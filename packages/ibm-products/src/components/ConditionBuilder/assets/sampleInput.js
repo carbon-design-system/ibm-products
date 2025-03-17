@@ -476,12 +476,17 @@ const colors = [
 
 const customOperators = [
   {
-    label: 'is greater than',
-    id: 'greater',
+    label: 'has value',
+    id: 'hasValue',
   },
   {
-    label: 'is greater than or equal to',
-    id: 'greaterEqual',
+    label: 'has no value',
+    id: 'hasNoValue',
+  },
+  {
+    label: 'has values',
+    id: 'hasValues',
+    isMultiSelect: true,
   },
 ];
 
@@ -492,6 +497,7 @@ export const inputData = {
       label: 'Continent',
       icon: Earth,
       type: 'option',
+      description: 'Continent',
       config: {
         options: [
           {
@@ -660,10 +666,42 @@ export const inputData = {
       config: {
         component: CustomInput,
         operators: customOperators,
+        valueFormatter: (value) => {
+          // add any customization to the value to be populated
+          return value;
+        },
       },
     },
   ],
 };
+function modifyPropertiesWithoutCustomOperators(inputData) {
+  const newProperties = inputData.properties.map((property) => {
+    if (property.id === 'continent') {
+      return {
+        ...property,
+        config: {
+          ...property.config,
+          operators: customOperators,
+        },
+      };
+    }
+    if (property.id === 'id') {
+      return {
+        ...property,
+        config: {
+          ...property.config,
+          operators: customOperators.slice(0, 2),
+        },
+      };
+    }
+    return property;
+  });
+
+  return { ...inputData, properties: newProperties };
+}
+
+export const inputDataForCustomOperator =
+  modifyPropertiesWithoutCustomOperators(inputData);
 
 export const inputDataDynamicOptions = {
   properties: [

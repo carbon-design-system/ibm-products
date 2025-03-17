@@ -146,8 +146,8 @@ export let CoachmarkStack = React.forwardRef<
 
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget
-        ? document?.querySelector(portalTarget) ??
-          document?.querySelector('body')
+        ? (document?.querySelector(portalTarget) ??
+          document?.querySelector('body'))
         : document?.querySelector('body');
     }, [portalTarget]);
 
@@ -192,7 +192,11 @@ export let CoachmarkStack = React.forwardRef<
     const escFunction = useCallback(
       (event) => {
         if (event.key === 'Escape') {
-          selectedItemNumber === 0 ? handleClose(true) : handleClose(false);
+          if (selectedItemNumber === 0) {
+            handleClose(true);
+          } else {
+            handleClose(false);
+          }
         }
       },
       [handleClose, selectedItemNumber]
@@ -269,9 +273,6 @@ export let CoachmarkStack = React.forwardRef<
       return (
         <CoachmarkOverlay
           key={idx}
-          // ref={(ref) =>
-          //   (stackedCoachmarkRefs.current[idx] = ref as HTMLDivElement)
-          // }
           ref={(ref: HTMLDivElement | null) => {
             stackedCoachmarkRefs.current[idx] = ref as HTMLDivElement;
           }}

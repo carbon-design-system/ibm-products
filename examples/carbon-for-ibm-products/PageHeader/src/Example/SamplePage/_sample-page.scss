@@ -1,12 +1,12 @@
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 .sample-page__dummy-content {
   margin-top: $spacing-05;
 }
 
 .sample-page__dummy-content-block {
-  height: 120vh;
+  block-size: 120vh;
   background-clip: content-box;
   background-color: $layer-01;
 }

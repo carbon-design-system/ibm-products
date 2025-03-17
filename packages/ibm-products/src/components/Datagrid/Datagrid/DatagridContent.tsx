@@ -263,6 +263,8 @@ export const DatagridContent = ({
           {filterProps?.variation === 'panel' && (
             // @ts-expect-error
             <FilterPanel
+              updateMethod={undefined}
+              setAllFilters={undefined}
               {...getFilterFlyoutProps?.()}
               title={filterProps.panelTitle}
               filterSections={filterProps.sections}

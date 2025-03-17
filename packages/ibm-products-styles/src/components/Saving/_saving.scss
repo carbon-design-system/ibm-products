@@ -7,7 +7,7 @@
 
 // Standard imports.
 @use '@carbon/styles/scss/type';
-@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
@@ -18,7 +18,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--saving;
 }
 
 .#{$block-class}__error-icon {
-  margin-right: $spacing-05;
+  margin-inline-end: $spacing-05;
 }
 
 .#{$block-class}__error-icon svg {

@@ -24,11 +24,9 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { moderate02 } from '@carbon/motion';
 import { pkg } from '../../settings';
-import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 import { useWebTerminal } from './hooks';
-import { useIsomorphicEffect } from '../../global/js/hooks';
+import { usePrefersReducedMotion } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
@@ -123,19 +121,6 @@ export let WebTerminal = React.forwardRef(
 
     const [shouldRender, setRender] = useState(open);
     const shouldReduceMotion = usePrefersReducedMotion();
-
-    const webTerminalAnimationName = `${
-      open ? 'web-terminal-entrance' : 'web-terminal-exit forwards'
-    } ${moderate02}`;
-
-    useIsomorphicEffect(() => {
-      const timeout = setTimeout(() => {
-        if (webTerminalRef.current && !shouldReduceMotion) {
-          webTerminalRef.current.style.animation = webTerminalAnimationName;
-        }
-      }, 0);
-      return () => clearTimeout(timeout);
-    }, [shouldReduceMotion, webTerminalAnimationName, webTerminalRef]);
 
     const showDocumentationLinks = useMemo(
       () => documentationLinks.length > 0,

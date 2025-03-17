@@ -8,12 +8,25 @@
 import { action } from '@storybook/addon-actions';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-const currentDate = new Date();
-let yesterdayDate = new Date();
-yesterdayDate.setDate(yesterdayDate.getDate() - 1);
-let dayBeforeYesterday = new Date();
-dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 2);
+/**
+ Currently setting this to Jan 1st of the current year so notifications aren't too far back. I set it to current year for this case.
+ The reason we changed this to hardcode is because percy was showing the change in timestamp as a design change. So technically it will
+  only trigger a percy check once a year.
+*/
+const currentYear = new Date().getFullYear();
+const currentDate = new Date(currentYear, 0, 1); // Month is 0-based, 4 = May
+
+// Static yesterday date (May 3, 2024)
+let yesterdayDate = new Date(currentDate);
+yesterdayDate.setDate(currentDate.getDate() - 1);
+
+// Static day before yesterday date (May 2, 2024)
+let dayBeforeYesterday = new Date(currentDate);
+dayBeforeYesterday.setDate(currentDate.getDate() - 2);
+
+// Constant for milliseconds in one minute
 const msInOneMinute = 60000;
+
 const data = [
   {
     id: uuidv4(),
@@ -39,6 +52,7 @@ const data = [
     title: 'System alert',
     description: 'Email classification was exported successfully.',
     timestamp: new Date(currentDate.getTime() - 11 * msInOneMinute),
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -47,6 +61,7 @@ const data = [
     title: 'IBM Cloud Pak for Automation Success',
     description: 'Successfully connected cartridge',
     timestamp: new Date(currentDate.getTime() - 120 * msInOneMinute),
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -55,6 +70,7 @@ const data = [
     title: 'Successfully connected LogDNA',
     description: 'App connection succeeded',
     timestamp: yesterdayDate,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -63,6 +79,7 @@ const data = [
     title: 'Cloud Foundry app memory',
     description: 'Allocated app memory low',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -74,6 +91,7 @@ const data = [
       url: 'https://www.carbondesignsystem.com',
     },
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -83,6 +101,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -92,6 +111,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -101,6 +121,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -110,6 +131,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -119,6 +141,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -128,6 +151,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -137,6 +161,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -146,6 +171,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -155,6 +181,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
 ];

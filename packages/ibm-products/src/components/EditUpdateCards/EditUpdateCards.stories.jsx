@@ -253,8 +253,8 @@ const Template = (args) => {
             editMode && !loading
               ? null
               : editMode && loading
-              ? actionIconsLoading
-              : actionIcons
+                ? actionIconsLoading
+                : actionIcons
           }
           previewChildren={preview}
           editChildren={edit}

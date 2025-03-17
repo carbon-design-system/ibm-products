@@ -13,11 +13,16 @@ import React, {
   PropsWithChildren,
   KeyboardEvent,
   ReactNode,
-  RefObject,
-  MouseEvent,
+  Ref,
 } from 'react';
 
-import { Popover, PopoverContent, Layer } from '@carbon/react';
+import {
+  Popover,
+  PopoverContent,
+  Layer,
+  Heading,
+  Section,
+} from '@carbon/react';
 import PropTypes from 'prop-types';
 import { Add, CarbonIconType } from '@carbon/react/icons';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
@@ -26,11 +31,15 @@ import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBui
 import { handleKeyDownForPopover } from '../utils/handleKeyboardEvents';
 import {
   Condition,
-  PropertyConfig,
   Action,
   Option,
+  ConfigType,
 } from '../ConditionBuilder.types';
-import { blockClass, getValue } from '../utils/util';
+import {
+  blockClass,
+  checkForMultiSelectOperator,
+  getValue,
+} from '../utils/util';
 import { translationsObject } from '../ConditionBuilderContext/translationObject';
 
 interface ConditionBuilderItemProps extends PropsWithChildren {
@@ -42,9 +51,10 @@ interface ConditionBuilderItemProps extends PropsWithChildren {
   showToolTip?: boolean;
   popOverClassName?: string;
   type?: string;
+  description?: string;
   condition?: Action & Condition;
-  config?: PropertyConfig;
-  renderChildren?: (ref: RefObject<HTMLDivElement | null>) => ReactNode;
+  config?: ConfigType;
+  renderChildren?: (ref: Ref<HTMLDivElement | null>) => ReactNode;
   onChange?: (val: string) => void;
   tabIndex?: number;
   onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -65,6 +75,7 @@ export const ConditionBuilderItem = ({
   config,
   renderChildren,
   onChange,
+  description,
   ...rest
 }: ConditionBuilderItemProps) => {
   const popoverRef = useRef<HTMLDivElement | null>(null);
@@ -118,7 +129,7 @@ export const ConditionBuilderItem = ({
     }
     const propertyId =
       rest['data-name'] == 'valueField' && type
-        ? getValue[type](label, config)
+        ? getValue(type, label, config)
         : labelText;
 
     return {
@@ -141,8 +152,8 @@ export const ConditionBuilderItem = ({
         closePopover();
       } else if (
         currentField == 'valueField' &&
-        type == 'option' &&
-        condition?.operator !== 'oneOf'
+        type === 'option' &&
+        !checkForMultiSelectOperator(condition, config)
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         closePopover();
@@ -201,8 +212,21 @@ export const ConditionBuilderItem = ({
     }
   };
 
+  const getCustomOperatorLabel = (propertyLabel) => {
+    return (
+      propertyLabel &&
+      // @ts-ignore
+      config?.operators?.find((operator) => {
+        return operator.id === propertyLabel;
+      })
+    );
+  };
+
   const getLabel = () => {
-    if (propertyLabel) {
+    // @ts-ignore
+    if (config?.operators && rest['data-name'] === 'operatorField') {
+      return getCustomOperatorLabel(propertyLabel)?.label ?? propertyLabel;
+    } else if (propertyLabel) {
       return propertyLabel;
     } else if (rest['data-name'] === 'propertyField') {
       return addPropertyText;
@@ -236,6 +260,7 @@ export const ConditionBuilderItem = ({
         }
         showToolTip={showToolTip}
         isInvalid={isInvalid}
+        description={description}
         {...rest}
       />
 
@@ -247,10 +272,14 @@ export const ConditionBuilderItem = ({
           onKeyDown={handleKeyDownHandler}
         >
           <Layer>
-            <h1 className={`${blockClass}__item__title`}>{title}</h1>
-            <div className={`${blockClass}__popover-content`}>
-              {renderChildren ? renderChildren(popoverRef) : children}
-            </div>
+            <Section>
+              <Heading className={`${blockClass}__item__title`}>
+                {title}
+              </Heading>
+              <div className={`${blockClass}__popover-content`}>
+                {renderChildren ? renderChildren(popoverRef) : children}
+              </div>
+            </Section>
           </Layer>
         </PopoverContent>
       )}

@@ -56,31 +56,36 @@ export type Operators = {
   date: DateOperator;
 };
 
-export type option = {
-  id: string;
-  label: string;
+type Item = { id: string; label: string };
+
+export type option = Item & {
   icon?: CarbonIconType;
 };
+
 export type PropertyConfigOption = {
   type: 'option';
   config?: {
     options?: option[];
+    operators?: (Item & { isMultiSelect?: boolean })[];
   };
 };
 
 export interface PropertyConfigText {
   type: 'text';
   config: TextInputProps;
+  operators?: Item[];
 }
 
 export interface PropertyConfigTextArea {
   type: 'textarea';
   config: TextAreaProps;
+  operators?: Item[];
 }
 
 export interface PropertyConfigNumber {
   type: 'number';
   config: {
+    operators?: Item[];
     min?: number;
     max?: number;
     step?: number;
@@ -90,12 +95,16 @@ export interface PropertyConfigNumber {
 
 export type PropertyConfigDate = {
   type: 'date';
-  config: object;
+  config: {
+    valueFormatter?: (value: string) => string;
+    operators?: Item[];
+  };
 };
 
 export type PropertyConfigTime = {
   type: 'time';
   config: {
+    operators?: Item[];
     timeZones: string[];
   };
 };
@@ -104,44 +113,31 @@ export type PropertyConfigCustom = {
   type: 'custom';
   config: {
     component: React.ComponentType<any>;
-    operators: {
-      label: string;
-      id: string;
-    }[];
+    operators?: Item[];
+    valueFormatter?: (value: string) => string;
   };
 };
 
-export type PropertyConfig = {
-  option: PropertyConfigOption;
-  text: PropertyConfigText;
-  textarea: PropertyConfigTextArea;
-  number: PropertyConfigNumber;
-  date: PropertyConfigDate;
-  time: PropertyConfigTime;
-  custom: PropertyConfigCustom;
-};
-
-export type Property = {
-  id: string;
-  label: string;
+export type ConfigType =
+  | PropertyConfigOption['config']
+  | PropertyConfigTextArea['config']
+  | PropertyConfigText['config']
+  | PropertyConfigNumber['config']
+  | PropertyConfigDate['config']
+  | PropertyConfigTime['config']
+  | PropertyConfigCustom['config'];
+export type Property = Item & {
   icon?: CarbonIconType;
-} & (
-  | PropertyConfig['option']
-  | PropertyConfig['text']
-  | PropertyConfig['number']
-  | PropertyConfig['date']
-  | PropertyConfig['textarea']
-  | PropertyConfig['time']
-  | PropertyConfig['custom']
-);
+  description?: string;
+  type?: any;
+  config?: any;
+} & ConfigType;
 
 export type inputConfig = {
   properties: Property[];
 };
 
-export type Option = {
-  id: string;
-  label: string;
+export type Option = Item & {
   icon?: CarbonIconType;
 };
 export type Condition = {
@@ -171,10 +167,8 @@ export type Action = {
 
 export type variantsType = 'Non-Hierarchical' | 'Hierarchical';
 
-export type statementConfig = {
-  id: string;
+export type statementConfig = Item & {
   connector: 'and' | 'or';
-  label: string;
   secondaryLabel?: string;
 };
 

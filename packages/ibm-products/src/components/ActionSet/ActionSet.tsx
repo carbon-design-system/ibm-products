@@ -124,12 +124,13 @@ export const validateActionSetProps = ({ actions, size }) => {
   if (actions && actions.length) {
     const problems = [] as string[];
 
-    // eslint-disable-next-line react/prop-types
+     
     const stacking = willStack(size, actions.length);
 
     const countActions = (kind: ButtonKind) =>
       actions.filter(
-        (action: ButtonProps) => (action.kind || defaultKind) === kind
+        (action: ButtonProps<React.ElementType>) =>
+          (action.kind || defaultKind) === kind
       ).length;
 
     const primaryActions = countActions('primary');
@@ -137,39 +138,43 @@ export const validateActionSetProps = ({ actions, size }) => {
     const dangerActions = countActions('danger');
     const ghostActions = countActions('ghost') + countActions('danger--ghost');
 
-    stacking &&
-      actions.length > 3 &&
+    if (stacking && actions > 3) {
       problems.push(
         `you cannot have more than three actions in this size of ${componentName}`
       );
+    }
 
-    actions.length > 4 &&
+    if (actions.length > 4) {
       problems.push(
         `you cannot have more than four actions in a ${componentName}`
       );
-
-    primaryActions > 1 &&
+    }
+    if (primaryActions > 1) {
       problems.push(
         `you cannot have more than one 'primary' action in a ${componentName}`
       );
+    }
 
-    ghostActions > 1 &&
+    if (ghostActions > 1) {
       problems.push(
         `you cannot have more than one 'ghost' action in a ${componentName}`
       );
+    }
 
-    stacking &&
-      actions.length > 1 &&
-      ghostActions > 0 &&
+    if (stacking && actions > 1 && ghostActions > 0) {
       problems.push(
         `you cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}`
       );
+    }
 
-    actions.length >
-      primaryActions + secondaryActions + dangerActions + ghostActions &&
+    if (
+      actions >
+      primaryActions + secondaryActions + dangerActions + ghostActions
+    ) {
       problems.push(
         `you can only have 'primary', 'danger', 'secondary', 'ghost' and 'danger--ghost' buttons in a ${componentName}`
       );
+    }
     return problems.length > 0
       ? pconsole.error(
           `Invalid prop \`actions\` supplied to \`${componentName}\`: ${problems.join(
@@ -221,7 +226,7 @@ export const ActionSet = React.forwardRef<HTMLDivElement, ActionSetProps>(
         'danger--ghost': 2,
         danger: 4,
         primary: 5,
-      }[kind] ?? 3);
+      })[kind] ?? 3;
 
     // order the actions with ghost/ghost-danger buttons first and primary/danger buttons last
     // (or the opposite way if we're stacking)

@@ -8,6 +8,7 @@
 import React, {
   ForwardedRef,
   ReactNode,
+  RefObject,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -20,6 +21,13 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { useIsomorphicEffect } from '../../global/js/hooks';
+
+type Handle = {
+  scrollNext?: () => void;
+  scrollPrev?: () => void;
+  scrollReset?: () => void;
+  scrollToView?: (n: number) => void;
+};
 
 export interface CarouselProps {
   /**
@@ -88,8 +96,8 @@ const defaults = {
  *      the left-most item should again be left-aligned.
  */
 const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
-  (
-    {
+  (props, ref: ForwardedRef<any>) => {
+    const {
       children,
       className,
       disableArrowScroll = defaults.disableArrowScroll,
@@ -97,9 +105,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       onChangeIsScrollable = defaults.onChangeIsScrollable,
       onScroll = defaults.onScroll,
       ...rest
-    },
-    ref: ForwardedRef<any>
-  ) => {
+    } = props;
     const carouselRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
     const leftFadedEdgeRef = useRef<HTMLDivElement>(null);
@@ -311,7 +317,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
 
     // Enable external function calls
     useImperativeHandle(
-      ref,
+      ref as RefObject<Handle>,
       (): any => ({
         scrollNext() {
           handleScrollNext();

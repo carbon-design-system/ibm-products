@@ -5,17 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { Button, IconButton } from '@carbon/react';
-import { DURATIONS, EASINGS } from '../../global/js/utils/motionConstants';
-import React, { ForwardedRef, MutableRefObject, useRef, useState } from 'react';
-import { usePreviousValue, useWindowResize } from '../../global/js/hooks';
+import React, {
+  ForwardedRef,
+  MutableRefObject,
+  useRef,
+  useState,
+  RefObject,
+} from 'react';
+import {
+  usePreviousValue,
+  useWindowResize,
+  usePresence,
+} from '../../global/js/hooks';
 
 import { ChevronDown } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import { TagSet } from '../TagSet';
 import cx from 'classnames';
-import debounce from 'lodash/debounce';
+import { debounce } from '../../global/js/utils/debounce';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -91,52 +99,39 @@ const FilterSummary = React.forwardRef(
       typeof viewAllButtonRef?.current?.offsetWidth === 'undefined'
         ? 0
         : overflowCount > 0
-        ? 48
-        : 0;
+          ? 48
+          : 0;
     const measurementOffset =
       (filterSummaryClearButton?.current?.offsetWidth || 0) + viewAllWidth;
-
-    const renderTagSet = (type) => (
-      // @ts-expect-error Expected until we remove framer-motion
-      <motion.div
-        key={type}
-        initial={{
-          opacity: 0,
-          y: -16,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-        }}
-        exit={{
-          opacity: 0,
-          y: -16,
-        }}
-        transition={{
-          duration: DURATIONS.moderate01,
-          ease: EASINGS.productive.entrance,
-        }}
-      >
-        <TagSet
-          allTagsModalSearchLabel="Search all tags"
-          allTagsModalSearchPlaceholderText="Search all tags"
-          allTagsModalTitle="All tags"
-          showAllTagsLabel="View all tags"
-          tags={tagFilters}
-          overflowType={overflowType}
-          className={cx({
-            [`${blockClass}__clear-button-inline`]: clearButtonInline,
-          })}
-          // @ts-expect-error: Fixed once we replace MutableRefObject
-          containingElementRef={localRef}
-          measurementOffset={measurementOffset}
-          onOverflowTagChange={(overflowTags: any) =>
-            setOverflowCount(overflowTags?.length)
-          }
-          multiline={multiline}
-        />
-      </motion.div>
+    const exitAnimationName = 'filter-summary-enter';
+    const { shouldRender } = usePresence(
+      true,
+      localRef as RefObject<HTMLElement>,
+      exitAnimationName
     );
+    const renderTagSet = (type) => {
+      return shouldRender ? (
+        <div key={type}>
+          <TagSet
+            allTagsModalSearchLabel="Search all tags"
+            allTagsModalSearchPlaceholderText="Search all tags"
+            allTagsModalTitle="All tags"
+            showAllTagsLabel="View all tags"
+            tags={tagFilters}
+            overflowType={overflowType}
+            className={cx({
+              [`${blockClass}__clear-button-inline`]: clearButtonInline,
+            })}
+            containingElementRef={localRef}
+            measurementOffset={measurementOffset}
+            onOverflowTagChange={(overflowTags: any) =>
+              setOverflowCount(overflowTags?.length)
+            }
+            multiline={multiline}
+          />
+        </div>
+      ) : null;
+    };
 
     useWindowResize(() => {
       const handleFilterSummaryResize = () => {
@@ -162,10 +157,8 @@ const FilterSummary = React.forwardRef(
           [`${blockClass}__expanded`]: multiline,
         })}
       >
-        <AnimatePresence exitBeforeEnter>
-          {!multiline && renderTagSet('single')}
-          {multiline && renderTagSet('multiline')}
-        </AnimatePresence>
+        {!multiline && renderTagSet('single')}
+        {multiline && renderTagSet('multiline')}
         <Button
           kind="ghost"
           size="sm"

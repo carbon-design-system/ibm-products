@@ -33,9 +33,9 @@ import { useDataConfigs } from '../utils/useDataConfigs';
 import {
   Condition,
   ConditionGroup,
+  ConfigType,
   LogicalOperator,
   Property,
-  PropertyConfig,
   PropertyConfigCustom,
 } from '../ConditionBuilder.types';
 
@@ -122,7 +122,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     );
   };
 
-  const { icon, type, config, label }: Property = getCurrentConfig(
+  const { icon, type, config, label, description }: Property = getCurrentConfig(
     property
   ) as Property;
 
@@ -188,8 +188,10 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     return isLastCondition(conditionIndex, conditions);
   };
   const getOperators = () => {
-    if ((config as PropertyConfigCustom['config'])?.operators) {
-      return (config as PropertyConfigCustom['config']).operators;
+    // @ts-ignore
+    if ((config as ConfigType)?.operators) {
+      // @ts-ignore
+      return (config as ConfigType).operators;
     }
     return operatorConfig.filter(
       (operator) => operator.type.indexOf(type) != -1 || operator.type == 'all'
@@ -277,8 +279,6 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         </ConditionBuilderItem>
       )}
 
-      {/* <div className={`${blockClass}__block`}> */}
-
       <ConditionBuilderItem
         label={label ?? condition?.property}
         title={propertyText}
@@ -287,6 +287,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         data-name="propertyField"
         condition={condition}
         type={type}
+        description={description}
         onChange={onPropertyChangeHandler}
       >
         <ItemOption
@@ -305,6 +306,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           data-name="operatorField"
           condition={condition}
           type={type}
+          config={config as ConfigType}
           onChange={onOperatorChangeHandler}
         >
           <ItemOption
@@ -327,7 +329,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           showToolTip={true}
           data-name="valueField"
           condition={condition}
-          config={config as PropertyConfig}
+          config={config as ConfigType}
           onChange={onValueChangeHandler}
           renderChildren={renderChildren}
         />
@@ -347,7 +349,6 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           wrapperClassName={`${blockClass}__close-condition-wrapper`}
         />
       </span>
-      {/* </div> */}
       {manageActionButtons(conditionIndex, group.conditions) && (
         <ConditionBuilderAdd
           onClick={() => {

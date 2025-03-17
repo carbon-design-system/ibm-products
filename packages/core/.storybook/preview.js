@@ -10,7 +10,7 @@ import { white, g10, g90, g100 } from '@carbon/themes';
 import '../../ibm-products/src/feature-flags';
 
 import { pkg } from '../../ibm-products/src/settings';
-
+import theme from '../.storybook/theme';
 import index from './index.scss?inline';
 import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
 
@@ -43,13 +43,14 @@ const decorators = [
       globals,
       parameters: { styles },
     } = context;
-    const { theme } = globals;
+    const { theme, dir } = globals;
     const story = storyFn();
     JSON.stringify(args.featureFlags);
 
     useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
-    }, [theme]);
+      document.documentElement.dir = dir;
+    }, [theme, dir]);
 
     return (
       <div className="preview-position-fix story-wrapper">
@@ -130,6 +131,7 @@ const parameters = {
         ['Components', 'Patterns', 'Onboarding'],
         'Utils',
         ['Components'],
+        'Hooks',
         'Deprecated',
       ],
     },
@@ -141,6 +143,7 @@ const parameters = {
     defaultViewport: 'basic',
   },
   docs: {
+    theme,
     page: () => <StoryDocsPage />,
   },
 };
@@ -154,6 +157,32 @@ const argTypes = {
 };
 
 const globalTypes = {
+  dir: {
+    name: 'Text direction',
+    description: 'Set the text direction for the story',
+    defaultValue: 'ltr',
+    toolbar: {
+      icon: 'transfer',
+      title: 'Text direction',
+      items: [
+        {
+          right: '🔄',
+          title: 'auto',
+          value: 'auto',
+        },
+        {
+          right: '➡️',
+          title: 'left-to-right (ltr)',
+          value: 'ltr',
+        },
+        {
+          right: '⬅️',
+          title: 'right-to-left (rtl)',
+          value: 'rtl',
+        },
+      ],
+    },
+  },
   theme: {
     name: 'Theme',
     description: 'Set the global theme for displaying components',

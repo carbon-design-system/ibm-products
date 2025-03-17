@@ -12,7 +12,7 @@
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
 // or
-// TODO: @use '@carbon/react/scss/grid';
+// TODO: @use '@carbon/styles/scss/grid';
 
 // InterstitialScreenView uses the following Carbon for IBM Products components:
 // TODO: @use(s) of IBM Products component styles used by InterstitialScreenView
@@ -21,5 +21,5 @@
 $block-class: #{c4p-settings.$pkg-prefix}--interstitial-screen-view;
 
 .#{$block-class} {
-  height: 100%;
+  block-size: 100%;
 }

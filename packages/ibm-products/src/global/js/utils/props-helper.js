@@ -43,8 +43,8 @@ export const prepareProps = (...values) => {
     typeof arg === 'string'
       ? { [arg]: null }
       : Array.isArray(arg)
-      ? Object.fromEntries(arg.map((key) => [key, null]))
-      : arg;
+        ? Object.fromEntries(arg.map((key) => [key, null]))
+        : arg;
 
   // Merge all the args from left to right
   const merged = Object.assign({}, ...values.map(toNulls));

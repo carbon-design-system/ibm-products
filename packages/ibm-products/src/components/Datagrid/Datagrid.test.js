@@ -934,6 +934,17 @@ describe(componentName, () => {
       unobserve: jest.fn(),
       disconnect: jest.fn(),
     }));
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
   });
 
   afterEach(() => {
@@ -2367,12 +2378,20 @@ describe(componentName, () => {
     expect(panelContainer).toHaveClass(
       `${blockClass}__table-container--filter-open`
     );
+    await waitFor(
+      () =>
+        expect(
+          document.querySelector(`.${blockClass}-filter-panel`)
+        ).toBeInTheDocument(),
+      {
+        timeout: 1000, // Match the animation duration
+      }
+    );
 
     const normalCheckbox = screen.getByRole('checkbox', { name: 'Normal' });
 
     const applyButton = screen.getByRole('button', { name: 'Apply' });
     await click(applyButton);
-
     const panelCloseButton = screen.getByLabelText('Close filter panel');
     await click(panelCloseButton);
     expect(panelContainer).not.toHaveClass(
@@ -2701,6 +2720,17 @@ describe(componentName, () => {
       ...defaultCheckboxFilters,
       ...generateDummyCheckboxes,
     ].length;
+
+    await waitFor(
+      () =>
+        expect(
+          document.querySelector(`.${blockClass}-filter-panel`)
+        ).toBeInTheDocument(),
+      {
+        timeout: 1000, // Match the animation duration
+      }
+    );
+
     const viewMoreButton = screen.getByRole('button', {
       name: `View all (${checkboxTotal})`,
     });

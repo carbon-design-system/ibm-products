@@ -6,7 +6,7 @@
  */
 
 import { useCallback } from 'react';
-import debounce from 'lodash/debounce';
+import { debounce } from '../../global/js/utils/debounce';
 import useParentDimensions from './useParentDimensions';
 import useResizeTable from './useResizeTable';
 import { DataGridState } from './types';
@@ -37,10 +37,7 @@ const useInfiniteScroll = (hooks: Hooks) => {
     const emptyFetchData = () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const fetchMore = useCallback(
-      debounce(fetchMoreData || emptyFetchData, 3000, {
-        leading: true,
-        trailing: false,
-      }),
+      debounce(fetchMoreData || emptyFetchData, 3000),
       [fetchMoreData]
     );
     const onScroll = ({ scrollDirection, scrollOffset }) => {

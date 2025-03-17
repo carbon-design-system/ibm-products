@@ -6,17 +6,10 @@
  */
 
 import { addons } from '@storybook/manager-api';
-import { create } from '@storybook/theming/create';
-
-import packageInfo from '../../ibm-products/package.json';
-
-const { description, version } = packageInfo;
+import theme from './theme';
 
 addons.setConfig({
-  theme: create({
-    brandTitle: `${description} v${version}`,
-  }),
-
+  theme: theme,
   sidebar: {
     renderLabel: (item) => item.name,
   },

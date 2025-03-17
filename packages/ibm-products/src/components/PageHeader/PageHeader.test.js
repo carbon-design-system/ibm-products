@@ -145,11 +145,11 @@ const initSizes = () => ({
   },
 });
 const testSizes = (el, property, _default) => {
-  const classes = el.getAttribute('class').split(' ');
+  const classes = el.getAttribute('class')?.split(' ');
   const sizes = initSizes();
 
   const propSizes = sizes[property];
-  if (propSizes) {
+  if (propSizes && classes) {
     for (let cls of classes) {
       // see if any class we check for is catered for.
       const val = propSizes[cls] ? propSizes[cls] : -1;

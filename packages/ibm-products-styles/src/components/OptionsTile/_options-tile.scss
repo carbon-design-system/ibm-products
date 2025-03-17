@@ -10,7 +10,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
-@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/colors' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
@@ -22,23 +22,23 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
 .#{$block-class} {
   position: relative;
-  border-bottom: 1px solid $border-subtle;
   background-color: $layer;
+  border-block-end: 1px solid $border-subtle;
 }
 
 .#{$block-class}__toggle-container {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: calc(
+  inline-size: calc(
     #{$spacing-05} + 2rem + #{$spacing-05}
   ); // spacing + toggle width + spacing
+
+  inset-block: 0;
+  inset-inline-end: 0;
 }
 
 .#{$block-class}__toggle {
   position: absolute;
-  right: $spacing-05;
+  inset-inline-end: $spacing-05;
 }
 
 .#{$block-class}__toggle
@@ -56,8 +56,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
   display: grid;
   box-sizing: border-box;
   align-items: center;
-  padding-right: $spacing-05;
   grid-template-columns: 3rem 1fr 2rem; // chevron container, heading, toggle width
+  padding-inline-end: $spacing-05;
 }
 
 .#{$block-class}__header {
@@ -92,9 +92,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
   @include type.type-style('helper-text-01');
 
   display: grid;
-  height: $spacing-05;
-  margin-top: $spacing-02;
+  block-size: $spacing-05;
   color: $text-secondary;
+  margin-block-start: $spacing-02;
   opacity: 1;
   transition-duration: $duration-moderate-01;
   transition-property: height, opacity, margin-top;
@@ -132,10 +132,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
 .#{$block-class}__summary-text {
   overflow: hidden;
-  height: max-content;
+  block-size: max-content;
   // spacing-05 + toggle width
   // stylelint-disable-next-line carbon/layout-use
-  padding-right: calc(#{$spacing-05} + 2rem);
+  padding-inline-end: calc(#{$spacing-05} + 2rem);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -147,10 +147,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 }
 
 .#{$block-class}__content {
-  padding-right: $spacing-05;
+  padding-inline: $spacing-09 $spacing-05;
   // spacing-05 + chevron size + spacing-05
   // stylelint-disable-next-line carbon/layout-use
-  padding-left: calc(#{$spacing-05} * 2 + 1rem);
 }
 
 .#{$block-class}__content
@@ -167,8 +166,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
     .#{$block-class}__summary--closing
   ),
 .#{$block-class}__summary--hidden {
-  height: 0;
-  margin-top: 0;
+  block-size: 0;
+  margin-block-start: 0;
   opacity: 0;
 }
 
@@ -179,8 +178,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 }
 
 .#{$block-class} > details[open] .#{$block-class}__content {
-  padding-top: $spacing-03;
-  padding-bottom: $spacing-06;
+  padding-block: $spacing-03 $spacing-06;
 }
 
 .#{$block-class}__locked-text {
@@ -188,36 +186,36 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
   display: inline-flex;
   align-items: center;
-  margin-bottom: $spacing-06;
   color: $text-secondary;
+  margin-block-end: $spacing-06;
 }
 
 .#{$block-class}__locked-text > svg {
-  margin-right: $spacing-02;
+  margin-inline-end: $spacing-02;
 }
 
 .#{$block-class}--lg .#{$block-class}__header,
 .#{$block-class}--lg .#{$block-class}__static-content {
-  height: 3rem;
+  block-size: 3rem;
 }
 
 .#{$block-class}--xl .#{$block-class}__header,
 .#{$block-class}--xl .#{$block-class}__static-content {
-  height: 4rem;
+  block-size: 4rem;
 }
 
 .#{$block-class}--lg .#{$block-class}__toggle {
   // "top" shouldn't be spacing token as it depends on the toggle size
-  top: $spacing-05;
+  inset-block-start: $spacing-05;
 }
 
 .#{$block-class}--xl .#{$block-class}__toggle {
   // "top" shouldn't be spacing token as it depends on the toggle size
-  top: $spacing-06;
+  inset-block-start: $spacing-06;
 }
 
 .#{$block-class}--lg .#{$block-class}__summary {
-  margin-top: $spacing-01;
+  margin-block-start: $spacing-01;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -44,6 +44,10 @@ describe(name, () => {
       removeEventListener: jest.fn(),
       dispatchEvent: jest.fn(),
     }));
+    window.IntersectionObserver = jest.fn(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+    }));
   });
 
   afterEach(() => {

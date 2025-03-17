@@ -10,7 +10,7 @@
 
 // Standard imports.
 @use '@carbon/layout/scss/convert' as *;
-@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/components/button/tokens' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
@@ -41,15 +41,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
 
 // CLOSED/COLLAPSED STATE, DEFAULT
 .#{$block-class} .#{$block-class}__keyword {
-  height: to-rem(20px);
-  padding-top: 0;
-  padding-right: to-rem(3px);
   border-width: to-rem(1px);
   border-style: solid;
   border-color: $button-tertiary;
   border-radius: $spacing-04;
   background-color: transparent;
+  block-size: to-rem(20px);
   color: $button-tertiary;
+  padding-block-start: 0;
+  padding-inline-end: to-rem(3px);
   white-space: nowrap;
 }
 .#{$block-class} .#{$block-class}__keyword:hover {
@@ -65,7 +65,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
 .#{$block-class} .#{$block-class}__keyword:focus {
   border-color: $text-inverse;
   background-color: $button-tertiary;
-  box-shadow: 0 0 0 1px $text-inverse, 0 0 0 3px $button-tertiary;
+  box-shadow:
+    0 0 0 1px $text-inverse,
+    0 0 0 3px $button-tertiary;
   color: $text-inverse;
 }
 // The "up" chevron
@@ -88,7 +90,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
 .#{$block-class} .#{$block-class}__keyword-open:focus {
   border-color: $text-inverse;
   background-color: transparent;
-  box-shadow: inset 0 0 0 1px $button-tertiary, 0 0 0 1px $text-inverse,
+  box-shadow:
+    inset 0 0 0 1px $button-tertiary,
+    0 0 0 1px $text-inverse,
     0 0 0 3px $button-tertiary;
   color: $button-tertiary;
 }
@@ -102,11 +106,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
 
   display: block;
   padding: $spacing-03 $spacing-04;
-  border-left: to-rem(1.25px) solid $text-primary;
   margin: $spacing-02 0;
   // Onboarding does not always use Carbon defaults/tokens
   // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
   animation: fade 600ms;
+  border-inline-start: to-rem(1.25px) solid $text-primary;
 
   /* stylelint-disable-next-line max-nesting-depth */
   @media (prefers-reduced-motion: reduce) {

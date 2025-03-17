@@ -12,7 +12,12 @@ import {
   tearsheetShellWideProps as blocked,
 } from './TearsheetShell';
 // Import portions of React that are needed.
-import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  RefObject,
+} from 'react';
 import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 
 // Other standard imports.
@@ -73,6 +78,11 @@ export interface TearsheetNarrowProps extends PropsWithChildren {
    * to page of a multi-page task).
    */
   label?: ReactNode;
+
+  /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
 
   /**
    * An optional handler that is called when the user closes the tearsheet (by

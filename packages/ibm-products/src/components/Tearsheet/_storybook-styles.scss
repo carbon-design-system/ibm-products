@@ -17,7 +17,7 @@
 }
 
 .tearsheet-stories__tabs {
-  margin-left: calc(-1 * #{$spacing-05});
+  margin-inline-start: calc(-1 * #{$spacing-05});
 }
 
 .tearsheet-stories__tabs .#{c4p-settings.$carbon-prefix}--tab-content {

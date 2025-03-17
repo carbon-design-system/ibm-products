@@ -88,7 +88,6 @@ expect.extend({
         'aria_content_in_landmark',
         'aria_child_tabbable',
         'skip_main_described',
-        'target_spacing_sufficient',
       ]);
 
       const ruleset = await aChecker.getRuleset('IBM_Accessibility');
@@ -133,6 +132,7 @@ expect.extend({
       await expect(page.locator('css=.story-wrapper')).toBeInViewport();
       pass = true;
     } catch (e) {
+      console.error(e);
       pass = false;
     }
 

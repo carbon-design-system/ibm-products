@@ -23,6 +23,10 @@ type Filter = {
 type Modifier = {
   label?: string;
   options?: string[];
+  /**
+   * Allows to select multiple modifier items, default it is false
+   */
+  multiSelect?: boolean;
 };
 
 interface Entry {
@@ -231,6 +235,7 @@ MultiAddSelect.propTypes = {
     modifiers: PropTypes.shape({
       label: PropTypes.string,
       options: PropTypes.array,
+      multiSelect: PropTypes.bool,
     }),
     sortBy: PropTypes.array,
     filterBy: PropTypes.array,

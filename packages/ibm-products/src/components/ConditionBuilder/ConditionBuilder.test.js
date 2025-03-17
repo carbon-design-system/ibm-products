@@ -22,6 +22,7 @@ import {
 } from './assets/SampleData';
 import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
 import CustomInput from './assets/CustomInput';
+import { inputDataForCustomOperator } from './assets/sampleInput';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = ConditionBuilder.displayName;
@@ -267,6 +268,7 @@ const inputData = {
       config: {
         component: CustomInput,
         operators: customOperators,
+        valueFormatter: (value) => value?.toUpperCase(),
       },
     },
   ],
@@ -396,7 +398,7 @@ const defaultProps = {
   getConditionState: () => {},
   variant: NON_HIERARCHICAL_VARIANT,
 };
-
+const testInputText = 'testID123';
 const inputConfigOptionType = {
   properties: [
     {
@@ -786,12 +788,12 @@ describe(componentName, () => {
     );
 
     const inputText = document.querySelector('#id');
-    fireEvent.change(inputText, { target: { value: 'testID123' } });
+    fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(container));
 
-    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+    const selectedItem = screen.getByRole('button', { name: testInputText });
 
     expect(selectedItem);
   });
@@ -815,12 +817,12 @@ describe(componentName, () => {
     await act(() => userEvent.click(isOperator));
 
     const inputText = document.querySelector('#id_long');
-    fireEvent.change(inputText, { target: { value: 'testID123' } });
+    fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(container));
 
-    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+    const selectedItem = screen.getByRole('button', { name: testInputText });
 
     expect(selectedItem);
   });
@@ -1612,12 +1614,15 @@ describe(componentName, () => {
     );
 
     const inputText = document.querySelector('#customInput');
-    fireEvent.change(inputText, { target: { value: 'testID123' } });
+    fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(container));
-
-    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+    // the value formatter will format to uppercase
+    // cspell: disable
+    const selectedItem = screen.getByRole('button', {
+      name: testInputText.toUpperCase(),
+    });
 
     expect(selectedItem);
   });
@@ -1682,6 +1687,77 @@ describe(componentName, () => {
       userEvent.click(screen.getByRole('option', { name: 'excl. if (or)' }))
     );
     expect(screen.getByRole('button', { name: 'excl. if' }));
+  });
+
+  it('check with custom operator configuration ', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputDataForCustomOperator}
+      />
+    );
+
+    // add one condition
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getByRole('option', { name: 'Continent' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Continent' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'has value' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'has value' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'Africa' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Africa' }))
+    );
+
+    const selectedItem = screen.getByRole('button', { name: 'Africa' });
+
+    expect(selectedItem);
+  });
+
+  it('check description tooltip for property', async () => {
+    const inputConfig_ = JSON.parse(JSON.stringify(inputData));
+    inputConfig_.properties[0].description = 'This is a tooltip';
+    const user = userEvent.setup();
+    render(<ConditionBuilder {...defaultProps} inputConfig={inputConfig_} />);
+
+    // add one condition
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getByRole('option', { name: 'Continent' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Continent' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'is' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'is' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'Africa' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Africa' }))
+    );
+
+    const selectedItem = screen.getByRole('button', { name: 'Africa' });
+
+    expect(selectedItem);
+    //hover on property
+    await act(() =>
+      user.hover(document.querySelector(`.${blockClass}__property-field`))
+    );
+    expect(screen.getByText('This is a tooltip')).toBeInTheDocument();
   });
 
   // keyboard navigation tests

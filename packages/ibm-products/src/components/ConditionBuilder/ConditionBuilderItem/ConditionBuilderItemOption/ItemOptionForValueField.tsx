@@ -26,7 +26,11 @@ import {
   Option,
   PropertyConfigOption,
 } from '../../ConditionBuilder.types';
-import { blockClass } from '../../utils/util';
+import {
+  blockClass,
+  checkForMultiSelectOperator,
+  onKeyDownHandlerForSearch,
+} from '../../utils/util';
 
 interface ItemOptionForValueFieldProps {
   conditionState: Condition & { label?: string };
@@ -38,7 +42,7 @@ export const ItemOptionForValueField = ({
   config = {},
   onChange,
 }: ItemOptionForValueFieldProps) => {
-  const multiSelectable = conditionState.operator === 'oneOf';
+  const multiSelectable = checkForMultiSelectOperator(conditionState, config);
 
   const { popOverSearchThreshold, getOptions, rootState } = useContext(
     ConditionBuilderContext
@@ -47,6 +51,7 @@ export const ItemOptionForValueField = ({
     'propertyText',
     'clearSearchText',
   ]);
+  const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const [allOptions, setAllOptions] = useState<Option[]>(
@@ -61,8 +66,8 @@ export const ItemOptionForValueField = ({
   const selection = Array.isArray(conditionState.value)
     ? conditionState.value
     : conditionState.value !== undefined
-    ? [conditionState.value]
-    : [];
+      ? [conditionState.value]
+      : [];
 
   useEffect(() => {
     //this commented code is kept as intentional. Alternate approach to pass async options instead of getOptions callback.
@@ -155,8 +160,8 @@ export const ItemOptionForValueField = ({
     return conditionState.label
       ? conditionState.label
       : conditionState.property
-      ? conditionState.property
-      : propertyText;
+        ? conditionState.property
+        : propertyText;
   };
 
   if (!allOptions) {
@@ -171,17 +176,18 @@ export const ItemOptionForValueField = ({
             labelText={clearSearchText}
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
+            onKeyDown={(evt) =>
+              onKeyDownHandlerForSearch(evt, conditionBuilderRef)
+            }
           />
         </div>
       )}
 
       {multiSelectable && (
         <div className={`${blockClass}__multiselectSelectionStatusContainer`}>
-          <h4>
-            <label>
-              {selection.length}/{allOptions.length} Selected
-            </label>
-          </h4>
+          <label>
+            {selection.length}/{allOptions.length} Selected
+          </label>
           <Button
             kind={'ghost'}
             size={'sm'}

@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.3.0-rc.0...@carbon/storybook-addon-theme@2.10.0-rc.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **useravatar:** variable change ([#6856](https://github.com/carbon-design-system/ibm-products/issues/6856)) ([2e6fc2b](https://github.com/carbon-design-system/ibm-products/commit/2e6fc2b3066fb55de2ded947d1d15429c852c375))
+
+
+
+
+
+# [2.9.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.9.0-rc.0...@carbon/storybook-addon-theme@2.9.0) (2025-02-19)
+
+**Note:** Version bump only for package @carbon/storybook-addon-theme
+
+
+
+
+
+# [2.9.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.3.0-rc.0...@carbon/storybook-addon-theme@2.9.0-rc.0) (2025-02-10)
+
+**Note:** Version bump only for package @carbon/storybook-addon-theme
+
+
+
+
+
+# [2.8.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.8.0-rc.0...@carbon/storybook-addon-theme@2.8.0) (2025-02-05)
+
+**Note:** Version bump only for package @carbon/storybook-addon-theme
+
+
+
+
+
+# [2.8.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.3.0-rc.0...@carbon/storybook-addon-theme@2.8.0-rc.0) (2025-01-27)
+
+**Note:** Version bump only for package @carbon/storybook-addon-theme
+
+
+
+
+
+# [2.7.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.7.0-rc.0...@carbon/storybook-addon-theme@2.7.0) (2025-01-22)
+
+**Note:** Version bump only for package @carbon/storybook-addon-theme
+
+
+
+
+
 # [2.7.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.3.0-rc.0...@carbon/storybook-addon-theme@2.7.0-rc.0) (2025-01-13)
 
 **Note:** Version bump only for package @carbon/storybook-addon-theme

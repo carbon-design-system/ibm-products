@@ -7,12 +7,22 @@
 
 import { defineConfig, configDefaults } from 'vitest/config';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
+import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize-source-dependencies';
 
 export default defineConfig({
-  plugins: [litStyleLoader(), litTemplateLoader()],
+  plugins: [
+    litStyleLoader(),
+    litTemplateLoader(),
+    externalizeSourceDependencies([
+      /* @web/test-runner-commands needs to establish a web-socket
+       * connection. It expects a file to be served from the
+       * @web/dev-server. So it should be ignored by Vite */
+      '/__web-dev-server__web-socket.js',
+    ]),
+  ],
   test: {
     environment: 'happy-dom',
-    include: ['./src/**/*.{test,spec}.{js,ts}'],
+    include: ['src/**/*.test.ts'],
     exclude: [...configDefaults.exclude],
     // Lit recommends using browser environment for testing
     // https://lit.dev/docs/tools/testing/#testing-in-the-browser
@@ -21,6 +31,12 @@ export default defineConfig({
       enabled: true,
       headless: true,
       name: 'chromium',
+    },
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*'],
+      exclude: ['src/**/*.stories.{js,ts}'],
+      reporter: ['text', 'html'],
     },
   },
 });

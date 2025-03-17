@@ -1,13 +1,13 @@
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 .container {
-  padding-top: 50px;
+  padding-block-start: 50px;
 }
 
 .graph {
-  width: 200px;
-  height: 100px;
+  inline-size: 200px;
+  block-size: 100px;
   border: 10px solid $support-error;
   border-right-color: $support-success;
   border-bottom: 0;
@@ -18,7 +18,7 @@
 
 .ccs-theme-dropdown {
   position: fixed;
-  bottom: $spacing-05;
-  left: $spacing-05;
-  min-width: 11.5rem;
+  inset-block-end: $spacing-05;
+  min-inline-size: 11.5rem;
+  inset-inline-start: 1rem; // stylelint-disable-line carbon/layout-use
 }

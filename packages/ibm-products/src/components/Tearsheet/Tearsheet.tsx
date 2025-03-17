@@ -8,7 +8,12 @@
 // Carbon and package components we use.
 import { Button, type ButtonProps } from '@carbon/react';
 // Import portions of React that are needed.
-import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  RefObject,
+} from 'react';
 import { TearsheetShell } from './TearsheetShell';
 
 // Other standard imports.
@@ -111,6 +116,11 @@ export interface TearsheetProps extends PropsWithChildren {
    * to page of a multi-page task).
    */
   label?: ReactNode;
+
+  /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
 
   /**
    * Navigation content, such as a set of tabs, to be displayed at the bottom

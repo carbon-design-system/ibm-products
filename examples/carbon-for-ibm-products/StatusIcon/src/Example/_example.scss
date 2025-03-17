@@ -1,22 +1,22 @@
-@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 .ccs-theme-dropdown {
   position: fixed;
-  bottom: $spacing-05;
-  left: $spacing-05;
-  min-width: 11.5rem;
+  inset-block-end: $spacing-05;
+  min-inline-size: 11.5rem;
+  inset-inline-start: $spacing-05;
 }
 
 .ccs-status-dropdown {
   position: fixed;
-  top: $spacing-05;
-  left: $spacing-05;
-  min-width: 11.5rem;
+  inset-block-start: $spacing-05;
+  min-inline-size: 11.5rem;
+  inset-inline-start: $spacing-05;
 }
 
 .example__status-icon {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
   transform: translate(-50%, -50%);
 }

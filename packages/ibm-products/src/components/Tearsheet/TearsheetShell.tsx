@@ -351,15 +351,6 @@ export const TearsheetShell = React.forwardRef(
       launcherButtonRef,
     ]);
 
-    // useEffect(() => {
-    //   if (prevOpen && !open && launcherButtonRef) {
-    //     setTimeout(() => {
-    //       launcherButtonRef.current.focus();
-    //       // Delayed to avoid race condition
-    //     }, 0);
-    //   }
-    // }, [launcherButtonRef, open, prevOpen]);
-
     useEffect(() => {
       const notify = () =>
         stack.all.forEach((handler) => {

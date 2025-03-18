@@ -330,7 +330,7 @@ export const TearsheetShell = React.forwardRef(
         });
       }
 
-      if (prevOpen && !open && launcherButtonRef) {
+      if (prevOpen && !open && launcherButtonRef?.current) {
         requestAnimationFrame(() => {
           launcherButtonRef.current.focus();
         });

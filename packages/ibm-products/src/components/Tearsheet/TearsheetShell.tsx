@@ -320,20 +320,16 @@ export const TearsheetShell = React.forwardRef(
       if (
         open &&
         position === depth &&
-        (!prevOpen ||
-          currentStep ||
-          !modalRef?.current?.contains(document.activeElement))
+        (!prevOpen || currentStep || !launcherButtonRef?.current)
       ) {
         // Focusing the first element or selectorPrimaryFocus element
-        requestAnimationFrame(() => {
-          claimFocus();
-        });
+        claimFocus();
       }
 
       if (prevOpen && !open && launcherButtonRef?.current) {
-        requestAnimationFrame(() => {
+        setTimeout(() => {
           launcherButtonRef.current.focus();
-        });
+        }, 0);
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -341,7 +337,6 @@ export const TearsheetShell = React.forwardRef(
       currentStep,
       depth,
       modalRef,
-      modalRefValue,
       open,
       position,
       hasError,

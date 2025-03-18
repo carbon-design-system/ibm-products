@@ -93,9 +93,9 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
       window?.getComputedStyle(specified)?.display !== 'none' &&
       specified?.tabIndex !== -1
     ) {
-      requestAnimationFrame(() => specified.focus());
+      setTimeout(() => specified.focus(), 0);
     } else {
-      requestAnimationFrame(() => first?.focus());
+      setTimeout(() => first?.focus(), 0);
     }
   };
 

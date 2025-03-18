@@ -8,17 +8,6 @@ import { expect, describe, it, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import './index';
 import { prefix } from '../../globals/settings';
-const mockedUserIcon = vi.fn().mockReturnValue(`
-  <svg slot="rendericon" data-test-id="mock-icon" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="16" cy="10" r="6"></circle>
-    <path d="M16 18C10 18 4 22 4 26V28H28V26C28 22 22 18 16 18Z"></path>
-  </svg>
-`);
-
-vi.mock('@carbon/web-components/es/icons/user/16.js', () => ({
-  default: mockedUserIcon,
-}));
-
 vi.mock('./_story-assets/headshot.jpg', () => 'mock-image-path');
 
 const blockClass = `${prefix}--user-avatar`;
@@ -113,18 +102,15 @@ describe('c4p-user-avatar', () => {
 
   it('should render the initials when simply passing two names to the name prop', async () => {
     const userAvatar = await fixture(template({ ...defaultProps, name: 'DN' }));
-
     const initials = userAvatar?.shadowRoot?.querySelectorAll(
       `.${blockClass}`
     )?.[0];
-
     expect(initials).to.exist;
     expect(initials?.textContent).to.equal('DN');
   });
 
   it('should render a tooltip if the tooltipText is supplied', async () => {
     const userAvatar = await fixture(template({ ...defaultProps }));
-
     const tooltipElement = userAvatar?.shadowRoot?.querySelectorAll(
       `.${blockClass}__tooltip`
     )?.[0];
@@ -135,7 +121,6 @@ describe('c4p-user-avatar', () => {
     const userAvatar = await fixture(
       template({ ...defaultProps, tooltipText: '' })
     );
-
     const tooltipElement = userAvatar?.shadowRoot?.querySelectorAll(
       `${blockClass}__tooltip`
     )?.[0];

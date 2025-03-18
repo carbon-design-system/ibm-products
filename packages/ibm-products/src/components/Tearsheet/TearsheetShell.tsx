@@ -14,6 +14,7 @@ import React, {
   ReactNode,
   ForwardedRef,
   RefObject,
+  useLayoutEffect,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -316,15 +317,27 @@ export const TearsheetShell = React.forwardRef(
       setPosition(newPosition);
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (
         open &&
         position === depth &&
-        (!prevOpen || currentStep || !launcherButtonRef?.current)
+        (!prevOpen ||
+          currentStep ||
+          !modalRef?.current?.contains(document.activeElement))
       ) {
         // Focusing the first element or selectorPrimaryFocus element
-        claimFocus();
+        requestAnimationFrame(() => {
+          claimFocus();
+        });
       }
+
+      if (prevOpen && !open && launcherButtonRef) {
+        requestAnimationFrame(() => {
+          launcherButtonRef.current.focus();
+          // Delayed to avoid race condition
+        });
+      }
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
       currentStep,
@@ -338,14 +351,14 @@ export const TearsheetShell = React.forwardRef(
       launcherButtonRef,
     ]);
 
-    useEffect(() => {
-      if (prevOpen && !open && launcherButtonRef) {
-        setTimeout(() => {
-          launcherButtonRef.current.focus();
-          // Delayed to avoid race condition
-        }, 0);
-      }
-    }, [launcherButtonRef, open, prevOpen]);
+    // useEffect(() => {
+    //   if (prevOpen && !open && launcherButtonRef) {
+    //     setTimeout(() => {
+    //       launcherButtonRef.current.focus();
+    //       // Delayed to avoid race condition
+    //     }, 0);
+    //   }
+    // }, [launcherButtonRef, open, prevOpen]);
 
     useEffect(() => {
       const notify = () =>

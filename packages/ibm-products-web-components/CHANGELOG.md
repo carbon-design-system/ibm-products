@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0-rc.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.11.0-rc.0...@carbon/ibm-products-web-components@0.11.0-rc.1) (2025-03-12)
+
+
+### Features
+
+* **custom-element:** new es build module ([#7090](https://github.com/carbon-design-system/ibm-products/issues/7090)) ([ab5562b](https://github.com/carbon-design-system/ibm-products/commit/ab5562b03342bbf23d679cff9c1b1ab79e9c9c39))
+
+
+
+
+
 # [0.11.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.3.0-rc.0...@carbon/ibm-products-web-components@0.11.0-rc.0) (2025-03-10)
 
 

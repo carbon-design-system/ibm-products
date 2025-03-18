@@ -8,9 +8,17 @@ import { expect, describe, it, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import './index';
 import { prefix } from '../../globals/settings';
-const mockedUserIcon = vi.fn().mockReturnValue({});
+const mockedUserIcon = vi.fn().mockReturnValue(`
+  <svg slot="rendericon" data-test-id="mock-icon" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="16" cy="10" r="6"></circle>
+    <path d="M16 18C10 18 4 22 4 26V28H28V26C28 22 22 18 16 18Z"></path>
+  </svg>
+`);
 
-vi.mock('@carbon/web-components/es/icons/user/16.js', () => mockedUserIcon);
+vi.mock('@carbon/web-components/es/icons/user/16.js', () => ({
+  default: mockedUserIcon,
+}));
+
 vi.mock('./_story-assets/headshot.jpg', () => 'mock-image-path');
 
 const blockClass = `${prefix}--user-avatar`;
@@ -29,8 +37,23 @@ const template = (props = defaultProps) => html`
     size=${props.size}
     image=${props.image}
     imageDescription=${props.imageDescription}
-    .renderIcon=${props.renderIcon}
   >
+  </c4p-user-avatar>
+`;
+
+const iconTemplate = (props = defaultProps) => html`
+  <c4p-user-avatar
+    tooltip-text=${props.tooltipText}
+    name=${props.name}
+    background-color=${props.backgroundColor}
+    size=${props.size}
+    image=${props.image}
+    imageDescription=${props.imageDescription}
+  >
+    <svg slot="rendericon" data-test-id="mock-icon" viewBox="0 0 32 32">
+      <circle cx="16" cy="10" r="6"></circle>
+      <path d="M16 18C10 18 4 22 4 26V28H28V26C28 22 22 18 16 18Z"></path>
+    </svg>
   </c4p-user-avatar>
 `;
 
@@ -46,6 +69,18 @@ describe('c4p-user-avatar', () => {
     expect(userAvatar.getAttribute('background-color')).toBe('order-1-cyan');
     const bgClass = userAvatar?.shadowRoot?.querySelectorAll(
       `.${blockClass}--order-1-cyan`
+    )?.[0];
+    expect(bgClass).toBeDefined();
+  });
+
+  it('should return a circle with updated background color', async () => {
+    const userAvatar = await fixture(
+      template({ ...defaultProps, backgroundColor: 'order-3-green' })
+    );
+    expect(userAvatar).toBeDefined();
+    expect(userAvatar.getAttribute('background-color')).toBe('order-3-green');
+    const bgClass = userAvatar?.shadowRoot?.querySelectorAll(
+      `.${blockClass}--order-3-green`
     )?.[0];
     expect(bgClass).toBeDefined();
   });
@@ -109,10 +144,17 @@ describe('c4p-user-avatar', () => {
 
   it('should return an icon for the avatar image', async () => {
     const userAvatar = await fixture(
-      template({ ...defaultProps, renderIcon: mockedUserIcon })
+      iconTemplate({ ...defaultProps, size: 'md' })
     );
-    const renderedSVG = userAvatar?.shadowRoot?.querySelectorAll('svg');
-    expect(renderedSVG).toBeTruthy();
+    const renderedSVG = userAvatar?.shadowRoot?.querySelector(
+      'slot[name="rendericon"]'
+    ) as HTMLSlotElement;
+    expect(renderedSVG).to.exist;
+    const assignedNodes = renderedSVG.assignedNodes({ flatten: true });
+    const svg = assignedNodes.find(
+      (node) => node.nodeName.toLowerCase() === 'svg'
+    ) as SVGElement;
+    expect(svg).to.exist;
   });
 
   it('should render image for the avatar image', async () => {

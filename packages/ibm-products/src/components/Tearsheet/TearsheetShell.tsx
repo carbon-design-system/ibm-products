@@ -14,7 +14,6 @@ import React, {
   ReactNode,
   ForwardedRef,
   RefObject,
-  useLayoutEffect,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -317,7 +316,7 @@ export const TearsheetShell = React.forwardRef(
       setPosition(newPosition);
     }
 
-    useLayoutEffect(() => {
+    useEffect(() => {
       if (
         open &&
         position === depth &&
@@ -334,7 +333,6 @@ export const TearsheetShell = React.forwardRef(
       if (prevOpen && !open && launcherButtonRef) {
         requestAnimationFrame(() => {
           launcherButtonRef.current.focus();
-          // Delayed to avoid race condition
         });
       }
 

@@ -142,7 +142,9 @@ jobs:
       - name: Install
       - run: yarn
       - name: Install React version ${{ matrix.react }}
-      - run: yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
+      - run:
+          yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
+          --frozen-lockfile
       - name: CI tests for c4p with React version ${{ matrix.react }}
       - run: yarn ci-check:test:c4p
   test-c4p-wc:

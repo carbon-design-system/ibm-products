@@ -317,12 +317,10 @@ export const TearsheetShell = React.forwardRef(
     }
 
     useEffect(() => {
-      if (!open) {
-        if (launcherButtonRef?.current) {
-          setTimeout(() => {
-            launcherButtonRef?.current.focus();
-          }, 0);
-        }
+      if (!open && launcherButtonRef?.current) {
+        setTimeout(() => {
+          launcherButtonRef?.current.focus();
+        }, 0);
       }
 
       if (open) {

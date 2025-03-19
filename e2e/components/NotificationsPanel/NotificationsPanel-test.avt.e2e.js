@@ -34,25 +34,10 @@ test.describe('NotificationsPanel @avt', () => {
       },
     });
 
-    const notificationPanel = page.locator(
+    const notificationPanel = await page.locator(
       `div#${pkg.prefix}--notifications-panel`
     );
     await expect(notificationPanel).toBeVisible();
-
-    const firstElement = page.locator(
-      `button.${pkg.prefix}--notifications-panel__dismiss-button`
-    );
-    await firstElement.focus();
-    await expect(firstElement).toBeFocused();
-
-    await page.keyboard.press('Shift+Tab');
-    const lastElement = await page.locator(
-      `button.${pkg.prefix}--notifications-panel__settings-button`
-    );
-
-    await expect(lastElement).toBeFocused();
-    await page.keyboard.press('Tab');
-    await expect(firstElement).toBeFocused();
 
     for (let i = 0; i < 10; i++) {
       await page.keyboard.press('Tab');

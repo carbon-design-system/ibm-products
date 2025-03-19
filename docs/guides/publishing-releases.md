@@ -95,10 +95,9 @@ release team will need to do the following:
       inputs as above, but this time with dry run unchecked.
 - [ ] Once job has completed, check the packages on npm to ensure they have been
       published under the `next` tag:
-  - [ ] `@carbon/ibm-products`:
-        https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions
-  - [ ] `@carbon/ibm-products-styles`:
-        https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions
+  - [ ] [`@carbon/ibm-products`](https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions)
+  - [ ] [`@carbon/ibm-products-web-components`](https://www.npmjs.com/package/@carbon/ibm-products-web-components?activeTab=versions)
+  - [ ] [`@carbon/ibm-products-styles`](https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions)
 - [ ] The workflow should have triggered the
       [deploy staging environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-staging.yml).
       Once this workflow has completed, check the
@@ -160,10 +159,9 @@ from the release branch for further testing. To publish subsequent prereleases,
       inputs as above, but this time with dry run unchecked.
 - [ ] Once job has completed, check the packages on npm to ensure they have been
       published under the `next` tag:
-  - [ ] `@carbon/ibm-products`:
-        https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions
-  - [ ] `@carbon/ibm-products-styles`:
-        https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions
+  - [ ] [`@carbon/ibm-products`](https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions)
+  - [ ] [`@carbon/ibm-products-web-components`](https://www.npmjs.com/package/@carbon/ibm-products-web-components?activeTab=versions)
+  - [ ] [`@carbon/ibm-products-styles`](https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions)
 - [ ] The workflow should have triggered the
       [deploy staging environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-staging.yml).
       Once this workflow has completed, check the
@@ -227,10 +225,9 @@ validated. During this stage, the release team will do the following:
       inputs as above, but this time with dry run unchecked.
 - [ ] Once job has completed, check the packages on npm to ensure they have been
       published under the `latest` tag:
-  - [ ] `@carbon/ibm-products`:
-        https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions
-  - [ ] `@carbon/ibm-products-styles`:
-        https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions
+  - [ ] [`@carbon/ibm-products`](https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions)
+  - [ ] [`@carbon/ibm-products-web-components`](https://www.npmjs.com/package/@carbon/ibm-products-web-components?activeTab=versions)
+  - [ ] [`@carbon/ibm-products-styles`](https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions)
 - [ ] The workflow should have triggered the
       [deploy staging environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-staging.yml)
       and the

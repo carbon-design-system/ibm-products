@@ -317,32 +317,39 @@ export const TearsheetShell = React.forwardRef(
     }
 
     useEffect(() => {
-      if (
-        open &&
-        position === depth &&
-        (!prevOpen || currentStep || !launcherButtonRef?.current)
-      ) {
-        // Focusing the first element or selectorPrimaryFocus element
+      if (!open) {
+        if (launcherButtonRef?.current) {
+          setTimeout(() => {
+            launcherButtonRef?.current.focus();
+          }, 0);
+        }
+      }
+
+      if (open) {
         claimFocus();
       }
-
-      if (prevOpen && !open && launcherButtonRef?.current) {
-        setTimeout(() => {
-          launcherButtonRef.current.focus();
-        }, 0);
-      }
-
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [
-      currentStep,
-      depth,
-      modalRef,
-      open,
-      position,
-      hasError,
-      prevOpen,
-      launcherButtonRef,
-    ]);
+    }, [open, currentStep, effectiveHasCloseIcon]);
+
+    useEffect(() => {
+      requestAnimationFrame(() => {
+        if (
+          open &&
+          depth === position &&
+          !modalRef?.current.contains(document.activeElement)
+        ) {
+          claimFocus();
+        }
+      });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [depth, position]);
+
+    useEffect(() => {
+      if (hasError && !modalRef?.current?.contains(document.activeElement)) {
+        claimFocus();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [hasError]);
 
     useEffect(() => {
       const notify = () =>

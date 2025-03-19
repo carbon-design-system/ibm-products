@@ -134,9 +134,14 @@ test.describe('TearsheetNarrow @avt', () => {
     const closeButton = page.getByLabel('Close the tearsheet');
     const inputField = page.locator('#tss-ft1');
 
+    // Now the focus is on the close button
+    await expect(closeButton).toBeFocused();
+
     await expect(slugButton1).toBeInViewport();
     // Initially expect first slug button aria-expanded attribute is false
     await expect(slugButton1).toHaveAttribute('aria-expanded', 'false');
+    // Now switch focus to slug button
+    await page.keyboard.press('Shift+Tab');
     // And the focus is on the first slug button
     await expect(slugButton1).toBeFocused();
 

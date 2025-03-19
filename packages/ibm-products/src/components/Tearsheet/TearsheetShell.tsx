@@ -317,17 +317,20 @@ export const TearsheetShell = React.forwardRef(
     }
 
     useEffect(() => {
-      if (!open && launcherButtonRef?.current) {
-        setTimeout(() => {
-          launcherButtonRef?.current.focus();
-        }, 0);
-      }
-
       if (open) {
         claimFocus();
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open, currentStep, effectiveHasCloseIcon]);
+
+    useEffect(() => {
+      if (prevOpen && !open && launcherButtonRef?.current) {
+        setTimeout(() => {
+          launcherButtonRef?.current.focus();
+        }, 0);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open, prevOpen]);
 
     useEffect(() => {
       requestAnimationFrame(() => {

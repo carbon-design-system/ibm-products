@@ -139,10 +139,10 @@ jobs:
           key:
             test-c4p-react-major-versions-modules-${{ runner.os }}-${{
             hashFiles('yarn.lock') }}
-      - name: Install React version ${{ matrix.react }}
+      - name: Add React version ${{ matrix.react }}
         run: yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
       - name: Install
-        run: yarn --frozen-lockfile
+        run: yarn --immutable
       - name: CI tests for c4p with React version ${{ matrix.react }}
         run: yarn ci-check:test:c4p
   test-c4p-wc:

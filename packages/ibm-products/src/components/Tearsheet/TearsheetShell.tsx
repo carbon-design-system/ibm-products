@@ -336,7 +336,7 @@ export const TearsheetShell = React.forwardRef(
         if (
           open &&
           depth === position &&
-          !modalRef?.current.contains(document.activeElement)
+          !modalRef?.current?.contains(document.activeElement)
         ) {
           claimFocus();
         }

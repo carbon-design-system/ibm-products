@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.38.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.30.0-rc.0...@carbon/ibm-cloud-cognitive-core@2.38.0-rc.0) (2025-03-10)
+
+
+### Bug Fixes
+
+* **storybook:** add fontBase ([#6940](https://github.com/carbon-design-system/ibm-products/issues/6940)) ([d8e2f96](https://github.com/carbon-design-system/ibm-products/commit/d8e2f9611bbb6d1c8c0a0cf9c930e1a7fcb0d05b))
+* update to Carbon 11 compatible versions to latest ([#6437](https://github.com/carbon-design-system/ibm-products/issues/6437)) ([48d5c34](https://github.com/carbon-design-system/ibm-products/commit/48d5c34dca79a4b00fc69391a513431fa21295ee))
+* **useravatar:** variable change ([#6856](https://github.com/carbon-design-system/ibm-products/issues/6856)) ([2e6fc2b](https://github.com/carbon-design-system/ibm-products/commit/2e6fc2b3066fb55de2ded947d1d15429c852c375))
+
+
+### Features
+
+* add utils section to storybook ([#6394](https://github.com/carbon-design-system/ibm-products/issues/6394)) ([711eb72](https://github.com/carbon-design-system/ibm-products/commit/711eb72ef00d1f1935fd0fcec9e0c0383dff53dc))
+* **storybook:** add text direction toolbar item ([#6855](https://github.com/carbon-design-system/ibm-products/issues/6855)) ([ae10146](https://github.com/carbon-design-system/ibm-products/commit/ae10146ff442e4aa70dfe998d5245bf68f1359bd))
+
+
+
+
+
+# [2.37.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.37.0-rc.0...@carbon/ibm-cloud-cognitive-core@2.37.0) (2025-03-05)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
 # [2.37.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.30.0-rc.0...@carbon/ibm-cloud-cognitive-core@2.37.0-rc.0) (2025-02-24)
 
 

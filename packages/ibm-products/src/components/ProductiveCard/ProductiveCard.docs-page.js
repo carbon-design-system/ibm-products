@@ -12,6 +12,7 @@ import * as stories from './ProductiveCard.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/components/card/productive-card/usage/"
     blocks={[
       {
         story: stories.Clickable,

@@ -7,9 +7,29 @@
 
 import { useEffect, useState, RefObject } from 'react';
 
-// Used as a replacement for AnimatePresence from framer-motion,
-// this hook will return a boolean value to let the component
-// calling this hook to know whether it should render or not
+/**
+ * Used as a replacement for AnimatePresence from framer-motion,
+ * this hook will return a boolean value to let the component
+ * calling this hook to know whether it should render or not.
+ * This solves a pain point around handling unmounting of components
+ * in React that should also include an exit animation.
+ *
+ * @param open The open value to the component using this hook
+ * @param ref The ref to the element that contains the animation this hook will be listening for
+ * @param animationName The animation that will be listened for, if event.animationName equals the 
+ * animationName value provided it means that the exit animation has completed and shouldRender
+ * should be updated to false. If a separate animation is used for reduced motion cases, it should
+ * be conditionally passed as the `animationName`.
+ * @returns A boolean value so the component using this hook knows when it should render it's contents
+ * 
+ * @example
+ * ```typescript
+ * const exitAnimationName = shouldReduceMotion
+    ? 'reduced-animation-name'
+    : 'standard-animation-name';
+ * const { shouldRender } = usePresence(open, componentRef, exitAnimationName);
+ * ```
+ */
 export function usePresence(
   open: boolean,
   ref: RefObject<HTMLElement>,

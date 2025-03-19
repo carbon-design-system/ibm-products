@@ -124,7 +124,6 @@ jobs:
       matrix:
         react: [17]
         testing-library: [12]
-        carbon-react: [1.28.0]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -144,8 +143,7 @@ jobs:
       - name: Add React version ${{ matrix.react }}
         run:
           yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
-          @testing-library/react@${{ matrix.testing-library }} @carbon/react@${{
-          matrix.carbon-react }}
+          @testing-library/react@${{ matrix.testing-library }}
       - name: Install
         run: yarn --immutable
       - name: CI tests for c4p with React version ${{ matrix.react }}

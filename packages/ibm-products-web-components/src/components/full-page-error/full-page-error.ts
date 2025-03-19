@@ -22,6 +22,18 @@ const componentName = 'full-page-error';
 export const blockClass = `${prefix}--${componentName}`;
 const elementName = `${prefix}-${componentName}`; // c4p-full-page-error
 
+const errorData = {
+  [Kind.Error403]: {
+    svg: error403SVG,
+  },
+  [Kind.Error404]: {
+    svg: error404SVG,
+  },
+  [Kind.Custom]: {
+    svg: errorGenericSVG,
+  },
+};
+
 /**
  * FullPageError.
  *
@@ -30,17 +42,6 @@ const elementName = `${prefix}-${componentName}`; // c4p-full-page-error
 @customElement(elementName)
 class CDSFullPageError extends LitElement {
   static styles = styles;
-  static errorData = {
-    [Kind.Error403]: {
-      svg: error403SVG,
-    },
-    [Kind.Error404]: {
-      svg: error404SVG,
-    },
-    [Kind.Custom]: {
-      svg: errorGenericSVG,
-    },
-  };
 
   /**
    * Sets the label text
@@ -67,9 +68,12 @@ class CDSFullPageError extends LitElement {
   title: string = 'Title';
 
   render() {
-    return html` <div class=${this.classList} role="main">
+    return html` <div
+      class=${`c4p--full-page-error ${this.classList}`}
+      role="main"
+    >
       <div class=${`${blockClass}__container`}>
-        <div class=${`${carbonPrefix}--css-grid ${blockClass}__grid`}>
+        <div class=${`${blockClass}__grid ${carbonPrefix}--css-grid `}>
           <div
             class=${`${blockClass}__column ${carbonPrefix}--css-grid-column ${carbonPrefix}--sm:col-span-4 ${carbonPrefix}--md:col-span-3 ${carbonPrefix}--lg:col-span-6`}
           >
@@ -87,7 +91,7 @@ class CDSFullPageError extends LitElement {
             class=${`${carbonPrefix}--css-grid-column ${carbonPrefix}--sm:col-span-4 ${carbonPrefix}--md:col-span-5 ${carbonPrefix}--lg:col-span-10`}
           >
             <div class=${`${blockClass}__svg-container`}>
-              ${CDSFullPageError.errorData[this.kind].svg}
+              ${errorData[this.kind].svg}
             </div>
           </div>
         </div>

@@ -8,8 +8,12 @@
 $css--plex: true !default;
 @use 'sass:map';
 
+@use '@carbon/styles/scss/reset';
+
 @use '@carbon/grid';
 @use '@carbon/ibm-products-styles/scss/components/FullPageError' as *;
+
+@use '@carbon/themes' as *;
 
 @include grid.css-grid();
 

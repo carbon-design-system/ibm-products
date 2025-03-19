@@ -137,7 +137,7 @@ export const validateActionSetProps = ({ actions, size }) => {
     const dangerActions = countActions('danger');
     const ghostActions = countActions('ghost') + countActions('danger--ghost');
 
-    if (stacking && actions > 3) {
+    if (stacking && actions.length > 3) {
       problems.push(
         `you cannot have more than three actions in this size of ${componentName}`
       );
@@ -160,14 +160,14 @@ export const validateActionSetProps = ({ actions, size }) => {
       );
     }
 
-    if (stacking && actions > 1 && ghostActions > 0) {
+    if (stacking && actions.length > 1 && ghostActions > 0) {
       problems.push(
         `you cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}`
       );
     }
 
     if (
-      actions >
+      actions.length >
       primaryActions + secondaryActions + dangerActions + ghostActions
     ) {
       problems.push(

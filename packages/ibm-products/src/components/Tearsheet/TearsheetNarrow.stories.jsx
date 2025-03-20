@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Information } from '@carbon/react/icons';
 import { pkg } from '../../settings';
@@ -195,10 +195,16 @@ const Template = ({ actions, decorator, slug, ...args }, context) => {
 
 // eslint-disable-next-line react/prop-types
 const StackedTemplate = ({ actions, decorator, slug, ...args }, context) => {
-  const [open1, setOpen1] = useState(context.viewMode !== 'docs');
-  const [open2, setOpen2] = useState(context.viewMode !== 'docs');
-  const [open3, setOpen3] = useState(context.viewMode !== 'docs');
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
   const ref = useRef(undefined);
+
+  useEffect(() => {
+    setOpen1(context.viewMode !== 'docs');
+    setOpen2(context.viewMode !== 'docs');
+    setOpen3(context.viewMode !== 'docs');
+  }, []);
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {

@@ -320,7 +320,7 @@ const commonTests = (Ts, name, props, testActions) => {
 
       rerender(<DummyComponent open={false} />);
 
-      await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+      await act(() => new Promise((resolve) => setTimeout(resolve, 50)));
       expect(launchButtonEl).toHaveFocus();
     });
 

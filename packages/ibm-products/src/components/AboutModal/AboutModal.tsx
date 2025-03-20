@@ -21,7 +21,7 @@ import React, { MutableRefObject, ReactNode, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { claimFocus, useFocus } from '../../global/js/hooks/useFocus';
+import { useFocus } from '../../global/js/hooks/useFocus';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -143,7 +143,7 @@ export let AboutModal = React.forwardRef(
     const contentRef = useRef<HTMLDivElement>(null);
     const contentId = uuidv4();
     const renderPortalUse = usePortalTarget(portalTargetIn);
-    const { firstElement } = useFocus(modalRef);
+    const { claimFocus } = useFocus(modalRef);
 
     // We can't add a ref directly to the ModalBody, so track it in a ref
     // as the parent of the current bodyRef element
@@ -153,9 +153,10 @@ export let AboutModal = React.forwardRef(
 
     useEffect(() => {
       if (open) {
-        claimFocus(firstElement, modalRef);
+        claimFocus();
       }
-    }, [firstElement, modalRef, open]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [modalRef, open]);
 
     return renderPortalUse(
       <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>

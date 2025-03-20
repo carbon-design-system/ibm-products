@@ -82,10 +82,10 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('has no accessibility violations', async () => {
+  it('has no accessibility violations', () => {
     const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, async () => {

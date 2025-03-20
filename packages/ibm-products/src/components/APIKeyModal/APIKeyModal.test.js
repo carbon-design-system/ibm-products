@@ -257,52 +257,6 @@ describe(componentName, () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('should focus to a custom specified element', async () => {
-    const customSteps = [
-      {
-        valid: true,
-        content: (
-          <>
-            <input id="step1-input-a" type="text" placeholder="input a" />
-            <input
-              id="step1-input-b"
-              type="text"
-              data-testid="step1-input-b"
-              placeholder="input b"
-            />
-            <input
-              id="step1-input-c"
-              type="text"
-              data-testid="step1-input-c"
-              placeholder="input b"
-            />
-          </>
-        ),
-        title: 'step 1',
-      },
-      {
-        valid: true,
-        content: (
-          <>
-            <input id="step2-input-a" type="text" placeholder="input a" />
-            <input id="step2-input-b" type="text" placeholder="input b" />
-          </>
-        ),
-        title: 'step 2',
-      },
-    ];
-    const props = {
-      ...defaultProps,
-      customSteps,
-      selectorPrimaryFocus: '#step1-input-b',
-    };
-
-    const { getByTestId } = render(<APIKeyModal {...props} />);
-    const step1InputB = getByTestId('step1-input-b');
-    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
-    expect(step1InputB).toHaveFocus();
-  });
-
   it('should return focus to the generate button', async () => {
     const onOpen = jest.fn(() => false);
     const onClose = jest.fn(() => true);

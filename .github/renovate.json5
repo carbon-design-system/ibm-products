@@ -27,7 +27,7 @@
       "matchPackageNames": ["@carbon/**"],
       "groupName": "Carbon core packages",
       // Update at 4:00 UTC on the 1st and 15th of every month
-      "schedule": "0 4 1,15 * *"
+      "schedule": "* 4 1,15 * *"
     }
   ]
 }

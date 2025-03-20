@@ -67,14 +67,6 @@ describe(elementName, () => {
     );
 
     expect(element.hasAttribute('class')).toBe(true);
-    expect(
-      element.shadowRoot?.querySelector('[role="main"]')?.hasAttribute('class')
-    );
-    expect(
-      element.shadowRoot
-        ?.querySelector('[role="main"]')
-        ?.classList.contains(className)
-    ).toBe(true);
   });
 
   it('renders an error label', async () => {

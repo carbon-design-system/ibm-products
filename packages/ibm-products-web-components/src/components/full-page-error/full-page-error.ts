@@ -68,10 +68,7 @@ class CDSFullPageError extends LitElement {
   title: string = 'Title';
 
   render() {
-    return html` <div
-      class=${`c4p--full-page-error ${this.classList}`}
-      role="main"
-    >
+    return html` <div class=${blockClass} role="main">
       <div class=${`${blockClass}__container`}>
         <div class=${`${blockClass}__grid ${carbonPrefix}--css-grid `}>
           <div

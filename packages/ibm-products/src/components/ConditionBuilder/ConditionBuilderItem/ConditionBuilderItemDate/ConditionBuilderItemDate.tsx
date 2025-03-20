@@ -36,6 +36,7 @@ export const ConditionBuilderItemDate = ({
       selectedDate && selectedDate.length > 0 ? selectedDate : 'INVALID'
     );
   };
+
   return (
     <div className={`${blockClass}__item-date `}>
       {datePickerType == 'single' && (

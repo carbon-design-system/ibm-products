@@ -6,8 +6,9 @@
  */
 
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
-import { describe, expect, it, vi, afterEach, beforeEach } from 'vitest';
-import { fixture, html, oneEvent } from '@open-wc/testing';
+import { describe, expect, it, vi, afterEach } from 'vitest';
+import { TemplateResult } from 'lit';
+import { fixture, html } from '@open-wc/testing';
 import './index';
 import '@carbon/web-components/es/components/tabs/index.js';
 import '@carbon/web-components/es/components/slug/index.js';
@@ -24,7 +25,6 @@ import {
   getActionItems,
   getSlug,
   getNavigation,
-  getInfluencer,
   influencers,
 } from './tearsheet.stories';
 import CDSTearsheet from './tearsheet';
@@ -133,7 +133,7 @@ describe('c4p-tearsheet', () => {
       template(defaultProps, getSlug(1))
     )) as CDSTearsheet;
 
-    await new Promise((resolve) => setTimeout(resolve, 100)); // ✅ Wait for styles to settle
+    await new Promise((resolve) => setTimeout(resolve, 100));
     document.body.offsetHeight;
 
     expect(tearsheet?.open).toBeTruthy();
@@ -184,18 +184,18 @@ describe('c4p-tearsheet', () => {
 
   it('should close tearsheet when pressing Esc', async () => {
     const tearsheet = (await fixture(
-      template({ ...defaultProps, open: true }) // Ensure it starts open
+      template({ ...defaultProps, open: true })
     )) as CDSTearsheet;
 
     // Ensure the tearsheet is initially open
     expect(tearsheet?.open).toBeTruthy();
 
-    // Dispatch the before-close event via keyboard event (Esc)
+    // Dispatch the before-close event via Esc
     const beforeCloseEvent = new CustomEvent('cds-tearsheet-before-close', {
       bubbles: true,
       composed: true,
       cancelable: true,
-      detail: { triggeredBy: 'Escape' }, // Simulate the keypress trigger
+      detail: { triggeredBy: 'Escape' },
     });
 
     // Dispatch the close event
@@ -278,23 +278,67 @@ describe('c4p-tearsheet', () => {
     expect(tabs?.querySelectorAll('cds-tab')).to.have.lengthOf(4);
   });
 
-  it('renders influencer', async () => {
+  it('responds to influencerPosition', async () => {
     const tearsheet = (await fixture(
-      template({ ...defaultProps, influencer: influencers[1] })
+      template({
+        ...defaultProps,
+        influencer: influencers[1],
+        influencerPlacement: 'right',
+        influencerWidth: 'wide',
+      })
     )) as CDSTearsheet;
 
     expect(tearsheet?.open).toBeTruthy();
+    expect(tearsheet?.influencerPlacement).toBe('right');
+    expect(tearsheet?.influencerWidth).toBe('wide');
+    const bodyEle = tearsheet.shadowRoot?.querySelector('cds-modal-body');
+    expect(bodyEle).to.exist;
 
-    const headerEle = tearsheet.shadowRoot?.querySelector('cds-modal-body');
-    expect(headerEle).to.exist;
-
-    const influencerSlot = headerEle?.querySelector(
+    const influencerSlot = bodyEle?.querySelector(
       'slot[name="influencer"]'
     ) as HTMLSlotElement;
     expect(influencerSlot).to.exist;
-    const assignedElements = influencerSlot?.assignedElements();
 
-    expect(assignedElements.length).to.be.equal(0);
+    const influencer = bodyEle?.querySelector(
+      '.c4p--tearsheet__influencer'
+    ) as HTMLElement;
+    const rightSection = bodyEle?.querySelector(
+      '.c4p--tearsheet__right'
+    ) as HTMLElement;
+
+    // Expect elements to exist
+    expect(influencer).to.exist;
+    expect(influencer.getAttribute('wide')).to.not.be.null;
+
+    expect(rightSection).to.exist;
+
+    // Ensure content is before influencer in DOM
+    expect(
+      rightSection.compareDocumentPosition(influencer) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).to.be.greaterThan(0);
+  });
+
+  it('responds to action items', async () => {
+    const actionItems = getActionItems(2);
+    const mergedActionItems = actionItems
+      ? (html`${actionItems}` as TemplateResult<1>)
+      : null;
+
+    const tearsheet = (await fixture(
+      template(defaultProps, mergedActionItems)
+    )) as CDSTearsheet;
+
+    expect(tearsheet?.open).toBeTruthy();
+    const slot = tearsheet.shadowRoot?.querySelector(
+      'cds-modal-body cds-button-set-base slot[name="actions"]'
+    ) as HTMLSlotElement;
+
+    const buttons = slot
+      ?.assignedElements({ flatten: true })
+      .filter((node) => node.tagName === 'CDS-BUTTON');
+
+    expect(buttons?.length).to.equal(2);
   });
 
   afterEach(() => {

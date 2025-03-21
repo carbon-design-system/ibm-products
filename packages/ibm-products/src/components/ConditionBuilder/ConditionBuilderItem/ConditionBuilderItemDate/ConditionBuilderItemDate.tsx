@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ForwardedRef, useRef } from 'react';
+import React, { ForwardedRef, useEffect, useRef } from 'react';
 
 import { DatePicker, DatePickerInput } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { useTranslations } from '../../utils/useTranslations';
 import { Condition, PropertyConfigDate } from '../../ConditionBuilder.types';
-import { blockClass } from '../../utils/util';
+import { blockClass, checkForMultiSelectOperator } from '../../utils/util';
 
 interface ConditionBuilderItemDate {
   conditionState: Condition;
@@ -28,18 +28,47 @@ export const ConditionBuilderItemDate = ({
 }) => {
   const DatePickerInputRef = useRef<HTMLDivElement>(null);
   const [startText, endText] = useTranslations(['startText', 'endText']);
-  const datePickerType =
-    conditionState.operator == 'between' ? 'range' : 'single';
-  //TO DO: support for range picker in custom operators
-  const dateFormat = config.dateFormat || 'Y-m-d';
 
+  const dateFromState = useRef<Date[] | undefined>([]);
+
+  const dateFormat = config.dateFormat || 'm/d/Y';
+
+  const datePickerType =
+    conditionState.operator == 'between' ||
+    checkForMultiSelectOperator(conditionState, config)
+      ? 'range'
+      : 'single';
+
+  useEffect(() => {
+    dateFromState.current = getParsedDate(conditionState.value) ?? undefined;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  //This method will convert the date string from the condition state to date object based on the dateFormat
+  const getParsedDate = (dateToParse: string): Date[] | null => {
+    // @ts-ignore
+    const calendarInstance = DatePickerInputRef?.current?.calendar;
+    if (!calendarInstance || !dateToParse) {
+      return null;
+    }
+
+    const [startDate, endDate] = dateToParse.split(' - ');
+    const parsedDates: Date[] = [];
+
+    if (startDate && startDate !== 'INVALID') {
+      parsedDates.push(calendarInstance.parseDate(startDate, dateFormat));
+    }
+    if (endDate && endDate !== 'INVALID') {
+      parsedDates.push(calendarInstance.parseDate(endDate, dateFormat));
+    }
+
+    return parsedDates.length ? parsedDates : null;
+  };
   const onCloseHandler = (selectedDate, selectedDateStr, instance) => {
     let formattedDate = selectedDateStr;
-    if (datePickerType == 'range' && selectedDate.length === 2) {
-      formattedDate =
-        instance.formatDate(selectedDate[0], dateFormat) +
-        ' - ' +
-        instance.formatDate(selectedDate[1], dateFormat);
+
+    if (datePickerType === 'range' && selectedDate.length === 2) {
+      formattedDate = `${instance.formatDate(selectedDate[0], dateFormat)} - ${instance.formatDate(selectedDate[1], dateFormat)}`;
     }
 
     onChange(formattedDate || 'INVALID');
@@ -49,13 +78,12 @@ export const ConditionBuilderItemDate = ({
     <div className={`${blockClass}__item-date `}>
       {datePickerType == 'single' && (
         <DatePicker
+          {...config}
           ref={DatePickerInputRef}
-          dateFormat={dateFormat}
           datePickerType="single"
           value={conditionState.value}
           onClose={onCloseHandler}
           appendTo={parentRef?.current}
-          locale={config.locale}
         >
           <DatePickerInput
             id="datePicker"
@@ -67,13 +95,12 @@ export const ConditionBuilderItemDate = ({
 
       {datePickerType == 'range' && (
         <DatePicker
+          {...config}
           ref={DatePickerInputRef}
-          dateFormat={dateFormat}
           datePickerType={datePickerType}
           onClose={onCloseHandler}
-          value={conditionState.value?.split(' - ')}
+          value={dateFromState.current}
           appendTo={parentRef?.current}
-          locale={config.locale}
         >
           <DatePickerInput
             id="datePickerStart"

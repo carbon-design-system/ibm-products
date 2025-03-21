@@ -17,7 +17,7 @@ import '@carbon/web-components/es/components/progress-bar/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/textarea/index.js';
-import { prefix } from '../../globals/settings';
+
 import {
   getContent,
   getLabel,
@@ -28,7 +28,7 @@ import {
   influencers,
 } from './tearsheet.stories';
 import CDSTearsheet from './tearsheet';
-const blockClass = `${prefix}--tearsheet`;
+
 const defaultProps = {
   headerActions: '',
   open: true,

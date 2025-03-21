@@ -94,6 +94,16 @@ export const ConditionBuilderItemDate = ({
   //Note: has to use onKeyPress instead of onKeyDown, since core is stop propagating for onKeydown(fixEventsPlugin.js)
   const onKeyPressHandler = (evt: KeyboardEvent) => {
     if (evt.key === 'Enter') {
+      // @ts-ignore
+      const calendarInstance = DatePickerInputRef?.current?.calendar;
+      if (calendarInstance) {
+        onCloseHandler(
+          calendarInstance.selectedDates,
+          (evt.target as HTMLInputElement).value,
+          calendarInstance
+        );
+      }
+
       focusThisField(evt, conditionBuilderRef);
     }
   };

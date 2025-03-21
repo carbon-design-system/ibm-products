@@ -106,28 +106,17 @@ export const manageTabIndexAndFocus = (currentElement, conditionBuilderRef) => {
 };
 
 export const getValue = (type, value, config) => {
-  if (config?.valueFormatter && ['date', 'custom'].includes(type)) {
+  if (config?.valueFormatter && ['custom'].includes(type)) {
     return config.valueFormatter(value);
-  } else {
-    const formatters = {
-      text: (value) => value,
-      textarea: (value) => value,
-      time: (value) => value,
-      number: (value) => value,
-      option: (value) => {
-        if (value && typeof value !== 'string') {
-          const selectedValues = Array.isArray(value) ? value : [value];
-          return selectedValues.map((option) => option.label).join(', ');
-        }
+  } else if (type === 'option') {
+    if (value && typeof value !== 'string') {
+      const selectedValues = Array.isArray(value) ? value : [value];
+      return selectedValues.map((option) => option.label).join(', ');
+    }
 
-        return value;
-      },
-      date: (value) => {
-        return value;
-      },
-      custom: (value) => value,
-    };
-    return formatters[type](value, config);
+    return value;
+  } else {
+    return value;
   }
 };
 
@@ -140,4 +129,10 @@ export const checkForMultiSelectOperator = (condition, config) => {
         condition?.operator === operator.id && operator.isMultiSelect
     )
   );
+};
+//this will close the popover on escape key on search box
+export const onKeyDownHandlerForSearch = (evt, conditionBuilderRef) => {
+  if (!evt.currentTarget.value && evt.key === 'Escape') {
+    focusThisField(evt, conditionBuilderRef);
+  }
 };

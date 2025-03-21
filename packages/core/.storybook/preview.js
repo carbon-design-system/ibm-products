@@ -10,7 +10,7 @@ import { white, g10, g90, g100 } from '@carbon/themes';
 import '../../ibm-products/src/feature-flags';
 
 import { pkg } from '../../ibm-products/src/settings';
-
+import theme from '../.storybook/theme';
 import index from './index.scss?inline';
 import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
 
@@ -131,6 +131,7 @@ const parameters = {
         ['Components', 'Patterns', 'Onboarding'],
         'Utils',
         ['Components'],
+        'Hooks',
         'Deprecated',
       ],
     },
@@ -142,6 +143,7 @@ const parameters = {
     defaultViewport: 'basic',
   },
   docs: {
+    theme,
     page: () => <StoryDocsPage />,
   },
 };

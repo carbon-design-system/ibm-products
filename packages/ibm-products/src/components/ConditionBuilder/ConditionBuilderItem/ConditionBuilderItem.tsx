@@ -16,7 +16,13 @@ import React, {
   Ref,
 } from 'react';
 
-import { Popover, PopoverContent, Layer } from '@carbon/react';
+import {
+  Popover,
+  PopoverContent,
+  Layer,
+  Heading,
+  Section,
+} from '@carbon/react';
 import PropTypes from 'prop-types';
 import { Add, CarbonIconType } from '@carbon/react/icons';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
@@ -219,7 +225,7 @@ export const ConditionBuilderItem = ({
   const getLabel = () => {
     // @ts-ignore
     if (config?.operators && rest['data-name'] === 'operatorField') {
-      return getCustomOperatorLabel(propertyLabel)?.label ?? propertyLabel;
+      return getCustomOperatorLabel(propertyLabel)?.label ?? addOperatorText;
     } else if (propertyLabel) {
       return propertyLabel;
     } else if (rest['data-name'] === 'propertyField') {
@@ -266,10 +272,14 @@ export const ConditionBuilderItem = ({
           onKeyDown={handleKeyDownHandler}
         >
           <Layer>
-            <h1 className={`${blockClass}__item__title`}>{title}</h1>
-            <div className={`${blockClass}__popover-content`}>
-              {renderChildren ? renderChildren(popoverRef) : children}
-            </div>
+            <Section>
+              <Heading className={`${blockClass}__item__title`}>
+                {title}
+              </Heading>
+              <div className={`${blockClass}__popover-content`}>
+                {renderChildren ? renderChildren(popoverRef) : children}
+              </div>
+            </Section>
           </Layer>
         </PopoverContent>
       )}

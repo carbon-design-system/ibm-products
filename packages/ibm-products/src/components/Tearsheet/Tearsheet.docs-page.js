@@ -29,6 +29,9 @@ const DocsPage = () => (
         story: stories.firstElementDisabled,
       },
       {
+        story: stories.firstElementReadOnly,
+      },
+      {
         story: stories.fullyLoaded,
       },
       {

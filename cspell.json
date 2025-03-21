@@ -203,6 +203,8 @@
     "unauthorizedemptystate",
     "userprofileimage",
     "uuidv",
-    "webfonts"
+    "webfonts",
+    "useravatar",
+    "rendericon"
   ]
 }

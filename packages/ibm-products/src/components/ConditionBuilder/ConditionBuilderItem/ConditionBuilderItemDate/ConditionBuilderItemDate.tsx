@@ -5,14 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ForwardedRef, useEffect, useRef } from 'react';
+import React, {
+  ForwardedRef,
+  useEffect,
+  useRef,
+  useContext,
+  useState,
+} from 'react';
 
 import { DatePicker, DatePickerInput } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { useTranslations } from '../../utils/useTranslations';
 import { Condition, PropertyConfigDate } from '../../ConditionBuilder.types';
-import { blockClass, checkForMultiSelectOperator } from '../../utils/util';
+import {
+  blockClass,
+  checkForMultiSelectOperator,
+  focusThisField,
+} from '../../utils/util';
+import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
 
 interface ConditionBuilderItemDate {
   conditionState: Condition;
@@ -29,10 +40,11 @@ export const ConditionBuilderItemDate = ({
   const DatePickerInputRef = useRef<HTMLDivElement>(null);
   const [startText, endText] = useTranslations(['startText', 'endText']);
 
-  const dateFromState = useRef<Date[] | undefined>([]);
+  const [dateFromState, setDateFromState] = useState<Date[] | undefined>();
 
   const dateFormat = config.dateFormat || 'm/d/Y';
 
+  const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const datePickerType =
     conditionState.operator == 'between' ||
     checkForMultiSelectOperator(conditionState, config)
@@ -40,7 +52,10 @@ export const ConditionBuilderItemDate = ({
       : 'single';
 
   useEffect(() => {
-    dateFromState.current = getParsedDate(conditionState.value) ?? undefined;
+    if (datePickerType === 'range') {
+      setDateFromState(getParsedDate(conditionState.value) ?? undefined);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -64,6 +79,7 @@ export const ConditionBuilderItemDate = ({
 
     return parsedDates.length ? parsedDates : null;
   };
+
   const onCloseHandler = (selectedDate, selectedDateStr, instance) => {
     let formattedDate = selectedDateStr;
 
@@ -72,6 +88,13 @@ export const ConditionBuilderItemDate = ({
     }
 
     onChange(formattedDate || 'INVALID');
+  };
+
+  // this will close the popover on enter key press
+  const onKeyDownHandler = (evt: KeyboardEvent) => {
+    if (evt.key === 'Enter') {
+      focusThisField(evt, conditionBuilderRef);
+    }
   };
 
   return (
@@ -83,6 +106,7 @@ export const ConditionBuilderItemDate = ({
           datePickerType="single"
           value={conditionState.value}
           onClose={onCloseHandler}
+          onKeyDown={onKeyDownHandler}
           appendTo={parentRef?.current}
         >
           <DatePickerInput
@@ -99,7 +123,8 @@ export const ConditionBuilderItemDate = ({
           ref={DatePickerInputRef}
           datePickerType={datePickerType}
           onClose={onCloseHandler}
-          value={dateFromState.current}
+          onKeyPress={onKeyDownHandler}
+          value={dateFromState}
           appendTo={parentRef?.current}
         >
           <DatePickerInput

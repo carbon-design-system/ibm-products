@@ -57,13 +57,13 @@ const influencerPlacements = {
     TEARSHEET_INFLUENCER_PLACEMENT.RIGHT,
 };
 
-const influencers = {
+export const influencers = {
   'No influencer': 0,
   'Simple influencer': 1,
   'Progress influencer': 2,
 };
 
-const getInfluencer = (index) => {
+export const getInfluencer = (index) => {
   switch (index) {
     case 1:
       return html`<div
@@ -116,7 +116,7 @@ const contents = {
 
 const storyPrefix = 'tearsheet-stories';
 
-const getContent = (index) => {
+export const getContent = (index) => {
   switch (index) {
     case 1:
       return html`
@@ -189,7 +189,7 @@ const labels = {
   'Longer label': 2,
 };
 
-const getLabel = (index) => {
+export const getLabel = (index) => {
   switch (index) {
     case 1:
       return html`<span slot="label">Optional label for context</span>`;
@@ -208,7 +208,7 @@ const headerActions = {
   Buttons: 2,
 };
 
-const getActionToolbarItems = (index) => {
+export const getActionToolbarItems = (index) => {
   switch (index) {
     case 1:
       return html`<cds-dropdown slot="header-actions" value="option 1">
@@ -269,7 +269,7 @@ const toActions = (kinds: BUTTON_KIND[]) => {
 };
 
 // TODO: There are problems switching this
-const getActionItems = (index) => {
+export const getActionItems = (index) => {
   switch (index) {
     case 1:
       return toActions([BUTTON_KIND.PRIMARY]);
@@ -321,7 +321,7 @@ const navigation = {
   'With navigation': 1,
 };
 
-const getNavigation = (index) => {
+export const getNavigation = (index) => {
   switch (index) {
     case 1:
       return html` <div
@@ -345,7 +345,7 @@ const slugs = {
   'With Slug': 1,
 };
 
-const getSlug = (index) => {
+export const getSlug = (index) => {
   switch (index) {
     case 1:
       return html`<cds-slug size="xs" alignment="bottom-right">
@@ -681,14 +681,6 @@ export const StackingTemplate = {
         <!-- slotted header label -->
         ${getLabel(args.label)}
 
-        <!-- slotted header title -->
-        ${args.title ? html`<span slot="title">Three ${args.title}</span>` : ''}
-
-        <!-- slotted header description -->
-        ${args.description
-          ? html`<span slot="description">${args.description}</span>`
-          : ''}
-
         <!-- slotted action in header cds-buttons -->
         ${getActionToolbarItems(args.headerActions)}
 
@@ -703,6 +695,14 @@ export const StackingTemplate = {
 
         <!-- slotted influencer -->
         ${getInfluencer(args.influencer)}
+
+        <!-- slotted header title -->
+        ${args.title ? html`<span slot="title">Three ${args.title}</span>` : ''}
+
+        <!-- slotted header description -->
+        ${args.description
+          ? html`<span slot="description">${args.description}</span>`
+          : ''}
       </c4p-tearsheet>
     `;
   },

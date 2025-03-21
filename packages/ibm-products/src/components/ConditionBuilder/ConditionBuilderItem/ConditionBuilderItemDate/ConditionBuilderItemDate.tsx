@@ -91,7 +91,8 @@ export const ConditionBuilderItemDate = ({
   };
 
   // this will close the popover on enter key press
-  const onKeyDownHandler = (evt: KeyboardEvent) => {
+  //Note: has to use onKeyPress instead of onKeyDown, since core is stop propagating for onKeydown(fixEventsPlugin.js)
+  const onKeyPressHandler = (evt: KeyboardEvent) => {
     if (evt.key === 'Enter') {
       focusThisField(evt, conditionBuilderRef);
     }
@@ -106,7 +107,7 @@ export const ConditionBuilderItemDate = ({
           datePickerType="single"
           value={conditionState.value}
           onClose={onCloseHandler}
-          onKeyDown={onKeyDownHandler}
+          onKeyPress={onKeyPressHandler}
           appendTo={parentRef?.current}
         >
           <DatePickerInput
@@ -123,7 +124,7 @@ export const ConditionBuilderItemDate = ({
           ref={DatePickerInputRef}
           datePickerType={datePickerType}
           onClose={onCloseHandler}
-          onKeyPress={onKeyDownHandler}
+          onKeyPress={onKeyPressHandler}
           value={dateFromState}
           appendTo={parentRef?.current}
         >

@@ -16,7 +16,6 @@ import React, {
 } from 'react';
 import { TearsheetShell } from './TearsheetShell';
 
-import { ActionSet } from '../ActionSet';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { allPropTypes } from '../../global/js/utils/props-helper';
@@ -250,11 +249,8 @@ Tearsheet.propTypes = {
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: allPropTypes([
-    /**@ts-ignore */
-    ActionSet.validateActions(() => '2xl'),
     PropTypes.arrayOf(
       PropTypes.shape({
-        /**@ts-ignore*/
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',

@@ -324,7 +324,7 @@ export let InterstitialScreen = React.forwardRef<
                     return (
                       <ProgressStep
                         key={idx}
-                        label={child.props.stepTitle || ''}
+                        label={(child?.props as any).stepTitle || ''}
                       />
                     );
                   }
@@ -377,7 +377,7 @@ export let InterstitialScreen = React.forwardRef<
                       return (
                         <ProgressStep
                           key={idx}
-                          label={child.props.stepTitle || ''}
+                          label={(child?.props as any).stepTitle || ''}
                         />
                       );
                     }

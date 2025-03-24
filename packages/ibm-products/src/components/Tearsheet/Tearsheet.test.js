@@ -298,6 +298,16 @@ const commonTests = (Ts, name, props, testActions) => {
       expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
     });
 
+    it('should call claimFocus when hasError prop is true and no element focused yet', async () => {
+      render(<Ts {...{ ...props, closeIconDescription }} hasError open />);
+
+      const closeButton = screen.getByRole('button', {
+        name: closeIconDescription,
+      });
+
+      expect(closeButton).toHaveFocus();
+    });
+
     it('should return focus to the launcher button', async () => {
       const { rerender, getByText, getByTestId } = render(
         <DummyComponent open={true} />

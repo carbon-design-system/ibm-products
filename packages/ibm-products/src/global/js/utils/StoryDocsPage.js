@@ -7,6 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
 
 import {
   Title,
@@ -47,7 +48,17 @@ export const CustomBlocks = ({ blocks }) => {
         ) : (
           block.description
         )}
-        {block.story && <Canvas of={block.story} />}
+        {block.story && (
+          <Canvas
+            additionalActions={[
+              {
+                title: 'Open in Stackblitz',
+                onClick: () => stackblitzPrefillConfig(block.story),
+              },
+            ]}
+            s
+          />
+        )}
         {block.source && <Source {...source} />}
       </div>
     );

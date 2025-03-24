@@ -138,12 +138,10 @@ export const StoryDocsPage = ({
       {guidelinesHref ? (
         guidelinesHref && Array.isArray(guidelinesHref) ? (
           guidelinesHref.map(({ href, label }, index) => (
-            <>
+            <React.Fragment key={href}>
               {index > 0 && ' | '}
-              <AnchorMdx key={href} href={href}>
-                {label}
-              </AnchorMdx>
-            </>
+              <AnchorMdx href={href}>{label}</AnchorMdx>
+            </React.Fragment>
           ))
         ) : (
           <AnchorMdx href={guidelinesHref}>

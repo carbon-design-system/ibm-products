@@ -2,15 +2,17 @@ import React from 'react';
 import StackBlitzSDK from '@stackblitz/sdk';
 import sdk, { Project } from '@stackblitz/sdk';
 import { index, main, packageJson, style, viteConfig } from './configFiles';
-import * as carbonComponents from '../src/index';
 import * as carbonIconsReact from '@carbon/icons-react';
-
-export const stackblitzPrefillConfig = (
+const iconsNames = Object.keys(carbonIconsReact);
+export const stackblitzPrefillConfig = async (
   code: any,
   // components: Array<string>, // Add all required components to be imported from @carbon/react
   // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
   customImport: string
 ) => {
+  const carbonComponents = await import('../src/index');
+  const componentNames = Object.keys(carbonComponents);
+
   const storyCode = code.parameters.docs.source.originalSource
     .replace(/^\s*args\s*=>\s*{\s*|}\s*;?\s*$/g, '')
     // Before: args => { <Component> }
@@ -45,7 +47,6 @@ export const stackblitzPrefillConfig = (
   };
 
   // Get all matched components
-  const componentNames = Object.keys(carbonComponents);
   const matchedComponents = findComponentImports(componentNames, storyCode);
 
   // Function to find all matches
@@ -66,7 +67,7 @@ export const stackblitzPrefillConfig = (
   };
 
   // Get all matched icons
-  const iconsNames = Object.keys(carbonIconsReact);
+
   const matchedIcons = findIconImports(iconsNames, storyCode);
 
   // Generate App.jsx code

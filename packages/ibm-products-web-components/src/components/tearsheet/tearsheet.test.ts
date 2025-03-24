@@ -128,6 +128,33 @@ describe('c4p-tearsheet', () => {
     expect(labelText).to.equal('Optional label for context');
   });
 
+  it('should render description and title', async () => {
+    const tearsheet = (await fixture(
+      template({ ...defaultProps })
+    )) as CDSTearsheet;
+
+    expect(tearsheet?.open).toBeTruthy();
+
+    const headerEle = tearsheet.shadowRoot?.querySelector('cds-modal-header');
+    expect(headerEle).to.exist;
+
+    ['description', 'title'].forEach((name, i) => {
+      const slot = headerEle?.querySelector(
+        `slot[name="${name}"]`
+      ) as HTMLSlotElement;
+      expect(slot).to.exist;
+      const text = (slot?.assignedNodes({ flatten: true }) ?? [])
+        .map((node) => node.textContent?.trim() ?? '')
+        .join(' ');
+      expect(text).to.equal(
+        [
+          'Description used to describe the flow if need be.',
+          'Three Title used to designate the overarching flow of the tearsheet.',
+        ][i]
+      );
+    });
+  });
+
   it('should render a slug', async () => {
     const tearsheet = (await fixture(
       template(defaultProps, getSlug(1))
@@ -306,7 +333,6 @@ describe('c4p-tearsheet', () => {
       '.c4p--tearsheet__right'
     ) as HTMLElement;
 
-    // Expect elements to exist
     expect(influencer).to.exist;
     expect(influencer.getAttribute('wide')).to.not.be.null;
 
@@ -339,6 +365,49 @@ describe('c4p-tearsheet', () => {
       .filter((node) => node.tagName === 'CDS-BUTTON');
 
     expect(buttons?.length).to.equal(2);
+  });
+
+  it('Exceeded more than 4 action items', async () => {
+    const actionItems = getActionItems(8);
+    const mergedActionItems = actionItems
+      ? (html`${actionItems}` as TemplateResult<1>)
+      : null;
+
+    const tearsheet = (await fixture(
+      template(defaultProps, mergedActionItems)
+    )) as CDSTearsheet;
+
+    expect(tearsheet?.open).toBeTruthy();
+    const slot = tearsheet.shadowRoot?.querySelector(
+      'cds-modal-body cds-button-set-base slot[name="actions"]'
+    ) as HTMLSlotElement;
+
+    expect(slot).to.exist;
+
+    const allButtons = slot?.assignedElements({ flatten: true }) ?? [];
+
+    // Fetching only visible buttons
+    const visibleButtons = allButtons.filter(
+      (node) =>
+        node.tagName === 'CDS-BUTTON' &&
+        !node.hasAttribute('data-actions-limit-4-exceeded')
+    );
+    expect(visibleButtons.length).to.equal(4);
+
+    const fifthButton = allButtons[4] as HTMLElement;
+    expect(fifthButton).to.exist;
+    expect(fifthButton.hasAttribute('data-actions-limit-4-exceeded')).to.be
+      .true;
+  });
+
+  it('render stacked tearsheet with depth 3', async () => {
+    const tearsheets = await Promise.all([
+      fixture(template({ ...defaultProps })) as Promise<CDSTearsheet>,
+      fixture(template({ ...defaultProps })) as Promise<CDSTearsheet>,
+      fixture(template({ ...defaultProps })) as Promise<CDSTearsheet>,
+    ]);
+
+    expect(tearsheets).to.have.lengthOf(3);
   });
 
   afterEach(() => {

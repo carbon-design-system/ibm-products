@@ -154,7 +154,7 @@ jobs:
         run: |
           yarn add @testing-library/react@12.1.4
           yarn workspace @carbon/ibm-cloud-cognitive-core add @carbon/react@1.28 -D
-          yarn workspace @carbon/ibm-cloud-products add @carbon/react@1.28 -P
+          yarn workspace @carbon/ibm-products add @carbon/react@1.28 -P
       - name: CI tests for c4p with React version ${{ matrix.react }}
         run: yarn ci-check:test:c4p
   test-c4p-wc:

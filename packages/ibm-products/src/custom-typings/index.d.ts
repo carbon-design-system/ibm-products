@@ -5,11 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  AnimatePresenceProps,
-  MotionProps as OriginalMotionProps,
-  AnimatePresenceProps as PresenceProps,
-} from 'framer-motion';
 import React from 'react';
 
 declare module '@carbon/react' {
@@ -222,13 +217,3 @@ declare module '@carbon/react' {
 declare module '@carbon/colors';
 declare module '@carbon/motion';
 declare module '@carbon/feature-flags';
-
-declare module 'framer-motion' {
-  interface MotionProps extends OriginalMotionProps {
-    className?: string;
-    children?: React.ReactNode;
-  }
-  interface AnimatePresenceProps extends PresenceProps {
-    mode?: string;
-  }
-}

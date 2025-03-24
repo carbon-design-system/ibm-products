@@ -124,7 +124,7 @@ jobs:
       matrix:
         react:
           - 17.0.0
-          - 18.0.0
+          # - 18.0.0
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

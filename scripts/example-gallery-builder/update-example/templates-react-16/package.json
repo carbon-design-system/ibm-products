@@ -17,8 +17,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "^2.60.0",
-    "@carbon/react": "^1.77.0",
+    "@carbon/ibm-products": "^2.61.0",
+    "@carbon/react": "^1.78.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "sass": "^1.85.1"

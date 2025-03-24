@@ -122,10 +122,9 @@ jobs:
   test-c4p-react-major-version:
     strategy:
       matrix:
-        carbon-react: [^1.28]
-        react: [^17]
-        react-dom: [^17]
-        testing-library: [^12]
+        react:
+          - 17.0.0
+          - 18.0.0
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -142,21 +141,20 @@ jobs:
           key:
             test-c4p-react-major-versions-modules-${{ runner.os }}-${{
             hashFiles('yarn.lock') }}
-      - name: Add React version ${{ matrix.react }} dependencies
-        run:
-          yarn add react@${{ matrix.react }} react-dom@${{ matrix.react-dom }}
-          @testing-library/react@${{ matrix.testing-library }}
-      - name: Add React version ${{ matrix.react }} dependencies to core
-        run:
-          yarn workspace @carbon/ibm-cloud-cognitive-core add @carbon/react@${{
-          matrix.carbon-react }} react@${{ matrix.react }} react-dom@${{
-          matrix.react-dom }} -D
-      - name: Add React version ${{ matrix.react }} dependencies to products
-        run:
-          yarn workspace @carbon/ibm-products add @carbon/react@${{
-          matrix.carbon-react }} -P
       - name: Install
         run: yarn --immutable
+      - name: Add React version ${{ matrix.react }}
+        run: yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
+      - name: Add React version ${{ matrix.react }} to core
+        run:
+          yarn workspace @carbon/ibm-cloud-cognitive-core add react@${{
+          matrix.react }} react-dom@${{ matrix.react }} -D
+      - name: Add legacy testing dependencies
+        if: ${{ startsWith(matrix.react, '17.') }}
+        run: |
+          yarn add @testing-library/react@12.1.4
+          yarn workspace @carbon/ibm-cloud-cognitive-core add @carbon/react@1.28 -D
+          yarn workspace @carbon/ibm-cloud-products add @carbon/react@1.28 -P
       - name: CI tests for c4p with React version ${{ matrix.react }}
         run: yarn ci-check:test:c4p
   test-c4p-wc:

@@ -35,6 +35,7 @@ import {
   ModalHeader,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
+  Section,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -422,6 +423,9 @@ export const TearsheetShell = React.forwardRef(
 
       const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
+      const Level3Section = ({children}: {children: ReactNode}) =>
+        <Section level={3}>{children}</Section>;
+
       return renderPortalUse(
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
           <ComposedModal
@@ -523,8 +527,9 @@ export const TearsheetShell = React.forwardRef(
                   [`${bc}__influencer--wide`]: influencerWidth === 'wide',
                 })}
                 neverRender={influencerPosition === 'right'}
+                element={Level3Section}
               >
-                {influencer}
+                  {influencer}
               </Wrap>
               <Wrap className={`${bc}__right`}>
                 <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
@@ -534,8 +539,9 @@ export const TearsheetShell = React.forwardRef(
                       !!(influencer && influencerPosition === 'right')
                     }
                     tabIndex={-1}
+                    element={Level3Section}
                   >
-                    {children}
+                      {children}
                   </Wrap>
                   <Wrap
                     className={cx({
@@ -543,8 +549,9 @@ export const TearsheetShell = React.forwardRef(
                       [`${bc}__influencer--wide`]: influencerWidth === 'wide',
                     })}
                     neverRender={influencerPosition !== 'right'}
+                    element={Level3Section}
                   >
-                    {influencer}
+                      {influencer}
                   </Wrap>
                 </Wrap>
                 {includeActions && (

@@ -27,7 +27,7 @@ import {
   AILabelContent,
   Toggletip,
   ToggletipButton,
-  ToggletipContent,
+  ToggletipContent, Heading, Section,
 } from '@carbon/react';
 
 import { Tearsheet, deprecatedProps } from './Tearsheet';
@@ -148,13 +148,17 @@ const description =
   describe the flow over a couple of lines in the header of the tearsheet.';
 
 const influencer = (
-  <div className="tearsheet-stories__dummy-content-block">Influencer</div>
+  <Section className="tearsheet-stories__dummy-content-block">
+    <Heading>Influencer heading</Heading>
+    <p>Influencer content</p>
+  </Section>
 );
 
 const label = 'The label of the tearsheet';
 
 const mainContent = (
-  <div className="tearsheet-stories__dummy-content-block">
+  <Section className="tearsheet-stories__dummy-content-block">
+    <Heading>Main content heading</Heading>
     <Form>
       <p>Main content</p>
       <FormGroup legendId="tearsheet-form-group" legendText="FormGroup Legend">
@@ -176,7 +180,7 @@ const mainContent = (
         />
       </FormGroup>
     </Form>
-  </div>
+  </Section>
 );
 
 const title = 'Title of the tearsheet';

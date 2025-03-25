@@ -74,14 +74,12 @@ export type PropertyConfigOption = {
 
 export interface PropertyConfigText {
   type: 'text';
-  config: TextInputProps;
-  operators?: Item[];
+  config: TextInputProps & { operators?: Item[] };
 }
 
 export interface PropertyConfigTextArea {
   type: 'textarea';
-  config: TextAreaProps;
-  operators?: Item[];
+  config: TextAreaProps & { operators?: Item[] };
 }
 
 export interface PropertyConfigNumber {

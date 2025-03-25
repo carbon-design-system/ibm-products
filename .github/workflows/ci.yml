@@ -18,6 +18,7 @@ jobs:
     strategy:
       matrix:
         react:
+          - ^16.8.6
           - ^17.0.1
           - ^18.3.1
     runs-on: ubuntu-latest
@@ -41,7 +42,7 @@ jobs:
           yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
           yarn workspace @carbon/ibm-cloud-cognitive-core add react@${{ matrix.react }} react-dom@${{ matrix.react }} -D
       - name: Add legacy dependencies
-        if: ${{ startsWith(matrix.react, '^17.') }}
+        if: ${{ startsWith(matrix.react, '^16.') || startsWith(matrix.react, '^17.') }}
         run: |
           yarn workspace @carbon/ibm-cloud-cognitive-core add @carbon/react@^1.28.0 -D
           yarn workspace @carbon/ibm-products add @carbon/react@^1.28.0 -P

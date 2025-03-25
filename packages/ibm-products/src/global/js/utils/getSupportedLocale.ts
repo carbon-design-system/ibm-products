@@ -6,6 +6,8 @@
  */
 
 /**
+ * Ensures the requested `locale` is valid, else returns the default locale.
+ *
  * Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales
  */
 

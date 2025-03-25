@@ -12,6 +12,12 @@ import * as stories from './Checklist.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    altGuidelinesHref={[
+      {
+        href: 'https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/checklist/usage/',
+        label: 'Checklist usage guidelines',
+      },
+    ]}
     blocks={[
       {
         story: stories.checklist,

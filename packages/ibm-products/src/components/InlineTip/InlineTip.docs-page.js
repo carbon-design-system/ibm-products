@@ -12,12 +12,23 @@ import * as stories from './InlineTip.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    altGuidelinesHref={[
+      {
+        href: 'https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/inline-tip/usage/',
+        label: 'Inline tip usage guidelines',
+      },
+    ]}
     blocks={[
       {
         story: stories.inlineTip,
       },
       {
         story: stories.inlineTipNarrow,
+      },
+      {
+        title: 'Stackblitz example with Animated Media',
+        description: `[![Example with Animated media](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/InlineTipWithAnimatedMedia)
+`,
       },
     ]}
   />

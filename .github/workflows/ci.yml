@@ -37,11 +37,13 @@ jobs:
       - name: Install
         run: yarn --immutable
       - name: Add React version ${{ matrix.react }}
-        run: yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
+        run: |
+          yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
+          yarn workspace @carbon/ibm-cloud-cognitive-core add react@${{ matrix.react }} react-dom@${{ matrix.react }} -D
       - name: Add legacy dependencies
         if: ${{ startsWith(matrix.react, '^17.') }}
         run: |
-          yarn workspace @carbon/ibm-cloud-cognitive-core add react@${{ matrix.react }} react-dom@${{ matrix.react }} @carbon/react@^1.28.0 -D
+          yarn workspace @carbon/ibm-cloud-cognitive-core add @carbon/react@^1.28.0 -D
           yarn workspace @carbon/ibm-products add @carbon/react@^1.28.0 -P
       - name: CI build checks
         run: yarn ci-check:build

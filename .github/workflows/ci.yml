@@ -18,8 +18,8 @@ jobs:
     strategy:
       matrix:
         react:
-          - 17.0.1
-          - 18.2.0
+          - ^17.0.1
+          - ^18.2.0
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

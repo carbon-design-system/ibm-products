@@ -15,6 +15,11 @@ concurrency:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        react:
+          - 17.0.1
+          - 18.2.0
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,7 +35,9 @@ jobs:
           path: '**/node_modules'
           key: build-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
-        run: yarn
+        run: yarn --immutable
+      - name: Add React version ${{ matrix.react }}
+        run: yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
       - name: CI build checks
         run: yarn ci-check:build
 
@@ -119,44 +126,6 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: CI snapshot tests for c4p
         run: yarn ci-check:test:c4p:snapshot
-  test-c4p-react-major-version:
-    strategy:
-      matrix:
-        react:
-          - 17.0.0
-          # - 18.0.0
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.x'
-          cache: yarn
-      - name: Cache dependencies
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 #4.2.0
-        with:
-          path: '**/node_modules'
-          key:
-            test-c4p-react-major-versions-modules-${{ runner.os }}-${{
-            hashFiles('yarn.lock') }}
-      - name: Install
-        run: yarn --immutable
-      - name: Add React version ${{ matrix.react }}
-        run: yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
-      - name: Add React version ${{ matrix.react }} to core
-        run:
-          yarn workspace @carbon/ibm-cloud-cognitive-core add react@${{
-          matrix.react }} react-dom@${{ matrix.react }} -D
-      - name: Add legacy testing dependencies
-        if: ${{ startsWith(matrix.react, '17.') }}
-        run: |
-          yarn add @testing-library/react@12.1.4
-          yarn workspace @carbon/ibm-cloud-cognitive-core add @carbon/react@1.28 -D
-          yarn workspace @carbon/ibm-products add @carbon/react@1.28 -P
-      - name: CI tests for c4p with React version ${{ matrix.react }}
-        run: yarn ci-check:test:c4p
   test-c4p-wc:
     runs-on: ubuntu-latest
     steps:

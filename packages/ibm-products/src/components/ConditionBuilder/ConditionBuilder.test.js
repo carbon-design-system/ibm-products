@@ -892,6 +892,42 @@ describe(componentName, () => {
     expect(selectedItem);
   });
 
+  it('render the component with input type date range', async () => {
+    render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Date',
+        })
+      )
+    );
+
+    const betweenOperator = screen.getByRole('option', {
+      name: 'is between',
+    });
+    await act(() => userEvent.click(betweenOperator));
+
+    const startDateInput = document.querySelector('#datePickerStart');
+    const endDateInput = document.querySelector('#datePickerEnd');
+
+    fireEvent.change(startDateInput, { target: { value: '01/06/2024' } });
+    fireEvent.change(endDateInput, { target: { value: '12/06/2024' } });
+
+    await act(() => userEvent.keyboard('{Enter}'));
+    const button = screen.getByRole('button', {
+      name: /01\/06\/2024 - 12\/06\/2024/i,
+    });
+    expect(button).toBeInTheDocument();
+    await act(() => userEvent.keyboard('{Enter}'));
+    expect(document.querySelector('#datePickerStart')).toHaveValue(
+      '01/06/2024'
+    );
+    expect(document.querySelector('#datePickerEnd')).toHaveValue('12/06/2024');
+  });
+
   it('render the component with input type time', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 

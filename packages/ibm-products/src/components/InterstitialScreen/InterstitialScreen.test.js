@@ -19,6 +19,8 @@ import userEvent from '@testing-library/user-event';
 const blockClass = `${pkg.prefix}--interstitial-screen`;
 const componentName = InterstitialScreen.displayName;
 
+// cspell:words Terminé Partiel Actuel valide
+
 // values to use
 
 const className = `class-${uuidv4()}`;
@@ -26,22 +28,37 @@ const InterstitialScreenViewModuleTitle = `Title-${uuidv4()}`;
 const dataTestId = uuidv4();
 const { fn } = jest;
 const onClose = fn();
-const renderComponent = ({ ...rest } = {}) =>
-  render(
+const renderComponent = ({ ...rest } = {}) => {
+  const translations = {
+    'carbon.progress-step.complete': 'Terminé',
+    'carbon.progress-step.incomplete': 'Partiel',
+    'carbon.progress-step.current': 'Actuel',
+    'carbon.progress-step.invalid': 'Non valide',
+  };
+  const translateWithId = (messageId) => {
+    return translations[messageId];
+  };
+  return render(
     <InterstitialScreen
       isOpen={true}
       onClose={onClose}
       data-testid={dataTestId}
       {...{ ...rest }}
     >
-      <InterstitialScreenView stepTitle="Step 1">
+      <InterstitialScreenView
+        stepTitle="Step 1"
+        translateWithId={translateWithId}
+      >
         <InterstitialScreenViewModule
           title={InterstitialScreenViewModuleTitle}
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>
 
-      <InterstitialScreenView stepTitle="Step 2">
+      <InterstitialScreenView
+        stepTitle="Step 2"
+        translateWithId={translateWithId}
+      >
         <InterstitialScreenViewModule
           title="Use case-specific heading 2"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
@@ -49,6 +66,7 @@ const renderComponent = ({ ...rest } = {}) =>
       </InterstitialScreenView>
     </InterstitialScreen>
   );
+};
 
 describe(componentName, () => {
   it('renders a component InterstitialScreen (Modal)', () => {
@@ -194,18 +212,26 @@ describe(componentName, () => {
     expect(listElement1).toHaveClass(
       `${carbon.prefix}--progress-step--current`
     );
+    expect(listElement1).toHaveTextContent('Actuel');
+
     expect(listElement2).toHaveClass(
       `${carbon.prefix}--progress-step--incomplete`
     );
+    expect(listElement2).toHaveTextContent('Partiel');
+
     const nextButtonElement = screen.getByText('Next');
     expect(nextButtonElement).toHaveClass(`${blockClass}--next-btn`);
     await act(() => userEvent.click(nextButtonElement));
     expect(listElement1).toHaveClass(
       `${carbon.prefix}--progress-step--complete`
     );
+    expect(listElement1).toHaveTextContent('Terminé');
+
     expect(listElement2).toHaveClass(
       `${carbon.prefix}--progress-step--current`
     );
+    expect(listElement2).toHaveTextContent('Actuel');
+
     expect(screen.getByText('Back')).toBeInTheDocument();
     const backButtonElement = screen.getByText('Back');
     expect(backButtonElement).toHaveClass(`${blockClass}--prev-btn`);

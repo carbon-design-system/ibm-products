@@ -182,21 +182,6 @@ export const ConditionBuilderItem = ({
     }
   }, [popoverRef, open]);
 
-  //This is a work around for the issue(#18872) in core , for popovers not closing inside modal
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (!popoverRef?.current?.contains(event.target) && open) {
-        closePopover();
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
-
   const manageInvalidSelection = () => {
     //when the user didn't select any value , we need to show as incomplete
     if (

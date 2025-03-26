@@ -320,8 +320,7 @@ export const TearsheetShell = React.forwardRef(
       if (open) {
         claimFocus();
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, currentStep, effectiveHasCloseIcon]);
+    }, [open, currentStep, effectiveHasCloseIcon, claimFocus]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef?.current) {
@@ -342,7 +341,7 @@ export const TearsheetShell = React.forwardRef(
         }
       });
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [depth, position]);
+    }, [claimFocus, depth, modalRef, position]);
 
     useEffect(() => {
       if (hasError && !modalRef?.current?.contains(document.activeElement)) {

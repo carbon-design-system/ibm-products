@@ -10,6 +10,7 @@ import React, {
   useEffect,
   useState,
   useRef,
+  ComponentProps,
   PropsWithChildren,
   ReactNode,
   ForwardedRef,
@@ -26,6 +27,7 @@ import pconsole from '../../global/js/utils/pconsole';
 import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 import { deprecateProp } from '../../global/js/utils/props-helper';
 import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
+
 // Carbon and package components we use.
 import {
   Button,
@@ -424,8 +426,13 @@ export const TearsheetShell = React.forwardRef(
       const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
       // Since the Tearsheet has an H3 heading, any headings inside the Tearsheet should start at H4.
-      const SectionLevel3 = ({ children }: { children: ReactNode }) => (
-        <Section level={3}>{children}</Section>
+      const SectionLevel3 = ({
+        children,
+        ...rest
+      }: ComponentProps<typeof Section>) => (
+        <Section level={3} {...rest}>
+          {children}
+        </Section>
       );
 
       return renderPortalUse(

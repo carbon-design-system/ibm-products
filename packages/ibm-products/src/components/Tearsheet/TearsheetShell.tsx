@@ -329,8 +329,7 @@ export const TearsheetShell = React.forwardRef(
           launcherButtonRef?.current.focus();
         }, 0);
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, prevOpen]);
+    }, [open, prevOpen, launcherButtonRef]);
 
     useEffect(() => {
       requestAnimationFrame(() => {

@@ -348,8 +348,7 @@ export const TearsheetShell = React.forwardRef(
       if (hasError && !modalRef?.current?.contains(document.activeElement)) {
         claimFocus();
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [hasError]);
+    }, [claimFocus, hasError, modalRef]);
 
     useEffect(() => {
       const notify = () =>

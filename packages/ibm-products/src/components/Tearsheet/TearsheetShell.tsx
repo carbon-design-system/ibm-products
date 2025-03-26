@@ -234,6 +234,19 @@ export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
   hasCloseIcon ?? tearsheetIsPassive(actions);
 
 /**
+ * Since the Tearsheet has an H3 heading, any headings inside the Tearsheet should start at H4.
+ * This is a helper to do that.
+ */
+const SectionLevel3 = ({
+  children,
+  ...rest
+}: ComponentProps<typeof Section>) => (
+  <Section level={3} {...rest}>
+    {children}
+  </Section>
+);
+
+/**
  *  TearSheetShell is used internally by TearSheet and TearSheetNarrow
  *
  * The component is not public.
@@ -424,16 +437,6 @@ export const TearsheetShell = React.forwardRef(
       const includeActions = actions && actions?.length > 0;
 
       const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
-
-      // Since the Tearsheet has an H3 heading, any headings inside the Tearsheet should start at H4.
-      const SectionLevel3 = ({
-        children,
-        ...rest
-      }: ComponentProps<typeof Section>) => (
-        <Section level={3} {...rest}>
-          {children}
-        </Section>
-      );
 
       return renderPortalUse(
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>

@@ -12,8 +12,8 @@ const useFilterContext = () => {
   // get the context
   const context = useContext(FilterContext);
 
-  // if `undefined`, throw an error
-  if (context === undefined) {
+  // if empty object, throw an error
+  if (Object.entries(context).length === 0) {
     throw new Error('useFilterContext was used outside of its Provider');
   }
 

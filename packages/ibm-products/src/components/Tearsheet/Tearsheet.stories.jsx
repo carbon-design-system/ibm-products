@@ -17,6 +17,8 @@ import {
   Dropdown,
   Form,
   FormGroup,
+  Heading,
+  Section,
   Tab,
   Tabs,
   TabPanels,
@@ -27,7 +29,7 @@ import {
   AILabelContent,
   Toggletip,
   ToggletipButton,
-  ToggletipContent, Heading, Section,
+  ToggletipContent,
 } from '@carbon/react';
 
 import { Tearsheet, deprecatedProps } from './Tearsheet';

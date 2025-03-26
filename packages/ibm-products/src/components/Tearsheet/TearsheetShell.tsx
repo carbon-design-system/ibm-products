@@ -33,9 +33,9 @@ import {
   DefinitionTooltip,
   Layer,
   ModalHeader,
+  Section,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
-  Section,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -423,8 +423,10 @@ export const TearsheetShell = React.forwardRef(
 
       const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
-      const Level3Section = ({children}: {children: ReactNode}) =>
-        <Section level={3}>{children}</Section>;
+      // Since the Tearsheet has an H3 heading, any headings inside the Tearsheet should start at H4.
+      const SectionLevel3 = ({ children }: { children: ReactNode }) => (
+        <Section level={3}>{children}</Section>
+      );
 
       return renderPortalUse(
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
@@ -527,9 +529,9 @@ export const TearsheetShell = React.forwardRef(
                   [`${bc}__influencer--wide`]: influencerWidth === 'wide',
                 })}
                 neverRender={influencerPosition === 'right'}
-                element={Level3Section}
+                element={SectionLevel3}
               >
-                  {influencer}
+                {influencer}
               </Wrap>
               <Wrap className={`${bc}__right`}>
                 <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
@@ -539,9 +541,9 @@ export const TearsheetShell = React.forwardRef(
                       !!(influencer && influencerPosition === 'right')
                     }
                     tabIndex={-1}
-                    element={Level3Section}
+                    element={SectionLevel3}
                   >
-                      {children}
+                    {children}
                   </Wrap>
                   <Wrap
                     className={cx({
@@ -549,9 +551,9 @@ export const TearsheetShell = React.forwardRef(
                       [`${bc}__influencer--wide`]: influencerWidth === 'wide',
                     })}
                     neverRender={influencerPosition !== 'right'}
-                    element={Level3Section}
+                    element={SectionLevel3}
                   >
-                      {influencer}
+                    {influencer}
                   </Wrap>
                 </Wrap>
                 {includeActions && (

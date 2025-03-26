@@ -9,6 +9,7 @@ import React from 'react';
 import StackBlitzSDK from '@stackblitz/sdk';
 import sdk, { Project } from '@stackblitz/sdk';
 import { index, main, packageJson, style, viteConfig } from './configFiles';
+import * as carbonComponentsReact from '@carbon/react';
 import * as carbonIconsReact from '@carbon/icons-react';
 const iconsNames = Object.keys(carbonIconsReact);
 export const stackblitzPrefillConfig = async (
@@ -17,8 +18,8 @@ export const stackblitzPrefillConfig = async (
   // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
   customImport: string
 ) => {
-  const carbonComponents = await import('../src/index');
-  const componentNames = Object.keys(carbonComponents);
+  const productComponents = await import('../src/index');
+  const componentNames = Object.keys(productComponents);
 
   const storyCode = code.parameters.docs.source.originalSource
     .replace(/^\s*args\s*=>\s*{\s*|}\s*;?\s*$/g, '')
@@ -54,6 +55,7 @@ export const stackblitzPrefillConfig = async (
   };
 
   // Get all matched components
+  // const componentNames = Object.keys(productComponents);
   const matchedComponents = findComponentImports(componentNames, storyCode);
 
   // Function to find all matches
@@ -62,10 +64,18 @@ export const stackblitzPrefillConfig = async (
       // Grab the component to convert in "<Component" and "{Component}"
       const regexComponent = new RegExp(`<${iconName}\\b`, 'g');
       const regexCurlBraces = new RegExp(`{\\s*${iconName}\\s*}`, 'g');
+      const regexObjectValue = new RegExp(`:\\s*${iconName}\\b`, 'g');
+      const regexImport = new RegExp(
+        `import\\s+.*\\b${iconName}\\b.*from\\s+['"]@my-icons['"]`,
+        'g'
+      );
 
       // Check if the component exists in the `storyCode`
       if (
-        (regexComponent.test(storyCode) || regexCurlBraces.test(storyCode)) &&
+        (regexComponent.test(storyCode) ||
+          regexCurlBraces.test(storyCode) ||
+          regexObjectValue.test(storyCode)) &&
+        regexImport.test(storyCode) &&
         !componentNames.includes(iconName)
       ) {
         return iconName;
@@ -77,14 +87,34 @@ export const stackblitzPrefillConfig = async (
 
   const matchedIcons = findIconImports(iconsNames, storyCode);
 
+  const carbonComponentNames = Object.keys(carbonComponentsReact);
+  const matchedCarbonComponents = findComponentImports(
+    carbonComponentNames,
+    storyCode
+  );
+
+  const extractStory = storyCode.match(
+    /<StoryWrapper\b[^>]*>([\s\S]*?)<\/StoryWrapper>/g
+  );
+  const extractedStoryCode = extractStory
+    ? extractStory.map((match) =>
+        match.replace(/<\/?StoryWrapper\b[^>]*>/g, '')
+      )
+    : [];
+
   // Generate App.jsx code
   const app = `
   import React from 'react';
   ${customImport ? customImport : ''}
-  import { ${matchedComponents} } from "@carbon/react";
+  import { ${matchedComponents} } from "@carbon/ibm-products";
+  import { ${matchedCarbonComponents} } from "@carbon/react";
   ${matchedIcons.length > 0 ? `import { ${matchedIcons} } from "@carbon/icons-react";` : ''}
   export default function App() {
-    ${storyCode}
+  return(
+    <>
+    ${extractedStoryCode}
+    </>
+    );
   }
   `;
 

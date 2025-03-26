@@ -48,17 +48,7 @@ export const CustomBlocks = ({ blocks }) => {
         ) : (
           block.description
         )}
-        {block.story && (
-          <Canvas
-            of={block.story}
-            additionalActions={[
-              {
-                title: 'Open in Stackblitz',
-                onClick: () => stackblitzPrefillConfig(block.story),
-              },
-            ]}
-          />
-        )}
+        {block.story && <Canvas of={block.story} />}
         {block.source && <Source {...source} />}
       </div>
     );

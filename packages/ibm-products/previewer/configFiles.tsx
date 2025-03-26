@@ -17,6 +17,7 @@ export const packageJson: string = `{
   },
   "dependencies": {
     "@carbon/react": "latest",
+    "@carbon/ibm-products": "^v2.62.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -71,7 +72,6 @@ root.render(
 `;
 
 export const style: string = `
-@use '@carbon/react' with (
-  $font-path: '@ibm/plex'
-);
+@use '@carbon/styles';
+@use '@carbon/ibm-products/css/index';
 `;

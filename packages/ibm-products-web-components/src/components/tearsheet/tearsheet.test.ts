@@ -413,6 +413,5 @@ describe('c4p-tearsheet', () => {
   afterEach(() => {
     // Clears the DOM after each test
     document.body.innerHTML = '';
-    document.body.offsetHeight;
   });
 });

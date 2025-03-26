@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.63.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.62.0-rc.0...@carbon/ibm-products@2.63.0-rc.0) (2025-03-24)
+
+
+### Bug Fixes
+
+* correct tooltip for custom operator ([#7113](https://github.com/carbon-design-system/ibm-products/issues/7113)) ([cca6e1f](https://github.com/carbon-design-system/ibm-products/commit/cca6e1f27d23ea987ee085d29976084e82e2637a))
+* **Storybook:** update documentation links ([#6989](https://github.com/carbon-design-system/ibm-products/issues/6989)) ([50f65d9](https://github.com/carbon-design-system/ibm-products/commit/50f65d9d610940ac1bcc253fa7ec94504259ffc6))
+
+
+
+
+
 # [2.62.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.62.0-rc.0...@carbon/ibm-products@2.62.0) (2025-03-19)
 
 **Note:** Version bump only for package @carbon/ibm-products

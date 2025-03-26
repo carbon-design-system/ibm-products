@@ -49,6 +49,10 @@ export default {
 
 const defaultProps = {
   kind: 'custom',
+  title: '[Error title]',
+  label: 'Error ###',
+  description:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
 };
 /**
  * TODO: Declare template(s) for one or more scenarios.
@@ -67,9 +71,9 @@ const Template = (args) => {
           </div>
           <StoryWrapper>
             <FullPageError
-              title="[Error title]"
-              label="Error ###"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+              title={`${args.title}`}
+              label={`${args.label}`}
+              description={`${args.description}`}
             >
               <Link size="lg" href={'/'}>
                 – Forwarding Link 1

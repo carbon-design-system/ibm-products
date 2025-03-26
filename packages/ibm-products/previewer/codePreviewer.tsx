@@ -14,32 +14,60 @@ import * as carbonIconsReact from '@carbon/icons-react';
 const iconsNames = Object.keys(carbonIconsReact);
 export const stackblitzPrefillConfig = async (
   code: any,
+  args: Record<string, any>,
   // components: Array<string>, // Add all required components to be imported from @carbon/react
   // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
   customImport: string
 ) => {
   const productComponents = await import('../src/index');
   const componentNames = Object.keys(productComponents);
-
-  const storyCode = code.parameters.docs.source.originalSource
+  let storyCode = code.parameters.docs.source.originalSource
     .replace(/^\s*args\s*=>\s*{\s*|}\s*;?\s*$/g, '')
-    // Before: args => { <Component> }
-    // After: <Component>
-    .replace(/^\s*\(\)\s*=>\s*{/g, '') // We could delete this one if all stories had the return statement
-    // Before: () => { <Component>
-    // After: <Component>
+    .replace(/^\s*\(\)\s*=>\s*{/g, '')
     .replace(/^\s*args\s*=>/g, 'return')
-    // Before: args => { <Component>
-    // After: return <Component>
     .replace(/^"|"$/g, '')
-    // Before: "<Component>"
-    // After: <Component>
     .replace(/{\.\.\.args}/g, '')
-    // Before: <Component {...args}>
-    // After: <Component>
     .replace(/onChange=\{(args\.onChange|action\('onChange'\))\}\s*/g, '')
     .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
-  // Remove the onClick/onChange action
+
+  // Replace args properties with values
+  Object.entries(args).forEach(([key, value]) => {
+    const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    // Case 1: Template literal with args (${args.title})
+    const templateLiteralRegex = new RegExp(
+      `\\$\\{\\s*args\\.${escapedKey}\\s*\\}`,
+      'g'
+    );
+
+    // Case 2: Direct JSX attribute (title={args.title})
+    const jsxAttributeRegex = new RegExp(
+      `(=\\s*)\\{args\\.${escapedKey}\\}`,
+      'g'
+    );
+
+    // Case 3: String literal in template (`${args.title}`)
+    const stringInTemplateRegex = new RegExp(
+      `\`\\$\\{args\\.${escapedKey}\\}\``,
+      'g'
+    );
+
+    if (typeof value === 'string') {
+      // Replace template literals with plain strings
+      storyCode = storyCode.replace(templateLiteralRegex, value);
+
+      // Replace JSX attributes with plain strings
+      storyCode = storyCode.replace(jsxAttributeRegex, `$1"${value}"`);
+
+      // Replace string-in-template cases with plain strings
+      storyCode = storyCode.replace(stringInTemplateRegex, `"${value}"`);
+    } else {
+      const valueStr = JSON.stringify(value);
+      const regex = new RegExp(`args\\.${escapedKey}`, 'g');
+      storyCode = storyCode.replace(regex, valueStr);
+    }
+  });
+  storyCode = storyCode.replace(/`([^`]+)`/g, '"$1"');
 
   // Function to find all matches
   const findComponentImports = (

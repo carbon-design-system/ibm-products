@@ -9,7 +9,12 @@
 import React, { PropsWithChildren, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Heading, ProgressIndicator, ProgressStep, Section } from '@carbon/react';
+import {
+  Heading,
+  ProgressIndicator,
+  ProgressStep,
+  Section,
+} from '@carbon/react';
 import '../../global/js/utils/props-helper';
 
 import { pkg } from '../../settings';

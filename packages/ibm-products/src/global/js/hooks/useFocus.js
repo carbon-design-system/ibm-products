@@ -85,7 +85,7 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     }
   };
 
-  const claimFocus = () => {
+  const claimFocus = useCallback(() => {
     const { first, specified } = getFocusable();
 
     if (
@@ -97,7 +97,7 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     } else {
       setTimeout(() => first?.focus(), 0);
     }
-  };
+  }, [getFocusable]);
 
   return {
     firstElement: getFocusable()?.first,

@@ -131,7 +131,7 @@ describe(componentName, () => {
     const { click } = userEvent;
     renderEditPanel();
     const primaryActionButton = screen.getByText(primaryButtonText);
-    await act(() => click(primaryActionButton));
+    await act(async () => click(primaryActionButton));
     expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);
   });
 });

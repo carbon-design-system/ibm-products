@@ -149,7 +149,7 @@ describe(ActionBar.displayName, () => {
         const ofBtn = screen.getByLabelText(overflowAriaLabel, {
           selector: `.${blockClass}-overflow-items`,
         });
-        await act(() => userEvent.click(ofBtn));
+        await act(async () => userEvent.click(ofBtn));
 
         // <ul role='menu' /> but default <ul> role of list used for query
         // see https://testing-library.com/docs/queries/byrole/#api

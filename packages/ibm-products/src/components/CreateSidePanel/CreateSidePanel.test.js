@@ -106,7 +106,7 @@ describe(componentName, () => {
     renderComponent({
       onRequestSubmit: primaryHandler,
     });
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('button', { name: 'Create' }))
     );
     expect(primaryHandler).toBeCalledTimes(1);
@@ -117,7 +117,7 @@ describe(componentName, () => {
     renderComponent({
       onRequestClose: secondaryHandler,
     });
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('button', { name: 'Cancel' }))
     );
     expect(secondaryHandler).toBeCalledTimes(1);

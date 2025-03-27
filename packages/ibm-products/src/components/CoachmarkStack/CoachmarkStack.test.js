@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act } from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React from 'react';
+import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -88,7 +88,7 @@ describe(componentName, () => {
     });
     screen.getByTestId(dataTestId);
     const stackButton = screen.getByRole('button', { name: 'Test Tagline' });
-    await act(() => userEvent.click(stackButton));
+    await act(async () => userEvent.click(stackButton));
     screen.getByTestId(childDataTestId);
   });
 
@@ -148,13 +148,13 @@ describe(componentName, () => {
       name: /Test Tagline/,
     });
 
-    await act(() => userEvent.click(coachmarkStackButton));
+    await act(async () => userEvent.click(coachmarkStackButton));
 
     const closeButton = screen.getAllByRole('button', {
       name: /Close/,
     })[0];
 
-    await act(() => userEvent.click(closeButton));
+    await act(async () => userEvent.click(closeButton));
 
     expect(onClose).toHaveBeenCalled();
   });
@@ -174,13 +174,13 @@ describe(componentName, () => {
     const coachmarkStackButton = screen.getByRole('button', {
       name: /Test Tagline/,
     });
-    await act(() => userEvent.click(coachmarkStackButton));
+    await act(async () => userEvent.click(coachmarkStackButton));
 
     // Gets the label button to open a stacked item
     const labelButton = screen.getByRole('button', {
       name: /Label 1/,
     });
-    await act(() => userEvent.click(labelButton));
+    await act(async () => userEvent.click(labelButton));
 
     // Gets the overlay element
     const coachmarkOverlay = document.querySelector(
@@ -193,12 +193,12 @@ describe(componentName, () => {
     );
 
     // pressing escape should close the stacked item
-    await act(() => userEvent.keyboard('{Escape}'));
+    await act(async () => userEvent.keyboard('{Escape}'));
 
     expect(coachmarkOverlay).not.toHaveClass(
       `${pkg.prefix}--coachmark-stack-element--is-stacked`
     );
 
-    await act(() => userEvent.keyboard('{Escape}'));
+    await act(async () => userEvent.keyboard('{Escape}'));
   });
 });

@@ -90,9 +90,9 @@ describe(TagSet.displayName, () => {
       />
     );
     const visible = screen.getAllByLabelText('Dismiss');
-    await act(() => userEvent.click(visible[2]));
+    await act(async () => userEvent.click(visible[2]));
     expect(handler1).toHaveBeenCalled();
-    await act(() => userEvent.click(visible[3]));
+    await act(async () => userEvent.click(visible[3]));
     expect(handler2).toHaveBeenCalled();
   });
 
@@ -134,7 +134,7 @@ describe(TagSet.displayName, () => {
     expect(visible.length).toEqual(0);
 
     const overflow = screen.getByText('+10');
-    await act(() => userEvent.click(overflow));
+    await act(async () => userEvent.click(overflow));
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
@@ -149,7 +149,7 @@ describe(TagSet.displayName, () => {
     render(<TagSet tags={tags10} overflowType="tag" />);
 
     const overflow = screen.getByText('+10');
-    await act(() => userEvent.click(overflow));
+    await act(async () => userEvent.click(overflow));
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
@@ -182,7 +182,7 @@ describe(TagSet.displayName, () => {
     expect(visible.length).toEqual(visibleTags);
 
     const overflow = screen.getByText(`+${tags10.length - visibleTags}`);
-    await act(() => userEvent.click(overflow));
+    await act(async () => userEvent.click(overflow));
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
@@ -198,15 +198,15 @@ describe(TagSet.displayName, () => {
     render(<TagSet {...overflowAndModalStrings} tags={tags} />);
 
     const overflow = screen.getByText(`+${tags.length - visibleTags}`);
-    await act(() => userEvent.click(overflow));
+    await act(async () => userEvent.click(overflow));
 
     const viewAll = screen.getByText('View all tags');
-    await act(() => userEvent.click(viewAll));
+    await act(async () => userEvent.click(viewAll));
 
     const modal = screen.getByRole('presentation');
     expect(modal).toHaveClass('is-visible');
     const closeButton = screen.getByLabelText('Close');
-    await act(() => userEvent.click(closeButton));
+    await act(async () => userEvent.click(closeButton));
     expect(modal).not.toHaveClass('is-visible');
   });
 
@@ -228,7 +228,7 @@ describe(TagSet.displayName, () => {
     // Ensure the number of visible elements are rendered on the screen
     expect(overFlowButton).toBeInTheDocument();
     // Clicking the overflow button causes the spyFunction to be called
-    await act(() => userEvent.click(overFlowButton));
+    await act(async () => userEvent.click(overFlowButton));
     expect(overflowClickSpy).toHaveBeenCalledTimes(1);
 
     // Ensure the overflow popup is not rendered onto the screen

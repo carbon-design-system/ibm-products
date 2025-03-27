@@ -102,7 +102,9 @@ describe(componentName, () => {
       'data-testid': dataTestId,
     });
     expect(container.querySelector(`.${taglineCTAClass}`)).not.toBeNull();
-    await act(() => user.click(container.querySelector(`.${taglineCTAClass}`)));
+    await act(async () =>
+      user.click(container.querySelector(`.${taglineCTAClass}`))
+    );
 
     const fixedRoot = screen.getByTestId(dataTestId);
     const overlayElements = screen.getByTestId(overlayElementsDataTestId);

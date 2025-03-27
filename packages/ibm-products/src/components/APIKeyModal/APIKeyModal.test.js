@@ -104,7 +104,7 @@ describe(componentName, () => {
       props.apiKey
     );
     getByText(props.apiKeyLabel);
-    await act(() => click(getByText(props.copyButtonText)));
+    await act(async () => click(getByText(props.copyButtonText)));
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(props.apiKey);
     getByLabelText(defaultProps.copyIconDescription);
@@ -128,7 +128,7 @@ describe(componentName, () => {
     const createButton = getByText(props.generateButtonText);
 
     change(nameInput, { target: { value: 'test-key' } });
-    await act(() => click(createButton));
+    await act(async () => click(createButton));
     expect(onRequestGenerate).toHaveBeenCalledWith('test-key');
 
     rerender(<APIKeyModal {...props} loading />);
@@ -140,7 +140,7 @@ describe(componentName, () => {
     expect(modal.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       '444-444-444-444'
     );
-    await act(() => click(getByText(props.copyButtonText)));
+    await act(async () => click(getByText(props.copyButtonText)));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
       '444-444-444-444'
     );
@@ -165,7 +165,7 @@ describe(componentName, () => {
     const createButton = getByText(props.generateButtonText);
 
     change(nameInput, { target: { value: 'test-key' } });
-    await act(() => click(createButton));
+    await act(async () => click(createButton));
     expect(onRequestGenerate).toHaveBeenCalled();
 
     rerender(<APIKeyModal {...props} error />);
@@ -212,48 +212,48 @@ describe(componentName, () => {
     getByText(props.customSteps[0].title);
 
     // advance to step 2
-    await act(() => click(getByText(props.nextStepButtonText)));
+    await act(async () => click(getByText(props.nextStepButtonText)));
     getByPlaceholderText('input b');
     getByText(props.nextStepButtonText);
     getByText(props.previousStepButtonText);
     getByText(props.customSteps[1].title);
 
     // go back to step 1
-    await act(() => click(getByText(props.previousStepButtonText)));
+    await act(async () => click(getByText(props.previousStepButtonText)));
     getByPlaceholderText('input a');
     getByText(props.nextStepButtonText);
     getByText(props.closeButtonText);
     getByText(props.customSteps[0].title);
 
     // advance to step 2
-    await act(() => click(getByText(props.nextStepButtonText)));
+    await act(async () => click(getByText(props.nextStepButtonText)));
     getByPlaceholderText('input b');
     getByText(props.nextStepButtonText);
     getByText(props.previousStepButtonText);
     getByText(props.customSteps[1].title);
 
     // advance to step 3
-    await act(() => click(getByText(props.nextStepButtonText)));
+    await act(async () => click(getByText(props.nextStepButtonText)));
     getByPlaceholderText('input c');
     getByText(props.generateButtonText);
     getByText(props.previousStepButtonText);
     getByText(props.customSteps[2].title);
 
     // submit invalid form
-    await act(() => click(getByText(props.generateButtonText)));
+    await act(async () => click(getByText(props.generateButtonText)));
     expect(onRequestGenerate).not.toHaveBeenCalled();
 
     // submit valid form
     customSteps[2].valid = true;
     rerender(<APIKeyModal {...props} customSteps={customSteps} />);
-    await act(() => click(getByText(props.generateButtonText)));
+    await act(async () => click(getByText(props.generateButtonText)));
     expect(onRequestGenerate).toHaveBeenCalled();
     rerender(<APIKeyModal {...props} />);
     rerender(<APIKeyModal {...props} apiKey="abc-123" />);
     expect(screen.getByLabelText(props.apiKeyLabel).value).toBe('abc-123');
     getByText(props.generateSuccessBody);
     getAllByText(props.generateSuccessMessage);
-    await act(() => click(getByText(props.closeButtonText)));
+    await act(async () => click(getByText(props.closeButtonText)));
     expect(onClose).toHaveBeenCalled();
   });
 
@@ -299,7 +299,7 @@ describe(componentName, () => {
 
     const { getByTestId } = render(<APIKeyModal {...props} />);
     const step1InputB = getByTestId('step1-input-b');
-    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    await act(async () => new Promise((resolve) => setTimeout(resolve, 0)));
     expect(step1InputB).toHaveFocus();
   });
 
@@ -331,21 +331,21 @@ describe(componentName, () => {
     const launchButtonEl = getByText('Generate');
     expect(launchButtonEl).toBeInTheDocument();
 
-    await act(() => userEvent.click(launchButtonEl));
+    await act(async () => userEvent.click(launchButtonEl));
     expect(onOpen).toHaveBeenCalled();
 
     rerender(<DummyComponent open={true} />);
 
     const closeButton = getByText(defaultProps.closeButtonText);
-    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    await act(async () => new Promise((resolve) => setTimeout(resolve, 0)));
     expect(closeButton).toBeInTheDocument();
 
-    await act(() => userEvent.click(closeButton));
+    await act(async () => userEvent.click(closeButton));
     expect(onClose).toHaveBeenCalled();
 
     rerender(<DummyComponent open={false} />);
 
-    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    await act(async () => new Promise((resolve) => setTimeout(resolve, 0)));
     expect(launchButtonEl).toHaveFocus();
   });
 
@@ -370,7 +370,7 @@ describe(componentName, () => {
     expect(nameInput.value).toBe(props.apiKeyName);
     getByText(props.editButtonText);
     change(nameInput, { target: { value: 'new-key-name' } });
-    await act(() => click(editButton));
+    await act(async () => click(editButton));
     expect(onRequestEdit).toHaveBeenCalledWith(nameInput.value);
     rerender(<APIKeyModal {...props} editSuccess />);
     getAllByText(props.editSuccessMessage);
@@ -396,7 +396,7 @@ describe(componentName, () => {
     );
     mouseOver(modal.querySelector(`.${carbon.prefix}--icon-visibility-on`));
     await waitFor(() => getByText(defaultProps.showAPIKeyLabel));
-    await act(() =>
+    await act(async () =>
       click(modal.querySelector(`.${carbon.prefix}--icon-visibility-on`))
     );
     mouseOver(modal.querySelector(`.${carbon.prefix}--icon-visibility-off`));

@@ -117,7 +117,7 @@ describe(componentName, () => {
   it('calls onRequestSubmit() when primary button is clicked', async () => {
     const primaryHandler = jest.fn();
     render(<RenderComponent onRequestSubmit={primaryHandler} />);
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('button', { name: 'Create' }))
     );
     expect(primaryHandler).toBeCalledTimes(1);
@@ -126,7 +126,7 @@ describe(componentName, () => {
   it('calls onRequestClose() when secondary button is clicked', async () => {
     const secondaryHandler = jest.fn();
     render(<RenderComponent onRequestClose={secondaryHandler} />);
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('button', { name: 'Cancel' }))
     );
     expect(secondaryHandler).toBeCalledTimes(1);
@@ -141,11 +141,11 @@ describe(componentName, () => {
         onRequestClose={secondaryHandler}
       />
     );
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('button', { name: 'Create' }))
     );
     expect(primaryHandler).toBeCalledTimes(1);
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('button', { name: 'Cancel' }))
     );
     expect(secondaryHandler).toBeCalledTimes(1);

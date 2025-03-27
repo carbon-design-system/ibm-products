@@ -45,7 +45,9 @@ describe(componentName, () => {
     const onChange = jest.fn();
     renderComponent({ onChange });
 
-    await act(() => userEvent.type(screen.getByRole('searchbox'), 'test'));
+    await act(async () =>
+      userEvent.type(screen.getByRole('searchbox'), 'test')
+    );
 
     expect(onChange).toHaveBeenCalled();
   });
@@ -60,7 +62,9 @@ describe(componentName, () => {
     const onChange = jest.fn();
     renderComponent({ children, onChange });
 
-    await act(() => userEvent.type(screen.getByRole('searchbox'), 'test'));
+    await act(async () =>
+      userEvent.type(screen.getByRole('searchbox'), 'test')
+    );
     expect(screen.getByText(children)).toBeInTheDocument();
   });
 

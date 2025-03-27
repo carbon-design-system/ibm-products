@@ -186,7 +186,7 @@ describe(componentName, () => {
 
     expect(document.body).toHaveFocus();
 
-    await act(() => tab());
+    await act(async () => tab());
 
     expect(getByText(getText(0))).toHaveFocus();
   }
@@ -194,7 +194,7 @@ describe(componentName, () => {
   it('moves the focus out when tabbed', async () => {
     await setupFocus();
 
-    await act(() => tab());
+    await act(async () => tab());
 
     expect(document.body).toHaveFocus();
   });

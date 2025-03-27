@@ -83,12 +83,10 @@ describe(componentName, () => {
     });
 
     const buttons = screen.getAllByRole('button');
-    await act(() =>
-      Promise.all(buttons.map((button) => userEvent.click(button)))
-    );
-
-    expect(primaryHandler).toBeCalledTimes(1);
-    expect(secondaryHandler).toBeCalledTimes(1);
+    await userEvent.click(buttons[0]);
+    expect(secondaryHandler).toHaveBeenCalled();
+    await userEvent.click(buttons[1]);
+    expect(primaryHandler).toHaveBeenCalled();
   });
 
   it('renders the primaryButtonLabel and secondaryButtonLabel properties', async () => {

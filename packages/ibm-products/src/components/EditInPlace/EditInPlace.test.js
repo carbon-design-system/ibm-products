@@ -47,21 +47,21 @@ describe(componentName, () => {
   it('renders in invalid mode', async () => {
     render(<EditInPlace {...defaultProps} invalid />);
     const input = screen.getByDisplayValue(defaultProps.value);
-    await act(() => userEvent.click(input));
+    await act(async () => userEvent.click(input));
     expect(screen.getByText(defaultProps.invalidLabel)).toBeVisible();
   });
 
   it('focuses the input when the component is clicked', async () => {
     render(<EditInPlace {...defaultProps} />);
     const input = screen.getByDisplayValue(defaultProps.value);
-    await act(() => userEvent.click(input));
+    await act(async () => userEvent.click(input));
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
   });
 
   it('focuses the input when the edit button is clicked', async () => {
     render(<EditInPlace {...defaultProps} />);
     const editBtn = screen.getByLabelText(defaultProps.editLabel);
-    await act(() => userEvent.click(editBtn));
+    await act(async () => userEvent.click(editBtn));
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
   });
 
@@ -92,8 +92,12 @@ describe(componentName, () => {
     };
     const { rerender } = render(<EditInPlace {...props} />);
     rerender(<EditInPlace {...props} value="new value" />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
-    await act(() => userEvent.click(screen.getByLabelText(props.saveLabel)));
+    await act(async () =>
+      userEvent.click(screen.getByLabelText(props.editLabel))
+    );
+    await act(async () =>
+      userEvent.click(screen.getByLabelText(props.saveLabel))
+    );
     expect(onSave).toHaveBeenCalled();
   });
 
@@ -105,8 +109,12 @@ describe(componentName, () => {
     };
     const { rerender } = render(<EditInPlace {...props} />);
     rerender(<EditInPlace {...props} value="new value" />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
-    await act(() => userEvent.click(screen.getByLabelText(props.cancelLabel)));
+    await act(async () =>
+      userEvent.click(screen.getByLabelText(props.editLabel))
+    );
+    await act(async () =>
+      userEvent.click(screen.getByLabelText(props.cancelLabel))
+    );
     expect(onCancel).toHaveBeenCalled();
   });
 
@@ -118,7 +126,9 @@ describe(componentName, () => {
     };
     const { rerender } = render(<EditInPlace {...props} />);
     rerender(<EditInPlace {...props} value="new value" />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await act(async () =>
+      userEvent.click(screen.getByLabelText(props.editLabel))
+    );
     const input = screen.getByDisplayValue('new value');
     fireEvent.blur(input);
     expect(onSave).toHaveBeenCalled();
@@ -131,7 +141,9 @@ describe(componentName, () => {
       onCancel,
     };
     render(<EditInPlace {...props} />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await act(async () =>
+      userEvent.click(screen.getByLabelText(props.editLabel))
+    );
     const input = screen.getByDisplayValue(props.value);
     fireEvent.blur(input);
     expect(onCancel).toHaveBeenCalled();

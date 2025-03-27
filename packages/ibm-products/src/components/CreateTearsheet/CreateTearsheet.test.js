@@ -6,8 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act } from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import React from 'react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import { expectWarn, expectWarnAsync } from '../../global/js/utils/test-helper';
 import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
@@ -276,7 +276,7 @@ describe(CreateTearsheet.displayName, () => {
     renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
     const createTearsheetSteps = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
@@ -290,7 +290,7 @@ describe(CreateTearsheet.displayName, () => {
     jest.advanceTimersByTime(1000);
 
     expect(onNextStepFn).toHaveBeenCalled();
-    await act(() => click(cancelButtonElement));
+    await act(async () => click(cancelButtonElement));
     expect(onCloseFn).toHaveBeenCalled();
   });
 
@@ -300,7 +300,7 @@ describe(CreateTearsheet.displayName, () => {
       firstFocusElement: `#${secondStepButtonId}`,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     setTimeout(() => {
       const button = screen.getByRole('button', {
         name: 'Second step button two',
@@ -316,7 +316,7 @@ describe(CreateTearsheet.displayName, () => {
       firstFocusElement: `#invalid-selector`,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     jest.advanceTimersByTime(1000);
     const button = screen.getByRole('button', {
       name: 'Second step button one',
@@ -334,7 +334,7 @@ describe(CreateTearsheet.displayName, () => {
           rejectOnNext: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        await act(() => click(nextButtonElement));
+        await act(async () => click(nextButtonElement));
 
         expect(onNextStepRejectionFn).toHaveBeenCalled();
       }
@@ -365,11 +365,11 @@ describe(CreateTearsheet.displayName, () => {
   it('renders the next CreateTearsheet step without onNext handler', async () => {
     const { rerender } = renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
     const tearsheetChildren = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content  .${carbon.prefix}--form`
@@ -406,16 +406,16 @@ describe(CreateTearsheet.displayName, () => {
     });
 
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     const submitButtonElement = screen.getByText(submitButtonText);
-    await act(() => click(submitButtonElement));
+    await act(async () => click(submitButtonElement));
     await waitFor(() => {
       expect(onRequestSubmitFn).toHaveBeenCalled();
     });
@@ -431,16 +431,16 @@ describe(CreateTearsheet.displayName, () => {
       finalOnNextFn: finalStepOnNextNonPromise,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepNonPromiseFn).toHaveBeenCalled();
     });
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepNonPromiseFn).toHaveBeenCalled();
     });
     const submitButtonElement = screen.getByText(submitButtonText);
-    await act(() => click(submitButtonElement));
+    await act(async () => click(submitButtonElement));
     await waitFor(() => {
       expect(onRequestSubmitNonPromiseFn).toHaveBeenCalled();
     });
@@ -460,16 +460,16 @@ describe(CreateTearsheet.displayName, () => {
           rejectOnSubmitNext: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        await act(() => click(nextButtonElement));
+        await act(async () => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
-        await act(() => click(nextButtonElement));
+        await act(async () => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
         const submitButtonElement = screen.getByText(submitButtonText);
-        await act(() => click(submitButtonElement));
+        await act(async () => click(submitButtonElement));
         await waitFor(() => {
           expect(finalStepOnNextRejectFn).toHaveBeenCalled();
         });
@@ -485,16 +485,16 @@ describe(CreateTearsheet.displayName, () => {
           rejectOnSubmit: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        await act(() => click(nextButtonElement));
+        await act(async () => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
-        await act(() => click(nextButtonElement));
+        await act(async () => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
         const submitButtonElement = screen.getByText(submitButtonText);
-        await act(() => click(submitButtonElement));
+        await act(async () => click(submitButtonElement));
         await waitFor(() => {
           expect(onRequestSubmitRejectFn).toHaveBeenCalled();
         });
@@ -516,10 +516,10 @@ describe(CreateTearsheet.displayName, () => {
       rejectOnNext: false,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     expect(onNextStepFn).toHaveBeenCalledTimes(1);
     const backButtonElement = screen.getByText(backButtonText);
-    await act(() => click(backButtonElement));
+    await act(async () => click(backButtonElement));
     expect(onPreviousStepFn).toHaveBeenCalledTimes(1);
     const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
     const tearsheetChildren = tearsheetElement.querySelector(
@@ -582,7 +582,7 @@ describe(CreateTearsheet.displayName, () => {
       },
     });
     const button = screen.getByText(experimentalSecondarySubmitText);
-    await act(() => click(button));
+    await act(async () => click(button));
     await waitFor(() =>
       expect(onExperimentalSecondarySubmitClickFn).toHaveBeenCalled()
     );

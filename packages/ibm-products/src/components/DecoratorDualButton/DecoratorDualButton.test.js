@@ -106,7 +106,7 @@ describe(componentName, () => {
       value: value,
     });
 
-    await act(() => click(screen.getByRole('button', { name: label })));
+    await act(async () => click(screen.getByRole('button', { name: label })));
     expect(handleClick).toBeCalled();
   });
 
@@ -120,7 +120,9 @@ describe(componentName, () => {
       value: value,
     });
 
-    await act(() => contextMenu(screen.getByRole('button', { name: label })));
+    await act(async () =>
+      contextMenu(screen.getByRole('button', { name: label }))
+    );
     expect(handleContextMenu).toBeCalled();
   });
 
@@ -134,7 +136,7 @@ describe(componentName, () => {
       value: value,
     });
 
-    await act(() => click(screen.getByRole('button', { name: value })));
+    await act(async () => click(screen.getByRole('button', { name: value })));
     expect(handleClick).toBeCalled();
   });
 
@@ -148,7 +150,9 @@ describe(componentName, () => {
       value: value,
     });
 
-    await act(() => contextMenu(screen.getByRole('button', { name: value })));
+    await act(async () =>
+      contextMenu(screen.getByRole('button', { name: value }))
+    );
     expect(handleContextMenu).toBeCalled();
   });
 

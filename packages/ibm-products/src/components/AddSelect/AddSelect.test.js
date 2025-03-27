@@ -5,8 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { render, screen } from '@testing-library/react';
-import React, { act } from 'react';
+import { render, screen, act } from '@testing-library/react';
+import React from 'react';
 import { waitForPosition } from '../../global/js/utils/wait_for_position';
 import { AddSelect } from './AddSelect';
 import { pkg } from '../../settings';
@@ -201,9 +201,9 @@ describe(componentName, () => {
           el?.getAttribute('aria-labelledby') === 'control-label-test-entry-1'
       );
 
-    await act(() => userEvent.click(checkbox));
+    await act(async () => userEvent.click(checkbox));
     expect(combobox.getAttribute('aria-disabled')).toBe(null);
-    await act(() => userEvent.click(combobox));
+    await act(async () => userEvent.click(combobox));
     expect(combobox.getAttribute('aria-expanded')).toBe('true');
     await waitForPosition();
     const listbox = screen.getByRole('listbox');

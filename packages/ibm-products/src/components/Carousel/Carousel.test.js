@@ -12,6 +12,7 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { Carousel } from '.';
+import userEvent from '@testing-library/user-event';
 
 const blockClass = `${pkg.prefix}--carousel`;
 const componentName = Carousel.displayName;
@@ -95,9 +96,7 @@ describe(componentName, () => {
     const element = screen.getByTestId(dataTestId);
     expect(element).not.toBeNull();
 
-    await waitFor(() =>
-      fireEvent.scroll(element, { target: { scrollX: '20px' } })
-    );
+    await userEvent.scroll(element, { target: { scrollX: '20px' } });
     expect(onScroll).toHaveBeenCalled();
     expect(onScroll()).toBe(0.2);
   });

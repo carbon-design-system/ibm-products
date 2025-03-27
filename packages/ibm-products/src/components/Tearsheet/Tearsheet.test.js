@@ -188,7 +188,7 @@ const commonTests = (Ts, name, props, testActions) => {
       render(<Ts {...{ ...props, actions }} />);
       expect(document.querySelector(`.${blockClass}__buttons`)).not.toBeNull();
       expect(onClick).toHaveBeenCalledTimes(0);
-      await act(() => userEvent.click(screen.getByText(createButton)));
+      await act(async () => userEvent.click(screen.getByText(createButton)));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
@@ -274,7 +274,7 @@ const commonTests = (Ts, name, props, testActions) => {
       });
       expect(tearsheet).toHaveClass('is-visible');
       expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
-      await act(() => userEvent.click(closeButton));
+      await act(async () => userEvent.click(closeButton));
       expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
     });
 
@@ -293,7 +293,7 @@ const commonTests = (Ts, name, props, testActions) => {
       });
       expect(tearsheet).toHaveClass('is-visible');
       expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
-      await act(() => userEvent.click(closeButton));
+      await act(async () => userEvent.click(closeButton));
       expect(tearsheet).toHaveClass('is-visible');
       expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
     });
@@ -315,12 +315,12 @@ const commonTests = (Ts, name, props, testActions) => {
       expect(closeButton).toBeInTheDocument();
       expect(inputEl).toHaveFocus();
 
-      await act(() => userEvent.click(closeButton));
+      await act(async () => userEvent.click(closeButton));
       expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
 
       rerender(<DummyComponent open={false} />);
 
-      await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+      await act(async () => new Promise((resolve) => setTimeout(resolve, 0)));
       expect(launchButtonEl).toHaveFocus();
     });
 
@@ -333,7 +333,7 @@ const commonTests = (Ts, name, props, testActions) => {
       });
 
       expect(inputEl).toHaveFocus();
-      await act(() => userEvent.click(closeButton));
+      await act(async () => userEvent.click(closeButton));
       expect(onBlur).toHaveBeenCalledTimes(1);
     });
   }

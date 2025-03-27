@@ -108,7 +108,7 @@ describe(componentName, () => {
     );
     const allCells = ref?.current.querySelectorAll(`.${blockClass}__td`);
     const firstDataCell = Array.from(allCells)[1]; // the first cell is a row header so we need to get the second cell element
-    await act(() => click(firstDataCell));
+    await act(async () => await click(firstDataCell));
     expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
     const activeCellElement = ref?.current.querySelector(
       `.${blockClass}__active-cell--highlight`
@@ -137,7 +137,7 @@ describe(componentName, () => {
     );
     const allCells = ref?.current.querySelectorAll(`.${blockClass}__td-th`);
     const firstRowHeaderCell = Array.from(allCells)[0]; // the first item is the first row header cell
-    await act(() => click(firstRowHeaderCell));
+    await act(async () => await click(firstRowHeaderCell));
     expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
     const selectionArea = ref?.current.querySelector(
       `.${blockClass}__selection-area--element`
@@ -163,7 +163,9 @@ describe(componentName, () => {
     );
     const firstColumnHeaderCell = Array.from(allColumnHeaderCells)[1]; // the second item is the first column header cell
     const secondColumnHeaderCell = Array.from(allColumnHeaderCells)[2];
-    await act(() => click(firstColumnHeaderCell));
+    await act(async () => {
+      await click(firstColumnHeaderCell);
+    });
     expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
     const selectionArea = ref?.current.querySelector(
       `.${blockClass}__selection-area--element`
@@ -176,7 +178,7 @@ describe(componentName, () => {
 
     // Start column reordering
     const firstColumnHeaderText = firstColumnHeaderCell.textContent;
-    await act(() => {
+    await act(async () => {
       mouseDown(firstColumnHeaderCell);
       mouseMove(secondColumnHeaderCell);
       mouseUp(secondColumnHeaderCell);
@@ -206,7 +208,7 @@ describe(componentName, () => {
     const selectAllButton = ref?.current.querySelector(
       `.${blockClass}__th--select-all`
     );
-    await act(() => click(selectAllButton));
+    await act(async () => await click(selectAllButton));
     expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
     const selectionArea = ref?.current.querySelector(
       `.${blockClass}__selection-area--element`
@@ -275,13 +277,15 @@ describe(componentName, () => {
     const cellEditor = ref?.current.querySelector(
       `#${blockClass}__cell-editor-text-area`
     );
-    await act(() => click(cellToEdit));
+    await act(async () => await click(cellToEdit));
     expect(activeCellChangeFn).toHaveBeenCalled();
-    await act(() => keyboard('{Enter}'));
-    await act(() => cellEditor.setSelectionRange(0, cellEditor.value.length));
-    await act(() => keyboard(newCellValue));
-    await act(() => tab());
-    await act(() => keyboard('{ArrowLeft}'));
+    await act(async () => keyboard('{Enter}'));
+    await act(async () =>
+      cellEditor.setSelectionRange(0, cellEditor.value.length)
+    );
+    await act(async () => keyboard(newCellValue));
+    await act(async () => tab());
+    await act(async () => keyboard('{ArrowLeft}'));
 
     const activeCellElement = ref?.current.querySelector(
       `.${blockClass}__active-cell--highlight`
@@ -303,13 +307,13 @@ describe(componentName, () => {
     const cellEditor = ref?.current.querySelector(
       `#${blockClass}__cell-editor-text-area`
     );
-    await act(() => click(cellToEdit));
+    await act(async () => await click(cellToEdit));
     expect(activeCellChangeFn).toHaveBeenCalled();
-    await act(() => keyboard('{Enter}'));
+    await act(async () => keyboard('{Enter}'));
     cellEditor.setSelectionRange(0, cellEditor.value.length);
-    await act(() => keyboard(newCellValue));
+    await act(async () => keyboard(newCellValue));
     const nextCell = ref?.current.querySelector(`#${blockClass}__cell--0--3`);
-    await act(() => click(nextCell));
+    await act(async () => await click(nextCell));
 
     const updatedCell = ref?.current.querySelector(
       `#${blockClass}__cell--0--1`
@@ -327,8 +331,8 @@ describe(componentName, () => {
         onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
-    await act(() => container.firstChild.focus());
-    await act(() => keyboard('{ArrowDown}'));
+    await act(async () => container.firstChild.focus());
+    await act(async () => keyboard('{ArrowDown}'));
 
     const activeCellElement = ref?.current.querySelector(
       `.${blockClass}__active-cell--highlight`
@@ -351,8 +355,8 @@ describe(componentName, () => {
       />
     );
     const cellToEdit = ref?.current.querySelector(`#${blockClass}__cell--0--1`);
-    await act(() => click(cellToEdit));
-    await act(() => keyboard('{ArrowRight}'));
+    await act(async () => await click(cellToEdit));
+    await act(async () => keyboard('{ArrowRight}'));
 
     const activeCellElement = ref?.current.querySelector(
       `.${blockClass}__active-cell--highlight`
@@ -366,7 +370,7 @@ describe(componentName, () => {
     expect(parseInt(activeCellRowIndex)).toEqual(0);
     expect(parseInt(activeCellColumnIndex)).toEqual(2);
 
-    await act(() => keyboard('{ArrowUp}'));
+    await act(async () => keyboard('{ArrowUp}'));
     expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
       'header'
     );
@@ -374,7 +378,7 @@ describe(componentName, () => {
       parseInt(activeCellElement.getAttribute('data-active-column-index'))
     ).toEqual(2);
 
-    await act(() => keyboard('{ArrowDown}'));
+    await act(async () => keyboard('{ArrowDown}'));
     expect(
       parseInt(activeCellElement.getAttribute('data-active-row-index'))
     ).toEqual(0);
@@ -382,7 +386,7 @@ describe(componentName, () => {
       parseInt(activeCellElement.getAttribute('data-active-column-index'))
     ).toEqual(2);
 
-    await act(() => keyboard('{ArrowDown}'));
+    await act(async () => keyboard('{ArrowDown}'));
     expect(
       parseInt(activeCellElement.getAttribute('data-active-row-index'))
     ).toEqual(1);
@@ -404,18 +408,18 @@ describe(componentName, () => {
       `.${blockClass}__active-cell--highlight`
     );
     const cellToEdit = ref?.current.querySelector(`#${blockClass}__cell--0--1`);
-    await act(() => click(cellToEdit));
+    await act(async () => await click(cellToEdit));
     expect(activeCellChangeFn).toHaveBeenCalled();
-    await act(() => keyboard('{Backspace}'));
+    await act(async () => keyboard('{Backspace}'));
     expect(activeCellElement.textContent).toEqual('');
 
-    await act(() => keyboard('{ArrowRight}'));
-    await act(() => keyboard('{Delete}'));
+    await act(async () => keyboard('{ArrowRight}'));
+    await act(async () => keyboard('{Delete}'));
 
     expect(activeCellElement.textContent).toEqual('');
 
     // Home button should move active cell to first column in the current row
-    await act(() => keyboard('{Home}'));
+    await act(async () => keyboard('{Home}'));
     expect(
       parseInt(activeCellElement.getAttribute('data-active-row-index'))
     ).toEqual(0);
@@ -424,7 +428,7 @@ describe(componentName, () => {
     ).toEqual(0);
 
     // Home and resource key should move active cell to first column of the first row
-    await act(() => keyboard('{End}'));
+    await act(async () => keyboard('{End}'));
     expect(
       parseInt(activeCellElement.getAttribute('data-active-row-index'))
     ).toEqual(0);
@@ -444,8 +448,8 @@ describe(componentName, () => {
       />
     );
 
-    await act(() => container.firstChild.focus());
-    await act(() => tab());
+    await act(async () => container.firstChild.focus());
+    await act(async () => tab());
     expect(ref.current).not.toHaveClass(`${blockClass}__container-has-focus`);
   });
 
@@ -459,9 +463,9 @@ describe(componentName, () => {
         onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
-    await act(() => {
+    await act(async () => {
       container.firstChild.focus();
-      keyboard('{ArrowDown}');
+      await keyboard('{ArrowDown}');
     });
 
     const activeCellElement = ref?.current.querySelector(
@@ -474,7 +478,7 @@ describe(componentName, () => {
       'header'
     );
 
-    await act(() => keyboard('{ArrowRight}'));
+    await act(async () => keyboard('{ArrowRight}'));
     expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
       'header'
     );
@@ -482,9 +486,9 @@ describe(componentName, () => {
       parseInt(activeCellElement.getAttribute('data-active-column-index'))
     ).toEqual(0);
 
-    await act(() => keyboard('{ArrowUp}'));
-    await act(() => keyboard('{ArrowDown}'));
-    await act(() => keyboard('{ArrowLeft}'));
+    await act(async () => keyboard('{ArrowUp}'));
+    await act(async () => keyboard('{ArrowDown}'));
+    await act(async () => keyboard('{ArrowLeft}'));
 
     expect(
       parseInt(activeCellElement.getAttribute('data-active-row-index'))
@@ -493,17 +497,17 @@ describe(componentName, () => {
       'header'
     );
 
-    await act(() => keyboard('{ArrowLeft}'));
+    await act(async () => keyboard('{ArrowLeft}'));
     expect(
       parseInt(activeCellElement.getAttribute('data-active-row-index'))
     ).toEqual(0);
     expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
       'header'
     );
-    await act(() => keyboard('{ArrowRight}'));
-    await act(() => keyboard('{ArrowDown}'));
-    await act(() => keyboard('{ArrowDown}'));
-    await act(() => keyboard('{ArrowUp}'));
+    await act(async () => keyboard('{ArrowRight}'));
+    await act(async () => keyboard('{ArrowDown}'));
+    await act(async () => keyboard('{ArrowDown}'));
+    await act(async () => keyboard('{ArrowUp}'));
 
     expect(
       parseInt(activeCellElement.getAttribute('data-active-row-index'))
@@ -512,11 +516,11 @@ describe(componentName, () => {
       parseInt(activeCellElement.getAttribute('data-active-column-index'))
     ).toEqual(0);
 
-    await act(() => keyboard('{ArrowRight}'));
-    await act(() => keyboard('{ArrowRight}'));
-    await act(() => keyboard('{ArrowRight}'));
-    await act(() => keyboard('{ArrowRight}'));
-    await act(() => keyboard('{ArrowRight}'));
+    await act(async () => keyboard('{ArrowRight}'));
+    await act(async () => keyboard('{ArrowRight}'));
+    await act(async () => keyboard('{ArrowRight}'));
+    await act(async () => keyboard('{ArrowRight}'));
+    await act(async () => keyboard('{ArrowRight}'));
 
     expect(
       parseInt(activeCellElement.getAttribute('data-active-row-index'))
@@ -526,7 +530,7 @@ describe(componentName, () => {
     ).toEqual(5);
 
     // If active cell is positioned in the last column, it shouldn't change position again if right arrow key is pressed
-    await act(() => keyboard('{ArrowRight}'));
+    await act(async () => keyboard('{ArrowRight}'));
     expect(
       parseInt(activeCellElement.getAttribute('data-active-row-index'))
     ).toEqual(1);
@@ -548,11 +552,11 @@ describe(componentName, () => {
       `.${blockClass}__active-cell--highlight`
     );
 
-    await act(() => container.firstChild.focus());
-    await act(() => keyboard('{ArrowDown}'));
-    await act(() => keyboard('{ArrowDown}'));
-    await act(() => keyboard('{ArrowRight}'));
-    await act(() => dblClick(activeCellElement));
+    await act(async () => container.firstChild.focus());
+    await act(async () => keyboard('{ArrowDown}'));
+    await act(async () => keyboard('{ArrowDown}'));
+    await act(async () => keyboard('{ArrowRight}'));
+    await act(async () => dblClick(activeCellElement));
 
     const cellEditor = ref?.current.querySelector(
       `#${blockClass}__cell-editor-text-area`
@@ -587,14 +591,14 @@ describe(componentName, () => {
       `.${blockClass}__active-cell--highlight`
     );
 
-    await act(() => ref?.current.focus());
-    await act(() => keyboard('{ArrowDown}'));
-    await act(() => keyboard('{ArrowDown}'));
-    await act(() => keyboard('{ArrowRight}'));
-    await act(() => keyboard('{Meta}'));
+    await act(async () => ref?.current.focus());
+    await act(async () => keyboard('{ArrowDown}'));
+    await act(async () => keyboard('{ArrowDown}'));
+    await act(async () => keyboard('{ArrowRight}'));
+    await act(async () => keyboard('{Meta}'));
     // Tab key during editing should do nothing
-    await act(() => dblClick(activeCellElement));
-    await act(() => keyboard('{Tab}'));
+    await act(async () => dblClick(activeCellElement));
+    await act(async () => keyboard('{Tab}'));
 
     expect(ref.current).toHaveClass(`${blockClass}__container-has-focus`);
   });

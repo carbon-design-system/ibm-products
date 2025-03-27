@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { render, renderHook, screen, act } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
 import userEvent from '@testing-library/user-event';
 import { Code, Copy } from '@carbon/react/icons';
 
@@ -161,7 +162,9 @@ describe(name, () => {
       </MockWebTerminal>
     );
     const { click } = userEvent;
-    await act(() => click(screen.getByRole('button', { name: overflowLabel })));
+    await act(async () =>
+      click(screen.getByRole('button', { name: overflowLabel }))
+    );
     documentationLinks.forEach((link) => {
       screen.getByText(link.itemText);
     });
@@ -199,7 +202,7 @@ describe(name, () => {
     const closeButton = screen.getByRole('button', {
       name: /close terminal/i,
     });
-    await act(() => userEvent.click(closeButton));
+    await act(async () => userEvent.click(closeButton));
 
     const outerElement = container.querySelector(`.${blockClass}`);
 
@@ -230,10 +233,14 @@ describe(name, () => {
       </MockWebTerminal>
     );
 
-    await act(() => click(screen.getByLabelText(/Create new deployment/i)));
+    await act(async () =>
+      click(screen.getByLabelText(/Create new deployment/i))
+    );
     expect(deploymentButtonFn).toHaveBeenCalledTimes(1);
 
-    await act(() => click(screen.getByRole('button', { name: /Copy logs/i })));
+    await act(async () =>
+      click(screen.getByRole('button', { name: /Copy logs/i }))
+    );
     expect(copyLogsButtonFn).toHaveBeenCalledTimes(1);
   });
 

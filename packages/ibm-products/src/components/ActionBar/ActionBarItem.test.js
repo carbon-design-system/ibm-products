@@ -28,7 +28,7 @@ describe(ActionBarItem.displayName, () => {
         <ActionBarItem label={testLabel}></ActionBarItem>
       </main>
     );
-    await act(() => userEvent.tab());
+    await act(async () => userEvent.tab());
     expect(screen.getByText(testLabel));
     expect(screen.getByRole('button')).toHaveFocus();
     expect(container).toBeAccessible(componentName);
@@ -46,7 +46,7 @@ describe(ActionBarItem.displayName, () => {
     const actionBarItemElement = container.querySelector(`.${blockClass}`);
     expect(actionBarItemElement).toHaveClass(`${carbon.prefix}--btn`);
 
-    await act(() => click(actionBarItemElement));
+    await act(async () => click(actionBarItemElement));
     expect(myOnClick).toBeCalled();
   });
 

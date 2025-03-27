@@ -86,7 +86,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
       selector: `.${blockClass}__button-container--visible .${carbon.prefix}--btn`,
     });
 
-    await act(() => userEvent.click(action1));
+    await act(async () => userEvent.click(action1));
     expect(myOnClick).toBeCalled();
   });
 
@@ -111,13 +111,13 @@ describe(ButtonSetWithOverflow.displayName, () => {
     const comboButton = screen.getByText(buttonMenuLabel, {
       selector: `.${pkg.prefix}--button-set-with-overflow__button-container.${pkg.prefix}--button-set-with-overflow__button-container--visible button`,
     });
-    await act(() => userEvent.click(comboButton));
+    await act(async () => userEvent.click(comboButton));
 
     const action1a = screen.getByText(/Action 1/, {
       selector: `.button-class-test .${carbon.prefix}--menu-item__label`,
     });
 
-    await act(() => userEvent.click(action1a));
+    await act(async () => userEvent.click(action1a));
     expect(myOnClick).toBeCalled();
   });
 

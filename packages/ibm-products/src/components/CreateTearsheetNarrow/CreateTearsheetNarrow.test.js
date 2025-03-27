@@ -130,8 +130,12 @@ describe(componentName, () => {
   it('should click on both action buttons', async () => {
     const { click } = userEvent;
     renderComponent();
-    await act(() => click(screen.getByText(defaultProps.primaryButtonText)));
-    await act(() => click(screen.getByText(defaultProps.secondaryButtonText)));
+    await act(async () =>
+      click(screen.getByText(defaultProps.primaryButtonText))
+    );
+    await act(async () =>
+      click(screen.getByText(defaultProps.secondaryButtonText))
+    );
     expect(onRequestCloseFn).toHaveBeenCalledTimes(1);
     expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);
   });

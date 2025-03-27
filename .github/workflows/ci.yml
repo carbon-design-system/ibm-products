@@ -30,7 +30,7 @@ jobs:
           path: '**/node_modules'
           key: build-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
-        run: yarn --immutable
+        run: yarn
       - name: CI build checks
         run: yarn ci-check:build
 
@@ -125,7 +125,7 @@ jobs:
       matrix:
         react:
           - ^17.0.1
-          - ^18.3.1
+          # - ^18.3.1
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

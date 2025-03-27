@@ -13,9 +13,9 @@ import { useOverflowItems } from '.';
 
 ## Overview
 
-The `useOverflowItems` hook is a hook that can be used deal with the handling of multiple DOM elements inside of a given area.
+The `useOverflowItems` hook can be used for handling overflow behavior of multiple DOM elements inside of a given area.
 
-For example, if you had the task to only display a certain amount of `Tag` elements in a container and instead of wrapping them to the next line you needed to display their values in an `OverflowMenu`. You could use this hook to do just that.
+For example, if you need to display a certain number of `Tag` elements in a container and render additional values in a popover, you could use this hook to do just that.
 
 ## Hook API
 
@@ -41,6 +41,21 @@ onChange?: (value: {
 ```
 
 ## Example usage
+
+```jsx
+const {
+  visibleItems,
+  hiddenItems,
+  itemRefHandler,
+  offsetRefHandler
+} = useOverflowItems(
+  items,
+  containerRef,
+  offsetRef,
+  maxVisible,
+  onChange
+);
+```
 
 <Canvas>
   <Story of={UseOverflowItemsStories.Default} />

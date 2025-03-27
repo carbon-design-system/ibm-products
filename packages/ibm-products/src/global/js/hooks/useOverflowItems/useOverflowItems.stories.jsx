@@ -17,13 +17,11 @@ export default {
   title: 'Hooks/useOverflowItems',
   parameters: {
     layout: 'padded',
-  },
-  tags: ['autodocs'],
-  parameters: {
     docs: {
       page: mdx,
     },
   },
+  tags: ['autodocs'],
 };
 
 const Template = () => {

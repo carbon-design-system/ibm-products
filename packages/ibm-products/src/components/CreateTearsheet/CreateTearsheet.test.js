@@ -334,8 +334,8 @@ describe(CreateTearsheet.displayName, () => {
           rejectOnNext: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        await act(async () => click(nextButtonElement));
-
+        await act(() => click(nextButtonElement));
+        jest.advanceTimersByTime(1000);
         expect(onNextStepRejectionFn).toHaveBeenCalled();
       }
     ));

@@ -64,6 +64,7 @@ const handleKeyPressForPopover = (
     //focus the corresponding field in which the popover is triggered from
     focusThisField(evt, conditionBuilderRef);
     evt.preventDefault();
+    evt.stopPropagation();
   }
 
   if (isOptionInput) {

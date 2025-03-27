@@ -85,6 +85,20 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     }
   };
 
+  const claimFocus = useCallback(() => {
+    const { first, specified } = getFocusable();
+
+    if (
+      specified &&
+      window?.getComputedStyle(specified)?.display !== 'none' &&
+      specified?.tabIndex !== -1
+    ) {
+      setTimeout(() => specified.focus(), 0);
+    } else {
+      setTimeout(() => first?.focus(), 0);
+    }
+  }, [getFocusable]);
+
   return {
     firstElement: getFocusable()?.first,
     lastElement: getFocusable()?.last,
@@ -92,33 +106,6 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     specifiedElement: getFocusable()?.specified,
     keyDownListener: handleKeyDown,
     getFocusable: getFocusable,
+    claimFocus,
   };
-};
-
-/**
- *
- * @param {*} firstElement
- * @param {*} modalRef
- * @param {string | undefined} selectorPrimaryFocus
- */
-export const claimFocus = (
-  firstElement,
-  modalRef,
-  selectorPrimaryFocus = undefined
-) => {
-  let specifiedEl;
-
-  if (selectorPrimaryFocus) {
-    specifiedEl = getSpecificElement(modalRef?.current, selectorPrimaryFocus);
-  }
-
-  if (
-    specifiedEl &&
-    window?.getComputedStyle(specifiedEl)?.display !== 'none' &&
-    specifiedEl?.tabIndex !== -1
-  ) {
-    setTimeout(() => specifiedEl.focus(), 0);
-  } else {
-    setTimeout(() => firstElement?.focus(), 0);
-  }
 };

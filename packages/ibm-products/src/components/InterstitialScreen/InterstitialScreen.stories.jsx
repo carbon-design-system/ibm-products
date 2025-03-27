@@ -31,6 +31,8 @@ const HowACaseIsCreated3 = new URL(
 import styles from './_storybook-styles.scss?inline';
 const storyClass = 'interstitial-stories';
 
+// cspell:words Terminé Partiel Actuel valide
+
 export default {
   title: 'Experimental/Onboarding/Interstitial screen/InterstitialScreen',
   component: InterstitialScreen,
@@ -59,6 +61,12 @@ export default {
       page: mdx,
     },
   },
+};
+const translations = {
+  'carbon.progress-step.complete': 'Terminé',
+  'carbon.progress-step.incomplete': 'Partiel',
+  'carbon.progress-step.current': 'Actuel',
+  'carbon.progress-step.invalid': 'Non valide',
 };
 const getSelectedMedia = (media) => {
   switch (media) {
@@ -286,7 +294,10 @@ interstitialScreenModalWithImage.args = {
   hideProgressIndicator: true,
   interstitialAriaLabel: 'Interstitial Screen',
   children: (
-    <InterstitialScreenView stepTitle="Step 1">
+    <InterstitialScreenView
+      stepTitle="Step 1"
+      translateWithId={(id) => translations[id] ?? id}
+    >
       <InterstitialScreenViewModule
         size="sm"
         title="Use case-specific heading"
@@ -306,21 +317,30 @@ interstitialScreenModalMultiplesHeader.args = {
   interstitialAriaLabel: 'Interstitial Screen',
   children: (
     <>
-      <InterstitialScreenView stepTitle="Step 1">
+      <InterstitialScreenView
+        stepTitle="Step 1"
+        translateWithId={(id) => translations[id] ?? id}
+      >
         <InterstitialScreenViewModule
           size="md"
           title="Use case-specific heading 1"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>
-      <InterstitialScreenView stepTitle="Step 2">
+      <InterstitialScreenView
+        stepTitle="Step 2"
+        translateWithId={(id) => translations[id] ?? id}
+      >
         <InterstitialScreenViewModule
           size="md"
           title="Use case-specific heading 2"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>
-      <InterstitialScreenView stepTitle="Step 3">
+      <InterstitialScreenView
+        stepTitle="Step 3"
+        translateWithId={(id) => translations[id] ?? id}
+      >
         <InterstitialScreenViewModule
           size="md"
           title="Use case-specific heading 3"

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "version": "0.11.0",
+  "version": "0.12.0-rc.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -51,7 +51,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.58.0",
+    "@carbon/ibm-products-styles": "^2.59.0-rc.0",
     "@carbon/styles": "1.75.0",
     "@carbon/web-components": "2.25.0",
     "lit": "^3.1.0"
@@ -86,6 +86,7 @@
     "eslint-config-carbon": "^3.19.0",
     "globby": "^14.0.2",
     "happy-dom": "^15.11.6",
+    "playwright": "^1.51.1",
     "postcss": "^8.4.47",
     "remark-gfm": "^4.0.0",
     "rimraf": "^5.0.5",

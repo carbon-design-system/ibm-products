@@ -281,11 +281,10 @@ export const TearsheetShell = React.forwardRef(
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const { width } = useResizeObserver(resizer);
     const prevOpen = usePreviousValue(open);
-    const { firstElement, keyDownListener } = useFocus(
+    const { getFocusable, keyDownListener } = useFocus(
       modalRef,
       selectorPrimaryFocus
     );
-    const modalRefValue = modalRef.current;
 
     const descriptionRef = useRef<HTMLSpanElement>(null);
     const isOverflowing = checkHeightOverflow(descriptionRef.current);
@@ -320,14 +319,13 @@ export const TearsheetShell = React.forwardRef(
     useEffect(() => {
       if (open && position === depth) {
         // Focusing the first element or selectorPrimaryFocus element
-        claimFocus(firstElement, modalRef, selectorPrimaryFocus);
+        claimFocus(getFocusable()?.first, modalRef, selectorPrimaryFocus);
       }
     }, [
       currentStep,
       depth,
-      firstElement,
+      getFocusable,
       modalRef,
-      modalRefValue,
       open,
       position,
       selectorPrimaryFocus,

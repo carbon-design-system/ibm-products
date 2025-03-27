@@ -58,7 +58,7 @@ const defaultProps = {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const StoryWrapper = ({ children }) => {
-  return <div className="story-wrapper">{children}</div>;
+  return <div className={`${storyClass}__story-wrapper`}>{children}</div>;
 };
 
 const Template = (args) => {

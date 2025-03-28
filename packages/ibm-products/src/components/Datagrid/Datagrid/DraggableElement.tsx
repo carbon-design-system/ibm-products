@@ -21,12 +21,14 @@ interface DraggableElementProps extends PropsWithChildren {
   classList?: string;
   disabled?: boolean;
   id: string;
+  elementId?: string;
   isSticky?: boolean;
   selected?: boolean;
 }
 
 const DraggableElement = ({
   id,
+  elementId,
   children,
   classList,
   disabled,
@@ -72,7 +74,7 @@ const DraggableElement = ({
         [`${blockClass}__draggable-handleHolder--sticky`]: isSticky,
         [`${blockClass}__draggable-handleHolder--dragging`]: isDragging,
       })}
-      id={id}
+      id={elementId}
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -103,6 +105,7 @@ DraggableElement.propTypes = {
   children: PropTypes.element.isRequired,
   classList: PropTypes.string,
   disabled: PropTypes.bool,
+  elementId: PropTypes.string,
   id: PropTypes.string.isRequired,
   isSticky: PropTypes.bool,
   selected: PropTypes.bool,

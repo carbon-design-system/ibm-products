@@ -102,7 +102,7 @@ describe(componentName, () => {
       onClick: handleClick,
     });
 
-    await act(() => click(screen.getByRole('button')));
+    await act(async () => click(screen.getByRole('button')));
     expect(handleClick).toBeCalled();
   });
 
@@ -114,7 +114,7 @@ describe(componentName, () => {
       onContextMenu: handleContextMenu,
     });
 
-    await act(() => contextMenu(screen.getByRole('button')));
+    await act(async () => contextMenu(screen.getByRole('button')));
     expect(handleContextMenu).toBeCalled();
   });
 

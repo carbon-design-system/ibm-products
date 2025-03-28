@@ -39,7 +39,7 @@ const renderMenu = async (menuProps = {}, itemProps = {}) => {
       </ButtonMenu>
     </main>
   );
-  await act(() => userEvent.click(screen.getByRole('button')));
+  await act(async () => userEvent.click(screen.getByRole('button')));
   return container;
 };
 

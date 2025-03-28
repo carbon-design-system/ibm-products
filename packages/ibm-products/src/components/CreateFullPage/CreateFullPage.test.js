@@ -306,7 +306,7 @@ describe(componentName, () => {
     const { click } = userEvent;
     const { container } = renderCreateFullPage(defaultFullPageProps);
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     const createFullPageSteps = container.querySelector(
       `.${blockClass}__content`
     ).children;
@@ -326,7 +326,7 @@ describe(componentName, () => {
     const { container } = renderCreateFullPage(defaultFullPageProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const backButtonElement = screen.getByText(backButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     const createFullPageSteps = container.querySelector(
       `.${blockClass}__content`
     ).children;
@@ -347,14 +347,14 @@ describe(componentName, () => {
     const { click } = userEvent;
     const { container, rerender } = renderCreateFullPage(defaultFullPageProps);
     const cancelButtonElement = screen.getByText(cancelButtonText);
-    await act(() => click(cancelButtonElement));
+    await act(async () => click(cancelButtonElement));
     const createFullPageModal = container.querySelector(
       `.${blockClass}__modal`
     );
     expect(container.classList.contains(createFullPageModal));
     const modalCancelButtonElement = screen.getByText(modalDangerButtonText);
     const modalReturnButtonElement = screen.getByText(modalSecondaryButtonText);
-    await act(() => click(modalCancelButtonElement));
+    await act(async () => click(modalCancelButtonElement));
     expect(onCloseFn).toHaveBeenCalled();
 
     rerender(
@@ -386,7 +386,7 @@ describe(componentName, () => {
         </CreateFullPageStep>
       </CreateFullPage>
     );
-    await act(() => click(modalReturnButtonElement));
+    await act(async () => click(modalReturnButtonElement));
     expect(container.querySelector(`.${blockClass}`)).toBeTruthy();
   });
 
@@ -401,16 +401,16 @@ describe(componentName, () => {
       finalOnNextFn: null,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     const submitButtonElement = screen.getByText(submitButtonText);
-    await act(() => click(submitButtonElement));
+    await act(async () => click(submitButtonElement));
     await waitFor(() => {
       expect(onRequestSubmitFn).toHaveBeenCalled();
     });
@@ -427,16 +427,16 @@ describe(componentName, () => {
       finalOnNextFn: finalStepOnNextNonPromise,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepNonPromiseFn).toHaveBeenCalled();
     });
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepNonPromiseFn).toHaveBeenCalled();
     });
     const submitButtonElement = screen.getByText(submitButtonText);
-    await act(() => click(submitButtonElement));
+    await act(async () => click(submitButtonElement));
     await waitFor(() => {
       expect(onRequestSubmitNonPromiseFn).toHaveBeenCalled();
     });
@@ -457,16 +457,16 @@ describe(componentName, () => {
           rejectOnSubmitNext: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        await act(() => click(nextButtonElement));
+        await act(async () => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
-        await act(() => click(nextButtonElement));
+        await act(async () => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
         const submitButtonElement = screen.getByText(submitButtonText);
-        await act(() => click(submitButtonElement));
+        await act(async () => click(submitButtonElement));
         await waitFor(() => {
           expect(finalStepOnNextRejectFn).toHaveBeenCalled();
         });
@@ -483,16 +483,16 @@ describe(componentName, () => {
           rejectOnSubmit: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        await act(() => click(nextButtonElement));
+        await act(async () => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
-        await act(() => click(nextButtonElement));
+        await act(async () => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
         const submitButtonElement = screen.getByText(submitButtonText);
-        await act(() => click(submitButtonElement));
+        await act(async () => click(submitButtonElement));
         await waitFor(() => {
           expect(onRequestSubmitRejectFn).toHaveBeenCalled();
         });
@@ -524,7 +524,7 @@ describe(componentName, () => {
       </CreateFullPage>
     );
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
@@ -540,12 +540,12 @@ describe(componentName, () => {
       rejectOnNext: false,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await act(async () => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     const backButtonElement = screen.getByText(backButtonText);
-    await act(() => click(backButtonElement));
+    await act(async () => click(backButtonElement));
     const fullPageChildren = container.querySelector(
       `.${blockClass}__form`
     ).children;

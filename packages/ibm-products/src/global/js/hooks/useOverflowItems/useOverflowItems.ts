@@ -22,7 +22,12 @@ export function useOverflowItems<T extends Item>(
     minWidth?: number;
     maxWidth?: number;
   }) => void
-) {
+): {
+  visibleItems: T[];
+  itemRefHandler: (id: string, node: HTMLElement | null) => void;
+  hiddenItems: T[];
+  offsetRefHandler: (node: HTMLElement | null) => HTMLElement;
+} {
   const [remainingWidth, setRemainingWidth] = useState(0);
   const offsetWidthRef = useRef<number>(0);
   const itemsRef = useRef<Map<string, number> | null>(null);

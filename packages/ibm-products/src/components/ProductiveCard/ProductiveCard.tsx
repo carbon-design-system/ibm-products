@@ -78,7 +78,13 @@ export interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Provides the callback for a clickable card
    */
-  onClick?: () => void;
+  onClick?: (event: MouseEvent) => void;
+
+  /**
+   * Provides the callback for keydown events on the card
+   */
+  onKeyDown?: (event: KeyboardEvent) => void;
+
   /**
    * Function that's called from the primary button or action icon
    */

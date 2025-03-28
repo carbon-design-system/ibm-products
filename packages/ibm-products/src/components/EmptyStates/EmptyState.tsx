@@ -104,6 +104,8 @@ export interface EmptyStateProps {
   v2?: boolean;
 }
 
+export type EmptyStatePresetProps = Omit<EmptyStateProps, 'illustration'>;
+
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */

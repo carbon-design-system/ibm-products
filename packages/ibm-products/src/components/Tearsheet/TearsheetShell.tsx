@@ -31,9 +31,11 @@ import {
   ComposedModal,
   DefinitionTooltip,
   Layer,
+  Section,
   ModalHeader,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
+  Heading,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -186,6 +188,12 @@ interface TearsheetShellProps extends PropsWithChildren {
 
   verticalPosition?: 'normal' | 'lower';
 
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+
   // Deprecated props
   /**
    * @deprecated Property replaced by `decorator`
@@ -266,6 +274,7 @@ export const TearsheetShell = React.forwardRef(
       title,
       verticalPosition,
       launcherButtonRef,
+      headingLevel = 1,
       // Collect any other property values passed in.
       ...rest
     }: TearsheetShellProps,
@@ -488,30 +497,32 @@ export const TearsheetShell = React.forwardRef(
                   <Wrap className={`${bc}__header-fields`}>
                     {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
-                    <Wrap element="h2" className={`${bcModalHeader}__label`}>
+                    <Wrap element="span" className={`${bcModalHeader}__label`}>
                       {label}
                     </Wrap>
-                    <Wrap
-                      element="h3"
-                      className={cx(
-                        `${bcModalHeader}__heading`,
-                        `${bc}__heading`
-                      )}
-                    >
-                      {title}
-                    </Wrap>
-                    <Wrap className={`${bc}__header-description`}>
-                      {isOverflowing ? (
-                        <DefinitionTooltip
-                          definition={description}
-                          className={`${bc}__description-tooltip`}
-                        >
-                          {descriptionContent}
-                        </DefinitionTooltip>
-                      ) : (
-                        descriptionContent
-                      )}
-                    </Wrap>
+                    <Section>
+                      <Wrap
+                        element={Heading}
+                        className={cx(
+                          `${bcModalHeader}__heading`,
+                          `${bc}__heading`
+                        )}
+                      >
+                        {title}
+                      </Wrap>
+                      <Wrap className={`${bc}__header-description`}>
+                        {isOverflowing ? (
+                          <DefinitionTooltip
+                            definition={description}
+                            className={`${bc}__description-tooltip`}
+                          >
+                            {descriptionContent}
+                          </DefinitionTooltip>
+                        ) : (
+                          descriptionContent
+                        )}
+                      </Wrap>
+                    </Section>
                   </Wrap>
                   <Wrap className={`${bc}__header-actions`}>
                     {headerActions}
@@ -697,6 +708,12 @@ TearsheetShell.propTypes = {
   headerActions: PropTypes.element,
 
   /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
+
+  /**
    * The content for the influencer section of the tearsheet, displayed
    * alongside the main content. This is typically a menu, or filter, or
    * progress indicator, or similar. NB the influencer is only applicable for
@@ -766,15 +783,17 @@ TearsheetShell.propTypes = {
    */
   /**@ts-ignore*/
   selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
-
   /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.
    */
   /**@ts-ignore*/
+
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
+
   /**
    * The main title of the tearsheet, displayed in the header area.
    */
   title: PropTypes.node,
+
   ...deprecatedProps,
 };

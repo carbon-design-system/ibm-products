@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, PropsWithChildren, ReactNode } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { Draggable as DraggableIcon, Locked } from '@carbon/react/icons';
 import cx from 'classnames';
@@ -21,14 +21,12 @@ interface DraggableElementProps extends PropsWithChildren {
   classList?: string;
   disabled?: boolean;
   id: string;
-  elementId?: string;
   isSticky?: boolean;
   selected?: boolean;
 }
 
 const DraggableElement = ({
   id,
-  elementId,
   children,
   classList,
   disabled,
@@ -74,7 +72,7 @@ const DraggableElement = ({
         [`${blockClass}__draggable-handleHolder--sticky`]: isSticky,
         [`${blockClass}__draggable-handleHolder--dragging`]: isDragging,
       })}
-      id={elementId}
+      id={id}
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -105,7 +103,6 @@ DraggableElement.propTypes = {
   children: PropTypes.element.isRequired,
   classList: PropTypes.string,
   disabled: PropTypes.bool,
-  elementId: PropTypes.string,
   id: PropTypes.string.isRequired,
   isSticky: PropTypes.bool,
   selected: PropTypes.bool,

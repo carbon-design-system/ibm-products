@@ -49,21 +49,18 @@ export default {
 
 const defaultProps = {
   kind: 'custom',
-  children: (
-    <>
-      <Link size="lg" href={'/'}>
-        – Forwarding Link 1
-      </Link>
-      <br />
-      <Link size="lg" href={'/'}>
-        – Forwarding Link 1
-      </Link>
-    </>
-  ),
+  title: '[Error title]',
+  label: 'Error ###',
+  description:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
 };
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
+const StoryWrapper = ({ children }) => {
+  return <div className={`${storyClass}__story-wrapper`}>{children}</div>;
+};
+
 const Template = (args) => {
   return (
     <div className={`${storyClass}__viewport`}>
@@ -72,7 +69,21 @@ const Template = (args) => {
           <div className={`${storyClass}__breadcrumb-container`}>
             <Breadcrumbs className={`${storyClass}__breadcrumb`} />
           </div>
-          <FullPageError {...args} />
+          <StoryWrapper>
+            <FullPageError
+              title={`${args.title}`}
+              label={`${args.label}`}
+              description={`${args.description}`}
+            >
+              <Link size="lg" href={'/'}>
+                – Forwarding Link 1
+              </Link>
+              <br />
+              <Link size="lg" href={'/'}>
+                – Forwarding Link 1
+              </Link>
+            </FullPageError>
+          </StoryWrapper>
         </div>
       </UiShell>
     </div>
@@ -87,10 +98,6 @@ export const fullPageError = Template.bind({});
 fullPageError.storyName = 'Default';
 fullPageError.args = {
   ...defaultProps,
-  title: '[Error title]',
-  label: 'Error ###',
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
 };
 export const fullPageError403 = Template.bind({});
 fullPageError403.storyName = '403';

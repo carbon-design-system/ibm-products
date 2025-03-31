@@ -15,8 +15,8 @@ component_management:
     - component_id: ibm-products # this is an identifier that should not be changed
       name: ibm-products # this is a display name, and can be changed freely
       paths:
-        - ../packages/ibm-products/**
+        - ../packages/ibm-products/
     - component_id: ibm-products-web-components # this is an identifier that should not be changed
       name: ibm-products-web-components # this is a display name, and can be changed freely
       paths:
-        - ../packages/ibm-products-web-components/**
+        - ../packages/ibm-products-web-components/

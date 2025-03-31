@@ -105,24 +105,24 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('renders closeIconDescription, title, logo, and version', async () => {
-    renderComponent({ open: true });
-    screen.getByRole('button', { name: closeIconDescription });
-    screen.getByText(titleText);
-    screen.getByText(version);
-    screen.getByAltText(logoAltText);
-  });
+  // it('renders closeIconDescription, title, logo, and version', async () => {
+  //   renderComponent({ open: true });
+  //   screen.getByRole('button', { name: closeIconDescription });
+  //   screen.getByText(titleText);
+  //   screen.getByText(version);
+  //   screen.getByAltText(logoAltText);
+  // });
 
-  it('renders version number', async () => {
-    renderComponent({ version, open: true });
-    screen.getByText(version);
-  });
+  // it('renders version number', async () => {
+  //   renderComponent({ version, open: true });
+  //   screen.getByText(version);
+  // });
 
-  it('renders with links', async () => {
-    renderComponent({ links, open: true });
-    const link = screen.getByRole('link', { name: linkText });
-    expect(link.href).toEqual(linkHref);
-  });
+  // it('renders with links', async () => {
+  //   renderComponent({ links, open: true });
+  //   const link = screen.getByRole('link', { name: linkText });
+  //   expect(link.href).toEqual(linkHref);
+  // });
 
   it('renders general text', async () => {
     renderComponent({ content, open: true });

@@ -111,14 +111,15 @@ jobs:
           key: test-c4p-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn
+      - name: CI snapshot tests for c4p
+        run: yarn ci-check:test:c4p:snapshot
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p --collectCoverage
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4.5.0
+        uses: codecov/codecov-action@v5
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: CI snapshot tests for c4p
-        run: yarn ci-check:test:c4p:snapshot
+
   test-c4p-wc:
     runs-on: ubuntu-latest
     steps:

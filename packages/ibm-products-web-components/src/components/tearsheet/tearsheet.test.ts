@@ -94,11 +94,6 @@ describe('c4p-tearsheet', () => {
 
     expect(closeButton).to.exist;
 
-describe('c4p-tearsheet', () => {
-  it.skip('should render a tearsheet', async () => {
-    await fixture(template());
-    const elem = document.body.querySelector('c4p-tearsheet' as any);
-    expect(elem).toBeDefined();
     closeButton?.click();
 
     await new Promise((resolve) => setTimeout(resolve, 50));

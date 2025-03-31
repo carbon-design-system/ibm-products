@@ -17,6 +17,6 @@ component_management:
       paths:
         - ../packages/ibm-products
     - component_id: ibm-products # this is an identifier that should not be changed
-      name: react-components # this is a display name, and can be changed freely
+      name: ibm-products # this is a display name, and can be changed freely
       paths:
         - ../packages/ibm-products

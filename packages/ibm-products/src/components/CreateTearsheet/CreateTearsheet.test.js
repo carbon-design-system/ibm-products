@@ -335,7 +335,7 @@ describe(CreateTearsheet.displayName, () => {
         });
         const nextButtonElement = screen.getByText(nextButtonText);
         await act(() => click(nextButtonElement));
-
+        jest.advanceTimersByTime(1000);
         expect(onNextStepRejectionFn).toHaveBeenCalled();
       }
     ));

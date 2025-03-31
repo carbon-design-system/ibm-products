@@ -13,7 +13,7 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/react/icons';
-import { Layer, Toggle } from '@carbon/react';
+import { Heading, Layer, Section, Toggle } from '@carbon/react';
 import React, { MouseEvent, ReactNode, useRef, useState } from 'react';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 import PropTypes from 'prop-types';
@@ -274,17 +274,17 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
       });
 
       return (
-        <div className={`${blockClass}__heading`}>
-          <h6 id={titleId} className={`${blockClass}__title`}>
+        <Section className={`${blockClass}__heading`}>
+          <Heading id={titleId} className={`${blockClass}__title`}>
             {title}
-          </h6>
+          </Heading>
           {text && (
             <span className={summaryClasses} aria-hidden={summaryHidden}>
               {Icon && <Icon size={16} />}
               <span className={`${blockClass}__summary-text`}>{text}</span>
             </span>
           )}
-        </div>
+        </Section>
       );
     };
 

@@ -188,10 +188,8 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     return isLastCondition(conditionIndex, conditions);
   };
   const getOperators = () => {
-    // @ts-ignore
     if ((config as ConfigType)?.operators) {
-      // @ts-ignore
-      return (config as ConfigType).operators;
+      return (config as ConfigType)?.operators;
     }
     return operatorConfig.filter(
       (operator) => operator.type.indexOf(type) != -1 || operator.type == 'all'

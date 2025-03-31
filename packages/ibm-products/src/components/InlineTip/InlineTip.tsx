@@ -165,7 +165,7 @@ export let InlineTip = React.forwardRef(
     }, [collapsible]);
 
     return (
-      <div
+      <section
         {...rest}
         aria-labelledby={labelId}
         className={cx(
@@ -201,9 +201,9 @@ export let InlineTip = React.forwardRef(
         )}
 
         <div className={`${blockClass}__content`}>
-          <h6 id={labelId} className={`${blockClass}__title`}>
+          <header id={labelId} className={`${blockClass}__title`}>
             {title}
-          </h6>
+          </header>
           <section className={`${blockClass}__body`}>
             {childrenToRender}
             {/* Only show the secondary button when body is showing expanded content */}
@@ -244,7 +244,7 @@ export let InlineTip = React.forwardRef(
         {renderMedia && (
           <div className={`${blockClass}__media`}>{renderMedia()}</div>
         )}
-      </div>
+      </section>
     );
   }
 );

@@ -161,6 +161,17 @@ describe(componentName, () => {
     screen.getByText(`Powered by (${id})`);
   });
 
+  it('is visible when open is true', async () => {
+    renderComponent({ open: true });
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
+  });
+
+  it('is not visible when open is not true', async () => {
+    const { container } = renderComponent({ open: false });
+
+    expect(container.firstChild).not.toHaveClass('is-visible');
+  });
+
   it('applies className to the root node', async () => {
     renderComponent({ className, open: true });
     expect(screen.getByRole('presentation')).toHaveClass(className);

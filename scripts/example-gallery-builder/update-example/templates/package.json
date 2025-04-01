@@ -17,21 +17,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "^2.60.0",
-    "@carbon/react": "^1.77.0",
+    "@carbon/ibm-products": "^2.62.0",
+    "@carbon/react": "^1.79.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sass": "^1.85.1"
+    "sass": "^1.86.1"
   },
   "devDependencies": {
-    "@types/react": "^18.3.18",
+    "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.19",
-    "vite": "^4.5.9"
+    "vite": "^4.5.11"
   },
   "browserslist": {
     "production": [

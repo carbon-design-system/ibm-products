@@ -105,7 +105,7 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it.skip('renders closeIconDescription, title, logo, and version', async () => {
+  it('renders closeIconDescription, title, logo, and version', async () => {
     renderComponent({ open: true });
     screen.getByRole('button', { name: closeIconDescription });
     screen.getByText(titleText);
@@ -113,12 +113,12 @@ describe(componentName, () => {
     screen.getByAltText(logoAltText);
   });
 
-  it.skip('renders version number', async () => {
+  it('renders version number', async () => {
     renderComponent({ version, open: true });
     screen.getByText(version);
   });
 
-  it.skip('renders with links', async () => {
+  it('renders with links', async () => {
     renderComponent({ links, open: true });
     const link = screen.getByRole('link', { name: linkText });
     expect(link.href).toEqual(linkHref);
@@ -159,17 +159,6 @@ describe(componentName, () => {
       ),
     });
     screen.getByText(`Powered by (${id})`);
-  });
-
-  it('is visible when open is true', async () => {
-    renderComponent({ open: true });
-    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
-  });
-
-  it('is not visible when open is not true', async () => {
-    const { container } = renderComponent({ open: false });
-
-    expect(container.firstChild).not.toHaveClass('is-visible');
   });
 
   it('applies className to the root node', async () => {

@@ -1,5 +1,5 @@
 comment:
-  layout: 'condensed_header, diff, flags, components'
+  layout: 'header, diff, flags, components'
 
 component_management:
   default_rules: # default rules that will be inherited by all components
@@ -11,8 +11,8 @@ component_management:
     - component_id: ibm-products # this is an identifier that should not be changed
       name: ibm-products # this is a display name, and can be changed freely
       paths:
-        - ../packages/ibm-products/**
+        - packages/ibm-products/**
     - component_id: ibm-products-web-components # this is an identifier that should not be changed
       name: ibm-products-web-components # this is a display name, and can be changed freely
       paths:
-        - ../packages/ibm-products-web-components/**
+        - packages/ibm-products-web-components/**

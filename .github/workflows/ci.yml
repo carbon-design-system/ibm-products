@@ -118,7 +118,7 @@ jobs:
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v5
         with:
-          directory: ../packages/ibm-products/coverage
+          files: ../packages/ibm-products/coverage/coverage-final.json
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
@@ -150,7 +150,7 @@ jobs:
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v5
         with:
-          directory: ../packages/ibm-products-web-components/coverage
+          files: ../packages/ibm-products-web-components/coverage/coverage-final.json
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 

@@ -26,11 +26,23 @@ const blockClass = `${prefix}--options-tile`;
 
 @customElement(`${prefix}-options-tile`)
 class CDSOptionsTile extends HostListenerMixin(LitElement) {
-  @property({ type: Boolean })
   /**
    * If `true` the body of the component is shown
    */
+  @property({ type: Boolean })
   open: boolean = false;
+
+  /**
+   * Callback fired when the component requests to be closed
+   */
+  @property({ type: Function })
+  onClose?: (evt: Event) => void;
+
+  /**
+   * Callback fired when the component requests to be opened
+   */
+  @property({ type: Function })
+  onOpen?: (evt: Event) => void;
 
   /**
    * Determines the size of the header
@@ -96,11 +108,27 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   }
 
   private _toggle() {
+    if (this.open) {
+      this._onClose();
+    } else {
+      this._onOpen();
+    }
+  }
+
+  private _onOpen() {
     const options = {
       bubbles: true,
       composed: true,
     };
-    this.dispatchEvent(new CustomEvent('toggle', options));
+    this.dispatchEvent(new CustomEvent('onOpen', options));
+  }
+
+  private _onClose() {
+    const options = {
+      bubbles: true,
+      composed: true,
+    };
+    this.dispatchEvent(new CustomEvent('onClose', options));
   }
 
   static styles = styles;

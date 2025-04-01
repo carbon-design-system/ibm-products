@@ -16,6 +16,12 @@ const argTypes = {
     control: 'boolean',
     description: 'If `true` the body of the component is shown',
   },
+  onClose: {
+    description: 'Callback fired when the component requests to be closed',
+  },
+  onOpen: {
+    description: 'Callback fired when the component requests to be opened',
+  },
   size: {
     control: 'radio',
     options: ['lg', 'xl'],
@@ -35,9 +41,14 @@ const argTypes = {
   },
 };
 
-const toggleOpen = () => {
+const handleOpen = (evt: Event) => {
   const tile = document.querySelector('#my-tile');
-  tile?.toggleAttribute('open');
+  tile?.setAttribute('open', 'true');
+};
+
+const handleClose = (evt: Event) => {
+  const tile = document.querySelector('#my-tile');
+  tile?.removeAttribute('open');
 };
 
 const renderTemplate = (args) => {
@@ -50,7 +61,8 @@ const renderTemplate = (args) => {
       summary=${summary}
       title=${title}
       titleId=${titleId}
-      @toggle=${toggleOpen}
+      @onOpen=${handleOpen}
+      @onClose=${handleClose}
     >
       <div slot="toggle">
         <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>

@@ -115,10 +115,6 @@ jobs:
         run: yarn ci-check:test:c4p:snapshot
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p --collectCoverage
-      - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@v5
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   test-c4p-wc:
     runs-on: ubuntu-latest
@@ -145,6 +141,32 @@ jobs:
         run: yarn build:packages
       - name: CI tests for products web components
         run: yarn ci-check:test:c4p-wc --coverage
+
+  upload-codecov-reports:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.x'
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 #4.2.0
+        with:
+          path: '**/node_modules'
+      - name: Install
+        run: yarn
+      - name: Install browsers
+        working-directory: packages/ibm-products-web-components
+        run: yarn playwright install --with-deps
+      - name: Build web-components project
+        run: yarn build:packages
+      - name: CI tests for products web components
+        run: yarn ci-check:test:c4p-wc --coverage
+      - name: CI tests for c4p
+        run: yarn ci-check:test:c4p --collectCoverage
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v5
         env:

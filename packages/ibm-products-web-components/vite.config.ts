@@ -36,7 +36,7 @@ export default defineConfig({
       provider: 'v8',
       include: ['src/**/*'],
       exclude: ['src/**/*.stories.{js,ts}'],
-      reporter: ['text', 'html'],
+      reporter: ['text', 'html', 'json'],
     },
   },
 });

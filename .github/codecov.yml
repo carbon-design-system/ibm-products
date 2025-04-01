@@ -1,16 +1,12 @@
 comment:
   layout: 'condensed_header, diff, flags, components'
 
-coverage:
-  status:
-    project:
-      default:
-        informational: true
-    patch:
-      default:
-        informational: true
-
 component_management:
+  default_rules: # default rules that will be inherited by all components
+    statuses:
+      - type: project # in this case every component that doens't have a status defined will have a project type one
+        target: auto
+        threshold: 1%
   individual_components:
     - component_id: ibm-products # this is an identifier that should not be changed
       name: ibm-products # this is a display name, and can be changed freely

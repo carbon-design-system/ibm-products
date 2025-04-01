@@ -116,7 +116,7 @@ jobs:
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p --collectCoverage
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4.5.0
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
@@ -144,7 +144,11 @@ jobs:
       - name: Build web-components project
         run: yarn build:packages
       - name: CI tests for products web components
-        run: yarn ci-check:test:c4p-wc
+        run: yarn ci-check:test:c4p-wc --coverage
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4.5.0
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   avt-runner:
     strategy:

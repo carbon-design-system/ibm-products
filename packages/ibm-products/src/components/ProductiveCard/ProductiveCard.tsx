@@ -24,16 +24,16 @@ const componentName = 'ProductiveCard';
 type ActionIcon = {
   id?: string;
   icon?: CarbonIconType;
-  onClick?(): (event: MouseEvent) => void;
-  onKeyDown?(): (event: KeyboardEvent) => void;
+  onClick?: (event: MouseEvent) => void;
+  onKeydown?: (event: KeyboardEvent) => void;
   iconDescription?: string;
   href?: string;
 };
 type overflowAction = {
   id?: string;
   itemText?: string;
-  onClick?(): (event: MouseEvent) => void;
-  onKeyDown?(): (event: KeyboardEvent) => void;
+  onClick?: (event: MouseEvent) => void;
+  onKeydown?: (event: KeyboardEvent) => void;
 };
 type PlacementType = 'top' | 'bottom';
 type ClickZoneType = 'one' | 'two' | 'three';

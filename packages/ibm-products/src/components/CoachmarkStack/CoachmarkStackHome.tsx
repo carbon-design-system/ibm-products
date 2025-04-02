@@ -24,6 +24,7 @@ import { CoachmarkHeader } from '../Coachmark/CoachmarkHeader';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 import { ButtonProps } from '@carbon/react';
 
+type TooltipAlignment = 'top' | 'bottom';
 interface CoachmarkStackHomeProps {
   /**
    * Optional class name for this component.
@@ -74,6 +75,10 @@ interface CoachmarkStackHomeProps {
    * The title of the Coachmark.
    */
   title: string;
+  /**
+   * Label's tooltip position
+   */
+  tooltipAlign?: TooltipAlignment;
 }
 
 // Carbon and package components we use.
@@ -104,6 +109,7 @@ export let CoachmarkStackHome = forwardRef<
       portalTarget,
       closeButtonLabel,
       title,
+      tooltipAlign,
       ...rest
     },
     ref
@@ -175,6 +181,7 @@ export let CoachmarkStackHome = forwardRef<
               <Tooltip
                 highContrast={false}
                 label={label}
+                align={tooltipAlign}
                 className={`${blockClass}__navLinkLabels-tooltip`}
               >
                 <span className={`${blockClass}__navLinkLabels-text`}>
@@ -330,4 +337,8 @@ CoachmarkStackHome.propTypes = {
    * The title of the Coachmark.
    */
   title: PropTypes.string.isRequired,
+  /**
+   * Label's tooltip position
+   */
+  tooltipAlign: PropTypes.oneOf(['top', 'bottom']),
 };

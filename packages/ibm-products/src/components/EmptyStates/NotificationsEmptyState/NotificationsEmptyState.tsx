@@ -18,41 +18,13 @@ import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
 import NotificationsIllustration from '../assets/NotificationsIllustration';
-import { defaults } from '../EmptyState';
-import { ButtonProps } from '@carbon/react';
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { defaults, EmptyStatePresetProps } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'NotificationsEmptyState';
 
-export interface NotificationsEmptyStateProps {
-  /**
-   * Empty state action button
-   */
-
-  action?: {
-    kind?: 'primary' | 'secondary' | 'tertiary';
-    renderIcon?: CarbonIconType;
-    onClick?: ButtonProps<React.ElementType>['onClick'];
-    text?: string;
-  };
-
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
-  className?: string;
-
-  /**
-   * The alt text for empty state svg images. If not provided , title will be used.
-   */
-  illustrationDescription?: string;
-
-  /**
-   * Designates the position of the illustration relative to the content
-   */
-  illustrationPosition?: 'top' | 'right' | 'bottom' | 'left';
-
+export interface NotificationsEmptyStateProps extends EmptyStatePresetProps {
   /**
    * Empty state illustration theme variations.
    * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
@@ -60,34 +32,6 @@ export interface NotificationsEmptyStateProps {
    * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme?: 'light' | 'dark';
-
-  /**
-   * Empty state link object
-   */
-  link?: {
-    text?: string | ReactNode;
-    href?: string;
-  };
-
-  /**
-   * Empty state headingAs allows you to customize the type of heading element
-   */
-  headingAs?: (() => ReactNode) | string | ElementType;
-
-  /**
-   * Empty state size
-   */
-  size?: 'lg' | 'sm';
-
-  /**
-   * Empty state subtitle
-   */
-  subtitle: ReactNode;
-
-  /**
-   * Empty state title
-   */
-  title: ReactNode;
 }
 
 /**

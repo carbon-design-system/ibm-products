@@ -9,7 +9,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Checkbox } from '@carbon/react';
 import { isColumnVisible } from './common';
-import { v4 as uuidv4 } from 'uuid';
+import { useId } from '../../../../../global/js/utils/useId';
 import DraggableElement from '../../DraggableElement';
 import { pkg } from '../../../../../settings';
 import { getNodeTextContent } from '../../../../../global/js/utils/getNodeTextContent';
@@ -246,7 +246,7 @@ export const DraggableItemsList = ({
                 classList={draggableClass}
                 key={colDef.id}
                 id={colDef.id}
-                elementId={`${colDef.id}-${uuidv4()}`}
+                elementId={`${colDef.id}-${useId()}`}
                 disabled={filterString.length > 0 || isFrozenColumn}
                 ariaLabel={colHeaderTitle}
                 isSticky={isFrozenColumn}

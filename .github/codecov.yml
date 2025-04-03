@@ -1,5 +1,3 @@
-comment:
-  layout: 'header, diff, flags, components'
 coverage:
   status:
     project:
@@ -8,6 +6,11 @@ coverage:
     patch:
       default:
         informational: true
+
+# This is the configuration on how the codecov report layout will look like in PR's
+comment:
+  layout: 'header, diff, flags, components'
+
 component_management:
   default_rules: # default rules that will be inherited by all components
     statuses:

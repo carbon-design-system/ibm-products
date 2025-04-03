@@ -43,8 +43,8 @@ test.describe('TearsheetNarrow @avt', () => {
     await expect(modalElement).not.toBeInViewport();
 
     // Opening the Tearsheet
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Enter');
+    const openButton = page.getByText('Open Tearsheet');
+    await openButton.click();
     await page.screenshot({ animations: 'disabled' });
     await expect(modalElement).toBeInViewport();
   });
@@ -134,9 +134,14 @@ test.describe('TearsheetNarrow @avt', () => {
     const closeButton = page.getByLabel('Close the tearsheet');
     const inputField = page.locator('#tss-ft1');
 
+    // Now the focus is on the close button
+    await expect(closeButton).toBeFocused();
+
     await expect(slugButton1).toBeInViewport();
     // Initially expect first slug button aria-expanded attribute is false
     await expect(slugButton1).toHaveAttribute('aria-expanded', 'false');
+    // Now switch focus to slug button
+    await page.keyboard.press('Shift+Tab');
     // And the focus is on the first slug button
     await expect(slugButton1).toBeFocused();
 
@@ -180,49 +185,52 @@ test.describe('TearsheetNarrow @avt', () => {
       },
     });
 
-    await page.waitForSelector(`.${bc}--stacked-${3}-of-${3}`, {
-      visible: true,
-    });
+    const tearsheet3 = page.getByLabel('Tearsheet #3');
+    await expect(tearsheet3).toBeInViewport();
+
+    const cancelBtn3 = tearsheet3.getByText('Cancel');
+    await expect(cancelBtn3).toBeFocused();
 
     // press escape thrice to close all pre open tearsheets
     await page.keyboard.press('Escape');
     await page.screenshot({ animations: 'disabled' });
+
+    const tearsheet2 = page.getByLabel('Tearsheet #2');
+    await expect(tearsheet2).toBeInViewport();
+    const cancelBtn2 = tearsheet2.getByText('Cancel');
+    await expect(cancelBtn2).toBeFocused();
+
     await page.keyboard.press('Escape');
     await page.screenshot({ animations: 'disabled' });
+
+    const tearsheet1 = page.getByLabel('Tearsheet #1');
+    await expect(tearsheet1).toBeInViewport();
+    const cancelBtn1 = tearsheet1.getByText('Cancel');
+    await expect(cancelBtn1).toBeFocused();
+
     await page.keyboard.press('Escape');
     await page.screenshot({ animations: 'disabled' });
 
     // Open tearsheet one
     await page.getByText('Toggle #1').click();
     await page.screenshot({ animations: 'disabled' });
+
+    await expect(tearsheet1).toBeInViewport();
+    await expect(cancelBtn1).toBeFocused();
     await expect(page).toHaveNoACViolations('TearsheetNarrow @avt-stacking');
 
     // Open second tearsheet
     await page.getByText('Toggle #2').click();
     await page.screenshot({ animations: 'disabled' });
-    await page.waitForSelector(`.${bc}--stacked-${2}-of-${2}`, {
-      visible: true,
-    });
 
-    // Tearsheet 2 is now open
-    const ts2 = page.locator(
-      `[class*="${bc}--stacked-${2}-of-${2}"].is-visible`
-    );
-    await expect(ts2).toBeInViewport();
-    await expect(ts2).toHaveAttribute('aria-hidden', 'false');
+    await expect(tearsheet2).toBeInViewport();
+    await expect(cancelBtn2).toBeFocused();
 
     // Open third tearsheet
     await page.getByText('Toggle #3').click();
     await page.screenshot({ animations: 'disabled' });
-    await page.waitForSelector(`.${bc}--stacked-${3}-of-${3}`, {
-      visible: true,
-    });
+    await expect(cancelBtn3).toBeFocused();
 
-    // Tearsheet 3 is now open
-    const ts3 = page.locator(
-      `[class*="${bc}--stacked-${3}-of-${3}"].is-visible`
-    );
-    await expect(ts3).toBeInViewport();
-    await expect(ts3).toHaveAttribute('aria-hidden', 'false');
+    await expect(tearsheet3).toBeInViewport();
   });
 });

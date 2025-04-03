@@ -9,7 +9,12 @@
 import React, { PropsWithChildren, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ProgressIndicator, ProgressStep } from '@carbon/react';
+import {
+  Heading,
+  ProgressIndicator,
+  ProgressStep,
+  Section,
+} from '@carbon/react';
 import '../../global/js/utils/props-helper';
 
 import { pkg } from '../../settings';
@@ -79,8 +84,8 @@ export const CreateInfluencer = ({
       0;
 
     return (
-      <div className={`${blockClass}__left-nav`}>
-        {title && <h3 className={`${blockClass}__title`}>{title}</h3>}
+      <Section className={`${blockClass}__left-nav`}>
+        {title && <Heading className={`${blockClass}__title`}>{title}</Heading>}
         {currentStep === 1 && stepData[0]?.introStep ? null : (
           <ProgressIndicator
             currentIndex={
@@ -105,7 +110,7 @@ export const CreateInfluencer = ({
             })}
           </ProgressIndicator>
         )}
-      </div>
+      </Section>
     );
   };
 

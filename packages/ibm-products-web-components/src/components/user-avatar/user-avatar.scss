@@ -20,7 +20,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities';
 @use 'sass:map';
 
-@use '@carbon/ibm-products-styles/scss/components/UserAvatar/index' as *;
+@use '@carbon/ibm-products-styles/scss/components/UserAvatar' as *;
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
@@ -30,6 +30,31 @@ $block-class: #{$prefix}--user-avatar;
 :host(#{$prefix}-user-avatar) {
   @extend .#{$block-class};
   @extend .#{$block-class}__tooltip;
+}
+
+:host(#{$prefix}-user-avatar) .#{$block-class}--xl {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+  }
+}
+:host(#{$prefix}-user-avatar) .#{$block-class}--lg {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-06;
+    inline-size: $spacing-06;
+  }
+}
+:host(#{$prefix}-user-avatar) .#{$block-class}--md {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-04 + $spacing-03;
+    inline-size: $spacing-04 + $spacing-03;
+  }
+}
+:host(#{$prefix}-user-avatar) .#{$block-class}--sm {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-05;
+    inline-size: $spacing-05;
+  }
 }
 
 :host(#{$prefix}-user-avatar) .#{$block-class}__tooltip-trigger {

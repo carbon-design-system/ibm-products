@@ -385,6 +385,7 @@ const FirstElementDisabledTemplate = (
   context
 ) => {
   const [open, setOpen] = useState(false);
+  const [text, setText] = useState('');
   const wiredActions =
     actions &&
     Array.prototype.map.call(actions, (action) => {
@@ -434,7 +435,7 @@ const FirstElementDisabledTemplate = (
                     // stylelint-disable-next-line carbon/layout-use
                     { marginBottom: '1em' }
                   }
-                  disabled
+                  disabled={!text?.length > 0}
                 />
                 <TextInput
                   id="tss-ft2"
@@ -443,6 +444,7 @@ const FirstElementDisabledTemplate = (
                     // stylelint-disable-next-line carbon/layout-use
                     { marginBottom: '1em' }
                   }
+                  onChange={(ev) => setText(ev?.target?.value)}
                 />
               </FormGroup>
             </Form>
@@ -537,6 +539,8 @@ const StackedTemplate = (
   const [open3, setOpen3] = useState(false);
   const ref = useRef(undefined);
   const openButton1 = useRef();
+  const openButton2 = useRef();
+  const openButton3 = useRef();
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {
@@ -627,6 +631,7 @@ const StackedTemplate = (
                 style={{ width: 'initial' }}
                 onClick={() => setOpen2(true)}
                 disabled={open2}
+                ref={openButton2}
               >
                 Open tearsheet 2
               </Button>
@@ -659,6 +664,7 @@ const StackedTemplate = (
                 style={{ width: 'initial' }}
                 onClick={() => setOpen3(true)}
                 disabled={open3}
+                ref={openButton3}
               >
                 Open tearsheet 3
               </Button>
@@ -670,6 +676,7 @@ const StackedTemplate = (
           selectorPrimaryFocus="#stacked-input-2"
           decorator={decorator && sampleDecorator(decorator)}
           slug={slug && sampleDecorator(slug)}
+          launcherButtonRef={openButton2}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 2
@@ -689,6 +696,7 @@ const StackedTemplate = (
             selectorPrimaryFocus="#stacked-input-3"
             decorator={decorator && sampleDecorator(decorator)}
             slug={slug && sampleDecorator(slug)}
+            launcherButtonRef={openButton3}
           >
             <div className="tearsheet-stories__dummy-content-block">
               Main content 3

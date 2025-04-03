@@ -5,8 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act } from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React from 'react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  act,
+} from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -523,23 +529,23 @@ describe(componentName, () => {
   it('render the component with input type as single select option', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     expect(screen.getByRole('option', { name: 'Continent' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Continent' }))
     );
 
     expect(screen.getByRole('option', { name: 'is' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'is' }))
     );
 
     expect(screen.getByRole('option', { name: 'Africa' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Africa' }))
     );
 
@@ -551,24 +557,24 @@ describe(componentName, () => {
   it('render the component with input type as multiselect option', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     expect(screen.getByRole('option', { name: 'Continent' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Continent' }))
     );
 
     expect(screen.getByRole('option', { name: 'is one of' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'is one of' }))
     );
 
     //selection option 1
     expect(screen.getByRole('option', { name: 'Africa' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Africa' }))
     );
 
@@ -576,24 +582,24 @@ describe(componentName, () => {
 
     expect(screen.getByRole('option', { name: 'Antarctica' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Antarctica' }))
     );
 
     //selecting and deselecting option 3
     expect(screen.getByRole('option', { name: 'Asia' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Asia' }))
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Asia' }))
     );
 
     //clicking outside
     const container = document.querySelector(`.${blockClass}`);
-    await act(() => userEvent.click(container));
+    await act(async () => userEvent.click(container));
 
     const selectedItem = screen.getByRole('button', {
       name: 'Africa, Antarctica',
@@ -606,17 +612,17 @@ describe(componentName, () => {
       <ConditionBuilder {...defaultProps} inputConfig={inputConfigOptionType} />
     );
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     expect(screen.getByRole('option', { name: 'Continent' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Continent' }))
     );
 
     expect(screen.getByRole('option', { name: 'is one of' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'is one of' }))
     );
 
@@ -625,7 +631,7 @@ describe(componentName, () => {
       name: 'Select all',
     });
 
-    await act(() => userEvent.click(selectAllButton));
+    await act(async () => userEvent.click(selectAllButton));
 
     const selectedItems = screen.getByRole('button', {
       name: 'Africa, Antarctica',
@@ -637,16 +643,16 @@ describe(componentName, () => {
       name: 'Deselect all',
     });
 
-    await act(() => userEvent.click(deSelectAllButton));
+    await act(async () => userEvent.click(deSelectAllButton));
 
     //selecting one
     expect(screen.getByText('Antarctica'));
 
-    await act(() => userEvent.click(screen.getByText('Antarctica')));
+    await act(async () => userEvent.click(screen.getByText('Antarctica')));
 
     //clicking outside
     const container = document.querySelector(`.${blockClass}`);
-    await act(() => userEvent.click(container));
+    await act(async () => userEvent.click(container));
 
     const selectedItem = screen.getByRole('button', {
       name: 'Antarctica',
@@ -657,15 +663,15 @@ describe(componentName, () => {
   it('check search feature is functioning in popover', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     expect(screen.getByText('Continent'));
 
-    await act(() => userEvent.click(screen.getByText('Continent')));
+    await act(async () => userEvent.click(screen.getByText('Continent')));
 
     expect(screen.getByText('is one of'));
 
-    await act(() => userEvent.click(screen.getByText('is one of')));
+    await act(async () => userEvent.click(screen.getByText('is one of')));
 
     const searchInput = screen.getByRole('searchbox');
     expect(searchInput);
@@ -684,7 +690,7 @@ describe(componentName, () => {
 
     //add first condition
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Continent',
@@ -706,10 +712,10 @@ describe(componentName, () => {
 
     const addButton = document.querySelector(`.${blockClass}__add-button`);
     expect(addButton);
-    await act(() => userEvent.click(addButton));
+    await act(async () => userEvent.click(addButton));
 
     //add second condition
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Continent',
@@ -717,7 +723,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'is',
@@ -725,7 +731,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() => userEvent.click(screen.getByText('Antarctica')));
+    await act(async () => userEvent.click(screen.getByText('Antarctica')));
 
     const selectedItem2 = screen.getByRole('button', { name: 'Antarctica' });
 
@@ -750,12 +756,12 @@ describe(componentName, () => {
     );
     //start builder
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getAllByRole('button', { name: 'and' })[0])
     );
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'or',
@@ -769,9 +775,9 @@ describe(componentName, () => {
   it('render the component with input type text', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'ID',
@@ -779,7 +785,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'is',
@@ -791,7 +797,7 @@ describe(componentName, () => {
     fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
-    await act(() => userEvent.click(container));
+    await act(async () => userEvent.click(container));
 
     const selectedItem = screen.getByRole('button', { name: testInputText });
 
@@ -801,9 +807,9 @@ describe(componentName, () => {
   it('render the component with input type textarea', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Id Long',
@@ -814,13 +820,13 @@ describe(componentName, () => {
     const isOperator = screen.getByRole('option', {
       name: 'is',
     });
-    await act(() => userEvent.click(isOperator));
+    await act(async () => userEvent.click(isOperator));
 
     const inputText = document.querySelector('#id_long');
     fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
-    await act(() => userEvent.click(container));
+    await act(async () => userEvent.click(container));
 
     const selectedItem = screen.getByRole('button', { name: testInputText });
 
@@ -830,9 +836,9 @@ describe(componentName, () => {
   it('render the component with input type number', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Price',
@@ -843,23 +849,23 @@ describe(componentName, () => {
     const isOperator = screen.getByRole('option', {
       name: 'is',
     });
-    await act(() => userEvent.click(isOperator));
+    await act(async () => userEvent.click(isOperator));
 
     let inputText = document.querySelector('#price');
     fireEvent.change(inputText, { target: { value: '123' } });
 
     const container = document.querySelector(`.${blockClass}`);
-    await act(() => userEvent.click(container));
+    await act(async () => userEvent.click(container));
 
     const selectedItem = screen.getByRole('button', { name: '123 Dollars' });
 
     expect(selectedItem);
 
-    await act(() => userEvent.click(selectedItem));
+    await act(async () => userEvent.click(selectedItem));
     inputText = document.querySelector('#price');
     fireEvent.change(inputText, { target: { value: '-123' } });
 
-    await act(() => userEvent.click(container));
+    await act(async () => userEvent.click(container));
 
     expect(screen.getByRole('button', { name: 'Incomplete' }));
   });
@@ -867,9 +873,9 @@ describe(componentName, () => {
   it('render the component with input type date', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Date',
@@ -880,10 +886,10 @@ describe(componentName, () => {
     const isOperator = screen.getByRole('option', {
       name: 'is',
     });
-    await act(() => userEvent.click(isOperator));
+    await act(async () => userEvent.click(isOperator));
 
     const inputElement = document.querySelector('#datePicker');
-    await act(() => userEvent.type(inputElement, '12/06/2024{enter}'));
+    await act(async () => userEvent.type(inputElement, '12/06/2024{enter}'));
 
     const outsideElement = document.body;
     fireEvent.mouseDown(outsideElement);
@@ -931,9 +937,9 @@ describe(componentName, () => {
   it('render the component with input type time', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Time',
@@ -944,24 +950,24 @@ describe(componentName, () => {
     const isOperator = screen.getByRole('option', {
       name: 'is',
     });
-    await act(() => userEvent.click(isOperator));
+    await act(async () => userEvent.click(isOperator));
 
     const timeElement = document.querySelector('#time-picker');
-    await act(() => userEvent.type(timeElement, '12:30'));
+    await act(async () => userEvent.type(timeElement, '12:30'));
 
     const dayZoneElement = document.querySelector('#time-picker-day-zone');
-    await act(() =>
+    await act(async () =>
       fireEvent.change(dayZoneElement, { target: { value: 'PM' } })
     );
     expect(dayZoneElement).toHaveValue('PM');
 
     const timeZoneElement = document.querySelector('#time-picker-time-zone');
-    await act(() =>
+    await act(async () =>
       fireEvent.change(timeZoneElement, { target: { value: 'UTC' } })
     );
     expect(timeZoneElement).toHaveValue('UTC');
 
-    await act(() => userEvent.keyboard('{escape}'));
+    await act(async () => userEvent.keyboard('{escape}'));
 
     const selectedItem = screen.getByRole('button', { name: '12:30 PM UTC' });
 
@@ -977,21 +983,21 @@ describe(componentName, () => {
       />
     );
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     expect(screen.getByText('Continent'));
 
-    await act(() => userEvent.click(screen.getByText('Continent')));
+    await act(async () => userEvent.click(screen.getByText('Continent')));
 
     expect(screen.getByText('is'));
 
-    await act(() => userEvent.click(screen.getByText('is')));
+    await act(async () => userEvent.click(screen.getByText('is')));
 
     //fetching the options dynamically and it will be resolved after 2 seconds
 
     await waitFor(() => screen.getByText('Africa'), { timeout: 2500 });
 
-    await act(() => userEvent.click(screen.getByText('Africa')));
+    await act(async () => userEvent.click(screen.getByText('Africa')));
 
     const selectedItem = screen.getByRole('button', { name: 'Africa' });
 
@@ -1016,7 +1022,7 @@ describe(componentName, () => {
       />
     );
     //start builder
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     expect(screen.getByText('Condition Heading'));
   });
@@ -1031,11 +1037,11 @@ describe(componentName, () => {
       />
     );
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     //adding condition 1
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Continent',
@@ -1043,7 +1049,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'is',
@@ -1051,20 +1057,20 @@ describe(componentName, () => {
       )
     );
 
-    await act(() => userEvent.click(screen.getByText('Africa')));
+    await act(async () => userEvent.click(screen.getByText('Africa')));
 
     //adding condition 2
 
     let addButton = document.querySelector(`.${blockClass}__add-button`);
     expect(addButton);
-    await act(() => userEvent.click(addButton));
+    await act(async () => userEvent.click(addButton));
 
     const regionOption = screen.getByRole('option', {
       name: 'Region',
     });
-    await act(() => userEvent.click(regionOption));
+    await act(async () => userEvent.click(regionOption));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'is',
@@ -1072,7 +1078,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'India',
@@ -1086,16 +1092,16 @@ describe(componentName, () => {
       `.${blockClass}__add-condition-sub-group`
     );
     expect(addSubGroupButton);
-    await act(() => userEvent.click(addSubGroupButton));
+    await act(async () => userEvent.click(addSubGroupButton));
 
     //add third condition
 
     const colorOption = screen.getByRole('option', {
       name: 'Color',
     });
-    await act(() => userEvent.click(colorOption));
+    await act(async () => userEvent.click(colorOption));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'is',
@@ -1103,7 +1109,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'black',
@@ -1123,11 +1129,11 @@ describe(componentName, () => {
       />
     );
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
     //group 1
     //adding condition 1
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Continent',
@@ -1135,7 +1141,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'is',
@@ -1143,20 +1149,20 @@ describe(componentName, () => {
       )
     );
 
-    await act(() => userEvent.click(screen.getByText('Africa')));
+    await act(async () => userEvent.click(screen.getByText('Africa')));
 
     //adding condition 2
 
     let addButton = document.querySelector(`.${blockClass}__add-button`);
     expect(addButton);
-    await act(() => userEvent.click(addButton));
+    await act(async () => userEvent.click(addButton));
 
     const regionOption = screen.getByRole('option', {
       name: 'Region',
     });
-    await act(() => userEvent.click(regionOption));
+    await act(async () => userEvent.click(regionOption));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'is',
@@ -1164,7 +1170,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'India',
@@ -1178,16 +1184,16 @@ describe(componentName, () => {
       `.${blockClass}__add-condition-sub-group`
     );
     expect(addSubGroupButton);
-    await act(() => userEvent.click(addSubGroupButton));
+    await act(async () => userEvent.click(addSubGroupButton));
 
     //add third condition
 
     const colorOption = screen.getByRole('option', {
       name: 'Color',
     });
-    await act(() => userEvent.click(colorOption));
+    await act(async () => userEvent.click(colorOption));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'is',
@@ -1195,7 +1201,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'black',
@@ -1211,10 +1217,10 @@ describe(componentName, () => {
       `.${blockClass}__add-condition-group`
     );
     expect(addGroupButton);
-    await act(() => userEvent.click(addGroupButton));
+    await act(async () => userEvent.click(addGroupButton));
     //adding condition 1
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Continent',
@@ -1222,7 +1228,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'is',
@@ -1230,7 +1236,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Africa',
@@ -1254,14 +1260,14 @@ describe(componentName, () => {
       />
     );
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     let closeButtons = document.querySelectorAll(
       `.${blockClass}__close-condition`
     );
     expect(closeButtons).toHaveLength(4);
     //click first close button
-    await act(() => userEvent.click(closeButtons[0]));
+    await act(async () => userEvent.click(closeButtons[0]));
 
     closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
     expect(closeButtons).toHaveLength(3);
@@ -1270,7 +1276,7 @@ describe(componentName, () => {
 
     //click last close button
 
-    await act(() => userEvent.click(closeButtons[1]));
+    await act(async () => userEvent.click(closeButtons[1]));
     closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
     expect(closeButtons).toHaveLength(2);
     expect(closeButtons[1]).toHaveFocus();
@@ -1348,14 +1354,14 @@ describe(componentName, () => {
       />
     );
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     let closeButtons = document.querySelectorAll(
       `.${blockClass}__close-condition`
     );
     expect(closeButtons).toHaveLength(7);
     //click first close button
-    await act(() => userEvent.click(closeButtons[0]));
+    await act(async () => userEvent.click(closeButtons[0]));
 
     closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
     expect(closeButtons).toHaveLength(6);
@@ -1364,16 +1370,16 @@ describe(componentName, () => {
 
     //click 4th(first condition in first subgroup) close button
 
-    await act(() => userEvent.click(closeButtons[3]));
+    await act(async () => userEvent.click(closeButtons[3]));
     closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
     expect(closeButtons).toHaveLength(5);
     expect(closeButtons[3]).toHaveFocus();
 
     //close all conditions of the subgroup
 
-    await act(() => userEvent.click(closeButtons[4]));
+    await act(async () => userEvent.click(closeButtons[4]));
     closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
-    await act(() => userEvent.click(closeButtons[3]));
+    await act(async () => userEvent.click(closeButtons[3]));
     closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
     expect(closeButtons).toHaveLength(3);
 
@@ -1424,10 +1430,10 @@ describe(componentName, () => {
       />
     );
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     //click on add action button
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         document.querySelector(
           `.${blockClass}__actions-container .${blockClass}__add-button`
@@ -1440,7 +1446,7 @@ describe(componentName, () => {
         name: 'Add item to cart',
       })
     );
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Add item to cart',
@@ -1455,7 +1461,7 @@ describe(componentName, () => {
     );
 
     //add second action
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         document.querySelector(
           `.${blockClass}__actions-container .${blockClass}__add-button`
@@ -1468,7 +1474,7 @@ describe(componentName, () => {
         name: 'Proceed item to checkout',
       })
     );
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Proceed item to checkout',
@@ -1483,7 +1489,7 @@ describe(componentName, () => {
     );
 
     //add third action
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         document.querySelector(
           `.${blockClass}__actions-container .${blockClass}__add-button`
@@ -1496,7 +1502,7 @@ describe(componentName, () => {
         name: 'Add item to cart',
       })
     );
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Add item to cart',
@@ -1516,7 +1522,7 @@ describe(componentName, () => {
     );
     expect(closeConditions).toHaveLength(3);
 
-    await act(() => userEvent.click(closeConditions[2]));
+    await act(async () => userEvent.click(closeConditions[2]));
 
     closeConditions = document.querySelectorAll(
       `.${blockClass}__actions-container .${blockClass}__close-condition`
@@ -1533,7 +1539,7 @@ describe(componentName, () => {
       })
     ).toHaveLength(1);
 
-    await act(() => userEvent.click(closeConditions[1]));
+    await act(async () => userEvent.click(closeConditions[1]));
 
     closeConditions = document.querySelectorAll(
       `.${blockClass}__actions-container .${blockClass}__close-condition`
@@ -1618,11 +1624,11 @@ describe(componentName, () => {
       />
     );
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     expect(screen.getAllByRole('button', { name: 'if' })).toHaveLength(3);
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(document.querySelector(`.${blockClass}__close-condition`))
     );
 
@@ -1632,8 +1638,8 @@ describe(componentName, () => {
   it('check the custom input type', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 
-    await act(() => userEvent.click(screen.getByText('Add condition')));
-    await act(() =>
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'Product',
@@ -1641,7 +1647,7 @@ describe(componentName, () => {
       )
     );
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(
         screen.getByRole('option', {
           name: 'is greater than',
@@ -1653,7 +1659,7 @@ describe(componentName, () => {
     fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
-    await act(() => userEvent.click(container));
+    await act(async () => userEvent.click(container));
     // the value formatter will format to uppercase
     // cspell: disable
     const selectedItem = screen.getByRole('button', {
@@ -1686,23 +1692,23 @@ describe(componentName, () => {
     );
 
     // add one condition
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     expect(screen.getByRole('option', { name: 'Continent' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Continent' }))
     );
 
     expect(screen.getByRole('option', { name: 'is' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'is' }))
     );
 
     expect(screen.getByRole('option', { name: 'Africa' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Africa' }))
     );
 
@@ -1713,13 +1719,13 @@ describe(componentName, () => {
     //change statement option
 
     expect(screen.getByRole('button', { name: 'if' }));
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('button', { name: 'if' }))
     );
     expect(screen.getByRole('option', { name: 'if (and)' }));
     expect(screen.getByRole('option', { name: 'excl. if (or)' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'excl. if (or)' }))
     );
     expect(screen.getByRole('button', { name: 'excl. if' }));
@@ -1734,23 +1740,23 @@ describe(componentName, () => {
     );
 
     // add one condition
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     expect(screen.getByRole('option', { name: 'Continent' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Continent' }))
     );
 
     expect(screen.getByRole('option', { name: 'has value' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'has value' }))
     );
 
     expect(screen.getByRole('option', { name: 'Africa' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Africa' }))
     );
 
@@ -1766,23 +1772,23 @@ describe(componentName, () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputConfig_} />);
 
     // add one condition
-    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(async () => userEvent.click(screen.getByText('Add condition')));
 
     expect(screen.getByRole('option', { name: 'Continent' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Continent' }))
     );
 
     expect(screen.getByRole('option', { name: 'is' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'is' }))
     );
 
     expect(screen.getByRole('option', { name: 'Africa' }));
 
-    await act(() =>
+    await act(async () =>
       userEvent.click(screen.getByRole('option', { name: 'Africa' }))
     );
 
@@ -1790,7 +1796,7 @@ describe(componentName, () => {
 
     expect(selectedItem);
     //hover on property
-    await act(() =>
+    await act(async () =>
       user.hover(document.querySelector(`.${blockClass}__property-field`))
     );
     expect(screen.getByText('This is a tooltip')).toBeInTheDocument();
@@ -1808,121 +1814,121 @@ describe(componentName, () => {
     );
 
     expect(screen.getByText('Add condition'));
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(screen.getByText('Add condition')).toHaveFocus();
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
 
     //adding first condition
 
     expect(screen.getByRole('searchbox')).toHaveFocus();
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(
       screen.getByRole('option', {
         name: 'Continent',
       })
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
     expect(
       screen.getByRole('option', {
         name: 'is',
       })
     ).toHaveFocus();
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
 
     expect(screen.getByRole('searchbox')).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(
       screen.getByRole('option', {
         name: 'Africa',
       })
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
 
     expect(screen.getByText('Continent'));
     expect(screen.getByText('is'));
     expect(screen.getByRole('button', { name: 'Africa' })).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
 
     expect(
       document.querySelector(`.${blockClass}__close-condition`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
 
     expect(document.querySelector(`.${blockClass}__add-button`)).toHaveFocus();
 
     //adding second condition
 
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
     expect(screen.getByRole('searchbox')).toHaveFocus();
-    await act(() => userEvent.keyboard('{Tab}'));
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       screen.getByRole('option', {
         name: 'Region',
       })
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{Enter}'));
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
 
     expect(
       screen.getByRole('option', {
         name: 'is one of',
       })
     ).toHaveFocus();
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
 
     expect(screen.getByRole('searchbox')).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{Tab}'));
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(
       screen.getByRole('option', {
         name: 'Afghanistan',
       })
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard(' '));
-    await act(() => userEvent.keyboard('{Escape}'));
+    await act(async () => userEvent.keyboard(' '));
+    await act(async () => userEvent.keyboard('{Escape}'));
 
     expect(screen.getByText('Region'));
     expect(screen.getByText('is one of'));
     expect(screen.getByRole('button', { name: 'Afghanistan' })).toHaveFocus();
 
     //checking arrow up/down will select next row same cell
-    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
     expect(screen.getByRole('button', { name: 'Africa' })).toHaveFocus();
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(screen.getByRole('button', { name: 'Afghanistan' })).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
 
     expect(
       document.querySelectorAll(`.${blockClass}__close-condition`)[1]
     ).toHaveFocus();
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
     expect(
       document.querySelectorAll(`.${blockClass}__close-condition`)[0]
     ).toHaveFocus();
-    await act(() => userEvent.keyboard('{ArrowLeft}'));
-    await act(() => userEvent.keyboard('{ArrowLeft}'));
+    await act(async () => userEvent.keyboard('{ArrowLeft}'));
+    await act(async () => userEvent.keyboard('{ArrowLeft}'));
 
-    await act(() => userEvent.keyboard('{ArrowLeft}'));
+    await act(async () => userEvent.keyboard('{ArrowLeft}'));
     expect(screen.getByRole('button', { name: 'Continent' })).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowRight}'));
-    await act(() => userEvent.keyboard('{ArrowRight}'));
-    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
     expect(
       document.querySelectorAll(`.${blockClass}__close-condition`)[0]
     ).toHaveFocus();
-    await act(() => userEvent.keyboard('{Enter}'));
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(screen.getByText('Add condition')).toHaveFocus();
   });
 
@@ -1938,111 +1944,111 @@ describe(componentName, () => {
 
     //adding first condition
     expect(screen.getByText('Add condition'));
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(screen.getByText('Add condition')).toHaveFocus();
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
 
     expect(screen.getByRole('searchbox')).toHaveFocus();
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(
       screen.getByRole('option', {
         name: 'Continent',
       })
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
     expect(
       screen.getByRole('option', {
         name: 'is',
       })
     ).toHaveFocus();
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
 
     expect(screen.getByRole('searchbox')).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(
       screen.getByRole('option', {
         name: 'Africa',
       })
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowDown}'));
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       screen.getByRole('option', {
         name: 'Asia',
       })
     ).toHaveFocus();
-    await act(() => userEvent.keyboard('{ArrowUp}'));
-    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
 
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
 
     expect(screen.getByText('Continent'));
     expect(screen.getByText('is'));
     expect(screen.getByRole('button', { name: 'Africa' })).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
 
     expect(
       document.querySelector(`.${blockClass}__close-condition`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
 
     expect(document.querySelector(`.${blockClass}__add-button`)).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
     expect(
       document.querySelector(`.${blockClass}__add-condition-sub-group`)
     ).toHaveFocus();
 
     //adding second condition
 
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
     expect(screen.getByRole('searchbox')).toHaveFocus();
-    await act(() => userEvent.keyboard('{Tab}'));
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       screen.getByRole('option', {
         name: 'Region',
       })
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{Enter}'));
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
 
     expect(
       screen.getByRole('option', {
         name: 'is one of',
       })
     ).toHaveFocus();
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
 
     expect(screen.getByRole('searchbox')).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{Tab}'));
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(
       screen.getByRole('option', {
         name: 'Afghanistan',
       })
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard(' '));
-    await act(() => userEvent.keyboard('{Escape}'));
+    await act(async () => userEvent.keyboard(' '));
+    await act(async () => userEvent.keyboard('{Escape}'));
 
     expect(screen.getByText('Region'));
     expect(screen.getByText('is one of'));
     expect(screen.getByRole('button', { name: 'Afghanistan' })).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
 
     expect(
       document.querySelectorAll(`.${blockClass}__close-condition`)[1]
     ).toHaveFocus();
-    await act(() => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
 
     expect(
       document.querySelector(
@@ -2050,8 +2056,8 @@ describe(componentName, () => {
       )
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{Enter}'));
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(screen.getByText('Add condition')).toHaveFocus();
   });
 
@@ -2066,53 +2072,53 @@ describe(componentName, () => {
     );
 
     expect(screen.getByText('Add condition'));
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
     expect(screen.getByText('Add condition')).toHaveFocus();
-    await act(() => userEvent.keyboard('{Enter}'));
-    await act(() => userEvent.keyboard('{Tab}'));
+    await act(async () => userEvent.keyboard('{Enter}'));
+    await act(async () => userEvent.keyboard('{Tab}'));
 
     expect(
       document.querySelector(`[role="row"][aria-level="1"][aria-posinset="1"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="2"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="3"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       document.querySelector(`[role="row"][aria-level="3"][aria-posinset="1"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       document.querySelector(`[role="row"][aria-level="3"][aria-posinset="2"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       document.querySelectorAll(
         `[role="row"][aria-level="3"][aria-posinset="1"]`
       )[1]
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(async () => userEvent.keyboard('{ArrowDown}'));
     expect(
       document.querySelectorAll(
         `[role="row"][aria-level="3"][aria-posinset="2"]`
@@ -2121,49 +2127,49 @@ describe(componentName, () => {
 
     //reverse row navigation
 
-    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
     expect(
       document.querySelectorAll(
         `[role="row"][aria-level="3"][aria-posinset="1"]`
       )[1]
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
     expect(
       document.querySelector(`[role="row"][aria-level="3"][aria-posinset="2"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
     expect(
       document.querySelector(`[role="row"][aria-level="3"][aria-posinset="1"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="3"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="2"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(async () => userEvent.keyboard('{ArrowUp}'));
     expect(
       document.querySelector(`[role="row"][aria-level="1"][aria-posinset="1"]`)
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(async () => userEvent.keyboard('{ArrowRight}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
     ).toHaveFocus();

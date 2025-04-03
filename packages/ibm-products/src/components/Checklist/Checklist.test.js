@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React from 'react';
+import { render, screen, fireEvent, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
@@ -153,7 +153,7 @@ describe(componentName, () => {
 
     expect(screen.getByLabelText(checklistToggleAriaLabel)).toBeDefined();
     const enableToggleButton = screen.getByLabelText(checklistToggleAriaLabel);
-    await act(() => click(enableToggleButton));
+    await act(async () => click(enableToggleButton));
     // onToggle is called initially because the component defaults to being open which
     // causes onToggle to be called. Then we click it again in this test, causing
     // onToggle to be called 2 times

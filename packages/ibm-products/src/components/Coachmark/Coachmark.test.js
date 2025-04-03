@@ -5,8 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act } from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React from 'react';
+import {
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+  act,
+} from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
@@ -95,7 +101,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     screen.getByTestId(childDataTestId);
   });
 

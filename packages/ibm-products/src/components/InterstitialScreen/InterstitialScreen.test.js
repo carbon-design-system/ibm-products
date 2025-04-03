@@ -221,7 +221,7 @@ describe(componentName, () => {
 
     const nextButtonElement = screen.getByText('Next');
     expect(nextButtonElement).toHaveClass(`${blockClass}--next-btn`);
-    await act(() => userEvent.click(nextButtonElement));
+    await act(async () => userEvent.click(nextButtonElement));
     expect(listElement1).toHaveClass(
       `${carbon.prefix}--progress-step--complete`
     );
@@ -235,7 +235,7 @@ describe(componentName, () => {
     expect(screen.getByText('Back')).toBeInTheDocument();
     const backButtonElement = screen.getByText('Back');
     expect(backButtonElement).toHaveClass(`${blockClass}--prev-btn`);
-    await act(() => userEvent.click(backButtonElement));
+    await act(async () => userEvent.click(backButtonElement));
     expect(listElement1).toHaveClass(
       `${carbon.prefix}--progress-step--current`
     );
@@ -250,7 +250,7 @@ describe(componentName, () => {
       interstitialAriaLabel: 'Modal Interstitial Screen',
     });
     const closeBtn = screen.getByLabelText('Close');
-    await act(() => userEvent.click(closeBtn));
+    await act(async () => userEvent.click(closeBtn));
     expect(onClose).toBeCalled();
   });
 

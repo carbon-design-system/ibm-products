@@ -73,7 +73,7 @@ describe(componentName, () => {
 
     change(textInput, { target: { value: `${props.filename}.pdf` } });
     blur(textInput);
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).toBeCalled();
   });
 
@@ -93,7 +93,7 @@ describe(componentName, () => {
       `.${carbon.prefix}--btn--primary`
     );
 
-    await act(() => click(submitBtn));
+    await act(async () => click(submitBtn));
     expect(onRequestSubmit).not.toBeCalled();
   });
 
@@ -114,13 +114,13 @@ describe(componentName, () => {
 
     change(textInput, { target: { value: `${props.filename}` } });
     blur(textInput);
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
     screen.getByText(props.invalidInputText);
 
     change(textInput, { target: { value: `${props.filename}.mp3` } });
     blur(textInput);
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
     screen.getByText(props.invalidInputText);
   });
@@ -151,11 +151,13 @@ describe(componentName, () => {
     const { getByLabelText } = render(<ExportModal {...props} />);
 
     screen.getByText(props.preformattedExtensionsLabel);
-    await act(() => click(getByLabelText('BAR (best for integration server)')));
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () =>
+      click(getByLabelText('BAR (best for integration server)'))
+    );
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).toBeCalledWith(`${props.filename}.bar`);
 
-    await act(() => click(screen.getByText(props.secondaryButtonText)));
+    await act(async () => click(screen.getByText(props.secondaryButtonText)));
     expect(onClose).toBeCalled();
   });
 

@@ -48,7 +48,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
@@ -61,7 +61,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
@@ -77,7 +77,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
@@ -92,7 +92,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     screen.getByTestId(tmpTestID);
   });
 
@@ -107,7 +107,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     expect(ref.current).toHaveClass(blockClass);
   });
 
@@ -121,7 +121,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );

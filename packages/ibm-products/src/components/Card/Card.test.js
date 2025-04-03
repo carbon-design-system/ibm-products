@@ -28,7 +28,7 @@ describe(componentName, () => {
       onPrimaryButtonClick,
     };
     render(<Card {...props} />);
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
 
@@ -43,9 +43,9 @@ describe(componentName, () => {
       onSecondaryButtonClick,
     };
     render(<Card {...props} />);
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
     expect(onPrimaryButtonClick).toHaveBeenCalled();
-    await act(() => click(screen.getByText(props.secondaryButtonText)));
+    await act(async () => click(screen.getByText(props.secondaryButtonText)));
     expect(onSecondaryButtonClick).toHaveBeenCalled();
   });
 
@@ -70,7 +70,7 @@ describe(componentName, () => {
       actionIcons,
     };
     render(<Card {...props} />);
-    await act(() => click(screen.getByText('withOnClick')));
+    await act(async () => click(screen.getByText('withOnClick')));
     expect(onClick).toHaveBeenCalled();
     expect(screen.getByText('withHref').closest('a')).toHaveAttribute(
       'href',
@@ -85,7 +85,7 @@ describe(componentName, () => {
       onClick,
     };
     const { container } = render(<Card {...props} />);
-    await act(() => click(container.firstChild));
+    await act(async () => click(container.firstChild));
     expect(onClick).toHaveBeenCalled();
   });
 
@@ -131,13 +131,13 @@ describe(componentName, () => {
     expect(
       container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
     ).toBeVisible();
-    await act(() => click(screen.getByText('withOnClick')));
+    await act(async () => click(screen.getByText('withOnClick')));
     expect(iconClick).toHaveBeenCalled();
     expect(screen.getByText('withHref').closest('a')).toHaveAttribute(
       'href',
       '#'
     );
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
     expect(buttonClick).toHaveBeenCalled();
     rerender(<Card {...props} actionsPlacement="top" />);
     expect(
@@ -165,9 +165,9 @@ describe(componentName, () => {
     const secondaryButtonElement = screen.getByText(/Secondary button/i);
     expect(primaryButtonElement).toHaveAttribute('disabled');
     expect(secondaryButtonElement).toHaveAttribute('disabled');
-    await act(() => click(primaryButtonElement));
+    await act(async () => click(primaryButtonElement));
     expect(primaryButtonClick).toHaveBeenCalledTimes(0);
-    await act(() => click(secondaryButtonElement));
+    await act(async () => click(secondaryButtonElement));
     expect(secondaryButtonClick).toHaveBeenCalledTimes(0);
   });
 
@@ -189,10 +189,10 @@ describe(componentName, () => {
     expect(
       container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
     ).toBeVisible();
-    await act(() =>
+    await act(async () =>
       click(container.querySelector(`.${carbon.prefix}--overflow-menu`))
     );
-    await act(() => click(screen.getByText('Edit')));
+    await act(async () => click(screen.getByText('Edit')));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} actionsPlacement="top" />);
     expect(
@@ -216,17 +216,17 @@ describe(componentName, () => {
     const { rerender, container } = render(<Card {...props} />);
     expect(screen.getByText(props.title)).toBeVisible();
     expect(screen.getByText(props.description)).toBeVisible();
-    await act(() =>
+    await act(async () =>
       click(container.querySelector(`.${blockClass}__clickable`))
     );
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} clickZone="two" />);
-    await act(() =>
+    await act(async () =>
       click(container.querySelector(`.${blockClass}__clickable`))
     );
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} clickZone="three" />);
-    await act(() =>
+    await act(async () =>
       click(container.querySelector(`.${blockClass}__clickable`))
     );
     expect(onClick).toHaveBeenCalled();

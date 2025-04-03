@@ -74,7 +74,7 @@ const DraggableElement = ({
         [`${blockClass}__draggable-handleHolder--sticky`]: isSticky,
         [`${blockClass}__draggable-handleHolder--dragging`]: isDragging,
       })}
-      id={elementId}
+      id={elementId ? elementId : id}
       ref={setNodeRef}
       style={style}
       {...attributes}

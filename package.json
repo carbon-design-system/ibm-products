@@ -80,6 +80,7 @@
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.22.0",
     "@playwright/test": "^1.51.0",
+    "@stackblitz/sdk": "^1.11.0",
     "@testing-library/dom": "^8.11.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^8.0.1",

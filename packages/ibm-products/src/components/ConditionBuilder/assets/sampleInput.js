@@ -475,19 +475,9 @@ const colors = [
 // };
 
 const customOperators = [
-  {
-    label: 'has value',
-    id: 'hasValue',
-  },
-  {
-    label: 'has no value',
-    id: 'hasNoValue',
-  },
-  {
-    label: 'has values',
-    id: 'hasValues',
-    isMultiSelect: true,
-  },
+  { label: 'has value', id: 'hasValue' },
+  { label: 'has no value', id: 'hasNoValue' },
+  { label: 'has values', id: 'hasValues', isMultiSelect: true },
 ];
 
 export const inputData = {
@@ -500,26 +490,11 @@ export const inputData = {
       description: 'Continent',
       config: {
         options: [
-          {
-            label: 'Africa',
-            id: 'Africa',
-          },
-          {
-            label: 'Antarctica',
-            id: 'Antarctica',
-          },
-          {
-            label: 'Asia',
-            id: 'Asia',
-          },
-          {
-            label: 'Australia',
-            id: 'Australia',
-          },
-          {
-            label: 'Europe',
-            id: 'Europe',
-          },
+          { label: 'Africa', id: 'Africa' },
+          { label: 'Antarctica', id: 'Antarctica' },
+          { label: 'Asia', id: 'Asia' },
+          { label: 'Australia', id: 'Australia' },
+          { label: 'Europe', id: 'Europe' },
         ],
       },
     },
@@ -561,13 +536,7 @@ export const inputData = {
         }),
       },
     },
-    {
-      id: 'id',
-      label: 'ID',
-      icon: Hashtag,
-      type: 'text',
-      config: {},
-    },
+    { id: 'id', label: 'ID', icon: Hashtag, type: 'text', config: {} },
     {
       id: 'id_long',
       label: 'Id Long',
@@ -580,27 +549,21 @@ export const inputData = {
       label: 'Price',
       icon: Currency,
       type: 'number',
-      config: {
-        min: 0,
-        step: 1,
-        unit: 'Dollars',
-      },
+      config: { min: 0, step: 1, unit: 'Dollars' },
     },
     {
       id: 'date',
       label: 'Date',
       icon: Calendar,
       type: 'date',
-      config: {},
+      config: { locale: 'en', dateFormat: 'd/m/Y' },
     },
     {
       id: 'time',
       label: 'Time',
       icon: Calendar,
       type: 'time',
-      config: {
-        timeZones: ['IST', 'CET', 'UTC', 'LOCAL'],
-      },
+      config: { timeZones: ['IST', 'CET', 'UTC', 'LOCAL'] },
     },
     {
       id: 'delivery',
@@ -609,26 +572,11 @@ export const inputData = {
       type: 'option',
       config: {
         options: [
-          {
-            label: 'Processing',
-            id: 'Processing',
-          },
-          {
-            label: 'Preparing for dispatch',
-            id: 'Preparing for dispatch',
-          },
-          {
-            label: 'Dispatched',
-            id: 'Dispatched',
-          },
-          {
-            label: 'In delivery',
-            id: 'In delivery',
-          },
-          {
-            label: 'Delivered',
-            id: 'Delivered',
-          },
+          { label: 'Processing', id: 'Processing' },
+          { label: 'Preparing for dispatch', id: 'Preparing for dispatch' },
+          { label: 'Dispatched', id: 'Dispatched' },
+          { label: 'In delivery', id: 'In delivery' },
+          { label: 'Delivered', id: 'Delivered' },
         ],
       },
     },
@@ -639,22 +587,10 @@ export const inputData = {
       type: 'option',
       config: {
         options: [
-          {
-            label: 'Winter',
-            id: 'Winter',
-          },
-          {
-            label: 'Spring',
-            id: 'Spring',
-          },
-          {
-            label: 'Summer',
-            id: 'Summer',
-          },
-          {
-            label: 'Fall',
-            id: 'Fall',
-          },
+          { label: 'Winter', id: 'Winter' },
+          { label: 'Spring', id: 'Spring' },
+          { label: 'Summer', id: 'Summer' },
+          { label: 'Fall', id: 'Fall' },
         ],
       },
     },
@@ -668,7 +604,7 @@ export const inputData = {
         operators: customOperators,
         valueFormatter: (value) => {
           // add any customization to the value to be populated
-          return value;
+          return value.toLocaleUpperCase();
         },
       },
     },
@@ -679,19 +615,13 @@ function modifyPropertiesWithoutCustomOperators(inputData) {
     if (property.id === 'continent') {
       return {
         ...property,
-        config: {
-          ...property.config,
-          operators: customOperators,
-        },
+        config: { ...property.config, operators: customOperators },
       };
     }
     if (property.id === 'id') {
       return {
         ...property,
-        config: {
-          ...property.config,
-          operators: customOperators.slice(0, 2),
-        },
+        config: { ...property.config, operators: customOperators.slice(0, 2) },
       };
     }
     return property;
@@ -712,13 +642,7 @@ export const inputDataDynamicOptions = {
       type: 'option',
       config: {},
     },
-    {
-      id: 'region',
-      label: 'Region',
-      icon: Flag,
-      type: 'option',
-      config: {},
-    },
+    { id: 'region', label: 'Region', icon: Flag, type: 'option', config: {} },
     {
       id: 'color',
       label: 'Color',
@@ -726,48 +650,34 @@ export const inputDataDynamicOptions = {
       type: 'option',
       config: {},
     },
-    {
-      id: 'id',
-      label: 'ID',
-      icon: Hashtag,
-      type: 'text',
-      config: {},
-    },
+    { id: 'id', label: 'ID', icon: Hashtag, type: 'text', config: {} },
     {
       id: 'price',
       label: 'Price',
       icon: Currency,
       type: 'number',
-      config: {
-        min: 0,
-        step: 1,
-        unit: 'Dollars',
-      },
+      config: { min: 0, step: 1, unit: 'Dollars' },
     },
     {
       id: 'date',
       label: 'Date',
       icon: Calendar,
       type: 'date',
-      config: {},
+      config: {
+        locale: 'en-US',
+        dateFormat: 'M j, Y',
+        // datePickerType:'range'
+      },
     },
     {
       id: 'time',
       label: 'Time',
       icon: Calendar,
       type: 'time',
-      config: {
-        timeZones: ['IST', 'CET', 'UTC', 'LOCAL'],
-      },
+      config: { timeZones: ['IST', 'CET', 'UTC', 'LOCAL'] },
     },
 
-    {
-      id: 'product',
-      label: 'Product',
-      icon: Cube,
-      type: 'text',
-      config: {},
-    },
+    { id: 'product', label: 'Product', icon: Cube, type: 'text', config: {} },
     {
       id: 'delivery',
       label: 'Delivery',
@@ -775,26 +685,11 @@ export const inputDataDynamicOptions = {
       type: 'option',
       config: {
         options: [
-          {
-            label: 'Processing',
-            id: 'Processing',
-          },
-          {
-            label: 'Preparing for dispatch',
-            id: 'Preparing for dispatch',
-          },
-          {
-            label: 'Dispatched',
-            id: 'Dispatched',
-          },
-          {
-            label: 'In delivery',
-            id: 'In delivery',
-          },
-          {
-            label: 'Delivered',
-            id: 'Delivered',
-          },
+          { label: 'Processing', id: 'Processing' },
+          { label: 'Preparing for dispatch', id: 'Preparing for dispatch' },
+          { label: 'Dispatched', id: 'Dispatched' },
+          { label: 'In delivery', id: 'In delivery' },
+          { label: 'Delivered', id: 'Delivered' },
         ],
       },
     },
@@ -805,22 +700,10 @@ export const inputDataDynamicOptions = {
       type: 'option',
       config: {
         options: [
-          {
-            label: 'Winter',
-            id: 'Winter',
-          },
-          {
-            label: 'Spring',
-            id: 'Spring',
-          },
-          {
-            label: 'Summer',
-            id: 'Summer',
-          },
-          {
-            label: 'Fall',
-            id: 'Fall',
-          },
+          { label: 'Winter', id: 'Winter' },
+          { label: 'Spring', id: 'Spring' },
+          { label: 'Summer', id: 'Summer' },
+          { label: 'Fall', id: 'Fall' },
         ],
       },
     },

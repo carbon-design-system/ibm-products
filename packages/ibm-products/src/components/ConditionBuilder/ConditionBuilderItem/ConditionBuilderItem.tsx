@@ -215,7 +215,6 @@ export const ConditionBuilderItem = ({
   const getCustomOperatorLabel = (propertyLabel) => {
     return (
       propertyLabel &&
-      // @ts-ignore
       config?.operators?.find((operator) => {
         return operator.id === propertyLabel;
       })
@@ -223,9 +222,8 @@ export const ConditionBuilderItem = ({
   };
 
   const getLabel = () => {
-    // @ts-ignore
     if (config?.operators && rest['data-name'] === 'operatorField') {
-      return getCustomOperatorLabel(propertyLabel)?.label ?? propertyLabel;
+      return getCustomOperatorLabel(propertyLabel)?.label ?? addOperatorText;
     } else if (propertyLabel) {
       return propertyLabel;
     } else if (rest['data-name'] === 'propertyField') {

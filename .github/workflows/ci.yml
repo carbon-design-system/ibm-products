@@ -206,6 +206,7 @@ jobs:
       - name: Run VRT
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
+          TEST_TOKEN: 1234
         if:
           ${{ github.repository == 'carbon-design-system/ibm-products' &&
           github.event.pull_request.draft == false }}

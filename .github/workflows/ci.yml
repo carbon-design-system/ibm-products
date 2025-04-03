@@ -205,8 +205,8 @@ jobs:
         run: yarn build
       - name: Run VRT
         if:
-          github.repository == 'carbon-design-system/ibm-products &&
-          github.event.pull_request.draft == false'
+          ${{ github.repository == 'carbon-design-system/ibm-products' &&
+          github.event.pull_request.draft == false }}
         working-directory: packages/core
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}

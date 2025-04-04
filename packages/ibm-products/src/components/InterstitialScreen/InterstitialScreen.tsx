@@ -1,49 +1,40 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  Button,
-  Column,
-  ComposedModal,
-  FlexGrid,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ProgressIndicator,
-  ProgressStep,
-  Row,
-} from '@carbon/react';
+import { ComposedModal } from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
-  Children,
-  PropsWithChildren,
   ReactNode,
-  isValidElement,
+  RefObject,
+  createContext,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
 
-import { ArrowRight } from '@carbon/react/icons';
-import { Carousel } from '../Carousel';
 // Other standard imports.
 import PropTypes from 'prop-types';
 // Other standard imports.
 import cx from 'classnames';
-import { clamp } from '../../global/js/utils/clamp';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+import InterstitialScreenHeader, {
+  InterstitialScreenHeaderProps,
+} from './InterstitialScreenHeader';
+import InterstitialScreenBody, {
+  InterstitialScreenBodyProps,
+} from './InterstitialScreenBody';
+import InterstitialScreenFooter, {
+  InterstitialScreenFooterProps,
+} from './InterstitialScreenFooter';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--interstitial-screen`;
-const headerBlockClass = `${blockClass}--internal-header`;
-const bodyBlockClass = `${blockClass}--internal-body`;
 const componentName = 'InterstitialScreen';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -60,24 +51,14 @@ const componentName = 'InterstitialScreen';
 // Default values for props
 const defaults = {
   closeIconDescription: 'Close',
-  domainName: '',
   hideProgressIndicator: false,
   interstitialAriaLabel: 'Interstitial screen',
   isFullScreen: false,
   isOpen: false,
-  nextButtonLabel: 'Next',
   onClose: () => {},
-  previousButtonLabel: 'Back',
-  productName: '',
-  skipButtonLabel: '',
-  startButtonLabel: 'Get started',
 };
 
-type BreakpointsWithMedia = {
-  xlg?: number;
-  lg?: number;
-};
-export interface InterstitialScreenProps extends PropsWithChildren {
+export interface InterstitialScreenProps {
   /**
    * Provide the contents of the InterstitialScreen.
    */
@@ -88,22 +69,6 @@ export interface InterstitialScreenProps extends PropsWithChildren {
    */
   className?: string;
 
-  /**
-   * Tooltip text and aria label for the Close button icon.
-   */
-  closeIconDescription?: string;
-  /**
-   * The domain this app belongs to, e.g. "IBM Cloud Pak".
-   */
-  domainName?: string;
-  /**
-   * Provide an optional class to be applied to the <header> element >.
-   */
-  headerClassName?: string;
-  /**
-   * Provide an optional class to be applied to the <header> element >.
-   */
-  headerTitle?: string;
   /**
    * Optional parameter to hide the progress indicator when multiple steps are used.
    */
@@ -124,48 +89,45 @@ export interface InterstitialScreenProps extends PropsWithChildren {
   isOpen?: boolean;
 
   /**
-   * Optional prop to render any media like images or any animated media.
-   */
-  renderMedia?: (params) => ReactNode;
-
-  /**
-   * optional prop to specify breakpoints when media is rendered through renderMedia
-   * Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size.
-   * Medium and small breakpoints will be set to 0 internally to focus on the main content area.
-   */
-  breakpointsWithMedia?: BreakpointsWithMedia;
-  /**
-   * The label for the Next button.
-   */
-  nextButtonLabel?: string;
-  /**
    * Function to call when the close button is clicked.
    */
   onClose?: () => void;
-  /**
-   * The label for the Previous button.
-   */
-  previousButtonLabel?: string;
-  /**
-   * The name of this app, e.g. "QRadar".
-   */
-  productName?: string;
-
-  /**
-   * The label for the skip button.
-   */
-  skipButtonLabel?: string;
-  /**
-   * The label for the start button.
-   */
-  startButtonLabel?: string;
 }
 
-type EnrichedChildren = {
-  children?: ReactNode;
-  stepTitle?: string;
-  translateWithId?: (id: string) => string;
+// Define the type for InterstitialScreen, extending it to include Header
+type InterstitialScreenComponent = React.ForwardRefExoticComponent<
+  InterstitialScreenProps & React.RefAttributes<HTMLDivElement>
+> & {
+  Header: React.FC<InterstitialScreenHeaderProps>;
+  Body: React.FC<InterstitialScreenBodyProps>;
+  Footer: React.FC<InterstitialScreenFooterProps>;
 };
+
+export type disableButtonConfigType = {
+  skip?: boolean;
+  back?: boolean;
+  next?: boolean;
+  start?: boolean;
+};
+interface InterstitialScreenContextType {
+  hideProgressIndicator?: boolean;
+  bodyChildrenData?: ReactNode;
+  setBodyChildrenData?: (value: ReactNode) => void;
+  isFullScreen?: boolean;
+  handleClose?: () => void;
+  progStep: number;
+  setProgStep?: (value: number) => void;
+  bodyScrollRef?: RefObject<HTMLDivElement | null>;
+  scrollRef?: RefObject<HTMLDivElement>;
+  handleGotoStep?: (value: number) => void;
+  stepCount: number;
+  setStepCount?: (value: number) => void;
+  disableButtonConfig?: disableButtonConfigType;
+  setDisableButtonConfig?: (value: disableButtonConfigType) => void;
+}
+
+export const InterstitialScreenContext =
+  createContext<InterstitialScreenContextType>({ progStep: 0, stepCount: 0 });
 /**
  * InterstitialScreen can be a full page or an overlay, and are
  * shown on the first time a user accesses a new experience
@@ -179,22 +141,11 @@ export let InterstitialScreen = React.forwardRef<
   const {
     children,
     className,
-    closeIconDescription = defaults.closeIconDescription,
-    domainName = defaults.domainName,
     hideProgressIndicator = defaults.hideProgressIndicator,
     interstitialAriaLabel = defaults.interstitialAriaLabel,
     isFullScreen = defaults.isFullScreen,
     isOpen = defaults.isOpen,
-    renderMedia,
-    breakpointsWithMedia,
-    nextButtonLabel = defaults.nextButtonLabel,
     onClose = defaults.onClose,
-    previousButtonLabel = defaults.previousButtonLabel,
-    productName = defaults.productName,
-    headerClassName,
-    headerTitle,
-    startButtonLabel = defaults.startButtonLabel,
-    skipButtonLabel = defaults.skipButtonLabel,
     ...rest
   } = props;
   const backupRef = useRef<HTMLDivElement>(null);
@@ -203,55 +154,28 @@ export let InterstitialScreen = React.forwardRef<
   const startButtonRef = useRef<HTMLElement | undefined>(undefined);
   const nextButtonRef = useRef<HTMLElement | undefined>(undefined);
   const [isVisibleClass, setIsVisibleClass] = useState<string | null>(null);
-  const [progStep, setProgStep] = useState(0);
-  const childArray = Children.toArray(children);
-  const isMultiStep = childArray.length > 1;
+  const [progStep, setProgStep] = useState<number>(0);
   const bodyScrollRef = useRef<HTMLDivElement>(null);
-  const mediaBreakpoints = {
-    xlg: breakpointsWithMedia?.xlg || 0,
-    lg: breakpointsWithMedia?.lg || 0,
-    md: 0,
-    sm: 0,
-  };
-  const contentBreakpoints = {
-    xlg: 16 - mediaBreakpoints.xlg,
-    lg: 16 - mediaBreakpoints.lg,
-    md: 8,
-    sm: 4,
-  };
+  const [stepCount, setStepCount] = useState<number>(0);
+
+  const [disableButtonConfig, setDisableButtonConfig] =
+    useState<disableButtonConfigType>({
+      skip: false,
+      back: false,
+      next: false,
+      start: false,
+    });
 
   const variantClass = isFullScreen
     ? `${blockClass}--full-screen`
     : `${blockClass}--modal`;
 
-  const progStepFloor = 0;
-  const progStepCeil = childArray.length - 1;
+  const [bodyChildrenData, setBodyChildrenData] = useState<ReactNode>(null);
 
   const handleClose = useCallback(() => {
     setProgStep(0);
     onClose();
   }, [onClose]);
-
-  const scrollBodyToTop = () => {
-    bodyScrollRef.current?.scroll?.({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
-  const handleClickPrev = () => {
-    const targetStep = clamp(progStep - 1, progStepFloor, progStepCeil);
-    scrollRef.current.scrollPrev();
-    scrollBodyToTop();
-    setProgStep(targetStep as number);
-  };
-
-  const handleClickNext = () => {
-    const targetStep = clamp(progStep + 1, progStepFloor, progStepCeil);
-    scrollRef.current.scrollNext();
-    scrollBodyToTop();
-    setProgStep(targetStep as number);
-  };
 
   useEffect(() => {
     if (!isOpen) {
@@ -278,21 +202,11 @@ export let InterstitialScreen = React.forwardRef<
     return () => window.removeEventListener('keydown', close);
   }, [handleClose]);
 
-  const stepSize = useMemo(
-    () =>
-      children && Children.count(children) > 1
-        ? parseFloat((1 / (Children.count(children) - 1)).toFixed(2))
-        : 0,
-    [children]
-  );
-
   if (!isOpen) {
     return null;
   }
-  const domainProductDelimiter =
-    domainName !== '' && productName !== '' ? ' | ' : '';
 
-  const renderModal = (childElements) => {
+  const renderModal = () => {
     return (
       <ComposedModal
         {...rest}
@@ -308,40 +222,12 @@ export let InterstitialScreen = React.forwardRef<
         aria-label={interstitialAriaLabel}
         {...getDevtoolsProps(componentName)}
       >
-        <ModalHeader
-          className={cx(
-            headerBlockClass,
-            headerTitle && `${headerBlockClass}--has-title`,
-            headerClassName
-          )}
-          iconDescription={closeIconDescription}
-        >
-          {headerTitle && <h2>{headerTitle}</h2>}
-          {!hideProgressIndicator && (
-            <div className={`${blockClass}--progress`}>
-              <ProgressIndicator vertical={false} currentIndex={progStep}>
-                {childArray.map((child: ReactNode, idx) => {
-                  if (isValidElement<EnrichedChildren>(child)) {
-                    return (
-                      <ProgressStep
-                        key={idx}
-                        label={child.props.stepTitle || ''}
-                        translateWithId={child.props.translateWithId}
-                      />
-                    );
-                  }
-                })}
-              </ProgressIndicator>
-            </div>
-          )}
-        </ModalHeader>
-        <ModalBody className={bodyBlockClass}>{childElements}</ModalBody>
-        <ModalFooter>{renderFooter()}</ModalFooter>
+        {children}
       </ComposedModal>
     );
   };
 
-  const renderFullScreen = (childElements) => {
+  const renderFullScreen = () => {
     return (
       <div
         {...rest}
@@ -356,199 +242,50 @@ export let InterstitialScreen = React.forwardRef<
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <div className={cx([{ [`${blockClass}--container`]: isFullScreen }])}>
-          <div className={`${blockClass}--header`}>
-            {domainName}
-            {domainProductDelimiter}
-            <strong>{productName}</strong>
-          </div>
-
-          <header
-            className={cx(
-              headerBlockClass,
-              headerTitle && `${headerBlockClass}--has-title`,
-              headerClassName
-            )}
-          >
-            {headerTitle && <h2>{headerTitle}</h2>}
-            {!hideProgressIndicator && (
-              <div className={`${blockClass}--progress`}>
-                <ProgressIndicator vertical={false} currentIndex={progStep}>
-                  {childArray.map((child: ReactNode, idx) => {
-                    if (isValidElement<EnrichedChildren>(child)) {
-                      return (
-                        <ProgressStep
-                          key={idx}
-                          label={child.props.stepTitle || ''}
-                          translateWithId={child.props.translateWithId}
-                        />
-                      );
-                    }
-                  })}
-                </ProgressIndicator>
-              </div>
-            )}
-          </header>
-
-          {childElements}
-          {renderFooter()}
-        </div>
+        <div className={`${blockClass}--container`}>{children}</div>
       </div>
     );
   };
 
-  const scrollToCurrentStep = (scrollPercent) => {
-    const currentStep = scrollPercent / stepSize;
-    setProgStep(Math.ceil(currentStep));
+  const handleGotoStep = (targetStep) => {
+    setProgStep(targetStep as number);
+    scrollRef.current.scrollToView(targetStep as number);
+
+    scrollBodyToTop();
   };
 
-  const renderBody = () => {
-    {
-      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-    }
-    return (
-      <div
-        className={cx(`${blockClass}--body`)}
-        ref={bodyScrollRef}
-        tabIndex={0}
-      >
-        {renderMedia ? (
-          <FlexGrid fullWidth className={cx(`${blockClass}--body-grid`)}>
-            <Row className={cx(`${blockClass}--body-row`)}>
-              <Column
-                xlg={contentBreakpoints.xlg}
-                lg={contentBreakpoints.lg}
-                md={contentBreakpoints.md}
-                sm={contentBreakpoints.sm}
-              >
-                <div className={cx(`${blockClass}--content`)}>
-                  {isMultiStep ? (
-                    <div className={`${blockClass}__carousel`}>
-                      <Carousel
-                        disableArrowScroll
-                        ref={scrollRef}
-                        onScroll={scrollToCurrentStep}
-                      >
-                        {children}
-                      </Carousel>
-                    </div>
-                  ) : (
-                    childArray[0]
-                  )}
-                </div>
-              </Column>
-              {renderMedia && (
-                <Column
-                  xlg={mediaBreakpoints.xlg}
-                  lg={mediaBreakpoints.lg}
-                  md={mediaBreakpoints.md}
-                  sm={mediaBreakpoints.sm}
-                  className={cx(`${blockClass}--media-container`)}
-                >
-                  <div className={`${blockClass}--media`}>
-                    {renderMedia && (
-                      <div className={`${blockClass}--stepped-animated-media`}>
-                        {renderMedia({ playStep: progStep })}
-                      </div>
-                    )}
-                  </div>
-                </Column>
-              )}
-            </Row>
-          </FlexGrid>
-        ) : (
-          <div className={cx(`${blockClass}--content`)}>
-            {isMultiStep ? (
-              <div className={`${blockClass}__carousel`}>
-                <Carousel
-                  disableArrowScroll
-                  ref={scrollRef}
-                  onScroll={scrollToCurrentStep}
-                >
-                  {children}
-                </Carousel>
-              </div>
-            ) : (
-              <div>{childArray[0]}</div>
-            )}
-          </div>
-        )}
-      </div>
-    );
+  const scrollBodyToTop = () => {
+    bodyScrollRef.current?.scroll?.({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
-
-  const renderFooter = () => {
-    return (
-      <div className={`${blockClass}--footer`}>
-        {isMultiStep && skipButtonLabel !== '' && (
-          <Button
-            className={`${blockClass}--skip-btn`}
-            kind="ghost"
-            size="lg"
-            title={skipButtonLabel}
-            onClick={handleClose}
-          >
-            {skipButtonLabel}
-          </Button>
-        )}
-        <div className={`${blockClass}--footer-controls`}>
-          {isMultiStep && progStep > 0 && (
-            <Button
-              className={`${blockClass}--prev-btn`}
-              kind="secondary"
-              size="lg"
-              title={previousButtonLabel}
-              onClick={handleClickPrev}
-            >
-              {previousButtonLabel}
-            </Button>
-          )}
-
-          {isMultiStep && progStep < progStepCeil && (
-            <Button
-              className={`${blockClass}--next-btn`}
-              renderIcon={ArrowRight}
-              ref={nextButtonRef}
-              size="lg"
-              title={nextButtonLabel}
-              onClick={handleClickNext}
-            >
-              {nextButtonLabel}
-            </Button>
-          )}
-          {isMultiStep && progStep === progStepCeil && (
-            <Button
-              className={`${blockClass}--start-btn`}
-              ref={startButtonRef}
-              renderIcon={ArrowRight}
-              size="lg"
-              title={startButtonLabel}
-              onClick={handleClose}
-            >
-              {startButtonLabel}
-            </Button>
-          )}
-          {!isMultiStep && (
-            <Button
-              className={`${blockClass}--start-btn`}
-              ref={startButtonRef}
-              size="lg"
-              title={startButtonLabel}
-              onClick={handleClose}
-            >
-              {startButtonLabel}
-            </Button>
-          )}
-        </div>
-      </div>
-    );
-  };
-
-  return isFullScreen
-    ? renderFullScreen(renderBody())
-    : renderModal(renderBody());
-});
-
+  return (
+    <InterstitialScreenContext.Provider
+      value={{
+        hideProgressIndicator,
+        bodyChildrenData,
+        setBodyChildrenData,
+        isFullScreen,
+        handleClose,
+        progStep,
+        setProgStep,
+        bodyScrollRef,
+        scrollRef,
+        handleGotoStep,
+        stepCount,
+        setStepCount,
+        disableButtonConfig,
+        setDisableButtonConfig,
+      }}
+    >
+      {isFullScreen ? renderFullScreen() : renderModal()}
+    </InterstitialScreenContext.Provider>
+  );
+}) as InterstitialScreenComponent;
+InterstitialScreen.Header = InterstitialScreenHeader;
+InterstitialScreen.Body = InterstitialScreenBody;
+InterstitialScreen.Footer = InterstitialScreenFooter;
 // Return a placeholder if not released and not enabled by feature flag
 InterstitialScreen = pkg.checkComponentEnabled(
   InterstitialScreen,
@@ -563,15 +300,7 @@ InterstitialScreen.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 InterstitialScreen.propTypes = {
-  /**
-   * Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size. Medium and small breakpoints will be set to 0 internally to focus on the main content area.
-   */
-  breakpointsWithMedia: PropTypes.object,
-
-  /**
-   * Provide the contents of the InterstitialScreen.
-   */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 
   /**
    * Provide an optional class to be applied to the containing node.
@@ -581,18 +310,6 @@ InterstitialScreen.propTypes = {
    * Tooltip text and aria label for the Close button icon.
    */
   closeIconDescription: PropTypes.string,
-  /**
-   * The domain this app belongs to, e.g. "IBM Cloud Pak".
-   */
-  domainName: PropTypes.string,
-  /**
-   * Provide an optional class to be applied to the <header> element >.
-   */
-  headerClassName: PropTypes.string,
-  /**
-   * Provide an optional class to be applied to the <header> element >.
-   */
-  headerTitle: PropTypes.string,
 
   /**
    * Optional parameter to hide the progress indicator when multiple steps are used.
@@ -613,32 +330,7 @@ InterstitialScreen.propTypes = {
   isOpen: PropTypes.bool,
 
   /**
-   * The label for the Next button.
-   */
-  nextButtonLabel: PropTypes.string,
-  /**
    * Function to call when the close button is clicked.
    */
   onClose: PropTypes.func,
-  /**
-   * The label for the Previous button.
-   */
-  previousButtonLabel: PropTypes.string,
-
-  /**
-   * The name of this app, e.g. "QRadar".
-   */
-  productName: PropTypes.string,
-  /**
-   * Optional prop to render any media like images or animated media.
-   */
-  renderMedia: PropTypes.func,
-  /**
-   * The label for the skip button.
-   */
-  skipButtonLabel: PropTypes.string,
-  /**
-   * The label for the start button.
-   */
-  startButtonLabel: PropTypes.string,
 };

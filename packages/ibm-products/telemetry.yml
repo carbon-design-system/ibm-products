@@ -2,7 +2,7 @@
 
 version: 1
 projectId: 495342db-5046-4ecf-85ea-9ffceb6f8cdf
-endpoint: https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics
+endpoint: https://www-api.ibm.com/ibm-telemetry/v1/metrics
 collect:
   jsx:
     elements:
@@ -230,6 +230,7 @@ collect:
         - onContextMenuValue
         - onDataUpdate
         - onFocus
+        - onKeyDown
         - onMount
         - onMouseEnter
         - onMouseLeave
@@ -504,7 +505,6 @@ collect:
         - componentName
         # Card
         - getStarted
-        - onKeyDown
         # CardFooter
         - hasButton
         # CardHeader
@@ -1176,9 +1176,6 @@ collect:
         - xl
   npm:
     dependencies: null
-  js:
-    functions: {}
-    tokens: null
   js:
     functions: {}
     tokens: null

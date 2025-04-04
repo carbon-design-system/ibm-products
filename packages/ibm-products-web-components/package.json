@@ -17,7 +17,8 @@
     "es/**/*",
     "es-custom/**/*",
     "lib/**/*",
-    "scss/**/*"
+    "scss/**/*",
+    "telemetry.yml"
   ],
   "publishConfig": {
     "access": "public",
@@ -30,7 +31,8 @@
     "./dist/*": "./dist/*",
     "./scss/*": "./scss/*",
     "./custom-elements.json": "./custom-elements.json",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./telemetry.yml": "./telemetry.yml"
   },
   "keywords": [
     "carbon",
@@ -44,6 +46,7 @@
     "build": "yarn clean && node tasks/build.js && yarn wca",
     "build:storybook": "storybook build --quiet",
     "clean": "rimraf es lib scss dist storybook-static",
+    "postinstall": "ibmtelemetry --config=telemetry.yml",
     "preview": "vite preview",
     "storybook": "storybook dev -p 3000",
     "test": "vitest run",
@@ -54,6 +57,7 @@
     "@carbon/ibm-products-styles": "^2.59.0",
     "@carbon/styles": "1.75.0",
     "@carbon/web-components": "2.25.0",
+    "@ibm/telemetry-js": "^1.9.1",
     "lit": "^3.1.0"
   },
   "devDependencies": {

@@ -1780,6 +1780,7 @@ __metadata:
     "@carbon/motion": "npm:^11.24.0"
     "@carbon/styles": "npm:1.75.0"
     "@carbon/web-components": "npm:2.25.0"
+    "@ibm/telemetry-js": "npm:^1.9.1"
     "@mordech/vite-lit-loader": "npm:^0.37.0"
     "@open-wc/testing": "npm:^4.0.0"
     "@rollup/plugin-alias": "npm:^5.1.1"

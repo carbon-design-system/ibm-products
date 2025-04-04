@@ -12,19 +12,17 @@ comment:
   layout: 'header, diff, flags, components'
 
 component_management:
-  default_rules:
+  default_rules: # default rules that will be inherited by all components
     statuses:
-      - type: project
+      - type: project # in this case every component that doesn't have a status defined will have a project type one
         target: auto
         threshold: 1%
-        branches:
-          - '!main'
   individual_components:
-    - component_id: ibm-products
-      name: ibm-products
+    - component_id: ibm-products # this is an identifier that should not be changed
+      name: ibm-products # this is a display name, and can be changed freely
       paths:
-        - ../packages/ibm-products/**
-    - component_id: ibm-products-web-components
-      name: ibm-products-web-components
+        - packages/ibm-products/**
+    - component_id: ibm-products-web-components # this is an identifier that should not be changed
+      name: ibm-products-web-components # this is a display name, and can be changed freely
       paths:
-        - ../packages/ibm-products-web-components/**
+        - packages/ibm-products-web-components/**

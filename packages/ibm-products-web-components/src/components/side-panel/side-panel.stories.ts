@@ -61,7 +61,7 @@ const contents = {
 
 const storyPrefix = 'side-panel-stories__';
 
-const getContent = (index) => {
+export const getContent = (index) => {
   switch (index) {
     case 1:
       return html`
@@ -149,7 +149,7 @@ const subtitles = {
   'Short subtitle': 1,
   'Longer subtitle': 2,
 };
-const getSubTitle = (index) => {
+export const getSubTitle = (index) => {
   switch (index) {
     case 1:
       return html`<div slot="subtitle">This is your subtitle slot.</div>`;
@@ -168,7 +168,7 @@ const actionToolbarItems = {
   'With action toolbar': 1,
 };
 
-const getActionToolbarItems = (index) => {
+export const getActionToolbarItems = (index) => {
   switch (index) {
     case 1:
       return html`
@@ -208,7 +208,7 @@ const actionItems = {
 };
 
 // TODO: There are problems switching this
-const getActionItems = (index) => {
+export const getActionItems = (index) => {
   switch (index) {
     case 1:
       return html`<cds-button key="p" slot="actions" kind=${BUTTON_KIND.PRIMARY}
@@ -277,7 +277,7 @@ const slugs = {
   'With Slug': 1,
 };
 
-const getSlug = (index) => {
+export const getSlug = (index) => {
   switch (index) {
     case 1:
       return html`<cds-slug size="xs" alignment="bottom-right">

@@ -26,7 +26,7 @@ import {
   getSlug,
   getNavigation,
   influencers,
-} from './tearsheet.stories';
+} from './utils';
 import CDSTearsheet from './tearsheet';
 
 const defaultProps = {

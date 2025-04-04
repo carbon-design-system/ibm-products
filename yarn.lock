@@ -1780,7 +1780,7 @@ __metadata:
     "@carbon/motion": "npm:^11.24.0"
     "@carbon/styles": "npm:1.75.0"
     "@carbon/web-components": "npm:2.25.0"
-    "@mordech/vite-lit-loader": "npm:^0.35.0"
+    "@mordech/vite-lit-loader": "npm:^0.37.0"
     "@open-wc/testing": "npm:^4.0.0"
     "@rollup/plugin-alias": "npm:^5.1.1"
     "@rollup/plugin-commonjs": "npm:^28.0.1"
@@ -4113,13 +4113,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mordech/vite-lit-loader@npm:^0.35.0":
-  version: 0.35.0
-  resolution: "@mordech/vite-lit-loader@npm:0.35.0"
+"@mordech/vite-lit-loader@npm:^0.37.0":
+  version: 0.37.0
+  resolution: "@mordech/vite-lit-loader@npm:0.37.0"
   dependencies:
     cheerio: "npm:1.0.0-rc.12"
     tslib: "npm:^2.6.2"
-  checksum: 10/297c42f5facbe6cd06e5a23d233f6da67b4a7c0a2b7680bdbcbe54bf9770d0e8b23f137f1926e7b9404fb45af07adbeb067691bd571706ee4c847f68d2ebdb4b
+  checksum: 10/2fd61c83a51dce907ee2c8a9cdb900df1642035753a25b4c26494846c36728a4cd412bd2e303e7b8f367df686b1bfaf00d4ff60bd8bdd3ff9d2dc79f420ad9e5
   languageName: node
   linkType: hard
 
@@ -23499,8 +23499,8 @@ __metadata:
   linkType: hard
 
 "vite@npm:^5.0.0 || ^6.0.0, vite@npm:^6.0.3, vite@npm:^6.2.2":
-  version: 6.2.2
-  resolution: "vite@npm:6.2.2"
+  version: 6.2.5
+  resolution: "vite@npm:6.2.5"
   dependencies:
     esbuild: "npm:^0.25.0"
     fsevents: "npm:~2.3.3"
@@ -23546,7 +23546,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/30896cbdbc082131cca3a343461ada8c2e8c30eed640dfaca39fd44b2f2fa4a1a312fe298e037063106af09f3026239be822a6b2f49e3d8239b8a64e86e83193
+  checksum: 10/354023589439e7e2bcb77af79d24cd06ce20cfc48b409e663c44e515b373b89eb8f29362223eac16a3ff080d3114e40bc5df158372279d92ad03eb270f9e9762
   languageName: node
   linkType: hard
 

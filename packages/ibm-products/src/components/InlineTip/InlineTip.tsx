@@ -21,6 +21,7 @@ import React, {
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Section, Heading } from '@carbon/react';
 import { getComponentText } from './utils';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
@@ -165,7 +166,7 @@ export let InlineTip = React.forwardRef(
     }, [collapsible]);
 
     return (
-      <div
+      <Section
         {...rest}
         aria-labelledby={labelId}
         className={cx(
@@ -201,9 +202,9 @@ export let InlineTip = React.forwardRef(
         )}
 
         <div className={`${blockClass}__content`}>
-          <h6 id={labelId} className={`${blockClass}__title`}>
+          <Heading id={labelId} className={`${blockClass}__title`}>
             {title}
-          </h6>
+          </Heading>
           <section className={`${blockClass}__body`}>
             {childrenToRender}
             {/* Only show the secondary button when body is showing expanded content */}
@@ -244,7 +245,7 @@ export let InlineTip = React.forwardRef(
         {renderMedia && (
           <div className={`${blockClass}__media`}>{renderMedia()}</div>
         )}
-      </div>
+      </Section>
     );
   }
 );

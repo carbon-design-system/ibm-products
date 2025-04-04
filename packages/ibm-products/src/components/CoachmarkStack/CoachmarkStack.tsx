@@ -38,6 +38,7 @@ import { CoachmarkContext } from '../Coachmark/utils/context';
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 
+type TooltipAlignment = 'top' | 'bottom';
 interface CoachmarkStackProps {
   /**
    * CoachmarkStack should use a single CoachmarkOverlayElements component as a child.
@@ -85,6 +86,10 @@ interface CoachmarkStackProps {
    * The title of the Coachmark.
    */
   title: string;
+  /**
+   * Label's tooltip position
+   */
+  tooltipAlign?: TooltipAlignment;
 }
 
 const defaults = {
@@ -125,6 +130,7 @@ export let CoachmarkStack = React.forwardRef<
       tagline,
       theme = defaults.theme,
       title,
+      tooltipAlign,
       ...rest
     },
     ref
@@ -320,6 +326,7 @@ export let CoachmarkStack = React.forwardRef<
             portalTarget={portalTarget}
             closeButtonLabel={closeButtonLabel}
             title={title}
+            tooltipAlign={tooltipAlign}
           />
           {portalNode?.current
             ? createPortal(wrappedChildren, portalNode?.current)
@@ -397,4 +404,8 @@ CoachmarkStack.propTypes = {
    * The title of the Coachmark.
    */
   title: PropTypes.string.isRequired,
+  /**
+   * Label's tooltip position
+   */
+  tooltipAlign: PropTypes.oneOf(['top', 'bottom']),
 };

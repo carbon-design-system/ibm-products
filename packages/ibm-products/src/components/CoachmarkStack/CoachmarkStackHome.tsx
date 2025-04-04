@@ -16,7 +16,7 @@ import pconsole from '../../global/js/utils/pconsole';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Idea } from '@carbon/react/icons';
-import { Button } from '@carbon/react';
+import { Button, Tooltip } from '@carbon/react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { createPortal } from 'react-dom';
@@ -24,6 +24,7 @@ import { CoachmarkHeader } from '../Coachmark/CoachmarkHeader';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 import { ButtonProps } from '@carbon/react';
 
+type TooltipAlignment = 'top' | 'bottom';
 interface CoachmarkStackHomeProps {
   /**
    * Optional class name for this component.
@@ -74,6 +75,10 @@ interface CoachmarkStackHomeProps {
    * The title of the Coachmark.
    */
   title: string;
+  /**
+   * Label's tooltip position
+   */
+  tooltipAlign?: TooltipAlignment;
 }
 
 // Carbon and package components we use.
@@ -104,12 +109,15 @@ export let CoachmarkStackHome = forwardRef<
       portalTarget,
       closeButtonLabel,
       title,
+      tooltipAlign,
       ...rest
     },
     ref
   ) => {
     const buttonFocusRef = useRef<ButtonProps<React.ElementType> | null>(null);
     const [linkFocusIndex, setLinkFocusIndex] = useState(0);
+    const navItemRefs = useRef<(HTMLLIElement | null)[]>([]);
+    const [overflowStates, setOverflowStates] = useState<boolean[]>([]);
 
     useEffect(() => {
       setTimeout(() => {
@@ -134,13 +142,32 @@ export let CoachmarkStackHome = forwardRef<
       );
     }
 
+    const itemRefHandler = (index, node) => {
+      if (node && navItemRefs.current[index] !== node) {
+        const isOverflowing = node.scrollWidth > node.clientWidth;
+        navItemRefs.current[index] = node;
+        setOverflowStates((prev) => {
+          const newState = [...prev];
+          newState[index] = isOverflowing;
+          return newState;
+        });
+      }
+    };
+
     function renderNavLink(
       index,
       label,
       ref: React.RefObject<ButtonProps<React.ElementType>> | null = null
     ) {
+      const isOverflowing = overflowStates[index] ?? false;
+
       return (
-        <li key={index}>
+        <li
+          key={index}
+          ref={(node) => {
+            itemRefHandler(index, node);
+          }}
+        >
           <Button
             kind="ghost"
             size="sm"
@@ -150,7 +177,20 @@ export let CoachmarkStackHome = forwardRef<
             }}
             ref={ref}
           >
-            {label}
+            {isOverflowing ? (
+              <Tooltip
+                highContrast={false}
+                label={label}
+                align={tooltipAlign}
+                className={`${blockClass}__navLinkLabels-tooltip`}
+              >
+                <span className={`${blockClass}__navLinkLabels-text`}>
+                  {label}
+                </span>
+              </Tooltip>
+            ) : (
+              label
+            )}
           </Button>
         </li>
       );
@@ -297,4 +337,8 @@ CoachmarkStackHome.propTypes = {
    * The title of the Coachmark.
    */
   title: PropTypes.string.isRequired,
+  /**
+   * Label's tooltip position
+   */
+  tooltipAlign: PropTypes.oneOf(['top', 'bottom']),
 };

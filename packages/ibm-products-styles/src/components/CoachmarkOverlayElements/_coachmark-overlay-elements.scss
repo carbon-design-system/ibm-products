@@ -27,6 +27,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-overlay-elements;
 
 .#{$block-class} {
   &__element-stepped-media {
+    padding: 0 $spacing-05;
     /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
     block-size: to-rem(128px);
     margin-block-end: $spacing-05;

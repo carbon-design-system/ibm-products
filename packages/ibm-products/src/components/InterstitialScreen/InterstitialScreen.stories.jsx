@@ -8,14 +8,14 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 
-import { InterstitialScreenView } from '..';
-import { InterstitialScreenViewModule } from '..';
 import { InterstitialScreen } from '.';
 import mdx from './InterstitialScreen.mdx';
 import styles from './_storybook-styles.scss?inline';
 import { clamp } from '../../global/js/utils/clamp';
 import { ArrowRight } from '@carbon/react/icons';
 import { pkg } from '../../settings';
+import { InterstitialScreenView } from './_story-assets/InterstitialScreenView/InterstitialScreenView';
+import { InterstitialScreenViewModule } from './_story-assets/InterstitialScreenViewModule/InterstitialScreenViewModule';
 const storyClass = 'interstitial-stories';
 
 // cspell:words Terminé Partiel Actuel valide
@@ -23,7 +23,7 @@ const storyClass = 'interstitial-stories';
 const blockClass = `${pkg.prefix}--interstitial-screen`;
 
 export default {
-  title: 'Experimental/Onboarding/Interstitial screen/InterstitialScreen',
+  title: 'Experimental/Onboarding/InterstitialScreen',
   component: InterstitialScreen,
   tags: ['autodocs'],
   subcomponents: {
@@ -49,10 +49,6 @@ const translations = {
   'carbon.progress-step.current': 'Actuel',
   'carbon.progress-step.invalid': 'Non valide',
 };
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* * * * * * * | UTILITY COMPONENTS FOR THIS STORYBOOK | * * * * * * */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 const getMultipleContent = ({ handleGotoStep }) => {
   return (
@@ -132,10 +128,6 @@ const getSingleContent = (
   );
 };
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* * * * * * * * * * * * * * | TEMPLATES | * * * * * * * * * * * * * * */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* * * * * * * * * * * * * * | STORIES | * * * * * * * * * * * * * * */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -200,6 +192,7 @@ export const ModalWithMultipleSteps = () => {
           setShowInterstitialScreen(false);
         }}
         hideProgressIndicator={false}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}
@@ -235,6 +228,7 @@ export const ModalWithCustomActionButtons = () => {
           setShowInterstitialScreen(false);
         }}
         hideProgressIndicator={false}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}
@@ -341,6 +335,7 @@ export const fullScreen = () => {
         }}
         hideProgressIndicator={false}
         isFullScreen={true}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}
@@ -376,6 +371,7 @@ export const fullScreenWithMultipleSteps = () => {
         }}
         hideProgressIndicator={false}
         isFullScreen={true}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}

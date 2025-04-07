@@ -10,11 +10,10 @@ import PropTypes from 'prop-types';
 // Import portions of React that are needed.
 import React, { useEffect } from 'react';
 import cx from 'classnames';
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
 import { SelectableTag } from '@carbon/react';
 import { Checkmark } from '@carbon/react/icons';
-import { disableButtonConfigType } from '../InterstitialScreen/InterstitialScreen';
+import { pkg } from '../../../../settings';
+import { disableButtonConfigType } from '../../InterstitialScreen';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -101,7 +100,6 @@ export let InterstitialScreenViewModule = React.forwardRef<
           className // Apply any supplied class names to the main HTML element.
         )}
         ref={ref}
-        {...getDevtoolsProps(componentName)}
       >
         <h1 className={`${blockClass}--heading`}>{title}</h1>
         <p className={`${blockClass}--body`}>{description}</p>

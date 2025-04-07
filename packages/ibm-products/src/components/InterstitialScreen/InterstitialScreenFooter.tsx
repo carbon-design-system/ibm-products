@@ -13,7 +13,7 @@ import {
   disableButtonConfigType,
   InterstitialScreenContext,
 } from './InterstitialScreen';
-import { Button } from '@carbon/react';
+import { Button, ModalFooter } from '@carbon/react';
 import { clamp } from '../../global/js/utils/clamp';
 import { ArrowRight } from '@carbon/react/icons';
 
@@ -66,6 +66,7 @@ const InterstitialScreenFooter = ({
     handleGotoStep,
     stepCount,
     disableButtonConfig,
+    isFullScreen,
   } = useContext(InterstitialScreenContext);
   const startButtonRef = useRef<HTMLElement | undefined>(undefined);
   const nextButtonRef = useRef<HTMLElement | undefined>(undefined);
@@ -84,20 +85,7 @@ const InterstitialScreenFooter = ({
     handleGotoStep?.(targetStep as number);
   };
 
-  if (actionButtonRenderer) {
-    return (
-      <div className={`${blockClass}--footer`}>
-        {actionButtonRenderer({
-          handleGotoStep,
-          progStep,
-          stepCount,
-          disableButtonConfig,
-        })}
-      </div>
-    );
-  }
-
-  return (
+  const getFooterContent = () => (
     <div className={`${blockClass}--footer ${className}`}>
       {isMultiStep && skipButtonLabel !== '' && (
         <Button
@@ -165,6 +153,24 @@ const InterstitialScreenFooter = ({
         )}
       </div>
     </div>
+  );
+  if (actionButtonRenderer) {
+    return (
+      <div className={`${blockClass}--footer`}>
+        {actionButtonRenderer({
+          handleGotoStep,
+          progStep,
+          stepCount,
+          disableButtonConfig,
+        })}
+      </div>
+    );
+  }
+
+  return isFullScreen ? (
+    getFooterContent()
+  ) : (
+    <ModalFooter>{getFooterContent()}</ModalFooter>
   );
 };
 

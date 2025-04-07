@@ -14,7 +14,7 @@ test.describe('InterstitialScreen @avt', () => {
   test('@avt-full-screen-state', async ({ page }) => {
     await visitStory(page, {
       component: 'InterstitialScreen',
-      id: 'experimental-onboarding-interstitial-screen-interstitialscreen--interstitial-screen-full-screen-image',
+      id: 'experimental-onboarding-interstitial-screen-interstitialscreen--modal',
       globals: {
         carbonTheme: 'white',
       },

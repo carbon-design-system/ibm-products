@@ -12,9 +12,9 @@ import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { InterstitialScreen } from '.';
-import { InterstitialScreenView } from '..';
-import { InterstitialScreenViewModule } from '..';
 import userEvent from '@testing-library/user-event';
+import { InterstitialScreenViewModule } from './_story-assets/InterstitialScreenViewModule/InterstitialScreenViewModule';
+import { InterstitialScreenView } from './_story-assets/InterstitialScreenView/InterstitialScreenView';
 
 const blockClass = `${pkg.prefix}--interstitial-screen`;
 const componentName = InterstitialScreen.displayName;

@@ -278,7 +278,7 @@ export let CreateFullPage = React.forwardRef(
       }
 
       /**@ts-ignore */
-      if (open && initialStep) {
+      if (initialStep) {
         const numberOfHiddenSteps = getNumberOfHiddenSteps(
           stepData,
           initialStep
@@ -292,6 +292,11 @@ export let CreateFullPage = React.forwardRef(
       initialStep,
       modalIsOpen,
     ]);
+
+    useEffect(() => {
+      checkForValidInitialStep();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initialStep]);
 
     useCreateComponentFocus({
       previousState,
@@ -326,6 +331,26 @@ export let CreateFullPage = React.forwardRef(
       setCreateComponentActions: setCreateFullPageActions,
       setModalIsOpen,
     });
+
+    const checkForValidInitialStep = () => {
+      // An invalid initialStep value was provided, we'll default to rendering the first step or last step
+
+      if (
+        (initialStep &&
+          stepData?.length &&
+          Number(initialStep) > Number(stepData?.length)) ||
+        Number(initialStep) <= 0
+      ) {
+        if (Number(initialStep) <= 0) {
+          setCurrentStep(1);
+        } else {
+          setCurrentStep(stepData?.length);
+        }
+        console.warn(
+          `${componentName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${componentName} has.`
+        );
+      }
+    };
     // currently, we are not supporting the use of 'view all' toggle state
     /* istanbul ignore next */
     return (

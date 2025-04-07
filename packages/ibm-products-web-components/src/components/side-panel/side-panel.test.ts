@@ -16,7 +16,7 @@ import {
   getContent,
   getSlug,
   getSubTitle,
-} from './side-panel.stories';
+} from './_story-assets';
 
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/slug/index.js';

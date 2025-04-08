@@ -130,7 +130,7 @@
     "cheerio": "1.0.0-rc.10",
     "cross-spawn": "7.0.6",
     "micromatch": "4.0.8",
-    "semver": "7.6.3",
+    "semver": "7.7.1",
     "ws": "^8.17.1"
   },
   "lint-staged": {

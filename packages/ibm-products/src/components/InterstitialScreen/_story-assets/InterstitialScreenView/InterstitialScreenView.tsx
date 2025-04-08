@@ -12,6 +12,7 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../../settings';
+import './_interstitial-screen-view.scss';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */

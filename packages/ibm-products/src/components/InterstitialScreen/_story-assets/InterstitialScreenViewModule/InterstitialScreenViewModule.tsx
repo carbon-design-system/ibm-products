@@ -14,6 +14,7 @@ import { SelectableTag } from '@carbon/react';
 import { Checkmark } from '@carbon/react/icons';
 import { pkg } from '../../../../settings';
 import { disableButtonConfigType } from '../../InterstitialScreen';
+import './_interstitial-screen-view-module.scss';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */

@@ -17,7 +17,8 @@
     "es/**/*",
     "es-custom/**/*",
     "lib/**/*",
-    "scss/**/*"
+    "scss/**/*",
+    "telemetry.yml"
   ],
   "publishConfig": {
     "access": "public",
@@ -30,7 +31,8 @@
     "./dist/*": "./dist/*",
     "./scss/*": "./scss/*",
     "./custom-elements.json": "./custom-elements.json",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./telemetry.yml": "./telemetry.yml"
   },
   "keywords": [
     "carbon",
@@ -44,6 +46,7 @@
     "build": "yarn clean && node tasks/build.js && yarn wca",
     "build:storybook": "storybook build --quiet",
     "clean": "rimraf es lib scss dist storybook-static",
+    "postinstall": "ibmtelemetry --config=telemetry.yml",
     "preview": "vite preview",
     "storybook": "storybook dev -p 3000",
     "test": "vitest run",
@@ -54,6 +57,7 @@
     "@carbon/ibm-products-styles": "^2.59.0",
     "@carbon/styles": "1.75.0",
     "@carbon/web-components": "2.25.0",
+    "@ibm/telemetry-js": "^1.9.1",
     "lit": "^3.1.0"
   },
   "devDependencies": {
@@ -61,7 +65,7 @@
     "@carbon/icon-helpers": "^10.54.0",
     "@carbon/icons": "^11.55.0",
     "@carbon/motion": "^11.24.0",
-    "@mordech/vite-lit-loader": "^0.35.0",
+    "@mordech/vite-lit-loader": "^0.37.0",
     "@open-wc/testing": "^4.0.0",
     "@rollup/plugin-alias": "^5.1.1",
     "@rollup/plugin-commonjs": "^28.0.1",
@@ -98,6 +102,7 @@
     "tslib": "^2.8.1",
     "typescript": "^5.5.3",
     "vite": "^6.0.3",
+    "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.1",
     "web-component-analyzer": "2.0.0"
   }

@@ -50,7 +50,7 @@
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
-    "telemetry-config": "ibmtelemetry-config generate --id 495342db-5046-4ecf-85ea-9ffceb6f8cdf --endpoint https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)",
+    "telemetry-config": "ibmtelemetry-config generate --id 495342db-5046-4ecf-85ea-9ffceb6f8cdf --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency), chalk (issue #1596)",
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^namor)/'"
@@ -90,7 +90,7 @@
     "rollup": "^4.35.0",
     "rollup-plugin-strip-banner": "^3.1.0",
     "sass": "^1.85.1",
-    "typescript-config-carbon": "^0.3.0",
+    "typescript-config-carbon": "^0.5.0",
     "yargs": "^17.7.2"
   },
   "dependencies": {

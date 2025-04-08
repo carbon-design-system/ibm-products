@@ -121,16 +121,17 @@ export const stackblitzPrefillConfig = async (
     storyCode
   );
 
-  const extractStory = storyCode.match(
-    /<StoryWrapper\b[^>]*>([\s\S]*?)<\/StoryWrapper>/g
-  );
-  const extractedStoryCode = extractStory
-    ? extractStory.map((match) =>
-        match.replace(/<\/?StoryWrapper\b[^>]*>/g, '')
-      )
-    : [];
+  // const extractStory = storyCode.match(
+  //   /<StoryWrapper\b[^>]*>([\s\S]*?)<\/StoryWrapper>/g
+  // );
+  // const extractedStoryCode = extractStory
+  //   ? extractStory.map((match) =>
+  //       match.replace(/<\/?StoryWrapper\b[^>]*>/g, '')
+  //     )
+  //   : [];
 
   // Generate App.jsx code
+  const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
   const app = `
   import React from 'react';
   ${customImport ? customImport : ''}
@@ -138,11 +139,8 @@ export const stackblitzPrefillConfig = async (
   import { ${matchedCarbonComponents} } from "@carbon/react";
   ${matchedIcons.length > 0 ? `import { ${matchedIcons} } from "@carbon/icons-react";` : ''}
   export default function App() {
-  return(
-    <>
-    ${extractedStoryCode}
-    </>
-    );
+    ${formattedArgs}
+    ${storyCode}
   }
   `;
 

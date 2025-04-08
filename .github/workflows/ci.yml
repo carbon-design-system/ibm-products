@@ -23,7 +23,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '20.x'
-          cache: yarn
+          # cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # 4.2.3
+        with:
+          path: '**/node_modules'
+          key: build-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Cache Yarn Global Folder
         uses: actions/cache@v3
         with:

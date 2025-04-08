@@ -155,12 +155,12 @@ export const Modal = () => {
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
-        hideProgressIndicator={true}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}
           headerSubTitle={defaultProps.headerSubTitle}
+          hideProgressIndicator={true}
         ></InterstitialScreen.Header>
         <InterstitialScreen.Body
           contentRenderer={(internalConfig) => {
@@ -191,7 +191,6 @@ export const ModalWithMultipleSteps = () => {
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
-        hideProgressIndicator={false}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
       >
         <InterstitialScreen.Header
@@ -227,7 +226,6 @@ export const ModalWithCustomActionButtons = () => {
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
-        hideProgressIndicator={false}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
       >
         <InterstitialScreen.Header
@@ -333,7 +331,6 @@ export const fullScreen = () => {
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
-        hideProgressIndicator={false}
         isFullScreen={true}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
       >
@@ -369,7 +366,6 @@ export const fullScreenWithMultipleSteps = () => {
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
-        hideProgressIndicator={false}
         isFullScreen={true}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
       >

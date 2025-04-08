@@ -48,16 +48,6 @@ const componentName = 'InterstitialScreen';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
-// Default values for props
-const defaults = {
-  closeIconDescription: 'Close',
-  hideProgressIndicator: false,
-  interstitialAriaLabel: 'Interstitial screen',
-  isFullScreen: false,
-  isOpen: false,
-  onClose: () => {},
-};
-
 export interface InterstitialScreenProps {
   /**
    * Provide the contents of the InterstitialScreen.
@@ -68,12 +58,6 @@ export interface InterstitialScreenProps {
    * Provide an optional class to be applied to the containing node.
    */
   className?: string;
-
-  /**
-   * Optional parameter to hide the progress indicator when multiple steps are used.
-   */
-  hideProgressIndicator?: boolean;
-
   /**
    * The aria label applied to the Interstitial Screen component
    */
@@ -110,7 +94,6 @@ export type disableButtonConfigType = {
   start?: boolean;
 };
 interface InterstitialScreenContextType {
-  hideProgressIndicator?: boolean;
   bodyChildrenData?: ReactNode;
   setBodyChildrenData?: (value: ReactNode) => void;
   isFullScreen?: boolean;
@@ -141,11 +124,10 @@ export let InterstitialScreen = React.forwardRef<
   const {
     children,
     className,
-    hideProgressIndicator = defaults.hideProgressIndicator,
-    interstitialAriaLabel = defaults.interstitialAriaLabel,
-    isFullScreen = defaults.isFullScreen,
-    isOpen = defaults.isOpen,
-    onClose = defaults.onClose,
+    interstitialAriaLabel = 'Interstitial screen',
+    isFullScreen = false,
+    isOpen = false,
+    onClose,
     ...rest
   } = props;
   const backupRef = useRef<HTMLDivElement>(null);
@@ -174,7 +156,7 @@ export let InterstitialScreen = React.forwardRef<
 
   const handleClose = useCallback(() => {
     setProgStep(0);
-    onClose();
+    onClose?.();
   }, [onClose]);
 
   useEffect(() => {
@@ -263,7 +245,6 @@ export let InterstitialScreen = React.forwardRef<
   return (
     <InterstitialScreenContext.Provider
       value={{
-        hideProgressIndicator,
         bodyChildrenData,
         setBodyChildrenData,
         isFullScreen,
@@ -310,11 +291,6 @@ InterstitialScreen.propTypes = {
    * Tooltip text and aria label for the Close button icon.
    */
   closeIconDescription: PropTypes.string,
-
-  /**
-   * Optional parameter to hide the progress indicator when multiple steps are used.
-   */
-  hideProgressIndicator: PropTypes.bool,
   /**
    * The aria label applied to the Interstitial Screen component
    */

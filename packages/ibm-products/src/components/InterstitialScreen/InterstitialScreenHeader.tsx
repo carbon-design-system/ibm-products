@@ -37,6 +37,10 @@ export interface InterstitialScreenHeaderProps {
    * Tooltip text and aria label for the Close button icon.
    */
   closeIconDescription?: string;
+  /**
+   * Optional parameter to hide the progress indicator when multiple steps are used.
+   */
+  hideProgressIndicator?: boolean;
 }
 
 type EnrichedChildren = {
@@ -50,15 +54,11 @@ const InterstitialScreenHeader = ({
   headerTitle,
   headerSubTitle,
   closeIconDescription,
+  hideProgressIndicator,
   children,
 }: InterstitialScreenHeaderProps) => {
-  const {
-    hideProgressIndicator,
-    bodyChildrenData,
-    isFullScreen,
-    progStep,
-    handleClose,
-  } = React.useContext(InterstitialScreenContext);
+  const { bodyChildrenData, isFullScreen, progStep, handleClose } =
+    React.useContext(InterstitialScreenContext);
 
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const headerBlockClass = `${blockClass}--internal-header`;
@@ -142,4 +142,8 @@ InterstitialScreenHeader.propTypes = {
    * Provide an optional title to be applied to the header >.
    */
   headerTitle: PropTypes.string,
+  /**
+   * Optional parameter to hide the progress indicator when multiple steps are used.
+   */
+  hideProgressIndicator: PropTypes.bool,
 };

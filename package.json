@@ -89,7 +89,7 @@
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "accessibility-checker": "^4.0.2",
     "cheerio": "^1.0.0",
-    "commander": "^12.0.0",
+    "commander": "^13.0.0",
     "copyfiles": "^2.4.1",
     "cspell": "^8.17.5",
     "eslint": "^9.22.0",

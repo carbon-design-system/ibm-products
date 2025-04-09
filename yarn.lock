@@ -10557,14 +10557,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^12.0.0, commander@npm:^12.1.0":
+"commander@npm:^12.1.0":
   version: 12.1.0
   resolution: "commander@npm:12.1.0"
   checksum: 10/cdaeb672d979816853a4eed7f1310a9319e8b976172485c2a6b437ed0db0a389a44cfb222bfbde772781efa9f215bdd1b936f80d6b249485b465c6cb906e1f93
   languageName: node
   linkType: hard
 
-"commander@npm:^13.1.0":
+"commander@npm:^13.0.0, commander@npm:^13.1.0":
   version: 13.1.0
   resolution: "commander@npm:13.1.0"
   checksum: 10/d3b4b79e6be8471ddadacbb8cd441fe82154d7da7393b50e76165a9e29ccdb74fa911a186437b9a211d0fc071db6051915c94fb8ef16d77511d898e9dbabc6af
@@ -14452,7 +14452,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.26.1"
     accessibility-checker: "npm:^4.0.2"
     cheerio: "npm:^1.0.0"
-    commander: "npm:^12.0.0"
+    commander: "npm:^13.0.0"
     copyfiles: "npm:^2.4.1"
     cspell: "npm:^8.17.5"
     eslint: "npm:^9.22.0"

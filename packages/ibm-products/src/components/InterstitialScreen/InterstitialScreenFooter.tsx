@@ -51,14 +51,15 @@ export interface InterstitialScreenFooterProps {
    */
   actionButtonRenderer?: (config: actionButtonRendererArgs) => React.ReactNode;
 }
-const InterstitialScreenFooter = ({
-  className,
-  skipButtonLabel = 'Skip',
-  previousButtonLabel = 'Back',
-  nextButtonLabel = 'Next',
-  startButtonLabel = 'Get Started',
-  actionButtonRenderer,
-}: InterstitialScreenFooterProps) => {
+const InterstitialScreenFooter = (props: InterstitialScreenFooterProps) => {
+  const {
+    className = '',
+    skipButtonLabel = 'Skip',
+    previousButtonLabel = 'Back',
+    nextButtonLabel = 'Next',
+    startButtonLabel = 'Get Started',
+    actionButtonRenderer,
+  } = props;
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const {
     handleClose,
@@ -83,6 +84,13 @@ const InterstitialScreenFooter = ({
   const handleClickNext = () => {
     const targetStep = clamp(progStep + 1, progStepFloor, progStepCeil);
     handleGotoStep?.(targetStep as number);
+  };
+
+  const getRenderIcon = () => {
+    if (isMultiStep && progStep === progStepCeil) {
+      return { renderIcon: ArrowRight };
+    }
+    return {};
   };
 
   const getFooterContent = () => (
@@ -126,20 +134,7 @@ const InterstitialScreenFooter = ({
             {nextButtonLabel}
           </Button>
         )}
-        {isMultiStep && progStep === progStepCeil && (
-          <Button
-            className={`${blockClass}--start-btn`}
-            ref={startButtonRef}
-            renderIcon={ArrowRight}
-            size="lg"
-            title={startButtonLabel}
-            disabled={disableButtonConfig?.start}
-            onClick={handleClose}
-          >
-            {startButtonLabel}
-          </Button>
-        )}
-        {!isMultiStep && (
+        {((isMultiStep && progStep === progStepCeil) || !isMultiStep) && (
           <Button
             className={`${blockClass}--start-btn`}
             ref={startButtonRef}
@@ -147,6 +142,7 @@ const InterstitialScreenFooter = ({
             title={startButtonLabel}
             disabled={disableButtonConfig?.start}
             onClick={handleClose}
+            {...getRenderIcon()}
           >
             {startButtonLabel}
           </Button>

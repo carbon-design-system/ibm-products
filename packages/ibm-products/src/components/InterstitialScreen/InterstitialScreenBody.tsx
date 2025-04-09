@@ -23,6 +23,7 @@ import { pkg } from '../../settings';
 import cx from 'classnames';
 
 import { Carousel } from '../Carousel';
+import { EnrichedChildren } from './InterstitialScreenHeader';
 
 type contentRendererArgs = {
   handleGotoStep?: (value: number) => void;
@@ -38,13 +39,13 @@ export interface InterstitialScreenBodyProps {
    * This is a required callback that has to return the content to render in the body section.
    * It can be a single child or an array of children depending on your need
    */
-  contentRenderer: (config: contentRendererArgs) => ReactNode;
+  contentRenderer: (
+    config: contentRendererArgs
+  ) => ReactElement<EnrichedChildren> | ReactNode;
 }
 
-const InterstitialScreenBody = ({
-  className,
-  contentRenderer,
-}: InterstitialScreenBodyProps) => {
+const InterstitialScreenBody = (props: InterstitialScreenBodyProps) => {
+  const { className = '', contentRenderer, ...rest } = props;
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const bodyBlockClass = `${blockClass}--internal-body`;
 
@@ -67,26 +68,26 @@ const InterstitialScreenBody = ({
   const [scrollPercent, setScrollPercent] = useState(-1);
 
   useEffect(() => {
-    const _bodyContent: ReactNode | ReactElement = contentRenderer({
+    const _bodyContent = contentRenderer({
       handleGotoStep,
       progStep,
       disableActionButton,
     });
-    setBodyChildrenData?.(
-      isValidElement(_bodyContent)
-        ? (_bodyContent.props as { children: ReactNode }).children
-        : _bodyContent
-    );
-    if (
-      isValidElement(_bodyContent) &&
-      Array.isArray((_bodyContent.props as { children: ReactNode }).children)
-    ) {
-      setIsMultiStep(
-        !!(_bodyContent.props as { children: ReactNode[] }).children?.length
-      );
-      setStepCount?.(
-        (_bodyContent.props as { children: ReactNode[] }).children?.length
-      );
+
+    const isElement = isValidElement(_bodyContent);
+    const children = isElement
+      ? (_bodyContent.props as { children?: ReactNode }).children
+      : _bodyContent;
+
+    // Set body children data
+    setBodyChildrenData?.(children);
+
+    // If the children is an array, treat it as a multiStep
+    if (isElement && Array.isArray(children)) {
+      const stepLength = children.length;
+
+      setIsMultiStep(!!stepLength);
+      setStepCount?.(stepLength);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -117,8 +118,12 @@ const InterstitialScreenBody = ({
   const onScrollHandler = (scrollPercent) => setScrollPercent(scrollPercent);
 
   const renderBody = () => (
-    <div className={`${blockClass}--body ${className}`} ref={bodyScrollRef}>
-      <div className={cx(`${blockClass}--content`)}>
+    <div
+      className={`${blockClass}--body ${className}`}
+      ref={bodyScrollRef}
+      {...rest}
+    >
+      <div className={`${blockClass}--content`}>
         {isMultiStep ? (
           <div className={`${blockClass}__carousel`}>
             <Carousel
@@ -130,7 +135,7 @@ const InterstitialScreenBody = ({
             </Carousel>
           </div>
         ) : (
-          <div>{bodyChildrenData}</div>
+          bodyChildrenData
         )}
       </div>
     </div>

@@ -82,13 +82,7 @@ export let InterstitialScreenViewModule = React.forwardRef<
     }, []);
 
     const handleOnChange = (selected) => {
-      if (selected) {
-        disableActionButton?.({ start: false });
-      } else {
-        disableActionButton?.({
-          start: true,
-        });
-      }
+      disableActionButton?.({ start: !selected });
     };
     return (
       <section

@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import { InterstitialScreenContext } from './InterstitialScreen';
+import { useId } from '../../global/js/utils/useId';
 
 export interface InterstitialScreenHeaderProps {
   /**
@@ -43,25 +44,27 @@ export interface InterstitialScreenHeaderProps {
   hideProgressIndicator?: boolean;
 }
 
-type EnrichedChildren = {
-  children?: React.ReactNode;
-  stepTitle?: string;
+export type EnrichedChildren = {
+  children: React.ReactNode;
+  stepTitle: string;
   translateWithId?: (id: string) => string;
 };
 
-const InterstitialScreenHeader = ({
-  className,
-  headerTitle,
-  headerSubTitle,
-  closeIconDescription,
-  hideProgressIndicator,
-  children,
-}: InterstitialScreenHeaderProps) => {
+const InterstitialScreenHeader = (props: InterstitialScreenHeaderProps) => {
+  const {
+    className = '',
+    headerTitle,
+    headerSubTitle,
+    closeIconDescription,
+    hideProgressIndicator,
+    children,
+  } = props;
   const { bodyChildrenData, isFullScreen, progStep, handleClose } =
     React.useContext(InterstitialScreenContext);
 
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const headerBlockClass = `${blockClass}--internal-header`;
+  const _useId = useId();
 
   const headerContent = () => {
     return (
@@ -79,9 +82,11 @@ const InterstitialScreenHeader = ({
               <ProgressIndicator vertical={false} currentIndex={progStep}>
                 {bodyChildrenData?.map((child: React.ReactNode, idx) => {
                   if (React.isValidElement<EnrichedChildren>(child)) {
+                    const stepKey = `${_useId}_${child.props?.stepTitle?.replace(/\s+/g, '') || idx}`;
+
                     return (
                       <ProgressStep
-                        key={idx}
+                        key={stepKey}
                         label={child.props.stepTitle || ''}
                         translateWithId={child.props.translateWithId}
                       />

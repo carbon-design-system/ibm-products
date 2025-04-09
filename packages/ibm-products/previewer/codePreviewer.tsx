@@ -12,16 +12,20 @@ import { index, main, packageJson, style, viteConfig } from './configFiles';
 import * as carbonComponentsReact from '@carbon/react';
 import * as carbonIconsReact from '@carbon/icons-react';
 const iconsNames = Object.keys(carbonIconsReact);
-const productComponents = await import('../src/index');
-const componentNames = Object.keys(productComponents);
+let componentNames;
+let mainComponentName;
 
 export const stackblitzPrefillConfig = async (
   code: any,
-  args: Record<string, any>,
+  componentName: string,
   // components: Array<string>, // Add all required components to be imported from @carbon/react
   // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
   customImport: string
 ) => {
+  const { args } = code;
+  mainComponentName = componentName;
+  const productComponents = await import('../src/index');
+  componentNames = Object.keys(productComponents);
   const storyCode = filterStoryCode(
     code.parameters.docs.source.originalSource,
     args
@@ -50,7 +54,7 @@ export const stackblitzPrefillConfig = async (
 };
 
 const filterStoryCode = (storyCode, args) => {
-  const storyCodeUpdated = storyCode
+  let storyCodeUpdated = storyCode
     .replace(/^\s*args\s*=>\s*{\s*|}\s*;?\s*$/g, '')
     .replace(/^\s*\(\)\s*=>\s*{/g, '')
     .replace(/^\s*args\s*=>/g, 'return')
@@ -75,18 +79,33 @@ const filterStoryCode = (storyCode, args) => {
     );
     if (typeof value === 'string') {
       // Replace template literals with plain strings
-      storyCode = storyCode.replace(templateLiteralRegex, value);
+      storyCodeUpdated = storyCodeUpdated.replace(templateLiteralRegex, value);
       // Replace JSX attributes with plain strings
-      storyCode = storyCode.replace(jsxAttributeRegex, `$1"${value}"`);
+      storyCodeUpdated = storyCodeUpdated.replace(
+        jsxAttributeRegex,
+        `$1"${value}"`
+      );
       // Replace string-in-template cases with plain strings
-      storyCode = storyCode.replace(stringInTemplateRegex, `"${value}"`);
+      storyCodeUpdated = storyCodeUpdated.replace(
+        stringInTemplateRegex,
+        `"${value}"`
+      );
     } else {
       const valueStr = JSON.stringify(value);
       const regex = new RegExp(`args\\.${escapedKey}`, 'g');
-      storyCode = storyCode.replace(regex, valueStr);
+      storyCodeUpdated = storyCodeUpdated.replace(regex, valueStr);
     }
   });
-  storyCode = storyCode.replace(/`([^`]+)`/g, '"$1"');
+  storyCodeUpdated = storyCodeUpdated.replace(/`([^`]+)`/g, '"$1"');
+  const hasDestructuring = /const\s*{\s*[^}]*\s*}\s*=\s*args\s*;?/.test(
+    storyCodeUpdated
+  );
+  const hasRestSpread = /{\s*\.{3}rest\s*}/.test(storyCodeUpdated);
+
+  if (!hasDestructuring && !hasRestSpread) {
+    const regex = new RegExp(`<(${mainComponentName})(\\s|>)`);
+    storyCodeUpdated = storyCodeUpdated.replace(regex, `<$1 {...args}$2`);
+  }
   return storyCodeUpdated;
 };
 
@@ -130,7 +149,6 @@ const appGenerator = (storyCode, customImport, args) => {
     carbonComponentNames,
     storyCode
   );
-
   // Generate App.jsx code
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
   const app = `

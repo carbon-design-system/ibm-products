@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.64.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.62.0-rc.0...@carbon/ibm-products@2.64.0-rc.0) (2025-04-07)
+
+
+### Bug Fixes
+
+* **ConditionBuilder:** allow user to pass custom dateformat ([#7135](https://github.com/carbon-design-system/ibm-products/issues/7135)) ([5c1fe20](https://github.com/carbon-design-system/ibm-products/commit/5c1fe201ce38c268022b0464533e7eceb45bbc05))
+* **Conditionbuilder:** popovers do not close when clicked somewhere else when inside a tearsheet ([#7150](https://github.com/carbon-design-system/ibm-products/issues/7150)) ([49c4826](https://github.com/carbon-design-system/ibm-products/commit/49c4826758b08fdae32373b442120dd75b631d4e))
+* correct tooltip for custom operator ([#7113](https://github.com/carbon-design-system/ibm-products/issues/7113)) ([cca6e1f](https://github.com/carbon-design-system/ibm-products/commit/cca6e1f27d23ea987ee085d29976084e82e2637a))
+* **CreateFullPage:** use correct heading levels ([#7166](https://github.com/carbon-design-system/ibm-products/issues/7166)) ([503dbb5](https://github.com/carbon-design-system/ibm-products/commit/503dbb5fc4865d703aaa1ef94ce155e78b6957d7)), closes [#6816](https://github.com/carbon-design-system/ibm-products/issues/6816) [#6815](https://github.com/carbon-design-system/ibm-products/issues/6815)
+* **custom typings:** include section ([#7161](https://github.com/carbon-design-system/ibm-products/issues/7161)) ([892dc11](https://github.com/carbon-design-system/ibm-products/commit/892dc1146db2bac23fa69d03b12df5b2fd7e4382)), closes [#4336](https://github.com/carbon-design-system/ibm-products/issues/4336) [#4225](https://github.com/carbon-design-system/ibm-products/issues/4225)
+* **OptionsTile:** use correct heading levels ([#7163](https://github.com/carbon-design-system/ibm-products/issues/7163)) ([9645dc8](https://github.com/carbon-design-system/ibm-products/commit/9645dc85fc0a6581220691eaed9a5030941693a4))
+* **productive card:** onkeydown  and onclick type missing ([#7187](https://github.com/carbon-design-system/ibm-products/issues/7187)) ([dc817f8](https://github.com/carbon-design-system/ibm-products/commit/dc817f819ea36c543f9fedabd6a97d560316cd0f))
+* set minWidth to 50 instead of 0, prioritize column.minWidth ([#7181](https://github.com/carbon-design-system/ibm-products/issues/7181)) ([72f7e30](https://github.com/carbon-design-system/ibm-products/commit/72f7e3011928a57f5f5d722c5e495f188290caac))
+* **Storybook:** update documentation links ([#6989](https://github.com/carbon-design-system/ibm-products/issues/6989)) ([50f65d9](https://github.com/carbon-design-system/ibm-products/commit/50f65d9d610940ac1bcc253fa7ec94504259ffc6))
+* **tearsheet:** fix heading levels of content ([#7165](https://github.com/carbon-design-system/ibm-products/issues/7165)) ([246e6b2](https://github.com/carbon-design-system/ibm-products/commit/246e6b2d27a3c81728dbbcdef8f75a8e3778aead)), closes [#7164](https://github.com/carbon-design-system/ibm-products/issues/7164)
+* **useFocus:** resolve focus missing in state change ([#7063](https://github.com/carbon-design-system/ibm-products/issues/7063)) ([6a17a20](https://github.com/carbon-design-system/ibm-products/commit/6a17a20721daa5124ea2df6d408b231413fec007))
+
+
+### Features
+
+* add support for translateWithId to pass in to progress step ([#7148](https://github.com/carbon-design-system/ibm-products/issues/7148)) ([c947641](https://github.com/carbon-design-system/ibm-products/commit/c947641fd80a71d83de18b79c50c8f6c2761f2c0))
+* **stories:** open in stackblitz ([#7147](https://github.com/carbon-design-system/ibm-products/issues/7147)) ([879560e](https://github.com/carbon-design-system/ibm-products/commit/879560e5ae4391e2d2ebb235d7e7931bdd9d2c2d))
+
+
+
+
+
 # [2.63.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.63.0-rc.0...@carbon/ibm-products@2.63.0) (2025-04-02)
 
 **Note:** Version bump only for package @carbon/ibm-products

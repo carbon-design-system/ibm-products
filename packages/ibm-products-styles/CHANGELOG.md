@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.60.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.58.0-rc.0...@carbon/ibm-products-styles@2.60.0-rc.0) (2025-04-07)
+
+
+### Features
+
+* **stories:** open in stackblitz ([#7147](https://github.com/carbon-design-system/ibm-products/issues/7147)) ([879560e](https://github.com/carbon-design-system/ibm-products/commit/879560e5ae4391e2d2ebb235d7e7931bdd9d2c2d))
+
+
+
+
+
 # [2.59.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.59.0-rc.0...@carbon/ibm-products-styles@2.59.0) (2025-04-02)
 
 **Note:** Version bump only for package @carbon/ibm-products-styles

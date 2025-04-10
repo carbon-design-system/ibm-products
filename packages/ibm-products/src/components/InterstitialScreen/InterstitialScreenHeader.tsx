@@ -50,7 +50,10 @@ export type EnrichedChildren = {
   translateWithId?: (id: string) => string;
 };
 
-const InterstitialScreenHeader = (props: InterstitialScreenHeaderProps) => {
+const InterstitialScreenHeader = React.forwardRef<
+  HTMLDivElement,
+  InterstitialScreenHeaderProps
+>((props) => {
   const {
     className = '',
     headerTitle,
@@ -120,7 +123,7 @@ const InterstitialScreenHeader = (props: InterstitialScreenHeaderProps) => {
       {headerContent()}
     </ModalHeader>
   );
-};
+});
 
 export default InterstitialScreenHeader;
 

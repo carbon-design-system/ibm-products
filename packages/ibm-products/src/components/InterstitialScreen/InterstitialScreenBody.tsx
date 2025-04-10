@@ -20,7 +20,6 @@ import {
 } from './InterstitialScreen';
 import { ModalBody } from '@carbon/react';
 import { pkg } from '../../settings';
-import cx from 'classnames';
 
 import { Carousel } from '../Carousel';
 import { EnrichedChildren } from './InterstitialScreenHeader';
@@ -44,7 +43,10 @@ export interface InterstitialScreenBodyProps {
   ) => ReactElement<EnrichedChildren> | ReactNode;
 }
 
-const InterstitialScreenBody = (props: InterstitialScreenBodyProps) => {
+const InterstitialScreenBody = React.forwardRef<
+  HTMLDivElement,
+  InterstitialScreenBodyProps
+>((props) => {
   const { className = '', contentRenderer, ...rest } = props;
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const bodyBlockClass = `${blockClass}--internal-body`;
@@ -146,7 +148,7 @@ const InterstitialScreenBody = (props: InterstitialScreenBodyProps) => {
   ) : (
     <ModalBody className={bodyBlockClass}>{renderBody()}</ModalBody>
   );
-};
+});
 
 export default InterstitialScreenBody;
 

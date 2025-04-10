@@ -51,7 +51,10 @@ export interface InterstitialScreenFooterProps {
    */
   actionButtonRenderer?: (config: actionButtonRendererArgs) => React.ReactNode;
 }
-const InterstitialScreenFooter = (props: InterstitialScreenFooterProps) => {
+const InterstitialScreenFooter = React.forwardRef<
+  HTMLDivElement,
+  InterstitialScreenFooterProps
+>((props) => {
   const {
     className = '',
     skipButtonLabel = 'Skip',
@@ -168,7 +171,7 @@ const InterstitialScreenFooter = (props: InterstitialScreenFooterProps) => {
   ) : (
     <ModalFooter>{getFooterContent()}</ModalFooter>
   );
-};
+});
 
 export default InterstitialScreenFooter;
 

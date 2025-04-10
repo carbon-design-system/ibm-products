@@ -192,31 +192,7 @@ jobs:
           name: playwright-avt-report
           path: .playwright
 
-  vrt-runner:
-    runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.x'
-          cache: yarn
-      - name: Install
-        run: yarn
-      - name: Install browsers
-        run: yarn playwright install --with-deps
-      - name: Build project
-        run: yarn build
-      - name: Run VRT
-        if:
-          ${{ env.PERCY_TOKEN != '' && github.repository ==
-          'carbon-design-system/ibm-products' && github.event.pull_request.draft
-          == false }}
-        working-directory: packages/core
-        run: yarn percy storybook storybook-static
+
 
   avt:
     if: ${{ always() }}

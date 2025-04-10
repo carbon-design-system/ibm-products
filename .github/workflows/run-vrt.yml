@@ -1,8 +1,16 @@
 name: Visual Regression Testing
 
 on:
-  issue_comment:
-    types: [created]
+    pull_request:
+      branches:
+        - main
+        - v1
+        - 'percySnapshot'
+        - 'release\/v2**'
+    issue_comment:
+        types: [created]    
+
+  
 
 jobs:
   vrt-runner:

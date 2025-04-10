@@ -14,9 +14,6 @@ on:
 
 jobs:
   vrt-runner:
-    if: |
-      github.event.issue.pull_request &&
-      github.event.comment.body == '/run-vrt'
     runs-on: ubuntu-latest
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}

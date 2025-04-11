@@ -6,8 +6,7 @@
 //
 
 // Standard imports.
-@use '../../global/styles/project-settings' as c4p-settings;
-@use '../../global/styles/mixins';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';

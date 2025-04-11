@@ -11,8 +11,8 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
+import { pkg } from '../../../../settings';
+import './_interstitial-screen-view.scss';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -78,7 +78,6 @@ export let InterstitialScreenView = React.forwardRef<
           }
         )}
         ref={ref}
-        {...getDevtoolsProps(componentName)}
       >
         {children}
       </div>

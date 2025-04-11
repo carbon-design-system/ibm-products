@@ -104,8 +104,6 @@ export { NonLinearReading } from './NonLinearReading';
 export { BigNumbers } from './BigNumbers';
 export { TruncatedList } from './TruncatedList';
 export { InterstitialScreen } from './InterstitialScreen';
-export { InterstitialScreenView } from './InterstitialScreenView';
-export { InterstitialScreenViewModule } from './InterstitialScreenViewModule';
 export { DelimitedList } from './DelimitedList';
 export { Decorator } from './Decorator';
 export { DecoratorLink } from './DecoratorLink';

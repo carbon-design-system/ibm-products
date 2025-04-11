@@ -33,7 +33,7 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByText('Main view')).toBeVisible();
     await page.getByText('View all').click();
     await expect(page.getByText('Detail view')).toBeVisible();
-    await page.getByLabel('back').click();
+    await page.getByRole('button', { name: 'back' }).click();
     await expect(page.getByText('Main view')).toBeVisible();
   });
 

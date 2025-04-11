@@ -48,29 +48,6 @@ export const getNewSortOrder = (currentOrder?: boolean | string) => {
   return order;
 };
 
-const getAriaSortValue = (
-  col,
-  {
-    ascendingSortableLabelText,
-    descendingSortableLabelText,
-    defaultSortableLabelText,
-  }
-) => {
-  if (!col) {
-    return;
-  }
-  const { isSorted, isSortedDesc } = col;
-  if (!isSorted) {
-    return defaultSortableLabelText;
-  }
-  if (isSorted && !isSortedDesc) {
-    return ascendingSortableLabelText;
-  }
-  if (isSorted && isSortedDesc) {
-    return descendingSortableLabelText;
-  }
-};
-
 const getAriaPressedValue = (col) => {
   if (!col) {
     return;
@@ -84,12 +61,7 @@ const getAriaPressedValue = (col) => {
 
 const useSortableColumns = (hooks: Hooks) => {
   const sortableVisibleColumns = (visibleColumns, { instance }) => {
-    const {
-      onSort,
-      ascendingSortableLabelText,
-      descendingSortableLabelText,
-      defaultSortableLabelText,
-    } = instance;
+    const { onSort } = instance;
     const onSortClick = (event, column) => {
       const aiLabel =
         event.target.classList.contains(`${carbon.prefix}--slug`) ||
@@ -145,11 +117,6 @@ const useSortableColumns = (hooks: Hooks) => {
           )
         ) : (
           <Button
-            aria-sort={getAriaSortValue(headerProp?.column, {
-              ascendingSortableLabelText,
-              descendingSortableLabelText,
-              defaultSortableLabelText,
-            })}
             aria-pressed={getAriaPressedValue(headerProp?.column)}
             onClick={(event) => onSortClick(event, headerProp?.column)}
             kind="ghost"

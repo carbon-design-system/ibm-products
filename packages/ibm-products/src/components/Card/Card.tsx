@@ -350,7 +350,7 @@ export const Card = forwardRef(
       secondaryButtonText,
     });
     return (
-      <Section aria-disabled={disabled} {...getCardProps()}>
+      <Section as="div" aria-disabled={disabled} {...getCardProps()}>
         {!getStarted && media && (
           <div className={`${blockClass}__media`}>{media}</div>
         )}

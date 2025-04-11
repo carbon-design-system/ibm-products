@@ -1,30 +1,40 @@
-name: Visual Regression Testin
+name: Visual Regression Testing
 
 on:
+  pull_request_target:
+    types: [opened, closed, synchronize]
   issue_comment:
     types: [created]
 
 jobs:
   vrt-runner:
     if: |
+      github.event_name == 'issue_comment' &&
       github.event.issue.pull_request &&
       github.event.comment.body == '/run-vrt'
     runs-on: ubuntu-latest
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
 
+    permissions:
+      contents: read
+      pull-requests: write
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout PR code
+        uses: actions/checkout@v3
+        with:
+          ref: refs/pull/${{ github.event.issue.number }}/merge
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-          cache: yarn
+          cache: 'yarn'
 
-      - name: Install
-        run: yarn
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Install browsers
         run: yarn playwright install --with-deps
@@ -32,6 +42,6 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Run VRT
+      - name: Run Percy VRT
         working-directory: packages/core
         run: yarn percy storybook storybook-static

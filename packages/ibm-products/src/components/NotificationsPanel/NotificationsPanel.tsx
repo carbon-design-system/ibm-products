@@ -570,6 +570,7 @@ export let NotificationsPanel = React.forwardRef(
         <Section
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
+          as="div"
           role="button"
           tabIndex={0}
           onClick={() => notification.onNotificationClick(notification)}
@@ -708,6 +709,7 @@ export let NotificationsPanel = React.forwardRef(
         </button>
         {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
         <Section
+          as="div"
           role="dialog"
           aria-label="Notification Panel"
           onKeyDown={handleKeydown}

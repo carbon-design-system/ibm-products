@@ -13,6 +13,7 @@ import {
   OverflowMenu,
   MenuItem,
   Layer,
+  Section,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
 import { CheckmarkOutline, Incomplete } from '@carbon/react/icons';
@@ -182,7 +183,7 @@ export const Card = forwardRef(
                 label={overflowAriaLabel || iconDescription}
               >
                 {overflowActions.map(({ id, itemText, ...rest }) => (
-                  <MenuItem key={id} label={itemText} {...rest} />
+                  <MenuItem key={id} label={itemText ?? ''} {...rest} />
                 ))}
               </OverflowMenu>
             </FeatureFlags>
@@ -349,7 +350,7 @@ export const Card = forwardRef(
       secondaryButtonText,
     });
     return (
-      <div aria-disabled={disabled} {...getCardProps()}>
+      <Section aria-disabled={disabled} {...getCardProps()}>
         {!getStarted && media && (
           <div className={`${blockClass}__media`}>{media}</div>
         )}
@@ -379,7 +380,7 @@ export const Card = forwardRef(
           </div>
           {hasBottomBar && <CardFooter {...getFooterProps()} />}
         </div>
-      </div>
+      </Section>
     );
   }
 );

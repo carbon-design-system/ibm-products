@@ -341,11 +341,8 @@ export let CreateFullPage = React.forwardRef(
           Number(initialStep) > Number(stepData?.length)) ||
         Number(initialStep) <= 0
       ) {
-        if (Number(initialStep) <= 0) {
-          setCurrentStep(1);
-        } else {
-          setCurrentStep(stepData?.length);
-        }
+        setCurrentStep(1);
+
         console.warn(
           `${componentName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${componentName} has.`
         );

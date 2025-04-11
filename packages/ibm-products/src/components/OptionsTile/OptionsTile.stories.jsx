@@ -9,6 +9,7 @@ import React from 'react';
 import { Dropdown } from '@carbon/react';
 import { OptionsTile } from '.';
 import styles from './_storybook-styles.scss?inline';
+import mdx from './OptionsTile.mdx';
 
 export default {
   title: 'IBM Products/Components/Options tile/OptionsTile',
@@ -16,6 +17,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
+    docs: {
+      page: mdx,
+    },
   },
   percy: {
     args: {
@@ -23,50 +27,49 @@ export default {
     },
   },
 };
-
-// spell-checker:disable
-const languages = [
-  { label: 'English', id: 'en' },
-  { label: '简体中文 - Chinese Simplified', id: 'zh-CN' },
-  { label: '繁體中文 - Chinese Traditional', id: 'zh-TW' },
-  { label: 'Français - French', id: 'fr' },
-  { label: 'Deutsch - German', id: 'de' },
-  { label: 'Italiano - Italian', id: 'it' },
-  { label: '日本語 - Japanese', id: 'ja' },
-  { label: '한국어 - Korean', id: 'ko' },
-  { label: 'Polski - Polish', id: 'pl' },
-  { label: 'Português (brasileiro) - Portuguese (Brazilian)', id: 'pt-BR' },
-  { label: 'Русский - Russian', id: 'ru' },
-  { label: 'Español - Spanish', id: 'es' },
-];
-
-const locales = [
-  { label: 'English', id: 'en' },
-  { label: 'English-US', id: 'en-US' },
-  { label: 'English-UK', id: 'en-UK' },
-  { label: 'English-Canada', id: 'en-CA' },
-  { label: 'English-Australia', id: 'en-AU' },
-  { label: 'Japanese', id: 'ja' },
-  { label: 'Korean', id: 'ko' },
-  { label: 'Chinese-PRC', id: 'zh-CN' },
-  { label: 'Chinese-Taiwan', id: 'zh-TW' },
-  { label: 'Vietnamese', id: 'vi' },
-  { label: 'Thai', id: 'th' },
-  { label: 'Russian', id: 'ru' },
-  { label: 'Polish', id: 'pl' },
-  { label: 'Greek', id: 'el' },
-  { label: 'Hebrew', id: 'he' },
-  { label: 'Arabic', id: 'ar' },
-  { label: 'Spanish', id: 'es' },
-  { label: 'German', id: 'de' },
-  { label: 'French', id: 'fr' },
-  { label: 'French-Canada', id: 'fr-CA' },
-  { label: 'Italian', id: 'it' },
-  { label: 'Portuguese-Brazil', id: 'pt-BR' },
-  { label: 'Turkish', id: 'tr' },
-];
-
 const Template = (args) => {
+  // spell-checker:disable
+  const languages = [
+    { label: 'English', id: 'en' },
+    { label: '简体中文 - Chinese Simplified', id: 'zh-CN' },
+    { label: '繁體中文 - Chinese Traditional', id: 'zh-TW' },
+    { label: 'Français - French', id: 'fr' },
+    { label: 'Deutsch - German', id: 'de' },
+    { label: 'Italiano - Italian', id: 'it' },
+    { label: '日本語 - Japanese', id: 'ja' },
+    { label: '한국어 - Korean', id: 'ko' },
+    { label: 'Polski - Polish', id: 'pl' },
+    { label: 'Português (brasileiro) - Portuguese (Brazilian)', id: 'pt-BR' },
+    { label: 'Русский - Russian', id: 'ru' },
+    { label: 'Español - Spanish', id: 'es' },
+  ];
+
+  const locales = [
+    { label: 'English', id: 'en' },
+    { label: 'English-US', id: 'en-US' },
+    { label: 'English-UK', id: 'en-UK' },
+    { label: 'English-Canada', id: 'en-CA' },
+    { label: 'English-Australia', id: 'en-AU' },
+    { label: 'Japanese', id: 'ja' },
+    { label: 'Korean', id: 'ko' },
+    { label: 'Chinese-PRC', id: 'zh-CN' },
+    { label: 'Chinese-Taiwan', id: 'zh-TW' },
+    { label: 'Vietnamese', id: 'vi' },
+    { label: 'Thai', id: 'th' },
+    { label: 'Russian', id: 'ru' },
+    { label: 'Polish', id: 'pl' },
+    { label: 'Greek', id: 'el' },
+    { label: 'Hebrew', id: 'he' },
+    { label: 'Arabic', id: 'ar' },
+    { label: 'Spanish', id: 'es' },
+    { label: 'German', id: 'de' },
+    { label: 'French', id: 'fr' },
+    { label: 'French-Canada', id: 'fr-CA' },
+    { label: 'Italian', id: 'it' },
+    { label: 'Portuguese-Brazil', id: 'pt-BR' },
+    { label: 'Turkish', id: 'tr' },
+  ];
+
   const { titleId: id, ...rest } = args;
   return (
     <main>

@@ -35,7 +35,7 @@ test.describe('NotificationsPanel @avt', () => {
     });
 
     const notificationPanel = await page.locator(
-      `div#${pkg.prefix}--notifications-panel`
+      `#${pkg.prefix}--notifications-panel`
     );
     await expect(notificationPanel).toBeVisible();
 

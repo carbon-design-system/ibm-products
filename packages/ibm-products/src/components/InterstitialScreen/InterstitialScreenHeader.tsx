@@ -72,12 +72,15 @@ const InterstitialScreenHeader = React.forwardRef<
   const headerContent = () => {
     return (
       <>
-        <div className={`${blockClass}--titleContainer`}>
-          {headerTitle && <h2>{headerTitle}</h2>}
-          {headerSubTitle && <h3>{headerSubTitle}</h3>}
-        </div>
+        {(headerTitle || headerSubTitle) && (
+          <div className={`${blockClass}--titleContainer`}>
+            {headerTitle && <h2>{headerTitle}</h2>}
+            {headerSubTitle && <h3>{headerSubTitle}</h3>}
+          </div>
+        )}
 
         {children}
+
         {!hideProgressIndicator &&
           bodyChildrenData &&
           Array.isArray(bodyChildrenData) && (

@@ -6,7 +6,15 @@
  */
 
 // Carbon and package components we use.
-import { Button, Link, Toggle, IconButton, usePrefix } from '@carbon/react';
+import {
+  Button,
+  Heading,
+  IconButton,
+  Link,
+  Section,
+  Toggle,
+  usePrefix,
+} from '@carbon/react';
 import { dateTimeFormat } from '@carbon/utilities';
 import {
   CheckmarkFilled,
@@ -559,7 +567,7 @@ export let NotificationsPanel = React.forwardRef(
         },
       ]);
       return (
-        <div
+        <Section
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
           role="button"
@@ -643,9 +651,9 @@ export let NotificationsPanel = React.forwardRef(
                     nowText,
                   })}
             </p>
-            <h6 className={notificationHeaderClassName}>
+            <Heading className={notificationHeaderClassName}>
               {notification.title}
-            </h6>
+            </Heading>
             {notification.description &&
               notification.description.length &&
               renderDescription(notification.id)}
@@ -671,7 +679,7 @@ export let NotificationsPanel = React.forwardRef(
           >
             <Close size={16} />
           </IconButton>
-        </div>
+        </Section>
       );
     };
 
@@ -699,7 +707,7 @@ export let NotificationsPanel = React.forwardRef(
           Focus sentinel start
         </button>
         {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
-        <div
+        <Section
           role="dialog"
           aria-label="Notification Panel"
           onKeyDown={handleKeydown}
@@ -722,7 +730,7 @@ export let NotificationsPanel = React.forwardRef(
           <div ref={notificationPanelInnerRef}>
             <div className={`${blockClass}__header-container`}>
               <div className={`${blockClass}__header-flex`}>
-                <h2 className={`${blockClass}__header`}>{title}</h2>
+                <Heading className={`${blockClass}__header`}>{title}</Heading>
                 <Button
                   size="sm"
                   kind="ghost"
@@ -746,13 +754,13 @@ export let NotificationsPanel = React.forwardRef(
                 />
               )}
             </div>
-            <div className={mainSectionClassName}>
+            <Section className={mainSectionClassName}>
               {withinLastDayNotifications &&
               withinLastDayNotifications.length ? (
                 <>
-                  <h6 className={`${blockClass}__time-section-label`}>
+                  <Heading className={`${blockClass}__time-section-label`}>
                     {todayLabel}
-                  </h6>
+                  </Heading>
                   {withinLastDayNotifications.map((notification, index) =>
                     renderNotification('today', notification, index)
                   )}
@@ -760,9 +768,9 @@ export let NotificationsPanel = React.forwardRef(
               ) : null}
               {previousDayNotifications && previousDayNotifications.length ? (
                 <>
-                  <h6 className={`${blockClass}__time-section-label`}>
+                  <Heading className={`${blockClass}__time-section-label`}>
                     {yesterdayLabel}
-                  </h6>
+                  </Heading>
                   {previousDayNotifications.map((notification, index) =>
                     renderNotification('yesterday', notification, index)
                   )}
@@ -770,9 +778,9 @@ export let NotificationsPanel = React.forwardRef(
               ) : null}
               {previousNotifications && previousNotifications.length ? (
                 <>
-                  <h6 className={`${blockClass}__time-section-label`}>
+                  <Heading className={`${blockClass}__time-section-label`}>
                     {previousLabel}
-                  </h6>
+                  </Heading>
                   {previousNotifications.map((notification, index) =>
                     renderNotification('previous', notification, index)
                   )}
@@ -785,7 +793,7 @@ export let NotificationsPanel = React.forwardRef(
                   subtitle={emptyStateLabel}
                 />
               )}
-            </div>
+            </Section>
             {onViewAllClick &&
               onSettingsClick &&
               allNotifications &&
@@ -811,7 +819,7 @@ export let NotificationsPanel = React.forwardRef(
                 </div>
               )}
           </div>
-        </div>
+        </Section>
         {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
         <button
           type="button"

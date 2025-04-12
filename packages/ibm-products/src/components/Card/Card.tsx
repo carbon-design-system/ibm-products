@@ -30,6 +30,11 @@ type ActionIcon = {
   onClick?: () => void;
   iconDescription?: string;
   href?: string;
+  link?: {
+    url: string;
+    target?: string;
+    rel?: string;
+  };
 };
 type OverflowActions = {
   id?: string;
@@ -44,6 +49,11 @@ type Metadata = {
   iconDescription?: string;
   onClick?: () => void;
   href?: string;
+  link?: {
+    url: string;
+    target?: string;
+    rel?: string;
+  };
 };
 interface CardProp extends PropsWithChildren {
   actionIcons?: readonly ActionIcon[];
@@ -192,7 +202,7 @@ export const Card = forwardRef(
       }
 
       const icons = getIcons().map(
-        ({ id, icon: Icon, onClick, iconDescription, href, ...rest }) => {
+        ({ id, icon: Icon, onClick, iconDescription, href, link, ...rest }) => {
           if (getStarted) {
             return (
               <span key={id} className={`${blockClass}__icon`}>
@@ -216,13 +226,15 @@ export const Card = forwardRef(
               />
             );
           }
-          if (href) {
+          if (link?.url || href) {
             return (
               <a
                 key={id}
                 className={`${blockClass}__icon`}
-                href={href}
+                href={link?.url || href}
                 onClick={onClick}
+                target={link?.target ?? '_self'}
+                rel={link?.rel ?? ''}
               >
                 {Icon && <Icon aria-label={iconDescription} />}
               </a>
@@ -395,6 +407,11 @@ Card.propTypes = {
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
       href: PropTypes.string,
+      link: {
+        url: PropTypes.string.isRequired,
+        target: PropTypes.string,
+        rel: PropTypes.string,
+      },
     })
   ),
   actionsPlacement: PropTypes.oneOf(['top', 'bottom']),

@@ -21,6 +21,11 @@ type ActionIcon = {
   onClick?: () => void;
   iconDescription?: string;
   href?: string;
+  link?: {
+    url: string;
+    target?: string;
+    rel?: string;
+  };
 };
 
 export interface ExpressiveCardProps extends PropsWithChildren {
@@ -150,6 +155,11 @@ ExpressiveCard.propTypes = {
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
       href: PropTypes.string,
+      link: {
+        url: PropTypes.string.isRequired,
+        target: PropTypes.string,
+        rel: PropTypes.string,
+      },
     })
   ),
   /**

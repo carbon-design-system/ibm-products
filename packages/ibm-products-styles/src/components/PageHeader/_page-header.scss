@@ -109,6 +109,7 @@ $duration: 1000ms;
     z-index: $z-index-header-minus;
     display: inline-block; /* cause top/bottom margin to reserve space */
     background-color: $background;
+    border-block-end: 1px solid $border-subtle-00;
     color: $text-primary;
     inline-size: 100%;
     /* stylelint-disable-next-line carbon/layout-use */
@@ -122,6 +123,10 @@ $duration: 1000ms;
     --#{$block-class}--breadcrumb-title-top: initial;
     --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
     --#{$block-class}--navigation-buffer-top: $spacing-06;
+  }
+
+  &.#{$block-class}--without-background {
+    border-block-end: none;
   }
 
   &.#{$block-class}--has-navigation-tags-only {

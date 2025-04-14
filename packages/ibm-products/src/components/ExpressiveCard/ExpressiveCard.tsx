@@ -30,7 +30,7 @@ type ActionIcon = {
 
 export interface ExpressiveCardProps extends PropsWithChildren {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.url for href functionality. If you are setting link, url is a required property.
    */
   actionIcons?: ActionIcon[];
   /**
@@ -155,11 +155,11 @@ ExpressiveCard.propTypes = {
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
       href: PropTypes.string,
-      link: {
+      link: PropTypes.shape({
         url: PropTypes.string.isRequired,
         target: PropTypes.string,
         rel: PropTypes.string,
-      },
+      }),
     })
   ),
   /**

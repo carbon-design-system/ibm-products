@@ -226,21 +226,6 @@ WithMedia.args = {
   ...defaultProps,
 };
 
-export const WithActionIconHref = Template.bind({});
-WithActionIconHref.args = {
-  ...defaultProps,
-  actionIcons: [
-    {
-      id: '1',
-      icon: (props) => <ArrowRight size={24} {...props} />,
-      href: '#',
-      iconDescription: 'Next',
-    },
-  ],
-  primaryButtonText: '',
-  mediaRatio: null,
-};
-
 export const WithActionIconLink = Template.bind({});
 WithActionIconLink.args = {
   ...defaultProps,

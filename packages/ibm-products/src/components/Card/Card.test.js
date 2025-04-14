@@ -33,7 +33,7 @@ describe(componentName, () => {
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
 
-  it('Renders expressive card with action icons and ensures that each click is being called', async () => {
+  it('renders expressive card with primary and secondary buttons and ensures that each click is being called', async () => {
     const { click } = userEvent;
     const onPrimaryButtonClick = jest.fn();
     const onSecondaryButtonClick = jest.fn();
@@ -50,7 +50,7 @@ describe(componentName, () => {
     expect(onSecondaryButtonClick).toHaveBeenCalled();
   });
 
-  it('renders expressive with action icons', async () => {
+  it('renders an expressive card with action icons', async () => {
     const { click } = userEvent;
     const onClick = jest.fn();
     const actionIcons = [
@@ -268,6 +268,49 @@ describe(componentName, () => {
       click(container.querySelector(`.${blockClass}__clickable`))
     );
     expect(onClick).toHaveBeenCalled();
+  });
+
+  it('renders a productive card with action icons', async () => {
+    const actionIcons = [
+      {
+        id: '1',
+        icon: ArrowRight,
+        iconDescription: 'Visit Carbon official site',
+        link: {
+          url: 'https://carbondesignsystem.com/',
+          target: '_blank',
+          rel: 'noreferrer noopener',
+        },
+      },
+    ];
+
+    const props = {
+      title: 'Title',
+      description: 'Description',
+      productive: true,
+      actionIcons,
+      children: <p>body</p>,
+    };
+
+    render(<Card {...props} />);
+
+    // link with url, target and rel
+    const LinkWithTargetAndRel = screen.getByRole('link', {
+      name: actionIcons[0].iconDescription,
+    });
+    expect(LinkWithTargetAndRel).toBeInTheDocument();
+    expect(LinkWithTargetAndRel).toHaveAttribute(
+      'href',
+      actionIcons[0].link.url
+    );
+    expect(LinkWithTargetAndRel).toHaveAttribute(
+      'target',
+      actionIcons[0].link.target
+    );
+    expect(LinkWithTargetAndRel).toHaveAttribute(
+      'rel',
+      actionIcons[0].link.rel
+    );
   });
 
   it('has no accessibility violations', async () => {

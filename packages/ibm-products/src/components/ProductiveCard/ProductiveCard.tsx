@@ -18,17 +18,10 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { ActionIcon } from '../Card/Card';
 
 const componentName = 'ProductiveCard';
 
-type ActionIcon = {
-  id?: string;
-  icon?: CarbonIconType;
-  onClick?: (event: MouseEvent) => void;
-  onKeydown?: (event: KeyboardEvent) => void;
-  iconDescription?: string;
-  href?: string;
-};
 type overflowAction = {
   id?: string;
   itemText?: string;
@@ -39,7 +32,7 @@ type PlacementType = 'top' | 'bottom';
 type ClickZoneType = 'one' | 'two' | 'three';
 export interface ProductiveCardProps extends PropsWithChildren {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.url for href functionality. If you are setting link, url is a required property.
    */
   actionIcons?: ActionIcon[];
   /**
@@ -199,7 +192,15 @@ ProductiveCard.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      /**
+       * @deprecated please use the `link.url` instead
+       */
       href: PropTypes.string,
+      link: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        target: PropTypes.string,
+        rel: PropTypes.string,
+      }),
     })
   ),
   /**

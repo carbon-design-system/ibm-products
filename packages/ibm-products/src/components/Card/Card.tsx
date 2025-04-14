@@ -22,19 +22,23 @@ import { CardFooter } from './CardFooter';
 import { pkg } from '../../settings';
 const componentName = 'Card';
 
-type ActionIcon = {
+interface Metadata {
   id?: string;
   icon?: () => ReactNode;
+  iconDescription?: string;
+}
+
+interface ActionIcon extends Metadata {
   onKeydown?: () => void;
   onClick?: () => void;
-  iconDescription?: string;
   href?: string;
   link?: {
     url: string;
     target?: string;
     rel?: string;
   };
-};
+}
+
 type OverflowActions = {
   id?: string;
   itemText?: string;
@@ -42,18 +46,6 @@ type OverflowActions = {
   onKeydown?: () => void;
 };
 
-type Metadata = {
-  id?: string;
-  icon?: () => ReactNode;
-  iconDescription?: string;
-  onClick?: () => void;
-  href?: string;
-  link?: {
-    url: string;
-    target?: string;
-    rel?: string;
-  };
-};
 interface CardProp extends PropsWithChildren {
   actionIcons?: readonly ActionIcon[];
   actionsPlacement?: 'top' | 'bottom';
@@ -157,10 +149,10 @@ export const Card = forwardRef(
     }: CardProp,
     ref: React.ForwardedRef<HTMLDivElement>
   ) => {
-    const getIcons = () => (getStarted ? metadata : actionIcons);
+    const IconList: readonly ActionIcon[] = getStarted ? metadata : actionIcons;
     const blockClass = `${pkg.prefix}--card`;
     const hasActions =
-      getIcons().length > 0 ||
+      IconList?.length > 0 ||
       overflowActions.length > 0 ||
       (!!primaryButtonText && primaryButtonPlacement === 'top');
     const hasHeaderActions = hasActions && actionsPlacement === 'top';
@@ -200,7 +192,7 @@ export const Card = forwardRef(
         );
       }
 
-      const icons = getIcons().map(
+      const icons = IconList?.map(
         ({ id, icon: Icon, onClick, iconDescription, href, link, ...rest }) => {
           if (getStarted) {
             return (
@@ -303,7 +295,7 @@ export const Card = forwardRef(
       actions: actionsPlacement === 'top' ? getActions() : '',
       decorator,
       noActionIcons:
-        getIcons().length > 0 && actionsPlacement === 'top' ? false : true,
+        IconList?.length > 0 && actionsPlacement === 'top' ? false : true,
       actionsPlacement,
       onPrimaryButtonClick,
       onSecondaryButtonClick,

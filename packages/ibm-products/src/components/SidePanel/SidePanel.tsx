@@ -37,6 +37,7 @@ import { moderate02 } from '@carbon/motion';
 import pconsole from '../../global/js/utils/pconsole';
 import { pkg } from '../../settings';
 import { getSpecificElement } from '../../global/js/hooks/useFocus';
+import ResizeBar from './ResizeBar';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
@@ -289,7 +290,7 @@ export let SidePanel = React.forwardRef(
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
     const panelRefValue = sidePanelRef.current;
     const previousOpen = usePreviousValue(open);
-
+    const [sidepanelWidth, setSidepanelWidth] = useState<number>(480); // predefined sizes 'xs','sm','md','lg','xl','2xl' in scss messes this up, need to find a cleaner approach, maybe get them and set here??
     const shouldReduceMotion = usePrefersReducedMotion();
     const exitAnimationName = shouldReduceMotion
       ? 'side-panel-exit-reduced'
@@ -476,6 +477,10 @@ export let SidePanel = React.forwardRef(
           '0'
         );
       }
+      if (sidePanelRef.current) {
+        sidePanelRef.current.style.width = `${sidepanelWidth}px`;
+      }
+      // eslint-disable-next-line
     }, [
       doAnimateTitle,
       handleScroll,
@@ -484,6 +489,9 @@ export let SidePanel = React.forwardRef(
       open,
       panelRefValue?.style,
     ]);
+
+    // note side panel without all these changes still renders ~5 times on initial load, i think we need to optimize it.
+    // console.log("render");
 
     // Calculate scroll distances
     useEffect(() => {
@@ -908,6 +916,25 @@ export let SidePanel = React.forwardRef(
           onAnimationStart={onAnimationStart}
           onKeyDown={handleKeyDown}
         >
+          <ResizeBar
+            // this callback can be used to set width of side panel
+            // in the context of grid, we can set grid template of the parent
+            // there is also a default behavior internally and double click is han
+            onResize={(delta) => {
+              // setSidepanelWidth(sidePanelRef.current.clientWidth);
+              sidePanelRef.current.style.inlineSize = `${Math.max(sidepanelWidth - delta, 48)}px`;
+            }}
+            // added this callback to set the initial width of the side panel, we don't want to set it on every resize for performance reasons
+            onResizeEnd={() => {
+              setSidepanelWidth(sidePanelRef.current.clientWidth);
+            }}
+            onDoubleClick={() => {
+              setSidepanelWidth(480);
+              sidePanelRef.current.style.inlineSize = '480px';
+            }}
+            orientation="vertical"
+            className={cx(`${blockClass}__resize-bar`)}
+          />
           {/* header */}
           {renderHeader()}
 

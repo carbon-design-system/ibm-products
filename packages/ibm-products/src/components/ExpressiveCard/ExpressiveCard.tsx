@@ -13,20 +13,7 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
-
-type ActionIcon = {
-  id?: string;
-  icon?: () => void | object;
-  onKeydown?: () => void;
-  onClick?: () => void;
-  iconDescription?: string;
-  href?: string;
-  link?: {
-    url: string;
-    target?: string;
-    rel?: string;
-  };
-};
+import { ActionIcon } from '../Card/Card';
 
 export interface ExpressiveCardProps extends PropsWithChildren {
   /**
@@ -154,6 +141,9 @@ ExpressiveCard.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      /**
+       * @deprecated please use the `link.url` instead
+       */
       href: PropTypes.string,
       link: PropTypes.shape({
         url: PropTypes.string.isRequired,

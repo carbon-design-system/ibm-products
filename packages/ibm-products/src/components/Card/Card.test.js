@@ -8,6 +8,7 @@
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { Add, UserIdentification, ArrowRight } from '@carbon/react/icons';
 
 import { Card } from '.';
 import { pkg, carbon } from '../../settings';
@@ -56,25 +57,62 @@ describe(componentName, () => {
       {
         id: '1',
         onClick,
-        icon: () => <div>withOnClick</div>,
-        iconDescription: 'icon',
+        icon: Add,
+        iconDescription: 'Click here to add a new user',
       },
       {
         id: '2',
         href: '#',
-        icon: () => <div>withHref</div>,
-        iconDescription: 'icon',
+        icon: UserIdentification,
+        iconDescription: 'Contact IBM Support',
+      },
+      {
+        id: '3',
+        icon: ArrowRight,
+        iconDescription: 'Visit Carbon official site',
+        link: {
+          url: 'https://carbondesignsystem.com/',
+          target: '_blank',
+          rel: 'noreferrer noopener',
+        },
       },
     ];
     const props = {
       actionIcons,
     };
     render(<Card {...props} />);
-    await act(() => click(screen.getByText('withOnClick')));
+
+    // with onClick
+    const AddButton = screen.getByRole('button', {
+      name: actionIcons[0].iconDescription,
+    });
+    expect(AddButton).toBeInTheDocument();
+    await act(() => click(AddButton));
     expect(onClick).toHaveBeenCalled();
-    expect(screen.getByText('withHref').closest('a')).toHaveAttribute(
+
+    // link with href
+    const LinkWithHref = screen.getByRole('link', {
+      name: actionIcons[1].iconDescription,
+    });
+    expect(LinkWithHref).toBeInTheDocument();
+    expect(LinkWithHref).toHaveAttribute('href', actionIcons[1].href);
+
+    // link with url, target and rel
+    const LinkWithTargetAndRel = screen.getByRole('link', {
+      name: actionIcons[2].iconDescription,
+    });
+    expect(LinkWithTargetAndRel).toBeInTheDocument();
+    expect(LinkWithTargetAndRel).toHaveAttribute(
       'href',
-      '#'
+      actionIcons[2].link.url
+    );
+    expect(LinkWithTargetAndRel).toHaveAttribute(
+      'target',
+      actionIcons[2].link.target
+    );
+    expect(LinkWithTargetAndRel).toHaveAttribute(
+      'rel',
+      actionIcons[2].link.rel
     );
   });
 

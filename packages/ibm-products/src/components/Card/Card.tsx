@@ -398,11 +398,11 @@ Card.propTypes = {
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
       href: PropTypes.string,
-      link: {
+      link: PropTypes.shape({
         url: PropTypes.string.isRequired,
         target: PropTypes.string,
         rel: PropTypes.string,
-      },
+      }),
     })
   ),
   actionsPlacement: PropTypes.oneOf(['top', 'bottom']),

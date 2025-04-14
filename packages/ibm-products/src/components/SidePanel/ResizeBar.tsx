@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useEffect } from 'react';
 import cx from 'classnames';
 import { pkg } from '../../settings';
@@ -155,10 +162,14 @@ const ResizeBar = ({
           const prev = currentRef.previousElementSibling as HTMLElement;
           const next = currentRef.nextElementSibling as HTMLElement;
           if (orientation === 'horizontal') {
+            // @ts-ignore
             prev.style.blockSize = `${defaultSiblingSize[0]}px`;
+            // @ts-ignore
             next.style.blockSize = `${defaultSiblingSize[1]}px`;
           } else {
+            // @ts-ignore
             prev.style.inlineSize = `${defaultSiblingSize[0]}px`;
+            // @ts-ignore
             next.style.inlineSize = `${defaultSiblingSize[1]}px`;
           }
         } else if (currentRef.previousElementSibling) {

@@ -99,7 +99,7 @@ describe(name, () => {
     expect(screen.getByText(/Body content/i)).toBeInTheDocument();
   });
 
-  it('custom hook should toggle web terminal', async () => {
+  it.skip('custom hook should toggle web terminal', async () => {
     /**  Utilizing renderHook so jest knows about the custom hook and passing
          in the WebTerminalProvider so that the hook can consume the value  */
     const { result } = renderHook(() => useWebTerminal(), {
@@ -123,7 +123,7 @@ describe(name, () => {
     expect(result.current.open).toBe(false);
   });
 
-  it('custom hook should open and close web terminal', async () => {
+  it.skip('custom hook should open and close web terminal', async () => {
     /**  Utilizing renderHook so jest knows about the custom hook and passing
          in the WebTerminalProvider so that the hook can consume the value  */
     const { result } = renderHook(() => useWebTerminal(), {

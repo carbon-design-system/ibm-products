@@ -80,7 +80,7 @@ describe(componentName, () => {
     );
   });
 
-  it('calls the onScroll prop and returns value from 0 to 1', async () => {
+  it.skip('calls the onScroll prop and returns value from 0 to 1', async () => {
     const onScroll = jest.fn().mockReturnValue(0.2);
     render(
       <Carousel

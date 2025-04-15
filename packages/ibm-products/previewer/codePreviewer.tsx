@@ -5,15 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
 import StackBlitzSDK from '@stackblitz/sdk';
-import sdk, { Project } from '@stackblitz/sdk';
+import { Project } from '@stackblitz/sdk';
 import { index, main, packageJson, style, viteConfig } from './configFiles';
 import * as carbonComponentsReact from '@carbon/react';
 import * as carbonIconsReact from '@carbon/icons-react';
 const iconsNames = Object.keys(carbonIconsReact);
+const carbonComponentNames = Object.keys(carbonComponentsReact);
 let componentNames;
 let mainComponentName;
+
+interface ComponentSources {
+  carbon: string[];
+  ibmProducts: string[];
+  icons: string[];
+  unknown: string[];
+}
 
 export const stackblitzPrefillConfig = async (
   code: any,
@@ -62,7 +69,6 @@ const filterStoryCode = (storyCode, args) => {
     .replace(/{\.\.\.args}/g, '')
     .replace(/onChange=\{(args\.onChange|action\('onChange'\))\}\s*/g, '')
     .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
-  // Replace args properties with values
   Object.entries(args).forEach(([key, value]) => {
     const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const templateLiteralRegex = new RegExp(
@@ -78,14 +84,11 @@ const filterStoryCode = (storyCode, args) => {
       'g'
     );
     if (typeof value === 'string') {
-      // Replace template literals with plain strings
       storyCodeUpdated = storyCodeUpdated.replace(templateLiteralRegex, value);
-      // Replace JSX attributes with plain strings
       storyCodeUpdated = storyCodeUpdated.replace(
         jsxAttributeRegex,
         `$1"${value}"`
       );
-      // Replace string-in-template cases with plain strings
       storyCodeUpdated = storyCodeUpdated.replace(
         stringInTemplateRegex,
         `"${value}"`
@@ -102,61 +105,31 @@ const filterStoryCode = (storyCode, args) => {
   );
   const hasRestSpread = /{\s*\.{3}rest\s*}/.test(storyCodeUpdated);
 
-  if (!hasDestructuring && !hasRestSpread) {
+  if (mainComponentName && !hasDestructuring && !hasRestSpread) {
     const regex = new RegExp(`<(${mainComponentName})(\\s|>)`);
     storyCodeUpdated = storyCodeUpdated.replace(regex, `<$1 {...args}$2`);
   }
   return storyCodeUpdated;
 };
 
-const findComponentImports = (
-  componentNames: Array<string>,
-  storyCode: string
-) => {
-  return componentNames.filter((componentName) => {
-    const regex = new RegExp(`<${componentName}\\b`, 'g');
-    return regex.test(storyCode);
-  });
-};
-
-const findIconImports = (iconNames: Array<string>, storyCode: string) => {
-  return iconNames.filter((iconName) => {
-    const regexComponent = new RegExp(`<${iconName}\\b`, 'g');
-    const regexCurlBraces = new RegExp(`{\\s*${iconName}\\s*}`, 'g');
-    const regexObjectValue = new RegExp(`:\\s*${iconName}\\b`, 'g');
-    const regexImport = new RegExp(
-      `import\\s+.*\\b${iconName}\\b.*from\\s+['"]@my-icons['"]`,
-      'g'
-    );
-
-    if (
-      (regexComponent.test(storyCode) ||
-        regexCurlBraces.test(storyCode) ||
-        regexObjectValue.test(storyCode)) &&
-      regexImport.test(storyCode) &&
-      !componentNames.includes(iconName)
-    ) {
-      return iconName;
-    }
-  });
-};
-
-const appGenerator = (storyCode, customImport, args) => {
-  const matchedComponents = findComponentImports(componentNames, storyCode);
-  const matchedIcons = findIconImports(iconsNames, storyCode);
-  const carbonComponentNames = Object.keys(carbonComponentsReact);
-  const matchedCarbonComponents = findComponentImports(
-    carbonComponentNames,
-    storyCode
-  );
+const appGenerator = (storyCode: string, customImport: string, args: any) => {
+  const {
+    carbon: matchedCarbonComponents,
+    ibmProducts: matchedComponents,
+    icons: matchedIcons,
+    unknown: unknownComponents,
+  } = findComponentsInCode(storyCode);
+  if (unknownComponents.length > 0) {
+    storyCode = removeUnknownComponents(storyCode, unknownComponents);
+  }
   // Generate App.jsx code
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
   const app = `
   import React from 'react';
   ${customImport ? customImport : ''}
-  import { ${matchedComponents} } from "@carbon/ibm-products";
-  import { ${matchedCarbonComponents} } from "@carbon/react";
-  ${matchedIcons.length > 0 ? `import { ${matchedIcons} } from "@carbon/icons-react";` : ''}
+  ${matchedComponents.length > 0 ? `import { ${matchedComponents.join(', ')} } from "@carbon/ibm-products";` : ''}
+  ${matchedCarbonComponents.length > 0 ? `import { ${matchedCarbonComponents.join(', ')} } from "@carbon/react";` : ''}
+  ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
   const storyClass = 'example'
   export default function App() {
     ${formattedArgs}
@@ -164,4 +137,47 @@ const appGenerator = (storyCode, customImport, args) => {
   }
   `;
   return app;
+};
+
+const findComponentsInCode = (code: string): ComponentSources => {
+  const componentRegex = /<([A-Z][a-zA-Z0-9]*)(?:\s|>)/g;
+  const matches: string[] = [];
+
+  let match: RegExpExecArray | null;
+  while ((match = componentRegex.exec(code)) !== null) {
+    matches.push(match[1]);
+  }
+  const componentNamesInCode = [...new Set(matches)];
+  const result: ComponentSources = {
+    carbon: [],
+    ibmProducts: [],
+    icons: [],
+    unknown: [],
+  };
+  componentNamesInCode.forEach((component) => {
+    if (carbonComponentNames.includes(component)) {
+      result.carbon.push(component);
+    } else if (componentNames.includes(component)) {
+      result.ibmProducts.push(component);
+    } else if (iconsNames.includes(component)) {
+      result.icons.push(component);
+    } else {
+      result.unknown.push(component);
+    }
+  });
+  return result;
+};
+
+const removeUnknownComponents = (storyCode, unknownComponents) => {
+  const openingTagPattern = new RegExp(
+    `<(${unknownComponents.join('|')})(\\s+[^>]*)?/?>`,
+    'g'
+  );
+  const closingTagPattern = new RegExp(
+    `</(${unknownComponents.join('|')})>`,
+    'g'
+  );
+  let cleanedCode = storyCode.replace(openingTagPattern, '');
+  cleanedCode = cleanedCode.replace(closingTagPattern, '');
+  return cleanedCode;
 };

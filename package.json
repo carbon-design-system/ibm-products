@@ -138,7 +138,7 @@
       "npx prettier --cache --write",
       "npx eslint --fix",
       "npx cspell --no-must-find-files",
-      "yarn lint:license:staged"
+      "bash -c 'yarn lint:license:staged'" 
     ],
     "**/*.scss": [
       "npx prettier --cache --write",
@@ -147,7 +147,7 @@
     "!(examples/**/*).md": [
       "npx prettier --cache --write",
       "npx cspell --no-must-find-files",
-      "yarn lint:license:staged"
+      "bash -c 'yarn lint:license:staged'"
     ]
   },
   "dependencies": {

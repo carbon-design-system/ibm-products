@@ -28,6 +28,7 @@ const {
 } = reLicense;
 
 program
+  .allowExcessArguments(true)
   .option(
     '-c, --test-current-year',
     'Ensures the license header represents the current year'

@@ -57,7 +57,6 @@ const defaultProps = {
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
-
 const Template = (args) => {
   return (
     <div className={`${storyClass}__viewport`}>

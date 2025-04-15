@@ -771,6 +771,7 @@ export let SidePanel = React.forwardRef(
               iconDescription={navigationBackIconDescription}
               className={`${blockClass}__navigation-back-button`}
               onClick={onNavigationBack}
+              aria-label={navigationBackIconDescription}
             />
           )}
           {/* label */}

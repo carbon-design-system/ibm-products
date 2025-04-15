@@ -121,6 +121,12 @@ $one-grid-column: calc(100% / 16);
       max-inline-size: none;
       padding-inline-start: $spacing-07 !important;
     }
+    .#{c4p-settings.$carbon-prefix}--inline-loading {
+      position: absolute;
+      inline-size: $spacing-07;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+    }
   }
 
   &--footer-controls {

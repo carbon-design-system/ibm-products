@@ -4,16 +4,17 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useMemo, useRef, useState } from 'react';
 
 import { pkg } from '../../settings';
 import PropTypes from 'prop-types';
 
 import {
+  ActionType,
   disableButtonConfigType,
   InterstitialScreenContext,
 } from './InterstitialScreen';
-import { Button, ModalFooter } from '@carbon/react';
+import { Button, InlineLoading, ModalFooter } from '@carbon/react';
 import { clamp } from '../../global/js/utils/clamp';
 import { ArrowRight } from '@carbon/react/icons';
 
@@ -48,8 +49,14 @@ export interface InterstitialScreenFooterProps {
   nextButtonLabel?: string;
   /**
    * This is an optional callback prop that allows to render your custom footer action buttons.
+   * note: this is applicable when not using custom actionButtonRenderer
    */
   actionButtonRenderer?: (config: actionButtonRendererArgs) => React.ReactNode;
+
+  /**
+   * optional asynchronous callback on action button click
+   */
+  onAction?: (actionName: ActionType, config: actionButtonRendererArgs) => void;
 }
 const InterstitialScreenFooter = React.forwardRef<
   HTMLDivElement,
@@ -62,6 +69,7 @@ const InterstitialScreenFooter = React.forwardRef<
     nextButtonLabel = 'Next',
     startButtonLabel = 'Get Started',
     actionButtonRenderer,
+    onAction,
   } = props;
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const {
@@ -75,33 +83,49 @@ const InterstitialScreenFooter = React.forwardRef<
   const startButtonRef = useRef<HTMLElement | undefined>(undefined);
   const nextButtonRef = useRef<HTMLElement | undefined>(undefined);
 
+  const [loadingAction, setLoadingAction] = useState('');
+
   const isMultiStep = !!stepCount;
   const progStepFloor = 0;
   const progStepCeil = stepCount - 1;
 
-  const handleClickPrev = () => {
-    const targetStep = clamp(progStep - 1, progStepFloor, progStepCeil);
-    handleGotoStep?.(targetStep as number);
+  const handleAction = async (actionType: ActionType) => {
+    setLoadingAction(actionType);
+
+    await onAction?.(actionType, {
+      handleGotoStep,
+      progStep,
+      stepCount,
+      disableButtonConfig,
+    });
+
+    setLoadingAction('');
+
+    if (actionType === 'next' || actionType === 'back') {
+      const stepDelta = actionType === 'next' ? 1 : -1;
+      const targetStep = clamp(
+        progStep + stepDelta,
+        progStepFloor,
+        progStepCeil
+      );
+      handleGotoStep?.(targetStep as number);
+    } else {
+      handleClose?.(actionType);
+    }
   };
 
-  const handleClickNext = () => {
-    const targetStep = clamp(progStep + 1, progStepFloor, progStepCeil);
-    handleGotoStep?.(targetStep as number);
-  };
+  // Usage
+  const handleStart = () => handleAction('start');
+  const handleSkip = () => handleAction('skip');
+  const handleClickNext = () => handleAction('next');
+  const handleClickPrev = () => handleAction('back');
 
-  const getRenderIcon = () => {
-    if (isMultiStep && progStep === progStepCeil) {
+  const getRenderIcon = useMemo(() => {
+    if (loadingAction !== 'start' && isMultiStep && progStep === progStepCeil) {
       return { renderIcon: ArrowRight };
     }
     return {};
-  };
-
-  const handleSkip = () => {
-    handleClose?.('skip');
-  };
-  const handleStart = () => {
-    handleClose?.('start');
-  };
+  }, [loadingAction, isMultiStep, progStep, progStepCeil]);
 
   const getFooterContent = () => (
     <div className={`${blockClass}--footer ${className}`}>
@@ -115,6 +139,7 @@ const InterstitialScreenFooter = React.forwardRef<
           disabled={disableButtonConfig?.skip}
         >
           {skipButtonLabel}
+          {loadingAction === 'skip' && <InlineLoading />}
         </Button>
       )}
       <div className={`${blockClass}--footer-controls`}>
@@ -128,13 +153,14 @@ const InterstitialScreenFooter = React.forwardRef<
             onClick={handleClickPrev}
           >
             {previousButtonLabel}
+            {loadingAction === 'back' && <InlineLoading />}
           </Button>
         )}
 
         {isMultiStep && progStep < progStepCeil && (
           <Button
             className={`${blockClass}--next-btn`}
-            renderIcon={ArrowRight}
+            renderIcon={loadingAction !== 'next' ? ArrowRight : null}
             ref={nextButtonRef}
             size="lg"
             title={nextButtonLabel}
@@ -142,6 +168,7 @@ const InterstitialScreenFooter = React.forwardRef<
             onClick={handleClickNext}
           >
             {nextButtonLabel}
+            {loadingAction === 'next' && <InlineLoading />}
           </Button>
         )}
         {((isMultiStep && progStep === progStepCeil) || !isMultiStep) && (
@@ -152,9 +179,10 @@ const InterstitialScreenFooter = React.forwardRef<
             title={startButtonLabel}
             disabled={disableButtonConfig?.start}
             onClick={handleStart}
-            {...getRenderIcon()}
+            {...getRenderIcon}
           >
             {startButtonLabel}
+            {loadingAction === 'start' && <InlineLoading />}
           </Button>
         )}
       </div>
@@ -197,7 +225,13 @@ InterstitialScreenFooter.propTypes = {
    */
   nextButtonLabel: PropTypes.string,
   /**
+   * optional asynchronous callback on action button click (skip, previous, next and start)
+   * note: this is applicable when not using custom actionButtonRenderer
+   */
+  onAction: PropTypes.func,
+  /**
    * The label for the Previous button.
+   *
    */
   previousButtonLabel: PropTypes.string,
   /**

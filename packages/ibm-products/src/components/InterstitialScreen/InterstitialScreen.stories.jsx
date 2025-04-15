@@ -208,7 +208,7 @@ export const ModalWithMultipleSteps = () => {
   );
 };
 
-export const ModalWithCustomActionButtons = () => {
+export const WithCustomActionButtons = () => {
   const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
 
   return (
@@ -313,10 +313,53 @@ export const ModalWithCustomActionButtons = () => {
     </>
   );
 };
+export const WithAsynchronousActionCallback = () => {
+  const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
 
+  const onAction = async (actionType, config) => {
+    if (actionType !== 'skip') {
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1500);
+      });
+    }
+  };
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setShowInterstitialScreen(true);
+        }}
+      >
+        Show Interstitial modal
+      </Button>
+
+      <InterstitialScreen
+        isOpen={showInterstitialScreen}
+        onClose={() => {
+          setShowInterstitialScreen(false);
+        }}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+      >
+        <InterstitialScreen.Header
+          headerTitle={defaultProps.headerTitle}
+          headerSubTitle={defaultProps.headerSubTitle}
+        ></InterstitialScreen.Header>
+        <InterstitialScreen.Body
+          contentRenderer={(internalConfig) => {
+            return getMultipleContent(internalConfig);
+          }}
+        />
+        <InterstitialScreen.Footer onAction={onAction} />
+      </InterstitialScreen>
+    </>
+  );
+};
 export const fullScreen = () => {
   const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
   useState(true);
+
   return (
     <>
       <Button

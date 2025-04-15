@@ -48,7 +48,7 @@ const componentName = 'InterstitialScreen';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
-type CloseActionType = 'close' | 'start' | 'skip';
+export type ActionType = 'close' | 'start' | 'skip' | 'back' | 'next';
 export interface InterstitialScreenProps {
   /**
    * Provide the contents of the InterstitialScreen.
@@ -76,7 +76,7 @@ export interface InterstitialScreenProps {
   /**
    * Function to call when the close button is clicked.
    */
-  onClose?: (value: CloseActionType) => void;
+  onClose?: (value: ActionType) => void;
 }
 
 // Define the type for InterstitialScreen, extending it to include Header
@@ -98,7 +98,7 @@ interface InterstitialScreenContextType {
   bodyChildrenData?: ReactNode;
   setBodyChildrenData?: (value: ReactNode) => void;
   isFullScreen?: boolean;
-  handleClose?: (value: CloseActionType) => void;
+  handleClose?: (value: ActionType) => void;
   progStep: number;
   setProgStep?: (value: number) => void;
   bodyScrollRef?: RefObject<HTMLDivElement | null>;

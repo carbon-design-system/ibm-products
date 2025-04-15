@@ -48,6 +48,7 @@ const componentName = 'InterstitialScreen';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
+type CloseActionType = 'close' | 'start' | 'skip';
 export interface InterstitialScreenProps {
   /**
    * Provide the contents of the InterstitialScreen.
@@ -75,7 +76,7 @@ export interface InterstitialScreenProps {
   /**
    * Function to call when the close button is clicked.
    */
-  onClose?: () => void;
+  onClose?: (value: CloseActionType) => void;
 }
 
 // Define the type for InterstitialScreen, extending it to include Header
@@ -97,7 +98,7 @@ interface InterstitialScreenContextType {
   bodyChildrenData?: ReactNode;
   setBodyChildrenData?: (value: ReactNode) => void;
   isFullScreen?: boolean;
-  handleClose?: () => void;
+  handleClose?: (value: CloseActionType) => void;
   progStep: number;
   setProgStep?: (value: number) => void;
   bodyScrollRef?: RefObject<HTMLDivElement | null>;
@@ -154,10 +155,13 @@ export let InterstitialScreen = React.forwardRef<
 
   const [bodyChildrenData, setBodyChildrenData] = useState<ReactNode>(null);
 
-  const handleClose = useCallback(() => {
-    setProgStep(0);
-    onClose?.();
-  }, [onClose]);
+  const handleClose = useCallback(
+    (actionName) => {
+      setProgStep(0);
+      onClose?.(actionName ?? 'close');
+    },
+    [onClose]
+  );
 
   useEffect(() => {
     if (!isOpen) {
@@ -177,7 +181,7 @@ export let InterstitialScreen = React.forwardRef<
     const close = (e) => {
       const { key } = e;
       if (key === 'Escape') {
-        handleClose();
+        handleClose('close');
       }
     };
     window.addEventListener('keydown', close);

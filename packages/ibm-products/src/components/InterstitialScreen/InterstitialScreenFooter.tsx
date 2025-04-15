@@ -96,6 +96,13 @@ const InterstitialScreenFooter = React.forwardRef<
     return {};
   };
 
+  const handleSkip = () => {
+    handleClose?.('skip');
+  };
+  const handleStart = () => {
+    handleClose?.('start');
+  };
+
   const getFooterContent = () => (
     <div className={`${blockClass}--footer ${className}`}>
       {isMultiStep && skipButtonLabel !== '' && (
@@ -104,7 +111,7 @@ const InterstitialScreenFooter = React.forwardRef<
           kind="ghost"
           size="lg"
           title={skipButtonLabel}
-          onClick={handleClose}
+          onClick={handleSkip}
           disabled={disableButtonConfig?.skip}
         >
           {skipButtonLabel}
@@ -144,7 +151,7 @@ const InterstitialScreenFooter = React.forwardRef<
             size="lg"
             title={startButtonLabel}
             disabled={disableButtonConfig?.start}
-            onClick={handleClose}
+            onClick={handleStart}
             {...getRenderIcon()}
           >
             {startButtonLabel}

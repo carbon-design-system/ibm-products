@@ -13,7 +13,7 @@ import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
-import { Tooltip } from '@carbon/react';
+import { Tooltip, Heading } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--simple-header`;
 const componentName = 'SimpleHeader';
@@ -63,7 +63,9 @@ const SimpleHeader = ({
           overflowTooltipAlign={overflowTooltipAlign}
         />
       )}
-      {title && <h1 className={cx(`${blockClass}__title`)}>{title}</h1>}
+      {title && (
+        <Heading className={cx(`${blockClass}__title`)}>{title}</Heading>
+      )}
     </header>
   );
 };

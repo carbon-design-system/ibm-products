@@ -952,6 +952,7 @@ export let PageHeader = React.forwardRef(
             {
               [`${blockClass}--has-navigation`]: navigation || tags,
               [`${blockClass}--has-navigation-tags-only`]: !navigation && tags,
+              [`${blockClass}--without-background`]: withoutBackground,
             },
           ])}
           ref={headerRef}

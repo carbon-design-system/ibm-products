@@ -24,16 +24,16 @@ const componentName = 'ProductiveCard';
 type ActionIcon = {
   id?: string;
   icon?: CarbonIconType;
-  onKeyDown?(): void;
-  onClick?(): void;
+  onClick?: (event: MouseEvent) => void;
+  onKeydown?: (event: KeyboardEvent) => void;
   iconDescription?: string;
   href?: string;
 };
 type overflowAction = {
   id?: string;
   itemText?: string;
-  onClick?: () => void;
-  onKeydown?: () => void;
+  onClick?: (event: MouseEvent) => void;
+  onKeydown?: (event: KeyboardEvent) => void;
 };
 type PlacementType = 'top' | 'bottom';
 type ClickZoneType = 'one' | 'two' | 'three';
@@ -78,7 +78,13 @@ export interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Provides the callback for a clickable card
    */
-  onClick?: () => void;
+  onClick?: (event: MouseEvent) => void;
+
+  /**
+   * Provides the callback for keydown events on the card
+   */
+  onKeyDown?: (event: KeyboardEvent) => void;
+
   /**
    * Function that's called from the primary button or action icon
    */

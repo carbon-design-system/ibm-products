@@ -36,6 +36,11 @@ export interface InterstitialScreenViewProps extends PropsWithChildren {
    * The label to pass to the ProgressStep component.
    */
   stepTitle: string;
+
+  /**
+   * Optional method that takes in a message id and returns an internationalized string.
+   */
+  translateWithId?: (id: string) => string;
 }
 /**
  * An Onboarding component intended to be used as the child elements of the InterstitialScreen component.
@@ -49,6 +54,7 @@ export let InterstitialScreenView = React.forwardRef<
       children,
       className,
       stepTitle,
+      translateWithId,
       // Collect any other property values passed in.
       ...rest
     },
@@ -108,4 +114,9 @@ InterstitialScreenView.propTypes = {
    * The label to pass to the ProgressStep component.
    */
   stepTitle: PropTypes.string.isRequired,
+
+  /**
+   * Optional method that takes in a message id and returns an internationalized string.
+   */
+  translateWithId: PropTypes.func,
 };

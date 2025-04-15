@@ -164,6 +164,7 @@ export interface InterstitialScreenProps extends PropsWithChildren {
 type EnrichedChildren = {
   children?: ReactNode;
   stepTitle?: string;
+  translateWithId?: (id: string) => string;
 };
 /**
  * InterstitialScreen can be a full page or an overlay, and are
@@ -324,7 +325,8 @@ export let InterstitialScreen = React.forwardRef<
                     return (
                       <ProgressStep
                         key={idx}
-                        label={(child?.props as any).stepTitle || ''}
+                        label={child.props.stepTitle || ''}
+                        translateWithId={child.props.translateWithId}
                       />
                     );
                   }
@@ -377,7 +379,8 @@ export let InterstitialScreen = React.forwardRef<
                       return (
                         <ProgressStep
                           key={idx}
-                          label={(child?.props as any).stepTitle || ''}
+                          label={child.props.stepTitle || ''}
+                          translateWithId={child.props.translateWithId}
                         />
                       );
                     }

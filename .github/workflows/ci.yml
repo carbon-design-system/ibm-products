@@ -20,12 +20,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 #4.2.0
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # 4.2.3
         with:
           path: '**/node_modules'
           key: build-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -40,12 +40,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 #4.2.0
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # 4.2.3
         with:
           path: '**/node_modules'
           key: lint-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -60,12 +60,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 #4.2.0
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # 4.2.3
         with:
           path: '**/node_modules'
           key: lint-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -80,12 +80,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 #4.2.0
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # 4.2.3
         with:
           path: '**/node_modules'
           key: spellcheck-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -100,37 +100,38 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 #4.2.0
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # 4.2.3
         with:
           path: '**/node_modules'
           key: test-c4p-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn
+      - name: CI snapshot tests for c4p
+        run: yarn ci-check:test:c4p:snapshot
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p --collectCoverage
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4.5.0
+        uses: codecov/codecov-action@0565863a31f2c772f9f0395002a31e3f06189574 # v5.4.0
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: CI snapshot tests for c4p
-        run: yarn ci-check:test:c4p:snapshot
+
   test-c4p-wc:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 #4.2.0
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # 4.2.3
         with:
           path: '**/node_modules'
           key:
@@ -143,7 +144,11 @@ jobs:
       - name: Build web-components project
         run: yarn build:packages
       - name: CI tests for products web components
-        run: yarn ci-check:test:c4p-wc
+        run: yarn ci-check:test:c4p-wc --coverage
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@0565863a31f2c772f9f0395002a31e3f06189574 # v5.4.0
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   avt-runner:
     strategy:
@@ -154,7 +159,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: '20.x'
           cache: yarn
@@ -182,10 +187,36 @@ jobs:
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 #4.4.3
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # 4.6.2
         with:
           name: playwright-avt-report
           path: .playwright
+
+  vrt-runner:
+    runs-on: ubuntu-latest
+    env:
+      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.x'
+          cache: yarn
+      - name: Install
+        run: yarn
+      - name: Install browsers
+        run: yarn playwright install --with-deps
+      - name: Build project
+        run: yarn build
+      - name: Run VRT
+        if:
+          ${{ env.PERCY_TOKEN != '' && github.repository ==
+          'carbon-design-system/ibm-products' && github.event.pull_request.draft
+          == false }}
+        working-directory: packages/core
+        run: yarn percy storybook storybook-static
 
   avt:
     if: ${{ always() }}

@@ -183,9 +183,9 @@ const useSortableColumns = (hooks: Hooks) => {
       return {
         ...column,
         Header,
-        minWidth: column.disableSortBy
-          ? 0
-          : (column.minWidth ?? (column.isAction ? 50 : 90)),
+        minWidth:
+          column.minWidth ??
+          (column.disableSortBy ? 50 : column.isAction ? 50 : 90),
       };
     });
     return instance.customizeColumnsProps?.isTearsheetOpen

@@ -10,10 +10,10 @@ import React, {
   useEffect,
   useState,
   useRef,
+  ComponentProps,
   PropsWithChildren,
   ReactNode,
   ForwardedRef,
-  MutableRefObject,
   RefObject,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
@@ -26,6 +26,7 @@ import pconsole from '../../global/js/utils/pconsole';
 import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 import { deprecateProp } from '../../global/js/utils/props-helper';
 import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
+
 // Carbon and package components we use.
 import {
   Button,
@@ -33,6 +34,7 @@ import {
   DefinitionTooltip,
   Layer,
   ModalHeader,
+  Section,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
@@ -41,7 +43,7 @@ import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { useIsomorphicEffect, usePreviousValue } from '../../global/js/hooks';
-import { claimFocus, useFocus } from '../../global/js/hooks/useFocus';
+import { useFocus } from '../../global/js/hooks/useFocus';
 import { TearsheetAction } from './Tearsheet';
 
 // The block part of our conventional BEM class names (bc__E--M).
@@ -231,6 +233,19 @@ export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
   hasCloseIcon ?? tearsheetIsPassive(actions);
 
 /**
+ * Since the Tearsheet has an H3 heading, any headings inside the Tearsheet should start at H4.
+ * This is a helper to do that.
+ */
+const SectionLevel3 = ({
+  children,
+  ...rest
+}: ComponentProps<typeof Section>) => (
+  <Section level={3} {...rest}>
+    {children}
+  </Section>
+);
+
+/**
  *  TearSheetShell is used internally by TearSheet and TearSheetNarrow
  *
  * The component is not public.
@@ -278,10 +293,10 @@ export const TearsheetShell = React.forwardRef(
     const localRef = useRef(undefined);
     const resizer = useRef(null);
     const modalBodyRef = useRef(null);
-    const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
+    const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
     const { width } = useResizeObserver(resizer);
     const prevOpen = usePreviousValue(open);
-    const { firstElement, keyDownListener } = useFocus(
+    const { keyDownListener, claimFocus } = useFocus(
       modalRef,
       selectorPrimaryFocus
     );
@@ -318,29 +333,37 @@ export const TearsheetShell = React.forwardRef(
     }
 
     useEffect(() => {
-      if (open && position === depth) {
-        // Focusing the first element or selectorPrimaryFocus element
-        claimFocus(firstElement, modalRef, selectorPrimaryFocus);
+      if (open) {
+        claimFocus();
       }
-    }, [
-      currentStep,
-      depth,
-      firstElement,
-      modalRef,
-      modalRefValue,
-      open,
-      position,
-      selectorPrimaryFocus,
-      hasError,
-    ]);
+    }, [open, currentStep, effectiveHasCloseIcon, claimFocus]);
 
     useEffect(() => {
-      if (prevOpen && !open && launcherButtonRef) {
+      if (prevOpen && !open && launcherButtonRef?.current) {
         setTimeout(() => {
-          launcherButtonRef.current.focus();
+          launcherButtonRef?.current.focus();
         }, 0);
       }
-    }, [launcherButtonRef, open, prevOpen]);
+    }, [open, prevOpen, launcherButtonRef]);
+
+    useEffect(() => {
+      requestAnimationFrame(() => {
+        if (
+          open &&
+          depth === position &&
+          !modalRef?.current?.contains(document.activeElement)
+        ) {
+          claimFocus();
+        }
+      });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [claimFocus, depth, modalRef, position]);
+
+    useEffect(() => {
+      if (hasError && !modalRef?.current?.contains(document.activeElement)) {
+        claimFocus();
+      }
+    }, [claimFocus, hasError, modalRef]);
 
     useEffect(() => {
       const notify = () =>
@@ -523,6 +546,7 @@ export const TearsheetShell = React.forwardRef(
                   [`${bc}__influencer--wide`]: influencerWidth === 'wide',
                 })}
                 neverRender={influencerPosition === 'right'}
+                element={SectionLevel3}
               >
                 {influencer}
               </Wrap>
@@ -534,6 +558,7 @@ export const TearsheetShell = React.forwardRef(
                       !!(influencer && influencerPosition === 'right')
                     }
                     tabIndex={-1}
+                    element={SectionLevel3}
                   >
                     {children}
                   </Wrap>
@@ -543,6 +568,7 @@ export const TearsheetShell = React.forwardRef(
                       [`${bc}__influencer--wide`]: influencerWidth === 'wide',
                     })}
                     neverRender={influencerPosition !== 'right'}
+                    element={SectionLevel3}
                   >
                     {influencer}
                   </Wrap>

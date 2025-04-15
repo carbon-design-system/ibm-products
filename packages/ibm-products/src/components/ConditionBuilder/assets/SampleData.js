@@ -166,7 +166,7 @@ export const sampleDataStructure_nonHierarchical = {
         {
           property: 'date',
           operator: 'between',
-          value: ['2024-12-04T18:30:00.000Z', '2024-12-18T18:30:00.000Z'],
+          value: '10/03/2025 - 13/03/2025',
           id: uuidv4(),
         },
         {

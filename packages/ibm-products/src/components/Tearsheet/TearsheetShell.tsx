@@ -10,6 +10,7 @@ import React, {
   useEffect,
   useState,
   useRef,
+  ComponentProps,
   PropsWithChildren,
   ReactNode,
   ForwardedRef,
@@ -25,6 +26,7 @@ import pconsole from '../../global/js/utils/pconsole';
 import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 import { deprecateProp } from '../../global/js/utils/props-helper';
 import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
+
 // Carbon and package components we use.
 import {
   Button,
@@ -32,6 +34,7 @@ import {
   DefinitionTooltip,
   Layer,
   ModalHeader,
+  Section,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
@@ -228,6 +231,19 @@ export const tearsheetShellWideProps = [
 export const tearsheetIsPassive = (actions) => !actions || !actions?.length;
 export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
   hasCloseIcon ?? tearsheetIsPassive(actions);
+
+/**
+ * Since the Tearsheet has an H3 heading, any headings inside the Tearsheet should start at H4.
+ * This is a helper to do that.
+ */
+const SectionLevel3 = ({
+  children,
+  ...rest
+}: ComponentProps<typeof Section>) => (
+  <Section level={3} {...rest}>
+    {children}
+  </Section>
+);
 
 /**
  *  TearSheetShell is used internally by TearSheet and TearSheetNarrow
@@ -530,6 +546,7 @@ export const TearsheetShell = React.forwardRef(
                   [`${bc}__influencer--wide`]: influencerWidth === 'wide',
                 })}
                 neverRender={influencerPosition === 'right'}
+                element={SectionLevel3}
               >
                 {influencer}
               </Wrap>
@@ -541,6 +558,7 @@ export const TearsheetShell = React.forwardRef(
                       !!(influencer && influencerPosition === 'right')
                     }
                     tabIndex={-1}
+                    element={SectionLevel3}
                   >
                     {children}
                   </Wrap>
@@ -550,6 +568,7 @@ export const TearsheetShell = React.forwardRef(
                       [`${bc}__influencer--wide`]: influencerWidth === 'wide',
                     })}
                     neverRender={influencerPosition !== 'right'}
+                    element={SectionLevel3}
                   >
                     {influencer}
                   </Wrap>

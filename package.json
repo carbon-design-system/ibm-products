@@ -41,7 +41,7 @@
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
     "lint:license": "scripts/check-license.cjs -a",
-    "lint:license:staged": "scripts/check-license.cjs -w",
+    "lint:license:staged": "scripts/check-license.cjs",
     "lint:js": "eslint packages --fix",
     "lint:styles": "stylelint '**/*.scss' --fix",
     "prepare": "husky install",
@@ -138,7 +138,7 @@
       "npx prettier --cache --write",
       "npx eslint --fix",
       "npx cspell --no-must-find-files",
-      "bash -c 'yarn lint:license:staged'" 
+      "yarn lint:license:staged"
     ],
     "**/*.scss": [
       "npx prettier --cache --write",
@@ -147,7 +147,7 @@
     "!(examples/**/*).md": [
       "npx prettier --cache --write",
       "npx cspell --no-must-find-files",
-      "bash -c 'yarn lint:license:staged'"
+      "yarn lint:license:staged"
     ]
   },
   "dependencies": {

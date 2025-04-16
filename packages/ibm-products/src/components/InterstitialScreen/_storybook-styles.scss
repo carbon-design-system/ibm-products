@@ -15,6 +15,8 @@
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/type';
 
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
 .CustomLayout {
   display: flex;
   flex-wrap: wrap;
@@ -66,4 +68,8 @@
       $one-grid-column * 8
     ); // stylelint-disable-line carbon/layout-use
   }
+}
+
+.#{c4p-settings.$pkg-prefix}--interstitial-screen-view-module--enableTag {
+  margin-block-start: $spacing-07;
 }

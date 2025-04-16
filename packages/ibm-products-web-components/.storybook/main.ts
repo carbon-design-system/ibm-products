@@ -1,6 +1,12 @@
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
-const glob = require('fast-glob');
+import glob from 'fast-glob';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const stories = glob.sync(
   [
     '../docs/**/*.mdx',

@@ -246,7 +246,7 @@ describe(componentName, () => {
     );
   });
 
-  it('renders the first step if an invalid initialStep value is provided', () =>
+  it('renders the first step if an invalid initialStep value zero is provided', () =>
     expectWarn(
       `${CreateFullPage.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateFullPage.displayName} has.`,
       () => {
@@ -255,6 +255,28 @@ describe(componentName, () => {
           // Starting on 0 step is invalid since the steps start with a value of 1
           // This will cause a console warning
           initialStep: 0,
+        });
+        const createFullPageSteps = container.querySelector(
+          `.${blockClass}__content .${blockClass}__form`
+        ).children;
+        expect(
+          createFullPageSteps[0].classList.contains(
+            `.${blockClass}__step__step--visible-step`
+          )
+        );
+        // The onMount prop will get called here because the first step is rendered
+        expect(onMountFn).toHaveBeenCalledTimes(1);
+      }
+    ));
+  it('renders the first step if an invalid initialStep value bigger than step length is provided', () =>
+    expectWarn(
+      `${CreateFullPage.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateFullPage.displayName} has.`,
+      () => {
+        const { container } = renderCreateFullPage({
+          ...defaultFullPageProps,
+          // Starting on 0 step is invalid since the steps start with a value of 1
+          // This will cause a console warning
+          initialStep: 10,
         });
         const createFullPageSteps = container.querySelector(
           `.${blockClass}__content .${blockClass}__form`

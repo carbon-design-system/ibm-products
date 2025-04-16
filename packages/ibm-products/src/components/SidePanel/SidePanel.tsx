@@ -771,6 +771,7 @@ export let SidePanel = React.forwardRef(
               iconDescription={navigationBackIconDescription}
               className={`${blockClass}__navigation-back-button`}
               onClick={onNavigationBack}
+              aria-label={navigationBackIconDescription}
             />
           )}
           {/* label */}
@@ -903,7 +904,7 @@ export let SidePanel = React.forwardRef(
           className={mainPanelClassNames}
           ref={sidePanelRef}
           role="complementary"
-          aria-label={title}
+          aria-label={title || rest['aria-label']}
           onAnimationEnd={onAnimationEnd}
           onAnimationStart={onAnimationStart}
           onKeyDown={handleKeyDown}

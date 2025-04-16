@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2023
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,7 @@ import React, {
   ReactNode,
   createContext,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import {
@@ -259,7 +260,7 @@ export let CreateFullPage = React.forwardRef(
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const previousState = usePreviousValue({ currentStep, open });
+    const previousState = usePreviousValue({ currentStep });
     const [isDisabled, setIsDisabled] = useState(false);
     const [onPrevious, setOnPrevious] = useState();
     const [onNext, setOnNext] = useState();
@@ -267,6 +268,7 @@ export let CreateFullPage = React.forwardRef(
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
+    const invalidInitialStepWarned = useRef(false);
 
     useEffect(() => {
       const firstItem =
@@ -280,7 +282,7 @@ export let CreateFullPage = React.forwardRef(
       }
 
       /**@ts-ignore */
-      if (open && initialStep) {
+      if (initialStep) {
         const numberOfHiddenSteps = getNumberOfHiddenSteps(
           stepData,
           initialStep
@@ -295,6 +297,14 @@ export let CreateFullPage = React.forwardRef(
       modalIsOpen,
     ]);
 
+    useEffect(() => {
+      if (!invalidInitialStepWarned?.current) {
+        checkForValidInitialStep();
+      }
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initialStep, stepData]);
+
     useCreateComponentFocus({
       previousState,
       currentStep,
@@ -303,17 +313,6 @@ export let CreateFullPage = React.forwardRef(
       firstFocusElement,
     });
     useValidCreateStepCount(stepData.length, componentName);
-    useResetCreateComponent({
-      firstIncludedStep,
-      previousState,
-      open: true,
-      setCurrentStep,
-      stepData,
-      /**@ts-ignore */
-      initialStep,
-      totalSteps: stepData?.length,
-      componentName,
-    });
     useCreateComponentStepChange({
       firstIncludedStep,
       lastIncludedStep,
@@ -339,6 +338,23 @@ export let CreateFullPage = React.forwardRef(
       setCreateComponentActions: setCreateFullPageActions,
       setModalIsOpen,
     });
+
+    const checkForValidInitialStep = () => {
+      // An invalid initialStep value was provided, we'll default to rendering the first step or last step
+
+      if (
+        (initialStep &&
+          stepData?.length &&
+          Number(initialStep) > Number(stepData?.length)) ||
+        Number(initialStep) <= 0
+      ) {
+        invalidInitialStepWarned.current = true;
+        setCurrentStep(1);
+        console.warn(
+          `${componentName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${componentName} has.`
+        );
+      }
+    };
     // currently, we are not supporting the use of 'view all' toggle state
     /* istanbul ignore next */
     return (
@@ -385,11 +401,16 @@ export let CreateFullPage = React.forwardRef(
                       } as any
                     }
                   >
-                    {React.Children.map(children, (child, index) => (
-                      <StepNumberContext.Provider value={index + 1}>
-                        {child}
-                      </StepNumberContext.Provider>
-                    ))}
+                    {React.Children.toArray(children)
+                      .filter(Boolean)
+                      .map((child, index) => (
+                        <StepNumberContext.Provider
+                          value={index + 1}
+                          key={index}
+                        >
+                          {child}
+                        </StepNumberContext.Provider>
+                      ))}
                   </StepsContext.Provider>
                 </Form>
               </div>

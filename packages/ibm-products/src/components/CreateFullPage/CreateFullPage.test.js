@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2024
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -246,7 +246,28 @@ describe(componentName, () => {
     );
   });
 
-  it('renders the first step if an invalid initialStep value is provided', () =>
+  it('renders the first step if an invalid initialStep value zero is provided', () =>
+    expectWarn(
+      `${CreateFullPage.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateFullPage.displayName} has.`,
+      () => {
+        const { container } = renderCreateFullPage({
+          ...defaultFullPageProps,
+          // This will cause a console warning
+          initialStep: 0,
+        });
+        const createFullPageSteps = container.querySelector(
+          `.${blockClass}__content .${blockClass}__form`
+        ).children;
+        expect(
+          createFullPageSteps[0].classList.contains(
+            `.${blockClass}__step__step--visible-step`
+          )
+        );
+        // The onMount prop will get called here because the first step is rendered
+        expect(onMountFn).toHaveBeenCalledTimes(1);
+      }
+    ));
+  it('renders the first step if an invalid initialStep value bigger than step length is provided', () =>
     expectWarn(
       `${CreateFullPage.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateFullPage.displayName} has.`,
       () => {
@@ -254,7 +275,7 @@ describe(componentName, () => {
           ...defaultFullPageProps,
           // Starting on 0 step is invalid since the steps start with a value of 1
           // This will cause a console warning
-          initialStep: 0,
+          initialStep: 10,
         });
         const createFullPageSteps = container.querySelector(
           `.${blockClass}__content .${blockClass}__form`
@@ -639,5 +660,39 @@ describe(componentName, () => {
     await waitFor(() => userEvent.click(submitButtonElement));
     // the component should not un mount, thus onClose should not be
     expect(onCloseFn).not.toHaveBeenCalled();
+  });
+
+  it('should not throw an error if null is passed as one of the children', async () => {
+    const children = [
+      <CreateFullPageStep title="Title 1" subtitle="Subtitle 1" key="1">
+        <p>1</p>
+      </CreateFullPageStep>,
+      null,
+      <CreateFullPageStep title="Title 2" description="2" key="2">
+        <p>2</p>
+      </CreateFullPageStep>,
+    ];
+
+    const { container } = render(
+      <CreateFullPage
+        {...defaultFullPageProps}
+        onRequestSubmit={onRequestSubmitFn}
+      >
+        {children}
+      </CreateFullPage>
+    );
+
+    // Select the next button
+    const nextButtonElement = screen.getByText(nextButtonText);
+
+    await waitFor(() => userEvent.click(nextButtonElement));
+
+    // Make sure the next step is on step 2
+    const influencerSteps = container.querySelector(
+      `.${pkg.prefix}--create-influencer__progress-indicator`
+    );
+
+    expect(influencerSteps.childNodes[0].classList.contains('complete'));
+    expect(influencerSteps.childNodes[1].classList.contains('current'));
   });
 });

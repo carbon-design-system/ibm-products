@@ -29,7 +29,7 @@ interface ConditionBuilderAddProps {
   enableSubGroup?: boolean;
   buttonLabel?: string;
   tabIndex?: number;
-  group: ConditionGroup;
+  group?: ConditionGroup;
 }
 const ConditionBuilderAdd = ({
   className,

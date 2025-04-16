@@ -43,6 +43,7 @@ import { useClickOutside, usePresence } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
+import { useId } from '../../global/js/utils/useId';
 import { pkg } from '../../settings';
 import { timeAgo } from './utils';
 
@@ -391,6 +392,7 @@ export let NotificationsPanel = React.forwardRef(
     const [allNotifications, setAllNotifications] = useState<Data[]>([]);
     const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
     const carbonPrefix = usePrefix();
+    const headingId = useId();
 
     const reducedMotion = usePrefersReducedMotion();
     const exitAnimationName = reducedMotion
@@ -707,11 +709,11 @@ export let NotificationsPanel = React.forwardRef(
         >
           Focus sentinel start
         </button>
-        {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
+        { }
         <Section
           as="div"
           role="dialog"
-          aria-label="Notification Panel"
+          aria-labelledby={headingId}
           onKeyDown={handleKeydown}
           tabIndex={0}
           {
@@ -732,7 +734,9 @@ export let NotificationsPanel = React.forwardRef(
           <div ref={notificationPanelInnerRef}>
             <div className={`${blockClass}__header-container`}>
               <div className={`${blockClass}__header-flex`}>
-                <Heading className={`${blockClass}__header`}>{title}</Heading>
+                <Heading id={headingId} className={`${blockClass}__header`}>
+                  {title}
+                </Heading>
                 <Button
                   size="sm"
                   kind="ghost"
@@ -822,7 +826,7 @@ export let NotificationsPanel = React.forwardRef(
               )}
           </div>
         </Section>
-        {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
+        { }
         <button
           type="button"
           className={`${carbonPrefix}--visually-hidden`}

@@ -44,3 +44,13 @@ if (global.HTMLElement) {
 // computed style for that regardless of a pseudo-element being supplied
 const oldGetComputedStyle = global.getComputedStyle;
 global.getComputedStyle = jest.fn((elt) => oldGetComputedStyle(elt));
+
+if (global.window) {
+  window.ResizeObserver = jest.fn(() => {
+    return {
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    };
+  });
+}

@@ -252,7 +252,6 @@ describe(componentName, () => {
       () => {
         const { container } = renderCreateFullPage({
           ...defaultFullPageProps,
-          // Starting on 0 step is invalid since the steps start with a value of 1
           // This will cause a console warning
           initialStep: 0,
         });

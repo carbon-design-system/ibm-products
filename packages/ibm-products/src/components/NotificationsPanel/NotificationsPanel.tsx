@@ -1031,7 +1031,7 @@ NotificationsPanel.propTypes = {
   /**
    * Sets triggerButtonRef value, element where focus will return to
    */
-  triggerButtonRef: PropTypes.any.isRequired,
+  triggerButtonRef: PropTypes.any,
 
   /**
    * Sets the View all button text

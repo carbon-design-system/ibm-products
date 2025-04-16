@@ -8,13 +8,6 @@
 import glob from 'fast-glob';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
-import { fileURLToPath } from 'url';
-import { createRequire } from 'node:module';
-
-const require = createRequire(import.meta.url);
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const storyGlobs = [
   '../../ibm-products/src/**/*.stories.*',

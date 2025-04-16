@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2024
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -641,5 +641,39 @@ describe(componentName, () => {
         .getByRole('button', { description: 'Title 3' })
         .querySelector(`.${carbon.prefix}--progress__warning`)
     ).toBeInTheDocument();
+  });
+
+  it('should not throw an error if null is passed as one of the children', async () => {
+    const children = [
+      <CreateFullPageStep title="Title 1" subtitle="Subtitle 1" key="1">
+        <p>1</p>
+      </CreateFullPageStep>,
+      null,
+      <CreateFullPageStep title="Title 2" description="2" key="2">
+        <p>2</p>
+      </CreateFullPageStep>,
+    ];
+
+    const { container } = render(
+      <CreateFullPage
+        {...defaultFullPageProps}
+        onRequestSubmit={onRequestSubmitFn}
+      >
+        {children}
+      </CreateFullPage>
+    );
+
+    // Select the next button
+    const nextButtonElement = screen.getByText(nextButtonText);
+
+    await waitFor(() => userEvent.click(nextButtonElement));
+
+    // Make sure the next step is on step 2
+    const influencerSteps = container.querySelector(
+      `.${pkg.prefix}--create-influencer__progress-indicator`
+    );
+
+    expect(influencerSteps.childNodes[0].classList.contains('complete'));
+    expect(influencerSteps.childNodes[1].classList.contains('current'));
   });
 });

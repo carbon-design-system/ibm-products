@@ -709,7 +709,6 @@ export let NotificationsPanel = React.forwardRef(
         >
           Focus sentinel start
         </button>
-        { }
         <Section
           as="div"
           role="dialog"
@@ -826,7 +825,6 @@ export let NotificationsPanel = React.forwardRef(
               )}
           </div>
         </Section>
-        { }
         <button
           type="button"
           className={`${carbonPrefix}--visually-hidden`}

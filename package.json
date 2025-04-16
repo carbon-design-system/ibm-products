@@ -136,7 +136,8 @@
     "react-dom": "~19.0.0",
     "semver": "7.7.1",
     "ws": "^8.17.1",
-    "@babel/runtime": "7.26.10"
+    "@babel/runtime": "7.26.10",
+    "react-is": "^19.0.0"
   },
   "lint-staged": {
     "!(examples/**/*)**/*.{js,jsx,ts,tsx,mjs}": [

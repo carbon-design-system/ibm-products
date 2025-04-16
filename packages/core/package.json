@@ -32,7 +32,7 @@
     "@carbon/ibm-products-styles": "^2.60.0-rc.0",
     "@carbon/layout": "^11.29.0",
     "@carbon/motion": "^11.24.0",
-    "@carbon/react": "^1.76.0",
+    "@carbon/react": "^1.80.0",
     "@carbon/themes": "^11.46.0",
     "@carbon/type": "^11.35.0",
     "@percy/cli": "^1.30.7",

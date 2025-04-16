@@ -125,7 +125,7 @@ const appGenerator = (storyCode: string, customImport: string, args: any) => {
   // Generate App.jsx code
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
   const app = `
-  import React from 'react';
+  import React, { useState, useEffect } from 'react';
   ${customImport ? customImport : ''}
   ${matchedComponents.length > 0 ? `import { ${matchedComponents.join(', ')} } from "@carbon/ibm-products";` : ''}
   ${matchedCarbonComponents.length > 0 ? `import { ${matchedCarbonComponents.join(', ')} } from "@carbon/react";` : ''}

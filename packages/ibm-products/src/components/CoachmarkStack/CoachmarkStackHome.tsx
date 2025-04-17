@@ -16,7 +16,7 @@ import pconsole from '../../global/js/utils/pconsole';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Idea } from '@carbon/react/icons';
-import { Button } from '@carbon/react';
+import { Button, Tooltip } from '@carbon/react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { createPortal } from 'react-dom';
@@ -24,6 +24,7 @@ import { CoachmarkHeader } from '../Coachmark/CoachmarkHeader';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 import { ButtonProps } from '@carbon/react';
 
+type TooltipAlignment = 'top' | 'bottom';
 interface CoachmarkStackHomeProps {
   /**
    * Optional class name for this component.
@@ -74,6 +75,10 @@ interface CoachmarkStackHomeProps {
    * The title of the Coachmark.
    */
   title: string;
+  /**
+   * Label's tooltip position
+   */
+  tooltipAlign?: TooltipAlignment;
 }
 
 // Carbon and package components we use.
@@ -91,143 +96,183 @@ const componentName = 'CoachmarkStackHome';
 export let CoachmarkStackHome = forwardRef<
   HTMLDivElement,
   CoachmarkStackHomeProps
->((props, ref) => {
-  const {
-    className,
-    description,
-    isOpen,
-    renderMedia,
-    navLinkLabels,
-    onClickNavItem,
-    onClose,
-    portalTarget,
-    closeButtonLabel,
-    title,
-    ...rest
-  } = props;
-  const buttonFocusRef = useRef<ButtonProps<React.ElementType> | null>(null);
-  const [linkFocusIndex, setLinkFocusIndex] = useState(0);
+>(
+  (
+    {
+      className,
+      description,
+      isOpen,
+      renderMedia,
+      navLinkLabels,
+      onClickNavItem,
+      onClose,
+      portalTarget,
+      closeButtonLabel,
+      title,
+      tooltipAlign,
+      ...rest
+    },
+    ref
+  ) => {
+    const buttonFocusRef = useRef<ButtonProps<React.ElementType> | null>(null);
+    const [linkFocusIndex, setLinkFocusIndex] = useState(0);
+    const navItemRefs = useRef<(HTMLLIElement | null)[]>([]);
+    const [overflowStates, setOverflowStates] = useState<boolean[]>([]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (isOpen && buttonFocusRef.current) {
-        buttonFocusRef.current.focus();
+    useEffect(() => {
+      setTimeout(() => {
+        if (isOpen && buttonFocusRef.current) {
+          buttonFocusRef.current.focus();
+        }
+      }, 100);
+    }, [isOpen]);
+
+    const portalNode = useRef<Element | null>(null);
+
+    useIsomorphicEffect(() => {
+      portalNode.current = portalTarget
+        ? (document?.querySelector(portalTarget) ??
+          document?.querySelector('body'))
+        : document?.querySelector('body');
+    }, [portalTarget]);
+
+    if (!navLinkLabels) {
+      return pconsole.warn(
+        `${componentName} is an Onboarding internal component and is not intended for general use.`
+      );
+    }
+
+    const itemRefHandler = (index, node) => {
+      if (node && navItemRefs.current[index] !== node) {
+        const isOverflowing = node.scrollWidth > node.clientWidth;
+        navItemRefs.current[index] = node;
+        setOverflowStates((prev) => {
+          const newState = [...prev];
+          newState[index] = isOverflowing;
+          return newState;
+        });
       }
-    }, 100);
-  }, [isOpen]);
+    };
 
-  const portalNode = useRef<Element | null>(null);
+    function renderNavLink(
+      index,
+      label,
+      ref: React.RefObject<ButtonProps<React.ElementType>> | null = null
+    ) {
+      const isOverflowing = overflowStates[index] ?? false;
 
-  useIsomorphicEffect(() => {
-    portalNode.current = portalTarget
-      ? (document?.querySelector(portalTarget) ??
-        document?.querySelector('body'))
-      : document?.querySelector('body');
-  }, [portalTarget]);
-
-  if (!navLinkLabels) {
-    pconsole.warn(
-      `${componentName} is an Onboarding internal component and is not intended for general use.`
-    );
-    return null;
-  }
-
-  function renderNavLink(
-    index,
-    label,
-    ref: React.RefObject<ButtonProps<React.ElementType>> | null = null
-  ) {
-    return (
-      <li key={index}>
-        <Button
-          kind="ghost"
-          size="sm"
-          onClick={() => {
-            setLinkFocusIndex(index);
-            onClickNavItem(index + 1);
+      return (
+        <li
+          key={index}
+          ref={(node) => {
+            itemRefHandler(index, node);
           }}
-          ref={ref}
         >
-          {label}
-        </Button>
-      </li>
-    );
-  }
-
-  return portalNode?.current
-    ? createPortal(
-        <div
-          {
-            // Pass through any other property values as HTML attributes.
-            ...rest
-          }
-          className={cx(blockClass, className)}
-          ref={ref}
-          {...getDevtoolsProps(componentName)}
-        >
-          <CoachmarkHeader
-            onClose={() => {
-              setLinkFocusIndex(0);
-              onClose();
+          <Button
+            kind="ghost"
+            size="sm"
+            onClick={() => {
+              setLinkFocusIndex(index);
+              onClickNavItem(index + 1);
             }}
-          />
-          <div className={`${overlayClass}__body`}>
-            <div className={`${overlayClass}-element`}>
-              {!renderMedia && (
-                <Idea size={20} className={`${blockClass}__icon-idea`} />
-              )}
+            ref={ref}
+          >
+            {isOverflowing ? (
+              <Tooltip
+                highContrast={false}
+                label={label}
+                align={tooltipAlign}
+                className={`${blockClass}__navLinkLabels-tooltip`}
+              >
+                <span className={`${blockClass}__navLinkLabels-text`}>
+                  {label}
+                </span>
+              </Tooltip>
+            ) : (
+              label
+            )}
+          </Button>
+        </li>
+      );
+    }
 
-              {renderMedia && (
-                <div className={`${blockClass}__element-stepped-media`}>
-                  {renderMedia({ playStep: 0 })}
-                </div>
-              )}
-
-              <div className={`${overlayClass}-element__content`}>
-                {title && (
-                  <h2 className={`${overlayClass}-element__title`}>{title}</h2>
+    return portalNode?.current
+      ? createPortal(
+          <div
+            {
+              // Pass through any other property values as HTML attributes.
+              ...rest
+            }
+            className={cx(blockClass, className)}
+            ref={ref}
+            {...getDevtoolsProps(componentName)}
+          >
+            <CoachmarkHeader
+              onClose={() => {
+                setLinkFocusIndex(0);
+                onClose();
+              }}
+            />
+            <div className={`${overlayClass}__body`}>
+              <div className={`${overlayClass}-element`}>
+                {!renderMedia && (
+                  <Idea size={20} className={`${blockClass}__icon-idea`} />
                 )}
-                {description && (
-                  <p className={`${overlayClass}-element__body`}>
-                    {description}
-                  </p>
+
+                {renderMedia && (
+                  <div className={`${blockClass}__element-stepped-media`}>
+                    {renderMedia({ playStep: 0 })}
+                  </div>
+                )}
+
+                <div className={`${overlayClass}-element__content`}>
+                  {title && (
+                    <h2 className={`${overlayClass}-element__title`}>
+                      {title}
+                    </h2>
+                  )}
+                  {description && (
+                    <p className={`${overlayClass}-element__body`}>
+                      {description}
+                    </p>
+                  )}
+                </div>
+
+                <ul className={`${blockClass}__nav-links`}>
+                  {navLinkLabels.map((label, index) => {
+                    if (index === linkFocusIndex) {
+                      return renderNavLink(
+                        index,
+                        label,
+                        buttonFocusRef as React.RefObject<
+                          ButtonProps<React.ElementType>
+                        >
+                      );
+                    }
+                    return renderNavLink(index, label);
+                  })}
+                </ul>
+                {closeButtonLabel && (
+                  <div className={`${overlayClass}__footer`}>
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        setLinkFocusIndex(0);
+                        onClose();
+                      }}
+                    >
+                      {closeButtonLabel}
+                    </Button>
+                  </div>
                 )}
               </div>
-
-              <ul className={`${blockClass}__nav-links`}>
-                {navLinkLabels.map((label, index) => {
-                  if (index === linkFocusIndex) {
-                    return renderNavLink(
-                      index,
-                      label,
-                      buttonFocusRef as React.RefObject<
-                        ButtonProps<React.ElementType>
-                      >
-                    );
-                  }
-                  return renderNavLink(index, label);
-                })}
-              </ul>
-              {closeButtonLabel && (
-                <div className={`${overlayClass}__footer`}>
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      setLinkFocusIndex(0);
-                      onClose();
-                    }}
-                  >
-                    {closeButtonLabel}
-                  </Button>
-                </div>
-              )}
             </div>
-          </div>
-        </div>,
-        portalNode?.current
-      )
-    : null;
-});
+          </div>,
+          portalNode?.current
+        )
+      : null;
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 CoachmarkStackHome = pkg.checkComponentEnabled(
@@ -292,4 +337,8 @@ CoachmarkStackHome.propTypes = {
    * The title of the Coachmark.
    */
   title: PropTypes.string.isRequired,
+  /**
+   * Label's tooltip position
+   */
+  tooltipAlign: PropTypes.oneOf(['top', 'bottom']),
 };

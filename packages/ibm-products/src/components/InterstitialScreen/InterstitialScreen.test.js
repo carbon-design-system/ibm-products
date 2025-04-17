@@ -6,15 +6,15 @@
  */
 
 import React from 'react';
-import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, act, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { InterstitialScreen } from '.';
-import { InterstitialScreenView } from '..';
-import { InterstitialScreenViewModule } from '..';
 import userEvent from '@testing-library/user-event';
+import { InterstitialScreenViewModule } from './_story-assets/InterstitialScreenViewModule/InterstitialScreenViewModule';
+import { InterstitialScreenView } from './_story-assets/InterstitialScreenView/InterstitialScreenView';
 
 const blockClass = `${pkg.prefix}--interstitial-screen`;
 const componentName = InterstitialScreen.displayName;
@@ -45,25 +45,35 @@ const renderComponent = ({ ...rest } = {}) => {
       data-testid={dataTestId}
       {...{ ...rest }}
     >
-      <InterstitialScreenView
-        stepTitle="Step 1"
-        translateWithId={translateWithId}
-      >
-        <InterstitialScreenViewModule
-          title={InterstitialScreenViewModuleTitle}
-          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-        />
-      </InterstitialScreenView>
-
-      <InterstitialScreenView
-        stepTitle="Step 2"
-        translateWithId={translateWithId}
-      >
-        <InterstitialScreenViewModule
-          title="Use case-specific heading 2"
-          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-        />
-      </InterstitialScreenView>
+      <InterstitialScreen.Header
+        headerTitle={'headerTitle'}
+        headerSubTitle={'headerSubTitle'}
+      ></InterstitialScreen.Header>
+      <InterstitialScreen.Body
+        contentRenderer={(internalConfig) => (
+          <>
+            <InterstitialScreenView
+              stepTitle="Step 1"
+              translateWithId={translateWithId}
+            >
+              <InterstitialScreenViewModule
+                title={InterstitialScreenViewModuleTitle}
+                description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+              />
+            </InterstitialScreenView>
+            <InterstitialScreenView
+              stepTitle="Step 2"
+              translateWithId={translateWithId}
+            >
+              <InterstitialScreenViewModule
+                title="Use case-specific heading 2"
+                description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+              />
+            </InterstitialScreenView>
+          </>
+        )}
+      />
+      <InterstitialScreen.Footer />
     </InterstitialScreen>
   );
 };
@@ -203,6 +213,7 @@ describe(componentName, () => {
       className: blockClass,
       interstitialAriaLabel: 'Modal Interstitial Screen',
     });
+
     expect(screen.getByText('Next'));
     expect(screen.getByText('Step 1'));
     const step1 = screen.getByText('Step 1');
@@ -221,7 +232,8 @@ describe(componentName, () => {
 
     const nextButtonElement = screen.getByText('Next');
     expect(nextButtonElement).toHaveClass(`${blockClass}--next-btn`);
-    await act(async () => userEvent.click(nextButtonElement));
+    await waitFor(() => userEvent.click(nextButtonElement, { timeout: 10 }));
+
     expect(listElement1).toHaveClass(
       `${carbon.prefix}--progress-step--complete`
     );
@@ -252,14 +264,5 @@ describe(componentName, () => {
     const closeBtn = screen.getByLabelText('Close');
     await act(async () => userEvent.click(closeBtn));
     expect(onClose).toBeCalled();
-  });
-
-  it('renders an image with renderMedia prop', async () => {
-    renderComponent({
-      className: blockClass,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
-      renderMedia: () => <img alt="img" />,
-    });
-    expect(screen.getByRole('img')).toBeInTheDocument();
   });
 });

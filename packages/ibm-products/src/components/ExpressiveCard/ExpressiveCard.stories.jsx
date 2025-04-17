@@ -226,6 +226,21 @@ WithMedia.args = {
   ...defaultProps,
 };
 
+export const WithActionIconButton = Template.bind({});
+WithActionIconButton.args = {
+  ...defaultProps,
+  actionIcons: [
+    {
+      id: '1',
+      icon: (props) => <ArrowRight size={18} {...props} />,
+      iconDescription: 'Visit carbon official site',
+      onClick: action('onClick'),
+    },
+  ],
+  primaryButtonText: '',
+  mediaRatio: null,
+};
+
 export const WithActionIconLink = Template.bind({});
 WithActionIconLink.args = {
   ...defaultProps,

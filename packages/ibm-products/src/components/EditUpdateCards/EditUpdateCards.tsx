@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+import { ActionIcon } from '../Card/Card';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -34,19 +35,11 @@ const componentName = 'EditUpdateCards';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
-type ActionIcon = {
-  id: string;
-  icon: CarbonIconType;
-  onKeyDown?(): void;
-  onClick?(): void;
-  iconDescription: string;
-  href?: string;
-};
 type PlacementType = 'top' | 'bottom';
 
 export interface EditUpdateCardsProps {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.url for href functionality. If you are setting link, url is a required property. link.url, href has precedence over onClick.
    */
   actionIcons?: Array<ActionIcon>;
   /**
@@ -238,7 +231,7 @@ EditUpdateCards.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 EditUpdateCards.propTypes = {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.url for href functionality. If you are setting link, url is a required property. link.url, href has precedence over onClick.
    */
   /**@ts-ignore */
   actionIcons: PropTypes.arrayOf(
@@ -249,6 +242,11 @@ EditUpdateCards.propTypes = {
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
       href: PropTypes.string,
+      link: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        target: PropTypes.string,
+        rel: PropTypes.string,
+      }),
     })
   ),
   /**

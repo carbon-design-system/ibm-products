@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Add, UserIdentification, ArrowRight } from '@carbon/react/icons';
@@ -50,8 +50,8 @@ describe(componentName, () => {
     expect(onSecondaryButtonClick).toHaveBeenCalled();
   });
 
-  it('renders an expressive card with action icons', async () => {
-    const { click } = userEvent;
+  it('renders expressive card with action icons', async () => {
+    const user = userEvent.setup();
     const onClick = jest.fn();
     const actionIcons = [
       {
@@ -87,7 +87,10 @@ describe(componentName, () => {
       name: actionIcons[0].iconDescription,
     });
     expect(AddButton).toBeInTheDocument();
-    await act(() => click(AddButton));
+    // The use of act is deprecated. Wrapping the click in a waitFor is a workaround to ensure that all the state updates related to Tooltip is completed.
+    await waitFor(async () => {
+      await user.click(AddButton);
+    });
     expect(onClick).toHaveBeenCalled();
 
     // link with href

@@ -365,6 +365,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           showConditionPreviewHandler={showConditionPreviewHandler}
           hideConditionPreviewHandler={hideConditionPreviewHandler}
           className={`${blockClass}__gap ${blockClass}__gap-left`}
+          group={group}
         />
       )}
     </div>

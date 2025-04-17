@@ -158,6 +158,7 @@ export type statementConfig = Item & {
   connector: 'and' | 'or';
   secondaryLabel?: string;
 };
+type AddItemType = 'add-condition' | 'add-subgroup' | 'add-group';
 
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
@@ -175,6 +176,11 @@ export type ConditionBuilderProps = {
   variant?: 'Non-Hierarchical' | 'Hierarchical';
   translateWithId: (id: string) => string;
   statementConfigCustom: statementConfig[];
+  onAddItem?: (
+    addItemType: AddItemType,
+    rootState: ConditionBuilderState,
+    group?: ConditionGroup
+  ) => { preventAdd: boolean };
 };
 
 export type InitialState = {
@@ -202,4 +208,9 @@ export type ConditionBuilderContextProps = {
   setRootState?: Dispatch<SetStateAction<ConditionBuilderState>>;
   actionState?: Action[];
   setActionState?: Dispatch<SetStateAction<Action[]>>;
+  onAddItem?: (
+    addItemType: AddItemType,
+    rootState: ConditionBuilderState,
+    group?: ConditionGroup
+  ) => { preventAdd: boolean };
 } & ConditionBuilderContextInputProps;

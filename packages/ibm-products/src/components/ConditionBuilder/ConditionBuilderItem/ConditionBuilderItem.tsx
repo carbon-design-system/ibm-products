@@ -54,7 +54,7 @@ interface ConditionBuilderItemProps extends PropsWithChildren {
   description?: string;
   condition?: Action & Condition;
   config?: ConfigType;
-  renderChildren?: (ref: Ref<HTMLDivElement>) => ReactNode;
+  renderChildren?: (ref: Ref<HTMLDivElement | null>) => ReactNode;
   onChange?: (val: string) => void;
   tabIndex?: number;
   onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -78,7 +78,7 @@ export const ConditionBuilderItem = ({
   description,
   ...rest
 }: ConditionBuilderItemProps) => {
-  const popoverRef = useRef<HTMLDivElement>(null);
+  const popoverRef = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(false);
 
   const { conditionBuilderRef, statementConfigCustom } = useContext(

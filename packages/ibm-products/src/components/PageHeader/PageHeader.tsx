@@ -20,7 +20,6 @@ import {
 import { TagProps } from '@carbon/react/lib/components/Tag/Tag';
 import React, {
   ForwardedRef,
-  JSX,
   MutableRefObject,
   PropsWithChildren,
   ReactNode,
@@ -28,6 +27,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  type JSX,
 } from 'react';
 import { TagSet, string_required_if_more_than_10_tags } from '../TagSet/TagSet';
 import { baseFontSize, spacing } from '@carbon/layout';

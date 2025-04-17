@@ -251,29 +251,7 @@ Guidebanner.propTypes = {
    * Provide the contents of the Guidebanner.
    * One or more GuidebannerElement components are required.
    */
-  children: (props, propName) => {
-    let error;
-    const prop = props[propName];
-    if (!prop) {
-      error = new Error(
-        '`Guidebanner` requires one or more children of type `GuidebannerElement`.'
-      );
-    }
-    React.Children.forEach(prop, (child) => {
-      if (child.type.displayName !== 'GuidebannerElement') {
-        // If child element is not `GuidebannerElement`, then show:
-        // Carbon Products component's `displayName` (child.type.displayName) or
-        // React component's `name` (child.type.name) or
-        // HTML element's tag name (child.type).
-        error = new Error(
-          `\`Guidebanner\` only accepts children of type \`GuidebannerElement\`, found \`${
-            child.type?.displayName || child.type?.name || child.type
-          }\` instead.`
-        );
-      }
-    });
-    return error;
-  },
+  children: PropTypes.node,
   /**
    * Provide an optional class to be applied to the containing node.
    */

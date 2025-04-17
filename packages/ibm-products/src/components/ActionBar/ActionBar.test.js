@@ -4,8 +4,8 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
-import { render, screen, act, waitFor } from '@testing-library/react';
+import React, { act } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ActionBar } from '.';
 import { Lightning, Bee } from '@carbon/react/icons';

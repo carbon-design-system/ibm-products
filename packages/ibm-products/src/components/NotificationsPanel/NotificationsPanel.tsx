@@ -289,7 +289,7 @@ export interface NotificationsPanelProps {
   /**
    * Reference to trigger button
    */
-  triggerButtonRef?: RefObject<any>;
+  triggerButtonRef: RefObject<any>;
 
   /**
    * Sets the View all button text
@@ -409,7 +409,7 @@ export let NotificationsPanel = React.forwardRef(
       setAllNotifications(data);
     }, [data]);
 
-    useClickOutside(ref || notificationPanelRef, () => {
+    useClickOutside(ref ?? notificationPanelRef, () => {
       onClickOutside?.();
       setTimeout(() => {
         triggerButtonRef?.current?.focus();
@@ -1029,7 +1029,7 @@ NotificationsPanel.propTypes = {
   todayLabel: PropTypes.string,
 
   /**
-   * Sets the today label text
+   * Sets triggerButtonRef value, element where focus will return to
    */
   triggerButtonRef: PropTypes.any,
 

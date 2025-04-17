@@ -6,13 +6,13 @@
 //
 
 import React, {
-  JSX,
   PropsWithChildren,
   ReactNode,
   useCallback,
   useEffect,
   useRef,
   useState,
+  type JSX,
 } from 'react';
 
 import PropTypes from 'prop-types';

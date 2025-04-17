@@ -13,19 +13,11 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
-
-type ActionIcon = {
-  id?: string;
-  icon?: () => void | object;
-  onKeydown?: () => void;
-  onClick?: () => void;
-  iconDescription?: string;
-  href?: string;
-};
+import { ActionIcon } from '../Card/Card';
 
 export interface ExpressiveCardProps extends PropsWithChildren {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.url for href functionality. If you are setting link, url is a required property. link.url, href has precedence over onClick.
    */
   actionIcons?: ActionIcon[];
   /**
@@ -149,7 +141,15 @@ ExpressiveCard.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      /**
+       * @deprecated please use the `link.url` instead
+       */
       href: PropTypes.string,
+      link: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        target: PropTypes.string,
+        rel: PropTypes.string,
+      }),
     })
   ),
   /**

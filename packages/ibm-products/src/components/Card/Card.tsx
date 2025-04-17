@@ -22,14 +22,30 @@ import { CardFooter } from './CardFooter';
 import { pkg } from '../../settings';
 const componentName = 'Card';
 
-type ActionIcon = {
+interface Metadata {
   id?: string;
   icon?: () => ReactNode;
-  onKeydown?: () => void;
-  onClick?: () => void;
   iconDescription?: string;
-  href?: string;
+}
+
+type LinkType = {
+  url: string;
+  target?: string;
+  rel?: string;
 };
+
+export interface ActionIcon extends Metadata {
+  onKeydown?: (event: KeyboardEvent) => void;
+  onClick?: (
+    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => void;
+  /**
+   * @deprecated please use the `link.url` instead
+   */
+  href?: string;
+  link?: LinkType;
+}
+
 type OverflowActions = {
   id?: string;
   itemText?: string;
@@ -37,13 +53,6 @@ type OverflowActions = {
   onKeydown?: () => void;
 };
 
-type Metadata = {
-  id?: string;
-  icon?: () => ReactNode;
-  iconDescription?: string;
-  onClick?: () => void;
-  href?: string;
-};
 interface CardProp extends PropsWithChildren {
   actionIcons?: readonly ActionIcon[];
   actionsPlacement?: 'top' | 'bottom';
@@ -147,10 +156,10 @@ export const Card = forwardRef(
     }: CardProp,
     ref: React.ForwardedRef<HTMLDivElement>
   ) => {
-    const getIcons = () => (getStarted ? metadata : actionIcons);
+    const iconList: readonly ActionIcon[] = getStarted ? metadata : actionIcons;
     const blockClass = `${pkg.prefix}--card`;
     const hasActions =
-      getIcons().length > 0 ||
+      iconList?.length > 0 ||
       overflowActions.length > 0 ||
       (!!primaryButtonText && primaryButtonPlacement === 'top');
     const hasHeaderActions = hasActions && actionsPlacement === 'top';
@@ -190,8 +199,8 @@ export const Card = forwardRef(
         );
       }
 
-      const icons = getIcons().map(
-        ({ id, icon: Icon, onClick, iconDescription, href, ...rest }) => {
+      const icons = iconList?.map(
+        ({ id, icon: Icon, onClick, iconDescription, href, link, ...rest }) => {
           if (getStarted) {
             return (
               <span key={id} className={`${blockClass}__icon`}>
@@ -211,17 +220,21 @@ export const Card = forwardRef(
                 size={actionsPlacement === 'top' ? 'sm' : 'md'}
                 iconDescription={iconDescription}
                 kind="ghost"
-                href={href}
+                href={link?.url ?? href}
+                target={link?.target ?? '_self'}
+                rel={link?.rel ?? ''}
               />
             );
           }
-          if (href) {
+          if (link?.url || href) {
             return (
               <a
                 key={id}
                 className={`${blockClass}__icon`}
-                href={href}
+                href={link?.url || href}
                 onClick={onClick}
+                target={link?.target ?? '_self'}
+                rel={link?.rel ?? ''}
               >
                 {Icon && <Icon aria-label={iconDescription} />}
               </a>
@@ -291,7 +304,7 @@ export const Card = forwardRef(
       actions: actionsPlacement === 'top' ? getActions() : '',
       decorator,
       noActionIcons:
-        getIcons().length > 0 && actionsPlacement === 'top' ? false : true,
+        iconList?.length > 0 && actionsPlacement === 'top' ? false : true,
       actionsPlacement,
       onPrimaryButtonClick,
       onSecondaryButtonClick,
@@ -393,7 +406,15 @@ Card.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      /**
+       * @deprecated please use the `link.url` instead
+       */
       href: PropTypes.string,
+      link: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        target: PropTypes.string,
+        rel: PropTypes.string,
+      }),
     })
   ),
   actionsPlacement: PropTypes.oneOf(['top', 'bottom']),

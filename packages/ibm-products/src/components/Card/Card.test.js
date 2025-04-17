@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { Add, UserIdentification, ArrowRight } from '@carbon/react/icons';
 
 import { Card } from '.';
 import { pkg, carbon } from '../../settings';
@@ -32,7 +33,7 @@ describe(componentName, () => {
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
 
-  it('Renders expressive card with action icons and ensures that each click is being called', async () => {
+  it('renders expressive card with primary and secondary buttons and ensures that each click is being called', async () => {
     const { click } = userEvent;
     const onPrimaryButtonClick = jest.fn();
     const onSecondaryButtonClick = jest.fn();
@@ -49,32 +50,72 @@ describe(componentName, () => {
     expect(onSecondaryButtonClick).toHaveBeenCalled();
   });
 
-  it('renders expressive with action icons', async () => {
-    const { click } = userEvent;
+  it('renders expressive card with action icons', async () => {
+    const user = userEvent.setup();
     const onClick = jest.fn();
     const actionIcons = [
       {
         id: '1',
         onClick,
-        icon: () => <div>withOnClick</div>,
-        iconDescription: 'icon',
+        icon: Add,
+        iconDescription: 'Click here to add a new user',
       },
       {
         id: '2',
         href: '#',
-        icon: () => <div>withHref</div>,
-        iconDescription: 'icon',
+        icon: UserIdentification,
+        iconDescription: 'Contact IBM Support',
+      },
+      {
+        id: '3',
+        icon: ArrowRight,
+        iconDescription: 'Visit Carbon official site',
+        link: {
+          url: 'https://carbondesignsystem.com/',
+          target: '_blank',
+          rel: 'noreferrer noopener',
+        },
       },
     ];
     const props = {
       actionIcons,
     };
     render(<Card {...props} />);
-    await act(() => click(screen.getByText('withOnClick')));
+
+    // with onClick
+    const AddButton = screen.getByRole('button', {
+      name: actionIcons[0].iconDescription,
+    });
+    expect(AddButton).toBeInTheDocument();
+    // The use of act is deprecated. Wrapping the click in a waitFor is a workaround to ensure that all the state updates related to Tooltip is completed.
+    await waitFor(async () => {
+      await user.click(AddButton);
+    });
     expect(onClick).toHaveBeenCalled();
-    expect(screen.getByText('withHref').closest('a')).toHaveAttribute(
+
+    // link with href
+    const LinkWithHref = screen.getByRole('link', {
+      name: actionIcons[1].iconDescription,
+    });
+    expect(LinkWithHref).toBeInTheDocument();
+    expect(LinkWithHref).toHaveAttribute('href', actionIcons[1].href);
+
+    // link with url, target and rel
+    const LinkWithTargetAndRel = screen.getByRole('link', {
+      name: actionIcons[2].iconDescription,
+    });
+    expect(LinkWithTargetAndRel).toBeInTheDocument();
+    expect(LinkWithTargetAndRel).toHaveAttribute(
       'href',
-      '#'
+      actionIcons[2].link.url
+    );
+    expect(LinkWithTargetAndRel).toHaveAttribute(
+      'target',
+      actionIcons[2].link.target
+    );
+    expect(LinkWithTargetAndRel).toHaveAttribute(
+      'rel',
+      actionIcons[2].link.rel
     );
   });
 
@@ -230,6 +271,49 @@ describe(componentName, () => {
       click(container.querySelector(`.${blockClass}__clickable`))
     );
     expect(onClick).toHaveBeenCalled();
+  });
+
+  it('renders a productive card with action icons', async () => {
+    const actionIcons = [
+      {
+        id: '1',
+        icon: ArrowRight,
+        iconDescription: 'Visit Carbon official site',
+        link: {
+          url: 'https://carbondesignsystem.com/',
+          target: '_blank',
+          rel: 'noreferrer noopener',
+        },
+      },
+    ];
+
+    const props = {
+      title: 'Title',
+      description: 'Description',
+      productive: true,
+      actionIcons,
+      children: <p>body</p>,
+    };
+
+    render(<Card {...props} />);
+
+    // link with url, target and rel
+    const LinkWithTargetAndRel = screen.getByRole('link', {
+      name: actionIcons[0].iconDescription,
+    });
+    expect(LinkWithTargetAndRel).toBeInTheDocument();
+    expect(LinkWithTargetAndRel).toHaveAttribute(
+      'href',
+      actionIcons[0].link.url
+    );
+    expect(LinkWithTargetAndRel).toHaveAttribute(
+      'target',
+      actionIcons[0].link.target
+    );
+    expect(LinkWithTargetAndRel).toHaveAttribute(
+      'rel',
+      actionIcons[0].link.rel
+    );
   });
 
   it('has no accessibility violations', async () => {

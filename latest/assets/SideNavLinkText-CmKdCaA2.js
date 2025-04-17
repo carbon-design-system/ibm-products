@@ -1,1 +1,0 @@
-import{b as c,c as o,_ as m,P as e}from"./index-BPCFiO9b.js";import{e as p}from"./index-CPiZ6Cnx.js";function l(s){let{className:a,children:r,...t}=s;const n=c(),i=o(`${n}--side-nav__link-text`,a);return p.createElement("span",m({},t,{className:i}),r)}l.propTypes={children:e.node.isRequired,className:e.string};export{l as S};

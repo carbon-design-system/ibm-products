@@ -1,0 +1,1 @@
+var r=16;function i(n){return"".concat(n/r,"rem")}var f={sm:{width:i(320)},md:{width:i(672)},lg:{width:i(1056)}},s=8;function a(n){return i(s*n)}var c=a(.25),v=a(.5),p=a(1),g=a(1.5),t=a(2),e=a(3),m=a(4),o=a(5),d=a(6),u=a(8),b=a(10),h=a(12),w=a(20),U=[c,v,p,g,t,e,m,o,d,u,b,h,w];export{f as b,U as s};

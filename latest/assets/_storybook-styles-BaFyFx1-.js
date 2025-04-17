@@ -1,0 +1,1 @@
+const o=".http-error-stories__viewport{overflow:hidden;block-size:calc(100vh - 58px)}.sbdocs .http-error-stories__viewport{background-color:var(--cds-background, #ffffff);max-block-size:60vh}";export{o as s};

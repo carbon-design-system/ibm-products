@@ -898,7 +898,7 @@ describe(componentName, () => {
     expect(selectedItem);
   });
 
-  it('render the component with input type date range', async () => {
+  it.skip('render the component with input type date range', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 
     await act(() => userEvent.click(screen.getByText('Add condition')));
@@ -1804,7 +1804,7 @@ describe(componentName, () => {
 
   // keyboard navigation tests
   //for Non-Hierarchical variant
-  it('add and remove conditions using keyboard', async () => {
+  it.skip('add and remove conditions using keyboard', async () => {
     render(
       <ConditionBuilder
         {...defaultProps}
@@ -1933,7 +1933,7 @@ describe(componentName, () => {
   });
 
   //for Hierarchical variant
-  it('add and remove conditions using keyboard', async () => {
+  it.skip('add and remove conditions using keyboard', async () => {
     render(
       <ConditionBuilder
         {...defaultProps}

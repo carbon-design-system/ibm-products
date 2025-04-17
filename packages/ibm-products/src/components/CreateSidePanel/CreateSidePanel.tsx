@@ -146,46 +146,48 @@ export let CreateSidePanel = React.forwardRef(
       },
     ];
 
+    if (!selectorPageContent) {
+      return null;
+    }
+
     const formTitleId = uuidv4();
 
     return (
-      selectorPageContent && (
-        <SidePanel
-          {...rest}
-          {...{
-            id,
-            open,
-            ref,
-            selectorPageContent,
-            onRequestClose,
-            title,
-            subtitle,
-            selectorPrimaryFocus,
-            ...getDevtoolsProps(componentName),
-          }}
-          placement="right"
-          slideIn
-          animateTitle={false}
-          className={cx(blockClass, className)}
-          size="md"
-          actions={actions}
+      <SidePanel
+        {...rest}
+        {...{
+          id,
+          open,
+          ref,
+          selectorPageContent,
+          onRequestClose,
+          title,
+          subtitle,
+          selectorPrimaryFocus,
+          ...getDevtoolsProps(componentName),
+        }}
+        placement="right"
+        slideIn
+        animateTitle={false}
+        className={cx(blockClass, className)}
+        size="md"
+        actions={actions}
+      >
+        <h3
+          className={`${blockClass}__form-title-text ${blockClass}__content-text`}
+          id={formTitleId}
         >
-          <h3
-            className={`${blockClass}__form-title-text ${blockClass}__content-text`}
-            id={formTitleId}
-          >
-            {formTitle}
-          </h3>
-          <p
-            className={`${blockClass}__form-description-text ${blockClass}__content-text`}
-          >
-            {formDescription}
-          </p>
-          <Form className={`${blockClass}__form`} aria-labelledby={formTitleId}>
-            {children}
-          </Form>
-        </SidePanel>
-      )
+          {formTitle}
+        </h3>
+        <p
+          className={`${blockClass}__form-description-text ${blockClass}__content-text`}
+        >
+          {formDescription}
+        </p>
+        <Form className={`${blockClass}__form`} aria-labelledby={formTitleId}>
+          {children}
+        </Form>
+      </SidePanel>
     );
   }
 );

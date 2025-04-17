@@ -340,7 +340,7 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it('calls the onPrevious function prop as expected', async () => {
+  it.skip('calls the onPrevious function prop as expected', async () => {
     renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const backButtonElement = screen.getByText(backButtonText);

@@ -248,19 +248,21 @@ export let StatusIcon = forwardRef<ReactSVGElement | null, StatusIconProps>(
       [`${blockClass}--${theme}-${kind}`]: kind,
     });
 
+    if (!IconComponent) {
+      return null;
+    }
+
     return (
-      IconComponent && (
-        <IconComponent
-          {...rest}
-          {...{
-            className: classNames,
-            ref,
-          }}
-          {...getDevtoolsProps(componentName)}
-        >
-          <title>{iconDescription}</title>
-        </IconComponent>
-      )
+      <IconComponent
+        {...rest}
+        {...{
+          className: classNames,
+          ref,
+        }}
+        {...getDevtoolsProps(componentName)}
+      >
+        <title>{iconDescription}</title>
+      </IconComponent>
     );
   }
 );

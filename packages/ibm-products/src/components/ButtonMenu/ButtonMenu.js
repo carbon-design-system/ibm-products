@@ -35,63 +35,47 @@ const defaults = {
  * zero to many ButtonMenuItem, which is identical to the carbon
  * OverflowMenuItem component.
  */
-export let ButtonMenu = React.forwardRef(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
-
-      children,
-      className,
-      iconDescription,
-      kind = defaults.kind,
-      label,
-      menuAriaLabel,
-      menuOptionsClass,
-      renderIcon: Icon,
-      size = defaults.size,
-
-      // Collect any other property values passed in.
-      ...rest
-    },
-    ref
-  ) => {
-    const carbonPrefix = usePrefix();
-    return (
-      <OverflowMenu
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          `${carbonPrefix}--btn--${size}`,
-          {
-            [`${blockClass}__wrapper--${kind}`]: kind,
-          }
-        )}
-        aria-label={menuAriaLabel}
-        menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
-        size={size}
-        renderIcon={() => (
-          <div className={cx(`${blockClass}__trigger`)}>
-            {label}
-            {Icon && (
-              <Icon
-                aria-hidden="true"
-                aria-label={iconDescription}
-                className={`${carbonPrefix}--btn__icon`}
-              />
-            )}
-          </div>
-        )}
-        innerRef={ref}
-      >
-        {children}
-      </OverflowMenu>
-    );
-  }
-);
+export let ButtonMenu = React.forwardRef((props, ref) => {
+  const {
+    children,
+    className,
+    iconDescription,
+    kind = defaults.kind,
+    label,
+    menuAriaLabel,
+    menuOptionsClass,
+    renderIcon: Icon,
+    size = defaults.size,
+    ...rest
+  } = props;
+  const carbonPrefix = usePrefix();
+  return (
+    <OverflowMenu
+      {...rest}
+      className={cx(blockClass, className, `${carbonPrefix}--btn--${size}`, {
+        [`${blockClass}__wrapper--${kind}`]: kind,
+      })}
+      aria-label={menuAriaLabel}
+      menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
+      size={size}
+      renderIcon={() => (
+        <div className={cx(`${blockClass}__trigger`)}>
+          {label}
+          {Icon && (
+            <Icon
+              aria-hidden="true"
+              aria-label={iconDescription}
+              className={`${carbonPrefix}--btn__icon`}
+            />
+          )}
+        </div>
+      )}
+      ref={ref}
+    >
+      {children}
+    </OverflowMenu>
+  );
+});
 
 ButtonMenu.deprecated = {
   level: 'warn',

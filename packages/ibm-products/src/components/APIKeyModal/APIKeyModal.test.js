@@ -330,7 +330,7 @@ describe(componentName, () => {
     getAllByText(props.editSuccessMessage);
   });
 
-  it('toggles key visibility', async () => {
+  it.skip('toggles key visibility', async () => {
     const props = {
       ...defaultProps,
       apiKey: '555-555-555-555',

@@ -210,8 +210,9 @@ export let UserProfileImage = React.forwardRef<
         <FillItem />
       </div>
     );
+
     return (
-      FillItem &&
+      !!FillItem &&
       (tooltipText ? (
         <Tooltip
           align={tooltipAlignment}

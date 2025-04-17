@@ -178,9 +178,10 @@ export let CoachmarkOverlayElements = React.forwardRef<
     }, [isVisible]);
 
     if (!coachmark) {
-      return pconsole.warn(
+      pconsole.warn(
         `The ${componentName} is a composable container element which should be used only within the scope of a Coachmark or a CoachmarkFixed component.`
       );
+      return null;
     }
 
     return (

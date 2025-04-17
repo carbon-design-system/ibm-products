@@ -213,7 +213,14 @@ export let CreateFullPageStep = forwardRef(
       return null;
     };
 
-    return stepsContext ? (
+    if (!stepsContext) {
+      pconsole.warn(
+        `You have tried using a ${componentName} component outside of a CreateFullPage. This is not allowed. ${componentName}s should always be children of the CreateFullPage`
+      );
+      return null;
+    }
+
+    return (
       <Section
         {
           // Pass through any other property values as HTML attributes.
@@ -256,10 +263,6 @@ export let CreateFullPageStep = forwardRef(
           children
         )}
       </Section>
-    ) : (
-      pconsole.warn(
-        `You have tried using a ${componentName} component outside of a CreateFullPage. This is not allowed. ${componentName}s should always be children of the CreateFullPage`
-      )
     );
   }
 );

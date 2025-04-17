@@ -126,9 +126,10 @@ export let CoachmarkStackHome = forwardRef<
   }, [portalTarget]);
 
   if (!navLinkLabels) {
-    return pconsole.warn(
+    pconsole.warn(
       `${componentName} is an Onboarding internal component and is not intended for general use.`
     );
+    return null;
   }
 
   function renderNavLink(

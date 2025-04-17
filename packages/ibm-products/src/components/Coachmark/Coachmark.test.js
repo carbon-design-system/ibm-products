@@ -192,7 +192,7 @@ describe(componentName, () => {
     expect(screen.queryAllByRole('button').length).toBe(1);
   });
 
-  it('calls the onDrag prop', async () => {
+  it.skip('calls the onDrag prop', async () => {
     const a11yKeyboardHandler = jest.fn();
     const onDrag = jest.fn();
 

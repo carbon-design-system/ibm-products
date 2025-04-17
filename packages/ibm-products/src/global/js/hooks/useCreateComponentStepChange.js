@@ -73,8 +73,11 @@ export const useCreateComponentStepChange = ({
     const handleOnRequestSubmit = async () => {
       // check if onRequestSubmit returns a promise
       try {
-        await onRequestSubmit();
-        onUnmount();
+        const options = await onRequestSubmit();
+        // if onRequestSubmit returns an object with the preventClose property, then check if
+        if (!options?.preventClose) {
+          onUnmount();
+        }
       } catch (error) {
         setIsSubmitting(false);
         console.warn(`${componentName} submit error: ${error}`);

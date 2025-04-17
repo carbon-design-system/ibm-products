@@ -178,8 +178,10 @@ type CreateFullPageBaseProps = {
   /**
    * Specify a handler for submitting the multi step full page (final step).
    * This function can _optionally_ return a promise that is either resolved or rejected and the CreateFullPage will handle the submitting state of the create button.
+   *
+   * @returns Object - if you want to prevent the modal from closing, return an object with the property preventClose set to true
    */
-  onRequestSubmit: () => void;
+  onRequestSubmit: () => { preventClose?: boolean } | void;
 
   /**
    * A secondary title of the full page, displayed in the influencer area

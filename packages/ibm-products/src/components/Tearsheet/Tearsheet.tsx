@@ -192,6 +192,7 @@ export let Tearsheet = React.forwardRef(
     {
       influencerPosition = 'left',
       influencerWidth = 'narrow',
+      children,
       ...rest
     }: TearsheetProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -205,7 +206,9 @@ export let Tearsheet = React.forwardRef(
         ref,
         size: 'wide',
       }}
-    />
+    >
+      {children}
+    </TearsheetShell>
   )
 );
 

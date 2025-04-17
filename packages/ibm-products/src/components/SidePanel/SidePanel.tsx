@@ -777,6 +777,7 @@ const SidePanelBase = React.forwardRef(
               iconDescription={navigationBackIconDescription}
               className={`${blockClass}__navigation-back-button`}
               onClick={onNavigationBack}
+              aria-label={navigationBackIconDescription}
             />
           )}
           {/* label */}
@@ -901,7 +902,7 @@ const SidePanelBase = React.forwardRef(
 
     return shouldRender ? (
       <>
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+        { }
         <Section
           {...getDevtoolsProps(componentName)}
           {...rest}
@@ -909,7 +910,7 @@ const SidePanelBase = React.forwardRef(
           className={mainPanelClassNames}
           ref={sidePanelRef}
           as="aside"
-          aria-label={title}
+          aria-label={title || rest['aria-label']}
           onAnimationEnd={onAnimationEnd}
           onAnimationStart={onAnimationStart}
           onKeyDown={handleKeyDown}

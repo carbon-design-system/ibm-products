@@ -395,11 +395,11 @@ describe('PageHeader', () => {
       .mockImplementation();
 
     expect(scrollableEl.scrollTo).not.toHaveBeenCalled();
-    await act(() => userEvent.click(collapseButton));
+    await act(async () => userEvent.click(collapseButton));
     // Determine how to test this (jest dom does not do scroll events)
     // screen.getByLabelText(testProps.expandHeaderIconDescription);
     expect(scrollableEl.scrollTo).toHaveBeenCalled();
-    await act(() => userEvent.click(collapseButton));
+    await act(async () => userEvent.click(collapseButton));
     expect(scrollableEl.scrollTo).toHaveBeenCalledTimes(2);
   });
 

@@ -187,7 +187,7 @@ describe(componentName, () => {
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass('is-visible');
     const closeButton = screen.getByLabelText('Close');
-    await act(() => click(closeButton));
+    await act(async () => click(closeButton));
     expect(editTearsheet).not.toHaveClass('is-visible');
   });
 
@@ -205,7 +205,7 @@ describe(componentName, () => {
     expect(editTearsheet).toHaveClass('is-visible');
     const submitButton = screen.getByText('Save');
 
-    await act(() => click(submitButton));
+    await act(async () => click(submitButton));
     expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);
   });
 
@@ -226,7 +226,7 @@ describe(componentName, () => {
     const submitButton = screen.getByText('Save');
     expect(submitButton.disabled).toEqual(false);
 
-    await act(() => click(submitButton));
+    await act(async () => click(submitButton));
     expect(submitButton.disabled).toBeTruthy();
     //wait up to a sec until state expected to change
     await waitFor(() => expect(submitButton.disabled).toEqual(false));
@@ -265,7 +265,7 @@ describe(componentName, () => {
       `.${carbon.prefix}--side-nav__link-text`
     )[2];
 
-    await act(() => click(form2NavLink));
+    await act(async () => click(form2NavLink));
     expect(onFormChange).toHaveBeenCalledTimes(1);
     expect(onFormChange).toHaveBeenCalledWith(2);
   });

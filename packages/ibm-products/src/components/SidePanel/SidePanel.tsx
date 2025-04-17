@@ -902,7 +902,6 @@ const SidePanelBase = React.forwardRef(
 
     return shouldRender ? (
       <>
-        { }
         <Section
           {...getDevtoolsProps(componentName)}
           {...rest}

@@ -159,6 +159,56 @@ export type statementConfig = Item & {
   secondaryLabel?: string;
 };
 
+type ConditionBuilderTextKeys =
+  | 'ifText'
+  | 'unlessText'
+  | 'excl_if'
+  | 'and'
+  | 'or'
+  | 'is'
+  | 'ifAll'
+  | 'ifAny'
+  | 'unlessAll'
+  | 'unlessAny'
+  | 'greater'
+  | 'greaterEqual'
+  | 'lower'
+  | 'lowerEqual'
+  | 'startsWith'
+  | 'endsWith'
+  | 'contains'
+  | 'oneOf'
+  | 'before'
+  | 'after'
+  | 'between'
+  | 'addConditionText'
+  | 'addConditionGroupText'
+  | 'addSubgroupText'
+  | 'conditionText'
+  | 'propertyText'
+  | 'operatorText'
+  | 'valueText'
+  | 'connectorText'
+  | 'conditionRowText'
+  | 'conditionRowGroupText'
+  | 'removeConditionText'
+  | 'addConditionRowText'
+  | 'startText'
+  | 'endText'
+  | 'clearSearchText'
+  | 'actionsText'
+  | 'then'
+  | 'removeActionText'
+  | 'addActionText'
+  | 'invalidText'
+  | 'invalidNumberWarnText'
+  | 'conditionBuilderText'
+  | 'actionSectionText'
+  | 'conditionHeadingText'
+  | 'addPropertyText'
+  | 'addOperatorText'
+  | 'addValueText'
+  | 'conditionBuilderHierarchicalText';
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
   initialState?: InitialState;
@@ -173,8 +223,8 @@ export type ConditionBuilderProps = {
   popOverSearchThreshold: number;
   startConditionLabel?: string;
   variant?: 'Non-Hierarchical' | 'Hierarchical';
-  translateWithId: (id: string) => string;
-  statementConfigCustom: statementConfig[];
+  translateWithId?: (id: ConditionBuilderTextKeys) => string;
+  statementConfigCustom?: statementConfig[];
 };
 
 export type InitialState = {
@@ -191,7 +241,7 @@ export interface ConditionBuilderContextInputProps extends PropsWithChildren {
     condition: Condition
   ) => Promise<Option[]>;
   variant?: string;
-  translateWithId?: (id: string) => string;
+  translateWithId?: (id: ConditionBuilderTextKeys) => string;
   statementConfigCustom?: statementConfig[];
 
   conditionBuilderRef?: ForwardedRef<HTMLDivElement>;

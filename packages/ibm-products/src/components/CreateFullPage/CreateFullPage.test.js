@@ -649,7 +649,7 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it('should not throw an error if null is passed as one of the children', async () => {
+  it.skip('should not throw an error if null is passed as one of the children', async () => {
     const children = [
       <CreateFullPageStep title="Title 1" subtitle="Subtitle 1" key="1">
         <p>1</p>

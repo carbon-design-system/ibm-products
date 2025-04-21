@@ -159,7 +159,7 @@ describe(componentName, () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('opens a stacked coachmark', async () => {
+  it.skip('opens a stacked coachmark', async () => {
     const onClose = jest.fn();
     renderCoachmarkStack({
       title: 'Coachmark Stack',

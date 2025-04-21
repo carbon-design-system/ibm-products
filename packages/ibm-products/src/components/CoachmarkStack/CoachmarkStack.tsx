@@ -115,227 +115,219 @@ const defaults = {
 export let CoachmarkStack = React.forwardRef<
   HTMLDivElement,
   CoachmarkStackProps
->(
-  (
-    {
-      children,
-      className,
-      onClose = defaults.onClose,
-      // Pass through to CoachmarkStackHome
-      description,
-      renderMedia,
-      navLinkLabels,
-      portalTarget = defaults.portalTarget,
-      closeButtonLabel,
-      tagline,
-      theme = defaults.theme,
-      title,
-      tooltipAlign,
-      ...rest
+>((props, ref) => {
+  const {
+    children,
+    className,
+    onClose = defaults.onClose,
+    // Pass through to CoachmarkStackHome
+    description,
+    renderMedia,
+    navLinkLabels,
+    portalTarget = defaults.portalTarget,
+    closeButtonLabel,
+    tagline,
+    theme = defaults.theme,
+    title,
+    tooltipAlign,
+    ...rest
+  } = props;
+  const portalNode = useRef<HTMLBodyElement | null>(null);
+
+  useIsomorphicEffect(() => {
+    portalNode.current = portalTarget
+      ? (document?.querySelector(portalTarget) ??
+        document?.querySelector('body'))
+      : document?.querySelector('body');
+  }, [portalTarget]);
+
+  const stackHomeRef = useRef<HTMLDivElement | null>(null);
+  const stackedCoachmarkRefs = useRef<HTMLDivElement[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  // selectedItemNumber -1 = parent close button was clicked, remove entire stack
+  // selectedItemNumber 0 = (default) the parent is visible, all children are hidden
+  // selectedItemNumber 1+ = a child is visible and stacked atop the parent
+  const [selectedItemNumber, setSelectedItemNumber] = useState(0);
+  // // The parent height and width values to return to after unstacked
+  const [parentHeight, setParentHeight] = useState<number>();
+  // parent height = child height when stacked behind a child that is shorter
+  const childArray = Children.toArray(children);
+  const mountedRef = useRef<boolean | undefined>(undefined);
+  // same value as CSS animation speed
+  const delayMs = 240;
+
+  // Unmount or unstack a child
+  const handleClickNavItem = (itemNumber) => {
+    setSelectedItemNumber(itemNumber);
+  };
+  const handleClose = useCallback(
+    (isParentCloseButton) => {
+      if (isParentCloseButton) {
+        // Trigger slide-out animation
+        setSelectedItemNumber(-1);
+
+        // Unmount after animation is complete
+        const timer = setTimeout(() => {
+          setIsOpen(false);
+          onClose();
+        }, delayMs);
+        return () => clearTimeout(timer);
+      } else {
+        // Unstack child
+        setSelectedItemNumber(0);
+      }
     },
-    ref
-  ) => {
-    const portalNode = useRef<HTMLBodyElement | null>(null);
-
-    useIsomorphicEffect(() => {
-      portalNode.current = portalTarget
-        ? (document?.querySelector(portalTarget) ??
-          document?.querySelector('body'))
-        : document?.querySelector('body');
-    }, [portalTarget]);
-
-    const stackHomeRef = useRef<HTMLDivElement | null>(null);
-    const stackedCoachmarkRefs = useRef<HTMLDivElement[]>([]);
-    const [isOpen, setIsOpen] = useState(false);
-    // selectedItemNumber -1 = parent close button was clicked, remove entire stack
-    // selectedItemNumber 0 = (default) the parent is visible, all children are hidden
-    // selectedItemNumber 1+ = a child is visible and stacked atop the parent
-    const [selectedItemNumber, setSelectedItemNumber] = useState(0);
-    // // The parent height and width values to return to after unstacked
-    const [parentHeight, setParentHeight] = useState<number>();
-    // parent height = child height when stacked behind a child that is shorter
-    const childArray = Children.toArray(children);
-    const mountedRef = useRef<boolean | undefined>(undefined);
-    // same value as CSS animation speed
-    const delayMs = 240;
-
-    // Unmount or unstack a child
-    const handleClickNavItem = (itemNumber) => {
-      setSelectedItemNumber(itemNumber);
-    };
-    const handleClose = useCallback(
-      (isParentCloseButton) => {
-        if (isParentCloseButton) {
-          // Trigger slide-out animation
-          setSelectedItemNumber(-1);
-
-          // Unmount after animation is complete
-          const timer = setTimeout(() => {
-            setIsOpen(false);
-            onClose();
-          }, delayMs);
-          return () => clearTimeout(timer);
+    [onClose]
+  );
+  const escFunction = useCallback(
+    (event) => {
+      if (event.key === 'Escape') {
+        if (selectedItemNumber === 0) {
+          handleClose(true);
         } else {
-          // Unstack child
-          setSelectedItemNumber(0);
+          handleClose(false);
         }
-      },
-      [onClose]
-    );
-    const escFunction = useCallback(
-      (event) => {
-        if (event.key === 'Escape') {
-          if (selectedItemNumber === 0) {
-            handleClose(true);
-          } else {
-            handleClose(false);
-          }
-        }
-      },
-      [handleClose, selectedItemNumber]
-    );
+      }
+    },
+    [handleClose, selectedItemNumber]
+  );
 
-    useEffect(() => {
-      document.addEventListener('keydown', escFunction, false);
+  useEffect(() => {
+    document.addEventListener('keydown', escFunction, false);
 
-      return () => {
-        document.removeEventListener('keydown', escFunction, false);
-      };
-    }, [escFunction]);
-
-    const contextValue = {
-      buttonProps: {
-        tabIndex: 0,
-        'aria-expanded': isOpen,
-        onClick: () => {
-          setIsOpen(true);
-        },
-        // Compensate for accidental open/close on double-click.
-        // Only open on double-click.
-        onDoubleClick: () => {
-          setIsOpen(true);
-        },
-      },
-      closeButtonProps: {
-        onClick: () => handleClose(false),
-      },
-      isOpen: isOpen,
+    return () => {
+      document.removeEventListener('keydown', escFunction, false);
     };
-    useEffect(() => {
-      mountedRef.current = true;
-      return () => {
-        mountedRef.current = false;
-      };
-    }, []);
-    useEffect(() => {
-      setTimeout(() => {
-        if (stackHomeRef.current) {
-          setParentHeight(stackHomeRef.current.clientHeight + 16);
-        }
-      }, 0);
-    }, [stackHomeRef]);
+  }, [escFunction]);
 
-    useEffect(() => {
-      const targetSelectedItem = selectedItemNumber - 1;
-      if (!parentHeight) {
-        return;
-      }
+  const contextValue = {
+    buttonProps: {
+      tabIndex: 0,
+      'aria-expanded': isOpen,
+      onClick: () => {
+        setIsOpen(true);
+      },
+      // Compensate for accidental open/close on double-click.
+      // Only open on double-click.
+      onDoubleClick: () => {
+        setIsOpen(true);
+      },
+    },
+    closeButtonProps: {
+      onClick: () => handleClose(false),
+    },
+    isOpen: isOpen,
+  };
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+  useEffect(() => {
+    setTimeout(() => {
       if (stackHomeRef.current) {
-        stackHomeRef.current.style.height = `${parentHeight}px`;
+        setParentHeight(stackHomeRef.current.clientHeight + 16);
       }
-      if (!isOpen || targetSelectedItem < 0) {
-        if (stackHomeRef.current) {
-          stackHomeRef.current.focus();
-        }
-        return;
-      }
+    }, 0);
+  }, [stackHomeRef]);
 
-      const targetHomeHeight =
-        stackedCoachmarkRefs.current[targetSelectedItem].clientHeight;
-
+  useEffect(() => {
+    const targetSelectedItem = selectedItemNumber - 1;
+    if (!parentHeight) {
+      return;
+    }
+    if (stackHomeRef.current) {
+      stackHomeRef.current.style.height = `${parentHeight}px`;
+    }
+    if (!isOpen || targetSelectedItem < 0) {
       if (stackHomeRef.current) {
-        stackHomeRef.current.style.height = `${targetHomeHeight}px`;
-        stackedCoachmarkRefs.current[targetSelectedItem].focus();
+        stackHomeRef.current.focus();
       }
-    }, [selectedItemNumber, isOpen, parentHeight]);
+      return;
+    }
 
-    const wrappedChildren = Children.map(childArray, (child, idx) => {
-      const mountedClass = mountedRef.current
-        ? `${elementBlockClass}--is-mounted`
-        : '';
-      return (
-        <CoachmarkOverlay
-          key={idx}
-          ref={(ref) => {
-            stackedCoachmarkRefs.current[idx] = ref as HTMLDivElement;
-          }}
-          kind={COACHMARK_OVERLAY_KIND.STACKED}
-          onClose={() => handleClose(false)}
-          theme={theme}
-          fixedIsVisible={false}
+    const targetHomeHeight =
+      stackedCoachmarkRefs.current[targetSelectedItem].clientHeight;
+
+    if (stackHomeRef.current) {
+      stackHomeRef.current.style.height = `${targetHomeHeight}px`;
+      stackedCoachmarkRefs.current[targetSelectedItem].focus();
+    }
+  }, [selectedItemNumber, isOpen, parentHeight]);
+
+  const wrappedChildren = Children.map(childArray, (child, idx) => {
+    const mountedClass = mountedRef.current
+      ? `${elementBlockClass}--is-mounted`
+      : '';
+    return (
+      <CoachmarkOverlay
+        key={idx}
+        ref={(ref) => {
+          stackedCoachmarkRefs.current[idx] = ref as HTMLDivElement;
+        }}
+        kind={COACHMARK_OVERLAY_KIND.STACKED}
+        onClose={() => handleClose(false)}
+        theme={theme}
+        fixedIsVisible={false}
+        className={cx(
+          elementBlockClass,
+          mountedClass,
+          idx === selectedItemNumber - 1 && `${elementBlockClass}--is-visible`,
+          mountedRef.current && `${elementBlockClass}--is-mounted`
+        )}
+      >
+        {child}
+      </CoachmarkOverlay>
+    );
+  });
+
+  return (
+    <CoachmarkContext.Provider value={contextValue}>
+      <div
+        {...rest}
+        className={cx(
+          blockClass,
+          `${pkg.prefix}--coachmark-overlay--stack`,
+          className
+        )}
+        ref={ref}
+        {...getDevtoolsProps(componentName)}
+      >
+        <CoachmarkTagline title={tagline} onClose={onClose} />
+
+        <CoachmarkStackHome
+          ref={stackHomeRef}
           className={cx(
+            `${pkg.prefix}--coachmark-overlay`,
+            `${pkg.prefix}--coachmark-overlay__${theme}`,
             elementBlockClass,
-            mountedClass,
-            idx === selectedItemNumber - 1 &&
-              `${elementBlockClass}--is-visible`,
+            selectedItemNumber > 0 && `${elementBlockClass}--is-stacked`,
+            selectedItemNumber > 0 &&
+              `${elementBlockClass}--is-stacked__${theme}`,
+            isOpen && `${elementBlockClass}--is-visible`,
             mountedRef.current && `${elementBlockClass}--is-mounted`
           )}
-        >
-          {child}
-        </CoachmarkOverlay>
-      );
-    });
-
-    return (
-      <CoachmarkContext.Provider value={contextValue}>
-        <div
-          {
-            // Pass through any other property values as HTML attributes.
-            ...rest
-          }
-          className={cx(
-            blockClass,
-            `${pkg.prefix}--coachmark-overlay--stack`,
-            className
-          )}
-          ref={ref}
-          {...getDevtoolsProps(componentName)}
-        >
-          <CoachmarkTagline title={tagline} onClose={onClose} />
-
-          <CoachmarkStackHome
-            ref={stackHomeRef}
-            className={cx(
-              `${pkg.prefix}--coachmark-overlay`,
-              `${pkg.prefix}--coachmark-overlay__${theme}`,
-              elementBlockClass,
-              selectedItemNumber > 0 && `${elementBlockClass}--is-stacked`,
-              selectedItemNumber > 0 &&
-                `${elementBlockClass}--is-stacked__${theme}`,
-              isOpen && `${elementBlockClass}--is-visible`,
-              mountedRef.current && `${elementBlockClass}--is-mounted`
-            )}
-            isOpen={isOpen && selectedItemNumber < 1}
-            description={description}
-            renderMedia={renderMedia}
-            navLinkLabels={navLinkLabels}
-            onClickNavItem={handleClickNavItem}
-            onClose={() => {
-              handleClose(true);
-            }}
-            portalTarget={portalTarget}
-            closeButtonLabel={closeButtonLabel}
-            title={title}
-            tooltipAlign={tooltipAlign}
-          />
-          {portalNode?.current
-            ? createPortal(wrappedChildren, portalNode?.current)
-            : null}
-        </div>
-      </CoachmarkContext.Provider>
-    );
-  }
-);
+          isOpen={isOpen && selectedItemNumber < 1}
+          description={description}
+          renderMedia={renderMedia}
+          navLinkLabels={navLinkLabels}
+          onClickNavItem={handleClickNavItem}
+          onClose={() => {
+            handleClose(true);
+          }}
+          portalTarget={portalTarget}
+          closeButtonLabel={closeButtonLabel}
+          title={title}
+          tooltipAlign={tooltipAlign}
+        />
+        {portalNode?.current
+          ? createPortal(wrappedChildren, portalNode?.current)
+          : null}
+      </div>
+    </CoachmarkContext.Provider>
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 CoachmarkStack = pkg.checkComponentEnabled(CoachmarkStack, componentName);

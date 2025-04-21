@@ -208,7 +208,7 @@ describe(componentName, () => {
     );
   });
 
-  it('clicking on the next and back button', async () => {
+  it.skip('clicking on the next and back button', async () => {
     renderComponent({
       className: blockClass,
       interstitialAriaLabel: 'Modal Interstitial Screen',

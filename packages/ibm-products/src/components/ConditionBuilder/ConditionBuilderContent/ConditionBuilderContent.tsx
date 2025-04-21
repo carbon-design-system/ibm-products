@@ -154,7 +154,10 @@ const ConditionBuilderContent = ({
 
   const addConditionGroupHandler = () => {
     const { preventAdd } =
-      onAddItem?.('add-group', rootState as ConditionBuilderState) ?? {};
+      onAddItem?.({
+        type: 'group',
+        state: rootState as ConditionBuilderState,
+      }) ?? {};
     if (!preventAdd) {
       const newGroup: ConditionGroup = {
         statement: 'ifAll',

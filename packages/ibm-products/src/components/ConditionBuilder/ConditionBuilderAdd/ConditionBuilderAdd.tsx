@@ -55,8 +55,11 @@ const ConditionBuilderAdd = ({
 
   const onClickHandler = () => {
     const { preventAdd } =
-      onAddItem?.('add-condition', rootState as ConditionBuilderState, group) ??
-      {};
+      onAddItem?.({
+        type: 'condition',
+        state: rootState as ConditionBuilderState,
+        group,
+      }) ?? {};
     if (!preventAdd) {
       hideConditionPreviewHandler?.();
       onClick();
@@ -81,8 +84,11 @@ const ConditionBuilderAdd = ({
 
   const handleAddSubGroup = () => {
     const { preventAdd } =
-      onAddItem?.('add-subgroup', rootState as ConditionBuilderState, group) ??
-      {};
+      onAddItem?.({
+        type: 'subgroup',
+        state: rootState as ConditionBuilderState,
+        group,
+      }) ?? {};
     if (!preventAdd) {
       addConditionSubGroupHandler?.();
     }

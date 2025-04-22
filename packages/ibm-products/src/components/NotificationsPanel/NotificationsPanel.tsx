@@ -6,7 +6,15 @@
  */
 
 // Carbon and package components we use.
-import { Button, Link, Toggle, IconButton, usePrefix } from '@carbon/react';
+import {
+  Button,
+  Heading,
+  IconButton,
+  Link,
+  Section,
+  Toggle,
+  usePrefix,
+} from '@carbon/react';
 import { dateTimeFormat } from '@carbon/utilities';
 import {
   CheckmarkFilled,
@@ -35,6 +43,7 @@ import { useClickOutside, usePresence } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
+import { useId } from '../../global/js/utils/useId';
 import { pkg } from '../../settings';
 import { timeAgo } from './utils';
 
@@ -383,6 +392,7 @@ export let NotificationsPanel = React.forwardRef(
     const [allNotifications, setAllNotifications] = useState<Data[]>([]);
     const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
     const carbonPrefix = usePrefix();
+    const headingId = useId();
 
     const reducedMotion = usePrefersReducedMotion();
     const exitAnimationName = reducedMotion
@@ -559,9 +569,10 @@ export let NotificationsPanel = React.forwardRef(
         },
       ]);
       return (
-        <div
+        <Section
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
+          as="div"
           role="button"
           tabIndex={0}
           onClick={() => notification.onNotificationClick(notification)}
@@ -643,9 +654,9 @@ export let NotificationsPanel = React.forwardRef(
                     nowText,
                   })}
             </p>
-            <h6 className={notificationHeaderClassName}>
+            <Heading className={notificationHeaderClassName}>
               {notification.title}
-            </h6>
+            </Heading>
             {notification.description &&
               notification.description.length &&
               renderDescription(notification.id)}
@@ -671,7 +682,7 @@ export let NotificationsPanel = React.forwardRef(
           >
             <Close size={16} />
           </IconButton>
-        </div>
+        </Section>
       );
     };
 
@@ -698,10 +709,10 @@ export let NotificationsPanel = React.forwardRef(
         >
           Focus sentinel start
         </button>
-        {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
-        <div
+        <Section
+          as="div"
           role="dialog"
-          aria-label="Notification Panel"
+          aria-labelledby={headingId}
           onKeyDown={handleKeydown}
           tabIndex={0}
           {
@@ -722,7 +733,9 @@ export let NotificationsPanel = React.forwardRef(
           <div ref={notificationPanelInnerRef}>
             <div className={`${blockClass}__header-container`}>
               <div className={`${blockClass}__header-flex`}>
-                <h2 className={`${blockClass}__header`}>{title}</h2>
+                <Heading id={headingId} className={`${blockClass}__header`}>
+                  {title}
+                </Heading>
                 <Button
                   size="sm"
                   kind="ghost"
@@ -746,13 +759,13 @@ export let NotificationsPanel = React.forwardRef(
                 />
               )}
             </div>
-            <div className={mainSectionClassName}>
+            <Section className={mainSectionClassName}>
               {withinLastDayNotifications &&
               withinLastDayNotifications.length ? (
                 <>
-                  <h6 className={`${blockClass}__time-section-label`}>
+                  <Heading className={`${blockClass}__time-section-label`}>
                     {todayLabel}
-                  </h6>
+                  </Heading>
                   {withinLastDayNotifications.map((notification, index) =>
                     renderNotification('today', notification, index)
                   )}
@@ -760,9 +773,9 @@ export let NotificationsPanel = React.forwardRef(
               ) : null}
               {previousDayNotifications && previousDayNotifications.length ? (
                 <>
-                  <h6 className={`${blockClass}__time-section-label`}>
+                  <Heading className={`${blockClass}__time-section-label`}>
                     {yesterdayLabel}
-                  </h6>
+                  </Heading>
                   {previousDayNotifications.map((notification, index) =>
                     renderNotification('yesterday', notification, index)
                   )}
@@ -770,9 +783,9 @@ export let NotificationsPanel = React.forwardRef(
               ) : null}
               {previousNotifications && previousNotifications.length ? (
                 <>
-                  <h6 className={`${blockClass}__time-section-label`}>
+                  <Heading className={`${blockClass}__time-section-label`}>
                     {previousLabel}
-                  </h6>
+                  </Heading>
                   {previousNotifications.map((notification, index) =>
                     renderNotification('previous', notification, index)
                   )}
@@ -785,7 +798,7 @@ export let NotificationsPanel = React.forwardRef(
                   subtitle={emptyStateLabel}
                 />
               )}
-            </div>
+            </Section>
             {onViewAllClick &&
               onSettingsClick &&
               allNotifications &&
@@ -811,8 +824,7 @@ export let NotificationsPanel = React.forwardRef(
                 </div>
               )}
           </div>
-        </div>
-        {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
+        </Section>
         <button
           type="button"
           className={`${carbonPrefix}--visually-hidden`}

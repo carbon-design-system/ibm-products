@@ -9,6 +9,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Checkbox } from '@carbon/react';
 import { isColumnVisible } from './common';
+import { useId } from '../../../../../global/js/utils/useId';
 import DraggableElement from '../../DraggableElement';
 import { pkg } from '../../../../../settings';
 import { getNodeTextContent } from '../../../../../global/js/utils/getNodeTextContent';
@@ -42,6 +43,8 @@ export const DraggableItemsList = ({
   setAriaRegionText,
 }) => {
   const draggableClass = `${blockClass}__draggable-item`;
+  const generatedId = useId();
+
   const visibleCols = columns
     // hide the columns without Header, e.g the sticky actions, spacer
     .filter((colDef) => getNodeTextContent(colDef.Header).trim().length !== 0)
@@ -239,12 +242,12 @@ export const DraggableItemsList = ({
                 }
               </>
             );
-
             return (
               <DraggableElement
                 classList={draggableClass}
                 key={colDef.id}
                 id={colDef.id}
+                elementId={`${colDef.id}-${generatedId}`}
                 disabled={filterString.length > 0 || isFrozenColumn}
                 ariaLabel={colHeaderTitle}
                 isSticky={isFrozenColumn}

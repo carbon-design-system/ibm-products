@@ -58,8 +58,6 @@ export * from './NonLinearReading';
 export * from './BigNumbers';
 export * from './TruncatedList';
 export * from './InterstitialScreen';
-export * from './InterstitialScreenView';
-export * from './InterstitialScreenViewModule';
 export * from './DelimitedList';
 export * from './Decorator';
 export * from './DecoratorLink';

@@ -120,8 +120,6 @@
     "typescript-eslint": "^8.26.1",
     "webpack": "^5.98.0"
   },
-  "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
-  "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {
     "@types/react": "~19.0.0",
     "@types/prop-types": "^15.7.14",

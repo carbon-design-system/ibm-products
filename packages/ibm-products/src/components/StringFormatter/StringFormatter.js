@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -50,11 +50,35 @@ export let StringFormatter = React.forwardRef(
     ref
   ) => {
     const contentRef = useRef(null);
+    const [isTextTruncated, setIsTextTruncated] = useState(false);
 
     useIsomorphicEffect(() => {
-      contentRef.current.style.maxWidth = width;
-      contentRef.current.style.WebkitLineClamp = lines;
-    }, [lines, width]);
+      const checkTruncation = () => {
+        if (contentRef.current) {
+          const element = contentRef.current;
+          element.style.webkitLineClamp = truncate ? lines : undefined;
+          element.style.maxWidth = width;
+          const buffer = element.clientHeight / (2 * lines);
+          // add a buffer of at least half of line height/clientHeight. to get a stable outcome.
+          const isOverflowing =
+            element.scrollHeight > element.clientHeight + buffer;
+          setIsTextTruncated(isOverflowing);
+        }
+      };
+
+      const resizeObserver = new ResizeObserver(() => {
+        checkTruncation();
+      });
+
+      if (contentRef.current) {
+        resizeObserver.observe(contentRef.current.parentElement);
+        checkTruncation();
+      }
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }, [lines, value, width, truncate]);
 
     const stringFormatterContent = (
       <span
@@ -74,7 +98,7 @@ export let StringFormatter = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        {truncate ? (
+        {truncate && isTextTruncated ? (
           <DefinitionTooltip
             className={`${blockClass}__tooltip`}
             align={tooltipDirection}
@@ -125,7 +149,7 @@ StringFormatter.propTypes = {
       Object.values(StringFormatterAlignment)
     ),
   ]),
-  /** Whether or not the value should be truncated. */
+  /** Whether or not the value should be truncated. if it exceeds lines. */
   truncate: PropTypes.bool,
   /** Value to format. */
   value: PropTypes.string.isRequired,

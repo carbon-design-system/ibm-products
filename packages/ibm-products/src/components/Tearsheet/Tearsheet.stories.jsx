@@ -10,7 +10,7 @@ import DocsPage from './Tearsheet.docs-page';
 import { action } from '@storybook/addon-actions';
 import { Information } from '@carbon/react/icons';
 import { pkg } from '../../settings';
-
+import { StringFormatter } from '../StringFormatter/StringFormatter.js';
 import {
   Button,
   ButtonSet,
@@ -145,9 +145,14 @@ export default {
 
 const closeIconDescription = 'Close the tearsheet';
 
-const description =
-  'This is a description for the tearsheet, providing an opportunity to \
-  describe the flow over a couple of lines in the header of the tearsheet.';
+const description = (
+  <StringFormatter
+    lines={2}
+    truncate={true}
+    value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+    tooltipDirection="bottom"
+  />
+);
 
 const influencer = (
   <Section className="tearsheet-stories__dummy-content-block">

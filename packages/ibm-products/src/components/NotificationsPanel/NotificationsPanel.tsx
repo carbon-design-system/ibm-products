@@ -411,9 +411,6 @@ export let NotificationsPanel = React.forwardRef(
 
     useClickOutside(ref || notificationPanelRef, () => {
       onClickOutside?.();
-      setTimeout(() => {
-        triggerButtonRef?.current?.focus();
-      }, 0);
     });
 
     const handleKeydown = (event) => {

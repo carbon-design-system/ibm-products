@@ -61,8 +61,8 @@ const renderTemplate = (args) => {
       summary=${summary}
       title=${title}
       titleId=${titleId}
-      @onOpen=${handleOpen}
-      @onClose=${handleClose}
+      @c4p-options-tile-open=${handleOpen}
+      @c4p-options-tile-close=${handleClose}
     >
       <div slot="toggle">
         <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>

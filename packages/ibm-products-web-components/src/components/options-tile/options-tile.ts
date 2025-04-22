@@ -17,6 +17,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import ChevronDown20 from '@carbon/web-components/es/icons/chevron--down/20';
 
 const blockClass = `${prefix}--options-tile`;
+const blockEvent = `${prefix}-options-tile`;
 
 /**
  * OptionsTile.
@@ -68,24 +69,42 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   @property({ type: String, reflect: true })
   titleId: string = '';
 
+  static get eventOpen() {
+    return `${blockEvent}-open`;
+  }
+
+  static get eventClose() {
+    return `${blockEvent}-close`;
+  }
+
   private _toggle() {
     this.open ? this._handleClose() : this._handleOpen();
   }
 
   private _handleOpen() {
-    const options = {
+    const init = {
       bubbles: true,
       composed: true,
     };
-    this.dispatchEvent(new CustomEvent('onOpen', options));
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSOptionsTile).eventOpen,
+        init
+      )
+    );
   }
 
   private _handleClose() {
-    const options = {
+    const init = {
       bubbles: true,
       composed: true,
     };
-    this.dispatchEvent(new CustomEvent('onClose', options));
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSOptionsTile).eventClose,
+        init
+      )
+    );
   }
 
   getBody() {

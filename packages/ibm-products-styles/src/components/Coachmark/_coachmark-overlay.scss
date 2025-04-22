@@ -234,6 +234,8 @@ $draghandle-btn-class: #{$block-class}__handle;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-block-start: $spacing-05;
+    padding-block-end: $spacing-05;
   }
 
   // THEME

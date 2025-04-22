@@ -169,6 +169,8 @@ $block-size: 38.5rem;
     text-align: start;
     transition: background-color $duration-moderate-02 motion(standard);
     .#{$block-class}__notification-title {
+      @include type.type-style('heading-01');
+
       color: $text-secondary;
       margin-block-end: $spacing-02;
       @include font-weight('regular');

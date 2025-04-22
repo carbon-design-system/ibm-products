@@ -8,10 +8,13 @@
 // Other standard imports.
 import PropTypes from 'prop-types';
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useEffect } from 'react';
 import cx from 'classnames';
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
+import { SelectableTag } from '@carbon/react';
+import { Checkmark } from '@carbon/react/icons';
+import { pkg } from '../../../../settings';
+import { disableButtonConfigType } from '../../InterstitialScreen';
+import './_interstitial-screen-view-module.scss';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -44,6 +47,12 @@ export interface InterstitialScreenViewModuleProps {
    * The title of this component.
    */
   title: string;
+  /**
+   *
+   * @param value This is callback to disable any action button dynamically
+   * @returns void
+   */
+  disableActionButton?: (value: disableButtonConfigType) => void;
 }
 /**
  * View module to help in building interstitial screen views.
@@ -59,11 +68,22 @@ export let InterstitialScreenViewModule = React.forwardRef<
       className,
       title,
       description,
+      disableActionButton,
       // Collect any other property values passed in.
       ...rest
     }: InterstitialScreenViewModuleProps,
     ref
   ) => {
+    useEffect(() => {
+      disableActionButton?.({
+        start: true,
+      });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handleOnChange = (selected) => {
+      disableActionButton?.({ start: !selected });
+    };
     return (
       <section
         {
@@ -75,10 +95,18 @@ export let InterstitialScreenViewModule = React.forwardRef<
           className // Apply any supplied class names to the main HTML element.
         )}
         ref={ref}
-        {...getDevtoolsProps(componentName)}
       >
         <h1 className={`${blockClass}--heading`}>{title}</h1>
         <p className={`${blockClass}--body`}>{description}</p>
+
+        {disableActionButton && (
+          <SelectableTag
+            renderIcon={Checkmark}
+            text="Enable Get Started"
+            className={`${blockClass}--enableTag`}
+            onChange={handleOnChange}
+          />
+        )}
       </section>
     );
   }
@@ -106,6 +134,10 @@ InterstitialScreenViewModule.propTypes = {
    * The description of this component.
    */
   description: PropTypes.string.isRequired,
+  /**
+   * This is callback to disable any action button dynamically
+   */
+  disableActionButton: PropTypes.func,
   /**
    * The title of this component.
    */

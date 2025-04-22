@@ -29,7 +29,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   /**
    * If `true` the body of the component is shown
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   open: boolean = false;
 
   /**
@@ -47,26 +47,46 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   /**
    * Determines the size of the header
    */
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   size?: 'lg' | 'xl' = 'lg';
 
   /**
    * Text that is displayed under the title
    */
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   summary?: string;
 
   /**
    * Text for the title
    */
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   title: string = '';
 
   /**
    * ID for the title
    */
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   titleId: string = '';
+
+  private _toggle() {
+    this.open ? this._handleClose() : this._handleOpen();
+  }
+
+  private _handleOpen() {
+    const options = {
+      bubbles: true,
+      composed: true,
+    };
+    this.dispatchEvent(new CustomEvent('onOpen', options));
+  }
+
+  private _handleClose() {
+    const options = {
+      bubbles: true,
+      composed: true,
+    };
+    this.dispatchEvent(new CustomEvent('onClose', options));
+  }
 
   getBody() {
     const { open } = this;
@@ -105,30 +125,6 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
         ${this.getBody()}
       </div>
     `;
-  }
-
-  private _toggle() {
-    if (this.open) {
-      this._onClose();
-    } else {
-      this._onOpen();
-    }
-  }
-
-  private _onOpen() {
-    const options = {
-      bubbles: true,
-      composed: true,
-    };
-    this.dispatchEvent(new CustomEvent('onOpen', options));
-  }
-
-  private _onClose() {
-    const options = {
-      bubbles: true,
-      composed: true,
-    };
-    this.dispatchEvent(new CustomEvent('onClose', options));
   }
 
   static styles = styles;

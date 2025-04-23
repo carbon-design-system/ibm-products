@@ -78,7 +78,7 @@ export let StringFormatter = React.forwardRef(
       return () => {
         resizeObserver.disconnect();
       };
-    }, [lines, value, width, truncate]);
+    }, [lines, value, width, truncate, contentRef?.current?.clientWidth]);
 
     const stringFormatterContent = (
       <span

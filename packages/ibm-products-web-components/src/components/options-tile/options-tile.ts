@@ -55,12 +55,6 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   size?: 'lg' | 'xl' = 'lg';
 
   /**
-   * Text that is displayed under the title
-   */
-  @property({ type: String, reflect: true })
-  summary?: string;
-
-  /**
    * Text for the title
    */
   @property({ type: String, reflect: true })
@@ -121,7 +115,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    const { open, size, summary, title, titleId } = this;
+    const { open, size, title, titleId } = this;
     const classes = classMap({
       [`${blockClass}`]: true,
       [`${blockClass}--xl`]: size === 'xl',
@@ -137,7 +131,9 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
             </div>
             <div class="${blockClass}__title-block">
               <p class="${blockClass}__title" id="${titleId}">${title}</p>
-              <p class="${blockClass}__summary">${summary}</p>
+              <div class="${blockClass}__summary">
+                <slot name="summary"></slot>
+              </div>
             </div>
           </div>
           <div class="${blockClass}__header-right">

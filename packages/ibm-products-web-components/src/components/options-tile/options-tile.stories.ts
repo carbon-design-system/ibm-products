@@ -12,6 +12,10 @@ import './index';
 import '@carbon/web-components/es/components/toggle/index.js';
 
 const argTypes = {
+  body: {
+    control: 'text',
+    description: 'Slot body content',
+  },
   open: {
     control: 'boolean',
     description: 'If `true` the body of the component is shown',
@@ -29,7 +33,7 @@ const argTypes = {
   },
   summary: {
     control: 'text',
-    description: 'Text that is displayed under the title',
+    description: 'Slot text that is displayed under the title',
   },
   title: {
     control: 'text',
@@ -52,37 +56,36 @@ const handleClose = (evt: Event) => {
 };
 
 const renderTemplate = (args) => {
-  const { open, size, summary, title, titleId } = args;
+  const { open, size, title, titleId } = args;
   return html`
     <c4p-options-tile
       id="my-tile"
       ?open=${open}
       size=${size}
-      summary=${summary}
       title=${title}
       titleId=${titleId}
       @c4p-options-tile-open=${handleOpen}
       @c4p-options-tile-close=${handleClose}
     >
+      <div slot="summary">
+        <span>${args.summary}</span>
+      </div>
       <div slot="toggle">
         <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>
       </div>
-      <div slot="body">
-        <div>
-          <p>Body content</p>
-        </div>
-      </div>
+      <div slot="body">${args.body}</div>
     </c4p-options-tile>
   `;
 };
 
 export const Default = {
   args: {
+    body: 'Body content',
     open: false,
     size: 'lg',
+    summary: 'Back up every 10min',
     title: 'Auto recovery',
     titleId: 'title-01',
-    summary: 'Back up every 10min',
   },
   argTypes,
   render: renderTemplate,

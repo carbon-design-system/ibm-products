@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.11.0-rc.0...@carbon/ibm-products-web-components@0.14.0-rc.0) (2025-04-21)
+
+
+### Bug Fixes
+
+* **tearsheet:** added utils.ts ([#7223](https://github.com/carbon-design-system/ibm-products/issues/7223)) ([e5e5b09](https://github.com/carbon-design-system/ibm-products/commit/e5e5b09b72673716d282d73a88c1be67c20a9a62))
+* **useravatar:** renderIcon prop changed to slot ([#7099](https://github.com/carbon-design-system/ibm-products/issues/7099)) ([2745f90](https://github.com/carbon-design-system/ibm-products/commit/2745f905384ab446cccd0a437c41fe1e040ec6d8))
+
+
+### Features
+
+* **custom-element:** new es build module ([#7090](https://github.com/carbon-design-system/ibm-products/issues/7090)) ([ab5562b](https://github.com/carbon-design-system/ibm-products/commit/ab5562b03342bbf23d679cff9c1b1ab79e9c9c39))
+* **full-page-error:** adds web component example ([#7177](https://github.com/carbon-design-system/ibm-products/issues/7177)) ([bc8b0f0](https://github.com/carbon-design-system/ibm-products/commit/bc8b0f03e1d2ee0631acaf2cd5ea432beb88a5a7))
+* **web-components:** adds FullPageError to web components ([#6910](https://github.com/carbon-design-system/ibm-products/issues/6910)) ([55a3a2f](https://github.com/carbon-design-system/ibm-products/commit/55a3a2f94757610ae5f69fb4e003ebbcbb78f69b))
+* **web-components:** adds FullPageError to web components ([#7154](https://github.com/carbon-design-system/ibm-products/issues/7154)) ([67eacec](https://github.com/carbon-design-system/ibm-products/commit/67eacec5f85be248f9262f328d5b60f149e7e7fa)), closes [#6910](https://github.com/carbon-design-system/ibm-products/issues/6910) [#7153](https://github.com/carbon-design-system/ibm-products/issues/7153)
+
+
+### Reverts
+
+* Revert "feat(web-components): adds FullPageError to web components (#6910)" (#7153) ([1130cfa](https://github.com/carbon-design-system/ibm-products/commit/1130cfa404f42a8c2bf094caa571fde27c7e4ee3)), closes [#6910](https://github.com/carbon-design-system/ibm-products/issues/6910) [#7153](https://github.com/carbon-design-system/ibm-products/issues/7153)
+
+
+
+
+
+# [0.13.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.13.0-rc.0...@carbon/ibm-products-web-components@0.13.0) (2025-04-17)
+
+**Note:** Version bump only for package @carbon/ibm-products-web-components
+
+
+
+
+
 # [0.13.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.11.0-rc.0...@carbon/ibm-products-web-components@0.13.0-rc.0) (2025-04-07)
 
 

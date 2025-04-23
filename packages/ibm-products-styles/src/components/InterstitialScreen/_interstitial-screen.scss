@@ -29,31 +29,6 @@ $one-grid-column: calc(100% / 16);
 .#{$block-class} {
   $block: &;
 
-  .#{$carousel} {
-    display: flex;
-    flex-direction: column;
-    min-block-size: 100%;
-
-    &__elements-container {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-    }
-
-    &__elements {
-      flex: 1;
-    }
-  }
-
-  position: fixed;
-  z-index: 6001;
-  inset-block-start: 0;
-  inset-inline: 0;
-
-  #{$block}--auto-height-container {
-    flex: 1;
-  }
-
   &--body {
     overflow: hidden auto;
     flex-grow: 1;
@@ -62,17 +37,8 @@ $one-grid-column: calc(100% / 16);
     background-color: $background;
   }
 
-  &--body-grid {
-    padding: 0 !important;
-    block-size: 100%;
-  }
-
-  &--body-row {
-    block-size: 100%;
-  }
-
   &--progress {
-    margin: $spacing-07 $spacing-05 $spacing-04;
+    margin-block-end: $spacing-04;
   }
 
   &__carousel {
@@ -81,32 +47,6 @@ $one-grid-column: calc(100% / 16);
       flex: 0 0 100% !important;
       scroll-snap-align: start;
     }
-  }
-
-  &--container {
-    margin: calc($spacing-10 * 2) auto; // stylelint-disable-line carbon/layout-use
-    background-color: $background;
-    max-inline-size: 82rem;
-    min-inline-size: 47rem;
-  }
-
-  &--media-container {
-    overflow: hidden;
-  }
-
-  &--media {
-    block-size: 100%;
-    inline-size: 100%;
-
-    margin-inline-end: calc($spacing-08 * -1);
-    @include breakpoint-down(xlg) {
-      margin-inline-end: calc($spacing-07 * -1);
-    }
-  }
-
-  &--stepped-animated-media {
-    overflow: hidden;
-    block-size: 100%;
   }
 
   &--internal-body {
@@ -120,18 +60,32 @@ $one-grid-column: calc(100% / 16);
     background-color: $background;
     margin-block-end: 0 !important;
     min-block-size: $spacing-09;
+    padding-block-start: $spacing-06;
+    padding-inline-start: $spacing-07 !important;
 
     &:empty {
       min-block-size: 0;
     }
 
-    h2 {
-      @include type.type-style('productive-heading-04');
+    .#{$block-class}--titleContainer {
+      margin-block-end: $spacing-05;
 
-      padding: 0 $spacing-05 $spacing-06;
+      h2 {
+        @include type.type-style('productive-heading-04');
 
-      &:empty {
-        padding: 0;
+        margin-block-end: $spacing-03;
+
+        &:empty {
+          padding: 0;
+        }
+      }
+
+      h3 {
+        @include type.type-style('productive-heading-03');
+
+        &:empty {
+          padding: 0;
+        }
       }
     }
 
@@ -142,13 +96,6 @@ $one-grid-column: calc(100% / 16);
       #{$block}--progress {
         margin-block-start: 0;
       }
-    }
-    > #{$block}--close-icon {
-      position: absolute !important;
-      z-index: 1;
-      inline-size: $spacing-09;
-      inset-block-start: 0;
-      inset-inline-end: 0;
     }
   }
 
@@ -174,6 +121,12 @@ $one-grid-column: calc(100% / 16);
       max-inline-size: none;
       padding-inline-start: $spacing-07 !important;
     }
+    .#{c4p-settings.$carbon-prefix}--inline-loading {
+      position: absolute;
+      inline-size: $spacing-07;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+    }
   }
 
   &--footer-controls {
@@ -183,25 +136,11 @@ $one-grid-column: calc(100% / 16);
     margin-inline-start: auto;
   }
 
-  // MODAL (settings exclusive of "FULL SCREEN")
-  &--modal {
-    #{$block}--content {
-      margin-block-start: 0;
-    }
-
-    #{$block}--internal-header {
-      &:has(> :nth-child(2)) {
-        min-block-size: initial;
-      }
-    }
-
-    &:has(> :nth-child(1)) {
-      min-block-size: initial;
-    }
-  }
-
   // FULL SCREEN (settings exclusive of "MODAL")
   &--full-screen {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline: 0;
     #{$block}--container {
       display: flex;
       flex-direction: column;
@@ -209,53 +148,6 @@ $one-grid-column: calc(100% / 16);
       margin: 0;
       block-size: 100vh;
       max-inline-size: 100vw;
-    }
-
-    // e.g. "IBM Cloud Pak | Product"
-    // ..."IBM Cloud Pak"
-    #{$block}--header {
-      @include type.type-style('body-long-01');
-      /* stylelint-disable-next-line carbon/theme-use */
-      background-color: $gray-100;
-
-      block-size: $spacing-09;
-      border-block-end: 1px solid $border-subtle-01;
-      /* stylelint-disable-next-line carbon/theme-use */
-      color: $gray-10;
-      /* stylelint-disable-next-line carbon/type-use */
-      font-weight: normal !important; // overrides type style above
-      /* stylelint-disable-next-line carbon/type-use */
-      line-height: $spacing-09 !important;
-      padding-inline-start: $spacing-05;
-
-      b {
-        /* stylelint-disable-next-line carbon/type-use */
-        font-weight: 600;
-      }
-    }
-
-    #{$block}--internal-header {
-      > h2 {
-        padding: $spacing-05 $spacing-08 0;
-      }
-
-      #{$block}--progress {
-        margin: $spacing-10 $spacing-08 $spacing-04;
-
-        @include breakpoint-down(xlg) {
-          margin-inline-start: $spacing-07;
-        }
-      }
-
-      &--has-title {
-        #{$block}--progress {
-          margin-block-start: $spacing-06;
-        }
-      }
-
-      &:has(> :nth-child(1)) {
-        min-block-size: initial;
-      }
     }
 
     #{$block}--footer {

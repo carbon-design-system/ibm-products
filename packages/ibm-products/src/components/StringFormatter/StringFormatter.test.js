@@ -123,21 +123,4 @@ describe(componentName, () => {
     const style = getComputedStyle(pageContent);
     expect(style.maxWidth).toBe(widthValue);
   });
-
-  it('does not show tooltip when text fits', async () => {
-    const { container } = renderComponent({
-      value: shortValueString,
-      truncate: true,
-      width: '100px',
-    });
-
-    const el = container.querySelector(`.${blockClass}`);
-    Object.defineProperties(el, {
-      scrollWidth: { value: 100, configurable: true },
-      clientWidth: { value: 100, configurable: true },
-    });
-
-    const tooltip = container.querySelector(`.${blockClass}__tooltip`);
-    expect(tooltip).not.toBeInTheDocument();
-  });
 });

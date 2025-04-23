@@ -47,7 +47,7 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^namor)/'"
   },
   "devDependencies": {
-    "chalk": "^4.1.2",
+    "chalk": "^5.0.0",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "glob": "^11.0.1",

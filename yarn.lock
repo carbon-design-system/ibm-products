@@ -1748,7 +1748,7 @@ __metadata:
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.9.1"
-    chalk: "npm:^4.1.2"
+    chalk: "npm:^5.0.0"
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^7.0.3"
     glob: "npm:^11.0.1"
@@ -1856,7 +1856,7 @@ __metadata:
     "@types/react-table": "npm:^7.7.20"
     babel-plugin-dev-expression: "npm:^0.2.3"
     babel-preset-ibm-cloud-cognitive: "npm:^0.23.0-rc.0"
-    chalk: "npm:^4.1.2"
+    chalk: "npm:^5.0.0"
     change-case: "npm:5.4.4"
     classnames: "npm:^2.5.1"
     copyfiles: "npm:^2.4.1"
@@ -9974,7 +9974,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0, chalk@npm:^4.0.2, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2":
+"chalk@npm:^4.0.0, chalk@npm:^4.0.2, chalk@npm:^4.1.0, chalk@npm:^4.1.1":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -9984,7 +9984,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.2.0, chalk@npm:^5.3.0, chalk@npm:^5.4.1":
+"chalk@npm:^5.0.0, chalk@npm:^5.2.0, chalk@npm:^5.3.0, chalk@npm:^5.4.1":
   version: 5.4.1
   resolution: "chalk@npm:5.4.1"
   checksum: 10/29df3ffcdf25656fed6e95962e2ef86d14dfe03cd50e7074b06bad9ffbbf6089adbb40f75c00744d843685c8d008adaf3aed31476780312553caf07fa86e5bc7
@@ -15389,7 +15389,7 @@ __metadata:
     axe-core: "npm:^4.10.3"
     babel-jest: "npm:^29.7.0"
     babel-preset-ibm-cloud-cognitive: "npm:^0.23.0-rc.0"
-    chalk: "npm:^4.1.2"
+    chalk: "npm:^5.0.0"
     identity-obj-proxy: "npm:^3.0.0"
     jest-circus: "npm:^29.7.0"
     jest-watch-typeahead: "npm:^2.2.2"

@@ -13,8 +13,6 @@ import * as carbonIconsReact from '@carbon/icons-react';
 const iconsNames = Object.keys(carbonIconsReact);
 const carbonComponentNames = Object.keys(carbonComponentsReact);
 let componentNames;
-let mainComponentName;
-
 interface ComponentSources {
   carbon: string[];
   ibmProducts: string[];
@@ -24,13 +22,11 @@ interface ComponentSources {
 
 export const stackblitzPrefillConfig = async (
   code: any,
-  componentName: string,
   // components: Array<string>, // Add all required components to be imported from @carbon/react
   // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
   customImport: string
 ) => {
   const { args } = code;
-  mainComponentName = componentName;
   const productComponents = await import('../src/index');
   componentNames = Object.keys(productComponents);
   const storyCode = filterStoryCode(
@@ -66,7 +62,6 @@ const filterStoryCode = (storyCode, args) => {
     .replace(/^\s*\(\)\s*=>\s*{/g, '')
     .replace(/^\s*args\s*=>/g, 'return')
     .replace(/^"|"$/g, '')
-    .replace(/{\.\.\.args}/g, '')
     .replace(/onChange=\{(args\.onChange|action\('onChange'\))\}\s*/g, '')
     .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
   Object.entries(args).forEach(([key, value]) => {
@@ -100,15 +95,6 @@ const filterStoryCode = (storyCode, args) => {
     }
   });
   storyCodeUpdated = storyCodeUpdated.replace(/`([^`]+)`/g, '"$1"');
-  const hasDestructuring = /const\s*{\s*[^}]*\s*}\s*=\s*args\s*;?/.test(
-    storyCodeUpdated
-  );
-  const hasRestSpread = /{\s*\.{3}rest\s*}/.test(storyCodeUpdated);
-
-  if (mainComponentName && !hasDestructuring && !hasRestSpread) {
-    const regex = new RegExp(`<(${mainComponentName})(\\s|>)`);
-    storyCodeUpdated = storyCodeUpdated.replace(regex, `<$1 {...args}$2`);
-  }
   return storyCodeUpdated;
 };
 

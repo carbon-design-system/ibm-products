@@ -89,7 +89,7 @@
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "accessibility-checker": "^4.0.2",
     "cheerio": "^1.0.0",
-    "commander": "^12.0.0",
+    "commander": "^13.0.0",
     "copyfiles": "^2.4.1",
     "cspell": "^8.17.5",
     "eslint": "^9.22.0",
@@ -131,7 +131,8 @@
     "cross-spawn": "7.0.6",
     "micromatch": "4.0.8",
     "semver": "7.7.1",
-    "ws": "^8.17.1"
+    "ws": "^8.17.1",
+    "@babel/runtime": "7.27.0"
   },
   "lint-staged": {
     "!(examples/**/*)**/*.{js,jsx,ts,tsx,mjs}": [
@@ -154,5 +155,5 @@
     "stylelint-plugin-carbon-tokens": "^3.2.3",
     "stylelint-use-logical": "^2.1.2"
   },
-  "packageManager": "yarn@4.7.0"
+  "packageManager": "yarn@4.9.1"
 }

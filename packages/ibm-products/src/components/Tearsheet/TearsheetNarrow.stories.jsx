@@ -9,6 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Information } from '@carbon/react/icons';
 import { pkg } from '../../settings';
+import { StringFormatter } from '../StringFormatter/StringFormatter.js';
 
 import {
   Button,
@@ -93,9 +94,14 @@ export default {
 
 const closeIconDescription = 'Close the tearsheet';
 
-const description =
-  'This is a description for the tearsheet, providing an opportunity to \
-  describe the flow.';
+const description = (
+  <StringFormatter
+    lines={2}
+    truncate={true}
+    value="This is a description for the tearsheet, providing an opportunity to describe the flow."
+    tooltipDirection="bottom"
+  />
+);
 
 const label = 'The label of the tearsheet';
 

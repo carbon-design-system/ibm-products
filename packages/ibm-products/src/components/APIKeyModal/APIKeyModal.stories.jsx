@@ -21,7 +21,7 @@ import { pkg } from '../../settings';
 import { APIKeyModal } from '.';
 import wait from '../../global/js/utils/wait';
 import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
-import DocsPage from './APIKeyModal.docs-page';
+import mdx from './APIKeyModal.mdx';
 
 export default {
   title: 'IBM Products/Components/Generating an API key/APIKeyModal',
@@ -29,7 +29,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: DocsPage },
+    docs: {
+      page: mdx,
+    },
   },
   argTypes: {
     generateSuccessBody: {

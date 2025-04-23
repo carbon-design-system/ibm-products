@@ -1,0 +1,108 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { APIKeyModal } from '.';
+import * as stories from './APIKeyModal.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+export const customFunctionArr = [
+     `function wait(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }`,
+];
+
+# APIKeyModal
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+
+## Overview
+[API key modal guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/api-key-modal/usage/)
+(IBM internal)
+
+## Generate
+<Canvas
+  of={stories.Generate}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(stories.Generate,[],customFunctionArr),
+      },
+    ]}>
+</Canvas>
+
+## Generate With Error
+
+<Canvas
+  of={stories.GenerateWithError}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(stories.GenerateWithError,[],customFunctionArr),
+      },
+    ]}>
+</Canvas>
+
+## Instant Generate
+
+<Canvas
+  of={stories.InstantGenerate}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(stories.InstantGenerate,[],customFunctionArr),
+      },
+    ]}>
+</Canvas>
+
+## Custom Generate
+
+<Canvas
+  of={stories.CustomGenerate}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(stories.CustomGenerate,[],customFunctionArr),
+      },
+    ]}>
+</Canvas>
+
+## Edit
+
+<Canvas
+  of={stories.Edit}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(stories.Edit,[],customFunctionArr),
+      },
+    ]}>
+</Canvas>
+
+## Edit With Error
+
+<Canvas
+  of={stories.EditWithError}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(stories.EditWithError,[],customFunctionArr),
+      },
+    ]}>
+</Canvas>
+
+## Custom Edit
+
+<Canvas
+  of={stories.CustomEdit}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(stories.CustomEdit,[],customFunctionArr),
+      },
+    ]}>
+</Canvas>
+
+## Component API
+
+<Controls />

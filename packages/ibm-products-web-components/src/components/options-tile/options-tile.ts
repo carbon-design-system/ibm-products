@@ -23,6 +23,9 @@ const blockEvent = `${prefix}-options-tile`;
  * OptionsTile.
  *
  * @element c4p-options-tile
+ * @csspart options-tile The options tile
+ * @fires c4p-options-tile-open Custom event fired when tile is opened
+ * @fires c4p-options-tile-close Custom event fired when tile is closed
  * */
 
 @customElement(`${prefix}-options-tile`)
@@ -126,7 +129,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
     });
 
     return html`
-      <div class="${classes}">
+      <div part="options-tile" class="${classes}">
         <div class="${blockClass}__header">
           <div class="${blockClass}__header-left">
             <div class="${blockClass}__chevron" @click=${this._toggle}>

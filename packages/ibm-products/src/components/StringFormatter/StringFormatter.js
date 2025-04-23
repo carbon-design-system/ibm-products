@@ -49,13 +49,24 @@ export let StringFormatter = React.forwardRef(
     },
     ref
   ) => {
-    const contentRef = useRef(null);
+    const outerRef = useRef(null);
     const [isTextTruncated, setIsTextTruncated] = useState(false);
+
+    const mergedRefs = (node) => {
+      outerRef.current = node;
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    };
 
     useIsomorphicEffect(() => {
       const checkTruncation = () => {
-        if (contentRef.current) {
-          const element = contentRef.current;
+        const element = outerRef.current?.querySelector(
+          `.${blockClass}--content`
+        );
+        if (element) {
           element.style.webkitLineClamp = truncate ? lines : undefined;
           element.style.maxWidth = width;
           const buffer = element.clientHeight / (2 * lines);
@@ -66,23 +77,20 @@ export let StringFormatter = React.forwardRef(
         }
       };
 
-      const resizeObserver = new ResizeObserver(() => {
-        checkTruncation();
-      });
+      const resizeObserver = new ResizeObserver(checkTruncation);
 
-      if (contentRef.current) {
-        resizeObserver.observe(contentRef.current.parentElement);
+      if (outerRef.current) {
+        resizeObserver.observe(outerRef.current);
         checkTruncation();
       }
 
       return () => {
         resizeObserver.disconnect();
       };
-    }, [lines, value, width, truncate, contentRef?.current?.clientWidth]);
+    }, [lines, value, width, truncate]);
 
     const stringFormatterContent = (
       <span
-        ref={contentRef}
         className={cx(`${blockClass}--content`, {
           [`${blockClass}--truncate`]: truncate,
         })}
@@ -95,7 +103,7 @@ export let StringFormatter = React.forwardRef(
       <span
         {...rest}
         className={cx(blockClass, className)}
-        ref={ref}
+        ref={mergedRefs}
         {...getDevtoolsProps(componentName)}
       >
         {truncate && isTextTruncated ? (

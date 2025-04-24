@@ -1708,6 +1708,7 @@ __metadata:
     "@carbon/react": "npm:^1.76.0"
     "@carbon/themes": "npm:^11.46.0"
     "@carbon/type": "npm:^11.35.0"
+    "@carbon/utilities-react": "npm:0.7.0"
     "@percy/cli": "npm:^1.30.7"
     "@percy/storybook": "npm:^6.0.3"
     "@storybook/addon-a11y": "npm:^8.6.12"
@@ -1884,6 +1885,7 @@ __metadata:
     "@carbon/react": ^1.76.0
     "@carbon/themes": ^11.46.0
     "@carbon/type": ^11.35.0
+    "@carbon/utilities-react": 0.7.0
     react: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
   languageName: unknown
@@ -2160,12 +2162,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/utilities-react@npm:0.7.0":
+  version: 0.7.0
+  resolution: "@carbon/utilities-react@npm:0.7.0"
+  dependencies:
+    "@carbon/utilities": "npm:^0.5.0"
+    "@ibm/telemetry-js": "npm:^1.6.1"
+  peerDependencies:
+    react: ^16.8.6 || ^17.0.1 || ^18.2.0
+  checksum: 10/4d17e13dddce72228da29f452cf93fea93993dd5073b8865d56f5caf1eaf00a10dc36e15f29087b981faca0d3fb3830ec47e18f04f21a8359e115f3df2bb8cd7
+  languageName: node
+  linkType: hard
+
 "@carbon/utilities@npm:^0.4.0":
   version: 0.4.0
   resolution: "@carbon/utilities@npm:0.4.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.6.1"
   checksum: 10/72d0442c54933acc56109e2c0068d8355305e8fbed031d2edaf51be1a1c8bfbbf8f131713b1d6672acc2989e645b5cb6ea0d749503916192cafd40f44823e36a
+  languageName: node
+  linkType: hard
+
+"@carbon/utilities@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@carbon/utilities@npm:0.5.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.6.1"
+  checksum: 10/ea08676e3d0ea94e4584b3ede065f92d4b74629f3c6c1f9a834b5a23aff63b1e3ddab0c40820aba440909af34ef93b18b48241b12e9f48ea68f0e5ff00844243
   languageName: node
   linkType: hard
 

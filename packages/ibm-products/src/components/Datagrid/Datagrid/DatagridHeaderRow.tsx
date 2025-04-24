@@ -278,9 +278,7 @@ const HeaderRow = (
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}
               aria-sort={
-                datagridState.isTableSortable
-                  ? getAriaSortValue(header, datagridState)
-                  : ''
+                header.canSort ? getAriaSortValue(header, datagridState) : ''
               }
               {...getAccessibilityProps(header)}
             >

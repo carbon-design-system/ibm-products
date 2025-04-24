@@ -70,7 +70,7 @@ export default {
         'A description of the flow, displayed in the header area of the tearsheet.\n Note: `StringFormatter` can be passed as a React node to apply custom text formatting, including ellipsis truncation and a definition tooltip when the content is too long.',
       options: [0, 1, 2],
       mapping: {
-        0: 'This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet.',
+        0: 'This is a description for the tearsheet, providing an opportunity to describe the flow.',
         1: (
           <StringFormatter
             lines={1}
@@ -346,7 +346,7 @@ export const tearsheetNarrow = Template.bind({});
 tearsheetNarrow.storyName = 'Narrow tearsheet';
 tearsheetNarrow.args = {
   closeIconDescription,
-  description: 2,
+  description: 0,
   onClose: action('onClose called'),
   title,
   actions: 7,
@@ -356,7 +356,7 @@ export const fullyLoaded = Template.bind({});
 fullyLoaded.storyName = 'Narrow tearsheet with all header items';
 fullyLoaded.args = {
   closeIconDescription,
-  description: 2,
+  description: 0,
   hasCloseIcon: true,
   label,
   onClose: action('onClose called'),
@@ -370,7 +370,7 @@ export const stacked = StackedTemplate.bind({});
 stacked.storyName = 'Stacking narrow tearsheets';
 stacked.args = {
   closeIconDescription,
-  description: 2,
+  description: 0,
   height: 'lower',
   label,
   actions: 7,

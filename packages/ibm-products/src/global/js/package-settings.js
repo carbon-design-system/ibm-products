@@ -127,8 +127,6 @@ const defaults = {
     InlineTipButton: false,
     InlineTipLink: false,
     InterstitialScreen: false,
-    InterstitialScreenView: false,
-    InterstitialScreenViewModule: false,
     NonLinearReading: false,
   },
 

@@ -38,9 +38,6 @@ const defaultArgs = {
   maxFileSizeErrorHeader: 'Import failed',
   defaultErrorBody: 'Select a new file and try again.',
   defaultErrorHeader: 'Import failed',
-  onRequestSubmit: (files: FileType[]) => {
-    console.log('Submitting files:', files);
-  },
 };
 
 const defaultControls = {
@@ -123,6 +120,39 @@ const defaultControls = {
     description:
       'Optional error body to display specifically for a fetch error',
   },
+  defaultErrorBody: {
+    control: 'text',
+    description: 'The default message shown for an import error',
+  },
+  defaultErrorHeader: {
+    control: 'text',
+    description:
+      'The default header that is displayed to show an error message',
+  },
+  invalidFileTypeErrorBody: {
+    control: 'text',
+    description:
+      'Optional error message to display specifically for a invalid file type error',
+  },
+  invalidFileTypeErrorHeader: {
+    control: 'text',
+    description:
+      'Optional error header to display specifically for a invalid file type error',
+  },
+  maxFileSizeErrorBody: {
+    control: 'text',
+    description:
+      'Optional error message to display specifically for a max file size error',
+  },
+  maxFileSizeErrorHeader: {
+    control: 'text',
+    description:
+      'Optional error header to display specifically for a max file size error',
+  },
+  maxFileSize: {
+    control: 'text',
+    description: 'File size limit in bytes',
+  },
 };
 
 export default {
@@ -160,6 +190,11 @@ export const importModal = {
         defaultErrorBody=${args.defaultErrorBody}
         defaultErrorHeader=${args.defaultErrorHeader}
         .onRequestSubmit=${args.onRequestSubmit}
+        @cds-modal-closed=${() => {
+          console.log('onClose');
+        }}
+        @request-submit=${(e: CustomEvent<FileType[]>) => {
+          console.log('Submitting files:', e.detail);
         }}
       >
       </c4p-import-modal>

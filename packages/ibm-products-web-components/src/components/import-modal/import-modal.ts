@@ -47,81 +47,166 @@ export type FileType = {
 
 @customElement(`${prefix}-import-modal`)
 class CDSImportModal extends HostListenerMixin(LitElement) {
+  /**
+   * The text displayed at the top of the modal
+   */
   @property({ reflect: true })
   title;
 
+  /**
+   * Content that is displayed inside the modal
+   */
   @property({ reflect: true })
   description;
 
+  /**
+   * Specify the text for the secondary button
+   */
   @property({ reflect: true })
   secondaryButtonText;
 
+  /**
+   * Specify the text for the primary button
+   */
   @property({ reflect: true })
   primaryButtonText;
 
+  /**
+   * Specify whether the Modal is currently open
+   */
   @property({ reflect: true })
   open;
 
+  /**
+   * Placeholder for text input
+   */
   @property({ reflect: true })
   inputPlaceholder;
 
+  /**
+   * Header to display above import by url
+   */
   @property({ reflect: true })
   inputLabel;
 
+  /**
+   * ID for text input
+   */
   @property({ reflect: true })
   inputId;
 
+  /**
+   * Button text for import by url button
+   */
   @property({ reflect: true })
   inputButtonText;
 
+  /**
+   * Button icon for import by url button
+   */
   @property({ reflect: true })
   inputButtonIcon;
 
+  /**
+   * Header for the drag and drop box
+   */
   @property({ reflect: true })
   fileDropHeader;
 
+  /**
+   * Label for the drag and drop box
+   */
   @property({ reflect: true })
   fileDropLabel;
 
+  /**
+   * Label that appears when a file is uploaded to show number of files (1 / 1)
+   */
   @property({ reflect: true })
   fileUploadLabel;
 
+  /**
+   * Specify the types of files that this input should be able to receive
+   */
   @property({ reflect: true })
   accept;
 
+  /**
+   * Optional error header to display specifically for a fetch error
+   */
   @property({ reflect: true })
   fetchErrorHeader;
 
+  /**
+   * Optional error body to display specifically for a fetch error
+   */
   @property({ reflect: true })
   fetchErrorBody;
 
+  /**
+   * The default message shown for an import error
+   */
   @property({ reflect: true })
   defaultErrorBody;
 
+  /**
+   * The default header that is displayed to show an error message
+   */
   @property({ reflect: true })
   defaultErrorHeader;
 
+  /**
+   * Optional error message to display specifically for a invalid file type error
+   */
   @property({ reflect: true })
   invalidFileTypeErrorBody;
 
+  /**
+   * Optional error header to display specifically for a invalid file type error
+   */
   @property({ reflect: true })
   invalidFileTypeErrorHeader;
 
+  /**
+   * Optional error message to display specifically for a max file size error
+   */
   @property({ reflect: true })
   maxFileSizeErrorBody;
 
+  /**
+   * Optional error header to display specifically for a max file size error
+   */
   @property({ reflect: true })
   maxFileSizeErrorHeader;
 
+  /**
+   * File size limit in bytes
+   */
   @property({ reflect: true })
   maxFileSize;
 
-  @property({ type: Function })
-  onRequestSubmit!: (files: FileType[]) => void;
+  @state()
+  files: FileType[] = [];
 
-  @state() files: FileType[] = [];
-  @state() fileStatusString = '';
-  @state() importUrl: string = '';
+  @state()
+  fileStatusString = '';
+
+  @state()
+  importUrl: string = '';
+
+  /**
+   * Handles `submit` in import modal.
+   *
+   */
+  private submitHandler = () => {
+    this.dispatchEvent(
+      new CustomEvent('request-submit', {
+        detail: this.files,
+        bubbles: true,
+        composed: true,
+      })
+    );
+  };
 
   render() {
     let modalRef: HTMLElement | null = null;
@@ -240,12 +325,6 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
       fetchFile(this.importUrl);
     };
 
-    const onSubmitHandler = () => {
-      if (this.onRequestSubmit) {
-        this.onRequestSubmit(this.files);
-      }
-    };
-
     const numberOfFiles = this.files.length;
     const numberOfValidFiles = this.files.filter(
       (f: FileType) => !f.invalid
@@ -346,7 +425,7 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
           >
           <cds-modal-footer-button
             ?disabled=${primaryButtonDisabled}
-            @click=${onSubmitHandler}
+            @click=${this.submitHandler}
             >${this.primaryButtonText}</cds-modal-footer-button
           >
         </cds-modal-footer>

@@ -386,9 +386,8 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
                 ?disabled=${importButtonDisabled}
                 @click=${handleImportFile}
               >
-                ${this.inputButtonIcon
-                  ? Add16({ slot: 'icon' })
-                  : this.inputButtonText}
+                ${this.inputButtonIcon ? Add16({ slot: 'icon' }) : ''}
+                ${this.inputButtonText}
               </cds-button>
             </cds-form-item>
           </div>

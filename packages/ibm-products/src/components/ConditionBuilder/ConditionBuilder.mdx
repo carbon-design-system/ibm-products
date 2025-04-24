@@ -25,15 +25,15 @@ textarea, number, time, and date—as well as a custom type that allows users to
 
  ### inputConfig
 **Input types** <br/>
- option : Support single select as well was multi select. Multi-select will be activated for one-of operator or user preferred multi select custom operator.
+ **option :** Support single select as well as multi select. Multi-select will be activated for one-of operator or user preferred multi select custom operator.
  User can pass the list of options inside config object (`properties[i].config.options`) or can be dynamically populated using an asynchronous callback prop `getOptions`.
 
-For input types like text, textarea, number, date, and time, the component uses the corresponding Carbon components and supports standard Carbon props.
+**text**, **textarea**, **number**, **date**, & **time :** Here the component uses the corresponding Carbon components and supports standard Carbon props.
 
 The date range picker can be enabled when using the '`between`' operator or user preferred multiselect custom operator. 
 Eg: you can customize the date format and locale by setting `properties[i].config.dateFormat` and `properties[i].config.locale`, respectively.
 
-custom: Users can render a custom component by providing a `properties[i].config.component`, which should be a function that returns JSX. 
+**custom :** Users can render a custom component by providing a `properties[i].config.component`, which should be a function that returns JSX. 
 This function receives `onChange` and `conditionState` as arguments. To update the condition builder’s state, users must call `onChange('value')` with the new value.
 
 Additionally, a `valueFormatter` can be specified via `properties[i].config.valueFormatter` to format how the value is displayed in the UI.

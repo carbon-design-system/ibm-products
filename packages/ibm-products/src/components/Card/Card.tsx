@@ -31,8 +31,8 @@ interface Metadata {
 
 type LinkType = {
   url: string;
-  target?: string;
-  rel?: string;
+} & {
+  [key: string]: unknown;
 };
 
 export interface ActionIcon extends Metadata {
@@ -202,6 +202,8 @@ export const Card = forwardRef(
 
       const icons = iconList?.map(
         ({ id, icon: Icon, onClick, iconDescription, href, link, ...rest }) => {
+          const { url, ...linkProps } = link ?? {};
+
           if (getStarted) {
             return (
               <span key={id} className={`${blockClass}__icon`}>
@@ -222,8 +224,7 @@ export const Card = forwardRef(
                 iconDescription={iconDescription}
                 kind="ghost"
                 href={link?.url ?? href}
-                target={link?.target ?? '_self'}
-                rel={link?.rel ?? ''}
+                {...linkProps}
               />
             );
           }
@@ -232,10 +233,9 @@ export const Card = forwardRef(
               <a
                 key={id}
                 className={`${blockClass}__icon`}
-                href={link?.url || href}
+                href={link?.url ?? href}
                 onClick={onClick}
-                target={link?.target ?? '_self'}
-                rel={link?.rel ?? ''}
+                {...linkProps}
               >
                 {Icon && <Icon aria-label={iconDescription} />}
               </a>

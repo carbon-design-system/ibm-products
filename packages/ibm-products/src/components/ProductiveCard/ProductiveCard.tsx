@@ -32,7 +32,7 @@ type PlacementType = 'top' | 'bottom';
 type ClickZoneType = 'one' | 'two' | 'three';
 export interface ProductiveCardProps extends PropsWithChildren {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.url for href functionality. If you are setting link, url is a required property. link.url, href has precedence over onClick
+   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.url for href functionality. If you are setting link, url is a required property. link object can have any anchor element properties. link.url, href has precedence over onClick.
    */
   actionIcons?: ActionIcon[];
   /**
@@ -182,7 +182,7 @@ ProductiveCard = pkg.checkComponentEnabled(ProductiveCard, componentName);
 
 ProductiveCard.propTypes = {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
+   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.url for href functionality. If you are setting link, url is a required property. link object can have any anchor element properties. link.url, href has precedence over onClick.
    */
   /**@ts-ignore */
   actionIcons: PropTypes.arrayOf(
@@ -198,8 +198,6 @@ ProductiveCard.propTypes = {
       href: PropTypes.string,
       link: PropTypes.shape({
         url: PropTypes.string.isRequired,
-        target: PropTypes.string,
-        rel: PropTypes.string,
       }),
     })
   ),

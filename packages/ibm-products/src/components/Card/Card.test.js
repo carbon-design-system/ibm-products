@@ -74,6 +74,7 @@ describe(componentName, () => {
           url: 'https://carbondesignsystem.com/',
           target: '_blank',
           rel: 'noreferrer noopener',
+          download: 'carbon-site.pdf',
         },
       },
     ];
@@ -100,22 +101,20 @@ describe(componentName, () => {
     expect(LinkWithHref).toBeInTheDocument();
     expect(LinkWithHref).toHaveAttribute('href', actionIcons[1].href);
 
-    // link with url, target and rel
-    const LinkWithTargetAndRel = screen.getByRole('link', {
+    // link with url, target, rel and download
+    const LinkWithLinkProps = screen.getByRole('link', {
       name: actionIcons[2].iconDescription,
     });
-    expect(LinkWithTargetAndRel).toBeInTheDocument();
-    expect(LinkWithTargetAndRel).toHaveAttribute(
-      'href',
-      actionIcons[2].link.url
-    );
-    expect(LinkWithTargetAndRel).toHaveAttribute(
+    expect(LinkWithLinkProps).toBeInTheDocument();
+    expect(LinkWithLinkProps).toHaveAttribute('href', actionIcons[2].link.url);
+    expect(LinkWithLinkProps).toHaveAttribute(
       'target',
       actionIcons[2].link.target
     );
-    expect(LinkWithTargetAndRel).toHaveAttribute(
-      'rel',
-      actionIcons[2].link.rel
+    expect(LinkWithLinkProps).toHaveAttribute('rel', actionIcons[2].link.rel);
+    expect(LinkWithLinkProps).toHaveAttribute(
+      'download',
+      actionIcons[2].link.download
     );
   });
 

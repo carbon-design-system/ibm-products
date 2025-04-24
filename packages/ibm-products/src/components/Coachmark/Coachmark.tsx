@@ -39,6 +39,7 @@ const defaults = {
   overlayKind: 'tooltip',
   theme: 'light',
   isOpenByDefault: false,
+  closeIconDescription: 'Close',
 };
 
 export interface CoachmarkProps {
@@ -74,7 +75,10 @@ export interface CoachmarkProps {
    * Optional class name for this component.
    */
   className?: string;
-
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
   /**
    * Function to call when the Coachmark closes.
    */
@@ -135,6 +139,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       children,
       className,
       onClose = defaults.onClose,
+      closeIconDescription = defaults.closeIconDescription,
       overlayClassName,
       overlayKind = defaults.overlayKind,
       overlayRef,
@@ -304,6 +309,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
                     fixedIsVisible={false}
                     kind={overlayKind}
                     onClose={handleClose}
+                    closeIconDescription={closeIconDescription}
                     theme={theme}
                     className={cx(
                       overlayClassName,
@@ -333,6 +339,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
                     fixedIsVisible={false}
                     kind={overlayKind}
                     onClose={handleClose}
+                    closeIconDescription={closeIconDescription}
                     theme={theme}
                     className={cx(overlayClassName, {
                       [`${overlayBlockClass}--is-visible`]: isOpen,

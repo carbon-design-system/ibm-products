@@ -38,6 +38,7 @@ const componentName = 'CoachmarkOverlay';
 const defaults = {
   kind: COACHMARK_OVERLAY_KIND.FLOATING,
   theme: 'light',
+  closeIconDescription: 'Close',
 };
 
 interface CoachmarkOverlayProps {
@@ -50,6 +51,10 @@ interface CoachmarkOverlayProps {
    * Optional class name for this component.
    */
   className?: string;
+  /**
+   * Optional icon description for the close button.
+   */
+  closeIconDescription?: string;
   /**
    * The visibility of CoachmarkOverlay is
    * managed in the parent Coachmark component.
@@ -91,6 +96,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
       className,
       kind = defaults.kind,
       theme = defaults.theme,
+      closeIconDescription = defaults.closeIconDescription,
       ...rest
     },
     ref
@@ -221,6 +227,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
       >
         {isDraggable ? (
           <CoachmarkDragbar
+            closeIconDescription={closeIconDescription}
             a11yKeyboardHandler={handleKeyPress}
             onBlur={() => setA11yDragMode(false)}
             onDrag={handleDrag}
@@ -228,7 +235,10 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
             onClose={onClose}
           />
         ) : (
-          <CoachmarkHeader onClose={onClose} />
+          <CoachmarkHeader
+            onClose={onClose}
+            closeIconDescription={closeIconDescription}
+          />
         )}
         <div className={`${blockClass}__body`} ref={ref} id={contentId}>
           {React.Children.map(children, (child) => {
@@ -287,6 +297,10 @@ CoachmarkOverlay.propTypes = {
    * Optional class name for this component.
    */
   className: PropTypes.string,
+  /**
+   * Optional icon description for the close button.
+   */
+  closeIconDescription: PropTypes.string,
   /**
    * The visibility of CoachmarkOverlay is
    * managed in the parent Coachmark component.

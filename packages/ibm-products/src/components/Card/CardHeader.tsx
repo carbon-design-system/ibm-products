@@ -9,7 +9,7 @@ import React, { ReactNode } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
-import { Button, usePrefix } from '@carbon/react';
+import { Button, Heading, usePrefix } from '@carbon/react';
 const componentName = 'CardHeader';
 
 const defaults = {
@@ -143,7 +143,9 @@ export const CardHeader = ({
       >
         <div className={`${blockClass}__title-container`}>
           {label && <p className={`${blockClass}__label`}>{label}</p>}
-          {title && <h6 className={`${blockClass}__title`}>{title}</h6>}
+          {title && (
+            <Heading className={`${blockClass}__title`}>{title}</Heading>
+          )}
           {description && (
             <p className={`${blockClass}__description`}>{description}</p>
           )}

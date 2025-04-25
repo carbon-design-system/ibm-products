@@ -89,7 +89,7 @@ export let ConditionBuilder = React.forwardRef(
         statementConfigCustom={statementConfigCustom}
         onAddItem={onAddItem}
       >
-        <div
+        <span
           {
             // Pass through any other property values as HTML attributes.
             ...rest
@@ -118,7 +118,7 @@ export let ConditionBuilder = React.forwardRef(
               actions={actions}
             />
           </VStack>
-        </div>
+        </span>
       </ConditionBuilderProvider>
     );
   }

@@ -50,6 +50,7 @@ export let StringFormatter = React.forwardRef(
     ref
   ) => {
     const outerRef = useRef(null);
+    const contentRef = useRef(null);
     const [isTextTruncated, setIsTextTruncated] = useState(false);
 
     const mergedRefs = (node) => {
@@ -63,9 +64,7 @@ export let StringFormatter = React.forwardRef(
 
     useIsomorphicEffect(() => {
       const checkTruncation = () => {
-        const element = outerRef.current?.querySelector(
-          `.${blockClass}--content`
-        );
+        const element = contentRef.current;
         if (element) {
           element.style.webkitLineClamp = truncate ? lines : undefined;
           element.style.maxWidth = width;
@@ -91,6 +90,7 @@ export let StringFormatter = React.forwardRef(
 
     const stringFormatterContent = (
       <span
+        ref={contentRef}
         className={cx(`${blockClass}--content`, {
           [`${blockClass}--truncate`]: truncate,
         })}

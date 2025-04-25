@@ -66,6 +66,7 @@ export let ConditionBuilder = React.forwardRef(
       actions,
       translateWithId,
       statementConfigCustom,
+      onAddItem,
       ...rest
     }: ConditionBuilderProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -86,6 +87,7 @@ export let ConditionBuilder = React.forwardRef(
         translateWithId={translateWithId}
         conditionBuilderRef={conditionBuilderRef}
         statementConfigCustom={statementConfigCustom}
+        onAddItem={onAddItem}
       >
         <div
           {
@@ -246,6 +248,11 @@ ConditionBuilder.propTypes = {
       })
     ),
   }).isRequired,
+  /**
+   * this is an optional callback triggered before adding any condition , subgroup or group.
+   * User can optionally perform any validation and can stop add action if they return back {preventAdd:true}
+   */
+  onAddItem: PropTypes.func,
 
   /**
    * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.

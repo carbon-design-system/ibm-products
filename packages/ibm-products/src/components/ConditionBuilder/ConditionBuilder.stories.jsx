@@ -6,6 +6,8 @@
  */
 
 import React, { useRef, useState } from 'react';
+import { action } from '@storybook/addon-actions';
+
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 import { Wikis } from '@carbon/react/icons';
@@ -214,7 +216,14 @@ const translateWithId = (key) => {
 
 const ConditionBuilderTemplate = (args) => {
   const ref = useRef(undefined);
-  return <ConditionBuilder {...args} ref={ref} {...requiredProps} />;
+  return (
+    <ConditionBuilder
+      {...args}
+      ref={ref}
+      {...requiredProps}
+      onAddItem={(type) => action(`onAddItem is triggered , type: ${type}`)()}
+    />
+  );
 };
 
 /**

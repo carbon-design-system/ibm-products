@@ -224,6 +224,17 @@ sections, you can utilize the below included class names.
 | \`#{$pkg-prefix}--create-full-page__section-divider\`  | divider     | Includes a \`1px\` divider line inside the \`main\` content    |
 `,
         },
+        {
+          title: 'Prevent the modal from closing after submit',
+          description: `In the case that you want to prevent the modal from closing after the user submits you can return an object from \`onRequestSubmit\` and indicate the \`preventClose\` property to \`true\``,
+          source: {
+            code: `
+<CreateFullPage onRequestSubmit={() => ({ preventClose: true })}>
+  ...
+</CreateFullPage>
+`,
+          },
+        },
       ]}
     />
   );

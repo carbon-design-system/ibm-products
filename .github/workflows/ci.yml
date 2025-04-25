@@ -7,7 +7,6 @@ on:
       - main
       - v1
       - 'release\/v2**'
-      - percyWorkflow
   merge_group:
     types: [checks_requested]
 

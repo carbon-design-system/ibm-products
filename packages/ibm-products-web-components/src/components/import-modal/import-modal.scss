@@ -26,3 +26,9 @@ $prefix: 'c4p';
 $carbon-prefix: 'cds';
 
 $block-class: #{$prefix}--import-modal;
+
+:host(#{$prefix}--import-modal) {
+  .#{$block-class} {
+    @extend .#{$block-class};
+  }
+}

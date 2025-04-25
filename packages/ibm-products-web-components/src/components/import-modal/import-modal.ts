@@ -343,6 +343,7 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
         Launch Modal
       </cds-button>
       <cds-modal
+        class=${blockClass}
         size="sm"
         ?open=${this.open}
         ${ref((el) => (modalRef = el as HTMLElement))}
@@ -355,7 +356,7 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
           <cds-modal-close-button></cds-modal-close-button>
           <cds-modal-heading>${this.title}</cds-modal-heading>
         </cds-modal-header>
-        <cds-modal-body>
+        <cds-modal-body class=${`${blockClass}__body-container`}>
           <cds-modal-body-content description>
             ${this.description}
           </cds-modal-body-content>
@@ -368,29 +369,29 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
               ${this.fileDropLabel}
             </cds-file-uploader-drop-container>
           </cds-file-uploader>
-          <div class="${blockClass}__input-group">
-            <cds-form-item>
-              <cds-text-input
-                placeholder=${this.inputPlaceholder}
-                label=${this.inputLabel}
-                id=${this.inputId}
-                .value=${this.importUrl}
-                @input="${inputHandler}"
-                ?disabled=${hasFiles}
-              ></cds-text-input>
-              <cds-button
-                .button-class-name="inputButton"
-                .kind="primary"
-                .size="sm"
-                .type="Submit"
-                ?disabled=${importButtonDisabled}
-                @click=${handleImportFile}
-              >
-                ${this.inputButtonIcon ? Add16({ slot: 'icon' }) : ''}
-                ${this.inputButtonText}
-              </cds-button>
-            </cds-form-item>
-          </div>
+          ${this.inputLabel &&
+          html`<p class=${`${blockClass}__label`}>${this.inputLabel}</p>`}
+          <cds-form-item>
+            <cds-text-input
+              placeholder=${this.inputPlaceholder}
+              label=""
+              id=${this.inputId}
+              .value=${this.importUrl}
+              @input="${inputHandler}"
+              ?disabled=${hasFiles}
+            ></cds-text-input>
+            <cds-button
+              .button-class-name="inputButton"
+              .kind="primary"
+              .size="sm"
+              .type="Submit"
+              ?disabled=${importButtonDisabled}
+              @click=${handleImportFile}
+            >
+              ${this.inputButtonIcon ? Add16({ slot: 'icon' }) : ''}
+              ${this.inputButtonText}
+            </cds-button>
+          </cds-form-item>
 
           <div className="cds--file-container">
             ${hasFiles

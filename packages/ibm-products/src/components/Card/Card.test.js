@@ -71,10 +71,30 @@ describe(componentName, () => {
         icon: ArrowRight,
         iconDescription: 'Visit Carbon official site',
         link: {
-          url: 'https://carbondesignsystem.com/',
+          href: 'https://carbondesignsystem.com/',
           target: '_blank',
           rel: 'noreferrer noopener',
           download: 'carbon-site.pdf',
+        },
+      },
+      {
+        id: '4',
+        icon: ArrowRight,
+        iconDescription: 'Visit another page',
+        href: 'dummy.link',
+        link: {
+          href: 'https://carbondesignsystem.com/designing/get-started/',
+          target: '_blank',
+          rel: 'noreferrer noopener',
+        },
+      },
+      {
+        id: '5',
+        icon: ArrowRight,
+        iconDescription: 'Visit page',
+        onClick,
+        link: {
+          href: '#',
         },
       },
     ];
@@ -101,12 +121,12 @@ describe(componentName, () => {
     expect(LinkWithHref).toBeInTheDocument();
     expect(LinkWithHref).toHaveAttribute('href', actionIcons[1].href);
 
-    // link with url, target, rel and download
+    // link with href, target, rel and download
     const LinkWithLinkProps = screen.getByRole('link', {
       name: actionIcons[2].iconDescription,
     });
     expect(LinkWithLinkProps).toBeInTheDocument();
-    expect(LinkWithLinkProps).toHaveAttribute('href', actionIcons[2].link.url);
+    expect(LinkWithLinkProps).toHaveAttribute('href', actionIcons[2].link.href);
     expect(LinkWithLinkProps).toHaveAttribute(
       'target',
       actionIcons[2].link.target
@@ -116,6 +136,27 @@ describe(componentName, () => {
       'download',
       actionIcons[2].link.download
     );
+
+    // with link.href and href (link.href should have precedence)
+    const LinkAndHref = screen.getByRole('link', {
+      name: actionIcons[3].iconDescription,
+    });
+    expect(LinkAndHref).toBeInTheDocument();
+    expect(LinkAndHref).toHaveAttribute('href', actionIcons[3].link.href);
+    expect(LinkAndHref).toHaveAttribute('target', actionIcons[3].link.target);
+    expect(LinkAndHref).toHaveAttribute('rel', actionIcons[3].link.rel);
+
+    // with link and onClick
+    const LinkAndOnClick = screen.getByRole('link', {
+      name: actionIcons[4].iconDescription,
+    });
+    expect(LinkAndOnClick).toBeInTheDocument();
+    expect(LinkAndOnClick).toHaveAttribute('href', actionIcons[4].link.href);
+    // The use of act is deprecated. Wrapping the click in a waitFor is a workaround to ensure that all the state updates related to Tooltip is completed.
+    await waitFor(async () => {
+      await user.click(LinkAndOnClick);
+    });
+    expect(onClick).toHaveBeenCalled();
   });
 
   it('renders expressive with onClick', async () => {
@@ -273,15 +314,37 @@ describe(componentName, () => {
   });
 
   it('renders a productive card with action icons', async () => {
+    const user = userEvent.setup();
+    const onClick = jest.fn();
     const actionIcons = [
       {
         id: '1',
         icon: ArrowRight,
         iconDescription: 'Visit Carbon official site',
         link: {
-          url: 'https://carbondesignsystem.com/',
+          href: 'https://carbondesignsystem.com/',
           target: '_blank',
           rel: 'noreferrer noopener',
+        },
+      },
+      {
+        id: '2',
+        icon: ArrowRight,
+        iconDescription: 'Visit next page',
+        href: 'dummy.link',
+        link: {
+          href: 'https://carbondesignsystem.com/',
+          target: '_blank',
+          rel: 'noreferrer noopener',
+        },
+      },
+      {
+        id: '3',
+        icon: ArrowRight,
+        iconDescription: 'Visit page',
+        onClick,
+        link: {
+          href: '#',
         },
       },
     ];
@@ -296,14 +359,14 @@ describe(componentName, () => {
 
     render(<Card {...props} />);
 
-    // link with url, target and rel
+    // link with href, target and rel
     const LinkWithTargetAndRel = screen.getByRole('link', {
       name: actionIcons[0].iconDescription,
     });
     expect(LinkWithTargetAndRel).toBeInTheDocument();
     expect(LinkWithTargetAndRel).toHaveAttribute(
       'href',
-      actionIcons[0].link.url
+      actionIcons[0].link.href
     );
     expect(LinkWithTargetAndRel).toHaveAttribute(
       'target',
@@ -313,6 +376,25 @@ describe(componentName, () => {
       'rel',
       actionIcons[0].link.rel
     );
+
+    // with link.href and href (link.href should have precedence)
+    const LinkAndHref = screen.getByRole('link', {
+      name: actionIcons[1].iconDescription,
+    });
+    expect(LinkAndHref).toBeInTheDocument();
+    expect(LinkAndHref).toHaveAttribute('href', actionIcons[1].link.href);
+
+    // with link and onClick
+    const LinkAndOnClick = screen.getByRole('link', {
+      name: actionIcons[2].iconDescription,
+    });
+    expect(LinkAndOnClick).toBeInTheDocument();
+    expect(LinkAndOnClick).toHaveAttribute('href', actionIcons[2].link.href);
+    // The use of act is deprecated. Wrapping the click in a waitFor is a workaround to ensure that all the state updates related to Tooltip is completed.
+    await waitFor(async () => {
+      await user.click(LinkAndOnClick);
+    });
+    expect(onClick).toHaveBeenCalled();
   });
 
   it('has no accessibility violations', async () => {

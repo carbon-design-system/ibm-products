@@ -17,7 +17,7 @@ import { ActionIcon } from '../Card/Card';
 
 export interface ExpressiveCardProps extends PropsWithChildren {
   /**
-   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.url for href functionality. If you are setting link, url is a required property. link object can have any anchor element properties. link.url, href has precedence over onClick.
+   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.href for href functionality. If you are setting link object, href is a required property. link object supports all anchor element properties. Precedence: link.href > href. If link.href or href is set => anchor element, else button.
    */
   actionIcons?: ActionIcon[];
   /**
@@ -131,7 +131,7 @@ ExpressiveCard = pkg.checkComponentEnabled(ExpressiveCard, componentName);
 
 ExpressiveCard.propTypes = {
   /**
-   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.url for href functionality. If you are setting link, url is a required property. link object can have any anchor element properties. link.url, href has precedence over onClick.
+   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.href for href functionality. If you are setting link object, href is a required property. link object supports all anchor element properties. Precedence: link.href > href. If link.href or href is set => anchor element, else button.
    */
   /**@ts-ignore */
   actionIcons: PropTypes.arrayOf(
@@ -142,11 +142,11 @@ ExpressiveCard.propTypes = {
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
       /**
-       * @deprecated please use the `link.url` instead
+       * @deprecated please use the `link.href` instead
        */
       href: PropTypes.string,
       link: PropTypes.shape({
-        url: PropTypes.string.isRequired,
+        href: PropTypes.string.isRequired,
       }),
     })
   ),

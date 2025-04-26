@@ -250,7 +250,7 @@ WithActionIconLink.args = {
       icon: (props) => <ArrowRight size={24} {...props} />,
       iconDescription: 'Visit carbon official site',
       link: {
-        url: 'https://carbondesignsystem.com/',
+        href: 'https://carbondesignsystem.com/',
         target: '_blank',
         rel: 'noreferrer noopener',
       },

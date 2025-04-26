@@ -30,7 +30,7 @@ interface Metadata {
 }
 
 type LinkType = {
-  url: string;
+  href: string;
 } & {
   [key: string]: unknown;
 };
@@ -41,7 +41,7 @@ export interface ActionIcon extends Metadata {
     event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => void;
   /**
-   * @deprecated please use the `link.url` instead
+   * @deprecated please use the `link.href` instead
    */
   href?: string;
   link?: LinkType;
@@ -157,10 +157,11 @@ export const Card = forwardRef(
     }: CardProp,
     ref: React.ForwardedRef<HTMLDivElement>
   ) => {
-    const iconList: readonly ActionIcon[] = getStarted ? metadata : actionIcons;
+    const getIcons = (): readonly ActionIcon[] =>
+      getStarted ? metadata : actionIcons;
     const blockClass = `${pkg.prefix}--card`;
     const hasActions =
-      iconList?.length > 0 ||
+      getIcons().length > 0 ||
       overflowActions.length > 0 ||
       (!!primaryButtonText && primaryButtonPlacement === 'top');
     const hasHeaderActions = hasActions && actionsPlacement === 'top';
@@ -200,9 +201,17 @@ export const Card = forwardRef(
         );
       }
 
-      const icons = iconList?.map(
-        ({ id, icon: Icon, onClick, iconDescription, href, link, ...rest }) => {
-          const { url, ...linkProps } = link ?? {};
+      const icons = getIcons().map(
+        ({
+          id,
+          icon: Icon,
+          onClick,
+          iconDescription,
+          href: deprecatedHref,
+          link,
+          ...rest
+        }) => {
+          const { href, ...linkProps } = link ?? { href: deprecatedHref };
 
           if (getStarted) {
             return (
@@ -223,17 +232,17 @@ export const Card = forwardRef(
                 size={actionsPlacement === 'top' ? 'sm' : 'md'}
                 iconDescription={iconDescription}
                 kind="ghost"
-                href={link?.url ?? href}
+                href={href}
                 {...linkProps}
               />
             );
           }
-          if (link?.url || href) {
+          if (href) {
             return (
               <a
                 key={id}
                 className={`${blockClass}__icon`}
-                href={link?.url ?? href}
+                href={href}
                 onClick={onClick}
                 {...linkProps}
               >
@@ -305,7 +314,7 @@ export const Card = forwardRef(
       actions: actionsPlacement === 'top' ? getActions() : '',
       decorator,
       noActionIcons:
-        iconList?.length > 0 && actionsPlacement === 'top' ? false : true,
+        getIcons().length > 0 && actionsPlacement === 'top' ? false : true,
       actionsPlacement,
       onPrimaryButtonClick,
       onSecondaryButtonClick,
@@ -408,13 +417,11 @@ Card.propTypes = {
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
       /**
-       * @deprecated please use the `link.url` instead
+       * @deprecated please use the `link.href` instead
        */
       href: PropTypes.string,
       link: PropTypes.shape({
-        url: PropTypes.string.isRequired,
-        target: PropTypes.string,
-        rel: PropTypes.string,
+        href: PropTypes.string.isRequired,
       }),
     })
   ),

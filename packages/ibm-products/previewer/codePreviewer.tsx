@@ -124,6 +124,8 @@ const appGenerator = (
   }
   const foundHooks = detectReactHooks(storyCode);
   const hooksString = foundHooks.join(', ');
+  const regex = /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)/;
+  const hasArgs = regex.test(storyCode);
   // Generate App.jsx code
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
   const app = `
@@ -134,7 +136,7 @@ const appGenerator = (
   ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
   const storyClass = 'example'
   export default function App() {
-    ${formattedArgs}
+    ${hasArgs ? formattedArgs : ''}
     ${customFunctionDefs.map((customFunction) => customFunction)}
     ${storyCode}
   }

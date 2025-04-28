@@ -460,6 +460,10 @@ const getOptions = async (conditionState, { property }) => {
       return [];
   }
 };
+
+const onAddItem = jest.fn(() => {
+  preventAdd: false;
+});
 describe(componentName, () => {
   it('renders a component ConditionBuilder', async () => {
     render(<ConditionBuilder data-testid={dataTestId} {...defaultProps} />);
@@ -1028,6 +1032,7 @@ describe(componentName, () => {
         {...defaultProps}
         variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
+        onAddItem={onAddItem}
       />
     );
 
@@ -1059,6 +1064,9 @@ describe(componentName, () => {
     expect(addButton);
     await act(() => userEvent.click(addButton));
 
+    //verify onAddItem callback is triggered
+    expect(onAddItem).toHaveBeenCalled();
+
     const regionOption = screen.getByRole('option', {
       name: 'Region',
     });
@@ -1087,6 +1095,9 @@ describe(componentName, () => {
     );
     expect(addSubGroupButton);
     await act(() => userEvent.click(addSubGroupButton));
+
+    //verify onAddItem callback is triggered
+    expect(onAddItem).toHaveBeenCalled();
 
     //add third condition
 
@@ -1120,6 +1131,7 @@ describe(componentName, () => {
         {...defaultProps}
         variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
+        onAddItem={onAddItem}
       />
     );
 
@@ -1212,6 +1224,10 @@ describe(componentName, () => {
     );
     expect(addGroupButton);
     await act(() => userEvent.click(addGroupButton));
+
+    //verify onAddItem callback is triggered
+    expect(onAddItem).toHaveBeenCalled();
+
     //adding condition 1
 
     await act(() =>
@@ -1794,6 +1810,85 @@ describe(componentName, () => {
       user.hover(document.querySelector(`.${blockClass}__property-field`))
     );
     expect(screen.getByText('This is a tooltip')).toBeInTheDocument();
+  });
+
+  it('prevent adding a condition, subgroup and group when onAddItem returns preventAdd true', async () => {
+    const onAddItemWithPreventAdd = jest.fn(() => ({
+      preventAdd: true,
+    }));
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        variant={HIERARCHICAL_VARIANT}
+        inputConfig={inputData}
+        onAddItem={onAddItemWithPreventAdd}
+      />
+    );
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+    //group 1
+    //adding condition 1
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Continent',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'is',
+        })
+      )
+    );
+
+    await act(() => userEvent.click(screen.getByText('Africa')));
+
+    //adding condition 2
+
+    let addButton = document.querySelector(`.${blockClass}__add-button`);
+    expect(addButton);
+    await act(() => userEvent.click(addButton));
+
+    expect(onAddItemWithPreventAdd).toHaveBeenCalled();
+    const container = document.querySelector(`.${blockClass}`);
+    await act(() => userEvent.click(container));
+
+    expect(
+      screen.queryByRole('button', { name: 'and' })
+    ).not.toBeInTheDocument();
+
+    //adding a subgroup
+
+    let addSubGroupButton = document.querySelector(
+      `.${blockClass}__add-condition-sub-group`
+    );
+    expect(addSubGroupButton);
+    await act(() => userEvent.click(addSubGroupButton));
+
+    expect(onAddItemWithPreventAdd).toHaveBeenCalled();
+    await act(() => userEvent.click(container));
+
+    const subGroups = screen.getAllByText('if');
+    expect(subGroups).toHaveLength(1);
+
+    //group 2
+
+    const addGroupButton = document.querySelector(
+      `.${blockClass}__add-condition-group`
+    );
+    expect(addGroupButton);
+    await act(() => userEvent.click(addGroupButton));
+
+    //verify onAddItem callback is triggered
+    expect(onAddItemWithPreventAdd).toHaveBeenCalled();
+    await act(() => userEvent.click(container));
+
+    const groupConnector = screen.queryAllByRole('button', { name: 'or' });
+    expect(groupConnector).toHaveLength(0);
   });
 
   // keyboard navigation tests

@@ -334,7 +334,3 @@ ProductiveCard.propTypes = {
 };
 
 ProductiveCard.displayName = componentName;
-
-export const Test = () => {
-  return <ProductiveCard />;
-};

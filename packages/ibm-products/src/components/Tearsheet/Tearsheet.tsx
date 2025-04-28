@@ -34,7 +34,6 @@ const componentName = 'Tearsheet';
 export interface TearsheetAction extends ButtonProps<'button'> {
   label?: string;
   loading?: boolean;
-  kind?: 'primary' | 'secondary' | 'ghost';
 }
 
 // Note that the descriptions here should be kept in sync with those for the

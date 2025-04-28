@@ -2,7 +2,7 @@
 
 version: 1
 projectId: 495342db-5046-4ecf-85ea-9ffceb6f8cdf
-endpoint: https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics
+endpoint: https://www-api.ibm.com/ibm-telemetry/v1/metrics
 collect:
   jsx:
     elements:
@@ -230,6 +230,7 @@ collect:
         - onContextMenuValue
         - onDataUpdate
         - onFocus
+        - onKeyDown
         - onMount
         - onMouseEnter
         - onMouseLeave
@@ -363,6 +364,7 @@ collect:
         - titleSize
         - toolbarBatchActions
         - toolbarBatchActionsDisplayMin
+        - tooltipAlign
         - tooltipAlignment
         - tooltipText
         - totalVisibleColumns
@@ -504,7 +506,6 @@ collect:
         - componentName
         # Card
         - getStarted
-        - onKeyDown
         # CardFooter
         - hasButton
         # CardHeader
@@ -561,7 +562,6 @@ collect:
         # ConditionBuilderButton
         - hideLabel
         - isInvalid
-        - tooltipAlign
         - wrapperClassName
         - wrapperProps
         # ConditionBuilderItem
@@ -627,6 +627,7 @@ collect:
         - border
         # DraggableElement
         - classList
+        - elementId
         - isSticky
         # DraggableItemsList
         - moveElement
@@ -729,19 +730,24 @@ collect:
         - narrow
         - tertiaryButtonLabel
         # InterstitialScreen
-        - breakpointsWithMedia
-        - domainName
-        - headerClassName
-        - headerTitle
-        - hideProgressIndicator
         - interstitialAriaLabel
         - isFullScreen
+        # InterstitialScreenBody
+        - contentRenderer
+        # InterstitialScreenFooter
+        - actionButtonRenderer
         - nextButtonLabel
-        - productName
+        - onAction
         - skipButtonLabel
         - startButtonLabel
+        # InterstitialScreenHeader
+        - headerSubTitle
+        - headerTitle
+        - hideProgressIndicator
         # InterstitialScreenView
         - stepTitle
+        # InterstitialScreenViewModule
+        - disableActionButton
         # Item
         - attributes
         - dragOverlay
@@ -1095,6 +1101,9 @@ collect:
         # General - titleSize
         - default
         - large
+        # General - tooltipAlign
+        - bottom
+        - top
         # General - tooltipAlignment
         - bottom
         - bottom-left

@@ -51,7 +51,7 @@ const ConditionBuilderContent = ({
   initialState,
   actions,
 }: ConditionBuilderContentProps) => {
-  const { rootState, setRootState, variant, actionState } =
+  const { rootState, setRootState, variant, actionState, onAddItem } =
     useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
 
   const initialConditionState = useRef(
@@ -153,27 +153,34 @@ const ConditionBuilderContent = ({
   };
 
   const addConditionGroupHandler = () => {
-    const newGroup: ConditionGroup = {
-      statement: 'ifAll',
-      groupOperator: 'and',
-      id: uuidv4(),
-      conditions: [
-        {
-          property: undefined,
-          operator: '',
-          value: '',
-          popoverToOpen: 'propertyField',
-          id: uuidv4(),
-        },
-      ],
-    };
-    setRootState?.({
-      ...rootState,
-      groups:
-        rootState && rootState.groups
-          ? [...rootState.groups, newGroup]
-          : [newGroup],
-    });
+    const { preventAdd } =
+      onAddItem?.({
+        type: 'group',
+        state: rootState as ConditionBuilderState,
+      }) ?? {};
+    if (!preventAdd) {
+      const newGroup: ConditionGroup = {
+        statement: 'ifAll',
+        groupOperator: 'and',
+        id: uuidv4(),
+        conditions: [
+          {
+            property: undefined,
+            operator: '',
+            value: '',
+            popoverToOpen: 'propertyField',
+            id: uuidv4(),
+          },
+        ],
+      };
+      setRootState?.({
+        ...rootState,
+        groups:
+          rootState && rootState.groups
+            ? [...rootState.groups, newGroup]
+            : [newGroup],
+      });
+    }
   };
 
   const getColorIndex = () => {

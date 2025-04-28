@@ -79,9 +79,9 @@ const stepFormField = (
 const renderComponent = ({ ...rest } = {}) =>
   render(
     <CreateFullPage
-      {...rest}
       onRequestSubmit={onRequestSubmitRejectFn}
       {...defaultFullPageProps}
+      {...rest}
     >
       <CreateFullPageStep title="Title 1" subtitle="Subtitle 1">
         <p>1</p>
@@ -641,6 +641,25 @@ describe(componentName, () => {
         .getByRole('button', { description: 'Title 3' })
         .querySelector(`.${carbon.prefix}--progress__warning`)
     ).toBeInTheDocument();
+  });
+
+  it('should prevent close after submitting', async () => {
+    renderComponent({
+      onRequestSubmit: () => {
+        return {
+          preventClose: true,
+        };
+      },
+      initialStep: 2,
+    });
+
+    // select the submit button with the label text
+    const submitButtonElement = screen.getByText(submitButtonText);
+
+    // click the submit button
+    await waitFor(() => userEvent.click(submitButtonElement));
+    // the component should not un mount, thus onClose should not be
+    expect(onCloseFn).not.toHaveBeenCalled();
   });
 
   it('should not throw an error if null is passed as one of the children', async () => {

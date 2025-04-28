@@ -52,7 +52,7 @@ jobs:
       - name: Create pull request
         if: failure() && steps.up_to_date.outcome == 'failure'
         id: create-pr
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
         with:
           token: ${{ secrets.generate_token.outputs.token }}
           commit-message: 'chore: update example gallery'

@@ -1828,7 +1828,7 @@ __metadata:
     playwright: "npm:^1.51.1"
     postcss: "npm:^8.4.47"
     remark-gfm: "npm:^4.0.0"
-    rimraf: "npm:^5.0.5"
+    rimraf: "npm:^6.0.1"
     rollup: "npm:^4.27.3"
     rollup-plugin-copy: "npm:^3.5.0"
     sass: "npm:^1.80.6"
@@ -9406,7 +9406,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.26.3"
     "@babel/preset-typescript": "npm:^7.26.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
-    browserslist-config-carbon: "npm:^10.6.1"
+    browserslist-config-carbon: "npm:^11.0.0"
     npm-check-updates: "npm:^17.1.15"
   languageName: unknown
   linkType: soft
@@ -9621,10 +9621,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist-config-carbon@npm:^10.6.1":
-  version: 10.6.1
-  resolution: "browserslist-config-carbon@npm:10.6.1"
-  checksum: 10/7ea29a8cbf31a124a2351180d1fee3ce2ede67e4381ed7ec8deee73e58a6db1d70022ea8803d1b62d519253de3193341d15654c5355c1eb84b88b6e160961620
+"browserslist-config-carbon@npm:^11.0.0":
+  version: 11.2.0
+  resolution: "browserslist-config-carbon@npm:11.2.0"
+  checksum: 10/06cdbf01b8696dc1813414a833c6639b1b7e5ce2253549b4a8eaea4512aa59c2655c5a95265b0374f427b068ac08b1843c16776b22861984a603ab78ad0734ee
   languageName: node
   linkType: hard
 

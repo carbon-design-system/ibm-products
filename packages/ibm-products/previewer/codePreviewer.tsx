@@ -5,146 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
 import StackBlitzSDK from '@stackblitz/sdk';
-import sdk, { Project } from '@stackblitz/sdk';
+import { Project } from '@stackblitz/sdk';
 import { index, main, packageJson, style, viteConfig } from './configFiles';
 import * as carbonComponentsReact from '@carbon/react';
 import * as carbonIconsReact from '@carbon/icons-react';
 const iconsNames = Object.keys(carbonIconsReact);
+const carbonComponentNames = Object.keys(carbonComponentsReact);
+let componentNames;
+interface ComponentSources {
+  carbon: string[];
+  ibmProducts: string[];
+  icons: string[];
+  unknown: string[];
+}
+
 export const stackblitzPrefillConfig = async (
   code: any,
-  args: Record<string, any>,
   // components: Array<string>, // Add all required components to be imported from @carbon/react
   // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
   customImport: string
 ) => {
+  const { args } = code;
   const productComponents = await import('../src/index');
-  const componentNames = Object.keys(productComponents);
-  let storyCode = code.parameters.docs.source.originalSource
-    .replace(/^\s*args\s*=>\s*{\s*|}\s*;?\s*$/g, '')
-    .replace(/^\s*\(\)\s*=>\s*{/g, '')
-    .replace(/^\s*args\s*=>/g, 'return')
-    .replace(/^"|"$/g, '')
-    .replace(/{\.\.\.args}/g, '')
-    .replace(/onChange=\{(args\.onChange|action\('onChange'\))\}\s*/g, '')
-    .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
-
-  // Replace args properties with values
-  Object.entries(args).forEach(([key, value]) => {
-    const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-    // Case 1: Template literal with args (${args.title})
-    const templateLiteralRegex = new RegExp(
-      `\\$\\{\\s*args\\.${escapedKey}\\s*\\}`,
-      'g'
-    );
-
-    // Case 2: Direct JSX attribute (title={args.title})
-    const jsxAttributeRegex = new RegExp(
-      `(=\\s*)\\{args\\.${escapedKey}\\}`,
-      'g'
-    );
-
-    // Case 3: String literal in template (`${args.title}`)
-    const stringInTemplateRegex = new RegExp(
-      `\`\\$\\{args\\.${escapedKey}\\}\``,
-      'g'
-    );
-
-    if (typeof value === 'string') {
-      // Replace template literals with plain strings
-      storyCode = storyCode.replace(templateLiteralRegex, value);
-
-      // Replace JSX attributes with plain strings
-      storyCode = storyCode.replace(jsxAttributeRegex, `$1"${value}"`);
-
-      // Replace string-in-template cases with plain strings
-      storyCode = storyCode.replace(stringInTemplateRegex, `"${value}"`);
-    } else {
-      const valueStr = JSON.stringify(value);
-      const regex = new RegExp(`args\\.${escapedKey}`, 'g');
-      storyCode = storyCode.replace(regex, valueStr);
-    }
-  });
-  storyCode = storyCode.replace(/`([^`]+)`/g, '"$1"');
-
-  // Function to find all matches
-  const findComponentImports = (
-    componentNames: Array<string>,
-    storyCode: string
-  ) => {
-    return componentNames.filter((componentName) => {
-      // Grab the component and add the "<" resulting in"`<ComponentName`
-      const regex = new RegExp(`<${componentName}\\b`, 'g');
-      // Check if the component exists in the `storyCode`
-      return regex.test(storyCode);
-    });
-  };
-
-  // Get all matched components
-  // const componentNames = Object.keys(productComponents);
-  const matchedComponents = findComponentImports(componentNames, storyCode);
-
-  // Function to find all matches
-  const findIconImports = (iconNames: Array<string>, storyCode: string) => {
-    return iconNames.filter((iconName) => {
-      // Grab the component to convert in "<Component" and "{Component}"
-      const regexComponent = new RegExp(`<${iconName}\\b`, 'g');
-      const regexCurlBraces = new RegExp(`{\\s*${iconName}\\s*}`, 'g');
-      const regexObjectValue = new RegExp(`:\\s*${iconName}\\b`, 'g');
-      const regexImport = new RegExp(
-        `import\\s+.*\\b${iconName}\\b.*from\\s+['"]@my-icons['"]`,
-        'g'
-      );
-
-      // Check if the component exists in the `storyCode`
-      if (
-        (regexComponent.test(storyCode) ||
-          regexCurlBraces.test(storyCode) ||
-          regexObjectValue.test(storyCode)) &&
-        regexImport.test(storyCode) &&
-        !componentNames.includes(iconName)
-      ) {
-        return iconName;
-      }
-    });
-  };
-
-  // Get all matched icons
-
-  const matchedIcons = findIconImports(iconsNames, storyCode);
-
-  const carbonComponentNames = Object.keys(carbonComponentsReact);
-  const matchedCarbonComponents = findComponentImports(
-    carbonComponentNames,
-    storyCode
+  componentNames = Object.keys(productComponents);
+  const storyCode = filterStoryCode(
+    code.parameters.docs.source.originalSource,
+    args
   );
-
-  const extractStory = storyCode.match(
-    /<StoryWrapper\b[^>]*>([\s\S]*?)<\/StoryWrapper>/g
-  );
-  const extractedStoryCode = extractStory
-    ? extractStory.map((match) =>
-        match.replace(/<\/?StoryWrapper\b[^>]*>/g, '')
-      )
-    : [];
-
-  // Generate App.jsx code
-  const app = `
-  import React from 'react';
-  ${customImport ? customImport : ''}
-  import { ${matchedComponents} } from "@carbon/ibm-products";
-  import { ${matchedCarbonComponents} } from "@carbon/react";
-  ${matchedIcons.length > 0 ? `import { ${matchedIcons} } from "@carbon/icons-react";` : ''}
-  export default function App() {
-  return(
-    <>
-    ${extractedStoryCode}
-    </>
-    );
-  }
-  `;
+  const app = appGenerator(storyCode, customImport, args);
 
   const stackblitzFileConfig: Project = {
     title: 'Carbon demo',
@@ -165,4 +54,116 @@ export const stackblitzPrefillConfig = async (
     newWindow: true,
     openFile: 'src/App.jsx',
   });
+};
+
+const filterStoryCode = (storyCode, args) => {
+  let storyCodeUpdated = storyCode
+    .replace(/^\s*args\s*=>\s*{\s*|}\s*;?\s*$/g, '')
+    .replace(/^\s*\(\)\s*=>\s*{/g, '')
+    .replace(/^\s*args\s*=>/g, 'return')
+    .replace(/^"|"$/g, '')
+    .replace(/onChange=\{(args\.onChange|action\('onChange'\))\}\s*/g, '')
+    .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
+  Object.entries(args).forEach(([key, value]) => {
+    const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const templateLiteralRegex = new RegExp(
+      `\\$\\{\\s*args\\.${escapedKey}\\s*\\}`,
+      'g'
+    );
+    const jsxAttributeRegex = new RegExp(
+      `(=\\s*)\\{args\\.${escapedKey}\\}`,
+      'g'
+    );
+    const stringInTemplateRegex = new RegExp(
+      `\`\\$\\{args\\.${escapedKey}\\}\``,
+      'g'
+    );
+    if (typeof value === 'string') {
+      storyCodeUpdated = storyCodeUpdated.replace(templateLiteralRegex, value);
+      storyCodeUpdated = storyCodeUpdated.replace(
+        jsxAttributeRegex,
+        `$1"${value}"`
+      );
+      storyCodeUpdated = storyCodeUpdated.replace(
+        stringInTemplateRegex,
+        `"${value}"`
+      );
+    } else {
+      const valueStr = JSON.stringify(value);
+      const regex = new RegExp(`args\\.${escapedKey}`, 'g');
+      storyCodeUpdated = storyCodeUpdated.replace(regex, valueStr);
+    }
+  });
+  storyCodeUpdated = storyCodeUpdated.replace(/`([^`]+)`/g, '"$1"');
+  return storyCodeUpdated;
+};
+
+const appGenerator = (storyCode: string, customImport: string, args: any) => {
+  const {
+    carbon: matchedCarbonComponents,
+    ibmProducts: matchedComponents,
+    icons: matchedIcons,
+    unknown: unknownComponents,
+  } = findComponentsInCode(storyCode);
+  if (unknownComponents.length > 0) {
+    storyCode = removeUnknownComponents(storyCode, unknownComponents);
+  }
+  // Generate App.jsx code
+  const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
+  const app = `
+  import React, { useState, useEffect } from 'react';
+  ${customImport ? customImport : ''}
+  ${matchedComponents.length > 0 ? `import { ${matchedComponents.join(', ')} } from "@carbon/ibm-products";` : ''}
+  ${matchedCarbonComponents.length > 0 ? `import { ${matchedCarbonComponents.join(', ')} } from "@carbon/react";` : ''}
+  ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
+  const storyClass = 'example'
+  export default function App() {
+    ${formattedArgs}
+    ${storyCode}
+  }
+  `;
+  return app;
+};
+
+const findComponentsInCode = (code: string): ComponentSources => {
+  const componentRegex = /<([A-Z][a-zA-Z0-9]*)(?:\s|>)/g;
+  const matches: string[] = [];
+
+  let match: RegExpExecArray | null;
+  while ((match = componentRegex.exec(code)) !== null) {
+    matches.push(match[1]);
+  }
+  const componentNamesInCode = [...new Set(matches)];
+  const result: ComponentSources = {
+    carbon: [],
+    ibmProducts: [],
+    icons: [],
+    unknown: [],
+  };
+  componentNamesInCode.forEach((component) => {
+    if (carbonComponentNames.includes(component)) {
+      result.carbon.push(component);
+    } else if (componentNames.includes(component)) {
+      result.ibmProducts.push(component);
+    } else if (iconsNames.includes(component)) {
+      result.icons.push(component);
+    } else {
+      result.unknown.push(component);
+    }
+  });
+  return result;
+};
+
+const removeUnknownComponents = (storyCode, unknownComponents) => {
+  const openingTagPattern = new RegExp(
+    `<(${unknownComponents.join('|')})(\\s+[^>]*)?/?>`,
+    'g'
+  );
+  const closingTagPattern = new RegExp(
+    `</(${unknownComponents.join('|')})>`,
+    'g'
+  );
+  let cleanedCode = storyCode.replace(openingTagPattern, '');
+  cleanedCode = cleanedCode.replace(closingTagPattern, '');
+  return cleanedCode;
 };

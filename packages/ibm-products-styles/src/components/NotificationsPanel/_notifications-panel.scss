@@ -108,7 +108,7 @@ $block-size: 38.5rem;
   .#{$block-class}__header-container {
     position: sticky;
     z-index: 2;
-    padding: $spacing-03 $spacing-05 $spacing-05;
+    padding: $spacing-03 $spacing-05;
     background-color: $layer-01;
     border-block-end: 1px solid $border-subtle-01;
     inset-block-start: 0;
@@ -117,9 +117,12 @@ $block-size: 38.5rem;
       align-items: center;
       justify-content: space-between;
     }
-    .#{$block-class}__do-not-disturb-toggle
+    .#{$block-class}__do-not-disturb-toggle {
+      padding-block-end: $spacing-03;
+
       .#{c4p-settings.$carbon-prefix}--toggle__label-text {
-      @include utilities.visually-hidden;
+        @include utilities.visually-hidden;
+      }
     }
     .#{$block-class}__dismiss-button {
       color: $text-primary;
@@ -140,7 +143,7 @@ $block-size: 38.5rem;
     background-color: $layer-01;
     color: $text-secondary;
     // stylelint-disable-next-line carbon/layout-use
-    inset-block-start: 4.8125rem;
+    inset-block-start: 3.0625rem;
   }
   .#{$block-class}__notification:hover,
   .#{$block-class}__notification:focus {
@@ -343,5 +346,14 @@ $block-size: 38.5rem;
       .#{c4p-settings.$carbon-prefix}--btn__icon {
       margin: 0;
     }
+  }
+}
+
+.#{$block-class}__header-container:has(
+    .#{$block-class}__do-not-disturb-toggle
+  ) {
+  + .#{$block-class}__main-section .#{$block-class}__time-section-label {
+    // stylelint-disable-next-line carbon/layout-use
+    inset-block-start: 4.8125rem;
   }
 }

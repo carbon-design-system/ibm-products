@@ -76,7 +76,7 @@ export const useResizeObserver = (ref, callback, deps = []) => {
     observer.observe(ref.current);
 
     return () => {
-      observer.disconnect();
+      observer?.disconnect();
       observer = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

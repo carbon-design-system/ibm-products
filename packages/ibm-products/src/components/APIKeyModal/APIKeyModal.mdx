@@ -8,6 +8,9 @@ export const customFunctionArr = [
       return new Promise((resolve) => setTimeout(resolve, ms));
     }`,
 ];
+export const customImportsArr = [
+     `import {InlineLoading} from '@carbon/react';`,
+];
 
 # APIKeyModal
 
@@ -50,7 +53,7 @@ export const customFunctionArr = [
   additionalActions={[
       {
         title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig(stories.InstantGenerate,[],customFunctionArr),
+        onClick: () => stackblitzPrefillConfig(stories.InstantGenerate,customImportsArr,customFunctionArr),
       },
     ]}>
 </Canvas>

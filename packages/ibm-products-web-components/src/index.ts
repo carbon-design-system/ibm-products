@@ -12,3 +12,4 @@ export { default as CDSTearsheet } from './components/tearsheet/tearsheet';
 export { default as CDSFullPageError } from './components/full-page-error/full-page-error';
 export { default as CDSAboutModal } from './components/about-modal/about-modal';
 export { default as CDSUseravatar } from './components/user-avatar/user-avatar';
+export { default as CDSOptionsTile } from './components/options-tile/options-tile';

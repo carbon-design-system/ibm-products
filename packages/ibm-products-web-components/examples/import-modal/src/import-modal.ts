@@ -9,20 +9,18 @@
 
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
-import { prefix } from '../../../src/globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import styles from './import-modal.scss?lit';
-import '@carbon/web-components/es/components/modal/index';
+import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
-import '@carbon/web-components/es/components/button/index';
-import '@carbon/web-components/es/components/text-input/index';
-import '@carbon/web-components/es/components/file-uploader/demo-file-uploader';
-import '@carbon/web-components/es/components/file-uploader/file-uploader-item';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/file-uploader/demo-file-uploader.js';
+import '@carbon/web-components/es/components/file-uploader/file-uploader-item.js';
 import Add16 from '@carbon/web-components/es/icons/add/16.js';
 import { ref } from 'lit/directives/ref.js';
 
-const blockClass = `${prefix}--import-modal`;
+const blockClass = `c4p--import-modal`;
 
 export type FileType = {
   fetchError?: undefined | boolean;
@@ -45,7 +43,7 @@ export type FileType = {
  *
  * */
 
-@customElement(`${prefix}-import-modal`)
+@customElement(`import-modal`)
 class ImportModal extends HostListenerMixin(LitElement) {
   /**
    * The text displayed at the top of the modal
@@ -333,9 +331,6 @@ class ImportModal extends HostListenerMixin(LitElement) {
     const primaryButtonDisabled = !hasFiles || !(numberOfValidFiles > 0);
     const importButtonDisabled = !this.importUrl || hasFiles;
     return html`
-      <style>
-        ${styles}
-      </style>
       <cds-button
         kind="primary"
         @click=${() => modalRef?.setAttribute('open', '')}
@@ -432,7 +427,5 @@ class ImportModal extends HostListenerMixin(LitElement) {
       </cds-modal>
     `;
   }
-
-  static styles = styles;
 }
 export default ImportModal;

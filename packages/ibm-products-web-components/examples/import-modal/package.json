@@ -12,12 +12,22 @@
     "clean": "rimraf node_modules dist .cache"
   },
   "dependencies": {
-    "@carbon/ibm-products-web-components": "^0.10.0-rc.0",
+    "@carbon/ibm-products-web-components": "^0.13.0",
     "lit": "^3.2.1",
     "sass": "^1.64.1"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "postcss": "^8.5.3",
+    "postcss-scss": "^4.0.9",
     "rimraf": "^3.0.2",
+    "rollup": "^4.40.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-sass": "^1.15.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.8.3",
     "vite": "5.4.18"
   }
 }

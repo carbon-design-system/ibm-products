@@ -7,4 +7,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import '../../../es/components/import-modal/index';
+import './import-modal.ts';
+import './import-modal.scss';

@@ -13,4 +13,3 @@ export { default as CDSFullPageError } from './components/full-page-error/full-p
 export { default as CDSAboutModal } from './components/about-modal/about-modal';
 export { default as CDSUseravatar } from './components/user-avatar/user-avatar';
 export { default as CDSOptionsTile } from './components/options-tile/options-tile';
-export { default as CDSStringFormatter } from './components/string-formatter/string-formatter';

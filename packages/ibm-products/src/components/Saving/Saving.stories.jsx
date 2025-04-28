@@ -11,6 +11,7 @@ import { Saving } from '.';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import wait from '../../global/js/utils/wait';
 import { TextArea } from '@carbon/react';
+import mdx from './Saving.mdx';
 
 export default {
   title: 'IBM Products/Components/Saving',
@@ -19,9 +20,7 @@ export default {
   parameters: {
     styles,
     docs: {
-      page: () => (
-        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/components/save/usage/" />
-      ),
+      page: mdx,
     },
   },
   argTypes: {
@@ -42,8 +41,8 @@ const defaultProps = {
   successText: 'Saved',
 };
 
-const AutoTemplate = (opts) => {
-  const { successful, ...args } = opts;
+const AutoTemplate = (args) => {
+  const { successful, ...rest } = args;
   const [status, setStatus] = useState('default');
   const [text, setText] = useState('');
   const [dirtyInput, setDirtyInput] = useState(false);
@@ -77,14 +76,14 @@ const AutoTemplate = (opts) => {
         className="saving-story-textarea"
       />
       {dirtyInput && status !== 'default' && (
-        <Saving {...args} status={status} />
+        <Saving {...rest} status={status} />
       )}
     </div>
   );
 };
 
-const ManualTemplate = (opts) => {
-  const { successful, ...args } = opts;
+const ManualTemplate = (args) => {
+  const { successful, ...rest } = args;
   const [status, setStatus] = useState('default');
 
   const onSaveHandler = async () => {
@@ -95,7 +94,7 @@ const ManualTemplate = (opts) => {
 
   return (
     <div>
-      <Saving {...args} onRequestSave={onSaveHandler} status={status} />
+      <Saving {...rest} onRequestSave={onSaveHandler} status={status} />
     </div>
   );
 };

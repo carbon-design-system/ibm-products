@@ -5,13 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import cx from 'classnames';
 import { AddAlt, TextNewLine } from '@carbon/react/icons';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import PropTypes from 'prop-types';
 import { useTranslations } from '../utils/useTranslations';
 import { blockClass } from '../utils/util';
+import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
+import {
+  ConditionBuilderState,
+  ConditionGroup,
+} from '../ConditionBuilder.types';
 
 interface ConditionBuilderAddProps {
   className?: string;
@@ -24,6 +29,7 @@ interface ConditionBuilderAddProps {
   enableSubGroup?: boolean;
   buttonLabel?: string;
   tabIndex?: number;
+  group?: ConditionGroup;
 }
 const ConditionBuilderAdd = ({
   className,
@@ -36,6 +42,7 @@ const ConditionBuilderAdd = ({
   enableSubGroup,
   buttonLabel,
   tabIndex,
+  group,
 }: ConditionBuilderAddProps) => {
   const [addConditionText, addConditionRowText, addSubgroupText] =
     useTranslations([
@@ -44,9 +51,19 @@ const ConditionBuilderAdd = ({
       'addSubgroupText',
     ]);
 
+  const { onAddItem, rootState } = useContext(ConditionBuilderContext);
+
   const onClickHandler = () => {
-    hideConditionPreviewHandler?.();
-    onClick();
+    const { preventAdd } =
+      onAddItem?.({
+        type: 'condition',
+        state: rootState as ConditionBuilderState,
+        group,
+      }) ?? {};
+    if (!preventAdd) {
+      hideConditionPreviewHandler?.();
+      onClick();
+    }
   };
   const previewHandlers = () => {
     return enableSubGroup
@@ -64,6 +81,18 @@ const ConditionBuilderAdd = ({
     onFocus: showConditionSubGroupPreviewHandler,
     onBlur: hideConditionSubGroupPreviewHandler,
   });
+
+  const handleAddSubGroup = () => {
+    const { preventAdd } =
+      onAddItem?.({
+        type: 'subgroup',
+        state: rootState as ConditionBuilderState,
+        group,
+      }) ?? {};
+    if (!preventAdd) {
+      addConditionSubGroupHandler?.();
+    }
+  };
 
   const getAriaLabel = () => {
     return buttonLabel
@@ -99,7 +128,7 @@ const ConditionBuilderAdd = ({
       {enableSubGroup && (
         <ConditionBuilderButton
           renderIcon={TextNewLine}
-          onClick={addConditionSubGroupHandler}
+          onClick={handleAddSubGroup}
           className={cx(`${blockClass}__add-condition-sub-group`)}
           hideLabel
           label={addSubgroupText}

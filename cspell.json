@@ -64,7 +64,9 @@
     "*.avt.e2e.js",
     "*.snap",
     "*.log",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "examples/**/*",
+    "dist"
   ],
   "words": [
     "aboutmodal",

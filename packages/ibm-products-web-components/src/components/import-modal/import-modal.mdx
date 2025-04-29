@@ -1,6 +1,12 @@
 import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { Source } from '@storybook/addon-docs';
+
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as importModalStories from './import-modal.stories';
+
+import {sourceCode} from './fetchHtml.js';
+
+
 
 <Meta of={importModalStories} />
 
@@ -19,16 +25,9 @@ cds-stack, cds-icon-button, cds-dropdown, cds-overflow-menu a js function to ach
 
 Here's a quick example to get you started.
 
+<Source language="html" code={sourceCode} /> 
 
-### Default
 
-```html
 
-```
 
-### With Icon
-
-```html
- 
-```
 

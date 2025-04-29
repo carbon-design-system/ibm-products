@@ -15,6 +15,7 @@ const stories = glob.sync(
 );
 const config = {
   stories: stories,
+  staticDirs: [{ from: '../examples', to: '/examples' }],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-toolbars',

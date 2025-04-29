@@ -12,6 +12,7 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
+  useState,
 } from 'react';
 
 import PropTypes from 'prop-types';
@@ -105,6 +106,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       onScroll = defaults.onScroll,
       ...rest
     } = props;
+    const [isScrollableElement, setIsScrollableElement] = useState(false);
     const carouselRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
     const leftFadedEdgeRef = useRef<HTMLDivElement>(null);
@@ -352,6 +354,18 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       }
     }, [rightFadedEdgeRef, rightFadedEdgeColor]);
 
+    useIsomorphicEffect(() => {
+      if (scrollRef?.current) {
+        setIsScrollableElement(
+          scrollRef.current.scrollHeight > scrollRef.current.clientHeight
+        );
+      }
+    }, []);
+
+    const scrollableElementAttributes = isScrollableElement
+      ? { 'aria-label': 'Carousel element', tabIndex: 0, role: 'region' }
+      : {};
+
     return (
       <div
         {...rest}
@@ -361,7 +375,11 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
         {...getDevtoolsProps(componentName)}
       >
         <div className={cx(`${blockClass}__elements-container`)}>
-          <div className={`${blockClass}__elements`} ref={scrollRef}>
+          <div
+            className={`${blockClass}__elements`}
+            ref={scrollRef}
+            {...scrollableElementAttributes}
+          >
             {React.Children.map(children, (child, index) => {
               return (
                 <CarouselItem

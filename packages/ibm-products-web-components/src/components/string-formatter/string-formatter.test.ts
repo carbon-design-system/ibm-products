@@ -5,27 +5,63 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
-// import { describe, it, vi, expect } from 'vitest';
-// import { fixture, html, expect as owcExpect } from '@open-wc/testing';
-// import { render } from 'lit';
-// import CDSStringFormatter, { blockClass } from './string-formatter';
+import { describe, it, expect } from 'vitest';
+import { fixture, html } from '@open-wc/testing';
+import CDSStringFormatter from './string-formatter';
+import './index';
 
-// const defaultProps = {
-//   lines: 2,
-//   text: 'Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular sized button. This issue is most found in tables. Small button should have three words or less. When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are always paired with text.',
-// };
+const defaultProps = {
+  lines: 2,
+  text: 'Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page.',
+};
 
-// const template = (props: any = defaultProps) => html`
-//   <c4p-string-formatter value=${props.text} lines=${props.lines}>
-//   </c4p-string-formatter>
-// `;
+const template = (props = defaultProps, templateWidth?: number) => html`
+  <div style=${templateWidth ? `width: ${templateWidth}px;` : ''}>
+    <c4p-string-formatter
+      value=${props.text}
+      lines=${props.lines}
+    ></c4p-string-formatter>
+  </div>
+`;
 
-// const elementName = 'c4p-string-formatter';
+describe('c4p-string-formatter', () => {
+  it('renders a tooltip when text is truncated', async () => {
+    const wrapper = await fixture(template(defaultProps, 200));
 
-// describe(elementName, () => {
-//   it('should render string formatter', async () => {
-//     const element = render(template(), document.body);
-//     expect(element).toBeDefined();
-//   });
-// });
+    const el = wrapper.querySelector(
+      'c4p-string-formatter'
+    ) as CDSStringFormatter;
+
+    const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+    expect(tooltip).toBeTruthy();
+  });
+
+  it('does not render a tooltip if the text fits', async () => {
+    const wrapper = await fixture(template(defaultProps, 9000));
+
+    const el = wrapper.querySelector(
+      'c4p-string-formatter'
+    ) as CDSStringFormatter;
+
+    const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+    expect(tooltip).not.toBeTruthy();
+  });
+
+  it('tests lines prop/attribute', async () => {
+    for (let lines = 1; lines <= 4; lines++) {
+      const wrapper = await fixture(template({ ...defaultProps, lines }, 600));
+
+      const el = wrapper.querySelector(
+        'c4p-string-formatter'
+      ) as CDSStringFormatter;
+      await el.updateComplete;
+
+      const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+      if (lines <= 2) {
+        expect(tooltip).toBeTruthy();
+      } else {
+        expect(tooltip).not.toBeTruthy();
+      }
+    }
+  });
+});

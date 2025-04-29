@@ -5,7 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { ForwardedRef, ReactNode, forwardRef } from 'react';
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  forwardRef,
+} from 'react';
 
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 import { Card } from '../Card';
@@ -32,7 +37,7 @@ type overflowAction = {
 };
 type PlacementType = 'top' | 'bottom';
 type ClickZoneType = 'one' | 'two' | 'three';
-export interface ProductiveCardProps {
+export interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
    */
@@ -46,10 +51,6 @@ export interface ProductiveCardProps {
    * Determines if the action icons are on the top or bottom of the card
    */
   actionsPlacement?: PlacementType;
-  /**
-   * Content that shows in the body of the card
-   */
-  children?: ReactNode;
   /**
    * Optional user provided class
    */

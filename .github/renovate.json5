@@ -1,33 +1,62 @@
 {
-  "extends": [
+  extends: [
     // https://docs.renovatebot.com/presets-config/#configjs-lib
-    "config:js-lib",
+    'config:js-lib',
 
     // https://docs.renovatebot.com/presets-default/#maintainlockfilesweekly
-    ":maintainLockFilesWeekly",
+    ':maintainLockFilesWeekly',
 
     // https://docs.renovatebot.com/presets-default/#preservesemverranges
-    ":preserveSemverRanges",
+    ':preserveSemverRanges',
 
     // https://docs.renovatebot.com/presets-npm/#npmunpublishsafe
-    "npm:unpublishSafe",
+    'npm:unpublishSafe',
   ],
-  "schedule": [
-    "after 10pm every weekday",
-    "before 5am every weekday",
-    "every weekend",
+  schedule: [
+    'after 10pm every weekday',
+    'before 5am every weekday',
+    'every weekend',
   ],
-  "vulnerabilityAlerts": {
-    "enabled": true
+  vulnerabilityAlerts: {
+    enabled: true,
   },
-  "rebaseWhen": "never",
+  rebaseWhen: 'never',
   // Batch all Carbon package dependency upgrades together
-  "packageRules": [
+  packageRules: [
     {
-      "matchPackageNames": ["@carbon/**"],
-      "groupName": "Carbon core packages",
+      matchPackageNames: ['@carbon/**'],
+      groupName: 'Carbon core packages',
       // Update at 4:00 UTC on the 1st and 15th of every month
-      "schedule": "* 4 1,15 * *"
-    }
-  ]
+      schedule: '* 4 1,15 * *',
+    },
+  ],
+  major: {
+    ignoreDeps: [
+      // Ignore @testing-library/** packages
+      '@testing-library/dom',
+      '@testing-library/react',
+      '@testing-library/react-hooks',
+      '@testing-library/user-event',
+      '@testing-library/jest-dom',
+
+      // Ignore react packages
+      'react',
+      'react-dom',
+
+      // Ignore Carbon packages
+      '@carbon/react',
+      '@carbon/grid',
+      '@carbon/layout',
+      '@carbon/motion',
+      '@carbon/themes',
+      '@carbon/type',
+      '@carbon/feature-flags',
+      '@carbon/utilities',
+      '@carbon/icons',
+      '@carbon/icons-helpers',
+
+      // Ignore misc packages
+      'commander',
+    ],
+  },
 }

@@ -8,8 +8,8 @@
  */
 
 import { html } from 'lit';
-import './index';
-import { FileType } from './import-modal';
+import '../../../examples/import-modal/src/import-modal';
+import { FileType } from '../../../examples/import-modal/src/import-modal';
 
 const defaultArgs = {
   title: 'Import',

@@ -25,6 +25,11 @@
       // Update at 4:00 UTC on the 1st and 15th of every month
       schedule: '* 4 1,15 * *',
     },
+    {
+      matchPackageNames: ['react', 'react-dom'],
+      groupName: 'React packages',
+      allowedVersions: '< 19.0.0',
+    },
   ],
   major: {
     ignoreDeps: [

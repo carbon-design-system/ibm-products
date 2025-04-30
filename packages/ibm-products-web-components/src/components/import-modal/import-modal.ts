@@ -41,12 +41,12 @@ export type FileType = {
 /**
  * ImportModal.
  *
- * @element c4p-import-modal
+ * @element import-modal
  *
  * */
 
 @customElement(`${prefix}-import-modal`)
-class CDSImportModal extends HostListenerMixin(LitElement) {
+class ImportModal extends HostListenerMixin(LitElement) {
   /**
    * The text displayed at the top of the modal
    */
@@ -352,7 +352,6 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
         }}
       >
         <cds-modal-header>
-          <cds-modal-close-button></cds-modal-close-button>
           <cds-modal-heading>${this.title}</cds-modal-heading>
         </cds-modal-header>
         <cds-modal-body class=${`${blockClass}__body-container`}>
@@ -363,7 +362,8 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
             <cds-file-uploader-drop-container
               accept=${this.accept}
               ?disabled=${hasFiles}
-              @cds-file-uploader-drop-container-changed="${onAddFile}"
+              @cds-file-uploader-drop-container-changed=${(evt) =>
+                onAddFile(evt)}
             >
               ${this.fileDropLabel}
             </cds-file-uploader-drop-container>
@@ -439,4 +439,4 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
 
   static styles = styles;
 }
-export default CDSImportModal;
+export default ImportModal;

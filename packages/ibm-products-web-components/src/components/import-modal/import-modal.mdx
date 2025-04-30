@@ -1,12 +1,6 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
-import { Source } from '@storybook/addon-docs';
-
+import { ArgTypes, Markdown, Meta, Story } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as importModalStories from './import-modal.stories';
-
-import {sourceCode} from './fetchHtml.js';
-
-
 
 <Meta of={importModalStories} />
 
@@ -16,18 +10,56 @@ The Import Modal pattern is made with carbon design system's web components,
 
 Note: This is not a component, and is only a recipe to build a Import Modal using carbon components meant to be scaled as per specific requirements.
 
-ingredients used
+Ingredients used
 
-cds-stack, cds-icon-button, cds-dropdown, cds-overflow-menu a js function to achieve roving tab index. for accessibility
+These are the ingredients used to generate the import modal
+cds-modal, cds-modal-header, cds-modal-body, cds-file-uploader, cds-file-uploader-drop-container, cds-form-item, cds-text-input, cds-button, cds-file-uploader-item, and cds-modal-footer. 
+All of these are used within a wrapper component to handle state management required for the import modal’s functionality.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/import-modal)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/import-modal)
 
 
 ## Getting started
 
 Here's a quick example to get you started.
 
-<Source language="html" code={sourceCode} /> 
+### HTML
 
+### Default
 
+```html
+    <import-modal
+        title='Import'
+        description='You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB)'
+        ?open=false
+        fetchErrorHeader='Import failed'
+        fetchErrorBody='Unable to fetch URL.'
+        maxFileSize=500000
+        ?accept=0
+        secondaryButtonText='Cancel'
+        primaryButtonText='Import'
+        inputPlaceholder='URL'
+        inputLabel='Add a file by specifying a URL'
+        inputId='test-id'
+        inputButtonText='Add file'
+        .inputButtonIcon=false
+        fileDropHeader='Add files using drag and drop'
+        fileDropLabel='Drag and drop files here or click to upload'
+        fileUploadLabel='files uploaded'
+        invalidFileTypeErrorBody='Invalid file type.'
+        invalidFileTypeErrorHeader='Import failed'
+        invalidIconDescription='Delete'
+        maxFileSizeErrorBody='500kb max file size. Select a new file and try again.'
+        maxFileSizeErrorHeader='Import failed'
+        defaultErrorBody='Select a new file and try again.'
+        defaultErrorHeader='Import failed'
+      >
+    </import-modal>
+```
 
 
 

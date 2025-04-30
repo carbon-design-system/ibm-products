@@ -11,9 +11,8 @@ LICENSE file in the root directory of this source tree.
 <head>
   <title>carbon-web-components import modal example</title>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="dist/styles.css" />
-  
-  <script src="dist/bundle.js"></script>
+  <link rel="stylesheet" href="src/import-modal.scss" /> 
+  <script type="module" src="src/import-modal.ts"></script>
 </head>
 <body>
   <div class="example-container">
@@ -32,10 +31,9 @@ LICENSE file in the root directory of this source tree.
   fileDropHeader= 'Add files using drag and drop'
   fileDropLabel= 'Drag and drop files here or click to upload'
   fileUploadLabel= 'files uploaded'
-  accept= 0
+  accept= 'image/jpeg image/png'
   fetchErrorHeader= 'Import failed'
   fetchErrorBody= 'Unable to fetch URL.'
-
   invalidFileTypeErrorBody= 'Invalid file type.'
   invalidFileTypeErrorHeader= 'Import failed'
   invalidIconDescription= 'Delete'

@@ -189,7 +189,6 @@ export const importModal = {
         maxFileSizeErrorHeader=${args.maxFileSizeErrorHeader}
         defaultErrorBody=${args.defaultErrorBody}
         defaultErrorHeader=${args.defaultErrorHeader}
-        .onRequestSubmit=${args.onRequestSubmit}
         @cds-modal-closed=${() => {
           console.log('onClose');
         }}

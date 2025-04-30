@@ -19,6 +19,8 @@ import '@carbon/web-components/es/components/file-uploader/demo-file-uploader.js
 import '@carbon/web-components/es/components/file-uploader/file-uploader-item.js';
 import Add16 from '@carbon/web-components/es/icons/add/16.js';
 import { ref } from 'lit/directives/ref.js';
+// import './import-modal.scss?lit';
+import styles from './import-modal.scss?lit';
 
 const blockClass = `c4p--import-modal`;
 
@@ -330,6 +332,9 @@ class ImportModal extends HostListenerMixin(LitElement) {
     const primaryButtonDisabled = !hasFiles || !(numberOfValidFiles > 0);
     const importButtonDisabled = !this.importUrl || hasFiles;
     return html`
+      <style>
+        ${styles}
+      </style>
       <cds-button
         kind="primary"
         @click=${() => modalRef?.setAttribute('open', '')}
@@ -347,7 +352,6 @@ class ImportModal extends HostListenerMixin(LitElement) {
         }}
       >
         <cds-modal-header>
-          <cds-modal-close-button></cds-modal-close-button>
           <cds-modal-heading>${this.title}</cds-modal-heading>
         </cds-modal-header>
         <cds-modal-body class=${`${blockClass}__body-container`}>
@@ -356,9 +360,11 @@ class ImportModal extends HostListenerMixin(LitElement) {
           </cds-modal-body-content>
           <cds-file-uploader label-title=${this.fileDropHeader}>
             <cds-file-uploader-drop-container
-              accept=${this.accept}
+              accept="${this.accept}"
               ?disabled=${hasFiles}
-              @cds-file-uploader-drop-container-changed="${onAddFile}"
+              @cds-file-uploader-drop-container-changed=${(evt) => {
+                onAddFile(evt);
+              }}
             >
               ${this.fileDropLabel}
             </cds-file-uploader-drop-container>
@@ -431,5 +437,6 @@ class ImportModal extends HostListenerMixin(LitElement) {
       </cds-modal>
     `;
   }
+  static styles = styles;
 }
 export default ImportModal;

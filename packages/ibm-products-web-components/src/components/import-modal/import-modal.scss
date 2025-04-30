@@ -27,28 +27,12 @@ $carbon-prefix: 'cds';
 
 $block-class: #{$prefix}--import-modal;
 
-:host(#{$prefix}--import-modal) {
-  .#{$block-class} {
-    @extend .#{$block-class};
-    @extend .#{$block-class}__helper-text;
-    @extend .#{$block-class}__file-container;
-    @extend .#{$block-class}__import-button;
-    @extend .#{$block-class}__input-group;
+.#{$block-class} {
+  .#{$block-class}__import-button {
+    margin-inline-start: $spacing-03;
+  }
+  .#{$block-class}__file-uploader-item {
+    margin-block-end: 0;
+    max-inline-size: none;
   }
 }
-
-// cds-modal cds-modal-body {
-//   .c4p--import-modal__input-group {
-//     .c4p--import-modal__import-button {
-//       margin-inline-start: 0.5rem;
-//     }
-//   }
-//   .c4p--import-modal__file-uploader-item {
-//     max-inline-size: none;
-//     margin-block-end: 0;
-//   }
-// }
-
-// cds-modal cds-modal-close-button {
-//   display: none;
-// }

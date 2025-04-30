@@ -30,13 +30,12 @@ $block-class: #{$prefix}--import-modal;
   color: var(--cds-text-primary);
 }
 
-:host(#{$prefix}--import-modal) {
-  background-color: red;
-  .#{$block-class} {
-    @extend .#{$block-class};
-    @extend .#{$block-class}__label;
-    @extend .#{$block-class}__helper-text;
-    @extend .#{$block-class}__file-container;
-    @extend .#{$block-class}__input-group;
+.#{$block-class} {
+  .#{$block-class}__import-button {
+    margin-inline-start: 0.5rem;
+  }
+  .#{$block-class}__file-uploader-item {
+    max-inline-size: none;
+    margin-block-end: 0;
   }
 }

@@ -635,7 +635,7 @@ export let NotificationsPanel = React.forwardRef(
                */}
               {dateTimeLocale
                 ? dateTimeFormat.relative.format(notification.timestamp, {
-                    locale: supportedLocale,
+                    locale: supportedLocale as string,
                     style: dateTimeStyle,
                   })
                 : timeAgo({

@@ -16,8 +16,6 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
-// import { children } from 'cheerio/lib/api/traversing';
-
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 

@@ -615,14 +615,15 @@ export let PageHeader = React.forwardRef(
 
     useEffect(() => {
       // Determine the location of the pageAction buttons
-      /* istanbul ignore next */
-      if (metrics?.titleRowSpaceAbove && metrics?.pageActionsSpaceAbove) {
-        setPageActionsInBreadcrumbRow(
-          collapseTitle ||
-            (hasActionBar && scrollYValue > metrics?.titleRowSpaceAbove) ||
-            (widthIsNarrow && scrollYValue > metrics?.pageActionsSpaceAbove)
-        );
-      }
+      setPageActionsInBreadcrumbRow(
+        collapseTitle ||
+          (hasActionBar &&
+            !!metrics?.titleRowSpaceAbove &&
+            scrollYValue > metrics?.titleRowSpaceAbove) ||
+          (widthIsNarrow &&
+            !!metrics?.pageActionsSpaceAbove &&
+            scrollYValue > metrics?.pageActionsSpaceAbove)
+      );
     }, [
       hasActionBar,
       metrics.breadcrumbRowSpaceBelow,

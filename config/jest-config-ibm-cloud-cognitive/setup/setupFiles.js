@@ -19,15 +19,7 @@ global.__DEV__ = true;
 global.requestAnimationFrame = (callback) => {
   return setTimeout(callback, 0);
 };
-if (global.window) {
-  window.ResizeObserver = jest.fn(() => {
-    return {
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    };
-  });
-}
+
 if (global.HTMLElement) {
   HTMLCanvasElement.prototype.getContext = jest.fn();
 

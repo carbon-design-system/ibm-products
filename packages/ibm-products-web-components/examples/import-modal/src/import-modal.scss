@@ -19,8 +19,24 @@ $css--plex: true !default;
 
 @use '@carbon/ibm-products-styles/scss/components/ImportModal';
 
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+$block-class: #{$prefix}--import-modal;
+
 :root {
   @include theme.theme(themes.$white);
   background-color: var(--cds-background);
   color: var(--cds-text-primary);
+}
+
+:host(#{$prefix}--import-modal) {
+  background-color: red;
+  .#{$block-class} {
+    @extend .#{$block-class};
+    @extend .#{$block-class}__label;
+    @extend .#{$block-class}__helper-text;
+    @extend .#{$block-class}__file-container;
+    @extend .#{$block-class}__input-group;
+  }
 }

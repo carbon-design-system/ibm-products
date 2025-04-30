@@ -307,8 +307,7 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
       updateFiles(addedFiles);
     };
 
-    const onRemoveFile = (evt) => {
-      const uuid = evt.detail.uuid;
+    const onRemoveFile = (_evt, uuid) => {
       this.files = this.files.filter((f) => f.uuid !== uuid);
     };
 
@@ -371,7 +370,7 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
           </cds-file-uploader>
           ${this.inputLabel &&
           html`<p class=${`${blockClass}__label`}>${this.inputLabel}</p>`}
-          <cds-form-item>
+          <cds-form-item class=${`${blockClass}__input-group`}>
             <cds-text-input
               placeholder=${this.inputPlaceholder}
               label=""
@@ -381,9 +380,9 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
               ?disabled=${hasFiles}
             ></cds-text-input>
             <cds-button
-              .button-class-name="inputButton"
+              class=${`${blockClass}__import-button`}
               .kind="primary"
-              .size="sm"
+              size="sm"
               .type="Submit"
               ?disabled=${importButtonDisabled}
               @click=${handleImportFile}
@@ -393,21 +392,26 @@ class CDSImportModal extends HostListenerMixin(LitElement) {
             </cds-button>
           </cds-form-item>
 
-          <div className="cds--file-container">
+          <div class="${blockClass}__file-container cds--file-container">
             ${hasFiles
-              ? html`<p className="{}">${this.fileStatusString}</p>`
+              ? html`<p class=${`${blockClass}__helper-text`}>
+                  ${this.fileStatusString}
+                </p>`
               : null}
             ${this.files.map(
               (file) => html`
                 <cds-file-uploader-item
                   name=${file.name}
+                  class=${`${blockClass}__file-uploader-item`}
                   size="lg"
+                  state=${file.status}
                   icon-description=${file.iconDescription}
                   ?invalid=${file.invalid === true}
                   error-subject=${file.errorSubject || ''}
                   error-body=${file.errorBody || ''}
                   uuid=${file.uuid}
-                  @cds-file-uploader-item-deleted=${onRemoveFile}
+                  @cds-file-uploader-item-deleted=${(evt) =>
+                    onRemoveFile(evt, file.uuid)}
                   >${file.name}</cds-file-uploader-item
                 >
               `

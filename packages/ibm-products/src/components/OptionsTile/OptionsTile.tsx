@@ -96,7 +96,7 @@ export interface OptionsTileProps {
   /**
    * Provide the title for this OptionsTile.
    */
-  title: string;
+  title: string | object | ReactNode;
 
   /**
    * Optionally provide an id which should be used for the title.
@@ -424,7 +424,11 @@ OptionsTile.propTypes = {
   /**
    * Provide the title for this OptionsTile.
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]).isRequired,
 
   /**
    * Optionally provide an id which should be used for the title.

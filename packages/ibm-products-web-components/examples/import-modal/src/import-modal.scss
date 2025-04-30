@@ -8,13 +8,10 @@
 $css--plex: true !default;
 
 /* Other Carbon settings. */
-@use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/colors';
-@use '@carbon/styles/scss/layout';
-@use '@carbon/styles/scss/utilities';
 @use 'sass:map';
 
 @use '@carbon/ibm-products-styles/scss/components/ImportModal';
@@ -31,6 +28,9 @@ $block-class: #{$prefix}--import-modal;
 }
 
 .#{$block-class} {
+  .#{$block-class}__body-container {
+    padding-block: unset;
+  }
   .#{$block-class}__import-button {
     margin-inline-start: 0.5rem;
   }

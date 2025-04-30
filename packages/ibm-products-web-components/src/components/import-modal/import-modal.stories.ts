@@ -164,7 +164,7 @@ export const importModal = {
   args: defaultArgs,
   render: (args) => {
     return html`
-      <c4p-import-modal
+      <import-modal
         title=${args.title}
         description=${args.description}
         ?open=${args.open}
@@ -196,7 +196,7 @@ export const importModal = {
           console.log('Submitting files:', e.detail);
         }}
       >
-      </c4p-import-modal>
+      </import-modal>
     `;
   },
 };

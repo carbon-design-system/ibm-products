@@ -44,8 +44,7 @@ export type FileType = {
  * @element import-modal
  *
  * */
-
-@customElement(`${prefix}-import-modal`)
+@customElement(`import-modal`)
 class ImportModal extends HostListenerMixin(LitElement) {
   /**
    * The text displayed at the top of the modal

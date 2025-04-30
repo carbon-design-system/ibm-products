@@ -7,6 +7,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-//export { importModal as default } from './import-modal.stories';
-
 import './import-modal';

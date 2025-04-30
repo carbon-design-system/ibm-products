@@ -64,9 +64,7 @@
     "*.avt.e2e.js",
     "*.snap",
     "*.log",
-    "CHANGELOG.md",
-    "examples/**/*",
-    "dist"
+    "CHANGELOG.md"
   ],
   "words": [
     "aboutmodal",
@@ -207,6 +205,7 @@
     "uuidv",
     "webfonts",
     "useravatar",
-    "rendericon"
+    "rendericon",
+    "litcss"
   ]
 }

@@ -7,7 +7,13 @@
 
 import { ArrowLeft, Close } from '@carbon/react/icons';
 // Carbon and package components we use.
-import { Button, IconButton } from '@carbon/react';
+import {
+  Button,
+  ButtonProps,
+  Heading,
+  IconButton,
+  Section,
+} from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
   ForwardedRef,
@@ -26,7 +32,7 @@ import {
 } from '../../global/js/hooks';
 
 import { ActionSet } from '../ActionSet';
-import { ButtonProps } from '@carbon/react';
+
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { SIDE_PANEL_SIZES } from './constants';
@@ -233,7 +239,7 @@ const defaults = {
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
  */
-export let SidePanel = React.forwardRef(
+const SidePanelBase = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -693,22 +699,22 @@ export let SidePanel = React.forwardRef(
         })}
         ref={titleRef}
       >
-        <h2
+        <Heading
           className={`${blockClass}__title-text`}
           title={title}
           aria-hidden={false}
         >
           {title}
-        </h2>
+        </Heading>
 
         {doAnimateTitle && !shouldReduceMotion && (
-          <h2
+          <Heading
             className={`${blockClass}__collapsed-title-text`}
             title={title}
             aria-hidden={true}
           >
             {title}
-          </h2>
+          </Heading>
         )}
       </div>
     );
@@ -896,14 +902,13 @@ export let SidePanel = React.forwardRef(
 
     return shouldRender ? (
       <>
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-        <div
+        <Section
           {...getDevtoolsProps(componentName)}
           {...rest}
           id={id}
           className={mainPanelClassNames}
           ref={sidePanelRef}
-          role="complementary"
+          as="aside"
           aria-label={title || rest['aria-label']}
           onAnimationEnd={onAnimationEnd}
           onAnimationStart={onAnimationStart}
@@ -921,7 +926,7 @@ export let SidePanel = React.forwardRef(
             className={primaryActionContainerClassNames}
             size={size === 'xs' ? 'sm' : size}
           />
-        </div>
+        </Section>
         {includeOverlay && (
           <div
             ref={overlayRef}
@@ -936,7 +941,10 @@ export let SidePanel = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
+export const SidePanel = pkg.checkComponentEnabled(
+  SidePanelBase,
+  componentName
+);
 
 const deprecatedProps = {
   /**

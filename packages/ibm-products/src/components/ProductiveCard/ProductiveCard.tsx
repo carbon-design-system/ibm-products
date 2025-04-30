@@ -52,16 +52,9 @@ export interface ProductiveCardProps extends PropsWithChildren {
    */
   actionsPlacement?: PlacementType;
   /**
-   * Content that shows in the body of the card
-   */
-  // children: PropTypes.node,
-  /**
    * Optional user provided class
    */
   className?: string;
-
-  children: ReactNode;
-
   /**
    * Designates which zones of the card are clickable. Refer to design documentation for implementation guidelines
    */

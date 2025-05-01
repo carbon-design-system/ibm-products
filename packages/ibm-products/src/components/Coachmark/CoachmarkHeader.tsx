@@ -16,6 +16,7 @@ import { Button } from '@carbon/react';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
+import { useCoachmark } from '.';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-header`;
@@ -23,17 +24,12 @@ const overlayBlockClass = `${pkg.prefix}--coachmark-overlay`;
 const componentName = 'CoachmarkHeader';
 
 const defaults = {
-  closeIconDescription: 'Close',
   onClose: () => {},
   showCloseButton: true,
   theme: 'light',
 };
 
 interface CoachmarkHeaderProps {
-  /**
-   * Tooltip text and aria label for the Close button icon.
-   */
-  closeIconDescription?: string;
   /**
    * Function to call when the close button is clicked.
    */
@@ -58,7 +54,6 @@ export let CoachmarkHeader = React.forwardRef<
 >(
   (
     {
-      closeIconDescription = defaults.closeIconDescription,
       onClose = defaults.onClose,
       showCloseButton = defaults.showCloseButton,
       theme = defaults.theme,
@@ -67,6 +62,7 @@ export let CoachmarkHeader = React.forwardRef<
     },
     ref
   ) => {
+    const { closeIconDescription } = useCoachmark();
     return (
       <header
         {
@@ -106,10 +102,6 @@ CoachmarkHeader.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 CoachmarkHeader.propTypes = {
-  /**
-   * Tooltip text and aria label for the Close button icon.
-   */
-  closeIconDescription: PropTypes.string,
   /**
    * Function to call when the close button is clicked.
    */

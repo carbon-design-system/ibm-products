@@ -52,10 +52,6 @@ interface CoachmarkOverlayProps {
    */
   className?: string;
   /**
-   * Optional icon description for the close button.
-   */
-  closeIconDescription?: string;
-  /**
    * The visibility of CoachmarkOverlay is
    * managed in the parent Coachmark component.
    */
@@ -96,7 +92,6 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
       className,
       kind = defaults.kind,
       theme = defaults.theme,
-      closeIconDescription = defaults.closeIconDescription,
       ...rest
     },
     ref
@@ -227,7 +222,6 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
       >
         {isDraggable ? (
           <CoachmarkDragbar
-            closeIconDescription={closeIconDescription}
             a11yKeyboardHandler={handleKeyPress}
             onBlur={() => setA11yDragMode(false)}
             onDrag={handleDrag}
@@ -237,7 +231,6 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
         ) : (
           <CoachmarkHeader
             onClose={onClose}
-            closeIconDescription={closeIconDescription}
           />
         )}
         <div className={`${blockClass}__body`} ref={ref} id={contentId}>

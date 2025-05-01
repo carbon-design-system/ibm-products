@@ -10,7 +10,7 @@ import { StatusIndicatorStep } from '.';
 import mdx from './StatusIndicatorStep.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { Annotation } from '../../../../ibm-products/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
   title: 'Deprecated/Status indicator/StatusIndicatorStep',

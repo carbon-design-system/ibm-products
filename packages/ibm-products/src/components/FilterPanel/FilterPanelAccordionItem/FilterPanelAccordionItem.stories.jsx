@@ -18,7 +18,7 @@ import mdx from './FilterPanelAccordionItem.mdx';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
 import styles from '../_storybook-styles.scss?inline';
-import { Annotation } from '../../../../../ibm-products/.storybook/Annotation';
+import { Annotation } from '../../../../.storybook/Annotation';
 
 const storyClass = 'filter-panel-stories';
 

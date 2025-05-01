@@ -14,7 +14,7 @@ import { FilterPanel, FilterPanelCheckbox } from '..';
 import mdx from './FilterPanelCheckbox.mdx';
 
 import styles from '../_storybook-styles.scss?inline';
-import { Annotation } from '../../../../../ibm-products/.storybook/Annotation';
+import { Annotation } from '../../../../.storybook/Annotation';
 
 const storyClass = 'filter-panel-stories';
 

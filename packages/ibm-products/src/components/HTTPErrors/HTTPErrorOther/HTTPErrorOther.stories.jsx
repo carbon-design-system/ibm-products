@@ -8,7 +8,7 @@
 import React from 'react';
 import { HTTPErrorOther } from '.';
 import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
-import { Annotation } from '../../../../../ibm-products/.storybook/Annotation';
+import { Annotation } from '../../../../.storybook/Annotation';
 import styles from '../_storybook-styles.scss?inline';
 
 const storyClass = 'http-error-stories';

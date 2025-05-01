@@ -119,8 +119,6 @@ const FilterPanel = ({
       prevFiltersRef,
     });
 
-  // NOTE: In the future when we get rid of framer-motion we can use our own usePrefersReducedMotion hook
-  // using our own was causing an error
   const shouldReduceMotion = usePrefersReducedMotion();
 
   const exitAnimationName = shouldReduceMotion

@@ -4,7 +4,11 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { TextAreaProps, TextInputProps } from '@carbon/react';
+import {
+  TextAreaProps,
+  TextInputProps,
+  type DatePickerProps,
+} from '@carbon/react';
 import { CarbonIconType } from '@carbon/icons-react';
 import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
 import {
@@ -58,9 +62,7 @@ export type Operators = {
 
 type Item = { id: string; label: string };
 
-export type option = Item & {
-  icon?: CarbonIconType;
-};
+export type option = Item & { icon?: CarbonIconType };
 
 export type PropertyConfigOption = {
   type: 'option';
@@ -72,14 +74,12 @@ export type PropertyConfigOption = {
 
 export interface PropertyConfigText {
   type: 'text';
-  config: TextInputProps;
-  operators?: Item[];
+  config: TextInputProps & { operators?: Item[] };
 }
 
 export interface PropertyConfigTextArea {
   type: 'textarea';
-  config: TextAreaProps;
-  operators?: Item[];
+  config: TextAreaProps & { operators?: Item[] };
 }
 
 export interface PropertyConfigNumber {
@@ -95,18 +95,12 @@ export interface PropertyConfigNumber {
 
 export type PropertyConfigDate = {
   type: 'date';
-  config: {
-    valueFormatter?: (value: string) => string;
-    operators?: Item[];
-  };
+  config: DatePickerProps & { operators?: Item[] };
 };
 
 export type PropertyConfigTime = {
   type: 'time';
-  config: {
-    operators?: Item[];
-    timeZones: string[];
-  };
+  config: { operators?: Item[]; timeZones: string[] };
 };
 
 export type PropertyConfigCustom = {
@@ -133,13 +127,9 @@ export type Property = Item & {
   config?: any;
 } & ConfigType;
 
-export type inputConfig = {
-  properties: Property[];
-};
+export type inputConfig = { properties: Property[] };
 
-export type Option = Item & {
-  icon?: CarbonIconType;
-};
+export type Option = Item & { icon?: CarbonIconType };
 export type Condition = {
   property?: string;
   operator?: Operator | '' | 'INVALID';
@@ -160,10 +150,7 @@ export type ConditionBuilderState = {
   operator?: LogicalOperator;
 };
 
-export type Action = {
-  id?: string | number;
-  label?: string;
-};
+export type Action = { id?: string | number; label?: string };
 
 export type variantsType = 'Non-Hierarchical' | 'Hierarchical';
 
@@ -171,7 +158,63 @@ export type statementConfig = Item & {
   connector: 'and' | 'or';
   secondaryLabel?: string;
 };
+type AddItemType = 'condition' | 'subgroup' | 'group';
+type AddItemConfig = {
+  type: AddItemType;
+  state: ConditionBuilderState;
+  group?: ConditionGroup;
+};
 
+type ConditionBuilderTextKeys =
+  | 'ifText'
+  | 'unlessText'
+  | 'excl_if'
+  | 'and'
+  | 'or'
+  | 'is'
+  | 'ifAll'
+  | 'ifAny'
+  | 'unlessAll'
+  | 'unlessAny'
+  | 'greater'
+  | 'greaterEqual'
+  | 'lower'
+  | 'lowerEqual'
+  | 'startsWith'
+  | 'endsWith'
+  | 'contains'
+  | 'oneOf'
+  | 'before'
+  | 'after'
+  | 'between'
+  | 'addConditionText'
+  | 'addConditionGroupText'
+  | 'addSubgroupText'
+  | 'conditionText'
+  | 'propertyText'
+  | 'operatorText'
+  | 'valueText'
+  | 'connectorText'
+  | 'conditionRowText'
+  | 'conditionRowGroupText'
+  | 'removeConditionText'
+  | 'addConditionRowText'
+  | 'startText'
+  | 'endText'
+  | 'clearSearchText'
+  | 'actionsText'
+  | 'then'
+  | 'removeActionText'
+  | 'addActionText'
+  | 'invalidText'
+  | 'invalidNumberWarnText'
+  | 'conditionBuilderText'
+  | 'actionSectionText'
+  | 'conditionHeadingText'
+  | 'addPropertyText'
+  | 'addOperatorText'
+  | 'addValueText'
+  | 'conditionBuilderHierarchicalText';
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
   initialState?: InitialState;
@@ -186,8 +229,9 @@ export type ConditionBuilderProps = {
   popOverSearchThreshold: number;
   startConditionLabel?: string;
   variant?: 'Non-Hierarchical' | 'Hierarchical';
-  translateWithId: (id: string) => string;
+  translateWithId?: (id: ConditionBuilderTextKeys) => string;
   statementConfigCustom: statementConfig[];
+  onAddItem?: (config: AddItemConfig) => { preventAdd: boolean };
 };
 
 export type InitialState = {
@@ -204,7 +248,7 @@ export interface ConditionBuilderContextInputProps extends PropsWithChildren {
     condition: Condition
   ) => Promise<Option[]>;
   variant?: string;
-  translateWithId?: (id: string) => string;
+  translateWithId?: (id: ConditionBuilderTextKeys) => string;
   statementConfigCustom?: statementConfig[];
 
   conditionBuilderRef?: ForwardedRef<HTMLDivElement>;
@@ -215,4 +259,5 @@ export type ConditionBuilderContextProps = {
   setRootState?: Dispatch<SetStateAction<ConditionBuilderState>>;
   actionState?: Action[];
   setActionState?: Dispatch<SetStateAction<Action[]>>;
+  onAddItem?: (config: AddItemConfig) => { preventAdd: boolean };
 } & ConditionBuilderContextInputProps;

@@ -105,50 +105,18 @@ export const manageTabIndexAndFocus = (currentElement, conditionBuilderRef) => {
   currentElement?.focus();
 };
 
-const formatDate = (date) => {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
-};
-
 export const getValue = (type, value, config) => {
-  if (config?.valueFormatter && ['date', 'custom'].includes(type)) {
+  if (config?.valueFormatter && ['custom'].includes(type)) {
     return config.valueFormatter(value);
-  } else {
-    const formatters = {
-      text: (value) => value,
-      textarea: (value) => value,
-      time: (value) => value,
-      number: (value) => value,
-      option: (value) => {
-        if (value && typeof value !== 'string') {
-          const selectedValues = Array.isArray(value) ? value : [value];
-          return selectedValues.map((option) => option.label).join(', ');
-        }
+  } else if (type === 'option') {
+    if (value && typeof value !== 'string') {
+      const selectedValues = Array.isArray(value) ? value : [value];
+      return selectedValues.map((option) => option.label).join(', ');
+    }
 
-        return value;
-      },
-      date: (value) => {
-        if (Array.isArray(value) && value.length > 1) {
-          const start =
-            value?.[0] && !isNaN(new Date(value[0]))
-              ? formatDate(new Date(value[0]))
-              : '';
-          const end =
-            value?.[1] && !isNaN(new Date(value[1]))
-              ? formatDate(new Date(value[1]))
-              : '';
-          return `${start} To ${end}`;
-        } else if (Array.isArray(value) && !isNaN(new Date(value[0]))) {
-          return formatDate(new Date(value[0]));
-        } else {
-          return value;
-        }
-      },
-      custom: (value) => value,
-    };
-    return formatters[type](value, config);
+    return value;
+  } else {
+    return value;
   }
 };
 

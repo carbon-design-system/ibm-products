@@ -1,3 +1,4 @@
+/// <reference types="@vitest/browser/providers/playwright" />
 /**
  * Copyright IBM Corp. 2024, 2024
  *
@@ -30,13 +31,13 @@ export default defineConfig({
       provider: 'playwright',
       enabled: true,
       headless: true,
-      name: 'chromium',
+      instances: [{ browser: 'chromium' }],
     },
     coverage: {
       provider: 'v8',
       include: ['src/**/*'],
       exclude: ['src/**/*.stories.{js,ts}'],
-      reporter: ['text', 'html'],
+      reporter: ['text', 'html', 'json'],
     },
   },
 });

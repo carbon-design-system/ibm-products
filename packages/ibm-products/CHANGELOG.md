@@ -3,6 +3,97 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.65.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.65.0-rc.0...@carbon/ibm-products@2.65.0) (2025-04-30)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
+# [2.65.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.62.0-rc.0...@carbon/ibm-products@2.65.0-rc.0) (2025-04-21)
+
+
+### Bug Fixes
+
+* **checklist:** use appropriate heading levels ([#7286](https://github.com/carbon-design-system/ibm-products/issues/7286)) ([873454c](https://github.com/carbon-design-system/ibm-products/commit/873454cb9d5e8a8c876406dc3895687b1d7d4bdd)), closes [#7168](https://github.com/carbon-design-system/ibm-products/issues/7168)
+* **coachmark:** media/button padding and navLinkLabel as tooltip ([#7213](https://github.com/carbon-design-system/ibm-products/issues/7213)) ([9b2346c](https://github.com/carbon-design-system/ibm-products/commit/9b2346c9ffc385af60353a7d7285a111b1184617))
+* **ConditionBuilder:** allow user to pass custom dateformat ([#7135](https://github.com/carbon-design-system/ibm-products/issues/7135)) ([5c1fe20](https://github.com/carbon-design-system/ibm-products/commit/5c1fe201ce38c268022b0464533e7eceb45bbc05))
+* **Conditionbuilder:** popovers do not close when clicked somewhere else when inside a tearsheet ([#7150](https://github.com/carbon-design-system/ibm-products/issues/7150)) ([49c4826](https://github.com/carbon-design-system/ibm-products/commit/49c4826758b08fdae32373b442120dd75b631d4e))
+* correct tooltip for custom operator ([#7113](https://github.com/carbon-design-system/ibm-products/issues/7113)) ([cca6e1f](https://github.com/carbon-design-system/ibm-products/commit/cca6e1f27d23ea987ee085d29976084e82e2637a))
+* **CreateFullPage:** fix build issue in next js app ([#7244](https://github.com/carbon-design-system/ibm-products/issues/7244)) ([a032766](https://github.com/carbon-design-system/ibm-products/commit/a032766afa265b9143450cdf371b19bccfed7146))
+* **CreateFullPage:** use correct heading levels ([#7166](https://github.com/carbon-design-system/ibm-products/issues/7166)) ([503dbb5](https://github.com/carbon-design-system/ibm-products/commit/503dbb5fc4865d703aaa1ef94ce155e78b6957d7)), closes [#6816](https://github.com/carbon-design-system/ibm-products/issues/6816) [#6815](https://github.com/carbon-design-system/ibm-products/issues/6815)
+* **custom typings:** include section ([#7161](https://github.com/carbon-design-system/ibm-products/issues/7161)) ([892dc11](https://github.com/carbon-design-system/ibm-products/commit/892dc1146db2bac23fa69d03b12df5b2fd7e4382)), closes [#4336](https://github.com/carbon-design-system/ibm-products/issues/4336) [#4225](https://github.com/carbon-design-system/ibm-products/issues/4225)
+* **customizeColumns:** update column ids for accessibility ([#7221](https://github.com/carbon-design-system/ibm-products/issues/7221)) ([ed0d5df](https://github.com/carbon-design-system/ibm-products/commit/ed0d5df8315d84f662363ba5c7357d5bd5888a8b))
+* **notificationspanel:** fix hardcoded aria-label ([#7312](https://github.com/carbon-design-system/ibm-products/issues/7312)) ([29c2865](https://github.com/carbon-design-system/ibm-products/commit/29c286567d350a0edec78a481a81aa4996ff5d3f)), closes [#7287](https://github.com/carbon-design-system/ibm-products/issues/7287) [#7287](https://github.com/carbon-design-system/ibm-products/issues/7287)
+* **notificationspanel:** use appropriate heading levels ([#7288](https://github.com/carbon-design-system/ibm-products/issues/7288)) ([9517ef7](https://github.com/carbon-design-system/ibm-products/commit/9517ef7dfc1458513aa77ac32983a05091cc0cc6)), closes [#7173](https://github.com/carbon-design-system/ibm-products/issues/7173)
+* **OptionsTile:** use correct heading levels ([#7163](https://github.com/carbon-design-system/ibm-products/issues/7163)) ([9645dc8](https://github.com/carbon-design-system/ibm-products/commit/9645dc85fc0a6581220691eaed9a5030941693a4))
+* **pageheader:** add bottom border when background is present ([#7254](https://github.com/carbon-design-system/ibm-products/issues/7254)) ([932bfc8](https://github.com/carbon-design-system/ibm-products/commit/932bfc81a8de09b8e0dd84a591e6a03419dcdcf2))
+* **productive card:** onkeydown  and onclick type missing ([#7187](https://github.com/carbon-design-system/ibm-products/issues/7187)) ([dc817f8](https://github.com/carbon-design-system/ibm-products/commit/dc817f819ea36c543f9fedabd6a97d560316cd0f))
+* section and heading ([#7207](https://github.com/carbon-design-system/ibm-products/issues/7207)) ([45e26a8](https://github.com/carbon-design-system/ibm-products/commit/45e26a8017201392320679ded69a9faa9cff25ad))
+* set minWidth to 50 instead of 0, prioritize column.minWidth ([#7181](https://github.com/carbon-design-system/ibm-products/issues/7181)) ([72f7e30](https://github.com/carbon-design-system/ibm-products/commit/72f7e3011928a57f5f5d722c5e495f188290caac))
+* **sidepanel:** aria-label for back button ([#7267](https://github.com/carbon-design-system/ibm-products/issues/7267)) ([e7a7975](https://github.com/carbon-design-system/ibm-products/commit/e7a79758087c146aae33e043fa5a5b15c6971e8b))
+* **SidePanel:** support aria-label for if title is not provided ([#7245](https://github.com/carbon-design-system/ibm-products/issues/7245)) ([528bc9e](https://github.com/carbon-design-system/ibm-products/commit/528bc9ec4ad5d5a0db1317f5421520f10987a178))
+* **Storybook:** update documentation links ([#6989](https://github.com/carbon-design-system/ibm-products/issues/6989)) ([50f65d9](https://github.com/carbon-design-system/ibm-products/commit/50f65d9d610940ac1bcc253fa7ec94504259ffc6))
+* **tearsheet:** fix heading levels of content ([#7165](https://github.com/carbon-design-system/ibm-products/issues/7165)) ([246e6b2](https://github.com/carbon-design-system/ibm-products/commit/246e6b2d27a3c81728dbbcdef8f75a8e3778aead)), closes [#7164](https://github.com/carbon-design-system/ibm-products/issues/7164)
+* **Tearsheet:** include children in props to remove ts error ([#7246](https://github.com/carbon-design-system/ibm-products/issues/7246)) ([58ea753](https://github.com/carbon-design-system/ibm-products/commit/58ea753d273955a03c06d56587daf8130d80c069))
+* **useFocus:** resolve focus missing in state change ([#7063](https://github.com/carbon-design-system/ibm-products/issues/7063)) ([6a17a20](https://github.com/carbon-design-system/ibm-products/commit/6a17a20721daa5124ea2df6d408b231413fec007))
+
+
+### Features
+
+* add support for translateWithId to pass in to progress step ([#7148](https://github.com/carbon-design-system/ibm-products/issues/7148)) ([c947641](https://github.com/carbon-design-system/ibm-products/commit/c947641fd80a71d83de18b79c50c8f6c2761f2c0))
+* composable interstitial screen implementation ([#7229](https://github.com/carbon-design-system/ibm-products/issues/7229)) ([5f350de](https://github.com/carbon-design-system/ibm-products/commit/5f350de805b02cd6e38270ee5261702af47524b5))
+* **create-full-page:** null as a viable step ([#7299](https://github.com/carbon-design-system/ibm-products/issues/7299)) ([16b5d32](https://github.com/carbon-design-system/ibm-products/commit/16b5d3248a28aeebf2e5297ba1ade8d679c71f63))
+* **stories:** open in stackblitz ([#7147](https://github.com/carbon-design-system/ibm-products/issues/7147)) ([879560e](https://github.com/carbon-design-system/ibm-products/commit/879560e5ae4391e2d2ebb235d7e7931bdd9d2c2d))
+
+
+
+
+
+# [2.64.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.64.0-rc.0...@carbon/ibm-products@2.64.0) (2025-04-17)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
+# [2.64.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.62.0-rc.0...@carbon/ibm-products@2.64.0-rc.0) (2025-04-07)
+
+
+### Bug Fixes
+
+* **ConditionBuilder:** allow user to pass custom dateformat ([#7135](https://github.com/carbon-design-system/ibm-products/issues/7135)) ([5c1fe20](https://github.com/carbon-design-system/ibm-products/commit/5c1fe201ce38c268022b0464533e7eceb45bbc05))
+* **Conditionbuilder:** popovers do not close when clicked somewhere else when inside a tearsheet ([#7150](https://github.com/carbon-design-system/ibm-products/issues/7150)) ([49c4826](https://github.com/carbon-design-system/ibm-products/commit/49c4826758b08fdae32373b442120dd75b631d4e))
+* correct tooltip for custom operator ([#7113](https://github.com/carbon-design-system/ibm-products/issues/7113)) ([cca6e1f](https://github.com/carbon-design-system/ibm-products/commit/cca6e1f27d23ea987ee085d29976084e82e2637a))
+* **CreateFullPage:** use correct heading levels ([#7166](https://github.com/carbon-design-system/ibm-products/issues/7166)) ([503dbb5](https://github.com/carbon-design-system/ibm-products/commit/503dbb5fc4865d703aaa1ef94ce155e78b6957d7)), closes [#6816](https://github.com/carbon-design-system/ibm-products/issues/6816) [#6815](https://github.com/carbon-design-system/ibm-products/issues/6815)
+* **custom typings:** include section ([#7161](https://github.com/carbon-design-system/ibm-products/issues/7161)) ([892dc11](https://github.com/carbon-design-system/ibm-products/commit/892dc1146db2bac23fa69d03b12df5b2fd7e4382)), closes [#4336](https://github.com/carbon-design-system/ibm-products/issues/4336) [#4225](https://github.com/carbon-design-system/ibm-products/issues/4225)
+* **OptionsTile:** use correct heading levels ([#7163](https://github.com/carbon-design-system/ibm-products/issues/7163)) ([9645dc8](https://github.com/carbon-design-system/ibm-products/commit/9645dc85fc0a6581220691eaed9a5030941693a4))
+* **productive card:** onkeydown  and onclick type missing ([#7187](https://github.com/carbon-design-system/ibm-products/issues/7187)) ([dc817f8](https://github.com/carbon-design-system/ibm-products/commit/dc817f819ea36c543f9fedabd6a97d560316cd0f))
+* set minWidth to 50 instead of 0, prioritize column.minWidth ([#7181](https://github.com/carbon-design-system/ibm-products/issues/7181)) ([72f7e30](https://github.com/carbon-design-system/ibm-products/commit/72f7e3011928a57f5f5d722c5e495f188290caac))
+* **Storybook:** update documentation links ([#6989](https://github.com/carbon-design-system/ibm-products/issues/6989)) ([50f65d9](https://github.com/carbon-design-system/ibm-products/commit/50f65d9d610940ac1bcc253fa7ec94504259ffc6))
+* **tearsheet:** fix heading levels of content ([#7165](https://github.com/carbon-design-system/ibm-products/issues/7165)) ([246e6b2](https://github.com/carbon-design-system/ibm-products/commit/246e6b2d27a3c81728dbbcdef8f75a8e3778aead)), closes [#7164](https://github.com/carbon-design-system/ibm-products/issues/7164)
+* **useFocus:** resolve focus missing in state change ([#7063](https://github.com/carbon-design-system/ibm-products/issues/7063)) ([6a17a20](https://github.com/carbon-design-system/ibm-products/commit/6a17a20721daa5124ea2df6d408b231413fec007))
+
+
+### Features
+
+* add support for translateWithId to pass in to progress step ([#7148](https://github.com/carbon-design-system/ibm-products/issues/7148)) ([c947641](https://github.com/carbon-design-system/ibm-products/commit/c947641fd80a71d83de18b79c50c8f6c2761f2c0))
+* **stories:** open in stackblitz ([#7147](https://github.com/carbon-design-system/ibm-products/issues/7147)) ([879560e](https://github.com/carbon-design-system/ibm-products/commit/879560e5ae4391e2d2ebb235d7e7931bdd9d2c2d))
+
+
+
+
+
+# [2.63.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.63.0-rc.0...@carbon/ibm-products@2.63.0) (2025-04-02)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
 # [2.63.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.62.0-rc.0...@carbon/ibm-products@2.63.0-rc.0) (2025-03-24)
 
 

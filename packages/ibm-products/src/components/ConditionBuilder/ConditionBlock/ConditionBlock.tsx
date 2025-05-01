@@ -188,10 +188,8 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     return isLastCondition(conditionIndex, conditions);
   };
   const getOperators = () => {
-    // @ts-ignore
     if ((config as ConfigType)?.operators) {
-      // @ts-ignore
-      return (config as ConfigType).operators;
+      return (config as ConfigType)?.operators;
     }
     return operatorConfig.filter(
       (operator) => operator.type.indexOf(type) != -1 || operator.type == 'all'
@@ -367,6 +365,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           showConditionPreviewHandler={showConditionPreviewHandler}
           hideConditionPreviewHandler={hideConditionPreviewHandler}
           className={`${blockClass}__gap ${blockClass}__gap-left`}
+          group={group}
         />
       )}
     </div>

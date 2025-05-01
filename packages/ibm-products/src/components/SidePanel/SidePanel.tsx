@@ -769,16 +769,16 @@ const SidePanelBase = React.forwardRef(
         >
           {/* back button */}
           {currentStep > 0 && (
-            <Button
+            <IconButton
               kind="ghost"
               size={closeSize}
-              disabled={false}
-              renderIcon={(props) => <ArrowLeft size={20} {...props} />}
-              iconDescription={navigationBackIconDescription}
+              align="bottom"
+              label={navigationBackIconDescription}
               className={`${blockClass}__navigation-back-button`}
               onClick={onNavigationBack}
-              aria-label={navigationBackIconDescription}
-            />
+            >
+              <ArrowLeft />
+            </IconButton>
           )}
           {/* label */}
           {title && title.length && labelText && labelText.length && (
@@ -796,8 +796,6 @@ const SidePanelBase = React.forwardRef(
               label={closeIconDescription}
               onClick={onRequestClose}
               onKeyDown={slideIn ? undefined : handleEscapeKey}
-              title={closeIconDescription}
-              aria-label={closeIconDescription}
               ref={closeRef}
               align="left"
             >

@@ -114,6 +114,27 @@ const ResizeHeader = ({
   );
 };
 
+const getAriaSortValue = (col, datagridState) => {
+  const {
+    ascendingSortableLabelText,
+    descendingSortableLabelText,
+    defaultSortableLabelText,
+  } = datagridState;
+  if (!col) {
+    return;
+  }
+  const { isSorted, isSortedDesc } = col;
+  if (!isSorted) {
+    return defaultSortableLabelText;
+  }
+  if (isSorted && !isSortedDesc) {
+    return ascendingSortableLabelText;
+  }
+  if (isSorted && isSortedDesc) {
+    return descendingSortableLabelText;
+  }
+};
+
 const HeaderRow = (
   datagridState: DataGridState,
   headRef: MutableRefObject<HTMLDivElement>,
@@ -256,6 +277,9 @@ const HeaderRow = (
               )}
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}
+              aria-sort={
+                header.canSort ? getAriaSortValue(header, datagridState) : ''
+              }
               {...getAccessibilityProps(header)}
             >
               {header.render('Header')}

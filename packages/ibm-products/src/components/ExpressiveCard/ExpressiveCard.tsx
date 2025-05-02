@@ -13,19 +13,11 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
-
-type ActionIcon = {
-  id?: string;
-  icon?: () => void | object;
-  onKeydown?: () => void;
-  onClick?: () => void;
-  iconDescription?: string;
-  href?: string;
-};
+import { ActionIcon } from '../Card/Card';
 
 export interface ExpressiveCardProps extends PropsWithChildren {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
+   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.href for href functionality. If you are setting link object, href is a required property. link object supports all anchor element properties. Precedence: link.href > href. If link.href or href is set => anchor element, else button.
    */
   actionIcons?: ActionIcon[];
   /**
@@ -139,7 +131,7 @@ ExpressiveCard = pkg.checkComponentEnabled(ExpressiveCard, componentName);
 
 ExpressiveCard.propTypes = {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
+   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.href for href functionality. If you are setting link object, href is a required property. link object supports all anchor element properties. Precedence: link.href > href. If link.href or href is set => anchor element, else button.
    */
   /**@ts-ignore */
   actionIcons: PropTypes.arrayOf(
@@ -149,7 +141,13 @@ ExpressiveCard.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      /**
+       * @deprecated please use the `link.href` instead
+       */
       href: PropTypes.string,
+      link: PropTypes.shape({
+        href: PropTypes.string.isRequired,
+      }),
     })
   ),
   /**

@@ -1,76 +1,23 @@
 {
-  "name": "delete-pattern",
-  "description": "Webcomponent delete-pattern following open-wc recommendations",
-  "license": "MIT",
-  "author": "delete-pattern",
-  "version": "0.0.0",
+  "name": "ibm-products-web-components-delete-pattern-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the Web Components from Carbon for IBM Products.",
+  "license": "Apache-2",
+  "main": "index.html",
   "type": "module",
-  "main": "dist/src/index.js",
-  "module": "dist/src/index.js",
-  "exports": {
-    ".": "./dist/src/index.js",
-    "./delete-pattern.js": "./dist/src/delete-pattern.js"
-  },
   "scripts": {
-    "analyze": "cem analyze --litelement",
-    "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"web-dev-server\"",
-    "build": "tsc && npm run analyze -- --exclude dist",
-    "prepublish": "tsc && npm run analyze -- --exclude dist",
-    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
-    "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
-    "prepare": "husky"
+    "build": "vite build",
+    "clean": "rimraf node_modules dist .cache",
+    "dev": "vite"
   },
   "dependencies": {
-    "lit": "^3.1.4"
+    "@carbon/web-components": "^2.28.0",
+    "lit": "^3.1.4",
+    "sass": "^1.87.0"
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "^0.10.3",
-    "@open-wc/eslint-config": "^12.0.3",
-    "@typescript-eslint/eslint-plugin": "^7.16.0",
-    "@typescript-eslint/parser": "^7.16.0",
-    "@web/dev-server": "^0.4.6",
-    "concurrently": "^8.2.2",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
-    "prettier": "^3.3.2",
-    "tslib": "^2.6.3",
-    "typescript": "^5.5.3"
-  },
-  "customElements": "custom-elements.json",
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "extends": [
-      "@open-wc",
-      "prettier"
-    ],
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "rules": {
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "error"
-      ],
-      "import/no-unresolved": "off",
-      "import/extensions": [
-        "error",
-        "always",
-        {
-          "ignorePackages": true
-        }
-      ]
-    }
-  },
-  "prettier": {
-    "singleQuote": true,
-    "arrowParens": "avoid"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "rimraf": "^3.0.2",
+    "vite": "^6.2.3"
   }
 }

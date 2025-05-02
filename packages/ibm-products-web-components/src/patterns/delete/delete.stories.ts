@@ -8,15 +8,14 @@
  */
 
 import { html } from 'lit';
+import '../../../examples/delete-pattern/src/index';
 
 export default {
   title: 'Patterns/Delete',
 };
 
 export const highImpactDeletion = () => html`
-  <!-- <iframe
-    title="Deletion Pattern"
-    src="/examples/delete-pattern/index.html"
-  ></iframe> -->
-  <div>Render delete pattern here</div>
+  <delete-pattern resourceName="Sample"
+    >Render delete pattern here</delete-pattern
+  >
 `;

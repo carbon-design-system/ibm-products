@@ -7,7 +7,7 @@
 
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
 import { describe, expect, it, vi } from 'vitest';
-import { fixture, html, expect as owcExpect } from '@open-wc/testing';
+import { fixture, html } from '@open-wc/testing';
 import { render, TemplateResult } from 'lit';
 import './index';
 import CDSAboutModal, { blockClass } from './about-modal';

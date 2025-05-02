@@ -10,7 +10,8 @@ import { describe, expect, it, vi } from 'vitest';
 import { fixture, html, expect as owcExpect } from '@open-wc/testing';
 import { render, TemplateResult } from 'lit';
 import './index';
-import CDSAboutModal from './about-modal';
+import CDSAboutModal, { blockClass } from './about-modal';
+import { carbonPrefix } from '../../globals/settings';
 
 const logo = html`
   <img
@@ -85,8 +86,9 @@ describe('c4p-about-modal', () => {
   it('renders a title', async () => {
     const element: CDSAboutModal = await fixture(template());
     expect(element.title).toBe(defaultProps.title);
-    const headingElement =
-      element.shadowRoot?.querySelector('cds-modal-heading');
+    const headingElement = element.shadowRoot?.querySelector(
+      `${carbonPrefix}-modal-heading`
+    );
     expect(headingElement).toBeTruthy();
     expect(headingElement?.shadowRoot).toBeTruthy();
     const slot = headingElement?.shadowRoot?.querySelector('slot');
@@ -101,14 +103,16 @@ describe('c4p-about-modal', () => {
   it('renders version', async () => {
     const element: CDSAboutModal = await fixture(template());
     expect(element.version).toBe(defaultProps.version);
-    const modalBody = element.shadowRoot?.querySelector('cds-modal-body');
+    const modalBody = element.shadowRoot?.querySelector(
+      `${carbonPrefix}-modal-body`
+    );
     expect(modalBody).toBeTruthy();
     expect(modalBody?.shadowRoot).toBeTruthy();
     const slot = modalBody?.shadowRoot?.querySelector('slot');
     expect(slot).toBeTruthy();
     const assignedElements = slot?.assignedElements({ flatten: true }) ?? [];
     const modalVersion = assignedElements
-      .map((el) => el.querySelector('.c4p--about-modal__version'))
+      .map((el) => el.querySelector(`.${blockClass}__version`))
       .find((el) => el !== null);
     expect(modalVersion).toBeTruthy();
     expect(modalVersion?.textContent?.trim()).toBe(defaultProps.version);
@@ -116,14 +120,16 @@ describe('c4p-about-modal', () => {
   it('renders copyright text', async () => {
     const element: CDSAboutModal = await fixture(template());
     expect(element.copyrightText).toBe(defaultProps.copyrightText);
-    const modalBody = element.shadowRoot?.querySelector('cds-modal-body');
+    const modalBody = element.shadowRoot?.querySelector(
+      `${carbonPrefix}-modal-body`
+    );
     expect(modalBody).toBeTruthy();
     expect(modalBody?.shadowRoot).toBeTruthy();
     const slot = modalBody?.shadowRoot?.querySelector('slot');
     expect(slot).toBeTruthy();
     const assignedElements = slot?.assignedElements({ flatten: true }) ?? [];
     const modalCopyRight = assignedElements
-      .map((el) => el.querySelector('.c4p--about-modal__copyright-text'))
+      .map((el) => el.querySelector(`.${blockClass}__copyright-text`))
       .find((el) => el !== null);
     expect(modalCopyRight).toBeTruthy();
     expect(modalCopyRight?.textContent?.trim()).toBe(
@@ -132,7 +138,9 @@ describe('c4p-about-modal', () => {
   });
   it('renders links', async () => {
     const element: CDSAboutModal = await fixture(template());
-    const modalBody = element.shadowRoot?.querySelector('cds-modal-body');
+    const modalBody = element.shadowRoot?.querySelector(
+      `${carbonPrefix}-modal-body`
+    );
     expect(modalBody).toBeTruthy();
     expect(modalBody?.shadowRoot).toBeTruthy();
     const slot = modalBody?.shadowRoot?.querySelector('slot');
@@ -140,24 +148,28 @@ describe('c4p-about-modal', () => {
     const assignedElements = slot?.assignedElements({ flatten: true }) ?? [];
     if (element.links.length > 0) {
       const modalLinkContainer = assignedElements
-        .map((el) => el.querySelector('.c4p--about-modal__links-container'))
+        .map((el) => el.querySelector(`.${blockClass}__links-container`))
         .find((el) => el !== null);
       expect(modalLinkContainer).toBeTruthy();
-      const links = modalLinkContainer?.querySelectorAll('cds-link');
+      const links = modalLinkContainer?.querySelectorAll(
+        `${carbonPrefix}-link`
+      );
       expect(links?.length == element?.links.length).toBeTruthy();
     }
   });
   it('renders additional info', async () => {
     const element: CDSAboutModal = await fixture(template());
     if (element.additionalInfo) {
-      const modalFooter = element.shadowRoot?.querySelector('cds-modal-footer');
+      const modalFooter = element.shadowRoot?.querySelector(
+        `${carbonPrefix}-modal-footer`
+      );
       expect(modalFooter).toBeTruthy();
     }
   });
   it('closes modal on clicking close button', async () => {
     const element: CDSAboutModal = await fixture(template());
     const modalClose = element.shadowRoot?.querySelector(
-      'cds-modal-close-button'
+      `${carbonPrefix}-modal-close-button`
     );
     expect(modalClose).toBeTruthy();
     expect(element.open).toBe(true);
@@ -167,7 +179,7 @@ describe('c4p-about-modal', () => {
   it('Scrollable body with overflowing content', async () => {
     const element: CDSAboutModal = await fixture(template());
     const container = element.shadowRoot?.querySelector(
-      'cds-modal-body'
+      `${carbonPrefix}-modal-body`
     ) as HTMLElement;
     // Simulate overflow: content fits
     Object.defineProperty(container, 'scrollHeight', {
@@ -188,7 +200,7 @@ describe('c4p-about-modal', () => {
   it('No scrollable body if content fits', async () => {
     const element: CDSAboutModal = await fixture(template());
     const container = element.shadowRoot?.querySelector(
-      'cds-modal-body'
+      `${carbonPrefix}-modal-body`
     ) as HTMLElement;
     // Simulate non-overflow: content fits
     Object.defineProperty(container, 'scrollHeight', {

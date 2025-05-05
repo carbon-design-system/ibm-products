@@ -3,7 +3,8 @@
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "experimentalDecorators": true,
+    "experimentalDecorators": true, 
+    "emitDecoratorMetadata": true, 
     "useDefineForClassFields": false,
     "lib": ["DOM", "ES2022"]
   }

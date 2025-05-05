@@ -16,3 +16,12 @@
   background-color: var(--cds-background);
   color: var(--cds-text-primary);
 }
+
+section {
+  margin: 20px;
+  border: 1px dotted #000000;
+  padding: 20px;
+  p {
+    margin: 10px 0 10px;
+  }
+}

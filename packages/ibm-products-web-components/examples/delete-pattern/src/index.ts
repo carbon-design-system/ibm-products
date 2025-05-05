@@ -7,102 +7,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, css, LitElement } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.action-btn').forEach((btn) => {
+    btn.addEventListener('click', handleButtonClick);
+  });
 
-import '@carbon/web-components/es/components/modal/index.js';
-import '@carbon/web-components/es/components/form/form-item.js';
-import '@carbon/web-components/es/components/text-input/text-input.js';
-import '@carbon/web-components/es/components/notification/toast-notification.js';
+  function handleButtonClick(event) {
+    const actionType = event.target.dataset.actionType;
+    const actionSeverity = event.target.dataset.actionSev;
 
-@customElement('delete-pattern')
-export class DeletePattern extends LitElement {
-  static styles = css`
-    :host cds-modal-body {
-      padding-bottom: 0;
+    const existing = document.querySelector('delete-pattern');
+    if (existing) {
+      existing.remove(); // Remove existing element
     }
-    .notification {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-    }
-  `;
 
-  @property()
-  resourceName?: string;
+    const element = document.createElement('delete-pattern');
 
-  @state()
-  private _isOpen: boolean = true;
+    element.setAttribute('resourceName', 'Sample');
+    element.setAttribute('type', actionType);
+    element.setAttribute('severity', actionSeverity);
 
-  @state()
-  private _textInput: string = '';
-
-  @state()
-  private _enableDelete: boolean = false;
-
-  @state()
-  private _showNotification: boolean = false;
-
-  private _close() {
-    this._isOpen = false;
+    document.body.appendChild(element);
   }
-
-  private _onInputChange(e: Event) {
-    this._textInput = (e.target as HTMLInputElement).value;
-    this._enableDelete = this.resourceName === this._textInput;
-  }
-
-  private _onDelete(e: Event) {
-    this._isOpen = false;
-    this._showNotification = true;
-  }
-
-  private onNotificationClose() {
-    this._showNotification = false;
-    this._isOpen = true;
-  }
-
-  render() {
-    return html`
-      <cds-modal size="sm" ?open="${this._isOpen}" prevent-close >
-        <cds-modal-header>
-          <cds-modal-close-button  @click="${this._close}" ></cds-modal-close-button>
-          <cds-modal-label>Delete ${this.resourceName} project</cds-modal-label>
-          <cds-modal-heading>Confirm delete</cds-modal-heading>
-        </cds-modal-header>
-        <cds-modal-body>
-          <cds-modal-body-content description>
-            Deleting '${this.resourceName}' project will permanently remove the project and all related configurations from the system. This action cannot be undone.
-          </cds-modal-body-content>
-          <cds-form-item>
-            <cds-text-input placeholder="Name of resource" label="Type ${this.resourceName} to confirm" value="${this._textInput}" @input="${this._onInputChange}" autocomplete="off">
-            </cds-text-input>
-          </cds-form-item>
-        </cds-modal-body>
-        <cds-modal-footer>
-          <cds-modal-footer-button kind="secondary"
-            >Cancel</cds-modal-footer-button
-          >
-          <cds-modal-footer-button ?disabled="${!this._enableDelete}" kind="danger"  @click="${this._onDelete}">Delete</cds-modal-footer-button>
-        </cds-modal-footer>
-      </cds-modal>
-
-      ${
-        this._showNotification
-          ? html`<cds-toast-notification
-              class="notification"
-              kind="success"
-              title="Successfully deleted project"
-              subtitle="${this.resourceName} project has been removed"
-              caption="10:10:00 AM"
-              hide-close-button="true"
-              low-contrast="true"
-              timeout="3000"
-              @cds-notification-closed="${this.onNotificationClose}"
-            ></cds-toast-notification>`
-          : null
-      }
-      </cds-toast-notification>
-    `;
-  }
-}
+});

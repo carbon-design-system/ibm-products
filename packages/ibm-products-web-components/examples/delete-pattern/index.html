@@ -12,9 +12,81 @@ LICENSE file in the root directory of this source tree.
   <title>Delete pattern example</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="src/styles.scss" />
+  <script type="module" src="src/delete-pattern.ts"></script>
   <script type="module" src="src/index.ts"></script>
 </head>
 <body>
-  <delete-pattern resourceName="Sample">  </delete-pattern>
+  <section>
+    <h4>Delete pattern</h4>
+    <p> High impact delete:
+    </p> 
+    <cds-button
+      data-action-type="delete"
+      data-action-sev="high"
+      class="action-btn"
+      id="high-impact-del-btn"
+      type="button"
+      kind="danger"
+      size="md"
+      >
+      Delete Sample project
+    </cds-button>
+    <p> Medium impact delete:</p> 
+    <cds-button
+    data-action-type="delete"
+    data-action-sev="medium"
+      class="action-btn"
+      id="medium-impact-del-btn"
+      type="button"
+      kind="danger-tertiary"
+      size="md"
+      >
+      Delete Sample project
+    </cds-button>
+    <p> Low impact delete:</p> 
+    <cds-button
+      data-action-type="delete"
+      data-action-sev="low"
+      class="action-btn"
+      id="low-impact-del-btn"
+      type="button"
+      kind="danger"
+      size="md"
+      >
+      Delete Sample project
+    </cds-button>
+  </section>
+  
+  <section>
+    <h4>Remove pattern</h4>
+    <p> Medium impact remove:</p> 
+   <cds-button
+     data-action-type="remove"
+     data-action-sev="medium"
+     class="action-btn"
+     id="medium-impact-remove-btn"
+     type="button"
+     kind="danger-tertiary"
+     size="md"
+     >
+     Remove Sample project
+   </cds-button>
+    <p> Low impact remove:</p> 
+   <cds-button
+     data-action-type="remove"
+     data-action-sev="low"
+     class="action-btn"
+     id="low-impact-remove-btn"
+     type="button"
+     kind="danger"
+     size="md"
+     >
+     Remove Sample project
+   </cds-button>
+  </section>
+
+
+ 
+  <!-- <delete-pattern resourceName="Sample"> </delete-pattern> -->
 </body>
 </html>

@@ -15,18 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleButtonClick(event) {
     const actionType = event.target.dataset.actionType;
     const actionSeverity = event.target.dataset.actionSev;
-
-    const existing = document.querySelector('delete-pattern');
-    if (existing) {
-      existing.remove(); // Remove existing element
+    let element = document.querySelector('delete-pattern');
+    if (actionSeverity !== 'low') {
+      element?.setAttribute('isOpen', 'true');
     }
-
-    const element = document.createElement('delete-pattern');
-
-    element.setAttribute('resourceName', 'Sample');
-    element.setAttribute('type', actionType);
-    element.setAttribute('severity', actionSeverity);
-
-    document.body.appendChild(element);
+    element?.setAttribute('type', actionType);
+    element?.setAttribute('severity', actionSeverity);
   }
 });

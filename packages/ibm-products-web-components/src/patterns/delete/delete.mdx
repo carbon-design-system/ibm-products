@@ -7,9 +7,9 @@ import * as deleteStories from './delete.stories';
 
 <Meta of={deleteStories} />
 
-# Deletion pattern
+# Delete and remove pattern
 
-“Deletion” is an action that removes information from one location and is destructive.
+“Removing” is an action that moves information from one location to another. Removal can be both destructive and non-destructive. “Deletion” is the most common type of removal and is destructive
 
 > 💡 Check our
 > [Stackblitz](https://stackblitz.com/github/szinta/ibm-products/tree/deletePattern/packages/ibm-products-web-components/examples/delete-pattern)
@@ -23,12 +23,49 @@ To build this pattern, we recommend including the following components:
 - [cds-modal](https://web-components.carbondesignsystem.com/?path=/docs/components-modal)
 - [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input--overview)
 - [cds-toast-notification](https://web-components.carbondesignsystem.com/?path=/docs/components-notifications-toast--overview)
-
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview)
 
 ## Example
 
 ### High impact deletion
 
+A high-impact deletion cannot be reversed. The action would result in a significant loss for a user if done accidentally.
+
+When deleting is high-impact, a confirmation dialog should be presented to the user which displays:
+
+- The name of the resource
+- Consequences of the deletion
+- This action cannot be undone.
+- An editable text field for the name of the resource to be entered
+
+For high-impact scenarios, a user should confirm the action by manually entering the name of the resource. The ‘Delete’ button is enabled when the text entered perfectly matches the resource name.
+
 <Canvas layout="fullscreen" >
   <Story of={deleteStories.highImpactDeletion} />
 </Canvas>
+
+### Medium impact deletion or removal
+
+A medium-impact deletion is one that cannot be reversed, but would not be catastrophic if done accidentally. When deleting is medium-impact, a confirmation dialog should be presented to the user which displays:
+
+- The name of the resource
+- Consequences of the deletion
+- The action cannot be undone.
+ 
+<Canvas layout="fullscreen" >
+  <Story of={deleteStories.mediumImpactDeletion} />
+</Canvas>
+
+### Low impact deletion
+
+Requiring the user to confirm deletion is generally recommended. However, in low impact situations, or when an ‘undo’ option is available, user confirmation may not be required.
+
+<Canvas layout="fullscreen" >
+  <Story of={deleteStories.lowImpactDeletion} />
+</Canvas>
+
+# Remove pattern
+
+The medium and low impact 'Remove' patterns are similar to their corresponding 'Delete' patterns, with the only difference being the use of 'Remove' instead of 'Delete' in the text.
+
+'Remove' fits better when the action is reversible or not truly destructive. 

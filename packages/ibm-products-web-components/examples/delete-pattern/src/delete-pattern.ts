@@ -38,12 +38,13 @@ export class DeletePattern extends LitElement {
 
   @property()
   resourceName?: string;
+  ß;
 
   @property()
   severity?: string;
 
-  @state()
-  private _isOpen: boolean = true;
+  @property({ reflect: true })
+  private isOpen: boolean = false;
 
   @state()
   private _textInput: string = '';
@@ -60,8 +61,10 @@ export class DeletePattern extends LitElement {
   updated(changedProps: PropertyValues<this>) {
     if (changedProps.has('severity')) {
       this._enableDelete = this.severity !== 'high';
-      this._isOpen = this.severity !== 'low';
-      this._showNotification = this.severity === 'low';
+      if (this.severity === 'low') {
+        this.isOpen = false;
+        this._showNotification = true;
+      }
     }
     if (changedProps.has('type')) {
       this._label = this.type === 'delete' ? 'delete' : 'remove';
@@ -69,7 +72,8 @@ export class DeletePattern extends LitElement {
   }
 
   private _close() {
-    this._isOpen = false;
+    this.isOpen = false;
+    this._textInput = '';
   }
 
   private _onInputChange(e: Event) {
@@ -78,7 +82,7 @@ export class DeletePattern extends LitElement {
   }
 
   private _onDelete(e: Event) {
-    this._isOpen = false;
+    this._close();
     this._showNotification = true;
   }
 
@@ -88,7 +92,7 @@ export class DeletePattern extends LitElement {
 
   render() {
     return html`
-      <cds-modal size="sm" ?open="${this._isOpen}" prevent-close >
+      <cds-modal size="sm" ?open="${this.isOpen}" prevent-close >
         <cds-modal-header>
           <cds-modal-close-button  @click="${this._close}" ></cds-modal-close-button>
           <cds-modal-label class="capitalize">${this._label} ${this.resourceName} project</cds-modal-label>
@@ -115,7 +119,7 @@ export class DeletePattern extends LitElement {
           }
         </cds-modal-body>
         <cds-modal-footer>
-          <cds-modal-footer-button kind="secondary"
+          <cds-modal-footer-button kind="secondary" @click="${this._close}"
             >Cancel</cds-modal-footer-button
           >
           <cds-modal-footer-button ?disabled="${!this._enableDelete}" kind="danger"  @click="${this._onDelete}"><span class="capitalize"> ${this._label}</span></cds-modal-footer-button>

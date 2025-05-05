@@ -226,15 +226,34 @@ WithMedia.args = {
   ...defaultProps,
 };
 
-export const WithActionIconHref = Template.bind({});
-WithActionIconHref.args = {
+export const WithActionIconButton = Template.bind({});
+WithActionIconButton.args = {
+  ...defaultProps,
+  actionIcons: [
+    {
+      id: '1',
+      icon: (props) => <ArrowRight size={18} {...props} />,
+      iconDescription: 'Visit carbon official site',
+      onClick: action('onClick'),
+    },
+  ],
+  primaryButtonText: '',
+  mediaRatio: null,
+};
+
+export const WithActionIconLink = Template.bind({});
+WithActionIconLink.args = {
   ...defaultProps,
   actionIcons: [
     {
       id: '1',
       icon: (props) => <ArrowRight size={24} {...props} />,
-      href: '#',
-      iconDescription: 'Next',
+      iconDescription: 'Visit carbon official site',
+      link: {
+        href: 'https://carbondesignsystem.com/',
+        target: '_blank',
+        rel: 'noreferrer noopener',
+      },
     },
   ],
   primaryButtonText: '',

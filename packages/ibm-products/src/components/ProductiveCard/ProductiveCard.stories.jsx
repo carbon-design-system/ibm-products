@@ -7,7 +7,7 @@
 
 import React from 'react';
 import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
-import { TrashCan, Edit, Information } from '@carbon/react/icons';
+import { TrashCan, Edit, Information, ArrowRight } from '@carbon/react/icons';
 import {
   Grid,
   Column,
@@ -268,4 +268,21 @@ WithActionGhostButton.args = {
   primaryButtonText: 'Read more',
   primaryButtonIcon: (props) => <TrashCan size={16} {...props} />,
   primaryButtonDisabled: true,
+};
+
+export const WithActionIconLink = Template.bind({});
+WithActionIconLink.args = {
+  ...defaultProps,
+  actionIcons: [
+    {
+      id: '1',
+      icon: (props) => <ArrowRight size={18} {...props} />,
+      iconDescription: 'Visit carbon official site',
+      link: {
+        href: 'https://carbondesignsystem.com/',
+        target: '_blank',
+        rel: 'noreferrer noopener',
+      },
+    },
+  ],
 };

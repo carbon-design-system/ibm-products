@@ -61,6 +61,7 @@ export const ConditionBuilderProvider: React.FC<
     translateWithId: props.translateWithId,
     conditionBuilderRef: props.conditionBuilderRef,
     statementConfigCustom: props.statementConfigCustom,
+    onAddItem: props.onAddItem,
   };
 
   return (

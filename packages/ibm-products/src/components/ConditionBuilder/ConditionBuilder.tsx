@@ -66,6 +66,7 @@ export let ConditionBuilder = React.forwardRef(
       actions,
       translateWithId,
       statementConfigCustom,
+      onAddItem,
       ...rest
     }: ConditionBuilderProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -86,6 +87,7 @@ export let ConditionBuilder = React.forwardRef(
         translateWithId={translateWithId}
         conditionBuilderRef={conditionBuilderRef}
         statementConfigCustom={statementConfigCustom}
+        onAddItem={onAddItem}
       >
         <div
           {
@@ -157,25 +159,11 @@ ConditionBuilder.propTypes = {
    */
   getConditionState: PropTypes.func.isRequired,
   /**
-   * This is a callback that get triggered when  you want to dynamically fetch options.
-   *  Component call this when the option array is not passed against a property with type as option in the input config.
-   * This is an asynchronous callback that can return a promise , and you need to resolve the promise with options array in the valid format.
-   * You will receive the root condition state and current condition as the 2 arguments.
-   * eg: const getOptions = async (conditionState,condition) => {
-  switch (condition.property) {
-    case 'continent':
-      return new Promise((resolve) => {
-        const continents=[{
-      label: 'Africa',
-      id: 'Africa',
-    },...]
-          resolve(continents);
-      });
-      default:
-      return [];
-  }
-};
-   */
+ * Callback triggered to dynamically fetch options for a property of type 'option'.
+ * This is invoked when no static options array is provided in the input config.
+ * The function should return a Promise that resolves with an array of options in the required format.
+ 
+ */
   getOptions: PropTypes.func,
   /**
    * Optional prop if you want to pass a saved condition state, pass as "initialState.state".
@@ -260,6 +248,11 @@ ConditionBuilder.propTypes = {
       })
     ),
   }).isRequired,
+  /**
+   * this is an optional callback triggered before adding any condition , subgroup or group.
+   * User can optionally perform any validation and can stop add action if they return back {preventAdd:true}
+   */
+  onAddItem: PropTypes.func,
 
   /**
    * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
@@ -285,8 +278,7 @@ ConditionBuilder.propTypes = {
   /**
    * Optional prop, if you need to pass translations to the texts on the component instead of the defined defaults.
    * This callback function will receive the message id and you need to return the corresponding text for that id.
-   * The message id will be one of [   "ifText","addConditionText",   "addConditionGroupText",   "addSubgroupText",   "conditionText",   "propertyText",   "operatorText",   "valueText",   "connectorText",   "conditionRowText","conditionRowGroupText","conditionBuilderText","actionSectionText",   "removeConditionText",   "addConditionRowText",   "startText",   "endText",   "clearSearchText",   "actionsText",   "then",   "removeActionText",   "addActionText",   "invalidText",  "invalidNumberWarnText"]
-]
+   
    */
   /**@ts-ignore */
   translateWithId: PropTypes.func,

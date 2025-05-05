@@ -55,11 +55,11 @@ export class DeletePattern extends LitElement {
   private _onDelete(e: Event) {
     this._isOpen = false;
     this._showNotification = true;
-    setTimeout(() => {}, 2000);
   }
 
   private onNotificationClose() {
     this._showNotification = false;
+    this._isOpen = true;
   }
 
   render() {

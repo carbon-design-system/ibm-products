@@ -47,144 +47,6 @@ export type FileType = {
 
 @customElement(`import-modal`)
 class ImportModal extends HostListenerMixin(LitElement) {
-  /**
-   * The text displayed at the top of the modal
-   */
-  @property({ reflect: true })
-  title;
-
-  /**
-   * Content that is displayed inside the modal
-   */
-  @property({ reflect: true })
-  description;
-
-  /**
-   * Specify the text for the secondary button
-   */
-  @property({ reflect: true })
-  secondaryButtonText;
-
-  /**
-   * Specify the text for the primary button
-   */
-  @property({ reflect: true })
-  primaryButtonText;
-
-  /**
-   * Specify whether the Modal is currently open
-   */
-  @property({ reflect: true })
-  open;
-
-  /**
-   * Placeholder for text input
-   */
-  @property({ reflect: true })
-  inputPlaceholder;
-
-  /**
-   * Header to display above import by url
-   */
-  @property({ reflect: true })
-  inputLabel;
-
-  /**
-   * ID for text input
-   */
-  @property({ reflect: true })
-  inputId;
-
-  /**
-   * Button text for import by url button
-   */
-  @property({ reflect: true })
-  inputButtonText;
-
-  /**
-   * Button icon for import by url button
-   */
-  @property({ reflect: true })
-  inputButtonIcon;
-
-  /**
-   * Header for the drag and drop box
-   */
-  @property({ reflect: true })
-  fileDropHeader;
-
-  /**
-   * Label for the drag and drop box
-   */
-  @property({ reflect: true })
-  fileDropLabel;
-
-  /**
-   * Label that appears when a file is uploaded to show number of files (1 / 1)
-   */
-  @property({ reflect: true })
-  fileUploadLabel;
-
-  /**
-   * Specify the types of files that this input should be able to receive
-   */
-  @property({ reflect: true })
-  accept;
-
-  /**
-   * Optional error header to display specifically for a fetch error
-   */
-  @property({ reflect: true })
-  fetchErrorHeader;
-
-  /**
-   * Optional error body to display specifically for a fetch error
-   */
-  @property({ reflect: true })
-  fetchErrorBody;
-
-  /**
-   * The default message shown for an import error
-   */
-  @property({ reflect: true })
-  defaultErrorBody;
-
-  /**
-   * The default header that is displayed to show an error message
-   */
-  @property({ reflect: true })
-  defaultErrorHeader;
-
-  /**
-   * Optional error message to display specifically for a invalid file type error
-   */
-  @property({ reflect: true })
-  invalidFileTypeErrorBody;
-
-  /**
-   * Optional error header to display specifically for a invalid file type error
-   */
-  @property({ reflect: true })
-  invalidFileTypeErrorHeader;
-
-  /**
-   * Optional error message to display specifically for a max file size error
-   */
-  @property({ reflect: true })
-  maxFileSizeErrorBody;
-
-  /**
-   * Optional error header to display specifically for a max file size error
-   */
-  @property({ reflect: true })
-  maxFileSizeErrorHeader;
-
-  /**
-   * File size limit in bytes
-   */
-  @property({ reflect: true })
-  maxFileSize;
-
   @state()
   files: FileType[] = [];
 
@@ -207,18 +69,20 @@ class ImportModal extends HostListenerMixin(LitElement) {
       })
     );
   };
+  x;
 
   render() {
+    const accept = 'image/png image/jpeg image/gif';
     let modalRef: HTMLElement | null = null;
     const isInvalidFileType = (file) => {
-      const acceptSet = new Set(this.accept);
+      const acceptSet = new Set(accept);
       const name = file.name;
       const mimeType = file.type;
       const extension = `.${name.split('.').pop()}`;
       if (
         acceptSet.has(mimeType) ||
         acceptSet.has(extension) ||
-        this.accept.length === 0
+        accept.length === 0
       ) {
         return false;
       }
@@ -274,34 +138,29 @@ class ImportModal extends HostListenerMixin(LitElement) {
         } as FileType;
 
         if (newFile.fetchError) {
-          newFile.errorBody = this.fetchErrorBody || this.defaultErrorBody;
-          newFile.errorSubject =
-            this.fetchErrorHeader || this.defaultErrorHeader;
+          newFile.errorBody = 'Unable to fetch URL.';
+          newFile.errorSubject = 'Import failed';
           newFile.invalid = true;
         } else if (newFile.invalidFileType) {
-          newFile.errorBody =
-            this.invalidFileTypeErrorBody || this.defaultErrorBody;
-          newFile.errorSubject =
-            this.invalidFileTypeErrorHeader || this.defaultErrorHeader;
+          newFile.errorBody = 'Invalid file type.';
+          newFile.errorSubject = 'Import failed';
           newFile.invalid = true;
-        } else if (
-          this.maxFileSize &&
-          (newFile?.fileSize ?? 0) > this.maxFileSize
-        ) {
+        } else if ((newFile?.fileSize ?? 0) > 500000) {
           newFile.errorBody =
-            this.maxFileSizeErrorBody || this.defaultErrorBody;
-          newFile.errorSubject =
-            this.maxFileSizeErrorHeader || this.defaultErrorHeader;
+            '500kb max file size. Select a new file and try again.';
+          newFile.errorSubject = 'Import failed';
           newFile.invalid = true;
         }
         return newFile;
       });
 
       this.files = [...updatedFiles];
-      this.fileStatusString = `${this.files.filter((f) => !f.invalid).length} / ${this.files.length} ${this.fileUploadLabel}`;
+      this.fileStatusString = `${this.files.filter((f) => !f.invalid).length} / ${this.files.length} files uploaded`;
     };
 
     const onAddFile = (evt) => {
+      console.log(evt.detail.addedFiles);
+
       const addedFiles = evt.detail.addedFiles;
       evt.stopPropagation();
       updateFiles(addedFiles);
@@ -344,7 +203,7 @@ class ImportModal extends HostListenerMixin(LitElement) {
       <cds-modal
         class=${blockClass}
         size="sm"
-        ?open=${this.open}
+        ?open="false"
         ${ref((el) => (modalRef = el as HTMLElement))}
         @cds-modal-closed=${() => {
           modalRef?.removeAttribute('open');
@@ -352,30 +211,31 @@ class ImportModal extends HostListenerMixin(LitElement) {
         }}
       >
         <cds-modal-header>
-          <cds-modal-heading>${this.title}</cds-modal-heading>
+          <cds-modal-heading>Import</cds-modal-heading>
         </cds-modal-header>
         <cds-modal-body class=${`${blockClass}__body-container`}>
-          <cds-modal-body-content description>
-            ${this.description}
+          <cds-modal-body-content>
+            You can specify a file to import by either dragging it into the drag
+            and drop area or by specifying a URL. (Maximum file size of 500KB)
           </cds-modal-body-content>
-          <cds-file-uploader label-title=${this.fileDropHeader}>
+          <cds-file-uploader label-title="Add files using drag and drop">
             <cds-file-uploader-drop-container
-              accept="${this.accept}"
+              accept=${accept}
               ?disabled=${hasFiles}
               @cds-file-uploader-drop-container-changed=${(evt) => {
                 onAddFile(evt);
               }}
             >
-              ${this.fileDropLabel}
+              Drag and drop files here or click to upload
             </cds-file-uploader-drop-container>
           </cds-file-uploader>
-          ${this.inputLabel &&
-          html`<p class=${`${blockClass}__label`}>${this.inputLabel}</p>`}
+
+          <p class=${`${blockClass}__label`}>Add a file by specifying a URL</p>
           <cds-form-item class=${`${blockClass}__input-group`}>
             <cds-text-input
-              placeholder=${this.inputPlaceholder}
+              placeholder="URL"
               label=""
-              id=${this.inputId}
+              id="test-id"
               .value=${this.importUrl}
               @input="${inputHandler}"
               ?disabled=${hasFiles}
@@ -388,8 +248,7 @@ class ImportModal extends HostListenerMixin(LitElement) {
               ?disabled=${importButtonDisabled}
               @click=${handleImportFile}
             >
-              ${this.inputButtonIcon ? Add16({ slot: 'icon' }) : ''}
-              ${this.inputButtonText}
+              Add file
             </cds-button>
           </cds-form-item>
 
@@ -426,12 +285,12 @@ class ImportModal extends HostListenerMixin(LitElement) {
             @click=${() => {
               onCloseHandler;
             }}
-            >${this.secondaryButtonText}</cds-modal-footer-button
+            >Cancel</cds-modal-footer-button
           >
           <cds-modal-footer-button
             ?disabled=${primaryButtonDisabled}
             @click=${this.submitHandler}
-            >${this.primaryButtonText}</cds-modal-footer-button
+            >Import</cds-modal-footer-button
           >
         </cds-modal-footer>
       </cds-modal>

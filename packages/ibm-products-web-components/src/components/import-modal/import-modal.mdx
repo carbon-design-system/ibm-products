@@ -34,34 +34,82 @@ Here's a quick example to get you started.
 
 ### Default
 
-```html
-    <import-modal
-        title='Import'
-        description='You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB)'
-        ?open=false
-        fetchErrorHeader='Import failed'
-        fetchErrorBody='Unable to fetch URL.'
-        maxFileSize=500000
-        ?accept=0
-        secondaryButtonText='Cancel'
-        primaryButtonText='Import'
-        inputPlaceholder='URL'
-        inputLabel='Add a file by specifying a URL'
-        inputId='test-id'
-        inputButtonText='Add file'
-        .inputButtonIcon=false
-        fileDropHeader='Add files using drag and drop'
-        fileDropLabel='Drag and drop files here or click to upload'
-        fileUploadLabel='files uploaded'
-        invalidFileTypeErrorBody='Invalid file type.'
-        invalidFileTypeErrorHeader='Import failed'
-        invalidIconDescription='Delete'
-        maxFileSizeErrorBody='500kb max file size. Select a new file and try again.'
-        maxFileSizeErrorHeader='Import failed'
-        defaultErrorBody='Select a new file and try again.'
-        defaultErrorHeader='Import failed'
-      >
-    </import-modal>
+```tsx  
+   <cds-modal>
+        <cds-modal-header>
+          <cds-modal-heading>Import</cds-modal-heading>
+        </cds-modal-header>
+        <cds-modal-body>
+          <cds-modal-body-content description>
+            You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB)
+          </cds-modal-body-content>
+          <cds-file-uploader label-title='Add files using drag and drop'>
+            <cds-file-uploader-drop-container
+              accept="image/png image/jpeg image/gif"
+              @cds-file-uploader-drop-container-changed=${(evt) => {
+                onAddFile(evt);
+              }}
+            >
+             Drag and drop files here or click to upload
+            </cds-file-uploader-drop-container>
+          </cds-file-uploader>
+    
+        <p>Add a file by specifying a URL</p>
+          <cds-form-item >
+            <cds-text-input
+              placeholder='URL'
+              label=""
+              id='test-id'
+              .value=${this.importUrl}
+              @input="${inputHandler}"
+            ></cds-text-input>
+            <cds-button
+              .kind="primary"
+              size="sm"
+              .type="Submit"
+              @click=${handleImportFile}
+            >
+              Add file
+            </cds-button>
+          </cds-form-item>
+
+          <div> 
+            ${hasFiles  ? html`<p> ${this.fileStatusString}</p>`: null}
+            ${this.files.map(
+              (file) => html`
+                <cds-file-uploader-item
+                  name=${file.name}
+                  class=${`${blockClass}__file-uploader-item`}
+                  size="lg"
+                  state=${file.status}
+                  icon-description=${file.iconDescription}
+                  ?invalid=${file.invalid === true}
+                  error-subject=${file.errorSubject || ''}
+                  error-body=${file.errorBody || ''}
+                  uuid=${file.uuid}
+                  @cds-file-uploader-item-deleted=${(evt) =>
+                    onRemoveFile(evt, file.uuid)}
+                  >${file.name}</cds-file-uploader-item
+                >
+              `
+            )}
+          </div>
+        </cds-modal-body>
+        <cds-modal-footer>
+          <cds-modal-footer-button
+            kind="secondary"
+            data-modal-close
+            @click=${() => {
+              onCloseHandler;
+            }}
+            >Cancel</cds-modal-footer-button
+          >
+          <cds-modal-footer-button
+            @click=${this.submitHandler}
+            >Import</cds-modal-footer-button
+          >
+        </cds-modal-footer>
+      </cds-modal>
 ```
 
 

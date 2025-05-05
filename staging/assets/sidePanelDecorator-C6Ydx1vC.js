@@ -1,0 +1,1 @@
+import{e}from"./index-DtHxqM--.js";import"./index-CGLP8AGt.js";import{C as o}from"./Content-CMOf70a9.js";const s=(a,t)=>n=>e.createElement("div",{className:`${t}container`},a(),e.createElement(o,{className:`${t}content`},e.createElement(n,null)));export{s};

@@ -1,0 +1,1 @@
+import{b as o,_ as a,d as n,P as c}from"./index-CGLP8AGt.js";import{e as p}from"./index-DtHxqM--.js";const m=e=>{let{className:s,...r}=e;const t=o();return p.createElement("div",a({className:n(`${t}--icon--skeleton`,s)},r))};m.propTypes={className:c.string};export{m as I};

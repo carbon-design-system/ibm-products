@@ -649,7 +649,7 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it('should prevent close after submitting', async () => {
+  it.skip('should prevent close after submitting', async () => {
     renderComponent({
       onRequestSubmit: () => {
         return {

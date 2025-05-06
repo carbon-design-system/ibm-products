@@ -9,6 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Information } from '@carbon/react/icons';
 import { pkg } from '../../settings';
+import { StringFormatter } from '../StringFormatter/StringFormatter.js';
 
 import {
   Button,
@@ -55,7 +56,39 @@ export default {
         action
       ),
     },
-    description: { control: { type: 'text' } },
+    description: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'With plain String',
+          1: 'With StringFormatter and 1 line',
+          2: 'With StringFormatter and 2 lines',
+        },
+        default: 0,
+      },
+      description:
+        'A description of the flow, displayed in the header area of the tearsheet.\n Note: `StringFormatter` can be passed as a React node to apply custom text formatting, including ellipsis truncation and a definition tooltip when the content is too long.',
+      options: [0, 1, 2],
+      mapping: {
+        0: 'This is a description for the tearsheet, providing an opportunity to describe the flow.',
+        1: (
+          <StringFormatter
+            lines={1}
+            truncate={true}
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            tooltipDirection="bottom"
+          />
+        ),
+        2: (
+          <StringFormatter
+            lines={2}
+            truncate={true}
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            tooltipDirection="bottom"
+          />
+        ),
+      },
+    },
     label: { control: { type: 'text' } },
     title: { control: { type: 'text' } },
     onClose: { control: { disable: true } },
@@ -92,10 +125,6 @@ export default {
 // Test values for props.
 
 const closeIconDescription = 'Close the tearsheet';
-
-const description =
-  'This is a description for the tearsheet, providing an opportunity to \
-  describe the flow.';
 
 const label = 'The label of the tearsheet';
 
@@ -317,7 +346,7 @@ export const tearsheetNarrow = Template.bind({});
 tearsheetNarrow.storyName = 'Narrow tearsheet';
 tearsheetNarrow.args = {
   closeIconDescription,
-  description,
+  description: 0,
   onClose: action('onClose called'),
   title,
   actions: 7,
@@ -327,7 +356,7 @@ export const fullyLoaded = Template.bind({});
 fullyLoaded.storyName = 'Narrow tearsheet with all header items';
 fullyLoaded.args = {
   closeIconDescription,
-  description,
+  description: 0,
   hasCloseIcon: true,
   label,
   onClose: action('onClose called'),
@@ -341,7 +370,7 @@ export const stacked = StackedTemplate.bind({});
 stacked.storyName = 'Stacking narrow tearsheets';
 stacked.args = {
   closeIconDescription,
-  description,
+  description: 0,
   height: 'lower',
   label,
   actions: 7,

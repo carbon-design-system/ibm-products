@@ -978,6 +978,8 @@ export let PageHeader = React.forwardRef(
                       hasActionBar || widthIsNarrow,
                     [`${blockClass}__has-page-actions-without-action-bar`]:
                       !hasActionBar && !widthIsNarrow && pageActions,
+                    [`${blockClass}__has-page-actions-with-title-collapsed`]:
+                      collapseTitle && pageActions,
                   })}
                 >
                   <div className={`${blockClass}__breadcrumb-row--container`}>
@@ -1036,7 +1038,7 @@ export let PageHeader = React.forwardRef(
                             />
                           </>
                         ) : (
-                          widthIsNarrow &&
+                          (widthIsNarrow || pageActions) &&
                           thePageActions(true, pageActionsInBreadcrumbRow)
                         )}
                       </div>

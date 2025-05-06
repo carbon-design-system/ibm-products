@@ -173,6 +173,10 @@ $duration: 1000ms;
     min-inline-size: calc(0.6 * (100% + 2 * #{$spacing-05}));
   }
 
+  .#{$block-class}__has-page-actions-with-title-collapsed {
+    max-inline-size: none;
+  }
+
   .#{$block-class}__has-page-actions-without-action-bar
     .#{$block-class}__has-page-actions-without-action-bar {
     min-inline-size: 100%;
@@ -211,6 +215,7 @@ $duration: 1000ms;
   .#{$block-class}__breadcrumb-row--next-to-tabs:not(
       .#{$block-class}__has-page-actions-without-action-bar
     )::after,
+  .#{$block-class}__has-page-actions-without-action-bar.#{$block-class}__has-page-actions-with-title-collapsed::after,
   .#{$block-class}__breadcrumb-row--has-action-bar::after {
     /* creates a full width box shadow without causing scroll */
     box-shadow:
@@ -613,6 +618,15 @@ $duration: 1000ms;
 
   .#{$block-class}__navigation-row .#{$carbon-prefix}--tab-content {
     display: none; /* need to figure out how to handle the tab content */
+  }
+
+  .#{$block-class}__action-bar-column--has-page-actions {
+    display: block;
+  }
+
+  .#{$block-class}__has-page-actions-with-title-collapsed
+    .#{$block-class}__action-bar-column--has-page-actions {
+    display: block;
   }
 
   .#{$block-class}__navigation-tabs {

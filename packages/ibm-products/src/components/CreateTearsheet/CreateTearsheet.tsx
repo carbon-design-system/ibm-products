@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -350,11 +350,13 @@ export let CreateTearsheet = forwardRef(
                 stepData,
               }}
             >
-              {React.Children.map(children, (child, index) => (
-                <StepNumberContext.Provider value={index + 1}>
-                  {child}
-                </StepNumberContext.Provider>
-              ))}
+              {React.Children.toArray(children)
+                .filter(Boolean)
+                .map((child, index) => (
+                  <StepNumberContext.Provider value={index + 1} key={index}>
+                    {child}
+                  </StepNumberContext.Provider>
+                ))}
             </StepsContext.Provider>
           </Form>
         </div>

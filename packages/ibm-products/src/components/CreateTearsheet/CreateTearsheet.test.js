@@ -606,4 +606,44 @@ describe(CreateTearsheet.displayName, () => {
         renderInvalidCreateTearsheet(defaultProps);
       }
     ));
+
+  it('should not throw an error if null is passed as one of the children?', async () => {
+    const children = [
+      <CreateTearsheetStep title="Title 1" key="1" fieldsetLegendText="Title 1">
+        <p>1</p>
+      </CreateTearsheetStep>,
+      null,
+      <CreateTearsheetStep title="Title 2" key="2" fieldsetLegendText="Title 2">
+        <p>2</p>
+      </CreateTearsheetStep>,
+    ];
+
+    render(
+      <CreateTearsheet {...defaultProps} onRequestSubmit={onRequestSubmitFn}>
+        {children}
+      </CreateTearsheet>
+    );
+
+    // Select the next button
+    const nextButtonElement = screen.getByText(nextButtonText);
+
+    await waitFor(() => userEvent.click(nextButtonElement));
+
+    // Make sure the next step is on step 2
+    const influencerSteps = document.querySelector(
+      `.${pkg.prefix}--create-influencer__progress-indicator`
+    );
+
+    expect(
+      influencerSteps.childNodes[0].classList.contains(
+        'cds--progress-step--complete'
+      )
+    ).toBe(true);
+
+    expect(
+      influencerSteps.childNodes[1].classList.contains(
+        'cds--progress-step--current'
+      )
+    ).toBe(true);
+  });
 });

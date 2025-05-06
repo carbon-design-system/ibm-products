@@ -228,9 +228,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
             onClose={onClose}
           />
         ) : (
-          <CoachmarkHeader
-            onClose={onClose}
-          />
+          <CoachmarkHeader onClose={onClose} />
         )}
         <div className={`${blockClass}__body`} ref={ref} id={contentId}>
           {React.Children.map(children, (child) => {

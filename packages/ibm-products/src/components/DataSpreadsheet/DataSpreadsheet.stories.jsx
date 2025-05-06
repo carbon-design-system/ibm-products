@@ -147,7 +147,6 @@ const Template = ({ ...args }) => {
 const largeDatasetSpreadsheetCustomRowHeaders = ({ ...args }) => {
   const [data, setData] = useState(() => generateData({ rows: 100000 }));
   const columns = useMemo(() => columnData, []);
-
   const buildComponent = (index) => (
     <OverflowMenu
       align="right"

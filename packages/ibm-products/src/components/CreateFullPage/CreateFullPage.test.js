@@ -663,7 +663,7 @@ describe(componentName, () => {
     const submitButtonElement = screen.getByText(submitButtonText);
 
     // click the submit button
-    await waitFor(() => userEvent.click(submitButtonElement));
+    await waitFor(async () => userEvent.click(submitButtonElement));
     // the component should not un mount, thus onClose should not be
     expect(onCloseFn).not.toHaveBeenCalled();
   });

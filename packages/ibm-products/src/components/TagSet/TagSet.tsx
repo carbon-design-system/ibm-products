@@ -406,6 +406,9 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
 
     const handleModalClose = () => {
       setShowAllModalOpen(false);
+
+      const launcherButton = overflowTag.current?.querySelector('button');
+      setTimeout(() => launcherButton?.focus(), 0);
     };
 
     useResizeObserver(sizingContainerRef, handleSizerTagsResize);

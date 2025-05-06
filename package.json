@@ -130,7 +130,7 @@
     "micromatch": "4.0.8",
     "semver": "7.7.1",
     "ws": "^8.17.1",
-    "@babel/runtime": "7.27.0"
+    "@babel/runtime": "7.27.1"
   },
   "lint-staged": {
     "!(examples/**/*)**/*.{js,jsx,ts,tsx,mjs}": [

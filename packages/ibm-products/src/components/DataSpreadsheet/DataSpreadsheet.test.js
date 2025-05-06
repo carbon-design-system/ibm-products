@@ -107,7 +107,7 @@ describe(componentName, () => {
       />
     );
     const allCells = ref?.current.querySelectorAll(`.${blockClass}__td`);
-    const firstDataCell = Array.from(allCells)[1]; // the first cell is a row header so we need to get the second cell element
+    const firstDataCell = Array.from(allCells)[0];
     await act(() => click(firstDataCell));
     expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
     const activeCellElement = ref?.current.querySelector(

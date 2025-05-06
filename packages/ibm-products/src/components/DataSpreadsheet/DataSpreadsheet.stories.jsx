@@ -150,6 +150,7 @@ const largeDatasetSpreadsheetCustomRowHeaders = ({ ...args }) => {
 
   const buildComponent = (index) => (
     <OverflowMenu
+      align="right"
       style={{
         width: '32px',
         height: '32px',

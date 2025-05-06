@@ -219,7 +219,7 @@ jobs:
           ${{ env.PERCY_TOKEN != '' && github.repository ==
           'carbon-design-system/ibm-products' && github.event.pull_request.draft
           == false }}
-        working-directory: packages/core
+        working-directory: packages/ibm-products
         run: yarn percy storybook storybook-static
 
   avt:

@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { ReactNode, forwardRef } from 'react';
+import React, { ReactNode, forwardRef, type JSX } from 'react';
 
 import { Grid } from '@carbon/react';
 import PropTypes from 'prop-types';
@@ -67,20 +67,25 @@ export let Cascade = forwardRef<HTMLDivElement, CascadeProps>((props, ref) => {
 
   if (grid) {
     let colIdx = 0;
-    const gridElm = React.Children.map(children, (row) => {
+    const gridElm = React.Children.map(children, (row: React.ReactNode) => {
       if (React.isValidElement<EnrichedChildren>(row)) {
-        const cols = React.Children.map(row?.props.children, (col) => {
-          if (React.isValidElement<EnrichedChildren>(col)) {
-            colIdx = colIdx + 1;
-            const colClassnames = cx(
-              col.props.className,
-              `${blockClass}__col`,
-              `${blockClass}__col-${colIdx}`
-            );
-            return React.cloneElement(col, { className: colClassnames });
+        const cols = React.Children.map(
+          // @ts-ignore revisit type
+          row?.props.children,
+          (col: JSX.Element) => {
+            if (React.isValidElement<EnrichedChildren>(col)) {
+              colIdx = colIdx + 1;
+              const colClassnames = cx(
+                col.props.className,
+                `${blockClass}__col`,
+                `${blockClass}__col-${colIdx}`
+              );
+              return React.cloneElement(col, { className: colClassnames });
+            }
           }
-        });
+        );
         return React.cloneElement(row, {
+          // @ts-ignore revisit type
           children: cols,
         });
       }

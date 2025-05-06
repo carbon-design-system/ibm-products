@@ -266,7 +266,7 @@ export let CoachmarkStack = React.forwardRef<
       return (
         <CoachmarkOverlay
           key={idx}
-          ref={(ref) => {
+          ref={(ref: HTMLDivElement | null) => {
             stackedCoachmarkRefs.current[idx] = ref as HTMLDivElement;
           }}
           kind={COACHMARK_OVERLAY_KIND.STACKED}

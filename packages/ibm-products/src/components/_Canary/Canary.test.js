@@ -17,6 +17,18 @@ const componentName = Canary.displayName;
 const replacedComponentName = `component-${uuidv4()}`;
 
 describe(componentName, () => {
+  const { ResizeObserver } = window;
+  beforeEach(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+  afterEach(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
+  });
   // it('has no accessibility violations', async () => {
   //   const { container } = render(<Canary component={dummyContent} />);
 

@@ -82,7 +82,7 @@ const ComboButton = forwardRef<HTMLDivElement, ComboButtonProps>(
         if (React.isValidElement<EnrichedChildren>(child)) {
           const { props } = child;
           return {
-            ...props,
+            ...(props as any),
             children: <span className={`${blockClass}__action`}>{child}</span>,
           };
         }

@@ -14,6 +14,15 @@ export default {
   title: 'Patterns/Delete and remove',
 };
 
+const handleClick = (event) => {
+  const actionType = event.target.dataset.actionType;
+  const actionSeverity = event.target.dataset.actionSev;
+  const element = document.querySelector('delete-pattern');
+  element?.setAttribute('isOpen', 'true');
+  element?.setAttribute('type', actionType);
+  element?.setAttribute('severity', actionSeverity);
+};
+
 const defaultTemplate = {
   args: {
     type: '',
@@ -27,24 +36,12 @@ const defaultTemplate = {
 
   render: (args) => {
     const container = document.createElement('div');
-
-    const handleClick = (event) => {
-      const actionType = event.target.dataset.actionType;
-      const actionSeverity = event.target.dataset.actionSev;
-      const element = document.querySelector('delete-pattern');
-      // if(actionSeverity !== 'low') {
-      element?.setAttribute('isOpen', 'true');
-      // }
-      element?.setAttribute('type', actionType);
-      element?.setAttribute('severity', actionSeverity);
-    };
-
     const template = html`
       <cds-button
         data-action-type=${args.type}
         data-action-sev=${args.severity}
         class="action-btn"
-        id="high-impact-del-btn"
+        id="${args.severity}-impact-${args.type}-btn"
         type="button"
         kind="danger"
         size="md"

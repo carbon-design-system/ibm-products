@@ -38,13 +38,12 @@ export class DeletePattern extends LitElement {
 
   @property()
   resourceName?: string;
-  ß;
 
   @property()
   severity?: string;
 
   @property({ reflect: true })
-  private isOpen: boolean = false;
+  isOpen: boolean = false;
 
   @state()
   private _textInput: string = '';

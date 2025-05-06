@@ -18,17 +18,10 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { ActionIcon } from '../Card/Card';
 
 const componentName = 'ProductiveCard';
 
-type ActionIcon = {
-  id?: string;
-  icon?: CarbonIconType;
-  onClick?: (event: MouseEvent) => void;
-  onKeydown?: (event: KeyboardEvent) => void;
-  iconDescription?: string;
-  href?: string;
-};
 type overflowAction = {
   id?: string;
   itemText?: string;
@@ -39,7 +32,7 @@ type PlacementType = 'top' | 'bottom';
 type ClickZoneType = 'one' | 'two' | 'three';
 export interface ProductiveCardProps extends PropsWithChildren {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
+   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.href for href functionality. If you are setting link object, href is a required property. link object supports all anchor element properties. Precedence: link.href > href. If link.href or href is set => anchor element, else button.
    */
   actionIcons?: ActionIcon[];
   /**
@@ -52,16 +45,9 @@ export interface ProductiveCardProps extends PropsWithChildren {
    */
   actionsPlacement?: PlacementType;
   /**
-   * Content that shows in the body of the card
-   */
-  // children: PropTypes.node,
-  /**
    * Optional user provided class
    */
   className?: string;
-
-  children: ReactNode;
-
   /**
    * Designates which zones of the card are clickable. Refer to design documentation for implementation guidelines
    */
@@ -196,7 +182,7 @@ ProductiveCard = pkg.checkComponentEnabled(ProductiveCard, componentName);
 
 ProductiveCard.propTypes = {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
+   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.href for href functionality. If you are setting link object, href is a required property. link object supports all anchor element properties. Precedence: link.href > href. If link.href or href is set => anchor element, else button.
    */
   /**@ts-ignore */
   actionIcons: PropTypes.arrayOf(
@@ -206,7 +192,13 @@ ProductiveCard.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      /**
+       * @deprecated please use the `link.href` instead
+       */
       href: PropTypes.string,
+      link: PropTypes.shape({
+        href: PropTypes.string.isRequired,
+      }),
     })
   ),
   /**

@@ -24,7 +24,24 @@ $popover-block-class: #{c4p-settings.$carbon-prefix}--popover;
 
 .#{$block-class} {
   display: inline-block;
-  text-align: start;
+
+  &--truncate {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    line-height: inherit;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+
+  button.cds--definition-term {
+    border-block-end: none;
+    letter-spacing: inherit;
+  }
+
+  .cds--popover-container {
+    display: flex;
+  }
 }
 
 .#{$block-class}--content {
@@ -37,7 +54,6 @@ $popover-block-class: #{c4p-settings.$carbon-prefix}--popover;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-  max-inline-size: 80ch;
 }
 
 .#{$block-class}__tooltip > button {

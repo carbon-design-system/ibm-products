@@ -10,7 +10,7 @@ import DocsPage from './Tearsheet.docs-page';
 import { action } from '@storybook/addon-actions';
 import { Information } from '@carbon/react/icons';
 import { pkg } from '../../settings';
-
+import { StringFormatter } from '../StringFormatter/StringFormatter.js';
 import {
   Button,
   ButtonSet,
@@ -73,7 +73,39 @@ export default {
         action
       ),
     },
-    description: { control: { type: 'text' } },
+    description: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'With plain String',
+          1: 'With StringFormatter and 1 line',
+          2: 'With StringFormatter and 2 lines',
+        },
+        default: 0,
+      },
+      description:
+        'A description of the flow, displayed in the header area of the tearsheet.\n Note: `StringFormatter` can be passed as a React node to apply custom text formatting, including ellipsis truncation and a definition tooltip when the content is too long.',
+      options: [0, 1, 2],
+      mapping: {
+        0: 'This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet.',
+        1: (
+          <StringFormatter
+            lines={1}
+            truncate={true}
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            tooltipDirection="bottom"
+          />
+        ),
+        2: (
+          <StringFormatter
+            lines={2}
+            truncate={true}
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            tooltipDirection="bottom"
+          />
+        ),
+      },
+    },
     headerActions: {
       control: {
         type: 'select',
@@ -144,10 +176,6 @@ export default {
 // Test values for props.
 
 const closeIconDescription = 'Close the tearsheet';
-
-const description =
-  'This is a description for the tearsheet, providing an opportunity to \
-  describe the flow over a couple of lines in the header of the tearsheet.';
 
 const influencer = (
   <Section className="tearsheet-stories__dummy-content-block">
@@ -723,7 +751,7 @@ export const tearsheet = Template.bind({});
 tearsheet.storyName = 'Tearsheet';
 tearsheet.args = {
   closeIconDescription,
-  description,
+  description: 2,
   onClose: action('onClose called'),
   title,
   actions: 7,
@@ -734,7 +762,7 @@ export const withNavigation = TemplateWithNav.bind({});
 withNavigation.storyName = 'Tearsheet with navigation';
 withNavigation.args = {
   closeIconDescription,
-  description,
+  description: 2,
   label,
   navigation: tabs,
   onClose: action('onClose called'),
@@ -746,7 +774,7 @@ export const withInfluencer = Template.bind({});
 withInfluencer.storyName = 'Tearsheet with influencer';
 withInfluencer.args = {
   closeIconDescription,
-  description,
+  description: 2,
   influencer,
   influencerPosition: 'left',
   influencerWidth: 'narrow',
@@ -758,7 +786,7 @@ withInfluencer.args = {
 export const ReturnFocusToOpenButton = ReturnFocusTemplate.bind({});
 ReturnFocusToOpenButton.args = {
   closeIconDescription,
-  description,
+  description: 2,
   onClose: action('onClose called'),
   title,
   actions: 7,
@@ -769,7 +797,7 @@ firstElementDisabled.storyName = 'First Element Disabled';
 firstElementDisabled.args = {
   closeIconDescription,
   hasCloseIcon: true,
-  description,
+  description: 2,
   onClose: action('onClose called'),
   title,
   actions: 7,
@@ -781,7 +809,7 @@ firstElementReadOnly.storyName = 'First Element ReadOnly';
 firstElementReadOnly.args = {
   closeIconDescription,
   hasCloseIcon: true,
-  description,
+  description: 2,
   onClose: action('onClose called'),
   title,
   actions: 7,
@@ -792,7 +820,7 @@ export const fullyLoaded = TemplateWithNav.bind({});
 fullyLoaded.storyName = 'Tearsheet with all header items and influencer';
 fullyLoaded.args = {
   closeIconDescription,
-  description,
+  description: 2,
   hasCloseIcon: true,
   headerActions: 2,
   influencer,
@@ -812,7 +840,7 @@ export const stacked = StackedTemplate.bind({});
 stacked.storyName = 'Stacking tearsheets';
 stacked.args = {
   closeIconDescription,
-  description,
+  description: 2,
   height: 'lower',
   influencer,
   label,
@@ -824,7 +852,7 @@ stackedMixedSizes.storyName = 'Stacking tearsheets, different sizes';
 stackedMixedSizes.args = {
   mixedSizes: true,
   closeIconDescription,
-  description,
+  description: 2,
   height: 'lower',
   influencer,
   label,

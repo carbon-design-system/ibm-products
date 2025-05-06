@@ -38,7 +38,6 @@ const componentName = 'CoachmarkOverlay';
 const defaults = {
   kind: COACHMARK_OVERLAY_KIND.FLOATING,
   theme: 'light',
-  closeIconDescription: 'Close',
 };
 
 interface CoachmarkOverlayProps {
@@ -290,10 +289,6 @@ CoachmarkOverlay.propTypes = {
    * Optional class name for this component.
    */
   className: PropTypes.string,
-  /**
-   * Optional icon description for the close button.
-   */
-  closeIconDescription: PropTypes.string,
   /**
    * The visibility of CoachmarkOverlay is
    * managed in the parent Coachmark component.

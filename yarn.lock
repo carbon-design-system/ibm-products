@@ -1754,7 +1754,7 @@ __metadata:
     "@storybook/theming": "npm:^8.6.12"
     fast-glob: "npm:^3.3.3"
     lottie-web: "npm:^5.12.2"
-    npm-check-updates: "npm:^17.1.15"
+    npm-check-updates: "npm:^18.0.0"
     npm-run-all: "npm:^4.1.5"
     prop-types: "npm:^15.8.1"
     react: "npm:^18.3.1"
@@ -1781,7 +1781,7 @@ __metadata:
     jest: "npm:^29.7.0"
     jest-config-ibm-cloud-cognitive: "npm:^1.25.0-rc.0"
     jest-environment-jsdom: "npm:^29.7.0"
-    npm-check-updates: "npm:^17.1.15"
+    npm-check-updates: "npm:^18.0.0"
     npm-run-all: "npm:^4.1.5"
     rimraf: "npm:^6.0.1"
     sass: "npm:^1.85.1"
@@ -1893,7 +1893,7 @@ __metadata:
     jest-config-ibm-cloud-cognitive: "npm:^1.25.0-rc.0"
     jest-environment-jsdom: "npm:^29.7.0"
     namor: "npm:^1.1.2"
-    npm-check-updates: "npm:^17.1.15"
+    npm-check-updates: "npm:^18.0.0"
     npm-run-all: "npm:^4.1.5"
     react-table: "npm:^7.8.0"
     react-window: "npm:^1.8.11"
@@ -2057,7 +2057,7 @@ __metadata:
     "@storybook/theming": "npm:^8.6.6"
     core-js: "npm:^3.41.0"
     global: "npm:^4.4.0"
-    npm-check-updates: "npm:^17.1.15"
+    npm-check-updates: "npm:^18.0.0"
     npm-run-all: "npm:^4.1.5"
     rimraf: "npm:^6.0.1"
   peerDependencies:
@@ -9613,7 +9613,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.26.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
     browserslist-config-carbon: "npm:^11.0.0"
-    npm-check-updates: "npm:^17.1.15"
+    npm-check-updates: "npm:^18.0.0"
   languageName: unknown
   linkType: soft
 
@@ -14503,7 +14503,7 @@ __metadata:
     json: "npm:^11.0.0"
     lerna: "npm:^8.2.1"
     lint-staged: "npm:^15.5.0"
-    npm-check-updates: "npm:^17.1.15"
+    npm-check-updates: "npm:^18.0.0"
     npm-run-all: "npm:^4.1.5"
     postcss: "npm:^8.5.3"
     prettier: "npm:^3.5.3"
@@ -15560,7 +15560,7 @@ __metadata:
     identity-obj-proxy: "npm:^3.0.0"
     jest-circus: "npm:^29.7.0"
     jest-watch-typeahead: "npm:^2.2.2"
-    npm-check-updates: "npm:^17.1.15"
+    npm-check-updates: "npm:^18.0.0"
     sass: "npm:^1.85.1"
   peerDependencies:
     jest: ^29.7.0
@@ -18411,13 +18411,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-check-updates@npm:^17.1.15":
-  version: 17.1.15
-  resolution: "npm-check-updates@npm:17.1.15"
+"npm-check-updates@npm:^18.0.0":
+  version: 18.0.1
+  resolution: "npm-check-updates@npm:18.0.1"
   bin:
     ncu: build/cli.js
     npm-check-updates: build/cli.js
-  checksum: 10/25780c2168502c4737a41a0756aa59253bc13d743390ba3da09825d71232fe9aedb643e0074f0b44af43e52e35be2915220d9ffdedc06fd70e71fb3442e1c5f1
+  checksum: 10/c4c0dafe30760e5d7ec08cb683abea3dea05d8e092baaa008dafc8a7c4f942579aa3176d44c906f82c5e96c208cb0dae796be7fdfa687edddf7fbcbe6e63bb28
   languageName: node
   linkType: hard
 

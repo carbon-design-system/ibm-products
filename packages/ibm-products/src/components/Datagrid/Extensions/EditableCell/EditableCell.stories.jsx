@@ -21,7 +21,7 @@ import { DocsPage } from './EditableCell.docs-page';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { getInlineEditColumns } from '../../utils/getInlineEditColumns';
-import { WithFeatureFlags } from '../../../../../../core/.storybook/WithFeatureFlags';
+import { WithFeatureFlags } from '../../../../../.storybook/WithFeatureFlags';
 import { ListItem, UnorderedList } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--datagrid`;

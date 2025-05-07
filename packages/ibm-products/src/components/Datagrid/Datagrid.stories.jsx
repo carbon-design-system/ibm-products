@@ -36,7 +36,7 @@ import { Wrapper } from './utils/Wrapper';
 import DocsPage from './Datagrid.docs-page';
 import { getBatchActions } from './utils/getBatchActions';
 import { StatusIcon } from '../StatusIcon';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
   title: 'Deprecated/Datagrid/Datagrid',

@@ -11,7 +11,7 @@ import { StatusIndicator, StatusIndicatorStep } from '.';
 import mdx from './StatusIndicator.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
   title: 'Deprecated/Status indicator/StatusIndicator',

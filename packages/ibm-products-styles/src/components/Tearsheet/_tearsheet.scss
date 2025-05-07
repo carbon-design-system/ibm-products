@@ -253,6 +253,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__header-description {
+    display: inline-flex;
     margin-block-start: $spacing-05;
     max-inline-size: 100%;
 
@@ -261,28 +262,6 @@ $motion-duration: $duration-moderate-02;
     @include breakpoint-up('md') {
       max-inline-size: 60%;
     }
-  }
-
-  .#{$block-class}__description-tooltip .#{$carbon-prefix}--definition-term {
-    border-block-end: 0;
-    letter-spacing: inherit;
-    word-break: break-word;
-  }
-
-  // overwrites the existing styles to make the popover bigger because in some cases the narrow space can be too constricting for the description
-  .#{$block-class}__description-tooltip {
-    display: inline-flex;
-    .#{$carbon-prefix}--popover-content.#{$carbon-prefix}--definition-tooltip {
-      max-inline-size: fit-content;
-    }
-  }
-
-  .#{$block-class}__description-text {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
   }
 
   &.#{$block-class}--narrow .#{$block-class}__header-description {

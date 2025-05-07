@@ -98,6 +98,8 @@ export let FullPageError = React.forwardRef<HTMLDivElement, FullPageErrorProps>(
         ),
       },
     };
+    console.log('kind', kind);
+
     return (
       <div
         {...rest}

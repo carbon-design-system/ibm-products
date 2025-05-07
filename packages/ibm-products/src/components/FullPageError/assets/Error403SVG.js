@@ -14,9 +14,9 @@ import { string } from 'prop-types';
 export const Error403SVG = ({ className }) => {
   return (
     <svg
+      className={'xxx'}
       viewBox="0 0 750 570"
       fill="none"
-      className={className}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
     >

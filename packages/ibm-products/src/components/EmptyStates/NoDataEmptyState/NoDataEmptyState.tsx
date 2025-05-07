@@ -52,7 +52,7 @@ export let NoDataEmptyState = React.forwardRef<
       illustrationDescription,
       link,
       size = defaults.size,
-      headingAs = defaults.headingAs,
+      headingAs,
       subtitle,
       title,
 

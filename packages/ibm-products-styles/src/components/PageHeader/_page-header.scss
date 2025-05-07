@@ -122,15 +122,10 @@ $duration: 1000ms;
     --#{$block-class}--background-opacity: 1;
     --#{$block-class}--breadcrumb-title-top: initial;
     --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
-    --#{$block-class}--navigation-buffer-top: $spacing-06;
   }
 
   &.#{$block-class}--without-background {
     border-block-end: none;
-  }
-
-  &.#{$block-class}--has-navigation-tags-only {
-    --#{$block-class}--navigation-buffer-top: $spacing-04;
   }
 
   &::before {

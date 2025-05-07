@@ -237,7 +237,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       align: align,
       positionTune: positionTune,
       isOpen: isOpen,
-      closeIconDescription
+      closeIconDescription,
     };
     const handleResize = throttle(() => {
       closeOverlay();
@@ -339,7 +339,6 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
                     fixedIsVisible={false}
                     kind={overlayKind}
                     onClose={handleClose}
-                    closeIconDescription={closeIconDescription}
                     theme={theme}
                     className={cx(overlayClassName, {
                       [`${overlayBlockClass}--is-visible`]: isOpen,

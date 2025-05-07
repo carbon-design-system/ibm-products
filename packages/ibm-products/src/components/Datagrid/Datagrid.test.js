@@ -634,6 +634,7 @@ const RadioSelect = ({ ...rest } = {}) => {
           3: true,
         },
       },
+      onRadioSelect: jest.fn(), // for code coverage
     },
     useSelectRows
   );

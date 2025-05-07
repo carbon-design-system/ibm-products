@@ -19,6 +19,7 @@ import HostListener from '@carbon/web-components/es/globals/decorators/host-list
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import styles from './tearsheet.scss?lit';
 import { selectorTabbable } from '../../globals/settings';
+import pconsole from '../../globals/internal/pconsole';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
@@ -567,94 +568,98 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
           ></cds-modal-close-button>`
         : ''}
     </cds-modal-header>`;
+    if (this._stackPosition <= this._stackDepth) {
+      return html`
+        <a
+          id="start-sentinel"
+          class="${prefix}--visually-hidden"
+          href="javascript:void 0"
+          role="navigation"
+        ></a>
+        <div
+          aria-label=${this.ariaLabel}
+          class=${`${blockClass}__container ${carbonPrefix}--modal-container ${carbonPrefix}--modal-container--sm`}
+          part="dialog"
+          role="complementary"
+          ?open=${this._isOpen}
+          ?opening=${open && !this._isOpen}
+          ?closing=${!open && this._isOpen}
+          width=${width}
+          stack-position=${this._stackPosition}
+          stack-depth=${this._stackDepth}
+          @click=${this._handleClickContainer}
+        >
+          <!-- Header -->
+          ${headerTemplate}
 
-    return html`
-      <a
-        id="start-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"
-      ></a>
-      <div
-        aria-label=${this.ariaLabel}
-        class=${`${blockClass}__container ${carbonPrefix}--modal-container ${carbonPrefix}--modal-container--sm`}
-        part="dialog"
-        role="complementary"
-        ?open=${this._isOpen}
-        ?opening=${open && !this._isOpen}
-        ?closing=${!open && this._isOpen}
-        width=${width}
-        stack-position=${this._stackPosition}
-        stack-depth=${this._stackDepth}
-        @click=${this._handleClickContainer}
-      >
-        <!-- Header -->
-        ${headerTemplate}
+          <!-- Body  -->
+          <cds-modal-body class=${`${blockClass}__body`} width=${width}>
+            <!-- Influencer when on left -->
+            ${influencerPlacement !== TEARSHEET_INFLUENCER_PLACEMENT.RIGHT
+              ? html`<div
+                  class=${`${blockClass}__influencer`}
+                  ?wide=${influencerWidth === 'wide'}
+                  ?hidden=${!this._hasInfluencerLeft ||
+                  this.width === TEARSHEET_WIDTH.NARROW}
+                >
+                  <slot
+                    name="influencer"
+                    data-postfix="left"
+                    @slotchange=${this._checkSetHasSlot}
+                  ></slot>
+                </div>`
+              : ''}
 
-        <!-- Body  -->
-        <cds-modal-body class=${`${blockClass}__body`} width=${width}>
-          <!-- Influencer when on left -->
-          ${influencerPlacement !== TEARSHEET_INFLUENCER_PLACEMENT.RIGHT
-            ? html`<div
-                class=${`${blockClass}__influencer`}
-                ?wide=${influencerWidth === 'wide'}
-                ?hidden=${!this._hasInfluencerLeft ||
-                this.width === TEARSHEET_WIDTH.NARROW}
+            <div class=${`${blockClass}__right`}>
+              <div class=${`${blockClass}__main`}>
+                <div class=${`${blockClass}__content`}>
+                  <cds-layer level="0">
+                    <slot></slot>
+                  </cds-layer>
+                </div>
+
+                <!-- Influencer when on right -->
+                ${influencerPlacement === TEARSHEET_INFLUENCER_PLACEMENT.RIGHT
+                  ? html`<div
+                      class=${`${blockClass}__influencer`}
+                      ?wide=${influencerWidth}
+                      ?hidden=${!this._hasInfluencerRight ||
+                      this.width === TEARSHEET_WIDTH.NARROW}
+                    >
+                      <slot
+                        name="influencer"
+                        data-postfix="right"
+                        @slotchange=${this._checkSetHasSlot}
+                      ></slot>
+                    </div>`
+                  : ''}
+              </div>
+              <!-- Action buttons -->
+              <cds-button-set-base
+                class=${`${blockClass}__buttons ${blockClass}__button-container`}
+                actions-multiple=${actionsMultiple}
+                ?tearsheet-wide=${width === 'wide'}
+                ?hidden=${this._actionsCount === 0}
               >
                 <slot
-                  name="influencer"
-                  data-postfix="left"
-                  @slotchange=${this._checkSetHasSlot}
+                  name="actions"
+                  @slotchange=${this._handleActionsChange}
                 ></slot>
-              </div>`
-            : ''}
-
-          <div class=${`${blockClass}__right`}>
-            <div class=${`${blockClass}__main`}>
-              <div class=${`${blockClass}__content`}>
-                <cds-layer level="0">
-                  <slot></slot>
-                </cds-layer>
-              </div>
-
-              <!-- Influencer when on right -->
-              ${influencerPlacement === TEARSHEET_INFLUENCER_PLACEMENT.RIGHT
-                ? html`<div
-                    class=${`${blockClass}__influencer`}
-                    ?wide=${influencerWidth}
-                    ?hidden=${!this._hasInfluencerRight ||
-                    this.width === TEARSHEET_WIDTH.NARROW}
-                  >
-                    <slot
-                      name="influencer"
-                      data-postfix="right"
-                      @slotchange=${this._checkSetHasSlot}
-                    ></slot>
-                  </div>`
-                : ''}
+              </cds-button-set-base>
             </div>
-            <!-- Action buttons -->
-            <cds-button-set-base
-              class=${`${blockClass}__buttons ${blockClass}__button-container`}
-              actions-multiple=${actionsMultiple}
-              ?tearsheet-wide=${width === 'wide'}
-              ?hidden=${this._actionsCount === 0}
-            >
-              <slot
-                name="actions"
-                @slotchange=${this._handleActionsChange}
-              ></slot>
-            </cds-button-set-base>
-          </div>
-        </cds-modal-body>
-      </div>
-      <a
-        id="end-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"
-      ></a>
-    `;
+          </cds-modal-body>
+        </div>
+        <a
+          id="end-sentinel"
+          class="${prefix}--visually-hidden"
+          href="javascript:void 0"
+          role="navigation"
+        ></a>
+      `;
+    } else {
+      pconsole.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
+      return null;
+    }
   }
 
   _checkSetOpen = () => {

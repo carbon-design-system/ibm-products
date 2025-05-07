@@ -15,20 +15,11 @@ import cx from 'classnames';
 
 // Carbon and package components we use.
 import { Button, Link, Section } from '@carbon/react';
-import { ButtonProps, LinkProps } from '@carbon/react';
+import { CustomLink, EmptyStateAction } from './EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateContent';
-
-interface EmptyStateAction extends ButtonProps<React.ElementType> {
-  kind?: 'primary' | 'secondary' | 'tertiary';
-  text?: string;
-}
-
-interface customLink extends LinkProps<React.ElementType> {
-  text?: ReactNode;
-}
 interface EmptyStateProps {
   /**
    * Empty state action button
@@ -41,7 +32,7 @@ interface EmptyStateProps {
   /**
    * Empty state link object
    */
-  link?: customLink;
+  link?: CustomLink;
   /**
    * Empty state size
    */

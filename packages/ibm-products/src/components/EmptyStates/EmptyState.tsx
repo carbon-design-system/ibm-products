@@ -37,12 +37,12 @@ export const defaults: { position: string; size: sizes; headingAs: string } = {
   headingAs: 'h3',
 };
 
-interface EmptyStateAction extends ButtonProps<React.ElementType> {
+export interface EmptyStateAction extends ButtonProps<React.ElementType> {
   kind?: 'primary' | 'secondary' | 'tertiary';
   text?: string;
 }
 
-interface customLink extends LinkProps<React.ElementType> {
+export interface CustomLink extends LinkProps<React.ElementType> {
   text?: ReactNode;
 }
 
@@ -76,7 +76,7 @@ export interface EmptyStateProps {
   /**
    * Empty state link object
    */
-  link?: customLink;
+  link?: CustomLink;
 
   /**
    * Empty state headingAs allows you to customize the type of heading element

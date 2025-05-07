@@ -89,6 +89,7 @@ withLink.args = {
   link: {
     text: 'View documentation',
     href: 'https://www.carbondesignsystem.com',
+    target: '_blank',
   },
 };
 

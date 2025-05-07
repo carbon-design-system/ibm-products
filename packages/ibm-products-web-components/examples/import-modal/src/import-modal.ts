@@ -69,7 +69,6 @@ class ImportModal extends HostListenerMixin(LitElement) {
       })
     );
   };
-  x;
 
   render() {
     const accept = 'image/png image/jpeg image/gif';

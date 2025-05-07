@@ -11,12 +11,17 @@ import { Tag, Slider } from '@carbon/react';
 import { Annotation } from '../../../../../../core/.storybook/Annotation';
 import { FitToWidth } from '@carbon/react/icons';
 import './_storybook-styles.scss';
+import mdx from './useOverflowItems.mdx';
 
 export default {
   title: 'Hooks/useOverflowItems',
   parameters: {
     layout: 'padded',
+    docs: {
+      page: mdx,
+    },
   },
+  tags: ['autodocs'],
 };
 
 const Template = () => {
@@ -99,5 +104,5 @@ const Template = () => {
   );
 };
 
-export const DefaultUsage = Template.bind({});
-DefaultUsage.args = {};
+export const Default = Template.bind({});
+Default.args = {};

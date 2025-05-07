@@ -23,7 +23,7 @@ import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
 import fs from 'fs-extra';
 
-import * as packageJson from '../package.json' assert { type: 'json' };
+import * as packageJson from '../package.json' with { type: 'json' };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

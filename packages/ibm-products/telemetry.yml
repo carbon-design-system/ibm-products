@@ -214,6 +214,7 @@ collect:
         - noSelectionTitle
         - noTrailingSlash
         - onActiveCellChange
+        - onAddItem
         - onAllRowSelect
         - onApply
         - onBlur
@@ -364,6 +365,7 @@ collect:
         - titleSize
         - toolbarBatchActions
         - toolbarBatchActionsDisplayMin
+        - tooltipAlign
         - tooltipAlignment
         - tooltipText
         - totalVisibleColumns
@@ -561,7 +563,6 @@ collect:
         # ConditionBuilderButton
         - hideLabel
         - isInvalid
-        - tooltipAlign
         - wrapperClassName
         - wrapperProps
         # ConditionBuilderItem
@@ -627,6 +628,7 @@ collect:
         - border
         # DraggableElement
         - classList
+        - elementId
         - isSticky
         # DraggableItemsList
         - moveElement
@@ -729,19 +731,24 @@ collect:
         - narrow
         - tertiaryButtonLabel
         # InterstitialScreen
-        - breakpointsWithMedia
-        - domainName
-        - headerClassName
-        - headerTitle
-        - hideProgressIndicator
         - interstitialAriaLabel
         - isFullScreen
+        # InterstitialScreenBody
+        - contentRenderer
+        # InterstitialScreenFooter
+        - actionButtonRenderer
         - nextButtonLabel
-        - productName
+        - onAction
         - skipButtonLabel
         - startButtonLabel
+        # InterstitialScreenHeader
+        - headerSubTitle
+        - headerTitle
+        - hideProgressIndicator
         # InterstitialScreenView
         - stepTitle
+        # InterstitialScreenViewModule
+        - disableActionButton
         # Item
         - attributes
         - dragOverlay
@@ -873,14 +880,12 @@ collect:
         - getToggleAllPageRowsSelectedProps
         - getToggleAllRowsSelectedProps
         - isAllRowsSelected
-        # SidePanel
+        # SidePanelBase
         - actionToolbarButtons
         - animateTitle
         - condensedActions
         - includeOverlay
         - navigationBackIconDescription
-        - onNavigationBack
-        - onUnmount
         # SingleAddSelect
         - searchResultsLabel
         # Sortable
@@ -1095,6 +1100,9 @@ collect:
         # General - titleSize
         - default
         - large
+        # General - tooltipAlign
+        - bottom
+        - top
         # General - tooltipAlignment
         - bottom
         - bottom-left
@@ -1176,6 +1184,9 @@ collect:
         - xl
   npm:
     dependencies: null
+  js:
+    functions: {}
+    tokens: null
   js:
     functions: {}
     tokens: null

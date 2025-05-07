@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ElementType, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -15,19 +15,43 @@ import cx from 'classnames';
 
 // Carbon and package components we use.
 import { Button, Link, Section } from '@carbon/react';
+import { CustomLink, EmptyStateAction } from './EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateContent';
+interface EmptyStateProps {
+  /**
+   * Empty state action button
+   */
+  action?: EmptyStateAction;
+  /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs?: (() => ReactNode) | string | ElementType;
+  /**
+   * Empty state link object
+   */
+  link?: CustomLink;
+  /**
+   * Empty state size
+   */
+  size?: 'lg' | 'sm';
+  /**
+   * Empty state subtitle
+   */
+  subtitle?: string | ReactNode;
+  /**
+   * Empty state title
+   */
+  title: string | ReactNode;
+}
+export const EmptyStateContent = React.forwardRef<
+  HTMLDivElement,
+  EmptyStateProps
+>((props) => {
+  const { action, link, headingAs, size, subtitle, title } = props;
 
-export const EmptyStateContent = ({
-  action,
-  link,
-  headingAs,
-  size,
-  subtitle,
-  title,
-}) => {
   return (
     <div className={`${blockClass}__content`}>
       <Section
@@ -53,7 +77,7 @@ export const EmptyStateContent = ({
           className={`${blockClass}__action-button`}
           kind={action.kind || 'tertiary'}
           onClick={action.onClick}
-          renderIcon={action.renderIcon || null}
+          renderIcon={action.renderIcon ?? undefined}
           size={'sm'}
         >
           {action.text}
@@ -66,7 +90,7 @@ export const EmptyStateContent = ({
       )}
     </div>
   );
-};
+});
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -80,10 +104,12 @@ EmptyStateContent.propTypes = {
    * Empty state action button
    */
   action: PropTypes.shape({
+    /**@ts-ignore*/
     ...Button.propTypes,
     iconDescription: PropTypes.string,
     kind: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
     renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    /**@ts-ignore*/
     onClick: Button.propTypes.onClick,
     text: PropTypes.string,
   }),
@@ -94,11 +120,7 @@ EmptyStateContent.propTypes = {
   /**
    * Empty state link object
    */
-  link: PropTypes.shape({
-    ...Link.propTypes,
-    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    href: PropTypes.string,
-  }),
+  link: PropTypes.any,
   /**
    * Empty state size
    */

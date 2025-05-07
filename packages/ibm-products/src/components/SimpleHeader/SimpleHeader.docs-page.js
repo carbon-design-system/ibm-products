@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
-import * as stories from './SimpleHeader.stories';
+import * as stories from './SimpleHeader.internal.stories';
 
 const DocsPage = () => {
   return (

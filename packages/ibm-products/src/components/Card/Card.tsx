@@ -13,6 +13,7 @@ import {
   OverflowMenu,
   MenuItem,
   Layer,
+  Section,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
 import { CheckmarkOutline, Incomplete } from '@carbon/react/icons';
@@ -22,14 +23,30 @@ import { CardFooter } from './CardFooter';
 import { pkg } from '../../settings';
 const componentName = 'Card';
 
-type ActionIcon = {
+interface Metadata {
   id?: string;
   icon?: () => ReactNode;
-  onKeydown?: () => void;
-  onClick?: () => void;
   iconDescription?: string;
-  href?: string;
+}
+
+type LinkType = {
+  href: string;
+} & {
+  [key: string]: unknown;
 };
+
+export interface ActionIcon extends Metadata {
+  onKeydown?: (event: KeyboardEvent) => void;
+  onClick?: (
+    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => void;
+  /**
+   * @deprecated please use the `link.href` instead
+   */
+  href?: string;
+  link?: LinkType;
+}
+
 type OverflowActions = {
   id?: string;
   itemText?: string;
@@ -37,13 +54,6 @@ type OverflowActions = {
   onKeydown?: () => void;
 };
 
-type Metadata = {
-  id?: string;
-  icon?: () => ReactNode;
-  iconDescription?: string;
-  onClick?: () => void;
-  href?: string;
-};
 interface CardProp extends PropsWithChildren {
   actionIcons?: readonly ActionIcon[];
   actionsPlacement?: 'top' | 'bottom';
@@ -147,7 +157,8 @@ export const Card = forwardRef(
     }: CardProp,
     ref: React.ForwardedRef<HTMLDivElement>
   ) => {
-    const getIcons = () => (getStarted ? metadata : actionIcons);
+    const getIcons = (): readonly ActionIcon[] =>
+      getStarted ? metadata : actionIcons;
     const blockClass = `${pkg.prefix}--card`;
     const hasActions =
       getIcons().length > 0 ||
@@ -182,7 +193,7 @@ export const Card = forwardRef(
                 label={overflowAriaLabel || iconDescription}
               >
                 {overflowActions.map(({ id, itemText, ...rest }) => (
-                  <MenuItem key={id} label={itemText} {...rest} />
+                  <MenuItem key={id} label={itemText ?? ''} {...rest} />
                 ))}
               </OverflowMenu>
             </FeatureFlags>
@@ -191,7 +202,17 @@ export const Card = forwardRef(
       }
 
       const icons = getIcons().map(
-        ({ id, icon: Icon, onClick, iconDescription, href, ...rest }) => {
+        ({
+          id,
+          icon: Icon,
+          onClick,
+          iconDescription,
+          href: deprecatedHref,
+          link,
+          ...rest
+        }) => {
+          const { href, ...linkProps } = link ?? { href: deprecatedHref };
+
           if (getStarted) {
             return (
               <span key={id} className={`${blockClass}__icon`}>
@@ -212,6 +233,7 @@ export const Card = forwardRef(
                 iconDescription={iconDescription}
                 kind="ghost"
                 href={href}
+                {...linkProps}
               />
             );
           }
@@ -222,6 +244,7 @@ export const Card = forwardRef(
                 className={`${blockClass}__icon`}
                 href={href}
                 onClick={onClick}
+                {...linkProps}
               >
                 {Icon && <Icon aria-label={iconDescription} />}
               </a>
@@ -349,7 +372,7 @@ export const Card = forwardRef(
       secondaryButtonText,
     });
     return (
-      <div aria-disabled={disabled} {...getCardProps()}>
+      <Section as="div" aria-disabled={disabled} {...getCardProps()}>
         {!getStarted && media && (
           <div className={`${blockClass}__media`}>{media}</div>
         )}
@@ -379,7 +402,7 @@ export const Card = forwardRef(
           </div>
           {hasBottomBar && <CardFooter {...getFooterProps()} />}
         </div>
-      </div>
+      </Section>
     );
   }
 );
@@ -393,7 +416,13 @@ Card.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      /**
+       * @deprecated please use the `link.href` instead
+       */
       href: PropTypes.string,
+      link: PropTypes.shape({
+        href: PropTypes.string.isRequired,
+      }),
     })
   ),
   actionsPlacement: PropTypes.oneOf(['top', 'bottom']),

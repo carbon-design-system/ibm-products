@@ -94,4 +94,29 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
   &__icon-idea {
     margin-block-end: $spacing-03;
   }
+
+  li {
+    display: block;
+    max-inline-size: 100%;
+    white-space: nowrap;
+  }
+
+  button,
+  &__navLinkLabels-tooltip {
+    max-inline-size: 100%;
+
+    .#{c4p-settings.$carbon-prefix}--tooltip-content {
+      color: $text-primary;
+      margin-inline-start: calc($spacing-02 + $spacing-01);
+      max-inline-size: 100%;
+    }
+  }
+
+  &__navLinkLabels-text {
+    display: inline-block;
+    overflow: hidden;
+    max-inline-size: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

@@ -57,10 +57,6 @@ const defaultProps = {
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
-const StoryWrapper = ({ children }) => {
-  return <div className={`${storyClass}__story-wrapper`}>{children}</div>;
-};
-
 const Template = (args) => {
   return (
     <div className={`${storyClass}__viewport`}>
@@ -69,22 +65,20 @@ const Template = (args) => {
           <div className={`${storyClass}__breadcrumb-container`}>
             <Breadcrumbs className={`${storyClass}__breadcrumb`} />
           </div>
-          <StoryWrapper>
-            <FullPageError
-              title={`${args.title}`}
-              label={`${args.label}`}
-              description={`${args.description}`}
-              kind={args.kind}
-            >
-              <Link size="lg" href={'/'}>
-                – Forwarding Link 1
-              </Link>
-              <br />
-              <Link size="lg" href={'/'}>
-                – Forwarding Link 1
-              </Link>
-            </FullPageError>
-          </StoryWrapper>
+          <FullPageError
+            title={`${args.title}`}
+            label={`${args.label}`}
+            description={`${args.description}`}
+            kind={`${args.kind}`}
+          >
+            <Link size="lg" href={'/'}>
+              – Forwarding Link 1
+            </Link>
+            <br />
+            <Link size="lg" href={'/'}>
+              – Forwarding Link 1
+            </Link>
+          </FullPageError>
         </div>
       </UiShell>
     </div>

@@ -785,6 +785,44 @@ const InfiniteScroll = () => {
   );
 };
 
+const InfiniteScrollWithSelection = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data, setData] = useState(makeData(0));
+
+  const [isFetching, setIsFetching] = useState(false);
+  const fetchData = () =>
+    new Promise((resolve) => {
+      setIsFetching(true);
+      setTimeout(() => {
+        setData(data.concat(makeData(30, 5, 2)));
+        setIsFetching(false);
+        resolve();
+      }, 1000);
+    });
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      isFetching,
+      fetchMoreData: fetchData,
+    },
+    useInfiniteScroll,
+    useSelectRows
+  );
+
+  return (
+    <Wrapper>
+      <Datagrid datagridState={{ ...datagridState }} />;
+    </Wrapper>
+  );
+};
+
 const InitialLoad = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data, setData] = useState(makeData(0));
@@ -1252,6 +1290,28 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].classList[0]
     ).toBe('c4p--datagrid__virtual-scrollbar');
+  });
+
+  it('Infinite scroll with selection', async () => {
+    const user = userEvent.setup({ delay: null });
+    const { click } = user;
+
+    render(<InfiniteScrollWithSelection data-testid={dataTestId} />);
+
+    // Wait for load to complete and skeletons to disappear.
+    await waitFor(
+      () => {
+        expect(screen.getAllByRole('row')).toHaveLength(12);
+      },
+      { timeout: 5000 }
+    );
+
+    const selectAllCheckbox = screen.getByRole('checkbox', {
+      name: 'Select all rows in the table',
+    });
+    await click(selectAllCheckbox);
+
+    expect(screen.getAllByRole('checkbox', { checked: true })).toHaveLength(12);
   });
 
   it('renders Ten Thousand table entries', async () => {

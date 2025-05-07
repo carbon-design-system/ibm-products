@@ -17,21 +17,26 @@ export default {
 const handleClick = (event) => {
   const actionType = event.target.dataset.actionType;
   const actionSeverity = event.target.dataset.actionSev;
+  const resourceName = event.target.dataset.resourceName;
+
   const element = document.querySelector('delete-pattern');
   element?.setAttribute('isOpen', 'true');
   element?.setAttribute('type', actionType);
   element?.setAttribute('severity', actionSeverity);
+  element?.setAttribute('resourceName', resourceName);
 };
 
 const defaultTemplate = {
   args: {
     type: '',
     severity: '',
+    resourceName: '',
   },
 
   argTypes: {
     type: { table: { disable: true } }, // Hides "type"
     severity: { table: { disable: true } }, // Hides "severity"
+    resourceName: { table: { disable: true } }, // Hides "severity"
   },
 
   render: (args) => {
@@ -40,6 +45,7 @@ const defaultTemplate = {
       <cds-button
         data-action-type=${args.type}
         data-action-sev=${args.severity}
+        data-resource-name=${args.resourceName}
         class="action-btn"
         id="${args.severity}-impact-${args.type}-btn"
         type="button"
@@ -47,9 +53,9 @@ const defaultTemplate = {
         size="md"
         @click=${handleClick}
       >
-        Delete Sample project
+        Delete
       </cds-button>
-      <delete-pattern resourceName="Sample"> </delete-pattern>
+      <delete-pattern> </delete-pattern>
     `;
 
     render(template, container);
@@ -62,6 +68,25 @@ export const highImpactDeletion = {
   args: {
     type: 'delete',
     severity: 'high',
+    resourceName: 'Sample',
+  },
+};
+
+export const highImpactDeletionWithConnectedItems = {
+  ...defaultTemplate,
+  args: {
+    type: 'delete',
+    severity: 'high',
+    resourceName: 'Demo',
+  },
+};
+
+export const highImpactBatchDeletion = {
+  ...defaultTemplate,
+  args: {
+    type: 'delete',
+    severity: 'high',
+    resourceName: 'Batch Demo',
   },
 };
 
@@ -70,6 +95,7 @@ export const mediumImpactDeletion = {
   args: {
     type: 'delete',
     severity: 'medium',
+    resourceName: 'Sample',
   },
 };
 
@@ -78,5 +104,6 @@ export const lowImpactDeletion = {
   args: {
     type: 'delete',
     severity: 'low',
+    resourceName: 'Sample',
   },
 };

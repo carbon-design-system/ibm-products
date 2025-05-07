@@ -8,83 +8,126 @@ LICENSE file in the root directory of this source tree.
 -->
 
 <html>
-<head>
-  <title>Delete pattern example</title>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="src/styles.scss" />
-  <script type="module" src="src/delete-pattern.ts"></script>
-  <script type="module" src="src/index.ts"></script>
-</head>
-<body>
-  <section>
-    <h4>Delete pattern</h4>
-    <p> High impact delete:
-    </p> 
-    <cds-button
-      data-action-type="delete"
-      data-action-sev="high"
-      class="action-btn"
-      id="high-impact-del-btn"
-      type="button"
-      kind="danger"
-      size="md"
+  <head>
+    <title>Delete pattern example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <script type="module" src="src/delete-pattern.ts"></script>
+    <script type="module" src="src/index.ts"></script>
+  </head>
+  <body>
+    <section>
+      <h4>Deletion patterns</h4>
+      <p>High impact deletion:</p>
+      <cds-button
+        data-action-type="delete"
+        data-action-sev="high"
+        data-resource-name="Sample"
+        class="action-btn"
+        id="high-impact-del-btn"
+        type="button"
+        kind="danger"
+        size="md"
       >
-      Delete Sample project
-    </cds-button>
-    <p> Medium impact delete:</p> 
-    <cds-button
-    data-action-type="delete"
-    data-action-sev="medium"
-      class="action-btn"
-      id="medium-impact-del-btn"
-      type="button"
-      kind="danger-tertiary"
-      size="md"
+        Delete
+      </cds-button>
+      <p>High impact deletion with connected items:</p>
+      <cds-button
+        data-action-type="delete"
+        data-action-sev="high"
+        data-resource-name="Demo"
+        class="action-btn"
+        id="high-impact-del-btn"
+        type="button"
+        kind="danger"
+        size="md"
       >
-      Delete Sample project
-    </cds-button>
-    <p> Low impact delete:</p> 
-    <cds-button
-      data-action-type="delete"
-      data-action-sev="low"
-      class="action-btn"
-      id="low-impact-del-btn"
-      type="button"
-      kind="danger"
-      size="md"
+        Delete
+      </cds-button>
+      <p>High impact batch deletion:</p>
+      <cds-button
+        data-action-type="delete"
+        data-action-sev="high"
+        data-resource-name="Batch Demo"
+        class="action-btn"
+        id="high-impact-del-btn"
+        type="button"
+        kind="danger"
+        size="md"
       >
-      Delete Sample project
-    </cds-button>
-  </section>
-  
-  <section>
-    <h4>Remove pattern</h4>
-    <p> Medium impact remove:</p> 
-   <cds-button
-     data-action-type="remove"
-     data-action-sev="medium"
-     class="action-btn"
-     id="medium-impact-remove-btn"
-     type="button"
-     kind="danger-tertiary"
-     size="md"
-     >
-     Remove Sample project
-   </cds-button>
-    <p> Low impact remove:</p> 
-   <cds-button
-     data-action-type="remove"
-     data-action-sev="low"
-     class="action-btn"
-     id="low-impact-remove-btn"
-     type="button"
-     kind="danger"
-     size="md"
-     >
-     Remove Sample project
-   </cds-button>
-  </section>
+        Delete all
+      </cds-button>
+      <p>High impact batch deletion with more than 10 items:</p>
+      <cds-button
+        data-action-type="delete"
+        data-action-sev="high"
+        data-resource-name="Batch Demo 15"
+        class="action-btn"
+        id="high-impact-del-btn"
+        type="button"
+        kind="danger"
+        size="md"
+      >
+        Delete all
+      </cds-button>
+      <p>Medium impact deletion:</p>
+      <cds-button
+        data-action-type="delete"
+        data-action-sev="medium"
+        data-resource-name="Sample"
+        class="action-btn"
+        id="medium-impact-del-btn"
+        type="button"
+        kind="danger-tertiary"
+        size="md"
+      >
+        Delete
+      </cds-button>
+      <p>Low impact deletion:</p>
+      <cds-button
+        data-action-type="delete"
+        data-action-sev="low"
+        data-resource-name="Sample"
+        class="action-btn"
+        id="low-impact-del-btn"
+        type="button"
+        kind="danger"
+        size="md"
+      >
+        Delete
+      </cds-button>
+    </section>
 
-  <delete-pattern resourceName="Sample"> </delete-pattern>
-</body>
+    <section>
+      <h4>Removal patterns</h4>
+      <p>Medium impact removal:</p>
+      <cds-button
+        data-action-type="remove"
+        data-action-sev="medium"
+        data-resource-name="Sample"
+        class="action-btn"
+        id="medium-impact-remove-btn"
+        type="button"
+        kind="danger-tertiary"
+        size="md"
+      >
+        Remove
+      </cds-button>
+      <p>Low impact removal:</p>
+      <cds-button
+        data-action-type="remove"
+        data-action-sev="low"
+        data-resource-name="Sample"
+        class="action-btn"
+        id="low-impact-remove-btn"
+        type="button"
+        kind="danger"
+        size="md"
+      >
+        Remove
+      </cds-button>
+    </section>
+
+    <delete-pattern> </delete-pattern>
+  </body>
 </html>

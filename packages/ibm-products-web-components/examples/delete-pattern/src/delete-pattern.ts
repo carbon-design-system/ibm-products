@@ -1,3 +1,4 @@
+// cspell:words Gigstore, Ktps
 /**
  * @license
  *
@@ -14,6 +15,27 @@ import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/form/form-item.js';
 import '@carbon/web-components/es/components/text-input/text-input.js';
 import '@carbon/web-components/es/components/notification/toast-notification.js';
+import '@carbon/web-components/es/components/checkbox/checkbox.js';
+import '@carbon/web-components/es/components/link/link.js';
+
+const launchIcon = html`
+  <svg
+    focusable="false"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    aria-hidden="true"
+    slot="icon"
+  >
+    <path
+      d="M13,14H3c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h5v1H3v10h10V8h1v5C14,13.6,13.6,14,13,14z"
+    ></path>
+    <path d="M10 1L10 2 13.3 2 9 6.3 9.7 7 14 2.7 14 6 15 6 15 1z"></path>
+  </svg>
+`;
 
 @customElement('delete-pattern')
 export class DeletePattern extends LitElement {
@@ -24,6 +46,12 @@ export class DeletePattern extends LitElement {
 
     .capitalize {
       text-transform: capitalize;
+    }
+
+    .no-bullets {
+      list-style-type: none;
+      padding-inline-start: 32px;
+      margin: 0;
     }
 
     .notification {
@@ -57,6 +85,33 @@ export class DeletePattern extends LitElement {
   @state()
   private _label: string = 'delete';
 
+  @state()
+  private _isCheckboxChecked: boolean = false;
+
+  @state()
+  private _connectedItems: Array<number> = [];
+
+  @state()
+  private _protectedItems: Array<number> = [];
+
+  @state()
+  private _isBatch: boolean = false;
+
+  private _getDescription() {
+    let text = '';
+    if (this._isBatch) {
+      text =
+        'Decide if you want to keep these items. Deleting these items is permanent. This action cannot be undone.';
+    } else if (!this._isBatch && this._connectedItems.length) {
+      text = `When you delete the ${this.resourceName} project, this resource and all connected items are permanently deleted. This action cannot be undone.`;
+    } else if (this.type === 'delete') {
+      text = `Deleting ${this.resourceName} project will permanently delete the project and all related configurations from the system. This action cannot be undone.`;
+    } else {
+      text = `Removing ${this.resourceName} project will permanently remove the project and all related configurations from the system.`;
+    }
+    return text;
+  }
+
   updated(changedProps: PropertyValues<this>) {
     if (changedProps.has('severity')) {
       this._enableDelete = this.severity !== 'high';
@@ -68,6 +123,20 @@ export class DeletePattern extends LitElement {
     if (changedProps.has('type')) {
       this._label = this.type === 'delete' ? 'delete' : 'remove';
     }
+    if (changedProps.has('resourceName')) {
+      // write your logic to find if resource has any connected items
+      if (this.resourceName === 'Demo') {
+        this._connectedItems = Array.from({ length: 3 });
+      } else if (this.resourceName === 'Batch Demo') {
+        this._isBatch = true;
+        this._connectedItems = Array.from({ length: 3 });
+        this._protectedItems = Array.from({ length: 3 });
+      } else if (this.resourceName === 'Batch Demo 15') {
+        this._isBatch = true;
+        this._connectedItems = Array.from({ length: 15 });
+        this._protectedItems = Array.from({ length: 3 });
+      }
+    }
   }
 
   private _close() {
@@ -75,9 +144,19 @@ export class DeletePattern extends LitElement {
     this._textInput = '';
   }
 
+  private _setDeleteButtonState() {
+    const isResourceNameMatching = this.resourceName === this._textInput;
+    const isConnected = this._connectedItems.length > 0;
+
+    this._enableDelete =
+      (isConnected && this._isCheckboxChecked && isResourceNameMatching) ||
+      (!isConnected && isResourceNameMatching) ||
+      (this._isBatch && this._isCheckboxChecked);
+  }
+
   private _onInputChange(e: Event) {
     this._textInput = (e.target as HTMLInputElement).value;
-    this._enableDelete = this.resourceName === this._textInput;
+    this._setDeleteButtonState();
   }
 
   private _onDelete(e: Event) {
@@ -87,6 +166,11 @@ export class DeletePattern extends LitElement {
 
   private onNotificationClose() {
     this._showNotification = false;
+  }
+
+  private _onCheckboxChange(e: CustomEvent) {
+    this._isCheckboxChecked = e.detail.checked;
+    this._setDeleteButtonState();
   }
 
   render() {
@@ -99,21 +183,61 @@ export class DeletePattern extends LitElement {
         </cds-modal-header>
         <cds-modal-body>
           <cds-modal-body-content description>
-          ${this.type === 'delete' ? 'Deleting' : 'Removing'} '${this.resourceName}' project will permanently ${this._label} the project and all related configurations from the system.
-          ${this.type === 'delete' ? 'This action cannot be undone.' : null}
+          
+          ${this._getDescription()}
           </cds-modal-body-content>
           ${
             this.severity === 'high'
-              ? html`<cds-form-item>
-                  <cds-text-input
-                    placeholder="Name of resource"
-                    label="Type ${this.resourceName} to confirm"
-                    value="${this._textInput}"
-                    @input="${this._onInputChange}"
-                    autocomplete="off"
-                  >
-                  </cds-text-input>
-                </cds-form-item>`
+              ? html`${!this._isBatch
+                  ? html`<cds-form-item>
+                      <cds-text-input
+                        placeholder="Name of resource"
+                        label="Type ${this.resourceName} to confirm"
+                        value="${this._textInput}"
+                        @input="${this._onInputChange}"
+                        autocomplete="off"
+                      >
+                      </cds-text-input>
+                    </cds-form-item>`
+                  : null}
+                ${this._connectedItems.length
+                  ? html`
+                      <cds-modal-label
+                        >${this._connectedItems.length < 10
+                          ? html`The following
+                            ${!this._isBatch ? 'connected' : null} items will
+                            also be deleted. Review each item to confirm that
+                            they can be deleted.`
+                          : 'Confirm the items to be deleted.'}</cds-modal-label
+                      >
+
+                      <cds-checkbox
+                        @cds-checkbox-changed="${this._onCheckboxChange}"
+                        >${this._connectedItems.length} items:</cds-checkbox
+                      >
+
+                      ${this._connectedItems.length < 10
+                        ? html`<ul class="no-bullets">
+                            <li>
+                              <cds-link> Route1_name ${launchIcon} </cds-link>
+                            </li>
+                            <li>
+                              <cds-link> Hpt-392-ser ${launchIcon} </cds-link>
+                            </li>
+                            <li>
+                              <cds-link> MKtps_02_094 ${launchIcon} </cds-link>
+                            </li>
+                          </ul>`
+                        : null}
+                      ${this._protectedItems.length
+                        ? html`<p>
+                            Note - the following selected items cannot be
+                            deleted: <cds-link> Gigstore-0034 </cds-link>,
+                            <cds-link> Gigstore-0058 </cds-link>
+                          </p>`
+                        : null}
+                    `
+                  : null}`
               : null
           }
         </cds-modal-body>

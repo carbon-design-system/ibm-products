@@ -26,7 +26,7 @@ export interface GuidebannerProps {
   /**
    * Provide aria-label for elements listing region.
    */
-  elementsRegionLabel?: string;
+  carouselLabel?: string;
   /**
    * Provide the contents of the Guidebanner.
    * One or more GuidebannerElement components are required.
@@ -98,7 +98,7 @@ const defaults = {
 export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
   (
     {
-      elementsRegionLabel,
+      carouselLabel,
       children,
       className,
       collapsible = defaults.collapsible,
@@ -155,7 +155,7 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
           onScroll={(scrollPercent) => {
             setScrollPosition(scrollPercent);
           }}
-          carouselLabel={elementsRegionLabel}
+          elementsRegionLabel={carouselLabel}
         >
           {children}
         </Carousel>
@@ -254,6 +254,10 @@ Guidebanner.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 Guidebanner.propTypes = {
   /**
+   * Provide aria-label for elements listing region.
+   */
+  carouselLabel: PropTypes.string,
+  /**
    * Provide the contents of the Guidebanner.
    * One or more GuidebannerElement components are required.
    */
@@ -299,10 +303,6 @@ Guidebanner.propTypes = {
    * When expanded, it will show the GuidebannerElement child components and the Collapse button.
    */
   collapsible: PropTypes.bool,
-  /**
-   * Provide aria-label for elements listing region.
-   */
-  elementsRegionLabel: PropTypes.string,
   /**
    * Text label for the Expand button.
    */

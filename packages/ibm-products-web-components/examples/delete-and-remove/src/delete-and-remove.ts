@@ -37,8 +37,8 @@ const launchIcon = html`
   </svg>
 `;
 
-@customElement('delete-pattern')
-export class DeletePattern extends LitElement {
+@customElement('delete-remove')
+export class DeleteRemove extends LitElement {
   static styles = css`
     :host cds-modal-body {
       padding-bottom: 0;

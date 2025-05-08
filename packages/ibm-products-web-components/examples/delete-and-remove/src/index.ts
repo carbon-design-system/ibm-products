@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const actionSeverity = event.target.dataset.actionSev;
     const resourceName = event.target.dataset.resourceName;
 
-    let element = document.querySelector('delete-pattern');
+    let element = document.querySelector('delete-remove');
     if (actionSeverity !== 'low') {
       element?.setAttribute('isOpen', 'true');
     }

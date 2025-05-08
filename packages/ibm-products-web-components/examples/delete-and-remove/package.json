@@ -1,8 +1,8 @@
 {
-  "name": "ibm-products-web-components-delete-pattern-example",
+  "name": "ibm-products-web-components-delete-and-remove-pattern-example",
   "version": "0.1.0",
   "private": true,
-  "description": "Sample project for getting started with the Web Components from Carbon for IBM Products.",
+  "description": "Sample project for getting started with the Delete and remove pattern using Carbon web components",
   "license": "Apache-2",
   "main": "index.html",
   "type": "module",

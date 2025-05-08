@@ -8,7 +8,7 @@
  */
 
 import { html, render } from 'lit';
-import '../../../examples/delete-pattern/src/delete-pattern';
+import '../../../examples/delete-and-remove/src/delete-and-remove';
 
 export default {
   title: 'Patterns/Delete and remove',
@@ -19,7 +19,7 @@ const handleClick = (event) => {
   const actionSeverity = event.target.dataset.actionSev;
   const resourceName = event.target.dataset.resourceName;
 
-  const element = document.querySelector('delete-pattern');
+  const element = document.querySelector('delete-remove');
   element?.setAttribute('isOpen', 'true');
   element?.setAttribute('type', actionType);
   element?.setAttribute('severity', actionSeverity);
@@ -36,7 +36,7 @@ const defaultTemplate = {
   argTypes: {
     type: { table: { disable: true } }, // Hides "type"
     severity: { table: { disable: true } }, // Hides "severity"
-    resourceName: { table: { disable: true } }, // Hides "severity"
+    resourceName: { table: { disable: true } }, // Hides "resourceName"
   },
 
   render: (args) => {
@@ -55,7 +55,7 @@ const defaultTemplate = {
       >
         Delete
       </cds-button>
-      <delete-pattern> </delete-pattern>
+      <delete-remove> </delete-remove>
     `;
 
     render(template, container);

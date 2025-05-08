@@ -25,13 +25,11 @@ import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 import { deprecateProp } from '../../global/js/utils/props-helper';
-import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
 
 // Carbon and package components we use.
 import {
   Button,
   ComposedModal,
-  DefinitionTooltip,
   Layer,
   ModalHeader,
   Section,
@@ -301,14 +299,6 @@ export const TearsheetShell = React.forwardRef(
       selectorPrimaryFocus
     );
     const modalRefValue = modalRef.current;
-
-    const descriptionRef = useRef<HTMLSpanElement>(null);
-    const isOverflowing = checkHeightOverflow(descriptionRef.current);
-    const descriptionContent = (
-      <span ref={descriptionRef} className={`${bc}__description-text`}>
-        {description}
-      </span>
-    );
     const wide = size === 'wide';
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
@@ -517,16 +507,7 @@ export const TearsheetShell = React.forwardRef(
                       {title}
                     </Wrap>
                     <Wrap className={`${bc}__header-description`}>
-                      {isOverflowing ? (
-                        <DefinitionTooltip
-                          definition={description}
-                          className={`${bc}__description-tooltip`}
-                        >
-                          {descriptionContent}
-                        </DefinitionTooltip>
-                      ) : (
-                        descriptionContent
-                      )}
+                      {description}
                     </Wrap>
                   </Wrap>
                   <Wrap className={`${bc}__header-actions`}>

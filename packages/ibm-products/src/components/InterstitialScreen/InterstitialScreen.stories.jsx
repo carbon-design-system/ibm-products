@@ -166,6 +166,7 @@ export const Modal = () => {
           contentRenderer={(internalConfig) => {
             return getSingleContent(internalConfig, true);
           }}
+          carouselLabel="Carousel elements"
         />
         <InterstitialScreen.Footer />
       </InterstitialScreen>
@@ -201,6 +202,7 @@ export const ModalWithMultipleSteps = () => {
           contentRenderer={(internalConfig) => {
             return getMultipleContent(internalConfig);
           }}
+          carouselLabel="Carousel elements"
         />
         <InterstitialScreen.Footer />
       </InterstitialScreen>
@@ -236,6 +238,7 @@ export const WithCustomActionButtons = () => {
           contentRenderer={(internalConfig) => {
             return getMultipleContent(internalConfig);
           }}
+          carouselLabel="Carousel elements"
         />
         <InterstitialScreen.Footer
           actionButtonRenderer={({ handleGotoStep, progStep, stepCount }) => {
@@ -350,6 +353,7 @@ export const WithAsynchronousActionCallback = () => {
           contentRenderer={(internalConfig) => {
             return getMultipleContent(internalConfig);
           }}
+          carouselLabel="Carousel elements"
         />
         <InterstitialScreen.Footer onAction={onAction} />
       </InterstitialScreen>
@@ -385,6 +389,7 @@ export const fullScreen = () => {
           contentRenderer={(internalConfig) => {
             return getSingleContent(internalConfig, true, true);
           }}
+          carouselLabel="Carousel elements"
         />
         <InterstitialScreen.Footer />
       </InterstitialScreen>
@@ -420,6 +425,7 @@ export const fullScreenWithMultipleSteps = () => {
           contentRenderer={(internalConfig) => {
             return getMultipleContent(internalConfig, true);
           }}
+          carouselLabel="Carousel elements"
         />
         <InterstitialScreen.Footer />
       </InterstitialScreen>

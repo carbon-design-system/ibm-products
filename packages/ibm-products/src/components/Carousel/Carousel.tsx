@@ -44,6 +44,10 @@ export interface CarouselProps {
    */
   disableArrowScroll?: boolean;
   /**
+   * Provide aria-label for elements listing region.
+   */
+  elementsRegionLabel?: string;
+  /**
    * Enables the edges of the component to have faded styling.
    *
    * Pass a single string (`$color`) to specify the same color for left and right.
@@ -101,6 +105,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       children,
       className,
       disableArrowScroll = defaults.disableArrowScroll,
+      elementsRegionLabel,
       fadedEdgeColor,
       onChangeIsScrollable = defaults.onChangeIsScrollable,
       onScroll = defaults.onScroll,
@@ -363,7 +368,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     }, []);
 
     const scrollableElementAttributes = isScrollableElement
-      ? { 'aria-label': 'Carousel element', tabIndex: 0, role: 'region' }
+      ? { 'aria-label': elementsRegionLabel, tabIndex: 0, role: 'region' }
       : {};
 
     return (
@@ -432,6 +437,10 @@ Carousel.propTypes = {
    * use a keyboard's left and right arrow keys.
    */
   disableArrowScroll: PropTypes.bool,
+  /**
+   * Provide aria-label for elements listing region.
+   */
+  elementsRegionLabel: PropTypes.string,
   /**
    * Enables the edges of the component to have faded styling.
    *

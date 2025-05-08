@@ -31,6 +31,10 @@ type contentRendererArgs = {
 };
 export interface InterstitialScreenBodyProps {
   /**
+   * Provide aria-label for Carousel
+   */
+  carouselLabel?: string;
+  /**
    * Provide an optional class to be applied to the containing node.
    */
   className?: string;
@@ -47,7 +51,7 @@ const InterstitialScreenBody = React.forwardRef<
   HTMLDivElement,
   InterstitialScreenBodyProps
 >((props) => {
-  const { className = '', contentRenderer, ...rest } = props;
+  const { carouselLabel, className = '', contentRenderer, ...rest } = props;
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const bodyBlockClass = `${blockClass}--internal-body`;
 
@@ -132,6 +136,7 @@ const InterstitialScreenBody = React.forwardRef<
               disableArrowScroll
               ref={scrollRef}
               onScroll={onScrollHandler}
+              elementsRegionLabel={carouselLabel}
             >
               {bodyChildrenData}
             </Carousel>
@@ -153,6 +158,10 @@ const InterstitialScreenBody = React.forwardRef<
 export default InterstitialScreenBody;
 
 InterstitialScreenBody.propTypes = {
+  /**
+   * Provide aria-label for Carousel
+   */
+  carouselLabel: PropTypes.string,
   /**
    * Provide an optional class to be applied to the containing node.
    */

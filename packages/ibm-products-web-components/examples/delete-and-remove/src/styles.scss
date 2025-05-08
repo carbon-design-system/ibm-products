@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/spacing' as *;
 
 :root {
   @include theme.theme(themes.$white);
@@ -18,10 +19,10 @@
 }
 
 section {
-  margin: 20px;
-  border: 1px dotted #000000;
-  padding: 20px;
+  margin: $spacing-06;
+  border: $spacing-01 dotted var(--cds-border-strong-01, #000000);
+  padding: $spacing-06;
   p {
-    margin: 10px 0 10px;
+    margin: $spacing-04 0 $spacing-04;
   }
 }

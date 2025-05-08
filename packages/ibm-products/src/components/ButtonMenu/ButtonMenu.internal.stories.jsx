@@ -15,7 +15,7 @@ import { ButtonMenu, ButtonMenuItem } from '.';
 // import styles from './_storybook-styles.scss?inline';
 
 import { Add } from '@carbon/react/icons';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
   title: 'IBM Products/Internal/ButtonMenu',

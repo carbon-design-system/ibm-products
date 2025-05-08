@@ -37,6 +37,10 @@ const componentName = 'CoachmarkOverlayElements';
 
 export interface CoachmarkOverlayElementsProps {
   /**
+   * Provide aria-label for Carousel
+   */
+  carouselLabel?: string;
+  /**
    * CoachmarkOverlayElements should be used with one or many CoachmarkOverlayElement components as children.
    * @see CoachmarkOverlayElement
    */
@@ -112,6 +116,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
 >(
   (
     {
+      carouselLabel,
       className,
       children,
       isVisible = defaults.isVisible,
@@ -234,6 +239,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
               onScroll={(scrollPercent) => {
                 setScrollPosition(scrollPercent);
               }}
+              elementsRegionLabel={carouselLabel}
             >
               {children}
             </Carousel>
@@ -315,7 +321,10 @@ CoachmarkOverlayElements.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 CoachmarkOverlayElements.propTypes = {
   // TODO: UPDATE COMMENT HERE - UPDATE MDX TO HAVE DIRECTION TO USE ONLY OVERLAY ELEMENTS>...CoachmarkOverlayElements will accept only one or more CoachmarkOverlayElement as child components.
-
+  /**
+   * Provide aria-label for Carousel
+   */
+  carouselLabel: PropTypes.string,
   /**
    * CoachmarkOverlayElements should be used with one or many CoachmarkOverlayElement components as children.
    * @see CoachmarkOverlayElement

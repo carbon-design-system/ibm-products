@@ -35,4 +35,5 @@ carousel.args = {
       for general use.
     </>
   ),
+  elementsRegionLabel: 'Carousel elements',
 };

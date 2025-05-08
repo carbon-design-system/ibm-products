@@ -130,6 +130,7 @@ collapsible.args = {
       />
     </React.Fragment>
   ),
+  elementsRegionLabel: 'Carousel elements',
 };
 
 export const manyInsights = Template.bind({});

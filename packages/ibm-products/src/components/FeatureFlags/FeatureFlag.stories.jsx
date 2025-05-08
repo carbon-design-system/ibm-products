@@ -7,7 +7,7 @@
 import React from 'react';
 import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import mdx from './FeatureFlags.mdx';
-import { WithFeatureFlags } from '../../../../core/.storybook/WithFeatureFlags';
+import { WithFeatureFlags } from '../../../.storybook/WithFeatureFlags';
 
 export default {
   title: 'Experimental/FeatureFlags',

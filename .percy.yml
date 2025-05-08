@@ -10,6 +10,7 @@ discovery:
 storybook:
   include: ['/IBM Products/']
   exclude: [
+      '/Internal/',
       '/Datagrid/*',
       '/DataSpreadsheet/',
       'Cascade: With Grid',

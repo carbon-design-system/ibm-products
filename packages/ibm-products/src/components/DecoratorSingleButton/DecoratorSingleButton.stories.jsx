@@ -11,7 +11,7 @@ import { DecoratorSingleButton } from '.';
 import mdx from './DecoratorSingleButton.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 const scoreOptions = {
   '-1 (less than 0 is 0)': -1,

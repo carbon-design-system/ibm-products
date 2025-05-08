@@ -8,18 +8,17 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { state } from 'lit/decorators.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
-import '@carbon/web-components/es/components/file-uploader/demo-file-uploader.js';
+import '@carbon/web-components/es/components/file-uploader/file-uploader.js';
+import '@carbon/web-components/es/components/file-uploader/file-uploader-drop-container.js';
 import '@carbon/web-components/es/components/file-uploader/file-uploader-item.js';
-import Add16 from '@carbon/web-components/es/icons/add/16.js';
 import { ref } from 'lit/directives/ref.js';
-// import './import-modal.scss?lit';
 import styles from './import-modal.scss?lit';
 
 const blockClass = `c4p--import-modal`;
@@ -213,7 +212,7 @@ class ImportModal extends HostListenerMixin(LitElement) {
           <cds-modal-heading>Import</cds-modal-heading>
         </cds-modal-header>
         <cds-modal-body class=${`${blockClass}__body-container`}>
-          <cds-modal-body-content>
+          <cds-modal-body-content class=${`${blockClass}__body`}>
             You can specify a file to import by either dragging it into the drag
             and drop area or by specifying a URL. (Maximum file size of 500KB)
           </cds-modal-body-content>

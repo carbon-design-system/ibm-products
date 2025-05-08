@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "experimentalDecorators": true, 
+    "emitDecoratorMetadata": true, 
+    "useDefineForClassFields": false,
+    "lib": ["DOM", "ES2022"]
+  }
+}

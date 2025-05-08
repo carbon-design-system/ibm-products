@@ -189,7 +189,7 @@ To get started, run the following commands and Storybook will be built and then
 served on port `3000` on your local machine.
 
 ```shell
-yarn install
+yarn
 yarn storybook
 ```
 

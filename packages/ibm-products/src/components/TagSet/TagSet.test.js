@@ -208,6 +208,8 @@ describe(TagSet.displayName, () => {
     const closeButton = screen.getByLabelText('Close');
     await act(() => userEvent.click(closeButton));
     expect(modal).not.toHaveClass('is-visible');
+
+    expect(document.activeElement.tagName).toBe('BUTTON');
   });
 
   it('Tags set overflow trigger can be overridden, and does not show TagSetModal or overflow popup', async () => {

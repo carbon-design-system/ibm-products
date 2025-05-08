@@ -16,7 +16,7 @@ import { FilterPanelCheckboxWithOverflow } from '.';
 import mdx from './FilterPanelCheckboxWithOverflow.mdx';
 
 import styles from '../_storybook-styles.scss?inline';
-import { Annotation } from '../../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../../.storybook/Annotation';
 
 const storyClass = 'filter-panel-stories';
 

@@ -12,7 +12,7 @@ import { FilterPanelSearch } from '.';
 import mdx from './FilterPanelSearch.mdx';
 
 import styles from '../_storybook-styles.scss?inline';
-import { Annotation } from '../../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../../.storybook/Annotation';
 
 const storyClass = 'filter-panel-stories';
 

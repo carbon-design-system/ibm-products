@@ -14,7 +14,7 @@ import { pkg } from '../../settings';
 import cx from 'classnames';
 
 // Carbon and package components we use.
-import { Button, Link, Section } from '@carbon/react';
+import { Button, Heading, Link, Section } from '@carbon/react';
 import { CustomLink, EmptyStateAction } from './EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -51,17 +51,17 @@ export const EmptyStateContent = React.forwardRef<
   EmptyStateProps
 >((props) => {
   const { action, link, headingAs, size, subtitle, title } = props;
+  const HeadingComponent = headingAs ?? Heading;
 
   return (
-    <div className={`${blockClass}__content`}>
-      <Section
-        as={headingAs}
+    <Section className={`${blockClass}__content`}>
+      <HeadingComponent
         className={cx(`${blockClass}__header`, {
           [`${blockClass}__header--small`]: size === 'sm',
         })}
       >
         {title}
-      </Section>
+      </HeadingComponent>
       {subtitle && (
         <p
           className={cx(`${blockClass}__subtitle`, {
@@ -88,7 +88,7 @@ export const EmptyStateContent = React.forwardRef<
           {link.text}
         </Link>
       )}
-    </div>
+    </Section>
   );
 });
 

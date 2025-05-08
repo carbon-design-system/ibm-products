@@ -98,6 +98,7 @@ const defaults = {
 export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
   (
     {
+      elementsRegionLabel,
       children,
       className,
       collapsible = defaults.collapsible,
@@ -154,7 +155,7 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
           onScroll={(scrollPercent) => {
             setScrollPosition(scrollPercent);
           }}
-          elementsRegionLabel={carouselLabel}
+          carouselLabel={elementsRegionLabel}
         >
           {children}
         </Carousel>

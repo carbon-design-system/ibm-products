@@ -13,7 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/colors';
 @use 'sass:map';
-
+@use '@carbon/styles';
 @use '@carbon/ibm-products-styles/scss/components/ImportModal';
 
 $prefix: 'c4p';

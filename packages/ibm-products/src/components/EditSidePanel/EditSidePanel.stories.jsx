@@ -27,7 +27,7 @@ import { EditSidePanel } from '.';
 import styles from './_storybook-styles.scss?inline';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 const sampleSlug = (
   <Slug className="slug-container" size="xs">

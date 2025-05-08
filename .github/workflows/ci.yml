@@ -2,6 +2,7 @@ name: CI # Run CI Checks
 
 on:
   pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
     branches:
       - main
       - v1
@@ -172,7 +173,7 @@ jobs:
       - name: Run storybook
         id: storybook
         run: |
-          npx serve -l 3000 packages/core/storybook-static &
+          npx serve -l 3000 packages/ibm-products/storybook-static &
           pid=$!
           echo "pid=$pid" >> $GITHUB_OUTPUT
       - uses: ./actions/wait-for-it
@@ -194,8 +195,11 @@ jobs:
 
   vrt-runner:
     runs-on: ubuntu-latest
+    if:
+      ${{ github.repository == 'carbon-design-system/ibm-products' &&
+      github.event.pull_request.draft == false }}
     env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
+      PERCY_TOKEN: web_d04495b0b413d61c2ea6b9118d1748b43f4fdd58d17ebe453ef8e0016b5766e4
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -215,7 +219,7 @@ jobs:
           ${{ env.PERCY_TOKEN != '' && github.repository ==
           'carbon-design-system/ibm-products' && github.event.pull_request.draft
           == false }}
-        working-directory: packages/core
+        working-directory: packages/ibm-products
         run: yarn percy storybook storybook-static
 
   avt:

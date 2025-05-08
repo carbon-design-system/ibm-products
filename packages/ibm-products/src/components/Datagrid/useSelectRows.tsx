@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useState } from 'react';
 import cx from 'classnames';
 import { TableSelectRow } from '@carbon/react';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
@@ -17,6 +17,13 @@ import { DataGridState } from './types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const checkboxClass = `${pkg.prefix}--datagrid__checkbox-cell`;
+
+const renderSelectAll = (gridState: DataGridState) => (
+  <SelectAll {...gridState} />
+);
+const renderSelectCell = (gridState: DataGridState) => (
+  <SelectRow {...gridState} />
+);
 
 const useSelectRows = (hooks: Hooks) => {
   useHighlightSelection(hooks);
@@ -48,8 +55,8 @@ const useSelectRows = (hooks: Hooks) => {
         : []),
       {
         id: selectionColumnId,
-        Header: (gridState: DataGridState<any>) => <SelectAll {...gridState} />,
-        Cell: (gridState) => <SelectRow {...gridState} />,
+        Header: renderSelectAll,
+        Cell: renderSelectCell,
       },
       ...newColOrder,
     ] as ColumnInstance[];
@@ -102,29 +109,6 @@ const SelectRow = (datagridState) => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  const onSelectHandler = async (event) => {
-    event.stopPropagation(); // avoid triggering onRowClick
-    if (radio) {
-      toggleAllRowsSelected(false);
-      if (onRadioSelect) {
-        onRadioSelect(row);
-      }
-    }
-    onChange(event);
-    onRowSelect?.(row, event);
-    handleToggleRowSelected({
-      dispatch,
-      rowData: row,
-      isChecked: event.target.checked,
-      getRowId,
-      selectAll: null,
-    });
-    // focus the radio / checkbox if lost
-    const activeElement = document?.activeElement?.id ?? '';
-    await undefined;
-    document?.getElementById(activeElement)?.focus();
-  };
-
   const selectDisabled = isFetching || row.getRowProps().disabled;
   const { onChange, title, ...selectProps } = row.getToggleRowSelectedProps();
   const cellProps = cell.getCellProps();
@@ -132,6 +116,37 @@ const SelectRow = (datagridState) => {
     columns[0]?.sticky === 'left' && withStickyColumn;
   const rowId = `${tableId}-${row.id}-${row.index}`;
   const { key, _cellProps } = cellProps;
+
+  const onSelectHandler = useCallback(
+    (event) => {
+      event.stopPropagation(); // avoid triggering onRowClick
+      if (radio) {
+        toggleAllRowsSelected(false);
+        if (onRadioSelect) {
+          onRadioSelect(row);
+        }
+      }
+      onChange(event);
+      onRowSelect?.(row, event);
+      handleToggleRowSelected({
+        dispatch,
+        rowData: row,
+        isChecked: event.target.checked,
+        getRowId,
+        selectAll: null,
+      });
+    },
+    [
+      dispatch,
+      getRowId,
+      onChange,
+      onRadioSelect,
+      onRowSelect,
+      radio,
+      row,
+      toggleAllRowsSelected,
+    ]
+  );
 
   return (
     <TableSelectRow
@@ -150,7 +165,7 @@ const SelectRow = (datagridState) => {
             isFirstColumnStickyLeft && Number(windowSize) > 671,
         },
       ])}
-      ariaLabel={title}
+      aria-label={title}
       disabled={selectDisabled}
     />
   );

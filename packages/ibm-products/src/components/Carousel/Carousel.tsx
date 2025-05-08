@@ -368,7 +368,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     }, []);
 
     const scrollableElementAttributes = isScrollableElement
-      ? { 'aria-label': elementsRegionLabel, tabIndex: 0, role: 'region' }
+      ? { 'aria-label': elementsRegionLabel, tabIndex: 0, role: 'tabpanel' }
       : {};
 
     return (

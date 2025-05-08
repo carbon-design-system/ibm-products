@@ -49,6 +49,7 @@ const defaultProps = {
   onClose: () => action('onClose()')(),
   title: 'Page-related heading that can stand on its own',
   withLeftGutter: false,
+  carouselLabel: 'Carousel elements',
 };
 
 const DefaultButtonLarge = () => (
@@ -130,7 +131,6 @@ collapsible.args = {
       />
     </React.Fragment>
   ),
-  carouselLabel: 'Carousel elements',
 };
 
 export const manyInsights = Template.bind({});

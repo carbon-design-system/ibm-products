@@ -22,7 +22,7 @@ import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 import styles from '../CreateTearsheetNarrow/_storybook-styles.scss?inline';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
   title: 'Deprecated/Edit and update/EditTearsheetNarrow',

@@ -97,7 +97,7 @@ export interface OptionsTileProps {
   /**
    * Provide the title for this OptionsTile. Must not contain any interactive elements.
    */
-  title: React.ReactNode;
+  title: ReactNode;
 
   /**
    * Optionally provide an id which should be used for the title.

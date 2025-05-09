@@ -11,7 +11,7 @@ import { Add } from '@carbon/react/icons';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 import { EmptyStateV2 } from '.';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
   title: 'Deprecated/Empty state/EmptyStateV2',

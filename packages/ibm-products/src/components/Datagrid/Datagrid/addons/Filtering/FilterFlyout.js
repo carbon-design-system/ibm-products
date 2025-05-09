@@ -252,13 +252,6 @@ const FilterFlyout = ({
     reset(tableId);
   });
 
-  useEffect(
-    function reflectLastAppliedFiltersWhenReactTableUpdates() {
-      lastAppliedFilters.current = JSON.stringify(reactTableFiltersState);
-    },
-    [reactTableFiltersState, lastAppliedFilters]
-  );
-
   return (
     <div className={`${componentClass}__container`} ref={filterFlyoutRef}>
       <IconButton

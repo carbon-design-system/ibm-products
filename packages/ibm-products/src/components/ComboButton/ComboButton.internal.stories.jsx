@@ -8,7 +8,7 @@
 import React from 'react';
 import { CloudApp } from '@carbon/react/icons';
 import { ComboButton, ComboButtonItem } from '..';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
   title: 'IBM Products/Internal/ComboButton',

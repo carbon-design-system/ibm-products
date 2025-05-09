@@ -367,10 +367,6 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       }
     }, []);
 
-    const scrollableElementAttributes = isScrollableElement
-      ? { 'aria-label': elementsRegionLabel, tabIndex: 0, role: 'tabpanel' }
-      : {};
-
     return (
       <div
         {...rest}
@@ -383,7 +379,9 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
           <div
             className={`${blockClass}__elements`}
             ref={scrollRef}
-            {...scrollableElementAttributes}
+            aria-label={elementsRegionLabel}
+            tabIndex={0}
+            role="tabpanel"
           >
             {React.Children.map(children, (child, index) => {
               return (

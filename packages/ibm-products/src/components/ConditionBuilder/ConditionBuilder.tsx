@@ -110,13 +110,13 @@ export let ConditionBuilder = React.forwardRef(
             className={`${blockClass}__${variant}`}
             onKeyDown={handleKeyDownHandler}
           >
-            <ConditionBuilderContent
+            {/* <ConditionBuilderContent
               startConditionLabel={startConditionLabel}
               getConditionState={getConditionState}
               getActionsState={getActionsState}
               initialState={initialState}
               actions={actions}
-            />
+            /> */}
           </VStack>
         </div>
       </ConditionBuilderProvider>

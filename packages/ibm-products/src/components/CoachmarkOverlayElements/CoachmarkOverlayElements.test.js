@@ -36,7 +36,9 @@ const childrenContent = [
 ];
 
 const renderCoachmarkWithOverlayElements = (
-  { ...rest } = {},
+  { ...rest } = {
+    carouselLabel: 'Carousel elements',
+  },
   children = childrenContent
 ) =>
   render(

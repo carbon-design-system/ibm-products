@@ -15,7 +15,7 @@ import NavList from './NavList';
 import mdx from './Nav.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
   title: 'Deprecated/Nav',

@@ -96,7 +96,7 @@ export interface OptionsTileProps {
   /**
    * Provide the title for this OptionsTile.
    */
-  title: string;
+  title: ReactNode;
 
   /**
    * Optionally provide an id which should be used for the title.
@@ -274,7 +274,7 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
       });
 
       return (
-        <Section className={`${blockClass}__heading`}>
+        <div className={`${blockClass}__heading`}>
           <Heading id={titleId} className={`${blockClass}__title`}>
             {title}
           </Heading>
@@ -284,12 +284,12 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
               <span className={`${blockClass}__summary-text`}>{text}</span>
             </span>
           )}
-        </Section>
+        </div>
       );
     };
 
     return (
-      <div
+      <Section
         {...rest}
         className={cx(blockClass, className, `${blockClass}--${size}`, {
           [`${blockClass}--closing`]: closing,
@@ -342,7 +342,7 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
         ) : (
           <div className={`${blockClass}__static-content`}>{renderTitle()}</div>
         )}
-      </div>
+      </Section>
     );
   }
 );
@@ -424,7 +424,7 @@ OptionsTile.propTypes = {
   /**
    * Provide the title for this OptionsTile.
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 
   /**
    * Optionally provide an id which should be used for the title.

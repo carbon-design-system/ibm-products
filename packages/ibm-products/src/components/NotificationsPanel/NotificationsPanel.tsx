@@ -6,7 +6,15 @@
  */
 
 // Carbon and package components we use.
-import { Button, Link, Toggle, IconButton, usePrefix } from '@carbon/react';
+import {
+  Button,
+  Heading,
+  IconButton,
+  Link,
+  Section,
+  Toggle,
+  usePrefix,
+} from '@carbon/react';
 import { dateTimeFormat } from '@carbon/utilities';
 import {
   CheckmarkFilled,
@@ -35,6 +43,7 @@ import { useClickOutside, usePresence } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
+import { useId } from '../../global/js/utils/useId';
 import { pkg } from '../../settings';
 import { timeAgo } from './utils';
 
@@ -383,6 +392,7 @@ export let NotificationsPanel = React.forwardRef(
     const [allNotifications, setAllNotifications] = useState<Data[]>([]);
     const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
     const carbonPrefix = usePrefix();
+    const headingId = useId();
 
     const reducedMotion = usePrefersReducedMotion();
     const exitAnimationName = reducedMotion
@@ -401,9 +411,6 @@ export let NotificationsPanel = React.forwardRef(
 
     useClickOutside(ref || notificationPanelRef, () => {
       onClickOutside?.();
-      setTimeout(() => {
-        triggerButtonRef?.current?.focus();
-      }, 0);
     });
 
     const handleKeydown = (event) => {
@@ -559,9 +566,10 @@ export let NotificationsPanel = React.forwardRef(
         },
       ]);
       return (
-        <div
+        <Section
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
+          as="div"
           role="button"
           tabIndex={0}
           onClick={() => notification.onNotificationClick(notification)}
@@ -624,7 +632,7 @@ export let NotificationsPanel = React.forwardRef(
                */}
               {dateTimeLocale
                 ? dateTimeFormat.relative.format(notification.timestamp, {
-                    locale: supportedLocale,
+                    locale: supportedLocale as string,
                     style: dateTimeStyle,
                   })
                 : timeAgo({
@@ -643,9 +651,9 @@ export let NotificationsPanel = React.forwardRef(
                     nowText,
                   })}
             </p>
-            <h6 className={notificationHeaderClassName}>
+            <Heading className={notificationHeaderClassName}>
               {notification.title}
-            </h6>
+            </Heading>
             {notification.description &&
               notification.description.length &&
               renderDescription(notification.id)}
@@ -671,7 +679,7 @@ export let NotificationsPanel = React.forwardRef(
           >
             <Close size={16} />
           </IconButton>
-        </div>
+        </Section>
       );
     };
 
@@ -690,137 +698,121 @@ export let NotificationsPanel = React.forwardRef(
     ]);
 
     return shouldRender ? (
-      <>
-        <button
-          type="button"
-          className={`${carbonPrefix}--visually-hidden`}
-          ref={startSentinel}
-        >
-          Focus sentinel start
-        </button>
-        {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
-        <div
-          role="dialog"
-          aria-label="Notification Panel"
-          onKeyDown={handleKeydown}
-          tabIndex={0}
-          {
-            // Pass through any other property values as HTML attributes.
-            ...rest
-          }
-          id={blockClass}
-          className={cx(blockClass, className, `${blockClass}__container`, {
-            [`${blockClass}__entrance`]: open,
-            [`${blockClass}__exit`]: !open,
-          })}
-          ref={
-            (ref as MutableRefObject<HTMLDivElement | null>) ||
-            notificationPanelRef
-          }
-          {...getDevtoolsProps(componentName)}
-        >
-          <div ref={notificationPanelInnerRef}>
-            <div className={`${blockClass}__header-container`}>
-              <div className={`${blockClass}__header-flex`}>
-                <h2 className={`${blockClass}__header`}>{title}</h2>
-                <Button
-                  size="sm"
-                  kind="ghost"
-                  className={`${blockClass}__dismiss-button`}
-                  onClick={onDismissAllNotifications}
-                >
-                  {dismissAllLabel}
-                </Button>
-              </div>
-              {onDoNotDisturbChange && (
-                <Toggle
-                  size="sm"
-                  className={`${blockClass}__do-not-disturb-toggle`}
-                  id={`${blockClass}__do-not-disturb-toggle-component`}
-                  labelA={doNotDisturbLabel}
-                  labelB={doNotDisturbLabel}
-                  onToggle={(event) => onDoNotDisturbChange(event)}
-                  defaultToggled={doNotDisturbDefaultToggled}
-                  aria-label={doNotDisturbLabel}
-                  labelText={doNotDisturbLabel}
-                />
-              )}
+      <Section
+        as="div"
+        role="dialog"
+        aria-labelledby={headingId}
+        onKeyDown={handleKeydown}
+        tabIndex={0}
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        id={blockClass}
+        className={cx(blockClass, className, `${blockClass}__container`, {
+          [`${blockClass}__entrance`]: open,
+          [`${blockClass}__exit`]: !open,
+        })}
+        ref={
+          (ref as MutableRefObject<HTMLDivElement | null>) ||
+          notificationPanelRef
+        }
+        {...getDevtoolsProps(componentName)}
+      >
+        <div ref={notificationPanelInnerRef}>
+          <div className={`${blockClass}__header-container`}>
+            <div className={`${blockClass}__header-flex`}>
+              <Heading id={headingId} className={`${blockClass}__header`}>
+                {title}
+              </Heading>
+              <Button
+                size="sm"
+                kind="ghost"
+                className={`${blockClass}__dismiss-button`}
+                onClick={onDismissAllNotifications}
+              >
+                {dismissAllLabel}
+              </Button>
             </div>
-            <div className={mainSectionClassName}>
-              {withinLastDayNotifications &&
-              withinLastDayNotifications.length ? (
-                <>
-                  <h6 className={`${blockClass}__time-section-label`}>
-                    {todayLabel}
-                  </h6>
-                  {withinLastDayNotifications.map((notification, index) =>
-                    renderNotification('today', notification, index)
-                  )}
-                </>
-              ) : null}
-              {previousDayNotifications && previousDayNotifications.length ? (
-                <>
-                  <h6 className={`${blockClass}__time-section-label`}>
-                    {yesterdayLabel}
-                  </h6>
-                  {previousDayNotifications.map((notification, index) =>
-                    renderNotification('yesterday', notification, index)
-                  )}
-                </>
-              ) : null}
-              {previousNotifications && previousNotifications.length ? (
-                <>
-                  <h6 className={`${blockClass}__time-section-label`}>
-                    {previousLabel}
-                  </h6>
-                  {previousNotifications.map((notification, index) =>
-                    renderNotification('previous', notification, index)
-                  )}
-                </>
-              ) : null}
-              {!allNotifications.length && (
-                <NotificationsEmptyState
-                  illustrationTheme={illustrationTheme}
-                  title=""
-                  subtitle={emptyStateLabel}
-                />
-              )}
-            </div>
-            {onViewAllClick &&
-              onSettingsClick &&
-              allNotifications &&
-              allNotifications.length > 0 && (
-                <div className={`${blockClass}__bottom-actions`}>
-                  <Button
-                    kind="ghost"
-                    className={`${blockClass}__view-all-button`}
-                    onClick={onViewAllClick}
-                  >
-                    {viewAllLabel(allNotifications.length)}
-                  </Button>
-                  <Button
-                    kind="ghost"
-                    size="sm"
-                    className={`${blockClass}__settings-button`}
-                    renderIcon={(props) => <Settings size={16} {...props} />}
-                    iconDescription={settingsIconDescription}
-                    onClick={onSettingsClick}
-                    hasIconOnly
-                    tooltipPosition="left"
-                  />
-                </div>
-              )}
+            {onDoNotDisturbChange && (
+              <Toggle
+                size="sm"
+                className={`${blockClass}__do-not-disturb-toggle`}
+                id={`${blockClass}__do-not-disturb-toggle-component`}
+                labelA={doNotDisturbLabel}
+                labelB={doNotDisturbLabel}
+                onToggle={(event) => onDoNotDisturbChange(event)}
+                defaultToggled={doNotDisturbDefaultToggled}
+                aria-label={doNotDisturbLabel}
+                labelText={doNotDisturbLabel}
+              />
+            )}
           </div>
+          <Section className={mainSectionClassName}>
+            {withinLastDayNotifications && withinLastDayNotifications.length ? (
+              <>
+                <Heading className={`${blockClass}__time-section-label`}>
+                  {todayLabel}
+                </Heading>
+                {withinLastDayNotifications.map((notification, index) =>
+                  renderNotification('today', notification, index)
+                )}
+              </>
+            ) : null}
+            {previousDayNotifications && previousDayNotifications.length ? (
+              <>
+                <Heading className={`${blockClass}__time-section-label`}>
+                  {yesterdayLabel}
+                </Heading>
+                {previousDayNotifications.map((notification, index) =>
+                  renderNotification('yesterday', notification, index)
+                )}
+              </>
+            ) : null}
+            {previousNotifications && previousNotifications.length ? (
+              <>
+                <Heading className={`${blockClass}__time-section-label`}>
+                  {previousLabel}
+                </Heading>
+                {previousNotifications.map((notification, index) =>
+                  renderNotification('previous', notification, index)
+                )}
+              </>
+            ) : null}
+            {!allNotifications.length && (
+              <NotificationsEmptyState
+                illustrationTheme={illustrationTheme}
+                title=""
+                subtitle={emptyStateLabel}
+              />
+            )}
+          </Section>
+          {onViewAllClick &&
+            onSettingsClick &&
+            allNotifications &&
+            allNotifications.length > 0 && (
+              <div className={`${blockClass}__bottom-actions`}>
+                <Button
+                  kind="ghost"
+                  className={`${blockClass}__view-all-button`}
+                  onClick={onViewAllClick}
+                >
+                  {viewAllLabel(allNotifications.length)}
+                </Button>
+                <Button
+                  kind="ghost"
+                  size="sm"
+                  className={`${blockClass}__settings-button`}
+                  renderIcon={(props) => <Settings size={16} {...props} />}
+                  iconDescription={settingsIconDescription}
+                  onClick={onSettingsClick}
+                  hasIconOnly
+                  tooltipPosition="left"
+                />
+              </div>
+            )}
         </div>
-        {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
-        <button
-          type="button"
-          className={`${carbonPrefix}--visually-hidden`}
-          ref={endSentinel}
-        >
-          Focus sentinel end
-        </button>
-      </>
+      </Section>
     ) : null;
   }
 );

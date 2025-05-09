@@ -125,12 +125,24 @@ describe(componentName, () => {
       removeEventListener: jest.fn(),
       dispatchEvent: jest.fn(),
     }));
+
+    //todo: remove once carbon fixes issue on side nav
+    jest.spyOn(console, 'error').mockImplementation((msg) => {
+      if (
+        typeof msg === 'string' &&
+        msg.includes('Received `true` for a non-boolean attribute `inert`')
+      ) {
+        return;
+      }
+      console.warn(msg); // or optionally call the original
+    });
   });
 
   afterEach(() => {
     window.ResizeObserver = ResizeObserver;
     jest.useRealTimers();
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
+    console.error.mockRestore();
   });
 
   it('renders the EditTearsheet component', async () => {

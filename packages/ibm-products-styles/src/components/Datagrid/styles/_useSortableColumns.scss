@@ -11,6 +11,9 @@
 @use './variables' as *;
 
 .#{$block-class}__sortableColumn {
+  /* stylelint-disable-next-line declaration-no-important */
+  padding-inline: $spacing-05 !important;
+
   .#{c4p-settings.$carbon-prefix}--table-header-label .header-title {
     display: inline-block;
     inline-size: auto;

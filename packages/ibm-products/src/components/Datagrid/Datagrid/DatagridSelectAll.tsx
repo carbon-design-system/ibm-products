@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useState } from 'react';
 import { TableSelectAll } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
@@ -48,8 +48,70 @@ const SelectAll = (datagridState: DataGridState) => {
     withVirtualScroll,
     onAllRowSelect,
   } = datagridState;
+
   const isFirstColumnStickyLeft =
     columns[0]?.sticky === 'left' && withStickyColumn;
+
+  const getProps = DatagridPagination
+    ? getToggleAllPageRowsSelectedProps
+    : getToggleAllRowsSelectedProps;
+  const { onChange, ...selectProps } = getProps() as DataGridToggleAllRowsProps;
+  const { indeterminate } = selectProps;
+
+  const handleOnPageSelectAllChange = useCallback(
+    (event) => {
+      handleOnPageSelectAllRowData({
+        dispatch,
+        rows,
+        getRowId,
+        isChecked: event.target.checked,
+        indeterminate,
+      });
+
+      onAllRowSelect?.(rows, event);
+      return onChange?.(event);
+    },
+    [dispatch, getRowId, indeterminate, onAllRowSelect, onChange, rows]
+  );
+
+  const handleSelectAllChange = useCallback(
+    (event) => {
+      if (indeterminate) {
+        handleSelectAllRowData({
+          dispatch,
+          rows,
+          getRowId,
+          indeterminate: true,
+          isChecked: undefined,
+        });
+        toggleAllRowsSelected(false);
+        onAllRowSelect?.(rows, event);
+
+        return onChange?.({
+          target: { checked: false },
+        } as any);
+      }
+      handleSelectAllRowData({
+        dispatch,
+        rows,
+        getRowId,
+        isChecked: event.target.checked,
+        indeterminate,
+      });
+      onAllRowSelect?.(rows, event);
+      return onChange?.(event);
+    },
+    [
+      dispatch,
+      getRowId,
+      indeterminate,
+      onAllRowSelect,
+      onChange,
+      rows,
+      toggleAllRowsSelected,
+    ]
+  );
+
   if (hideSelectAll || radio) {
     return (
       <th
@@ -61,51 +123,6 @@ const SelectAll = (datagridState: DataGridState) => {
       />
     );
   }
-  const getProps = DatagridPagination
-    ? getToggleAllPageRowsSelectedProps
-    : getToggleAllRowsSelectedProps;
-  const { onChange, ...selectProps } = getProps() as DataGridToggleAllRowsProps;
-  const { indeterminate } = selectProps;
-
-  const handleOnPageSelectAllChange = (event) => {
-    handleOnPageSelectAllRowData({
-      dispatch,
-      rows,
-      getRowId,
-      isChecked: event.target.checked,
-      indeterminate,
-    });
-
-    onAllRowSelect?.(rows, event);
-    return onChange?.(event);
-  };
-
-  const handleSelectAllChange = (event) => {
-    if (indeterminate) {
-      handleSelectAllRowData({
-        dispatch,
-        rows,
-        getRowId,
-        indeterminate: true,
-        isChecked: undefined,
-      });
-      toggleAllRowsSelected(false);
-      onAllRowSelect?.(rows, event);
-
-      return onChange?.({
-        target: { checked: false },
-      } as any);
-    }
-    handleSelectAllRowData({
-      dispatch,
-      rows,
-      getRowId,
-      isChecked: event.target.checked,
-      indeterminate,
-    });
-    onAllRowSelect?.(rows, event);
-    return onChange?.(event);
-  };
 
   return (
     <TableSelectAll

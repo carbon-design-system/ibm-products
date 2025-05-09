@@ -23,7 +23,7 @@ import styles from './_storybook-styles.scss?inline';
 
 const blockClass = `${pkg.prefix}--about-modal`;
 
-import DocsPage from './AboutModal.docs-page';
+import mdx from './AboutModal.mdx';
 
 export default {
   title: 'IBM Products/Components/About modal/AboutModal',
@@ -32,7 +32,7 @@ export default {
   parameters: {
     styles,
     docs: {
-      page: DocsPage,
+      page: mdx,
     },
     controls: { sort: 'requiredFirst' },
   },
@@ -167,16 +167,12 @@ const logo = (
   />
 );
 
-const Template = (storyName, storyInitiallyOpen, args, context) => {
+const Template = (args, context) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
-  const [beenOpen, setBeenOpen] = useState(false);
-  useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>
-        {beenOpen ? 'Reopen the' : 'Open the'} {storyName}
-      </Button>
+      <Button onClick={() => setOpen(true)}>{'Open Modal'}</Button>
 
       <style>{`.${blockClass} { opacity: 0; }`};</style>
       <AboutModal
@@ -198,9 +194,7 @@ const commonArgs = {
   copyrightText: 'Copyright © IBM Corp. 2020, 2023',
 };
 
-const aboutModalStoryName = 'About modal';
-export const aboutModal = Template.bind({}, aboutModalStoryName, true);
-aboutModal.storyName = aboutModalStoryName;
+export const aboutModal = Template.bind({});
 aboutModal.args = {
   title: 2,
   links: 0,
@@ -209,13 +203,7 @@ aboutModal.args = {
   ...commonArgs,
 };
 
-const fullyLoadedStoryName = 'About modal with all props set';
-export const aboutModalWithAllPropsSet = Template.bind(
-  {},
-  fullyLoadedStoryName,
-  false
-);
-aboutModalWithAllPropsSet.storyName = fullyLoadedStoryName;
+export const aboutModalWithAllPropsSet = Template.bind({});
 aboutModalWithAllPropsSet.args = {
   title: 2,
   links: 3,

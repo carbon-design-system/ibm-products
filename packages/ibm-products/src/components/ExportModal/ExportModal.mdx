@@ -1,0 +1,63 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { ExportModal } from '.';
+import * as ExportModalStories from './ExportModal.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import wait from '../../global/js/utils/wait';
+
+export const customFunctionArr = [
+  wait,
+];
+
+# About Modal
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+Modal dialog version of the export pattern.
+
+### Standard
+
+<Canvas
+  of={ExportModalStories.Standard}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(ExportModalStories.Standard,[],customFunctionArr),
+      },
+    ]}>
+</Canvas>
+
+
+### With Extension Validation
+
+<Canvas
+  of={ExportModalStories.WithExtensionValidation}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(ExportModalStories.WithExtensionValidation,[],customFunctionArr),
+      },
+    ]}>
+</Canvas>
+
+### With Preformatted Extensions
+
+<Canvas
+  of={ExportModalStories.WithPreformattedExtensions}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig(ExportModalStories.WithPreformattedExtensions,[],customFunctionArr),
+      },
+    ]}>
+</Canvas>
+
+## Component API
+
+<Controls />

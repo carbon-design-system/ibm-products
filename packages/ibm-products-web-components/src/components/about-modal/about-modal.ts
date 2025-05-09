@@ -15,7 +15,7 @@ import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-lis
 import '@carbon/web-components/es/components/modal/index.js';
 import styles from './about-modal.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-const blockClass = `${prefix}--about-modal`;
+export const blockClass = `${prefix}--about-modal`;
 
 /**
  * About Modal.

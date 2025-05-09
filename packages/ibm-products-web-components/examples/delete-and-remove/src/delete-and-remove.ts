@@ -18,48 +18,12 @@ import '@carbon/web-components/es/components/notification/toast-notification.js'
 import '@carbon/web-components/es/components/checkbox/checkbox.js';
 import '@carbon/web-components/es/components/link/link.js';
 
-const launchIcon = html`
-  <svg
-    focusable="false"
-    preserveAspectRatio="xMidYMid meet"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="currentColor"
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    aria-hidden="true"
-    slot="icon"
-  >
-    <path
-      d="M13,14H3c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h5v1H3v10h10V8h1v5C14,13.6,13.6,14,13,14z"
-    ></path>
-    <path d="M10 1L10 2 13.3 2 9 6.3 9.7 7 14 2.7 14 6 15 6 15 1z"></path>
-  </svg>
-`;
+import styles from './delete-and-remove.scss?lit';
+import { launchSVG } from './assets/launchSVG';
 
 @customElement('delete-remove')
 export class DeleteRemove extends LitElement {
-  static styles = css`
-    :host cds-modal-body {
-      padding-bottom: 0;
-    }
-
-    .capitalize {
-      text-transform: capitalize;
-    }
-
-    .no-bullets {
-      list-style-type: none;
-      padding-inline-start: 32px;
-      margin: 0;
-    }
-
-    .notification {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-    }
-  `;
+  static styles = styles;
 
   @property()
   type?: string;
@@ -70,8 +34,8 @@ export class DeleteRemove extends LitElement {
   @property()
   severity?: string;
 
-  @property({ reflect: true })
-  isOpen: boolean = false;
+  @property({ reflect: true, type: Boolean })
+  isOpen = false;
 
   @state()
   private _textInput: string = '';
@@ -219,13 +183,13 @@ export class DeleteRemove extends LitElement {
                       ${this._connectedItems.length < 10
                         ? html`<ul class="no-bullets">
                             <li>
-                              <cds-link> Route1_name ${launchIcon} </cds-link>
+                              <cds-link> Route1_name ${launchSVG} </cds-link>
                             </li>
                             <li>
-                              <cds-link> Hpt-392-ser ${launchIcon} </cds-link>
+                              <cds-link> Hpt-392-ser ${launchSVG} </cds-link>
                             </li>
                             <li>
-                              <cds-link> MKtps_02_094 ${launchIcon} </cds-link>
+                              <cds-link> MKtps_02_094 ${launchSVG} </cds-link>
                             </li>
                           </ul>`
                         : null}

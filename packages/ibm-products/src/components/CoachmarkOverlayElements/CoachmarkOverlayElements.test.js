@@ -36,9 +36,7 @@ const childrenContent = [
 ];
 
 const renderCoachmarkWithOverlayElements = (
-  { ...rest } = {
-    carouselLabel: 'Carousel elements',
-  },
+  { ...rest } = {},
   children = childrenContent
 ) =>
   render(
@@ -50,7 +48,9 @@ const renderCoachmarkWithOverlayElements = (
         <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
       }
     >
-      <CoachmarkOverlayElements {...rest}>{children}</CoachmarkOverlayElements>
+      <CoachmarkOverlayElements carouselLabel="Carousel elements" {...rest}>
+        {children}
+      </CoachmarkOverlayElements>
     </Coachmark>
   );
 

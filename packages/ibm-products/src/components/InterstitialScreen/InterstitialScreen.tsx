@@ -77,6 +77,11 @@ export interface InterstitialScreenProps {
    * Function to call when the close button is clicked.
    */
   onClose?: (value: ActionType) => void;
+
+  /**
+   * Provide a ref to return focus to once the interstitial is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
 }
 
 // Define the type for InterstitialScreen, extending it to include Header
@@ -128,6 +133,7 @@ export let InterstitialScreen = React.forwardRef<
     interstitialAriaLabel = 'Interstitial screen',
     isFullScreen = false,
     isOpen = false,
+    launcherButtonRef,
     onClose,
     ...rest
   } = props;
@@ -174,7 +180,12 @@ export let InterstitialScreen = React.forwardRef<
     // for modal only, "is-visible" triggers animation
     setIsVisibleClass(!isFullScreen && isOpen ? 'is-visible' : null);
     nextButtonRef?.current?.focus();
-  }, [isFullScreen, isOpen]);
+    if (!isOpen && launcherButtonRef) {
+      setTimeout(() => {
+        launcherButtonRef.current.focus();
+      }, 0);
+    }
+  }, [launcherButtonRef, isFullScreen, isOpen]);
 
   // hitting escape key also closes this component
   useEffect(() => {
@@ -308,6 +319,11 @@ InterstitialScreen.propTypes = {
    * Specifies whether the component is currently open.
    */
   isOpen: PropTypes.bool,
+
+  /**
+   * Provide a ref to return focus to once the interstitial is closed.
+   */
+  launcherButtonRef: PropTypes.any,
 
   /**
    * Function to call when the close button is clicked.

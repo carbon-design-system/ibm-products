@@ -145,12 +145,14 @@ const defaultProps = {
   actionIcons: [
     {
       id: '1',
+      'data-testid': 'test-id-1',
       icon: (props) => <Edit size={16} {...props} />,
       onClick: action('on click'),
       iconDescription: 'Edit',
     },
     {
       id: '2',
+      'data-testid': 'test-id-2',
       icon: (props) => <TrashCan size={16} {...props} />,
       onClick: action('on click'),
       iconDescription: 'Delete',

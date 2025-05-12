@@ -52,7 +52,6 @@ const Columns = ({
     >
       <ol
         className={`${blockClass}__customize-columns-column-list--focus`}
-        role="listbox"
         aria-label={customizeTearsheetHeadingLabel}
         aria-describedby={`${blockClass}__customize-columns--instructions`}
         tabIndex={0}

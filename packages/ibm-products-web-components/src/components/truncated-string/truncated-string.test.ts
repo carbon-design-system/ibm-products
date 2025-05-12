@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-import CDSStringFormatter from './string-formatter';
+import CDSStringFormatter from './truncated-string';
 import './index';
 
 const defaultProps = {
@@ -17,19 +17,19 @@ const defaultProps = {
 
 const template = (props = defaultProps, templateWidth?: number) => html`
   <div style=${templateWidth ? `width: ${templateWidth}px;` : ''}>
-    <c4p-string-formatter
+    <c4p-truncated-string
       value=${props.text}
       lines=${props.lines}
-    ></c4p-string-formatter>
+    ></c4p-truncated-string>
   </div>
 `;
 
-describe('c4p-string-formatter', () => {
+describe('c4p-truncated-string', () => {
   it('renders a tooltip when text is truncated', async () => {
     const wrapper = await fixture(template(defaultProps, 200));
 
     const el = wrapper.querySelector(
-      'c4p-string-formatter'
+      'c4p-truncated-string'
     ) as CDSStringFormatter;
 
     const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
@@ -40,7 +40,7 @@ describe('c4p-string-formatter', () => {
     const wrapper = await fixture(template(defaultProps, 9000));
 
     const el = wrapper.querySelector(
-      'c4p-string-formatter'
+      'c4p-truncated-string'
     ) as CDSStringFormatter;
 
     const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
@@ -52,7 +52,7 @@ describe('c4p-string-formatter', () => {
       const wrapper = await fixture(template({ ...defaultProps, lines }, 600));
 
       const el = wrapper.querySelector(
-        'c4p-string-formatter'
+        'c4p-truncated-string'
       ) as CDSStringFormatter;
       await el.updateComplete;
 

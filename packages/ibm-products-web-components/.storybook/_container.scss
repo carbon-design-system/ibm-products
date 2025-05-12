@@ -60,6 +60,10 @@ body {
   padding: 0;
 }
 
+.sbdocs-preview {
+  background-color: theme.$background;
+}
+
 #main-content {
   position: relative;
   /* stylelint-disable-next-line carbon/layout-use */

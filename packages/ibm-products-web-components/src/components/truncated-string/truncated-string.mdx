@@ -1,0 +1,50 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as TruncatedString from './truncated-string.stories';
+
+<Meta of={TruncatedString} />
+
+# TruncatedString
+
+The `TruncatedString` component truncates text based on a specified number of lines, provided via a prop. It offers two configurable options for revealing the full content:
+
+Tooltip Mode `with="tooltip"`: Displays the full text in a tooltip overlay on hover.
+
+Expandable Mode `with="expand"`: Reveals the complete content through collapsible "Read more" / "Read less" toggles. these labels can be customized with `expand-label`, `collapse-label` attributes on the component
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/truncated-string)
+> example implementation.
+> [![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/truncated-string)
+
+## Default with tooltip
+
+<Canvas of={TruncatedString.WithTooltip} />
+
+## With expand
+
+<Canvas of={TruncatedString.WithExpand} />
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/truncated-string/index.js';
+```
+
+### HTML
+
+```html
+<c4p-truncated-string
+  value="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principal call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular-sized button. This issue is most often found in tables. Small buttons should have three words or fewer."
+  lines="2"
+  with="tooltip"
+></c4p-truncated-string>
+```
+
+## `<c4p-truncated-string>` attributes, properties and events
+
+<ArgTypes of="c4p-truncated-string" />

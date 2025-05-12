@@ -65,19 +65,19 @@ test.describe('ExpressiveCard @avt', () => {
       'ExpressiveCard @avt-with-media-state'
     );
   });
-  test('@avt-with-action-icon-href-state', async ({ page }) => {
+  test('@avt-with-action-icon-link-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--with-action-icon-href',
+      id: 'ibm-products-components-cards-expressivecard--with-action-icon-link',
       globals: {
         carbonTheme: 'white',
       },
     });
     await expect(page).toHaveNoACViolations(
-      'ExpressiveCard @avt-with-action-icon-href-state'
+      'ExpressiveCard @avt-with-action-icon-link-state'
     );
 
-    const hrefEle = page.locator('a[href="#"]');
+    const hrefEle = page.locator('a[href="https://carbondesignsystem.com/"]');
     // Pressing 'Tab' key to focus on the '->' href button
     await page.keyboard.press('Tab');
     await expect(hrefEle).toBeFocused();

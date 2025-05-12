@@ -12,7 +12,7 @@
     "clean": "rimraf node_modules dist .cache"
   },
   "dependencies": {
-    "@carbon/ibm-products-web-components": "^0.10.0-rc.0",
+    "@carbon/ibm-products-web-components": "^0.14.0-rc.0",
     "lit": "^3.2.1",
     "sass": "^1.64.1"
   },

@@ -214,6 +214,7 @@ collect:
         - noSelectionTitle
         - noTrailingSlash
         - onActiveCellChange
+        - onAddItem
         - onAllRowSelect
         - onApply
         - onBlur
@@ -879,14 +880,12 @@ collect:
         - getToggleAllPageRowsSelectedProps
         - getToggleAllRowsSelectedProps
         - isAllRowsSelected
-        # SidePanel
+        # SidePanelBase
         - actionToolbarButtons
         - animateTitle
         - condensedActions
         - includeOverlay
         - navigationBackIconDescription
-        - onNavigationBack
-        - onUnmount
         # SingleAddSelect
         - searchResultsLabel
         # Sortable

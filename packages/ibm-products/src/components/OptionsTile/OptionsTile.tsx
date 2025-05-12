@@ -16,6 +16,7 @@ import {
 import { Heading, Layer, Section, Toggle } from '@carbon/react';
 import React, { MouseEvent, ReactNode, useRef, useState } from 'react';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { useNoInteractiveChildren } from '@carbon/utilities-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -94,9 +95,9 @@ export interface OptionsTileProps {
   summary?: string;
 
   /**
-   * Provide the title for this OptionsTile.
+   * Provide the title for this OptionsTile. Must not contain any interactive elements.
    */
-  title: string;
+  title: ReactNode;
 
   /**
    * Optionally provide an id which should be used for the title.
@@ -145,6 +146,9 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
 
     const detailsRef = useRef<HTMLDetailsElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const headingRef = useRef<HTMLHeadingElement>(null);
+
+    useNoInteractiveChildren(headingRef);
 
     const titleId = userDefinedTitleId ?? `${uuidv4()}-title`;
     const isExpandable = children !== undefined;
@@ -274,8 +278,12 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
       });
 
       return (
-        <Section className={`${blockClass}__heading`}>
-          <Heading id={titleId} className={`${blockClass}__title`}>
+        <div className={`${blockClass}__heading`}>
+          <Heading
+            ref={headingRef}
+            id={titleId}
+            className={`${blockClass}__title`}
+          >
             {title}
           </Heading>
           {text && (
@@ -284,12 +292,12 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
               <span className={`${blockClass}__summary-text`}>{text}</span>
             </span>
           )}
-        </Section>
+        </div>
       );
     };
 
     return (
-      <div
+      <Section
         {...rest}
         className={cx(blockClass, className, `${blockClass}--${size}`, {
           [`${blockClass}--closing`]: closing,
@@ -342,7 +350,7 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
         ) : (
           <div className={`${blockClass}__static-content`}>{renderTitle()}</div>
         )}
-      </div>
+      </Section>
     );
   }
 );
@@ -422,9 +430,9 @@ OptionsTile.propTypes = {
   summary: PropTypes.string,
 
   /**
-   * Provide the title for this OptionsTile.
+   * Provide the title for this OptionsTile. Must not contain any interactive elements.
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 
   /**
    * Optionally provide an id which should be used for the title.

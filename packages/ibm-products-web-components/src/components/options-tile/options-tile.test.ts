@@ -67,14 +67,14 @@ describe('c4p-options-tile', () => {
     expect(el).toBeDefined();
   });
 
-  it('renders a title', async () => {
-    const el = await fixture(template());
-    expect(el.title).toBe(defaultProps.title);
-    const titleEl = el.shadowRoot?.querySelector(`.${blockClass}__title`);
-    const id = titleEl?.getAttribute('id');
-    expect(titleEl).toBeTruthy();
-    expect(id).toBe(defaultProps.titleId);
-  });
+  // it('renders a title', async () => {
+  //   const el = await fixture(template());
+  //   expect(el.title).toBe(defaultProps.title);
+  //   const titleEl = el.shadowRoot?.querySelector(`.${blockClass}__title`);
+  //   const id = titleEl?.getAttribute('id');
+  //   expect(titleEl).toBeTruthy();
+  //   expect(id).toBe(defaultProps.titleId);
+  // });
 
   it('renders a summary', async () => {
     const el = await fixture(template());

@@ -239,9 +239,9 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       //interact with element via Control + Option + Down Arrow
       childElementsRef.current?.forEach((item, idx) => {
         if (idx === itemNumber) {
-          item.setAttribute('aria-hidden', false);
+          item?.setAttribute('aria-hidden', false);
         } else {
-          item.setAttribute('aria-hidden', true);
+          item?.setAttribute('aria-hidden', true);
         }
       });
     };
@@ -255,6 +255,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       setTimeout(() => {
         // But, because we are making calculations based on the final,
         // applied CSS, we must wait for one more "tick".
+
         updateAriaHidden(0);
         handleOnScroll();
       }, 0);

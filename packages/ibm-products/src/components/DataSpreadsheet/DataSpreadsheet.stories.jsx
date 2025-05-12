@@ -166,7 +166,7 @@ const largeDatasetSpreadsheetCustomRowHeaders = ({ ...args }) => {
       columns={columns}
       data={data}
       onDataUpdate={setData}
-      renderRowHeaderDirection="Left"
+      renderRowHeaderDirection="left"
       renderRowHeader={buildComponent}
       id="spreadsheet--id"
       {...args}

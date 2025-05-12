@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ComposedModal } from '@carbon/react';
+import {
+  ComposedModal,
+  unstable_FeatureFlags as FeatureFlags,
+} from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
   ReactNode,
@@ -205,22 +208,24 @@ export let InterstitialScreen = React.forwardRef<
 
   const renderModal = () => {
     return (
-      <ComposedModal
-        {...rest}
-        preventCloseOnClickOutside={true}
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className // Apply any supplied class names to the main HTML element.
-        )}
-        size="lg"
-        onClose={handleClose}
-        open={isOpen}
-        ref={_forwardedRef}
-        aria-label={interstitialAriaLabel}
-        {...getDevtoolsProps(componentName)}
-      >
-        {children}
-      </ComposedModal>
+      <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+        <ComposedModal
+          {...rest}
+          preventCloseOnClickOutside={true}
+          className={cx(
+            blockClass, // Apply the block class to the main HTML element
+            className // Apply any supplied class names to the main HTML element.
+          )}
+          size="lg"
+          onClose={handleClose}
+          open={isOpen}
+          ref={_forwardedRef}
+          aria-label={interstitialAriaLabel}
+          {...getDevtoolsProps(componentName)}
+        >
+          {children}
+        </ComposedModal>
+      </FeatureFlags>
     );
   };
 

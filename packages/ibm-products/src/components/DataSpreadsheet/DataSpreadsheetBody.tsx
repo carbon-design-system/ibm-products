@@ -121,7 +121,7 @@ interface DataSpreadsheetBodyProps {
   /**
    * Component next to numbering rows
    */
-  renderRowHeaderDirection?: string;
+  renderRowHeaderDirection?: 'left' | 'right';
 
   /**
    * The event handler that is called to set the rows for the empty spreadsheet
@@ -708,6 +708,8 @@ export const DataSpreadsheetBody = forwardRef(
                   // [`${blockClass}__td`]: true,
                   [`${blockClass}__td-th--cell-container`]: true,
                   [`${blockClass}__row-header`]: true,
+                  [`${blockClass}__row-header-reverse`]:
+                    renderRowHeaderDirection === 'right' && hasCustomRowHeader,
                   [`${blockClass}__row-header-active`]: isActive,
                   [`${blockClass}__row-header-selected`]:
                     !hasCustomRowHeader &&
@@ -723,11 +725,6 @@ export const DataSpreadsheetBody = forwardRef(
                 })}
                 style={{
                   width: defaultColumn?.rowHeaderWidth,
-                  flexDirection: hasCustomRowHeader
-                    ? renderRowHeaderDirection === 'Left'
-                      ? 'row-reverse'
-                      : row
-                    : undefined,
                 }}
               >
                 <button
@@ -950,7 +947,7 @@ DataSpreadsheetBody.propTypes = {
   /**
    * Component next to numbering rows
    */
-  renderRowHeaderDirection: PropTypes.string,
+  renderRowHeaderDirection: PropTypes.oneOf(['left', 'right']),
 
   /**
    * All of the spreadsheet row data

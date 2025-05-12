@@ -318,6 +318,22 @@ $header-cell-background: $layer-accent-01;
 
   block-size: 100%;
   cursor: pointer;
+  gap: $spacing-02;
+  padding-inline: $spacing-05 $spacing-03;
+
+  &.#{$block-class}__row-header-reverse {
+    flex-direction: row-reverse;
+    padding-inline: $spacing-03 $spacing-05;
+
+    .#{$block-class}__td-th-button {
+      text-align: end;
+    }
+  }
+
+  /* Exactly 1 child - only the row header button */
+  &:has(> :nth-child(1):last-child) {
+    padding-inline: $spacing-05;
+  }
 }
 
 .#{$block-class}__td-th--cell-container.#{$block-class}__row-header-active,
@@ -360,7 +376,8 @@ $header-cell-background: $layer-accent-01;
   background: inherit;
   block-size: 100%;
   border-block: none;
-  text-align: end;
+  cursor: pointer;
+  text-align: start;
 
   &:hover,
   &:focus {

@@ -8,7 +8,9 @@ import { describe, expect, it } from 'vitest';
 import { fixture, html, oneEvent } from '@open-wc/testing';
 import { render } from 'lit';
 import './index';
-import CDSOptionsTile, { blockClass } from './options-tile';
+
+import { prefix } from '../../globals/settings';
+const blockClass = `${prefix}--options-tile`;
 
 const defaultEvents = {
   handleOpen: () => {},
@@ -66,7 +68,7 @@ describe('c4p-options-tile', () => {
   });
 
   it('renders a title', async () => {
-    const el: CDSOptionsTile = await fixture(template());
+    const el = await fixture(template());
     expect(el.title).toBe(defaultProps.title);
     const titleEl = el.shadowRoot?.querySelector(`.${blockClass}__title`);
     const id = titleEl?.getAttribute('id');
@@ -75,7 +77,7 @@ describe('c4p-options-tile', () => {
   });
 
   it('renders a summary', async () => {
-    const el: CDSOptionsTile = await fixture(template());
+    const el = await fixture(template());
     const slot = el.shadowRoot?.querySelector(
       `slot[name="summary"]`
     ) as HTMLSlotElement;
@@ -86,7 +88,7 @@ describe('c4p-options-tile', () => {
   });
 
   it('renders a toggle', async () => {
-    const el: CDSOptionsTile = await fixture(template());
+    const el = await fixture(template());
     const slot = el.shadowRoot?.querySelector(
       `slot[name="toggle"]`
     ) as HTMLSlotElement;
@@ -97,9 +99,7 @@ describe('c4p-options-tile', () => {
   });
 
   it('renders a body', async () => {
-    const el: CDSOptionsTile = await fixture(
-      template({ props: { open: true } })
-    );
+    const el = await fixture(template({ props: { open: true } }));
     const slot = el.shadowRoot?.querySelector(
       `slot[name="body"]`
     ) as HTMLSlotElement;
@@ -110,7 +110,7 @@ describe('c4p-options-tile', () => {
   });
 
   it('fires open handler', async () => {
-    const el: CDSOptionsTile = await fixture(template());
+    const el = await fixture(template());
     const chevron = el.shadowRoot?.querySelector(
       `.${blockClass}__chevron`
     ) as HTMLElement;
@@ -121,9 +121,7 @@ describe('c4p-options-tile', () => {
   });
 
   it('fires close handler', async () => {
-    const el: CDSOptionsTile = await fixture(
-      template({ props: { open: true } })
-    );
+    const el = await fixture(template({ props: { open: true } }));
     const chevron = el.shadowRoot?.querySelector(
       `.${blockClass}__chevron`
     ) as HTMLElement;
@@ -134,9 +132,7 @@ describe('c4p-options-tile', () => {
   });
 
   it('has xl class when size is xl', async () => {
-    const el: CDSOptionsTile = await fixture(
-      template({ props: { size: 'xl' } })
-    );
+    const el = await fixture(template({ props: { size: 'xl' } }));
     const node = el.shadowRoot?.querySelector(
       `.${blockClass}--xl`
     ) as HTMLSlotElement;

@@ -111,7 +111,6 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       onScroll = defaults.onScroll,
       ...rest
     } = props;
-    const [isScrollableElement, setIsScrollableElement] = useState(false);
     const carouselRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
     const leftFadedEdgeRef = useRef<HTMLDivElement>(null);
@@ -358,14 +357,6 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
         rightFadedEdgeRef.current.style.background = `linear-gradient(270deg, ${rightFadedEdgeColor}, transparent)`;
       }
     }, [rightFadedEdgeRef, rightFadedEdgeColor]);
-
-    useIsomorphicEffect(() => {
-      if (scrollRef?.current) {
-        setIsScrollableElement(
-          scrollRef.current.scrollHeight > scrollRef.current.clientHeight
-        );
-      }
-    }, []);
 
     return (
       <div

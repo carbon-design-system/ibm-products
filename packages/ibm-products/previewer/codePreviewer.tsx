@@ -25,7 +25,8 @@ export const stackblitzPrefillConfig = async (
   // components: Array<string>, // Add all required components to be imported from @carbon/react
   // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
   customImports: Array<string> = [],
-  customFunctionDefs: Array<string> = []
+  customFunctionDefs: Array<string> = [],
+  styles: string
 ) => {
   const { args } = code;
   const productComponents = await import('../src/index');
@@ -35,7 +36,14 @@ export const stackblitzPrefillConfig = async (
     args
   );
   const app = appGenerator(storyCode, customImports, customFunctionDefs, args);
-
+  let styleImport = style;
+  if (styles) {
+    // This regex matches multi-line comments that start with /* and end with */
+    // It specifically looks for comments containing common license keywords
+    const licenseCommentRegex =
+      /\/\*\*?\s*\n?(?:\s*\*[^\n]*\n)*\s*\*?\s*(?:copyright|license|licensed|apache|mit|ibm corp|found in the|root directory)[^*]*\*\//gi;
+    styleImport += styles.replace(licenseCommentRegex, '');
+  }
   const stackblitzFileConfig: Project = {
     title: 'Carbon demo',
     description:
@@ -47,7 +55,7 @@ export const stackblitzPrefillConfig = async (
       'vite.config.js': viteConfig,
       'src/main.jsx': main,
       'src/App.jsx': app,
-      'src/index.scss': style,
+      'src/index.scss': styleImport,
     },
   };
 
@@ -103,7 +111,6 @@ const filterStoryCode = (storyCode, args) => {
       storyCodeUpdated = storyCodeUpdated.replace(regex, valueStr);
     }
   });
-  storyCodeUpdated = storyCodeUpdated.replace(/`([^`]+)`/g, '"$1"');
   return storyCodeUpdated;
 };
 
@@ -134,7 +141,6 @@ const appGenerator = (
   ${matchedComponents.length > 0 ? `import { ${matchedComponents.join(', ')} } from "@carbon/ibm-products";` : ''}
   ${matchedCarbonComponents.length > 0 ? `import { ${matchedCarbonComponents.join(', ')} } from "@carbon/react";` : ''}
   ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
-  const storyClass = 'example'
   export default function App() {
     ${hasArgs ? formattedArgs : ''}
     ${customFunctionDefs.map((customFunction) => customFunction)}

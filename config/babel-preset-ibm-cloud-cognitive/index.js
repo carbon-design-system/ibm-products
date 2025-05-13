@@ -29,6 +29,7 @@ module.exports = () => {
       '@babel/plugin-proposal-export-namespace-from',
       '@babel/plugin-proposal-export-default-from',
       '@babel/plugin-transform-react-constant-elements',
+      '@babel/plugin-transform-class-static-block',
     ],
   };
 };

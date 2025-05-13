@@ -1620,8 +1620,8 @@ __metadata:
     "@storybook/web-components": "npm:^8.6.12"
     "@storybook/web-components-vite": "npm:^8.6.12"
     "@types/jest": "npm:^29.5.13"
-    "@vitest/browser": "npm:^3.1.3"
-    "@vitest/coverage-v8": "npm:^3.1.3"
+    "@vitest/browser": "npm:^3.0.1"
+    "@vitest/coverage-v8": "npm:^3.0.1"
     autoprefixer: "npm:^10.4.20"
     c8: "npm:^10.1.3"
     cssnano: "npm:^7.0.6"
@@ -1629,7 +1629,7 @@ __metadata:
     eslint-config-carbon: "npm:^3.20.0"
     globby: "npm:^14.0.2"
     happy-dom: "npm:^17.0.0"
-    lit: "npm:^3.2.1"
+    lit: "npm:^3.1.0"
     playwright: "npm:^1.51.1"
     postcss: "npm:^8.4.47"
     remark-gfm: "npm:^4.0.0"
@@ -1643,7 +1643,7 @@ __metadata:
     typescript: "npm:^5.5.3"
     vite: "npm:^6.0.3"
     vite-tsconfig-paths: "npm:^5.1.4"
-    vitest: "npm:^3.1.3"
+    vitest: "npm:^3.0.1"
     web-component-analyzer: "npm:2.0.0"
   languageName: unknown
   linkType: soft
@@ -7783,7 +7783,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/browser@npm:^3.1.3":
+"@vitest/browser@npm:^3.0.1":
   version: 3.1.3
   resolution: "@vitest/browser@npm:3.1.3"
   dependencies:
@@ -7810,7 +7810,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-v8@npm:^3.1.3":
+"@vitest/coverage-v8@npm:^3.0.1":
   version: 3.1.3
   resolution: "@vitest/coverage-v8@npm:3.1.3"
   dependencies:
@@ -16198,7 +16198,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lit@npm:^2.0.0 || ^3.0.0, lit@npm:^3.0.0, lit@npm:^3.1.0, lit@npm:^3.2.1":
+"lit@npm:^2.0.0 || ^3.0.0, lit@npm:^3.0.0, lit@npm:^3.1.0":
   version: 3.3.0
   resolution: "lit@npm:3.3.0"
   dependencies:
@@ -23159,7 +23159,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:^3.1.3":
+"vitest@npm:^3.0.1":
   version: 3.1.3
   resolution: "vitest@npm:3.1.3"
   dependencies:

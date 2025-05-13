@@ -13,31 +13,37 @@ import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const ButtonWrapper = ({
-  onClick,
-  setIsTearsheetOpen,
-  isTearsheetOpen,
-  iconTooltipLabel = 'Customize columns',
-  ...rest
-}) => {
-  return (
-    <Button
-      {...rest}
-      renderIcon={(props) => <Column size={16} {...props} />}
-      iconDescription={iconTooltipLabel}
-      tooltipPosition="bottom"
-      kind="ghost"
-      hasIconOnly
-      test-id={`${blockClass}__customize-columns-trigger`}
-      onClick={() => {
-        setIsTearsheetOpen(!isTearsheetOpen);
-        if (typeof onClick === 'function') {
-          onClick();
-        }
-      }}
-    />
-  );
-};
+const ButtonWrapper = React.forwardRef(
+  (
+    {
+      onClick,
+      setIsTearsheetOpen,
+      isTearsheetOpen,
+      iconTooltipLabel = 'Customize columns',
+      ...rest
+    },
+    ref
+  ) => {
+    return (
+      <Button
+        {...rest}
+        renderIcon={(props) => <Column size={16} {...props} />}
+        iconDescription={iconTooltipLabel}
+        tooltipPosition="bottom"
+        kind="ghost"
+        hasIconOnly
+        test-id={`${blockClass}__customize-columns-trigger`}
+        ref={ref}
+        onClick={() => {
+          setIsTearsheetOpen(!isTearsheetOpen);
+          if (typeof onClick === 'function') {
+            onClick();
+          }
+        }}
+      />
+    );
+  }
+);
 
 ButtonWrapper.defaultProps = {
   onClick: () => {},

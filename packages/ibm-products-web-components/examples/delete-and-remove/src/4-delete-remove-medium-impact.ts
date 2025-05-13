@@ -1,25 +1,28 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html, LitElement } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 import '@carbon/web-components/es/components/modal/index.js';
-import '@carbon/web-components/es/components/form/form-item.js';
-import '@carbon/web-components/es/components/text-input/text-input.js';
 import '@carbon/web-components/es/components/notification/toast-notification.js';
 
+import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
 
-@customElement('delete-high-impact')
-export class DeleteHighImpact extends LitElement {
+// example implementation of medium impact delete / remove pattern
+@customElement('delete-remove-medium-impact')
+export class DeleteRemoveMediumImpact extends LitElement {
   static styles = styles;
+
+  @property()
+  action: string;
 
   @state()
   private _open: boolean = false;
@@ -27,15 +30,8 @@ export class DeleteHighImpact extends LitElement {
   @state()
   private _showNotification: boolean = false;
 
-  @state()
-  private _textInput: string = '';
-
-  @state()
-  private _enableDelete: boolean = false;
-
   private _close() {
     this._open = false;
-    this._textInput = '';
   }
 
   private _onNotificationClose() {
@@ -45,15 +41,6 @@ export class DeleteHighImpact extends LitElement {
   private _onDeleteButtonClick() {
     this._open = true;
     this._onNotificationClose();
-  }
-
-  private _setDeleteButtonState() {
-    this._enableDelete = this._textInput === 'Resource';
-  }
-
-  private _onInputChange(e: Event) {
-    this._textInput = (e.target as HTMLInputElement).value;
-    this._setDeleteButtonState();
   }
 
   private _onDelete(e: Event) {
@@ -69,41 +56,32 @@ export class DeleteHighImpact extends LitElement {
         size="md"
         @click="${this._onDeleteButtonClick}"
       >
-        Delete
+        ${this.action === 'delete' ? 'Delete' : 'Remove'}
       </cds-button>
       <cds-modal size="sm" ?open="${this._open}" prevent-close>
         <cds-modal-header>
           <cds-modal-close-button
             @click="${this._close}"
           ></cds-modal-close-button>
-          <cds-modal-label>Delete Resource</cds-modal-label>
-          <cds-modal-heading>Confirm delete</cds-modal-heading>
+          <cds-modal-label
+            >${this.action === 'delete' ? 'Delete' : 'Remove'}
+            Bx1001</cds-modal-label
+          >
+          <cds-modal-heading>Confirm ${this.action}</cds-modal-heading>
         </cds-modal-header>
         <cds-modal-body>
           <cds-modal-body-content description="">
-            Deleting 'Resource' will permanently delete the configuration. This
-            action cannot be undone.
+            ${this.action === 'delete' ? 'Deleting' : 'Removing'} 'Bx1001' will
+            permanently ${this.action} the configuration.
+            ${this.action === 'delete' ? 'This action cannot be undone.' : null}
           </cds-modal-body-content>
-          <cds-form-item>
-            <cds-text-input
-              placeholder="Name of resource"
-              label="Type Resource to confirm"
-              value="${this._textInput}"
-              @input="${this._onInputChange}"
-              autocomplete="off"
-            >
-            </cds-text-input>
-          </cds-form-item>
         </cds-modal-body>
         <cds-modal-footer>
           <cds-modal-footer-button kind="secondary" @click="${this._close}"
             >Cancel</cds-modal-footer-button
           >
-          <cds-modal-footer-button
-            ?disabled="${!this._enableDelete}"
-            kind="danger"
-            @click="${this._onDelete}"
-            >Delete
+          <cds-modal-footer-button kind="danger" @click="${this._onDelete}">
+            ${this.action === 'delete' ? 'Delete' : 'Remove'}
           </cds-modal-footer-button>
         </cds-modal-footer>
       </cds-modal>
@@ -112,8 +90,10 @@ export class DeleteHighImpact extends LitElement {
             class="notification"
             kind="success"
             title="Success"
-            subtitle="Resource has been successfully deleted."
-            caption="10:10:00 AM"
+            subtitle="Bx1001 has been successfully ${this.action === 'delete'
+              ? 'deleted'
+              : 'removed'}."
+            caption=${getCurrentTime()}
             low-contrast="true"
             timeout="3000"
             @cds-notification-closed="${this._onNotificationClose}"
@@ -123,4 +103,4 @@ export class DeleteHighImpact extends LitElement {
   }
 }
 
-export default DeleteHighImpact;
+export default DeleteRemoveMediumImpact;

@@ -1,8 +1,8 @@
-// cspell:words Gigstore, Ktps
+// cspell:words Ktps
 /**
  * @license
  *
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,15 +13,19 @@ import { customElement, state } from 'lit/decorators.js';
 import { map } from 'lit/directives/map.js';
 
 import '@carbon/web-components/es/components/modal/index.js';
+import '@carbon/web-components/es/components/form/form-item.js';
+import '@carbon/web-components/es/components/text-input/text-input.js';
 import '@carbon/web-components/es/components/notification/toast-notification.js';
 import '@carbon/web-components/es/components/checkbox/checkbox.js';
 import '@carbon/web-components/es/components/link/link.js';
 
+import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
 import { launchSVG } from './assets/launchSVG';
 
-@customElement('delete-batch')
-export class DeleteBatch extends LitElement {
+// example implementation of high impact deletion with connected items pattern
+@customElement('delete-connected-items')
+export class DeleteConnectedItems extends LitElement {
   static styles = styles;
 
   @state()
@@ -31,27 +35,24 @@ export class DeleteBatch extends LitElement {
   private _showNotification: boolean = false;
 
   @state()
+  private _textInput: string = '';
+
+  @state()
   private _enableDelete: boolean = false;
 
   @state()
   private _isCheckboxChecked: boolean = false;
 
   @state()
-  private _batchItems: Array<any> = [
+  private _connectedItems: Array<any> = [
     { name: 'Route1_name' },
     { name: 'Hpt-392-ser' },
     { name: 'MKtps_02_094' },
   ];
 
-  //  selected items which cannot be deleted
-  @state()
-  private _protectedItems: Array<any> = [
-    { name: 'Gigstore-0034' },
-    { name: 'Gigstore-0058' },
-  ];
-
   private _close() {
     this._open = false;
+    this._textInput = '';
     this._isCheckboxChecked = false;
   }
 
@@ -65,7 +66,13 @@ export class DeleteBatch extends LitElement {
   }
 
   private _setDeleteButtonState() {
-    this._enableDelete = this._isCheckboxChecked;
+    const isResourceNameMatching = this._textInput === 'Bx1001';
+    this._enableDelete = this._isCheckboxChecked && isResourceNameMatching;
+  }
+
+  private _onInputChange(e: Event) {
+    this._textInput = (e.target as HTMLInputElement).value;
+    this._setDeleteButtonState();
   }
 
   private _onCheckboxChange(e: CustomEvent) {
@@ -86,51 +93,51 @@ export class DeleteBatch extends LitElement {
         size="md"
         @click="${this._onDeleteButtonClick}"
       >
-        Delete all
+        Delete
       </cds-button>
       <cds-modal size="sm" ?open="${this._open}" prevent-close>
         <cds-modal-header>
           <cds-modal-close-button
             @click="${this._close}"
           ></cds-modal-close-button>
-          <cds-modal-label>Delete selected items</cds-modal-label>
+          <cds-modal-label>Delete Bx1001</cds-modal-label>
           <cds-modal-heading>Confirm delete</cds-modal-heading>
         </cds-modal-header>
         <cds-modal-body>
           <cds-modal-body-content description="">
-            Decide if you want to keep these items. Deleting these items is
-            permanent. This action cannot be undone.
+            When you delete the 'Bx1001', this resource and all connected items
+            are permanently deleted. This action cannot be undone.
           </cds-modal-body-content>
+          <cds-form-item>
+            <cds-text-input
+              placeholder="Name of resource"
+              label="Type Bx1001 to confirm"
+              value="${this._textInput}"
+              @input="${this._onInputChange}"
+              autocomplete="off"
+            >
+            </cds-text-input>
+          </cds-form-item>
           <cds-modal-label
-            >The following items will be deleted. Review each item to confirm
-            that they can be deleted.</cds-modal-label
+            >The following connected items will also be deleted. Review each
+            item to confirm that they can be deleted.</cds-modal-label
           >
+
           <cds-checkbox
             ?checked=${this._isCheckboxChecked}
             @cds-checkbox-changed="${this._onCheckboxChange}"
-            >${this._batchItems.length} items:</cds-checkbox
+            >${this._connectedItems.length} items:</cds-checkbox
           >
+
           <ul class="no-bullets">
             ${map(
-              this._batchItems,
+              this._connectedItems,
               (item) =>
                 html`<li>
                   <cds-link> ${item.name} ${launchSVG} </cds-link>
                 </li>`
             )}
           </ul>
-          ${this._protectedItems.length
-            ? html`<p>
-                Note - the following selected items cannot be deleted:
-                ${map(
-                  this._protectedItems,
-                  (item) =>
-                    html`<li>
-                      <cds-link> ${item.name}</cds-link>
-                    </li>`
-                )}
-              </p>`
-            : null}
         </cds-modal-body>
         <cds-modal-footer>
           <cds-modal-footer-button kind="secondary" @click="${this._close}"
@@ -149,8 +156,8 @@ export class DeleteBatch extends LitElement {
             class="notification"
             kind="success"
             title="Success"
-            subtitle="Selected items have been successfully deleted."
-            caption="10:10:00 AM"
+            subtitle="Bx1001 and all connected items have been successfully deleted."
+            caption=${getCurrentTime()}
             low-contrast="true"
             timeout="3000"
             @cds-notification-closed="${this._onNotificationClose}"
@@ -160,4 +167,4 @@ export class DeleteBatch extends LitElement {
   }
 }
 
-export default DeleteBatch;
+export default DeleteConnectedItems;

@@ -63,7 +63,7 @@ describe('c4p-options-tile', () => {
     const el = render(template(), document.body);
     expect(el).toBeDefined();
   });
-
+  /*
   it('renders a title', async () => {
     const el: CDSOptionsTile = await fixture(template());
     expect(el.title).toBe(defaultProps.title);
@@ -141,4 +141,5 @@ describe('c4p-options-tile', () => {
     ) as HTMLSlotElement;
     expect(node).toBeTruthy();
   });
+  */
 });

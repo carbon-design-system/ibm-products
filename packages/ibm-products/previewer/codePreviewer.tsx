@@ -143,6 +143,9 @@ const appGenerator = (
   ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
   export default function App() {
     ${hasArgs ? formattedArgs : ''}
+    const pkg = {
+     prefix: 'c4p'
+    }
     ${customFunctionDefs.map((customFunction) => customFunction)}
     ${storyCode}
   }

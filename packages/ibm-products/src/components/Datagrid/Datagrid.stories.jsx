@@ -279,6 +279,45 @@ export const InfiniteScroll = () => {
   );
 };
 
+export const InfiniteScrollWithSelection = () => {
+  const [data, setData] = useState(makeData(0));
+  const columns = React.useMemo(() => getColumns(data), []);
+
+  const [isFetching, setIsFetching] = useState(false);
+  const fetchData = () =>
+    new Promise((resolve) => {
+      setIsFetching(true);
+      setTimeout(() => {
+        setData(data.concat(makeData(30, 5, 2)));
+        setIsFetching(false);
+        resolve();
+      }, 1000);
+    });
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      isFetching,
+      fetchMoreData: fetchData,
+      virtualHeight: 540,
+      emptyStateTitle: 'Empty state title',
+      emptyStateDescription: 'Description explaining why the table is empty',
+    },
+    useInfiniteScroll,
+    useSelectRows
+  );
+
+  return (
+    <Wrapper>
+      <Datagrid datagridState={{ ...datagridState }} />
+    </Wrapper>
+  );
+};
+
 export const WithVirtualizedData = () => {
   const [data] = useState(makeData(10000));
   const columns = React.useMemo(() => getColumns(data), []);

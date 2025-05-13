@@ -16,6 +16,7 @@ import {
 import { Heading, Layer, Section, Toggle } from '@carbon/react';
 import React, { MouseEvent, ReactNode, useRef, useState } from 'react';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { useNoInteractiveChildren } from '@carbon/utilities-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -94,7 +95,7 @@ export interface OptionsTileProps {
   summary?: string;
 
   /**
-   * Provide the title for this OptionsTile.
+   * Provide the title for this OptionsTile. Must not contain any interactive elements.
    */
   title: ReactNode;
 
@@ -145,6 +146,9 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
 
     const detailsRef = useRef<HTMLDetailsElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const headingRef = useRef<HTMLHeadingElement>(null);
+
+    useNoInteractiveChildren(headingRef);
 
     const titleId = userDefinedTitleId ?? `${uuidv4()}-title`;
     const isExpandable = children !== undefined;
@@ -275,7 +279,11 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
 
       return (
         <div className={`${blockClass}__heading`}>
-          <Heading id={titleId} className={`${blockClass}__title`}>
+          <Heading
+            ref={headingRef}
+            id={titleId}
+            className={`${blockClass}__title`}
+          >
             {title}
           </Heading>
           {text && (
@@ -422,7 +430,7 @@ OptionsTile.propTypes = {
   summary: PropTypes.string,
 
   /**
-   * Provide the title for this OptionsTile.
+   * Provide the title for this OptionsTile. Must not contain any interactive elements.
    */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 

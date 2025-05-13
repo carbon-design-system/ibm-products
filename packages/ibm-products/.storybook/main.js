@@ -68,6 +68,20 @@ export default {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
 
+  managerHead: (head) => {
+    return `
+      ${head}
+      <script src="https://cdn.amplitude.com/script/${process.env.STORYBOOK_AMPLITUDE_KEY}.js"></script>
+      <script>
+        window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+        window.amplitude.init('${process.env.STORYBOOK_AMPLITUDE_KEY}', {
+          "fetchRemoteConfig": true,
+          "autocapture": true
+        });
+      </script>
+    `;
+  },
+
   async viteFinal(config, { configType }) {
     // Merge custom configuration into the default config
     const { mergeConfig } = await import('vite');

@@ -1,4 +1,3 @@
-// cspell:words Ktps
 /**
  * @license
  *

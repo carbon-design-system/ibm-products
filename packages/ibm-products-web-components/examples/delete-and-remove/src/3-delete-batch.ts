@@ -1,4 +1,3 @@
-// cspell:words Gigstore, Ktps
 /**
  * @license
  *

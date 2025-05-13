@@ -30,11 +30,10 @@ To build this pattern, we recommend including the following components:
 - [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input--overview)
 - [cds-toast-notification](https://web-components.carbondesignsystem.com/?path=/docs/components-notifications-toast--overview)
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview)
+- [cds-checkbox](https://web-components.carbondesignsystem.com/?path=/docs/components-checkbox--overview)
+- [cds-link](https://web-components.carbondesignsystem.com/?path=/docs/components-link--overview)
 
 ## High impact deletion
-
-A high-impact deletion cannot be reversed. The action would result in a
-significant loss for a user if done accidentally.
 
 When deleting is high-impact, a confirmation dialog should be presented to the
 user which displays:
@@ -52,9 +51,8 @@ perfectly matches the resource name.
 
 Here's a quick example to get you started.
 
-All of the carbon web components listed under 'ingredients' section are used
-within a wrapper component `delete-pattern` to handle state management required
-for the functionality.
+The Carbon web components listed in the 'ingredients' section are used within a
+wrapper component to implement the functionality.
 
 #### JS (via import)
 
@@ -70,21 +68,21 @@ import '@carbon/web-components/es/components/link/link.js';
 #### HTML
 
 ```html
-<cds-modal size="sm" ?open="${this.isOpen}" prevent-close>
+<cds-modal size="sm" ?open="${this._open}" prevent-close>
   <cds-modal-header>
     <cds-modal-close-button @click="${this._close}"></cds-modal-close-button>
-    <cds-modal-label>Delete project</cds-modal-label>
+    <cds-modal-label>Delete Resource</cds-modal-label>
     <cds-modal-heading>Confirm delete</cds-modal-heading>
   </cds-modal-header>
   <cds-modal-body>
-    <cds-modal-body-content description>
-      Deleting project will permanently delete the project and all related
-      configurations from the system. This action cannot be undone.
+    <cds-modal-body-content description="">
+      Deleting 'Resource' will permanently delete the configuration. This action
+      cannot be undone.
     </cds-modal-body-content>
     <cds-form-item>
       <cds-text-input
         placeholder="Name of resource"
-        label="Type ${this.resourceName} to confirm"
+        label="Type Resource to confirm"
         value="${this._textInput}"
         @input="${this._onInputChange}"
         autocomplete="off"
@@ -100,22 +98,19 @@ import '@carbon/web-components/es/components/link/link.js';
       ?disabled="${!this._enableDelete}"
       kind="danger"
       @click="${this._onDelete}"
-    >
-      Delete
+      >Delete
     </cds-modal-footer-button>
   </cds-modal-footer>
 </cds-modal>
-
 <cds-toast-notification
   class="notification"
   kind="success"
-  title="Successfully deleted project"
-  subtitle="${this.resourceName} project has been deleted"
+  title="Success"
+  subtitle="Resource has been successfully deleted."
   caption="10:10:00 AM"
-  hide-close-button="true"
   low-contrast="true"
   timeout="3000"
-  @cds-notification-closed="${this.onNotificationClose}"
+  @cds-notification-closed="${this._onNotificationClose}"
 ></cds-toast-notification>
 ```
 
@@ -124,8 +119,8 @@ import '@carbon/web-components/es/components/link/link.js';
 It is similar to high-impact deletion pattern, but the confirmation dialog will
 display the below 2 additional content:
 
-- list of all the connected items
-- checkbox to confirm the deletion the all its connected items.
+- A list of all the connected items
+- A checkbox to confirm the deletion the all its connected items.
 
 ### High impact batch deletion
 

@@ -13,51 +13,19 @@ LICENSE file in the root directory of this source tree.
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="src/styles.scss" />
     <script type="module" src="src/delete-and-remove.ts"></script>
-    <script type="module" src="src/index.ts"></script>
+    <!-- <script type="module" src="src/index.ts"></script> -->
   </head>
   <body>
     <section>
       <h4>Deletion patterns</h4>
       <p>High impact deletion:</p>
-      <cds-button
-        data-action-type="delete"
-        data-action-sev="high"
-        data-resource-name="Sample"
-        class="action-btn"
-        id="high-impact-del-btn"
-        type="button"
-        kind="danger"
-        size="md"
-      >
-        Delete
-      </cds-button>
+      <delete-high-impact></delete-high-impact>
+      
       <p>High impact deletion with connected items:</p>
-      <cds-button
-        data-action-type="delete"
-        data-action-sev="high"
-        data-resource-name="Demo"
-        class="action-btn"
-        id="high-impact-del-btn"
-        type="button"
-        kind="danger"
-        size="md"
-      >
-        Delete
-      </cds-button>
-      <p>High impact batch deletion:</p>
-      <cds-button
-        data-action-type="delete"
-        data-action-sev="high"
-        data-resource-name="Batch Demo"
-        class="action-btn"
-        id="high-impact-del-btn"
-        type="button"
-        kind="danger"
-        size="md"
-      >
-        Delete all
-      </cds-button>
-      <p>High impact batch deletion with more than 10 items:</p>
+      <delete-connected-items></delete-connected-items>
+      p>High impact batch deletion:</p>
+      <delete-batch></delete-batch>
+      <!--<<p>High impact batch deletion with more than 10 items:</p>
       <cds-button
         data-action-type="delete"
         data-action-sev="high"
@@ -95,10 +63,10 @@ LICENSE file in the root directory of this source tree.
         size="md"
       >
         Delete
-      </cds-button>
+      </cds-button> -->
     </section>
 
-    <section>
+    <!-- <section>
       <h4>Removal patterns</h4>
       <p>Medium impact removal:</p>
       <cds-button
@@ -126,8 +94,8 @@ LICENSE file in the root directory of this source tree.
       >
         Remove
       </cds-button>
-    </section>
+    </section> -->
 
-    <delete-remove> </delete-remove>
+    <!-- <delete-remove> </delete-remove> -->
   </body>
 </html>

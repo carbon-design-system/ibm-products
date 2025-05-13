@@ -1,28 +1,40 @@
-/**
- * @license
- *
- * Copyright IBM Corp. 2025
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+// /**
+//  * @license
+//  *
+//  * Copyright IBM Corp. 2025
+//  *
+//  * This source code is licensed under the Apache-2.0 license found in the
+//  * LICENSE file in the root directory of this source tree.
+//  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.action-btn').forEach((btn) => {
-    btn.addEventListener('click', handleButtonClick);
-  });
+// document.addEventListener('DOMContentLoaded', () => {
+//   document.querySelectorAll('.action-btn').forEach((btn) => {
+//     btn.addEventListener('click', handleButtonClick);
+//   });
 
-  function handleButtonClick(event) {
-    const actionType = event.target.dataset.actionType;
-    const actionSeverity = event.target.dataset.actionSev;
-    const resourceName = event.target.dataset.resourceName;
+//   function handleButtonClick(event) {
+//     const actionType = event.target.dataset.actionType;
+//     const actionVariant = event.target.dataset.actionVariant;
 
-    let element = document.querySelector('delete-remove');
-    if (actionSeverity !== 'low') {
-      element?.setAttribute('isOpen', 'true');
-    }
-    element?.setAttribute('resourceName', resourceName);
-    element?.setAttribute('type', actionType);
-    element?.setAttribute('severity', actionSeverity);
-  }
-});
+//     const componentName = `${actionType}-${actionVariant}`;
+
+//     const existing = document.querySelector(componentName);
+//     if (existing) {
+//       existing.remove();
+//     }
+//     const element = document.createElement(componentName);
+//     element.setAttribute('open', 'true');
+
+//     document.body.appendChild(element);
+
+//     // const resourceName = event.target.dataset.resourceName;
+
+//     // let element = document.querySelector('delete-remove');
+//     // if (actionSeverity !== 'low') {
+//     //   element?.setAttribute('isOpen', 'true');
+//     // }
+//     // element?.setAttribute('resourceName', resourceName);
+//     // element?.setAttribute('type', actionType);
+//     // element?.setAttribute('severity', actionSeverity);
+//   }
+// });

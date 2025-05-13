@@ -24,7 +24,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.Auto),
+      onClick: () => stackblitzPrefillConfig(stories.Auto, [], [], stories.default.parameters.styles),
     },
   ]}
 />
@@ -36,7 +36,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.Manual),
+      onClick: () => stackblitzPrefillConfig(stories.Manual, [], [], stories.default.parameters.styles),
     },
   ]}
 />

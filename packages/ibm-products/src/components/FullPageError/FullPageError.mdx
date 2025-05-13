@@ -33,7 +33,7 @@ errors, and not caused by server connectivity issues.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.fullPageError),
+      onClick: () => stackblitzPrefillConfig(stories.fullPageError, [], [], stories.default.parameters.styles),
     },
   ]}
 />
@@ -48,7 +48,7 @@ access the page or data, or when login is required.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.fullPageError403),
+      onClick: () => stackblitzPrefillConfig(stories.fullPageError403, [], [], stories.default.parameters.styles),
     },
   ]}
 />
@@ -64,7 +64,7 @@ broken links.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.fullPageError404),
+      onClick: () => stackblitzPrefillConfig(stories.fullPageError404, [], [], stories.default.parameters.styles),
     },
   ]}
 />

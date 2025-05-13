@@ -1,3 +1,4 @@
+<!-- cspell:words Gigstore, Ktps -->
 import { Markdown, Meta, Story } from '@storybook/blocks';
 
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
@@ -5,17 +6,17 @@ import * as DeleteStories from './delete-and-remove.stories';
 
 <Meta of={DeleteStories} />
 
-# Delete and remove pattern
+# Delete and remove
+
+[Delete and remove usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/delete-and-remove/usage/)
+
+## Overview
 
 “Removing” is an action that moves information from one location to another.
 Removal can be both destructive and non-destructive. “Deletion” is the most
 common type of removal and is destructive
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/delete-pattern)
-> example implementation.
-
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/delete-pattern)
+## Coded examples
 
 Patterns have multiple ways of accomplishing a user need and typically use a
 combination of components with additional design considerations. The pattern
@@ -30,11 +31,16 @@ To build this pattern, we recommend including the following components:
 - [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input--overview)
 - [cds-toast-notification](https://web-components.carbondesignsystem.com/?path=/docs/components-notifications-toast--overview)
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview)
+- [cds-checkbox](https://web-components.carbondesignsystem.com/?path=/docs/components-checkbox--overview)
+- [cds-link](https://web-components.carbondesignsystem.com/?path=/docs/components-link--overview)
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/delete-and-remove)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/delete-and-remove)
 
 ## High impact deletion
-
-A high-impact deletion cannot be reversed. The action would result in a
-significant loss for a user if done accidentally.
 
 When deleting is high-impact, a confirmation dialog should be presented to the
 user which displays:
@@ -44,17 +50,9 @@ user which displays:
 - This action cannot be undone.
 - An editable text field for the name of the resource to be entered
 
-For high-impact scenarios, a user should confirm the action by manually entering
-the name of the resource. The ‘Delete’ button is enabled when the text entered
-perfectly matches the resource name.
-
 ### Example
 
 Here's a quick example to get you started.
-
-All of the carbon web components listed under 'ingredients' section are used
-within a wrapper component `delete-pattern` to handle state management required
-for the functionality.
 
 #### JS (via import)
 
@@ -70,21 +68,21 @@ import '@carbon/web-components/es/components/link/link.js';
 #### HTML
 
 ```html
-<cds-modal size="sm" ?open="${this.isOpen}" prevent-close>
+<cds-modal size="sm" ?open="${this._open}" prevent-close>
   <cds-modal-header>
     <cds-modal-close-button @click="${this._close}"></cds-modal-close-button>
-    <cds-modal-label>Delete project</cds-modal-label>
+    <cds-modal-label>Delete Bx1001</cds-modal-label>
     <cds-modal-heading>Confirm delete</cds-modal-heading>
   </cds-modal-header>
   <cds-modal-body>
-    <cds-modal-body-content description>
-      Deleting project will permanently delete the project and all related
-      configurations from the system. This action cannot be undone.
+    <cds-modal-body-content description="">
+      Deleting 'Bx1001' will permanently delete the configuration. This action
+      cannot be undone.
     </cds-modal-body-content>
     <cds-form-item>
       <cds-text-input
         placeholder="Name of resource"
-        label="Type ${this.resourceName} to confirm"
+        label="Type Bx1001 to confirm"
         value="${this._textInput}"
         @input="${this._onInputChange}"
         autocomplete="off"
@@ -100,34 +98,31 @@ import '@carbon/web-components/es/components/link/link.js';
       ?disabled="${!this._enableDelete}"
       kind="danger"
       @click="${this._onDelete}"
-    >
-      Delete
+      >Delete
     </cds-modal-footer-button>
   </cds-modal-footer>
 </cds-modal>
-
 <cds-toast-notification
   class="notification"
   kind="success"
-  title="Successfully deleted project"
-  subtitle="${this.resourceName} project has been deleted"
-  caption="10:10:00 AM"
-  hide-close-button="true"
+  title="Success"
+  subtitle="Bx1001 has been successfully deleted."
+  caption="${getCurrentTime()}"
   low-contrast="true"
   timeout="3000"
-  @cds-notification-closed="${this.onNotificationClose}"
+  @cds-notification-closed="${this._onNotificationClose}"
 ></cds-toast-notification>
 ```
 
-### High impact deletion with connected items
+### Deletion with connected items
 
 It is similar to high-impact deletion pattern, but the confirmation dialog will
 display the below 2 additional content:
 
-- list of all the connected items
-- checkbox to confirm the deletion the all its connected items.
+- A list of all the connected items
+- A checkbox to confirm the deletion of all its connected items.
 
-### High impact batch deletion
+### Batch deletion
 
 In batch deletion, a confirmation dialog should be presented to the user which
 displays:
@@ -138,11 +133,72 @@ displays:
 - A checkbox to confirm the deletion of the selected resources
 - A note of items that cannot be deleted in batch selection (optional)
 
+### Example
+
+Here's a quick example to get you started.
+
+#### HTML
+
+```html
+<cds-modal size="sm" ?open="${this._open}" prevent-close>
+  <cds-modal-header>
+    <cds-modal-close-button @click="${this._close}"></cds-modal-close-button>
+    <cds-modal-label>Delete selected items</cds-modal-label>
+    <cds-modal-heading>Confirm delete</cds-modal-heading>
+  </cds-modal-header>
+  <cds-modal-body>
+    <cds-modal-body-content description="">
+      Decide if you want to keep these items. Deleting these items is permanent.
+      This action cannot be undone.
+    </cds-modal-body-content>
+    <cds-modal-label
+      >The following items will be deleted. Review each item to confirm that
+      they can be deleted.</cds-modal-label
+    >
+    <cds-checkbox
+      ?checked="${this._isCheckboxChecked}"
+      @cds-checkbox-changed="${this._onCheckboxChange}"
+      >3 items:</cds-checkbox
+    >
+    <ul class="no-bullets">
+      <li><cds-link> Route1_name ${launchSVG} </cds-link></li>
+      <li><cds-link> Hpt-392-ser ${launchSVG} </cds-link></li>
+      <li><cds-link> MKtps_02_094 ${launchSVG} </cds-link></li>
+    </ul>
+
+    <p>
+      Note - the following selected items cannot be deleted:
+      <cds-link>Gigstore-0034</cds-link>, <cds-link>Gigstore-0058</cds-link>
+    </p>
+  </cds-modal-body>
+  <cds-modal-footer>
+    <cds-modal-footer-button kind="secondary" @click="${this._close}"
+      >Cancel</cds-modal-footer-button
+    >
+    <cds-modal-footer-button
+      ?disabled="${!this._enableDelete}"
+      kind="danger"
+      @click="${this._onDelete}"
+      >Delete</cds-modal-footer-button
+    >
+  </cds-modal-footer>
+</cds-modal>
+<cds-toast-notification
+  class="notification"
+  kind="success"
+  title="Success"
+  subtitle="Selected items have been successfully deleted."
+  caption="${getCurrentTime()}"
+  low-contrast="true"
+  timeout="3000"
+  @cds-notification-closed="${this._onNotificationClose}"
+></cds-toast-notification>
+```
+
 ## Medium impact deletion or removal
 
-A medium-impact deletion is one that cannot be reversed, but would not be
-catastrophic if done accidentally. When deleting is medium-impact, a
-confirmation dialog should be presented to the user which displays:
+When deleting is medium-impact, a confirmation dialog should be presented to the
+user which displays:
 
 - The name of the resource
 - Consequences of the deletion
@@ -156,23 +212,19 @@ confirmation dialog should be presented to the user which displays:
 
 Here's a quick example to get you started.
 
-All of the carbon web components listed under 'ingredients' section are used
-within a wrapper component `delete-pattern` to handle state management required
-for the functionality.
-
 #### HTML
 
 ```html
-<cds-modal size="sm" ?open="${this.isOpen}" prevent-close>
+<cds-modal size="sm" ?open="${this._open}" prevent-close>
   <cds-modal-header>
     <cds-modal-close-button @click="${this._close}"></cds-modal-close-button>
-    <cds-modal-label>Delete project</cds-modal-label>
+    <cds-modal-label>Delete Bx1001</cds-modal-label>
     <cds-modal-heading>Confirm delete</cds-modal-heading>
   </cds-modal-header>
   <cds-modal-body>
-    <cds-modal-body-content description>
-      Deleting project will permanently delete the project and all related
-      configurations from the system. This action cannot be undone.
+    <cds-modal-body-content description="">
+      Deleting 'Bx1001' will permanently delete the configuration. This action
+      cannot be undone.
     </cds-modal-body-content>
   </cds-modal-body>
   <cds-modal-footer>
@@ -187,13 +239,12 @@ for the functionality.
 <cds-toast-notification
   class="notification"
   kind="success"
-  title="Successfully deleted project"
-  subtitle="${this.resourceName} project has been deleted"
-  caption="10:10:00 AM"
-  hide-close-button="true"
+  title="Success"
+  subtitle="Bx1001 has been successfully deleted"
+  caption="${getCurrentTime()}"
   low-contrast="true"
   timeout="3000"
-  @cds-notification-closed="${this.onNotificationClose}"
+  @cds-notification-closed="${this._onNotificationClose}"
 ></cds-toast-notification>
 ```
 
@@ -211,23 +262,25 @@ not be required.
 
 Here's a quick example to get you started.
 
-All of the carbon web components listed under 'ingredients' section are used
-within a wrapper component `delete-pattern` to handle state management required
-for the functionality.
-
 #### HTML
 
 ```html
-<cds-button kind="danger" @click="${this._onDelete}"> Delete </cds-button>
+<cds-button
+  type="button"
+  kind="danger"
+  size="md"
+  @click="${this._onDeleteButtonClick}"
+>
+  Delete ${trashCanSVG}
+</cds-button>
 <cds-toast-notification
   class="notification"
   kind="success"
-  title="Successfully deleted project"
-  subtitle="${this.resourceName} project has been deleted"
-  caption="10:10:00 AM"
-  hide-close-button="true"
+  title="Success"
+  subtitle="Bx1001 has been successfully deleted"
+  caption="${getCurrentTime()}"
   low-contrast="true"
   timeout="3000"
-  @cds-notification-closed="${this.onNotificationClose}"
+  @cds-notification-closed="${this._onNotificationClose}"
 ></cds-toast-notification>
 ```

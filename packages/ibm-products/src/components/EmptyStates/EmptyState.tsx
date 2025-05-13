@@ -31,10 +31,9 @@ enum sizes {
 }
 
 // Default values for props
-export const defaults: { position: string; size: sizes; headingAs: string } = {
+export const defaults: { position: string; size: sizes } = {
   position: 'top',
   size: sizes.lg,
-  headingAs: 'h3',
 };
 
 export interface EmptyStateAction extends ButtonProps<React.ElementType> {
@@ -79,7 +78,9 @@ export interface EmptyStateProps {
   link?: CustomLink;
 
   /**
-   * Empty state headingAs allows you to customize the type of heading element
+   * Customize the heading element.  Set to "h1" when EmptyState is full page, i.e. there is no higher header.
+   * Otherwise, you normally don't need to specify this: EmptyState will automatically pick the right heading level
+   * (h2-h6) by leveraging Section and Heading.
    */
   headingAs?: (() => ReactNode) | string | ElementType;
 
@@ -124,7 +125,7 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       illustrationPosition = defaults.position,
       link,
       size = defaults.size,
-      headingAs = defaults.headingAs,
+      headingAs,
       subtitle,
       title,
       ...rest

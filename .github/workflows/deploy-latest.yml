@@ -34,6 +34,6 @@ jobs:
       - name: Deploy to latest
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npx gh-pages -d packages/core/storybook-static -u "github-actions-bot <support+actions@github.com>" --dest latest --message "chore(deploy): deploy to gh-pages latest"
+          npx gh-pages -d packages/ibm-products/storybook-static -u "github-actions-bot <support+actions@github.com>" --dest latest --message "chore(deploy): deploy to gh-pages latest"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

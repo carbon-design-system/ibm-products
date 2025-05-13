@@ -52,7 +52,7 @@ export let ErrorEmptyState = React.forwardRef<
       illustrationTheme,
       link,
       size = defaults.size,
-      headingAs = defaults.headingAs,
+      headingAs,
       subtitle,
       title,
 

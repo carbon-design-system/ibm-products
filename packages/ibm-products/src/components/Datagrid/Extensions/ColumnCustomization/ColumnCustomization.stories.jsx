@@ -27,7 +27,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { CodeSnippet } from '@carbon/react';
 import { pkg } from '../../../../settings';
 import { FeatureFlags } from '../../../FeatureFlags';
-import { WithFeatureFlags } from '../../../../../../core/.storybook/WithFeatureFlags';
+import { WithFeatureFlags } from '../../../../../.storybook/WithFeatureFlags';
 
 export default {
   title: 'Deprecated/Datagrid/Datagrid/ColumnCustomization',

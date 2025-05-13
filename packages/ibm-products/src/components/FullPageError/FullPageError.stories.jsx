@@ -69,6 +69,7 @@ const Template = (args) => {
             title={`${args.title}`}
             label={`${args.label}`}
             description={`${args.description}`}
+            kind={`${args.kind}`}
           >
             <Link size="lg" href={'/'}>
               – Forwarding Link 1

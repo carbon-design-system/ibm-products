@@ -73,17 +73,16 @@ export default {
       ${head}
       ${
         process.env.NODE_ENV !== 'development'
-          ? `<script src="https://cdn.amplitude.com/script/1181fcf4482b4c8e905ffd877f3aef57}.js"></script>
+          ? `<script src="https://cdn.amplitude.com/script/1181fcf4482b4c8e905ffd877f3aef57.js"></script>
       <script>
         window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-        window.amplitude.init('1181fcf4482b4c8e905ffd877f3aef57}', {
+        window.amplitude.init('1181fcf4482b4c8e905ffd877f3aef57', {
           "fetchRemoteConfig": true,
           "autocapture": true
         });
       </script>`
           : ''
       }
-      
     `;
   },
 

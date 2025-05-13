@@ -34,6 +34,18 @@ const config = {
     name: '@storybook/web-components-vite',
     options: {},
   },
+  managerHead: (head: string) => {
+    return `
+      ${head}
+      ${
+        process.env.NODE_ENV !== 'development'
+          ? `
+        <script src="https://cdn.amplitude.com/script/48c55527c3d2a224764e27b396e954aa.js"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('48c55527c3d2a224764e27b396e954aa', {"fetchRemoteConfig":true,"autocapture":true});</script>
+        `
+          : ''
+      }
+    `;
+  },
   async viteFinal(config) {
     return mergeConfig(config, {
       plugins: [litStyleLoader(), litTemplateLoader()],

@@ -69,16 +69,22 @@ export default {
   },
 
   managerHead: (head) => {
+    console.log(process.env.NODE_ENV);
     return `
       ${head}
-      <script src="https://cdn.amplitude.com/script/${process.env.STORYBOOK_AMPLITUDE_KEY}.js"></script>
+      ${
+        process.env.NODE_ENV !== 'development'
+          ? `<script src="https://cdn.amplitude.com/script/${process.env.STORYBOOK_AMPLITUDE_KEY}.js"></script>
       <script>
         window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
         window.amplitude.init('${process.env.STORYBOOK_AMPLITUDE_KEY}', {
           "fetchRemoteConfig": true,
           "autocapture": true
         });
-      </script>
+      </script>`
+          : ''
+      }
+      
     `;
   },
 

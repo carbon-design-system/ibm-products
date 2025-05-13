@@ -23,11 +23,11 @@ const useInstance = (instance: TableInstance) => {
   const CustomizeColumnsButton = React.useCallback(
     (props: ComponentProps<typeof ToggleButtonWrapper>) => (
       <ToggleButtonWrapper
+        {...props}
         iconTooltipLabel={labels?.iconTooltipLabel}
         isTearsheetOpen={isTearsheetOpen}
         setIsTearsheetOpen={setIsTearsheetOpen}
         ref={launcherButtonRef}
-        {...props}
       />
     ),
     [isTearsheetOpen, labels?.iconTooltipLabel]
@@ -35,8 +35,8 @@ const useInstance = (instance: TableInstance) => {
   const CustomizeColumnsTearsheet = React.useCallback(
     (props: ComponentProps<typeof CustomizeColumnsTearsheetWrapper>) => (
       <CustomizeColumnsTearsheetWrapper
-        launcherButtonRef={launcherButtonRef}
         {...props}
+        launcherButtonRef={launcherButtonRef}
       />
     ),
     [launcherButtonRef]

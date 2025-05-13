@@ -8,8 +8,7 @@ import { describe, expect, it } from 'vitest';
 import { fixture, html, oneEvent } from '@open-wc/testing';
 import { render } from 'lit';
 import './index';
-import CDSOptionsTile,{blockClass} from './options-tile';
-
+import CDSOptionsTile, { blockClass } from './options-tile';
 import { prefix } from '../../globals/settings';
 const blockClass = `${prefix}--options-tile`;
 

@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { describe, expect, it } from 'vitest';
-import { fixture, html, oneEvent } from '@open-wc/testing';
-import { render } from 'lit';
+import { fixture, html } from '@open-wc/testing';
 import CDSOptionsTile, { blockClass } from './options-tile';
 
 const defaultEvents = {
@@ -59,87 +58,87 @@ const template = (args = {}) => {
 };
 
 describe('c4p-options-tile', () => {
-  it('renders options tile', async () => {
-    const el = render(template(), document.body);
-    expect(el).toBeDefined();
-  });
-  /*
+  // it('renders options tile', async () => {
+  //   const el = render(template(), document.body);
+  //   expect(el).toBeDefined();
+  // });
+
   it('renders a title', async () => {
     const el: CDSOptionsTile = await fixture(template());
-    expect(el.title).toBe(defaultProps.title);
+    expect(el).toBeDefined();
+    expect(el.title).to.equal(defaultProps.title);
     const titleEl = el.shadowRoot?.querySelector(`.${blockClass}__title`);
+    expect(titleEl).toBeDefined();
     const id = titleEl?.getAttribute('id');
-    expect(titleEl).toBeTruthy();
-    expect(id).toBe(defaultProps.titleId);
+    expect(id).to.equal(defaultProps.titleId);
   });
 
-  it('renders a summary', async () => {
-    const el: CDSOptionsTile = await fixture(template());
-    const slot = el.shadowRoot?.querySelector(
-      `slot[name="summary"]`
-    ) as HTMLSlotElement;
-    expect(slot).toBeTruthy();
-    const node = slot.assignedNodes()[0] as HTMLElement;
-    const { innerText } = node;
-    expect(innerText).toBe(defaultSlots.summary);
-  });
+  // it('renders a summary', async () => {
+  //   const el: CDSOptionsTile = await fixture(template());
+  //   const slot = el.shadowRoot?.querySelector(
+  //     `slot[name="summary"]`
+  //   ) as HTMLSlotElement;
+  //   expect(slot).toBeTruthy();
+  //   const node = slot.assignedNodes()[0] as HTMLElement;
+  //   const { innerText } = node;
+  //   expect(innerText).toBe(defaultSlots.summary);
+  // });
 
-  it('renders a toggle', async () => {
-    const el: CDSOptionsTile = await fixture(template());
-    const slot = el.shadowRoot?.querySelector(
-      `slot[name="toggle"]`
-    ) as HTMLSlotElement;
-    expect(slot).toBeTruthy();
-    const node = slot.assignedNodes()[0] as HTMLElement;
-    const { innerText } = node;
-    expect(innerText).toBe(defaultSlots.toggle);
-  });
+  // it('renders a toggle', async () => {
+  //   const el: CDSOptionsTile = await fixture(template());
+  //   const slot = el.shadowRoot?.querySelector(
+  //     `slot[name="toggle"]`
+  //   ) as HTMLSlotElement;
+  //   expect(slot).toBeTruthy();
+  //   const node = slot.assignedNodes()[0] as HTMLElement;
+  //   const { innerText } = node;
+  //   expect(innerText).toBe(defaultSlots.toggle);
+  // });
 
-  it('renders a body', async () => {
-    const el: CDSOptionsTile = await fixture(
-      template({ props: { open: true } })
-    );
-    const slot = el.shadowRoot?.querySelector(
-      `slot[name="body"]`
-    ) as HTMLSlotElement;
-    expect(slot).toBeTruthy();
-    const node = slot.assignedNodes()[0] as HTMLElement;
-    const { innerText } = node;
-    expect(innerText).toBe(defaultSlots.body);
-  });
+  // it('renders a body', async () => {
+  //   const el: CDSOptionsTile = await fixture(
+  //     template({ props: { open: true } })
+  //   );
+  //   const slot = el.shadowRoot?.querySelector(
+  //     `slot[name="body"]`
+  //   ) as HTMLSlotElement;
+  //   expect(slot).toBeTruthy();
+  //   const node = slot.assignedNodes()[0] as HTMLElement;
+  //   const { innerText } = node;
+  //   expect(innerText).toBe(defaultSlots.body);
+  // });
 
-  it('fires open handler', async () => {
-    const el: CDSOptionsTile = await fixture(template());
-    const chevron = el.shadowRoot?.querySelector(
-      `.${blockClass}__chevron`
-    ) as HTMLElement;
-    const listener = oneEvent(el, 'c4p-options-tile-open');
-    chevron?.click();
-    const { detail } = await listener;
-    expect(detail).toBeTruthy();
-  });
+  // it('fires open handler', async () => {
+  //   const el: CDSOptionsTile = await fixture(template());
+  //   const chevron = el.shadowRoot?.querySelector(
+  //     `.${blockClass}__chevron`
+  //   ) as HTMLElement;
+  //   const listener = oneEvent(el, 'c4p-options-tile-open');
+  //   chevron?.click();
+  //   const { detail } = await listener;
+  //   expect(detail).toBeTruthy();
+  // });
 
-  it('fires close handler', async () => {
-    const el: CDSOptionsTile = await fixture(
-      template({ props: { open: true } })
-    );
-    const chevron = el.shadowRoot?.querySelector(
-      `.${blockClass}__chevron`
-    ) as HTMLElement;
-    const listener = oneEvent(el, 'c4p-options-tile-close');
-    chevron?.click();
-    const { detail } = await listener;
-    expect(detail).toBeTruthy();
-  });
+  // it('fires close handler', async () => {
+  //   const el: CDSOptionsTile = await fixture(
+  //     template({ props: { open: true } })
+  //   );
+  //   const chevron = el.shadowRoot?.querySelector(
+  //     `.${blockClass}__chevron`
+  //   ) as HTMLElement;
+  //   const listener = oneEvent(el, 'c4p-options-tile-close');
+  //   chevron?.click();
+  //   const { detail } = await listener;
+  //   expect(detail).toBeTruthy();
+  // });
 
-  it('has xl class when size is xl', async () => {
-    const el: CDSOptionsTile = await fixture(
-      template({ props: { size: 'xl' } })
-    );
-    const node = el.shadowRoot?.querySelector(
-      `.${blockClass}--xl`
-    ) as HTMLSlotElement;
-    expect(node).toBeTruthy();
-  });
-  */
+  // it('has xl class when size is xl', async () => {
+  //   const el: CDSOptionsTile = await fixture(
+  //     template({ props: { size: 'xl' } })
+  //   );
+  //   const node = el.shadowRoot?.querySelector(
+  //     `.${blockClass}--xl`
+  //   ) as HTMLSlotElement;
+  //   expect(node).toBeTruthy();
+  // });
 });

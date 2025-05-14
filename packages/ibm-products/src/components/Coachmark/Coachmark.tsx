@@ -28,7 +28,6 @@ import { pkg } from '../../settings';
 import { throttle } from '../../global/js/utils/throttle';
 import { Popover, PopoverAlignment, PopoverContent } from '@carbon/react';
 import { useIsomorphicEffect } from '../../global/js/hooks';
-import { coachmarkBeacon } from '../CoachmarkBeacon/CoachmarkBeacon.stories';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark`;

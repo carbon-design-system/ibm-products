@@ -13,12 +13,14 @@ import React, {
   useEffect,
   useRef,
   useState,
+  isValidElement,
 } from 'react';
 import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
 
 import { COACHMARK_OVERLAY_KIND } from './utils/enums';
 import { CoachmarkContext } from './utils/context';
 import { CoachmarkOverlay } from './CoachmarkOverlay';
+import { CoachmarkBeaconProps } from '../CoachmarkBeacon';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import cx from 'classnames';
@@ -27,6 +29,7 @@ import { pkg } from '../../settings';
 import { throttle } from '../../global/js/utils/throttle';
 import { Popover, PopoverAlignment, PopoverContent } from '@carbon/react';
 import { useIsomorphicEffect } from '../../global/js/hooks';
+import { coachmarkBeacon } from '../CoachmarkBeacon/CoachmarkBeacon.stories';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark`;
@@ -80,17 +83,22 @@ export interface CoachmarkProps {
    */
   onClose?: () => void;
   /**
+   *  @deprecated
    * Optional class name for the Coachmark Overlay component.
    */
   overlayClassName?: string;
 
   /**
+   *  @deprecated
    * What kind or style of Coachmark to render.
    */
   overlayKind?: 'tooltip' | 'floating' | 'stacked';
-
+  /**
+   *  @deprecated
+   */
   overlayRef?: MutableRefObject<HTMLElement | null>;
   /**
+   *  @deprecated
    * By default, the Coachmark will be appended to the end of `document.body`.
    * The Coachmark will remain persistent as the user navigates the app until
    * the user closes the Coachmark.
@@ -107,10 +115,12 @@ export interface CoachmarkProps {
    */
   positionTune?: { x: number; y: number };
   /**
+   * @deprecated
    * The optional button or beacon that the user will click to show the Coachmark.
    */
   target: React.ReactNode;
   /**
+   * @deprecated
    * Determines the theme of the component.
    */
   theme?: 'light' | 'dark';
@@ -295,7 +305,11 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
         >
           {overlayKind !== 'tooltip' ? (
             <>
-              {target}
+              {isValidElement(target) &&
+                React.cloneElement(target as React.ReactElement<any>, {
+                  ...((target as React.ReactElement<any>).props?.buttonProps ??
+                    contextValue.buttonProps),
+                })}
               {isOpen &&
                 portalNode?.current &&
                 createPortal(
@@ -325,7 +339,11 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
               autoAlign={autoAlign}
               open={isOpen}
             >
-              {target}
+              {isValidElement(target) &&
+                React.cloneElement(target as React.ReactElement<any>, {
+                  ...((target as React.ReactElement<any>).props?.buttonProps ??
+                    contextValue.buttonProps),
+                })}
               <PopoverContent>
                 {isOpen && (
                   <CoachmarkOverlay
@@ -362,6 +380,46 @@ Coachmark = pkg.checkComponentEnabled(Coachmark, componentName);
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 Coachmark.displayName = componentName;
+
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   * Optional class name for the Coachmark Overlay component.
+   */
+  overlayClassName: PropTypes.string,
+
+  /**
+   * **Deprecated**
+   * What kind or style of Coachmark to render.
+   */
+  overlayKind: PropTypes.oneOf(['tooltip', 'floating', 'stacked']),
+
+  overlayRef: PropTypes.shape({
+    current: overlayRefType as PropTypes.Validator<HTMLElement | null>,
+  }),
+  /**
+   * **Deprecated**
+   * By default, the Coachmark will be appended to the end of `document.body`.
+   * The Coachmark will remain persistent as the user navigates the app until
+   * the user closes the Coachmark.
+   *
+   * Alternatively, the app developer can tightly couple the Coachmark to a DOM
+   * element or other component by specifying a CSS selector. The Coachmark will
+   * remain visible as long as that element remains visible or mounted. When the
+   * element is hidden or component is unmounted, the Coachmark will disappear.
+   */
+  portalTarget: PropTypes.string,
+  /**
+   * **Deprecated**
+   * The optional button or beacon that the user will click to show the Coachmark.
+   */
+  target: PropTypes.node,
+  /**
+   * **Deprecated**
+   * Determines the theme of the component.
+   */
+  theme: PropTypes.oneOf(['light', 'dark']),
+};
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
@@ -412,30 +470,7 @@ Coachmark.propTypes = {
    * Function to call when the Coachmark closes.
    */
   onClose: PropTypes.func,
-  /**
-   * Optional class name for the Coachmark Overlay component.
-   */
-  overlayClassName: PropTypes.string,
 
-  /**
-   * What kind or style of Coachmark to render.
-   */
-  overlayKind: PropTypes.oneOf(['tooltip', 'floating', 'stacked']),
-
-  overlayRef: PropTypes.shape({
-    current: overlayRefType as PropTypes.Validator<HTMLElement | null>,
-  }),
-  /**
-   * By default, the Coachmark will be appended to the end of `document.body`.
-   * The Coachmark will remain persistent as the user navigates the app until
-   * the user closes the Coachmark.
-   *
-   * Alternatively, the app developer can tightly couple the Coachmark to a DOM
-   * element or other component by specifying a CSS selector. The Coachmark will
-   * remain visible as long as that element remains visible or mounted. When the
-   * element is hidden or component is unmounted, the Coachmark will disappear.
-   */
-  portalTarget: PropTypes.string,
   /**
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */
@@ -444,12 +479,6 @@ Coachmark.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
   }),
-  /**
-   * The optional button or beacon that the user will click to show the Coachmark.
-   */
-  target: PropTypes.node,
-  /**
-   * Determines the theme of the component.
-   */
-  theme: PropTypes.oneOf(['light', 'dark']),
+
+  ...deprecatedProps,
 };

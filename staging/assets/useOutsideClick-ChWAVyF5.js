@@ -1,0 +1,1 @@
+import{r as n}from"./index-DtHxqM--.js";import{M as c}from"./index-CMVdkQrl.js";import{u as i}from"./index-BLvAv8yb.js";const m=(r,t)=>{const s=n.useRef(t);n.useEffect(()=>{s.current=t},[t]),c&&i("click",e=>{const{target:o}=e;o instanceof Node&&r.current&&!r.current.contains(o)&&s.current(e)})};export{m as u};

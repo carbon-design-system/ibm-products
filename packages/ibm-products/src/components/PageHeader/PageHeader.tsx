@@ -615,14 +615,15 @@ export let PageHeader = React.forwardRef(
 
     useEffect(() => {
       // Determine the location of the pageAction buttons
-      /* istanbul ignore next */
-      if (metrics?.titleRowSpaceAbove && metrics?.pageActionsSpaceAbove) {
-        setPageActionsInBreadcrumbRow(
-          collapseTitle ||
-            (hasActionBar && scrollYValue > metrics?.titleRowSpaceAbove) ||
-            (widthIsNarrow && scrollYValue > metrics?.pageActionsSpaceAbove)
-        );
-      }
+      setPageActionsInBreadcrumbRow(
+        collapseTitle ||
+          (hasActionBar &&
+            !!metrics?.titleRowSpaceAbove &&
+            scrollYValue > metrics?.titleRowSpaceAbove) ||
+          (widthIsNarrow &&
+            !!metrics?.pageActionsSpaceAbove &&
+            scrollYValue > metrics?.pageActionsSpaceAbove)
+      );
     }, [
       hasActionBar,
       metrics.breadcrumbRowSpaceBelow,
@@ -977,6 +978,8 @@ export let PageHeader = React.forwardRef(
                       hasActionBar || widthIsNarrow,
                     [`${blockClass}__has-page-actions-without-action-bar`]:
                       !hasActionBar && !widthIsNarrow && pageActions,
+                    [`${blockClass}__has-page-actions-with-title-collapsed`]:
+                      collapseTitle && pageActions,
                   })}
                 >
                   <div className={`${blockClass}__breadcrumb-row--container`}>
@@ -1035,7 +1038,7 @@ export let PageHeader = React.forwardRef(
                             />
                           </>
                         ) : (
-                          widthIsNarrow &&
+                          (widthIsNarrow || pageActions) &&
                           thePageActions(true, pageActionsInBreadcrumbRow)
                         )}
                       </div>

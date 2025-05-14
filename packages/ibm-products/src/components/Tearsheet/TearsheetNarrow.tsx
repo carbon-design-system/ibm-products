@@ -26,6 +26,7 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { portalType } from './TearsheetShell';
+import { TearsheetAction } from './Tearsheet';
 
 export interface TearsheetNarrowProps extends PropsWithChildren {
   /**
@@ -41,7 +42,7 @@ export interface TearsheetNarrowProps extends PropsWithChildren {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps<React.ElementType>[];
+  actions?: TearsheetAction[];
 
   /**
    * The aria-label for the tearsheet, which is optional.

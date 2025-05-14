@@ -1,4 +1,5 @@
-import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { Canvas } from '@storybook/addon-docs';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as TruncatedString from './truncated-string.stories';
 
@@ -6,11 +7,16 @@ import * as TruncatedString from './truncated-string.stories';
 
 # TruncatedString
 
-The `TruncatedString` component truncates text based on a specified number of lines, provided via a prop. It offers two configurable options for revealing the full content:
+The `TruncatedString` component truncates text based on a specified number of
+lines, provided via a prop. It offers two configurable options for revealing the
+full content:
 
-Tooltip Mode `with="tooltip"`: Displays the full text in a tooltip overlay on hover.
+Tooltip Mode `with="tooltip"`: Displays the full text in a tooltip overlay on
+hover.
 
-Expandable Mode `with="expand"`: Reveals the complete content through collapsible "Read more" / "Read less" toggles. these labels can be customized with `expand-label`, `collapse-label` attributes on the component
+Expandable Mode `with="expand"`: Reveals the complete content through
+collapsible "Read more" / "Read less" toggles. these labels can be customized
+with `expand-label`, `collapse-label` attributes on the component
 
 > 💡 Check our
 > [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/truncated-string)

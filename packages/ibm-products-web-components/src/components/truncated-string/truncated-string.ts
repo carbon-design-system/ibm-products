@@ -21,6 +21,11 @@ const componentName = 'truncated-string';
 export const blockClass = `${prefix}--${componentName}`;
 const elementName = `${prefix}-${componentName}`; // c4p-truncated-string
 
+/**
+ * TruncatedString.
+ *
+ * @element c4p-truncated-string
+ */
 @customElement(elementName)
 export class CDSTruncatedString extends LitElement {
   @property({ type: Number }) lines = 0;
@@ -49,6 +54,13 @@ export class CDSTruncatedString extends LitElement {
     this._lineHeight = parseFloat(computedStyle.lineHeight);
     this._updateOverflowStatus();
     this.setupResizeObserver();
+
+    // apply transitions after first render
+    if (this._textElement) {
+      setTimeout(() => {
+        this._textElement.classList.add(`${blockClass}_transition`);
+      }, 0);
+    }
   }
 
   private setupResizeObserver() {
@@ -84,13 +96,15 @@ export class CDSTruncatedString extends LitElement {
     }
   }
 
-  private _toggleLines() {
+  private _toggleExpansion() {
     const isExpanded = this._localLines === undefined;
     this._localLines = isExpanded ? this.lines : undefined;
 
-    setTimeout(() => {
+    const onTransitionEnd = () => {
       this._textElement?.querySelector('button')?.focus();
-    });
+      this._textElement?.removeEventListener('transitionend', onTransitionEnd);
+    };
+    this._textElement?.addEventListener('transitionend', onTransitionEnd);
   }
 
   private _renderToggleButton() {
@@ -108,7 +122,9 @@ export class CDSTruncatedString extends LitElement {
     const label = isExpanded ? this.collapseLabel : this.expandLabel;
 
     return html`
-      <button class="${className}" @click=${this._toggleLines}>${label}</button>
+      <button class="${className}" @click=${this._toggleExpansion}>
+        ${label}
+      </button>
     `;
   }
 
@@ -118,7 +134,7 @@ export class CDSTruncatedString extends LitElement {
         ? `--line-clamp: ${this._localLines};`
         : this._localLines != null && this.with !== null
           ? `max-block-size: ${this._localLines * this._lineHeight}px;`
-          : '';
+          : `max-block-size: ${this._textElement?.scrollHeight}px`;
 
     const contentClass = classMap({
       [`${blockClass}_content`]: true,

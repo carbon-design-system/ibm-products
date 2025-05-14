@@ -5,12 +5,13 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-$css--plex: true !default;
+// $css--plex: true !default;
 
 @use 'sass:map';
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/themes' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/motion';
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
@@ -36,6 +37,12 @@ $block-class: #{$prefix}--truncated-string;
 :host(#{$prefix}-truncated-string) {
   display: block;
   inline-size: 100%;
+
+  .#{$block-class}_transition {
+    @media (prefers-reduced-motion: no-preference) {
+      transition: max-height motion.$duration-moderate-01 ease-out;
+    }
+  }
 
   .#{$block-class}_content {
     display: -webkit-box;

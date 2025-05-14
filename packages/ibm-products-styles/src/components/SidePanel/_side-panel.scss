@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'sass:list';
+// @use 'sass:list';
 @use 'sass:map';
 
 // Other Carbon settings.
@@ -37,13 +37,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 }
 
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
-  /* any value is single value list */
-  inline-size: list.nth($size, 1);
-  @if list.length($size) > 1 {
-    min-inline-size: list.nth($size, 2);
-  }
-
-  max-inline-size: 100%;
+  inline-size: var(--c4p-side-panel-modified-size, $size);
 }
 
 @mixin setDividerStyles() {
@@ -89,19 +83,29 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   background-color: $layer-01;
   block-size: calc(100% - 3rem);
   color: $text-primary;
-  /* if the title does not scroll then we have a child scrolling section. */
+
   grid-template-rows: auto 1fr auto; /* titles content and actions */
   inset-block-start: $spacing-09;
+  max-inline-size: 100%;
+  min-inline-size: 16rem;
 
   transform: translateX(0);
   transition-behavior: allow-discrete;
   transition-duration: $duration-moderate-01;
   transition-property: display, opacity, transform;
+  /* if the title does not scroll then we have a child scrolling section. */
+  &:not(.#{$block-class}--slide-in) {
+    grid-template-columns: 0 1fr;
+  }
 
   @starting-style {
     opacity: 0;
     /* stylelint-disable-next-line carbon/layout-use */
     transform: translateX(var(--panel-transform));
+  }
+
+  @include breakpoint(lg) {
+    max-inline-size: 75vw;
   }
 
   @each $size, $size_value in $side-panel-sizes {
@@ -188,6 +192,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     inset-inline-end: 0;
   }
   &.#{$block-class}--left-placement {
+    .clabs--resizer {
+      grid-column: 2;
+      inset-inline-start: 0;
+    }
+    &:not(.#{$block-class}--slide-in) {
+      grid-template-columns: 1fr 0;
+    }
+
     border-inline-end: 1px solid $border-subtle-02;
     inset-inline-start: 0;
   }
@@ -198,6 +210,26 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     box-shadow:
       inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
+  }
+
+  .clabs--resizer {
+    z-index: 10;
+    background-color: transparent;
+    grid-row: span 4 / span 3;
+    inset-inline-start: -$spacing-02;
+
+    &--vertical::before {
+      position: absolute;
+      block-size: 100%;
+      content: '';
+      inline-size: calc(100% + 1rem);
+      inset-inline-start: -$spacing-03;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $border-interactive;
+    }
   }
 
   .#{$block-class}__header {

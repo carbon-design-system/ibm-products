@@ -30,6 +30,7 @@ import {
   usePresence,
   usePrefersReducedMotion,
 } from '../../global/js/hooks';
+import { Resizer } from './resizer/resizer';
 
 import { ActionSet } from '../ActionSet';
 
@@ -295,6 +296,12 @@ const SidePanelBase = React.forwardRef(
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
     const panelRefValue = sidePanelRef.current;
     const previousOpen = usePreviousValue(open);
+    const [sidePanelWidth, setSidePanelWidth] = useState<number | undefined>(
+      undefined
+    );
+    useEffect(() => {
+      setSidePanelWidth(sidePanelRef?.current?.clientWidth);
+    }, [sidePanelRef, sidePanelRef?.current?.clientWidth]);
 
     const shouldReduceMotion = usePrefersReducedMotion();
     const exitAnimationName = shouldReduceMotion
@@ -912,6 +919,39 @@ const SidePanelBase = React.forwardRef(
           onAnimationStart={onAnimationStart}
           onKeyDown={handleKeyDown}
         >
+          {!slideIn && (
+            <Resizer
+              orientation="vertical"
+              onResize={(event, delta) => {
+                if (event.type === 'keydown') {
+                  console.log('keyboard resize');
+                  if (sidePanelRef.current) {
+                    document.documentElement.style.setProperty(
+                      '--c4p-side-panel-modified-size',
+                      `${(sidePanelWidth ?? 0) - (placement === 'right' ? delta : -delta)}px`
+                    );
+                  }
+                } else {
+                  console.log('mouse resize', delta);
+                  if (sidePanelRef.current) {
+                    document.documentElement.style.setProperty(
+                      '--c4p-side-panel-modified-size',
+                      `${(sidePanelWidth ?? 0) - (placement === 'right' ? delta : -delta)}px`
+                    );
+                  }
+                }
+              }}
+              onResizeEnd={() => {
+                setSidePanelWidth(sidePanelRef?.current?.clientWidth);
+              }}
+              onDoubleClick={() => {
+                setSidePanelWidth(undefined);
+                document.documentElement.style.removeProperty(
+                  '--c4p-side-panel-modified-size'
+                );
+              }}
+            />
+          )}
           {/* header */}
           {renderHeader()}
 

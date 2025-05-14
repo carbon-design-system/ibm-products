@@ -12,12 +12,12 @@ import { EmptyStateV2 } from '.';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, Link } from '@carbon/react';
+import { Button } from '@carbon/react';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
-import { ButtonProps } from '@carbon/react';
+import { ButtonProps, LinkProps } from '@carbon/react';
 
 import { EmptyStateContent } from './EmptyStateContent';
 
@@ -31,15 +31,18 @@ enum sizes {
 }
 
 // Default values for props
-export const defaults: { position: string; size: sizes; headingAs: string } = {
+export const defaults: { position: string; size: sizes } = {
   position: 'top',
   size: sizes.lg,
-  headingAs: 'h3',
 };
 
-interface EmptyStateAction extends ButtonProps<React.ElementType> {
+export interface EmptyStateAction extends ButtonProps<React.ElementType> {
   kind?: 'primary' | 'secondary' | 'tertiary';
   text?: string;
+}
+
+export interface CustomLink extends LinkProps<React.ElementType> {
+  text?: ReactNode;
 }
 
 export interface EmptyStateProps {
@@ -72,13 +75,12 @@ export interface EmptyStateProps {
   /**
    * Empty state link object
    */
-  link?: {
-    text?: string | ReactNode;
-    href?: string;
-  };
+  link?: CustomLink;
 
   /**
-   * Empty state headingAs allows you to customize the type of heading element
+   * Customize the heading element.  Set to "h1" when EmptyState is full page, i.e. there is no higher header.
+   * Otherwise, you normally don't need to specify this: EmptyState will automatically pick the right heading level
+   * (h2-h6) by leveraging Section and Heading.
    */
   headingAs?: (() => ReactNode) | string | ElementType;
 
@@ -123,7 +125,7 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       illustrationPosition = defaults.position,
       link,
       size = defaults.size,
-      headingAs = defaults.headingAs,
+      headingAs,
       subtitle,
       title,
       ...rest
@@ -213,11 +215,7 @@ EmptyState.propTypes = {
    * Empty state link object
    */
   /**@ts-ignore*/
-  link: PropTypes.shape({
-    ...Link.propTypes,
-    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    href: PropTypes.string,
-  }),
+  link: PropTypes.any,
   /**
    * Empty state size
    */

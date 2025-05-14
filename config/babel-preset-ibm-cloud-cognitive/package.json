@@ -22,7 +22,7 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon)/'"
   },
   "devDependencies": {
-    "npm-check-updates": "^17.1.15"
+    "npm-check-updates": "^18.0.0"
   },
   "dependencies": {
     "@babel/core": "^7.26.10",

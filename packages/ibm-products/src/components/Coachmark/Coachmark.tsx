@@ -20,7 +20,6 @@ import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
 import { COACHMARK_OVERLAY_KIND } from './utils/enums';
 import { CoachmarkContext } from './utils/context';
 import { CoachmarkOverlay } from './CoachmarkOverlay';
-import { CoachmarkBeaconProps } from '../CoachmarkBeacon';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import cx from 'classnames';

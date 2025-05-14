@@ -37,18 +37,6 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   open: boolean = false;
 
   /**
-   * Callback fired when the component requests to be closed
-   */
-  @property({ type: Function })
-  onClose?: (evt: Event) => void;
-
-  /**
-   * Callback fired when the component requests to be opened
-   */
-  @property({ type: Function })
-  onOpen?: (evt: Event) => void;
-
-  /**
    * Determines the size of the header
    */
   @property({ type: String, reflect: true })

@@ -1,1 +1,0 @@
-import{F as o}from"./useDatagrid-D8g-gYQ1.js";import{r}from"./index-DzvNrmz8.js";const i=()=>{const t=r.useContext(o);if(t===void 0)throw new Error("useFilterContext was used outside of its Provider");return t};export{i as u};

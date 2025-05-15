@@ -84,7 +84,7 @@ export interface InterstitialScreenProps {
   /**
    * Provide a ref to return focus to once the interstitial is closed.
    */
-  launcherButtonRef?: RefObject<any>;
+  launcherButtonRef?: RefObject<HTMLElement>;
 }
 
 // Define the type for InterstitialScreen, extending it to include Header

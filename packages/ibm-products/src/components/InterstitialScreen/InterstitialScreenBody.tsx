@@ -43,6 +43,8 @@ export interface InterstitialScreenBodyProps {
   ) => ReactElement<EnrichedChildren> | ReactNode;
 }
 
+type StepType = 'single' | 'multi';
+
 const InterstitialScreenBody = React.forwardRef<
   HTMLDivElement,
   InterstitialScreenBodyProps
@@ -51,7 +53,7 @@ const InterstitialScreenBody = React.forwardRef<
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const bodyBlockClass = `${blockClass}--internal-body`;
 
-  const [stepType, setStepType] = useState('');
+  const [stepType, setStepType] = useState<StepType>();
 
   const {
     setBodyChildrenData,

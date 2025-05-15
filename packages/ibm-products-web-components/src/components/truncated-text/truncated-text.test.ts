@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-import CDSTruncatedString from './truncated-string';
+import CDSTruncatedText from './truncated-text';
 import './index';
 
 const defaultProps = {
@@ -19,24 +19,22 @@ const defaultProps = {
 const template = (props = defaultProps, templateWidth?: number) => {
   return html`
     <div style=${templateWidth ? `width: ${templateWidth}px;` : ''}>
-      <c4p-truncated-string
+      <c4p-truncated-text
         value=${props.text}
         lines=${props.lines}
         with=${props.with}
-      ></c4p-truncated-string>
+      ></c4p-truncated-text>
     </div>
   `;
 };
 
-describe('c4p-truncated-string', () => {
+describe('c4p-truncated-text', () => {
   it('renders a tooltip when text is truncated with tooltip', async () => {
     const wrapper = await fixture(
       template({ ...defaultProps, with: 'tooltip' }, 200)
     );
 
-    const el = wrapper.querySelector(
-      'c4p-truncated-string'
-    ) as CDSTruncatedString;
+    const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
     const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
     expect(tooltip).toBeTruthy();
   });
@@ -46,9 +44,7 @@ describe('c4p-truncated-string', () => {
       template({ ...defaultProps, with: 'tooltip' }, 9000)
     );
 
-    const el = wrapper.querySelector(
-      'c4p-truncated-string'
-    ) as CDSTruncatedString;
+    const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
 
     const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
     expect(tooltip).not.toBeTruthy();
@@ -61,8 +57,8 @@ describe('c4p-truncated-string', () => {
       );
 
       const el = wrapper.querySelector(
-        'c4p-truncated-string'
-      ) as CDSTruncatedString;
+        'c4p-truncated-text'
+      ) as CDSTruncatedText;
       await el.updateComplete;
 
       const tooltip = el.shadowRoot?.querySelector('cds-tooltip');

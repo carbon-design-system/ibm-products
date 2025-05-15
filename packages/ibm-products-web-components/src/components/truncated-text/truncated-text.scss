@@ -15,7 +15,7 @@
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
-$block-class: #{$prefix}--truncated-string;
+$block-class: #{$prefix}--truncated-text;
 
 // Common reset button style
 %reset-button {
@@ -34,7 +34,7 @@ $block-class: #{$prefix}--truncated-string;
   );
 }
 
-:host(#{$prefix}-truncated-string) {
+:host(#{$prefix}-truncated-text) {
   display: block;
   inline-size: 100%;
 

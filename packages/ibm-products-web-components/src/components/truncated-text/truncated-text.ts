@@ -15,19 +15,19 @@ import '@carbon/web-components/es/components/tooltip/index.js';
 import '@carbon/web-components/es/components/button/button.js';
 import '@carbon/web-components/es/components/link/index.js';
 
-import styles from './truncated-string.scss?lit';
+import styles from './truncated-text.scss?lit';
 
-const componentName = 'truncated-string';
+const componentName = 'truncated-text';
 export const blockClass = `${prefix}--${componentName}`;
-const elementName = `${prefix}-${componentName}`; // c4p-truncated-string
+const elementName = `${prefix}-${componentName}`; // c4p-truncated-text
 
 /**
- * TruncatedString.
+ * TruncatedText.
  *
- * @element c4p-truncated-string
+ * @element c4p-truncated-text
  */
 @customElement(elementName)
-export class CDSTruncatedString extends LitElement {
+export class CDSTruncatedText extends LitElement {
   /**
    * The maximum number of lines to display before truncation.
    */
@@ -183,8 +183,8 @@ export class CDSTruncatedString extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    [elementName]: CDSTruncatedString;
+    [elementName]: CDSTruncatedText;
   }
 }
 
-export default CDSTruncatedString;
+export default CDSTruncatedText;

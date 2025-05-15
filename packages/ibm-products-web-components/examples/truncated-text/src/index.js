@@ -7,4 +7,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@carbon/ibm-products-web-components/es/components/truncated-string/index.js';
+import '@carbon/ibm-products-web-components/es/components/truncated-text/index.js';

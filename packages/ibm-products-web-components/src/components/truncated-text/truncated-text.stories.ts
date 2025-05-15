@@ -222,7 +222,7 @@ export const Default = {
       source: {
         code: `
 <c4p-truncated-text
-  value="${defaultArgs.text}"
+  value="${defaultArgs.value}"
   lines="${defaultArgs.lines}"
 ></c4p-truncated-text>
         `,
@@ -243,7 +243,7 @@ export const WithTooltip = {
       source: {
         code: `
 <c4p-truncated-text
-  value="${defaultArgs.text}"
+  value="${defaultArgs.value}"
   lines="${defaultArgs.lines}"
   with="tooltip"
 ></c4p-truncated-text>
@@ -265,7 +265,7 @@ export const WithExpand = {
       source: {
         code: `
 <c4p-truncated-text
-  value="${defaultArgs.text}"
+  value="${defaultArgs.value}"
   lines="${defaultArgs.lines}"
   with="expand"
 ></c4p-truncated-text>

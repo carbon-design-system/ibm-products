@@ -4,7 +4,6 @@ import {
   Button,
   Column,
   FlexGrid,
-  Grid,
   Layer,
   RadioTile,
   Row,
@@ -13,9 +12,6 @@ import {
 } from '@carbon/react';
 
 import './_example.scss';
-import { InterstitialScreenView } from '../_story-assets/InterstitialScreenView/InterstitialScreenView';
-import { InterstitialScreenViewModule } from '../_story-assets/InterstitialScreenViewModule/InterstitialScreenViewModule';
-
 import InterstitialExampleImgStep1 from '../_story-assets/illustrations/stepImage1.png';
 import InterstitialExampleImgStep2 from '../_story-assets/illustrations/interstitial-ph.png';
 import { Checkmark } from '@carbon/react/icons';

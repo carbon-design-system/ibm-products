@@ -77,6 +77,46 @@ const renderComponent = ({ ...rest } = {}) => {
     </InterstitialScreen>
   );
 };
+const renderComponentSingleStep = ({ ...rest } = {}) => {
+  const translations = {
+    'carbon.progress-step.complete': 'Terminé',
+    'carbon.progress-step.incomplete': 'Partiel',
+    'carbon.progress-step.current': 'Actuel',
+    'carbon.progress-step.invalid': 'Non valide',
+  };
+  const translateWithId = (messageId) => {
+    return translations[messageId];
+  };
+  return render(
+    <InterstitialScreen
+      isOpen={true}
+      onClose={onClose}
+      data-testid={dataTestId}
+      {...{ ...rest }}
+    >
+      <InterstitialScreen.Header
+        headerTitle={'headerTitle'}
+        headerSubTitle={'headerSubTitle'}
+      ></InterstitialScreen.Header>
+      <InterstitialScreen.Body
+        contentRenderer={(internalConfig) => (
+          <>
+            <InterstitialScreenView
+              stepTitle="Step 1"
+              translateWithId={translateWithId}
+            >
+              <InterstitialScreenViewModule
+                title={InterstitialScreenViewModuleTitle}
+                description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+              />
+            </InterstitialScreenView>
+          </>
+        )}
+      />
+      <InterstitialScreen.Footer />
+    </InterstitialScreen>
+  );
+};
 
 describe(componentName, () => {
   it('renders a component InterstitialScreen (Modal)', () => {
@@ -87,6 +127,17 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
+  it('renders a component InterstitialScreen (Modal) single step', () => {
+    renderComponentSingleStep({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
+  });
+  it('renders a component InterstitialScreen (Modal) with a plain text', () => {
+    render('test content');
+    expect(screen.getByText('test content')).toBeInTheDocument();
+  });
   it('renders a component InterstitialScreen (Full Screen)', () => {
     renderComponent({
       className: blockClass,

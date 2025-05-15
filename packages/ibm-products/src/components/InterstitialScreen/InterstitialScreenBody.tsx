@@ -83,17 +83,10 @@ const InterstitialScreenBody = React.forwardRef<
 
     // Set body children data
     setBodyChildrenData?.(children);
-
     // If the children is an array, treat it as a multiStep
     if (isElement && Array.isArray(children)) {
-      const numberOfSteps = children.length;
-
-      if (numberOfSteps) {
-        setStepType('multi');
-        setStepCount?.(numberOfSteps);
-      } else {
-        setStepType('single');
-      }
+      setStepType('multi');
+      setStepCount?.(children.length);
     } else {
       setStepType('single');
     }

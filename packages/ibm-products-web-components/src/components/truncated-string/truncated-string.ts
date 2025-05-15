@@ -28,12 +28,31 @@ const elementName = `${prefix}-${componentName}`; // c4p-truncated-string
  */
 @customElement(elementName)
 export class CDSTruncatedString extends LitElement {
-  @property({ type: Number }) lines = 0;
-  @property({ type: String }) value = '';
+  /**
+   * The maximum number of lines to display before truncation.
+   */
+  @property({ type: Number, reflect: true }) lines = 0;
+
+  /**
+   * The string value to be truncated.
+   */
+  @property({ type: String, attribute: 'value', reflect: true }) value = '';
+
+  /**
+   * The label on expand button.
+   */
   @property({ attribute: 'expand-label', type: String, reflect: true })
   expandLabel = '...more';
+
+  /**
+   * The label on the collapse button.
+   */
   @property({ attribute: 'collapse-label', type: String, reflect: true })
   collapseLabel = '...less';
+
+  /**
+   * The method to display the full text when truncated. Options are "tooltip" or "expand". if not passed, the text would just be truncated with ellipsis.
+   */
   @property({ type: String, reflect: true }) with: 'tooltip' | 'expand' | null =
     null;
 
@@ -119,7 +138,9 @@ export class CDSTruncatedString extends LitElement {
       [`${blockClass}_layered`]: !!this._isLayered,
     });
 
-    const label = isExpanded ? this.collapseLabel : this.expandLabel;
+    const label = isExpanded
+      ? this.collapseLabel || '...less'
+      : this.expandLabel || '...more';
 
     return html`
       <button class="${className}" @click=${this._toggleExpansion}>

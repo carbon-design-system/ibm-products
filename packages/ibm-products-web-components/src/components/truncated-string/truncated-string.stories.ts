@@ -17,28 +17,43 @@ import '@carbon/web-components/es/components/layer/layer.js';
 const storyPrefix = 'truncated-string-stories__';
 const defaultArgs = {
   lines: 2,
-  text: 'Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principal call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular-sized button. This issue is most often found in tables. Small buttons should have three words or fewer.',
+  value:
+    'Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principal call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular-sized button. This issue is most often found in tables. Small buttons should have three words or fewer.',
   element: 'p',
+  expandLabel: '...more',
+  collapseLabel: '...less',
 };
 
 const argTypes = {
   lines: {
-    description: 'The maximum number of lines to display before truncation.',
     control: {
       type: 'number',
     },
   },
-  text: {
-    description: 'The string value to be truncated.',
+  value: {
     control: {
       type: 'text',
     },
   },
   with: {
     control: { type: 'select' },
-    description:
-      'The method to display the full text when truncated. Options are "tooltip" or "expand". if not passed, the text would just be truncated with ellipsis.',
     options: ['tooltip', 'expand'],
+  },
+  expandLabel: {
+    table: {
+      disable: true,
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  collapseLabel: {
+    table: {
+      disable: true,
+    },
+    control: {
+      type: 'text',
+    },
   },
   element: {
     description:
@@ -61,14 +76,18 @@ const argTypes = {
 };
 
 const renderTemplate = (args) => {
-  const { lines, text, with: withMode } = args;
+  const { lines, value, with: withMode } = args;
+  const expandLabelAttr = args['expand-label'];
+  const collapseLabelAttr = args['collapse-label'];
   return html`
     ${args.element === 'p'
       ? html`<p>
           <c4p-truncated-string
-            value=${text}
+            value=${value}
             lines=${lines}
-            .with=${withMode || null}
+            expand-label=${expandLabelAttr}
+            collapse-label=${collapseLabelAttr}
+            .with=${withMode}
           ></c4p-truncated-string>
         </p>`
       : ''}
@@ -76,9 +95,11 @@ const renderTemplate = (args) => {
       ? html`
           <p>
             <c4p-truncated-string
-              value=${text}
+              value=${value}
               lines=${lines}
-              .with=${withMode || null}
+              expand-label=${expandLabelAttr}
+              collapse-label=${collapseLabelAttr}
+              .with=${withMode}
             ></c4p-truncated-string>
           </p>
           <cds-layer>
@@ -87,9 +108,11 @@ const renderTemplate = (args) => {
             >
               <p>
                 <c4p-truncated-string
-                  value=${text}
+                  value=${value}
                   lines=${lines}
-                  .with=${withMode || null}
+                  expand-label=${expandLabelAttr}
+                  collapse-label=${collapseLabelAttr}
+                  .with=${withMode}
                 ></c4p-truncated-string>
               </p>
             </div>
@@ -99,9 +122,10 @@ const renderTemplate = (args) => {
               >
                 <p>
                   <c4p-truncated-string
-                    value=${text}
-                    lines=${lines}
-                    .with=${withMode || null}
+                    value=${value}
+                    expand-label=${expandLabelAttr}
+                    collapse-label=${collapseLabelAttr}
+                    .with=${withMode}
                   ></c4p-truncated-string>
                 </p>
               </div>
@@ -111,9 +135,11 @@ const renderTemplate = (args) => {
                 >
                   <p>
                     <c4p-truncated-string
-                      value=${text}
+                      value=${value}
                       lines=${lines}
-                      .with=${withMode || null}
+                      expand-label=${expandLabelAttr}
+                      collapse-label=${collapseLabelAttr}
+                      .with=${withMode}
                     ></c4p-truncated-string>
                   </p>
                 </div>
@@ -125,54 +151,62 @@ const renderTemplate = (args) => {
     ${args.element === 'h1'
       ? html`<h1>
           <c4p-truncated-string
-            value=${text}
+            value=${value}
             lines=${lines}
-            .with=${withMode || null}
+            expand-label=${expandLabelAttr}
+            collapse-label=${collapseLabelAttr}
+            .with=${withMode}
           ></c4p-truncated-string>
         </h1>`
       : ''}
     ${args.element === 'h2'
       ? html`<h2>
           <c4p-truncated-string
-            value=${text}
-            lines=${lines}
-            .with=${withMode || null}
+            value=${value}
+            expand-label=${expandLabelAttr}
+            collapse-label=${collapseLabelAttr}
+            .with=${withMode}
           ></c4p-truncated-string>
         </h2>`
       : ''}
     ${args.element === 'h3'
       ? html`<h3>
           <c4p-truncated-string
-            value=${text}
-            lines=${lines}
-            .with=${withMode || null}
+            value=${value}
+            expand-label=${expandLabelAttr}
+            collapse-label=${collapseLabelAttr}
+            .with=${withMode}
           ></c4p-truncated-string>
         </h3>`
       : ''}
     ${args.element === 'h4'
       ? html`<h4>
           <c4p-truncated-string
-            value=${text}
+            value=${value}
             lines=${lines}
-            .with=${withMode || null}
+            expand-label=${expandLabelAttr}
+            collapse-label=${collapseLabelAttr}
+            .with=${withMode}
           ></c4p-truncated-string>
         </h4>`
       : ''}
     ${args.element === 'h5'
       ? html`<h5>
           <c4p-truncated-string
-            value=${text}
-            lines=${lines}
-            .with=${withMode || null}
+            value=${value}
+            expand-label=${expandLabelAttr}
+            collapse-label=${collapseLabelAttr}
+            .with=${withMode}
           ></c4p-truncated-string>
         </h5>`
       : ''}
     ${args.element === 'h6'
       ? html`<h6>
           <c4p-truncated-string
-            value=${text}
-            lines=${lines}
-            .with=${withMode || null}
+            value=${value}
+            expand-label=${expandLabelAttr}
+            collapse-label=${collapseLabelAttr}
+            .with=${withMode}
           ></c4p-truncated-string>
         </h6>`
       : ''}

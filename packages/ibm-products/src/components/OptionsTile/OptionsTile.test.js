@@ -291,4 +291,15 @@ describe(componentName, () => {
     fireEvent.click(container.querySelector('summary'));
     expect(onChangeFn).toHaveBeenCalled();
   });
+
+  it('should throw if props.title contains interactive children', async () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(<OptionsTile {...props} title={<button>Button</button>} />);
+    }).toThrow();
+
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
+  });
 });

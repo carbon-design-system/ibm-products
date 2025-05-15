@@ -121,6 +121,7 @@ const renderTemplate = (args) => {
                 <p>
                   <c4p-truncated-text
                     value=${value}
+                    lines=${lines}
                     expand-label=${expandLabelAttr}
                     collapse-label=${collapseLabelAttr}
                     .with=${withMode}

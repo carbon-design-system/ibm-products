@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "version": "0.15.0-rc.0",
+  "version": "0.15.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -54,7 +54,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.62.0-rc.0",
+    "@carbon/ibm-products-styles": "^2.62.0",
     "@carbon/styles": "1.79.0",
     "@carbon/web-components": "2.27.1",
     "@ibm/telemetry-js": "^1.9.1",

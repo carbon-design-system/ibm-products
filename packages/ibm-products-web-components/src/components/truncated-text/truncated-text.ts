@@ -150,10 +150,12 @@ export class CDSTruncatedText extends LitElement {
   }
 
   render() {
+    console.log(!this.with);
+
     const contentStyle =
-      this.with === 'tooltip' || this.with === null
+      this.with === 'tooltip' || !this.with
         ? `--line-clamp: ${this._localLines};`
-        : this._localLines != null && this.with !== null
+        : !!this._localLines && this.with === 'expand'
           ? `max-block-size: ${this._localLines * this._lineHeight}px;`
           : `max-block-size: ${this._textElement?.scrollHeight}px`;
 

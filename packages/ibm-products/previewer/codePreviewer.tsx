@@ -20,19 +20,23 @@ interface ComponentSources {
   unknown: string[];
 }
 
-export const stackblitzPrefillConfig = async (
-  code: any,
-  // components: Array<string>, // Add all required components to be imported from @carbon/react
-  // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
-  customImports: Array<string> = [],
-  customFunctionDefs: Array<string> = [],
-  styles: string
-) => {
-  const { args } = code;
+interface previewerObject {
+  story: any;
+  customImports: string[];
+  customFunctionDefs: string[];
+  styles: string;
+}
+export const stackblitzPrefillConfig = async ({
+  story,
+  customImports = [],
+  customFunctionDefs = [],
+  styles,
+}: previewerObject) => {
+  const { args } = story;
   const productComponents = await import('../src/index');
   componentNames = Object.keys(productComponents);
   const storyCode = filterStoryCode(
-    code.parameters.docs.source.originalSource,
+    story.parameters.docs.source.originalSource,
     args
   );
   const app = appGenerator(storyCode, customImports, customFunctionDefs, args);
@@ -137,7 +141,7 @@ const appGenerator = (
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
   const app = `
   import React ${hooksString != '' ? `, { ${hooksString} }` : ''} from 'react';
-  ${customImports.length > 0 ? customImports.map((customImport) => customImport) : ''}
+  ${customImports?.length > 0 ? customImports?.map((customImport) => customImport) : ''}
   ${matchedComponents.length > 0 ? `import { ${matchedComponents.join(', ')} } from "@carbon/ibm-products";` : ''}
   ${matchedCarbonComponents.length > 0 ? `import { ${matchedCarbonComponents.join(', ')} } from "@carbon/react";` : ''}
   ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
@@ -146,7 +150,7 @@ const appGenerator = (
     const pkg = {
      prefix: 'c4p'
     }
-    ${customFunctionDefs.map((customFunction) => customFunction)}
+    ${customFunctionDefs?.map((customFunction) => customFunction)}
     ${storyCode}
   }
   `;

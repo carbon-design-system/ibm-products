@@ -31,7 +31,10 @@ set of features with ease.
   additionalActions={[
       {
         title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig(stories.optionsTile, [], [], stories.default.parameters.styles),
+        onClick: () => stackblitzPrefillConfig({
+          'story': stories.optionsTile,
+          'styles': stories.default.parameters.styles
+        }),
       },
     ]}>
 </Canvas>
@@ -43,7 +46,10 @@ set of features with ease.
   additionalActions={[
       {
         title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig(stories.staticOptionsTile, [], [], stories.default.parameters.styles),
+        onClick: () => stackblitzPrefillConfig({
+          'story': stories.staticOptionsTile,
+          'styles': stories.default.parameters.styles
+        }),
       },
     ]}>
 </Canvas>

@@ -57,37 +57,32 @@ export interface CoachmarkBeaconProps {
 export let CoachmarkBeacon = React.forwardRef<
   HTMLDivElement,
   CoachmarkBeaconProps
->(
-  (
-    { label, className, kind = defaults.kind, buttonProps = {}, ...rest },
-    ref
-  ) => {
-    return (
-      <span
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(blockClass, `${blockClass}-${kind}`, className)}
-        ref={ref}
-        {...getDevtoolsProps(componentName)}
-        role="tooltip"
+>(({ label, className, kind = defaults.kind, buttonProps, ...rest }, ref) => {
+  return (
+    <span
+      {
+        // Pass through any other property values as HTML attributes.
+        ...rest
+      }
+      className={cx(blockClass, `${blockClass}-${kind}`, className)}
+      ref={ref}
+      {...getDevtoolsProps(componentName)}
+      role="tooltip"
+    >
+      <button
+        tabIndex={0}
+        type="button"
+        {...buttonProps}
+        className={`${blockClass}__target`}
       >
-        <button
-          tabIndex={0}
-          type="button"
-          {...buttonProps}
-          className={`${blockClass}__target`}
-        >
-          <svg className={`${blockClass}__center`} aria-label={label}>
-            <title>{label}</title>
-            <circle r={1} cx={38} cy={38} />
-          </svg>
-        </button>
-      </span>
-    );
-  }
-);
+        <svg className={`${blockClass}__center`} aria-label={label}>
+          <title>{label}</title>
+          <circle r={1} cx={38} cy={38} />
+        </svg>
+      </button>
+    </span>
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 CoachmarkBeacon = pkg.checkComponentEnabled(CoachmarkBeacon, componentName);

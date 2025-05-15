@@ -49,6 +49,9 @@ const renderCoachmarkWithBeacon = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('renders a component CoachmarkBeacon', () => {
     renderCoachmarkWithBeacon({ label: 'Show information' });
     expect(screen.getByTestId(childDataTestId)).toHaveClass(blockClass);

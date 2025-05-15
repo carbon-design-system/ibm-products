@@ -303,11 +303,11 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
         >
           {overlayKind !== 'tooltip' ? (
             <>
-              {isValidElement(target) &&
-                React.cloneElement(target as React.ReactElement<any>, {
-                  ...((target as React.ReactElement<any>).props?.buttonProps ??
-                    contextValue.buttonProps),
-                })}
+              {React.cloneElement(target as React.ReactElement<any>, {
+                buttonProps:
+                  (target as React.ReactElement<any>).props?.buttonProps ??
+                  contextValue.buttonProps,
+              })}
               {isOpen &&
                 portalNode?.current &&
                 createPortal(
@@ -337,11 +337,11 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
               autoAlign={autoAlign}
               open={isOpen}
             >
-              {isValidElement(target) &&
-                React.cloneElement(target as React.ReactElement<any>, {
-                  ...((target as React.ReactElement<any>).props?.buttonProps ??
-                    contextValue.buttonProps),
-                })}
+              {React.cloneElement(target as React.ReactElement<any>, {
+                buttonProps:
+                  (target as React.ReactElement<any>).props?.buttonProps ??
+                  contextValue.buttonProps,
+              })}
               <PopoverContent>
                 {isOpen && (
                   <CoachmarkOverlay

@@ -28,7 +28,7 @@ export interface CoachmarkButtonProps extends ButtonProps<React.ElementType> {
   onClick?(): void;
   onDoubleClick?(): void;
   tabIndex?: number;
-  ['aria-label']?: string;
+  ['aria-bool']?: boolean;
 }
 export interface CoachmarkBeaconProps {
   /**
@@ -110,7 +110,7 @@ CoachmarkBeacon.propTypes = {
     onClick: PropTypes.func,
     onDoubleClick: PropTypes.func,
     tabIndex: PropTypes.number,
-    ['aria-label']: PropTypes.string,
+    ['aria-expanded']: PropTypes.bool,
   }),
   /**
    * Optional class name for this component.

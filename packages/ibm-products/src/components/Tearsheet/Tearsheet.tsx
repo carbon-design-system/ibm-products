@@ -33,6 +33,7 @@ const componentName = 'Tearsheet';
 
 export interface TearsheetAction extends ButtonProps<'button'> {
   label?: string;
+  loading?: boolean;
 }
 
 // Note that the descriptions here should be kept in sync with those for the

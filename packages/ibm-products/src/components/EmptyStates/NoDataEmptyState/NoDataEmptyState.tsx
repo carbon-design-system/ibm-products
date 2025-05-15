@@ -52,7 +52,7 @@ export let NoDataEmptyState = React.forwardRef<
       illustrationDescription,
       link,
       size = defaults.size,
-      headingAs = defaults.headingAs,
+      headingAs,
       subtitle,
       title,
 
@@ -150,11 +150,7 @@ NoDataEmptyState.propTypes = {
    * Empty state link object
    */
   /**@ts-ignore */
-  link: PropTypes.shape({
-    ...Link.propTypes,
-    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    href: PropTypes.string,
-  }),
+  link: PropTypes.any,
 
   /**
    * Empty state size

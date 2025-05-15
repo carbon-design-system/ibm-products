@@ -210,7 +210,7 @@ jobs:
       - name: Run storybook
         id: storybook
         run: |
-          npx serve -l 3000 packages/core/storybook-static &
+          npx serve -l 3000 packages/ibm-products/storybook-static &
           pid=$!
           echo "pid=$pid" >> $GITHUB_OUTPUT
       - uses: ./actions/wait-for-it
@@ -252,7 +252,11 @@ jobs:
       - name: Build project
         run: yarn build
       - name: Run VRT
-        working-directory: packages/core
+        if:
+          ${{ env.PERCY_TOKEN != '' && github.repository ==
+          'carbon-design-system/ibm-products' && github.event.pull_request.draft
+          == false }}
+        working-directory: packages/ibm-products
         run: yarn percy storybook storybook-static
 
   avt:

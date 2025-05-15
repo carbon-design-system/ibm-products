@@ -23,7 +23,7 @@ import { DescriptionListSize } from './constants';
 import mdx from './DescriptionList.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
   title: 'Deprecated/DescriptionList',

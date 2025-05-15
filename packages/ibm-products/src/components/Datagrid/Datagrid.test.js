@@ -634,6 +634,7 @@ const RadioSelect = ({ ...rest } = {}) => {
           3: true,
         },
       },
+      onRadioSelect: jest.fn(), // for code coverage
     },
     useSelectRows
   );
@@ -776,6 +777,44 @@ const InfiniteScroll = () => {
       fetchMoreData: fetchData,
     },
     useInfiniteScroll
+  );
+
+  return (
+    <Wrapper>
+      <Datagrid datagridState={{ ...datagridState }} />;
+    </Wrapper>
+  );
+};
+
+const InfiniteScrollWithSelection = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data, setData] = useState(makeData(0));
+
+  const [isFetching, setIsFetching] = useState(false);
+  const fetchData = () =>
+    new Promise((resolve) => {
+      setIsFetching(true);
+      setTimeout(() => {
+        setData(data.concat(makeData(30, 5, 2)));
+        setIsFetching(false);
+        resolve();
+      }, 1000);
+    });
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      isFetching,
+      fetchMoreData: fetchData,
+    },
+    useInfiniteScroll,
+    useSelectRows
   );
 
   return (
@@ -1252,6 +1291,42 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].classList[0]
     ).toBe('c4p--datagrid__virtual-scrollbar');
+  });
+
+  it('Infinite scroll with selection', async () => {
+    const user = userEvent.setup({ delay: null });
+    const { click } = user;
+
+    render(<InfiniteScrollWithSelection data-testid={dataTestId} />);
+
+    // Wait for load to complete and skeletons to disappear.
+    await waitFor(
+      () => {
+        expect(screen.getAllByRole('row')).toHaveLength(12);
+      },
+      { timeout: 5000 }
+    );
+
+    // Select all rows.
+    const selectAllCheckbox = screen.getByRole('checkbox', {
+      name: 'Select all rows in the table',
+    });
+    await click(selectAllCheckbox);
+    expect(screen.getAllByRole('checkbox', { checked: true })).toHaveLength(12);
+
+    // Deselect a single row, sending the "select all" checkbox to an indeterminate state.
+    const rowLevelCheckbox = screen.getAllByRole('checkbox', {
+      name: 'Toggle Row Selected',
+    })[3];
+    await click(rowLevelCheckbox);
+    expect(screen.getAllByRole('checkbox', { checked: true })).toHaveLength(10);
+
+    // Toggle the "select all" checkbox again.  All rows should be deselected.
+    // This tests the indeterminate code path in handleSelectAllChange().
+    await click(selectAllCheckbox);
+    expect(screen.queryAllByRole('checkbox', { checked: true })).toHaveLength(
+      0
+    );
   });
 
   it('renders Ten Thousand table entries', async () => {

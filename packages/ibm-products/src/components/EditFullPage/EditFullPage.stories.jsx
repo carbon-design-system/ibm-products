@@ -14,7 +14,7 @@ import { pkg } from '../../settings';
 import { EditFullPage } from '.';
 
 import styles from '../CreateFullPage/_storybook-styles.scss?inline';
-import { Annotation } from '../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../.storybook/Annotation';
 
 const storyClass = 'create-full-page-stories';
 const blockClass = `${pkg.prefix}--create-full-page`;

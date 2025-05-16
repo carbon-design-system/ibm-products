@@ -47,6 +47,8 @@ const defaultStoryProps = {
     </>
   ),
   id: 'storybook-sidepanel',
+  size: 'md',
+  placement: 'right',
 };
 
 const headerData = [
@@ -417,6 +419,17 @@ export default {
       },
       options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     },
+    size: {
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+      description:
+        'Sets the intended size of the side panel. if the size exceeds 75vw, it will limit the side panel to a maximum of 75vw.',
+      control: { type: 'select' },
+    },
+    placement: {
+      options: ['left', 'right'],
+      description: 'The placement of the side panel',
+      control: { type: 'select' },
+    },
     slideIn: {
       table: {
         disable: true,
@@ -465,7 +478,7 @@ export default {
 
 // eslint-disable-next-line react/prop-types
 const SlideOverTemplate = (
-  { minimalContent, actions, aiLabel, slug, decorator, ...args },
+  { minimalContent, actions, aiLabel, slug, decorator, placement, ...args },
   context
 ) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
@@ -493,6 +506,7 @@ const SlideOverTemplate = (
         onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}
         ref={testRef}
+        placement={placement}
         aiLabel={aiLabel && sampleAILabel}
         slug={slug && sampleAILabel}
         decorator={decorator && sampleAILabel}

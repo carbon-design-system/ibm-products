@@ -21,7 +21,7 @@ import { pkg } from '../../settings';
 import { APIKeyModal } from '.';
 import wait from '../../global/js/utils/wait';
 import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
-import DocsPage from './APIKeyModal.docs-page';
+import mdx from './APIKeyModal.mdx';
 
 export default {
   title: 'IBM Products/Components/Generating an API key/APIKeyModal',
@@ -29,7 +29,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: DocsPage },
+    docs: {
+      page: mdx,
+    },
   },
   argTypes: {
     generateSuccessBody: {
@@ -80,13 +82,11 @@ const defaultProps = {
   modalLabel: 'An example of Generate API key',
 };
 
-const blockClass = `${pkg.prefix}--apikey-modal`;
-
 const InstantTemplate = (args, context) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef(undefined);
-
+  const blockClass = `${pkg.prefix}--apikey-modal`;
   const generateKey = async () => {
     setLoading(true);
     await wait(1000);
@@ -126,6 +126,7 @@ const TemplateWithState = (args, context) => {
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
   const buttonRef = useRef(undefined);
+  const blockClass = `${pkg.prefix}--apikey-modal`;
 
   // eslint-disable-next-line
   const submitHandler = async (apiKeyName) => {
@@ -179,6 +180,7 @@ const MultiStepTemplate = (args, context) => {
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef(undefined);
+  const blockClass = `${pkg.prefix}--apikey-modal`;
 
   // multi step options
   const [name, setName] = useState(savedName);
@@ -339,6 +341,7 @@ const EditTemplate = (args, context) => {
   const [fetchError, setFetchError] = useState(false);
   const [fetchSuccess, setFetchSuccess] = useState(false);
   const buttonRef = useRef(undefined);
+  const blockClass = `${pkg.prefix}--apikey-modal`;
 
   const submitHandler = async () => {
     action(`submitted ${apiKeyName}`)();

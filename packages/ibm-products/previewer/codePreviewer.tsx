@@ -20,21 +20,34 @@ interface ComponentSources {
   unknown: string[];
 }
 
-export const stackblitzPrefillConfig = async (
-  code: any,
-  // components: Array<string>, // Add all required components to be imported from @carbon/react
-  // icons: Array<string> // Add all required icons to be imported from @carbon/icons-react
-  customImport: string
-) => {
-  const { args } = code;
+interface previewerObject {
+  story: any;
+  customImports: string[];
+  customFunctionDefs: string[];
+  styles: string;
+}
+export const stackblitzPrefillConfig = async ({
+  story,
+  customImports = [],
+  customFunctionDefs = [],
+  styles,
+}: previewerObject) => {
+  const { args } = story;
   const productComponents = await import('../src/index');
   componentNames = Object.keys(productComponents);
   const storyCode = filterStoryCode(
-    code.parameters.docs.source.originalSource,
+    story.parameters.docs.source.originalSource,
     args
   );
-  const app = appGenerator(storyCode, customImport, args);
-
+  const app = appGenerator(storyCode, customImports, customFunctionDefs, args);
+  let styleImport = style;
+  if (styles) {
+    // This regex matches multi-line comments that start with /* and end with */
+    // It specifically looks for comments containing common license keywords
+    const licenseCommentRegex =
+      /\/\*\*?\s*\n?(?:\s*\*[^\n]*\n)*\s*\*?\s*(?:copyright|license|licensed|apache|mit|ibm corp|found in the|root directory)[^*]*\*\//gi;
+    styleImport += styles.replace(licenseCommentRegex, '');
+  }
   const stackblitzFileConfig: Project = {
     title: 'Carbon demo',
     description:
@@ -46,7 +59,7 @@ export const stackblitzPrefillConfig = async (
       'vite.config.js': viteConfig,
       'src/main.jsx': main,
       'src/App.jsx': app,
-      'src/index.scss': style,
+      'src/index.scss': styleImport,
     },
   };
 
@@ -58,9 +71,17 @@ export const stackblitzPrefillConfig = async (
 
 const filterStoryCode = (storyCode, args) => {
   let storyCodeUpdated = storyCode
-    .replace(/^\s*args\s*=>\s*{\s*|}\s*;?\s*$/g, '')
+    // Remove arrow functions
+    .replace(/^\s*(\([^)]*\)|[\w]+)\s*=>\s*{\s*|}\s*;?\s*$/g, '')
+    // Remove empty arrow wrappers
     .replace(/^\s*\(\)\s*=>\s*{/g, '')
+    // Replace `args =>` with `return`
     .replace(/^\s*args\s*=>/g, 'return')
+    // Remove ALL action() calls (including template literals and invocations)
+    .replace(/action\(([^)]*)\)(\(\))?/g, '')
+    // Replace ONLY `context.viewMode !== 'docs'` with `false` (your specific case)
+    .replace(/context\.viewMode\s*!==\s*'docs'/g, 'false')
+    // Remove quotes/action handlers (unchanged)
     .replace(/^"|"$/g, '')
     .replace(/onChange=\{(args\.onChange|action\('onChange'\))\}\s*/g, '')
     .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
@@ -94,11 +115,15 @@ const filterStoryCode = (storyCode, args) => {
       storyCodeUpdated = storyCodeUpdated.replace(regex, valueStr);
     }
   });
-  storyCodeUpdated = storyCodeUpdated.replace(/`([^`]+)`/g, '"$1"');
   return storyCodeUpdated;
 };
 
-const appGenerator = (storyCode: string, customImport: string, args: any) => {
+const appGenerator = (
+  storyCode: string,
+  customImports: Array<string>,
+  customFunctionDefs: Array<string>,
+  args: any
+) => {
   const {
     carbon: matchedCarbonComponents,
     ibmProducts: matchedComponents,
@@ -108,17 +133,24 @@ const appGenerator = (storyCode: string, customImport: string, args: any) => {
   if (unknownComponents.length > 0) {
     storyCode = removeUnknownComponents(storyCode, unknownComponents);
   }
+  const foundHooks = detectReactHooks(storyCode);
+  const hooksString = foundHooks.join(', ');
+  const regex = /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)/;
+  const hasArgs = regex.test(storyCode);
   // Generate App.jsx code
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
   const app = `
-  import React, { useState, useEffect } from 'react';
-  ${customImport ? customImport : ''}
+  import React ${hooksString != '' ? `, { ${hooksString} }` : ''} from 'react';
+  ${customImports?.length > 0 ? customImports?.map((customImport) => customImport) : ''}
   ${matchedComponents.length > 0 ? `import { ${matchedComponents.join(', ')} } from "@carbon/ibm-products";` : ''}
   ${matchedCarbonComponents.length > 0 ? `import { ${matchedCarbonComponents.join(', ')} } from "@carbon/react";` : ''}
   ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
-  const storyClass = 'example'
   export default function App() {
-    ${formattedArgs}
+    ${hasArgs ? formattedArgs : ''}
+    const pkg = {
+     prefix: 'c4p'
+    }
+    ${customFunctionDefs?.map((customFunction) => customFunction)}
     ${storyCode}
   }
   `;
@@ -167,3 +199,22 @@ const removeUnknownComponents = (storyCode, unknownComponents) => {
   cleanedCode = cleanedCode.replace(closingTagPattern, '');
   return cleanedCode;
 };
+
+function detectReactHooks(sanitizedCode: string): string[] {
+  const hooksToCheck = [
+    'useState',
+    'useEffect',
+    'useContext',
+    'useRef',
+  ] as const;
+  const foundHooks: string[] = [];
+
+  hooksToCheck.forEach((hook) => {
+    const regex = new RegExp(`\\b${hook}\\s*\\(`);
+    if (regex.test(sanitizedCode)) {
+      foundHooks.push(hook);
+    }
+  });
+
+  return foundHooks;
+}

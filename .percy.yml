@@ -12,7 +12,7 @@ storybook:
   # waits for data-carbon-theme attribute to exist before taking snapshot
   # if storybook is still loading, percy could take a snapshot of the storybook
   # loading spinner and cause flaky tests
-  waitForSelector: '[data-carbon-theme]'
+  waitForSelector: '.story-wrapper'
   include: ['/IBM Products/']
   exclude: [
       '/Internal/',

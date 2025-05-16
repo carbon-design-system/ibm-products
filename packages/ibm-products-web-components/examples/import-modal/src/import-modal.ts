@@ -241,7 +241,7 @@ class ImportModal extends HostListenerMixin(LitElement) {
             <cds-button
               class=${`${blockClass}__import-button`}
               .kind="primary"
-              size="sm"
+              size="md"
               .type="Submit"
               ?disabled=${importButtonDisabled}
               @click=${handleImportFile}

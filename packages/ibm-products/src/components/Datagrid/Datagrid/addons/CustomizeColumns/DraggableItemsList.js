@@ -212,36 +212,28 @@ export const DraggableItemsList = ({
             const parts = colHeaderTitle.split(
               new RegExp(`(${filterString})`, 'gi')
             );
-            const highlightedText = parts
-              .map((part) =>
-                part.toLowerCase() === filterString.toLowerCase()
-                  ? `<strong>${part}</strong>`
-                  : part
+            const highlightedText = parts.map((part) =>
+              part.toLowerCase() === filterString.toLowerCase() ? (
+                <strong>{part}</strong>
+              ) : (
+                part
               )
-              .join('');
+            );
             const isFrozenColumn = !!colDef.sticky;
             const isDisabled = colDef.disabled;
+
             const listContents = (
-              <>
-                <Checkbox
-                  checked={isColumnVisible(colDef)}
-                  disabled={isDisabled || isFrozenColumn}
-                  onChange={(_, { checked }) => onSelectColumn(colDef, checked)}
-                  id={`${blockClass}__customization-column-${colDef.id}`}
-                  labelText={colHeaderTitle}
-                  title={colHeaderTitle}
-                  className={`${blockClass}__customize-columns-checkbox`}
-                  hideLabel
-                  onKeyDown={(event) => handleCheckboxKeydown(event, colDef)}
-                />
-                {
-                  <div
-                    dangerouslySetInnerHTML={{ __html: highlightedText }}
-                    className={`${blockClass}__customize-columns-checkbox-visible-label`}
-                  />
-                }
-              </>
+              <Checkbox
+                checked={isColumnVisible(colDef)}
+                disabled={isDisabled || isFrozenColumn}
+                onChange={(_, { checked }) => onSelectColumn(colDef, checked)}
+                id={`${blockClass}__customization-column-${colDef.id}`}
+                labelText={highlightedText}
+                className={`${blockClass}__customize-columns-checkbox`}
+                onKeyDown={(event) => handleCheckboxKeydown(event, colDef)}
+              />
             );
+
             return (
               <DraggableElement
                 classList={draggableClass}

@@ -39,13 +39,6 @@
 }
 
 .#{variables.$block-class}__customize-columns-column-list
-  .#{variables.$block-class}__customize-columns-checkbox-visible-label {
-  // Disabling linter only to match the spacing that Carbon uses for the Checkbox label
-  /* stylelint-disable-next-line */
-  padding-inline-start: convert.to-rem(6px);
-}
-
-.#{variables.$block-class}__customize-columns-column-list
   .#{variables.$block-class}__customize-columns-checkbox-wrapper.#{c4p-settings.$carbon-prefix}--form-item {
   margin-block-end: 0;
 }

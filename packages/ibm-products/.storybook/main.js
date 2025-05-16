@@ -73,14 +73,15 @@ export default {
       ${head}
       ${
         process.env.NODE_ENV !== 'development'
-          ? `<script src="https://cdn.amplitude.com/script/1181fcf4482b4c8e905ffd877f3aef57.js"></script>
-      <script>
-        window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-        window.amplitude.init('1181fcf4482b4c8e905ffd877f3aef57', {
-          "fetchRemoteConfig": true,
-          "autocapture": true
-        });
-      </script>`
+          ? `
+          <script src="https://cdn.amplitude.com/script/f6f1d9025934f04f5a2a8bebb74abf2f.js"></script>
+          <script>
+            window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+            window.amplitude.init('f6f1d9025934f04f5a2a8bebb74abf2f', {
+              "fetchRemoteConfig":true,
+              "autocapture":true
+            });
+          </script>`
           : ''
       }
     `;

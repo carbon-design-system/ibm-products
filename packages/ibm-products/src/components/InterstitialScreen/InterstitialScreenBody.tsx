@@ -43,6 +43,8 @@ export interface InterstitialScreenBodyProps {
   ) => ReactElement<EnrichedChildren> | ReactNode;
 }
 
+type StepType = 'single' | 'multi';
+
 const InterstitialScreenBody = React.forwardRef<
   HTMLDivElement,
   InterstitialScreenBodyProps
@@ -51,7 +53,7 @@ const InterstitialScreenBody = React.forwardRef<
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const bodyBlockClass = `${blockClass}--internal-body`;
 
-  const [isMultiStep, setIsMultiStep] = useState(false);
+  const [stepType, setStepType] = useState<StepType>();
 
   const {
     setBodyChildrenData,
@@ -83,13 +85,12 @@ const InterstitialScreenBody = React.forwardRef<
 
     // Set body children data
     setBodyChildrenData?.(children);
-
     // If the children is an array, treat it as a multiStep
     if (isElement && Array.isArray(children)) {
-      const stepLength = children.length;
-
-      setIsMultiStep(!!stepLength);
-      setStepCount?.(stepLength);
+      setStepType('multi');
+      setStepCount?.(children.length);
+    } else {
+      setStepType('single');
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,7 +127,7 @@ const InterstitialScreenBody = React.forwardRef<
       {...rest}
     >
       <div className={`${blockClass}--content`}>
-        {isMultiStep ? (
+        {stepType === 'multi' ? (
           <div className={`${blockClass}__carousel`}>
             <Carousel
               disableArrowScroll
@@ -136,8 +137,10 @@ const InterstitialScreenBody = React.forwardRef<
               {bodyChildrenData}
             </Carousel>
           </div>
-        ) : (
+        ) : stepType === 'single' ? (
           bodyChildrenData
+        ) : (
+          ''
         )}
       </div>
     </div>

@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities';
 @use '../../global/styles/project-settings' as c4p-settings;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -59,6 +60,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--carousel;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  &:focus {
+    @include utilities.focus-outline('outline');
+  }
 
   /* stylelint-disable-next-line max-nesting-depth */
   @media (prefers-reduced-motion) {

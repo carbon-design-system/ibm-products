@@ -7,6 +7,7 @@
   ModalHeader,
   ProgressIndicator,
   ProgressStep,
+  usePrefix,
 } from '@carbon/react';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -62,20 +63,21 @@ const InterstitialScreenHeader = React.forwardRef<
     hideProgressIndicator,
     children,
   } = props;
-  const { bodyChildrenData, isFullScreen, progStep, handleClose } =
+  const { bodyChildrenData, isFullScreen, progStep, handleClose, stepCount } =
     React.useContext(InterstitialScreenContext);
 
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const headerBlockClass = `${blockClass}--internal-header`;
   const _useId = useId();
+  const carbonPrefix = usePrefix();
 
   const headerContent = () => {
     return (
       <>
         {(headerTitle || headerSubTitle) && (
           <div className={`${blockClass}--titleContainer`}>
-            {headerTitle && <h2>{headerTitle}</h2>}
-            {headerSubTitle && <h3>{headerSubTitle}</h3>}
+            {headerTitle && <h1>{headerTitle}</h1>}
+            {headerSubTitle && <h2>{headerSubTitle}</h2>}
           </div>
         )}
 
@@ -100,6 +102,13 @@ const InterstitialScreenHeader = React.forwardRef<
                   }
                 })}
               </ProgressIndicator>
+              <div
+                aria-live="polite"
+                aria-atomic="true"
+                className={`${carbonPrefix}--visually-hidden`}
+              >
+                Step {progStep + 1} of {stepCount}
+              </div>
             </div>
           )}
       </>

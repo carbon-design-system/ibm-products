@@ -355,7 +355,7 @@ export let ImportModal: React.FC<ImportModalProps> = forwardRef(
             <Button
               onClick={fetchFile}
               className={`${blockClass}__import-button`}
-              size="sm"
+              size="md"
               disabled={importButtonDisabled}
               renderIcon={
                 inputButtonIcon

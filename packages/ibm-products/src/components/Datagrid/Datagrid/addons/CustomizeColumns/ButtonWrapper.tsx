@@ -10,17 +10,29 @@ import PropTypes from 'prop-types';
 import { Column } from '@carbon/react/icons';
 import { Button } from '@carbon/react';
 import { pkg } from '../../../../../settings';
+import { DataGridState } from '../../../types';
+import { ComponentProps } from 'react';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const ButtonWrapper = ({
-  onClick,
-  setIsTearsheetOpen,
-  isTearsheetOpen,
-  iconTooltipLabel = 'Customize columns',
-  ...rest
-}) => {
-  return (
+interface ButtonWrapperProps extends ComponentProps<typeof Button> {
+  isTearsheetOpen: boolean;
+  iconTooltipLabel?: string;
+  onClick?: () => void;
+  setIsTearsheetOpen: (open: boolean) => void;
+}
+
+const ButtonWrapper = React.forwardRef<HTMLButtonElement, ButtonWrapperProps>(
+  (
+    {
+      onClick,
+      setIsTearsheetOpen,
+      isTearsheetOpen,
+      iconTooltipLabel = 'Customize columns',
+      ...rest
+    },
+    ref
+  ) => (
     <Button
       {...rest}
       renderIcon={(props) => <Column size={16} {...props} />}
@@ -29,6 +41,7 @@ const ButtonWrapper = ({
       kind="ghost"
       hasIconOnly
       test-id={`${blockClass}__customize-columns-trigger`}
+      ref={ref}
       onClick={() => {
         setIsTearsheetOpen(!isTearsheetOpen);
         if (typeof onClick === 'function') {
@@ -36,12 +49,8 @@ const ButtonWrapper = ({
         }
       }}
     />
-  );
-};
-
-ButtonWrapper.defaultProps = {
-  onClick: () => {},
-};
+  )
+);
 
 ButtonWrapper.propTypes = {
   iconTooltipLabel: PropTypes.string,

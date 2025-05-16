@@ -5,7 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { PropsWithChildren, ReactNode, forwardRef } from 'react';
+import React, {
+  HTMLAttributes,
+  PropsWithChildren,
+  ReactNode,
+  forwardRef,
+} from 'react';
 import cx from 'classnames';
 import {
   Button,
@@ -35,7 +40,7 @@ type LinkType = {
   [key: string]: unknown;
 };
 
-export interface ActionIcon extends Metadata {
+export interface ActionIcon extends Metadata, HTMLAttributes<HTMLElement> {
   onKeydown?: (event: KeyboardEvent) => void;
   onClick?: (
     event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>

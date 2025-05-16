@@ -45,7 +45,7 @@ export let Datagrid = React.forwardRef(
       pconsole.warn(
         'Datagrid was not passed datagridState which is required to render this component.'
       );
-      return;
+      return null;
     }
 
     const {

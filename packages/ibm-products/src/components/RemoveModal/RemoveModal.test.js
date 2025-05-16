@@ -87,10 +87,10 @@ describe(componentName, () => {
     };
 
     render(<RemoveModal {...props} />);
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
 
     expect(onRequestSubmit).toBeCalled();
-    await act(() => click(screen.getByText(props.secondaryButtonText)));
+    await act(async () => click(screen.getByText(props.secondaryButtonText)));
     expect(onClose).toBeCalled();
   });
 
@@ -107,20 +107,20 @@ describe(componentName, () => {
 
     render(<RemoveModal {...props} />);
 
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
     const textInput = screen.getByRole('textbox');
     change(textInput, {
       target: { value: 'bx1002' },
     });
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
     change(textInput, {
       target: { value: 'bx1001' },
     });
-    await act(() => click(screen.getByText(props.primaryButtonText)));
+    await act(async () => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).toBeCalled();
   });
 

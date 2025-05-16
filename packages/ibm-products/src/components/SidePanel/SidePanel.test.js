@@ -6,11 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  act,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
-
-import React, { act } from 'react';
+import React from 'react';
 import { Button, TextInput, AILabel, AILabelContent } from '@carbon/react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -150,7 +155,7 @@ describe('SidePanel', () => {
     });
     const overlayElement = container.querySelector(`.${blockClass}__overlay`);
     expect(overlayElement).toBeTruthy();
-    await act(() => userEvent.click(overlayElement));
+    await act(async () => userEvent.click(overlayElement));
     expect(onRequestCloseFn).toHaveBeenCalled();
   });
 
@@ -180,8 +185,8 @@ describe('SidePanel', () => {
     const style = getComputedStyle(pageContent);
     expect(style.marginInlineStart).toBe('30rem');
     const closeIconButton = screen.getByRole('button', { name: 'Close' });
-    await act(() => userEvent.click(closeIconButton));
-    await act(() => rerender(<SlideIn placement="left" open={false} />));
+    await act(async () => userEvent.click(closeIconButton));
+    await act(async () => rerender(<SlideIn placement="left" open={false} />));
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineStart).toBe('0');
   });
@@ -193,10 +198,10 @@ describe('SidePanel', () => {
     expect(style.marginInlineEnd).toBe('30rem');
     const closeIconButton = screen.getByRole('button', { name: 'Close' });
     const outerElement = container.querySelector(`.${blockClass}`);
-    await act(() => userEvent.click(closeIconButton));
-    await act(() => fireEvent.animationStart(outerElement));
-    await act(() => rerender(<SlideIn placement="right" open={false} />));
-    await act(() => fireEvent.animationEnd(outerElement));
+    await act(async () => userEvent.click(closeIconButton));
+    await act(async () => fireEvent.animationStart(outerElement));
+    await act(async () => rerender(<SlideIn placement="right" open={false} />));
+    await act(async () => fireEvent.animationEnd(outerElement));
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineEnd).toBe('0');
     expect(onUnmountFn).toHaveBeenCalled();
@@ -216,10 +221,10 @@ describe('SidePanel', () => {
     expect(style.marginInlineEnd).toBe('30rem');
     const closeIconButton = screen.getByRole('button', { name: 'Close' });
     const outerElement = container.querySelector(`.${blockClass}`);
-    await act(() => userEvent.click(closeIconButton));
-    await act(() => fireEvent.animationStart(outerElement));
-    await act(() => fireEvent.animationEnd(outerElement));
-    await act(() =>
+    await act(async () => userEvent.click(closeIconButton));
+    await act(async () => fireEvent.animationStart(outerElement));
+    await act(async () => fireEvent.animationEnd(outerElement));
+    await act(async () =>
       rerender(<SlideIn animateTitle={false} placement="right" open={false} />)
     );
     const updatedStyles = getComputedStyle(pageContent);
@@ -232,8 +237,8 @@ describe('SidePanel', () => {
     });
     const closeIconButton = screen.getByRole('button', { name: 'Close' });
     const overlayElement = container.querySelector(`.${blockClass}__overlay`);
-    await act(() => userEvent.click(closeIconButton));
-    await act(() =>
+    await act(async () => userEvent.click(closeIconButton));
+    await act(async () =>
       rerender(
         <SidePanel
           title={title}
@@ -425,7 +430,7 @@ describe('SidePanel', () => {
     const navigationAction = container.querySelector(
       `.${blockClass}__navigation-back-button`
     );
-    await act(() => click(navigationAction));
+    await act(async () => click(navigationAction));
     expect(onNavigationBackFn).toBeCalled();
   });
 
@@ -441,7 +446,7 @@ describe('SidePanel', () => {
       ],
     });
     const sidePanelAction = screen.getByText(/Primary button/i);
-    await act(() => click(sidePanelAction));
+    await act(async () => click(sidePanelAction));
     expect(onClick).toBeCalled();
   });
 
@@ -466,9 +471,9 @@ describe('SidePanel', () => {
     const toolbarButtons = container.querySelectorAll(
       `.${blockClass}__action-toolbar-button`
     );
-    await act(() => click(toolbarButtons[0]));
+    await act(async () => click(toolbarButtons[0]));
     expect(toolbarButtonFn1).toHaveBeenCalledTimes(1);
-    await act(() => click(toolbarButtons[1]));
+    await act(async () => click(toolbarButtons[1]));
     expect(toolbarButtonFn2).toHaveBeenCalledTimes(1);
   });
 
@@ -495,7 +500,7 @@ describe('SidePanel', () => {
     const { click } = userEvent;
     const { container } = renderSidePanel();
     const closeIconButton = screen.getByRole('button', { name: 'Close' });
-    await act(() => click(closeIconButton));
+    await act(async () => click(closeIconButton));
     expect(onRequestCloseFn).toHaveBeenCalled();
   });
 
@@ -518,7 +523,7 @@ describe('SidePanel', () => {
     const navigationButton = container.querySelector(
       `.${blockClass}__navigation-back-button`
     );
-    await act(() => click(navigationButton));
+    await act(async () => click(navigationButton));
     expect(onNavigationBackFn).toHaveBeenCalled();
   });
 
@@ -602,7 +607,7 @@ describe('SidePanel', () => {
     expect(launchButtonEl).toBeInTheDocument();
 
     const closeIconButton = screen.getByRole('button', { name: 'Close' });
-    await act(() => userEvent.click(closeIconButton));
+    await act(async () => userEvent.click(closeIconButton));
     expect(mockCloseFn).toHaveBeenCalledTimes(1);
 
     rerender(<DummyComponent open={false} />);

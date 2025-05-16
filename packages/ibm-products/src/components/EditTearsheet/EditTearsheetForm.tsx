@@ -95,7 +95,14 @@ export let EditTearsheetForm = forwardRef(
     const formNumber = useContext(FormNumberContext);
     useRetrieveFormTitles({ formContext, formNumber, title });
 
-    return formContext ? (
+    if (!formContext) {
+      pconsole.warn(
+        `You have tried using a ${componentName} component outside of a EditTearsheet. This is not allowed. ${componentName}s should always be children of the EditTearsheet`
+      );
+      return null;
+    }
+
+    return (
       <div
         {
           // Pass through any other property values as HTML attributes.
@@ -133,10 +140,6 @@ export let EditTearsheetForm = forwardRef(
           </Column>
         </Grid>
       </div>
-    ) : (
-      pconsole.warn(
-        `You have tried using a ${componentName} component outside of a EditTearsheet. This is not allowed. ${componentName}s should always be children of the EditTearsheet`
-      )
     );
   }
 );

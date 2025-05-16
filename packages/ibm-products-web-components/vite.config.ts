@@ -40,4 +40,13 @@ export default defineConfig({
       reporter: ['text', 'html', 'json'],
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern',
+        quietDeps: true,
+        silenceDeprecations: ['mixed-decls', 'global-builtin', 'legacy-js-api'],
+      },
+    },
+  },
 });

@@ -113,6 +113,19 @@ export default {
           ),
         },
       },
+      css: {
+        preprocessorOptions: {
+          scss: {
+            api: 'modern',
+            quietDeps: true,
+            silenceDeprecations: [
+              'mixed-decls',
+              'global-builtin',
+              'legacy-js-api',
+            ],
+          },
+        },
+      },
     });
   },
 

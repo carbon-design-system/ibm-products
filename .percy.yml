@@ -6,8 +6,13 @@ snapshot:
     - 1366
   minHeight: 1024
 discovery:
-  network_idle_timeout: 500
+  network_idle_timeout: 750
 storybook:
+  waitForTimeout: 1000
+  # waits for data-carbon-theme attribute to exist before taking snapshot
+  # if storybook is still loading, percy could take a snapshot of the storybook
+  # loading spinner and cause flaky tests
+  waitForSelector: '[data-carbon-theme]'
   include: ['/IBM Products/']
   exclude: [
       '/Internal/',

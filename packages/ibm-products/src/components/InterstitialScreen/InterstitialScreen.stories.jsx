@@ -17,7 +17,7 @@ import { pkg } from '../../settings';
 import { InterstitialScreenView } from './_story-assets/InterstitialScreenView/InterstitialScreenView';
 import { InterstitialScreenViewModule } from './_story-assets/InterstitialScreenViewModule/InterstitialScreenViewModule';
 const storyClass = 'interstitial-stories';
-import App from '../../../../../examples/carbon-for-ibm-products/InterstitialScreenWithAnimatedMedia/src/App';
+import App from '../../../../../examples/carbon-for-ibm-products/InterstitialScreenWithAnimatedMedia/src/App.jsx';
 // cspell:words Terminé Partiel Actuel valide
 
 const blockClass = `${pkg.prefix}--interstitial-screen`;

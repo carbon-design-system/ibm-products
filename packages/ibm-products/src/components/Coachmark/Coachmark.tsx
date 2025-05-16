@@ -13,7 +13,6 @@ import React, {
   useEffect,
   useRef,
   useState,
-  isValidElement,
 } from 'react';
 import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
 
@@ -170,6 +169,10 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
     const portalNode = useRef<Element | DocumentFragment | null>(null);
     const popoverRef = useRef<HTMLDivElement>(null);
 
+    let targetName;
+    if (React.isValidElement(target) && typeof target.type !== 'string') {
+      targetName = target.type as { displayName?: string };
+    }
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget
         ? (document?.querySelector(portalTarget) ??
@@ -303,11 +306,11 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
         >
           {overlayKind !== 'tooltip' ? (
             <>
-              {React.cloneElement(target as React.ReactElement<any>, {
-                buttonProps:
-                  (target as React.ReactElement<any>).props?.buttonProps ??
-                  contextValue.buttonProps,
-              })}
+              {targetName?.displayName === 'CoachmarkBeacon'
+                ? React.cloneElement(target as React.ReactElement<any>, {
+                    buttonProps: contextValue.buttonProps,
+                  })
+                : target}
               {isOpen &&
                 portalNode?.current &&
                 createPortal(
@@ -337,11 +340,11 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
               autoAlign={autoAlign}
               open={isOpen}
             >
-              {React.cloneElement(target as React.ReactElement<any>, {
-                buttonProps:
-                  (target as React.ReactElement<any>).props?.buttonProps ??
-                  contextValue.buttonProps,
-              })}
+              {targetName?.displayName === 'CoachmarkBeacon'
+                ? React.cloneElement(target as React.ReactElement<any>, {
+                    buttonProps: contextValue.buttonProps,
+                  })
+                : target}
               <PopoverContent>
                 {isOpen && (
                   <CoachmarkOverlay

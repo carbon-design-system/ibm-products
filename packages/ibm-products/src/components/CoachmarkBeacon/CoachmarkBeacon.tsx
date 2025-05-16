@@ -57,7 +57,14 @@ export interface CoachmarkBeaconProps {
 export let CoachmarkBeacon = React.forwardRef<
   HTMLDivElement,
   CoachmarkBeaconProps
->(({ label, className, kind = defaults.kind, buttonProps, ...rest }, ref) => {
+>((props, ref) => {
+  const {
+    label,
+    className,
+    kind = defaults.kind,
+    buttonProps,
+    ...rest
+  } = props;
   return (
     <span
       {

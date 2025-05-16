@@ -53,6 +53,9 @@ const renderCoachmarkStack = ({ ...rest } = {}, children = childrenContent) =>
   render(<CoachmarkStack {...rest}>{children}</CoachmarkStack>);
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('renders a component CoachmarkStack', () => {
     renderCoachmarkStack({
       title: 'Coachmark Stack',

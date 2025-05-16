@@ -91,6 +91,12 @@ export let CoachmarkButton = React.forwardRef<
   );
 });
 
+/**@ts-ignore*/
+CoachmarkButton.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 CoachmarkButton = pkg.checkComponentEnabled(CoachmarkButton, componentName);
 

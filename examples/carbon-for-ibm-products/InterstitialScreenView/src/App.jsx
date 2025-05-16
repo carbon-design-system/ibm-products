@@ -6,7 +6,7 @@ import Example from './Example/Example';
 
 function App() {
   return (
-    <div>
+    <div className="wrapper">
       <ThemeProvider>
         <Example />
         <ThemeDropdown />

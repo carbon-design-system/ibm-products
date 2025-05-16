@@ -1,11 +1,9 @@
 {
-  "label": "Coachmark-With-Animated-Media",
+  "label": "Interstitial-Screen",
   "package-config": {
     "flags": {
       "component": {
-        "InterstitialScreen": true,
-        "InterstitialScreenView": true,
-        "InterstitialScreenViewModule": true
+        "InterstitialScreen": true
       }
     }
   },

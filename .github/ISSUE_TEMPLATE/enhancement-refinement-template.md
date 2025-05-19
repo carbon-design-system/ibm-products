@@ -26,8 +26,8 @@ User stories describing what this new component is meant to achieve.
 
 ### Additional resources
 
-- [ ] Links to design resources, figma file/s
-- [ ] Links to website guidance
+- Links to design resources, Figma file/s
+- Links to website guidance
 
 ### Composability checklist
 

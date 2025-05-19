@@ -20,6 +20,7 @@ const stories = glob.sync(storyGlobs, {
   ignore: [
     '../../**!(node_modules)/**!(node_modules)/*.mdx',
     '../../**!(node_modules)/**!(node_modules)/*.stories.*',
+    '../src/**/*.internal.stories.*',
   ],
   cwd: __dirname,
 });

@@ -1,0 +1,62 @@
+# Creates and pushes release tag, then creates release notes from the changelogs.
+# Creates PR to merge changelog and version bump updates from release to main branch
+name: Create github tag and PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        # Recently published version
+        required: true
+        description: 'release tag (ie. v2.46.0-rc.0)'
+        type: string
+        default: 'v2.46.0-rc.0'
+      previous-tag:
+        # Previous release tag to grab changelogs from
+        # To pick the previous tag:
+        # - If published tag is the first release candidate, choose the previous full release tag.
+        # - If published tag is a subsequent release candidate, choose the previous release candidate.
+        # - If published tag is a full release, choose the previous full release tag.
+        required: true
+        description: 'previous release tag (ie. v2.45.0)'
+        type: string
+        default: 'v2.45.0'
+      create-pr:
+        # set to true to create PR to merge changes from release to `main` branch
+        required: true
+        description: 'Create PR?'
+        type: boolean
+        default: true
+
+jobs:
+  changelog:
+    name: Generate changelog between tags
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensure full git history for changelog
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate changelog
+        run: |
+          node ./scripts/get-changelog.js \
+            -f ${{ github.event.inputs.previous-tag }} \
+            -t ${{ github.event.inputs.tag }}
+          echo "📄 changelog.txt contents:"
+          cat changelog.txt
+
+      - name: Upload changelog artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: changelog
+          path: changelog.txt

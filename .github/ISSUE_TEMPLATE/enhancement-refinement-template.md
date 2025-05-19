@@ -1,8 +1,9 @@
 # Acceptance criteria
 
+User stories describing what this new component is meant to achieve.
+
 ## Base requirements
 
-- [ ] User stories describing what new component is meant to achieve
 - [ ] Create initial component
 - [ ] Include stories for component
 - [ ] Add test coverage, reaching our baseline 80% coverage threshold (this may
@@ -13,6 +14,10 @@
 `<component-name>`
 
 - [ ] Draft tentative api specifications
+- [ ] List any new props/attributes
+- [ ] Component is built in TypeScript from the start
+- [ ] Any composability considerations that may impact the new component's
+      architecture
 
 ### Additional resources
 

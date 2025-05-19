@@ -1,29 +1,17 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import glob from 'fast-glob';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
 
-const storyGlobs = [
-  '../src/**/*.stories.*',
-  '../../core/src/**/*.stories.*',
-  '../../core/src/**/*.mdx',
+const stories = [
+  '../src/**/!(*.internal).stories.*',
+  '../../core/src/**/!(*.internal).stories.*',
   '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
 ];
-
-const stories = glob.sync(storyGlobs, {
-  ignore: [
-    '../../**!(node_modules)/**!(node_modules)/*.mdx',
-    '../../**!(node_modules)/**!(node_modules)/*.stories.*',
-    '../src/**/*.internal.stories.*',
-  ],
-  cwd: __dirname,
-});
 
 export default {
   staticDirs: ['../public'],

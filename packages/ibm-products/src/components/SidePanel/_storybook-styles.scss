@@ -9,7 +9,11 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/themes/scss/themes';
 @use '@carbon/styles/scss/type';
-
+// @use '@carbon/ibm-products-styles/scss/global/decorators/side-panel-decorator'
+//   as *;
+@use '../../../../ibm-products-styles/src/global/decorators/side-panel-decorator'
+  as *;
+// NOTE: there is a separate decorator for side panel that adds changes to all the sidepanel patterns.
 $story-prefix: side-panel-stories__;
 
 .side-panel-stories__body-content {
@@ -55,28 +59,4 @@ $story-prefix: side-panel-stories__;
   block-size: 100%;
 }
 
-// .#{$story-prefix}story-content {
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   block-size: 100vh;
-// }
-
-.#{$story-prefix}content {
-  flex-grow: 1;
-}
-
-.sbdocs .#{$story-prefix}container {
-  display: flex;
-  background-color: var(--cds-background, #ffffff);
-  block-size: 60vh;
-  box-shadow: 0 0 4px 1px var(--cds-layer-accent-01, #e0e0e0);
-  color: var(--cds-text-primary, #161616);
-}
-
-.sb-show-main.sb-main-fullscreen {
-  // sidepanel sets overflow hidden to body when open, which is right in context of irl application but in story page, as we are rendering many isolated sidepanel variants, we need to unset this for presentational purposes
-  /* stylelint-disable-next-line declaration-no-important */
-  overflow: unset !important;
-}
+@include side-panel-decorator($story-prefix);

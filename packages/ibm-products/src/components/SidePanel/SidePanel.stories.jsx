@@ -6,7 +6,7 @@
  */
 
 import styles from './_storybook-styles.scss?inline';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
@@ -28,13 +28,12 @@ import {
   HeaderName,
   AILabel,
   AILabelContent,
-  Content,
 } from '@carbon/react';
 
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 import { SidePanel } from './SidePanel';
+import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
 import DocsPage from './SidePanel.docs-page';
-import { WithFeatureFlags } from '../../../.storybook/WithFeatureFlags';
 
 const prefix = 'side-panel-stories__';
 
@@ -491,25 +490,7 @@ export default {
     //   },
     // },
   },
-  decorators: [
-    (Story, context) => {
-      const { jsFlags } = context.args;
-      return (
-        <div className={`${prefix}container`}>
-          {renderUIShellHeader()}
-          <Content className={`${prefix}content`}>
-            {jsFlags && jsFlags.length !== 0 ? (
-              <WithFeatureFlags {...jsFlags}>
-                <Story />
-              </WithFeatureFlags>
-            ) : (
-              <Story />
-            )}
-          </Content>
-        </div>
-      );
-    },
-  ],
+  decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
 };
 
 // eslint-disable-next-line react/prop-types
@@ -529,12 +510,6 @@ const SlideOverTemplate = (
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const testRef = useRef(undefined);
   const buttonRef = useRef(undefined);
-
-  useEffect(() => {
-    if (context.viewMode === 'docs') {
-      document.body.style.overflow = '';
-    }
-  }, [open]);
 
   return (
     <>
@@ -578,12 +553,6 @@ const FirstElementDisabledTemplate = (
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const testRef = useRef(undefined);
   const buttonRef = useRef(undefined);
-
-  useEffect(() => {
-    if (context.viewMode === 'docs') {
-      document.body.style.overflow = '';
-    }
-  }, [open]);
 
   return (
     <>
@@ -656,12 +625,6 @@ const StepTemplate = (
   const [currentStep, setCurrentStep] = useState(0);
   const buttonRef = useRef(undefined);
 
-  useEffect(() => {
-    if (context.viewMode === 'docs') {
-      document.body.style.overflow = '';
-    }
-  }, [open]);
-
   return (
     <>
       <Button
@@ -707,12 +670,6 @@ const SlideInTemplate = (
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const buttonRef = useRef(undefined);
 
-  useEffect(() => {
-    if (context.viewMode === 'docs') {
-      document.body.style.overflow = '';
-    }
-  }, [open]);
-
   return (
     <>
       <div className={`${prefix}story-content`} id="ibm-products-page-content">
@@ -755,6 +712,13 @@ SlideIn.args = {
   actions: 0,
   ...defaultStoryProps,
   labelText: 'Incident management',
+};
+
+SlideIn.argTypes = {
+  jsFlags: {
+    control: false,
+    description: 'Not supported in this story',
+  },
 };
 
 export const WithActionToolbar = SlideOverTemplate.bind({});

@@ -27,6 +27,14 @@
     align-items: center;
     justify-content: center;
     block-size: calc(100vh - 48px);
+
+    // dynamic prefix not working here, and this file is out of scope in the configuration
+    > div:first-of-type {
+      > div:last-of-type[class*='--annotation__content'] {
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 
   .#{$prefix}toggle {
@@ -37,11 +45,6 @@
     // sidepanel sets overflow hidden to body when open, which is right in context of irl application but in story page, as we are rendering many isolated sidepanel variants, we need to unset this for presentational purposes
     /* stylelint-disable-next-line declaration-no-important */
     overflow: unset !important;
-  }
-
-  .dev-prefix--c4p--annotation__content {
-    display: flex;
-    justify-content: center;
   }
 
   .sbdocs .docs-story > div {

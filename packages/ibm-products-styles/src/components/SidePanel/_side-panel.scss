@@ -29,7 +29,7 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
-$prefix: 'clabs'; // TODO: remove when resizer available in labs
+$clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
 
 @property --panel-transform {
   inherits: true;
@@ -616,7 +616,7 @@ $prefix: 'clabs'; // TODO: remove when resizer available in labs
 }
 
 // TODO: remove along with prefix after resizer available in labs
-.#{$prefix}--resizer {
+.#{$clabs-prefix}--resizer {
   position: relative;
   flex: none;
   background-color: $border-subtle-01;

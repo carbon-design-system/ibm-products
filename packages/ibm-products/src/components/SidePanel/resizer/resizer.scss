@@ -63,10 +63,3 @@ $prefix: 'clabs' !default;
   inline-size: 1px;
   white-space: nowrap;
 }
-
-// add transitions to panel resizes
-.smooth-resize {
-  @media (prefers-reduced-motion: no-preference) {
-    transition: all motion.$duration-moderate-01 linear;
-  }
-}

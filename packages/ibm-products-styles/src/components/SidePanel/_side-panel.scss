@@ -37,7 +37,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 }
 
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
-  inline-size: var(--c4p-side-panel-modified-size, $size);
+  inline-size: clamp(16rem, var(--c4p-side-panel-modified-size, $size), 100%);
 }
 
 @mixin setDividerStyles() {
@@ -95,7 +95,13 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   transition-property: display, opacity, transform;
   /* if the title does not scroll then we have a child scrolling section. */
   &:not(.#{$block-class}--slide-in) {
-    grid-template-columns: 0 1fr;
+    // enableSidepanelResizer flag class
+    &.#{$block-class}--enable-sidepanel-resizer {
+      grid-template-columns: 0 1fr;
+      @media (prefers-reduced-motion: no-preference) {
+        transition: all $duration-moderate-01 linear;
+      }
+    }
   }
 
   @starting-style {
@@ -104,7 +110,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     transform: translateX(var(--panel-transform));
   }
 
-  @include breakpoint(lg) {
+  @include breakpoint(md) {
     max-inline-size: 75vw;
   }
 
@@ -197,7 +203,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       inset-inline-start: 0;
     }
     &:not(.#{$block-class}--slide-in) {
-      grid-template-columns: 1fr 0;
+      // enableSidepanelResizer FeatureFlag class
+      &.#{$block-class}--enable-sidepanel-resizer {
+        grid-template-columns: 1fr 0;
+
+        @media (prefers-reduced-motion: no-preference) {
+          transition: all $duration-moderate-01 linear;
+        }
+      }
     }
 
     border-inline-end: 1px solid $border-subtle-02;
@@ -528,10 +541,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       // extra class needed to override default size
       block-size: var(--#{$block-class}--actions-height);
     }
-  }
-  &.#{$block-class}.#{$block-class}--xs
-    .#{$block-class}__actions-container.#{$action-set-block-class}--sm {
-    @include setPanelSize(map.get($side-panel-sizes, xs));
   }
 }
 

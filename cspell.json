@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -203,6 +199,7 @@
     "unauthorizedemptystate",
     "userprofileimage",
     "uuidv",
+    "valuenow",
     "webfonts",
     "useravatar",
     "rendericon"

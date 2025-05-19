@@ -14,6 +14,7 @@ import {
   IconButton,
   Section,
 } from '@carbon/react';
+import { useFeatureFlag } from '../FeatureFlags';
 // Import portions of React that are needed.
 import React, {
   ForwardedRef,
@@ -30,9 +31,9 @@ import {
   usePresence,
   usePrefersReducedMotion,
 } from '../../global/js/hooks';
-import { Resizer } from './resizer/resizer';
 
 import { ActionSet } from '../ActionSet';
+import { Resizer } from './resizer/resizer';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -296,13 +297,11 @@ const SidePanelBase = React.forwardRef(
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
     const panelRefValue = sidePanelRef.current;
     const previousOpen = usePreviousValue(open);
+    const enableResizer = useFeatureFlag('enableSidepanelResizer');
     const [sidePanelWidth, setSidePanelWidth] = useState<number | undefined>(
       undefined
     );
-    useEffect(() => {
-      setSidePanelWidth(sidePanelRef?.current?.clientWidth);
-    }, [sidePanelRef, sidePanelRef?.current?.clientWidth]);
-
+    const accumulatedDeltaRef = useRef(0);
     const shouldReduceMotion = usePrefersReducedMotion();
     const exitAnimationName = shouldReduceMotion
       ? 'side-panel-exit-reduced'
@@ -319,6 +318,22 @@ const SidePanelBase = React.forwardRef(
         onRequestClose?.();
       }
     };
+
+    useEffect(() => {
+      if (!enableResizer) {
+        return;
+      }
+      document.documentElement.style.removeProperty(
+        '--c4p-side-panel-modified-size'
+      );
+    }, [size, enableResizer]);
+
+    useEffect(() => {
+      if (!enableResizer) {
+        return;
+      }
+      setSidePanelWidth(sidePanelRef?.current?.clientWidth);
+    }, [sidePanelRef, sidePanelRef?.current?.clientWidth, enableResizer]);
 
     useEffect(() => {
       if (open && !titleRef?.current) {
@@ -688,6 +703,8 @@ const SidePanelBase = React.forwardRef(
         [`${blockClass}--right-placement`]: placement === 'right',
         [`${blockClass}--left-placement`]: placement === 'left',
         [`${blockClass}--slide-in`]: slideIn,
+        [`${blockClass}--enable-sidepanel-resizer`]:
+          enableResizer && window.innerWidth > 768,
         [`${blockClass}--has-decorator`]: decorator,
         [`${blockClass}--has-slug`]: slug,
         [`${blockClass}--has-ai-label`]: aiLabel,
@@ -919,33 +936,75 @@ const SidePanelBase = React.forwardRef(
           onAnimationStart={onAnimationStart}
           onKeyDown={handleKeyDown}
         >
-          {!slideIn && (
+          {!slideIn && enableResizer && window.innerWidth > 768 && (
             <Resizer
               orientation="vertical"
-              onResize={(event, delta) => {
-                if (event.type === 'keydown') {
-                  console.log('keyboard resize');
-                  if (sidePanelRef.current) {
-                    document.documentElement.style.setProperty(
-                      '--c4p-side-panel-modified-size',
-                      `${(sidePanelWidth ?? 0) - (placement === 'right' ? delta : -delta)}px`
-                    );
+              aria-valuenow={sidePanelWidth}
+              onResize={(e, d) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const setWidth = (w: number | string) =>
+                  document.documentElement.style.setProperty(
+                    '--c4p-side-panel-modified-size',
+                    typeof w === 'number' ? `${w}px` : w
+                  );
+
+                if (e.type === 'keydown') {
+                  const key = (e as KeyboardEvent).key;
+                  switch (key) {
+                    case 'Home':
+                      setWidth('75vw');
+                      break;
+                    case 'End':
+                      setWidth(SIDE_PANEL_SIZES['xs']);
+                      break;
+                    case 'ArrowLeft':
+                    case 'ArrowRight':
+                      accumulatedDeltaRef.current += d;
+                      setWidth(
+                        (sidePanelWidth ?? 0) -
+                          (placement === 'right'
+                            ? accumulatedDeltaRef.current
+                            : -accumulatedDeltaRef.current)
+                      );
+                      break;
                   }
-                } else {
-                  console.log('mouse resize', delta);
-                  if (sidePanelRef.current) {
-                    document.documentElement.style.setProperty(
-                      '--c4p-side-panel-modified-size',
-                      `${(sidePanelWidth ?? 0) - (placement === 'right' ? delta : -delta)}px`
-                    );
-                  }
+                  return;
                 }
+
+                if (sidePanelRef.current?.style) {
+                  sidePanelRef.current.style.transition = 'none';
+                }
+                setWidth(
+                  (sidePanelWidth ?? 0) - (placement === 'right' ? d : -d)
+                );
               }}
-              onResizeEnd={() => {
-                setSidePanelWidth(sidePanelRef?.current?.clientWidth);
+              onResizeEnd={(event, ref) => {
+                accumulatedDeltaRef.current = 0;
+                sidePanelRef.current?.style?.removeProperty('transition');
+
+                const percent = Math.round(
+                  ((sidePanelRef.current.clientWidth || 0) /
+                    window.innerWidth) *
+                    100
+                );
+                // custom a11y announcements
+                ref.current.setAttribute(
+                  'aria-label',
+                  `side panel is covering ${percent}% of screen`
+                );
+
+                setSidePanelWidth(sidePanelRef.current?.clientWidth);
               }}
               onDoubleClick={() => {
-                setSidePanelWidth(undefined);
+                setSidePanelWidth(
+                  Math.min(
+                    parseFloat(SIDE_PANEL_SIZES[size]) * 16,
+                    window.innerWidth * 0.75
+                  )
+                );
+
                 document.documentElement.style.removeProperty(
                   '--c4p-side-panel-modified-size'
                 );

@@ -11,7 +11,6 @@ import React, { useRef, useEffect } from 'react';
 import cx from 'classnames';
 import debounce from 'lodash.debounce';
 const DEBOUNCE_DELAY = 100;
-import './resizer.scss';
 /** Primary UI component for user interaction */
 
 interface ResizerProps {

@@ -1,3 +1,8 @@
+---
+name: (C4IBM Products devs only) enhancement refinement template
+about: Refinement template for new enhancements
+---
+
 # Acceptance criteria
 
 User stories describing what this new component is meant to achieve.

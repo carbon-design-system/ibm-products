@@ -126,7 +126,7 @@
     "braces": "^3.0.3",
     "cross-spawn": "7.0.6",
     "micromatch": "4.0.8",
-    "semver": "7.7.1",
+    "semver": "7.7.2",
     "ws": "^8.17.1",
     "@babel/runtime": "7.27.1"
   },

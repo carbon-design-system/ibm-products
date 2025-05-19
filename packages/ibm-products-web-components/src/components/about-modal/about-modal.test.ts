@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import { render, TemplateResult } from 'lit';
 import './index';

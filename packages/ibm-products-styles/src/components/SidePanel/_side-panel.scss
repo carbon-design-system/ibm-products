@@ -84,6 +84,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   block-size: calc(100% - 3rem);
   color: $text-primary;
 
+  /* if the title does not scroll then we have a child scrolling section. */
   grid-template-rows: auto 1fr auto; /* titles content and actions */
   inset-block-start: $spacing-09;
   max-inline-size: 100%;
@@ -93,7 +94,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   transition-behavior: allow-discrete;
   transition-duration: $duration-moderate-01;
   transition-property: display, opacity, transform;
-  /* if the title does not scroll then we have a child scrolling section. */
   &:not(.#{$block-class}--slide-in) {
     // enableSidepanelResizer flag class
     &.#{$block-class}--enable-sidepanel-resizer {

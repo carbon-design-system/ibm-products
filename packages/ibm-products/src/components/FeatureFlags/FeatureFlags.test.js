@@ -9,7 +9,6 @@ import React from 'react';
 import * as GlobalFeatureFlags from '@carbon/feature-flags';
 import { render } from '@testing-library/react';
 import { FeatureFlags, useFeatureFlags, useFeatureFlag } from '.';
-import { C4PFeatureFlags } from '../../feature-flags';
 
 describe('FeatureFlags base tests', () => {
   it('should default to the global feature flag scope', () => {

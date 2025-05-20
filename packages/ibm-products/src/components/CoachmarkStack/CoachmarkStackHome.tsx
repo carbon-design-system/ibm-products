@@ -114,6 +114,7 @@ export let CoachmarkStackHome = forwardRef<
   const [linkFocusIndex, setLinkFocusIndex] = useState(0);
   const navItemRefs = useRef<(HTMLLIElement | null)[]>([]);
   const [overflowStates, setOverflowStates] = useState<boolean[]>([]);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -129,6 +130,7 @@ export let CoachmarkStackHome = forwardRef<
     if (portalTarget) {
       portalNode.current = document.querySelector(portalTarget);
     }
+    setMounted(true);
   }, [portalTarget]);
 
   if (!navLinkLabels) {
@@ -192,72 +194,76 @@ export let CoachmarkStackHome = forwardRef<
     );
   }
 
-  return createPortal(
-    <div
-      {...rest}
-      className={cx(blockClass, className)}
-      ref={ref}
-      {...getDevtoolsProps(componentName)}
-    >
-      <CoachmarkHeader
-        onClose={() => {
-          setLinkFocusIndex(0);
-          onClose();
-        }}
-      />
-      <div className={`${overlayClass}__body`}>
-        <div className={`${overlayClass}-element`}>
-          {!renderMedia && (
-            <Idea size={20} className={`${blockClass}__icon-idea`} />
-          )}
+  return mounted
+    ? createPortal(
+        <div
+          {...rest}
+          className={cx(blockClass, className)}
+          ref={ref}
+          {...getDevtoolsProps(componentName)}
+        >
+          <CoachmarkHeader
+            onClose={() => {
+              setLinkFocusIndex(0);
+              onClose();
+            }}
+          />
+          <div className={`${overlayClass}__body`}>
+            <div className={`${overlayClass}-element`}>
+              {!renderMedia && (
+                <Idea size={20} className={`${blockClass}__icon-idea`} />
+              )}
 
-          {renderMedia && (
-            <div className={`${blockClass}__element-stepped-media`}>
-              {renderMedia({ playStep: 0 })}
-            </div>
-          )}
+              {renderMedia && (
+                <div className={`${blockClass}__element-stepped-media`}>
+                  {renderMedia({ playStep: 0 })}
+                </div>
+              )}
 
-          <div className={`${overlayClass}-element__content`}>
-            {title && (
-              <h2 className={`${overlayClass}-element__title`}>{title}</h2>
-            )}
-            {description && (
-              <p className={`${overlayClass}-element__body`}>{description}</p>
-            )}
-          </div>
+              <div className={`${overlayClass}-element__content`}>
+                {title && (
+                  <h2 className={`${overlayClass}-element__title`}>{title}</h2>
+                )}
+                {description && (
+                  <p className={`${overlayClass}-element__body`}>
+                    {description}
+                  </p>
+                )}
+              </div>
 
-          <ul className={`${blockClass}__nav-links`}>
-            {navLinkLabels.map((label, index) => {
-              if (index === linkFocusIndex) {
-                return renderNavLink(
-                  index,
-                  label,
-                  buttonFocusRef as React.RefObject<
-                    ButtonProps<React.ElementType>
+              <ul className={`${blockClass}__nav-links`}>
+                {navLinkLabels.map((label, index) => {
+                  if (index === linkFocusIndex) {
+                    return renderNavLink(
+                      index,
+                      label,
+                      buttonFocusRef as React.RefObject<
+                        ButtonProps<React.ElementType>
+                      >
+                    );
+                  }
+                  return renderNavLink(index, label);
+                })}
+              </ul>
+              {closeButtonLabel && (
+                <div className={`${overlayClass}__footer`}>
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      setLinkFocusIndex(0);
+                      onClose();
+                    }}
                   >
-                );
-              }
-              return renderNavLink(index, label);
-            })}
-          </ul>
-          {closeButtonLabel && (
-            <div className={`${overlayClass}__footer`}>
-              <Button
-                size="sm"
-                onClick={() => {
-                  setLinkFocusIndex(0);
-                  onClose();
-                }}
-              >
-                {closeButtonLabel}
-              </Button>
+                    {closeButtonLabel}
+                  </Button>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </div>
-    </div>,
-    portalNode.current || document.body
-  );
+          </div>
+        </div>,
+        portalNode.current || document.body
+      )
+    : null;
 });
 
 // Return a placeholder if not released and not enabled by feature flag

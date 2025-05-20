@@ -1,0 +1,30 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as NotificationPanelStories from './notification-panel.stories';
+
+<Meta of={NotificationPanelStories} />
+
+# NotificationPanel
+
+The NotificationsPanel sets expectations on the behavior for notifications, allowing the user to view and interact with them all in one place.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/notification-panel/index.js';
+```
+
+### HTML
+
+```html
+<c4p-notification-panel>
+</c4p-notification-panel>
+```
+
+## `<c4p-notification-panel>` attributes, properties and events
+
+<ArgTypes of="c4p-notification-panel" />

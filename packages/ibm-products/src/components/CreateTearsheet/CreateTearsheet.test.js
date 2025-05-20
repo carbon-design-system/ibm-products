@@ -204,7 +204,7 @@ describe(CreateTearsheet.displayName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
     await waitFor(() => {
       expect(screen.getByTestId(dataTestId)).toBeInTheDocument();

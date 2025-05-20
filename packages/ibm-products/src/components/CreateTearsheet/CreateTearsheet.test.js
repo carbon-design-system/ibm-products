@@ -204,13 +204,11 @@ describe(CreateTearsheet.displayName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
-    await waitFor(() => {
-      expect(screen.getByTestId(dataTestId)).toBeInTheDocument();
-    });
-    expect(screen.getByTestId(dataTestId)).toBeAccessible();
-    expect(screen.getByTestId(dataTestId)).toHaveNoAxeViolations();
+    const element = await screen.findByTestId(dataTestId);
+    expect(element).toBeAccessible();
+    expect(element).toHaveNoAxeViolations();
   });
 
   it('renders the CreateTearsheet component', async () => {

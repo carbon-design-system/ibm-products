@@ -11,7 +11,7 @@ import { html } from 'lit';
 import './index';
 import { prefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/button/index.js';
-
+import { dataToday, dataPrevious } from './NotificationsPanel_data';
 const storyPrefix = 'notification-panel-stories__';
 
 const toggleButton = () => {
@@ -47,80 +47,35 @@ export const defaultTemplate = {
         dismiss-all-label="Dismiss All"
         donot-disturb-label="Do not disturb"
       >
-        <c4p-notification
-          slot="today"
-          type="error"
-          notification-title="Cluster unreachable"
-          unread
-        >
-          <div slot="description">
-            <p
-              class="c4p--notifications-panel__notification-description c4p--notifications-panel__notification-short-description"
-            >
-              Not able to establish connection with provided cluster. Please
-              check your logs and memory allocation to resolve this issue
-              further.
-            </p>
-            <button
-              class="c4p--notifications-panel__notification-read-more-button cds--btn cds--btn--sm cds--layout--size-sm cds--btn--ghost"
-              type="button"
-            >
-              Read more
-              <svg
-                focusable="false"
-                preserveAspectRatio="xMidYMid meet"
-                fill="currentColor"
-                aria-label="Read more"
-                aria-hidden="true"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                role="img"
-                class="cds--btn__icon"
-                xmlns="http://www.w3.org/2000/svg"
+        <div slot="today">
+          ${dataToday.map((item) => {
+            return html`
+              <c4p-notification
+                type=${item.type}
+                notification-title=${item.title}
+                unread=${item.unread}
+                .onNotificationClick=${item.onNotificationClick}
               >
-                <path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path>
-              </svg>
-            </button>
-          </div>
-        </c4p-notification>
-        <c4p-notification
-          slot="previous"
-          type="error"
-          notification-title="Cluster unreachable"
-          unread
-        >
-          <div slot="description">
-            <p
-              class="c4p--notifications-panel__notification-description c4p--notifications-panel__notification-short-description"
-            >
-              Not able to establish connection with provided cluster. Please
-              check your logs and memory allocation to resolve this issue
-              further.
-            </p>
-            <button
-              class="c4p--notifications-panel__notification-read-more-button cds--btn cds--btn--sm cds--layout--size-sm cds--btn--ghost"
-              type="button"
-            >
-              Read more
-              <svg
-                focusable="false"
-                preserveAspectRatio="xMidYMid meet"
-                fill="currentColor"
-                aria-label="Read more"
-                aria-hidden="true"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                role="img"
-                class="cds--btn__icon"
-                xmlns="http://www.w3.org/2000/svg"
+                <div slot="description">${item.description}</div>
+              </c4p-notification>
+            `;
+          })}
+        </div>
+
+        <div slot="previous">
+          ${dataPrevious.map((item) => {
+            return html`
+              <c4p-notification
+                type=${item.type}
+                notification-title=${item.title}
+                unread=${item.unread}
+                .onNotificationClick=${item.onNotificationClick}
               >
-                <path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path>
-              </svg>
-            </button>
-          </div>
-        </c4p-notification>
+                <div slot="description">${item.description}</div>
+              </c4p-notification>
+            `;
+          })}
+        </div>
       </c4p-notification-panel>
     `;
   },

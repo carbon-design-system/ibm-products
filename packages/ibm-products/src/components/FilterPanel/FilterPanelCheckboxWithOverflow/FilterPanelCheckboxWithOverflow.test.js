@@ -33,8 +33,7 @@ const renderComponent = ({ ...rest } = {}) =>
       labelText={labelText}
       {...{ ...rest }}
     >
-      {/* <OverflowMenuItem itemText="Option 1" /> */}
-      <OverflowMenuItem itemText="FART" />
+      <OverflowMenuItem itemText="Option 1" />
     </FilterPanelCheckboxWithOverflow>
   );
 

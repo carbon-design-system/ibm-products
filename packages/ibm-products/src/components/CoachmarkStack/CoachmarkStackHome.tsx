@@ -12,6 +12,7 @@ import React, {
   useState,
   ReactNode,
 } from 'react';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 import pconsole from '../../global/js/utils/pconsole';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -126,7 +127,7 @@ export let CoachmarkStackHome = forwardRef<
 
   const portalNode = useRef<Element>(null);
 
-  useEffect(() => {
+  useIsomorphicEffect(() => {
     if (portalTarget) {
       portalNode.current = document.querySelector(portalTarget);
     }

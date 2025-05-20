@@ -86,10 +86,11 @@ const actionBarItems = {
   ],
 };
 
-const makeBreadcrumb = (item, title) => ({
+const makeBreadcrumb = (item, title, isCurrent = false) => ({
   href: '#',
   key: `Breadcrumb ${item}`,
   label: typeof title === 'string' ? title : `Breadcrumb ${item}`,
+  isCurrentPage: isCurrent,
 });
 
 const breadcrumbs = {
@@ -97,7 +98,7 @@ const breadcrumbs = {
   'A single breadcrumb': [makeBreadcrumb(1, 'Home page')],
   'Two-level breadcrumb': [
     makeBreadcrumb(1, 'Home page'),
-    makeBreadcrumb(2, 'Secondary page'),
+    makeBreadcrumb(2, 'Secondary page', true),
   ],
   'Many breadcrumbs': [
     makeBreadcrumb(1, 'Home page'),
@@ -107,7 +108,7 @@ const breadcrumbs = {
   'Demo breadcrumbs': [
     makeBreadcrumb(1, 'Home page', '../../../homepage'),
     makeBreadcrumb(2, 'Reports', '../../Reports'),
-    makeBreadcrumb(3, `January 2025`, `../January 2025`),
+    makeBreadcrumb(3, `January 2025`, `../January 2025`, true),
   ],
 };
 

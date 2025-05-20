@@ -16,9 +16,6 @@ import { FullPageError } from '.';
 import mdx from './FullPageError.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-
-const storyClass = 'full-page-error-stories';
-
 export default {
   title: 'IBM Products/Components/Full-page error/FullPageError',
   component: FullPageError,
@@ -58,6 +55,7 @@ const defaultProps = {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
+  const storyClass = 'full-page-error-stories';
   return (
     <div className={`${storyClass}__viewport`}>
       <UiShell>

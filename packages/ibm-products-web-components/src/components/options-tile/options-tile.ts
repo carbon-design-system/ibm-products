@@ -16,7 +16,7 @@ import styles from './options-tile.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import ChevronDown20 from '@carbon/web-components/es/icons/chevron--down/20';
 
-const blockClass = `${prefix}--options-tile`;
+export const blockClass = `${prefix}--options-tile`;
 const blockEvent = `${prefix}-options-tile`;
 
 /**
@@ -35,18 +35,6 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
    */
   @property({ type: Boolean, reflect: true })
   open: boolean = false;
-
-  /**
-   * Callback fired when the component requests to be closed
-   */
-  @property({ type: Function })
-  onClose?: (evt: Event) => void;
-
-  /**
-   * Callback fired when the component requests to be opened
-   */
-  @property({ type: Function })
-  onOpen?: (evt: Event) => void;
 
   /**
    * Determines the size of the header
@@ -82,6 +70,9 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
     const init = {
       bubbles: true,
       composed: true,
+      detail: {
+        open: this.open,
+      },
     };
     this.dispatchEvent(
       new CustomEvent(
@@ -95,6 +86,9 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
     const init = {
       bubbles: true,
       composed: true,
+      detail: {
+        open: this.open,
+      },
     };
     this.dispatchEvent(
       new CustomEvent(

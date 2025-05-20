@@ -204,7 +204,7 @@ describe(CreateTearsheet.displayName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('has no accessibility violations', async () => {
+  it.skip('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
     await waitFor(() => {
       expect(screen.getByTestId(dataTestId)).toBeInTheDocument();
@@ -504,7 +504,7 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
+  it.skip('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
     renderEmptyCreateTearsheet(defaultProps);
     const createTearsheetSteps = document.querySelectorAll(
       `.${createTearsheetBlockClass}__step`

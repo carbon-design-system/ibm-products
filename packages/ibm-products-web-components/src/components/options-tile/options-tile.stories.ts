@@ -20,12 +20,6 @@ const argTypes = {
     control: 'boolean',
     description: 'If `true` the body of the component is shown',
   },
-  onClose: {
-    description: 'Callback fired when the component requests to be closed',
-  },
-  onOpen: {
-    description: 'Callback fired when the component requests to be opened',
-  },
   size: {
     control: 'radio',
     options: ['lg', 'xl'],

@@ -68,6 +68,25 @@ export default {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
 
+  managerHead: (head) => {
+    return `
+      ${head}
+      ${
+        process.env.NODE_ENV !== 'development'
+          ? `
+          <script src="https://cdn.amplitude.com/script/f6f1d9025934f04f5a2a8bebb74abf2f.js"></script>
+          <script>
+            window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+            window.amplitude.init('f6f1d9025934f04f5a2a8bebb74abf2f', {
+              "fetchRemoteConfig":true,
+              "autocapture":true
+            });
+          </script>`
+          : ''
+      }
+    `;
+  },
+
   async viteFinal(config, { configType }) {
     // Merge custom configuration into the default config
     const { mergeConfig } = await import('vite');

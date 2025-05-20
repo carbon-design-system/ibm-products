@@ -205,9 +205,12 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderCreateTearsheet({ ...defaultProps });
-    expect(() => container.toBeAccessible());
-    expect(() => container.toHaveNoAxeViolations());
+    renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
+    await waitFor(() => {
+      expect(screen.getByTestId(dataTestId)).toBeInTheDocument();
+    });
+    expect(screen.getByTestId(dataTestId)).toBeAccessible();
+    expect(screen.getByTestId(dataTestId)).toHaveNoAxeViolations();
   });
 
   it('renders the CreateTearsheet component', async () => {
@@ -502,8 +505,8 @@ describe(CreateTearsheet.displayName, () => {
     ));
 
   it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
-    const { container } = renderEmptyCreateTearsheet(defaultProps);
-    const createTearsheetSteps = container.querySelectorAll(
+    renderEmptyCreateTearsheet(defaultProps);
+    const createTearsheetSteps = document.querySelectorAll(
       `.${createTearsheetBlockClass}__step`
     );
     expect(Array(...createTearsheetSteps)).toStrictEqual([]);

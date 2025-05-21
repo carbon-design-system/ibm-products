@@ -150,8 +150,6 @@ export class CDSTruncatedText extends LitElement {
   }
 
   render() {
-    console.log(!this.with);
-
     const contentStyle =
       this.with === 'tooltip' || !this.with
         ? `--line-clamp: ${this._localLines};`

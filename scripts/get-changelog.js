@@ -11,12 +11,18 @@
 
 const child = require('child_process');
 const { Command } = require('commander');
+const fs = require('fs');
+const path = require('path');
 
 const program = new Command();
 
 program
   .option('-f, --tagFrom <git tag from>', 'Git tag range from')
-  .option('-t, --tagTo <git tag to>', 'Git tag range from');
+  .option('-t, --tagTo <git tag to>', 'Git tag range from')
+  .option(
+    '-w, --writeChangelog <git tag log>',
+    'Write changelog to CHANGELOG.md'
+  );
 
 program.parse(process.argv);
 
@@ -40,6 +46,8 @@ const { tagFrom } = args;
  * @type {string}
  */
 const { tagTo } = args;
+
+const { writeChangelog } = args;
 
 /**
  * Uses a delimiter for splitting the comments into an array
@@ -161,7 +169,32 @@ function getChangelog(pkgName, folder) {
     changelog = '';
   }
 
+  if (changelog && writeChangelog) {
+    updateChangelogFile(folder, changelog);
+  }
+
   return changelog;
+}
+
+/**
+ * Updates or creates a CHANGELOG.md file with new content prepended
+ *
+ * @param {string} folder Folder path (e.g., ./packages/web-components)
+ * @param {string} newChangelog New changelog content to prepend
+ */
+function updateChangelogFile(folder, newChangelog) {
+  const changelogPath = path.join(folder, 'CHANGELOG.md');
+  let existingContent = '';
+
+  if (fs.existsSync(changelogPath)) {
+    existingContent = fs.readFileSync(changelogPath, 'utf-8');
+  }
+
+  // Only prepend if there’s new changelog content
+  if (newChangelog && newChangelog.trim()) {
+    const updatedContent = `${newChangelog.trim()}\n\n${existingContent}`;
+    fs.writeFileSync(changelogPath, updatedContent);
+  }
 }
 
 /**
@@ -179,8 +212,21 @@ function generateLog() {
     '@carbon/ibm-products-web-components',
     './packages/ibm-products-web-components'
   );
-
   console.log(log);
+
+  getChangelog('@carbon/ibm-cloud-cognitive-core', './packages/core');
+  getChangelog(
+    '@babel-preset-ibm-cloud-cognitive',
+    './config/babel-preset-ibm-cloud-cognitive'
+  );
+  getChangelog(
+    '@jest-config-ibm-cloud-cognitive',
+    './config/jest-config-ibm-cloud-cognitive'
+  );
+  getChangelog(
+    '@carbon/storybook-addon-theme',
+    './config/storybook-addon-carbon-theme'
+  );
 
   return log;
 }

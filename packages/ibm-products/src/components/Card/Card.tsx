@@ -32,6 +32,7 @@ interface Metadata {
   id?: string;
   icon?: () => ReactNode;
   iconDescription?: string;
+  [key: `data-${string}`]: string;
 }
 
 type LinkType = {
@@ -40,7 +41,7 @@ type LinkType = {
   [key: string]: unknown;
 };
 
-export interface ActionIcon extends Metadata, HTMLAttributes<HTMLElement> {
+export interface ActionIcon extends Metadata {
   onKeydown?: (event: KeyboardEvent) => void;
   onClick?: (
     event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>

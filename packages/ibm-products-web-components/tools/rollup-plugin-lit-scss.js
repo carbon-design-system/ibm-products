@@ -76,6 +76,8 @@ export default function LitSCSS({
         ...options,
         file: id,
         data: finalContent,
+        quietDeps: true,
+        silenceDeprecations: ['mixed-decls', 'global-builtin', 'legacy-js-api'],
       });
 
       return {

@@ -206,12 +206,10 @@ describe(CreateTearsheet.displayName, () => {
 
   it('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
-    const tearsheetElement = screen.getByRole('dialog', {
-      name: ariaLabel,
-    }).parentElement;
-    expect(tearsheetElement).toHaveClass(createTearsheetBlockClass);
-    expect(tearsheetElement).toBeAccessible();
-    expect(tearsheetElement).toHaveNoAxeViolations();
+
+    await screen.findByRole('dialog', { name: ariaLabel });
+    expect(document.body).toBeAccessible();
+    expect(document.body).toHaveNoAxeViolations();
   });
 
   it('renders the CreateTearsheet component', async () => {

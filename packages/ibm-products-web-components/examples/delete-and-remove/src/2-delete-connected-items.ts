@@ -46,7 +46,7 @@ export class DeleteConnectedItems extends LitElement {
   private _connectedItems: Array<any> = [
     { name: 'Route1_name' },
     { name: 'Hpt-392-ser' },
-    { name: 'MKtps_02_094' },
+    { name: 'Route2_name' },
   ];
 
   private _close() {

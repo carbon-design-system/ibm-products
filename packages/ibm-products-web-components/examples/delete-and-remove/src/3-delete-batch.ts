@@ -42,14 +42,14 @@ export class DeleteBatch extends LitElement {
   private _batchItems: Array<any> = [
     { name: 'Route1_name' },
     { name: 'Hpt-392-ser' },
-    { name: 'MKtps_02_094' },
+    { name: 'Route2_name' },
   ];
 
   //  selected batch items which cannot be deleted
   @state()
   private _protectedItems: Array<any> = [
-    { name: 'Gigstore-0034' },
-    { name: 'Gigstore-0058' },
+    { name: 'Route3_name' },
+    { name: 'Route4_name' },
   ];
 
   private _close() {

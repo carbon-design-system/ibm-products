@@ -15,8 +15,8 @@ import '@carbon/web-components/es/components/notification/toast-notification.js'
 
 import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
-import { trashCanSVG } from './assets/trashCanSVG';
-import { subtractAltSVG } from './assets/subtractAltSVG';
+import TrashCan16 from '@carbon/web-components/es/icons/trash-can/16';
+import SubtractAlt16 from '@carbon/web-components/es/icons/subtract--alt/16';
 
 // example implementation of low impact delete / remove pattern
 @customElement('delete-remove-low-impact')
@@ -47,7 +47,9 @@ export class DeleteRemoveLowImpact extends LitElement {
         @click="${this._onDeleteButtonClick}"
       >
         ${this.action === 'delete' ? 'Delete' : 'Remove'}
-        ${this.action === 'delete' ? trashCanSVG : subtractAltSVG}
+        ${this.action === 'delete'
+          ? html`${TrashCan16({ slot: 'icon' })}`
+          : html`${SubtractAlt16({ slot: 'icon' })}`}
       </cds-button>
       ${this._showNotification
         ? html`<cds-toast-notification

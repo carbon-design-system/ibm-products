@@ -18,7 +18,7 @@ import '@carbon/web-components/es/components/link/link.js';
 
 import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
-import { launchSVG } from './assets/launchSVG';
+import Launch16 from '@carbon/web-components/es/icons/launch/16';
 
 // example implementation of high impact batch deletion pattern
 @customElement('delete-batch')
@@ -117,7 +117,9 @@ export class DeleteBatch extends LitElement {
               this._batchItems,
               (item) =>
                 html`<li>
-                  <cds-link> ${item.name} ${launchSVG} </cds-link>
+                  <cds-link>
+                    ${item.name} ${Launch16({ slot: 'icon' })}
+                  </cds-link>
                 </li>`
             )}
           </ul>

@@ -11,7 +11,7 @@
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/themes' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/motion';
+@use '@carbon/styles/scss/motion' as *;
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
@@ -40,7 +40,7 @@ $block-class: #{$prefix}--truncated-text;
 
   .#{$block-class}_transition {
     @media (prefers-reduced-motion: no-preference) {
-      transition: max-height motion.$duration-moderate-01 ease-out;
+      transition: max-height $duration-fast-02 motion(standard, productive);
     }
   }
 
@@ -51,6 +51,10 @@ $block-class: #{$prefix}--truncated-text;
     -webkit-line-clamp: var(--line-clamp, 0);
     text-overflow: clip;
     white-space: normal;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   #{$carbon-prefix}-tooltip {
@@ -80,15 +84,6 @@ $block-class: #{$prefix}--truncated-text;
 
   &.#{$block-class}_layered {
     background-color: $layer;
-  }
-
-  &::before {
-    position: absolute;
-    block-size: 100%;
-    content: '';
-    inline-size: 1em;
-    inset-block-start: 0;
-    inset-inline-start: -1em;
   }
 
   // Gradient LTR

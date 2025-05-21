@@ -164,7 +164,11 @@ export class CDSTruncatedText extends LitElement {
     });
 
     const content = html`
-      <div class="${contentClass}" style="${contentStyle}">
+      <div
+        class="${contentClass}"
+        style="${contentStyle}"
+        tabindex=${this.with === 'tooltip' ? '0' : undefined}
+      >
         ${this.value}
         ${this.with === 'expand' ? this._renderToggleButton() : null}
       </div>

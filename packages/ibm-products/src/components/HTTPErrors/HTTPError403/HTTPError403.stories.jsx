@@ -8,7 +8,7 @@
 import React from 'react';
 import { HTTPError403 } from '.';
 import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
-import { Annotation } from '../../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../../.storybook/Annotation';
 import styles from '../_storybook-styles.scss?inline';
 
 const storyClass = 'http-error-stories';

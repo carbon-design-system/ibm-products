@@ -538,7 +538,6 @@ export const TearsheetShell = React.forwardRef(
                     alwaysRender={
                       !!(influencer && influencerPosition === 'right')
                     }
-                    tabIndex={-1}
                     element={SectionLevel3}
                   >
                     {children}

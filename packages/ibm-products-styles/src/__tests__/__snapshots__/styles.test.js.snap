@@ -4654,11 +4654,6 @@ p.c4p--about-modal__copyright-text:first-child {
   justify-content: center;
 }
 
-.c4p--datagrid__customize-columns-column-list .c4p--datagrid__customize-columns-checkbox-visible-label {
-  /* stylelint-disable-next-line */
-  padding-inline-start: 0.375rem;
-}
-
 .c4p--datagrid__customize-columns-column-list .c4p--datagrid__customize-columns-checkbox-wrapper.cds--form-item {
   margin-block-end: 0;
 }
@@ -5172,12 +5167,20 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--datagrid__draggable-handleStyle {
-  display: flex;
-  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: grab;
   margin-inline-end: 0.5rem;
 }
 
+.c4p--datagrid__draggable-handleStyle:active,
+.c4p--datagrid__draggable-handleHolder--dragging {
+  cursor: grabbing;
+}
+
 .c4p--datagrid__draggable-handleStyle.disabled {
+  cursor: none;
   pointer-events: none;
 }
 
@@ -5204,7 +5207,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   background-color: var(--cds-layer);
   block-size: 3rem;
   border-block-end: 1px solid var(--cds-layer-active);
-  cursor: grab;
 }
 
 .c4p--datagrid__draggable-handleHolder:hover {
@@ -5225,11 +5227,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   background-color: var(--cds-highlight, #d0e2ff);
   color: var(--cds-text-primary, #161616);
   outline: none;
-}
-
-.c4p--datagrid__draggable-handleHolder:active,
-.c4p--datagrid__draggable-handleHolder--dragging {
-  cursor: grabbing;
 }
 
 .c4p--datagrid__draggable-handleHolder-selected:hover {
@@ -9048,13 +9045,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --c4p--page-header--background-opacity: 1;
   --c4p--page-header--breadcrumb-title-top: initial;
   --c4p--page-header--button-set-in-breadcrumb-width-px: initial;
-  --c4p--page-header--navigation-buffer-top: $spacing-06;
 }
 .c4p--page-header.c4p--page-header--without-background {
   border-block-end: none;
-}
-.c4p--page-header.c4p--page-header--has-navigation-tags-only {
-  --c4p--page-header--navigation-buffer-top: $spacing-04;
 }
 .c4p--page-header::before {
   --from-color: var(--cds-background, #ffffff);
@@ -9085,7 +9078,7 @@ button.c4p--add-select__global-filter-toggle--open {
   block-size: 0.25rem;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row:not(.c4p--page-header__breadcrumb-row--has-action-bar) {
-  min-block-size: 2rem;
+  min-block-size: 2.5rem;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--container {
   display: flex;
@@ -9095,6 +9088,9 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--page-header .c4p--page-header__has-page-actions-without-action-bar {
   max-inline-size: calc(0.6 * (100% + 2 * 1rem));
   min-inline-size: calc(0.6 * (100% + 2 * 1rem));
+}
+.c4p--page-header .c4p--page-header__has-page-actions-with-title-collapsed {
+  max-inline-size: none;
 }
 .c4p--page-header .c4p--page-header__has-page-actions-without-action-bar .c4p--page-header__has-page-actions-without-action-bar {
   min-inline-size: 100%;
@@ -9117,6 +9113,7 @@ button.c4p--add-select__global-filter-toggle--open {
   transition: all 150ms ease-out;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--next-to-tabs:not(.c4p--page-header__has-page-actions-without-action-bar)::after,
+.c4p--page-header .c4p--page-header__has-page-actions-without-action-bar.c4p--page-header__has-page-actions-with-title-collapsed::after,
 .c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar::after {
   /* creates a full width box shadow without causing scroll */
   box-shadow: 25vw 1px 0 0 var(--cds-layer-accent-01, #e0e0e0), -25vw 1px 0 0 var(--cds-layer-accent-01, #e0e0e0);
@@ -9471,6 +9468,12 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--page-header .c4p--page-header__navigation-row .cds--tab-content {
   display: none; /* need to figure out how to handle the tab content */
+}
+.c4p--page-header .c4p--page-header__action-bar-column--has-page-actions {
+  display: block;
+}
+.c4p--page-header .c4p--page-header__has-page-actions-with-title-collapsed .c4p--page-header__action-bar-column--has-page-actions {
+  display: block;
 }
 .c4p--page-header .c4p--page-header__navigation-tabs {
   margin-inline-start: calc(-1 * 1rem);

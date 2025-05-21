@@ -1,7 +1,7 @@
 import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
 import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { AboutModal } from '.';
-import * as AboutModalStories from './AboutModal.stories';
+import * as stories from './AboutModal.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 # About Modal
@@ -21,11 +21,14 @@ The purpose of this modal should be immediately apparent to the user, with a cle
 ### About Modal
 
 <Canvas
-  of={AboutModalStories.aboutModal}
+  of={stories.aboutModal}
   additionalActions={[
       {
         title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig(AboutModalStories.aboutModal,[],[]),
+        onClick: () => stackblitzPrefillConfig({
+          'story': stories.aboutModal,
+          'styles': stories.default.parameters.styles
+      }),
       },
     ]}>
 </Canvas>
@@ -34,11 +37,14 @@ The purpose of this modal should be immediately apparent to the user, with a cle
 ### About Modal With All Props Set
 
 <Canvas
-  of={AboutModalStories.aboutModalWithAllPropsSet}
+  of={stories.aboutModalWithAllPropsSet}
   additionalActions={[
       {
         title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig(AboutModalStories.aboutModalWithAllPropsSet,[],[]),
+        onClick: () => stackblitzPrefillConfig({
+          'story': stories.aboutModalWithAllPropsSet,
+          'styles': stories.default.parameters.styles
+      }),
       },
     ]}>
 </Canvas>

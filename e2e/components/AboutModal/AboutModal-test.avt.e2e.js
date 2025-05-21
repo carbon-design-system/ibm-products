@@ -87,9 +87,9 @@ test.describe('AboutModal @avt', () => {
     );
 
     // Reopening modal from trigger button to check if focus trap is working
-    const openButton = page.getByText(
-      'Reopen the About modal with all props set'
-    );
+    const openButton = page.getByText('Open Modal');
+    console.log('openButton', openButton);
+
     await openButton.click();
     await modalElement.evaluate((element) =>
       Promise.all(

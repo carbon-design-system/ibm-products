@@ -11,7 +11,7 @@ import {
   TileGroup,
 } from '@carbon/react';
 
-import './_example.scss';
+// import './_example.scss';
 
 const HowACaseIsCreated1 = new URL(
   './SteppedAnimatedMedia/assets/illustrations/how-a-case-is-created-1.json',

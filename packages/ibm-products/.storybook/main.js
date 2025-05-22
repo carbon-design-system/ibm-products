@@ -84,6 +84,10 @@ export default {
             '.js': 'jsx',
           },
         },
+        include: ['@carbon/ibm-products'],
+        ssr: {
+          noExternal: ['@carbon/ibm-products'],
+        },
       },
       resolve: {
         alias: {

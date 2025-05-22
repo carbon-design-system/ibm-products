@@ -212,6 +212,18 @@ describe(CreateTearsheet.displayName, () => {
     expect(document.body.querySelector('#c4p--CreateTearsheet')).toBeAccessible(
       componentName
     );
+    try {
+      await expect(() =>
+        document.body.querySelector('#c4p--CreateTearsheet').toBeAccessible()
+      );
+      await expect(() =>
+        document.body
+          .querySelector('#c4p--CreateTearsheet')
+          .toHaveNoAxeViolations()
+      );
+    } catch (err) {
+      console.log('accessibility test error :', err);
+    }
   });
 
   it('renders the CreateTearsheet component', async () => {

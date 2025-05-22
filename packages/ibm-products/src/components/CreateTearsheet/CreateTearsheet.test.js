@@ -93,52 +93,49 @@ const renderCreateTearsheet = ({
   ...rest
 }) =>
   render(
-    // <CreateTearsheet
-    //   onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
-    //   {...rest}
-    // >
-    //   <CreateTearsheetStep
-    //     onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
-    //     title={step1Title}
-    //     fieldsetLegendText={step1Title}
-    //     onMount={onMountFn}
-    //     description={step1Description}
-    //     subtitle={step1Subtitle}
-    //     experimentalSecondarySubmit={{
-    //       labelText: experimentalSecondarySubmit.labelText,
-    //       disabled: experimentalSecondarySubmit.disabled,
-    //       hideSecondarySubmit: experimentalSecondarySubmit.hideSecondarySubmit,
-    //       onClick: experimentalSecondarySubmit.onClick,
-    //     }}
-    //   >
-    //     step 1 content
-    //     <button type="button" disabled>
-    //       Test
-    //     </button>
-    //     <input type="text" />
-    //   </CreateTearsheetStep>
-    //   <CreateTearsheetStep
-    //     title={step2Title}
-    //     hasFieldset={false}
-    //     onPrevious={onPrevious}
-    //   >
-    //     step 2 content
-    //     <button type="button">Second step button one</button>
-    //     <button id={secondStepButtonId} type="button">
-    //       Second step button two
-    //     </button>
-    //   </CreateTearsheetStep>
-    //   <CreateTearsheetStep
-    //     title={step3Title}
-    //     fieldsetLegendText={step3Title}
-    //     onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}
-    //   >
-    //     step 3 content
-    //   </CreateTearsheetStep>
-    // </CreateTearsheet>
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <CreateTearsheet
+      onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
+      {...rest}
+    >
+      <CreateTearsheetStep
+        onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
+        title={step1Title}
+        fieldsetLegendText={step1Title}
+        onMount={onMountFn}
+        description={step1Description}
+        subtitle={step1Subtitle}
+        experimentalSecondarySubmit={{
+          labelText: experimentalSecondarySubmit.labelText,
+          disabled: experimentalSecondarySubmit.disabled,
+          hideSecondarySubmit: experimentalSecondarySubmit.hideSecondarySubmit,
+          onClick: experimentalSecondarySubmit.onClick,
+        }}
+      >
+        step 1 content
+        <button type="button" disabled>
+          Test
+        </button>
+        <input type="text" />
+      </CreateTearsheetStep>
+      <CreateTearsheetStep
+        title={step2Title}
+        hasFieldset={false}
+        onPrevious={onPrevious}
+      >
+        step 2 content
+        <button type="button">Second step button one</button>
+        <button id={secondStepButtonId} type="button">
+          Second step button two
+        </button>
+      </CreateTearsheetStep>
+      <CreateTearsheetStep
+        title={step3Title}
+        fieldsetLegendText={step3Title}
+        onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}
+      >
+        step 3 content
+      </CreateTearsheetStep>
+    </CreateTearsheet>
   );
 
 const renderEmptyCreateTearsheet = ({ ...rest } = {}) =>
@@ -209,6 +206,8 @@ describe(CreateTearsheet.displayName, () => {
 
   it.only('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
+    console.log(document.body.outerHTML);
+
     expect(document.body.querySelector('#c4p--CreateTearsheet')).toBeAccessible(
       componentName
     );

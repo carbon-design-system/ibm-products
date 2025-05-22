@@ -204,27 +204,23 @@ describe(CreateTearsheet.displayName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('has no accessibility violations', async () => {
-    renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
-    const element = await waitFor(() => screen.getByTestId(dataTestId), {
-      timeout: 2500,
-    });
-    expect(document.body.querySelector('#c4p--CreateTearsheet')).toBeAccessible(
-      componentName
-    );
-    try {
-      await expect(() =>
-        document.body.querySelector('#c4p--CreateTearsheet').toBeAccessible()
-      );
-      await expect(() =>
-        document.body
-          .querySelector('#c4p--CreateTearsheet')
-          .toHaveNoAxeViolations()
-      );
-    } catch (err) {
-      console.log('accessibility test error :', err);
-    }
-  });
+ it('has no accessibility violations', async () => {
+  renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
+
+  const element = await waitFor(() => {
+    const el = document.body.querySelector('#c4p--CreateTearsheet');
+    if (!el) throw new Error('Element not found');
+    return el;
+  }, { timeout: 500 });
+
+  try {
+    await expect(element).toBeAccessible();
+  } catch (err) {
+    console.error('Accessibility test error:', err);
+    throw err; // rethrow so test fails
+  }
+});
+
 
   it('renders the CreateTearsheet component', async () => {
     renderCreateTearsheet({

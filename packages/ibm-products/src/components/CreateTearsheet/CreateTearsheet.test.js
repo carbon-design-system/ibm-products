@@ -524,17 +524,19 @@ describe(CreateTearsheet.displayName, () => {
       rejectOnSubmit: false,
       rejectOnNext: false,
     });
-    const nextButtonElement = screen.getByText(nextButtonText);
+    const nextButtonElement = await screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
     expect(onNextStepFn).toHaveBeenCalledTimes(1);
-    const backButtonElement = screen.getByText(backButtonText);
+    const backButtonElement = await screen.getByText(backButtonText);
     await act(() => click(backButtonElement));
-    expect(onPreviousStepFn).toHaveBeenCalledTimes(1);
-    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
-    const tearsheetChildren = tearsheetElement.querySelector(
+    await expect(onPreviousStepFn).toHaveBeenCalledTimes(1);
+    const tearsheetElement = await screen.getByRole('dialog', {
+      name: ariaLabel,
+    });
+    const tearsheetChildren = await tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content`
     ).children;
-    expect(
+    await expect(
       tearsheetChildren[0].classList.contains(
         `.${createTearsheetBlockClass}__step__step--visible-section`
       )

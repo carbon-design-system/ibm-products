@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { InterstitialScreen } from '@carbon/ibm-products';
+import { InterstitialScreen, pkg } from '@carbon/ibm-products';
 import {
   Button,
   Column,
@@ -37,7 +37,10 @@ export const Example = () => {
     headerTitle: 'Welcom, Jan!',
     interstitialAriaLabel: 'Interstitial Screen',
   };
-  const step2Ref = useRef();
+
+  // NOTE: must happen before component is first used
+  pkg.component.InterstitialScreen = true;
+
   const getContent = ({ progStep }) => {
     return (
       <>

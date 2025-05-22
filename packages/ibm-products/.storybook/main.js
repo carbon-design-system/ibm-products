@@ -13,7 +13,7 @@ const storyGlobs = [
   '../src/**/*.stories.*',
   '../../core/src/**/*.stories.*',
   '../../core/src/**/*.mdx',
-  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
+  '../../../examples/carbon-for-ibm-products/**/*.stories.*',
 ];
 
 const stories = glob.sync(storyGlobs, {

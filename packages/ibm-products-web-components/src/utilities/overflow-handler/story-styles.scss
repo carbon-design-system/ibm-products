@@ -29,6 +29,8 @@ $story-prefix: 'overflow-handler-stories__';
 // todo - create annotation component
 .annotation {
   border: 1px dashed colors.$purple-40;
+  inline-size: 100%;
+  max-inline-size: 500px;
 }
 
 .annotation__label {

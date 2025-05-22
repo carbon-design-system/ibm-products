@@ -319,7 +319,12 @@ describe(CreateTearsheet.displayName, () => {
       ...defaultProps,
       firstFocusElement: `#invalid-selector`,
     });
-    const nextButtonElement = screen.getByText(nextButtonText);
+    const nextButtonElement = await waitFor(
+      () => screen.getByText(nextButtonText),
+      {
+        timeout: 2500,
+      }
+    );
     await act(() => click(nextButtonElement));
     jest.advanceTimersByTime(1000);
     const button = screen.getByRole('button', {

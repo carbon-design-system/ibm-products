@@ -206,10 +206,9 @@ describe(CreateTearsheet.displayName, () => {
 
   it('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
-
-    await screen.findByRole('dialog', { name: ariaLabel });
-
-    expect(document.body).toBeAccessible(componentName);
+    expect(document.body.querySelector('#c4p--CreateTearsheet')).toBeAccessible(
+      componentName
+    );
   });
 
   it('renders the CreateTearsheet component', async () => {

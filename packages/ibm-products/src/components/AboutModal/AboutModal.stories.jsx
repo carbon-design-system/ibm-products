@@ -7,18 +7,12 @@
 
 // cspell:words grafana
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { pkg } from '../../settings';
 import { AboutModal } from '.';
 
 import { Button, Link } from '@carbon/react';
-
-// import ExampleLogo from './_story-assets/example-logo.svg';
-// import ansibleLogo from './_story-assets/ansible-logo.png';
-// import grafanaLogo from './_story-assets/grafana-logo.png';
-// import jsLogo from './_story-assets/js-logo.png';
-
 import styles from './_storybook-styles.scss?inline';
 
 import mdx from './AboutModal.mdx';

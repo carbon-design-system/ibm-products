@@ -207,11 +207,9 @@ describe(CreateTearsheet.displayName, () => {
   it('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
 
-    const element = await screen.findByRole('dialog', { name: ariaLabel });
-    console.log(element, element);
-    console.log('document.body', document.body);
-    expect(document.body).toBeAccessible();
-    // expect(document.body).toHaveNoAxeViolations();
+    await screen.findByRole('dialog', { name: ariaLabel });
+
+    expect(document.body).toBeAccessible(componentName);
   });
 
   it('renders the CreateTearsheet component', async () => {

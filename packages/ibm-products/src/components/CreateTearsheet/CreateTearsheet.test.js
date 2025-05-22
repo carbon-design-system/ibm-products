@@ -209,7 +209,9 @@ describe(CreateTearsheet.displayName, () => {
     const element = await waitFor(() => screen.getByTestId(dataTestId), {
       timeout: 2500,
     });
-    expect(element).toBeAccessible(componentName);
+    expect(document.body.querySelector('#c4p--CreateTearsheet')).toBeAccessible(
+      componentName
+    );
   });
 
   it('renders the CreateTearsheet component', async () => {

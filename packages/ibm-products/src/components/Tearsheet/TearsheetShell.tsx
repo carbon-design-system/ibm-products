@@ -435,7 +435,7 @@ export const TearsheetShell = React.forwardRef(
 
       const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
-      return (
+      return renderPortalUse(
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
           <ComposedModal
             {

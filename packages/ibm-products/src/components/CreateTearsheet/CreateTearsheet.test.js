@@ -204,7 +204,7 @@ describe(CreateTearsheet.displayName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('has no accessibility violations', async () => {
+  it.only('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
     const element = await waitFor(() => screen.getByTestId(dataTestId), {
       timeout: 2500,

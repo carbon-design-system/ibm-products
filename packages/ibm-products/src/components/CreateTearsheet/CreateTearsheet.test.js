@@ -206,7 +206,6 @@ describe(CreateTearsheet.displayName, () => {
 
   it.only('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
-    console.log(document.body.outerHTML);
     await waitFor(() => screen.getByTestId(dataTestId), { timeout: 2500 });
     expect(document.body.querySelector('#c4p--CreateTearsheet')).toBeAccessible(
       componentName

@@ -12,8 +12,6 @@ import { useFeatureFlag } from '../../../components/FeatureFlags';
 
 const usePortalTarget = (portalTargetIn) => {
   const enablePortalTarget = useFeatureFlag('default-portal-target-body');
-  console.log(enablePortalTarget);
-
   const [portalTarget, setPortalTarget] = useState(null);
 
   useEffect(() => {

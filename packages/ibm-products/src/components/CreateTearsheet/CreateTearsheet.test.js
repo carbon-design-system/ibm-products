@@ -201,13 +201,13 @@ describe(CreateTearsheet.displayName, () => {
   afterEach(() => {
     window.ResizeObserver = ResizeObserver;
     jest.useRealTimers();
-    pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
+    pkg.feature['default-portal-target-body'] = false;
   });
 
   it.only('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
     console.log(document.body.outerHTML);
-    await new Promise((resolve) => setTimeout(resolve, 2500));
+    await waitFor(() => screen.getByTestId(dataTestId), { timeout: 2500 });
     expect(document.body.querySelector('#c4p--CreateTearsheet')).toBeAccessible(
       componentName
     );

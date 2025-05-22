@@ -213,21 +213,25 @@ function generateLog() {
     './packages/ibm-products-web-components'
   );
   console.log(log);
-
+  //update changelog.md for packages/core
   getChangelog('@carbon/ibm-cloud-cognitive-core', './packages/core');
+
+  //update changelog.md for config/babel-preset-ibm-cloud-cognitive
   getChangelog(
     '@babel-preset-ibm-cloud-cognitive',
     './config/babel-preset-ibm-cloud-cognitive'
   );
+  //update changelog.md for config/jest-config-ibm-cloud-cognitive
   getChangelog(
     '@jest-config-ibm-cloud-cognitive',
     './config/jest-config-ibm-cloud-cognitive'
   );
+  //update changelog.md for config/storybook-addon-carbon-theme
   getChangelog(
     '@carbon/storybook-addon-theme',
     './config/storybook-addon-carbon-theme'
   );
-
+  // the log returned is used to create changelog in releases
   return log;
 }
 

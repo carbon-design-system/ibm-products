@@ -8,14 +8,9 @@
  */
 
 import { LitElement, html } from 'lit';
-import {
-  property,
-  query,
-  queryAssignedElements,
-  state,
-} from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { provide } from '@lit/context';
-import { prefix, carbonPrefix } from '../../globals/settings';
+import { prefix } from '../../globals/settings';
 import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import styles from './notification-panel.scss?lit';
@@ -80,6 +75,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   dateTimeLocale?: string;
 
   @provide({ context: dateTimeLocaleContext })
+  // @ts-ignore
   private _providedLocale: string | undefined;
 
   willUpdate(changedProperties: any) {

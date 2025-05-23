@@ -50,11 +50,6 @@ class CDSNotification extends HostListenerMixin(LitElement) {
    */
   @property()
   timestamp?: Date;
-  /**
-   * Indicates whether the notification is unread.
-   */
-  @property({ reflect: true, type: Boolean })
-  unread;
 
   @consume({ context: dateTimeLocaleContext, subscribe: true })
   dateTimeLocale: string | undefined = undefined;
@@ -63,7 +58,6 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     const {
       type,
       timestamp,
-      unread,
       dateTimeLocale,
       _handleClick: handleClick,
       _handleKeyDown: handleKeyDown,

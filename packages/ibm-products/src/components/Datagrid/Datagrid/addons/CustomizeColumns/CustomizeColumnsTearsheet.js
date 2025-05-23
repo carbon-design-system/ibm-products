@@ -18,6 +18,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const CustomizeColumnsTearsheet = ({
   isOpen,
   setIsTearsheetOpen,
+  launcherButtonRef,
   onSaveColumnPrefs,
   columnDefinitions,
   originalColumnDefinitions,
@@ -128,6 +129,7 @@ const CustomizeColumnsTearsheet = ({
       open={isOpen}
       title={`${customizeTearsheetHeadingLabel} (${visibleColumnsCount}/${totalColumns})`}
       description={instructionsLabel}
+      launcherButtonRef={launcherButtonRef}
       actions={[
         {
           kind: 'secondary',

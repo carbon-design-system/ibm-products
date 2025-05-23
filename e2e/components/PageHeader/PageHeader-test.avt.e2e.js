@@ -213,7 +213,7 @@ test.describe('PageHeader @avt', () => {
 
     // reset focus to first focusable element
     await page.getByRole('link', { name: 'Home page' }).focus();
-    await pressTabKey(page, 3);
+    await pressTabKey(page, 4);
     await expect(
       page.getByRole('button', { name: 'Page actions...' })
     ).toBeFocused();

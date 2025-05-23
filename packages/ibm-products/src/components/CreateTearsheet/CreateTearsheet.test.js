@@ -208,13 +208,9 @@ describe(CreateTearsheet.displayName, () => {
    renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
 
  
-   const tearsheet = await waitFor(() => {
-    const el = document.querySelector('.c4p--tearsheet');
-    if (!el) throw new Error('Tearsheet not rendered');
-    return el;
-  }, { timeout: 500 });
+   
   
-  await expect(tearsheet).toBeAccessible(CreateTearsheet.displayName);
+  await expect(document.querySelector('.c4p--tearsheet')).toBeAccessible(CreateTearsheet.displayName);
   });
 
   it("renders the CreateTearsheet component", async () => {

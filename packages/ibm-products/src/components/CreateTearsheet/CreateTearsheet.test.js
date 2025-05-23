@@ -205,17 +205,16 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = renderCreateTearsheet({
-      ...defaultProps,
-      "data-testid": dataTestId,
-    });
+   renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
 
-    await waitFor(
-      () => {
-        expect(container).toBeAccessible();
-      },
-      { timeout: 500 }
-    );
+ 
+   const tearsheet = await waitFor(() => {
+    const el = document.querySelector('.c4p--tearsheet');
+    if (!el) throw new Error('Tearsheet not rendered');
+    return el;
+  }, { timeout: 500 });
+  
+  await expect(tearsheet).toBeAccessible(CreateTearsheet.displayName);
   });
 
   it("renders the CreateTearsheet component", async () => {

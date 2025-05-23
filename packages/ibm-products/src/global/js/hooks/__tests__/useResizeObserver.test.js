@@ -11,7 +11,7 @@ import { useResizeObserver } from '../useResizeObserver';
 
 const ResizeTest = ({ onResize = null }) => {
   const ref = useRef(null);
-  const { width, height } = useResizeObserver({ ref, onResize });
+  const { width, height } = useResizeObserver(ref, onResize);
   return (
     <div ref={ref} data-testid="observed-element">
       width: {width}, height: {height}
@@ -49,7 +49,7 @@ describe('useResizeObserver', () => {
     screen.getByText('width: 0, height: 0');
   });
 
-  it('returns the updated sizes from hook upon resizing', async () => {
+  it('returns the updated sizes from hook upon resizing', () => {
     render(<ResizeTest />);
     const element = screen.getByTestId('observed-element');
     screen.getByText('width: 0, height: 0');

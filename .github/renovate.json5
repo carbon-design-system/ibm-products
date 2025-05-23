@@ -33,7 +33,6 @@
       matchPackageNames: [
         '@testing-library/dom',
         '@testing-library/react',
-        '@testing-library/react-hooks',
         '@testing-library/user-event',
         '@testing-library/jest-dom',
         'react',

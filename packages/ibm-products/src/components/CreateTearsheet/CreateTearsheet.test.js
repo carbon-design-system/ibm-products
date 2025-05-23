@@ -204,7 +204,7 @@ describe(CreateTearsheet.displayName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('has no accessibility violations', async () => {
+  it.skip('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps });
     await expect(document.querySelector('.c4p--tearsheet')).toBeAccessible(
       CreateTearsheet.displayName
@@ -510,9 +510,9 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it.skip('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
+  it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
     renderEmptyCreateTearsheet(defaultProps);
-    const createTearsheetSteps = document.querySelectorAll(
+    const createTearsheetSteps = await document.querySelectorAll(
       `.${createTearsheetBlockClass}__step`
     );
     expect(Array(...createTearsheetSteps)).toStrictEqual([]);

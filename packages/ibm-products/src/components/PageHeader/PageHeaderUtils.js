@@ -212,7 +212,7 @@ export const utilGetBreadcrumbItemForTitle = (
     if (title.text !== undefined) {
       // Shape title provided
       breadcrumbTitle = {
-        label: <span>{title.loading ? <SkeletonText /> : title.text}</span>,
+        label: title.loading ? <SkeletonText /> : title.text,
         title: title.text,
       };
     } else if (title.content !== undefined) {
@@ -230,6 +230,7 @@ export const utilGetBreadcrumbItemForTitle = (
     if (breadcrumbTitle) {
       breadcrumbTitle.key = 'breadcrumb-title';
       breadcrumbTitle.isCurrentPage = true;
+      breadcrumbTitle.href = '#';
       breadcrumbTitle.className = cx([
         `${blockClass}__breadcrumb-title`,
         {

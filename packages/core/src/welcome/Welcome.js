@@ -58,20 +58,57 @@ const Welcome = () => {
           </hgroup>
           <div className="welcome__links">
             <Link
+              href="https://pages.github.ibm.com/carbon/ibm-products/"
+              className="welcome__link"
+              renderIcon={ArrowRight}
+              size="lg"
+            >
+              Website (IBMers only)
+            </Link>
+
+            <Link
+              href="https://ibm-products-web-components.carbondesignsystem.com/"
+              className="welcome__link"
+              renderIcon={ArrowRight}
+              size="lg"
+            >
+              Web Components Storybook
+            </Link>
+
+            <Link
+              href="https://github.com/carbon-design-system/ibm-products"
+              className="welcome__link"
+              renderIcon={ArrowRight}
+              size="lg"
+            >
+              GitHub repo
+            </Link>
+
+            <Link
+              href="https://github.com/carbon-design-system/ibm-products/wiki/Carbon-for-IBM-Products-Releases"
+              className="welcome__link"
+              renderIcon={ArrowRight}
+              size="lg"
+            >
+              Release schedule
+            </Link>
+
+            <Link
+              href="https://github.com/carbon-design-system/ibm-products?tab=security-ov-file"
+              className="welcome__link"
+              renderIcon={ArrowRight}
+              size="lg"
+            >
+              Security policy
+            </Link>
+
+            <Link
               href="https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/v2.md"
               className="welcome__link"
               renderIcon={ArrowRight}
               size="lg"
             >
-              Migration guide
-            </Link>
-            <Link
-              href="https://v1-ibm-products.carbondesignsystem.com/"
-              className="welcome__link"
-              renderIcon={ArrowRight}
-              size="lg"
-            >
-              Carbon 10 (v1) Storybook
+              v1 to v2 migration guide
             </Link>
           </div>
         </div>

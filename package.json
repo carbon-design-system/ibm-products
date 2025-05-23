@@ -16,7 +16,7 @@
   "scripts": {
     "audit": "node scripts/audit.js '--environment production' moderate",
     "avt": "AVT=true yarn playwright test --project chromium --grep @avt",
-    "build": "run-s -s 'build:*' storybook:build:storybook",
+    "build": "run-s -s 'build:*' storybook:build",
     "build:packages": "yarn run-all --include-dependencies build",
     "ci-check": "run-s -s 'ci-check:*' storybook:build",
     "ci-check:build": "run-s -s 'build:*' 'run-all --no-sort ci-check'",
@@ -53,10 +53,8 @@
     "test:c4p-styles": "lerna run --stream --scope @carbon/ibm-products-styles test --",
     "test:c4p-wc": "yarn playwright install && lerna run --stream --scope @carbon/ibm-products-web-components test --",
     "spellcheck": "cspell '**' -e './examples' --gitignore --quiet --no-must-find-files",
-    "storybook": "yarn storybook:start",
-    "storybook:build": "run-s -s 'storybook:build:*'",
-    "storybook:build:storybook": "cd packages/core && yarn build",
-    "storybook:start": "cd packages/core && yarn start",
+    "storybook": "cd packages/ibm-products && yarn storybook:start",
+    "storybook:build": "cd packages/ibm-products && yarn storybook:build",
     "storybook-wc": "cd packages/ibm-products-web-components && yarn storybook",
     "storybook-wc:build": "cd packages/ibm-products-web-components && run-s build build:storybook",
     "sync": "carbon-cli sync",
@@ -67,7 +65,7 @@
     "upgrade:dependencies:examples": "npm-check-updates -u --dep dev,peer,prod --color --target minor --packageFile 'scripts/example-gallery-builder/update-example/**/package.json'",
     "upgrade:automatic": "run-s -s 'upgrade:dependencies:*'",
     "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
-    "visual-snapshot": "cd packages/core && yarn percy storybook storybook-static",
+    "visual-snapshot": "cd packages/ibm-products && yarn percy storybook storybook-static",
     "wc-coverage": "cd packages/ibm-products-web-components && yarn coverage"
   },
   "devDependencies": {
@@ -90,7 +88,7 @@
     "accessibility-checker": "^4.0.2",
     "commander": "^13.0.0",
     "copyfiles": "^2.4.1",
-    "cspell": "^8.17.5",
+    "cspell": "^9.0.0",
     "eslint": "^9.22.0",
     "eslint-config-carbon": "^3.20.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -107,7 +105,7 @@
     "json": "^11.0.0",
     "lerna": "^8.2.1",
     "lint-staged": "^15.5.0",
-    "npm-check-updates": "^17.1.15",
+    "npm-check-updates": "^18.0.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
@@ -124,13 +122,13 @@
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {
-    "body-parser": "1.20.3",
+    "body-parser": "2.2.0",
     "braces": "^3.0.3",
     "cross-spawn": "7.0.6",
     "micromatch": "4.0.8",
-    "semver": "7.7.1",
+    "semver": "7.7.2",
     "ws": "^8.17.1",
-    "@babel/runtime": "7.27.0"
+    "@babel/runtime": "7.27.1"
   },
   "lint-staged": {
     "!(examples/**/*)**/*.{js,jsx,ts,tsx,mjs}": [

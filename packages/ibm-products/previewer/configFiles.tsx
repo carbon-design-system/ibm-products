@@ -72,6 +72,13 @@ root.render(
 `;
 
 export const style: string = `
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 @use '@carbon/styles';
 @use '@carbon/ibm-products/css/index';
 `;

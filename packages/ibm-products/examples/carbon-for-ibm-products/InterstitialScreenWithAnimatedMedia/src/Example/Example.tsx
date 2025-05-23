@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { InterstitialScreen, pkg } from '@carbon/ibm-products';
+
 import {
   Button,
   Column,
@@ -12,6 +12,17 @@ import {
 } from '@carbon/react';
 
 import './_example.scss';
+let InterstitialScreen, pkg;
+
+try {
+  // Try local path first (adjust the path as needed)
+  ({ InterstitialScreen } = await import(
+    '../../../../../src/components/InterstitialScreen/InterstitialScreen.tsx'
+  ));
+} catch (e) {
+  // If local fails, fallback to the package
+  ({ InterstitialScreen, pkg } = await import('@carbon/ibm-products'));
+}
 
 const HowACaseIsCreated1 = new URL(
   './SteppedAnimatedMedia/assets/illustrations/how-a-case-is-created-1.json',
@@ -39,7 +50,7 @@ export const Example = () => {
   };
 
   // NOTE: must happen before component is first used
-  pkg.component.InterstitialScreen = true;
+  //pkg.component.InterstitialScreen = true;
 
   const getContent = ({ progStep }) => {
     return (

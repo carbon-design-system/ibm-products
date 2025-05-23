@@ -83,7 +83,9 @@ class CDSNotification extends HostListenerMixin(LitElement) {
             })}
           </p>
           <slot name="title"></slot>
-          <slot name="description"></slot>
+          <div class="${blockClass}__notification-description">
+            <slot name="description"></slot>
+          </div>
         </div>
         <cds-icon-button
           align="left"

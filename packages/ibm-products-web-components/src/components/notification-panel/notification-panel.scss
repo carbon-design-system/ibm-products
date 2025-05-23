@@ -30,19 +30,100 @@ $block-class-action-set: #{$prefix}--action-set;
 // :host(#{$prefix}-notification-panel) {
 // }
 :host(#{$prefix}-notification) {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  padding: $spacing-05;
-  border: 0;
-  background-color: $layer-01;
-  cursor: pointer;
-  inline-size: 100%;
-  min-block-size: 6.25rem;
-  text-align: start;
-  transition: background-color $duration-moderate-02 motion(standard);
+  .#{$block-notification-class}__notification {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    padding: $spacing-05;
+    border: 0;
+    background-color: $layer-01;
+    cursor: pointer;
+    inline-size: 100%;
+    min-block-size: 6.25rem;
+    text-align: start;
+    transition: background-color $duration-moderate-02 motion(standard);@media screen and (prefers-reduced-motion: reduce) {
+&::before {
+      position: absolute;
+      margin: 0 auto;
+      background-color: $border-subtle-01;
+      block-size: 1px;
+      content: '';
+      inline-size: calc(100% - (2 * #{$spacing-05}));
+      inset-block-start: 0;
+      transition: none;
 }
-::slotted(.#{$prefix}--notifications-panel__notification__notification-title) {
+}
+
+    &::before {
+      position: absolute;
+      margin: 0 auto;
+      background-color: $border-subtle-01;
+      block-size: 1px;
+      content: '';
+      inline-size: calc(100% - (2 * #{$spacing-05}));
+      inset-block-start: 0;
+      transition: background-color $duration-moderate-02 motion(standard);
+    }
+
+    &:hover::before {
+      background-color: transparent;
+    }
+    .#{$block-notification-class}__notification-status-icon {
+      margin-inline-end: $spacing-03;
+      min-inline-size: 1rem;
+      &.#{$block-notification-class}__notification-status-icon-error {
+        fill: $support-error;
+      }
+      &.#{$block-notification-class}__notification-status-icon-success {
+        fill: $support-success;
+      }
+      &.#{$block-notification-class}__notification-status-icon-warning {
+        fill: $support-warning;
+      }
+      &.#{$block-notification-class}__notification-status-icon-informational {
+        fill: $support-info;
+      }
+    }
+    .#{$block-notification-class}__notification-time-label {
+      margin-block-end: $spacing-03;
+    }
+    .#{$block-notification-class}__dismiss-single-button {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      color: $text-primary;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      min-inline-size: 2rem;
+      opacity: 0;
+      /* stylelint-disable-next-line max-nesting-depth */
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
+    .#{$block-notification-class}__notification-time-label,
+    .#{$block-notification-class}__notification-description {
+      @include type.type-style('label-01');
+
+      color: $text-secondary;
+    }
+    .#{$block-notification-class}__notification-description {
+      display: block;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $layer-accent-01;
+    .#{$block-notification-class}__dismiss-single-button {
+      opacity: 1;
+    }
+  }
+}
+::slotted(.#{$block-notification-class}__notification-title) {
   --#{$carbon-prefix}-heading-06-font-size: --#{$carbon-prefix}-heading-01-font-size;
   --#{$carbon-prefix}-heading-06-font-weight: --#{$carbon-prefix}-heading-01-font-weight;
   --#{$carbon-prefix}-heading-06-line-height: --#{$carbon-prefix}-heading-01-line-height;

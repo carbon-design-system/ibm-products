@@ -13,7 +13,7 @@ const storyGlobs = [
   '../src/**/*.stories.*',
   '../../core/src/**/*.stories.*',
   '../../core/src/**/*.mdx',
-  '../../../examples/carbon-for-ibm-products/**/*.stories.*',
+  '../examples/carbon-for-ibm-products/**/*.stories.*',
 ];
 
 const stories = glob.sync(storyGlobs, {
@@ -83,10 +83,6 @@ export default {
           loader: {
             '.js': 'jsx',
           },
-        },
-        include: ['@carbon/ibm-products'],
-        ssr: {
-          noExternal: ['@carbon/ibm-products'],
         },
       },
       resolve: {

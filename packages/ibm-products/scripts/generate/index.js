@@ -56,7 +56,7 @@ sync(resolve(templatesPath, '**/*')).forEach((template) => {
     // relativePath = relative('example-gallery', relativePath);
 
     path = join(
-      '../../examples/carbon-for-ibm-products',
+      //  '../examples/carbon-for-ibm-products',
       substitutions.DISPLAY_NAME,
       compiledPath.substr('gallery-example/'.length)
     );

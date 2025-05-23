@@ -14,6 +14,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 
@@ -22,4 +24,62 @@ $carbon-prefix: 'cds';
 @use '@carbon/ibm-products-styles/scss/components/NotificationsPanel/index' as *;
 
 $block-class: #{$prefix}--notifications-panel;
+$block-notification-class: #{$prefix}--notifications-panel__notification;
 $block-class-action-set: #{$prefix}--action-set;
+
+// :host(#{$prefix}-notification-panel) {
+// }
+:host(#{$prefix}-notification) {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: $spacing-05;
+  border: 0;
+  background-color: $layer-01;
+  cursor: pointer;
+  inline-size: 100%;
+  min-block-size: 6.25rem;
+  text-align: start;
+  transition: background-color $duration-moderate-02 motion(standard);
+}
+::slotted(.#{$prefix}--notifications-panel__notification__notification-title) {
+  --#{$carbon-prefix}-heading-06-font-size: --#{$carbon-prefix}-heading-01-font-size;
+  --#{$carbon-prefix}-heading-06-font-weight: --#{$carbon-prefix}-heading-01-font-weight;
+  --#{$carbon-prefix}-heading-06-line-height: --#{$carbon-prefix}-heading-01-line-height;
+  --#{$carbon-prefix}-heading-06-letter-spacing: --#{$carbon-prefix}-heading-01-letter-spacing;
+
+  @include type.type-style('heading-01');
+
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+  @include font-weight('regular');
+}
+
+// :host(#{$prefix}-notification-panel) ::slotted(.c4p--notifications-panel__bottom-actions){
+//      position: sticky;
+//     z-index: 2;
+//     display: flex;
+//     align-items: center;
+//     background-color: $layer-01;
+//     block-size: 2.5rem;
+//     border-block-start: 1px solid $border-subtle-01;
+//     inset-block-end: 0;
+//     min-block-size: 2.5rem;
+// }
+
+.#{$block-class}__header-container {
+  --#{$carbon-prefix}-heading-06-font-size: --#{$carbon-prefix}-heading-compact-01-font-size;
+  --#{$carbon-prefix}-heading-06-font-weight: --#{$carbon-prefix}-heading-compact-01-font-weight;
+  --#{$carbon-prefix}-heading-06-line-height: --#{$carbon-prefix}-heading-compact-01-line-height;
+  --#{$carbon-prefix}-heading-06-letter-spacing: --#{$carbon-prefix}-heading-compact-01-letter-spacing;
+}
+.#{$block-class}__dismiss-button {
+  --#{$carbon-prefix}-link-primary: --#{$carbon-prefix}-text-primary;
+  --#{$carbon-prefix}-link-primary-hover: --#{$carbon-prefix}-text-primary;
+}
+.#{$block-class}__time-section-label {
+  --#{$carbon-prefix}-heading-06-font-size: --#{$carbon-prefix}-label-01-font-size;
+  --#{$carbon-prefix}-heading-06-font-weight: --#{$carbon-prefix}-label-01-font-weight;
+  --#{$carbon-prefix}-heading-06-line-height: --#{$carbon-prefix}-label-01-line-height;
+  --#{$carbon-prefix}-heading-06-letter-spacing: --#{$carbon-prefix}-label-01-letter-spacing;
+}

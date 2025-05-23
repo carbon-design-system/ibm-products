@@ -8,11 +8,17 @@
  */
 
 import { html } from 'lit';
+import { classMap } from 'lit/directives/class-map.js';
 import './index';
+import styles from './story-styles.scss?lit';
 import { prefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/heading/index.js';
+import Settings16 from '@carbon/web-components/es/icons/settings/16';
 import { dataToday, dataPrevious } from './NotificationsPanel_data';
 const storyPrefix = 'notification-panel-stories__';
+const blockClassNotificationPanel = `${prefix}--notifications-panel`;
+const blockClassNotification = `${prefix}--notifications-panel__notification`;
 
 const toggleButton = () => {
   document
@@ -20,6 +26,9 @@ const toggleButton = () => {
     ?.toggleAttribute('open');
 };
 
+const onViewAllClick = () => {};
+
+const onSettingsClick = () => {};
 export const defaultTemplate = {
   args: {
     titleText: 'Notifications',
@@ -32,6 +41,9 @@ export const defaultTemplate = {
   },
   render: (args) => {
     return html`
+      <style>
+        ${styles}
+      </style>
       <div class="${storyPrefix}story-container">
         <div class="${storyPrefix}story-header"></div>
         <div id="page-content-selector" class="${storyPrefix}story-content">
@@ -51,11 +63,24 @@ export const defaultTemplate = {
           ${dataToday.map((item) => {
             return html`
               <c4p-notification
+                @c4p-notification-click=${item.onNotificationClick}
+                @c4p-notification-dismiss=${() => {
+                  console.log('Notification dismissed');
+                }}
                 type=${item.type}
-                notification-title=${item.title}
                 unread=${item.unread}
-                .onNotificationClick=${item.onNotificationClick}
+                .timestamp=${item.timestamp}
               >
+                <cds-heading
+                  class=${classMap({
+                    [`${blockClassNotification}__notification-title`]: true,
+                    [`${blockClassNotification}__notification-title-unread`]:
+                      item.unread,
+                  })}
+                  slot="title"
+                >
+                  ${item.title}
+                </cds-heading>
                 <div slot="description">${item.description}</div>
               </c4p-notification>
             `;
@@ -66,15 +91,49 @@ export const defaultTemplate = {
           ${dataPrevious.map((item) => {
             return html`
               <c4p-notification
+                @c4p-notification-click=${item.onNotificationClick}
+                @c4p-notification-dismiss=${() => {
+                  console.log('Notification dismissed');
+                }}
                 type=${item.type}
-                notification-title=${item.title}
                 unread=${item.unread}
-                .onNotificationClick=${item.onNotificationClick}
+                .timestamp=${item.timestamp}
               >
+                <cds-heading
+                  class=${classMap({
+                    [`${blockClassNotification}__notification-title`]: true,
+                    [`${blockClassNotification}__notification-title-unread`]:
+                      item.unread,
+                  })}
+                  slot="title"
+                >
+                  ${item.title}
+                </cds-heading>
                 <div slot="description">${item.description}</div>
               </c4p-notification>
             `;
           })}
+        </div>
+        <div
+          slot="footer"
+          class="${blockClassNotificationPanel}__bottom-actions"
+        >
+          <cds-button
+            kind="ghost"
+            class="${blockClassNotificationPanel}__view-all-button"
+            }
+            @click=${onViewAllClick}
+          >
+            View all(${dataPrevious.length + dataToday.length})
+          </cds-button>
+          <cds-button
+            kind="ghost"
+            size="sm"
+            class="${blockClassNotificationPanel}__settings-button"
+            @click=${onSettingsClick}
+          >
+            ${Settings16()}
+          </cds-button>
         </div>
       </c4p-notification-panel>
     `;

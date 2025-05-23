@@ -9,109 +9,94 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { prefix, carbonPrefix } from '../../globals/settings';
-import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
+import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { selectorTabbable } from '@carbon/web-components/es/globals/settings.js';
+import { dateTimeFormat } from '@carbon/utilities';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import { classMap } from 'lit/directives/class-map.js';
-import '@carbon/web-components/es/components/heading/index.js';
+import { consume } from '@lit/context';
+import { dateTimeLocaleContext } from './date-time-context';
+import styles from './notification-panel.scss?lit';
 import '@carbon/web-components/es/components/icon-button/index.js';
 import Close16 from '@carbon/web-components/es/icons/close/16';
 import ErrorFilled16 from '@carbon/web-components/es/icons/error--filled/16';
 import CheckmarkFilled16 from '@carbon/web-components/es/icons/checkmark--filled/16';
 import WarningAltFilled16 from '@carbon/web-components/es/icons/warning--alt--filled/16';
 import InformationSquareFilled16 from '@carbon/web-components/es/icons/information--square--filled/16';
+import { getSupportedLocale } from '../../globals/js/utils/getSupportedLocale';
 
 const blockClass = `${prefix}--notifications-panel__notification`;
+const DefaultLocale = 'en-US';
+type DateTimeStyles = 'long' | 'short' | 'narrow';
+const dateTimeStyle = 'long' as DateTimeStyles;
 /**
  * Notification.
  *
  * @element c4p-notification
  * @csspart dialog The dialog.
- * @fires c4p-notification-beingclosed
- *   The custom event fired before this notification-panel is being closed upon a user gesture.
- *   Cancellation of this event stops the user-initiated action of closing this notification-panel.
- * @fires c4p-notification-closed - The custom event fired after this notification-panel is closed upon a user gesture.
+ * @fires c4p-notification-click
+ *   The custom event is fired when a notification is clicked or when the Enter key is pressed on it.
+ * @fires c4p-notification-dismiss - The custom event is fired when the notification is closed by a user gesture.
  */
 @customElement(`${prefix}-notification`)
 class CDSNotification extends HostListenerMixin(LitElement) {
   /**
-   * Sets the Title for the Notification panel
-   */
-  @property({ reflect: true, attribute: 'notification-id' })
-  notificationId?: string | number;
-  /**
-   * Sets the Today text for the Notification panel
+   * Sets the type of notification to display: 'error', 'warning', 'success', or 'informational'
    */
   @property({ reflect: true })
   type?: 'error' | 'warning' | 'success' | 'informational';
   /**
-   * Sets the Previous section title for the Notification panel
+   * Sets the timestamp for the notification, typically used to indicate when it was received
    */
   @property()
   timestamp?: Date;
   /**
-   * Determines whether the notifications panel should render or not
-   */
-  @property({ type: String, attribute: 'notification-title' })
-  notificationTitle;
-  /**
-   * Determines whether the notifications panel should render or not
+   * Indicates whether the notification is unread.
    */
   @property({ reflect: true, type: Boolean })
   unread;
-  /**
-   * Determines whether the notifications panel should render or not
-   */
-  @property()
-  onNotificationClick?: () => void;
-  /**
-   * Determines whether the notifications panel should render or not
-   */
-  @property()
-  onDismissSingleNotification?: () => void;
+
+  @consume({ context: dateTimeLocaleContext, subscribe: true })
+  dateTimeLocale: string | undefined = undefined;
 
   render() {
     const {
-      notificationId,
       type,
       timestamp,
-      notificationTitle,
       unread,
-      onNotificationClick,
+      dateTimeLocale,
+      _handleClick: handleClick,
       _handleKeyDown: handleKeyDown,
       _dismissSingleNotification: dismissSingleNotification,
       _fetchIcon: fetchIcon,
     } = this;
-
-    const notificationHeaderClassName = classMap({
-      [`${blockClass}__notification-title`]: true,
-      [`${blockClass}__notification-title-unread`]: unread,
-    });
+    const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
     const icon = fetchIcon(type);
     return html`
       <div
         class="${blockClass}__notification"
         role="button"
         tabindex="0"
-        @click=${onNotificationClick}
+        @click=${handleClick}
         @keydown=${handleKeyDown}
       >
         ${icon}
         <div class="${blockClass}__notification-content">
-          <p class="${blockClass}__notification-time-label">x time ago</p>
-          <cds-heading class="${notificationHeaderClassName}">
-            ${notificationTitle}
-          </cds-heading>
-          <slot name="description">
+          <p class="${blockClass}__notification-time-label">
+            ${dateTimeFormat.relative.format(timestamp as Date, {
+              locale: supportedLocale as string,
+              style: dateTimeStyle,
+            })}
+          </p>
+          <slot name="title"></slot>
+          <slot name="description"></slot>
         </div>
         <cds-icon-button
           align="left"
           kind="ghost"
           size="sm"
           class="${blockClass}__dismiss-single-button"
-          @click=${(event) => dismissSingleNotification(event)}
+          @click=${dismissSingleNotification}
         >
           ${Close16({})}
         </cds-icon-button>
@@ -125,15 +110,70 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     ) {
       return;
     }
-    if (event.key === 'Enter' && this.onNotificationClick) {
-      this.onNotificationClick();
+    if (event.key === 'Enter') {
+      const triggeredBy = event.target;
+      const init = {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: {
+          triggeredBy,
+        },
+      };
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSNotification).notificationClick,
+          init
+        )
+      );
     }
   }
 
-  private _dismissSingleNotification(event) {
+  /**
+   * Handles click event on notification.
+   *
+   * @param triggeredBy The element that triggered click event.
+   */
+  private _handleClick(triggeredBy: EventTarget | null) {
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        triggeredBy,
+      },
+    };
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSNotification).notificationClick,
+        init
+      )
+    );
+  }
+
+  /**
+   * Handles user-initiated dismiss request of the Notification.
+   *
+   * @param event The event that triggered the click.
+   */
+  private _dismissSingleNotification(event: Event) {
+    const triggeredBy = event.target;
     event.preventDefault();
     event.stopPropagation();
-    this.onDismissSingleNotification && this.onDismissSingleNotification();
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        triggeredBy,
+      },
+    };
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSNotification).notificationDismiss,
+        init
+      )
+    );
   }
 
   private _fetchIcon(type) {
@@ -173,19 +213,19 @@ class CDSNotification extends HostListenerMixin(LitElement) {
   }
 
   /**
-   * The name of the custom event fired before this notification-panel is being closed upon a user gesture.
-   * Cancellation of this event stops the user-initiated action of closing this notification-panel.
+   * The custom event is fired when a notification is clicked or when the Enter key is pressed on it.
    */
-  static get eventBeforeClose() {
-    return `${prefix}-notification-beingclosed`;
+  static get notificationClick() {
+    return `${prefix}-notification-click`;
   }
 
   /**
-   * The name of the custom event fired after this notification-panel is closed upon a user gesture.
+   * The custom event is fired when the notification is closed by a user gesture.
    */
-  static get eventClose() {
-    return `${prefix}-notification-closed`;
+  static get notificationDismiss() {
+    return `${prefix}-notification-dismiss`;
   }
+  static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
 export default CDSNotification;

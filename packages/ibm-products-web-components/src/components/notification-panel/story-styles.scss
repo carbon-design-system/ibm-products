@@ -6,8 +6,10 @@
 */
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
 $story-prefix: 'side-panel-stories__';
+$block-class: #{$prefix}--notifications-panel;
 
 .#{$story-prefix}body-content {
   display: flex;
@@ -44,4 +46,39 @@ $story-prefix: 'side-panel-stories__';
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.#{$block-class}__bottom-actions {
+  position: sticky;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  background-color: $layer-01;
+  block-size: 2.5rem;
+  border-block-start: 1px solid $border-subtle-01;
+  inset-block-end: 0;
+  min-block-size: 2.5rem;
+  .#{$block-class}__view-all-button {
+    display: flex;
+    align-items: center;
+    block-size: 2.5rem;
+    border-inline-end: 1px solid $border-subtle-01;
+    color: $text-primary;
+    inline-size: 100%;
+    max-inline-size: calc(100% - 2.5rem);
+    min-block-size: 2.5rem;
+  }
+  .#{$block-class}__settings-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    block-size: 2.5rem;
+    color: $text-primary;
+    min-block-size: 2.5rem;
+    min-inline-size: 2.5rem;
+  }
+  .#{$block-class}__settings-button .#{$carbon-prefix}--btn__icon {
+    margin: 0;
+  }
 }

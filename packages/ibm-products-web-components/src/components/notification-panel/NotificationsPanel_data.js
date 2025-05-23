@@ -32,21 +32,24 @@ export const dataToday = [
   {
     id: uuidv4(),
     type: 'error',
-    title: 'LogRhythm connection failure',
-    description: 'LogRhythm is failing to connect, check timeout.',
-    timestamp: currentDate,
-    unread: true,
-    onNotificationClick: action(`Clicked on notification`),
-  },
-  {
-    id: uuidv4(),
-    type: 'error',
     title: 'LogDNA cannot be reached.',
     description: 'Unable to communicate with LogDNA.',
     timestamp: new Date(new Date().getTime() - 30 * 1000), // 30 seconds ago
     unread: true,
     onNotificationClick: action(`Clicked on notification`),
   },
+];
+export const dataPrevious = [
+  {
+    id: uuidv4(),
+    type: 'error',
+    title: 'LogRhythm connection failure',
+    description: 'LogRhythm is failing to connect, check timeout.',
+    timestamp: currentDate,
+    unread: true,
+    onNotificationClick: action(`Clicked on notification`),
+  },
+
   {
     id: uuidv4(),
     type: 'warning',
@@ -65,8 +68,6 @@ export const dataToday = [
     unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
-];
-export const dataPrevious = [
   {
     id: uuidv4(),
     type: 'success',

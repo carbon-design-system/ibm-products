@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act } from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { expectWarn, expectWarnAsync } from '../../global/js/utils/test-helper';
-import { pkg, carbon } from '../../settings';
-import { CreateTearsheet } from './CreateTearsheet';
-import { CreateTearsheetStep } from './CreateTearsheetStep';
-import uuidv4 from '../../global/js/utils/uuidv4';
+import React, { act } from "react";
+import { render, screen, waitFor } from "@testing-library/react";
+import { expectWarn, expectWarnAsync } from "../../global/js/utils/test-helper";
+import { pkg, carbon } from "../../settings";
+import { CreateTearsheet } from "./CreateTearsheet";
+import { CreateTearsheetStep } from "./CreateTearsheetStep";
+import uuidv4 from "../../global/js/utils/uuidv4";
 
-import userEvent from '@testing-library/user-event';
+import userEvent from "@testing-library/user-event";
 const { click } = userEvent.setup({
   // delay: null, // prev version
   advanceTimers: jest.advanceTimersByTime,
@@ -45,12 +45,12 @@ const finalStepOnNextNonPromise = jest.fn();
 const finalStepOnNextRejectFn = jest.fn(() =>
   Promise.reject(rejectionErrorMessage)
 );
-const submitButtonText = 'Submit';
-const cancelButtonText = 'Cancel';
-const backButtonText = 'Back';
-const nextButtonText = 'Next';
-const experimentalSecondarySubmitText = 'Secondary submit';
-const experimentalSecondaryLabelText = 'Skip all step';
+const submitButtonText = "Submit";
+const cancelButtonText = "Cancel";
+const backButtonText = "Back";
+const nextButtonText = "Next";
+const experimentalSecondarySubmitText = "Secondary submit";
+const experimentalSecondaryLabelText = "Skip all step";
 const onExperimentalSecondarySubmitClickFn = jest.fn();
 const step3Title = uuidv4();
 const step2Title = uuidv4();
@@ -61,7 +61,7 @@ const title = uuidv4();
 const dataTestId = uuidv4();
 const ref = React.createRef();
 const onMountFn = jest.fn();
-const ariaLabel = 'test-aria-label';
+const ariaLabel = "test-aria-label";
 const defaultProps = {
   title,
   submitButtonText,
@@ -74,7 +74,7 @@ const defaultProps = {
   ariaLabel,
 };
 
-const secondStepButtonId = 'second-step-button';
+const secondStepButtonId = "second-step-button";
 
 const renderCreateTearsheet = ({
   rejectOnSubmit = false,
@@ -85,7 +85,7 @@ const renderCreateTearsheet = ({
   finalOnNextFn = finalStepOnNext,
   rejectOnSubmitNext = false,
   experimentalSecondarySubmit = {
-    labelText: '',
+    labelText: "",
     disabled: false,
     hideSecondarySubmit: false,
     onClick: onExperimentalSecondarySubmitClickFn,
@@ -172,7 +172,7 @@ const renderInvalidCreateTearsheet = ({ ...rest } = {}) =>
   );
 
 const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
-  'default-portal-target-body',
+  "default-portal-target-body",
   true
 );
 
@@ -187,7 +187,7 @@ describe(CreateTearsheet.displayName, () => {
     }));
     window.IntersectionObserver = jest.fn().mockImplementation(() => ({
       root: null,
-      rootMargin: '',
+      rootMargin: "",
       thresholds: [],
       disconnect: () => null,
       observe: () => null,
@@ -195,37 +195,33 @@ describe(CreateTearsheet.displayName, () => {
       unobserve: () => null,
     }));
     jest.useFakeTimers();
-    pkg.feature['default-portal-target-body'] = false;
+    pkg.feature["default-portal-target-body"] = false;
   });
 
   afterEach(() => {
     window.ResizeObserver = ResizeObserver;
     jest.useRealTimers();
-    pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
+    pkg.feature["default-portal-target-body"] = initialDefaultPortalTargetBody;
   });
 
- it('has no accessibility violations', async () => {
-  renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
+  it("has no accessibility violations", async () => {
+    const { container } = renderCreateTearsheet({
+      ...defaultProps,
+      "data-testid": dataTestId,
+    });
 
-  const element = await waitFor(() => {
-    const el = document.body.querySelector('#c4p--CreateTearsheet');
-    if (!el) throw new Error('Element not found');
-    return el;
-  }, { timeout: 500 });
+    await waitFor(
+      () => {
+        expect(container).toBeAccessible();
+      },
+      { timeout: 500 }
+    );
+  });
 
-  try {
-    await expect(element).toBeAccessible();
-  } catch (err) {
-    console.error('Accessibility test error:', err);
-    throw err; // rethrow so test fails
-  }
-});
-
-
-  it('renders the CreateTearsheet component', async () => {
+  it("renders the CreateTearsheet component", async () => {
     renderCreateTearsheet({
       ...defaultProps,
-      'data-testid': dataTestId,
+      "data-testid": dataTestId,
     });
     screen.getByTestId(dataTestId);
 
@@ -234,19 +230,19 @@ describe(CreateTearsheet.displayName, () => {
     );
 
     screen.getAllByText(title);
-    const tearsheetElement = screen.getByRole('dialog', {
+    const tearsheetElement = screen.getByRole("dialog", {
       name: ariaLabel,
     }).parentElement;
     expect(tearsheetElement).toHaveClass(createTearsheetBlockClass);
     expect(ref.current).not.toBeNull();
   });
 
-  it('should render the tearsheet on the specified initialStep prop provided', async () => {
+  it("should render the tearsheet on the specified initialStep prop provided", async () => {
     renderCreateTearsheet({
       ...defaultProps,
       initialStep: 2,
     });
-    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
+    const tearsheetElement = screen.getByRole("dialog", { name: ariaLabel });
     const createTearsheetSteps = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
     ).children;
@@ -257,7 +253,7 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('renders the first step if an invalid initialStep value is provided', async () =>
+  it("renders the first step if an invalid initialStep value is provided", async () =>
     expectWarn(
       `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`,
       () => {
@@ -267,7 +263,7 @@ describe(CreateTearsheet.displayName, () => {
           // This will cause a console warning
           initialStep: 0,
         });
-        const tearsheetElement = screen.getByRole('dialog', {
+        const tearsheetElement = screen.getByRole("dialog", {
           name: ariaLabel,
         });
         const createTearsheetSteps = tearsheetElement.querySelector(
@@ -283,13 +279,13 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
+  it("renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button", async () => {
     jest.useFakeTimers();
     renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);
     await act(() => click(nextButtonElement));
-    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
+    const tearsheetElement = screen.getByRole("dialog", { name: ariaLabel });
     const createTearsheetSteps = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
     ).children;
@@ -306,7 +302,7 @@ describe(CreateTearsheet.displayName, () => {
     expect(onCloseFn).toHaveBeenCalled();
   });
 
-  it('should focus the specified element on steps greater than the first', async () => {
+  it("should focus the specified element on steps greater than the first", async () => {
     renderCreateTearsheet({
       ...defaultProps,
       firstFocusElement: `#${secondStepButtonId}`,
@@ -314,14 +310,14 @@ describe(CreateTearsheet.displayName, () => {
     const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
     setTimeout(() => {
-      const button = screen.getByRole('button', {
-        name: 'Second step button two',
+      const button = screen.getByRole("button", {
+        name: "Second step button two",
       });
       expect(button).toHaveFocus();
     }, 20);
   });
 
-  it('should not focus the specified element if an invalid selector is provided', async () => {
+  it("should not focus the specified element if an invalid selector is provided", async () => {
     jest.useFakeTimers();
     renderCreateTearsheet({
       ...defaultProps,
@@ -335,13 +331,13 @@ describe(CreateTearsheet.displayName, () => {
     );
     await act(() => click(nextButtonElement));
     jest.advanceTimersByTime(1000);
-    const button = screen.getByRole('button', {
-      name: 'Second step button one',
+    const button = screen.getByRole("button", {
+      name: "Second step button one",
     });
     expect(button).toHaveFocus();
   });
 
-  it('renders first step with onNext function prop that rejects', async () =>
+  it("renders first step with onNext function prop that rejects", async () =>
     expectWarnAsync(
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
       async () => {
@@ -357,11 +353,11 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it('calls the onPrevious function prop as expected', async () => {
+  it("calls the onPrevious function prop as expected", async () => {
     renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const backButtonElement = screen.getByText(backButtonText);
-    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
+    const tearsheetElement = screen.getByRole("dialog", { name: ariaLabel });
     const createTearsheetSteps = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
     ).children;
@@ -379,7 +375,7 @@ describe(CreateTearsheet.displayName, () => {
     await waitFor(() => expect(onPreviousStepFn).toHaveBeenCalledTimes(1));
   });
 
-  it('renders the next CreateTearsheet step without onNext handler', async () => {
+  it("renders the next CreateTearsheet step without onNext handler", async () => {
     const { rerender } = renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
@@ -387,7 +383,7 @@ describe(CreateTearsheet.displayName, () => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     await act(() => click(nextButtonElement));
-    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
+    const tearsheetElement = screen.getByRole("dialog", { name: ariaLabel });
     const tearsheetChildren = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content  .${carbon.prefix}--form`
     ).children;
@@ -412,7 +408,7 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
+  it("should call the onRequestSubmit prop, returning a promise on last step submit button", async () => {
     renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
@@ -438,7 +434,7 @@ describe(CreateTearsheet.displayName, () => {
     });
   });
 
-  it('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
+  it("should call the onRequestSubmit function, without a promise, on last step submit button", async () => {
     renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
@@ -463,7 +459,7 @@ describe(CreateTearsheet.displayName, () => {
     });
   });
 
-  it('should call the onNext function from the final step and reject the promise', async () =>
+  it("should call the onNext function from the final step and reject the promise", async () =>
     expectWarnAsync(
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
       async () => {
@@ -493,7 +489,7 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it('should call the onRequestSubmit prop and reject the promise', async () =>
+  it("should call the onRequestSubmit prop and reject the promise", async () =>
     expectWarnAsync(
       `CreateTearsheet submit error: ${rejectionErrorMessage}`,
       async () => {
@@ -518,7 +514,7 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it.skip('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
+  it.skip("should not render any CreateTearsheet steps when there are no TearsheetStep components included", async () => {
     renderEmptyCreateTearsheet(defaultProps);
     const createTearsheetSteps = document.querySelectorAll(
       `.${createTearsheetBlockClass}__step`
@@ -526,7 +522,7 @@ describe(CreateTearsheet.displayName, () => {
     expect(Array(...createTearsheetSteps)).toStrictEqual([]);
   });
 
-  it('should click the back button and add a custom next button label on a single step', async () => {
+  it("should click the back button and add a custom next button label on a single step", async () => {
     renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
@@ -538,7 +534,7 @@ describe(CreateTearsheet.displayName, () => {
     const backButtonElement = await screen.getByText(backButtonText);
     await act(() => click(backButtonElement));
     await expect(onPreviousStepFn).toHaveBeenCalledTimes(1);
-    const tearsheetElement = await screen.getByRole('dialog', {
+    const tearsheetElement = await screen.getByRole("dialog", {
       name: ariaLabel,
     });
     const tearsheetChildren = await tearsheetElement.querySelector(
@@ -551,7 +547,7 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('should show experimentalSecondarySubmit button (4th button)', () => {
+  it("should show experimentalSecondarySubmit button (4th button)", () => {
     renderCreateTearsheet({
       ...defaultProps,
       experimentalSecondarySubmitText,
@@ -560,7 +556,7 @@ describe(CreateTearsheet.displayName, () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('should disabled experimentalSecondarySubmit button', () => {
+  it("should disabled experimentalSecondarySubmit button", () => {
     renderCreateTearsheet({
       ...defaultProps,
       experimentalSecondarySubmitText,
@@ -570,7 +566,7 @@ describe(CreateTearsheet.displayName, () => {
     expect(button).toBeDisabled();
   });
 
-  it('should hide experimentalSecondarySubmit button', () => {
+  it("should hide experimentalSecondarySubmit button", () => {
     renderCreateTearsheet({
       ...defaultProps,
       experimentalSecondarySubmitText,
@@ -580,7 +576,7 @@ describe(CreateTearsheet.displayName, () => {
     expect(button).toBeNull();
   });
 
-  it('should rename experimentalSecondarySubmit button text', () => {
+  it("should rename experimentalSecondarySubmit button text", () => {
     renderCreateTearsheet({
       ...defaultProps,
       experimentalSecondarySubmitText,
@@ -592,7 +588,7 @@ describe(CreateTearsheet.displayName, () => {
     const button = screen.getByText(experimentalSecondaryLabelText);
     expect(button).toBeInTheDocument();
   });
-  it('should call experimentalSecondarySubmit onClick', async () => {
+  it("should call experimentalSecondarySubmit onClick", async () => {
     renderCreateTearsheet({
       ...defaultProps,
       experimentalSecondarySubmitText,
@@ -607,18 +603,18 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('should create a console warning when using CreateTearsheet with only one step', async () => {
-    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+  it("should create a console warning when using CreateTearsheet with only one step", async () => {
+    jest.spyOn(console, "warn").mockImplementation(jest.fn());
     renderSingleStepCreateTearsheet(defaultProps);
-    jest.spyOn(console, 'warn').mockRestore();
+    jest.spyOn(console, "warn").mockRestore();
   });
 
-  it('should create a console warning when using CreateTearsheet with only one step', async () =>
-    expectWarn('CreateTearsheets with one step are not permitted', () => {
+  it("should create a console warning when using CreateTearsheet with only one step", async () =>
+    expectWarn("CreateTearsheets with one step are not permitted", () => {
       renderSingleStepCreateTearsheet(defaultProps);
     }));
 
-  it('should render an invalid create tearsheet', async () =>
+  it("should render an invalid create tearsheet", async () =>
     expectWarn(
       `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
       () => {
@@ -626,7 +622,7 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it('should not throw an error if null is passed as one of the children?', async () => {
+  it("should not throw an error if null is passed as one of the children?", async () => {
     const children = [
       <CreateTearsheetStep title="Title 1" key="1" fieldsetLegendText="Title 1">
         <p>1</p>
@@ -655,13 +651,13 @@ describe(CreateTearsheet.displayName, () => {
 
     expect(
       influencerSteps.childNodes[0].classList.contains(
-        'cds--progress-step--complete'
+        "cds--progress-step--complete"
       )
     ).toBe(true);
 
     expect(
       influencerSteps.childNodes[1].classList.contains(
-        'cds--progress-step--current'
+        "cds--progress-step--current"
       )
     ).toBe(true);
   });

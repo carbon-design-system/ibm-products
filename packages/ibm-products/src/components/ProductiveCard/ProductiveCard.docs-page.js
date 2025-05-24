@@ -12,6 +12,7 @@ import * as stories from './ProductiveCard.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/components/card/productive-card/usage/"
     blocks={[
       {
         story: stories.Clickable,
@@ -54,7 +55,7 @@ const DocsPage = () => (
   onClick={() => {}}
   onKeyDown={() => {}}
   primaryButtonText="Ghost button"
-  aiLabel={<AILabel>...</AILabel> || true}
+  decorator={<AILabel>...</AILabel> || true}
   title="Title"
 >
   <React.Fragment key=".0">
@@ -72,7 +73,7 @@ const DocsPage = () => (
       },
       {
         description:
-          'Clickable tiles only accept a boolean value of true for the aiLabel property.',
+          'Clickable tiles only accept a boolean value of true for the decorator property.',
         source: {
           language: 'html',
           code: `
@@ -80,7 +81,7 @@ const DocsPage = () => (
   onClick={() => {}}
   onKeyDown={() => {}}
   primaryButtonText="Ghost button"
-  aiLabel={true}
+  decorator={true}
   title="Title"
 >
   <React.Fragment key=".0">

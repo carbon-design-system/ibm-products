@@ -16,16 +16,378 @@ import { ConditionBuilder } from '.';
 import cx from 'classnames';
 import userEvent from '@testing-library/user-event';
 
-import { inputData, inputDataDynamicOptions } from './assets/sampleInput';
 import {
   sampleDataStructure_nonHierarchical,
   sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
 import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
+import CustomInput from './assets/CustomInput';
+import { inputDataForCustomOperator } from './assets/sampleInput';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = ConditionBuilder.displayName;
 
+const customOperators = [
+  {
+    label: 'is greater than',
+    id: 'greater',
+  },
+  {
+    label: 'is greater than or equal to',
+    id: 'greaterEqual',
+  },
+];
+
+const inputData = {
+  properties: [
+    {
+      id: 'continent',
+      label: 'Continent',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Africa',
+            id: 'Africa',
+          },
+          {
+            label: 'Antarctica',
+            id: 'Antarctica',
+          },
+          {
+            label: 'Asia',
+            id: 'Asia',
+          },
+          {
+            label: 'Australia',
+            id: 'Australia',
+          },
+          {
+            label: 'Europe',
+            id: 'Europe',
+          },
+        ],
+      },
+    },
+    {
+      id: 'region',
+      label: 'Region',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Afghanistan',
+            id: 'AF',
+          },
+          {
+            label: 'Albania',
+            id: 'AL',
+          },
+          {
+            label: 'Algeria',
+            id: 'AG',
+          },
+          {
+            label: 'Andorra',
+            id: 'AN',
+          },
+          {
+            label: 'India',
+            id: 'India',
+          },
+        ],
+      },
+    },
+    {
+      id: 'color',
+      label: 'Color',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'black',
+            id: 'black',
+          },
+          {
+            label: 'silver',
+            id: 'silver',
+          },
+          {
+            label: 'gray',
+            id: 'gray',
+          },
+          {
+            label: 'white',
+            id: 'white',
+          },
+          {
+            label: 'maroon',
+            id: 'maroon',
+          },
+          {
+            label: 'red',
+            id: 'red',
+          },
+          {
+            label: 'purple',
+            id: 'purple',
+          },
+          {
+            label: 'fuchsia',
+            id: 'fuchsia',
+          },
+          {
+            label: 'green',
+            id: 'green',
+          },
+          {
+            label: 'lime',
+            id: 'lime',
+          },
+          {
+            label: 'olive',
+            id: 'olive',
+          },
+          {
+            label: 'yellow',
+            id: 'yellow',
+          },
+          {
+            label: 'navy',
+            id: 'navy',
+          },
+          {
+            label: 'blue',
+            id: 'blue',
+          },
+          {
+            label: 'teal',
+            id: 'teal',
+          },
+          {
+            label: 'aqua',
+            id: 'aqua',
+          },
+        ],
+      },
+    },
+    {
+      id: 'id',
+      label: 'ID',
+      type: 'text',
+      config: {},
+    },
+    {
+      id: 'id_long',
+      label: 'Id Long',
+      type: 'textarea',
+      config: {},
+    },
+    {
+      id: 'price',
+      label: 'Price',
+      type: 'number',
+      config: {
+        min: 0,
+        step: 1,
+        unit: 'Dollars',
+      },
+    },
+    {
+      id: 'date',
+      label: 'Date',
+      type: 'date',
+      config: {},
+    },
+    {
+      id: 'time',
+      label: 'Time',
+      type: 'time',
+      config: {
+        timeZones: ['IST', 'CET', 'UTC', 'LOCAL'],
+      },
+    },
+    {
+      id: 'delivery',
+      label: 'Delivery',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Processing',
+            id: 'Processing',
+          },
+          {
+            label: 'Preparing for dispatch',
+            id: 'Preparing for dispatch',
+          },
+          {
+            label: 'Dispatched',
+            id: 'Dispatched',
+          },
+          {
+            label: 'In delivery',
+            id: 'In delivery',
+          },
+          {
+            label: 'Delivered',
+            id: 'Delivered',
+          },
+        ],
+      },
+    },
+    {
+      id: 'season',
+      label: 'Season',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Winter',
+            id: 'Winter',
+          },
+          {
+            label: 'Spring',
+            id: 'Spring',
+          },
+          {
+            label: 'Summer',
+            id: 'Summer',
+          },
+          {
+            label: 'Fall',
+            id: 'Fall',
+          },
+        ],
+      },
+    },
+    {
+      id: 'product',
+      label: 'Product',
+      type: 'custom',
+      config: {
+        component: CustomInput,
+        operators: customOperators,
+        valueFormatter: (value) => value?.toUpperCase(),
+      },
+    },
+  ],
+};
+
+const inputDataDynamicOptions = {
+  properties: [
+    {
+      id: 'continent',
+      label: 'Continent',
+      icon: Earth,
+      type: 'option',
+      config: {},
+    },
+    {
+      id: 'region',
+      label: 'Region',
+      type: 'option',
+      config: {},
+    },
+    {
+      id: 'color',
+      label: 'Color',
+      type: 'option',
+      config: {},
+    },
+    {
+      id: 'id',
+      label: 'ID',
+      type: 'text',
+      config: {},
+    },
+    {
+      id: 'price',
+      label: 'Price',
+      type: 'number',
+      config: {
+        min: 0,
+        step: 1,
+        unit: 'Dollars',
+      },
+    },
+    {
+      id: 'date',
+      label: 'Date',
+      type: 'date',
+      config: {},
+    },
+    {
+      id: 'time',
+      label: 'Time',
+      type: 'time',
+      config: {
+        timeZones: ['IST', 'CET', 'UTC', 'LOCAL'],
+      },
+    },
+
+    {
+      id: 'product',
+      label: 'Product',
+      type: 'text',
+      config: {},
+    },
+    {
+      id: 'delivery',
+      label: 'Delivery',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Processing',
+            id: 'Processing',
+          },
+          {
+            label: 'Preparing for dispatch',
+            id: 'Preparing for dispatch',
+          },
+          {
+            label: 'Dispatched',
+            id: 'Dispatched',
+          },
+          {
+            label: 'In delivery',
+            id: 'In delivery',
+          },
+          {
+            label: 'Delivered',
+            id: 'Delivered',
+          },
+        ],
+      },
+    },
+    {
+      id: 'season',
+      label: 'Season',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Winter',
+            id: 'Winter',
+          },
+          {
+            label: 'Spring',
+            id: 'Spring',
+          },
+          {
+            label: 'Summer',
+            id: 'Summer',
+          },
+          {
+            label: 'Fall',
+            id: 'Fall',
+          },
+        ],
+      },
+    },
+  ],
+};
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
@@ -36,7 +398,7 @@ const defaultProps = {
   getConditionState: () => {},
   variant: NON_HIERARCHICAL_VARIANT,
 };
-
+const testInputText = 'testID123';
 const inputConfigOptionType = {
   properties: [
     {
@@ -98,6 +460,10 @@ const getOptions = async (conditionState, { property }) => {
       return [];
   }
 };
+
+const onAddItem = jest.fn(() => {
+  preventAdd: false;
+});
 describe(componentName, () => {
   it('renders a component ConditionBuilder', async () => {
     render(<ConditionBuilder data-testid={dataTestId} {...defaultProps} />);
@@ -426,12 +792,12 @@ describe(componentName, () => {
     );
 
     const inputText = document.querySelector('#id');
-    fireEvent.change(inputText, { target: { value: 'testID123' } });
+    fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(container));
 
-    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+    const selectedItem = screen.getByRole('button', { name: testInputText });
 
     expect(selectedItem);
   });
@@ -455,12 +821,12 @@ describe(componentName, () => {
     await act(() => userEvent.click(isOperator));
 
     const inputText = document.querySelector('#id_long');
-    fireEvent.change(inputText, { target: { value: 'testID123' } });
+    fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(container));
 
-    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+    const selectedItem = screen.getByRole('button', { name: testInputText });
 
     expect(selectedItem);
   });
@@ -528,6 +894,42 @@ describe(componentName, () => {
     const selectedItem = screen.getByRole('button', { name: '12/06/2024' });
 
     expect(selectedItem);
+  });
+
+  it('render the component with input type date range', async () => {
+    render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Date',
+        })
+      )
+    );
+
+    const betweenOperator = screen.getByRole('option', {
+      name: 'is between',
+    });
+    await act(() => userEvent.click(betweenOperator));
+
+    const startDateInput = document.querySelector('#datePickerStart');
+    const endDateInput = document.querySelector('#datePickerEnd');
+
+    fireEvent.change(startDateInput, { target: { value: '01/06/2024' } });
+    fireEvent.change(endDateInput, { target: { value: '12/06/2024' } });
+
+    await act(() => userEvent.keyboard('{Enter}'));
+    const button = screen.getByRole('button', {
+      name: /01\/06\/2024 - 12\/06\/2024/i,
+    });
+    expect(button).toBeInTheDocument();
+    await act(() => userEvent.keyboard('{Enter}'));
+    expect(document.querySelector('#datePickerStart')).toHaveValue(
+      '01/06/2024'
+    );
+    expect(document.querySelector('#datePickerEnd')).toHaveValue('12/06/2024');
   });
 
   it('render the component with input type time', async () => {
@@ -630,6 +1032,7 @@ describe(componentName, () => {
         {...defaultProps}
         variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
+        onAddItem={onAddItem}
       />
     );
 
@@ -661,6 +1064,9 @@ describe(componentName, () => {
     expect(addButton);
     await act(() => userEvent.click(addButton));
 
+    //verify onAddItem callback is triggered
+    expect(onAddItem).toHaveBeenCalled();
+
     const regionOption = screen.getByRole('option', {
       name: 'Region',
     });
@@ -689,6 +1095,9 @@ describe(componentName, () => {
     );
     expect(addSubGroupButton);
     await act(() => userEvent.click(addSubGroupButton));
+
+    //verify onAddItem callback is triggered
+    expect(onAddItem).toHaveBeenCalled();
 
     //add third condition
 
@@ -722,6 +1131,7 @@ describe(componentName, () => {
         {...defaultProps}
         variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
+        onAddItem={onAddItem}
       />
     );
 
@@ -814,6 +1224,10 @@ describe(componentName, () => {
     );
     expect(addGroupButton);
     await act(() => userEvent.click(addGroupButton));
+
+    //verify onAddItem callback is triggered
+    expect(onAddItem).toHaveBeenCalled();
+
     //adding condition 1
 
     await act(() =>
@@ -861,12 +1275,12 @@ describe(componentName, () => {
     let closeButtons = document.querySelectorAll(
       `.${blockClass}__close-condition`
     );
-    expect(closeButtons).toHaveLength(3);
+    expect(closeButtons).toHaveLength(4);
     //click first close button
     await act(() => userEvent.click(closeButtons[0]));
 
     closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
-    expect(closeButtons).toHaveLength(2);
+    expect(closeButtons).toHaveLength(3);
 
     expect(closeButtons[0]).toHaveFocus();
 
@@ -874,8 +1288,8 @@ describe(componentName, () => {
 
     await act(() => userEvent.click(closeButtons[1]));
     closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
-    expect(closeButtons).toHaveLength(1);
-    expect(closeButtons[0]).toHaveFocus();
+    expect(closeButtons).toHaveLength(2);
+    expect(closeButtons[1]).toHaveFocus();
   });
 
   it('check the next/previous close button is focussed on remove condition for Hierarchical variant', async () => {
@@ -1252,14 +1666,229 @@ describe(componentName, () => {
     );
 
     const inputText = document.querySelector('#customInput');
-    fireEvent.change(inputText, { target: { value: 'testID123' } });
+    fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(container));
-
-    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+    // the value formatter will format to uppercase
+    // cspell: disable
+    const selectedItem = screen.getByRole('button', {
+      name: testInputText.toUpperCase(),
+    });
 
     expect(selectedItem);
+  });
+
+  it('check with custom statement configuration ', async () => {
+    const statementConfigCustom = [
+      {
+        id: 'if',
+        connector: 'and',
+        label: 'if',
+      },
+      {
+        id: 'exclIf',
+        connector: 'or',
+        label: 'excl. if',
+      },
+    ];
+
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputData}
+        statementConfigCustom={statementConfigCustom}
+      />
+    );
+
+    // add one condition
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getByRole('option', { name: 'Continent' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Continent' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'is' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'is' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'Africa' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Africa' }))
+    );
+
+    const selectedItem = screen.getByRole('button', { name: 'Africa' });
+
+    expect(selectedItem);
+
+    //change statement option
+
+    expect(screen.getByRole('button', { name: 'if' }));
+    await act(() =>
+      userEvent.click(screen.getByRole('button', { name: 'if' }))
+    );
+    expect(screen.getByRole('option', { name: 'if (and)' }));
+    expect(screen.getByRole('option', { name: 'excl. if (or)' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'excl. if (or)' }))
+    );
+    expect(screen.getByRole('button', { name: 'excl. if' }));
+  });
+
+  it('check with custom operator configuration ', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputDataForCustomOperator}
+      />
+    );
+
+    // add one condition
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getByRole('option', { name: 'Continent' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Continent' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'has value' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'has value' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'Africa' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Africa' }))
+    );
+
+    const selectedItem = screen.getByRole('button', { name: 'Africa' });
+
+    expect(selectedItem);
+  });
+
+  it('check description tooltip for property', async () => {
+    const inputConfig_ = JSON.parse(JSON.stringify(inputData));
+    inputConfig_.properties[0].description = 'This is a tooltip';
+    const user = userEvent.setup();
+    render(<ConditionBuilder {...defaultProps} inputConfig={inputConfig_} />);
+
+    // add one condition
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getByRole('option', { name: 'Continent' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Continent' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'is' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'is' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'Africa' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Africa' }))
+    );
+
+    const selectedItem = screen.getByRole('button', { name: 'Africa' });
+
+    expect(selectedItem);
+    //hover on property
+    await act(() =>
+      user.hover(document.querySelector(`.${blockClass}__property-field`))
+    );
+    expect(screen.getByText('This is a tooltip')).toBeInTheDocument();
+  });
+
+  it('prevent adding a condition, subgroup and group when onAddItem returns preventAdd true', async () => {
+    const onAddItemWithPreventAdd = jest.fn(() => ({
+      preventAdd: true,
+    }));
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        variant={HIERARCHICAL_VARIANT}
+        inputConfig={inputData}
+        onAddItem={onAddItemWithPreventAdd}
+      />
+    );
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+    //group 1
+    //adding condition 1
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Continent',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'is',
+        })
+      )
+    );
+
+    await act(() => userEvent.click(screen.getByText('Africa')));
+
+    //adding condition 2
+
+    let addButton = document.querySelector(`.${blockClass}__add-button`);
+    expect(addButton);
+    await act(() => userEvent.click(addButton));
+
+    expect(onAddItemWithPreventAdd).toHaveBeenCalled();
+    const container = document.querySelector(`.${blockClass}`);
+    await act(() => userEvent.click(container));
+
+    expect(
+      screen.queryByRole('button', { name: 'and' })
+    ).not.toBeInTheDocument();
+
+    //adding a subgroup
+
+    let addSubGroupButton = document.querySelector(
+      `.${blockClass}__add-condition-sub-group`
+    );
+    expect(addSubGroupButton);
+    await act(() => userEvent.click(addSubGroupButton));
+
+    expect(onAddItemWithPreventAdd).toHaveBeenCalled();
+    await act(() => userEvent.click(container));
+
+    const subGroups = screen.getAllByText('if');
+    expect(subGroups).toHaveLength(1);
+
+    //group 2
+
+    const addGroupButton = document.querySelector(
+      `.${blockClass}__add-condition-group`
+    );
+    expect(addGroupButton);
+    await act(() => userEvent.click(addGroupButton));
+
+    //verify onAddItem callback is triggered
+    expect(onAddItemWithPreventAdd).toHaveBeenCalled();
+    await act(() => userEvent.click(container));
+
+    const groupConnector = screen.queryAllByRole('button', { name: 'or' });
+    expect(groupConnector).toHaveLength(0);
   });
 
   // keyboard navigation tests
@@ -1558,16 +2187,6 @@ describe(componentName, () => {
 
     await act(() => userEvent.keyboard('{ArrowDown}'));
     expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
-    ).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowDown}'));
-    expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="5"]`)
-    ).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowDown}'));
-    expect(
       document.querySelector(`[role="row"][aria-level="3"][aria-posinset="1"]`)
     ).toHaveFocus();
 
@@ -1578,29 +2197,45 @@ describe(componentName, () => {
 
     await act(() => userEvent.keyboard('{ArrowDown}'));
     expect(
-      document.querySelector(`[role="row"][aria-level="3"][aria-posinset="3"]`)
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelectorAll(
+        `[role="row"][aria-level="3"][aria-posinset="1"]`
+      )[1]
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelectorAll(
+        `[role="row"][aria-level="3"][aria-posinset="2"]`
+      )[1]
     ).toHaveFocus();
 
     //reverse row navigation
 
     await act(() => userEvent.keyboard('{ArrowUp}'));
     expect(
+      document.querySelectorAll(
+        `[role="row"][aria-level="3"][aria-posinset="1"]`
+      )[1]
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
       document.querySelector(`[role="row"][aria-level="3"][aria-posinset="2"]`)
     ).toHaveFocus();
 
     await act(() => userEvent.keyboard('{ArrowUp}'));
     expect(
       document.querySelector(`[role="row"][aria-level="3"][aria-posinset="1"]`)
-    ).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowUp}'));
-    expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="5"]`)
-    ).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowUp}'));
-    expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
     ).toHaveFocus();
 
     await act(() => userEvent.keyboard('{ArrowUp}'));
@@ -1624,14 +2259,6 @@ describe(componentName, () => {
     ).toHaveFocus();
 
     await act(() => userEvent.keyboard('{ArrowRight}'));
-    expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
-    ).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowRight}'));
-    expect(screen.getAllByRole('button', { name: 'Region' })[0]).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowLeft}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
     ).toHaveFocus();

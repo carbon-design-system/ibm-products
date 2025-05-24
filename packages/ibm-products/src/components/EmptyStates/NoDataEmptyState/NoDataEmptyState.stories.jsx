@@ -26,12 +26,8 @@ export default {
         <StoryDocsPage
           altGuidelinesHref={[
             {
-              href: 'https://carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Error pattern usage guidelines',
-            },
-            {
               href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon empty pattern usage guidelines',
+              label: 'Carbon Empty pattern usage guidelines',
             },
           ]}
         />
@@ -41,6 +37,7 @@ export default {
 };
 
 const defaultStoryProps = {
+  headingAs: 'h3',
   title: 'Empty state title',
   subtitle: 'Description text explaining why this section is empty.',
   illustrationDescription: 'Test alt text',

@@ -8,7 +8,7 @@
 import React from 'react';
 import { HTTPErrorOther } from '.';
 import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
-import { Annotation } from '../../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../../.storybook/Annotation';
 import styles from '../_storybook-styles.scss?inline';
 
 const storyClass = 'http-error-stories';
@@ -45,8 +45,11 @@ const Template = (args) => {
           version. Please migrate to{' '}
           <a href="https://ibm-products.carbondesignsystem.com/?path=/docs/ibm-products-patterns-full-page-error-fullpageerror--docs">
             FullPageError
-          </a>
-          .
+          </a>{' '}
+          by running{' '}
+          <code>
+            npx @carbon/upgrade migrate ibm-products-update-http-errors --write
+          </code>
         </div>
       }
     >

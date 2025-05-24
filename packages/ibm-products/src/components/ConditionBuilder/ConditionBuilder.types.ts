@@ -4,8 +4,12 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { TextAreaProps, TextInputProps } from '@carbon/react';
-import { CarbonIconType } from '@carbon/react/icons';
+import {
+  TextAreaProps,
+  TextInputProps,
+  type DatePickerProps,
+} from '@carbon/react';
+import { CarbonIconType } from '@carbon/icons-react';
 import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
 import {
   Dispatch,
@@ -56,30 +60,32 @@ export type Operators = {
   date: DateOperator;
 };
 
+type Item = { id: string; label: string };
+
+export type option = Item & { icon?: CarbonIconType };
+
 export type PropertyConfigOption = {
   type: 'option';
   config?: {
-    options?: {
-      id: string;
-      label: string;
-      icon?: CarbonIconType;
-    }[];
+    options?: option[];
+    operators?: (Item & { isMultiSelect?: boolean })[];
   };
 };
 
 export interface PropertyConfigText {
   type: 'text';
-  config: TextInputProps;
+  config: TextInputProps & { operators?: Item[] };
 }
 
 export interface PropertyConfigTextArea {
   type: 'textarea';
-  config: TextAreaProps;
+  config: TextAreaProps & { operators?: Item[] };
 }
 
 export interface PropertyConfigNumber {
   type: 'number';
   config: {
+    operators?: Item[];
     min?: number;
     max?: number;
     step?: number;
@@ -89,60 +95,41 @@ export interface PropertyConfigNumber {
 
 export type PropertyConfigDate = {
   type: 'date';
-  config: object;
+  config: DatePickerProps & { operators?: Item[] };
 };
 
 export type PropertyConfigTime = {
   type: 'time';
-  config: {
-    timeZones: string[];
-  };
+  config: { operators?: Item[]; timeZones: string[] };
 };
 
 export type PropertyConfigCustom = {
   type: 'custom';
   config: {
     component: React.ComponentType<any>;
-    operators: {
-      label: string;
-      id: string;
-    }[];
+    operators?: Item[];
+    valueFormatter?: (value: string) => string;
   };
 };
 
-export type PropertyConfig = {
-  option: PropertyConfigOption;
-  text: PropertyConfigText;
-  textarea: PropertyConfigTextArea;
-  number: PropertyConfigNumber;
-  date: PropertyConfigDate;
-  time: PropertyConfigTime;
-  custom: PropertyConfigCustom;
-};
-
-export type Property = {
-  id: string;
-  label: string;
+export type ConfigType =
+  | PropertyConfigOption['config']
+  | PropertyConfigTextArea['config']
+  | PropertyConfigText['config']
+  | PropertyConfigNumber['config']
+  | PropertyConfigDate['config']
+  | PropertyConfigTime['config']
+  | PropertyConfigCustom['config'];
+export type Property = Item & {
   icon?: CarbonIconType;
-} & (
-  | PropertyConfig['option']
-  | PropertyConfig['text']
-  | PropertyConfig['number']
-  | PropertyConfig['date']
-  | PropertyConfig['textarea']
-  | PropertyConfig['time']
-  | PropertyConfig['custom']
-);
+  description?: string;
+  type?: any;
+  config?: any;
+} & ConfigType;
 
-export type inputConfig = {
-  properties: Property[];
-};
+export type inputConfig = { properties: Property[] };
 
-export type Option = {
-  id: string;
-  label: string;
-  icon?: CarbonIconType;
-};
+export type Option = Item & { icon?: CarbonIconType };
 export type Condition = {
   property?: string;
   operator?: Operator | '' | 'INVALID';
@@ -163,13 +150,71 @@ export type ConditionBuilderState = {
   operator?: LogicalOperator;
 };
 
-export type Action = {
-  id?: string | number;
-  label?: string;
-};
+export type Action = { id?: string | number; label?: string };
 
 export type variantsType = 'Non-Hierarchical' | 'Hierarchical';
 
+export type statementConfig = Item & {
+  connector: 'and' | 'or';
+  secondaryLabel?: string;
+};
+type AddItemType = 'condition' | 'subgroup' | 'group';
+type AddItemConfig = {
+  type: AddItemType;
+  state: ConditionBuilderState;
+  group?: ConditionGroup;
+};
+
+type ConditionBuilderTextKeys =
+  | 'ifText'
+  | 'unlessText'
+  | 'excl_if'
+  | 'and'
+  | 'or'
+  | 'is'
+  | 'ifAll'
+  | 'ifAny'
+  | 'unlessAll'
+  | 'unlessAny'
+  | 'greater'
+  | 'greaterEqual'
+  | 'lower'
+  | 'lowerEqual'
+  | 'startsWith'
+  | 'endsWith'
+  | 'contains'
+  | 'oneOf'
+  | 'before'
+  | 'after'
+  | 'between'
+  | 'addConditionText'
+  | 'addConditionGroupText'
+  | 'addSubgroupText'
+  | 'conditionText'
+  | 'propertyText'
+  | 'operatorText'
+  | 'valueText'
+  | 'connectorText'
+  | 'conditionRowText'
+  | 'conditionRowGroupText'
+  | 'removeConditionText'
+  | 'addConditionRowText'
+  | 'startText'
+  | 'endText'
+  | 'clearSearchText'
+  | 'actionsText'
+  | 'then'
+  | 'removeActionText'
+  | 'addActionText'
+  | 'invalidText'
+  | 'invalidNumberWarnText'
+  | 'conditionBuilderText'
+  | 'actionSectionText'
+  | 'conditionHeadingText'
+  | 'addPropertyText'
+  | 'addOperatorText'
+  | 'addValueText'
+  | 'conditionBuilderHierarchicalText';
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
   initialState?: InitialState;
@@ -184,7 +229,9 @@ export type ConditionBuilderProps = {
   popOverSearchThreshold: number;
   startConditionLabel?: string;
   variant?: 'Non-Hierarchical' | 'Hierarchical';
-  translateWithId: (id: string) => string;
+  translateWithId?: (id: ConditionBuilderTextKeys) => string;
+  statementConfigCustom: statementConfig[];
+  onAddItem?: (config: AddItemConfig) => { preventAdd: boolean };
 };
 
 export type InitialState = {
@@ -201,7 +248,8 @@ export interface ConditionBuilderContextInputProps extends PropsWithChildren {
     condition: Condition
   ) => Promise<Option[]>;
   variant?: string;
-  translateWithId?: (id: string) => string;
+  translateWithId?: (id: ConditionBuilderTextKeys) => string;
+  statementConfigCustom?: statementConfig[];
 
   conditionBuilderRef?: ForwardedRef<HTMLDivElement>;
 }
@@ -211,4 +259,5 @@ export type ConditionBuilderContextProps = {
   setRootState?: Dispatch<SetStateAction<ConditionBuilderState>>;
   actionState?: Action[];
   setActionState?: Dispatch<SetStateAction<Action[]>>;
+  onAddItem?: (config: AddItemConfig) => { preventAdd: boolean };
 } & ConditionBuilderContextInputProps;

@@ -8,13 +8,16 @@
 // Carbon and package components we use.
 import { Button, ButtonProps } from '@carbon/react';
 import {
-  CloseIconDescriptionTypes,
   TearsheetShell,
   tearsheetShellWideProps as blocked,
-  tearsheetHasCloseIcon,
 } from './TearsheetShell';
 // Import portions of React that are needed.
-import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  RefObject,
+} from 'react';
 import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 
 import { ActionSet } from '../ActionSet';
@@ -23,8 +26,9 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { portalType } from './TearsheetShell';
+import { TearsheetAction } from './Tearsheet';
 
-interface TearsheetNarrowBaseProps extends PropsWithChildren {
+export interface TearsheetNarrowProps extends PropsWithChildren {
   /**
    * The navigation actions to be shown as buttons in the action area at the
    * bottom of the tearsheet. Each action is specified as an object with
@@ -38,7 +42,7 @@ interface TearsheetNarrowBaseProps extends PropsWithChildren {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps<React.ElementType>[];
+  actions?: TearsheetAction[];
 
   /**
    * The aria-label for the tearsheet, which is optional.
@@ -50,6 +54,12 @@ interface TearsheetNarrowBaseProps extends PropsWithChildren {
    * An optional class or classes to be added to the outermost element.
    */
   className?: string;
+
+  /**
+   * The accessibility title for the close icon (if shown).
+   *
+   */
+  closeIconDescription?: string;
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -70,6 +80,11 @@ interface TearsheetNarrowBaseProps extends PropsWithChildren {
    * to page of a multi-page task).
    */
   label?: ReactNode;
+
+  /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
 
   /**
    * An optional handler that is called when the user closes the tearsheet (by
@@ -117,9 +132,6 @@ interface TearsheetNarrowBaseProps extends PropsWithChildren {
    */
   verticalPosition?: 'normal' | 'lower';
 }
-
-export type TearsheetNarrowProps = TearsheetNarrowBaseProps &
-  CloseIconDescriptionTypes;
 
 const componentName = 'TearsheetNarrow';
 
@@ -236,14 +248,8 @@ TearsheetNarrow.propTypes = {
   /**
    * The accessibility title for the close icon (if shown).
    *
-   * **Note:** This prop is only required if a close icon is shown, i.e. if
-   * there are a no navigation actions and/or hasCloseIcon is true.
    */
-  /**@ts-ignore */
-  closeIconDescription: PropTypes.string.isRequired.if(
-    ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
-  ),
-
+  closeIconDescription: PropTypes.string,
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
    */
@@ -255,7 +261,6 @@ TearsheetNarrow.propTypes = {
    * the tearsheet is read-only or has no navigation actions (sometimes called
    * a "passive tearsheet").
    */
-  /**@ts-ignore*/
   hasCloseIcon: PropTypes.bool,
 
   /**

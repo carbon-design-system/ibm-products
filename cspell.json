@@ -67,6 +67,7 @@
     "actionbar",
     "apikey",
     "apikeymodal",
+    "autocapture",
     "autodocs",
     "automerge",
     "beingclosed",
@@ -199,6 +200,8 @@
     "unauthorizedemptystate",
     "userprofileimage",
     "uuidv",
-    "webfonts"
+    "webfonts",
+    "useravatar",
+    "rendericon"
   ]
 }

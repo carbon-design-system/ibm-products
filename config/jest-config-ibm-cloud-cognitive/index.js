@@ -14,6 +14,10 @@ module.exports = {
     '!**/*.stories.{js,jsx}',
     '!**/*.story.{js,jsx}',
     '!**/*.docs-page.{js,jsx}',
+    '!**/src/globals/decorators/*',
+    '!packages/ibm-products/src/globals/js/utils/props-helper.js', // This file contains utilities to help with prop-types which we're moving away from now that we've introduced TypeScript support
+    '!packages/ibm-products/src/globals/js/utils/story-helper.js', // Contains bespoke storybook utilities that we want to move away from
+    '!packages/ibm-products/src/globals/js/utils/StoryDocsPage.js', // Contains bespoke storybook utilities that we want to move away from
   ],
   coveragePathIgnorePatterns: ['preview-components'],
   resolver: require.resolve('./setup/resolver.js'),
@@ -33,9 +37,9 @@ module.exports = {
   setupFiles: [require.resolve('./setup/setupFiles.js')],
   setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv.js')],
   testMatch: [
-    '<rootDir>/**/__tests__/**/*.js?(x)',
-    '<rootDir>/**/*.(spec|test).js?(x)',
-    '<rootDir>/**/*-(spec|test).js?(x)',
+    '<rootDir>/**/__tests__/**/*.(js|jsx|ts|tsx)?(x)',
+    '<rootDir>/**/*.(spec|test).(js|jsx|ts|tsx)?(x)',
+    '<rootDir>/**/*-(spec|test).(js|jsx|ts|tsx)?(x)',
   ],
   transform: {
     '^.+\\.(mjs|cjs|js|jsx|ts|tsx)$': require.resolve(

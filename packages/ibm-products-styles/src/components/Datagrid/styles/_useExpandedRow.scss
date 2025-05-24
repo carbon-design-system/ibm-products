@@ -11,8 +11,8 @@
 @use './variables';
 
 @mixin shared-pseudo-styles() {
-  height: 1px;
   background-color: $layer-accent;
+  block-size: 1px;
   content: '';
 }
 
@@ -24,36 +24,36 @@
 .#{variables.$block-class}
   .#{variables.$block-class}__expanded-row-content::before {
   position: absolute;
-  /* stylelint-disable-next-line carbon/layout-token-use */
-  top: -1px;
-  right: 0;
-  width: calc(100% - #{$spacing-09});
+  inline-size: calc(100% - #{$spacing-09});
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: -1px;
+  inset-inline-end: 0;
   @include shared-pseudo-styles();
 }
 
 .#{variables.$block-class}
   .#{variables.$block-class}__expanded-row-content::after {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  inline-size: 100%;
+  inset-block-end: 0;
+  inset-inline-start: 0;
   @include shared-pseudo-styles();
 }
 
 .#{variables.$block-class}__carbon-row.#{variables.$block-class}__carbon-row-expandable
   .#{variables.$block-class}__cell.#{variables.$block-class}__expandable-row-cell {
   padding: $spacing-03;
-  padding-right: 0;
+  padding-inline-end: 0;
 }
 
 .#{variables.$block-class}__row-expander.#{c4p-settings.$carbon-prefix}--btn {
   display: flex;
-  width: $spacing-07;
-  height: $spacing-07;
-  min-height: $spacing-07;
   align-items: center;
   justify-content: center;
   padding: 0;
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
+  min-block-size: $spacing-07;
   .#{variables.$block-class}__row-expander--icon {
     fill: $layer-selected-inverse;
   }
@@ -68,8 +68,8 @@
 .#{variables.$block-class}
   .#{variables.$block-class}__expandable-row--hover
   td {
-  border-top: none;
   background: $layer-hover;
+  border-block-start: none;
 }
 
 .#{variables.$block-class}
@@ -91,7 +91,7 @@
   .#{c4p-settings.$carbon-prefix}--data-table
   .#{variables.$block-class}__carbon-row-expanded:hover
   td:not(.#{variables.$block-class}__expandable-row-cell) {
-  border-bottom: 1px solid $border-subtle-02;
+  border-block-end: 1px solid $border-subtle-02;
 }
 
 .#{variables.$block-class}

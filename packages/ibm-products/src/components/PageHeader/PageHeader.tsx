@@ -15,13 +15,16 @@ import {
   usePrefix,
   ButtonProps,
   PopoverAlignment,
+  DefinitionTooltip,
 } from '@carbon/react';
 import { TagProps } from '@carbon/react/lib/components/Tag/Tag';
 import React, {
   ForwardedRef,
+  JSX,
   MutableRefObject,
   PropsWithChildren,
   ReactNode,
+  RefObject,
   useEffect,
   useRef,
   useState,
@@ -38,7 +41,11 @@ import {
   deprecateProp,
   prepareProps,
 } from '../../global/js/utils/props-helper';
-import { useNearestScroll, useWindowResize } from '../../global/js/hooks';
+import {
+  useIsomorphicEffect,
+  useNearestScroll,
+  useWindowResize,
+} from '../../global/js/hooks';
 
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
@@ -51,6 +58,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import { useOverflowStringHeight } from '../../global/js/hooks/useOverflowString';
 
 const componentName = 'PageHeader';
 
@@ -64,10 +72,10 @@ const defaults = {
   breadcrumbOverflowTooltipAlign: 'right',
 };
 
-interface ActionBarItem extends ButtonProps {
+interface ActionBarItem extends ButtonProps<'button'> {
   iconDescription: string;
   onClick: () => void;
-  renderIcon: ReactNode;
+  renderIcon: React.ElementType;
 }
 
 type Size = 'xl';
@@ -419,6 +427,10 @@ interface Metrics {
   navigationRowHeight?: number;
 }
 
+interface HTMLElementStyled extends HTMLElement {
+  style: CSSStyleDeclaration;
+}
+
 export let PageHeader = React.forwardRef(
   (
     {
@@ -454,7 +466,7 @@ export let PageHeader = React.forwardRef(
       tags,
       title,
       withoutBackground,
-      breadcrumbOverflowTooltipAlign = defaults.breadcrumbOverflowTooltipAlign,
+      breadcrumbOverflowTooltipAlign = defaults.breadcrumbOverflowTooltipAlign as PopoverAlignment,
 
       // Collect any other property values passed in.
       ...rest
@@ -474,8 +486,9 @@ export let PageHeader = React.forwardRef(
     });
 
     // refs
-    const localHeaderRef = useRef(null);
-    const headerRef = ref || localHeaderRef;
+    const localHeaderRef = useRef<HTMLDivElement | null>(null);
+    const headerRef = (ref ||
+      localHeaderRef) as MutableRefObject<HTMLElementStyled>;
     const sizingContainerRef: MutableRefObject<HTMLDivElement | null> =
       useRef(null);
     const offsetTopMeasuringRef = useRef(null);
@@ -538,22 +551,24 @@ export let PageHeader = React.forwardRef(
 
     // handlers
     const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
-      let overflowMenuWidth = 0;
+      if (minWidth !== actionBarMinWidth || maxWidth !== actionBarMaxWidth) {
+        let overflowMenuWidth = 0;
 
-      const overflowMenu = overflowMenuRef?.current?.querySelector(
-        `.${prefix}--overflow-menu`
-      );
+        const overflowMenu = overflowMenuRef?.current?.querySelector(
+          `.${prefix}--overflow-menu`
+        );
 
-      if (overflowMenu) {
-        overflowMenuWidth = (overflowMenu as HTMLDivElement).offsetWidth;
+        if (overflowMenu) {
+          overflowMenuWidth = (overflowMenu as HTMLDivElement).offsetWidth;
+        }
+
+        /* don't know how to test resize */
+        /* istanbul ignore next */
+        setActionBarMaxWidth(maxWidth + overflowMenuWidth);
+        /* don't know how to test resize */
+        /* istanbul ignore next */
+        setActionBarMinWidth(minWidth);
       }
-
-      /* don't know how to test resize */
-      /* istanbul ignore next */
-      setActionBarMaxWidth(maxWidth + overflowMenuWidth);
-      /* don't know how to test resize */
-      /* istanbul ignore next */
-      setActionBarMinWidth(minWidth);
     };
 
     const handlePageActionWidthChange = ({ minWidth, maxWidth }) => {
@@ -600,14 +615,15 @@ export let PageHeader = React.forwardRef(
 
     useEffect(() => {
       // Determine the location of the pageAction buttons
-      /* istanbul ignore next */
-      if (metrics?.titleRowSpaceAbove && metrics?.pageActionsSpaceAbove) {
-        setPageActionsInBreadcrumbRow(
-          collapseTitle ||
-            (hasActionBar && scrollYValue > metrics?.titleRowSpaceAbove) ||
-            (widthIsNarrow && scrollYValue > metrics?.pageActionsSpaceAbove)
-        );
-      }
+      setPageActionsInBreadcrumbRow(
+        collapseTitle ||
+          (hasActionBar &&
+            !!metrics?.titleRowSpaceAbove &&
+            scrollYValue > metrics?.titleRowSpaceAbove) ||
+          (widthIsNarrow &&
+            !!metrics?.pageActionsSpaceAbove &&
+            scrollYValue > metrics?.pageActionsSpaceAbove)
+      );
     }, [
       hasActionBar,
       metrics.breadcrumbRowSpaceBelow,
@@ -901,12 +917,33 @@ export let PageHeader = React.forwardRef(
 
     const displayedBreadcrumbs = getBreadcrumbs();
 
+    useIsomorphicEffect(() => {
+      Object.keys(pageHeaderStyles).forEach((key) => {
+        // check if style is a css var
+        if (key.startsWith('--')) {
+          headerRef.current.style.setProperty(key, pageHeaderStyles[key]);
+        } else {
+          headerRef.current.style[key] = pageHeaderStyles[key];
+        }
+      });
+    }, [headerRef, pageHeaderStyles]);
+
+    const subtitleRef = useRef<HTMLSpanElement>(null);
+    const isOverflowing = useOverflowStringHeight(
+      subtitleRef as RefObject<HTMLElement>
+    );
+    const subtitleContent = (
+      <span ref={subtitleRef} className={`${blockClass}__subtitle-text`}>
+        {subtitle}
+      </span>
+    );
+
     return (
       <>
         <div
           className={`${blockClass}--offset-top-measuring-element`}
           ref={offsetTopMeasuringRef}
-        ></div>
+        />
         <section
           {...rest}
           className={cx([
@@ -916,9 +953,9 @@ export let PageHeader = React.forwardRef(
             {
               [`${blockClass}--has-navigation`]: navigation || tags,
               [`${blockClass}--has-navigation-tags-only`]: !navigation && tags,
+              [`${blockClass}--without-background`]: withoutBackground,
             },
           ])}
-          style={pageHeaderStyles}
           ref={headerRef}
           {...getDevtoolsProps(componentName)}
         >
@@ -941,6 +978,8 @@ export let PageHeader = React.forwardRef(
                       hasActionBar || widthIsNarrow,
                     [`${blockClass}__has-page-actions-without-action-bar`]:
                       !hasActionBar && !widthIsNarrow && pageActions,
+                    [`${blockClass}__has-page-actions-with-title-collapsed`]:
+                      collapseTitle && pageActions,
                   })}
                 >
                   <div className={`${blockClass}__breadcrumb-row--container`}>
@@ -999,7 +1038,7 @@ export let PageHeader = React.forwardRef(
                             />
                           </>
                         ) : (
-                          widthIsNarrow &&
+                          (widthIsNarrow || pageActions) &&
                           thePageActions(true, pageActionsInBreadcrumbRow)
                         )}
                       </div>
@@ -1035,13 +1074,22 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {subtitle ? (
+              {subtitle && (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
-                    {subtitle}
+                    {isOverflowing ? (
+                      <DefinitionTooltip
+                        definition={subtitle}
+                        className={`${blockClass}__subtitle-tooltip`}
+                      >
+                        {subtitleContent}
+                      </DefinitionTooltip>
+                    ) : (
+                      subtitleContent
+                    )}
                   </Column>
                 </Row>
-              ) : null}
+              )}
 
               {children ? (
                 <Row className={`${blockClass}__available-row`}>

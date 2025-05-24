@@ -20,8 +20,8 @@ import React, {
 } from 'react';
 
 import PropTypes from 'prop-types';
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 import cx from 'classnames';
+import { Section, Heading } from '@carbon/react';
 import { getComponentText } from './utils';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
@@ -44,11 +44,6 @@ const defaults = {
   onClick: () => {},
   onClose: () => {},
   title: 'Use case-specific heading',
-};
-
-type MediaType = {
-  render?: () => ReactNode;
-  filePaths?: string[];
 };
 
 export interface InlineTipProps {
@@ -88,17 +83,14 @@ export interface InlineTipProps {
    */
   expandButtonLabel?: string;
   /**
-   * The object describing an image in one of two shapes.
-   * - If a single media element is required, use `{render}`.
-   * - If a stepped animation is required, use `{filePaths}`.
-   *
-   * Enabling `media` disables the `collapsible` feature.
+   * Optional prop to render any media like images or any animated media.
    */
-  media?: MediaType;
+  renderMedia?: () => ReactNode;
   /**
    * Set to `true` to arrange the information in a format
    * that is easier to read in a limited space.
    */
+
   narrow?: boolean;
   /**
    * Function to call when the tertiary button is clicked.
@@ -142,7 +134,7 @@ export let InlineTip = React.forwardRef(
       collapsible = defaults.collapsible,
       collapseButtonLabel = defaults.collapseButtonLabel,
       expandButtonLabel = defaults.expandButtonLabel,
-      media,
+      renderMedia,
       narrow = defaults.narrow,
       onClick,
       onClose,
@@ -162,7 +154,7 @@ export let InlineTip = React.forwardRef(
     );
     let childrenToRender = children;
 
-    if (!media && collapsible && isCollapsed) {
+    if (!renderMedia && collapsible && isCollapsed) {
       childrenToRender = (
         <p className={`${blockClass}__preview-text`}>{previewText}</p>
       );
@@ -174,7 +166,7 @@ export let InlineTip = React.forwardRef(
     }, [collapsible]);
 
     return (
-      <div
+      <Section
         {...rest}
         aria-labelledby={labelId}
         className={cx(
@@ -182,7 +174,7 @@ export let InlineTip = React.forwardRef(
           className,
           collapsible && `${blockClass}__collapsible`,
           isCollapsed && `${blockClass}__collapsible-collapsed`,
-          media && `${blockClass}__has-media`,
+          renderMedia && `${blockClass}__has-media`,
           [narrow ? `${blockClass}__narrow` : `${blockClass}__wide`],
           withLeftGutter && !narrow && `${blockClass}__with-left-gutter`
         )}
@@ -203,16 +195,16 @@ export let InlineTip = React.forwardRef(
         </div>
 
         {/* Hide the idea icon if is narrow and showing an image */}
-        {((!media && narrow) || !narrow) && (
+        {((!renderMedia && narrow) || !narrow) && (
           <div className={`${blockClass}__icon-idea`} tabIndex={-1}>
             <Idea size={16} />
           </div>
         )}
 
         <div className={`${blockClass}__content`}>
-          <h6 id={labelId} className={`${blockClass}__title`}>
+          <Heading id={labelId} className={`${blockClass}__title`}>
             {title}
-          </h6>
+          </Heading>
           <section className={`${blockClass}__body`}>
             {childrenToRender}
             {/* Only show the secondary button when body is showing expanded content */}
@@ -224,7 +216,7 @@ export let InlineTip = React.forwardRef(
           {(collapsible || tertiaryButtonLabel) && (
             <footer className={`${blockClass}__footer`}>
               {/* Disable the collapsible feature if an image is visible */}
-              {collapsible && !media && (
+              {collapsible && !renderMedia && (
                 <Button
                   className={`${blockClass}__toggle-btn`}
                   kind="ghost"
@@ -250,16 +242,10 @@ export let InlineTip = React.forwardRef(
             </footer>
           )}
         </div>
-        {media &&
-          (media.render ? (
-            <div className={`${blockClass}__media`}>{media.render()}</div>
-          ) : (
-            <SteppedAnimatedMedia
-              className={`${blockClass}__media`}
-              filePaths={media.filePaths}
-            />
-          ))}
-      </div>
+        {renderMedia && (
+          <div className={`${blockClass}__media`}>{renderMedia()}</div>
+        )}
+      </Section>
     );
   }
 );
@@ -303,22 +289,7 @@ InlineTip.propTypes = {
    * This button is not visible if `media` is specified.
    */
   expandButtonLabel: PropTypes.string,
-  /**
-   * The object describing an image in one of two shapes.
-   * - If a single media element is required, use `{render}`.
-   * - If a stepped animation is required, use `{filePaths}`.
-   *
-   * Enabling `media` disables the `collapsible` feature.
-   */
-  /**@ts-ignore*/
-  media: PropTypes.oneOfType([
-    PropTypes.shape({
-      render: PropTypes.func,
-    }),
-    PropTypes.shape({
-      filePaths: PropTypes.string,
-    }),
-  ]),
+
   /**
    * Set to `true` to arrange the information in a format
    * that is easier to read in a limited space.
@@ -332,6 +303,10 @@ InlineTip.propTypes = {
    * Function to call when the InlineTip is closed via the "X" button.
    */
   onClose: PropTypes.func,
+  /**
+   * Optional prop to render any media like images or animated media.
+   */
+  renderMedia: PropTypes.func,
   /**
    * Defining the label will show a the tertiary button with the crossroads icon.
    * You will still need to define the `onClose` method to trigger a callback.

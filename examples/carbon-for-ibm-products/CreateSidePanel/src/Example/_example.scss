@@ -1,12 +1,12 @@
 @use '@carbon/ibm-products/scss/config';
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 #ibm-products-page-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  block-size: 100vh;
 }
 
 $block-class: #{config.$pkg-prefix}--create-side-panel;

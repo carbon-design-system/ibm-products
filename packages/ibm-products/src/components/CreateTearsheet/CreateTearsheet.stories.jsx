@@ -5,20 +5,57 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { slugArgTypes } from '../../global/js/story-parts/slug';
+import React from 'react';
+import {
+  decoratorArgTypes,
+  slugArgTypes,
+} from '../../global/js/story-parts/decorator';
 import styles from './_storybook-styles.scss?inline';
 import { CreateTearsheet } from './CreateTearsheet';
 import DocsPage from './CreateTearsheet.docs-page';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 import { MultiStepWithStepInErrorState } from './preview-components/MultiStepWithStepInErrorState';
+import { StringFormatter } from '../StringFormatter/StringFormatter.js';
 
 export default {
   title: 'IBM Products/Patterns/Create flows/CreateTearsheet',
   component: CreateTearsheet,
   tags: ['autodocs'],
   argTypes: {
-    description: { control: { type: 'text' } },
+    description: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'With plain String',
+          1: 'With StringFormatter and 1 line',
+          2: 'With StringFormatter and 2 lines',
+        },
+        default: 0,
+      },
+      description:
+        'A description of the flow, displayed in the header area of the tearsheet.\n Note: `StringFormatter` can be passed as a React node to apply custom text formatting, including ellipsis truncation and a definition tooltip when the content is too long.',
+      options: [0, 1, 2],
+      mapping: {
+        0: 'Specify details for the new topic you want to create',
+        1: (
+          <StringFormatter
+            lines={1}
+            truncate={true}
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            tooltipDirection="bottom"
+          />
+        ),
+        2: (
+          <StringFormatter
+            lines={2}
+            truncate={true}
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            tooltipDirection="bottom"
+          />
+        ),
+      },
+    },
     label: { control: { type: 'text' } },
     title: { control: { type: 'text' } },
     onClose: { control: { disable: true } },
@@ -26,6 +63,7 @@ export default {
     open: { control: { disable: true } },
     children: { control: { disable: true } },
     ...slugArgTypes(),
+    ...decoratorArgTypes(),
   },
   parameters: {
     styles,
@@ -35,7 +73,7 @@ export default {
 
 const createTearsheetProps = {
   title: 'Create topic',
-  description: 'Specify details for the new topic you want to create',
+  description: 0,
   submitButtonText: 'Create',
   cancelButtonText: 'Cancel',
   backButtonText: 'Back',
@@ -43,7 +81,6 @@ const createTearsheetProps = {
   className: 'test-class-name',
   label: '',
   influencerWidth: 'narrow',
-  firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
 export const multiStepTearsheet = MultiStepTearsheet.bind({});

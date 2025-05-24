@@ -34,10 +34,11 @@ const useOnRowClick = (hooks: Hooks) => {
           closestRow.classList.add(`${carbon.prefix}--data-table--selected`);
 
           if (!withSelectRows) {
-            instance.selectedFlatRows &&
+            if (instance.selectedFlatRows) {
               instance.selectedFlatRows.map((toggleRow) =>
-                toggleRow.toggleRowSelected(false)
+                toggleRow.toggleRowSelected?.(false)
               );
+            }
             toggleRowSelected(id, true);
           }
         }

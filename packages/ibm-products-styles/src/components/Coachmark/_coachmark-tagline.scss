@@ -6,17 +6,17 @@
 //
 
 /* stylelint-disable max-nesting-depth */
-/* stylelint-disable carbon/theme-token-use */
+/* stylelint-disable carbon/theme-use */
 /* stylelint-disable declaration-no-important */
 
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/react/scss/motion' as *;
+@use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/react/scss/colors' as *;
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/button/tokens' as *;
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
@@ -27,16 +27,16 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
 .#{$block-class} {
   position: fixed;
   z-index: 1000;
-  right: $spacing-05;
-  bottom: 0;
   display: grid;
   overflow: hidden;
-  width: 18rem;
   border-radius: $spacing-01 $spacing-01 0 0;
   background: $purple-70;
   background-image: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
   color: $white-0 !important;
   grid-template-columns: [cta-col] auto [close-btn-col] $spacing-08;
+  inline-size: 18rem;
+  inset-block-end: 0;
+  inset-inline-end: $spacing-05;
   opacity: 1;
   // stylelint-disable-next-line carbon/motion-duration-use
   transition: opacity $duration-moderate-02 motion(exit, productive) 300ms;
@@ -87,11 +87,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
     background: transparent;
     color: $white-0 !important;
     grid-template-columns: [icon-col] $spacing-07 [body-col] auto;
-    text-align: left;
+    text-align: start;
     @include type.type-style('body-short-01');
 
     &:focus {
-      box-shadow: inset 0 0 0 3px $purple-70, inset 0 0 0 $spacing-02 $white-0;
+      box-shadow:
+        inset 0 0 0 3px $purple-70,
+        inset 0 0 0 $spacing-02 $white-0;
       outline: 1px solid transparent;
     }
 
@@ -105,18 +107,18 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
   }
 
   &--close-btn-container {
-    width: $spacing-07;
-    height: $spacing-07;
-    margin-left: auto;
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+    margin-inline-start: auto;
   }
 
   &--close-btn {
-    width: $spacing-07;
-    height: $spacing-07;
     border-color: transparent !important;
     border-radius: 0;
-    margin-left: auto !important;
+    block-size: $spacing-07;
     color: $white-0;
+    inline-size: $spacing-07;
+    margin-inline-start: auto !important;
     outline: 1px solid transparent;
 
     &:active {
@@ -124,7 +126,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
     }
 
     &:focus {
-      box-shadow: inset 0 0 0 1px $background-inverse,
+      box-shadow:
+        inset 0 0 0 1px $background-inverse,
         inset 0 0 0 $spacing-01 $white-0 !important;
     }
 

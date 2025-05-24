@@ -31,18 +31,6 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
-  beforeEach(() => {
-    // InlineTip imports SteppedAnimatedMedia, which imports the `lottie-web` package.
-    // We use `lottie-web` to create complex, animated <svg> elements from json files.
-
-    // Lottie uses the browser > DOM > <canvas> to do this, but the test
-    // environment uses `jsdom` instead, and <canvas> is not available.
-    // So, we need to use jest-canvas-mock to mock the <canvas>.
-
-    // See also the comment in `setupFilesAfterEnv.js @ beforeEach()`.
-    setupJestCanvasMock();
-  });
-
   it('renders a component InlineTip', () => {
     render(<InlineTip title={title}>{children}</InlineTip>);
     expect(screen.getByRole('complementary')).toHaveClass(blockClass);
@@ -143,7 +131,7 @@ describe(componentName, () => {
     render(
       <InlineTip
         title={title}
-        media={{ render: () => <img alt="img" src={InlineTipImage} /> }}
+        renderMedia={() => <img alt="img" src={InlineTipImage} />}
       >
         {children}
       </InlineTip>

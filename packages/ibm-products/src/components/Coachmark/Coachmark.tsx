@@ -24,7 +24,7 @@ import { createPortal } from 'react-dom';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import { throttle } from 'lodash';
+import { throttle } from '../../global/js/utils/throttle';
 import { Popover, PopoverAlignment, PopoverContent } from '@carbon/react';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 
@@ -38,6 +38,7 @@ const defaults = {
   onClose: () => {},
   overlayKind: 'tooltip',
   theme: 'light',
+  isOpenByDefault: false,
 };
 
 export interface CoachmarkProps {
@@ -113,6 +114,11 @@ export interface CoachmarkProps {
    * Determines the theme of the component.
    */
   theme?: 'light' | 'dark';
+  /**
+   * Determines if the coachmark is open by default.
+   * Does nothing if `overlayKind=stacked`.
+   */
+  isOpenByDefault?: boolean;
 }
 
 /**
@@ -136,7 +142,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       portalTarget,
       target,
       theme = defaults.theme,
-
+      isOpenByDefault = defaults.isOpenByDefault,
       // Collect any other property values passed in.
       ...rest
     },
@@ -144,7 +150,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
   ) => {
     const isBeacon = overlayKind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isStacked = overlayKind === COACHMARK_OVERLAY_KIND.STACKED;
-    const [isOpen, setIsOpen] = useState(isStacked);
+    const [isOpen, setIsOpen] = useState(isStacked || isOpenByDefault);
     const [shouldResetPosition, setShouldResetPosition] = useState(false);
     const [targetRect, setTargetRect] = useState();
     const [targetOffset, setTargetOffset] = useState({ x: 0, y: 0 });
@@ -158,8 +164,8 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
 
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget
-        ? document?.querySelector(portalTarget) ??
-          document?.querySelector('body')
+        ? (document?.querySelector(portalTarget) ??
+          document?.querySelector('body'))
         : document?.querySelector('body');
     }, [portalTarget]);
 
@@ -395,6 +401,12 @@ Coachmark.propTypes = {
    * Optional class name for this component.
    */
   className: PropTypes.string,
+
+  /**
+   * Determines if the coachmark is open by default.
+   * Does nothing if `overlayKind=stacked`.
+   */
+  isOpenByDefault: PropTypes.bool,
 
   /**
    * Function to call when the Coachmark closes.

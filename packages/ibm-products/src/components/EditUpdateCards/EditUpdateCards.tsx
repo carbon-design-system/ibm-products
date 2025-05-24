@@ -15,8 +15,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-
-// import { children } from 'cheerio/lib/api/traversing';
+import { ActionIcon } from '../Card/Card';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -36,19 +35,11 @@ const componentName = 'EditUpdateCards';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
-type ActionIcon = {
-  id: string;
-  icon: CarbonIconType;
-  onKeyDown?(): void;
-  onClick?(): void;
-  iconDescription: string;
-  href?: string;
-};
 type PlacementType = 'top' | 'bottom';
 
 export interface EditUpdateCardsProps {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
+   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.href for href functionality. If you are setting link object, href is a required property. link object supports all anchor element properties. Precedence: link.href > href. If link.href or href is set => anchor element, else button.
    */
   actionIcons?: Array<ActionIcon>;
   /**
@@ -240,7 +231,7 @@ EditUpdateCards.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 EditUpdateCards.propTypes = {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
+   * Icons that are displayed on the card. Refer to design documentation for implementation guidelines. Note: href is deprecated. Set link.href for href functionality. If you are setting link object, href is a required property. link object supports all anchor element properties. Precedence: link.href > href. If link.href or href is set => anchor element, else button.
    */
   /**@ts-ignore */
   actionIcons: PropTypes.arrayOf(
@@ -250,7 +241,13 @@ EditUpdateCards.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      /**
+       * @deprecated please use the `link.href` instead
+       */
       href: PropTypes.string,
+      link: PropTypes.shape({
+        href: PropTypes.string.isRequired,
+      }),
     })
   ),
   /**

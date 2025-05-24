@@ -6,7 +6,16 @@
  */
 
 // Carbon and package components we use.
-import { Button, Link, Toggle, IconButton, usePrefix } from '@carbon/react';
+import {
+  Button,
+  Heading,
+  IconButton,
+  Link,
+  Section,
+  Toggle,
+  usePrefix,
+} from '@carbon/react';
+import { dateTimeFormat } from '@carbon/utilities';
 import {
   CheckmarkFilled,
   ChevronDown,
@@ -29,20 +38,26 @@ import { NotificationsEmptyState } from '../EmptyStates';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { usePrefersReducedMotion } from '../../global/js/hooks/usePrefersReducedMotion';
+import { useClickOutside, usePresence } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
+import { useId } from '../../global/js/utils/useId';
+import { pkg } from '../../settings';
 import { timeAgo } from './utils';
-import { useClickOutside, usePreviousValue } from '../../global/js/hooks';
-import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
-import wrapFocus from '../../global/js/utils/wrapFocus';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'NotificationsPanel';
 const blockClass = `${pkg.prefix}--notifications-panel`;
 
+const DefaultLocale = 'en-US';
+type Themes = 'light' | 'dark';
+type DateTimeStyles = 'long' | 'short' | 'narrow';
+
 // Default values for props
 const defaults = {
+  dateTimeStyle: 'long' as DateTimeStyles,
   daysAgoText: (value) => `${value} days ago`,
   dismissAllLabel: 'Dismiss all',
   dismissSingleNotificationIconDescription: 'Dismiss',
@@ -50,6 +65,7 @@ const defaults = {
   emptyStateLabel: 'You do not have any notifications',
   hourAgoText: (value) => `${value} hour ago`,
   hoursAgoText: (value) => `${value} hours ago`,
+  illustrationTheme: 'light' as Themes,
   minuteAgoText: (value) => `${value} minute ago`,
   minutesAgoText: (value) => `${value} minutes ago`,
   monthAgoText: (value) => `${value} month ago`,
@@ -64,7 +80,7 @@ const defaults = {
   settingsIconDescription: 'Settings',
   title: 'Notifications',
   todayLabel: 'Today',
-  viewAllLabel: (value) => `View all (${value})`,
+  viewAllLabel: (value: string | number) => `View all (${value})`,
   yearAgoText: (value) => `${value} year ago`,
   yearsAgoText: (value) => `${value} years ago`,
   yesterdayAtText: (value) => `Yesterday at ${value}`,
@@ -99,7 +115,23 @@ export interface NotificationsPanelProps {
   data: Data[];
 
   /**
+   * The language for each notification's time stamp.
+   * Used with `dateTimeStyle`.
+   */
+  dateTimeLocale?: string;
+
+  /**
+   * The date/time format for each notification's time stamp.
+   * Used with `dateTimeLocale`.
+   *
+   * E.g. `long` as "6 minutes ago", `short` as "6m ago".
+   */
+  dateTimeStyle?: DateTimeStyles;
+
+  /**
    * Sets the `days ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   daysAgoText?: (value: number) => string;
 
@@ -130,66 +162,85 @@ export interface NotificationsPanelProps {
 
   /**
    * Sets the `hour ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   hourAgoText?: (value: number) => string;
 
   /**
    * Sets the `hours ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   hoursAgoText?: (value: number) => string;
 
   /**
+   * Determines the theme of the empty state's illustration.
+   */
+  illustrationTheme: Themes;
+
+  /**
    * Sets the `minute ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   minuteAgoText?: (value: number) => string;
 
   /**
    * Sets the `minutes ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   minutesAgoText?: (value: number) => string;
 
   /**
    * Sets the `month ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   monthAgoText?: (value: number) => string;
 
   /**
    * Sets the `months ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   monthsAgoText?: (value: number) => string;
 
   /**
    * Sets the `now` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   nowText?: string;
 
   /**
-   * Sets the notifications panel open state
+   * Optional function called after clicking outside of the panel.
    */
-  onClickOutside: () => void;
+  onClickOutside?: () => void;
 
   /**
-   * Function that will dismiss all notifications
+   * Optional function called after clicking the "Dismiss all" button.
    */
   onDismissAllNotifications?: () => void;
 
   /**
-   * Function that will dismiss a single notification
+   * Optional function called after clicking a notification's "X" button.
    */
   onDismissSingleNotification?: (prop) => void;
 
   /**
-   * Optional: function that returns the current selected value of the disable notification toggle
+   * Optional function called after toggling "Do not disturb".
    */
   onDoNotDisturbChange?: (prop) => void;
 
   /**
-   * Event handler for the View all button
+   * Optional function called after clicking settings / gear icon button.
    */
   onSettingsClick?: () => void;
 
   /**
-   * Event handler for the View all button
+   * Optional function called after clicking the "View all" button.
    */
   onViewAllClick?: () => void;
 
@@ -215,6 +266,8 @@ export interface NotificationsPanelProps {
 
   /**
    * Sets the `seconds ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   secondsAgoText?: (value: number) => string;
 
@@ -245,16 +298,22 @@ export interface NotificationsPanelProps {
 
   /**
    * Sets the `year ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   yearAgoText?: (value: number) => string;
 
   /**
    * Sets the `years ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   yearsAgoText?: (value: number) => string;
 
   /**
    * Sets the `Yesterday at` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   yesterdayAtText?: (value: number) => string;
 
@@ -262,20 +321,31 @@ export interface NotificationsPanelProps {
    * Sets the yesterday label text
    */
   yesterdayLabel?: string;
+}
 
-  /** Specify the CSS selectors that match the floating menus. */
-  selectorsFloatingMenus?: string[];
-}
-interface PreviousStateProps {
-  open: boolean;
-}
+/**
+ * The `NotificationsPanel` sets expectations on the behavior for notifications,
+ * allowing the user to view and interact with them all in one place.
+ *
+ * **To adopt the new localization:**
+ *
+ * **Step 1:** Provide a locale to the `dateTimeLocale` prop, such as "de" or "fr-CA".
+ *
+ * **Step 2:** Remove the now _deprecated_ props: `daysAgoText`,
+ * `hourAgoText`, `hoursAgoText`, `minuteAgoText`, `minutesAgoText`,
+ * `monthAgoText`, `monthsAgoText`, `nowText`, `secondsAgoText`,
+ * `yearAgoText`, `yearsAgoText`, `yesterdayAtText`.
+ *
+ * If you do not provide a locale, the deprecated props will be applied instead.
+ */
 export let NotificationsPanel = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-
       className,
       data,
+      dateTimeLocale,
+      dateTimeStyle = defaults.dateTimeStyle,
       daysAgoText = defaults.daysAgoText,
       dismissAllLabel = defaults.dismissAllLabel,
       dismissSingleNotificationIconDescription = defaults.dismissSingleNotificationIconDescription,
@@ -284,6 +354,7 @@ export let NotificationsPanel = React.forwardRef(
       emptyStateLabel = defaults.emptyStateLabel,
       hourAgoText = defaults.hourAgoText,
       hoursAgoText = defaults.hoursAgoText,
+      illustrationTheme = defaults.illustrationTheme,
       minuteAgoText = defaults.minuteAgoText,
       minutesAgoText = defaults.minutesAgoText,
       monthAgoText = defaults.monthAgoText,
@@ -308,7 +379,6 @@ export let NotificationsPanel = React.forwardRef(
       yearsAgoText = defaults.yearsAgoText,
       yesterdayAtText = defaults.yesterdayAtText,
       yesterdayLabel = defaults.yesterdayLabel,
-      selectorsFloatingMenus,
       triggerButtonRef,
       // Collect any other property values passed in.
       ...rest
@@ -319,30 +389,43 @@ export let NotificationsPanel = React.forwardRef(
     const notificationPanelInnerRef = useRef(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
-    const [shouldRender, setRender] = useState(open);
     const [allNotifications, setAllNotifications] = useState<Data[]>([]);
-    const previousState = usePreviousValue({ open }) as
-      | PreviousStateProps
-      | undefined;
+    const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
+    const carbonPrefix = usePrefix();
+    const headingId = useId();
 
     const reducedMotion = usePrefersReducedMotion();
-    const carbonPrefix = usePrefix();
+    const exitAnimationName = reducedMotion
+      ? 'notifications-panel-exit-reduced'
+      : 'notifications-panel-fade-out';
+    const { shouldRender } = usePresence(
+      open,
+      notificationPanelRef as RefObject<HTMLDialogElement>,
+      exitAnimationName
+    );
+
     useEffect(() => {
       // Set the notifications passed to the state within this component
       setAllNotifications(data);
     }, [data]);
 
     useClickOutside(ref || notificationPanelRef, () => {
-      onClickOutside();
-      setTimeout(() => {
-        triggerButtonRef?.current?.focus();
-      }, 0);
+      onClickOutside?.();
     });
+
+    const handleKeydown = (event) => {
+      event.stopPropagation();
+      if (event.key === 'Escape') {
+        onClickOutside?.();
+        setTimeout(() => {
+          triggerButtonRef?.current?.focus();
+        }, 100);
+      }
+    };
 
     useEffect(() => {
       // initialize the notification panel to open
       if (open) {
-        setRender(true);
         const observer = new MutationObserver(() => {
           if (notificationPanelRef.current) {
             const parentElement = notificationPanelRef.current;
@@ -369,50 +452,6 @@ export let NotificationsPanel = React.forwardRef(
         return () => observer.disconnect();
       }
     }, [open]);
-
-    const onAnimationEnd = () => {
-      // initialize the notification panel to close
-      !open && setRender(false);
-    };
-    const handleBlur = ({
-      target: oldActiveNode,
-      relatedTarget: currentActiveNode,
-    }) => {
-      if (
-        open &&
-        currentActiveNode &&
-        oldActiveNode &&
-        notificationPanelInnerRef.current
-      ) {
-        const { current: bodyNode } = notificationPanelInnerRef;
-        const { current: startSentinelNode } = startSentinel;
-        const { current: endSentinelNode } = endSentinel;
-        wrapFocus({
-          bodyNode,
-          startTrapNode: startSentinelNode,
-          endTrapNode: endSentinelNode,
-          currentActiveNode,
-          oldActiveNode,
-          selectorsFloatingMenus: selectorsFloatingMenus?.filter(
-            Boolean
-          ) as string[],
-        });
-      }
-    };
-    const handleKeydown = (event) => {
-      event.stopPropagation();
-      if (event.key === 'Escape') {
-        onClickOutside();
-        setTimeout(() => {
-          triggerButtonRef?.current?.focus();
-        }, 100);
-      }
-    };
-    useEffect(() => {
-      if (!open && previousState?.open && reducedMotion) {
-        setRender(false);
-      }
-    }, [open, previousState?.open, reducedMotion]);
 
     const sortChronologically = (arr) => {
       if (!arr || (arr && !arr.length)) {
@@ -527,9 +566,10 @@ export let NotificationsPanel = React.forwardRef(
         },
       ]);
       return (
-        <div
+        <Section
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
+          as="div"
           role="button"
           tabIndex={0}
           onClick={() => notification.onNotificationClick(notification)}
@@ -542,8 +582,9 @@ export let NotificationsPanel = React.forwardRef(
             ) {
               return;
             }
-            event.which === 13 &&
+            if (event.which === 13) {
               notification.onNotificationClick(notification);
+            }
           }}
         >
           {notification.type === 'error' && (
@@ -584,25 +625,35 @@ export let NotificationsPanel = React.forwardRef(
           )}
           <div className={`${blockClass}__notification-content`}>
             <p className={`${blockClass}__notification-time-label`}>
-              {timeAgo({
-                previousTime: notification.timestamp,
-                secondsAgoText,
-                minuteAgoText,
-                minutesAgoText,
-                hoursAgoText,
-                hourAgoText,
-                daysAgoText,
-                yesterdayAtText,
-                monthsAgoText,
-                monthAgoText,
-                yearsAgoText,
-                yearAgoText,
-                nowText,
-              })}
+              {/**
+               * If the new dateTimeLocale has been passed a value,
+               * then use the new dateTimeFormat.relative.format(),
+               * else use the deprecated timeAgo().
+               */}
+              {dateTimeLocale
+                ? dateTimeFormat.relative.format(notification.timestamp, {
+                    locale: supportedLocale as string,
+                    style: dateTimeStyle,
+                  })
+                : timeAgo({
+                    previousTime: notification.timestamp,
+                    secondsAgoText,
+                    minuteAgoText,
+                    minutesAgoText,
+                    hoursAgoText,
+                    hourAgoText,
+                    daysAgoText,
+                    yesterdayAtText,
+                    monthsAgoText,
+                    monthAgoText,
+                    yearsAgoText,
+                    yearAgoText,
+                    nowText,
+                  })}
             </p>
-            <h6 className={notificationHeaderClassName}>
+            <Heading className={notificationHeaderClassName}>
               {notification.title}
-            </h6>
+            </Heading>
             {notification.description &&
               notification.description.length &&
               renderDescription(notification.id)}
@@ -628,7 +679,7 @@ export let NotificationsPanel = React.forwardRef(
           >
             <Close size={16} />
           </IconButton>
-        </div>
+        </Section>
       );
     };
 
@@ -647,115 +698,104 @@ export let NotificationsPanel = React.forwardRef(
     ]);
 
     return shouldRender ? (
-      <>
-        <button
-          type="button"
-          className={`${carbonPrefix}--visually-hidden`}
-          ref={startSentinel}
-        >
-          Focus sentinel start
-        </button>
-        {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
-        <div
-          role="dialog"
-          aria-label="Notification Panel"
-          onBlur={handleBlur}
-          tabIndex={0}
-          onKeyDown={handleKeydown}
-          {
-            // Pass through any other property values as HTML attributes.
-            ...rest
-          }
-          id={blockClass}
-          className={cx(blockClass, className, `${blockClass}__container`)}
-          style={{
-            animation: !reducedMotion
-              ? `${open ? 'fade-in 250ms' : 'fade-out forwards 250ms'}`
-              : undefined,
-          }}
-          onAnimationEnd={onAnimationEnd}
-          ref={
-            (ref as MutableRefObject<HTMLDivElement | null>) ||
-            notificationPanelRef
-          }
-          {...getDevtoolsProps(componentName)}
-        >
-          <div ref={notificationPanelInnerRef}>
-            <div className={`${blockClass}__header-container`}>
-              <div className={`${blockClass}__header-flex`}>
-                <h2 className={`${blockClass}__header`}>{title}</h2>
-                <Button
-                  size="sm"
-                  kind="ghost"
-                  className={`${blockClass}__dismiss-button`}
-                  onClick={() => onDismissAllNotifications()}
-                >
-                  {dismissAllLabel}
-                </Button>
-              </div>
-              {onDoNotDisturbChange && (
-                <Toggle
-                  size="sm"
-                  className={`${blockClass}__do-not-disturb-toggle`}
-                  id={`${blockClass}__do-not-disturb-toggle-component`}
-                  labelA={doNotDisturbLabel}
-                  labelB={doNotDisturbLabel}
-                  onToggle={(event) => onDoNotDisturbChange(event)}
-                  defaultToggled={doNotDisturbDefaultToggled}
-                  aria-label={doNotDisturbLabel}
-                  labelText={doNotDisturbLabel}
-                />
-              )}
+      <Section
+        as="div"
+        role="dialog"
+        aria-labelledby={headingId}
+        onKeyDown={handleKeydown}
+        tabIndex={0}
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        id={blockClass}
+        className={cx(blockClass, className, `${blockClass}__container`, {
+          [`${blockClass}__entrance`]: open,
+          [`${blockClass}__exit`]: !open,
+        })}
+        ref={
+          (ref as MutableRefObject<HTMLDivElement | null>) ||
+          notificationPanelRef
+        }
+        {...getDevtoolsProps(componentName)}
+      >
+        <div ref={notificationPanelInnerRef}>
+          <div className={`${blockClass}__header-container`}>
+            <div className={`${blockClass}__header-flex`}>
+              <Heading id={headingId} className={`${blockClass}__header`}>
+                {title}
+              </Heading>
+              <Button
+                size="sm"
+                kind="ghost"
+                className={`${blockClass}__dismiss-button`}
+                onClick={onDismissAllNotifications}
+              >
+                {dismissAllLabel}
+              </Button>
             </div>
-            <div className={mainSectionClassName}>
-              {withinLastDayNotifications &&
-              withinLastDayNotifications.length ? (
-                <>
-                  <h6 className={`${blockClass}__time-section-label`}>
-                    {todayLabel}
-                  </h6>
-                  {withinLastDayNotifications.map((notification, index) =>
-                    renderNotification('today', notification, index)
-                  )}
-                </>
-              ) : null}
-              {previousDayNotifications && previousDayNotifications.length ? (
-                <>
-                  <h6 className={`${blockClass}__time-section-label`}>
-                    {yesterdayLabel}
-                  </h6>
-                  {previousDayNotifications.map((notification, index) =>
-                    renderNotification('yesterday', notification, index)
-                  )}
-                </>
-              ) : null}
-              {previousNotifications && previousNotifications.length ? (
-                <>
-                  <h6 className={`${blockClass}__time-section-label`}>
-                    {previousLabel}
-                  </h6>
-                  {previousNotifications.map((notification, index) =>
-                    renderNotification('previous', notification, index)
-                  )}
-                </>
-              ) : null}
-              {!allNotifications.length && (
-                <NotificationsEmptyState
-                  illustrationTheme="dark"
-                  title=""
-                  subtitle={emptyStateLabel}
-                />
-              )}
-            </div>
-            {onViewAllClick &&
+            {onDoNotDisturbChange && (
+              <Toggle
+                size="sm"
+                className={`${blockClass}__do-not-disturb-toggle`}
+                id={`${blockClass}__do-not-disturb-toggle-component`}
+                labelA={doNotDisturbLabel}
+                labelB={doNotDisturbLabel}
+                onToggle={(event) => onDoNotDisturbChange(event)}
+                defaultToggled={doNotDisturbDefaultToggled}
+                aria-label={doNotDisturbLabel}
+                labelText={doNotDisturbLabel}
+              />
+            )}
+          </div>
+          <Section className={mainSectionClassName}>
+            {withinLastDayNotifications && withinLastDayNotifications.length ? (
+              <>
+                <Heading className={`${blockClass}__time-section-label`}>
+                  {todayLabel}
+                </Heading>
+                {withinLastDayNotifications.map((notification, index) =>
+                  renderNotification('today', notification, index)
+                )}
+              </>
+            ) : null}
+            {previousDayNotifications && previousDayNotifications.length ? (
+              <>
+                <Heading className={`${blockClass}__time-section-label`}>
+                  {yesterdayLabel}
+                </Heading>
+                {previousDayNotifications.map((notification, index) =>
+                  renderNotification('yesterday', notification, index)
+                )}
+              </>
+            ) : null}
+            {previousNotifications && previousNotifications.length ? (
+              <>
+                <Heading className={`${blockClass}__time-section-label`}>
+                  {previousLabel}
+                </Heading>
+                {previousNotifications.map((notification, index) =>
+                  renderNotification('previous', notification, index)
+                )}
+              </>
+            ) : null}
+            {!allNotifications.length && (
+              <NotificationsEmptyState
+                illustrationTheme={illustrationTheme}
+                title=""
+                subtitle={emptyStateLabel}
+              />
+            )}
+          </Section>
+          {onViewAllClick &&
             onSettingsClick &&
             allNotifications &&
-            allNotifications.length ? (
+            allNotifications.length > 0 && (
               <div className={`${blockClass}__bottom-actions`}>
                 <Button
                   kind="ghost"
                   className={`${blockClass}__view-all-button`}
-                  onClick={() => onViewAllClick()}
+                  onClick={onViewAllClick}
                 >
                   {viewAllLabel(allNotifications.length)}
                 </Button>
@@ -765,22 +805,14 @@ export let NotificationsPanel = React.forwardRef(
                   className={`${blockClass}__settings-button`}
                   renderIcon={(props) => <Settings size={16} {...props} />}
                   iconDescription={settingsIconDescription}
-                  onClick={() => onSettingsClick()}
+                  onClick={onSettingsClick}
                   hasIconOnly
+                  tooltipPosition="left"
                 />
               </div>
-            ) : null}
-          </div>
+            )}
         </div>
-        {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
-        <button
-          type="button"
-          className={`${carbonPrefix}--visually-hidden`}
-          ref={endSentinel}
-        >
-          Focus sentinel end
-        </button>
-      </>
+      </Section>
     ) : null;
   }
 );
@@ -825,6 +857,18 @@ NotificationsPanel.propTypes = {
   ).isRequired,
 
   /**
+   * The language for each notification's time stamp.
+   */
+  dateTimeLocale: PropTypes.string,
+
+  /**
+   * The date/time format for each notification's time stamp.
+   *
+   * E.g. `long` as "6 minutes ago", `short` as "6m ago".
+   */
+  dateTimeStyle: PropTypes.string,
+
+  /**
    * Sets the `days ago` label text
    */
   daysAgoText: PropTypes.func,
@@ -865,6 +909,11 @@ NotificationsPanel.propTypes = {
   hoursAgoText: PropTypes.func,
 
   /**
+   * Determines the theme of the empty state's illustration.
+   */
+  illustrationTheme: PropTypes.oneOf(['light', 'dark']),
+
+  /**
    * Sets the `minute ago` label text
    */
   minuteAgoText: PropTypes.func,
@@ -890,32 +939,32 @@ NotificationsPanel.propTypes = {
   nowText: PropTypes.string,
 
   /**
-   * Sets the notifications panel open state
+   * Optional function called after clicking outside of the panel.
    */
-  onClickOutside: PropTypes.func.isRequired,
+  onClickOutside: PropTypes.func,
 
   /**
-   * Function that will dismiss all notifications
+   * Optional function called after clicking the "Dismiss all" button.
    */
   onDismissAllNotifications: PropTypes.func,
 
   /**
-   * Function that will dismiss a single notification
+   * Optional function called after clicking a notification's "X" button.
    */
   onDismissSingleNotification: PropTypes.func,
 
   /**
-   * Optional: function that returns the current selected value of the disable notification toggle
+   * Optional function called after toggling "Do not disturb".
    */
   onDoNotDisturbChange: PropTypes.func,
 
   /**
-   * Event handler for the View all button
+   * Optional function called after clicking settings / gear icon button.
    */
   onSettingsClick: PropTypes.func,
 
   /**
-   * Event handler for the View all button
+   * Optional function called after clicking the "View all" button.
    */
   onViewAllClick: PropTypes.func,
 
@@ -943,11 +992,6 @@ NotificationsPanel.propTypes = {
    * Sets the `seconds ago` label text
    */
   secondsAgoText: PropTypes.func,
-
-  /**
-   * Specify the CSS selectors that match the floating menus
-   */
-  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string.isRequired),
 
   /**
    * Sets the settings icon description text

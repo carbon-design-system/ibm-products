@@ -6,6 +6,7 @@
 */
 
 $css--plex: true !default;
+@use 'sass:map';
 
 /* Other Carbon settings. */
 @use '@carbon/styles/scss/reset';
@@ -15,7 +16,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
-@use 'sass:map';
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
@@ -297,6 +297,6 @@ $block-class-action-set: #{$prefix}--action-set;
   }
 
   .#{$block-class}__close-button {
-    width: 2rem;
+    inline-size: 2rem;
   }
 }

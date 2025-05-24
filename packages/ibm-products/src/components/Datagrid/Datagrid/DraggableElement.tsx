@@ -21,12 +21,17 @@ interface DraggableElementProps extends PropsWithChildren {
   classList?: string;
   disabled?: boolean;
   id: string;
+  elementId?: string;
   isSticky?: boolean;
   selected?: boolean;
 }
 
+/**
+ * Single row in the DraggableItemsList used by CustomizeColumnsTearsheet.
+ */
 const DraggableElement = ({
   id,
+  elementId,
   children,
   classList,
   disabled,
@@ -45,18 +50,38 @@ const DraggableElement = ({
     disabled,
     id,
   });
+
+  // Most of the attributes (ex: role, tabIndex, aria-disabled) are unnecessary for a <button>, so just get the ones we need.
+  const { 'aria-pressed': ariaPressed, 'aria-describedby': ariaDescribedby } =
+    attributes;
+
+  const dragHandle = isSticky ? (
+    <div
+      className={cx(
+        {
+          disabled,
+        },
+        `${blockClass}__draggable-handleStyle`
+      )}
+    >
+      <Locked size={16} />{' '}
+    </div>
+  ) : (
+    <button
+      className={`${blockClass}__draggable-handleStyle`}
+      type="button"
+      aria-label={ariaLabel}
+      aria-describedby={ariaDescribedby}
+      aria-pressed={ariaPressed}
+      {...listeners}
+    >
+      <DraggableIcon size={16} />
+    </button>
+  );
+
   const content = (
     <>
-      <div
-        className={cx(
-          {
-            disabled,
-          },
-          `${blockClass}__draggable-handleStyle`
-        )}
-      >
-        {isSticky ? <Locked size={16} /> : <DraggableIcon size={16} />}
-      </div>
+      {dragHandle}
       {children}
     </>
   );
@@ -72,26 +97,11 @@ const DraggableElement = ({
         [`${blockClass}__draggable-handleHolder--sticky`]: isSticky,
         [`${blockClass}__draggable-handleHolder--dragging`]: isDragging,
       })}
-      id={id}
+      id={elementId ? elementId : id}
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
-      aria-disabled={undefined}
-      aria-selected={selected}
-      role="option"
     >
-      <span className={`${blockClass}__shared-ui--assistive-text`}>
-        {ariaLabel}
-      </span>
-      <div
-        className={cx(
-          {
-            [`${blockClass}__draggable-handleStyle`]: !disabled,
-          },
-          [`${blockClass}__draggable-handleHolder-droppable`]
-        )}
-      >
+      <div className={cx([`${blockClass}__draggable-handleHolder-droppable`])}>
         {content}
       </div>
     </li>
@@ -103,6 +113,7 @@ DraggableElement.propTypes = {
   children: PropTypes.element.isRequired,
   classList: PropTypes.string,
   disabled: PropTypes.bool,
+  elementId: PropTypes.string,
   id: PropTypes.string.isRequired,
   isSticky: PropTypes.bool,
   selected: PropTypes.bool,

@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// stylelint-disable carbon/layout-token-use
+// stylelint-disable carbon/layout-use
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/layout/scss/convert' as *;
@@ -25,14 +25,14 @@ $action-set-height: to-rem(64px);
 
 .#{variables.$block-class}-filter-flyout {
   position: absolute;
-  top: spacing.$spacing-09;
-  right: 0;
   display: none;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  width: to-rem(642px);
   background-color: $layer-02;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   box-shadow: 0 1px to-rem(8px) 0 rgba(0, 0, 0, 0.25);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  inline-size: to-rem(642px);
+  inset-block-start: spacing.$spacing-09;
+  inset-inline-end: 0;
 }
 
 .#{variables.$block-class}-filter-flyout--open {
@@ -41,15 +41,15 @@ $action-set-height: to-rem(64px);
 
 .#{variables.$block-class}-filter-flyout--batch {
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  min-height: to-rem(346px);
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   grid-template-rows: 1fr to-rem(48px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  min-block-size: to-rem(346px);
 }
 
 .#{variables.$block-class}-filter-flyout--instant {
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  min-height: to-rem(282px);
   grid-template-rows: 1fr;
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  min-block-size: to-rem(282px);
 }
 
 .#{variables.$block-class}-filter-flyout__inner-container {
@@ -59,23 +59,23 @@ $action-set-height: to-rem(64px);
 
 .#{variables.$block-class}-filter-flyout__inner-container::before {
   position: absolute;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  top: to-rem(-7px);
-  right: 1px;
   display: block;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  width: to-rem(46px);
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  height: to-rem(15px);
   background-color: $layer-02;
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  block-size: to-rem(15px);
   content: '';
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  inline-size: to-rem(46px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  inset-block-start: to-rem(-7px);
+  inset-inline-end: 1px;
 }
 
 .#{variables.$block-class}-filter-flyout__title {
   display: block;
   @include type-style('heading-compact-01');
 
-  margin-bottom: spacing.$spacing-06;
+  margin-block-end: spacing.$spacing-06;
 }
 
 .#{variables.$block-class}-filter-flyout__filters {
@@ -88,9 +88,9 @@ $action-set-height: to-rem(64px);
 // Carbon overrides
 .#{variables.$block-class}-filter-flyout__trigger.#{c4p-settings.$carbon-prefix}--btn {
   display: flex;
-  width: 3rem;
-  height: 3rem;
   justify-content: center;
+  block-size: 3rem;
+  inline-size: 3rem;
 }
 
 .#{variables.$block-class}-filter-flyout__trigger--open.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--icon-only {
@@ -102,7 +102,7 @@ $action-set-height: to-rem(64px);
 
 .#{variables.$block-class}-filter-flyout
   .#{c4p-settings.$carbon-prefix}--fieldset {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 .#{variables.$block-class}-filter-flyout__stacked {

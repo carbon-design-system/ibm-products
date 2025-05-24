@@ -8,9 +8,10 @@
 import React, { useState, useEffect } from 'react';
 import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { Saving } from '.';
-// import mdx from './Saving.mdx';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import wait from '../../global/js/utils/wait';
 import { TextArea } from '@carbon/react';
+import mdx from './Saving.mdx';
 
 export default {
   title: 'IBM Products/Components/Saving',
@@ -18,11 +19,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    /*
-docs: {
+    docs: {
       page: mdx,
     },
-*/
   },
   argTypes: {
     successful: {
@@ -42,8 +41,8 @@ const defaultProps = {
   successText: 'Saved',
 };
 
-const AutoTemplate = (opts) => {
-  const { successful, ...args } = opts;
+const AutoTemplate = (args) => {
+  const { successful, ...rest } = args;
   const [status, setStatus] = useState('default');
   const [text, setText] = useState('');
   const [dirtyInput, setDirtyInput] = useState(false);
@@ -77,14 +76,14 @@ const AutoTemplate = (opts) => {
         className="saving-story-textarea"
       />
       {dirtyInput && status !== 'default' && (
-        <Saving {...args} status={status} />
+        <Saving {...rest} status={status} />
       )}
     </div>
   );
 };
 
-const ManualTemplate = (opts) => {
-  const { successful, ...args } = opts;
+const ManualTemplate = (args) => {
+  const { successful, ...rest } = args;
   const [status, setStatus] = useState('default');
 
   const onSaveHandler = async () => {
@@ -95,7 +94,7 @@ const ManualTemplate = (opts) => {
 
   return (
     <div>
-      <Saving {...args} onRequestSave={onSaveHandler} status={status} />
+      <Saving {...rest} onRequestSave={onSaveHandler} status={status} />
     </div>
   );
 };

@@ -27,9 +27,6 @@ export default {
     children: {
       control: { type: null },
     },
-    media: {
-      control: { type: null },
-    },
     portalTarget: {
       control: { type: null },
     },

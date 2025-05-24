@@ -14,10 +14,6 @@ import { InlineTip, InlineTipButton, InlineTipLink } from '.';
 
 import styles from './_storybook-styles.scss?inline';
 import InlineTipImage from './storybook_assets/inline-tip-image.png';
-const InlineTipAnimation = new URL(
-  './storybook_assets/inline-tip-animation',
-  import.meta.url
-).pathname;
 import DocsPage from './InlineTip.docs-page';
 
 export default {
@@ -36,8 +32,8 @@ export default {
       options: ['None', '<InlineTipButton>', '<InlineTipLink>'],
       control: { type: 'radio' },
     },
-    media: {
-      options: ['None', 'Render a static image', 'Render an animation'],
+    renderMedia: {
+      options: ['None', 'Render a static image'],
       control: { type: 'radio' },
     },
     narrow: {
@@ -68,7 +64,7 @@ const defaultProps = {
   collapsible: false,
   action: 'None',
   expandButtonLabel: 'Read more',
-  media: 'None',
+  renderMedia: 'None',
   onClick: () => {
     action(`Clicked the tertiary button`)();
   },
@@ -80,16 +76,13 @@ const defaultProps = {
 };
 
 const Template = (args) => {
-  const { media, narrow, action: componentAction } = args;
+  const { renderMedia, narrow, action: componentAction } = args;
 
   const selectedMedia = (function () {
-    switch (media) {
+    switch (renderMedia) {
       case 'Render a static image':
-        return { render: () => <img alt="" src={InlineTipImage} /> };
-      case 'Render an animation':
-        return {
-          filePaths: [InlineTipAnimation],
-        };
+        return () => <img alt="" src={InlineTipImage} />;
+
       default:
         return null;
     }
@@ -129,7 +122,11 @@ const Template = (args) => {
         narrow ? 'storybook--inline-tip-narrow' : 'storybook--inline-tip-wide',
       ])}
     >
-      <InlineTip {...args} media={selectedMedia} action={selectedAction} />
+      <InlineTip
+        {...args}
+        renderMedia={selectedMedia}
+        action={selectedAction}
+      />
     </div>
   );
 };

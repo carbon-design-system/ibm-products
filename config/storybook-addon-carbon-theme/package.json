@@ -1,7 +1,7 @@
 {
   "name": "@carbon/storybook-addon-theme",
   "description": "Carbon theme switcher for Storybook",
-  "version": "2.3.0",
+  "version": "2.16.0-rc.0",
   "license": "Apache-2.0",
   "main": "dist/react.js",
   "repository": {
@@ -45,23 +45,23 @@
     "vue": "*"
   },
   "dependencies": {
-    "@ibm/telemetry-js": "^1.5.0",
-    "@storybook/addons": "^7.6.10",
-    "@storybook/api": "^7.6.10",
-    "@storybook/client-api": "^7.6.10",
-    "@storybook/client-logger": "^7.6.10",
-    "@storybook/components": "^7.6.10",
-    "@storybook/core-events": "^7.6.10",
-    "@storybook/theming": "^7.6.10",
-    "core-js": "^3.35.1",
+    "@ibm/telemetry-js": "^1.9.1",
+    "@storybook/addons": "7.6.17",
+    "@storybook/api": "7.6.17",
+    "@storybook/client-api": "7.6.17",
+    "@storybook/client-logger": "^8.6.6",
+    "@storybook/components": "^8.6.6",
+    "@storybook/core-events": "^8.6.6",
+    "@storybook/theming": "^8.6.6",
+    "core-js": "^3.41.0",
     "global": "^4.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.9",
-    "@babel/core": "^7.23.9",
-    "@babel/preset-react": "^7.23.3",
-    "npm-check-updates": "^16.14.12",
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.10",
+    "@babel/preset-react": "^7.26.3",
+    "npm-check-updates": "^18.0.0",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^5.0.5"
+    "rimraf": "^6.0.1"
   }
 }

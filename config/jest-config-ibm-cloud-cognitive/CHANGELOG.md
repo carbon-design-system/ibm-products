@@ -3,6 +3,251 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.26.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.21.0-rc.0...jest-config-ibm-cloud-cognitive@1.26.0-rc.0) (2025-05-19)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.25.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.25.0-rc.0...jest-config-ibm-cloud-cognitive@1.25.0) (2025-05-14)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.25.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.21.0-rc.0...jest-config-ibm-cloud-cognitive@1.25.0-rc.0) (2025-05-05)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.24.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.24.0-rc.0...jest-config-ibm-cloud-cognitive@1.24.0) (2025-04-30)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.24.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.21.0-rc.0...jest-config-ibm-cloud-cognitive@1.24.0-rc.0) (2025-04-21)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.23.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.23.0-rc.0...jest-config-ibm-cloud-cognitive@1.23.0) (2025-04-17)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.23.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.21.0-rc.0...jest-config-ibm-cloud-cognitive@1.23.0-rc.0) (2025-04-07)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.22.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.22.0-rc.0...jest-config-ibm-cloud-cognitive@1.22.0) (2025-04-02)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.22.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.21.0-rc.0...jest-config-ibm-cloud-cognitive@1.22.0-rc.0) (2025-03-24)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.21.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.21.0-rc.0...jest-config-ibm-cloud-cognitive@1.21.0) (2025-03-19)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.21.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.13.0-rc.0...jest-config-ibm-cloud-cognitive@1.21.0-rc.0) (2025-03-10)
+
+
+### Bug Fixes
+
+* update accessibility-checker version ([#6525](https://github.com/carbon-design-system/ibm-products/issues/6525)) ([d8c7051](https://github.com/carbon-design-system/ibm-products/commit/d8c70518087e7e41fdf1aa45cbbf692389058d56))
+
+
+### Features
+
+* remove lottie web media prop and stepped animated media ([#7024](https://github.com/carbon-design-system/ibm-products/issues/7024)) ([7115972](https://github.com/carbon-design-system/ibm-products/commit/711597259fbecd8deb435eafd368c40abef9e6ea))
+
+
+
+
+
+# [1.20.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.20.0-rc.0...jest-config-ibm-cloud-cognitive@1.20.0) (2025-03-05)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.20.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.13.0-rc.0...jest-config-ibm-cloud-cognitive@1.20.0-rc.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* update accessibility-checker version ([#6525](https://github.com/carbon-design-system/ibm-products/issues/6525)) ([d8c7051](https://github.com/carbon-design-system/ibm-products/commit/d8c70518087e7e41fdf1aa45cbbf692389058d56))
+
+
+
+
+
+# [1.19.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.19.0-rc.0...jest-config-ibm-cloud-cognitive@1.19.0) (2025-02-19)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.19.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.13.0-rc.0...jest-config-ibm-cloud-cognitive@1.19.0-rc.0) (2025-02-10)
+
+
+### Bug Fixes
+
+* update accessibility-checker version ([#6525](https://github.com/carbon-design-system/ibm-products/issues/6525)) ([d8c7051](https://github.com/carbon-design-system/ibm-products/commit/d8c70518087e7e41fdf1aa45cbbf692389058d56))
+
+
+
+
+
+# [1.18.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.18.0-rc.0...jest-config-ibm-cloud-cognitive@1.18.0) (2025-02-05)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.18.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.13.0-rc.0...jest-config-ibm-cloud-cognitive@1.18.0-rc.0) (2025-01-27)
+
+
+### Bug Fixes
+
+* update accessibility-checker version ([#6525](https://github.com/carbon-design-system/ibm-products/issues/6525)) ([d8c7051](https://github.com/carbon-design-system/ibm-products/commit/d8c70518087e7e41fdf1aa45cbbf692389058d56))
+
+
+
+
+
+# [1.17.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.17.0-rc.0...jest-config-ibm-cloud-cognitive@1.17.0) (2025-01-22)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.17.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.13.0-rc.0...jest-config-ibm-cloud-cognitive@1.17.0-rc.0) (2025-01-13)
+
+
+### Bug Fixes
+
+* update accessibility-checker version ([#6525](https://github.com/carbon-design-system/ibm-products/issues/6525)) ([d8c7051](https://github.com/carbon-design-system/ibm-products/commit/d8c70518087e7e41fdf1aa45cbbf692389058d56))
+
+
+
+
+
+## [1.16.1](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.16.1-rc.0...jest-config-ibm-cloud-cognitive@1.16.1) (2025-01-10)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+## [1.16.1-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.13.0-rc.0...jest-config-ibm-cloud-cognitive@1.16.1-rc.0) (2025-01-09)
+
+
+### Bug Fixes
+
+* update accessibility-checker version ([#6525](https://github.com/carbon-design-system/ibm-products/issues/6525)) ([d8c7051](https://github.com/carbon-design-system/ibm-products/commit/d8c70518087e7e41fdf1aa45cbbf692389058d56))
+
+
+
+
+
+# [1.16.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.16.0-rc.0...jest-config-ibm-cloud-cognitive@1.16.0) (2025-01-08)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.16.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.13.0-rc.0...jest-config-ibm-cloud-cognitive@1.16.0-rc.0) (2024-12-24)
+
+
+### Bug Fixes
+
+* update accessibility-checker version ([#6525](https://github.com/carbon-design-system/ibm-products/issues/6525)) ([d8c7051](https://github.com/carbon-design-system/ibm-products/commit/d8c70518087e7e41fdf1aa45cbbf692389058d56))
+
+
+
+
+
+# [1.15.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.15.0-rc.0...jest-config-ibm-cloud-cognitive@1.15.0) (2024-12-18)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.15.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.13.0-rc.0...jest-config-ibm-cloud-cognitive@1.15.0-rc.0) (2024-12-09)
+
+
+### Bug Fixes
+
+* update accessibility-checker version ([#6525](https://github.com/carbon-design-system/ibm-products/issues/6525)) ([d8c7051](https://github.com/carbon-design-system/ibm-products/commit/d8c70518087e7e41fdf1aa45cbbf692389058d56))
+
+
+
+
+
+# [1.14.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.14.0-rc.0...jest-config-ibm-cloud-cognitive@1.14.0) (2024-12-04)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.14.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.13.0-rc.0...jest-config-ibm-cloud-cognitive@1.14.0-rc.0) (2024-11-25)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
 # [1.13.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.13.0-rc.1...jest-config-ibm-cloud-cognitive@1.13.0) (2024-11-20)
 
 **Note:** Version bump only for package jest-config-ibm-cloud-cognitive

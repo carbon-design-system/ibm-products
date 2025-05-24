@@ -16,7 +16,7 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
 @keyframes influencer-menu-entrance {
   0% {
     opacity: 0;
-    // stylelint-disable-next-line carbon/layout-token-use
+    // stylelint-disable-next-line carbon/layout-use
     transform: translateX($influencerAnimationStart);
   }
 
@@ -33,14 +33,14 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
 
   100% {
     opacity: 0;
-    // stylelint-disable-next-line carbon/layout-token-use
+    // stylelint-disable-next-line carbon/layout-use
     transform: translateX($influencerAnimationStart);
   }
 }
 .#{$influencer-block-class} {
   display: grid;
-  height: 100%;
   padding: $spacing-06 $spacing-07;
+  block-size: 100%;
   grid-template-columns: 100%;
   grid-template-rows: 1fr auto;
 }
@@ -49,12 +49,15 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
   grid-column: 1 / -1;
   grid-row: 1 / -1;
   overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }
 
 .#{$influencer-block-class}__title {
   @include type.type-style('heading-03');
 
-  margin-bottom: $spacing-06;
+  margin-block-end: $spacing-06;
 }
 
 .#{$influencer-block-class}__view-all-toggle {

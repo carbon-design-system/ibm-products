@@ -5,17 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
-
-import { Dropdown, FormGroup } from '@carbon/react';
-
-import uuidv4 from '../../global/js/utils/uuidv4';
-
+import React from 'react';
+import { Dropdown } from '@carbon/react';
 import { OptionsTile } from '.';
-// import mdx from './OptionsTile.mdx';
-
 import styles from './_storybook-styles.scss?inline';
+import mdx from './OptionsTile.mdx';
 
 export default {
   title: 'IBM Products/Components/Options tile/OptionsTile',
@@ -23,14 +17,16 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    /*
-docs: {
+    docs: {
       page: mdx,
     },
-*/
+  },
+  percy: {
+    args: {
+      open: true,
+    },
   },
 };
-
 const Template = (args) => {
   // spell-checker:disable
   const languages = [
@@ -73,23 +69,11 @@ const Template = (args) => {
     { label: 'Portuguese-Brazil', id: 'pt-BR' },
     { label: 'Turkish', id: 'tr' },
   ];
-  // spell-checker:enable
 
-  const id = uuidv4();
-  const titleId = args.titleId ?? `${id}-title`;
-
-  const isInvalid = args.invalid;
-  const isWarn = !isInvalid && args.warn;
-  const isLocked = !isInvalid && !isWarn && args.locked;
-  const disableControls = args.enabled === false || isLocked;
-
+  const { titleId: id, ...rest } = args;
   return (
-    <OptionsTile
-      onToggle={action('onToggle')}
-      onChange={action('onChange')}
-      {...args}
-    >
-      <FormGroup aria-labelledby={titleId} legendText="">
+    <main>
+      <OptionsTile {...rest}>
         <p>
           User interface defines the language the application is displayed in.
           Locale sets the regional display formats for information like time,
@@ -101,11 +85,6 @@ const Template = (args) => {
           label="User interface"
           items={languages}
           initialSelectedItem={languages[0]}
-          invalid={isInvalid}
-          invalidText="Non-latin languages are not supported by system"
-          warn={isWarn}
-          warnText="A language change requires a restart of the application"
-          disabled={disableControls}
         />
         <Dropdown
           id={`${id}-locale`}
@@ -113,47 +92,38 @@ const Template = (args) => {
           label="Locale"
           items={locales}
           initialSelectedItem={locales[0]}
-          disabled={disableControls}
         />
-      </FormGroup>
-    </OptionsTile>
+      </OptionsTile>
+    </main>
   );
 };
 
-// eslint-disable-next-line react/prop-types
-const TemplateStatic = ({ enabled, ...rest }) => {
-  const [liveEnabled, setLiveEnabled] = useState(enabled);
-
-  function onToggle(e) {
-    setLiveEnabled(e);
-    action('onToggle')(e);
-  }
-
-  function onChange(value) {
-    action('onChange')(value);
-  }
-
+const TemplateStatic = (args) => {
   return (
-    <OptionsTile
-      onToggle={onToggle}
-      onChange={onChange}
-      {...rest}
-      enabled={liveEnabled}
-    />
+    <main>
+      <OptionsTile {...args} />
+    </main>
   );
+};
+
+const defaultProps = {
+  className: 'example-class',
+  enabled: undefined,
+  invalid: false,
+  invalidText: 'Your system does not support this configuration',
+  locked: false,
+  lockedText: 'This option is managed by your administrator',
+  open: false,
+  size: 'lg',
+  summary: 'English | Locale: English',
+  title: 'Language',
+  titleId: 'title-id',
+  warn: false,
+  warnText: 'A restart is required to apply these settings',
 };
 
 export const optionsTile = Template.bind({});
-optionsTile.args = {
-  title: 'Language',
-  summary: 'English | Locale: English',
-  invalidText: 'Your system does not support this configuration',
-  warnText: 'A restart is required to apply these settings',
-  lockedText: 'This option is managed by your administrator',
-};
+optionsTile.args = { ...defaultProps };
 
 export const staticOptionsTile = TemplateStatic.bind({});
-staticOptionsTile.args = {
-  title: 'Hardware acceleration',
-  enabled: true,
-};
+staticOptionsTile.args = { ...defaultProps };

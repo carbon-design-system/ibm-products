@@ -13,24 +13,24 @@
 $story-class: 'productive-card-stories';
 
 .#{$story-class}__graph {
-  width: 200px;
-  height: 100px;
   border: 10px solid $border-subtle-01;
-  border-right-color: $support-success;
-  border-bottom: 0;
-  border-left-color: $support-error;
-  margin: 0 auto $spacing-06 auto;
-  border-top-left-radius: 110px;
-  border-top-right-radius: 110px;
+  margin: 0 auto $spacing-06;
+  block-size: 100px;
+  border-block-end: 0;
+  border-inline-end-color: $support-success;
+  border-inline-start-color: $support-error;
+  border-start-end-radius: 110px;
+  border-start-start-radius: 110px;
+  inline-size: 200px;
 }
 .#{$story-class}__visually-hidden {
   position: absolute;
   overflow: hidden;
-  width: 1px;
-  height: 1px;
   padding: 0;
   border: 0;
+  block-size: 1px;
   clip: rect(0, 0, 0, 0);
+  inline-size: 1px;
   visibility: inherit;
   white-space: nowrap;
 }

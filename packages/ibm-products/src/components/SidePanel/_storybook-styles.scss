@@ -23,7 +23,7 @@ $story-prefix: side-panel-stories__;
   }
   .#{$story-prefix}text-inputs #side-panel-story-text-input-a,
   .#{$story-prefix}text-inputs #side-panel-story-text-input-c {
-    margin-right: $spacing-05;
+    margin-inline-end: $spacing-05;
   }
   .#{$story-prefix}text-area-container {
     position: relative;
@@ -36,8 +36,8 @@ $story-prefix: side-panel-stories__;
     @include type.type-style('label-01');
 
     position: absolute;
-    right: 0;
     color: $text-secondary;
+    inset-inline-end: 0;
   }
   .#{$story-prefix}text-area-container
     .#{$story-prefix}allowed-characters-invalid {
@@ -56,7 +56,15 @@ $story-prefix: side-panel-stories__;
 }
 
 .#{$story-prefix}grid {
-  height: 100%;
+  block-size: 100%;
+}
+
+.#{$story-prefix}story-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: 100vh;
 }
 
 @include side-panel-decorator($story-prefix);

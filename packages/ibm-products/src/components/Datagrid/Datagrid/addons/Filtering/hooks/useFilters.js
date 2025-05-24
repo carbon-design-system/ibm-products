@@ -283,7 +283,7 @@ const useFilters = ({
                 {...components.RadioButtonGroup}
                 valueSelected={
                   filtersState[column]?.value === ''
-                    ? components.DefaultRadioButton?.value ?? 'Any'
+                    ? (components.DefaultRadioButton?.value ?? 'Any')
                     : filtersState[column]?.value
                 }
                 onChange={(selected) => {
@@ -522,6 +522,14 @@ const useFilters = ({
     savedFilters,
     filtersObjectArray,
   ]);
+
+  // This useEffect will update the last applied filters when the react-table filters change, this helps keeps all states in sync
+  useEffect(
+    function reflectLastAppliedFiltersWhenReactTableUpdates() {
+      lastAppliedFilters.current = JSON.stringify(reactTableFiltersState);
+    },
+    [reactTableFiltersState, lastAppliedFilters]
+  );
 
   const cancel = () => {
     // Reverting to previous filters only applies when using batch actions

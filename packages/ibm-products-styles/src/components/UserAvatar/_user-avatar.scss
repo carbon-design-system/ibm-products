@@ -1,9 +1,11 @@
 //
-// Copyright IBM Corp. 2024, 2024
+// Copyright IBM Corp. 2024, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+
+@use 'sass:map';
 
 // Standard imports.
 @use '../../global/styles/project-settings' as *;
@@ -12,17 +14,6 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-
-// Other Carbon settings if needed
-// TODO: @use '@carbon/styles/scss/grid';
-// or
-// TODO: @use '@carbon/react/scss/grid';
-
-// UserAvatar uses the following Carbon for IBM Products components:
-// TODO: @use(s) of IBM Products component styles used by UserAvatar
-@use '@carbon/react/scss/components/tooltip';
-
-// The block part of our conventional BEM class names (blockClass__E--M).
 
 $block-class: #{$pkg-prefix}--user-avatar;
 
@@ -34,22 +25,23 @@ $sizes: (
 );
 
 @mixin size($size) {
-  $_size: map-get($sizes, $size);
+  $_size: map.get($sizes, $size);
 
-  width: $_size;
-  height: $_size;
+  block-size: $_size;
+
+  inline-size: $_size;
 }
 
 .#{$block-class} {
   position: relative;
   display: flex;
-  width: 4rem;
-  height: 4rem;
   align-items: center;
   justify-content: center;
   border: 0.5px solid transparent;
   border-radius: 100%;
+  block-size: 4rem;
   color: $text-inverse;
+  inline-size: 4rem;
   outline: none;
   outline-offset: 3px;
 }
@@ -60,7 +52,7 @@ $sizes: (
 
 .#{$block-class}__tooltip {
   &:focus-within .#{$block-class} {
-    // stylelint-disable-next-line carbon/theme-token-use
+    // stylelint-disable-next-line carbon/theme-use
     outline: 2px solid $focus;
     outline-offset: 1px;
   }
@@ -72,7 +64,7 @@ $sizes: (
 }
 
 @mixin setBgColor($color) {
-  // stylelint-disable-next-line carbon/theme-token-use
+  // stylelint-disable-next-line carbon/theme-use
   background-color: $color;
 }
 
@@ -80,9 +72,7 @@ $sizes: (
 @mixin setLightBg($order, $color) {
   :root .#{$block-class}--#{$order},
   .#{$carbon-prefix}--g10 .#{$block-class}--#{$order},
-  .#{$carbon-prefix}--white .#{$block-class}--#{$order},
-  [storybook-carbon-theme='g10'] .#{$block-class}--#{$order},
-  [storybook-carbon-theme='white'] .#{$block-class}--#{$order} {
+  .#{$carbon-prefix}--white .#{$block-class}--#{$order} {
     @include setBgColor($color);
   }
 }
@@ -90,9 +80,7 @@ $sizes: (
 //this mixin allows you to set background color based on the darker themes such as g90 and g100
 @mixin setDarkBg($order, $color) {
   .#{$carbon-prefix}--g90 .#{$block-class}--#{$order},
-  .#{$carbon-prefix}--g100 .#{$block-class}--#{$order},
-  [storybook-carbon-theme='g90'] .#{$block-class}--#{$order},
-  [storybook-carbon-theme='g100'] .#{$block-class}--#{$order} {
+  .#{$carbon-prefix}--g100 .#{$block-class}--#{$order} {
     @include setBgColor($color);
   }
 }

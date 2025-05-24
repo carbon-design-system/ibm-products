@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:map';
+
 // Standard imports.
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
@@ -24,10 +26,11 @@ $sizes: (
 );
 
 @mixin size($size) {
-  $_size: map-get($sizes, $size);
+  $_size: map.get($sizes, $size);
 
-  width: $_size;
-  height: $_size;
+  block-size: $_size;
+
+  inline-size: $_size;
 }
 
 $base-colors: 'cyan', 'gray', 'green', 'magenta', 'purple', 'teal';
@@ -45,9 +48,9 @@ $themes: (
 $theme-keys: map-keys($themes);
 
 @function carbon-get-background-color($color, $key, $contrast-key) {
-  @return map-get(
+  @return map.get(
     $carbon-colors,
-    #{$color}#{map-get(map-get($themes, $key), #{$contrast-key}-contrast)}
+    #{$color}#{map.get(map.get($themes, $key), #{$contrast-key}-contrast)}
   );
 }
 
@@ -58,7 +61,7 @@ $theme-keys: map-keys($themes);
   @each $color in $base-colors {
     @each $contrast-key in $theme-keys {
       .#{$block-class}--#{$key}.#{$block-class}--#{$contrast-key}-#{$color} {
-        // stylelint-disable-next-line carbon/theme-token-use
+        // stylelint-disable-next-line carbon/theme-use
         background-color: carbon-get-background-color(
           $color,
           $key,
@@ -91,9 +94,9 @@ $theme-keys: map-keys($themes);
 }
 
 .#{$block-class}__tooltip.#{$carbon-prefix}--btn--md.#{$carbon-prefix}--btn--icon-only {
-  min-height: auto;
   padding: 0;
   border-radius: 50%;
+  min-block-size: auto;
 }
 
 .#{$carbon-prefix}--btn--ghost.#{$block-class}__tooltip:focus {
@@ -107,8 +110,8 @@ $theme-keys: map-keys($themes);
 }
 
 .#{$block-class}__photo {
-  width: 100%;
   border-radius: 100%;
+  inline-size: 100%;
 }
 
 .#{$block-class}__photo--xl {

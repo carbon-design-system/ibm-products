@@ -166,7 +166,7 @@ export let EditSidePanel = React.forwardRef(
         label: primaryButtonText,
         onClick: (event) => {
           event.preventDefault();
-          onRequestSubmit && onRequestSubmit();
+          onRequestSubmit?.();
         },
         kind: 'primary',
         disabled: disableSubmit,

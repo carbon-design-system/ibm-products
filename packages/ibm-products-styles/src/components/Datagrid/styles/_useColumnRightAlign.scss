@@ -8,21 +8,21 @@
 @use './variables';
 
 .#{variables.$block-class}__right-align-header {
-  width: 100%;
-  text-align: right;
+  inline-size: 100%;
+  text-align: end;
 }
 
 .#{variables.$block-class}__right-align-header button {
-  text-align: right;
+  text-align: end;
 }
 
 .#{variables.$block-class}__right-align-cell-renderer {
-  width: 100%;
-  /* stylelint-disable-next-line carbon/layout-token-use */
-  padding-right: 23px;
-  text-align: right;
+  inline-size: 100%;
+  /* stylelint-disable-next-line carbon/layout-use */
+  padding-inline-end: 23px;
+  text-align: end;
 }
 
 .#{variables.$block-class}__right-align-cell-renderer.sortDisabled {
-  padding-right: 0;
+  padding-inline-end: 0;
 }

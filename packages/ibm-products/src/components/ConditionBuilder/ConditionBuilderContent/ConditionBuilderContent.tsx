@@ -51,7 +51,7 @@ const ConditionBuilderContent = ({
   initialState,
   actions,
 }: ConditionBuilderContentProps) => {
-  const { rootState, setRootState, variant, actionState } =
+  const { rootState, setRootState, variant, actionState, onAddItem } =
     useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
 
   const initialConditionState = useRef(
@@ -99,8 +99,7 @@ const ConditionBuilderContent = ({
   }, [actionState]);
   useEffect(() => {
     if (initialState?.enabledDefault) {
-      setRootState?.(initialConditionState.current as ConditionBuilderState);
-      initialConditionState.current = null;
+      setRootState?.(initialState.state);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialState]);
@@ -120,12 +119,17 @@ const ConditionBuilderContent = ({
 
   const onRemove = useCallback(
     (groupId) => {
+      const groups = rootState?.groups?.filter(
+        (group) => groupId !== group?.id
+      );
       setRootState?.({
         ...rootState,
-        groups: rootState
-          ? rootState?.groups?.filter((group) => groupId !== group?.id)
-          : [],
+        groups: rootState ? groups : [],
       });
+      //set the initial state to empty.
+      if (groups?.length === 0) {
+        initialConditionState.current = null;
+      }
     },
     [setRootState, rootState]
   );
@@ -149,27 +153,34 @@ const ConditionBuilderContent = ({
   };
 
   const addConditionGroupHandler = () => {
-    const newGroup: ConditionGroup = {
-      statement: 'ifAll',
-      groupOperator: 'and',
-      id: uuidv4(),
-      conditions: [
-        {
-          property: undefined,
-          operator: '',
-          value: '',
-          popoverToOpen: 'propertyField',
-          id: uuidv4(),
-        },
-      ],
-    };
-    setRootState?.({
-      ...rootState,
-      groups:
-        rootState && rootState.groups
-          ? [...rootState.groups, newGroup]
-          : [newGroup],
-    });
+    const { preventAdd } =
+      onAddItem?.({
+        type: 'group',
+        state: rootState as ConditionBuilderState,
+      }) ?? {};
+    if (!preventAdd) {
+      const newGroup: ConditionGroup = {
+        statement: 'ifAll',
+        groupOperator: 'and',
+        id: uuidv4(),
+        conditions: [
+          {
+            property: undefined,
+            operator: '',
+            value: '',
+            popoverToOpen: 'propertyField',
+            id: uuidv4(),
+          },
+        ],
+      };
+      setRootState?.({
+        ...rootState,
+        groups:
+          rootState && rootState.groups
+            ? [...rootState.groups, newGroup]
+            : [newGroup],
+      });
+    }
   };
 
   const getColorIndex = () => {

@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
+
 declare module '@carbon/react' {
   export {
     Accordion,
@@ -29,7 +31,6 @@ declare module '@carbon/react' {
     ComposedModal,
     ContainedList,
     ContainedListItem,
-    ContainedListItem,
     Content,
     ContentSwitcher,
     ContextMenu,
@@ -38,8 +39,6 @@ declare module '@carbon/react' {
     CopyButtonProps,
     DangerButton,
     DismissibleTag,
-    DataTable,
-    DataTable,
     DataTable,
     DataTableCustomRowData,
     DataTableCustomRowProps,
@@ -77,7 +76,6 @@ declare module '@carbon/react' {
     HeaderGlobalAction,
     HeaderGlobalBar,
     HeaderName,
-    HeaderName,
     HeaderNavigation,
     Heading,
     IconButton,
@@ -86,7 +84,6 @@ declare module '@carbon/react' {
     IdPrefix,
     InlineLoading,
     InlineNotification,
-    Layer,
     Layer,
     Link,
     LinkProps,
@@ -121,8 +118,6 @@ declare module '@carbon/react' {
     PopoverContent,
     PrimaryButton,
     ProgressBar,
-    ProgressBar,
-    ProgressIndicator,
     ProgressIndicator,
     ProgressIndicatorSkeleton,
     ProgressStep,
@@ -133,6 +128,7 @@ declare module '@carbon/react' {
     Search,
     SearchSkeleton,
     SecondaryButton,
+    Section,
     Select,
     SelectItem,
     SelectItemGroup,
@@ -153,28 +149,21 @@ declare module '@carbon/react' {
     StructuredListSkeleton,
     Switch,
     Tab,
-    Tab,
     TabContent,
     TabList,
     TabPanel,
     TabPanels,
     Table,
-    Table,
     TableBatchAction,
     TableBatchActions,
     TableBody,
-    TableBody,
-    TableCell,
     TableCell,
     TableContainer,
     TableExpandHeader,
     TableExpandRow,
     TableExpandedRow,
     TableHead,
-    TableHead,
     TableHeader,
-    TableHeader,
-    TableRow,
     TableRow,
     TableSelectAll,
     TableSelectAllProps,
@@ -182,12 +171,10 @@ declare module '@carbon/react' {
     TableToolbar,
     TableToolbarSearch,
     Tabs,
-    Tabs,
     TabsSkeleton,
     Tag,
     TextArea,
     TextAreaProps,
-    TextInput,
     TextInput,
     TextInputProps,
     Theme,
@@ -212,7 +199,6 @@ declare module '@carbon/react' {
     usePrefix,
   } from '@carbon/react';
 }
-
 declare module '@carbon/colors';
 declare module '@carbon/motion';
 declare module '@carbon/feature-flags';

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -20,6 +20,7 @@ import {
   propMappingFunction,
 } from './utils/enums';
 import { allPropTypes } from '../../global/js/utils/props-helper';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--string-formatter`;
 const componentName = 'StringFormatter';
@@ -48,15 +49,51 @@ export let StringFormatter = React.forwardRef(
     },
     ref
   ) => {
+    const outerRef = useRef(null);
+    const contentRef = useRef(null);
+    const [isTextTruncated, setIsTextTruncated] = useState(false);
+
+    const mergedRefs = (node) => {
+      outerRef.current = node;
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    };
+
+    useIsomorphicEffect(() => {
+      const checkTruncation = () => {
+        const element = contentRef.current;
+        if (element) {
+          element.style.webkitLineClamp = truncate ? lines : undefined;
+          element.style.maxWidth = width;
+          const buffer = element.clientHeight / (2 * lines);
+          // add a buffer of at least half of line height/clientHeight. to get a stable outcome.
+          const isOverflowing =
+            element.scrollHeight > element.clientHeight + buffer;
+          setIsTextTruncated(isOverflowing);
+        }
+      };
+
+      const resizeObserver = new ResizeObserver(checkTruncation);
+
+      if (outerRef.current) {
+        resizeObserver.observe(outerRef.current);
+        checkTruncation();
+      }
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }, [lines, value, width, truncate]);
+
     const stringFormatterContent = (
       <span
+        ref={contentRef}
         className={cx(`${blockClass}--content`, {
           [`${blockClass}--truncate`]: truncate,
         })}
-        style={{
-          maxWidth: width,
-          WebkitLineClamp: lines,
-        }}
       >
         {value}
       </span>
@@ -66,10 +103,10 @@ export let StringFormatter = React.forwardRef(
       <span
         {...rest}
         className={cx(blockClass, className)}
-        ref={ref}
+        ref={mergedRefs}
         {...getDevtoolsProps(componentName)}
       >
-        {truncate ? (
+        {truncate && isTextTruncated ? (
           <DefinitionTooltip
             className={`${blockClass}__tooltip`}
             align={tooltipDirection}
@@ -120,7 +157,7 @@ StringFormatter.propTypes = {
       Object.values(StringFormatterAlignment)
     ),
   ]),
-  /** Whether or not the value should be truncated. */
+  /** Whether or not the value should be truncated. if it exceeds lines. */
   truncate: PropTypes.bool,
   /** Value to format. */
   value: PropTypes.string.isRequired,

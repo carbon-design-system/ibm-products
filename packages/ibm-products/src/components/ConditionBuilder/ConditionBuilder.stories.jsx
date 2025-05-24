@@ -6,6 +6,8 @@
  */
 
 import React, { useRef, useState } from 'react';
+import { action } from '@storybook/addon-actions';
+
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 import { Wikis } from '@carbon/react/icons';
@@ -13,10 +15,15 @@ import { ConditionBuilder } from '.';
 import mdx from './ConditionBuilder.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { inputData, inputDataDynamicOptions } from './assets/sampleInput';
+import {
+  inputData,
+  inputDataDynamicOptions,
+  inputDataForCustomOperator,
+} from './assets/sampleInput';
 import {
   sampleDataStructure_nonHierarchical,
   sampleDataStructure_Hierarchical,
+  initialStateWithCustomOperators,
 } from './assets/SampleData';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
@@ -25,10 +32,6 @@ export default {
   component: ConditionBuilder,
   tags: ['autodocs'],
 
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
   parameters: {
     layout: 'fullscreen',
     styles,
@@ -213,13 +216,33 @@ const translateWithId = (key) => {
 
 const ConditionBuilderTemplate = (args) => {
   const ref = useRef(undefined);
-  return <ConditionBuilder {...args} ref={ref} {...requiredProps} />;
+  return (
+    <ConditionBuilder
+      {...args}
+      ref={ref}
+      {...requiredProps}
+      onAddItem={(type) => action(`onAddItem is triggered , type: ${type}`)()}
+    />
+  );
 };
 
 /**
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
+const statementConfigCustom = [
+  {
+    id: 'if',
+    connector: 'and',
+    label: 'if',
+  },
+  {
+    id: 'exclIf',
+    connector: 'or',
+    label: 'excl. if',
+  },
+];
+
 export const conditionBuilder = ConditionBuilderTemplate.bind({});
 conditionBuilder.storyName = 'Condition Builder';
 conditionBuilder.args = {
@@ -245,6 +268,31 @@ conditionBuilderWithInitialState.args = {
     enabledDefault: true,
   },
   inputConfig: inputData,
+  variant: NON_HIERARCHICAL_VARIANT,
+  translateWithId: translateWithId,
+};
+
+export const conditionBuilderWithCustomStatements =
+  ConditionBuilderTemplate.bind({});
+conditionBuilderWithCustomStatements.storyName =
+  'With Custom statement configuration';
+conditionBuilderWithCustomStatements.args = {
+  inputConfig: inputData,
+  variant: NON_HIERARCHICAL_VARIANT,
+  translateWithId: translateWithId,
+  statementConfigCustom: statementConfigCustom,
+};
+
+export const conditionBuilderWithCustomOperators =
+  ConditionBuilderTemplate.bind({});
+conditionBuilderWithCustomOperators.storyName =
+  'With Custom operator configuration';
+conditionBuilderWithCustomOperators.args = {
+  inputConfig: inputDataForCustomOperator,
+  initialState: {
+    state: initialStateWithCustomOperators,
+    enabledDefault: true,
+  },
   variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
 };

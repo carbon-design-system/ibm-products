@@ -1,3 +1,4 @@
+// stylelint-disable carbon/theme-use, declaration-empty-line-before
 /**
  * Copyright IBM Corp. 2024
  *
@@ -8,17 +9,17 @@
 @use 'sass:list';
 @use 'sass:math';
 @use 'sass:string';
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/type';
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/utilities';
-@use '@carbon/react/scss/motion' as *;
-@use '@carbon/react/scss/utilities/focus-outline';
-@use '@carbon/styles/scss/components/tag';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities/focus-outline';
+@use '@carbon/styles/scss/components/tag/tokens' as *;
 
 @use '@carbon/styles/scss/type' as *;
-@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/colors' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
@@ -26,20 +27,20 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   z-index: -1;
   opacity: 0;
   pointer-events: none;
-  /* stylelint-disable-next-line carbon/layout-token-use */
+  /* stylelint-disable-next-line carbon/layout-use */
   transform: translateX($translateValue);
   transition: all $duration-fast-02 motion(standard, productive);
 }
 
-.#{$block-class}__condition-wrapper * {
+.#{$block-class}__condition-wrapper {
   @include type-style('body-01');
 }
 
 .#{$block-class}__popover-content-wrapper {
   overflow: auto;
-  min-width: $spacing-07 + $spacing-13;
-  max-width: $spacing-13 + $spacing-13;
-  max-height: $spacing-13 + $spacing-13 + $spacing-07;
+  max-block-size: $spacing-13 + $spacing-13 + $spacing-07;
+  max-inline-size: $spacing-13 + $spacing-13;
+  min-inline-size: $spacing-07 + $spacing-13;
 }
 
 .#{$block-class}__item__title {
@@ -55,8 +56,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
 .#{$block-class}__item-option__option {
   display: grid;
-  min-height: 2rem;
   cursor: pointer;
+  min-block-size: 2rem;
   padding-inline: $spacing-05;
 }
 
@@ -66,8 +67,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
 .#{$block-class}__item-option__option-content {
   display: flex;
-  height: 100%;
   align-items: center;
+  block-size: 100%;
 }
 
 .#{$block-class}__item-option__option-label {
@@ -120,16 +121,16 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 
 .#{$block-class}__checkmark {
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 
 .#{$block-class}__button {
   @include utilities.button-reset();
 
   display: inline-flex;
-  height: $spacing-07;
   align-items: center;
   background-color: $layer;
+  block-size: $spacing-07;
   color: inherit;
   column-gap: $spacing-02;
   cursor: pointer;
@@ -155,20 +156,19 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
 .#{$block-class}__statement-button,
 .#{$block-class}__connector-button {
-  min-width: $spacing-10;
+  min-inline-size: $spacing-10;
   padding-inline: $spacing-03;
 }
 .#{$block-class}__property-field {
   @include type.type-style('heading-01');
 
-  padding-left: $spacing-03;
+  padding-inline-start: $spacing-03;
 }
 .#{$block-class}__close-condition {
-  padding-right: $spacing-03;
+  padding-inline-end: $spacing-03;
 }
 .#{$block-class}__add-button {
-  padding-right: $spacing-03;
-  padding-left: $spacing-03;
+  padding-inline: $spacing-03;
 }
 
 .#{$block-class}__multiselectSelectionStatusContainer {
@@ -176,7 +176,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   align-items: center;
   padding-inline: $spacing-05;
   .#{$block-class}__selectAll-button {
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 }
 
@@ -204,24 +204,20 @@ $colors: (
   //this is to select and add color to the new group preview
   .#{$block-class}__group-preview[data-color-index='#{($i%list.length($colors))}']
     button {
-    /* stylelint-disable-next-line carbon/theme-token-use */
     $next-group-color: list.nth($colors, (($i%list.length($colors)) + 1));
-    /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: inset 0 #{$spacing-01} 0 0 list.nth($next-group-color, 1);
   }
 
   //we need to select the group color from the $colors array and need to repeat the colors after $colors.length subgroups
   @for $el-index from 1 through 50 {
     $item-index: $el-index;
-    /* stylelint-disable-next-line carbon/theme-token-use */
     $item-index: ((($item-index - 1) % $group-colors-length) + 1);
     #{$selector} {
       @if $item-index != 1 {
-        /* stylelint-disable-next-line carbon/theme-token-use */
         --#{$block-class}__condition-wrapper-color: #{list.nth(
             $group-colors,
             $item-index
-          )}; // stylelint-disable-line carbon/theme-token-use
+          )};
       }
     }
 
@@ -248,21 +244,21 @@ $colors: (
       .#{$block-class}__add-button,
       .#{$block-class}__add-condition-sub-group
     ) {
-    /* stylelint-disable-next-line carbon/theme-token-use */
-    box-shadow: inset 0 #{$spacing-01} 0 0 var(--#{$block-class}__condition-wrapper-color);
+    box-shadow: inset 0 #{$spacing-01} 0 0
+      var(--#{$block-class}__condition-wrapper-color);
   }
 }
 
 .#{$block-class}__groupOperatorConnector {
-  margin-bottom: $spacing-02;
+  margin-block-end: $spacing-02;
 }
 .#{$block-class}__option-check-box {
   display: flex;
-  margin-right: $spacing-03;
+  margin-inline-end: $spacing-03;
 }
 .#{$block-class}__option-icon {
   align-self: center;
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 .#{$block-class}__content-container {
   .#{$block-class}__add-button-wrapper > :nth-child(1) {

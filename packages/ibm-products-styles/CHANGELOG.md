@@ -3,6 +3,381 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.63.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.58.0-rc.0...@carbon/ibm-products-styles@2.63.0-rc.0) (2025-05-19)
+
+
+### Bug Fixes
+
+* adjust time section labels spacing ([#7334](https://github.com/carbon-design-system/ibm-products/issues/7334)) ([7d98e26](https://github.com/carbon-design-system/ibm-products/commit/7d98e26f483d79c21abfd72e7627eed26c0e51d5))
+* **coachmark:** media/button padding and navLinkLabel as tooltip ([#7213](https://github.com/carbon-design-system/ibm-products/issues/7213)) ([9b2346c](https://github.com/carbon-design-system/ibm-products/commit/9b2346c9ffc385af60353a7d7285a111b1184617))
+* **Datagrid:** move `aria-sort` to Datagrid `th` element ([#7206](https://github.com/carbon-design-system/ibm-products/issues/7206)) ([f4af549](https://github.com/carbon-design-system/ibm-products/commit/f4af549e64558606cc89ae0390294be3e0d678d0))
+* **notificationspanel:** use appropriate heading levels ([#7288](https://github.com/carbon-design-system/ibm-products/issues/7288)) ([9517ef7](https://github.com/carbon-design-system/ibm-products/commit/9517ef7dfc1458513aa77ac32983a05091cc0cc6)), closes [#7173](https://github.com/carbon-design-system/ibm-products/issues/7173)
+* **pageheader:** add bottom border when background is present ([#7254](https://github.com/carbon-design-system/ibm-products/issues/7254)) ([932bfc8](https://github.com/carbon-design-system/ibm-products/commit/932bfc81a8de09b8e0dd84a591e6a03419dcdcf2))
+* **PageHeader:** page actions without title (collapseTitle=true) ([#7447](https://github.com/carbon-design-system/ibm-products/issues/7447)) ([3bcb632](https://github.com/carbon-design-system/ibm-products/commit/3bcb63212f2c50e806fe809646f72cd0efdadda9))
+* **pageheader:** remove unused styles ([#7446](https://github.com/carbon-design-system/ibm-products/issues/7446)) ([c6c5b57](https://github.com/carbon-design-system/ibm-products/commit/c6c5b575a6cb38422c9f7bbf1c9cff1774e364b9))
+
+
+### Features
+
+* composable interstitial screen implementation ([#7229](https://github.com/carbon-design-system/ibm-products/issues/7229)) ([5f350de](https://github.com/carbon-design-system/ibm-products/commit/5f350de805b02cd6e38270ee5261702af47524b5))
+* **stories:** open in stackblitz ([#7147](https://github.com/carbon-design-system/ibm-products/issues/7147)) ([879560e](https://github.com/carbon-design-system/ibm-products/commit/879560e5ae4391e2d2ebb235d7e7931bdd9d2c2d))
+* string formatter height overflow, re-use in tearsheet ([#7345](https://github.com/carbon-design-system/ibm-products/issues/7345)) ([259cb8b](https://github.com/carbon-design-system/ibm-products/commit/259cb8be8147bc2e3c1e1bd2186c0db81e00f05b))
+
+
+
+
+
+# [2.62.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.62.0-rc.0...@carbon/ibm-products-styles@2.62.0) (2025-05-14)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.62.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.58.0-rc.0...@carbon/ibm-products-styles@2.62.0-rc.0) (2025-05-05)
+
+
+### Bug Fixes
+
+* adjust time section labels spacing ([#7334](https://github.com/carbon-design-system/ibm-products/issues/7334)) ([7d98e26](https://github.com/carbon-design-system/ibm-products/commit/7d98e26f483d79c21abfd72e7627eed26c0e51d5))
+* **coachmark:** media/button padding and navLinkLabel as tooltip ([#7213](https://github.com/carbon-design-system/ibm-products/issues/7213)) ([9b2346c](https://github.com/carbon-design-system/ibm-products/commit/9b2346c9ffc385af60353a7d7285a111b1184617))
+* **Datagrid:** move `aria-sort` to Datagrid `th` element ([#7206](https://github.com/carbon-design-system/ibm-products/issues/7206)) ([f4af549](https://github.com/carbon-design-system/ibm-products/commit/f4af549e64558606cc89ae0390294be3e0d678d0))
+* **notificationspanel:** use appropriate heading levels ([#7288](https://github.com/carbon-design-system/ibm-products/issues/7288)) ([9517ef7](https://github.com/carbon-design-system/ibm-products/commit/9517ef7dfc1458513aa77ac32983a05091cc0cc6)), closes [#7173](https://github.com/carbon-design-system/ibm-products/issues/7173)
+* **pageheader:** add bottom border when background is present ([#7254](https://github.com/carbon-design-system/ibm-products/issues/7254)) ([932bfc8](https://github.com/carbon-design-system/ibm-products/commit/932bfc81a8de09b8e0dd84a591e6a03419dcdcf2))
+
+
+### Features
+
+* composable interstitial screen implementation ([#7229](https://github.com/carbon-design-system/ibm-products/issues/7229)) ([5f350de](https://github.com/carbon-design-system/ibm-products/commit/5f350de805b02cd6e38270ee5261702af47524b5))
+* **stories:** open in stackblitz ([#7147](https://github.com/carbon-design-system/ibm-products/issues/7147)) ([879560e](https://github.com/carbon-design-system/ibm-products/commit/879560e5ae4391e2d2ebb235d7e7931bdd9d2c2d))
+* string formatter height overflow, re-use in tearsheet ([#7345](https://github.com/carbon-design-system/ibm-products/issues/7345)) ([259cb8b](https://github.com/carbon-design-system/ibm-products/commit/259cb8be8147bc2e3c1e1bd2186c0db81e00f05b))
+
+
+
+
+
+# [2.61.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.61.0-rc.0...@carbon/ibm-products-styles@2.61.0) (2025-04-30)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.61.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.58.0-rc.0...@carbon/ibm-products-styles@2.61.0-rc.0) (2025-04-21)
+
+
+### Bug Fixes
+
+* **coachmark:** media/button padding and navLinkLabel as tooltip ([#7213](https://github.com/carbon-design-system/ibm-products/issues/7213)) ([9b2346c](https://github.com/carbon-design-system/ibm-products/commit/9b2346c9ffc385af60353a7d7285a111b1184617))
+* **notificationspanel:** use appropriate heading levels ([#7288](https://github.com/carbon-design-system/ibm-products/issues/7288)) ([9517ef7](https://github.com/carbon-design-system/ibm-products/commit/9517ef7dfc1458513aa77ac32983a05091cc0cc6)), closes [#7173](https://github.com/carbon-design-system/ibm-products/issues/7173)
+* **pageheader:** add bottom border when background is present ([#7254](https://github.com/carbon-design-system/ibm-products/issues/7254)) ([932bfc8](https://github.com/carbon-design-system/ibm-products/commit/932bfc81a8de09b8e0dd84a591e6a03419dcdcf2))
+
+
+### Features
+
+* composable interstitial screen implementation ([#7229](https://github.com/carbon-design-system/ibm-products/issues/7229)) ([5f350de](https://github.com/carbon-design-system/ibm-products/commit/5f350de805b02cd6e38270ee5261702af47524b5))
+* **stories:** open in stackblitz ([#7147](https://github.com/carbon-design-system/ibm-products/issues/7147)) ([879560e](https://github.com/carbon-design-system/ibm-products/commit/879560e5ae4391e2d2ebb235d7e7931bdd9d2c2d))
+
+
+
+
+
+# [2.60.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.60.0-rc.0...@carbon/ibm-products-styles@2.60.0) (2025-04-17)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.60.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.58.0-rc.0...@carbon/ibm-products-styles@2.60.0-rc.0) (2025-04-07)
+
+
+### Features
+
+* **stories:** open in stackblitz ([#7147](https://github.com/carbon-design-system/ibm-products/issues/7147)) ([879560e](https://github.com/carbon-design-system/ibm-products/commit/879560e5ae4391e2d2ebb235d7e7931bdd9d2c2d))
+
+
+
+
+
+# [2.59.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.59.0-rc.0...@carbon/ibm-products-styles@2.59.0) (2025-04-02)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.59.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.58.0-rc.0...@carbon/ibm-products-styles@2.59.0-rc.0) (2025-03-24)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.58.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.58.0-rc.0...@carbon/ibm-products-styles@2.58.0) (2025-03-19)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.58.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.58.0-rc.0) (2025-03-10)
+
+
+### Bug Fixes
+
+* **APIKeyModal:** improve screen reader announcement ([#6481](https://github.com/carbon-design-system/ibm-products/issues/6481)) ([bea9003](https://github.com/carbon-design-system/ibm-products/commit/bea9003e1c1dcf2f1c19ecaccd6a4096bc313d8d))
+* **BigNumbers:** Convert to TypeScript ([#6734](https://github.com/carbon-design-system/ibm-products/issues/6734)) ([2ac32d0](https://github.com/carbon-design-system/ibm-products/commit/2ac32d096b6bc01df000e1c534e61a574fd55e2a))
+* component token style import ([#6710](https://github.com/carbon-design-system/ibm-products/issues/6710)) ([49604de](https://github.com/carbon-design-system/ibm-products/commit/49604de6c3b15e7ed677abc27004cc5166fbff62))
+* condition builder style issues ([#6724](https://github.com/carbon-design-system/ibm-products/issues/6724)) ([37dba95](https://github.com/carbon-design-system/ibm-products/commit/37dba95fffdfce26cd5505d0451a33d82f4cb0e3))
+* **conditionbuilder:** property text to be bold ([#6658](https://github.com/carbon-design-system/ibm-products/issues/6658)) ([cfc7b39](https://github.com/carbon-design-system/ibm-products/commit/cfc7b3928b1e16847a7370413d2f52588beca03e))
+* **GetStartedCard:** [#6949](https://github.com/carbon-design-system/ibm-products/issues/6949) - 2 Sass deprecation warnings ([#6950](https://github.com/carbon-design-system/ibm-products/issues/6950)) ([ef5d492](https://github.com/carbon-design-system/ibm-products/commit/ef5d492ca5c248133569cebb881b65199160b746))
+* glitches on open ([#6873](https://github.com/carbon-design-system/ibm-products/issues/6873)) ([dd74e33](https://github.com/carbon-design-system/ibm-products/commit/dd74e337cd3670201bab669035a77e026c54103d))
+* **NotificationsPanel:** implemented usePresence hook ([#7028](https://github.com/carbon-design-system/ibm-products/issues/7028)) ([0fbdf56](https://github.com/carbon-design-system/ibm-products/commit/0fbdf5661bd064b4867031b6c963320f0d097a4a))
+* **NotificationsPanel:** remove focus trap ([#6829](https://github.com/carbon-design-system/ibm-products/issues/6829)) ([ccd0926](https://github.com/carbon-design-system/ibm-products/commit/ccd09268b98f9e1ced078086f00f00a58faf99c4))
+* **NotificationsPanel:** remove hard-coded dark theme ([#6862](https://github.com/carbon-design-system/ibm-products/issues/6862)) ([64d9b48](https://github.com/carbon-design-system/ibm-products/commit/64d9b48a8db748ba21835baa14fe047fd8aaf264))
+* pageheader subtitle truncation visibility ([#6551](https://github.com/carbon-design-system/ibm-products/issues/6551)) ([26394dd](https://github.com/carbon-design-system/ibm-products/commit/26394dd2b740f19306e8fbbbd6c2195fc5a3bbed))
+* **pageHeader:** menu button overflow issue on small screens ([#6502](https://github.com/carbon-design-system/ibm-products/issues/6502)) ([0072e42](https://github.com/carbon-design-system/ibm-products/commit/0072e424fc1f25fbf58be67f7d4d792643f26c30))
+* **Tearsheet:** undo previous "readonly" css fix ([#6975](https://github.com/carbon-design-system/ibm-products/issues/6975)) ([73a0d2f](https://github.com/carbon-design-system/ibm-products/commit/73a0d2fc7987d1a5e16ec8745bdadfa533a537d4))
+* **useravatar:** remove data-carbon-theme related style ([#6945](https://github.com/carbon-design-system/ibm-products/issues/6945)) ([2876fb3](https://github.com/carbon-design-system/ibm-products/commit/2876fb3958cb41fae82c4d206569dbfcd0f01706))
+* **useravatar:** variable change ([#6856](https://github.com/carbon-design-system/ibm-products/issues/6856)) ([2e6fc2b](https://github.com/carbon-design-system/ibm-products/commit/2e6fc2b3066fb55de2ded947d1d15429c852c375))
+
+
+### Features
+
+* adds open-wc/testing library ([#6972](https://github.com/carbon-design-system/ibm-products/issues/6972)) ([0ec55fb](https://github.com/carbon-design-system/ibm-products/commit/0ec55fb1da989c510e466f98a453f795dab595e3))
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+* **sidepanel:** implement decorator prop ([#6511](https://github.com/carbon-design-system/ibm-products/issues/6511)) ([336a5b0](https://github.com/carbon-design-system/ibm-products/commit/336a5b0ad06051bd52080e5d7cd610feb56604c8))
+
+
+
+
+
+# [2.57.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.57.0-rc.0...@carbon/ibm-products-styles@2.57.0) (2025-03-05)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.57.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.57.0-rc.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **APIKeyModal:** improve screen reader announcement ([#6481](https://github.com/carbon-design-system/ibm-products/issues/6481)) ([bea9003](https://github.com/carbon-design-system/ibm-products/commit/bea9003e1c1dcf2f1c19ecaccd6a4096bc313d8d))
+* **BigNumbers:** Convert to TypeScript ([#6734](https://github.com/carbon-design-system/ibm-products/issues/6734)) ([2ac32d0](https://github.com/carbon-design-system/ibm-products/commit/2ac32d096b6bc01df000e1c534e61a574fd55e2a))
+* component token style import ([#6710](https://github.com/carbon-design-system/ibm-products/issues/6710)) ([49604de](https://github.com/carbon-design-system/ibm-products/commit/49604de6c3b15e7ed677abc27004cc5166fbff62))
+* condition builder style issues ([#6724](https://github.com/carbon-design-system/ibm-products/issues/6724)) ([37dba95](https://github.com/carbon-design-system/ibm-products/commit/37dba95fffdfce26cd5505d0451a33d82f4cb0e3))
+* **conditionbuilder:** property text to be bold ([#6658](https://github.com/carbon-design-system/ibm-products/issues/6658)) ([cfc7b39](https://github.com/carbon-design-system/ibm-products/commit/cfc7b3928b1e16847a7370413d2f52588beca03e))
+* glitches on open ([#6873](https://github.com/carbon-design-system/ibm-products/issues/6873)) ([dd74e33](https://github.com/carbon-design-system/ibm-products/commit/dd74e337cd3670201bab669035a77e026c54103d))
+* **NotificationsPanel:** remove focus trap ([#6829](https://github.com/carbon-design-system/ibm-products/issues/6829)) ([ccd0926](https://github.com/carbon-design-system/ibm-products/commit/ccd09268b98f9e1ced078086f00f00a58faf99c4))
+* **NotificationsPanel:** remove hard-coded dark theme ([#6862](https://github.com/carbon-design-system/ibm-products/issues/6862)) ([64d9b48](https://github.com/carbon-design-system/ibm-products/commit/64d9b48a8db748ba21835baa14fe047fd8aaf264))
+* pageheader subtitle truncation visibility ([#6551](https://github.com/carbon-design-system/ibm-products/issues/6551)) ([26394dd](https://github.com/carbon-design-system/ibm-products/commit/26394dd2b740f19306e8fbbbd6c2195fc5a3bbed))
+* **pageHeader:** menu button overflow issue on small screens ([#6502](https://github.com/carbon-design-system/ibm-products/issues/6502)) ([0072e42](https://github.com/carbon-design-system/ibm-products/commit/0072e424fc1f25fbf58be67f7d4d792643f26c30))
+* **useravatar:** remove data-carbon-theme related style ([#6945](https://github.com/carbon-design-system/ibm-products/issues/6945)) ([2876fb3](https://github.com/carbon-design-system/ibm-products/commit/2876fb3958cb41fae82c4d206569dbfcd0f01706))
+* **useravatar:** variable change ([#6856](https://github.com/carbon-design-system/ibm-products/issues/6856)) ([2e6fc2b](https://github.com/carbon-design-system/ibm-products/commit/2e6fc2b3066fb55de2ded947d1d15429c852c375))
+
+
+### Features
+
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+* **sidepanel:** implement decorator prop ([#6511](https://github.com/carbon-design-system/ibm-products/issues/6511)) ([336a5b0](https://github.com/carbon-design-system/ibm-products/commit/336a5b0ad06051bd52080e5d7cd610feb56604c8))
+
+
+
+
+
+# [2.56.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.56.0-rc.0...@carbon/ibm-products-styles@2.56.0) (2025-02-19)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.56.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.56.0-rc.0) (2025-02-10)
+
+
+### Bug Fixes
+
+* **APIKeyModal:** improve screen reader announcement ([#6481](https://github.com/carbon-design-system/ibm-products/issues/6481)) ([bea9003](https://github.com/carbon-design-system/ibm-products/commit/bea9003e1c1dcf2f1c19ecaccd6a4096bc313d8d))
+* **BigNumbers:** Convert to TypeScript ([#6734](https://github.com/carbon-design-system/ibm-products/issues/6734)) ([2ac32d0](https://github.com/carbon-design-system/ibm-products/commit/2ac32d096b6bc01df000e1c534e61a574fd55e2a))
+* component token style import ([#6710](https://github.com/carbon-design-system/ibm-products/issues/6710)) ([49604de](https://github.com/carbon-design-system/ibm-products/commit/49604de6c3b15e7ed677abc27004cc5166fbff62))
+* condition builder style issues ([#6724](https://github.com/carbon-design-system/ibm-products/issues/6724)) ([37dba95](https://github.com/carbon-design-system/ibm-products/commit/37dba95fffdfce26cd5505d0451a33d82f4cb0e3))
+* **conditionbuilder:** property text to be bold ([#6658](https://github.com/carbon-design-system/ibm-products/issues/6658)) ([cfc7b39](https://github.com/carbon-design-system/ibm-products/commit/cfc7b3928b1e16847a7370413d2f52588beca03e))
+* **NotificationsPanel:** remove focus trap ([#6829](https://github.com/carbon-design-system/ibm-products/issues/6829)) ([ccd0926](https://github.com/carbon-design-system/ibm-products/commit/ccd09268b98f9e1ced078086f00f00a58faf99c4))
+* pageheader subtitle truncation visibility ([#6551](https://github.com/carbon-design-system/ibm-products/issues/6551)) ([26394dd](https://github.com/carbon-design-system/ibm-products/commit/26394dd2b740f19306e8fbbbd6c2195fc5a3bbed))
+* **pageHeader:** menu button overflow issue on small screens ([#6502](https://github.com/carbon-design-system/ibm-products/issues/6502)) ([0072e42](https://github.com/carbon-design-system/ibm-products/commit/0072e424fc1f25fbf58be67f7d4d792643f26c30))
+
+
+### Features
+
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+* **sidepanel:** implement decorator prop ([#6511](https://github.com/carbon-design-system/ibm-products/issues/6511)) ([336a5b0](https://github.com/carbon-design-system/ibm-products/commit/336a5b0ad06051bd52080e5d7cd610feb56604c8))
+
+
+
+
+
+# [2.55.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.55.0-rc.0...@carbon/ibm-products-styles@2.55.0) (2025-02-05)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.55.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.55.0-rc.0) (2025-01-27)
+
+
+### Bug Fixes
+
+* **APIKeyModal:** improve screen reader announcement ([#6481](https://github.com/carbon-design-system/ibm-products/issues/6481)) ([bea9003](https://github.com/carbon-design-system/ibm-products/commit/bea9003e1c1dcf2f1c19ecaccd6a4096bc313d8d))
+* condition builder style issues ([#6724](https://github.com/carbon-design-system/ibm-products/issues/6724)) ([37dba95](https://github.com/carbon-design-system/ibm-products/commit/37dba95fffdfce26cd5505d0451a33d82f4cb0e3))
+* **conditionbuilder:** property text to be bold ([#6658](https://github.com/carbon-design-system/ibm-products/issues/6658)) ([cfc7b39](https://github.com/carbon-design-system/ibm-products/commit/cfc7b3928b1e16847a7370413d2f52588beca03e))
+* pageheader subtitle truncation visibility ([#6551](https://github.com/carbon-design-system/ibm-products/issues/6551)) ([26394dd](https://github.com/carbon-design-system/ibm-products/commit/26394dd2b740f19306e8fbbbd6c2195fc5a3bbed))
+* **pageHeader:** menu button overflow issue on small screens ([#6502](https://github.com/carbon-design-system/ibm-products/issues/6502)) ([0072e42](https://github.com/carbon-design-system/ibm-products/commit/0072e424fc1f25fbf58be67f7d4d792643f26c30))
+
+
+### Features
+
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+* **sidepanel:** implement decorator prop ([#6511](https://github.com/carbon-design-system/ibm-products/issues/6511)) ([336a5b0](https://github.com/carbon-design-system/ibm-products/commit/336a5b0ad06051bd52080e5d7cd610feb56604c8))
+
+
+
+
+
+# [2.54.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.54.0-rc.0...@carbon/ibm-products-styles@2.54.0) (2025-01-22)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.54.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.54.0-rc.0) (2025-01-13)
+
+
+### Bug Fixes
+
+* **APIKeyModal:** improve screen reader announcement ([#6481](https://github.com/carbon-design-system/ibm-products/issues/6481)) ([bea9003](https://github.com/carbon-design-system/ibm-products/commit/bea9003e1c1dcf2f1c19ecaccd6a4096bc313d8d))
+* **conditionbuilder:** property text to be bold ([#6658](https://github.com/carbon-design-system/ibm-products/issues/6658)) ([cfc7b39](https://github.com/carbon-design-system/ibm-products/commit/cfc7b3928b1e16847a7370413d2f52588beca03e))
+* pageheader subtitle truncation visibility ([#6551](https://github.com/carbon-design-system/ibm-products/issues/6551)) ([26394dd](https://github.com/carbon-design-system/ibm-products/commit/26394dd2b740f19306e8fbbbd6c2195fc5a3bbed))
+* **pageHeader:** menu button overflow issue on small screens ([#6502](https://github.com/carbon-design-system/ibm-products/issues/6502)) ([0072e42](https://github.com/carbon-design-system/ibm-products/commit/0072e424fc1f25fbf58be67f7d4d792643f26c30))
+
+
+### Features
+
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+* **sidepanel:** implement decorator prop ([#6511](https://github.com/carbon-design-system/ibm-products/issues/6511)) ([336a5b0](https://github.com/carbon-design-system/ibm-products/commit/336a5b0ad06051bd52080e5d7cd610feb56604c8))
+
+
+
+
+
+## [2.53.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.53.1-rc.0...@carbon/ibm-products-styles@2.53.1) (2025-01-10)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+## [2.53.1-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.53.1-rc.0) (2025-01-09)
+
+
+### Bug Fixes
+
+* **APIKeyModal:** improve screen reader announcement ([#6481](https://github.com/carbon-design-system/ibm-products/issues/6481)) ([bea9003](https://github.com/carbon-design-system/ibm-products/commit/bea9003e1c1dcf2f1c19ecaccd6a4096bc313d8d))
+* pageheader subtitle truncation visibility ([#6551](https://github.com/carbon-design-system/ibm-products/issues/6551)) ([26394dd](https://github.com/carbon-design-system/ibm-products/commit/26394dd2b740f19306e8fbbbd6c2195fc5a3bbed))
+* **pageHeader:** menu button overflow issue on small screens ([#6502](https://github.com/carbon-design-system/ibm-products/issues/6502)) ([0072e42](https://github.com/carbon-design-system/ibm-products/commit/0072e424fc1f25fbf58be67f7d4d792643f26c30))
+
+
+### Features
+
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+* **sidepanel:** implement decorator prop ([#6511](https://github.com/carbon-design-system/ibm-products/issues/6511)) ([336a5b0](https://github.com/carbon-design-system/ibm-products/commit/336a5b0ad06051bd52080e5d7cd610feb56604c8))
+
+
+
+
+
+# [2.53.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.53.0-rc.0...@carbon/ibm-products-styles@2.53.0) (2025-01-08)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.53.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.53.0-rc.0) (2024-12-24)
+
+
+### Bug Fixes
+
+* **APIKeyModal:** improve screen reader announcement ([#6481](https://github.com/carbon-design-system/ibm-products/issues/6481)) ([bea9003](https://github.com/carbon-design-system/ibm-products/commit/bea9003e1c1dcf2f1c19ecaccd6a4096bc313d8d))
+* pageheader subtitle truncation visibility ([#6551](https://github.com/carbon-design-system/ibm-products/issues/6551)) ([26394dd](https://github.com/carbon-design-system/ibm-products/commit/26394dd2b740f19306e8fbbbd6c2195fc5a3bbed))
+* **pageHeader:** menu button overflow issue on small screens ([#6502](https://github.com/carbon-design-system/ibm-products/issues/6502)) ([0072e42](https://github.com/carbon-design-system/ibm-products/commit/0072e424fc1f25fbf58be67f7d4d792643f26c30))
+
+
+### Features
+
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+* **sidepanel:** implement decorator prop ([#6511](https://github.com/carbon-design-system/ibm-products/issues/6511)) ([336a5b0](https://github.com/carbon-design-system/ibm-products/commit/336a5b0ad06051bd52080e5d7cd610feb56604c8))
+
+
+
+
+
+# [2.52.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.52.0-rc.0...@carbon/ibm-products-styles@2.52.0) (2024-12-18)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.52.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.52.0-rc.0) (2024-12-09)
+
+
+### Bug Fixes
+
+* **pageHeader:** menu button overflow issue on small screens ([#6502](https://github.com/carbon-design-system/ibm-products/issues/6502)) ([0072e42](https://github.com/carbon-design-system/ibm-products/commit/0072e424fc1f25fbf58be67f7d4d792643f26c30))
+
+
+### Features
+
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+
+
+
+
+
+# [2.51.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.51.0-rc.0...@carbon/ibm-products-styles@2.51.0) (2024-12-04)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.51.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.51.0-rc.0) (2024-11-25)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
 # [2.50.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.1...@carbon/ibm-products-styles@2.50.0) (2024-11-20)
 
 **Note:** Version bump only for package @carbon/ibm-products-styles

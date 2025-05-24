@@ -91,16 +91,7 @@ const makeBreadcrumb = (item, title) => ({
   key: `Breadcrumb ${item}`,
   label: typeof title === 'string' ? title : `Breadcrumb ${item}`,
 });
-const now = new Date();
-const m = now.getMonth();
-if (m === 0) {
-  now.setFullYear(now.getFullYear() - 1);
-  now.setMonth(11);
-} else {
-  now.setMonth(m - 1);
-}
-const ms = now.toLocaleString('default', { month: 'long' });
-const ys = now.toLocaleString('default', { year: 'numeric' });
+
 const breadcrumbs = {
   'No breadcrumb': null,
   'A single breadcrumb': [makeBreadcrumb(1, 'Home page')],
@@ -116,7 +107,7 @@ const breadcrumbs = {
   'Demo breadcrumbs': [
     makeBreadcrumb(1, 'Home page', '../../../homepage'),
     makeBreadcrumb(2, 'Reports', '../../Reports'),
-    makeBreadcrumb(3, `${ms} ${ys}`, `../${ms}{ys}`),
+    makeBreadcrumb(3, `January 2025`, `../January 2025`),
   ],
 };
 
@@ -133,7 +124,7 @@ const children = {
     <div style={{ display: 'flex' }}>
       <p
         style={{
-          // stylelint-disable-next-line carbon/layout-token-use
+          // stylelint-disable-next-line carbon/layout-use
           marginRight: '50px',
           maxWidth: '400px',
         }}
@@ -486,7 +477,7 @@ const pageActionsOverflowLabel = 'Page actions...';
 
 const subtitle = 'Optional subtitle if necessary';
 const longSubtitle =
-  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on.';
+  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on and on and on and on and on and on and on.';
 const demoSubtitle = 'This report details the monthly authentication failures';
 
 const dummyPageContent = (

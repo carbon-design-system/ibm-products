@@ -6,51 +6,25 @@
  */
 
 // Import portions of React that are needed.
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, Link, ButtonProps } from '@carbon/react';
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { Button, Link } from '@carbon/react';
 
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
 import UnauthorizedIllustration from '../assets/UnauthorizedIllustration';
-import { defaults } from '../EmptyState';
+import { defaults, EmptyStatePresetProps } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'UnauthorizedEmptyState';
 
-export interface UnauthorizedEmptyStateProps {
-  /**
-   * Empty state action button
-   */
-  action?: {
-    kind?: 'primary' | 'secondary' | 'tertiary';
-    renderIcon?: CarbonIconType;
-    onClick?: ButtonProps<React.ElementType>['onClick'];
-    text?: string;
-  };
-
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
-  className?: string;
-
-  /**
-   * The alt text for empty state svg images. If not provided , title will be used.
-   */
-  illustrationDescription?: string;
-
-  /**
-   * Designates the position of the illustration relative to the content
-   */
-  illustrationPosition?: 'top' | 'right' | 'bottom' | 'left';
-
+export interface UnauthorizedEmptyStateProps extends EmptyStatePresetProps {
   /**
    * Empty state illustration theme variations.
    * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
@@ -58,29 +32,6 @@ export interface UnauthorizedEmptyStateProps {
    * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme?: 'light' | 'dark';
-
-  /**
-   * Empty state link object
-   */
-  link?: {
-    text?: string | ReactNode;
-    href?: string;
-  };
-
-  /**
-   * Empty state size
-   */
-  size?: 'lg' | 'sm';
-
-  /**
-   * Empty state subtitle
-   */
-  subtitle: string | ReactNode;
-
-  /**
-   * Empty state title
-   */
-  title: string | ReactNode;
 }
 
 /**
@@ -101,6 +52,7 @@ export let UnauthorizedEmptyState = React.forwardRef<
       illustrationDescription,
       link,
       size = defaults.size,
+      headingAs,
       subtitle,
       title,
 
@@ -133,6 +85,7 @@ export let UnauthorizedEmptyState = React.forwardRef<
           action={action}
           link={link}
           size={size}
+          headingAs={headingAs}
           subtitle={subtitle}
           title={title || ''}
         />
@@ -174,6 +127,11 @@ UnauthorizedEmptyState.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs: PropTypes.elementType,
+
+  /**
    * The alt text for empty state svg images. If not provided , title will be used.
    */
   illustrationDescription: PropTypes.string,
@@ -190,7 +148,6 @@ UnauthorizedEmptyState.propTypes = {
    * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
-
   /**
    * Empty state link object
    */
@@ -200,7 +157,6 @@ UnauthorizedEmptyState.propTypes = {
     text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     href: PropTypes.string,
   }),
-
   /**
    * Empty state size
    */

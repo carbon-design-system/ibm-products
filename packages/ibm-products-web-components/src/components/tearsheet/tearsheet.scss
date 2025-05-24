@@ -105,8 +105,9 @@ $motion-duration: $duration-moderate-02;
   ::slotted(#{$carbon-prefix}-slug) {
     display: flex;
     inset-inline-end: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
     margin-block: 6px;
-    margin-inline-end: 1rem;
+    margin-inline-end: $spacing-05;
   }
 }
 
@@ -118,7 +119,7 @@ $motion-duration: $duration-moderate-02;
   align-items: flex-end;
   background: initial;
   opacity: 1;
-
+  /* stylelint-disable-next-line */
   transition: visibility 0s linear;
   visibility: inherit;
 
@@ -139,7 +140,8 @@ $motion-duration: $duration-moderate-02;
     inset: 0;
     opacity: var(--overlay-opacity);
 
-    transition: background-color $motion-duration motion(exit, expressive),
+    transition:
+      background-color $motion-duration motion(exit, expressive),
       opacity $motion-duration motion(exit, expressive);
 
     @media (prefers-reduced-motion: reduce) {
@@ -176,8 +178,8 @@ $motion-duration: $duration-moderate-02;
     border: 1px solid transparent;
 
     /* override carbon ai removing background gradient */
-    background: linear-gradient(to top, var(--cds-layer), var(--cds-layer))
-        padding-box,
+    background:
+      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) padding-box,
       linear-gradient(
           to bottom,
           var(--cds-ai-border-start, #78a9ff),
@@ -259,6 +261,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__header[has-close-icon][has-slug] {
+    /* stylelint-disable-next-line carbon/layout-use */
     padding-inline-end: calc(#{$spacing-11 + $spacing-09});
   }
 

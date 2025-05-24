@@ -12,24 +12,33 @@
 @use '@carbon/styles/scss/spacing' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--scroll-gradient;
+$intersection-value: 3rem;
 
 .#{$block-class} {
   position: relative;
   display: flex;
-  width: inherit;
-  height: inherit;
   align-items: stretch;
   justify-content: stretch;
+  block-size: inherit;
+  inline-size: inherit;
 }
 .#{$block-class}__content {
+  display: grid;
   overflow: auto;
-  width: 100%;
-  height: inherit;
+  block-size: inherit;
+  grid-template-columns: 1fr;
+  inline-size: 100%;
 }
 
 .#{$block-class}__content-children {
-  width: 100%;
-  height: 100%;
+  block-size: 100%;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  inline-size: 100%;
+}
+
+.#{$block-class}__content-children > * {
+  grid-area: 1 / 1;
 }
 // All gradients
 .#{$block-class}__start-vertical,
@@ -44,29 +53,29 @@ $block-class: #{c4p-settings.$pkg-prefix}--scroll-gradient;
 
 // Vertical start
 .#{$block-class}--y-scrollable .#{$block-class}__start-vertical {
-  top: 0;
-  left: 0;
-  height: $spacing-09;
+  block-size: $spacing-09;
+  inset-block-start: 0;
+  inset-inline-start: 0;
 }
 // Vertical end
 .#{$block-class}--y-scrollable .#{$block-class}__end-vertical {
-  bottom: 0;
-  left: 0;
-  height: $spacing-09;
+  block-size: $spacing-09;
+  inset-block-end: 0;
+  inset-inline-start: 0;
 }
 
 // Horizontal start
 .#{$block-class}--x-scrollable .#{$block-class}__start-horizontal {
-  top: 0;
-  left: 0;
-  width: $spacing-09;
+  inline-size: $spacing-09;
+  inset-block-start: 0;
+  inset-inline-start: 0;
 }
 
 // Horizontal end
 .#{$block-class}--x-scrollable .#{$block-class}__end-horizontal {
-  top: 0;
-  right: 0;
-  width: $spacing-09;
+  inline-size: $spacing-09;
+  inset-block-start: 0;
+  inset-inline-end: 0;
 }
 
 // Vertical start states
@@ -99,4 +108,25 @@ $block-class: #{c4p-settings.$pkg-prefix}--scroll-gradient;
 .#{$block-class}--x-started.#{$block-class}--x-scrollable
   .#{$block-class}__end-horizontal {
   display: block;
+}
+
+.#{$block-class} [data-start-vertical],
+.#{$block-class} [data-end-vertical] {
+  block-size: $intersection-value;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  inline-size: 100%;
+}
+
+.#{$block-class} [data-end-vertical],
+.#{$block-class} [data-end-horizontal] {
+  place-self: flex-end;
+}
+
+.#{$block-class} [data-start-horizontal],
+.#{$block-class} [data-end-horizontal] {
+  block-size: 100%;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  inline-size: $intersection-value;
 }

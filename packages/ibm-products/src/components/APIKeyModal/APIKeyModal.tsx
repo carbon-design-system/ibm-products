@@ -10,7 +10,7 @@ import React, {
   useRef,
   useEffect,
   forwardRef,
-  MutableRefObject,
+  RefObject,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -26,7 +26,12 @@ import {
   Button,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
-import { InformationFilled, Copy, ErrorFilled } from '@carbon/react/icons';
+import {
+  InformationFilled,
+  Copy,
+  ErrorFilled,
+  CheckmarkFilled,
+} from '@carbon/react/icons';
 import { APIKeyDownloader } from './APIKeyDownloader';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
@@ -36,7 +41,6 @@ import { isRequiredIf } from '../../global/js/utils/props-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { APIKeyModalProps } from './APIKeyModal.types';
 import { useFocus, usePreviousValue } from '../../global/js/hooks';
-import { claimFocus } from '../../global/js/hooks/useFocus';
 
 const componentName = 'APIKeyModal';
 
@@ -68,12 +72,14 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       editButtonText,
       editSuccess,
       editSuccessTitle,
+      editSuccessMessage,
       editing,
       error,
       errorText,
       generateButtonText,
       generateSuccessBody,
       generateSuccessTitle,
+      generateSuccessMessage,
       generateTitle,
       hasAPIKeyVisibilityToggle,
       hasDownloadLink,
@@ -94,8 +100,8 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       open,
       portalTarget: portalTargetIn,
       previousStepButtonText,
-      selectorPrimaryFocus,
       showAPIKeyLabel,
+      helperText,
 
       // Collect any other property values passed in.
       ...rest
@@ -103,6 +109,9 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     ref: React.Ref<HTMLDivElement>
   ) => {
     const [title, setTitle] = useState<string | null | undefined>(null);
+    const [successMessage, setSuccessMessage] = useState<
+      string | null | undefined
+    >(null);
     const [copyError, setCopyError] = useState(false);
     const [name, setName] = useState(apiKeyName);
     const [currentStep, setCurrentStep] = useState(0);
@@ -121,25 +130,27 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     };
     const blockClass = `${pkg.prefix}--apikey-modal`;
     const localRef = useRef(undefined);
-    const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
-    const { firstElement, keyDownListener } = useFocus(
-      modalRef,
-      selectorPrimaryFocus
-    );
+    const PasswordInputRef = useRef<HTMLElement | null>(null);
+    const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
+    const { firstElement, keyDownListener, claimFocus } = useFocus(modalRef);
     const prevOpen = usePreviousValue(open);
 
     useEffect(() => {
       if (copyRef.current && open && apiKeyLoaded) {
         copyRef.current.focus();
       }
+      if (PasswordInputRef?.current) {
+        PasswordInputRef?.current.setAttribute('readOnly', 'true');
+      }
     }, [open, apiKeyLoaded]);
 
     useEffect(() => {
       if (open) {
         // Focusing the first element or selectorPrimaryFocus element
-        claimFocus(firstElement, modalRef, selectorPrimaryFocus);
+        claimFocus();
       }
-    }, [firstElement, modalRef, open, selectorPrimaryFocus]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [modalRef, open, firstElement]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef) {
@@ -184,9 +195,11 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
 
     useEffect(() => {
       if (editing && editSuccess) {
-        setTitle(editSuccessTitle);
+        setTitle(generateTitle);
+        setSuccessMessage(editSuccessMessage ?? editSuccessTitle);
       } else if (apiKeyLoaded) {
-        setTitle(generateSuccessTitle);
+        setTitle(generateTitle);
+        setSuccessMessage(generateSuccessMessage ?? generateSuccessTitle);
       } else if (hasSteps) {
         setTitle(customSteps[currentStep]?.title);
       } else {
@@ -194,11 +207,14 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       }
     }, [
       apiKeyLoaded,
+      loading,
       editing,
       editSuccess,
       editSuccessTitle,
+      editSuccessMessage,
       hasSteps,
       generateSuccessTitle,
+      generateSuccessMessage,
       generateTitle,
       currentStep,
       customSteps,
@@ -276,6 +292,8 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
                     showPasswordLabel={showAPIKeyLabel}
                     hidePasswordLabel={hideAPIKeyLabel}
                     tooltipPosition="left"
+                    helperText={helperText}
+                    ref={PasswordInputRef}
                   />
                 )}
                 {!editing && apiKey && !hasAPIKeyVisibilityToggle && (
@@ -314,7 +332,11 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
                     <div className={`${blockClass}__error-icon`}>
                       <ErrorFilled size={16} />
                     </div>
-                    <p className={`${blockClass}__messaging-text`}>
+                    <p
+                      className={`${blockClass}__messaging-text`}
+                      role="alert"
+                      aria-live="assertive"
+                    >
                       {copyError ? copyErrorText : errorText}
                     </p>
                   </div>
@@ -332,10 +354,30 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
                         downloadLinkLabel={downloadLinkLabel}
                       />
                     ) : (
-                      <div className={`${blockClass}__messaging-text`}>
+                      <div
+                        className={`${blockClass}__messaging-text`}
+                        role="alert"
+                        aria-live="assertive"
+                      >
                         {generateSuccessBody}
                       </div>
                     )}
+                  </div>
+                )}
+
+                {(editSuccess || (apiKeyLoaded && successMessage)) && (
+                  <div className={`${blockClass}__messaging`}>
+                    <CheckmarkFilled
+                      size={16}
+                      className={`${blockClass}__checkmark-icon`}
+                    />
+                    <p
+                      className={`${blockClass}__messaging-text`}
+                      role="alert"
+                      aria-live="assertive"
+                    >
+                      {successMessage}
+                    </p>
                   </div>
                 )}
               </>
@@ -375,6 +417,20 @@ const downloadRequiredProps = (type) =>
 
 // Return a placeholder if not released and not enabled by feature flag
 APIKeyModal = pkg.checkComponentEnabled(APIKeyModal, componentName);
+
+export const deprecatedProps = {
+  /**
+   * deprecated
+   * title for a successful edit
+   */
+  editSuccessTitle: PropTypes.string,
+
+  /**
+   * deprecated
+   * title for a successful key generation
+   */
+  generateSuccessTitle: PropTypes.string,
+};
 
 APIKeyModal.propTypes = {
   /**
@@ -436,7 +492,7 @@ APIKeyModal.propTypes = {
   /**
    * the content that appears that indicates the key is downloadable
    */
-  downloadBodyText: downloadRequiredProps(PropTypes.string),
+  downloadBodyText: PropTypes.string,
   /**
    * designates the name of downloadable json file with the key. if not specified will default to 'apikey'
    */
@@ -464,7 +520,7 @@ APIKeyModal.propTypes = {
   /**
    * title for a successful edit
    */
-  editSuccessTitle: editRequiredProps(PropTypes.string),
+  editSuccessMessage: editRequiredProps(PropTypes.string),
   /**
    * designates if the modal is in the edit mode
    */
@@ -490,7 +546,7 @@ APIKeyModal.propTypes = {
   /**
    * title for a successful key generation
    */
-  generateSuccessTitle: PropTypes.string,
+  generateSuccessMessage: PropTypes.string,
   /**
    * default title for the modal in generate key mode
    */
@@ -503,6 +559,10 @@ APIKeyModal.propTypes = {
    * designates if user is able to download the api key
    */
   hasDownloadLink: PropTypes.bool,
+  /**
+   * helper text for password input
+   */
+  helperText: PropTypes.string,
   /**
    * label text that's displayed when hovering over visibility toggler to hide key
    */
@@ -574,14 +634,11 @@ APIKeyModal.propTypes = {
    */
   previousStepButtonText: customStepsRequiredProps(PropTypes.string),
   /**
-   * Specify a CSS selector that matches the DOM element that should be
-   * focused when the Modal opens.
-   */
-  selectorPrimaryFocus: PropTypes.string,
-  /**
    * label text that's displayed when hovering over visibility toggler to show key
    */
   showAPIKeyLabel: PropTypes.string,
+
+  ...deprecatedProps,
 };
 
 APIKeyModal.displayName = componentName;

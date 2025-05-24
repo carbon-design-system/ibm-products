@@ -27,12 +27,8 @@ export default {
         <StoryDocsPage
           altGuidelinesHref={[
             {
-              href: 'https://carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Error pattern usage guidelines',
-            },
-            {
               href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon empty pattern usage guidelines',
+              label: 'Carbon Empty pattern usage guidelines',
             },
           ]}
         />
@@ -92,6 +88,7 @@ withLink.args = {
   link: {
     text: 'View documentation',
     href: 'https://www.carbondesignsystem.com',
+    target: '_blank',
   },
 };
 

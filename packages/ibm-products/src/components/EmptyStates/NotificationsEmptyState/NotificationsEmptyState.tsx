@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { ReactNode } from 'react';
+import React, { ElementType, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -18,41 +18,13 @@ import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
 import NotificationsIllustration from '../assets/NotificationsIllustration';
-import { defaults } from '../EmptyState';
-import { ButtonProps } from '@carbon/react';
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { defaults, EmptyStatePresetProps } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'NotificationsEmptyState';
 
-export interface NotificationsEmptyStateProps {
-  /**
-   * Empty state action button
-   */
-
-  action?: {
-    kind?: 'primary' | 'secondary' | 'tertiary';
-    renderIcon?: CarbonIconType;
-    onClick?: ButtonProps<React.ElementType>['onClick'];
-    text?: string;
-  };
-
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
-  className?: string;
-
-  /**
-   * The alt text for empty state svg images. If not provided , title will be used.
-   */
-  illustrationDescription?: string;
-
-  /**
-   * Designates the position of the illustration relative to the content
-   */
-  illustrationPosition?: 'top' | 'right' | 'bottom' | 'left';
-
+export interface NotificationsEmptyStateProps extends EmptyStatePresetProps {
   /**
    * Empty state illustration theme variations.
    * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
@@ -60,29 +32,6 @@ export interface NotificationsEmptyStateProps {
    * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme?: 'light' | 'dark';
-
-  /**
-   * Empty state link object
-   */
-  link?: {
-    text?: string | ReactNode;
-    href?: string;
-  };
-
-  /**
-   * Empty state size
-   */
-  size?: 'lg' | 'sm';
-
-  /**
-   * Empty state subtitle
-   */
-  subtitle: ReactNode;
-
-  /**
-   * Empty state title
-   */
-  title: ReactNode;
 }
 
 /**
@@ -103,6 +52,7 @@ export let NotificationsEmptyState = React.forwardRef<
       illustrationDescription,
       link,
       size = defaults.size,
+      headingAs,
       subtitle,
       title,
 
@@ -135,6 +85,7 @@ export let NotificationsEmptyState = React.forwardRef<
           action={action}
           link={link}
           size={size}
+          headingAs={headingAs}
           subtitle={subtitle}
           title={title || ''}
         />
@@ -176,6 +127,11 @@ NotificationsEmptyState.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs: PropTypes.elementType,
+
+  /**
    * The alt text for empty state svg images. If not provided , title will be used.
    */
   illustrationDescription: PropTypes.string,
@@ -197,11 +153,7 @@ NotificationsEmptyState.propTypes = {
    * Empty state link object
    */
   /**@ts-ignore*/
-  link: PropTypes.shape({
-    ...Link.propTypes,
-    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    href: PropTypes.string,
-  }),
+  link: PropTypes.any,
 
   /**
    * Empty state size

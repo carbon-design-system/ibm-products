@@ -23,13 +23,6 @@ test.describe('TearsheetNarrow @avt', () => {
       },
     });
 
-    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
-    await page.getByText('Open Tearsheet').click();
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
     await expect(page).toHaveNoACViolations('Tearsheet @avt-default-state');
   });
 
@@ -43,29 +36,17 @@ test.describe('TearsheetNarrow @avt', () => {
     });
 
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
-
-    // Pressing 'Tab' key to focus on the "Open Tearsheet" button in the Storybook
-    await page.keyboard.press('Tab');
-    // Pressing 'Enter' key to open the Tearsheet
-    await page.keyboard.press('Enter');
-
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
-
+    // Default opened in story
     // Pressing 'Escape' key to close the Tearsheet
     await page.keyboard.press('Escape');
-
-    await page
-      .locator(`.${carbon.prefix}--modal`)
-      .evaluate((element) =>
-        Promise.all(
-          element.getAnimations().map((animation) => animation.finished)
-        )
-      );
+    await page.screenshot({ animations: 'disabled' });
     await expect(modalElement).not.toBeInViewport();
+
+    // Opening the Tearsheet
+    const openButton = page.getByText('Open Tearsheet');
+    await openButton.click();
+    await page.screenshot({ animations: 'disabled' });
+    await expect(modalElement).toBeInViewport();
   });
 
   test('@avt-default-state focus trap', async ({ page }) => {
@@ -83,16 +64,8 @@ test.describe('TearsheetNarrow @avt', () => {
     const closeButton = page.getByRole('button', { name: 'Close' });
     const cancelButton = page.getByText('Cancel');
 
-    // Pressing 'Tab' key to focus on the "Open Tearsheet" button in the Storybook
-    await page.keyboard.press('Tab');
-    // Pressing 'Enter' key to open the Tearsheet
-    await page.keyboard.press('Enter');
-
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
+    // Default opened in story
+    await page.screenshot({ animations: 'disabled' });
     await expect(modalElement).toBeInViewport();
     // Now the focus on the input field in the Tearsheet
     await expect(inputField).toBeFocused();
@@ -133,14 +106,7 @@ test.describe('TearsheetNarrow @avt', () => {
     await expect(inputField).toBeFocused();
     // Pressing 'Escape' to close the Tearsheet
     await page.keyboard.press('Escape');
-
-    await page
-      .locator(`.${carbon.prefix}--modal`)
-      .evaluate((element) =>
-        Promise.all(
-          element.getAnimations().map((animation) => animation.finished)
-        )
-      );
+    await page.screenshot({ animations: 'disabled' });
     await expect(modalElement).not.toBeInViewport();
   });
 
@@ -155,31 +121,27 @@ test.describe('TearsheetNarrow @avt', () => {
 
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
 
-    // Pressing 'Tab' key to focus on the "Open Tearsheet" button in the Storybook
-    await page.keyboard.press('Tab');
-    // Pressing 'Enter' key to open the Tearsheet
-    await page.keyboard.press('Enter');
-
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
+    await page.screenshot({ animations: 'disabled' });
     await expect(page).toHaveNoACViolations(
       'TearsheetNarrow @avt-all-header-items'
     );
-    await expect(page.locator('.ai-label-container')).toBeInViewport();
+    await expect(page.locator('.decorator-container')).toBeInViewport();
 
     // Selecting the first slug button
     const slugButton1 = page
-      .locator('*[aria-label="AI - Show information"]')
+      .locator('*[aria-label="AI Show information"]')
       .first();
     const closeButton = page.getByLabel('Close the tearsheet');
     const inputField = page.locator('#tss-ft1');
 
+    // Now the focus is on the close button
+    await expect(closeButton).toBeFocused();
+
     await expect(slugButton1).toBeInViewport();
     // Initially expect first slug button aria-expanded attribute is false
     await expect(slugButton1).toHaveAttribute('aria-expanded', 'false');
+    // Now switch focus to slug button
+    await page.keyboard.press('Shift+Tab');
     // And the focus is on the first slug button
     await expect(slugButton1).toBeFocused();
 
@@ -210,14 +172,7 @@ test.describe('TearsheetNarrow @avt', () => {
 
     // Closing the Tearsheet by pressing 'Esc' key
     await page.keyboard.press('Escape');
-
-    await page
-      .locator(`.${carbon.prefix}--modal`)
-      .evaluate((element) =>
-        Promise.all(
-          element.getAnimations().map((animation) => animation.finished)
-        )
-      );
+    await page.screenshot({ animations: 'disabled' });
     await expect(modalElement).not.toBeInViewport();
   });
 
@@ -230,48 +185,52 @@ test.describe('TearsheetNarrow @avt', () => {
       },
     });
 
+    const tearsheet3 = page.getByLabel('Tearsheet #3');
+    await expect(tearsheet3).toBeInViewport();
+
+    const cancelBtn3 = tearsheet3.getByText('Cancel');
+    await expect(cancelBtn3).toBeFocused();
+
+    // press escape thrice to close all pre open tearsheets
+    await page.keyboard.press('Escape');
+    await page.screenshot({ animations: 'disabled' });
+
+    const tearsheet2 = page.getByLabel('Tearsheet #2');
+    await expect(tearsheet2).toBeInViewport();
+    const cancelBtn2 = tearsheet2.getByText('Cancel');
+    await expect(cancelBtn2).toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await page.screenshot({ animations: 'disabled' });
+
+    const tearsheet1 = page.getByLabel('Tearsheet #1');
+    await expect(tearsheet1).toBeInViewport();
+    const cancelBtn1 = tearsheet1.getByText('Cancel');
+    await expect(cancelBtn1).toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await page.screenshot({ animations: 'disabled' });
+
     // Open tearsheet one
     await page.getByText('Toggle #1').click();
+    await page.screenshot({ animations: 'disabled' });
 
-    const ts1 = page.locator(`.${carbon.prefix}--modal.is-visible`);
-
-    await ts1.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
-    await expect(page).toHaveNoACViolations('Tearsheet @avt-stacking');
+    await expect(tearsheet1).toBeInViewport();
+    await expect(cancelBtn1).toBeFocused();
+    await expect(page).toHaveNoACViolations('TearsheetNarrow @avt-stacking');
 
     // Open second tearsheet
     await page.getByText('Toggle #2').click();
+    await page.screenshot({ animations: 'disabled' });
 
-    const ts2 = page.locator(
-      `[class*="${bc}--stacked-${2}-of-${2}"].is-visible`
-    );
-
-    await ts2.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
-    // Tearsheet 2 is now open
-    await expect(ts2).toBeInViewport();
-    await expect(ts2).toHaveAttribute('aria-hidden', 'false');
+    await expect(tearsheet2).toBeInViewport();
+    await expect(cancelBtn2).toBeFocused();
 
     // Open third tearsheet
     await page.getByText('Toggle #3').click();
+    await page.screenshot({ animations: 'disabled' });
+    await expect(cancelBtn3).toBeFocused();
 
-    const ts3 = page.locator(
-      `[class*="${bc}--stacked-${3}-of-${3}"].is-visible`
-    );
-
-    await ts3.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
-    // Tearsheet 3 is now open
-    await expect(ts3).toBeInViewport();
-    await expect(ts3).toHaveAttribute('aria-hidden', 'false');
+    await expect(tearsheet3).toBeInViewport();
   });
 });

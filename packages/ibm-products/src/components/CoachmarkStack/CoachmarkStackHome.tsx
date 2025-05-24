@@ -16,25 +16,15 @@ import pconsole from '../../global/js/utils/pconsole';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Idea } from '@carbon/react/icons';
-import { Button } from '@carbon/react';
+import { Button, Tooltip } from '@carbon/react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { createPortal } from 'react-dom';
 import { CoachmarkHeader } from '../Coachmark/CoachmarkHeader';
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 import { ButtonProps } from '@carbon/react';
 
-type Media =
-  | {
-      render?: () => ReactNode;
-      filePaths?: never;
-    }
-  | {
-      render?: never;
-      filePaths?: string[];
-    };
-
+type TooltipAlignment = 'top' | 'bottom';
 interface CoachmarkStackHomeProps {
   /**
    * Optional class name for this component.
@@ -52,16 +42,11 @@ interface CoachmarkStackHomeProps {
    * If the stack home is open.
    */
   isOpen: boolean;
+
   /**
-   * The object describing an image in one of two shapes.
-   *
-   * If a single media element is required, use `{render}`.
-   *
-   * If a stepped animation is required, use `{filePaths}`.
-   *
-   * @see {@link MEDIA_PROP_TYPE}.
+   * Optional prop to render any media like images or any animated media.
    */
-  media?: Media;
+  renderMedia?: (params) => ReactNode;
 
   /**
    * The labels used to link to the stackable Coachmarks.
@@ -90,6 +75,10 @@ interface CoachmarkStackHomeProps {
    * The title of the Coachmark.
    */
   title: string;
+  /**
+   * Label's tooltip position
+   */
+  tooltipAlign?: TooltipAlignment;
 }
 
 // Carbon and package components we use.
@@ -113,19 +102,23 @@ export let CoachmarkStackHome = forwardRef<
       className,
       description,
       isOpen,
-      media,
+      renderMedia,
       navLinkLabels,
       onClickNavItem,
       onClose,
       portalTarget,
       closeButtonLabel,
       title,
+      tooltipAlign,
       ...rest
     },
     ref
   ) => {
     const buttonFocusRef = useRef<ButtonProps<React.ElementType> | null>(null);
     const [linkFocusIndex, setLinkFocusIndex] = useState(0);
+    const navItemRefs = useRef<(HTMLLIElement | null)[]>([]);
+    const [overflowStates, setOverflowStates] = useState<boolean[]>([]);
+
     useEffect(() => {
       setTimeout(() => {
         if (isOpen && buttonFocusRef.current) {
@@ -138,8 +131,8 @@ export let CoachmarkStackHome = forwardRef<
 
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget
-        ? document?.querySelector(portalTarget) ??
-          document?.querySelector('body')
+        ? (document?.querySelector(portalTarget) ??
+          document?.querySelector('body'))
         : document?.querySelector('body');
     }, [portalTarget]);
 
@@ -149,13 +142,32 @@ export let CoachmarkStackHome = forwardRef<
       );
     }
 
+    const itemRefHandler = (index, node) => {
+      if (node && navItemRefs.current[index] !== node) {
+        const isOverflowing = node.scrollWidth > node.clientWidth;
+        navItemRefs.current[index] = node;
+        setOverflowStates((prev) => {
+          const newState = [...prev];
+          newState[index] = isOverflowing;
+          return newState;
+        });
+      }
+    };
+
     function renderNavLink(
       index,
       label,
       ref: React.RefObject<ButtonProps<React.ElementType>> | null = null
     ) {
+      const isOverflowing = overflowStates[index] ?? false;
+
       return (
-        <li key={index}>
+        <li
+          key={index}
+          ref={(node) => {
+            itemRefHandler(index, node);
+          }}
+        >
           <Button
             kind="ghost"
             size="sm"
@@ -165,7 +177,20 @@ export let CoachmarkStackHome = forwardRef<
             }}
             ref={ref}
           >
-            {label}
+            {isOverflowing ? (
+              <Tooltip
+                highContrast={false}
+                label={label}
+                align={tooltipAlign}
+                className={`${blockClass}__navLinkLabels-tooltip`}
+              >
+                <span className={`${blockClass}__navLinkLabels-text`}>
+                  {label}
+                </span>
+              </Tooltip>
+            ) : (
+              label
+            )}
           </Button>
         </li>
       );
@@ -190,20 +215,15 @@ export let CoachmarkStackHome = forwardRef<
             />
             <div className={`${overlayClass}__body`}>
               <div className={`${overlayClass}-element`}>
-                {!media && (
+                {!renderMedia && (
                   <Idea size={20} className={`${blockClass}__icon-idea`} />
                 )}
 
-                {media &&
-                  (media.render ? (
-                    media.render()
-                  ) : (
-                    <SteppedAnimatedMedia
-                      className={`${overlayClass}__element-stepped-media`}
-                      filePaths={media.filePaths}
-                      playStep={0}
-                    />
-                  ))}
+                {renderMedia && (
+                  <div className={`${blockClass}__element-stepped-media`}>
+                    {renderMedia({ playStep: 0 })}
+                  </div>
+                )}
 
                 <div className={`${overlayClass}-element__content`}>
                   {title && (
@@ -221,7 +241,13 @@ export let CoachmarkStackHome = forwardRef<
                 <ul className={`${blockClass}__nav-links`}>
                   {navLinkLabels.map((label, index) => {
                     if (index === linkFocusIndex) {
-                      return renderNavLink(index, label, buttonFocusRef);
+                      return renderNavLink(
+                        index,
+                        label,
+                        buttonFocusRef as React.RefObject<
+                          ButtonProps<React.ElementType>
+                        >
+                      );
                     }
                     return renderNavLink(index, label);
                   })}
@@ -278,23 +304,7 @@ CoachmarkStackHome.propTypes = {
    * If the stack home is open.
    */
   isOpen: PropTypes.bool.isRequired,
-  /**
-   * The object describing an image in one of two shapes.
-   *
-   * If a single media element is required, use `{render}`.
-   *
-   * If a stepped animation is required, use `{filePaths}`.
-   *
-   * @see {@link MEDIA_PROP_TYPE}.
-   */
-  media: PropTypes.oneOfType([
-    PropTypes.shape({
-      render: PropTypes.func,
-    }),
-    PropTypes.shape({
-      filePaths: PropTypes.arrayOf(PropTypes.string),
-    }),
-  ]) as PropTypes.Validator<Media>,
+
   /**
    * The labels used to link to the stackable Coachmarks.
    */
@@ -318,9 +328,17 @@ CoachmarkStackHome.propTypes = {
    * element is hidden or component is unmounted, the CoachmarkStackHome will disappear.
    */
   portalTarget: PropTypes.string,
+  /**
+   * Optional prop to render any media like images or animated media.
+   */
+  renderMedia: PropTypes.func,
 
   /**
    * The title of the Coachmark.
    */
   title: PropTypes.string.isRequired,
+  /**
+   * Label's tooltip position
+   */
+  tooltipAlign: PropTypes.oneOf(['top', 'bottom']),
 };

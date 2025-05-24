@@ -8,8 +8,13 @@
 // Carbon and package components we use.
 import { Button, type ButtonProps } from '@carbon/react';
 // Import portions of React that are needed.
-import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
-import { TearsheetShell, tearsheetHasCloseIcon } from './TearsheetShell';
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  RefObject,
+} from 'react';
+import { TearsheetShell } from './TearsheetShell';
 
 import { ActionSet } from '../ActionSet';
 // Other standard imports.
@@ -22,29 +27,13 @@ import { portalType } from './TearsheetShell';
 const componentName = 'Tearsheet';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
-
-/**
- * The accessibility title for the close icon (if shown).
- *
- * **Note:** This prop is only required if a close icon is shown, i.e. if
- * there are a no navigation actions and/or hasCloseIcon is true.
- */
-export type CloseIconDescriptionTypes =
-  | {
-      hasCloseIcon?: false;
-      closeIconDescription?: string;
-    }
-  | {
-      hasCloseIcon: true;
-      closeIconDescription: string;
-    };
-
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 
 export interface TearsheetAction extends ButtonProps<'button'> {
   label?: string;
+  loading?: boolean;
 }
 
 // Note that the descriptions here should be kept in sync with those for the
@@ -75,6 +64,12 @@ export interface TearsheetProps extends PropsWithChildren {
    * An optional class or classes to be added to the outermost element.
    */
   className?: string;
+
+  /**
+   * The accessibility title for the close icon (if shown).
+   *
+   */
+  closeIconDescription?: string;
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -123,6 +118,11 @@ export interface TearsheetProps extends PropsWithChildren {
    * to page of a multi-page task).
    */
   label?: ReactNode;
+
+  /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
 
   /**
    * Navigation content, such as a set of tabs, to be displayed at the bottom
@@ -193,8 +193,9 @@ export let Tearsheet = React.forwardRef(
     {
       influencerPosition = 'left',
       influencerWidth = 'narrow',
+      children,
       ...rest
-    }: TearsheetProps & CloseIconDescriptionTypes,
+    }: TearsheetProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => (
     <TearsheetShell
@@ -206,7 +207,9 @@ export let Tearsheet = React.forwardRef(
         ref,
         size: 'wide',
       }}
-    />
+    >
+      {children}
+    </TearsheetShell>
   )
 );
 
@@ -287,13 +290,8 @@ Tearsheet.propTypes = {
   /**
    * The accessibility title for the close icon (if shown).
    *
-   * **Note:** This prop is only required if a close icon is shown, i.e. if
-   * there are a no navigation actions and/or hasCloseIcon is true.
    */
-  /**@ts-ignore */
-  closeIconDescription: PropTypes.string.isRequired.if(
-    ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
-  ),
+  closeIconDescription: PropTypes.string,
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -308,7 +306,6 @@ Tearsheet.propTypes = {
    * tearsheet"), and that behavior can be overridden if required by setting
    * this prop to either true or false.
    */
-  /**@ts-ignore */
   hasCloseIcon: PropTypes.bool,
 
   /**

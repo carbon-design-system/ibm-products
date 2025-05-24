@@ -35,7 +35,7 @@ $row-heights: (
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--date.#{variables.$block-class}__inline-edit--date-#{$size}
     .#{c4p-settings.$carbon-prefix}--date-picker__input {
-    height: $size-value;
+    block-size: $size-value;
   }
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
@@ -43,18 +43,18 @@ $row-heights: (
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{c4p-settings.$carbon-prefix}--number__control-btn::after {
-    height: calc(#{$size-value} - 0.25rem);
+    block-size: calc(#{$size-value} - 0.25rem);
   }
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{variables.$block-class}__inline-edit--select
     .#{c4p-settings.$carbon-prefix}--list-box {
-    max-height: none;
+    max-block-size: none;
   }
 }
 
 @mixin input-outline($color: $focus) {
-  /* stylelint-disable-next-line carbon/theme-token-use */
+  /* stylelint-disable-next-line carbon/theme-use */
   outline: $spacing-01 solid $color;
   outline-offset: calc(-1 * #{$spacing-01});
 
@@ -69,8 +69,8 @@ $row-heights: (
 
 .#{variables.$block-class}__inline-edit-cell {
   display: flex;
-  height: 100%;
   align-items: center;
+  block-size: 100%;
 }
 
 .#{variables.$block-class}
@@ -87,44 +87,44 @@ $row-heights: (
 
 .#{variables.$block-class}__inline-edit--outer-cell-checkbox {
   display: flex;
-  height: -webkit-fill-available;
   justify-content: center;
+  block-size: -webkit-fill-available;
   padding-inline: $spacing-05;
 }
 
 .#{variables.$block-class}__static--outer-cell {
   display: flex;
-  height: -webkit-fill-available;
   align-items: center;
+  block-size: -webkit-fill-available;
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button {
-  width: 100%;
-  height: calc(100% + 2px); // account for borders
+  block-size: calc(100% + 2px); // account for borders
+  inline-size: 100%;
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button
   .#{variables.$block-class}__inline-edit-button {
   position: relative;
   display: flex;
-  width: 100%;
-  height: 100%;
   align-items: center;
   justify-content: space-between;
-  padding-left: $spacing-05;
+  block-size: 100%;
   color: $text-secondary;
   cursor: pointer;
+  inline-size: 100%;
   outline: 0; // handled by active class
+  padding-inline-start: $spacing-05;
   .#{variables.$block-class}__label-icon {
-    height: $spacing-05;
-    padding-right: $spacing-05;
+    block-size: $spacing-05;
+    padding-inline-end: $spacing-05;
   }
   &.#{variables.$block-class}__inline-edit-button--non-edit {
-    padding-left: 0;
     cursor: default;
+    padding-inline-start: 0;
   }
   .#{variables.$block-class}__inline-edit-button-icon {
-    height: $spacing-05;
+    block-size: $spacing-05;
     fill: $icon-secondary;
   }
   &.#{variables.$block-class}__inline-edit-button--date {
@@ -184,7 +184,7 @@ $row-heights: (
   .#{variables.$block-class}__inline-edit-button
   .#{variables.$block-class}__inline-edit-button-label {
   overflow: hidden;
-  padding-right: $spacing-05;
+  padding-inline-end: $spacing-05;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -192,7 +192,7 @@ $row-heights: (
 .#{variables.$block-class}__inline-edit--outer-cell-button
   .#{variables.$block-class}__inline-edit-button
   .#{variables.$block-class}__inline-edit-button-label.#{variables.$block-class}__inline-edit-button-label-with-icon {
-  padding-right: $spacing-09;
+  padding-inline-end: $spacing-09;
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button
@@ -200,12 +200,12 @@ $row-heights: (
 .#{variables.$block-class}__inline-edit--outer-cell-button
   .#{c4p-settings.$carbon-prefix}--number
   input[type='number'] {
-  height: $spacing-09;
+  block-size: $spacing-09;
 }
 
 .#{variables.$block-class}__inline-edit-button-icon {
   position: absolute;
-  right: $spacing-05;
+  inset-inline-end: $spacing-05;
 }
 
 .#{variables.$block-class}__table-with-inline-edit.#{c4p-settings.$carbon-prefix}--data-table
@@ -213,47 +213,47 @@ $row-heights: (
   position: relative;
   padding: 0;
   .#{variables.$block-class}__inline-edit-button--non-edit {
-    padding-left: $spacing-05;
+    padding-inline-start: $spacing-05;
   }
 
   .#{c4p-settings.$carbon-prefix}--number input[type='number'] {
-    min-width: auto;
-    padding-right: $spacing-05;
+    min-inline-size: auto;
+    padding-inline-end: $spacing-05;
   }
 }
 
 .#{variables.$block-class}__inline-edit--select
   .#{variables.$block-class}__inline-edit--select-item {
-  padding-bottom: $spacing-05;
-  padding-left: $spacing-05;
+  padding-block-end: $spacing-05;
+  padding-inline-start: $spacing-05;
 }
 
 .#{variables.$block-class}__inline-edit--select.#{c4p-settings.$carbon-prefix}--dropdown,
 .#{variables.$block-class}__inline-edit--date
   .#{c4p-settings.$carbon-prefix}--date-picker {
-  width: inherit;
+  inline-size: inherit;
 }
 
 .#{variables.$block-class}__inline-edit--select.#{c4p-settings.$carbon-prefix}--dropdown,
 .#{variables.$block-class}__inline-edit--date
   .#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
   .#{c4p-settings.$carbon-prefix}--date-picker__input {
-  width: 100%;
-  height: $spacing-09; // default row height
-  max-height: none;
+  block-size: $spacing-09; // default row height
+  inline-size: 100%;
+  max-block-size: none;
 }
 
 .#{variables.$block-class}__inline-edit--date
   .#{c4p-settings.$carbon-prefix}--date-picker-container {
-  width: inherit;
+  inline-size: inherit;
 }
 
 .#{variables.$block-class}__inline-edit--date.#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
   .#{c4p-settings.$carbon-prefix}--date-picker__input {
   overflow: hidden;
-  width: 100%;
-  max-width: none;
-  padding-right: $spacing-07;
+  inline-size: 100%;
+  max-inline-size: none;
+  padding-inline-end: $spacing-07;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -262,8 +262,8 @@ $row-heights: (
   .#{c4p-settings.$carbon-prefix}--data-table
   .#{variables.$block-class}__carbon-row-hover-active
   td {
-  border-top-color: $layer-hover;
   background-color: $layer-hover;
+  border-block-start-color: $layer-hover;
 }
 
 // Custom border/outline for the focus region area, because of the scrolling
@@ -273,28 +273,28 @@ $row-heights: (
   .#{variables.$block-class}__grid-container-active::before {
   position: absolute;
   z-index: 2;
-  bottom: 0;
-  left: 0;
-  width: 2px;
-  height: calc(
+  background-color: $link-inverse;
+  block-size: calc(
     100% - 50px - var(--#{variables.$block-class}--grid-header-height)
   );
-  background-color: $link-inverse;
   content: '';
+  inline-size: 2px;
+  inset-block-end: 0;
+  inset-inline-start: 0;
 }
 
 .#{variables.$block-class}
   .#{variables.$block-class}__grid-container-active::after {
   position: absolute;
   z-index: 2;
-  right: 0;
-  bottom: 0;
-  width: 2px;
-  height: calc(
+  background-color: $link-inverse;
+  block-size: calc(
     100% - 50px - var(--#{variables.$block-class}--grid-header-height)
   );
-  background-color: $link-inverse;
   content: '';
+  inline-size: 2px;
+  inset-block-end: 0;
+  inset-inline-end: 0;
 }
 
 .#{variables.$block-class}
@@ -302,19 +302,18 @@ $row-heights: (
   .#{c4p-settings.$carbon-prefix}--data-table-content::before {
   position: absolute;
   z-index: 2;
-  top: 0;
-  right: 0;
-  left: 0;
-  width: var(--#{variables.$block-class}--grid-width);
-  height: 2px;
   background-color: $link-inverse;
+  block-size: 2px;
+  inline-size: var(--#{variables.$block-class}--grid-width);
+  inset-block-start: 0;
+  inset-inline: 0;
 }
 
 .#{variables.$block-class}
   .#{variables.$block-class}__grid-container-active.#{variables.$block-class}__grid-container-active--without-toolbar::before,
 .#{variables.$block-class}
   .#{variables.$block-class}__grid-container-active.#{variables.$block-class}__grid-container-active--without-toolbar::after {
-  height: calc(
+  block-size: calc(
     100% - 2px - var(--#{variables.$block-class}--grid-header-height)
   );
 }
@@ -329,7 +328,7 @@ $row-heights: (
 .#{variables.$block-class}
   .#{variables.$block-class}__grid-container-inline-edit
   .#{variables.$block-class}__table-container {
-  padding-top: $spacing-01;
+  padding-block-start: $spacing-01;
 }
 
 .#{variables.$block-class}
@@ -342,11 +341,11 @@ $row-heights: (
   .#{c4p-settings.$carbon-prefix}--form-requirement {
   position: absolute;
   z-index: 3;
-  top: calc(100% - #{$spacing-01});
-  width: 100%;
   padding: $spacing-03 $spacing-06 $spacing-03 $spacing-03;
   margin: 0;
   background-color: $layer-01;
+  inline-size: 100%;
+  inset-block-start: calc(100% - #{$spacing-01});
   outline: $spacing-01 solid $support-error;
   outline-offset: calc(-1 * #{$spacing-01});
 }
@@ -368,37 +367,37 @@ $row-heights: (
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   .#{c4p-settings.$carbon-prefix}--number__invalid {
   z-index: 4;
-  top: calc(100% + #{$spacing-04} + #{$spacing-01});
-  right: $spacing-03;
+  inset-block-start: calc(100% + #{$spacing-04} + #{$spacing-01});
+  inset-inline-end: $spacing-03;
 }
 
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   .#{c4p-settings.$carbon-prefix}--number__invalid {
-  top: calc(100% + #{$spacing-02} + #{$spacing-01});
+  inset-block-start: calc(100% + #{$spacing-02} + #{$spacing-01});
 }
 
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   .#{c4p-settings.$carbon-prefix}--form-requirement::before {
   position: absolute;
-  top: 0;
-  left: $spacing-01;
-  width: calc(100% - (#{$spacing-01} * 2));
-  height: $spacing-01;
   background-color: $layer-01;
+  block-size: $spacing-01;
   content: '';
+  inline-size: calc(100% - (#{$spacing-01} * 2));
+  inset-block-start: 0;
+  inset-inline-start: $spacing-01;
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   .#{c4p-settings.$carbon-prefix}--form-requirement::after {
   position: absolute;
-  top: $spacing-01;
-  left: $spacing-03;
-  width: calc(100% - (#{$spacing-03} * 2));
-  height: 1px;
   background-color: $layer-accent-01;
+  block-size: 1px;
   content: '';
+  inline-size: calc(100% - (#{$spacing-03} * 2));
+  inset-block-start: $spacing-01;
+  inset-inline-start: $spacing-03;
 }
 
 .#{variables.$block-class} tbody tr:hover {

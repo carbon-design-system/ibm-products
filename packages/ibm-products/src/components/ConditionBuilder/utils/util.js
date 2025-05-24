@@ -105,42 +105,34 @@ export const manageTabIndexAndFocus = (currentElement, conditionBuilderRef) => {
   currentElement?.focus();
 };
 
-const formatDate = (date) => {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
-};
-
-export const getValue = {
-  text: (value) => value,
-  textarea: (value) => value,
-  time: (value) => value,
-  number: (value) => value,
-  option: (value) => {
+export const getValue = (type, value, config) => {
+  if (config?.valueFormatter && ['custom'].includes(type)) {
+    return config.valueFormatter(value);
+  } else if (type === 'option') {
     if (value && typeof value !== 'string') {
       const selectedValues = Array.isArray(value) ? value : [value];
       return selectedValues.map((option) => option.label).join(', ');
     }
 
     return value;
-  },
-  date: (value) => {
-    if (Array.isArray(value) && value.length > 1) {
-      const start =
-        value?.[0] && !isNaN(new Date(value[0]))
-          ? formatDate(new Date(value[0]))
-          : '';
-      const end =
-        value?.[1] && !isNaN(new Date(value[1]))
-          ? formatDate(new Date(value[1]))
-          : '';
-      return `${start} To ${end}`;
-    } else if (Array.isArray(value) && !isNaN(new Date(value[0]))) {
-      return formatDate(new Date(value[0]));
-    } else {
-      return value;
-    }
-  },
-  custom: (value) => value,
+  } else {
+    return value;
+  }
+};
+
+//check if the operator is configured as multiSelect in the input configuration or operator is on of
+export const checkForMultiSelectOperator = (condition, config) => {
+  return (
+    condition?.operator === 'oneOf' ||
+    config?.operators?.find(
+      (operator) =>
+        condition?.operator === operator.id && operator.isMultiSelect
+    )
+  );
+};
+//this will close the popover on escape key on search box
+export const onKeyDownHandlerForSearch = (evt, conditionBuilderRef) => {
+  if (!evt.currentTarget.value && evt.key === 'Escape') {
+    focusThisField(evt, conditionBuilderRef);
+  }
 };

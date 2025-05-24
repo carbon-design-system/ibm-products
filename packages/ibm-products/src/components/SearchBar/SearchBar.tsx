@@ -8,7 +8,12 @@
 // Carbon and package components we use.
 import { Button, MultiSelect, Search } from '@carbon/react';
 // Import portions of React that are needed.
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -58,15 +63,14 @@ export interface SearchBarProps extends PropsWithChildren {
   placeholderText: string;
 
   /** @type {Function} Function to get the text for each scope to display in dropdown. */
-  scopeToString?: () => void;
+  scopeToString?: (item: string | object) => string;
 
   /** @type {Array<any>} Array of allowed search scopes. */
   scopes?: Scopes;
 
   /** @type {string} The name text for the search scope type. */
 
-  // eslint-disable-next-line react/require-default-props
-  scopesTypeLabel?: typeof conditionalScopePropValidator;
+  scopesTypeLabel?: NonNullable<ReactNode>;
 
   /** @type {Array<any> Array of initially selected search scopes. */
   selectedScopes?: Scopes;
@@ -76,7 +80,7 @@ export interface SearchBarProps extends PropsWithChildren {
    * By default, scope items are sorted in ascending alphabetical order,
    * with "selected" items moved to the start of the scope items array.
    */
-  sortItems?: () => void; // eslint-disable-line react/require-default-props
+  sortItems?: (items: readonly unknown[]) => unknown[];
 
   /** @type {string} The label text for the search submit button. */
   submitLabel: string;
@@ -87,7 +91,9 @@ export interface SearchBarProps extends PropsWithChildren {
   titleText?: string;
 
   /** @type {func} Callback function for translating MultiSelect's child ListBoxMenuIcon SVG title. */
-  translateWithId?: () => void; // eslint-disable-line react/require-default-props
+  translateWithId?: (
+    messageId: 'close.menu' | 'open.menu' | 'clear.all' | 'clear.selection'
+  ) => string;
 
   /** @type {string} Search query value. */
   value?: string;
@@ -95,6 +101,7 @@ export interface SearchBarProps extends PropsWithChildren {
    * Search bar with input field and search button
    */
 }
+
 export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
   (
     {
@@ -182,7 +189,7 @@ export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
       initialSelectedItems: selectedScopes,
       items: scopes,
       itemToString: scopeToString,
-      label: scopesTypeLabel,
+      label: scopesTypeLabel as NonNullable<ReactNode>,
       sortItems,
       translateWithId,
     };
@@ -201,7 +208,6 @@ export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
           <MultiSelect
             {...multiSelectProps}
             id={`${blockClass}__multi-select`}
-            name="search-scopes"
             className={`${blockClass}__scopes`}
             onChange={handleSearchScopeChange}
             size="lg"
@@ -299,7 +305,6 @@ SearchBar.propTypes = {
   ),
 
   /** @type {string} The name text for the search scope type. */
-  // eslint-disable-next-line react/require-default-props
   scopesTypeLabel: conditionalScopePropValidator,
 
   /** @type {Array<any> Array of initially selected search scopes. */
@@ -313,13 +318,13 @@ SearchBar.propTypes = {
    * By default, scope items are sorted in ascending alphabetical order,
    * with "selected" items moved to the start of the scope items array.
    */
-  sortItems: PropTypes.func, // eslint-disable-line react/require-default-props
+  sortItems: PropTypes.func,
 
   /** @type {string} The label text for the search submit button. */
   submitLabel: PropTypes.string.isRequired,
 
   /** @type {func} Callback function for translating MultiSelect's child ListBoxMenuIcon SVG title. */
-  translateWithId: PropTypes.func, // eslint-disable-line react/require-default-props
+  translateWithId: PropTypes.func,
 
   /** @type {string} Search query value. */
   value: PropTypes.string,

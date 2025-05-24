@@ -6,19 +6,18 @@
  */
 
 // Import portions of React that are needed.
-import React, { ReactNode } from 'react';
+import React, { ElementType, ReactNode } from 'react';
 import { EmptyStateV2 } from '.';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, Link } from '@carbon/react';
+import { Button } from '@carbon/react';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
-import { ButtonProps } from '@carbon/react';
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { ButtonProps, LinkProps } from '@carbon/react';
 
 import { EmptyStateContent } from './EmptyStateContent';
 
@@ -37,16 +36,20 @@ export const defaults: { position: string; size: sizes } = {
   size: sizes.lg,
 };
 
+export interface EmptyStateAction extends ButtonProps<React.ElementType> {
+  kind?: 'primary' | 'secondary' | 'tertiary';
+  text?: string;
+}
+
+export interface CustomLink extends LinkProps<React.ElementType> {
+  text?: ReactNode;
+}
+
 export interface EmptyStateProps {
   /**
    * Empty state action button
    */
-  action?: {
-    kind?: 'primary' | 'secondary' | 'tertiary';
-    renderIcon?: CarbonIconType;
-    onClick?: ButtonProps<React.ElementType>['onClick'];
-    text?: string;
-  };
+  action?: EmptyStateAction;
 
   /**
    * Provide an optional class to be applied to the containing node.
@@ -72,10 +75,14 @@ export interface EmptyStateProps {
   /**
    * Empty state link object
    */
-  link?: {
-    text?: string | ReactNode;
-    href?: string;
-  };
+  link?: CustomLink;
+
+  /**
+   * Customize the heading element.  Set to "h1" when EmptyState is full page, i.e. there is no higher header.
+   * Otherwise, you normally don't need to specify this: EmptyState will automatically pick the right heading level
+   * (h2-h6) by leveraging Section and Heading.
+   */
+  headingAs?: (() => ReactNode) | string | ElementType;
 
   /**
    * Empty state size
@@ -99,6 +106,8 @@ export interface EmptyStateProps {
   v2?: boolean;
 }
 
+export type EmptyStatePresetProps = Omit<EmptyStateProps, 'illustration'>;
+
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */
@@ -116,6 +125,7 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       illustrationPosition = defaults.position,
       link,
       size = defaults.size,
+      headingAs,
       subtitle,
       title,
       ...rest
@@ -140,12 +150,14 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
               `${blockClass}__illustration`,
               `${blockClass}__illustration--${size}`,
             ])}
+            aria-hidden="true"
           />
         )}
         <EmptyStateContent
           action={action}
           link={link}
           size={size}
+          headingAs={headingAs}
           subtitle={subtitle}
           title={title ?? ''}
         />
@@ -177,6 +189,11 @@ EmptyState.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs: PropTypes.elementType,
+
+  /**
    * Empty state illustration, specify the `src` for a provided illustration to be displayed. In the case of requiring a light and dark illustration of your own, simply pass the corresponding illustration based on the current theme of your application.
    * For example: `illustration={appTheme === 'dark' ? darkIllustration : lightIllustration}`
    */
@@ -194,17 +211,11 @@ EmptyState.propTypes = {
    * Designates the position of the illustration relative to the content
    */
   illustrationPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-
   /**
    * Empty state link object
    */
   /**@ts-ignore*/
-  link: PropTypes.shape({
-    ...Link.propTypes,
-    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    href: PropTypes.string,
-  }),
-
+  link: PropTypes.any,
   /**
    * Empty state size
    */

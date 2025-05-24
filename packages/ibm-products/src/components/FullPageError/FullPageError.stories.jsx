@@ -16,9 +16,6 @@ import { FullPageError } from '.';
 import mdx from './FullPageError.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-
-const storyClass = 'full-page-error-stories';
-
 export default {
   title: 'IBM Products/Components/Full-page error/FullPageError',
   component: FullPageError,
@@ -49,18 +46,16 @@ export default {
 
 const defaultProps = {
   kind: 'custom',
-  children: (
-    <>
-      <Link href={'/'}>– Forwarding Link 1</Link>
-      <br />
-      <Link href={'/'}>– Forwarding Link 1</Link>
-    </>
-  ),
+  title: '[Error title]',
+  label: 'Error ###',
+  description:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
 };
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
+  const storyClass = 'full-page-error-stories';
   return (
     <div className={`${storyClass}__viewport`}>
       <UiShell>
@@ -68,7 +63,20 @@ const Template = (args) => {
           <div className={`${storyClass}__breadcrumb-container`}>
             <Breadcrumbs className={`${storyClass}__breadcrumb`} />
           </div>
-          <FullPageError {...args} />
+          <FullPageError
+            title={`${args.title}`}
+            label={`${args.label}`}
+            description={`${args.description}`}
+            kind={`${args.kind}`}
+          >
+            <Link size="lg" href={'/'}>
+              – Forwarding Link 1
+            </Link>
+            <br />
+            <Link size="lg" href={'/'}>
+              – Forwarding Link 1
+            </Link>
+          </FullPageError>
         </div>
       </UiShell>
     </div>
@@ -83,10 +91,6 @@ export const fullPageError = Template.bind({});
 fullPageError.storyName = 'Default';
 fullPageError.args = {
   ...defaultProps,
-  title: '[Error title]',
-  label: 'Error ###',
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
 };
 export const fullPageError403 = Template.bind({});
 fullPageError403.storyName = '403';

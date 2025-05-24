@@ -1,10 +1,10 @@
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/config';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config';
 
 .container {
-  width: 80vw;
-  min-width: 16rem;
+  inline-size: 80vw;
+  min-inline-size: 16rem;
 }
 
 .container .#{config.$prefix}--fieldset.recovery-location {

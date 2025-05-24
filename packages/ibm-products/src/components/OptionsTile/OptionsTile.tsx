@@ -13,16 +13,18 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/react/icons';
-import { Layer, Toggle } from '@carbon/react';
-import React, { ReactNode, useRef, useState } from 'react';
-
+import { Heading, Layer, Section, Toggle } from '@carbon/react';
+import React, { MouseEvent, ReactNode, useRef, useState } from 'react';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { useNoInteractiveChildren } from '@carbon/utilities-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import { useControllableState } from '../../global/js/hooks';
-import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import {
+  useControllableState,
+  usePrefersReducedMotion,
+} from '../../global/js/hooks';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--options-tile`;
@@ -67,8 +69,7 @@ export interface OptionsTileProps {
   lockedText?: string;
 
   /**
-   * Provide a function which will be called each time the user
-   * toggles the open state of the OptionsTile.
+   * A handler for managing the controlled state of open prop. If not passed the open prop will not be honored and an uncontrolled state will be used.
    */
   onChange?: (value: boolean) => void;
 
@@ -79,7 +80,7 @@ export interface OptionsTileProps {
   onToggle?: (value: boolean) => void;
 
   /**
-   * Whether the OptionsTile is in open state.
+   * For controlled usage of the tile open state. This prop only works when an onChange prop is also passed, otherwise an uncontrolled state is used.
    */
   open?: boolean;
 
@@ -94,9 +95,9 @@ export interface OptionsTileProps {
   summary?: string;
 
   /**
-   * Provide the title for this OptionsTile.
+   * Provide the title for this OptionsTile. Must not contain any interactive elements.
    */
-  title: string;
+  title: ReactNode;
 
   /**
    * Optionally provide an id which should be used for the title.
@@ -119,9 +120,9 @@ const defaults = {
   size: 'lg' as const,
 };
 
-export let OptionsTile = React.forwardRef(
-  (
-    {
+export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
+  (props, ref) => {
+    const {
       children,
       className,
       enabled,
@@ -131,7 +132,7 @@ export let OptionsTile = React.forwardRef(
       lockedText,
       onChange,
       onToggle,
-      open,
+      open: userOpen,
       size = defaults.size,
       summary,
       title,
@@ -139,44 +140,25 @@ export let OptionsTile = React.forwardRef(
       warn,
       warnText,
       ...rest
-    }: OptionsTileProps,
-    ref: React.Ref<HTMLDivElement>
-  ) => {
-    const [prevIsOpen, setPrevIsOpen] = useState(open);
+    } = props;
     const [closing, setClosing] = useState(false);
-
-    const [isOpen, setIsOpen] = useControllableState({
-      defaultValue: open || null,
-      name: 'OptionsTile',
-      onChange: (value: boolean) => onChange?.(value),
-      value: open,
-    });
+    const [open, setOpen] = useControllableState(userOpen ?? false, onChange);
 
     const detailsRef = useRef<HTMLDetailsElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const headingRef = useRef<HTMLHeadingElement>(null);
 
-    const id = uuidv4();
-    const titleId = userDefinedTitleId ?? `${id}-title`;
+    useNoInteractiveChildren(headingRef);
 
+    const titleId = userDefinedTitleId ?? `${uuidv4()}-title`;
     const isExpandable = children !== undefined;
-
-    const isInvalid = invalid;
-    const isWarn = !isInvalid && warn;
-    const isLocked = !isInvalid && !isWarn && locked;
+    const isWarn = !invalid && warn;
+    const isLocked = !invalid && !isWarn && locked;
     const shouldReduceMotion = usePrefersReducedMotion();
 
-    if (open !== prevIsOpen) {
-      if (isOpen && !open) {
-        collapse();
-      } else if (!isOpen && open) {
-        expand();
-      }
-      setPrevIsOpen(open);
-    }
-
-    function expand() {
+    const expand = () => {
       if (detailsRef.current && contentRef.current && !shouldReduceMotion) {
-        setIsOpen(true);
+        setOpen(true);
 
         detailsRef.current.open = true;
         const { paddingTop, paddingBottom, height } = getComputedStyle(
@@ -206,12 +188,11 @@ export let OptionsTile = React.forwardRef(
           }
         );
       } else {
-        // in case the refs are not set or the user prefers reduced motion, skip the animation
-        setIsOpen(true);
+        setOpen(true);
       }
-    }
+    };
 
-    function collapse() {
+    const collapse = () => {
       if (contentRef.current && !shouldReduceMotion) {
         setClosing(true);
 
@@ -222,6 +203,7 @@ export let OptionsTile = React.forwardRef(
         const animationDuration = Number(
           carbonMotion.moderate01.replace('ms', '')
         );
+
         const animation = contentRef.current.animate(
           [
             {
@@ -244,58 +226,41 @@ export let OptionsTile = React.forwardRef(
         );
 
         const callback = () => {
-          setIsOpen(false);
+          setOpen(false);
           setClosing(false);
         };
 
-        //This is to fix the flicking issue while collapsing.
-        //root cause : after the animation is finished , isOpen is still true until onFinish callback is triggered.For that minute duration , collapsed content will again show.
-        // To avoid this , isOpen is set to false after the 90% of animation duration.
         setTimeout(() => {
           callback();
         }, animationDuration * 0.9);
-
-        // animation.onfinish = callback;
         animation.oncancel = callback;
       } else {
-        // in case the ref is not set or the user prefers reduced motion, skip the animation
-        setIsOpen(false);
+        setOpen(false);
       }
-    }
+    };
 
-    function toggle(e: { preventDefault: () => void }) {
-      e.preventDefault();
+    const toggle = (evt: MouseEvent) => {
+      evt.preventDefault();
 
-      if (isOpen) {
+      if (open) {
         collapse();
       } else {
         expand();
       }
-    }
+    };
 
-    function renderTitle() {
+    const renderTitle = () => {
       let Icon: CarbonIconType | null = null;
       let text = summary;
-      const summaryClasses = [`${blockClass}__summary`];
-      if (closing) {
-        summaryClasses.push(`${blockClass}__summary--closing`);
-      }
-      if (isOpen) {
-        summaryClasses.push(`${blockClass}__summary--open`);
-      }
 
       if (invalid) {
         Icon = WarningFilled;
         text = invalidText;
-        summaryClasses.push(`${blockClass}__summary--invalid`);
       } else if (warn) {
         Icon = WarningAltFilled;
         text = warnText;
-        summaryClasses.push(`${blockClass}__summary--warn`);
       } else if (locked) {
         Icon = Locked;
-        summaryClasses.push(`${blockClass}__summary--locked`);
-
         if (!text) {
           text = lockedText;
         }
@@ -303,28 +268,36 @@ export let OptionsTile = React.forwardRef(
 
       const hasValidationState = invalid || warn || locked;
       const summaryHidden = !hasValidationState && enabled === false;
-
-      if (summaryHidden) {
-        summaryClasses.push(`${blockClass}__summary--hidden`);
-      }
+      const summaryClasses = cx(`${blockClass}__summary`, {
+        [`${blockClass}__summary--closing`]: closing,
+        [`${blockClass}__summary--open`]: open,
+        [`${blockClass}__summary--invalid`]: invalid,
+        [`${blockClass}__summary--warn`]: warn,
+        [`${blockClass}__summary--locked`]: locked,
+        [`${blockClass}__summary--hidden`]: summaryHidden,
+      });
 
       return (
         <div className={`${blockClass}__heading`}>
-          <h6 id={titleId} className={`${blockClass}__title`}>
+          <Heading
+            ref={headingRef}
+            id={titleId}
+            className={`${blockClass}__title`}
+          >
             {title}
-          </h6>
+          </Heading>
           {text && (
-            <span className={cx(summaryClasses)} aria-hidden={summaryHidden}>
+            <span className={summaryClasses} aria-hidden={summaryHidden}>
               {Icon && <Icon size={16} />}
               <span className={`${blockClass}__summary-text`}>{text}</span>
             </span>
           )}
         </div>
       );
-    }
+    };
 
     return (
-      <div
+      <Section
         {...rest}
         className={cx(blockClass, className, `${blockClass}--${size}`, {
           [`${blockClass}--closing`]: closing,
@@ -347,25 +320,21 @@ export let OptionsTile = React.forwardRef(
           </div>
         )}
         {isExpandable ? (
-          <details open={isOpen} ref={detailsRef}>
-            {
-              /* summary should not be considered non-interactive
-               * https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/656
-               * https://github.com/A11yance/axobject-query/issues/319
-               */
-              /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
-              <summary className={`${blockClass}__header`} onClick={toggle}>
-                <ChevronDown
-                  size={16}
-                  className={cx(`${blockClass}__chevron`, {
-                    [`${blockClass}__chevron--open`]: isOpen,
-                    [`${blockClass}__chevron--closing`]: closing,
-                  })}
-                />
-                {renderTitle()}
-              </summary>
-            }
-
+          <details
+            className={`${blockClass}__details`}
+            open={open}
+            ref={detailsRef}
+          >
+            <summary className={`${blockClass}__header`} onClick={toggle}>
+              <ChevronDown
+                size={16}
+                className={cx(`${blockClass}__chevron`, {
+                  [`${blockClass}__chevron--open`]: open,
+                  [`${blockClass}__chevron--closing`]: closing,
+                })}
+              />
+              {renderTitle()}
+            </summary>
             <div className={`${blockClass}__content`} ref={contentRef}>
               <Layer>
                 {isLocked && (
@@ -381,7 +350,7 @@ export let OptionsTile = React.forwardRef(
         ) : (
           <div className={`${blockClass}__static-content`}>{renderTitle()}</div>
         )}
-      </div>
+      </Section>
     );
   }
 );
@@ -435,8 +404,7 @@ OptionsTile.propTypes = {
   lockedText: PropTypes.string,
 
   /**
-   * Provide a function which will be called each time the user
-   * toggles the open state of the OptionsTile.
+   * A handler for managing the controlled state of open prop. If not passed the open prop will not be honored and an uncontrolled state will be used.
    */
   onChange: PropTypes.func,
 
@@ -447,7 +415,7 @@ OptionsTile.propTypes = {
   onToggle: PropTypes.func,
 
   /**
-   * Whether the OptionsTile is in open state.
+   * For controlled usage of the tile open state. This prop only works when an onChange prop is also passed, otherwise an uncontrolled state is used.
    */
   open: PropTypes.bool,
 
@@ -462,9 +430,9 @@ OptionsTile.propTypes = {
   summary: PropTypes.string,
 
   /**
-   * Provide the title for this OptionsTile.
+   * Provide the title for this OptionsTile. Must not contain any interactive elements.
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 
   /**
    * Optionally provide an id which should be used for the title.

@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2023
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { render, screen, waitFor, act } from '@testing-library/react';
+import React, { act } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { expectWarn, expectWarnAsync } from '../../global/js/utils/test-helper';
 import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
@@ -74,6 +74,8 @@ const defaultProps = {
   ariaLabel,
 };
 
+const secondStepButtonId = 'second-step-button';
+
 const renderCreateTearsheet = ({
   rejectOnSubmit = false,
   rejectOnNext = false,
@@ -121,6 +123,10 @@ const renderCreateTearsheet = ({
         onPrevious={onPrevious}
       >
         step 2 content
+        <button type="button">Second step button one</button>
+        <button id={secondStepButtonId} type="button">
+          Second step button two
+        </button>
       </CreateTearsheetStep>
       <CreateTearsheetStep
         title={step3Title}
@@ -266,6 +272,7 @@ describe(CreateTearsheet.displayName, () => {
     ));
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
+    jest.useFakeTimers();
     renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);
@@ -280,9 +287,41 @@ describe(CreateTearsheet.displayName, () => {
       )
     );
 
+    jest.advanceTimersByTime(1000);
+
     expect(onNextStepFn).toHaveBeenCalled();
     await act(() => click(cancelButtonElement));
     expect(onCloseFn).toHaveBeenCalled();
+  });
+
+  it('should focus the specified element on steps greater than the first', async () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      firstFocusElement: `#${secondStepButtonId}`,
+    });
+    const nextButtonElement = screen.getByText(nextButtonText);
+    await act(() => click(nextButtonElement));
+    setTimeout(() => {
+      const button = screen.getByRole('button', {
+        name: 'Second step button two',
+      });
+      expect(button).toHaveFocus();
+    }, 20);
+  });
+
+  it('should not focus the specified element if an invalid selector is provided', async () => {
+    jest.useFakeTimers();
+    renderCreateTearsheet({
+      ...defaultProps,
+      firstFocusElement: `#invalid-selector`,
+    });
+    const nextButtonElement = screen.getByText(nextButtonText);
+    await act(() => click(nextButtonElement));
+    jest.advanceTimersByTime(1000);
+    const button = screen.getByRole('button', {
+      name: 'Second step button one',
+    });
+    expect(button).toHaveFocus();
   });
 
   it('renders first step with onNext function prop that rejects', async () =>
@@ -296,7 +335,7 @@ describe(CreateTearsheet.displayName, () => {
         });
         const nextButtonElement = screen.getByText(nextButtonText);
         await act(() => click(nextButtonElement));
-
+        jest.advanceTimersByTime(1000);
         expect(onNextStepRejectionFn).toHaveBeenCalled();
       }
     ));
@@ -567,4 +606,44 @@ describe(CreateTearsheet.displayName, () => {
         renderInvalidCreateTearsheet(defaultProps);
       }
     ));
+
+  it('should not throw an error if null is passed as one of the children?', async () => {
+    const children = [
+      <CreateTearsheetStep title="Title 1" key="1" fieldsetLegendText="Title 1">
+        <p>1</p>
+      </CreateTearsheetStep>,
+      null,
+      <CreateTearsheetStep title="Title 2" key="2" fieldsetLegendText="Title 2">
+        <p>2</p>
+      </CreateTearsheetStep>,
+    ];
+
+    render(
+      <CreateTearsheet {...defaultProps} onRequestSubmit={onRequestSubmitFn}>
+        {children}
+      </CreateTearsheet>
+    );
+
+    // Select the next button
+    const nextButtonElement = screen.getByText(nextButtonText);
+
+    await waitFor(() => userEvent.click(nextButtonElement));
+
+    // Make sure the next step is on step 2
+    const influencerSteps = document.querySelector(
+      `.${pkg.prefix}--create-influencer__progress-indicator`
+    );
+
+    expect(
+      influencerSteps.childNodes[0].classList.contains(
+        'cds--progress-step--complete'
+      )
+    ).toBe(true);
+
+    expect(
+      influencerSteps.childNodes[1].classList.contains(
+        'cds--progress-step--current'
+      )
+    ).toBe(true);
+  });
 });

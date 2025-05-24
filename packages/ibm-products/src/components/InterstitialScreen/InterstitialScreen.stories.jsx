@@ -8,29 +8,28 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 
-import { InterstitialScreenView } from '..';
-import { InterstitialScreenViewModule } from '..';
 import { InterstitialScreen } from '.';
 import mdx from './InterstitialScreen.mdx';
-
-import HowACaseIsCreated1 from './_story-assets/illustrations/how-a-case-is-created-1.json';
-import HowACaseIsCreated2 from './_story-assets/illustrations/how-a-case-is-created-2.json';
-import HowACaseIsCreated3 from './_story-assets/illustrations/how-a-case-is-created-3.json';
-import InterstitialExampleImg from './_story-assets/illustrations/interstitial-ph.png';
-
 import styles from './_storybook-styles.scss?inline';
+import { clamp } from '../../global/js/utils/clamp';
+import { ArrowRight } from '@carbon/react/icons';
+import { pkg } from '../../settings';
+import { InterstitialScreenView } from './_story-assets/InterstitialScreenView/InterstitialScreenView';
+import { InterstitialScreenViewModule } from './_story-assets/InterstitialScreenViewModule/InterstitialScreenViewModule';
 const storyClass = 'interstitial-stories';
 
+// cspell:words Terminé Partiel Actuel valide
+
+const blockClass = `${pkg.prefix}--interstitial-screen`;
+
 export default {
-  title: 'Experimental/Onboarding/Interstitial screen/InterstitialScreen',
+  title: 'Experimental/Onboarding/InterstitialScreen',
   component: InterstitialScreen,
   tags: ['autodocs'],
-  argTypes: {
-    media: {
-      options: ['None', 'With a static image', 'With an animation'],
-      control: { type: 'select' },
-    },
-    children: { control: { disable: true } },
+  subcomponents: {
+    Header: InterstitialScreen.Header,
+    Body: InterstitialScreen.Body,
+    Footer: InterstitialScreen.Footer,
   },
   decorators: [
     (Story) => {
@@ -44,365 +43,386 @@ export default {
     },
   },
 };
-const getSelectedMedia = (media) => {
-  console.log('Story media: ', InterstitialExampleImg);
-  switch (media) {
-    case 'With a static image':
-      return {
-        render: () => (
-          <div
-            style={{
-              width: '100%',
-              height: '100%',
-              background: `center center / contain no-repeat url("${InterstitialExampleImg}") `,
-            }}
-          />
-        ),
-        breakpoints: { xlg: 8, lg: 8 },
-      };
-    case 'With an animation':
-      return {
-        filePaths: [HowACaseIsCreated1, HowACaseIsCreated2, HowACaseIsCreated3],
-        breakpoints: { xlg: 8, lg: 8 },
-      };
-    default:
-      return null;
-  }
-};
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* * * * * * * | UTILITY COMPONENTS FOR THIS STORYBOOK | * * * * * * */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-const StoryCardTemplate = ({ title }) => {
-  return (
-    <div className="storyCardExample">
-      <span>{title}</span>
-    </div>
-  );
+const translations = {
+  'carbon.progress-step.complete': 'Terminé',
+  'carbon.progress-step.incomplete': 'Partiel',
+  'carbon.progress-step.current': 'Actuel',
+  'carbon.progress-step.invalid': 'Non valide',
 };
 
-const GenerateExampleObjects = ({ total, startValue, copyPrefix }) => {
-  const allElements = [];
-  for (let i = startValue; i < startValue + total; i++) {
-    allElements.push(
-      <StoryCardTemplate key={i} title={`${copyPrefix} ${i}`} />
-    );
-  }
-  return allElements;
-};
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* * * * * * * * * * * * * * | TEMPLATES | * * * * * * * * * * * * * * */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-const TemplateModal = ({ children, ...args }) => {
-  const [showInterstitialModal, setShowInterstitialModal] = useState(true);
-
-  const { media } = args;
-  const selectedMedia = getSelectedMedia(media);
-
+const getMultipleContent = ({ handleGotoStep }) => {
   return (
     <>
-      <Button
-        onClick={() => {
-          setShowInterstitialModal(true);
-        }}
+      <InterstitialScreenView
+        stepTitle="Step 1"
+        translateWithId={(id) => translations[id] ?? id}
       >
-        Show Interstitial modal
-      </Button>
-
-      <InterstitialScreen
-        isOpen={showInterstitialModal}
-        onClose={() => {
-          setShowInterstitialModal(false);
-        }}
-        {...args}
-        media={selectedMedia}
-      >
-        {children}
-      </InterstitialScreen>
-    </>
-  );
-};
-
-const TemplateModalMultipleChildren = ({ children, ...args }) => {
-  const [showInterstitialModal, setShowInterstitialModal] = useState(true);
-
-  const { media } = args;
-  const selectedMedia = getSelectedMedia(media);
-
-  return (
-    <>
-      <Button
-        onClick={() => {
-          setShowInterstitialModal(true);
-        }}
-      >
-        Show Interstitial modal
-      </Button>
-
-      <InterstitialScreen
-        isOpen={showInterstitialModal}
-        onClose={() => {
-          setShowInterstitialModal(false);
-        }}
-        {...args}
-        media={selectedMedia}
-      >
-        {children.props.children}
-      </InterstitialScreen>
-    </>
-  );
-};
-
-const TemplateFullScreenMultiples = ({ children, ...args }) => {
-  const [showInterstitialModal, setShowInterstitialModal] = useState(true);
-  const [showInterstitialFullScreen, setShowInterstitialFullScreen] =
-    useState(true);
-  const { media } = args;
-  const selectedMedia = getSelectedMedia(media);
-
-  return (
-    <>
-      <Button
-        onClick={() => {
-          setShowInterstitialFullScreen(true);
-        }}
-      >
-        Show Interstitial full screen
-      </Button>
-      <InterstitialScreen
-        isOpen={showInterstitialModal || showInterstitialFullScreen}
-        isFullScreen={showInterstitialFullScreen}
-        onClose={() => {
-          setShowInterstitialModal(false);
-          setShowInterstitialFullScreen(false);
-        }}
-        {...args}
-        media={selectedMedia}
-      >
-        {children.props.children}
-      </InterstitialScreen>
-    </>
-  );
-};
-
-const TemplateFullScreen = ({ children, ...args }) => {
-  const [showInterstitialModal, setShowInterstitialModal] = useState(true);
-  const [showInterstitialFullScreen, setShowInterstitialFullScreen] =
-    useState(true);
-  const { media } = args;
-  const selectedMedia = getSelectedMedia(media);
-
-  return (
-    <>
-      <Button
-        onClick={() => {
-          setShowInterstitialFullScreen(true);
-        }}
-      >
-        Show Interstitial full screen
-      </Button>
-      <InterstitialScreen
-        isOpen={showInterstitialModal || showInterstitialFullScreen}
-        isFullScreen={showInterstitialFullScreen}
-        onClose={() => {
-          setShowInterstitialModal(false);
-          setShowInterstitialFullScreen(false);
-        }}
-        {...args}
-        media={selectedMedia}
-      >
-        {children}
-      </InterstitialScreen>
-    </>
-  );
-};
-
-const TemplateFullScreenMultipleCardGrids = ({ children, ...args }) => {
-  const [showInterstitialModal, setShowInterstitialModal] = useState(true);
-  const [showInterstitialFullScreen, setShowInterstitialFullScreen] =
-    useState(true);
-  const { media } = args;
-  const selectedMedia = getSelectedMedia(media);
-
-  return (
-    <>
-      <Button
-        onClick={() => {
-          setShowInterstitialFullScreen(true);
-        }}
-      >
-        Show Interstitial full screen
-      </Button>
-      <InterstitialScreen
-        isOpen={showInterstitialModal || showInterstitialFullScreen}
-        isFullScreen={showInterstitialFullScreen}
-        onClose={() => {
-          setShowInterstitialModal(false);
-          setShowInterstitialFullScreen(false);
-        }}
-        {...args}
-        media={selectedMedia}
-      >
-        {children.props.children}
-      </InterstitialScreen>
-    </>
-  );
-};
-
-const defaultProps = {
-  domainName: 'IBM',
-  productName: 'Product',
-  previousButtonLabel: 'Back',
-  nextButtonLabel: 'Next',
-  startButtonLabel: 'Get started',
-  skipButtonLabel: 'Skip',
-  media: 'None', // sets media's default radio button selection
-};
-
-const defaultPropsImage = {
-  ...defaultProps,
-  media: 'With a static image',
-};
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* * * * * * * * * * * * * * | STORIES | * * * * * * * * * * * * * * */
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-export const interstitialScreenModalWithImage = TemplateModal.bind({});
-interstitialScreenModalWithImage.storyName = 'Modal';
-interstitialScreenModalWithImage.args = {
-  ...defaultPropsImage,
-  hideProgressIndicator: true,
-  interstitialAriaLabel: 'Interstitial Screen',
-  children: (
-    <InterstitialScreenView stepTitle="Step 1">
-      <InterstitialScreenViewModule
-        size="sm"
-        title="Use case-specific heading"
-        description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-      />
-    </InterstitialScreenView>
-  ),
-};
-
-export const interstitialScreenModalMultiplesHeader =
-  TemplateModalMultipleChildren.bind({});
-interstitialScreenModalMultiplesHeader.storyName = 'Modal with multiple steps';
-interstitialScreenModalMultiplesHeader.args = {
-  ...defaultPropsImage,
-  hideProgressIndicator: false,
-  headerTitle: 'Use case-specific title',
-  interstitialAriaLabel: 'Interstitial Screen',
-  children: (
-    <>
-      <InterstitialScreenView stepTitle="Step 1">
         <InterstitialScreenViewModule
           size="md"
           title="Use case-specific heading 1"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>
-      <InterstitialScreenView stepTitle="Step 2">
+      <InterstitialScreenView
+        stepTitle="Step 2"
+        translateWithId={(id) => translations[id] ?? id}
+      >
         <InterstitialScreenViewModule
           size="md"
           title="Use case-specific heading 2"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>
-      <InterstitialScreenView stepTitle="Step 3">
+      <InterstitialScreenView
+        stepTitle="Step 3"
+        translateWithId={(id) => translations[id] ?? id}
+      >
         <InterstitialScreenViewModule
           size="md"
           title="Use case-specific heading 3"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>
+      <InterstitialScreenView
+        stepTitle="Step 4"
+        translateWithId={(id) => translations[id] ?? id}
+      >
+        <InterstitialScreenViewModule
+          size="md"
+          title="Use case-specific heading 4"
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
+      </InterstitialScreenView>
+      <InterstitialScreenView
+        stepTitle="Step 5"
+        translateWithId={(id) => translations[id] ?? id}
+      >
+        <InterstitialScreenViewModule
+          size="md"
+          title="Use case-specific heading 5"
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
+      </InterstitialScreenView>
     </>
-  ),
+  );
 };
 
-export const interstitialScreenFullScreenImage = TemplateFullScreen.bind({});
-interstitialScreenFullScreenImage.storyName = 'Full screen';
-interstitialScreenFullScreenImage.args = {
-  ...defaultPropsImage,
-  hideProgressIndicator: true,
-  children: (
-    <InterstitialScreenView stepTitle="Step 1">
-      <InterstitialScreenViewModule
-        className="GenericView"
-        title="Use case-specific heading"
-        description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-      />
-    </InterstitialScreenView>
-  ),
-};
-
-export const interstitialScreenFullScreenHeaderWithImage =
-  TemplateFullScreenMultiples.bind({});
-interstitialScreenFullScreenHeaderWithImage.storyName =
-  'Full screen with multiple steps';
-interstitialScreenFullScreenHeaderWithImage.args = {
-  ...defaultPropsImage,
-  headerTitle: 'Use case-specific title',
-  headerClassName: 'MyInterstitialHeader',
-  hideProgressIndicator: false,
-  children: (
+const getSingleContent = (
+  { handleGotoStep, disableActionButton },
+  includeDisableButton,
+  isFullScreen
+) => {
+  return (
     <>
       <InterstitialScreenView stepTitle="Step 1">
         <InterstitialScreenViewModule
-          className="GenericView"
+          className={isFullScreen ? 'GenericView' : ''}
           title="Use case-specific heading"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-        />
-      </InterstitialScreenView>
-      <InterstitialScreenView stepTitle="Step 2">
-        <InterstitialScreenViewModule
-          className="GenericView"
-          title="Use case-specific heading"
-          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-        />
-      </InterstitialScreenView>
-      <InterstitialScreenView stepTitle="Step 3">
-        <InterstitialScreenViewModule
-          className="GenericView"
-          title="Use case-specific heading"
-          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+          disableActionButton={
+            includeDisableButton ? disableActionButton : null
+          }
         />
       </InterstitialScreenView>
     </>
-  ),
+  );
 };
 
-export const interstitialScreenFullScreenNoMediaWithCards =
-  TemplateFullScreenMultipleCardGrids.bind({});
-interstitialScreenFullScreenNoMediaWithCards.storyName =
-  'Full screen with custom layout';
-interstitialScreenFullScreenNoMediaWithCards.args = {
-  ...defaultProps,
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * | STORIES | * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+const defaultProps = {
   headerTitle: 'Use case-specific title',
-  headerClassName: 'MyInterstitialHeader',
-  hideProgressIndicator: false,
-  children: (
+  headerSubTitle: 'Use case-specific sub title',
+  interstitialAriaLabel: 'Interstitial Screen',
+};
+export const Modal = () => {
+  const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
+
+  return (
     <>
-      <InterstitialScreenView stepTitle="Step 1">
-        <div className="CustomLayout">
-          <GenerateExampleObjects
-            total={8}
-            startValue={1}
-            copyPrefix="Custom Element"
-          />
-        </div>
-      </InterstitialScreenView>
-      <InterstitialScreenView stepTitle="Step 2">
-        <div className="CustomLayout">
-          <GenerateExampleObjects
-            total={8}
-            startValue={9}
-            copyPrefix="Custom Element"
-          />
-        </div>
-      </InterstitialScreenView>
+      <Button
+        onClick={() => {
+          setShowInterstitialScreen(true);
+        }}
+      >
+        Show Interstitial modal
+      </Button>
+
+      <InterstitialScreen
+        isOpen={showInterstitialScreen}
+        onClose={() => {
+          setShowInterstitialScreen(false);
+        }}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+      >
+        <InterstitialScreen.Header
+          headerTitle={defaultProps.headerTitle}
+          headerSubTitle={defaultProps.headerSubTitle}
+          hideProgressIndicator={true}
+        ></InterstitialScreen.Header>
+        <InterstitialScreen.Body
+          contentRenderer={(internalConfig) => {
+            return getSingleContent(internalConfig, true);
+          }}
+        />
+        <InterstitialScreen.Footer />
+      </InterstitialScreen>
     </>
-  ),
+  );
+};
+
+export const ModalWithMultipleSteps = () => {
+  const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
+
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setShowInterstitialScreen(true);
+        }}
+      >
+        Show Interstitial modal
+      </Button>
+
+      <InterstitialScreen
+        isOpen={showInterstitialScreen}
+        onClose={() => {
+          setShowInterstitialScreen(false);
+        }}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+      >
+        <InterstitialScreen.Header
+          headerTitle={defaultProps.headerTitle}
+          headerSubTitle={defaultProps.headerSubTitle}
+        ></InterstitialScreen.Header>
+        <InterstitialScreen.Body
+          contentRenderer={(internalConfig) => {
+            return getMultipleContent(internalConfig);
+          }}
+        />
+        <InterstitialScreen.Footer />
+      </InterstitialScreen>
+    </>
+  );
+};
+
+export const WithCustomActionButtons = () => {
+  const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
+
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setShowInterstitialScreen(true);
+        }}
+      >
+        Show Interstitial modal
+      </Button>
+
+      <InterstitialScreen
+        isOpen={showInterstitialScreen}
+        onClose={() => {
+          setShowInterstitialScreen(false);
+        }}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+      >
+        <InterstitialScreen.Header
+          headerTitle={defaultProps.headerTitle}
+          headerSubTitle={defaultProps.headerSubTitle}
+        ></InterstitialScreen.Header>
+        <InterstitialScreen.Body
+          contentRenderer={(internalConfig) => {
+            return getMultipleContent(internalConfig);
+          }}
+        />
+        <InterstitialScreen.Footer
+          actionButtonRenderer={({ handleGotoStep, progStep, stepCount }) => {
+            return (
+              <>
+                <Button
+                  className={`${blockClass}--skip-btn`}
+                  kind="ghost"
+                  size="lg"
+                  title={'Explore on my own'}
+                  onClick={() => setShowInterstitialScreen(false)}
+                >
+                  Explore on my own
+                </Button>
+                <div className={`${blockClass}--footer-controls`}>
+                  {progStep > 0 && (
+                    <Button
+                      className={`${blockClass}--prev-btn`}
+                      kind="secondary"
+                      size="lg"
+                      title={'Previous'}
+                      onClick={() => {
+                        const progStepFloor = 0;
+                        const progStepCeil = stepCount - 1;
+                        const targetStep = clamp(
+                          progStep - 1,
+                          progStepFloor,
+                          progStepCeil
+                        );
+                        handleGotoStep(targetStep);
+                      }}
+                    >
+                      Previous
+                    </Button>
+                  )}
+
+                  {progStep < stepCount - 1 && (
+                    <Button
+                      className={`${blockClass}--next-btn`}
+                      renderIcon={ArrowRight}
+                      size="lg"
+                      title={'Next'}
+                      onClick={() => {
+                        const progStepFloor = 0;
+                        const progStepCeil = stepCount - 1;
+                        const targetStep = clamp(
+                          progStep + 1,
+                          progStepFloor,
+                          progStepCeil
+                        );
+                        handleGotoStep(targetStep);
+                      }}
+                    >
+                      Next
+                    </Button>
+                  )}
+
+                  {progStep === stepCount - 1 && (
+                    <Button
+                      className={`${blockClass}--start-btn`}
+                      renderIcon={ArrowRight}
+                      size="lg"
+                      title={'Start'}
+                      onClick={() => setShowInterstitialScreen(false)}
+                    >
+                      Start
+                    </Button>
+                  )}
+                </div>
+              </>
+            );
+          }}
+        />
+      </InterstitialScreen>
+    </>
+  );
+};
+export const WithAsynchronousActionCallback = () => {
+  const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
+
+  const onAction = async (actionType, config) => {
+    if (actionType !== 'skip') {
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1500);
+      });
+    }
+  };
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setShowInterstitialScreen(true);
+        }}
+      >
+        Show Interstitial modal
+      </Button>
+
+      <InterstitialScreen
+        isOpen={showInterstitialScreen}
+        onClose={() => {
+          setShowInterstitialScreen(false);
+        }}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+      >
+        <InterstitialScreen.Header
+          headerTitle={defaultProps.headerTitle}
+          headerSubTitle={defaultProps.headerSubTitle}
+        ></InterstitialScreen.Header>
+        <InterstitialScreen.Body
+          contentRenderer={(internalConfig) => {
+            return getMultipleContent(internalConfig);
+          }}
+        />
+        <InterstitialScreen.Footer onAction={onAction} />
+      </InterstitialScreen>
+    </>
+  );
+};
+export const fullScreen = () => {
+  const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
+  useState(true);
+
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setShowInterstitialScreen(true);
+        }}
+      >
+        Show Interstitial full screen
+      </Button>
+      <InterstitialScreen
+        isOpen={showInterstitialScreen}
+        onClose={() => {
+          setShowInterstitialScreen(false);
+        }}
+        isFullScreen={true}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+      >
+        <InterstitialScreen.Header
+          headerTitle={defaultProps.headerTitle}
+          headerSubTitle={defaultProps.headerSubTitle}
+        ></InterstitialScreen.Header>
+        <InterstitialScreen.Body
+          contentRenderer={(internalConfig) => {
+            return getSingleContent(internalConfig, true, true);
+          }}
+        />
+        <InterstitialScreen.Footer />
+      </InterstitialScreen>
+    </>
+  );
+};
+
+export const fullScreenWithMultipleSteps = () => {
+  const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
+  useState(true);
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setShowInterstitialScreen(true);
+        }}
+      >
+        Show Interstitial full screen
+      </Button>
+      <InterstitialScreen
+        isOpen={showInterstitialScreen}
+        onClose={() => {
+          setShowInterstitialScreen(false);
+        }}
+        isFullScreen={true}
+        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+      >
+        <InterstitialScreen.Header
+          headerTitle={defaultProps.headerTitle}
+          headerSubTitle={defaultProps.headerSubTitle}
+        ></InterstitialScreen.Header>
+        <InterstitialScreen.Body
+          contentRenderer={(internalConfig) => {
+            return getMultipleContent(internalConfig, true);
+          }}
+        />
+        <InterstitialScreen.Footer />
+      </InterstitialScreen>
+    </>
+  );
 };

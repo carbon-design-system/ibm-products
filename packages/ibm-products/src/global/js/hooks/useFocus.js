@@ -8,7 +8,6 @@
 import { usePrefix } from '@carbon/react';
 import { pkg } from '../../../settings';
 import { useCallback, useEffect } from 'react';
-import wait from '../utils/wait';
 
 export const getSpecificElement = (parentEl, elementId) => {
   const element = parentEl?.querySelector(elementId);
@@ -30,16 +29,15 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
   const querySelect = `select${notQuery}`;
   const queryTextarea = `textarea${notQuery}`;
   const queryLink = `[href]${notQuery}`;
+  const queryAnchor = `a${notQuery}`;
   const queryTabIndex = `[tabindex="0"]${notQuery}`;
   const querySidePanelScroll = `.${sidePanelBaseClass}--scrolls`;
   // Final query
-  const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea},${queryTabIndex},${querySidePanelScroll}`;
-
-  const modalEl = modalRef?.current;
+  const query = `${queryButton},${queryLink},${queryAnchor},${queryInput},${querySelect},${queryTextarea},${queryTabIndex},${querySidePanelScroll}`;
 
   const getFocusable = useCallback(() => {
     // Selecting all focusable elements based on the above conditions
-    let focusableElements = modalEl?.querySelectorAll(`${query}`);
+    let focusableElements = modalRef?.current?.querySelectorAll(`${query}`);
     if (focusableElements?.length) {
       focusableElements = Array.prototype.filter.call(
         focusableElements,
@@ -50,7 +48,10 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     const first = focusableElements?.[0];
     const last = focusableElements?.[focusableElements?.length - 1];
     const all = focusableElements;
-    const specified = getSpecificElement(modalEl, selectorPrimaryFocus);
+    const specified = getSpecificElement(
+      modalRef?.current,
+      selectorPrimaryFocus
+    );
 
     return {
       first,
@@ -58,28 +59,24 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
       all,
       specified,
     };
-  }, [modalEl, query, selectorPrimaryFocus]);
+  }, [modalRef, query, selectorPrimaryFocus]);
 
   useEffect(() => {
     getFocusable();
-  }, [getFocusable]);
+  }, [getFocusable, modalRef]);
 
   const handleKeyDown = async (event) => {
     // Checking whether the key is tab or not
     if (event.key === 'Tab') {
       // updating the focusable elements list
-      const { first, last, all } = getFocusable();
+      const { first, last } = getFocusable();
 
-      await wait(1);
-      if (
-        event.shiftKey &&
-        !Array.prototype.includes.call(all, document?.activeElement)
-      ) {
+      if (event.shiftKey && document?.activeElement === first) {
         // Prevents the default "Tab" behavior
         event.preventDefault();
         // if the user press shift+tab and the current element not in focusable items
         last?.focus();
-      } else if (!Array.prototype.includes.call(all, document?.activeElement)) {
+      } else if (!event.shiftKey && document?.activeElement === last) {
         event.preventDefault();
         // user pressing tab key only then
         // focusing the first element if the current element is not in focusable items
@@ -88,43 +85,27 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     }
   };
 
-  return {
-    firstElement: getFocusable().first,
-    lastElement: getFocusable().last,
-    allElements: getFocusable().all,
-    specifiedElement: getFocusable().specified,
-    keyDownListener: handleKeyDown,
-    getFocusable: getFocusable,
-  };
-};
-
-/**
- *
- * @param {*} firstElement
- * @param {*} modalRef
- * @param {string | undefined} selectorPrimaryFocus
- */
-export const claimFocus = (
-  firstElement,
-  modalRef,
-  selectorPrimaryFocus = undefined
-) => {
-  if (
-    selectorPrimaryFocus &&
-    getSpecificElement(modalRef?.current, selectorPrimaryFocus)
-  ) {
-    const specifiedEl = getSpecificElement(
-      modalRef?.current,
-      selectorPrimaryFocus
-    );
+  const claimFocus = useCallback(() => {
+    const { first, specified } = getFocusable();
 
     if (
-      specifiedEl &&
-      window?.getComputedStyle(specifiedEl)?.display !== 'none'
+      specified &&
+      window?.getComputedStyle(specified)?.display !== 'none' &&
+      specified?.tabIndex !== -1
     ) {
-      return specifiedEl.focus();
+      setTimeout(() => specified.focus(), 0);
+    } else {
+      setTimeout(() => first?.focus(), 0);
     }
-  }
+  }, [getFocusable]);
 
-  setTimeout(() => firstElement?.focus(), 0);
+  return {
+    firstElement: getFocusable()?.first,
+    lastElement: getFocusable()?.last,
+    allElements: getFocusable()?.all,
+    specifiedElement: getFocusable()?.specified,
+    keyDownListener: handleKeyDown,
+    getFocusable: getFocusable,
+    claimFocus,
+  };
 };

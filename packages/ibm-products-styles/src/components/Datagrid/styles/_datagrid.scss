@@ -9,7 +9,7 @@
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/breakpoint';
 @use './variables' as *;
@@ -22,7 +22,7 @@
 .#{$block-class}__full-height,
 .#{$block-class}__full-height table,
 .#{$block-class}__full-height tbody {
-  height: 100%;
+  block-size: 100%;
 }
 
 .#{$block-class}__grid-container::-webkit-scrollbar-thumb {
@@ -37,55 +37,53 @@
     .#{$block-class}__head {
       .#{c4p-settings.$carbon-prefix}--table-header-label {
         display: flex;
-        height: 100%;
         align-items: center;
+        block-size: 100%;
         color: $text-primary;
       }
 
       .#{$block-class}__head-select-all.#{$block-class}__checkbox-cell.#{$block-class}__checkbox-cell-sticky-left {
         position: sticky;
         z-index: 10;
-        left: 0;
+        inset-inline-start: 0;
       }
     }
 
     .#{$block-class}__cell {
       align-items: center;
-      padding-top: 0;
-      padding-bottom: 0;
+      padding-block: 0;
     }
 
     td.#{c4p-settings.$carbon-prefix}--table-column-checkbox,
     th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
-      /* stylelint-disable-next-line carbon/layout-token-use */
-      padding-top: 0.6875rem;
+      /* stylelint-disable-next-line carbon/layout-use */
+      padding-block-start: 0.6875rem;
 
       &.#{$block-class}__checkbox-cell {
         display: flex;
         align-items: center;
-        padding-top: 0;
+        padding-block-start: 0;
       }
 
       &.#{$block-class}__checkbox-cell-sticky-left {
         position: sticky;
-        left: 0;
+        inset-inline-start: 0;
       }
     }
 
     .#{$block-class}__checkbox-cell {
       th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
         display: flex;
-        height: 100%;
         align-items: center;
-        padding-top: 0;
+        block-size: 100%;
+        padding-block-start: 0;
       }
     }
 
     &.#{$block-class}__variable-row-height {
       &.#{c4p-settings.$carbon-prefix}--data-table--xs {
         .#{$block-class}__cell {
-          padding-top: $spacing-01;
-          padding-bottom: $spacing-01;
+          padding-block: $spacing-01;
         }
       }
 
@@ -93,17 +91,14 @@
       &.#{c4p-settings.$carbon-prefix}--data-table--md {
         .#{$block-class}__cell {
           /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-          padding-top: to-rem(7px);
-          /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-          padding-bottom: to-rem(6px);
+          padding-block: to-rem(7px) to-rem(6px);
         }
       }
 
       &.#{c4p-settings.$carbon-prefix}--data-table--lg,
       &.#{c4p-settings.$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {
-          padding-top: $spacing-05;
-          padding-bottom: $spacing-05;
+          padding-block: $spacing-05;
         }
       }
     }
@@ -113,16 +108,16 @@
     &.#{c4p-settings.$carbon-prefix}--data-table--lg,
     &.#{c4p-settings.$carbon-prefix}--data-table--xl {
       .#{$block-class}__cell {
-        padding-top: $spacing-05;
+        padding-block-start: $spacing-05;
       }
 
       .#{c4p-settings.$carbon-prefix}--table-header-label {
-        padding-top: $spacing-05;
+        padding-block-start: $spacing-05;
       }
 
       .#{c4p-settings.$carbon-prefix}--table-column-checkbox {
         /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-        padding-top: to-rem(13px);
+        padding-block-start: to-rem(13px);
       }
     }
 
@@ -130,11 +125,11 @@
       &.#{c4p-settings.$carbon-prefix}--data-table--lg,
       &.#{c4p-settings.$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {
-          padding-bottom: $spacing-05;
+          padding-block-end: $spacing-05;
         }
 
         .#{c4p-settings.$carbon-prefix}--table-header-label {
-          padding-bottom: $spacing-05;
+          padding-block-end: $spacing-05;
         }
       }
     }
@@ -142,7 +137,7 @@
 
   &.#{$block-class}__variable-row-height {
     tr.#{$block-class}__carbon-row {
-      height: auto;
+      block-size: auto;
     }
   }
 }
@@ -152,13 +147,12 @@
 }
 
 .#{$block-class}__grid-container::-webkit-scrollbar {
-  width: 6px;
   background-color: $background;
+  inline-size: 6px;
 }
 
 /* This section to be removed after support for slug dropped  - start */
 .#{$block-class} th.#{$block-class}__with-slug {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   box-shadow: inset 0 1px $ai-border-strong;
 }
 
@@ -185,7 +179,7 @@
   .#{c4p-settings.$carbon-prefix}--data-table
   tbody
   tr.#{$block-class}__slug--row {
-  /* stylelint-disable-next-line carbon/theme-token-use */
+  /* stylelint-disable-next-line carbon/theme-use */
   box-shadow: inset 1px 0 $ai-border-strong;
 }
 
@@ -227,12 +221,11 @@
 .#{$block-class}
   th.#{$block-class}__with-slug
   .#{c4p-settings.$carbon-prefix}--slug {
-  margin-left: $spacing-03;
+  margin-inline-start: $spacing-03;
 }
 /* This section to be removed after support for slug dropped  - end */
 
 .#{$block-class} th.#{$block-class}__with-ai-label {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   box-shadow: inset 0 1px $ai-border-strong;
 }
 
@@ -259,7 +252,6 @@
   .#{c4p-settings.$carbon-prefix}--data-table
   tbody
   tr.#{$block-class}__ai-label--row {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   box-shadow: inset 1px 0 $ai-border-strong;
 }
 
@@ -301,13 +293,13 @@
 .#{$block-class}
   th.#{$block-class}__with-ai-label
   .#{c4p-settings.$carbon-prefix}--slug {
-  margin-left: $spacing-03;
+  margin-inline-start: $spacing-03;
 }
 
 .#{$block-class}__grid-container {
   display: block;
-  width: 100%;
-  padding-top: 0;
+  inline-size: 100%;
+  padding-block-start: 0;
 
   .#{c4p-settings.$carbon-prefix}--data-table-header__description {
     overflow: hidden;
@@ -317,33 +309,37 @@
 
   .#{c4p-settings.$carbon-prefix}--data-table-header__title {
     overflow: hidden;
-    max-width: 80ch;
+    max-inline-size: 80ch;
     text-overflow: ellipsis;
     white-space: nowrap;
 
     @include breakpoint.breakpoint(md) {
-      max-width: 55ch;
+      max-inline-size: 55ch;
     }
   }
 
   .#{c4p-settings.$carbon-prefix}--data-table-content {
-    width: 100%;
-    height: 100%;
+    block-size: 100%;
+    inline-size: 100%;
     overflow-x: auto;
+    @supports (overflow-inline: auto) {
+      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+      overflow-inline: auto;
+    }
   }
 
   .#{$block-class}-filter-panel
     + .#{$block-class}__table-container-inner
     .#{c4p-settings.$carbon-prefix}--data-table-content {
-    height: fit-content;
+    block-size: fit-content;
   }
 
   table.#{$block-class}__table-simple {
     display: flex;
     overflow: auto;
-    max-height: 100%;
     flex-direction: column;
     background-color: $layer-01;
+    max-block-size: 100%;
   }
 
   .#{$block-class}__head {
@@ -351,9 +347,9 @@
   }
 
   .#{$block-class}__head .header {
-    /* Each cell should grow equally */
-    width: 1%;
     align-items: center;
+    /* Each cell should grow equally */
+    inline-size: 1%;
   }
 
   .#{$block-class}__virtual-scrollbar {
@@ -366,19 +362,19 @@
   }
 
   .#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
-    width: 6px;
     background-color: $background;
+    inline-size: 6px;
   }
 
   .#{$block-class}__cell {
     display: flex;
     /* Each cell should grow equally */
-    width: 1%;
+    inline-size: 1%;
   }
 
   .#{$block-class}__defaultStringRenderer {
     overflow: hidden;
-    width: 100%;
+    inline-size: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -387,20 +383,21 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     white-space: initial;
   }
 
   .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--slug,
   .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--ai-label {
-    width: fit-content;
+    inline-size: fit-content;
   }
 
   .#{$block-class}__expanded-row {
     display: flex;
     overflow: hidden;
-    width: 100%;
-    height: 100%;
     flex-direction: column;
+    block-size: 100%;
+    inline-size: 100%;
   }
 
   .#{$block-class}__carbon-row {
@@ -440,6 +437,7 @@
 
   .#{c4p-settings.$carbon-prefix}--select-input {
     -webkit-appearance: none; // could be fixed by post-css plugin
+    appearance: none; // could be fixed by post-css plugin
   }
 
   th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
@@ -449,18 +447,18 @@
   td.#{c4p-settings.$carbon-prefix}--table-column-checkbox,
   th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
     /* stylelint-disable-next-line declaration-no-important */
-    width: $spacing-09 !important;
+    inline-size: $spacing-09 !important;
     /* stylelint-disable-next-line declaration-no-important */
-    padding-right: $spacing-05 !important;
+    padding-inline-end: $spacing-05 !important;
   }
 }
 
 .#{$block-class}__empty-state .#{$block-class}__table-simple {
   display: table;
-  height: 100%;
+  block-size: 100%;
 
   .#{c4p-settings.$pkg-prefix}--empty-state {
-    max-width: 280px;
+    max-inline-size: 280px;
   }
 }
 
@@ -476,8 +474,8 @@
 }
 
 .#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover td {
-  border-bottom: none;
   background: transparent;
+  border-block-end: none;
 }
 
 .#{$block-class}__empty-state .#{$block-class}__table-simple td,
@@ -490,18 +488,18 @@
 }
 
 .#{$block-class}__empty-state .#{$block-class}__empty-state-cell {
-  border-bottom: none;
+  border-block-end: none;
 }
 
 .#{$block-class}__resizer {
   position: absolute;
   z-index: 1;
-  top: 0;
-  right: 0;
   display: inline-block;
-  width: $spacing-02;
-  height: 100%;
   background: transparent;
+  block-size: 100%;
+  inline-size: $spacing-02;
+  inset-block-start: 0;
+  inset-inline-end: 0;
   touch-action: none;
   transform: translateX(50%);
 }
@@ -517,12 +515,15 @@
 .#{$block-class}__grid-container
   table.#{$block-class}__table-simple.#{c4p-settings.$carbon-prefix}--data-table.#{$block-class}__table-is-resizing {
   overflow-y: hidden;
+  @supports (overflow-block: hidden) {
+    overflow-block: hidden;
+  }
 }
 
 .#{$block-class}__resizableColumn {
   &.#{$block-class}__isResizing {
     .#{$block-class}__resizer {
-      border-right: $spacing-01 solid $button-secondary-hover;
+      border-inline-end: $spacing-01 solid $button-secondary-hover;
     }
   }
 
@@ -535,8 +536,8 @@
   background-color: $layer-selected-hover;
 
   .#{$block-class}__resizer {
-    border-right: $spacing-01 solid $border-strong-01;
     background-color: $background-selected-hover;
+    border-inline-end: $spacing-01 solid $border-strong-01;
   }
 }
 
@@ -567,14 +568,14 @@
 }
 
 .#{$block-class}__head-hidden-select-all {
-  min-width: $spacing-09;
-  padding-right: $spacing-09;
+  min-inline-size: $spacing-09;
+  padding-inline-end: $spacing-09;
 
   &.#{$block-class}__select-all-sticky-left {
     position: sticky;
     z-index: 10;
-    left: 0;
     background-color: $layer-accent-01;
+    inset-inline-start: 0;
   }
 }
 
@@ -591,13 +592,13 @@
 }
 
 .#{$block-class}__simple-body::-webkit-scrollbar {
-  width: 6px;
   background-color: $background;
+  inline-size: 6px;
 }
 
 .#{$block-class}__sticky.#{$block-class}__table-simple {
   /* stylelint-disable-next-line declaration-no-important */
-  min-width: 0 !important;
+  min-inline-size: 0 !important;
 }
 
 .#{$block-class}__sticky.#{$block-class}__simple-body {
@@ -607,23 +608,23 @@
 .#{$block-class}__sticky.#{$block-class}__table-simple thead > div {
   overflow: hidden;
   /* stylelint-disable-next-line declaration-no-important */
-  width: 100% !important;
+  inline-size: 100% !important;
 }
 
 .#{$block-class}__sticky thead {
   display: flex;
 
   tr.#{$block-class}__sticky {
-    width: auto;
+    inline-size: auto;
   }
 }
 
 .#{$block-class}__displayFlex {
   position: relative;
   display: flex;
-  width: 100%;
-  height: 100%;
   flex-direction: row;
+  block-size: 100%;
+  inline-size: 100%;
 }
 
 .#{$block-class}__table-container-inner {
@@ -634,8 +635,8 @@
 .#{$block-class}__datagridWithPanel {
   position: relative;
   display: flex;
-  height: 100%;
   flex-direction: column;
+  block-size: 100%;
 
   .#{$block-class}__grid-container {
     display: flex;
@@ -644,7 +645,7 @@
   }
 
   .#{$block-class}__table-toolbar {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$block-class}__table-container {
@@ -654,11 +655,11 @@
   }
 
   .#{$block-class}__table-container .#{$block-class}__filter-summary {
-    border-bottom: 1px solid $layer-03;
+    border-block-end: 1px solid $layer-03;
   }
 
   .#{c4p-settings.$pkg-prefix}--datagrid__table-simple {
-    height: 100%;
+    block-size: 100%;
   }
 }
 
@@ -666,9 +667,12 @@
   position: relative;
   display: flex;
   overflow: auto;
-  width: 100%;
-  max-height: 100%;
+  inline-size: 100%;
+  max-block-size: 100%;
   overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }
 
 .#{$block-class}__carbon-row-expanded {
@@ -677,16 +681,16 @@
   &.#{$block-class}__carbon-row-expanded-hover-active::before {
     position: absolute;
     z-index: 2;
-    /* stylelint-disable-next-line carbon/layout-token-use */
-    top: var(--#{$block-class}--row-height);
-    /* stylelint-disable-next-line carbon/layout-token-use */
-    left: calc(
+    block-size: var(--#{$block-class}--indicator-height);
+    border-inline-start: 1px solid $border-subtle-selected-01;
+    content: '';
+    inline-size: 1px;
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$block-class}--row-height);
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-inline-start: calc(
       var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05}
     );
-    width: 1px;
-    height: var(--#{$block-class}--indicator-height);
-    border-left: 1px solid $border-subtle-selected-01;
-    content: '';
   }
 }
 
@@ -700,7 +704,7 @@
 
   .#{c4p-settings.$carbon-prefix}--data-table-header {
     flex: 1 1 auto;
-    padding-bottom: $spacing-05;
+    padding-block-end: $spacing-05;
   }
 
   .#{$block-class}__table-toolbar {
@@ -723,12 +727,12 @@
 
   .#{$block-class}__toolbar-divider::before {
     position: absolute;
-    top: 50%;
-    left: 0;
-    width: 1px;
-    height: $spacing-05;
-    border-left: 1px solid $border-subtle-01;
+    block-size: $spacing-05;
+    border-inline-start: 1px solid $border-subtle-01;
     content: '';
+    inline-size: 1px;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
     transform: translateY(-50%);
   }
 }
@@ -745,12 +749,12 @@
     .#{$block-class}__active-row
   )::before {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: $spacing-02;
-  height: 100%;
   background-color: $background-brand;
+  block-size: 100%;
   content: '';
+  inline-size: $spacing-02;
+  inset-block-start: 0;
+  inset-inline-start: 0;
 }
 
 .#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
@@ -762,30 +766,34 @@
   .#{c4p-settings.$carbon-prefix}--batch-actions
   .#{c4p-settings.$carbon-prefix}--batch-actions--active {
   overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-inline: hidden;
+  }
 }
 
 .#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
   .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu {
   display: flex;
-  min-width: $spacing-08;
   justify-content: center;
-  margin-right: $spacing-04;
+  margin-inline-end: $spacing-04;
+  min-inline-size: $spacing-08;
 }
 
 .#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
   .#{c4p-settings.$pkg-prefix}--datagrid__button-menu {
-  min-width: calc(#{$spacing-12} + #{$spacing-03});
+  min-inline-size: calc(#{$spacing-12} + #{$spacing-03});
 }
 
 .#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
   .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu
   .#{c4p-settings.$pkg-prefix}--button-menu__trigger {
   display: flex;
-  width: 100%;
-  min-width: $spacing-09;
   justify-content: center;
   padding: 0;
   margin: 0;
+  inline-size: 100%;
+  min-inline-size: $spacing-09;
 
   .#{c4p-settings.$carbon-prefix}--btn__icon {
     margin: 0;
@@ -793,24 +801,24 @@
 }
 
 .#{$block-class} .#{c4p-settings.$pkg-prefix}--button-menu {
-  height: $spacing-09;
+  block-size: $spacing-09;
 }
 
 .#{$block-class} .#{$block-class}__row-size-button {
   display: flex;
-  width: $spacing-09;
-  height: $spacing-09;
   justify-content: center;
+  block-size: $spacing-09;
+  inline-size: $spacing-09;
 }
 
 .#{$block-class}__customize-columns-checkbox-wrapper.#{c4p-settings.$carbon-prefix}--form-item {
   flex: 0 0 auto;
-  margin-right: $spacing-03;
+  margin-inline-end: $spacing-03;
 }
 
 .#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
-  width: 10px;
-  height: 7px;
+  block-size: 7px;
+  inline-size: 10px;
 }
 
 .#{$block-class}__virtual-scrollbar::-webkit-scrollbar-track {
@@ -822,15 +830,19 @@
 }
 
 .#{$block-class}__virtualScrollContainer {
-  width: 100%;
+  inline-size: 100%;
   .#{c4p-settings.$carbon-prefix}--data-table-content {
     // overrides default scroll overflow as we handle overflow in thead and tbody separately for virtualScrollContainer variant
     overflow-x: hidden;
+    @supports (overflow-inline: hidden) {
+      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+      overflow-inline: hidden;
+    }
   }
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--modal {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
@@ -897,21 +909,21 @@
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--action-list
   .#{c4p-settings.$carbon-prefix}--btn__icon {
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
 .#{$block-class} .#{$block-class}__col-resizer-range {
   position: absolute;
   z-index: 2;
-  top: 0;
-  right: calc(#{$spacing-03} * -1);
-  width: 1rem;
-  height: 100%;
   margin: 0;
   -moz-appearance: initial;
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
+  block-size: 100%;
+  inline-size: 1rem;
+  inset-block-start: 0;
+  inset-inline-end: calc(#{$spacing-03} * -1);
 }
 
 .#{$block-class} .#{$block-class}__col-resizer-range:focus {
@@ -922,12 +934,12 @@
   .#{$block-class}__col-resizer-range:focus
   + .#{$block-class}__col-resize-indicator::before {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 2px;
-  height: var(--#{$block-class}--header-height);
   background-color: $focus;
+  block-size: var(--#{$block-class}--header-height);
   content: '';
+  inline-size: 2px;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -936,12 +948,12 @@
   + .#{$block-class}__col-resize-indicator {
   position: absolute;
   z-index: 2;
-  right: calc(#{$spacing-03} * -1);
-  width: 0.5rem;
-  height: 0.5rem;
   border-radius: 100%;
   margin: 0;
   background-color: $focus;
+  block-size: 0.5rem;
+  inline-size: 0.5rem;
+  inset-inline-end: calc(#{$spacing-03} * -1);
   transform: translate(-50%, 0);
 }
 
@@ -949,25 +961,25 @@
   .#{$block-class}__col-resizer-range:focus
   + .#{$block-class}__col-resize-indicator::after {
   position: absolute;
-  /* stylelint-disable-next-line carbon/layout-token-use */
-  top: calc(var(--#{$block-class}--row-height) - 20px);
-  right: $spacing-02;
-  width: 1px;
-  height: calc(
+  background-color: $layer-active-01;
+  block-size: calc(
     var(--#{$block-class}--grid-height) - var(--#{$block-class}--row-height)
   );
-  background-color: $layer-active-01;
   content: '';
+  inline-size: 1px;
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: calc(var(--#{$block-class}--row-height) - 20px);
+  inset-inline-end: $spacing-02;
 }
 
 .#{$block-class} .#{$block-class}__col-resizer-range::-webkit-slider-thumb {
-  width: 16px;
-  height: 16px;
   border: none;
   border-radius: 50%;
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
+  block-size: 16px;
+  inline-size: 16px;
 }
 
 .#{$block-class} .#{$block-class}__col-resizer-range::-moz-range-thumb {
@@ -986,5 +998,5 @@
 
 .#{$block-class} .#{$block-class}__table-row-ai-spacer,
 .#{$block-class} .#{$block-class}__table-row-ai-enabled {
-  width: $spacing-05;
+  inline-size: $spacing-05;
 }

@@ -74,21 +74,15 @@ describe('c4p-truncated-text', () => {
     }
   });
 
-  // it.only('renders a expandable button when text is truncated with expand', async () => {
-  //   // for (let lines = 1; lines <= 4; lines++) {
-  //   const wrapper = await fixture(
-  //     template({ ...defaultProps, lines: 2, with: 'expand' }, 600)
-  //   );
-
-  //   const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
-  //   await el.updateComplete;
-  //   const expandButton = el.shadowRoot?.querySelector(
-  //     '.c4p--truncated-text_expand'
-  //   );
-  //   // (expandButton as HTMLElement)?.click();
-  //   // await new Promise((resolve) => setTimeout(resolve, 1000));
-  //   // console.log(el.shadowRoot?.innerHTML);
-  //   expect(expandButtons).toBeTruthy();
-  //   // }
-  // });
+  it('renders a expandable button when text is truncated with expand', async () => {
+    const wrapper = await fixture(
+      template({ ...defaultProps, lines: 2, with: 'expand' }, 400)
+    );
+    const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
+    await el.updateComplete;
+    const expandButton = el.shadowRoot?.querySelector(
+      '.c4p--truncated-text_expand'
+    );
+    expect(expandButton).toBeTruthy();
+  });
 });

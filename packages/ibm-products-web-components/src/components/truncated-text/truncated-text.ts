@@ -56,69 +56,83 @@ export class CDSTruncatedText extends LitElement {
   @property({ type: String, reflect: true }) with: 'tooltip' | 'expand' | null =
     null;
 
-  @state() private _localLines: number | undefined = this.lines;
-  @state() private _isOverflowing = false;
+  @state() private _isOverflowing: boolean = false;
+  @state() private _isExpanded: boolean = false;
 
   @query(`.${blockClass}_content`) private _textElement!: HTMLElement;
-  private _lineHeight = 0;
-  private _isLayered = this.closest(`${carbonPrefix}-layer`);
+  private _lineHeight: number = 0;
+  private _isLayered: boolean = false;
+  private _resizeObserver?: ResizeObserver;
 
   static styles = styles;
 
-  private resizeObserver?: ResizeObserver;
-
-  protected firstUpdated() {
-    this._localLines = this.lines;
-    const computedStyle = getComputedStyle(this._textElement);
-    this._lineHeight = parseFloat(computedStyle.lineHeight);
-    this._updateOverflowStatus();
-    this.setupResizeObserver();
-
-    // apply transitions after first render
-    if (this._textElement) {
-      setTimeout(() => {
-        this._textElement.classList.add(`${blockClass}_transition`);
-      }, 0);
-    }
+  connectedCallback() {
+    super.connectedCallback();
+    this._isLayered = !!this.closest(`${carbonPrefix}-layer`);
   }
 
-  private setupResizeObserver() {
-    if (this._textElement) {
-      this.resizeObserver = new ResizeObserver(() => {
-        this._updateOverflowStatus();
-      });
-      this.resizeObserver.observe(this);
+  disconnectedCallback() {
+    this._resizeObserver?.disconnect();
+    super.disconnectedCallback();
+  }
+
+  protected firstUpdated() {
+    requestAnimationFrame(() => {
+      const computedStyle = getComputedStyle(this._textElement);
+      this._lineHeight = parseFloat(computedStyle.lineHeight);
+      this._setupResizeObserver();
+    });
+  }
+
+  private _setupResizeObserver() {
+    const el = this._textElement;
+    if (!el) {
+      return;
     }
+
+    let lastWidth = el.offsetWidth;
+
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect();
+    }
+
+    this._resizeObserver = new ResizeObserver(([entry]) => {
+      const newWidth = entry.contentRect.width;
+      if (newWidth !== lastWidth) {
+        lastWidth = newWidth;
+        this._updateOverflowStatus();
+      }
+    });
+
+    this._resizeObserver.observe(el);
   }
 
   protected updated(changed: Map<string, unknown>) {
-    if (changed.has('lines')) {
-      this._localLines = this.lines;
-      this._updateOverflowStatus();
-    }
-    if (changed.has('value')) {
+    if (changed.has('lines') || changed.has('value')) {
       this._updateOverflowStatus();
     }
   }
 
   private _updateOverflowStatus() {
-    if (!this._textElement || !this._lineHeight) {
+    if (!this._textElement || this.lines <= 0) {
       return;
     }
-    const { scrollHeight, clientHeight } = this._textElement;
-    const buffer = Math.ceil(
-      clientHeight / (2 * Math.max(1, this._localLines || 1))
-    );
-    const overflowing = scrollHeight > clientHeight + buffer;
-    if (overflowing !== this._isOverflowing) {
-      this._isOverflowing = overflowing;
-    }
+    setTimeout(() => {
+      const { scrollHeight, clientHeight } = this._textElement;
+      const buffer = Math.ceil(
+        clientHeight / (2 * Math.max(1, this.lines || 1))
+      );
+      const isOverflowing = scrollHeight > clientHeight + buffer;
+
+      if (isOverflowing !== this._isOverflowing) {
+        this._isOverflowing = isOverflowing;
+      }
+    });
   }
 
   private _toggleExpansion() {
-    const isExpanded = this._localLines === undefined;
-    this._localLines = isExpanded ? this.lines : undefined;
-
+    this._isExpanded = !this._isExpanded;
+    this._textElement?.classList.add(`${blockClass}_transition`);
     const onTransitionEnd = () => {
       this._textElement?.querySelector('button')?.focus();
       this._textElement?.removeEventListener('transitionend', onTransitionEnd);
@@ -127,21 +141,17 @@ export class CDSTruncatedText extends LitElement {
   }
 
   private _renderToggleButton() {
-    if (!this._isOverflowing && this._localLines !== undefined) {
-      return null;
+    if (!this._isOverflowing && !this._isExpanded) {
+      return;
     }
-
-    const isExpanded = this._localLines === undefined;
     const className = classMap({
-      [`${blockClass}_collapse`]: isExpanded,
-      [`${blockClass}_expand`]: !isExpanded,
-      [`${blockClass}_layered`]: !!this._isLayered,
+      [`${blockClass}_collapse`]: this._isExpanded,
+      [`${blockClass}_expand`]: !this._isExpanded,
+      [`${blockClass}_layered`]: this._isLayered,
     });
-
-    const label = isExpanded
+    const label = this._isExpanded
       ? this.collapseLabel || '...less'
       : this.expandLabel || '...more';
-
     return html`
       <button class="${className}" @click=${this._toggleExpansion}>
         ${label}
@@ -150,12 +160,17 @@ export class CDSTruncatedText extends LitElement {
   }
 
   render() {
+    // Calculate max height based on line height and number of lines
+    const maxHeight =
+      this.lines > 0 && !this._isExpanded
+        ? `${this.lines * this._lineHeight}px`
+        : `${this._textElement?.scrollHeight}px`;
+
+    // Apply different styles based on truncation method
     const contentStyle =
       this.with === 'tooltip' || !this.with
-        ? `--line-clamp: ${this._localLines};`
-        : !!this._localLines && this.with === 'expand'
-          ? `max-block-size: ${this._localLines * this._lineHeight}px;`
-          : `max-block-size: ${this._textElement?.scrollHeight}px`;
+        ? `--line-clamp: ${this._isExpanded ? 'none' : this.lines};`
+        : `max-block-size: ${maxHeight};`;
 
     const contentClass = classMap({
       [`${blockClass}_content`]: true,
@@ -165,7 +180,9 @@ export class CDSTruncatedText extends LitElement {
       <div
         class="${contentClass}"
         style="${contentStyle}"
-        tabindex=${this.with === 'tooltip' ? '0' : undefined}
+        tabindex=${this.with === 'tooltip' && this._isOverflowing
+          ? '0'
+          : undefined}
       >
         ${this.value}
         ${this.with === 'expand' ? this._renderToggleButton() : null}

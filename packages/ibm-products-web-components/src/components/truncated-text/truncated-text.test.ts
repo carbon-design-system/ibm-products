@@ -7,7 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-// import CDSTruncatedText from './truncated-text';
+import CDSTruncatedText from './truncated-text';
 import './index';
 
 const defaultProps = {
@@ -16,17 +16,15 @@ const defaultProps = {
   with: '',
 };
 
-const template = (props = defaultProps, templateWidth?: number) => {
-  return html`
-    <div style=${templateWidth ? `width: ${templateWidth}px;` : ''}>
-      <c4p-truncated-text
-        value=${props.text}
-        lines=${props.lines}
-        with=${props.with}
-      ></c4p-truncated-text>
-    </div>
-  `;
-};
+const template = (props = defaultProps, templateWidth?: number) => html`
+  <div style=${templateWidth ? `width: ${templateWidth}px;` : ''}>
+    <c4p-truncated-text
+      value=${props.text}
+      lines=${props.lines}
+      with=${props.with}
+    ></c4p-truncated-text>
+  </div>
+`;
 
 describe('c4p-truncated-text', () => {
   it('renders the component', async () => {
@@ -34,47 +32,63 @@ describe('c4p-truncated-text', () => {
     const el = wrapper.querySelector('c4p-truncated-text');
     expect(el).toBeTruthy();
   });
+
+  it('renders a tooltip when text is truncated with tooltip', async () => {
+    const wrapper = await fixture(
+      template({ ...defaultProps, with: 'tooltip' }, 200)
+    );
+
+    const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
+    const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+    expect(tooltip).toBeTruthy();
+  });
+
+  it('does not render a tooltip if the text fits', async () => {
+    const wrapper = await fixture(
+      template({ ...defaultProps, with: 'tooltip' }, 9000)
+    );
+
+    const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
+
+    const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+    expect(tooltip).not.toBeTruthy();
+  });
+
+  it('tests lines prop/attribute with tooltip', async () => {
+    for (let lines = 1; lines <= 4; lines++) {
+      const wrapper = await fixture(
+        template({ ...defaultProps, lines, with: 'tooltip' }, 600)
+      );
+
+      const el = wrapper.querySelector(
+        'c4p-truncated-text'
+      ) as CDSTruncatedText;
+      await el.updateComplete;
+
+      const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+      if (lines <= 2) {
+        expect(tooltip).toBeTruthy();
+      } else {
+        expect(tooltip).not.toBeTruthy();
+      }
+    }
+  });
+
+  // it.only('renders a expandable button when text is truncated with expand', async () => {
+  //   // for (let lines = 1; lines <= 4; lines++) {
+  //   const wrapper = await fixture(
+  //     template({ ...defaultProps, lines: 2, with: 'expand' }, 600)
+  //   );
+
+  //   const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
+  //   await el.updateComplete;
+  //   const expandButton = el.shadowRoot?.querySelector(
+  //     '.c4p--truncated-text_expand'
+  //   );
+  //   // (expandButton as HTMLElement)?.click();
+  //   // await new Promise((resolve) => setTimeout(resolve, 1000));
+  //   // console.log(el.shadowRoot?.innerHTML);
+  //   expect(expandButtons).toBeTruthy();
+  //   // }
+  // });
 });
-
-// describe('c4p-truncated-text', () => {
-//   it('renders a tooltip when text is truncated with tooltip', async () => {
-//     const wrapper = await fixture(
-//       template({ ...defaultProps, with: 'tooltip' }, 200)
-//     );
-
-//     const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
-//     const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
-//     expect(tooltip).toBeTruthy();
-//   });
-
-//   it('does not render a tooltip if the text fits', async () => {
-//     const wrapper = await fixture(
-//       template({ ...defaultProps, with: 'tooltip' }, 9000)
-//     );
-
-//     const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
-
-//     const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
-//     expect(tooltip).not.toBeTruthy();
-//   });
-
-//   it('tests lines prop/attribute with tooltip', async () => {
-//     for (let lines = 1; lines <= 4; lines++) {
-//       const wrapper = await fixture(
-//         template({ ...defaultProps, lines, with: 'tooltip' }, 600)
-//       );
-
-//       const el = wrapper.querySelector(
-//         'c4p-truncated-text'
-//       ) as CDSTruncatedText;
-//       await el.updateComplete;
-
-//       const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
-//       if (lines <= 2) {
-//         expect(tooltip).toBeTruthy();
-//       } else {
-//         expect(tooltip).not.toBeTruthy();
-//       }
-//     }
-//   });
-// });

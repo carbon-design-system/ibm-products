@@ -970,7 +970,7 @@ WithStaticTitleAndActionToolbar.args = {
   actions: 0,
   animateTitle: false,
   includeOverlay: true,
-  actionToolbarButtons: 2,
+  actionToolbarButtons: 3,
 };
 
 export const WithoutTitle = SlideOverTemplate.bind({});

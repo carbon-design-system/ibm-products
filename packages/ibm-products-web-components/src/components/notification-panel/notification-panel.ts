@@ -8,7 +8,12 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import {
+  state,
+  property,
+  query,
+  queryAssignedElements,
+} from 'lit/decorators.js';
 import { provide } from '@lit/context';
 import { prefix } from '../../globals/settings';
 import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
@@ -31,8 +36,9 @@ const blockClass = `${prefix}--notifications-panel`;
  * @fires c4p-notification-panel-beingclosed
  *   The custom event fired before this notification-panel is being closed upon a user gesture.
  *   Cancellation of this event stops the user-initiated action of closing this notification-panel.
- * @fires c4p-notification-panel-closed - The custom event fired after this notification-panel is closed upon a user gesture.
- * @fires c4p-notification-panel-navigate-back - custom event fired when clicking navigate back (available when step > 0)
+ * @fires c4p-notification-dismiss-all - The custom event fired after this notification-panel is closed upon a user gesture.
+ * @fires c4p-notification-donot-disturb-change - The custom event fired after this notification-panel is closed upon a user gesture.
+ * @fires c4p-notification-panel-closed - The custom event fired after dismiss all notification upon a user gesture.
  */
 @customElement(`${prefix}-notification-panel`)
 class CDSNotificationPanel extends HostListenerMixin(LitElement) {
@@ -77,12 +83,44 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   @provide({ context: dateTimeLocaleContext })
   // @ts-ignore
   private _providedLocale: string | undefined;
+  @query('slot[name="today"]')
+  private todaySlot!: HTMLSlotElement;
+  @query('slot[name="previous"]')
+  private previousSlot!: HTMLSlotElement;
+  @state() // Use @state decorator
+  private _hasTodayContent = true;
+
+  @state() // Use @state decorator
+  private _hasPreviousContent = true;
+
+  @queryAssignedElements({ slot: 'today', flatten: true })
+  _todayElements!: Array<HTMLElement>;
+
+  @queryAssignedElements({ slot: 'previous', flatten: true })
+  _previousElements!: Array<HTMLElement>;
 
   willUpdate(changedProperties: any) {
     if (changedProperties.has('dateTimeLocale')) {
       this._providedLocale = this.dateTimeLocale;
     }
+    if (
+      changedProperties.has('_todayElements') ||
+      changedProperties.has('_previousElements')
+    ) {
+      this._hasTodayContent = this._todayElements.length > 0;
+      this._hasPreviousContent = this._previousElements.length > 0;
+    }
   }
+
+  firstUpdated() {
+    this.todaySlot?.addEventListener('slotchange', () =>
+      this._handleSlotChange('today')
+    );
+    this.previousSlot?.addEventListener('slotchange', () =>
+      this._handleSlotChange('previous')
+    );
+  }
+
   render() {
     const {
       titleText,
@@ -91,6 +129,8 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       dismissAllLabel,
       doNotDisturbLabel,
       open,
+      _hasTodayContent,
+      _hasPreviousContent,
       _onDismissAllNotifications: onDismissAllNotifications,
     } = this;
     const classes = classMap({
@@ -125,14 +165,21 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
             ></cds-toggle>
           </div>
           <div class="${blockClass}__main-section">
-            <cds-heading class="${blockClass}__time-section-label">
-              ${todayText}
-            </cds-heading>
+            ${_hasTodayContent
+              ? html`
+                  <cds-heading class="${blockClass}__time-section-label">
+                    ${todayText}
+                  </cds-heading>
+                `
+              : ''}
             <slot name="today"></slot>
-
-            <cds-heading class="${blockClass}__time-section-label">
-              ${previousText}
-            </cds-heading>
+            ${_hasPreviousContent
+              ? html`
+                  <cds-heading class="${blockClass}__time-section-label">
+                    ${previousText}
+                  </cds-heading>
+                `
+              : ''}
             <slot name="previous"></slot>
           </div>
           <div className="${blockClass}__bottom-actions">
@@ -142,8 +189,35 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       </div>
     `;
   }
+  private _handleSlotChange(slotName: 'today' | 'previous') {
+    slotName === 'today'
+      ? (this._hasTodayContent = this._todayElements.length > 0)
+      : (this._hasPreviousContent = this._previousElements.length > 0);
+  }
+  /**
+   * Handles user-initiated dismiss of all notifications.
+   *
+   * @param event The event that triggered the click.
+   */
+  private _onDismissAllNotifications(event: Event) {
+    const triggeredBy = event.target;
+    event.stopPropagation();
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        triggeredBy,
+      },
+    };
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSNotificationPanel).dismissAll,
+        init
+      )
+    );
+  }
 
-  private _onDismissAllNotifications() {}
   @HostListener('document:keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = ({ key, target }: KeyboardEvent) => {};
@@ -168,6 +242,20 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
    */
   static get eventClose() {
     return `${prefix}-notification-panel-closed`;
+  }
+
+  /**
+   * The name of the custom event fired after this notification-panel is closed upon a user gesture.
+   */
+  static get dismissAll() {
+    return `${prefix}-notification-dismiss-all`;
+  }
+
+  /**
+   * The name of the custom event fired after this do not disturb button toggled.
+   */
+  static get donotDisturbChange() {
+    return `${prefix}-notification-donot-disturb-change`;
   }
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }

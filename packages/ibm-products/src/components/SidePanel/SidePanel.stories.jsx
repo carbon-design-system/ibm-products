@@ -921,7 +921,7 @@ SlideIn.args = {
 
 export const WithActionToolbar = SlideOverTemplate.bind({});
 WithActionToolbar.args = {
-  actionToolbarButtons: 2,
+  actionToolbarButtons: 3,
   ...defaultStoryProps,
 };
 

@@ -206,11 +206,11 @@ describe(CreateTearsheet.displayName, () => {
 
   it.skip('has no accessibility violations', async () => {
     renderCreateTearsheet({ ...defaultProps });
-    await expect(document.querySelector('.c4p--tearsheet')).toBeAccessible(
-      CreateTearsheet.displayName
-    );
     await expect(
-      document.querySelector('.c4p--tearsheet')
+      document.querySelector(`.${prefix}--tearsheet`)
+    ).toBeAccessible(CreateTearsheet.displayName);
+    await expect(
+      document.querySelector(`.${prefix}--tearsheet`)
     ).toHaveNoAxeViolations();
   });
 

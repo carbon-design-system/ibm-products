@@ -132,6 +132,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       _hasTodayContent,
       _hasPreviousContent,
       _onDismissAllNotifications: onDismissAllNotifications,
+      _handleToggle: handleToggle,
     } = this;
     const classes = classMap({
       [`${blockClass}__container`]: true,
@@ -162,6 +163,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
               label-a=${doNotDisturbLabel}
               label-b=${doNotDisturbLabel}
               aria-label=${doNotDisturbLabel}
+              @cds-toggle-changed=${handleToggle}
             ></cds-toggle>
           </div>
           <div class="${blockClass}__main-section">
@@ -218,6 +220,23 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     );
   }
 
+  private _handleToggle(event: Event) {
+    const triggeredBy = event.target;
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        triggeredBy,
+      },
+    };
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSNotificationPanel).donotDisturbChange,
+        init
+      )
+    );
+  }
   @HostListener('document:keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = ({ key, target }: KeyboardEvent) => {};

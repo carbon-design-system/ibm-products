@@ -72,6 +72,9 @@ export const defaultTemplate = {
         dismiss-all-label="Dismiss All"
         donot-disturb-label="Do not disturb"
         @c4p-notification-dismiss-all=${dismissAllNotification}
+        @c4p-notification-donot-disturb-change=${() => {
+          console.log('Do not disturb');
+        }}
       >
         ${dataToday.length > 0
           ? html`

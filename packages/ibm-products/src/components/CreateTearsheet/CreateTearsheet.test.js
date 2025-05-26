@@ -319,12 +319,7 @@ describe(CreateTearsheet.displayName, () => {
       ...defaultProps,
       firstFocusElement: `#invalid-selector`,
     });
-    const nextButtonElement = await waitFor(
-      () => screen.getByText(nextButtonText),
-      {
-        timeout: 2500,
-      }
-    );
+    const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
     jest.advanceTimersByTime(1000);
     const button = screen.getByRole('button', {
@@ -512,7 +507,7 @@ describe(CreateTearsheet.displayName, () => {
 
   it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
     renderEmptyCreateTearsheet(defaultProps);
-    const createTearsheetSteps = await document.querySelectorAll(
+    const createTearsheetSteps = document.querySelectorAll(
       `.${createTearsheetBlockClass}__step`
     );
     expect(Array(...createTearsheetSteps)).toStrictEqual([]);
@@ -524,19 +519,19 @@ describe(CreateTearsheet.displayName, () => {
       rejectOnSubmit: false,
       rejectOnNext: false,
     });
-    const nextButtonElement = await screen.getByText(nextButtonText);
+    const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
     expect(onNextStepFn).toHaveBeenCalledTimes(1);
-    const backButtonElement = await screen.getByText(backButtonText);
+    const backButtonElement = screen.getByText(backButtonText);
     await act(() => click(backButtonElement));
-    await expect(onPreviousStepFn).toHaveBeenCalledTimes(1);
-    const tearsheetElement = await screen.getByRole('dialog', {
+    expect(onPreviousStepFn).toHaveBeenCalledTimes(1);
+    const tearsheetElement = screen.getByRole('dialog', {
       name: ariaLabel,
     });
-    const tearsheetChildren = await tearsheetElement.querySelector(
+    const tearsheetChildren = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content`
     ).children;
-    await expect(
+    expect(
       tearsheetChildren[0].classList.contains(
         `.${createTearsheetBlockClass}__step__step--visible-section`
       )

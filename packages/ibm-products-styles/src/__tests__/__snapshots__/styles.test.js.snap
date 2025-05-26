@@ -8833,7 +8833,6 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child {
   display: inline-flex;
-  overflow: hidden;
 }
 .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child .cds--link {
   display: inline-block;

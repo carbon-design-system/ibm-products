@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { InterstitialScreen } from '@carbon/ibm-products';
 import {
   Button,
@@ -12,23 +12,10 @@ import {
 } from '@carbon/react';
 
 import './_example.scss';
-
-const HowACaseIsCreated1 = new URL(
-  './SteppedAnimatedMedia/assets/illustrations/how-a-case-is-created-1.json',
-  import.meta.url
-).pathname;
-const HowACaseIsCreated2 = new URL(
-  './SteppedAnimatedMedia/assets/illustrations/how-a-case-is-created-2.json',
-  import.meta.url
-).pathname;
-const HowACaseIsCreated3 = new URL(
-  './SteppedAnimatedMedia/assets/illustrations/how-a-case-is-created-3.json',
-  import.meta.url
-).pathname;
-
+import InterstitialExampleImgStep1 from '../_story-assets/illustrations/stepImage1.png';
+import InterstitialExampleImgStep2 from '../_story-assets/illustrations/interstitial-ph.png';
 import { Checkmark } from '@carbon/react/icons';
 import { ContentWrapper } from './ContentWrapper';
-import { SteppedAnimatedMedia } from './SteppedAnimatedMedia/SteppedAnimatedMedia';
 
 export const Example = () => {
   const [showInterstitialModal, setShowInterstitialModal] = useState(true);
@@ -37,14 +24,14 @@ export const Example = () => {
     headerTitle: 'Welcom, Jan!',
     interstitialAriaLabel: 'Interstitial Screen',
   };
-  const step2Ref = useRef();
-  const getContent = ({ progStep }) => {
+
+  const getContent = () => {
     return (
       <>
         <ContentWrapper stepTitle="Your role">
           <FlexGrid fullWidth className="flexContainer">
             <Row>
-              <Column lg={8} className="contentColumn">
+              <Column lg={9} className="contentColumn">
                 <div className="interstitialTextContainer">
                   <h3>
                     <span>Let’s tailor your experience in 3 steps.</span>
@@ -70,15 +57,14 @@ export const Example = () => {
                   />
                 </div>
               </Column>
-              <Column lg={8} className="mediaColumn">
-                <div className={`media__container`}>
-                  {progStep == 0 && (
-                    <SteppedAnimatedMedia
-                      filePaths={[HowACaseIsCreated1]}
-                      playStep={progStep}
-                    />
-                  )}
-                </div>
+              <Column lg={7}>
+                <div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    background: `center center / contain no-repeat url("${InterstitialExampleImgStep1}") `,
+                  }}
+                />
               </Column>
             </Row>
           </FlexGrid>
@@ -86,7 +72,7 @@ export const Example = () => {
         <ContentWrapper stepTitle="Prioritize">
           <FlexGrid fullWidth className="flexContainer">
             <Row>
-              <Column lg={8} className="contentColumn">
+              <Column lg={9} className="contentColumn">
                 <div className="interstitialTextContainer">
                   <h3>
                     <span>Prioritize your needs</span>
@@ -101,15 +87,14 @@ export const Example = () => {
                   </p>
                 </div>
               </Column>
-              <Column lg={8} className="mediaColumn">
-                <div className={`media__container`}>
-                  {progStep == 1 && (
-                    <SteppedAnimatedMedia
-                      filePaths={[HowACaseIsCreated2]}
-                      playStep={progStep}
-                    />
-                  )}
-                </div>
+              <Column lg={7}>
+                <div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    background: `center center / contain no-repeat url("${InterstitialExampleImgStep2}") `,
+                  }}
+                />
               </Column>
             </Row>
           </FlexGrid>
@@ -117,7 +102,7 @@ export const Example = () => {
         <ContentWrapper stepTitle="Experience">
           <FlexGrid fullWidth className="flexContainer">
             <Row>
-              <Column lg={8} className="contentColumn">
+              <Column lg={9} className="contentColumn">
                 <div className="interstitialTextContainer step-3">
                   <h3>
                     <span>Welcome to IBM Product!</span>
@@ -130,12 +115,8 @@ export const Example = () => {
                   </p>
                 </div>
                 <Layer>
-                  <TileGroup
-                    name="radio tile group"
-                    className="tileWrapper"
-                    defaultSelected="medium"
-                  >
-                    <RadioTile id="radio-tile-1" value="starter">
+                  <TileGroup name="radio tile group" className="tileWrapper" defaultSelected='medium'>
+                    <RadioTile id="radio-tile-1" value="starter"  >
                       <p>Starter size</p>
                       <p>
                         Trial size in extra small. Includes 1 general purpose
@@ -166,15 +147,14 @@ export const Example = () => {
                   </TileGroup>
                 </Layer>
               </Column>
-              <Column lg={8} className="mediaColumn">
-                <div className={`media__container`}>
-                  {progStep == 2 && (
-                    <SteppedAnimatedMedia
-                      filePaths={[HowACaseIsCreated3]}
-                      playStep={progStep}
-                    />
-                  )}
-                </div>
+              <Column lg={7}>
+                <div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    background: `center center / contain no-repeat url("${InterstitialExampleImgStep2}") `,
+                  }}
+                />
               </Column>
             </Row>
           </FlexGrid>
@@ -204,11 +184,12 @@ export const Example = () => {
         ></InterstitialScreen.Header>
         <InterstitialScreen.Body
           contentRenderer={(internalConfig) => {
-            return getContent({ progStep: internalConfig.progStep });
+            return getContent();
           }}
         />
         <InterstitialScreen.Footer />
       </InterstitialScreen>
+     
     </>
   );
 };

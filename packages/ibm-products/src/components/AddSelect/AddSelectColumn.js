@@ -10,10 +10,12 @@ import PropTypes from 'prop-types';
 import {
   Search,
   Tag,
-  OverflowMenu,
   Checkbox,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
+  Popover,
+  PopoverContent,
+  IconButton,
 } from '@carbon/react';
 import { Filter } from '@carbon/react/icons';
 import { pkg } from '../../settings';
@@ -46,6 +48,7 @@ export let AddSelectColumn = ({
   const [searchTerm, setSearchTerm] = useState('');
   const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
     useItemSort();
+  const [filterOpen, setFilterOpen] = useState(false);
   const [filters, setFilters] = useState([]);
   const { entries, filterBy, sortBy } = items;
   const getSelectedItem = () => {
@@ -110,6 +113,8 @@ export let AddSelectColumn = ({
     return filters.some((filter) => filter === filterByValue);
   };
 
+  const filterBtnId = `filter-${uuidv4()}`;
+
   const sortFn = sortItems(sortAttribute, sortDirection);
 
   const colItems = entries
@@ -146,37 +151,52 @@ export let AddSelectColumn = ({
               sortByLabel={sortByLabel}
             />
             {filterByOpts.length > 0 && (
-              <FeatureFlags enableV12Overflowmenu>
-                <OverflowMenu
-                  autoAlign
-                  menuAlignment="bottom-end"
-                  renderIcon={(props) => <Filter size={32} {...props} />}
-                  className={`${colClass}-overflow`}
-                  aria-label={filterByLabel}
-                  iconDescription={filterByLabel}
+              <FeatureFlags enableV12DynamicFloatingStyles>
+                <Popover
+                  align="bottom-right"
+                  isTabTip
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') {
+                      setFilterOpen(false);
+                      e.preventDefault(); // prevent modal close
+                      e.stopPropagation();
+                      const filterBtn = document.querySelector(
+                        `#${filterBtnId}`
+                      );
+                      filterBtn?.focus(); // workaround to return focus, refs not possible on button inside popover for some reason
+                    }
+                  }}
+                  onRequestClose={() => setFilterOpen(false)}
+                  open={filterOpen}
                 >
-                  {filterByOpts.map((opt) => (
-                    <div
-                      key={opt}
-                      className={`${carbonPrefix}--overflow-menu-options__option`}
-                    >
-                      <div
-                        className={`${carbonPrefix}--overflow-menu-options__btn`}
-                      >
-                        <Checkbox
-                          id={opt}
-                          labelText={opt}
-                          onChange={(event, { checked }) =>
-                            filterHandler(checked, opt)
-                          }
-                          checked={
-                            filters.find((o) => o === opt) ? true : false
-                          }
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </OverflowMenu>
+                  <IconButton
+                    size="md"
+                    id={filterBtnId}
+                    hasIconOnly
+                    aria-expanded={filterOpen}
+                    badgeCount={filters.length > 0 ? 0 : undefined} // setting to 0 renders an empty dot
+                    kind="ghost"
+                    label={filterByLabel || 'Filter'}
+                    onClick={() => {
+                      setFilterOpen(!filterOpen);
+                    }}
+                  >
+                    <Filter />
+                  </IconButton>
+                  <PopoverContent className={`${colClass}-filter-popover`}>
+                    {filterByOpts.map((opt) => (
+                      <Checkbox
+                        key={opt}
+                        id={opt}
+                        labelText={opt}
+                        onChange={(event, { checked }) =>
+                          filterHandler(checked, opt)
+                        }
+                        checked={filters.find((o) => o === opt) ? true : false}
+                      />
+                    ))}
+                  </PopoverContent>
+                </Popover>
               </FeatureFlags>
             )}
           </div>

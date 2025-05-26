@@ -38,14 +38,12 @@ export const AddSelectSort = ({
           {
             id: `${cur}-asc`,
             label: cur,
-            shortcut: <ArrowUp size={16} />,
             direction: 'asc',
             attribute: cur,
           },
           {
             id: `${cur}-desc`,
             label: cur,
-            shortcut: <ArrowDown size={16} />,
             direction: 'desc',
             attribute: cur,
           },
@@ -65,20 +63,19 @@ export const AddSelectSort = ({
       {sortByOpts.length > 0 && (
         <FeatureFlags enableV12Overflowmenu>
           <OverflowMenu
+            // @ts-ignore // TODO: remove after carbon fixes this ts error
             autoAlign
             menuAlignment="bottom-end"
             renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
             className={`${blockClass}_overflow`}
-            aria-label={sortByLabel}
-            iconDescription={sortByLabel}
+            label={sortByLabel}
           >
             {sortByOpts.map((opt) => {
               return (
                 <MenuItem
                   className={`${blockClass}_overflow-item`}
-                  shortcut={opt?.shortcut}
                   key={opt?.id}
-                  label={opt?.label}
+                  label={`${opt?.label} ${opt?.direction}`}
                   onClick={() => sortHandler(opt)}
                 />
               );

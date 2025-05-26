@@ -53,6 +53,22 @@ export const defaultTemplate = {
       setDataToday([]);
       setDataPrevious([]);
     };
+    const notificationSingleDismiss = (
+      notificationId: string,
+      dataType: 'today' | 'previous'
+    ) => {
+      if (dataType === 'today') {
+        const filteredData = dataToday.filter(
+          (obj) => obj.id !== notificationId
+        );
+        setDataToday([...filteredData]);
+      } else {
+        const filteredData = dataPrevious.filter(
+          (obj) => obj.id !== notificationId
+        );
+        setDataPrevious([...filteredData]);
+      }
+    };
     return html`
       <style>
         ${styles}
@@ -84,7 +100,7 @@ export const defaultTemplate = {
                     <c4p-notification
                       @c4p-notification-click=${item.onNotificationClick}
                       @c4p-notification-dismiss=${() => {
-                        console.log('Notification dismissed');
+                        notificationSingleDismiss(item.id, 'today');
                       }}
                       type=${item.type}
                       unread=${item.unread}
@@ -116,7 +132,7 @@ export const defaultTemplate = {
                     <c4p-notification
                       @c4p-notification-click=${item.onNotificationClick}
                       @c4p-notification-dismiss=${() => {
-                        console.log('Notification dismissed');
+                        notificationSingleDismiss(item.id, 'previous');
                       }}
                       type=${item.type}
                       unread=${item.unread}

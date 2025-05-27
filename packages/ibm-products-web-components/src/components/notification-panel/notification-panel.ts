@@ -131,7 +131,6 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       dismissAllLabel,
       doNotDisturbLabel,
       open,
-      triggerButtonRef,
       _hasTodayContent,
       _hasPreviousContent,
       _onDismissAllNotifications: onDismissAllNotifications,

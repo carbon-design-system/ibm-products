@@ -69,6 +69,11 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
    */
   @property({ type: String, attribute: 'donot-disturb-label' })
   doNotDisturbLabel;
+  /**
+   * Reference to the trigger button
+   */
+  @property({ type: Object })
+  triggerButtonRef?: HTMLElement;
 
   /**
    * The language for each notification's time stamp.
@@ -126,6 +131,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       dismissAllLabel,
       doNotDisturbLabel,
       open,
+      triggerButtonRef,
       _hasTodayContent,
       _hasPreviousContent,
       _onDismissAllNotifications: onDismissAllNotifications,
@@ -136,6 +142,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       [`${blockClass}__entrance`]: open,
       [`${blockClass}__exit`]: !open,
     });
+
     return html`
       <div role="dialog" tabindex="0" class=${classes}>
         <div>
@@ -238,7 +245,26 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   }
   @HostListener('document:keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeydown = ({ key, target }: KeyboardEvent) => {};
+  private _handleKeydown = ({ key, target }: KeyboardEvent) => {
+    if (key === 'Escape') {
+      const init = {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: {
+          triggeredBy: target,
+        },
+      };
+
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSNotificationPanel).eventClickOutside,
+          init
+        )
+      );
+      this.triggerButtonRef?.focus();
+    }
+  };
   // Use @HostListener for global document click events
   @HostListener('document:click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
@@ -280,6 +306,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
         init
       )
     );
+    this.triggerButtonRef?.focus();
   };
 
   /**

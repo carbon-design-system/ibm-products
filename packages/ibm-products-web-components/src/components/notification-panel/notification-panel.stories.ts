@@ -40,10 +40,10 @@ export const defaultTemplate = {
     const [dataToday, setDataToday] = useState([...initialDataToday]);
     const [dataPrevious, setDataPrevious] = useState([...initialDataPrevious]);
     const [openPanel, setOpenPanel] = useState(args.open);
+    const triggerButton = document.querySelector('#trigger-button');
     const toggleButton = () => {
       setOpenPanel(!openPanel);
     };
-
     const dismissAllNotification = () => {
       setDataToday([]);
       setDataPrevious([]);
@@ -65,8 +65,6 @@ export const defaultTemplate = {
       }
     };
     const clickOutside = (event) => {
-      console.log(event.target);
-
       setOpenPanel(false);
     };
     return html`
@@ -76,12 +74,13 @@ export const defaultTemplate = {
       <div class="${storyPrefix}story-container">
         <div class="${storyPrefix}story-header"></div>
         <div id="page-content-selector" class="${storyPrefix}story-content">
-          <cds-button @click="${toggleButton}"
+          <cds-button id="trigger-button" @click="${toggleButton}"
             >Toggle Notification Panel</cds-button
           >
         </div>
       </div>
       <c4p-notification-panel
+        .triggerButtonRef=${triggerButton}
         .open="${openPanel}"
         title-text="Notifications"
         today-text="Today"

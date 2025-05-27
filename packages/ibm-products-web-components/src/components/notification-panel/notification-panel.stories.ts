@@ -8,13 +8,18 @@
  */
 import { html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
+import { action } from '@storybook/addon-actions';
 import './index';
 import styles from './story-styles.scss?lit';
 import { useState } from '@storybook/preview-api';
-import { prefix } from '../../globals/settings';
+import { prefix, carbonPrefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/ui-shell/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
 import Settings16 from '@carbon/web-components/es/icons/settings/16';
+import User20 from '@carbon/web-components/es/icons/user/20.js';
+import Notification20 from '@carbon/web-components/es/icons/notification/20.js';
+import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20.js';
 import {
   dataToday as initialDataToday,
   dataPrevious as initialDataPrevious,
@@ -22,9 +27,8 @@ import {
 const storyPrefix = 'notification-panel-stories__';
 const blockClassNotificationPanel = `${prefix}--notifications-panel`;
 const blockClassNotification = `${prefix}--notifications-panel__notification`;
-const onViewAllClick = () => {};
+const storyBlockClass = `${prefix}--notifications-panel__story`;
 
-const onSettingsClick = () => {};
 export const defaultTemplate = {
   args: {
     titleText: 'Notifications',
@@ -40,9 +44,12 @@ export const defaultTemplate = {
     const [dataToday, setDataToday] = useState([...initialDataToday]);
     const [dataPrevious, setDataPrevious] = useState([...initialDataPrevious]);
     const [openPanel, setOpenPanel] = useState(args.open);
+    const [expandPanel, setExpandPanel] = useState(false);
     const triggerButton = document.querySelector('#trigger-button');
     const toggleButton = () => {
       setOpenPanel(!openPanel);
+      setExpandPanel(false);
+      console.log(expandPanel, 'expandPanel');
     };
     const dismissAllNotification = () => {
       setDataToday([]);
@@ -65,20 +72,66 @@ export const defaultTemplate = {
       }
     };
     const clickOutside = (event) => {
-      setOpenPanel(false);
+      if (
+        event.detail.triggeredBy !== triggerButton &&
+        !triggerButton?.contains(event.detail.triggeredBy) &&
+        openPanel
+      ) {
+        setOpenPanel(false);
+      }
     };
     return html`
       <style>
         ${styles}
       </style>
-      <div class="${storyPrefix}story-container">
-        <div class="${storyPrefix}story-header"></div>
-        <div id="page-content-selector" class="${storyPrefix}story-content">
-          <cds-button id="trigger-button" @click="${toggleButton}"
-            >Toggle Notification Panel</cds-button
+      <cds-header
+        aria-label="IBM Cloud Pak"
+        className="${storyBlockClass}--header"
+      >
+        <cds-header-name
+          href="/"
+          prefix="IBM"
+          @click=${(e) => {
+            e.preventDefault();
+          }}
+        >
+          Cloud Pak
+        </cds-header-name>
+        <div class="${carbonPrefix}--header__global">
+          <cds-header-global-action aria-label="User" tooltip-text="User">
+            ${User20({ slot: 'icon' })}
+          </cds-header-global-action>
+          <cds-header-global-action
+            aria-label="Notification"
+            tooltip-text="Notification"
+            id="trigger-button"
+            @click="${toggleButton}"
           >
+            ${Notification20({ slot: 'icon' })}
+          </cds-header-global-action>
+          <cds-header-global-action
+            aria-label="App Switcher"
+            tooltip-text="App Switcher"
+            tooltip-alignment="right"
+            @click=${() => {
+              setExpandPanel((prev) => !prev);
+            }}
+          >
+            ${SwitcherIcon20({ slot: 'icon' })}
+          </cds-header-global-action>
+          <cds-header-panel
+            id="switcher-panel"
+            .expanded="${expandPanel}"
+            aria-label="Header Panel"
+          >
+            <div className="${storyBlockClass}__header-panel">
+              App switcher
+              <br />
+              example panel
+            </div>
+          </cds-header-panel>
         </div>
-      </div>
+      </cds-header>
       <c4p-notification-panel
         .triggerButtonRef=${triggerButton}
         .open="${openPanel}"
@@ -165,8 +218,7 @@ export const defaultTemplate = {
           <cds-button
             kind="ghost"
             class="${blockClassNotificationPanel}__view-all-button"
-            }
-            @click=${onViewAllClick}
+            @click=${action(`Clicked View All`)}
           >
             View all(${dataPrevious.length + dataToday.length})
           </cds-button>
@@ -174,12 +226,18 @@ export const defaultTemplate = {
             kind="ghost"
             size="sm"
             class="${blockClassNotificationPanel}__settings-button"
-            @click=${onSettingsClick}
+            @click=${action(`Clicked Settings`)}
           >
             ${Settings16()}
           </cds-button>
         </div>
       </c4p-notification-panel>
+      <div class="${storyPrefix}story-container">
+        <div class="${storyPrefix}story-header"></div>
+        <div id="page-content-selector" class="${storyPrefix}story-content">
+          <cds-button>Toggle Notification Panel</cds-button>
+        </div>
+      </div>
     `;
   },
 };

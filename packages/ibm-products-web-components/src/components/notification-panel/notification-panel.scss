@@ -137,18 +137,11 @@ $block-class-action-set: #{$prefix}--action-set;
   @include font-weight('regular');
 }
 
-// :host(#{$prefix}-notification-panel) ::slotted(.c4p--notifications-panel__bottom-actions){
-//      position: sticky;
-//     z-index: 2;
-//     display: flex;
-//     align-items: center;
-//     background-color: $layer-01;
-//     block-size: 2.5rem;
-//     border-block-start: 1px solid $border-subtle-01;
-//     inset-block-end: 0;
-//     min-block-size: 2.5rem;
-// }
-
+:host(#{$prefix}-notification-panel)
+  ::slotted(.c4p--notifications-panel__bottom-actions) {
+  display: flex;
+  align-items: center;
+}
 .#{$block-class}__header-container {
   --#{$carbon-prefix}-heading-06-font-size: --#{$carbon-prefix}-heading-compact-01-font-size;
   --#{$carbon-prefix}-heading-06-font-weight: --#{$carbon-prefix}-heading-compact-01-font-weight;
@@ -164,4 +157,14 @@ $block-class-action-set: #{$prefix}--action-set;
   --#{$carbon-prefix}-heading-06-font-weight: --#{$carbon-prefix}-label-01-font-weight;
   --#{$carbon-prefix}-heading-06-line-height: --#{$carbon-prefix}-label-01-line-height;
   --#{$carbon-prefix}-heading-06-letter-spacing: --#{$carbon-prefix}-label-01-letter-spacing;
+}
+
+.#{$block-class}__bottom-actions-container {
+  position: sticky;
+  z-index: 2;
+  background-color: $layer-01;
+  block-size: 2.5rem;
+  border-block-start: 1px solid $border-subtle-01;
+  inset-block-end: 0;
+  min-block-size: 2.5rem;
 }

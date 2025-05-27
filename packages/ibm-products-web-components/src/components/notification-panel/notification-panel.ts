@@ -188,7 +188,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
               : ''}
             <slot name="previous"></slot>
           </div>
-          <div className="${blockClass}__bottom-actions">
+          <div class="${blockClass}__bottom-actions-container">
             <slot name="footer"></slot>
           </div>
         </div>
@@ -282,7 +282,6 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       'select',
       'textarea',
       '[role="button"]',
-      'cds-button',
     ];
     const isActionable = actionableSelectors.some(
       (selector) => target instanceof Element && target.closest(selector)

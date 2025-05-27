@@ -22,20 +22,13 @@ import {
 const storyPrefix = 'notification-panel-stories__';
 const blockClassNotificationPanel = `${prefix}--notifications-panel`;
 const blockClassNotification = `${prefix}--notifications-panel__notification`;
-
-const toggleButton = () => {
-  document
-    .querySelector(`${prefix}-notification-panel`)
-    ?.toggleAttribute('open');
-};
-
 const onViewAllClick = () => {};
 
 const onSettingsClick = () => {};
-
 export const defaultTemplate = {
   args: {
     titleText: 'Notifications',
+    open: false,
   },
   argTypes: {
     titleText: {
@@ -44,12 +37,14 @@ export const defaultTemplate = {
     },
   },
   render: function Render(args) {
-    // Use Storybook's useState to make the data reactive
     const [dataToday, setDataToday] = useState([...initialDataToday]);
     const [dataPrevious, setDataPrevious] = useState([...initialDataPrevious]);
+    const [openPanel, setOpenPanel] = useState(args.open);
+    const toggleButton = () => {
+      setOpenPanel(!openPanel);
+    };
 
     const dismissAllNotification = () => {
-      // Clear both arrays
       setDataToday([]);
       setDataPrevious([]);
     };
@@ -69,6 +64,11 @@ export const defaultTemplate = {
         setDataPrevious([...filteredData]);
       }
     };
+    const clickOutside = (event) => {
+      console.log(event.target);
+
+      setOpenPanel(false);
+    };
     return html`
       <style>
         ${styles}
@@ -82,6 +82,7 @@ export const defaultTemplate = {
         </div>
       </div>
       <c4p-notification-panel
+        .open="${openPanel}"
         title-text="Notifications"
         today-text="Today"
         previous-text="Previous"
@@ -91,6 +92,7 @@ export const defaultTemplate = {
         @c4p-notification-donot-disturb-change=${() => {
           console.log('Do not disturb');
         }}
+        @c4p-notification-click-outside=${clickOutside}
       >
         ${dataToday.length > 0
           ? html`
@@ -98,6 +100,7 @@ export const defaultTemplate = {
                 ${dataToday.map((item) => {
                   return html`
                     <c4p-notification
+                      .open=${args.open}
                       @c4p-notification-click=${item.onNotificationClick}
                       @c4p-notification-dismiss=${() => {
                         notificationSingleDismiss(item.id, 'today');

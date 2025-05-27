@@ -20,9 +20,9 @@ import mdx from './CoachmarkButton.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark/Coachmark elements/CoachmarkButton',
+  title: 'Experimental/Coachmark/Coachmark elements/CoachmarkButton',
   component: CoachmarkButton,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {
   //   egProp: { control: 'color' },

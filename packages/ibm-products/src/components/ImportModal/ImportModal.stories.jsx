@@ -14,7 +14,7 @@ import DocsPage from './ImportModal.docs-page';
 // import mdx from './ImportModal.mdx';
 
 export default {
-  title: 'IBM Products/Patterns/Import and upload/ImportModal',
+  title: 'Components/Patterns/Import and upload/ImportModal',
   component: ImportModal,
   tags: ['autodocs'],
   parameters: {

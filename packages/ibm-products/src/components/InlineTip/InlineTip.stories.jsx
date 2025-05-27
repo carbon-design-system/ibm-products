@@ -19,7 +19,7 @@ import DocsPage from './InlineTip.docs-page';
 export default {
   title: 'Experimental/Onboarding/Inline tip/InlineTip',
   component: InlineTip,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     styles,
     layout: 'padded',

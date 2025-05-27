@@ -15,7 +15,7 @@ import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 // import styles from '../_index.scss';
 
 export default {
-  title: 'IBM Products/Patterns/Empty state/NotFoundEmptyState',
+  title: 'Components/Patterns/Empty state/NotFoundEmptyState',
   component: NotFoundEmptyState,
   tags: ['autodocs'],
   parameters: {

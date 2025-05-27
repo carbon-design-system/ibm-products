@@ -83,7 +83,7 @@ WithActions.args = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/Web terminal/WebTerminal',
+  title: 'Components/Patterns/Web terminal/WebTerminal',
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',

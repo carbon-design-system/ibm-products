@@ -387,7 +387,7 @@ const renderUIShellHeader = () => (
 );
 
 export default {
-  title: 'IBM Products/Components/Side panel/SidePanel',
+  title: 'Components/Side panel/SidePanel',
   component: SidePanel,
   tags: ['autodocs'],
   parameters: {

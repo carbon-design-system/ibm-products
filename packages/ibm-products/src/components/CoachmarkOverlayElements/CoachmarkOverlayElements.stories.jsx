@@ -18,10 +18,9 @@ import styles from './_storybook-styles.scss?inline';
 import sampleImage from './assets/sample-image.png';
 
 export default {
-  title:
-    'Experimental/Onboarding/Coachmark/Coachmark elements/CoachmarkOverlayElements',
+  title: 'Experimental/Coachmark/Coachmark elements/CoachmarkOverlayElements',
   component: CoachmarkOverlayElements,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   argTypes: {
     children: {
       control: { type: null },

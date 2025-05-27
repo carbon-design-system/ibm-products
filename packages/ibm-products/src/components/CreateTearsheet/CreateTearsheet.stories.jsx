@@ -19,7 +19,7 @@ import { MultiStepWithStepInErrorState } from './preview-components/MultiStepWit
 import { StringFormatter } from '../StringFormatter/StringFormatter.js';
 
 export default {
-  title: 'IBM Products/Patterns/Create flows/CreateTearsheet',
+  title: 'Components/Patterns/Create flows/CreateTearsheet',
   component: CreateTearsheet,
   tags: ['autodocs'],
   argTypes: {

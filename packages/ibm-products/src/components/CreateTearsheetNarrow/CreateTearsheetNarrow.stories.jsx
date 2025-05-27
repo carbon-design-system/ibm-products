@@ -27,7 +27,7 @@ import {
 } from '../../global/js/story-parts/decorator';
 
 export default {
-  title: 'IBM Products/Patterns/Create flows/CreateTearsheetNarrow',
+  title: 'Components/Patterns/Create flows/CreateTearsheetNarrow',
   component: CreateTearsheetNarrow,
   tags: ['autodocs'],
   argTypes: {

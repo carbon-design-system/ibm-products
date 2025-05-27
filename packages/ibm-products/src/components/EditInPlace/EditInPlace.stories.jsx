@@ -33,7 +33,7 @@ const tooltipAlignmentOptions = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/Edit and update/EditInPlace',
+  title: 'Components/Edit-in-place/EditInPlace',
   component: EditInPlace,
   tags: ['autodocs'],
   argTypes: {

@@ -361,7 +361,7 @@ const fullWidthGrid = {
 };
 
 export default {
-  title: 'IBM Products/Components/Page header/PageHeader',
+  title: 'Components/Page header/PageHeader',
   component: PageHeader,
   tags: ['autodocs'],
   parameters: {

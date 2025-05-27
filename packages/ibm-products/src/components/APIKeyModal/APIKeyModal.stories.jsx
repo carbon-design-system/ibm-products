@@ -24,7 +24,7 @@ import styles from './_storybook-styles.scss?inline'; // import index in case mo
 import mdx from './APIKeyModal.mdx';
 
 export default {
-  title: 'IBM Products/Components/Generating an API key/APIKeyModal',
+  title: 'Components/Generating an API key/APIKeyModal',
   component: APIKeyModal,
   tags: ['autodocs'],
   parameters: {

@@ -23,7 +23,7 @@ const storyClass = 'guidebanner-stories';
 export default {
   title: 'Experimental/Onboarding/Guidebanner',
   component: Guidebanner,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     styles,
     layout: 'fullscreen',

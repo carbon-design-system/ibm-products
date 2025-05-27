@@ -19,7 +19,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/User profile images/UserProfileImage',
+  title: 'Components/Patterns/User profile images/UserProfileImage',
   component: UserProfileImage,
   tags: ['autodocs'],
   argTypes: {

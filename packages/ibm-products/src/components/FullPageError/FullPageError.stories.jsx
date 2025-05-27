@@ -17,7 +17,7 @@ import mdx from './FullPageError.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 export default {
-  title: 'IBM Products/Components/Full-page error/FullPageError',
+  title: 'Components/Full-page error/FullPageError',
   component: FullPageError,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

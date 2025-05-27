@@ -17,7 +17,7 @@ const storyClass = 'non-linear-reading-stories';
 export default {
   title: 'Experimental/Onboarding/Non-linear reading/NonLinearReading',
   component: NonLinearReading,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     styles,
     layout: 'padded',

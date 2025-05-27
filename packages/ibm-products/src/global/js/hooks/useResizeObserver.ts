@@ -95,8 +95,7 @@ export const useResizeObserver = (
     return () => {
       observer.disconnect();
     };
-    // Ignoring exhaustive-deps as we do NOT want to include the ref in dep array
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ref.current]);
   return { width, height };
 };

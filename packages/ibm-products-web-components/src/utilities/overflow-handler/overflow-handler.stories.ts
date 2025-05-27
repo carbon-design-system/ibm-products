@@ -12,6 +12,7 @@ import { render } from 'lit-html';
 import styles from './story-styles.scss?lit';
 import '@carbon/web-components/es/components/tag/index.js';
 import '@carbon/web-components/es/components/slider/index.js';
+import { createOverflowHandler } from '@carbon/utilities';
 
 const storyPrefix = 'overflow-handler-stories__';
 
@@ -27,12 +28,27 @@ const tagTemplate = {
   args: {},
   argTypes: {},
   render: () => {
-    let tags = 5;
-    let width = 500;
-    let items = getItems(tags);
+    let width = 750;
+    let handler;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const visibleContainer = document.querySelector(
+        '#visible-tags'
+      ) as HTMLElement;
+      const hiddenContainer = document.querySelector(
+        '#hidden-tags'
+      ) as HTMLElement;
+      handler = createOverflowHandler({
+        container: visibleContainer,
+        onChange: (visible, hidden) => {
+          render(visible, visibleContainer);
+          render(hidden, hiddenContainer);
+        },
+      });
+    });
 
     const getTags = () => {
-      return items.map(
+      return getItems(10).map(
         (tag) => html`<cds-tag title=${tag.label}>${tag.label}</cds-tag>`
       );
     };
@@ -42,22 +58,9 @@ const tagTemplate = {
       width = value;
       const slider = document.querySelector('#width-slider');
       slider?.setAttribute('value', value);
-      const container = document.querySelector('.annotation') as HTMLElement;
+      const container = document.querySelector('#visible-tags') as HTMLElement;
       if (container) {
-        container.style.maxWidth = `${width}px`;
-      }
-    };
-
-    const tagsHandler = (evt: CustomEvent) => {
-      const { value } = evt.detail;
-      tags = value;
-      items = getItems(value);
-      const slider = document.querySelector('#tag-slider');
-      slider?.setAttribute('value', value);
-      const container = document.querySelector('#tag-container') as HTMLElement;
-      const newTags = getTags();
-      if (container) {
-        render(newTags, container);
+        container.style.width = `${width}px`;
       }
     };
 
@@ -78,25 +81,18 @@ const tagTemplate = {
         >
           <cds-slider-input aria-label="Width" type="number"></cds-slider-input>
         </cds-slider>
-        <cds-slider
-          id="tag-slider"
-          label-text="Number of total tags"
-          class="slider"
-          max="50"
-          min="1"
-          step="1"
-          @cds-slider-changed="${tagsHandler}"
-          value="${tags}"
-        >
-          <cds-slider-input aria-label="Tags" type="number"></cds-slider-input>
-        </cds-slider>
-        <div class="parent">
-          <div class="annotation">
-            <div class="annotation__label">Parent container</div>
-            <div class="annotation__content">
-              <p>Visible items:</p>
-              <div id="tag-container">${getTags()}</div>
-            </div>
+        <div class="parent" style="width:${width}px">
+          <div id="visible-tags">
+            <cds-tag title="1">1</cds-tag>
+            <cds-tag title="2">2</cds-tag>
+            <cds-tag title="3">3</cds-tag>
+            <cds-tag title="4">4</cds-tag>
+            <cds-tag title="5">5</cds-tag>
+            <cds-tag title="6">6</cds-tag>
+            <cds-tag title="7">7</cds-tag>
+            <cds-tag title="8">8</cds-tag>
+            <cds-tag title="9">9</cds-tag>
+            <cds-tag title="10000">10000</cds-tag>
           </div>
         </div>
       </div>

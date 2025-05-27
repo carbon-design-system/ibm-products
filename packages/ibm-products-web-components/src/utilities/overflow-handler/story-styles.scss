@@ -22,7 +22,7 @@ $story-prefix: 'overflow-handler-stories__';
   scrollbar-width: none;
 }
 
-.child {
+#visible-tags {
   white-space: nowrap;
 }
 
@@ -30,7 +30,6 @@ $story-prefix: 'overflow-handler-stories__';
 .annotation {
   border: 1px dashed colors.$purple-40;
   inline-size: 100%;
-  max-inline-size: 500px;
 }
 
 .annotation__label {

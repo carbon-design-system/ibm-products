@@ -15,6 +15,7 @@ import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-lis
 import styles from './options-tile.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import ChevronDown20 from '@carbon/web-components/es/icons/chevron--down/20';
+import '@carbon/web-components/es/components/button/index.js';
 
 export const blockClass = `${prefix}--options-tile`;
 const blockEvent = `${prefix}-options-tile`;
@@ -43,16 +44,22 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   size?: 'lg' | 'xl' = 'lg';
 
   /**
-   * Text for the title
-   */
-  @property({ type: String, reflect: true })
-  title: string = '';
-
-  /**
    * ID for the title
    */
   @property({ type: String, reflect: true })
   titleId: string = '';
+
+  /**
+   * Text for the title
+   */
+  @property({ type: String, reflect: true })
+  titleText: string = '';
+
+  /**
+   * Text for the chevron toggle button
+   */
+  @property({ type: String, reflect: true })
+  toggleText: string = '';
 
   static get eventOpen() {
     return `${blockEvent}-open`;
@@ -109,7 +116,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    const { open, size, title, titleId } = this;
+    const { open, size, titleId, titleText, toggleText } = this;
     const classes = classMap({
       [`${blockClass}`]: true,
       [`${blockClass}--xl`]: size === 'xl',
@@ -120,11 +127,20 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
       <div part="options-tile" class="${classes}">
         <div class="${blockClass}__header">
           <div class="${blockClass}__header-left">
-            <div class="${blockClass}__chevron" @click=${this._toggle}>
-              ${ChevronDown20({ slot: 'icon' })}
-            </div>
+            <cds-button
+              tooltip-text="${toggleText}"
+              kind="ghost"
+              tooltip-position="top"
+              size="sm"
+              @click=${this._toggle}
+            >
+              ${ChevronDown20({
+                slot: 'icon',
+                class: `${blockClass}__chevron`,
+              })}
+            </cds-button>
             <div class="${blockClass}__title-block">
-              <p class="${blockClass}__title" id="${titleId}">${title}</p>
+              <p class="${blockClass}__title" id="${titleId}">${titleText}</p>
               <div class="${blockClass}__summary">
                 <slot name="summary"></slot>
               </div>

@@ -29,13 +29,17 @@ const argTypes = {
     control: 'text',
     description: 'Slot text that is displayed under the title',
   },
-  title: {
-    control: 'text',
-    description: 'Text for the title',
-  },
   titleId: {
     control: 'text',
     description: 'ID for the title',
+  },
+  titleText: {
+    control: 'text',
+    description: 'Text for the title',
+  },
+  toggleText: {
+    control: 'text',
+    description: 'Text for the chevron toggle button',
   },
 };
 
@@ -50,14 +54,15 @@ const handleClose = (evt: Event) => {
 };
 
 const renderTemplate = (args) => {
-  const { open, size, title, titleId } = args;
+  const { open, size, titleText, titleId, toggleText } = args;
   return html`
     <c4p-options-tile
       id="my-tile"
       ?open=${open}
       size=${size}
-      title=${title}
       titleId=${titleId}
+      titleText=${titleText}
+      toggleText=${toggleText}
       @c4p-options-tile-open=${handleOpen}
       @c4p-options-tile-close=${handleClose}
     >
@@ -78,8 +83,9 @@ export const Default = {
     open: false,
     size: 'lg',
     summary: 'Back up every 10min',
-    title: 'Auto recovery',
     titleId: 'title-01',
+    titleText: 'Auto recovery',
+    toggleText: 'Toggle content',
   },
   argTypes,
   render: renderTemplate,

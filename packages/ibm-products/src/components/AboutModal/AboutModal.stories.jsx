@@ -173,7 +173,7 @@ const Template = (storyName, storyInitiallyOpen, args, context) => {
   useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
 
   return (
-    <>
+    <main>
       <Button onClick={() => setOpen(true)}>
         {beenOpen ? 'Reopen the' : 'Open the'} {storyName}
       </Button>
@@ -184,9 +184,10 @@ const Template = (storyName, storyInitiallyOpen, args, context) => {
         onClose={() => setOpen(false)}
         logo={logo}
         modalAriaLabel="About this product"
+        modalBodyAriaLabel="Product details"
         open={open}
       />
-    </>
+    </main>
   );
 };
 

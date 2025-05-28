@@ -15,7 +15,7 @@ Here's a quick example to get you started.
 import { createOverflowHandler } from '@carbon/utilities';
 
 createOverflowHandler({
-  container, // The container element that holds the items. HTMLElement
+  container, // The document node that holds the items. HTMLElement
   maxVisibleItems, // Maximum number of visible items. If provided, only this number of items will be shown. number | undefined
   onChange: (visibleItems: HTMLElement[], hiddenItems: HTMLElement[]) => void, // Callback function invoked when the visible and hidden items change.
   dimension, // The dimension to consider for overflow calculations. "width" | "height" | undefined
@@ -24,6 +24,6 @@ createOverflowHandler({
 
 The only required argument necessary to consume this utility is `container`. Once the handler has been instantiated, an event handler is created that checks the width of the container when it's rendered or resized. By default, the handler will automatically hide items that are unable to fit.
 
-Using the `onChange` callback, you have access to an array holding the visible and hidden elements. This will allow you to control how you want to display the sets of items. For example, if you wanted to display a list of tags for a resource but didn't want to display dozens or hundreds of tags in a page header or whatever container element the resource is being displayed in, you could use the callback handler to easily access the hidden items and render them elsewhere, like in a modal or popover.
+Using the `onChange` callback, you have access to an array holding the visible and hidden elements. This gives you the flexibility to access the hidden items and render them elsewhere, such as a modal or popover.
 
-For additional details on proper implementation, please refer to the example code provided in the story.
+For details on implementation, please refer to the example code.

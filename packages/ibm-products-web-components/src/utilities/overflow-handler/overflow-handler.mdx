@@ -15,10 +15,10 @@ Here's a quick example to get you started.
 import { createOverflowHandler } from '@carbon/utilities';
 
 createOverflowHandler({
-  container, // The container element that holds the items
-  maxVisibleItems, // Maximum number of visible items. If provided, only this number of items will be shown.
-  onChange: (visibleItems, hiddenItems) => {}, // Callback function invoked when the visible and hidden items change.
-  dimension // The dimension to consider for overflow calculations. Defaults to 'width'.
+  container, // The container element that holds the items. HTMLElement
+  maxVisibleItems, // Maximum number of visible items. If provided, only this number of items will be shown. number | undefined
+  onChange: (visibleItems: HTMLElement[], hiddenItems: HTMLElement[]) => void, // Callback function invoked when the visible and hidden items change.
+  dimension, // The dimension to consider for overflow calculations. "width" | "height" | undefined
 });
 ```
 

@@ -18,16 +18,16 @@ LICENSE file in the root directory of this source tree.
   <section>
     <h4>Export Modal</h4>
     <p>Standard Export Modal</p>
-    <standard-export-modal id='exportModalstandard'></standard-export-modal>
+    <standard-export-modal id='standard'></standard-export-modal>
     <p>With Extension Validation</p>
-    <standard-export-modal id='exportModalWithExtension'></standard-export-modal>
+    <standard-export-modal id='withExtension'></standard-export-modal>
     <p>With Preformatted Extension</p>
     <export-modal-preformatted-extension></export-modal-preformatted-extension>
   </section>
   <script>
     const validExtension = ['pdf'];
     window.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('exportModalWithExtension');
+    const modal = document.getElementById('withExtension');
     if (modal) {
       modal.validExtensions = validExtension;
     }

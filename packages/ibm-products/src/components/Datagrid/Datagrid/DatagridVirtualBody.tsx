@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { MutableRefObject, useEffect, useRef } from 'react';
+import React, { MutableRefObject, RefObject, useEffect, useRef } from 'react';
 import { VariableSizeList } from 'react-window';
 import { TableBody } from '@carbon/react';
 import { pkg } from '../../../settings';
@@ -58,7 +58,7 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
     }
   };
 
-  useResizeObserver(gridRef, handleVirtualGridResize);
+  useResizeObserver(gridRef as RefObject<HTMLElement>, handleVirtualGridResize);
 
   useEffect(() => {
     handleResize?.();

@@ -108,14 +108,9 @@ const DefaultTemplate = ({ slug, ...args }, context) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   return (
     <>
-      {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content">
-        <Column lg={{ span: 2, start: 8 }}>
-          <Button onClick={() => setOpen(!open)}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
+      <Button onClick={() => setOpen(!open)}>
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
       <CreateSidePanel
         {...args}
         open={open}
@@ -204,14 +199,9 @@ const TemplateWithFormValidation = ({ slug, ...args }, context) => {
   const [invalid, setInvalid] = useState(false);
   return (
     <>
-      {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content">
-        <Column lg={{ span: 2, start: 8 }}>
-          <Button onClick={() => setOpen(!open)}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
+      <Button onClick={() => setOpen(!open)}>
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
       <CreateSidePanel
         {...args}
         open={open}
@@ -303,14 +293,9 @@ const TemplateWithMultipleForms = ({ slug, ...args }, context) => {
   const [invalid, setInvalid] = useState(false);
   return (
     <>
-      {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content">
-        <Column lg={{ span: 2, start: 8 }}>
-          <Button onClick={() => setOpen(!open)}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
+      <Button onClick={() => setOpen(!open)}>
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
       <CreateSidePanel
         {...args}
         open={open}

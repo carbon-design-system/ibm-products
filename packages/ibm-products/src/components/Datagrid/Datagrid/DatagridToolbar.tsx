@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, MutableRefObject, useEffect, useState } from 'react';
+import React, {
+  useRef,
+  MutableRefObject,
+  useEffect,
+  useState,
+  RefObject,
+} from 'react';
 import PropTypes from 'prop-types';
 import {
   TableToolbar,
@@ -234,8 +240,8 @@ const DatagridToolbar = ({
   ariaToolbarLabel,
   ...datagridState
 }: DatagridToolbarProps & DataGridState) => {
-  const ref = useRef(null);
-  const { width } = useResizeObserver(ref);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const { width } = useResizeObserver(ref as RefObject<HTMLDivElement>);
   const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
     datagridState;
   const getRowHeight = rowSize || 'lg';

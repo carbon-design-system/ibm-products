@@ -80,7 +80,6 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
 
   .#{$_block-class}__displayed-breadcrumb:last-child {
     display: inline-flex; // flex instead of block due to spacing
-    overflow: hidden;
   }
 
   .#{$_block-class}__displayed-breadcrumb:last-child

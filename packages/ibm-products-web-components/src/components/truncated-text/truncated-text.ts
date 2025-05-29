@@ -101,8 +101,7 @@ export class CDSTruncatedText extends LitElement {
   }
 
   private _setupResizeObserver() {
-    const el = this._textElement;
-    if (!el) {
+    if (!this._textElement) {
       return;
     }
 
@@ -114,7 +113,7 @@ export class CDSTruncatedText extends LitElement {
       this._updateOverflowStatus();
     });
 
-    this._resizeObserver.observe(el);
+    this._resizeObserver.observe(this);
   }
 
   protected updated(changed: Map<string, unknown>) {

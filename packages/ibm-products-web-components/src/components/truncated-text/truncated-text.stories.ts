@@ -162,6 +162,7 @@ const renderTemplate = (args) => {
       ? html`<h2>
           <c4p-truncated-text
             value=${value}
+            lines=${lines}
             expand-label=${expandLabelAttr}
             collapse-label=${collapseLabelAttr}
             .with=${withMode}
@@ -172,6 +173,7 @@ const renderTemplate = (args) => {
       ? html`<h3>
           <c4p-truncated-text
             value=${value}
+            lines=${lines}
             expand-label=${expandLabelAttr}
             collapse-label=${collapseLabelAttr}
             .with=${withMode}
@@ -193,6 +195,7 @@ const renderTemplate = (args) => {
       ? html`<h5>
           <c4p-truncated-text
             value=${value}
+            lines=${lines}
             expand-label=${expandLabelAttr}
             collapse-label=${collapseLabelAttr}
             .with=${withMode}
@@ -203,6 +206,7 @@ const renderTemplate = (args) => {
       ? html`<h6>
           <c4p-truncated-text
             value=${value}
+            lines=${lines}
             expand-label=${expandLabelAttr}
             collapse-label=${collapseLabelAttr}
             .with=${withMode}

@@ -62,27 +62,31 @@ $block-class: #{$prefix}--truncated-text;
   }
 
   button:focus,
-  .#{$block-class}_expand:focus,
-  .#{$block-class}_collapse:focus {
+  .#{$block-class}_button-expand:focus,
+  .#{$block-class}_button-collapse:focus {
     @include focus-outline('outline');
   }
 }
 
-.#{$block-class}_expand,
-.#{$block-class}_collapse {
+.#{$block-class}_button-expand,
+.#{$block-class}_button-collapse {
   @extend %reset-button;
 
   padding: 0;
   color: $link-primary;
+
+  &.#{$block-class}_button-hide {
+    display: none;
+  }
 }
 
-.#{$block-class}_expand {
+.#{$block-class}_button-expand {
   position: absolute;
   background-color: $background;
   inset-block-end: 0;
   inset-inline-end: 0;
 
-  &.#{$block-class}_layered {
+  &.#{$block-class}_button-layered {
     background-color: $layer;
   }
 
@@ -91,7 +95,7 @@ $block-class: #{$prefix}--truncated-text;
     @include gradient-bg(90deg, $background);
   }
 
-  &.#{$block-class}_layered:dir(ltr)::before {
+  &.#{$block-class}_button-layered:dir(ltr)::before {
     @include gradient-bg(90deg, $layer);
   }
 
@@ -100,11 +104,11 @@ $block-class: #{$prefix}--truncated-text;
     @include gradient-bg(270deg, $background);
   }
 
-  &.#{$block-class}_layered:dir(rtl)::before {
+  &.#{$block-class}_button-layered:dir(rtl)::before {
     @include gradient-bg(270deg, $layer);
   }
 }
 
-.#{$block-class}_collapse {
+.#{$block-class}_button-collapse {
   background-color: transparent;
 }

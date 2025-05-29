@@ -8,6 +8,7 @@
 import { describe, it, expect } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import CDSTruncatedText from './truncated-text';
+import { prefix, carbonPrefix } from '../../globals/settings';
 import './index';
 
 const defaultProps = {
@@ -29,7 +30,7 @@ const template = (props = defaultProps, templateWidth?: number) => html`
 describe('c4p-truncated-text', () => {
   it('renders the component', async () => {
     const wrapper = await fixture(template());
-    const el = wrapper.querySelector('c4p-truncated-text');
+    const el = wrapper.querySelector(`${prefix}-truncated-text`);
     expect(el).toBeTruthy();
   });
 
@@ -38,8 +39,10 @@ describe('c4p-truncated-text', () => {
       template({ ...defaultProps, with: 'tooltip' }, 200)
     );
 
-    const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
-    const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+    const el = wrapper.querySelector(
+      `${prefix}-truncated-text`
+    ) as CDSTruncatedText;
+    const tooltip = el.shadowRoot?.querySelector(`${carbonPrefix}-tooltip`);
     expect(tooltip).toBeTruthy();
   });
 
@@ -48,9 +51,11 @@ describe('c4p-truncated-text', () => {
       template({ ...defaultProps, with: 'tooltip' }, 9000)
     );
 
-    const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
+    const el = wrapper.querySelector(
+      `${prefix}-truncated-text`
+    ) as CDSTruncatedText;
 
-    const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+    const tooltip = el.shadowRoot?.querySelector(`${carbonPrefix}-tooltip`);
     expect(tooltip).not.toBeTruthy();
   });
 
@@ -61,11 +66,11 @@ describe('c4p-truncated-text', () => {
       );
 
       const el = wrapper.querySelector(
-        'c4p-truncated-text'
+        `${prefix}-truncated-text`
       ) as CDSTruncatedText;
       await el.updateComplete;
 
-      const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+      const tooltip = el.shadowRoot?.querySelector(`${carbonPrefix}-tooltip`);
       if (lines <= 2) {
         expect(tooltip).toBeTruthy();
       } else {
@@ -74,21 +79,17 @@ describe('c4p-truncated-text', () => {
     }
   });
 
-  // it.only('renders a expandable button when text is truncated with expand', async () => {
-  //   // for (let lines = 1; lines <= 4; lines++) {
-  //   const wrapper = await fixture(
-  //     template({ ...defaultProps, lines: 2, with: 'expand' }, 600)
-  //   );
-
-  //   const el = wrapper.querySelector('c4p-truncated-text') as CDSTruncatedText;
-  //   await el.updateComplete;
-  //   const expandButton = el.shadowRoot?.querySelector(
-  //     '.c4p--truncated-text_expand'
-  //   );
-  //   // (expandButton as HTMLElement)?.click();
-  //   // await new Promise((resolve) => setTimeout(resolve, 1000));
-  //   // console.log(el.shadowRoot?.innerHTML);
-  //   expect(expandButtons).toBeTruthy();
-  //   // }
-  // });
+  it('renders a expandable button when text is truncated with expand', async () => {
+    const wrapper = await fixture(
+      template({ ...defaultProps, lines: 2, with: 'expand' }, 400)
+    );
+    const el = wrapper.querySelector(
+      `${prefix}-truncated-text`
+    ) as CDSTruncatedText;
+    await el.updateComplete;
+    const expandButton = el.shadowRoot?.querySelector(
+      `.${prefix}--truncated-text_button-expand`
+    );
+    expect(expandButton).toBeTruthy();
+  });
 });

@@ -58,6 +58,7 @@ export class CDSTruncatedText extends LitElement {
 
   @state() private _isOverflowing: boolean = false;
   @state() private _isExpanded: boolean = false;
+  @state() private _maxHeight: string = 'none';
 
   @query(`.${blockClass}_content`) private _textElement!: HTMLElement;
   private _lineHeight: number = 0;
@@ -84,6 +85,21 @@ export class CDSTruncatedText extends LitElement {
     });
   }
 
+  private _updateMaxHeight() {
+    if (this.with !== 'expand') {
+      return;
+    }
+    requestAnimationFrame(() => {
+      if (!this._textElement) {
+        return;
+      }
+      this._maxHeight =
+        this.lines > 0 && !this._isExpanded
+          ? `${this.lines * this._lineHeight}px`
+          : `${this._textElement.scrollHeight}px`;
+    });
+  }
+
   private _setupResizeObserver() {
     const el = this._textElement;
     if (!el) {
@@ -98,7 +114,7 @@ export class CDSTruncatedText extends LitElement {
 
     this._resizeObserver = new ResizeObserver(([entry]) => {
       const newWidth = entry.contentRect.width;
-      if (newWidth !== lastWidth) {
+      if (newWidth !== lastWidth || !this._isOverflowing) {
         lastWidth = newWidth;
         this._updateOverflowStatus();
       }
@@ -110,6 +126,7 @@ export class CDSTruncatedText extends LitElement {
   protected updated(changed: Map<string, unknown>) {
     if (changed.has('lines') || changed.has('value')) {
       this._updateOverflowStatus();
+      this._updateMaxHeight();
     }
   }
 
@@ -117,11 +134,11 @@ export class CDSTruncatedText extends LitElement {
     if (!this._textElement || this.lines <= 0) {
       return;
     }
+    this._updateMaxHeight();
     setTimeout(() => {
       const { scrollHeight, clientHeight } = this._textElement;
-      const buffer = Math.ceil(
-        clientHeight / (2 * Math.max(1, this.lines || 1))
-      );
+      const buffer = this._lineHeight / 2; // buffer of at least half of line height for a stable outcome
+
       const isOverflowing = scrollHeight > clientHeight + buffer;
 
       if (isOverflowing !== this._isOverflowing) {
@@ -132,6 +149,7 @@ export class CDSTruncatedText extends LitElement {
 
   private _toggleExpansion() {
     this._isExpanded = !this._isExpanded;
+    this._updateMaxHeight();
     this._textElement?.classList.add(`${blockClass}_transition`);
     const onTransitionEnd = () => {
       this._textElement?.querySelector('button')?.focus();
@@ -141,13 +159,14 @@ export class CDSTruncatedText extends LitElement {
   }
 
   private _renderToggleButton() {
-    if (!this._isOverflowing && !this._isExpanded) {
+    if (this.with !== 'expand') {
       return;
     }
     const className = classMap({
-      [`${blockClass}_collapse`]: this._isExpanded,
-      [`${blockClass}_expand`]: !this._isExpanded,
-      [`${blockClass}_layered`]: this._isLayered,
+      [`${blockClass}_button-collapse`]: this._isExpanded,
+      [`${blockClass}_button-expand`]: !this._isExpanded,
+      [`${blockClass}_button-layered`]: this._isLayered,
+      [`${blockClass}_button-hide`]: !this._isOverflowing && !this._isExpanded,
     });
     const label = this._isExpanded
       ? this.collapseLabel || '...less'
@@ -160,17 +179,11 @@ export class CDSTruncatedText extends LitElement {
   }
 
   render() {
-    // Calculate max height based on line height and number of lines
-    const maxHeight =
-      this.lines > 0 && !this._isExpanded
-        ? `${this.lines * this._lineHeight}px`
-        : `${this._textElement?.scrollHeight}px`;
-
     // Apply different styles based on truncation method
     const contentStyle =
       this.with === 'tooltip' || !this.with
         ? `--line-clamp: ${this._isExpanded ? 'none' : this.lines};`
-        : `max-block-size: ${maxHeight};`;
+        : `max-block-size: ${this._maxHeight};`;
 
     const contentClass = classMap({
       [`${blockClass}_content`]: true,
@@ -184,8 +197,7 @@ export class CDSTruncatedText extends LitElement {
           ? '0'
           : undefined}
       >
-        ${this.value}
-        ${this.with === 'expand' ? this._renderToggleButton() : null}
+        ${this.value} ${this._renderToggleButton()}
       </div>
     `;
 

@@ -124,7 +124,7 @@ const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
     );
   }
   return (
-    <>
+    <main>
       {RenderButton(triggerButtonRef)}
       <ExportModal
         {...args}
@@ -139,7 +139,7 @@ const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
         errorMessage="Server error 500"
         triggerButtonRef={triggerButtonRef}
       />
-    </>
+    </main>
   );
 };
 

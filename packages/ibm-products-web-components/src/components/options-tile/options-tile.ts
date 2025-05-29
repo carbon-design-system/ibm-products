@@ -133,6 +133,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
               tooltip-position="top"
               size="sm"
               @click=${this._toggle}
+              class="${blockClass}__toggle"
             >
               ${ChevronDown20({
                 slot: 'icon',

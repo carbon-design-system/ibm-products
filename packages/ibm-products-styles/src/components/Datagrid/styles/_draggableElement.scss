@@ -11,13 +11,24 @@
 @use '@carbon/styles/scss/motion' as *;
 @use './variables';
 
+// Drag handle.
 .#{variables.$block-class}__draggable-handleStyle {
-  display: flex;
-  align-items: center;
+  // Cancel out default button styling.
+  padding: 0;
+  border: none;
+  background: none;
+
+  cursor: grab;
   margin-inline-end: $spacing-03;
 }
 
+.#{variables.$block-class}__draggable-handleStyle:active,
+.#{variables.$block-class}__draggable-handleHolder--dragging {
+  cursor: grabbing;
+}
+
 .#{variables.$block-class}__draggable-handleStyle.disabled {
+  cursor: none;
   pointer-events: none;
 }
 
@@ -39,13 +50,13 @@
   inline-size: 100%;
 }
 
+// The draggable element itself.
 .#{variables.$block-class}__draggable-handleHolder {
   position: relative; // above underlay
   display: flex;
   background-color: $layer;
   block-size: $spacing-09;
   border-block-end: 1px solid $layer-active;
-  cursor: grab;
 }
 
 .#{variables.$block-class}__draggable-handleHolder:hover {
@@ -66,11 +77,6 @@
   background-color: $highlight;
   color: $text-primary;
   outline: none;
-}
-
-.#{variables.$block-class}__draggable-handleHolder:active,
-.#{variables.$block-class}__draggable-handleHolder--dragging {
-  cursor: grabbing;
 }
 
 .#{variables.$block-class}__draggable-handleHolder-selected:hover {

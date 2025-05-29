@@ -3235,6 +3235,7 @@ p.c4p--about-modal__copyright-text:first-child {
   letter-spacing: var(--cds-heading-04-letter-spacing, 0);
 }
 .c4p--tearsheet .c4p--tearsheet__header-description {
+  display: inline-flex;
   margin-block-start: 1rem;
   max-inline-size: 100%;
   font-size: var(--cds-body-compact-01-font-size, 0.875rem);
@@ -3246,24 +3247,6 @@ p.c4p--about-modal__copyright-text:first-child {
   .c4p--tearsheet .c4p--tearsheet__header-description {
     max-inline-size: 60%;
   }
-}
-.c4p--tearsheet .c4p--tearsheet__description-tooltip .cds--definition-term {
-  border-block-end: 0;
-  letter-spacing: inherit;
-  word-break: break-word;
-}
-.c4p--tearsheet .c4p--tearsheet__description-tooltip {
-  display: inline-flex;
-}
-.c4p--tearsheet .c4p--tearsheet__description-tooltip .cds--popover-content.cds--definition-tooltip {
-  max-inline-size: fit-content;
-}
-.c4p--tearsheet .c4p--tearsheet__description-text {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
 }
 .c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
   margin-block-start: 0.5rem;
@@ -4455,6 +4438,10 @@ p.c4p--about-modal__copyright-text:first-child {
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+.c4p--datagrid__sortableColumn {
+  /* stylelint-disable-next-line declaration-no-important */
+  padding-inline: 1rem !important;
+}
 .c4p--datagrid__sortableColumn .cds--table-header-label .header-title {
   display: inline-block;
   inline-size: auto;
@@ -4665,11 +4652,6 @@ p.c4p--about-modal__copyright-text:first-child {
   flex: initial;
   align-items: center;
   justify-content: center;
-}
-
-.c4p--datagrid__customize-columns-column-list .c4p--datagrid__customize-columns-checkbox-visible-label {
-  /* stylelint-disable-next-line */
-  padding-inline-start: 0.375rem;
 }
 
 .c4p--datagrid__customize-columns-column-list .c4p--datagrid__customize-columns-checkbox-wrapper.cds--form-item {
@@ -5185,12 +5167,20 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--datagrid__draggable-handleStyle {
-  display: flex;
-  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: grab;
   margin-inline-end: 0.5rem;
 }
 
+.c4p--datagrid__draggable-handleStyle:active,
+.c4p--datagrid__draggable-handleHolder--dragging {
+  cursor: grabbing;
+}
+
 .c4p--datagrid__draggable-handleStyle.disabled {
+  cursor: none;
   pointer-events: none;
 }
 
@@ -5217,7 +5207,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   background-color: var(--cds-layer);
   block-size: 3rem;
   border-block-end: 1px solid var(--cds-layer-active);
-  cursor: grab;
 }
 
 .c4p--datagrid__draggable-handleHolder:hover {
@@ -5238,11 +5227,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   background-color: var(--cds-highlight, #d0e2ff);
   color: var(--cds-text-primary, #161616);
   outline: none;
-}
-
-.c4p--datagrid__draggable-handleHolder:active,
-.c4p--datagrid__draggable-handleHolder--dragging {
-  cursor: grabbing;
 }
 
 .c4p--datagrid__draggable-handleHolder-selected:hover {
@@ -7066,7 +7050,7 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--notifications-panel__container .c4p--notifications-panel__header-container {
   position: sticky;
   z-index: 2;
-  padding: 0.5rem 1rem 1rem;
+  padding: 0.5rem 1rem;
   background-color: var(--cds-layer-01, #f4f4f4);
   border-block-end: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   inset-block-start: 0;
@@ -7075,6 +7059,9 @@ button.c4p--add-select__global-filter-toggle--open {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.c4p--notifications-panel__container .c4p--notifications-panel__header-container .c4p--notifications-panel__do-not-disturb-toggle {
+  padding-block-end: 0.5rem;
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__header-container .c4p--notifications-panel__do-not-disturb-toggle .cds--toggle__label-text {
   position: absolute;
@@ -7109,7 +7096,7 @@ button.c4p--add-select__global-filter-toggle--open {
   padding: 0.5rem 1rem;
   background-color: var(--cds-layer-01, #f4f4f4);
   color: var(--cds-text-secondary, #525252);
-  inset-block-start: 4.8125rem;
+  inset-block-start: 3.0625rem;
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification:hover,
 .c4p--notifications-panel__container .c4p--notifications-panel__notification:focus {
@@ -7138,6 +7125,10 @@ button.c4p--add-select__global-filter-toggle--open {
   transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-title {
+  font-size: var(--cds-heading-01-font-size, 0.875rem);
+  font-weight: var(--cds-heading-01-font-weight, 600);
+  line-height: var(--cds-heading-01-line-height, 1.42857);
+  letter-spacing: var(--cds-heading-01-letter-spacing, 0.16px);
   color: var(--cds-text-secondary, #525252);
   margin-block-end: 0.25rem;
   font-weight: 400;
@@ -7309,6 +7300,10 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__bottom-actions .c4p--notifications-panel__settings-button .cds--btn__icon {
   margin: 0;
+}
+
+.c4p--notifications-panel__header-container:has(.c4p--notifications-panel__do-not-disturb-toggle) + .c4p--notifications-panel__main-section .c4p--notifications-panel__time-section-label {
+  inset-block-start: 4.8125rem;
 }
 
 .cds--grid {
@@ -8838,7 +8833,6 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child {
   display: inline-flex;
-  overflow: hidden;
 }
 .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child .cds--link {
   display: inline-block;
@@ -9038,6 +9032,7 @@ button.c4p--add-select__global-filter-toggle--open {
   z-index: 7999;
   display: inline-block; /* cause top/bottom margin to reserve space */
   background-color: var(--cds-background, #ffffff);
+  border-block-end: 1px solid var(--cds-border-subtle-00, #e0e0e0);
   color: var(--cds-text-primary, #161616);
   inline-size: 100%;
   /* stylelint-disable-next-line carbon/layout-use */
@@ -9049,10 +9044,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --c4p--page-header--background-opacity: 1;
   --c4p--page-header--breadcrumb-title-top: initial;
   --c4p--page-header--button-set-in-breadcrumb-width-px: initial;
-  --c4p--page-header--navigation-buffer-top: $spacing-06;
 }
-.c4p--page-header.c4p--page-header--has-navigation-tags-only {
-  --c4p--page-header--navigation-buffer-top: $spacing-04;
+.c4p--page-header.c4p--page-header--without-background {
+  border-block-end: none;
 }
 .c4p--page-header::before {
   --from-color: var(--cds-background, #ffffff);
@@ -9083,7 +9077,7 @@ button.c4p--add-select__global-filter-toggle--open {
   block-size: 0.25rem;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row:not(.c4p--page-header__breadcrumb-row--has-action-bar) {
-  min-block-size: 2rem;
+  min-block-size: 2.5rem;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--container {
   display: flex;
@@ -9093,6 +9087,9 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--page-header .c4p--page-header__has-page-actions-without-action-bar {
   max-inline-size: calc(0.6 * (100% + 2 * 1rem));
   min-inline-size: calc(0.6 * (100% + 2 * 1rem));
+}
+.c4p--page-header .c4p--page-header__has-page-actions-with-title-collapsed {
+  max-inline-size: none;
 }
 .c4p--page-header .c4p--page-header__has-page-actions-without-action-bar .c4p--page-header__has-page-actions-without-action-bar {
   min-inline-size: 100%;
@@ -9115,6 +9112,7 @@ button.c4p--add-select__global-filter-toggle--open {
   transition: all 150ms ease-out;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--next-to-tabs:not(.c4p--page-header__has-page-actions-without-action-bar)::after,
+.c4p--page-header .c4p--page-header__has-page-actions-without-action-bar.c4p--page-header__has-page-actions-with-title-collapsed::after,
 .c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar::after {
   /* creates a full width box shadow without causing scroll */
   box-shadow: 25vw 1px 0 0 var(--cds-layer-accent-01, #e0e0e0), -25vw 1px 0 0 var(--cds-layer-accent-01, #e0e0e0);
@@ -9469,6 +9467,12 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--page-header .c4p--page-header__navigation-row .cds--tab-content {
   display: none; /* need to figure out how to handle the tab content */
+}
+.c4p--page-header .c4p--page-header__action-bar-column--has-page-actions {
+  display: block;
+}
+.c4p--page-header .c4p--page-header__has-page-actions-with-title-collapsed .c4p--page-header__action-bar-column--has-page-actions {
+  display: block;
 }
 .c4p--page-header .c4p--page-header__navigation-tabs {
   margin-inline-start: calc(-1 * 1rem);

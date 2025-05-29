@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useContext, useMemo, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { pkg } from '../../settings';
 import PropTypes from 'prop-types';
@@ -88,6 +88,13 @@ const InterstitialScreenFooter = React.forwardRef<
   const isMultiStep = !!stepCount;
   const progStepFloor = 0;
   const progStepCeil = stepCount - 1;
+  //this will focus the start button on last step when next button is hidden and start button is shown
+  useEffect(() => {
+    if (progStep + 1 === stepCount && startButtonRef.current) {
+      startButtonRef.current.focus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [progStep]);
 
   const handleAction = async (actionType: ActionType) => {
     setLoadingAction(actionType);

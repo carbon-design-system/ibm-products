@@ -489,8 +489,7 @@ export let PageHeader = React.forwardRef(
     const localHeaderRef = useRef<HTMLDivElement | null>(null);
     const headerRef = (ref ||
       localHeaderRef) as MutableRefObject<HTMLElementStyled>;
-    const sizingContainerRef: MutableRefObject<HTMLDivElement | null> =
-      useRef(null);
+    const sizingContainerRef: RefObject<HTMLDivElement | null> = useRef(null);
     const offsetTopMeasuringRef = useRef(null);
     const overflowMenuRef = useRef<HTMLDivElement>(null);
 
@@ -615,14 +614,15 @@ export let PageHeader = React.forwardRef(
 
     useEffect(() => {
       // Determine the location of the pageAction buttons
-      /* istanbul ignore next */
-      if (metrics?.titleRowSpaceAbove && metrics?.pageActionsSpaceAbove) {
-        setPageActionsInBreadcrumbRow(
-          collapseTitle ||
-            (hasActionBar && scrollYValue > metrics?.titleRowSpaceAbove) ||
-            (widthIsNarrow && scrollYValue > metrics?.pageActionsSpaceAbove)
-        );
-      }
+      setPageActionsInBreadcrumbRow(
+        collapseTitle ||
+          (hasActionBar &&
+            !!metrics?.titleRowSpaceAbove &&
+            scrollYValue > metrics?.titleRowSpaceAbove) ||
+          (widthIsNarrow &&
+            !!metrics?.pageActionsSpaceAbove &&
+            scrollYValue > metrics?.pageActionsSpaceAbove)
+      );
     }, [
       hasActionBar,
       metrics.breadcrumbRowSpaceBelow,
@@ -892,7 +892,10 @@ export let PageHeader = React.forwardRef(
       headerRef,
     ]);
 
-    useResizeObserver(sizingContainerRef, handleResizeActionBarColumn);
+    useResizeObserver(
+      sizingContainerRef as RefObject<HTMLDivElement>,
+      handleResizeActionBarColumn
+    );
     useResizeObserver(headerRef, handleResize);
 
     // Determine what form of title to display in the breadcrumb
@@ -977,6 +980,8 @@ export let PageHeader = React.forwardRef(
                       hasActionBar || widthIsNarrow,
                     [`${blockClass}__has-page-actions-without-action-bar`]:
                       !hasActionBar && !widthIsNarrow && pageActions,
+                    [`${blockClass}__has-page-actions-with-title-collapsed`]:
+                      collapseTitle && pageActions,
                   })}
                 >
                   <div className={`${blockClass}__breadcrumb-row--container`}>
@@ -1035,7 +1040,7 @@ export let PageHeader = React.forwardRef(
                             />
                           </>
                         ) : (
-                          widthIsNarrow &&
+                          (widthIsNarrow || pageActions) &&
                           thePageActions(true, pageActionsInBreadcrumbRow)
                         )}
                       </div>

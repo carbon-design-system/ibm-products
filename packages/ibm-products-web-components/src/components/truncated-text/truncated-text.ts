@@ -106,18 +106,12 @@ export class CDSTruncatedText extends LitElement {
       return;
     }
 
-    let lastWidth = el.offsetWidth;
-
     if (this._resizeObserver) {
       this._resizeObserver.disconnect();
     }
 
-    this._resizeObserver = new ResizeObserver(([entry]) => {
-      const newWidth = entry.contentRect.width;
-      if (newWidth !== lastWidth || !this._isOverflowing) {
-        lastWidth = newWidth;
-        this._updateOverflowStatus();
-      }
+    this._resizeObserver = new ResizeObserver(() => {
+      this._updateOverflowStatus();
     });
 
     this._resizeObserver.observe(el);

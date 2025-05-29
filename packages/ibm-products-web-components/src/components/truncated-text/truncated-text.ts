@@ -85,6 +85,13 @@ export class CDSTruncatedText extends LitElement {
     });
   }
 
+  protected updated(changed: Map<string, unknown>) {
+    if (changed.has('lines') || changed.has('value')) {
+      this._updateOverflowStatus();
+      this._updateMaxHeight();
+    }
+  }
+
   private _updateMaxHeight() {
     if (this.with !== 'expand') {
       return;
@@ -114,13 +121,6 @@ export class CDSTruncatedText extends LitElement {
     });
 
     this._resizeObserver.observe(this);
-  }
-
-  protected updated(changed: Map<string, unknown>) {
-    if (changed.has('lines') || changed.has('value')) {
-      this._updateOverflowStatus();
-      this._updateMaxHeight();
-    }
   }
 
   private _updateOverflowStatus() {

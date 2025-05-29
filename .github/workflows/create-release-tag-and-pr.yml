@@ -61,7 +61,7 @@ jobs:
 
       - name: Generate CHANGELOG.md
         run: |
-          node ./scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }}
+          node ./scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }} -w true
 
       - name: Commit changelog
         run: |

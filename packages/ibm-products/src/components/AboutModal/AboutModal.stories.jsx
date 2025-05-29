@@ -26,7 +26,7 @@ const blockClass = `${pkg.prefix}--about-modal`;
 import DocsPage from './AboutModal.docs-page';
 
 export default {
-  title: 'Components/About modal/AboutModal',
+  title: 'Components/AboutModal',
   component: AboutModal,
   tags: ['autodocs'],
   parameters: {

@@ -14,7 +14,7 @@ import DocsPage from './ImportModal.docs-page';
 // import mdx from './ImportModal.mdx';
 
 export default {
-  title: 'Components/Patterns/Import and upload/ImportModal',
+  title: 'Components/Patterns/ImportModal',
   component: ImportModal,
   tags: ['autodocs'],
   parameters: {

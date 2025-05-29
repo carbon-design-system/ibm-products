@@ -73,7 +73,7 @@ const dateTimeLocaleOptions = {
 };
 
 export default {
-  title: 'Components/Notifications panel/NotificationsPanel',
+  title: 'Components/NotificationsPanel',
   component: NotificationsPanel,
   tags: ['autodocs'],
   parameters: {

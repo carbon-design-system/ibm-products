@@ -387,7 +387,7 @@ const renderUIShellHeader = () => (
 );
 
 export default {
-  title: 'Components/Side panel/SidePanel',
+  title: 'Components/SidePanel',
   component: SidePanel,
   tags: ['autodocs'],
   parameters: {

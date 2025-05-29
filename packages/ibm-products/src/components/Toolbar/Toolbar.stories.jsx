@@ -39,7 +39,7 @@ import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
 import mdx from './Toolbar.mdx';
 
 export default {
-  title: 'Experimental/Components/Toolbars/Toolbar',
+  title: 'Experimental/Components/Toolbar',
   component: Toolbar,
   tags: ['autodocs'],
   parameters: {

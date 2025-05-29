@@ -16,7 +16,7 @@ import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 // import styles from '../_index.scss';
 
 export default {
-  title: 'Components/Patterns/Empty state/NoDataEmptyState',
+  title: 'Components/Patterns/Empty states/NoDataEmptyState',
   component: NoDataEmptyState,
   tags: ['autodocs'],
   parameters: {

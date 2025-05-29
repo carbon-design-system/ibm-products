@@ -17,7 +17,7 @@ import InlineTipImage from './storybook_assets/inline-tip-image.png';
 import DocsPage from './InlineTip.docs-page';
 
 export default {
-  title: 'Experimental/Onboarding/Inline tip/InlineTip',
+  title: 'Experimental/Onboarding/InlineTip',
   component: InlineTip,
   tags: ['autodocs', 'Onboarding'],
   parameters: {

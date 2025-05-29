@@ -12,7 +12,7 @@ import { RemoveModal } from '.';
 import DocsPage from './RemoveModal.docs-page';
 
 export default {
-  title: 'Components/Patterns/Remove/RemoveModal',
+  title: 'Components/Patterns/RemoveModal',
   component: RemoveModal,
   tags: ['autodocs'],
   parameters: {

@@ -83,7 +83,7 @@ WithActions.args = {
 };
 
 export default {
-  title: 'Components/Patterns/Web terminal/WebTerminal',
+  title: 'Components/Patterns/WebTerminal',
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',

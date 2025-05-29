@@ -33,7 +33,7 @@ const tooltipAlignmentOptions = {
 };
 
 export default {
-  title: 'Components/Edit-in-place/EditInPlace',
+  title: 'Components/EditInPlace',
   component: EditInPlace,
   tags: ['autodocs'],
   argTypes: {

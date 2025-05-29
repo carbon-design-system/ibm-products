@@ -77,7 +77,7 @@ const renderUIShellHeader = () => (
 );
 
 export default {
-  title: 'Components/Patterns/Create flows/CreateSidePanel',
+  title: 'Patterns/Prebuilt patterns/Create flows/CreateSidePanel',
   component: CreateSidePanel,
   tags: ['autodocs'],
   parameters: {

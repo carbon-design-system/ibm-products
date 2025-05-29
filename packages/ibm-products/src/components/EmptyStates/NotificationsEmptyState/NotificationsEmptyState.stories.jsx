@@ -15,7 +15,7 @@ import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 // import styles from '../_index.scss';
 
 export default {
-  title: 'Components/Patterns/Empty states/NotificationsEmptyState',
+  title: 'Patterns/Prebuilt patterns/Empty states/NotificationsEmptyState',
   component: NotificationsEmptyState,
   tags: ['autodocs'],
   parameters: {

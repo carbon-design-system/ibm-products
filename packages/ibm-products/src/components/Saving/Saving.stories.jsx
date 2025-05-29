@@ -14,7 +14,7 @@ import { TextArea } from '@carbon/react';
 import mdx from './Saving.mdx';
 
 export default {
-  title: 'Components/Saving',
+  title: 'Patterns/Prebuilt patterns/Saving',
   component: Saving,
   tags: ['autodocs'],
   parameters: {

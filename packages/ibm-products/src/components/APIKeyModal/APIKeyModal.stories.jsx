@@ -24,7 +24,7 @@ import styles from './_storybook-styles.scss?inline'; // import index in case mo
 import mdx from './APIKeyModal.mdx';
 
 export default {
-  title: 'Components/APIKeyModal',
+  title: 'Patterns/Prebuilt patterns/Modals/APIKeyModal',
   component: APIKeyModal,
   tags: ['autodocs'],
   parameters: {

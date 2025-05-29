@@ -19,7 +19,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: 'Components/Patterns/UserProfileImage',
+  title: 'Patterns/Prebuilt patterns/UserProfileImage',
   component: UserProfileImage,
   tags: ['autodocs'],
   argTypes: {

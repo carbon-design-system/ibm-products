@@ -19,7 +19,7 @@ import { MultiStepWithStepInErrorState } from './preview-components/MultiStepWit
 import { StringFormatter } from '../StringFormatter/StringFormatter.js';
 
 export default {
-  title: 'Components/Patterns/Create flows/CreateTearsheet',
+  title: 'Patterns/Prebuilt patterns/Create flows/CreateTearsheet',
   component: CreateTearsheet,
   tags: ['autodocs'],
   argTypes: {

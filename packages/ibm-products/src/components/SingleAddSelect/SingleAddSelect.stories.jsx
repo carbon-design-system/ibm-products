@@ -13,7 +13,7 @@ import DocsPage from './SingleAddSelect.docs-page';
 // import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'Components/Patterns/Add and select/SingleAddSelect',
+  title: 'Patterns/Prebuilt patterns/Add and select/SingleAddSelect',
   component: SingleAddSelect,
   tags: ['autodocs'],
   parameters: {

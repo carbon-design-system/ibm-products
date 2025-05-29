@@ -128,16 +128,14 @@ export class CDSTruncatedText extends LitElement {
       return;
     }
     this._updateMaxHeight();
-    setTimeout(() => {
-      const { scrollHeight, clientHeight } = this._textElement;
-      const buffer = this._lineHeight / 2; // buffer of at least half of line height for a stable outcome
+    const { scrollHeight, clientHeight } = this._textElement;
+    const buffer = this._lineHeight / 2; // buffer of at least half of line height for a stable outcome
 
-      const isOverflowing = scrollHeight > clientHeight + buffer;
+    const isOverflowing = scrollHeight > clientHeight + buffer;
 
-      if (isOverflowing !== this._isOverflowing) {
-        this._isOverflowing = isOverflowing;
-      }
-    });
+    if (isOverflowing !== this._isOverflowing) {
+      this._isOverflowing = isOverflowing;
+    }
   }
 
   private _toggleExpansion() {

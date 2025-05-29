@@ -19,7 +19,7 @@ import mdx from './CoachmarkStack.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Experimental/Coachmark/CoachmarkStack',
+  title: 'Experimental/Onboarding/Coachmark/CoachmarkStack',
   component: CoachmarkStack,
   tags: ['autodocs', 'Onboarding'],
   // TODO: Define argTypes for props not represented by standard JS types.

@@ -23,7 +23,7 @@ import mdx from './CoachmarkOverlayElement.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Experimental/Coachmark/Coachmark elements/CoachmarkOverlayElement',
+  title: 'Experimental/Onboarding/Coachmark/CoachmarkOverlayElement',
   component: CoachmarkOverlayElement,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {

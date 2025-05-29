@@ -60,7 +60,7 @@ const taskLists = [
 ];
 
 export default {
-  title: 'Components/Checklist',
+  title: 'Components/Onboarding/Checklist',
   component: Checklist,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {

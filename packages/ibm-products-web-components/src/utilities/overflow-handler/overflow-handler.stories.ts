@@ -18,6 +18,7 @@ const argTypes = {
       disable: true,
     },
   },
+  onChange: { action: 'onChange' },
 };
 
 const makeItems = (n: number = 5) => {
@@ -29,7 +30,7 @@ const makeItems = (n: number = 5) => {
 };
 
 const renderTemplate = (args) => {
-  const { variant, dimension, maxVisibleItems } = args;
+  const { variant, dimension, maxVisibleItems, onChange } = args;
   let width = 1000;
   let handler;
 
@@ -48,7 +49,7 @@ const renderTemplate = (args) => {
       handler = createOverflowHandler({
         container: visibleContainer,
         onChange: (visible, hidden) => {
-          console.log(visible, hidden);
+          onChange({ visible, hidden });
         },
         dimension,
         maxVisibleItems,

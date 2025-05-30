@@ -206,7 +206,6 @@ const Template = (args, context) => {
         onClose={() => setOpen(false)}
         logo={logo}
         modalAriaLabel="About this product"
-        modalBodyAriaLabel="Product details"
         open={open}
       />
     </main>

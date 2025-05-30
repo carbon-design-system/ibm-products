@@ -78,11 +78,6 @@ export interface AboutModalProps {
   modalAriaLabel?: string;
 
   /**
-   * Specifies aria label for AboutModal body component
-   */
-  modalBodyAriaLabel?: string;
-
-  /**
    * Specifies an optional handler which is called when the AboutModal
    * is closed. Returning `false` prevents the AboutModal from closing.
    */
@@ -132,7 +127,6 @@ export let AboutModal = React.forwardRef(
       links,
       logo,
       modalAriaLabel,
-      modalBodyAriaLabel,
       onClose,
       open,
       portalTarget: portalTargetIn,
@@ -187,10 +181,7 @@ export let AboutModal = React.forwardRef(
             label={title}
             labelClassName={`${blockClass}__title`}
           />
-          <ModalBody
-            className={`${blockClass}__body`}
-            aria-label={modalBodyAriaLabel}
-          >
+          <ModalBody className={`${blockClass}__body`}>
             <div
               className={`${blockClass}__body-content`}
               ref={contentRef}
@@ -278,11 +269,6 @@ AboutModal.propTypes = {
    * Specifies aria label for AboutModal
    */
   modalAriaLabel: PropTypes.string,
-
-  /**
-   * Specifies aria label for AboutModal body component
-   */
-  modalBodyAriaLabel: PropTypes.string,
 
   /**
    * Specifies an optional handler which is called when the AboutModal

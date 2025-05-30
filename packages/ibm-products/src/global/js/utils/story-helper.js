@@ -108,16 +108,15 @@ export const storyDocsPageTitle = (csfFile) => {
 
 export const storyDocsPageInfo = (csfFile) => {
   const title = csfFile?.meta?.title;
-  const [pkg, kind, a, b, ...rest] = title.split('/');
+  const [category, a, b, ...rest] = title.split('/');
 
   let result = {
-    package: pkg,
-    kind,
+    category,
     expectCodedExample: false,
   };
   let component;
 
-  if (/components|patterns/i.test(kind)) {
+  if (/components|patterns/i.test(category)) {
     result.expectCodedExample = true;
     // Required until components within 'Patterns' category use the
     // new approach with setting story titles because they are nested an
@@ -130,7 +129,7 @@ export const storyDocsPageInfo = (csfFile) => {
 
     result.section = a;
 
-    result.guidelinesHref = `https://pages.github.ibm.com/carbon/ibm-products/${kind.toLowerCase()}/${changeCase.kebabCase(
+    result.guidelinesHref = `https://pages.github.ibm.com/carbon/ibm-products/${category.toLowerCase()}/${changeCase.kebabCase(
       result.section
     )}/usage`;
   } else {

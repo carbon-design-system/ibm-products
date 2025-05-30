@@ -158,18 +158,20 @@ const Template = (opts) => {
   } = opts;
 
   return (
-    <Grid>
-      <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ExpressiveCard
-          {...args}
-          decorator={
-            decorator && (decorator === 3 || sampleDecorator(decorator))
-          }
-        >
-          {children}
-        </ExpressiveCard>
-      </Column>
-    </Grid>
+    <main>
+      <Grid>
+        <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
+          <ExpressiveCard
+            {...args}
+            decorator={
+              decorator && (decorator === 3 || sampleDecorator(decorator))
+            }
+          >
+            {children}
+          </ExpressiveCard>
+        </Column>
+      </Grid>
+    </main>
   );
 };
 
@@ -184,19 +186,21 @@ const MediaTemplate = (opts) => {
     ...args
   } = opts;
   return (
-    <Grid>
-      <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ExpressiveCard
-          media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
-          decorator={
-            decorator && (decorator === 3 || sampleDecorator(decorator))
-          }
-          {...args}
-        >
-          {children}
-        </ExpressiveCard>
-      </Column>
-    </Grid>
+    <main>
+      <Grid>
+        <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
+          <ExpressiveCard
+            media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
+            decorator={
+              decorator && (decorator === 3 || sampleDecorator(decorator))
+            }
+            {...args}
+          >
+            {children}
+          </ExpressiveCard>
+        </Column>
+      </Grid>
+    </main>
   );
 };
 

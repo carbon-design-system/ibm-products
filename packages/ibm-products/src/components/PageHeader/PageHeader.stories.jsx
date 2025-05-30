@@ -649,23 +649,25 @@ const Template = ({
         tabIndex={0}
         navigation={navigation}
       >
-        <PageHeader
-          {...props}
-          {...getNavProps(navigation)}
-          title={
-            title?.onSave
-              ? {
-                  ...title,
-                  text: titleText,
-                  onChange: handleTitleChange,
-                  onSave: handleTitleSave,
-                  onCancel: handleTitleCancel,
-                }
-              : title
-          }
-        >
-          {children}
-        </PageHeader>
+        <main>
+          <PageHeader
+            {...props}
+            {...getNavProps(navigation)}
+            title={
+              title?.onSave
+                ? {
+                    ...title,
+                    text: titleText,
+                    onChange: handleTitleChange,
+                    onSave: handleTitleSave,
+                    onCancel: handleTitleCancel,
+                  }
+                : title
+            }
+          >
+            {children}
+          </PageHeader>
+        </main>
         <ChildrenMaybeTabPanels navigation={navigation}>
           {dummyPageContent}
         </ChildrenMaybeTabPanels>
@@ -862,12 +864,14 @@ const TemplateDemo = ({
           tabIndex={0}
           navigation={navigation}
         >
-          <PageHeader {...props} {...getNavProps(navigation)}>
-            {children}
-          </PageHeader>
-          <ChildrenMaybeTabPanels navigation={navigation}>
-            {demoDummyPageContent}
-          </ChildrenMaybeTabPanels>
+          <main>
+            <PageHeader {...props} {...getNavProps(navigation)}>
+              {children}
+            </PageHeader>
+            <ChildrenMaybeTabPanels navigation={navigation}>
+              {demoDummyPageContent}
+            </ChildrenMaybeTabPanels>
+          </main>
         </ContainerDivOrTabs>
       </div>
     </>

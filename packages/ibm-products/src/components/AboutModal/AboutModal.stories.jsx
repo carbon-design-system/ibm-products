@@ -193,7 +193,7 @@ const Template = (args, context) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
 
   return (
-    <>
+    <main>
       <Button onClick={() => setOpen(true)}>{'Open Modal'}</Button>
 
       <style>{`.${blockClass} { opacity: 0; }`};</style>
@@ -208,7 +208,7 @@ const Template = (args, context) => {
         modalAriaLabel="About this product"
         open={open}
       />
-    </>
+    </main>
   );
 };
 

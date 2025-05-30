@@ -979,4 +979,5 @@ WithoutTitle.args = {
   actions: 0,
   title: null,
   includeOverlay: true,
+  'aria-label': 'SidePanel without title',
 };

@@ -111,7 +111,7 @@ describe('c4p-options-tile', () => {
   it('fires open handler', async () => {
     const el: CDSOptionsTile = await fixture(template());
     const chevron = el.shadowRoot?.querySelector(
-      `.${blockClass}__chevron`
+      `.${blockClass}__toggle`
     ) as HTMLElement;
     const listener = oneEvent(el, 'c4p-options-tile-open');
     chevron?.click();
@@ -124,7 +124,7 @@ describe('c4p-options-tile', () => {
       template({ props: { open: true } })
     );
     const chevron = el.shadowRoot?.querySelector(
-      `.${blockClass}__chevron`
+      `.${blockClass}__toggle`
     ) as HTMLElement;
     const listener = oneEvent(el, 'c4p-options-tile-close');
     chevron?.click();

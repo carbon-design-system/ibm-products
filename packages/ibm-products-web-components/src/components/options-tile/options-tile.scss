@@ -42,14 +42,14 @@ $block-class: #{$prefix}--options-tile;
 
     &__title {
       @include type.type-style('heading-compact-01');
+
+      &-block {
+        margin-inline-start: $spacing-03;
+      }
     }
 
     &__summary {
       @include type.type-style('helper-text-01');
-    }
-
-    &__chevron {
-      margin-inline-end: $spacing-03;
     }
 
     &__body {

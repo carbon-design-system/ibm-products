@@ -53,6 +53,9 @@ const renderCoachmarkWithOverlayElements = (
   );
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('renders a component CoachmarkOverlayElements', async () => {
     const user = userEvent.setup();
     renderCoachmarkWithOverlayElements({ 'data-testid': dataTestId });

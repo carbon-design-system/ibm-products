@@ -267,6 +267,12 @@ const useWindowDimensions = () => {
   return windowDimensions;
 };
 
+/**@ts-ignore*/
+CoachmarkOverlay.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 CoachmarkOverlay = pkg.checkComponentEnabled(CoachmarkOverlay, componentName);
 

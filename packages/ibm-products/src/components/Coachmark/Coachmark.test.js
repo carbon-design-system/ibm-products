@@ -70,6 +70,9 @@ const isCoachmarkVisible = () => {
 };
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('renders a component Coachmark', () => {
     renderCoachmark({ 'data-testid': dataTestId });
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);

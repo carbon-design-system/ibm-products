@@ -61,7 +61,7 @@ export interface InterstitialScreenFooterProps {
 const InterstitialScreenFooter = React.forwardRef<
   HTMLDivElement,
   InterstitialScreenFooterProps
->((props) => {
+>((props, ref) => {
   const {
     className = '',
     skipButtonLabel = 'Skip',
@@ -128,7 +128,7 @@ const InterstitialScreenFooter = React.forwardRef<
   }, [loadingAction, isMultiStep, progStep, progStepCeil]);
 
   const getFooterContent = () => (
-    <div className={`${blockClass}--footer ${className}`}>
+    <div ref={ref} className={`${blockClass}--footer ${className}`}>
       {isMultiStep && skipButtonLabel !== '' && (
         <Button
           className={`${blockClass}--skip-btn`}
@@ -204,7 +204,7 @@ const InterstitialScreenFooter = React.forwardRef<
   return isFullScreen ? (
     getFooterContent()
   ) : (
-    <ModalFooter>{getFooterContent()}</ModalFooter>
+    <ModalFooter ref={ref}>{getFooterContent()}</ModalFooter>
   );
 });
 

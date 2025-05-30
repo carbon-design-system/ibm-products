@@ -46,7 +46,7 @@ export interface InterstitialScreenBodyProps {
 const InterstitialScreenBody = React.forwardRef<
   HTMLDivElement,
   InterstitialScreenBodyProps
->((props) => {
+>((props, ref) => {
   const { className = '', contentRenderer, ...rest } = props;
   const blockClass = `${pkg.prefix}--interstitial-screen`;
   const bodyBlockClass = `${blockClass}--internal-body`;
@@ -122,7 +122,7 @@ const InterstitialScreenBody = React.forwardRef<
   const renderBody = () => (
     <div
       className={`${blockClass}--body ${className}`}
-      ref={bodyScrollRef}
+      ref={bodyScrollRef ?? ref}
       {...rest}
     >
       <div className={`${blockClass}--content`}>
@@ -146,7 +146,9 @@ const InterstitialScreenBody = React.forwardRef<
   return isFullScreen ? (
     renderBody()
   ) : (
-    <ModalBody className={bodyBlockClass}>{renderBody()}</ModalBody>
+    <ModalBody ref={ref} className={bodyBlockClass}>
+      {renderBody()}
+    </ModalBody>
   );
 });
 

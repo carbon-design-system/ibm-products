@@ -41,10 +41,8 @@ $indicator-height: $spacing-04;
 }
 
 .sb-main-centered .#{$block-class}__message {
-  inset-inline-start: 50%;
-  min-inline-size: 100vh;
+  inline-size: inherit;
   text-align: center;
-  transform: translateX(-50%);
 }
 
 .#{$block-class}__indicator--left,

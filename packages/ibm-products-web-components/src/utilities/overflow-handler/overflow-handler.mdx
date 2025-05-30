@@ -5,8 +5,25 @@ import * as OverflowHandlerStories from './overflow-handler.stories';
 
 # overflowHandler
 
-overflowHandler is pretty cool utility to handle overflowing items
+overflowHandler is a utility for handling the truncation of a list of items.
 
 ## Getting started
 
 Here's a quick example to get you started.
+
+```js
+import { createOverflowHandler } from '@carbon/utilities';
+
+createOverflowHandler({
+  container, // The document node that holds the items. HTMLElement
+  maxVisibleItems, // Maximum number of visible items. If provided, only this number of items will be shown. number | undefined
+  onChange: (visibleItems: HTMLElement[], hiddenItems: HTMLElement[]) => void, // Callback function invoked when the visible and hidden items change.
+  dimension, // The dimension to consider for overflow calculations. "width" | "height" | undefined
+});
+```
+
+The only required argument necessary to consume this utility is `container`. Once the handler has been instantiated, an event handler is created that checks the width of the container when it's rendered or resized. By default, the handler will automatically hide items that are unable to fit.
+
+Using the `onChange` callback, you have access to an array holding the visible and hidden elements. This gives you the flexibility to access the hidden items and render them elsewhere, such as a modal or popover.
+
+For details on implementation, please refer to the example code.

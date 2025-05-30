@@ -15,7 +15,7 @@ import styles from '../_storybook-styles.scss?inline';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'Experimental/Internal/FilterPanelLabel',
+  title: 'Internal/FilterPanelLabel',
   component: FilterPanelLabel,
   tags: ['autodocs'],
   parameters: {

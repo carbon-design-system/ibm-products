@@ -22,7 +22,7 @@ const breadcrumbs = {
 };
 
 export default {
-  title: 'IBM Products/Internal/SimpleHeader',
+  title: 'Internal/SimpleHeader',
   component: SimpleHeader,
   tags: ['autodocs'],
   parameters: {

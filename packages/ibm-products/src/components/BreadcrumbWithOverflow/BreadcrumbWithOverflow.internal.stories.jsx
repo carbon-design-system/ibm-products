@@ -18,7 +18,7 @@ const lastBreadcrumbs = [
 ];
 
 export default {
-  title: 'IBM Products/Internal/BreadcrumbWithOverflow',
+  title: 'Internal/BreadcrumbWithOverflow',
   component: BreadcrumbWithOverflow,
   tags: ['autodocs'],
   argTypes: {

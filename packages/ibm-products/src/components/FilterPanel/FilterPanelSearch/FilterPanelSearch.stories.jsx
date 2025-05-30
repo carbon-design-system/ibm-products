@@ -17,7 +17,7 @@ import { Annotation } from '../../../../.storybook/Annotation';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'Deprecated/Filter Panel/FilterPanelSearch',
+  title: 'Deprecated/Filter panel/FilterPanelSearch',
   component: FilterPanelSearch,
   tags: ['autodocs'],
   parameters: {

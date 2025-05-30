@@ -15,9 +15,9 @@ import styles from './_storybook-styles.scss?inline';
 const storyClass = 'non-linear-reading-stories';
 
 export default {
-  title: 'Experimental/Onboarding/Non-linear reading/NonLinearReading',
+  title: 'Experimental/Onboarding/NonLinearReading',
   component: NonLinearReading,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     styles,
     layout: 'padded',

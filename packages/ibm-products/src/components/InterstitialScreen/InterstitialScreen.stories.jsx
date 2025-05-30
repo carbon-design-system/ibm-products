@@ -25,7 +25,7 @@ const blockClass = `${pkg.prefix}--interstitial-screen`;
 export default {
   title: 'Experimental/Onboarding/InterstitialScreen',
   component: InterstitialScreen,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   subcomponents: {
     Header: InterstitialScreen.Header,
     Body: InterstitialScreen.Body,

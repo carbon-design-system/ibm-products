@@ -12,7 +12,7 @@ import styles from './_storybook-styles.scss?inline';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 export default {
-  title: 'IBM Products/Internal/FilterSummary',
+  title: 'Internal/FilterSummary',
   component: FilterSummary,
   tags: ['autodocs'],
   parameters: {

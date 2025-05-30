@@ -5,7 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { PropsWithChildren, ReactNode, forwardRef } from 'react';
+import React, {
+  HTMLAttributes,
+  PropsWithChildren,
+  ReactNode,
+  forwardRef,
+} from 'react';
 import cx from 'classnames';
 import {
   Button,
@@ -27,6 +32,7 @@ interface Metadata {
   id?: string;
   icon?: () => ReactNode;
   iconDescription?: string;
+  [key: `data-${string}`]: string;
 }
 
 type LinkType = {

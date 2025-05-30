@@ -70,7 +70,7 @@ $one-grid-column: calc(100% / 16);
     .#{$block-class}--titleContainer {
       margin-block-end: $spacing-05;
 
-      h2 {
+      h1 {
         @include type.type-style('productive-heading-04');
 
         margin-block-end: $spacing-03;
@@ -80,7 +80,7 @@ $one-grid-column: calc(100% / 16);
         }
       }
 
-      h3 {
+      h2 {
         @include type.type-style('productive-heading-03');
 
         &:empty {

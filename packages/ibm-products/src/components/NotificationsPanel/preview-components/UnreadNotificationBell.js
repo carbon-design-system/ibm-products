@@ -16,6 +16,7 @@ const UnreadNotificationBell = () => {
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      className="sb-unread-notification-icon"
     >
       <title>Unread notification bell</title>
       <g id="Group" transform="translate(-1.000000, 0.000000)">

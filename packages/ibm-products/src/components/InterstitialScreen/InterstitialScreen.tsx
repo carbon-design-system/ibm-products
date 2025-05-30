@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ComposedModal } from '@carbon/react';
+import {
+  ComposedModal,
+  unstable_FeatureFlags as FeatureFlags,
+} from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
   ReactNode,
@@ -77,6 +80,11 @@ export interface InterstitialScreenProps {
    * Function to call when the close button is clicked.
    */
   onClose?: (value: ActionType) => void;
+
+  /**
+   * Provide a ref to return focus to once the interstitial is closed.
+   */
+  launcherButtonRef?: RefObject<HTMLElement>;
 }
 
 // Define the type for InterstitialScreen, extending it to include Header
@@ -128,6 +136,7 @@ export let InterstitialScreen = React.forwardRef<
     interstitialAriaLabel = 'Interstitial screen',
     isFullScreen = false,
     isOpen = false,
+    launcherButtonRef,
     onClose,
     ...rest
   } = props;
@@ -174,7 +183,12 @@ export let InterstitialScreen = React.forwardRef<
     // for modal only, "is-visible" triggers animation
     setIsVisibleClass(!isFullScreen && isOpen ? 'is-visible' : null);
     nextButtonRef?.current?.focus();
-  }, [isFullScreen, isOpen]);
+    if (!isOpen && launcherButtonRef) {
+      setTimeout(() => {
+        launcherButtonRef.current.focus();
+      }, 0);
+    }
+  }, [launcherButtonRef, isFullScreen, isOpen]);
 
   // hitting escape key also closes this component
   useEffect(() => {
@@ -194,22 +208,24 @@ export let InterstitialScreen = React.forwardRef<
 
   const renderModal = () => {
     return (
-      <ComposedModal
-        {...rest}
-        preventCloseOnClickOutside={true}
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className // Apply any supplied class names to the main HTML element.
-        )}
-        size="lg"
-        onClose={handleClose}
-        open={isOpen}
-        ref={_forwardedRef}
-        aria-label={interstitialAriaLabel}
-        {...getDevtoolsProps(componentName)}
-      >
-        {children}
-      </ComposedModal>
+      <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+        <ComposedModal
+          {...rest}
+          preventCloseOnClickOutside={true}
+          className={cx(
+            blockClass, // Apply the block class to the main HTML element
+            className // Apply any supplied class names to the main HTML element.
+          )}
+          size="lg"
+          onClose={handleClose}
+          open={isOpen}
+          ref={_forwardedRef}
+          aria-label={interstitialAriaLabel}
+          {...getDevtoolsProps(componentName)}
+        >
+          {children}
+        </ComposedModal>
+      </FeatureFlags>
     );
   };
 
@@ -308,6 +324,11 @@ InterstitialScreen.propTypes = {
    * Specifies whether the component is currently open.
    */
   isOpen: PropTypes.bool,
+
+  /**
+   * Provide a ref to return focus to once the interstitial is closed.
+   */
+  launcherButtonRef: PropTypes.any,
 
   /**
    * Function to call when the close button is clicked.

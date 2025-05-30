@@ -9,6 +9,7 @@ import React, {
   JSX,
   PropsWithChildren,
   ReactNode,
+  RefObject,
   useCallback,
   useEffect,
   useRef,
@@ -411,12 +412,15 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       setTimeout(() => launcherButton?.focus(), 0);
     };
 
-    useResizeObserver(sizingContainerRef, handleSizerTagsResize);
+    useResizeObserver(
+      sizingContainerRef as RefObject<HTMLDivElement>,
+      handleSizerTagsResize
+    );
 
     const resizeOption = containingElementRef
       ? containingElementRef
       : tagSetRef;
-    useResizeObserver(resizeOption, handleResize);
+    useResizeObserver(resizeOption as RefObject<HTMLElement>, handleResize);
 
     return (
       <div

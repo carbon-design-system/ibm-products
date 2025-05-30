@@ -54,7 +54,7 @@ export type EnrichedChildren = {
 const InterstitialScreenHeader = React.forwardRef<
   HTMLDivElement,
   InterstitialScreenHeaderProps
->((props) => {
+>((props, ref) => {
   const {
     className = '',
     headerTitle,
@@ -116,6 +116,7 @@ const InterstitialScreenHeader = React.forwardRef<
   };
   return isFullScreen ? (
     <header
+      ref={ref}
       className={cx(headerBlockClass, className, {
         [`${headerBlockClass}--has-title`]:
           headerTitle || headerSubTitle || children,
@@ -125,6 +126,7 @@ const InterstitialScreenHeader = React.forwardRef<
     </header>
   ) : (
     <ModalHeader
+      ref={ref}
       className={cx(headerBlockClass, className, {
         [`${headerBlockClass}--has-title`]:
           headerTitle || headerSubTitle || children,

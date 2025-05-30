@@ -46,10 +46,8 @@ interface EmptyStateProps {
    */
   title: string | ReactNode;
 }
-export const EmptyStateContent = React.forwardRef<
-  HTMLDivElement,
-  EmptyStateProps
->((props) => {
+
+export const EmptyStateContent = (props: EmptyStateProps) => {
   const { action, link, headingAs, size, subtitle, title } = props;
   const HeadingComponent = headingAs ?? Heading;
 
@@ -90,7 +88,7 @@ export const EmptyStateContent = React.forwardRef<
       )}
     </Section>
   );
-});
+};
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

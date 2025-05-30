@@ -24,13 +24,15 @@ LICENSE file in the root directory of this source tree.
     <c4p-options-tile
       id="my-tile"
       size="lg"
-      title="The title"
-      titleId="tile-title"
+      title="A title describing all included content."
+      titleId="my-title-title"
     >
       <div slot="summary">
-        <span>summary</span>
+        <span>A summary of the current state of content.</span>
       </div>
-      <div slot="body">body</div>
+      <div slot="body">
+        Additional detail or content will be shown when expanded.
+      </div>
     </c4p-options-tile>
     <script>
       document.addEventListener('DOMContentLoaded', () => {

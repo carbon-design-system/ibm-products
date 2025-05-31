@@ -16,8 +16,8 @@ import { dateTimeFormat } from '@carbon/utilities';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { consume } from '@lit/context';
 import { dateTimeLocaleContext } from './date-time-context';
-import styles from './notification-panel.scss?lit';
-import '@carbon/web-components/es/components/icon-button/index.js';
+import styles from './notification.scss?lit';
+import '@carbon/web-components/es/components/button/index.js';
 import Close16 from '@carbon/web-components/es/icons/close/16';
 import ErrorFilled16 from '@carbon/web-components/es/icons/error--filled/16';
 import CheckmarkFilled16 from '@carbon/web-components/es/icons/checkmark--filled/16';
@@ -87,15 +87,16 @@ class CDSNotification extends HostListenerMixin(LitElement) {
             <slot name="description"></slot>
           </div>
         </div>
-        <cds-icon-button
+        <cds-button
+          tooltip-text=""
           align="left"
           kind="ghost"
           size="sm"
           class="${blockClass}__dismiss-single-button"
           @click=${dismissSingleNotification}
         >
-          ${Close16({})}
-        </cds-icon-button>
+          ${Close16({ slot: 'icon' })}
+        </cds-button>
       </div>
     `;
   }

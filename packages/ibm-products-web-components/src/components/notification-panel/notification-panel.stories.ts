@@ -29,15 +29,84 @@ const blockClassNotificationPanel = `${prefix}--notifications-panel`;
 const blockClassNotification = `${prefix}--notifications-panel__notification`;
 const storyBlockClass = `${prefix}--notifications-panel__story`;
 
+const dateTimeLocaleOptions = {
+  undefined: undefined,
+  bg: 'bg',
+  cs: 'cs',
+  'da-DK': 'da-DK',
+  'de-CH': 'de-CH',
+  de: 'de',
+  'en-AU': 'en-AU',
+  'en-GB': 'en-GB',
+  'en-US': 'en-US',
+  'en-ZA': 'en-ZA',
+  'es-ES': 'es-ES',
+  es: 'es',
+  et: 'et',
+  fi: 'fi',
+  'fr-CA': 'fr-CA',
+  'fr-CH': 'fr-CH',
+  fr: 'fr',
+  hu: 'hu',
+  it: 'it',
+  ja: 'ja',
+  lv: 'lv',
+  'nl-BE': 'nl-BE',
+  'nl-NL': 'nl-NL',
+  no: 'no',
+  pl: 'pl',
+  'pt-BR': 'pt-BR',
+  'pt-PT': 'pt-PT',
+  'ru-UA': 'ru-UA',
+  ru: 'ru',
+  sk: 'sk',
+  sl: 'sl',
+  th: 'th',
+  tr: 'tr',
+  'uk-UA': 'uk-UA',
+  vi: 'vi',
+};
+
 export const defaultTemplate = {
   args: {
     titleText: 'Notifications',
     open: false,
+    todayText: 'Today',
+    previousText: 'Previous',
+    dismissAllLabel: 'Dismiss All',
+    doNotDisturbLabel: 'Do not disturb',
   },
   argTypes: {
     titleText: {
       control: 'text',
-      description: 'Title for the Notification panel',
+      description: 'Sets the Title for the Notification panel',
+    },
+    open: {
+      description:
+        'Determines whether the notifications panel should render or not',
+    },
+    todayText: {
+      control: 'text',
+      description: 'Sets the Today text for the Notification panel',
+    },
+    previousText: {
+      control: 'text',
+      description: 'Sets the Previous section title for the Notification panel',
+    },
+    dismissAllLabel: {
+      control: 'text',
+      description:
+        'Sets the label text for the "Dismiss all" button in the Notification panel',
+    },
+    doNotDisturbLabel: {
+      control: 'text',
+      description:
+        'Sets the label text for the "Do Not Disturb" toggle in the Notification panel',
+    },
+    dateTimeLocale: {
+      control: 'select',
+      description: "The language for each notification's time stamp",
+      options: dateTimeLocaleOptions,
     },
   },
   render: function Render(args) {
@@ -49,7 +118,6 @@ export const defaultTemplate = {
     const toggleButton = () => {
       setOpenPanel(!openPanel);
       setExpandPanel(false);
-      console.log(expandPanel, 'expandPanel');
     };
     const dismissAllNotification = () => {
       setDataToday([]);
@@ -135,11 +203,12 @@ export const defaultTemplate = {
       <c4p-notification-panel
         .triggerButtonRef=${triggerButton}
         .open="${openPanel}"
-        title-text="Notifications"
-        today-text="Today"
-        previous-text="Previous"
-        dismiss-all-label="Dismiss All"
-        donot-disturb-label="Do not disturb"
+        title-text="${args.titleText}"
+        today-text="${args.todayText}"
+        previous-text="${args.previousText}"
+        dismiss-all-label="${args.dismissAllLabel}"
+        donot-disturb-label="${args.doNotDisturbLabel}"
+        date-time-locale="${args.dateTimeLocale}"
         @c4p-notification-dismiss-all=${dismissAllNotification}
         @c4p-notification-donot-disturb-change=${() => {
           console.log('Do not disturb');
@@ -220,7 +289,7 @@ export const defaultTemplate = {
             class="${blockClassNotificationPanel}__view-all-button"
             @click=${action(`Clicked View All`)}
           >
-            View all(${dataPrevious.length + dataToday.length})
+            View all (${dataPrevious.length + dataToday.length})
           </cds-button>
           <cds-button
             kind="ghost"
@@ -228,7 +297,7 @@ export const defaultTemplate = {
             class="${blockClassNotificationPanel}__settings-button"
             @click=${action(`Clicked Settings`)}
           >
-            ${Settings16()}
+            ${Settings16({ slot: 'icon' })}
           </cds-button>
         </div>
       </c4p-notification-panel>

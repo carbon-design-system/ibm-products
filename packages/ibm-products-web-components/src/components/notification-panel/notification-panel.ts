@@ -121,6 +121,11 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     this.previousSlot?.addEventListener('slotchange', () =>
       this._handleSlotChange('previous')
     );
+    this._markFirstNotification();
+  }
+
+  updated() {
+    this._markFirstNotification(); // optional if re-renders can add more notifications
   }
 
   render() {
@@ -193,6 +198,12 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
         </div>
       </div>
     `;
+  }
+  private _markFirstNotification() {
+    const notifications = this.querySelectorAll(`${prefix}-notification`);
+    notifications.forEach((el, i) => {
+      el.classList.toggle('first-notification', i === 0);
+    });
   }
   private _handleSlotChange(slotName: 'today' | 'previous') {
     slotName === 'today'

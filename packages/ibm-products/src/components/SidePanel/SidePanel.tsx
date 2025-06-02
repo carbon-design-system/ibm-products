@@ -1017,6 +1017,7 @@ const SidePanelBase = React.forwardRef(
         >
           {!slideIn && enableResizer && window.innerWidth > 768 && (
             <Resizer
+              className={`${blockClass}__resizer`}
               orientation="vertical"
               aria-valuenow={sidePanelWidth.current}
               onResize={onResize}

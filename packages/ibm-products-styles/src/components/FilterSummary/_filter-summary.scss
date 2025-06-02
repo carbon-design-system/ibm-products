@@ -9,7 +9,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
-@use './animations' as *;
 
 $block-class: #{$pkg-prefix}--filter-summary;
 
@@ -30,10 +29,6 @@ $block-class: #{$pkg-prefix}--filter-summary;
   inline-size: 100%;
   &.#{$block-class}__expanded {
     block-size: fit-content;
-  }
-  .#{$pkg-prefix}--tag-set__tag-container {
-    animation: filter-summary-enter $duration-moderate-01
-      motion(entrance, productive) forwards;
   }
 }
 

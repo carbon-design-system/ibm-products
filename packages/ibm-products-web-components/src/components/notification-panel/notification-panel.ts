@@ -33,8 +33,9 @@ const blockClass = `${prefix}--notifications-panel`;
  *
  * @element c4p-notification-panel
  * @csspart dialog The dialog.
- * @fires c4p-notification-dismiss-all - The custom event fired after this notification-panel is closed upon a user gesture.
- * @fires c4p-notification-donot-disturb-change - The custom event fired after this notification-panel is closed upon a user gesture.
+ * @fires c4p-notification-panel-beingclosed - The custom event before notification-panel is closed.
+ * @fires c4p-notification-dismiss-all - The custom event fired after notification-panel is closed upon a user gesture.
+ * @fires c4p-notification-donot-disturb-change - The custom event fired after notification-panel is closed upon a user gesture.
  * @fires c4p-notification-click-outside - The custom event fired after user clicks outside the panel or Esc key is pressed.
  */
 @customElement(`${prefix}-notification-panel`)
@@ -303,7 +304,6 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     if (this.open && this.triggerButtonRef?.contains(target)) {
       return;
     }
-    this.open = false;
     const init = {
       bubbles: true,
       cancelable: true,
@@ -312,14 +312,23 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
         triggeredBy: target,
       },
     };
-
-    this.dispatchEvent(
-      new CustomEvent(
-        (this.constructor as typeof CDSNotificationPanel).eventClickOutside,
-        init
+    if (
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSNotificationPanel).eventBeforeClose,
+          init
+        )
       )
-    );
-    this.triggerButtonRef?.focus();
+    ) {
+      this.open = false;
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSNotificationPanel).eventClickOutside,
+          init
+        )
+      );
+      this.triggerButtonRef?.focus();
+    }
   };
 
   /**

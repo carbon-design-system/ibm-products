@@ -21,8 +21,104 @@ import '@carbon/ibm-products-web-components/es/components/notification-panel/ind
 ### HTML
 
 ```html
-<c4p-notification-panel>
-</c4p-notification-panel>
+<c4p-notification-panel
+        .triggerButtonRef=${triggerButton}
+        .open="${openPanel}"
+        title-text="${args.titleText}"
+        today-text="${args.todayText}"
+        previous-text="${args.previousText}"
+        dismiss-all-label="${args.dismissAllLabel}"
+        donot-disturb-label="${args.doNotDisturbLabel}"
+        date-time-locale="${args.dateTimeLocale}"
+        @c4p-notification-dismiss-all=${dismissAllNotification}
+        @c4p-notification-click-outside=${clickOutside}
+      >
+        ${dataToday.length > 0
+          ? html`
+              <div slot="today">
+                ${dataToday.map((item) => {
+                  return html`
+                    <c4p-notification
+                      .open=${args.open}
+                      @c4p-notification-click=${item.onNotificationClick}
+                      @c4p-notification-dismiss=${() => {
+                        notificationSingleDismiss(item.id, 'today');
+                      }}
+                      type=${item.type}
+                      unread=${item.unread}
+                      .timestamp=${item.timestamp}
+                    >
+                      <cds-heading
+                        class=${classMap({
+                          [`${blockClassNotification}__notification-title`]:
+                            true,
+                          [`${blockClassNotification}__notification-title-unread`]:
+                            item.unread,
+                        })}
+                        slot="title"
+                      >
+                        ${item.title}
+                      </cds-heading>
+                      <div slot="description">${item.description}</div>
+                    </c4p-notification>
+                  `;
+                })}
+              </div>
+            `
+          : ''}
+        ${dataPrevious.length > 0
+          ? html`
+              <div slot="previous">
+                ${dataPrevious.map((item) => {
+                  return html`
+                    <c4p-notification
+                      @c4p-notification-click=${item.onNotificationClick}
+                      @c4p-notification-dismiss=${() => {
+                        notificationSingleDismiss(item.id, 'previous');
+                      }}
+                      type=${item.type}
+                      unread=${item.unread}
+                      .timestamp=${item.timestamp}
+                    >
+                      <cds-heading
+                        class=${classMap({
+                          [`${blockClassNotification}__notification-title`]:
+                            true,
+                          [`${blockClassNotification}__notification-title-unread`]:
+                            item.unread,
+                        })}
+                        slot="title"
+                      >
+                        ${item.title}
+                      </cds-heading>
+                      <div slot="description">${item.description}</div>
+                    </c4p-notification>
+                  `;
+                })}
+              </div>
+            `
+          : ''}
+        <div
+          slot="footer"
+          class="${blockClassNotificationPanel}__bottom-actions"
+        >
+          <cds-button
+            kind="ghost"
+            class="${blockClassNotificationPanel}__view-all-button"
+            @click=${action(`Clicked View All`)}
+          >
+            View all (${dataPrevious.length + dataToday.length})
+          </cds-button>
+          <cds-button
+            kind="ghost"
+            size="sm"
+            class="${blockClassNotificationPanel}__settings-button"
+            @click=${action(`Clicked Settings`)}
+          >
+            ${Settings16({ slot: 'icon' })}
+          </cds-button>
+        </div>
+      </c4p-notification-panel>
 ```
 
 ## `<c4p-notification-panel>` attributes, properties and events

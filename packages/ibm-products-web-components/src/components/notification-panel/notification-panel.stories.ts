@@ -204,9 +204,6 @@ export const defaultTemplate = {
         donot-disturb-label="${args.doNotDisturbLabel}"
         date-time-locale="${args.dateTimeLocale}"
         @c4p-notification-dismiss-all=${dismissAllNotification}
-        @c4p-notification-donot-disturb-change=${() => {
-          console.log('Do not disturb');
-        }}
         @c4p-notification-click-outside=${clickOutside}
       >
         ${dataToday.length > 0

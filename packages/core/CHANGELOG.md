@@ -1,3 +1,7 @@
+## `@carbon/ibm-cloud-cognitive-core@2.44.0-rc.0`
+### Housekeeping :house:
+- chore: added links to welcome page (#7485)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.

@@ -143,10 +143,8 @@ export const Resizer = ({
       if (nextSibling) {
         nextSibling.style.transition = '';
       }
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
     },
-    [onResizeEnd, handleMouseMove]
+    [onResizeEnd]
   );
 
   // Effect to add/remove mousemove and mouseup listeners during resizing

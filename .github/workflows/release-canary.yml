@@ -48,7 +48,6 @@ jobs:
       # Publish release with canary tag to NPM using Lerna
       - name: Publish canary release of packages
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
-          NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: false
         run: |
           yarn lerna publish --canary --preid canary --dist-tag canary --yes

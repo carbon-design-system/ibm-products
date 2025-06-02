@@ -110,11 +110,11 @@ describe('c4p-options-tile', () => {
 
   it('fires open handler', async () => {
     const el: CDSOptionsTile = await fixture(template());
-    const chevron = el.shadowRoot?.querySelector(
-      `.${blockClass}__toggle`
+    const header = el.shadowRoot?.querySelector(
+      `.${blockClass}__header`
     ) as HTMLElement;
     const listener = oneEvent(el, 'c4p-options-tile-open');
-    chevron?.click();
+    header?.click();
     const { detail } = await listener;
     expect(detail).toBeTruthy();
   });
@@ -123,11 +123,11 @@ describe('c4p-options-tile', () => {
     const el: CDSOptionsTile = await fixture(
       template({ props: { open: true } })
     );
-    const chevron = el.shadowRoot?.querySelector(
-      `.${blockClass}__toggle`
+    const header = el.shadowRoot?.querySelector(
+      `.${blockClass}__header`
     ) as HTMLElement;
     const listener = oneEvent(el, 'c4p-options-tile-close');
-    chevron?.click();
+    header?.click();
     const { detail } = await listener;
     expect(detail).toBeTruthy();
   });

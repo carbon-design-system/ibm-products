@@ -55,12 +55,6 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   @property({ type: String, reflect: true })
   titleText: string = '';
 
-  /**
-   * Text for the chevron toggle button
-   */
-  @property({ type: String, reflect: true })
-  toggleText: string = '';
-
   static get eventOpen() {
     return `${blockEvent}-open`;
   }
@@ -105,18 +99,8 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
     );
   }
 
-  getBody() {
-    const { open } = this;
-    if (open) {
-      return html` <div class="${blockClass}__body">
-        <div class="${blockClass}__body-content"><slot name="body"></slot></div>
-      </div>`;
-    }
-    return nothing;
-  }
-
   render() {
-    const { open, size, titleId, titleText, toggleText } = this;
+    const { open, size, titleId, titleText } = this;
     const classes = classMap({
       [`${blockClass}`]: true,
       [`${blockClass}--xl`]: size === 'xl',
@@ -124,22 +108,18 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
     });
 
     return html`
-      <div part="options-tile" class="${classes}">
-        <div class="${blockClass}__header">
+      <details
+        @toggle=${this._toggle}
+        class="${classes}"
+        part="options-tile"
+        open=${open || nothing}
+      >
+        <summary class="${blockClass}__header">
           <div class="${blockClass}__header-left">
-            <cds-button
-              tooltip-text="${toggleText}"
-              kind="ghost"
-              tooltip-position="top"
-              size="sm"
-              @click=${this._toggle}
-              class="${blockClass}__toggle"
-            >
-              ${ChevronDown20({
-                slot: 'icon',
-                class: `${blockClass}__chevron`,
-              })}
-            </cds-button>
+            ${ChevronDown20({
+              slot: 'icon',
+              class: `${blockClass}__chevron`,
+            })}
             <div class="${blockClass}__title-block">
               <p class="${blockClass}__title" id="${titleId}">${titleText}</p>
               <div class="${blockClass}__summary">
@@ -150,9 +130,11 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
           <div class="${blockClass}__header-right">
             <slot name="toggle"></slot>
           </div>
+        </summary>
+        <div class="${blockClass}__body">
+          <slot name="body"></slot>
         </div>
-        ${this.getBody()}
-      </div>
+      </details>
     `;
   }
 

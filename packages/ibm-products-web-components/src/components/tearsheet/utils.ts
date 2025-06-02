@@ -13,6 +13,8 @@ import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/textarea/index.js';
 import '@carbon/web-components/es/components/tabs/index.js';
 import '@carbon/web-components/es/components/slug/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
+import '@carbon/web-components/es/components/toggle-tip/index.js';
 import '@carbon/web-components/es/components/dropdown/index.js';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
 import '@carbon/web-components/es/components/progress-bar/index.js';
@@ -295,3 +297,40 @@ export const getSlug = (index) => {
       return null;
   }
 };
+// cspell: disable
+export const getDecorator = (decorator) => {
+  switch (decorator) {
+    case 1:
+      return html`
+        <cds-ai-label alignment="bottom-right" slot="decorator">
+          <div slot="body-text">
+            <p class="secondary">AI Explained</p>
+            <h2 class="ai-label-heading">84%</h2>
+            <p class="secondary bold">Confidence score</p>
+            <p class="secondary">
+              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+              do eiusmod tempor incididunt ut fsil labore et dolore magna
+              aliqua.
+            </p>
+            <hr />
+            <p class="secondary">Model type</p>
+            <p class="bold">Foundation model</p>
+          </div>
+        </cds-ai-label>
+      `;
+    case 2:
+      return html`
+        <cds-toggletip slot="decorator" alignment="bottom">
+          <p slot="body-text">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <cds-link slot="actions">Test</cds-link>
+          <cds-button slot="actions">Button</cds-button>
+        </cds-toggletip>
+      `;
+    default:
+      return;
+  }
+};
+// cspell: enable

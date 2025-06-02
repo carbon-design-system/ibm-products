@@ -613,7 +613,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
             <div class=${`${blockClass}__right`}>
               <div class=${`${blockClass}__main`}>
                 <div class=${`${blockClass}__content`}>
-                  <cds-layer level="0">
+                  <cds-layer level="1">
                     <slot></slot>
                   </cds-layer>
                 </div>

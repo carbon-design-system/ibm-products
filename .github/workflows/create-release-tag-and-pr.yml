@@ -65,7 +65,7 @@ jobs:
 
       - name: Commit changelog
         run: |
-          git add CHANGELOG.md
+          git add .
           git commit -m "docs(changelog): update for ${{ github.event.inputs.tag }}" || echo "No changes to commit"
 
           git push origin chore/${{ github.event.inputs.tag }}-release

@@ -140,13 +140,7 @@ export const defaultTemplate = {
       }
     };
     const clickOutside = (event) => {
-      if (
-        event.detail.triggeredBy !== triggerButton &&
-        !triggerButton?.contains(event.detail.triggeredBy) &&
-        openPanel
-      ) {
-        setOpenPanel(false);
-      }
+      setOpenPanel(false);
     };
     return html`
       <style>

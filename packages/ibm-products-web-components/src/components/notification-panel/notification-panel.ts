@@ -257,6 +257,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = ({ key, target }: KeyboardEvent) => {
     if (key === 'Escape') {
+      this.open = false;
       const init = {
         bubbles: true,
         cancelable: true,
@@ -296,10 +297,13 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     const isActionable = actionableSelectors.some(
       (selector) => target instanceof Element && target.closest(selector)
     );
-
     if (isActionable) {
       return;
     }
+    if (this.open && this.triggerButtonRef?.contains(target)) {
+      return;
+    }
+    this.open = false;
     const init = {
       bubbles: true,
       cancelable: true,

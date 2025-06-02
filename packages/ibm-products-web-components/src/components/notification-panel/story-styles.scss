@@ -6,6 +6,9 @@
 */
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
 $story-prefix: 'notification-panel-stories__';
@@ -90,4 +93,38 @@ $block-class: #{$prefix}--notifications-panel;
 }
 .#{$block-class}__settings-button .#{$carbon-prefix}--btn__icon {
   margin: 0;
+}
+.#{$block-class}__notification-description {
+  @include type.type-style('label-01');
+
+  color: $text-secondary;
+}
+
+.#{$block-class}__notification-read-more-button,
+.#{$block-class}__notification-read-less-button {
+  @include type.type-style('label-01');
+
+  display: flex;
+  align-items: center;
+  padding: 0;
+  min-inline-size: 5.5rem;
+
+  .#{carbon-prefix}--btn__icon {
+    // stylelint-disable-next-line carbon/motion-easing-use
+    transition: transform $duration-moderate-02 ease;
+    /* stylelint-disable-next-line max-nesting-depth */
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+  &.#{$block-class}__notification-read-more-button {
+    .#{$carbon-prefix}--btn__icon {
+      transform: rotate(0deg);
+    }
+  }
+  &.#{$block-class}__notification-read-less-button {
+    .#{$carbon-prefix}--btn__icon {
+      transform: rotate(180deg);
+    }
+  }
 }

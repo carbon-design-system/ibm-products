@@ -72,6 +72,8 @@ interface HeaderBreadcrumb {
   isCurrentPage?: boolean;
 }
 
+type MaybePromise<T> = Promise<T> | T;
+
 type CreateFullPageBreadcrumbsProps =
   | {
       /** The header breadcrumbs */
@@ -181,7 +183,7 @@ type CreateFullPageBaseProps = {
    *
    * @returns Object - if you want to prevent the modal from closing, return an object with the property preventClose set to true
    */
-  onRequestSubmit: () => { preventClose?: boolean } | void;
+  onRequestSubmit: () => MaybePromise<{ preventClose?: boolean } | void>;
 
   /**
    * A secondary title of the full page, displayed in the influencer area

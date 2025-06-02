@@ -81,7 +81,6 @@
     "@stackblitz/sdk": "^1.11.0",
     "@testing-library/dom": "^8.11.4",
     "@testing-library/react": "^14.0.0",
-    "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
     "@types/carbon__layout": "^0.0.3",
     "@typescript-eslint/eslint-plugin": "^8.26.1",

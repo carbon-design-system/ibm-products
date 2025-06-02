@@ -14,6 +14,25 @@ const DocsPage = () => (
   <StoryDocsPage
     blocks={[
       {
+        title: 'Feature flags',
+        description:
+          'The SidePanel supports resizable feature through feature flag. The feature can be enabled by wrapping the component with `FeatureFlags` component and passing the `enableSidepanelResizer` flag as a prop. the feature can be seen in action in the stories by enabling the `enableSidepanelResizer` flag in the controls panel.',
+        source: {
+          language: 'jsx',
+          code: `
+import { unstable_FeatureFlags as FeatureFlags } from '@carbon/ibm-products';
+...
+<FeatureFlags enableSidepanelResizer>
+  <SidePanel
+    {...args}
+  >
+    ...
+  </SidePanel>
+</FeatureFlags>
+                `,
+        },
+      },
+      {
         story: stories.SlideOver,
       },
       {

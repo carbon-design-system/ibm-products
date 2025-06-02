@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { FeatureFlags as FeatureFlagScope } from '@carbon/feature-flags';
 import LinkTo from '@storybook/addon-links/react';
 
 import { FeatureFlags } from '../../../ibm-products/src/components/FeatureFlags';

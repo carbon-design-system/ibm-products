@@ -7,7 +7,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import cx from 'classnames';
 import debounce from 'lodash.debounce';
 const DEBOUNCE_DELAY = 100;
@@ -37,17 +37,22 @@ export const Resizer = ({
   const blockClass = `${prefix}--resizer`;
 
   const ref = useRef<HTMLDivElement>(null);
-  const isResizing = useRef(false);
+  const [isResizing, setIsResizing] = useState(false);
   const startPos = useRef({ x: 0, y: 0 });
-  const currentSizes = useRef({
-    prev: { width: 0, height: 0 },
-    next: { width: 0, height: 0 },
+  // Sizes of the previous and next siblings, gets modified during resizing
+  const sizes = useRef({
+    prevSiblingSize: { width: 0, height: 0 },
+    nextSiblingSize: { width: 0, height: 0 },
   });
+  // Initial sizes of the previous and next siblings, a static reference
   const initialSizes = useRef({
-    prev: { width: 0, height: 0 },
-    next: { width: 0, height: 0 },
+    prevSiblingSize: { width: 0, height: 0 },
+    nextSiblingSize: { width: 0, height: 0 },
   });
 
+  // Debounced function to handle resize end events
+  // This is used to prevent multiple calls during a resize operation especially from keyboard when the key is held down
+  // It will only call the onResizeEnd after the user has stopped resizing
   const debouncedResizeEnd = useRef(
     debounce((event) => {
       if (ref.current && onResizeEnd) {
@@ -58,196 +63,221 @@ export const Resizer = ({
     }, DEBOUNCE_DELAY)
   );
 
+  // Initialize sizes of the previous and next siblings
   useEffect(() => {
     if (!ref.current) {
       return;
     }
 
-    const prev = ref.current.previousElementSibling as HTMLElement;
-    const next = ref.current.nextElementSibling as HTMLElement;
+    const prevSibling = ref.current.previousElementSibling as HTMLElement;
+    const nextSibling = ref.current.nextElementSibling as HTMLElement;
     const rect = (el: Element) => el?.getBoundingClientRect();
 
     initialSizes.current = {
-      prev: prev
-        ? { width: rect(prev).width, height: rect(prev).height }
+      prevSiblingSize: prevSibling
+        ? { width: rect(prevSibling).width, height: rect(prevSibling).height }
         : { width: 0, height: 0 },
-      next: next
-        ? { width: rect(next).width, height: rect(next).height }
+      nextSiblingSize: nextSibling
+        ? { width: rect(nextSibling).width, height: rect(nextSibling).height }
         : { width: 0, height: 0 },
     };
   }, []);
 
-  const updateSizes = (event, delta: number) => {
-    if (!ref.current) {
+  const updateSizes = useCallback(
+    (event, delta: number) => {
+      if (!ref.current) {
+        return;
+      }
+
+      if (onResize) {
+        onResize(event, delta);
+        return;
+      }
+
+      const prevSibling = ref.current.previousElementSibling as HTMLElement;
+      const nextSibling = ref.current.nextElementSibling as HTMLElement;
+      const prop = orientation === 'horizontal' ? 'height' : 'width';
+
+      if (prevSibling) {
+        const newSize = sizes.current.prevSiblingSize[prop] + delta;
+        prevSibling.style[prop] = `${newSize}px`;
+      }
+      if (nextSibling) {
+        const newSize = sizes.current.nextSiblingSize[prop] - delta;
+        nextSibling.style[prop] = `${newSize}px`;
+      }
+    },
+    [onResize, orientation]
+  );
+
+  const handleMouseMove = useCallback(
+    (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const delta =
+        orientation === 'horizontal'
+          ? event.clientY - startPos.current.y
+          : event.clientX - startPos.current.x;
+      updateSizes(event, delta);
+    },
+    [orientation, updateSizes]
+  );
+
+  const handleMouseUp = useCallback(
+    (event) => {
+      if (!ref.current) {
+        return;
+      }
+      setIsResizing(false);
+      if (onResizeEnd) {
+        if (ref.current) {
+          onResizeEnd(event, ref as React.RefObject<HTMLDivElement>);
+        }
+      }
+      const prevSibling = ref.current.previousElementSibling as HTMLElement;
+      const nextSibling = ref.current.nextElementSibling as HTMLElement;
+      if (prevSibling) {
+        prevSibling.style.transition = '';
+      }
+      if (nextSibling) {
+        nextSibling.style.transition = '';
+      }
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    },
+    [onResizeEnd, handleMouseMove]
+  );
+
+  // Effect to add/remove mousemove and mouseup listeners during resizing
+  useEffect(() => {
+    if (!isResizing) {
       return;
     }
-
-    if (onResize) {
-      onResize(event, delta);
-      return;
-    }
-
-    const prev = ref.current.previousElementSibling as HTMLElement;
-    const next = ref.current.nextElementSibling as HTMLElement;
-    const prop = orientation === 'horizontal' ? 'height' : 'width';
-
-    if (prev) {
-      const newSize = currentSizes.current.prev[prop] + delta;
-      prev.style[prop] = `${newSize}px`;
-    }
-    if (next) {
-      const newSize = currentSizes.current.next[prop] - delta;
-      next.style[prop] = `${newSize}px`;
-    }
-  };
-
-  const handleMouseMove = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    if (!isResizing.current) {
-      return;
-    }
-
-    const delta =
-      orientation === 'horizontal'
-        ? event.clientY - startPos.current.y
-        : event.clientX - startPos.current.x;
-    updateSizes(event, delta);
-  };
-
-  const handleMouseDown = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    if (!ref.current) {
-      return;
-    }
-
-    const prev = ref.current.previousElementSibling as HTMLElement;
-    const next = ref.current.nextElementSibling as HTMLElement;
-    const rect = (el: Element) => el?.getBoundingClientRect();
-    prev && (prev.style.transition = 'none');
-    next && (next.style.transition = 'none');
-
-    isResizing.current = true;
-    startPos.current = { x: event.clientX, y: event.clientY };
-    currentSizes.current = {
-      prev: prev
-        ? { width: rect(prev).width, height: rect(prev).height }
-        : { width: 0, height: 0 },
-      next: next
-        ? { width: rect(next).width, height: rect(next).height }
-        : { width: 0, height: 0 },
-    };
-
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
-  };
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isResizing, handleMouseMove, handleMouseUp]);
 
-  const handleMouseUp = (event) => {
-    if (!ref.current) {
-      return;
-    }
-    isResizing.current = false;
-    if (onResizeEnd) {
-      if (ref.current) {
-        onResizeEnd(event, ref as React.RefObject<HTMLDivElement>);
-      }
-    }
-    const prev = ref.current.previousElementSibling as HTMLElement;
-    const next = ref.current.nextElementSibling as HTMLElement;
-    if (prev) {
-      prev.style.transition = '';
-    }
-    if (next) {
-      next.style.transition = '';
-    }
-    window.removeEventListener('mousemove', handleMouseMove);
-    window.removeEventListener('mouseup', handleMouseUp);
-  };
-
-  const handleKeyDown = (event) => {
-    const navigationKeys = [
-      'ArrowUp',
-      'ArrowDown',
-      'ArrowLeft',
-      'ArrowRight',
-      'Home',
-      'End',
-    ];
-
-    if (![...navigationKeys, 'PageUp', 'PageDown'].includes(event.key)) {
-      return;
-    }
-    if (!ref.current) {
-      return;
-    }
-
+  const handleMouseDown = useCallback((event) => {
     event.preventDefault();
     event.stopPropagation();
-
-    const prev = ref.current.previousElementSibling as HTMLElement;
-    const next = ref.current.nextElementSibling as HTMLElement;
-
-    const getSize = (el: Element | null) => {
-      const rect = el?.getBoundingClientRect();
-      return {
-        width: rect?.width || 0,
-        height: rect?.height || 0,
-      };
-    };
-
-    currentSizes.current = {
-      prev: getSize(prev),
-      next: getSize(next),
-    };
-
-    const step = event.shiftKey ? 25 : 5;
-    let delta = 0;
-
-    const isHorizontal = orientation === 'horizontal';
-
-    const keyMap: Record<string, () => void> = {
-      ArrowUp: () => (isHorizontal ? (delta = -step) : null),
-      ArrowDown: () => (isHorizontal ? (delta = step) : null),
-      ArrowLeft: () => (!isHorizontal ? (delta = -step) : null),
-      ArrowRight: () => (!isHorizontal ? (delta = step) : null),
-      Home: () =>
-        (delta = isHorizontal
-          ? -currentSizes.current.prev.height
-          : -currentSizes.current.prev.width),
-      End: () =>
-        (delta = isHorizontal
-          ? currentSizes.current.next.height
-          : currentSizes.current.next.width),
-    };
-
-    keyMap[event.key]?.();
-
-    updateSizes(event, delta);
-    debouncedResizeEnd?.current(event);
-  };
-
-  const handleDoubleClick = (event) => {
-    event.preventDefault();
     if (!ref.current) {
       return;
     }
 
-    const prev = ref.current.previousElementSibling as HTMLElement;
-    const next = ref.current.nextElementSibling as HTMLElement;
+    const prevSibling = ref.current.previousElementSibling as HTMLElement;
+    const nextSibling = ref.current.nextElementSibling as HTMLElement;
+    const rect = (el: Element) => el?.getBoundingClientRect();
+    prevSibling && (prevSibling.style.transition = 'none');
+    nextSibling && (nextSibling.style.transition = 'none');
 
-    if (onDoubleClick) {
-      onDoubleClick(event);
-    } else {
-      const prop = orientation === 'horizontal' ? 'height' : 'width';
-      if (prev) {
-        prev.style[prop] = `${initialSizes.current.prev[prop]}px`;
+    setIsResizing(true);
+    startPos.current = { x: event.clientX, y: event.clientY };
+    sizes.current = {
+      prevSiblingSize: prevSibling
+        ? { width: rect(prevSibling).width, height: rect(prevSibling).height }
+        : { width: 0, height: 0 },
+      nextSiblingSize: nextSibling
+        ? { width: rect(nextSibling).width, height: rect(nextSibling).height }
+        : { width: 0, height: 0 },
+    };
+  }, []);
+
+  const handleKeyDown = useCallback(
+    (event) => {
+      const navigationKeys = [
+        'ArrowUp',
+        'ArrowDown',
+        'ArrowLeft',
+        'ArrowRight',
+        'Home',
+        'End',
+      ];
+
+      if (![...navigationKeys, 'PageUp', 'PageDown'].includes(event.key)) {
+        return;
       }
-      if (next) {
-        next.style[prop] = `${initialSizes.current.next[prop]}px`;
+      if (!ref.current) {
+        return;
       }
-    }
-  };
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      const prevSibling = ref.current.previousElementSibling as HTMLElement;
+      const nextSibling = ref.current.nextElementSibling as HTMLElement;
+
+      const getSize = (el: Element | null) => {
+        const rect = el?.getBoundingClientRect();
+        return {
+          width: rect?.width || 0,
+          height: rect?.height || 0,
+        };
+      };
+
+      sizes.current = {
+        prevSiblingSize: getSize(prevSibling),
+        nextSiblingSize: getSize(nextSibling),
+      };
+
+      const step = event.shiftKey ? 25 : 5;
+      let delta = 0;
+
+      const isHorizontal = orientation === 'horizontal';
+
+      const keyMap: Record<string, () => void> = {
+        ArrowUp: () => (isHorizontal ? (delta = -step) : null),
+        ArrowDown: () => (isHorizontal ? (delta = step) : null),
+        ArrowLeft: () => (!isHorizontal ? (delta = -step) : null),
+        ArrowRight: () => (!isHorizontal ? (delta = step) : null),
+        Home: () =>
+          (delta = isHorizontal
+            ? -sizes.current.prevSiblingSize.height
+            : -sizes.current.prevSiblingSize.width),
+        End: () =>
+          (delta = isHorizontal
+            ? sizes.current.nextSiblingSize.height
+            : sizes.current.nextSiblingSize.width),
+      };
+
+      keyMap[event.key]?.();
+
+      updateSizes(event, delta);
+      debouncedResizeEnd?.current(event);
+    },
+    [orientation, updateSizes, debouncedResizeEnd]
+  );
+
+  const handleDoubleClick = useCallback(
+    (event) => {
+      event.preventDefault();
+      if (!ref.current) {
+        return;
+      }
+
+      const prevSibling = ref.current.previousElementSibling as HTMLElement;
+      const nextSibling = ref.current.nextElementSibling as HTMLElement;
+
+      if (onDoubleClick) {
+        onDoubleClick(event);
+      } else {
+        const prop = orientation === 'horizontal' ? 'height' : 'width';
+        if (prevSibling) {
+          prevSibling.style[prop] =
+            `${initialSizes.current.prevSiblingSize[prop]}px`;
+        }
+        if (nextSibling) {
+          nextSibling.style[prop] =
+            `${initialSizes.current.nextSiblingSize[prop]}px`;
+        }
+      }
+    },
+    [onDoubleClick, orientation]
+  );
 
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions

@@ -738,7 +738,6 @@ const SlideOverTemplate = (
         onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}
         ref={testRef}
-        placement={placement}
         aiLabel={aiLabel && sampleAILabel}
         slug={slug && sampleAILabel}
         decorator={decorator && sampleAILabel}

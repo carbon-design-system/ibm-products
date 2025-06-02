@@ -90,7 +90,7 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
   grid-template-rows: auto 1fr auto; /* titles content and actions */
   inset-block-start: $spacing-09;
   max-inline-size: 100%;
-  min-inline-size: 16rem;
+  min-inline-size: map.get($side-panel-sizes, xs);
 
   transform: translateX(0);
   transition-behavior: allow-discrete;

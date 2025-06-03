@@ -12,7 +12,7 @@ import wait from '../../global/js/utils/wait';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Modals/ExportModal',
+  title: 'Patterns/Prebuilt patterns/ExportModal',
   component: ExportModal,
   tags: ['autodocs'],
   parameters: {

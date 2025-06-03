@@ -128,3 +128,8 @@ $block-class: #{$prefix}--notifications-panel;
     }
   }
 }
+#{$prefix}-notification:hover + #{$prefix}-notification {
+  &::before {
+    background-color: transparent;
+  }
+}

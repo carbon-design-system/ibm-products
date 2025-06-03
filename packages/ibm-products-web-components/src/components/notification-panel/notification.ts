@@ -10,6 +10,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { selectorTabbable } from '@carbon/web-components/es/globals/settings.js';
 import { dateTimeFormat } from '@carbon/utilities';
@@ -73,33 +74,33 @@ class CDSNotification extends HostListenerMixin(LitElement) {
         tabindex="0"
         @click=${handleClick}
         @keydown=${handleKeyDown}
-      >
-        ${icon}
-        <div class="${blockClass}__notification-content">
-          <p class="${blockClass}__notification-time-label">
-            ${dateTimeFormat.relative.format(timestamp as Date, {
-              locale: supportedLocale as string,
-              style: dateTimeStyle,
-            })}
-          </p>
-          <slot name="title"></slot>
-          <div class="${blockClass}__notification-description">
-            <slot name="description"></slot>
-          </div>
+      ></div>
+      ${icon}
+      <div class="${blockClass}__notification-content">
+        <p class="${blockClass}__notification-time-label">
+          ${dateTimeFormat.relative.format(timestamp as Date, {
+            locale: supportedLocale as string,
+            style: dateTimeStyle,
+          })}
+        </p>
+        <slot name="title"></slot>
+        <div class="${blockClass}__notification-description">
+          <slot name="description"></slot>
         </div>
-        <cds-button
-          tooltip-text=""
-          align="left"
-          kind="ghost"
-          size="sm"
-          class="${blockClass}__dismiss-single-button"
-          @click=${dismissSingleNotification}
-        >
-          ${Close16({ slot: 'icon' })}
-        </cds-button>
       </div>
+      <cds-button
+        tooltip-text=""
+        align="left"
+        kind="ghost"
+        size="sm"
+        class="${blockClass}__dismiss-single-button"
+        @click=${dismissSingleNotification}
+      >
+        ${Close16({ slot: 'icon' })}
+      </cds-button>
     `;
   }
+
   private _handleKeyDown(event: KeyboardEvent) {
     if (
       event.target instanceof HTMLElement &&
@@ -131,6 +132,9 @@ class CDSNotification extends HostListenerMixin(LitElement) {
    *
    * @param triggeredBy The element that triggered click event.
    */
+  // Use @HostListener for global document click events
+  @HostListener('document:click')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick(triggeredBy: EventTarget | null) {
     const init = {
       bubbles: true,

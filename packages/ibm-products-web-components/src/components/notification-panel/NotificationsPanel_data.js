@@ -216,3 +216,14 @@ export const dataPrevious = [
     onNotificationClick: action(`Clicked on notification`),
   },
 ];
+
+export const extraData = {
+  id: uuidv4(),
+  type: 'error',
+  title: 'Cluster unreachable',
+  description:
+    'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
+  timestamp: dayBeforeYesterday,
+  unread: false,
+  onNotificationClick: action(`Clicked on notification`),
+};

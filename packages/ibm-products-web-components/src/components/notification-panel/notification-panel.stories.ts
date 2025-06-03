@@ -20,9 +20,11 @@ import Settings16 from '@carbon/web-components/es/icons/settings/16';
 import User20 from '@carbon/web-components/es/icons/user/20.js';
 import Notification20 from '@carbon/web-components/es/icons/notification/20.js';
 import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20.js';
+import uuidv4 from '../../globals/js/utils/uuidv4';
 import {
   dataToday as initialDataToday,
   dataPrevious as initialDataPrevious,
+  extraData,
 } from './NotificationsPanel_data';
 const storyPrefix = 'notification-panel-stories__';
 const blockClassNotificationPanel = `${prefix}--notifications-panel`;
@@ -122,6 +124,9 @@ export const defaultTemplate = {
     const dismissAllNotification = () => {
       setDataToday([]);
       setDataPrevious([]);
+    };
+    const addNotification = () => {
+      setDataPrevious([...dataPrevious, extraData]);
     };
     const notificationSingleDismiss = (
       notificationId: string,
@@ -295,7 +300,9 @@ export const defaultTemplate = {
       <div class="${storyPrefix}story-container">
         <div class="${storyPrefix}story-header"></div>
         <div id="page-content-selector" class="${storyPrefix}story-content">
-          <cds-button>Toggle Notification Panel</cds-button>
+          <cds-button @click=${addNotification}
+            >Add new notification</cds-button
+          >
         </div>
       </div>
     `;

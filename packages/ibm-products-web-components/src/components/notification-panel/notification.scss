@@ -100,6 +100,8 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
       &:focus {
         opacity: 1;
       }
+      --cds-link-primary: --cds-text-primary;
+      --cds-link-primary-hover: --cds-text-primary;
     }
     .#{$block-notification-class}__notification-time-label,
     .#{$block-notification-class}__notification-description {
@@ -131,7 +133,11 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
 
 :host(:hover),
 :host(:focus) {
-  .c4p--notifications-panel__notification__notification {
+  .#{$block-notification-class}__notification {
     background-color: $layer-accent-01;
+  }
+  .#{$block-notification-class}__notification
+    .#{$block-notification-class}__dismiss-single-button {
+    opacity: 1;
   }
 }

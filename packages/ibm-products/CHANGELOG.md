@@ -1,3 +1,25 @@
+## `@carbon/ibm-products@2.68.0-rc.0`
+### Features :rocket:
+- feat(openStackblitz): about modal and export Modal (#7479)
+- feat(InterstitialScreen): add and update various stackblitz examples (#7510)
+- feat(open stackblitz): API Key modal (#7365)
+
+### Bug fixes :bug:
+- fix(rtl): minor updates to provide stronger rtl support (#7580)
+- fix: interstitial accessibility issue fixes (#7478)
+- fix(CustomizeColumnsTearsheet): focus on close (#7497)
+- fix(page header):  current page a11y issue (#7532)
+- fix: include .internal.stories to ignore stories glob (#7531)
+- fix(Tearsheet): fix keyboard scroll for non-interactive tearsheet (#7536)
+- fix: supress sass deprecation warnings (#7515)
+- fix(CustomizeColumnsTearsheet): keyboard and screen reader fixes (#7491)
+
+### Housekeeping :house:
+- chore(CreateFullPage): onrequestsubmit can return a promise (#7538)
+- chore(sidepanel): update controls in the storybook (#7561)
+- refactor(useResizeObserver): migrate to TS and refactor tests to include resize validation (#7548)
+- test(CreateTearsheet): remove container usage (#7533)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.

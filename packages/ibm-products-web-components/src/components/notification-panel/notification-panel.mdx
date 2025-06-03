@@ -35,67 +35,65 @@ import '@carbon/ibm-products-web-components/es/components/notification-panel/ind
       >
         ${dataToday.length > 0
           ? html`
-              <div slot="today">
-                ${dataToday.map((item) => {
-                  return html`
-                    <c4p-notification
-                      .open=${args.open}
-                      @c4p-notification-click=${item.onNotificationClick}
-                      @c4p-notification-dismiss=${() => {
-                        notificationSingleDismiss(item.id, 'today');
-                      }}
-                      type=${item.type}
-                      unread=${item.unread}
-                      .timestamp=${item.timestamp}
-                    >
-                      <cds-heading
-                        class=${classMap({
-                          [`${blockClassNotification}__notification-title`]:
-                            true,
-                          [`${blockClassNotification}__notification-title-unread`]:
-                            item.unread,
-                        })}
-                        slot="title"
-                      >
-                        ${item.title}
-                      </cds-heading>
-                      <div slot="description">${item.description}</div>
-                    </c4p-notification>
-                  `;
-                })}
-              </div>
+            ${dataToday.map((item) => {
+              return html`
+                <c4p-notification
+                  slot="today"
+                  .open=${args.open}
+                  @c4p-notification-click=${item.onNotificationClick}
+                  @c4p-notification-dismiss=${() => {
+                    notificationSingleDismiss(item.id, 'today');
+                  }}
+                  type=${item.type}
+                  unread=${item.unread}
+                  .timestamp=${item.timestamp}
+                >
+                  <cds-heading
+                    class=${classMap({
+                      [`${blockClassNotification}__notification-title`]:
+                        true,
+                      [`${blockClassNotification}__notification-title-unread`]:
+                        item.unread,
+                    })}
+                    slot="title"
+                  >
+                    ${item.title}
+                  </cds-heading>
+                  <div slot="description">${item.description}</div>
+                </c4p-notification>
+              `;
+            })}
             `
           : ''}
         ${dataPrevious.length > 0
           ? html`
-              <div slot="previous">
-                ${dataPrevious.map((item) => {
-                  return html`
-                    <c4p-notification
-                      @c4p-notification-click=${item.onNotificationClick}
-                      @c4p-notification-dismiss=${() => {
-                        notificationSingleDismiss(item.id, 'previous');
-                      }}
-                      type=${item.type}
-                      unread=${item.unread}
-                      .timestamp=${item.timestamp}
+              ${dataPrevious.map((item) => {
+                return html`
+                  <c4p-notification
+                    slot="previous"
+                    @c4p-notification-click=${item.onNotificationClick}
+                    @c4p-notification-dismiss=${() => {
+                      notificationSingleDismiss(item.id, 'previous');
+                    }}
+                    type=${item.type}
+                    unread=${item.unread}
+                    .timestamp=${item.timestamp}
+                  >
+                    <cds-heading
+                      class=${classMap({
+                        [`${blockClassNotification}__notification-title`]:
+                          true,
+                        [`${blockClassNotification}__notification-title-unread`]:
+                          item.unread,
+                      })}
+                      slot="title"
                     >
-                      <cds-heading
-                        class=${classMap({
-                          [`${blockClassNotification}__notification-title`]:
-                            true,
-                          [`${blockClassNotification}__notification-title-unread`]:
-                            item.unread,
-                        })}
-                        slot="title"
-                      >
-                        ${item.title}
-                      </cds-heading>
-                      <div slot="description">${item.description}</div>
-                    </c4p-notification>
-                  `;
-                })}
-              </div>
+                      ${item.title}
+                    </cds-heading>
+                    <div slot="description">${item.description}</div>
+                  </c4p-notification>
+                `;
+              })}
             `
           : ''}
         <div

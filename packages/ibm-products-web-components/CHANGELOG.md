@@ -1,3 +1,13 @@
+## `@carbon/ibm-products-web-components@0.17.0-rc.0`
+### Features :rocket:
+- feat(DeleteAndRemovePattern): deletion and removal patterns using carbon web components (#7473)
+
+### Bug fixes :bug:
+- fix: supress sass deprecation warnings (#7515)
+
+### Housekeeping :house:
+- chore(deps-dev): bump vite (#7534)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.

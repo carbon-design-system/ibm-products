@@ -7,13 +7,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
+import { html, nothing } from 'lit';
 import styles from './story-styles.scss?lit';
 import '@carbon/web-components/es/components/tag/index.js';
 import '@carbon/web-components/es/components/slider/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '../../components/user-avatar/index.js';
 import { createOverflowHandler } from '@carbon/utilities';
+import { classMap } from 'lit/directives/class-map.js';
 
 const storyPrefix = 'overflow-handler-stories__';
 
@@ -28,6 +29,12 @@ const argTypes = {
     },
   },
   onChange: { action: 'onChange' },
+  fixed: {
+    control: 'boolean',
+  },
+  fixedId: {
+    control: 'number',
+  },
 };
 
 const makeItems = (n: number = 5) => {
@@ -39,8 +46,9 @@ const makeItems = (n: number = 5) => {
 };
 
 const renderTemplate = (args) => {
-  const { variant, dimension, maxVisibleItems, onChange } = args;
-  let width = 1000;
+  const { variant, dimension, maxVisibleItems, onChange, fixed, fixedId } =
+    args;
+  let size = '1000';
   let handler;
 
   const initializeHandler = () => {
@@ -70,8 +78,8 @@ const renderTemplate = (args) => {
 
   const makeTags = () => {
     return makeItems(10).map(
-      (item) =>
-        html`<span
+      (item, idx) =>
+        html`<span data-fixed=${fixed && fixedId === idx + 1 ? true : nothing}
           ><cds-tag type="blue" title=${item.label}
             >${item.label}</cds-tag
           ></span
@@ -91,14 +99,14 @@ const renderTemplate = (args) => {
     );
   };
 
-  const widthHandler = (evt: CustomEvent) => {
+  const sizeHandler = (evt: CustomEvent) => {
     const { value } = evt.detail;
-    width = value;
-    const slider = document.querySelector('#width-slider');
+    size = value;
+    const slider = document.querySelector('#dimension-slider');
     slider?.setAttribute('value', value);
     const container = document.querySelector('.parent') as HTMLElement;
     if (container) {
-      container.style.width = `${width}px`;
+      container.style[dimension] = `${value}px`;
     }
   };
 
@@ -112,30 +120,33 @@ const renderTemplate = (args) => {
     return makeTags();
   };
 
+  const itemClasses = classMap({
+    items: true,
+    'items--vertical': dimension === 'height',
+  });
+
   return html`
     <style>
       ${styles}
     </style>
     <div class="example">
       <cds-slider
-        id="width-slider"
-        label-text="Parent container width"
+        id="dimension-slider"
+        label-text="Parent container ${dimension}"
         class="slider"
         max="1000"
         min="200"
         step="1"
-        @cds-slider-changed="${widthHandler}"
-        value="${width}"
+        @cds-slider-changed="${sizeHandler}"
+        value="${size}"
       >
-        <cds-slider-input aria-label="Width" type="number"></cds-slider-input>
+        <cds-slider-input aria-label="Size" type="number"></cds-slider-input>
       </cds-slider>
-      <div class="parent">
-        <div class="annotation">
-          <div class="annotation__label">Parent container</div>
-          <div class="annotation__content">
-            <p>Visible items:</p>
-            <div id="visible-items">${getBody()}</div>
-          </div>
+      <div class="annotation parent">
+        <div class="annotation__label">Parent container</div>
+        <div class="annotation__content">
+          <p>Visible items:</p>
+          <div id="visible-items" class="${itemClasses}">${getBody()}</div>
         </div>
       </div>
     </div>
@@ -145,6 +156,8 @@ const renderTemplate = (args) => {
 const defaultProps = {
   maxVisibleItems: 10,
   dimension: 'width',
+  fixed: false,
+  fixedId: 5,
 };
 
 export const WithTags = {

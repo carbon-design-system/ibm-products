@@ -111,12 +111,6 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
       display: block;
     }
   }
-  //   .c4p--notifications-panel__notification__dismiss-single-button{
-  //         --cds-layout-density-padding-inline-min: .0625rem;
-  //         --cds-layout-density-padding-inline-normal: .0625rem;
-  //         --cds-layout-density-padding-inline-max: .0625rem;
-  //         --cds-layout-density-padding-inline: .0625rem,
-  //   }
 }
 ::slotted(.#{$block-notification-class}__notification-title) {
   --#{$carbon-prefix}-heading-06-font-size: --#{$carbon-prefix}-heading-01-font-size;

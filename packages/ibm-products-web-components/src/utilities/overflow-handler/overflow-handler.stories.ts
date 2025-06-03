@@ -40,7 +40,7 @@ const makeItems = (n: number = 5) => {
 
 const renderTemplate = (args) => {
   const { variant, dimension, maxVisibleItems, onChange } = args;
-  let width = 1000;
+  let size = 1000;
   let handler;
 
   const initializeHandler = () => {
@@ -91,14 +91,14 @@ const renderTemplate = (args) => {
     );
   };
 
-  const widthHandler = (evt: CustomEvent) => {
+  const sizeHandler = (evt: CustomEvent) => {
     const { value } = evt.detail;
-    width = value;
-    const slider = document.querySelector('#width-slider');
+    size = value;
+    const slider = document.querySelector('#size-slider');
     slider?.setAttribute('value', value);
     const container = document.querySelector('.parent') as HTMLElement;
     if (container) {
-      container.style.width = `${width}px`;
+      container.style[dimension] = `${size}px`;
     }
   };
 
@@ -118,24 +118,22 @@ const renderTemplate = (args) => {
     </style>
     <div class="example">
       <cds-slider
-        id="width-slider"
-        label-text="Parent container width"
+        id="size-slider"
+        label-text="Parent container ${dimension}"
         class="slider"
         max="1000"
         min="200"
         step="1"
-        @cds-slider-changed="${widthHandler}"
-        value="${width}"
+        @cds-slider-changed="${sizeHandler}"
+        value="${size}"
       >
-        <cds-slider-input aria-label="Width" type="number"></cds-slider-input>
+        <cds-slider-input aria-label="size" type="number"></cds-slider-input>
       </cds-slider>
-      <div class="parent">
-        <div class="annotation">
-          <div class="annotation__label">Parent container</div>
-          <div class="annotation__content">
-            <p>Visible items:</p>
-            <div id="visible-items">${getBody()}</div>
-          </div>
+      <div class="annotation parent">
+        <div class="annotation__label">Parent container</div>
+        <div class="annotation__content">
+          <p>Visible items:</p>
+          <div id="visible-items" class=${dimension}>${getBody()}</div>
         </div>
       </div>
     </div>

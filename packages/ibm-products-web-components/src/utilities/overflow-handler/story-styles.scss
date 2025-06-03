@@ -22,13 +22,20 @@ $story-prefix: 'overflow-handler-stories__';
 .parent {
   overflow: scroll;
   margin-block-start: spacing.$spacing-04;
-  max-inline-size: 100%;
+  max-inline-size: 1000px;
   scrollbar-width: none;
 }
 
 #visible-items {
   display: flex;
   white-space: nowrap;
+
+  &.height {
+    flex-direction: column;
+    block-size: calc(
+      100% - spacing.$spacing-06
+    ); // subtracting p tag text element height
+  }
 }
 
 // todo - create annotation component
@@ -51,6 +58,9 @@ $story-prefix: 'overflow-handler-stories__';
 
 .annotation__content {
   padding: spacing.$spacing-05;
+  block-size: calc(
+    100% - spacing.$spacing-06
+  ); // subtracting annotation text element height
 }
 
 [data-hidden]:not([data-fixed]) {

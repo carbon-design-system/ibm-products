@@ -253,6 +253,7 @@ Clickable.args = {
   onClick: action('on click'),
   onKeyDown: action('on keydown'),
   primaryButtonText: 'Read more',
+  clickZone: 'two',
   actionIcons: [],
 };
 

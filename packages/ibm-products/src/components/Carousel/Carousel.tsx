@@ -20,6 +20,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { useIsomorphicEffect } from '../../global/js/hooks';
+import { usePrefix } from '@carbon/react';
 
 type Handle = {
   scrollNext?: () => void;
@@ -65,6 +66,13 @@ export interface CarouselProps {
    * Additional props passed to the component.
    */
   [key: string]: any;
+
+  /**
+   * enable scroll mode when only scroll functionality is required, more than one items will be visible at a time
+   * when isScrollMode is false, component behaves like a carousal and on item will be active at a time
+   * and other items will be hidden and inactive.
+   */
+  isScrollMode?: boolean;
 }
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -103,6 +111,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       fadedEdgeColor,
       onChangeIsScrollable = defaults.onChangeIsScrollable,
       onScroll = defaults.onScroll,
+      isScrollMode = false,
       ...rest
     } = props;
     const carouselRef = useRef<HTMLDivElement>(null);
@@ -121,6 +130,8 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       typeof fadedEdgeColor === 'object'
         ? fadedEdgeColor?.right
         : fadedEdgeColor;
+
+    const carbonPrefix = usePrefix();
 
     // Trigger callbacks to report state of the carousel
     const handleOnScroll = useCallback(() => {
@@ -230,8 +241,45 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     }, [handleOnScroll]);
 
     const handleScrollToView = useCallback((itemNumber) => {
+      updateAriaHiddenTabIndex(itemNumber);
       childElementsRef.current[itemNumber].scrollIntoView();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const getFocusableElements = (container) => {
+      const notQuery = `:not(.${carbonPrefix}--visually-hidden,.${carbonPrefix}--btn--disabled,[aria-hidden="true"],[disabled])`;
+      // Queries to include element types button, input, select, textarea
+      const queryButton = `button${notQuery}`;
+      const queryInput = `input${notQuery}`;
+      const querySelect = `select${notQuery}`;
+      const queryTextarea = `textarea${notQuery}`;
+      const queryLink = `[href]${notQuery}`;
+      const queryAnchor = `a${notQuery}`;
+      const queryTabIndex = `[tabindex="0"]${notQuery}`;
+      // Final query
+      const query = `${queryButton},${queryLink},${queryAnchor},${queryInput},${querySelect},${queryTextarea},${queryTabIndex}`;
+      return container?.querySelectorAll(`${query}`) ?? [];
+    };
+
+    const updateAriaHiddenTabIndex = (itemNumber: number) => {
+      //aria-hidden need to updated based on the active item, otherwise screen reader will reset to first item while
+      //interact with element via Control + Option + Down Arrow
+      // aria-hidden is set to true to inactive carousal items
+      // tab-index is set to -1 for all inputs in in active elements
+
+      !isScrollMode &&
+        childElementsRef.current?.forEach((item, idx) => {
+          const isActive = idx === itemNumber;
+          // Set aria-hidden based on active state
+          item?.setAttribute('aria-hidden', String(!isActive));
+
+          // Update tabIndex for all focusable elements within the item
+          const focusableElements = getFocusableElements(item);
+          focusableElements.forEach((el) => {
+            el.tabIndex = isActive ? 0 : -1;
+          });
+        });
+    };
 
     // Trigger a callback after first render (and applied CSS).
     useEffect(() => {
@@ -242,6 +290,8 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       setTimeout(() => {
         // But, because we are making calculations based on the final,
         // applied CSS, we must wait for one more "tick".
+
+        updateAriaHiddenTabIndex(0);
         handleOnScroll();
       }, 0);
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -426,6 +476,12 @@ Carousel.propTypes = {
     PropTypes.string,
     PropTypes.shape({ left: PropTypes.string, right: PropTypes.string }),
   ]),
+  /**
+   * enable scroll mode when only scroll functionality is required, more than one items will be visible at a time
+   * when isScrollMode is false, component behaves like a carousal and on item will be active at a time
+   * and other items will be hidden and inactive.
+   */
+  isScrollMode: PropTypes.bool,
   /**
    * An optional callback function that returns `true`
    * when the carousel has enough content to be scrollable,

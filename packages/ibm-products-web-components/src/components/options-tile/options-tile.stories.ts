@@ -20,12 +20,6 @@ const argTypes = {
     control: 'boolean',
     description: 'If `true` the body of the component is shown',
   },
-  onClose: {
-    description: 'Callback fired when the component requests to be closed',
-  },
-  onOpen: {
-    description: 'Callback fired when the component requests to be opened',
-  },
   size: {
     control: 'radio',
     options: ['lg', 'xl'],
@@ -35,13 +29,13 @@ const argTypes = {
     control: 'text',
     description: 'Slot text that is displayed under the title',
   },
-  title: {
-    control: 'text',
-    description: 'Text for the title',
-  },
   titleId: {
     control: 'text',
     description: 'ID for the title',
+  },
+  titleText: {
+    control: 'text',
+    description: 'Text for the title',
   },
 };
 
@@ -56,14 +50,14 @@ const handleClose = (evt: Event) => {
 };
 
 const renderTemplate = (args) => {
-  const { open, size, title, titleId } = args;
+  const { open, size, titleText, titleId } = args;
   return html`
     <c4p-options-tile
       id="my-tile"
       ?open=${open}
       size=${size}
-      title=${title}
       titleId=${titleId}
+      titleText=${titleText}
       @c4p-options-tile-open=${handleOpen}
       @c4p-options-tile-close=${handleClose}
     >
@@ -84,8 +78,8 @@ export const Default = {
     open: false,
     size: 'lg',
     summary: 'Back up every 10min',
-    title: 'Auto recovery',
     titleId: 'title-01',
+    titleText: 'Auto recovery',
   },
   argTypes,
   render: renderTemplate,

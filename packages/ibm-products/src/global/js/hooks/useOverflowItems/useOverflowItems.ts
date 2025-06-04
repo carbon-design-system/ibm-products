@@ -55,7 +55,7 @@ export function useOverflowItems<T extends Item>(
     return node;
   };
 
-  useResizeObserver(containerRef, handleResize);
+  useResizeObserver(containerRef as RefObject<HTMLElement>, handleResize);
 
   const getMap = () => {
     if (!itemsRef.current) {

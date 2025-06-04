@@ -39,22 +39,34 @@ export class CDSTruncatedText extends LitElement {
   @property({ type: String, attribute: 'value', reflect: true }) value = '';
 
   /**
+   * Specify how the tooltip should align with the content.
+   */
+  @property({ reflect: true, type: String })
+  align = 'top';
+
+  /**
+   * Specify whether a auto align functionality should be applied
+   */
+  @property({ type: Boolean, reflect: true })
+  autoalign = false;
+
+  /**
    * The label on expand button.
    */
   @property({ attribute: 'expand-label', type: String, reflect: true })
-  expandLabel = '...more';
+  expandLabel = 'View more';
 
   /**
    * The label on the collapse button.
    */
   @property({ attribute: 'collapse-label', type: String, reflect: true })
-  collapseLabel = '...less';
+  collapseLabel = 'View less';
 
   /**
    * The method to display the full text when truncated. Options are "tooltip" or "expand". if not passed, the text would just be truncated with ellipsis.
    */
-  @property({ type: String, reflect: true }) with: 'tooltip' | 'expand' | null =
-    null;
+  @property({ type: String, reflect: true }) with: 'tooltip' | 'expand' =
+    'tooltip';
 
   @state() private _isOverflowing: boolean = false;
   @state() private _isExpanded: boolean = false;
@@ -70,6 +82,7 @@ export class CDSTruncatedText extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this._isLayered = !!this.closest(`${carbonPrefix}-layer`);
+    this.with = this.with || 'tooltip';
   }
 
   disconnectedCallback() {
@@ -160,8 +173,8 @@ export class CDSTruncatedText extends LitElement {
       [`${blockClass}_button-hide`]: !this._isOverflowing && !this._isExpanded,
     });
     const label = this._isExpanded
-      ? this.collapseLabel || '...less'
-      : this.expandLabel || '...more';
+      ? this.collapseLabel || 'View less'
+      : this.expandLabel || 'View more';
     return html`
       <button class="${className}" @click=${this._toggleExpansion}>
         ${label}
@@ -194,7 +207,12 @@ export class CDSTruncatedText extends LitElement {
 
     return this.with === 'tooltip' && this._isOverflowing
       ? html`
-          <cds-tooltip align="bottom" enter-delay-ms="0" leave-delay-ms="0">
+          <cds-tooltip
+            align=${this.align}
+            ?autoalign=${this.autoalign}
+            enter-delay-ms="0"
+            leave-delay-ms="0"
+          >
             ${content}
             <cds-tooltip-content>${this.value}</cds-tooltip-content>
           </cds-tooltip>

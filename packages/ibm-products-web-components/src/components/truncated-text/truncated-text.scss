@@ -10,6 +10,7 @@
 @use 'sass:map';
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/themes' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
 
@@ -27,11 +28,7 @@ $block-class: #{$prefix}--truncated-text;
 
 // Mixin for directional gradients
 @mixin gradient-bg($direction, $color) {
-  background: linear-gradient(
-    $direction,
-    rgba(255, 255, 255, 0) 0%,
-    $color 90%
-  );
+  background: linear-gradient($direction, rgba(255, 255, 255, 0) 0%, $color 0%);
 }
 
 :host(#{$prefix}-truncated-text) {
@@ -72,7 +69,7 @@ $block-class: #{$prefix}--truncated-text;
 .#{$block-class}_button-collapse {
   @extend %reset-button;
 
-  padding: 0;
+  padding: 0 $spacing-01;
   color: $link-primary;
 
   &.#{$block-class}_button-hide {
@@ -88,6 +85,18 @@ $block-class: #{$prefix}--truncated-text;
 
   &.#{$block-class}_button-layered {
     background-color: $layer;
+  }
+
+  &::before {
+    position: absolute;
+    block-size: 100%;
+    color: $text-primary;
+    content: '...';
+    inline-size: 1em;
+    inset-block-start: 0;
+    inset-inline-start: calc(-1em - 0.2em);
+    padding-inline-start: 0.2em;
+    pointer-events: none;
   }
 
   // Gradient LTR

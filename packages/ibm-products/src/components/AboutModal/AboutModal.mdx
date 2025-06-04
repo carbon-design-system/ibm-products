@@ -1,0 +1,58 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { AboutModal } from '.';
+import * as stories from './AboutModal.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# About Modal
+
+[AboutModal usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/about-modal/usage/) | [Carbon Modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage) | [Carbon Modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [About Modal](#about-modal-1)
+  - [About Modal With All Props Set](#about-modal-with-all-props-set)
+- [Component API](#component-api)
+
+## Overview
+
+The About modal component conveys product information, including the version number, copyright information, and license details.
+The About modal is triggered by a user’s action which appears on top of the main page content and is persistent until dismissed. 
+The purpose of this modal should be immediately apparent to the user, with a clear and obvious path to completion.
+
+### About Modal
+
+<Canvas
+  of={stories.aboutModal}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig({
+          'story': stories.aboutModal,
+          'styles': stories.default.parameters.styles
+      }),
+      },
+    ]}>
+</Canvas>
+
+
+### About Modal With All Props Set
+
+<Canvas
+  of={stories.aboutModalWithAllPropsSet}
+  additionalActions={[
+      {
+        title: 'Open in Stackblitz',
+        onClick: () => stackblitzPrefillConfig({
+          'story': stories.aboutModalWithAllPropsSet,
+          'styles': stories.default.parameters.styles
+      }),
+      },
+    ]}>
+</Canvas>
+
+## Component API
+
+<Controls />

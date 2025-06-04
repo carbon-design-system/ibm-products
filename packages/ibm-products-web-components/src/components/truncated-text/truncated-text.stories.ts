@@ -281,7 +281,7 @@ export const WithExpand = {
 };
 
 const meta = {
-  title: 'Experimental/TruncatedText',
+  title: 'Experimental/Utilities/TruncatedText',
   component: 'c4p-truncated-text',
 };
 

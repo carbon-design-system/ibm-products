@@ -7,19 +7,7 @@
 
 @use '@carbon/styles/scss/theme' as *;
 
-$story-prefix: 'truncated-text-stories__';
-
+// $story-prefix: 'truncated-text-stories__';
 #main-content {
-  block-size: 100vh;
-}
-
-.#{$story-prefix}centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  block-size: 100%;
-
-  .#{$story-prefix}content {
-    max-inline-size: 36rem;
-  }
+  padding: 12rem;
 }

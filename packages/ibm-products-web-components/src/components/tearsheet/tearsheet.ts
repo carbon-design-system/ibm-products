@@ -644,7 +644,9 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
             <div class=${`${blockClass}__right`}>
               <div class=${`${blockClass}__main`}>
                 <div class=${`${blockClass}__content`}>
-                  <cds-layer level="0">
+                  <cds-layer
+                    level="${this.width === TEARSHEET_WIDTH.NARROW ? 1 : 0}"
+                  >
                     <slot></slot>
                   </cds-layer>
                 </div>

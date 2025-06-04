@@ -50,7 +50,7 @@
     "build:js-new": "node scripts/build",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
-    "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
+    "generate": "cross-env FORCE_COLOR=1 node scripts/generate/index.mjs",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
     "start": "run-s build:carbon storybook:start",
     "storybook:build": "run-s build:carbon build:storybook",

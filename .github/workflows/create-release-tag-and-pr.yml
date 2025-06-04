@@ -82,7 +82,7 @@ jobs:
       - name: Generate CHANGELOG.md
         # The tags are now guaranteed to exist before this step runs
         run: |
-          node ./scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }}
+          node ./scripts/get-changelog.js -f ${{ github.event.inputs.previous-tag }} -t ${{ github.event.inputs.tag }} -w true
 
       - name: Commit changelog
         run: |

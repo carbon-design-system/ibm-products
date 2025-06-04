@@ -100,6 +100,8 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     `;
   }
 
+  @HostListener('document:keydown')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeyDown(event: KeyboardEvent) {
     if (
       event.target instanceof HTMLElement &&

@@ -295,6 +295,7 @@ export let ExportModal = forwardRef(
                       onChange={onExtensionChangeHandler}
                       valueSelected={extension}
                       name="extensions"
+                      aria-label="extensions"
                     >
                       {preformattedExtensions.map((o) => (
                         <RadioButton

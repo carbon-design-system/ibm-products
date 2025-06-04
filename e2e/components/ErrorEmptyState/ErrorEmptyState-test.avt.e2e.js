@@ -14,7 +14,7 @@ test.describe('ErrorEmptyState @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ErrorEmptyState',
-      id: 'ibm-products-patterns-empty-state-erroremptystate--default',
+      id: 'patterns-prebuilt-patterns-empty-states-erroremptystate--default',
       globals: {
         carbonTheme: 'white',
       },

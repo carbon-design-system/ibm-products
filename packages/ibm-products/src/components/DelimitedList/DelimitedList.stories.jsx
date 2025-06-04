@@ -15,7 +15,7 @@ import { DocsPage } from './DelimitedList.docs-page';
 const storyClass = 'delimited-list-stories';
 
 export default {
-  title: 'Utils/Components/DelimitedList',
+  title: 'Utilities/DelimitedList',
   component: DelimitedList,
   tags: ['autodocs'],
   parameters: {

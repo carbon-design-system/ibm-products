@@ -15,7 +15,7 @@ test.describe('CreateTearsheet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateTearsheet',
-      id: 'ibm-products-patterns-create-flows-createtearsheet--multi-step-tearsheet',
+      id: 'patterns-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -32,7 +32,7 @@ test.describe('CreateTearsheet @avt', () => {
   test('@avt-focus-move-properly-across-steps', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateTearsheet',
-      id: 'ibm-products-patterns-create-flows-createtearsheet--multi-step-tearsheet',
+      id: 'patterns-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -158,7 +158,7 @@ test.describe('CreateTearsheet @avt', () => {
   test('@avt-simulate-error-and-focus', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateTearsheet',
-      id: 'ibm-products-patterns-create-flows-createtearsheet--multi-step-tearsheet',
+      id: 'patterns-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
       globals: {
         carbonTheme: 'white',
       },

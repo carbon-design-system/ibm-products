@@ -14,7 +14,7 @@ test.describe('ActionBar @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ActionBar',
-      id: 'utils-components-actionbar--default',
+      id: 'utilities-actionbar--default',
       globals: {
         carbonTheme: 'white',
       },

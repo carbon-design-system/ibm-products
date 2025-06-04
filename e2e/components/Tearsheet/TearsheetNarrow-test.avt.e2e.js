@@ -17,7 +17,7 @@ test.describe('TearsheetNarrow @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
-      id: 'ibm-products-components-tearsheet-tearsheetnarrow--tearsheet-narrow',
+      id: 'components-tearsheet-tearsheetnarrow--tearsheet-narrow',
       globals: {
         carbonTheme: 'white',
       },
@@ -29,7 +29,7 @@ test.describe('TearsheetNarrow @avt', () => {
   test('@avt-default-state open and close', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
-      id: 'ibm-products-components-tearsheet-tearsheetnarrow--tearsheet-narrow',
+      id: 'components-tearsheet-tearsheetnarrow--tearsheet-narrow',
       globals: {
         carbonTheme: 'white',
       },
@@ -52,7 +52,7 @@ test.describe('TearsheetNarrow @avt', () => {
   test('@avt-default-state focus trap', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
-      id: 'ibm-products-components-tearsheet-tearsheetnarrow--tearsheet-narrow',
+      id: 'components-tearsheet-tearsheetnarrow--tearsheet-narrow',
       globals: {
         carbonTheme: 'white',
       },
@@ -113,7 +113,7 @@ test.describe('TearsheetNarrow @avt', () => {
   test('@avt-all-header-items', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
-      id: 'ibm-products-components-tearsheet-tearsheetnarrow--fully-loaded',
+      id: 'components-tearsheet-tearsheetnarrow--fully-loaded',
       globals: {
         carbonTheme: 'white',
       },
@@ -179,7 +179,7 @@ test.describe('TearsheetNarrow @avt', () => {
   test('@avt-stacking', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
-      id: 'ibm-products-components-tearsheet-tearsheetnarrow--stacked',
+      id: 'components-tearsheet-tearsheetnarrow--stacked',
       globals: {
         carbonTheme: 'white',
       },

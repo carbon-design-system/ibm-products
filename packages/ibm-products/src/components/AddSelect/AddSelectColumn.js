@@ -178,7 +178,7 @@ export let AddSelectColumn = ({
                     kind="ghost"
                     label={filterByLabel || 'Filter'}
                     onClick={() => {
-                      setFilterOpen(!filterOpen);
+                      setFilterOpen(prev => !prev);
                     }}
                   >
                     <Filter />

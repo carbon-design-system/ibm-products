@@ -54,27 +54,26 @@ class CDSNotification extends HostListenerMixin(LitElement) {
 
   @consume({ context: dateTimeLocaleContext, subscribe: true })
   dateTimeLocale: string | undefined = undefined;
-
+  connectedCallback() {
+    super.connectedCallback();
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'button');
+    }
+    if (!this.hasAttribute('tabindex')) {
+      this.setAttribute('tabindex', '0');
+    }
+  }
   render() {
     const {
       type,
       timestamp,
       dateTimeLocale,
-      _handleClick: handleClick,
-      _handleKeyDown: handleKeyDown,
       _dismissSingleNotification: dismissSingleNotification,
       _fetchIcon: fetchIcon,
     } = this;
     const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
     const icon = fetchIcon(type);
     return html`
-      <div
-        class="${blockClass}__notification"
-        role="button"
-        tabindex="0"
-        @click=${handleClick}
-        @keydown=${handleKeyDown}
-      ></div>
       ${icon}
       <div class="${blockClass}__notification-content">
         <p class="${blockClass}__notification-time-label">

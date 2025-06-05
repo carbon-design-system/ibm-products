@@ -53,7 +53,7 @@ const renderTemplate = (args) => {
 
   const initializeHandler = () => {
     if (handler) {
-      console.log('handler found. removing ...');
+      console.log('Handler found. Removing and re-initiating...');
       document.removeEventListener('DOMContentLoaded', initializeHandler);
       handler.disconnect();
       return;
@@ -80,7 +80,9 @@ const renderTemplate = (args) => {
     return makeItems(10).map(
       (item, idx) =>
         html`<span data-fixed=${fixed && fixedId === idx + 1 ? true : nothing}
-          ><cds-tag type="blue" title=${item.label}
+          ><cds-tag
+            type=${fixed && fixedId === idx + 1 ? 'blue' : 'gray'}
+            title=${item.label}
             >${item.label}</cds-tag
           ></span
         >`
@@ -89,13 +91,27 @@ const renderTemplate = (args) => {
 
   const makeButtons = () => {
     return makeItems(10).map(
-      (item) => html`<span><cds-button>${item.label}</cds-button></span>`
+      (item, idx) =>
+        html`<span data-fixed=${fixed && fixedId === idx + 1 ? true : nothing}
+          ><cds-button
+            size="sm"
+            kind=${fixed && fixedId === idx + 1 ? 'primary' : 'secondary'}
+            >${item.label}</cds-button
+          ></span
+        >`
     );
   };
 
   const makeUserAvatars = () => {
     return makeItems(10).map(
-      (item) => html`<span><c4p-user-avatar></c4p-user-avatar></span>`
+      (item, idx) =>
+        html`<span data-fixed=${fixed && fixedId === idx + 1 ? true : nothing}
+          ><c4p-user-avatar
+            background-color=${fixed && fixedId === idx + 1
+              ? 'order-1-cyan'
+              : 'order-2-gray'}
+          ></c4p-user-avatar
+        ></span>`
     );
   };
 
@@ -157,7 +173,6 @@ const defaultProps = {
   maxVisibleItems: 10,
   dimension: 'width',
   fixed: false,
-  fixedId: 5,
 };
 
 export const WithTags = {

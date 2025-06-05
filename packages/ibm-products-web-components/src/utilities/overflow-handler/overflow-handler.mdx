@@ -22,8 +22,33 @@ createOverflowHandler({
 });
 ```
 
-The only required argument necessary to consume this utility is `container`. Once the handler has been instantiated, an event handler is created that checks the width of the container when it's rendered or resized. By default, the handler will automatically hide items that are unable to fit.
+The only required argument necessary to consume this utility is `container`.
+Once the handler has been instantiated, an event handler is created that checks
+the width of the container when it's rendered or resized. The handler adds the
+necessary `data-hidden` attributes to the items that should be hidden. These
+items can then be hidden using the following style in the implementation.
 
-Using the `onChange` callback, you have access to an array holding the visible and hidden elements. This gives you the flexibility to access the hidden items and render them elsewhere, such as a modal or popover.
+```css
+[data-hidden]:not([data-fixed]) { // scope if needed
+  display: none;
+}
+```
+
+## Attribute definitions
+
+- `data-hidden` - Added by the handler on the items that are meant to be hidden.
+- `data-fixed` - Items that have this attribute added will opt out of all
+  overflow activities and will be outside the scope of the handler.
+- `data-offset` - Is added to the offset element that contains all the
+  overflowing elements within it, such as popovers, overflow menus, tooltips,
+  modals, etc.
+
+Using the `onChange` callback, you have access to an array holding the visible
+and hidden elements. This gives you the flexibility to access the hidden items
+and render them elsewhere, such as a modal or popover.
+
+The handler needs to be re-initialized whenever items are added or removed, when
+an item changes its width dynamically, or when the offset changes its width
+dynamically, to update the overflow with the new sizes.
 
 For details on implementation, please refer to the example code.

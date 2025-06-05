@@ -300,7 +300,7 @@ export const getSlug = (index) => {
 // cspell: disable
 export const getDecorator = (decorator) => {
   switch (decorator) {
-    case 1:
+    case 'WITH_AI_LABEL':
       return html`
         <cds-ai-label alignment="bottom-right" slot="decorator">
           <div slot="body-text">
@@ -318,7 +318,7 @@ export const getDecorator = (decorator) => {
           </div>
         </cds-ai-label>
       `;
-    case 2:
+    case 'NON_AI_LABEL_DECORATOR':
       return html`
         <cds-toggletip slot="decorator" alignment="bottom">
           <p slot="body-text">

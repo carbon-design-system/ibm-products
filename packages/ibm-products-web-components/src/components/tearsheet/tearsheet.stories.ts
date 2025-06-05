@@ -87,9 +87,9 @@ const slugs = {
 };
 
 const decorators = {
-  'No Decorator': 0,
-  'With AI Label': 1,
-  'With non AI Label component': 2,
+  'No Decorator': 'NO_DECORATOR',
+  'With AI Label': 'WITH_AI_LABEL',
+  'With non AI Label component': 'NON_AI_LABEL_DECORATOR',
 };
 
 const contents = {
@@ -118,7 +118,7 @@ export const Default = {
     selectorInitialFocus: '',
     width: TEARSHEET_WIDTH.WIDE,
     slug: 0,
-    decorator: 0,
+    decorator: 'NO_DECORATOR',
     description: 'Description used to describe the flow if need be.',
     title: 'Title used to designate the overarching flow of the tearsheet.',
     headerNavigation: 0,

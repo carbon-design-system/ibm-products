@@ -47,7 +47,7 @@ describe(name, () => {
       />
     );
 
-    await act(() => click(getByText('Create new')));
+    await act(async () => click(getByText('Create new')));
     expect(onActionHandler).toBeCalled();
   });
 

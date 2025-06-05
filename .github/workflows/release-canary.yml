@@ -53,4 +53,3 @@ jobs:
           NPM_CONFIG_PROVENANCE: true
         run: |
           yarn lerna publish --canary --preid canary --dist-tag canary --yes
-          

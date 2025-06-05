@@ -170,18 +170,20 @@ const Template = (opts) => {
     ...args
   } = opts;
   return (
-    <Grid>
-      <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ProductiveCard
-          {...args}
-          decorator={
-            decorator && (decorator === 3 || sampleDecorator(decorator))
-          }
-        >
-          {children}
-        </ProductiveCard>
-      </Column>
-    </Grid>
+    <main>
+      <Grid>
+        <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
+          <ProductiveCard
+            {...args}
+            decorator={
+              decorator && (decorator === 3 || sampleDecorator(decorator))
+            }
+          >
+            {children}
+          </ProductiveCard>
+        </Column>
+      </Grid>
+    </main>
   );
 };
 
@@ -253,6 +255,7 @@ Clickable.args = {
   onClick: action('on click'),
   onKeyDown: action('on keydown'),
   primaryButtonText: 'Read more',
+  clickZone: 'two',
   actionIcons: [],
 };
 

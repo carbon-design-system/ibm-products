@@ -1,3 +1,65 @@
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react' with (
+  $use-flexbox-grid: true
+);
 
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/type/scss/font-family' as *;
+@use '@carbon/styles/scss/components/tag' as *;
 /* example SCSS */
+
+.wrapper {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.flexContainer {
+  height: 100%;
+  padding-inline-end: 0;
+}
+.interstitialTextContainer {
+  margin-block-end: $spacing-09;
+
+  h3 {
+    @include type-style('fluid-heading-05', true);
+    & span.blue-text {
+      color: $interactive;
+    }
+    margin-block-end: $spacing-05;
+  }
+  &.step-3 {
+    h3 {
+      @include type-style('heading-04', true);
+    }
+    h4 {
+      @include type-style('heading-02', true);
+      margin-block-end: $spacing-03;
+    }
+  }
+}
+.contentColumn {
+  padding-block-start: $spacing-10;
+  box-sizing: border-box;
+  position: relative;
+}
+.interstitialTextContainer h3 {
+  p {
+    @include type-style('body-02');
+  }
+}
+.tileWrapper {
+  & > div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .cds--tile-content {
+    & > p {
+      @include type-style('body-compact-01');
+      margin-block-end: $spacing-05;
+    }
+  }
+  margin-block-end: $spacing-06;
+}

@@ -206,6 +206,7 @@
     "uuidv",
     "webfonts",
     "useravatar",
-    "rendericon"
+    "rendericon",
+    "csvg"
   ]
 }

@@ -1,7 +1,59 @@
+## `@carbon/ibm-products-web-components@0.17.0-rc.0`
+### Features :rocket:
+- feat(DeleteAndRemovePattern): deletion and removal patterns using carbon web components (#7473)
+
+### Bug fixes :bug:
+- fix: supress sass deprecation warnings (#7515)
+
+### Housekeeping :house:
+- chore(deps-dev): bump vite (#7534)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.16.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.16.0-rc.0...@carbon/ibm-products-web-components@0.16.0) (2025-05-28)
+
+**Note:** Version bump only for package @carbon/ibm-products-web-components
+
+
+
+
+
+# [0.16.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.11.0-rc.0...@carbon/ibm-products-web-components@0.16.0-rc.0) (2025-05-19)
+
+
+### Bug Fixes
+
+* **about modal:** custom event not properly configured ([#7378](https://github.com/carbon-design-system/ibm-products/issues/7378)) ([b02f51f](https://github.com/carbon-design-system/ibm-products/commit/b02f51f19b16cbf9eb89b9638e08d4578bcbd1c4))
+* **stackblitz examples:** updated version in about modal and fullpage ([#7391](https://github.com/carbon-design-system/ibm-products/issues/7391)) ([903cfab](https://github.com/carbon-design-system/ibm-products/commit/903cfab47e14a4a20ce4699e87f08949cae50aec))
+* **tearsheet:** added utils.ts ([#7223](https://github.com/carbon-design-system/ibm-products/issues/7223)) ([e5e5b09](https://github.com/carbon-design-system/ibm-products/commit/e5e5b09b72673716d282d73a88c1be67c20a9a62))
+* **tearsheet:** stacklimit not working ([#7389](https://github.com/carbon-design-system/ibm-products/issues/7389)) ([6d2243c](https://github.com/carbon-design-system/ibm-products/commit/6d2243ca663c36578aeb36462a597127b2ebfd61))
+* **useravatar:** renderIcon prop changed to slot ([#7099](https://github.com/carbon-design-system/ibm-products/issues/7099)) ([2745f90](https://github.com/carbon-design-system/ibm-products/commit/2745f905384ab446cccd0a437c41fe1e040ec6d8))
+* **wc-tests:** remove vi mock, no longer needed, causing flaky tests ([#7514](https://github.com/carbon-design-system/ibm-products/issues/7514)) ([ab29866](https://github.com/carbon-design-system/ibm-products/commit/ab298661e3517eb8d2dea364c043f4a7a1a92f8f))
+
+
+### Features
+
+* **about Modal:** add test coverage ([#7432](https://github.com/carbon-design-system/ibm-products/issues/7432)) ([00010be](https://github.com/carbon-design-system/ibm-products/commit/00010bebc6493fd5e23f053497e8d537f432f4b2))
+* add storybook (react and wc) amplitude instrumentation ([#7494](https://github.com/carbon-design-system/ibm-products/issues/7494)) ([8ec3386](https://github.com/carbon-design-system/ibm-products/commit/8ec3386c3e9f0524b1a3ba442f7fb66172a7f3b4))
+* **custom-element:** new es build module ([#7090](https://github.com/carbon-design-system/ibm-products/issues/7090)) ([ab5562b](https://github.com/carbon-design-system/ibm-products/commit/ab5562b03342bbf23d679cff9c1b1ab79e9c9c39))
+* **full-page-error:** adds web component example ([#7177](https://github.com/carbon-design-system/ibm-products/issues/7177)) ([bc8b0f0](https://github.com/carbon-design-system/ibm-products/commit/bc8b0f03e1d2ee0631acaf2cd5ea432beb88a5a7))
+* **importModal:** importModal as a pattern ([#7363](https://github.com/carbon-design-system/ibm-products/issues/7363)) ([c41f2c6](https://github.com/carbon-design-system/ibm-products/commit/c41f2c699ea2501c76209f7fc16cc808c7780f85))
+* options tile webcomponent init ([#7205](https://github.com/carbon-design-system/ibm-products/issues/7205)) ([b73e4f2](https://github.com/carbon-design-system/ibm-products/commit/b73e4f243c8567bbb34644de22bcb64b45af0c7d))
+* upgrade sb packages ([#7318](https://github.com/carbon-design-system/ibm-products/issues/7318)) ([8d1f019](https://github.com/carbon-design-system/ibm-products/commit/8d1f0198a8a52130fce95d60a866f26f96811795))
+* **web-components:** adds FullPageError to web components ([#6910](https://github.com/carbon-design-system/ibm-products/issues/6910)) ([55a3a2f](https://github.com/carbon-design-system/ibm-products/commit/55a3a2f94757610ae5f69fb4e003ebbcbb78f69b))
+* **web-components:** adds FullPageError to web components ([#7154](https://github.com/carbon-design-system/ibm-products/issues/7154)) ([67eacec](https://github.com/carbon-design-system/ibm-products/commit/67eacec5f85be248f9262f328d5b60f149e7e7fa)), closes [#6910](https://github.com/carbon-design-system/ibm-products/issues/6910) [#7153](https://github.com/carbon-design-system/ibm-products/issues/7153)
+
+
+### Reverts
+
+* Revert "feat(web-components): adds FullPageError to web components (#6910)" (#7153) ([1130cfa](https://github.com/carbon-design-system/ibm-products/commit/1130cfa404f42a8c2bf094caa571fde27c7e4ee3)), closes [#6910](https://github.com/carbon-design-system/ibm-products/issues/6910) [#7153](https://github.com/carbon-design-system/ibm-products/issues/7153)
+
+
+
+
 
 # [0.15.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.15.0-rc.0...@carbon/ibm-products-web-components@0.15.0) (2025-05-14)
 

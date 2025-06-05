@@ -150,6 +150,7 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
           onScroll={(scrollPercent) => {
             setScrollPosition(scrollPercent);
           }}
+          isScrollMode={true}
         >
           {children}
         </Carousel>

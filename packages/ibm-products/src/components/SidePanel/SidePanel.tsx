@@ -239,7 +239,7 @@ const defaults = {
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
  */
-const SidePanelBase = React.forwardRef(
+export let SidePanel = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -939,10 +939,7 @@ const SidePanelBase = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-export const SidePanel = pkg.checkComponentEnabled(
-  SidePanelBase,
-  componentName
-);
+SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
 
 const deprecatedProps = {
   /**

@@ -1,0 +1,124 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as NotificationPanelStories from './notification-panel.stories';
+
+<Meta of={NotificationPanelStories} />
+
+# NotificationPanel
+
+The NotificationsPanel sets expectations on the behavior for notifications, allowing the user to view and interact with them all in one place.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/notification-panel/index.js';
+```
+
+### HTML
+
+```html
+<c4p-notification-panel
+        .triggerButtonRef=${triggerButton}
+        .open="${openPanel}"
+        title-text="${args.titleText}"
+        today-text="${args.todayText}"
+        previous-text="${args.previousText}"
+        dismiss-all-label="${args.dismissAllLabel}"
+        donot-disturb-label="${args.doNotDisturbLabel}"
+        date-time-locale="${args.dateTimeLocale}"
+        @c4p-notification-dismiss-all=${dismissAllNotification}
+        @c4p-notification-click-outside=${clickOutside}
+      >
+        ${dataToday.length > 0
+          ? html`
+            ${dataToday.map((item) => {
+              return html`
+                <c4p-notification
+                  slot="today"
+                  .open=${args.open}
+                  @c4p-notification-click=${item.onNotificationClick}
+                  @c4p-notification-dismiss=${() => {
+                    notificationSingleDismiss(item.id, 'today');
+                  }}
+                  type=${item.type}
+                  unread=${item.unread}
+                  .timestamp=${item.timestamp}
+                >
+                  <cds-heading
+                    class=${classMap({
+                      [`${blockClassNotification}__notification-title`]:
+                        true,
+                      [`${blockClassNotification}__notification-title-unread`]:
+                        item.unread,
+                    })}
+                    slot="title"
+                  >
+                    ${item.title}
+                  </cds-heading>
+                  <div slot="description">${item.description}</div>
+                </c4p-notification>
+              `;
+            })}
+            `
+          : ''}
+        ${dataPrevious.length > 0
+          ? html`
+              ${dataPrevious.map((item) => {
+                return html`
+                  <c4p-notification
+                    slot="previous"
+                    @c4p-notification-click=${item.onNotificationClick}
+                    @c4p-notification-dismiss=${() => {
+                      notificationSingleDismiss(item.id, 'previous');
+                    }}
+                    type=${item.type}
+                    unread=${item.unread}
+                    .timestamp=${item.timestamp}
+                  >
+                    <cds-heading
+                      class=${classMap({
+                        [`${blockClassNotification}__notification-title`]:
+                          true,
+                        [`${blockClassNotification}__notification-title-unread`]:
+                          item.unread,
+                      })}
+                      slot="title"
+                    >
+                      ${item.title}
+                    </cds-heading>
+                    <div slot="description">${item.description}</div>
+                  </c4p-notification>
+                `;
+              })}
+            `
+          : ''}
+        <div
+          slot="footer"
+          class="${blockClassNotificationPanel}__bottom-actions"
+        >
+          <cds-button
+            kind="ghost"
+            class="${blockClassNotificationPanel}__view-all-button"
+            @click=${action(`Clicked View All`)}
+          >
+            View all (${dataPrevious.length + dataToday.length})
+          </cds-button>
+          <cds-button
+            kind="ghost"
+            size="sm"
+            class="${blockClassNotificationPanel}__settings-button"
+            @click=${action(`Clicked Settings`)}
+          >
+            ${Settings16({ slot: 'icon' })}
+          </cds-button>
+        </div>
+      </c4p-notification-panel>
+```
+
+## `<c4p-notification-panel>` attributes, properties and events
+
+<ArgTypes of="c4p-notification-panel" />

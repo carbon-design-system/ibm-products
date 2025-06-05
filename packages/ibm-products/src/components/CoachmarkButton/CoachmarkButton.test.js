@@ -51,6 +51,10 @@ const renderCoachmarkWithButton = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders a component CoachmarkButton', () => {
     renderCoachmarkWithButton({ children: buttonChildren });
     expect(screen.getByTestId(childDataTestId)).toHaveClass(blockClass);

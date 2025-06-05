@@ -300,9 +300,11 @@ const Template = (args) => {
           </HeaderPanel>
         </HeaderGlobalBar>
       </Header>
-      <div className={`${storyBlockClass}__add`}>
-        <Button onClick={addNewNotification}>Add new notification</Button>
-      </div>
+      <main>
+        <div className={`${storyBlockClass}__add`}>
+          <Button onClick={addNewNotification}>Add new notification</Button>
+        </div>
+      </main>
     </div>
   );
 };

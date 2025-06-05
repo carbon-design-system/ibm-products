@@ -89,6 +89,12 @@ export let CoachmarkOverlayElement = React.forwardRef<
   }
 );
 
+/**@ts-ignore*/
+CoachmarkOverlayElement.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 CoachmarkOverlayElement = pkg.checkComponentEnabled(
   CoachmarkOverlayElement,

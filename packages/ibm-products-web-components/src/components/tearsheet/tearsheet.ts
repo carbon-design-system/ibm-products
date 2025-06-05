@@ -137,6 +137,12 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
   _hasSlug = false;
 
   @state()
+  _hasDecorator = false;
+
+  @state()
+  _hasAILabel = false;
+
+  @state()
   _hasTitle = false;
 
   @state()
@@ -309,13 +315,33 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
 
   private _handleSlugChange(e: Event) {
     const childItems = (e.target as HTMLSlotElement).assignedElements();
-
     this._hasSlug = childItems.length > 0;
     if (this._hasSlug) {
       childItems[0].setAttribute('size', 'sm');
       this.setAttribute('slug', '');
     } else {
       this.removeAttribute('slug');
+    }
+  }
+  private _handleDecoratorChange(e: Event) {
+    this._hasAILabel = false;
+    const childItems = (e.target as HTMLSlotElement).assignedElements();
+    this._hasDecorator = childItems.length > 0;
+    if (this._hasDecorator) {
+      for (const item of childItems) {
+        if (item.tagName.toLowerCase() === 'cds-ai-label') {
+          this._hasAILabel = true;
+          break;
+        }
+      }
+    }
+    if (this._hasAILabel || this._hasDecorator) {
+      childItems[0].setAttribute('size', 'sm');
+      this.setAttribute(this._hasAILabel ? 'ai-label' : 'decorator', '');
+      this.removeAttribute(this._hasAILabel ? 'decorator' : 'ai-label');
+    } else {
+      this.removeAttribute('decorator');
+      this.removeAttribute('ai-label');
     }
   }
 
@@ -496,7 +522,6 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
     const indexOpen = CDSTearsheet._stack.all.indexOf(this._handleStackChange);
     CDSTearsheet._stack.open.splice(indexOpen, 1);
   }
-
   render() {
     const {
       closeIconDescription,
@@ -543,6 +568,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
       ?has-header-actions=${this._hasHeaderActions && this.width === 'wide'}
       ?has-actions=${this?._actionsCount > 0}
       ?has-slug=${this?._hasSlug}
+      ?has-decorator=${this?._hasDecorator}
       width=${width}
     >
       ${this.width === TEARSHEET_WIDTH.WIDE
@@ -560,6 +586,11 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
           @slotchange=${this._checkSetHasSlot}
         ></slot>
       </div>
+      <slot
+        name="decorator"
+        slot="ai-label"
+        @slotchange=${this._handleDecoratorChange}
+      ></slot>
       <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
       ${this.hasCloseIcon || this?._actionsCount === 0
         ? html`<cds-modal-close-button

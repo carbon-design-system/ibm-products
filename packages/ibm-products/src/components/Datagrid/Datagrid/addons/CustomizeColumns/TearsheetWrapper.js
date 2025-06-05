@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import CustomizeColumnsTearsheet from './CustomizeColumnsTearsheet';
 import { InlineEditContext } from '../InlineEdit/InlineEditContext';
 
-const TearsheetWrapper = ({ instance }) => {
+const TearsheetWrapper = ({ instance, launcherButtonRef }) => {
   const {
     onSaveColumnPrefs,
     isTearsheetOpen,
@@ -38,6 +38,7 @@ const TearsheetWrapper = ({ instance }) => {
       {...labels}
       isOpen={isTearsheetOpen}
       setIsTearsheetOpen={setIsTearsheetOpen}
+      launcherButtonRef={launcherButtonRef}
       columnDefinitions={instance.allColumns}
       originalColumnDefinitions={instance.columns}
       onSaveColumnPrefs={(updatedColDefs) => {

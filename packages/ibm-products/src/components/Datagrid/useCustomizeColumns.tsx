@@ -12,29 +12,49 @@ import {
 } from './Datagrid/addons/CustomizeColumns';
 import { DataGridState } from './types';
 import { Hooks, TableInstance } from 'react-table';
+import { ComponentProps } from 'react';
+
+const useInstance = (instance: TableInstance) => {
+  const { customizeColumnsProps } = instance as DataGridState;
+  const { labels } = customizeColumnsProps || {};
+  const [isTearsheetOpen, setIsTearsheetOpen] = React.useState(false);
+  const launcherButtonRef = React.useRef<HTMLButtonElement | null>(null);
+
+  const CustomizeColumnsButton = React.useCallback(
+    (props: ComponentProps<typeof ToggleButtonWrapper>) => (
+      <ToggleButtonWrapper
+        {...props}
+        iconTooltipLabel={labels?.iconTooltipLabel}
+        isTearsheetOpen={isTearsheetOpen}
+        setIsTearsheetOpen={setIsTearsheetOpen}
+        ref={launcherButtonRef}
+      />
+    ),
+    [isTearsheetOpen, labels?.iconTooltipLabel]
+  );
+  const CustomizeColumnsTearsheet = React.useCallback(
+    (props: ComponentProps<typeof CustomizeColumnsTearsheetWrapper>) => (
+      <CustomizeColumnsTearsheetWrapper
+        {...props}
+        launcherButtonRef={launcherButtonRef}
+      />
+    ),
+    [launcherButtonRef]
+  );
+
+  Object.assign(instance, {
+    customizeColumnsProps: {
+      ...customizeColumnsProps,
+      isTearsheetOpen,
+      setIsTearsheetOpen,
+    },
+    CustomizeColumnsButton,
+    CustomizeColumnsTearsheet,
+  });
+};
 
 const useCustomizeColumns = (hooks: Hooks) => {
-  const [isTearsheetOpen, setIsTearsheetOpen] = React.useState(false);
-  hooks.useInstance.push((instance: TableInstance) => {
-    const { customizeColumnsProps } = instance as DataGridState;
-    const { labels } = customizeColumnsProps || {};
-    Object.assign(instance, {
-      customizeColumnsProps: {
-        ...customizeColumnsProps,
-        isTearsheetOpen,
-        setIsTearsheetOpen,
-      },
-      CustomizeColumnsButton: (props) => (
-        <ToggleButtonWrapper
-          iconTooltipLabel={labels?.iconTooltipLabel}
-          isTearsheetOpen={isTearsheetOpen}
-          setIsTearsheetOpen={setIsTearsheetOpen}
-          {...props}
-        />
-      ),
-      CustomizeColumnsTearsheet: CustomizeColumnsTearsheetWrapper,
-    });
-  });
+  hooks.useInstance.push(useInstance);
 };
 
 export default useCustomizeColumns;

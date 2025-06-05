@@ -205,7 +205,9 @@ const Template = ({ actions, decorator, slug, ...args }, context) => {
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
       <div ref={ref}>
         <TearsheetNarrow
           {...args}
@@ -281,7 +283,7 @@ const StackedTemplate = ({ actions, decorator, slug, ...args }, context) => {
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
       <div style={{ height: '3rem' }} data-reserve-space="for toggle buttons" />
-      <div
+      <main
         style={{
           display: 'flex',
           position: 'fixed',
@@ -293,7 +295,7 @@ const StackedTemplate = ({ actions, decorator, slug, ...args }, context) => {
         <Button onClick={() => setOpen1(!open1)}>Toggle #1</Button>
         <Button onClick={() => setOpen2(!open2)}>Toggle #2</Button>
         <Button onClick={() => setOpen3(!open3)}>Toggle #3</Button>
-      </div>
+      </main>
       <div ref={ref}>
         <TearsheetNarrow
           {...args}

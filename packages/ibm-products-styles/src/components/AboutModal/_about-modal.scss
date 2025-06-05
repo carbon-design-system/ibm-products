@@ -25,9 +25,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 }
 
 .#{$block-class} .#{$block-class}__header {
-  padding: 0 20% 0 $spacing-05;
+  padding: 0;
   grid-row: auto;
   margin-block-end: 0;
+  padding-inline-end: 20%;
+  padding-inline-start: $spacing-05;
 }
 
 .#{$block-class} .#{$block-class}__title {

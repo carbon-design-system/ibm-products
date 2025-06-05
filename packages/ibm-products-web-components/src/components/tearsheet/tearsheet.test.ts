@@ -178,7 +178,7 @@ describe('c4p-tearsheet', () => {
 
   it('should render an ai label', async () => {
     const tearsheet = (await fixture(
-      template(defaultProps, getDecorator(1))
+      template(defaultProps, getDecorator('WITH_AI_LABEL'))
     )) as CDSTearsheet;
 
     await new Promise((resolve) => setTimeout(resolve, 100));
@@ -199,7 +199,7 @@ describe('c4p-tearsheet', () => {
 
   it('should render a non ai label decorator', async () => {
     const tearsheet = (await fixture(
-      template(defaultProps, getDecorator(2))
+      template(defaultProps, getDecorator('NON_AI_LABEL_DECORATOR'))
     )) as CDSTearsheet;
 
     await new Promise((resolve) => setTimeout(resolve, 100));

@@ -735,7 +735,6 @@ export const DataSpreadsheetBody = forwardRef(
                   type="button"
                   onClick={handleRowHeaderClickEvent(index)}
                   className={cx(
-                    // `${blockClass}__td`,
                     `${blockClass}__td-th-button`,
                     `${blockClass}__td-th`,
                     `${blockClass}--interactive-cell-element`,

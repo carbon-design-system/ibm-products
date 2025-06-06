@@ -32,6 +32,7 @@ import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 import { SidePanel } from './SidePanel';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
 import DocsPage from './SidePanel.docs-page';
+import { renderTrigger } from '../../global/js/utils/story-helper';
 
 const prefix = 'side-panel-stories__';
 
@@ -725,13 +726,7 @@ const SlideOverTemplate = (
 
   return (
     <>
-      <Button
-        ref={buttonRef}
-        onClick={() => setOpen(!open)}
-        className={`${prefix}toggle`}
-      >
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
+      {renderTrigger({ open, setOpen, buttonRef, prefix, name: 'side panel' })}
       <SidePanel
         {...args}
         open={open}
@@ -769,13 +764,7 @@ const FirstElementDisabledTemplate = (
 
   return (
     <>
-      <Button
-        ref={buttonRef}
-        onClick={() => setOpen(!open)}
-        className={`${prefix}toggle`}
-      >
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
+      {renderTrigger({ open, setOpen, buttonRef, prefix, name: 'side panel' })}
       <SidePanel
         {...args}
         open={open}
@@ -842,13 +831,7 @@ const StepTemplate = (
 
   return (
     <>
-      <Button
-        ref={buttonRef}
-        onClick={() => setOpen(!open)}
-        className={`${prefix}toggle`}
-      >
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
+      {renderTrigger({ open, setOpen, buttonRef, prefix, name: 'side panel' })}
       <SidePanel
         {...args}
         open={open}
@@ -890,13 +873,13 @@ const SlideInTemplate = (
   return (
     <>
       <div className={`${prefix}story-content`} id="ibm-products-page-content">
-        <Button
-          ref={buttonRef}
-          onClick={() => setOpen(!open)}
-          className={`${prefix}toggle`}
-        >
-          {open ? 'Close side panel' : 'Open side panel'}
-        </Button>
+        {renderTrigger({
+          open,
+          setOpen,
+          buttonRef,
+          prefix,
+          name: 'side panel',
+        })}
       </div>
       <SidePanel
         {...args}

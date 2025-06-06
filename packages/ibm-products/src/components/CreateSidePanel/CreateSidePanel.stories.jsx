@@ -27,6 +27,7 @@ import { CreateSidePanel } from './CreateSidePanel';
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './CreateSidePanel.docs-page';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
+import { renderTrigger } from '../../global/js/utils/story-helper';
 
 const blockClass = `${pkg.prefix}--create-side-panel`;
 
@@ -108,9 +109,7 @@ const DefaultTemplate = ({ slug, ...args }, context) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   return (
     <>
-      <Button onClick={() => setOpen(!open)}>
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
+      {renderTrigger({ open, setOpen, name: 'side panel' })}
       <CreateSidePanel
         {...args}
         open={open}
@@ -199,9 +198,7 @@ const TemplateWithFormValidation = ({ slug, ...args }, context) => {
   const [invalid, setInvalid] = useState(false);
   return (
     <>
-      <Button onClick={() => setOpen(!open)}>
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
+      {renderTrigger({ open, setOpen, name: 'side panel' })}
       <CreateSidePanel
         {...args}
         open={open}
@@ -293,9 +290,7 @@ const TemplateWithMultipleForms = ({ slug, ...args }, context) => {
   const [invalid, setInvalid] = useState(false);
   return (
     <>
-      <Button onClick={() => setOpen(!open)}>
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
+      {renderTrigger({ open, setOpen, name: 'side panel' })}
       <CreateSidePanel
         {...args}
         open={open}

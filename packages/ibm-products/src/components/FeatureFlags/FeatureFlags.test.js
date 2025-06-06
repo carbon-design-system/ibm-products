@@ -78,35 +78,35 @@ describe('FeatureFlags base tests', () => {
 
     function TestComponent() {
       const featureFlags = useFeatureFlags();
-      const enableExampleFlag1 = useFeatureFlag('enable-example-flag-1');
-      const enableExampleFlag = useFeatureFlag('enable-example-flag');
+      const enableTestFlagB = useFeatureFlag('enable-test-flag-b');
+      const enableTestFlagA = useFeatureFlag('enable-test-flag-a');
 
       checkFlags({
-        enableExampleFlag1: featureFlags.enabled('enable-example-flag-1'),
-        enableExampleFlag: featureFlags.enabled('enable-example-flag'),
+        enableTestFlagB: featureFlags.enabled('enable-test-flag-b'),
+        enableTestFlagA: featureFlags.enabled('enable-test-flag-a'),
       });
 
       checkFlag({
-        enableExampleFlag1,
-        enableExampleFlag,
+        enableTestFlagB,
+        enableTestFlagA,
       });
 
       return null;
     }
 
     render(
-      <FeatureFlags enableExampleFlag1>
+      <FeatureFlags enableTestFlagB>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      enableExampleFlag1: true,
-      enableExampleFlag: false,
+      enableTestFlagB: true,
+      enableTestFlagA: false,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableExampleFlag1: true,
-      enableExampleFlag: false,
+      enableTestFlagB: true,
+      enableTestFlagA: false,
     });
   });
 
@@ -116,50 +116,50 @@ describe('FeatureFlags base tests', () => {
 
     function TestComponent() {
       const featureFlags = useFeatureFlags();
-      const enableExampleFlag1 = useFeatureFlag('enable-example-flag-1');
-      const enableExampleFlag = useFeatureFlag('enable-example-flag');
+      const enableTestFlagB = useFeatureFlag('enable-test-flag-b');
+      const enableTestFlagA = useFeatureFlag('enable-test-flag-a');
 
       checkFlags({
-        enableExampleFlag1: featureFlags.enabled('enable-example-flag-1'),
-        enableExampleFlag: featureFlags.enabled('enable-example-flag'),
+        enableTestFlagB: featureFlags.enabled('enable-test-flag-b'),
+        enableTestFlagA: featureFlags.enabled('enable-test-flag-a'),
       });
 
       checkFlag({
-        enableExampleFlag1,
-        enableExampleFlag,
+        enableTestFlagB,
+        enableTestFlagA,
       });
 
       return null;
     }
 
     const { rerender } = render(
-      <FeatureFlags enableExampleFlag1>
+      <FeatureFlags enableTestFlagB>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      enableExampleFlag1: true,
-      enableExampleFlag: false,
+      enableTestFlagB: true,
+      enableTestFlagA: false,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableExampleFlag1: true,
-      enableExampleFlag: false,
+      enableTestFlagB: true,
+      enableTestFlagA: false,
     });
 
     rerender(
-      <FeatureFlags enableExampleFlag>
+      <FeatureFlags enableTestFlagA>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      enableExampleFlag1: false,
-      enableExampleFlag: true,
+      enableTestFlagB: false,
+      enableTestFlagA: true,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableExampleFlag1: false,
-      enableExampleFlag: true,
+      enableTestFlagB: false,
+      enableTestFlagA: true,
     });
   });
 
@@ -167,42 +167,42 @@ describe('FeatureFlags base tests', () => {
     const checkFlag = jest.fn();
 
     function TestComponent() {
-      const enableExampleFlag1 = useFeatureFlag('enable-example-flag-1');
-      const enableExampleFlag = useFeatureFlag('enable-example-flag');
+      const enableTestFlagB = useFeatureFlag('enable-test-flag-b');
+      const enableTestFlagA = useFeatureFlag('enable-test-flag-a');
 
-      checkFlag({ enableExampleFlag1, enableExampleFlag });
+      checkFlag({ enableTestFlagB, enableTestFlagA });
 
       return null;
     }
 
     render(
-      <FeatureFlags enableExampleFlag>
+      <FeatureFlags enableTestFlagA>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableExampleFlag1: false,
-      enableExampleFlag: true,
+      enableTestFlagB: false,
+      enableTestFlagA: true,
     });
 
     render(
-      <FeatureFlags enableExampleFlag>
-        <FeatureFlags enableExampleFlag1>
+      <FeatureFlags enableTestFlagA>
+        <FeatureFlags enableTestFlagB>
           <TestComponent />
         </FeatureFlags>
       </FeatureFlags>
     );
 
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableExampleFlag1: true,
-      enableExampleFlag: false,
+      enableTestFlagB: true,
+      enableTestFlagA: false,
     });
 
     render(
-      <FeatureFlags enableExampleFlag>
-        <FeatureFlags enableExampleFlag1>
-          <FeatureFlags enableExampleFlag={false} enableExampleFlag1={false}>
+      <FeatureFlags enableTestFlagA>
+        <FeatureFlags enableTestFlagB>
+          <FeatureFlags enableTestFlagA={false} enableTestFlagB={false}>
             <TestComponent />
           </FeatureFlags>
         </FeatureFlags>
@@ -210,8 +210,8 @@ describe('FeatureFlags base tests', () => {
     );
 
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableExampleFlag1: false,
-      enableExampleFlag: false,
+      enableTestFlagB: false,
+      enableTestFlagA: false,
     });
   });
 
@@ -221,35 +221,35 @@ describe('FeatureFlags base tests', () => {
 
     function TestComponent() {
       const featureFlags = useFeatureFlags();
-      const enableExampleFlag1 = useFeatureFlag('enable-example-flag-1'); // true default
-      const enableExampleFlag = useFeatureFlag('enable-example-flag'); // false default
+      const enableTestFlagB = useFeatureFlag('enable-test-flag-b'); // true default
+      const enableTestFlagA = useFeatureFlag('enable-test-flag-a'); // false default
 
       checkFlags({
-        enableExampleFlag1: featureFlags.enabled('enable-example-flag-1'),
-        enableExampleFlag: featureFlags.enabled('enable-example-flag'),
+        enableTestFlagB: featureFlags.enabled('enable-test-flag-b'),
+        enableTestFlagA: featureFlags.enabled('enable-test-flag-a'),
       });
 
       checkFlag({
-        enableExampleFlag1,
-        enableExampleFlag,
+        enableTestFlagB,
+        enableTestFlagA,
       });
 
       return null;
     }
 
     render(
-      <FeatureFlags enableExampleFlag>
+      <FeatureFlags enableTestFlagA>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      enableExampleFlag1: false,
-      enableExampleFlag: true,
+      enableTestFlagB: false,
+      enableTestFlagA: true,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableExampleFlag1: false,
-      enableExampleFlag: true,
+      enableTestFlagB: false,
+      enableTestFlagA: true,
     });
   });
 
@@ -259,35 +259,35 @@ describe('FeatureFlags base tests', () => {
 
     function TestComponent() {
       const featureFlags = useFeatureFlags();
-      const enableExampleFlag1 = useFeatureFlag('enable-example-flag-1');
-      const enableExampleFlag = useFeatureFlag('enable-example-flag');
+      const enableTestFlagB = useFeatureFlag('enable-test-flag-b');
+      const enableTestFlagA = useFeatureFlag('enable-test-flag-a');
 
       checkFlags({
-        enableExampleFlag1: featureFlags.enabled('enable-example-flag-1'),
-        enableExampleFlag: featureFlags.enabled('enable-example-flag'),
+        enableTestFlagB: featureFlags.enabled('enable-test-flag-b'),
+        enableTestFlagA: featureFlags.enabled('enable-test-flag-a'),
       });
 
       checkFlag({
-        enableExampleFlag1,
-        enableExampleFlag,
+        enableTestFlagB,
+        enableTestFlagA,
       });
 
       return null;
     }
 
     render(
-      <FeatureFlags enableExampleFlag1 enableExampleFlag={false}>
+      <FeatureFlags enableTestFlagB enableTestFlagA={false}>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      enableExampleFlag1: true,
-      enableExampleFlag: false,
+      enableTestFlagB: true,
+      enableTestFlagA: false,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableExampleFlag1: true,
-      enableExampleFlag: false,
+      enableTestFlagB: true,
+      enableTestFlagA: false,
     });
   });
 });

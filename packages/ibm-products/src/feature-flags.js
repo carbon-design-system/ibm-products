@@ -14,7 +14,7 @@ FeatureFlags.merge({
   'enable-datagrid-useCustomizeColumns': false,
   'ExampleComponent.secondaryIcon': false,
   'ExampleComponent.useExample': false,
-  'enable-example-flag': false, // used in testing
-  'enable-example-flag-1': true, // used in testing
+  'enable-test-flag-a': false, // used in testing
+  'enable-test-flag-b': true, // used in testing
   enableSidepanelResizer: false,
 });

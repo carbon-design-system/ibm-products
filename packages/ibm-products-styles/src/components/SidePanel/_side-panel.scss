@@ -200,7 +200,7 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
     inset-inline-end: 0;
   }
   &.#{$block-class}--left-placement {
-    .#{$clabs-prefix}--resizer {
+    .#{$clabs-prefix}__resizer {
       grid-column: 2;
       inset-inline-start: 0;
 
@@ -231,7 +231,7 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
       0 4px 10px 2px $ai-drop-shadow;
   }
 
-  .#{$clabs-prefix}--resizer--vertical::before {
+  .#{$clabs-prefix}__resizer--vertical::before {
     position: absolute;
     z-index: -1;
     background-color: transparent;
@@ -245,12 +245,12 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
   }
 
   &:hover {
-    .#{$clabs-prefix}--resizer--vertical::before {
+    .#{$clabs-prefix}__resizer--vertical::before {
       background-color: $button-secondary-hover;
     }
   }
 
-  .#{$clabs-prefix}--resizer {
+  .#{$clabs-prefix}__resizer {
     background-color: transparent;
     grid-row: span 4 / span 3;
     inset-inline-start: -$spacing-02;
@@ -640,7 +640,7 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
 }
 
 // TODO: remove along with prefix after resizer available in labs
-.#{$clabs-prefix}--resizer {
+.#{$clabs-prefix}__resizer {
   position: relative;
   flex: none;
   background-color: $border-subtle-01;

@@ -31,8 +31,8 @@ export interface FeatureFlagsProps {
   // exampleComponentSecondaryIcon?: boolean;
   // exampleComponentUseExample?: boolean;
   enableSidepanelResizer?: boolean;
-  enableExampleFlag?: boolean;
-  enableExampleFlag1?: boolean;
+  enableTestFlagA?: boolean;
+  enableTestFlagB?: boolean;
 }
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
@@ -55,8 +55,8 @@ function FeatureFlags({
   // exampleComponentSecondaryIcon = false,
   // exampleComponentUseExample = false,
   enableSidepanelResizer = false,
-  enableExampleFlag = false,
-  enableExampleFlag1 = false,
+  enableTestFlagA = false,
+  enableTestFlagB = false,
 }: FeatureFlagsProps): JSX.Element {
   const parentScope = useContext(FeatureFlagContext);
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
@@ -69,8 +69,8 @@ function FeatureFlags({
     // 'ExampleComponent.secondaryIcon': exampleComponentSecondaryIcon,
     // 'ExampleComponent.useExample': exampleComponentUseExample,
     enableSidepanelResizer: enableSidepanelResizer,
-    'enable-example-flag': enableExampleFlag,
-    'enable-example-flag-1': enableExampleFlag1,
+    'enable-test-flag-a': enableTestFlagA,
+    'enable-test-flag-b': enableTestFlagB,
     ...flags,
   };
   const [scope, updateScope] = useState(() => {
@@ -112,9 +112,9 @@ FeatureFlags.propTypes = {
   enableDatagridUseCustomizeColumns: PropTypes.bool,
   enableDatagridUseEditableCell: PropTypes.bool,
   enableDatagridUseInlineEdit: PropTypes.bool,
-  enableExampleFlag: PropTypes.bool,
-  enableExampleFlag1: PropTypes.bool,
   enableSidepanelResizer: PropTypes.bool,
+  enableTestFlagA: PropTypes.bool,
+  enableTestFlagB: PropTypes.bool,
   // exampleComponentSecondaryIcon: PropTypes.bool,
   // exampleComponentUseExample: PropTypes.bool,
   flags: deprecateProp(

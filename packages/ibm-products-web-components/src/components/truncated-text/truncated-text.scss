@@ -92,10 +92,8 @@ $block-class: #{$prefix}--truncated-text;
     block-size: 100%;
     color: $text-primary;
     content: '...';
-    inline-size: 1em;
-    inset-block-start: 0;
-    inset-inline-start: calc(-1em - 0.2em);
-    padding-inline-start: 0.2em;
+    inline-size: 1em; // use em so truncation element scales with parent font size
+    inset-inline-start: -1em; // positions pseudo element before button without overlap across font sizes
     pointer-events: none;
   }
 

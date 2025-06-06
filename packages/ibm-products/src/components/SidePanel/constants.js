@@ -11,5 +11,5 @@ export const SIDE_PANEL_SIZES = {
   md: '30rem',
   lg: '40rem',
   xl: '65rem',
-  max: '75%',
+  '2xl': '80rem',
 };

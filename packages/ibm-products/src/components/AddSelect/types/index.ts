@@ -57,5 +57,4 @@ export interface SortOption {
   direction?: string;
   attribute?: string;
   label?: string;
-  shortcut?: ReactNode;
 }

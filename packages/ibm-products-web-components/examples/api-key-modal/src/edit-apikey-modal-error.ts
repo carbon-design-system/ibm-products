@@ -87,12 +87,9 @@ class EditApiKeyModalError extends HostListenerMixin(LitElement) {
       try {
         await navigator.clipboard.writeText(this.apiKey);
       } catch (e) {
-        console.error(e);
         this.copyError = true;
       }
     } else {
-      console.log('inside else');
-
       this.error = false;
       this.loading = true;
       await this.wait(1000);
@@ -196,10 +193,7 @@ class EditApiKeyModalError extends HostListenerMixin(LitElement) {
             ? html`
                 <div class=${`${blockClass}__messaging`}>
                   <div class=${`${blockClass}__error-icon`}>
-                    ${ErrorFilled16({
-                      slot: 'icon',
-                      // class: `${blockClass}__error-icon`,
-                    })}
+                    ${ErrorFilled16({ slot: 'icon' })}
                   </div>
                   <p
                     class=${`${blockClass}__messaging-text`}

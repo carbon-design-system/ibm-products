@@ -11,6 +11,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import styles from './api-key-modal.scss?lit';
 
+const blockClass = `c4p--apikey-modal`;
 @customElement('api-key-downloader')
 export class APIKeyDownloader extends LitElement {
   @property({ type: String }) apiKey;
@@ -50,13 +51,13 @@ export class APIKeyDownloader extends LitElement {
       <style>
         ${styles}
       </style>
-      <div class="c4p--apikey-modal__download-container">
-        <p class="c4p--apikey-modal__messaging-text">
+      <div class=${`${blockClass}__download-container`}>
+        <p class=${`${blockClass}__messaging-text`}>
           ${this.body}
           <a
             href=${this.href || ''}
             download=${this.download || ''}
-            class="c4p--apikey-modal__download-link"
+            class=${`${blockClass}__download-link`}
             aria-label=${this.downloadLinkLabel || this.linkText}
             role="button"
           >

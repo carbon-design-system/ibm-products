@@ -10,6 +10,7 @@ import {
   DOCUMENT_POSITION_BROAD_FOLLOWING,
   selectorTabbable,
 } from './keyboardNavigation';
+import { carbon } from '../../../settings';
 
 /**
  * @param {Node} node A DOM node.
@@ -19,11 +20,10 @@ import {
 function elementOrParentIsFloatingMenu(
   node,
   selectorsFloatingMenus = [
-    `.${prefix}--overflow-menu-options`,
-    `.${prefix}--tooltip`,
+    `.${carbon.prefix}--overflow-menu-options`,
+    `.${carbon.prefix}--tooltip`,
     '.flatpickr-calendar',
-  ],
-  prefix
+  ]
 ) {
   if (node && typeof node.closest === 'function') {
     return selectorsFloatingMenus.some((selector) => node.closest(selector));
@@ -47,18 +47,13 @@ function wrapFocus({
   currentActiveNode,
   oldActiveNode,
   selectorsFloatingMenus,
-  carbonPrefix = 'cds',
 }) {
   if (
     bodyNode &&
     currentActiveNode &&
     oldActiveNode &&
     !bodyNode.contains(currentActiveNode) &&
-    !elementOrParentIsFloatingMenu(
-      currentActiveNode,
-      selectorsFloatingMenus,
-      carbonPrefix
-    )
+    !elementOrParentIsFloatingMenu(currentActiveNode, selectorsFloatingMenus)
   ) {
     const comparisonResult =
       oldActiveNode.compareDocumentPosition(currentActiveNode);

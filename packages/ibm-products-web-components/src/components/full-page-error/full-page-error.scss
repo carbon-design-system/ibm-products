@@ -19,7 +19,6 @@ $css--plex: true !default;
 
 // Local vars
 $prefix: 'c4p';
-$carbon-prefix: 'cds';
 $block-class: #{$prefix}--side-panel;
 
 :host(#{$prefix}-full-page-error) {

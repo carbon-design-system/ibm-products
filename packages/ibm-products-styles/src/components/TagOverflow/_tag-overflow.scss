@@ -1,17 +1,18 @@
 //
-// Copyright IBM Corp. 2024, 2024
+// Copyright IBM Corp. 2024, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 // Standard imports.
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config';
 
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
@@ -22,8 +23,8 @@
 // TODO: @use(s) of IBM Products component styles used by TagOverflow
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--tag-overflow;
-$block-class-popover: #{$block-class}-popover;
+$block-class: #{c4p-settings.$pkg-prefix}--tag-overflow;
+$block-class-overflow: #{$block-class}-popover;
 $block-class-modal: #{$block-class}-modal;
 
 .#{$block-class}__visible-tags {
@@ -42,10 +43,12 @@ $block-class-modal: #{$block-class}-modal;
   flex-wrap: wrap;
 }
 
+.#{$block-class}__item {
+  margin: $spacing-01;
+}
+
 .#{$block-class}__item--tag {
   border: none;
-  margin-block-end: $spacing-03;
-  margin-inline-end: $spacing-03;
 }
 
 .#{$block-class}__item--tag span {
@@ -61,78 +64,71 @@ $block-class-modal: #{$block-class}-modal;
   max-inline-size: $spacing-09;
 }
 
-.#{$carbon-prefix}--popover .#{$carbon-prefix}--popover-content {
+.#{config.$prefix}--popover .#{config.$prefix}--popover-content {
   white-space: normal;
 }
 
-.#{$block-class-popover} {
+.#{$block-class-overflow} {
   display: inline-block;
   vertical-align: bottom;
-
-  .#{$carbon-prefix}--tag.#{$carbon-prefix}--tag--interactive {
+  .#{config.$prefix}--tag.#{config.$prefix}--tag--interactive {
     border: 0;
   }
 
-  .#{$carbon-prefix}--popover .#{$carbon-prefix}--popover-content {
+  .#{config.$prefix}--popover .#{config.$prefix}--popover-content {
     padding: $spacing-05;
   }
 }
 
-.#{$block-class-popover}--hidden {
+.#{$block-class-overflow}--hidden {
   overflow: hidden;
   max-inline-size: 0;
   visibility: hidden;
 }
 
-@include mixins.block-wrap('#{$block-class-popover}__el') {
-  &.#{$block-class-popover}__el {
+@include mixins.block-wrap('#{$block-class-overflow}__el') {
+  &.#{$block-class-overflow}__el {
     // removes the min width in Carbon
     min-inline-size: initial;
     text-align: start;
   }
 
-  .#{$block-class-popover}__trigger {
+  .#{$block-class-overflow}__trigger {
     /* stylelint-disable-next-line declaration-no-important */
     border: none !important;
     font-family: inherit;
   }
 
-  .#{$carbon-prefix}--link:active,
-  .#{$carbon-prefix}--link:active:visited,
-  .#{$carbon-prefix}--link:active:visited:hover {
+  .#{$block-class-overflow}__show-all-tags-link.#{config.$prefix}--link:visited {
+    display: inline-block;
+    margin: $spacing-03 0 $spacing-02; // to match the tags
+    color: $link-inverse;
+  }
+
+  .#{config.$prefix}--link:active,
+  .#{config.$prefix}--link:active:visited,
+  .#{config.$prefix}--link:active:visited:hover {
     color: $text-inverse;
   }
 
-  .#{$block-class-popover}__tag-list {
+  .#{$block-class-overflow}__tag-list {
     display: flex;
     flex-direction: column;
   }
 
-  .#{$block-class-popover}__show-all-tags-link {
+  .#{$block-class-overflow}__show-all-tags-link {
     color: $link-inverse;
-
-    &:hover,
-    &:visited:hover {
-      color: $link-inverse-hover;
-    }
-
-    &:focus {
-      color: $focus-inverse;
-    }
-
-    &:visited {
-      color: $link-inverse;
-    }
+    margin-block-start: $spacing-03;
   }
 
-  .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--tag
-    .#{$carbon-prefix}--tag {
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
+    .#{config.$prefix}--tag {
     background-color: $background-inverse-hover;
   }
 
-  .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--default,
-  .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--default
-    .#{$carbon-prefix}--tag {
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default
+    .#{config.$prefix}--tag {
     @include type.type-style('body-compact-01');
 
     display: block;
@@ -146,21 +142,21 @@ $block-class-modal: #{$block-class}-modal;
     min-inline-size: initial;
   }
 
-  .#{$block-class-popover}__tag .#{$carbon-prefix}--tag__close-icon {
-    // undo override by .#{$carbon-prefix}--tooltip button
+  .#{$block-class-overflow}__tag .#{config.$prefix}--tag__close-icon {
+    // undo override by .#{config.$prefix}--tooltip button
     padding: 0;
   }
 
-  .#{$block-class-popover}__tag .#{$carbon-prefix}--tag--high-contrast {
+  .#{$block-class-overflow}__tag .#{config.$prefix}--tag--high-contrast {
     background-color: $background;
     color: $text-primary;
   }
 
-  .#{$block-class-popover}__tag .#{$carbon-prefix}--tag__close-icon:hover {
+  .#{$block-class-overflow}__tag .#{config.$prefix}--tag__close-icon:hover {
     background-color: $background-hover;
   }
 
-  .#{$block-class-popover}__tag .#{$carbon-prefix}--tag__close-icon:focus {
+  .#{$block-class-overflow}__tag .#{config.$prefix}--tag__close-icon:focus {
     box-shadow: inset 0 0 0 $spacing-01 $focus;
   }
 }
@@ -186,12 +182,5 @@ $block-class-modal: #{$block-class}-modal;
   .#{$block-class-modal}__header {
     margin-inline-end: $spacing-05;
     padding-inline-end: 0;
-  }
-
-  .#{$block-class-modal}__body {
-    .#{$carbon-prefix}--tag {
-      margin-block-end: $spacing-03;
-      margin-inline-end: $spacing-03;
-    }
   }
 }

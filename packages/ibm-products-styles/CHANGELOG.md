@@ -1,7 +1,26 @@
+## `@carbon/ibm-products-styles@2.64.0-rc.0`
+### Bug fixes :bug:
+- fix(rtl): minor updates to provide stronger rtl support (#7580)
+- fix: interstitial accessibility issue fixes (#7478)
+- fix(page header):  current page a11y issue (#7532)
+- fix(CustomizeColumnsTearsheet): keyboard and screen reader fixes (#7491)
+
+### Housekeeping :house:
+- chore(FilterSummary): fix clipped tooltips (#7567)
+- test(CreateTearsheet): remove container usage (#7533)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [2.63.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.63.0-rc.0...@carbon/ibm-products-styles@2.63.0) (2025-05-28)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
 
 # [2.63.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.58.0-rc.0...@carbon/ibm-products-styles@2.63.0-rc.0) (2025-05-19)
 

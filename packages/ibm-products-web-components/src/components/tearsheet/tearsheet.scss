@@ -216,7 +216,6 @@ $motion-duration: $duration-moderate-02;
 :host(#{$prefix}-tearsheet[width='narrow']) {
   .#{$block-class}__header {
     margin: 0;
-    background-color: $layer;
     border-block-end: 1px solid $border-subtle-01;
   }
 
@@ -226,7 +225,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__main {
-    background-color: $layer;
+    background-color: unset;
   }
 }
 
@@ -324,4 +323,9 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__buttons
   ::slotted(#{$carbon-prefix}-button) {
   block-size: $spacing-10;
+}
+:host(#{$prefix}-tearsheet[width='narrow']) {
+  .#{$block-class}__buttons {
+    background-color: unset;
+  }
 }

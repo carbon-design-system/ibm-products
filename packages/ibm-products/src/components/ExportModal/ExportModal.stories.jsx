@@ -9,7 +9,7 @@ import React, { useState, useRef } from 'react';
 import { Button } from '@carbon/react';
 import { ExportModal } from '.';
 import wait from '../../global/js/utils/wait';
-import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+import mdx from './ExportModal.mdx';
 
 export default {
   title: 'IBM Products/Components/Export/ExportModal',
@@ -17,24 +17,7 @@ export default {
   tags: ['autodocs'],
   parameters: {
     docs: {
-      page: () => (
-        <StoryDocsPage
-          altGuidelinesHref={[
-            {
-              href: 'https://pages.github.ibm.com/carbon/ibm-products/components/export/usage/',
-              label: 'Export usage guidelines',
-            },
-            {
-              href: 'https://www.carbondesignsystem.com/components/modal/usage',
-              label: 'Carbon Modal usage guidelines',
-            },
-            {
-              href: 'https://react.carbondesignsystem.com/?path=/docs/components-modal',
-              label: 'Carbon Modal documentation',
-            },
-          ]}
-        />
-      ),
+      page: mdx,
     },
   },
   argTypes: {
@@ -47,10 +30,6 @@ export default {
         },
       },
       options: [0, 1],
-      mapping: {
-        0: [],
-        1: ['pdf'],
-      },
     },
     preformattedExtensions: {
       control: {
@@ -61,19 +40,6 @@ export default {
         },
       },
       options: [0, 1],
-      mapping: {
-        0: [],
-        1: [
-          {
-            extension: 'YAML',
-            description: 'best for IBM managed cloud',
-          },
-          {
-            extension: 'BAR',
-            description: 'best for integration server',
-          },
-        ],
-      },
     },
   },
 };
@@ -91,7 +57,31 @@ const defaultProps = {
   successful: true,
 };
 
-const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
+const Template = ({ storyInitiallyOpen, ...args }, context) => {
+  const { preformattedExtensions, validExtensions } = args;
+  const getPreformattedExtensions = (value) => {
+    if (value === 1) {
+      return [
+        {
+          extension: 'YAML',
+          description: 'best for IBM managed cloud',
+        },
+        {
+          extension: 'BAR',
+          description: 'best for integration server',
+        },
+      ];
+    }
+    return [];
+  };
+
+  const getValidations = (value) => {
+    if (value === 1) {
+      return ['pdf'];
+    }
+    return [];
+  };
+
   const [open, setOpen] = useState(
     context.viewMode !== 'docs' && storyInitiallyOpen
   );
@@ -124,10 +114,14 @@ const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
     );
   }
   return (
-    <>
+    <main>
       {RenderButton(triggerButtonRef)}
       <ExportModal
         {...args}
+        validExtensions={getValidations(validExtensions)}
+        preformattedExtensions={getPreformattedExtensions(
+          preformattedExtensions
+        )}
         open={open}
         onClose={onCloseHandler}
         onRequestSubmit={onSubmitHandler}
@@ -139,7 +133,7 @@ const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
         errorMessage="Server error 500"
         triggerButtonRef={triggerButtonRef}
       />
-    </>
+    </main>
   );
 };
 

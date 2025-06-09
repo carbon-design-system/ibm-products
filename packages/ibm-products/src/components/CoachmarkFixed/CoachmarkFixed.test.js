@@ -56,6 +56,8 @@ const renderCoachmarkFixed = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: jest.fn().mockImplementation((query) => ({

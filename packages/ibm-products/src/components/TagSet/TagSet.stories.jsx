@@ -204,14 +204,14 @@ const Template = (argsIn) => {
 
   const ref = useRef(undefined);
   return (
-    <div style={{ width: containerWidth }} ref={ref}>
+    <main style={{ width: containerWidth }} ref={ref}>
       <TagSet
         {...args}
         allTagsModalTarget={
           allTagsModalTargetCustomDomNode ? ref.current : undefined
         }
       />
-    </div>
+    </main>
   );
 };
 
@@ -276,7 +276,7 @@ const TemplateWithClose = (argsIn) => {
     );
   }, [size]);
   return (
-    <div style={{ width: containerWidth }} ref={ref}>
+    <main style={{ width: containerWidth }} ref={ref}>
       <TagSet
         {...args}
         tags={liveTags}
@@ -284,7 +284,7 @@ const TemplateWithClose = (argsIn) => {
           allTagsModalTargetCustomDomNode ? ref.current : undefined
         }
       />
-    </div>
+    </main>
   );
 };
 

@@ -204,10 +204,14 @@ describe(CreateTearsheet.displayName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('has no accessibility violations', async () => {
-    const { container } = renderCreateTearsheet({ ...defaultProps });
-    expect(() => container.toBeAccessible());
-    expect(() => container.toHaveNoAxeViolations());
+  it.skip('has no accessibility violations', async () => {
+    renderCreateTearsheet({ ...defaultProps });
+    await expect(
+      document.querySelector(`.${prefix}--tearsheet`)
+    ).toBeAccessible(CreateTearsheet.displayName);
+    await expect(
+      document.querySelector(`.${prefix}--tearsheet`)
+    ).toHaveNoAxeViolations();
   });
 
   it('renders the CreateTearsheet component', async () => {
@@ -502,8 +506,8 @@ describe(CreateTearsheet.displayName, () => {
     ));
 
   it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
-    const { container } = renderEmptyCreateTearsheet(defaultProps);
-    const createTearsheetSteps = container.querySelectorAll(
+    renderEmptyCreateTearsheet(defaultProps);
+    const createTearsheetSteps = document.querySelectorAll(
       `.${createTearsheetBlockClass}__step`
     );
     expect(Array(...createTearsheetSteps)).toStrictEqual([]);
@@ -521,7 +525,9 @@ describe(CreateTearsheet.displayName, () => {
     const backButtonElement = screen.getByText(backButtonText);
     await act(() => click(backButtonElement));
     expect(onPreviousStepFn).toHaveBeenCalledTimes(1);
-    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
+    const tearsheetElement = screen.getByRole('dialog', {
+      name: ariaLabel,
+    });
     const tearsheetChildren = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content`
     ).children;

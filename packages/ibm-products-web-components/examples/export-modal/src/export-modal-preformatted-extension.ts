@@ -153,7 +153,6 @@ class ExportModalPreformattedExtension extends HostListenerMixin(LitElement) {
               ? html`
                   <cds-loading
                     aria-live="off"
-                    description=""
                     small
                     .withOverlay=${false}
                   ></cds-loading>

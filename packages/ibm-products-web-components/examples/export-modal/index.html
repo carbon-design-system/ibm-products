@@ -11,7 +11,7 @@ LICENSE file in the root directory of this source tree.
 <head>
   <title>carbon-web-components export modal example</title>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="src/export-modal.scss" /> 
+  <link rel="stylesheet" href="src/styles.scss" /> 
   <script type="module" src="src/export-modal.ts"></script>
 </head>
 <body>
@@ -20,18 +20,10 @@ LICENSE file in the root directory of this source tree.
     <p>Standard Export Modal</p>
     <standard-export-modal id='standard'></standard-export-modal>
     <p>With Extension Validation</p>
-    <standard-export-modal id='withExtension'></standard-export-modal>
+    <export-modal-with-extension></export-modal-with-extension>
     <p>With Preformatted Extension</p>
     <export-modal-preformatted-extension></export-modal-preformatted-extension>
   </section>
-  <script>
-    const validExtension = ['pdf'];
-    window.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('withExtension');
-    if (modal) {
-      modal.validExtensions = validExtension;
-    }
-  });
 </script>
 </body>
 </html> 

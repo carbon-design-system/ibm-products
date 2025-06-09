@@ -6,3 +6,4 @@
  */
 export { default as StandardExportModal } from './standard-export-modal';
 export { default as ExportModalPreformattedExtension } from './export-modal-preformatted-extension';
+export { default as ExportModalWithExtension } from './export-modal-with-extension';

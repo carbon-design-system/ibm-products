@@ -21,11 +21,7 @@ export const standard = {
 
 export const WithExtension = {
   render: () => {
-    const extension = ['pdf'];
-    return html`
-      <standard-export-modal .validExtensions=${extension}>
-      </standard-export-modal>
-    `;
+    return html` <export-modal-with-extension> </export-modal-with-extension> `;
   },
 };
 

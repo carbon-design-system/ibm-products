@@ -23,14 +23,14 @@ import styles from './export-modal.scss?lit';
 const blockClass = `c4p--export-modal`;
 
 /**
- * StandardExportModal.
+ * ExportModalWithExtension.
  *
- * @element standard-export-modal
+ * @element export-modal-with-extension
  *
  * */
 
-@customElement(`standard-export-modal`)
-class StandardExportModal extends HostListenerMixin(LitElement) {
+@customElement(`export-modal-with-extension`)
+class ExportModalWithExtension extends HostListenerMixin(LitElement) {
   @state()
   filename = '';
 
@@ -47,7 +47,7 @@ class StandardExportModal extends HostListenerMixin(LitElement) {
   dirtyInput: Boolean = false;
 
   @property({ type: Array })
-  validExtensions: string[] = [];
+  validExtensions: string[] = ['pdf'];
 
   private wait = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -108,6 +108,8 @@ class StandardExportModal extends HostListenerMixin(LitElement) {
   render() {
     let modalRef: HTMLElement | null = null;
     const submitted = this.loading || this.error || this.successful;
+
+    console.log(this.dirtyInput);
 
     return html`
       <style>
@@ -218,4 +220,4 @@ class StandardExportModal extends HostListenerMixin(LitElement) {
   }
   static styles = styles;
 }
-export default StandardExportModal;
+export default ExportModalWithExtension;

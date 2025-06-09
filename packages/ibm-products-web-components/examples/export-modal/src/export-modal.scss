@@ -8,10 +8,6 @@
 $css--plex: true !default;
 
 /* Other Carbon settings. */
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/colors';
 @use 'sass:map';
 @use '@carbon/styles';
 @use '@carbon/ibm-products-styles/scss/components/ExportModal';
@@ -20,12 +16,6 @@ $prefix: 'c4p';
 $carbon-prefix: 'cds';
 
 $block-class: #{$prefix}--export-modal;
-
-:root {
-  @include theme.theme(themes.$white);
-  background-color: var(--cds-background);
-  color: var(--cds-text-primary);
-}
 
 .#{$block-class} {
   @extend .#{$block-class};

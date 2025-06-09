@@ -11,8 +11,10 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family' as *;
-@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/config';
 @use '@carbon/styles/scss/utilities';
+
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // NotificationsPanel uses the following IBM Products components:
 // NotificationsEmptyState
@@ -120,7 +122,7 @@ $block-size: 38.5rem;
     .#{$block-class}__do-not-disturb-toggle {
       padding-block-end: $spacing-03;
 
-      .#{c4p-settings.$carbon-prefix}--toggle__label-text {
+      .#{config.$prefix}--toggle__label-text {
         @include utilities.visually-hidden;
       }
     }
@@ -236,7 +238,7 @@ $block-size: 38.5rem;
         padding: 0;
         min-inline-size: 5.5rem;
 
-        .#{c4p-settings.$carbon-prefix}--btn__icon {
+        .#{config.$prefix}--btn__icon {
           // stylelint-disable-next-line carbon/motion-easing-use
           transition: transform $duration-moderate-02 ease;
           /* stylelint-disable-next-line max-nesting-depth */
@@ -245,18 +247,18 @@ $block-size: 38.5rem;
           }
         }
         &.#{$block-class}__notification-read-more-button {
-          .#{c4p-settings.$carbon-prefix}--btn__icon {
+          .#{config.$prefix}--btn__icon {
             transform: rotate(0deg);
           }
         }
         &.#{$block-class}__notification-read-less-button {
-          .#{c4p-settings.$carbon-prefix}--btn__icon {
+          .#{config.$prefix}--btn__icon {
             transform: rotate(180deg);
           }
         }
       }
     }
-    .#{c4p-settings.$carbon-prefix}--popover-container {
+    .#{config.$prefix}--popover-container {
       position: initial;
     }
     .#{$block-class}__dismiss-single-button {
@@ -342,8 +344,7 @@ $block-size: 38.5rem;
       min-block-size: 2.5rem;
       min-inline-size: 2.5rem;
     }
-    .#{$block-class}__settings-button
-      .#{c4p-settings.$carbon-prefix}--btn__icon {
+    .#{$block-class}__settings-button .#{config.$prefix}--btn__icon {
       margin: 0;
     }
   }

@@ -16,6 +16,7 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/config';
 
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
@@ -228,10 +229,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       padding-block-start: $spacing-07;
     }
 
-    &:has(
-        .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
-      ),
-    &.#{$block-class}__header--has-navigation-back.#{c4p-settings.$carbon-prefix}--btn--md {
+    &:has(.#{$block-class}__navigation-back-button.#{config.$prefix}--btn--md),
+    &.#{$block-class}__header--has-navigation-back.#{config.$prefix}--btn--md {
       padding-block-start: $spacing-08;
     }
 
@@ -263,7 +262,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     }
 
     &.#{$block-class}__header--on-detail-step
-      .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
+      .#{$block-class}__navigation-back-button.#{config.$prefix}--btn--md
       ~ .#{$block-class}__collapsed-title-text {
       inset-block-start: $spacing-06;
     }
@@ -421,14 +420,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     margin-inline-end: $spacing-03;
   }
 
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button {
+  .#{config.$prefix}--btn.#{$block-class}__navigation-back-button {
     position: fixed;
     z-index: 5;
     inset-block-start: 0;
     inset-inline-start: 0;
   }
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button,
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button {
+  .#{config.$prefix}--btn.#{$block-class}__navigation-back-button,
+  .#{config.$prefix}--btn.#{$block-class}__close-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -449,8 +448,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     }
   }
 
-  .#{c4p-settings.$carbon-prefix}--btn--md.#{$block-class}__navigation-back-button,
-  .#{c4p-settings.$carbon-prefix}--btn--md.#{$block-class}__close-button {
+  .#{config.$prefix}--btn--md.#{$block-class}__navigation-back-button,
+  .#{config.$prefix}--btn--md.#{$block-class}__close-button {
     block-size: $spacing-08;
     inline-size: $spacing-08;
   }
@@ -504,15 +503,15 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 }
 
 // form fields should receive correct background color
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--text-input,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--text-area,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--search-input,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--select-input,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--multi-select,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--dropdown,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--dropdown-list,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--number input[type='number'],
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--date-picker__input {
+.#{$block-class} .#{config.$prefix}--text-input,
+.#{$block-class} .#{config.$prefix}--text-area,
+.#{$block-class} .#{config.$prefix}--search-input,
+.#{$block-class} .#{config.$prefix}--select-input,
+.#{$block-class} .#{config.$prefix}--multi-select,
+.#{$block-class} .#{config.$prefix}--dropdown,
+.#{$block-class} .#{config.$prefix}--dropdown-list,
+.#{$block-class} .#{config.$prefix}--number input[type='number'],
+.#{$block-class} .#{config.$prefix}--date-picker__input {
   background-color: $field-02;
 }
 

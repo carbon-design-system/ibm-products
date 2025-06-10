@@ -118,10 +118,12 @@ export const storyDocsPageInfo = (csfFile) => {
 
   if (/components|patterns/i.test(category)) {
     result.expectCodedExample = true;
-    // Required until components within 'Patterns' category use the
-    // new approach with setting story titles because they are nested an
-    // extra level
-    if (typeof b === 'string') {
+    // Required until components within 'Patterns' and 'Prebuilt' category
+    // use the new approach with setting story titles because they are
+    // nested an extra level
+    if (a === 'Prebuilt patterns') {
+      component = rest[0] ? rest[0] : b;
+    } else if (typeof b === 'string') {
       component = b;
     } else {
       component = a;
@@ -145,7 +147,7 @@ export const storyDocsPageInfo = (csfFile) => {
 
   if (name) {
     if (rest.length > 0) {
-      result.component = result.title = `${name} (${rest.join(' ')})`;
+      result.component = result.title = `${name}`;
     } else {
       result.component = name;
       result.title = name;

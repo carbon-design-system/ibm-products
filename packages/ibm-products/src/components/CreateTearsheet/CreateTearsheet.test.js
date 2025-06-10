@@ -211,9 +211,6 @@ describe(CreateTearsheet.displayName, () => {
     await expect(
       document.querySelector(`.${prefix}--tearsheet`)
     ).toBeAccessible(CreateTearsheet.displayName);
-    // await expect(
-    //   document.querySelector(`.${prefix}--tearsheet`)
-    // ).toHaveNoAxeViolations();
   });
 
   it('renders the CreateTearsheet component', async () => {

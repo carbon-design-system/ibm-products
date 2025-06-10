@@ -20,14 +20,31 @@ $block-class: #{$prefix}--options-tile;
 :host(#{$prefix}-options-tile) {
   .#{$block-class} {
     background: $layer-01;
+    border-block-end: 1px solid $border-subtle-01;
+
+    ::marker,
+    ::-webkit-details-marker {
+      display: none;
+      content: '';
+    }
 
     &__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       block-size: $spacing-09;
+      cursor: pointer;
       padding-inline: $spacing-05;
       padding-inline-end: $spacing-05;
+
+      &:hover {
+        background: $background-hover;
+      }
+
+      &:focus {
+        outline: 2px solid $focus;
+        outline-offset: -2px;
+      }
 
       &-left {
         display: flex;
@@ -42,14 +59,17 @@ $block-class: #{$prefix}--options-tile;
 
     &__title {
       @include type.type-style('heading-compact-01');
+
+      &-block {
+        margin-inline-end: $spacing-05;
+        margin-inline-start: $spacing-05;
+      }
     }
 
     &__summary {
       @include type.type-style('helper-text-01');
-    }
 
-    &__chevron {
-      margin-inline-end: $spacing-03;
+      color: $text-secondary;
     }
 
     &__body {
@@ -60,8 +80,14 @@ $block-class: #{$prefix}--options-tile;
     }
   }
 
-  .#{$block-class}--xl .#{$block-class}__header {
-    block-size: $spacing-10;
+  .#{$block-class}--xl {
+    .#{$block-class}__header {
+      block-size: $spacing-10;
+    }
+
+    .#{$block-class}__summary {
+      margin-block-start: $spacing-01;
+    }
   }
 
   .#{$block-class}--open .#{$block-class}__chevron {

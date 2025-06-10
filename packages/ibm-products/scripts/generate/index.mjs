@@ -5,19 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const fs = require('fs');
-const { green, red } = require('chalk');
-const { outputFileSync, readFileSync } = require('fs-extra');
-const { sync } = require('glob');
-const { camelCase, kebabCase, pascalCase, headerCase } = require('change-case');
-const { join, relative, resolve } = require('path');
+import fs from 'fs';
+import { sync } from 'glob';
+import { camelCase, kebabCase, pascalCase } from 'change-case';
+import { join, relative, resolve, dirname } from 'path';
+
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+import fsExtra from 'fs-extra';
+const { outputFileSync, readFileSync } = fsExtra;
+
+import chalk from 'chalk';
+const { green, red } = chalk;
 
 // https://www.npmjs.com/package/yargs#usage
-const {
-  argv: { _ },
-} = require('yargs');
+import yargs from 'yargs';
+const argv = yargs(process.argv.slice(2)).parse();
 
-const name = _[0];
+const name = argv._[0];
 
 // If no component name is given in args throw an error
 if (!name) {
@@ -32,7 +40,7 @@ const substitutions = {
   FULL_YEAR: new Date().getFullYear(),
   CAMEL_NAME: camelCase(name),
   STYLE_NAME: kebabCase(name),
-  TITLE_NAME: headerCase(name),
+  TITLE_NAME: pascalCase(name),
 };
 
 const compile = (template) =>

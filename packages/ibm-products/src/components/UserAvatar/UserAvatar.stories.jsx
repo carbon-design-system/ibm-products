@@ -101,16 +101,18 @@ const ThemeText = () => {
  */
 const Template = (args) => {
   return (
-    <UserAvatar
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-    />
+    <main>
+      <UserAvatar
+        // TODO: handle events with action or local handler.
+        // onTodo={action('onTodo log action')}
+        {...args}
+      />
+    </main>
   );
 };
 const ThemeTemplate = (args) => {
   return (
-    <>
+    <main>
       <Theme theme="white">
         <section className="theme-section">
           <ThemeText />
@@ -135,7 +137,7 @@ const ThemeTemplate = (args) => {
           <UserAvatar {...args} />
         </section>
       </Theme>
-    </>
+    </main>
   );
 };
 /**

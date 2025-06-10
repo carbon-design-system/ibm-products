@@ -489,8 +489,7 @@ export let PageHeader = React.forwardRef(
     const localHeaderRef = useRef<HTMLDivElement | null>(null);
     const headerRef = (ref ||
       localHeaderRef) as MutableRefObject<HTMLElementStyled>;
-    const sizingContainerRef: MutableRefObject<HTMLDivElement | null> =
-      useRef(null);
+    const sizingContainerRef: RefObject<HTMLDivElement | null> = useRef(null);
     const offsetTopMeasuringRef = useRef(null);
     const overflowMenuRef = useRef<HTMLDivElement>(null);
 
@@ -893,7 +892,10 @@ export let PageHeader = React.forwardRef(
       headerRef,
     ]);
 
-    useResizeObserver(sizingContainerRef, handleResizeActionBarColumn);
+    useResizeObserver(
+      sizingContainerRef as RefObject<HTMLDivElement>,
+      handleResizeActionBarColumn
+    );
     useResizeObserver(headerRef, handleResize);
 
     // Determine what form of title to display in the breadcrumb

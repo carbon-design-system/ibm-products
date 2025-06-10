@@ -515,6 +515,7 @@ collect:
         # Carousel
         - disableArrowScroll
         - fadedEdgeColor
+        - isScrollMode
         - onChangeIsScrollable
         # Checklist
         - chartLabel

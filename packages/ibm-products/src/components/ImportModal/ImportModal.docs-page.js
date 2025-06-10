@@ -19,11 +19,11 @@ const DocsPage = () => {
         storyDocsGuidelines(csfFile),
         {
           href: 'https://www.carbondesignsystem.com/components/modal/usage',
-          label: 'Carbon Modal usage guidelines',
+          label: 'Carbon modal usage guidelines',
         },
         {
           href: 'https://react.carbondesignsystem.com/?path=/docs/components-modal',
-          label: 'Carbon Modal documentation',
+          label: 'Carbon modal documentation',
         },
       ]}
     />

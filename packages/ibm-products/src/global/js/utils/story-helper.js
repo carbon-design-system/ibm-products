@@ -158,7 +158,7 @@ export const storyDocsPageInfo = (csfFile) => {
   }
 
   if (result.guidelinesHref) {
-    result.guidelinesLinkLabel = `${result.title} usage guidelines`;
+    result.guidelinesLinkLabel = `Usage guidelines`;
   }
 
   return result;

@@ -257,7 +257,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 
   &-filter-popover.#{$carbon-prefix}--popover-content {
     padding: $spacing-05;
-    min-inline-size: 10rem;
+    min-inline-size: $spacing-13;
   }
 
   &-sort-filter {

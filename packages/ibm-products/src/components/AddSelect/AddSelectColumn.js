@@ -23,7 +23,7 @@ import { AddSelectList } from './AddSelectList';
 import { AddSelectSort } from './AddSelectSort';
 import { sortItems } from './add-select-utils';
 import { useItemSort } from './hooks/useItemSort';
-import uuidv4 from '../../global/js/utils/uuidv4';
+import { useId } from '../../global/js/utils/useId';
 import useParentSelect from './hooks/useParentSelect';
 
 const blockClass = `${pkg.prefix}--add-select`;
@@ -43,8 +43,10 @@ export let AddSelectColumn = ({
   sortByLabel,
   ...props
 }) => {
-  const carbonPrefix = usePrefix();
   const { parentSelected, setParentSelected } = useParentSelect();
+  const selectAllId = useId();
+  const filterId = useId();
+  const searchId = useId();
   const [searchTerm, setSearchTerm] = useState('');
   const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
     useItemSort();
@@ -113,7 +115,7 @@ export let AddSelectColumn = ({
     return filters.some((filter) => filter === filterByValue);
   };
 
-  const filterBtnId = `filter-${uuidv4()}`;
+  const filterBtnId = `filter-${filterId}`;
 
   const sortFn = sortItems(sortAttribute, sortDirection);
 
@@ -136,7 +138,7 @@ export let AddSelectColumn = ({
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={columnInputPlaceholder}
             className={`${colClass}-input`}
-            id={uuidv4()}
+            id={searchId}
             labelText={columnInputPlaceholder}
             size="md"
           />
@@ -203,7 +205,7 @@ export let AddSelectColumn = ({
         </div>
         <div className={`${blockClass}__tags`}>
           <Checkbox
-            id={`${uuidv4()}-select-all`}
+            id={`${selectAllId}-select-all`}
             className={`${colClass}__select-all`}
             checked={allSelected}
             onChange={selectAllHandler}

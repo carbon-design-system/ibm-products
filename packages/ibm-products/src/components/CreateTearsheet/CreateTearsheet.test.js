@@ -101,6 +101,7 @@ const renderCreateTearsheet = ({
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         title={step1Title}
         fieldsetLegendText={step1Title}
+        fieldsetLegendId={step1Title}
         onMount={onMountFn}
         description={step1Description}
         subtitle={step1Subtitle}
@@ -115,7 +116,7 @@ const renderCreateTearsheet = ({
         <button type="button" disabled>
           Test
         </button>
-        <input type="text" />
+        <input aria-label="step1-input" type="text" />
       </CreateTearsheetStep>
       <CreateTearsheetStep
         title={step2Title}
@@ -131,6 +132,7 @@ const renderCreateTearsheet = ({
       <CreateTearsheetStep
         title={step3Title}
         fieldsetLegendText={step3Title}
+        fieldsetLegendId={step3Title}
         onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}
       >
         step 3 content
@@ -204,12 +206,19 @@ describe(CreateTearsheet.displayName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it.skip('has no accessibility violations', async () => {
-    renderCreateTearsheet({ ...defaultProps });
-    await expect(
-      document.querySelector(`.${prefix}--tearsheet`)
-    ).toBeAccessible(CreateTearsheet.displayName);
-    await expect(
+  it('has no accessibility violations', async () => {
+    renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
+    await waitFor(
+      () => {
+        const tearsheetElement = screen.getByTestId(dataTestId);
+        expect(tearsheetElement).toBeInTheDocument();
+      },
+      { timeout: 100 }
+    );
+    expect(document.querySelector(`.${prefix}--tearsheet`)).toBeAccessible(
+      CreateTearsheet.displayName
+    );
+    expect(
       document.querySelector(`.${prefix}--tearsheet`)
     ).toHaveNoAxeViolations();
   });

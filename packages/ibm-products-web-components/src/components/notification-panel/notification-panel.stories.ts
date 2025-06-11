@@ -272,26 +272,12 @@ export const defaultTemplate = {
               })}
             `
           : ''}
-        <div
+        <c4p-notification-footer
           slot="footer"
-          class="${blockClassNotificationPanel}__bottom-actions"
-        >
-          <cds-button
-            kind="ghost"
-            class="${blockClassNotificationPanel}__view-all-button"
-            @click=${action(`Clicked View All`)}
-          >
-            View all (${dataPrevious.length + dataToday.length})
-          </cds-button>
-          <cds-button
-            kind="ghost"
-            size="sm"
-            class="${blockClassNotificationPanel}__settings-button"
-            @click=${action(`Clicked Settings`)}
-          >
-            ${Settings16({ slot: 'icon' })}
-          </cds-button>
-        </div>
+          view-all-label="View all (${dataToday.length + dataPrevious.length})"
+          @c4p-notification-view-all=${action(`Clicked View All`)}
+          @c4p-notification-settings=${action(`Clicked Settings`)}
+        ></c4p-notification-footer>
       </c4p-notification-panel>
       <div class="${storyPrefix}story-container">
         <div class="${storyPrefix}story-header"></div>

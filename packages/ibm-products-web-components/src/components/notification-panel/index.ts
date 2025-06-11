@@ -9,3 +9,4 @@
 
 import './notification-panel';
 import './notification';
+import './notification-footer';

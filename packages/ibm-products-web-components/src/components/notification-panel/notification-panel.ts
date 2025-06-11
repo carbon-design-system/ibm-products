@@ -150,52 +150,50 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
 
     return html`
       <div role="dialog" tabindex="0" class=${classes}>
-        <div>
-          <div class="${blockClass}__header-container">
-            <div class="${blockClass}__header-flex">
-              <cds-heading class="${blockClass}__header">
-                ${titleText}
-              </cds-heading>
-              <cds-button
-                size="sm"
-                kind="ghost"
-                class="${blockClass}__dismiss-button"
-                @click=${onDismissAllNotifications}
-              >
-                ${dismissAllLabel}
-              </cds-button>
-            </div>
-            <cds-toggle
+        <div class="${blockClass}__header-container">
+          <div class="${blockClass}__header-flex">
+            <cds-heading class="${blockClass}__header">
+              ${titleText}
+            </cds-heading>
+            <cds-button
               size="sm"
-              class="${blockClass}__do-not-disturb-toggle"
-              id="${blockClass}__do-not-disturb-toggle-component"
-              label-a=${doNotDisturbLabel}
-              label-b=${doNotDisturbLabel}
-              aria-label=${doNotDisturbLabel}
-              @cds-toggle-changed=${handleToggle}
-            ></cds-toggle>
+              kind="ghost"
+              class="${blockClass}__dismiss-button"
+              @click=${onDismissAllNotifications}
+            >
+              ${dismissAllLabel}
+            </cds-button>
           </div>
-          <div class="${blockClass}__main-section">
-            ${_hasTodayContent
-              ? html`
-                  <cds-heading class="${blockClass}__time-section-label">
-                    ${todayText}
-                  </cds-heading>
-                `
-              : ''}
-            <slot name="today"></slot>
-            ${_hasPreviousContent
-              ? html`
-                  <cds-heading class="${blockClass}__time-section-label">
-                    ${previousText}
-                  </cds-heading>
-                `
-              : ''}
-            <slot name="previous"></slot>
-          </div>
-          <div class="${blockClass}__bottom-actions-container">
-            <slot name="footer"></slot>
-          </div>
+          <cds-toggle
+            size="sm"
+            class="${blockClass}__do-not-disturb-toggle"
+            id="${blockClass}__do-not-disturb-toggle-component"
+            label-a=${doNotDisturbLabel}
+            label-b=${doNotDisturbLabel}
+            aria-label=${doNotDisturbLabel}
+            @cds-toggle-changed=${handleToggle}
+          ></cds-toggle>
+        </div>
+        <div class="${blockClass}__main-section">
+          ${_hasTodayContent
+            ? html`
+                <cds-heading class="${blockClass}__time-section-label">
+                  ${todayText}
+                </cds-heading>
+              `
+            : ''}
+          <slot name="today"></slot>
+          ${_hasPreviousContent
+            ? html`
+                <cds-heading class="${blockClass}__time-section-label">
+                  ${previousText}
+                </cds-heading>
+              `
+            : ''}
+          <slot name="previous"></slot>
+        </div>
+        <div class="${blockClass}__bottom-actions-container">
+          <slot name="footer"></slot>
         </div>
       </div>
     `;

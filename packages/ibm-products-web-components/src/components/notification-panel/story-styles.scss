@@ -59,41 +59,6 @@ $block-class: #{$prefix}--notifications-panel;
   align-items: center;
   justify-content: center;
 }
-
-.#{$block-class}__view-all-button {
-  display: flex;
-  align-items: center;
-  border-inline-end: 1px solid $border-subtle-01;
-  color: $text-primary;
-  inline-size: 100%;
-  max-inline-size: calc(100% - 2.5rem);
-  min-block-size: 2.5rem;
-  --cds-link-primary: $text-primary;
-  --cds-link-primary-hover: $text-primary;
-  --cds-layout-size-height-min: 2.5rem;
-  --cds-layout-size-height-sm: 2.5rem;
-  --cds-layout-size-height: 2.5rem;
-  --cds-layout-size-height-lg: 2.5rem;
-  --cds-layout-size-height-max: 2.5rem;
-  --cds-layout-size-height-2xl: 2.5rem;
-}
-.#{$block-class}__settings-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  --cds-link-primary: $text-primary;
-  --cds-link-primary-hover: $text-primary;
-  --cds-layout-size-height-min: 2.5rem;
-  --cds-layout-size-height-sm: 2.5rem;
-  --cds-layout-size-height: 2.5rem;
-  --cds-layout-size-height-lg: 2.5rem;
-  --cds-layout-size-height-max: 2.5rem;
-  --cds-layout-size-height-2xl: 2.5rem;
-}
-.#{$block-class}__settings-button .#{$carbon-prefix}--btn__icon {
-  margin: 0;
-}
 .#{$block-class}__notification-description {
   @include type.type-style('label-01');
 

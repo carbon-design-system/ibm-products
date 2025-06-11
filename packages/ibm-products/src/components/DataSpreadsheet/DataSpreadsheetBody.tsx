@@ -705,7 +705,6 @@ export const DataSpreadsheetBody = forwardRef(
               <div
                 role="rowheader"
                 className={cx({
-                  // [`${blockClass}__td`]: true,
                   [`${blockClass}__td-th--cell-container`]: true,
                   [`${blockClass}__row-header`]: true,
                   [`${blockClass}__row-header-reverse`]:

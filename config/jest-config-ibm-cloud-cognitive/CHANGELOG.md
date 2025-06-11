@@ -1,3 +1,7 @@
+## `@jest-config-ibm-cloud-cognitive@1.27.0`
+### Housekeeping :house:
+- refactor(useResizeObserver): migrate to TS and refactor tests to include resize validation (#7548)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.

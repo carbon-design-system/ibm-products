@@ -100,7 +100,7 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     `;
   }
 
-  @HostListener('document:keydown')
+  @HostListener('keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeyDown(event: KeyboardEvent) {
     if (
@@ -133,8 +133,8 @@ class CDSNotification extends HostListenerMixin(LitElement) {
    *
    * @param triggeredBy The element that triggered click event.
    */
-  // Use @HostListener for global document click events
-  @HostListener('document:click')
+  // Use @HostListener for click events on Notification Component
+  @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick(triggeredBy: EventTarget | null) {
     const init = {

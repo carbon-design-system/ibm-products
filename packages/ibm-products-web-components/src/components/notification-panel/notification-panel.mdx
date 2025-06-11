@@ -21,7 +21,7 @@ import '@carbon/ibm-products-web-components/es/components/notification-panel/ind
 ### HTML
 
 ```html
-<c4p-notification-panel
+      <c4p-notification-panel
         .triggerButtonRef=${triggerButton}
         .open="${openPanel}"
         title-text="${args.titleText}"
@@ -35,34 +35,33 @@ import '@carbon/ibm-products-web-components/es/components/notification-panel/ind
       >
         ${dataToday.length > 0
           ? html`
-            ${dataToday.map((item) => {
-              return html`
-                <c4p-notification
-                  slot="today"
-                  .open=${args.open}
-                  @c4p-notification-click=${item.onNotificationClick}
-                  @c4p-notification-dismiss=${() => {
-                    notificationSingleDismiss(item.id, 'today');
-                  }}
-                  type=${item.type}
-                  unread=${item.unread}
-                  .timestamp=${item.timestamp}
-                >
-                  <cds-heading
-                    class=${classMap({
-                      [`${blockClassNotification}__notification-title`]:
-                        true,
-                      [`${blockClassNotification}__notification-title-unread`]:
-                        item.unread,
-                    })}
-                    slot="title"
+              ${dataToday.map((item) => {
+                return html`
+                  <c4p-notification
+                    slot="today"
+                    .open=${args.open}
+                    @c4p-notification-click=${item.onNotificationClick}
+                    @c4p-notification-dismiss=${() => {
+                      notificationSingleDismiss(item.id, 'today');
+                    }}
+                    type=${item.type}
+                    unread=${item.unread}
+                    .timestamp=${item.timestamp}
                   >
-                    ${item.title}
-                  </cds-heading>
-                  <div slot="description">${item.description}</div>
-                </c4p-notification>
-              `;
-            })}
+                    <cds-heading
+                      class=${classMap({
+                        [`${blockClassNotification}__notification-title`]: true,
+                        [`${blockClassNotification}__notification-title-unread`]:
+                          item.unread,
+                      })}
+                      slot="title"
+                    >
+                      ${item.title}
+                    </cds-heading>
+                    <div slot="description">${item.description}</div>
+                  </c4p-notification>
+                `;
+              })}
             `
           : ''}
         ${dataPrevious.length > 0
@@ -81,8 +80,7 @@ import '@carbon/ibm-products-web-components/es/components/notification-panel/ind
                   >
                     <cds-heading
                       class=${classMap({
-                        [`${blockClassNotification}__notification-title`]:
-                          true,
+                        [`${blockClassNotification}__notification-title`]: true,
                         [`${blockClassNotification}__notification-title-unread`]:
                           item.unread,
                       })}
@@ -96,26 +94,12 @@ import '@carbon/ibm-products-web-components/es/components/notification-panel/ind
               })}
             `
           : ''}
-        <div
+        <c4p-notification-footer
           slot="footer"
-          class="${blockClassNotificationPanel}__bottom-actions"
-        >
-          <cds-button
-            kind="ghost"
-            class="${blockClassNotificationPanel}__view-all-button"
-            @click=${action(`Clicked View All`)}
-          >
-            View all (${dataPrevious.length + dataToday.length})
-          </cds-button>
-          <cds-button
-            kind="ghost"
-            size="sm"
-            class="${blockClassNotificationPanel}__settings-button"
-            @click=${action(`Clicked Settings`)}
-          >
-            ${Settings16({ slot: 'icon' })}
-          </cds-button>
-        </div>
+          view-all-label="View all (${dataToday.length + dataPrevious.length})"
+          @c4p-notification-view-all=${action(`Clicked View All`)}
+          @c4p-notification-settings=${action(`Clicked Settings`)}
+        ></c4p-notification-footer>
       </c4p-notification-panel>
 ```
 

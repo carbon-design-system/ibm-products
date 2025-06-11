@@ -74,7 +74,6 @@ const defaultProps = {
   ariaLabel,
 };
 
-const axe = require('axe-core');
 const secondStepButtonId = 'second-step-button';
 
 const renderCreateTearsheet = ({
@@ -183,7 +182,6 @@ describe(CreateTearsheet.displayName, () => {
   const { ResizeObserver } = window;
 
   beforeEach(() => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),

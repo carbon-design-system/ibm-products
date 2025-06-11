@@ -115,11 +115,13 @@ export const defaultTemplate = {
     const [dataToday, setDataToday] = useState([...initialDataToday]);
     const [dataPrevious, setDataPrevious] = useState([...initialDataPrevious]);
     const [openPanel, setOpenPanel] = useState(args.open);
+    const [expandUserPanel, setExpandUserPanel] = useState(false);
     const [expandPanel, setExpandPanel] = useState(false);
     const triggerButton = document.querySelector('#trigger-button');
     const toggleButton = () => {
       setOpenPanel(!openPanel);
       setExpandPanel(false);
+      setExpandUserPanel(false);
     };
     const dismissAllNotification = () => {
       setDataToday([]);
@@ -151,10 +153,7 @@ export const defaultTemplate = {
       <style>
         ${styles}
       </style>
-      <cds-header
-        aria-label="IBM Cloud Pak"
-        className="${storyBlockClass}--header"
-      >
+      <cds-header aria-label="IBM Cloud Pak" class="${storyBlockClass}--header">
         <cds-header-name
           href="/"
           prefix="IBM"
@@ -165,9 +164,26 @@ export const defaultTemplate = {
           Cloud Pak
         </cds-header-name>
         <div class="${carbonPrefix}--header__global">
-          <cds-header-global-action aria-label="User" tooltip-text="User">
+          <cds-header-global-action
+            aria-label="User"
+            tooltip-text="User"
+            @click=${() => {
+              setExpandUserPanel((prev) => !prev);
+            }}
+          >
             ${User20({ slot: 'icon' })}
           </cds-header-global-action>
+          <cds-header-panel
+            id="user-panel"
+            .expanded="${expandUserPanel}"
+            aria-label="User Panel"
+          >
+            <div class="${storyBlockClass}__header-panel">
+              User account
+              <br />
+              example panel
+            </div>
+          </cds-header-panel>
           <cds-header-global-action
             aria-label="Notification"
             tooltip-text="Notification"
@@ -191,7 +207,7 @@ export const defaultTemplate = {
             .expanded="${expandPanel}"
             aria-label="Header Panel"
           >
-            <div className="${storyBlockClass}__header-panel">
+            <div class="${storyBlockClass}__header-panel">
               App switcher
               <br />
               example panel
@@ -279,9 +295,9 @@ export const defaultTemplate = {
           @c4p-notification-settings=${action(`Clicked Settings`)}
         ></c4p-notification-footer>
       </c4p-notification-panel>
-      <div class="${storyPrefix}story-container">
-        <div class="${storyPrefix}story-header"></div>
-        <div id="page-content-selector" class="${storyPrefix}story-content">
+      <div class="${storyBlockClass}story-container">
+        <div class="${storyBlockClass}story-header"></div>
+        <div id="page-content-selector" class="${storyBlockClass}story-content">
           <cds-button @click=${addNotification}
             >Add new notification</cds-button
           >

@@ -11,7 +11,7 @@
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
-$story-prefix: 'notification-panel-stories__';
+$story-prefix: #{$prefix}--notifications-panel__story;
 $block-class: #{$prefix}--notifications-panel;
 
 .#{$story-prefix}__story-container {
@@ -58,6 +58,13 @@ $block-class: #{$prefix}--notifications-panel;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.#{$story-prefix}__header-panel {
+  padding: $spacing-10 $spacing-05 0;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: center;
 }
 .#{$block-class}__notification-description {
   @include type.type-style('label-01');

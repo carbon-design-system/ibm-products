@@ -24,6 +24,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import { classMap } from 'lit/directives/class-map.js';
 import { dateTimeLocaleContext } from './date-time-context';
 import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/toggle/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 

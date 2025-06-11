@@ -50,20 +50,12 @@ const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
 );
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-
   beforeAll(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
     pkg.feature['default-portal-target-body'] = false;
   });
 
   afterAll(() => {
     jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 

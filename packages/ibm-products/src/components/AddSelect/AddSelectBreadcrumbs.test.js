@@ -22,21 +22,6 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-
-  beforeEach(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-  });
-
-  afterEach(() => {
-    jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
-  });
-
   it('renders', async () => {
     render(<AddSelectBreadcrumbs {...defaultProps} />);
   });

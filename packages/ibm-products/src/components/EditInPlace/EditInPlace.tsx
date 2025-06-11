@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,9 +13,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { carbon, pkg } from '../../settings';
+import { pkg } from '../../settings';
 
-import { IconButton } from '@carbon/react';
+import { IconButton, usePrefix } from '@carbon/react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -163,6 +163,7 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     const inputRef = useRef<HTMLInputElement>(null);
     const canSave = value !== initialValue && !invalid;
     const escaping = useRef(false);
+    const carbonPrefix = usePrefix();
 
     const tipAlignIsObject = typeof tooltipAlignment === 'object';
     const tipAlignments: { [key: string]: AlignPropType } = [
@@ -290,8 +291,8 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
             id={id}
             className={cx(
               `${blockClass}__text-input`,
-              `${carbon.prefix}--text-input`,
-              `${carbon.prefix}--text-input--${size}`
+              `${carbonPrefix}--text-input`,
+              `${carbonPrefix}--text-input--${size}`
             )}
             type="text"
             placeholder={placeholder}

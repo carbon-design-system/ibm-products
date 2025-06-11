@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.64.0-rc.0`
+## `@carbon/ibm-products-styles@2.64.0`
 ### Bug fixes :bug:
 - fix(rtl): minor updates to provide stronger rtl support (#7580)
 - fix: interstitial accessibility issue fixes (#7478)

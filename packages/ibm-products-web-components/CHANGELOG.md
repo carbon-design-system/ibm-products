@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.17.0-rc.0`
+## `@carbon/ibm-products-web-components@0.17.0`
 ### Features :rocket:
 - feat(DeleteAndRemovePattern): deletion and removal patterns using carbon web components (#7473)
 

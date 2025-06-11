@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,8 +7,8 @@
 
 import React from 'react';
 import cx from 'classnames';
-import { pkg, carbon } from '../../settings';
-import { Button } from '@carbon/react';
+import { pkg } from '../../settings';
+import { Button, usePrefix } from '@carbon/react';
 import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
 import { DatagridAILabel } from './Datagrid/addons/AiLabel/DatagridAiLabel';
@@ -60,12 +60,13 @@ const getAriaPressedValue = (col) => {
 };
 
 const useSortableColumns = (hooks: Hooks) => {
+  const carbonPrefix = usePrefix();
   const sortableVisibleColumns = (visibleColumns, { instance }) => {
     const { onSort } = instance;
     const onSortClick = (event, column) => {
       const aiLabel =
-        event.target.classList.contains(`${carbon.prefix}--slug`) ||
-        event.target.closest(`.${carbon.prefix}--slug`);
+        event.target.classList.contains(`${carbonPrefix}--slug`) ||
+        event.target.closest(`.${carbonPrefix}--slug`);
       // Do not continue with sorting if we find a slug
       if (aiLabel) {
         event.stopPropagation();
@@ -84,7 +85,7 @@ const useSortableColumns = (hooks: Hooks) => {
         const iconProps = {
           size: 16,
           ...props,
-          className: `${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`,
+          className: `${blockClass}__sortable-icon ${carbonPrefix}--btn__icon`,
         };
         if (col?.isSorted) {
           switch (col.isSortedDesc) {
@@ -134,7 +135,7 @@ const useSortableColumns = (hooks: Hooks) => {
             }}
             id={column?.id}
             className={cx(
-              `${carbon.prefix}--table-sort ${blockClass}--table-sort`,
+              `${carbonPrefix}--table-sort ${blockClass}--table-sort`,
               {
                 [`${blockClass}--table-sort--desc`]:
                   headerProp?.column.isSortedDesc,

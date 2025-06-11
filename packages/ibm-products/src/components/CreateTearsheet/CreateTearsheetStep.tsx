@@ -317,7 +317,7 @@ export let CreateTearsheetStep = forwardRef(
             <h4 className={`${blockClass}--title`}>{title}</h4>
 
             {subtitle && (
-              <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+              <h5 className={`${blockClass}--subtitle`}>{subtitle}</h5>
             )}
 
             {renderDescription()}

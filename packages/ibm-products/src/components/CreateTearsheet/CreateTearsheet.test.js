@@ -209,17 +209,17 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    jest.useFakeTimers();
     await act(async () => {
       renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
-      jest.advanceTimersByTime(1000);
     });
     try {
       const tearsheetElement = document.querySelector(`.${prefix}--tearsheet`);
       await expect(tearsheetElement).toBeAccessible(
         CreateTearsheet.displayName
       );
-      expect(await tearsheetElement).toHaveNoAxeViolations();
+      jest.useRealTimers();
+      await expect(tearsheetElement).toHaveNoAxeViolations();
+      jest.useFakeTimers();
     } catch (err) {
       console.log('accessibility test error :', err);
     }

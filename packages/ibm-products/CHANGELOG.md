@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.68.0-rc.0`
+## `@carbon/ibm-products@2.68.0`
 ### Features :rocket:
 - feat(openStackblitz): about modal and export Modal (#7479)
 - feat(InterstitialScreen): add and update various stackblitz examples (#7510)

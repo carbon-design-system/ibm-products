@@ -1,4 +1,4 @@
-## `@carbon/ibm-cloud-cognitive-core@2.44.0-rc.0`
+## `@carbon/ibm-cloud-cognitive-core@2.44.0`
 ### Housekeeping :house:
 - chore: added links to welcome page (#7485)
 

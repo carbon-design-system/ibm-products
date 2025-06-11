@@ -23,7 +23,6 @@ $css--plex: true !default;
 @use '@carbon/ibm-products-styles/scss/components/UserAvatar' as *;
 
 $prefix: 'c4p';
-$carbon-prefix: 'cds';
 
 $block-class: #{$prefix}--user-avatar;
 

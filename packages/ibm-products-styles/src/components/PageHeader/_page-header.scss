@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/config';
 
 // Standard imports.
 @use '../../global/styles/project-settings' as *;
@@ -328,18 +329,18 @@ $duration: 1000ms;
     }
   }
 
-  .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item {
+  .#{$block-class}__breadcrumb .#{config.$prefix}--breadcrumb-item {
     margin-inline-end: $spacing-02;
   }
 
-  .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item::after {
+  .#{$block-class}__breadcrumb .#{config.$prefix}--breadcrumb-item::after {
     margin-inline-start: $spacing-02;
   }
 
-  .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item,
+  .#{$block-class}__breadcrumb .#{config.$prefix}--breadcrumb-item,
   .#{$block-class}__breadcrumb
-    .#{$carbon-prefix}--breadcrumb-item
-    .#{$carbon-prefix}--link {
+    .#{config.$prefix}--breadcrumb-item
+    .#{config.$prefix}--link {
     @include type.type-style('label-01');
   }
 
@@ -504,8 +505,8 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__page-actions
-    .#{$carbon-prefix}--btn-set
-    .#{$carbon-prefix}--btn {
+    .#{config.$prefix}--btn-set
+    .#{config.$prefix}--btn {
     inline-size: initial;
   }
 
@@ -563,14 +564,14 @@ $duration: 1000ms;
     @include type.type-style('body-01');
   }
 
-  .#{$block-class}__subtitle-tooltip .#{$carbon-prefix}--definition-term {
+  .#{$block-class}__subtitle-tooltip .#{config.$prefix}--definition-term {
     border-block-end: 0;
     letter-spacing: inherit;
   }
 
   // overwrites the existing styles to make the popover bigger because in some cases the narrow space can be too constricting for the header
   .#{$block-class}__subtitle-tooltip
-    .#{$carbon-prefix}--popover-content.#{$carbon-prefix}--definition-tooltip {
+    .#{config.$prefix}--popover-content.#{config.$prefix}--definition-tooltip {
     max-inline-size: fit-content;
   }
 
@@ -605,13 +606,13 @@ $duration: 1000ms;
     flex-wrap: wrap-reverse;
     margin-block-start: 0;
 
-    .#{$carbon-prefix}--content-switcher {
+    .#{config.$prefix}--content-switcher {
       box-sizing: content-box;
       padding-block-end: $spacing-05;
     }
   }
 
-  .#{$block-class}__navigation-row .#{$carbon-prefix}--tab-content {
+  .#{$block-class}__navigation-row .#{config.$prefix}--tab-content {
     display: none; /* need to figure out how to handle the tab content */
   }
 
@@ -657,7 +658,7 @@ $duration: 1000ms;
     text-align: initial;
   }
 
-  .#{$block-class}__navigation-row .#{$carbon-prefix}--content-switcher-btn {
+  .#{$block-class}__navigation-row .#{config.$prefix}--content-switcher-btn {
     background-color: $background;
   }
 
@@ -668,7 +669,7 @@ $duration: 1000ms;
     inset-inline-end: 0;
   }
 
-  .#{$block-class}__collapse-expand-toggle .#{$carbon-prefix}--btn__icon {
+  .#{$block-class}__collapse-expand-toggle .#{config.$prefix}--btn__icon {
     // transform: rotate(-90deg); // accordion does this, but it feels odd in page header
     transition: all $duration-slow-01 motion(standard, productive);
   }
@@ -690,17 +691,17 @@ $duration: 1000ms;
   inset-block-start: var(--#{$block-class}--tagset-tooltip-offset) !important;
 }
 
-.#{$block-class}__navigation-tags-overflow.#{$carbon-prefix}--tooltip {
+.#{$block-class}__navigation-tags-overflow.#{config.$prefix}--tooltip {
   z-index: $z-index-header-minus;
 }
 
-.#{$block-class}__action-bar-menu-options.#{$carbon-prefix}--overflow-menu-options,
-.#{$carbon-prefix}--breadcrumb-menu-options.#{$carbon-prefix}--overflow-menu-options,
-.#{$block-class}__button-set-menu-options.#{$carbon-prefix}--overflow-menu-options {
+.#{$block-class}__action-bar-menu-options.#{config.$prefix}--overflow-menu-options,
+.#{config.$prefix}--breadcrumb-menu-options.#{config.$prefix}--overflow-menu-options,
+.#{$block-class}__button-set-menu-options.#{config.$prefix}--overflow-menu-options {
   z-index: $z-index-header-minus;
 }
 
 .#{$block-class}__button-set-menu-options
-  > button.#{$carbon-prefix}--menu-button__trigger {
+  > button.#{config.$prefix}--menu-button__trigger {
   min-inline-size: 0;
 }

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2024, 2024
+// Copyright IBM Corp. 2024, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config';
 
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
@@ -63,20 +64,18 @@ $block-class-modal: #{$block-class}-modal;
   max-inline-size: $spacing-09;
 }
 
-.#{c4p-settings.$carbon-prefix}--popover
-  .#{c4p-settings.$carbon-prefix}--popover-content {
+.#{config.$prefix}--popover .#{config.$prefix}--popover-content {
   white-space: normal;
 }
 
 .#{$block-class-overflow} {
   display: inline-block;
   vertical-align: bottom;
-  .#{c4p-settings.$carbon-prefix}--tag.#{c4p-settings.$carbon-prefix}--tag--interactive {
+  .#{config.$prefix}--tag.#{config.$prefix}--tag--interactive {
     border: 0;
   }
 
-  .#{c4p-settings.$carbon-prefix}--popover
-    .#{c4p-settings.$carbon-prefix}--popover-content {
+  .#{config.$prefix}--popover .#{config.$prefix}--popover-content {
     padding: $spacing-05;
   }
 }
@@ -100,15 +99,15 @@ $block-class-modal: #{$block-class}-modal;
     font-family: inherit;
   }
 
-  .#{$block-class-overflow}__show-all-tags-link.#{c4p-settings.$carbon-prefix}--link:visited {
+  .#{$block-class-overflow}__show-all-tags-link.#{config.$prefix}--link:visited {
     display: inline-block;
     margin: $spacing-03 0 $spacing-02; // to match the tags
     color: $link-inverse;
   }
 
-  .#{c4p-settings.$carbon-prefix}--link:active,
-  .#{c4p-settings.$carbon-prefix}--link:active:visited,
-  .#{c4p-settings.$carbon-prefix}--link:active:visited:hover {
+  .#{config.$prefix}--link:active,
+  .#{config.$prefix}--link:active:visited,
+  .#{config.$prefix}--link:active:visited:hover {
     color: $text-inverse;
   }
 
@@ -123,13 +122,13 @@ $block-class-modal: #{$block-class}-modal;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
-    .#{c4p-settings.$carbon-prefix}--tag {
+    .#{config.$prefix}--tag {
     background-color: $background-inverse-hover;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default
-    .#{c4p-settings.$carbon-prefix}--tag {
+    .#{config.$prefix}--tag {
     @include type.type-style('body-compact-01');
 
     display: block;
@@ -143,25 +142,21 @@ $block-class-modal: #{$block-class}-modal;
     min-inline-size: initial;
   }
 
-  .#{$block-class-overflow}__tag
-    .#{c4p-settings.$carbon-prefix}--tag__close-icon {
-    // undo override by .#{c4p-settings.$carbon-prefix}--tooltip button
+  .#{$block-class-overflow}__tag .#{config.$prefix}--tag__close-icon {
+    // undo override by .#{config.$prefix}--tooltip button
     padding: 0;
   }
 
-  .#{$block-class-overflow}__tag
-    .#{c4p-settings.$carbon-prefix}--tag--high-contrast {
+  .#{$block-class-overflow}__tag .#{config.$prefix}--tag--high-contrast {
     background-color: $background;
     color: $text-primary;
   }
 
-  .#{$block-class-overflow}__tag
-    .#{c4p-settings.$carbon-prefix}--tag__close-icon:hover {
+  .#{$block-class-overflow}__tag .#{config.$prefix}--tag__close-icon:hover {
     background-color: $background-hover;
   }
 
-  .#{$block-class-overflow}__tag
-    .#{c4p-settings.$carbon-prefix}--tag__close-icon:focus {
+  .#{$block-class-overflow}__tag .#{config.$prefix}--tag__close-icon:focus {
     box-shadow: inset 0 0 0 $spacing-01 $focus;
   }
 }

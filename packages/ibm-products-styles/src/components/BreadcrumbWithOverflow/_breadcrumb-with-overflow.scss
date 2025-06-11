@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,6 +9,8 @@
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/config';
+
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
@@ -31,8 +33,7 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
     inline-size: 100%;
   }
 
-  .#{$_block-class}__breadcrumb-container
-    .#{c4p-settings.$carbon-prefix}--breadcrumb {
+  .#{$_block-class}__breadcrumb-container .#{config.$prefix}--breadcrumb {
     flex-wrap: nowrap;
     align-items: flex-start;
     inline-size: 100%;
@@ -47,22 +48,22 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
     display: none;
   }
 
-  .#{$_block-class}__back__button.#{c4p-settings.$carbon-prefix}--btn {
+  .#{$_block-class}__back__button.#{config.$prefix}--btn {
     padding: 0;
     min-block-size: revert;
   }
 
-  .#{$_block-class}__back__button.#{c4p-settings.$carbon-prefix}--btn--ghost:hover {
+  .#{$_block-class}__back__button.#{config.$prefix}--btn--ghost:hover {
     background-color: inherit;
   }
 
   @include breakpoint-down(md) {
-    .#{c4p-settings.$carbon-prefix}--breadcrumb-item {
+    .#{config.$prefix}--breadcrumb-item {
       display: none;
     }
 
     .#{$_block-class}__breadcrumb-back,
-    .#{c4p-settings.$carbon-prefix}--breadcrumb-item:last-child {
+    .#{config.$prefix}--breadcrumb-item:last-child {
       display: inline-flex;
       vertical-align: middle;
     }
@@ -74,7 +75,7 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
     }
   }
 
-  .#{c4p-settings.$carbon-prefix}--breadcrumb-item:last-child {
+  .#{config.$prefix}--breadcrumb-item:last-child {
     display: inline-flex; // flex instead of block due to spacing
   }
 
@@ -82,8 +83,7 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
     display: inline-flex; // flex instead of block due to spacing
   }
 
-  .#{$_block-class}__displayed-breadcrumb:last-child
-    .#{c4p-settings.$carbon-prefix}--link {
+  .#{$_block-class}__displayed-breadcrumb:last-child .#{config.$prefix}--link {
     display: inline-block;
     overflow: hidden;
     inline-size: 100%;

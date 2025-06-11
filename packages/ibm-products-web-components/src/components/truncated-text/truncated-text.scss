@@ -13,9 +13,9 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config';
 
 $prefix: 'c4p';
-$carbon-prefix: 'cds';
 $block-class: #{$prefix}--truncated-text;
 
 // Common reset button style
@@ -54,7 +54,7 @@ $block-class: #{$prefix}--truncated-text;
     }
   }
 
-  #{$carbon-prefix}-tooltip {
+  #{config.$prefix}-tooltip {
     display: inline-flex;
   }
 

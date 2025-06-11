@@ -48,13 +48,6 @@ $block-class-action-set: #{$prefix}--action-set;
   --#{$carbon-prefix}-link-primary: --#{$carbon-prefix}-text-primary;
   --#{$carbon-prefix}-link-primary-hover: --#{$carbon-prefix}-text-primary;
 }
-.#{$block-class}__time-section-label {
-  --#{$carbon-prefix}-heading-06-font-size: --#{$carbon-prefix}-label-01-font-size;
-  --#{$carbon-prefix}-heading-06-font-weight: --#{$carbon-prefix}-label-01-font-weight;
-  --#{$carbon-prefix}-heading-06-line-height: --#{$carbon-prefix}-label-01-line-height;
-  --#{$carbon-prefix}-heading-06-letter-spacing: --#{$carbon-prefix}-label-01-letter-spacing;
-}
-
 .#{$block-class}__bottom-actions-container {
   position: sticky;
   z-index: 2;

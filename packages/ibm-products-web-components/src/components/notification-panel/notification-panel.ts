@@ -25,7 +25,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { dateTimeLocaleContext } from './date-time-context';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/toggle/index.js';
-import '@carbon/web-components/es/components/heading/index.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 
 const blockClass = `${prefix}--notifications-panel`;
@@ -153,9 +152,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       <div role="dialog" tabindex="0" class=${classes}>
         <div class="${blockClass}__header-container">
           <div class="${blockClass}__header-flex">
-            <cds-heading class="${blockClass}__header">
-              ${titleText}
-            </cds-heading>
+            <h2 class="${blockClass}__header">${titleText}</h2>
             <cds-button
               size="sm"
               kind="ghost"
@@ -178,17 +175,15 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
         <div class="${blockClass}__main-section">
           ${_hasTodayContent
             ? html`
-                <cds-heading class="${blockClass}__time-section-label">
-                  ${todayText}
-                </cds-heading>
+                <h3 class="${blockClass}__time-section-label">${todayText}</h3>
               `
             : ''}
           <slot name="today"></slot>
           ${_hasPreviousContent
             ? html`
-                <cds-heading class="${blockClass}__time-section-label">
+                <h3 class="${blockClass}__time-section-label">
                   ${previousText}
-                </cds-heading>
+                </h3>
               `
             : ''}
           <slot name="previous"></slot>

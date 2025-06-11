@@ -16,11 +16,9 @@ import { prefix, carbonPrefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/ui-shell/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
-import Settings16 from '@carbon/web-components/es/icons/settings/16';
 import User20 from '@carbon/web-components/es/icons/user/20.js';
 import Notification20 from '@carbon/web-components/es/icons/notification/20.js';
 import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20.js';
-import uuidv4 from '../../globals/js/utils/uuidv4';
 import {
   dataToday as initialDataToday,
   dataPrevious as initialDataPrevious,

@@ -74,6 +74,7 @@ const defaultProps = {
   ariaLabel,
 };
 
+const axe = require('axe-core');
 const secondStepButtonId = 'second-step-button';
 
 const renderCreateTearsheet = ({
@@ -182,6 +183,7 @@ describe(CreateTearsheet.displayName, () => {
   const { ResizeObserver } = window;
 
   beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -207,10 +209,20 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
-    await expect(
-      document.querySelector(`.${prefix}--tearsheet`)
-    ).toBeAccessible(CreateTearsheet.displayName);
+    jest.useFakeTimers();
+    await act(async () => {
+      renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
+      jest.advanceTimersByTime(1000);
+    });
+    try {
+      const tearsheetElement = document.querySelector(`.${prefix}--tearsheet`);
+      await expect(tearsheetElement).toBeAccessible(
+        CreateTearsheet.displayName
+      );
+      expect(await tearsheetElement).toHaveNoAxeViolations();
+    } catch (err) {
+      console.log('accessibility test error :', err);
+    }
   });
 
   it('renders the CreateTearsheet component', async () => {

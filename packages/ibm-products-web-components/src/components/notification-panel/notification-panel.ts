@@ -210,13 +210,13 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   private _handleMouseEnter(el: Element) {
     const next = el.nextElementSibling;
     if (next?.tagName.toLowerCase() === 'c4p-notification') {
-      next.classList.add('c4p--notifications-panel__notification--next');
+      next.classList.add(`${blockClass}__notification--next`);
     }
   }
   private _handleMouseLeave(el: Element) {
     const next = el.nextElementSibling;
     if (next?.tagName.toLowerCase() === 'c4p-notification') {
-      next.classList.remove('c4p--notifications-panel__notification--next');
+      next.classList.remove(`${blockClass}__notification--next`);
     }
   }
   private _markFirstNotification() {

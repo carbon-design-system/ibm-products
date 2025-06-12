@@ -123,6 +123,19 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       this._handleSlotChange('previous')
     );
     this._markFirstNotification();
+
+    const slot = this.shadowRoot?.querySelector(
+      'slot[name="previous"]'
+    ) as HTMLSlotElement | null;
+    const slottedElements = slot?.assignedElements({ flatten: true }) || [];
+    for (const el of slottedElements) {
+      el.addEventListener('mouseenter', () => {
+        this._handleMouseEnter(el);
+      });
+      el.addEventListener('mouseleave', () => {
+        this._handleMouseLeave(el);
+      });
+    }
   }
 
   updated() {
@@ -193,6 +206,18 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
         </div>
       </div>
     `;
+  }
+  private _handleMouseEnter(el: Element) {
+    const next = el.nextElementSibling;
+    if (next?.tagName.toLowerCase() === 'c4p-notification') {
+      next.classList.add('c4p--notifications-panel__notification--next');
+    }
+  }
+  private _handleMouseLeave(el: Element) {
+    const next = el.nextElementSibling;
+    if (next?.tagName.toLowerCase() === 'c4p-notification') {
+      next.classList.remove('c4p--notifications-panel__notification--next');
+    }
   }
   private _markFirstNotification() {
     const notifications = this.querySelectorAll(`${prefix}-notification`);

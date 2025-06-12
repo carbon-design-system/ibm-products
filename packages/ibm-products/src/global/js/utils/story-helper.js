@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import pkg from '../package-settings';
 import * as changeCase from 'change-case';
+import { Button } from '@carbon/react';
 
 export const checkCanaryStatus = (componentName) =>
   !pkg.isComponentEnabled(componentName, true) &&
@@ -182,3 +183,17 @@ export const getSelectedCarbonTheme = () => {
     ?.getAttribute('data-carbon-theme');
   return themeId === 'g90' || themeId === 'g100' ? 'dark' : 'light';
 };
+
+/**
+ * A helper function that returns a button that toggles a modal / side panel.
+ * @returns {JSX.Element} A button that toggles any component.
+ */
+export const renderTrigger = ({ open, setOpen, buttonRef, prefix, name }) => (
+  <Button
+    ref={buttonRef}
+    onClick={() => setOpen(!open)}
+    className={`${prefix}toggle`}
+  >
+    {open ? `Close ${name}` : `Open ${name}`}
+  </Button>
+);

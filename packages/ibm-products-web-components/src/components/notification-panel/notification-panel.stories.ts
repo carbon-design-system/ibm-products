@@ -24,8 +24,6 @@ import {
   dataPrevious as initialDataPrevious,
   extraData,
 } from './NotificationsPanel_data';
-const storyPrefix = 'notification-panel-stories__';
-const blockClassNotificationPanel = `${prefix}--notifications-panel`;
 const blockClassNotification = `${prefix}--notifications-panel__notification`;
 const storyBlockClass = `${prefix}--notifications-panel__story`;
 
@@ -190,6 +188,7 @@ export const defaultTemplate = {
           >
             ${Notification20({ slot: 'icon' })}
           </cds-header-global-action>
+
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"

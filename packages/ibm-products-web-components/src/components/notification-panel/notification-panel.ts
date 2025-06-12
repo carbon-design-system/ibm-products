@@ -101,6 +101,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
 
   @queryAssignedElements({ slot: 'previous', flatten: true })
   _previousElements!: Array<HTMLElement>;
+  private _mutationObserver?: MutationObserver;
 
   willUpdate(changedProperties: any) {
     if (changedProperties.has('dateTimeLocale')) {
@@ -138,8 +139,13 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     }
   }
 
-  updated() {
-    this._markFirstNotification(); // optional if re-renders can add more notifications
+  updated(changedProps: Map<string, any>) {
+    this._markFirstNotification();
+    if (changedProps.has('open') && this.open) {
+      console.log('yes');
+
+      this._tryFocusDismissButton();
+    }
   }
 
   render() {
@@ -207,6 +213,11 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       </div>
     `;
   }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._mutationObserver?.disconnect();
+  }
+
   private _handleMouseEnter(el: Element) {
     const next = el.nextElementSibling;
     if (next?.tagName.toLowerCase() === 'c4p-notification') {
@@ -229,6 +240,31 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     slotName === 'today'
       ? (this._hasTodayContent = this._todayElements.length > 0)
       : (this._hasPreviousContent = this._previousElements.length > 0);
+  }
+  private _tryFocusDismissButton() {
+    const button = this.renderRoot.querySelector<HTMLButtonElement>(
+      `.${blockClass}__dismiss-button`
+    );
+
+    if (button) {
+      button.focus();
+    } else {
+      this._mutationObserver?.disconnect(); // Clear any existing
+      this._mutationObserver = new MutationObserver(() => {
+        const btn = this.renderRoot.querySelector<HTMLButtonElement>(
+          `.${blockClass}__dismiss-button`
+        );
+        if (btn) {
+          btn.focus();
+          this._mutationObserver?.disconnect(); // Done observing
+        }
+      });
+
+      this._mutationObserver.observe(this.renderRoot, {
+        childList: true,
+        subtree: true,
+      });
+    }
   }
   /**
    * Handles user-initiated dismiss of all notifications.
@@ -273,7 +309,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       )
     );
   }
-  @HostListener('document:keydown')
+  @HostListener('keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = ({ key, target }: KeyboardEvent) => {
     if (key === 'Escape') {

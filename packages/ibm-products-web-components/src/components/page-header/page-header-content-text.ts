@@ -15,7 +15,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 
 /**
  * Page header Content Text.
- * @element cds-page-header-content-text
+ * @element c4p-page-header-content-text
  */
 @customElement(`${prefix}-page-header-content-text`)
 class CDSPageHeaderContentText extends LitElement {

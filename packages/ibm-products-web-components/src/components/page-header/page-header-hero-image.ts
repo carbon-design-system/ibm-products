@@ -14,7 +14,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 
 /**
  * Page header Hero Image.
- * @element cds-page-header-hero-image
+ * @element c4p-page-header-hero-image
  */
 @customElement(`${prefix}-page-header-hero-image`)
 class CDSPageHeaderHeroImage extends LitElement {

@@ -70,27 +70,27 @@ const args = {
 const argTypes = {
   border: {
     description:
-      'Specify whether to render `cds-page-header-breadcrumb` border',
+      'Specify whether to render `c4p-page-header-breadcrumb` border',
     control: 'boolean',
   },
   pageActionsFlush: {
     description:
-      'Specify whether the page actions within `cds-page-header-breadcrumb` should be flush',
+      'Specify whether the page actions within `c4p-page-header-breadcrumb` should be flush',
     control: 'boolean',
   },
   contentActionsFlush: {
     description:
-      'Specify whether the content actions within `cds-page-header-breadcrumb` should be flush with the page actions',
+      'Specify whether the content actions within `c4p-page-header-breadcrumb` should be flush with the page actions',
     control: 'boolean',
   },
   title: {
     description:
-      'Provide the title text to be rendered within  `cds-page-header-content`',
+      'Provide the title text to be rendered within  `c4p-page-header-content`',
     control: 'text',
   },
   renderBreadcrumbIcon: {
     description:
-      'Specify whether to render the `cds-page-header-breadcrumb` icon (storybook control only)',
+      'Specify whether to render the `c4p-page-header-breadcrumb` icon (storybook control only)',
     control: 'boolean',
   },
 };
@@ -107,8 +107,8 @@ export const Default = {
       renderBreadcrumbIcon,
     } = args ?? {};
     return html`
-      <cds-page-header>
-        <cds-page-header-breadcrumb
+      <c4p-page-header>
+        <c4p-page-header-breadcrumb
           border="${border}"
           ?page-actions-flush="${pageActionsFlush}"
           ?content-actions-flush="${contentActionsFlush}"
@@ -134,17 +134,17 @@ export const Default = {
           <cds-icon-button slot="page-actions" kind="ghost" size="md"
             >${CloudFoundry16()}</cds-icon-button
           >
-        </cds-page-header-breadcrumb>
-        <cds-page-header-content title="${title}">
-          <cds-page-header-content-text subtitle="Subtitle">
+        </c4p-page-header-breadcrumb>
+        <c4p-page-header-content title="${title}">
+          <c4p-page-header-content-text subtitle="Subtitle">
             Built for modern teams, our technology platform simplifies
             complexity with powerful APIs, real-time collaboration tools, and
             seamless integration. From deployment to monitoring, we help you
             ship faster, scale efficiently, and stay in control every step of
             the way.
-          </cds-page-header-content-text>
-        </cds-page-header-content>
-        <cds-page-header-tabs>
+          </c4p-page-header-content-text>
+        </c4p-page-header-content>
+        <c4p-page-header-tabs>
           <cds-tabs value="tab-1">
             <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
               >Tab 1</cds-tab
@@ -168,8 +168,8 @@ export const Default = {
               >Tab 7</cds-tab
             >
           </cds-tabs>
-        </cds-page-header-tabs>
-      </cds-page-header>
+        </c4p-page-header-tabs>
+      </c4p-page-header>
       <div>
         <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
           Tab Panel 1
@@ -199,8 +199,8 @@ export const Default = {
 
 export const ContentWithContextualActions = {
   render: () =>
-    html`<cds-page-header>
-      <cds-page-header-breadcrumb>
+    html`<c4p-page-header>
+      <c4p-page-header-breadcrumb>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
@@ -219,27 +219,27 @@ export const ContentWithContextualActions = {
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
           >${CloudFoundry16()}</cds-icon-button
         >
-      </cds-page-header-breadcrumb>
-      <cds-page-header-content
+      </c4p-page-header-breadcrumb>
+      <c4p-page-header-content
         title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
       >
         <div slot="contextual-actions">
           <cds-tag type="blue" size="lg">Tag</cds-tag>
         </div>
-        <cds-page-header-content-text subtitle="Subtitle">
+        <c4p-page-header-content-text subtitle="Subtitle">
           Built for modern teams, our technology platform simplifies complexity
           with powerful APIs, real-time collaboration tools, and seamless
           integration. From deployment to monitoring, we help you ship faster,
           scale efficiently, and stay in control every step of the way.
-        </cds-page-header-content-text>
-      </cds-page-header-content>
-    </cds-page-header>`,
+        </c4p-page-header-content-text>
+      </c4p-page-header-content>
+    </c4p-page-header>`,
 };
 
 export const ContentWithContextualActionsAndPageActions = {
   render: () =>
-    html`<cds-page-header>
-      <cds-page-header-breadcrumb>
+    html`<c4p-page-header>
+      <c4p-page-header-breadcrumb>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
@@ -258,8 +258,8 @@ export const ContentWithContextualActionsAndPageActions = {
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
           >${CloudFoundry16()}</cds-icon-button
         >
-      </cds-page-header-breadcrumb>
-      <cds-page-header-content
+      </c4p-page-header-breadcrumb>
+      <c4p-page-header-content
         title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
       >
         <div slot="contextual-actions">
@@ -270,23 +270,23 @@ export const ContentWithContextualActionsAndPageActions = {
             >Primary action ${Add16({ slot: 'icon' })}</cds-button
           >
         </div>
-        <cds-page-header-content-text subtitle="Subtitle">
+        <c4p-page-header-content-text subtitle="Subtitle">
           Built for modern teams, our technology platform simplifies complexity
           with powerful APIs, real-time collaboration tools, and seamless
           integration. From deployment to monitoring, we help you ship faster,
           scale efficiently, and stay in control every step of the way.
-        </cds-page-header-content-text>
-      </cds-page-header-content>
-    </cds-page-header>`,
+        </c4p-page-header-content-text>
+      </c4p-page-header-content>
+    </c4p-page-header>`,
 };
 
 export const ContentWithHeroImage = {
   render: () =>
     html`
-    <cds-page-header>
+    <c4p-page-header>
       <div class="cds--css-grid">
         <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <cds-page-header-breadcrumb border=false within-grid>
+          <c4p-page-header-breadcrumb border=false within-grid>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
@@ -296,18 +296,18 @@ export const ContentWithHeroImage = {
             <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
           </cds-breadcrumb-item>
         </cds-breadcrumb>
-      </cds-page-header-breadcrumb>
-          <cds-page-header-content
+      </c4p-page-header-breadcrumb>
+          <c4p-page-header-content
             within-grid
             title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
             >
-            <cds-page-header-content-text subtitle="Subtitle">
+            <c4p-page-header-content-text subtitle="Subtitle">
              Built for modern teams, our technology platform simplifies complexity with powerful APIs, real-time collaboration tools, and seamless integration. From deployment to monitoring, we help you ship faster, scale efficiently, and stay in control every step of the way.
-            </cds-page-header-content-text>
-          </cds-page-header-content>
+            </c4p-page-header-content-text>
+          </c4p-page-header-content>
         </div>
         <div class="cds--sm:col-span-0 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <cds-page-header-hero-image>
+          <c4p-page-header-hero-image>
             <picture>
               <source
                 srcset="${image1}"
@@ -323,17 +323,17 @@ export const ContentWithHeroImage = {
                 style="max-width:100%;height:auto"
               />
             </picture>
-          </cds-page-header-hero-image>
+          </c4p-page-header-hero-image>
         </div>
       </div>
       </div>
-    </cds-page-header>`,
+    </c4p-page-header>`,
 };
 
 export const ContentWithIcon = {
   render: () =>
-    html`<cds-page-header>
-      <cds-page-header-breadcrumb>
+    html`<c4p-page-header>
+      <c4p-page-header-breadcrumb>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
@@ -352,25 +352,25 @@ export const ContentWithIcon = {
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
           >${CloudFoundry16()}</cds-icon-button
         >
-      </cds-page-header-breadcrumb>
-      <cds-page-header-content
+      </c4p-page-header-breadcrumb>
+      <c4p-page-header-content
         title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
       >
         ${Bee32({ slot: 'icon' })}
-        <cds-page-header-content-text subtitle="Subtitle">
+        <c4p-page-header-content-text subtitle="Subtitle">
           Built for modern teams, our technology platform simplifies complexity
           with powerful APIs, real-time collaboration tools, and seamless
           integration. From deployment to monitoring, we help you ship faster,
           scale efficiently, and stay in control every step of the way.
-        </cds-page-header-content-text>
-      </cds-page-header-content>
-    </cds-page-header>`,
+        </c4p-page-header-content-text>
+      </c4p-page-header-content>
+    </c4p-page-header>`,
 };
 
 export const TabBarWithTabsAndTags = {
   render: () =>
-    html`<cds-page-header>
-        <cds-page-header-breadcrumb>
+    html`<c4p-page-header>
+        <c4p-page-header-breadcrumb>
           ${Bee16({ slot: 'icon' })}
           <cds-breadcrumb>
             <cds-breadcrumb-item>
@@ -389,19 +389,19 @@ export const TabBarWithTabsAndTags = {
           <cds-icon-button slot="page-actions" kind="ghost" size="md"
             >${CloudFoundry16()}</cds-icon-button
           >
-        </cds-page-header-breadcrumb>
-        <cds-page-header-content
+        </c4p-page-header-breadcrumb>
+        <c4p-page-header-content
           title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
         >
-          <cds-page-header-content-text subtitle="Subtitle">
+          <c4p-page-header-content-text subtitle="Subtitle">
             Built for modern teams, our technology platform simplifies
             complexity with powerful APIs, real-time collaboration tools, and
             seamless integration. From deployment to monitoring, we help you
             ship faster, scale efficiently, and stay in control every step of
             the way.
-          </cds-page-header-content-text>
-        </cds-page-header-content>
-        <cds-page-header-tabs>
+          </c4p-page-header-content-text>
+        </c4p-page-header-content>
+        <c4p-page-header-tabs>
           <cds-tabs value="tab-1">
             <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
               >Tab 1</cds-tab
@@ -433,8 +433,8 @@ export const TabBarWithTabsAndTags = {
                 >`
             )}
           </div>
-        </cds-page-header-tabs>
-      </cds-page-header>
+        </c4p-page-header-tabs>
+      </c4p-page-header>
       <div">
         <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
           Tab Panel 1

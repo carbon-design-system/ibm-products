@@ -16,7 +16,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 
 /**
  * Page header Breadcrumb Bar.
- * @element cds-page-header-breadcrumb
+ * @element c4p-page-header-breadcrumb
  */
 @customElement(`${prefix}-page-header-breadcrumb`)
 class CDSPageHeaderBreadcrumb extends LitElement {

@@ -16,7 +16,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 
 /**
  * Page header content.
- * @element cds-page-header-content
+ * @element c4p-page-header-content
  */
 @customElement(`${prefix}-page-header-content`)
 class CDSPageHeaderContent extends LitElement {
@@ -64,7 +64,9 @@ class CDSPageHeaderContent extends LitElement {
       `.${prefix}--page-header__content__title`
     );
 
-    if (!textContainer || this._hasEllipsisApplied === true) {return;}
+    if (!textContainer || this._hasEllipsisApplied === true) {
+      return;
+    }
 
     this._hasEllipsisApplied =
       textContainer.scrollHeight > textContainer.clientHeight;

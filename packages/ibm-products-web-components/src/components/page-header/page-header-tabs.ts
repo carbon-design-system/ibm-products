@@ -14,7 +14,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 
 /**
  * Page header Tabs Bar.
- * @element cds-page-header-tabs
+ * @element c4p-page-header-tabs
  */
 @customElement(`${prefix}-page-header-tabs`)
 class CDSPageHeaderTabs extends LitElement {

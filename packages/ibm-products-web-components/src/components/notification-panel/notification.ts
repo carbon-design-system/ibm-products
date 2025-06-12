@@ -10,7 +10,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { selectorTabbable } from '@carbon/web-components/es/globals/settings.js';
 import { dateTimeFormat } from '@carbon/utilities';
@@ -35,7 +34,6 @@ const dateTimeStyle = 'long' as DateTimeStyles;
  *
  * @element c4p-notification
  * @csspart dialog The dialog.
- * @fires c4p-notification-click
  *   The custom event is fired when a notification is clicked or when the Enter key is pressed on it.
  * @fires c4p-notification-dismiss - The custom event is fired when the notification is closed by a user gesture.
  */
@@ -54,6 +52,13 @@ class CDSNotification extends HostListenerMixin(LitElement) {
 
   @consume({ context: dateTimeLocaleContext, subscribe: true })
   dateTimeLocale: string | undefined = undefined;
+
+  private _handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      this.click();
+    }
+  };
+
   connectedCallback() {
     super.connectedCallback();
     if (!this.hasAttribute('role')) {
@@ -62,6 +67,7 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     if (!this.hasAttribute('tabindex')) {
       this.setAttribute('tabindex', '0');
     }
+    this.addEventListener('keydown', this._handleKeyDown);
   }
   render() {
     const {
@@ -99,60 +105,10 @@ class CDSNotification extends HostListenerMixin(LitElement) {
       </cds-button>
     `;
   }
-
-  @HostListener('keydown')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeyDown(event: KeyboardEvent) {
-    if (
-      event.target instanceof HTMLElement &&
-      event.target.classList.contains(`${blockClass}__dismiss-single-button`)
-    ) {
-      return;
-    }
-    if (event.key === 'Enter') {
-      const triggeredBy = event.target;
-      const init = {
-        bubbles: true,
-        cancelable: true,
-        composed: true,
-        detail: {
-          triggeredBy,
-        },
-      };
-      this.dispatchEvent(
-        new CustomEvent(
-          (this.constructor as typeof CDSNotification).notificationClick,
-          init
-        )
-      );
-    }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('keydown', this._handleKeyDown);
   }
-
-  /**
-   * Handles click event on notification.
-   *
-   * @param triggeredBy The element that triggered click event.
-   */
-  // Use @HostListener for click events on Notification Component
-  @HostListener('click')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleClick(triggeredBy: EventTarget | null) {
-    const init = {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-      detail: {
-        triggeredBy,
-      },
-    };
-    this.dispatchEvent(
-      new CustomEvent(
-        (this.constructor as typeof CDSNotification).notificationClick,
-        init
-      )
-    );
-  }
-
   /**
    * Handles user-initiated dismiss request of the Notification.
    *
@@ -212,13 +168,6 @@ class CDSNotification extends HostListenerMixin(LitElement) {
    */
   static get selectorTabbable() {
     return selectorTabbable;
-  }
-
-  /**
-   * The custom event is fired when a notification is clicked or when the Enter key is pressed on it.
-   */
-  static get notificationClick() {
-    return `${prefix}-notification-click`;
   }
 
   /**

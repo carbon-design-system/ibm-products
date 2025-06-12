@@ -232,7 +232,7 @@ export const defaultTemplate = {
                   <c4p-notification
                     slot="today"
                     .open=${args.open}
-                    @c4p-notification-click=${item.onNotificationClick}
+                    @click=${item.onNotificationClick}
                     @c4p-notification-dismiss=${() => {
                       notificationSingleDismiss(item.id, 'today');
                     }}
@@ -262,7 +262,7 @@ export const defaultTemplate = {
                 return html`
                   <c4p-notification
                     slot="previous"
-                    @c4p-notification-click=${item.onNotificationClick}
+                    @click=${item.onNotificationClick}
                     @c4p-notification-dismiss=${() => {
                       notificationSingleDismiss(item.id, 'previous');
                     }}

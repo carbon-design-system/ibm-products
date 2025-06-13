@@ -14,7 +14,7 @@ const DocsPage = () => {
     <StoryDocsPage
       altGuidelinesHref={[
         {
-          href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/cascade/',
+          href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/cascade/usage',
           label: 'Usage guidelines',
         },
         {

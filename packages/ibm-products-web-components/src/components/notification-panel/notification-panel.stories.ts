@@ -68,7 +68,7 @@ const dateTimeLocaleOptions = {
 export const defaultTemplate = {
   args: {
     titleText: 'Notifications',
-    open: false,
+    open: true,
     todayText: 'Today',
     previousText: 'Previous',
     dismissAllLabel: 'Dismiss All',
@@ -239,7 +239,7 @@ export const defaultTemplate = {
                     unread=${item.unread}
                     .timestamp=${item.timestamp}
                   >
-                    <cds-heading
+                    <h4
                       class=${classMap({
                         [`${blockClassNotification}__notification-title`]: true,
                         [`${blockClassNotification}__notification-title-unread`]:
@@ -248,7 +248,7 @@ export const defaultTemplate = {
                       slot="title"
                     >
                       ${item.title}
-                    </cds-heading>
+                    </h4>
                     <div slot="description">${item.description}</div>
                   </c4p-notification>
                 `;
@@ -269,7 +269,7 @@ export const defaultTemplate = {
                     unread=${item.unread}
                     .timestamp=${item.timestamp}
                   >
-                    <cds-heading
+                    <h4
                       class=${classMap({
                         [`${blockClassNotification}__notification-title`]: true,
                         [`${blockClassNotification}__notification-title-unread`]:
@@ -278,7 +278,7 @@ export const defaultTemplate = {
                       slot="title"
                     >
                       ${item.title}
-                    </cds-heading>
+                    </h4>
                     <div slot="description">${item.description}</div>
                   </c4p-notification>
                 `;

@@ -113,11 +113,6 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
   }
 }
 ::slotted(.#{$block-notification-class}__notification-title) {
-  --#{$carbon-prefix}-heading-06-font-size: --#{$carbon-prefix}-heading-01-font-size;
-  --#{$carbon-prefix}-heading-06-font-weight: --#{$carbon-prefix}-heading-01-font-weight;
-  --#{$carbon-prefix}-heading-06-line-height: --#{$carbon-prefix}-heading-01-line-height;
-  --#{$carbon-prefix}-heading-06-letter-spacing: --#{$carbon-prefix}-heading-01-letter-spacing;
-
   @include type.type-style('heading-01');
 
   color: $text-secondary;

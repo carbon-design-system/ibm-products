@@ -8,6 +8,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/type/scss/font-family' as *;
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
@@ -99,4 +100,11 @@ $block-class: #{$prefix}--notifications-panel;
       transform: rotate(180deg);
     }
   }
+}
+.#{$block-class}__notification__notification-title {
+  @include type.type-style('heading-01');
+
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+  @include font-weight('regular');
 }

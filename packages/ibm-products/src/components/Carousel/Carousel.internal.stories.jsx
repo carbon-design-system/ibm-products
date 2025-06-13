@@ -12,7 +12,7 @@ import styles from './_storybook-styles.scss?inline';
 import DocsPage from './Carousel.docs-page';
 
 export default {
-  title: 'IBM Products/Internal/Carousel',
+  title: 'Internal/Carousel',
   component: Carousel,
   tags: ['autodocs'],
   parameters: {

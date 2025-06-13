@@ -17,7 +17,7 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 // import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Patterns/Empty state/EmptyState',
+  title: 'Patterns/Prebuilt patterns/Empty states/EmptyState',
   component: EmptyState,
   tags: ['autodocs'],
   parameters: {
@@ -28,7 +28,7 @@ export default {
           altGuidelinesHref={[
             {
               href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon Empty pattern usage guidelines',
+              label: 'Carbon empty states pattern',
             },
           ]}
         />

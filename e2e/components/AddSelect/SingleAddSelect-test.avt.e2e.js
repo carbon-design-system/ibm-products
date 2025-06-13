@@ -16,7 +16,7 @@ test.describe('SingleAddSelect @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'SingleAddSelect',
-      id: 'ibm-products-patterns-add-and-select-singleaddselect--default',
+      id: 'patterns-prebuilt-patterns-add-and-select-singleaddselect--default',
       globals: {
         carbonTheme: 'white',
       },

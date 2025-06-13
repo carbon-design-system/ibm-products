@@ -28,7 +28,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
 
 export default {
-  title: 'Deprecated/Datagrid/Datagrid/EditableCell',
+  title: 'Deprecated/Datagrid/EditableCell',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

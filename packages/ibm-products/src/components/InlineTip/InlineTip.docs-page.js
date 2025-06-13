@@ -15,7 +15,7 @@ const DocsPage = () => (
     altGuidelinesHref={[
       {
         href: 'https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/inline-tip/usage/',
-        label: 'Inline tip usage guidelines',
+        label: 'Usage guidelines',
       },
     ]}
     blocks={[

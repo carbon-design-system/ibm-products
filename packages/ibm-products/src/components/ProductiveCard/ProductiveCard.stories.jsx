@@ -63,7 +63,7 @@ const sampleDecorator = (decorator) => {
 };
 
 export default {
-  title: 'IBM Products/Components/Cards/ProductiveCard',
+  title: 'Components/Cards/ProductiveCard',
   component: ProductiveCard,
   tags: ['autodocs'],
   parameters: {

@@ -14,7 +14,7 @@ test.describe('WebTerminal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'WebTerminal',
-      id: 'ibm-products-patterns-web-terminal-webterminal--default',
+      id: 'patterns-prebuilt-patterns-webterminal--default',
       globals: {
         carbonTheme: 'white',
       },

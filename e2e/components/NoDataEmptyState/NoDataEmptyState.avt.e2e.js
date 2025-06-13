@@ -14,7 +14,7 @@ test.describe('NoDataEmptyState @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'NoDataEmptyState',
-      id: 'ibm-products-patterns-empty-state-nodataemptystate--default',
+      id: 'patterns-prebuilt-patterns-empty-states-nodataemptystate--default',
       globals: {
         carbonTheme: 'white',
       },

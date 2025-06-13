@@ -17,7 +17,7 @@ test.describe('OptionsTile @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'OptionsTile',
-      id: 'ibm-products-components-options-tile-optionstile--options-tile',
+      id: 'components-optionstile--options-tile',
       globals: {
         carbonTheme: 'white',
       },
@@ -35,7 +35,7 @@ test.describe('OptionsTile @avt', () => {
   test('@avt-keyboard-navigation', async ({ page }) => {
     await visitStory(page, {
       component: 'OptionsTile',
-      id: 'ibm-products-components-options-tile-optionstile--options-tile&args=enabled',
+      id: 'components-optionstile--options-tile&args=enabled',
       globals: {
         carbonTheme: 'white',
       },

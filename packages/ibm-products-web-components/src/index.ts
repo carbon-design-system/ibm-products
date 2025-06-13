@@ -14,3 +14,4 @@ export { default as CDSAboutModal } from './components/about-modal/about-modal';
 export { default as CDSUseravatar } from './components/user-avatar/user-avatar';
 export { default as CDSOptionsTile } from './components/options-tile/options-tile';
 export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
+export { default as CDSPageHeader } from './components/page-header/page-header';

@@ -1,5 +1,5 @@
 // /**
-//  * Copyright IBM Corp. 2022, 2024
+//  * Copyright IBM Corp. 2022, 2025
 //  *
 //  * This source code is licensed under the Apache-2.0 license found in the
 //  * LICENSE file in the root directory of this source tree.
@@ -7,8 +7,8 @@
 import '../../../feature-flags';
 import { FilterContext, FilterPanel } from './addons/Filtering';
 import React, { useContext, ForwardedRef, useRef, useEffect } from 'react';
-import { Table, TableContainer } from '@carbon/react';
-import { carbon, pkg } from '../../../settings';
+import { Table, TableContainer, usePrefix } from '@carbon/react';
+import { pkg } from '../../../settings';
 import {
   CLEAR_FILTERS,
   CLEAR_SINGLE_FILTER,
@@ -82,6 +82,7 @@ export const DatagridContent = ({
   const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
   const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
   const multiKeyTrackingRef: ForwardedRef<HTMLDivElement> = useRef(null);
+  const carbonPrefix = usePrefix();
 
   const enableEditableCell = useFeatureFlag('enable-datagrid-useEditableCell');
   const enableInlineEdit = useFeatureFlag('enable-datagrid-useInlineEdit');
@@ -161,6 +162,7 @@ export const DatagridContent = ({
                   state: inlineEditState,
                   usingMac,
                   ref: multiKeyTrackingRef,
+                  carbonPrefix,
                 })),
             onFocus:
               withInlineEdit &&
@@ -194,7 +196,7 @@ export const DatagridContent = ({
       `#${tableId}`
     );
     const tableHeader = gridElement?.querySelector(
-      `.${carbon.prefix}--data-table-header`
+      `.${carbonPrefix}--data-table-header`
     );
     gridElement?.style?.setProperty(
       `--${blockClass}--grid-width`,
@@ -206,7 +208,14 @@ export const DatagridContent = ({
         px(tableHeader?.clientHeight || 0)
       );
     }
-  }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
+  }, [
+    withInlineEdit,
+    tableId,
+    totalColumnsWidth,
+    datagridState,
+    gridActive,
+    carbonPrefix,
+  ]);
 
   useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
     clearSingleFilter(id, setAllFilters, state, contextTableId)

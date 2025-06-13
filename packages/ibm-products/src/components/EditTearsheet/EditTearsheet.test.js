@@ -95,36 +95,10 @@ const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
 );
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-
   beforeEach(() => {
     jest.spyOn(console, 'warn').mockImplementation(() => {});
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
-      root: null,
-      rootMargin: '',
-      thresholds: [],
-      disconnect: () => null,
-      observe: () => null,
-      takeRecords: () => [],
-      unobserve: () => null,
-    }));
     jest.useFakeTimers();
     pkg.feature['default-portal-target-body'] = false;
-    window.matchMedia = jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(), // Deprecated
-      removeListener: jest.fn(), // Deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
 
     //todo: remove once carbon fixes issue on side nav
     jest.spyOn(console, 'error').mockImplementation((msg) => {
@@ -139,7 +113,6 @@ describe(componentName, () => {
   });
 
   afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
     jest.useRealTimers();
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
     console.error.mockRestore();

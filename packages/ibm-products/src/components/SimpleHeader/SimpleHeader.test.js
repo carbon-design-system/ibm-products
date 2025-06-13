@@ -13,18 +13,6 @@ const componentName = SimpleHeader.displayName;
 const blockClass = `${pkg.prefix}--simple-header`;
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-  beforeEach(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-  });
-  afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
-  });
-
   const renderComponent = (args) => render(<SimpleHeader {...args} />);
 
   beforeAll(() => {

@@ -27,24 +27,15 @@ const tagOverflowProps = {
 };
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
   let warn;
 
   beforeEach(() => {
     warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-
     window.innerWidth = 500;
     fireEvent(window, new Event('resize'));
   });
 
   afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
     warn.mockRestore();
   });
 

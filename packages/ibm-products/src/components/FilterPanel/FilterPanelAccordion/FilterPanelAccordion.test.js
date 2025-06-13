@@ -36,15 +36,6 @@ describe(componentName, () => {
   beforeEach(() => {
     jest.spyOn(console, 'warn').mockImplementation(() => {});
   });
-  const { getComputedStyle } = window;
-
-  beforeEach(() => {
-    window.getComputedStyle = jest.fn();
-  });
-
-  afterEach(() => {
-    window.getComputedStyle = getComputedStyle;
-  });
 
   it('renders a component FilterPanelAccordion', async () => {
     const { container } = renderComponent();

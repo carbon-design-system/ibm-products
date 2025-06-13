@@ -18,7 +18,6 @@ const name = 'JS export checks';
 pkg.setAllComponents();
 
 describe(name, () => {
-  const { ResizeObserver } = window;
   let mockError, mockWarn;
 
   beforeEach(() => {
@@ -27,18 +26,12 @@ describe(name, () => {
     // conditions not met, and for the purposes of these tests we don't care.
     mockError = jest.spyOn(console, 'error').mockImplementation(() => {});
     mockWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
   });
 
   afterEach(() => {
     mockError.mockRestore();
     mockWarn.mockRestore();
     jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
   });
 
   for (const key in components) {

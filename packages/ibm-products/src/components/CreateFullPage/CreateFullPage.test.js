@@ -176,18 +176,6 @@ const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-  beforeEach(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-  });
-  afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
-  });
-
   it('has no accessibility violations', async () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
 

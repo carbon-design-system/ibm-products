@@ -74,20 +74,6 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-
-  beforeEach(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-  });
-
-  afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
-  });
-
   it('renders a component AboutModal', async () => {
     renderComponent({ open: true });
     expect(screen.getByRole('presentation')).toHaveClass(blockClass);

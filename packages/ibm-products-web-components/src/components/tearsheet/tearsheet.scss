@@ -266,7 +266,7 @@ $motion-duration: $duration-moderate-02;
 
   .#{$block-class}__header[has-close-icon],
   .#{$block-class}__header[has-slug],
-  #{$block-class}__header[has-decorator] {
+  .#{$block-class}__header[has-decorator] {
     padding-inline-end: $spacing-11;
   }
 

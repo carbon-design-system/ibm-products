@@ -156,7 +156,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       `.${blockClass}__overflow-menu button`
     );
 
-    await act(() => click(overflowBtn));
+    await act(async () => click(overflowBtn));
 
     // <ul role='menu' /> but default <ul> role of list used for query
     // see https://testing-library.com/docs/queries/byrole/#api
@@ -168,7 +168,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     expect(menuItems).toHaveLength(overflowItemsExpected);
     expect(menuItems[0]).toHaveTextContent(breadcrumbContent[1]);
     expect(menuItems[1]).toHaveTextContent(breadcrumbContent[2]);
-    await act(() => click(menuItems[1]));
+    await act(async () => click(menuItems[1]));
     expect(myOnClick).toHaveBeenCalled();
   });
 

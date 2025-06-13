@@ -70,7 +70,7 @@ describe(componentName, () => {
   it('shows extra content when button is toggled open', async () => {
     const { container } = renderComponent();
     const button = container.querySelector('button');
-    await act(() => click(button));
+    await act(async () => click(button));
     expect(screen.queryByText(definition)).toBeInTheDocument();
   });
 
@@ -78,10 +78,10 @@ describe(componentName, () => {
     const { container } = renderComponent();
     const button = container.querySelector('button');
     // render/expand content
-    await act(() => click(button));
+    await act(async () => click(button));
     expect(screen.queryByText(definition)).toBeInTheDocument();
     // "un-render"/collapse content
-    await act(() => click(button));
+    await act(async () => click(button));
     expect(screen.queryByText(definition)).not.toBeInTheDocument();
   });
 });

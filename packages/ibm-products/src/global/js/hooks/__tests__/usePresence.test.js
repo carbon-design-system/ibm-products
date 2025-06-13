@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { usePresence } from '../usePresence';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import cx from 'classnames';
 
 const content = 'Component content';
@@ -62,7 +62,7 @@ describe('usePresence', () => {
 
     const event = new Event('animationend');
     Object.assign(event, { animationName: 'fade-out' });
-    act(() => ref?.current.dispatchEvent(event));
+    await act(async () => ref?.current.dispatchEvent(event));
     expect(ref.current).toBeNull();
   });
 });

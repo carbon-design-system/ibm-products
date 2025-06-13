@@ -62,7 +62,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
@@ -74,7 +74,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     screen.getByTestId(dataTestId);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
@@ -89,7 +89,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     screen.getByTestId(dataTestId);
   });
 
@@ -102,7 +102,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
@@ -116,7 +116,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     screen.getByTestId(tmpTestID);
   });
 
@@ -130,7 +130,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     expect(ref.current).toHaveClass(blockClass);
   });
 
@@ -142,7 +142,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
@@ -158,7 +158,7 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
 
     expect(screen.getByRole('img')).toBeInTheDocument();
   });
@@ -173,11 +173,11 @@ describe(componentName, () => {
     const beaconOrButton = screen.getByRole('button', {
       name: 'Show information',
     });
-    await act(() => user.click(beaconOrButton));
+    await act(async () => user.click(beaconOrButton));
     const nextButton = screen.getByRole('button', {
       name: 'Next',
     });
-    await act(() => user.click(nextButton));
+    await act(async () => user.click(nextButton));
     await expect(onNext).toHaveBeenCalled();
   });
 });

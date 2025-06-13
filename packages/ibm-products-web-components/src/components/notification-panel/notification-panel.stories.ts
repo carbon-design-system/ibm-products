@@ -71,7 +71,7 @@ export const defaultTemplate = {
     open: true,
     todayText: 'Today',
     previousText: 'Previous',
-    dismissAllLabel: 'Dismiss All',
+    dismissAllLabel: 'Dismiss all',
     doNotDisturbLabel: 'Do not disturb',
   },
   argTypes: {

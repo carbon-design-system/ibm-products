@@ -101,7 +101,9 @@ release team will need to do the following:
 - [ ] The workflow should have triggered the
       [deploy staging environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-staging.yml).
       Once this workflow has completed, check the
-      [staging environment](https://carbon-design-system.github.io/ibm-products/staging)
+      [staging environment for React](https://carbon-design-system.github.io/ibm-products/staging/react)
+      and
+      [staging environment for Web components](https://carbon-design-system.github.io/ibm-products/staging/web-components)
       and ensure the version in the storybook top left header has been updated.
 - [ ] Run the
       [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
@@ -131,7 +133,8 @@ release team will need to do the following:
     What is a release candidate? Before releasing a full version (ie. v2.45.0), we publish prerelease versions / release candidates for testing purposes. This helps to prevent any major bugs making their way to our full versions. If you find any issues with this release candidate, you can report any issues here: https://github.com/carbon-design-system/ibm-products/issues/new/choose.
 
     Changelog: https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.45.0-rc.0
-    Storybook environment (Staging): https://carbon-design-system.github.io/ibm-products/staging/
+    Storybook environment for react (Staging): https://carbon-design-system.github.io/ibm-products/staging/react/
+    Storybook environment for web-components (Staging): https://carbon-design-system.github.io/ibm-products/staging/web-components/
 
     :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
     ```
@@ -165,7 +168,9 @@ from the release branch for further testing. To publish subsequent prereleases,
 - [ ] The workflow should have triggered the
       [deploy staging environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-staging.yml).
       Once this workflow has completed, check the
-      [staging environment](https://carbon-design-system.github.io/ibm-products/staging)
+      [staging environment for React](https://carbon-design-system.github.io/ibm-products/staging/react)
+      and
+      [staging environment for Web components](https://carbon-design-system.github.io/ibm-products/staging/web-components)
       and ensure the version in the storybook top left header has been updated.
 - [ ] Run the
       [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
@@ -195,7 +200,8 @@ from the release branch for further testing. To publish subsequent prereleases,
     What is a release candidate? Before releasing a full version (ie. v2.45.0), we publish prerelease versions / release candidates for testing purposes. This helps to prevent any major bugs making their way to our full versions. If you find any issues with this release candidate, you can report any issues here: https://github.com/carbon-design-system/ibm-products/issues/new/choose.
 
     Changelog: https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.45.0-rc.1
-    Storybook environment (Staging): https://carbon-design-system.github.io/ibm-products/staging/
+    Storybook environment for react (Staging): https://carbon-design-system.github.io/ibm-products/staging/react/
+    Storybook environment for web-components (Staging): https://carbon-design-system.github.io/ibm-products/staging/web-components/
 
     :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
     ```
@@ -233,10 +239,16 @@ validated. During this stage, the release team will do the following:
       and the
       [deploy production environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-latest.yml).
       Once both these workflows have completed, check the
-      [staging environment](https://carbon-design-system.github.io/ibm-products/staging)
+      [staging environment for React](https://carbon-design-system.github.io/ibm-products/staging/react)
+      and
+      [staging environment for Web components](https://carbon-design-system.github.io/ibm-products/staging/web-components)
       and the
-      [production/latest environment](https://carbon-design-system.github.io/ibm-products/latest)
+      [production/latest environment for React](https://carbon-design-system.github.io/ibm-products/latest/react)
+      and
+      [production/latest environment for Web components](https://carbon-design-system.github.io/ibm-products/latest/web-components)
+
       to ensure the versions in the storybook top left header have been updated.
+
 - [ ] Run the
       [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
       This workflow creates the release tag, generates the release with notes,

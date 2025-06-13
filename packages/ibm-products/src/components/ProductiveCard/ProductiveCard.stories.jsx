@@ -220,14 +220,22 @@ WithOverflow.args = {
     {
       id: '1',
       itemText: 'Edit',
-      onClick: action('on click'),
-      onKeyDown: action('on keydown'),
+      onClick: () => {
+        action('click');
+      },
+      onKeyDown: () => {
+        action('keydown');
+      },
     },
     {
       id: '2',
       itemText: 'Delete',
-      onClick: action('on click'),
-      onKeyDown: action('on keydown'),
+      onClick: () => {
+        action('click');
+      },
+      onKeyDown: () => {
+        action('keydown');
+      },
     },
   ],
 };

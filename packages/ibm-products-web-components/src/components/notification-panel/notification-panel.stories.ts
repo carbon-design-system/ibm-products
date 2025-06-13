@@ -296,7 +296,7 @@ export const defaultTemplate = {
         <div class="${storyBlockClass}story-header"></div>
         <div id="page-content-selector" class="${storyBlockClass}story-content">
           <cds-button @click=${addNotification}
-            >Add new notification</cds-button
+            >Add new notification ${User20({ slot: 'icon' })}</cds-button
           >
         </div>
       </div>

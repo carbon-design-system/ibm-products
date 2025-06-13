@@ -142,8 +142,6 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   updated(changedProps: Map<string, any>) {
     this._markFirstNotification();
     if (changedProps.has('open') && this.open) {
-      console.log('yes');
-
       this._tryFocusDismissButton();
     }
   }
@@ -249,14 +247,14 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     if (button) {
       button.focus();
     } else {
-      this._mutationObserver?.disconnect(); // Clear any existing
+      this._mutationObserver?.disconnect();
       this._mutationObserver = new MutationObserver(() => {
         const btn = this.renderRoot.querySelector<HTMLButtonElement>(
           `.${blockClass}__dismiss-button`
         );
         if (btn) {
           btn.focus();
-          this._mutationObserver?.disconnect(); // Done observing
+          this._mutationObserver?.disconnect();
         }
       });
 
@@ -349,13 +347,58 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       'select',
       'textarea',
       '[role="button"]',
+      '[role="link"]',
+      '[tabindex]:not([tabindex="-1"]',
+      'cds-button',
+      'cds-link',
+      'cds-accordion-item',
+      'cds-breadcrumb-item',
+      'cds-icon-button',
+      'cds-checkbox',
+      'cds-dropdown',
+      'cds-dropdown-item',
+      'cds-file-uploader',
+      'cds-file-uploader-button',
+      'cds-menu-button',
+      'cds-menu',
+      'cds-menu-item',
+      'cds-multi-select',
+      'cds-multi-select-item',
+      'cds-number-input',
+      'cds-overflow-menu',
+      'cds-overflow-menu-body',
+      'cds-overflow-menu-item',
+      'cds-pagination',
+      'cds-select-item',
+      'cds-radio-button',
+      'cds-search',
+      'cds-select',
+      'cds-slider',
+      'cds-slider-input',
+      'cds-tabs',
+      'cds-tab',
+      'cds-textarea',
+      'cds-text-input',
+      'cds-time-picker',
+      'cds-time-picker-select',
+      'cds-select-item',
+      'cds-toggle',
+      'cds-toggletip',
     ];
-    const isActionable = actionableSelectors.some(
-      (selector) => target instanceof Element && target.closest(selector)
-    );
-    if (isActionable) {
-      return;
-    }
+    const isActionable = actionableSelectors.some((selector) => {
+      if (!(target instanceof Element)) {
+        return false;
+      }
+      if (target.closest(selector)) {
+        return true;
+      }
+      const root = target.getRootNode();
+      return (
+        root instanceof ShadowRoot &&
+        root.host instanceof Element &&
+        root.host.matches(selector)
+      );
+    });
     if (this.open && this.triggerButtonRef?.contains(target)) {
       return;
     }
@@ -382,7 +425,9 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
           init
         )
       );
-      this.triggerButtonRef?.focus();
+      if (!isActionable) {
+        this.triggerButtonRef?.focus();
+      }
     }
   };
 

@@ -36,7 +36,7 @@ type LinkType = {
 };
 
 export interface ActionIcon extends Metadata {
-  onKeydown?: (event: KeyboardEvent) => void;
+  onKeyDown?: (event: KeyboardEvent) => void;
   onClick?: (
     event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => void;
@@ -51,7 +51,7 @@ type OverflowActions = {
   id?: string;
   itemText?: string;
   onClick?: () => void;
-  onKeydown?: () => void;
+  onKeyDown?: () => void;
 };
 
 interface CardProp extends PropsWithChildren {
@@ -192,8 +192,13 @@ export const Card = forwardRef(
                 size={size}
                 label={overflowAriaLabel || iconDescription}
               >
-                {overflowActions.map(({ id, itemText, ...rest }) => (
-                  <MenuItem key={id} label={itemText ?? ''} {...rest} />
+                {overflowActions.map(({ id, itemText, onKeyDown, onClick }) => (
+                  <MenuItem
+                    key={id}
+                    label={itemText ?? ''}
+                    onKeyDown={onKeyDown}
+                    onClick={onClick}
+                  />
                 ))}
               </OverflowMenu>
             </FeatureFlags>

@@ -738,4 +738,16 @@ describe('SidePanel', () => {
       parentEl.style.getPropertyValue('--c4p-side-panel-modified-size')
     ).toBe('');
   });
+
+  it('should display a close button by default', () => {
+    const { container } = renderSidePanel();
+    expect(
+      container.querySelector(`.${blockClass}__close-button`)
+    ).toBeTruthy();
+  });
+
+  it('should not display a close button when showCloseButton prop is set to false', () => {
+    const { container } = renderSidePanel({ showCloseButton: false });
+    expect(container.querySelector(`.${blockClass}__close-button`)).toBe(null);
+  });
 });

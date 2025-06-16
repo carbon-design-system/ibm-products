@@ -165,6 +165,11 @@ type SidePanelBaseProps = {
   selectorPrimaryFocus?: string;
 
   /**
+   * Show/hide the "X" close button.
+   */
+  showCloseButton?: boolean;
+
+  /**
    * Sets the size of the side panel
    */
   size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
@@ -236,6 +241,7 @@ const defaults = {
   navigationBackIconDescription: 'Back',
   placement: 'right',
   size: 'md',
+  showCloseButton: true,
 };
 
 /**
@@ -268,6 +274,7 @@ const SidePanelBase = React.forwardRef(
       preventCloseOnClickOutside,
       selectorPageContent,
       selectorPrimaryFocus,
+      showCloseButton = defaults.showCloseButton,
       size = defaults.size as SidePanelProps['size'],
       slideIn,
       slug,
@@ -894,21 +901,23 @@ const SidePanelBase = React.forwardRef(
           {/* decorator and close */}
           <div className={`${blockClass}__decorator-and-close`}>
             {normalizedDecorator}
-            <IconButton
-              className={`${blockClass}__close-button`}
-              label={closeIconDescription}
-              onClick={onRequestClose}
-              onKeyDown={slideIn ? undefined : handleEscapeKey}
-              ref={closeRef}
-              align="left"
-            >
-              <Close
-                size={20}
-                aria-hidden="true"
-                tabIndex="-1"
-                className={`${blockClass}--btn__icon`}
-              />
-            </IconButton>
+            {showCloseButton && (
+              <IconButton
+                className={`${blockClass}__close-button`}
+                label={closeIconDescription}
+                onClick={onRequestClose}
+                onKeyDown={slideIn ? undefined : handleEscapeKey}
+                ref={closeRef}
+                align="left"
+              >
+                <Close
+                  size={20}
+                  aria-hidden="true"
+                  tabIndex="-1"
+                  className={`${blockClass}--btn__icon`}
+                />
+              </IconButton>
+            )}
           </div>
           {/* subtitle */}
           {subtitle && (
@@ -1234,6 +1243,11 @@ SidePanel.propTypes = {
    */
   /**@ts-ignore*/
   selectorPrimaryFocus: PropTypes.string,
+
+  /**
+   * Show/hide the "X" close button.
+   */
+  showCloseButton: PropTypes.bool,
 
   /**
    * Sets the size of the side panel

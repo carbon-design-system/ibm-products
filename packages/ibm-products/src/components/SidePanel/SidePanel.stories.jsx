@@ -639,6 +639,13 @@ export default {
       description:
         'Specify a CSS selector that matches the DOM element that should be focused when the side panel opens',
     },
+    showCloseButton: {
+      control: {
+        type: 'boolean',
+      },
+      default: true,
+      description: 'Show/hide the "X" close button.',
+    },
     size: {
       control: {
         type: 'select',

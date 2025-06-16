@@ -51,6 +51,10 @@ $carbon-prefix: 'cds';
     // @extend .#{$prefix}--page-header__breadcrumb__icon;
   }
 
+  .#{$carbon-prefix}--subgrid {
+    block-size: 100%;
+  }
+
   // TODO: remove this section when styles from React have been migrated
   .#{$prefix}--page-header__breadcrumb-container {
     display: inline-flex;
@@ -77,12 +81,12 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-breadcrumb[page-actions-flush]) {
-  .#{$prefix}--css-grid {
+  .#{$carbon-prefix}--css-grid {
     margin-inline-end: 0;
     padding-inline-end: 0;
   }
 
-  .#{$prefix}--css-grid-column {
+  .#{$carbon-prefix}--css-grid-column {
     margin-inline-end: 0;
   }
 }
@@ -198,7 +202,6 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-hero-image) {
-
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__hero-image;

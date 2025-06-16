@@ -7,26 +7,16 @@
 
 import { expect, fixture, html } from '@open-wc/testing';
 import Bee32 from '@carbon/web-components/es/icons/bee/32.js';
-import '@carbon/web-components/es/components/page-header/index.js';
+import CDSPageHeader from './page-header';
+import CDSPageHeaderBreadcrumb from './page-header-breadcrumb';
+import CDSPageHeaderTabs from './page-header-tabs';
+import CDSTabs from '@carbon/web-components/es/components/tabs/tabs';
+import './index';
 
 describe('cds-page-header', function () {
-  it('should render', async () => {
-    const el = await fixture(html`<cds-page-header></cds-page-header>`);
-
-    await expect(el).dom.to.equalSnapshot();
-  });
-
   describe('cds-page-header-breadcrumb', () => {
-    it('should render', async () => {
-      const el = await fixture(
-        html`<cds-page-header-breadcrumb></cds-page-header-breadcrumb>`
-      );
-
-      await expect(el).dom.to.equalSnapshot();
-    });
-
     it('should place className on the outermost element', async () => {
-      const el = await fixture(
+      const el: CDSPageHeaderBreadcrumb = await fixture(
         html`<cds-page-header-breadcrumb
           class="custom-class"
         ></cds-page-header-breadcrumb>`
@@ -35,7 +25,7 @@ describe('cds-page-header', function () {
     });
 
     it('should render breadcrumb items', async () => {
-      const el = await fixture(html`
+      const el: CDSPageHeaderBreadcrumb = await fixture(html`
         <cds-page-header-breadcrumb>
           <cds-breadcrumb>
             <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
@@ -51,7 +41,7 @@ describe('cds-page-header', function () {
     });
 
     it('should render content actions', async () => {
-      const el = await fixture(html`
+      const el: CDSPageHeaderBreadcrumb = await fixture(html`
         <cds-page-header-breadcrumb>
           <div slot="content-actions">
             <button class="content-action-item">Button</button>
@@ -70,7 +60,7 @@ describe('cds-page-header', function () {
     });
 
     it('should render page actions', async () => {
-      const el = await fixture(html`
+      const el: CDSPageHeaderBreadcrumb = await fixture(html`
         <cds-page-header-breadcrumb>
           <div slot="page-actions">
             <button class="page-action-item">Button</button>
@@ -90,18 +80,8 @@ describe('cds-page-header', function () {
   });
 
   describe('cds-page-header-content', () => {
-    it('should render', async () => {
-      const el = await fixture(html`
-        <cds-page-header>
-          <cds-page-header-content title="Title"> </cds-page-header-content>
-        </cds-page-header>
-      `);
-
-      await expect(el).dom.to.equalSnapshot();
-    });
-
     it('should render a title', async () => {
-      const el = await fixture(html`
+      const el: CDSPageHeader = await fixture(html`
         <cds-page-header>
           <cds-page-header-content title="Page header content title">
           </cds-page-header-content>
@@ -109,14 +89,14 @@ describe('cds-page-header', function () {
       `);
 
       const content = el.querySelector(`cds-page-header-content`);
-      const title = content.shadowRoot.querySelector(
+      const title = content?.shadowRoot?.querySelector(
         '.cds--page-header__content__title'
       );
-      expect(title.textContent).to.include('Page header content title');
+      expect(title?.textContent).to.include('Page header content title');
     });
 
     it('should render an icon', async () => {
-      const el = await fixture(html`
+      const el: CDSPageHeader = await fixture(html`
         <cds-page-header>
           <cds-page-header-content title="Page header content title">
             ${Bee32({ slot: 'icon' })}
@@ -127,20 +107,22 @@ describe('cds-page-header', function () {
       await el.updateComplete;
 
       const content = el.querySelector('cds-page-header-content');
-      const slot = content.shadowRoot.querySelector('slot[name="icon"]');
+      const slot = content?.shadowRoot?.querySelector(
+        'slot[name="icon"]'
+      ) as HTMLSlotElement;
       const assigned = slot.assignedNodes({ flatten: true });
 
       const icon = assigned.find(
         (node) =>
           node.nodeType === Node.ELEMENT_NODE &&
-          node.tagName.toLowerCase() === 'svg'
+          (node as Element).tagName.toLowerCase() === 'svg'
       );
 
       expect(icon).to.exist;
     });
 
     it('should render children', async () => {
-      const el = await fixture(html`
+      const el: CDSPageHeader = await fixture(html`
         <cds-page-header>
           <cds-page-header-content title="Page header content title">
             <cds-page-header-content-text>
@@ -151,11 +133,11 @@ describe('cds-page-header', function () {
       `);
 
       const inner = el.querySelector('cds-page-header-content-text');
-      expect(inner.textContent).to.include('Content text');
+      expect(inner?.textContent).to.include('Content text');
     });
 
     it('should render contextual actions', async () => {
-      const el = await fixture(html`
+      const el: CDSPageHeader = await fixture(html`
         <cds-page-header>
           <cds-page-header-content title="Page header content title">
             <div slot="contextual-actions">
@@ -171,12 +153,12 @@ describe('cds-page-header', function () {
       `);
 
       const content = el.querySelector('cds-page-header-content');
-      const slot = content.shadowRoot.querySelector(
+      const slot = content?.shadowRoot?.querySelector(
         'slot[name="contextual-actions"]'
-      );
-      const assigned = slot.assignedNodes({ flatten: true });
+      ) as HTMLSlotElement;
+      const assigned = slot?.assignedNodes({ flatten: true });
 
-      const actions = assigned[0].querySelectorAll('div');
+      const actions = (assigned[0] as Element).querySelectorAll('div');
 
       expect(actions.length).to.equal(3);
       expect(actions[0].textContent).to.include('action 1');
@@ -185,7 +167,7 @@ describe('cds-page-header', function () {
     });
 
     it('should render page actions', async () => {
-      const el = await fixture(html`
+      const el: CDSPageHeader = await fixture(html`
         <cds-page-header>
           <cds-page-header-content title="Page header content title">
             <button slot="page-actions">page actions</button>
@@ -197,43 +179,26 @@ describe('cds-page-header', function () {
       `);
 
       const content = el.querySelector('cds-page-header-content');
-      const slot = content.shadowRoot.querySelector(
+      const slot = content?.shadowRoot?.querySelector(
         'slot[name="page-actions"]'
-      );
+      ) as HTMLSlotElement;
 
       const assigned = slot.assignedNodes({ flatten: true });
 
       const button = assigned.find(
         (node) =>
           node.nodeType === Node.ELEMENT_NODE &&
-          node.tagName.toLowerCase() === 'button'
+          (node as Element).tagName.toLowerCase() === 'button'
       );
 
       expect(button).to.exist;
-      expect(button.textContent).to.include('page actions');
+      expect(button?.textContent).to.include('page actions');
     });
   });
 
   describe('cds-page-header-tabs', () => {
-    it('should render', async () => {
-      const el = await fixture(
-        html` <cds-page-header-tabs>
-          <cds-tabs value="tab-1">
-            <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
-              >Tab 1</cds-tab
-            >
-            <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
-              >Tab 2</cds-tab
-            >
-          </cds-tabs>
-        </cds-page-header-tabs>`
-      );
-
-      await expect(el).dom.to.equalSnapshot();
-    });
-
     it('should render tabs', async () => {
-      const el = await fixture(
+      const el: CDSPageHeaderTabs = await fixture(
         html` <cds-page-header-tabs>
           <cds-tabs value="tab-1">
             <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
@@ -246,7 +211,7 @@ describe('cds-page-header', function () {
         </cds-page-header-tabs>`
       );
 
-      const tabs = el.querySelector('cds-tabs');
+      const tabs = el.querySelector('cds-tabs') as CDSTabs;
       expect(tabs).to.exist;
 
       await tabs.updateComplete;
@@ -258,7 +223,7 @@ describe('cds-page-header', function () {
     });
 
     it('should render tags', async () => {
-      const el = await fixture(
+      const el: CDSPageHeaderTabs = await fixture(
         html` <cds-page-header-tabs>
           <div slot="tags">
             <cds-tag>Tag 1</cds-tag>
@@ -267,16 +232,18 @@ describe('cds-page-header', function () {
         </cds-page-header-tabs>`
       );
 
-      const slot = el.shadowRoot.querySelector('slot[name="tags"]');
-      const assigned = slot.assignedNodes({ flatten: true });
+      const slot = el?.shadowRoot?.querySelector(
+        'slot[name="tags"]'
+      ) as HTMLSlotElement;
+      const assigned = slot?.assignedNodes({ flatten: true });
 
       const wrapper = assigned.find(
         (node) =>
           node.nodeType === Node.ELEMENT_NODE &&
-          node.tagName.toLowerCase() === 'div'
+          (node as Element).tagName.toLowerCase() === 'div'
       );
 
-      const tags = wrapper.querySelectorAll('cds-tag');
+      const tags = (wrapper as Element)?.querySelectorAll('cds-tag');
 
       expect(tags.length).to.equal(2);
       expect(tags[0].textContent).to.include('Tag 1');

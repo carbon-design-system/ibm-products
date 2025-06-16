@@ -139,10 +139,10 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     }
   }
 
-  updated(changedProps: Map<string, any>) {
+  updated() {
     this._markFirstNotification();
-    if (changedProps.has('open') && this.open) {
-      this._tryFocusDismissButton();
+    if (this.open) {
+      requestAnimationFrame(() => this._tryFocusDismissButton());
     }
   }
 

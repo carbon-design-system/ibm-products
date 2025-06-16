@@ -23,6 +23,8 @@ $prefix: 'c4p';
 $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header) {
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
   // @extend .#{$prefix}--page-header;
   display: block;
   background-color: $layer-01;
@@ -41,17 +43,15 @@ $carbon-prefix: 'cds';
   block-size: convert.to-rem(40px);
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
-
   // @extend .#{$prefix}--page-header__breadcrumb-bar;
   ::slotted([slot='icon']) {
     margin-inline-end: $spacing-03;
     // TODO: remove above styles when styles from React have been migrated
     // and use the extend below
-
     // @extend .#{$prefix}--page-header__breadcrumb__icon;
   }
 
-  // TODO: remove this section
+  // TODO: remove this section when styles from React have been migrated
   .#{$prefix}--page-header__breadcrumb-container {
     display: inline-flex;
     align-items: center;
@@ -59,6 +59,15 @@ $carbon-prefix: 'cds';
     block-size: 100%;
     inline-size: 100%;
   }
+
+  .#{$prefix}--page-header__breadcrumb-wrapper {
+    display: inline-flex;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__actions {
+    display: inline-flex;
+  }
+  ///////////////////////////////
 }
 
 :host(#{$prefix}-page-header-breadcrumb:not([content-actions-flush]))
@@ -90,7 +99,6 @@ $carbon-prefix: 'cds';
   padding: $spacing-06 0;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
-
   // @extend .#{$prefix}--page-header__content;
 
   .#{$prefix}--page-header__content__title {
@@ -100,7 +108,6 @@ $carbon-prefix: 'cds';
     overflow: hidden;
     // TODO: remove above styles when styles from React have been migrated
     // and use the extend below
-
     // @extend .#{$prefix}--page-header__content__title;
     margin: 0;
     -webkit-box-orient: vertical;
@@ -110,8 +117,8 @@ $carbon-prefix: 'cds';
     white-space: normal;
   }
 
-  // TODO: remove this section
   .#{$prefix}--page-header__content__title-wrapper {
+    // TODO: remove this section
     @include breakpoint-down(md) {
       display: flex;
       flex-direction: column;
@@ -120,6 +127,7 @@ $carbon-prefix: 'cds';
 
     display: grid;
     gap: $spacing-05;
+    ///////////////////////////////
 
     // overriding until the responsive behavior is implemented
     grid-template-columns: auto minmax(auto, auto);
@@ -127,13 +135,34 @@ $carbon-prefix: 'cds';
     min-block-size: convert.to-rem(40px);
   }
 
+  // TODO: remove this section
+  .#{$prefix}--page-header__content__start {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__content__page-actions {
+    display: flex;
+    justify-content: right;
+
+    @include breakpoint-down('md') {
+      justify-content: left;
+      margin-block-start: 0;
+    }
+  }
+  ///////////////////////////////
   ::slotted([slot='icon']) {
+    margin-inline-end: $spacing-05;
+    // TODO: remove above styles when styles from React have been migrated
+    // and use the extend below
     // @extend .#{$prefix}--page-header__content__icon;
   }
 
   ::slotted([slot='contextual-actions']) {
     display: flex;
-
+    // TODO: remove above styles when styles from React have been migrated
+    // and use the extend below
     // @extend .#{$prefix}--page-header__content__contextual-actions;
   }
 }
@@ -151,18 +180,34 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-content-text) {
+  @include type-style('body-01');
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
   // @extend .#{$prefix}--page-header__content__body;
   display: block;
   margin-block-start: $spacing-05;
+  max-inline-size: convert.to-rem(640px);
 
   .#{$prefix}--page-header__content__subtitle {
+    @include type-style('productive-heading-03');
+
+    margin-block-end: $spacing-03;
+    // TODO: remove above styles when styles from React have been migrated
     margin-block-start: 0;
   }
 }
 
 :host(#{$prefix}-page-header-hero-image) {
+
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
   // @extend .#{$prefix}--page-header__hero-image;
   position: relative;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: flex-end;
+  block-size: 100%;
 }
 
 :host(#{$prefix}-page-header-hero-image)::before {
@@ -186,6 +231,9 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-tabs) {
+  margin-inline-start: -$spacing-05;
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
   // @extend .#{$prefix}--page-header__tab-bar;
 }
 
@@ -202,6 +250,11 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='tags']) {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
   // @extend .#{$prefix}--page-header__tags;
   inline-size: 100%;
 
@@ -214,15 +267,15 @@ $carbon-prefix: 'cds';
 :host(#{$prefix}-page-header-breadcrumb),
 :host(#{$prefix}-page-header-content),
 :host(#{$prefix}-page-header-tabs) {
-  .#{$prefix}--css-grid {
+  .#{$carbon-prefix}--css-grid {
     inline-size: initial;
   }
 }
 
-#{$prefix}-definition-tooltip::part(definition-term) {
+#{$carbon-prefix}-definition-tooltip::part(definition-term) {
   border: none;
 }
 
-:host(#{$prefix}-page-header-tabs) ::slotted(cds-tabs) {
+:host(#{$prefix}-page-header-tabs) ::slotted(#{$carbon-prefix}-tabs) {
   --tabs-overflow-button-background: $layer-01;
 }

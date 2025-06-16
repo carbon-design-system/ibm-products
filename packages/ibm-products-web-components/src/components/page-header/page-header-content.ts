@@ -10,7 +10,8 @@
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property, state } from 'lit/decorators.js';
-import { prefix } from '../../globals/settings';
+import { prefix, carbonPrefix } from '../../globals/settings';
+import '@carbon/web-components/es/components/tooltip/index.js';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 
@@ -81,13 +82,13 @@ class CDSPageHeaderContent extends LitElement {
     } = this;
 
     const gridClasses = classMap({
-      [`${prefix}--css-grid`]: !withinGrid,
-      [`${prefix}--subgrid ${prefix}--subgrid--wide`]: withinGrid,
+      [`${carbonPrefix}--css-grid`]: !withinGrid,
+      [`${carbonPrefix}--subgrid ${carbonPrefix}--subgrid--wide`]: withinGrid,
     });
 
     return html` <div class="${gridClasses}">
       <div
-        class="${prefix}--sm:col-span-4 ${prefix}--md:col-span-8 ${prefix}--lg:col-span-16 ${prefix}--css-grid-column"
+        class="${carbonPrefix}--sm:col-span-4 ${carbonPrefix}--md:col-span-8 ${carbonPrefix}--lg:col-span-16 ${carbonPrefix}--css-grid-column"
       >
         <div class="${prefix}--page-header__content__title-wrapper">
           <div class="${prefix}--page-header__content__start">

@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { prefix } from '../../globals/settings';
+import { prefix, carbonPrefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 
@@ -19,9 +19,9 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 @customElement(`${prefix}-page-header-tabs`)
 class CDSPageHeaderTabs extends LitElement {
   render() {
-    return html` <div class="${prefix}--css-grid">
+    return html` <div class="${carbonPrefix}--css-grid">
       <div
-        class="${prefix}--sm:col-span-4 ${prefix}--md:col-span-8 ${prefix}--lg:col-span-16 ${prefix}--css-grid-column"
+        class="${carbonPrefix}--sm:col-span-4 ${carbonPrefix}--md:col-span-8 ${carbonPrefix}--lg:col-span-16 ${carbonPrefix}--css-grid-column"
       >
         <div class="${prefix}--page-header__tab-bar--tablist">
           <slot></slot>

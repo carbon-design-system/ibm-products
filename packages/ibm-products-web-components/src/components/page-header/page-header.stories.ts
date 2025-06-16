@@ -170,7 +170,7 @@ export const Default = {
           </cds-tabs>
         </c4p-page-header-tabs>
       </c4p-page-header>
-      <div>
+      <div class="tabs-demo">
         <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
           Tab Panel 1
         </div>
@@ -435,7 +435,7 @@ export const TabBarWithTabsAndTags = {
           </div>
         </c4p-page-header-tabs>
       </c4p-page-header>
-      <div">
+      <div class="tabs-demo">
         <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
           Tab Panel 1
         </div>
@@ -467,6 +467,10 @@ const meta = {
       html` <style>
           #main-content {
             padding: 0;
+          }
+
+          .tabs-demo {
+            padding: 1rem;
           }
         </style>
         ${story()}`,

@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
-import { prefix } from '../../globals/settings';
+import { prefix, carbonPrefix } from '../../globals/settings';
 import { property } from 'lit/decorators.js';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -48,25 +48,23 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   render() {
     const { withinGrid } = this;
     const gridClasses = classMap({
-      [`${prefix}--css-grid`]: !withinGrid,
-      [`${prefix}--subgrid ${prefix}--subgrid--wide`]: withinGrid,
+      [`${carbonPrefix}--css-grid`]: !withinGrid,
+      [`${carbonPrefix}--subgrid ${carbonPrefix}--subgrid--wide`]: withinGrid,
     });
 
     return html`
-      <div class="${prefix}--page-header__breadcrumb-bar">
-        <div class="${gridClasses}">
-          <div
-            class="${prefix}--sm:col-span-4 ${prefix}--md:col-span-8 ${prefix}--lg:col-span-16 ${prefix}--css-grid-column"
-          >
-            <div class="${prefix}--page-header__breadcrumb-container">
-              <div class="${prefix}--page-header__breadcrumb-wrapper">
-                <slot name="icon"></slot>
-                <slot></slot>
-              </div>
-              <div class="${prefix}--page-header__breadcrumb__actions">
-                <slot name="content-actions"></slot>
-                <slot name="page-actions"></slot>
-              </div>
+      <div class="${gridClasses}">
+        <div
+          class="${carbonPrefix}--sm:col-span-4 ${carbonPrefix}--md:col-span-8 ${carbonPrefix}--lg:col-span-16 ${carbonPrefix}--css-grid-column"
+        >
+          <div class="${prefix}--page-header__breadcrumb-container">
+            <div class="${prefix}--page-header__breadcrumb-wrapper">
+              <slot name="icon"></slot>
+              <slot></slot>
+            </div>
+            <div class="${prefix}--page-header__breadcrumb__actions">
+              <slot name="content-actions"></slot>
+              <slot name="page-actions"></slot>
             </div>
           </div>
         </div>

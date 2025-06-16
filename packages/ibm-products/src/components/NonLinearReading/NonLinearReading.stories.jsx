@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { NonLinearReading } from '.';
-import DocsPage from './NonLinearReading.docs-page';
+import mdx from './NonLinearReading.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 
@@ -22,7 +22,7 @@ export default {
     styles,
     layout: 'padded',
     docs: {
-      page: DocsPage,
+      page: mdx,
     },
   },
   argTypes: {

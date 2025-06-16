@@ -121,7 +121,7 @@ export const storyDocsPageInfo = (csfFile) => {
     // Required until components within 'Patterns' and 'Prebuilt' category
     // use the new approach with setting story titles because they are
     // nested an extra level
-    if (a === 'Prebuilt patterns') {
+    if (a === ('Prebuilt patterns' || 'Onboarding')) {
       component = rest[0] ? rest[0] : b;
     } else if (typeof b === 'string') {
       component = b;

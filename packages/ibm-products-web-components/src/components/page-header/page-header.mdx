@@ -4,7 +4,7 @@ import * as PageHeaderStories from './page-header.stories';
 
 <Meta of={PageHeaderStories} />
 
-# PageHeader
+# Page header
 
 > 💡 Check our
 > [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/page-header)
@@ -43,7 +43,7 @@ the breadcrumb content.
 
 <Canvas of={PageHeaderStories.ContentWithContextualActionsAndPageActions} />
 
-The `c4p-page-header-content` component defines the primary content area of the Pageheader, including the title, subtitle, and
+The `c4p-page-header-content` component defines the primary content area of the Page header, including the title, subtitle, and
 any supporting text or contextual actions. It accepts a `title` attribute to display the main heading and has an `icon` slot
 to show an icon adjacent to the title. Child components such as `c4p-page-header-content-text` can be used to provide additional descriptive text.
 To support use cases such as tags, `contextual-actions` slot can be to render components beside the content.
@@ -73,7 +73,7 @@ To support use cases such as tags, `contextual-actions` slot can be to render co
 
 <Canvas of={PageHeaderStories.ContentWithHeroImage} />
 
-When including a hero image within the Pageheader, the Carbon Grid classes will need to be utilitized. In addition,
+When including a hero image within the Page header, the Carbon Grid classes will need to be utilized. In addition,
 the `withinGrid` attribute has to be set in the `c4p-page-header-content` and `c4p-page-header-breadcrumb` components.
 
 ```css
@@ -121,7 +121,7 @@ the `withinGrid` attribute has to be set in the `c4p-page-header-content` and `c
 
 ## Tabs
 
-To render the Tabs zone, utilitize the `c4p-page-header-tabs` component, passing in the `cds-tabs` and `cds-tab` components
+To render the Tabs zone, utilize the `c4p-page-header-tabs` component, passing in the `cds-tabs` and `cds-tab` components
 as within its `tabs` slot. Then set up the corresponding tab panel elements outside of `c4p-page-header`.
 
 ```html

@@ -67,8 +67,8 @@ describe(componentName, () => {
       ],
     };
     render(<AddSelectBreadcrumbs {...newProps} />);
-    expect(screen.getByText('default'));
-    expect(screen.getByText('level 2'));
+    expect(screen.getByText('default')).toBeVisible();
+    expect(screen.getByText('level 2')).toBeVisible();
     expect(
       document.querySelectorAll(`.${carbon.prefix}--breadcrumb-item`).length
     ).toEqual(2);

@@ -270,7 +270,6 @@ export let CreateFullPage = React.forwardRef(
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
-    const invalidInitialStepWarned = useRef(false);
 
     useEffect(() => {
       const firstItem =
@@ -283,8 +282,9 @@ export let CreateFullPage = React.forwardRef(
         setLastIncludedStep(lastItem);
       }
 
-      /**@ts-ignore */
-      if (initialStep) {
+      if (Number(initialStep) > stepData.length || Number(initialStep) <= 0) {
+        setCurrentStep(1);
+      } else if (initialStep) {
         const numberOfHiddenSteps = getNumberOfHiddenSteps(
           stepData,
           initialStep
@@ -300,12 +300,10 @@ export let CreateFullPage = React.forwardRef(
     ]);
 
     useEffect(() => {
-      if (!invalidInitialStepWarned?.current) {
-        checkForValidInitialStep();
-      }
+      checkForValidInitialStep();
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [initialStep, stepData]);
+    }, [initialStep]);
 
     useCreateComponentFocus({
       previousState,
@@ -342,16 +340,13 @@ export let CreateFullPage = React.forwardRef(
     });
 
     const checkForValidInitialStep = () => {
-      // An invalid initialStep value was provided, we'll default to rendering the first step or last step
-
+      const stepLength = React.Children.toArray(children).filter(
+        (item) => item?.props?.includeStep !== false
+      ).length;
       if (
-        (initialStep &&
-          stepData?.length &&
-          Number(initialStep) > Number(stepData?.length)) ||
+        (initialStep && stepLength && Number(initialStep) > stepLength) ||
         Number(initialStep) <= 0
       ) {
-        invalidInitialStepWarned.current = true;
-        setCurrentStep(1);
         console.warn(
           `${componentName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${componentName} has.`
         );

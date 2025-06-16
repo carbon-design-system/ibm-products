@@ -190,7 +190,6 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
-
     try {
       await expect(container).toBeAccessible(componentName);
       await expect(container).toHaveNoAxeViolations();
@@ -241,9 +240,9 @@ describe(componentName, () => {
 
     expect(
       createFullPageSteps[1].classList.contains(
-        `.${blockClass}__step__step--visible-step`
+        `${blockClass}__step__step--visible-step`
       )
-    );
+    ).toBeTruthy();
   });
 
   it('renders the first step if an invalid initialStep value zero is provided', () =>
@@ -260,20 +259,19 @@ describe(componentName, () => {
         ).children;
         expect(
           createFullPageSteps[0].classList.contains(
-            `.${blockClass}__step__step--visible-step`
+            `${blockClass}__step__step--visible-step`
           )
-        );
+        ).toBeTruthy();
         // The onMount prop will get called here because the first step is rendered
         expect(onMountFn).toHaveBeenCalledTimes(1);
       }
     ));
-  it('renders the first step if an invalid initialStep value bigger than step length is provided', () =>
+  it('renders the first step if an invalid initialStep value bigger than step length is provided', async () =>
     expectWarn(
       `${CreateFullPage.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateFullPage.displayName} has.`,
       () => {
         const { container } = renderCreateFullPage({
           ...defaultFullPageProps,
-          // Starting on 0 step is invalid since the steps start with a value of 1
           // This will cause a console warning
           initialStep: 10,
         });
@@ -282,9 +280,9 @@ describe(componentName, () => {
         ).children;
         expect(
           createFullPageSteps[0].classList.contains(
-            `.${blockClass}__step__step--visible-step`
+            `${blockClass}__step__step--visible-step`
           )
-        );
+        ).toBeTruthy();
         // The onMount prop will get called here because the first step is rendered
         expect(onMountFn).toHaveBeenCalledTimes(1);
       }

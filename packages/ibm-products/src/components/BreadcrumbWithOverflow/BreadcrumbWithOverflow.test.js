@@ -298,6 +298,6 @@ describe(BreadcrumbWithOverflow.displayName, () => {
         ]}
       />
     );
-    expect(screen.getByText('short title'));
+    expect(screen.getByText('short title')).toBeVisible();
   });
 });

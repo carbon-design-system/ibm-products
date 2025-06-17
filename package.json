@@ -89,7 +89,7 @@
     "copyfiles": "^2.4.1",
     "cspell": "^9.0.0",
     "eslint": "^9.22.0",
-    "eslint-config-carbon": "^3.20.0",
+    "eslint-config-carbon": "^3.22.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -128,7 +128,7 @@
     "react-is": "^19.0.0",
     "semver": "7.7.2",
     "ws": "^8.17.1",
-    "@babel/runtime": "7.27.3"
+    "@babel/runtime": "7.27.6"
   },
   "lint-staged": {
     "!(examples/**/*)**/*.{js,jsx,ts,tsx,mjs}": [

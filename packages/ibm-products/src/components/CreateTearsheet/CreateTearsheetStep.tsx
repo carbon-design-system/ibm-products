@@ -295,7 +295,14 @@ export let CreateTearsheetStep = forwardRef(
       return null;
     };
 
-    return stepsContext ? (
+    if (!stepsContext) {
+      pconsole.warn(
+        `You have tried using a ${componentName} component outside of a CreateTearsheet. This is not allowed. ${componentName}s should always be children of the CreateTearsheet`
+      );
+      return null;
+    }
+
+    return (
       <div ref={stepRef as RefObject<HTMLDivElement>}>
         <Grid
           {
@@ -333,10 +340,6 @@ export let CreateTearsheetStep = forwardRef(
           </Column>
         </Grid>
       </div>
-    ) : (
-      pconsole.warn(
-        `You have tried using a ${componentName} component outside of a CreateTearsheet. This is not allowed. ${componentName}s should always be children of the CreateTearsheet`
-      )
     );
   }
 );

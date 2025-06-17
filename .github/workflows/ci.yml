@@ -121,6 +121,43 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
+  test-c4p-react-major-version:
+    strategy:
+      matrix:
+        react:
+          - ^17.0.1
+          # - ^18.3.1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
+        with:
+          node-version: '20.x'
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # 4.2.3
+        with:
+          path: '**/node_modules'
+          key:
+            test-c4p-react-major-versions-modules-${{ runner.os }}-${{
+            hashFiles('yarn.lock') }}
+      - name: Install
+        run: yarn --immutable
+      - name: Add React version ${{ matrix.react }}
+        run: |
+          yarn add react@${{ matrix.react }} react-dom@${{ matrix.react }}
+          yarn workspace @carbon/ibm-cloud-cognitive-core add react@${{ matrix.react }} react-dom@${{ matrix.react }} -D
+      - name: Add legacy dependencies
+        if: ${{ startsWith(matrix.react, '^17.') }}
+        run: |
+          yarn add @testing-library/react@^12.0.0 -D
+          yarn workspace @carbon/ibm-cloud-cognitive-core add @carbon/react@^1.28.0 -D
+          yarn workspace @carbon/ibm-products add @carbon/react@^1.28.0 -P
+      - name: CI tests for c4p with React version ${{ matrix.react }}
+        run: yarn ci-check:test:c4p
+
   test-c4p-wc:
     runs-on: ubuntu-latest
     steps:

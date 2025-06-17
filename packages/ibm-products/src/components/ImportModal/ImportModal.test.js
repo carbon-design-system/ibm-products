@@ -112,7 +112,7 @@ describe(componentName, () => {
         `${carbon.prefix}--btn--disabled`
       )
     ).toBe(true);
-    await act(() => click(getByText(props.primaryButtonText)));
+    await act(async () => click(getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
     change(getByRole('textbox'), {
@@ -123,12 +123,12 @@ describe(componentName, () => {
         `${carbon.prefix}--btn--disabled`
       )
     ).not.toBe(true);
-    await act(() => click(getByText(props.inputButtonText)));
+    await act(async () => click(getByText(props.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(
       screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
     ).toBeVisible();
-    await act(() => click(getByText(props.primaryButtonText)));
+    await act(async () => click(getByText(props.primaryButtonText)));
     expect(onRequestSubmit).toBeCalled();
   });
 
@@ -141,7 +141,7 @@ describe(componentName, () => {
     change(getByRole('textbox'), {
       target: { value: 'test.jpeg' },
     });
-    await act(() => click(getByText(defaultProps.inputButtonText)));
+    await act(async () => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
     expect(getByText(defaultProps.fetchErrorHeader)).toBeVisible();
@@ -164,7 +164,7 @@ describe(componentName, () => {
     change(getByRole('textbox'), {
       target: { value: 'test.jpeg' },
     });
-    await act(() => click(getByText(defaultProps.inputButtonText)));
+    await act(async () => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();
@@ -186,7 +186,7 @@ describe(componentName, () => {
     change(getByRole('textbox'), {
       target: { value: 'test.jpeg' },
     });
-    await act(() => click(getByText(defaultProps.inputButtonText)));
+    await act(async () => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
     expect(getByText(defaultProps.fetchErrorHeader)).toBeVisible();
@@ -210,7 +210,7 @@ describe(componentName, () => {
     change(getByRole('textbox'), {
       target: { value: 'test.pdf' },
     });
-    await act(() => click(getByText(defaultProps.inputButtonText)));
+    await act(async () => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.invalidFileTypeErrorBody)).toBeVisible();
     expect(getByText(defaultProps.invalidFileTypeErrorHeader)).toBeVisible();
@@ -239,7 +239,7 @@ describe(componentName, () => {
     change(getByRole('textbox'), {
       target: { value: 'test.pdf' },
     });
-    await act(() => click(getByText(defaultProps.inputButtonText)));
+    await act(async () => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();
@@ -262,7 +262,7 @@ describe(componentName, () => {
     expect(
       screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
     ).toBeVisible();
-    await act(() =>
+    await act(async () =>
       click(modal.querySelector(`.${carbon.prefix}--file-close`))
     );
     expect(modal.querySelector(`.${carbon.prefix}--file-filename`)).toBeNull();
@@ -280,7 +280,7 @@ describe(componentName, () => {
     change(getByRole('textbox'), {
       target: { value: 'test.pdf' },
     });
-    await act(() => click(getByText(defaultProps.inputButtonText)));
+    await act(async () => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.maxFileSizeErrorBody)).toBeVisible();
     expect(getByText(defaultProps.maxFileSizeErrorHeader)).toBeVisible();
@@ -303,7 +303,7 @@ describe(componentName, () => {
     change(getByRole('textbox'), {
       target: { value: 'test.pdf' },
     });
-    await act(() => click(getByText(defaultProps.inputButtonText)));
+    await act(async () => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();

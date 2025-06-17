@@ -21,8 +21,9 @@ import React, {
   ReactNode,
   createContext,
   useEffect,
-  useRef,
   useState,
+  ReactElement,
+  isValidElement,
 } from 'react';
 import {
   SimpleHeader,
@@ -341,8 +342,11 @@ export let CreateFullPage = React.forwardRef(
 
     const checkForValidInitialStep = () => {
       const stepLength = React.Children.toArray(children).filter(
-        (item) => item?.props?.includeStep !== false
+        (item) =>
+          isValidElement(item) &&
+          (item as ReactElement<any>).props.includeStep !== false
       ).length;
+
       if (
         (initialStep && stepLength && Number(initialStep) > stepLength) ||
         Number(initialStep) <= 0

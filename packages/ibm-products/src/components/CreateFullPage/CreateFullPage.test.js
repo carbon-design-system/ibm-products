@@ -327,13 +327,13 @@ describe(componentName, () => {
     const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
     const createFullPageSteps = container.querySelector(
-      `.${blockClass}__content`
+      `.${blockClass}__content .${blockClass}__form`
     ).children;
     expect(
-      createFullPageSteps[0].classList.contains(
-        `.${blockClass}__step__step--visible-step`
+      createFullPageSteps[1].classList.contains(
+        `${blockClass}__step__step--visible-step`
       )
-    );
+    ).toBeTruthy();
 
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
@@ -347,13 +347,13 @@ describe(componentName, () => {
     const backButtonElement = screen.getByText(backButtonText);
     await act(() => click(nextButtonElement));
     const createFullPageSteps = container.querySelector(
-      `.${blockClass}__content`
+      `.${blockClass}__content .${blockClass}__form`
     ).children;
     expect(
       createFullPageSteps[0].classList.contains(
-        `.${blockClass}__step__step--visible-step`
+        `${blockClass}__step__step--visible-step`
       )
-    );
+    ).not.toBeTruthy();
 
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
@@ -370,7 +370,7 @@ describe(componentName, () => {
     const createFullPageModal = container.querySelector(
       `.${blockClass}__modal`
     );
-    expect(container.classList.contains(createFullPageModal));
+    expect(container).toContainElement(createFullPageModal);
     const modalCancelButtonElement = screen.getByText(modalDangerButtonText);
     const modalReturnButtonElement = screen.getByText(modalSecondaryButtonText);
     await act(() => click(modalCancelButtonElement));
@@ -570,9 +570,9 @@ describe(componentName, () => {
     ).children;
     expect(
       fullPageChildren[0].classList.contains(
-        `.${blockClass}__step__step--visible-step`
+        `${blockClass}__step__step--visible-step`
       )
-    );
+    ).toBeTruthy();
   });
 
   it('should render a fieldset element around FullPageStep children when `hasFieldset` prop is provided', async () => {
@@ -580,11 +580,13 @@ describe(componentName, () => {
       ...defaultFullPageProps,
     });
     const createFullPageSteps = container.querySelector(
-      `.${blockClass}__content`
+      `.${blockClass}__content .${blockClass}__form`
     ).children;
     expect(
-      createFullPageSteps[0].classList.contains(`.${blockClass}__step-fieldset`)
-    );
+      createFullPageSteps[0].children[1].classList.contains(
+        `${blockClass}__step-fieldset`
+      )
+    ).toBeTruthy();
   });
 
   it('renders a header if title is provided ', () => {
@@ -689,8 +691,15 @@ describe(componentName, () => {
     const influencerSteps = container.querySelector(
       `.${pkg.prefix}--create-influencer__progress-indicator`
     );
-
-    expect(influencerSteps.childNodes[0].classList.contains('complete'));
-    expect(influencerSteps.childNodes[1].classList.contains('current'));
+    expect(
+      influencerSteps.childNodes[0].classList.contains(
+        `${carbon.prefix}--progress-step--complete`
+      )
+    ).toBe(true);
+    expect(
+      influencerSteps.childNodes[1].classList.contains(
+        `${carbon.prefix}--progress-step--current`
+      )
+    ).toBe(true);
   });
 });

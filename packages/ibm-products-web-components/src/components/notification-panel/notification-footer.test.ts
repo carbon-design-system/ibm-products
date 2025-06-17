@@ -6,7 +6,7 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { html, fixture, oneEvent, elementUpdated } from '@open-wc/testing';
+import { html, fixture, oneEvent } from '@open-wc/testing';
 import './index';
 import CDSNotificationFooter from './notification-footer';
 

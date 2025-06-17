@@ -6,7 +6,7 @@
  */
 
 import { action } from '@storybook/addon-actions';
-import uuidv4 from '../../globals/js/utils/uuidv4';
+import uuidv4 from '../../../globals/js/utils/uuidv4';
 import { html } from 'lit';
 
 /**

@@ -139,10 +139,10 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     }
   }
 
-  updated(changedProps: Map<string, any>) {
+  updated() {
     this._markFirstNotification();
-    if (changedProps.has('open') && this.open) {
-      this._tryFocusDismissButton();
+    if (this.open) {
+      requestAnimationFrame(() => this._tryFocusDismissButton());
     }
   }
 
@@ -192,13 +192,19 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
         <div class="${blockClass}__main-section">
           ${_hasTodayContent
             ? html`
-                <h3 class="${blockClass}__time-section-label">${todayText}</h3>
+                <h3
+                  class="${blockClass}__time-section-label ${blockClass}__time-section-label--today"
+                >
+                  ${todayText}
+                </h3>
               `
             : ''}
           <slot name="today"></slot>
           ${_hasPreviousContent
             ? html`
-                <h3 class="${blockClass}__time-section-label">
+                <h3
+                  class="${blockClass}__time-section-label ${blockClass}__time-section-label--previous"
+                >
                   ${previousText}
                 </h3>
               `
@@ -243,7 +249,6 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     const button = this.renderRoot.querySelector<HTMLButtonElement>(
       `.${blockClass}__dismiss-button`
     );
-
     if (button) {
       button.focus();
     } else {

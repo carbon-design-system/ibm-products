@@ -23,7 +23,7 @@ import {
   dataToday as initialDataToday,
   dataPrevious as initialDataPrevious,
   extraData,
-} from './NotificationsPanel_data';
+} from './_story-assets/NotificationsPanel_data';
 const blockClassNotification = `${prefix}--notifications-panel__notification`;
 const storyBlockClass = `${prefix}--notifications-panel__story`;
 
@@ -230,7 +230,6 @@ export const defaultTemplate = {
                 return html`
                   <c4p-notification
                     slot="today"
-                    .open=${args.open}
                     @click=${item.onNotificationClick}
                     @c4p-notification-dismiss=${() => {
                       notificationSingleDismiss(item.id, 'today');
@@ -296,7 +295,7 @@ export const defaultTemplate = {
         <div class="${storyBlockClass}story-header"></div>
         <div id="page-content-selector" class="${storyBlockClass}story-content">
           <cds-button @click=${addNotification}
-            >Add new notification ${User20({ slot: 'icon' })}</cds-button
+            >Add new notification</cds-button
           >
         </div>
       </div>

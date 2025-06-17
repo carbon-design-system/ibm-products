@@ -21,6 +21,7 @@ import {
   getInfluencer,
   getContent,
   getSlug,
+  getDecorator,
   getLabel,
   getActionToolbarItems,
   getActionItems,
@@ -85,6 +86,12 @@ const slugs = {
   'With Slug': 1,
 };
 
+const decorators = {
+  'No Decorator': 'NO_DECORATOR',
+  'With AI Label': 'WITH_AI_LABEL',
+  'With non AI Label component': 'NON_AI_LABEL_DECORATOR',
+};
+
 const contents = {
   Empty: 0,
   'Brief content': 1,
@@ -96,6 +103,7 @@ const labels = {
   'Shorter label': 1,
   'Longer label': 2,
 };
+
 export const Default = {
   args: {
     actionItems: 4,
@@ -110,6 +118,7 @@ export const Default = {
     selectorInitialFocus: '',
     width: TEARSHEET_WIDTH.WIDE,
     slug: 0,
+    decorator: 'NO_DECORATOR',
     description: 'Description used to describe the flow if need be.',
     title: 'Title used to designate the overarching flow of the tearsheet.',
     headerNavigation: 0,
@@ -172,6 +181,11 @@ export const Default = {
       description: 'slug (AI slug)',
       options: slugs,
     },
+    decorator: {
+      control: 'select',
+      description: 'Slot(decorator)',
+      options: decorators,
+    },
     description: {
       control: 'text',
       description: 'description',
@@ -222,6 +236,9 @@ export const Default = {
 
         <!-- slotted action items cds-buttons -->
         ${getActionItems(args.actionItems)}
+
+        <!-- slotted Decorator -->
+        ${getDecorator(args.decorator)}
 
         <!-- slotted slug -->
         ${getSlug(args.slug)}

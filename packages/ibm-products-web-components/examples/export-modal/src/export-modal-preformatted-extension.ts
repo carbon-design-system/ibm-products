@@ -156,7 +156,7 @@ class ExportModalPreformattedExtension extends HostListenerMixin(LitElement) {
                     small
                     .withOverlay=${false}
                   ></cds-loading>
-                  <p>Exporting File...</p>
+                  <p>Exporting file...</p>
                 `
               : null}
             ${this.successful

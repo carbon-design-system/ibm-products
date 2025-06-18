@@ -4,7 +4,7 @@ import * as exportModalStories from './export-modal.stories';
 
 <Meta of={exportModalStories} />
 
-# Export Modal
+# Export
 
 The export pattern is used for exporting resources to the system.
 
@@ -22,7 +22,7 @@ To build this pattern, we recommend including the following components:
 - [cds-loading](https://web-components.carbondesignsystem.com/?path=/docs/components-loading)
 
 These components are used within the `standard-export-modal` and
-`export-modal-preformatted-extension` wrapper component to handle state
+`export-modal-preformatted-extension` wrapper components to handle state
 management.
 
 > 💡 Check our
@@ -31,7 +31,7 @@ management.
 
 [![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/export-modal)
 
-## Standard
+## Basic implementation
 
 When a file’s name can be edited before exporting, a dialog containing an
 editable textbox should be presented to the user. The textbox should be
@@ -86,7 +86,7 @@ import '@carbon/web-components/es/components/loading/index';
         small
         .withOverlay="${false}"
       ></cds-loading>
-      <p>Exporting File...</p>
+      <p>Exporting file...</p>
       `: null} ${this.successful ? html` ${CheckmarkFilled16({slot: 'icon',})}
       <p>The file has been exported.</p>
       `: null} ${this.error ? html` ${ErrorFilled16({slot: 'icon',})}
@@ -117,8 +117,8 @@ Similar as standard Export Modal with valid Extension property.
 ## With Preformatted Extension
 
 When a file can be exported in 2-5 different formats, these can be presented in
-a radio-button selection. Where possible, provide guidance about which format a
-user might want to choose, and pre-select a sensible default.
+a radio button selection. Where possible, provide guidance about which format a
+user might want to choose, and set a sensible default.
 
 ### Getting started
 
@@ -162,7 +162,7 @@ Here's a quick example to get you started.
         small
         .withOverlay="${false}"
       ></cds-loading>
-      <p>Exporting File...</p>
+      <p>Exporting file...</p>
       `: null} ${this.successful ? html` ${CheckmarkFilled16({slot: 'icon',})}
       <p>The file has been exported.</p>
       `: null} ${this.error ? html` ${ErrorFilled16({slot: 'icon',})}

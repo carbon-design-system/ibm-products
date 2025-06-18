@@ -10,10 +10,10 @@
 import { html } from 'lit';
 import '../../../examples/export-modal/src/export-modal';
 export default {
-  title: 'Patterns/ExportModal',
+  title: 'Patterns/Export',
 };
 
-export const standard = {
+export const BasicModal = {
   render: () => {
     return html` <standard-export-modal> </standard-export-modal> `;
   },

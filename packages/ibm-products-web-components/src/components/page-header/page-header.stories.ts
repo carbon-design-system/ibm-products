@@ -250,13 +250,13 @@ export const ContentWithContextualActionsAndPageActions = {
           </cds-breadcrumb-item>
         </cds-breadcrumb>
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${Activity16()}</cds-icon-button
+          >${Activity16({ slot: 'icon' })}</cds-icon-button
         >
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${AiGenerate16()}</cds-icon-button
+          >${AiGenerate16({ slot: 'icon' })}</cds-icon-button
         >
         <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${CloudFoundry16()}</cds-icon-button
+          >${CloudFoundry16({ slot: 'icon' })}</cds-icon-button
         >
       </c4p-page-header-breadcrumb>
       <c4p-page-header-content

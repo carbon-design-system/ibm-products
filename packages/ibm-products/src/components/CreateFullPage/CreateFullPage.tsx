@@ -319,7 +319,7 @@ export let CreateFullPage = React.forwardRef(
       onMount,
       firstFocusElement,
     });
-    useValidCreateStepCount(stepLength, componentName);
+    useValidCreateStepCount(stepData.length, componentName);
     useCreateComponentStepChange({
       firstIncludedStep,
       lastIncludedStep,

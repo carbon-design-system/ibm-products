@@ -271,6 +271,11 @@ export let CreateFullPage = React.forwardRef(
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
+    const stepLength = React.Children.toArray(children).filter(
+      (item) =>
+        isValidElement(item) &&
+        (item as ReactElement<any>).props.includeStep !== false
+    ).length;
 
     useEffect(() => {
       const firstItem =
@@ -283,7 +288,7 @@ export let CreateFullPage = React.forwardRef(
         setLastIncludedStep(lastItem);
       }
 
-      if (Number(initialStep) > stepData.length || Number(initialStep) <= 0) {
+      if (Number(initialStep) > stepLength || Number(initialStep) <= 0) {
         setCurrentStep(1);
       } else if (initialStep) {
         const numberOfHiddenSteps = getNumberOfHiddenSteps(
@@ -298,6 +303,7 @@ export let CreateFullPage = React.forwardRef(
       lastIncludedStep,
       initialStep,
       modalIsOpen,
+      stepLength,
     ]);
 
     useEffect(() => {
@@ -313,7 +319,7 @@ export let CreateFullPage = React.forwardRef(
       onMount,
       firstFocusElement,
     });
-    useValidCreateStepCount(stepData.length, componentName);
+    useValidCreateStepCount(stepLength, componentName);
     useCreateComponentStepChange({
       firstIncludedStep,
       lastIncludedStep,
@@ -341,12 +347,6 @@ export let CreateFullPage = React.forwardRef(
     });
 
     const checkForValidInitialStep = () => {
-      const stepLength = React.Children.toArray(children).filter(
-        (item) =>
-          isValidElement(item) &&
-          (item as ReactElement<any>).props.includeStep !== false
-      ).length;
-
       if (
         (initialStep && stepLength && Number(initialStep) > stepLength) ||
         Number(initialStep) <= 0

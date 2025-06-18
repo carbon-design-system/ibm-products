@@ -618,8 +618,8 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   /**
    * Show/hide the "X" close button
    */
-  @property({ attribute: 'show-close-button', type: Boolean })
-  showCloseButton = true;
+  @property({ attribute: 'hide-close-button', type: Boolean })
+  hideCloseButton = false;
 
   /**
    * SidePanel size.
@@ -671,7 +671,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       navigationBackIconDescription,
       open,
       placement,
-      showCloseButton,
+      hideCloseButton,
       size,
       slideIn,
       title,
@@ -742,7 +742,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         <div class=${`${blockClass}__slug-and-close`}>
           <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
           <!-- {normalizedSlug} -->
-          ${showCloseButton
+          ${!hideCloseButton
             ? html`<cds-icon-button
                 align="bottom-right"
                 aria-label=${closeIconDescription}

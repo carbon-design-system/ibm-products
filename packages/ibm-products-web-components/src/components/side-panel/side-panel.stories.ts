@@ -126,7 +126,7 @@ const defaultTemplate = {
     preventCloseOnClickOutside: false,
     selectorPageContent: '#page-content-selector',
     selectorInitialFocus: '#side-panel-story-text-input-a',
-    showCloseButton: true,
+    hideCloseButton: false,
     size: SIDE_PANEL_SIZE.MEDIUM,
     slideIn: false,
     slug: 0,
@@ -196,7 +196,7 @@ const defaultTemplate = {
       control: 'text',
       description: 'selector-initial-focus',
     },
-    showCloseButton: {
+    hideCloseButton: {
       control: 'boolean',
       description: 'Show/hide the "X" close button',
     },
@@ -245,7 +245,7 @@ const defaultTemplate = {
         selector-page-content=${args.selectorPageContent}
         size=${args.size}
         ?slide-in=${args.slideIn}
-        ?show-close-button=${args.showCloseButton}
+        ?hide-close-button=${args.hideCloseButton}
         .title=${args.title}
         @c4p-side-panel-navigate-back=${prevStep}
       >

@@ -96,6 +96,11 @@ type SidePanelBaseProps = {
   currentStep?: number;
 
   /**
+   * Show/hide the "X" close button.
+   */
+  hideCloseButton?: boolean;
+
+  /**
    * Unique identifier
    */
   id?: string;
@@ -163,11 +168,6 @@ type SidePanelBaseProps = {
    * be focused when the side panel opens
    */
   selectorPrimaryFocus?: string;
-
-  /**
-   * Show/hide the "X" close button.
-   */
-  showCloseButton?: boolean;
 
   /**
    * Sets the size of the side panel
@@ -238,10 +238,10 @@ const defaults = {
   animateTitle: true,
   closeIconDescription: 'Close',
   currentStep: 0,
+  hideCloseButton: false,
   navigationBackIconDescription: 'Back',
   placement: 'right',
   size: 'md',
-  showCloseButton: true,
 };
 
 /**
@@ -262,6 +262,7 @@ const SidePanelBase = React.forwardRef(
       condensedActions,
       currentStep = defaults.currentStep,
       decorator,
+      hideCloseButton = defaults.hideCloseButton,
       id = blockClass,
       includeOverlay,
       labelText,
@@ -274,7 +275,6 @@ const SidePanelBase = React.forwardRef(
       preventCloseOnClickOutside,
       selectorPageContent,
       selectorPrimaryFocus,
-      showCloseButton = defaults.showCloseButton,
       size = defaults.size as SidePanelProps['size'],
       slideIn,
       slug,
@@ -901,7 +901,7 @@ const SidePanelBase = React.forwardRef(
           {/* decorator and close */}
           <div className={`${blockClass}__decorator-and-close`}>
             {normalizedDecorator}
-            {showCloseButton && (
+            {!hideCloseButton && (
               <IconButton
                 className={`${blockClass}__close-button`}
                 label={closeIconDescription}
@@ -1173,6 +1173,11 @@ SidePanel.propTypes = {
   currentStep: PropTypes.number,
 
   /**
+   * Show/hide the "X" close button.
+   */
+  hideCloseButton: PropTypes.bool,
+
+  /**
    * Unique identifier
    */
   id: PropTypes.string,
@@ -1243,11 +1248,6 @@ SidePanel.propTypes = {
    */
   /**@ts-ignore*/
   selectorPrimaryFocus: PropTypes.string,
-
-  /**
-   * Show/hide the "X" close button.
-   */
-  showCloseButton: PropTypes.bool,
 
   /**
    * Sets the size of the side panel

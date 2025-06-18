@@ -746,8 +746,8 @@ describe('SidePanel', () => {
     ).toBeTruthy();
   });
 
-  it('should not display a close button when showCloseButton prop is set to false', () => {
-    const { container } = renderSidePanel({ showCloseButton: false });
+  it('should not display a close button when hideCloseButton prop is set to true', () => {
+    const { container } = renderSidePanel({ hideCloseButton: true });
     expect(container.querySelector(`.${blockClass}__close-button`)).toBe(null);
   });
 });

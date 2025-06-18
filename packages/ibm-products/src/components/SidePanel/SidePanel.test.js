@@ -160,8 +160,8 @@ describe('SidePanel', () => {
       labelText,
     });
     expect(screen.queryAllByText(/Test side panel/i)).toBeTruthy();
-    expect(screen.getByText(subtitle));
-    expect(screen.getByText(labelText));
+    expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
+    expect(screen.getByText(labelText).textContent).toEqual(labelText);
   });
 
   it('should render a side panel with an overlay and trigger clickOutside hook when clicked', async () => {

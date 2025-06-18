@@ -41,7 +41,7 @@ describe(componentName, () => {
   it('renders a component Decorator', async () => {
     const { container } = renderComponent();
     const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
-    expect(decorator);
+    expect(decorator).toBeInTheDocument();
   });
 
   it('renders a label', async () => {

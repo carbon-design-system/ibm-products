@@ -98,7 +98,7 @@ describe('Notifications', () => {
     renderNotifications({
       data: [],
     });
-    expect(screen.getByText(/you do not have any notifications/i));
+    expect(screen.getByText(/you do not have any notifications/i)).toBeTruthy();
   });
 
   it('should render notification with error state svg', async () => {

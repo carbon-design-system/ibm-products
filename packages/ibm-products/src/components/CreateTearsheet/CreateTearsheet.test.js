@@ -211,7 +211,9 @@ describe(CreateTearsheet.displayName, () => {
       renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
     });
     try {
-      const tearsheetElement = document.querySelector(`.${prefix}--tearsheet`);
+      const tearsheetElement = document.querySelector(
+        `.${prefix}--tearsheet-create`
+      );
       await expect(tearsheetElement).toBeAccessible(
         CreateTearsheet.displayName
       );

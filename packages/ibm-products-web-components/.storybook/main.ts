@@ -29,6 +29,7 @@ const config = {
         viewport: true,
       },
     },
+    '@storybook/addon-a11y',
   ],
   framework: {
     name: '@storybook/web-components-vite',

@@ -106,6 +106,8 @@ test.describe('SidePanel @avt', () => {
         carbonTheme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('SidePanel @avt-default-state');
+    await expect(page).toHaveNoACViolations(
+      'SidePanel @avt-resizer-feature-enabled'
+    );
   });
 });

@@ -71,6 +71,10 @@ $carbon-prefix: 'cds';
   .#{$prefix}--page-header__breadcrumb__actions {
     display: inline-flex;
   }
+
+  .#{$prefix}--page-header__content__title-container {
+    display: flex;
+  }
   ///////////////////////////////
 }
 

@@ -96,6 +96,11 @@ type SidePanelBaseProps = {
   currentStep?: number;
 
   /**
+   * Show/hide the "X" close button.
+   */
+  hideCloseButton?: boolean;
+
+  /**
    * Unique identifier
    */
   id?: string;
@@ -233,6 +238,7 @@ const defaults = {
   animateTitle: true,
   closeIconDescription: 'Close',
   currentStep: 0,
+  hideCloseButton: false,
   navigationBackIconDescription: 'Back',
   placement: 'right',
   size: 'md',
@@ -254,6 +260,7 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
       condensedActions,
       currentStep = defaults.currentStep,
       decorator,
+      hideCloseButton = defaults.hideCloseButton,
       id = blockClass,
       includeOverlay,
       labelText,
@@ -888,21 +895,23 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
           {/* decorator and close */}
           <div className={`${blockClass}__decorator-and-close`}>
             {normalizedDecorator}
-            <IconButton
-              className={`${blockClass}__close-button`}
-              label={closeIconDescription}
-              onClick={onRequestClose}
-              onKeyDown={slideIn ? undefined : handleEscapeKey}
-              ref={closeRef}
-              align="left"
-            >
-              <Close
-                size={20}
-                aria-hidden="true"
-                tabIndex="-1"
-                className={`${blockClass}--btn__icon`}
-              />
-            </IconButton>
+            {!hideCloseButton && (
+              <IconButton
+                className={`${blockClass}__close-button`}
+                label={closeIconDescription}
+                onClick={onRequestClose}
+                onKeyDown={slideIn ? undefined : handleEscapeKey}
+                ref={closeRef}
+                align="left"
+              >
+                <Close
+                  size={20}
+                  aria-hidden="true"
+                  tabIndex="-1"
+                  className={`${blockClass}--btn__icon`}
+                />
+              </IconButton>
+            )}
           </div>
           {/* subtitle */}
           {subtitle && (
@@ -1153,6 +1162,11 @@ SidePanel.propTypes = {
    * Sets the current step of the side panel
    */
   currentStep: PropTypes.number,
+
+  /**
+   * Show/hide the "X" close button.
+   */
+  hideCloseButton: PropTypes.bool,
 
   /**
    * Unique identifier

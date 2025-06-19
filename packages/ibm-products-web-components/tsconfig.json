@@ -8,8 +8,7 @@
       "src/typings",
       "tests/typings",
       "node_modules/@types",
-      "../../node_modules/@types",
-      "./storybook/typings"
+      "../../node_modules/@types"
     ],
     "declaration": true,
     "skipLibCheck": true,

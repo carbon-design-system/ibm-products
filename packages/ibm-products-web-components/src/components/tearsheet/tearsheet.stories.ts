@@ -22,6 +22,7 @@ import {
   getContent,
   getSlug,
   getDecorator,
+  getDescription,
   getLabel,
   getActionToolbarItems,
   getActionItems,
@@ -104,6 +105,14 @@ const labels = {
   'Longer label': 2,
 };
 
+const descriptions = {
+  'No description': 0,
+  'With plain String': 1,
+  'With truncated-text and 1 line': 2,
+  'With truncated-text and 2 lines': 3,
+  'With truncated-text and 2 lines with expand': 4,
+};
+
 export const Default = {
   args: {
     actionItems: 4,
@@ -119,7 +128,7 @@ export const Default = {
     width: TEARSHEET_WIDTH.WIDE,
     slug: 0,
     decorator: 'NO_DECORATOR',
-    description: 'Description used to describe the flow if need be.',
+    description: 1,
     title: 'Title used to designate the overarching flow of the tearsheet.',
     headerNavigation: 0,
   },
@@ -187,8 +196,9 @@ export const Default = {
       options: decorators,
     },
     description: {
-      control: 'text',
-      description: 'description',
+      control: 'select',
+      description: 'description (slot)',
+      options: descriptions,
     },
     title: {
       control: 'text',
@@ -227,9 +237,7 @@ export const Default = {
         ${args.title ? html`<span slot="title">${args.title}</span>` : ''}
 
         <!-- slotted header description -->
-        ${args.description
-          ? html`<span slot="description">${args.description}</span>`
-          : ''}
+        ${getDescription(args.description)}
 
         <!-- slotted action in header cds-buttons -->
         ${getActionToolbarItems(args.headerActions)}

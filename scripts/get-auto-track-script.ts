@@ -29,11 +29,8 @@ export const getAutoTrack = (source: string) => `
             key: 'aWg1ug3bDNcSTnde9iwvg1OcvVRzf0JC',
             coremetrics: false,
             commonProperties: {
-              UT30: 'C4IP',
               productCode: 'C4IP',
-              productCodeType: 'C4IP',
-              productTitle: 'carbon-for-ibm-products',
-              instanceId: 'carbon-for-ibm-products',
+              productTitle: 'Carbon for IBM Products',
             },
             pageProperties: {
               // NO REQUIRED PROPERTIES

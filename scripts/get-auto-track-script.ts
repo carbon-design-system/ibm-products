@@ -21,7 +21,7 @@ export const getAutoTrack = (source: string) => `
       page: {
         pageInfo: {
           ibm: {
-            siteId: ${`IBM_${(window as any)._ibmAnalytics.settings.name}`},
+            siteId: ${`IBM_${source}`},
           },
           segment: {
             enabled: true,

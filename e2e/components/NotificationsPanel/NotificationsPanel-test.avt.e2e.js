@@ -38,6 +38,7 @@ test.describe('NotificationsPanel @avt', () => {
       `#${pkg.prefix}--notifications-panel`
     );
     await expect(notificationPanel).toBeVisible();
+
     for (let i = 0; i < 10; i++) {
       await page.keyboard.press('Tab');
       await expect(notificationPanel).toContainText(
@@ -76,7 +77,7 @@ test.describe('NotificationsPanel @avt', () => {
         (el) => el === document.activeElement
       );
       expect(isFocused).toBeTruthy();
-    }).toPass({ timeout: 2000 }); // Wait up to 2 seconds
+    }).toPass({ timeout: 2000 });
   });
   test('@avt-notification-panel-doesn-not-focus-return-to-trigger-when-clicked-on-actionable-elements', async ({
     page,

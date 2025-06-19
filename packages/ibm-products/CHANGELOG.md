@@ -1,4 +1,22 @@
-## `@carbon/ibm-products@2.68.0-rc.0`
+## `@carbon/ibm-products@2.69.0-rc.0`
+### Features :rocket:
+- feat: resize feature changes added (#7501)
+- feat(MultiAddSelect): add floating ui to sort and filter buttons (#6389)
+
+### Bug fixes :bug:
+- fix: productive card overflow bug (#7645)
+- fix: remove usage of local carbon prefix in component files (#7642)
+- fix:  investigate and address any accessibility violations in stable components  (#7586)
+- fix(Interstitial): pass forwarded refs (#7588)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+- chore: overflow handler web component stories (#7553)
+- chore(deps): update dependency yargs to v18 (#7596)
+- chore(Coachmark): deprecation of props and coachmark components (#7499)
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+
+## `@carbon/ibm-products@2.68.0`
 ### Features :rocket:
 - feat(openStackblitz): about modal and export Modal (#7479)
 - feat(InterstitialScreen): add and update various stackblitz examples (#7510)

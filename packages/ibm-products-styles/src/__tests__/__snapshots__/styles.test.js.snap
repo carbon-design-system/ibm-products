@@ -6726,12 +6726,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  overflow-x: auto;
-}
-@supports (overflow-inline: auto) {
-  .c4p--add-select__columns {
-    overflow-inline: auto;
-  }
 }
 .c4p--add-select__columns .c4p--add-select__selections-form-control-label-wrapper {
   margin-inline-start: 0.5rem;
@@ -6763,7 +6757,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--add-select__column {
-  overflow: auto;
   flex: 0 0 20rem;
   padding: 1rem;
   border-block-start: 1px solid var(--cds-border-subtle-01, #c6c6c6);
@@ -6772,8 +6765,15 @@ th.c4p--datagrid__select-all-toggle-on.button {
 .c4p--add-select__column-search-bar {
   display: flex;
 }
-.c4p--add-select__column-search-bar label {
-  display: none;
+.c4p--add-select__column-search-bar .cds--btn {
+  border-block-end: 1px solid var(--cds-border-strong-01, #8d8d8d);
+}
+.c4p--add-select__column .cds--popover--tab-tip.cds--popover--open .cds--btn {
+  background: var(--cds-layer);
+}
+.c4p--add-select__column-filter-popover.cds--popover-content {
+  padding: 1rem;
+  min-inline-size: 10rem;
 }
 .c4p--add-select__column-sort-filter {
   display: flex;
@@ -6957,11 +6957,6 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--add-select .cds--accordion__item--active .cds--accordion__content {
   margin-block-start: 0.5rem;
   padding-block: 0;
-}
-
-.c4p--add-select + div .cds--tooltip,
-.c4p--add-select + div .cds--overflow-menu-options {
-  z-index: 9000;
 }
 
 @keyframes notifications-panel-fade-in {

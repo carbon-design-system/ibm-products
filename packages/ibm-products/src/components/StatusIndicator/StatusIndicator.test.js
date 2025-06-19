@@ -39,7 +39,7 @@ describe(componentName, () => {
 
   it('renders a child component StatusIndicatorStep', async () => {
     renderComponent();
-    expect(screen.getByText(/Waiting/));
+    expect(screen.getByText(/Waiting/)).toBeTruthy();
   });
 
   it('has no accessibility violations', async () => {

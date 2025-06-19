@@ -8,10 +8,10 @@
       "src/typings",
       "tests/typings",
       "node_modules/@types",
-      "../../node_modules/@types"
+      "../../node_modules/@types",
+      "./storybook/typings"
     ],
     "declaration": true,
-    "rootDir": ".",
     "skipLibCheck": true,
     "sourceMap": true,
     "stripInternal": true,

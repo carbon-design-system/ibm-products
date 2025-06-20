@@ -47,6 +47,7 @@ type fieldsetLegendTextProps =
        * Otherwise, use CSS to hide/remove this label text.
        */
       fieldsetLegendText?: string;
+      fieldsetLegendId?: React.ReactNode;
     }
   | {
       /**
@@ -61,6 +62,8 @@ type fieldsetLegendTextProps =
        * Otherwise, use CSS to hide/remove this label text.
        */
       fieldsetLegendText: string;
+
+      fieldsetLegendId: React.ReactNode;
     };
 
 interface CreateTearsheetStepBaseProps extends PropsWithChildren {
@@ -170,6 +173,7 @@ export let CreateTearsheetStep = forwardRef(
       disableSubmit,
       experimentalSecondarySubmit,
       fieldsetLegendText,
+      fieldsetLegendId,
       hasFieldset = defaults.hasFieldset,
       includeStep = defaults.includeStep,
       introStep,
@@ -313,7 +317,7 @@ export let CreateTearsheetStep = forwardRef(
             <h4 className={`${blockClass}--title`}>{title}</h4>
 
             {subtitle && (
-              <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+              <h5 className={`${blockClass}--subtitle`}>{subtitle}</h5>
             )}
 
             {renderDescription()}
@@ -324,6 +328,7 @@ export let CreateTearsheetStep = forwardRef(
               <FormGroup
                 legendText={fieldsetLegendText}
                 className={`${blockClass}--fieldset`}
+                legendId={fieldsetLegendId}
               >
                 {children}
               </FormGroup>
@@ -383,6 +388,14 @@ CreateTearsheetStep.propTypes = {
     hideSecondarySubmit: PropTypes.bool,
     onClick: PropTypes.func,
   }),
+
+  /**
+   * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
+   */
+  /**@ts-ignore*/
+  fieldsetLegendId: PropTypes.node.isRequired.if(
+    ({ hasFieldset }) => !!hasFieldset
+  ),
 
   /**
    * This is the required legend text that appears above a fieldset html element for accessibility purposes.

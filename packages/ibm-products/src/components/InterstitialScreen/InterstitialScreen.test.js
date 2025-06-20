@@ -266,8 +266,8 @@ describe(componentName, () => {
       interstitialAriaLabel: 'Modal Interstitial Screen',
     });
 
-    expect(screen.getByText('Next'));
-    expect(screen.getByText('Step 1'));
+    expect(screen.getByText('Next')).toBeVisible();
+    expect(screen.getByText('Step 1')).toBeVisible();
     const step1 = screen.getByText('Step 1');
     const listElement1 = step1.closest('li');
     const step2 = screen.getByText('Step 2');

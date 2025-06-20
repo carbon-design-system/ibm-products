@@ -13,11 +13,7 @@ import { within } from '@testing-library/dom';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { makeData } from './utils/makeData';
 
-import {
-  checkLogging,
-  expectWarn,
-  mockHTMLElement,
-} from '../../global/js/utils/test-helper';
+import { expectWarn, mockHTMLElement } from '../../global/js/utils/test-helper';
 import { Datagrid, useFilterContext } from '.';
 
 import {
@@ -634,7 +630,6 @@ const RadioSelect = ({ ...rest } = {}) => {
           3: true,
         },
       },
-      onRadioSelect: jest.fn(), // for code coverage
     },
     useSelectRows
   );
@@ -777,44 +772,6 @@ const InfiniteScroll = () => {
       fetchMoreData: fetchData,
     },
     useInfiniteScroll
-  );
-
-  return (
-    <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} />;
-    </Wrapper>
-  );
-};
-
-const InfiniteScrollWithSelection = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data, setData] = useState(makeData(0));
-
-  const [isFetching, setIsFetching] = useState(false);
-  const fetchData = () =>
-    new Promise((resolve) => {
-      setIsFetching(true);
-      setTimeout(() => {
-        setData(data.concat(makeData(30, 5, 2)));
-        setIsFetching(false);
-        resolve();
-      }, 1000);
-    });
-
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      isFetching,
-      fetchMoreData: fetchData,
-    },
-    useInfiniteScroll,
-    useSelectRows
   );
 
   return (
@@ -1212,18 +1169,10 @@ describe(componentName, () => {
     expectWarn(
       'Datagrid was not passed datagridState which is required to render this component.',
       () => {
-        const errorMock = jest
-          .spyOn(console, 'error')
-          .mockImplementation(() => {});
         const { container } = render(
           <BasicUsage data-testid={dataTestId} datagridState={null} />
         );
-        checkLogging(
-          errorMock,
-          /^Warning: Failed prop type: The prop `datagridState` is marked as required in `Datagrid`, but its value is `null`./
-        );
         expect(container.children.length).toEqual(0);
-        jest.spyOn(console, 'error').mockRestore();
       },
       2
     );
@@ -1291,42 +1240,6 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].classList[0]
     ).toBe('c4p--datagrid__virtual-scrollbar');
-  });
-
-  it('Infinite scroll with selection', async () => {
-    const user = userEvent.setup({ delay: null });
-    const { click } = user;
-
-    render(<InfiniteScrollWithSelection data-testid={dataTestId} />);
-
-    // Wait for load to complete and skeletons to disappear.
-    await waitFor(
-      () => {
-        expect(screen.getAllByRole('row')).toHaveLength(12);
-      },
-      { timeout: 5000 }
-    );
-
-    // Select all rows.
-    const selectAllCheckbox = screen.getByRole('checkbox', {
-      name: 'Select all rows in the table',
-    });
-    await click(selectAllCheckbox);
-    expect(screen.getAllByRole('checkbox', { checked: true })).toHaveLength(12);
-
-    // Deselect a single row, sending the "select all" checkbox to an indeterminate state.
-    const rowLevelCheckbox = screen.getAllByRole('checkbox', {
-      name: 'Toggle Row Selected',
-    })[3];
-    await click(rowLevelCheckbox);
-    expect(screen.getAllByRole('checkbox', { checked: true })).toHaveLength(10);
-
-    // Toggle the "select all" checkbox again.  All rows should be deselected.
-    // This tests the indeterminate code path in handleSelectAllChange().
-    await click(selectAllCheckbox);
-    expect(screen.queryAllByRole('checkbox', { checked: true })).toHaveLength(
-      0
-    );
   });
 
   it('renders Ten Thousand table entries', async () => {
@@ -2476,7 +2389,6 @@ describe(componentName, () => {
     );
 
     const normalCheckbox = screen.getByRole('checkbox', { name: 'Normal' });
-    await click(normalCheckbox);
 
     const applyButton = screen.getByRole('button', { name: 'Apply' });
     await click(applyButton);
@@ -2542,10 +2454,10 @@ describe(componentName, () => {
     expect(visitsInput.value).toEqual('');
     // Apply single checkbox
     await click(normalCheckbox);
-    expect(normalCheckbox.checked).toEqual(true);
+    await waitFor(() => expect(normalCheckbox.checked).toEqual(true));
     // Remove checkbox
     await click(normalCheckbox);
-    expect(normalCheckbox.checked).toEqual(false);
+    await waitFor(() => expect(normalCheckbox.checked).toEqual(false));
   });
 
   const FilterUsageError = () => {

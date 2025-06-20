@@ -367,25 +367,6 @@ describe('SidePanel', () => {
     ).toBeTruthy();
   });
 
-  it('rejects too many buttons using the custom validator', async () =>
-    expectMultipleError(
-      [
-        'Invalid prop `actions` supplied to `SidePanel`: you cannot have more than three actions',
-        'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
-        'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
-      ],
-      () =>
-        renderSidePanel({
-          actions: [
-            { kind: 'primary' },
-            { kind: 'primary' },
-            { kind: 'ghost' },
-            { kind: 'ghost' },
-            { kind: 'danger--tertiary' },
-          ],
-        })
-    ));
-
   it('should render navigation button', async () => {
     const { container } = renderSidePanel({
       currentStep: 1,

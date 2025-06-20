@@ -114,10 +114,3 @@ $block-class: #{$prefix}--notifications-panel;
   margin-block-end: $spacing-02;
   @include font-weight('semibold');
 }
-.#{$story-prefix}__notification-trigger {
-  svg {
-    circle {
-      fill: rgb(218, 30, 40);
-    }
-  }
-}

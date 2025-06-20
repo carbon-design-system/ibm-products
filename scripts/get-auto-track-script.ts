@@ -33,7 +33,8 @@ export const getAutoTrack = (source: string) => `
               productTitle: 'Carbon for IBM Products',
             },
             pageProperties: {
-              // NO REQUIRED PROPERTIES
+              productCode: 'C4IP',
+              productTitle: 'Carbon for IBM Products',
             },
           },
         },

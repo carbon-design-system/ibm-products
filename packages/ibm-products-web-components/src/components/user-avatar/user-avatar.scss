@@ -28,8 +28,7 @@ $carbon-prefix: 'cds';
 $block-class: #{$prefix}--user-avatar;
 
 :host(#{$prefix}-user-avatar) {
-  @extend .#{$block-class};
-  @extend .#{$block-class}__tooltip;
+  display: inline-block;
 }
 
 :host(#{$prefix}-user-avatar) .#{$block-class}--xl {

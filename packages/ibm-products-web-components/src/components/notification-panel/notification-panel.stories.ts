@@ -18,7 +18,7 @@ import '@carbon/web-components/es/components/ui-shell/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
 import User20 from '@carbon/web-components/es/icons/user/20.js';
 import Notification20 from '@carbon/web-components/es/icons/notification/20.js';
-import NotificationNew20 from '@carbon/web-components/es/icons/notification--new/20.js';
+import { UnreadNotificationBell } from './_story-assets/unreadNotification-bell';
 import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20.js';
 import {
   dataToday as initialDataToday,
@@ -208,7 +208,7 @@ export const defaultTemplate = {
             @click="${toggleButton}"
           >
             ${isNewNotification
-              ? NotificationNew20({ slot: 'icon' })
+              ? UnreadNotificationBell({ slot: 'icon' })
               : Notification20({ slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action

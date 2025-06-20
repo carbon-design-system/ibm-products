@@ -8,6 +8,10 @@ import * as NotificationPanelStories from './notification-panel.stories';
 
 The NotificationsPanel sets expectations on the behavior for notifications, allowing the user to view and interact with them all in one place.
 
+The component includes a composable footer section, exposed via the footer slot. Adopters can insert custom content into this slot and, if they choose to do so, are expected to provide the appropriate styles. Alternatively, the `c4p-notification-footer` component can be used, which comes with built-in styling.
+
+In addition to the footer, the today and previous sections are also exposed as named slots, giving adopters more flexibility to control the content in those areas. These sections are intended to contain `c4p-notification` components. Each `c4p-notification` supports two named slots: title and description, allowing for further customization of the notification content.
+
 ## Getting started
 
 Here's a quick example to get you started.
@@ -50,8 +54,8 @@ import '@carbon/ibm-products-web-components/es/components/notification-panel/ind
             >
               <cds-heading
                 class=${classMap({
-                  [`${blockClassNotification}__notification-title`]: true,
-                  [`${blockClassNotification}__notification-title-unread`]:
+                  [`${blockClassNotification}-title`]: true,
+                  [`${blockClassNotification}-title-unread`]:
                     item.unread,
                 })}
                 slot="title"
@@ -80,8 +84,8 @@ import '@carbon/ibm-products-web-components/es/components/notification-panel/ind
             >
               <cds-heading
                 class=${classMap({
-                  [`${blockClassNotification}__notification-title`]: true,
-                  [`${blockClassNotification}__notification-title-unread`]:
+                  [`${blockClassNotification}-title`]: true,
+                  [`${blockClassNotification}-title-unread`]:
                     item.unread,
                 })}
                 slot="title"

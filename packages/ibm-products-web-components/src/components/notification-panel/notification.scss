@@ -63,23 +63,23 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
   &:hover::before {
     background-color: transparent;
   }
-  .#{$block-notification-class}__notification-status-icon {
+  .#{$block-notification-class}-status-icon {
     margin-inline-end: $spacing-03;
     min-inline-size: 1rem;
-    &.#{$block-notification-class}__notification-status-icon-error {
+    &.#{$block-notification-class}-status-icon-error {
       fill: $support-error;
     }
-    &.#{$block-notification-class}__notification-status-icon-success {
+    &.#{$block-notification-class}-status-icon-success {
       fill: $support-success;
     }
-    &.#{$block-notification-class}__notification-status-icon-warning {
+    &.#{$block-notification-class}-status-icon-warning {
       fill: $support-warning;
     }
-    &.#{$block-notification-class}__notification-status-icon-informational {
+    &.#{$block-notification-class}-status-icon-informational {
       fill: $support-info;
     }
   }
-  .#{$block-notification-class}__notification-time-label {
+  .#{$block-notification-class}-time-label {
     margin-block-end: $spacing-03;
   }
   .#{$block-notification-class}__dismiss-single-button {
@@ -101,22 +101,27 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
     --cds-link-primary: --cds-text-primary;
     --cds-link-primary-hover: --cds-text-primary;
   }
-  .#{$block-notification-class}__notification-time-label,
-  .#{$block-notification-class}__notification-description {
+  .#{$block-notification-class}-time-label,
+  .#{$block-notification-class}-description {
     @include type.type-style('label-01');
 
     color: $text-secondary;
   }
-  .#{$block-notification-class}__notification-description {
+  .#{$block-notification-class}-description {
     display: block;
   }
 }
-::slotted(.#{$block-notification-class}__notification-title) {
+::slotted(.#{$block-notification-class}-title) {
   @include type.type-style('heading-01');
 
   color: $text-secondary;
   margin-block-end: $spacing-02;
   @include font-weight('regular');
+}
+::slotted(.#{$block-notification-class}-title-unread) {
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+  @include font-weight('semibold');
 }
 
 :host(.first-notification)::before {

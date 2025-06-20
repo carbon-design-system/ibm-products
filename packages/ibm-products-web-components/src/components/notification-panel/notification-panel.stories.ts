@@ -150,6 +150,20 @@ export const defaultTemplate = {
     };
     const clickOutside = (event) => {
       setOpenPanel(false);
+      const updatedTodayData = dataToday.map((data) => {
+        return {
+          ...data,
+          unread: false,
+        };
+      });
+      const updatedPreviousData = dataPrevious.map((data) => {
+        return {
+          ...data,
+          unread: false,
+        };
+      });
+      setDataToday([...updatedTodayData]);
+      setDataPrevious([...updatedPreviousData]);
     };
     return html`
       <style>
@@ -187,6 +201,7 @@ export const defaultTemplate = {
             </div>
           </cds-header-panel>
           <cds-header-global-action
+            class="${storyBlockClass}__notification-trigger"
             aria-label="Notification"
             tooltip-text="Notification"
             id="trigger-button"
@@ -248,9 +263,8 @@ export const defaultTemplate = {
                   >
                     <h4
                       class=${classMap({
-                        [`${blockClassNotification}__notification-title`]: true,
-                        [`${blockClassNotification}__notification-title-unread`]:
-                          item.unread,
+                        [`${blockClassNotification}-title`]: true,
+                        [`${blockClassNotification}-title-unread`]: item.unread,
                       })}
                       slot="title"
                     >
@@ -278,9 +292,8 @@ export const defaultTemplate = {
                   >
                     <h4
                       class=${classMap({
-                        [`${blockClassNotification}__notification-title`]: true,
-                        [`${blockClassNotification}__notification-title-unread`]:
-                          item.unread,
+                        [`${blockClassNotification}-title`]: true,
+                        [`${blockClassNotification}-title-unread`]: item.unread,
                       })}
                       slot="title"
                     >

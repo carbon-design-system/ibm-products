@@ -224,6 +224,6 @@ export const extraData = {
   description:
     'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
   timestamp: new Date(new Date().getTime() - 30 * 1000),
-  unread: false,
+  unread: true,
   onNotificationClick: action(`Clicked on notification`),
 };

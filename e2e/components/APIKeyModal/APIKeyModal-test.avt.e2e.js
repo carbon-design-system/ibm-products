@@ -15,7 +15,7 @@ test.describe('APIKeyModal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'APIKeyModal',
-      id: 'ibm-products-components-generating-an-api-key-apikeymodal--generate',
+      id: 'patterns-prebuilt-patterns-apikeymodal--generate',
       globals: {
         carbonTheme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('APIKeyModal @avt', () => {
   test('@avt-instant-generate-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'APIKeyModal',
-      id: 'ibm-products-components-generating-an-api-key-apikeymodal--instant-generate',
+      id: 'patterns-prebuilt-patterns-apikeymodal--instant-generate',
       globals: {
         carbonTheme: 'white',
       },

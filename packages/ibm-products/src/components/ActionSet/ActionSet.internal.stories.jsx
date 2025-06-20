@@ -20,7 +20,7 @@ import styles from './_storybook-styles.scss?inline';
 const blockClass = `${pkg.prefix}--action-set`;
 
 export default {
-  title: 'IBM Products/Internal/ActionSet',
+  title: 'Internal/ActionSet',
   component: ActionSet,
   tags: ['autodocs'],
   parameters: {

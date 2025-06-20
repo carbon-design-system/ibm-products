@@ -16,7 +16,7 @@ import styles from './_storybook-styles.scss?inline';
 import { Wrap } from '../../global/js/utils/Wrap';
 
 export default {
-  title: 'Experimental/Components/String formatter/StringFormatter',
+  title: 'Utilities/StringFormatter',
   component: StringFormatter,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

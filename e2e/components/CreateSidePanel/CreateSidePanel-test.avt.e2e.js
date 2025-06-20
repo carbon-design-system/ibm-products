@@ -15,7 +15,7 @@ test.describe('CreateSidePanel @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateSidePanel',
-      id: 'ibm-products-patterns-create-flows-createsidepanel--default',
+      id: 'patterns-prebuilt-patterns-create-flows-createsidepanel--default',
       globals: {
         carbonTheme: 'white',
       },

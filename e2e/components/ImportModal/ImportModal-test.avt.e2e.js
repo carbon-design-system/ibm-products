@@ -15,7 +15,7 @@ test.describe('ImportModal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ImportModal',
-      id: 'ibm-products-patterns-import-and-upload-importmodal--standard',
+      id: 'patterns-prebuilt-patterns-importmodal--standard',
       globals: {
         carbonTheme: 'white',
       },

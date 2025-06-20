@@ -15,7 +15,7 @@ test.describe('NotificationsPanel @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
-      id: 'ibm-products-components-notifications-panel-notificationspanel--default',
+      id: 'components-notificationspanel--default',
       globals: {
         carbonTheme: 'white',
       },
@@ -28,7 +28,7 @@ test.describe('NotificationsPanel @avt', () => {
   test('@avt-notification-panel-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
-      id: 'ibm-products-components-notifications-panel-notificationspanel--default',
+      id: 'components-notificationspanel--default',
       globals: {
         carbonTheme: 'white',
       },

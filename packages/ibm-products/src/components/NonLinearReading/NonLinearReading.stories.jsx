@@ -8,21 +8,21 @@
 import React from 'react';
 
 import { NonLinearReading } from '.';
-import DocsPage from './NonLinearReading.docs-page';
+import mdx from './NonLinearReading.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 
 const storyClass = 'non-linear-reading-stories';
 
 export default {
-  title: 'Experimental/Onboarding/Non-linear reading/NonLinearReading',
+  title: 'Experimental/Onboarding/NonLinearReading',
   component: NonLinearReading,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     styles,
     layout: 'padded',
     docs: {
-      page: DocsPage,
+      page: mdx,
     },
   },
   argTypes: {

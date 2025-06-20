@@ -19,6 +19,7 @@ import '@carbon/web-components/es/components/dropdown/index.js';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
 import '@carbon/web-components/es/components/progress-bar/index.js';
 import './index';
+import '../truncated-text/index';
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './story-styles.scss?lit';
@@ -334,3 +335,52 @@ export const getDecorator = (decorator) => {
   }
 };
 // cspell: enable
+
+export const getDescription = (index) => {
+  switch (index) {
+    case 1:
+      return html`
+        <span slot="description">
+          This is a description for the tearsheet, providing an opportunity to
+          describe the flow over a couple of lines in the header of the
+          tearsheet.
+        </span>
+      `;
+    case 2:
+      return html`
+        <span slot="description">
+          <c4p-truncated-text
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            lines="1"
+            ?autoalign="true"
+            align="bottom"
+          />
+        </span>
+      `;
+    case 3:
+      return html`
+        <span slot="description">
+          <c4p-truncated-text
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            lines="2"
+            ?autoalign="true"
+            align="bottom"
+          />
+        </span>
+      `;
+    case 4:
+      return html`
+        <span slot="description">
+          <c4p-truncated-text
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            lines="2"
+            with="expand"
+            expand-label="View more"
+            collapse-label="View less"
+          />
+        </span>
+      `;
+    default:
+      return null;
+  }
+};

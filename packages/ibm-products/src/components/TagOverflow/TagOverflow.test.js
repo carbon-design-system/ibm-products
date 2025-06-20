@@ -105,7 +105,7 @@ describe(componentName, () => {
   it('Obeys max visible', async () => {
     render(<TagOverflow {...tagOverflowProps} maxVisible={3} />);
     await waitFor(() => {
-      expect(screen.getByText('+2'));
+      expect(screen.getByText('+2')).toBeTruthy();
     });
   });
 

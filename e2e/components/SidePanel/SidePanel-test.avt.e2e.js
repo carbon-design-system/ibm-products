@@ -97,4 +97,17 @@ test.describe('SidePanel @avt', () => {
     await page.getByRole('button', { name: 'Open side panel' }).click();
     await expect(page.getByLabel('Close')).toBeFocused();
   });
+
+  test('@avt-resizer-feature-enabled', async ({ page }) => {
+    await visitStory(page, {
+      component: 'SidePanel',
+      id: 'ibm-products-components-side-panel-sidepanel--slide-over&args=jsFlags[0]:enableSidepanelResizer',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations(
+      'SidePanel @avt-resizer-feature-enabled'
+    );
+  });
 });

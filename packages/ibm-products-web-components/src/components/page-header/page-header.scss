@@ -71,10 +71,6 @@ $carbon-prefix: 'cds';
   .#{$prefix}--page-header__breadcrumb__actions {
     display: inline-flex;
   }
-
-  .#{$prefix}--page-header__content__title-container {
-    display: flex;
-  }
   ///////////////////////////////
 }
 
@@ -158,6 +154,10 @@ $carbon-prefix: 'cds';
       justify-content: left;
       margin-block-start: 0;
     }
+  }
+
+  .#{$prefix}--page-header__content__title-container {
+    display: flex;
   }
   ///////////////////////////////
   ::slotted([slot='icon']) {

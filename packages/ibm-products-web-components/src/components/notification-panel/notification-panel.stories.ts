@@ -18,12 +18,13 @@ import '@carbon/web-components/es/components/ui-shell/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
 import User20 from '@carbon/web-components/es/icons/user/20.js';
 import Notification20 from '@carbon/web-components/es/icons/notification/20.js';
+import NotificationNew20 from '@carbon/web-components/es/icons/notification--new/20.js';
 import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20.js';
 import {
   dataToday as initialDataToday,
   dataPrevious as initialDataPrevious,
   extraData,
-} from './NotificationsPanel_data';
+} from './_story-assets/NotificationsPanel_data';
 const blockClassNotification = `${prefix}--notifications-panel__notification`;
 const storyBlockClass = `${prefix}--notifications-panel__story`;
 
@@ -113,18 +114,23 @@ export const defaultTemplate = {
     const [openPanel, setOpenPanel] = useState(args.open);
     const [expandUserPanel, setExpandUserPanel] = useState(false);
     const [expandPanel, setExpandPanel] = useState(false);
+    const [isNewNotification, setIsNewNotification] = useState(false);
     const triggerButton = document.querySelector('#trigger-button');
     const toggleButton = () => {
       setOpenPanel(!openPanel);
       setExpandPanel(false);
       setExpandUserPanel(false);
+      setTimeout(() => {
+        setIsNewNotification(false);
+      }, 0);
     };
     const dismissAllNotification = () => {
       setDataToday([]);
       setDataPrevious([]);
     };
     const addNotification = () => {
-      setDataPrevious([...dataPrevious, extraData]);
+      setDataToday([extraData, ...dataToday]);
+      setIsNewNotification(true);
     };
     const notificationSingleDismiss = (
       notificationId: string,
@@ -186,9 +192,10 @@ export const defaultTemplate = {
             id="trigger-button"
             @click="${toggleButton}"
           >
-            ${Notification20({ slot: 'icon' })}
+            ${isNewNotification
+              ? NotificationNew20({ slot: 'icon' })
+              : Notification20({ slot: 'icon' })}
           </cds-header-global-action>
-
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"

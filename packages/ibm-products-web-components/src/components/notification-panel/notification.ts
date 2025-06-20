@@ -31,7 +31,8 @@ type DateTimeStyles = 'long' | 'short' | 'narrow';
 const dateTimeStyle = 'long' as DateTimeStyles;
 /**
  * Notification.
- *
+ * @slot title - The Title for the notification.
+ * @slot description - The description for the notification.
  * @element c4p-notification
  * @csspart dialog The dialog.
  *   The custom event is fired when a notification is clicked or when the Enter key is pressed on it.

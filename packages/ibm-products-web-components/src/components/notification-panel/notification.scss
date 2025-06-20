@@ -22,7 +22,6 @@ $css--plex: true !default;
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
 @use '@carbon/ibm-products-styles/scss/components/NotificationsPanel/index' as *;
-
 $block-notification-class: #{$prefix}--notifications-panel__notification;
 
 :host(#{$prefix}-notification) {

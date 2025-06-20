@@ -21,7 +21,7 @@ export const getAutoTrack = (source: string) => `
       page: {
         pageInfo: {
           ibm: {
-            siteId: ${`IBM_${source}`},
+            siteId: IBM_${source},
           },
           segment: {
             enabled: true,

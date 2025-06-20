@@ -18,7 +18,7 @@ import '@carbon/web-components/es/components/ui-shell/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
 import User20 from '@carbon/web-components/es/icons/user/20.js';
 import Notification20 from '@carbon/web-components/es/icons/notification/20.js';
-import { UnreadNotificationBell } from './_story-assets/unreadNotification-bell';
+import { UnreadNotificationBell } from './_story-assets/unread-notification-bell';
 import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20.js';
 import {
   dataToday as initialDataToday,

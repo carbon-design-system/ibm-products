@@ -16,6 +16,8 @@ import { Button, Link } from '@carbon/react';
 import styles from './_storybook-styles.scss?inline';
 
 import mdx from './AboutModal.mdx';
+import grafanaLogo from './_story-assets/grafana-logo.png';
+import ansibleLogo from './_story-assets/ansible-logo.png';
 
 export default {
   title: 'IBM Products/Components/About modal/AboutModal',
@@ -166,16 +168,12 @@ const Template = (args, context) => {
         <>
           <p className={`${blockClass}__footer-label`}>Powered by</p>
           <img
-            src={
-              'https://ibm-products.carbondesignsystem.com/assets/grafana-logo-C_G0-VRi.png'
-            }
+            src={grafanaLogo}
             alt="Grafana"
             className={`${blockClass}__stories--tech-logo`}
           />
           <img
-            src={
-              'https://ibm-products.carbondesignsystem.com/assets/ansible-logo-BdFhBRCd.png'
-            }
+            src={ansibleLogo}
             alt="Ansible"
             className={`${blockClass}__stories--tech-logo`}
           />

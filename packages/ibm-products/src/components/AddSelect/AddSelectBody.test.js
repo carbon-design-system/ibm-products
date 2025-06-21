@@ -286,12 +286,12 @@ describe(componentName, () => {
   it('filters the items', async () => {
     render(<AddSelectBody {...singleHierarchyProps} />);
     const input = screen.getByPlaceholderText('Find categories');
-    expect(screen.getByText('Categories'));
-    expect(screen.getByText('Florida'));
-    expect(screen.getByText('Kansas'));
+    expect(screen.getByText('Categories')).toBeVisible();
+    expect(screen.getByText('Florida')).toBeVisible();
+    expect(screen.getByText('Kansas')).toBeVisible();
     fireEvent.change(input, { target: { value: 'florida' } });
-    expect(screen.getByText('Search results'));
-    expect(screen.getByText('Florida'));
+    expect(screen.getByText('Search results')).toBeVisible();
+    expect(screen.getByText('Florida')).toBeVisible();
     expect(screen.queryByText('Kansas')).toBeNull();
   });
 
@@ -399,7 +399,7 @@ describe(componentName, () => {
     const metaBtn = document.querySelectorAll(
       `.${blockClass}__selections-view-meta`
     )[0];
-    expect(metaBtn);
+    expect(metaBtn).toBeVisible();
     fireEvent.click(metaBtn);
     expect(screen.getByText(newProps.metaPanelTitle));
   });

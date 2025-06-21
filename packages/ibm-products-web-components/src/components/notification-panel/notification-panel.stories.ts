@@ -18,6 +18,7 @@ import '@carbon/web-components/es/components/ui-shell/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
 import User20 from '@carbon/web-components/es/icons/user/20.js';
 import Notification20 from '@carbon/web-components/es/icons/notification/20.js';
+import { UnreadNotificationBell } from './_story-assets/unread-notification-bell';
 import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20.js';
 import {
   dataToday as initialDataToday,
@@ -113,18 +114,23 @@ export const defaultTemplate = {
     const [openPanel, setOpenPanel] = useState(args.open);
     const [expandUserPanel, setExpandUserPanel] = useState(false);
     const [expandPanel, setExpandPanel] = useState(false);
+    const [isNewNotification, setIsNewNotification] = useState(false);
     const triggerButton = document.querySelector('#trigger-button');
     const toggleButton = () => {
       setOpenPanel(!openPanel);
       setExpandPanel(false);
       setExpandUserPanel(false);
+      setTimeout(() => {
+        setIsNewNotification(false);
+      }, 0);
     };
     const dismissAllNotification = () => {
       setDataToday([]);
       setDataPrevious([]);
     };
     const addNotification = () => {
-      setDataPrevious([...dataPrevious, extraData]);
+      setDataToday([extraData, ...dataToday]);
+      setIsNewNotification(true);
     };
     const notificationSingleDismiss = (
       notificationId: string,
@@ -144,6 +150,20 @@ export const defaultTemplate = {
     };
     const clickOutside = (event) => {
       setOpenPanel(false);
+      const updatedTodayData = dataToday.map((data) => {
+        return {
+          ...data,
+          unread: false,
+        };
+      });
+      const updatedPreviousData = dataPrevious.map((data) => {
+        return {
+          ...data,
+          unread: false,
+        };
+      });
+      setDataToday([...updatedTodayData]);
+      setDataPrevious([...updatedPreviousData]);
     };
     return html`
       <style>
@@ -181,14 +201,16 @@ export const defaultTemplate = {
             </div>
           </cds-header-panel>
           <cds-header-global-action
+            class="${storyBlockClass}__notification-trigger"
             aria-label="Notification"
             tooltip-text="Notification"
             id="trigger-button"
             @click="${toggleButton}"
           >
-            ${Notification20({ slot: 'icon' })}
+            ${isNewNotification
+              ? UnreadNotificationBell({ slot: 'icon' })
+              : Notification20({ slot: 'icon' })}
           </cds-header-global-action>
-
           <cds-header-global-action
             aria-label="App Switcher"
             tooltip-text="App Switcher"
@@ -240,9 +262,8 @@ export const defaultTemplate = {
                   >
                     <h4
                       class=${classMap({
-                        [`${blockClassNotification}__notification-title`]: true,
-                        [`${blockClassNotification}__notification-title-unread`]:
-                          item.unread,
+                        [`${blockClassNotification}-title`]: true,
+                        [`${blockClassNotification}-title-unread`]: item.unread,
                       })}
                       slot="title"
                     >
@@ -270,9 +291,8 @@ export const defaultTemplate = {
                   >
                     <h4
                       class=${classMap({
-                        [`${blockClassNotification}__notification-title`]: true,
-                        [`${blockClassNotification}__notification-title-unread`]:
-                          item.unread,
+                        [`${blockClassNotification}-title`]: true,
+                        [`${blockClassNotification}-title-unread`]: item.unread,
                       })}
                       slot="title"
                     >

@@ -101,10 +101,16 @@ $block-class: #{$prefix}--notifications-panel;
     }
   }
 }
-.#{$block-class}__notification__notification-title {
+.#{$block-class}__notification-title {
   @include type.type-style('heading-01');
 
   color: $text-secondary;
   margin-block-end: $spacing-02;
   @include font-weight('regular');
+}
+
+.#{$block-class}__notification-title-unread {
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+  @include font-weight('semibold');
 }

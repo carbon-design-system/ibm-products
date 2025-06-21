@@ -33,6 +33,9 @@ const blockClass = `${prefix}--notifications-panel`;
  *
  * @element c4p-notification-panel
  * @csspart dialog The dialog.
+ * @slot today - Today Section.
+ * @slot previous - Previous Section.
+ * @slot footer - Footer for the Panel.
  * @fires c4p-notification-panel-beingclosed - The custom event before notification-panel is closed.
  * @fires c4p-notification-dismiss-all - The custom event fired after notification-panel is closed upon a user gesture.
  * @fires c4p-notification-donot-disturb-change - The custom event fired after notification-panel is closed upon a user gesture.

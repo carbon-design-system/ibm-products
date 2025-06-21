@@ -31,8 +31,9 @@ type DateTimeStyles = 'long' | 'short' | 'narrow';
 const dateTimeStyle = 'long' as DateTimeStyles;
 /**
  * Notification.
- *
  * @element c4p-notification
+ * @slot title - The Title for the notification.
+ * @slot description - The description for the notification.
  * @csspart dialog The dialog.
  *   The custom event is fired when a notification is clicked or when the Enter key is pressed on it.
  * @fires c4p-notification-dismiss - The custom event is fired when the notification is closed by a user gesture.
@@ -81,15 +82,15 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     const icon = fetchIcon(type);
     return html`
       ${icon}
-      <div class="${blockClass}__notification-content">
-        <p class="${blockClass}__notification-time-label">
+      <div class="${blockClass}-content">
+        <p class="${blockClass}-time-label">
           ${dateTimeFormat.relative.format(timestamp as Date, {
             locale: supportedLocale as string,
             style: dateTimeStyle,
           })}
         </p>
         <slot name="title"></slot>
-        <div class="${blockClass}__notification-description">
+        <div class="${blockClass}-description">
           <slot name="description"></slot>
         </div>
       </div>
@@ -139,22 +140,22 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     switch (type) {
       case 'error':
         icon = ErrorFilled16({
-          class: `${blockClass}__notification-status-icon ${blockClass}__notification-status-icon-error`,
+          class: `${blockClass}-status-icon ${blockClass}-status-icon-error`,
         });
         break;
       case 'success':
         icon = CheckmarkFilled16({
-          class: `${blockClass}__notification-status-icon ${blockClass}__notification-status-icon-success`,
+          class: `${blockClass}-status-icon ${blockClass}-status-icon-success`,
         });
         break;
       case 'warning':
         icon = WarningAltFilled16({
-          class: `${blockClass}__notification-status-icon ${blockClass}__notification-status-icon-warning`,
+          class: `${blockClass}-status-icon ${blockClass}-status-icon-warning`,
         });
         break;
       case 'informational':
         icon = InformationSquareFilled16({
-          class: `${blockClass}__notification-status-icon ${blockClass}__notification-status-icon-informational`,
+          class: `${blockClass}-status-icon ${blockClass}-status-icon-informational`,
         });
         break;
       default:

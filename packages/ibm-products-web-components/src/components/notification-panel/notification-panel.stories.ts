@@ -252,6 +252,7 @@ export const defaultTemplate = {
                 return html`
                   <c4p-notification
                     slot="today"
+                    .open=${args.open}
                     @click=${item.onNotificationClick}
                     @c4p-notification-dismiss=${() => {
                       notificationSingleDismiss(item.id, 'today');

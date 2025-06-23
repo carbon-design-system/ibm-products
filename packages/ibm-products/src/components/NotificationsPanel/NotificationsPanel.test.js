@@ -9,7 +9,7 @@
 
 import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
+import { waitFor } from '@testing-library/react';
 import React from 'react';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -98,7 +98,7 @@ describe('Notifications', () => {
     renderNotifications({
       data: [],
     });
-    expect(screen.getByText(/you do not have any notifications/i));
+    expect(screen.getByText(/you do not have any notifications/i)).toBeTruthy();
   });
 
   it('should render notification with error state svg', async () => {
@@ -255,6 +255,38 @@ describe('Notifications', () => {
     container.querySelector(`.${blockClass}`).focus();
     await act(() => userEvent.keyboard('{Escape}'));
     expect(onClickOutside).toHaveBeenCalled();
+  });
+
+  it('should return focus to trigger button when clicking outside and not on actionable element', async () => {
+    const triggerButtonRef = React.createRef();
+    const button = document.createElement('button');
+    document.body.appendChild(button);
+    triggerButtonRef.current = button;
+    renderNotifications({
+      triggerButtonRef,
+      open: true,
+      data: [],
+    });
+    await userEvent.click(document.body);
+    await waitFor(() => {
+      expect(document.activeElement).toBe(button);
+    });
+  });
+  it('should not return focus to trigger button when clicking outside but on an actionable element', async () => {
+    const triggerButtonRef = React.createRef();
+    const button = document.createElement('button');
+    document.body.appendChild(button);
+    const buttonAction = document.createElement('button');
+    document.body.appendChild(buttonAction);
+    triggerButtonRef.current = button;
+    renderNotifications({
+      triggerButtonRef,
+      open: true,
+      data: [],
+    });
+    await userEvent.click(buttonAction);
+    expect(document.activeElement).not.toBe(button);
+    expect(document.activeElement).toBe(buttonAction);
   });
 
   it('should not render a notifications panel when open is false', async () => {

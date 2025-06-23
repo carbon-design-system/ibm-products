@@ -60,7 +60,8 @@
     "*.avt.e2e.js",
     "*.snap",
     "*.log",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "yarn.lock"
   ],
   "words": [
     "aboutmodal",
@@ -94,6 +95,7 @@
     "denormalized",
     "disttag",
     "disttags",
+    "donot",
     "dragbar",
     "draggable",
     "interstitialscreenviewmodule",
@@ -171,6 +173,7 @@
     "skipnav",
     "slotchange",
     "spacebar",
+    "spinbutton",
     "stackable",
     "stackblitz",
     "statusicon",

@@ -54,11 +54,11 @@ describe(componentName, () => {
 
   it('renders a count', async () => {
     renderComponent({ count });
-    expect(
-      screen.getByText(/5/, {
-        selector: `.${blockClass} .${pkg.prefix}--filter-panel-group__title .${pkg.prefix}--filter-panel-label__count`,
-      })
-    );
+    const element = screen.getByText(/5/, {
+      selector: `.${blockClass} .${pkg.prefix}--filter-panel-group__title .${pkg.prefix}--filter-panel-label__count`,
+    });
+    expect(element).toBeInTheDocument();
+    expect(element).toHaveTextContent(5);
   });
 
   it('has no accessibility violations', async () => {

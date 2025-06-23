@@ -63,7 +63,7 @@ const sampleDecorator = (decorator) => {
 };
 
 export default {
-  title: 'IBM Products/Components/Cards/ProductiveCard',
+  title: 'Components/Cards/ProductiveCard',
   component: ProductiveCard,
   tags: ['autodocs'],
   parameters: {
@@ -220,14 +220,22 @@ WithOverflow.args = {
     {
       id: '1',
       itemText: 'Edit',
-      onClick: action('on click'),
-      onKeyDown: action('on keydown'),
+      onClick: () => {
+        action('click');
+      },
+      onKeyDown: () => {
+        action('keydown');
+      },
     },
     {
       id: '2',
       itemText: 'Delete',
-      onClick: action('on click'),
-      onKeyDown: action('on keydown'),
+      onClick: () => {
+        action('click');
+      },
+      onKeyDown: () => {
+        action('keydown');
+      },
     },
   ],
 };

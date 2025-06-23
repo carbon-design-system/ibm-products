@@ -29,7 +29,7 @@ describe(ActionBarItem.displayName, () => {
       </main>
     );
     await act(() => userEvent.tab());
-    expect(screen.getByText(testLabel));
+    expect(screen.getByText(testLabel)).toBeVisible();
     expect(screen.getByRole('button')).toHaveFocus();
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();

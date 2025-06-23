@@ -14,7 +14,7 @@ import './_storybook-styles.scss';
 import mdx from './useOverflowItems.mdx';
 
 export default {
-  title: 'Hooks/useOverflowItems',
+  title: 'Utilities/useOverflowItems',
   parameters: {
     layout: 'padded',
     docs: {

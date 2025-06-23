@@ -13,7 +13,7 @@ import { StatusIcon } from '.';
 import DocsPage from './StatusIcon.docs-page';
 
 export default {
-  title: 'IBM Products/Patterns/Status icons/StatusIcon',
+  title: 'Patterns/Prebuilt patterns/StatusIcon',
   component: StatusIcon,
   tags: ['autodocs'],
   argTypes: {

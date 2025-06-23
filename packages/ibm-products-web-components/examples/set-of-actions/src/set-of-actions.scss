@@ -20,53 +20,20 @@ $carbon-prefix: 'cds';
 
 $block-class: #{$prefix}--set-of-tags;
 
-#tag-container {
-  box-sizing: border-box;
+[data-hidden]:not([data-fixed]) {
+  display: none;
 }
-cds-tag {
-  min-inline-size: unset;
-}
-.popover-container {
-  // .dismissible-tag-container {
-  //   display: flex;
-  //   justify-content: end;
-  // }
-
-  .popover-tag {
-    @include type.type-style('label-02');
-    margin: 0;
-  }
-
-  cds-dismissible-tag {
-    margin: $spacing-01 0;
-  }
+.action-svg {
+  /* web components ghost icon only button bug override */
+  align-self: unset;
+  color: var(--cds-icon-primary, #161616);
 }
 
-.modal-tags-container {
-  cds-dismissible-tag {
-    margin: $spacing-02 $spacing-03 $spacing-02 0;
-  }
+/* Suppress custom element until styles are loaded */
+cds-button:not(:defined) {
+  display: none;
 }
-
-.view-all {
-  margin-top: $spacing-03;
-  display: block;
-}
-
-.tags-search {
-  margin-block-start: $spacing-05;
-}
-
-cds-modal-header {
-  padding-inline: $spacing-05;
-}
-
-cds-modal-body {
-  @extend .#{$carbon-prefix}--modal-scroll-content;
-
-  overflow: auto;
-
-  @include breakpoint-up(md) {
-    block-size: 300px;
-  }
+/* Suppress custom element until styles are loaded */
+cds-overflow-menu:not(:defined) {
+  display: none;
 }

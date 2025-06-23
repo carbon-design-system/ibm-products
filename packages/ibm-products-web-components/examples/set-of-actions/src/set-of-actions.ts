@@ -1,11 +1,9 @@
-import { LitElement, css, html, nothing } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { LitElement, css, html } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
 import { createOverflowHandler } from '@carbon/utilities';
-import Lightning16 from '@carbon/web-components/es/icons/lightning/16.js';
 import OverflowMenuVertical16 from '@carbon/web-components/es/icons/overflow-menu--vertical/16.js';
-import { TagData } from './example-data';
 import styles from './set-of-actions.scss?lit';
 
 interface Action {
@@ -47,7 +45,6 @@ export default class SetOfActions extends LitElement {
             this.hiddenItems = this.actionsData?.slice(visibleItems.length);
           },
         });
-        console.log('initialized handler');
       });
     });
   }
@@ -60,7 +57,6 @@ export default class SetOfActions extends LitElement {
           this.hiddenItems = this.actionsData?.slice(visibleItems.length);
         },
       });
-      console.log('initialized handler');
     }
   }
 
@@ -124,26 +120,7 @@ export default class SetOfActions extends LitElement {
       </div>
     `;
   }
-
-  static styles = css`
-    [data-hidden]:not([data-fixed]) {
-      display: none;
-    }
-    .action-svg {
-      /* web components ghost icon only button bug override */
-      align-self: unset;
-      color: var(--cds-icon-primary, #161616);
-    }
-
-    /* Suppress custom element until styles are loaded */
-    cds-button:not(:defined) {
-      display: none;
-    }
-    /* Suppress custom element until styles are loaded */
-    cds-overflow-menu:not(:defined) {
-      display: none;
-    }
-  `;
+  static styles = styles;
 }
 
 declare global {

@@ -36,7 +36,6 @@ const renderActionsTemplate = (args) => {
     size: actionSize,
     onClick,
   });
-  console.log(actionsData);
 
   return html`
     <style>

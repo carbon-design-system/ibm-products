@@ -90,7 +90,6 @@ export default class SetOfTags extends LitElement {
   }
 
   private reinitializeOverflowHandler() {
-    // console.log('re-initializing...');
     if (this.overflowHandler) {
       this.overflowHandler.disconnect();
     }

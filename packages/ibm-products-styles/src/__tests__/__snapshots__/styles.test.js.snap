@@ -10,9 +10,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--about-modal .c4p--about-modal__header {
-  padding: 0 20% 0 1rem;
+  padding: 0;
   grid-row: auto;
   margin-block-end: 0;
+  padding-inline-end: 20%;
+  padding-inline-start: 1rem;
 }
 
 .c4p--about-modal .c4p--about-modal__title {
@@ -2306,10 +2308,6 @@ p.c4p--about-modal__copyright-text:first-child {
   border-block-start: 1px solid var(--cds-layer-accent-01, #e0e0e0);
 }
 
-/* One or two values
-  * - width (first value)
-  * - min-width (optional second value)
-*/
 @keyframes cds--hide-feedback {
   0% {
     opacity: 1;
@@ -2628,10 +2626,20 @@ p.c4p--about-modal__copyright-text:first-child {
   /* if the title does not scroll then we have a child scrolling section. */
   grid-template-rows: auto 1fr auto; /* titles content and actions */
   inset-block-start: 3rem;
+  max-inline-size: 100%;
+  min-inline-size: 16rem;
   transform: translateX(0);
   transition-behavior: allow-discrete;
   transition-duration: 150ms;
   transition-property: display, opacity, transform;
+}
+.c4p--side-panel:not(.c4p--side-panel--slide-in).c4p--side-panel--enable-sidepanel-resizer {
+  grid-template-columns: 0 1fr;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .c4p--side-panel:not(.c4p--side-panel--slide-in).c4p--side-panel--enable-sidepanel-resizer {
+    transition: all 150ms linear;
+  }
 }
 @starting-style {
   .c4p--side-panel {
@@ -2640,36 +2648,28 @@ p.c4p--about-modal__copyright-text:first-child {
     transform: translateX(var(--panel-transform));
   }
 }
+@media (min-width: 42rem) {
+  .c4p--side-panel {
+    max-inline-size: 75vw;
+  }
+}
 .c4p--side-panel.c4p--side-panel--xs {
-  /* any value is single value list */
-  inline-size: 16rem;
-  max-inline-size: 100%;
+  inline-size: clamp(16rem, var(--c4p-side-panel-modified-size, 16rem), 100%);
 }
 .c4p--side-panel.c4p--side-panel--sm {
-  /* any value is single value list */
-  inline-size: 20rem;
-  max-inline-size: 100%;
+  inline-size: clamp(16rem, var(--c4p-side-panel-modified-size, 20rem), 100%);
 }
 .c4p--side-panel.c4p--side-panel--md {
-  /* any value is single value list */
-  inline-size: 30rem;
-  max-inline-size: 100%;
+  inline-size: clamp(16rem, var(--c4p-side-panel-modified-size, 30rem), 100%);
 }
 .c4p--side-panel.c4p--side-panel--lg {
-  /* any value is single value list */
-  inline-size: 40rem;
-  max-inline-size: 100%;
+  inline-size: clamp(16rem, var(--c4p-side-panel-modified-size, 40rem), 100%);
 }
 .c4p--side-panel.c4p--side-panel--xl {
-  /* any value is single value list */
-  inline-size: 65rem;
-  max-inline-size: 100%;
+  inline-size: clamp(16rem, var(--c4p-side-panel-modified-size, 65rem), 100%);
 }
 .c4p--side-panel.c4p--side-panel--2xl {
-  /* any value is single value list */
-  inline-size: 40rem;
-  min-inline-size: 75%;
-  max-inline-size: 100%;
+  inline-size: clamp(16rem, var(--c4p-side-panel-modified-size, 80rem), 100%);
 }
 .c4p--side-panel.c4p--side-panel--open.c4p--side-panel--right-placement {
   animation: side-panel-entrance-right 150ms cubic-bezier(0, 0, 0.38, 0.9) forwards;
@@ -2738,9 +2738,54 @@ p.c4p--about-modal__copyright-text:first-child {
   border-inline-end: 1px solid var(--cds-border-subtle-02, #e0e0e0);
   inset-inline-start: 0;
 }
+.c4p--side-panel.c4p--side-panel--left-placement .clabs__resizer {
+  grid-column: 2;
+  inset-inline-start: 0;
+}
+.c4p--side-panel.c4p--side-panel--left-placement .clabs__resizer::before {
+  inset-inline-start: 0;
+}
+.c4p--side-panel.c4p--side-panel--left-placement:not(.c4p--side-panel--slide-in).c4p--side-panel--enable-sidepanel-resizer {
+  grid-template-columns: 1fr 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .c4p--side-panel.c4p--side-panel--left-placement:not(.c4p--side-panel--slide-in).c4p--side-panel--enable-sidepanel-resizer {
+    transition: all 150ms linear;
+  }
+}
 .c4p--side-panel.c4p--side-panel.c4p--side-panel--has-slug, .c4p--side-panel.c4p--side-panel.c4p--side-panel--has-ai-label, .c4p--side-panel.c4p--side-panel.c4p--side-panel--has-decorator {
   border-color: transparent;
   box-shadow: inset 0 -80px 70px -65px var(--cds-ai-inner-shadow, rgba(69, 137, 255, 0.1)), 0 4px 10px 2px var(--cds-ai-drop-shadow, rgba(15, 98, 254, 0.1));
+}
+.c4p--side-panel .clabs__resizer--vertical::before {
+  position: absolute;
+  z-index: -1;
+  background-color: transparent;
+  block-size: 100%;
+  content: "";
+  inline-size: 0.125rem;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  transition: background-color 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+.c4p--side-panel:hover .clabs__resizer--vertical::before {
+  background-color: var(--cds-button-secondary-hover, #474747);
+}
+.c4p--side-panel .clabs__resizer {
+  background-color: transparent;
+  grid-row: span 4/span 3;
+  inset-inline-start: -0.25rem;
+}
+.c4p--side-panel .clabs__resizer--vertical::after {
+  position: absolute;
+  z-index: 10;
+  block-size: 100%;
+  content: "";
+  inline-size: 0.5rem;
+  inset-inline-start: -0.125rem;
+}
+.c4p--side-panel .clabs__resizer:hover, .c4p--side-panel .clabs__resizer:focus {
+  background-color: var(--cds-border-interactive, #0f62fe);
 }
 .c4p--side-panel .c4p--side-panel__header {
   --c4p--side-panel--title-padding-bottom: 1rem;
@@ -2991,11 +3036,6 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--side-panel .c4p--side-panel__actions-container .c4p--action-set__action-button.c4p--action-set__action-button {
   block-size: var(--c4p--side-panel--actions-height);
 }
-.c4p--side-panel.c4p--side-panel.c4p--side-panel--xs .c4p--side-panel__actions-container.c4p--action-set--sm {
-  /* any value is single value list */
-  inline-size: 16rem;
-  max-inline-size: 100%;
-}
 
 .c4p--side-panel .cds--text-input,
 .c4p--side-panel .cds--text-area,
@@ -3057,6 +3097,49 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--side-panel--has-ai-label + .c4p--side-panel__overlay,
 .c4p--side-panel--has-decorator + .c4p--side-panel__overlay {
   background-color: var(--cds-ai-overlay, rgba(0, 17, 65, 0.5));
+}
+
+.clabs__resizer {
+  position: relative;
+  flex: none;
+  background-color: var(--cds-border-subtle-01, #c6c6c6);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .clabs__resizer:hover {
+    background-color: var(--cds-border-interactive, #0f62fe);
+    transition: background-color 150ms;
+  }
+}
+.clabs__resizer:focus {
+  background-color: var(--cds-border-interactive, #0f62fe);
+  outline: none;
+}
+.clabs__resizer:active {
+  background-color: var(--cds-border-interactive, #0f62fe);
+}
+.clabs__resizer:focus:not(:focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+.clabs__resizer--horizontal {
+  block-size: 0.25rem;
+  cursor: ns-resize;
+}
+.clabs__resizer--vertical {
+  cursor: ew-resize;
+  inline-size: 0.25rem;
+}
+
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  block-size: 1px;
+  clip: rect(0, 0, 0, 0);
+  inline-size: 1px;
+  white-space: nowrap;
 }
 
 .c4p--create-side-panel.c4p--side-panel .c4p--create-side-panel__content-text {
@@ -5685,19 +5768,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   content: initial;
 }
 
-@keyframes filter-summary-enter {
-  0% {
-    block-size: 0;
-    opacity: 0;
-    /* Move from top */
-    transform: translateY(calc(var(--panel-transform) * -1));
-  }
-  100% {
-    block-size: var(--panel-transform);
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 @property --panel-transform {
   inherits: true;
   initial-value: 16px;
@@ -5715,9 +5785,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 .c4p--filter-summary.c4p--filter-summary__expanded {
   block-size: fit-content;
-}
-.c4p--filter-summary .c4p--tag-set__tag-container {
-  animation: filter-summary-enter 150ms cubic-bezier(0, 0, 0.38, 0.9) forwards;
 }
 
 .c4p--filter-summary .c4p--tag-set.c4p--tag-set.c4p--filter-summary__clear-button-inline {
@@ -10588,6 +10655,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-active-01: #6f6f6f;
   --cds-layer-active-02: #8d8d8d;
   --cds-layer-active-03: #393939;
+  --cds-layer-background-01: #262626;
+  --cds-layer-background-02: #393939;
+  --cds-layer-background-03: #525252;
   --cds-layer-hover-01: #474747;
   --cds-layer-hover-02: #636363;
   --cds-layer-hover-03: #5e5e5e;
@@ -10888,6 +10958,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
   --cds-layer-active: var(--cds-layer-active-01, #c6c6c6);
+  --cds-layer-background: var(--cds-layer-background-01, #ffffff);
   --cds-layer-hover: var(--cds-layer-hover-01, #e8e8e8);
   --cds-layer-selected: var(--cds-layer-selected-01, #e0e0e0);
   --cds-layer-selected-hover: var(--cds-layer-selected-hover-01, #d1d1d1);
@@ -11023,6 +11094,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-active-01: #525252;
   --cds-layer-active-02: #6f6f6f;
   --cds-layer-active-03: #8d8d8d;
+  --cds-layer-background-01: #161616;
+  --cds-layer-background-02: #262626;
+  --cds-layer-background-03: #393939;
   --cds-layer-hover-01: #333333;
   --cds-layer-hover-02: #474747;
   --cds-layer-hover-03: #636363;
@@ -11323,6 +11397,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
   --cds-layer-active: var(--cds-layer-active-01, #c6c6c6);
+  --cds-layer-background: var(--cds-layer-background-01, #ffffff);
   --cds-layer-hover: var(--cds-layer-hover-01, #e8e8e8);
   --cds-layer-selected: var(--cds-layer-selected-01, #e0e0e0);
   --cds-layer-selected-hover: var(--cds-layer-selected-hover-01, #d1d1d1);

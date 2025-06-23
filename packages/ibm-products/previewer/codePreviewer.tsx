@@ -71,32 +71,51 @@ export const stackblitzPrefillConfig = async ({
 
 const filterStoryCode = (storyCode, args) => {
   let storyCodeUpdated = storyCode
-    // Remove arrow functions
-    .replace(/^\s*(\([^)]*\)|[\w]+)\s*=>\s*{\s*|}\s*;?\s*$/g, '')
-    // Remove empty arrow wrappers
-    .replace(/^\s*\(\)\s*=>\s*{/g, '')
-    // Replace `args =>` with `return`
-    .replace(/^\s*args\s*=>/g, 'return')
-    // Remove ALL action() calls (including template literals and invocations)
-    .replace(/action\(([^)]*)\)(\(\))?/g, '')
-    // Replace ONLY `context.viewMode !== 'docs'` with `false` (your specific case)
-    .replace(/context\.viewMode\s*!==\s*'docs'/g, 'false')
-    // Remove quotes/action handlers (unchanged)
-    .replace(/^"|"$/g, '')
-    .replace(/onChange=\{(args\.onChange|action\('onChange'\))\}\s*/g, '')
-    .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
+    // Remove arrow functions (more precise)
+    .replace(/^\s*(?:\([^)]*\)|[\w$]+)\s*=>\s*{\s*|}\s*;?\s*$/g, '')
+
+    // Remove empty arrow wrappers (non-capturing group)
+    .replace(/^\s*\(\s*\)\s*=>\s*{\s*/g, '')
+
+    // Replace `args =>` with `return` (word boundary)
+    .replace(/(?:^|\s)args\s*=>/g, 'return')
+
+    // Remove ALL action() calls (including nested ones)
+    .replace(
+      /\baction\s*\(\s*(?:[^()]|\((?:[^()]|\([^()]*\))*\))*\s*\)\s*(?:\(\s*\))?/g,
+      ''
+    )
+
+    // Replace context.viewMode check (word boundary)
+    .replace(/\bcontext\.viewMode\s*!==\s*'docs'/g, 'false')
+
+    // Remove surrounding quotes (non-greedy)
+    .replace(/^["`]|["`]$/g, '')
+
+    // Remove event handlers (optimized combined pattern)
+    .replace(
+      /\b(?:onChange|onClick)\s*=\s*\{(?:args\.(?:onChange|onClick)|action\(['"](?:onChange|onClick)['"]\))\}\s*/g,
+      ''
+    );
+
   Object.entries(args).forEach(([key, value]) => {
     const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    // Template literals - handles default values and optional chaining
     const templateLiteralRegex = new RegExp(
-      `\\$\\{\\s*args\\.${escapedKey}\\s*\\}`,
+      `\\$\\{\\s*args\\.${escapedKey}(?:\\.\\w+)?(?:\\s*\\|\\|\\s*[^}]+)?\\s*\\}`,
       'g'
     );
+
+    // JSX attributes - more precise whitespace handling
     const jsxAttributeRegex = new RegExp(
-      `(=\\s*)\\{args\\.${escapedKey}\\}`,
+      `(=\\s*{\\s*)args\\.${escapedKey}(?:\\.\\w+)?(?:\\s*\\|\\|\\s*[^}]+)?\\s*(}\\s*)`,
       'g'
     );
+
+    // String in template literals - added word boundary
     const stringInTemplateRegex = new RegExp(
-      `\`\\$\\{args\\.${escapedKey}\\}\``,
+      `\`\\$\\{\\s*args\\.${escapedKey}(?:\\.\\w+)?\\s*\\}\``,
       'g'
     );
     if (typeof value === 'string') {
@@ -135,7 +154,7 @@ const appGenerator = (
   }
   const foundHooks = detectReactHooks(storyCode);
   const hooksString = foundHooks.join(', ');
-  const regex = /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)/;
+  const regex = /(\.\.\.\s*args\b)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args\b)/;
   const hasArgs = regex.test(storyCode);
   // Generate App.jsx code
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
@@ -158,7 +177,7 @@ const appGenerator = (
 };
 
 const findComponentsInCode = (code: string): ComponentSources => {
-  const componentRegex = /<([A-Z][a-zA-Z0-9]*)(?:\s|>)/g;
+  const componentRegex = /<([A-Z][a-zA-Z0-9_-]*)(?=[\s>])/g;
   const matches: string[] = [];
 
   let match: RegExpExecArray | null;
@@ -188,7 +207,7 @@ const findComponentsInCode = (code: string): ComponentSources => {
 
 const removeUnknownComponents = (storyCode, unknownComponents) => {
   const openingTagPattern = new RegExp(
-    `<(${unknownComponents.join('|')})(\\s+[^>]*)?/?>`,
+    `<(${unknownComponents.join('|')})(\\s+[^>]*?)?\\s*\\/?>`,
     'g'
   );
   const closingTagPattern = new RegExp(

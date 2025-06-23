@@ -1,6 +1,7 @@
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import glob from 'fast-glob';
+import { getAutoTrack } from '../../../scripts/get-auto-track-script';
 
 const stories = glob.sync(
   [
@@ -39,16 +40,7 @@ const config = {
       ${head}
       ${
         process.env.NODE_ENV !== 'development'
-          ? `
-        <script src="https://cdn.amplitude.com/script/f6f1d9025934f04f5a2a8bebb74abf2f.js"></script>
-          <script>
-            window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-            window.amplitude.init('f6f1d9025934f04f5a2a8bebb74abf2f', {
-              "fetchRemoteConfig":true,
-              "autocapture":true
-            });
-          </script>
-        `
+          ? getAutoTrack('ibm-products-web-components-storybook')
           : ''
       }
     `;

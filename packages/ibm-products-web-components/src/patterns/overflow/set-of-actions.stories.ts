@@ -61,7 +61,7 @@ export const SetOfActions = {
 };
 
 const meta = {
-  title: 'Patterns/Overflow',
+  title: 'Patterns/Item overflow',
 };
 
 export default meta;

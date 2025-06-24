@@ -125,15 +125,33 @@ export const Default = {
           <div slot="content-actions">
             <cds-button size="md">Button</cds-button>
           </div>
-          <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${Activity16({ slot: 'icon' })}</cds-icon-button
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
           >
-          <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${AiGenerate16({ slot: 'icon' })}</cds-icon-button
+            ${Activity16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 1</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
           >
-          <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${CloudFoundry16({ slot: 'icon' })}</cds-icon-button
+            ${AiGenerate16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 2</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
           >
+            ${CloudFoundry16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 3</span>
+          </cds-icon-button>
         </c4p-page-header-breadcrumb>
         <c4p-page-header-content title="${title}">
           <c4p-page-header-content-text subtitle="Subtitle">
@@ -210,15 +228,33 @@ export const ContentWithContextualActions = {
             <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
           </cds-breadcrumb-item>
         </cds-breadcrumb>
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${Activity16({ slot: 'icon' })}</cds-icon-button
+        <cds-icon-button
+          slot="page-actions"
+          kind="ghost"
+          size="md"
+          align="bottom"
         >
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${AiGenerate16({ slot: 'icon' })}</cds-icon-button
+          ${Activity16({ slot: 'icon' })}
+          <span slot="tooltip-content">action 1</span>
+        </cds-icon-button>
+        <cds-icon-button
+          slot="page-actions"
+          kind="ghost"
+          size="md"
+          align="bottom"
         >
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${CloudFoundry16({ slot: 'icon' })}</cds-icon-button
+          ${AiGenerate16({ slot: 'icon' })}
+          <span slot="tooltip-content">action 2</span>
+        </cds-icon-button>
+        <cds-icon-button
+          slot="page-actions"
+          kind="ghost"
+          size="md"
+          align="bottom"
         >
+          ${CloudFoundry16({ slot: 'icon' })}
+          <span slot="tooltip-content">action 3</span>
+        </cds-icon-button>
       </c4p-page-header-breadcrumb>
       <c4p-page-header-content
         title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
@@ -249,15 +285,33 @@ export const ContentWithContextualActionsAndPageActions = {
             <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
           </cds-breadcrumb-item>
         </cds-breadcrumb>
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${Activity16({ slot: 'icon' })}</cds-icon-button
+        <cds-icon-button
+          slot="page-actions"
+          kind="ghost"
+          size="md"
+          align="bottom"
         >
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${AiGenerate16({ slot: 'icon' })}</cds-icon-button
+          ${Activity16({ slot: 'icon' })}
+          <span slot="tooltip-content">action 1</span>
+        </cds-icon-button>
+        <cds-icon-button
+          slot="page-actions"
+          kind="ghost"
+          size="md"
+          align="bottom"
         >
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${CloudFoundry16({ slot: 'icon' })}</cds-icon-button
+          ${AiGenerate16({ slot: 'icon' })}
+          <span slot="tooltip-content">action 2</span>
+        </cds-icon-button>
+        <cds-icon-button
+          slot="page-actions"
+          kind="ghost"
+          size="md"
+          align="bottom"
         >
+          ${CloudFoundry16({ slot: 'icon' })}
+          <span slot="tooltip-content">action 3</span>
+        </cds-icon-button>
       </c4p-page-header-breadcrumb>
       <c4p-page-header-content
         title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
@@ -343,15 +397,33 @@ export const ContentWithIcon = {
             <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
           </cds-breadcrumb-item>
         </cds-breadcrumb>
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${Activity16({ slot: 'icon' })}</cds-icon-button
+        <cds-icon-button
+          slot="page-actions"
+          kind="ghost"
+          size="md"
+          align="bottom"
         >
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${AiGenerate16({ slot: 'icon' })}</cds-icon-button
+          ${Activity16({ slot: 'icon' })}
+          <span slot="tooltip-content">action 1</span>
+        </cds-icon-button>
+        <cds-icon-button
+          slot="page-actions"
+          kind="ghost"
+          size="md"
+          align="bottom"
         >
-        <cds-icon-button slot="page-actions" kind="ghost" size="md"
-          >${CloudFoundry16({ slot: 'icon' })}</cds-icon-button
+          ${AiGenerate16({ slot: 'icon' })}
+          <span slot="tooltip-content">action 2</span>
+        </cds-icon-button>
+        <cds-icon-button
+          slot="page-actions"
+          kind="ghost"
+          size="md"
+          align="bottom"
         >
+          ${CloudFoundry16({ slot: 'icon' })}
+          <span slot="tooltip-content">action 3</span>
+        </cds-icon-button>
       </c4p-page-header-breadcrumb>
       <c4p-page-header-content
         title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
@@ -380,15 +452,33 @@ export const TabBarWithTabsAndTags = {
               <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
             </cds-breadcrumb-item>
           </cds-breadcrumb>
-          <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${Activity16({ slot: 'icon' })}</cds-icon-button
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
           >
-          <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${AiGenerate16({ slot: 'icon' })}</cds-icon-button
+            ${Activity16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 1</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
           >
-          <cds-icon-button slot="page-actions" kind="ghost" size="md"
-            >${CloudFoundry16({ slot: 'icon' })}</cds-icon-button
+            ${AiGenerate16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 2</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
           >
+            ${CloudFoundry16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 3</span>
+          </cds-icon-button>
         </c4p-page-header-breadcrumb>
         <c4p-page-header-content
           title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"

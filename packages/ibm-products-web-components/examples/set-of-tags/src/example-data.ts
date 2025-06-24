@@ -3,7 +3,7 @@ import {
   TAG_SIZE,
 } from '@carbon/web-components/es/components/tag/defs';
 
-export interface TagData {
+export interface TagType {
   type: TAG_TYPE;
   text: string;
   size: TAG_SIZE;

@@ -5,16 +5,16 @@ import '@carbon/web-components/es/components/link/index.js';
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/search/index.js';
 import { createOverflowHandler } from '@carbon/utilities';
-import { TagData } from './example-data';
+import { TagType } from './example-data';
 import styles from './set-of-tags.scss?lit';
 
 @customElement('set-of-tags')
 export default class SetOfTags extends LitElement {
   @state()
-  hiddenTags: TagData[] = [];
+  hiddenTags: TagType[] = [];
 
   @property({ type: Array, attribute: 'tags-data', reflect: true })
-  tagsData: TagData[] = [];
+  tagsData: TagType[] = [];
 
   @query('#tag-container')
   private container!: HTMLElement;
@@ -117,6 +117,12 @@ export default class SetOfTags extends LitElement {
     }
   };
 
+  private handleDismiss = (e: CustomEvent, tag: TagType) => {
+    e.stopPropagation();
+    e.preventDefault();
+    this.tagsData = this.tagsData.filter((t) => t.text !== tag.text);
+  };
+
   render() {
     return html` <div
         id="tag-container"
@@ -127,12 +133,8 @@ export default class SetOfTags extends LitElement {
             <span>
               ${tag.onClose
                 ? html`<cds-dismissible-tag
-                    @cds-dismissible-tag-beingclosed=${(e: CustomEvent) => {
-                      e.preventDefault();
-                      this.tagsData = this.tagsData.filter(
-                        (t) => t.text !== tag.text
-                      );
-                    }}
+                    @cds-dismissible-tag-beingclosed=${(e: CustomEvent) =>
+                      this.handleDismiss(e, tag)}
                     text=${tag?.text}
                     tag-title="Provide a custom title to the tag"
                     type=${tag.type}
@@ -169,12 +171,7 @@ export default class SetOfTags extends LitElement {
                               <cds-dismissible-tag
                                 @cds-dismissible-tag-beingclosed=${(
                                   e: CustomEvent
-                                ) => {
-                                  e.preventDefault();
-                                  this.tagsData = this.tagsData.filter(
-                                    (t) => t.text !== tag.text
-                                  );
-                                }}
+                                ) => this.handleDismiss(e, tag)}
                                 text=${tag?.text}
                                 tag-title="Provide a custom title to the tag"
                                 type=${tag.type}
@@ -231,6 +228,8 @@ export default class SetOfTags extends LitElement {
                   .map((tag) =>
                     tag.onClose
                       ? html`<cds-dismissible-tag
+                          @cds-dismissible-tag-beingclosed=${(e: CustomEvent) =>
+                            this.handleDismiss(e, tag)}
                           text=${tag?.text}
                           tag-title="Provide a custom title to the tag"
                           type=${tag.type}

@@ -27,7 +27,7 @@ import {
 } from '@dnd-kit/modifiers';
 
 export default {
-  title: 'IBM Products/Patterns/Drag and drop',
+  title: 'Patterns/Drag and drop',
   component: () => {},
   tags: ['autodocs'],
   argTypes: {

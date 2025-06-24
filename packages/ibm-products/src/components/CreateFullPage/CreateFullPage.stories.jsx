@@ -47,7 +47,7 @@ const breadcrumbs = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/Create flows/CreateFullPage',
+  title: 'Patterns/Prebuilt patterns/Create flows/CreateFullPage',
   component: CreateFullPage,
   tags: ['autodocs'],
   parameters: {

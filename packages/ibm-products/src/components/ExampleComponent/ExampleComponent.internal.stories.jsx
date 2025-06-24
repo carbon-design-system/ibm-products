@@ -14,7 +14,7 @@ import { pkg } from '../../settings';
 // import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Internal/ExampleComponent',
+  title: 'Internal/ExampleComponent',
   component: ExampleComponent,
   tags: ['autodocs'],
   argTypes: {

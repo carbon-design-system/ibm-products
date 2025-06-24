@@ -10,9 +10,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--about-modal .c4p--about-modal__header {
-  padding: 0 20% 0 1rem;
+  padding: 0;
   grid-row: auto;
   margin-block-end: 0;
+  padding-inline-end: 20%;
+  padding-inline-start: 1rem;
 }
 
 .c4p--about-modal .c4p--about-modal__title {
@@ -5685,19 +5687,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   content: initial;
 }
 
-@keyframes filter-summary-enter {
-  0% {
-    block-size: 0;
-    opacity: 0;
-    /* Move from top */
-    transform: translateY(calc(var(--panel-transform) * -1));
-  }
-  100% {
-    block-size: var(--panel-transform);
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 @property --panel-transform {
   inherits: true;
   initial-value: 16px;
@@ -5715,9 +5704,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 .c4p--filter-summary.c4p--filter-summary__expanded {
   block-size: fit-content;
-}
-.c4p--filter-summary .c4p--tag-set__tag-container {
-  animation: filter-summary-enter 150ms cubic-bezier(0, 0, 0.38, 0.9) forwards;
 }
 
 .c4p--filter-summary .c4p--tag-set.c4p--tag-set.c4p--filter-summary__clear-button-inline {

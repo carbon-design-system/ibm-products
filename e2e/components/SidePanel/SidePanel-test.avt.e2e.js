@@ -14,7 +14,7 @@ test.describe('SidePanel @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
-      id: 'ibm-products-components-side-panel-sidepanel--slide-over',
+      id: 'components-sidepanel--slide-over',
       globals: {
         carbonTheme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('SidePanel @avt', () => {
   test('@avt-multi-step', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
-      id: 'ibm-products-components-side-panel-sidepanel--panel-with-second-step',
+      id: 'components-sidepanel--panel-with-second-step',
       globals: {
         carbonTheme: 'white',
       },
@@ -40,7 +40,7 @@ test.describe('SidePanel @avt', () => {
   test('@avt-action-toolbar', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
-      id: 'ibm-products-components-side-panel-sidepanel--with-action-toolbar',
+      id: 'components-sidepanel--with-action-toolbar',
       globals: {
         carbonTheme: 'white',
       },
@@ -58,7 +58,7 @@ test.describe('SidePanel @avt', () => {
     await visitStory(page, {
       component: 'SidePanel',
       // This used to be a specific story but using a default story to test the focus trap
-      id: 'ibm-products-components-side-panel-sidepanel--slide-over',
+      id: 'components-sidepanel--slide-over',
       globals: {
         carbonTheme: 'white',
       },
@@ -72,7 +72,7 @@ test.describe('SidePanel @avt', () => {
     await visitStory(page, {
       component: 'SidePanel',
       // This used to be a specific story but using a default story to test the focus trap
-      id: 'ibm-products-components-side-panel-sidepanel--first-element-disabled',
+      id: 'components-sidepanel--first-element-disabled',
       globals: {
         carbonTheme: 'white',
       },

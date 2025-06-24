@@ -7,24 +7,22 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-
 import cx from 'classnames';
-
 import { InlineTip, InlineTipButton, InlineTipLink } from '.';
+import mdx from './InlineTip.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 import InlineTipImage from './storybook_assets/inline-tip-image.png';
-import DocsPage from './InlineTip.docs-page';
 
 export default {
-  title: 'Experimental/Onboarding/Inline tip/InlineTip',
+  title: 'Experimental/Onboarding/InlineTip',
   component: InlineTip,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     styles,
     layout: 'padded',
     docs: {
-      page: DocsPage,
+      page: mdx,
     },
   },
   argTypes: {

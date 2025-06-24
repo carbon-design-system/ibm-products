@@ -30,7 +30,7 @@ const blockClass = `${pkg.prefix}--tag-set`;
 const blockClassModal = `${blockClass}-modal`;
 
 export default {
-  title: 'Utils/Components/TagOverflow',
+  title: 'Utilities/TagOverflow',
   component: TagOverflow,
   tags: ['autodocs'],
   parameters: {

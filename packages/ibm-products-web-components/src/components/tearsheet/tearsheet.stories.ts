@@ -354,9 +354,7 @@ export const StackingTemplate = {
         ${args.title ? html`<span slot="title">One ${args.title}</span>` : ''}
 
         <!-- slotted header description -->
-        ${args.description
-          ? html`<span slot="description">${args.description}</span>`
-          : ''}
+        ${getDescription(args.description)}
 
         <!-- slotted action in header cds-buttons -->
         ${getActionToolbarItems(args.headerActions)}
@@ -452,9 +450,7 @@ export const StackingTemplate = {
         ${args.title ? html`<span slot="title">Three ${args.title}</span>` : ''}
 
         <!-- slotted header description -->
-        ${args.description
-          ? html`<span slot="description">${args.description}</span>`
-          : ''}
+        ${getDescription(args.description)}
       </c4p-tearsheet>
     `;
   },

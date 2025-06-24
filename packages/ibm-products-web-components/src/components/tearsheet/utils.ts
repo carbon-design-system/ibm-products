@@ -352,7 +352,7 @@ export const getDescription = (index) => {
           <c4p-truncated-text
             value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
             lines="1"
-            ?autoalign="true"
+            autoalign="true"
             align="bottom"
           />
         </span>
@@ -363,7 +363,7 @@ export const getDescription = (index) => {
           <c4p-truncated-text
             value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
             lines="2"
-            ?autoalign="true"
+            autoalign="true"
             align="bottom"
           />
         </span>

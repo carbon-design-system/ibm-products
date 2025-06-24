@@ -15,7 +15,7 @@ const DocsPage = () => {
       altGuidelinesHref={[
         {
           href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#side-panel',
-          label: 'CreateSidePanel usage guidelines',
+          label: 'Usage guidelines',
         },
       ]}
       blocks={[

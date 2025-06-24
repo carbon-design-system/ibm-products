@@ -1964,6 +1964,7 @@ __metadata:
     "@carbon/styles": "npm:1.82.0"
     "@carbon/web-components": "npm:2.30.0"
     "@ibm/telemetry-js": "npm:^1.9.1"
+    "@lit/context": "npm:^1.1.5"
     "@mordech/vite-lit-loader": "npm:^0.37.0"
     "@open-wc/testing": "npm:^4.0.0"
     "@rollup/plugin-alias": "npm:^5.1.1"
@@ -4299,7 +4300,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lit/context@npm:^1.1.1":
+"@lit/context@npm:^1.1.1, @lit/context@npm:^1.1.5":
   version: 1.1.5
   resolution: "@lit/context@npm:1.1.5"
   dependencies:

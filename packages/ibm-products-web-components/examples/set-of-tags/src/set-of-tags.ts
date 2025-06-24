@@ -127,6 +127,12 @@ export default class SetOfTags extends LitElement {
             <span>
               ${tag.onClose
                 ? html`<cds-dismissible-tag
+                    @cds-dismissible-tag-beingclosed=${(e: CustomEvent) => {
+                      e.preventDefault();
+                      this.tagsData = this.tagsData.filter(
+                        (t) => t.text !== tag.text
+                      );
+                    }}
                     text=${tag?.text}
                     tag-title="Provide a custom title to the tag"
                     type=${tag.type}
@@ -161,6 +167,14 @@ export default class SetOfTags extends LitElement {
                         ? html`
                             <div class="dismissible-tag-container">
                               <cds-dismissible-tag
+                                @cds-dismissible-tag-beingclosed=${(
+                                  e: CustomEvent
+                                ) => {
+                                  e.preventDefault();
+                                  this.tagsData = this.tagsData.filter(
+                                    (t) => t.text !== tag.text
+                                  );
+                                }}
                                 text=${tag?.text}
                                 tag-title="Provide a custom title to the tag"
                                 type=${tag.type}

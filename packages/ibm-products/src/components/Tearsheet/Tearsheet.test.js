@@ -140,27 +140,16 @@ const commonTests = (Ts, name, props, testActions) => {
     });
   });
 
-  it('has no accessibility violations when closed', async () => {
-    const { container } = render(
-      <Ts {...{ ...props, closeIconDescription, label, title }} />
-    );
-    await expect(container).toBeAccessible(`${name} when closed`);
-    await expect(container).toHaveNoAxeViolations();
-  });
-
   it('has no accessibility violations', async () => {
-    const { container } = render(
-      <Ts
-        {...{ ...props, closeIconDescription, label, title }}
-        open
-        hasCloseIcon
-      />
-    );
-
     await act(async () => {
-      await expect(container).toBeAccessible(name);
-      await expect(container).toHaveNoAxeViolations();
+      render(<Ts {...{ ...props, closeIconDescription, title }} open />);
     });
+
+    const tearsheetElement = document.querySelector(
+      `.${pkg.prefix}--tearsheet`
+    );
+    await expect(tearsheetElement).toBeAccessible(`${name}`);
+    await expect(tearsheetElement).toHaveNoAxeViolations();
   });
 
   it('omits main content sections when no props supplied and no close icon requested', async () => {

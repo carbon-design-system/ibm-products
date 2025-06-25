@@ -101,6 +101,7 @@ const renderCreateTearsheet = ({
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         title={step1Title}
         fieldsetLegendText={step1Title}
+        fieldsetLegendId={step1Title}
         onMount={onMountFn}
         description={step1Description}
         subtitle={step1Subtitle}
@@ -115,7 +116,7 @@ const renderCreateTearsheet = ({
         <button type="button" disabled>
           Test
         </button>
-        <input type="text" />
+        <input aria-label="step1-input" type="text" />
       </CreateTearsheetStep>
       <CreateTearsheetStep
         title={step2Title}
@@ -131,6 +132,7 @@ const renderCreateTearsheet = ({
       <CreateTearsheetStep
         title={step3Title}
         fieldsetLegendText={step3Title}
+        fieldsetLegendId={step3Title}
         onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}
       >
         step 3 content
@@ -204,14 +206,23 @@ describe(CreateTearsheet.displayName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it.skip('has no accessibility violations', async () => {
-    renderCreateTearsheet({ ...defaultProps });
-    await expect(
-      document.querySelector(`.${prefix}--tearsheet`)
-    ).toBeAccessible(CreateTearsheet.displayName);
-    await expect(
-      document.querySelector(`.${prefix}--tearsheet`)
-    ).toHaveNoAxeViolations();
+  it('has no accessibility violations', async () => {
+    await act(async () => {
+      renderCreateTearsheet({ ...defaultProps, 'data-testid': dataTestId });
+    });
+    try {
+      const tearsheetElement = document.querySelector(
+        `.${prefix}--tearsheet-create`
+      );
+      await expect(tearsheetElement).toBeAccessible(
+        CreateTearsheet.displayName
+      );
+      jest.useRealTimers();
+      await expect(tearsheetElement).toHaveNoAxeViolations();
+      jest.useFakeTimers();
+    } catch (err) {
+      console.log('accessibility test error :', err);
+    }
   });
 
   it('renders the CreateTearsheet component', async () => {

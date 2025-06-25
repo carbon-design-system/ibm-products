@@ -11,7 +11,7 @@ import { ComboButton, ComboButtonItem } from '..';
 import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'IBM Products/Internal/ComboButton',
+  title: 'Internal/ComboButton',
   component: ComboButton,
   tags: ['autodocs'],
 };

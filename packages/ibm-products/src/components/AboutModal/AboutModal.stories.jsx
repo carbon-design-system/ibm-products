@@ -18,7 +18,7 @@ import styles from './_storybook-styles.scss?inline';
 import mdx from './AboutModal.mdx';
 
 export default {
-  title: 'IBM Products/Components/About modal/AboutModal',
+  title: 'Components/AboutModal',
   component: AboutModal,
   tags: ['autodocs'],
   parameters: {

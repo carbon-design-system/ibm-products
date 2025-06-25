@@ -80,6 +80,7 @@ export default {
     PageHeaderContentText,
     PageHeaderContentPageActions,
   },
+  tags: ['autodocs'],
   argTypes: {
     children: {
       control: false, // ReactNode props don't work in the controls pane

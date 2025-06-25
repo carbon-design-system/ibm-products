@@ -103,6 +103,7 @@ export { InlineTip, InlineTipButton, InlineTipLink } from './InlineTip';
 export { NonLinearReading } from './NonLinearReading';
 export { BigNumbers } from './BigNumbers';
 export { TruncatedList } from './TruncatedList';
+export { TruncatedText } from './TruncatedText';
 export { InterstitialScreen } from './InterstitialScreen';
 export { DelimitedList } from './DelimitedList';
 export { Decorator } from './Decorator';

@@ -14,7 +14,7 @@ test.describe('ExportModal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExportModal',
-      id: 'ibm-products-components-export-exportmodal--standard',
+      id: 'patterns-prebuilt-patterns-exportmodal--standard',
       globals: {
         carbonTheme: 'white',
       },

@@ -11,6 +11,12 @@ import * as stories from './WebTerminal.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    altGuidelinesHref={[
+      {
+        href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/web-terminal/usage/',
+        label: 'Usage guidelines',
+      },
+    ]}
     blocks={[
       {
         description: `To get started using the WebTerminal, you have to first wrap your

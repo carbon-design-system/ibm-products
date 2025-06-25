@@ -24,7 +24,7 @@ export default {
           altGuidelinesHref={[
             {
               href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon Empty pattern usage guidelines',
+              label: 'Carbon empty states pattern',
             },
           ]}
           deprecationNotice="This component is deprecated and will be removed in the next major version. For more information, please refer to the [Carbon docs](https://carbondesignsystem.com/patterns/empty-states-pattern/)."

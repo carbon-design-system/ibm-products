@@ -41,7 +41,7 @@ const defaultProps = {
 export default {
   title: 'Experimental/Onboarding/GetStartedCard',
   component: GetStartedCard,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     docs: {
       page: mdx,

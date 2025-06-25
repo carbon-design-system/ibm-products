@@ -109,21 +109,22 @@ export const storyDocsPageTitle = (csfFile) => {
 
 export const storyDocsPageInfo = (csfFile) => {
   const title = csfFile?.meta?.title;
-  const [pkg, kind, a, b, ...rest] = title.split('/');
+  const [category, a, b, ...rest] = title.split('/');
 
   let result = {
-    package: pkg,
-    kind,
+    category,
     expectCodedExample: false,
   };
   let component;
 
-  if (/components|patterns/i.test(kind)) {
+  if (/components|patterns/i.test(category)) {
     result.expectCodedExample = true;
-    // Required until components within 'Patterns' category use the
-    // new approach with setting story titles because they are nested an
-    // extra level
-    if (typeof b === 'string') {
+    // Required until components within 'Patterns' and 'Prebuilt' category
+    // use the new approach with setting story titles because they are
+    // nested an extra level
+    if (a === ('Prebuilt patterns' || 'Onboarding')) {
+      component = rest[0] ? rest[0] : b;
+    } else if (typeof b === 'string') {
       component = b;
     } else {
       component = a;
@@ -131,7 +132,7 @@ export const storyDocsPageInfo = (csfFile) => {
 
     result.section = a;
 
-    result.guidelinesHref = `https://pages.github.ibm.com/carbon/ibm-products/${kind.toLowerCase()}/${changeCase.kebabCase(
+    result.guidelinesHref = `https://pages.github.ibm.com/carbon/ibm-products/${category.toLowerCase()}/${changeCase.kebabCase(
       result.section
     )}/usage`;
   } else {
@@ -147,7 +148,7 @@ export const storyDocsPageInfo = (csfFile) => {
 
   if (name) {
     if (rest.length > 0) {
-      result.component = result.title = `${name} (${rest.join(' ')})`;
+      result.component = result.title = `${name}`;
     } else {
       result.component = name;
       result.title = name;
@@ -158,7 +159,7 @@ export const storyDocsPageInfo = (csfFile) => {
   }
 
   if (result.guidelinesHref) {
-    result.guidelinesLinkLabel = `${result.title} usage guidelines`;
+    result.guidelinesLinkLabel = `Usage guidelines`;
   }
 
   return result;

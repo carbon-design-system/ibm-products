@@ -466,4 +466,4 @@ AddSelectBody.propTypes = {
   useNormalizedItems: PropTypes.bool,
 };
 
-AddSelectBreadcrumbs.displayName = componentName;
+AddSelectBody.displayName = componentName;

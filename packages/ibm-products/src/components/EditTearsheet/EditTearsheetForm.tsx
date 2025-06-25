@@ -64,10 +64,12 @@ type EditTearsheetFormFieldsetTypes =
   | {
       hasFieldset?: false;
       fieldsetLegendText: string;
+      fieldsetLegendId?: React.ReactNode;
     }
   | {
       hasFieldset: true;
       fieldsetLegendText: string;
+      fieldsetLegendId: React.ReactNode;
     };
 
 type EditTearsheetFormProps = EditTearsheetFormBaseProps &
@@ -82,6 +84,7 @@ export let EditTearsheetForm = forwardRef(
       className,
       description,
       fieldsetLegendText,
+      fieldsetLegendId,
       hasFieldset = defaults.hasFieldset,
       subtitle,
       title,
@@ -113,7 +116,7 @@ export let EditTearsheetForm = forwardRef(
           <Column xlg={12} lg={12} md={8} sm={4}>
             <h4 className={`${blockClass}--title`}>{title}</h4>
             {subtitle && (
-              <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+              <h5 className={`${blockClass}--subtitle`}>{subtitle}</h5>
             )}
             {description && (
               <p className={`${blockClass}--description`}>{description}</p>
@@ -124,6 +127,7 @@ export let EditTearsheetForm = forwardRef(
               <FormGroup
                 legendText={fieldsetLegendText}
                 className={`${blockClass}--fieldset`}
+                legendId={fieldsetLegendId}
               >
                 <Grid>{children}</Grid>
               </FormGroup>
@@ -159,6 +163,14 @@ EditTearsheetForm.propTypes = {
    * Sets an optional description on the form component
    */
   description: PropTypes.string,
+
+  /**
+   * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
+   */
+  /**@ts-ignore */
+  fieldsetLegendId: PropTypes.node.isRequired.if(
+    ({ hasFieldset }) => !!hasFieldset
+  ),
 
   /**
    * This is the required legend text that appears above a fieldset html element for accessibility purposes.

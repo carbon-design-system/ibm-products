@@ -15,7 +15,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { carbon } from '../../settings';
-
+import { pkg } from '../../settings';
 import { ImportModal } from '.';
 
 global.fetch = jest.fn(() =>
@@ -58,6 +58,7 @@ const defaultProps = {
 
 describe(componentName, () => {
   beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
     fetch.mockClear();
   });
 
@@ -312,14 +313,19 @@ describe(componentName, () => {
     ).toBeVisible();
   });
 
-  // TODO: We temporarily skip the accessibility check, since the Carbon
-  // FileUploaderDropContainer has a violation. Once there is a fix for issue
-  // https://github.com/carbon-design-system/carbon/issues/8847 this test
-  // should be reinstated.
   it.skip('has no accessibility violations', async () => {
-    const { container } = render(<ImportModal {...defaultProps} />);
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
+    fetch.mockImplementationOnce(() =>
+      Promise.resolve({
+        ok: true,
+        status: 200,
+        blob: () => Promise.resolve({ type: 'pdf' }),
+        json: () => Promise.resolve({ type: 'pdf' }),
+      })
+    );
+    render(<ImportModal {...defaultProps} />);
+    const modalElement = screen.getByRole('presentation');
+    await expect(modalElement).toBeAccessible(componentName);
+    await expect(modalElement).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {

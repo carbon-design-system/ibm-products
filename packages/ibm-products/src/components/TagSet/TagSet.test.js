@@ -78,6 +78,12 @@ describe(TagSet.displayName, () => {
     warn.mockRestore();
   });
 
+  it('has no accessibility violations', async () => {
+    const { container } = render(<TagSet maxVisible={5} tags={tags10} />);
+    await expect(container).toBeAccessible(TagSet.displayName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
   it('Displays a DismissibleTag when passed an onClose or filter', async () => {
     const handler1 = jest.fn();
     const handler2 = jest.fn();

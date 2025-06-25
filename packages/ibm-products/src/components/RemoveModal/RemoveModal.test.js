@@ -9,7 +9,7 @@ import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Link } from '@carbon/react';
-
+import { pkg } from '../../settings';
 import { RemoveModal } from '.';
 
 const componentName = RemoveModal.displayName;
@@ -131,9 +131,10 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<RemoveModal {...defaultProps} />);
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
+    render(<RemoveModal {...defaultProps} />);
+    const modalElement = document.querySelector(`.${pkg.prefix}--remove-modal`);
+    await expect(modalElement).toBeAccessible(componentName);
+    await expect(modalElement).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {

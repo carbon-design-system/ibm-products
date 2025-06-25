@@ -47,6 +47,9 @@ type fieldsetLegendTextProps =
        * Otherwise, use CSS to hide/remove this label text.
        */
       fieldsetLegendText?: string;
+      /**
+       * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
+       */
       fieldsetLegendId?: React.ReactNode;
     }
   | {
@@ -62,7 +65,9 @@ type fieldsetLegendTextProps =
        * Otherwise, use CSS to hide/remove this label text.
        */
       fieldsetLegendText: string;
-
+      /**
+       * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
+       */
       fieldsetLegendId: React.ReactNode;
     };
 

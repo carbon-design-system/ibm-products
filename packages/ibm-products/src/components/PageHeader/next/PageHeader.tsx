@@ -33,11 +33,10 @@ import {
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import { blockClass } from '../PageHeaderUtils';
-import { useMatchMedia } from '@carbon/react/es/internal/useMatchMedia';
 import { createOverflowHandler } from '@carbon/utilities';
 import { TYPES } from '@carbon/react/es/components/Tag/Tag';
 import { useOverflowItems } from '../../../global/js/hooks/useOverflowItems';
-import { useId } from '@carbon/react/es/internal/useId';
+import { useId } from '../../../global/js/utils/useId';
 
 /**
  * ----------
@@ -511,6 +510,8 @@ const PageHeaderHeroImage = ({
   children,
   ...other
 }: PageHeaderHeroImageProps) => {
+  const [lgBreakpoint, setLgBreakpoint] = useState(false);
+
   const classNames = classnames(
     {
       [`${blockClass}__hero-image`]: true,
@@ -519,10 +520,29 @@ const PageHeaderHeroImage = ({
   );
 
   const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
-  const isLg = useMatchMedia(lgMediaQuery);
+
+  useEffect(() => {
+    const listener = (event: MediaQueryListEvent) => {
+      setLgBreakpoint(event.matches);
+    };
+
+    const mediaQueryList = window.matchMedia(lgMediaQuery);
+
+    mediaQueryList.addEventListener('change', listener);
+
+    setLgBreakpoint(mediaQueryList.matches);
+
+    return () => {
+      mediaQueryList.removeEventListener('change', listener);
+    };
+  }, [lgMediaQuery]);
 
   return (
-    <AspectRatio className={classNames} {...other} ratio={isLg ? '2x1' : '3x2'}>
+    <AspectRatio
+      className={classNames}
+      {...other}
+      ratio={lgBreakpoint ? '2x1' : '3x2'}
+    >
       {children}
     </AspectRatio>
   );

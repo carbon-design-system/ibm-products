@@ -9,7 +9,7 @@ import React from 'react';
 import { UserProfileImage } from '.';
 import image from './headshot.jpg'; // cspell:disable-line
 import DocsPage from './UserProfileImage.docs-page';
-
+import { Annotation } from '../../../.storybook/Annotation';
 // import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 const defaultArgs = {

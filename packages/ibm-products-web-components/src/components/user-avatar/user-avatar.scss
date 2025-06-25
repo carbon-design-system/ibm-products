@@ -29,6 +29,10 @@ $block-class: #{$prefix}--user-avatar;
 
 :host(#{$prefix}-user-avatar) {
   display: inline-block;
+
+  .#{$block-class} {
+    box-sizing: border-box;
+  }
 }
 
 :host(#{$prefix}-user-avatar) .#{$block-class}--xl {

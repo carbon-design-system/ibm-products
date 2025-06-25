@@ -70,7 +70,7 @@ const tags = [
 ];
 
 export default {
-  title: 'Experimental/Components/PageHeader',
+  title: 'Experimental/Patterns/PageHeader',
   component: PageHeader,
   subcomponents: {
     PageHeaderBreadcrumbBar,
@@ -95,10 +95,14 @@ export default {
       <>
         <style>
           {`
-          .sb-show-main.sb-main-padded {
-            padding-left: 0;
-            padding-right: 0;
-            padding-top: 0;
+          .sb-show-main.sb-main-centered {
+            align-items: normal;
+          }
+
+          .sb-show-main.sb-main-centered #storybook-root {
+            margin: 0;
+            padding: 0;
+            width: 100%;
           }
         `}
         </style>

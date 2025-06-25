@@ -30,9 +30,9 @@ import {
   PopoverContent,
   Tag,
   unstable_Text as Text,
-  usePrefix,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
+import { blockClass } from '../PageHeaderUtils';
 import { useMatchMedia } from '@carbon/react/es/internal/useMatchMedia';
 import { createOverflowHandler } from '@carbon/utilities';
 import { TYPES } from '@carbon/react/es/components/Tag/Tag';
@@ -50,10 +50,10 @@ interface PageHeaderProps {
 }
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
-    const prefix = usePrefix();
     const classNames = classnames(
       {
-        [`${prefix}--page-header`]: true,
+        [`${blockClass}`]: true,
+        [`${blockClass}__next`]: true,
       },
       className
     );
@@ -116,35 +116,33 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
   }: PageHeaderBreadcrumbBarProps,
   ref
 ) {
-  const prefix = usePrefix();
   const classNames = classnames(
     {
-      [`${prefix}--page-header__breadcrumb-bar`]: true,
-      [`${prefix}--page-header__breadcrumb-bar-border`]: border,
-      [`${prefix}--page-header__breadcrumb__actions-flush`]: pageActionsFlush,
+      [`${blockClass}__breadcrumb-bar`]: true,
+      [`${blockClass}__breadcrumb-bar-border`]: border,
+      [`${blockClass}__breadcrumb__actions-flush`]: pageActionsFlush,
     },
     className
   );
 
   const contentActionsClasses = classnames({
-    [`${prefix}--page-header__breadcrumb__content-actions`]:
-      !contentActionsFlush,
+    [`${blockClass}__breadcrumb__content-actions`]: !contentActionsFlush,
   });
 
   return (
     <div className={classNames} ref={ref} {...other}>
       <Grid>
         <Column lg={16} md={8} sm={4}>
-          <div className={`${prefix}--page-header__breadcrumb-container`}>
-            <div className={`${prefix}--page-header__breadcrumb-wrapper`}>
+          <div className={`${blockClass}__breadcrumb-container`}>
+            <div className={`${blockClass}__breadcrumb-wrapper`}>
               {IconElement && (
-                <div className={`${prefix}--page-header__breadcrumb__icon`}>
+                <div className={`${blockClass}__breadcrumb__icon`}>
                   <IconElement />
                 </div>
               )}
               {children}
             </div>
-            <div className={`${prefix}--page-header__breadcrumb__actions`}>
+            <div className={`${blockClass}__breadcrumb__actions`}>
               <div className={contentActionsClasses}>{contentActions}</div>
               {pageActions}
             </div>
@@ -203,10 +201,9 @@ const PageHeaderContent = React.forwardRef<
   }: PageHeaderContentProps,
   ref
 ) {
-  const prefix = usePrefix();
   const classNames = classnames(
     {
-      [`${prefix}--page-header__content`]: true,
+      [`${blockClass}__content`]: true,
     },
     className
   );
@@ -226,13 +223,11 @@ const PageHeaderContent = React.forwardRef<
     <div className={classNames} ref={ref} {...other}>
       <Grid>
         <Column lg={16} md={8} sm={4}>
-          <div className={`${prefix}--page-header__content__title-wrapper`}>
-            <div className={`${prefix}--page-header__content__start`}>
-              <div
-                className={`${prefix}--page-header__content__title-container`}
-              >
+          <div className={`${blockClass}__content__title-wrapper`}>
+            <div className={`${blockClass}__content__start`}>
+              <div className={`${blockClass}__content__title-container`}>
                 {IconElement && (
-                  <div className={`${prefix}--page-header__content__icon`}>
+                  <div className={`${blockClass}__content__icon`}>
                     <IconElement />
                   </div>
                 )}
@@ -242,7 +237,7 @@ const PageHeaderContent = React.forwardRef<
                     <Text
                       ref={titleRef}
                       as="h4"
-                      className={`${prefix}--page-header__content__title`}
+                      className={`${blockClass}__content__title`}
                     >
                       {title}
                     </Text>
@@ -251,16 +246,14 @@ const PageHeaderContent = React.forwardRef<
                   <Text
                     ref={titleRef}
                     as="h4"
-                    className={`${prefix}--page-header__content__title`}
+                    className={`${blockClass}__content__title`}
                   >
                     {title}
                   </Text>
                 )}
               </div>
               {contextualActions && (
-                <div
-                  className={`${prefix}--page-header__content__contextual-actions`}
-                >
+                <div className={`${blockClass}__content__contextual-actions`}>
                   {contextualActions}
                 </div>
               )}
@@ -336,10 +329,9 @@ const PageHeaderContentPageActions = ({
   actions,
   ...other
 }: PageHeaderContentPageActionsProps) => {
-  const prefix = usePrefix();
   const classNames = classnames(
     {
-      [`${prefix}--page-header__content__page-actions`]: true,
+      [`${blockClass}__content__page-actions`]: true,
     },
     className
   );
@@ -464,10 +456,9 @@ const PageHeaderContentText = ({
   subtitle,
   ...other
 }: PageHeaderContentTextProps) => {
-  const prefix = usePrefix();
   const classNames = classnames(
     {
-      [`${prefix}--page-header__content__body`]: true,
+      [`${blockClass}__content__body`]: true,
     },
     className
   );
@@ -475,7 +466,7 @@ const PageHeaderContentText = ({
   return (
     <div className={classNames} {...other}>
       {subtitle && (
-        <Text as="h3" className={`${prefix}--page-header__content__subtitle`}>
+        <Text as="h3" className={`${blockClass}__content__subtitle`}>
           {subtitle}
         </Text>
       )}
@@ -520,10 +511,9 @@ const PageHeaderHeroImage = ({
   children,
   ...other
 }: PageHeaderHeroImageProps) => {
-  const prefix = usePrefix();
   const classNames = classnames(
     {
-      [`${prefix}--page-header__hero-image`]: true,
+      [`${blockClass}__hero-image`]: true,
     },
     className
   );
@@ -574,10 +564,9 @@ const PageHeaderTabBar = React.forwardRef<
   { className, children, tags = [], ...other }: PageHeaderTabBarProps,
   ref
 ) {
-  const prefix = usePrefix();
   const classNames = classnames(
     {
-      [`${prefix}--page-header__tab-bar`]: true,
+      [`${blockClass}__tab-bar`]: true,
     },
     className
   );
@@ -641,14 +630,14 @@ const PageHeaderTabBar = React.forwardRef<
 
   // Function to render tags
   const renderTags = () => (
-    <div className={`${prefix}--page-header__tags`} ref={tagsContainerRef}>
+    <div className={`${blockClass}__tags`} ref={tagsContainerRef}>
       {visibleItems.map((tag) => (
         <Tag
           key={tag.id}
           ref={(node) => itemRefHandler(tag.id, node)}
           type={tag.type}
           size={tag.size}
-          className={`${prefix}--page-header__tag-item`}
+          className={`${blockClass}__tag-item`}
         >
           {tag.text}
         </Tag>
@@ -666,7 +655,7 @@ const PageHeaderTabBar = React.forwardRef<
             size={tagSize}
           />
           <PopoverContent className="tag-popover-content">
-            <div className={`${prefix}--page-header__tags-popover-list`}>
+            <div className={`${blockClass}__tags-popover-list`}>
               {hiddenItems.map((tag) => (
                 <Tag key={tag.id} type={tag.type} size={tag.size}>
                   {tag.text}
@@ -683,7 +672,7 @@ const PageHeaderTabBar = React.forwardRef<
     <div className={classNames} ref={ref} {...other}>
       <Grid>
         <Column lg={16} md={8} sm={4}>
-          <div className={`${prefix}--page-header__tab-bar--tablist`}>
+          <div className={`${blockClass}__tab-bar--tablist`}>
             {children}
             {tags.length > 0 && renderTags()}
           </div>

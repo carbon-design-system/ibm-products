@@ -180,7 +180,9 @@ describe(componentName, () => {
       `.${editTearsheetBlockClass}`
     );
     await expect(tearsheetElement).toBeAccessible(componentName);
+    jest.useRealTimers();
     await expect(tearsheetElement).toHaveNoAxeViolations();
+    jest.useFakeTimers();
   });
 
   it('adds additional props to the containing node', async () => {

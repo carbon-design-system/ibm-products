@@ -485,7 +485,9 @@ export const TearsheetShell = React.forwardRef(
                   [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
                 })}
                 closeModal={onClose}
-                iconDescription={closeIconDescription}
+                iconDescription={
+                  effectiveHasCloseIcon ? closeIconDescription : undefined
+                }
               >
                 <Wrap
                   className={`${bc}__header-content`}

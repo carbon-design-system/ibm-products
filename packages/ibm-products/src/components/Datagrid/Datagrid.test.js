@@ -929,27 +929,10 @@ describe(componentName, () => {
     jest.spyOn(global.console, 'warn').mockImplementation(() => {});
     jest.useFakeTimers();
     jest.spyOn(global, 'setTimeout');
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
   });
 
   afterEach(() => {
     jest.useRealTimers();
-    window.ResizeObserver = ResizeObserver;
   });
 
   it('check total column count', () => {
@@ -2851,16 +2834,10 @@ describe('batch action testing', () => {
           },
         },
       });
-      window.ResizeObserver = jest.fn().mockImplementation(() => ({
-        observe: jest.fn(),
-        unobserve: jest.fn(),
-        disconnect: jest.fn(),
-      }));
     });
 
     afterEach(() => {
       mockElement.mockRestore();
-      window.ResizeObserver = ResizeObserver;
     });
 
     it('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {

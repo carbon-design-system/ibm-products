@@ -44,25 +44,25 @@ describe('c4p-notification', () => {
     )) as CDSNotification;
     expect(notification.type).toBe('error');
     let iconElement = notification.shadowRoot?.querySelector(
-      '.c4p--notifications-panel__notification__notification-status-icon-error'
+      '.c4p--notifications-panel__notification-status-icon-error'
     );
     expect(iconElement).not.toBeNull();
     notification.type = 'success';
     await elementUpdated(notification);
     iconElement = notification.shadowRoot?.querySelector(
-      '.c4p--notifications-panel__notification__notification-status-icon-success'
+      '.c4p--notifications-panel__notification-status-icon-success'
     );
     expect(iconElement).not.toBeNull();
     notification.type = 'warning';
     await elementUpdated(notification);
     iconElement = notification.shadowRoot?.querySelector(
-      '.c4p--notifications-panel__notification__notification-status-icon-warning'
+      '.c4p--notifications-panel__notification-status-icon-warning'
     );
     expect(iconElement).not.toBeNull();
     notification.type = 'informational';
     await elementUpdated(notification);
     iconElement = notification.shadowRoot?.querySelector(
-      '.c4p--notifications-panel__notification__notification-status-icon-informational'
+      '.c4p--notifications-panel__notification-status-icon-informational'
     );
     expect(iconElement).not.toBeNull();
   });
@@ -83,7 +83,7 @@ describe('c4p-notification', () => {
       -1
     );
     const notificationTimeLabel = notification.shadowRoot?.querySelector(
-      '.c4p--notifications-panel__notification__notification-time-label'
+      '.c4p--notifications-panel__notification-time-label'
     );
     expect(notificationTimeLabel?.textContent?.trim()).toBe(dateTimeValue);
   });

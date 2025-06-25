@@ -8,6 +8,7 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import * as stories from './UserProfileImage.stories';
+import { Callout, CodeSnippet } from '@carbon/react';
 
 const DocsPage = () => (
   <StoryDocsPage
@@ -15,6 +16,18 @@ const DocsPage = () => (
     // cspell:disable-next-line
     deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [UserAvatar](?path=/docs/components-useravatar--docs#migration-from-userprofileimage)."
     blocks={[
+      {
+        description: (
+          <>
+            <p>Please use the below command to migrate</p>
+            <CodeSnippet type="single" feedback="Copied to clipboard">
+              npx @carbon/upgrade migrate ibm-products-update-userprofileimage
+              --write
+            </CodeSnippet>
+            <br />
+          </>
+        ),
+      },
       {
         story: stories.Default,
       },

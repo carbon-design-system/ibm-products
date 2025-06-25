@@ -50,14 +50,6 @@ const renderComponent = (customProps = {}) => {
 };
 
 describe(componentName, () => {
-  // The Carousel component uses IntersectionObserver.
-  beforeEach(() => {
-    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
-      observe: () => null,
-      unobserve: () => null,
-    }));
-  });
-
   it('renders a component Guidebanner', () => {
     const { container } = renderComponent();
     const guidebanner = container.getElementsByClassName(blockClass);

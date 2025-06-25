@@ -20,7 +20,6 @@ pkg._silenceWarnings(true);
 pkg.setAllComponents(true);
 
 describe(name, () => {
-  const { ResizeObserver } = window;
   let mockError, mockWarn;
 
   beforeEach(() => {
@@ -29,32 +28,12 @@ describe(name, () => {
     // conditions not met, and for the purposes of these tests we don't care.
     mockError = jest.spyOn(console, 'error').mockImplementation(() => {});
     mockWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    window.matchMedia = jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(), // Deprecated
-      removeListener: jest.fn(), // Deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
-    window.IntersectionObserver = jest.fn(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-    }));
   });
 
   afterEach(() => {
     mockError.mockRestore();
     mockWarn.mockRestore();
     jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
   });
 
   for (const key in components) {

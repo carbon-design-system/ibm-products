@@ -27,7 +27,7 @@ export const themeData = [
   },
 ];
 
-export const ThemeContext = createContext();
+export const ThemeContext = createcontext(undefined);
 
 const initialState = {
   currentTheme: themeData[1],

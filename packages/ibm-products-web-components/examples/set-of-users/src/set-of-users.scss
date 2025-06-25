@@ -1,0 +1,114 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use 'sass:map';
+@use '@carbon/styles';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/tag';
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+$block-class: #{$prefix}--set-of-users;
+
+.custom-overflow {
+  @include type.type-style('heading-03', true);
+  background-color: tag.$tag-background-gray;
+  color: $text-primary;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+
+  &__xl {
+    @include type.type-style('heading-04', true);
+    block-size: $spacing-10;
+    inline-size: $spacing-10;
+  }
+  &__lg {
+    @include type.type-style('heading-03', true);
+    block-size: $spacing-09;
+    inline-size: $spacing-09;
+  }
+  &__md {
+    @include type.type-style('body-compact-01', true);
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+  }
+  &__sm {
+    block-size: $spacing-06;
+    inline-size: $spacing-06;
+  }
+}
+
+.custom-avatar {
+  transition: all 0.1s ease-out;
+
+  &__xl {
+    block-size: $spacing-10;
+    inline-size: $spacing-10;
+
+    &.condensed {
+      inline-size: calc($spacing-10 / 2);
+      justify-content: flex-start;
+
+      &:hover,
+      &focus {
+        inline-size: $spacing-10;
+      }
+    }
+  }
+  &__lg {
+    block-size: $spacing-09;
+    inline-size: $spacing-09;
+
+    &.condensed {
+      inline-size: calc($spacing-09 / 2);
+      justify-content: flex-start;
+
+      &:hover,
+      &focus {
+        inline-size: $spacing-09;
+      }
+    }
+  }
+  &__md {
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+
+    &.condensed {
+      inline-size: calc($spacing-07 / 2);
+      justify-content: flex-start;
+
+      &:hover,
+      &focus {
+        inline-size: $spacing-07;
+      }
+    }
+  }
+  &__sm {
+    block-size: $spacing-06;
+    inline-size: $spacing-06;
+
+    &.condensed {
+      inline-size: calc($spacing-06 / 2);
+      justify-content: flex-start;
+
+      &:hover,
+      &focus {
+        inline-size: $spacing-06;
+      }
+    }
+  }
+}

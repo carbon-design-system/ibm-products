@@ -17,6 +17,9 @@ export default class SetOfUsers extends LitElement {
   @property({ type: Array, attribute: 'tags-data', reflect: true })
   usersData: any[] = [];
 
+  @property({ type: String, attribute: 'theme', reflect: true })
+  theme: string = 'white';
+
   @property({ type: Boolean, attribute: 'condensed', reflect: true })
   condensed = false;
 
@@ -136,6 +139,7 @@ export default class SetOfUsers extends LitElement {
           (user) => html`
             <span>
               <c4p-user-avatar
+                theme=${this.theme}
                 class=${classMap({
                   [`custom-avatar`]: true,
                   [`custom-avatar__${user.size}`]: true,

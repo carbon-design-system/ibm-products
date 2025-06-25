@@ -22,16 +22,21 @@ const argTypes = {
     options: ['sm', 'md', 'lg', 'xl'],
   },
   condensed: { control: { type: 'boolean' } },
+  theme: {
+    control: { type: 'radio' },
+    options: ['light', 'dark'],
+  },
 };
 
 const defaultProps = {
   usersCount: 10,
   userSize: 'lg',
   condensed: false,
+  theme: 'light',
 };
 
 const renderUsersTemplate = (args) => {
-  const { usersCount, userSize, condensed } = args;
+  const { usersCount, userSize, condensed, theme } = args;
   const usersData = generateUsers({
     count: usersCount,
     size: userSize,
@@ -46,6 +51,7 @@ const renderUsersTemplate = (args) => {
         <div class="annotation__label">Parent container</div>
         <div class="annotation__content">
           <set-of-users
+            theme=${theme}
             ?condensed=${condensed}
             .usersData=${usersData}
           ></set-of-users>

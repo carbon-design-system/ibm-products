@@ -23,7 +23,7 @@ $carbon-prefix: 'cds';
 $block-class: #{$prefix}--set-of-users;
 
 .custom-overflow {
-  @include type.type-style('heading-03', true);
+  @include type.type-style('label-01', true);
   background-color: tag.$tag-background-gray;
   color: $text-primary;
   padding: 0;

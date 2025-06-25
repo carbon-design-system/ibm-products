@@ -532,7 +532,7 @@ export const TearsheetShell = React.forwardRef(
                 neverRender={influencerPosition === 'right'}
                 element={SectionLevel3}
               >
-                {influencer}
+                <Wrap element={Layer}>{influencer}</Wrap>
               </Wrap>
               <Wrap className={`${bc}__right`}>
                 {/* Main area */}
@@ -555,7 +555,7 @@ export const TearsheetShell = React.forwardRef(
                     neverRender={influencerPosition !== 'right'}
                     element={SectionLevel3}
                   >
-                    {influencer}
+                    <Wrap element={Layer}>{influencer}</Wrap>
                   </Wrap>
                 </Wrap>
                 {includeActions && (

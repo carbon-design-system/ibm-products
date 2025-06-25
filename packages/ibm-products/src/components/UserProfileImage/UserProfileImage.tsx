@@ -98,6 +98,7 @@ export type UserProfileImageProps = UserProfileImageBaseProps & imageProps;
 
 /**
  * The user profile avatar allows for an image of the user to be displayed by passing in the image prop. By default the component will display a user icon on a blue background.
+ * @deprecated This component is deprecated.
  */
 export let UserProfileImage = React.forwardRef<
   HTMLDivElement,
@@ -226,6 +227,12 @@ export let UserProfileImage = React.forwardRef<
     );
   }
 );
+
+/**@ts-ignore*/
+UserProfileImage.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with UserAvatar`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);

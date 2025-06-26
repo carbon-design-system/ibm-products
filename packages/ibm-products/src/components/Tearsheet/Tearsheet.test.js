@@ -374,29 +374,11 @@ const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
 );
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-
   beforeAll(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
     pkg.feature['default-portal-target-body'] = false;
-    window.matchMedia = jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(), // Deprecated
-      removeListener: jest.fn(), // Deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
   });
 
   afterAll(() => {
-    window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
@@ -453,19 +435,7 @@ describe(componentName, () => {
 });
 
 describe(componentNameNarrow, () => {
-  const { ResizeObserver } = window;
-
-  beforeAll(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    pkg.feature['default-portal-target-body'] = false;
-  });
-
   afterAll(() => {
-    window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
@@ -473,20 +443,8 @@ describe(componentNameNarrow, () => {
 });
 
 describe(componentNameCreateNarrow, () => {
-  const { ResizeObserver } = window;
-
   beforeAll(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
     pkg.feature['default-portal-target-body'] = false;
-  });
-
-  afterAll(() => {
-    window.ResizeObserver = ResizeObserver;
-    pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
   commonTests(

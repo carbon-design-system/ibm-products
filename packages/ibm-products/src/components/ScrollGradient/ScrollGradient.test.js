@@ -40,15 +40,6 @@ const renderComponent = ({ ...rest } = {}, children = childrenContent) =>
   render(<ScrollGradient {...rest}>{children}</ScrollGradient>);
 
 describe(componentName, () => {
-  beforeEach(() => {
-    const observe = jest.fn();
-    const unobserve = jest.fn();
-    window.IntersectionObserver = jest.fn(() => ({
-      observe,
-      unobserve,
-    }));
-  });
-
   it('renders a component ScrollGradient', async () => {
     renderComponent({ 'data-testid': dataTestId });
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);

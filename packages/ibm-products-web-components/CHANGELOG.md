@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.18.0-rc.0`
+## `@carbon/ibm-products-web-components@0.18.0`
 ### Features :rocket:
 - feat(tearsheet): add decorator option (#7600)
 - feat: truncated text initial commit web component (#7397)

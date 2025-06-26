@@ -18,7 +18,7 @@ import { Add } from '@carbon/react/icons';
 import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'IBM Products/Internal/ButtonMenu',
+  title: 'Internal/ButtonMenu',
   component: ButtonMenu,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

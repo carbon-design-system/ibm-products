@@ -176,21 +176,8 @@ const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-  beforeEach(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-  });
-  afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
-  });
-
   it('has no accessibility violations', async () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
-
     try {
       await expect(container).toBeAccessible(componentName);
       await expect(container).toHaveNoAxeViolations();
@@ -241,9 +228,9 @@ describe(componentName, () => {
 
     expect(
       createFullPageSteps[1].classList.contains(
-        `.${blockClass}__step__step--visible-step`
+        `${blockClass}__step__step--visible-step`
       )
-    );
+    ).toBeTruthy();
   });
 
   it('renders the first step if an invalid initialStep value zero is provided', () =>
@@ -260,20 +247,19 @@ describe(componentName, () => {
         ).children;
         expect(
           createFullPageSteps[0].classList.contains(
-            `.${blockClass}__step__step--visible-step`
+            `${blockClass}__step__step--visible-step`
           )
-        );
+        ).toBeTruthy();
         // The onMount prop will get called here because the first step is rendered
         expect(onMountFn).toHaveBeenCalledTimes(1);
       }
     ));
-  it('renders the first step if an invalid initialStep value bigger than step length is provided', () =>
+  it('renders the first step if an invalid initialStep value bigger than step length is provided', async () =>
     expectWarn(
       `${CreateFullPage.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateFullPage.displayName} has.`,
       () => {
         const { container } = renderCreateFullPage({
           ...defaultFullPageProps,
-          // Starting on 0 step is invalid since the steps start with a value of 1
           // This will cause a console warning
           initialStep: 10,
         });
@@ -282,9 +268,9 @@ describe(componentName, () => {
         ).children;
         expect(
           createFullPageSteps[0].classList.contains(
-            `.${blockClass}__step__step--visible-step`
+            `${blockClass}__step__step--visible-step`
           )
-        );
+        ).toBeTruthy();
         // The onMount prop will get called here because the first step is rendered
         expect(onMountFn).toHaveBeenCalledTimes(1);
       }
@@ -329,13 +315,13 @@ describe(componentName, () => {
     const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
     const createFullPageSteps = container.querySelector(
-      `.${blockClass}__content`
+      `.${blockClass}__content .${blockClass}__form`
     ).children;
     expect(
-      createFullPageSteps[0].classList.contains(
-        `.${blockClass}__step__step--visible-step`
+      createFullPageSteps[1].classList.contains(
+        `${blockClass}__step__step--visible-step`
       )
-    );
+    ).toBeTruthy();
 
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
@@ -349,13 +335,13 @@ describe(componentName, () => {
     const backButtonElement = screen.getByText(backButtonText);
     await act(() => click(nextButtonElement));
     const createFullPageSteps = container.querySelector(
-      `.${blockClass}__content`
+      `.${blockClass}__content .${blockClass}__form`
     ).children;
     expect(
       createFullPageSteps[0].classList.contains(
-        `.${blockClass}__step__step--visible-step`
+        `${blockClass}__step__step--visible-step`
       )
-    );
+    ).not.toBeTruthy();
 
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
@@ -372,7 +358,7 @@ describe(componentName, () => {
     const createFullPageModal = container.querySelector(
       `.${blockClass}__modal`
     );
-    expect(container.classList.contains(createFullPageModal));
+    expect(container).toContainElement(createFullPageModal);
     const modalCancelButtonElement = screen.getByText(modalDangerButtonText);
     const modalReturnButtonElement = screen.getByText(modalSecondaryButtonText);
     await act(() => click(modalCancelButtonElement));
@@ -572,9 +558,9 @@ describe(componentName, () => {
     ).children;
     expect(
       fullPageChildren[0].classList.contains(
-        `.${blockClass}__step__step--visible-step`
+        `${blockClass}__step__step--visible-step`
       )
-    );
+    ).toBeTruthy();
   });
 
   it('should render a fieldset element around FullPageStep children when `hasFieldset` prop is provided', async () => {
@@ -582,11 +568,13 @@ describe(componentName, () => {
       ...defaultFullPageProps,
     });
     const createFullPageSteps = container.querySelector(
-      `.${blockClass}__content`
+      `.${blockClass}__content .${blockClass}__form`
     ).children;
     expect(
-      createFullPageSteps[0].classList.contains(`.${blockClass}__step-fieldset`)
-    );
+      createFullPageSteps[0].children[1].classList.contains(
+        `${blockClass}__step-fieldset`
+      )
+    ).toBeTruthy();
   });
 
   it('renders a header if title is provided ', () => {
@@ -691,8 +679,15 @@ describe(componentName, () => {
     const influencerSteps = container.querySelector(
       `.${pkg.prefix}--create-influencer__progress-indicator`
     );
-
-    expect(influencerSteps.childNodes[0].classList.contains('complete'));
-    expect(influencerSteps.childNodes[1].classList.contains('current'));
+    expect(
+      influencerSteps.childNodes[0].classList.contains(
+        `${carbon.prefix}--progress-step--complete`
+      )
+    ).toBe(true);
+    expect(
+      influencerSteps.childNodes[1].classList.contains(
+        `${carbon.prefix}--progress-step--current`
+      )
+    ).toBe(true);
   });
 });

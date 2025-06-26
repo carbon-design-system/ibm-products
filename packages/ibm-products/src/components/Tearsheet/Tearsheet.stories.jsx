@@ -46,7 +46,7 @@ import { TearsheetNarrow } from './TearsheetNarrow';
 // import mdx from './Tearsheet.mdx';
 
 export default {
-  title: 'IBM Products/Components/Tearsheet',
+  title: 'Components/Tearsheet',
   component: Tearsheet,
   tags: ['autodocs'],
   parameters: {

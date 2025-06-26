@@ -15,7 +15,7 @@ test.describe('NotificationsPanel @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
-      id: 'ibm-products-components-notifications-panel-notificationspanel--default',
+      id: 'components-notificationspanel--default',
       globals: {
         carbonTheme: 'white',
       },
@@ -28,15 +28,13 @@ test.describe('NotificationsPanel @avt', () => {
   test('@avt-notification-panel-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
-      id: 'ibm-products-components-notifications-panel-notificationspanel--default',
+      id: 'components-notificationspanel--default',
       globals: {
         carbonTheme: 'white',
       },
     });
 
-    const notificationPanel = await page.locator(
-      `#${pkg.prefix}--notifications-panel`
-    );
+    const notificationPanel = await page.locator('[role="dialog"]');
     await expect(notificationPanel).toBeVisible();
 
     for (let i = 0; i < 10; i++) {
@@ -52,5 +50,53 @@ test.describe('NotificationsPanel @avt', () => {
       name: 'Notifications',
     });
     await expect(notificationTrigger).toBeFocused();
+  });
+  test('@avt-notification-panel-focus-return-to-trigger', async ({ page }) => {
+    await visitStory(page, {
+      component: 'NotificationsPanel',
+      id: 'components-notificationspanel--default',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    const notificationPanel = await page.locator('[role="dialog"]');
+    await expect(notificationPanel).toBeVisible();
+    const notificationTrigger = page.locator(
+      'button[aria-label="Open notifications"]'
+    );
+    await page.evaluate(() => {
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+    await expect(notificationPanel).not.toBeVisible({ timeout: 2000 });
+    await expect(async () => {
+      const isFocused = await notificationTrigger.evaluate(
+        (el) => el === document.activeElement
+      );
+      expect(isFocused).toBeTruthy();
+    }).toPass({ timeout: 2000 });
+  });
+  test('@avt-notification-panel-doesn-not-focus-return-to-trigger-when-clicked-on-actionable-elements', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'NotificationsPanel',
+      id: 'components-notificationspanel--default',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    const notificationPanel = await page.locator('[role="dialog"]');
+    await expect(notificationPanel).toBeVisible();
+    const notificationTrigger = page.locator(
+      'button[aria-label="Open notifications"]'
+    );
+    const addNotificationButton = page.getByRole('button', {
+      name: 'Add new notification',
+      exact: true,
+    });
+    await addNotificationButton.click();
+    await expect(notificationPanel).not.toBeVisible({ timeout: 2000 });
+    await expect(notificationTrigger).not.toBeFocused();
+    await expect(addNotificationButton).toBeFocused({ timeout: 2000 });
   });
 });

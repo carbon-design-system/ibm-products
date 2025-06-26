@@ -73,7 +73,7 @@ const dateTimeLocaleOptions = {
 };
 
 export default {
-  title: 'IBM Products/Components/Notifications panel/NotificationsPanel',
+  title: 'Components/NotificationsPanel',
   component: NotificationsPanel,
   tags: ['autodocs'],
   parameters: {

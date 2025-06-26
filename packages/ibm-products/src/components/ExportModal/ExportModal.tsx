@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -18,6 +18,7 @@ import {
   RadioButtonGroup,
   TextInput,
   unstable_FeatureFlags as FeatureFlags,
+  usePrefix,
 } from '@carbon/react';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/react/icons';
 import React, {
@@ -32,7 +33,7 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -200,6 +201,7 @@ export let ExportModal = forwardRef(
     // by default (if it exists) use the first extension in the extension array
     const [extension, setExtension] = useState('');
     const renderPortalUse = usePortalTarget(portalTargetIn);
+    const carbonPrefix = usePrefix();
 
     useEffect(() => {
       setName(filename);
@@ -215,11 +217,11 @@ export let ExportModal = forwardRef(
     useEffect(() => {
       if (successful) {
         const button: HTMLButtonElement | null = document.querySelector(
-          `.${blockClass} .${carbon.prefix}--modal-close-button button`
+          `.${blockClass} .${carbonPrefix}--modal-close-button button`
         );
         button?.focus();
       }
-    }, [successful, blockClass]);
+    }, [successful, blockClass, carbonPrefix]);
 
     const onNameChangeHandler = (evt) => {
       setName(evt.target.value);

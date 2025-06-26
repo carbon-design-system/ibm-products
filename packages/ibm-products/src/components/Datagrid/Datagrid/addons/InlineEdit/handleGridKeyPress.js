@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { carbon, pkg } from '../../../../../settings';
+import { pkg } from '../../../../../settings';
 import { handleMultipleKeys } from './handleMultipleKeys';
 import { getCellIdAsObject } from './InlineEditContext/getCellIdAsObject';
 
@@ -19,6 +19,7 @@ export const handleGridKeyPress = ({
   keysPressedList,
   usingMac,
   ref,
+  carbonPrefix,
 }) => {
   const { key } = event;
   const { gridActive, activeCellId, editId } = state;
@@ -70,7 +71,7 @@ export const handleGridKeyPress = ({
   // Checks if the date picker is open
   const datePickerIsActive = () => {
     const focusedCalendarElement = document.querySelector(
-      `.${carbon.prefix}--date-picker__input.flatpickr-input.active`
+      `.${carbonPrefix}--date-picker__input.flatpickr-input.active`
     );
     if (
       focusedCalendarElement ||

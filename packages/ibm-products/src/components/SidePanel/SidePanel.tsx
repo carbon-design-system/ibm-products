@@ -14,6 +14,7 @@ import {
   IconButton,
   Section,
 } from '@carbon/react';
+import { useFeatureFlag } from '../FeatureFlags';
 // Import portions of React that are needed.
 import React, {
   ForwardedRef,
@@ -32,6 +33,7 @@ import {
 } from '../../global/js/hooks';
 
 import { ActionSet } from '../ActionSet';
+import { Resizer } from './resizer/Resizer';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -92,6 +94,11 @@ type SidePanelBaseProps = {
    * Sets the current step of the side panel
    */
   currentStep?: number;
+
+  /**
+   * Show/hide the "X" close button.
+   */
+  hideCloseButton?: boolean;
 
   /**
    * Unique identifier
@@ -231,6 +238,7 @@ const defaults = {
   animateTitle: true,
   closeIconDescription: 'Close',
   currentStep: 0,
+  hideCloseButton: false,
   navigationBackIconDescription: 'Back',
   placement: 'right',
   size: 'md',
@@ -254,6 +262,7 @@ const SidePanelBase = React.forwardRef(
       condensedActions,
       currentStep = defaults.currentStep,
       decorator,
+      hideCloseButton = defaults.hideCloseButton,
       id = blockClass,
       includeOverlay,
       labelText,
@@ -295,7 +304,9 @@ const SidePanelBase = React.forwardRef(
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
     const panelRefValue = sidePanelRef.current;
     const previousOpen = usePreviousValue(open);
-
+    const enableResizer = useFeatureFlag('enableSidepanelResizer');
+    const sidePanelWidth = useRef<number | undefined>(undefined);
+    const accumulatedDeltaRef = useRef(0);
     const shouldReduceMotion = usePrefersReducedMotion();
     const exitAnimationName = shouldReduceMotion
       ? 'side-panel-exit-reduced'
@@ -314,12 +325,109 @@ const SidePanelBase = React.forwardRef(
     };
 
     useEffect(() => {
+      if (!enableResizer) {
+        return;
+      }
+      const parentEl = sidePanelRef.current?.parentElement;
+      if (parentEl) {
+        parentEl.style.removeProperty('--c4p-side-panel-modified-size');
+      }
+    }, [size, enableResizer, sidePanelRef]);
+
+    useEffect(() => {
+      if (!enableResizer) {
+        return;
+      }
+      sidePanelWidth.current = sidePanelRef?.current?.clientWidth;
+    }, [sidePanelRef, sidePanelRef?.current?.clientWidth, enableResizer]);
+
+    useEffect(() => {
       if (open && !titleRef?.current) {
         setDoAnimateTitle(false);
       } else {
         setDoAnimateTitle(animateTitle);
       }
     }, [animateTitle, open]);
+
+    const onResize = useCallback(
+      (event, delta) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const setWidth = (width: number | string) => {
+          const parentEl = sidePanelRef.current?.parentElement;
+          if (parentEl) {
+            parentEl.style.setProperty(
+              '--c4p-side-panel-modified-size',
+              typeof width === 'number' ? `${width}px` : width
+            );
+          }
+        };
+
+        if (event.type === 'keydown') {
+          const key = (event as KeyboardEvent).key;
+          switch (key) {
+            case 'Home':
+              setWidth('75vw');
+              break;
+            case 'End':
+              setWidth(SIDE_PANEL_SIZES['xs']);
+              break;
+            case 'ArrowLeft':
+            case 'ArrowRight':
+              accumulatedDeltaRef.current += delta;
+              setWidth(
+                (sidePanelWidth.current ?? 0) -
+                  (placement === 'right'
+                    ? accumulatedDeltaRef.current
+                    : -accumulatedDeltaRef.current)
+              );
+              break;
+          }
+          return;
+        }
+
+        if (sidePanelRef.current?.style) {
+          sidePanelRef.current.style.transition = 'none';
+        }
+        setWidth(
+          (sidePanelWidth.current ?? 0) -
+            (placement === 'right' ? delta : -delta)
+        );
+      },
+      [placement, sidePanelRef, sidePanelWidth]
+    );
+
+    const onResizeEnd = useCallback(
+      (_, ref) => {
+        accumulatedDeltaRef.current = 0;
+        sidePanelRef.current?.style?.removeProperty('transition');
+
+        const percent = Math.round(
+          ((sidePanelRef.current.clientWidth || 0) / window.innerWidth) * 100
+        );
+        // custom a11y announcements
+        ref.current.setAttribute(
+          'aria-label',
+          `side panel is covering ${percent}% of screen`
+        );
+
+        sidePanelWidth.current = sidePanelRef.current?.clientWidth;
+      },
+      [sidePanelRef]
+    );
+
+    const onDoubleClick = useCallback(() => {
+      sidePanelWidth.current = Math.min(
+        parseFloat(SIDE_PANEL_SIZES[size]) * 16,
+        window.innerWidth * 0.75
+      );
+
+      const parentEl = sidePanelRef.current?.parentElement;
+      if (parentEl) {
+        parentEl.style.removeProperty('--c4p-side-panel-modified-size');
+      }
+    }, [sidePanelRef, size]);
 
     const titleItemsStyles = useCallback(
       (progress) => {
@@ -681,6 +789,8 @@ const SidePanelBase = React.forwardRef(
         [`${blockClass}--right-placement`]: placement === 'right',
         [`${blockClass}--left-placement`]: placement === 'left',
         [`${blockClass}--slide-in`]: slideIn,
+        [`${blockClass}--enable-sidepanel-resizer`]:
+          enableResizer && window.innerWidth > 768,
         [`${blockClass}--has-decorator`]: decorator,
         [`${blockClass}--has-slug`]: slug,
         [`${blockClass}--has-ai-label`]: aiLabel,
@@ -791,21 +901,23 @@ const SidePanelBase = React.forwardRef(
           {/* decorator and close */}
           <div className={`${blockClass}__decorator-and-close`}>
             {normalizedDecorator}
-            <IconButton
-              className={`${blockClass}__close-button`}
-              label={closeIconDescription}
-              onClick={onRequestClose}
-              onKeyDown={slideIn ? undefined : handleEscapeKey}
-              ref={closeRef}
-              align="left"
-            >
-              <Close
-                size={20}
-                aria-hidden="true"
-                tabIndex="-1"
-                className={`${blockClass}--btn__icon`}
-              />
-            </IconButton>
+            {!hideCloseButton && (
+              <IconButton
+                className={`${blockClass}__close-button`}
+                label={closeIconDescription}
+                onClick={onRequestClose}
+                onKeyDown={slideIn ? undefined : handleEscapeKey}
+                ref={closeRef}
+                align="left"
+              >
+                <Close
+                  size={20}
+                  aria-hidden="true"
+                  tabIndex="-1"
+                  className={`${blockClass}--btn__icon`}
+                />
+              </IconButton>
+            )}
           </div>
           {/* subtitle */}
           {subtitle && (
@@ -912,6 +1024,16 @@ const SidePanelBase = React.forwardRef(
           onAnimationStart={onAnimationStart}
           onKeyDown={handleKeyDown}
         >
+          {!slideIn && enableResizer && window.innerWidth > 768 && (
+            <Resizer
+              className={`${blockClass}__resizer`}
+              orientation="vertical"
+              aria-valuenow={sidePanelWidth.current}
+              onResize={onResize}
+              onResizeEnd={onResizeEnd}
+              onDoubleClick={onDoubleClick}
+            />
+          )}
           {/* header */}
           {renderHeader()}
 
@@ -1049,6 +1171,11 @@ SidePanel.propTypes = {
    * Sets the current step of the side panel
    */
   currentStep: PropTypes.number,
+
+  /**
+   * Show/hide the "X" close button.
+   */
+  hideCloseButton: PropTypes.bool,
 
   /**
    * Unique identifier

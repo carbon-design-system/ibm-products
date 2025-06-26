@@ -26,7 +26,7 @@ type overflowAction = {
   id?: string;
   itemText?: string;
   onClick?: (event: MouseEvent) => void;
-  onKeydown?: (event: KeyboardEvent) => void;
+  onKeyDown?: (event: KeyboardEvent) => void;
 };
 type PlacementType = 'top' | 'bottom';
 type ClickZoneType = 'one' | 'two' | 'three';

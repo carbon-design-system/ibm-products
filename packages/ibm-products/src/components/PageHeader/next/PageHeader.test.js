@@ -8,28 +8,30 @@
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { unstable__PageHeader as PageHeader } from '../../';
+import { unstable__PageHeader as PageHeader } from '../../..';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar as PageHeaderBreadcrumbBarDirect,
   PageHeaderContent as PageHeaderContentDirect,
-  PageHeaderContentPageActions as PageHeaderContentPageActionsDirect,
   PageHeaderTabBar as PageHeaderTabBarDirect,
-} from '../PageHeader';
-import * as hooks from '../../internal/useMatchMedia';
+} from './PageHeader';
 import { breakpoints } from '@carbon/layout';
-import { Breadcrumb, BreadcrumbItem } from '../Breadcrumb';
-import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+} from '@carbon/react';
 import { Bee } from '@carbon/icons-react';
 
-import useOverflowItems from '../../internal/useOverflowItems';
-const mockUseOverflowItems = useOverflowItems;
-
-const prefix = 'cds';
+import { useOverflowItems } from '../../../global/js/hooks/useOverflowItems';
+jest.mock('../../../global/js/hooks/useOverflowItems');
 
 let mockOverflowOnChange = jest.fn();
 
-jest.mock('../../internal/useOverflowItems');
+jest.mock('../../../global/js/hooks/useOverflowItems');
 
 jest.mock('@carbon/utilities', () => ({
   createOverflowHandler: jest.fn(({ onChange }) => {
@@ -37,16 +39,10 @@ jest.mock('@carbon/utilities', () => ({
   }),
 }));
 
-describe('PageHeader', () => {
-  beforeEach(() => {
-    mockUseOverflowItems.mockReset();
-    mockUseOverflowItems.mockReturnValue({
-      visibleItems: [],
-      hiddenItems: [],
-      itemRefHandler: jest.fn(),
-    });
-  });
+const prefix = 'c4p';
+const carbonPrefix = 'cds';
 
+describe('PageHeader', () => {
   describe('export configuration', () => {
     it('supports dot notation component namespacing from the main entrypoint', () => {
       const { container } = render(
@@ -124,7 +120,7 @@ describe('PageHeader', () => {
       );
 
       const breadcrumbs = container.getElementsByClassName(
-        `${prefix}--breadcrumb-item`
+        `${carbonPrefix}--breadcrumb-item`
       );
 
       expect(breadcrumbs.length).toBe(2);
@@ -280,7 +276,7 @@ describe('PageHeader', () => {
 
       // check that the parent div of menu button is hidden
       const menuButton = container.querySelector(
-        `.${prefix}--menu-button__container`
+        `.${carbonPrefix}--menu-button__container`
       );
       const parent = menuButton?.parentElement;
       expect(parent).toHaveAttribute('data-hidden');
@@ -302,7 +298,9 @@ describe('PageHeader', () => {
       });
       expect(menuButton).toBeInTheDocument();
 
-      await userEvent.click(menuButton);
+      await act(() => {
+        userEvent.click(menuButton);
+      });
 
       const menu = await screen.findByRole('menu');
       expect(menu).toBeInTheDocument();
@@ -336,12 +334,12 @@ describe('PageHeader', () => {
     it('should call onClick of hidden action when MenuItem is clicked', async () => {
       render(<PageHeader.ContentPageActions actions={mockPageActions} />);
 
-      act(() => {
+      await act(() =>
         mockOverflowOnChange(
           [mockPageActions[0]], // visible
           [mockPageActions[1]] // hidden
-        );
-      });
+        )
+      );
 
       // Find the menu button
       const menuButton = await screen.findByRole('button', {
@@ -349,12 +347,15 @@ describe('PageHeader', () => {
       });
       expect(menuButton).toBeInTheDocument();
 
-      await userEvent.click(menuButton);
+      await act(() => userEvent.click(menuButton));
 
       const menuItem = await screen.findByRole('menuitem', {
         name: /Action 2/i,
       });
-      await userEvent.click(menuItem);
+
+      expect(menuItem).toBeInTheDocument();
+
+      await act(() => userEvent.click(menuItem));
 
       expect(onClickMock).toHaveBeenCalledTimes(1);
     });
@@ -387,8 +388,17 @@ describe('PageHeader', () => {
 
   describe('PageHeader.HeroImage component api', () => {
     beforeEach(() => {
-      jest.resetModules();
-      jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation((query) => ({
+          matches: false,
+          media: query,
+          onchange: null,
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
     });
 
     it('should place className on the outermost element', () => {
@@ -399,6 +409,18 @@ describe('PageHeader', () => {
     });
 
     it('should use a 2x1 ratio on large screens', () => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation((query) => ({
+          matches: true,
+          media: query,
+          onchange: null,
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+
       const { container } = render(
         <PageHeader.HeroImage>
           <picture>
@@ -419,12 +441,12 @@ describe('PageHeader', () => {
         </PageHeader.HeroImage>
       );
 
-      expect(container.firstChild).toHaveClass(`${prefix}--aspect-ratio--2x1`);
+      expect(container.firstChild).toHaveClass(
+        `${carbonPrefix}--aspect-ratio--2x1`
+      );
     });
 
     it('should use a 3x2 ratio on small screens', () => {
-      jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => false);
-
       const { container } = render(
         <PageHeader.HeroImage>
           <picture>
@@ -445,7 +467,9 @@ describe('PageHeader', () => {
         </PageHeader.HeroImage>
       );
 
-      expect(container.firstChild).toHaveClass(`${prefix}--aspect-ratio--3x2`);
+      expect(container.firstChild).toHaveClass(
+        `${carbonPrefix}--aspect-ratio--3x2`
+      );
     });
   });
 
@@ -471,7 +495,7 @@ describe('PageHeader', () => {
     ];
 
     it('should render tags when provided', () => {
-      mockUseOverflowItems.mockReturnValue({
+      useOverflowItems.mockReturnValue({
         visibleItems: mockTags,
         hiddenItems: [],
         itemRefHandler: jest.fn(),
@@ -493,7 +517,7 @@ describe('PageHeader', () => {
     });
 
     it('should render tags alongside tabs', () => {
-      mockUseOverflowItems.mockReturnValue({
+      useOverflowItems.mockReturnValue({
         visibleItems: mockTags,
         hiddenItems: [],
         itemRefHandler: jest.fn(),
@@ -516,7 +540,7 @@ describe('PageHeader', () => {
     });
 
     it('should apply correct classes to tags container', () => {
-      mockUseOverflowItems.mockReturnValue({
+      useOverflowItems.mockReturnValue({
         visibleItems: mockTags,
         hiddenItems: [],
         itemRefHandler: jest.fn(),
@@ -531,7 +555,7 @@ describe('PageHeader', () => {
     });
 
     it('should maintain tab focus management with tags present', async () => {
-      mockUseOverflowItems.mockReturnValue({
+      useOverflowItems.mockReturnValue({
         visibleItems: mockTags,
         hiddenItems: [],
         itemRefHandler: jest.fn(),
@@ -577,7 +601,7 @@ describe('PageHeader', () => {
 
     describe('Overflow functionality', () => {
       it('should handle overflow items correctly', () => {
-        mockUseOverflowItems.mockReturnValue({
+        useOverflowItems.mockReturnValue({
           visibleItems: mockTags.slice(0, 2), // Only Tag 1 and Tag 2
           hiddenItems: mockTags.slice(2), // Only Tag 3
           itemRefHandler: jest.fn(),
@@ -607,7 +631,7 @@ describe('PageHeader', () => {
       });
 
       it('should not show overflow tag when all items are visible', () => {
-        mockUseOverflowItems.mockReturnValue({
+        useOverflowItems.mockReturnValue({
           visibleItems: mockTags,
           hiddenItems: [],
           itemRefHandler: jest.fn(),
@@ -625,7 +649,7 @@ describe('PageHeader', () => {
       });
 
       it('should show hidden tags in popover when overflow tag is clicked', async () => {
-        mockUseOverflowItems.mockReturnValue({
+        useOverflowItems.mockReturnValue({
           visibleItems: mockTags.slice(0, 2),
           hiddenItems: mockTags.slice(2),
           itemRefHandler: jest.fn(),
@@ -639,7 +663,7 @@ describe('PageHeader', () => {
         expect(overflowButton).toHaveAttribute('aria-expanded', 'false');
 
         // Click to open popover
-        await userEvent.click(overflowButton);
+        await await act(() => userEvent.click(overflowButton));
 
         // Check that popover is now open
         await waitFor(() => {
@@ -648,7 +672,7 @@ describe('PageHeader', () => {
       });
 
       it('should close popover when clicked outside', async () => {
-        mockUseOverflowItems.mockReturnValue({
+        useOverflowItems.mockReturnValue({
           visibleItems: mockTags.slice(0, 2),
           hiddenItems: mockTags.slice(2),
           itemRefHandler: jest.fn(),
@@ -659,7 +683,7 @@ describe('PageHeader', () => {
         const overflowButton = screen.getByRole('button', { name: '+1' });
 
         // Click to open popover
-        await userEvent.click(overflowButton);
+        await await act(() => userEvent.click(overflowButton));
 
         // Verify popover is open
         await waitFor(() => {
@@ -667,7 +691,7 @@ describe('PageHeader', () => {
         });
 
         // Click outside popover
-        await userEvent.click(document.body);
+        await await act(() => userEvent.click(document.body));
 
         // Verify popover is closed
         await waitFor(() => {
@@ -676,7 +700,7 @@ describe('PageHeader', () => {
       });
 
       it('should handle window resize by closing popover', async () => {
-        mockUseOverflowItems.mockReturnValue({
+        useOverflowItems.mockReturnValue({
           visibleItems: mockTags.slice(0, 2),
           hiddenItems: mockTags.slice(2),
           itemRefHandler: jest.fn(),
@@ -687,7 +711,7 @@ describe('PageHeader', () => {
         const overflowButton = screen.getByRole('button', { name: '+1' });
 
         // Click to open popover
-        await userEvent.click(overflowButton);
+        await act(() => userEvent.click(overflowButton));
 
         // Verify popover is open
         await waitFor(() => {
@@ -707,12 +731,14 @@ describe('PageHeader', () => {
 
       it('should handle useOverflowItems returning null/undefined', () => {
         // Mock the hook to return undefined/null
-        mockUseOverflowItems.mockReturnValue(null);
+        useOverflowItems.mockReturnValue(null);
 
         render(<PageHeader.TabBar tags={mockTags} />);
 
         // Should use fallback values
-        const tagsContainer = document.querySelector('.cds--page-header__tags');
+        const tagsContainer = document.querySelector(
+          `.${prefix}--page-header__tags`
+        );
         expect(tagsContainer).toBeInTheDocument();
 
         // Should not render any tags (fallback to empty arrays)
@@ -721,7 +747,7 @@ describe('PageHeader', () => {
 
       it('should handle useOverflowItems returning undefined properties', () => {
         // Mock with missing properties
-        mockUseOverflowItems.mockReturnValue({
+        useOverflowItems.mockReturnValue({
           visibleItems: undefined,
           hiddenItems: undefined,
           itemRefHandler: undefined,
@@ -730,13 +756,15 @@ describe('PageHeader', () => {
         render(<PageHeader.TabBar tags={mockTags} />);
 
         // Should use fallback values from the || operator
-        const tagsContainer = document.querySelector('.cds--page-header__tags');
+        const tagsContainer = document.querySelector(
+          `.${prefix}--page-header__tags`
+        );
         expect(tagsContainer).toBeInTheDocument();
       });
 
       it('should handle useOverflowItems with partial data', () => {
         // Mock with only some properties
-        mockUseOverflowItems.mockReturnValue({
+        useOverflowItems.mockReturnValue({
           visibleItems: mockTags.slice(0, 1),
           // hiddenItems and itemRefHandler missing
         });

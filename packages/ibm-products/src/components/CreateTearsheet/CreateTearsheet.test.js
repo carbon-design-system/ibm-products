@@ -179,29 +179,12 @@ const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
 );
 
 describe(CreateTearsheet.displayName, () => {
-  const { ResizeObserver } = window;
-
   beforeEach(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
-      root: null,
-      rootMargin: '',
-      thresholds: [],
-      disconnect: () => null,
-      observe: () => null,
-      takeRecords: () => [],
-      unobserve: () => null,
-    }));
     jest.useFakeTimers();
     pkg.feature['default-portal-target-body'] = false;
   });
 
   afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
     jest.useRealTimers();
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });

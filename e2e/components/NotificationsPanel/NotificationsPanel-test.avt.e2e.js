@@ -62,7 +62,7 @@ test.describe('NotificationsPanel @avt', () => {
     const notificationPanel = await page.locator('[role="dialog"]');
     await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(
-      'button[aria-label="Close notifications"]'
+      'button[aria-label="Open notifications"]'
     );
     await page.evaluate(() => {
       document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -88,7 +88,7 @@ test.describe('NotificationsPanel @avt', () => {
     const notificationPanel = await page.locator('[role="dialog"]');
     await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(
-      'button[aria-label="Close notifications"]'
+      'button[aria-label="Open notifications"]'
     );
     const addNotificationButton = page.getByRole('button', {
       name: 'Add new notification',

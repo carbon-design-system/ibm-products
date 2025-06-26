@@ -35,7 +35,7 @@ test.describe('NotificationsPanel @avt', () => {
     });
 
     const notificationPanel = await page.locator(
-      `#${pkg.prefix}--notifications-panel`
+      `.#${pkg.prefix}--notifications-panel`
     );
     await expect(notificationPanel).toBeVisible();
 
@@ -62,7 +62,7 @@ test.describe('NotificationsPanel @avt', () => {
       },
     });
     const notificationPanel = await page.locator(
-      `#${pkg.prefix}--notifications-panel`
+      `.#${pkg.prefix}--notifications-panel`
     );
     await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(
@@ -90,7 +90,7 @@ test.describe('NotificationsPanel @avt', () => {
       },
     });
     const notificationPanel = await page.locator(
-      `#${pkg.prefix}--notifications-panel`
+      `.#${pkg.prefix}--notifications-panel`
     );
     await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(

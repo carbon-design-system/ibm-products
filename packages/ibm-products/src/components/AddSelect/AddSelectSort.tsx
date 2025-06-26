@@ -7,7 +7,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
+import {
+  OverflowMenu,
+  MenuItem,
+  unstable_FeatureFlags as FeatureFlags,
+} from '@carbon/react';
 import { ArrowsVertical, ArrowUp, ArrowDown } from '@carbon/react/icons';
 import { pkg } from '../../settings';
 import { SortOption } from './types';
@@ -33,23 +37,13 @@ export const AddSelectSort = ({
         const opts = [
           {
             id: `${cur}-asc`,
-            itemText: (
-              <>
-                <ArrowUp size={16} />
-                {cur}
-              </>
-            ),
+            label: cur,
             direction: 'asc',
             attribute: cur,
           },
           {
             id: `${cur}-desc`,
-            itemText: (
-              <>
-                <ArrowDown size={16} />
-                {cur}
-              </>
-            ),
+            label: cur,
             direction: 'desc',
             attribute: cur,
           },
@@ -67,24 +61,27 @@ export const AddSelectSort = ({
   return (
     <div className={blockClass}>
       {sortByOpts.length > 0 && (
-        <OverflowMenu
-          renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
-          className={`${blockClass}_overflow`}
-          flipped
-          aria-label={sortByLabel}
-          iconDescription={sortByLabel}
-        >
-          {sortByOpts.map((opt) => {
-            return (
-              <OverflowMenuItem
-                className={`${blockClass}_overflow-item`}
-                key={opt?.id}
-                itemText={opt?.itemText}
-                onClick={() => sortHandler(opt)}
-              />
-            );
-          })}
-        </OverflowMenu>
+        <FeatureFlags enableV12Overflowmenu>
+          <OverflowMenu
+            // @ts-ignore // TODO: remove after carbon fixes this ts error
+            autoAlign
+            menuAlignment="bottom-end"
+            renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
+            className={`${blockClass}_overflow`}
+            label={sortByLabel}
+          >
+            {sortByOpts.map((opt) => {
+              return (
+                <MenuItem
+                  className={`${blockClass}_overflow-item`}
+                  key={opt?.id}
+                  label={`${opt?.label} ${opt?.direction}`}
+                  onClick={() => sortHandler(opt)}
+                />
+              );
+            })}
+          </OverflowMenu>
+        </FeatureFlags>
       )}
     </div>
   );

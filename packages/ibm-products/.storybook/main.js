@@ -1,28 +1,18 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import glob from 'fast-glob';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
+import { getAutoTrack } from '../../../scripts/get-auto-track-script';
 
-const storyGlobs = [
-  '../src/**/*.stories.*',
-  '../../core/src/**/*.stories.*',
-  '../../core/src/**/*.mdx',
+const stories = [
+  '../src/**/!(*.internal).stories.*',
+  '../../core/src/**/!(*.internal).stories.*',
   '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
 ];
-
-const stories = glob.sync(storyGlobs, {
-  ignore: [
-    '../../**!(node_modules)/**!(node_modules)/*.mdx',
-    '../../**!(node_modules)/**!(node_modules)/*.stories.*',
-  ],
-  cwd: __dirname,
-});
 
 export default {
   staticDirs: ['../public'],
@@ -31,7 +21,6 @@ export default {
     getAbsolutePath('@storybook/addon-actions'),
     getAbsolutePath('@storybook/addon-controls'),
     getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-storysource'),
     getAbsolutePath('@storybook/addon-viewport'),
     {
       name: '@storybook/addon-docs',
@@ -73,15 +62,7 @@ export default {
       ${head}
       ${
         process.env.NODE_ENV !== 'development'
-          ? `
-          <script src="https://cdn.amplitude.com/script/f6f1d9025934f04f5a2a8bebb74abf2f.js"></script>
-          <script>
-            window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-            window.amplitude.init('f6f1d9025934f04f5a2a8bebb74abf2f', {
-              "fetchRemoteConfig":true,
-              "autocapture":true
-            });
-          </script>`
+          ? getAutoTrack('ibm-products-react-storybook')
           : ''
       }
     `;

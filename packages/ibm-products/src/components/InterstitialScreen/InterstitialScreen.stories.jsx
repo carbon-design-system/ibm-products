@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '@carbon/react';
 
 import { InterstitialScreen } from '.';
@@ -25,7 +25,7 @@ const blockClass = `${pkg.prefix}--interstitial-screen`;
 export default {
   title: 'Experimental/Onboarding/InterstitialScreen',
   component: InterstitialScreen,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   subcomponents: {
     Header: InterstitialScreen.Header,
     Body: InterstitialScreen.Body,
@@ -139,13 +139,14 @@ const defaultProps = {
 };
 export const Modal = () => {
   const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
-
+  const launcherButtonRef = useRef(null);
   return (
     <>
       <Button
         onClick={() => {
           setShowInterstitialScreen(true);
         }}
+        ref={launcherButtonRef}
       >
         Show Interstitial modal
       </Button>
@@ -156,6 +157,7 @@ export const Modal = () => {
           setShowInterstitialScreen(false);
         }}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}
@@ -175,13 +177,14 @@ export const Modal = () => {
 
 export const ModalWithMultipleSteps = () => {
   const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
-
+  const launcherButtonRef = useRef(null);
   return (
     <>
       <Button
         onClick={() => {
           setShowInterstitialScreen(true);
         }}
+        ref={launcherButtonRef}
       >
         Show Interstitial modal
       </Button>
@@ -192,6 +195,7 @@ export const ModalWithMultipleSteps = () => {
           setShowInterstitialScreen(false);
         }}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}
@@ -210,13 +214,14 @@ export const ModalWithMultipleSteps = () => {
 
 export const WithCustomActionButtons = () => {
   const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
-
+  const launcherButtonRef = useRef(null);
   return (
     <>
       <Button
         onClick={() => {
           setShowInterstitialScreen(true);
         }}
+        ref={launcherButtonRef}
       >
         Show Interstitial modal
       </Button>
@@ -227,6 +232,7 @@ export const WithCustomActionButtons = () => {
           setShowInterstitialScreen(false);
         }}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}
@@ -315,6 +321,7 @@ export const WithCustomActionButtons = () => {
 };
 export const WithAsynchronousActionCallback = () => {
   const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
+  const launcherButtonRef = useRef(null);
 
   const onAction = async (actionType, config) => {
     if (actionType !== 'skip') {
@@ -331,6 +338,7 @@ export const WithAsynchronousActionCallback = () => {
         onClick={() => {
           setShowInterstitialScreen(true);
         }}
+        ref={launcherButtonRef}
       >
         Show Interstitial modal
       </Button>
@@ -341,6 +349,7 @@ export const WithAsynchronousActionCallback = () => {
           setShowInterstitialScreen(false);
         }}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}
@@ -359,6 +368,7 @@ export const WithAsynchronousActionCallback = () => {
 export const fullScreen = () => {
   const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
   useState(true);
+  const launcherButtonRef = useRef(null);
 
   return (
     <>
@@ -366,6 +376,7 @@ export const fullScreen = () => {
         onClick={() => {
           setShowInterstitialScreen(true);
         }}
+        ref={launcherButtonRef}
       >
         Show Interstitial full screen
       </Button>
@@ -376,6 +387,7 @@ export const fullScreen = () => {
         }}
         isFullScreen={true}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}
@@ -395,12 +407,15 @@ export const fullScreen = () => {
 export const fullScreenWithMultipleSteps = () => {
   const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
   useState(true);
+  const launcherButtonRef = useRef(null);
+
   return (
     <>
       <Button
         onClick={() => {
           setShowInterstitialScreen(true);
         }}
+        ref={launcherButtonRef}
       >
         Show Interstitial full screen
       </Button>
@@ -411,6 +426,7 @@ export const fullScreenWithMultipleSteps = () => {
         }}
         isFullScreen={true}
         interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}

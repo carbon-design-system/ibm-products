@@ -15,7 +15,7 @@ test.describe('AboutModal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'AboutModal',
-      id: 'ibm-products-components-about-modal-aboutmodal--about-modal',
+      id: 'components-aboutmodal--about-modal',
       globals: {
         carbonTheme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('AboutModal @avt', () => {
   test('@avt-initially-focus-close-button', async ({ page }) => {
     await visitStory(page, {
       component: 'AboutModal',
-      id: 'ibm-products-components-about-modal-aboutmodal--about-modal',
+      id: 'components-aboutmodal--about-modal',
       globals: {
         carbonTheme: 'white',
       },
@@ -40,7 +40,7 @@ test.describe('AboutModal @avt', () => {
   test('@avt-open-close-with-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'AboutModal',
-      id: 'ibm-products-components-about-modal-aboutmodal--about-modal-with-all-props-set',
+      id: 'components-aboutmodal--about-modal-with-all-props-set',
       globals: {
         carbonTheme: 'white',
       },
@@ -87,9 +87,7 @@ test.describe('AboutModal @avt', () => {
     );
 
     // Reopening modal from trigger button to check if focus trap is working
-    const openButton = page.getByText(
-      'Reopen the About modal with all props set'
-    );
+    const openButton = page.getByText('Open Modal');
     await openButton.click();
     await modalElement.evaluate((element) =>
       Promise.all(

@@ -32,3 +32,8 @@ $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
 .cds--header__global {
   z-index: 2;
 }
+
+// Mirror unread notification bell svg in RTL
+[dir='rtl'] .sb-unread-notification-icon {
+  transform: scaleX(-1);
+}

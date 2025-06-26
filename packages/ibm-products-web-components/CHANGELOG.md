@@ -1,7 +1,44 @@
+## `@carbon/ibm-products-web-components@0.18.0-rc.0`
+### Features :rocket:
+- feat(tearsheet): add decorator option (#7600)
+- feat: truncated text initial commit web component (#7397)
+- feat(APIKeyModal): added as WC pattern (#7636)
+
+### Bug fixes :bug:
+- fix: options-tile toggle button (#7576)
+- fix(tearsheet): theming issue in WC (#7598)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+- chore(deps-dev): bump vite (#7652)
+- chore: overflow handler web component stories (#7553)
+- chore(deps-dev): bump vite (#7624)
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+- chore(deps-dev): bump vite (#7599)
+- chore: add options-tile webcomponent stackblitz example (#7535)
+
+## `@carbon/ibm-products-web-components@0.17.0`
+### Features :rocket:
+- feat(DeleteAndRemovePattern): deletion and removal patterns using carbon web components (#7473)
+
+### Bug fixes :bug:
+- fix: supress sass deprecation warnings (#7515)
+
+### Housekeeping :house:
+- chore(deps-dev): bump vite (#7534)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.16.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.16.0-rc.0...@carbon/ibm-products-web-components@0.16.0) (2025-05-28)
+
+**Note:** Version bump only for package @carbon/ibm-products-web-components
+
+
+
+
 
 # [0.16.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.11.0-rc.0...@carbon/ibm-products-web-components@0.16.0-rc.0) (2025-05-19)
 

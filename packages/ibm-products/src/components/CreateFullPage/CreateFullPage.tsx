@@ -21,8 +21,9 @@ import React, {
   ReactNode,
   createContext,
   useEffect,
-  useRef,
   useState,
+  ReactElement,
+  isValidElement,
 } from 'react';
 import {
   SimpleHeader,
@@ -71,6 +72,8 @@ interface HeaderBreadcrumb {
   /** Provide if this breadcrumb item represents the current page */
   isCurrentPage?: boolean;
 }
+
+type MaybePromise<T> = Promise<T> | T;
 
 type CreateFullPageBreadcrumbsProps =
   | {
@@ -181,7 +184,7 @@ type CreateFullPageBaseProps = {
    *
    * @returns Object - if you want to prevent the modal from closing, return an object with the property preventClose set to true
    */
-  onRequestSubmit: () => { preventClose?: boolean } | void;
+  onRequestSubmit: () => MaybePromise<{ preventClose?: boolean } | void>;
 
   /**
    * A secondary title of the full page, displayed in the influencer area
@@ -268,7 +271,11 @@ export let CreateFullPage = React.forwardRef(
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
-    const invalidInitialStepWarned = useRef(false);
+    const stepLength = React.Children.toArray(children).filter(
+      (item) =>
+        isValidElement(item) &&
+        (item as ReactElement<any>).props.includeStep !== false
+    ).length;
 
     useEffect(() => {
       const firstItem =
@@ -281,8 +288,9 @@ export let CreateFullPage = React.forwardRef(
         setLastIncludedStep(lastItem);
       }
 
-      /**@ts-ignore */
-      if (initialStep) {
+      if (Number(initialStep) > stepLength || Number(initialStep) <= 0) {
+        setCurrentStep(1);
+      } else if (initialStep) {
         const numberOfHiddenSteps = getNumberOfHiddenSteps(
           stepData,
           initialStep
@@ -295,15 +303,14 @@ export let CreateFullPage = React.forwardRef(
       lastIncludedStep,
       initialStep,
       modalIsOpen,
+      stepLength,
     ]);
 
     useEffect(() => {
-      if (!invalidInitialStepWarned?.current) {
-        checkForValidInitialStep();
-      }
+      checkForValidInitialStep();
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [initialStep, stepData]);
+    }, [initialStep]);
 
     useCreateComponentFocus({
       previousState,
@@ -340,16 +347,10 @@ export let CreateFullPage = React.forwardRef(
     });
 
     const checkForValidInitialStep = () => {
-      // An invalid initialStep value was provided, we'll default to rendering the first step or last step
-
       if (
-        (initialStep &&
-          stepData?.length &&
-          Number(initialStep) > Number(stepData?.length)) ||
+        (initialStep && stepLength && Number(initialStep) > stepLength) ||
         Number(initialStep) <= 0
       ) {
-        invalidInitialStepWarned.current = true;
-        setCurrentStep(1);
         console.warn(
           `${componentName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${componentName} has.`
         );

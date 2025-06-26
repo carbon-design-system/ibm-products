@@ -73,7 +73,7 @@ const dateTimeLocaleOptions = {
 };
 
 export default {
-  title: 'IBM Products/Components/Notifications panel/NotificationsPanel',
+  title: 'Components/NotificationsPanel',
   component: NotificationsPanel,
   tags: ['autodocs'],
   parameters: {
@@ -300,9 +300,11 @@ const Template = (args) => {
           </HeaderPanel>
         </HeaderGlobalBar>
       </Header>
-      <div className={`${storyBlockClass}__add`}>
-        <Button onClick={addNewNotification}>Add new notification</Button>
-      </div>
+      <main>
+        <div className={`${storyBlockClass}__add`}>
+          <Button onClick={addNewNotification}>Add new notification</Button>
+        </div>
+      </main>
     </div>
   );
 };

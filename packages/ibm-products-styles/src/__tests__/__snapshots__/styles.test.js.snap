@@ -10,9 +10,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--about-modal .c4p--about-modal__header {
-  padding: 0 20% 0 1rem;
+  padding: 0;
   grid-row: auto;
   margin-block-end: 0;
+  padding-inline-end: 20%;
+  padding-inline-start: 1rem;
 }
 
 .c4p--about-modal .c4p--about-modal__title {
@@ -4654,11 +4656,6 @@ p.c4p--about-modal__copyright-text:first-child {
   justify-content: center;
 }
 
-.c4p--datagrid__customize-columns-column-list .c4p--datagrid__customize-columns-checkbox-visible-label {
-  /* stylelint-disable-next-line */
-  padding-inline-start: 0.375rem;
-}
-
 .c4p--datagrid__customize-columns-column-list .c4p--datagrid__customize-columns-checkbox-wrapper.cds--form-item {
   margin-block-end: 0;
 }
@@ -5172,12 +5169,20 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--datagrid__draggable-handleStyle {
-  display: flex;
-  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: grab;
   margin-inline-end: 0.5rem;
 }
 
+.c4p--datagrid__draggable-handleStyle:active,
+.c4p--datagrid__draggable-handleHolder--dragging {
+  cursor: grabbing;
+}
+
 .c4p--datagrid__draggable-handleStyle.disabled {
+  cursor: none;
   pointer-events: none;
 }
 
@@ -5204,7 +5209,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   background-color: var(--cds-layer);
   block-size: 3rem;
   border-block-end: 1px solid var(--cds-layer-active);
-  cursor: grab;
 }
 
 .c4p--datagrid__draggable-handleHolder:hover {
@@ -5225,11 +5229,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   background-color: var(--cds-highlight, #d0e2ff);
   color: var(--cds-text-primary, #161616);
   outline: none;
-}
-
-.c4p--datagrid__draggable-handleHolder:active,
-.c4p--datagrid__draggable-handleHolder--dragging {
-  cursor: grabbing;
 }
 
 .c4p--datagrid__draggable-handleHolder-selected:hover {
@@ -5688,19 +5687,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   content: initial;
 }
 
-@keyframes filter-summary-enter {
-  0% {
-    block-size: 0;
-    opacity: 0;
-    /* Move from top */
-    transform: translateY(calc(var(--panel-transform) * -1));
-  }
-  100% {
-    block-size: var(--panel-transform);
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 @property --panel-transform {
   inherits: true;
   initial-value: 16px;
@@ -5718,9 +5704,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 .c4p--filter-summary.c4p--filter-summary__expanded {
   block-size: fit-content;
-}
-.c4p--filter-summary .c4p--tag-set__tag-container {
-  animation: filter-summary-enter 150ms cubic-bezier(0, 0, 0.38, 0.9) forwards;
 }
 
 .c4p--filter-summary .c4p--tag-set.c4p--tag-set.c4p--filter-summary__clear-button-inline {
@@ -6743,12 +6726,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  overflow-x: auto;
-}
-@supports (overflow-inline: auto) {
-  .c4p--add-select__columns {
-    overflow-inline: auto;
-  }
 }
 .c4p--add-select__columns .c4p--add-select__selections-form-control-label-wrapper {
   margin-inline-start: 0.5rem;
@@ -6780,7 +6757,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--add-select__column {
-  overflow: auto;
   flex: 0 0 20rem;
   padding: 1rem;
   border-block-start: 1px solid var(--cds-border-subtle-01, #c6c6c6);
@@ -6789,8 +6765,15 @@ th.c4p--datagrid__select-all-toggle-on.button {
 .c4p--add-select__column-search-bar {
   display: flex;
 }
-.c4p--add-select__column-search-bar label {
-  display: none;
+.c4p--add-select__column-search-bar .cds--btn {
+  border-block-end: 1px solid var(--cds-border-strong-01, #8d8d8d);
+}
+.c4p--add-select__column .cds--popover--tab-tip.cds--popover--open .cds--btn {
+  background: var(--cds-layer);
+}
+.c4p--add-select__column-filter-popover.cds--popover-content {
+  padding: 1rem;
+  min-inline-size: 10rem;
 }
 .c4p--add-select__column-sort-filter {
   display: flex;
@@ -6974,11 +6957,6 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--add-select .cds--accordion__item--active .cds--accordion__content {
   margin-block-start: 0.5rem;
   padding-block: 0;
-}
-
-.c4p--add-select + div .cds--tooltip,
-.c4p--add-select + div .cds--overflow-menu-options {
-  z-index: 9000;
 }
 
 @keyframes notifications-panel-fade-in {
@@ -8836,7 +8814,6 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child {
   display: inline-flex;
-  overflow: hidden;
 }
 .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child .cds--link {
   display: inline-block;
@@ -9081,7 +9058,7 @@ button.c4p--add-select__global-filter-toggle--open {
   block-size: 0.25rem;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row:not(.c4p--page-header__breadcrumb-row--has-action-bar) {
-  min-block-size: 2rem;
+  min-block-size: 2.5rem;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--container {
   display: flex;
@@ -9091,6 +9068,9 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--page-header .c4p--page-header__has-page-actions-without-action-bar {
   max-inline-size: calc(0.6 * (100% + 2 * 1rem));
   min-inline-size: calc(0.6 * (100% + 2 * 1rem));
+}
+.c4p--page-header .c4p--page-header__has-page-actions-with-title-collapsed {
+  max-inline-size: none;
 }
 .c4p--page-header .c4p--page-header__has-page-actions-without-action-bar .c4p--page-header__has-page-actions-without-action-bar {
   min-inline-size: 100%;
@@ -9113,6 +9093,7 @@ button.c4p--add-select__global-filter-toggle--open {
   transition: all 150ms ease-out;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--next-to-tabs:not(.c4p--page-header__has-page-actions-without-action-bar)::after,
+.c4p--page-header .c4p--page-header__has-page-actions-without-action-bar.c4p--page-header__has-page-actions-with-title-collapsed::after,
 .c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar::after {
   /* creates a full width box shadow without causing scroll */
   box-shadow: 25vw 1px 0 0 var(--cds-layer-accent-01, #e0e0e0), -25vw 1px 0 0 var(--cds-layer-accent-01, #e0e0e0);
@@ -9467,6 +9448,12 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--page-header .c4p--page-header__navigation-row .cds--tab-content {
   display: none; /* need to figure out how to handle the tab content */
+}
+.c4p--page-header .c4p--page-header__action-bar-column--has-page-actions {
+  display: block;
+}
+.c4p--page-header .c4p--page-header__has-page-actions-with-title-collapsed .c4p--page-header__action-bar-column--has-page-actions {
+  display: block;
 }
 .c4p--page-header .c4p--page-header__navigation-tabs {
   margin-inline-start: calc(-1 * 1rem);

@@ -1,11 +1,10 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// cspell:words wojtekmaj
 // Avoid side effects from `Canary` in `ibm-products/src/settings`.
 import settings from '../../../packages/ibm-products/src/global/js/package-settings';
 
@@ -17,8 +16,9 @@ setAllComponents(true);
 global.__DEV__ = true;
 
 global.requestAnimationFrame = (callback) => {
-  return setTimeout(callback, 0);
+  return callback();
 };
+
 if (global.window) {
   window.ResizeObserver = jest.fn(() => {
     return {
@@ -27,7 +27,29 @@ if (global.window) {
       disconnect: jest.fn(),
     };
   });
+
+  window.matchMedia = jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // Deprecated
+    removeListener: jest.fn(), // Deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  }));
+
+  window.IntersectionObserver = jest.fn().mockImplementation(() => ({
+    root: null,
+    rootMargin: '',
+    thresholds: [],
+    disconnect: () => null,
+    observe: () => null,
+    takeRecords: () => [],
+    unobserve: () => null,
+  }));
 }
+
 if (global.HTMLElement) {
   HTMLCanvasElement.prototype.getContext = jest.fn();
 

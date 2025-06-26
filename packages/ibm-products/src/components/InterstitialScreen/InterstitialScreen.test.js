@@ -15,6 +15,7 @@ import { InterstitialScreen } from '.';
 import userEvent from '@testing-library/user-event';
 import { InterstitialScreenViewModule } from './_story-assets/InterstitialScreenViewModule/InterstitialScreenViewModule';
 import { InterstitialScreenView } from './_story-assets/InterstitialScreenView/InterstitialScreenView';
+import { Button } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--interstitial-screen`;
 const componentName = InterstitialScreen.displayName;
@@ -77,6 +78,46 @@ const renderComponent = ({ ...rest } = {}) => {
     </InterstitialScreen>
   );
 };
+const renderComponentSingleStep = ({ ...rest } = {}) => {
+  const translations = {
+    'carbon.progress-step.complete': 'Terminé',
+    'carbon.progress-step.incomplete': 'Partiel',
+    'carbon.progress-step.current': 'Actuel',
+    'carbon.progress-step.invalid': 'Non valide',
+  };
+  const translateWithId = (messageId) => {
+    return translations[messageId];
+  };
+  return render(
+    <InterstitialScreen
+      isOpen={true}
+      onClose={onClose}
+      data-testid={dataTestId}
+      {...{ ...rest }}
+    >
+      <InterstitialScreen.Header
+        headerTitle={'headerTitle'}
+        headerSubTitle={'headerSubTitle'}
+      ></InterstitialScreen.Header>
+      <InterstitialScreen.Body
+        contentRenderer={(internalConfig) => (
+          <>
+            <InterstitialScreenView
+              stepTitle="Step 1"
+              translateWithId={translateWithId}
+            >
+              <InterstitialScreenViewModule
+                title={InterstitialScreenViewModuleTitle}
+                description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+              />
+            </InterstitialScreenView>
+          </>
+        )}
+      />
+      <InterstitialScreen.Footer />
+    </InterstitialScreen>
+  );
+};
 
 describe(componentName, () => {
   it('renders a component InterstitialScreen (Modal)', () => {
@@ -87,6 +128,17 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
+  it('renders a component InterstitialScreen (Modal) single step', () => {
+    renderComponentSingleStep({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
+  });
+  it('renders a component InterstitialScreen (Modal) with a plain text', () => {
+    render('test content');
+    expect(screen.getByText('test content')).toBeInTheDocument();
+  });
   it('renders a component InterstitialScreen (Full Screen)', () => {
     renderComponent({
       className: blockClass,
@@ -214,8 +266,8 @@ describe(componentName, () => {
       interstitialAriaLabel: 'Modal Interstitial Screen',
     });
 
-    expect(screen.getByText('Next'));
-    expect(screen.getByText('Step 1'));
+    expect(screen.getByText('Next')).toBeVisible();
+    expect(screen.getByText('Step 1')).toBeVisible();
     const step1 = screen.getByText('Step 1');
     const listElement1 = step1.closest('li');
     const step2 = screen.getByText('Step 2');
@@ -264,5 +316,55 @@ describe(componentName, () => {
     const closeBtn = screen.getByLabelText('Close');
     await act(() => userEvent.click(closeBtn));
     expect(onClose).toBeCalled();
+  });
+
+  it('should return focus to the launcher button', async () => {
+    const onOpen = jest.fn(() => false);
+    const onClose = jest.fn(() => true);
+
+    const DummyComponent = ({ open }) => {
+      const buttonRef = React.useRef(undefined);
+
+      return (
+        <>
+          <InterstitialScreen
+            isOpen={open}
+            onClose={onClose}
+            data-testid={dataTestId}
+            launcherButtonRef={buttonRef}
+          >
+            <InterstitialScreen.Header
+              headerTitle={'headerTitle'}
+              headerSubTitle={'headerSubTitle'}
+            ></InterstitialScreen.Header>
+          </InterstitialScreen>
+          <Button ref={buttonRef} onClick={onOpen}>
+            Generate
+          </Button>
+        </>
+      );
+    };
+
+    const { getByText, rerender } = render(<DummyComponent open={false} />);
+
+    const launchButtonEl = getByText('Generate');
+    expect(launchButtonEl).toBeInTheDocument();
+
+    await act(() => userEvent.click(launchButtonEl));
+    expect(onOpen).toHaveBeenCalled();
+
+    rerender(<DummyComponent open={true} />);
+
+    const closeButton = screen.getByLabelText('Close');
+    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    expect(closeButton).toBeInTheDocument();
+
+    await act(() => userEvent.click(closeButton));
+    expect(onClose).toHaveBeenCalled();
+
+    rerender(<DummyComponent open={false} />);
+
+    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    expect(launchButtonEl).toHaveFocus();
   });
 });

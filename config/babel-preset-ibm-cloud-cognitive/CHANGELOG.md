@@ -1,7 +1,19 @@
+## `@babel-preset-ibm-cloud-cognitive@0.27.0-rc.0`
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.25.0](https://github.com/carbon-design-system/ibm-products/compare/babel-preset-ibm-cloud-cognitive@0.25.0-rc.0...babel-preset-ibm-cloud-cognitive@0.25.0) (2025-05-28)
+
+**Note:** Version bump only for package babel-preset-ibm-cloud-cognitive
+
+
+
+
 
 # [0.25.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/babel-preset-ibm-cloud-cognitive@0.20.0-rc.0...babel-preset-ibm-cloud-cognitive@0.25.0-rc.0) (2025-05-19)
 

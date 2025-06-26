@@ -14,7 +14,7 @@ test.describe('UnauthorizedEmptyState @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'UnauthorizedEmptyState',
-      id: 'ibm-products-patterns-empty-state-unauthorizedemptystate--default',
+      id: 'patterns-prebuilt-patterns-empty-states-unauthorizedemptystate--default',
       globals: {
         carbonTheme: 'white',
       },

@@ -17,7 +17,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--with-title',
+      id: 'components-pageheader--with-title',
       globals: {
         carbonTheme: 'white',
       },
@@ -29,7 +29,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-collapse-on-scroll', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      id: 'components-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -63,7 +63,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-collapse-by-default', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded',
+      id: 'components-pageheader--fully-loaded',
       globals: {
         carbonTheme: 'white',
       },
@@ -85,7 +85,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-collapse-by-toggle-button', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      id: 'components-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -117,7 +117,7 @@ test.describe('PageHeader @avt', () => {
   }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      id: 'components-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -174,7 +174,7 @@ test.describe('PageHeader @avt', () => {
   }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      id: 'components-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -213,7 +213,7 @@ test.describe('PageHeader @avt', () => {
 
     // reset focus to first focusable element
     await page.getByRole('link', { name: 'Home page' }).focus();
-    await pressTabKey(page, 3);
+    await pressTabKey(page, 4);
     await expect(
       page.getByRole('button', { name: 'Page actions...' })
     ).toBeFocused();
@@ -235,7 +235,7 @@ test.describe('PageHeader @avt', () => {
   }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      id: 'components-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },

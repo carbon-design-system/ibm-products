@@ -1,7 +1,55 @@
+## `@carbon/ibm-products@2.69.0-rc.0`
+### Features :rocket:
+- feat: resize feature changes added (#7501)
+- feat(MultiAddSelect): add floating ui to sort and filter buttons (#6389)
+
+### Bug fixes :bug:
+- fix: productive card overflow bug (#7645)
+- fix: remove usage of local carbon prefix in component files (#7642)
+- fix:  investigate and address any accessibility violations in stable components  (#7586)
+- fix(Interstitial): pass forwarded refs (#7588)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+- chore: overflow handler web component stories (#7553)
+- chore(deps): update dependency yargs to v18 (#7596)
+- chore(Coachmark): deprecation of props and coachmark components (#7499)
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+
+## `@carbon/ibm-products@2.68.0`
+### Features :rocket:
+- feat(openStackblitz): about modal and export Modal (#7479)
+- feat(InterstitialScreen): add and update various stackblitz examples (#7510)
+- feat(open stackblitz): API Key modal (#7365)
+
+### Bug fixes :bug:
+- fix(rtl): minor updates to provide stronger rtl support (#7580)
+- fix: interstitial accessibility issue fixes (#7478)
+- fix(CustomizeColumnsTearsheet): focus on close (#7497)
+- fix(page header):  current page a11y issue (#7532)
+- fix: include .internal.stories to ignore stories glob (#7531)
+- fix(Tearsheet): fix keyboard scroll for non-interactive tearsheet (#7536)
+- fix: supress sass deprecation warnings (#7515)
+- fix(CustomizeColumnsTearsheet): keyboard and screen reader fixes (#7491)
+
+### Housekeeping :house:
+- chore(CreateFullPage): onrequestsubmit can return a promise (#7538)
+- chore(sidepanel): update controls in the storybook (#7561)
+- refactor(useResizeObserver): migrate to TS and refactor tests to include resize validation (#7548)
+- test(CreateTearsheet): remove container usage (#7533)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [2.67.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.67.0-rc.0...@carbon/ibm-products@2.67.0) (2025-05-28)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
 
 # [2.67.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.62.0-rc.0...@carbon/ibm-products@2.67.0-rc.0) (2025-05-19)
 

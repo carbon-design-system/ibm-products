@@ -289,10 +289,10 @@ export const TearsheetShell = React.forwardRef(
     const bcModalHeader = `${carbonPrefix}--modal-header`;
     const renderPortalUse = usePortalTarget(portalTargetIn);
     const localRef = useRef(undefined);
-    const resizer = useRef(null);
+    const resizer = useRef<HTMLDivElement | null>(null);
     const modalBodyRef = useRef(null);
     const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
-    const { width } = useResizeObserver(resizer);
+    const { width } = useResizeObserver(resizer as RefObject<HTMLDivElement>);
     const prevOpen = usePreviousValue(open);
     const { keyDownListener, claimFocus } = useFocus(
       modalRef,
@@ -485,7 +485,9 @@ export const TearsheetShell = React.forwardRef(
                   [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
                 })}
                 closeModal={onClose}
-                iconDescription={closeIconDescription}
+                iconDescription={
+                  effectiveHasCloseIcon ? closeIconDescription : undefined
+                }
               >
                 <Wrap
                   className={`${bc}__header-content`}
@@ -538,7 +540,6 @@ export const TearsheetShell = React.forwardRef(
                     alwaysRender={
                       !!(influencer && influencerPosition === 'right')
                     }
-                    tabIndex={-1}
                     element={SectionLevel3}
                   >
                     {children}

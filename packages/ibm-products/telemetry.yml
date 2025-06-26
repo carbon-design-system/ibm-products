@@ -515,6 +515,7 @@ collect:
         # Carousel
         - disableArrowScroll
         - fadedEdgeColor
+        - isScrollMode
         - onChangeIsScrollable
         # Checklist
         - chartLabel
@@ -533,6 +534,8 @@ collect:
         - overlayRef
         - positionTune
         - target
+        # CoachmarkBeacon
+        - buttonProps
         # CoachmarkDragbar
         - a11yKeyboardHandler
         - onDrag
@@ -673,6 +676,13 @@ collect:
         - successMessage
         - validExtensions
         # FeatureFlags
+        - defaultPortalTargetBody
+        - enableDatagridUseCustomizeColumns
+        - enableDatagridUseEditableCell
+        - enableDatagridUseInlineEdit
+        - enableSidepanelResizer
+        - enableTestFlagA
+        - enableTestFlagB
         - flags
         # FilterFlyout
         - flyoutIconDescription
@@ -843,6 +853,11 @@ collect:
         - primaryDangerDescription
         - resourceName
         - textConfirmation
+        # Resizer
+        - onDoubleClick
+        - onResize
+        - onResizeEnd
+        - orientation
         # RowSizeDropdown
         - datagridName
         - light
@@ -1182,6 +1197,9 @@ collect:
         - short
         # PageHeader - fullWidthGrid
         - xl
+        # Resizer - orientation
+        - horizontal
+        - vertical
   npm:
     dependencies: null
   js:

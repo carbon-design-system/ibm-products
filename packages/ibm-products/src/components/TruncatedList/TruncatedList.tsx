@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,10 +14,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { carbon, pkg } from '../../settings';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button } from '@carbon/react';
+import { Button, usePrefix } from '@carbon/react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -109,6 +109,7 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
     //   (difference of the guessed height to rendered height - a few pixels)
     const [listHeight, setListHeight] = useState(minItems * 16);
     const listRef = useRef<HTMLElement | undefined>(undefined);
+    const carbonPrefix = usePrefix();
 
     const handleToggle = () => {
       setIsCollapsed((prev) => !prev);
@@ -171,7 +172,7 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
           <Button
             className={cx(
               `${blockClass}__button`,
-              `${carbon.prefix}--link`,
+              `${carbonPrefix}--link`,
               buttonClassName
             )}
             kind="ghost"

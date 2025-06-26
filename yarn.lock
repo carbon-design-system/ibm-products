@@ -1972,7 +1972,7 @@ __metadata:
     "@carbon/icons": "npm:^11.61.0"
     "@carbon/motion": "npm:^11.29.0"
     "@carbon/styles": "npm:1.83.0"
-    "@carbon/web-components": "npm:2.31.0"
+    "@carbon/web-components": "npm:2.32.0"
     "@ibm/telemetry-js": "npm:^1.9.1"
     "@lit/context": "npm:^1.1.5"
     "@mordech/vite-lit-loader": "npm:^0.37.0"
@@ -2252,7 +2252,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:1.83.0, @carbon/styles@npm:^1.83.0":
+"@carbon/styles@npm:1.83.0":
   version: 1.83.0
   resolution: "@carbon/styles@npm:1.83.0"
   dependencies:
@@ -2415,11 +2415,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/web-components@npm:2.31.0":
-  version: 2.31.0
-  resolution: "@carbon/web-components@npm:2.31.0"
+"@carbon/web-components@npm:2.32.0":
+  version: 2.32.0
+  resolution: "@carbon/web-components@npm:2.32.0"
   dependencies:
-    "@carbon/styles": "npm:^1.83.0"
+    "@carbon/styles": "npm:^1.84.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@lit/context": "npm:^1.1.1"
@@ -2427,7 +2427,7 @@ __metadata:
     lit: "npm:^3.1.0"
     lodash-es: "npm:^4.17.21"
     tslib: "npm:^2.6.3"
-  checksum: 10/17285c2cff27965e5aa256b58bff324d649ce7cace3c5fc84e3d349ea9f009872414a3fd87ff09fea55aaae2f5e337b9a1f428bf8f4887d45ca674376a698451
+  checksum: 10/4032de949411a9289ae379525cb94ae821fc76aa4d7f201c921ec9a7b6ced6029f3a0a6e293c7b63817656649f22350e599e5275ac100eb28f04e710111c409c
   languageName: node
   linkType: hard
 

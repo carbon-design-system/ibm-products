@@ -34,9 +34,7 @@ test.describe('NotificationsPanel @avt', () => {
       },
     });
 
-    const notificationPanel = await page.locator(
-      `#${pkg.prefix}--notifications-panel`
-    );
+    const notificationPanel = await page.locator('[role="dialog"]');
     await expect(notificationPanel).toBeVisible();
 
     for (let i = 0; i < 10; i++) {
@@ -61,9 +59,7 @@ test.describe('NotificationsPanel @avt', () => {
         carbonTheme: 'white',
       },
     });
-    const notificationPanel = await page.locator(
-      `#${pkg.prefix}--notifications-panel`
-    );
+    const notificationPanel = await page.locator('[role="dialog"]');
     await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(
       'button[aria-label="Close notifications"]'
@@ -89,9 +85,7 @@ test.describe('NotificationsPanel @avt', () => {
         carbonTheme: 'white',
       },
     });
-    const notificationPanel = await page.locator(
-      `#${pkg.prefix}--notifications-panel`
-    );
+    const notificationPanel = await page.locator('[role="dialog"]');
     await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(
       'button[aria-label="Close notifications"]'

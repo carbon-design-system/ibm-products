@@ -34,7 +34,9 @@ test.describe('NotificationsPanel @avt', () => {
       },
     });
 
-    const notificationPanel = await page.locator(`#c4p--notifications-panel`);
+    const notificationPanel = await page.locator(
+      `#${pkg.prefix}--notifications-panel`
+    );
     await expect(notificationPanel).toBeVisible();
 
     for (let i = 0; i < 10; i++) {
@@ -59,7 +61,9 @@ test.describe('NotificationsPanel @avt', () => {
         carbonTheme: 'white',
       },
     });
-    const notificationPanel = await page.locator(`#c4p--notifications-panel`);
+    const notificationPanel = await page.locator(
+      `#${pkg.prefix}--notifications-panel`
+    );
     await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(
       'button[aria-label="Open notifications"]'
@@ -85,7 +89,9 @@ test.describe('NotificationsPanel @avt', () => {
         carbonTheme: 'white',
       },
     });
-    const notificationPanel = await page.locator(`#c4p--notifications-panel`);
+    const notificationPanel = await page.locator(
+      `#${pkg.prefix}--notifications-panel`
+    );
     await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(
       'button[aria-label="Open notifications"]'

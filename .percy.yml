@@ -13,7 +13,7 @@ storybook:
   # if storybook is still loading, percy could take a snapshot of the storybook
   # loading spinner and cause flaky tests
   waitForSelector: '.story-wrapper'
-  include: ['/IBM Products/']
+  include: ['/Components/', '/Patterns/', '/Utilities/']
   exclude: [
       '/Internal/',
       '/Datagrid/*',

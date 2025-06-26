@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.69.0-rc.0`
+## `@carbon/ibm-products@2.69.0`
 ### Features :rocket:
 - feat: resize feature changes added (#7501)
 - feat(MultiAddSelect): add floating ui to sort and filter buttons (#6389)

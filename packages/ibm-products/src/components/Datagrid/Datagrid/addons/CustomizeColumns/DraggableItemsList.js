@@ -209,6 +209,16 @@ export const DraggableItemsList = ({
         >
           {visibleCols.map((colDef) => {
             const colHeaderTitle = getNodeTextContent(colDef.Header);
+            // const parts = colHeaderTitle.split(
+            //   new RegExp(`(${filterString})`, 'gi')
+            // );
+            // const highlightedText = parts.map((part) =>
+            //   part.toLowerCase() === filterString.toLowerCase() ? (
+            //     <strong>{part}</strong>
+            //   ) : (
+            //     part
+            //   )
+            // );
             const isFrozenColumn = !!colDef.sticky;
             const isDisabled = colDef.disabled;
 
@@ -218,7 +228,7 @@ export const DraggableItemsList = ({
                 disabled={isDisabled || isFrozenColumn}
                 onChange={(_, { checked }) => onSelectColumn(colDef, checked)}
                 id={`${blockClass}__customization-column-${colDef.id}`}
-                labelText={colHeaderTitle}
+                labelText={colHeaderTitle} //filterString ? highlightedText : colHeaderTitle
                 className={`${blockClass}__customize-columns-checkbox`}
                 onKeyDown={(event) => handleCheckboxKeydown(event, colDef)}
               />

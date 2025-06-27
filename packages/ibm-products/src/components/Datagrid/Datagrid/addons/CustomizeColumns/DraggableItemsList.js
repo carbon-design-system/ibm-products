@@ -228,7 +228,7 @@ export const DraggableItemsList = ({
                 disabled={isDisabled || isFrozenColumn}
                 onChange={(_, { checked }) => onSelectColumn(colDef, checked)}
                 id={`${blockClass}__customization-column-${colDef.id}`}
-                labelText={highlightedText}
+                labelText={filterString ? highlightedText : colHeaderTitle}
                 className={`${blockClass}__customize-columns-checkbox`}
                 onKeyDown={(event) => handleCheckboxKeydown(event, colDef)}
               />

@@ -31,6 +31,7 @@ const defaultProps = {
   placement: SIDE_PANEL_PLACEMENT.RIGHT,
   preventCloseOnClickOutside: false,
   selectorPageContent: '',
+  hideCloseButton: false,
   size: SIDE_PANEL_SIZE.MEDIUM,
   title: 'Side panel title',
   condensedActions: false,
@@ -48,6 +49,7 @@ const template = (props = defaultProps, children = getContent(1)) => html`
     placement=${props.placement}
     ?prevent-close-on-click-outside=${props.preventCloseOnClickOutside}
     selector-page-content=${props.selectorPageContent}
+    ?hide-close-button=${props.hideCloseButton}
     size=${props.size}
     ?slide-in=${props.slideIn}
     .title=${props.title}
@@ -340,6 +342,30 @@ describe('c4p-side-panel', () => {
     );
 
     expect(actionItems).toHaveLength(3);
+  });
+
+  it('should display a close button by default', async () => {
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
+    expect(sidePanel?.open).toBeTruthy();
+
+    // get the close button
+    const closeButton = sidePanel.shadowRoot?.querySelector('cds-icon-button');
+    // ensure the close button is present
+    expect(closeButton).toBeDefined();
+  });
+
+  it('should not display a close button when hideCloseButton prop is set to true', async () => {
+    const sidePanel = (await fixture(
+      template({ ...defaultProps, hideCloseButton: true })
+    )) as CDSSidePanel;
+
+    expect(sidePanel?.open).toBeTruthy();
+    expect(sidePanel?.hideCloseButton).toBeTruthy();
+
+    // get the close button
+    const closeButton = sidePanel.shadowRoot?.querySelector('cds-icon-button');
+    // ensure the close button is not present
+    expect(closeButton).to.be.null;
   });
 
   afterEach(() => {

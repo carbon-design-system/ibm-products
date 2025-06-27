@@ -485,7 +485,9 @@ export const TearsheetShell = React.forwardRef(
                   [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
                 })}
                 closeModal={onClose}
-                iconDescription={closeIconDescription}
+                iconDescription={
+                  effectiveHasCloseIcon ? closeIconDescription : undefined
+                }
               >
                 <Wrap
                   className={`${bc}__header-content`}
@@ -521,6 +523,7 @@ export const TearsheetShell = React.forwardRef(
               ref={modalBodyRef}
               className={`${carbonPrefix}--modal-content ${bc}__body`}
             >
+              {/* Left influencer */}
               <Wrap
                 className={cx({
                   [`${bc}__influencer`]: true,
@@ -529,9 +532,10 @@ export const TearsheetShell = React.forwardRef(
                 neverRender={influencerPosition === 'right'}
                 element={SectionLevel3}
               >
-                {influencer}
+                <Wrap element={Layer}>{influencer}</Wrap>
               </Wrap>
               <Wrap className={`${bc}__right`}>
+                {/* Main area */}
                 <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
                   <Wrap
                     className={`${bc}__content`}
@@ -540,8 +544,9 @@ export const TearsheetShell = React.forwardRef(
                     }
                     element={SectionLevel3}
                   >
-                    {children}
+                    <Wrap element={!wide ? Layer : undefined}>{children}</Wrap>
                   </Wrap>
+                  {/* Right influencer */}
                   <Wrap
                     className={cx({
                       [`${bc}__influencer`]: true,
@@ -550,7 +555,7 @@ export const TearsheetShell = React.forwardRef(
                     neverRender={influencerPosition !== 'right'}
                     element={SectionLevel3}
                   >
-                    {influencer}
+                    <Wrap element={Layer}>{influencer}</Wrap>
                   </Wrap>
                 </Wrap>
                 {includeActions && (

@@ -16,7 +16,7 @@ test.describe('MultiAddSelect @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'MultiAddSelect',
-      id: 'ibm-products-patterns-add-and-select-multiaddselect--default',
+      id: 'patterns-prebuilt-patterns-add-and-select-multiaddselect--default',
       globals: {
         carbonTheme: 'white',
       },

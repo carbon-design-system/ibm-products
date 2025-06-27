@@ -135,9 +135,7 @@ export const StoryDocsPage = ({
           ))
         ) : (
           <AnchorMdx href={guidelinesHref}>
-            {altTitle
-              ? `${altTitle} usage guidelines`
-              : storyInfo.guidelinesLinkLabel}
+            {altTitle ? `Usage guidelines` : storyInfo.guidelinesLinkLabel}
           </AnchorMdx>
         )
       ) : null}

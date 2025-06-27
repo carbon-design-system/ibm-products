@@ -16,7 +16,7 @@ import styles from './_storybook-styles.scss?inline';
 // Carbon and package components we use.
 
 export default {
-  title: 'IBM Products/Internal/ButtonSetWithOverflow',
+  title: 'Internal/ButtonSetWithOverflow',
   component: ButtonSetWithOverflow,
   tags: ['autodocs'],
   argTypes: {

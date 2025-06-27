@@ -124,33 +124,6 @@ const SlideIn = ({
 };
 
 describe('SidePanel', () => {
-  const { ResizeObserver } = window;
-
-  beforeEach(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
-  });
-
-  afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
-  });
-
   it('renders the side panel', async () => {
     const subtitle = uuidv4();
     const labelText = uuidv4();
@@ -737,5 +710,17 @@ describe('SidePanel', () => {
     expect(
       parentEl.style.getPropertyValue('--c4p-side-panel-modified-size')
     ).toBe('');
+  });
+
+  it('should display a close button by default', () => {
+    const { container } = renderSidePanel();
+    expect(
+      container.querySelector(`.${blockClass}__close-button`)
+    ).toBeTruthy();
+  });
+
+  it('should not display a close button when hideCloseButton prop is set to true', () => {
+    const { container } = renderSidePanel({ hideCloseButton: true });
+    expect(container.querySelector(`.${blockClass}__close-button`)).toBe(null);
   });
 });

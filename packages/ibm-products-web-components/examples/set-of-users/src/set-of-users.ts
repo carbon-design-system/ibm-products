@@ -39,10 +39,18 @@ export default class SetOfUsers extends LitElement {
   private searchString = '';
 
   private overflowHandler: { disconnect: () => void } | undefined;
+  private resizeObserver: ResizeObserver | undefined; // only for observing width changes of offset
 
   firstUpdated() {
     this.updateComplete.then(() => {
       this.initializeOverflowHandler();
+
+      // Observe size changes in the overflow tag
+      this.resizeObserver = new ResizeObserver(() => {
+        this.reinitializeOverflowHandler();
+      });
+      this.resizeObserver.observe(this.offset);
+
       document.addEventListener('click', this.handleDocumentClick);
     });
   }
@@ -60,6 +68,9 @@ export default class SetOfUsers extends LitElement {
     super.disconnectedCallback();
     if (this.overflowHandler) {
       this.overflowHandler.disconnect();
+    }
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
     }
     document.removeEventListener('click', this.handleDocumentClick);
   }

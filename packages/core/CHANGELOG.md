@@ -1,3 +1,8 @@
+## `@carbon/ibm-cloud-cognitive-core@2.45.0`
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+
 ## `@carbon/ibm-cloud-cognitive-core@2.44.0`
 ### Housekeeping :house:
 - chore: added links to welcome page (#7485)

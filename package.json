@@ -127,7 +127,9 @@
     "micromatch": "4.0.8",
     "semver": "7.7.2",
     "ws": "^8.17.1",
-    "@babel/runtime": "7.27.3"
+    "@babel/runtime": "7.27.6",
+    "brace-expansion@^1.1.7": "1.1.12",
+    "brace-expansion@^2.0.1": "2.0.2"
   },
   "lint-staged": {
     "!(examples/**/*)**/*.{js,jsx,ts,tsx,mjs}": [

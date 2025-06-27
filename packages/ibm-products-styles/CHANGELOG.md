@@ -1,3 +1,13 @@
+## `@carbon/ibm-products-styles@2.65.0`
+### Features :rocket:
+- feat: resize feature changes added (#7501)
+- feat(MultiAddSelect): add floating ui to sort and filter buttons (#6389)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+- chore(deps): update dependency yargs to v18 (#7596)
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+
 ## `@carbon/ibm-products-styles@2.64.0`
 ### Bug fixes :bug:
 - fix(rtl): minor updates to provide stronger rtl support (#7580)

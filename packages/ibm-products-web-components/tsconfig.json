@@ -11,7 +11,6 @@
       "../../node_modules/@types"
     ],
     "declaration": true,
-    "rootDir": ".",
     "skipLibCheck": true,
     "sourceMap": true,
     "stripInternal": true,

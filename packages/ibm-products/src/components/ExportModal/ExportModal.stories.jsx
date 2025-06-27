@@ -12,7 +12,7 @@ import wait from '../../global/js/utils/wait';
 import mdx from './ExportModal.mdx';
 
 export default {
-  title: 'IBM Products/Components/Export/ExportModal',
+  title: 'Patterns/Prebuilt patterns/ExportModal',
   component: ExportModal,
   tags: ['autodocs'],
   parameters: {

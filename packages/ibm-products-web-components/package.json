@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "version": "0.18.0-rc.0",
+  "version": "0.18.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -54,10 +54,11 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.65.0-rc.0",
+    "@carbon/ibm-products-styles": "^2.65.0",
     "@carbon/styles": "1.82.0",
-    "@carbon/web-components": "2.30.0",
+    "@carbon/web-components": "2.32.0",
     "@ibm/telemetry-js": "^1.9.1",
+    "@lit/context": "^1.1.5",
     "lit": "^3.1.0"
   },
   "devDependencies": {
@@ -72,9 +73,9 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.1",
+    "@storybook/addon-a11y": "^8.6.12",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
-    "@storybook/addon-storysource": "^8.6.12",
     "@storybook/addon-toolbars": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
     "@storybook/theming": "^8.6.12",

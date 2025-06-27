@@ -129,7 +129,7 @@ const overflowAndModalStrings = {
 };
 
 export default {
-  title: 'IBM Products/Components/Tag set/TagSet',
+  title: 'Components/TagSet',
   component: TagSet,
   tags: ['autodocs'],
   parameters: {
@@ -143,15 +143,15 @@ export default {
           altGuidelinesHref={[
             {
               href: 'https://pages.github.ibm.com/carbon/ibm-products/components/tag-set/usage/',
-              label: 'TagSet usage guidelines',
+              label: 'Usage guidelines',
             },
             {
               href: 'https://carbondesignsystem.com/components/tag/usage/',
-              label: 'Carbon Tag usage guidelines',
+              label: 'Carbon tag usage guidelines',
             },
             {
               href: 'https://react.carbondesignsystem.com/?path=/docs/components-tag--overview',
-              label: 'Carbon Tag documentation',
+              label: 'Carbon tag documentation',
             },
           ]}
         />

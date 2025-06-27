@@ -17,7 +17,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'ibm-products-components-tearsheet--tearsheet',
+      id: 'components-tearsheet--tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -29,7 +29,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-open-and-close', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'ibm-products-components-tearsheet--tearsheet',
+      id: 'components-tearsheet--tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -50,7 +50,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-default-state-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'ibm-products-components-tearsheet--tearsheet',
+      id: 'components-tearsheet--tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -110,7 +110,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-first-element-disabled-focus-behaviour', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'ibm-products-components-tearsheet--first-element-disabled',
+      id: 'components-tearsheet--first-element-disabled',
       globals: {
         carbonTheme: 'white',
       },
@@ -141,7 +141,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-focus-return-to-launcher-button', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'ibm-products-components-tearsheet--return-focus-to-open-button',
+      id: 'components-tearsheet--return-focus-to-open-button',
       globals: {
         carbonTheme: 'white',
       },
@@ -192,7 +192,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-stacking', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'ibm-products-components-tearsheet--stacked',
+      id: 'components-tearsheet--stacked',
       globals: {
         carbonTheme: 'white',
       },
@@ -295,7 +295,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-stacking-different-sizes', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'ibm-products-components-tearsheet--stacked-mixed-sizes',
+      id: 'components-tearsheet--stacked-mixed-sizes',
       globals: {
         carbonTheme: 'white',
       },

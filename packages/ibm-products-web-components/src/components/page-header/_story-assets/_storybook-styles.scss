@@ -1,0 +1,9 @@
+@use '@carbon/styles/scss/spacing';
+
+#main-content {
+  margin-block-start: spacing.$spacing-09;
+}
+
+.tabs-demo {
+  block-size: 200vh;
+}

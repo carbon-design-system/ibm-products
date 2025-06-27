@@ -8,15 +8,16 @@
  */
 
 import { html } from 'lit';
-import { prefix } from '../../globals/settings';
 import './index';
 import '@carbon/web-components/es/components/tag/index.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/tabs/index.js';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
+import '@carbon/web-components/es/components/ui-shell/index.js';
 import image1 from './_story-assets/2x1.jpg';
 import image2 from './_story-assets/3x2.jpg';
+import styles from './_story-assets/_storybook-styles.scss?lit';
 import { breakpoints } from '@carbon/layout';
 import Add16 from '@carbon/web-components/es/icons/add/16.js';
 import Bee32 from '@carbon/web-components/es/icons/bee/32.js';
@@ -24,6 +25,10 @@ import Bee16 from '@carbon/web-components/es/icons/bee/16.js';
 import Activity16 from '@carbon/web-components/es/icons/activity/16.js';
 import AiGenerate16 from '@carbon/web-components/es/icons/ai-generate/16.js';
 import CloudFoundry16 from '@carbon/web-components/es/icons/cloud-foundry--1/16.js';
+import {
+  TAG_SIZE,
+  TAG_TYPE,
+} from '@carbon/web-components/es/components/tag/defs.js';
 
 const tags = [
   {
@@ -107,9 +112,17 @@ export const Default = {
       renderBreadcrumbIcon,
     } = args ?? {};
     return html`
+      <style>
+        ${styles}
+      </style>
+      <cds-header aria-label="IBM Platform Name">
+        <cds-header-name href="javascript:void 0" prefix="IBM"
+          >[Platform]</cds-header-name
+        >
+      </cds-header>
       <c4p-page-header>
         <c4p-page-header-breadcrumb
-          border="${border}"
+          ?border="${border}"
           ?page-actions-flush="${pageActionsFlush}"
           ?content-actions-flush="${contentActionsFlush}"
         >
@@ -217,130 +230,156 @@ export const Default = {
 
 export const ContentWithContextualActions = {
   render: () =>
-    html`<c4p-page-header>
-      <c4p-page-header-breadcrumb>
-        ${Bee16({ slot: 'icon' })}
-        <cds-breadcrumb>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-        </cds-breadcrumb>
-        <cds-icon-button
-          slot="page-actions"
-          kind="ghost"
-          size="md"
-          align="bottom"
+    html` <style>
+        ${styles}
+      </style>
+      <cds-header aria-label="IBM Platform Name">
+        <cds-header-name href="javascript:void 0" prefix="IBM"
+          >[Platform]</cds-header-name
         >
-          ${Activity16({ slot: 'icon' })}
-          <span slot="tooltip-content">action 1</span>
-        </cds-icon-button>
-        <cds-icon-button
-          slot="page-actions"
-          kind="ghost"
-          size="md"
-          align="bottom"
+      </cds-header>
+      <c4p-page-header>
+        <c4p-page-header-breadcrumb>
+          ${Bee16({ slot: 'icon' })}
+          <cds-breadcrumb>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${Activity16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 1</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${AiGenerate16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 2</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${CloudFoundry16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 3</span>
+          </cds-icon-button>
+        </c4p-page-header-breadcrumb>
+        <c4p-page-header-content
+          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
         >
-          ${AiGenerate16({ slot: 'icon' })}
-          <span slot="tooltip-content">action 2</span>
-        </cds-icon-button>
-        <cds-icon-button
-          slot="page-actions"
-          kind="ghost"
-          size="md"
-          align="bottom"
-        >
-          ${CloudFoundry16({ slot: 'icon' })}
-          <span slot="tooltip-content">action 3</span>
-        </cds-icon-button>
-      </c4p-page-header-breadcrumb>
-      <c4p-page-header-content
-        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      >
-        <div slot="contextual-actions">
-          <cds-tag type="blue" size="lg">Tag</cds-tag>
-        </div>
-        <c4p-page-header-content-text subtitle="Subtitle">
-          Built for modern teams, our technology platform simplifies complexity
-          with powerful APIs, real-time collaboration tools, and seamless
-          integration. From deployment to monitoring, we help you ship faster,
-          scale efficiently, and stay in control every step of the way.
-        </c4p-page-header-content-text>
-      </c4p-page-header-content>
-    </c4p-page-header>`,
+          <div slot="contextual-actions">
+            <cds-tag type="blue" size="lg">Tag</cds-tag>
+          </div>
+          <c4p-page-header-content-text subtitle="Subtitle">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </c4p-page-header-content-text>
+        </c4p-page-header-content>
+      </c4p-page-header>`,
 };
 
 export const ContentWithContextualActionsAndPageActions = {
   render: () =>
-    html`<c4p-page-header>
-      <c4p-page-header-breadcrumb>
-        ${Bee16({ slot: 'icon' })}
-        <cds-breadcrumb>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-        </cds-breadcrumb>
-        <cds-icon-button
-          slot="page-actions"
-          kind="ghost"
-          size="md"
-          align="bottom"
+    html` <style>
+        ${styles}
+      </style>
+      <cds-header aria-label="IBM Platform Name">
+        <cds-header-name href="javascript:void 0" prefix="IBM"
+          >[Platform]</cds-header-name
         >
-          ${Activity16({ slot: 'icon' })}
-          <span slot="tooltip-content">action 1</span>
-        </cds-icon-button>
-        <cds-icon-button
-          slot="page-actions"
-          kind="ghost"
-          size="md"
-          align="bottom"
-        >
-          ${AiGenerate16({ slot: 'icon' })}
-          <span slot="tooltip-content">action 2</span>
-        </cds-icon-button>
-        <cds-icon-button
-          slot="page-actions"
-          kind="ghost"
-          size="md"
-          align="bottom"
-        >
-          ${CloudFoundry16({ slot: 'icon' })}
-          <span slot="tooltip-content">action 3</span>
-        </cds-icon-button>
-      </c4p-page-header-breadcrumb>
-      <c4p-page-header-content
-        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      >
-        <div slot="contextual-actions">
-          <cds-tag type="blue" size="lg">Tag</cds-tag>
-        </div>
-        <div slot="page-actions">
-          <cds-button size="md"
-            >Primary action ${Add16({ slot: 'icon' })}</cds-button
+      </cds-header>
+      <c4p-page-header>
+        <c4p-page-header-breadcrumb>
+          ${Bee16({ slot: 'icon' })}
+          <cds-breadcrumb>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
           >
-        </div>
-        <c4p-page-header-content-text subtitle="Subtitle">
-          Built for modern teams, our technology platform simplifies complexity
-          with powerful APIs, real-time collaboration tools, and seamless
-          integration. From deployment to monitoring, we help you ship faster,
-          scale efficiently, and stay in control every step of the way.
-        </c4p-page-header-content-text>
-      </c4p-page-header-content>
-    </c4p-page-header>`,
+            ${Activity16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 1</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${AiGenerate16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 2</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${CloudFoundry16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 3</span>
+          </cds-icon-button>
+        </c4p-page-header-breadcrumb>
+        <c4p-page-header-content
+          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+        >
+          <div slot="contextual-actions">
+            <cds-tag type="blue" size="lg">Tag</cds-tag>
+          </div>
+          <div slot="page-actions">
+            <cds-button size="md"
+              >Primary action ${Add16({ slot: 'icon' })}</cds-button
+            >
+          </div>
+          <c4p-page-header-content-text subtitle="Subtitle">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </c4p-page-header-content-text>
+        </c4p-page-header-content>
+      </c4p-page-header>`,
 };
 
 export const ContentWithHeroImage = {
   render: () =>
     html`
+    <style>
+        ${styles}
+      </style>
+      <cds-header aria-label="IBM Platform Name">
+        <cds-header-name href="javascript:void 0" prefix="IBM"
+          >[Platform]</cds-header-name
+        >
+      </cds-header>
     <c4p-page-header>
       <div class="cds--css-grid">
         <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <c4p-page-header-breadcrumb border=false within-grid>
+          <c4p-page-header-breadcrumb ?border=${false} within-grid>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
@@ -386,62 +425,79 @@ export const ContentWithHeroImage = {
 
 export const ContentWithIcon = {
   render: () =>
-    html`<c4p-page-header>
-      <c4p-page-header-breadcrumb>
-        ${Bee16({ slot: 'icon' })}
-        <cds-breadcrumb>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-        </cds-breadcrumb>
-        <cds-icon-button
-          slot="page-actions"
-          kind="ghost"
-          size="md"
-          align="bottom"
+    html` <style>
+        ${styles}
+      </style>
+      <cds-header aria-label="IBM Platform Name">
+        <cds-header-name href="javascript:void 0" prefix="IBM"
+          >[Platform]</cds-header-name
         >
-          ${Activity16({ slot: 'icon' })}
-          <span slot="tooltip-content">action 1</span>
-        </cds-icon-button>
-        <cds-icon-button
-          slot="page-actions"
-          kind="ghost"
-          size="md"
-          align="bottom"
+      </cds-header>
+      <c4p-page-header>
+        <c4p-page-header-breadcrumb>
+          ${Bee16({ slot: 'icon' })}
+          <cds-breadcrumb>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${Activity16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 1</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${AiGenerate16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 2</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${CloudFoundry16({ slot: 'icon' })}
+            <span slot="tooltip-content">action 3</span>
+          </cds-icon-button>
+        </c4p-page-header-breadcrumb>
+        <c4p-page-header-content
+          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
         >
-          ${AiGenerate16({ slot: 'icon' })}
-          <span slot="tooltip-content">action 2</span>
-        </cds-icon-button>
-        <cds-icon-button
-          slot="page-actions"
-          kind="ghost"
-          size="md"
-          align="bottom"
-        >
-          ${CloudFoundry16({ slot: 'icon' })}
-          <span slot="tooltip-content">action 3</span>
-        </cds-icon-button>
-      </c4p-page-header-breadcrumb>
-      <c4p-page-header-content
-        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      >
-        ${Bee32({ slot: 'icon' })}
-        <c4p-page-header-content-text subtitle="Subtitle">
-          Built for modern teams, our technology platform simplifies complexity
-          with powerful APIs, real-time collaboration tools, and seamless
-          integration. From deployment to monitoring, we help you ship faster,
-          scale efficiently, and stay in control every step of the way.
-        </c4p-page-header-content-text>
-      </c4p-page-header-content>
-    </c4p-page-header>`,
+          ${Bee32({ slot: 'icon' })}
+          <c4p-page-header-content-text subtitle="Subtitle">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </c4p-page-header-content-text>
+        </c4p-page-header-content>
+      </c4p-page-header>`,
 };
 
 export const TabBarWithTabsAndTags = {
   render: () =>
-    html`<c4p-page-header>
+    html` <style>
+        ${styles}
+      </style>
+      <cds-header aria-label="IBM Platform Name">
+        <cds-header-name href="javascript:void 0" prefix="IBM"
+          >[Platform]</cds-header-name
+        >
+      </cds-header>
+      <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${Bee16({ slot: 'icon' })}
           <cds-breadcrumb>
@@ -518,7 +574,9 @@ export const TabBarWithTabsAndTags = {
           <div slot="tags">
             ${tags.map(
               (e) =>
-                html` <cds-tag type="${e.type}" size="${e.size}"
+                html` <cds-tag
+                  type="${e.type as TAG_TYPE}"
+                  size="${e.size as TAG_SIZE}"
                   >${e.text}</cds-tag
                 >`
             )}

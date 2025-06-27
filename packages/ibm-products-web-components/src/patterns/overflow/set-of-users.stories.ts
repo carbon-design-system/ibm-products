@@ -22,25 +22,22 @@ const argTypes = {
     options: ['sm', 'md', 'lg', 'xl'],
   },
   condensed: { control: { type: 'boolean' } },
-  theme: {
-    control: { type: 'radio' },
-    options: ['light', 'dark'],
-  },
 };
 
 const defaultProps = {
-  usersCount: 10,
-  userSize: 'lg',
+  usersCount: 20,
+  userSize: 'md',
   condensed: false,
-  theme: 'light',
 };
 
-const renderUsersTemplate = (args) => {
-  const { usersCount, userSize, condensed, theme } = args;
+const renderUsersTemplate = (args, { globals }) => {
+  const { usersCount, userSize, condensed } = args;
   const usersData = generateUsers({
     count: usersCount,
     size: userSize,
   });
+
+  const theme = ['white', 'g10'].includes(globals.theme) ? 'light' : 'dark';
 
   return html`
     <style>

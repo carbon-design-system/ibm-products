@@ -52,15 +52,46 @@ $block-class: #{$prefix}--set-of-users;
   }
 }
 
+.popover-container {
+  .popover-user {
+    @include type.type-style('label-02');
+    margin: 0;
+  }
+}
+
+.view-all {
+  margin-top: $spacing-03;
+  display: block;
+}
+
+.users-search {
+  margin-block-start: $spacing-05;
+}
+
+cds-modal-header {
+  padding-inline: $spacing-05;
+}
+
+cds-modal-body {
+  @extend .#{$carbon-prefix}--modal-scroll-content;
+
+  overflow: auto;
+
+  @include breakpoint-up(md) {
+    block-size: 300px;
+  }
+}
+
 .custom-avatar {
   transition: all 0.1s ease-out;
+  margin-right: 4px;
 
   &__xl {
     block-size: $spacing-10;
     inline-size: $spacing-10;
 
     &.condensed {
-      inline-size: calc($spacing-10 / 2);
+      inline-size: calc($spacing-10 / 1.4);
       justify-content: flex-start;
 
       &:hover,
@@ -74,7 +105,7 @@ $block-class: #{$prefix}--set-of-users;
     inline-size: $spacing-09;
 
     &.condensed {
-      inline-size: calc($spacing-09 / 2);
+      inline-size: calc($spacing-09 / 1.4);
       justify-content: flex-start;
 
       &:hover,
@@ -88,7 +119,7 @@ $block-class: #{$prefix}--set-of-users;
     inline-size: $spacing-07;
 
     &.condensed {
-      inline-size: calc($spacing-07 / 2);
+      inline-size: calc($spacing-07 / 1.4);
       justify-content: flex-start;
 
       &:hover,
@@ -102,7 +133,7 @@ $block-class: #{$prefix}--set-of-users;
     inline-size: $spacing-06;
 
     &.condensed {
-      inline-size: calc($spacing-06 / 2);
+      inline-size: calc($spacing-06 / 1.4);
       justify-content: flex-start;
 
       &:hover,

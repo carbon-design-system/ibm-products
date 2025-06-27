@@ -14,7 +14,7 @@ export default class SetOfUsers extends LitElement {
   @state()
   hiddenUsers: any[] = [];
 
-  @property({ type: Array, attribute: 'tags-data', reflect: true })
+  @property({ type: Array, attribute: 'users-data', reflect: true })
   usersData: any[] = [];
 
   @property({ type: String, attribute: 'theme', reflect: true })
@@ -23,7 +23,7 @@ export default class SetOfUsers extends LitElement {
   @property({ type: Boolean, attribute: 'condensed', reflect: true })
   condensed = false;
 
-  @query('#tag-container')
+  @query('#user-container')
   private container!: HTMLElement;
 
   @query('[data-offset]')
@@ -39,28 +39,18 @@ export default class SetOfUsers extends LitElement {
   private searchString = '';
 
   private overflowHandler: { disconnect: () => void } | undefined;
-  private resizeObserver: ResizeObserver | undefined; // only for observing width changes of offset
 
   firstUpdated() {
     this.updateComplete.then(() => {
       this.initializeOverflowHandler();
-
-      // Observe size changes in the overflow tag
-      this.resizeObserver = new ResizeObserver(() => {
-        this.reinitializeOverflowHandler();
-      });
-      this.resizeObserver.observe(this.offset);
-
       document.addEventListener('click', this.handleDocumentClick);
     });
   }
 
   updated(changedProperties: Map<string, unknown>) {
     if (changedProperties.has('usersData')) {
-      const previousIsPopoverOpen = this.isPopoverOpen;
       this.updateComplete.then(() => {
         this.hiddenUsers = [];
-        this.isPopoverOpen = previousIsPopoverOpen;
         this.reinitializeOverflowHandler();
       });
     }
@@ -70,9 +60,6 @@ export default class SetOfUsers extends LitElement {
     super.disconnectedCallback();
     if (this.overflowHandler) {
       this.overflowHandler.disconnect();
-    }
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
     }
     document.removeEventListener('click', this.handleDocumentClick);
   }
@@ -105,34 +92,24 @@ export default class SetOfUsers extends LitElement {
 
   private handleTogglePopover(event: Event) {
     if (event instanceof PointerEvent) {
-      const popoverElement = (event.target as HTMLElement)?.parentElement
-        ?.parentElement;
-      popoverElement?.toggleAttribute('open');
+      this.isPopoverOpen = !this.isPopoverOpen;
     }
     if (event instanceof KeyboardEvent) {
       if (event.key === ' ' || event.key === 'Enter') {
-        const popoverElement = (event.target as HTMLElement)?.parentElement
-          ?.parentElement;
-        popoverElement?.toggleAttribute('open');
+        this.isPopoverOpen = !this.isPopoverOpen;
       }
     }
   }
 
   private handleDocumentClick = (event: Event) => {
-    if (!this.offset.contains(event.target as Node)) {
+    if (event.target !== this) {
       this.isPopoverOpen = false;
     }
   };
 
-  private handleDismiss = (e: CustomEvent, tag: any) => {
-    e.stopPropagation();
-    e.preventDefault();
-    this.usersData = this.usersData.filter((t) => t.text !== tag.text);
-  };
-
   render() {
     return html` <div
-        id="tag-container"
+        id="user-container"
         style="display: flex; white-space: nowrap;"
       >
         ${this.usersData.map(
@@ -175,23 +152,11 @@ export default class SetOfUsers extends LitElement {
             <cds-popover-content>
               <div style="padding: 0.9rem;" class="popover-container">
                 ${this.hiddenUsers.length > 0
-                  ? this.hiddenUsers.slice(0, 10).map((tag) =>
-                      tag.onClose
-                        ? html`
-                            <div class="dismissible-tag-container">
-                              <cds-dismissible-tag
-                                @cds-dismissible-tag-beingclosed=${(
-                                  e: CustomEvent
-                                ) => this.handleDismiss(e, tag)}
-                                text=${tag?.text}
-                                tag-title="Provide a custom title to the tag"
-                                type=${tag.type}
-                                size=${tag.size}
-                              ></cds-dismissible-tag>
-                            </div>
-                          `
-                        : html`<p class="popover-tag">${tag?.text}</p>`
-                    )
+                  ? this.hiddenUsers
+                      .slice(0, 10)
+                      .map(
+                        (user) => html`<p class="popover-user">${user.name}</p>`
+                      )
                   : nothing}
                 ${this.hiddenUsers.length > 10
                   ? html`
@@ -199,7 +164,7 @@ export default class SetOfUsers extends LitElement {
                         class="view-all"
                         @click=${() => (this.modalOpen = true)}
                       >
-                        View all tags
+                        View all users
                       </cds-link>
                     `
                   : nothing}
@@ -216,40 +181,27 @@ export default class SetOfUsers extends LitElement {
           >
             <cds-modal-header>
               <cds-modal-close-button></cds-modal-close-button>
-              <cds-modal-heading>All tags</cds-modal-heading>
+              <cds-modal-heading>All users</cds-modal-heading>
               <cds-search
                 size="lg"
                 close-button-label-text="Clear search input"
-                class="tags-search"
+                class="users-search"
                 label-text="Search"
-                placeholder="Search all tags"
+                placeholder="Search all users"
                 type="text"
                 @cds-search-input=${(e: CustomEvent) =>
                   (this.searchString = e.detail.value)}
               ></cds-search>
             </cds-modal-header>
             <cds-modal-body>
-              <div class="modal-tags-container gradient-vertical">
+              <div class="modal-users-container gradient-vertical">
                 ${this.usersData
                   .filter(
-                    (tag) =>
-                      tag.text &&
-                      new RegExp(this.searchString, 'i').test(tag.text)
+                    (user) =>
+                      user.name &&
+                      new RegExp(this.searchString, 'i').test(user.name)
                   )
-                  .map((tag) =>
-                    tag.onClose
-                      ? html`<cds-dismissible-tag
-                          @cds-dismissible-tag-beingclosed=${(e: CustomEvent) =>
-                            this.handleDismiss(e, tag)}
-                          text=${tag?.text}
-                          tag-title="Provide a custom title to the tag"
-                          type=${tag.type}
-                          size=${tag.size}
-                        ></cds-dismissible-tag>`
-                      : html`<cds-tag type=${tag.type} size=${tag.size}
-                          >${tag?.text}</cds-tag
-                        >`
-                  )}
+                  .map((user) => html`<cds-tag>${user?.name}</cds-tag>`)}
               </div>
             </cds-modal-body>
           </cds-modal>`

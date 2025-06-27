@@ -115,115 +115,117 @@ export const Default = {
       <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
+      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
         <cds-header-name href="javascript:void 0" prefix="IBM"
           >[Platform]</cds-header-name
         >
       </cds-header>
-      <c4p-page-header>
-        <c4p-page-header-breadcrumb
-          ?border="${border}"
-          ?page-actions-flush="${pageActionsFlush}"
-          ?content-actions-flush="${contentActionsFlush}"
-        >
-          ${renderBreadcrumbIcon ? Bee16({ slot: 'icon' }) : undefined}
-          <cds-breadcrumb>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-          </cds-breadcrumb>
-          <div slot="content-actions">
-            <cds-button size="md">Button</cds-button>
+      <main>
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb
+            border=${border}
+            ?page-actions-flush="${pageActionsFlush}"
+            ?content-actions-flush="${contentActionsFlush}"
+          >
+            ${renderBreadcrumbIcon ? Bee16({ slot: 'icon' }) : undefined}
+            <cds-breadcrumb>
+              <cds-breadcrumb-item>
+                <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+              </cds-breadcrumb-item>
+              <cds-breadcrumb-item>
+                <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+              </cds-breadcrumb-item>
+            </cds-breadcrumb>
+            <div slot="content-actions">
+              <cds-button size="md">Button</cds-button>
+            </div>
+            <cds-icon-button
+              slot="page-actions"
+              kind="ghost"
+              size="md"
+              align="bottom"
+            >
+              ${Activity16({ slot: 'icon' })}
+              <span slot="tooltip-content">action 1</span>
+            </cds-icon-button>
+            <cds-icon-button
+              slot="page-actions"
+              kind="ghost"
+              size="md"
+              align="bottom"
+            >
+              ${AiGenerate16({ slot: 'icon' })}
+              <span slot="tooltip-content">action 2</span>
+            </cds-icon-button>
+            <cds-icon-button
+              slot="page-actions"
+              kind="ghost"
+              size="md"
+              align="bottom"
+            >
+              ${CloudFoundry16({ slot: 'icon' })}
+              <span slot="tooltip-content">action 3</span>
+            </cds-icon-button>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content title="${title}">
+            <c4p-page-header-content-text subtitle="Subtitle">
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </c4p-page-header-content-text>
+          </c4p-page-header-content>
+          <c4p-page-header-tabs>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+                >Tab 2</cds-tab
+              >
+              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+                >Tab 3</cds-tab
+              >
+              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+                >Tab 4</cds-tab
+              >
+              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+                >Tab 5</cds-tab
+              >
+              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+                >Tab 6</cds-tab
+              >
+              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+                >Tab 7</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+        <div class="tabs-demo">
+          <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+            Tab Panel 1
           </div>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${Activity16({ slot: 'icon' })}
-            <span slot="tooltip-content">action 1</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${AiGenerate16({ slot: 'icon' })}
-            <span slot="tooltip-content">action 2</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${CloudFoundry16({ slot: 'icon' })}
-            <span slot="tooltip-content">action 3</span>
-          </cds-icon-button>
-        </c4p-page-header-breadcrumb>
-        <c4p-page-header-content title="${title}">
-          <c4p-page-header-content-text subtitle="Subtitle">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </c4p-page-header-content-text>
-        </c4p-page-header-content>
-        <c4p-page-header-tabs>
-          <cds-tabs value="tab-1">
-            <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
-              >Tab 1</cds-tab
-            >
-            <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
-              >Tab 2</cds-tab
-            >
-            <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
-              >Tab 3</cds-tab
-            >
-            <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
-              >Tab 4</cds-tab
-            >
-            <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
-              >Tab 5</cds-tab
-            >
-            <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
-              >Tab 6</cds-tab
-            >
-            <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
-              >Tab 7</cds-tab
-            >
-          </cds-tabs>
-        </c4p-page-header-tabs>
-      </c4p-page-header>
-      <div class="tabs-demo">
-        <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
-          Tab Panel 1
+          <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+            Tab Panel 2
+          </div>
+          <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+            Tab Panel 3
+          </div>
+          <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+            Tab Panel 4
+          </div>
+          <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
+            Tab Panel 5
+          </div>
+          <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>
+            Tab Panel 6
+          </div>
+          <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
+            Tab Panel 7
+          </div>
         </div>
-        <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
-          Tab Panel 2
-        </div>
-        <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
-          Tab Panel 3
-        </div>
-        <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
-          Tab Panel 4
-        </div>
-        <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
-          Tab Panel 5
-        </div>
-        <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>
-          Tab Panel 6
-        </div>
-        <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
-          Tab Panel 7
-        </div>
-      </div>
+      </main>
     `;
   },
 };
@@ -233,77 +235,80 @@ export const ContentWithContextualActions = {
     html` <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
+      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
         <cds-header-name href="javascript:void 0" prefix="IBM"
           >[Platform]</cds-header-name
         >
       </cds-header>
-      <c4p-page-header>
-        <c4p-page-header-breadcrumb>
-          ${Bee16({ slot: 'icon' })}
-          <cds-breadcrumb>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-          </cds-breadcrumb>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
+      <main>
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb>
+            ${Bee16({ slot: 'icon' })}
+            <cds-breadcrumb>
+              <cds-breadcrumb-item>
+                <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+              </cds-breadcrumb-item>
+              <cds-breadcrumb-item>
+                <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+              </cds-breadcrumb-item>
+            </cds-breadcrumb>
+            <cds-icon-button
+              slot="page-actions"
+              kind="ghost"
+              size="md"
+              align="bottom"
+            >
+              ${Activity16({ slot: 'icon' })}
+              <span slot="tooltip-content">action 1</span>
+            </cds-icon-button>
+            <cds-icon-button
+              slot="page-actions"
+              kind="ghost"
+              size="md"
+              align="bottom"
+            >
+              ${AiGenerate16({ slot: 'icon' })}
+              <span slot="tooltip-content">action 2</span>
+            </cds-icon-button>
+            <cds-icon-button
+              slot="page-actions"
+              kind="ghost"
+              size="md"
+              align="bottom"
+            >
+              ${CloudFoundry16({ slot: 'icon' })}
+              <span slot="tooltip-content">action 3</span>
+            </cds-icon-button>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content
+            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
           >
-            ${Activity16({ slot: 'icon' })}
-            <span slot="tooltip-content">action 1</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${AiGenerate16({ slot: 'icon' })}
-            <span slot="tooltip-content">action 2</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${CloudFoundry16({ slot: 'icon' })}
-            <span slot="tooltip-content">action 3</span>
-          </cds-icon-button>
-        </c4p-page-header-breadcrumb>
-        <c4p-page-header-content
-          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-        >
-          <div slot="contextual-actions">
-            <cds-tag type="blue" size="lg">Tag</cds-tag>
-          </div>
-          <c4p-page-header-content-text subtitle="Subtitle">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </c4p-page-header-content-text>
-        </c4p-page-header-content>
-      </c4p-page-header>`,
+            <div slot="contextual-actions">
+              <cds-tag type="blue" size="lg">Tag</cds-tag>
+            </div>
+            <c4p-page-header-content-text subtitle="Subtitle">
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </c4p-page-header-content-text>
+          </c4p-page-header-content> </c4p-page-header
+        >,
+      </main>`,
 };
 
 export const ContentWithContextualActionsAndPageActions = {
-  render: () =>
-    html` <style>
-        ${styles}
-      </style>
-      <cds-header aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
+  render: () => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
+      <cds-header-name href="javascript:void 0" prefix="IBM"
+        >[Platform]</cds-header-name
+      >
+    </cds-header>
+    <main>
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${Bee16({ slot: 'icon' })}
@@ -362,7 +367,9 @@ export const ContentWithContextualActionsAndPageActions = {
             the way.
           </c4p-page-header-content-text>
         </c4p-page-header-content>
-      </c4p-page-header>`,
+      </c4p-page-header>
+    </main>
+  `,
 };
 
 export const ContentWithHeroImage = {
@@ -371,15 +378,16 @@ export const ContentWithHeroImage = {
     <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
+      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
         <cds-header-name href="javascript:void 0" prefix="IBM"
           >[Platform]</cds-header-name
         >
       </cds-header>
-    <c4p-page-header>
+      <main>
+<c4p-page-header>
       <div class="cds--css-grid">
         <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <c4p-page-header-breadcrumb ?border=${false} within-grid>
+          <c4p-page-header-breadcrumb border=${false} within-grid>
         ${Bee16({ slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
@@ -420,19 +428,22 @@ export const ContentWithHeroImage = {
         </div>
       </div>
       </div>
-    </c4p-page-header>`,
+    </c4p-page-header>
+      </main>
+    `,
 };
 
 export const ContentWithIcon = {
-  render: () =>
-    html` <style>
-        ${styles}
-      </style>
-      <cds-header aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
+  render: () => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
+      <cds-header-name href="javascript:void 0" prefix="IBM"
+        >[Platform]</cds-header-name
+      >
+    </cds-header>
+    <main>
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${Bee16({ slot: 'icon' })}
@@ -484,19 +495,22 @@ export const ContentWithIcon = {
             the way.
           </c4p-page-header-content-text>
         </c4p-page-header-content>
-      </c4p-page-header>`,
+      </c4p-page-header>
+    </main>
+  `,
 };
 
 export const TabBarWithTabsAndTags = {
-  render: () =>
-    html` <style>
-        ${styles}
-      </style>
-      <cds-header aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
+  render: () => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
+      <cds-header-name href="javascript:void 0" prefix="IBM"
+        >[Platform]</cds-header-name
+      >
+    </cds-header>
+    <main>
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${Bee16({ slot: 'icon' })}
@@ -605,7 +619,9 @@ export const TabBarWithTabsAndTags = {
         <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
           Tab Panel 7
         </div>
-      </div>`,
+      </div>
+    </main>
+  `,
 };
 
 const meta = {

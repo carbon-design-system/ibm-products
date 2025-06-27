@@ -1,9 +1,28 @@
 @use '@carbon/styles/scss/spacing';
 
-#main-content {
-  margin-block-start: spacing.$spacing-09;
+.page-header--docs-demo .docs-story div:first-child {
+  padding: 0;
 }
 
 .tabs-demo {
   block-size: 200vh;
+}
+
+.page-header--docs-demo .tabs-demo {
+  block-size: 100%;
+}
+
+#main-content main {
+  margin-block-start: spacing.$spacing-09;
+}
+
+.page-header--docs-demo .innerZoomElementWrapper > * {
+  /* Used to override storybook styling from a dynamically generated class in the canvas preview */
+  /* stylelint-disable-next-line declaration-no-important */
+  border: 0 !important;
+}
+
+.page-header--docs-demo .ui-shell--header {
+  /* stylelint-disable-next-line carbon/layout-use */
+  transform: translateY(-48px);
 }

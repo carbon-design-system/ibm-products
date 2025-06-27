@@ -47,6 +47,7 @@ $carbon-prefix: 'cds';
   position: sticky;
   background-color: $layer-01;
   block-size: convert.to-rem(40px);
+  border-block-end: $border-subtle;
 
   /* custom css property used from calculation of breadcrumb offset */
   /* stylelint-disable-next-line carbon/layout-use */

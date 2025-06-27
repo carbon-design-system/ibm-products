@@ -23,9 +23,7 @@ const getHeaderOffset = (el: HTMLElement): number => {
   const scrollableContainerTop = scrollableContainer
     ? (scrollableContainer as HTMLElement).getBoundingClientRect().top
     : 0;
-  console.log(scrollableContainer);
   const offsetMeasuringTop = el ? el.getBoundingClientRect().top : 0;
-  console.log(el, offsetMeasuringTop);
   const totalHeaderOffset =
     offsetMeasuringTop !== 0 ? offsetMeasuringTop - scrollableContainerTop : 0;
   return totalHeaderOffset;

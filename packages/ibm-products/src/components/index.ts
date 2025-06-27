@@ -76,6 +76,7 @@ export { ActionBar } from './ActionBar';
 export * from './FilterPanel';
 export * from './ConditionBuilder';
 export * from './GetStartedCard';
+export * as unstable__PageHeader from './PageHeader/next/PageHeader';
 
 export {
   FeatureFlags as unstable_FeatureFlags,

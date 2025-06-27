@@ -37,7 +37,7 @@ import InterstitialScreenFooter, {
 } from './InterstitialScreenFooter';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--interstitial-screen`;
+export const blockClass = `${pkg.prefix}--interstitial-screen`;
 const componentName = 'InterstitialScreen';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -65,7 +65,7 @@ export interface InterstitialScreenProps {
   /**
    * The aria label applied to the Interstitial Screen component
    */
-  interstitialAriaLabel?: string;
+  ariaLabel?: string;
   /**
    * Specifies whether the component is shown as a full-screen
    * experience, else it is shown as a modal by default.
@@ -74,7 +74,7 @@ export interface InterstitialScreenProps {
   /**
    * Specifies whether the component is currently open.
    */
-  isOpen?: boolean;
+  open?: boolean;
 
   /**
    * Function to call when the close button is clicked.
@@ -88,7 +88,7 @@ export interface InterstitialScreenProps {
 }
 
 // Define the type for InterstitialScreen, extending it to include Header
-type InterstitialScreenComponent = React.ForwardRefExoticComponent<
+export type InterstitialScreenComponent = React.ForwardRefExoticComponent<
   InterstitialScreenProps & React.RefAttributes<HTMLDivElement>
 > & {
   Header: React.FC<InterstitialScreenHeaderProps>;
@@ -133,9 +133,9 @@ export let InterstitialScreen = React.forwardRef<
   const {
     children,
     className,
-    interstitialAriaLabel = 'Interstitial screen',
+    ariaLabel = 'Interstitial screen',
     isFullScreen = false,
-    isOpen = false,
+    open = false,
     launcherButtonRef,
     onClose,
     ...rest
@@ -173,22 +173,22 @@ export let InterstitialScreen = React.forwardRef<
   );
 
   useEffect(() => {
-    if (!isOpen) {
+    if (!open) {
       setProgStep(0);
     }
     startButtonRef.current?.focus();
-  }, [isOpen, progStep, onClose]);
+  }, [open, progStep, onClose]);
 
   useEffect(() => {
     // for modal only, "is-visible" triggers animation
-    setIsVisibleClass(!isFullScreen && isOpen ? 'is-visible' : null);
+    setIsVisibleClass(!isFullScreen && open ? 'is-visible' : null);
     nextButtonRef?.current?.focus();
-    if (!isOpen && launcherButtonRef) {
+    if (!open && launcherButtonRef) {
       setTimeout(() => {
         launcherButtonRef.current.focus();
       }, 0);
     }
-  }, [launcherButtonRef, isFullScreen, isOpen]);
+  }, [launcherButtonRef, isFullScreen, open]);
 
   // hitting escape key also closes this component
   useEffect(() => {
@@ -202,7 +202,7 @@ export let InterstitialScreen = React.forwardRef<
     return () => window.removeEventListener('keydown', close);
   }, [handleClose]);
 
-  if (!isOpen) {
+  if (!open) {
     return null;
   }
 
@@ -218,9 +218,9 @@ export let InterstitialScreen = React.forwardRef<
           )}
           size="lg"
           onClose={handleClose}
-          open={isOpen}
+          open={open}
           ref={_forwardedRef}
-          aria-label={interstitialAriaLabel}
+          aria-label={ariaLabel}
           {...getDevtoolsProps(componentName)}
         >
           {children}
@@ -240,7 +240,7 @@ export let InterstitialScreen = React.forwardRef<
           isVisibleClass
         )}
         role="main"
-        aria-label={interstitialAriaLabel}
+        aria-label={ariaLabel}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
@@ -301,6 +301,11 @@ InterstitialScreen.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 InterstitialScreen.propTypes = {
+  /**
+   * The aria label applied to the Interstitial Screen component
+   */
+  ariaLabel: PropTypes.string,
+
   children: PropTypes.node,
 
   /**
@@ -311,20 +316,12 @@ InterstitialScreen.propTypes = {
    * Tooltip text and aria label for the Close button icon.
    */
   closeIconDescription: PropTypes.string,
-  /**
-   * The aria label applied to the Interstitial Screen component
-   */
-  interstitialAriaLabel: PropTypes.string,
+
   /**
    * Specifies whether the component is shown as a full-screen
    * experience, else it is shown as a modal by default.
    */
   isFullScreen: PropTypes.bool,
-  /**
-   * Specifies whether the component is currently open.
-   */
-  isOpen: PropTypes.bool,
-
   /**
    * Provide a ref to return focus to once the interstitial is closed.
    */
@@ -334,4 +331,9 @@ InterstitialScreen.propTypes = {
    * Function to call when the close button is clicked.
    */
   onClose: PropTypes.func,
+
+  /**
+   * Specifies whether the component is currently open.
+   */
+  open: PropTypes.bool,
 };

@@ -44,7 +44,7 @@ $one-grid-column: calc(100% / 16);
   &__carousel {
     block-size: 100%;
     .#{$carousel-item} {
-      flex: 0 0 100% !important;
+      flex: 0 0 100%;
       scroll-snap-align: start;
     }
   }
@@ -52,6 +52,10 @@ $one-grid-column: calc(100% / 16);
   &--internal-body {
     padding: 0 !important;
     margin: 0 !important;
+  }
+
+  &--content {
+    block-size: 100%;
   }
 
   // HEADER
@@ -102,6 +106,7 @@ $one-grid-column: calc(100% / 16);
   // FOOTER
   &--footer {
     display: flex;
+    box-sizing: initial;
     flex-direction: row;
     justify-content: flex-end;
     background: $background;
@@ -119,7 +124,7 @@ $one-grid-column: calc(100% / 16);
     #{$block}--skip-btn {
       flex-grow: 1 !important;
       max-inline-size: none;
-      padding-inline-start: $spacing-07 !important;
+      padding-inline-start: $spacing-07;
     }
     .#{c4p-settings.$carbon-prefix}--inline-loading {
       position: absolute;
@@ -148,15 +153,6 @@ $one-grid-column: calc(100% / 16);
       margin: 0;
       block-size: 100vh;
       max-inline-size: 100vw;
-    }
-
-    #{$block}--footer {
-      #{$block}--skip-btn {
-        padding-inline-start: $spacing-08 !important;
-        @include breakpoint-down(xlg) {
-          padding-inline-start: $spacing-07 !important;
-        }
-      }
     }
   }
 }

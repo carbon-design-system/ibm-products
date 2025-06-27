@@ -15,14 +15,15 @@ import React, {
 import PropTypes from 'prop-types';
 
 import {
+  blockClass,
   disableButtonConfigType,
   InterstitialScreenContext,
 } from './InterstitialScreen';
 import { ModalBody } from '@carbon/react';
-import { pkg } from '../../settings';
 
 import { Carousel } from '../Carousel';
 import { EnrichedChildren } from './InterstitialScreenHeader';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 type contentRendererArgs = {
   handleGotoStep?: (value: number) => void;
@@ -50,7 +51,7 @@ const InterstitialScreenBody = React.forwardRef<
   InterstitialScreenBodyProps
 >((props, ref) => {
   const { className = '', contentRenderer, ...rest } = props;
-  const blockClass = `${pkg.prefix}--interstitial-screen`;
+
   const bodyBlockClass = `${blockClass}--internal-body`;
 
   const [stepType, setStepType] = useState<StepType>();
@@ -124,7 +125,8 @@ const InterstitialScreenBody = React.forwardRef<
     <div
       className={`${blockClass}--body ${className}`}
       ref={bodyScrollRef ?? ref}
-      {...rest}
+      {...getDevtoolsProps('InterstitialScreenBody')}
+      {...(isFullScreen ? rest : {})}
     >
       <div className={`${blockClass}--content`}>
         {stepType === 'multi' ? (
@@ -149,7 +151,7 @@ const InterstitialScreenBody = React.forwardRef<
   return isFullScreen ? (
     renderBody()
   ) : (
-    <ModalBody ref={ref} className={bodyBlockClass}>
+    <ModalBody ref={ref} className={bodyBlockClass} {...rest}>
       {renderBody()}
     </ModalBody>
   );

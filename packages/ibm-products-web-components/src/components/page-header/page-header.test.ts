@@ -11,9 +11,27 @@ import CDSPageHeader from './page-header';
 import CDSPageHeaderBreadcrumb from './page-header-breadcrumb';
 import CDSPageHeaderTabs from './page-header-tabs';
 import CDSTabs from '@carbon/web-components/es/components/tabs/tabs';
+import { prefix } from '../../globals/settings';
 import './index';
 
 describe('c4p-page-header', function () {
+    it.only('should find custom css properties to initialize sticky positioning', async () => {
+    const pageHeader: CDSPageHeader = await fixture(
+      html`<c4p-page-header>
+        <c4p-page-header-breadcrumb>
+          <cds-breadcrumb>
+            <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
+            <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </c4p-page-header-breadcrumb>
+        <c4p-page-header-content title="Page header content title">
+          </c4p-page-header-content>
+      </c4p-page-header>`
+    );
+    await pageHeader.updated;
+    console.log(getComputedStyle(pageHeader), 'HEREEEEEEEE????????????', pageHeader);
+    console.log(getComputedStyle(pageHeader).getPropertyValue(`--${prefix}-page-header-header-top`));
+  });
   describe('c4p-page-header-breadcrumb', () => {
     it('should place className on the outermost element', async () => {
       const el: CDSPageHeaderBreadcrumb = await fixture(

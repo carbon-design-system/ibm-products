@@ -34,9 +34,7 @@ test.describe('NotificationsPanel @avt', () => {
       },
     });
 
-    const notificationPanel = await page.locator(
-      `#${pkg.prefix}--notifications-panel`
-    );
+    const notificationPanel = await page.locator('[role="dialog"]');
     await expect(notificationPanel).toBeVisible();
 
     for (let i = 0; i < 10; i++) {
@@ -56,14 +54,12 @@ test.describe('NotificationsPanel @avt', () => {
   test('@avt-notification-panel-focus-return-to-trigger', async ({ page }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
-      id: 'ibm-products-components-notifications-panel-notificationspanel--default',
+      id: 'components-notificationspanel--default',
       globals: {
         carbonTheme: 'white',
       },
     });
-    const notificationPanel = await page.locator(
-      `#${pkg.prefix}--notifications-panel`
-    );
+    const notificationPanel = await page.locator('[role="dialog"]');
     await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(
       'button[aria-label="Open notifications"]'
@@ -84,14 +80,12 @@ test.describe('NotificationsPanel @avt', () => {
   }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
-      id: 'ibm-products-components-notifications-panel-notificationspanel--default',
+      id: 'components-notificationspanel--default',
       globals: {
         carbonTheme: 'white',
       },
     });
-    const notificationPanel = await page.locator(
-      `#${pkg.prefix}--notifications-panel`
-    );
+    const notificationPanel = await page.locator('[role="dialog"]');
     await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(
       'button[aria-label="Open notifications"]'

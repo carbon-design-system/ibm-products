@@ -101,7 +101,7 @@ test.describe('SidePanel @avt', () => {
   test('@avt-resizer-feature-enabled', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
-      id: 'ibm-products-components-side-panel-sidepanel--slide-over&args=jsFlags[0]:enableSidepanelResizer',
+      id: 'components-sidepanel--slide-over&args=jsFlags[0]:enableSidepanelResizer',
       globals: {
         carbonTheme: 'white',
       },

@@ -363,6 +363,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__main .#{$block-class}__influencer {
+    background-color: $layer;
     border-inline-end: none;
     border-inline-start: 1px solid $border-subtle-01;
   }

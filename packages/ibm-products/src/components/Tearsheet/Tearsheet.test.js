@@ -392,8 +392,8 @@ describe(componentName, () => {
   it('renders influencer', async () => {
     render(<Tearsheet {...{ influencer }} />);
     expect(document.querySelector(`.${blockClass}__influencer`)).not.toBeNull();
-    const influencerElt = screen.getByText(influencerFragment).parentElement;
-    expect(influencerElt).not.toHaveClass(`${blockClass}__influencer--right`);
+    const influencerElt =
+      screen.getByText(influencerFragment).parentElement.parentElement;
     expect(influencerElt).not.toHaveClass(`${blockClass}__influencer--wide`);
   });
 
@@ -401,12 +401,14 @@ describe(componentName, () => {
     render(<Tearsheet {...{ influencer }} influencerPosition="right" />);
     const influencerElt =
       screen.getByText(influencerFragment).parentElement.parentElement;
-    expect(influencerElt).toHaveClass(`${blockClass}__main`);
+    const mainElt = influencerElt.parentElement;
+    expect(mainElt).toHaveClass(`${blockClass}__main`);
   });
 
   it('responds to influencerWidth', async () => {
     render(<Tearsheet {...{ influencer }} influencerWidth="wide" />);
-    const influencerElt = screen.getByText(influencerFragment).parentElement;
+    const influencerElt =
+      screen.getByText(influencerFragment).parentElement.parentElement;
     expect(influencerElt).toHaveClass(`${blockClass}__influencer--wide`);
   });
 

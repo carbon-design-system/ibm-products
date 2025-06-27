@@ -37,7 +37,7 @@ export const Example = () => {
     headerTitle: 'Welcom, Jan!',
     interstitialAriaLabel: 'Interstitial Screen',
   };
-  const step2Ref = useRef();
+  const step2Ref = useRef(undefined);
   const getContent = ({ progStep }) => {
     return (
       <>

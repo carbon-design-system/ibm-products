@@ -113,7 +113,6 @@ export type EmptyStatePresetProps = Omit<EmptyStateProps, 'illustration'>;
  */
 export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
   ({ v2 = false, ...props }, ref) => {
-    // todo: deprecate v1
     if (v2) {
       return <EmptyStateV2 {...props} />;
     }
@@ -132,10 +131,7 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
     } = props;
     return (
       <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
+        {...rest}
         className={cx(blockClass, `${blockClass}-type--default`, className, {
           [`${blockClass}-position--${illustrationPosition}`]: !!illustration,
         })}

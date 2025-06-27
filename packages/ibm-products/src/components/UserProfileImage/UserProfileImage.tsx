@@ -102,130 +102,125 @@ export type UserProfileImageProps = UserProfileImageBaseProps & imageProps;
 export let UserProfileImage = React.forwardRef<
   HTMLDivElement,
   UserProfileImageProps
->(
-  (
-    {
-      backgroundColor,
-      className,
-      kind,
-      icon,
-      initials,
-      image,
-      imageDescription,
-      size,
-      theme,
-      tooltipText,
-      tooltipAlignment = 'bottom',
-      // Collect any other property values passed in.
-      ...rest
+>((props, ref) => {
+  const {
+    backgroundColor,
+    className,
+    kind,
+    icon,
+    initials,
+    image,
+    imageDescription,
+    size,
+    theme,
+    tooltipText,
+    tooltipAlignment = 'bottom',
+    ...rest
+  } = props;
+  const carbonPrefix = usePrefix();
+  const icons = {
+    user: {
+      md: (props) => <User size={20} {...props} />,
+      lg: (props) => <User size={24} {...props} />,
+      xl: (props) => <User size={32} {...props} />,
     },
-    ref
-  ) => {
-    const carbonPrefix = usePrefix();
-    const icons = {
-      user: {
-        md: (props) => <User size={20} {...props} />,
-        lg: (props) => <User size={24} {...props} />,
-        xl: (props) => <User size={32} {...props} />,
-      },
-      group: {
-        md: (props) => <Group size={20} {...props} />,
-        lg: (props) => <Group size={24} {...props} />,
-        xl: (props) => <Group size={32} {...props} />,
-      },
-    };
+    group: {
+      md: (props) => <Group size={20} {...props} />,
+      lg: (props) => <Group size={24} {...props} />,
+      xl: (props) => <Group size={32} {...props} />,
+    },
+  };
 
-    const formatInitials = () => {
-      if (initials && initials.length === 2) {
-        return initials;
-      }
-      // RegEx takes in the display name and returns the first and last initials. Thomas Watson and Thomas J. Watson
-      // both return JW.
-      return (
-        (initials || '')
-          .match(/(^\S\S?|\b\S)?/g)
-          ?.join('')
-          .match(/(^\S|\S$)?/g)
-          ?.join('')
-          .toUpperCase() || ''
-      );
-    };
-
-    const getFillItem = () => {
-      if (image) {
-        return () => (
-          <img
-            alt={imageDescription}
-            src={image}
-            className={`${blockClass}__photo ${blockClass}__photo--${size}`}
-          />
-        );
-      }
-      if (initials) {
-        return formatInitials;
-      }
-      if (kind && size) {
-        return icons[kind][size];
-      }
-      return icon;
-    };
-
-    // if user doesn't provide a color just generate a random one
-    const getRandomColor = () => {
-      const colors = [
-        'light-cyan',
-        'dark-cyan',
-        'light-gray',
-        'dark-gray',
-        'light-green',
-        'dark-green',
-        'light-magenta',
-        'dark-magenta',
-        'light-purple',
-        'dark-purple',
-        'light-teal',
-        'dark-teal',
-      ];
-      return colors[Math.floor(Math.random() * colors.length)];
-    };
-
-    const FillItem = getFillItem() as React.ComponentType<any>;
-
-    const renderUserProfileImage = () => (
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        ref={ref}
-        className={cx([
-          blockClass,
-          className,
-          `${blockClass}--${size}`,
-          `${blockClass}--${theme}`,
-          `${blockClass}--${backgroundColor || getRandomColor()}`,
-        ])}
-        {...getDevtoolsProps(componentName)}
-      >
-        <FillItem />
-      </div>
-    );
+  const formatInitials = () => {
+    if (initials && initials.length === 2) {
+      return initials;
+    }
+    // RegEx takes in the display name and returns the first and last initials. Thomas Watson and Thomas J. Watson
+    // both return JW.
     return (
-      FillItem &&
-      (tooltipText ? (
-        <Tooltip
-          align={tooltipAlignment}
-          label={tooltipText}
-          className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
-        >
-          <TooltipTrigger>{renderUserProfileImage()}</TooltipTrigger>
-        </Tooltip>
-      ) : (
-        renderUserProfileImage()
-      ))
+      (initials || '')
+        .match(/(^\S\S?|\b\S)?/g)
+        ?.join('')
+        .match(/(^\S|\S$)?/g)
+        ?.join('')
+        .toUpperCase() || ''
     );
-  }
-);
+  };
+
+  const getFillItem = () => {
+    if (image) {
+      return () => (
+        <img
+          alt={imageDescription}
+          src={image}
+          className={`${blockClass}__photo ${blockClass}__photo--${size}`}
+        />
+      );
+    }
+    if (initials) {
+      return formatInitials;
+    }
+    if (kind && size) {
+      return icons[kind][size];
+    }
+    return icon;
+  };
+
+  // if user doesn't provide a color just generate a random one
+  const getRandomColor = () => {
+    const colors = [
+      'light-cyan',
+      'dark-cyan',
+      'light-gray',
+      'dark-gray',
+      'light-green',
+      'dark-green',
+      'light-magenta',
+      'dark-magenta',
+      'light-purple',
+      'dark-purple',
+      'light-teal',
+      'dark-teal',
+    ];
+    return colors[Math.floor(Math.random() * colors.length)];
+  };
+
+  const FillItem = getFillItem() as React.ComponentType<any>;
+
+  const renderUserProfileImage = () => (
+    <div
+      {
+        // Pass through any other property values as HTML attributes.
+        ...rest
+      }
+      ref={ref}
+      className={cx([
+        blockClass,
+        className,
+        `${blockClass}--${size}`,
+        `${blockClass}--${theme}`,
+        `${blockClass}--${backgroundColor || getRandomColor()}`,
+      ])}
+      {...getDevtoolsProps(componentName)}
+    >
+      <FillItem />
+    </div>
+  );
+  return (
+    FillItem &&
+    (tooltipText ? (
+      <Tooltip
+        align={tooltipAlignment}
+        label={tooltipText}
+        className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
+      >
+        <TooltipTrigger>{renderUserProfileImage()}</TooltipTrigger>
+      </Tooltip>
+    ) : (
+      renderUserProfileImage()
+    ))
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);

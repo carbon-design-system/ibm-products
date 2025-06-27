@@ -173,15 +173,4 @@ describe(componentName, () => {
     fireEvent.click(closeButton);
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
-
-  it('throws error for an invalid child', () => {
-    const errorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    render(
-      <Guidebanner title="test title">
-        <p>invalid child</p>
-      </Guidebanner>
-    );
-    expect(errorMock).toHaveBeenCalledTimes(1);
-  });
 });

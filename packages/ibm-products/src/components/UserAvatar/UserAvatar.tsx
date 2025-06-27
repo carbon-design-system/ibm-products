@@ -106,9 +106,8 @@ type UserAvatarBaseProps = {
 type UserAvatarProps = UserAvatarBaseProps & ImageProps;
 
 export let UserAvatar = React.forwardRef<HTMLDivElement, UserAvatarProps>(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
+  (props, ref) => {
+    const {
       backgroundColor = 'order-1-cyan',
       className,
       image,
@@ -119,11 +118,8 @@ export let UserAvatar = React.forwardRef<HTMLDivElement, UserAvatarProps>(
       size = 'md',
       tooltipText,
       tooltipAlignment = 'bottom',
-      // Collect any other property values passed in.
       ...rest
-    },
-    ref
-  ) => {
+    } = props;
     const carbonPrefix = usePrefix();
     const iconSize = {
       sm: 16,

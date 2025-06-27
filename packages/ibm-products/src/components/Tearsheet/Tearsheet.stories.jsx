@@ -582,9 +582,9 @@ const StackedTemplate = (
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const ref = useRef(undefined);
-  const openButton1 = useRef();
-  const openButton2 = useRef();
-  const openButton3 = useRef();
+  const openButton1 = useRef(undefined);
+  const openButton2 = useRef(undefined);
+  const openButton3 = useRef(undefined);
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {

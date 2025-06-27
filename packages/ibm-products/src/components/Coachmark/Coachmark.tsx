@@ -240,7 +240,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       },
       targetRect: targetRect,
       targetOffset: targetOffset,
-      align: align,
+      align: align as PopoverAlignment,
       positionTune: positionTune,
       isOpen: isOpen,
     };

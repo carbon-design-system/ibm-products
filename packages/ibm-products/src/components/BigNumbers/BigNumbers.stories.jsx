@@ -8,7 +8,7 @@
 import React from 'react';
 import { Button } from '@carbon/react';
 import { Edit } from '@carbon/react/icons';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { BigNumbers } from '.';
 import { BigNumbersSize } from './constants';

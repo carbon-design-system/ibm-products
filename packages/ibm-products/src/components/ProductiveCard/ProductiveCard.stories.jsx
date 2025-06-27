@@ -20,7 +20,7 @@ import {
 } from '@carbon/react';
 import { ProductiveCard } from '.';
 import DocsPage from './ProductiveCard.docs-page';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const storyClass = 'productive-card-stories';
 

@@ -7,7 +7,7 @@
 
 import React from 'react';
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 import { Link as CarbonLink } from '@carbon/react';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 

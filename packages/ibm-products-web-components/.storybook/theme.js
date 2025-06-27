@@ -1,4 +1,4 @@
-import { create } from '@storybook/theming/create';
+import { create } from 'storybook/theming';
 import packageInfo from '../package.json';
 
 const { description, version } = packageInfo;

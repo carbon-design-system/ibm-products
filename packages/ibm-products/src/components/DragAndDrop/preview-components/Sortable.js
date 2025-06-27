@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { px } from '@carbon/layout';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { pkg } from '../../../settings';
 import { SortableItem } from './SortableItem';
 import { ListContainer } from './ListContainer';

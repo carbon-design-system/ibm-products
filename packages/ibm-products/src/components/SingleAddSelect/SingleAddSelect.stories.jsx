@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 import { SingleAddSelect } from '.';
 import { Button } from '@carbon/react';
 import DocsPage from './SingleAddSelect.docs-page';
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 
 export default {
   title: 'Patterns/Prebuilt patterns/Add and select/SingleAddSelect',

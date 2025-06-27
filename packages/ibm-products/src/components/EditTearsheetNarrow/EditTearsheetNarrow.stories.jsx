@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 // TODO: import action to handle events if required.
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   Button,
   Dropdown,

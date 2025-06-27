@@ -62,6 +62,7 @@ const valueStr =
  */
 export const stringFormatter = Template.bind({});
 stringFormatter.args = {
+  autoAlign: false,
   lines: 1,
   truncate: true,
   value: valueStr,

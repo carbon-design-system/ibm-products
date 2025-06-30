@@ -29,14 +29,16 @@ describe('c4p-page-header', function () {
       </c4p-page-header>`
     );
     await pageHeader.updateComplete;
+    await new Promise((resolve) => setTimeout(resolve, 0));
     const contentHeight = getComputedStyle(pageHeader).getPropertyValue(
       `--${prefix}-page-header-header-top`
     );
     const breadcrumbPosition = getComputedStyle(pageHeader).getPropertyValue(
       `--${prefix}-page-header-breadcrumb-top`
     );
-    expect(contentHeight).toBeDefined();
-    expect(breadcrumbPosition).toBeDefined();
+
+    expect(parseFloat(contentHeight)).toBeTypeOf('number');
+    expect(parseFloat(breadcrumbPosition)).toBeTypeOf('number');
   });
 
   describe('c4p-page-header-breadcrumb', () => {

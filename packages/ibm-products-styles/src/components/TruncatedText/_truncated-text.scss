@@ -19,38 +19,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--truncated-text;
     max-block-size: 48px;
     text-overflow: clip;
 
-    transition: none;
-    white-space: normal;
-
-    &--expanded {
-      max-block-size: 900px;
-    }
-  }@media screen and (prefers-reduced-motion: reduce) {
-&__text-content {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    max-block-size: 48px;
-    text-overflow: clip;
-
-    transition: none;
-    white-space: normal;
-
-    &--expanded {
-      max-block-size: 900px;
-    }
-}
-}
-
-  &__text-content {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    max-block-size: 48px;
-    text-overflow: clip;
-
     transition: all 300ms ease;
     white-space: normal;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
 
     &--expanded {
       max-block-size: 900px;

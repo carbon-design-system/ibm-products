@@ -1843,6 +1843,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon-labs/react-resizer@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@carbon-labs/react-resizer@npm:0.2.0"
+  checksum: 10/b983d194bc3a187b607c7ef7b52a22b4f8e1759d1e4918dd85e7d9fdc656593e5fb819ebc9314a14fc13fa90fc9b0d0a3ffce6aa0c21ea735ca3227fefdbbb90
+  languageName: node
+  linkType: hard
+
 "@carbon/colors@npm:>=10 <= 11, @carbon/colors@npm:^11.30.0":
   version: 11.30.0
   resolution: "@carbon/colors@npm:11.30.0"
@@ -14716,6 +14723,7 @@ __metadata:
     "@babel/core": "npm:^7.26.10"
     "@babel/eslint-parser": "npm:^7.26.10"
     "@babel/preset-react": "npm:^7.26.3"
+    "@carbon-labs/react-resizer": "npm:^0.2.0"
     "@commitlint/cli": "npm:^19.8.0"
     "@commitlint/config-conventional": "npm:^19.8.0"
     "@eslint/compat": "npm:^1.2.7"

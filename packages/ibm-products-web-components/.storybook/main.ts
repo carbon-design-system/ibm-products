@@ -35,6 +35,11 @@ const config = {
     name: '@storybook/web-components-vite',
     options: {},
   },
+  features: {
+    previewCsfV3: true,
+    buildStoriesJson: true,
+    interactions: false, // disable Interactions tab
+  },
   managerHead: (head: string) => {
     return `
       ${head}

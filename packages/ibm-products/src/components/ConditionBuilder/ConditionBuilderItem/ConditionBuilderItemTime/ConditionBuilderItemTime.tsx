@@ -15,20 +15,43 @@ import { blockClass } from '../../utils/util';
 interface ConditionBuilderItemTime {
   onChange: (value: string | undefined) => void;
   config: PropertyConfigTime['config'];
+  conditionState: {
+    label?: string;
+    value?: string;
+  };
 }
 export const ConditionBuilderItemTime = ({
   onChange,
   config,
+  conditionState,
 }: ConditionBuilderItemTime) => {
-  const [timeValue, setTimeValue] = useState('');
-  const [dayZoneValue, setDayZoneValue] = useState('AM');
-  const [timeZoneValue, setTimeZoneValue] = useState(config?.timeZones?.[0]);
+  const getInitialValue = (itemType: 'time' | 'dayZone' | 'timeZone') => {
+    const itemMap: Record<typeof itemType, number> = {
+      time: 0,
+      dayZone: 1,
+      timeZone: 2,
+    };
+
+    return conditionState.value !== 'INVALID'
+      ? (conditionState.value?.split(' ')[itemMap[itemType]] ?? undefined)
+      : undefined;
+  };
+
+  const initialTimeValue = getInitialValue('time');
+  const initialDayZone = getInitialValue('dayZone');
+  const initialTimeZone = getInitialValue('timeZone');
+
+  const [timeValue, setTimeValue] = useState(initialTimeValue);
+  const [dayZoneValue, setDayZoneValue] = useState(initialDayZone ?? 'AM');
+  const [timeZoneValue, setTimeZoneValue] = useState(
+    initialTimeZone ?? config?.timeZones?.[0]
+  );
 
   useEffect(() => {
     const timeToUpdate = `${timeValue ?? ''} ${dayZoneValue ?? ''} ${
       timeZoneValue ?? ''
     }`;
-    onChange(timeValue ? timeToUpdate : undefined);
+    onChange(timeValue ? timeToUpdate : 'INVALID');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeValue, dayZoneValue, timeZoneValue]);
 
@@ -43,12 +66,25 @@ export const ConditionBuilderItemTime = ({
   };
   return (
     <div className={`${blockClass}__item-time`}>
-      <TimePicker id="time-picker" labelText="Select a time" onChange={setTime}>
-        <TimePickerSelect id="time-picker-day-zone" onChange={setDayZone}>
+      <TimePicker
+        defaultValue={initialTimeValue}
+        id="time-picker"
+        labelText="Select a time"
+        onChange={setTime}
+      >
+        <TimePickerSelect
+          id="time-picker-day-zone"
+          defaultValue={initialDayZone}
+          onChange={setDayZone}
+        >
           <SelectItem value="AM" text="AM" />
           <SelectItem value="PM" text="PM" />
         </TimePickerSelect>
-        <TimePickerSelect id="time-picker-time-zone" onChange={setTimeZone}>
+        <TimePickerSelect
+          id="time-picker-time-zone"
+          defaultValue={initialTimeZone}
+          onChange={setTimeZone}
+        >
           {config?.timeZones?.map((timeZone, index) => (
             <SelectItem key={index} value={timeZone} text={timeZone} />
           ))}
@@ -59,6 +95,10 @@ export const ConditionBuilderItemTime = ({
 };
 
 ConditionBuilderItemTime.propTypes = {
+  /**
+   * current condition object
+   */
+  conditionState: PropTypes.object,
   /**
    * current config object that this property is part of
    */

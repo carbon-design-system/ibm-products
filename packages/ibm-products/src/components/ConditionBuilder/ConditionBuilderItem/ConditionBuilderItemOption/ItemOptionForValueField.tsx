@@ -36,11 +36,13 @@ interface ItemOptionForValueFieldProps {
   conditionState: Condition & { label?: string };
   config: PropertyConfigOption['config'];
   onChange: (value: any, e?: Event) => void;
+  closePopover: () => void;
 }
 export const ItemOptionForValueField = ({
   conditionState = {},
   config = {},
   onChange,
+  closePopover,
 }: ItemOptionForValueFieldProps) => {
   const multiSelectable = checkForMultiSelectOperator(conditionState, config);
 
@@ -176,9 +178,9 @@ export const ItemOptionForValueField = ({
             labelText={clearSearchText}
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
-            onKeyDown={(evt) =>
-              onKeyDownHandlerForSearch(evt, conditionBuilderRef)
-            }
+            onKeyDown={(evt) => {
+              onKeyDownHandlerForSearch(evt, conditionBuilderRef, closePopover);
+            }}
           />
         </div>
       )}

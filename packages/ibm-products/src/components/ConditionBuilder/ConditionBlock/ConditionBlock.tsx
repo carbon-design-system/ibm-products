@@ -205,7 +205,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
       : {};
   };
 
-  const renderChildren = (popoverRef) => {
+  const renderChildren = (popoverRef, closePopover) => {
     return (
       <ItemComponent
         conditionState={{
@@ -218,6 +218,20 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         data-name="valueField"
         parentRef={popoverRef}
         type={type}
+        closePopover={closePopover}
+      />
+    );
+  };
+  const renderItemOption = (popoverRef, closePopover) => {
+    return (
+      <ItemOption
+        conditionState={{
+          value: property,
+          label: propertyText,
+        }}
+        onChange={onPropertyChangeHandler}
+        config={{ options: inputConfig?.properties }}
+        closePopover={closePopover}
       />
     );
   };
@@ -287,16 +301,8 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         type={type}
         description={description}
         onChange={onPropertyChangeHandler}
-      >
-        <ItemOption
-          conditionState={{
-            value: property,
-            label: propertyText,
-          }}
-          onChange={onPropertyChangeHandler}
-          config={{ options: inputConfig?.properties }}
-        />
-      </ConditionBuilderItem>
+        renderChildren={renderItemOption}
+      />
       {checkIsValid(property) && (
         <ConditionBuilderItem
           label={operator}

@@ -36,7 +36,7 @@ interface ItemOptionForValueFieldProps {
   conditionState: Condition & { label?: string };
   config: PropertyConfigOption['config'];
   onChange: (value: any, e?: Event) => void;
-  closePopover: () => void;
+  closePopover?: () => void;
 }
 export const ItemOptionForValueField = ({
   conditionState = {},

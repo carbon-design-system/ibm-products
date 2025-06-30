@@ -18,11 +18,46 @@
 <meta name="twitter:image:alt" content="Carbon for IBM Products" />
 <meta name="twitter:image" content="https://ibm-products.carbondesignsystem.com/social.png" />
 
-<footer>
-  <dds-footer-container key="footer" disable-locale-button="true" size="micro" />
-</footer>
+<!-- Window objects / analytics config -->
+<script>
+  window._ibmAnalytics = {
+    settings: {
+      name: '',
+      isSpa: true,
+      tealiumProfileName: 'in-app-usage-growth',
+    },
+    onLoad: [['ibmStats.pageview', []]],
+  };
 
-<script type="module" src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/footer.min.js"></script>
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        ibm: {
+          siteId: '',
+        },
+        segment: {
+          autoPageEventSpa: true,
+          enabled: true,
+          env: 'test',
+          key: 'aWg1ug3bDNcSTnde9iwvg1OcvVRzf0JC',
+          coremetrics: false,
+          skipIdentify: true,
+          commonProperties: {
+            productCode: 'C4IP',
+            productTitle: 'Carbon for IBM Products',
+          },
+          pageProperties: {
+            productCode: 'C4IP',
+            productTitle: 'Carbon for IBM Products',
+          },
+        },
+      },
+      category: {
+        primaryCategory: 'PC110',
+      },
+    },
+  };
+</script>
 
 <!-- Storybook override -->
 <script>
@@ -31,6 +66,14 @@
   }, 1000);
 </script>
 
+<!-- Footer -->
+<!-- TODO: Uncomment footer tag and script below to test for analytics errors -->
+<!-- <footer>
+  <dds-footer-container key="footer" disable-locale-button="true" size="micro" />
+</footer>
+<script type="module" src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/footer.min.js"></script> -->
+
+
 <!-- Style overrides -->
 <style>
   body {
@@ -38,7 +81,7 @@
   }
 
   /* This style is required because of the compliance footer */
-  #root > div {
+  #root>div {
     height: calc(100vh - 48px);
   }
 

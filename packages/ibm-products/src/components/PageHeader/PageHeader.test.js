@@ -199,10 +199,8 @@ const testPropsUserDefined = {
 };
 
 describe('PageHeader', () => {
-  const { ResizeObserver } = window;
-  let mockElement;
   const mocks = [];
-  let warn;
+  let mockElement, warn;
 
   window.innerWidth = 2000;
   window.innerHeight = 1080;
@@ -226,21 +224,6 @@ describe('PageHeader', () => {
       id: 'uuidv4',
       mock: uuidv4.mockImplementation(() => 'test-id'),
     });
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    window.matchMedia = jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(), // Deprecated
-      removeListener: jest.fn(), // Deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
   });
 
   afterEach(() => {
@@ -248,7 +231,6 @@ describe('PageHeader', () => {
       mock.mock.mockRestore();
     });
     mockElement.mockRestore();
-    window.ResizeObserver = ResizeObserver;
     warn.mockRestore();
   });
 

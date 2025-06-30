@@ -531,9 +531,9 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
     position: absolute;
     z-index: 10; /* must be higher than title container border bottom */
     display: flex;
+    block-size: $spacing-07;
     inset-block-start: 0;
     inset-inline-end: 0;
-
     /* stylelint-disable-next-line max-nesting-depth */
     @media (prefers-reduced-motion) {
       position: absolute;

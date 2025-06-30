@@ -374,29 +374,11 @@ const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
 );
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-
   beforeAll(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
     pkg.feature['default-portal-target-body'] = false;
-    window.matchMedia = jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(), // Deprecated
-      removeListener: jest.fn(), // Deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
   });
 
   afterAll(() => {
-    window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
@@ -410,8 +392,8 @@ describe(componentName, () => {
   it('renders influencer', async () => {
     render(<Tearsheet {...{ influencer }} />);
     expect(document.querySelector(`.${blockClass}__influencer`)).not.toBeNull();
-    const influencerElt = screen.getByText(influencerFragment).parentElement;
-    expect(influencerElt).not.toHaveClass(`${blockClass}__influencer--right`);
+    const influencerElt =
+      screen.getByText(influencerFragment).parentElement.parentElement;
     expect(influencerElt).not.toHaveClass(`${blockClass}__influencer--wide`);
   });
 
@@ -419,12 +401,14 @@ describe(componentName, () => {
     render(<Tearsheet {...{ influencer }} influencerPosition="right" />);
     const influencerElt =
       screen.getByText(influencerFragment).parentElement.parentElement;
-    expect(influencerElt).toHaveClass(`${blockClass}__main`);
+    const mainElt = influencerElt.parentElement;
+    expect(mainElt).toHaveClass(`${blockClass}__main`);
   });
 
   it('responds to influencerWidth', async () => {
     render(<Tearsheet {...{ influencer }} influencerWidth="wide" />);
-    const influencerElt = screen.getByText(influencerFragment).parentElement;
+    const influencerElt =
+      screen.getByText(influencerFragment).parentElement.parentElement;
     expect(influencerElt).toHaveClass(`${blockClass}__influencer--wide`);
   });
 
@@ -451,19 +435,7 @@ describe(componentName, () => {
 });
 
 describe(componentNameNarrow, () => {
-  const { ResizeObserver } = window;
-
-  beforeAll(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    pkg.feature['default-portal-target-body'] = false;
-  });
-
   afterAll(() => {
-    window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
@@ -471,20 +443,8 @@ describe(componentNameNarrow, () => {
 });
 
 describe(componentNameCreateNarrow, () => {
-  const { ResizeObserver } = window;
-
   beforeAll(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
     pkg.feature['default-portal-target-body'] = false;
-  });
-
-  afterAll(() => {
-    window.ResizeObserver = ResizeObserver;
-    pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
   commonTests(

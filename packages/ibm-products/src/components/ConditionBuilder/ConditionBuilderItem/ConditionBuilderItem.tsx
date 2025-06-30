@@ -54,7 +54,10 @@ interface ConditionBuilderItemProps extends PropsWithChildren {
   description?: string;
   condition?: Action & Condition;
   config?: ConfigType;
-  renderChildren?: (ref: Ref<HTMLDivElement>) => ReactNode;
+  renderChildren?: (
+    ref: Ref<HTMLDivElement | null>,
+    closePopover: () => void
+  ) => ReactNode;
   onChange?: (val: string) => void;
   tabIndex?: number;
   onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -160,7 +163,9 @@ export const ConditionBuilderItem = ({
       }
       if (condition.popoverToOpen == currentField) {
         //current popover need to be opened
-        openPopOver();
+        setTimeout(() => {
+          openPopOver();
+        });
       }
     } else {
       // when we change any statement(if/ excl.if) which is not part of condition state, label change is triggered.
@@ -206,7 +211,7 @@ export const ConditionBuilderItem = ({
   };
 
   const handleKeyDownHandler = (evt: KeyboardEvent) => {
-    handleKeyDownForPopover(evt, conditionBuilderRef, popoverRef);
+    handleKeyDownForPopover(evt, conditionBuilderRef, popoverRef, closePopover);
     if (evt.key === 'Escape') {
       manageInvalidSelection();
     }
@@ -275,7 +280,9 @@ export const ConditionBuilderItem = ({
                 {title}
               </Heading>
               <div className={`${blockClass}__popover-content`}>
-                {renderChildren ? renderChildren(popoverRef) : children}
+                {renderChildren
+                  ? renderChildren(popoverRef, closePopover)
+                  : children}
               </div>
             </Section>
           </Layer>

@@ -15,7 +15,7 @@ import styles from './story-styles.scss?lit';
 const argTypes = {
   usersCount: {
     control: { type: 'number' },
-    description: 'Number of tags to display',
+    description: 'Number of users avatars to display',
   },
   userSize: {
     control: { type: 'radio' },

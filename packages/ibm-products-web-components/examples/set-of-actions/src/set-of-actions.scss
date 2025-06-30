@@ -8,32 +8,44 @@
 $css--plex: true !default;
 
 /* Other Carbon settings. */
-@use 'sass:map';
-@use '@carbon/styles';
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
 
-$block-class: #{$prefix}--set-of-tags;
+$block-class: #{$prefix}--set-of-actions;
 
-[data-hidden]:not([data-fixed]) {
-  display: none;
-}
-.action-svg {
-  /* web components ghost icon only button bug override */
-  align-self: unset;
-  color: var(--cds-icon-primary, #161616);
-}
+:host {
+  .#{$block-class} {
+    height: 100%;
 
-/* Suppress custom element until styles are loaded */
-cds-button:not(:defined) {
-  display: none;
-}
-/* Suppress custom element until styles are loaded */
-cds-overflow-menu:not(:defined) {
-  display: none;
+    // Suppress custom elements until styles are loaded
+    #{$carbon-prefix}-button:not(:defined),
+    #{$carbon-prefix}-overflow-menu:not(:defined) {
+      display: none;
+    }
+
+    &--horizontal {
+      display: flex;
+    }
+
+    &--vertical {
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    &__overflow-svg {
+      // Web components ghost icon only button bug override
+      align-self: unset;
+      color: $icon-primary;
+    }
+
+    [data-floating-menu-container] {
+      position: relative;
+    }
+
+    [data-hidden]:not([data-fixed]) {
+      display: none;
+    }
+  }
 }

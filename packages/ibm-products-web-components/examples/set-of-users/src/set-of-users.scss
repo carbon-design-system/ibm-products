@@ -12,134 +12,159 @@ $css--plex: true !default;
 @use '@carbon/styles';
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/focus-outline';
 @use '@carbon/styles/scss/components/tag';
 
 $prefix: 'c4p';
+$overlap-divisor: 1.4;
 $carbon-prefix: 'cds';
 
 $block-class: #{$prefix}--set-of-users;
 
-.custom-overflow {
-  @include type.type-style('label-01', true);
-  background-color: tag.$tag-background-gray;
-  color: $text-primary;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-
-  &__xl {
-    @include type.type-style('heading-04', true);
-    block-size: $spacing-10;
-    inline-size: $spacing-10;
+:host {
+  * {
+    box-sizing: border-box;
   }
-  &__lg {
-    @include type.type-style('heading-03', true);
-    block-size: $spacing-09;
-    inline-size: $spacing-09;
+
+  cds-modal-header {
+    padding-inline: $spacing-05;
   }
-  &__md {
-    @include type.type-style('body-compact-01', true);
-    block-size: $spacing-07;
-    inline-size: $spacing-07;
+
+  cds-modal-body {
+    @extend .#{$carbon-prefix}--modal-scroll-content;
+
+    cds-tag {
+      margin-inline-start: 0;
+    }
   }
-  &__sm {
-    block-size: $spacing-06;
-    inline-size: $spacing-06;
+
+  .#{$block-class}__custom-avatar {
+    display: flex;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: all $duration-fast-01 ease-out;
+    }
+
+    &:not(.#{$block-class}__custom-avatar--condensed) {
+      margin-right: $spacing-02;
+    }
   }
-}
 
-.popover-container {
-  .popover-user {
-    @include type.type-style('label-02');
-    margin: 0;
-  }
-}
+  @each $size, $spacing,
+    $type
+      in (
+        xl: (
+            $spacing-10,
+            'heading-04',
+          ),
+        lg: (
+            $spacing-09,
+            'heading-03',
+          ),
+        md: (
+            $spacing-07,
+            'body-compact-01',
+          ),
+        sm: (
+            $spacing-06,
+            null,
+          )
+      )
+  {
+    .#{$block-class}__custom-avatar--#{$size} {
+      block-size: nth($spacing, 1);
+      inline-size: nth($spacing, 1);
+    }
 
-.view-all {
-  margin-top: $spacing-03;
-  display: block;
-}
-
-.users-search {
-  margin-block-start: $spacing-05;
-}
-
-cds-modal-header {
-  padding-inline: $spacing-05;
-}
-
-cds-modal-body {
-  @extend .#{$carbon-prefix}--modal-scroll-content;
-
-  overflow: auto;
-
-  @include breakpoint-up(md) {
-    block-size: 300px;
-  }
-}
-
-.custom-avatar {
-  transition: all 0.1s ease-out;
-  margin-right: 4px;
-
-  &__xl {
-    block-size: $spacing-10;
-    inline-size: $spacing-10;
-
-    &.condensed {
-      inline-size: calc($spacing-10 / 1.4);
+    .#{$block-class}__custom-avatar--#{$size}.#{$block-class}__custom-avatar--condensed {
+      inline-size: calc(nth($spacing, 1) / $overlap-divisor);
       justify-content: flex-start;
 
       &:hover,
-      &focus {
-        inline-size: $spacing-10;
+      &:focus {
+        inline-size: nth($spacing, 1);
       }
     }
   }
-  &__lg {
-    block-size: $spacing-09;
-    inline-size: $spacing-09;
 
-    &.condensed {
-      inline-size: calc($spacing-09 / 1.4);
-      justify-content: flex-start;
+  .#{$block-class}__custom-overflow {
+    @include type.type-style('label-01', true);
+    border: none;
+    box-shadow: inset 0 0 0 1px tag.$tag-border-gray;
+    background-color: tag.$tag-background-gray;
+    color: $text-primary;
+    padding-inline: $spacing-03;
+    border-radius: $spacing-10;
+    padding-block: 0;
 
-      &:hover,
-      &focus {
-        inline-size: $spacing-09;
+    &:focus-within {
+      @include focus-outline.focus-outline('outline');
+      outline-offset: 1px;
+    }
+
+    &:hover {
+      background-color: tag.$tag-hover-gray;
+    }
+  }
+
+  @each $size, $spacing,
+    $type
+      in (
+        xl: (
+            $spacing-10,
+            'heading-04',
+            $spacing-05,
+          ),
+        lg: (
+            $spacing-09,
+            'heading-03',
+            $spacing-04,
+          ),
+        md: (
+            $spacing-07,
+            'body-compact-01',
+            $spacing-03,
+          ),
+        sm: (
+            $spacing-06,
+            null,
+            null,
+          )
+      )
+  {
+    .#{$block-class}__custom-overflow--#{$size} {
+      block-size: nth($spacing, 1);
+      min-inline-size: nth($spacing, 1);
+      padding-inline: if(length($spacing) > 2, nth($spacing, 3), null);
+      @if nth($spacing, 2) {
+        @include type.type-style(nth($spacing, 2), true);
       }
     }
   }
-  &__md {
-    block-size: $spacing-07;
-    inline-size: $spacing-07;
 
-    &.condensed {
-      inline-size: calc($spacing-07 / 1.4);
-      justify-content: flex-start;
+  .#{$block-class}__modal-users-search {
+    margin-block-start: $spacing-05;
+  }
 
-      &:hover,
-      &focus {
-        inline-size: $spacing-07;
-      }
+  .#{$block-class}__modal-tags-container {
+    cds-dismissible-tag {
+      margin: $spacing-02 $spacing-03 $spacing-02 0;
     }
   }
-  &__sm {
-    block-size: $spacing-06;
-    inline-size: $spacing-06;
 
-    &.condensed {
-      inline-size: calc($spacing-06 / 1.4);
-      justify-content: flex-start;
-
-      &:hover,
-      &focus {
-        inline-size: $spacing-06;
-      }
+  .#{$block-class}__popover-container {
+    .#{$block-class}__popover-user {
+      @include type.type-style('label-02');
+      margin: 0;
     }
+  }
+
+  .#{$block-class}__popover-view-all {
+    margin-top: $spacing-03;
+    display: block;
   }
 }

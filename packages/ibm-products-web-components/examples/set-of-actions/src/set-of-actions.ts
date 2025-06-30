@@ -1,10 +1,14 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { repeat } from 'lit/directives/repeat.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
 import { createOverflowHandler } from '@carbon/utilities';
 import OverflowMenuVertical16 from '@carbon/web-components/es/icons/overflow-menu--vertical/16.js';
 import styles from './set-of-actions.scss?lit';
+
+const blockClass = `c4p--set-of-actions`;
 
 interface Action {
   text: string;
@@ -28,24 +32,44 @@ export default class SetOfActions extends LitElement {
   actionsData: Action[] = [];
 
   /**
+   * The orientation of the action set
+   */
+  @property({ type: String, attribute: 'orientation', reflect: true })
+  orientation = '';
+
+  /**
    * Container holding all action buttons and the overflow menu.
    */
-  @query('#actionContainer')
+  @query(`.${blockClass}`)
   private container!: HTMLElement;
 
   private overflowHandler: { disconnect: () => void } | undefined;
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.style.visibility = 'hidden';
+  }
+
   firstUpdated() {
-    if (!this.container) return;
+    if (!this.container) {
+      return;
+    }
     this.updateComplete.then(() => {
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         this.overflowHandler = createOverflowHandler({
           container: this.container,
+          dimension: this.orientation == 'horizontal' ? 'width' : 'height',
           onChange: (visibleItems: HTMLElement[], _) => {
             this.hiddenItems = this.actionsData?.slice(visibleItems.length);
           },
         });
       });
+    });
+    // On first render, all elements are initially visible. so hiding `this` visibility in connectedCallback
+    // The handler runs on the second render to hide specific elements as needed.
+    // The following line restores visibility after layout settles, allowing for smoother transitions.
+    setTimeout(() => {
+      this.style.visibility = 'visible';
     });
   }
   updated(changedProperties: Map<string, unknown>) {
@@ -53,6 +77,7 @@ export default class SetOfActions extends LitElement {
       this.overflowHandler?.disconnect();
       this.overflowHandler = createOverflowHandler({
         container: this.container,
+        dimension: this.orientation == 'horizontal' ? 'width' : 'height',
         onChange: (visibleItems: HTMLElement[], _) => {
           this.hiddenItems = this.actionsData?.slice(visibleItems.length);
         },
@@ -69,17 +94,26 @@ export default class SetOfActions extends LitElement {
 
   render() {
     return html`
-      <div id="actionContainer" style="display: flex;">
-        ${this.actionsData?.map(
+      <div
+        class=${classMap({
+          [`${blockClass}`]: true,
+          [`${blockClass}--${this.orientation}`]: true,
+        })}
+      >
+        ${repeat(
+          this.actionsData ?? [],
+          (action, index) => index,
           (action, index) => html`
             <span>
               <cds-icon-button
                 @click="${action.onClick}"
                 size=${action.size}
                 kind="ghost"
-                align=${index == this.actionsData.length - 1
-                  ? 'bottom-right'
-                  : 'bottom-left'}
+                align=${this.orientation === 'horizontal'
+                  ? index === this.actionsData.length - 1
+                    ? 'top-right'
+                    : 'top-left'
+                  : 'right'}
               >
                 ${action.icon}
                 <span slot="tooltip-content">${action.text}</span>
@@ -87,27 +121,26 @@ export default class SetOfActions extends LitElement {
             </span>
           `
         )}
-        <div
-          data-offset
-          data-hidden
-          data-floating-menu-container
-          style="
-      position: relative;
-    "
-        >
+
+        <div data-offset data-hidden data-floating-menu-container>
           <cds-overflow-menu
             size=${this.actionsData[0].size}
             close-on-activation
             enter-delay-ms="0"
             leave-delay-ms="0"
+            align=${this.orientation === 'horizontal' ? 'top-right' : 'right'}
           >
             ${OverflowMenuVertical16({
-              class: 'action-svg',
+              class: `${blockClass}__overflow-svg`,
               slot: 'icon',
             })}
             <span slot="tooltip-content">Options</span>
-            <cds-overflow-menu-body flipped>
-              ${this.hiddenItems?.map(
+            <cds-overflow-menu-body
+              ?flipped=${this.orientation == 'horizontal'}
+            >
+              ${repeat(
+                this.hiddenItems ?? [],
+                (item) => item.text,
                 (item) => html`
                   <cds-overflow-menu-item @click="${item.onClick}">
                     ${item.text}

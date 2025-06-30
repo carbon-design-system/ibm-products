@@ -1,4 +1,4 @@
-import { LitElement, css, html, nothing } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import '@carbon/web-components/es/components/tag/index.js';
 import '@carbon/web-components/es/components/link/index.js';
@@ -8,6 +8,8 @@ import { createOverflowHandler } from '@carbon/utilities';
 import { TagType } from './example-data';
 import styles from './set-of-tags.scss?lit';
 
+const blockClass = `c4p--set-of-tags`;
+
 @customElement('set-of-tags')
 export default class SetOfTags extends LitElement {
   @state()
@@ -16,7 +18,7 @@ export default class SetOfTags extends LitElement {
   @property({ type: Array, attribute: 'tags-data', reflect: true })
   tagsData: TagType[] = [];
 
-  @query('#tag-container')
+  @query(`.${blockClass}`)
   private container!: HTMLElement;
 
   @query('[data-offset]')
@@ -34,44 +36,56 @@ export default class SetOfTags extends LitElement {
   private overflowHandler: { disconnect: () => void } | undefined;
   private resizeObserver: ResizeObserver | undefined; // only for observing width changes of offset
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.style.visibility = 'hidden';
+  }
+
   firstUpdated() {
-    this.updateComplete.then(() => {
-      this.initializeOverflowHandler();
-
-      // Observe size changes in the overflow tag
-      this.resizeObserver = new ResizeObserver(() => {
-        this.reinitializeOverflowHandler();
-      });
-      this.resizeObserver.observe(this.offset);
-
-      document.addEventListener('click', this.handleDocumentClick);
+    // setup overflow handler by observing offset by default
+    // dynamic changes in offset sizes re-initializes the handler to account for the new offset size
+    this.resizeObserver = new ResizeObserver(() => {
+      this.setupOverflowHandler();
     });
+    this.resizeObserver.observe(this.offset);
+
+    // On first render, all elements are initially visible. so hiding `this` visibility in connectedCallback
+    // The handler runs on the second render to hide specific elements as needed.
+    // The following line restores visibility after layout settles, allowing for smoother transitions.
+    setTimeout(() => {
+      this.style.visibility = 'visible';
+    });
+
+    document.addEventListener('click', this.handleDocumentClick);
   }
 
   updated(changedProperties: Map<string, unknown>) {
+    // setup overflow handler whenever tags data changes to account for the new item sizes
     if (changedProperties.has('tagsData')) {
       const previousIsPopoverOpen = this.isPopoverOpen;
       this.updateComplete.then(() => {
         this.hiddenTags = [];
         this.isPopoverOpen = previousIsPopoverOpen;
-        this.reinitializeOverflowHandler();
+        this.setupOverflowHandler();
       });
     }
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    if (this.overflowHandler) {
-      this.overflowHandler.disconnect();
-    }
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
+    this.overflowHandler?.disconnect();
+    this.resizeObserver?.disconnect();
     document.removeEventListener('click', this.handleDocumentClick);
   }
 
-  private initializeOverflowHandler() {
-    if (!this.container) return;
+  private setupOverflowHandler() {
+    if (!this.container) {
+      return;
+    }
+
+    // Disconnect existing handler if any
+    this.overflowHandler?.disconnect();
+
     this.overflowHandler = createOverflowHandler({
       container: this.container,
       onChange: (_, hiddenItems: HTMLElement[]) => {
@@ -89,30 +103,17 @@ export default class SetOfTags extends LitElement {
     });
   }
 
-  private reinitializeOverflowHandler() {
-    if (this.overflowHandler) {
-      this.overflowHandler.disconnect();
-    }
-    this.initializeOverflowHandler();
-  }
-
   private handleTogglePopover(event: Event) {
-    if (event instanceof PointerEvent) {
-      const popoverElement = (event.target as HTMLElement)?.parentElement
-        ?.parentElement;
-      popoverElement?.toggleAttribute('open');
-    }
-    if (event instanceof KeyboardEvent) {
-      if (event.key === ' ' || event.key === 'Enter') {
-        const popoverElement = (event.target as HTMLElement)?.parentElement
-          ?.parentElement;
-        popoverElement?.toggleAttribute('open');
-      }
+    if (
+      event instanceof PointerEvent ||
+      (event instanceof KeyboardEvent && [' ', 'Enter'].includes(event.key))
+    ) {
+      this.isPopoverOpen = !this.isPopoverOpen;
     }
   }
 
   private handleDocumentClick = (event: Event) => {
-    if (!this.offset.contains(event.target as Node)) {
+    if (event.target !== this) {
       this.isPopoverOpen = false;
     }
   };
@@ -120,18 +121,26 @@ export default class SetOfTags extends LitElement {
   private handleDismiss = (e: CustomEvent, tag: TagType) => {
     e.stopPropagation();
     e.preventDefault();
+
     this.tagsData = this.tagsData.filter((t) => t.text !== tag.text);
+    this.shadowRoot
+      ?.querySelectorAll('[data-hidden]:not([data-offset])')
+      .forEach((el) => el.removeAttribute('data-hidden'));
+
+    const remaining = this.hiddenTags.filter((t) => t.text !== tag.text);
+    if (this.hiddenTags.length === 2 && remaining[0]) {
+      this.shadowRoot
+        ?.querySelector(`#${remaining[0].text}`)
+        ?.removeAttribute('data-hidden');
+    }
   };
 
   render() {
-    return html` <div
-        id="tag-container"
-        style="display: flex; white-space: nowrap;"
-      >
+    return html` <div class=${blockClass}>
         ${this.tagsData.map(
           (tag) => html`
-            <span>
-              ${tag.onClose
+            <span id=${tag?.text}>
+              ${tag?.onClose
                 ? html`<cds-dismissible-tag
                     @cds-dismissible-tag-beingclosed=${(e: CustomEvent) =>
                       this.handleDismiss(e, tag)}
@@ -152,22 +161,20 @@ export default class SetOfTags extends LitElement {
             ?highContrast=${true}
             align=${document.dir === 'rtl' ? 'bottom-left' : 'bottom-right'}
           >
-            <div class="playground-trigger">
-              <cds-operational-tag
-                size=${this.tagsData[0]?.size}
-                title="+${this.hiddenTags.length}"
-                text="+${this.hiddenTags.length}"
-                @click=${this.handleTogglePopover}
-                @keydown=${this.handleTogglePopover}
-              ></cds-operational-tag>
-            </div>
+            <cds-operational-tag
+              size=${this.tagsData[0]?.size}
+              title="+${this.hiddenTags.length}"
+              text="+${this.hiddenTags.length}"
+              @click=${this.handleTogglePopover}
+              @keydown=${this.handleTogglePopover}
+            ></cds-operational-tag>
             <cds-popover-content>
-              <div style="padding: 0.9rem;" class="popover-container">
+              <div class="${`${blockClass}__popover-container`}">
                 ${this.hiddenTags.length > 0
                   ? this.hiddenTags.slice(0, 10).map((tag) =>
                       tag.onClose
                         ? html`
-                            <div class="dismissible-tag-container">
+                            <div>
                               <cds-dismissible-tag
                                 @cds-dismissible-tag-beingclosed=${(
                                   e: CustomEvent
@@ -179,14 +186,21 @@ export default class SetOfTags extends LitElement {
                               ></cds-dismissible-tag>
                             </div>
                           `
-                        : html`<p class="popover-tag">${tag?.text}</p>`
+                        : html`<p class="${blockClass}__popover-tag">
+                            ${tag?.text}
+                          </p>`
                     )
                   : nothing}
                 ${this.hiddenTags.length > 10
                   ? html`
                       <cds-link
-                        class="view-all"
+                        class="${blockClass}__view-all"
                         @click=${() => (this.modalOpen = true)}
+                        @keydown=${(e: KeyboardEvent) => {
+                          if (e.key === ' ') {
+                            this.modalOpen = true;
+                          }
+                        }}
                       >
                         View all tags
                       </cds-link>
@@ -209,7 +223,7 @@ export default class SetOfTags extends LitElement {
               <cds-search
                 size="lg"
                 close-button-label-text="Clear search input"
-                class="tags-search"
+                class="${blockClass}__modal-tags-search"
                 label-text="Search"
                 placeholder="Search all tags"
                 type="text"
@@ -218,7 +232,7 @@ export default class SetOfTags extends LitElement {
               ></cds-search>
             </cds-modal-header>
             <cds-modal-body>
-              <div class="modal-tags-container gradient-vertical">
+              <div class="${blockClass}__modal-tags-container">
                 ${this.tagsData
                   .filter(
                     (tag) =>

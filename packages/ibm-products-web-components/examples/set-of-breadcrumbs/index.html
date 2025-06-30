@@ -9,24 +9,24 @@ LICENSE file in the root directory of this source tree.
 
 <html>
   <head>
-    <title>carbon-web-components set of tags example</title>
+    <title>carbon-web-components set of breadcrumbs example</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="src/styles.scss" />
-    <script type="module" src="src/set-of-tags.ts"></script>
+    <script type="module" src="src/set-of-breadcrumbs.ts"></script>
   </head>
   <body>
     <section>
       <div style="margin: 1rem">
-        <h6>Set of Tags</h6>
+        <h6>Set of Breadcrumbs</h6>
       </div>
       <div>
-        <set-of-tags id="setOfTags"></set-of-tags>
+        <set-of-breadcrumbs id="setOfBreadcrumbs"></set-of-breadcrumbs>
       </div>
     </section>
     <script type="module">
-      import { tagsData } from './src/example-data.ts';
-      const setOfTags = document.getElementById('setOfTags');
-      setOfTags.tagsData = tagsData;
+      import { breadcrumbData } from './src/example-data.ts';
+      const setOfBreadcrumbs = document.getElementById('setOfBreadcrumbs');
+      setOfBreadcrumbs.breadcrumbData = breadcrumbData;
     </script>
   </body>
 </html>

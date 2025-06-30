@@ -13,26 +13,31 @@ import '../../../examples/set-of-actions/src';
 import styles from './story-styles.scss?lit';
 
 const argTypes = {
-  // actionsCount: {
-  //   control: { type: 'number' },
-  //   description: 'Number of actions to display',
-  // },
+  actionsCount: {
+    control: { type: 'number' },
+    description: 'Number of actions to display',
+  },
   actionSize: {
     control: { type: 'radio' },
     options: ['sm', 'md', 'lg'],
   },
   onClick: { action: 'onClick' },
+  orientation: {
+    control: { type: 'radio' },
+    options: ['horizontal', 'vertical'],
+  },
 };
 
 const defaultProps = {
-  // actionsCount: 16,
+  actionsCount: 11,
   actionSize: 'md',
+  orientation: 'horizontal',
 };
 
 const renderActionsTemplate = (args) => {
-  const { actionsCount, actionSize, onClick } = args;
+  const { actionsCount, actionSize, onClick, orientation } = args;
   const actionsData = generateActions({
-    count: 16,
+    count: actionsCount,
     size: actionSize,
     onClick,
   });
@@ -42,10 +47,18 @@ const renderActionsTemplate = (args) => {
       ${styles}
     </style>
     <div class="example">
-      <div class="annotation parent">
+      <div
+        class="annotation parent"
+        style="height: ${orientation == 'horizontal'
+          ? 'unset'
+          : 'calc(100vh - 16rem)'}"
+      >
         <div class="annotation__label">Parent container</div>
         <div class="annotation__content">
-          <set-of-actions .actionsData=${actionsData}></set-of-actions>
+          <set-of-actions
+            orientation=${orientation}
+            .actionsData=${actionsData}
+          ></set-of-actions>
         </div>
       </div>
     </div>

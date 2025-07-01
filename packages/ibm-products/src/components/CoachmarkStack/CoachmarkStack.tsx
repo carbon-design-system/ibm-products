@@ -233,7 +233,9 @@ export let CoachmarkStack = React.forwardRef<
       if (!parentHeight) {
         if (stackHomeRef.current) {
           const height = stackHomeRef.current.clientHeight;
-          if (height > 0) {setParentHeight(height);}
+          if (height > 0) {
+            setParentHeight(height);
+          }
         }
         return;
       }

@@ -40,7 +40,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   let titleText;
   let isEditable = !!onSave;
 
-  const titleRef = useRef();
+  const titleRef = useRef(undefined);
   const isEllipsisApplied = useOverflowStringWidth(titleRef);
 
   if (text || !content) {

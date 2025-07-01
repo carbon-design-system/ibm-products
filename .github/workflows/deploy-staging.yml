@@ -29,7 +29,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build packages and storybook
-        run: yarn build
+        run: |
+          yarn storybook:build
+          yarn storybook-wc:build
 
       # Deploy to staging Github Pages using `gh-pages` package
       - name: Prepare combined staging directory with clean URL paths

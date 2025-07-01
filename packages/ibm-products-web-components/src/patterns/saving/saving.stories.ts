@@ -9,18 +9,32 @@
 
 import { html } from 'lit';
 import '../../../examples/saving/src/saving';
-
+import styles from './story-styles.scss?lit';
 export default {
   title: 'Patterns/Saving',
 };
 
 export const AutoSaving = {
   render: () => {
-    return html` <auto-saving> </auto-saving> `;
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div class="saving-stories__wrapper">
+        <auto-saving> </auto-saving>
+      </div>
+    `;
   },
 };
 export const ManualSaving = {
   render: () => {
-    return html` <manual-saving> </manual-saving> `;
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div class="saving-stories__wrapper">
+        <manual-saving> </manual-saving>
+      </div>
+    `;
   },
 };

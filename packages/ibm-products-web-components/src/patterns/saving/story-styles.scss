@@ -8,6 +8,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 
 $story-prefix: 'saving-stories__';
-.#{$story-prefix}__wrapper {
+.#{$story-prefix}wrapper {
   display: flex;
+  flex-direction: row;
 }

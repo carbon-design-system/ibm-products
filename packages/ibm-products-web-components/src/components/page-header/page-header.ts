@@ -84,7 +84,7 @@ const scrollableAncestor = (target: HTMLElement) => {
 @customElement(`${prefix}-page-header`)
 class CDSPageHeader extends LitElement {
   updated() {
-    const contentElement = this.querySelector('c4p-page-header-content');
+    const contentElement = this.querySelector(`${prefix}-page-header-content`);
 
     if (contentElement) {
       const resizeObserver = new ResizeObserver((entries) => {

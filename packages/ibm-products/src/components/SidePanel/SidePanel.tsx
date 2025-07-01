@@ -392,23 +392,36 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
       [placement, sidePanelRef, sidePanelWidth]
     );
 
+    const getPanelWidthPercent = useCallback(
+      (customWidth?: string) => {
+        if (customWidth) {
+          const remValue = parseFloat(customWidth);
+          const remInPixels =
+            remValue *
+            parseFloat(getComputedStyle(document.documentElement).fontSize);
+          return Math.round((remInPixels / window.innerWidth) * 100);
+        }
+        return Math.round(
+          ((sidePanelRef.current?.clientWidth || 0) / window.innerWidth) * 100
+        );
+      },
+      [sidePanelRef]
+    );
+
     const onResizeEnd = useCallback(
       (_, ref) => {
         accumulatedDeltaRef.current = 0;
         sidePanelRef.current?.style?.removeProperty('transition');
-
-        const percent = Math.round(
-          ((sidePanelRef.current.clientWidth || 0) / window.innerWidth) * 100
-        );
         // custom a11y announcements
         ref.current.setAttribute(
           'aria-label',
-          `side panel is covering ${percent}% of screen`
+          `side panel is covering ${getPanelWidthPercent()}% of screen`
         );
+        ref.current.setAttribute('aria-valuenow', getPanelWidthPercent());
 
         sidePanelWidth.current = sidePanelRef.current?.clientWidth;
       },
-      [sidePanelRef]
+      [sidePanelRef, getPanelWidthPercent]
     );
 
     const onDoubleClick = useCallback(() => {
@@ -1022,7 +1035,9 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
             <Resizer
               className={`${blockClass}__resizer`}
               orientation="vertical"
-              aria-valuenow={sidePanelWidth.current}
+              aria-valuemin={getPanelWidthPercent(SIDE_PANEL_SIZES['xs'])}
+              aria-valuemax={75}
+              aria-valuenow={getPanelWidthPercent()}
               onResize={onResize}
               onResizeEnd={onResizeEnd}
               onDoubleClick={onDoubleClick}

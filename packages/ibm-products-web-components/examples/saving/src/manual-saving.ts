@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { state } from 'lit/decorators.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/button/index.js';
@@ -48,14 +48,14 @@ const statusObj = {
 /**
  * Saving.
  *
- * @element custom-saving
+ * @element manual-saving
  *
  * */
 
-@customElement(`custom-saving`)
-class Saving extends HostListenerMixin(LitElement) {
+@customElement(`manual-saving`)
+class ManualSaving extends HostListenerMixin(LitElement) {
   @state()
-  status: Status = 'in-progress';
+  status: Status = 'default';
   render() {
     const { status, _onRequestSave: onRequestSave } = this;
     const icon = statusObj[status]?.icon?.();
@@ -90,4 +90,4 @@ class Saving extends HostListenerMixin(LitElement) {
   };
   static styles = styles;
 }
-export default Saving;
+export default ManualSaving;

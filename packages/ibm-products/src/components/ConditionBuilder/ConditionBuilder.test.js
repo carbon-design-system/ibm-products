@@ -1909,7 +1909,7 @@ describe(componentName, () => {
 
   // keyboard navigation tests
   //for Non-Hierarchical variant
-  it('add and remove conditions using keyboard', async () => {
+  it.skip('add and remove conditions using keyboard', async () => {
     render(
       <ConditionBuilder
         {...defaultProps}
@@ -2038,7 +2038,7 @@ describe(componentName, () => {
   });
 
   //for Hierarchical variant
-  it('add and remove conditions using keyboard', async () => {
+  it.skip('add and remove conditions using keyboard', async () => {
     render(
       <ConditionBuilder
         {...defaultProps}

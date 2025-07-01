@@ -81,7 +81,7 @@ export const ConditionBuilderItem = ({
   description,
   ...rest
 }: ConditionBuilderItemProps) => {
-  const popoverRef = useRef<HTMLDivElement>(null);
+  const popoverRef = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(false);
 
   const { conditionBuilderRef, statementConfigCustom } = useContext(

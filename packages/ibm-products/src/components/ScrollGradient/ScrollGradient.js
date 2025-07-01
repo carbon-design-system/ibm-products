@@ -42,10 +42,10 @@ export let ScrollGradient = React.forwardRef(
     },
     ref
   ) => {
-    const intersectionStartRef = useRef();
-    const intersectionEndRef = useRef();
-    const intersectionLeftRef = useRef();
-    const intersectionRightRef = useRef();
+    const intersectionStartRef = useRef(undefined);
+    const intersectionEndRef = useRef(undefined);
+    const intersectionLeftRef = useRef(undefined);
+    const intersectionRightRef = useRef(undefined);
 
     const carbonPrefix = usePrefix();
     const fallbackColor = `var(--${carbonPrefix}-layer-01)`;

@@ -1,3 +1,10 @@
+## `@carbon/ibm-cloud-cognitive-core@2.46.0-rc.0`
+### Bug fixes :bug:
+- fix(stories): remove extra carbon style imports (#7647)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7663)
+
 ## `@carbon/ibm-cloud-cognitive-core@2.45.0`
 ### Housekeeping :house:
 - build(deps): update Carbon 11 compatible versions to latest (#7593)

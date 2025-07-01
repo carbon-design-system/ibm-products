@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/colors';
 @use 'sass:map';
 @use '@carbon/styles';
@@ -32,12 +33,15 @@ $block-class: #{$prefix}--saving;
     padding-block: unset;
   }
 }
-.example-container {
-  box-sizing: border-box;
-  margin: auto;
-  padding: 1rem;
-  max-height: 100%;
-}
 cds-inline-loading {
   min-block-size: auto;
+}
+section {
+  margin: $spacing-06;
+  border: $spacing-01 dotted var(--cds-border-strong-01, #000000);
+  padding: $spacing-06;
+  p {
+    margin: $spacing-04 0 $spacing-04;
+  }
+  inline-size: 350px;
 }

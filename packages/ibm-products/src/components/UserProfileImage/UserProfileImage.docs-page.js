@@ -19,7 +19,10 @@ const DocsPage = () => (
       {
         description: (
           <>
-            <p>Please use the below command to migrate</p>
+            <p>
+              Please use the below command to migrate from userProfileImage to
+              userAvatar component
+            </p>
             <CodeSnippet type="single" feedback="Copied to clipboard">
               npx @carbon/upgrade migrate ibm-products-update-userprofileimage
               --write

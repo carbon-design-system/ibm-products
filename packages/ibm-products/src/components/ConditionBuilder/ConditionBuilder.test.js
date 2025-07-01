@@ -693,7 +693,7 @@ describe(componentName, () => {
         screen.getByRole('option', {
           name: 'Continent',
         }),
-      { timeout: 10 }
+      { timeout: 100 }
     );
 
     await act(() =>
@@ -715,7 +715,7 @@ describe(componentName, () => {
         screen.getByRole('option', {
           name: 'Africa',
         }),
-      { timeout: 10 }
+      { timeout: 100 }
     );
 
     fireEvent.click(

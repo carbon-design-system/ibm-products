@@ -1,5 +1,7 @@
 import { mergeConfig } from 'vite';
+import { dirname, join } from 'node:path';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
+import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
 import { getAutoTrack } from '../../../scripts/get-auto-track-script';
 
@@ -17,24 +19,26 @@ const stories = glob.sync(
 const config = {
   stories: stories,
   addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-toolbars',
     {
-      name: '@storybook/addon-essentials',
+      name: getAbsolutePath('@storybook/addon-docs'),
       options: {
-        actions: true,
-        backgrounds: false,
-        controls: true,
-        docs: true,
-        toolbars: true,
-        viewport: true,
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
       },
     },
-    '@storybook/addon-a11y',
+    '@storybook/addon-links',
   ],
   framework: {
     name: '@storybook/web-components-vite',
     options: {},
+  },
+  features: {
+    previewCsfV3: true,
+    buildStoriesJson: true,
+    interactions: false, // disable Interactions tab
   },
   managerHead: (head: string) => {
     return `
@@ -49,7 +53,16 @@ const config = {
   async viteFinal(config) {
     return mergeConfig(config, {
       plugins: [litStyleLoader(), litTemplateLoader()],
+      optimizeDeps: {
+        include: ['@storybook/web-components-vite'],
+        exclude: ['lit', 'lit-html'],
+      },
     });
   },
 };
+
 export default config;
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, 'package.json')));
+}

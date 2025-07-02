@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import cx from 'classnames';
 import { InlineTip, InlineTipButton, InlineTipLink } from '.';
 import mdx from './InlineTip.mdx';

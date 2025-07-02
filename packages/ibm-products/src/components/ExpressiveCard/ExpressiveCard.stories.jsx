@@ -22,7 +22,7 @@ import {
 
 import { ExpressiveCard } from '.';
 import DocsPage from './ExpressiveCard.docs-page';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const sampleDecorator = (decorator) => {
   switch (decorator) {

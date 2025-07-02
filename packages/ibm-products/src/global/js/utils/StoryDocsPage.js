@@ -19,7 +19,7 @@ import {
   AnchorMdx,
   useOf,
   Markdown,
-} from '@storybook/blocks';
+} from '@storybook/addon-docs/blocks';
 import * as changeCase from 'change-case';
 
 import {

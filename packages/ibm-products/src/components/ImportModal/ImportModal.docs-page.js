@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
-import { useOf } from '@storybook/blocks';
+import { useOf } from '@storybook/addon-docs/blocks';
 import { storyDocsGuidelines } from '../../global/js/utils/story-helper';
 
 const DocsPage = () => {

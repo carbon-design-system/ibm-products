@@ -8,7 +8,7 @@
 
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Datagrid, useDatagrid } from '../../index';
 import styles from '../../_storybook-styles.scss?inline';
 // import mdx from '../../Datagrid.mdx';

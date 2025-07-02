@@ -83,8 +83,8 @@ type StyledTune = {
  * of other Onboarding components.
  */
 export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
-  (
-    {
+  (props, ref) => {
+    const {
       children,
       onClose,
       fixedIsVisible,
@@ -92,9 +92,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
       kind = defaults.kind,
       theme = defaults.theme,
       ...rest
-    },
-    ref
-  ) => {
+    } = props;
     const { winHeight, winWidth } = useWindowDimensions();
     const [a11yDragMode, setA11yDragMode] = useState(false);
     const overlayRef = useRef<HTMLDivElement>(null);
@@ -132,7 +130,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
     const styledTune: StyledTune = useMemo(() => {
       const style: StyledTune = {};
       if (isBeacon || isDraggable) {
-        if (coachmark.targetRect) {
+        if (coachmark?.targetRect) {
           style.left = coachmark.targetRect.x + window.scrollX;
           style.top = coachmark.targetRect.y + window.scrollY;
         }
@@ -209,7 +207,9 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
           blockClass,
           `${blockClass}--${kind}`,
           `${blockClass}__${theme}`,
-          (isBeacon || isDraggable) && `${blockClass}--${coachmark.align}`,
+          (isBeacon || isDraggable) &&
+            coachmark?.align &&
+            `${blockClass}--${coachmark.align}`,
           fixedIsVisible && `${blockClass}--is-visible`,
           a11yDragMode && `${blockClass}--is-dragmode`,
           className
@@ -265,6 +265,12 @@ const useWindowDimensions = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   return windowDimensions;
+};
+
+/**@ts-ignore*/
+CoachmarkOverlay.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
 };
 
 // Return a placeholder if not released and not enabled by feature flag

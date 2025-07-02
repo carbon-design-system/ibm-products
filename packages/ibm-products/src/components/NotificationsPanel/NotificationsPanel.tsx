@@ -409,7 +409,13 @@ export let NotificationsPanel = React.forwardRef(
       setAllNotifications(data);
     }, [data]);
 
-    useClickOutside(ref || notificationPanelRef, () => {
+    useClickOutside(ref || notificationPanelRef, (target) => {
+      const element = target as HTMLElement;
+      if (!isActionableElement(element)) {
+        setTimeout(() => {
+          triggerButtonRef?.current?.focus();
+        }, 100);
+      }
       onClickOutside?.();
     });
 
@@ -680,6 +686,45 @@ export let NotificationsPanel = React.forwardRef(
             <Close size={16} />
           </IconButton>
         </Section>
+      );
+    };
+
+    const isActionableElement = (el: HTMLElement | null): boolean => {
+      if (!el) {
+        return false;
+      }
+      const interactiveRoles = new Set([
+        'button',
+        'link',
+        'textbox',
+        'checkbox',
+        'radio',
+        'slider',
+        'spinbutton',
+        'combobox',
+        'switch',
+        'menuitem',
+      ]);
+
+      const actionableAncestor = el.closest<HTMLElement>(
+        'button, a, input, select, textarea, [tabindex], [contenteditable="true"], [role]'
+      );
+
+      if (!actionableAncestor) {
+        return false;
+      }
+
+      return (
+        actionableAncestor instanceof HTMLButtonElement ||
+        actionableAncestor instanceof HTMLAnchorElement ||
+        actionableAncestor instanceof HTMLInputElement ||
+        actionableAncestor instanceof HTMLSelectElement ||
+        actionableAncestor instanceof HTMLTextAreaElement ||
+        actionableAncestor.tabIndex >= 0 ||
+        actionableAncestor.isContentEditable ||
+        interactiveRoles.has(
+          actionableAncestor.getAttribute('role')?.toLowerCase() ?? ''
+        )
       );
     };
 

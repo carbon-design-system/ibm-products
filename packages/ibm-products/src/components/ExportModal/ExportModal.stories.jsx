@@ -12,7 +12,7 @@ import wait from '../../global/js/utils/wait';
 import mdx from './ExportModal.mdx';
 
 export default {
-  title: 'IBM Products/Components/Export/ExportModal',
+  title: 'Patterns/Prebuilt patterns/ExportModal',
   component: ExportModal,
   tags: ['autodocs'],
   parameters: {
@@ -114,7 +114,7 @@ const Template = ({ storyInitiallyOpen, ...args }, context) => {
     );
   }
   return (
-    <>
+    <main>
       {RenderButton(triggerButtonRef)}
       <ExportModal
         {...args}
@@ -133,7 +133,7 @@ const Template = ({ storyInitiallyOpen, ...args }, context) => {
         errorMessage="Server error 500"
         triggerButtonRef={triggerButtonRef}
       />
-    </>
+    </main>
   );
 };
 

@@ -15,7 +15,7 @@ const DocsPage = () => (
     altGuidelinesHref={[
       {
         href: 'https://pages.github.ibm.com/carbon/ibm-products/components/notification-panel/usage/',
-        label: 'NotificationsPanel usage guidelines',
+        label: 'Usage guidelines',
       },
     ]}
     blocks={[

@@ -80,17 +80,22 @@ export interface CoachmarkProps {
    */
   onClose?: () => void;
   /**
+   *  @deprecated
    * Optional class name for the Coachmark Overlay component.
    */
   overlayClassName?: string;
 
   /**
+   *  @deprecated
    * What kind or style of Coachmark to render.
    */
   overlayKind?: 'tooltip' | 'floating' | 'stacked';
-
+  /**
+   *  @deprecated
+   */
   overlayRef?: MutableRefObject<HTMLElement | null>;
   /**
+   *  @deprecated
    * By default, the Coachmark will be appended to the end of `document.body`.
    * The Coachmark will remain persistent as the user navigates the app until
    * the user closes the Coachmark.
@@ -107,10 +112,12 @@ export interface CoachmarkProps {
    */
   positionTune?: { x: number; y: number };
   /**
+   * @deprecated
    * The optional button or beacon that the user will click to show the Coachmark.
    */
   target: React.ReactNode;
   /**
+   * @deprecated
    * Determines the theme of the component.
    */
   theme?: 'light' | 'dark';
@@ -162,6 +169,10 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
     const portalNode = useRef<Element | DocumentFragment | null>(null);
     const popoverRef = useRef<HTMLDivElement>(null);
 
+    let targetName;
+    if (React.isValidElement(target) && typeof target.type !== 'string') {
+      targetName = target.type as { displayName?: string };
+    }
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget
         ? (document?.querySelector(portalTarget) ??
@@ -229,7 +240,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       },
       targetRect: targetRect,
       targetOffset: targetOffset,
-      align: align,
+      align: align as PopoverAlignment,
       positionTune: positionTune,
       isOpen: isOpen,
     };
@@ -295,7 +306,11 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
         >
           {overlayKind !== 'tooltip' ? (
             <>
-              {target}
+              {targetName?.displayName === 'CoachmarkBeacon'
+                ? React.cloneElement(target as React.ReactElement<any>, {
+                    buttonProps: contextValue.buttonProps,
+                  })
+                : target}
               {isOpen &&
                 portalNode?.current &&
                 createPortal(
@@ -325,7 +340,11 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
               autoAlign={autoAlign}
               open={isOpen}
             >
-              {target}
+              {targetName?.displayName === 'CoachmarkBeacon'
+                ? React.cloneElement(target as React.ReactElement<any>, {
+                    buttonProps: contextValue.buttonProps,
+                  })
+                : target}
               <PopoverContent>
                 {isOpen && (
                   <CoachmarkOverlay
@@ -362,6 +381,46 @@ Coachmark = pkg.checkComponentEnabled(Coachmark, componentName);
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 Coachmark.displayName = componentName;
+
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   * Optional class name for the Coachmark Overlay component.
+   */
+  overlayClassName: PropTypes.string,
+
+  /**
+   * **Deprecated**
+   * What kind or style of Coachmark to render.
+   */
+  overlayKind: PropTypes.oneOf(['tooltip', 'floating', 'stacked']),
+
+  overlayRef: PropTypes.shape({
+    current: overlayRefType as PropTypes.Validator<HTMLElement | null>,
+  }),
+  /**
+   * **Deprecated**
+   * By default, the Coachmark will be appended to the end of `document.body`.
+   * The Coachmark will remain persistent as the user navigates the app until
+   * the user closes the Coachmark.
+   *
+   * Alternatively, the app developer can tightly couple the Coachmark to a DOM
+   * element or other component by specifying a CSS selector. The Coachmark will
+   * remain visible as long as that element remains visible or mounted. When the
+   * element is hidden or component is unmounted, the Coachmark will disappear.
+   */
+  portalTarget: PropTypes.string,
+  /**
+   * **Deprecated**
+   * The optional button or beacon that the user will click to show the Coachmark.
+   */
+  target: PropTypes.node,
+  /**
+   * **Deprecated**
+   * Determines the theme of the component.
+   */
+  theme: PropTypes.oneOf(['light', 'dark']),
+};
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
@@ -412,30 +471,7 @@ Coachmark.propTypes = {
    * Function to call when the Coachmark closes.
    */
   onClose: PropTypes.func,
-  /**
-   * Optional class name for the Coachmark Overlay component.
-   */
-  overlayClassName: PropTypes.string,
 
-  /**
-   * What kind or style of Coachmark to render.
-   */
-  overlayKind: PropTypes.oneOf(['tooltip', 'floating', 'stacked']),
-
-  overlayRef: PropTypes.shape({
-    current: overlayRefType as PropTypes.Validator<HTMLElement | null>,
-  }),
-  /**
-   * By default, the Coachmark will be appended to the end of `document.body`.
-   * The Coachmark will remain persistent as the user navigates the app until
-   * the user closes the Coachmark.
-   *
-   * Alternatively, the app developer can tightly couple the Coachmark to a DOM
-   * element or other component by specifying a CSS selector. The Coachmark will
-   * remain visible as long as that element remains visible or mounted. When the
-   * element is hidden or component is unmounted, the Coachmark will disappear.
-   */
-  portalTarget: PropTypes.string,
   /**
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */
@@ -444,12 +480,6 @@ Coachmark.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
   }),
-  /**
-   * The optional button or beacon that the user will click to show the Coachmark.
-   */
-  target: PropTypes.node,
-  /**
-   * Determines the theme of the component.
-   */
-  theme: PropTypes.oneOf(['light', 'dark']),
+
+  ...deprecatedProps,
 };

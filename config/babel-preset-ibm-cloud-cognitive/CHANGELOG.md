@@ -1,3 +1,7 @@
+## `@babel-preset-ibm-cloud-cognitive@0.27.0`
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.

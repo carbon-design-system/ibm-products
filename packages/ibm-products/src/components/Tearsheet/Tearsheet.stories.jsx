@@ -46,7 +46,7 @@ import { TearsheetNarrow } from './TearsheetNarrow';
 // import mdx from './Tearsheet.mdx';
 
 export default {
-  title: 'IBM Products/Components/Tearsheet',
+  title: 'Components/Tearsheet',
   component: Tearsheet,
   tags: ['autodocs'],
   parameters: {
@@ -283,7 +283,9 @@ const Template = ({ actions, decorator, slug, ...args }, context) => {
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
       <div ref={ref}>
         <Tearsheet
           {...args}
@@ -338,7 +340,9 @@ const TemplateWithNav = ({ actions, decorator, slug, ...args }, context) => {
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
       <div ref={ref}>
         <Tabs onChange={action('Tab selection changed')}>
           <Tearsheet
@@ -394,9 +398,11 @@ const ReturnFocusTemplate = (
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button ref={buttonRef} onClick={() => setOpen(true)}>
-        Open Tearsheet
-      </Button>
+      <main>
+        <Button ref={buttonRef} onClick={() => setOpen(true)}>
+          Open Tearsheet
+        </Button>
+      </main>
       <div ref={ref}>
         <Tearsheet
           {...args}
@@ -445,7 +451,9 @@ const FirstElementDisabledTemplate = (
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
       <div ref={ref}>
         <Tearsheet
           {...args}
@@ -519,7 +527,9 @@ const FirstElementReadOnlyTemplate = (
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
       <div ref={ref}>
         <Tearsheet
           {...args}
@@ -572,9 +582,9 @@ const StackedTemplate = (
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const ref = useRef(undefined);
-  const openButton1 = useRef();
-  const openButton2 = useRef();
-  const openButton3 = useRef();
+  const openButton1 = useRef(undefined);
+  const openButton2 = useRef(undefined);
+  const openButton3 = useRef(undefined);
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {
@@ -632,27 +642,29 @@ const StackedTemplate = (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
       <div style={{ height: '3rem' }} data-reserve-space="for toggle buttons" />
-      <ButtonSet
-        style={{
-          display: 'flex',
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          zIndex: 10000,
-        }}
-      >
-        <Button onClick={() => setOpen1(!open1)} ref={openButton1}>
-          Toggle&nbsp;tearsheet&nbsp;1
-        </Button>
-        <Button onClick={() => setOpen2(!open2)}>
-          Toggle&nbsp;tearsheet&nbsp;2
-        </Button>
-        {!mixedSizes && (
-          <Button onClick={() => setOpen3(!open3)}>
-            Toggle&nbsp;tearsheet&nbsp;3
+      <main>
+        <ButtonSet
+          style={{
+            display: 'flex',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            zIndex: 10000,
+          }}
+        >
+          <Button onClick={() => setOpen1(!open1)} ref={openButton1}>
+            Toggle&nbsp;tearsheet&nbsp;1
           </Button>
-        )}
-      </ButtonSet>
+          <Button onClick={() => setOpen2(!open2)}>
+            Toggle&nbsp;tearsheet&nbsp;2
+          </Button>
+          {!mixedSizes && (
+            <Button onClick={() => setOpen3(!open3)}>
+              Toggle&nbsp;tearsheet&nbsp;3
+            </Button>
+          )}
+        </ButtonSet>
+      </main>
       <div ref={ref}>
         <Tearsheet
           {...args}

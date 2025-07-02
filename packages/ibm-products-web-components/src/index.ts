@@ -13,3 +13,10 @@ export { default as CDSFullPageError } from './components/full-page-error/full-p
 export { default as CDSAboutModal } from './components/about-modal/about-modal';
 export { default as CDSUseravatar } from './components/user-avatar/user-avatar';
 export { default as CDSOptionsTile } from './components/options-tile/options-tile';
+export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
+export { default as CDSPageHeader } from './components/page-header/page-header';
+export { default as CDSPageHeaderBreadcrumb } from './components/page-header/page-header-breadcrumb';
+export { default as CDSPageHeaderContent } from './components/page-header/page-header-content';
+export { default as CDSPageHeaderContentText } from './components/page-header/page-header-content-text';
+export { default as CDSPageHeaderHeroImage } from './components/page-header/page-header-hero-image';
+export { default as CDSPageHeaderTabs } from './components/page-header/page-header-tabs';

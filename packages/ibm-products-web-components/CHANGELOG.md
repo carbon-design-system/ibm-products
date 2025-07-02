@@ -1,4 +1,37 @@
-## `@carbon/ibm-products-web-components@0.17.0-rc.0`
+## `@carbon/ibm-products-web-components@0.19.0-rc.0`
+### Features :rocket:
+- feat(sidepanel): option to hide close button in web component (#7695)
+- feat(page-header): new web components page-header (#7658)
+- feat(notification panel): create notification panel wc (#7557)
+- feat(ExportModal): added as WC Pattern (#7578)
+
+### Housekeeping :house:
+- chore(deps): update dependency happy-dom to v18 (#7665)
+- build(deps): update Carbon 11 compatible versions to latest (#7663)
+- chore(deps-dev): bump vite (#7739)
+- chore(storybook): add a11y tab in wc and remove code tab from react (#7706)
+- refactor(instrumentation): replace amplitude with autotrack (#7710)
+
+## `@carbon/ibm-products-web-components@0.18.0`
+### Features :rocket:
+- feat(tearsheet): add decorator option (#7600)
+- feat: truncated text initial commit web component (#7397)
+- feat(APIKeyModal): added as WC pattern (#7636)
+
+### Bug fixes :bug:
+- fix: options-tile toggle button (#7576)
+- fix(tearsheet): theming issue in WC (#7598)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+- chore(deps-dev): bump vite (#7652)
+- chore: overflow handler web component stories (#7553)
+- chore(deps-dev): bump vite (#7624)
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+- chore(deps-dev): bump vite (#7599)
+- chore: add options-tile webcomponent stackblitz example (#7535)
+
+## `@carbon/ibm-products-web-components@0.17.0`
 ### Features :rocket:
 - feat(DeleteAndRemovePattern): deletion and removal patterns using carbon web components (#7473)
 

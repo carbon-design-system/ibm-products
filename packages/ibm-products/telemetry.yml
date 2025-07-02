@@ -534,6 +534,8 @@ collect:
         - overlayRef
         - positionTune
         - target
+        # CoachmarkBeacon
+        - buttonProps
         # CoachmarkDragbar
         - a11yKeyboardHandler
         - onDrag
@@ -598,6 +600,7 @@ collect:
         - experimentalSecondarySubmitText
         # CreateTearsheetStep
         - experimentalSecondarySubmit
+        - fieldsetLegendId
         # CustomizeColumnsTearsheet
         - columnDefinitions
         - onSaveColumnPrefs
@@ -674,6 +677,13 @@ collect:
         - successMessage
         - validExtensions
         # FeatureFlags
+        - defaultPortalTargetBody
+        - enableDatagridUseCustomizeColumns
+        - enableDatagridUseEditableCell
+        - enableDatagridUseInlineEdit
+        - enableSidepanelResizer
+        - enableTestFlagA
+        - enableTestFlagB
         - flags
         # FilterFlyout
         - flyoutIconDescription
@@ -844,6 +854,11 @@ collect:
         - primaryDangerDescription
         - resourceName
         - textConfirmation
+        # Resizer
+        - onDoubleClick
+        - onResize
+        - onResizeEnd
+        - orientation
         # RowSizeDropdown
         - datagridName
         - light
@@ -885,6 +900,7 @@ collect:
         - actionToolbarButtons
         - animateTitle
         - condensedActions
+        - hideCloseButton
         - includeOverlay
         - navigationBackIconDescription
         # SingleAddSelect
@@ -1183,6 +1199,9 @@ collect:
         - short
         # PageHeader - fullWidthGrid
         - xl
+        # Resizer - orientation
+        - horizontal
+        - vertical
   npm:
     dependencies: null
   js:

@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -98,6 +94,7 @@
     "denormalized",
     "disttag",
     "disttags",
+    "donot",
     "dragbar",
     "draggable",
     "interstitialscreenviewmodule",
@@ -175,12 +172,14 @@
     "skipnav",
     "slotchange",
     "spacebar",
+    "spinbutton",
     "stackable",
     "stackblitz",
     "statusicon",
     "structurality",
     "subcomponent",
     "subcomponents",
+    "subgrid",
     "svgid",
     "tabbable",
     "tableid",
@@ -204,9 +203,11 @@
     "unauthorizedemptystate",
     "userprofileimage",
     "uuidv",
+    "valuenow",
     "webfonts",
     "useravatar",
     "rendericon",
-    "csvg"
+    "csvg",
+    "autoalign"
   ]
 }

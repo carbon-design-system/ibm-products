@@ -56,23 +56,7 @@ const renderCoachmarkFixed = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   beforeEach(() => {
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
-    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
-      observe: () => null,
-      unobserve: () => null,
-    }));
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
   });
   it('renders a component CoachmarkFixed', () => {
     renderCoachmarkFixed({

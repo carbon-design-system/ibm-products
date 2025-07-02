@@ -8,9 +8,12 @@
  */
 
 import { LitElement, html } from 'lit';
+import { state } from 'lit/decorators.js';
+import { ContextRoot, provide } from '@lit/context';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
+import { pageHeaderContext } from './context';
 
 /**
  * ----------
@@ -77,24 +80,38 @@ const scrollableAncestor = (target: HTMLElement) => {
   return scrollableAncestorInner(target);
 };
 
+export interface offsetValues {
+  breadcrumbOffset?: number;
+  headerOffset?: number;
+}
+
 /**
  * Page header.
  * @element c4p-page-header
  */
 @customElement(`${prefix}-page-header`)
 class CDSPageHeader extends LitElement {
-  updated() {
+  @state()
+  @provide({ context: pageHeaderContext })
+  offsets: offsetValues = {};
+
+  private resizeObserver: ResizeObserver | undefined;
+
+  connectedCallback(): void {
+    super.connectedCallback();
     const contentElement = this.querySelector(`${prefix}-page-header-content`);
 
     if (contentElement) {
-      const resizeObserver = new ResizeObserver((entries) => {
+      let totalContentHeight;
+      let headerOffset;
+      this.resizeObserver = new ResizeObserver((entries) => {
         const contentElEntry = entries[0];
         const contentHeight = contentElEntry.contentRect.height;
         const padding =
           parseFloat(getComputedStyle(contentElement)?.paddingBlockStart) +
           parseFloat(getComputedStyle(contentElement)?.paddingBlockEnd);
-        const totalContentHeight = contentHeight + padding;
-        const headerOffset = getHeaderOffset(this);
+        totalContentHeight = contentHeight + padding;
+        headerOffset = getHeaderOffset(this);
 
         this.style.setProperty(
           `--${prefix}-page-header-header-top`,
@@ -104,11 +121,20 @@ class CDSPageHeader extends LitElement {
           `--${prefix}-page-header-breadcrumb-top`,
           `${headerOffset}px`
         );
+        this.offsets = {
+          breadcrumbOffset: headerOffset,
+          headerOffset: (Math.round(totalContentHeight) - headerOffset) * -1,
+        };
       });
-
-      resizeObserver.observe(contentElement);
+      this.resizeObserver.observe(contentElement);
     }
   }
+
+  disconnectedCallback() {
+    this.resizeObserver?.disconnect(); // Clean up
+    super.disconnectedCallback();
+  }
+
   render() {
     return html` <slot></slot>`;
   }

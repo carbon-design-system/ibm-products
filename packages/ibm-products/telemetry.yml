@@ -600,6 +600,7 @@ collect:
         - experimentalSecondarySubmitText
         # CreateTearsheetStep
         - experimentalSecondarySubmit
+        - fieldsetLegendId
         # CustomizeColumnsTearsheet
         - columnDefinitions
         - onSaveColumnPrefs
@@ -899,6 +900,7 @@ collect:
         - actionToolbarButtons
         - animateTitle
         - condensedActions
+        - hideCloseButton
         - includeOverlay
         - navigationBackIconDescription
         # SingleAddSelect

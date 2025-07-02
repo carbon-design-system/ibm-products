@@ -1,3 +1,17 @@
+## `@carbon/ibm-products-web-components@0.19.0-rc.0`
+### Features :rocket:
+- feat(sidepanel): option to hide close button in web component (#7695)
+- feat(page-header): new web components page-header (#7658)
+- feat(notification panel): create notification panel wc (#7557)
+- feat(ExportModal): added as WC Pattern (#7578)
+
+### Housekeeping :house:
+- chore(deps): update dependency happy-dom to v18 (#7665)
+- build(deps): update Carbon 11 compatible versions to latest (#7663)
+- chore(deps-dev): bump vite (#7739)
+- chore(storybook): add a11y tab in wc and remove code tab from react (#7706)
+- refactor(instrumentation): replace amplitude with autotrack (#7710)
+
 ## `@carbon/ibm-products-web-components@0.18.0`
 ### Features :rocket:
 - feat(tearsheet): add decorator option (#7600)

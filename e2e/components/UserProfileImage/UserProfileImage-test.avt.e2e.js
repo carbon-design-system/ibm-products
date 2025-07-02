@@ -14,7 +14,7 @@ test.describe('UserProfileImage @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'UserProfileImage',
-      id: 'patterns-prebuilt-patterns-userprofileimage--default',
+      id: 'deprecated-userprofileimage--default',
       globals: {
         carbonTheme: 'white',
       },

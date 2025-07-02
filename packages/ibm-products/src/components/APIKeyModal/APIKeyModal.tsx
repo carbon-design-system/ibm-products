@@ -147,7 +147,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     useEffect(() => {
       if (open) {
         // Focusing the first element or selectorPrimaryFocus element
-        claimFocus();
+        setTimeout(() => claimFocus(), 0);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [modalRef, open, firstElement]);

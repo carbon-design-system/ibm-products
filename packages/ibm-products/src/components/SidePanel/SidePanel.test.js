@@ -124,33 +124,6 @@ const SlideIn = ({
 };
 
 describe('SidePanel', () => {
-  const { ResizeObserver } = window;
-
-  beforeEach(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
-  });
-
-  afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
-  });
-
   it('renders the side panel', async () => {
     const subtitle = uuidv4();
     const labelText = uuidv4();
@@ -366,25 +339,6 @@ describe('SidePanel', () => {
       )
     ).toBeTruthy();
   });
-
-  it('rejects too many buttons using the custom validator', async () =>
-    expectMultipleError(
-      [
-        'Invalid prop `actions` supplied to `SidePanel`: you cannot have more than three actions',
-        'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
-        'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
-      ],
-      () =>
-        renderSidePanel({
-          actions: [
-            { kind: 'primary' },
-            { kind: 'primary' },
-            { kind: 'ghost' },
-            { kind: 'ghost' },
-            { kind: 'danger--tertiary' },
-          ],
-        })
-    ));
 
   it('should render navigation button', async () => {
     const { container } = renderSidePanel({

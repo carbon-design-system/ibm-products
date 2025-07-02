@@ -14,7 +14,7 @@ export default {
   title: 'Patterns/Saving',
 };
 
-export const AutoSaving = {
+export const Auto = {
   render: () => {
     return html`
       <style>
@@ -26,7 +26,7 @@ export const AutoSaving = {
     `;
   },
 };
-export const ManualSaving = {
+export const Manual = {
   render: () => {
     return html`
       <style>

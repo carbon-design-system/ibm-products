@@ -8,7 +8,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
-import { carbon } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 const componentName = AddSelectBreadcrumbs.name;
 const defaultProps = {
@@ -22,6 +22,30 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
+  const { ResizeObserver } = window;
+
+  beforeEach(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
+  });
+
+  it('has no accessibility violations', async () => {
+    render(<AddSelectBreadcrumbs {...defaultProps} />);
+    const AddSelectElement = document.querySelector(
+      `.${pkg.prefix}--add-select__breadcrumbs`
+    );
+    await expect(AddSelectElement).toBeAccessible(componentName);
+    await expect(AddSelectElement).toHaveNoAxeViolations();
+  });
+
   it('renders', async () => {
     render(<AddSelectBreadcrumbs {...defaultProps} />);
   });

@@ -256,6 +256,7 @@ export default class SetOfUsers extends LitElement {
               <cds-search
                 size="lg"
                 close-button-label-text="Clear search input"
+                value="${this.searchString}"
                 class="${blockClass}__modal-users-search"
                 label-text="Search"
                 placeholder="Search all users"

@@ -33,6 +33,7 @@ const blockClass = `${pkg.prefix}--filter-summary`;
 export interface Filter {
   key: string;
   value: string;
+  onClose?: () => void;
 }
 export interface FilterSummaryProps {
   className?: string;
@@ -80,10 +81,11 @@ const FilterSummary = React.forwardRef(
     const localRef = filterSummaryRef || ref;
     const [overflowCount, setOverflowCount] = useState(0);
     const [multiline, setMultiline] = useState(false);
+    // @ts-ignore
     const previousState: PrevState =
       usePreviousValue({
         multiline,
-      }) || {};
+      }) ?? {};
 
     const handleViewAll = () => {
       if (overflowCount === 0) {

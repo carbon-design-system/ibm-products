@@ -130,12 +130,12 @@
     "react-window": "^1.8.11"
   },
   "peerDependencies": {
-    "@carbon/grid": "^11.37.0",
-    "@carbon/layout": "^11.35.0",
-    "@carbon/motion": "^11.29.0",
-    "@carbon/react": "^1.84.0",
-    "@carbon/themes": "^11.54.0",
-    "@carbon/type": "^11.41.0",
+    "@carbon/grid": "^11.38.0",
+    "@carbon/layout": "^11.36.0",
+    "@carbon/motion": "^11.30.0",
+    "@carbon/react": "^1.85.1",
+    "@carbon/themes": "^11.55.0",
+    "@carbon/type": "^11.42.0",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
     "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0"
   }

@@ -61,9 +61,11 @@ export default {
     return `
       ${head}
       ${
-        process.env.NODE_ENV !== 'development'
-          ? getAutoTrack('ibm-products-react-storybook')
-          : ''
+        // TODO: Delete this and uncomment dev check below when finished testing locally
+        getAutoTrack('ibm-products-react-storybook')
+        // process.env.NODE_ENV !== 'development'
+        //   ? getAutoTrack('ibm-products-react-storybook')
+        //   : ''
       }
     `;
   },

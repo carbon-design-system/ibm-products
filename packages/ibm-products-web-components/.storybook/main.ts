@@ -40,9 +40,11 @@ const config = {
     return `
       ${head}
       ${
-        process.env.NODE_ENV !== 'development'
-          ? getAutoTrack('ibm-products-web-components-storybook')
-          : ''
+        // TODO: Delete this and uncomment dev check below when finished testing locally
+        getAutoTrack('ibm-products-web-components-storybook')
+        // process.env.NODE_ENV !== 'development'
+        //   ? getAutoTrack('ibm-products-web-components-storybook')
+        //   : ''
       }
     `;
   },

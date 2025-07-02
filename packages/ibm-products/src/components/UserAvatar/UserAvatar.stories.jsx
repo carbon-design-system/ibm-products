@@ -8,8 +8,6 @@
  */
 
 import React from 'react';
-// TODO: import action to handle events if required.
-// import { action } from 'storybook/actions';
 import { UserAvatar } from '.';
 import { Theme, useTheme } from '@carbon/react';
 import mdx from './UserAvatar.mdx';

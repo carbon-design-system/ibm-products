@@ -1,0 +1,1 @@
+import{m as e}from"./index-4poXP75K.js";e({"default-portal-target-body":!0,"enable-datagrid-useInlineEdit":!1,"enable-datagrid-useEditableCell":!1,"enable-datagrid-useCustomizeColumns":!1,"ExampleComponent.secondaryIcon":!1,"ExampleComponent.useExample":!1,"enable-test-flag-a":!1,"enable-test-flag-b":!0,enableSidepanelResizer:!1});

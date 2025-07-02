@@ -1,0 +1,1 @@
+import{b as c,d as m,P as e}from"./index-4poXP75K.js";import{e as p}from"./index-DtHxqM--.js";const i=({className:s,children:t,tagName:r="main",...a})=>{const n=c(),o=m(`${n}--content`,s);return p.createElement(r,{...a,className:o},t)};i.propTypes={children:e.node,className:e.string,tagName:e.string};export{i as C};

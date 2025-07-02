@@ -37,7 +37,7 @@ import styles from './_storybook-styles.scss?inline';
 // import mdx from './Tearsheet.mdx';
 
 export default {
-  title: 'IBM Products/Components/Tearsheet/TearsheetNarrow',
+  title: 'Components/Tearsheet/TearsheetNarrow',
   component: TearsheetNarrow,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen', styles /* docs: { page: mdx } */ },

@@ -30,7 +30,7 @@ import { SidePanel } from '../../../SidePanel';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: 'Deprecated/Datagrid/Datagrid/ClickableRow',
+  title: 'Deprecated/Datagrid/ClickableRow',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

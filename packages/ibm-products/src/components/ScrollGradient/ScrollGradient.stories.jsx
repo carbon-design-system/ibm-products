@@ -26,7 +26,7 @@ const storyChildren = (
 );
 
 export default {
-  title: 'Utils/Components/ScrollGradient',
+  title: 'Utilities/ScrollGradient',
   component: ScrollGradient,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

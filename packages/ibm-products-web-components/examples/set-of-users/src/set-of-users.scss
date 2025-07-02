@@ -164,6 +164,16 @@ $block-class: #{$prefix}--set-of-users;
   }
 
   .#{$block-class}__popover-view-all {
+    --#{$carbon-prefix}-link-text-color: var(--#{$carbon-prefix}-link-inverse);
+    --#{$carbon-prefix}-link-hover-text-color: var(
+      --#{$carbon-prefix}-link-inverse-hover
+    );
+    --#{$carbon-prefix}-link-visited-text-color: var(
+      --#{$carbon-prefix}-link-inverse-visited
+    );
+    --#{$carbon-prefix}-link-focus-text-color: var(
+      --#{$carbon-prefix}-focus-inverse
+    );
     margin-top: $spacing-03;
     display: block;
   }

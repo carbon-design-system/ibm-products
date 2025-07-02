@@ -31,7 +31,7 @@ jobs:
         run: yarn install
       - name: Build storybook
         run: |
-          yarn storybook:build
+          yarn build
           yarn storybook-wc:build
 
       # Deploy to staging Github Pages using `gh-pages` package

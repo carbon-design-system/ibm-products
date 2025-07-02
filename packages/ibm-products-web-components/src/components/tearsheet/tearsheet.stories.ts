@@ -110,7 +110,6 @@ const descriptions = {
   'With plain String': 1,
   'With truncated-text and 1 line': 2,
   'With truncated-text and 2 lines': 3,
-  'With truncated-text and 2 lines with expand': 4,
 };
 
 export const Default = {

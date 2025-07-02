@@ -368,18 +368,6 @@ export const getDescription = (index) => {
           />
         </span>
       `;
-    case 4:
-      return html`
-        <span slot="description">
-          <c4p-truncated-text
-            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
-            lines="2"
-            with="expand"
-            expand-label="View more"
-            collapse-label="View less"
-          />
-        </span>
-      `;
     default:
       return null;
   }

@@ -16,19 +16,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--truncated-text;
     display: -webkit-box;
     overflow: hidden;
     -webkit-box-orient: vertical;
-    max-block-size: 48px;
     text-overflow: clip;
-
-    transition: all 300ms ease;
-    white-space: normal;
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
-
-    &--expanded {
-      max-block-size: 900px;
-    }
   }
 
   &__expand-toggle {

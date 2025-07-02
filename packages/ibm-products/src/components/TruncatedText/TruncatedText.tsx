@@ -5,19 +5,49 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, Ref, useState } from 'react';
+import React, { forwardRef, Ref, useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 import { Tooltip } from '@carbon/react';
 import { pkg } from '../../settings';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 interface TruncatedTextProps {
+  /**
+   * Specify how the tooltip should align with the content in tooltip variant. Refer to Carbon tooltip docs for additional information.
+   */
   align?: string;
+  /**
+   * Specify whether a auto align functionality should be applied in tooltip variant. Refer to Carbon tooltip docs for additional information.
+   */
   autoAlign?: boolean;
+  /**
+   * Optional class.
+   */
+  className?: string;
+  /**
+   * The label on the collapse button.
+   */
   collapseLabel?: string;
+  /**
+   * The label on expand button.
+   */
   expandLabel?: string;
+  /**
+   * Unique identifier for the element.
+   */
+  id: string;
+  /**
+   * The maximum number of lines to display before truncation.
+   */
   lines?: number;
-  value?: string;
+  /**
+   * The method to display the full text when truncated. Options are "tooltip" or "expand". if not passed, the text would just be truncated with ellipsis.
+   */
   type?: 'tooltip' | 'expand'; // refactor in web-components. with is reserved
+  /**
+   * The string value to be truncated.
+   */
+  value?: string;
 }
 
 const blockClass = `${pkg.prefix}--truncated-text`;
@@ -28,17 +58,20 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
     const {
       align = 'top',
       autoAlign,
+      className,
       collapseLabel,
       expandLabel,
+      id = `${blockClass}-default-id`,
       lines = 2,
       value,
       type = 'tooltip',
+      ...rest
     } = props;
     const [expanded, setExpanded] = useState(false);
 
-    const styles = {
+    const textContentStyles = {
       WebkitLineClamp:
-        (type === 'expand' && !expanded) || type === 'tooltip' ? lines : '9000',
+        (type === 'expand' && !expanded) || type === 'tooltip' ? lines : 'none',
     };
 
     const textContentClasses = cx(`${blockClass}__text-content`, {
@@ -56,24 +89,28 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
       }
     };
 
+    const valueBody = (
+      <span className={textContentClasses} id={id} style={textContentStyles}>
+        {value}
+      </span>
+    );
+
     const tooltipVariant = (
       <Tooltip align={align} autoAlign={autoAlign} label={value}>
-        <div className={`${blockClass}__text-content`} style={styles}>
-          {value}
-        </div>
+        {valueBody}
       </Tooltip>
     );
 
     const expandVariant = (
       <>
-        <span className={textContentClasses} style={styles}>
-          {value}
-        </span>
+        {valueBody}
         <span
+          aria-controls={id}
+          aria-expanded={expanded}
           className={`${blockClass}__expand-toggle`}
-          role="button"
           onClick={handleExpand}
           onKeyDown={handleExpandKey}
+          role="button"
           tabIndex={0}
         >
           {expanded ? collapseLabel : expandLabel}
@@ -82,7 +119,12 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
     );
 
     return (
-      <div className={blockClass} ref={ref}>
+      <div
+        {...rest}
+        className={cx(blockClass, className)}
+        ref={ref}
+        {...getDevtoolsProps(componentName)}
+      >
         {type === 'tooltip' ? tooltipVariant : expandVariant}
       </div>
     );

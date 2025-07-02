@@ -61,6 +61,7 @@ const renderEditTearsheet = ({ ...rest } = {}) =>
       <EditTearsheetForm
         title={form1Title}
         fieldsetLegendText={form1Title}
+        fieldsetLegendId={form1Title}
         description={form1Description}
         subtitle={form1Subtitle}
       >
@@ -68,15 +69,23 @@ const renderEditTearsheet = ({ ...rest } = {}) =>
         <button type="button" disabled>
           Test
         </button>
-        <input type="text" />
+        <input aria-label="step1-input" type="text" />
       </EditTearsheetForm>
       <EditTearsheetForm title={form2Title} hasFieldset={false}>
         form 2 content
       </EditTearsheetForm>
-      <EditTearsheetForm title={form3Title} fieldsetLegendText={form3Title}>
+      <EditTearsheetForm
+        title={form3Title}
+        fieldsetLegendText={form3Title}
+        fieldsetLegendId={form3Title}
+      >
         form 3 content
       </EditTearsheetForm>
-      <EditTearsheetForm title={form4Title} fieldsetLegendText={form4Title}>
+      <EditTearsheetForm
+        title={form4Title}
+        fieldsetLegendText={form4Title}
+        fieldsetLegendId={form4Title}
+      >
         form 4 content
       </EditTearsheetForm>
     </EditTearsheet>
@@ -95,36 +104,10 @@ const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
 );
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-
   beforeEach(() => {
     jest.spyOn(console, 'warn').mockImplementation(() => {});
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
-      root: null,
-      rootMargin: '',
-      thresholds: [],
-      disconnect: () => null,
-      observe: () => null,
-      takeRecords: () => [],
-      unobserve: () => null,
-    }));
     jest.useFakeTimers();
     pkg.feature['default-portal-target-body'] = false;
-    window.matchMedia = jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(), // Deprecated
-      removeListener: jest.fn(), // Deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
 
     //todo: remove once carbon fixes issue on side nav
     jest.spyOn(console, 'error').mockImplementation((msg) => {
@@ -139,7 +122,6 @@ describe(componentName, () => {
   });
 
   afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
     jest.useRealTimers();
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
     console.error.mockRestore();
@@ -166,9 +148,14 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderEditTearsheet({ ...defaultProps });
-    expect(() => container.toBeAccessible());
-    expect(() => container.toHaveNoAxeViolations());
+    renderEditTearsheet({ ...defaultProps });
+    const tearsheetElement = document.querySelector(
+      `.${editTearsheetBlockClass}`
+    );
+    await expect(tearsheetElement).toBeAccessible(componentName);
+    jest.useRealTimers();
+    await expect(tearsheetElement).toHaveNoAxeViolations();
+    jest.useFakeTimers();
   });
 
   it('adds additional props to the containing node', async () => {

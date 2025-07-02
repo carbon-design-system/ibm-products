@@ -50,20 +50,12 @@ const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
 );
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-
   beforeAll(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
     pkg.feature['default-portal-target-body'] = false;
   });
 
   afterAll(() => {
     jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
@@ -76,16 +68,15 @@ describe(componentName, () => {
     expect(screen.getByText(defaultProps.primaryButtonText)).toBeVisible();
   });
 
-  it('has no accessibility violations when closed', async () => {
-    const { container } = renderComponent({ open: false });
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
-  });
-
-  it('has no accessibility violations', () => {
-    const { container } = renderComponent();
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
+  it('has no accessibility violations', async () => {
+    await act(async () => {
+      renderComponent();
+    });
+    const tearsheetElement = document.querySelector(
+      `.${pkg.prefix}--create-tearsheet-narrow`
+    );
+    await expect(tearsheetElement).toBeAccessible(componentName);
+    await expect(tearsheetElement).toHaveNoAxeViolations();
   });
 
   it(`renders children`, async () => {

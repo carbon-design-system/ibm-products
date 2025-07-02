@@ -3001,6 +3001,7 @@ p.c4p--about-modal__copyright-text:first-child {
   position: absolute;
   z-index: 10; /* must be higher than title container border bottom */
   display: flex;
+  block-size: 2rem;
   inset-block-start: 0;
   inset-inline-end: 0;
   /* stylelint-disable-next-line max-nesting-depth */
@@ -3405,6 +3406,7 @@ p.c4p--about-modal__copyright-text:first-child {
   background-color: var(--cds-layer);
 }
 .c4p--tearsheet .c4p--tearsheet__main .c4p--tearsheet__influencer {
+  background-color: var(--cds-layer);
   border-inline-end: none;
   border-inline-start: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }

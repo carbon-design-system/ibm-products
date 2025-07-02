@@ -27,6 +27,7 @@ interface Metadata {
   id?: string;
   icon?: () => ReactNode;
   iconDescription?: string;
+  [key: `data-${string}`]: string;
 }
 
 type LinkType = {
@@ -192,14 +193,17 @@ export const Card = forwardRef(
                 size={size}
                 label={overflowAriaLabel || iconDescription}
               >
-                {overflowActions.map(({ id, itemText, onKeyDown, onClick }) => (
-                  <MenuItem
-                    key={id}
-                    label={itemText ?? ''}
-                    onKeyDown={onKeyDown}
-                    onClick={onClick}
-                  />
-                ))}
+                {overflowActions.map(
+                  ({ id, itemText, onKeyDown, onClick, ...rest }) => (
+                    <MenuItem
+                      {...rest}
+                      key={id}
+                      label={itemText ?? ''}
+                      onKeyDown={onKeyDown}
+                      onClick={onClick}
+                    />
+                  )
+                )}
               </OverflowMenu>
             </FeatureFlags>
           </Layer>

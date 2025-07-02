@@ -23,6 +23,10 @@ const renderComponent = ({ ...rest } = {}) =>
   render(<UserProfileImage {...{ kind, size, theme, ...rest }} />);
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('should return a circle with background color', async () => {
     const { container } = renderComponent({
       backgroundColor: 'light-cyan',

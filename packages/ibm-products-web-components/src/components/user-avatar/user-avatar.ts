@@ -140,7 +140,10 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
       return html` ${Avatar()}`;
     }
   }
-
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 export default CDSUseravatar;

@@ -33,7 +33,7 @@ import {
 } from '../../global/js/hooks';
 
 import { ActionSet } from '../ActionSet';
-import { Resizer } from './resizer/Resizer';
+import { Resizer } from '@carbon-labs/react-resizer';
 
 // Other standard imports.
 import PropTypes from 'prop-types';

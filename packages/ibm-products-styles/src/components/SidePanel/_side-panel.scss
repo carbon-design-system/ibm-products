@@ -16,6 +16,7 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities';
+@use '@carbon-labs/react-resizer/scss/resizer';
 @use '@carbon/styles/scss/components/button/tokens' as *;
 
 // Standard imports.
@@ -30,7 +31,7 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
-$clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
+$clabs-prefix: 'clabs';
 
 @property --panel-transform {
   inherits: true;
@@ -638,54 +639,3 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
 .#{$block-class}--has-decorator + .#{$block-class}__overlay {
   background-color: $ai-overlay;
 }
-
-// TODO: remove along with prefix after resizer available in labs
-.#{$clabs-prefix}__resizer {
-  position: relative;
-  flex: none;
-  background-color: $border-subtle-01;
-
-  &:hover {
-    @media (prefers-reduced-motion: no-preference) {
-      background-color: $border-interactive;
-      transition: background-color $duration-moderate-01;
-    }
-  }
-
-  &:focus {
-    background-color: $border-interactive;
-    outline: none;
-  }
-
-  &:active {
-    background-color: $border-interactive;
-  }
-
-  &:focus:not(:focus-visible) {
-    box-shadow: none;
-    outline: none;
-  }
-
-  &--horizontal {
-    block-size: $spacing-02;
-    cursor: ns-resize;
-  }
-
-  &--vertical {
-    cursor: ew-resize;
-    inline-size: $spacing-02;
-  }
-}
-
-.sr-only {
-  position: absolute;
-  overflow: hidden;
-  padding: 0;
-  border: 0;
-  margin: -1px;
-  block-size: 1px;
-  clip: rect(0, 0, 0, 0);
-  inline-size: 1px;
-  white-space: nowrap;
-}
-// END TODO: remove along with prefix after resizer available in labs

@@ -150,7 +150,6 @@
     ]
   },
   "dependencies": {
-    "@carbon-labs/react-resizer": "^0.2.0",
     "stylelint-plugin-carbon-tokens": "^3.2.3",
     "stylelint-use-logical": "^2.1.2"
   },

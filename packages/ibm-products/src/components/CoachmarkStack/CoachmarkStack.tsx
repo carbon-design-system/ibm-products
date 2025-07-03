@@ -227,24 +227,27 @@ export let CoachmarkStack = React.forwardRef<
         mountedRef.current = false;
       };
     }, []);
-    useEffect(() => {
-      setTimeout(() => {
-        if (stackHomeRef.current) {
-          setParentHeight(stackHomeRef.current.clientHeight + 16);
-        }
-      }, 0);
-    }, [stackHomeRef]);
 
     useEffect(() => {
       const targetSelectedItem = selectedItemNumber - 1;
       if (!parentHeight) {
+        if (stackHomeRef.current) {
+          const height = stackHomeRef.current.clientHeight;
+          if (height > 0) {
+            setParentHeight(height);
+          }
+        }
         return;
       }
+
       if (stackHomeRef.current) {
         stackHomeRef.current.style.height = `${parentHeight}px`;
       }
+
       if (!isOpen || targetSelectedItem < 0) {
         if (stackHomeRef.current) {
+          stackHomeRef.current.classList.remove(`${blockClass}--scaled-home`);
+          stackHomeRef.current.classList.add(`${blockClass}--unscaled-home`);
           stackHomeRef.current.focus();
         }
         return;
@@ -254,8 +257,10 @@ export let CoachmarkStack = React.forwardRef<
         stackedCoachmarkRefs.current[targetSelectedItem].clientHeight;
 
       if (stackHomeRef.current) {
-        stackHomeRef.current.style.height = `${targetHomeHeight}px`;
+        stackHomeRef.current.style.height = `calc(${targetHomeHeight}px + 3rem)`;
         stackedCoachmarkRefs.current[targetSelectedItem].focus();
+        stackHomeRef.current.classList.remove(`${blockClass}--unscaled-home`);
+        stackHomeRef.current.classList.add(`${blockClass}--scaled-home`);
       }
     }, [selectedItemNumber, isOpen, parentHeight]);
 

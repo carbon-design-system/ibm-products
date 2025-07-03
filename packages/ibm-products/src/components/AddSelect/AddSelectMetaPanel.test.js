@@ -20,23 +20,15 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-
-  beforeEach(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-  });
-
-  afterEach(() => {
-    jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
-  });
-
   it('renders', async () => {
     render(<AddSelectMetaPanel {...defaultProps} />);
+  });
+
+  it('has no accessibility violations', async () => {
+    render(<AddSelectMetaPanel {...defaultProps} />);
+    const AddSelectElement = document.querySelector(`.${blockClass}`);
+    await expect(AddSelectElement).toBeAccessible(componentName);
+    await expect(AddSelectElement).toHaveNoAxeViolations();
   });
 
   it('renders without html', async () => {

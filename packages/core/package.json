@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "2.45.0-rc.0",
+  "version": "2.46.0-rc.0",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -18,30 +18,27 @@
     "carbon for ibm products"
   ],
   "scripts": {
-    "clean": "yarn dlx rimraf storybook-static css",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (issue #1595)",
-    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
+    "clean": "yarn dlx rimraf storybook-static css"
   },
   "devDependencies": {
-    "@carbon/grid": "^11.36.0",
-    "@carbon/ibm-products-styles": "^2.65.0-rc.0",
-    "@carbon/layout": "^11.34.0",
-    "@carbon/motion": "^11.28.0",
-    "@carbon/react": "^1.83.0",
-    "@carbon/themes": "^11.53.0",
-    "@carbon/type": "^11.40.0",
+    "@carbon/grid": "^11.38.0",
+    "@carbon/ibm-products-styles": "^2.66.0-rc.0",
+    "@carbon/layout": "^11.36.0",
+    "@carbon/motion": "^11.30.0",
+    "@carbon/react": "^1.85.1",
+    "@carbon/themes": "^11.55.0",
+    "@carbon/type": "^11.42.0",
     "fast-glob": "^3.3.3",
-    "npm-check-updates": "^18.0.0",
     "npm-run-all": "^4.1.5",
     "prop-types": "^15.8.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "regenerator-runtime": "^0.14.1",
     "remark-gfm": "^4.0.1",
     "rimraf": "^6.0.1",
     "sass": "^1.85.1",
     "typescript": "^5.8.2",
-    "vite": "^6.2.2"
+    "vite": "^7.0.0"
   },
   "dependencies": {
     "lottie-web": "^5.12.2"

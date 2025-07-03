@@ -30,7 +30,7 @@ import { FeatureFlags } from '../../../FeatureFlags';
 import { WithFeatureFlags } from '../../../../../.storybook/WithFeatureFlags';
 
 export default {
-  title: 'Deprecated/Datagrid/Datagrid/ColumnCustomization',
+  title: 'Deprecated/Datagrid/ColumnCustomization',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

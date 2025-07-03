@@ -13,7 +13,6 @@ import { pkg } from '../../settings';
 import userEvent from '@testing-library/user-event';
 
 const componentName = AddSelect.displayName;
-
 const defaultProps = {
   closeIconDescription: 'test icon description',
   description: 'test description',
@@ -46,20 +45,21 @@ const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
 );
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
-
   beforeEach(() => {
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
     pkg.feature['default-portal-target-body'] = false;
   });
 
   afterEach(() => {
-    window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
+  });
+
+  it('has no accessibility violations', async () => {
+    render(<AddSelect {...defaultProps} />);
+    const AddSelectElement = document.querySelector(
+      `.${pkg.prefix}--add-select`
+    );
+    await expect(AddSelectElement).toBeAccessible(componentName);
+    await expect(AddSelectElement).toHaveNoAxeViolations();
   });
 
   it('renders single without hierarchy', async () => {
@@ -218,12 +218,6 @@ describe(componentName, () => {
     expect(li_1?.getAttribute('aria-selected')).toBe('true');
     expect(li_2?.getAttribute('aria-selected')).toBe('true');
     expect(li_3?.getAttribute('aria-selected')).toBe('false');
-  });
-
-  it('has no accessibility violations', async () => {
-    const { container } = render(<AddSelect {...defaultProps} />);
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {

@@ -15,7 +15,7 @@ import { scrollableAncestorInner } from './page-header';
  * Page header Scroller button
  * @element c4p-page-header-scroller
  */
-@customElement('c4p-page-header-scroller')
+@customElement(`${prefix}-page-header-scroller`)
 export class PageHeaderScroller extends CDSButton {
   /**
    * Specify how the trigger should align with the tooltip

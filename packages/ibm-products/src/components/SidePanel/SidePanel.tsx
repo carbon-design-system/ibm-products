@@ -33,7 +33,7 @@ import {
 } from '../../global/js/hooks';
 
 import { ActionSet } from '../ActionSet';
-import { Resizer } from './resizer/Resizer';
+import { Resizer } from '@carbon-labs/react-resizer';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -247,11 +247,9 @@ const defaults = {
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
  */
-const SidePanelBase = React.forwardRef(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
-
+const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
+  (props, ref) => {
+    const {
       actionToolbarButtons,
       actions,
       aiLabel,
@@ -281,12 +279,8 @@ const SidePanelBase = React.forwardRef(
       subtitle,
       title,
       launcherButtonRef,
-
-      // Collect any other property values passed in.
       ...rest
-    }: SidePanelProps,
-    ref: ForwardedRef<HTMLDivElement>
-  ) => {
+    } = props;
     const [animationComplete, setAnimationComplete] = useState(false);
     const localRef = useRef<HTMLDivElement>(null);
     const sidePanelRef = (ref || localRef) as RefObject<HTMLDivElement>;
@@ -398,23 +392,36 @@ const SidePanelBase = React.forwardRef(
       [placement, sidePanelRef, sidePanelWidth]
     );
 
+    const getPanelWidthPercent = useCallback(
+      (customWidth?: string) => {
+        if (customWidth) {
+          const remValue = parseFloat(customWidth);
+          const remInPixels =
+            remValue *
+            parseFloat(getComputedStyle(document.documentElement).fontSize);
+          return Math.round((remInPixels / window.innerWidth) * 100);
+        }
+        return Math.round(
+          ((sidePanelRef.current?.clientWidth || 0) / window.innerWidth) * 100
+        );
+      },
+      [sidePanelRef]
+    );
+
     const onResizeEnd = useCallback(
       (_, ref) => {
         accumulatedDeltaRef.current = 0;
         sidePanelRef.current?.style?.removeProperty('transition');
-
-        const percent = Math.round(
-          ((sidePanelRef.current.clientWidth || 0) / window.innerWidth) * 100
-        );
         // custom a11y announcements
         ref.current.setAttribute(
           'aria-label',
-          `side panel is covering ${percent}% of screen`
+          `side panel is covering ${getPanelWidthPercent()}% of screen`
         );
+        ref.current.setAttribute('aria-valuenow', getPanelWidthPercent());
 
         sidePanelWidth.current = sidePanelRef.current?.clientWidth;
       },
-      [sidePanelRef]
+      [sidePanelRef, getPanelWidthPercent]
     );
 
     const onDoubleClick = useCallback(() => {
@@ -1028,7 +1035,9 @@ const SidePanelBase = React.forwardRef(
             <Resizer
               className={`${blockClass}__resizer`}
               orientation="vertical"
-              aria-valuenow={sidePanelWidth.current}
+              aria-valuemin={getPanelWidthPercent(SIDE_PANEL_SIZES['xs'])}
+              aria-valuemax={75}
+              aria-valuenow={getPanelWidthPercent()}
               onResize={onResize}
               onResizeEnd={onResizeEnd}
               onDoubleClick={onDoubleClick}
@@ -1115,11 +1124,8 @@ SidePanel.propTypes = {
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: allPropTypes([
-    /**@ts-ignore*/
-    ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
-        /**@ts-ignore */
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',

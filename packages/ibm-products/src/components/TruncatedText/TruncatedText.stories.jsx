@@ -40,9 +40,7 @@ export default {
 const Template = (args) => {
   return (
     <div className={`${storyClass}__viewport`}>
-      <p>
-        <TruncatedText {...args} />
-      </p>
+      <TruncatedText {...args} />
     </div>
   );
 };

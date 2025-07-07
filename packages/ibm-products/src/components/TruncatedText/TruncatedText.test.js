@@ -28,6 +28,18 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest
+      .spyOn(HTMLElement.prototype, 'clientHeight', 'get')
+      .mockReturnValue('500');
+    jest
+      .spyOn(HTMLElement.prototype, 'scrollHeight', 'get')
+      .mockReturnValue('5000');
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('Renders', async () => {
     render(<TruncatedText />);
   });

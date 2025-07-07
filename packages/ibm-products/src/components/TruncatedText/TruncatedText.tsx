@@ -5,11 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, Ref, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 import { Tooltip } from '@carbon/react';
 import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 interface TruncatedTextProps {
   /**
@@ -68,6 +70,20 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
       ...rest
     } = props;
     const [expanded, setExpanded] = useState(false);
+    const [truncated, setTruncated] = useState(false);
+    const contentRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+      // initiate state for truncation on render
+      setTruncated(checkHeightOverflow(contentRef.current));
+    }, []);
+
+    useResizeObserver(contentRef, () => {
+      if (expanded) {
+        return;
+      }
+      setTruncated(checkHeightOverflow(contentRef.current));
+    });
 
     const textContentStyles = {
       WebkitLineClamp:
@@ -90,7 +106,12 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
     };
 
     const valueBody = (
-      <span className={textContentClasses} id={id} style={textContentStyles}>
+      <span
+        ref={contentRef}
+        className={textContentClasses}
+        id={id}
+        style={textContentStyles}
+      >
         {value}
       </span>
     );
@@ -125,7 +146,9 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        {type === 'tooltip' ? tooltipVariant : expandVariant}
+        {truncated && type === 'tooltip' && tooltipVariant}
+        {truncated && type === 'expand' && expandVariant}
+        {!truncated && valueBody}
       </div>
     );
   }

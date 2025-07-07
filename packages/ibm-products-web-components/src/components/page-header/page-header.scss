@@ -282,6 +282,11 @@ $carbon-prefix: 'cds';
   }
 }
 
+:host(#{$prefix}-page-header-tabs) ::slotted([slot='scroller']) {
+  position: absolute;
+  inset-inline-end: 0;
+}
+
 :host(#{$prefix}-page-header-breadcrumb),
 :host(#{$prefix}-page-header-content),
 :host(#{$prefix}-page-header-tabs) {

@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { state } from 'lit/decorators.js';
-import { ContextRoot, provide } from '@lit/context';
+import { provide } from '@lit/context';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -48,7 +48,7 @@ const scrollable = (target: HTMLElement): boolean => {
 /**
  * Recursively looks for the scrollable ancestor
  */
-const scrollableAncestorInner = (target: HTMLElement) => {
+export const scrollableAncestorInner = (target: HTMLElement) => {
   if (target.parentNode && target.parentNode !== document) {
     if (scrollable(target.parentNode as HTMLElement)) {
       return target.parentNode;
@@ -83,6 +83,8 @@ const scrollableAncestor = (target: HTMLElement) => {
 export interface offsetValues {
   breadcrumbOffset?: number;
   headerOffset?: number;
+  fullyCollapsed?: boolean;
+  root?: CDSPageHeader | null;
 }
 
 /**
@@ -93,7 +95,7 @@ export interface offsetValues {
 class CDSPageHeader extends LitElement {
   @state()
   @provide({ context: pageHeaderContext })
-  offsets: offsetValues = {};
+  context: offsetValues = {};
 
   private resizeObserver: ResizeObserver | undefined;
 
@@ -121,12 +123,42 @@ class CDSPageHeader extends LitElement {
           `--${prefix}-page-header-breadcrumb-top`,
           `${headerOffset}px`
         );
-        this.offsets = {
+        this.context = {
+          ...this.context,
           breadcrumbOffset: headerOffset,
           headerOffset: (Math.round(totalContentHeight) - headerOffset) * -1,
+          root: this,
         };
       });
       this.resizeObserver.observe(contentElement);
+    }
+
+    const predefinedContentPadding = 24;
+    const totalHeaderOffset = getHeaderOffset(this);
+    const contentObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            this.context = {
+              ...this.context,
+              fullyCollapsed: true,
+            };
+          } else {
+            this.context = {
+              ...this.context,
+              fullyCollapsed: false,
+            };
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+        threshold: 0.1,
+      }
+    );
+    if (contentElement) {
+      contentObserver.observe(contentElement);
     }
   }
 

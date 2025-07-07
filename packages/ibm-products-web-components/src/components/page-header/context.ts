@@ -12,4 +12,6 @@ import { createContext } from '@lit/context';
 export const pageHeaderContext = createContext({
   headerOffset: 0,
   breadcrumbOffset: 0,
+  fullyCollapsed: false,
+  root: null,
 });

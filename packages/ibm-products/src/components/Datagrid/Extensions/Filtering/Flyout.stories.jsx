@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Datagrid } from '../../index';
 import styles from '../../_storybook-styles.scss?inline';
 import { DocsPage } from './Filtering.docs-page';

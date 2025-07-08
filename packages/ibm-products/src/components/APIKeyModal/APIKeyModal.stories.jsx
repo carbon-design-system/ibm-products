@@ -16,7 +16,7 @@ import {
   InlineLoading,
   Form,
 } from '@carbon/react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { pkg } from '../../settings';
 import { APIKeyModal } from '.';
 import wait from '../../global/js/utils/wait';

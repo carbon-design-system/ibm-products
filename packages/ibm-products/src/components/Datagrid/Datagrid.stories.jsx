@@ -8,7 +8,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { makeData } from './utils/makeData';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Activity, Add } from '@carbon/react/icons';
 import { TableBatchAction, TableBatchActions, Tooltip } from '@carbon/react';
 import { Edit, TrashCan } from '@carbon/react/icons';

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { setCustomElementsManifest } from '@storybook/web-components';
+import { setCustomElementsManifest } from '@storybook/web-components-vite';
 import customElements from '../custom-elements.json';
 import container from './container';
 import { white, g10, g90, g100 } from '@carbon/themes';
@@ -180,8 +180,10 @@ export const decorators = [
   },
 ];
 
-export default {
+export const Preview = {
   parameters,
   globalTypes,
   decorators,
 };
+
+export const tags = ['autodocs'];

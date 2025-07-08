@@ -36,8 +36,11 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['src/**/*'],
-      exclude: ['src/**/*.stories.{js,ts}'],
+      exclude: ['src/**/*.stories.{js,ts}', 'src/components/*/_story-assets/*'],
       reporter: ['text', 'html', 'json'],
+    },
+    css: {
+      include: /page-header/,
     },
   },
   css: {

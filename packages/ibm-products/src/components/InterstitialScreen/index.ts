@@ -6,4 +6,12 @@
  */
 
 export { InterstitialScreen } from './InterstitialScreen';
-export type { InterstitialScreenProps } from './InterstitialScreen';
+export type {
+  InterstitialScreenProps,
+  InterstitialScreenComponent,
+  disableButtonConfigType,
+  ActionType,
+} from './InterstitialScreen';
+export type { InterstitialScreenBodyProps } from './InterstitialScreenBody';
+export type { InterstitialScreenFooterProps } from './InterstitialScreenFooter';
+export type { InterstitialScreenHeaderProps } from './InterstitialScreenHeader';

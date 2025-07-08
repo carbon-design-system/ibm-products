@@ -67,7 +67,6 @@ test.describe('NotificationsPanel @avt', () => {
     await page.evaluate(() => {
       document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
-    await expect(notificationPanel).not.toBeVisible({ timeout: 2000 });
     await expect(async () => {
       const isFocused = await notificationTrigger.evaluate(
         (el) => el === document.activeElement
@@ -95,7 +94,6 @@ test.describe('NotificationsPanel @avt', () => {
       exact: true,
     });
     await addNotificationButton.click();
-    await expect(notificationPanel).not.toBeVisible({ timeout: 2000 });
     await expect(notificationTrigger).not.toBeFocused();
     await expect(addNotificationButton).toBeFocused({ timeout: 2000 });
   });

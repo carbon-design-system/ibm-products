@@ -56,7 +56,8 @@
     "storybook:build": "run-s build:carbon build:storybook",
     "storybook:start": "storybook dev ./public -p 3000",
     "telemetry-config": "ibmtelemetry-config generate --id 495342db-5046-4ecf-85ea-9ffceb6f8cdf --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)",
-    "test": "jest --colors"
+    "test": "jest --colors",
+    "vrt": "percy storybook --verbose ./storybook-static"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
@@ -69,8 +70,8 @@
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@ibm/telemetry-js-config-generator": "^2.0.1",
-    "@percy/cli": "^1.30.7",
-    "@percy/storybook": "^6.0.3",
+    "@percy/cli": "^1.31.0",
+    "@percy/storybook": "^6.0.4",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",

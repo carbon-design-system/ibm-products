@@ -2534,6 +2534,61 @@ p.c4p--about-modal__copyright-text:first-child {
   white-space: nowrap;
 }
 
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+.clabs__resizer {
+  position: relative;
+  flex: none;
+  background-color: var(--cds-border-subtle);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .clabs__resizer:hover {
+    background-color: var(--cds-border-interactive, #0f62fe);
+    transition: background-color 150ms;
+  }
+}
+.clabs__resizer:focus {
+  background-color: var(--cds-border-interactive, #0f62fe);
+  outline: none;
+}
+.clabs__resizer:active {
+  background-color: var(--cds-border-interactive, #0f62fe);
+}
+.clabs__resizer:focus:not(:focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+.clabs__resizer--horizontal {
+  block-size: 0.25rem;
+  cursor: ns-resize;
+}
+.clabs__resizer--vertical {
+  cursor: ew-resize;
+  inline-size: 0.25rem;
+}
+
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  block-size: 1px;
+  clip: rect(0, 0, 0, 0);
+  inline-size: 1px;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .smooth-resize {
+    transition: all 150ms linear;
+  }
+}
+
 @keyframes side-panel-entrance-reduced {
   0% {
     opacity: 0;
@@ -3098,49 +3153,6 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--side-panel--has-ai-label + .c4p--side-panel__overlay,
 .c4p--side-panel--has-decorator + .c4p--side-panel__overlay {
   background-color: var(--cds-ai-overlay, rgba(0, 17, 65, 0.5));
-}
-
-.clabs__resizer {
-  position: relative;
-  flex: none;
-  background-color: var(--cds-border-subtle-01, #c6c6c6);
-}
-@media (prefers-reduced-motion: no-preference) {
-  .clabs__resizer:hover {
-    background-color: var(--cds-border-interactive, #0f62fe);
-    transition: background-color 150ms;
-  }
-}
-.clabs__resizer:focus {
-  background-color: var(--cds-border-interactive, #0f62fe);
-  outline: none;
-}
-.clabs__resizer:active {
-  background-color: var(--cds-border-interactive, #0f62fe);
-}
-.clabs__resizer:focus:not(:focus-visible) {
-  box-shadow: none;
-  outline: none;
-}
-.clabs__resizer--horizontal {
-  block-size: 0.25rem;
-  cursor: ns-resize;
-}
-.clabs__resizer--vertical {
-  cursor: ew-resize;
-  inline-size: 0.25rem;
-}
-
-.sr-only {
-  position: absolute;
-  overflow: hidden;
-  padding: 0;
-  border: 0;
-  margin: -1px;
-  block-size: 1px;
-  clip: rect(0, 0, 0, 0);
-  inline-size: 1px;
-  white-space: nowrap;
 }
 
 .c4p--create-side-panel.c4p--side-panel .c4p--create-side-panel__content-text {
@@ -6079,11 +6091,13 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--card {
+  border: 1px solid transparent;
   background-color: var(--cds-layer-01, #f4f4f4);
   color: var(--cds-text-primary, #161616);
 }
 
 .c4p--card__clickable {
+  border-color: var(--cds-border-tile-01, #c6c6c6);
   cursor: pointer;
   transition: background-color 110ms;
 }
@@ -11139,6 +11153,30 @@ button.c4p--add-select__global-filter-toggle--open {
   inset-inline-end: 0;
   max-inline-size: 40rem;
 }
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
+  .c4p--web-terminal {
+    --cds-icon-primary: ButtonText;
+    --cds-icon-secondary: ButtonText;
+    --cds-icon-interactive: ButtonText;
+    --cds-icon-disabled: GrayText;
+    --cds-icon-on-color-disabled: GrayText;
+    --cds-icon-inverse: SelectedItemText;
+    --cds-icon-on-color: SelectedItemText;
+    --cds-button-disabled: GrayText;
+    --cds-interactive: ButtonText;
+    --cds-link-primary: LinkText;
+    --cds-link-primary-hover: LinkText;
+    --cds-link-secondary: LinkText;
+    --cds-link-inverse: SelectedItemText;
+    --cds-link-inverse-hover: SelectedItemText;
+    --cds-link-inverse-visited: SelectedItemText;
+    --cds-link-visited: VisitedText;
+    --cds-background-selected: SelectedItem;
+    --cds-background-selected-hover: SelectedItem;
+    --cds-background-inverse: SelectedItem;
+    --cds-layer-selected-inverse: SelectedItem;
+  }
+}
 @media (prefers-reduced-motion) {
   .c4p--web-terminal {
     animation: none;
@@ -11569,6 +11607,30 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
   --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
+}
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
+  .c4p--web-terminal__documentation-overflow {
+    --cds-icon-primary: ButtonText;
+    --cds-icon-secondary: ButtonText;
+    --cds-icon-interactive: ButtonText;
+    --cds-icon-disabled: GrayText;
+    --cds-icon-on-color-disabled: GrayText;
+    --cds-icon-inverse: SelectedItemText;
+    --cds-icon-on-color: SelectedItemText;
+    --cds-button-disabled: GrayText;
+    --cds-interactive: ButtonText;
+    --cds-link-primary: LinkText;
+    --cds-link-primary-hover: LinkText;
+    --cds-link-secondary: LinkText;
+    --cds-link-inverse: SelectedItemText;
+    --cds-link-inverse-hover: SelectedItemText;
+    --cds-link-inverse-visited: SelectedItemText;
+    --cds-link-visited: VisitedText;
+    --cds-background-selected: SelectedItem;
+    --cds-background-selected-hover: SelectedItem;
+    --cds-background-inverse: SelectedItem;
+    --cds-layer-selected-inverse: SelectedItem;
+  }
 }
 
 .c4p--web-terminal__documentation-overflow .cds--overflow-menu-options__btn {

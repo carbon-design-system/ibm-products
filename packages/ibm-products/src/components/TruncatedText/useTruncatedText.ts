@@ -20,8 +20,11 @@ export default function useTruncatedText({ lines, value, expanded }: Params) {
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
-      if (ref.current && !expanded) {
-        setTruncated(checkHeightOverflow(ref.current));
+      if (!expanded) {
+        const result = checkHeightOverflow(ref.current);
+        if (result !== truncated) {
+          setTruncated(result);
+        }
       }
     });
 
@@ -32,7 +35,7 @@ export default function useTruncatedText({ lines, value, expanded }: Params) {
     return () => {
       resizeObserver.disconnect();
     };
-  }, [lines, value, expanded]);
+  }, [expanded, lines, value, truncated]);
 
   return { ref, truncated };
 }

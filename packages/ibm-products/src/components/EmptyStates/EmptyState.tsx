@@ -102,6 +102,7 @@ export interface EmptyStateProps {
   /**
    * Designates which version of the EmptyState component is being used.
    * Refer to V2 documentation separately.
+   * @deprecated
    */
   v2?: boolean;
 }
@@ -229,6 +230,7 @@ EmptyState.propTypes = {
   /**
    * Designates which version of the EmptyState component is being used.
    * Refer to V2 documentation separately.
+   * @deprecated
    */
   v2: PropTypes.bool,
 };

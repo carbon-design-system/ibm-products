@@ -10,6 +10,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { TruncatedText } from './TruncatedText';
 import { pkg } from '../../settings';
+import useTruncatedText from './useTruncatedText';
 
 const blockClass = `${pkg.prefix}--truncated-text`;
 const componentName = TruncatedText.displayName;
@@ -27,42 +28,43 @@ const defaultProps = {
   type: 'tooltip',
 };
 
+jest.mock('./useTruncatedText');
+
 describe(componentName, () => {
   beforeEach(() => {
-    jest
-      .spyOn(HTMLElement.prototype, 'clientHeight', 'get')
-      .mockReturnValue('500');
-    jest
-      .spyOn(HTMLElement.prototype, 'scrollHeight', 'get')
-      .mockReturnValue('5000');
+    useTruncatedText.mockReturnValue({ truncated: true });
   });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('Renders', async () => {
-    render(<TruncatedText />);
+    useTruncatedText.mockReturnValue({ truncated: false });
+    await act(async () => {
+      render(<TruncatedText />);
+    });
   });
 
   it('Expands and collapses with mouse', async () => {
     const props = { ...defaultProps, type: 'expand' };
     userEvent.setup();
-    render(<TruncatedText {...props} />);
-    expect(screen.getByRole('button').getAttribute('aria-expanded')).toBe(
-      'false'
-    );
     await act(async () => {
-      await userEvent.click(screen.getByRole('button'));
+      render(<TruncatedText {...props} />);
     });
-    expect(screen.getByRole('button').getAttribute('aria-expanded')).toBe(
-      'true'
-    );
+    const expandBtn = await screen.findByText(defaultProps.expandLabel);
+    await act(async () => {
+      userEvent.click(expandBtn);
+    });
+    await screen.findByText(defaultProps.collapseLabel);
   });
 
   it('Expands and collapses with keyboard', async () => {
     const props = { ...defaultProps, type: 'expand' };
     userEvent.setup();
-    render(<TruncatedText {...props} />);
+    await act(async () => {
+      render(<TruncatedText {...props} />);
+    });
     expect(screen.getByRole('button').getAttribute('aria-expanded')).toBe(
       'false'
     );
@@ -88,18 +90,24 @@ describe(componentName, () => {
   });
 
   it('Adds additional properties to the containing node', async () => {
-    render(<TruncatedText {...defaultProps} data-testid="test" />);
+    await act(async () => {
+      render(<TruncatedText {...defaultProps} data-testid="test" />);
+    });
     screen.getByTestId('test');
   });
 
   it('Forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<TruncatedText {...defaultProps} ref={ref} />);
+    await act(async () => {
+      render(<TruncatedText {...defaultProps} ref={ref} />);
+    });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('Adds the Devtools attribute to the containing node', async () => {
-    render(<TruncatedText {...defaultProps} data-testid="test" />);
+    await act(async () => {
+      render(<TruncatedText {...defaultProps} data-testid="test" />);
+    });
     expect(screen.getByTestId('test')).toHaveDevtoolsAttribute(componentName);
   });
 

@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import cx from 'classnames';
 import { Tooltip } from '@carbon/react';
 import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
-import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import useTruncatedText from './useTruncatedText';
 
 interface TruncatedTextProps {
   /**
@@ -70,19 +69,10 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
       ...rest
     } = props;
     const [expanded, setExpanded] = useState(false);
-    const [truncated, setTruncated] = useState(false);
-    const contentRef = useRef<HTMLElement>(null);
-
-    useEffect(() => {
-      // initiate state for truncation on render
-      setTruncated(checkHeightOverflow(contentRef.current));
-    }, []);
-
-    useResizeObserver(contentRef, () => {
-      if (expanded) {
-        return;
-      }
-      setTruncated(checkHeightOverflow(contentRef.current));
+    const { ref: contentRef, truncated } = useTruncatedText({
+      lines,
+      value,
+      expanded,
     });
 
     const textContentStyles = {
@@ -139,6 +129,8 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
       </>
     );
 
+    const truncatedBody = type === 'expand' ? expandVariant : tooltipVariant;
+
     return (
       <div
         {...rest}
@@ -146,9 +138,7 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        {truncated && type === 'tooltip' && tooltipVariant}
-        {truncated && type === 'expand' && expandVariant}
-        {!truncated && valueBody}
+        {truncated ? truncatedBody : valueBody}
       </div>
     );
   }

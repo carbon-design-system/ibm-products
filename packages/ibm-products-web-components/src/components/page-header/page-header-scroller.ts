@@ -18,7 +18,7 @@ import { pageHeaderContext } from './context';
 import { consume } from '@lit/context';
 import CDSButton from '@carbon/web-components/es/components/button/button';
 import { prefix } from '../../globals/settings';
-import { scrollableAncestorInner } from './page-header';
+import { scrollableAncestorInner } from './utils';
 
 /**
  * Page header Scroller button

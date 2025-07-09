@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 import { Bee, Lightning } from '@carbon/react/icons';

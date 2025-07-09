@@ -32,6 +32,10 @@ type contentRendererArgs = {
 };
 export interface InterstitialScreenBodyProps {
   /**
+   * Pass you static content as children
+   */
+  children?: ReactNode;
+  /**
    * Provide an optional class to be applied to the containing node.
    */
   className?: string;
@@ -39,7 +43,7 @@ export interface InterstitialScreenBodyProps {
    * This is a required callback that has to return the content to render in the body section.
    * It can be a single child or an array of children depending on your need
    */
-  contentRenderer: (
+  contentRenderer?: (
     config: contentRendererArgs
   ) => ReactElement<EnrichedChildren> | ReactNode;
 }
@@ -73,11 +77,12 @@ const InterstitialScreenBody = React.forwardRef<
   const [scrollPercent, setScrollPercent] = useState(-1);
 
   useEffect(() => {
-    const _bodyContent = contentRenderer({
-      handleGotoStep,
-      progStep,
-      disableActionButton,
-    });
+    const _bodyContent =
+      contentRenderer?.({
+        handleGotoStep,
+        progStep,
+        disableActionButton,
+      }) ?? props.children;
 
     const isElement = isValidElement(_bodyContent);
     const children = isElement

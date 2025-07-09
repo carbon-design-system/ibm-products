@@ -1,3 +1,7 @@
+## `@carbon/ibm-products@2.70.1`
+### Bug fixes :bug:
+- fix: useClickoutside causing NotificationsPanel to reopen (#7820)
+
 ## `@carbon/ibm-products@2.69.0`
 ### Features :rocket:
 - feat: resize feature changes added (#7501)

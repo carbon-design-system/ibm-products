@@ -1,0 +1,11 @@
+@use '@carbon/react/scss/spacing';
+
+.page-header-story-wrapper {
+  margin-block-start: spacing.$spacing-09;
+}
+
+.page-header-story--tall-tab-panel {
+  /* Disabling in order to create scrolling content */
+  /* stylelint-disable-next-line csstools/use-logical */
+  height: 200vh;
+}

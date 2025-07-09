@@ -6,6 +6,7 @@
 //
 
 @use '@carbon/react/scss/spacing';
+@use '@carbon/styles/scss/theme';
 
 .page-header-story-wrapper {
   margin-block-start: spacing.$spacing-09;
@@ -15,4 +16,19 @@
   /* Disabling in order to create scrolling content */
   /* stylelint-disable-next-line csstools/use-logical */
   height: 200vh;
+}
+
+.page-header--docs-demo .docs-story div:first-child {
+  padding: 0;
+}
+
+.page-header--docs-demo .innerZoomElementWrapper > * {
+  /* Used to override storybook styling from a dynamically generated class in the canvas preview */
+  /* stylelint-disable-next-line declaration-no-important */
+  border: 0 !important;
+}
+
+.page-header--docs-demo .page-header-story--tall-tab-panel {
+  background-color: theme.$layer-01;
+  block-size: inherit;
 }

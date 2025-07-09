@@ -1,3 +1,10 @@
+## `@jest-config-ibm-cloud-cognitive@1.29.0`
+### Bug fixes :bug:
+- fix(deps): update dependency jest-watch-typeahead to v3 (#7718)
+
+### Housekeeping :house:
+- chore: add global mocks to jest setup (#7653)
+
 ## `@jest-config-ibm-cloud-cognitive@1.28.0`
 ### Housekeeping :house:
 - docs(changelog): update for v2.68.0-rc.0 (#7602)

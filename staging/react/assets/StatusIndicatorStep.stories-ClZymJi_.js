@@ -1,0 +1,19 @@
+import{e as n}from"./index-DtHxqM--.js";import{j as t}from"./index-DgLvjnYm.js";import{useMDXComponents as p}from"./index-CseD6FCQ.js";import"./index-CkZI38nJ.js";import{s as d}from"./_storybook-styles-BshvqKA3.js";import{A as l}from"./index-Cr_YAIZY.js";import{S as m}from"./StatusIndicatorStep-CPOFW2gB.js";import{a as u,j as x,C as h}from"./index-B4WvMzTq.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./index-CiYgQLeJ.js";import"./preview-BV6Bb4BF.js";import"./iframe-wzBMF1p9.js";import"./DocsRenderer-CFRXHY34-Cz8oKkT0.js";import"./client-CZTHzaKS.js";import"./index-4poXP75K.js";import"./bucket-10-CJixWMOF.js";import"./bucket-19-D8xKEiK4.js";import"./settings-Bzj6EGPa.js";import"./events-CdfZZS3f.js";import"./devtools-B69Kc3qg.js";import"./InlineLoading-WqBhFG3p.js";import"./bucket-6-DLW23Ky6.js";import"./index-Dytf1aFS.js";import"./index-DrFu-skq.js";function s(r){const e={a:"a",blockquote:"blockquote",h1:"h1",h2:"h2",li:"li",p:"p",ul:"ul",...p(),...r.components};return t.jsxs(t.Fragment,{children:[t.jsx(e.h1,{id:"statusindicatorstep",children:"StatusIndicatorStep"}),`
+`,t.jsx(e.h2,{id:"table-of-contents",children:"Table of Contents"}),`
+`,t.jsxs(e.ul,{children:[`
+`,t.jsx(e.li,{children:t.jsx(e.a,{href:"#example-usage",children:"Example usage"})}),`
+`,t.jsx(e.li,{children:t.jsx(e.a,{href:"#component-api",children:"Component API"})}),`
+`]}),`
+`,t.jsx(e.h2,{id:"deprecation-notice",children:"Deprecation notice"}),`
+`,t.jsxs(e.blockquote,{children:[`
+`,t.jsx(e.p,{children:"This component is deprecated and will be removed in the next major version."}),`
+`]}),`
+`,t.jsx(e.h2,{id:"example-usage",children:"Example usage"}),`
+`,`
+`,t.jsx(u,{children:t.jsx(x,{of:o})}),`
+`,t.jsx(e.h2,{id:"component-api",children:"Component API"}),`
+`,t.jsx(h,{})]})}function j(r={}){const{wrapper:e}={...p(),...r.components};return e?t.jsx(e,{...r,children:t.jsx(s,{...r})}):s(r)}const B={title:"Deprecated/Status indicator/StatusIndicatorStep",component:m,tags:["autodocs"],argTypes:{className:{table:{disable:!0}}},parameters:{styles:d,layout:"padded",docs:{page:j}},decorators:[r=>n.createElement(l,{type:"deprecation-notice",text:n.createElement("div",null,"This component is deprecated and will be removed in the next major version.")},r())]},S=r=>n.createElement("ul",null,n.createElement(m,{...r})),o=S.bind({});o.storyName="StatusIndicatorStep";o.args={description:"Descriptive text",errorMessage:"Error message.",status:"inactive"};var a,i,c;o.parameters={...o.parameters,docs:{...(a=o.parameters)==null?void 0:a.docs,source:{originalSource:`args => {
+  return <ul>
+      <StatusIndicatorStep {...args} />
+    </ul>;
+}`,...(c=(i=o.parameters)==null?void 0:i.docs)==null?void 0:c.source}}};const G=["statusIndicatorStep"];export{G as __namedExportsOrder,B as default,o as statusIndicatorStep};

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.70.0-rc.0`
+## `@carbon/ibm-products@2.70.0`
 ### Features :rocket:
 - feat(sidepanel): option to hide close button (#7669)
 

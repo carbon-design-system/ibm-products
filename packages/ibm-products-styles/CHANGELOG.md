@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.66.0-rc.0`
+## `@carbon/ibm-products-styles@2.66.0`
 ### Features :rocket:
 - feat(sidepanel): option to hide close button in web component (#7695)
 

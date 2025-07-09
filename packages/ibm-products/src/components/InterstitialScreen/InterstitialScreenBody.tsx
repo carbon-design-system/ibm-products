@@ -15,14 +15,15 @@ import React, {
 import PropTypes from 'prop-types';
 
 import {
+  blockClass,
   disableButtonConfigType,
   InterstitialScreenContext,
 } from './InterstitialScreen';
 import { ModalBody } from '@carbon/react';
-import { pkg } from '../../settings';
 
 import { Carousel } from '../Carousel';
 import { EnrichedChildren } from './InterstitialScreenHeader';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 type contentRendererArgs = {
   handleGotoStep?: (value: number) => void;
@@ -31,6 +32,10 @@ type contentRendererArgs = {
 };
 export interface InterstitialScreenBodyProps {
   /**
+   * Pass you static content as children
+   */
+  children?: ReactNode;
+  /**
    * Provide an optional class to be applied to the containing node.
    */
   className?: string;
@@ -38,7 +43,7 @@ export interface InterstitialScreenBodyProps {
    * This is a required callback that has to return the content to render in the body section.
    * It can be a single child or an array of children depending on your need
    */
-  contentRenderer: (
+  contentRenderer?: (
     config: contentRendererArgs
   ) => ReactElement<EnrichedChildren> | ReactNode;
 }
@@ -50,7 +55,7 @@ const InterstitialScreenBody = React.forwardRef<
   InterstitialScreenBodyProps
 >((props, ref) => {
   const { className = '', contentRenderer, ...rest } = props;
-  const blockClass = `${pkg.prefix}--interstitial-screen`;
+
   const bodyBlockClass = `${blockClass}--internal-body`;
 
   const [stepType, setStepType] = useState<StepType>();
@@ -72,11 +77,12 @@ const InterstitialScreenBody = React.forwardRef<
   const [scrollPercent, setScrollPercent] = useState(-1);
 
   useEffect(() => {
-    const _bodyContent = contentRenderer({
-      handleGotoStep,
-      progStep,
-      disableActionButton,
-    });
+    const _bodyContent =
+      contentRenderer?.({
+        handleGotoStep,
+        progStep,
+        disableActionButton,
+      }) ?? props.children;
 
     const isElement = isValidElement(_bodyContent);
     const children = isElement
@@ -124,7 +130,8 @@ const InterstitialScreenBody = React.forwardRef<
     <div
       className={`${blockClass}--body ${className}`}
       ref={bodyScrollRef ?? ref}
-      {...rest}
+      {...getDevtoolsProps('InterstitialScreenBody')}
+      {...(isFullScreen ? rest : {})}
     >
       <div className={`${blockClass}--content`}>
         {stepType === 'multi' ? (
@@ -149,7 +156,7 @@ const InterstitialScreenBody = React.forwardRef<
   return isFullScreen ? (
     renderBody()
   ) : (
-    <ModalBody ref={ref} className={bodyBlockClass}>
+    <ModalBody ref={ref} className={bodyBlockClass} {...rest}>
       {renderBody()}
     </ModalBody>
   );

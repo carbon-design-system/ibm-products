@@ -409,15 +409,15 @@ export let NotificationsPanel = React.forwardRef(
       setAllNotifications(data);
     }, [data]);
 
-    useClickOutside(ref || notificationPanelRef, (target) => {
-      const element = target as HTMLElement;
-      if (!isActionableElement(element)) {
-        setTimeout(() => {
-          triggerButtonRef?.current?.focus();
-        }, 100);
-      }
-      onClickOutside?.();
-    });
+    // useClickOutside(ref || notificationPanelRef, (target) => {
+    //   const element = target as HTMLElement;
+    //   if (!isActionableElement(element)) {
+    //     setTimeout(() => {
+    //       triggerButtonRef?.current?.focus();
+    //     }, 100);
+    //   }
+    //   onClickOutside?.();
+    // });
 
     const handleKeydown = (event) => {
       event.stopPropagation();

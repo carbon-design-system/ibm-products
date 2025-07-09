@@ -1,1 +1,0 @@
-import{r as n}from"./index-DtHxqM--.js";const i=function(t){let r=arguments.length>1&&arguments[1]!==void 0?arguments[1]:!1;const[c,s]=n.useState(r);return n.useEffect(()=>{const a=o=>{s(o.matches)},e=window.matchMedia(t);return e.addEventListener("change",a),s(e.matches),()=>{e.removeEventListener("change",a)}},[t]),c};export{i as u};

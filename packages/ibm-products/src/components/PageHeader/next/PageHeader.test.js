@@ -890,4 +890,56 @@ describe('PageHeader', () => {
       });
     });
   });
+  describe('PageHeader.TabBar with scroller button', () => {
+    const mockTags = [
+      { id: '1', type: 'blue', text: 'Tag 1', size: 'md' },
+      { id: '2', type: 'green', text: 'Tag 2', size: 'md' },
+      { id: '3', type: 'purple', text: 'Tag 3', size: 'md' },
+    ];
+    beforeEach(() => {
+      window.IntersectionObserver = jest.fn().mockImplementation(() => ({
+        observe: () => null,
+        unobserve: () => null,
+      }));
+    });
+    it('should render a tab bar with scroller button and tags', () => {
+      render(
+        <PageHeader.Root>
+          <PageHeader.Content>Hello</PageHeader.Content>
+          <PageHeaderTabBarDirect
+            tags={mockTags}
+            scroller={<PageHeader.ScrollButton />}
+          />
+        </PageHeader.Root>
+      );
+      expect(screen.getByLabelText('Collapse')).toBeInTheDocument();
+    });
+    it('should render a tab bar with scroller button and without passing tags', () => {
+      render(
+        <PageHeader.Root>
+          <PageHeader.Content>Hello</PageHeader.Content>
+          <PageHeaderTabBarDirect scroller={<PageHeader.ScrollButton />} />
+        </PageHeader.Root>
+      );
+      expect(screen.getByLabelText('Collapse')).toBeInTheDocument();
+    });
+    it('should call onClick function passed to scroller', async () => {
+      const scrollerOnClick = jest.fn();
+      render(
+        <PageHeader.Root>
+          <PageHeader.Content>Hello</PageHeader.Content>
+          <PageHeaderTabBarDirect
+            scroller={<PageHeader.ScrollButton onClick={scrollerOnClick} />}
+          />
+        </PageHeader.Root>
+      );
+      const scrollerButton = screen.getByLabelText('Collapse');
+      expect(scrollerButton).toBeInTheDocument();
+
+      await act(() => {
+        userEvent.click(scrollerButton);
+      });
+      expect(scrollerOnClick).toHaveBeenCalledTimes(1);
+    });
+  });
 });

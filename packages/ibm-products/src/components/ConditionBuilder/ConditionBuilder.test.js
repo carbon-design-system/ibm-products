@@ -688,6 +688,14 @@ describe(componentName, () => {
 
     //add first condition
 
+    await waitFor(
+      () =>
+        screen.getByRole('option', {
+          name: 'Continent',
+        }),
+      { timeout: 100 }
+    );
+
     await act(() =>
       userEvent.click(
         screen.getByRole('option', {
@@ -700,6 +708,14 @@ describe(componentName, () => {
       screen.getByRole('option', {
         name: 'is',
       })
+    );
+
+    await waitFor(
+      () =>
+        screen.getByRole('option', {
+          name: 'Africa',
+        }),
+      { timeout: 100 }
     );
 
     fireEvent.click(

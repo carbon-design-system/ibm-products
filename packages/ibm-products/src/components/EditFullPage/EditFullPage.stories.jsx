@@ -6,7 +6,7 @@
  */
 import React, { useState } from 'react';
 import { carbon } from '../../settings';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { CreateFullPage } from '../CreateFullPage';
 import { CreateFullPageStep } from '../CreateFullPage/CreateFullPageStep';
 import { pkg } from '../../settings';

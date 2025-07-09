@@ -31,12 +31,18 @@ export const handleKeyDown = (evt, conditionBuilderRef, variant) => {
 export const handleKeyDownForPopover = (
   evt,
   conditionBuilderRef,
-  popoverRef
+  popoverRef,
+  closePopover
 ) => {
   if (excludeKeyPress(evt)) {
     return;
   }
-  handleKeyPressForPopover(evt, popoverRef?.current, conditionBuilderRef);
+  handleKeyPressForPopover(
+    evt,
+    popoverRef?.current,
+    conditionBuilderRef,
+    closePopover
+  );
 };
 
 //skipping keyboard handling for date and time fields to get take carbon's
@@ -50,7 +56,8 @@ const excludeKeyPress = (evt) => {
 const handleKeyPressForPopover = (
   evt,
   parentContainer,
-  conditionBuilderRef
+  conditionBuilderRef,
+  closePopover
 ) => {
   const key = evt.key;
   const isHoldingShiftKey = checkForHoldingKey(evt, 'shiftKey');
@@ -62,7 +69,10 @@ const handleKeyPressForPopover = (
 
   if (key === 'Escape') {
     //focus the corresponding field in which the popover is triggered from
+
+    closePopover?.();
     focusThisField(evt, conditionBuilderRef);
+
     evt.preventDefault();
     evt.stopPropagation();
   }
@@ -173,8 +183,8 @@ const handleKeyPressForPopover = (
     if (key === 'Enter' && !isHoldingShiftKey) {
       if (document.activeElement.type !== 'button') {
         //for button , enter key is click which already handled by framework, else trigger click
+        closePopover?.();
         focusThisField(evt, conditionBuilderRef);
-        document.activeElement?.click();
       }
     }
   }

@@ -26,11 +26,13 @@ interface ItemOptionProps {
     isStatement?: boolean;
   };
   onChange: (value: string, e: Event) => void;
+  closePopover?: () => void;
 }
 export const ItemOption = ({
   conditionState = {},
   config = {},
   onChange,
+  closePopover,
 }: ItemOptionProps) => {
   const { popOverSearchThreshold } = useContext(ConditionBuilderContext);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -100,9 +102,9 @@ export const ItemOption = ({
             labelText={clearSearchText}
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
-            onKeyDown={(evt: KeyboardEvent) =>
-              onKeyDownHandlerForSearch(evt, conditionBuilderRef)
-            }
+            onKeyDown={(evt: React.KeyboardEvent<HTMLInputElement>) => {
+              onKeyDownHandlerForSearch(evt, conditionBuilderRef, closePopover);
+            }}
           />
         </div>
       )}

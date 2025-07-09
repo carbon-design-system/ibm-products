@@ -6,10 +6,10 @@
  */
 
 import React, { useRef, useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 import { Wikis } from '@carbon/react/icons';
 import { ConditionBuilder } from '.';
 import mdx from './ConditionBuilder.mdx';

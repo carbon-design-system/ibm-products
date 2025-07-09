@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import Nav from './Nav';
 import NavItem from './NavItem';
 import NavList from './NavList';

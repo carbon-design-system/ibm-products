@@ -3,7 +3,6 @@
 - feat(sidepanel): option to hide close button (#7669)
 
 ### Bug fixes :bug:
-- fix: useClickOutside causing NotificationsPanel to reopen (#7817)
 - fix: add rest props back to card overflow (#7744)
 - fix(tearsheet): incorrect color layering (#7730)
 - fix(stories): remove extra carbon style imports (#7647)

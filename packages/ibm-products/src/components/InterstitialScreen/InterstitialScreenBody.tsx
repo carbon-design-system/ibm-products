@@ -45,7 +45,7 @@ export interface InterstitialScreenBodyProps {
    * to be rendered in the body section, which can be either a single element or an array of elements based on your needs.
    * If internal state access isn’t required, you can simply use static children instead
    */
-  contentRenderer: (
+  contentRenderer?: (
     config: contentRendererArgs
   ) => ReactElement<EnrichedChildren> | ReactNode;
 }
@@ -79,11 +79,12 @@ const InterstitialScreenBody = React.forwardRef<
   const [scrollPercent, setScrollPercent] = useState(-1);
 
   useEffect(() => {
-    const _bodyContent = contentRenderer({
-      handleGotoStep,
-      progStep,
-      disableActionButton,
-    });
+    const _bodyContent =
+      contentRenderer?.({
+        handleGotoStep,
+        progStep,
+        disableActionButton,
+      }) ?? props.children;
 
     const isElement = isValidElement(_bodyContent);
     const children = isElement

@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 // import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { ImportModal } from '.';
 import DocsPage from './ImportModal.docs-page';

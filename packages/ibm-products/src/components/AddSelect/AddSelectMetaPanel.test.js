@@ -24,6 +24,13 @@ describe(componentName, () => {
     render(<AddSelectMetaPanel {...defaultProps} />);
   });
 
+  it('has no accessibility violations', async () => {
+    render(<AddSelectMetaPanel {...defaultProps} />);
+    const AddSelectElement = document.querySelector(`.${blockClass}`);
+    await expect(AddSelectElement).toBeAccessible(componentName);
+    await expect(AddSelectElement).toHaveNoAxeViolations();
+  });
+
   it('renders without html', async () => {
     const entry = {
       id: 'test-id',

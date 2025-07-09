@@ -4,9 +4,12 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
 import { getAutoTrack } from '../../../scripts/get-auto-track-script';
+
+const require = createRequire(import.meta.url);
 
 const stories = [
   '../src/**/!(*.internal).stories.*',
@@ -18,10 +21,9 @@ export default {
   staticDirs: ['../public'],
 
   addons: [
-    getAbsolutePath('@storybook/addon-actions'),
-    getAbsolutePath('@storybook/addon-controls'),
+    // getAbsolutePath('@storybook/addon-controls'),
     getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-viewport'),
+    // getAbsolutePath('@storybook/addon-viewport'),
     {
       name: '@storybook/addon-docs',
       options: {
@@ -32,20 +34,13 @@ export default {
         },
       },
     },
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        actions: true,
-        backgrounds: false,
-        controls: true,
-        docs: true,
-        toolbars: true,
-        viewport: true,
-      },
-    },
-    // https://www.npmjs.com/package/storybook-addon-accessibility-checker
-    getAbsolutePath('@storybook/addon-a11y'),
   ],
+
+  features: {
+    previewCsfV3: true,
+    buildStoriesJson: true,
+    interactions: false, // disable Interactions tab
+  },
 
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),

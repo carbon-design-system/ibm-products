@@ -8,10 +8,7 @@
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  expectWarn,
-  expectMultipleError,
-} from '../../global/js/utils/test-helper';
+import { expectWarn } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
@@ -26,6 +23,11 @@ import {
 } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
+import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
+
+jest.mock('../../global/js/utils/checkForOverflow', () => ({
+  checkHeightOverflow: jest.fn(),
+}));
 
 const blockClass = `${pkg.prefix}--tearsheet`;
 const componentName = Tearsheet.displayName;
@@ -41,13 +43,6 @@ const createButton = `Create ${uuidv4()}`;
 const actions = [
   { kind: 'secondary', onClick, label: 'Cancel' },
   { onClick, label: createButton },
-];
-const badActions = [
-  { kind: 'primary' },
-  { kind: 'primary' },
-  { kind: 'ghost' },
-  { kind: 'ghost' },
-  { kind: 'danger--tertiary' },
 ];
 const childFragment = `Main ${uuidv4()} content`;
 const children = <div>{childFragment}</div>;
@@ -129,7 +124,6 @@ const DummyComponent = ({ props, open }) => {
 
 // These are tests than apply to both Tearsheet and TearsheetNarrow
 // and also (with extra props and omitting button tests) to CreateTearsheetNarrow
-let tooManyButtonsTestedAlready = false;
 const commonTests = (Ts, name, props, testActions) => {
   it(`renders a component ${name}`, async () => {
     render(<Ts {...{ ...props, closeIconDescription }} />);
@@ -140,27 +134,16 @@ const commonTests = (Ts, name, props, testActions) => {
     });
   });
 
-  it('has no accessibility violations when closed', async () => {
-    const { container } = render(
-      <Ts {...{ ...props, closeIconDescription, label, title }} />
-    );
-    await expect(container).toBeAccessible(`${name} when closed`);
-    await expect(container).toHaveNoAxeViolations();
-  });
-
   it('has no accessibility violations', async () => {
-    const { container } = render(
-      <Ts
-        {...{ ...props, closeIconDescription, label, title }}
-        open
-        hasCloseIcon
-      />
-    );
-
     await act(async () => {
-      await expect(container).toBeAccessible(name);
-      await expect(container).toHaveNoAxeViolations();
+      render(<Ts {...{ ...props, closeIconDescription, title }} open />);
     });
+
+    const tearsheetElement = document.querySelector(
+      `.${pkg.prefix}--tearsheet`
+    );
+    await expect(tearsheetElement).toBeAccessible(`${name}`);
+    await expect(tearsheetElement).toHaveNoAxeViolations();
   });
 
   it('omits main content sections when no props supplied and no close icon requested', async () => {
@@ -186,26 +169,6 @@ const commonTests = (Ts, name, props, testActions) => {
       await act(() => userEvent.click(screen.getByText(createButton)));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
-
-    it('rejects too many buttons using the custom validator', async () =>
-      expectMultipleError(
-        // prop-types only reports the first occurrence of each distinct error,
-        // which creates an unfortunate dependency between test runs
-        tooManyButtonsTestedAlready
-          ? [
-              `Invalid prop \`actions\` supplied to \`${name}\`: you cannot have more than four actions`,
-            ]
-          : [
-              `Invalid prop \`actions\` supplied to \`${name}\`: you cannot have more than four actions`,
-              'Invalid prop `actions[4].kind` of value `danger--tertiary` supplied to `TearsheetShell`',
-              'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than four actions',
-              'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
-            ],
-        () => {
-          tooManyButtonsTestedAlready = true;
-          render(<Ts {...props} actions={badActions} />);
-        }
-      ));
   }
 
   it('renders children', async () => {

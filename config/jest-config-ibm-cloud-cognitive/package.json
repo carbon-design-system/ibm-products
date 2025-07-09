@@ -17,13 +17,6 @@
     "carbon for cloud & cognitive",
     "carbon for ibm products"
   ],
-  "scripts": {
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), chalk (issue #1596)",
-    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^chalk$)/'"
-  },
-  "devDependencies": {
-    "npm-check-updates": "^18.0.0"
-  },
   "peerDependencies": {
     "jest": "^29.7.0"
   },

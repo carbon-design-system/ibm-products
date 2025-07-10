@@ -481,6 +481,9 @@ export const TabBarWithTabsAndTags = (args) => (
         <Breadcrumb>
           <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
           <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          <PageHeader.TitleBreadcrumb>
+            Virtual Machine DAL
+          </PageHeader.TitleBreadcrumb>
         </Breadcrumb>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content

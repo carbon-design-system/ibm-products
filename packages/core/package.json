@@ -37,8 +37,7 @@
     "remark-gfm": "^4.0.1",
     "rimraf": "^6.0.1",
     "sass": "^1.85.1",
-    "typescript": "^5.8.2",
-    "vite": "^7.0.0"
+    "typescript": "^5.8.2"
   },
   "dependencies": {
     "lottie-web": "^5.12.2"

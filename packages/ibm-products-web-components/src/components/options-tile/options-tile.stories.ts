@@ -86,7 +86,7 @@ export const Default = {
 };
 
 const meta = {
-  title: 'Experimental/OptionsTile',
+  title: 'Components/OptionsTile',
 };
 
 export default meta;

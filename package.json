@@ -61,7 +61,7 @@
     "update-gallery-config": "node scripts/example-gallery-builder/index.js; prettier examples/carbon-for-ibm-products/**/src/**/*.{js,jsx,md,mdx,scss,json} --write --loglevel=silent",
     "upgrade:dependencies:examples": "npm-check-updates -u --dep dev,peer,prod --color --target minor --packageFile 'scripts/example-gallery-builder/update-example/**/package.json'",
     "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
-    "visual-snapshot": "cd packages/ibm-products && yarn percy storybook storybook-static",
+    "visual-snapshot": "cd packages/ibm-products && yarn vrt",
     "wc-coverage": "cd packages/ibm-products-web-components && yarn coverage"
   },
   "devDependencies": {

@@ -1,4 +1,8 @@
-## `@carbon/ibm-products@2.70.0-rc.0`
+## `@carbon/ibm-products@2.70.1`
+### Bug fixes :bug:
+- fix: useClickoutside causing NotificationsPanel to reopen (#7820)
+
+## `@carbon/ibm-products@2.70.0`
 ### Features :rocket:
 - feat(sidepanel): option to hide close button (#7669)
 

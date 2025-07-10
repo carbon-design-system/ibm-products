@@ -144,6 +144,6 @@ export const WithImage = {
   },
 };
 
-const meta = { title: 'Experimental/Useravatar' };
+const meta = { title: 'Components/UserAvatar' };
 
 export default meta;

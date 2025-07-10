@@ -66,15 +66,15 @@ test.describe('NotificationsPanel @avt', () => {
     await expect(notificationPanel).toBeVisible();
     await page.locator('body').click({ force: true });
     await Promise.race([
-      notificationPanel.waitFor({ state: 'hidden', timeout: 5000 }),
-      notificationPanel.waitFor({ state: 'detached', timeout: 5000 }),
+      notificationPanel.waitFor({ state: 'hidden', timeout: 100 }),
+      notificationPanel.waitFor({ state: 'detached', timeout: 100 }),
       page.waitForFunction(
         (panelSelector) => {
           const panel = document.querySelector(panelSelector);
           return !panel || window.getComputedStyle(panel).opacity === '0';
         },
         '[role="dialog"]',
-        { timeout: 5000 }
+        { timeout: 100 }
       ),
     ]);
     await page.waitForTimeout(150);
@@ -90,7 +90,7 @@ test.describe('NotificationsPanel @avt', () => {
           `Expected notifications trigger to be focused, but active element was: ${activeElement}`
         );
       }
-    }).toPass({ timeout: 5000 });
+    }).toPass({ timeout: 100 });
   });
   test('@avt-notification-panel-doesn-not-focus-return-to-trigger-when-clicked-on-actionable-elements', async ({
     page,
@@ -113,18 +113,18 @@ test.describe('NotificationsPanel @avt', () => {
     });
     await addNotificationButton.click();
     await Promise.race([
-      notificationPanel.waitFor({ state: 'hidden', timeout: 5000 }),
-      notificationPanel.waitFor({ state: 'detached', timeout: 5000 }),
+      notificationPanel.waitFor({ state: 'hidden', timeout: 100 }),
+      notificationPanel.waitFor({ state: 'detached', timeout: 100 }),
       page.waitForFunction(
         (panelSelector) => {
           const panel = document.querySelector(panelSelector);
           return !panel || window.getComputedStyle(panel).opacity === '0';
         },
         '[role="dialog"]',
-        { timeout: 5000 }
+        { timeout: 100 }
       ),
     ]);
     await expect(notificationTrigger).not.toBeFocused();
-    await expect(addNotificationButton).toBeFocused({ timeout: 2000 });
+    await expect(addNotificationButton).toBeFocused({ timeout: 100 });
   });
 });

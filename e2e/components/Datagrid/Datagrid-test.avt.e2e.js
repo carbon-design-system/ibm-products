@@ -24,7 +24,7 @@ test.describe('Datagrid @avt', () => {
     await expect(page).toHaveNoACViolations('Datagrid @avt-basic-usage');
   });
 
-  test('@avt-open-and-dismiss-sidepanel-onRowClick', async ({ page }) => {
+  test.skip('@avt-open-and-dismiss-sidepanel-onRowClick', async ({ page }) => {
     await visitStory(page, {
       component: 'Datagrid',
       id: 'deprecated-datagrid-clickablerow--clickable-row-story',

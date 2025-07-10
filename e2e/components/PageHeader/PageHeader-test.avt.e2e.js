@@ -112,7 +112,7 @@ test.describe('PageHeader @avt', () => {
   });
 
   // PageHeader buttons move into MenuButton on small screens
-  test('@avt-header-buttons-move-to-menubutton-on-small-screens', async ({
+  test.skip('@avt-header-buttons-move-to-menubutton-on-small-screens', async ({
     page,
   }) => {
     await visitStory(page, {

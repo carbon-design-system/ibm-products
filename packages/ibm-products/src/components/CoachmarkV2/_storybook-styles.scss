@@ -1,0 +1,43 @@
+//
+// Copyright IBM Corp. 2023, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../../../ibm-products-styles/src/global/styles/project-settings';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/styles/scss/themes' as themes;
+@use '@carbon/styles/scss/type';
+
+:root {
+  @include theme.theme(themes.$white);
+
+  background-color: var(theme.$layer);
+}
+// BUBBLE
+.dev-prefix--c4p--coachmark--coachmark-content {
+  inline-size: 290px;
+
+  .dev-prefix--c4p--coachmark--content-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dev-prefix--c4p--coachmark--content-body > h2 {
+    @include type.type-style('productive-heading-02');
+
+    margin: 0 0 $spacing-03;
+  }
+
+  .dev-prefix--c4p--coachmark--content-body > p {
+    @include type.type-style('body-long-01');
+  }
+
+  .dev-prefix--c4p--coachmark--content-body > button {
+    display: flex;
+    align-self: flex-end;
+    margin-block-start: $spacing-05;
+  }
+}

@@ -1,0 +1,86 @@
+/**
+ * Copyright IBM Corp. 2024, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+import { usePrefix } from '@carbon/react';
+import React, { cloneElement, isValidElement, ReactElement } from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { blockClass, CoachmarkV2Context } from './Coachmark-v2';
+
+export interface CoachmarkTriggerProps {
+  /**
+   * Provide the optional content for header section and will be render after header titles and before progress indicator.
+   * People can make use of this if they want to have custom header.
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+}
+
+export type EnrichedChildren = {
+  children: React.ReactNode;
+};
+
+const CoachmarkTrigger = React.forwardRef<
+  HTMLDivElement,
+  CoachmarkTriggerProps
+>((props, ref) => {
+  const { className = '', children, ...rest } = props;
+  const { align, open, setOpen, triggerRef } =
+    React.useContext(CoachmarkV2Context);
+
+  const coachmarkTriggerBlockClass = `${blockClass}--coachmark-trigger`;
+  const carbonPrefix = usePrefix();
+  let childWithOnClick = children;
+  if (!isValidElement(children)) {
+    console.warn(
+      '<Comp.Trigger> expects a single valid React element as child'
+    );
+    return null;
+  }
+  const userOnClick = (children as ReactElement<any>).props.onClick;
+
+  const composedOnClick = (event: React.MouseEvent) => {
+    setOpen?.(!open);
+    userOnClick?.(event);
+  };
+
+  // Clone the element and override onClick
+  childWithOnClick = cloneElement(children, {
+    ...(children as ReactElement<any>).props,
+    onClick: composedOnClick,
+    ref: triggerRef,
+  });
+
+  return (
+    <div
+      ref={ref}
+      role="presentation"
+      className={cx(coachmarkTriggerBlockClass, className)}
+      {...rest}
+    >
+      {childWithOnClick}
+    </div>
+  );
+});
+
+export default CoachmarkTrigger;
+
+CoachmarkTrigger.propTypes = {
+  /**
+   * Provide the optional content for header section and will be render after header titles and before progress indicator.
+   * People can make use of this if they want to have custom header.
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className: PropTypes.string,
+};

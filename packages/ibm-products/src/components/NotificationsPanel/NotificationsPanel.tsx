@@ -412,6 +412,7 @@ export let NotificationsPanel = React.forwardRef(
     useClickOutside(ref || notificationPanelRef, (target) => {
       const element = target as HTMLElement;
       if (
+        triggerButtonRef &&
         element !== triggerButtonRef?.current &&
         !triggerButtonRef?.current?.contains(element)
       ) {

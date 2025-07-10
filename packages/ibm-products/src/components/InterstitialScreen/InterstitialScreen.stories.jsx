@@ -23,7 +23,7 @@ const storyClass = 'interstitial-stories';
 const blockClass = `${pkg.prefix}--interstitial-screen`;
 
 export default {
-  title: 'Experimental/Onboarding/InterstitialScreen',
+  title: 'Components/Onboarding/InterstitialScreen',
   component: InterstitialScreen,
   tags: ['autodocs', 'Onboarding'],
   subcomponents: {
@@ -135,7 +135,7 @@ const getSingleContent = (
 const defaultProps = {
   headerTitle: 'Use case-specific title',
   headerSubTitle: 'Use case-specific sub title',
-  interstitialAriaLabel: 'Interstitial Screen',
+  ariaLabel: 'Interstitial Screen',
 };
 export const Modal = () => {
   const [showInterstitialScreen, setShowInterstitialScreen] = useState(true);
@@ -152,11 +152,11 @@ export const Modal = () => {
       </Button>
 
       <InterstitialScreen
-        isOpen={showInterstitialScreen}
+        open={showInterstitialScreen}
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        ariaLabel={defaultProps.ariaLabel}
         launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
@@ -190,11 +190,11 @@ export const ModalWithMultipleSteps = () => {
       </Button>
 
       <InterstitialScreen
-        isOpen={showInterstitialScreen}
+        open={showInterstitialScreen}
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        ariaLabel={defaultProps.ariaLabel}
         launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
@@ -227,11 +227,11 @@ export const WithCustomActionButtons = () => {
       </Button>
 
       <InterstitialScreen
-        isOpen={showInterstitialScreen}
+        open={showInterstitialScreen}
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        ariaLabel={defaultProps.ariaLabel}
         launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
@@ -344,11 +344,11 @@ export const WithAsynchronousActionCallback = () => {
       </Button>
 
       <InterstitialScreen
-        isOpen={showInterstitialScreen}
+        open={showInterstitialScreen}
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        ariaLabel={defaultProps.ariaLabel}
         launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
@@ -381,12 +381,12 @@ export const fullScreen = () => {
         Show Interstitial full screen
       </Button>
       <InterstitialScreen
-        isOpen={showInterstitialScreen}
+        open={showInterstitialScreen}
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
         isFullScreen={true}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        ariaLabel={defaultProps.ariaLabel}
         launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header
@@ -420,12 +420,12 @@ export const fullScreenWithMultipleSteps = () => {
         Show Interstitial full screen
       </Button>
       <InterstitialScreen
-        isOpen={showInterstitialScreen}
+        open={showInterstitialScreen}
         onClose={() => {
           setShowInterstitialScreen(false);
         }}
         isFullScreen={true}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
+        ariaLabel={defaultProps.ariaLabel}
         launcherButtonRef={launcherButtonRef}
       >
         <InterstitialScreen.Header

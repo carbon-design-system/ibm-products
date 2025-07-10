@@ -8,7 +8,7 @@
 
 import React from 'react';
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 import { UiShell } from './preview-components/UiShell';
 import { Breadcrumbs } from './preview-components/Breadcrumbs';
 import { Link } from '@carbon/react';

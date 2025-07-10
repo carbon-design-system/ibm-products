@@ -19,6 +19,13 @@ describe(componentName, () => {
     render(<AddSelectSort sortByLabel="test sort title" />);
   });
 
+  it('has no accessibility violations', async () => {
+    render(<AddSelectSort />);
+    const AddSelectElement = document.querySelector(`.${blockClass}`);
+    await expect(AddSelectElement).toBeAccessible(componentName);
+    await expect(AddSelectElement).toHaveNoAxeViolations();
+  });
+
   it('renders with options', async () => {
     const props = {
       sortBy: ['title'],

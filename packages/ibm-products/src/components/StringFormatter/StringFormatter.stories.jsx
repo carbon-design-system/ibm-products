@@ -7,7 +7,7 @@
 
 import React from 'react';
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 
 import { StringFormatter } from '.';
 import mdx from './StringFormatter.mdx';

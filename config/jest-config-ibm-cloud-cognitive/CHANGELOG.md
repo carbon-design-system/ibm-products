@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.29.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.29.0`
 ### Bug fixes :bug:
 - fix(deps): update dependency jest-watch-typeahead to v3 (#7718)
 

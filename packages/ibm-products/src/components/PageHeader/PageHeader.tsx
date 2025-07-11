@@ -1279,7 +1279,8 @@ const tagTypes = Object.keys(TYPES);
 
 export const deprecatedProps = {
   /**
-   * **Deprecated** see property `enableBreadcrumbScroll`
+   * **Deprecated**
+   * see property `enableBreadcrumbScroll`
    */
   disableBreadcrumbScroll: deprecateProp(
     PropTypes.bool,

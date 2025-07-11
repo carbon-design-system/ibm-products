@@ -23,7 +23,7 @@ const storyClass = 'interstitial-stories';
 const blockClass = `${pkg.prefix}--interstitial-screen`;
 
 export default {
-  title: 'Experimental/Onboarding/InterstitialScreen',
+  title: 'Components/Onboarding/InterstitialScreen',
   component: InterstitialScreen,
   tags: ['autodocs', 'Onboarding'],
   subcomponents: {

@@ -521,6 +521,9 @@ export const TabBarWithTabsAndTags = {
             <cds-breadcrumb-item>
               <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
             </cds-breadcrumb-item>
+            <c4p-page-header-title-breadcrumb>
+              Virtual Machine DAL
+            </c4p-page-header-title-breadcrumb>
           </cds-breadcrumb>
           <cds-icon-button
             slot="page-actions"

@@ -7,7 +7,7 @@
 import { useRef, useState, useLayoutEffect, useEffect, RefObject } from 'react';
 
 export const useResizeObserver = (
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   onResize?: (rect: DOMRectReadOnly) => void
 ) => {
   const [width, setWidth] = useState(-1);

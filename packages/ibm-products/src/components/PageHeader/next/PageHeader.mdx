@@ -19,14 +19,12 @@ import * as PageHeaderStories from './PageHeader.stories';
 
 The `PageHeader` is a large family of components, composed of three zones; the Breadcrumb, Content, and Tabs.
 
-<Canvas>
-  <Story of={PageHeaderStories.Default} />
-</Canvas>
+<Canvas className='page-header--docs-demo' of={PageHeaderStories.Default} />
 
 ## PageHeader.BreadcrumbBar
 
 The `PageHeader.BreadcrumbBar` component is used to render the breadcrumb navigation area within the `PageHeader`.
-It accepts `Breadcrumb` and `BreadcrumbItem` components as children to define the breadcrumb trail. Additionally, it accepts
+It accepts `Breadcrumb`, `BreadcrumbItem`, and `PageHeader.TitleBreadcrumb` components as children to define the breadcrumb trail. Additionally, it accepts
 `contentActions` and` pageActions` props, allowing for actions, such as `Button` or `IconButton` — alongside
 the breadcrumb content.
 
@@ -58,6 +56,7 @@ return (
       <Breadcrumb>
         <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        <PageHeader.TitleBreadcrumb>Title</PageHeader.TitleBreadcrumb>
       </Breadcrumb>
     </PageHeader.BreadcrumbBar>
     ...
@@ -67,9 +66,7 @@ return (
 
 ## PageHeader.Content
 
-<Canvas>
-  <Story of={PageHeaderStories.ContentWithContextualActionsAndPageActions} />
-</Canvas>
+<Canvas className='page-header--docs-demo' of={PageHeaderStories.ContentWithContextualActionsAndPageActions} />
 
 The `PageHeader.Content` component defines the primary content area of the `PageHeader`, including the title, subtitle, and
 any supporting text or contextual actions. It accepts a `title` prop to display the main heading and can optionally include a `renderIcon` prop
@@ -135,9 +132,7 @@ return (
 
 ### PageHeader.Content With Hero Image
 
-<Canvas>
-  <Story of={PageHeaderStories.ContentWithHeroImage} />
-</Canvas>
+<Canvas className='page-header--docs-demo' of={PageHeaderStories.ContentWithHeroImage} />
 
 When including a hero image within the `PageHeader`, the `Grid` and `Column` components will need to be utilized in order
 to define the layout correctly.
@@ -177,7 +172,7 @@ return (
 
 ```
 
-## PageHeader.TabsBar
+## PageHeader.TabBar
 
 To render the Tabs zone, utilize the `PageHeader.TabBar` component, passing in the `TabList` and `Tab` components
 as its children. Then set up the `TabPanels` and `TabPanel` components outside of the `PageHeader`, making sure to
@@ -205,11 +200,9 @@ wrap all components within the `Tabs` component to ensures proper linkage of tab
 </Tabs>
 ```
 
-### PageHeader.TabsBar With Tags
+### PageHeader.TabBar With Tags
 
-<Canvas>
-  <Story of={PageHeaderStories.TabBarWithTabsAndTags} />
-</Canvas>
+<Canvas className='page-header--docs-demo' of={PageHeaderStories.TabBarWithTabsAndTags} />
 
 The `PageHeader.TabsBar` component accepts a `tags` prop expecting an array of objects as shown below. When the viewport
 width is reduced, these tags automatically collapse into a `Popover` for responsive display.
@@ -244,6 +237,27 @@ return (
   </TabPanels>
 </Tabs>
 );
+```
+
+### PageHeader.TabBar With scroller button
+
+To include the scroller button to expand and collapse the header, pass `PageHeader.ScrollButton` to the `scroller` prop of the tab bar.
+
+```jsx
+<Tabs>
+  <PageHeader.Root>
+    <PageHeader.TabBar tags={tags} scroller={<PageHeader.ScrollButton />}>
+      <TabList>
+        <Tab>Tab 1</Tab>
+        ...
+      </TabList>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+  <TabPanels>
+    <TabPanel>Tab Panel 1</TabPanel>
+    ...
+  </TabPanels>
+</Tabs>
 ```
 
 ## Component API

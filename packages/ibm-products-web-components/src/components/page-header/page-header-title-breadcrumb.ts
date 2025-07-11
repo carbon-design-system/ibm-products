@@ -7,9 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit';
-import { classMap } from 'lit/directives/class-map.js';
-import { property } from 'lit/decorators.js';
+import { html } from 'lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { CDSBreadcrumbItem } from '@carbon/web-components/es/index';
 import { prefix } from '../../globals/settings';

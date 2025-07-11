@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ import React, {
   useRef,
   useMemo,
   useCallback,
+  RefObject,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -30,6 +31,9 @@ import {
   PopoverContent,
   Tag,
   unstable_Text as Text,
+  usePrefix,
+  IconButtonProps,
+  IconButton,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import { blockClass } from '../PageHeaderUtils';
@@ -37,6 +41,10 @@ import { createOverflowHandler } from '@carbon/utilities';
 import { TYPES } from '@carbon/react/es/components/Tag/Tag';
 import { useOverflowItems } from '../../../global/js/hooks/useOverflowItems';
 import { useId } from '../../../global/js/utils/useId';
+import { ChevronUp } from '@carbon/react/icons';
+import { PageHeaderContext, PageHeaderRefs, usePageHeader } from './context';
+import { getHeaderOffset, scrollableAncestor } from './utils';
+import { pkg } from '../../../settings';
 
 /**
  * ----------
@@ -49,6 +57,9 @@ interface PageHeaderProps {
 }
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
+    const [refs, setRefs] = useState<PageHeaderRefs>({});
+    const tempRef = useRef<HTMLDivElement>(null);
+    const componentRef = (ref ?? tempRef) as RefObject<HTMLDivElement>;
     const classNames = classnames(
       {
         [`${blockClass}`]: true,
@@ -56,10 +67,69 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       },
       className
     );
+
+    // Used to set CSS custom property with PageHeaderContent height to be used
+    // for sticky positioning
+    useEffect(() => {
+      if (componentRef?.current && refs?.contentRef?.current) {
+        const pageHeaderContentHeight = refs?.contentRef?.current?.offsetHeight;
+        const totalHeaderOffset = getHeaderOffset(componentRef?.current);
+        componentRef?.current.style.setProperty(
+          `--${pkg.prefix}-page-header-header-top`,
+          `${(Math.round(pageHeaderContentHeight) - totalHeaderOffset) * -1}px`
+        );
+        componentRef?.current.style.setProperty(
+          `--${pkg.prefix}-page-header-breadcrumb-top`,
+          `${totalHeaderOffset}px`
+        );
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [refs]);
+
+    const [fullyCollapsed, setFullyCollapsed] = useState(false);
+
+    // Intersection Observer setup, tracks if the PageHeaderContent is visible on page.
+    // If it is not visible, we should set fully collapsed to true so that the
+    // scroller button will know if it is clicked to expand rather than
+    // collapse the header.
+    useEffect(() => {
+      if (!refs?.contentRef || !componentRef?.current) {
+        return;
+      }
+      const totalHeaderOffset = getHeaderOffset(componentRef?.current);
+      const predefinedContentPadding = 24;
+      const contentObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target === refs?.contentRef!.current) {
+              setFullyCollapsed(!entry.isIntersecting);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+          threshold: 0.1,
+        }
+      );
+
+      if (refs?.contentRef.current) {
+        contentObserver.observe(refs?.contentRef.current);
+      }
+
+      return () => {
+        if (!refs?.contentRef?.current) {
+          return;
+        }
+        contentObserver.unobserve(refs?.contentRef.current);
+      };
+    }, [refs, componentRef]);
     return (
-      <div className={classNames} ref={ref} {...other}>
-        {children}
-      </div>
+      <PageHeaderContext.Provider value={{ refs, setRefs, fullyCollapsed }}>
+        <div className={classNames} ref={componentRef} {...other}>
+          {children}
+        </div>
+      </PageHeaderContext.Provider>
     );
   }
 );
@@ -200,6 +270,9 @@ const PageHeaderContent = React.forwardRef<
   }: PageHeaderContentProps,
   ref
 ) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
+  const { setRefs } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__content`]: true,
@@ -207,6 +280,14 @@ const PageHeaderContent = React.forwardRef<
     className
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (componentRef?.current) {
+      setRefs((prev) => ({ ...prev, contentRef: componentRef }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
   const isEllipsisActive = (element: HTMLHeadingElement) => {
@@ -219,7 +300,7 @@ const PageHeaderContent = React.forwardRef<
   }, [title]);
 
   return (
-    <div className={classNames} ref={ref} {...other}>
+    <div className={classNames} ref={componentRef} {...other}>
       <Grid>
         <Column lg={16} md={8} sm={4}>
           <div className={`${blockClass}__content__title-wrapper`}>
@@ -575,13 +656,14 @@ interface PageHeaderTabBarProps {
   children?: React.ReactNode;
   className?: string;
   tags?: TagItem[];
+  scroller?: React.ReactNode;
 }
 
 const PageHeaderTabBar = React.forwardRef<
   HTMLDivElement,
   PageHeaderTabBarProps
 >(function PageHeaderTabBar(
-  { className, children, tags = [], ...other }: PageHeaderTabBarProps,
+  { className, children, tags = [], scroller, ...other }: PageHeaderTabBarProps,
   ref
 ) {
   const classNames = classnames(
@@ -590,6 +672,14 @@ const PageHeaderTabBar = React.forwardRef<
     },
     className
   );
+
+  const renderScroller = () =>
+    scroller && (
+      <div className={`${pkg.prefix}--page-header--scroller-button-container`}>
+        {scroller}
+      </div>
+    );
+
   // Early return if no tags are provided
   if (!tags.length) {
     return (
@@ -597,6 +687,7 @@ const PageHeaderTabBar = React.forwardRef<
         <Grid>
           <Column lg={16} md={8} sm={4}>
             {children}
+            {renderScroller()}
           </Column>
         </Grid>
       </div>
@@ -692,9 +783,15 @@ const PageHeaderTabBar = React.forwardRef<
     <div className={classNames} ref={ref} {...other}>
       <Grid>
         <Column lg={16} md={8} sm={4}>
-          <div className={`${blockClass}__tab-bar--tablist`}>
+          <div
+            className={classnames(`${blockClass}__tab-bar--tablist`, {
+              [`${pkg.prefix}--page-header__tab-bar--with-scroller`]:
+                !!scroller,
+            })}
+          >
             {children}
             {tags.length > 0 && renderTags()}
+            {renderScroller()}
           </div>
         </Column>
       </Grid>
@@ -702,6 +799,79 @@ const PageHeaderTabBar = React.forwardRef<
   );
 });
 PageHeaderTabBar.displayName = 'PageHeaderTabBar';
+
+interface PageHeaderScrollButtonProps extends IconButtonProps {
+  collapseText?: string;
+  expandText?: string;
+}
+
+const PageHeaderScrollButton = React.forwardRef<
+  HTMLDivElement,
+  PageHeaderScrollButtonProps
+>(function PageHeaderExpander(
+  {
+    className,
+    children,
+    label,
+    onClick,
+    collapseText = 'Collapse',
+    expandText = 'Expand',
+    ...other
+  }: PageHeaderScrollButtonProps,
+  ref
+) {
+  const { refs, fullyCollapsed } = usePageHeader();
+
+  const handleScroller = (isFullyCollapsed: boolean) => {
+    if (!refs?.contentRef?.current) {
+      return;
+    }
+    const scrollableTarget = scrollableAncestor(
+      refs?.contentRef.current
+    ) as HTMLElement;
+
+    // Page header content is not fully collapsed
+    if (!isFullyCollapsed) {
+      const pageHeaderContentHeight = refs?.contentRef.current.offsetHeight;
+      scrollableTarget?.scrollTo({
+        top: pageHeaderContentHeight, // headerTopValue, check if breadcrumb bar is included
+        behavior: 'smooth',
+      });
+    } else {
+      // Page header content is fully collapsed
+      scrollableTarget?.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <IconButton
+      ref={ref}
+      label={fullyCollapsed ? expandText : collapseText}
+      size="md"
+      kind="ghost"
+      autoAlign
+      {...other}
+      onClick={(event) => {
+        onClick?.(event);
+        handleScroller(!!fullyCollapsed);
+      }}
+      className={classnames(
+        className,
+        `${pkg.prefix}--page-header--scroller-button`
+      )}
+    >
+      <ChevronUp
+        className={classnames(
+          `${pkg.prefix}--page-header--scroller-button-icon`,
+          {
+            [`${pkg.prefix}--page-header--scroller-button-icon-collapsed`]:
+              fullyCollapsed,
+          }
+        )}
+      />
+    </IconButton>
+  );
+});
 
 /**
  * -------
@@ -729,6 +899,9 @@ HeroImage.displayName = 'PageHeaderHeroImage';
 const TabBar = PageHeaderTabBar;
 TabBar.displayName = 'PageHeaderTabBar';
 
+const ScrollButton = PageHeaderScrollButton;
+ScrollButton.displayName = 'PageHeaderScrollButton';
+
 export {
   // direct exports
   PageHeader,
@@ -738,6 +911,7 @@ export {
   PageHeaderContentText,
   PageHeaderHeroImage,
   PageHeaderTabBar,
+  PageHeaderScrollButton,
   // namespaced
   Root,
   BreadcrumbBar,
@@ -746,6 +920,7 @@ export {
   ContentText,
   HeroImage,
   TabBar,
+  ScrollButton,
 };
 export type {
   PageHeaderProps,
@@ -755,4 +930,5 @@ export type {
   PageHeaderContentTextProps,
   PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
+  PageHeaderScrollButtonProps,
 };

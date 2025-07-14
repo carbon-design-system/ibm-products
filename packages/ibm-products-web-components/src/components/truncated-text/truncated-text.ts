@@ -209,7 +209,7 @@ export class CDSTruncatedText extends LitElement {
       ? html`
           <cds-tooltip
             align=${this.align}
-            ?autoalign=${this.autoalign}
+            autoalign=${this.autoalign}
             enter-delay-ms="0"
             leave-delay-ms="0"
           >

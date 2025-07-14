@@ -1,1 +1,0 @@
-import{r as u}from"./index-DtHxqM--.js";function r(n,t,i){const[d,e]=u.useState(n);return u.useEffect(()=>{const s=o=>{!n&&o.animationName===i&&e(!1)};n&&e(!0),t!=null&&t.current&&(t==null||t.current.addEventListener("animationend",s));const a=t==null?void 0:t.current;return()=>{a&&a.removeEventListener("animationend",s)}},[n,e,t,i]),{shouldRender:d}}export{r as u};

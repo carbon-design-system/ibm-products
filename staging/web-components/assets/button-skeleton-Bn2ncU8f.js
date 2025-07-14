@@ -1,0 +1,21 @@
+import{_ as u,c as b,r as D,x as l,p as t,n as y,o as s}from"./iframe-DLZU8VBi.js";import{b as C}from"./class-map-zub5iHIG.js";import{b as $,B as k,C as _}from"./button-D60qw4xD.js";let r=class extends D{render(){return l`<slot></slot>`}connectedCallback(){super.connectedCallback(),this.setAttribute("role","list")}};r.styles=$;r=u([b(`${t}-button-set-base`)],r);var I=r;let c=class extends I{constructor(){super(...arguments),this.stacked=!1}_handleSlotChange(e){e.target.assignedNodes().filter(n=>n.matches!==void 0?n.matches(this.constructor.selectorItem):!1).forEach((n,d)=>{n.setAttribute("kind",d===0?k.SECONDARY:k.PRIMARY)});const o=new CustomEvent(`${t}-btn-set-update`,{bubbles:!0,cancelable:!0,composed:!0});this.dispatchEvent(o)}render(){const{stacked:e}=this,a={[`${t}--btn-set--stacked`]:e},o=C(a);return l`<slot class="${o} @slotchange="${this._handleSlotChange}"></slot>`}static get selectorItem(){return`${t}-button`}};c.styles=$;u([y({type:Boolean,reflect:!0})],c.prototype,"stacked",void 0);c=u([b(`${t}-button-set`)],c);let i=class extends _{_handleClickLinkSkeleton(e){this.disabled&&(e.preventDefault(),e.stopPropagation())}render(){const{autofocus:e,disabled:a,download:o,href:n,hreflang:d,ping:m,rel:g,size:p,target:B,type:S}=this,f=C({[`${t}--btn`]:!0,[`${t}--skeleton`]:!0,[`${t}--btn--${p}`]:p});return n?l`
+          <a
+            id="button"
+            role="button"
+            class="${f}"
+            download="${s(o)}"
+            href="${s(n)}"
+            hreflang="${s(d)}"
+            ping="${s(m)}"
+            rel="${s(g)}"
+            target="${s(B)}"
+            type="${s(S)}"
+            @click="${this._handleClickLinkSkeleton}"></a>
+        `:l`
+          <button
+            id="button"
+            class="${f}"
+            ?autofocus="${e}"
+            ?disabled="${a}"
+            type="${s(S)}"></button>
+        `}};i.styles=$;i=u([b(`${t}-button-skeleton`)],i);

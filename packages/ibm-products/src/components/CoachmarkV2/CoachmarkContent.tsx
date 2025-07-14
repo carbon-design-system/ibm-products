@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  Children,
   ReactElement,
   ReactNode,
   useContext,
+  useEffect,
   useLayoutEffect,
+  useRef,
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -20,7 +21,6 @@ import ContentHeader, { ContentHeaderProps } from './ContentHeader';
 import ContentBody, { ContentBodyProps } from './ContentBody';
 import { NewPopoverAlignment } from '@carbon/react';
 import cx from 'classnames';
-import { useEffect } from 'storybook/internal/preview-api';
 
 export interface CoachmarkContentProps {
   /**
@@ -52,14 +52,14 @@ export type CoachmarkContentComponent = React.ForwardRefExoticComponent<
 const CoachmarkContent = React.forwardRef<
   HTMLDivElement,
   CoachmarkContentProps
->((props, ref) => {
+>((props) => {
   const { className = '', children, highContrast, dropShadow, ...rest } = props;
   const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
   const { align, onClose, open, setOpen, triggerRef } =
     useContext(CoachmarkV2Context);
   const [targetId, setTargetId] = useState<string | null>(null);
 
-  // layout effect fires *after* DOM mutations, so ref.current is guaranteed to be set
+  // setting targetId from triggerRef context value
   useLayoutEffect(() => {
     if (open) {
       const id = triggerRef?.current?.id ?? null;
@@ -69,18 +69,45 @@ const CoachmarkContent = React.forwardRef<
     }
   }, [open, triggerRef]);
 
+  const bubbleRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const targetElement = document.getElementById(targetId || '');
+      const bubbleElement = bubbleRef.current;
+
+      if (
+        bubbleElement &&
+        !bubbleElement.contains(event.target as Node) &&
+        targetElement &&
+        !targetElement.contains(event.target as Node)
+      ) {
+        setOpen?.(false);
+      }
+    };
+
+    if (open) {
+      document.addEventListener('click', handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [open, targetId, setOpen]);
+
   return (
     open && (
-      <CoachmarkBubble
-        className={cx(coachmarkContentBlockClass, className)}
-        highContrast={highContrast}
-        dropShadow={dropShadow}
-        align={align as NewPopoverAlignment}
-        open={open}
-        target={`#${targetId}`}
-      >
-        {children}
-      </CoachmarkBubble>
+      <div ref={bubbleRef}>
+        <CoachmarkBubble
+          className={cx(coachmarkContentBlockClass, className)}
+          highContrast={highContrast}
+          dropShadow={dropShadow}
+          align={align as NewPopoverAlignment}
+          open={open}
+          target={`#${targetId}`}
+        >
+          {children}
+        </CoachmarkBubble>
+      </div>
     )
   );
 }) as CoachmarkContentComponent;

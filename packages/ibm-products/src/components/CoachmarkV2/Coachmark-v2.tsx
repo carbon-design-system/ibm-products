@@ -5,14 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 // Import portions of React that are needed.
-import React, {
-  ReactNode,
-  createContext,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ReactNode, createContext, useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -22,6 +15,7 @@ import { pkg } from '../../settings';
 import CoachmarkTrigger, { CoachmarkTriggerProps } from './CoachmarkTrigger';
 import CoachmarkContent, { CoachmarkContentProps } from './CoachmarkContent';
 import { NewPopoverAlignment } from '@carbon/react';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 export const blockClass = `${pkg.prefix}--coachmark`;
@@ -40,7 +34,7 @@ const componentName = 'CoachmarkV2';
 
 export interface CoachmarkV2Props {
   /**
-   * Provide the contents of the CoachmarkV2.
+   * Provide the contents of the Coachmark.
    */
   children: ReactNode;
 
@@ -64,9 +58,13 @@ export interface CoachmarkV2Props {
    * Where to render the Coachmark relative to its target.
    */
   align?: NewPopoverAlignment;
+  /**
+   * Fine tune the position of the target in pixels.
+   */
+  positionTune?: { x: number; y: number };
 }
 
-// Define the type for CoachmarkV2, extending it to include Trigger and Content
+// Define the type for Coachmark, extending it to include Trigger and Content
 export type CoachmarkV2Component = React.ForwardRefExoticComponent<
   CoachmarkV2Props & React.RefAttributes<HTMLDivElement>
 > & {
@@ -79,6 +77,7 @@ interface CoachmarkV2ContextType {
   setOpen: (value: boolean) => void;
   align?: NewPopoverAlignment;
   triggerRef: React.RefObject<HTMLElement | null>;
+  positionTune: { x: number; y: number };
 }
 
 export const CoachmarkV2Context = createContext<CoachmarkV2ContextType>({
@@ -86,6 +85,7 @@ export const CoachmarkV2Context = createContext<CoachmarkV2ContextType>({
   setOpen: () => {},
   align: 'bottom',
   triggerRef: { current: null },
+  positionTune: { x: 0, y: 0 },
 });
 /**
  * Coachmarks are used to call out specific functionality or concepts
@@ -101,10 +101,31 @@ export let CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
       onClose,
       align = 'bottom',
       isOpenByDefault = false,
+      positionTune,
       ...rest
     } = props;
     const [open, setOpen] = React.useState(isOpenByDefault);
     const triggerRef = useRef<HTMLElement>(null);
+    const internalRef = useRef<HTMLDivElement | null>(null);
+
+    useIsomorphicEffect(() => {
+      const { x = 0, y = 0 } = positionTune ?? {};
+      const el = internalRef.current;
+
+      if (el && (x !== 0 || y !== 0)) {
+        el.style.transform = `translate(${x}px, ${y}px)`;
+      }
+    }, [positionTune]);
+
+    const setRef = (node: HTMLDivElement | null) => {
+      internalRef.current = node;
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }
+    };
+
     return (
       <CoachmarkV2Context.Provider
         value={{
@@ -113,6 +134,7 @@ export let CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
           setOpen,
           align,
           triggerRef,
+          positionTune: positionTune ?? { x: 0, y: 0 },
         }}
       >
         <div
@@ -123,7 +145,7 @@ export let CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
           )}
           role="main"
           aria-label={ariaLabel}
-          ref={ref}
+          ref={setRef}
           {...getDevtoolsProps(componentName)}
         >
           <div className={`${blockClass}--container`}>{children}</div>
@@ -149,12 +171,14 @@ CoachmarkV2.propTypes = {
    * Where to render the Coachmark relative to its target.
    */
   align: PropTypes.string,
-
   /**
    * The aria label applied to the Coachmark component
    */
   ariaLabel: PropTypes.string,
-  children: PropTypes.node,
+  /**
+   * Provide the contents of the CoachmarkV2.
+   */
+  children: PropTypes.node.isRequired,
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -167,4 +191,12 @@ CoachmarkV2.propTypes = {
    * Function to call when the close button is clicked.
    */
   onClose: PropTypes.func,
+  /**
+   * Fine tune the position of the target in pixels. Applies only to Beacons.
+   */
+  // @ts-ignore
+  positionTune: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }),
 };

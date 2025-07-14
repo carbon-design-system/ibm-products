@@ -28,13 +28,22 @@ interface BubbleProps extends Omit<HTMLProps<HTMLDivElement>, 'target'> {
   /**
    * 'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-end' | 'left-start' | 'right-end' | 'right-start';
    **/
-  align: NewPopoverAlignment;
+  align?: NewPopoverAlignment;
   /**
    * Values can range from an Element, a ref of an Element, a string which will use query selector to select an Element.
    **/
   target: Element | React.RefObject<Element> | string | null | undefined;
-  dropShadow?: boolean;
+  /**
+   * Specify whether the component should be rendered on high-contrast.
+   */
   highContrast?: boolean;
+  /**
+   * Specify whether a drop shadow should be rendered on the popover.
+   */
+  dropShadow?: boolean;
+  /**
+   * Specifies whether the component is currently open.
+   */
   open: boolean;
 }
 
@@ -46,10 +55,10 @@ const CoachmarkBubble = ({
   dropShadow = true,
   highContrast = false,
   open,
-  // onClose,
   ...rest
 }: BubbleProps) => {
   const { theme } = useTheme();
+
   const carbonPrefix = useCarbonPrefix();
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const arrowRef = useRef<HTMLDivElement | null>(null);
@@ -71,8 +80,6 @@ const CoachmarkBubble = ({
           block: 'center',
           inline: 'center',
         });
-
-        // const middlewares = align ? [flip()] : [autoPlacement()];
 
         const middlewares = [
           offset(10),

@@ -12,7 +12,13 @@ import cx from 'classnames';
 import { pkg } from '../../../settings';
 
 interface BubbleHeaderProps extends HTMLProps<HTMLElement> {
+  /**
+   * Provide the contents of the Bubble header
+   */
   children: React.ReactNode;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
   className?: string;
 }
 

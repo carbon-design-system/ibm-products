@@ -21,7 +21,8 @@ $prefix: 'dev-prefix--c4p' !default;
   display: none;
   padding: $spacing-05;
   border-radius: $spacing-01;
-  background-color: carbontheme.$layer;
+  /* stylelint-disable-next-line declaration-no-important */
+  background: carbontheme.$layer !important;
   color: carbontheme.$text-primary;
   font-weight: bold;
   inline-size: max-content;

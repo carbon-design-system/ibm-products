@@ -18,9 +18,6 @@ import { CoachmarkV2 } from './Coachmark-v2';
 - [Overview](#overview)
 - [Tooltip example usage](#tooltip-example-usage)
 - [Tooltip code sample](#tooltip-code-sample)
-- [Floating example usage](#floating-example-usage)
-- [Floating code sample](#floating-code-sample)
-- [Stackblitz example with Animated Media](#stackblitz-example-with-animated-media)
 - [Component API](#component-api)
 
 ## Overview
@@ -34,8 +31,6 @@ understand.
 
 - The target prop should always be either a CoachmarkBeacon or a
   CoachmarkButton.
-- BEACON_KIND, COACHMARK_OVERLAY_KIND, COACHMARK_ALIGNMENT are enums exported as
-  a convenience from Coachmark.
 
 ## About Onboarding
 
@@ -43,22 +38,11 @@ understand.
 is a continuous learning methodology and framework that aims to orient, onboard,
 explain, educate, and cultivate novice users into high-functioning power users.
 
-## Note on theming
-
-The Coachmark uses the theme prop (e.g., theme='dark') to set the appropriate
-background and font colors for the overlay. Specify a value ('light' or 'dark')
-to display properly within your usage.
-
 ## Tooltip example usage
 
 <Canvas className="coachmarkExample" withSource="none">
-  <div className="CoachmarkBaseExampleUsage">
-    <Story of={CoachmarkStories.Coachmarktooltip} />
-  </div>
+    <Story of={CoachmarkStories.Tooltip} />
 </Canvas>
-
-## Stackblitz example with Animated Media
-[![Example with Animated media](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CoachmarkWithAnimatedMedia)
 
 ## Component API
 

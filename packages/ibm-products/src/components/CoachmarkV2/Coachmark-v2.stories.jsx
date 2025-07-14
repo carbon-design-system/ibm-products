@@ -5,25 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { CoachmarkV2 } from './Coachmark-v2';
 import './CoachmarkBubble';
 import mdx from './Coachmark-v2.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { Button, NewPopoverAlignment } from '@carbon/react';
-import { CoachmarkBubble, CoachmarkBubbleHeader } from './CoachmarkBubble';
+import { Button, Theme } from '@carbon/react';
 import CoachmarkContent from './CoachmarkContent';
-import { Close } from '@carbon/react/icons';
+import { CoachmarkBeacon } from './CoachmarkBeacon';
 
 export default {
   title: 'Experimental/Onboarding/CoachmarkV2/CoachmarkV2',
   component: CoachmarkV2,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
-    theme: {
-      control: { type: 'boolean' },
-    },
     children: {
       control: { type: null },
     },
@@ -62,21 +58,25 @@ export default {
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
-
 const Template = (args) => {
   return (
-    <CoachmarkV2 {...args}>
+    <CoachmarkV2 positionTune={{ x: 151, y: 155 }} {...args}>
       <CoachmarkV2.Trigger>
-        <Button id="CoachmarkBtn">Show Bubble</Button>
+        <CoachmarkBeacon
+          id="CoachmarkBtn"
+          label="Show information"
+        ></CoachmarkBeacon>
       </CoachmarkV2.Trigger>
-      <CoachmarkV2.Content highContrast={true}>
-        <CoachmarkContent.Header></CoachmarkContent.Header>
-        <CoachmarkContent.Body>
-          <h2>Hello World</h2>
-          <p>this is a description test</p>
-          <Button size="sm">Done</Button>
-        </CoachmarkContent.Body>
-      </CoachmarkV2.Content>
+      <Theme theme="white">
+        <CoachmarkV2.Content highContrast={true}>
+          <CoachmarkContent.Header></CoachmarkContent.Header>
+          <CoachmarkContent.Body>
+            <h2>Hello World</h2>
+            <p>this is a description test</p>
+            <Button size="sm">Done</Button>
+          </CoachmarkContent.Body>
+        </CoachmarkV2.Content>
+      </Theme>
     </CoachmarkV2>
   );
 };
@@ -85,12 +85,8 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-
 export const Tooltip = Template.bind({});
 Tooltip.args = {
   isOpenByDefault: true,
-  align: 'right',
-};
-Tooltip.args.onClose = () => {
-  console.log('do something', Tooltip.args.isOpenByDefault);
+  align: 'top',
 };

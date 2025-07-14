@@ -3,18 +3,19 @@
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- */ import { Button, usePrefix } from '@carbon/react';
-import React, { cloneElement, isValidElement, ReactElement } from 'react';
+ */
+
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blockClass, CoachmarkV2Context } from './Coachmark-v2';
+import { blockClass } from './Coachmark-v2';
 
 export interface ContentBodyProps {
   /**
    * Provide the optional content for header section and will be render after header titles and before progress indicator.
    * People can make use of this if they want to have custom header.
    */
-  children?: React.ReactNode;
+  children: React.ReactNode;
 
   /**
    * Provide an optional class to be applied to the containing node.
@@ -43,7 +44,7 @@ ContentBody.propTypes = {
    * Provide the optional content for header section and will be render after header titles and before progress indicator.
    * People can make use of this if they want to have custom header.
    */
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 
   /**
    * Provide an optional class to be applied to the containing node.

@@ -5,17 +5,15 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../../../ibm-products-styles/src/global/styles/project-settings';
+@use '../../../../ibm-products-styles/src/global/styles/project-settings' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as theme;
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/type';
 
-:root {
-  @include theme.theme(themes.$white);
+$block-class: #{$pkg-prefix}--coachmark--content;
+@debug $block-class;
 
-  background-color: var(theme.$layer);
-}
 // BUBBLE
 .dev-prefix--c4p--coachmark--coachmark-content {
   inline-size: 290px;

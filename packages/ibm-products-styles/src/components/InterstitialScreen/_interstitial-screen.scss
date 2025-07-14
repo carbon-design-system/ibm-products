@@ -22,6 +22,7 @@
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--interstitial-screen;
+@debug $block-class;
 $carousel: #{c4p-settings.$pkg-prefix}--carousel;
 $carousel-item: #{c4p-settings.$pkg-prefix}--carousel__item;
 $one-grid-column: calc(100% / 16);

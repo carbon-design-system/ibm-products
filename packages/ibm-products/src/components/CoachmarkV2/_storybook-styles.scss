@@ -5,35 +5,34 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../../../ibm-products-styles/src/global/styles/project-settings' as *;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as theme;
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/type';
 
-$block-class: #{$pkg-prefix}--coachmark--content;
-@debug $block-class;
+$block-class: #{c4p-settings.$pkg-prefix}--coachmark;
 
-// BUBBLE
-.dev-prefix--c4p--coachmark--coachmark-content {
+// BUBBLE - content styling
+.#{$block-class}--coachmark-content {
   inline-size: 290px;
 
-  .dev-prefix--c4p--coachmark--content-body {
+  .#{$block-class}--content-body {
     display: flex;
     flex-direction: column;
   }
 
-  .dev-prefix--c4p--coachmark--content-body > h2 {
+  .#{$block-class}--content-body > h2 {
     @include type.type-style('productive-heading-02');
 
     margin: 0 0 $spacing-03;
   }
 
-  .dev-prefix--c4p--coachmark--content-body > p {
+  .#{$block-class}--content-body > p {
     @include type.type-style('body-long-01');
   }
 
-  .dev-prefix--c4p--coachmark--content-body > button {
+  .#{$block-class}--content-body > button {
     display: flex;
     align-self: flex-end;
     margin-block-start: $spacing-05;

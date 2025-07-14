@@ -64,41 +64,52 @@ export default class SetOfActions extends LitElement {
       return;
     }
     this.updateComplete.then(() => {
-      requestAnimationFrame(() => {
-        this.overflowHandler = createOverflowHandler({
-          container: this.container,
-          dimension: this.orientation == 'horizontal' ? 'width' : 'height',
-          onChange: (visibleItems: HTMLElement[], _) => {
-            this.hiddenItems = this.actionsData?.slice(visibleItems.length);
-          },
-        });
+      setTimeout(() => {
+        this.setupOverflowHandler();
+        // // On first render, all elements are initially visible. so hiding `this` visibility in connectedCallback
+        // // The handler runs on the second render to hide specific elements as needed.
+        // // The following line restores visibility after layout settles, allowing for smoother transitions.
+        this.style.visibility = 'visible';
       });
-    });
-    // On first render, all elements are initially visible. so hiding `this` visibility in connectedCallback
-    // The handler runs on the second render to hide specific elements as needed.
-    // The following line restores visibility after layout settles, allowing for smoother transitions.
-    setTimeout(() => {
-      this.style.visibility = 'visible';
     });
   }
+
   updated(changedProperties: Map<string, unknown>) {
     if (changedProperties.has('actionsData')) {
-      this.overflowHandler?.disconnect();
-      this.overflowHandler = createOverflowHandler({
-        container: this.container,
-        dimension: this.orientation == 'horizontal' ? 'width' : 'height',
-        onChange: (visibleItems: HTMLElement[], _) => {
-          this.hiddenItems = this.actionsData?.slice(visibleItems.length);
-        },
+      this.updateComplete.then(() => {
+        this.hiddenItems = [];
+        setTimeout(() => this.setupOverflowHandler());
       });
     }
+
+    if (!this.hiddenItems.length) {
+      const lastItem = this.shadowRoot?.querySelector(
+        '[data-hidden]:not([data-offset])'
+      );
+      lastItem?.removeAttribute('data-hidden');
+    }
+  }
+
+  private setupOverflowHandler() {
+    if (!this.container) {
+      return;
+    }
+
+    // Disconnect existing handler if any
+    this.overflowHandler?.disconnect();
+
+    this.overflowHandler = createOverflowHandler({
+      container: this.container,
+      dimension: this.orientation == 'horizontal' ? 'width' : 'height',
+      onChange: (visibleItems: HTMLElement[], _) => {
+        this.hiddenItems = this.actionsData?.slice(visibleItems.length);
+      },
+    });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    if (this.overflowHandler) {
-      this.overflowHandler.disconnect();
-    }
+    this.overflowHandler?.disconnect();
   }
 
   render() {
@@ -131,7 +142,11 @@ export default class SetOfActions extends LitElement {
           `
         )}
 
-        <div data-offset data-hidden data-floating-menu-container>
+        <div
+          data-offset
+          ?data-hidden=${this.hiddenItems.length === 0}
+          data-floating-menu-container
+        >
           <cds-overflow-menu
             size=${this.actionsData[0].size}
             close-on-activation

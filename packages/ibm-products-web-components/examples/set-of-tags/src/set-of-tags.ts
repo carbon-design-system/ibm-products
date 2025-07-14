@@ -78,6 +78,13 @@ export default class SetOfTags extends LitElement {
         this.setupOverflowHandler();
       });
     }
+
+    if (!this.hiddenTags.length) {
+      const lastItem = this.shadowRoot?.querySelector(
+        '[data-hidden]:not([data-offset])'
+      );
+      lastItem?.removeAttribute('data-hidden');
+    }
   }
 
   disconnectedCallback() {

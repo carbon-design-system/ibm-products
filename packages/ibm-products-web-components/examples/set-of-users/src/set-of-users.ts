@@ -116,6 +116,13 @@ export default class SetOfUsers extends LitElement {
         this.setupOverflowHandler();
       });
     }
+
+    if (!this.hiddenUsers.length) {
+      const lastItem = this.shadowRoot?.querySelector(
+        '[data-hidden]:not([data-offset])'
+      );
+      lastItem?.removeAttribute('data-hidden');
+    }
   }
 
   disconnectedCallback() {

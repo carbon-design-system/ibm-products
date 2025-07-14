@@ -7,8 +7,8 @@
 @use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/colors' as *;
-@use '@carbon/styles/scss/theme' as carbontheme;
-@use '@carbon/styles/scss/themes' as carbonthemes;
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities';
 
@@ -21,8 +21,8 @@ $prefix: 'dev-prefix--c4p' !default;
   padding: $spacing-05;
   border-radius: $spacing-01;
   /* stylelint-disable-next-line declaration-no-important */
-  background: carbontheme.$layer !important;
-  color: carbontheme.$text-primary;
+  background: theme.$layer !important;
+  color: theme.$text-primary;
   font-weight: bold;
   inline-size: max-content;
   inset-block-start: 0;
@@ -46,7 +46,7 @@ $prefix: 'dev-prefix--c4p' !default;
 .#{$prefix}__bubble__arrow {
   position: absolute;
   z-index: 10010;
-  background: carbontheme.$layer;
+  background: theme.$layer;
   block-size: $spacing-04;
   inline-size: $spacing-04;
   transform: rotate(45deg);

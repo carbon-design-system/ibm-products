@@ -58,7 +58,6 @@ const CoachmarkBubble = ({
   ...rest
 }: BubbleProps) => {
   const { theme } = useTheme();
-
   const carbonPrefix = useCarbonPrefix();
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const arrowRef = useRef<HTMLDivElement | null>(null);

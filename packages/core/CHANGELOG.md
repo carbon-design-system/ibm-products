@@ -1,4 +1,4 @@
-## `@carbon/ibm-cloud-cognitive-core@2.46.0-rc.0`
+## `@carbon/ibm-cloud-cognitive-core@2.46.0`
 ### Bug fixes :bug:
 - fix(stories): remove extra carbon style imports (#7647)
 

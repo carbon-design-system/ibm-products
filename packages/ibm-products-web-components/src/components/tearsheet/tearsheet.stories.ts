@@ -453,7 +453,7 @@ export const StackingTemplate = {
 };
 
 const meta = {
-  title: 'Experimental/Tearsheet',
+  title: 'Components/Tearsheet',
 };
 
 export default meta;

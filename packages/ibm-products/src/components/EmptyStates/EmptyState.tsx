@@ -100,8 +100,8 @@ export interface EmptyStateProps {
   title: string | ReactNode;
 
   /**
-   * Designates which version of the EmptyState component is being used.
-   * Refer to V2 documentation separately.
+   * **Deprecated:** Designates which version of the EmptyState component is being used. Refer to V2 documentation separately.
+   * @deprecated
    */
   v2?: boolean;
 }
@@ -227,8 +227,8 @@ EmptyState.propTypes = {
    */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   /**
-   * Designates which version of the EmptyState component is being used.
-   * Refer to V2 documentation separately.
+   * **Deprecated:** Designates which version of the EmptyState component is being used. Refer to V2 documentation separately.
+   * @deprecated
    */
   v2: PropTypes.bool,
 };

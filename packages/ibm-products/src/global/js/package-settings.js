@@ -114,6 +114,7 @@ const defaults = {
     DescriptionListCell: false,
     DescriptionListRow: false,
     SearchBar: false,
+    CoachmarkV2: false,
 
     /* new component flags here - comment used by generate CLI */
 

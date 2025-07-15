@@ -1928,8 +1928,8 @@ __metadata:
     "@carbon/icon-helpers": "npm:^10.61.0"
     "@carbon/icons": "npm:^11.62.0"
     "@carbon/motion": "npm:^11.30.0"
-    "@carbon/styles": "npm:1.84.0"
-    "@carbon/web-components": "npm:2.32.1"
+    "@carbon/styles": "npm:1.85.0"
+    "@carbon/web-components": "npm:2.33.0"
     "@ibm/telemetry-js": "npm:^1.9.1"
     "@lit/context": "npm:^1.1.5"
     "@mordech/vite-lit-loader": "npm:^0.37.0"
@@ -1989,7 +1989,7 @@ __metadata:
     "@carbon/ibm-products-styles": "npm:^2.67.0-rc.0"
     "@carbon/telemetry": "npm:^0.1.0"
     "@carbon/utilities": "npm:^0.7.0"
-    "@carbon/utilities-react": "npm:0.9.0"
+    "@carbon/utilities-react": "npm:0.10.0"
     "@dnd-kit/core": "npm:^6.3.1"
     "@dnd-kit/modifiers": "npm:^9.0.0"
     "@dnd-kit/sortable": "npm:^10.0.0"
@@ -2168,7 +2168,37 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:1.84.0, @carbon/styles@npm:^1.84.0":
+"@carbon/styles@npm:1.85.0, @carbon/styles@npm:^1.85.0":
+  version: 1.85.0
+  resolution: "@carbon/styles@npm:1.85.0"
+  dependencies:
+    "@carbon/colors": "npm:^11.35.0"
+    "@carbon/feature-flags": "npm:^0.27.0"
+    "@carbon/grid": "npm:^11.38.0"
+    "@carbon/layout": "npm:^11.36.0"
+    "@carbon/motion": "npm:^11.30.0"
+    "@carbon/themes": "npm:^11.55.0"
+    "@carbon/type": "npm:^11.42.0"
+    "@ibm/plex": "npm:6.0.0-next.6"
+    "@ibm/plex-mono": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-arabic": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-devanagari": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-hebrew": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-thai": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-thai-looped": "npm:0.0.3-alpha.0"
+    "@ibm/plex-serif": "npm:0.0.3-alpha.0"
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  peerDependencies:
+    sass: ^1.33.0
+  peerDependenciesMeta:
+    sass:
+      optional: true
+  checksum: 10/2a33edf0784431a007ff4785b461865dbfc43889ec30a01a6bcdd2b278f79bd8cf395e3c6ba4da037a576262255825ca38590259bd1615ef734c42b6b14047bd
+  languageName: node
+  linkType: hard
+
+"@carbon/styles@npm:^1.84.0":
   version: 1.84.0
   resolution: "@carbon/styles@npm:1.84.0"
   dependencies:
@@ -2255,15 +2285,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/utilities-react@npm:0.9.0":
-  version: 0.9.0
-  resolution: "@carbon/utilities-react@npm:0.9.0"
+"@carbon/utilities-react@npm:0.10.0":
+  version: 0.10.0
+  resolution: "@carbon/utilities-react@npm:0.10.0"
   dependencies:
     "@carbon/utilities": "npm:^0.7.0"
     "@ibm/telemetry-js": "npm:^1.6.1"
   peerDependencies:
-    react: ^16.8.6 || ^17.0.1 || ^18.2.0
-  checksum: 10/79bef549ca02a2a015e6c88847aa654d8cc4493777dd5520e139374f3161348aa7ebbc6c49cf90a8305b4a9f7d7f287ef73d358fb2b267633be7283e517f201a
+    react: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
+  checksum: 10/b5fffc0f3a3e4388864b8756e5cf480413959655a73641095dc1bbc2093a0fb39920b1a1631fb52822c6855a5cfa21abb3eb2f74555cfeca37e00338a8135eac
   languageName: node
   linkType: hard
 
@@ -2277,19 +2307,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/web-components@npm:2.32.1":
-  version: 2.32.1
-  resolution: "@carbon/web-components@npm:2.32.1"
+"@carbon/web-components@npm:2.33.0":
+  version: 2.33.0
+  resolution: "@carbon/web-components@npm:2.33.0"
   dependencies:
-    "@carbon/styles": "npm:^1.84.0"
+    "@carbon/styles": "npm:^1.85.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.5.0"
-    "@lit/context": "npm:^1.1.1"
+    "@lit/context": "npm:^1.1.3"
     flatpickr: "npm:4.6.13"
     lit: "npm:^3.1.0"
     lodash-es: "npm:^4.17.21"
     tslib: "npm:^2.6.3"
-  checksum: 10/177bc5f2ca5c5ca0c15c9a135d8d7d6645c9ba0c05af178c9d92d00984406801c643476be379e443af9f03be53aa442519da5fe42972b852c46bb61848b98ec7
+  checksum: 10/a9774135ef9d41cc82bbce0edf5e3ed76d94e817ebc09bffb7c7fb98aa94398705a37c049a063dfe18eaa9f85fbad9f6093b5f892c67987853db97fa3df75410
   languageName: node
   linkType: hard
 
@@ -4210,7 +4240,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lit/context@npm:^1.1.1, @lit/context@npm:^1.1.5":
+"@lit/context@npm:^1.1.3":
+  version: 1.1.6
+  resolution: "@lit/context@npm:1.1.6"
+  dependencies:
+    "@lit/reactive-element": "npm:^1.6.2 || ^2.1.0"
+  checksum: 10/2d59b388ced1574467f0217292b577268462248bcac1fe0570017c6b06e71022a190fd7ac66e676e5903bb4dda8489fca6cf38dc4160f3f6d6c09434139038b3
+  languageName: node
+  linkType: hard
+
+"@lit/context@npm:^1.1.5":
   version: 1.1.5
   resolution: "@lit/context@npm:1.1.5"
   dependencies:

@@ -894,7 +894,7 @@ $duration: 1000ms;
     display: flex;
     align-items: center;
     justify-content: right;
-    transform: translateX($spacing-06);
+    transform: translateX(calc($spacing-06 * -1));
 
     @include breakpoint(md) {
       padding-inline-end: $spacing-03;

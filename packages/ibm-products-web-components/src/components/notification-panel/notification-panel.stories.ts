@@ -324,7 +324,7 @@ export const defaultTemplate = {
   },
 };
 const meta = {
-  title: 'Experimental/NotificationPanel',
+  title: 'Components/NotificationPanel',
 };
 
 export default meta;

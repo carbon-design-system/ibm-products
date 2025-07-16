@@ -107,6 +107,7 @@ export default {
 
   docs: {
     autodocs: 'tag',
+    defaultName: 'Overview',
   },
 };
 

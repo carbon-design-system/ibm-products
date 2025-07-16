@@ -711,12 +711,20 @@ $duration: 1000ms;
 /// @group page-header
 @include block-wrap(#{$block-class}__next) {
   &.#{$block-class} {
+    position: sticky;
     background-color: $layer-01;
     border-block-end: 1px solid $border-subtle-01;
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$pkg-prefix}-page-header-header-top);
   }
 
   .#{$block-class}__breadcrumb-bar {
+    position: sticky;
+    z-index: 1;
+    background-color: $layer;
     block-size: to-rem(40px);
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$pkg-prefix}-page-header-breadcrumb-top);
   }
 
   .#{$block-class}__breadcrumb-bar .#{$carbon-prefix}--subgrid {
@@ -874,6 +882,29 @@ $duration: 1000ms;
     grid-template-columns: auto minmax(0, 1fr);
   }
 
+  .#{$pkg-prefix}--page-header__tab-bar--tablist
+    .#{$pkg-prefix}--page-header__tags {
+    display: flex;
+    align-self: center;
+    justify-content: flex-end;
+  }
+
+  .#{$pkg-prefix}--page-header__tab-bar--tablist.#{$pkg-prefix}--page-header__tab-bar--with-scroller
+    .#{$pkg-prefix}--page-header__tags {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    transform: translateX(calc($spacing-06 * -1));
+
+    @include breakpoint(md) {
+      padding-inline-end: $spacing-03;
+      transform: translateX(0);
+    }
+    @include breakpoint(max) {
+      padding-inline-end: $spacing-05;
+    }
+  }
+
   .#{$carbon-prefix}--tabs .#{$carbon-prefix}--tab--overflow-nav-button {
     background-color: $layer-01;
 
@@ -900,5 +931,23 @@ $duration: 1000ms;
 
   .#{$block-class}__tag-item {
     flex-shrink: 0;
+  }
+
+  .#{$pkg-prefix}--page-header--scroller-button-icon {
+    /* stylelint-disable-next-line */
+    transition: transform $transition-base;
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .#{$pkg-prefix}--page-header--scroller-button-icon-collapsed {
+    transform: rotate(-180deg);
+  }
+
+  .#{$pkg-prefix}--page-header--scroller-button-container {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-end: $spacing-01;
   }
 }

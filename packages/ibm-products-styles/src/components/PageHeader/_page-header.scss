@@ -917,6 +917,10 @@ $duration: 1000ms;
     }
   }
 
+  .#{$carbon-prefix}--tabs .#{$carbon-prefix}--tabs__nav-link {
+    margin-inline-end: $spacing-01;
+  }
+
   .#{$block-class}__tags {
     display: flex;
     align-items: center;

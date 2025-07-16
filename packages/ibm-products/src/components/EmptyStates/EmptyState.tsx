@@ -100,8 +100,8 @@ export interface EmptyStateProps {
   title: string | ReactNode;
 
   /**
-   * Designates which version of the EmptyState component is being used.
-   * Refer to V2 documentation separately.
+   * **Deprecated:** Designates which version of the EmptyState component is being used. Refer to V2 documentation separately.
+   * @deprecated
    */
   v2?: boolean;
 }
@@ -113,7 +113,6 @@ export type EmptyStatePresetProps = Omit<EmptyStateProps, 'illustration'>;
  */
 export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
   ({ v2 = false, ...props }, ref) => {
-    // todo: deprecate v1
     if (v2) {
       return <EmptyStateV2 {...props} />;
     }
@@ -132,10 +131,7 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
     } = props;
     return (
       <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
+        {...rest}
         className={cx(blockClass, `${blockClass}-type--default`, className, {
           [`${blockClass}-position--${illustrationPosition}`]: !!illustration,
         })}
@@ -231,8 +227,8 @@ EmptyState.propTypes = {
    */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   /**
-   * Designates which version of the EmptyState component is being used.
-   * Refer to V2 documentation separately.
+   * **Deprecated:** Designates which version of the EmptyState component is being used. Refer to V2 documentation separately.
+   * @deprecated
    */
   v2: PropTypes.bool,
 };

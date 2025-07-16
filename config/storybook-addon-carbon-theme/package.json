@@ -1,7 +1,7 @@
 {
   "name": "@carbon/storybook-addon-theme",
   "description": "Carbon theme switcher for Storybook",
-  "version": "2.18.0-rc.0",
+  "version": "2.20.0-rc.0",
   "license": "Apache-2.0",
   "main": "dist/react.js",
   "repository": {
@@ -36,9 +36,7 @@
     "build": "run-s clean build:js",
     "build:js": "babel src --out-dir dist -s",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
-    "prepare": "npm run build",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
-    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon)/'"
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "react": "*",
@@ -60,7 +58,6 @@
     "@babel/cli": "^7.26.4",
     "@babel/core": "^7.26.10",
     "@babel/preset-react": "^7.26.3",
-    "npm-check-updates": "^18.0.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^6.0.1"
   }

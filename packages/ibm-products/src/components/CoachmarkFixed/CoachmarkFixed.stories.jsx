@@ -7,7 +7,7 @@
 
 import React from 'react';
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 import { Link as CarbonLink } from '@carbon/react';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
@@ -20,7 +20,7 @@ import styles from './_storybook-styles.scss?inline';
 export default {
   title: 'Experimental/Onboarding/Coachmark/CoachmarkFixed',
   component: CoachmarkFixed,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   // TODO: Define argTypes for props not represented by standard JS types.
   argTypes: {
     children: {

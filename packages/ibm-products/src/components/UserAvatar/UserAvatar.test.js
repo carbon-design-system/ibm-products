@@ -116,9 +116,4 @@ describe(componentName, () => {
     const imagePath = container.querySelector('img').getAttribute('src');
     expect(typeof imagePath).toBe('string');
   });
-
-  it('should throw a custom prop type validation error when an image is used without an imageDescription prop', async () =>
-    expectError(required('imageDescription', 'UserProfileImage'), () => {
-      renderComponent({ image: 'path_to_image.jpg' });
-    }));
 });

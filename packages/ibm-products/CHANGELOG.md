@@ -1,4 +1,58 @@
-## `@carbon/ibm-products@2.69.0-rc.0`
+## `@carbon/ibm-products@2.71.0-rc.0`
+### Features :rocket:
+- feat: add various options for description (#7708)
+- feat(storybook): use vite v7 (#7745)
+- feat: change to make interstitialScreen stable (#7814)
+- feat: add support for  children for InterstitialScreen.Body (#7791)
+- feat(storybook): upgrade to v9 (#7734)
+- feat(PageHeader): new experimental PageHeader component (#7733)
+
+### Bug fixes :bug:
+- fix: percy (#7812)
+- fix(coachmarkstack): align layers (#7762)
+- fix: condition builder various issues fixes related to popover close and focus (#7748)
+- fix: ProductiveCard - actionIcons doesn't include types for data attributes (#7486)
+- fix: interstitial screen release review (#7724)
+- fix: for checkbox labels in the custom columns (#7742)
+- fix(APIKeyModal): delay claimFocus (#7770)
+- fix: sidepanel resize feature a11y (#7704)
+
+### Housekeeping :house:
+- docs(ProductiveCard): add docs about overflow menu items (#7825)
+- chore: clean up side panel resizer (#7749)
+- build(deps): update Carbon 11 compatible versions to latest (#7757)
+- chore: remove redundant upgrade scripts (#7774)
+- test: accessibility test fixes (#7728)
+- chore: add deprecation notice to userprofileimage (#7729)
+- chore: init update to react 19 (#7681)
+
+## `@carbon/ibm-products@2.70.1`
+### Bug fixes :bug:
+- fix: useClickoutside causing NotificationsPanel to reopen (#7820)
+
+## `@carbon/ibm-products@2.70.0`
+### Features :rocket:
+- feat(sidepanel): option to hide close button (#7669)
+
+### Bug fixes :bug:
+- fix: add rest props back to card overflow (#7744)
+- fix(tearsheet): incorrect color layering (#7730)
+- fix(stories): remove extra carbon style imports (#7647)
+- fix: save usage guidelines (#7721)
+- fix(CreateTearsheet): accessibility violation (#7643)
+- fix(Instrumentation): auto track follow ups (#7715)
+- fix(notification panel): clickoutside return focus to trigger button (#7707)
+- fix: adds nullish checker back into create tearsheet first step logic (#7634)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7663)
+- chore: add global mocks to jest setup (#7653)
+- chore(storybook): add a11y tab in wc and remove code tab from react (#7706)
+- docs: restructure storybook IA (#7592)
+- refactor(instrumentation): replace amplitude with autotrack (#7710)
+- test: add valid matcher for expect() (#7666)
+
+## `@carbon/ibm-products@2.69.0`
 ### Features :rocket:
 - feat: resize feature changes added (#7501)
 - feat(MultiAddSelect): add floating ui to sort and filter buttons (#6389)

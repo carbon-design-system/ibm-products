@@ -9,7 +9,7 @@ import { GetStartedCard } from '.';
 import React from 'react';
 import mdx from './GetStartedCard.mdx';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   ArrowRight,
   Crossroads,
@@ -41,7 +41,7 @@ const defaultProps = {
 export default {
   title: 'Experimental/Onboarding/GetStartedCard',
   component: GetStartedCard,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     docs: {
       page: mdx,

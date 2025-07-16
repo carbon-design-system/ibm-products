@@ -7,7 +7,7 @@
 
 import styles from './_storybook-styles.scss?inline';
 import React, { useRef, useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   Button,
   TextArea,
@@ -438,7 +438,7 @@ const renderUIShellHeader = () => (
 );
 
 export default {
-  title: 'IBM Products/Components/Side panel/SidePanel',
+  title: 'Components/SidePanel',
   component: SidePanel,
   tags: ['autodocs'],
   parameters: {

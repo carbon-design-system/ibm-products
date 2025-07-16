@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 // TODO: import action to handle events if required.
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   Button,
   Dropdown,
@@ -27,7 +27,7 @@ import {
 } from '../../global/js/story-parts/decorator';
 
 export default {
-  title: 'IBM Products/Patterns/Create flows/CreateTearsheetNarrow',
+  title: 'Patterns/Prebuilt patterns/Create flows/CreateTearsheetNarrow',
   component: CreateTearsheetNarrow,
   tags: ['autodocs'],
   argTypes: {

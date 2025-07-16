@@ -78,7 +78,7 @@ const renderUIShellHeader = () => (
 );
 
 export default {
-  title: 'IBM Products/Patterns/Create flows/CreateSidePanel',
+  title: 'Patterns/Prebuilt patterns/Create flows/CreateSidePanel',
   component: CreateSidePanel,
   tags: ['autodocs'],
   parameters: {

@@ -16,7 +16,7 @@ import {
   InlineLoading,
   Form,
 } from '@carbon/react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { pkg } from '../../settings';
 import { APIKeyModal } from '.';
 import wait from '../../global/js/utils/wait';
@@ -24,7 +24,7 @@ import styles from './_storybook-styles.scss?inline'; // import index in case mo
 import mdx from './APIKeyModal.mdx';
 
 export default {
-  title: 'IBM Products/Components/Generating an API key/APIKeyModal',
+  title: 'Patterns/Prebuilt patterns/APIKeyModal',
   component: APIKeyModal,
   tags: ['autodocs'],
   parameters: {

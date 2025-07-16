@@ -1,4 +1,32 @@
-## `@carbon/ibm-products-styles@2.65.0-rc.0`
+## `@carbon/ibm-products-styles@2.67.0-rc.0`
+### Features :rocket:
+- feat: change to make interstitialScreen stable (#7814)
+- feat(PageHeader): new experimental PageHeader component (#7733)
+
+### Bug fixes :bug:
+- fix(coachmarkstack): align layers (#7762)
+- fix: interstitial screen release review (#7724)
+- fix: for checkbox labels in the custom columns (#7742)
+
+### Housekeeping :house:
+- chore: clean up side panel resizer (#7749)
+- build(deps): update Carbon 11 compatible versions to latest (#7757)
+- chore: remove redundant upgrade scripts (#7774)
+- chore: init update to react 19 (#7681)
+
+## `@carbon/ibm-products-styles@2.66.0`
+### Features :rocket:
+- feat(sidepanel): option to hide close button in web component (#7695)
+
+### Bug fixes :bug:
+- fix(tearsheet): incorrect color layering (#7730)
+- fix(stories): remove extra carbon style imports (#7647)
+- fix(CreateTearsheet): accessibility violation (#7643)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7663)
+
+## `@carbon/ibm-products-styles@2.65.0`
 ### Features :rocket:
 - feat: resize feature changes added (#7501)
 - feat(MultiAddSelect): add floating ui to sort and filter buttons (#6389)

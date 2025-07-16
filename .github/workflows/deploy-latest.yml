@@ -30,8 +30,12 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build storybook
-        run: yarn storybook:build
-
+        run: |
+          yarn build
+          yarn storybook-wc:build
+      # Set authenticated Git remote
+      - name: Set authenticated Git remote
+        run: git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
       # Deploy to staging Github Pages using `gh-pages` package
       - name: Prepare latest directory
         run: |

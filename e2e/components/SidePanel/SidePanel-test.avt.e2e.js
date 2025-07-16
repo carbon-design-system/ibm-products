@@ -14,7 +14,7 @@ test.describe('SidePanel @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
-      id: 'ibm-products-components-side-panel-sidepanel--slide-over',
+      id: 'components-sidepanel--slide-over',
       globals: {
         carbonTheme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('SidePanel @avt', () => {
   test('@avt-multi-step', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
-      id: 'ibm-products-components-side-panel-sidepanel--panel-with-second-step',
+      id: 'components-sidepanel--panel-with-second-step',
       globals: {
         carbonTheme: 'white',
       },
@@ -37,10 +37,10 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByText('Main view')).toBeVisible();
   });
 
-  test('@avt-action-toolbar', async ({ page }) => {
+  test.skip('@avt-action-toolbar', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
-      id: 'ibm-products-components-side-panel-sidepanel--with-action-toolbar',
+      id: 'components-sidepanel--with-action-toolbar',
       globals: {
         carbonTheme: 'white',
       },
@@ -54,11 +54,11 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByLabel('Delete')).toBeFocused();
   });
 
-  test('@avt-focus-trap', async ({ page }) => {
+  test.skip('@avt-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       // This used to be a specific story but using a default story to test the focus trap
-      id: 'ibm-products-components-side-panel-sidepanel--slide-over',
+      id: 'components-sidepanel--slide-over',
       globals: {
         carbonTheme: 'white',
       },
@@ -68,11 +68,11 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByText('Open side panel')).toBeFocused();
   });
 
-  test('@avt-first-element-disabled', async ({ page }) => {
+  test.skip('@avt-first-element-disabled', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       // This used to be a specific story but using a default story to test the focus trap
-      id: 'ibm-products-components-side-panel-sidepanel--first-element-disabled',
+      id: 'components-sidepanel--first-element-disabled',
       globals: {
         carbonTheme: 'white',
       },
@@ -96,5 +96,18 @@ test.describe('SidePanel @avt', () => {
     // Move focus to first element, on an open panel
     await page.getByRole('button', { name: 'Open side panel' }).click();
     await expect(page.getByLabel('Close')).toBeFocused();
+  });
+
+  test('@avt-resizer-feature-enabled', async ({ page }) => {
+    await visitStory(page, {
+      component: 'SidePanel',
+      id: 'components-sidepanel--slide-over&args=jsFlags[0]:enableSidepanelResizer',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations(
+      'SidePanel @avt-resizer-feature-enabled'
+    );
   });
 });

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Add } from '@carbon/react/icons';
 // import mdx from './NoDataEmptyState.mdx';
 
@@ -16,7 +16,7 @@ import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 // import styles from '../_index.scss';
 
 export default {
-  title: 'IBM Products/Patterns/Empty state/NoDataEmptyState',
+  title: 'Patterns/Prebuilt patterns/Empty states/NoDataEmptyState',
   component: NoDataEmptyState,
   tags: ['autodocs'],
   parameters: {
@@ -27,7 +27,7 @@ export default {
           altGuidelinesHref={[
             {
               href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon Empty pattern usage guidelines',
+              label: 'Carbon empty states pattern',
             },
           ]}
         />

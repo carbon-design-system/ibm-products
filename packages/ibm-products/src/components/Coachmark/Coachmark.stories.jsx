@@ -7,7 +7,7 @@
 
 import React, { useEffect, useRef } from 'react';
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 import { Crossroads } from '@carbon/react/icons';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
@@ -26,9 +26,9 @@ import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark',
+  title: 'Experimental/Onboarding/Coachmark/Coachmark',
   component: Coachmark,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   argTypes: {
     theme: {
       control: { type: null },

@@ -275,7 +275,7 @@ export const AboutModalWithAllPropsSet = {
 };
 
 const meta = {
-  title: 'Experimental/AboutModal',
+  title: 'Components/AboutModal',
 };
 
 export default meta;

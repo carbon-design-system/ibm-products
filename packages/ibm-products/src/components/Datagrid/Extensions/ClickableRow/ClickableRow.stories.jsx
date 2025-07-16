@@ -8,7 +8,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Edit, TrashCan, Add } from '@carbon/react/icons';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   Datagrid,
   useDatagrid,
@@ -30,7 +30,7 @@ import { SidePanel } from '../../../SidePanel';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: 'Deprecated/Datagrid/Datagrid/ClickableRow',
+  title: 'Deprecated/Datagrid/ClickableRow',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

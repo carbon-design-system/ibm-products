@@ -15,7 +15,7 @@ import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
 import { waitForPosition } from '../../global/js/utils/wait_for_position';
 
 const blockClass = `${pkg.prefix}--add-select`;
-const componentName = AddSelectBody.name;
+const componentName = AddSelectBody.displayName;
 const defaultItems = {
   entries: [
     {
@@ -221,24 +221,26 @@ const itemWithAvatar = {
 };
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
   let warn;
 
   beforeEach(() => {
     warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
     pkg.feature['default-portal-target-body'] = false;
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
     warn.mockRestore();
+  });
+
+  it('has no accessibility violations', async () => {
+    render(<AddSelectBody {...singleProps} open />);
+    const AddSelectElement = document.querySelector(
+      `.${blockClass}__selections-body`
+    );
+    await expect(AddSelectElement).toBeAccessible(componentName);
+    await expect(AddSelectElement).toHaveNoAxeViolations();
   });
 
   it('renders SingleAddSelectBody', async () => {

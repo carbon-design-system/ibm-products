@@ -8,7 +8,7 @@
 
 import React, { useState } from 'react';
 import { Add, Edit, TrashCan, Checkmark } from '@carbon/react/icons';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   Datagrid,
   useDatagrid,
@@ -25,7 +25,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
 export default {
-  title: 'Deprecated/Datagrid/Datagrid/RowActionButtons',
+  title: 'Deprecated/Datagrid/RowActionButtons',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

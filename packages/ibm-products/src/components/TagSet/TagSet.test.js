@@ -65,17 +65,17 @@ describe(TagSet.displayName, () => {
         },
       },
     });
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
   });
 
   afterEach(() => {
     mockElement.mockRestore();
-    window.ResizeObserver = ResizeObserver;
     warn.mockRestore();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<TagSet maxVisible={5} tags={tags10} />);
+    await expect(container).toBeAccessible(TagSet.displayName);
+    await expect(container).toHaveNoAxeViolations();
   });
 
   it('Displays a DismissibleTag when passed an onClose or filter', async () => {

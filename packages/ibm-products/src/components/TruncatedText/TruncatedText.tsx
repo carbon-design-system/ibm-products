@@ -7,7 +7,7 @@
 
 import React, { forwardRef, useState } from 'react';
 import cx from 'classnames';
-import { Tooltip } from '@carbon/react';
+import { Tooltip, PopoverAlignment } from '@carbon/react';
 import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import useTruncatedText from './useTruncatedText';
@@ -16,7 +16,7 @@ interface TruncatedTextProps {
   /**
    * Specify how the tooltip should align with the content in tooltip variant. Refer to Carbon tooltip docs for additional information.
    */
-  align?: string;
+  align?: PopoverAlignment;
   /**
    * Specify whether a auto align functionality should be applied in tooltip variant. Refer to Carbon tooltip docs for additional information.
    */
@@ -58,7 +58,7 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
   (props, ref) => {
     const {
       align = 'top',
-      autoAlign,
+      autoAlign = false,
       className,
       collapseLabel,
       expandLabel,

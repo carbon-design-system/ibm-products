@@ -35,6 +35,27 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    align: {
+      options: [
+        'top',
+        'top-left',
+        'top-right',
+        'bottom',
+        'bottom-left',
+        'bottom-right',
+        'left',
+        'left-bottom',
+        'left-top',
+        'right',
+        'right-bottom',
+        'right-top',
+      ],
+      control: {
+        type: 'select',
+      },
+    },
+  },
 };
 
 const Template = (args) => {

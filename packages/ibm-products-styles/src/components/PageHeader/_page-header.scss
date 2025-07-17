@@ -950,4 +950,66 @@ $duration: 1000ms;
     inset-block-end: 0;
     inset-inline-end: $spacing-01;
   }
+
+  @keyframes page-header-breadcrumb-content-actions-animation {
+    0% {
+      opacity: 0;
+      transform: translateY($spacing-03);
+    }
+
+    5% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes page-header-breadcrumb-content-actions-animation-reduced-motion {
+    0% {
+      opacity: 0;
+    }
+
+    5% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+    opacity: 0;
+    transform: translateY($spacing-03);
+    transition:
+      /* stylelint-disable-next-line */
+      transform motion(standard, productive) $duration-moderate-01,
+      opacity motion(standard, productive) $duration-moderate-01;
+
+    @supports not (animation-timeline: scroll()) {      
+      opacity: 1;
+      transform: translateY(0);
+      @media (prefers-reduced-motion: reduce) {
+        transform: translateY(0);
+        /* stylelint-disable-next-line */
+        transition: opacity motion(standard, productive) $duration-moderate-01;
+      }
+    }
+
+    @supports (animation-timeline: scroll()) {
+      animation-direction: alternate;
+      animation-duration: 1ms; /* Firefox requires this to apply the animation */
+      animation-name: page-header-breadcrumb-content-actions-animation;
+      animation-timeline: scroll(block nearest);
+
+      @media (prefers-reduced-motion: reduce) {
+        animation-name: page-header-breadcrumb-content-actions-animation-reduced-motion;
+        transform: translateY(0);
+      }
+    }
+  }
 }

@@ -58,6 +58,7 @@ interface PageHeaderProps {
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
     const [refs, setRefs] = useState<PageHeaderRefs>({});
+    const [pageActionsInstance, setPageActionsInstance] = useState<React.ReactNode | null>(null);
     const tempRef = useRef<HTMLDivElement>(null);
     const componentRef = (ref ?? tempRef) as RefObject<HTMLDivElement>;
     const classNames = classnames(
@@ -124,8 +125,17 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         contentObserver.unobserve(refs?.contentRef.current);
       };
     }, [refs, componentRef]);
+
     return (
-      <PageHeaderContext.Provider value={{ refs, setRefs, fullyCollapsed }}>
+      <PageHeaderContext.Provider
+        value={{
+          refs,
+          setRefs,
+          fullyCollapsed,
+          pageActionsInstance,
+          setPageActionsInstance
+        }}
+      >
         <div className={classNames} ref={componentRef} {...other}>
           {children}
         </div>
@@ -185,6 +195,7 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
   }: PageHeaderBreadcrumbBarProps,
   ref
 ) {
+  const { pageActionsInstance: globalActions } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__breadcrumb-bar`]: true,
@@ -196,6 +207,7 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
 
   const contentActionsClasses = classnames({
     [`${blockClass}__breadcrumb__content-actions`]: !contentActionsFlush,
+    [`${blockClass}__breadcrumb__content-actions-with-global-actions`]: !!globalActions
   });
 
   return (
@@ -272,7 +284,7 @@ const PageHeaderContent = React.forwardRef<
 ) {
   const contentRef = useRef<HTMLDivElement>(null);
   const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
-  const { setRefs } = usePageHeader();
+  const { setRefs, setPageActionsInstance } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__content`]: true,
@@ -287,6 +299,13 @@ const PageHeaderContent = React.forwardRef<
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (pageActions) {
+      setPageActionsInstance(pageActions);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageActions]);
 
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 

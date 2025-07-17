@@ -4,8 +4,8 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
-import { Add } from '@carbon/icons-react';
+import React, { useEffect } from 'react';
+import { Add, Ai, Basketball } from '@carbon/icons-react';
 import { unstable__PageHeader as PageHeader } from '../../';
 import {
   PageHeader as PageHeaderDirect,
@@ -28,6 +28,9 @@ import {
   Tabs,
   TabPanels,
   TabPanel,
+  IconButton,
+  MenuButton,
+  MenuItem,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
@@ -36,6 +39,7 @@ import styles from './_storybook-styles.scss?inline';
 
 import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
+import { createOverflowHandler } from '@carbon/utilities';
 
 const tags = [
   {
@@ -151,6 +155,45 @@ const breadcrumbContentActions = (
   </>
 );
 
+const CustomActions = () => {
+  const containerRef = React.useRef();
+  const [hiddenItems, setHiddenItems] = React.useState([]);
+
+  useEffect(() => {
+    createOverflowHandler({
+      container: containerRef.current,
+      // exclude the hidden menu button from children
+      maxVisibleItems: containerRef.current.children.length - 1,
+      onChange: (visible, hidden) => {
+        setHiddenItems(Array.from(containerRef.current.children)?.slice(visible.length - 1));
+      },
+    });
+  }, []);
+  return <div ref={containerRef}>
+    <IconButton kind="ghost" className="breadcrumb-bar-button" label="Icon Description 1"><AiGenerate /></IconButton>
+    <IconButton kind="ghost" className="breadcrumb-bar-button" label="Icon Description 2"><Activity /></IconButton>
+    <IconButton kind="ghost" className="breadcrumb-bar-button" label="Icon Description 3"><Activity /></IconButton>
+    <IconButton kind="ghost" className="breadcrumb-bar-button" label="Icon Description 4"><Activity /></IconButton>
+    <Button>Primary action</Button>
+    <span data-offset data-hidden>
+      <MenuButton
+        menuAlignment="bottom-end"
+        label={'Actions'}
+        size="md"
+      >
+        {[...hiddenItems].reverse().map((item) => (
+          <MenuItem
+            key={item.id}
+            onClick={item.onClick}
+            label={item.textContent}
+            {...item.menuItem}
+          />
+        ))}
+      </MenuButton>
+    </span>
+  </div>
+}
+
 export const Default = (args) => (
   <Tabs>
     <PageHeader.Root>
@@ -159,7 +202,7 @@ export const Default = (args) => (
         pageActionsFlush={args.pageActionsFlush}
         contentActionsFlush={args.contentActionsFlush}
         renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-        contentActions={breadcrumbContentActions}
+        contentActions={<CustomActions />}
         pageActions={breadcrumbPageActions}
       >
         <Breadcrumb>
@@ -167,7 +210,15 @@ export const Default = (args) => (
           <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
         </Breadcrumb>
       </PageHeader.BreadcrumbBar>
-      <PageHeader.Content title={args.title}>
+      <PageHeader.Content
+        title={args.title}
+        pageActions={
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}
+          />
+        }
+      >
         <PageHeader.ContentText subtitle="Subtitle">
           Built for modern teams, our technology platform simplifies complexity
           with powerful APIs, real-time collaboration tools, and seamless
@@ -188,13 +239,13 @@ export const Default = (args) => (
       </PageHeader.TabBar>
     </PageHeader.Root>
     <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
-      <TabPanel>Tab Panel 6</TabPanel>
-      <TabPanel>Tab Panel 7</TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 1</TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 2</TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 3</TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 4</TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 5</TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 6</TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 7</TabPanel>
     </TabPanels>
   </Tabs>
 );
@@ -485,6 +536,12 @@ export const TabBarWithTabsAndTags = (args) => (
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content
         title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+        pageActions={
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}
+          />
+        }
         {...args}
       >
         <PageHeader.ContentText subtitle="Subtitle">

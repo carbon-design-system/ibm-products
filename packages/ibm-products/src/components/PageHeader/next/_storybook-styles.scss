@@ -32,3 +32,12 @@
   background-color: theme.$layer-01;
   block-size: inherit;
 }
+
+[data-hidden] {
+  display: none;
+}
+
+.breadcrumb-bar-button {
+  height: 40px;
+  width: 40px;
+}

@@ -393,6 +393,7 @@ export let NotificationsPanel = React.forwardRef(
     const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
     const carbonPrefix = usePrefix();
     const headingId = useId();
+    const isClickOnTrigger = useRef(false);
 
     const reducedMotion = usePrefersReducedMotion();
     const exitAnimationName = reducedMotion
@@ -409,15 +410,29 @@ export let NotificationsPanel = React.forwardRef(
       setAllNotifications(data);
     }, [data]);
 
-    // useClickOutside(ref || notificationPanelRef, (target) => {
-    //   const element = target as HTMLElement;
-    //   if (!isActionableElement(element)) {
-    //     setTimeout(() => {
-    //       triggerButtonRef?.current?.focus();
-    //     }, 100);
-    //   }
-    //   onClickOutside?.();
-    // });
+    useEffect(() => {
+      const button = triggerButtonRef?.current;
+      const handleClick = () => {
+        isClickOnTrigger.current = true;
+      };
+      button?.addEventListener('click', handleClick, true);
+      return () => {
+        button?.removeEventListener('click', handleClick, true);
+      };
+    }, [triggerButtonRef]);
+
+    useClickOutside(ref || notificationPanelRef, (target) => {
+      const element = target as HTMLElement;
+      if (!isClickOnTrigger.current) {
+        if (!isActionableElement(element)) {
+          setTimeout(() => {
+            triggerButtonRef?.current?.focus();
+          }, 100);
+        }
+        onClickOutside?.();
+      }
+      isClickOnTrigger.current = false;
+    });
 
     const handleKeydown = (event) => {
       event.stopPropagation();

@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PageHeader as CCPageHeader } from '../../../../../ibm-products/src';
+import { PageHeader as CCPageHeader } from '../../../../src';
 import { Lightning, Bee } from '@carbon/react/icons';
 
 const PageHeader = (props) => {

@@ -8,10 +8,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  SidePanel as CCSidePanel,
-  UserProfileImage,
-} from '../../../../../ibm-products/src';
+import { SidePanel as CCSidePanel, UserProfileImage } from '../../../../src';
 import {
   Column,
   NumberInput,
@@ -22,7 +19,7 @@ import {
   FormGroup,
   usePrefix,
 } from '@carbon/react';
-import { pkg } from '../../../../../ibm-products/src/settings';
+import { pkg } from '../../../../src/settings';
 
 import costaPic from '../../_story-assets/costa.jpeg';
 

@@ -8,10 +8,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  CreateTearsheet,
-  CreateTearsheetStep,
-} from '../../../../../ibm-products/src';
+import { CreateTearsheet, CreateTearsheetStep } from '../../../../src';
 import {
   Column,
   //Dropdown,

@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TearsheetNarrow as CCTearsheetNarrow } from '../../../../../ibm-products/src';
+import { TearsheetNarrow as CCTearsheetNarrow } from '../../../../src';
 
 const TearsheetNarrow = (props) => {
   return (

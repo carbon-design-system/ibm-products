@@ -29,16 +29,6 @@ const elementName = `${prefix}-${componentName}`; // c4p-truncated-text
 @customElement(elementName)
 export class CDSTruncatedText extends LitElement {
   /**
-   * The maximum number of lines to display before truncation.
-   */
-  @property({ type: Number, reflect: true }) lines = 0;
-
-  /**
-   * The string value to be truncated.
-   */
-  @property({ type: String, attribute: 'value', reflect: true }) value = '';
-
-  /**
    * Specify how the tooltip should align with the content.
    */
   @property({ reflect: true, type: String })
@@ -51,22 +41,40 @@ export class CDSTruncatedText extends LitElement {
   autoalign = false;
 
   /**
-   * The label on expand button.
-   */
-  @property({ attribute: 'expand-label', type: String, reflect: true })
-  expandLabel = 'View more';
-
-  /**
    * The label on the collapse button.
    */
   @property({ attribute: 'collapse-label', type: String, reflect: true })
   collapseLabel = 'View less';
 
   /**
+   * The label on expand button.
+   */
+  @property({ attribute: 'expand-label', type: String, reflect: true })
+  expandLabel = 'View more';
+
+  /**
+   * Unique identifier for the element.
+   */
+  @property({ type: String, reflect: true })
+  id = '';
+
+  /**
+   * The maximum number of lines to display before truncation.
+   */
+  @property({ type: Number, reflect: true })
+  lines = 0;
+
+  /**
    * The method to display the full text when truncated. Options are "tooltip" or "expand". if not passed, the text would just be truncated with ellipsis.
    */
-  @property({ type: String, reflect: true }) with: 'tooltip' | 'expand' =
-    'tooltip';
+  @property({ type: String, reflect: true })
+  type: 'tooltip' | 'expand' = 'tooltip';
+
+  /**
+   * The string value to be truncated.
+   */
+  @property({ type: String, attribute: 'value', reflect: true })
+  value = '';
 
   @state() private _isOverflowing: boolean = false;
   @state() private _isExpanded: boolean = false;
@@ -82,7 +90,7 @@ export class CDSTruncatedText extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this._isLayered = !!this.closest(`${carbonPrefix}-layer`);
-    this.with = this.with || 'tooltip';
+    this.type = this.type || 'tooltip';
   }
 
   disconnectedCallback() {
@@ -106,7 +114,7 @@ export class CDSTruncatedText extends LitElement {
   }
 
   private _updateMaxHeight() {
-    if (this.with !== 'expand') {
+    if (this.type !== 'expand') {
       return;
     }
     requestAnimationFrame(() => {
@@ -151,6 +159,13 @@ export class CDSTruncatedText extends LitElement {
     }
   }
 
+  private _handleKeydown(evt: KeyboardEvent) {
+    const { key } = evt;
+    if (key === 'Enter' || key === ' ') {
+      this._toggleExpansion();
+    }
+  }
+
   private _toggleExpansion() {
     this._isExpanded = !this._isExpanded;
     this._updateMaxHeight();
@@ -163,63 +178,58 @@ export class CDSTruncatedText extends LitElement {
   }
 
   private _renderToggleButton() {
-    if (this.with !== 'expand') {
-      return;
-    }
     const className = classMap({
       [`${blockClass}_button-collapse`]: this._isExpanded,
       [`${blockClass}_button-expand`]: !this._isExpanded,
       [`${blockClass}_button-layered`]: this._isLayered,
       [`${blockClass}_button-hide`]: !this._isOverflowing && !this._isExpanded,
     });
-    const label = this._isExpanded
-      ? this.collapseLabel || 'View less'
-      : this.expandLabel || 'View more';
+    const label = this._isExpanded ? this.collapseLabel : this.expandLabel;
     return html`
-      <button class="${className}" @click=${this._toggleExpansion}>
+      <span
+        aria-controls=${this.id}
+        aria-expanded=${this._isExpanded}
+        class=${className}
+        @click=${this._toggleExpansion}
+        @keydown=${this._handleKeydown}
+        role="button"
+        tabIndex="0"
+      >
         ${label}
-      </button>
+      </span>
     `;
   }
 
   render() {
     // Apply different styles based on truncation method
     const contentStyle =
-      this.with === 'tooltip' || !this.with
+      this.type === 'tooltip' || !this.type
         ? `--line-clamp: ${this._isExpanded ? 'none' : this.lines};`
         : `max-block-size: ${this._maxHeight};`;
 
-    const contentClass = classMap({
-      [`${blockClass}_content`]: true,
-    });
-
-    const content = html`
-      <div
-        class="${contentClass}"
-        style="${contentStyle}"
-        tabindex=${this.with === 'tooltip' && this._isOverflowing
-          ? '0'
-          : undefined}
-      >
-        ${this.value} ${this._renderToggleButton()}
+    const valueBody = html`
+      <div id=${this.id} class="${blockClass}_content" style=${contentStyle}>
+        ${this.value}
       </div>
     `;
 
-    return this.with === 'tooltip' && this._isOverflowing
-      ? html`
-          <cds-tooltip
-            align=${this.align}
-            autoalign=${this.autoalign}
-            enter-delay-ms="0"
-            leave-delay-ms="0"
-          >
-            ${content}
-            <cds-tooltip-content>${this.value}</cds-tooltip-content>
-          </cds-tooltip>
-        `
-      : html`<div style="position: relative; background-color: inherit;">
-          ${content}
-        </div>`;
+    const tooltipVariant = html`
+      <cds-tooltip
+        align=${this.align}
+        autoalign=${this.autoalign}
+        enter-delay-ms="0"
+        leave-delay-ms="0"
+      >
+        ${valueBody}
+        <cds-tooltip-content>${this.value}</cds-tooltip-content>
+      </cds-tooltip>
+    `;
+
+    const expandVariant = html`${valueBody} ${this._renderToggleButton()}`;
+
+    return this.type === 'tooltip' && this._isOverflowing
+      ? tooltipVariant
+      : expandVariant;
   }
 }
 

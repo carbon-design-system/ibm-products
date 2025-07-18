@@ -46,6 +46,7 @@ export * from './EditFullPage';
 export * from './EditUpdateCards';
 export * from './Checklist';
 export { Coachmark } from './Coachmark';
+export { CoachmarkV2 } from './CoachmarkV2';
 export * from './CoachmarkBeacon';
 export * from './CoachmarkButton';
 export * from './CoachmarkFixed';

@@ -319,7 +319,6 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
                   label={cancelLabel}
                   onClick={onCancelHandler}
                   kind="ghost"
-                  tabIndex={0}
                   key="cancel"
                   className={`${blockClass}__btn ${blockClass}__btn-cancel`}
                 >
@@ -332,7 +331,6 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
                   label={saveLabel}
                   onClick={onSaveHandler}
                   kind="ghost"
-                  tabIndex={0}
                   key="save"
                   className={`${blockClass}__btn ${blockClass}__btn-save`}
                   disabled={!canSave}
@@ -351,7 +349,6 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
                 label={editLabel}
                 onClick={onFocusHandler}
                 kind="ghost"
-                tabIndex={0}
                 key="edit"
               >
                 <Edit size={16} />

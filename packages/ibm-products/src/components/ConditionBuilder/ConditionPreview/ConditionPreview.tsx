@@ -19,11 +19,13 @@ interface ConditionPreviewProps {
   previewType: 'newGroup' | 'subGroup' | 'condition';
   group: ConditionGroup;
   colorIndex?: number;
+  className?: string;
 }
 const ConditionPreview = ({
   previewType,
   group,
   colorIndex,
+  className,
 }: ConditionPreviewProps) => {
   const [animate, setAnimate] = useState(false);
   const [propertyText, operatorText, valueText, ifText] = useTranslations([
@@ -52,7 +54,7 @@ const ConditionPreview = ({
         <>
           <div
             className={cx([
-              `${blockClass}__group__row ${blockClass}__group-preview `,
+              `${blockClass}__group__row ${blockClass}__group-preview ${className}`,
               { [`${blockClass}__group-preview-animate`]: animate },
             ])}
           >
@@ -65,7 +67,7 @@ const ConditionPreview = ({
             data-color-index={colorIndex}
             aria-hidden
             className={cx([
-              `${blockClass}__group ${blockClass}__condition-wrapper ${blockClass}__group-preview ${blockClass}__group-wrapper `,
+              `${blockClass}__group  ${blockClass}__condition-wrapper ${blockClass}__group-preview ${blockClass}__group-wrapper ${className}`,
               { [`${blockClass}__group-preview-animate`]: animate },
             ])}
           >
@@ -130,6 +132,7 @@ const ConditionPreview = ({
 export default ConditionPreview;
 
 ConditionPreview.propTypes = {
+  className: PropTypes.string,
   /**
    * index of the color for next group
    */

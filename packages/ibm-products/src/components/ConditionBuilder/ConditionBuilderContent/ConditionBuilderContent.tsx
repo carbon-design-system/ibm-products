@@ -216,7 +216,7 @@ const ConditionBuilderContent = ({
       <div className={`${blockClass}__content-container`} {...wrapperRole}>
         {rootState &&
           rootState?.groups?.map((eachGroup, groupIndex) => (
-            <div key={eachGroup.id} className={`${blockClass}__group-wrapper`}>
+            <div key={eachGroup.id} className={`${blockClass}__group-wrapper `}>
               <ConditionGroupBuilder
                 className={`${blockClass}__group`}
                 aria={{
@@ -268,13 +268,17 @@ const ConditionBuilderContent = ({
             }
           </div>
         )}
-        {showConditionGroupPreview && (
-          <ConditionPreview
-            previewType="newGroup"
-            colorIndex={getColorIndex()}
-            group={{ groupOperator: rootState?.operator, id: uuidv4() }}
-          />
-        )}
+
+        <ConditionPreview
+          previewType="newGroup"
+          colorIndex={getColorIndex()}
+          className={
+            showConditionGroupPreview
+              ? `${blockClass}__visible`
+              : `${blockClass}__hidden`
+          }
+          group={{ groupOperator: rootState?.operator, id: uuidv4() }}
+        />
       </div>
       {actions && (
         <ConditionBuilderActions

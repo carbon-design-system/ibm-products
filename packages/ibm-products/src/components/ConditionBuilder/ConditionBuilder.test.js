@@ -1138,7 +1138,7 @@ describe(componentName, () => {
       )
     );
     const subGroups = screen.getAllByText('if');
-    expect(subGroups).toHaveLength(2);
+    expect(subGroups).toHaveLength(3);
   });
 
   it('render the Hierarchical variant with 2 groups', async () => {
@@ -1231,7 +1231,7 @@ describe(componentName, () => {
       )
     );
     const subGroups = screen.getAllByText('if');
-    expect(subGroups).toHaveLength(2);
+    expect(subGroups).toHaveLength(3);
 
     //group 2
 
@@ -1274,7 +1274,7 @@ describe(componentName, () => {
     expect(ifStatements).toHaveLength(3);
 
     const groupConnector = screen.getAllByRole('button', { name: 'or' });
-    expect(groupConnector).toHaveLength(1);
+    expect(groupConnector).toHaveLength(2);
   });
 
   it('check the next/previous close button is focussed on remove condition', async () => {
@@ -1889,7 +1889,7 @@ describe(componentName, () => {
     await act(() => userEvent.click(container));
 
     const subGroups = screen.getAllByText('if');
-    expect(subGroups).toHaveLength(1);
+    expect(subGroups).toHaveLength(2);
 
     //group 2
 
@@ -1904,7 +1904,7 @@ describe(componentName, () => {
     await act(() => userEvent.click(container));
 
     const groupConnector = screen.queryAllByRole('button', { name: 'or' });
-    expect(groupConnector).toHaveLength(0);
+    expect(groupConnector).toHaveLength(1);
   });
 
   // keyboard navigation tests

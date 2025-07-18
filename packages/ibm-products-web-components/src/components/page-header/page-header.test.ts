@@ -192,6 +192,27 @@ describe('c4p-page-header', function () {
       expect(breadcrumbItems.length).to.equal(2);
     });
 
+    it('should render title breadcrumb item', async () => {
+      const el: CDSPageHeaderBreadcrumb = await fixture(html`
+        <c4p-page-header-breadcrumb>
+          <cds-breadcrumb>
+            <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
+            <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+            <c4p-page-header-title-breadcrumb>
+              Virtual Machine DAL
+            </c4p-page-header-title-breadcrumb>
+          </cds-breadcrumb>
+        </c4p-page-header-breadcrumb>
+      `);
+
+      await el.updateComplete;
+
+      const titleBreadcrumb = el.querySelectorAll(
+        'c4p-page-header-title-breadcrumb'
+      );
+      expect(titleBreadcrumb).to.exist;
+    });
+
     it('should render content actions', async () => {
       const el: CDSPageHeaderBreadcrumb = await fixture(html`
         <c4p-page-header-breadcrumb>

@@ -75,7 +75,7 @@ type EditTearsheetFormFieldsetTypes =
 type EditTearsheetFormProps = EditTearsheetFormBaseProps &
   EditTearsheetFormFieldsetTypes;
 
-export let EditTearsheetForm = forwardRef(
+export const EditTearsheetForm = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -146,7 +146,6 @@ export let EditTearsheetForm = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-EditTearsheetForm = pkg.checkComponentEnabled(EditTearsheetForm, componentName);
 
 EditTearsheetForm.propTypes = {
   /**

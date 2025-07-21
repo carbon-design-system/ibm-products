@@ -116,7 +116,7 @@ export interface AboutModalProps {
  * should be immediately apparent to the user, with a clear and obvious path
  * to completion.
  */
-export let AboutModal = React.forwardRef(
+export const AboutModal = React.forwardRef(
   (
     {
       additionalInfo,
@@ -217,7 +217,6 @@ export let AboutModal = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-AboutModal = pkg.checkComponentEnabled(AboutModal, componentName);
 AboutModal.displayName = componentName;
 
 // The types and DocGen commentary for the component props,

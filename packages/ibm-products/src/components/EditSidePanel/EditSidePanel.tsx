@@ -132,7 +132,7 @@ export interface EditSidePanelProps {
  * Use with medium complexity edits if the user needs page context.
  * @deprecated
  */
-export let EditSidePanel = React.forwardRef(
+export const EditSidePanel = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -233,7 +233,6 @@ EditSidePanel.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-EditSidePanel = pkg.checkComponentEnabled(EditSidePanel, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

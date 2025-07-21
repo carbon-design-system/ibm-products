@@ -49,7 +49,7 @@ the page. It should not be used on a page if it is the secondary focus of the
 page as that will distract the user.
 
 */
-export let Cascade = forwardRef<HTMLDivElement, CascadeProps>((props, ref) => {
+export const Cascade = forwardRef<HTMLDivElement, CascadeProps>((props, ref) => {
   const { children, className, grid = defaults.grid, ...rest } = props;
   const childProps = {
     ...rest,
@@ -95,8 +95,6 @@ export let Cascade = forwardRef<HTMLDivElement, CascadeProps>((props, ref) => {
 
   return <div {...childProps}>{getModifiedChildren()}</div>;
 });
-
-Cascade = pkg.checkComponentEnabled(Cascade, componentName);
 
 Cascade.displayName = componentName;
 

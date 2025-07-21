@@ -126,7 +126,7 @@ type CreateFullPageStepFieldsetProps =
 export type CreateFullPageStepProps = CreateFullPageStepBaseProps &
   CreateFullPageStepFieldsetProps;
 
-export let CreateFullPageStep = forwardRef(
+export const CreateFullPageStep = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -262,12 +262,6 @@ export let CreateFullPageStep = forwardRef(
       )
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-CreateFullPageStep = pkg.checkComponentEnabled(
-  CreateFullPageStep,
-  componentName
 );
 
 CreateFullPageStep.propTypes = {

@@ -56,7 +56,7 @@ export interface BigNumbersProps {
  * of a button as well as tool tip functionality.
  * The default locale is English (`en-US`) if one is not provided or if the provided one is not supported.
  */
-export let BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
+export const BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -172,7 +172,6 @@ export let BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-BigNumbers = pkg.checkComponentEnabled(BigNumbers, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

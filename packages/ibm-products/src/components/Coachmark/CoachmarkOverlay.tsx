@@ -82,7 +82,7 @@ type StyledTune = {
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
  */
-export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
+export const CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
   (props, ref) => {
     const {
       children,
@@ -274,7 +274,6 @@ CoachmarkOverlay.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkOverlay = pkg.checkComponentEnabled(CoachmarkOverlay, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

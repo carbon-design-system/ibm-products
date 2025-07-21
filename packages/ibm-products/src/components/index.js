@@ -136,7 +136,7 @@ export {
 } from './FilterPanel';
 export { ConditionBuilder } from './ConditionBuilder';
 export { GetStartedCard } from './GetStartedCard';
-export * as unstable__PageHeader from './PageHeader/next/PageHeader';
+export * as preview__PageHeader from './PageHeader/next';
 
 export {
   FeatureFlags as unstable_FeatureFlags,

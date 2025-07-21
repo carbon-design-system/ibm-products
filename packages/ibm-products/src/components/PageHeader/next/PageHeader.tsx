@@ -15,6 +15,7 @@ import React, {
   useMemo,
   useCallback,
   RefObject,
+  forwardRef,
 } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -34,6 +35,8 @@ import {
   usePrefix,
   IconButtonProps,
   IconButton,
+  BreadcrumbItemProps,
+  BreadcrumbItem,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import { blockClass } from '../PageHeaderUtils';
@@ -87,6 +90,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
     }, [refs]);
 
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
+    const [titleClipped, setTitleClipped] = useState(false);
 
     // Intersection Observer setup, tracks if the PageHeaderContent is visible on page.
     // If it is not visible, we should set fully collapsed to true so that the
@@ -113,8 +117,31 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         }
       );
 
+      if (!refs?.titleRef?.current) {
+        return;
+      }
+      const totalTitleHeight = refs?.titleRef.current.offsetHeight;
+      const titleObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target === refs?.titleRef!.current) {
+              setTitleClipped(!entry.isIntersecting);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: `${(predefinedContentPadding + totalTitleHeight + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
+          threshold: 0.1,
+        }
+      );
+
       if (refs?.contentRef.current) {
         contentObserver.observe(refs?.contentRef.current);
+      }
+
+      if (refs?.titleRef.current) {
+        titleObserver.observe(refs?.titleRef.current);
       }
 
       return () => {
@@ -122,10 +149,16 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
           return;
         }
         contentObserver.unobserve(refs?.contentRef.current);
+        if (!refs?.titleRef?.current) {
+          return;
+        }
+        contentObserver.unobserve(refs?.titleRef.current);
       };
     }, [refs, componentRef]);
     return (
-      <PageHeaderContext.Provider value={{ refs, setRefs, fullyCollapsed }}>
+      <PageHeaderContext.Provider
+        value={{ refs, setRefs, fullyCollapsed, titleClipped }}
+      >
         <div className={classNames} ref={componentRef} {...other}>
           {children}
         </div>
@@ -283,7 +316,7 @@ const PageHeaderContent = React.forwardRef<
 
   useEffect(() => {
     if (componentRef?.current) {
-      setRefs((prev) => ({ ...prev, contentRef: componentRef }));
+      setRefs((prev) => ({ ...prev, contentRef: componentRef, titleRef }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -873,6 +906,29 @@ const PageHeaderScrollButton = React.forwardRef<
   );
 });
 
+const PageHeaderTitleBreadcrumb = forwardRef<
+  HTMLLIElement,
+  BreadcrumbItemProps
+>(({ className, children, ...other }, ref) => {
+  const { titleClipped, refs } = usePageHeader();
+  return (
+    <BreadcrumbItem
+      isCurrentPage
+      {...other}
+      className={classnames(
+        className,
+        `${pkg.prefix}--page-header-title-breadcrumb`,
+        {
+          [`${pkg.prefix}--page-header-title-breadcrumb-show`]:
+            titleClipped && refs?.titleRef,
+        }
+      )}
+    >
+      {children}
+    </BreadcrumbItem>
+  );
+});
+
 /**
  * -------
  * Exports
@@ -902,6 +958,9 @@ TabBar.displayName = 'PageHeaderTabBar';
 const ScrollButton = PageHeaderScrollButton;
 ScrollButton.displayName = 'PageHeaderScrollButton';
 
+const TitleBreadcrumb = PageHeaderTitleBreadcrumb;
+TitleBreadcrumb.displayName = 'PageHeaderTitleBreadcrumb';
+
 export {
   // direct exports
   PageHeader,
@@ -912,6 +971,7 @@ export {
   PageHeaderHeroImage,
   PageHeaderTabBar,
   PageHeaderScrollButton,
+  PageHeaderTitleBreadcrumb,
   // namespaced
   Root,
   BreadcrumbBar,
@@ -921,6 +981,7 @@ export {
   HeroImage,
   TabBar,
   ScrollButton,
+  TitleBreadcrumb,
 };
 export type {
   PageHeaderProps,

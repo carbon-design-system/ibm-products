@@ -20,7 +20,7 @@ import styles from './_storybook-styles.scss?inline';
 const storyClass = 'guidebanner-stories';
 
 export default {
-  title: 'Experimental/Onboarding/Guidebanner',
+  title: 'Preview/Onboarding/Guidebanner',
   component: Guidebanner,
   tags: ['autodocs', 'Onboarding'],
   parameters: {

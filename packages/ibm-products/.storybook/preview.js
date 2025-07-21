@@ -129,7 +129,7 @@ const parameters = {
         'Patterns',
         ['*', 'Prebuilt patterns'],
         'Utilities',
-        'Experimental',
+        'Preview',
         ['*', 'FeatureFlags'],
         'Deprecated',
       ],

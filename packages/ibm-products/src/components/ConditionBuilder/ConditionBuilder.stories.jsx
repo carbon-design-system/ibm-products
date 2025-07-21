@@ -28,7 +28,7 @@ import {
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
 export default {
-  title: 'Experimental/ConditionBuilder',
+  title: 'Preview/ConditionBuilder',
   component: ConditionBuilder,
   tags: ['autodocs'],
 

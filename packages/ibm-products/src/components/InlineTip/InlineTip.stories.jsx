@@ -15,7 +15,7 @@ import styles from './_storybook-styles.scss?inline';
 import InlineTipImage from './storybook_assets/inline-tip-image.png';
 
 export default {
-  title: 'Experimental/Onboarding/InlineTip',
+  title: 'Preview/Onboarding/InlineTip',
   component: InlineTip,
   tags: ['autodocs', 'Onboarding'],
   parameters: {

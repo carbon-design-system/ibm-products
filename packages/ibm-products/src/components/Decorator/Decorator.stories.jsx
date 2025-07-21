@@ -29,7 +29,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: 'Experimental/Decorator',
+  title: 'Preview/Decorator',
   component: Decorator,
   tags: ['autodocs'],
   parameters: {

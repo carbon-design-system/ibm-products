@@ -11,8 +11,10 @@
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities';
+@use '../../../../ibm-products-styles/src/global/styles/project-settings' as
+  c4p-settings;
 
-$prefix: 'dev-prefix--c4p' !default;
+$prefix: #{c4p-settings.$pkg-prefix} !default;
 
 .#{$prefix}__bubble {
   position: fixed;

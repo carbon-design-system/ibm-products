@@ -80,7 +80,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/carbon__layout": "^0.0.3",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
-    "accessibility-checker": "^4.0.2",
+    "accessibility-checker": "^4.0.6",
     "commander": "^14.0.0",
     "copyfiles": "^2.4.1",
     "cspell": "^9.0.0",

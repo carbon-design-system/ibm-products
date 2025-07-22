@@ -625,7 +625,7 @@ export const TabBarWithTabsAndTags = {
 };
 
 const meta = {
-  title: 'Experimental/PageHeader',
+  title: 'Patterns/PageHeader',
   decorators: [
     (story) =>
       html` <style>

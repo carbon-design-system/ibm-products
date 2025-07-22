@@ -24,22 +24,42 @@ const blockClass = `${prefix}--interstitial-screen`;
 
 export type ActionType = 'close' | 'start' | 'skip' | 'back' | 'next';
 
+/**
+ * interstitial-screen-footer for footer section
+ * @element c4p-interstitial-screen-footer
+ */
 @customElement(`${prefix}-interstitial-screen-footer`)
 class CDSInterstitialScreenFooter extends SignalWatcher(
   HostListenerMixin(CDSModalFooter)
 ) {
+  /**
+   * The label for the Next button.
+   */
   @property({ reflect: true })
   nextButtonLabel: string = 'Next';
-
+  /**
+   * The label for the Previous button.
+   */
   @property({ reflect: true })
   previousButtonLabel: string = 'Back';
-
+  /**
+   * The label for the skip button.
+   */
   @property({ reflect: true })
   skipButtonLabel: string = 'Skip';
-
+  /**
+   * The label for the start button.
+   */
   @property({ reflect: true })
   startButtonLabel = 'Get Started';
 
+  /**
+   * Enables support for asynchronous validation or user confirmation before proceeding
+   * to the next interstitial step. When set to true, the component will wait for an external
+   *  listener (e.g., a form validation or confirmation modal) to resolve the proceed() callback before continuing.
+   * When asyncAction is true, you must listen for the eventOnBeforeAction event and
+   * call the proceed() function (either synchronously or with a promise) to allow navigation.
+   */
   @property({ type: Boolean, reflect: true, attribute: 'async-action' })
   asyncAction;
 

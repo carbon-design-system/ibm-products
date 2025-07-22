@@ -16,6 +16,18 @@ import footerStyles from './interstitial-screen-footer.scss?lit';
 import Checkmark from '@carbon/web-components/es/icons/checkmark/16.js';
 import { prefix } from '../../globals/settings';
 
+const argTypes = {
+  isFullScreen: {
+    description:
+      'Specifies whether the component is shown as a full-screen experience, else it is shown as a modal by default.',
+    control: 'boolean',
+  },
+  open: {
+    description: 'Specifies whether the component is currently open.',
+    control: 'boolean',
+  },
+};
+
 const getMultipleContent = () => {
   const contentArray = [
     {
@@ -158,9 +170,7 @@ const toggleButton = () => {
 };
 
 export const Modal = {
-  args: {
-    open: false,
-  },
+  argTypes,
   render: (args) => {
     let disableActionButton;
     const getConfig = () => {
@@ -208,7 +218,6 @@ export const Modal = {
 };
 
 export const ModalWithMultipleSteps = {
-  args: {},
   render: (args) => {
     const { open, size, title, titleId } = args;
     return html`
@@ -244,7 +253,6 @@ export const ModalWithMultipleSteps = {
   },
 };
 export const ModalWithAsynchronousAction = {
-  args: {},
   render: (args) => {
     const { open, size, title, titleId } = args;
     return html`
@@ -277,7 +285,6 @@ export const ModalWithAsynchronousAction = {
 };
 
 export const WithCustomActionButtons = {
-  args: {},
   render: (args) => {
     const blockClass = `${prefix}--interstitial-screen`;
     const container = document.createElement('div');
@@ -416,7 +423,6 @@ export const WithCustomActionButtons = {
 };
 
 export const FullScreen = {
-  args: {},
   render: (args) => {
     let disableActionButton;
     const getConfig = () => {
@@ -456,7 +462,6 @@ export const FullScreen = {
   },
 };
 export const FullScreenWithMultipleSteps = {
-  args: {},
   render: (args) => {
     const { open, size, title, titleId } = args;
     return html`

@@ -19,8 +19,15 @@ import {
   updateInterstitialDetailsSignal,
 } from './interstitial-screen-context';
 
+/**
+ * interstitial-screen-body-item for body children
+ * @element c4p-interstitial-screen-body-item
+ */
 @customElement(`${prefix}-interstitial-screen-body-item`)
 class CDSInterstitialScreenBodyItem extends HostListenerMixin(LitElement) {
+  /**
+   * This will serve the labels for each step
+   */
   @property({ reflect: true })
   stepTitle: string = '';
 

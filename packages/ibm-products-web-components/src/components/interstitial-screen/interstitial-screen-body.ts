@@ -23,6 +23,10 @@ import {
 
 const blockClass = `${prefix}--interstitial-screen`;
 
+/**
+ * interstitial-screen-body for body section
+ * @element c4p-interstitial-screen-body
+ */
 @customElement(`${prefix}-interstitial-screen-body`)
 class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   @state()

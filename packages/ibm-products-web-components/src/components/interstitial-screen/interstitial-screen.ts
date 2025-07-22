@@ -31,13 +31,9 @@ export type disableButtonConfigType = {
   start?: boolean;
 };
 /**
- * interstitial-screen.
- *
+ * interstitial-screen main component
  * @element c4p-interstitial-screen
- * @csspart interstitial-screen The options tile
- * @fires c4p-options-tile-open Custom event fired when tile is opened
- * @fires c4p-options-tile-close Custom event fired when tile is closed
- * */
+ */
 
 @customElement(`${prefix}-interstitial-screen`)
 class CDSInterstitialScreen extends SignalWatcher(

@@ -29,6 +29,7 @@ const Template = () => {
 
   const fetchKey = async () => {
     setLoading(true);
+    // simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
     setKey('082be29c-3622-4276-bc58-695e2a12bd93');
@@ -49,7 +50,7 @@ const Template = () => {
 
   return (
     <div className="app">
-      <Button onClick={fetchKey}>
+      <Button onClick={fetchKey} disabled={loading}>
         {loading ? 'Generating...' : 'Generate'}
       </Button>
       <Modal

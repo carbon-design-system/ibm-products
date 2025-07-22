@@ -40,6 +40,7 @@ collect:
         - batchActionMenuButtonLabel
         - batchActions
         - body
+        - border
         - breadcrumbOverflowTooltipAlign
         - breadcrumbs
         - button
@@ -51,6 +52,7 @@ collect:
         - clickZone
         - closeButtonLabel
         - closeIconDescription
+        - closePopover
         - collapseButtonLabel
         - collapsible
         - column
@@ -99,6 +101,7 @@ collect:
         - ExpandedRowContentComponent
         - expandedRowIds
         - fetchMoreData
+        - fieldsetLegendId
         - fieldsetLegendText
         - filterByLabel
         - filterProps
@@ -267,6 +270,7 @@ collect:
         - overflowTags
         - overflowTooltipAlign
         - overflowType
+        - pageActions
         - parentId
         - path
         - pictogram
@@ -627,8 +631,6 @@ collect:
         - magnitude
         # DelimitedList
         - delimiter
-        # DescriptionList
-        - border
         # DraggableElement
         - classList
         - elementId
@@ -741,7 +743,6 @@ collect:
         - narrow
         - tertiaryButtonLabel
         # InterstitialScreen
-        - interstitialAriaLabel
         - isFullScreen
         # InterstitialScreenBody
         - contentRenderer
@@ -839,10 +840,17 @@ collect:
         - hasBackgroundAlways
         - hasCollapseHeaderToggle
         - narrowGrid
-        - pageActions
         - pageActionsMenuOptionsClass
         - pageActionsOverflowLabel
         - withoutBackground
+        # PageHeaderBreadcrumbBar
+        - contentActions
+        - contentActionsFlush
+        - pageActionsFlush
+        # PageHeaderContent
+        - contextualActions
+        # PageHeaderContentPageActions
+        - menuButtonLabel
         # PageHeaderTitle
         - blockClass
         - hasBreadcrumbRow
@@ -853,11 +861,6 @@ collect:
         - primaryDangerDescription
         - resourceName
         - textConfirmation
-        # Resizer
-        - onDoubleClick
-        - onResize
-        - onResizeEnd
-        - orientation
         # RowSizeDropdown
         - datagridName
         - light
@@ -899,6 +902,7 @@ collect:
         - actionToolbarButtons
         - animateTitle
         - condensedActions
+        - hideCloseButton
         - includeOverlay
         - navigationBackIconDescription
         # SingleAddSelect
@@ -1197,9 +1201,6 @@ collect:
         - short
         # PageHeader - fullWidthGrid
         - xl
-        # Resizer - orientation
-        - horizontal
-        - vertical
   npm:
     dependencies: null
   js:

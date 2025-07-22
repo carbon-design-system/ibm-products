@@ -1,11 +1,12 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 import * as OverflowHandlerStories from './overflow-handler.stories';
 
 <Meta of={OverflowHandlerStories} />
 
 # overflowHandler
 
-overflowHandler is a utility for handling the truncation of a list of items.
+overflowHandler is a framework agnostic utility for handling the truncation of a
+list of items.
 
 ## Getting started
 
@@ -51,4 +52,5 @@ The handler needs to be re-initialized whenever items are added or removed, when
 an item changes its width dynamically, or when the offset changes its width
 dynamically, to update the overflow with the new sizes.
 
-For details on implementation, please refer to the example code.
+For details on implementation, please refer to the
+[example code](?path=/docs/patterns-item-overflow--overview).

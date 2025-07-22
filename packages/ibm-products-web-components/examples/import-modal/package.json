@@ -12,9 +12,9 @@
     "clean": "rimraf node_modules dist .cache"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.63.0",
-    "@carbon/styles": "1.82.0",
-    "@carbon/web-components": "2.30.0",
+    "@carbon/ibm-products-styles": "^2.65.0",
+    "@carbon/styles": "1.84.0",
+    "@carbon/web-components": "2.32.1",
     "lit": "^3.2.1",
     "sass": "^1.64.1"
   },

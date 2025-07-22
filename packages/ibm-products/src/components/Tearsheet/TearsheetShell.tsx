@@ -332,7 +332,7 @@ export const TearsheetShell = React.forwardRef(
       if (prevOpen && !open && launcherButtonRef?.current) {
         setTimeout(() => {
           launcherButtonRef?.current.focus();
-        }, 0);
+        }, 10);
       }
     }, [open, prevOpen, launcherButtonRef]);
 
@@ -523,6 +523,7 @@ export const TearsheetShell = React.forwardRef(
               ref={modalBodyRef}
               className={`${carbonPrefix}--modal-content ${bc}__body`}
             >
+              {/* Left influencer */}
               <Wrap
                 className={cx({
                   [`${bc}__influencer`]: true,
@@ -531,9 +532,12 @@ export const TearsheetShell = React.forwardRef(
                 neverRender={influencerPosition === 'right'}
                 element={SectionLevel3}
               >
-                {influencer}
+                <Wrap element={Layer} className={`${bc}__layer`}>
+                  {influencer}
+                </Wrap>
               </Wrap>
               <Wrap className={`${bc}__right`}>
+                {/* Main area */}
                 <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
                   <Wrap
                     className={`${bc}__content`}
@@ -542,8 +546,15 @@ export const TearsheetShell = React.forwardRef(
                     }
                     element={SectionLevel3}
                   >
-                    {children}
+                    {wide ? (
+                      children
+                    ) : (
+                      <Wrap element={Layer} className={`${bc}__layer`}>
+                        {children}
+                      </Wrap>
+                    )}
                   </Wrap>
+                  {/* Right influencer */}
                   <Wrap
                     className={cx({
                       [`${bc}__influencer`]: true,
@@ -552,7 +563,9 @@ export const TearsheetShell = React.forwardRef(
                     neverRender={influencerPosition !== 'right'}
                     element={SectionLevel3}
                   >
-                    {influencer}
+                    <Wrap element={Layer} className={`${bc}__layer`}>
+                      {influencer}
+                    </Wrap>
                   </Wrap>
                 </Wrap>
                 {includeActions && (

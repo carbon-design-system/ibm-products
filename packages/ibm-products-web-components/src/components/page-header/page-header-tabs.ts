@@ -28,6 +28,7 @@ class CDSPageHeaderTabs extends LitElement {
           <slot name="tags"></slot>
         </div>
       </div>
+      <slot name="scroller"></slot>
     </div>`;
   }
 

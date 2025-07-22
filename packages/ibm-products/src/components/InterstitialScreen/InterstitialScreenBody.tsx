@@ -15,14 +15,15 @@ import React, {
 import PropTypes from 'prop-types';
 
 import {
+  blockClass,
   disableButtonConfigType,
   InterstitialScreenContext,
 } from './InterstitialScreen';
 import { ModalBody } from '@carbon/react';
-import { pkg } from '../../settings';
 
 import { Carousel } from '../Carousel';
 import { EnrichedChildren } from './InterstitialScreenHeader';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 type contentRendererArgs = {
   handleGotoStep?: (value: number) => void;
@@ -31,14 +32,20 @@ type contentRendererArgs = {
 };
 export interface InterstitialScreenBodyProps {
   /**
+   * Optional static content for body
+   */
+  children?: ReactNode;
+  /**
    * Provide an optional class to be applied to the containing node.
    */
   className?: string;
   /**
-   * This is a required callback that has to return the content to render in the body section.
-   * It can be a single child or an array of children depending on your need
+   *You can provide content either through a callback (contentRenderer) or as static children—but not both.
+   * If both are provided, contentRenderer always takes precedence. This optional callback should return the content
+   * to be rendered in the body section, which can be either a single element or an array of elements based on your needs.
+   * If internal state access isn’t required, you can simply use static children instead
    */
-  contentRenderer: (
+  contentRenderer?: (
     config: contentRendererArgs
   ) => ReactElement<EnrichedChildren> | ReactNode;
 }
@@ -50,7 +57,7 @@ const InterstitialScreenBody = React.forwardRef<
   InterstitialScreenBodyProps
 >((props, ref) => {
   const { className = '', contentRenderer, ...rest } = props;
-  const blockClass = `${pkg.prefix}--interstitial-screen`;
+
   const bodyBlockClass = `${blockClass}--internal-body`;
 
   const [stepType, setStepType] = useState<StepType>();
@@ -72,11 +79,12 @@ const InterstitialScreenBody = React.forwardRef<
   const [scrollPercent, setScrollPercent] = useState(-1);
 
   useEffect(() => {
-    const _bodyContent = contentRenderer({
-      handleGotoStep,
-      progStep,
-      disableActionButton,
-    });
+    const _bodyContent =
+      contentRenderer?.({
+        handleGotoStep,
+        progStep,
+        disableActionButton,
+      }) ?? props.children;
 
     const isElement = isValidElement(_bodyContent);
     const children = isElement
@@ -124,7 +132,8 @@ const InterstitialScreenBody = React.forwardRef<
     <div
       className={`${blockClass}--body ${className}`}
       ref={bodyScrollRef ?? ref}
-      {...rest}
+      {...getDevtoolsProps('InterstitialScreenBody')}
+      {...(isFullScreen ? rest : {})}
     >
       <div className={`${blockClass}--content`}>
         {stepType === 'multi' ? (
@@ -149,7 +158,7 @@ const InterstitialScreenBody = React.forwardRef<
   return isFullScreen ? (
     renderBody()
   ) : (
-    <ModalBody ref={ref} className={bodyBlockClass}>
+    <ModalBody ref={ref} className={bodyBlockClass} {...rest}>
       {renderBody()}
     </ModalBody>
   );
@@ -159,12 +168,18 @@ export default InterstitialScreenBody;
 
 InterstitialScreenBody.propTypes = {
   /**
+   * Optional static content for body
+   */
+  children: PropTypes.node,
+  /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
   /**
-   * This is a required callback that has to return the content to render in the body section.
-   * It can be a single child or an array of children depending on your need
+   *You can provide content either through a callback (contentRenderer) or as static children—but not both.
+   * If both are provided, contentRenderer always takes precedence. This optional callback should return the content
+   * to be rendered in the body section, which can be either a single element or an array of elements based on your needs.
+   * If internal state access isn’t required, you can simply use static children instead
    */
-  contentRenderer: PropTypes.func.isRequired,
+  contentRenderer: PropTypes.func,
 };

@@ -14,15 +14,19 @@ import CDSTruncatedText from './truncated-text';
 import styles from './story-styles.scss?lit';
 import '@carbon/web-components/es/components/layer/layer.js';
 
-// const storyPrefix = 'truncated-text-stories__';
+const storyPrefix = 'truncated-text-stories__';
 const defaultArgs = {
-  lines: 2,
-  value:
-    'Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principal call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page.',
-  element: 'p',
-  align: 'bottom',
-  with: 'tooltip',
+  align: 'top',
   autoalign: false,
+  'collapse-label': 'View less',
+  'expand-label': 'View more',
+  id: 'example-id',
+  lines: 3,
+  type: 'tooltip',
+  value:
+    'Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular sized button. This issue is most found in tables. Small button should have three words or less. When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are always paired with text.',
+  // storybook specific
+  element: 'p',
 };
 
 const argTypes = {
@@ -56,7 +60,7 @@ const argTypes = {
       type: 'text',
     },
   },
-  with: {
+  type: {
     control: { type: 'select' },
     options: ['tooltip', 'expand'],
   },
@@ -83,7 +87,7 @@ const argTypes = {
       type: 'select',
       labels: {
         p: 'Paragraph',
-        layers: 'With layers',
+        layers: 'type layers',
         h1: 'Heading 1',
         h2: 'Heading 2',
         h3: 'Heading 3',
@@ -97,55 +101,42 @@ const argTypes = {
 };
 
 const renderTemplate = (args) => {
-  const { lines, value, with: withMode, align, autoalign } = args;
+  const { lines, value, type, align, autoalign, id } = args;
   const expandLabelAttr = args['expand-label'];
   const collapseLabelAttr = args['collapse-label'];
   return html`
     <style>
       ${styles}
     </style>
-    ${args.element === 'p'
-      ? html`<p>
-          <c4p-truncated-text
-            value=${value}
-            align=${align}
-            ?autoalign=${autoalign}
-            lines=${lines}
-            expand-label=${expandLabelAttr}
-            collapse-label=${collapseLabelAttr}
-            .with=${withMode}
-          ></c4p-truncated-text>
-        </p>`
-      : ''}
-    ${args.element === 'layers'
-      ? html`
-          <p>
+    <div class="${storyPrefix}viewport">
+      ${args.element === 'p'
+        ? html`<p>
             <c4p-truncated-text
               value=${value}
+              id=${id}
               align=${align}
               ?autoalign=${autoalign}
               lines=${lines}
               expand-label=${expandLabelAttr}
               collapse-label=${collapseLabelAttr}
-              .with=${withMode}
+              .type=${type}
             ></c4p-truncated-text>
-          </p>
-          <cds-layer>
-            <div
-              style="background: var(--cds-layer); color: var(--cds-text-primary, #161616);"
-            >
-              <p>
-                <c4p-truncated-text
-                  value=${value}
-                  align=${align}
-                  ?autoalign=${autoalign}
-                  lines=${lines}
-                  expand-label=${expandLabelAttr}
-                  collapse-label=${collapseLabelAttr}
-                  .with=${withMode}
-                ></c4p-truncated-text>
-              </p>
-            </div>
+          </p>`
+        : ''}
+      ${args.element === 'layers'
+        ? html`
+            <p>
+              <c4p-truncated-text
+                value=${value}
+                id=${id}
+                align=${align}
+                ?autoalign=${autoalign}
+                lines=${lines}
+                expand-label=${expandLabelAttr}
+                collapse-label=${collapseLabelAttr}
+                .type=${type}
+              ></c4p-truncated-text>
+            </p>
             <cds-layer>
               <div
                 style="background: var(--cds-layer); color: var(--cds-text-primary, #161616);"
@@ -153,12 +144,13 @@ const renderTemplate = (args) => {
                 <p>
                   <c4p-truncated-text
                     value=${value}
+                    id=${id}
                     align=${align}
                     ?autoalign=${autoalign}
                     lines=${lines}
                     expand-label=${expandLabelAttr}
                     collapse-label=${collapseLabelAttr}
-                    .with=${withMode}
+                    .type=${type}
                   ></c4p-truncated-text>
                 </p>
               </div>
@@ -169,98 +161,106 @@ const renderTemplate = (args) => {
                   <p>
                     <c4p-truncated-text
                       value=${value}
+                      id=${id}
                       align=${align}
                       ?autoalign=${autoalign}
                       lines=${lines}
                       expand-label=${expandLabelAttr}
                       collapse-label=${collapseLabelAttr}
-                      .with=${withMode}
+                      .type=${type}
                     ></c4p-truncated-text>
                   </p>
                 </div>
+                </cds-layer>
               </cds-layer>
             </cds-layer>
-          </cds-layer>
-        `
-      : ''}
-    ${args.element === 'h1'
-      ? html`<h1>
-          <c4p-truncated-text
-            value=${value}
-            align=${align}
-            ?autoalign=${autoalign}
-            lines=${lines}
-            expand-label=${expandLabelAttr}
-            collapse-label=${collapseLabelAttr}
-            .with=${withMode}
-          ></c4p-truncated-text>
-        </h1>`
-      : ''}
-    ${args.element === 'h2'
-      ? html`<h2>
-          <c4p-truncated-text
-            value=${value}
-            align=${align}
-            ?autoalign=${autoalign}
-            lines=${lines}
-            expand-label=${expandLabelAttr}
-            collapse-label=${collapseLabelAttr}
-            .with=${withMode}
-          ></c4p-truncated-text>
-        </h2>`
-      : ''}
-    ${args.element === 'h3'
-      ? html`<h3>
-          <c4p-truncated-text
-            value=${value}
-            align=${align}
-            ?autoalign=${autoalign}
-            lines=${lines}
-            expand-label=${expandLabelAttr}
-            collapse-label=${collapseLabelAttr}
-            .with=${withMode}
-          ></c4p-truncated-text>
-        </h3>`
-      : ''}
-    ${args.element === 'h4'
-      ? html`<h4>
-          <c4p-truncated-text
-            value=${value}
-            align=${align}
-            ?autoalign=${autoalign}
-            lines=${lines}
-            expand-label=${expandLabelAttr}
-            collapse-label=${collapseLabelAttr}
-            .with=${withMode}
-          ></c4p-truncated-text>
-        </h4>`
-      : ''}
-    ${args.element === 'h5'
-      ? html`<h5>
-          <c4p-truncated-text
-            value=${value}
-            align=${align}
-            ?autoalign=${autoalign}
-            lines=${lines}
-            expand-label=${expandLabelAttr}
-            collapse-label=${collapseLabelAttr}
-            .with=${withMode}
-          ></c4p-truncated-text>
-        </h5>`
-      : ''}
-    ${args.element === 'h6'
-      ? html`<h6>
-          <c4p-truncated-text
-            value=${value}
-            align=${align}
-            ?autoalign=${autoalign}
-            lines=${lines}
-            expand-label=${expandLabelAttr}
-            collapse-label=${collapseLabelAttr}
-            .with=${withMode}
-          ></c4p-truncated-text>
-        </h6>`
-      : ''}
+          `
+        : ''}
+      ${args.element === 'h1'
+        ? html`<h1>
+            <c4p-truncated-text
+              value=${value}
+              id=${id}
+              align=${align}
+              ?autoalign=${autoalign}
+              lines=${lines}
+              expand-label=${expandLabelAttr}
+              collapse-label=${collapseLabelAttr}
+              .type=${type}
+            ></c4p-truncated-text>
+          </h1>`
+        : ''}
+      ${args.element === 'h2'
+        ? html`<h2>
+            <c4p-truncated-text
+              value=${value}
+              id=${id}
+              align=${align}
+              ?autoalign=${autoalign}
+              lines=${lines}
+              expand-label=${expandLabelAttr}
+              collapse-label=${collapseLabelAttr}
+              .type=${type}
+            ></c4p-truncated-text>
+          </h2>`
+        : ''}
+      ${args.element === 'h3'
+        ? html`<h3>
+            <c4p-truncated-text
+              value=${value}
+              id=${id}
+              align=${align}
+              ?autoalign=${autoalign}
+              lines=${lines}
+              expand-label=${expandLabelAttr}
+              collapse-label=${collapseLabelAttr}
+              .type=${type}
+            ></c4p-truncated-text>
+          </h3>`
+        : ''}
+      ${args.element === 'h4'
+        ? html`<h4>
+            <c4p-truncated-text
+              value=${value}
+              id=${id}
+              align=${align}
+              ?autoalign=${autoalign}
+              lines=${lines}
+              expand-label=${expandLabelAttr}
+              collapse-label=${collapseLabelAttr}
+              .type=${type}
+            ></c4p-truncated-text>
+          </h4>`
+        : ''}
+      ${args.element === 'h5'
+        ? html`<h5>
+            <c4p-truncated-text
+              value=${value}
+              id=${id}
+              align=${align}
+              ?autoalign=${autoalign}
+              lines=${lines}
+              expand-label=${expandLabelAttr}
+              collapse-label=${collapseLabelAttr}
+              .type=${type}
+            ></c4p-truncated-text>
+          </h5>`
+        : ''}
+      ${args.element === 'h6'
+        ? html`<h6>
+            <c4p-truncated-text
+              value=${value}
+              id=${id}
+              align=${align}
+              ?autoalign=${autoalign}
+              lines=${lines}
+              expand-label=${expandLabelAttr}
+              collapse-label=${collapseLabelAttr}
+              .type=${type}
+            ></c4p-truncated-text>
+          </h6>`
+        : ''}
+    </div>
   `;
 };
 
@@ -269,7 +269,7 @@ export const Default = {
     ...defaultArgs,
   },
   argTypes,
-  name: 'Default with Tooltip',
+  name: 'Default type Tooltip',
   render: renderTemplate,
   parameters: {
     docs: {
@@ -287,10 +287,10 @@ export const Default = {
   },
 };
 
-export const WithExpand = {
+export const typeExpand = {
   args: {
     ...defaultArgs,
-    with: 'expand',
+    type: 'expand',
   },
   argTypes,
   render: renderTemplate,
@@ -301,7 +301,7 @@ export const WithExpand = {
 <c4p-truncated-text
   value="${defaultArgs.value}"
   lines="${defaultArgs.lines}"
-  with="expand"
+  type="expand"
   expand-label="View more"
   collapse-label="View less"
 ></c4p-truncated-text>
@@ -312,10 +312,10 @@ export const WithExpand = {
 };
 
 const meta = {
-  title: 'Experimental/Utilities/TruncatedText',
+  title: 'Utilities/TruncatedText',
   component: 'c4p-truncated-text',
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
   },
 };
 

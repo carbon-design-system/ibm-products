@@ -57,6 +57,7 @@ export * from './InlineTip';
 export * from './NonLinearReading';
 export * from './BigNumbers';
 export * from './TruncatedList';
+export * from './TruncatedText';
 export * from './InterstitialScreen';
 export * from './DelimitedList';
 export * from './Decorator';
@@ -76,6 +77,7 @@ export { ActionBar } from './ActionBar';
 export * from './FilterPanel';
 export * from './ConditionBuilder';
 export * from './GetStartedCard';
+export * as unstable__PageHeader from './PageHeader/next/PageHeader';
 
 export {
   FeatureFlags as unstable_FeatureFlags,

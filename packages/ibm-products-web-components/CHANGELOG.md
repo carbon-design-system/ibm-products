@@ -1,3 +1,32 @@
+## `@carbon/ibm-products-web-components@0.20.0-rc.0`
+### Features :rocket:
+- feat: add various options for description (#7708)
+- feat(storybook): use vite v7 (#7745)
+- feat(storybook): upgrade to v9 (#7734)
+- feat(page-header): add sticky support, web component (#7741)
+- feat(save): create pattern in Web Components (#7766)
+- feat(notification panel): add test coverage (#7685)
+
+### Housekeeping :house:
+- docs(storybook): restructure top level categories (#7822)
+- chore(deps-dev): bump vite (#7778)
+- build(deps): update Carbon 11 compatible versions to latest (#7757)
+- chore(deps): update dependency vite to v7 (#7746)
+
+## `@carbon/ibm-products-web-components@0.19.0`
+### Features :rocket:
+- feat(sidepanel): option to hide close button in web component (#7695)
+- feat(page-header): new web components page-header (#7658)
+- feat(notification panel): create notification panel wc (#7557)
+- feat(ExportModal): added as WC Pattern (#7578)
+
+### Housekeeping :house:
+- chore(deps): update dependency happy-dom to v18 (#7665)
+- build(deps): update Carbon 11 compatible versions to latest (#7663)
+- chore(deps-dev): bump vite (#7739)
+- chore(storybook): add a11y tab in wc and remove code tab from react (#7706)
+- refactor(instrumentation): replace amplitude with autotrack (#7710)
+
 ## `@carbon/ibm-products-web-components@0.18.0`
 ### Features :rocket:
 - feat(tearsheet): add decorator option (#7600)

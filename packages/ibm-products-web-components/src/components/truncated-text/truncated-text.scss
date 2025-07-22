@@ -79,23 +79,8 @@ $block-class: #{$prefix}--truncated-text;
 }
 
 .#{$block-class}_button-expand {
-  position: absolute;
-  background-color: $background;
-  inset-block-end: 0;
-  inset-inline-end: 0;
-
   &.#{$block-class}_button-layered {
     background-color: $layer;
-  }
-
-  &::before {
-    position: absolute;
-    block-size: 100%;
-    color: $text-primary;
-    content: '...';
-    inline-size: 1em; // use em so truncation element scales with parent font size
-    inset-inline-start: -1em; // positions pseudo element before button without overlap across font sizes
-    pointer-events: none;
   }
 
   // Gradient LTR

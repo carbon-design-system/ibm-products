@@ -29,8 +29,6 @@ import {
   TabPanels,
   TabPanel,
   IconButton,
-  MenuButton,
-  MenuItem,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
@@ -39,7 +37,6 @@ import styles from './_storybook-styles.scss?inline';
 
 import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
-import { createOverflowHandler } from '@carbon/utilities';
 
 const tags = [
   {

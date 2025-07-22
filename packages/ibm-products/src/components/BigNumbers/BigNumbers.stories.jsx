@@ -50,7 +50,7 @@ const iconButtonOptions = {
 };
 
 export default {
-  title: 'Preview/BigNumbers',
+  title: 'Preview Candidate/BigNumbers',
   component: BigNumbers,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

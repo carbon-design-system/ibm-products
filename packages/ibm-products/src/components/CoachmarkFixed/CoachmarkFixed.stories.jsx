@@ -18,7 +18,7 @@ import mdx from './CoachmarkFixed.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Preview/Onboarding/Coachmark/CoachmarkFixed',
+  title: 'Preview Candidate/Onboarding/Coachmark/CoachmarkFixed',
   component: CoachmarkFixed,
   tags: ['autodocs', 'Onboarding'],
   // TODO: Define argTypes for props not represented by standard JS types.

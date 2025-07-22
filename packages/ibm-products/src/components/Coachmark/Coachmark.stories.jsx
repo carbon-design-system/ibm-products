@@ -26,7 +26,7 @@ import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Preview/Onboarding/Coachmark/Coachmark',
+  title: 'Preview Candidate/Onboarding/Coachmark/Coachmark',
   component: Coachmark,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {

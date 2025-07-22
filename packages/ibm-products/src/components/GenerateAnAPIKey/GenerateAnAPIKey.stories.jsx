@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { Modal, Button, TextInput } from '@carbon/react';
+import { Button, Modal, TextInput } from '@carbon/react';
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './GenerateAnAPIKey.mdx';
 

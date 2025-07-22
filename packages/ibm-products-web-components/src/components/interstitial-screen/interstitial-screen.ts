@@ -23,7 +23,6 @@ import {
 } from './interstitial-screen-context';
 
 export const blockClass = `${prefix}--interstitial-screen`;
-const blockEvent = `${prefix}-interstitial-screen`;
 
 export type disableButtonConfigType = {
   skip?: boolean;
@@ -126,7 +125,7 @@ class CDSInterstitialScreen extends SignalWatcher(
     updateInterstitialDetailsSignal({ name: 'disableActions', detail: config });
   };
 
-  _handleClose(e) {
+  _handleClose() {
     this.open = false;
   }
 

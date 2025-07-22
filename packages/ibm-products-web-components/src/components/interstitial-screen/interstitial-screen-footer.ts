@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement, nothing, PropertyValues } from 'lit';
+import { html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -21,7 +21,6 @@ import { CDSModalFooter } from '@carbon/web-components/es/index.js';
 import ArrowRight from '@carbon/web-components/es/icons/arrow--right/16.js';
 
 const blockClass = `${prefix}--interstitial-screen`;
-const headerBlockClass = `${blockClass}--internal-header`;
 
 export type ActionType = 'close' | 'start' | 'skip' | 'back' | 'next';
 

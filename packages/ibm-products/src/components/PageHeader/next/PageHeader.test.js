@@ -174,6 +174,29 @@ describe('PageHeader', () => {
       const elem = container.querySelector(`.page-action-item`);
       expect(elem).toBeInTheDocument();
     });
+
+    it('should render the page header title breadcrumb', () => {
+      const { container } = render(
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar
+            pageActions={<button className="page-action-item">Button</button>}
+          >
+            <Breadcrumb>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+              <PageHeader.TitleBreadcrumb className="title-breadcrumb-item">
+                Title
+              </PageHeader.TitleBreadcrumb>
+            </Breadcrumb>
+          </PageHeader.BreadcrumbBar>
+          <PageHeader.Content title="title" />
+        </PageHeader.Root>
+      );
+      const titleBreadcrumbElement = container.querySelector(
+        '.title-breadcrumb-item'
+      );
+      expect(titleBreadcrumbElement).toBeInTheDocument();
+    });
   });
 
   describe('PageHeader.Content component api', () => {

@@ -38,6 +38,14 @@
 }
 
 .breadcrumb-bar-button {
-  height: 40px;
-  width: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  block-size: 40px;
+  inline-size: 40px;
+}
+
+.breadcrumb-bar-action-button {
+  align-items: center;
+  block-size: 40px;
 }

@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useEffect } from 'react';
-import { Add, Ai, Basketball } from '@carbon/icons-react';
-import { unstable__PageHeader as PageHeader } from '../../';
+import { Add } from '@carbon/icons-react';
+import { preview__PageHeader as PageHeader } from '../../';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar,
@@ -149,51 +149,6 @@ const breadcrumbPageActions = (
   </>
 );
 
-const breadcrumbContentActions = (
-  <>
-    <Button size="md">Button</Button>
-  </>
-);
-
-const CustomActions = () => {
-  const containerRef = React.useRef();
-  const [hiddenItems, setHiddenItems] = React.useState([]);
-
-  useEffect(() => {
-    createOverflowHandler({
-      container: containerRef.current,
-      // exclude the hidden menu button from children
-      maxVisibleItems: containerRef.current.children.length - 1,
-      onChange: (visible, hidden) => {
-        setHiddenItems(Array.from(containerRef.current.children)?.slice(visible.length - 1));
-      },
-    });
-  }, []);
-  return <div ref={containerRef}>
-    <IconButton kind="ghost" className="breadcrumb-bar-button" label="Icon Description 1"><AiGenerate /></IconButton>
-    <IconButton kind="ghost" className="breadcrumb-bar-button" label="Icon Description 2"><Activity /></IconButton>
-    <IconButton kind="ghost" className="breadcrumb-bar-button" label="Icon Description 3"><Activity /></IconButton>
-    <IconButton kind="ghost" className="breadcrumb-bar-button" label="Icon Description 4"><Activity /></IconButton>
-    <Button>Primary action</Button>
-    <span data-offset data-hidden>
-      <MenuButton
-        menuAlignment="bottom-end"
-        label={'Actions'}
-        size="md"
-      >
-        {[...hiddenItems].reverse().map((item) => (
-          <MenuItem
-            key={item.id}
-            onClick={item.onClick}
-            label={item.textContent}
-            {...item.menuItem}
-          />
-        ))}
-      </MenuButton>
-    </span>
-  </div>
-}
-
 export const Default = (args) => (
   <Tabs>
     <PageHeader.Root>
@@ -202,7 +157,45 @@ export const Default = (args) => (
         pageActionsFlush={args.pageActionsFlush}
         contentActionsFlush={args.contentActionsFlush}
         renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-        contentActions={<CustomActions />}
+        contentActions={
+          <>
+            <IconButton
+              size="sm"
+              kind="ghost"
+              className="breadcrumb-bar-button"
+              label="Icon Description 1"
+            >
+              <AiGenerate />
+            </IconButton>
+            <IconButton
+              size="sm"
+              kind="ghost"
+              className="breadcrumb-bar-button"
+              label="Icon Description 2"
+            >
+              <Activity />
+            </IconButton>
+            <IconButton
+              size="sm"
+              kind="ghost"
+              className="breadcrumb-bar-button"
+              label="Icon Description 3"
+            >
+              <Activity />
+            </IconButton>
+            <IconButton
+              size="sm"
+              kind="ghost"
+              className="breadcrumb-bar-button"
+              label="Icon Description 4"
+            >
+              <Activity />
+            </IconButton>
+            <Button className="breadcrumb-bar-action-button" size="sm">
+              Primary action
+            </Button>
+          </>
+        }
         pageActions={breadcrumbPageActions}
       >
         <Breadcrumb>
@@ -239,13 +232,27 @@ export const Default = (args) => (
       </PageHeader.TabBar>
     </PageHeader.Root>
     <TabPanels>
-      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 1</TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 2</TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 3</TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 4</TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 5</TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 6</TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">Tab Panel 7</TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 1
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 2
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 3
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 4
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 5
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 6
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 7
+      </TabPanel>
     </TabPanels>
   </Tabs>
 );
@@ -532,6 +539,9 @@ export const TabBarWithTabsAndTags = (args) => (
         <Breadcrumb>
           <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
           <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          <PageHeader.TitleBreadcrumb>
+            Virtual Machine DAL
+          </PageHeader.TitleBreadcrumb>
         </Breadcrumb>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content

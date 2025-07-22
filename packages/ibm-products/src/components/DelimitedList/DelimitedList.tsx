@@ -45,7 +45,10 @@ export interface DelimitedListProps extends PropsWithChildren {
  * `DelimitedList` converts an array of items into a single line of
  * comma-separated values.
  */
-export const DelimitedList = React.forwardRef<HTMLDivElement, DelimitedListProps>(
+export const DelimitedList = React.forwardRef<
+  HTMLDivElement,
+  DelimitedListProps
+>(
   (
     {
       // The component props, in alphabetical order (for consistency).

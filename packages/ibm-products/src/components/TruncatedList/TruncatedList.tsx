@@ -80,7 +80,10 @@ export interface TruncatedListProps extends PropsWithChildren {
  * revealed to the user while giving the user the ability to expand
  * and see the entire list.
  */
-export const TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
+export const TruncatedList = React.forwardRef<
+  HTMLDivElement,
+  TruncatedListProps
+>(
   (
     {
       children,

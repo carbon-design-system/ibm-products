@@ -63,7 +63,10 @@ const defaults = {
  * Display a full-page error when the requested page is unavailable to the user.
  * This is typically caused by issues with the requested URL or access permissions.
  */
-export const FullPageError = React.forwardRef<HTMLDivElement, FullPageErrorProps>(
+export const FullPageError = React.forwardRef<
+  HTMLDivElement,
+  FullPageErrorProps
+>(
   (
     {
       // The component props, in alphabetical order (for consistency).

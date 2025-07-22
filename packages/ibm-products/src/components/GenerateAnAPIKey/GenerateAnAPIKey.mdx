@@ -15,6 +15,9 @@ import * as stories from './GenerateAnAPIKey.stories';
 
 ## Example usage
 ```jsx
+import React, { useState } from 'react';
+import { Modal, Button, TextInput } from '@carbon/react';
+
 const App = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);

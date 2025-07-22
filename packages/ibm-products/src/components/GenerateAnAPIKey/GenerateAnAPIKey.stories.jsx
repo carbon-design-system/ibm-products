@@ -6,9 +6,9 @@
  */
 
 import React, { useState } from 'react';
+import { Modal, Button, TextInput } from '@carbon/react';
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './GenerateAnAPIKey.mdx';
-import { Modal, Button, TextInput } from '@carbon/react';
 
 export default {
   title: 'Patterns/Generate an API key',

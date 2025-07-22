@@ -14,7 +14,7 @@ test.describe('Cascade @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'BigNumbers',
-      id: 'experimental-bignumbers--big-numbers',
+      id: 'preview-candidate-bignumbers--big-numbers',
       globals: {
         carbonTheme: 'white',
       },

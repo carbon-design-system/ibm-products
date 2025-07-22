@@ -14,7 +14,7 @@ test.describe('Decorator @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Decorator',
-      id: 'experimental-decorator--default',
+      id: 'preview-decorator--default',
       globals: {
         carbonTheme: 'white',
       },

@@ -71,6 +71,6 @@ const Template = () => {
   );
 };
 
-export const InstantGeneration = Template.bind({});
-InstantGeneration.storyName = 'Instant generation';
-InstantGeneration.args = {};
+export const instantGeneration = Template.bind({});
+instantGeneration.storyName = 'Instant generation';
+instantGeneration.args = {};

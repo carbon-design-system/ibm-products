@@ -60,19 +60,37 @@ test.describe('NotificationsPanel @avt', () => {
       },
     });
     const notificationPanel = await page.locator('[role="dialog"]');
-    await expect(notificationPanel).toBeVisible();
     const notificationTrigger = page.locator(
       'button[aria-label="Open notifications"]'
     );
-    await page.evaluate(() => {
-      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    });
+    await expect(notificationPanel).toBeVisible();
+    await page.locator('body').click({ force: true });
+    await Promise.race([
+      notificationPanel.waitFor({ state: 'hidden', timeout: 100 }),
+      notificationPanel.waitFor({ state: 'detached', timeout: 100 }),
+      page.waitForFunction(
+        (panelSelector) => {
+          const panel = document.querySelector(panelSelector);
+          return !panel || window.getComputedStyle(panel).opacity === '0';
+        },
+        '[role="dialog"]',
+        { timeout: 100 }
+      ),
+    ]);
+    await page.waitForTimeout(150);
     await expect(async () => {
       const isFocused = await notificationTrigger.evaluate(
         (el) => el === document.activeElement
       );
-      expect(isFocused).toBeTruthy();
-    }).toPass({ timeout: 2000 });
+      if (!isFocused) {
+        const activeElement = await page.evaluate(
+          () => document.activeElement?.outerHTML || 'null'
+        );
+        throw new Error(
+          `Expected notifications trigger to be focused, but active element was: ${activeElement}`
+        );
+      }
+    }).toPass({ timeout: 100 });
   });
   test('@avt-notification-panel-doesn-not-focus-return-to-trigger-when-clicked-on-actionable-elements', async ({
     page,
@@ -94,7 +112,19 @@ test.describe('NotificationsPanel @avt', () => {
       exact: true,
     });
     await addNotificationButton.click();
+    await Promise.race([
+      notificationPanel.waitFor({ state: 'hidden', timeout: 100 }),
+      notificationPanel.waitFor({ state: 'detached', timeout: 100 }),
+      page.waitForFunction(
+        (panelSelector) => {
+          const panel = document.querySelector(panelSelector);
+          return !panel || window.getComputedStyle(panel).opacity === '0';
+        },
+        '[role="dialog"]',
+        { timeout: 100 }
+      ),
+    ]);
     await expect(notificationTrigger).not.toBeFocused();
-    await expect(addNotificationButton).toBeFocused({ timeout: 2000 });
+    await expect(addNotificationButton).toBeFocused({ timeout: 100 });
   });
 });

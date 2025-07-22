@@ -334,7 +334,7 @@ export const WithoutTitle = {
 };
 
 const meta = {
-  title: 'Experimental/SidePanel',
+  title: 'Components/SidePanel',
 };
 
 export default meta;

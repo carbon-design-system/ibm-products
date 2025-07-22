@@ -87,7 +87,7 @@ export const Error404 = {
 };
 
 const meta = {
-  title: 'Experimental/FullPageError',
+  title: 'Components/FullPageError',
   component: 'c4p-full-page-error',
 };
 

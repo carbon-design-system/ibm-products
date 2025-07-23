@@ -20,6 +20,7 @@ export interface offsetValues {
   breadcrumbOffset?: number;
   headerOffset?: number;
   fullyCollapsed?: boolean;
+  titleClipped?: boolean;
   root?: CDSPageHeader | null;
 }
 
@@ -40,6 +41,10 @@ class CDSPageHeader extends LitElement {
     const contentElement = this.querySelector(`${prefix}-page-header-content`);
 
     if (contentElement) {
+      const titleWrapper = contentElement?.shadowRoot?.querySelector(
+        `.${prefix}--page-header__content__title-container`
+      );
+      console.log(titleWrapper);
       this.resizeObserver = new ResizeObserver((entries) => {
         const contentElEntry = entries[0];
         const contentHeight = contentElEntry.contentRect.height;
@@ -91,8 +96,32 @@ class CDSPageHeader extends LitElement {
         threshold: 0.1,
       }
     );
+
+    const titleObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            this.context = {
+              ...this.context,
+              titleClipped: true,
+            };
+          } else {
+            this.context = {
+              ...this.context,
+              titleClipped: false,
+            };
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+        threshold: 0.95,
+      }
+    );
     if (contentElement) {
       contentObserver.observe(contentElement);
+      titleObserver.observe(contentElement);
     }
   }
 

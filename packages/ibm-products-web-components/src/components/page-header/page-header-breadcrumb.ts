@@ -12,7 +12,10 @@ import { classMap } from 'lit/directives/class-map.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import { property } from 'lit/decorators.js';
 import styles from './page-header.scss?lit';
+import { consume } from '@lit/context';
+import { pageHeaderContext } from './context';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
+import { offsetValues } from './page-header';
 
 /**
  * Page header Breadcrumb Bar.
@@ -45,11 +48,22 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   @property({ attribute: 'content-actions-flush', type: Boolean })
   contentActionsFlush = false;
 
+  @consume({ context: pageHeaderContext, subscribe: true })
+  context;
+
   render() {
-    const { withinGrid } = this;
+    const { withinGrid, context } = this;
+    const { titleClipped } = context;
     const gridClasses = classMap({
       [`${carbonPrefix}--css-grid`]: !withinGrid,
       [`${carbonPrefix}--subgrid ${carbonPrefix}--subgrid--wide`]: withinGrid,
+    });
+
+    const contentActionClasses = classMap({
+      [`${prefix}--page-header__breadcrumb__content-actions-with-global-actions`]:
+        true,
+      [`${prefix}--page-header__breadcrumb__content-actions-with-global-actions--show`]:
+        titleClipped,
     });
 
     return html`
@@ -63,7 +77,9 @@ class CDSPageHeaderBreadcrumb extends LitElement {
               <slot></slot>
             </div>
             <div class="${prefix}--page-header__breadcrumb__actions">
-              <slot name="content-actions"></slot>
+              <div class="${contentActionClasses}">
+                <slot name="content-actions"></slot>
+              </div>
               <slot name="page-actions"></slot>
             </div>
           </div>

@@ -532,7 +532,9 @@ export const TearsheetShell = React.forwardRef(
                 neverRender={influencerPosition === 'right'}
                 element={SectionLevel3}
               >
-                <Wrap element={Layer}>{influencer}</Wrap>
+                <Wrap element={Layer} className={`${bc}__layer`}>
+                  {influencer}
+                </Wrap>
               </Wrap>
               <Wrap className={`${bc}__right`}>
                 {/* Main area */}
@@ -544,7 +546,13 @@ export const TearsheetShell = React.forwardRef(
                     }
                     element={SectionLevel3}
                   >
-                    <Wrap element={!wide ? Layer : undefined}>{children}</Wrap>
+                    {wide ? (
+                      children
+                    ) : (
+                      <Wrap element={Layer} className={`${bc}__layer`}>
+                        {children}
+                      </Wrap>
+                    )}
                   </Wrap>
                   {/* Right influencer */}
                   <Wrap
@@ -555,7 +563,9 @@ export const TearsheetShell = React.forwardRef(
                     neverRender={influencerPosition !== 'right'}
                     element={SectionLevel3}
                   >
-                    <Wrap element={Layer}>{influencer}</Wrap>
+                    <Wrap element={Layer} className={`${bc}__layer`}>
+                      {influencer}
+                    </Wrap>
                   </Wrap>
                 </Wrap>
                 {includeActions && (

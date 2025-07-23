@@ -177,6 +177,8 @@ export const Default = {
             </c4p-page-header-content-text>
           </c4p-page-header-content>
           <c4p-page-header-tabs>
+            <c4p-page-header-scroller slot="scroller">
+            </c4p-page-header-scroller>
             <cds-tabs value="tab-1">
               <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
                 >Tab 1</cds-tab
@@ -521,6 +523,9 @@ export const TabBarWithTabsAndTags = {
             <cds-breadcrumb-item>
               <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
             </cds-breadcrumb-item>
+            <c4p-page-header-title-breadcrumb>
+              Virtual Machine DAL
+            </c4p-page-header-title-breadcrumb>
           </cds-breadcrumb>
           <cds-icon-button
             slot="page-actions"

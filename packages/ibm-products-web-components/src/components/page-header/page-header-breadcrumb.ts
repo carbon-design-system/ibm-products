@@ -52,7 +52,7 @@ class CDSPageHeaderBreadcrumb extends LitElement {
 
   render() {
     const { withinGrid, context } = this;
-    const { titleClipped } = context;
+    const { titleClipped } = context ?? {};
     const gridClasses = classMap({
       [`${carbonPrefix}--css-grid`]: !withinGrid,
       [`${carbonPrefix}--subgrid ${carbonPrefix}--subgrid--wide`]: withinGrid,

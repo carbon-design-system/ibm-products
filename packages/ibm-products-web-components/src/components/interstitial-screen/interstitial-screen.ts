@@ -33,6 +33,12 @@ export type disableButtonConfigType = {
 /**
  * interstitial-screen main component
  * @element c4p-interstitial-screen
+ * @fires c4p-interstitial-opened -  The custom event triggered after loading the component.
+ * Its event.detail will provide you with carousal api methods for step navigation and method to disable any action button
+ * * @fires c4p-interstitial-beingclosed - The name of the custom event fired before interstitial is being closed upon a user gesture.
+ * Cancellation of this event stops the user-initiated action of closing the interstitial.
+ * @fires c4p-interstitial-closed - The name of the custom event fired after this tearsheet is closed upon a user gesture.
+
  */
 
 @customElement(`${prefix}-interstitial-screen`)
@@ -44,7 +50,7 @@ class CDSInterstitialScreen extends SignalWatcher(
    * experience, else it is shown as a modal by default.
    */
 
-  @property({ type: Boolean, reflect: true, attribute: 'full-screen' })
+  @property({ type: Boolean, reflect: true, attribute: 'fullscreen' })
   isFullScreen: boolean = false;
   /**
    * Specifies whether the component is currently open.
@@ -54,7 +60,9 @@ class CDSInterstitialScreen extends SignalWatcher(
 
   @state()
   stepDetails: Array<{ stepTitle: string; name?: string }> = [];
-
+  /**
+   * @ignore
+   */
   @query('cds-modal-body') modalBody!: HTMLElement;
   private header: Element | null = null;
   private body: Element | null = null;
@@ -64,7 +72,7 @@ class CDSInterstitialScreen extends SignalWatcher(
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener(`${prefix}-interstitial-closed`, this._handleClose);
+    this.addEventListener(`${prefix}-request-close`, this._handleClose);
   }
   firstUpdated() {
     // This has to do since cds-modal does not accept cds-body inside a slotted children.It will append it explicitly append cds body
@@ -121,8 +129,32 @@ class CDSInterstitialScreen extends SignalWatcher(
     updateInterstitialDetailsSignal({ name: 'disableActions', detail: config });
   };
 
-  _handleClose() {
+  _handleClose(e) {
     this.open = false;
+    e.stopPropagation();
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        triggeredBy: e.detail.triggeredBy,
+      },
+    };
+    if (
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSInterstitialScreen).eventBeforeClose,
+          init
+        )
+      )
+    ) {
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSInterstitialScreen).eventClose,
+          init
+        )
+      );
+    }
   }
 
   //template methods
@@ -163,6 +195,21 @@ class CDSInterstitialScreen extends SignalWatcher(
 
   static get eventOnInterstitialOpened() {
     return `${prefix}-interstitial-opened`;
+  }
+  /**
+   
+   * The name of the custom event fired before interstitial is being closed upon a user gesture.
+   * Cancellation of this event stops the user-initiated action of closing the interstitial.
+   */
+  static get eventBeforeClose() {
+    return `${prefix}-interstitial-beingclosed`;
+  }
+
+  /**
+   * The name of the custom event fired after this tearsheet is closed upon a user gesture.
+   */
+  static get eventClose() {
+    return `${prefix}-interstitial-closed`;
   }
 }
 

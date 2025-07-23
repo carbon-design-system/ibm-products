@@ -81,23 +81,15 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
         triggeredBy,
       },
     };
-    if (
-      this.dispatchEvent(
-        new CustomEvent(
-          (
-            this.constructor as typeof CDSInterstitialScreenHeader
-          ).eventBeforeClose,
-          init
-        )
+
+    this.dispatchEvent(
+      new CustomEvent(
+        (
+          this.constructor as typeof CDSInterstitialScreenHeader
+        ).eventRequestClose,
+        init
       )
-    ) {
-      this.dispatchEvent(
-        new CustomEvent(
-          (this.constructor as typeof CDSInterstitialScreenHeader).eventClose,
-          init
-        )
-      );
-    }
+    );
   }
 
   getHeaderContent() {
@@ -157,19 +149,8 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
 
   static styles = styles;
 
-  /**
-   * The name of the custom event fired before this tearsheet is being closed upon a user gesture.
-   * Cancellation of this event stops the user-initiated action of closing this tearsheet.
-   */
-  static get eventBeforeClose() {
-    return `${prefix}-interstitial-beingclosed`;
-  }
-
-  /**
-   * The name of the custom event fired after this tearsheet is closed upon a user gesture.
-   */
-  static get eventClose() {
-    return `${prefix}-interstitial-closed`;
+  static get eventRequestClose() {
+    return `${prefix}-request-close`;
   }
 }
 export default CDSInterstitialScreenHeader;

@@ -26,6 +26,8 @@ const blockClass = `${prefix}--interstitial-screen`;
 /**
  * interstitial-screen-body for body section
  * @element c4p-interstitial-screen-body
+ * @fires c4p-on-before-step-change - The name of the custom event fired at the start of  the step change.
+ * @fires c4p-on-after-step-change -  The name of the custom event fired at the end of  the step change.
  */
 @customElement(`${prefix}-interstitial-screen-body`)
 class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
@@ -57,6 +59,7 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   private _initCarousel() {
     this.carouselAPI = initCarousel(this.carouselElement.value as HTMLElement, {
       onViewChangeEnd: this.onViewChangeEnd,
+      onViewChangeStart: this.onViewChangeStart,
       excludeSwipeSupport: true,
     });
     interstitialDetailsSignal.set({
@@ -65,6 +68,25 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
     });
   }
 
+  private onViewChangeStart = ({ currentIndex, lastIndex, totalViews }) => {
+    this.dispatchEvent(
+      new CustomEvent(
+        (
+          this.constructor as typeof CDSInterstitialScreenBody
+        ).eventOnViewChangeStart,
+        {
+          bubbles: true,
+          cancelable: true,
+          composed: true,
+          detail: {
+            currentStep: currentIndex,
+            totalStepCount: totalViews,
+            lastStep: lastIndex,
+          },
+        }
+      )
+    );
+  };
   private onViewChangeEnd = ({ currentIndex, lastIndex, totalViews }) => {
     updateInterstitialDetailsSignal({
       name: 'currentStep',
@@ -112,10 +134,16 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   static styles = styles;
 
   /**
-   * The name of the custom event fired just after the action.
+   * The name of the custom event fired at the start of  the step change.
+   */
+  static get eventOnViewChangeStart() {
+    return `${prefix}-on-before-step-change`;
+  }
+  /**
+   * The name of the custom event fired at the end of  the step change.
    */
   static get eventOnViewChangeEnd() {
-    return `${prefix}-on-after-action`;
+    return `${prefix}-on-after-step-change`;
   }
 }
 

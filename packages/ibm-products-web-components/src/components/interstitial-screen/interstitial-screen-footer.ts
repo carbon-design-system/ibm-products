@@ -27,6 +27,10 @@ export type ActionType = 'close' | 'start' | 'skip' | 'back' | 'next';
 /**
  * interstitial-screen-footer for footer section
  * @element c4p-interstitial-screen-footer
+ * @fires c4p-on-action - The name of the custom event fired just before the action. You can use this event to perform any async/sync validation.
+ * if you pass async-action = true, the component will wait for an external listener (e.g., a form validation or confirmation modal) to resolve the proceed()
+ *  callback before continuing. When asyncAction is true, you must listen for the eventOnBeforeAction event and call the proceed() function
+ *  (either synchronously or with a promise) to allow navigation.
  */
 @customElement(`${prefix}-interstitial-screen-footer`)
 class CDSInterstitialScreenFooter extends SignalWatcher(
@@ -77,23 +81,15 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
         triggeredBy,
       },
     };
-    if (
-      this.dispatchEvent(
-        new CustomEvent(
-          (
-            this.constructor as typeof CDSInterstitialScreenFooter
-          ).eventBeforeClose,
-          init
-        )
+
+    this.dispatchEvent(
+      new CustomEvent(
+        (
+          this.constructor as typeof CDSInterstitialScreenFooter
+        ).eventRequestClose,
+        init
       )
-    ) {
-      this.dispatchEvent(
-        new CustomEvent(
-          (this.constructor as typeof CDSInterstitialScreenFooter).eventClose,
-          init
-        )
-      );
-    }
+    );
   }
 
   private handleSkip = () => this.handleAction('skip');
@@ -250,26 +246,15 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
 
   static styles = styles;
 
-  /**
-   * The name of the custom event fired before this tearsheet is being closed upon a user gesture.
-   * Cancellation of this event stops the user-initiated action of closing this tearsheet.
-   */
-  static get eventBeforeClose() {
-    return `${prefix}-interstitial-beingclosed`;
-  }
-
-  /**
-   * The name of the custom event fired after this tearsheet is closed upon a user gesture.
-   */
-  static get eventClose() {
-    return `${prefix}-interstitial-closed`;
+  static get eventRequestClose() {
+    return `${prefix}-request-close`;
   }
 
   /**
    * The name of the custom event fired just before the action.
    */
   static get eventOnBeforeAction() {
-    return `${prefix}-on-before-action`;
+    return `${prefix}-on-action`;
   }
 }
 export default CDSInterstitialScreenFooter;

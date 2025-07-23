@@ -34,7 +34,7 @@ const unwantedProperties = new Set([
   'hasUpdated',
   'updateComplete',
 
-  // Possibly inherited lifecycle hooks (optional)
+  // Possibly inherited lifecycle hooks
   'connectedCallback',
   'disconnectedCallback',
   'shouldUpdate',

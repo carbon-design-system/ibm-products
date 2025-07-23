@@ -17,15 +17,19 @@ import Checkmark from '@carbon/web-components/es/icons/checkmark/16.js';
 import { prefix } from '../../globals/settings';
 
 const argTypes = {
-  isFullScreen: {
+  fullscreen: {
     description:
-      'Specifies whether the component is shown as a full-screen experience, else it is shown as a modal by default.',
+      'Specifies whether the component is shown as a fullscreen experience, else it is shown as a modal by default.',
     control: 'boolean',
   },
   open: {
     description: 'Specifies whether the component is currently open.',
     control: 'boolean',
   },
+};
+const args = {
+  open: false,
+  fullscreen: false,
 };
 
 const getMultipleContent = () => {
@@ -186,8 +190,8 @@ export const Modal = {
       </div>
 
       <c4p-interstitial-screen
-        ?full-screen=${false}
-        ?open=${true}
+        ?fullscreen=${args.fullscreen}
+        ?open=${args.open}
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
           disableActionButton = e.detail.setDisableActionButtons;
@@ -210,7 +214,7 @@ export const Modal = {
         </c4p-interstitial-screen-body>
 
         <c4p-interstitial-screen-footer
-          @c4p-on-before-action="${onAction}"
+          @c4p-on-action="${onAction}"
         ></c4p-interstitial-screen-footer>
       </c4p-interstitial-screen>
     `;
@@ -227,7 +231,7 @@ export const ModalWithMultipleSteps = {
         >
       </div>
       <c4p-interstitial-screen
-        ?full-screen=${false}
+        ?fullscreen=${false}
         ?open=${true}
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
@@ -246,7 +250,7 @@ export const ModalWithMultipleSteps = {
           ${getMultipleContent()}
         </c4p-interstitial-screen-body>
         <c4p-interstitial-screen-footer
-          @c4p-on-before-action="${onAction}"
+          @c4p-on-action="${onAction}"
         ></c4p-interstitial-screen-footer>
       </c4p-interstitial-screen>
     `;
@@ -254,7 +258,7 @@ export const ModalWithMultipleSteps = {
 };
 export const ModalWithAsynchronousAction = {
   render: (args) => {
-    const { open, size, title, titleId } = args;
+    const { open } = args;
     return html`
       <div id="page-content-selector">
         <cds-button @click="${toggleButton}"
@@ -262,7 +266,7 @@ export const ModalWithAsynchronousAction = {
         >
       </div>
       <c4p-interstitial-screen
-        ?full-screen=${false}
+        ?fullscreen=${false}
         ?open=${true}
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
@@ -277,7 +281,7 @@ export const ModalWithAsynchronousAction = {
         </c4p-interstitial-screen-body>
         <c4p-interstitial-screen-footer
           ?async-action=${true}
-          @c4p-on-before-action="${onAction}"
+          @c4p-on-action="${onAction}"
         ></c4p-interstitial-screen-footer>
       </c4p-interstitial-screen>
     `;
@@ -331,7 +335,7 @@ export const WithCustomActionButtons = {
             >
           </div>
           <c4p-interstitial-screen
-            ?full-screen=${false}
+            ?fullscreen=${false}
             ?open=${true}
             @c4p-interstitial-opened=${(e) => {
               if (!initialized) {
@@ -437,7 +441,7 @@ export const FullScreen = {
         >
       </div>
       <c4p-interstitial-screen
-        ?full-screen=${true}
+        ?fullscreen=${true}
         ?open=${true}
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
@@ -455,7 +459,7 @@ export const FullScreen = {
         </c4p-interstitial-screen-body>
 
         <c4p-interstitial-screen-footer
-          @c4p-on-before-action="${onAction}"
+          @c4p-on-action="${onAction}"
         ></c4p-interstitial-screen-footer>
       </c4p-interstitial-screen>
     `;
@@ -471,7 +475,7 @@ export const FullScreenWithMultipleSteps = {
         >
       </div>
       <c4p-interstitial-screen
-        ?full-screen=${true}
+        ?fullscreen=${true}
         ?open=${true}
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
@@ -485,7 +489,7 @@ export const FullScreenWithMultipleSteps = {
           ${getMultipleContent()}
         </c4p-interstitial-screen-body>
         <c4p-interstitial-screen-footer
-          @c4p-on-before-action="${onAction}"
+          @c4p-on-action="${onAction}"
         ></c4p-interstitial-screen-footer>
       </c4p-interstitial-screen>
     `;

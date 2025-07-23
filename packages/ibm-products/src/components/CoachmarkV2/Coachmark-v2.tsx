@@ -92,7 +92,7 @@ export const CoachmarkV2Context = createContext<CoachmarkV2ContextType>({
  * within the UI that may not be intuitive but are important for the
  * user to gain understanding of the product's main value and discover new use cases.
  */
-export let CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
+export const CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
   (props, ref) => {
     const {
       children,
@@ -143,7 +143,6 @@ export let CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
             blockClass, // Apply the block class to the main HTML element
             className // Apply any supplied class names to the main HTML element.
           )}
-          role="main"
           aria-label={ariaLabel}
           ref={setRef}
           {...getDevtoolsProps(componentName)}
@@ -156,8 +155,6 @@ export let CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
 ) as CoachmarkV2Component;
 CoachmarkV2.Trigger = CoachmarkTrigger;
 CoachmarkV2.Content = CoachmarkContent;
-// Return a placeholder if not released and not enabled by feature flag
-CoachmarkV2 = pkg.checkComponentEnabled(CoachmarkV2, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

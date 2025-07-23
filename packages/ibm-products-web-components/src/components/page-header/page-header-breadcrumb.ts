@@ -15,7 +15,6 @@ import styles from './page-header.scss?lit';
 import { consume } from '@lit/context';
 import { pageHeaderContext } from './context';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import { offsetValues } from './page-header';
 
 /**
  * Page header Breadcrumb Bar.

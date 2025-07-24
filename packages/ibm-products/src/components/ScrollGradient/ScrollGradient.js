@@ -168,12 +168,10 @@ export let ScrollGradient = React.forwardRef(
         role="presentation"
         {...getDevtoolsProps(componentName)}
       >
-        {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
         <div
           onScroll={onScroll}
           ref={setRefs}
           className={cx(`${blockClass}__content`, scrollElementClassName)}
-          tabIndex={0}
         >
           <span ref={intersectionStartRef} data-start-vertical />
           <span ref={intersectionLeftRef} data-start-horizontal />

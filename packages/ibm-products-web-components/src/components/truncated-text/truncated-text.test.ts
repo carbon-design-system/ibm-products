@@ -14,7 +14,7 @@ import './index';
 const defaultProps = {
   lines: 2,
   text: 'Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page.',
-  with: '',
+  type: '',
 };
 
 const template = (props = defaultProps, templateWidth?: number) => html`
@@ -22,7 +22,7 @@ const template = (props = defaultProps, templateWidth?: number) => html`
     <c4p-truncated-text
       value=${props.text}
       lines=${props.lines}
-      with=${props.with}
+      type=${props.type}
     ></c4p-truncated-text>
   </div>
 `;
@@ -36,7 +36,7 @@ describe('c4p-truncated-text', () => {
 
   it('renders a tooltip when text is truncated with tooltip', async () => {
     const wrapper = await fixture(
-      template({ ...defaultProps, with: 'tooltip' }, 200)
+      template({ ...defaultProps, type: 'tooltip' }, 200)
     );
 
     const el = wrapper.querySelector(
@@ -48,7 +48,7 @@ describe('c4p-truncated-text', () => {
 
   it('does not render a tooltip if the text fits', async () => {
     const wrapper = await fixture(
-      template({ ...defaultProps, with: 'tooltip' }, 9000)
+      template({ ...defaultProps, type: 'tooltip' }, 9000)
     );
 
     const el = wrapper.querySelector(
@@ -62,7 +62,7 @@ describe('c4p-truncated-text', () => {
   it('tests lines prop/attribute with tooltip', async () => {
     for (let lines = 1; lines <= 4; lines++) {
       const wrapper = await fixture(
-        template({ ...defaultProps, lines, with: 'tooltip' }, 600)
+        template({ ...defaultProps, lines, type: 'tooltip' }, 600)
       );
 
       const el = wrapper.querySelector(
@@ -81,7 +81,7 @@ describe('c4p-truncated-text', () => {
 
   it('renders a expandable button when text is truncated with expand', async () => {
     const wrapper = await fixture(
-      template({ ...defaultProps, lines: 2, with: 'expand' }, 400)
+      template({ ...defaultProps, lines: 2, type: 'expand' }, 400)
     );
     const el = wrapper.querySelector(
       `${prefix}-truncated-text`

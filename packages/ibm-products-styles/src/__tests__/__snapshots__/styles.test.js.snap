@@ -6091,11 +6091,13 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--card {
+  border: 1px solid transparent;
   background-color: var(--cds-layer-01, #f4f4f4);
   color: var(--cds-text-primary, #161616);
 }
 
 .c4p--card__clickable {
+  border-color: var(--cds-border-tile-01, #c6c6c6);
   cursor: pointer;
   transition: background-color 110ms;
 }

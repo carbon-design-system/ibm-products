@@ -216,7 +216,7 @@ const ConditionBuilderContent = ({
       <div className={`${blockClass}__content-container`} {...wrapperRole}>
         {rootState &&
           rootState?.groups?.map((eachGroup, groupIndex) => (
-            <div key={eachGroup.id} className={`${blockClass}__group-wrapper `}>
+            <div key={eachGroup.id} className={`${blockClass}__group-wrapper`}>
               <ConditionGroupBuilder
                 className={`${blockClass}__group`}
                 aria={{

@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.30.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.30.0`
 ### Housekeeping :house:
 - chore: remove redundant upgrade scripts (#7774)
 

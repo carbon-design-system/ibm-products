@@ -35,6 +35,7 @@ import InterstitialScreenBody, {
 import InterstitialScreenFooter, {
   InterstitialScreenFooterProps,
 } from './InterstitialScreenFooter';
+import { InterstitialScreenContext } from './context';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 export const blockClass = `${pkg.prefix}--interstitial-screen`;
@@ -102,7 +103,7 @@ export type disableButtonConfigType = {
   next?: boolean;
   start?: boolean;
 };
-interface InterstitialScreenContextType {
+export interface InterstitialScreenContextType {
   bodyChildrenData?: ReactNode;
   setBodyChildrenData?: (value: ReactNode) => void;
   isFullScreen?: boolean;
@@ -118,8 +119,6 @@ interface InterstitialScreenContextType {
   setDisableButtonConfig?: (value: disableButtonConfigType) => void;
 }
 
-export const InterstitialScreenContext =
-  createContext<InterstitialScreenContextType>({ progStep: 0, stepCount: 0 });
 /**
  * InterstitialScreen can be a full page or an overlay, and are
  * shown on the first time a user accesses a new experience

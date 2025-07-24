@@ -14,11 +14,8 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  blockClass,
-  disableButtonConfigType,
-  InterstitialScreenContext,
-} from './InterstitialScreen';
+import { blockClass, disableButtonConfigType } from './InterstitialScreen';
+import { InterstitialScreenContext } from './context';
 import { ModalBody } from '@carbon/react';
 
 import { Carousel } from '../Carousel';

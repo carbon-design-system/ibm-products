@@ -12,8 +12,8 @@ import {
   ActionType,
   blockClass,
   disableButtonConfigType,
-  InterstitialScreenContext,
 } from './InterstitialScreen';
+import { InterstitialScreenContext } from './context';
 import { Button, InlineLoading, ModalFooter } from '@carbon/react';
 import { clamp } from '../../global/js/utils/clamp';
 import { ArrowRight } from '@carbon/react/icons';

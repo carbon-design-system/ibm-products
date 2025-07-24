@@ -12,7 +12,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blockClass, InterstitialScreenContext } from './InterstitialScreen';
+import { blockClass } from './InterstitialScreen';
+import { InterstitialScreenContext } from './context';
 import { useId } from '../../global/js/utils/useId';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 

@@ -16,7 +16,7 @@ import DocsPage from './CreateTearsheet.docs-page';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 import { MultiStepWithStepInErrorState } from './preview-components/MultiStepWithStepInErrorState';
-import { StringFormatter } from '../StringFormatter/StringFormatter.js';
+import { StringFormatter } from '../StringFormatter/StringFormatter';
 
 export default {
   title: 'Patterns/Prebuilt patterns/Create flows/CreateTearsheet',

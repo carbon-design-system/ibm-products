@@ -7,14 +7,16 @@
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
-import { getAutoTrack } from '../../../scripts/get-auto-track-script';
+import { transformWithOxc } from 'vite';
+import react from '@vitejs/plugin-react';
+// import { getAutoTrack } from '../../../scripts/get-auto-track-script';
 
 const require = createRequire(import.meta.url);
 
 const stories = [
   '../src/**/!(*.internal).stories.*',
   '../../core/src/**/!(*.internal).stories.*',
-  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
+  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.*',
 ];
 
 export default {
@@ -57,7 +59,8 @@ export default {
       ${head}
       ${
         process.env.NODE_ENV !== 'development'
-          ? getAutoTrack('ibm-products-react-storybook')
+          ? // ? getAutoTrack('ibm-products-react-storybook')
+            ''
           : ''
       }
     `;
@@ -68,13 +71,26 @@ export default {
     const { mergeConfig } = await import('vite');
 
     return mergeConfig(config, {
+      // plugins: [
+      //   react(),
+      //   {
+      //     name: 'treat-js-files-as-jsx',
+      //     async transform(code, id) {
+      //       if (!id.match(/src\/.*\.js$/)) return null; // Adjust path as needed
+      //       return transformWithOxc(code, id, {
+      //         loader: 'jsx',
+      //         jsx: 'classic', // Or 'classic' if you prefer
+      //       });
+      //     },
+      //   },
+      // ],
       esbuild: {
-        include: /\.[jt]sx?$/,
+        include: [/\.[jt]sx?$/, /\/.*\.js$/],
         exclude: [],
         loader: 'tsx',
       },
       optimizeDeps: {
-        esbuildOptions: {
+        rollupOptions: {
           loader: {
             '.js': 'jsx',
           },

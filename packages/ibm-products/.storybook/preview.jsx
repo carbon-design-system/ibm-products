@@ -7,12 +7,12 @@
 
 import React, { useEffect } from 'react';
 import { white, g10, g90, g100 } from '@carbon/themes';
-import '../../ibm-products/src/feature-flags';
+import '../src/feature-flags';
 
-import { pkg } from '../../ibm-products/src/settings';
-import theme from '../.storybook/theme';
+import { pkg } from '../src/settings';
+import theme from './theme';
 import index from './index.scss?inline';
-import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
+import { StoryDocsPage } from '../src/global/js/utils/StoryDocsPage';
 
 // Enable all components, whether released or not, for storybook purposes
 pkg._silenceWarnings(true);

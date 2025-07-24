@@ -55,6 +55,7 @@ const SimpleHeader = ({
     <header className={cx(blockClass, className)} {...rest}>
       {breadcrumbs?.length > 0 && (
         <BreadcrumbWithOverflow
+          label=""
           noTrailingSlash={noTrailingSlash}
           className={cx(`${blockClass}__breadcrumbs`)}
           breadcrumbs={breadcrumbs}

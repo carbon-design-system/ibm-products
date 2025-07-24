@@ -16,7 +16,7 @@ import {
   FormGroup,
 } from '@carbon/react';
 import { pkg } from '../../settings';
-import { StringFormatter } from '../StringFormatter/StringFormatter.js';
+import { StringFormatter } from '../StringFormatter/StringFormatter';
 import { CreateTearsheetNarrow } from '.';
 import styles from './_storybook-styles.scss?inline';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';

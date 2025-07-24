@@ -13,7 +13,6 @@ import {
 import React, {
   ReactNode,
   RefObject,
-  createContext,
   useCallback,
   useEffect,
   useRef,
@@ -35,22 +34,9 @@ import InterstitialScreenBody, {
 import InterstitialScreenFooter, {
   InterstitialScreenFooterProps,
 } from './InterstitialScreenFooter';
-import { InterstitialScreenContext } from './context';
+import { blockClass, InterstitialScreenContext } from './context';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
-export const blockClass = `${pkg.prefix}--interstitial-screen`;
 const componentName = 'InterstitialScreen';
-
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
-
-// Default values can be included here and then assigned to the prop params,
-// e.g. prop = defaults.prop,
-// This gathers default values together neatly and ensures non-primitive
-// values are initialized early to avoid react making unnecessary re-renders.
-// Note that default values are not required for props that are 'required',
-// nor for props where the component can apply undefined values reasonably.
-// Default values should be provided when the component needs to make a choice
-// or assumption when a prop is not supplied.
 
 export type ActionType = 'close' | 'start' | 'skip' | 'back' | 'next';
 export interface InterstitialScreenProps {

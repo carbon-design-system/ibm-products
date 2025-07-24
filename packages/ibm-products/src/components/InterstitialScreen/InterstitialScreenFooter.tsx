@@ -8,12 +8,8 @@ import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import {
-  ActionType,
-  blockClass,
-  disableButtonConfigType,
-} from './InterstitialScreen';
-import { InterstitialScreenContext } from './context';
+import { ActionType, disableButtonConfigType } from './InterstitialScreen';
+import { InterstitialScreenContext, blockClass } from './context';
 import { Button, InlineLoading, ModalFooter } from '@carbon/react';
 import { clamp } from '../../global/js/utils/clamp';
 import { ArrowRight } from '@carbon/react/icons';

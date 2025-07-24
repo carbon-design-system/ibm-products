@@ -3,7 +3,9 @@
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- */ import {
+ */
+
+import {
   ModalHeader,
   ProgressIndicator,
   ProgressStep,
@@ -12,8 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blockClass } from './InterstitialScreen';
-import { InterstitialScreenContext } from './context';
+import { InterstitialScreenContext, blockClass } from './context';
 import { useId } from '../../global/js/utils/useId';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 

@@ -1,0 +1,49 @@
+import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+
+import * as CoachmarkStories from './Coachmark-v2.stories';
+import { CoachmarkV2 } from './Coachmark-v2';
+
+<Meta title="Coachmark" component={CoachmarkV2} />
+
+# Coachmark
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [About Onboarding](#about-onboarding)
+- [Note on theming](#note-on-theming)
+- [Overview](#overview)
+- [Tooltip example usage](#tooltip-example-usage)
+- [Tooltip code sample](#tooltip-code-sample)
+- [Component API](#component-api)
+
+## Overview
+
+[Coachmarks](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage)
+are just-in-time messages used to draw a user’s attention to a particular spot,
+and explain new functionality or concepts they might not otherwise notice or
+understand.
+
+**Note:**
+
+- The target prop should always be either a CoachmarkBeacon or a
+  CoachmarkButton.
+
+## About Onboarding
+
+[Onboarding](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/onboarding/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Tooltip example usage
+
+<Canvas className="coachmarkExample" withSource="none">
+    <Story of={CoachmarkStories.Tooltip} />
+</Canvas>
+
+## Component API
+
+<Controls />

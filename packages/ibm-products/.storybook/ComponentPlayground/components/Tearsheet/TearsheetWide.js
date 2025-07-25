@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Tearsheet } from '../../../../../ibm-products/src';
+import { Tearsheet } from '../../../../src';
 import { Form, FormGroup, TextInput } from '@carbon/react';
 
 const TearsheetWide = (props) => {

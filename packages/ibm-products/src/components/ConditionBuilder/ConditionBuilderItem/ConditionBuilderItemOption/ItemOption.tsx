@@ -41,7 +41,7 @@ export const ItemOption = ({
     'clearSearchText',
   ]);
   const { conditionBuilderRef } = useContext(ConditionBuilderContext);
-  const allOptions = config.options;
+  const allOptions = config?.options;
   const [searchValue, setSearchValue] = useState('');
 
   const selection = conditionState.value;
@@ -129,7 +129,7 @@ export const ItemOption = ({
               <div className={`${blockClass}__item-option__option-content`}>
                 <span className={`${blockClass}__item-option__option-label`}>
                   {Icon && <Icon />}
-                  {config.isStatement
+                  {config?.isStatement
                     ? getStatementContent(option)
                     : option.label}
                 </span>

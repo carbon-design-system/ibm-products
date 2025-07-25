@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.20.0-rc.0`
+## `@carbon/ibm-products-web-components@0.20.0`
 ### Features :rocket:
 - feat: add various options for description (#7708)
 - feat(storybook): use vite v7 (#7745)

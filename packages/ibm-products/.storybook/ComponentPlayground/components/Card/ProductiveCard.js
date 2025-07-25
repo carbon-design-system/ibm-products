@@ -8,9 +8,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { ProductiveCard as CCProductiveCard } from '../../../../../ibm-products/src';
+import { ProductiveCard as CCProductiveCard } from '../../../../src';
 import { TrashCan, Edit } from '@carbon/react/icons';
-import { StatusIcon } from '../../../../../ibm-products/src';
+import { StatusIcon } from '../../../../src';
 import { Column, Grid } from '@carbon/react';
 
 const ProductiveCard = (props) => {

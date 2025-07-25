@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.71.0-rc.0`
+## `@carbon/ibm-products@2.71.0`
 ### Features :rocket:
 - feat: add various options for description (#7708)
 - feat(storybook): use vite v7 (#7745)
@@ -8,6 +8,7 @@
 - feat(PageHeader): new experimental PageHeader component (#7733)
 
 ### Bug fixes :bug:
+- fix(PageHeader): export as preview (#7872)
 - fix: percy (#7812)
 - fix(coachmarkstack): align layers (#7762)
 - fix: condition builder various issues fixes related to popover close and focus (#7748)

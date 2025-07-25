@@ -15,10 +15,10 @@ import React, {
 import PropTypes from 'prop-types';
 
 import {
+  InterstitialScreenContext,
   blockClass,
   disableButtonConfigType,
-  InterstitialScreenContext,
-} from './InterstitialScreen';
+} from './context';
 import { ModalBody } from '@carbon/react';
 
 import { Carousel } from '../Carousel';

@@ -13,7 +13,7 @@ import cx from 'classnames';
 import { SelectableTag } from '@carbon/react';
 import { Checkmark } from '@carbon/react/icons';
 import { pkg } from '../../../../settings';
-import { disableButtonConfigType } from '../../InterstitialScreen';
+import { disableButtonConfigType } from '../../context';
 import './_interstitial-screen-view-module.scss';
 
 // Carbon and package components we use.

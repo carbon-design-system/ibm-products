@@ -7,7 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { ElementType, ReactNode } from 'react';
-import { EmptyStateV2 } from '.';
+import { EmptyStateV2 } from './EmptyStateV2';
 
 // Other standard imports.
 import PropTypes from 'prop-types';

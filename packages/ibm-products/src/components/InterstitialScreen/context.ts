@@ -5,9 +5,32 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { createContext } from 'react';
-import { InterstitialScreenContextType } from './InterstitialScreen';
+import { createContext, ReactNode, RefObject } from 'react';
 import { pkg } from '../../settings';
+
+export type ActionType = 'close' | 'start' | 'skip' | 'back' | 'next';
+
+export type disableButtonConfigType = {
+  skip?: boolean;
+  back?: boolean;
+  next?: boolean;
+  start?: boolean;
+};
+export interface InterstitialScreenContextType {
+  bodyChildrenData?: ReactNode;
+  setBodyChildrenData?: (value: ReactNode) => void;
+  isFullScreen?: boolean;
+  handleClose?: (value: ActionType) => void;
+  progStep: number;
+  setProgStep?: (value: number) => void;
+  bodyScrollRef?: RefObject<HTMLDivElement | null>;
+  scrollRef?: RefObject<HTMLDivElement>;
+  handleGotoStep?: (value: number) => void;
+  stepCount: number;
+  setStepCount?: (value: number) => void;
+  disableButtonConfig?: disableButtonConfigType;
+  setDisableButtonConfig?: (value: disableButtonConfigType) => void;
+}
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 export const blockClass = `${pkg.prefix}--interstitial-screen`;

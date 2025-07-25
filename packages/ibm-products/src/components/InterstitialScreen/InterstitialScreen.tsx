@@ -34,11 +34,15 @@ import InterstitialScreenBody, {
 import InterstitialScreenFooter, {
   InterstitialScreenFooterProps,
 } from './InterstitialScreenFooter';
-import { blockClass, InterstitialScreenContext } from './context';
+import {
+  ActionType,
+  blockClass,
+  disableButtonConfigType,
+  InterstitialScreenContext,
+} from './context';
 
 const componentName = 'InterstitialScreen';
 
-export type ActionType = 'close' | 'start' | 'skip' | 'back' | 'next';
 export interface InterstitialScreenProps {
   /**
    * Provide the contents of the InterstitialScreen.
@@ -82,28 +86,6 @@ export type InterstitialScreenComponent = React.ForwardRefExoticComponent<
   Body: React.FC<InterstitialScreenBodyProps>;
   Footer: React.FC<InterstitialScreenFooterProps>;
 };
-
-export type disableButtonConfigType = {
-  skip?: boolean;
-  back?: boolean;
-  next?: boolean;
-  start?: boolean;
-};
-export interface InterstitialScreenContextType {
-  bodyChildrenData?: ReactNode;
-  setBodyChildrenData?: (value: ReactNode) => void;
-  isFullScreen?: boolean;
-  handleClose?: (value: ActionType) => void;
-  progStep: number;
-  setProgStep?: (value: number) => void;
-  bodyScrollRef?: RefObject<HTMLDivElement | null>;
-  scrollRef?: RefObject<HTMLDivElement>;
-  handleGotoStep?: (value: number) => void;
-  stepCount: number;
-  setStepCount?: (value: number) => void;
-  disableButtonConfig?: disableButtonConfigType;
-  setDisableButtonConfig?: (value: disableButtonConfigType) => void;
-}
 
 /**
  * InterstitialScreen can be a full page or an overlay, and are

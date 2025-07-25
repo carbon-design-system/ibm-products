@@ -7673,9 +7673,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "accessibility-checker@npm:4.0.2"
+"accessibility-checker@npm:^4.0.7":
+  version: 4.0.7
+  resolution: "accessibility-checker@npm:4.0.7"
   dependencies:
     chromedriver: "npm:*"
     deep-diff: "npm:^1.0.2"
@@ -7685,7 +7685,7 @@ __metadata:
     string-hash: "npm:^1.1.3"
   bin:
     achecker: bin/achecker.js
-  checksum: 10/47abf83f96eb40a58bb36e08933a8f3110ca59e1b3680abc742150b9bd17a1f36b4e5427d73cc1dce9a3b42738634365559db10294667e85d81bc376b8fb7500
+  checksum: 10/d5397240fc2b7312d88636769f922e7783e33f73a289f3bb045dddfce5d20ed4d823dd642b272dd3144121d8ed712b8f9a704320eb2c8abe955e23d9a5960b65
   languageName: node
   linkType: hard
 
@@ -13243,7 +13243,7 @@ __metadata:
     "@testing-library/user-event": "npm:^14.4.3"
     "@types/carbon__layout": "npm:^0.0.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.26.1"
-    accessibility-checker: "npm:^4.0.2"
+    accessibility-checker: "npm:^4.0.7"
     commander: "npm:^14.0.0"
     copyfiles: "npm:^2.4.1"
     cspell: "npm:^9.0.0"
@@ -14299,7 +14299,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.9"
     "@babel/preset-react": "npm:^7.26.3"
     "@testing-library/jest-dom": "npm:^6.6.3"
-    accessibility-checker: "npm:^4.0.2"
+    accessibility-checker: "npm:^4.0.7"
     axe-core: "npm:^4.10.3"
     babel-jest: "npm:^29.7.0"
     babel-preset-ibm-cloud-cognitive: "npm:^0.29.0"

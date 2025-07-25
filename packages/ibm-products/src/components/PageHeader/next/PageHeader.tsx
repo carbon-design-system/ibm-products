@@ -37,6 +37,8 @@ import {
   IconButton,
   BreadcrumbItemProps,
   BreadcrumbItem,
+  BreadcrumbProps,
+  Breadcrumb,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import { blockClass } from '../PageHeaderUtils';
@@ -913,6 +915,7 @@ const PageHeaderTitleBreadcrumb = forwardRef<
   const { titleClipped, refs } = usePageHeader();
   return (
     <BreadcrumbItem
+      ref={ref}
       isCurrentPage
       {...other}
       className={classnames(
@@ -928,6 +931,32 @@ const PageHeaderTitleBreadcrumb = forwardRef<
     </BreadcrumbItem>
   );
 });
+
+const PageHeaderBreadcrumbOverflow = forwardRef<HTMLElement, BreadcrumbProps>(
+  ({ className, children, ...other }, ref) => {
+    const fallbackRef = useRef<Breadcrumb | null>(null);
+    const componentRef = ref ?? fallbackRef;
+    // Initialize overflow resize handler
+    useEffect(() => {
+      if (!componentRef) {
+        return;
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    return (
+      <Breadcrumb
+        className={classnames(
+          className,
+          `${pkg.prefix}--page-header-breadcrumb-overflow`
+        )}
+        ref={componentRef}
+        {...other}
+      >
+        {children}
+      </Breadcrumb>
+    );
+  }
+);
 
 /**
  * -------
@@ -961,6 +990,9 @@ ScrollButton.displayName = 'PageHeaderScrollButton';
 const TitleBreadcrumb = PageHeaderTitleBreadcrumb;
 TitleBreadcrumb.displayName = 'PageHeaderTitleBreadcrumb';
 
+const BreadcrumbOverflow = PageHeaderBreadcrumbOverflow;
+BreadcrumbOverflow.displayName = 'PageHeaderBreadcrumbOverflow';
+
 export {
   // direct exports
   PageHeader,
@@ -972,6 +1004,7 @@ export {
   PageHeaderTabBar,
   PageHeaderScrollButton,
   PageHeaderTitleBreadcrumb,
+  PageHeaderBreadcrumbOverflow,
   // namespaced
   Root,
   BreadcrumbBar,
@@ -982,6 +1015,7 @@ export {
   TabBar,
   ScrollButton,
   TitleBreadcrumb,
+  BreadcrumbOverflow,
 };
 export type {
   PageHeaderProps,

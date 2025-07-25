@@ -478,13 +478,15 @@ export const TabBarWithTabsAndTags = (args) => (
         renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
         pageActions={breadcrumbPageActions}
       >
-        <Breadcrumb>
+        <PageHeader.BreadcrumbOverflow>
+          {/* <Breadcrumb> */}
           <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
           <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
           <PageHeader.TitleBreadcrumb>
             Virtual Machine DAL
           </PageHeader.TitleBreadcrumb>
-        </Breadcrumb>
+          {/* </Breadcrumb> */}
+        </PageHeader.BreadcrumbOverflow>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content
         title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"

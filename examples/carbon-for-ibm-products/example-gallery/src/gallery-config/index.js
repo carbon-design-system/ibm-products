@@ -80,7 +80,7 @@ const config = [
     thumbnail: `url(${imageAboutModal}`,
   },
   {
-    label: 'Big-Numbers',
+    label: 'Big-Number',
     directory: 'BigNumbers',
     thumbnail: `url(${imageBigNumbers}`,
   },

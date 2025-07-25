@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export enum BigNumbersSize {
+export enum BigNumberSize {
   Default = 'default',
   Large = 'lg',
   XLarge = 'xl',
 }
 
 // = 'default' | 'lg' | 'xl'
-export type BigNumbersSizeValues = `${BigNumbersSize}`;
+export type BigNumberSizeValues = `${BigNumberSize}`;
 
 export enum Characters {
   Dash = '–',
@@ -40,7 +40,7 @@ export const formatValue = (
     : Intl.NumberFormat(locale).format(value);
 };
 
-export const getIconSize = (size: BigNumbersSizeValues): number => {
+export const getIconSize = (size: BigNumberSizeValues): number => {
   switch (size) {
     case 'lg':
       return 20;

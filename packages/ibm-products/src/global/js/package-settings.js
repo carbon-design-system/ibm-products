@@ -73,7 +73,7 @@ const defaults = {
     Nav: false,
     NavItem: false,
     NavList: false,
-    BigNumbers: false,
+    BigNumber: false,
     TruncatedList: false,
     TruncatedText: false,
     DelimitedList: false,

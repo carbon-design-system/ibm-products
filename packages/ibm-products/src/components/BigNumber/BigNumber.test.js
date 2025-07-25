@@ -12,59 +12,59 @@ import { Edit } from '@carbon/react/icons';
 import { pkg, carbon } from '../../settings';
 import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { BigNumbers } from '.';
-import { BigNumbersSkeleton } from './BigNumbersSkeleton';
+import { BigNumber } from '.';
+import { BigNumberSkeleton } from './BigNumberSkeleton';
 
-const blockClass = `${pkg.prefix}--big-numbers`;
-const skeletonBlockClass = `${pkg.prefix}--big-numbers-skeleton`;
-const componentName = BigNumbers.displayName;
-const componentNameSkeleton = BigNumbersSkeleton.displayName;
+const blockClass = `${pkg.prefix}--big-number`;
+const skeletonBlockClass = `${pkg.prefix}--big-number-skeleton`;
+const componentName = BigNumber.displayName;
+const componentNameSkeleton = BigNumberSkeleton.displayName;
 
 // values to use
 const iconButtonClassName = `iconButtonClass-${uuidv4()}`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
-const renderBigNumbers = ({ ...rest } = {}) =>
-  render(<BigNumbers label="Label" value={12345} {...rest} />);
+const renderBigNumber = ({ ...rest } = {}) =>
+  render(<BigNumber label="Label" value={12345} {...rest} />);
 
 describe(componentName, () => {
-  it('renders a component BigNumbers', async () => {
-    renderBigNumbers({ className, 'data-testid': dataTestId });
+  it('renders a component BigNumber', async () => {
+    renderBigNumber({ className, 'data-testid': dataTestId });
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderBigNumbers();
+    const { container } = renderBigNumber();
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    renderBigNumbers({ className, 'data-testid': dataTestId });
+    renderBigNumber({ className, 'data-testid': dataTestId });
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
-    renderBigNumbers({ 'data-testid': dataTestId });
+    renderBigNumber({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    renderBigNumbers({ ref });
+    renderBigNumber({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    renderBigNumbers({ 'data-testid': dataTestId });
+    renderBigNumber({ 'data-testid': dataTestId });
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
   });
 
   it('adds the Devtools attribute to the containing node when loading', async () => {
-    renderBigNumbers({ 'data-testid': dataTestId, loading: true });
+    renderBigNumber({ 'data-testid': dataTestId, loading: true });
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentNameSkeleton
     );
@@ -72,12 +72,12 @@ describe(componentName, () => {
 
   it('forwards a ref to an appropriate node when loading', async () => {
     const ref = React.createRef();
-    renderBigNumbers({ loading: true, ref });
+    renderBigNumber({ loading: true, ref });
     expect(ref.current).toHaveClass(skeletonBlockClass);
   });
 
   it('renders an icon button', async () => {
-    renderBigNumbers({
+    renderBigNumber({
       iconButton: (
         <Button
           className={iconButtonClassName}
@@ -94,38 +94,38 @@ describe(componentName, () => {
   });
 
   it('should render en dash when `value` is `null`', async () => {
-    renderBigNumbers({ value: null });
+    renderBigNumber({ value: null });
     expect(screen.queryByText('–')).toBeVisible();
   });
 
   it('should render a number with a percent sign', async () => {
-    renderBigNumbers({ fractionDigits: 0, percentage: true, value: 34 });
+    renderBigNumber({ fractionDigits: 0, percentage: true, value: 34 });
     expect(screen.queryByText('34')).toBeVisible();
     expect(screen.queryByText('%')).toBeVisible();
   });
 
   it('should render "Unknown" when `total` is undefined and `forceShowTotal` is true', async () => {
-    renderBigNumbers({ forceShowTotal: true, total: undefined });
+    renderBigNumber({ forceShowTotal: true, total: undefined });
     expect(screen.queryByText('/Unknown')).toBeVisible();
   });
 
   it('should render a large value with a single decimal value by default', async () => {
-    renderBigNumbers({ value: 1234567 });
+    renderBigNumber({ value: 1234567 });
     expect(screen.queryByText('1.2M')).toBeVisible();
   });
 
   it('should render a large value with no decimal values', async () => {
-    renderBigNumbers({ fractionDigits: 0, value: 1234567 });
+    renderBigNumber({ fractionDigits: 0, value: 1234567 });
     expect(screen.queryByText('1M')).toBeVisible();
   });
 
   it('should not display the total if the total is less than the value', async () => {
-    renderBigNumbers({ total: 678, value: 1234 });
+    renderBigNumber({ total: 678, value: 1234 });
     expect(screen.queryByText('678')).toBeNull();
   });
 
   it('should display the total if the total is less than the value if forceShowTotal is true', async () => {
-    const { container } = renderBigNumbers({
+    const { container } = renderBigNumber({
       forceShowTotal: true,
       total: 678,
       value: 1234,
@@ -134,7 +134,7 @@ describe(componentName, () => {
   });
 
   it('should not display the total if total is the same as value', async () => {
-    renderBigNumbers({ total: 1234, value: 1234 });
+    renderBigNumber({ total: 1234, value: 1234 });
     // find value
     expect(screen.queryByText('1.2K')).toBeVisible();
     // and don't find total
@@ -142,7 +142,7 @@ describe(componentName, () => {
   });
 
   it('should not display the total if truncated total is the same as truncated value', async () => {
-    renderBigNumbers({ total: 1234, value: 1233 });
+    renderBigNumber({ total: 1234, value: 1233 });
     // find value
     expect(screen.queryByText('1.2K')).toBeVisible();
     // and don't find total
@@ -150,7 +150,7 @@ describe(componentName, () => {
   });
 
   it('should render a tooltip ', async () => {
-    renderBigNumbers({
+    renderBigNumber({
       tooltipDescription: 'Tooltip description',
       trending: true,
       'data-testid': dataTestId,
@@ -163,12 +163,12 @@ describe(componentName, () => {
   });
 
   it('should format a value in a different locale', async () => {
-    renderBigNumbers({ value: 12345.678, locale: 'fr-CA', truncate: false });
+    renderBigNumber({ value: 12345.678, locale: 'fr-CA', truncate: false });
     expect(screen.queryByText('12 345,678')).toBeVisible();
   });
 
   it('should render a large trending arrow', async () => {
-    const { container } = renderBigNumbers({
+    const { container } = renderBigNumber({
       size: 'lg',
       trending: true,
     });
@@ -178,7 +178,7 @@ describe(componentName, () => {
   });
 
   it('should render an extra-large trending arrow', async () => {
-    const { container } = renderBigNumbers({
+    const { container } = renderBigNumber({
       size: 'xl',
       trending: true,
     });

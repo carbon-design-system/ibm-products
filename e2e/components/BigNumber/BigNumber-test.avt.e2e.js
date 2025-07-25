@@ -13,12 +13,12 @@ import { visitStory } from '../../test-utils/storybook';
 test.describe('Cascade @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'BigNumbers',
-      id: 'experimental-bignumbers--big-numbers',
+      component: 'BigNumber',
+      id: 'experimental-bignumber--big-number',
       globals: {
         carbonTheme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('BigNumbers @avt-default-state');
+    await expect(page).toHaveNoACViolations('BigNumber @avt-default-state');
   });
 });

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,10 +10,10 @@ import { Button } from '@carbon/react';
 import { Edit } from '@carbon/react/icons';
 import { action } from 'storybook/actions';
 
-import { BigNumbers } from '.';
-import { BigNumbersSize } from './constants';
+import { BigNumber } from '.';
+import { BigNumberSize } from './constants';
 
-import mdx from './BigNumbers.mdx';
+import mdx from './BigNumber.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 
@@ -50,8 +50,8 @@ const iconButtonOptions = {
 };
 
 export default {
-  title: 'Experimental/BigNumbers',
-  component: BigNumbers,
+  title: 'Experimental/BigNumber',
+  component: BigNumber,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   argTypes: {
@@ -112,7 +112,7 @@ export default {
       control: { type: 'boolean' },
     },
     size: {
-      options: Object.values(BigNumbersSize),
+      options: Object.values(BigNumberSize),
       control: { type: 'radio' },
     },
     total: {
@@ -162,14 +162,14 @@ const defaultProps = {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  return <BigNumbers {...args} />;
+  return <BigNumber {...args} />;
 };
 
 /**
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const bigNumbers = Template.bind({});
-bigNumbers.args = {
+export const bigNumber = Template.bind({});
+bigNumber.args = {
   ...defaultProps,
 };

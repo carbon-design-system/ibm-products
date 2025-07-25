@@ -982,7 +982,8 @@ $duration: 1000ms;
     }
   }
 
-  .#{$pkg-prefix}--page-header-title-breadcrumb {
+  .#{$pkg-prefix}--page-header-title-breadcrumb,
+  .#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions {
     opacity: 0;
     transform: translateY($spacing-05);
     transition:
@@ -991,7 +992,8 @@ $duration: 1000ms;
       opacity motion(standard, productive) $duration-moderate-01;
     // Target browsers that do not yet support animation-timeline: scroll()
     @supports not (animation-timeline: scroll()) {
-      &.#{$pkg-prefix}--page-header-title-breadcrumb-show {
+      &.#{$pkg-prefix}--page-header-title-breadcrumb-show,
+      &.#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
         opacity: 1;
         transform: translateY(0);
       }

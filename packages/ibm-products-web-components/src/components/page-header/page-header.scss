@@ -46,6 +46,7 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-breadcrumb) {
   position: sticky;
+  z-index: 1;
   background-color: $layer-01;
   block-size: convert.to-rem(40px);
   border-block-end: $border-subtle;
@@ -335,7 +336,9 @@ $carbon-prefix: 'cds';
   }
 }
 
-:host(#{$prefix}-page-header-title-breadcrumb) {
+:host(#{$prefix}-page-header-title-breadcrumb),
+:host(#{$prefix}-page-header-breadcrumb)
+  .#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions {
   opacity: 0;
   transform: translateY($spacing-05);
   transition:
@@ -344,7 +347,8 @@ $carbon-prefix: 'cds';
     opacity motion(standard, productive) $duration-moderate-01;
   // Target browsers that do not yet support animation-timeline: scroll()
   @supports not (animation-timeline: scroll()) {
-    &.#{$prefix}--page-header-title-breadcrumb-show {
+    &.#{$prefix}--page-header-title-breadcrumb-show,
+    &.#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
       opacity: 1;
       transform: translateY(0);
     }

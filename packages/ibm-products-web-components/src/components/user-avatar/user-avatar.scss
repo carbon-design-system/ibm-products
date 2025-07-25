@@ -28,6 +28,8 @@ $carbon-prefix: 'cds';
 $block-class: #{$prefix}--user-avatar;
 
 :host(#{$prefix}-user-avatar) {
+  display: inline-block;
+
   .#{$block-class} {
     box-sizing: border-box;
   }

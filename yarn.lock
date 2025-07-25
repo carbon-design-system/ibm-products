@@ -1915,7 +1915,7 @@ __metadata:
     "@rollup/plugin-node-resolve": "npm:^16.0.0"
     "@rollup/plugin-typescript": "npm:^12.1.1"
     "@storybook/addon-docs": "npm:^9.0.5"
-    "@storybook/addon-links": "npm:^8.6.12"
+    "@storybook/addon-links": "npm:^9.0.0"
     "@storybook/web-components-vite": "npm:^9.0.12"
     "@types/jest": "npm:^29.5.13"
     "@vitest/browser": "npm:^3.2.0"
@@ -5778,23 +5778,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:^8.6.12":
-  version: 8.6.12
-  resolution: "@storybook/addon-links@npm:8.6.12"
-  dependencies:
-    "@storybook/global": "npm:^5.0.0"
-    ts-dedent: "npm:^2.0.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^8.6.12
-  peerDependenciesMeta:
-    react:
-      optional: true
-  checksum: 10/85ce71b11ba105516f229259b1ba58985f4f59c38f992d7d9060b1c0fd67953073d4075c5e2fd3a3b8ad6890168ca240b5bedfffc2d48e3ccdd58dad75c8e32f
-  languageName: node
-  linkType: hard
-
-"@storybook/addon-links@npm:^9.0.8":
+"@storybook/addon-links@npm:^9.0.0, @storybook/addon-links@npm:^9.0.8":
   version: 9.0.15
   resolution: "@storybook/addon-links@npm:9.0.15"
   dependencies:

@@ -111,7 +111,7 @@ export interface ExpressiveCardProps extends PropsWithChildren {
 
 const componentName = 'ExpressiveCard';
 
-export let ExpressiveCard = forwardRef(
+export const ExpressiveCard = forwardRef(
   (props: ExpressiveCardProps, ref: React.Ref<HTMLDivElement>) => {
     const validProps = prepareProps(props, [
       'actionIconsPosition',
@@ -127,7 +127,6 @@ export let ExpressiveCard = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-ExpressiveCard = pkg.checkComponentEnabled(ExpressiveCard, componentName);
 
 ExpressiveCard.propTypes = {
   /**

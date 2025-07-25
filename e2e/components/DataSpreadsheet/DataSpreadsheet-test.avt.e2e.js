@@ -14,7 +14,7 @@ test.describe('DataSpreadsheet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'DataSpreadsheet',
-      id: 'experimental-dataspreadsheet--data-spreadsheet',
+      id: 'preview-dataspreadsheet--data-spreadsheet',
       globals: {
         carbonTheme: 'white',
       },

@@ -28,7 +28,7 @@ interface WebTerminalProviderProps {
   children: ReactNode | ReactNode[];
 }
 
-export let WebTerminalProvider: React.FC<WebTerminalProviderProps> = ({
+export const WebTerminalProvider: React.FC<WebTerminalProviderProps> = ({
   children,
 }) => {
   const [open, setOpen] = useState(false);
@@ -45,12 +45,6 @@ export let WebTerminalProvider: React.FC<WebTerminalProviderProps> = ({
     </WebTerminalContext.Provider>
   );
 };
-
-// Return a placeholder if not released and not enabled by feature flag
-WebTerminalProvider = pkg.checkComponentEnabled(
-  WebTerminalProvider,
-  componentName
-);
 
 WebTerminalProvider.propTypes = {
   /**

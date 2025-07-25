@@ -24,7 +24,7 @@ export interface WebTerminalContentWrapperProps {
    */
   children: ReactNode;
 }
-export let WebTerminalContentWrapper = React.forwardRef<
+export const WebTerminalContentWrapper = React.forwardRef<
   HTMLDivElement,
   WebTerminalContentWrapperProps
 >(
@@ -49,12 +49,6 @@ export let WebTerminalContentWrapper = React.forwardRef<
       </div>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-WebTerminalContentWrapper = pkg.checkComponentEnabled(
-  WebTerminalContentWrapper,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

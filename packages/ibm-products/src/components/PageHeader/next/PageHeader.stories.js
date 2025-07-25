@@ -71,7 +71,7 @@ const tags = [
 ];
 
 export default {
-  title: 'Experimental/Patterns/PageHeader',
+  title: 'Preview/Patterns/PageHeader',
   component: PageHeader,
   subcomponents: {
     PageHeaderBreadcrumbBar,

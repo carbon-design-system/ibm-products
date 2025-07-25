@@ -1,4 +1,4 @@
-## `@carbon/ibm-cloud-cognitive-core@2.47.0-rc.0`
+## `@carbon/ibm-cloud-cognitive-core@2.47.0`
 ### Features :rocket:
 - feat(storybook): use vite v7 (#7745)
 

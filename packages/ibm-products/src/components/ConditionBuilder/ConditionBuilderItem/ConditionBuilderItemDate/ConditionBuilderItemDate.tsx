@@ -42,7 +42,7 @@ export const ConditionBuilderItemDate = ({
 
   const [dateFromState, setDateFromState] = useState<Date[] | undefined>();
 
-  const dateFormat = config.dateFormat || 'm/d/Y';
+  const dateFormat = config?.dateFormat || 'm/d/Y';
 
   const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const datePickerType =

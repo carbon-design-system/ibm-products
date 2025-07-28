@@ -42,7 +42,8 @@ import {
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import { blockClass } from '../PageHeaderUtils';
-import { createOverflowHandler } from './overflowHandler';
+import { createOverflowHandler as localOverflowHandler } from './overflowHandler';
+import { createOverflowHandler } from '@carbon/utilities';
 import { TYPES } from '@carbon/react/es/components/Tag/Tag';
 import { useOverflowItems } from '../../../global/js/hooks/useOverflowItems';
 import { useId } from '../../../global/js/utils/useId';
@@ -960,7 +961,7 @@ const PageHeaderBreadcrumbOverflow = forwardRef<
     const breadcrumbList = componentRef?.current.querySelector(
       `.${carbonPrefix}--breadcrumb`
     ) as HTMLOListElement;
-    createOverflowHandler({
+    localOverflowHandler({
       container: breadcrumbList,
       onChange: (_, hidden) => {
         setHiddenBreadcrumbs(hidden);

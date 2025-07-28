@@ -98,7 +98,7 @@ class CDSInterstitialScreen extends SignalWatcher(
 
   private dispatchInItializeEvent = () => {
     setTimeout(() => {
-      const carouselAPI = interstitialDetailsSignal.get().carouselAPI;
+      const { carouselAPI } = interstitialDetailsSignal.get();
       this.dispatchEvent(
         new CustomEvent(
           (

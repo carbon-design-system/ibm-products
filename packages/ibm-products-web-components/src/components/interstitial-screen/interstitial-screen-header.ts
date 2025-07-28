@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -62,9 +62,9 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
       return 'complete';
     } else if (index > currentStep) {
       return 'incomplete';
-    } else {
-      return 'invalid';
     }
+
+    return 'invalid';
   };
 
   /**
@@ -92,43 +92,51 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
     );
   }
 
+  getProgressIndicatorContent(stepDetails) {
+    return html`
+      <div class="${blockClass}--progress">
+        <cds-progress-indicator>
+          ${stepDetails.map(
+            (eachStep, index) =>
+              html` <cds-progress-step
+                label="${eachStep.stepTitle}"
+                key="${eachStep.id}"
+                state="${this.getStepState(index)}"
+              ></cds-progress-step>`
+          )}
+        </cds-progress-indicator>
+      </div>
+    `;
+  }
+
+  getTitleContent() {
+    return html` <div class="${blockClass}--titleContainer">
+      ${this.headerTitle && html`<h1>${this.headerTitle}</h1>`}
+      ${this.headerSubTitle && html`<h2>${this.headerSubTitle}</h2>`}
+    </div>`;
+  }
+
   getHeaderContent() {
     const stepDetails = interstitialDetailsSignal.get().stepDetails;
 
     return html`
-      ${(this.headerTitle || this.headerSubTitle) &&
-      html`
-        <div class="${blockClass}--titleContainer">
-          ${this.headerTitle && html`<h1>${this.headerTitle}</h1>`}
-          ${this.headerSubTitle && html`<h2>${this.headerSubTitle}</h2>`}
-          </div>
+     
+      ${this.headerTitle || this.headerSubTitle ? this.getTitleContent() : nothing}
+
           <slot></slot>
 
           ${
             !this.hideProgressIndicator && stepDetails?.length > 0
-              ? html`
-                  <div class="${blockClass}--progress">
-                    <cds-progress-indicator>
-                      ${stepDetails.map(
-                        (eachStep, index) =>
-                          html` <cds-progress-step
-                            label="${eachStep.stepTitle}"
-                            key="${eachStep.id}"
-                            state="${this.getStepState(index)}"
-                          ></cds-progress-step>`
-                      )}
-                    </cds-progress-indicator>
-                  </div>
-                `
-              : html``
+              ? this.getProgressIndicatorContent(stepDetails)
+              : nothing
           }
         </div>
-      `}
+      
     `;
   }
 
   render() {
-    const isFullScreen = interstitialDetailsSignal.get().isFullScreen;
+    const { isFullScreen } = interstitialDetailsSignal.get();
 
     const classes = classMap({
       [`${headerBlockClass}`]: true,

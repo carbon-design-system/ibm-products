@@ -32,14 +32,11 @@ class CDSInterstitialScreenBodyItem extends HostListenerMixin(LitElement) {
   stepTitle: string = '';
 
   protected firstUpdated(_changedProperties: PropertyValues): void {
-    const slot = this.shadowRoot?.querySelector('slot') as HTMLSlotElement;
-    slot.addEventListener('slotchange', this.updateStepDetails);
-
     this.updateStepDetails();
   }
 
   private updateStepDetails() {
-    const randomId = Math.random().toString(36).slice(2);
+    const randomId = crypto?.randomUUID();
     const stepKey = `${this.stepTitle?.replace(/\s+/g, '') || randomId}`;
     const newStep = {
       stepTitle: this.stepTitle,
@@ -56,7 +53,7 @@ class CDSInterstitialScreenBodyItem extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    return html` <slot></slot> `;
+    return html` <slot @slotchange=${this.updateStepDetails}></slot> `;
   }
 
   static styles = styles;

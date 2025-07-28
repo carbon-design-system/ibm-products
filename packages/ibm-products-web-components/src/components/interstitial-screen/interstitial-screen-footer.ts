@@ -100,8 +100,8 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   private handleAction = async (actionType: ActionType) => {
     this.loadingAction = actionType;
 
-    const currentStep = interstitialDetailsSignal.get().currentStep;
-    const stepCount = interstitialDetailsSignal.get().stepDetails.length;
+    const { currentStep, stepDetails } = interstitialDetailsSignal.get();
+    const stepCount = stepDetails.length;
 
     let resolvePromise;
     const proceedPromise = new Promise<boolean>((resolve) => {
@@ -149,8 +149,9 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   };
 
   getFooterContent() {
-    const stepDetails = interstitialDetailsSignal.get().stepDetails;
-    const currentStep = interstitialDetailsSignal.get().currentStep;
+    const { stepDetails, currentStep, disableActions } =
+      interstitialDetailsSignal.get();
+    const { start, next, back, skip } = disableActions;
     const isMulti = stepDetails?.length > 0;
     const progStepCeil = stepDetails?.length - 1;
     return html`
@@ -163,8 +164,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                 size="lg"
                 title="${this.skipButtonLabel}"
                 @click="${this.handleSkip}"
-                ?disabled="${interstitialDetailsSignal.get().disableActions
-                  ?.skip}"
+                ?disabled="${skip}"
               >
                 ${this.skipButtonLabel}
               </cds-button>
@@ -178,8 +178,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                   kind="secondary"
                   size="lg"
                   title="${this.previousButtonLabel}"
-                  ?disabled="${interstitialDetailsSignal.get().disableActions
-                    ?.back}"
+                  ?disabled="${back}"
                   @click="${this.handleClickPrev}"
                 >
                   ${this.previousButtonLabel}
@@ -197,8 +196,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                   kind="primary"
                   size="lg"
                   title="${this.nextButtonLabel}"
-                  ?disabled="${interstitialDetailsSignal.get().disableActions
-                    ?.next}"
+                  ?disabled="${next}"
                   @click="${this.handleClickNext}"
                 >
                   ${this.nextButtonLabel}
@@ -216,8 +214,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                   kind="primary"
                   size="lg"
                   title="${this.startButtonLabel}"
-                  ?disabled="${interstitialDetailsSignal.get().disableActions
-                    ?.start}"
+                  ?disabled="${start}"
                   @click="${this.handleStart}"
                 >
                   ${this.startButtonLabel}

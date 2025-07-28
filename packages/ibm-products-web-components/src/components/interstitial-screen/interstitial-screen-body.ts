@@ -32,7 +32,7 @@ const blockClass = `${prefix}--interstitial-screen`;
 @customElement(`${prefix}-interstitial-screen-body`)
 class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   @state()
-  stepType: 'single' | 'multi' | undefined = 'multi';
+  stepType: 'single' | 'multi' = 'multi';
 
   private carouselAPI!: InitCarousel;
   private carouselElement = createRef<HTMLElement>();
@@ -40,20 +40,15 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   firstUpdated(): void {
     const slot = this.shadowRoot?.querySelector('slot') as HTMLSlotElement;
 
-    const updateStepMode = () => {
-      const assigned = slot.assignedElements({ flatten: true });
+    const assigned = slot.assignedElements({ flatten: true });
 
-      if (assigned.length === 1) {
-        this.stepType = 'single';
-      } else if (assigned.length > 1) {
-        this.stepType = 'multi';
-        //initialize carousel for multi-step
-        this._initCarousel();
-      }
-    };
-
-    // Run once after initial slot content
-    updateStepMode();
+    if (assigned.length === 1) {
+      this.stepType = 'single';
+    } else if (assigned.length > 1) {
+      this.stepType = 'multi';
+      //initialize carousel for multi-step
+      this._initCarousel();
+    }
   }
 
   private _initCarousel() {
@@ -122,11 +117,9 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
             >
               <slot></slot>
             </div>`
-          : this.stepType === 'single'
-            ? html`<div class="${blockClass}__contentWrapper">
-                <slot></slot>
-              </div>`
-            : ''}
+          : html`<div class="${blockClass}__contentWrapper">
+              <slot></slot>
+            </div>`}
       </div>
     `;
   }

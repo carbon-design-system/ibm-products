@@ -1,0 +1,33 @@
+import { Story, Canvas } from '@storybook/addon-docs/blocks';
+import { makeDraggable } from '.';
+import * as makeDraggableStories from './makeDraggable.stories';
+
+# makeDraggable
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Example implementation](#example-implementation)
+
+## Overview
+
+The `makeDraggable` utility enables an HTML element to be draggable using either mouse or keyboard interactions. 
+It allows developers to specify a optional drag handle (e.g., a header) and focusable element (e.g., an icon) within the handle to support accessibility.
+
+## Example usage
+
+
+```jsx
+makeDraggable( dialogRef.current, headerRef.current, dragRef.current)
+```
+
+## Example implementation
+
+<Canvas>
+  <Story of={makeDraggableStories.DraggableCustomDiv} />
+</Canvas>
+
+<Canvas>
+  <Story of={makeDraggableStories.DraggablePopover} />
+</Canvas>

@@ -28,6 +28,8 @@ import {
   Tabs,
   TabPanels,
   TabPanel,
+  OverflowMenu,
+  OverflowMenuItem,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
@@ -477,15 +479,33 @@ export const TabBarWithTabsAndTags = (args) => (
         contentActionsFlush={args.contentActionsFlush}
         renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
         pageActions={breadcrumbPageActions}
+        contentActions={
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}
+          />
+        }
       >
-        <PageHeader.BreadcrumbOverflow>
-          {/* <Breadcrumb> */}
+        <PageHeader.BreadcrumbOverflow
+          renderOverflowBreadcrumb={(hiddenItems) => (
+            <BreadcrumbItem data-floating-menu-container>
+              <OverflowMenu
+                align="bottom"
+                aria-label="Overflow menu in a breadcrumb"
+              >
+                {hiddenItems.map((el) => (
+                  <OverflowMenuItem itemText={el.innerText} />
+                ))}
+              </OverflowMenu>
+            </BreadcrumbItem>
+          )}
+        >
           <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-          <PageHeader.TitleBreadcrumb>
+          <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+          <PageHeader.TitleBreadcrumb data-fixed>
             Virtual Machine DAL
           </PageHeader.TitleBreadcrumb>
-          {/* </Breadcrumb> */}
         </PageHeader.BreadcrumbOverflow>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content

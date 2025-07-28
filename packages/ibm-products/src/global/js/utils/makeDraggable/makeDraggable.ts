@@ -64,7 +64,9 @@ export function makeDraggable(
       ? handle.contains(e.target as Node)
       : el.contains(e.target as Node);
 
-    if (!isTargetInHandle) {return;}
+    if (!isTargetInHandle) {
+      return;
+    }
 
     offsetX = e.clientX - el.offsetLeft;
     offsetY = e.clientY - el.offsetTop;
@@ -75,13 +77,17 @@ export function makeDraggable(
   }
 
   function onMouseMove(e: MouseEvent) {
-    if (!isDragging) {return;}
+    if (!isDragging) {
+      return;
+    }
     el.style.left = `${e.clientX - offsetX}px`;
     el.style.top = `${e.clientY - offsetY}px`;
   }
 
   function onMouseUp() {
-    if (!isDragging) {return;}
+    if (!isDragging) {
+      return;
+    }
     isDragging = false;
 
     document.removeEventListener('mousemove', onMouseMove);

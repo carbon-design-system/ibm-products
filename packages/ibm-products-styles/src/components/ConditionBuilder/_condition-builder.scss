@@ -28,6 +28,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   display: flex;
 }
 
+.#{$block-class}__visible {
+  visibility: visible;
+}
+
+.#{$block-class}__hidden {
+  visibility: hidden;
+}
+
 .#{$block-class}__condition-wrapper {
   display: flex;
   flex-flow: row wrap;

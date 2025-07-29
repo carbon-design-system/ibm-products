@@ -1,6 +1,21 @@
 ## `@carbon/ibm-products-web-components@0.20.1`
+### Bug fixes :bug:
+- fix(side-panel): remove focus handle from slideIn variant
+
+## `@carbon/ibm-products-web-components@0.20.0`
+### Features :rocket:
+- feat: add various options for description (#7708)
+- feat(storybook): use vite v7 (#7745)
+- feat(storybook): upgrade to v9 (#7734)
+- feat(page-header): add sticky support, web component (#7741)
+- feat(save): create pattern in Web Components (#7766)
+- feat(notification panel): add test coverage (#7685)
+
 ### Housekeeping :house:
-- chore: cherry pick 7839 fix for release
+- docs(storybook): restructure top level categories (#7822)
+- chore(deps-dev): bump vite (#7778)
+- build(deps): update Carbon 11 compatible versions to latest (#7757)
+- chore(deps): update dependency vite to v7 (#7746)
 
 ## `@carbon/ibm-products-web-components@0.19.0`
 ### Features :rocket:

@@ -1,3 +1,7 @@
+## `@carbon/ibm-products-web-components@0.20.1`
+### Housekeeping :house:
+- chore: cherry pick 7839 fix for release
+
 ## `@carbon/ibm-products-web-components@0.19.0`
 ### Features :rocket:
 - feat(sidepanel): option to hide close button in web component (#7695)

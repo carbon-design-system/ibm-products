@@ -118,6 +118,15 @@ export const ConditionBuilderItem = ({
     statementIdMap
   );
 
+  const getCustomOperatorLabel = (propertyLabel) => {
+    return (
+      propertyLabel &&
+      config?.operators?.find((operator) => {
+        return operator.id === propertyLabel;
+      })
+    );
+  };
+
   const getPropertyDetails = () => {
     const { property, operator } = condition || {};
     if (
@@ -128,6 +137,12 @@ export const ConditionBuilderItem = ({
       return {
         propertyLabel: invalidText,
         isInvalid: true,
+      };
+    }
+    if (rest['data-name'] == 'operatorField' && type == 'custom') {
+      return {
+        isInvalid: false,
+        propertyLabel: getCustomOperatorLabel(label)?.id,
       };
     }
     const propertyId =
@@ -215,15 +230,6 @@ export const ConditionBuilderItem = ({
     if (evt.key === 'Escape') {
       manageInvalidSelection();
     }
-  };
-
-  const getCustomOperatorLabel = (propertyLabel) => {
-    return (
-      propertyLabel &&
-      config?.operators?.find((operator) => {
-        return operator.id === propertyLabel;
-      })
-    );
   };
 
   const getLabel = () => {

@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { Add } from '@carbon/icons-react';
-import { unstable__PageHeader as PageHeader } from '../../';
+import { preview__PageHeader as PageHeader } from '../../';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar,
@@ -32,6 +32,7 @@ import {
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
 import image2 from './_story-assets/3x2.jpg';
+import styles from './_storybook-styles.scss?inline';
 
 import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
@@ -87,6 +88,7 @@ export default {
     },
   },
   parameters: {
+    styles,
     docs: {
       page: mdx,
     },
@@ -479,6 +481,9 @@ export const TabBarWithTabsAndTags = (args) => (
         <Breadcrumb>
           <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
           <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          <PageHeader.TitleBreadcrumb>
+            Virtual Machine DAL
+          </PageHeader.TitleBreadcrumb>
         </Breadcrumb>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content
@@ -492,7 +497,7 @@ export const TabBarWithTabsAndTags = (args) => (
           scale efficiently, and stay in control every step of the way.
         </PageHeader.ContentText>
       </PageHeader.Content>
-      <PageHeader.TabBar tags={tags}>
+      <PageHeader.TabBar tags={tags} scroller={<PageHeader.ScrollButton />}>
         <TabList>
           <Tab>Tab 1</Tab>
           <Tab>Tab 2</Tab>
@@ -505,13 +510,27 @@ export const TabBarWithTabsAndTags = (args) => (
       </PageHeader.TabBar>
     </PageHeader.Root>
     <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
-      <TabPanel>Tab Panel 6</TabPanel>
-      <TabPanel>Tab Panel 7</TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 1
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 2
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 3
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 4
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 5
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 6
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 7
+      </TabPanel>
     </TabPanels>
   </Tabs>
 );

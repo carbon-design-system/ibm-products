@@ -13,3 +13,5 @@ import './page-header-content';
 import './page-header-content-text';
 import './page-header-hero-image';
 import './page-header-tabs';
+import './page-header-title-breadcrumb';
+import './page-header-scroller';

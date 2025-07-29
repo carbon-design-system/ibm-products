@@ -58,6 +58,7 @@ export * from './InlineTip';
 export * from './NonLinearReading';
 export * from './BigNumbers';
 export * from './TruncatedList';
+export * from './TruncatedText';
 export * from './InterstitialScreen';
 export * from './DelimitedList';
 export * from './Decorator';

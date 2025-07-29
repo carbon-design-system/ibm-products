@@ -1,4 +1,4 @@
-## `@babel-preset-ibm-cloud-cognitive@0.29.0-rc.0`
+## `@babel-preset-ibm-cloud-cognitive@0.29.0`
 ### Housekeeping :house:
 - chore: remove redundant upgrade scripts (#7774)
 

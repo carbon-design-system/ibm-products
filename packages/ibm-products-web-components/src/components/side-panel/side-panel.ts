@@ -57,28 +57,36 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
 /**
  * Tries to focus on the given elements and bails out if one of them is successful.
  *
+ * @param _this The `this` passed from the component.
  * @param elements The elements.
  * @param reverse `true` to go through the list in reverse order.
  * @returns `true` if one of the attempts is successful, `false` otherwise.
  */
-function tryFocusElements(elements: NodeListOf<HTMLElement>, reverse: boolean) {
-  if (!reverse) {
-    for (let i = 0; i < elements.length; ++i) {
-      const elem = elements[i];
-      elem.focus();
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
+function tryFocusElements(
+  _this: CDSSidePanel,
+  elements: NodeListOf<HTMLElement>,
+  reverse: boolean
+) {
+  if (!_this?.slideIn) {
+    if (!reverse) {
+      for (let i = 0; i < elements.length; ++i) {
+        const elem = elements[i];
+        elem.focus();
+        if (elem.ownerDocument!.activeElement === elem) {
+          return true;
+        }
       }
-    }
-  } else {
-    for (let i = elements.length - 1; i >= 0; --i) {
-      const elem = elements[i];
-      elem.focus();
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
+    } else {
+      for (let i = elements.length - 1; i >= 0; --i) {
+        const elem = elements[i];
+        elem.focus();
+        if (elem.ownerDocument!.activeElement === elem) {
+          return true;
+        }
       }
     }
   }
+
   return false;
 }
 
@@ -207,6 +215,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         await (this.constructor as typeof CDSSidePanel)._delay();
         if (
           !tryFocusElements(
+            this,
             this.querySelectorAll(selectorTabbableForSidePanel),
             true
           ) &&
@@ -218,6 +227,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         await (this.constructor as typeof CDSSidePanel)._delay();
         if (
           !tryFocusElements(
+            this,
             this.querySelectorAll(selectorTabbableForSidePanel),
             true
           )
@@ -922,6 +932,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           (focusNode as HTMLElement).focus();
         } else if (
           !tryFocusElements(
+            this,
             this.querySelectorAll(
               (this.constructor as typeof CDSSidePanel).selectorTabbable
             ),

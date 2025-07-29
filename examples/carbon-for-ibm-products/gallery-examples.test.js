@@ -20,6 +20,7 @@ import { Example as CoachmarkFixedExample } from './CoachmarkFixed/src/Example/E
 import { Example as CoachmarkOverlayElementExample } from './CoachmarkOverlayElement/src/Example/Example';
 import { Example as CoachmarkOverlayElementsExample } from './CoachmarkOverlayElements/src/Example/Example';
 import { Example as CoachmarkStackExample } from './CoachmarkStack/src/Example/Example';
+import { Example as CoachmarkWithAnimatedMediaExample } from './CoachmarkWithAnimatedMedia/src/Example/Example';
 import { Example as ConditionBuilderExample } from './ConditionBuilder/src/Example/Example';
 import { Example as CreateFullPageExample } from './CreateFullPage/src/Example/Example';
 import { Example as CreateModalExample } from './CreateModal/src/Example/Example';
@@ -37,12 +38,16 @@ import { Example as ExportModalExample } from './ExportModal/src/Example/Example
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
 import { Example as FilterPanelExample } from './FilterPanel/src/Example/Example';
 import { Example as FullPageErrorExample } from './FullPageError/src/Example/Example';
+import { Example as GenerateAnAPIKeyExample } from './GenerateAnAPIKey/src/Example/Example';
+import { Example as GenerateAnAPIKeyEditExample } from './GenerateAnAPIKeyEdit/src/Example/Example';
+import { Example as GenerateAnAPIKeyInstantExample } from './GenerateAnAPIKeyInstant/src/Example/Example';
 import { Example as GetStartedCardExample } from './GetStartedCard/src/Example/Example';
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
+import { Example as InlineTipWithAnimatedMediaExample } from './InlineTipWithAnimatedMedia/src/Example/Example';
 import { Example as InterstitialScreenExample } from './InterstitialScreen/src/Example/Example';
 import { Example as InterstitialScreenViewExample } from './InterstitialScreenView/src/Example/Example';
-import { Example as InterstitialScreenViewModuleExample } from './InterstitialScreenViewModule/src/Example/Example';
+import { Example as InterstitialScreenWithAnimatedMediaExample } from './InterstitialScreenWithAnimatedMedia/src/Example/Example';
 import { Example as NavExample } from './Nav/src/Example/Example';
 import { Example as NotificationsPanelExample } from './NotificationsPanel/src/Example/Example';
 import { Example as OptionsTileExample } from './OptionsTile/src/Example/Example';
@@ -132,6 +137,12 @@ describe('All examples', () => {
 
   it('CoachmarkStack renders', () => {
     render(<CoachmarkStackExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkWithAnimatedMedia renders', () => {
+    render(<CoachmarkWithAnimatedMediaExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
@@ -238,6 +249,24 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('GenerateAnAPIKey renders', () => {
+    render(<GenerateAnAPIKeyExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('GenerateAnAPIKeyEdit renders', () => {
+    render(<GenerateAnAPIKeyEditExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('GenerateAnAPIKeyInstant renders', () => {
+    render(<GenerateAnAPIKeyInstantExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('GetStartedCard renders', () => {
     render(<GetStartedCardExample />);
     // expect no errors int the console
@@ -256,6 +285,12 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('InlineTipWithAnimatedMedia renders', () => {
+    render(<InlineTipWithAnimatedMediaExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('InterstitialScreen renders', () => {
     render(<InterstitialScreenExample />);
     // expect no errors int the console
@@ -268,8 +303,8 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('InterstitialScreenViewModule renders', () => {
-    render(<InterstitialScreenViewModuleExample />);
+  it('InterstitialScreenWithAnimatedMedia renders', () => {
+    render(<InterstitialScreenWithAnimatedMediaExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

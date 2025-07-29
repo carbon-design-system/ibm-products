@@ -86,6 +86,7 @@ function tryFocusElements(
       }
     }
   }
+
   return false;
 }
 

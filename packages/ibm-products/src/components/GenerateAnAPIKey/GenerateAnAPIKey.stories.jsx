@@ -9,7 +9,6 @@ import React, { useState } from 'react';
 import { Button, Modal, TextInput, PasswordInput } from '@carbon/react';
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './GenerateAnAPIKey.mdx';
-import wait from '../../global/js/utils/wait';
 
 export default {
   title: 'Patterns/Generate an API key',
@@ -23,12 +22,16 @@ export default {
   },
 };
 
-async function apiCall() {
-  await wait(1000);
-  return '082be29c-3622-4276-bc58-695e2a12bd93';
-}
-
 const InstantTemplate = () => {
+  const wait = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
+  const apiCall = async () => {
+    await wait(1000);
+    return '082be29c-3622-4276-bc58-695e2a12bd93';
+  };
+
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [key, setKey] = useState('');
@@ -81,6 +84,15 @@ instantGenerate.storyName = 'Instant generate';
 instantGenerate.args = {};
 
 const GenerateTemplate = () => {
+  const wait = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
+  const apiCall = async () => {
+    await wait(1000);
+    return '082be29c-3622-4276-bc58-695e2a12bd93';
+  };
+
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [key, setKey] = useState('');
@@ -180,6 +192,15 @@ generate.storyName = 'Generate';
 generate.args = {};
 
 const EditTemplate = () => {
+  const wait = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
+  const apiCall = async () => {
+    await wait(1000);
+    return '082be29c-3622-4276-bc58-695e2a12bd93';
+  };
+
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('resource_name_1');

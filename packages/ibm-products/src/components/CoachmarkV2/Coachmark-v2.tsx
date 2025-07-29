@@ -62,6 +62,10 @@ export interface CoachmarkV2Props {
    * Fine tune the position of the target in pixels.
    */
   positionTune?: { x: number; y: number };
+  /**
+   * Specifies whether the component is floating or not.
+   */
+  isFloating?: boolean;
 }
 
 // Define the type for Coachmark, extending it to include Trigger and Content
@@ -78,6 +82,9 @@ interface CoachmarkV2ContextType {
   align?: NewPopoverAlignment;
   triggerRef: React.RefObject<HTMLElement | null>;
   positionTune: { x: number; y: number };
+  contentRef: HTMLElement | null;
+  setContentRef: (value: any) => void;
+  isFloating?: boolean;
 }
 
 export const CoachmarkV2Context = createContext<CoachmarkV2ContextType>({
@@ -86,6 +93,9 @@ export const CoachmarkV2Context = createContext<CoachmarkV2ContextType>({
   align: 'bottom',
   triggerRef: { current: null },
   positionTune: { x: 0, y: 0 },
+  contentRef: null,
+  setContentRef: () => {},
+  isFloating: false,
 });
 /**
  * Coachmarks are used to call out specific functionality or concepts
@@ -102,11 +112,15 @@ export const CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
       align = 'bottom',
       isOpenByDefault = false,
       positionTune,
+      isFloating,
       ...rest
     } = props;
     const [open, setOpen] = React.useState(isOpenByDefault);
     const triggerRef = useRef<HTMLElement>(null);
     const internalRef = useRef<HTMLDivElement | null>(null);
+    const [contentRef, setContentRef] = React.useState<HTMLElement | null>(
+      null
+    );
 
     useIsomorphicEffect(() => {
       const { x = 0, y = 0 } = positionTune ?? {};
@@ -135,13 +149,17 @@ export const CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
           align,
           triggerRef,
           positionTune: positionTune ?? { x: 0, y: 0 },
+          contentRef,
+          setContentRef,
+          isFloating,
         }}
       >
         <div
           {...rest}
           className={cx(
             blockClass, // Apply the block class to the main HTML element
-            className // Apply any supplied class names to the main HTML element.
+            className, // Apply any supplied class names to the main HTML element.
+            { [`${blockClass}--floating`]: isFloating }
           )}
           aria-label={ariaLabel}
           ref={setRef}
@@ -180,6 +198,10 @@ CoachmarkV2.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  /**
+   * Specifies whether the component is floating or not.
+   */
+  isFloating: PropTypes.bool,
   /**
    * Specifies whether the component is currently open.
    */

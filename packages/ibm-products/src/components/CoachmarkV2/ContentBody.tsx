@@ -32,7 +32,9 @@ const ContentBody = React.forwardRef<HTMLDivElement, ContentBodyProps>(
     const { className = '', children, ...rest } = props;
     const ContentBodyBlockClass = `${blockClass}--content-body`;
     return (
-      <div className={cx(ContentBodyBlockClass, className)}>{children}</div>
+      <div ref={ref} className={cx(ContentBodyBlockClass, className)}>
+        {children}
+      </div>
     );
   }
 );

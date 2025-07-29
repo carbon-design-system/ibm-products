@@ -14,6 +14,7 @@ import styles from './_storybook-styles.scss?inline';
 import { Button, Theme } from '@carbon/react';
 import CoachmarkContent from './CoachmarkContent';
 import { CoachmarkBeacon } from './CoachmarkBeacon';
+import { Crossroads } from '@carbon/react/icons';
 
 export default {
   title: 'Experimental/Onboarding/CoachmarkV2/CoachmarkV2',
@@ -58,49 +59,52 @@ export default {
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
-const Template = (args) => {
-  function useCarbonTheme() {
-    const [themeValue, setThemeValue] = useState(() =>
-      document.documentElement.getAttribute('data-carbon-theme')
-    );
 
-    useEffect(() => {
-      const target = document.documentElement;
+//fetching theme
+function useCarbonTheme() {
+  const [themeValue, setThemeValue] = useState(() =>
+    document.documentElement.getAttribute('data-carbon-theme')
+  );
 
-      // function to read the current theme
-      const readTheme = () => {
-        const newTheme = target.getAttribute('data-carbon-theme');
-        setThemeValue((prev) => (prev !== newTheme ? newTheme : prev));
-      };
+  useEffect(() => {
+    const target = document.documentElement;
 
-      const observer = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
-          if (
-            mutation.type === 'attributes' &&
-            mutation.attributeName === 'data-carbon-theme'
-          ) {
-            readTheme();
-          }
+    // function to read the current theme
+    const readTheme = () => {
+      const newTheme = target.getAttribute('data-carbon-theme');
+      setThemeValue((prev) => (prev !== newTheme ? newTheme : prev));
+    };
+
+    const observer = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'data-carbon-theme'
+        ) {
+          readTheme();
         }
-      });
+      }
+    });
 
-      observer.observe(target, {
-        attributes: true,
-        attributeFilter: ['data-carbon-theme'],
-      });
+    observer.observe(target, {
+      attributes: true,
+      attributeFilter: ['data-carbon-theme'],
+    });
 
-      //fallback - check readTheme in every 200ms
-      const interval = setInterval(readTheme, 200);
+    //fallback - check readTheme in every 200ms
+    const interval = setInterval(readTheme, 200);
 
-      return () => {
-        observer.disconnect();
-        clearInterval(interval);
-      };
-    }, []);
+    return () => {
+      observer.disconnect();
+      clearInterval(interval);
+    };
+  }, []);
 
-    return themeValue;
-  }
+  return themeValue;
+}
 
+//Tooltip variant
+const TooltipTemplate = (args) => {
   const carbonTheme = useCarbonTheme();
 
   return (
@@ -125,11 +129,48 @@ const Template = (args) => {
   );
 };
 
+//Floating variant
+const FloatingTemplate = (args) => {
+  const carbonTheme = useCarbonTheme();
+
+  return (
+    <Theme theme={carbonTheme}>
+      <CoachmarkV2 isFloating={true} {...args}>
+        <CoachmarkV2.Trigger>
+          <Button
+            id="CoachmarkBtn"
+            kind="tertiary"
+            size="md"
+            label="Show information"
+            renderIcon={Crossroads}
+          >
+            Show information
+          </Button>
+        </CoachmarkV2.Trigger>
+        <CoachmarkV2.Content highContrast={true}>
+          <CoachmarkContent.Header></CoachmarkContent.Header>
+          <CoachmarkContent.Body>
+            <h2>Hello World</h2>
+            <p>this is a description test</p>
+            <Button size="sm">Done</Button>
+          </CoachmarkContent.Body>
+        </CoachmarkV2.Content>
+      </CoachmarkV2>
+    </Theme>
+  );
+};
+
 /**
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const Tooltip = Template.bind({});
+export const Tooltip = TooltipTemplate.bind({});
+Tooltip.args = {
+  isOpenByDefault: true,
+  align: 'top',
+};
+
+export const Floating = FloatingTemplate.bind({});
 Tooltip.args = {
   isOpenByDefault: true,
   align: 'top',

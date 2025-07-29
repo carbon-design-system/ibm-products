@@ -14,7 +14,7 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-
+import { pkg } from '../../settings';
 import { blockClass, CoachmarkV2Context } from './Coachmark-v2';
 import { CoachmarkBubble } from './CoachmarkBubble';
 import ContentHeader, { ContentHeaderProps } from './ContentHeader';
@@ -52,10 +52,11 @@ export type CoachmarkContentComponent = React.ForwardRefExoticComponent<
 const CoachmarkContent = React.forwardRef<
   HTMLDivElement,
   CoachmarkContentProps
->((props) => {
+>((props, ref) => {
   const { className = '', children, highContrast, dropShadow, ...rest } = props;
   const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
-  const { align, onClose, open, setOpen, triggerRef } =
+  const contentBodyClass = `${blockClass}--content-body`;
+  const { align, onClose, open, setOpen, triggerRef, setContentRef } =
     useContext(CoachmarkV2Context);
   const [targetId, setTargetId] = useState<string | null>(null);
 
@@ -70,6 +71,24 @@ const CoachmarkContent = React.forwardRef<
   }, [open, triggerRef]);
 
   const bubbleRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (open && bubbleRef.current) {
+      requestAnimationFrame(() => {
+        const contentBody = bubbleRef.current!.querySelector(
+          `.${contentBodyClass}`
+        );
+
+        if (contentBody) {
+          const firstFocusable = Array.from(
+            contentBody.querySelectorAll<HTMLElement>('*')
+          ).find((el) => el.tabIndex >= 0);
+          firstFocusable?.focus();
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -94,6 +113,17 @@ const CoachmarkContent = React.forwardRef<
     };
   }, [open, targetId, setOpen]);
 
+  useEffect(() => {
+    if (open && bubbleRef.current) {
+      const dragContainer = bubbleRef.current.querySelector(
+        `.${pkg.prefix}__bubble`
+      );
+      if (dragContainer instanceof HTMLElement) {
+        setContentRef(dragContainer);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, bubbleRef.current]);
   return (
     open && (
       <div ref={bubbleRef}>

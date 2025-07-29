@@ -604,7 +604,7 @@ export const inputData = {
         operators: customOperators,
         valueFormatter: (value) => {
           // add any customization to the value to be populated
-          return value.toLocaleUpperCase();
+          return value?.toLocaleUpperCase();
         },
       },
     },

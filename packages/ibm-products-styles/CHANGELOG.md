@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.67.0-rc.0`
+## `@carbon/ibm-products-styles@2.67.0`
 ### Features :rocket:
 - feat: change to make interstitialScreen stable (#7814)
 - feat(PageHeader): new experimental PageHeader component (#7733)

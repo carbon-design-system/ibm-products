@@ -1878,6 +1878,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/ibm-cloud-cognitive-core@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "@carbon/ibm-cloud-cognitive-core@workspace:packages/core"
+  dependencies:
+    "@carbon/grid": "npm:^11.38.0"
+    "@carbon/ibm-products-styles": "npm:^2.67.0"
+    "@carbon/layout": "npm:^11.36.0"
+    "@carbon/motion": "npm:^11.30.0"
+    "@carbon/react": "npm:^1.85.1"
+    "@carbon/themes": "npm:^11.55.0"
+    "@carbon/type": "npm:^11.42.0"
+    fast-glob: "npm:^3.3.3"
+    lottie-web: "npm:^5.12.2"
+    npm-run-all: "npm:^4.1.5"
+    prop-types: "npm:^15.8.1"
+    react: "npm:^19.1.0"
+    react-dom: "npm:^19.1.0"
+    regenerator-runtime: "npm:^0.14.1"
+    remark-gfm: "npm:^4.0.1"
+    rimraf: "npm:^6.0.1"
+    sass: "npm:^1.85.1"
+    typescript: "npm:^5.8.2"
+  languageName: unknown
+  linkType: soft
+
 "@carbon/ibm-products-styles@npm:^2.67.0, @carbon/ibm-products-styles@npm:^2.67.0-rc.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
@@ -15762,7 +15787,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lottie-web@npm:^5.13.0":
+"lottie-web@npm:^5.12.2, lottie-web@npm:^5.13.0":
   version: 5.13.0
   resolution: "lottie-web@npm:5.13.0"
   checksum: 10/ccc65b91ddc569c874de265252ef41cb546798515dd63c5ee366844efd1e10335c080c483ce4305faba0cebd54c4afd6bb918fd0d6f4394dcc284fc0c3944941
@@ -19233,6 +19258,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"regenerator-runtime@npm:^0.14.1":
+  version: 0.14.1
+  resolution: "regenerator-runtime@npm:0.14.1"
+  checksum: 10/5db3161abb311eef8c45bcf6565f4f378f785900ed3945acf740a9888c792f75b98ecb77f0775f3bf95502ff423529d23e94f41d80c8256e8fa05ed4b07cf471
+  languageName: node
+  linkType: hard
+
 "regenerator-transform@npm:^0.15.2":
   version: 0.15.2
   resolution: "regenerator-transform@npm:0.15.2"
@@ -19288,7 +19320,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark-gfm@npm:^4.0.0":
+"remark-gfm@npm:^4.0.0, remark-gfm@npm:^4.0.1":
   version: 4.0.1
   resolution: "remark-gfm@npm:4.0.1"
   dependencies:
@@ -21719,6 +21751,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^5.8.2":
+  version: 5.8.3
+  resolution: "typescript@npm:5.8.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/65c40944c51b513b0172c6710ee62e951b70af6f75d5a5da745cb7fab132c09ae27ffdf7838996e3ed603bb015dadd099006658046941bd0ba30340cc563ae92
+  languageName: node
+  linkType: hard
+
 "typescript@npm:~5.2.0":
   version: 5.2.2
   resolution: "typescript@npm:5.2.2"
@@ -21736,6 +21778,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10/97920a082ffc57583b1cb6bc4faa502acc156358e03f54c7fc7fdf0b61c439a717f4c9070c449ee9ee683d4cfc3bb203127c2b9794b2950f66d9d307a4ff262c
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5.8.2#optional!builtin<compat/typescript>":
+  version: 5.8.3
+  resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/b9b1e73dabac5dc730c041325dbd9c99467c1b0d239f1b74ec3b90d831384af3e2ba973946232df670519147eb51a2c20f6f96163cea2b359f03de1e2091cc4f
   languageName: node
   linkType: hard
 

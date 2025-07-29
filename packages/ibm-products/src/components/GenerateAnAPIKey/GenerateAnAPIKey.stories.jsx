@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { Button, Modal, TextInput } from '@carbon/react';
+import { Button, Modal, TextInput, PasswordInput } from '@carbon/react';
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './GenerateAnAPIKey.mdx';
 import wait from '../../global/js/utils/wait';
@@ -66,7 +66,7 @@ const InstantTemplate = () => {
         secondaryButtonText="Close"
         onRequestSubmit={copyKey}
       >
-        <TextInput value={key} readOnly />
+        <PasswordInput value={key} />
         <p>
           This is your unique API key and is non-recoverable. If you lose this
           API key, you will have to reset it.

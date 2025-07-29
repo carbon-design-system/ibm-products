@@ -94,19 +94,6 @@ export default class SetOfBreadcrumbs extends LitElement {
       this.style.visibility = 'visible';
     });
   }
-  updated(changedProperties: Map<string, unknown>) {
-    if (changedProperties.has('breadcrumbsData')) {
-      this.hiddenItems = [];
-      this.overflowHandler?.disconnect();
-      this.overflowHandler = createOverflowHandler({
-        offsetValue: 14,
-        container: this.container,
-        onChange: (visibleItems: HTMLElement[], _) => {
-          this.hiddenItems = this.breadcrumbsData?.slice(visibleItems.length);
-        },
-      });
-    }
-  }
 
   disconnectedCallback() {
     super.disconnectedCallback();

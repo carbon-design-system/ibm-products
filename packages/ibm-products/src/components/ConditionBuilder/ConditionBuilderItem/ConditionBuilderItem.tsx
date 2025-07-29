@@ -54,7 +54,10 @@ interface ConditionBuilderItemProps extends PropsWithChildren {
   description?: string;
   condition?: Action & Condition;
   config?: ConfigType;
-  renderChildren?: (ref: Ref<HTMLDivElement | null>) => ReactNode;
+  renderChildren?: (
+    ref: Ref<HTMLDivElement | null>,
+    closePopover: () => void
+  ) => ReactNode;
   onChange?: (val: string) => void;
   tabIndex?: number;
   onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -115,6 +118,15 @@ export const ConditionBuilderItem = ({
     statementIdMap
   );
 
+  const getCustomOperatorLabel = (propertyLabel) => {
+    return (
+      propertyLabel &&
+      config?.operators?.find((operator) => {
+        return operator.id === propertyLabel;
+      })
+    );
+  };
+
   const getPropertyDetails = () => {
     const { property, operator } = condition || {};
     if (
@@ -125,6 +137,12 @@ export const ConditionBuilderItem = ({
       return {
         propertyLabel: invalidText,
         isInvalid: true,
+      };
+    }
+    if (rest['data-name'] == 'operatorField' && type == 'custom') {
+      return {
+        isInvalid: false,
+        propertyLabel: getCustomOperatorLabel(label)?.id,
       };
     }
     const propertyId =
@@ -160,7 +178,9 @@ export const ConditionBuilderItem = ({
       }
       if (condition.popoverToOpen == currentField) {
         //current popover need to be opened
-        openPopOver();
+        setTimeout(() => {
+          openPopOver();
+        });
       }
     } else {
       // when we change any statement(if/ excl.if) which is not part of condition state, label change is triggered.
@@ -206,19 +226,10 @@ export const ConditionBuilderItem = ({
   };
 
   const handleKeyDownHandler = (evt: KeyboardEvent) => {
-    handleKeyDownForPopover(evt, conditionBuilderRef, popoverRef);
+    handleKeyDownForPopover(evt, conditionBuilderRef, popoverRef, closePopover);
     if (evt.key === 'Escape') {
       manageInvalidSelection();
     }
-  };
-
-  const getCustomOperatorLabel = (propertyLabel) => {
-    return (
-      propertyLabel &&
-      config?.operators?.find((operator) => {
-        return operator.id === propertyLabel;
-      })
-    );
   };
 
   const getLabel = () => {
@@ -275,7 +286,9 @@ export const ConditionBuilderItem = ({
                 {title}
               </Heading>
               <div className={`${blockClass}__popover-content`}>
-                {renderChildren ? renderChildren(popoverRef) : children}
+                {renderChildren
+                  ? renderChildren(popoverRef, closePopover)
+                  : children}
               </div>
             </Section>
           </Layer>

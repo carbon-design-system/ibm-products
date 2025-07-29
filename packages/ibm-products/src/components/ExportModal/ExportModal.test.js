@@ -8,7 +8,7 @@
 import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { carbon } from '../../settings';
+import { carbon, pkg } from '../../settings';
 
 import { ExportModal } from '.';
 
@@ -169,10 +169,11 @@ describe(componentName, () => {
   });
 
   //@TODO: reinstate this test as soon as https://github.com/carbon-design-system/carbon/issues/10107 is fixed
-  it.skip('has no accessibility violations', async () => {
-    const { container } = render(<ExportModal {...defaultProps} />);
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
+  it('has no accessibility violations', async () => {
+    render(<ExportModal {...defaultProps} />);
+    const modalElement = document.querySelector(`.${pkg.prefix}--export-modal`);
+    expect(modalElement).toBeAccessible(componentName);
+    expect(modalElement).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {

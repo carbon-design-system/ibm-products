@@ -26,11 +26,13 @@ interface ItemOptionProps {
     isStatement?: boolean;
   };
   onChange: (value: string, e: Event) => void;
+  closePopover?: () => void;
 }
 export const ItemOption = ({
   conditionState = {},
   config = {},
   onChange,
+  closePopover,
 }: ItemOptionProps) => {
   const { popOverSearchThreshold } = useContext(ConditionBuilderContext);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -39,7 +41,7 @@ export const ItemOption = ({
     'clearSearchText',
   ]);
   const { conditionBuilderRef } = useContext(ConditionBuilderContext);
-  const allOptions = config.options;
+  const allOptions = config?.options;
   const [searchValue, setSearchValue] = useState('');
 
   const selection = conditionState.value;
@@ -100,9 +102,9 @@ export const ItemOption = ({
             labelText={clearSearchText}
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
-            onKeyDown={(evt: KeyboardEvent) =>
-              onKeyDownHandlerForSearch(evt, conditionBuilderRef)
-            }
+            onKeyDown={(evt: React.KeyboardEvent<HTMLInputElement>) => {
+              onKeyDownHandlerForSearch(evt, conditionBuilderRef, closePopover);
+            }}
           />
         </div>
       )}
@@ -127,7 +129,7 @@ export const ItemOption = ({
               <div className={`${blockClass}__item-option__option-content`}>
                 <span className={`${blockClass}__item-option__option-label`}>
                   {Icon && <Icon />}
-                  {config.isStatement
+                  {config?.isStatement
                     ? getStatementContent(option)
                     : option.label}
                 </span>

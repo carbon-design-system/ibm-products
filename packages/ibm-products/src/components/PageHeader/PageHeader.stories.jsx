@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import {
   Button,
@@ -649,7 +649,6 @@ const Template = ({
       <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
       <ContainerDivOrTabs
         className={`${storyClass}__content-container`}
-        tabIndex={0}
         navigation={navigation}
       >
         <main>
@@ -864,7 +863,6 @@ const TemplateDemo = ({
       >
         <ContainerDivOrTabs
           className={`${storyClass}__content-container`}
-          tabIndex={0}
           navigation={navigation}
         >
           <main>

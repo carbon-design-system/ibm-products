@@ -4,16 +4,168 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { expect, describe, it } from 'vitest';
+import { expect, describe, it, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import Bee32 from '@carbon/web-components/es/icons/bee/32.js';
 import CDSPageHeader from './page-header';
 import CDSPageHeaderBreadcrumb from './page-header-breadcrumb';
 import CDSPageHeaderTabs from './page-header-tabs';
 import CDSTabs from '@carbon/web-components/es/components/tabs/tabs';
+import { carbonPrefix, prefix } from '../../globals/settings';
 import './index';
 
+const IntersectionObserverMock = vi.fn(() => ({
+  disconnect: vi.fn(),
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+}));
+
+vi.stubGlobal('IntersectionObserver', IntersectionObserverMock);
+
 describe('c4p-page-header', function () {
+  it('should find custom css properties to initialize sticky positioning', async () => {
+    const pageHeader: CDSPageHeader = await fixture(
+      html`<c4p-page-header>
+        <c4p-page-header-breadcrumb>
+          <cds-breadcrumb>
+            <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
+            <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </c4p-page-header-breadcrumb>
+        <c4p-page-header-content title="Page header content title">
+        </c4p-page-header-content>
+      </c4p-page-header>`
+    );
+    await pageHeader.updateComplete;
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const contentHeight = getComputedStyle(pageHeader).getPropertyValue(
+      `--${prefix}-page-header-header-top`
+    );
+    const breadcrumbPosition = getComputedStyle(pageHeader).getPropertyValue(
+      `--${prefix}-page-header-breadcrumb-top`
+    );
+
+    expect(parseFloat(contentHeight)).toBeTypeOf('number');
+    expect(parseFloat(breadcrumbPosition)).toBeTypeOf('number');
+  });
+
+  describe('c4p-page-header-scroller', () => {
+    it('should collapse the page header/scroll', async () => {
+      const pageHeader: CDSPageHeader = await fixture(
+        html`<main style="height: 200vh;">
+          <c4p-page-header>
+            <c4p-page-header-breadcrumb>
+              <cds-breadcrumb>
+                <cds-breadcrumb-item href="/#"
+                  >Breadcrumb 1</cds-breadcrumb-item
+                >
+                <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+              </cds-breadcrumb>
+            </c4p-page-header-breadcrumb>
+            <c4p-page-header-content title="Page header content title">
+            </c4p-page-header-content>
+            <c4p-page-header-tabs>
+              <c4p-page-header-scroller slot="scroller">
+              </c4p-page-header-scroller>
+              <cds-tabs value="tab-1">
+                <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                  >Tab 1</cds-tab
+                >
+                <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+                  >Tab 2</cds-tab
+                >
+                <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+                  >Tab 3</cds-tab
+                >
+                <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+                  >Tab 4</cds-tab
+                >
+                <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+                  >Tab 5</cds-tab
+                >
+                <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+                  >Tab 6</cds-tab
+                >
+                <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+                  >Tab 7</cds-tab
+                >
+              </cds-tabs>
+            </c4p-page-header-tabs>
+          </c4p-page-header>
+          <div class="tabs-demo">
+            <div
+              id="tab-panel-1"
+              role="tabpanel"
+              aria-labelledby="tab-1"
+              hidden
+            >
+              Tab Panel 1
+            </div>
+            <div
+              id="tab-panel-2"
+              role="tabpanel"
+              aria-labelledby="tab-2"
+              hidden
+            >
+              Tab Panel 2
+            </div>
+            <div
+              id="tab-panel-3"
+              role="tabpanel"
+              aria-labelledby="tab-3"
+              hidden
+            >
+              Tab Panel 3
+            </div>
+            <div
+              id="tab-panel-4"
+              role="tabpanel"
+              aria-labelledby="tab-4"
+              hidden
+            >
+              Tab Panel 4
+            </div>
+            <div
+              id="tab-panel-5"
+              role="tabpanel"
+              aria-labelledby="tab-5"
+              hidden
+            >
+              Tab Panel 5
+            </div>
+            <div
+              id="tab-panel-6"
+              role="tabpanel"
+              aria-labelledby="tab-6"
+              hidden
+            >
+              Tab Panel 6
+            </div>
+            <div
+              id="tab-panel-7"
+              role="tabpanel"
+              aria-labelledby="tab-7"
+              hidden
+            >
+              Tab Panel 7
+            </div>
+          </div>
+        </main>`
+      );
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const scrollerButton = pageHeader.querySelector(
+        `${prefix}-page-header-scroller`
+      ) as HTMLElement;
+      const iconButton = scrollerButton?.shadowRoot?.querySelector(
+        `${carbonPrefix}-icon-button`
+      ) as HTMLElement;
+      expect(scrollerButton).toBeDefined();
+      expect(iconButton?.textContent?.trim()).toBe('Collapse');
+    });
+  });
+
   describe('c4p-page-header-breadcrumb', () => {
     it('should place className on the outermost element', async () => {
       const el: CDSPageHeaderBreadcrumb = await fixture(
@@ -38,6 +190,27 @@ describe('c4p-page-header', function () {
 
       const breadcrumbItems = el.querySelectorAll('cds-breadcrumb-item');
       expect(breadcrumbItems.length).to.equal(2);
+    });
+
+    it('should render title breadcrumb item', async () => {
+      const el: CDSPageHeaderBreadcrumb = await fixture(html`
+        <c4p-page-header-breadcrumb>
+          <cds-breadcrumb>
+            <cds-breadcrumb-item href="/#">Breadcrumb 1</cds-breadcrumb-item>
+            <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
+            <c4p-page-header-title-breadcrumb>
+              Virtual Machine DAL
+            </c4p-page-header-title-breadcrumb>
+          </cds-breadcrumb>
+        </c4p-page-header-breadcrumb>
+      `);
+
+      await el.updateComplete;
+
+      const titleBreadcrumb = el.querySelectorAll(
+        'c4p-page-header-title-breadcrumb'
+      );
+      expect(titleBreadcrumb).to.exist;
     });
 
     it('should render content actions', async () => {

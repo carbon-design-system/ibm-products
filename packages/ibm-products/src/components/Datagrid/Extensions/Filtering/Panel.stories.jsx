@@ -12,7 +12,7 @@ import { Datagrid } from '../../index';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 import { DocsPage } from './Filtering.docs-page';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import styles from '../../_storybook-styles.scss?inline';
 import { FilteringUsage } from '../../utils/FilteringUsage';
 import { getDateFormat } from '../../utils/getDateFormat';

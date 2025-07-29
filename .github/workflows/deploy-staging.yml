@@ -26,11 +26,13 @@ jobs:
           node-version: '20.x'
           registry-url: https://registry.npmjs.org
           cache: 'yarn'
+
       - name: Install dependencies
         run: yarn install
+
       - name: Build packages and storybook
         run: |
-          yarn storybook:build
+          yarn build
           yarn storybook-wc:build
 
       # Deploy to staging Github Pages using `gh-pages` package
@@ -41,6 +43,12 @@ jobs:
 
           mkdir -p staging-dist/web-components
           cp -r packages/ibm-products-web-components/storybook-static/* staging-dist/web-components
+
+      # Set authenticated Git remote
+      - name: Set authenticated Git remote
+        run:
+          git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN
+          }}@github.com/${{ github.repository }}.git
 
       - name: Deploy both Storybooks to GitHub Pages (gh-pages/staging)
         run: |

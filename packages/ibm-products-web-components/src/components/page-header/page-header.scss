@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/grid';
@@ -26,9 +27,13 @@ $carbon-prefix: 'cds';
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header;
+  position: sticky;
   display: block;
   background-color: $layer-01;
   border-block-end: 1px solid $border-subtle-01;
+  /* custom css property used from calculation of header offset */
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: var(--c4p-page-header-header-top);
 }
 
 :host(#{$prefix}-page-header-breadcrumb),
@@ -40,7 +45,14 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-breadcrumb) {
+  position: sticky;
+  background-color: $layer-01;
   block-size: convert.to-rem(40px);
+  border-block-end: $border-subtle;
+
+  /* custom css property used from calculation of breadcrumb offset */
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: var(--c4p-page-header-breadcrumb-top);
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__breadcrumb-bar;
@@ -271,6 +283,11 @@ $carbon-prefix: 'cds';
   }
 }
 
+:host(#{$prefix}-page-header-tabs) ::slotted([slot='scroller']) {
+  position: absolute;
+  inset-inline-end: 0;
+}
+
 :host(#{$prefix}-page-header-breadcrumb),
 :host(#{$prefix}-page-header-content),
 :host(#{$prefix}-page-header-tabs) {
@@ -285,4 +302,68 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-tabs) ::slotted(#{$carbon-prefix}-tabs) {
   --tabs-overflow-button-background: $layer-01;
+}
+
+@keyframes page-header-title-breadcrumb-animation {
+  0% {
+    opacity: 0;
+    transform: translateY($spacing-05);
+  }
+
+  5% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes page-header-title-breadcrumb-animation-reduced-motion {
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+:host(#{$prefix}-page-header-title-breadcrumb) {
+  opacity: 0;
+  transform: translateY($spacing-05);
+  transition:
+    /* stylelint-disable-next-line */
+    transform motion(standard, productive) $duration-moderate-01,
+    opacity motion(standard, productive) $duration-moderate-01;
+  // Target browsers that do not yet support animation-timeline: scroll()
+  @supports not (animation-timeline: scroll()) {
+    &.#{$prefix}--page-header-title-breadcrumb-show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      transform: translateY(0);
+      /* stylelint-disable-next-line */
+      transition: opacity motion(standard, productive) $duration-moderate-01;
+    }
+  }
+  // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+  @supports (animation-timeline: scroll()) {
+    animation-direction: alternate;
+    animation-duration: 1ms; /* Firefox requires this to apply the animation */
+    animation-name: page-header-title-breadcrumb-animation;
+    animation-timeline: scroll(block nearest);
+
+    @media (prefers-reduced-motion: reduce) {
+      animation-name: page-header-title-breadcrumb-animation-reduced-motion;
+      transform: translateY(0);
+    }
+  }
 }

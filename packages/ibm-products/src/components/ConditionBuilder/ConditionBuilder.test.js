@@ -688,6 +688,14 @@ describe(componentName, () => {
 
     //add first condition
 
+    await waitFor(
+      () =>
+        screen.getByRole('option', {
+          name: 'Continent',
+        }),
+      { timeout: 100 }
+    );
+
     await act(() =>
       userEvent.click(
         screen.getByRole('option', {
@@ -700,6 +708,14 @@ describe(componentName, () => {
       screen.getByRole('option', {
         name: 'is',
       })
+    );
+
+    await waitFor(
+      () =>
+        screen.getByRole('option', {
+          name: 'Africa',
+        }),
+      { timeout: 100 }
     );
 
     fireEvent.click(
@@ -1893,7 +1909,7 @@ describe(componentName, () => {
 
   // keyboard navigation tests
   //for Non-Hierarchical variant
-  it.skip('add and remove conditions using keyboard', async () => {
+  it('add and remove conditions using keyboard', async () => {
     render(
       <ConditionBuilder
         {...defaultProps}
@@ -2022,7 +2038,7 @@ describe(componentName, () => {
   });
 
   //for Hierarchical variant
-  it.skip('add and remove conditions using keyboard', async () => {
+  it('add and remove conditions using keyboard', async () => {
     render(
       <ConditionBuilder
         {...defaultProps}

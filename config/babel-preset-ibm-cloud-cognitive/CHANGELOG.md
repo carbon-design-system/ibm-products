@@ -1,3 +1,7 @@
+## `@babel-preset-ibm-cloud-cognitive@0.29.0`
+### Housekeeping :house:
+- chore: remove redundant upgrade scripts (#7774)
+
 ## `@babel-preset-ibm-cloud-cognitive@0.27.0`
 ### Housekeeping :house:
 - build(deps): update Carbon 11 compatible versions to latest (#7593)

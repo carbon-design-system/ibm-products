@@ -27,6 +27,7 @@ interface Metadata {
   id?: string;
   icon?: () => ReactNode;
   iconDescription?: string;
+  [key: `data-${string}`]: string;
 }
 
 type LinkType = {

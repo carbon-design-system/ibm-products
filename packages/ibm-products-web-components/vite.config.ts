@@ -39,6 +39,9 @@ export default defineConfig({
       exclude: ['src/**/*.stories.{js,ts}', 'src/components/*/_story-assets/*'],
       reporter: ['text', 'html', 'json'],
     },
+    css: {
+      include: /page-header/,
+    },
   },
   css: {
     preprocessorOptions: {

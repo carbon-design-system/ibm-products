@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,7 @@ import React, { useRef, useState } from 'react';
 import PackageInfo from '../../../ibm-products/package.json';
 import { Link, Tag } from '@carbon/react';
 import { ArrowRight, Pause, Play } from '@carbon/react/icons';
-import lottie from 'lottie-web';
+import lottie from 'lottie-web/build/player/lottie_light';
 import WelcomeLottie from './welcome-lottie.json';
 import './_storybook-styles.scss';
 

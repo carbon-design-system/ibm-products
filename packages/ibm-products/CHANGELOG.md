@@ -1,3 +1,7 @@
+## `@carbon/ibm-products@2.71.1`
+### Bug fixes :bug:
+- fix(PageHeader): export as preview from ts exports, bump resizer
+
 ## `@carbon/ibm-products@2.71.0`
 ### Features :rocket:
 - feat: add various options for description (#7708)

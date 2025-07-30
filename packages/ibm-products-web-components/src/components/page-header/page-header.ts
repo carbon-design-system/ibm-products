@@ -17,7 +17,7 @@ import { pageHeaderContext } from './context';
 import { getHeaderOffset } from './utils';
 import CDSPageHeaderContent from './page-header-content';
 
-export interface offsetValues {
+export interface pageHeaderContextType {
   breadcrumbOffset?: number;
   headerOffset?: number;
   fullyCollapsed?: boolean;
@@ -33,7 +33,7 @@ export interface offsetValues {
 class CDSPageHeader extends LitElement {
   @state()
   @provide({ context: pageHeaderContext })
-  context: offsetValues = {};
+  context: pageHeaderContextType = {};
 
   private resizeObserver: ResizeObserver | undefined;
 

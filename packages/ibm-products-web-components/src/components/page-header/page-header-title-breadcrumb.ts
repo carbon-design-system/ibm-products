@@ -14,7 +14,7 @@ import { CDSBreadcrumbItem } from '@carbon/web-components/es/index';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { pageHeaderContext } from './context';
-import { offsetValues } from './page-header';
+import { pageHeaderContextType } from './page-header';
 
 /**
  * Page header Title Breadcrumb
@@ -31,7 +31,7 @@ class CDSPageHeaderTitleBreadcrumb extends CDSBreadcrumbItem {
       context: pageHeaderContext,
       subscribe: true,
       callback: (state) => {
-        if ((state as offsetValues).withContent) {
+        if ((state as pageHeaderContextType).withContent) {
           this.classList.add(
             `${prefix}--page-header-title-breadcrumb-show__with-content`
           );

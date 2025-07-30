@@ -130,15 +130,21 @@ export const CoachmarkV2 = forwardRef<HTMLDivElement, CoachmarkV2Props>(
     const [openState, setOpenState] = useState(false);
 
     const setOpen = (value: boolean) => {
-      if (!value) {onClose?.();}
-      if (open === undefined) {setOpenState(value);}
+      if (!value) {
+        onClose?.();
+      }
+      if (open === undefined) {
+        setOpenState(value);
+      }
     };
 
     const currentOpen = open ?? openState;
 
     useEffect(() => {
       const container = internalRef.current;
-      if (!container) {return;}
+      if (!container) {
+        return;
+      }
 
       const focusableElements = Array.from(
         container.querySelectorAll('*')

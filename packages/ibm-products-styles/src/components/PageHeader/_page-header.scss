@@ -917,6 +917,9 @@ $duration: 1000ms;
     }
   }
 
+  // **** This is a temporary work-around until the focus clipping
+  // **** for overflowing tabs is resolved in core.
+  // **** https://github.com/carbon-design-system/carbon/issues/19942
   .#{$carbon-prefix}--tabs .#{$carbon-prefix}--tabs__nav-link {
     margin-inline-end: $spacing-01;
   }

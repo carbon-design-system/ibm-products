@@ -38,9 +38,6 @@ import { Example as ExportModalExample } from './ExportModal/src/Example/Example
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
 import { Example as FilterPanelExample } from './FilterPanel/src/Example/Example';
 import { Example as FullPageErrorExample } from './FullPageError/src/Example/Example';
-import { Example as GenerateAnAPIKeyExample } from './GenerateAnAPIKey/src/Example/Example';
-import { Example as GenerateAnAPIKeyEditExample } from './GenerateAnAPIKeyEdit/src/Example/Example';
-import { Example as GenerateAnAPIKeyInstantExample } from './GenerateAnAPIKeyInstant/src/Example/Example';
 import { Example as GetStartedCardExample } from './GetStartedCard/src/Example/Example';
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
@@ -245,24 +242,6 @@ describe('All examples', () => {
 
   it('FullPageError renders', () => {
     render(<FullPageErrorExample />);
-    // expect no errors int the console
-    expect(console.error).not.toHaveBeenCalled();
-  });
-
-  it('GenerateAnAPIKey renders', () => {
-    render(<GenerateAnAPIKeyExample />);
-    // expect no errors int the console
-    expect(console.error).not.toHaveBeenCalled();
-  });
-
-  it('GenerateAnAPIKeyEdit renders', () => {
-    render(<GenerateAnAPIKeyEditExample />);
-    // expect no errors int the console
-    expect(console.error).not.toHaveBeenCalled();
-  });
-
-  it('GenerateAnAPIKeyInstant renders', () => {
-    render(<GenerateAnAPIKeyInstantExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

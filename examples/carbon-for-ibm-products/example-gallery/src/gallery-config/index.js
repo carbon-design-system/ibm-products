@@ -37,9 +37,6 @@ import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
 import imageFilterPanel from './FilterPanel--thumbnail.png';
 import imageFullPageError from './FullPageError--thumbnail.png';
-import imageGenerateAnAPIKey from './GenerateAnAPIKey--thumbnail.png';
-import imageGenerateAnAPIKeyEdit from './GenerateAnAPIKeyEdit--thumbnail.png';
-import imageGenerateAnAPIKeyInstant from './GenerateAnAPIKeyInstant--thumbnail.png';
 import imageGetStartedCard from './GetStartedCard--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
@@ -211,21 +208,6 @@ const config = [
     label: 'Full-Page-Error',
     directory: 'FullPageError',
     thumbnail: `url(${imageFullPageError}`,
-  },
-  {
-    label: 'Generate an API key - Generate',
-    directory: 'GenerateAnAPIKey',
-    thumbnail: `url(${imageGenerateAnAPIKey}`,
-  },
-  {
-    label: 'Generate an API key - Edit',
-    directory: 'GenerateAnAPIKeyEdit',
-    thumbnail: `url(${imageGenerateAnAPIKeyEdit}`,
-  },
-  {
-    label: 'Generate an API key - Instant generate',
-    directory: 'GenerateAnAPIKeyInstant',
-    thumbnail: `url(${imageGenerateAnAPIKeyInstant}`,
   },
   {
     label: 'Get-Started-Card',

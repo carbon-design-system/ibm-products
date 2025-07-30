@@ -258,29 +258,20 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tab-bar--tablist {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   inline-size: 100%;
-
-  // TODO: remove once responsive logic for tags is implemented
-  @include breakpoint-down(md) {
-    flex-direction: column-reverse;
-    grid-gap: $spacing-05;
-  }
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='tags']) {
   display: flex;
   align-items: center;
   justify-content: right;
+  inline-size: 100%;
+  max-inline-size: 500px;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__tags;
-  inline-size: 100%;
-
-  // TODO: remove once responsive logic for tags is implemented
-  @include breakpoint-down(md) {
-    justify-content: left;
-  }
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='scroller']) {

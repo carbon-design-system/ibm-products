@@ -25,43 +25,8 @@ import Bee16 from '@carbon/web-components/es/icons/bee/16.js';
 import Activity16 from '@carbon/web-components/es/icons/activity/16.js';
 import AiGenerate16 from '@carbon/web-components/es/icons/ai-generate/16.js';
 import CloudFoundry16 from '@carbon/web-components/es/icons/cloud-foundry--1/16.js';
-import {
-  TAG_SIZE,
-  TAG_TYPE,
-} from '@carbon/web-components/es/components/tag/defs.js';
-
-const tags = [
-  {
-    type: 'blue',
-    text: 'Tag 1',
-    size: 'md',
-  },
-  {
-    type: 'purple',
-    text: 'Tag 2',
-    size: 'md',
-  },
-  {
-    type: 'red',
-    text: 'Tag 3',
-    size: 'md',
-  },
-  {
-    type: 'blue',
-    text: 'Tag 4',
-    size: 'md',
-  },
-  {
-    type: 'purple',
-    text: 'Tag 5',
-    size: 'md',
-  },
-  {
-    type: 'red',
-    text: 'Tag 6',
-    size: 'md',
-  },
-];
+import './_story-assets/set-of-tags';
+import { generateTags } from './_story-assets/set-of-tags/utils';
 
 const args = {
   border: true,
@@ -502,6 +467,7 @@ export const ContentWithIcon = {
   `,
 };
 
+const generatedTags = generateTags({ count: 10 });
 export const TabBarWithTabsAndTags = {
   render: () => html`
     <style>
@@ -591,14 +557,7 @@ export const TabBarWithTabsAndTags = {
             >
           </cds-tabs>
           <div slot="tags">
-            ${tags.map(
-              (e) =>
-                html` <cds-tag
-                  type="${e.type as TAG_TYPE}"
-                  size="${e.size as TAG_SIZE}"
-                  >${e.text}</cds-tag
-                >`
-            )}
+            <set-of-tags .tagsData="${generatedTags ?? []}"></set-of-tags>
           </div>
         </c4p-page-header-tabs>
       </c4p-page-header>

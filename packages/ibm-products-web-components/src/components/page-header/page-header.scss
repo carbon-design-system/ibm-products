@@ -336,6 +336,32 @@ $carbon-prefix: 'cds';
   }
 }
 
+// Target browsers that do not yet support animation-timeline: scroll()
+@mixin scroll-fallback {
+  @supports not (animation-timeline: scroll()) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transform: translateY(0);
+    /* stylelint-disable-next-line */
+    transition: opacity motion(standard, productive) $duration-moderate-01;
+  }
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show
+) {
+  @include scroll-fallback();
+}
+
+:host(#{$prefix}-page-header-breadcrumb)
+  .#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+  &.#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
+    @include scroll-fallback();
+  }
+}
+
 :host(#{$prefix}-page-header-title-breadcrumb),
 :host(#{$prefix}-page-header-breadcrumb)
   .#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions {
@@ -345,19 +371,6 @@ $carbon-prefix: 'cds';
     /* stylelint-disable-next-line */
     transform motion(standard, productive) $duration-moderate-01,
     opacity motion(standard, productive) $duration-moderate-01;
-  // Target browsers that do not yet support animation-timeline: scroll()
-  @supports not (animation-timeline: scroll()) {
-    &.#{$prefix}--page-header-title-breadcrumb-show,
-    &.#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    @media (prefers-reduced-motion: reduce) {
-      transform: translateY(0);
-      /* stylelint-disable-next-line */
-      transition: opacity motion(standard, productive) $duration-moderate-01;
-    }
-  }
   // `animation-timeline: scroll()` only currently supported in Chromium based browsers
   @supports (animation-timeline: scroll()) {
     animation-direction: alternate;

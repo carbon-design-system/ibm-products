@@ -8,10 +8,14 @@
  */
 
 import { html } from 'lit';
+import { consume, ContextConsumer } from '@lit/context';
+import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { CDSBreadcrumbItem } from '@carbon/web-components/es/index';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
+import { pageHeaderContext } from './context';
+import { offsetValues } from './page-header';
 
 /**
  * Page header Title Breadcrumb
@@ -19,6 +23,24 @@ import styles from './page-header.scss?lit';
  */
 @customElement(`${prefix}-page-header-title-breadcrumb`)
 class CDSPageHeaderTitleBreadcrumb extends CDSBreadcrumbItem {
+  @consume({ context: pageHeaderContext, subscribe: true })
+  context;
+
+  constructor() {
+    super();
+    new ContextConsumer(this, {
+      context: pageHeaderContext,
+      subscribe: true,
+      callback: (state) => {
+        if ((state as offsetValues).titleClipped) {
+          this.classList.add(`${prefix}--page-header-title-breadcrumb-show`);
+        } else {
+          this.classList.remove(`${prefix}--page-header-title-breadcrumb-show`);
+        }
+      },
+    });
+  }
+
   render() {
     return html`
       <cds-breadcrumb-item class="${prefix}--page-header-title-breadcrumb">

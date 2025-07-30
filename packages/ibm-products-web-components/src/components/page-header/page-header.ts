@@ -44,7 +44,6 @@ class CDSPageHeader extends LitElement {
       const titleWrapper = contentElement?.shadowRoot?.querySelector(
         `.${prefix}--page-header__content__title-container`
       );
-      console.log(titleWrapper);
       this.resizeObserver = new ResizeObserver((entries) => {
         const contentElEntry = entries[0];
         const contentHeight = contentElEntry.contentRect.height;

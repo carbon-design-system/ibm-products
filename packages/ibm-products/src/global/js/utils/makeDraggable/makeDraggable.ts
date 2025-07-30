@@ -4,22 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-// /**
-//  * Makes a given element draggable using a handle element.
-//  * @param el - The HTML element to move.
-//  * @param handle - Optional HTML element to initiate the drag (e.g., header).
-//  * @param focusableInHandle - Optional HTML element to focus on drag for keyboard interaction (e.g., Drag Icon).
-//  * @param dragStep - Optional pixel value that defines the distance to move when dragging with arrow keys. (default:8px)
-//  * @param shiftDragStep - Optional pixel value that defines the distance to move when dragging with shift+arrow keys. (default:32px)
-//  */
-// export function makeDraggable(
-//   el: HTMLElement,
-//   handle?: HTMLElement,
-//   focusableInHandle?: HTMLElement,
-//   dragStep?:number,
-//   shiftDragStep?:number,
-// ): void {
 interface DraggableProps {
   //The HTML element to move.
   el: HTMLElement;

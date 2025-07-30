@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { HTMLProps } from 'react';
+import React, { HTMLProps, ReactNode } from 'react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 
@@ -15,7 +15,7 @@ interface BubbleHeaderProps extends HTMLProps<HTMLElement> {
   /**
    * Provide the contents of the Bubble header
    */
-  children: React.ReactNode;
+  children: ReactNode;
   /**
    * Provide an optional class to be applied to the containing node.
    */

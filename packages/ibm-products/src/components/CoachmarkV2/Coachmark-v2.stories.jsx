@@ -109,7 +109,11 @@ const TooltipTemplate = (args) => {
 
   return (
     <Theme theme={carbonTheme}>
-      <CoachmarkV2 positionTune={{ x: 151, y: 155 }} {...args}>
+      <CoachmarkV2
+        ariaLabel="CoachmarkV2"
+        position={{ x: 151, y: 155 }}
+        {...args}
+      >
         <CoachmarkV2.Trigger>
           <CoachmarkBeacon
             id="CoachmarkBtn"
@@ -135,7 +139,7 @@ const FloatingTemplate = (args) => {
 
   return (
     <Theme theme={carbonTheme}>
-      <CoachmarkV2 isFloating={true} {...args}>
+      <CoachmarkV2 ariaLabel="CoachmarkV2" floating={true} {...args}>
         <CoachmarkV2.Trigger>
           <Button
             id="CoachmarkBtn"
@@ -166,12 +170,12 @@ const FloatingTemplate = (args) => {
  */
 export const Tooltip = TooltipTemplate.bind({});
 Tooltip.args = {
-  isOpenByDefault: true,
+  defaultOpen: true,
   align: 'top',
 };
 
 export const Floating = FloatingTemplate.bind({});
 Tooltip.args = {
-  isOpenByDefault: true,
+  defaultOpen: true,
   align: 'top',
 };

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act } from 'react';
+import React, { act, createRef } from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import userEvent from '@testing-library/user-event';
@@ -77,7 +77,7 @@ describe(componentName, () => {
   });
 
   it('forwards a ref to an appropriate node', () => {
-    const ref = React.createRef();
+    const ref = createRef();
     renderCoachmark({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });

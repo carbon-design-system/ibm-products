@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass } from './Coachmark-v2';
@@ -15,7 +15,7 @@ export interface ContentBodyProps {
    * Provide the optional content for header section and will be render after header titles and before progress indicator.
    * People can make use of this if they want to have custom header.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * Provide an optional class to be applied to the containing node.
@@ -24,10 +24,10 @@ export interface ContentBodyProps {
 }
 
 export type EnrichedChildren = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-const ContentBody = React.forwardRef<HTMLDivElement, ContentBodyProps>(
+const ContentBody = forwardRef<HTMLDivElement, ContentBodyProps>(
   (props, ref) => {
     const { className = '', children, ...rest } = props;
     const ContentBodyBlockClass = `${blockClass}--content-body`;

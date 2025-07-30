@@ -5,7 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 // Import portions of React that are needed.
-import React, { ReactNode, createContext, useRef } from 'react';
+import React, {
+  FC,
+  ForwardRefExoticComponent,
+  MutableRefObject,
+  ReactNode,
+  RefAttributes,
+  RefObject,
+  createContext,
+  forwardRef,
+  useRef,
+  useState,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -49,7 +60,7 @@ export interface CoachmarkV2Props {
   /**
    * Specifies whether the component is currently open.
    */
-  isOpenByDefault?: boolean;
+  defaultOpen?: boolean;
   /**
    * Function to call when the close button is clicked.
    */
@@ -61,30 +72,30 @@ export interface CoachmarkV2Props {
   /**
    * Fine tune the position of the target in pixels.
    */
-  positionTune?: { x: number; y: number };
+  position?: { x: number; y: number };
   /**
    * Specifies whether the component is floating or not.
    */
-  isFloating?: boolean;
+  floating?: boolean;
 }
 
 // Define the type for Coachmark, extending it to include Trigger and Content
-export type CoachmarkV2Component = React.ForwardRefExoticComponent<
-  CoachmarkV2Props & React.RefAttributes<HTMLDivElement>
+export type CoachmarkV2Component = ForwardRefExoticComponent<
+  CoachmarkV2Props & RefAttributes<HTMLDivElement>
 > & {
-  Trigger: React.FC<CoachmarkTriggerProps>;
-  Content: React.FC<CoachmarkContentProps>;
+  Trigger: FC<CoachmarkTriggerProps>;
+  Content: FC<CoachmarkContentProps>;
 };
 interface CoachmarkV2ContextType {
   onClose?: () => void;
   open?: boolean;
   setOpen: (value: boolean) => void;
   align?: NewPopoverAlignment;
-  triggerRef: React.RefObject<HTMLElement | null>;
-  positionTune: { x: number; y: number };
+  triggerRef: RefObject<HTMLElement | null>;
+  position: { x: number; y: number };
   contentRef: HTMLElement | null;
   setContentRef: (value: any) => void;
-  isFloating?: boolean;
+  floating?: boolean;
 }
 
 export const CoachmarkV2Context = createContext<CoachmarkV2ContextType>({
@@ -92,51 +103,49 @@ export const CoachmarkV2Context = createContext<CoachmarkV2ContextType>({
   setOpen: () => {},
   align: 'bottom',
   triggerRef: { current: null },
-  positionTune: { x: 0, y: 0 },
+  position: { x: 0, y: 0 },
   contentRef: null,
   setContentRef: () => {},
-  isFloating: false,
+  floating: false,
 });
 /**
  * Coachmarks are used to call out specific functionality or concepts
  * within the UI that may not be intuitive but are important for the
  * user to gain understanding of the product's main value and discover new use cases.
  */
-export const CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
+export const CoachmarkV2 = forwardRef<HTMLDivElement, CoachmarkV2Props>(
   (props, ref) => {
     const {
       children,
       className,
-      ariaLabel = 'CoachmarkV2',
+      ariaLabel,
       onClose,
       align = 'bottom',
-      isOpenByDefault = false,
-      positionTune,
-      isFloating,
+      defaultOpen = false,
+      position,
+      floating,
       ...rest
     } = props;
-    const [open, setOpen] = React.useState(isOpenByDefault);
+    const [open, setOpen] = useState(defaultOpen);
     const triggerRef = useRef<HTMLElement>(null);
     const internalRef = useRef<HTMLDivElement | null>(null);
-    const [contentRef, setContentRef] = React.useState<HTMLElement | null>(
-      null
-    );
+    const [contentRef, setContentRef] = useState<HTMLElement | null>(null);
 
     useIsomorphicEffect(() => {
-      const { x = 0, y = 0 } = positionTune ?? {};
+      const { x = 0, y = 0 } = position ?? {};
       const el = internalRef.current;
 
       if (el && (x !== 0 || y !== 0)) {
         el.style.transform = `translate(${x}px, ${y}px)`;
       }
-    }, [positionTune]);
+    }, [position]);
 
     const setRef = (node: HTMLDivElement | null) => {
       internalRef.current = node;
       if (typeof ref === 'function') {
         ref(node);
       } else if (ref) {
-        (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        (ref as RefObject<HTMLDivElement | null>).current = node;
       }
     };
 
@@ -148,10 +157,10 @@ export const CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
           setOpen,
           align,
           triggerRef,
-          positionTune: positionTune ?? { x: 0, y: 0 },
+          position: position ?? { x: 0, y: 0 },
           contentRef,
           setContentRef,
-          isFloating,
+          floating,
         }}
       >
         <div
@@ -159,7 +168,7 @@ export const CoachmarkV2 = React.forwardRef<HTMLDivElement, CoachmarkV2Props>(
           className={cx(
             blockClass, // Apply the block class to the main HTML element
             className, // Apply any supplied class names to the main HTML element.
-            { [`${blockClass}--floating`]: isFloating }
+            { [`${blockClass}--floating`]: floating }
           )}
           aria-label={ariaLabel}
           ref={setRef}
@@ -199,13 +208,13 @@ CoachmarkV2.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Specifies whether the component is floating or not.
-   */
-  isFloating: PropTypes.bool,
-  /**
    * Specifies whether the component is currently open.
    */
-  isOpenByDefault: PropTypes.bool,
+  defaultOpen: PropTypes.bool,
+  /**
+   * Specifies whether the component is floating or not.
+   */
+  floating: PropTypes.bool,
   /**
    * Function to call when the close button is clicked.
    */
@@ -214,7 +223,7 @@ CoachmarkV2.propTypes = {
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */
   // @ts-ignore
-  positionTune: PropTypes.shape({
+  position: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,
   }),

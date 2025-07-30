@@ -4,7 +4,13 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */ import { Button } from '@carbon/react';
-import React, { useEffect, useRef } from 'react';
+import React, {
+  forwardRef,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass, CoachmarkV2Context } from './Coachmark-v2';
@@ -24,14 +30,14 @@ export interface ContentHeaderProps {
 }
 
 export type EnrichedChildren = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-const ContentHeader = React.forwardRef<HTMLDivElement, ContentHeaderProps>(
+const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
   (props, ref) => {
     const { className = '', closeIconDescription, ...rest } = props;
-    const { open, setOpen, onClose, contentRef, isFloating } =
-      React.useContext(CoachmarkV2Context);
+    const { setOpen, onClose, contentRef, floating } =
+      useContext(CoachmarkV2Context);
     const headerRef = useRef<HTMLHeadingElement | null>(null);
     const dragRef = useRef<HTMLButtonElement | null>(null);
     const handleRef = ref || headerRef;
@@ -52,7 +58,7 @@ const ContentHeader = React.forwardRef<HTMLDivElement, ContentHeaderProps>(
     };
     useEffect(() => {
       if (
-        isFloating &&
+        floating &&
         contentRef &&
         typeof handleRef === 'object' &&
         handleRef !== null &&
@@ -60,7 +66,11 @@ const ContentHeader = React.forwardRef<HTMLDivElement, ContentHeaderProps>(
         handleRef.current &&
         dragRef.current
       ) {
-        makeDraggable(contentRef, handleRef.current, dragRef.current);
+        makeDraggable({
+          el: contentRef,
+          handle: handleRef.current,
+          focusableInHandle: dragRef.current,
+        });
       }
     });
 
@@ -69,7 +79,7 @@ const ContentHeader = React.forwardRef<HTMLDivElement, ContentHeaderProps>(
         ref={handleRef}
         className={cx(contentHeaderBlockClass, className)}
       >
-        {isFloating && (
+        {floating && (
           <Button
             kind="ghost"
             size="sm"

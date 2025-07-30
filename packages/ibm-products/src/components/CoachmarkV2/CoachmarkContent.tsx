@@ -5,8 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
+  FC,
+  forwardRef,
+  ForwardRefExoticComponent,
   ReactElement,
   ReactNode,
+  RefAttributes,
   useContext,
   useEffect,
   useLayoutEffect,
@@ -42,105 +46,110 @@ export interface CoachmarkContentProps {
   dropShadow?: boolean;
 }
 
-export type CoachmarkContentComponent = React.ForwardRefExoticComponent<
-  CoachmarkContentProps & React.RefAttributes<HTMLDivElement>
+export type CoachmarkContentComponent = ForwardRefExoticComponent<
+  CoachmarkContentProps & RefAttributes<HTMLDivElement>
 > & {
-  Header: React.FC<ContentHeaderProps>;
-  Body: React.FC<ContentBodyProps>;
+  Header: FC<ContentHeaderProps>;
+  Body: FC<ContentBodyProps>;
 };
 
-const CoachmarkContent = React.forwardRef<
-  HTMLDivElement,
-  CoachmarkContentProps
->((props, ref) => {
-  const { className = '', children, highContrast, dropShadow, ...rest } = props;
-  const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
-  const contentBodyClass = `${blockClass}--content-body`;
-  const { align, onClose, open, setOpen, triggerRef, setContentRef } =
-    useContext(CoachmarkV2Context);
-  const [targetId, setTargetId] = useState<string | null>(null);
+const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
+  (props, ref) => {
+    const {
+      className = '',
+      children,
+      highContrast,
+      dropShadow,
+      ...rest
+    } = props;
+    const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
+    const contentBodyClass = `${blockClass}--content-body`;
+    const { align, onClose, open, setOpen, triggerRef, setContentRef } =
+      useContext(CoachmarkV2Context);
+    const [targetId, setTargetId] = useState<string | null>(null);
 
-  // setting targetId from triggerRef context value
-  useLayoutEffect(() => {
-    if (open) {
-      const id = triggerRef?.current?.id ?? null;
-      setTargetId(id);
-    } else {
-      setTargetId(null);
-    }
-  }, [open, triggerRef]);
+    // setting targetId from triggerRef context value
+    useLayoutEffect(() => {
+      if (open) {
+        const id = triggerRef?.current?.id ?? null;
+        setTargetId(id);
+      } else {
+        setTargetId(null);
+      }
+    }, [open, triggerRef]);
 
-  const bubbleRef = useRef<HTMLDivElement | null>(null);
+    const bubbleRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (open && bubbleRef.current) {
-      requestAnimationFrame(() => {
-        const contentBody = bubbleRef.current!.querySelector(
-          `.${contentBodyClass}`
-        );
+    useEffect(() => {
+      if (open && bubbleRef.current) {
+        requestAnimationFrame(() => {
+          const contentBody = bubbleRef.current!.querySelector(
+            `.${contentBodyClass}`
+          );
 
-        if (contentBody) {
-          const firstFocusable = Array.from(
-            contentBody.querySelectorAll<HTMLElement>('*')
-          ).find((el) => el.tabIndex >= 0);
-          firstFocusable?.focus();
+          if (contentBody) {
+            const firstFocusable = Array.from(
+              contentBody.querySelectorAll<HTMLElement>('*')
+            ).find((el) => el.tabIndex >= 0);
+            firstFocusable?.focus();
+          }
+        });
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open]);
+
+    useEffect(() => {
+      const handleOutsideClick = (event: MouseEvent) => {
+        const targetElement = document.getElementById(targetId || '');
+        const bubbleElement = bubbleRef.current;
+
+        if (
+          bubbleElement &&
+          !bubbleElement.contains(event.target as Node) &&
+          targetElement &&
+          !targetElement.contains(event.target as Node)
+        ) {
+          setOpen?.(false);
         }
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+      };
 
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      const targetElement = document.getElementById(targetId || '');
-      const bubbleElement = bubbleRef.current;
-
-      if (
-        bubbleElement &&
-        !bubbleElement.contains(event.target as Node) &&
-        targetElement &&
-        !targetElement.contains(event.target as Node)
-      ) {
-        setOpen?.(false);
+      if (open) {
+        document.addEventListener('click', handleOutsideClick);
       }
-    };
+      return () => {
+        document.removeEventListener('click', handleOutsideClick);
+      };
+    }, [open, targetId, setOpen]);
 
-    if (open) {
-      document.addEventListener('click', handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener('click', handleOutsideClick);
-    };
-  }, [open, targetId, setOpen]);
-
-  useEffect(() => {
-    if (open && bubbleRef.current) {
-      const dragContainer = bubbleRef.current.querySelector(
-        `.${pkg.prefix}__bubble`
-      );
-      if (dragContainer instanceof HTMLElement) {
-        setContentRef(dragContainer);
+    useEffect(() => {
+      if (open && bubbleRef.current) {
+        const dragContainer = bubbleRef.current.querySelector(
+          `.${pkg.prefix}__bubble`
+        );
+        if (dragContainer instanceof HTMLElement) {
+          setContentRef(dragContainer);
+        }
       }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, bubbleRef.current]);
-  return (
-    open && (
-      <div ref={bubbleRef}>
-        <CoachmarkBubble
-          className={cx(coachmarkContentBlockClass, className)}
-          highContrast={highContrast}
-          dropShadow={dropShadow}
-          align={align as NewPopoverAlignment}
-          open={open}
-          target={`#${targetId}`}
-        >
-          {children}
-        </CoachmarkBubble>
-      </div>
-    )
-  );
-}) as CoachmarkContentComponent;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open, bubbleRef.current]);
+    return (
+      open && (
+        <div ref={bubbleRef}>
+          <CoachmarkBubble
+            className={cx(coachmarkContentBlockClass, className)}
+            highContrast={highContrast}
+            dropShadow={dropShadow}
+            align={align as NewPopoverAlignment}
+            open={open}
+            target={`#${targetId}`}
+          >
+            {children}
+          </CoachmarkBubble>
+        </div>
+      )
+    );
+  }
+) as CoachmarkContentComponent;
 
 CoachmarkContent.Header = ContentHeader;
 CoachmarkContent.Body = ContentBody;

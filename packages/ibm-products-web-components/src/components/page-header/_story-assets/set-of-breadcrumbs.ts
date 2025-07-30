@@ -16,6 +16,7 @@ import '@carbon/web-components/es/components/breadcrumb/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
 import { createOverflowHandler } from './overflowHandler';
 import OverflowMenuHorizontal16 from '@carbon/web-components/es/icons/overflow-menu--horizontal/16.js';
+import '../../truncated-text';
 import styles from './set-of-breadcrumbs.scss?lit';
 import '../page-header-title-breadcrumb';
 
@@ -126,7 +127,7 @@ export default class SetOfBreadcrumbs extends LitElement {
           data-fixed
           style="display: ${this.hiddenItems?.length >= 2 ? 'flex' : 'none'}"
         >
-          <cds-overflow-menu breadcrumb="" align="top">
+          <cds-overflow-menu breadcrumb="" align="bottom">
             ${OverflowMenuHorizontal16({
               slot: 'icon',
             })}
@@ -146,7 +147,11 @@ export default class SetOfBreadcrumbs extends LitElement {
         </cds-breadcrumb-item>
         <c4p-page-header-title-breadcrumb data-fixed>
           <cds-breadcrumb-link is-currentpage="">
-            ${this.breadcrumbsData!.at(-1)!.text}
+            <c4p-truncated-text
+              value="${this.breadcrumbsData!.at(-1)!.text}"
+              lines="1"
+              autoalign
+            ></c4p-truncated-text>
           </cds-breadcrumb-link>
         </c4p-page-header-title-breadcrumb>
       </cds-breadcrumb>

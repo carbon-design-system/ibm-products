@@ -516,6 +516,14 @@ const sampleBreadcrumbs = [
     text: 'Breadcrumb 3',
     href: 'https://www.carbondesignsystem.com',
   },
+  {
+    text: 'Breadcrumb 4',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Virtual-Machine-DAL-really-long-title-example',
+    href: 'https://www.carbondesignsystem.com',
+  },
 ];
 
 export const TabBarWithTabsAndTags = {

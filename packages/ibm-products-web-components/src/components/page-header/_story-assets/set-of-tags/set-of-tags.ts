@@ -14,7 +14,7 @@ import '@carbon/web-components/es/components/link/index.js';
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/search/index.js';
 import { createOverflowHandler } from '@carbon/utilities';
-import { TagType } from './example-data';
+import { TagType } from './utils';
 import styles from './set-of-tags.scss?lit';
 
 const blockClass = `c4p--set-of-tags`;

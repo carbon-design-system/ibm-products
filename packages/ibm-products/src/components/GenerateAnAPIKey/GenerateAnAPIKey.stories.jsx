@@ -126,44 +126,48 @@ const GenerateTemplate = () => {
     setOpen(!open);
   };
 
+  const getLoadingStatus = () => {
+    if (key) {
+      return 'finished';
+    }
+
+    if (loading) {
+      return 'active';
+    }
+
+    return 'inactive';
+  };
+
   const getModalProps = () => {
     const props = {
+      loadingDescription: 'Loading',
+      loadingStatus: getLoadingStatus(),
+      modalHeading: 'Generate an API key',
+      onLoadingSuccess: () => {},
+      open,
+      onRequestClose: toggleModal,
+      onRequestSubmit: fetchKey,
+      primaryButtonDisabled: loading || name.length === 0,
       primaryButtonText: 'Generate API key',
       secondaryButtonText: 'Close',
-      modalHeading: 'Generate an API key',
-      onRequestSubmit: fetchKey,
     };
 
     if (key) {
-      props.primaryButtonText = 'Copy';
+      props.loadingStatus = 'inactive';
       props.modalHeading = 'API key successfully created';
       props.onRequestSubmit = copyKey;
+      props.primaryButtonText = 'Copy';
     }
 
     return props;
   };
 
-  const {
-    primaryButtonText,
-    secondaryButtonText,
-    modalHeading,
-    onRequestSubmit,
-  } = getModalProps();
-
-  const canSubmit = !loading && name.length > 0;
+  const props = getModalProps();
 
   return (
     <div className="app">
       <Button onClick={toggleModal}>Generate</Button>
-      <Modal
-        open={open}
-        onRequestClose={toggleModal}
-        modalHeading={modalHeading}
-        primaryButtonText={primaryButtonText}
-        secondaryButtonText={secondaryButtonText}
-        onRequestSubmit={onRequestSubmit}
-        primaryButtonDisabled={!canSubmit}
-      >
+      <Modal {...props}>
         {key ? (
           <>
             <TextInput value={key} readOnly />
@@ -207,6 +211,9 @@ const EditTemplate = () => {
   const [success, setSuccess] = useState(false);
 
   const handleName = (evt) => {
+    if (success) {
+      setSuccess(false);
+    }
     setName(evt.target.value);
   };
 
@@ -227,20 +234,39 @@ const EditTemplate = () => {
     setOpen(!open);
   };
 
-  const canSubmit = !loading && name.length > 0;
+  const getLoadingStatus = () => {
+    if (success) {
+      return 'finished';
+    }
+
+    if (loading) {
+      return 'active';
+    }
+
+    return 'inactive';
+  };
+
+  const getModalProps = () => {
+    return {
+      loadingDescription: success ? 'Edited' : 'Loading',
+      loadingStatus: getLoadingStatus(),
+      modalHeading: 'Edit API key',
+      onLoadingSuccess: () => {},
+      open,
+      onRequestClose: toggleModal,
+      onRequestSubmit: putName,
+      primaryButtonDisabled: loading || name.length === 0,
+      primaryButtonText: 'Edit API key',
+      secondaryButtonText: 'Close',
+    };
+  };
+
+  const props = getModalProps();
 
   return (
     <div className="app">
       <Button onClick={toggleModal}>Edit</Button>
-      <Modal
-        open={open}
-        onRequestClose={toggleModal}
-        modalHeading="Edit API key"
-        primaryButtonText="Edit API key"
-        secondaryButtonText="Close"
-        onRequestSubmit={putName}
-        primaryButtonDisabled={!canSubmit}
-      >
+      <Modal {...props}>
         <p>
           (Optional description text) To connect securely to [product name],
           your application or tool needs an API key with permission to access

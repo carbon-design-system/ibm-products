@@ -29,7 +29,11 @@ const DraggableDiv = () => {
   const dragRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     if (dialogRef.current && headerRef.current && dragRef.current) {
-      makeDraggable(dialogRef.current, headerRef.current, dragRef.current);
+      makeDraggable({
+        el: dialogRef.current,
+        handle: headerRef.current,
+        focusableInHandle: dragRef.current,
+      });
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dialogRef.current, headerRef.current, dragRef.current]);
@@ -65,7 +69,11 @@ const DraggablePopoverTemplate = () => {
         dragContainer.style.transform = 'none';
         dragContainer.style.left = '0px';
         dragContainer.style.top = '0px';
-        makeDraggable(dragContainer, headerRef.current, dragRef.current);
+        makeDraggable({
+          el: dragContainer,
+          handle: headerRef.current,
+          focusableInHandle: dragRef.current,
+        });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

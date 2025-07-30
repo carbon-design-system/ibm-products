@@ -5,17 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+interface DraggableProps {
+  //The HTML element to move.
+  el: HTMLElement;
+  //Optional HTML element to initiate the drag (e.g., header).
+  handle?: HTMLElement;
+  //Optional HTML element to focus on drag for keyboard interaction (e.g., Drag Icon).
+  focusableInHandle?: HTMLElement;
+  //Optional pixel value that defines the distance to move when dragging with arrow keys. (default:8px)
+  dragStep?: number;
+  //Optional pixel value that defines the distance to move when dragging with shift+arrow keys. (default:32px)
+  shiftDragStep?: number;
+}
 /**
  * Makes a given element draggable using a handle element.
- * @param el - The HTML element to move.
- * @param handle - Optional HTML element to initiate the drag (e.g., header).
- * @param focusableInHandle - Optional HTML element to focus on drag for keyboard interaction (e.g., Drag Icon).
+ *@param draggable - object which accepts el and optional attributes handle,focusableInHandle,dragStep and shiftDragStep
  */
-export function makeDraggable(
-  el: HTMLElement,
-  handle?: HTMLElement,
-  focusableInHandle?: HTMLElement
-): void {
+
+export function makeDraggable({
+  el,
+  handle,
+  focusableInHandle,
+  dragStep,
+  shiftDragStep,
+}: DraggableProps): void {
   const computedStyle = window.getComputedStyle(el);
   if (handle) {
     handle.style.cursor = 'move';
@@ -38,7 +51,7 @@ export function makeDraggable(
   let offsetY = 0;
 
   function onKeyDown(e: KeyboardEvent) {
-    const distance = e.shiftKey ? 128 : 32;
+    const distance = e.shiftKey ? (shiftDragStep ?? 32) : (dragStep ?? 8);
     switch (e.key) {
       case 'Enter':
       case ' ':

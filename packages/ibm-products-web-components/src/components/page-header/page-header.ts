@@ -15,12 +15,14 @@ import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { pageHeaderContext } from './context';
 import { getHeaderOffset } from './utils';
+import CDSPageHeaderContent from './page-header-content';
 
 export interface offsetValues {
   breadcrumbOffset?: number;
   headerOffset?: number;
   fullyCollapsed?: boolean;
   root?: CDSPageHeader | null;
+  withContent?: boolean;
 }
 
 /**
@@ -39,33 +41,39 @@ class CDSPageHeader extends LitElement {
     super.connectedCallback();
     const contentElement = this.querySelector(`${prefix}-page-header-content`);
 
-    if (contentElement) {
-      this.resizeObserver = new ResizeObserver((entries) => {
-        const contentElEntry = entries[0];
-        const contentHeight = contentElEntry.contentRect.height;
-        const padding =
-          parseFloat(getComputedStyle(contentElement)?.paddingBlockStart) +
-          parseFloat(getComputedStyle(contentElement)?.paddingBlockEnd);
-        const totalContentHeight = contentHeight + padding;
-        const headerOffset = getHeaderOffset(this);
+    this.resizeObserver = new ResizeObserver((entries) => {
+      const pageHeaderElement = entries[0];
+      const contentEl = pageHeaderElement.target.querySelector(
+        `${prefix}-page-header-content`
+      );
+      const contentHeight =
+        contentEl instanceof CDSPageHeaderContent ? contentEl.scrollHeight : 0;
+      const padding =
+        contentEl instanceof CDSPageHeaderContent
+          ? parseFloat(getComputedStyle(contentEl)?.paddingBlockStart) +
+            parseFloat(getComputedStyle(contentEl)?.paddingBlockEnd)
+          : 0;
+      const totalContentHeight = contentHeight + padding;
+      const headerOffset = getHeaderOffset(this);
+      const contentPadding = contentEl instanceof CDSPageHeaderContent ? 48 : 0;
 
-        this.style.setProperty(
-          `--${prefix}-page-header-header-top`,
-          `${(Math.round(totalContentHeight) - headerOffset) * -1}px`
-        );
-        this.style.setProperty(
-          `--${prefix}-page-header-breadcrumb-top`,
-          `${headerOffset}px`
-        );
-        this.context = {
-          ...this.context,
-          breadcrumbOffset: headerOffset,
-          headerOffset: (Math.round(totalContentHeight) - headerOffset) * -1,
-          root: this,
-        };
-      });
-      this.resizeObserver.observe(contentElement);
-    }
+      this.style.setProperty(
+        `--${prefix}-page-header-header-top`,
+        `${(Math.round(totalContentHeight - contentPadding) - headerOffset) * -1}px`
+      );
+      this.style.setProperty(
+        `--${prefix}-page-header-breadcrumb-top`,
+        `${headerOffset}px`
+      );
+      this.context = {
+        ...this.context,
+        breadcrumbOffset: headerOffset,
+        headerOffset: (Math.round(totalContentHeight) - headerOffset) * -1,
+        root: this,
+        withContent: !!contentEl,
+      };
+    });
+    this.resizeObserver.observe(this);
 
     const predefinedContentPadding = 24;
     const totalHeaderOffset = getHeaderOffset(this);

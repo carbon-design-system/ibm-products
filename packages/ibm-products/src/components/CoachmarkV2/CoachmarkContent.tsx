@@ -13,7 +13,6 @@ import React, {
   RefAttributes,
   useContext,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -64,21 +63,24 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     } = props;
     const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
     const contentBodyClass = `${blockClass}--content-body`;
-    const { align, onClose, open, setOpen, triggerRef, setContentRef } =
+    const { align, open, setOpen, triggerRef, setContentRef } =
       useContext(CoachmarkV2Context);
     const [targetId, setTargetId] = useState<string | null>(null);
 
     // setting targetId from triggerRef context value
-    useLayoutEffect(() => {
-      if (open) {
+    useEffect(() => {
+      setTimeout(() => {
         const id = triggerRef?.current?.id ?? null;
-        setTargetId(id);
-      } else {
-        setTargetId(null);
-      }
+        if (id) {
+          setTargetId(id);
+        } else {
+          setTargetId(null);
+        }
+      }, 0);
     }, [open, triggerRef]);
 
-    const bubbleRef = useRef<HTMLDivElement | null>(null);
+    const handleRef = useRef<HTMLDivElement | null>(null);
+    const bubbleRef = ref && typeof ref !== 'function' ? ref : handleRef;
 
     useEffect(() => {
       if (open && bubbleRef.current) {
@@ -119,6 +121,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
       return () => {
         document.removeEventListener('click', handleOutsideClick);
       };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open, targetId, setOpen]);
 
     useEffect(() => {
@@ -142,6 +145,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
             align={align as NewPopoverAlignment}
             open={open}
             target={`#${targetId}`}
+            {...rest}
           >
             {children}
           </CoachmarkBubble>

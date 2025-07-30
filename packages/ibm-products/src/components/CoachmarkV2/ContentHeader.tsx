@@ -27,6 +27,10 @@ export interface ContentHeaderProps {
    * Tooltip text and aria label for the Close button icon.
    */
   closeIconDescription?: string;
+  /**
+   * Tooltip text and aria label for the Drag button icon.
+   */
+  dragIconDescription?: string;
 }
 
 export type EnrichedChildren = {
@@ -35,7 +39,12 @@ export type EnrichedChildren = {
 
 const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
   (props, ref) => {
-    const { className = '', closeIconDescription, ...rest } = props;
+    const {
+      className = '',
+      closeIconDescription,
+      dragIconDescription,
+      ...rest
+    } = props;
     const { setOpen, onClose, contentRef, floating } =
       useContext(CoachmarkV2Context);
     const headerRef = useRef<HTMLHeadingElement | null>(null);
@@ -78,6 +87,7 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
       <CoachmarkBubbleHeader
         ref={handleRef}
         className={cx(contentHeaderBlockClass, className)}
+        {...rest}
       >
         {floating && (
           <Button
@@ -85,7 +95,7 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
             size="sm"
             ref={dragRef}
             renderIcon={Draggable}
-            iconDescription={'Drag'}
+            iconDescription={dragIconDescription}
             hasIconOnly
             className={`${contentHeaderBlockClass}--drag-icon`}
           />
@@ -94,7 +104,7 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
           kind="ghost"
           size="sm"
           renderIcon={Close}
-          iconDescription={closeIconDescription ?? 'Close'}
+          iconDescription={closeIconDescription}
           hasIconOnly
           onClick={closeBubble}
         />
@@ -114,4 +124,8 @@ ContentHeader.propTypes = {
    * Tooltip text and aria label for the Close button icon.
    */
   closeIconDescription: PropTypes.string,
+  /**
+   * Tooltip text and aria label for the Drag button icon.
+   */
+  dragIconDescription: PropTypes.string,
 };

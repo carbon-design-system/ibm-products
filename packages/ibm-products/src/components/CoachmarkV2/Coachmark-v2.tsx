@@ -8,12 +8,12 @@
 import React, {
   FC,
   ForwardRefExoticComponent,
-  MutableRefObject,
   ReactNode,
   RefAttributes,
   RefObject,
   createContext,
   forwardRef,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -23,7 +23,6 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import CoachmarkTrigger, { CoachmarkTriggerProps } from './CoachmarkTrigger';
 import CoachmarkContent, { CoachmarkContentProps } from './CoachmarkContent';
 import { NewPopoverAlignment } from '@carbon/react';
 import { useIsomorphicEffect } from '../../global/js/hooks';
@@ -60,7 +59,7 @@ export interface CoachmarkV2Props {
   /**
    * Specifies whether the component is currently open.
    */
-  defaultOpen?: boolean;
+  open?: boolean;
   /**
    * Function to call when the close button is clicked.
    */
@@ -83,7 +82,6 @@ export interface CoachmarkV2Props {
 export type CoachmarkV2Component = ForwardRefExoticComponent<
   CoachmarkV2Props & RefAttributes<HTMLDivElement>
 > & {
-  Trigger: FC<CoachmarkTriggerProps>;
   Content: FC<CoachmarkContentProps>;
 };
 interface CoachmarkV2ContextType {
@@ -105,7 +103,7 @@ export const CoachmarkV2Context = createContext<CoachmarkV2ContextType>({
   triggerRef: { current: null },
   position: { x: 0, y: 0 },
   contentRef: null,
-  setContentRef: () => {},
+  setContentRef: (value: boolean) => {},
   floating: false,
 });
 /**
@@ -121,15 +119,39 @@ export const CoachmarkV2 = forwardRef<HTMLDivElement, CoachmarkV2Props>(
       ariaLabel,
       onClose,
       align = 'bottom',
-      defaultOpen = false,
-      position,
+      open,
+      position = { x: 0, y: 0 },
       floating,
       ...rest
     } = props;
-    const [open, setOpen] = useState(defaultOpen);
     const triggerRef = useRef<HTMLElement>(null);
     const internalRef = useRef<HTMLDivElement | null>(null);
     const [contentRef, setContentRef] = useState<HTMLElement | null>(null);
+    const [openState, setOpenState] = useState(false);
+
+    const setOpen = (value: boolean) => {
+      if (!value) {onClose?.();}
+      if (open === undefined) {setOpenState(value);}
+    };
+
+    const currentOpen = open ?? openState;
+
+    useEffect(() => {
+      const container = internalRef.current;
+      if (!container) {return;}
+
+      const focusableElements = Array.from(
+        container.querySelectorAll('*')
+      ) as HTMLElement[];
+
+      const firstFocusable = focusableElements.find(
+        (el) => el.tabIndex >= 0 && !el.hasAttribute('disabled')
+      );
+
+      if (firstFocusable) {
+        triggerRef.current = firstFocusable;
+      }
+    }, [children]);
 
     useIsomorphicEffect(() => {
       const { x = 0, y = 0 } = position ?? {};
@@ -153,11 +175,11 @@ export const CoachmarkV2 = forwardRef<HTMLDivElement, CoachmarkV2Props>(
       <CoachmarkV2Context.Provider
         value={{
           onClose,
-          open,
+          open: currentOpen,
           setOpen,
           align,
           triggerRef,
-          position: position ?? { x: 0, y: 0 },
+          position,
           contentRef,
           setContentRef,
           floating,
@@ -180,7 +202,6 @@ export const CoachmarkV2 = forwardRef<HTMLDivElement, CoachmarkV2Props>(
     );
   }
 ) as CoachmarkV2Component;
-CoachmarkV2.Trigger = CoachmarkTrigger;
 CoachmarkV2.Content = CoachmarkContent;
 
 // The display name of the component, used by React. Note that displayName

@@ -58,7 +58,7 @@ const CoachmarkBubble = forwardRef<HTMLDivElement, BubbleProps>((props) => {
     children,
     align,
     target,
-    className: customClassName,
+    className,
     dropShadow = true,
     highContrast = false,
     open,
@@ -171,7 +171,7 @@ const CoachmarkBubble = forwardRef<HTMLDivElement, BubbleProps>((props) => {
           [`${pkg.prefix}__bubble-high-contrast`]: highContrast,
           [`${pkg.prefix}__bubble-hidden`]: !targetRef.current,
         },
-        customClassName
+        className
       )}
     >
       <div ref={arrowRef} className={`${pkg.prefix}__bubble__arrow`}></div>

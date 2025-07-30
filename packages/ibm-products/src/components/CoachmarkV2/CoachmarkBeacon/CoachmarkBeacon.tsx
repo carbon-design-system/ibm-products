@@ -18,10 +18,6 @@ import { ButtonProps, Button } from '@carbon/react';
 const blockClass = `${pkg.prefix}--coachmark-beacon`;
 const componentName = 'CoachmarkBeacon';
 
-const defaults = {
-  kind: 'default',
-};
-
 /**
  * Reserved for future expansion, i.e. "RING".
  */
@@ -33,7 +29,7 @@ export interface CoachmarkButtonProps extends ButtonProps<ElementType> {
   onClick?(): void;
   onDoubleClick?(): void;
   tabIndex?: number;
-  ['aria-bool']?: boolean;
+  ['aria-expanded']?: boolean;
 }
 export interface CoachmarkBeaconProps {
   /**
@@ -61,29 +57,20 @@ export interface CoachmarkBeaconProps {
  */
 export const CoachmarkBeacon = forwardRef<HTMLDivElement, CoachmarkBeaconProps>(
   (props, ref) => {
-    const {
-      label,
-      className,
-      kind = defaults.kind,
-      buttonProps,
-      ...rest
-    } = props;
+    const { label, className, kind = 'default', buttonProps, ...rest } = props;
 
     return (
       <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
         className={cx(blockClass, `${blockClass}-${kind}`, className)}
-        ref={ref}
         {...getDevtoolsProps(componentName)}
         role="tooltip"
       >
         <button
+          ref={ref}
           type="button"
           {...buttonProps}
           className={`${blockClass}__target`}
+          {...rest}
         >
           <svg className={`${blockClass}__center`} aria-label={label}>
             <title>{label}</title>

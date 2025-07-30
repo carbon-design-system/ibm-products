@@ -106,22 +106,35 @@ function useCarbonTheme() {
 //Tooltip variant
 const TooltipTemplate = (args) => {
   const carbonTheme = useCarbonTheme();
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleBeaconClick = () => {
+    setIsOpen((isOpen) => !isOpen);
+  };
 
   return (
     <Theme theme={carbonTheme}>
       <CoachmarkV2
         ariaLabel="CoachmarkV2"
         position={{ x: 151, y: 155 }}
+        open={isOpen}
+        onClose={handleClose}
         {...args}
       >
-        <CoachmarkV2.Trigger>
-          <CoachmarkBeacon
-            id="CoachmarkBtn"
-            label="Show information"
-          ></CoachmarkBeacon>
-        </CoachmarkV2.Trigger>
+        <CoachmarkBeacon
+          id="CoachmarkBtn"
+          label="Show information"
+          onClick={handleBeaconClick}
+        ></CoachmarkBeacon>
         <CoachmarkV2.Content highContrast={true}>
-          <CoachmarkContent.Header></CoachmarkContent.Header>
+          <CoachmarkContent.Header
+            closeIconDescription="Close"
+            dragIconDescription="Drag"
+          ></CoachmarkContent.Header>
           <CoachmarkContent.Body>
             <h2>Hello World</h2>
             <p>this is a description test</p>
@@ -136,23 +149,39 @@ const TooltipTemplate = (args) => {
 //Floating variant
 const FloatingTemplate = (args) => {
   const carbonTheme = useCarbonTheme();
+  const [isOpen, setIsOpen] = useState(true);
 
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleButtonClick = () => {
+    setIsOpen((isOpen) => !isOpen);
+  };
   return (
     <Theme theme={carbonTheme}>
-      <CoachmarkV2 ariaLabel="CoachmarkV2" floating={true} {...args}>
-        <CoachmarkV2.Trigger>
-          <Button
-            id="CoachmarkBtn"
-            kind="tertiary"
-            size="md"
-            label="Show information"
-            renderIcon={Crossroads}
-          >
-            Show information
-          </Button>
-        </CoachmarkV2.Trigger>
+      <CoachmarkV2
+        open={isOpen}
+        onClose={handleClose}
+        ariaLabel="CoachmarkV2"
+        floating={true}
+        {...args}
+      >
+        <Button
+          id="CoachmarkBtn"
+          kind="tertiary"
+          size="md"
+          label="Show information"
+          renderIcon={Crossroads}
+          onClick={handleButtonClick}
+        >
+          Show information
+        </Button>
         <CoachmarkV2.Content highContrast={true}>
-          <CoachmarkContent.Header></CoachmarkContent.Header>
+          <CoachmarkContent.Header
+            closeIconDescription="Close"
+            dragIconDescription="Drag"
+          ></CoachmarkContent.Header>
           <CoachmarkContent.Body>
             <h2>Hello World</h2>
             <p>this is a description test</p>
@@ -170,12 +199,10 @@ const FloatingTemplate = (args) => {
  */
 export const Tooltip = TooltipTemplate.bind({});
 Tooltip.args = {
-  defaultOpen: true,
   align: 'top',
 };
 
 export const Floating = FloatingTemplate.bind({});
-Tooltip.args = {
-  defaultOpen: true,
-  align: 'top',
+Floating.args = {
+  align: 'bottom',
 };

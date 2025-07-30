@@ -231,7 +231,7 @@ export default class SetOfTags extends LitElement {
         ? html`<cds-modal
             ?open=${this.modalOpen}
             size="sm"
-            @cds-modal-closed=${(e: CustomEvent) => (this.modalOpen = false)}
+            @cds-modal-closed=${(_: CustomEvent) => (this.modalOpen = false)}
           >
             <cds-modal-header>
               <cds-modal-close-button></cds-modal-close-button>

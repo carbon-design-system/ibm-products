@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { Cascade } from '../../../ibm-products/src';
+import { Cascade } from '../../src';
 import {
   ProductiveCard,
   GlobalHeader,

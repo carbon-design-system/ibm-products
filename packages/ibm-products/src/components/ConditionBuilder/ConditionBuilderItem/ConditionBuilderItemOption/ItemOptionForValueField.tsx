@@ -57,7 +57,7 @@ export const ItemOptionForValueField = ({
   const contentRef = useRef<HTMLDivElement>(null);
 
   const [allOptions, setAllOptions] = useState<Option[]>(
-    config.options as Option[]
+    config?.options as Option[]
   );
   const [searchValue, setSearchValue] = useState<string>('');
 

@@ -29,7 +29,6 @@ $block-class-action-set: #{$prefix}--action-set;
 :host(#{$prefix}-notification-panel) {
   .c4p--notifications-panel__do-not-disturb-toggle {
     display: block;
-    margin-block-start: -$spacing-05;
   }
 }
 :host(#{$prefix}-notification-panel)

@@ -22,10 +22,25 @@ export const packageJson: string = `{
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+   "typescript": "^5.0.0",
     "@vitejs/plugin-react": "4.0.0",
     "sass": "^1.77.7",
     "vite": "^4.3.8"
   }
+}`;
+
+export const tsconfig: string = `{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"]
 }`;
 
 export const index: string = `
@@ -39,7 +54,7 @@ export const index: string = `
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
 

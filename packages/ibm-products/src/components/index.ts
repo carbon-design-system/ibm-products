@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2024, 2024
+// Copyright IBM Corp. 2024, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -55,8 +55,9 @@ export * from './CoachmarkStack';
 export * from './Guidebanner';
 export * from './InlineTip';
 export * from './NonLinearReading';
-export * from './BigNumbers';
+export * from './BigNumber';
 export * from './TruncatedList';
+export * from './TruncatedText';
 export * from './InterstitialScreen';
 export * from './DelimitedList';
 export * from './Decorator';
@@ -76,7 +77,7 @@ export { ActionBar } from './ActionBar';
 export * from './FilterPanel';
 export * from './ConditionBuilder';
 export * from './GetStartedCard';
-export * as unstable__PageHeader from './PageHeader/next/PageHeader';
+export * as preview__PageHeader from './PageHeader/next/PageHeader';
 
 export {
   FeatureFlags as unstable_FeatureFlags,

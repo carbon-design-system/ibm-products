@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,8 @@ export {
   PageHeaderContentText,
   PageHeaderTabBar,
   PageHeaderHeroImage,
+  PageHeaderScrollButton,
+  PageHeaderTitleBreadcrumb,
   //
   Root,
   BreadcrumbBar,
@@ -20,6 +22,8 @@ export {
   ContentText,
   TabBar,
   HeroImage,
+  ScrollButton,
+  TitleBreadcrumb,
 } from './PageHeader';
 export type {
   PageHeaderProps,
@@ -29,4 +33,5 @@ export type {
   PageHeaderContentTextProps,
   PageHeaderTabBarProps,
   PageHeaderHeroImageProps,
+  PageHeaderScrollButtonProps,
 } from './PageHeader';

@@ -84,7 +84,7 @@ const defaults = {
  * user to gain understanding of the product's main value and discover new use cases.
  * This variant allows the a coachmark overlay to be displayed by interacting with the tagline.
  */
-export let CoachmarkFixed = React.forwardRef<
+export const CoachmarkFixed = React.forwardRef<
   HTMLDivElement,
   CoachmarkFixedProps
 >(
@@ -242,7 +242,6 @@ export let CoachmarkFixed = React.forwardRef<
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkFixed = pkg.checkComponentEnabled(CoachmarkFixed, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

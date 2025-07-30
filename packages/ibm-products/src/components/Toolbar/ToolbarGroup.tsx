@@ -21,7 +21,7 @@ export interface ToolbarGroupProps {
 }
 
 /** Toolbar groups organize the commands within a toolbar into related groups. */
-export let ToolbarGroup = forwardRef(
+export const ToolbarGroup = forwardRef(
   (
     { className, children, ...rest }: PropsWithChildren<ToolbarGroupProps>,
     ref: React.Ref<HTMLDivElement>
@@ -48,5 +48,3 @@ ToolbarGroup.propTypes = {
   /** Provide an optional class to be applied to the containing node */
   className: string,
 };
-
-ToolbarGroup = pkg.checkComponentEnabled(ToolbarGroup, componentName);

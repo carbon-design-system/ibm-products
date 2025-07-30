@@ -150,7 +150,7 @@ export interface ProductiveCardProps extends PropsWithChildren {
   iconDescription?: string;
 }
 
-export let ProductiveCard = forwardRef(
+export const ProductiveCard = forwardRef(
   (
     { actionsPlacement = 'top', ...rest }: ProductiveCardProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -178,7 +178,6 @@ export let ProductiveCard = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-ProductiveCard = pkg.checkComponentEnabled(ProductiveCard, componentName);
 
 ProductiveCard.propTypes = {
   /**

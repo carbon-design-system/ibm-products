@@ -57,7 +57,7 @@ interface HTTPErrorOtherProps extends PropsWithChildren {
 the user doesn’t have permission for. This HTTPError component is generic so you
 can use it when you receive an error code that isn't provided.
  */
-export let HTTPErrorOther = React.forwardRef(
+export const HTTPErrorOther = React.forwardRef(
   (
     {
       className,
@@ -90,7 +90,6 @@ HTTPErrorOther.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-HTTPErrorOther = pkg.checkComponentEnabled(HTTPErrorOther, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

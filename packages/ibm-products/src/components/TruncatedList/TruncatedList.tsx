@@ -80,7 +80,10 @@ export interface TruncatedListProps extends PropsWithChildren {
  * revealed to the user while giving the user the ability to expand
  * and see the entire list.
  */
-export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
+export const TruncatedList = React.forwardRef<
+  HTMLDivElement,
+  TruncatedListProps
+>(
   (
     {
       children,
@@ -190,7 +193,6 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-TruncatedList = pkg.checkComponentEnabled(TruncatedList, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

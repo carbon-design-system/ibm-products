@@ -86,7 +86,7 @@ export interface SingleAddSelectProps {
 /**
  * Used to add or select one or more items from larger lists or hierarchies.
  */
-export let SingleAddSelect = forwardRef(
+export const SingleAddSelect = forwardRef(
   (props: SingleAddSelectProps, ref: ForwardedRef<HTMLDivElement>) => {
     // remove multi add select specific props
     const validProps = prepareProps(props, [
@@ -113,8 +113,6 @@ export let SingleAddSelect = forwardRef(
     );
   }
 );
-
-SingleAddSelect = pkg.checkComponentEnabled(SingleAddSelect, componentName);
 
 SingleAddSelect.propTypes = {
   /**

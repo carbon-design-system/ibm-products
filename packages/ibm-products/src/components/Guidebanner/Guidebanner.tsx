@@ -91,7 +91,7 @@ const defaults = {
  * The guide banner sits at the top of a page, or page-level tab,
  * to introduce foundational concepts related to the page's content.
  */
-export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
+export const Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
   (props, ref) => {
     const {
       children,
@@ -236,7 +236,6 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-Guidebanner = pkg.checkComponentEnabled(Guidebanner, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

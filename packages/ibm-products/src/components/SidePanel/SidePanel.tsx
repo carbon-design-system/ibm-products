@@ -247,7 +247,7 @@ const defaults = {
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
  */
-const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
+export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
   (props, ref) => {
     const {
       actionToolbarButtons,
@@ -1067,12 +1067,6 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
       </>
     ) : null;
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-export const SidePanel = pkg.checkComponentEnabled(
-  SidePanelBase,
-  componentName
 );
 
 const deprecatedProps = {

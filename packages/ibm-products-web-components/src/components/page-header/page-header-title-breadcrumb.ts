@@ -9,7 +9,6 @@
 
 import { html } from 'lit';
 import { consume, ContextConsumer } from '@lit/context';
-import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { CDSBreadcrumbItem } from '@carbon/web-components/es/index';
 import { prefix } from '../../globals/settings';

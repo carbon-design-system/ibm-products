@@ -7,9 +7,8 @@
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
-import { transformWithOxc } from 'vite';
 import react from '@vitejs/plugin-react';
-// import { getAutoTrack } from '../../../scripts/get-auto-track-script';
+// import { getAutoTrack } from './get-auto-track-script';
 
 const require = createRequire(import.meta.url);
 
@@ -71,19 +70,6 @@ export default {
     const { mergeConfig } = await import('vite');
 
     return mergeConfig(config, {
-      // plugins: [
-      //   react(),
-      //   {
-      //     name: 'treat-js-files-as-jsx',
-      //     async transform(code, id) {
-      //       if (!id.match(/src\/.*\.js$/)) return null; // Adjust path as needed
-      //       return transformWithOxc(code, id, {
-      //         loader: 'jsx',
-      //         jsx: 'classic', // Or 'classic' if you prefer
-      //       });
-      //     },
-      //   },
-      // ],
       esbuild: {
         include: [/\.[jt]sx?$/, /\/.*\.js$/],
         exclude: [],

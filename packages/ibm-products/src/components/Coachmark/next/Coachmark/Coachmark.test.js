@@ -15,7 +15,7 @@ import { Button } from '@carbon/react';
 import { CoachmarkBeacon } from './CoachmarkBeacon';
 import CoachmarkContent from './CoachmarkContent';
 
-const blockClass = `${pkg.prefix}--coachmark`;
+const blockClass = `${pkg.prefix}--coachmark__next`;
 const componentName = Coachmark.displayName;
 
 const className = `class-${uuidv4()}`;
@@ -23,7 +23,7 @@ const dataTestId = uuidv4();
 
 const renderCoachmark = ({ ...rest } = {}) =>
   render(
-    <Coachmark positionTune={{ x: 151, y: 155 }} {...rest}>
+    <Coachmark {...rest}>
       <CoachmarkBeacon
         id="CoachmarkBtn"
         label="Show information"

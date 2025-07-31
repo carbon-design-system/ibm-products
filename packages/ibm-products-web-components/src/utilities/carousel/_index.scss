@@ -7,7 +7,7 @@
 @use '@carbon/styles/scss/motion' as *;
 
 $prefix: 'carousel' !default;
-$animateTime: $duration-moderate-01;
+$animateTime: $duration-moderate-02;
 
 /// Shared keyframes (needed in both)
 @mixin keyframes {
@@ -85,21 +85,9 @@ $animateTime: $duration-moderate-01;
   @include viewBase('#{$prefix}__view-recycle-out', 90, null, active-to-out);
 }
 
-/// Combined for Lit/Web Components (with host + class)
-@mixin carouselHostStyles {
-  @include keyframes;
-  @include wrapperStyles;
-  @include viewStyles;
-}
-
-/// Combined for React
-@mixin carouselClassStyles {
-  @include keyframes;
-  @include wrapperStyles;
-  @include viewStyles;
-}
-
 /// Optional: Universal (Lit + React)
 @mixin carouselStyles {
-  @include carouselHostStyles;
+  @include keyframes;
+  @include wrapperStyles;
+  @include viewStyles;
 }

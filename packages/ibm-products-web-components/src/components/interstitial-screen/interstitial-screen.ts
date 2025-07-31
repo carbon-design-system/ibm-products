@@ -76,9 +76,9 @@ class CDSInterstitialScreen extends SignalWatcher(
   }
   firstUpdated() {
     // This has to do since cds-modal does not accept cds-body inside a slotted children.It will append it explicitly append cds body
-    this.header = this.querySelector('c4p-interstitial-screen-header');
-    this.body = this.querySelector('c4p-interstitial-screen-body');
-    this.footer = this.querySelector('c4p-interstitial-screen-footer');
+    this.header = this.querySelector(`${prefix}-interstitial-screen-header`);
+    this.body = this.querySelector(`${prefix}-interstitial-screen-body`);
+    this.footer = this.querySelector(`${prefix}-interstitial-screen-footer`);
 
     this.requestUpdate(); // Ensure re-render
     resetInterstitialDetailsSignal();
@@ -181,7 +181,9 @@ class CDSInterstitialScreen extends SignalWatcher(
       <cds-modal-body class="${blockClass}__body-container">
         ${this.body ? html`${this.body}` : nothing}
       </cds-modal-body>
-      ${this.footer ? html`${this.footer}` : nothing}
+      <cds-modal-footer>
+        ${this.footer ? html`${this.footer}` : nothing}
+      </cds-modal-footer>
     </cds-modal>`;
   }
 

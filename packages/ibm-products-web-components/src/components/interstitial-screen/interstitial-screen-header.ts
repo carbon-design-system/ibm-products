@@ -97,10 +97,10 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
       <div class="${blockClass}--progress">
         <cds-progress-indicator>
           ${stepDetails.map(
-            (eachStep, index) =>
+            (step, index) =>
               html` <cds-progress-step
-                label="${eachStep.stepTitle}"
-                key="${eachStep.id}"
+                label="${step.stepTitle}"
+                key="${step.id}"
                 state="${this.getStepState(index)}"
               ></cds-progress-step>`
           )}

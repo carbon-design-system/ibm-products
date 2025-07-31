@@ -15,6 +15,7 @@ import styles from './story-styles.scss?lit';
 import footerStyles from './interstitial-screen-footer.scss?lit';
 import Checkmark from '@carbon/web-components/es/icons/checkmark/16.js';
 import { prefix } from '../../globals/settings';
+import ArrowRight from '@carbon/web-components/es/icons/arrow--right/16.js';
 
 const argTypes = {
   fullscreen: {
@@ -356,10 +357,7 @@ export const WithCustomActionButtons = {
 
             <c4p-interstitial-screen-footer>
               <style>
-                ${footerStyles} cds-button {
-                  block-size: 100%;
-                  display: contents;
-                }
+                ${footerStyles}
               </style>
 
               <div class="${blockClass}--footer">
@@ -394,7 +392,7 @@ export const WithCustomActionButtons = {
                           size="lg"
                           @click=${handleClickNext}
                         >
-                          Next
+                          Next ${ArrowRight({ slot: 'icon' })}
                         </cds-button>
                       `
                     : nothing}

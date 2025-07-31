@@ -9,7 +9,7 @@
 @use '../../utilities/carousel/index' as carousel;
 @use '@carbon/styles/scss/spacing' as *;
 
-@include carousel.carouselHostStyles();
+@include carousel.carouselStyles();
 
 :host {
   /* stylelint-disable-next-line declaration-no-important */

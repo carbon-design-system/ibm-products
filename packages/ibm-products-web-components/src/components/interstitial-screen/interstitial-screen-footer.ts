@@ -148,13 +148,13 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
     }
   };
 
-  getFooterContent() {
+  render() {
     const { stepDetails, currentStep, disableActions } =
       interstitialDetailsSignal.get();
     const { start, next, back, skip } = disableActions;
     const isMulti = stepDetails?.length > 0;
     const progStepCeil = stepDetails?.length - 1;
-    return html`
+    return html`<slot>
       <div class="${blockClass}--footer">
         ${isMulti
           ? html`
@@ -227,17 +227,6 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
             : nothing}
         </div>
       </div>
-    `;
-  }
-
-  render() {
-    const isFullScreen = interstitialDetailsSignal.get().isFullScreen;
-    return html`<slot>
-      ${isFullScreen
-        ? html`${this.getFooterContent()}`
-        : html`<cds-modal-footer>
-            ${this.getFooterContent()}
-          </cds-modal-footer>`}
     </slot>`;
   }
 

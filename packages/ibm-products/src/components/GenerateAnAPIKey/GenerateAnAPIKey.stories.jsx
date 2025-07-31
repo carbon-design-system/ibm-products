@@ -69,11 +69,10 @@ const InstantTemplate = () => {
         secondaryButtonText="Close"
         onRequestSubmit={copyKey}
       >
-        <PasswordInput value={key} />
-        <p>
-          This is your unique API key and is non-recoverable. If you lose this
-          API key, you will have to reset it.
-        </p>
+        <PasswordInput
+          value={key}
+          helperText="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
+        />
       </Modal>
     </div>
   );
@@ -170,20 +169,28 @@ const GenerateTemplate = () => {
       <Modal {...props}>
         {key ? (
           <>
-            <TextInput value={key} readOnly />
-            <p>
-              This is your unique API key and is non-recoverable. If you lose
-              this API key, you will have to reset it.
-            </p>
+            <TextInput
+              labelText="Unique API key"
+              value={key}
+              readOnly
+              helperText="This is your unique API key and is non-recoverable. If you lose
+              this API key, you will have to reset it."
+            />
           </>
         ) : (
           <>
-            <p>
+            <p style={{ marginBlockEnd: '1rem' }}>
               (Optional description text) To connect securely to [product name],
               your application or tool needs an API key with permission to
               access resources such as [product resource name].
             </p>
-            <TextInput value={name} onChange={handleName} disabled={loading} />
+            <TextInput
+              labelText="Name your application"
+              value={name}
+              onChange={handleName}
+              disabled={loading}
+              helperText="Providing a name will help you identify your API key later."
+            />
           </>
         )}
       </Modal>
@@ -267,13 +274,18 @@ const EditTemplate = () => {
     <div className="app">
       <Button onClick={toggleModal}>Edit</Button>
       <Modal {...props}>
-        <p>
+        <p style={{ marginBlockEnd: '1rem' }}>
           (Optional description text) To connect securely to [product name],
           your application or tool needs an API key with permission to access
           resources such as [product resource name].
         </p>
-        <TextInput value={name} onChange={handleName} disabled={loading} />
-        {success && <small>API key successfully saved</small>}
+        <TextInput
+          labelText="Name your application"
+          value={name}
+          onChange={handleName}
+          disabled={loading}
+          helperText={success ? 'API key successfully saved' : ''}
+        />
       </Modal>
     </div>
   );

@@ -8,6 +8,8 @@
  */
 
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
 $interstitial-block-class: #{c4p}--interstitial-screen;
 $block-class: #{c4p}--interstitial-screen-view-module;
 
@@ -15,6 +17,11 @@ $block-class: #{c4p}--interstitial-screen-view-module;
   margin-block-start: $spacing-07;
 }
 
-.c4p--interstitial-screen-view-module {
+.#{$block-class} {
   margin-block: $spacing-07;
+}
+.#{$block-class}--heading {
+  @include type.type-style('heading-05');
+
+  margin-block-end: $spacing-07;
 }

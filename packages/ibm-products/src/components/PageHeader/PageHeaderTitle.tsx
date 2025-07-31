@@ -5,29 +5,42 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { ReactElement, ReactNode, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { DefinitionTooltip, SkeletonText } from '@carbon/react';
 import { EditInPlace } from '../EditInPlace';
 import { useOverflowStringWidth } from '../../global/js/hooks/useOverflowString';
 
+interface TitleProps {
+  text?: string;
+  editDescription?: string;
+  editableLabel?: string;
+  cancelDescription?: string;
+  saveDescription?: string;
+  content?: ReactNode;
+  loading?: boolean;
+  icon?: ReactElement<unknown, string> | undefined;
+  asText?: string;
+  onChange?: () => void;
+  onSave?: () => void;
+  tooltipAlignment?: string;
+}
+
 /**
  *
  * Utility component used by Page Header
  */
-// eslint-disable-next-line react/prop-types
+ 
 export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   let titleInnards;
-  // eslint-disable-next-line
+   
   // debugger;
 
-  let {
-    text,
+  const {
     content,
     loading,
     icon,
-    asText,
     onChange,
     onSave,
     editDescription,
@@ -36,11 +49,12 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
     saveDescription,
     tooltipAlignment = 'bottom',
     ...rest
-  } = title;
+  }: TitleProps = title;
+  let { text, asText }: TitleProps = title;
   let titleText;
-  let isEditable = !!onSave;
+  const isEditable = !!onSave;
 
-  const titleRef = useRef(undefined);
+  const titleRef = useRef<HTMLSpanElement | null>(null);
   const isEllipsisApplied = useOverflowStringWidth(titleRef);
 
   if (text || !content) {
@@ -60,6 +74,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
       <>
         {icon && !loading ? (
           <span className={`${blockClass}__title-icon-wrapper`}>
+            {/* @ts-ignore */}
             <TitleIcon className={`${blockClass}__title-icon`} />
           </span>
         ) : null}
@@ -69,15 +84,17 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
         ) : isEditable ? (
           <EditInPlace
             tooltipAlignment="bottom"
-            value={text}
-            cancelLabel={cancelDescription}
-            editLabel={editDescription}
-            saveLabel={saveDescription}
-            labelText={editableLabel}
-            onChange={onChange}
+            value={text!}
+            cancelLabel={cancelDescription!}
+            editLabel={editDescription!}
+            saveLabel={saveDescription!}
+            labelText={editableLabel!}
+            onChange={onChange!}
             onSave={onSave}
             size="md"
             inheritTypography
+            onCancel={() => {}}
+            id="page-header-title-edit-in-place"
             {...rest}
           />
         ) : isEllipsisApplied ? (

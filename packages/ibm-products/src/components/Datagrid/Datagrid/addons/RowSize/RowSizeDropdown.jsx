@@ -16,7 +16,7 @@ import {
   usePrefix,
 } from '@carbon/react';
 import cx from 'classnames';
-import RowSizeRadioGroup from './RowSizeRadioGroup';
+import RowSizeRadioGroup from './RowSizeRadioGroup.jsx';
 import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid__row-size`;

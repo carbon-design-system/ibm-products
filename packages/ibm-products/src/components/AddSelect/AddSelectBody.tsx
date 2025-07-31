@@ -16,12 +16,12 @@ import {
   TearsheetProps,
 } from '../../components/Tearsheet';
 import { NotFoundEmptyState } from '../EmptyStates';
-import { AddSelectSidebar } from './AddSelectSidebar';
-import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
-import { AddSelectList } from './AddSelectList';
-import { AddSelectColumn } from './AddSelectColumn';
-import { AddSelectFilter } from './AddSelectFilter';
-import { AddSelectSort } from './AddSelectSort';
+import { AddSelectSidebar } from './AddSelectSidebar.jsx';
+import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs.jsx';
+import { AddSelectList } from './AddSelectList.jsx';
+import { AddSelectColumn } from './AddSelectColumn.jsx';
+import { AddSelectFilter } from './AddSelectFilter.jsx';
+import { AddSelectSort } from './AddSelectSort.jsx';
 import { sortItems, getFilteredItems } from './add-select-utils';
 import { useItemSort } from './hooks/useItemSort';
 import useParentSelect from './hooks/useParentSelect';

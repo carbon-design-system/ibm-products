@@ -11,7 +11,7 @@ import { ChevronRight, View } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { AddSelectFormControl } from './AddSelectFormControl';
+import { AddSelectFormControl } from './AddSelectFormControl.jsx';
 
 const blockClass = `${pkg.prefix}--add-select__selections`;
 const componentName = 'AddSelectList';

@@ -24,8 +24,8 @@ import React, {
   useState,
 } from 'react';
 
-import { ChecklistChart } from './ChecklistChart';
-import { ChecklistIcon } from './ChecklistIcon';
+import { ChecklistChart } from './ChecklistChart.jsx';
+import { ChecklistIcon } from './ChecklistIcon.jsx';
 import { ChevronUp } from '@carbon/react/icons';
 // Other standard imports.
 import PropTypes from 'prop-types';

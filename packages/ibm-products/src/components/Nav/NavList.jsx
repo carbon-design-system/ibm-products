@@ -9,7 +9,7 @@ import React, { useState, useEffect, useImperativeHandle } from 'react';
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import { bool, func, node, number, string } from 'prop-types';
-import NavItem, { blockClass as navItemBlockClass } from './NavItem';
+import NavItem, { blockClass as navItemBlockClass } from './NavItem.jsx';
 import { pkg } from '../../settings';
 
 const componentName = 'NavList';

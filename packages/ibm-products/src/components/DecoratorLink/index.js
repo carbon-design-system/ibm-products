@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { DecoratorLink } from './DecoratorLink';
+export { DecoratorLink } from './DecoratorLink.jsx';

@@ -12,7 +12,7 @@ import { isColumnVisible } from './common';
 import { useId } from '../../../../../global/js/utils/useId';
 import DraggableElement from '../../DraggableElement';
 import { pkg } from '../../../../../settings';
-import { getNodeTextContent } from '../../../../../global/js/utils/getNodeTextContent';
+import { getNodeTextContent } from '../../../../../global/js/utils/getNodeTextContent.jsx';
 
 import {
   DndContext,

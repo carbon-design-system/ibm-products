@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { InlineEditCell } from './InlineEditCell';
+export { InlineEditCell } from './InlineEditCell.jsx';

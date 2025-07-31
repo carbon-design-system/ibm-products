@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { FilterPanelAccordion } from './FilterPanelAccordion';
+export { FilterPanelAccordion } from './FilterPanelAccordion.jsx';

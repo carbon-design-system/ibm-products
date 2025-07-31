@@ -23,7 +23,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
-import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
+import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent.jsx';
 import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.

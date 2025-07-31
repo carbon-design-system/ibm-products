@@ -10,9 +10,9 @@ import { Column, Grid } from '@carbon/react';
 // Import portions of React that are needed.
 import React, { ReactNode } from 'react';
 
-import { Error403SVG } from './assets/Error403SVG';
-import { Error404SVG } from './assets/Error404SVG';
-import { ErrorGenericSVG } from './assets/ErrorGenericSVG';
+import { Error403SVG } from './assets/Error403SVG.jsx';
+import { Error404SVG } from './assets/Error404SVG.jsx';
+import { ErrorGenericSVG } from './assets/ErrorGenericSVG.jsx';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';

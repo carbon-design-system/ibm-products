@@ -46,7 +46,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
 import { handleEditSubmit } from './utils/handleEditSubmit';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
-import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
+import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent.jsx';
 import { handleKeyPress } from './utils/commonEventHandlers';
 import { pkg } from '../../settings';
 import { removeCellSelections } from './utils/removeCellSelections';

@@ -6,7 +6,7 @@
 import '../../../../../feature-flags';
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import CustomizeColumnsTearsheet from './CustomizeColumnsTearsheet';
+import CustomizeColumnsTearsheet from './CustomizeColumnsTearsheet.jsx';
 import { InlineEditContext } from '../InlineEdit/InlineEditContext';
 
 const TearsheetWrapper = ({ instance, launcherButtonRef }) => {

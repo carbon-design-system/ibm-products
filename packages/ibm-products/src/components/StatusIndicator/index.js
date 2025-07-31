@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { StatusIndicator } from './StatusIndicator';
-export { StatusIndicatorStep } from './StatusIndicatorStep';
+export { StatusIndicator } from './StatusIndicator.jsx';
+export { StatusIndicatorStep } from './StatusIndicatorStep.jsx';

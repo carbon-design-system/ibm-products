@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { Checkbox } from '@carbon/react';
 import { pkg } from '../../../../../settings';
 import cx from 'classnames';
-import { DraggableItemsList } from './DraggableItemsList';
+import { DraggableItemsList } from './DraggableItemsList.jsx';
 import uuidv4 from '../../../../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--datagrid`;

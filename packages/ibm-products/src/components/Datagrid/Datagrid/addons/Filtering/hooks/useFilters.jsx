@@ -36,7 +36,7 @@ import React, {
   useContext,
 } from 'react';
 
-import OverflowCheckboxes from '../OverflowCheckboxes';
+import OverflowCheckboxes from '../OverflowCheckboxes.jsx';
 import { getInitialStateFromFilters } from '../utils';
 import { usePreviousValue } from '../../../../../../global/js/hooks';
 import { FilterContext } from '../FilterProvider';

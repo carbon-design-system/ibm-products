@@ -10,7 +10,7 @@ import { Tag, Accordion, AccordionItem } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
-import { AddSelectMetaPanel } from './AddSelectMetaPanel';
+import { AddSelectMetaPanel } from './AddSelectMetaPanel.jsx';
 
 const blockClass = `${pkg.prefix}--add-select__sidebar`;
 const componentName = 'AddSelectSidebar';

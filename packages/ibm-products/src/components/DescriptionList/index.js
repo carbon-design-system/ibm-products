@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { DescriptionList } from './DescriptionList';
-export { DescriptionListBody } from './DescriptionListBody';
-export { DescriptionListCell } from './DescriptionListCell';
-export { DescriptionListRow } from './DescriptionListRow';
+export { DescriptionList } from './DescriptionList.jsx';
+export { DescriptionListBody } from './DescriptionListBody.jsx';
+export { DescriptionListCell } from './DescriptionListCell.jsx';
+export { DescriptionListRow } from './DescriptionListRow.jsx';

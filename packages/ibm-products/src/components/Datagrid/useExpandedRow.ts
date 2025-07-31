@@ -7,7 +7,7 @@
 
 import { useState } from 'react';
 import DatagridExpandedRow from './Datagrid/DatagridExpandedRow';
-import useRowExpander from './useRowExpander';
+import useRowExpander from './useRowExpander.jsx';
 import { Hooks, TableInstance } from 'react-table';
 import { DataGridState, DatagridRow } from './types';
 

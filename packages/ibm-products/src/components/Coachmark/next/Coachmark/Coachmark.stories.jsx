@@ -9,10 +9,8 @@ import React, { useEffect, useState } from 'react';
 import { Coachmark } from './Coachmark';
 import './CoachmarkBubble';
 import mdx from './Coachmark.mdx';
-
 import styles from './_storybook-styles.scss?inline';
 import { Button, Theme } from '@carbon/react';
-import CoachmarkContent from './CoachmarkContent';
 import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 
@@ -131,15 +129,15 @@ const TooltipTemplate = (args) => {
           onClick={handleBeaconClick}
         ></CoachmarkBeacon>
         <Coachmark.Content highContrast={true}>
-          <CoachmarkContent.Header
+          <Coachmark.Content.Header
             closeIconDescription="Close"
             dragIconDescription="Drag"
-          ></CoachmarkContent.Header>
-          <CoachmarkContent.Body>
+          ></Coachmark.Content.Header>
+          <Coachmark.Content.Body>
             <h2>Hello World</h2>
             <p>this is a description test</p>
             <Button size="sm">Done</Button>
-          </CoachmarkContent.Body>
+          </Coachmark.Content.Body>
         </Coachmark.Content>
       </Coachmark>
     </Theme>
@@ -178,15 +176,15 @@ const FloatingTemplate = (args) => {
           Show information
         </Button>
         <Coachmark.Content highContrast={true}>
-          <CoachmarkContent.Header
+          <Coachmark.Content.Header
             closeIconDescription="Close"
             dragIconDescription="Drag"
-          ></CoachmarkContent.Header>
-          <CoachmarkContent.Body>
+          ></Coachmark.Content.Header>
+          <Coachmark.Content.Body>
             <h2>Hello World</h2>
             <p>this is a description test</p>
             <Button size="sm">Done</Button>
-          </CoachmarkContent.Body>
+          </Coachmark.Content.Body>
         </Coachmark.Content>
       </Coachmark>
     </Theme>

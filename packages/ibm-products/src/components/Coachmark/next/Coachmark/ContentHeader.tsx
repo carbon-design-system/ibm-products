@@ -31,11 +31,11 @@ export interface ContentHeaderProps {
    * Tooltip text and aria label for the Drag button icon.
    */
   dragIconDescription?: string;
+  /**
+   * Optional contents of the Coachmark Header.
+   */
+  children?: string;
 }
-
-export type EnrichedChildren = {
-  children: ReactNode;
-};
 
 const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
   (props, ref) => {
@@ -43,6 +43,7 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
       className = '',
       closeIconDescription,
       dragIconDescription,
+      children,
       ...rest
     } = props;
     const { setOpen, onClose, contentRef, floating } =
@@ -51,15 +52,6 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
     const dragRef = useRef<HTMLButtonElement | null>(null);
     const handleRef = ref || headerRef;
     const contentHeaderBlockClass = `${blockClass}--content-header`;
-    useEffect(() => {
-      const close = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          setOpen(false);
-        }
-      };
-      window.addEventListener('keydown', close);
-      return () => window.removeEventListener('keydown', close);
-    }, [onClose, setOpen]);
 
     const closeBubble = () => {
       onClose?.();
@@ -100,6 +92,7 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
             className={`${contentHeaderBlockClass}--drag-icon`}
           />
         )}
+        {children}
         <Button
           kind="ghost"
           size="sm"
@@ -116,6 +109,10 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
 export default ContentHeader;
 
 ContentHeader.propTypes = {
+  /**
+   * Optional contents of the Coachmark Header.
+   */
+  children: PropTypes.node,
   /**
    * Provide an optional class to be applied to the containing node.
    */

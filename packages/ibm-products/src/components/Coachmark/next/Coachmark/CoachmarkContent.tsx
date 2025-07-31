@@ -14,7 +14,6 @@ import React, {
   useContext,
   useEffect,
   useRef,
-  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../../../settings';
@@ -104,11 +103,20 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
         }
       };
 
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setOpen?.(false);
+        }
+      };
+
       if (open) {
         document.addEventListener('click', handleOutsideClick);
+        window.addEventListener('keydown', handleKeyDown);
       }
+
       return () => {
         document.removeEventListener('click', handleOutsideClick);
+        window.removeEventListener('keydown', handleKeyDown);
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open, targetId, setOpen]);

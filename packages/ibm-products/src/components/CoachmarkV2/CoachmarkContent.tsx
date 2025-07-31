@@ -65,19 +65,8 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     const contentBodyClass = `${blockClass}--content-body`;
     const { align, open, setOpen, triggerRef, setContentRef } =
       useContext(CoachmarkV2Context);
-    const [targetId, setTargetId] = useState<string | null>(null);
 
-    // setting targetId from triggerRef context value
-    useEffect(() => {
-      setTimeout(() => {
-        const id = triggerRef?.current?.id ?? null;
-        if (id) {
-          setTargetId(id);
-        } else {
-          setTargetId(null);
-        }
-      }, 0);
-    }, [open, triggerRef]);
+    const targetId = open ? triggerRef?.current?.id : null;
 
     const handleRef = useRef<HTMLDivElement | null>(null);
     const bubbleRef = ref && typeof ref !== 'function' ? ref : handleRef;

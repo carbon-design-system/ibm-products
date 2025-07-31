@@ -48,7 +48,6 @@
     "build:scss": "copyfiles '../ibm-products-styles/scss/**/*.*' ./ -u 2",
     "build:storybook": "yarn dlx cross-env \"NODE_OPTIONS=--max_old_space_size=8192\" && storybook build --quiet",
     "build:js-new": "node scripts/build",
-    "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate/index.mjs",
     "postinstall": "ibmtelemetry --config=telemetry.yml",

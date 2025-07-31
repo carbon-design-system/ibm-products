@@ -6,9 +6,9 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { CoachmarkV2 } from './Coachmark-v2';
+import { Coachmark } from './Coachmark';
 import './CoachmarkBubble';
-import mdx from './Coachmark-v2.mdx';
+import mdx from './Coachmark.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 import { Button, Theme } from '@carbon/react';
@@ -17,8 +17,8 @@ import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 
 export default {
-  title: 'Experimental/Onboarding/CoachmarkV2/CoachmarkV2',
-  component: CoachmarkV2,
+  title: 'Experimental/Onboarding/Coachmark/next',
+  component: Coachmark,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
     children: {
@@ -118,8 +118,8 @@ const TooltipTemplate = (args) => {
 
   return (
     <Theme theme={carbonTheme}>
-      <CoachmarkV2
-        ariaLabel="CoachmarkV2"
+      <Coachmark
+        ariaLabel="Coachmark"
         position={{ x: 151, y: 155 }}
         open={isOpen}
         onClose={handleClose}
@@ -130,7 +130,7 @@ const TooltipTemplate = (args) => {
           label="Show information"
           onClick={handleBeaconClick}
         ></CoachmarkBeacon>
-        <CoachmarkV2.Content highContrast={true}>
+        <Coachmark.Content highContrast={true}>
           <CoachmarkContent.Header
             closeIconDescription="Close"
             dragIconDescription="Drag"
@@ -140,8 +140,8 @@ const TooltipTemplate = (args) => {
             <p>this is a description test</p>
             <Button size="sm">Done</Button>
           </CoachmarkContent.Body>
-        </CoachmarkV2.Content>
-      </CoachmarkV2>
+        </Coachmark.Content>
+      </Coachmark>
     </Theme>
   );
 };
@@ -160,10 +160,10 @@ const FloatingTemplate = (args) => {
   };
   return (
     <Theme theme={carbonTheme}>
-      <CoachmarkV2
+      <Coachmark
         open={isOpen}
         onClose={handleClose}
-        ariaLabel="CoachmarkV2"
+        ariaLabel="Coachmark"
         floating={true}
         {...args}
       >
@@ -177,7 +177,7 @@ const FloatingTemplate = (args) => {
         >
           Show information
         </Button>
-        <CoachmarkV2.Content highContrast={true}>
+        <Coachmark.Content highContrast={true}>
           <CoachmarkContent.Header
             closeIconDescription="Close"
             dragIconDescription="Drag"
@@ -187,8 +187,8 @@ const FloatingTemplate = (args) => {
             <p>this is a description test</p>
             <Button size="sm">Done</Button>
           </CoachmarkContent.Body>
-        </CoachmarkV2.Content>
-      </CoachmarkV2>
+        </Coachmark.Content>
+      </Coachmark>
     </Theme>
   );
 };

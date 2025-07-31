@@ -11,7 +11,7 @@
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/type';
 
-$block-class: #{c4p-settings.$pkg-prefix}--coachmark;
+$block-class: #{c4p-settings.$pkg-prefix}--coachmark__next;
 
 // BUBBLE - content styling
 .#{$block-class}--coachmark-content {

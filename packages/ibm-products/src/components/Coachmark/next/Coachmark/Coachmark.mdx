@@ -5,12 +5,12 @@ import {
   Canvas,
   Meta,
 } from '@storybook/addon-docs/blocks';
-import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../../../global/js/utils/story-helper';
 
-import * as CoachmarkStories from './Coachmark-v2.stories';
-import { CoachmarkV2 } from './Coachmark-v2';
+import * as CoachmarkStories from './Coachmark.stories';
+import { Coachmark } from './Coachmark';
 
-<Meta title="Coachmark" component={CoachmarkV2} />
+<Meta title="Coachmark" component={Coachmark} />
 
 # Coachmark
 
@@ -33,15 +33,15 @@ understand.
 
 **Note:**
 
-- The trigger element or first child of `CoachmarkV2` should always be either a
+- The trigger element or first child of `Coachmark` should always be either a
   CoachmarkBeacon or a Button.
 
 ## Coachmark code sample
 
 ```jsx
 <Theme theme={white}>
-  <CoachmarkV2
-    ariaLabel="CoachmarkV2"
+  <Coachmark
+    ariaLabel="Coachmark"
     position={{ x: 151, y: 155 }}
     open={isOpen}
     onClose={handleClose}
@@ -52,7 +52,7 @@ understand.
       label="Show information"
       onClick={handleBeaconClick}
     ></CoachmarkBeacon>
-    <CoachmarkV2.Content highContrast={true}>
+    <Coachmark.Content highContrast={true}>
       <CoachmarkContent.Header
         closeIconDescription="Close"
         dragIconDescription="Drag"
@@ -62,8 +62,8 @@ understand.
         <p>this is a description test</p>
         <Button size="sm">Done</Button>
       </CoachmarkContent.Body>
-    </CoachmarkV2.Content>
-  </CoachmarkV2>
+    </Coachmark.Content>
+  </Coachmark>
 </Theme>
 ```
 

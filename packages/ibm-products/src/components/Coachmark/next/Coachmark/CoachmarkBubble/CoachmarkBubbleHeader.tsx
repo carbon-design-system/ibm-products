@@ -9,7 +9,7 @@
 
 import React, { HTMLProps, ReactNode } from 'react';
 import cx from 'classnames';
-import { pkg } from '../../../settings';
+import { pkg } from '../../../../../settings';
 
 interface BubbleHeaderProps extends HTMLProps<HTMLElement> {
   /**

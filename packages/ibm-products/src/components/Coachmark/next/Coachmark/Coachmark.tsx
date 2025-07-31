@@ -21,15 +21,15 @@ import React, {
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
+import { getDevtoolsProps } from '../../../../global/js/utils/devtools';
+import { pkg } from '../../../../settings';
 import CoachmarkContent, { CoachmarkContentProps } from './CoachmarkContent';
 import { NewPopoverAlignment } from '@carbon/react';
-import { useIsomorphicEffect } from '../../global/js/hooks';
+import { useIsomorphicEffect } from '../../../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-export const blockClass = `${pkg.prefix}--coachmark`;
-const componentName = 'CoachmarkV2';
+export const blockClass = `${pkg.prefix}--coachmark__next`;
+const componentName = 'Coachmark';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
@@ -42,7 +42,7 @@ const componentName = 'CoachmarkV2';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
-export interface CoachmarkV2Props {
+export interface CoachmarkProps {
   /**
    * Provide the contents of the Coachmark.
    */
@@ -79,12 +79,12 @@ export interface CoachmarkV2Props {
 }
 
 // Define the type for Coachmark, extending it to include Trigger and Content
-export type CoachmarkV2Component = ForwardRefExoticComponent<
-  CoachmarkV2Props & RefAttributes<HTMLDivElement>
+export type CoachmarkComponent = ForwardRefExoticComponent<
+  CoachmarkProps & RefAttributes<HTMLDivElement>
 > & {
   Content: FC<CoachmarkContentProps>;
 };
-interface CoachmarkV2ContextType {
+interface CoachmarkContextType {
   onClose?: () => void;
   open?: boolean;
   setOpen: (value: boolean) => void;
@@ -96,7 +96,7 @@ interface CoachmarkV2ContextType {
   floating?: boolean;
 }
 
-export const CoachmarkV2Context = createContext<CoachmarkV2ContextType>({
+export const CoachmarkContext = createContext<CoachmarkContextType>({
   open: false,
   setOpen: () => {},
   align: 'bottom',
@@ -111,7 +111,7 @@ export const CoachmarkV2Context = createContext<CoachmarkV2ContextType>({
  * within the UI that may not be intuitive but are important for the
  * user to gain understanding of the product's main value and discover new use cases.
  */
-export const CoachmarkV2 = forwardRef<HTMLDivElement, CoachmarkV2Props>(
+export const Coachmark = forwardRef<HTMLDivElement, CoachmarkProps>(
   (props, ref) => {
     const {
       children,
@@ -178,7 +178,7 @@ export const CoachmarkV2 = forwardRef<HTMLDivElement, CoachmarkV2Props>(
     };
 
     return (
-      <CoachmarkV2Context.Provider
+      <CoachmarkContext.Provider
         value={{
           onClose,
           open: currentOpen,
@@ -204,20 +204,20 @@ export const CoachmarkV2 = forwardRef<HTMLDivElement, CoachmarkV2Props>(
         >
           <div className={`${blockClass}--container`}>{children}</div>
         </div>
-      </CoachmarkV2Context.Provider>
+      </CoachmarkContext.Provider>
     );
   }
-) as CoachmarkV2Component;
-CoachmarkV2.Content = CoachmarkContent;
+) as CoachmarkComponent;
+Coachmark.Content = CoachmarkContent;
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-CoachmarkV2.displayName = componentName;
+Coachmark.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
-CoachmarkV2.propTypes = {
+Coachmark.propTypes = {
   /**
    * Where to render the Coachmark relative to its target.
    */

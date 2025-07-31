@@ -13,10 +13,10 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blockClass, CoachmarkV2Context } from './Coachmark-v2';
+import { blockClass, CoachmarkContext } from './Coachmark';
 import { CoachmarkBubbleHeader } from './CoachmarkBubble';
 import { Close, Draggable } from '@carbon/react/icons';
-import { makeDraggable } from '../../global/js/utils/makeDraggable';
+import { makeDraggable } from '../../../../global/js/utils/makeDraggable';
 
 export interface ContentHeaderProps {
   /**
@@ -46,7 +46,7 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
       ...rest
     } = props;
     const { setOpen, onClose, contentRef, floating } =
-      useContext(CoachmarkV2Context);
+      useContext(CoachmarkContext);
     const headerRef = useRef<HTMLHeadingElement | null>(null);
     const dragRef = useRef<HTMLButtonElement | null>(null);
     const handleRef = ref || headerRef;

@@ -28,7 +28,7 @@ import {
   offset,
   arrow,
 } from '@floating-ui/react';
-import { pkg } from '../../../settings';
+import { pkg } from '../../../../../settings';
 
 interface BubbleProps extends Omit<HTMLProps<HTMLDivElement>, 'target'> {
   /**

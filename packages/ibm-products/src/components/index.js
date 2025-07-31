@@ -87,7 +87,7 @@ export { EditFullPage } from './EditFullPage';
 export { EditUpdateCards } from './EditUpdateCards';
 export { Checklist } from './Checklist';
 export { Coachmark } from './Coachmark';
-export { CoachmarkV2 as preview__CoachmarkV2 } from './CoachmarkV2';
+export { Coachmark as preview__Coachmark } from './Coachmark/next/Coachmark';
 export { CoachmarkBeacon } from './CoachmarkBeacon';
 export { CoachmarkButton } from './CoachmarkButton';
 export { CoachmarkFixed } from './CoachmarkFixed';

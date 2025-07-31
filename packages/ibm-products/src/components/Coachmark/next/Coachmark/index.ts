@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { CoachmarkV2 } from './Coachmark-v2';
+export { Coachmark } from './Coachmark';

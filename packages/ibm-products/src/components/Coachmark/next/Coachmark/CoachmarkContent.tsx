@@ -17,8 +17,8 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../settings';
-import { blockClass, CoachmarkV2Context } from './Coachmark-v2';
+import { pkg } from '../../../../settings';
+import { blockClass, CoachmarkContext } from './Coachmark';
 import { CoachmarkBubble } from './CoachmarkBubble';
 import ContentHeader, { ContentHeaderProps } from './ContentHeader';
 import ContentBody, { ContentBodyProps } from './ContentBody';
@@ -64,7 +64,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
     const contentBodyClass = `${blockClass}--content-body`;
     const { align, open, setOpen, triggerRef, setContentRef } =
-      useContext(CoachmarkV2Context);
+      useContext(CoachmarkContext);
 
     const targetId = open ? triggerRef?.current?.id : null;
 

@@ -10,8 +10,8 @@ import PropTypes from 'prop-types';
 // Import portions of React that are needed.
 import React, { ElementType, forwardRef } from 'react';
 import cx from 'classnames';
-import { getDevtoolsProps } from '../../../global/js/utils/devtools';
-import { pkg } from '../../../settings';
+import { getDevtoolsProps } from '../../../../../global/js/utils/devtools';
+import { pkg } from '../../../../../settings';
 import { ButtonProps, Button } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).

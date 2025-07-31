@@ -8,7 +8,7 @@
 import React, { forwardRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blockClass } from './Coachmark-v2';
+import { blockClass } from './Coachmark';
 
 export interface ContentBodyProps {
   /**

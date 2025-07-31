@@ -5,44 +5,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act, createRef } from 'react';
+import React, { createRef } from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { pkg } from '../../../../settings';
+import uuidv4 from '../../../../global/js/utils/uuidv4';
 
-import userEvent from '@testing-library/user-event';
-import { pkg } from '../../settings';
-import uuidv4 from '../../global/js/utils/uuidv4';
-
-import { CoachmarkV2 } from '.';
-import { Button, Theme } from '@carbon/react';
+import { Coachmark } from '.';
+import { Button } from '@carbon/react';
 import { CoachmarkBeacon } from './CoachmarkBeacon';
 import CoachmarkContent from './CoachmarkContent';
 
 const blockClass = `${pkg.prefix}--coachmark`;
-const componentName = CoachmarkV2.displayName;
+const componentName = Coachmark.displayName;
 
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 const renderCoachmark = ({ ...rest } = {}) =>
   render(
-    <Theme theme="white">
-      <CoachmarkV2 positionTune={{ x: 151, y: 155 }} {...rest}>
-        <CoachmarkV2.Trigger>
-          <CoachmarkBeacon
-            id="CoachmarkBtn"
-            label="Show information"
-          ></CoachmarkBeacon>
-        </CoachmarkV2.Trigger>
-        <CoachmarkV2.Content highContrast={true}>
-          <CoachmarkContent.Header></CoachmarkContent.Header>
-          <CoachmarkContent.Body>
-            <h2>Hello World</h2>
-            <p>this is a description test</p>
-            <Button size="sm">Done</Button>
-          </CoachmarkContent.Body>
-        </CoachmarkV2.Content>
-      </CoachmarkV2>
-    </Theme>
+    <Coachmark positionTune={{ x: 151, y: 155 }} {...rest}>
+      <CoachmarkBeacon
+        id="CoachmarkBtn"
+        label="Show information"
+      ></CoachmarkBeacon>
+      <Coachmark.Content highContrast={true}>
+        <CoachmarkContent.Header></CoachmarkContent.Header>
+        <CoachmarkContent.Body>
+          <h2>Hello World</h2>
+          <p>this is a description test</p>
+          <Button size="sm">Done</Button>
+        </CoachmarkContent.Body>
+      </Coachmark.Content>
+    </Coachmark>
   );
 
 const isCoachmarkVisible = () => {

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "2.71.0",
+  "version": "2.71.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -48,7 +48,6 @@
     "build:scss": "copyfiles '../ibm-products-styles/scss/**/*.*' ./ -u 2",
     "build:storybook": "yarn dlx cross-env \"NODE_OPTIONS=--max_old_space_size=8192\" && storybook build --quiet",
     "build:js-new": "node scripts/build",
-    "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate/index.mjs",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
@@ -108,7 +107,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.26.10",
-    "@carbon-labs/react-resizer": "^0.4.0",
+    "@carbon-labs/react-resizer": "^0.5.0",
     "@carbon/feature-flags": "^0.28.1",
     "@carbon/ibm-products-styles": "^2.67.0",
     "@carbon/telemetry": "^0.1.0",

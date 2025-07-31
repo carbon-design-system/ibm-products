@@ -13,7 +13,6 @@ import {
 import React, {
   ReactNode,
   RefObject,
-  createContext,
   useCallback,
   useEffect,
   useRef,
@@ -35,23 +34,15 @@ import InterstitialScreenBody, {
 import InterstitialScreenFooter, {
   InterstitialScreenFooterProps,
 } from './InterstitialScreenFooter';
+import {
+  ActionType,
+  blockClass,
+  disableButtonConfigType,
+  InterstitialScreenContext,
+} from './context';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
-export const blockClass = `${pkg.prefix}--interstitial-screen`;
 const componentName = 'InterstitialScreen';
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
-
-// Default values can be included here and then assigned to the prop params,
-// e.g. prop = defaults.prop,
-// This gathers default values together neatly and ensures non-primitive
-// values are initialized early to avoid react making unnecessary re-renders.
-// Note that default values are not required for props that are 'required',
-// nor for props where the component can apply undefined values reasonably.
-// Default values should be provided when the component needs to make a choice
-// or assumption when a prop is not supplied.
-
-export type ActionType = 'close' | 'start' | 'skip' | 'back' | 'next';
 export interface InterstitialScreenProps {
   /**
    * Provide the contents of the InterstitialScreen.
@@ -96,30 +87,6 @@ export type InterstitialScreenComponent = React.ForwardRefExoticComponent<
   Footer: React.FC<InterstitialScreenFooterProps>;
 };
 
-export type disableButtonConfigType = {
-  skip?: boolean;
-  back?: boolean;
-  next?: boolean;
-  start?: boolean;
-};
-interface InterstitialScreenContextType {
-  bodyChildrenData?: ReactNode;
-  setBodyChildrenData?: (value: ReactNode) => void;
-  isFullScreen?: boolean;
-  handleClose?: (value: ActionType) => void;
-  progStep: number;
-  setProgStep?: (value: number) => void;
-  bodyScrollRef?: RefObject<HTMLDivElement | null>;
-  scrollRef?: RefObject<HTMLDivElement>;
-  handleGotoStep?: (value: number) => void;
-  stepCount: number;
-  setStepCount?: (value: number) => void;
-  disableButtonConfig?: disableButtonConfigType;
-  setDisableButtonConfig?: (value: disableButtonConfigType) => void;
-}
-
-export const InterstitialScreenContext =
-  createContext<InterstitialScreenContextType>({ progStep: 0, stepCount: 0 });
 /**
  * InterstitialScreen can be a full page or an overlay, and are
  * shown on the first time a user accesses a new experience

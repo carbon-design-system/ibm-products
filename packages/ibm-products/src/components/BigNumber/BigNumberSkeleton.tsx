@@ -17,36 +17,36 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 // Carbon and package components we use.
 import { SkeletonText } from '@carbon/react';
-import { BigNumbersProps } from './BigNumbers';
-import { BigNumbersSize } from './constants';
+import { BigNumberProps } from './BigNumber';
+import { BigNumberSize } from './constants';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--big-numbers-skeleton`;
-const componentName = 'BigNumbersSkeleton';
+const blockClass = `${pkg.prefix}--big-number-skeleton`;
+const componentName = 'BigNumberSkeleton';
 
 /**
- * SkeletonBigNumbers is used to display a skeleton version while
- * content is loading (handled by the BigNumbers prop `loading').
+ * SkeletonBigNumber is used to display a skeleton version while
+ * content is loading (handled by the BigNumber prop `loading').
  *
- * Note: This component is only used within BigNumbers.
+ * Note: This component is only used within BigNumber.
  */
 
-// Use the same properties and values as parent BigNumbersProps
-type BigNumbersSkeletonProps = Pick<BigNumbersProps, 'className' | 'size'>;
+// Use the same properties and values as parent BigNumberProps
+type BigNumberSkeletonProps = Pick<BigNumberProps, 'className' | 'size'>;
 
-export const BigNumbersSkeleton = forwardRef<
+export const BigNumberSkeleton = forwardRef<
   HTMLDivElement,
-  BigNumbersSkeletonProps
+  BigNumberSkeletonProps
 >(({ className, size, ...rest }, ref) => {
-  const bigNumbersSkeletonClasses = cx(className, blockClass, {
-    [`${blockClass}--lg`]: size === BigNumbersSize.Large,
-    [`${blockClass}--xl`]: size === BigNumbersSize.XLarge,
+  const bigNumberSkeletonClasses = cx(className, blockClass, {
+    [`${blockClass}--lg`]: size === BigNumberSize.Large,
+    [`${blockClass}--xl`]: size === BigNumberSize.XLarge,
   });
 
   return (
     <div
       {...rest}
-      className={bigNumbersSkeletonClasses}
+      className={bigNumberSkeletonClasses}
       ref={ref}
       {...getDevtoolsProps(componentName)}
     >
@@ -58,9 +58,9 @@ export const BigNumbersSkeleton = forwardRef<
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-BigNumbersSkeleton.displayName = componentName;
+BigNumberSkeleton.displayName = componentName;
 
-BigNumbersSkeleton.propTypes = {
+BigNumberSkeleton.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -69,8 +69,8 @@ BigNumbersSkeleton.propTypes = {
    *
    */
   size: PropTypes.oneOf([
-    BigNumbersSize.Default,
-    BigNumbersSize.Large,
-    BigNumbersSize.XLarge,
+    BigNumberSize.Default,
+    BigNumberSize.Large,
+    BigNumberSize.XLarge,
   ]),
 };

@@ -82,7 +82,7 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('BigNumbers renders', () => {
+  it('BigNumber renders', () => {
     render(<BigNumbersExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();

@@ -52,9 +52,9 @@ interface BubbleProps extends Omit<HTMLProps<HTMLDivElement>, 'target'> {
    */
   open: boolean;
   /**
-   * Specifies whether the component is draggable or not.
+   * Specify whether a caret should be rendered.
    */
-  floating?: boolean;
+  caret?: boolean;
 }
 
 const CoachmarkBubble = forwardRef<HTMLDivElement, BubbleProps>((props) => {
@@ -65,7 +65,7 @@ const CoachmarkBubble = forwardRef<HTMLDivElement, BubbleProps>((props) => {
     className,
     dropShadow = true,
     highContrast = false,
-    floating = false,
+    caret = false,
     open,
     ...rest
   } = props;
@@ -181,7 +181,7 @@ const CoachmarkBubble = forwardRef<HTMLDivElement, BubbleProps>((props) => {
     >
       <div
         ref={arrowRef}
-        className={!floating ? `${pkg.prefix}__bubble__arrow` : ''}
+        className={!caret ? `${pkg.prefix}__bubble__arrow` : ''}
       ></div>
       {children}
     </div>

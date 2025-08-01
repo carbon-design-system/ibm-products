@@ -39,7 +39,7 @@ understand.
 ## Coachmark code sample
 
 ```jsx
-<Theme theme={white}>
+<Theme theme="white">
   <Coachmark
     ariaLabel="Coachmark"
     position={{ x: 151, y: 155 }}
@@ -53,15 +53,15 @@ understand.
       onClick={handleBeaconClick}
     ></CoachmarkBeacon>
     <Coachmark.Content highContrast={true}>
-      <CoachmarkContent.Header
+      <Coachmark.Content.Header
         closeIconDescription="Close"
         dragIconDescription="Drag"
-      ></CoachmarkContent.Header>
-      <CoachmarkContent.Body>
+      ></Coachmark.Content.Header>
+      <Coachmark.Content.Body>
         <h2>Hello World</h2>
         <p>this is a description test</p>
         <Button size="sm">Done</Button>
-      </CoachmarkContent.Body>
+      </Coachmark.Content.Body>
     </Coachmark.Content>
   </Coachmark>
 </Theme>
@@ -69,15 +69,20 @@ understand.
 
 ## Tooltip example usage
 
-<Canvas className="coachmarkExample" withSource="none">
-  <Story of={CoachmarkStories.Tooltip} />
-</Canvas>
+<Canvas
+  className="coachmarkExample"
+  withSource="none"
+  of={CoachmarkStories.Tooltip}
+></Canvas>
 
-### Floating example usage
 
-<Canvas className="coachmarkExample" withSource="none">
-  <Story of={CoachmarkStories.Floating} />
-</Canvas>
+## Floating example usage
+
+<Canvas
+  className="coachmarkExample"
+  withSource="none"
+  of={CoachmarkStories.Floating}
+></Canvas>
 
 ## Component API
 

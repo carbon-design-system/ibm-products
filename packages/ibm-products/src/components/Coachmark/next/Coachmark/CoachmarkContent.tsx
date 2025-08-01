@@ -142,7 +142,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
             align={align as NewPopoverAlignment}
             open={open}
             target={`#${targetId}`}
-            floating={floating}
+            caret={floating}
             {...rest}
           >
             {children}

@@ -26,6 +26,7 @@ import Activity16 from '@carbon/web-components/es/icons/activity/16.js';
 import AiGenerate16 from '@carbon/web-components/es/icons/ai-generate/16.js';
 import CloudFoundry16 from '@carbon/web-components/es/icons/cloud-foundry--1/16.js';
 import './_story-assets/set-of-tags';
+import './_story-assets/set-of-breadcrumbs';
 import { generateTags } from './_story-assets/set-of-tags/utils';
 
 const args = {
@@ -466,7 +467,28 @@ export const ContentWithIcon = {
     </main>
   `,
 };
-
+const sampleBreadcrumbs = [
+  {
+    text: 'Breadcrumb 1',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 2',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 3',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 4',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Virtual-Machine-DAL-really-long-title-example',
+    href: 'https://www.carbondesignsystem.com',
+  },
+];
 const generatedTags = generateTags({ count: 10 });
 export const TabBarWithTabsAndTags = {
   render: () => html`
@@ -482,17 +504,9 @@ export const TabBarWithTabsAndTags = {
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${Bee16({ slot: 'icon' })}
-          <cds-breadcrumb>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <c4p-page-header-title-breadcrumb>
-              Virtual Machine DAL
-            </c4p-page-header-title-breadcrumb>
-          </cds-breadcrumb>
+          <set-of-breadcrumbs
+            .breadcrumbsData="${sampleBreadcrumbs}"
+          ></set-of-breadcrumbs>
           <cds-icon-button
             slot="page-actions"
             kind="ghost"

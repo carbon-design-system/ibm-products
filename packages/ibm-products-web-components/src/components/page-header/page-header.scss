@@ -78,6 +78,7 @@ $carbon-prefix: 'cds';
 
   .#{$prefix}--page-header__breadcrumb-wrapper {
     display: inline-flex;
+    inline-size: 100%;
   }
 
   .#{$prefix}--page-header__breadcrumb__actions {
@@ -345,8 +346,15 @@ $carbon-prefix: 'cds';
       transition: opacity motion(standard, productive) $duration-moderate-01;
     }
   }
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__with-content
+) {
   // `animation-timeline: scroll()` only currently supported in Chromium based browsers
   @supports (animation-timeline: scroll()) {
+    // Show by default should not have any animation, this means
+    // there was not a page header content element provided
     animation-direction: alternate;
     animation-duration: 1ms; /* Firefox requires this to apply the animation */
     animation-name: page-header-title-breadcrumb-animation;
@@ -357,4 +365,11 @@ $carbon-prefix: 'cds';
       transform: translateY(0);
     }
   }
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__by-default
+) {
+  opacity: 1;
+  transform: translateY(0);
 }

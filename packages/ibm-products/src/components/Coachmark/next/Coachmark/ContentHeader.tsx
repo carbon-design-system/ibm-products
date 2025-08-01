@@ -69,8 +69,8 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
       ) {
         makeDraggable({
           el: contentRef,
-          handle: handleRef.current,
-          focusableInHandle: dragRef.current,
+          dragHandle: handleRef.current,
+          focusableDragHandle: dragRef.current,
         });
       }
     });

@@ -19,7 +19,7 @@ import {
 } from '@carbon/react';
 import { Filter } from '@carbon/react/icons';
 import { pkg } from '../../settings';
-import { AddSelectList } from './AddSelectList';
+import { AddSelectList } from './AddSelectList.jsx';
 import { AddSelectSort } from './AddSelectSort';
 import { sortItems } from './add-select-utils';
 import { useItemSort } from './hooks/useItemSort';

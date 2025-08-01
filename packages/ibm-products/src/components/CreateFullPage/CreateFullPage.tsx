@@ -33,7 +33,6 @@ import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
   usePreviousValue,
-  useResetCreateComponent,
   useValidCreateStepCount,
 } from '../../global/js/hooks';
 

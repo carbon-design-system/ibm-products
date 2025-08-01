@@ -12,21 +12,60 @@ import * as makeDraggableStories from './makeDraggable.stories';
 
 ## Overview
 
-The `makeDraggable` utility enables an HTML element to be draggable using either mouse or keyboard interactions. 
-It allows developers to specify a optional drag handle (e.g., a header), focusable element (e.g., an icon) within the handle to support accessibility and an optional pixel value that defines the distance to move when dragging with arrow keys (default: 8px) and shift arrow keys (default: 32px).
+The `makeDraggable` utility enables an HTML element to be draggable using either
+mouse or keyboard interactions. It allows developers to specify an HTML element as a required attribute to be moved, 
+optional HTML element to initiate the drag(e.g., a header), optional HTML element to focus on drag for keyboard interaction (e.g.,
+an icon) and an optional pixel value that defines the distance to move when
+dragging with arrow keys (default: 8px) and shift arrow keys (default: 32px).
 
 ## Example usage
 
+```jsx
+makeDraggable({
+  el: dialogRef.current,
+  handle: headerRef.current,
+  focusableInHandle: dragRef.current,
+});
+```
 
 ```jsx
-makeDraggable({ el:dialogRef.current, handle:headerRef.current, focusableInHandle:dragRef.current})
+<Popover open={isOpen} ref={dialogRef} className="popover">
+  <Button
+    aria-expanded={isOpen}
+    onClick={() => {
+      setIsOpen(!isOpen);
+    }}
+  >
+    Toggle
+  </Button>
+
+  <PopoverContent className="popover-content">
+    <header ref={headerRef} className={`popover-header popover-title`}>
+      <Button
+        kind="ghost"
+        ref={dragRef}
+        className="drag-icon"
+        onClick={() => console.log('clicked')}
+      >
+        <Draggable />
+      </Button>
+      <Button
+        kind="ghost"
+        onClick={() => setIsOpen(false)}
+        className="close-icon"
+      >
+        <Close />
+      </Button>
+    </header>
+    <p className="heading"> Available storage</p>
+    <p className="popover-details">
+      This server has 150 GB of block storage remaining.
+    </p>
+  </PopoverContent>
+</Popover>
 ```
 
 ## Example implementation
-
-<Canvas>
-  <Story of={makeDraggableStories.DraggableCustomDiv} />
-</Canvas>
 
 <Canvas>
   <Story of={makeDraggableStories.DraggablePopover} />

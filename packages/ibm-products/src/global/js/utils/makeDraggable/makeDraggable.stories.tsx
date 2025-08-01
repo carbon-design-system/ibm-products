@@ -31,8 +31,8 @@ const DraggableDiv = () => {
     if (dialogRef.current && headerRef.current && dragRef.current) {
       makeDraggable({
         el: dialogRef.current,
-        handle: headerRef.current,
-        focusableInHandle: dragRef.current,
+        dragHandle: headerRef.current,
+        focusableDragHandle: dragRef.current,
       });
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,8 +71,8 @@ const DraggablePopoverTemplate = () => {
         dragContainer.style.top = '0px';
         makeDraggable({
           el: dragContainer,
-          handle: headerRef.current,
-          focusableInHandle: dragRef.current,
+          dragHandle: headerRef.current,
+          focusableDragHandle: dragRef.current,
         });
       }
     }

@@ -8,9 +8,9 @@ interface DraggableProps {
   //The HTML element to move.
   el: HTMLElement;
   //Optional HTML element to initiate the drag (e.g., header).
-  handle?: HTMLElement;
+  dragHandle?: HTMLElement;
   //Optional HTML element to focus on drag for keyboard interaction (e.g., Drag Icon).
-  focusableInHandle?: HTMLElement;
+  focusableDragHandle?: HTMLElement;
   //Optional pixel value that defines the distance to move when dragging with arrow keys. (default:8px)
   dragStep?: number;
   //Optional pixel value that defines the distance to move when dragging with shift+arrow keys. (default:32px)
@@ -23,14 +23,14 @@ interface DraggableProps {
 
 export function makeDraggable({
   el,
-  handle,
-  focusableInHandle,
+  dragHandle,
+  focusableDragHandle,
   dragStep,
   shiftDragStep,
 }: DraggableProps): void {
   const computedStyle = window.getComputedStyle(el);
-  if (handle) {
-    handle.style.cursor = 'move';
+  if (dragHandle) {
+    dragHandle.style.cursor = 'move';
     el.style.cursor = 'default';
   } else {
     el.style.cursor = 'move';
@@ -72,8 +72,8 @@ export function makeDraggable({
   }
 
   function onMouseDown(e: MouseEvent) {
-    const isTargetInHandle = handle
-      ? handle.contains(e.target as Node)
+    const isTargetInHandle = dragHandle
+      ? dragHandle.contains(e.target as Node)
       : el.contains(e.target as Node);
 
     if (!isTargetInHandle) {
@@ -104,10 +104,10 @@ export function makeDraggable({
 
     document.removeEventListener('mousemove', onMouseMove);
   }
-  if (handle) {
-    handle.addEventListener('mousedown', onMouseDown);
+  if (dragHandle) {
+    dragHandle.addEventListener('mousedown', onMouseDown);
   } else {
     el.addEventListener('mousedown', onMouseDown);
   }
-  focusableInHandle?.addEventListener('keydown', onKeyDown);
+  focusableDragHandle?.addEventListener('keydown', onKeyDown);
 }

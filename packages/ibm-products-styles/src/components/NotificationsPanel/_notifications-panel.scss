@@ -148,7 +148,8 @@ $block-size: 38.5rem;
   .#{$block-class}__notification-content--wrapper:hover,
   .#{$block-class}__notification-content--wrapper:focus {
     background-color: $layer-accent-01;
-    + .cds--popover-container .#{$block-class}__dismiss-single-button {
+    + .#{c4p-settings.$carbon-prefix}--popover-container
+      .#{$block-class}__dismiss-single-button {
       opacity: 1;
     }
   }
@@ -285,7 +286,7 @@ $block-size: 38.5rem;
   .#{$block-class}__notification-yesterday:not(:first-of-type):before,
   .#{$block-class}__notification-previous:not(:first-of-type):before {
     position: absolute;
-    margin: 0 auto;
+    margin: 0 #{$spacing-05};
     background-color: $border-subtle-01;
     block-size: 1px;
     content: '';

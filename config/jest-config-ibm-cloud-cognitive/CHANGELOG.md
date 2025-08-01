@@ -1,3 +1,7 @@
+## `@jest-config-ibm-cloud-cognitive@1.30.0`
+### Housekeeping :house:
+- chore: remove redundant upgrade scripts (#7774)
+
 ## `@jest-config-ibm-cloud-cognitive@1.29.0`
 ### Bug fixes :bug:
 - fix(deps): update dependency jest-watch-typeahead to v3 (#7718)

@@ -48,7 +48,7 @@ const renderNotifications = ({ ...rest } = {}) =>
   );
 
 describe('Notifications', () => {
-  it.skip('renders the notification panel', async () => {
+  it('renders the notification panel', async () => {
     const { animationStart, animationEnd } = fireEvent;
     const { container, rerender } = renderNotifications({
       data: [],
@@ -224,7 +224,7 @@ describe('Notifications', () => {
     );
   });
 
-  it.skip('should close the notifications panel when click is detected outside', async () => {
+  it('should close the notifications panel when click is detected outside', async () => {
     const { container } = renderNotifications({
       data: [],
     });
@@ -241,7 +241,7 @@ describe('Notifications', () => {
     expect(onClickOutside).toHaveBeenCalled();
   });
 
-  it.skip('should return focus to trigger button when clicking outside and not on actionable element', async () => {
+  it('should return focus to trigger button when clicking outside and not on actionable element', async () => {
     const triggerButtonRef = React.createRef();
     const button = document.createElement('button');
     document.body.appendChild(button);

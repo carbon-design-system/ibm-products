@@ -21,7 +21,7 @@ import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs.jsx';
 import { AddSelectList } from './AddSelectList.jsx';
 import { AddSelectColumn } from './AddSelectColumn.jsx';
 import { AddSelectFilter } from './AddSelectFilter.jsx';
-import { AddSelectSort } from './AddSelectSort.jsx';
+import { AddSelectSort } from './AddSelectSort';
 import { sortItems, getFilteredItems } from './add-select-utils';
 import { useItemSort } from './hooks/useItemSort';
 import useParentSelect from './hooks/useParentSelect';

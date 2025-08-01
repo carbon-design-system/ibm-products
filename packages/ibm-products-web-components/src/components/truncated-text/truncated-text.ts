@@ -44,13 +44,13 @@ export class CDSTruncatedText extends LitElement {
    * The label on the collapse button.
    */
   @property({ attribute: 'collapse-label', type: String, reflect: true })
-  collapseLabel = 'View less';
+  collapseLabel = '';
 
   /**
    * The label on expand button.
    */
   @property({ attribute: 'expand-label', type: String, reflect: true })
-  expandLabel = 'View more';
+  expandLabel = '';
 
   /**
    * Unique identifier for the element.

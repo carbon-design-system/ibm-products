@@ -10,8 +10,6 @@
 import { html } from 'lit';
 import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './side-panel';
 import './index';
-// import Settings from '@carbon/icons/lib/settings/16';
-// import Trashcan from '@carbon/icons/lib/trash-can/16';
 import { prefix } from '../../globals/settings';
 
 import '@carbon/web-components/es/components/button/index.js';
@@ -262,15 +260,15 @@ const defaultTemplate = {
         .title=${args.title}
         @c4p-side-panel-navigate-back=${prevStep}
       >
+        <!-- slotted action toolbar cds-buttons -->
+        ${getActionToolbarItems(args.actionToolbarItems)}
+
         <!-- default slotted content -->
         ${getContent(args.content)}
         <cds-button @click="${nextStep}">Step two</cds-button>
 
         <!-- slotted subtitle slotted content -->
         ${getSubTitle(args.subtitle)}
-
-        <!-- slotted action toolbar cds-buttons -->
-        ${getActionToolbarItems(args.actionToolbarItems)}
 
         <!-- slotted action items cds-buttons -->
         ${getActionItems(args.actionItems)}

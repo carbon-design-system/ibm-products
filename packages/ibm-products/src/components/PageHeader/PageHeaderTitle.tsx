@@ -31,10 +31,10 @@ interface TitleProps {
  *
  * Utility component used by Page Header
  */
- 
+
 export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   let titleInnards;
-   
+
   // debugger;
 
   const {

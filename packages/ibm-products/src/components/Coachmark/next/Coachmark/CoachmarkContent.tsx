@@ -62,7 +62,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     } = props;
     const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
     const contentBodyClass = `${blockClass}--content-body`;
-    const { align, open, setOpen, triggerRef, setContentRef } =
+    const { align, open, setOpen, triggerRef, setContentRef, floating } =
       useContext(CoachmarkContext);
 
     const targetId = open ? triggerRef?.current?.id : null;
@@ -142,6 +142,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
             align={align as NewPopoverAlignment}
             open={open}
             target={`#${targetId}`}
+            floating={floating}
             {...rest}
           >
             {children}

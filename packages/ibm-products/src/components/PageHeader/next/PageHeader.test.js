@@ -8,7 +8,7 @@
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { preview__PageHeader as PageHeader } from '../../..';
+import { preview__PageHeader as PageHeader, pkg } from '../../..';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar as PageHeaderBreadcrumbBarDirect,
@@ -24,6 +24,8 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  OverflowMenu,
+  OverflowMenuItem,
 } from '@carbon/react';
 import { Bee } from '@carbon/icons-react';
 
@@ -963,6 +965,92 @@ describe('PageHeader', () => {
         userEvent.click(scrollerButton);
       });
       expect(scrollerOnClick).toHaveBeenCalledTimes(1);
+    });
+  });
+  describe('PageHeader.BreadcrumbOverflow', () => {
+    it('should render default breadcrumbs', () => {
+      render(
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar>
+            <PageHeader.BreadcrumbOverflow>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+              <PageHeader.TitleBreadcrumb data-fixed>
+                Virtual Machine DAL
+              </PageHeader.TitleBreadcrumb>
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+        </PageHeader.Root>
+      );
+      expect(screen.getByText('Breadcrumb 1')).toBeInTheDocument();
+      expect(screen.getByText('Breadcrumb 2')).toBeInTheDocument();
+      expect(screen.getByText('Breadcrumb 3')).toBeInTheDocument();
+      expect(screen.getByText('Virtual Machine DAL')).toBeInTheDocument();
+    });
+    it('should accept a ref', () => {
+      const ref = React.createRef();
+      render(
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar>
+            <PageHeader.BreadcrumbOverflow ref={ref}>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+        </PageHeader.Root>
+      );
+      expect(ref.current).toHaveClass(
+        `${pkg.prefix}--page-header-breadcrumb-overflow`
+      );
+    });
+    it('should render children without overflow breadcrumb', () => {
+      const ref = React.createRef();
+      render(
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar>
+            <PageHeader.BreadcrumbOverflow ref={ref}>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+        </PageHeader.Root>
+      );
+      const breadcrumbParent = ref.current.firstChild;
+      expect(breadcrumbParent.childElementCount).toEqual(3);
+    });
+    it('should render children with overflow breadcrumb', () => {
+      const renderPropFn = jest.fn();
+      const ref = React.createRef();
+      render(
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar>
+            <PageHeader.BreadcrumbOverflow
+              ref={ref}
+              renderOverflowBreadcrumb={() => {
+                renderPropFn();
+                return (
+                  <BreadcrumbItem>
+                    <OverflowMenu
+                      align="bottom"
+                      aria-label="Overflow menu in a breadcrumb"
+                    >
+                      <OverflowMenuItem itemText={'Hidden item'} />
+                    </OverflowMenu>
+                  </BreadcrumbItem>
+                );
+              }}
+            >
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+        </PageHeader.Root>
+      );
+      const breadcrumbParent = ref.current.firstChild;
+      expect(breadcrumbParent.childElementCount).toEqual(4);
+      expect(renderPropFn).toHaveBeenCalled();
     });
   });
 });

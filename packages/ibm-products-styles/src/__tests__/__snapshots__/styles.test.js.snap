@@ -3296,6 +3296,7 @@ p.c4p--about-modal__copyright-text:first-child {
   transform: scale(var(--c4p--tearsheet--stacking-scale-factor-double));
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header {
+  overflow: visible;
   padding: 1.5rem 2rem;
   margin: 0;
   background-color: var(--cds-layer);

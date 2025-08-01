@@ -268,13 +268,17 @@ const ConditionBuilderContent = ({
             }
           </div>
         )}
-        {showConditionGroupPreview && (
-          <ConditionPreview
-            previewType="newGroup"
-            colorIndex={getColorIndex()}
-            group={{ groupOperator: rootState?.operator, id: uuidv4() }}
-          />
-        )}
+
+        <ConditionPreview
+          previewType="newGroup"
+          colorIndex={getColorIndex()}
+          className={
+            showConditionGroupPreview
+              ? `${blockClass}__visible`
+              : `${blockClass}__hidden`
+          }
+          group={{ groupOperator: rootState?.operator, id: uuidv4() }}
+        />
       </div>
       {actions && (
         <ConditionBuilderActions

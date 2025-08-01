@@ -29,6 +29,7 @@ import {
   TAG_SIZE,
   TAG_TYPE,
 } from '@carbon/web-components/es/components/tag/defs.js';
+import './_story-assets/set-of-breadcrumbs';
 
 const tags = [
   {
@@ -509,6 +510,29 @@ export const ContentWithIcon = {
   `,
 };
 
+const sampleBreadcrumbs = [
+  {
+    text: 'Breadcrumb 1',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 2',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 3',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 4',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Virtual-Machine-DAL-really-long-title-example',
+    href: 'https://www.carbondesignsystem.com',
+  },
+];
+
 export const TabBarWithTabsAndTags = {
   render: () => html`
     <style>
@@ -523,17 +547,9 @@ export const TabBarWithTabsAndTags = {
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${Bee16({ slot: 'icon' })}
-          <cds-breadcrumb>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <c4p-page-header-title-breadcrumb>
-              Virtual Machine DAL
-            </c4p-page-header-title-breadcrumb>
-          </cds-breadcrumb>
+          <set-of-breadcrumbs
+            .breadcrumbsData="${sampleBreadcrumbs}"
+          ></set-of-breadcrumbs>
           <cds-icon-button
             slot="page-actions"
             kind="ghost"

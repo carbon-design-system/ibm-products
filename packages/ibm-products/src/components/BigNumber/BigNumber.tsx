@@ -16,21 +16,21 @@ import { pkg } from '../../settings';
 import { ArrowUp, Information } from '@carbon/react/icons';
 import { Tooltip } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
-import { BigNumbersSkeleton } from './BigNumbersSkeleton';
+import { BigNumberSkeleton } from './BigNumberSkeleton';
 import {
-  BigNumbersSizeValues,
+  BigNumberSizeValues,
   Characters,
   DefaultLocale,
   formatValue,
   getIconSize,
 } from './constants';
 
-const blockClass = `${pkg.prefix}--big-numbers`;
-const componentName = 'BigNumbers';
+const blockClass = `${pkg.prefix}--big-number`;
+const componentName = 'BigNumber';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-export interface BigNumbersProps {
+export interface BigNumberProps {
   className?: string;
   forceShowTotal?: boolean;
   fractionDigits?: number;
@@ -39,7 +39,7 @@ export interface BigNumbersProps {
   label: string;
   locale?: string;
   percentage?: boolean;
-  size?: BigNumbersSizeValues;
+  size?: BigNumberSizeValues;
   tooltipDescription?: string;
   total?: number;
   trending?: boolean;
@@ -48,7 +48,7 @@ export interface BigNumbersProps {
 }
 
 /**
- * BigNumbers is used to display large values in a small area. The display of
+ * BigNumber is used to display large values in a small area. The display of
  * values can be the value itself, or grouped in a `numerator/denominator` fashion.
  * Control over the total fraction decimals displayed as well as how the
  * values/totals are displayed are done via a locale prop. Other optional props
@@ -56,7 +56,7 @@ export interface BigNumbersProps {
  * of a button as well as tool tip functionality.
  * The default locale is English (`en-US`) if one is not provided or if the provided one is not supported.
  */
-export let BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
+export let BigNumber = forwardRef<HTMLDivElement, BigNumberProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -79,7 +79,7 @@ export let BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
     },
     ref
   ) => {
-    const bigNumbersClasses = cx(className, {
+    const bigNumberClasses = cx(className, {
       [`${blockClass}--lg`]: size === 'lg',
       [`${blockClass}--xl`]: size === 'xl',
     });
@@ -104,7 +104,7 @@ export let BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
 
     if (loading) {
       return (
-        <BigNumbersSkeleton
+        <BigNumberSkeleton
           {...rest}
           ref={ref}
           className={className}
@@ -117,7 +117,7 @@ export let BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
     return (
       <div
         {...rest}
-        className={cx(blockClass, bigNumbersClasses, className)}
+        className={cx(blockClass, bigNumberClasses, className)}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
@@ -172,16 +172,16 @@ export let BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-BigNumbers = pkg.checkComponentEnabled(BigNumbers, componentName);
+BigNumber = pkg.checkComponentEnabled(BigNumber, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-BigNumbers.displayName = componentName;
+BigNumber.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
-BigNumbers.propTypes = {
+BigNumber.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node.
    */

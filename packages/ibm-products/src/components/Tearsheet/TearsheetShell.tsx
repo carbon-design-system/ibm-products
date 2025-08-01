@@ -471,6 +471,7 @@ export const TearsheetShell = React.forwardRef(
               `.${carbonPrefix}--tooltip`,
               '.flatpickr-calendar',
               `.${bc}__container`,
+              `.${carbonPrefix}--menu`,
               ...selectorsFloatingMenus,
             ]}
             size="sm"

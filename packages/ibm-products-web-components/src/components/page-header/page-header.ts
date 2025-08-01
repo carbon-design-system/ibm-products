@@ -21,6 +21,7 @@ export interface pageHeaderContextType {
   breadcrumbOffset?: number;
   headerOffset?: number;
   fullyCollapsed?: boolean;
+  titleClipped?: boolean;
   root?: CDSPageHeader | null;
   withContent?: boolean;
 }
@@ -99,8 +100,32 @@ class CDSPageHeader extends LitElement {
         threshold: 0.1,
       }
     );
+
+    const titleObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            this.context = {
+              ...this.context,
+              titleClipped: true,
+            };
+          } else {
+            this.context = {
+              ...this.context,
+              titleClipped: false,
+            };
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+        threshold: 0.95,
+      }
+    );
     if (contentElement) {
       contentObserver.observe(contentElement);
+      titleObserver.observe(contentElement);
     }
   }
 

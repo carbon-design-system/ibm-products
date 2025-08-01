@@ -21,6 +21,8 @@ export type PageHeaderRefs = {
 type PageHeaderContextType = {
   refs?: PageHeaderRefs;
   setRefs: React.Dispatch<React.SetStateAction<PageHeaderRefs>>;
+  pageActionsInstance?: React.ReactNode;
+  setPageActionsInstance: React.Dispatch<React.SetStateAction<React.ReactNode>>;
   fullyCollapsed?: boolean;
   titleClipped?: boolean;
 };
@@ -32,6 +34,8 @@ export const PageHeaderContext = createContext<
   setRefs: () => {},
   refs: {},
   titleClipped: false,
+  pageActionsInstance: null,
+  setPageActionsInstance: () => {},
 });
 
 export function usePageHeader() {

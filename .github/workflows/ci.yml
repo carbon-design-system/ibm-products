@@ -154,7 +154,8 @@ jobs:
   avt-runner:
     strategy:
       matrix:
-        shard: [1, 2, 3, 4]
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -167,7 +168,7 @@ jobs:
       - name: Install
         run: yarn
       - name: Install browsers
-        run: yarn playwright install --with-deps
+        run: npx playwright install --with-deps
       - name: Build project
         run: yarn build
       - name: Run storybook
@@ -180,20 +181,51 @@ jobs:
         with:
           URL: 'http://localhost:3000'
         timeout-minutes: 3
-      - name: Run AVT
+      - name: Run Playwright tests
         if: github.repository == 'carbon-design-system/ibm-products'
         run: |
-          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
+          npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # 4.6.2
+      - name: Upload blob report to GitHub Actions Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
         with:
-          include-hidden-files: true
-          overwrite: true
-          name: playwright-avt-report
-          path: .playwright/
+          name: blob-report-${{ matrix.shardIndex }}
+          path: .playwright/blob-reports
+          retention-days: 1
+
+  merge-reports:
+    # Merge reports after playwright-tests, even if some shards have failed
+    if: ${{ !cancelled() }}
+    needs: [avt-runner]
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: yarn
+
+      - name: Download blob reports from GitHub Actions Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: .playwright/blob-report
+          pattern: blob-report-*
+          merge-multiple: true
+
+      - name: Merge into HTML Report
+        run:
+          npx playwright merge-reports --reporter html .playwright/blob-reports
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-report--attempt-${{ github.run_attempt }}
+          path: playwright-report
+          retention-days: 14
 
   vrt-runner:
     runs-on: ubuntu-latest

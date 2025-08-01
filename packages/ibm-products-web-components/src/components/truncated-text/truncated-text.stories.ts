@@ -9,8 +9,6 @@
 
 import { html } from 'lit';
 import './index';
-import mdx from './truncated-text.mdx';
-import CDSTruncatedText from './truncated-text';
 import styles from './story-styles.scss?lit';
 import '@carbon/web-components/es/components/layer/layer.js';
 
@@ -18,8 +16,8 @@ const storyPrefix = 'truncated-text-stories__';
 const defaultArgs = {
   align: 'top',
   autoalign: false,
-  'collapse-label': 'View less',
-  'expand-label': 'View more',
+  collapseLabel: 'View less...',
+  expandLabel: 'View more...',
   id: 'example-id',
   lines: 3,
   type: 'tooltip',
@@ -101,9 +99,16 @@ const argTypes = {
 };
 
 const renderTemplate = (args) => {
-  const { lines, value, type, align, autoalign, id } = args;
-  const expandLabelAttr = args['expand-label'];
-  const collapseLabelAttr = args['collapse-label'];
+  const {
+    align,
+    autoalign,
+    collapseLabel,
+    expandLabel,
+    id,
+    lines,
+    type,
+    value,
+  } = args;
   return html`
     <style>
       ${styles}
@@ -117,8 +122,8 @@ const renderTemplate = (args) => {
               align=${align}
               ?autoalign=${autoalign}
               lines=${lines}
-              expand-label=${expandLabelAttr}
-              collapse-label=${collapseLabelAttr}
+              expand-label=${expandLabel}
+              collapse-label=${collapseLabel}
               .type=${type}
             ></c4p-truncated-text>
           </p>`
@@ -132,8 +137,8 @@ const renderTemplate = (args) => {
                 align=${align}
                 ?autoalign=${autoalign}
                 lines=${lines}
-                expand-label=${expandLabelAttr}
-                collapse-label=${collapseLabelAttr}
+                expand-label=${expandLabel}
+                collapse-label=${collapseLabel}
                 .type=${type}
               ></c4p-truncated-text>
             </p>
@@ -148,8 +153,8 @@ const renderTemplate = (args) => {
                     align=${align}
                     ?autoalign=${autoalign}
                     lines=${lines}
-                    expand-label=${expandLabelAttr}
-                    collapse-label=${collapseLabelAttr}
+                    expand-label=${expandLabel}
+                    collapse-label=${collapseLabel}
                     .type=${type}
                   ></c4p-truncated-text>
                 </p>
@@ -165,8 +170,8 @@ const renderTemplate = (args) => {
                       align=${align}
                       ?autoalign=${autoalign}
                       lines=${lines}
-                      expand-label=${expandLabelAttr}
-                      collapse-label=${collapseLabelAttr}
+                      expand-label=${expandLabel}
+                      collapse-label=${collapseLabel}
                       .type=${type}
                     ></c4p-truncated-text>
                   </p>
@@ -184,8 +189,8 @@ const renderTemplate = (args) => {
               align=${align}
               ?autoalign=${autoalign}
               lines=${lines}
-              expand-label=${expandLabelAttr}
-              collapse-label=${collapseLabelAttr}
+              expand-label=${expandLabel}
+              collapse-label=${collapseLabel}
               .type=${type}
             ></c4p-truncated-text>
           </h1>`
@@ -198,8 +203,8 @@ const renderTemplate = (args) => {
               align=${align}
               ?autoalign=${autoalign}
               lines=${lines}
-              expand-label=${expandLabelAttr}
-              collapse-label=${collapseLabelAttr}
+              expand-label=${expandLabel}
+              collapse-label=${collapseLabel}
               .type=${type}
             ></c4p-truncated-text>
           </h2>`
@@ -212,8 +217,8 @@ const renderTemplate = (args) => {
               align=${align}
               ?autoalign=${autoalign}
               lines=${lines}
-              expand-label=${expandLabelAttr}
-              collapse-label=${collapseLabelAttr}
+              expand-label=${expandLabel}
+              collapse-label=${collapseLabel}
               .type=${type}
             ></c4p-truncated-text>
           </h3>`
@@ -226,8 +231,8 @@ const renderTemplate = (args) => {
               align=${align}
               ?autoalign=${autoalign}
               lines=${lines}
-              expand-label=${expandLabelAttr}
-              collapse-label=${collapseLabelAttr}
+              expand-label=${expandLabel}
+              collapse-label=${collapseLabel}
               .type=${type}
             ></c4p-truncated-text>
           </h4>`
@@ -240,8 +245,8 @@ const renderTemplate = (args) => {
               align=${align}
               ?autoalign=${autoalign}
               lines=${lines}
-              expand-label=${expandLabelAttr}
-              collapse-label=${collapseLabelAttr}
+              expand-label=${expandLabel}
+              collapse-label=${collapseLabel}
               .type=${type}
             ></c4p-truncated-text>
           </h5>`
@@ -254,8 +259,8 @@ const renderTemplate = (args) => {
               align=${align}
               ?autoalign=${autoalign}
               lines=${lines}
-              expand-label=${expandLabelAttr}
-              collapse-label=${collapseLabelAttr}
+              expand-label=${expandLabel}
+              collapse-label=${collapseLabel}
               .type=${type}
             ></c4p-truncated-text>
           </h6>`
@@ -302,8 +307,8 @@ export const typeExpand = {
   value="${defaultArgs.value}"
   lines="${defaultArgs.lines}"
   type="expand"
-  expand-label="View more"
-  collapse-label="View less"
+  expand-label="${defaultArgs.expandLabel}"
+  collapse-label="${defaultArgs.collapseLabel}"
 ></c4p-truncated-text>
         `,
       },

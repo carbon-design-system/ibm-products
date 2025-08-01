@@ -16,6 +16,13 @@ $css--plex: true !default;
 $prefix: 'c4p';
 $block-class: #{$prefix}--interstitial-screen;
 
+:host([fullscreen]) {
+  @extend .#{$block-class}--full-screen;
+  .#{$block-class}--container {
+    @extend .#{$block-class}--container;
+  }
+}
+
 .#{$block-class}__body-container {
   padding: 0;
 }

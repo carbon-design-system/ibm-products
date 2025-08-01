@@ -440,6 +440,7 @@ export const FullScreen = {
       </div>
       <c4p-interstitial-screen
         ?fullscreen=${true}
+        role="main"
         ?open=${true}
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
@@ -475,6 +476,7 @@ export const FullScreenWithMultipleSteps = {
       <c4p-interstitial-screen
         ?fullscreen=${true}
         ?open=${true}
+        role="main"
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
         }}

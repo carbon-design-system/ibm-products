@@ -161,11 +161,11 @@ class CDSInterstitialScreen extends SignalWatcher(
 
   renderFullScreen() {
     return this.open
-      ? html`<div class="${blockClass} ${blockClass}--full-screen" role="main">
+      ? html`
           <div class="${blockClass}--container">
             <slot></slot>
           </div>
-        </div>`
+        `
       : nothing;
   }
 

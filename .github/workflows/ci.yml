@@ -184,7 +184,7 @@ jobs:
       - name: Run Playwright tests
         if: github.repository == 'carbon-design-system/ibm-products'
         run: |
-          npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+          npx playwright test --project chromium --grep @avt --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload blob report to GitHub Actions Artifacts

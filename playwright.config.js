@@ -6,7 +6,8 @@
  */
 
 const { devices, expect } = require('@playwright/test');
-const path = require('path');
+const path = require('node:path');
+const os = require('node:os');
 const { pkg } = require('./packages/ibm-products/src/settings');
 
 const config = {
@@ -50,18 +51,12 @@ const config = {
   reporter: [
     ['line'],
     [
-      'json',
-      {
-        outputFile: path.join(__dirname, '.playwright', 'results.json'),
-      },
-    ],
-    [
-      'json',
+      'blob',
       {
         outputFile: path.join(
           __dirname,
-          'packages/ibm-products/.playwright',
-          'INTERNAL_AVT_REPORT_DO_NOT_USE.json'
+          '.playwright/blob-report',
+          `blob-report-${os.platform()}.zip`
         ),
       },
     ],

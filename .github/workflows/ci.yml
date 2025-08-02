@@ -167,7 +167,7 @@ jobs:
       - name: Install
         run: yarn
       - name: Install browsers
-        run: npx playwright install --with-deps
+        run: yarn playwright install --with-deps
       - name: Build project
         run: yarn build
       - name: Run storybook
@@ -183,7 +183,7 @@ jobs:
       - name: Run Playwright tests
         if: github.repository == 'carbon-design-system/ibm-products'
         run: |
-          npx playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
+          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload blob report to GitHub Actions Artifacts
@@ -217,7 +217,7 @@ jobs:
 
       - name: Merge into HTML Report
         run:
-          npx playwright merge-reports --reporter html .playwright/blob-report
+          yarn playwright merge-reports --reporter html .playwright/blob-report
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4

@@ -188,7 +188,7 @@ $clabs-prefix: 'clabs';
     --#{$block-class}--actions-height: #{$spacing-09};
   }
 
-  &.#{$block-class}--has-overlay {
+  &:not(.#{$block-class}--has-overlay) {
     box-shadow: 0 $spacing-01 $spacing-02 $overlay;
   }
 

@@ -39,6 +39,7 @@ const defaults = {
   overlayKind: 'tooltip',
   theme: 'light',
   isOpenByDefault: false,
+  closeIconDescription: 'Close',
 };
 
 export interface CoachmarkProps {
@@ -126,6 +127,10 @@ export interface CoachmarkProps {
    * Does nothing if `overlayKind=stacked`.
    */
   isOpenByDefault?: boolean;
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
 }
 
 /**
@@ -150,6 +155,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       target,
       theme = defaults.theme,
       isOpenByDefault = defaults.isOpenByDefault,
+      closeIconDescription = defaults.closeIconDescription,
       // Collect any other property values passed in.
       ...rest
     },
@@ -243,6 +249,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       align: align as PopoverAlignment,
       positionTune: positionTune,
       isOpen: isOpen,
+      closeIconDescription,
     };
     const handleResize = throttle(() => {
       closeOverlay();
@@ -462,6 +469,11 @@ Coachmark.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription: PropTypes.string,
+
+  /**
    * Determines if the coachmark is open by default.
    * Does nothing if `overlayKind=stacked`.
    */
@@ -471,7 +483,6 @@ Coachmark.propTypes = {
    * Function to call when the Coachmark closes.
    */
   onClose: PropTypes.func,
-
   /**
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */

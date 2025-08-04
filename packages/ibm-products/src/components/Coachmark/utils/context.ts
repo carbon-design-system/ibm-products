@@ -25,6 +25,7 @@ interface CoachmarkContextType {
     y: number;
   };
   isOpen: boolean;
+  closeIconDescription?: string;
 }
 
 export const CoachmarkContext = createContext<CoachmarkContextType | null>(

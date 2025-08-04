@@ -249,7 +249,6 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       align: align as PopoverAlignment,
       positionTune: positionTune,
       isOpen: isOpen,
-      closeIconDescription,
     };
     const handleResize = throttle(() => {
       closeOverlay();

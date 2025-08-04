@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2024
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -87,6 +87,7 @@ export { EditFullPage } from './EditFullPage';
 export { EditUpdateCards } from './EditUpdateCards';
 export { Checklist } from './Checklist';
 export { Coachmark } from './Coachmark';
+export { Coachmark as preview__Coachmark } from './Coachmark/next/Coachmark';
 export { CoachmarkBeacon } from './CoachmarkBeacon';
 export { CoachmarkButton } from './CoachmarkButton';
 export { CoachmarkFixed } from './CoachmarkFixed';
@@ -101,7 +102,8 @@ export {
 } from './Guidebanner';
 export { InlineTip, InlineTipButton, InlineTipLink } from './InlineTip';
 export { NonLinearReading } from './NonLinearReading';
-export { BigNumbers } from './BigNumbers';
+export { BigNumber } from './BigNumber';
+export { BigNumber as BigNumbers } from './BigNumber';
 export { TruncatedList } from './TruncatedList';
 export { TruncatedText } from './TruncatedText';
 export { InterstitialScreen } from './InterstitialScreen';

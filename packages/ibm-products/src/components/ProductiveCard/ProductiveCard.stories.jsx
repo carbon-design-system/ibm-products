@@ -77,13 +77,13 @@ export default {
       control: {
         type: 'select',
       },
-      options: [4, 8, 12, 16],
+      options: [1, 2, 3, 4],
     },
     columnSizeMd: {
       control: {
         type: 'select',
       },
-      options: [4, 8, 12, 16],
+      options: [2, 4, 6, 8],
     },
     columnSizeLg: {
       control: {
@@ -130,7 +130,7 @@ const defaultProps = {
   title: 'Title',
   columnSizeSm: 4,
   columnSizeMd: 8,
-  columnSizeLg: 4,
+  columnSizeLg: 8,
   children: (
     <>
       <div className={`${storyClass}__graph`}>

@@ -74,4 +74,17 @@ describe(componentName, () => {
       tmpActionIconClassName
     );
   });
+  it('renders Productive card with children', async () => {
+    const tmpChildClassName = 'tmpChildClassName';
+    const tmpChildTestId = 'tmpChildTestId';
+
+    render(
+      <ProductiveCard data-testid={dataTestId}>
+        <div data-testid={tmpChildTestId} className={tmpChildClassName}>
+          Hello world
+        </div>
+      </ProductiveCard>
+    );
+    expect(screen.getByTestId(tmpChildTestId)).toHaveClass(tmpChildClassName);
+  });
 });

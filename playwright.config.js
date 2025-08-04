@@ -7,7 +7,6 @@
 
 const { devices, expect } = require('@playwright/test');
 const path = require('node:path');
-const os = require('node:os');
 const { pkg } = require('./packages/ibm-products/src/settings');
 
 const config = {
@@ -49,14 +48,25 @@ const config = {
     },
   ],
   reporter: [
-    ['line'],
+    // Dot reporter is used in CI because it's very concise - it only produces a
+    // single character per successful test run.
+    [process.env.CI ? 'dot' : 'line'],
+
+    // The remaining reporters should always be used, in both CI and dev.
+    ['blob'],
     [
-      'blob',
+      'json',
+      {
+        outputFile: path.join(__dirname, '.playwright', 'results.json'),
+      },
+    ],
+    [
+      'json',
       {
         outputFile: path.join(
           __dirname,
-          '.playwright/blob-report',
-          `blob-report-${os.platform()}.zip`
+          'packages/ibm-products/.playwright',
+          'INTERNAL_AVT_REPORT_DO_NOT_USE.json'
         ),
       },
     ],

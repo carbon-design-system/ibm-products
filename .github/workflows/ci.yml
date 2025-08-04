@@ -32,6 +32,37 @@ jobs:
           key: build-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn
+
+      # For generating playwright json report for avt tests
+      - name: Install browsers
+        run: yarn playwright install --with-deps
+
+      - name: Build project
+        run: yarn build
+
+      - name: Run storybook
+        id: storybook
+        run: |
+          npx serve -l 3000 packages/ibm-products/storybook-static &
+          pid=$!
+          echo "pid=$pid" >> $GITHUB_OUTPUT
+      - uses: ./actions/wait-for-it
+        with:
+          URL: 'http://localhost:3000'
+        timeout-minutes: 3
+      - name: Run AVT
+        if: github.repository == 'carbon-design-system/ibm-products'
+        run: |
+          yarn playwright test --project chromium --grep @avt
+      - name: Stop storybook
+        run: kill ${{ steps.storybook.outputs.pid }}
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-avt-report
+          path: .playwright
+
       - name: CI build checks
         run: yarn ci-check:build
 
@@ -154,7 +185,8 @@ jobs:
   avt-runner:
     strategy:
       matrix:
-        shard: [1, 2, 3, 4]
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -180,24 +212,33 @@ jobs:
         with:
           URL: 'http://localhost:3000'
         timeout-minutes: 3
-      - name: Run Playwright tests
+      - name: Run AVT
         if: github.repository == 'carbon-design-system/ibm-products'
         run: |
-          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
+          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
-          name: blob-report-${{ matrix.shard }}
-          path: .playwright/blob-report
+          name: playwright-avt-blob-report-${{ matrix.shardIndex }}
+          path: blob-report
           retention-days: 1
+
+  avt:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs: avt-runner
+    steps:
+      - name: Check AVT Runner job status
+        if: ${{ needs.avt-runner.result != 'success' }}
+        run: exit 1
 
   merge-reports:
     # Merge reports after playwright-tests, even if some shards have failed
     if: ${{ !cancelled() }}
-    needs: [avt-runner]
+    needs: avt-runner
 
     runs-on: ubuntu-latest
     steps:
@@ -208,22 +249,23 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Download blob reports from GitHub Actions Artifacts
+      - name: Download avt blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: .playwright/blob-report
-          pattern: blob-report-*
+          path: all-playwright-avt-blob-reports
+          pattern: playwright-avt-blob-report-*
           merge-multiple: true
 
-      - name: Merge into HTML Report
+      - name: Merge avt reports into HTML Report
         run:
-          yarn playwright merge-reports --reporter html .playwright/blob-report
+          npx playwright merge-reports --reporter html
+          ./all-playwright-avt-blob-reports
 
-      - name: Upload HTML report
+      - name: Upload avt HTML report
         uses: actions/upload-artifact@v4
         with:
-          name: html-report--attempt-${{ github.run_attempt }}
-          path: playwright-report
+          name: html-playwright-avt-report--attempt-${{ github.run_attempt }}
+          path: playwright-avt-report
           retention-days: 14
 
   vrt-runner:
@@ -254,12 +296,3 @@ jobs:
           == false }}
         working-directory: packages/ibm-products
         run: yarn percy storybook storybook-static
-
-  avt:
-    if: ${{ always() }}
-    runs-on: ubuntu-latest
-    needs: avt-runner
-    steps:
-      - name: Check AVT Runner job status
-        if: ${{ needs.avt-runner.result != 'success' }}
-        run: exit 1

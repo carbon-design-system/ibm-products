@@ -58,11 +58,11 @@
     "yargs": "^18.0.0"
   },
   "peerDependencies": {
-    "@carbon/grid": "^11.38.0",
-    "@carbon/layout": "^11.36.0",
-    "@carbon/motion": "^11.30.0",
-    "@carbon/themes": "^11.55.0",
-    "@carbon/type": "^11.42.0"
+    "@carbon/grid": "^11.40.0",
+    "@carbon/layout": "^11.38.0",
+    "@carbon/motion": "^11.32.0",
+    "@carbon/themes": "^11.57.0",
+    "@carbon/type": "^11.44.0"
   },
   "dependencies": {
     "@ibm/telemetry-js": "^1.9.1"

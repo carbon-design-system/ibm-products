@@ -209,6 +209,7 @@
     "useravatar",
     "rendericon",
     "csvg",
-    "autoalign"
+    "autoalign",
+    "scroller"
   ]
 }

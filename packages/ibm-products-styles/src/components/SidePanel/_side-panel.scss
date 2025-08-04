@@ -193,6 +193,7 @@ $clabs-prefix: 'clabs';
   }
 
   // Slide-in panels should use border not shadows since they don’t layer
+  &.#{$block-class}--slide-in,
   &.#{$block-class}--slide-in:not(.#{$block-class}--has-overlay) {
     box-shadow: none;
   }

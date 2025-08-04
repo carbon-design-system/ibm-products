@@ -52,8 +52,7 @@ jobs:
         timeout-minutes: 3
       - name: Run AVT
         if: github.repository == 'carbon-design-system/ibm-products'
-        run: |
-          yarn playwright test --project chromium --grep @avt
+        run: yarn avt
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results

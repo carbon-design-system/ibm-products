@@ -86,6 +86,11 @@ type SidePanelBaseProps = {
   closeIconDescription?: string;
 
   /**
+   * Sets the close button tooltip alignment
+   */
+  closeIconTooltipAlignment?: string;
+
+  /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)
    */
   condensedActions?: boolean;
@@ -237,6 +242,7 @@ export type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
 const defaults = {
   animateTitle: true,
   closeIconDescription: 'Close',
+  closeIconTooltipAlignment: 'left',
   currentStep: 0,
   hideCloseButton: false,
   navigationBackIconDescription: 'Back',
@@ -257,6 +263,7 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
       children,
       className,
       closeIconDescription = defaults.closeIconDescription,
+      closeIconTooltipAlignment = defaults.closeIconTooltipAlignment,
       condensedActions,
       currentStep = defaults.currentStep,
       decorator,
@@ -915,10 +922,10 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
                 onClick={onRequestClose}
                 onKeyDown={slideIn ? undefined : handleEscapeKey}
                 ref={closeRef}
-                align="left"
+                align={closeIconTooltipAlignment}
               >
                 <Close
-                  size={20}
+                  size={16}
                   aria-hidden="true"
                   tabIndex="-1"
                   className={`${blockClass}--btn__icon`}
@@ -1161,6 +1168,11 @@ SidePanel.propTypes = {
    * Sets the close button icon description
    */
   closeIconDescription: PropTypes.string,
+
+  /**
+   * Sets the close button tooltip alignment
+   */
+  closeIconTooltipAlignment: PropTypes.string,
 
   /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)

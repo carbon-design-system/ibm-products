@@ -77,7 +77,6 @@ export const CoachmarkBeacon = React.forwardRef<
       role="tooltip"
     >
       <button
-        tabIndex={0}
         type="button"
         {...buttonProps}
         className={`${blockClass}__target`}

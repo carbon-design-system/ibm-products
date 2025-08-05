@@ -14,8 +14,8 @@ import { createContext, RefObject, useContext } from 'react';
  */
 
 export type PageHeaderRefs = {
-  contentRef?: RefObject<HTMLDivElement>;
-  titleRef?: RefObject<HTMLDivElement>;
+  contentRef?: RefObject<HTMLDivElement | null>;
+  titleRef?: RefObject<HTMLHeadingElement | null>;
 };
 
 type PageHeaderContextType = {

@@ -152,7 +152,7 @@ export interface ProductiveCardProps extends PropsWithChildren {
 
 export const ProductiveCard = forwardRef(
   (
-    { actionsPlacement = 'top', ...rest }: ProductiveCardProps,
+    { actionsPlacement = 'top', children, ...rest }: ProductiveCardProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const validProps = prepareProps(rest, [
@@ -172,7 +172,9 @@ export const ProductiveCard = forwardRef(
           productive: true,
         }}
         {...getDevtoolsProps(componentName)}
-      />
+      >
+        {children}
+      </Card>
     );
   }
 );

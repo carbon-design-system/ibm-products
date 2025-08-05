@@ -1,4 +1,4 @@
-## `@carbon/storybook-addon-theme@2.20.0-rc.0`
+## `@carbon/storybook-addon-theme@2.20.0`
 ### Housekeeping :house:
 - chore: remove redundant upgrade scripts (#7774)
 

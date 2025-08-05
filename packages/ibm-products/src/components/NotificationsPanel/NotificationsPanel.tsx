@@ -763,7 +763,6 @@ export const NotificationsPanel = React.forwardRef(
         role="dialog"
         aria-labelledby={headingId}
         onKeyDown={handleKeydown}
-        tabIndex={0}
         {
           // Pass through any other property values as HTML attributes.
           ...rest

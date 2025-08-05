@@ -10,13 +10,12 @@
 import { html } from 'lit';
 import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './side-panel';
 import './index';
-// import Settings from '@carbon/icons/lib/settings/16';
-// import Trashcan from '@carbon/icons/lib/trash-can/16';
 import { prefix } from '../../globals/settings';
 
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/textarea/index.js';
+import { ICON_BUTTON_TOOLTIP_ALIGNMENT } from '@carbon/web-components/es/components/icon-button/defs.js';
 
 import {
   getContent,
@@ -110,6 +109,10 @@ const slugs = {
   'With Slug': 1,
 };
 
+const closeIconTooltipAlignmentOptions: string[] = Object.values(
+  ICON_BUTTON_TOOLTIP_ALIGNMENT
+);
+
 const defaultTemplate = {
   args: {
     actionItems: 1,
@@ -117,6 +120,7 @@ const defaultTemplate = {
     animateTitle: true,
     class: 'a-user-class',
     closeIconDescription: 'Close panel',
+    closeIconTooltipAlignment: 'left',
     condensedActions: false,
     content: 2,
     includeOverlay: true,
@@ -156,6 +160,11 @@ const defaultTemplate = {
     closeIconDescription: {
       control: 'text',
       description: 'Close icon description',
+    },
+    closeIconTooltipAlignment: {
+      control: 'select',
+      description: 'Close icon tooltip alignment',
+      options: closeIconTooltipAlignmentOptions,
     },
     condensedActions: {
       control: 'boolean',
@@ -246,18 +255,20 @@ const defaultTemplate = {
         size=${args.size}
         ?slide-in=${args.slideIn}
         ?hide-close-button=${args.hideCloseButton}
+        close-icon-description=${args.closeIconDescription}
+        close-icon-tooltip-alignment=${args.closeIconTooltipAlignment}
         .title=${args.title}
         @c4p-side-panel-navigate-back=${prevStep}
       >
+        <!-- slotted action toolbar cds-buttons -->
+        ${getActionToolbarItems(args.actionToolbarItems)}
+
         <!-- default slotted content -->
         ${getContent(args.content)}
         <cds-button @click="${nextStep}">Step two</cds-button>
 
         <!-- slotted subtitle slotted content -->
         ${getSubTitle(args.subtitle)}
-
-        <!-- slotted action toolbar cds-buttons -->
-        ${getActionToolbarItems(args.actionToolbarItems)}
 
         <!-- slotted action items cds-buttons -->
         ${getActionItems(args.actionItems)}

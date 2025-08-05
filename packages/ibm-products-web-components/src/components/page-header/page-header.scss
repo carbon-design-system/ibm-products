@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/grid';
@@ -77,6 +78,7 @@ $carbon-prefix: 'cds';
 
   .#{$prefix}--page-header__breadcrumb-wrapper {
     display: inline-flex;
+    inline-size: 100%;
   }
 
   .#{$prefix}--page-header__breadcrumb__actions {
@@ -257,29 +259,20 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tab-bar--tablist {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   inline-size: 100%;
-
-  // TODO: remove once responsive logic for tags is implemented
-  @include breakpoint-down(md) {
-    flex-direction: column-reverse;
-    grid-gap: $spacing-05;
-  }
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='tags']) {
   display: flex;
   align-items: center;
   justify-content: right;
+  inline-size: 100%;
+  max-inline-size: 500px;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__tags;
-  inline-size: 100%;
-
-  // TODO: remove once responsive logic for tags is implemented
-  @include breakpoint-down(md) {
-    justify-content: left;
-  }
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='scroller']) {
@@ -301,4 +294,82 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-tabs) ::slotted(#{$carbon-prefix}-tabs) {
   --tabs-overflow-button-background: $layer-01;
+}
+
+@keyframes page-header-title-breadcrumb-animation {
+  0% {
+    opacity: 0;
+    transform: translateY($spacing-05);
+  }
+
+  5% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes page-header-title-breadcrumb-animation-reduced-motion {
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+:host(#{$prefix}-page-header-title-breadcrumb) {
+  opacity: 0;
+  transform: translateY($spacing-05);
+  transition:
+    /* stylelint-disable-next-line */
+    transform motion(standard, productive) $duration-moderate-01,
+    opacity motion(standard, productive) $duration-moderate-01;
+  // Target browsers that do not yet support animation-timeline: scroll()
+  @supports not (animation-timeline: scroll()) {
+    &.#{$prefix}--page-header-title-breadcrumb-show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      transform: translateY(0);
+      /* stylelint-disable-next-line */
+      transition: opacity motion(standard, productive) $duration-moderate-01;
+    }
+  }
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__with-content
+) {
+  // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+  @supports (animation-timeline: scroll()) {
+    // Show by default should not have any animation, this means
+    // there was not a page header content element provided
+    animation-direction: alternate;
+    animation-duration: 1ms; /* Firefox requires this to apply the animation */
+    animation-name: page-header-title-breadcrumb-animation;
+    animation-timeline: scroll(block nearest);
+
+    @media (prefers-reduced-motion: reduce) {
+      animation-name: page-header-title-breadcrumb-animation-reduced-motion;
+      transform: translateY(0);
+    }
+  }
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__by-default
+) {
+  opacity: 1;
+  transform: translateY(0);
 }

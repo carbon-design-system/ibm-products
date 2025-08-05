@@ -727,7 +727,8 @@ $duration: 1000ms;
     inset-block-start: var(--#{$pkg-prefix}-page-header-breadcrumb-top);
   }
 
-  .#{$block-class}__breadcrumb-bar .#{$carbon-prefix}--subgrid {
+  .#{$block-class}__breadcrumb-bar .#{$carbon-prefix}--subgrid,
+  .#{$block-class}__breadcrumb-bar .#{$carbon-prefix}--css-grid {
     block-size: 100%;
   }
 
@@ -759,14 +760,36 @@ $duration: 1000ms;
 
   .#{$block-class}__breadcrumb__actions {
     display: inline-flex;
+    justify-content: flex-end;
+    inline-size: 100%;
   }
 
   .#{$block-class}__breadcrumb__content-actions {
+    inline-size: 100%;
     margin-inline-end: $spacing-04;
   }
 
   .#{$block-class}__breadcrumb-wrapper {
     display: inline-flex;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__breadcrumb-wrapper .#{$block-class}-breadcrumb-overflow {
+    inline-size: 100%;
+    .#{$carbon-prefix}--breadcrumb {
+      display: flex;
+    }
+  }
+
+  .#{$block-class}__breadcrumb-wrapper
+    .#{$block-class}-breadcrumb-overflow-item {
+    display: none;
+    opacity: 0;
+  }
+  .#{$block-class}__breadcrumb-wrapper
+    .#{$block-class}-overflow-breadcrumb-item-with-items {
+    display: flex;
+    opacity: 1;
   }
 
   .#{$block-class}__content {
@@ -917,6 +940,13 @@ $duration: 1000ms;
     }
   }
 
+  // **** This is a temporary work-around until the focus clipping
+  // **** for overflowing tabs is resolved in core.
+  // **** https://github.com/carbon-design-system/carbon/issues/19942
+  .#{$carbon-prefix}--tabs .#{$carbon-prefix}--tabs__nav-link {
+    margin-inline-end: $spacing-01;
+  }
+
   .#{$block-class}__tags {
     display: flex;
     align-items: center;
@@ -949,5 +979,76 @@ $duration: 1000ms;
     position: absolute;
     inset-block-end: 0;
     inset-inline-end: $spacing-01;
+  }
+
+  @keyframes page-header-title-breadcrumb-animation {
+    0% {
+      opacity: 0;
+      transform: translateY($spacing-05);
+    }
+
+    5% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes page-header-title-breadcrumb-animation-reduced-motion {
+    0% {
+      opacity: 0;
+    }
+
+    5% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .#{$pkg-prefix}--page-header-title-breadcrumb {
+    opacity: 0;
+    transform: translateY($spacing-05);
+    transition:
+      /* stylelint-disable-next-line */
+      transform motion(standard, productive) $duration-moderate-01,
+      opacity motion(standard, productive) $duration-moderate-01;
+    // Target browsers that do not yet support animation-timeline: scroll()
+    @supports not (animation-timeline: scroll()) {
+      &.#{$pkg-prefix}--page-header-title-breadcrumb-show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        transform: translateY(0);
+        /* stylelint-disable-next-line */
+        transition: opacity motion(standard, productive) $duration-moderate-01;
+      }
+    }
+
+    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__with-content-element {
+      // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+      @supports (animation-timeline: scroll()) {
+        animation-direction: alternate;
+        animation-duration: 1ms; /* Firefox requires this to apply the animation */
+        animation-name: page-header-title-breadcrumb-animation;
+        animation-timeline: scroll(block nearest);
+
+        @media (prefers-reduced-motion: reduce) {
+          animation-name: page-header-title-breadcrumb-animation-reduced-motion;
+          transform: translateY(0);
+        }
+      }
+    }
+    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__without-content-element {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { Add } from '@carbon/icons-react';
-import { unstable__PageHeader as PageHeader } from '../../';
+import { preview__PageHeader as PageHeader, TruncatedText } from '../../';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar,
@@ -28,6 +28,8 @@ import {
   Tabs,
   TabPanels,
   TabPanel,
+  OverflowMenu,
+  OverflowMenuItem,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
@@ -477,11 +479,38 @@ export const TabBarWithTabsAndTags = (args) => (
         contentActionsFlush={args.contentActionsFlush}
         renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
         pageActions={breadcrumbPageActions}
+        contentActions={
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}
+          />
+        }
       >
-        <Breadcrumb>
+        <PageHeader.BreadcrumbOverflow
+          renderOverflowBreadcrumb={(hiddenItems) => (
+            <BreadcrumbItem data-floating-menu-container>
+              <OverflowMenu
+                align="bottom"
+                aria-label="Overflow menu in a breadcrumb"
+              >
+                {hiddenItems.map((el) => (
+                  <OverflowMenuItem itemText={el.innerText} />
+                ))}
+              </OverflowMenu>
+            </BreadcrumbItem>
+          )}
+        >
           <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-        </Breadcrumb>
+          <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+          <PageHeader.TitleBreadcrumb data-fixed>
+            <TruncatedText
+              value="Virtual-Machine-DAL-really-long-title-example"
+              align="bottom"
+              lines={1}
+            />
+          </PageHeader.TitleBreadcrumb>
+        </PageHeader.BreadcrumbOverflow>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content
         title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"

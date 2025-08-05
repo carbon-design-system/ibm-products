@@ -16,8 +16,8 @@ const storyPrefix = 'truncated-text-stories__';
 const defaultArgs = {
   align: 'top',
   autoalign: false,
-  collapseLabel: 'View less...',
-  expandLabel: 'View more...',
+  collapseLabel: 'View less',
+  expandLabel: 'View more',
   id: 'example-id',
   lines: 3,
   type: 'tooltip',

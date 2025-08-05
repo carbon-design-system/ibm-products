@@ -9,6 +9,7 @@
 import { html, LitElement } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/tooltip/index.js';
@@ -202,13 +203,17 @@ export class CDSTruncatedText extends LitElement {
 
   render() {
     // Apply different styles based on truncation method
-    const contentStyle =
-      this.type === 'tooltip' || !this.type
-        ? `--line-clamp: ${this._isExpanded ? 'none' : this.lines};`
-        : `max-block-size: ${this._maxHeight};`;
+    const contentStyle = {
+      ['--line-clamp']: this._isExpanded ? 'none' : this.lines,
+      ['max-block-size']: this.type === 'expand' ? this._maxHeight : 'none',
+    };
 
     const valueBody = html`
-      <div id=${this.id} class="${blockClass}_content" style=${contentStyle}>
+      <div
+        id=${this.id}
+        class="${blockClass}_content"
+        style=${styleMap(contentStyle)}
+      >
         ${this.value}
       </div>
     `;

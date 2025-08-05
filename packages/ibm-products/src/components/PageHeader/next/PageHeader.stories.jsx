@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { Add } from '@carbon/icons-react';
-import { preview__PageHeader as PageHeader } from '../../';
+import { preview__PageHeader as PageHeader, TruncatedText } from '../../';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar,
@@ -504,7 +504,11 @@ export const TabBarWithTabsAndTags = (args) => (
           <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
           <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
           <PageHeader.TitleBreadcrumb data-fixed>
-            Virtual Machine DAL
+            <TruncatedText
+              value="Virtual-Machine-DAL-really-long-title-example"
+              align="bottom"
+              lines={1}
+            />
           </PageHeader.TitleBreadcrumb>
         </PageHeader.BreadcrumbOverflow>
       </PageHeader.BreadcrumbBar>

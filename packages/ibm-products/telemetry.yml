@@ -45,6 +45,7 @@ collect:
         - breadcrumbs
         - button
         - cancelButtonText
+        - caret
         - cellSize
         - children
         - className
@@ -85,6 +86,7 @@ collect:
         - displayMetalPanel
         - downloadLinkLabel
         - draggableClass
+        - dropShadow
         - element
         - emptyStateAction
         - emptyStateDescription
@@ -149,6 +151,7 @@ collect:
         - hideConditionSubGroupPreviewHandler
         - hideIcon
         - hideSelectAll
+        - highContrast
         - href
         - icon
         - iconDescription
@@ -189,6 +192,7 @@ collect:
         - labelText
         - launcherButtonRef
         - legendText
+        - lines
         - link
         - links
         - listRef
@@ -364,6 +368,7 @@ collect:
         - tableId
         - tagline
         - tags
+        - target
         - theme
         - title
         - titleSize
@@ -490,7 +495,7 @@ collect:
         - onRequestGenerate
         - previousStepButtonText
         - showAPIKeyLabel
-        # BigNumbers
+        # BigNumber
         - forceShowTotal
         - fractionDigits
         - iconButton
@@ -532,12 +537,14 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
+        - defaultOpen
+        - floating
         - isOpenByDefault
         - overlayClassName
         - overlayKind
         - overlayRef
+        - position
         - positionTune
-        - target
         # CoachmarkBeacon
         - buttonProps
         # CoachmarkDragbar
@@ -588,6 +595,8 @@ collect:
         # ConditionPreview
         - colorIndex
         - previewType
+        # ContentHeader
+        - dragIconDescription
         # CreateFullPage
         - breadcrumbsOverflowAriaLabel
         - maxVisibleBreadcrumbs
@@ -847,10 +856,17 @@ collect:
         - contentActions
         - contentActionsFlush
         - pageActionsFlush
+        # PageHeaderBreadcrumbOverflow
+        - renderOverflowBreadcrumb
         # PageHeaderContent
         - contextualActions
         # PageHeaderContentPageActions
         - menuButtonLabel
+        # PageHeaderScrollButton
+        - collapseText
+        - expandText
+        # PageHeaderTabBar
+        - scroller
         # PageHeaderTitle
         - blockClass
         - hasBreadcrumbRow
@@ -901,6 +917,7 @@ collect:
         # SidePanelBase
         - actionToolbarButtons
         - animateTitle
+        - closeIconTooltipAlignment
         - condensedActions
         - hideCloseButton
         - includeOverlay
@@ -920,21 +937,21 @@ collect:
         - retryLabel
         - showRetry
         # StringFormatter
-        - lines
         - tooltipDirection
         - width
         # TagOverflow
         - tagComponent
         # Toolbar
         - vertical
-        # ToolbarButton
-        - caret
         # TruncatedList
         - as
         - buttonClassName
         - collapsedItemsLimit
         - expandedItemsLimit
         - viewMoreLabel
+        # TruncatedText
+        - collapseLabel
+        - expandLabel
         # Underlay
         - activeId
         # UserAvatar
@@ -1138,12 +1155,14 @@ collect:
         - auto
         - checkbox
         - date
+        - expand
         - manual
         - number
         - radio
         - selection
         - text
         - textarea
+        - tooltip
         # General - updateMethod
         - batch
         - instant

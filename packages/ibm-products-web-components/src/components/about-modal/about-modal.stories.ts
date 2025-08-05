@@ -21,9 +21,12 @@ import '@carbon/web-components/es/components/link/index.js';
 const storyPrefix = 'about-modal-stories__';
 const blockClass = `${prefix}--about-modal`;
 const openModal = () => {
-  const modal = document
-    .querySelector(`${prefix}-about-modal`)
-    ?.toggleAttribute('open');
+  const modal = document.querySelector(`${prefix}-about-modal`);
+  if (modal) {
+    requestAnimationFrame(() => {
+      modal.setAttribute('open', '');
+    });
+  }
 };
 
 const argTypes = {

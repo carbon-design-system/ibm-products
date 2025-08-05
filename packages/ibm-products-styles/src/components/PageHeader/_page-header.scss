@@ -765,7 +765,7 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__breadcrumb__content-actions {
-    inline-size: 100%;
+    inline-size: fit-content;
     margin-inline-end: $spacing-04;
   }
 
@@ -1012,6 +1012,10 @@ $duration: 1000ms;
     }
   }
 
+  .#{$pkg-prefix}--page-header__breadcrumb__content-actions {
+    opacity: 0;
+  }
+
   .#{$pkg-prefix}--page-header-title-breadcrumb,
   .#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions {
     opacity: 0;
@@ -1034,7 +1038,8 @@ $duration: 1000ms;
       }
     }
 
-    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__with-content-element {
+    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__with-content-element,
+    &.#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions {
       // `animation-timeline: scroll()` only currently supported in Chromium based browsers
       @supports (animation-timeline: scroll()) {
         animation-direction: alternate;

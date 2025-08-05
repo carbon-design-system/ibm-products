@@ -7,81 +7,96 @@
 
 import '../feature-flags';
 
+/**
+ * Stable components
+ */
 export * from './AboutModal';
+export { ActionBar } from './ActionBar';
 export * from './APIKeyModal';
 export * from './Cascade';
-export * from './ComboButton';
-export * from './CreateFullPage';
-export * from './CreateModal';
-export * from './CreateSidePanel';
-export * from './CreateTearsheet';
-export * from './CreateTearsheetNarrow';
-export * from './EmptyStates';
-export * from './ExportModal';
-export * from './ExpressiveCard';
-export * from './HTTPErrors';
-export * from './ImportModal';
-export * from './MultiAddSelect';
-export * from './NotificationsPanel';
-export * from './PageHeader';
-export * from './ProductiveCard';
-export * from './RemoveModal';
-export * from './Saving';
-export * from './SidePanel';
-export * from './SingleAddSelect';
-export * from './StatusIcon';
-export * from './TagSet';
-export * from './Tearsheet';
-export * from './Toolbar';
-export * from './UserProfileImage';
-export * from './WebTerminal';
-export * from './EditSidePanel';
-export * from './OptionsTile';
-export * from './EditInPlace';
-export * from './DataSpreadsheet';
-export * from './Datagrid';
-export * from './EditTearsheet';
-export * from './EditTearsheetNarrow';
-export * from './EditFullPage';
-export * from './EditUpdateCards';
 export * from './Checklist';
 export { Coachmark } from './Coachmark';
-export { Coachmark as preview__Coachmark } from './Coachmark/next/Coachmark';
 export * from './CoachmarkBeacon';
 export * from './CoachmarkButton';
 export * from './CoachmarkFixed';
 export * from './CoachmarkOverlayElement';
 export * from './CoachmarkOverlayElements';
 export * from './CoachmarkStack';
-export * from './Guidebanner';
-export * from './InlineTip';
-export * from './NonLinearReading';
-export * from './BigNumber';
+export * from './CreateFullPage';
+export * from './CreateModal';
+export * from './CreateSidePanel';
+export * from './CreateTearsheet';
+export * from './CreateTearsheetNarrow';
+export * from './DelimitedList';
+export * from './EditSidePanel';
+export * from './EditInPlace';
+export * from './EmptyStates';
+export * from './ExportModal';
+export * from './ExpressiveCard';
+export * from './FullPageError';
+export * from './ImportModal';
+export * from './InterstitialScreen';
+export * from './MultiAddSelect';
+export * from './NotificationsPanel';
+export * from './OptionsTile';
+export * from './PageHeader';
+export * from './ProductiveCard';
+export * from './RemoveModal';
+export * from './Saving';
+export * from './ScrollGradient';
+export * from './SidePanel';
+export * from './SingleAddSelect';
+export * from './StatusIcon';
+export * from './StringFormatter';
+export * from './TagOverflow';
+export * from './TagSet';
+export * from './Tearsheet';
 export * from './TruncatedList';
 export * from './TruncatedText';
-export * from './InterstitialScreen';
-export * from './DelimitedList';
-export * from './Decorator';
-export * from './DecoratorLink';
-export * from './DecoratorSingleButton';
-export * from './DecoratorDualButton';
-export * from './DescriptionList';
-export * from './FullPageError';
-export * from './SearchBar';
-export * from './Nav';
-export * from './StringFormatter';
 export * from './UserAvatar';
-export * from './ScrollGradient';
-export * from './StatusIndicator';
-export * from './TagOverflow';
-export { ActionBar } from './ActionBar';
-export * from './FilterPanel';
-export * from './ConditionBuilder';
-export * from './GetStartedCard';
-export * as preview__PageHeader from './PageHeader/next/PageHeader';
+export * from './WebTerminal';
 
+/**
+ * Non-stable components
+ * draft | previewCandidate | preview
+ */
+
+// Preview
+export * as preview__Coachmark from './Coachmark/next/Coachmark';
+export * as preview__DataSpreadsheet from './DataSpreadsheet';
+export * as preview__Decorator from './Decorator';
 export {
-  FeatureFlags as unstable_FeatureFlags,
-  useFeatureFlag as unstable_useFeatureFlag,
-  useFeatureFlags as unstable_useFeatureFlags,
+  FeatureFlags as preview__FeatureFlags,
+  useFeatureFlag as preview__useFeatureFlag,
+  useFeatureFlags as preview__useFeatureFlags,
 } from './FeatureFlags';
+export * as preview__PageHeader from './PageHeader/next/PageHeader';
+export * as preview__SearchBar from './SearchBar';
+export * as preview__Toolbar from './Toolbar';
+
+// Preview candidates
+export * as previewCandidate__BigNumber from './BigNumber';
+export * as previewCandidate__ConditionBuilder from './ConditionBuilder';
+export * as previewCandidate__GetStartedCard from './GetStartedCard';
+export * as previewCandidate__Guidebanner from './Guidebanner';
+export * as previewCandidate__InlineTip from './InlineTip';
+export * as previewCandidate__NonLinearReading from './NonLinearReading';
+
+/**
+ * Deprecated
+ */
+export * from './ComboButton';
+export * from './Datagrid';
+export * from './DecoratorLink';
+export * from './DecoratorDualButton';
+export * from './DecoratorSingleButton';
+export * from './DescriptionList';
+export * from './EditFullPage';
+export * from './EditTearsheet';
+export * from './EditTearsheetNarrow';
+export * from './EditUpdateCards';
+export * from './FilterPanel';
+export * from './HTTPErrors';
+export * from './Nav';
+export * from './StatusIndicator';
+export * from './UserProfileImage';

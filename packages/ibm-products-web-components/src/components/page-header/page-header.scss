@@ -78,6 +78,7 @@ $carbon-prefix: 'cds';
 
   .#{$prefix}--page-header__breadcrumb-wrapper {
     display: inline-flex;
+    inline-size: 100%;
   }
 
   .#{$prefix}--page-header__breadcrumb__actions {
@@ -258,29 +259,20 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tab-bar--tablist {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   inline-size: 100%;
-
-  // TODO: remove once responsive logic for tags is implemented
-  @include breakpoint-down(md) {
-    flex-direction: column-reverse;
-    grid-gap: $spacing-05;
-  }
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='tags']) {
   display: flex;
   align-items: center;
   justify-content: right;
+  inline-size: 100%;
+  max-inline-size: 500px;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__tags;
-  inline-size: 100%;
-
-  // TODO: remove once responsive logic for tags is implemented
-  @include breakpoint-down(md) {
-    justify-content: left;
-  }
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='scroller']) {
@@ -354,8 +346,15 @@ $carbon-prefix: 'cds';
       transition: opacity motion(standard, productive) $duration-moderate-01;
     }
   }
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__with-content
+) {
   // `animation-timeline: scroll()` only currently supported in Chromium based browsers
   @supports (animation-timeline: scroll()) {
+    // Show by default should not have any animation, this means
+    // there was not a page header content element provided
     animation-direction: alternate;
     animation-duration: 1ms; /* Firefox requires this to apply the animation */
     animation-name: page-header-title-breadcrumb-animation;
@@ -366,4 +365,11 @@ $carbon-prefix: 'cds';
       transform: translateY(0);
     }
   }
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__by-default
+) {
+  opacity: 1;
+  transform: translateY(0);
 }

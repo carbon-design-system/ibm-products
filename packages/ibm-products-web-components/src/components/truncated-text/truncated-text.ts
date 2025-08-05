@@ -176,6 +176,18 @@ export class CDSTruncatedText extends LitElement {
       this._textElement?.removeEventListener('transitionend', onTransitionEnd);
     };
     this._textElement?.addEventListener('transitionend', onTransitionEnd);
+
+    /**
+     * currently you cannot animate line-clamping
+     * you can however animate max-height
+     * this removes the clamping and then quickly adds it so you can see the ellipsis
+     */
+    if (this._isExpanded === false) {
+      this._textElement?.classList.add(`${blockClass}_content--closing`);
+      setTimeout(() => {
+        this._textElement?.classList.remove(`${blockClass}_content--closing`);
+      }, 100);
+    }
   }
 
   private _renderToggleButton() {

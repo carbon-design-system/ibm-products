@@ -304,7 +304,7 @@ describe('Notifications', () => {
       onDismissSingleNotification: onDismissSingleNotificationFn,
     });
     const notificationElement = screen.getByText(/Test notification title/i)
-      .parentNode.parentNode;
+      .parentNode.parentNode.parentNode;
     const dismissSingleNotificationClass = `${blockClass}__dismiss-single-button`;
     const dismissIconButtonElement = notificationElement.querySelector(
       `.${dismissSingleNotificationClass}`
@@ -334,7 +334,7 @@ describe('Notifications', () => {
       onDismissSingleNotification: onDismissSingleNotificationFn,
     });
     const notificationElement = screen.getByText(/Test notification title/i)
-      .parentNode.parentNode;
+      .parentNode.parentNode.parentNode;
     const dismissSingleNotificationClass = `${blockClass}__dismiss-single-button`;
     const dismissIconButtonElement = notificationElement.querySelector(
       `.${dismissSingleNotificationClass}`

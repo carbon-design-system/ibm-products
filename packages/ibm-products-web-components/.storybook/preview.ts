@@ -13,6 +13,50 @@ import { breakpoints } from '@carbon/layout';
 import theme from './theme';
 import './templates/with-layer';
 
+// Properties to exclude from docs (usually leaked from Lit or SignalWatcher)
+const unwantedProperties = new Set([
+  // From SignalWatcher / @lit-labs/signals
+  'enabledWarnings',
+  'enableWarning',
+  'disableWarning',
+  'signalWatcher',
+  '__signalWatcher',
+  '_$litSignalWatcher$',
+
+  // From LitElement / ReactiveElement
+  'elementProperties',
+  'properties',
+  'elementStyles',
+  'styles',
+  'shadowRootOptions',
+  'renderRoot',
+  'isUpdatePending',
+  'hasUpdated',
+  'updateComplete',
+
+  // Possibly inherited lifecycle hooks
+  'connectedCallback',
+  'disconnectedCallback',
+  'shouldUpdate',
+  'willUpdate',
+  'update',
+  'firstUpdated',
+  'updated',
+
+  'context-request',
+  'context-provider',
+  'customElements',
+  'registry',
+]);
+customElements?.tags?.forEach((tag) => {
+  if (tag.properties) {
+    /**@ts-ignore */
+    tag.properties = tag.properties.filter(
+      (prop) => !unwantedProperties.has(prop.name)
+    );
+  }
+});
+
 setCustomElementsManifest(customElements);
 
 export const globalTypes = {

@@ -21,7 +21,7 @@ $story-class: 'productive-card-stories';
   border-inline-start-color: $support-error;
   border-start-end-radius: 110px;
   border-start-start-radius: 110px;
-  inline-size: 200px;
+  inline-size: 100%;
 }
 .#{$story-class}__visually-hidden {
   position: absolute;

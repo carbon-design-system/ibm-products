@@ -35,7 +35,11 @@ import { Dropdown, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 import React, { useState } from 'react';
 
-import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
+import {
+  preview__Toolbar as Toolbar,
+  preview__ToolbarButton as ToolbarButton,
+  preview__ToolbarGroup as ToolbarGroup,
+} from '../..';
 import mdx from './Toolbar.mdx';
 
 export default {

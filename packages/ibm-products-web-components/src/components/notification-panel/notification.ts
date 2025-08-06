@@ -81,17 +81,19 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
     const icon = fetchIcon(type);
     return html`
-      ${icon}
-      <div class="${blockClass}-content">
-        <p class="${blockClass}-time-label">
-          ${dateTimeFormat.relative.format(timestamp as Date, {
-            locale: supportedLocale as string,
-            style: dateTimeStyle,
-          })}
-        </p>
-        <slot name="title"></slot>
-        <div class="${blockClass}-description">
-          <slot name="description"></slot>
+      <div class="${blockClass}-content--wrapper">
+        ${icon}
+        <div class="${blockClass}-content">
+          <p class="${blockClass}-time-label">
+            ${dateTimeFormat.relative.format(timestamp as Date, {
+              locale: supportedLocale as string,
+              style: dateTimeStyle,
+            })}
+          </p>
+          <slot name="title"></slot>
+          <div class="${blockClass}-description">
+            <slot name="description"></slot>
+          </div>
         </div>
       </div>
       <cds-button

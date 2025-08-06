@@ -36,7 +36,7 @@ $clabs-prefix: 'clabs';
 @property --panel-transform {
   inherits: true;
   initial-value: 320px;
-  syntax: '<integer>';
+  syntax: '<length>';
 }
 
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {

@@ -10,13 +10,15 @@
 import { html } from 'lit';
 import './index';
 import '@carbon/web-components/es/components/toggle/index.js';
+import '@carbon/web-components/es/components/dropdown/index.js';
+import styles from './story-styles.scss?lit';
 
 const argTypes = {
   body: {
     control: 'text',
     description: 'Slot body content',
   },
-  open: {
+  defaultOpen: {
     control: 'boolean',
     description: 'If `true` the body of the component is shown',
   },
@@ -39,25 +41,29 @@ const argTypes = {
   },
 };
 
+const blockClass = 'options-tile';
+
 const handleOpen = (evt: Event) => {
-  const tile = document.querySelector('#my-tile');
-  tile?.setAttribute('open', 'true');
+  console.log('open');
 };
 
 const handleClose = (evt: Event) => {
-  const tile = document.querySelector('#my-tile');
-  tile?.removeAttribute('open');
+  console.log('close');
 };
 
 const renderTemplate = (args) => {
-  const { open, size, titleText, titleId } = args;
+  const { defaultOpen, size, titleText, titleId } = args;
   return html`
+    <style>
+      ${styles}
+    </style>
     <c4p-options-tile
+      class="${blockClass}"
+      ?defaultOpen="${defaultOpen}"
       id="my-tile"
-      ?open=${open}
-      size=${size}
-      titleId=${titleId}
-      titleText=${titleText}
+      size="${size}"
+      titleId="${titleId}"
+      titleText="${titleText}"
       @c4p-options-tile-open=${handleOpen}
       @c4p-options-tile-close=${handleClose}
     >
@@ -67,19 +73,33 @@ const renderTemplate = (args) => {
       <div slot="toggle">
         <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>
       </div>
-      <div slot="body">${args.body}</div>
+      <div slot="body">
+        <div class="${`${blockClass}__body`}">
+          <p>${args.body}</p>
+          <div class="${`${blockClass}__dropdown`}">
+            <cds-dropdown title-text="User interface" label="User interface">
+              <cds-dropdown-item value="option-0">English</cds-dropdown-item>
+            </cds-dropdown>
+          </div>
+          <div class="${`${blockClass}__dropdown`}">
+            <cds-dropdown title-text="Locale" label="Locale">
+              <cds-dropdown-item value="option-0">English</cds-dropdown-item>
+            </cds-dropdown>
+          </div>
+        </div>
+      </div>
     </c4p-options-tile>
   `;
 };
 
 export const Default = {
   args: {
-    body: 'Body content',
-    open: false,
+    body: 'User interface defines the language the application is displayed in. Locale sets the regional display formats for information like time, date, currency and decimal delimiters.',
+    defaultOpen: false,
     size: 'lg',
-    summary: 'Back up every 10min',
+    summary: 'English | Locale: English',
     titleId: 'title-01',
-    titleText: 'Auto recovery',
+    titleText: 'Language',
   },
   argTypes,
   render: renderTemplate,

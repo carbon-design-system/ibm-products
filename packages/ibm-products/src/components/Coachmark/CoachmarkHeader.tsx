@@ -80,7 +80,7 @@ export let CoachmarkHeader = React.forwardRef<
               kind="ghost"
               size="sm"
               renderIcon={Close}
-              iconDescription={closeIconDescription}
+              iconDescription={closeIconDescription ?? 'Close'}
               hasIconOnly
               className={`${overlayBlockClass}--close-btn`}
               onClick={onClose}

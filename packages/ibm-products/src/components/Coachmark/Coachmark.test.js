@@ -32,6 +32,7 @@ const componentName = Coachmark.displayName;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const childDataTestId = `child-element-${uuidv4()}`;
+const closeLabel = 'Close';
 
 // values to use
 
@@ -53,6 +54,7 @@ const renderCoachmark = ({ ...rest } = {}, children = childrenContent) =>
       theme={'dark'}
       align={'bottom'}
       positionTune={{ x: 0, y: 0 }}
+      closeIconDescription={closeLabel}
       target={
         <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
       }
@@ -135,17 +137,15 @@ describe(componentName, () => {
   it('renders the closeIconDescription text ', async () => {
     const a11yKeyboardHandler = jest.fn();
     const onClose = jest.fn();
-    const closeIconDescription = 'Close';
     render(
       <CoachmarkDragbar
         a11yKeyboardHandler={a11yKeyboardHandler}
-        closeIconDescription={closeIconDescription}
         onClose={onClose}
         showCloseButton
       />
     );
 
-    const tooltip = screen.getByText(closeIconDescription);
+    const tooltip = screen.getByText(closeLabel);
 
     expect(tooltip).toBeInTheDocument();
   });

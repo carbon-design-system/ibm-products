@@ -28,9 +28,14 @@ interface CoachmarkContextType {
   closeIconDescription?: string;
 }
 
-export const CoachmarkContext = createContext<CoachmarkContextType | null>(
-  null
-);
+export const CoachmarkContext = createContext<CoachmarkContextType | null>({
+  buttonProps: {},
+  closeButtonProps: {
+    onClick: () => {},
+  },
+  isOpen: false,
+  closeIconDescription: 'Close',
+});
 
 export const useCoachmark = () => {
   return useContext(CoachmarkContext);

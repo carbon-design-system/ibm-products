@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.72.0-rc.0`
+## `@carbon/ibm-products@2.72.0`
 ### Features :rocket:
 - feat(PageHeader): add new breadcrumb overflow utility sub-component (#7910)
 - feat(coachmarkv2): added floating variant (#7924)
@@ -12,6 +12,7 @@
 - feat(PageHeader): add expand/collapse functionality (#7815)
 
 ### Bug fixes :bug:
+- fix: conditionBuilder need to close on outside click
 - fix(ProductiveCard): Added children explicitly to productiveCard (#7957)
 - fix(Storybook): render the correct story in Storybook for few components (#7960)
 - fix: include .cds--menu to selectorsFloatingMenus (#7916)

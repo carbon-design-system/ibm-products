@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.68.0-rc.0`
+## `@carbon/ibm-products-styles@2.68.0`
 ### Features :rocket:
 - feat(PageHeader): add new breadcrumb overflow utility sub-component (#7910)
 - feat(coachmarkv2): added floating variant (#7924)

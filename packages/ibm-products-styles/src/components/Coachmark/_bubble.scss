@@ -10,8 +10,7 @@
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities';
-@use '../../../../ibm-products-styles/src/global/styles/project-settings' as
-  c4p-settings;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 $prefix: #{c4p-settings.$pkg-prefix} !default;
 

@@ -33,6 +33,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 $clabs-prefix: 'clabs';
 
+@property --panel-transform {
+  inherits: true;
+  initial-value: 320px;
+  syntax: '<length>';
+}
+
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
   inline-size: clamp(16rem, var(--c4p-side-panel-modified-size, $size), 100%);
 }

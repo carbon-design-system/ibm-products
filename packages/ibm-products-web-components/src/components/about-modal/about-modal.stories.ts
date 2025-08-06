@@ -23,9 +23,7 @@ const blockClass = `${prefix}--about-modal`;
 const openModal = () => {
   const modal = document.querySelector(`${prefix}-about-modal`);
   if (modal) {
-    requestAnimationFrame(() => {
-      modal.setAttribute('open', '');
-    });
+    modal.setAttribute('open', '');
   }
 };
 

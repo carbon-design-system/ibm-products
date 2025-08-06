@@ -1,3 +1,7 @@
+## `@carbon/ibm-products-styles@2.68.1`
+### Bug fixes :bug:
+- fix(coachmark): address bubble style import (#8010)
+
 ## `@carbon/ibm-products-styles@2.67.0`
 ### Features :rocket:
 - feat: change to make interstitialScreen stable (#7814)

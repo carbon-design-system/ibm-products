@@ -41,7 +41,7 @@ import {
   getValue,
 } from '../utils/util';
 import { translationsObject } from '../ConditionBuilderContext/translationObject';
-import { useEvent } from '../useEvent';
+import { useEvent } from '../utils/useEvent';
 
 interface ConditionBuilderItemProps extends PropsWithChildren {
   className?: string;

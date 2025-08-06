@@ -60,16 +60,6 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     }
   };
 
-  connectedCallback() {
-    super.connectedCallback();
-    if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'button');
-    }
-    if (!this.hasAttribute('tabindex')) {
-      this.setAttribute('tabindex', '0');
-    }
-    this.addEventListener('keydown', this._handleKeyDown);
-  }
   render() {
     const {
       type,
@@ -81,7 +71,12 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
     const icon = fetchIcon(type);
     return html`
-      <div class="${blockClass}-content--wrapper">
+      <div
+        class="${blockClass}-content--wrapper"
+        role="button"
+        tabindex="0"
+        @keydown=${this._handleKeyDown}
+      >
         ${icon}
         <div class="${blockClass}-content">
           <p class="${blockClass}-time-label">
@@ -108,10 +103,7 @@ class CDSNotification extends HostListenerMixin(LitElement) {
       </cds-icon-button>
     `;
   }
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('keydown', this._handleKeyDown);
-  }
+
   /**
    * Handles user-initiated dismiss request of the Notification.
    *

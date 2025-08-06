@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.21.0-rc.0`
+## `@carbon/ibm-products-web-components@0.21.0`
 ### Features :rocket:
 - feat(interstitialScreen): webcomponent implementation (#7867)
 - feat(page-header): add breadcrumb overflow example (#7913)

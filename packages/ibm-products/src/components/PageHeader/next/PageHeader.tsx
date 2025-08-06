@@ -78,8 +78,11 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
     // Used to set CSS custom property with PageHeaderContent height to be used
     // for sticky positioning
     useResizeObserver(componentRef, () => {
-      if (componentRef?.current && refs?.contentRef?.current) {
-        const pageHeaderContentHeight = refs?.contentRef?.current?.offsetHeight;
+      if (componentRef?.current) {
+        // It's possible we don't have the content element
+        // in which case we set it's height to 0
+        const pageHeaderContentHeight =
+          refs?.contentRef?.current?.offsetHeight ?? 0;
         const totalHeaderOffset = getHeaderOffset(componentRef?.current);
         componentRef?.current.style.setProperty(
           `--${pkg.prefix}-page-header-header-top`,
@@ -925,6 +928,10 @@ const PageHeaderTitleBreadcrumb = forwardRef<
         {
           [`${pkg.prefix}--page-header-title-breadcrumb-show`]:
             titleClipped && refs?.titleRef,
+          [`${pkg.prefix}--page-header-title-breadcrumb-show__with-content-element`]:
+            !!refs?.contentRef,
+          [`${pkg.prefix}--page-header-title-breadcrumb-show__without-content-element`]:
+            !refs?.contentRef,
         }
       )}
     >

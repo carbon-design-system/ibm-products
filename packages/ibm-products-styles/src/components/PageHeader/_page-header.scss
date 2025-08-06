@@ -1031,17 +1031,24 @@ $duration: 1000ms;
         transition: opacity motion(standard, productive) $duration-moderate-01;
       }
     }
-    // `animation-timeline: scroll()` only currently supported in Chromium based browsers
-    @supports (animation-timeline: scroll()) {
-      animation-direction: alternate;
-      animation-duration: 1ms; /* Firefox requires this to apply the animation */
-      animation-name: page-header-title-breadcrumb-animation;
-      animation-timeline: scroll(block nearest);
 
-      @media (prefers-reduced-motion: reduce) {
-        animation-name: page-header-title-breadcrumb-animation-reduced-motion;
-        transform: translateY(0);
+    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__with-content-element {
+      // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+      @supports (animation-timeline: scroll()) {
+        animation-direction: alternate;
+        animation-duration: 1ms; /* Firefox requires this to apply the animation */
+        animation-name: page-header-title-breadcrumb-animation;
+        animation-timeline: scroll(block nearest);
+
+        @media (prefers-reduced-motion: reduce) {
+          animation-name: page-header-title-breadcrumb-animation-reduced-motion;
+          transform: translateY(0);
+        }
       }
+    }
+    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__without-content-element {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }

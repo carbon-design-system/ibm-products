@@ -169,7 +169,12 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     });
 
     return html`
-      <div role="dialog" tabindex="0" class=${classes}>
+      <div
+        role="dialog"
+        tabindex="0"
+        class=${classes}
+        aria-label="Notifications"
+      >
         <div class="${blockClass}__header-container">
           <div class="${blockClass}__header-flex">
             <h2 class="${blockClass}__header">${titleText}</h2>
@@ -188,7 +193,6 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
             id="${blockClass}__do-not-disturb-toggle-component"
             label-a=${doNotDisturbLabel}
             label-b=${doNotDisturbLabel}
-            aria-label=${doNotDisturbLabel}
             @cds-toggle-changed=${handleToggle}
           ></cds-toggle>
         </div>

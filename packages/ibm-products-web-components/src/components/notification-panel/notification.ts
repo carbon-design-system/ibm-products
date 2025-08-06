@@ -96,8 +96,7 @@ class CDSNotification extends HostListenerMixin(LitElement) {
           </div>
         </div>
       </div>
-      <cds-button
-        tooltip-text=""
+      <cds-icon-button
         align="left"
         kind="ghost"
         size="sm"
@@ -105,7 +104,8 @@ class CDSNotification extends HostListenerMixin(LitElement) {
         @click=${dismissSingleNotification}
       >
         ${Close16({ slot: 'icon' })}
-      </cds-button>
+        <span slot="tooltip-content">Close</span>
+      </cds-icon-button>
     `;
   }
   disconnectedCallback() {

@@ -164,6 +164,7 @@
     "ruleset",
     "sbdocs",
     "scrollend",
+    "scroller",
     "semibold",
     "serializers",
     "setlabeltitle",
@@ -208,6 +209,7 @@
     "useravatar",
     "rendericon",
     "csvg",
-    "autoalign"
+    "autoalign",
+    "scroller"
   ]
 }

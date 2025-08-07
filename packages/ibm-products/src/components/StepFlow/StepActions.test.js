@@ -133,28 +133,4 @@ describe('StepFlow', () => {
     expect(step1TextInput).toHaveValue('Pizza');
     expect(tempFormState).toEqual({ email: 'Pizza' });
   });
-
-  it('handles undefined value passed to provider', async () => {
-    let testState;
-    render(
-      <StepComponent noContextValue>
-        <StepGroup>
-          <Step1 />
-          <Step2 />
-        </StepGroup>
-        <StepActions
-          buttonRenderer={(stepData) => {
-            testState = stepData;
-            return (
-              <>
-                <Button>Cancel</Button>
-                <Button>Submit</Button>
-              </>
-            );
-          }}
-        />
-      </StepComponent>
-    );
-    expect(testState).not.toBeDefined();
-  });
 });

@@ -128,7 +128,13 @@ export let CreateModal = React.forwardRef<HTMLDivElement, CreateModalProps>(
           {description && (
             <p className={`${blockClass}__description`}>{description}</p>
           )}
-          <Form className={`${blockClass}__form`} aria-label={title}>
+          <Form
+            className={`${blockClass}__form`}
+            aria-label={title}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+              e.preventDefault()
+            }
+          >
             {children}
           </Form>
         </ModalBody>

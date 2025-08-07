@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { cloneElement, useEffect, useRef, useState } from 'react';
 import DocsPage from './Tearsheet.docs-page';
 import { action } from 'storybook/actions';
 import { Information } from '@carbon/react/icons';
@@ -575,7 +575,7 @@ const FirstElementReadOnlyTemplate = (
 
 // eslint-disable-next-line react/prop-types
 const StackedTemplate = (
-  { mixedSizes, actions, decorator, slug, ...args },
+  { mixedSizes, actions, decorator, description, slug, ...args },
   context
 ) => {
   const [open1, setOpen1] = useState(false);
@@ -585,6 +585,10 @@ const StackedTemplate = (
   const openButton1 = useRef(undefined);
   const openButton2 = useRef(undefined);
   const openButton3 = useRef(undefined);
+
+  const description1 = cloneElement(description, { id: 'truncated-text-01' });
+  const description2 = cloneElement(description, { id: 'truncated-text-02' });
+  const description3 = cloneElement(description, { id: 'truncated-text-03' });
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {
@@ -668,6 +672,7 @@ const StackedTemplate = (
       <div ref={ref}>
         <Tearsheet
           {...args}
+          description={description1}
           actions={wiredActions1}
           headerActions={
             <ButtonSet>
@@ -701,6 +706,7 @@ const StackedTemplate = (
         </Tearsheet>
         <VariableSizeTearsheet
           {...args}
+          description={description2}
           actions={wiredActions2}
           headerActions={
             <ButtonSet>
@@ -735,6 +741,7 @@ const StackedTemplate = (
         {!mixedSizes && (
           <Tearsheet
             {...args}
+            description={description3}
             actions={wiredActions3}
             title="Tearsheet 3"
             open={open3}

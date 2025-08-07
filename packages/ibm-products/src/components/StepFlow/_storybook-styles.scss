@@ -1,0 +1,11 @@
+@use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/theme';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use './story-assets/Tearsheet/step-tearsheet';
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 100vh;
+}

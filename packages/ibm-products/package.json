@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "2.72.0",
+  "version": "2.72.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -109,7 +109,7 @@
     "@babel/runtime": "^7.26.10",
     "@carbon-labs/react-resizer": "^0.5.0",
     "@carbon/feature-flags": "^0.28.1",
-    "@carbon/ibm-products-styles": "^2.68.0",
+    "@carbon/ibm-products-styles": "^2.68.1",
     "@carbon/telemetry": "^0.1.0",
     "@carbon/utilities": "^0.7.0",
     "@carbon/utilities-react": "0.10.0",

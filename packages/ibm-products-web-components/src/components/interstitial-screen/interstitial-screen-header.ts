@@ -9,7 +9,7 @@
 
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
-import { prefix } from '../../globals/settings';
+import { carbonPrefix, prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { classMap } from 'lit-html/directives/class-map.js';
@@ -92,6 +92,17 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
     );
   }
 
+  getElementForAriaLive = () => {
+    const currentStep = interstitialDetailsSignal.get().currentStep;
+    const stepDetails = interstitialDetailsSignal.get().stepDetails;
+    return html` <div
+      aria-live="polite"
+      aria-atomic="true"
+      class="${carbonPrefix}--visually-hidden"
+    >
+      Step ${currentStep + 1} of ${stepDetails.length}
+    </div>`;
+  };
   getProgressIndicatorContent(stepDetails) {
     return html`
       <div class="${blockClass}--progress">
@@ -105,6 +116,7 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
               ></cds-progress-step>`
           )}
         </cds-progress-indicator>
+        ${this.getElementForAriaLive()}
       </div>
     `;
   }

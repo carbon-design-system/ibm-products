@@ -82,6 +82,11 @@ class CDSInterstitialScreen extends SignalWatcher(
 
     this.requestUpdate(); // Ensure re-render
     resetInterstitialDetailsSignal();
+
+    updateInterstitialDetailsSignal({
+      name: 'isFullScreen',
+      detail: this.isFullScreen,
+    });
   }
   updated(changedProps: Map<string | number | symbol, unknown>) {
     if (changedProps.has('open')) {

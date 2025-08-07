@@ -8,7 +8,6 @@
 import React, { act, useState } from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
-import PropTypes from 'prop-types';
 import { Button, TextInput } from '@carbon/react';
 
 import { carbon } from '../../settings';
@@ -60,11 +59,6 @@ const StepComponent = ({ children, noContextValue }) => {
       {children}
     </StepContext.Provider>
   );
-};
-
-StepComponent.propTypes = {
-  children: PropTypes.node,
-  noContextValue: PropTypes.bool,
 };
 
 describe('StepFlow', () => {
@@ -132,5 +126,37 @@ describe('StepFlow', () => {
     await act(() => user.type(step1TextInput, 'Pizza'));
     expect(step1TextInput).toHaveValue('Pizza');
     expect(tempFormState).toEqual({ email: 'Pizza' });
+  });
+  it('should use 1 as the default step if there are no steps', () => {
+    let tempCurrentStep;
+    render(
+      <StepComponent>
+        <StepGroup></StepGroup>
+        <StepActions
+          buttonRenderer={({ currentStep, formState }) => {
+            tempCurrentStep = currentStep;
+            return (
+              <>
+                <Button kind={'ghost'} disabled={currentStep === 1}>
+                  Cancel
+                </Button>
+                <Button>Submit</Button>
+              </>
+            );
+          }}
+        />
+      </StepComponent>
+    );
+    expect(tempCurrentStep).toBe(1);
+  });
+  it('should throw error and not render anything without step state', () => {
+    expect(() =>
+      render(
+        <>
+          <StepComponent noContextValue></StepComponent>
+          <StepGroup></StepGroup>
+        </>
+      )
+    ).toThrow('Context hook used outside of Step provider');
   });
 });

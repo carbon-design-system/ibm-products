@@ -22,9 +22,6 @@ export interface StepActionsProps {
  */
 export const StepActions = ({ buttonRenderer }: StepActionsProps) => {
   const data = useStepContext();
-  if (!data) {
-    return;
-  }
   return buttonRenderer(data);
 };
 

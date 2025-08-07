@@ -17,18 +17,14 @@ export const StepGroup = ({ children }) => {
 
   // set number of steps, based on num of children passed in
   useEffect(() => {
-    if (!stepState) {
-      return;
-    }
     const { setNumSteps } = stepState;
     setNumSteps(childrenCount), [childrenCount, setNumSteps];
   });
 
   // get currently selected step
-  const { currentStep } = stepState || {};
-  const currentStepComponent = currentStep
-    ? React.Children.toArray(cleanedChildren)[currentStep - 1]
-    : 1;
+  const { currentStep } = stepState;
+  const currentStepComponent =
+    React.Children.toArray(cleanedChildren)[currentStep - 1];
 
   // and just return that one single current step
   return currentStepComponent;

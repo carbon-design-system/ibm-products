@@ -33,13 +33,9 @@ export function getSize(
   size =
     dimension === 'width'
       ? size +
-        parseInt(computedStyles.paddingLeft) +
-        parseInt(computedStyles.paddingRight) +
         parseInt(computedStyles.marginLeft) +
         parseInt(computedStyles.marginRight)
       : size +
-        parseInt(computedStyles.paddingTop) +
-        parseInt(computedStyles.paddingBottom) +
         parseInt(computedStyles.marginTop) +
         parseInt(computedStyles.marginBottom);
   return size;

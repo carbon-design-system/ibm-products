@@ -12,6 +12,7 @@ import {
   ButtonProps,
   Heading,
   IconButton,
+  Layer,
   Section,
 } from '@carbon/react';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -1038,30 +1039,32 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
           onAnimationStart={onAnimationStart}
           onKeyDown={handleKeyDown}
         >
-          {!slideIn && enableResizer && window.innerWidth > 768 && (
-            <Resizer
-              className={`${blockClass}__resizer`}
-              orientation="vertical"
-              aria-valuemin={getPanelWidthPercent(SIDE_PANEL_SIZES['xs'])}
-              aria-valuemax={75}
-              aria-valuenow={getPanelWidthPercent()}
-              onResize={onResize}
-              onResizeEnd={onResizeEnd}
-              onDoubleClick={onDoubleClick}
+          <Layer>
+            {!slideIn && enableResizer && window.innerWidth > 768 && (
+              <Resizer
+                className={`${blockClass}__resizer`}
+                orientation="vertical"
+                aria-valuemin={getPanelWidthPercent(SIDE_PANEL_SIZES['xs'])}
+                aria-valuemax={75}
+                aria-valuenow={getPanelWidthPercent()}
+                onResize={onResize}
+                onResizeEnd={onResizeEnd}
+                onDoubleClick={onDoubleClick}
+              />
+            )}
+            {/* header */}
+            {renderHeader()}
+
+            {/* main */}
+            {renderMain()}
+
+            {/* footer */}
+            <ActionSet
+              actions={actions ?? []}
+              className={primaryActionContainerClassNames}
+              size={size === 'xs' ? 'sm' : size}
             />
-          )}
-          {/* header */}
-          {renderHeader()}
-
-          {/* main */}
-          {renderMain()}
-
-          {/* footer */}
-          <ActionSet
-            actions={actions ?? []}
-            className={primaryActionContainerClassNames}
-            size={size === 'xs' ? 'sm' : size}
-          />
+          </Layer>
         </Section>
         {includeOverlay && (
           <div

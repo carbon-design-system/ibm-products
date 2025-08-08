@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.31.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.31.0`
 ### Housekeeping :house:
 - build(deps): update to Carbon 11 compatible versions to latest (#7840)
 

@@ -7,6 +7,7 @@
 
 import { describe, expect, it, vi } from 'vitest';
 import { html, fixture, oneEvent, elementUpdated } from '@open-wc/testing';
+import { expect as chaiExpect } from '@open-wc/testing';
 import './index';
 import CDSNotificationPanel from './notification-panel';
 
@@ -90,6 +91,12 @@ const template = (props: any = defaultProps) => {
 };
 
 describe('c4p-notification-panel', () => {
+  it('should be accessible and have no axe violations', async () => {
+    const el = (await fixture(template())) as CDSNotificationPanel;
+    // Runs axe-core, checks for WCAG compliance
+    await chaiExpect(el).to.be.accessible();
+  });
+
   it('should render the notification panel', async () => {
     const panel = (await fixture(template())) as CDSNotificationPanel;
     expect(panel?.open).toBeTruthy();

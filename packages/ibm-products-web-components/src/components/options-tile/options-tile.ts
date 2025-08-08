@@ -16,6 +16,7 @@ import styles from './options-tile.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import ChevronDown20 from '@carbon/web-components/es/icons/chevron--down/20';
 import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/layer/index.js';
 
 export const blockClass = `${prefix}--options-tile`;
 const blockEvent = `${prefix}-options-tile`;
@@ -142,7 +143,9 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
           </div>
         </summary>
         <div class="${blockClass}__body">
-          <slot name="body"></slot>
+          <cds-layer level="1">
+            <slot name="body"></slot>
+          </cds-layer>
         </div>
       </details>
     `;

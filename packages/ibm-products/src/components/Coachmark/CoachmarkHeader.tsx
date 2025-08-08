@@ -62,8 +62,7 @@ export let CoachmarkHeader = React.forwardRef<
     },
     ref
   ) => {
-    const closeIconDescription =
-      useCoachmark()?.closeIconDescription ?? 'Close';
+    const closeIconDescription = useCoachmark()?.closeIconDescription;
 
     return (
       <header

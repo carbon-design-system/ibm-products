@@ -102,8 +102,7 @@ export let CoachmarkDragbar = React.forwardRef<
 
     const handleDragStart = () => setIsDragging(true);
 
-    const closeIconDescription =
-      useCoachmark()?.closeIconDescription ?? 'Close';
+    const closeIconDescription = useCoachmark()?.closeIconDescription;
 
     return (
       <header

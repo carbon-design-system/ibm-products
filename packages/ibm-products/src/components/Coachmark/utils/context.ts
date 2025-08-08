@@ -9,7 +9,7 @@ import { PopoverAlignment } from '@carbon/react';
 import { ButtonProps } from '@carbon/react';
 import { createContext, useContext } from 'react';
 
-interface CoachmarkContextType {
+export interface CoachmarkContextType {
   buttonProps: ButtonProps<React.ElementType>;
   closeButtonProps: {
     onClick: () => void;
@@ -26,16 +26,12 @@ interface CoachmarkContextType {
   };
   isOpen: boolean;
   closeIconDescription?: string;
+  tacos?: string;
 }
 
-export const CoachmarkContext = createContext<CoachmarkContextType | null>({
-  buttonProps: {},
-  closeButtonProps: {
-    onClick: () => {},
-  },
-  isOpen: false,
-  closeIconDescription: 'Close',
-});
+export const CoachmarkContext = createContext<CoachmarkContextType | null>(
+  null
+);
 
 export const useCoachmark = () => {
   return useContext(CoachmarkContext);

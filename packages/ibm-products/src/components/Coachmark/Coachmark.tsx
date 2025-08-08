@@ -17,7 +17,7 @@ import React, {
 import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
 
 import { COACHMARK_OVERLAY_KIND } from './utils/enums';
-import { CoachmarkContext } from './utils/context';
+import { CoachmarkContext, CoachmarkContextType } from './utils/context';
 import { CoachmarkOverlay } from './CoachmarkOverlay';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
@@ -232,7 +232,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       }
     };
 
-    const contextValue = {
+    const contextValue: CoachmarkContextType = {
       buttonProps: {
         'aria-expanded': isOpen,
         tabIndex: 0,
@@ -249,6 +249,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       align: align as PopoverAlignment,
       positionTune: positionTune,
       isOpen: isOpen,
+      closeIconDescription: closeIconDescription,
     };
     const handleResize = throttle(() => {
       closeOverlay();

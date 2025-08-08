@@ -5,8 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act } from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React from 'react';
+import {
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+  act,
+} from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
@@ -15,6 +21,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { Coachmark } from '.';
 import {
   CoachmarkBeacon,
+  CoachmarkButton,
   CoachmarkOverlayElement,
   CoachmarkOverlayElements,
 } from '..';
@@ -23,9 +30,10 @@ import {
   COACHMARK_ALIGNMENT,
   COACHMARK_OVERLAY_KIND,
 } from './utils/enums';
-import { CoachmarkDragbar } from './CoachmarkDragbar';
 import { getOffsetTune } from './utils/constants';
 import { clamp } from '../../global/js/utils/clamp';
+import { Crossroads } from '@carbon/react/icons';
+import { CoachmarkDragbar } from './CoachmarkDragbar';
 const blockClass = `${pkg.prefix}--coachmark`;
 const componentName = Coachmark.displayName;
 
@@ -57,6 +65,34 @@ const renderCoachmark = ({ ...rest } = {}, children = childrenContent) =>
       closeIconDescription={closeLabel}
       target={
         <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
+      }
+      {...rest}
+    >
+      {children}
+    </Coachmark>
+  );
+
+const renderCoachmarkFloating = (
+  { ...rest } = {},
+  children = childrenContent
+) =>
+  render(
+    <Coachmark
+      theme={'dark'}
+      align={'bottom'}
+      positionTune={{ x: 0, y: 0 }}
+      closeIconDescription={closeLabel}
+      overlayKind={'floating'}
+      isOpenByDefault={true}
+      target={
+        <CoachmarkButton
+          kind="tertiary"
+          size="md"
+          label="Show information"
+          renderIcon={Crossroads}
+        >
+          Click Me
+        </CoachmarkButton>
       }
       {...rest}
     >
@@ -135,51 +171,33 @@ describe(componentName, () => {
   });
 
   it('renders the closeIconDescription text ', async () => {
-    const a11yKeyboardHandler = jest.fn();
-    const onClose = jest.fn();
-    render(
-      <CoachmarkDragbar
-        a11yKeyboardHandler={a11yKeyboardHandler}
-        onClose={onClose}
-        showCloseButton
-      />
-    );
-
-    const tooltip = screen.getByText(closeLabel);
+    const container = renderCoachmarkFloating({ 'data-testid': dataTestId });
+    expect(isCoachmarkVisible()).toBeTruthy();
+    const btn = screen.getByRole('button', { name: 'Show information' });
+    await waitFor(() => userEvent.click(btn));
+    const tooltip = container.getByText(closeLabel);
 
     expect(tooltip).toBeInTheDocument();
   });
 
   it('calls the onClose prop when close is clicked', async () => {
-    const a11yKeyboardHandler = jest.fn();
-    const onClose = jest.fn();
-    render(
-      <CoachmarkDragbar
-        a11yKeyboardHandler={a11yKeyboardHandler}
-        onClose={onClose}
-      />
-    );
-
-    const closeButton = screen.getAllByRole('button')[1];
-
+    const onCloseMock = jest.fn();
+    renderCoachmarkFloating({
+      'data-testid': dataTestId,
+      onClose: onCloseMock,
+    });
+    const btn = screen.getByRole('button', { name: 'Show information' });
+    await waitFor(() => userEvent.click(btn));
+    const closeButton = screen.getByRole('button', { name: closeLabel });
     expect(closeButton).toBeInTheDocument();
-    await waitFor(() => userEvent.click(closeButton));
-    expect(onClose).toHaveBeenCalled();
+    await act(() => userEvent.click(closeButton));
+    expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
 
   it('showCloseButton prop works as expected', async () => {
     const a11yKeyboardHandler = jest.fn();
 
-    const { rerender } = render(
-      <CoachmarkDragbar
-        a11yKeyboardHandler={a11yKeyboardHandler}
-        showCloseButton
-      />
-    );
-
-    expect(screen.queryAllByRole('button').length).toBe(2);
-
-    rerender(
+    render(
       <CoachmarkDragbar
         a11yKeyboardHandler={a11yKeyboardHandler}
         showCloseButton={false}

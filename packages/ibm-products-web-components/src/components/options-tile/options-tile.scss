@@ -90,7 +90,13 @@ $block-class: #{$prefix}--options-tile;
     }
   }
 
-  .#{$block-class}--open .#{$block-class}__chevron {
-    transform: rotate(-180deg);
+  .#{$block-class}--open {
+    .#{$block-class}__chevron {
+      transform: rotate(-180deg);
+    }
+
+    .#{$block-class}__summary {
+      display: none;
+    }
   }
 }

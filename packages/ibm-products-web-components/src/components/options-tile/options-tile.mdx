@@ -31,8 +31,8 @@ import '@carbon/ibm-products-web-components/es/components/options-tile/index.js'
 <c4p-options-tile
   id="my-tile"
   size="lg"
-  title="A title describing all included content."
-  titleId="my-title-title"
+  titleText="A title describing all included content."
+  titleId="my-title"
 >
   <div slot="summary">
     <span>A summary of the current state of content.</span>
@@ -41,18 +41,6 @@ import '@carbon/ibm-products-web-components/es/components/options-tile/index.js'
     Additional detail or content will be shown when expanded.
   </div>
 </c4p-options-tile>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const tile = document.querySelector('c4p-options-tile');
-    tile.addEventListener('c4p-options-tile-open', () => {
-      tile?.setAttribute('open', 'true');
-    });
-    tile.addEventListener('c4p-options-tile-close', () => {
-      tile?.removeAttribute('open');
-    });
-  });
-</script>
 ```
 
 ## `<c4p-options-tile>` attributes, properties and events

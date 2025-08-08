@@ -14,9 +14,9 @@ const defaultEvents = {
 };
 
 const defaultProps = {
-  open: false,
+  defaultOpen: false,
   size: 'lg',
-  title: 'Test title',
+  titleText: 'Test title',
   titleId: 'test-title',
 };
 
@@ -37,9 +37,9 @@ const template = (args = {}) => {
   return html`
     <c4p-options-tile
       id="my-tile"
-      ?open=${props.open}
+      ?defaultOpen=${props.defaultOpen}
       size=${props.size}
-      title=${props.title}
+      titleText=${props.titleText}
       titleId=${props.titleId}
       @c4p-options-tile-open=${events.handleOpen}
       @c4p-options-tile-close=${events.handleClose}
@@ -66,7 +66,7 @@ describe('c4p-options-tile', () => {
   it('renders a title', async () => {
     const el: CDSOptionsTile = await fixture(template());
     expect(el).toBeDefined();
-    expect(el.title).to.equal(defaultProps.title);
+    expect(el.titleText).to.equal(defaultProps.titleText);
     const titleEl = el.shadowRoot?.querySelector(`.${blockClass}__title`);
     expect(titleEl).toBeDefined();
     const id = titleEl?.getAttribute('id');
@@ -97,7 +97,7 @@ describe('c4p-options-tile', () => {
 
   it('renders a body', async () => {
     const el: CDSOptionsTile = await fixture(
-      template({ props: { open: true } })
+      template({ props: { defaultOpen: true } })
     );
     const slot = el.shadowRoot?.querySelector(
       `slot[name="body"]`
@@ -121,7 +121,7 @@ describe('c4p-options-tile', () => {
 
   it('fires close handler', async () => {
     const el: CDSOptionsTile = await fixture(
-      template({ props: { open: true } })
+      template({ props: { defaultOpen: true } })
     );
     const header = el.shadowRoot?.querySelector(
       `.${blockClass}__header`

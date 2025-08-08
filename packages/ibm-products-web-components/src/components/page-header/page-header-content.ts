@@ -10,10 +10,12 @@
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property, state } from 'lit/decorators.js';
+import { consume } from '@lit/context';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/tooltip/index.js';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
+import { pageHeaderContext } from './context';
 
 /**
  * Page header content.
@@ -60,6 +62,9 @@ class CDSPageHeaderContent extends LitElement {
   @property({ attribute: 'within-grid', type: Boolean })
   withinGrid = false;
 
+  @consume({ context: pageHeaderContext, subscribe: true })
+  context;
+
   updated() {
     const textContainer = this.shadowRoot?.querySelector(
       `.${prefix}--page-header__content__title`
@@ -79,11 +84,20 @@ class CDSPageHeaderContent extends LitElement {
       withinGrid,
       _hasEllipsisApplied: hasEllipsisApplied,
       _handleSlotChange: handleSlotChange,
+      context,
     } = this;
+
+    const { contentActionsClipped } = context ?? {};
 
     const gridClasses = classMap({
       [`${carbonPrefix}--css-grid`]: !withinGrid,
       [`${carbonPrefix}--subgrid ${carbonPrefix}--subgrid--wide`]: withinGrid,
+    });
+
+    const contentActionClasses = classMap({
+      [`${prefix}--page-header__content__page-actions`]: true,
+      [`${prefix}--page-header__content__page-actions--clipped`]:
+        contentActionsClipped,
     });
 
     return html` <div class="${gridClasses}">
@@ -114,7 +128,7 @@ class CDSPageHeaderContent extends LitElement {
               @slotchange=${handleSlotChange}
             ></slot>
           </div>
-          <div class="${prefix}--page-header__content__page-actions">
+          <div class="${contentActionClasses}">
             <slot name="page-actions"></slot>
           </div>
         </div>

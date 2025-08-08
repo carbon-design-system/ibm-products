@@ -16,13 +16,17 @@ import { createContext, RefObject, useContext } from 'react';
 export type PageHeaderRefs = {
   contentRef?: RefObject<HTMLDivElement | null>;
   titleRef?: RefObject<HTMLHeadingElement | null>;
+  contentActions?: RefObject<HTMLDivElement | null>;
 };
 
 type PageHeaderContextType = {
   refs?: PageHeaderRefs;
   setRefs: React.Dispatch<React.SetStateAction<PageHeaderRefs>>;
+  pageActionsInstance?: React.ReactNode;
+  setPageActionsInstance: React.Dispatch<React.SetStateAction<React.ReactNode>>;
   fullyCollapsed?: boolean;
   titleClipped?: boolean;
+  contentActionsClipped?: boolean;
 };
 
 export const PageHeaderContext = createContext<
@@ -32,6 +36,9 @@ export const PageHeaderContext = createContext<
   setRefs: () => {},
   refs: {},
   titleClipped: false,
+  contentActionsClipped: false,
+  pageActionsInstance: null,
+  setPageActionsInstance: () => {},
 });
 
 export function usePageHeader() {

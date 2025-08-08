@@ -31,6 +31,15 @@ class CDSPageHeaderTitleBreadcrumb extends CDSBreadcrumbItem {
       context: pageHeaderContext,
       subscribe: true,
       callback: (state) => {
+        if ((state as pageHeaderContextType).titleClipped) {
+          this.classList.add(
+            `${prefix}--page-header-title-breadcrumb-show__fallback`
+          );
+        } else {
+          this.classList.remove(
+            `${prefix}--page-header-title-breadcrumb-show__fallback`
+          );
+        }
         if ((state as pageHeaderContextType).withContent) {
           this.classList.add(
             `${prefix}--page-header-title-breadcrumb-show__with-content`

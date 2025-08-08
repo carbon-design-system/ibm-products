@@ -21,6 +21,8 @@ export interface pageHeaderContextType {
   breadcrumbOffset?: number;
   headerOffset?: number;
   fullyCollapsed?: boolean;
+  titleClipped?: boolean;
+  contentActionsClipped?: boolean;
   root?: CDSPageHeader | null;
   withContent?: boolean;
 }
@@ -99,8 +101,58 @@ class CDSPageHeader extends LitElement {
         threshold: 0.1,
       }
     );
+
+    const titleObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            this.context = {
+              ...this.context,
+              titleClipped: true,
+            };
+          } else {
+            this.context = {
+              ...this.context,
+              titleClipped: false,
+            };
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+        threshold: 0.95,
+      }
+    );
+
+    const actionsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            this.context = {
+              ...this.context,
+              contentActionsClipped: true,
+            };
+          } else {
+            this.context = {
+              ...this.context,
+              contentActionsClipped: false,
+            };
+          }
+        });
+      },
+      {
+        root: null,
+        // 48 -> breadcrumb bar
+        // 18 -> content padding
+        rootMargin: `${(totalHeaderOffset + 48 + 18) * -1}px 0px 0px 0px`,
+        threshold: 0.95,
+      }
+    );
     if (contentElement) {
       contentObserver.observe(contentElement);
+      titleObserver.observe(contentElement);
+      actionsObserver.observe(contentElement);
     }
   }
 
@@ -110,7 +162,7 @@ class CDSPageHeader extends LitElement {
   }
 
   render() {
-    return html` <slot></slot>`;
+    return html`<slot></slot>`;
   }
 
   static styles = styles;

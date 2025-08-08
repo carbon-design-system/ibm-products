@@ -9,7 +9,7 @@
 
 import { LitElement, html, nothing } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import { prefix } from '../../globals/settings';
+import { carbonPrefix, prefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/modal/index.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -21,6 +21,7 @@ import {
   resetInterstitialDetailsSignal,
   updateInterstitialDetailsSignal,
 } from './interstitial-screen-context';
+import HostListener from '@carbon/web-components/es/globals/decorators/host-listener';
 
 export const blockClass = `${prefix}--interstitial-screen`;
 
@@ -73,6 +74,10 @@ class CDSInterstitialScreen extends SignalWatcher(
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener(`${prefix}-request-close`, this._handleClose);
+  }
+  disconnectedCallback(): void {
+    const { carouselAPI } = interstitialDetailsSignal.get();
+    carouselAPI?.destroyEvents?.();
   }
   firstUpdated() {
     // This has to do since cds-modal does not accept cds-body inside a slotted children.It will append it explicitly append cds body
@@ -130,6 +135,24 @@ class CDSInterstitialScreen extends SignalWatcher(
     });
   };
 
+  /**
+   * Handles `click` event on this element.
+   *
+   * @param event The event.
+   */
+  @HostListener('click')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleOutsideClick = (event: MouseEvent) => {
+    const modal = this.shadowRoot?.querySelector(`${carbonPrefix}-modal`);
+    const modalContent = modal?.shadowRoot?.querySelector(
+      `.${carbonPrefix}--modal-container`
+    );
+    const path = event.composedPath();
+    if (modalContent && !path.includes(modalContent)) {
+      this._handleClose(event);
+    }
+  };
+
   private setDisableActionButtons = (config: disableButtonConfigType) => {
     updateInterstitialDetailsSignal({ name: 'disableActions', detail: config });
   };
@@ -165,13 +188,11 @@ class CDSInterstitialScreen extends SignalWatcher(
   //template methods
 
   renderFullScreen() {
-    return this.open
-      ? html`
-          <div class="${blockClass}--container">
-            <slot></slot>
-          </div>
-        `
-      : nothing;
+    return html`
+      <div class="${blockClass}--container">
+        <slot></slot>
+      </div>
+    `;
   }
 
   renderModal() {
@@ -193,9 +214,11 @@ class CDSInterstitialScreen extends SignalWatcher(
   }
 
   render() {
-    return this.isFullScreen
-      ? html`${this.renderFullScreen()}`
-      : html`${this.renderModal()}`;
+    return this.open
+      ? this.isFullScreen
+        ? html`${this.renderFullScreen()}`
+        : html`${this.renderModal()}`
+      : nothing;
   }
 
   static styles = styles;

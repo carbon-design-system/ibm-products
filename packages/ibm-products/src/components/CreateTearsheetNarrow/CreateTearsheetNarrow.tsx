@@ -185,7 +185,11 @@ export let CreateTearsheetNarrow = React.forwardRef(
         >
           {formDescription}
         </p>
-        <Form className={`${blockClass}__form`} aria-labelledby={formTitleId}>
+        <Form
+          className={`${blockClass}__form`}
+          aria-labelledby={formTitleId}
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}
+        >
           {children}
         </Form>
       </TearsheetNarrow>

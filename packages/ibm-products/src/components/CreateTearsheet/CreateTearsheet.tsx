@@ -337,7 +337,12 @@ export let CreateTearsheet = forwardRef(
         selectorPrimaryFocus={selectorPrimaryFocus}
       >
         <div className={`${blockClass}__content`} ref={contentRef}>
-          <Form aria-label={title}>
+          <Form
+            aria-label={title}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+              e.preventDefault()
+            }
+          >
             <StepsContext.Provider
               value={{
                 currentStep,

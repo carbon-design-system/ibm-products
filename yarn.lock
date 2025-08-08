@@ -2030,22 +2030,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/ibm-products-styles@npm:^2.67.0-rc.0":
-  version: 2.67.0
-  resolution: "@carbon/ibm-products-styles@npm:2.67.0"
-  dependencies:
-    "@ibm/telemetry-js": "npm:^1.9.1"
-  peerDependencies:
-    "@carbon/grid": ^11.38.0
-    "@carbon/layout": ^11.36.0
-    "@carbon/motion": ^11.30.0
-    "@carbon/themes": ^11.55.0
-    "@carbon/type": ^11.42.0
-  checksum: 10/31f786e612f05e13b222263192dc3d347e43f3394ca9b67c3a3c80115f3bb17c3bb21a1cf6fbfa67ca0d9b17fb4a6e43c8fd640548d95dc241fc63ced23c6e92
-  languageName: node
-  linkType: hard
-
-"@carbon/ibm-products-styles@npm:^2.68.0-rc.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@npm:^2.68.0, @carbon/ibm-products-styles@npm:^2.68.1, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -2055,7 +2040,7 @@ __metadata:
     cross-env: "npm:^10.0.0"
     glob: "npm:^11.0.1"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.31.0-rc.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.31.0"
     jest-environment-jsdom: "npm:^29.7.0"
     npm-run-all: "npm:^4.1.5"
     rimraf: "npm:^6.0.1"
@@ -2075,7 +2060,7 @@ __metadata:
   resolution: "@carbon/ibm-products-web-components@workspace:packages/ibm-products-web-components"
   dependencies:
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
-    "@carbon/ibm-products-styles": "npm:^2.68.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.68.1"
     "@carbon/icon-helpers": "npm:^10.61.0"
     "@carbon/icons": "npm:^11.62.0"
     "@carbon/motion": "npm:^11.30.0"
@@ -2138,7 +2123,7 @@ __metadata:
     "@babel/runtime": "npm:^7.26.10"
     "@carbon-labs/react-resizer": "npm:^0.5.0"
     "@carbon/feature-flags": "npm:^0.28.1"
-    "@carbon/ibm-products-styles": "npm:^2.68.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.68.1"
     "@carbon/styles": "npm:^1.87.0"
     "@carbon/telemetry": "npm:^0.1.0"
     "@carbon/utilities": "npm:^0.7.0"
@@ -2162,7 +2147,7 @@ __metadata:
     "@types/react-table": "npm:^7.7.20"
     "@vitejs/plugin-react": "npm:^4.7.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.30.0-rc.0"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.30.0"
     chalk: "npm:^4.1.2"
     change-case: "npm:5.4.4"
     classnames: "npm:^2.5.1"
@@ -2171,7 +2156,7 @@ __metadata:
     fs-extra: "npm:^11.3.0"
     glob: "npm:^11.0.1"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.31.0-rc.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.31.0"
     jest-environment-jsdom: "npm:^29.7.0"
     namor: "npm:^1.1.2"
     npm-run-all: "npm:^4.1.5"
@@ -4601,13 +4586,13 @@ __metadata:
   linkType: hard
 
 "@napi-rs/wasm-runtime@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@napi-rs/wasm-runtime@npm:1.0.1"
+  version: 1.0.3
+  resolution: "@napi-rs/wasm-runtime@npm:1.0.3"
   dependencies:
     "@emnapi/core": "npm:^1.4.5"
     "@emnapi/runtime": "npm:^1.4.5"
     "@tybys/wasm-util": "npm:^0.10.0"
-  checksum: 10/8ed2a1f1246ecbef04b73e06c994f635ebb8c7b929620f28859c49cb7e373adee4fd1b9529bab286171c0ef0f668331d683bcf30ab193e5bf05a04b4e07cd56a
+  checksum: 10/4af90cfe43205591cdcfb86eb6ba41a625f35cca26c372c58dac7b99e85e2a2bf9d3f8b3fd71106d167a7efaca60fef69aa614fbc8c22103b3c81f0225ea8275
   languageName: node
   linkType: hard
 
@@ -5152,17 +5137,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-project/runtime@npm:=0.78.0":
-  version: 0.78.0
-  resolution: "@oxc-project/runtime@npm:0.78.0"
-  checksum: 10/0d0f117c9b496b059548f9b88ddcfe55db6464702e7a2b91e6d1b479b15f0965412294f7d63d70293f5d40ad401af40ee72a30bef1bcef1e4a712434e2d8529a
+"@oxc-project/runtime@npm:=0.80.0":
+  version: 0.80.0
+  resolution: "@oxc-project/runtime@npm:0.80.0"
+  checksum: 10/39f20b0e4ff272d61124f82baaa79b758ad4d056ac4edb7539fa705445380c43eb39d69a8892326e314c6b845b8d1e62bb3f2a772e92e3beee59e77b7840425c
   languageName: node
   linkType: hard
 
-"@oxc-project/types@npm:=0.78.0":
-  version: 0.78.0
-  resolution: "@oxc-project/types@npm:0.78.0"
-  checksum: 10/0da09607f842e2e3818344dd92c5820bb6f73ecd53c98baaf7d93ba9b318e6581e2ae2257c85f240153ad10e3141aec71a2cfb1fbf544c4b4d112cedf3acf9b0
+"@oxc-project/types@npm:=0.80.0":
+  version: 0.80.0
+  resolution: "@oxc-project/types@npm:0.80.0"
+  checksum: 10/7d4b098e28a2dfc8bdfc767f59bc79283ea925999adcafd684546bc76006716ffa0d3d9f03eb05f281b09a50ec5173f9f1dcf5d9c1871993f384e77b0bc37055
   languageName: node
   linkType: hard
 
@@ -5567,102 +5552,102 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rolldown/binding-android-arm64@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-android-arm64@npm:1.0.0-beta.30"
+"@rolldown/binding-android-arm64@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-android-arm64@npm:1.0.0-beta.31"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-darwin-arm64@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-darwin-arm64@npm:1.0.0-beta.30"
+"@rolldown/binding-darwin-arm64@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-darwin-arm64@npm:1.0.0-beta.31"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-darwin-x64@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-darwin-x64@npm:1.0.0-beta.30"
+"@rolldown/binding-darwin-x64@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-darwin-x64@npm:1.0.0-beta.31"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-freebsd-x64@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-freebsd-x64@npm:1.0.0-beta.30"
+"@rolldown/binding-freebsd-x64@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-freebsd-x64@npm:1.0.0-beta.31"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-arm-gnueabihf@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-linux-arm-gnueabihf@npm:1.0.0-beta.30"
+"@rolldown/binding-linux-arm-gnueabihf@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-linux-arm-gnueabihf@npm:1.0.0-beta.31"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-arm64-gnu@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-linux-arm64-gnu@npm:1.0.0-beta.30"
+"@rolldown/binding-linux-arm64-gnu@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-linux-arm64-gnu@npm:1.0.0-beta.31"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-arm64-musl@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-linux-arm64-musl@npm:1.0.0-beta.30"
+"@rolldown/binding-linux-arm64-musl@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-linux-arm64-musl@npm:1.0.0-beta.31"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-arm64-ohos@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-linux-arm64-ohos@npm:1.0.0-beta.30"
+"@rolldown/binding-linux-arm64-ohos@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-linux-arm64-ohos@npm:1.0.0-beta.31"
   conditions: os=openharmony & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-x64-gnu@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-linux-x64-gnu@npm:1.0.0-beta.30"
+"@rolldown/binding-linux-x64-gnu@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-linux-x64-gnu@npm:1.0.0-beta.31"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-x64-musl@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-linux-x64-musl@npm:1.0.0-beta.30"
+"@rolldown/binding-linux-x64-musl@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-linux-x64-musl@npm:1.0.0-beta.31"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@rolldown/binding-wasm32-wasi@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-wasm32-wasi@npm:1.0.0-beta.30"
+"@rolldown/binding-wasm32-wasi@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-wasm32-wasi@npm:1.0.0-beta.31"
   dependencies:
     "@napi-rs/wasm-runtime": "npm:^1.0.1"
   conditions: cpu=wasm32
   languageName: node
   linkType: hard
 
-"@rolldown/binding-win32-arm64-msvc@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-win32-arm64-msvc@npm:1.0.0-beta.30"
+"@rolldown/binding-win32-arm64-msvc@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-win32-arm64-msvc@npm:1.0.0-beta.31"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-win32-ia32-msvc@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-win32-ia32-msvc@npm:1.0.0-beta.30"
+"@rolldown/binding-win32-ia32-msvc@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-win32-ia32-msvc@npm:1.0.0-beta.31"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@rolldown/binding-win32-x64-msvc@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/binding-win32-x64-msvc@npm:1.0.0-beta.30"
+"@rolldown/binding-win32-x64-msvc@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/binding-win32-x64-msvc@npm:1.0.0-beta.31"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -5674,10 +5659,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rolldown/pluginutils@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@rolldown/pluginutils@npm:1.0.0-beta.30"
-  checksum: 10/2016282c4b3116d5ad1184d36fd6c080d9e1c243265c51761d8c14c00ab128dbc70cfbccbab76184ed881b4947196459b37c9ae6abed742eed9fe51d988fabce
+"@rolldown/pluginutils@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "@rolldown/pluginutils@npm:1.0.0-beta.31"
+  checksum: 10/b387406bdbe48c100292938cfec9e0c4706317373f8aa5af11603125418cae675a19aa5c0500dff6d70d5e058733c00725ffeb00481d1330cf6df85d6da7fb25
   languageName: node
   linkType: hard
 
@@ -8884,7 +8869,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-ibm-cloud-cognitive@npm:^0.30.0-rc.0, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
+"babel-preset-ibm-cloud-cognitive@npm:^0.30.0, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive"
   dependencies:
@@ -13726,7 +13711,7 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.26.10"
     "@babel/preset-react": "npm:^7.26.3"
     "@carbon/grid": "npm:^11.38.0"
-    "@carbon/ibm-products-styles": "npm:^2.67.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.68.0"
     "@carbon/layout": "npm:^11.36.0"
     "@carbon/motion": "npm:^11.30.0"
     "@carbon/react": "npm:^1.85.1"
@@ -13769,7 +13754,7 @@ __metadata:
     npm-run-all: "npm:^4.1.5"
     postcss: "npm:^8.5.3"
     prettier: "npm:^3.5.3"
-    prettier-config-carbon: "npm:^0.11.0"
+    prettier-config-carbon: "npm:^0.12.0"
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     rimraf: "npm:^6.0.1"
@@ -14788,7 +14773,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@npm:^1.31.0-rc.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@npm:^1.31.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:
@@ -14803,7 +14788,7 @@ __metadata:
     accessibility-checker: "npm:^4.0.7"
     axe-core: "npm:^4.10.3"
     babel-jest: "npm:^29.7.0"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.30.0-rc.0"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.30.0"
     chalk: "npm:^4.1.2"
     identity-obj-proxy: "npm:^3.0.0"
     jest-circus: "npm:^29.7.0"
@@ -19247,12 +19232,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-config-carbon@npm:^0.11.0":
-  version: 0.11.0
-  resolution: "prettier-config-carbon@npm:0.11.0"
+"prettier-config-carbon@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "prettier-config-carbon@npm:0.12.0"
   peerDependencies:
-    prettier: 2.x
-  checksum: 10/3f29bdd7d6ac5a006649737bc7574d43a3d734737f5dcecb2fa130d747ae79eb13f1b2bfc649750de4b4c9163cbdba5c6baae9a311aa1d51586b442cd9736d34
+    prettier: 3.x
+  checksum: 10/77e1029086103a5dcb30493654e6233fa95242bcc00f41b68e792a61458b507867a05e4bd27059d5c6b5759d599a6a2a036fe5b08fa45732f0b39f7e6467798a
   languageName: node
   linkType: hard
 
@@ -20189,27 +20174,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rolldown@npm:1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "rolldown@npm:1.0.0-beta.30"
+"rolldown@npm:1.0.0-beta.31":
+  version: 1.0.0-beta.31
+  resolution: "rolldown@npm:1.0.0-beta.31"
   dependencies:
-    "@oxc-project/runtime": "npm:=0.78.0"
-    "@oxc-project/types": "npm:=0.78.0"
-    "@rolldown/binding-android-arm64": "npm:1.0.0-beta.30"
-    "@rolldown/binding-darwin-arm64": "npm:1.0.0-beta.30"
-    "@rolldown/binding-darwin-x64": "npm:1.0.0-beta.30"
-    "@rolldown/binding-freebsd-x64": "npm:1.0.0-beta.30"
-    "@rolldown/binding-linux-arm-gnueabihf": "npm:1.0.0-beta.30"
-    "@rolldown/binding-linux-arm64-gnu": "npm:1.0.0-beta.30"
-    "@rolldown/binding-linux-arm64-musl": "npm:1.0.0-beta.30"
-    "@rolldown/binding-linux-arm64-ohos": "npm:1.0.0-beta.30"
-    "@rolldown/binding-linux-x64-gnu": "npm:1.0.0-beta.30"
-    "@rolldown/binding-linux-x64-musl": "npm:1.0.0-beta.30"
-    "@rolldown/binding-wasm32-wasi": "npm:1.0.0-beta.30"
-    "@rolldown/binding-win32-arm64-msvc": "npm:1.0.0-beta.30"
-    "@rolldown/binding-win32-ia32-msvc": "npm:1.0.0-beta.30"
-    "@rolldown/binding-win32-x64-msvc": "npm:1.0.0-beta.30"
-    "@rolldown/pluginutils": "npm:1.0.0-beta.30"
+    "@oxc-project/runtime": "npm:=0.80.0"
+    "@oxc-project/types": "npm:=0.80.0"
+    "@rolldown/binding-android-arm64": "npm:1.0.0-beta.31"
+    "@rolldown/binding-darwin-arm64": "npm:1.0.0-beta.31"
+    "@rolldown/binding-darwin-x64": "npm:1.0.0-beta.31"
+    "@rolldown/binding-freebsd-x64": "npm:1.0.0-beta.31"
+    "@rolldown/binding-linux-arm-gnueabihf": "npm:1.0.0-beta.31"
+    "@rolldown/binding-linux-arm64-gnu": "npm:1.0.0-beta.31"
+    "@rolldown/binding-linux-arm64-musl": "npm:1.0.0-beta.31"
+    "@rolldown/binding-linux-arm64-ohos": "npm:1.0.0-beta.31"
+    "@rolldown/binding-linux-x64-gnu": "npm:1.0.0-beta.31"
+    "@rolldown/binding-linux-x64-musl": "npm:1.0.0-beta.31"
+    "@rolldown/binding-wasm32-wasi": "npm:1.0.0-beta.31"
+    "@rolldown/binding-win32-arm64-msvc": "npm:1.0.0-beta.31"
+    "@rolldown/binding-win32-ia32-msvc": "npm:1.0.0-beta.31"
+    "@rolldown/binding-win32-x64-msvc": "npm:1.0.0-beta.31"
+    "@rolldown/pluginutils": "npm:1.0.0-beta.31"
     ansis: "npm:^4.0.0"
   dependenciesMeta:
     "@rolldown/binding-android-arm64":
@@ -20242,7 +20227,7 @@ __metadata:
       optional: true
   bin:
     rolldown: bin/cli.mjs
-  checksum: 10/82707d54e2e9bd6cbe1d7729abe8d2cb9f66a5b6ef8ef68bdb6e0bff234aa5b58f33b5d0c2fa087cf86a98846fa26691ed3574f98f2986c780d6b77f30ca7234
+  checksum: 10/cf072c74aa79d80c6332f3687e85ee2bc5d66f340528c3dba1364b8467546378f329138b4b02bda033a7e1981e2dcdce38ad93cc827a53bf99d74c93d554fd73
   languageName: node
   linkType: hard
 
@@ -22972,15 +22957,15 @@ __metadata:
   linkType: hard
 
 "vite@npm:rolldown-vite@latest":
-  version: 7.0.12
-  resolution: "rolldown-vite@npm:7.0.12"
+  version: 7.1.0
+  resolution: "rolldown-vite@npm:7.1.0"
   dependencies:
     fdir: "npm:^6.4.6"
     fsevents: "npm:~2.3.3"
     lightningcss: "npm:^1.30.1"
     picomatch: "npm:^4.0.3"
     postcss: "npm:^8.5.6"
-    rolldown: "npm:1.0.0-beta.30"
+    rolldown: "npm:1.0.0-beta.31"
     tinyglobby: "npm:^0.2.14"
   peerDependencies:
     "@types/node": ^20.19.0 || >=22.12.0
@@ -23022,7 +23007,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/659f2da0d2ea6b9ff6ef113341ec34387d39720c760757fe72c2aec6459d74250886c66cf45786a60ee2de624dbb0dceb53a3cdf02a6c3b35b6c5b2e082d3434
+  checksum: 10/c957f90993d1e8a70f022c22e38aa4a9b7a7003055e3eeecc0c46bdce7c7274c5cc914721aac198540a60e1dd0cadd8e4ab41971d0d85234eed5ac6e9acdacca
   languageName: node
   linkType: hard
 

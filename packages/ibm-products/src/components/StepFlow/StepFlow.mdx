@@ -65,6 +65,8 @@ const Step1 = () => {
   const { email } = formState ?? {};
   return (
     <TextInput
+      labelText="Email"
+      value={email ?? ''}
       onChange={(e) => {
         setFormState?.((prev: object) => ({
           ...prev,

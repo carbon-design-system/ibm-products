@@ -74,6 +74,10 @@ export default {
     className: {
       control: { type: null },
     },
+    closeIconDescription: {
+      control: { type: 'text' },
+      description: 'Tooltip text and aria label for the Close button icon.',
+    },
   },
   parameters: {
     styles,

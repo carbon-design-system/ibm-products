@@ -34,7 +34,10 @@ const elementBlockClass = `${pkg.prefix}--coachmark-stack-element`;
 import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
 import { CoachmarkStackHome } from './CoachmarkStackHome';
 import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
-import { CoachmarkContext } from '../Coachmark/utils/context';
+import {
+  CoachmarkContext,
+  CoachmarkContextType,
+} from '../Coachmark/utils/context';
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 
@@ -203,7 +206,7 @@ export let CoachmarkStack = React.forwardRef<
       };
     }, [escFunction]);
 
-    const contextValue = {
+    const contextValue: CoachmarkContextType = {
       buttonProps: {
         tabIndex: 0,
         'aria-expanded': isOpen,
@@ -220,6 +223,7 @@ export let CoachmarkStack = React.forwardRef<
         onClick: () => handleClose(false),
       },
       isOpen: isOpen,
+      closeIconDescription: 'Close',
     };
     useEffect(() => {
       mountedRef.current = true;

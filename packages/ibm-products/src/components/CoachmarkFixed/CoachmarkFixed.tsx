@@ -15,7 +15,10 @@ import React, {
 } from 'react';
 
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
-import { CoachmarkContext } from '../Coachmark/utils/context';
+import {
+  CoachmarkContext,
+  CoachmarkContextType,
+} from '../Coachmark/utils/context';
 import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
 import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
 // Other standard imports.
@@ -157,7 +160,7 @@ export let CoachmarkFixed = React.forwardRef<
       };
     }, [escFunction]);
 
-    const contextValue = {
+    const contextValue: CoachmarkContextType = {
       buttonProps: {
         'aria-expanded': isOpen,
         tabIndex: 0,
@@ -173,6 +176,7 @@ export let CoachmarkFixed = React.forwardRef<
       targetOffset: targetOffset,
       isOpen: isOpen,
       tacos: 'tacos',
+      closeIconDescription: 'Close',
     };
 
     // instead of toggling on/off,

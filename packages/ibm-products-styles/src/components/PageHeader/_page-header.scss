@@ -856,6 +856,13 @@ $duration: 1000ms;
   .#{$block-class}__content__page-actions {
     display: flex;
     justify-content: right;
+    /* stylelint-disable-next-line carbon/motion-easing-use */
+    transition: opacity motion(standard, productive) $duration-moderate-02;
+
+    &.#{$block-class}__content__page-actions--clipped {
+      opacity: 0;
+      visibility: hidden;
+    }
 
     @include breakpoint-down('md') {
       justify-content: left;
@@ -1016,8 +1023,14 @@ $duration: 1000ms;
     opacity: 0;
   }
 
-  .#{$pkg-prefix}--page-header-title-breadcrumb,
-  .#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+  .#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
+    opacity: 1;
+    transition:
+      /* stylelint-disable-next-line */ opacity
+      motion(standard, productive) $duration-moderate-01;
+  }
+
+  .#{$pkg-prefix}--page-header-title-breadcrumb {
     opacity: 0;
     transform: translateY($spacing-05);
     transition:
@@ -1026,20 +1039,16 @@ $duration: 1000ms;
       opacity motion(standard, productive) $duration-moderate-01;
     // Target browsers that do not yet support animation-timeline: scroll()
     @supports not (animation-timeline: scroll()) {
-      &.#{$pkg-prefix}--page-header-title-breadcrumb-show,
-      &.#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      @media (prefers-reduced-motion: reduce) {
-        transform: translateY(0);
-        /* stylelint-disable-next-line */
-        transition: opacity motion(standard, productive) $duration-moderate-01;
+      &.#{$pkg-prefix}--page-header-title-breadcrumb-show {
+        @media (prefers-reduced-motion: reduce) {
+          transform: translateY(0);
+          /* stylelint-disable-next-line */
+          transition: opacity motion(standard, productive) $duration-moderate-01;
+        }
       }
     }
 
-    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__with-content-element,
-    &.#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__with-content-element {
       // `animation-timeline: scroll()` only currently supported in Chromium based browsers
       @supports (animation-timeline: scroll()) {
         animation-direction: alternate;

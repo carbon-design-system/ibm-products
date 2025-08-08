@@ -99,6 +99,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
 
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [titleClipped, setTitleClipped] = useState(false);
+    const [contentActionsClipped, setContentActionsClipped] = useState(false);
 
     // Intersection Observer setup, tracks if the PageHeaderContent is visible on page.
     // If it is not visible, we should set fully collapsed to true so that the
@@ -144,12 +145,33 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         }
       );
 
+      if (!refs?.contentActions?.current) {
+        return;
+      }
+      const contentActionsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target === refs?.contentActions!.current) {
+              setContentActionsClipped(!entry.isIntersecting);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: `${(predefinedContentPadding + totalTitleHeight + totalHeaderOffset + 48) * -1}px 0px 0px 0px`,
+          threshold: 0.1,
+        }
+      );
+
       if (refs?.contentRef.current) {
         contentObserver.observe(refs?.contentRef.current);
       }
 
       if (refs?.titleRef.current) {
         titleObserver.observe(refs?.titleRef.current);
+      }
+      if (refs?.contentActions.current) {
+        contentActionsObserver.observe(refs?.contentActions.current);
       }
 
       return () => {
@@ -160,7 +182,11 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         if (!refs?.titleRef?.current) {
           return;
         }
-        contentObserver.unobserve(refs?.titleRef.current);
+        titleObserver.unobserve(refs?.titleRef.current);
+        if (!refs?.contentActions?.current) {
+          return;
+        }
+        contentActionsObserver.unobserve(refs?.contentActions.current);
       };
     }, [refs, componentRef]);
 
@@ -173,6 +199,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
           pageActionsInstance,
           setPageActionsInstance,
           titleClipped,
+          contentActionsClipped,
         }}
       >
         <div className={classNames} ref={componentRef} {...other}>
@@ -234,7 +261,8 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
   }: PageHeaderBreadcrumbBarProps,
   ref
 ) {
-  const { pageActionsInstance: globalActions, titleClipped } = usePageHeader();
+  const { pageActionsInstance: globalActions, contentActionsClipped } =
+    usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__breadcrumb-bar`]: true,
@@ -249,7 +277,7 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
     [`${blockClass}__breadcrumb__content-actions-with-global-actions`]:
       !!globalActions,
     [`${blockClass}__breadcrumb__content-actions-with-global-actions--show`]:
-      titleClipped,
+      contentActionsClipped,
   });
 
   return (
@@ -470,9 +498,13 @@ const PageHeaderContentPageActions = ({
   actions,
   ...other
 }: PageHeaderContentPageActionsProps) => {
+  const { setRefs, contentActionsClipped } = usePageHeader();
   const classNames = classnames(
+    `${blockClass}__content__page-actions`,
     {
-      [`${blockClass}__content__page-actions`]: true,
+      // Revisit this:
+      // May want to only add this class if there are content actions in the breadcrumb bar as well
+      [`${blockClass}__content__page-actions--clipped`]: contentActionsClipped,
     },
     className
   );
@@ -500,6 +532,11 @@ const PageHeaderContentPageActions = ({
       );
     }
   }, [menuButtonVisibility]);
+
+  useEffect(() => {
+    setRefs((prev) => ({ ...prev, contentActions: containerRef }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current || !Array.isArray(actions)) {

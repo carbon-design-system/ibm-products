@@ -163,6 +163,13 @@ $carbon-prefix: 'cds';
   .#{$prefix}--page-header__content__page-actions {
     display: flex;
     justify-content: right;
+    /* stylelint-disable-next-line carbon/motion-easing-use */
+    transition: opacity motion(standard, productive) $duration-moderate-02;
+
+    &.#{$prefix}--page-header__content__page-actions--clipped {
+      opacity: 0;
+      visibility: hidden;
+    }
 
     @include breakpoint-down('md') {
       justify-content: left;
@@ -365,14 +372,19 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-breadcrumb)
   .#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+  opacity: 0;
+  visibility: hidden;
   &.#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
-    @include scroll-fallback();
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+    /* stylelint-disable-next-line */ opacity
+      motion(standard, productive) $duration-moderate-01;
+    visibility: visible;
   }
 }
 
-:host(#{$prefix}-page-header-title-breadcrumb),
-:host(#{$prefix}-page-header-breadcrumb)
-  .#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+:host(#{$prefix}-page-header-title-breadcrumb) {
   opacity: 0;
   transform: translateY($spacing-05);
   transition:
@@ -383,9 +395,7 @@ $carbon-prefix: 'cds';
 
 :host(
   #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__with-content
-),
-:host(#{$prefix}-page-header-breadcrumb)
-  .#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+) {
   // Target browsers that do not yet support animation-timeline: scroll()
   &.#{$prefix}--page-header-title-breadcrumb-show__fallback {
     @supports not (animation-timeline: scroll()) {

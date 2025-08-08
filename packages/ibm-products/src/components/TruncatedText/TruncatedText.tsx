@@ -97,6 +97,7 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
 
     const valueBody = (
       <span
+        {...(type === 'tooltip' ? { role: 'button' } : {})}
         ref={contentRef}
         className={textContentClasses}
         id={id}

@@ -8,6 +8,7 @@
  */
 
 import { html } from 'lit';
+import { fn } from 'storybook/test';
 import './index';
 import '@carbon/web-components/es/components/toggle/index.js';
 import '@carbon/web-components/es/components/dropdown/index.js';
@@ -43,16 +44,15 @@ const argTypes = {
 
 const blockClass = 'options-tile';
 
-const handleOpen = (evt: Event) => {
-  console.log('open');
-};
-
-const handleClose = (evt: Event) => {
-  console.log('close');
-};
-
 const renderTemplate = (args) => {
-  const { defaultOpen, size, titleText, titleId } = args;
+  const {
+    '@c4p-options-tile-close': handleClose,
+    '@c4p-options-tile-open': handleOpen,
+    defaultOpen,
+    size,
+    titleText,
+    titleId,
+  } = args;
   return html`
     <style>
       ${styles}
@@ -94,6 +94,8 @@ const renderTemplate = (args) => {
 
 export const Default = {
   args: {
+    '@c4p-options-tile-open': fn(),
+    '@c4p-options-tile-close': fn(),
     body: 'User interface defines the language the application is displayed in. Locale sets the regional display formats for information like time, date, currency and decimal delimiters.',
     defaultOpen: false,
     size: 'lg',

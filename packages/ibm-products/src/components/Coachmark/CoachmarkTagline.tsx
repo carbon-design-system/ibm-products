@@ -22,16 +22,11 @@ const blockClass = `${pkg.prefix}--coachmark-tagline`;
 const componentName = 'CoachmarkTagline';
 
 const defaults = {
-  closeIconDescription: 'Close',
   onClose: () => {},
   theme: 'light',
 };
 
 interface CoachmarkTaglineProps {
-  /**
-   * Tooltip text and aria label for the Close button icon.
-   */
-  closeIconDescription?: string;
   /**
    * Function to call when the close button is clicked.
    */
@@ -55,16 +50,12 @@ export let CoachmarkTagline = React.forwardRef<
   CoachmarkTaglineProps
 >(
   (
-    {
-      closeIconDescription = defaults.closeIconDescription,
-      onClose = defaults.onClose,
-      theme = defaults.theme,
-      title,
-      ...rest
-    },
+    { onClose = defaults.onClose, theme = defaults.theme, title, ...rest },
     ref
   ) => {
     const coachmark = useCoachmark();
+    const closeIconDescription =
+      useCoachmark()?.closeIconDescription ?? 'Close';
 
     return (
       <div
@@ -118,10 +109,6 @@ CoachmarkTagline.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 CoachmarkTagline.propTypes = {
-  /**
-   * Tooltip text and aria label for the Close button icon.
-   */
-  closeIconDescription: PropTypes.string,
   /**
    * Function to call when the close button is clicked.
    */

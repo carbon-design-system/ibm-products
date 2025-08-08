@@ -62,7 +62,8 @@ export let CoachmarkHeader = React.forwardRef<
     },
     ref
   ) => {
-    const closeIconDescription = useCoachmark()?.closeIconDescription;
+    const closeIconDescription =
+      useCoachmark()?.closeIconDescription ?? 'Close';
 
     return (
       <header
@@ -80,7 +81,7 @@ export let CoachmarkHeader = React.forwardRef<
               kind="ghost"
               size="sm"
               renderIcon={Close}
-              iconDescription={closeIconDescription ?? 'Close'}
+              iconDescription={closeIconDescription}
               hasIconOnly
               className={`${overlayBlockClass}--close-btn`}
               onClick={onClose}

@@ -102,7 +102,8 @@ export let CoachmarkDragbar = React.forwardRef<
 
     const handleDragStart = () => setIsDragging(true);
 
-    const closeIconDescription = useCoachmark()?.closeIconDescription;
+    const closeIconDescription =
+      useCoachmark()?.closeIconDescription ?? 'Close';
 
     return (
       <header
@@ -138,7 +139,7 @@ export let CoachmarkDragbar = React.forwardRef<
             kind="ghost"
             size="sm"
             renderIcon={Close}
-            iconDescription={closeIconDescription ?? 'Close'}
+            iconDescription={closeIconDescription}
             hasIconOnly
             className={`${overlayBlockClass}--close-btn`}
             onClick={onClose}

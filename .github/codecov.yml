@@ -28,4 +28,4 @@ component_management:
         - packages/ibm-products-web-components/**
 
 ignore:
-  - "**/StepFlow/story-assets/*"
+  - "**/StepFlow/story-assets/**/*"

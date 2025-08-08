@@ -37,7 +37,7 @@ export interface NoDataEmptyStateProps extends EmptyStatePresetProps {
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */
-export let NoDataEmptyState = React.forwardRef<
+export const NoDataEmptyState = React.forwardRef<
   HTMLDivElement,
   NoDataEmptyStateProps
 >(
@@ -95,7 +95,6 @@ export let NoDataEmptyState = React.forwardRef<
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-NoDataEmptyState = pkg.checkComponentEnabled(NoDataEmptyState, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

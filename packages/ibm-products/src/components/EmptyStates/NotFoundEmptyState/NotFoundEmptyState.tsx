@@ -37,7 +37,7 @@ export interface NotFoundEmptyStateProps extends EmptyStatePresetProps {
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */
-export let NotFoundEmptyState = React.forwardRef<
+export const NotFoundEmptyState = React.forwardRef<
   HTMLDivElement,
   NotFoundEmptyStateProps
 >(
@@ -92,12 +92,6 @@ export let NotFoundEmptyState = React.forwardRef<
       </div>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-NotFoundEmptyState = pkg.checkComponentEnabled(
-  NotFoundEmptyState,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

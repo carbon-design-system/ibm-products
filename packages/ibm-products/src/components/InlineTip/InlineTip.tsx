@@ -124,7 +124,7 @@ export interface InlineTipProps {
  * provide an ambient way to deliver learning content without
  * distracting the user from their flow.
  */
-export let InlineTip = React.forwardRef(
+export const InlineTip = React.forwardRef(
   (
     {
       action,
@@ -250,7 +250,6 @@ export let InlineTip = React.forwardRef(
   }
 );
 
-InlineTip = pkg.checkComponentEnabled(InlineTip, componentName);
 InlineTip.displayName = componentName;
 
 InlineTip.propTypes = {

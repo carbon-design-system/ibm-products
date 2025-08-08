@@ -86,7 +86,7 @@ resource. It is triggered by a user’s action, appears on top of the main page
 content, and is persistent until dismissed. The purpose of this modal should be
 immediately apparent to the user, with a clear and obvious path to completion.
  */
-export let CreateModal = React.forwardRef<HTMLDivElement, CreateModalProps>(
+export const CreateModal = React.forwardRef<HTMLDivElement, CreateModalProps>(
   (props, ref) => {
     const {
       className,
@@ -151,7 +151,6 @@ export let CreateModal = React.forwardRef<HTMLDivElement, CreateModalProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CreateModal = pkg.checkComponentEnabled(CreateModal, componentName);
 
 CreateModal.propTypes = {
   /**

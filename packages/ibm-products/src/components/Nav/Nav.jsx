@@ -9,8 +9,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import NavList, { blockClass as navListBlockClass } from './NavList';
-import NavItem, { blockClass as navItemBlockClass } from './NavItem';
+import NavList, { blockClass as navListBlockClass } from './NavList.jsx';
+import NavItem, { blockClass as navItemBlockClass } from './NavItem.jsx';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';

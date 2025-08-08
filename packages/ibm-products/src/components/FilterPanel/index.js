@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { FilterPanel } from './FilterPanel';
-export { FilterPanelAccordion } from './FilterPanelAccordion/FilterPanelAccordion';
-export { FilterPanelAccordionItem } from './FilterPanelAccordionItem/FilterPanelAccordionItem';
-export { FilterPanelCheckbox } from './FilterPanelCheckbox/FilterPanelCheckbox';
-export { FilterPanelCheckboxWithOverflow } from './FilterPanelCheckboxWithOverflow/FilterPanelCheckboxWithOverflow';
-export { FilterPanelGroup } from './FilterPanelGroup/FilterPanelGroup';
-export { FilterPanelLabel } from './FilterPanelLabel/FilterPanelLabel';
-export { FilterPanelSearch } from './FilterPanelSearch/FilterPanelSearch';
+export { FilterPanel } from './FilterPanel.jsx';
+export { FilterPanelAccordion } from './FilterPanelAccordion/FilterPanelAccordion.jsx';
+export { FilterPanelAccordionItem } from './FilterPanelAccordionItem/FilterPanelAccordionItem.jsx';
+export { FilterPanelCheckbox } from './FilterPanelCheckbox/FilterPanelCheckbox.jsx';
+export { FilterPanelCheckboxWithOverflow } from './FilterPanelCheckboxWithOverflow/FilterPanelCheckboxWithOverflow.jsx';
+export { FilterPanelGroup } from './FilterPanelGroup/FilterPanelGroup.jsx';
+export { FilterPanelLabel } from './FilterPanelLabel/FilterPanelLabel.jsx';
+export { FilterPanelSearch } from './FilterPanelSearch/FilterPanelSearch.jsx';

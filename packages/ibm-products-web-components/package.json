@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "@carbon/ibm-products-styles": "^2.68.1",
-    "@carbon/styles": "1.85.0",
+    "@carbon/styles": "1.87.0",
     "@carbon/web-components": "2.33.0",
     "@ibm/telemetry-js": "^1.9.1",
     "@lit-labs/signals": "^0.1.2",

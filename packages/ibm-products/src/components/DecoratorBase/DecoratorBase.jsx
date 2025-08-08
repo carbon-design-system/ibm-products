@@ -13,7 +13,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 import { getMagnitude, truncate } from './utils';
-import { DecoratorIcon } from './DecoratorIcon';
+import { DecoratorIcon } from './DecoratorIcon.jsx';
 
 const blockClass = `${pkg.prefix}--decorator`;
 const componentName = 'DecoratorBase';

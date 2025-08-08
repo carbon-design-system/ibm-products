@@ -7,6 +7,8 @@
 import { html } from 'lit';
 import styles from '../story-styles.scss?lit';
 import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs.js';
+import TrashCan16 from '@carbon/web-components/es/icons/trash-can/16';
+import Settings16 from '@carbon/web-components/es/icons/settings/16';
 
 const storyPrefix = 'side-panel-stories__';
 
@@ -103,6 +105,7 @@ export const getActionToolbarItems = (index) => {
           size="sm"
           tooltip-text="Settings"
         >
+          ${Settings16({ slot: 'icon' })}
         </cds-button>
         <cds-button
           slot="action-toolbar"
@@ -112,6 +115,7 @@ export const getActionToolbarItems = (index) => {
           size="sm"
           tooltip-text="Delete"
         >
+          ${TrashCan16({ slot: 'icon' })}
         </cds-button>
       `;
     default:

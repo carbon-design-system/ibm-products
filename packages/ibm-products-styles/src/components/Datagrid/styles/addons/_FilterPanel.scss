@@ -19,6 +19,7 @@
   initial-value: 320px;
   syntax: '<length>';
 }
+
 $block-class-component: #{$block-class}-filter-panel;
 
 .#{$block-class-component} {

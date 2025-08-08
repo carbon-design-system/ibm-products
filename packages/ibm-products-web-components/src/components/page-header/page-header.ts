@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, PropertyValues, html } from 'lit';
+import { LitElement, html } from 'lit';
 import { state } from 'lit/decorators.js';
 import { provide } from '@lit/context';
 import { prefix } from '../../globals/settings';

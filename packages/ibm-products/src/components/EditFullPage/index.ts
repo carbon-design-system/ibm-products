@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { EditFullPage } from './EditFullPage.deprecated';
-export type { EditFullPageProps } from './EditFullPage.deprecated';
+export { EditFullPage } from './EditFullPage';
+export type { EditFullPageProps } from './EditFullPage';

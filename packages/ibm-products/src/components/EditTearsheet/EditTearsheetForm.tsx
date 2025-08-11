@@ -13,7 +13,7 @@ import {
   FormContext,
   FormContextType,
   FormNumberContext,
-} from './EditTearsheet.deprecated';
+} from './EditTearsheet';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 import { useRetrieveFormTitles } from '../../global/js/hooks/useRetrieveFormTitles';

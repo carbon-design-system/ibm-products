@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { EditTearsheetNarrow } from './EditTearsheetNarrow.deprecated';
-export type { EditTearsheetNarrowProps } from './EditTearsheetNarrow.deprecated';
+export { EditTearsheetNarrow } from './EditTearsheetNarrow';
+export type { EditTearsheetNarrowProps } from './EditTearsheetNarrow';

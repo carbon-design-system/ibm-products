@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { EditUpdateCards } from './EditUpdateCards.deprecated';
-export type { EditUpdateCardsProps } from './EditUpdateCards.deprecated';
+export { EditUpdateCards } from './EditUpdateCards';
+export type { EditUpdateCardsProps } from './EditUpdateCards';

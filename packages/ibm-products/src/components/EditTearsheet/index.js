@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { EditTearsheet } from './EditTearsheet.deprecated';
+export { EditTearsheet } from './EditTearsheet';
 export { EditTearsheetForm } from './EditTearsheetForm';

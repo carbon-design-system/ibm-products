@@ -40,6 +40,28 @@ The purpose of this modal should be immediately apparent to the user, with a cle
 
 ### With additional content
 
+Some products may be legally required to display logos of technologies used to build the product.
+These can be provided through the `additionalInfo` prop and will be displayed in the footer.
+
+While the about modal supports an array of Carbon `Link` components via the `links` prop, these
+should be used to display product information and not to direct users to find help content.
+
+```jsx
+<AboutModal
+  closeIconDescription="Close"
+  copyrightText="Copyright © IBM Corp. 2020, 2025"
+  logo={logo}
+  title="IBM Product name"
+  version="Version 0.0.0"
+  additionalInfo={
+    <p className={`${pkg.prefix}--about-modal__footer-label`}>Powered by</p>
+    <img src={img1} alt="First logo"/>
+    <img src={img2} alt="Second logo"/>
+    <img src={img3} alt="Third logo"/>
+  }
+/>
+```
+
 <Canvas
   of={stories.withAdditionalContent}
   additionalActions={[

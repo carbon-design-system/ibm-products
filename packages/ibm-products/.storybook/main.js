@@ -71,18 +71,6 @@ export default {
     const { mergeConfig } = await import('vite');
 
     return mergeConfig(config, {
-      esbuild: {
-        include: [/\.[jt]sx?$/, /\/.*\.js$/],
-        exclude: [],
-        loader: 'tsx',
-      },
-      optimizeDeps: {
-        rollupOptions: {
-          loader: {
-            '.js': 'jsx',
-          },
-        },
-      },
       resolve: {
         alias: {
           ALIAS_STORY_STYLE_CONFIG: resolve(
@@ -104,6 +92,9 @@ export default {
             ],
           },
         },
+      },
+      experimental: {
+        enableNativePlugin: true,
       },
     });
   },

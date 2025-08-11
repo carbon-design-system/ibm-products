@@ -14,7 +14,7 @@ import mdx from './SearchBar.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Preview/SearchBar',
+  title: 'Preview Candidate/SearchBar',
   component: SearchBar,
   tags: ['autodocs'],
   argTypes: {

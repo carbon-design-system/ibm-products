@@ -14,7 +14,7 @@ test.describe('Toolbar @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Toolbar',
-      id: 'preview-toolbar--toolbar',
+      id: 'preview-candidate-toolbar--toolbar',
       globals: {
         carbonTheme: 'white',
       },

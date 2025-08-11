@@ -14,7 +14,7 @@ import styles from './_storybook-styles.scss?inline';
 import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 export default {
-  title: 'Preview/DataSpreadsheet',
+  title: 'Preview Candidate/DataSpreadsheet',
   component: DataSpreadsheet,
   tags: ['autodocs'],
   argTypes: {

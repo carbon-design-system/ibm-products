@@ -26,3 +26,6 @@ component_management:
       name: ibm-products-web-components # this is a display name, and can be changed freely
       paths:
         - packages/ibm-products-web-components/**
+
+ignore:
+  - '*.deprecated.*'

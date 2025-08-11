@@ -4,25 +4,25 @@ import { AboutModal } from '.';
 import * as stories from './AboutModal.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
-# About Modal
+# AboutModal
 
-[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/about-modal/usage/) | [Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage) | [Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+[Source code](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/components/AboutModal)
+&nbsp;|&nbsp;
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/about-modal/usage/)
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Example usage](#example-usage)
-  - [About Modal](#about-modal-1)
-  - [About Modal With All Props Set](#about-modal-with-all-props-set)
+  - [With additional content](#with-additional-content)
 - [Component API](#component-api)
+- [References](#references)
+- [Feedback](#feedback)
 
 ## Overview
 
-The About modal component conveys product information, including the version number, copyright information, and license details.
-The About modal is triggered by a user’s action which appears on top of the main page content and is persistent until dismissed. 
+The `AboutModal` component conveys product information, including the version number, copyright information, and license details.
+The about modal is triggered by a user’s action which appears on top of the main page content and is persistent until dismissed. 
 The purpose of this modal should be immediately apparent to the user, with a clear and obvious path to completion.
-
-### About Modal
 
 <Canvas
   of={stories.aboutModal}
@@ -38,7 +38,7 @@ The purpose of this modal should be immediately apparent to the user, with a cle
 </Canvas>
 
 
-### About Modal With All Props Set
+### With additional content
 
 <Canvas
   of={stories.aboutModalWithAllPropsSet}
@@ -56,3 +56,14 @@ The purpose of this modal should be immediately apparent to the user, with a cle
 ## Component API
 
 <Controls />
+
+## References
+
+The `AboutModal` is built using the `ComposedModal`. Any additional props will be passed to the `ComposedModal`.
+For a full list of props, please see the [ComposedModal](https://react.carbondesignsystem.com/?path=/docs/components-modal).
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AboutModal/AboutModal.mdx).

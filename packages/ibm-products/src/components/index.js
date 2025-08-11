@@ -62,7 +62,6 @@ export { StringFormatter } from './StringFormatter';
 export { TagOverflow } from './TagOverflow';
 export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
-export { TruncatedList } from './TruncatedList';
 export { TruncatedText } from './TruncatedText';
 export { UserAvatar } from './UserAvatar';
 export {
@@ -112,6 +111,7 @@ export {
   ToolbarButton as previewCandidate__ToolbarButton,
   ToolbarGroup as previewCandidate__ToolbarGroup,
 } from './Toolbar';
+export { TruncatedList as previewCandidate__TruncatedList } from './TruncatedList';
 
 /**
  * Deprecated

@@ -50,7 +50,6 @@ export * from './StringFormatter';
 export * from './TagOverflow';
 export * from './TagSet';
 export * from './Tearsheet';
-export * from './TruncatedList';
 export * from './TruncatedText';
 export * from './UserAvatar';
 export * from './WebTerminal';
@@ -81,6 +80,7 @@ export * as previewCandidate__InlineTip from './InlineTip';
 export * as previewCandidate__NonLinearReading from './NonLinearReading';
 export * as previewCandidate__SearchBar from './SearchBar';
 export * as previewCandidate__Toolbar from './Toolbar';
+export * as previewCandidate__TruncatedList from './TruncatedList';
 
 /**
  * Deprecated

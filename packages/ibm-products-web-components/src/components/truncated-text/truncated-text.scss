@@ -55,6 +55,10 @@ $block-class: #{$prefix}--truncated-text;
     }
   }
 
+  .#{$block-class}_content--closing {
+    -webkit-line-clamp: none;
+  }
+
   #{$carbon-prefix}-tooltip {
     display: inline-flex;
   }

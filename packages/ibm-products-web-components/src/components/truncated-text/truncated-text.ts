@@ -9,6 +9,7 @@
 import { html, LitElement } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/tooltip/index.js';
@@ -44,13 +45,13 @@ export class CDSTruncatedText extends LitElement {
    * The label on the collapse button.
    */
   @property({ attribute: 'collapse-label', type: String, reflect: true })
-  collapseLabel = 'View less';
+  collapseLabel = '';
 
   /**
    * The label on expand button.
    */
   @property({ attribute: 'expand-label', type: String, reflect: true })
-  expandLabel = 'View more';
+  expandLabel = '';
 
   /**
    * Unique identifier for the element.
@@ -175,6 +176,18 @@ export class CDSTruncatedText extends LitElement {
       this._textElement?.removeEventListener('transitionend', onTransitionEnd);
     };
     this._textElement?.addEventListener('transitionend', onTransitionEnd);
+
+    /**
+     * currently you cannot animate line-clamping
+     * you can however animate max-height
+     * this removes the clamping and then quickly adds it so you can see the ellipsis
+     */
+    if (this._isExpanded === false) {
+      this._textElement?.classList.add(`${blockClass}_content--closing`);
+      setTimeout(() => {
+        this._textElement?.classList.remove(`${blockClass}_content--closing`);
+      }, 100);
+    }
   }
 
   private _renderToggleButton() {
@@ -202,13 +215,17 @@ export class CDSTruncatedText extends LitElement {
 
   render() {
     // Apply different styles based on truncation method
-    const contentStyle =
-      this.type === 'tooltip' || !this.type
-        ? `--line-clamp: ${this._isExpanded ? 'none' : this.lines};`
-        : `max-block-size: ${this._maxHeight};`;
+    const contentStyle = {
+      ['--line-clamp']: this._isExpanded ? 'none' : this.lines,
+      ['max-block-size']: this.type === 'expand' ? this._maxHeight : 'none',
+    };
 
     const valueBody = html`
-      <div id=${this.id} class="${blockClass}_content" style=${contentStyle}>
+      <div
+        id=${this.id}
+        class="${blockClass}_content"
+        style=${styleMap(contentStyle)}
+      >
         ${this.value}
       </div>
     `;

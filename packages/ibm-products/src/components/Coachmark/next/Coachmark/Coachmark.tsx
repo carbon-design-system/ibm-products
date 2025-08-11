@@ -159,6 +159,13 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkProps>(
       }
     }, [children]);
 
+    useEffect(() => {
+      const el = triggerRef.current;
+      if (el) {
+        el.setAttribute('aria-expanded', String(!!open));
+      }
+    }, [open]);
+
     useIsomorphicEffect(() => {
       const { x = 0, y = 0 } = position ?? {};
       const el = internalRef.current;

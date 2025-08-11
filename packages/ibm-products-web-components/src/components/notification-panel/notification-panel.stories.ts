@@ -73,6 +73,7 @@ export const defaultTemplate = {
     todayText: 'Today',
     previousText: 'Previous',
     dismissAllLabel: 'Dismiss all',
+    emptyStateLabel: 'You do not have any notifications',
     doNotDisturbLabel: 'Do not disturb',
   },
   argTypes: {
@@ -96,6 +97,11 @@ export const defaultTemplate = {
       control: 'text',
       description:
         'Sets the label text for the "Dismiss all" button in the Notification panel',
+    },
+    emptyStateLabel: {
+      control: 'text',
+      description:
+        'Sets the empty state label text when there are no notifications',
     },
     doNotDisturbLabel: {
       control: 'text',
@@ -241,6 +247,7 @@ export const defaultTemplate = {
         today-text="${args.todayText}"
         previous-text="${args.previousText}"
         dismiss-all-label="${args.dismissAllLabel}"
+        empty-state-label="${args.emptyStateLabel}"
         donot-disturb-label="${args.doNotDisturbLabel}"
         date-time-locale="${args.dateTimeLocale}"
         @c4p-notification-dismiss-all=${dismissAllNotification}
@@ -305,6 +312,9 @@ export const defaultTemplate = {
               })}
             `
           : ''}
+        <!-- <div slot="empty-state">
+          <p>No data found</p>
+        </div> -->
         <c4p-notification-footer
           slot="footer"
           view-all-label="View all (${dataToday.length + dataPrevious.length})"

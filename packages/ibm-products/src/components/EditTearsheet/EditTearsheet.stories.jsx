@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import styles from './_storybook-styles.scss?inline';
-import { EditTearsheet } from './EditTearsheet';
+import { EditTearsheet } from './EditTearsheet.deprecated';
 import DocsPage from './EditTearsheet.docs-page';
 import { MultiFormEditTearsheet } from './preview-components/MultiFormEditTearsheet';
 import { slugArgTypes } from '../../global/js/story-parts/slug';

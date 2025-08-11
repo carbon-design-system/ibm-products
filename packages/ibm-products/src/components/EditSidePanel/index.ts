@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { EditSidePanel } from './EditSidePanel';
-export type { EditSidePanelProps } from './EditSidePanel';
+export { EditSidePanel } from './EditSidePanel.deprecated';
+export type { EditSidePanelProps } from './EditSidePanel.deprecated';

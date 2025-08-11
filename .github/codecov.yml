@@ -29,3 +29,8 @@ component_management:
 
 ignore:
   - '**/*.deprecated.*'
+  - 'Datagrid/'
+  - 'FilterPanel/'
+  - 'HttpErrors/'
+  - 'Nav/'
+  - 'StatusIndicator/'

@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { DecoratorDualButton } from './DecoratorDualButton';
+export { DecoratorDualButton } from './DecoratorDualButton.deprecated';

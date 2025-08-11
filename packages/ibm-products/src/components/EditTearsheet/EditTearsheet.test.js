@@ -9,7 +9,7 @@
 import React from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import { carbon, pkg } from '../../settings';
-import { EditTearsheet } from './EditTearsheet';
+import { EditTearsheet } from './EditTearsheet.deprecated';
 import { EditTearsheetForm } from './EditTearsheetForm';
 import uuidv4 from '../../global/js/utils/uuidv4';
 

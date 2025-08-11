@@ -20,7 +20,16 @@ module.exports = {
     '!packages/ibm-products/src/globals/js/utils/StoryDocsPage.js', // Contains bespoke storybook utilities that we want to move away from
     '!**/*.deprecated.*',
   ],
-  coveragePathIgnorePatterns: ['preview-components'],
+  coveragePathIgnorePatterns: [
+    'preview-components',
+    // for deprecated components that contain more than 1 js file
+    'Datagrid',
+    'DescriptionList',
+    'FilterPanel',
+    'HttpErrors',
+    'Nav',
+    'StatusIndicator',
+  ],
   resolver: require.resolve('./setup/resolver.js'),
   moduleFileExtensions: ['tsx', 'ts', 'jsx', 'js', 'json', 'node'],
   moduleNameMapper: {

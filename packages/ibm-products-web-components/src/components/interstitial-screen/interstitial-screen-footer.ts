@@ -57,6 +57,9 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   @property({ reflect: true })
   startButtonLabel = 'Get Started';
 
+  @property({ reflect: true })
+  slot = 'footer';
+
   /**
    * Enables support for asynchronous validation or user confirmation before proceeding
    * to the next interstitial step. When set to true, the component will wait for an external

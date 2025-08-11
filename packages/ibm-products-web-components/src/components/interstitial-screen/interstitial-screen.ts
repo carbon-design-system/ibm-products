@@ -65,9 +65,6 @@ class CDSInterstitialScreen extends SignalWatcher(
    * @ignore
    */
   @query('cds-modal-body') modalBody!: HTMLElement;
-  private header: Element | null = null;
-  private body: Element | null = null;
-  private footer: Element | null = null;
 
   private _wasOpen = false;
 
@@ -80,11 +77,6 @@ class CDSInterstitialScreen extends SignalWatcher(
     carouselAPI?.destroyEvents?.();
   }
   firstUpdated() {
-    // This has to do since cds-modal does not accept cds-body inside a slotted children.It will append it explicitly append cds body
-    this.header = this.querySelector(`${prefix}-interstitial-screen-header`);
-    this.body = this.querySelector(`${prefix}-interstitial-screen-body`);
-    this.footer = this.querySelector(`${prefix}-interstitial-screen-footer`);
-
     this.requestUpdate(); // Ensure re-render
     resetInterstitialDetailsSignal();
 
@@ -190,7 +182,9 @@ class CDSInterstitialScreen extends SignalWatcher(
   renderFullScreen() {
     return html`
       <div class="${blockClass}--container">
-        <slot></slot>
+        <slot name="header"></slot>
+        <slot name="body"></slot>
+        <slot name="footer"></slot>
       </div>
     `;
   }
@@ -203,12 +197,12 @@ class CDSInterstitialScreen extends SignalWatcher(
       size="lg"
       ?open="${this.open}"
     >
-      ${this.header ? html`${this.header}` : nothing}
+      <slot name="header"></slot>
       <cds-modal-body class="${blockClass}__body-container">
-        ${this.body ? html`${this.body}` : nothing}
+        <slot name="body"></slot>
       </cds-modal-body>
       <cds-modal-footer>
-        ${this.footer ? html`${this.footer}` : nothing}
+        <slot name="footer"></slot>
       </cds-modal-footer>
     </cds-modal>`;
   }

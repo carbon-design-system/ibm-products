@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/modal/index.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -31,6 +31,9 @@ const blockClass = `${prefix}--interstitial-screen`;
  */
 @customElement(`${prefix}-interstitial-screen-body`)
 class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
+  @property({ reflect: true })
+  slot = 'body';
+
   @state()
   stepType: 'single' | 'multi' = 'multi';
 
@@ -38,13 +41,13 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   private carouselElement = createRef<HTMLElement>();
 
   firstUpdated(): void {
-    const slot = this.shadowRoot?.querySelector('slot') as HTMLSlotElement;
+    const bodyItems = this.querySelectorAll(
+      'c4p-interstitial-screen-body-item'
+    );
 
-    const assigned = slot.assignedElements({ flatten: true });
-
-    if (assigned.length === 1) {
+    if (bodyItems.length === 1) {
       this.stepType = 'single';
-    } else if (assigned.length > 1) {
+    } else if (bodyItems.length > 1) {
       this.stepType = 'multi';
       //initialize carousel for multi-step
       this._initCarousel();
@@ -150,7 +153,6 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
       </div>
     `;
   }
-
   static styles = styles;
 
   /**

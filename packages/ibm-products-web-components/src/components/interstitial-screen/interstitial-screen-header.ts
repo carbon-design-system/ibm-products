@@ -34,7 +34,8 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
    */
   @property({ reflect: true, attribute: 'header-title' })
   headerTitle: string = '';
-
+  @property({ reflect: true })
+  slot = 'header';
   /**
    * Tooltip text and aria label for the Close button icon.
    */

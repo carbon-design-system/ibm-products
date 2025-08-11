@@ -99,7 +99,7 @@ describe('c4p-interstitial-screen', function () {
     );
 
     // Header
-    const header = el.shadowRoot?.querySelector(
+    const header = el?.querySelector(
       `${prefix}-interstitial-screen-header`
     ) as CDSInterstitialScreenHeader;
     const headerShadow = header.shadowRoot!;
@@ -112,7 +112,7 @@ describe('c4p-interstitial-screen', function () {
     expect(headerSubTitle).to.equal('Use case-specific sub title');
 
     // Body
-    const body = el.shadowRoot?.querySelector(
+    const body = el?.querySelector(
       `${prefix}-interstitial-screen-body`
     ) as CDSInterstitialScreenBody;
     const bodyItem = body?.querySelector(
@@ -125,7 +125,7 @@ describe('c4p-interstitial-screen', function () {
     expect(contentText).to.equal('body text');
 
     // Footer
-    const footer = el.shadowRoot?.querySelector(
+    const footer = el?.querySelector(
       `${prefix}-interstitial-screen-footer`
     ) as CDSInterstitialScreenFooter;
     const footerShadow = footer.shadowRoot!;
@@ -141,7 +141,7 @@ describe('c4p-interstitial-screen', function () {
       templateSingleStep({ open: true, fullscreen: false })
     )) as CDSInterstitialScreen;
     expect(el?.open).toBeTruthy();
-    const header = el.shadowRoot?.querySelector(
+    const header = el?.querySelector(
       `${prefix}-interstitial-screen-header`
     ) as CDSInterstitialScreenHeader;
     expect(header?.closeIconDescription).toBe('Close');
@@ -195,7 +195,7 @@ describe('c4p-interstitial-screen', function () {
     expect(event.type).to.equal('c4p-interstitial-opened');
 
     // Header
-    const header = el.shadowRoot?.querySelector(
+    const header = el?.querySelector(
       `${prefix}-interstitial-screen-header`
     ) as CDSInterstitialScreenHeader;
     const headerShadow = header.shadowRoot!;
@@ -220,7 +220,7 @@ describe('c4p-interstitial-screen', function () {
     expect(step1?.getAttribute('state')).to.equal('current');
 
     // check content is of step 1
-    const body = el.shadowRoot?.querySelector(
+    const body = el?.querySelector(
       `${prefix}-interstitial-screen-body`
     ) as CDSInterstitialScreenBody;
     const bodyItem = body?.querySelector(
@@ -231,89 +231,107 @@ describe('c4p-interstitial-screen', function () {
     expect(contentText).to.equal('Use case-specific heading 1');
   });
 
-  it('step navigation using footer action buttons ', async () => {
+  it('step navigation using footer action buttons', async () => {
     const el = await fixture<CDSInterstitialScreen>(
       templateMultiStep({ fullscreen: false, open: true })
     );
 
     // Header
-    const header = el.shadowRoot?.querySelector(
+    const header = el.querySelector(
       `${prefix}-interstitial-screen-header`
     ) as CDSInterstitialScreenHeader;
     const headerShadow = header.shadowRoot!;
 
-    //check step 1 is active
-    const step1 = headerShadow?.querySelector(`cds-progress-indicator`)
-      ?.children[0];
+    // Step 1 active
+    let stepIndicator = headerShadow.querySelector(`cds-progress-indicator`);
+    const step1 = stepIndicator?.children[0];
     expect(step1?.getAttribute('label')).to.equal('step 1');
     expect(step1?.getAttribute('state')).to.equal('current');
 
-    // check content is of step 1
-    const body = el.shadowRoot?.querySelector(
+    // Step 1 content check
+    const body = el.querySelector(
       `${prefix}-interstitial-screen-body`
     ) as CDSInterstitialScreenBody;
-    const bodyItem = body?.querySelector(
+    const bodyItem = body.querySelector(
       `${prefix}-interstitial-screen-body-item`
     ) as CDSInterstitialScreenBodyItem;
-    const contentText = bodyItem?.querySelector('h1')?.textContent?.trim();
-    expect(contentText).to.equal('Use case-specific heading 1');
+    expect(bodyItem?.querySelector('h1')?.textContent?.trim()).to.equal(
+      'Use case-specific heading 1'
+    );
 
-    //click on next button and verify step 2 is reached
-    const footer = el.shadowRoot?.querySelector(
+    // Footer
+    const footer = el.querySelector(
       `${prefix}-interstitial-screen-footer`
     ) as CDSInterstitialScreenFooter;
     const footerShadow = footer.shadowRoot!;
     const nextButton = footerShadow.querySelector(
       '.c4p--interstitial-screen--next-btn'
     ) as HTMLButtonElement;
-    nextButton?.click();
-    await new Promise((resolve) => setTimeout(resolve, 500));
 
-    // check step 2 is reached
-    const step2 = headerShadow?.querySelector(`cds-progress-indicator`)
-      ?.children[1];
+    // Go to Step 2
+    nextButton.click();
+    body
+      .querySelectorAll(`${prefix}-interstitial-screen-body-item`)[1]
+      ?.dispatchEvent(new Event('transitionend', { bubbles: true }));
+
+    await el.updateComplete;
+    await Promise.all([footer.updateComplete, header.updateComplete]);
+
+    stepIndicator = headerShadow.querySelector(`cds-progress-indicator`);
+    const step2 = stepIndicator?.children[1];
     expect(step2?.getAttribute('label')).to.equal('step 2');
     expect(step2?.getAttribute('state')).to.equal('current');
 
-    nextButton?.click();
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    // Go to Step 3
+    nextButton.click();
+    body
+      .querySelectorAll(`${prefix}-interstitial-screen-body-item`)[2]
+      ?.dispatchEvent(new Event('transitionend', { bubbles: true }));
 
-    // check step 3 is reached
-    const step3 = headerShadow?.querySelector(`cds-progress-indicator`)
-      ?.children[2];
+    await el.updateComplete;
+    await Promise.all([footer.updateComplete, header.updateComplete]);
+
+    stepIndicator = headerShadow.querySelector(`cds-progress-indicator`);
+    const step3 = stepIndicator?.children[2];
     expect(step3?.getAttribute('label')).to.equal('step 3');
     expect(step3?.getAttribute('state')).to.equal('current');
 
-    //check back button and start button is visible
+    // Back to Step 2
     const backButton = footerShadow.querySelector(
       '.c4p--interstitial-screen--prev-btn'
     ) as HTMLButtonElement;
     expect(backButton).to.exist;
 
-    //click back and go to prev step 2
-    backButton?.click();
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    backButton.click();
+    body
+      .querySelectorAll(`${prefix}-interstitial-screen-body-item`)[1]
+      ?.dispatchEvent(new Event('transitionend', { bubbles: true }));
+    await el.updateComplete;
+    await Promise.all([footer.updateComplete, header.updateComplete]);
 
-    // check step 2 is reached
+    stepIndicator = headerShadow.querySelector(`cds-progress-indicator`);
+    expect(stepIndicator?.children[1]?.getAttribute('state')).to.equal(
+      'current'
+    );
 
-    expect(step2?.getAttribute('label')).to.equal('step 2');
-    expect(step2?.getAttribute('state')).to.equal('current');
-
-    // next button clicked
-    nextButton?.click();
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    // Forward to Step 3 again
+    nextButton.click();
+    body
+      .querySelectorAll(`${prefix}-interstitial-screen-body-item`)[2]
+      ?.dispatchEvent(new Event('transitionend', { bubbles: true }));
+    await el.updateComplete;
+    await Promise.all([footer.updateComplete, header.updateComplete]);
 
     const startButton = footerShadow.querySelector(
       '.c4p--interstitial-screen--start-btn'
     ) as HTMLButtonElement;
     expect(startButton).to.exist;
 
-    //close component by clicking on start button
-    startButton?.click();
+    // Close component
+    startButton.click();
+    await el.updateComplete;
 
-    await new Promise((resolve) => setTimeout(resolve, 50));
-
-    expect(el?.open).to.be.false;
+    expect(el.open).to.be.false;
   });
 
   it('should render single step fullscreen variant', async () => {

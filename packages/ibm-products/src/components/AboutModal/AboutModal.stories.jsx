@@ -26,7 +26,6 @@ export default {
     docs: {
       page: mdx,
     },
-    controls: { sort: 'requiredFirst' },
     layout: 'padded',
   },
   argTypes: {
@@ -216,25 +215,22 @@ const Template = (args, context) => {
 Template.propTypes = AboutModal.propTypes;
 
 const commonArgs = {
+  copyrightText: 'Copyright © IBM Corp. 2020, 2023',
   closeIconDescription: 'Close',
   version: 'Version 0.0.0',
-  copyrightText: 'Copyright © IBM Corp. 2020, 2023',
 };
 
 export const Default = Template.bind({});
 Default.args = {
   title: 1,
-  links: 0,
-  content: 0,
-  additionalInfo: 0,
   ...commonArgs,
 };
 
 export const withAdditionalContent = Template.bind({});
 withAdditionalContent.args = {
-  title: 2,
-  links: 3,
-  content: 2,
   additionalInfo: 1,
+  content: 2,
+  links: 3,
+  title: 2,
   ...commonArgs,
 };

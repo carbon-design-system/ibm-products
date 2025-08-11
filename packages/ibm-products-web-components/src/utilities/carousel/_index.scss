@@ -92,7 +92,7 @@ $animateTime: $duration-moderate-02;
 }
 
 /// Optional: Universal (Lit + React)
-@mixin carouselStyles {
+@mixin carousel {
   @include keyframes;
   @include wrapperStyles;
   @include viewStyles;

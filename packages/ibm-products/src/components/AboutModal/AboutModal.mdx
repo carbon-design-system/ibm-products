@@ -25,12 +25,12 @@ The about modal is triggered by a user’s action which appears on top of the ma
 The purpose of this modal should be immediately apparent to the user, with a clear and obvious path to completion.
 
 <Canvas
-  of={stories.aboutModal}
+  of={stories.Default}
   additionalActions={[
       {
         title: 'Open in Stackblitz',
         onClick: () => stackblitzPrefillConfig({
-          'story': stories.aboutModal,
+          'story': stories.Default,
           'styles': stories.default.parameters.styles
       }),
       },
@@ -41,12 +41,12 @@ The purpose of this modal should be immediately apparent to the user, with a cle
 ### With additional content
 
 <Canvas
-  of={stories.aboutModalWithAllPropsSet}
+  of={stories.withAdditionalContent}
   additionalActions={[
       {
         title: 'Open in Stackblitz',
         onClick: () => stackblitzPrefillConfig({
-          'story': stories.aboutModalWithAllPropsSet,
+          'story': stories.withAdditionalContent,
           'styles': stories.default.parameters.styles
       }),
       },

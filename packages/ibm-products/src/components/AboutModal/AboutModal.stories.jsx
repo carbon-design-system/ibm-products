@@ -27,6 +27,7 @@ export default {
       page: mdx,
     },
     controls: { sort: 'requiredFirst' },
+    layout: 'padded',
   },
   argTypes: {
     additionalInfo: {
@@ -220,8 +221,8 @@ const commonArgs = {
   copyrightText: 'Copyright © IBM Corp. 2020, 2023',
 };
 
-export const aboutModal = Template.bind({});
-aboutModal.args = {
+export const Default = Template.bind({});
+Default.args = {
   title: 1,
   links: 0,
   content: 0,
@@ -229,8 +230,8 @@ aboutModal.args = {
   ...commonArgs,
 };
 
-export const aboutModalWithAllPropsSet = Template.bind({});
-aboutModalWithAllPropsSet.args = {
+export const withAdditionalContent = Template.bind({});
+withAdditionalContent.args = {
   title: 2,
   links: 3,
   content: 2,

@@ -100,10 +100,10 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   @query('slot[name="previous"]')
   private previousSlot!: HTMLSlotElement;
   @state() // Use @state decorator
-  private _hasTodayContent = true;
+  private _hasTodayContent = false;
 
   @state() // Use @state decorator
-  private _hasPreviousContent = true;
+  private _hasPreviousContent = false;
 
   @queryAssignedElements({ slot: 'today', flatten: true })
   _todayElements!: Array<HTMLElement>;

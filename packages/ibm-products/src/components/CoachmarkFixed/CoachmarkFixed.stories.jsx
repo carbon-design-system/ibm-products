@@ -47,7 +47,7 @@ export default {
 const Template = (args) => {
   const theme = getSelectedCarbonTheme();
   return (
-    <CoachmarkFixed {...args} theme={theme}>
+    <CoachmarkFixed {...args} theme={theme} closeIconDescription="Close">
       <CoachmarkOverlayElements
         closeButtonLabel="Done"
         nextButtonText="Next"

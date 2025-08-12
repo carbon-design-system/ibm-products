@@ -39,7 +39,7 @@ const defaults = {
   overlayKind: 'tooltip',
   theme: 'light',
   isOpenByDefault: false,
-  closeIconDescription: 'Close',
+  closeIconDescription: '',
 };
 
 export interface CoachmarkProps {

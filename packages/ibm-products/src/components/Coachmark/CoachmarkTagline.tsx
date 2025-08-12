@@ -65,8 +65,8 @@ export let CoachmarkTagline = React.forwardRef<
     ref
   ) => {
     const coachmark = useCoachmark();
-    const closeIconDesc =
-      useCoachmark()?.closeIconDescription ?? closeIconDescription;
+    const contextCloseIconDescription = useCoachmark()?.closeIconDescription;
+    const closeIconDesc = closeIconDescription ?? contextCloseIconDescription;
     return (
       <div
         {

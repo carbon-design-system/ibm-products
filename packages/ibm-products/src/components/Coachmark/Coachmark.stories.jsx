@@ -98,7 +98,7 @@ const Template = (args) => {
   });
   const theme = getSelectedCarbonTheme();
   const content = (
-    <Coachmark {...args} theme={theme}>
+    <Coachmark closeIconDescription="Close" {...args} theme={theme}>
       <CoachmarkOverlayElements closeButtonLabel="Done">
         <CoachmarkOverlayElement
           title="Hello World"

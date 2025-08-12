@@ -73,6 +73,10 @@ export interface CoachmarkFixedProps {
    * Determines the theme of the component.
    */
   theme?: 'light' | 'dark';
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
 }
 
 const defaults = {
@@ -99,6 +103,7 @@ export let CoachmarkFixed = React.forwardRef<
       portalTarget,
       tagline = defaults.tagline,
       theme = defaults.theme,
+      closeIconDescription,
       // Collect any other property values passed in.
       ...rest
     },
@@ -175,8 +180,7 @@ export let CoachmarkFixed = React.forwardRef<
       targetRect: targetRect,
       targetOffset: targetOffset,
       isOpen: isOpen,
-      tacos: 'tacos',
-      closeIconDescription: 'Close',
+      closeIconDescription: closeIconDescription,
     };
 
     // instead of toggling on/off,

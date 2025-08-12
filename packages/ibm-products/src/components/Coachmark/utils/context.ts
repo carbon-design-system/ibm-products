@@ -26,7 +26,6 @@ export interface CoachmarkContextType {
   };
   isOpen: boolean;
   closeIconDescription?: string;
-  tacos?: string;
 }
 
 export const CoachmarkContext = createContext<CoachmarkContextType | null>(

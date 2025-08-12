@@ -98,7 +98,7 @@ const Template = (args) => {
   });
   const theme = getSelectedCarbonTheme();
   const content = (
-    <Coachmark closeIconDescription="Close" {...args} theme={theme}>
+    <Coachmark {...args} theme={theme}>
       <CoachmarkOverlayElements closeButtonLabel="Done">
         <CoachmarkOverlayElement
           title="Hello World"
@@ -134,6 +134,7 @@ export const tooltip = Template.bind({});
 tooltip.args = {
   theme: 'dark',
   align: 'bottom',
+  closeIconDescription: 'Close',
   positionTune: { x: 0, y: 0 },
   target: (
     <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
@@ -144,6 +145,7 @@ export const floating = Template.bind({});
 floating.args = {
   theme: 'dark',
   align: 'bottom',
+  closeIconDescription: 'Close',
   overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
   target: (
     <CoachmarkButton

@@ -93,6 +93,10 @@ interface CoachmarkStackProps {
    * Label's tooltip position
    */
   tooltipAlign?: TooltipAlignment;
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
 }
 
 const defaults = {
@@ -134,6 +138,7 @@ export let CoachmarkStack = React.forwardRef<
       theme = defaults.theme,
       title,
       tooltipAlign,
+      closeIconDescription,
       ...rest
     },
     ref
@@ -223,7 +228,7 @@ export let CoachmarkStack = React.forwardRef<
         onClick: () => handleClose(false),
       },
       isOpen: isOpen,
-      closeIconDescription: 'Close',
+      closeIconDescription,
     };
     useEffect(() => {
       mountedRef.current = true;
@@ -372,6 +377,11 @@ CoachmarkStack.propTypes = {
    */
   closeButtonLabel: PropTypes.string,
 
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription: PropTypes.string,
+
   // Pass through to CoachmarkStackHome
   /**
    * The description of the Coachmark.
@@ -408,7 +418,6 @@ CoachmarkStack.propTypes = {
    * Determines the theme of the component.
    */
   theme: PropTypes.oneOf(['light', 'dark']),
-
   /**
    * The title of the Coachmark.
    */

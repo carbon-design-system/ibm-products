@@ -47,7 +47,7 @@ export default {
 const Template = (args) => {
   const theme = getSelectedCarbonTheme();
   return (
-    <CoachmarkFixed {...args} theme={theme} closeIconDescription="Close">
+    <CoachmarkFixed {...args} theme={theme}>
       <CoachmarkOverlayElements
         closeButtonLabel="Done"
         nextButtonText="Next"
@@ -84,4 +84,5 @@ coachmarkFixed.args = {
   onClose: () => console.log('CLOSE'),
   portalTarget: '#root:not([hidden="true"])',
   className: 'myCoachmarkFixed',
+  closeIconDescription: 'Close',
 };

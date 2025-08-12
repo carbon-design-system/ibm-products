@@ -180,7 +180,7 @@ export let CoachmarkFixed = React.forwardRef<
       targetRect: targetRect,
       targetOffset: targetOffset,
       isOpen: isOpen,
-      closeIconDescription: closeIconDescription,
+      closeIconDescription,
     };
 
     // instead of toggling on/off,
@@ -270,6 +270,10 @@ CoachmarkFixed.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription: PropTypes.string,
+  /**
    * Function to call when the Coachmark closes.
    */
   onClose: PropTypes.func,
@@ -284,11 +288,11 @@ CoachmarkFixed.propTypes = {
    * element is hidden or component is unmounted, the Coachmark will disappear.
    */
   portalTarget: PropTypes.string,
+
   /**
    * The tagline title which will be fixed to the bottom right of the window and will serve as the display trigger.
    */
   tagline: PropTypes.string.isRequired,
-
   /**
    * Determines the theme of the component.
    */

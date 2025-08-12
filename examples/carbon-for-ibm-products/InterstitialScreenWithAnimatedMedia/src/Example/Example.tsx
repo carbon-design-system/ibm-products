@@ -192,11 +192,10 @@ export const Example = () => {
         Show Interstitial modal
       </Button>
       <InterstitialScreen
-        isOpen={showInterstitialModal}
+        open={showInterstitialModal}
         onClose={() => {
           setShowInterstitialModal(false);
         }}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
         isFullScreen={false}
       >
         <InterstitialScreen.Header

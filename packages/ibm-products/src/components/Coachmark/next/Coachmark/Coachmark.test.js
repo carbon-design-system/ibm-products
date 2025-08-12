@@ -25,19 +25,10 @@ const dataTestId = uuidv4();
 const renderCoachmark = ({ ...rest } = {}) =>
   render(
     <Coachmark {...rest}>
-      {/* <CoachmarkBeacon
+      <CoachmarkBeacon
         id="CoachmarkBtn"
         label="Show information"
-      ></CoachmarkBeacon> */}
-      <Button
-        id="CoachmarkBtn"
-        kind="tertiary"
-        size="md"
-        label="Show information"
-        renderIcon={Crossroads}
-      >
-        Show information
-      </Button>
+      ></CoachmarkBeacon>
       <Coachmark.Content highContrast={true}>
         <Coachmark.Content.Header
           closeIconDescription="Close"
@@ -60,7 +51,7 @@ const renderCoachmarkFloating = ({ ...rest } = {}) =>
         kind="tertiary"
         size="md"
         label="Show information"
-        //renderIcon={Crossroads}
+        renderIcon={Crossroads}
       >
         Show information
       </Button>
@@ -86,8 +77,14 @@ const isCoachmarkVisible = () => {
 };
 
 describe(componentName, () => {
+  const originalRAF = global.requestAnimationFrame;
   beforeEach(() => {
+    global.requestAnimationFrame = (callback) => setTimeout(callback, 0);
     jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    global.requestAnimationFrame = originalRAF;
   });
   it('renders a component Coachmark', () => {
     renderCoachmark({ 'data-testid': dataTestId });
@@ -106,7 +103,7 @@ describe(componentName, () => {
     renderCoachmark({
       'data-testid': dataTestId,
     });
-    screen.getByTestId(dataTestId);
+    expect(screen.getByTestId(dataTestId)).toBeTruthy();
   });
 
   it('forwards a ref to an appropriate node', () => {
@@ -159,15 +156,32 @@ describe(componentName, () => {
     expect(onCloseMock).toHaveBeenCalled();
   });
 
-  it('renders the Drag Icon and DragIconDescription', async () => {
+  it('changes the beacon position while using position prop ', async () => {
     renderCoachmark({
+      'data-testid': dataTestId,
+      open: true,
+      position: { x: 151, y: 155 },
+    });
+    const element = screen.getByTestId(dataTestId);
+    expect(element).toBeTruthy();
+    await waitFor(() => {
+      expect(element.style.transform).toBe('translate(151px, 155px)');
+    });
+  });
+
+  it('renders the Drag Icon and DragIconDescription in floating variant', async () => {
+    renderCoachmarkFloating({
       'data-testid': dataTestId,
       open: true,
       floating: true,
     });
     expect(isCoachmarkVisible()).toBeTruthy();
     const dragIconDescription = 'Drag';
-    const tooltip = screen.getByText(dragIconDescription);
-    expect(tooltip).toBeInTheDocument();
+    const dragTooltip = screen.getByText(dragIconDescription);
+    expect(dragTooltip).toBeInTheDocument();
+    const dragButton = screen.getByRole('button', {
+      name: dragIconDescription,
+    });
+    expect(dragButton).toBeInTheDocument();
   });
 });

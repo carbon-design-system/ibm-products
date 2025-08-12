@@ -312,9 +312,6 @@ export const defaultTemplate = {
               })}
             `
           : ''}
-        <!-- <div slot="empty-state">
-          <p>No data found</p>
-        </div> -->
         <c4p-notification-footer
           slot="footer"
           view-all-label="View all (${dataToday.length + dataPrevious.length})"

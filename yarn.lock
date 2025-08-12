@@ -1815,10 +1815,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon-labs/react-resizer@npm:^0.5.0":
-  version: 0.5.0
-  resolution: "@carbon-labs/react-resizer@npm:0.5.0"
-  checksum: 10/95f465c5ee04afeccd891db320255bf5f0f4899a302215e4e24173cd5be0003bbf183d30a80940b45c08693bbb11a7f15a00f97549d65eb97ad53f5806383b65
+"@carbon-labs/react-resizer@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "@carbon-labs/react-resizer@npm:0.6.0"
+  checksum: 10/99c93b675c52399bba1b67c11d1581505716303a28bdc7d3922ecbbdebf436ca92ac8990c476c7144ce4c75a6c2e72eacea8b7559580aea6728bfd4780190dcc
   languageName: node
   linkType: hard
 
@@ -1878,22 +1878,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/ibm-products-styles@npm:^2.67.0-rc.0":
-  version: 2.67.0
-  resolution: "@carbon/ibm-products-styles@npm:2.67.0"
-  dependencies:
-    "@ibm/telemetry-js": "npm:^1.9.1"
-  peerDependencies:
-    "@carbon/grid": ^11.38.0
-    "@carbon/layout": ^11.36.0
-    "@carbon/motion": ^11.30.0
-    "@carbon/themes": ^11.55.0
-    "@carbon/type": ^11.42.0
-  checksum: 10/31f786e612f05e13b222263192dc3d347e43f3394ca9b67c3a3c80115f3bb17c3bb21a1cf6fbfa67ca0d9b17fb4a6e43c8fd640548d95dc241fc63ced23c6e92
-  languageName: node
-  linkType: hard
-
-"@carbon/ibm-products-styles@npm:^2.68.0-rc.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@npm:^2.68.0, @carbon/ibm-products-styles@npm:^2.68.1, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -1903,7 +1888,7 @@ __metadata:
     cross-env: "npm:^10.0.0"
     glob: "npm:^11.0.1"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.31.0-rc.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.31.0"
     jest-environment-jsdom: "npm:^29.7.0"
     npm-run-all: "npm:^4.1.5"
     rimraf: "npm:^6.0.1"
@@ -1923,7 +1908,7 @@ __metadata:
   resolution: "@carbon/ibm-products-web-components@workspace:packages/ibm-products-web-components"
   dependencies:
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
-    "@carbon/ibm-products-styles": "npm:^2.68.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.68.1"
     "@carbon/icon-helpers": "npm:^10.61.0"
     "@carbon/icons": "npm:^11.62.0"
     "@carbon/motion": "npm:^11.30.0"
@@ -1984,9 +1969,9 @@ __metadata:
     "@babel/preset-react": "npm:^7.26.3"
     "@babel/preset-typescript": "npm:^7.26.0"
     "@babel/runtime": "npm:^7.26.10"
-    "@carbon-labs/react-resizer": "npm:^0.5.0"
+    "@carbon-labs/react-resizer": "npm:^0.6.0"
     "@carbon/feature-flags": "npm:^0.28.1"
-    "@carbon/ibm-products-styles": "npm:^2.68.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.68.1"
     "@carbon/telemetry": "npm:^0.1.0"
     "@carbon/utilities": "npm:^0.7.0"
     "@carbon/utilities-react": "npm:0.10.0"
@@ -2008,7 +1993,7 @@ __metadata:
     "@storybook/react-vite": "npm:^9.0.13"
     "@types/react-table": "npm:^7.7.20"
     babel-plugin-dev-expression: "npm:^0.2.3"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.30.0-rc.0"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.30.0"
     chalk: "npm:^4.1.2"
     change-case: "npm:5.4.4"
     classnames: "npm:^2.5.1"
@@ -2017,7 +2002,7 @@ __metadata:
     fs-extra: "npm:^11.3.0"
     glob: "npm:^11.0.1"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.31.0-rc.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.31.0"
     jest-environment-jsdom: "npm:^29.7.0"
     namor: "npm:^1.1.2"
     npm-run-all: "npm:^4.1.5"
@@ -8439,7 +8424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-ibm-cloud-cognitive@npm:^0.30.0-rc.0, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
+"babel-preset-ibm-cloud-cognitive@npm:^0.30.0, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive"
   dependencies:
@@ -13274,7 +13259,7 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.26.10"
     "@babel/preset-react": "npm:^7.26.3"
     "@carbon/grid": "npm:^11.38.0"
-    "@carbon/ibm-products-styles": "npm:^2.67.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.68.0"
     "@carbon/layout": "npm:^11.36.0"
     "@carbon/motion": "npm:^11.30.0"
     "@carbon/react": "npm:^1.85.1"
@@ -14336,7 +14321,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@npm:^1.31.0-rc.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@npm:^1.31.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:
@@ -14351,7 +14336,7 @@ __metadata:
     accessibility-checker: "npm:^4.0.7"
     axe-core: "npm:^4.10.3"
     babel-jest: "npm:^29.7.0"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.30.0-rc.0"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.30.0"
     chalk: "npm:^4.1.2"
     identity-obj-proxy: "npm:^3.0.0"
     jest-circus: "npm:^29.7.0"

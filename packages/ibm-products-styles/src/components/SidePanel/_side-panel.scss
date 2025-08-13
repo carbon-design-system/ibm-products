@@ -351,6 +351,11 @@ $clabs-prefix: 'clabs';
     }
   }
 
+  // Remove min‑block‑size when the header contains no child elements to prevent unnecessary blank space
+  .#{$block-class}__header:empty {
+    min-block-size: unset;
+  }
+
   &.#{$block-class}:has(.#{$block-class}__action-toolbar),
   &.#{$block-class}--has-action-toolbar,
   &.#{$block-class}--has-slug,

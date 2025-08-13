@@ -103,7 +103,9 @@ export const Default = {
               </cds-breadcrumb-item>
             </cds-breadcrumb>
             <div slot="content-actions">
-              <cds-button size="md">Button</cds-button>
+              <cds-button size="md"
+                >Primary action ${Add16({ slot: 'icon' })}</cds-button
+              >
             </div>
             <cds-icon-button
               slot="page-actions"
@@ -141,6 +143,11 @@ export const Default = {
               ship faster, scale efficiently, and stay in control every step of
               the way.
             </c4p-page-header-content-text>
+            <div slot="page-actions">
+              <cds-button size="md"
+                >Primary action ${Add16({ slot: 'icon' })}</cds-button
+              >
+            </div>
           </c4p-page-header-content>
           <c4p-page-header-tabs>
             <c4p-page-header-scroller slot="scroller">

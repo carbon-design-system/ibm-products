@@ -10,10 +10,12 @@ import React, { useState } from 'react';
 import {
   Button,
   Column,
+  ContentSwitcher,
   Grid,
   InlineNotification,
   RadioButtonGroup,
   RadioButton,
+  Switch,
   TextInput,
   Toggle,
   NumberInput,
@@ -78,7 +80,7 @@ export const MultiStepTearsheet = (
   const [isInvalid, setIsInvalid] = useState(false);
   const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
     useState(false);
-
+  const [selIndex, setSelIndex] = useState(0);
   const clearCreateData = () => {
     setStepOneTextInputValue('');
     setTopicDescriptionValue('');
@@ -123,7 +125,6 @@ export const MultiStepTearsheet = (
         decorator={decorator && sampleDecorator(decorator)}
         {...rest}
         hasError={hasSubmitError}
-        selectorPrimaryFocus="#tearsheet-multi-step-story-text-input-multi-step-1"
       >
         <CreateTearsheetStep
           onNext={() => {
@@ -154,6 +155,29 @@ export const MultiStepTearsheet = (
         >
           <Grid>
             <Column xlg={8} lg={8} md={8} sm={4}>
+              <div>
+                <ContentSwitcher
+                  onChange={({ name }) => {
+                    name === 'one' ? setSelIndex(0) : setSelIndex(1);
+                  }}
+                  selectedIndex={selIndex}
+                  selectionMode="automatic"
+                >
+                  <Switch name="one" text="First section" />
+                  <Switch name="two" text="Second section" />
+                </ContentSwitcher>
+                {selIndex === 0 ? (
+                  <>
+                    <p>first section</p>
+                    {/* <TextInput /> */}
+                  </>
+                ) : (
+                  <>
+                    <p>second section</p>
+                    {/* <TextInput /> */}
+                  </>
+                )}
+              </div>
               <TextInput
                 labelText="Topic name"
                 placeholder="Enter topic name"

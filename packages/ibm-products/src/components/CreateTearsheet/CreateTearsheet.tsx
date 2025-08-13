@@ -264,7 +264,7 @@ export let CreateTearsheet = forwardRef(
       currentStep,
       blockClass,
       onMount,
-      firstFocusElement,
+      firstFocusElement: firstFocusElement || selectorPrimaryFocus,
     });
     useValidCreateStepCount(stepData.length, componentName);
     useResetCreateComponent({

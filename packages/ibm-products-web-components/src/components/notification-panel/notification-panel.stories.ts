@@ -27,6 +27,7 @@ import {
 } from './_story-assets/NotificationsPanel_data';
 const blockClassNotification = `${prefix}--notifications-panel__notification`;
 const storyBlockClass = `${prefix}--notifications-panel__story`;
+const blockClass = `${prefix}--notifications-panel`;
 
 const dateTimeLocaleOptions = {
   undefined: undefined,
@@ -66,7 +67,7 @@ const dateTimeLocaleOptions = {
   vi: 'vi',
 };
 
-export const defaultTemplate = {
+const defaultTemplate = {
   args: {
     titleText: 'Notifications',
     open: true,
@@ -330,8 +331,39 @@ export const defaultTemplate = {
     `;
   },
 };
+
+async function queryShadowElement(hostSelector, targetSelector) {
+  const host = document.querySelector(hostSelector);
+  await new Promise((resolve) => {
+    const checkShadow = () => {
+      if (host && host.shadowRoot) {
+        resolve(true);
+      } else {
+        requestAnimationFrame(checkShadow);
+      }
+    };
+    checkShadow();
+  });
+  return host.shadowRoot.querySelector(targetSelector);
+}
+
 const meta = {
   title: 'Components/NotificationPanel',
+};
+
+export const Default = {
+  ...defaultTemplate,
+};
+
+export const EmptyState = {
+  ...defaultTemplate,
+  play: async ({ userEvent }) => {
+    const dismissAllButton = await queryShadowElement(
+      'c4p-notification-panel',
+      `.${blockClass}__dismiss-button`
+    );
+    await userEvent.click(dismissAllButton);
+  },
 };
 
 export default meta;

@@ -94,7 +94,7 @@ const Template = (args, context) => {
     if (value === 0) {
       return <>IBM Product name</>;
     } else if (value === 1) {
-      return <>IBM Product name example that is longer than one line'</>;
+      return <>IBM Product name example that is longer than one line</>;
     } else value === 2;
     {
       return (
@@ -222,6 +222,9 @@ const commonArgs = {
 
 export const Default = Template.bind({});
 Default.args = {
+  additionalInfo: 0,
+  content: 0,
+  links: 0,
   title: 1,
   ...commonArgs,
 };

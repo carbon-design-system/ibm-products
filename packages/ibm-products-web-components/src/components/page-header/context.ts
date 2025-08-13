@@ -14,4 +14,5 @@ export const pageHeaderContext = createContext({
   breadcrumbOffset: 0,
   fullyCollapsed: false,
   root: null,
+  titleClipped: false,
 });

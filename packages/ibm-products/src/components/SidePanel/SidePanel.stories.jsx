@@ -995,6 +995,7 @@ WithoutTitle.args = {
   ...defaultStoryProps,
   actions: 0,
   title: null,
+  subtitle: null,
   includeOverlay: true,
   'aria-label': 'SidePanel without title',
 };

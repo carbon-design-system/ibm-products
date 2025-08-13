@@ -37,9 +37,12 @@ import {
   IconButton,
   BreadcrumbItemProps,
   BreadcrumbItem,
+  BreadcrumbProps,
+  Breadcrumb,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import { blockClass } from '../PageHeaderUtils';
+import { createOverflowHandler as localOverflowHandler } from './overflowHandler';
 import { createOverflowHandler } from '@carbon/utilities';
 import { TYPES } from '@carbon/react/es/components/Tag/Tag';
 import { useOverflowItems } from '../../../global/js/hooks/useOverflowItems';
@@ -48,6 +51,7 @@ import { ChevronUp } from '@carbon/react/icons';
 import { PageHeaderContext, PageHeaderRefs, usePageHeader } from './context';
 import { getHeaderOffset, scrollableAncestor } from './utils';
 import { pkg } from '../../../settings';
+import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 
 /**
  * ----------
@@ -61,6 +65,8 @@ interface PageHeaderProps {
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
     const [refs, setRefs] = useState<PageHeaderRefs>({});
+    const [pageActionsInstance, setPageActionsInstance] =
+      useState<React.ReactNode | null>(null);
     const tempRef = useRef<HTMLDivElement>(null);
     const componentRef = (ref ?? tempRef) as RefObject<HTMLDivElement>;
     const classNames = classnames(
@@ -73,9 +79,12 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
 
     // Used to set CSS custom property with PageHeaderContent height to be used
     // for sticky positioning
-    useEffect(() => {
-      if (componentRef?.current && refs?.contentRef?.current) {
-        const pageHeaderContentHeight = refs?.contentRef?.current?.offsetHeight;
+    useResizeObserver(componentRef, () => {
+      if (componentRef?.current) {
+        // It's possible we don't have the content element
+        // in which case we set it's height to 0
+        const pageHeaderContentHeight =
+          refs?.contentRef?.current?.offsetHeight ?? 0;
         const totalHeaderOffset = getHeaderOffset(componentRef?.current);
         componentRef?.current.style.setProperty(
           `--${pkg.prefix}-page-header-header-top`,
@@ -86,11 +95,11 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
           `${totalHeaderOffset}px`
         );
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [refs]);
+    });
 
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [titleClipped, setTitleClipped] = useState(false);
+    const [contentActionsClipped, setContentActionsClipped] = useState(false);
 
     // Intersection Observer setup, tracks if the PageHeaderContent is visible on page.
     // If it is not visible, we should set fully collapsed to true so that the
@@ -136,12 +145,33 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         }
       );
 
+      if (!refs?.contentActions?.current) {
+        return;
+      }
+      const contentActionsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target === refs?.contentActions!.current) {
+              setContentActionsClipped(!entry.isIntersecting);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: `${(predefinedContentPadding + totalTitleHeight + totalHeaderOffset + 48) * -1}px 0px 0px 0px`,
+          threshold: 0.1,
+        }
+      );
+
       if (refs?.contentRef.current) {
         contentObserver.observe(refs?.contentRef.current);
       }
 
       if (refs?.titleRef.current) {
         titleObserver.observe(refs?.titleRef.current);
+      }
+      if (refs?.contentActions.current) {
+        contentActionsObserver.observe(refs?.contentActions.current);
       }
 
       return () => {
@@ -152,12 +182,25 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         if (!refs?.titleRef?.current) {
           return;
         }
-        contentObserver.unobserve(refs?.titleRef.current);
+        titleObserver.unobserve(refs?.titleRef.current);
+        if (!refs?.contentActions?.current) {
+          return;
+        }
+        contentActionsObserver.unobserve(refs?.contentActions.current);
       };
     }, [refs, componentRef]);
+
     return (
       <PageHeaderContext.Provider
-        value={{ refs, setRefs, fullyCollapsed, titleClipped }}
+        value={{
+          refs,
+          setRefs,
+          fullyCollapsed,
+          pageActionsInstance,
+          setPageActionsInstance,
+          titleClipped,
+          contentActionsClipped,
+        }}
       >
         <div className={classNames} ref={componentRef} {...other}>
           {children}
@@ -218,6 +261,8 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
   }: PageHeaderBreadcrumbBarProps,
   ref
 ) {
+  const { pageActionsInstance: globalActions, contentActionsClipped } =
+    usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__breadcrumb-bar`]: true,
@@ -229,6 +274,10 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
 
   const contentActionsClasses = classnames({
     [`${blockClass}__breadcrumb__content-actions`]: !contentActionsFlush,
+    [`${blockClass}__breadcrumb__content-actions-with-global-actions`]:
+      !!globalActions,
+    [`${blockClass}__breadcrumb__content-actions-with-global-actions--show`]:
+      contentActionsClipped,
   });
 
   return (
@@ -305,7 +354,7 @@ const PageHeaderContent = React.forwardRef<
 ) {
   const contentRef = useRef<HTMLDivElement>(null);
   const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
-  const { setRefs } = usePageHeader();
+  const { setRefs, setPageActionsInstance } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__content`]: true,
@@ -320,6 +369,13 @@ const PageHeaderContent = React.forwardRef<
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (pageActions) {
+      setPageActionsInstance(pageActions);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageActions]);
 
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -442,9 +498,13 @@ const PageHeaderContentPageActions = ({
   actions,
   ...other
 }: PageHeaderContentPageActionsProps) => {
+  const { setRefs, contentActionsClipped } = usePageHeader();
   const classNames = classnames(
+    `${blockClass}__content__page-actions`,
     {
-      [`${blockClass}__content__page-actions`]: true,
+      // Revisit this:
+      // May want to only add this class if there are content actions in the breadcrumb bar as well
+      [`${blockClass}__content__page-actions--clipped`]: contentActionsClipped,
     },
     className
   );
@@ -472,6 +532,11 @@ const PageHeaderContentPageActions = ({
       );
     }
   }, [menuButtonVisibility]);
+
+  useEffect(() => {
+    setRefs((prev) => ({ ...prev, contentActions: containerRef }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current || !Array.isArray(actions)) {
@@ -913,6 +978,7 @@ const PageHeaderTitleBreadcrumb = forwardRef<
   const { titleClipped, refs } = usePageHeader();
   return (
     <BreadcrumbItem
+      ref={ref}
       isCurrentPage
       {...other}
       className={classnames(
@@ -921,11 +987,112 @@ const PageHeaderTitleBreadcrumb = forwardRef<
         {
           [`${pkg.prefix}--page-header-title-breadcrumb-show`]:
             titleClipped && refs?.titleRef,
+          [`${pkg.prefix}--page-header-title-breadcrumb-show__with-content-element`]:
+            !!refs?.contentRef,
+          [`${pkg.prefix}--page-header-title-breadcrumb-show__without-content-element`]:
+            !refs?.contentRef,
         }
       )}
     >
       {children}
     </BreadcrumbItem>
+  );
+});
+
+interface PageHeaderBreadcrumbOverflowProps extends BreadcrumbProps {
+  renderOverflowBreadcrumb?: (
+    hiddenBreadcrumbs: HTMLElement[]
+  ) => React.ReactElement<BreadcrumbItemProps>;
+}
+// This component is a wrapper for the Breadcrumb, and renders breadcrumb items as children
+// including the overflow breadcrumb item. The overflowHandler determines what elements
+// are visible and hidden and passes the hidden elements back to the render prop used
+// to display the overflow breadcrumb
+const PageHeaderBreadcrumbOverflow = forwardRef<
+  HTMLElement,
+  PageHeaderBreadcrumbOverflowProps
+>(({ renderOverflowBreadcrumb, className, children, ...other }, ref) => {
+  const [hiddenBreadcrumbs, setHiddenBreadcrumbs] = React.useState<
+    HTMLElement[]
+  >([]);
+  const fallbackRef = useRef<Breadcrumb | null>(null);
+  const componentRef = (ref ?? fallbackRef) as RefObject<Breadcrumb>;
+
+  // Initialize overflow resize handler
+  const carbonPrefix = usePrefix();
+  useEffect(() => {
+    if (!componentRef) {
+      return;
+    }
+    const breadcrumbList = componentRef?.current.querySelector(
+      `.${carbonPrefix}--breadcrumb`
+    ) as HTMLOListElement;
+    localOverflowHandler({
+      container: breadcrumbList,
+      onChange: (_, hidden) => {
+        setHiddenBreadcrumbs(hidden);
+      },
+    });
+    // Don't want ref or carbon prefix in dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const renderChildren = () => {
+    // Only BreadcrumbItems and TitleBreadcrumbs are valid children
+    const filteredBreadcrumbs = React.Children.toArray(children).filter(
+      (child) => {
+        if (React.isValidElement(child)) {
+          return child.type === BreadcrumbItem || PageHeaderTitleBreadcrumb;
+        }
+      }
+    );
+    // We need to clone the renderProp for the overflow breadcrumb item
+    // to place it before the title breadcrumb according to the design
+    if (filteredBreadcrumbs) {
+      const overflowBreadcrumb = renderOverflowBreadcrumb?.(hiddenBreadcrumbs);
+      interface overflowBreadcrumbItemProps extends BreadcrumbItemProps {
+        'data-fixed'?: boolean;
+      }
+      // If no overflow breadcrumb provided, return here with the rest of the children
+      if (!overflowBreadcrumb) {
+        return children;
+      }
+      const clonedTitleBreadcrumb = React.cloneElement(
+        overflowBreadcrumb as React.ReactElement<overflowBreadcrumbItemProps>,
+        {
+          key: 'cloned overflow breadcrumb item',
+          'data-fixed': true,
+          className: classnames(
+            `${pkg.prefix}--page-header-breadcrumb-overflow-item`,
+            {
+              [`${pkg.prefix}--page-header-overflow-breadcrumb-item-with-items`]:
+                hiddenBreadcrumbs.length,
+            }
+          ),
+        }
+      );
+      const clonedChildren = [...filteredBreadcrumbs];
+      clonedChildren.splice(
+        filteredBreadcrumbs.length - 1,
+        0,
+        clonedTitleBreadcrumb
+      ); // second to last position
+      return clonedChildren;
+    }
+    return children;
+  };
+
+  return (
+    <Breadcrumb
+      className={classnames(
+        className,
+        `${pkg.prefix}--page-header-breadcrumb-overflow`
+      )}
+      ref={componentRef}
+      {...other}
+    >
+      {renderChildren()}
+    </Breadcrumb>
   );
 });
 
@@ -961,6 +1128,9 @@ ScrollButton.displayName = 'PageHeaderScrollButton';
 const TitleBreadcrumb = PageHeaderTitleBreadcrumb;
 TitleBreadcrumb.displayName = 'PageHeaderTitleBreadcrumb';
 
+const BreadcrumbOverflow = PageHeaderBreadcrumbOverflow;
+BreadcrumbOverflow.displayName = 'PageHeaderBreadcrumbOverflow';
+
 export {
   // direct exports
   PageHeader,
@@ -972,6 +1142,7 @@ export {
   PageHeaderTabBar,
   PageHeaderScrollButton,
   PageHeaderTitleBreadcrumb,
+  PageHeaderBreadcrumbOverflow,
   // namespaced
   Root,
   BreadcrumbBar,
@@ -982,6 +1153,7 @@ export {
   TabBar,
   ScrollButton,
   TitleBreadcrumb,
+  BreadcrumbOverflow,
 };
 export type {
   PageHeaderProps,

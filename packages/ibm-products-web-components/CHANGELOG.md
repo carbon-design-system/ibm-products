@@ -1,3 +1,25 @@
+## `@carbon/ibm-products-web-components@0.21.0`
+### Features :rocket:
+- feat(interstitialScreen): webcomponent implementation (#7867)
+- feat(page-header): add breadcrumb overflow example (#7913)
+- feat(page-header): position updates when content element not provided (#7940)
+- feat(sidepanel): add prop for close button tooltip alignment (#7876)
+- feat(TruncatedText): init TruncatedText react component (#7755)
+- feat(PageHeader): create title breadcrumb sub component (#7834)
+- feat: wc add overflow patterns (#7720)
+- feat: change docs to overview in stories (#7854)
+- feat(page-header): add expand/collapse functionality (#7798)
+- feat(notification panel): add Stackblitz examples in WC (#7726)
+
+### Bug fixes :bug:
+- fix(notificationPanel): title overlaps with toggle button (#7938)
+- fix(side-panel): remove focus handle from slideIn variant (#7914)
+- fix: user avatar style inheritance on web-component (#7713)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#7840)
+- chore(deps): update dependency @storybook/addon-links to v9 (#7801)
+
 ## `@carbon/ibm-products-web-components@0.20.1`
 ### Bug fixes :bug:
 - fix(side-panel): remove focus handle from slideIn variant

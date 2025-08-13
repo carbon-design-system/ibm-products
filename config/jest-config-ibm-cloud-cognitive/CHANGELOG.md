@@ -1,3 +1,7 @@
+## `@jest-config-ibm-cloud-cognitive@1.31.0`
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#7840)
+
 ## `@jest-config-ibm-cloud-cognitive@1.30.0`
 ### Housekeeping :house:
 - chore: remove redundant upgrade scripts (#7774)

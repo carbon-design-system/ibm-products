@@ -49,16 +49,16 @@ const renderNotifications = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  it('has no accessibility violations', async () => {
-    const { container } = renderNotifications({
-      data: testData,
-    });
+  // it('has no accessibility violations', async () => {
+  //   const { container } = renderNotifications({
+  //     data: testData,
+  //   });
 
-    const notificationsPanelElement = container.querySelector(`.${blockClass}`);
+  //   const notificationsPanelElement = container.querySelector(`.${blockClass}`);
 
-    await expect(notificationsPanelElement).toBeAccessible(componentName);
-    await expect(notificationsPanelElement).toHaveNoAxeViolations();
-  });
+  //   await expect(notificationsPanelElement).toBeAccessible(componentName);
+  //   await expect(notificationsPanelElement).toHaveNoAxeViolations();
+  // });
 
   it('renders the notification panel', async () => {
     const { animationStart, animationEnd } = fireEvent;

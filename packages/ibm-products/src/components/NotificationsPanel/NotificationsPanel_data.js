@@ -92,7 +92,6 @@ const data = [
     },
     timestamp: dayBeforeYesterday,
     unread: false,
-    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: uuidv4(),
@@ -102,7 +101,6 @@ const data = [
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
     unread: false,
-    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: uuidv4(),
@@ -112,7 +110,6 @@ const data = [
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
     unread: false,
-    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: uuidv4(),
@@ -122,7 +119,6 @@ const data = [
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
     unread: false,
-    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: uuidv4(),
@@ -132,7 +128,6 @@ const data = [
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
     unread: false,
-    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: uuidv4(),
@@ -142,7 +137,6 @@ const data = [
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
     unread: false,
-    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: uuidv4(),
@@ -152,7 +146,6 @@ const data = [
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
     unread: false,
-    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: uuidv4(),
@@ -162,7 +155,6 @@ const data = [
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
     unread: false,
-    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: uuidv4(),
@@ -172,7 +164,6 @@ const data = [
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
     unread: false,
-    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: uuidv4(),
@@ -182,7 +173,6 @@ const data = [
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
     unread: false,
-    onNotificationClick: action(`Clicked on notification`),
   },
 ];
 

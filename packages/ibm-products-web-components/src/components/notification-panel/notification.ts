@@ -73,8 +73,10 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     return html`
       <div
         class="${blockClass}-content--wrapper"
-        role="button"
-        tabindex="0"
+        role=${this.hasAttribute('role') ? this.getAttribute('role') : 'button'}
+        tabindex=${this.hasAttribute('tabindex')
+          ? this.getAttribute('tabindex')
+          : '0'}
         @keydown=${this._handleKeyDown}
       >
         ${icon}
@@ -99,7 +101,7 @@ class CDSNotification extends HostListenerMixin(LitElement) {
         @click=${dismissSingleNotification}
       >
         ${Close16({ slot: 'icon' })}
-        <span slot="tooltip-content">Close</span>
+        <span slot="tooltip-content">Dismiss</span>
       </cds-icon-button>
     `;
   }

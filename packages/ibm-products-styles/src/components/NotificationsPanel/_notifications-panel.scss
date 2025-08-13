@@ -201,10 +201,14 @@ $block-size: 38.5rem;
       display: flex;
       align-items: flex-start;
       padding: $spacing-05;
-      cursor: pointer;
       inline-size: 100%;
       min-block-size: 6.25rem;
       text-align: start;
+    }
+    .#{$block-class}__notification-content--wrapper--clickable {
+      @extend .#{$block-class}__notification-content--wrapper;
+
+      cursor: pointer;
     }
     .#{$block-class}__notification-content {
       .#{$block-class}__notification-time-label {

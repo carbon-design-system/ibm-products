@@ -586,23 +586,31 @@ export let NotificationsPanel = React.forwardRef(
           [`${blockClass}__notification-title-unread`]: notification.unread,
         },
       ]);
+      let wrapperParams: any = {
+        className: `${blockClass}__notification-content--wrapper`,
+      };
+      if (typeof notification.onNotificationClick === 'function') {
+        wrapperParams = {
+          role: 'button',
+          'aria-label': 'Notification details',
+          tabIndex: 0,
+          className: `${blockClass}__notification-content--wrapper--clickable`,
+          onClick: () => notification.onNotificationClick(notification),
+          onKeyDown: (event) => {
+            if (event.which === 13) {
+              notification.onNotificationClick(notification);
+            }
+          },
+        };
+      }
+
       return (
         <Section
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
           as="div"
         >
-          <div
-            role="button"
-            tabIndex={0}
-            className={`${blockClass}__notification-content--wrapper`}
-            onClick={() => notification.onNotificationClick(notification)}
-            onKeyDown={(event) => {
-              if (event.which === 13) {
-                notification.onNotificationClick(notification);
-              }
-            }}
-          >
+          <div {...(wrapperParams as Readonly<object>)}>
             {notification.type === 'error' && (
               <ErrorFilled
                 size={16}

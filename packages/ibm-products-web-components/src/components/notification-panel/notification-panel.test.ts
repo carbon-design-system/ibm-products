@@ -7,7 +7,7 @@
 
 import { describe, expect, it, vi } from 'vitest';
 import { html, fixture, oneEvent, elementUpdated } from '@open-wc/testing';
-import { expect as chaiExpect } from '@open-wc/testing';
+// import { expect as chaiExpect } from '@open-wc/testing';
 import './index';
 import CDSNotificationPanel from './notification-panel';
 

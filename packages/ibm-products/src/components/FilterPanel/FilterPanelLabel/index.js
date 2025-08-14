@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { FilterPanelLabel } from './FilterPanelLabel';
+export { FilterPanelLabel } from './FilterPanelLabel.jsx';

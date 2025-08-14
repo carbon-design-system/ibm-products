@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { DecoratorBase } from './DecoratorBase';
+export { DecoratorBase } from './DecoratorBase.jsx';

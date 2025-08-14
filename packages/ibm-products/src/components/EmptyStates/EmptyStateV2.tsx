@@ -153,13 +153,13 @@ export let EmptyStateV2 = React.forwardRef<HTMLDivElement, EmptyStateV2Props>(
             {title}
           </h3>
           {subtitle && (
-            <p
+            <div
               className={cx(`${blockClass}__subtitle`, {
                 [`${blockClass}__subtitle--small`]: size === 'sm',
               })}
             >
               {subtitle}
-            </p>
+            </div>
           )}
           {action && (
             <Button

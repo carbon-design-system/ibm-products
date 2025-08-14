@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, nothing } from 'lit';
+import { html, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -57,6 +57,9 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   @property({ reflect: true })
   startButtonLabel = 'Get Started';
 
+  @property({ reflect: true })
+  slot = 'footer';
+
   /**
    * Enables support for asynchronous validation or user confirmation before proceeding
    * to the next interstitial step. When set to true, the component will wait for an external
@@ -69,6 +72,37 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
 
   @state()
   loadingAction;
+
+  protected updated(_changedProperties: PropertyValues): void {
+    if (_changedProperties.size === 0) {
+      // This logic ensures the start/next button receives focus when focus is lost from the "next" or "back" buttons
+      // during step navigation—particularly when those buttons are not rendered.
+      this.updateComplete.then(() => {
+        const { stepDetails, currentStep } = interstitialDetailsSignal.get();
+
+        const isMultiStep =
+          Array.isArray(stepDetails) && stepDetails.length > 0;
+        const lastStepIndex = stepDetails?.length - 1;
+
+        if (!isMultiStep) {
+          return;
+        }
+
+        const focusButton = (selector: string) => {
+          const btn = this.shadowRoot?.querySelector(
+            selector
+          ) as HTMLButtonElement | null;
+          btn?.focus();
+        };
+
+        if (currentStep === lastStepIndex) {
+          focusButton(`.${prefix}--interstitial-screen--start-btn`);
+        } else if (currentStep === 0) {
+          focusButton(`.${prefix}--interstitial-screen--next-btn`);
+        }
+      });
+    }
+  }
 
   private _handleUserInitiatedClose(
     triggeredBy: EventTarget | null | ActionType
@@ -137,7 +171,8 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
     this.loadingAction = '';
 
     if (canProceed) {
-      const carouselAPI = interstitialDetailsSignal.get()?.carouselAPI;
+      const { carouselAPI } = interstitialDetailsSignal.get();
+
       if (actionType == 'next') {
         carouselAPI.next();
       } else if (actionType === 'back') {

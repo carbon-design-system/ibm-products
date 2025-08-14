@@ -35,9 +35,7 @@ export const Example = () => {
 
   const defaultProps = {
     headerTitle: 'Welcom, Jan!',
-    interstitialAriaLabel: 'Interstitial Screen',
   };
-  const step2Ref = useRef(undefined);
   const getContent = ({ progStep }) => {
     return (
       <>

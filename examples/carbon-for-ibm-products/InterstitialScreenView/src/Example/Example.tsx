@@ -11,7 +11,6 @@ export const Example = () => {
 
   const defaultProps = {
     headerTitle: 'Welcom, Jan!',
-    interstitialAriaLabel: 'Interstitial Screen',
   };
   const translations = {
     'carbon.progress-step.complete': 'Terminé',

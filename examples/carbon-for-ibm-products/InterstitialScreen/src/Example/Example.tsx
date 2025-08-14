@@ -22,7 +22,6 @@ export const Example = () => {
 
   const defaultProps = {
     headerTitle: 'Welcom, Jan!',
-    interstitialAriaLabel: 'Interstitial Screen',
   };
 
   const getContent = () => {
@@ -186,7 +185,7 @@ export const Example = () => {
           headerTitle={defaultProps.headerTitle}
         ></InterstitialScreen.Header>
         <InterstitialScreen.Body
-          contentRenderer={(internalConfig) => {
+          contentRenderer={() => {
             return getContent();
           }}
         />

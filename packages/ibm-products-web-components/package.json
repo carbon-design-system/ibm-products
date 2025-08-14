@@ -43,8 +43,7 @@
     "web components"
   ],
   "scripts": {
-    "build:new": "tsdown",
-    "build": "yarn clean && node tasks/build.js && yarn wca",
+    "build": "yarn clean && tsdown && yarn wca",
     "build:storybook": "storybook build --quiet",
     "clean": "rimraf es lib scss dist storybook-static",
     "postinstall": "ibmtelemetry --config=telemetry.yml",

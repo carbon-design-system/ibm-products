@@ -913,26 +913,28 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
           {/* title */}
           {title && title.length && renderTitle()}
           {/* decorator and close */}
-          <div className={`${blockClass}__decorator-and-close`}>
-            {normalizedDecorator}
-            {!hideCloseButton && (
-              <IconButton
-                className={`${blockClass}__close-button`}
-                label={closeIconDescription}
-                onClick={onRequestClose}
-                onKeyDown={slideIn ? undefined : handleEscapeKey}
-                ref={closeRef}
-                align={closeIconTooltipAlignment}
-              >
-                <Close
-                  size={16}
-                  aria-hidden="true"
-                  tabIndex="-1"
-                  className={`${blockClass}--btn__icon`}
-                />
-              </IconButton>
-            )}
-          </div>
+          {(normalizedDecorator || !hideCloseButton) && (
+            <div className={`${blockClass}__decorator-and-close`}>
+              {normalizedDecorator}
+              {!hideCloseButton && (
+                <IconButton
+                  className={`${blockClass}__close-button`}
+                  label={closeIconDescription}
+                  onClick={onRequestClose}
+                  onKeyDown={slideIn ? undefined : handleEscapeKey}
+                  ref={closeRef}
+                  align={closeIconTooltipAlignment}
+                >
+                  <Close
+                    size={16}
+                    aria-hidden="true"
+                    tabIndex="-1"
+                    className={`${blockClass}--btn__icon`}
+                  />
+                </IconButton>
+              )}
+            </div>
+          )}
           {/* subtitle */}
           {subtitle && (
             <p

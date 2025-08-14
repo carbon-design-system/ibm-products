@@ -387,7 +387,13 @@ export let CreateFullPage = React.forwardRef(
           <div className={`${blockClass}__body`}>
             <div className={`${blockClass}__main`}>
               <div className={`${blockClass}__content`}>
-                <Form className={`${blockClass}__form`} aria-label={title}>
+                <Form
+                  className={`${blockClass}__form`}
+                  aria-label={title}
+                  onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                    e.preventDefault()
+                  }
+                >
                   <StepsContext.Provider
                     value={
                       {

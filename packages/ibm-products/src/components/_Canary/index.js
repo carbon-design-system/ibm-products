@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { Canary } from './Canary';
+export { Canary } from './Canary.jsx';

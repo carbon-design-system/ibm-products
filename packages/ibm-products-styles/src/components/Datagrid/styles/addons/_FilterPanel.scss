@@ -19,6 +19,7 @@
   initial-value: 320px;
   syntax: '<length>';
 }
+
 $block-class-component: #{$block-class}-filter-panel;
 
 .#{$block-class-component} {
@@ -171,6 +172,7 @@ $block-class-component: #{$block-class}-filter-panel;
   margin-block-start: auto;
 
   opacity: 1;
+  /* stylelint-disable-next-line carbon/layout-use */
   transform: translateY(64px) translateZ(0);
 
   &.#{$block-class-component}__animationComplete {

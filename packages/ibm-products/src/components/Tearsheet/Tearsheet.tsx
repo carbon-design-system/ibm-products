@@ -187,7 +187,7 @@ export interface TearsheetProps extends PropsWithChildren {
  * panel on either the left or right side, the main content area, and a set of
  * action buttons.
  */
-export let Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
+export const Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
   (props, ref) => {
     const {
       influencerPosition = 'left',
@@ -213,7 +213,6 @@ export let Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-Tearsheet = pkg.checkComponentEnabled(Tearsheet, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

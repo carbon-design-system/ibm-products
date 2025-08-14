@@ -83,7 +83,7 @@ export interface SavingProps {
   type: Type;
 }
 
-export let Saving = forwardRef(
+export const Saving = forwardRef(
   (
     {
       secondaryButtonText,
@@ -170,8 +170,6 @@ export let Saving = forwardRef(
     );
   }
 );
-
-Saving = pkg.checkComponentEnabled(Saving, componentName);
 
 Saving.propTypes = {
   /**

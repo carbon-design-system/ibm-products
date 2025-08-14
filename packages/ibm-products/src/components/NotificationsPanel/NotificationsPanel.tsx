@@ -338,7 +338,7 @@ export interface NotificationsPanelProps {
  *
  * If you do not provide a locale, the deprecated props will be applied instead.
  */
-export let NotificationsPanel = React.forwardRef(
+export const NotificationsPanel = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -874,12 +874,6 @@ export let NotificationsPanel = React.forwardRef(
       </Section>
     ) : null;
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-NotificationsPanel = pkg.checkComponentEnabled(
-  NotificationsPanel,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

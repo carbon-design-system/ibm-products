@@ -73,7 +73,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     useEffect(() => {
       if (open && bubbleRef.current) {
         requestAnimationFrame(() => {
-          const contentBody = bubbleRef.current!.querySelector(
+          const contentBody = bubbleRef.current?.querySelector(
             `.${contentBodyClass}`
           );
 

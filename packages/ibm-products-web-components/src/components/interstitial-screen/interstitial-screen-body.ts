@@ -42,7 +42,7 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
 
   firstUpdated(): void {
     const bodyItems = this.querySelectorAll(
-      'c4p-interstitial-screen-body-item'
+      `${prefix}-interstitial-screen-body-item`
     );
 
     if (bodyItems.length === 1) {

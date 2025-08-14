@@ -363,8 +363,6 @@ export const initCarousel = (
    */
   const destroyEvents = () => {
     Object.values(refs).forEach((el) => {
-      console.log(el);
-
       if (el && (el as any)._carouselListener) {
         el.removeEventListener('animationend', (el as any)._carouselListener);
         el.removeEventListener('transitionend', (el as any)._carouselListener);
@@ -412,7 +410,7 @@ export const initCarousel = (
     reset,
     goToIndex,
     getActiveItem,
-    destroyEvents: destroyEvents,
+    destroyEvents,
     allViews: refs,
   };
 };

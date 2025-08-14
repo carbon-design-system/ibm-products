@@ -26,7 +26,7 @@ export default {
     docs: {
       page: mdx,
     },
-    controls: { sort: 'requiredFirst' },
+    layout: 'padded',
   },
   argTypes: {
     additionalInfo: {
@@ -94,7 +94,7 @@ const Template = (args, context) => {
     if (value === 0) {
       return <>IBM Product name</>;
     } else if (value === 1) {
-      return <>IBM Product name example that is longer than one line'</>;
+      return <>IBM Product name example that is longer than one line</>;
     } else value === 2;
     {
       return (
@@ -215,25 +215,25 @@ const Template = (args, context) => {
 Template.propTypes = AboutModal.propTypes;
 
 const commonArgs = {
+  copyrightText: 'Copyright © IBM Corp. 2020, 2023',
   closeIconDescription: 'Close',
   version: 'Version 0.0.0',
-  copyrightText: 'Copyright © IBM Corp. 2020, 2023',
 };
 
-export const aboutModal = Template.bind({});
-aboutModal.args = {
-  title: 1,
-  links: 0,
-  content: 0,
+export const Default = Template.bind({});
+Default.args = {
   additionalInfo: 0,
+  content: 0,
+  links: 0,
+  title: 1,
   ...commonArgs,
 };
 
-export const aboutModalWithAllPropsSet = Template.bind({});
-aboutModalWithAllPropsSet.args = {
-  title: 2,
-  links: 3,
-  content: 2,
+export const withAdditionalContent = Template.bind({});
+withAdditionalContent.args = {
   additionalInfo: 1,
+  content: 2,
+  links: 3,
+  title: 2,
   ...commonArgs,
 };

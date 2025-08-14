@@ -59,3 +59,9 @@ body {
 [data-carbon-theme='debug'] body {
   color: initial;
 }
+
+// Docs overrides
+.docblock-argstable-head ~ .docblock-argstable-body,
+.docblock-argstable-head ~ .docblock-argstable-body p {
+  @include styles.type-style('body-01');
+}

@@ -65,6 +65,8 @@ const blockClass = `${pkg.prefix}--page-header`;
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
     const [refs, setRefs] = useState<PageHeaderRefs>({});
+    const [pageActionsInstance, setPageActionsInstance] =
+      useState<React.ReactNode | null>(null);
     const tempRef = useRef<HTMLDivElement>(null);
     const componentRef = (ref ?? tempRef) as RefObject<HTMLDivElement>;
     const classNames = classnames(
@@ -97,6 +99,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
 
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [titleClipped, setTitleClipped] = useState(false);
+    const [contentActionsClipped, setContentActionsClipped] = useState(false);
 
     // Intersection Observer setup, tracks if the PageHeaderContent is visible on page.
     // If it is not visible, we should set fully collapsed to true so that the
@@ -142,12 +145,33 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         }
       );
 
+      if (!refs?.contentActions?.current) {
+        return;
+      }
+      const contentActionsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target === refs?.contentActions!.current) {
+              setContentActionsClipped(!entry.isIntersecting);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: `${(predefinedContentPadding + totalTitleHeight + totalHeaderOffset + 48) * -1}px 0px 0px 0px`,
+          threshold: 0.1,
+        }
+      );
+
       if (refs?.contentRef.current) {
         contentObserver.observe(refs?.contentRef.current);
       }
 
       if (refs?.titleRef.current) {
         titleObserver.observe(refs?.titleRef.current);
+      }
+      if (refs?.contentActions.current) {
+        contentActionsObserver.observe(refs?.contentActions.current);
       }
 
       return () => {
@@ -158,12 +182,25 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         if (!refs?.titleRef?.current) {
           return;
         }
-        contentObserver.unobserve(refs?.titleRef.current);
+        titleObserver.unobserve(refs?.titleRef.current);
+        if (!refs?.contentActions?.current) {
+          return;
+        }
+        contentActionsObserver.unobserve(refs?.contentActions.current);
       };
     }, [refs, componentRef]);
+
     return (
       <PageHeaderContext.Provider
-        value={{ refs, setRefs, fullyCollapsed, titleClipped }}
+        value={{
+          refs,
+          setRefs,
+          fullyCollapsed,
+          pageActionsInstance,
+          setPageActionsInstance,
+          titleClipped,
+          contentActionsClipped,
+        }}
       >
         <div className={classNames} ref={componentRef} {...other}>
           {children}
@@ -224,6 +261,8 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
   }: PageHeaderBreadcrumbBarProps,
   ref
 ) {
+  const { pageActionsInstance: globalActions, contentActionsClipped } =
+    usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__breadcrumb-bar`]: true,
@@ -235,6 +274,10 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
 
   const contentActionsClasses = classnames({
     [`${blockClass}__breadcrumb__content-actions`]: !contentActionsFlush,
+    [`${blockClass}__breadcrumb__content-actions-with-global-actions`]:
+      !!globalActions,
+    [`${blockClass}__breadcrumb__content-actions-with-global-actions--show`]:
+      contentActionsClipped,
   });
 
   return (
@@ -311,7 +354,7 @@ const PageHeaderContent = React.forwardRef<
 ) {
   const contentRef = useRef<HTMLDivElement>(null);
   const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
-  const { setRefs } = usePageHeader();
+  const { setRefs, setPageActionsInstance } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__content`]: true,
@@ -326,6 +369,13 @@ const PageHeaderContent = React.forwardRef<
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (pageActions) {
+      setPageActionsInstance(pageActions);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageActions]);
 
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -448,9 +498,13 @@ const PageHeaderContentPageActions = ({
   actions,
   ...other
 }: PageHeaderContentPageActionsProps) => {
+  const { setRefs, contentActionsClipped } = usePageHeader();
   const classNames = classnames(
+    `${blockClass}__content__page-actions`,
     {
-      [`${blockClass}__content__page-actions`]: true,
+      // Revisit this:
+      // May want to only add this class if there are content actions in the breadcrumb bar as well
+      [`${blockClass}__content__page-actions--clipped`]: contentActionsClipped,
     },
     className
   );
@@ -478,6 +532,11 @@ const PageHeaderContentPageActions = ({
       );
     }
   }, [menuButtonVisibility]);
+
+  useEffect(() => {
+    setRefs((prev) => ({ ...prev, contentActions: containerRef }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current || !Array.isArray(actions)) {

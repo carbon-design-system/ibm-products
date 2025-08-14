@@ -46,6 +46,7 @@ const Template = (args) => {
     <Coachmark
       align={'bottom'}
       target={<CoachmarkBeacon {...args} />}
+      closeIconDescription="Close"
       theme={theme}
     >
       <CoachmarkOverlayElements closeButtonLabel="Done">

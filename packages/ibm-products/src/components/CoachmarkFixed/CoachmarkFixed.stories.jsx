@@ -84,4 +84,5 @@ coachmarkFixed.args = {
   onClose: () => console.log('CLOSE'),
   portalTarget: '#root:not([hidden="true"])',
   className: 'myCoachmarkFixed',
+  closeIconDescription: 'Close',
 };

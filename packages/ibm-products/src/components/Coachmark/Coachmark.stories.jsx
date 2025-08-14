@@ -74,6 +74,10 @@ export default {
     className: {
       control: { type: null },
     },
+    closeIconDescription: {
+      control: { type: 'text' },
+      description: 'Tooltip text and aria label for the Close button icon.',
+    },
   },
   parameters: {
     styles,
@@ -130,6 +134,7 @@ export const tooltip = Template.bind({});
 tooltip.args = {
   theme: 'dark',
   align: 'bottom',
+  closeIconDescription: 'Close',
   positionTune: { x: 0, y: 0 },
   target: (
     <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
@@ -140,6 +145,7 @@ export const floating = Template.bind({});
 floating.args = {
   theme: 'dark',
   align: 'bottom',
+  closeIconDescription: 'Close',
   overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
   target: (
     <CoachmarkButton

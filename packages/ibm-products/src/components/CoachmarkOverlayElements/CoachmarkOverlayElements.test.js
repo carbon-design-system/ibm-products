@@ -44,6 +44,7 @@ const renderCoachmarkWithOverlayElements = (
       theme={'dark'}
       align={'bottom'}
       positionTune={{ x: 0, y: 0 }}
+      closeIconDescription="Close"
       target={
         <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
       }

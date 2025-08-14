@@ -155,4 +155,5 @@ coachmarkStack.args = {
   onClose: () => console.log('CLOSE'),
   tagline: 'Why are there two types of severity scores?',
   portalTarget: '#root:not([hidden="true"]) .preview-position-fix',
+  closeIconDescription: 'Close',
 };

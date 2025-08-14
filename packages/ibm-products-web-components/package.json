@@ -43,6 +43,7 @@
     "web components"
   ],
   "scripts": {
+    "build:new": "tsdown",
     "build": "yarn clean && node tasks/build.js && yarn wca",
     "build:storybook": "storybook build --quiet",
     "clean": "rimraf es lib scss dist storybook-static",
@@ -70,7 +71,6 @@
     "@mordech/vite-lit-loader": "^0.37.0",
     "@open-wc/testing": "^4.0.0",
     "@rollup/plugin-alias": "^5.1.1",
-    "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.1",
@@ -95,6 +95,7 @@
     "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.80.6",
     "storybook": "^9.0.5",
+    "tsdown": "^0.14.1",
     "tslib": "^2.8.1",
     "typescript": "^5.5.3",
     "vite": "^7.0.0",

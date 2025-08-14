@@ -70,7 +70,7 @@
     "@babel/preset-typescript": "^7.26.0",
     "@ibm/telemetry-js-config-generator": "^2.0.1",
     "@percy/cli": "^1.31.0",
-    "@percy/storybook": "^6.0.4",
+    "@percy/storybook": "^9.0.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",

@@ -53,10 +53,6 @@ export interface CoachmarkProps {
    */
   className?: string;
   /**
-   * The aria label applied to the Coachmark component
-   */
-  ariaLabel?: string;
-  /**
    * Specifies whether the component is currently open.
    */
   open?: boolean;
@@ -116,7 +112,6 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkProps>(
     const {
       children,
       className,
-      ariaLabel,
       onClose,
       align = 'bottom',
       open,
@@ -198,7 +193,6 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkProps>(
             className, // Apply any supplied class names to the main HTML element.
             { [`${blockClass}--floating`]: floating }
           )}
-          aria-label={ariaLabel}
           ref={setRef}
           {...getDevtoolsProps(componentName)}
         >
@@ -222,10 +216,6 @@ Coachmark.propTypes = {
    * Where to render the Coachmark relative to its target.
    */
   align: PropTypes.string,
-  /**
-   * The aria label applied to the Coachmark component
-   */
-  ariaLabel: PropTypes.string,
   /**
    * Provide the contents of the CoachmarkV2.
    */

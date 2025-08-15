@@ -27,9 +27,24 @@ export const useCreateComponentFocus = ({
       await wait(10);
       elm.focus();
     };
+    // FUNCTION TO ENSURE THE ELEMENT TARGETED IS NOT CONTAINED IN AN ELEMENT MARKED 'INERT'
+    const isNotContainedInInert = (elm) => {
+      return elm && !elm.closest(`[inert]`);
+    };
+
     if (previousState?.currentStep !== currentStep && currentStep > 0) {
-      if (firstFocusElement) {
-        const elm = document.querySelector(firstFocusElement);
+      // GET THE CURRENT STEP ELEMENT
+      const containingElement =
+        document.querySelectorAll(blockClass)[currentStep - 1];
+      // INTERACTIVE ELEMENTS WE CAN QUERY FOR TO SET FOCUS ON
+      const focusElementQuery = `button, input, select, textarea, a`;
+      if (containingElement && isNotContainedInInert(containingElement)) {
+        // PREFER THE USER DEFINED firstFocusElement IF IT EXISTS
+        const firstFocusEl = containingElement.querySelector(firstFocusElement);
+        // BACKUP TO INTERACTIVE ELEMENT LIST
+        const bakFocusEl = containingElement.querySelector(focusElementQuery);
+        // PRIMARY AND BACKUP ELEMENTS TO FOCUS ON
+        const elm = firstFocusEl || bakFocusEl;
         if (elm) {
           awaitFocus(elm);
         }

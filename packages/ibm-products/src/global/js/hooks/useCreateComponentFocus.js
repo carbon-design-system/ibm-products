@@ -24,29 +24,30 @@ export const useCreateComponentFocus = ({
   useEffect(() => {
     // because of how handleStackChange.claimFocus in TearsheetShell works a timeout is required to focus on specific elements
     const awaitFocus = async (elm) => {
-      await wait(100);
+      await wait(10);
       elm.focus();
     };
-
+    // FUNCTION TO ENSURE THE ELEMENT TARGETED IS NOT CONTAINED IN AN ELEMENT MARKED 'INERT'
     const isNotContainedInInert = (elm) => {
       return elm && !elm.closest(`[inert]`);
     };
-    // YOU ARE HERE
-    /*
-    SO IM TRYING TO SET THE FOCUS ON THE NEXT STEP OR PREVIOUS STEP... IT SHOULD ETHER BE A MATCH ON THE FIRSTFOCUSELEMENT PROPERTY
-    OR SOME DEFAULT... 
-    */
-    console.log('currentStep: ', currentStep);
+
     if (previousState?.currentStep !== currentStep && currentStep > 0) {
+      // GET THE CURRENT STEP ELEMENT
+      const containingElement =
+        document.querySelectorAll(blockClass)[currentStep - 1];
+      // INTERACTIVE ELEMENTS WE CAN QUERY FOR TO SET FOCUS ON
       const focusElementQuery = `button, input, select, textarea, a`;
-      const firstFocusEl = document.querySelector(firstFocusElement);
-      const bakFocusEl = document.querySelector(focusElementQuery);
-      const elm = isNotContainedInInert(firstFocusEl)
-        ? firstFocusEl
-        : bakFocusEl;
-      console.log('elm: ', elm);
-      if (elm) {
-        awaitFocus(elm);
+      if (containingElement && isNotContainedInInert(containingElement)) {
+        // PREFER THE USER DEFINED firstFocusElement IF IT EXISTS
+        const firstFocusEl = containingElement.querySelector(firstFocusElement);
+        // BACKUP TO INTERACTIVE ELEMENT LIST
+        const bakFocusEl = containingElement.querySelector(focusElementQuery);
+        // PRIMARY AND BACKUP ELEMENTS TO FOCUS ON
+        const elm = firstFocusEl || bakFocusEl;
+        if (elm) {
+          awaitFocus(elm);
+        }
       }
     }
   }, [currentStep, previousState, blockClass, onMount, firstFocusElement]);

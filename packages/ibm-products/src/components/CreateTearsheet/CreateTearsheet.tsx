@@ -262,7 +262,7 @@ export let CreateTearsheet = forwardRef(
     useCreateComponentFocus({
       previousState,
       currentStep,
-      blockClass,
+      blockClass: `.${blockClass} .${pkg.prefix}--tearsheet-create__step`,
       onMount,
       firstFocusElement: firstFocusElement || selectorPrimaryFocus,
     });

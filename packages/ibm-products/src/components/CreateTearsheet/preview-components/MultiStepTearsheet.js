@@ -125,6 +125,7 @@ export const MultiStepTearsheet = (
         decorator={decorator && sampleDecorator(decorator)}
         {...rest}
         hasError={hasSubmitError}
+        selectorPrimaryFocus="#tearsheet-multi-step-story-text-input-multi-step-1"
       >
         <CreateTearsheetStep
           onNext={() => {

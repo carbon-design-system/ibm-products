@@ -8,17 +8,21 @@
 import React, { Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 
-const ErrorIllustration = lazy(() => import('./assets/ErrorIllustration'));
-const NoDataIllustration = lazy(() => import('./assets/NoDataIllustration'));
-const NoTagsIllustration = lazy(() => import('./assets/NoTagsIllustration'));
+const ErrorIllustration = lazy(() => import('./assets/ErrorIllustration.jsx'));
+const NoDataIllustration = lazy(
+  () => import('./assets/NoDataIllustration.jsx')
+);
+const NoTagsIllustration = lazy(
+  () => import('./assets/NoTagsIllustration.jsx')
+);
 const NotFoundIllustration = lazy(
-  () => import('./assets/NotFoundIllustration')
+  () => import('./assets/NotFoundIllustration.jsx')
 );
 const NotificationsIllustration = lazy(
-  () => import('./assets/NotificationsIllustration')
+  () => import('./assets/NotificationsIllustration.jsx')
 );
 const UnauthorizedIllustration = lazy(
-  () => import('./assets/UnauthorizedIllustration')
+  () => import('./assets/UnauthorizedIllustration.jsx')
 );
 
 const getIllustration = (kind) => {
@@ -44,6 +48,7 @@ const EmptyStateIllustration = ({ kind, ...rest }) => {
   const Illustration = getIllustration(kind);
   return (
     <Suspense>
+      {/* @ts-ignore */}
       <Illustration aria-hidden="true" {...rest} />
     </Suspense>
   );

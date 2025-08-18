@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Copyright IBM Corp. 2020, 2023
  *
@@ -42,7 +43,7 @@ export const utilCheckUpdateVerticalSpace = (
     if (!headerRef.current) {
       return undefined;
     } else {
-      let dRef = dynamicRefs[selector];
+      const dRef = dynamicRefs[selector];
       /* istanbul ignore else */
       if (!dRef || /* istanbul ignore next */ dRef.parentNode === null) {
         dynamicRefs[selector] = headerRef.current.querySelector(selector);
@@ -190,7 +191,7 @@ export const utilSetCollapsed = (
 ) => {
   /* don't know how to test resize */
   /* istanbul ignore else */
-  let scrollableTarget = scrollableAncestor(headerRef.current);
+  const scrollableTarget = scrollableAncestor(headerRef.current);
 
   if (collapse) {
     scrollableTarget.scrollTo({

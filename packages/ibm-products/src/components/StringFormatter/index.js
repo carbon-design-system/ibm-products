@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { StringFormatter } from './StringFormatter';
+export { StringFormatter } from './StringFormatter.jsx';

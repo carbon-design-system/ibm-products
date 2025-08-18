@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { default as FilterFlyout } from './FilterFlyout';
-export { default as FilterPanel } from './FilterPanel';
+export { default as FilterFlyout } from './FilterFlyout.jsx';
+export { default as FilterPanel } from './FilterPanel.jsx';
 export { FilterProvider, FilterContext } from './FilterProvider';

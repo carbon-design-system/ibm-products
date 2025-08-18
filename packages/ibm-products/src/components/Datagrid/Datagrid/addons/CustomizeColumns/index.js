@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { default as CustomizeColumnsTearsheetWrapper } from './TearsheetWrapper';
+export { default as CustomizeColumnsTearsheetWrapper } from './TearsheetWrapper.jsx';
 export { default as ToggleButtonWrapper } from './ButtonWrapper';

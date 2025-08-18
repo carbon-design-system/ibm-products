@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement, nothing } from 'lit';
+import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonPrefix, prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -15,7 +15,10 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import { classMap } from 'lit-html/directives/class-map.js';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
 import styles from './interstitial-screen-header.scss?lit';
-import { interstitialDetailsSignal } from './interstitial-screen-context';
+import {
+  interstitialDetailsSignal,
+  updateInterstitialDetailsSignal,
+} from './interstitial-screen-context';
 import { SignalWatcher } from '@lit-labs/signals';
 
 const blockClass = `${prefix}--interstitial-screen`;
@@ -54,6 +57,16 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
    */
   @property({ type: Boolean, reflect: true })
   hideProgressIndicator: boolean = false;
+
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    updateInterstitialDetailsSignal({
+      detail: [
+        ...interstitialDetailsSignal.get().focusableContainers,
+        this.shadowRoot,
+      ],
+      name: 'registerFocusable',
+    });
+  }
 
   private getStepState = (index) => {
     const currentStep = interstitialDetailsSignal.get().currentStep;

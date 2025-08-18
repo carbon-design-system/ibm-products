@@ -33,6 +33,11 @@ class CDSInterstitialScreenBodyItem extends HostListenerMixin(LitElement) {
 
   protected firstUpdated(_changedProperties: PropertyValues): void {
     this.updateStepDetails();
+
+    updateInterstitialDetailsSignal({
+      detail: [...interstitialDetailsSignal.get().focusableContainers, this],
+      name: 'registerFocusable',
+    });
   }
 
   private updateStepDetails() {

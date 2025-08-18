@@ -22,6 +22,7 @@ import {
   updateInterstitialDetailsSignal,
 } from './interstitial-screen-context';
 import HostListener from '@carbon/web-components/es/globals/decorators/host-listener';
+import { trapFocus } from '../../utilities/trapFocus/trapFocus';
 
 export const blockClass = `${prefix}--interstitial-screen`;
 
@@ -67,6 +68,7 @@ class CDSInterstitialScreen extends SignalWatcher(
   @query('cds-modal-body') modalBody!: HTMLElement;
 
   private _wasOpen = false;
+  private _trapFocusAPI: { cleanup: () => void } | null = null;
 
   connectedCallback() {
     super.connectedCallback();
@@ -75,6 +77,7 @@ class CDSInterstitialScreen extends SignalWatcher(
   disconnectedCallback(): void {
     const { carouselAPI } = interstitialDetailsSignal.get();
     carouselAPI?.destroyEvents?.();
+    this._trapFocusAPI?.cleanup();
   }
   firstUpdated() {
     this.requestUpdate(); // Ensure re-render
@@ -85,6 +88,7 @@ class CDSInterstitialScreen extends SignalWatcher(
       detail: this.isFullScreen,
     });
   }
+
   updated(changedProps: Map<string | number | symbol, unknown>) {
     if (changedProps.has('open')) {
       const wasOpen = this._wasOpen;
@@ -92,6 +96,12 @@ class CDSInterstitialScreen extends SignalWatcher(
 
       if (!wasOpen && isOpen) {
         this.dispatchInItializeEvent();
+        // `focusableContainers` holds the containers where we can query DOM elements.
+        // Our strategy here is to let child/slotted components register their containers,
+        // which are then passed to `trapFocus`. This allows the utility to query elements
+        // directly without being blocked by shadow DOM boundaries.
+        const { focusableContainers } = interstitialDetailsSignal.get();
+        this._trapFocusAPI = trapFocus(focusableContainers);
       }
 
       this._wasOpen = isOpen;
@@ -152,6 +162,7 @@ class CDSInterstitialScreen extends SignalWatcher(
   _handleClose(e) {
     this.open = false;
     e.stopPropagation();
+
     const init = {
       bubbles: true,
       cancelable: true,

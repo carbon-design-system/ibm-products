@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import useNestedRowExpander from './useNestedRowExpander';
+import useNestedRowExpander from './useNestedRowExpander.jsx';
 import { useEffect } from 'react';
 import { Hooks, TableInstance } from 'react-table';
 import { DataGridState, DatagridRow } from './types';

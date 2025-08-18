@@ -26,7 +26,7 @@ import ConditionPreview from '../ConditionPreview/ConditionPreview';
 import { Heading } from '@carbon/react';
 /**@ts-ignore */
 import { Section } from '@carbon/react';
-import GroupConnector from '../ConditionBuilderConnector/GroupConnector';
+import GroupConnector from '../ConditionBuilderConnector/GroupConnector.jsx';
 import ConditionBuilderActions from '../ConditionBuilderActions/ConditionBuilderActions';
 import { useTranslations } from '../utils/useTranslations';
 import {

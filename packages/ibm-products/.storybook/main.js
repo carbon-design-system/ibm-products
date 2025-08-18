@@ -7,7 +7,8 @@
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
-import { getAutoTrack } from '../../../scripts/get-auto-track-script';
+import react from '@vitejs/plugin-react';
+// import { getAutoTrack } from './get-auto-track-script';
 
 const require = createRequire(import.meta.url);
 
@@ -16,7 +17,7 @@ const stories = [
   './ComponentPlayground/**/*.stories.*',
   './Welcome/**/*.stories.*',
   './PrebuiltPatterns/**/*.mdx',
-  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
+  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.*',
 ];
 
 export default {
@@ -59,7 +60,8 @@ export default {
       ${head}
       ${
         process.env.NODE_ENV !== 'development'
-          ? getAutoTrack('ibm-products-react-storybook')
+          ? // ? getAutoTrack('ibm-products-react-storybook')
+            ''
           : ''
       }
     `;
@@ -70,18 +72,6 @@ export default {
     const { mergeConfig } = await import('vite');
 
     return mergeConfig(config, {
-      esbuild: {
-        include: /\.[jt]sx?$/,
-        exclude: [],
-        loader: 'tsx',
-      },
-      optimizeDeps: {
-        esbuildOptions: {
-          loader: {
-            '.js': 'jsx',
-          },
-        },
-      },
       resolve: {
         alias: {
           ALIAS_STORY_STYLE_CONFIG: resolve(
@@ -103,6 +93,9 @@ export default {
             ],
           },
         },
+      },
+      experimental: {
+        enableNativePlugin: true,
       },
     });
   },

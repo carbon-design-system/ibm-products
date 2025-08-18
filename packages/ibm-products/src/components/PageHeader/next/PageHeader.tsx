@@ -41,7 +41,6 @@ import {
   Breadcrumb,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
-import { blockClass } from '../PageHeaderUtils';
 import { createOverflowHandler as localOverflowHandler } from './overflowHandler';
 import { createOverflowHandler } from '@carbon/utilities';
 import { TYPES } from '@carbon/react/es/components/Tag/Tag';
@@ -62,6 +61,7 @@ interface PageHeaderProps {
   children?: React.ReactNode;
   className?: string;
 }
+const blockClass = `${pkg.prefix}--page-header`;
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
     const [refs, setRefs] = useState<PageHeaderRefs>({});

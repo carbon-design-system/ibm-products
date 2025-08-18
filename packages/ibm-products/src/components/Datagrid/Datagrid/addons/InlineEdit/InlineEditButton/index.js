@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { InlineEditButton } from './InlineEditButton';
+export { InlineEditButton } from './InlineEditButton.jsx';

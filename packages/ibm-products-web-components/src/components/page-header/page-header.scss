@@ -46,6 +46,7 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-breadcrumb) {
   position: sticky;
+  z-index: 1;
   background-color: $layer-01;
   block-size: convert.to-rem(40px);
   border-block-end: $border-subtle;
@@ -162,6 +163,13 @@ $carbon-prefix: 'cds';
   .#{$prefix}--page-header__content__page-actions {
     display: flex;
     justify-content: right;
+    /* stylelint-disable-next-line carbon/motion-easing-use */
+    transition: opacity motion(standard, productive) $duration-moderate-02;
+
+    &.#{$prefix}--page-header__content__page-actions--clipped {
+      opacity: 0;
+      visibility: hidden;
+    }
 
     @include breakpoint-down('md') {
       justify-content: left;
@@ -259,29 +267,20 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tab-bar--tablist {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   inline-size: 100%;
-
-  // TODO: remove once responsive logic for tags is implemented
-  @include breakpoint-down(md) {
-    flex-direction: column-reverse;
-    grid-gap: $spacing-05;
-  }
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='tags']) {
   display: flex;
   align-items: center;
   justify-content: right;
+  inline-size: 100%;
+  max-inline-size: 500px;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__tags;
-  inline-size: 100%;
-
-  // TODO: remove once responsive logic for tags is implemented
-  @include breakpoint-down(md) {
-    justify-content: left;
-  }
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='scroller']) {
@@ -336,31 +335,20 @@ $carbon-prefix: 'cds';
   }
 }
 
-:host(#{$prefix}-page-header-title-breadcrumb) {
-  opacity: 0;
-  transform: translateY($spacing-05);
-  transition:
-    /* stylelint-disable-next-line */
-    transform motion(standard, productive) $duration-moderate-01,
-    opacity motion(standard, productive) $duration-moderate-01;
-  // Target browsers that do not yet support animation-timeline: scroll()
+// Target browsers that do not yet support animation-timeline: scroll()
+@mixin scroll-fallback {
   @supports not (animation-timeline: scroll()) {
-    &.#{$prefix}--page-header-title-breadcrumb-show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    @media (prefers-reduced-motion: reduce) {
-      transform: translateY(0);
-      /* stylelint-disable-next-line */
-      transition: opacity motion(standard, productive) $duration-moderate-01;
-    }
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transform: translateY(0);
+    /* stylelint-disable-next-line */
+    transition: opacity motion(standard, productive) $duration-moderate-01;
   }
 }
 
-:host(
-  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__with-content
-) {
-  // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+@mixin scroll-animation {
   @supports (animation-timeline: scroll()) {
     // Show by default should not have any animation, this means
     // there was not a page header content element provided
@@ -374,6 +362,54 @@ $carbon-prefix: 'cds';
       transform: translateY(0);
     }
   }
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__fallback
+) {
+  @include scroll-fallback();
+}
+
+:host(#{$prefix}-page-header-breadcrumb)
+  .#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+  opacity: 0;
+  visibility: hidden;
+  &.#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+    /* stylelint-disable-next-line */ opacity
+      motion(standard, productive) $duration-moderate-01;
+    visibility: visible;
+  }
+}
+
+:host(#{$prefix}-page-header-title-breadcrumb) {
+  opacity: 0;
+  transform: translateY($spacing-05);
+  transition:
+    /* stylelint-disable-next-line */
+    transform motion(standard, productive) $duration-moderate-01,
+    opacity motion(standard, productive) $duration-moderate-01;
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__with-content
+) {
+  // Target browsers that do not yet support animation-timeline: scroll()
+  &.#{$prefix}--page-header-title-breadcrumb-show__fallback {
+    @supports not (animation-timeline: scroll()) {
+      @include scroll-fallback();
+
+      @media (prefers-reduced-motion: reduce) {
+        transform: translateY(0);
+        /* stylelint-disable-next-line */
+        transition: opacity motion(standard, productive) $duration-moderate-01;
+      }
+    }
+  }
+  // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+  @include scroll-animation();
 }
 
 :host(

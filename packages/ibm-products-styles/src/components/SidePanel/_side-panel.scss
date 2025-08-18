@@ -36,7 +36,7 @@ $clabs-prefix: 'clabs';
 @property --panel-transform {
   inherits: true;
   initial-value: 320px;
-  syntax: '<integer>';
+  syntax: '<length>';
 }
 
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
@@ -349,6 +349,11 @@ $clabs-prefix: 'clabs';
     &:not(.#{$block-class}__header--has-title)::before {
       background-color: transparent;
     }
+  }
+
+  // Remove min‑block‑size when the header contains no child elements to prevent unnecessary blank space
+  .#{$block-class}__header:empty {
+    min-block-size: unset;
   }
 
   &.#{$block-class}:has(.#{$block-class}__action-toolbar),

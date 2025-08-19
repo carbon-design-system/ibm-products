@@ -2063,7 +2063,7 @@ __metadata:
     rollup-plugin-strip-banner: "npm:^3.1.0"
     sass: "npm:^1.85.1"
     storybook: "npm:^9.0.8"
-    typescript-config-carbon: "npm:^0.5.0"
+    typescript-config-carbon: "npm:^0.6.0"
     vite: "npm:^7.0.0"
     yargs: "npm:^18.0.0"
   peerDependencies:
@@ -21877,12 +21877,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-config-carbon@npm:^0.5.0":
-  version: 0.5.0
-  resolution: "typescript-config-carbon@npm:0.5.0"
+"typescript-config-carbon@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "typescript-config-carbon@npm:0.6.0"
   dependencies:
     typescript: "npm:^5.7.3"
-  checksum: 10/5b3a440e8521a749f441536a7b4301586dbf058ea9b3e64bb716a78ad267cf9947116a83aa3c07745a96f07d530351319544df9a7ffece966dd2c8e8ae2ab3b0
+  checksum: 10/17aef8ad246677482c549cf2f86a42b6f64d9d15db73f7cc36bc1459cb97be8905dc5d7a2500baf59dd4979031c63d8312aeba7fde4766de3e609288e30cbbf2
   languageName: node
   linkType: hard
 

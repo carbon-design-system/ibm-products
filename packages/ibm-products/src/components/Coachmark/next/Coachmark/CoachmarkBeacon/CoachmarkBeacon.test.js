@@ -68,13 +68,13 @@ describe(componentName, () => {
     renderCoachmarkWithBeacon({
       label: testingLabel,
     });
-    screen.getAllByLabelText(testingLabel)[1];
+    screen.getByLabelText(testingLabel)[1];
   });
 
   it('forwards a ref to an appropriate node', () => {
     const testRef = React.createRef();
     renderCoachmarkWithBeacon({ ref: testRef, label: 'Show information' });
-    expect(testRef.current).toHaveClass(`${blockClass}`);
+    expect(testRef.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {

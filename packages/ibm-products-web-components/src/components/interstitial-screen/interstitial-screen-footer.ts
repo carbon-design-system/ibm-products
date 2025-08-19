@@ -14,14 +14,12 @@ import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-lis
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/button/index.js';
 import styles from './interstitial-screen-footer.scss?lit';
-import {
-  interstitialDetailsSignal,
-  updateInterstitialDetailsSignal,
-} from './interstitial-screen-context';
+import { interstitialDetailsSignal } from './interstitial-screen-context';
 import { SignalWatcher } from '@lit-labs/signals';
 import '@carbon/web-components/es/components/inline-loading/inline-loading.js';
 import { CDSModalFooter } from '@carbon/web-components/es/index.js';
 import ArrowRight from '@carbon/web-components/es/icons/arrow--right/16.js';
+import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--interstitial-screen`;
 
@@ -77,13 +75,9 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   loadingAction;
 
   protected firstUpdated(_changedProperties: PropertyValues): void {
-    updateInterstitialDetailsSignal({
-      detail: [
-        ...interstitialDetailsSignal.get().focusableContainers,
-        this.childNodes.length > 0 ? this : this.shadowRoot,
-      ],
-      name: 'registerFocusable',
-    });
+    registerFocusableContainers(
+      this.childNodes.length > 0 ? this : this.shadowRoot
+    );
   }
 
   protected updated(_changedProperties: PropertyValues): void {

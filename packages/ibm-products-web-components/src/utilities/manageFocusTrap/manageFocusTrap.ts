@@ -11,7 +11,17 @@
  * @param {NodeListOf<Element>} containers - The containers to trap focus within.
  * @returns {object} An object with a `cleanup` method to remove event listeners.
  */
-export const trapFocus = (containers) => {
+let _containers: HTMLElement[] = [];
+
+export const registerFocusableContainers = (container) => {
+  if (container) {
+    _containers.push(container);
+  }
+};
+export const clearFocusableContainers = () => {
+  _containers.length = 0;
+};
+export const trapFocus = (containers?: HTMLElement[]) => {
   const prefix = 'cds';
   const selectorTabbable = `
     a[href]:not(#start-sentinel, #end-sentinel), area[href],
@@ -80,8 +90,10 @@ export const trapFocus = (containers) => {
     ${prefix}-side-nav-menu-item,
     ${prefix}-slug
   `;
-
-  if (!containers.length) {
+  if (containers && containers.length > 0) {
+    _containers = containers;
+  }
+  if (!_containers.length) {
     return { cleanup: () => {} };
   }
 
@@ -147,7 +159,7 @@ export const trapFocus = (containers) => {
 
   //Optionally focus first element immediately
   requestAnimationFrame(() => {
-    const elements = containers
+    const elements = _containers
       .flatMap((container) => getFocusableElements(container))
       .filter(Boolean);
     getFocusTarget(elements[0])?.focus({ preventScroll: true });
@@ -159,7 +171,7 @@ export const trapFocus = (containers) => {
     }
 
     // Flatten all focusable elements from all containers
-    const elements = containers
+    const elements = _containers
       .flatMap((container) => getFocusableElements(container))
       .filter(Boolean);
 
@@ -191,6 +203,7 @@ export const trapFocus = (containers) => {
   return {
     cleanup: () => {
       document.removeEventListener('keydown', onKeyDown, true);
+      _containers.length = 0;
     },
   };
 };

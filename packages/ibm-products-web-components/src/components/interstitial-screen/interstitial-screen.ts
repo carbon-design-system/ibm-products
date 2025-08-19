@@ -22,7 +22,7 @@ import {
   updateInterstitialDetailsSignal,
 } from './interstitial-screen-context';
 import HostListener from '@carbon/web-components/es/globals/decorators/host-listener';
-import { trapFocus } from '../../utilities/trapFocus/trapFocus';
+import { trapFocus } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 export const blockClass = `${prefix}--interstitial-screen`;
 
@@ -100,8 +100,8 @@ class CDSInterstitialScreen extends SignalWatcher(
         // Our strategy here is to let child/slotted components register their containers,
         // which are then passed to `trapFocus`. This allows the utility to query elements
         // directly without being blocked by shadow DOM boundaries.
-        const { focusableContainers } = interstitialDetailsSignal.get();
-        this._trapFocusAPI = trapFocus(focusableContainers);
+
+        this._trapFocusAPI = trapFocus();
       }
 
       this._wasOpen = isOpen;

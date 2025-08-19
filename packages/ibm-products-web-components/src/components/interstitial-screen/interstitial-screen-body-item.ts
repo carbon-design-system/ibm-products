@@ -18,6 +18,7 @@ import {
   interstitialDetailsSignal,
   updateInterstitialDetailsSignal,
 } from './interstitial-screen-context';
+import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 /**
  * interstitial-screen-body-item for body children
@@ -33,11 +34,7 @@ class CDSInterstitialScreenBodyItem extends HostListenerMixin(LitElement) {
 
   protected firstUpdated(_changedProperties: PropertyValues): void {
     this.updateStepDetails();
-
-    updateInterstitialDetailsSignal({
-      detail: [...interstitialDetailsSignal.get().focusableContainers, this],
-      name: 'registerFocusable',
-    });
+    registerFocusableContainers(this);
   }
 
   private updateStepDetails() {

@@ -15,14 +15,12 @@ interface InterstitialDetailsType {
   stepDetails: { stepTitle: string; id: string | number }[];
   carouselAPI?: any;
   disableActions: disableButtonConfigType;
-  focusableContainers: any[];
 }
 export const interstitialDetailsSignal = signal<InterstitialDetailsType>({
   isFullScreen: false,
   currentStep: 0,
   stepDetails: [],
   disableActions: {},
-  focusableContainers: [],
 });
 export const resetInterstitialDetailsSignal = () => {
   interstitialDetailsSignal.set({
@@ -30,7 +28,6 @@ export const resetInterstitialDetailsSignal = () => {
     currentStep: 0,
     stepDetails: [],
     disableActions: {},
-    focusableContainers: [],
   });
 };
 export const updateInterstitialDetailsSignal = ({ name, detail }) => {
@@ -53,11 +50,6 @@ export const updateInterstitialDetailsSignal = ({ name, detail }) => {
     interstitialDetailsSignal.set({
       ...interstitialDetailsSignal.get(),
       disableActions: detail,
-    });
-  } else if (name === 'registerFocusable') {
-    interstitialDetailsSignal.set({
-      ...interstitialDetailsSignal.get(),
-      focusableContainers: detail,
     });
   }
 };

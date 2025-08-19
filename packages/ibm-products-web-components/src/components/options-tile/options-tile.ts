@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html, nothing } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -16,6 +16,7 @@ import styles from './options-tile.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import ChevronDown20 from '@carbon/web-components/es/icons/chevron--down/20';
 import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/layer/index.js';
 
 export const blockClass = `${prefix}--options-tile`;
 const blockEvent = `${prefix}-options-tile`;
@@ -32,10 +33,10 @@ const blockEvent = `${prefix}-options-tile`;
 @customElement(`${prefix}-options-tile`)
 class CDSOptionsTile extends HostListenerMixin(LitElement) {
   /**
-   * If `true` the body of the component is shown
+   * Determines if the tile is open by default
    */
   @property({ type: Boolean, reflect: true })
-  open: boolean = false;
+  defaultOpen?: boolean = false;
 
   /**
    * Determines the size of the header
@@ -55,6 +56,14 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   @property({ type: String, reflect: true })
   titleText: string = '';
 
+  /**
+   * Using the native toggle event handler in details can cause an infinite loop
+   * when setting the native open attribute. To combat this, the open state is kept
+   * here and only referenced internally.
+   */
+  @state()
+  private _open = false;
+
   static get eventOpen() {
     return `${blockEvent}-open`;
   }
@@ -63,8 +72,10 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
     return `${blockEvent}-close`;
   }
 
-  private _toggle() {
-    this.open ? this._handleClose() : this._handleOpen();
+  private _toggle(evt: ToggleEvent) {
+    const { newState } = evt;
+    this._open = newState === 'open';
+    this._open ? this._handleOpen() : this._handleClose();
   }
 
   private _handleOpen() {
@@ -72,7 +83,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
       bubbles: true,
       composed: true,
       detail: {
-        open: this.open,
+        open: this._open,
       },
     };
     this.dispatchEvent(
@@ -88,7 +99,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
       bubbles: true,
       composed: true,
       detail: {
-        open: this.open,
+        open: this._open,
       },
     };
     this.dispatchEvent(
@@ -100,11 +111,11 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    const { open, size, titleId, titleText } = this;
+    const { _open, defaultOpen, size, titleId, titleText } = this;
     const classes = classMap({
       [`${blockClass}`]: true,
       [`${blockClass}--xl`]: size === 'xl',
-      [`${blockClass}--open`]: open,
+      [`${blockClass}--open`]: _open,
     });
 
     return html`
@@ -112,7 +123,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
         @toggle=${this._toggle}
         class="${classes}"
         part="options-tile"
-        open=${open || nothing}
+        open=${defaultOpen || nothing}
       >
         <summary class="${blockClass}__header">
           <div class="${blockClass}__header-left">
@@ -132,7 +143,9 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
           </div>
         </summary>
         <div class="${blockClass}__body">
-          <slot name="body"></slot>
+          <cds-layer level="1">
+            <slot name="body"></slot>
+          </cds-layer>
         </div>
       </details>
     `;

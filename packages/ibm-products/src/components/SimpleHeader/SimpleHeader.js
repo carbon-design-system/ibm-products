@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,6 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
-import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { Tooltip, Heading } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--simple-header`;
@@ -70,11 +69,6 @@ const SimpleHeader = ({
   );
 };
 
-export const overflowAriaLabel_required_if_breadcrumbs_exist = isRequiredIf(
-  PropTypes.string,
-  (props) => props.breadcrumbs?.length > 0
-);
-
 SimpleHeader.propTypes = {
   /** Header breadcrumbs */
   breadcrumbs: PropTypes.arrayOf(
@@ -102,7 +96,7 @@ SimpleHeader.propTypes = {
   noTrailingSlash: PropTypes.bool,
 
   /** Label for open/close overflow button used for breadcrumb items that do not fit */
-  overflowAriaLabel: overflowAriaLabel_required_if_breadcrumbs_exist,
+  overflowAriaLabel: PropTypes.string,
 
   /**
    * overflowTooltipAlign: align tooltip position

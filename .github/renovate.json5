@@ -52,5 +52,19 @@
       enabled: false,
       groupName: 'prevent major upgrades',
     },
+    {
+      groupName: 'storybook dependencies',
+      matchPackagePatterns: [
+        '^@storybook/',
+        '^storybook$', // exactly "storybook"
+        '^storybook-',
+      ],
+    },
+    {
+      matchPackageNames: ['storybook'],
+      matchUpdateTypes: ['major'],
+      enabled: false,
+      groupName: 'prevent major upgrade for storybook',
+    },
   ],
 }

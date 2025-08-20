@@ -159,9 +159,7 @@ export const trapFocus = (containers?: HTMLElement[]) => {
 
   //Optionally focus first element immediately
   requestAnimationFrame(() => {
-    const elements = _containers
-      .flatMap((container) => getFocusableElements(container))
-      .filter(Boolean);
+    const elements = getAllFocusableElements(_containers);
     getFocusTarget(elements[0])?.focus({ preventScroll: true });
   });
 
@@ -171,9 +169,7 @@ export const trapFocus = (containers?: HTMLElement[]) => {
     }
 
     // Flatten all focusable elements from all containers
-    const elements = _containers
-      .flatMap((container) => getFocusableElements(container))
-      .filter(Boolean);
+    const elements = getAllFocusableElements(_containers);
 
     const first = elements[0];
     const last = elements[elements.length - 1];
@@ -194,9 +190,13 @@ export const trapFocus = (containers?: HTMLElement[]) => {
     }
   }
 
-  const getFocusableElements = (container) => {
-    return [...container.querySelectorAll(selectorTabbable)];
-  };
+  /**
+   * Retrieves all focusable elements within the provided containers.
+   **/
+  const getAllFocusableElements = (containers) =>
+    containers
+      .flatMap((container) => [...container.querySelectorAll(selectorTabbable)])
+      .filter(Boolean);
 
   document.addEventListener('keydown', onKeyDown, true);
 

@@ -21,7 +21,8 @@ import {
   Heading,
 } from '@carbon/react';
 import { StepSidePanel } from './StepSidePanel';
-import { StepActions, StepGroup, useStepContext, StepState } from '../..';
+import { StepGroup, useStepContext, StepState, StepProvider } from '../..';
+import { StepActions } from '../StepActions';
 
 const introExample = true;
 
@@ -200,141 +201,143 @@ export const Example = () => {
   return (
     <>
       {renderUIShellHeader()}
-      <div ref={ref}>
-        <Button onClick={() => setOpen((prev) => !prev)}>
-          {open ? 'Close' : 'Open'}
-        </Button>
-        <StepSidePanel
-          // Causes HTML nesting error, would be nice to be able to change subtitle
-          // prop to be more generic element rather than wrapping in <p>
-          subtitle={
-            !showIntro
-              ? (state: StepState) =>
-                  buildCustomInfluencer(
-                    state,
-                    introExample,
-                    showIntro,
-                    selectedFlow
-                  )
-              : null
-          }
-          open={open}
-          onClose={() => setOpen(false)}
-          title={'Side panel title'}
-          selectorPrimaryFocus="#email"
-        >
-          {showIntro && (
-            <TileGroup
-              valueSelected={selectedFlow}
-              defaultSelected="standard create flow"
-              legend="Choose create flow"
-              name="radio tile group"
-              onChange={(a) => setSelectedFlow(a as string)}
-            >
-              <RadioTile
-                className="custom-intro-tile"
-                id="radio-tile-1"
-                value="standard create flow"
+      <StepProvider>
+        <div ref={ref}>
+          <Button onClick={() => setOpen((prev) => !prev)}>
+            {open ? 'Close' : 'Open'}
+          </Button>
+          <StepSidePanel
+            // Causes HTML nesting error, would be nice to be able to change subtitle
+            // prop to be more generic element rather than wrapping in <p>
+            subtitle={
+              !showIntro
+                ? (state: StepState) =>
+                    buildCustomInfluencer(
+                      state,
+                      introExample,
+                      showIntro,
+                      selectedFlow
+                    )
+                : null
+            }
+            open={open}
+            onClose={() => setOpen(false)}
+            title={'Side panel title'}
+            selectorPrimaryFocus="#email"
+          >
+            {showIntro && (
+              <TileGroup
+                valueSelected={selectedFlow}
+                defaultSelected="standard create flow"
+                legend="Choose create flow"
+                name="radio tile group"
+                onChange={(a) => setSelectedFlow(a as string)}
               >
-                Standard
-              </RadioTile>
-              <RadioTile
-                className="custom-intro-tile"
-                id="radio-tile-2"
-                value="premium create flow"
-              >
-                Premium
-              </RadioTile>
-              <RadioTile
-                className="custom-intro-tile"
-                id="radio-tile-3"
-                value="plus create flow"
-              >
-                Plus
-              </RadioTile>
-            </TileGroup>
-          )}
-          {/* Steps */}
-          {!showIntro && (
-            <StepGroup>
-              <Step1 />
-              <Step2 />
-              <Step3 />
-              {introExample && selectedFlow === 'plus' && <PlusOnly />}
-            </StepGroup>
-          )}
+                <RadioTile
+                  className="custom-intro-tile"
+                  id="radio-tile-1"
+                  value="standard create flow"
+                >
+                  Standard
+                </RadioTile>
+                <RadioTile
+                  className="custom-intro-tile"
+                  id="radio-tile-2"
+                  value="premium create flow"
+                >
+                  Premium
+                </RadioTile>
+                <RadioTile
+                  className="custom-intro-tile"
+                  id="radio-tile-3"
+                  value="plus create flow"
+                >
+                  Plus
+                </RadioTile>
+              </TileGroup>
+            )}
+            {/* Steps */}
+            {!showIntro && (
+              <StepGroup>
+                <Step1 />
+                <Step2 />
+                <Step3 />
+                {introExample && selectedFlow === 'plus' && <PlusOnly />}
+              </StepGroup>
+            )}
 
-          {/* Step actions */}
-          <div className="c4p--step-actions__button-container my-custom-action-set">
-            <StepActions
-              buttonRenderer={({
-                currentStep,
-                handleNext,
-                numSteps,
-                handleGoToStep,
-                setFormState,
-                handlePrevious,
-                formState,
-              }) => (
-                <>
-                  <Button
-                    className="step-action-button step-action-button__cancel"
-                    kind="ghost"
-                    onClick={() => {
-                      setOpen(false);
-                      if (introExample) {
-                        setShowIntro(true);
-                      }
-                    }}
-                    size="xl"
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    className="step-action-button"
-                    kind="secondary"
-                    onClick={() => {
-                      if (currentStep === 1 && introExample) {
-                        setShowIntro(true);
-                        return;
-                      }
-                      handlePrevious();
-                    }}
-                    disabled={handleBackDisabledState(currentStep)}
-                    size="xl"
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    disabled={handleNextDisabledState(formState, currentStep)}
-                    size="xl"
-                    className="step-action-button"
-                    onClick={() => {
-                      if (showIntro) {
-                        setShowIntro(false);
-                        return;
-                      }
-                      if (currentStep === numSteps) {
-                        // submit
+            {/* Step actions */}
+            <div className="c4p--step-actions__button-container my-custom-action-set">
+              <StepActions
+                buttonRenderer={({
+                  currentStep,
+                  handleNext,
+                  totalSteps,
+                  handleGoToStep,
+                  setFormState,
+                  handlePrevious,
+                  formState,
+                }) => (
+                  <>
+                    <Button
+                      className="step-action-button step-action-button__cancel"
+                      kind="ghost"
+                      onClick={() => {
                         setOpen(false);
-                        handleGoToStep(1);
-                        setFormState({});
                         if (introExample) {
                           setShowIntro(true);
                         }
-                      } else {
-                        handleNext();
-                      }
-                    }}
-                  >
-                    {currentStep === numSteps ? 'Submit' : 'Next'}
-                  </Button>
-                </>
-              )}
-            />
-          </div>
-        </StepSidePanel>
-      </div>
+                      }}
+                      size="xl"
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      className="step-action-button"
+                      kind="secondary"
+                      onClick={() => {
+                        if (currentStep === 1 && introExample) {
+                          setShowIntro(true);
+                          return;
+                        }
+                        handlePrevious();
+                      }}
+                      disabled={handleBackDisabledState(currentStep)}
+                      size="xl"
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      disabled={handleNextDisabledState(formState, currentStep)}
+                      size="xl"
+                      className="step-action-button"
+                      onClick={() => {
+                        if (showIntro) {
+                          setShowIntro(false);
+                          return;
+                        }
+                        if (currentStep === totalSteps) {
+                          // submit
+                          setOpen(false);
+                          handleGoToStep(1);
+                          setFormState({});
+                          if (introExample) {
+                            setShowIntro(true);
+                          }
+                        } else {
+                          handleNext();
+                        }
+                      }}
+                    >
+                      {currentStep === totalSteps ? 'Submit' : 'Next'}
+                    </Button>
+                  </>
+                )}
+              />
+            </div>
+          </StepSidePanel>
+        </div>
+      </StepProvider>
     </>
   );
 };

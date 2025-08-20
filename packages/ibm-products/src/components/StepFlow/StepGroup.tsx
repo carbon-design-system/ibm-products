@@ -17,8 +17,8 @@ export const StepGroup = ({ children }) => {
 
   // set number of steps, based on num of children passed in
   useEffect(() => {
-    const { setNumSteps } = stepState;
-    setNumSteps(childrenCount), [childrenCount, setNumSteps];
+    const { setTotalSteps } = stepState;
+    setTotalSteps(childrenCount), [childrenCount, setTotalSteps];
   });
 
   // get currently selected step

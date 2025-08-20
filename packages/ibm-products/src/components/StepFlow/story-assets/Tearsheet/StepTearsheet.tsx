@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import React, { ReactNode } from 'react';
 import { Tearsheet } from '../../../Tearsheet';
 
-import { StepContextType, StepState, StepContext } from '../..';
+import { useStepContext } from '../../StepContext';
+import { StepState } from '../../types';
 
 interface Props {
   children?: ReactNode;
@@ -21,55 +22,32 @@ interface Props {
   selectorPrimaryFocus?: string;
 }
 
-interface StepStateType extends StepContextType {
-  formState: {
-    email?: string;
-  };
-  setFormState: Dispatch<SetStateAction<StepStateType['formState']>>;
-}
-
 export const StepTearsheet = ({
-  influencer,
   children,
   open,
   onClose,
+  influencer,
   title,
   hasCloseIcon,
   closeIconDescription = 'Close',
   selectorPrimaryFocus,
   ...rest
 }: Props) => {
-  const [numSteps, setNumSteps] = useState<number>();
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formState, setFormState] = useState({});
-
-  const context: StepStateType = {
-    formState,
-    setFormState,
-    numSteps,
-    setNumSteps,
-    currentStep,
-    handleGoToStep: (step) => setCurrentStep(step),
-    handleNext: () => setCurrentStep((step) => step + 1),
-    handlePrevious: () => setCurrentStep((step) => step - 1),
-  };
-
-  const influencerContent = influencer?.(context) || null;
+  const state = useStepContext();
+  const influencerContent = influencer?.(state) || null;
 
   return (
-    <StepContext.Provider value={context}>
-      <Tearsheet
-        {...rest}
-        influencer={influencerContent}
-        open={open}
-        onClose={onClose}
-        title={title}
-        hasCloseIcon={hasCloseIcon}
-        closeIconDescription={closeIconDescription}
-        selectorPrimaryFocus={selectorPrimaryFocus}
-      >
-        {children}
-      </Tearsheet>
-    </StepContext.Provider>
+    <Tearsheet
+      {...rest}
+      influencer={influencerContent}
+      open={open}
+      onClose={onClose}
+      title={title}
+      hasCloseIcon={hasCloseIcon}
+      closeIconDescription={closeIconDescription}
+      selectorPrimaryFocus={selectorPrimaryFocus}
+    >
+      {children}
+    </Tearsheet>
   );
 };

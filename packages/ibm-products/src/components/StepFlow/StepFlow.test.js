@@ -5,13 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act, useState } from 'react';
+import React, { act } from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 import { Button, TextInput } from '@carbon/react';
 
 import { carbon } from '../../settings';
-import { StepActions, StepGroup, StepContext, useStepContext } from '.';
+import { StepGroup, useStepContext, StepProvider } from '.';
+import { StepActions } from './story-assets/StepActions';
 
 const Step1 = () => {
   const { setFormState, formState } = useStepContext();
@@ -38,27 +39,16 @@ const Step2 = () => {
   return <div>Step 2 content</div>;
 };
 
-const StepComponent = ({ children, noContextValue }) => {
-  const [numSteps, setNumSteps] = useState();
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formState, setFormState] = useState({});
-
-  const context = {
-    formState,
-    setFormState,
-    numSteps,
-    setNumSteps,
-    currentStep,
-    handleGoToStep: (step) => setCurrentStep(step),
-    handleNext: () => setCurrentStep((step) => step + 1),
-    handlePrevious: () => setCurrentStep((step) => step - 1),
-  };
-
-  return (
-    <StepContext.Provider value={noContextValue ? undefined : context}>
-      {children}
-    </StepContext.Provider>
-  );
+const StepComponent = ({ children, invalidUse }) => {
+  if (invalidUse) {
+    return (
+      <>
+        <StepGroup>test</StepGroup>
+        <StepProvider>{children}</StepProvider>
+      </>
+    );
+  }
+  return <StepProvider>{children}</StepProvider>;
 };
 
 describe('StepFlow', () => {
@@ -133,7 +123,7 @@ describe('StepFlow', () => {
       <StepComponent>
         <StepGroup></StepGroup>
         <StepActions
-          buttonRenderer={({ currentStep, formState }) => {
+          buttonRenderer={({ currentStep }) => {
             tempCurrentStep = currentStep;
             return (
               <>
@@ -153,7 +143,7 @@ describe('StepFlow', () => {
     expect(() =>
       render(
         <>
-          <StepComponent noContextValue></StepComponent>
+          <StepComponent invalidUse></StepComponent>
           <StepGroup></StepGroup>
         </>
       )

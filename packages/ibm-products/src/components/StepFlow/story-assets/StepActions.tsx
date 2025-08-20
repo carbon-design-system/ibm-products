@@ -6,7 +6,7 @@
  */
 
 import { ReactNode } from 'react';
-import { StepState, useStepContext } from '.';
+import { StepState, useStepContext } from '..';
 
 export interface StepActionsProps {
   buttonRenderer: (stepData: StepState) => ReactNode;

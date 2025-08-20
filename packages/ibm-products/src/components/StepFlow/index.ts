@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { StepActions } from './StepActions';
-export type { StepActionsProps } from './StepActions';
 export { StepGroup } from './StepGroup';
-export { StepContext, useStepContext } from './StepContext';
+export { StepProvider, useStepContext } from './StepContext';
+export type { StepActionsProps } from './story-assets/StepActions';
 export type { StepState, StepContextType } from './types';

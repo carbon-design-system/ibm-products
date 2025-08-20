@@ -27,7 +27,7 @@ export function makeDraggable({
   focusableDragHandle,
   dragStep,
   shiftDragStep,
-}: DraggableProps): void {
+}: DraggableProps) {
   const computedStyle = window.getComputedStyle(el);
   if (dragHandle) {
     dragHandle.style.cursor = 'move';
@@ -49,7 +49,15 @@ export function makeDraggable({
   let offsetX = 0;
   let offsetY = 0;
 
+  const listeners: ((val: boolean) => void)[] = [];
+  const notify = () => listeners.forEach((callback) => callback(isDragging));
+
   function onKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Enter') {
+      isDragging = !isDragging;
+      notify();
+    }
+    if (!isDragging) {return;}
     const distance = e.shiftKey ? (shiftDragStep ?? 32) : (dragStep ?? 8);
     switch (e.key) {
       case 'Enter':
@@ -83,6 +91,7 @@ export function makeDraggable({
     offsetX = e.clientX - el.offsetLeft;
     offsetY = e.clientY - el.offsetTop;
     isDragging = true;
+    notify();
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp, { once: true });
@@ -101,6 +110,7 @@ export function makeDraggable({
       return;
     }
     isDragging = false;
+    notify();
 
     document.removeEventListener('mousemove', onMouseMove);
   }
@@ -110,4 +120,17 @@ export function makeDraggable({
     el.addEventListener('mousedown', onMouseDown);
   }
   focusableDragHandle?.addEventListener('keydown', onKeyDown);
+
+  return {
+    get isDragging() {
+      return isDragging;
+    },
+    subscribe(callback: (val: boolean) => void) {
+      listeners.push(callback);
+      return () => {
+        const index = listeners.indexOf(callback);
+        if (index > -1) {listeners.splice(index, 1);}
+      };
+    },
+  };
 }

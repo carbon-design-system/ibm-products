@@ -1,3 +1,15 @@
+## `@carbon/ibm-products-styles@2.69.0-rc.0`
+### Features :rocket:
+- feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)
+
+### Bug fixes :bug:
+- fix(sidepanel): blank space appears when the header has no content (#8029)
+- fix(styles): use correct syntax for custom prop (#7990)
+- fix(PageHeader): ensures expected positioning even if content component is excluded (#7946)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
 ## `@carbon/ibm-products-styles@2.68.1`
 ### Bug fixes :bug:
 - fix(coachmark): address bubble style import (#8010)

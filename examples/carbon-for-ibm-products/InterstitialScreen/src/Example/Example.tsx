@@ -22,7 +22,6 @@ export const Example = () => {
 
   const defaultProps = {
     headerTitle: 'Welcom, Jan!',
-    interstitialAriaLabel: 'Interstitial Screen',
   };
 
   const getContent = () => {
@@ -115,8 +114,12 @@ export const Example = () => {
                   </p>
                 </div>
                 <Layer>
-                  <TileGroup name="radio tile group" className="tileWrapper" defaultSelected='medium'>
-                    <RadioTile id="radio-tile-1" value="starter"  >
+                  <TileGroup
+                    name="radio tile group"
+                    className="tileWrapper"
+                    defaultSelected="medium"
+                  >
+                    <RadioTile id="radio-tile-1" value="starter">
                       <p>Starter size</p>
                       <p>
                         Trial size in extra small. Includes 1 general purpose
@@ -172,24 +175,22 @@ export const Example = () => {
         Show Interstitial modal
       </Button>
       <InterstitialScreen
-        isOpen={showInterstitialModal}
+        open={showInterstitialModal}
         onClose={() => {
           setShowInterstitialModal(false);
         }}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
         isFullScreen={false}
       >
         <InterstitialScreen.Header
           headerTitle={defaultProps.headerTitle}
         ></InterstitialScreen.Header>
         <InterstitialScreen.Body
-          contentRenderer={(internalConfig) => {
+          contentRenderer={() => {
             return getContent();
           }}
         />
         <InterstitialScreen.Footer />
       </InterstitialScreen>
-     
     </>
   );
 };

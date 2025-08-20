@@ -11,7 +11,6 @@ export const Example = () => {
 
   const defaultProps = {
     headerTitle: 'Welcom, Jan!',
-    interstitialAriaLabel: 'Interstitial Screen',
   };
   const translations = {
     'carbon.progress-step.complete': 'Terminé',
@@ -63,11 +62,10 @@ export const Example = () => {
         Show Interstitial modal
       </Button>
       <InterstitialScreen
-        isOpen={showInterstitialModal}
+        open={showInterstitialModal}
         onClose={() => {
           setShowInterstitialModal(false);
         }}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
         isFullScreen={false}
       >
         <InterstitialScreen.Header

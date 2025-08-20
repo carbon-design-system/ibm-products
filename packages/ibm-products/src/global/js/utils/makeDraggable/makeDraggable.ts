@@ -57,7 +57,9 @@ export function makeDraggable({
       isDragging = !isDragging;
       notify();
     }
-    if (!isDragging) {return;}
+    if (!isDragging) {
+      return;
+    }
     const distance = e.shiftKey ? (shiftDragStep ?? 32) : (dragStep ?? 8);
     switch (e.key) {
       case 'Enter':
@@ -129,7 +131,9 @@ export function makeDraggable({
       listeners.push(callback);
       return () => {
         const index = listeners.indexOf(callback);
-        if (index > -1) {listeners.splice(index, 1);}
+        if (index > -1) {
+          listeners.splice(index, 1);
+        }
       };
     },
   };

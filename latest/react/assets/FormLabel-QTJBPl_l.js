@@ -1,0 +1,1 @@
+import{u as n,c as m,e as c,_ as i,P as e}from"./iframe-6Ea7Lnhj.js";import{T as p}from"./Text-CVT3kS-3.js";function x({className:a,children:r,id:o,...t}){const s=n(),l=m(`${s}--label`,`${s}--label--no-margin`,a);return c.createElement(p,i({as:"label",htmlFor:o,className:l},t),r)}x.propTypes={children:e.node,className:e.string,id:e.string};export{x as F};

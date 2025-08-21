@@ -7,5 +7,4 @@
 
 export { StepGroup } from './StepGroup';
 export { StepProvider, useStepContext } from './StepContext';
-export type { StepActionsProps } from './story-assets/StepActions';
 export type { StepState, StepContextType } from './types';

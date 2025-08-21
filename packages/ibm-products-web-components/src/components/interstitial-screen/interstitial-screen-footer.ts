@@ -181,9 +181,9 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
       const { carouselAPI } = interstitialDetailsSignal.get();
 
       if (actionType == 'next') {
-        carouselAPI.next();
+        carouselAPI?.next();
       } else if (actionType === 'back') {
-        carouselAPI.prev();
+        carouselAPI?.prev();
       } else {
         this._handleUserInitiatedClose?.(actionType);
       }

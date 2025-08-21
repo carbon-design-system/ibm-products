@@ -6,6 +6,11 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import {
+  selectorTabbable as selectorTabbableCarbon,
+  prefix as carbonPrefix,
+} from '@carbon/web-components/es/globals/settings';
 /**
  * Traps focus within a set of containers, ensuring it stays within focusable elements.
  * @param {NodeListOf<Element>} containers - The containers to trap focus within.
@@ -22,74 +27,11 @@ export const clearFocusableContainers = () => {
   _containers.length = 0;
 };
 export const trapFocus = (containers?: HTMLElement[]) => {
-  const prefix = 'cds';
-  const selectorTabbable = `
-    a[href]:not(#start-sentinel, #end-sentinel), area[href],
-    input:not([disabled]):not([tabindex='-1']),
-    button:not([disabled]):not([tabindex='-1']),
-    select:not([disabled]):not([tabindex='-1']),
-    textarea:not([disabled]):not([tabindex='-1']),
-    iframe, object, embed, *[tabindex]:not([tabindex='-1']),
-    *[contenteditable=true],
-    ${prefix}-accordion-item,
-    ${prefix}-actionable-notification-button,
-    ${prefix}-ai-label,
-    ${prefix}-button:not([disabled]),
-    ${prefix}-breadcrumb-link,
-    ${prefix}-checkbox,
-    ${prefix}-code-snippet,
-    ${prefix}-combo-box,
-    ${prefix}-content-switcher-item,
-    ${prefix}-copy-button,
-    ${prefix}-table-header-row,
-    ${prefix}-table-row,
-    ${prefix}-table-toolbar-search,
-    ${prefix}-date-picker-input,
-    ${prefix}-dropdown,
-    ${prefix}-icon-button,
-    ${prefix}-input,
-    ${prefix}-link,
-    ${prefix}-number-input,
-    ${prefix}-modal,
-    ${prefix}-modal-close-button,
-    ${prefix}-modal-footer-button,
-    ${prefix}-multi-select,
-    ${prefix}-inline-notification,
-    ${prefix}-toast-notification,
-    ${prefix}-overflow-menu,
-    ${prefix}-overflow-menu-item,
-    ${prefix}-page-sizes-select,
-    ${prefix}-pages-select,
-    ${prefix}-progress-step,
-    ${prefix}-radio-button,
-    ${prefix}-search,
-    ${prefix}-slider,
-    ${prefix}-slider-input,
-    ${prefix}-structured-list,
-    ${prefix}-tab,
-    ${prefix}-filter-tag,
-    ${prefix}-selectable-tag,
-    ${prefix}-tag,
-    ${prefix}-textarea,
-    ${prefix}-text-input,
-    ${prefix}-clickable-tile,
-    ${prefix}-expandable-tile,
-    ${prefix}-radio-tile,
-    ${prefix}-selectable-tile,
-    ${prefix}-toggle,
-    ${prefix}-tooltip,
-    ${prefix}-tooltip-definition,
-    ${prefix}-tooltip-icon,
-    ${prefix}-header-menu,
-    ${prefix}-header-menu-button,
-    ${prefix}-header-menu-item,
-    ${prefix}-header-name,
-    ${prefix}-header-nav-item,
-    ${prefix}-side-nav-link,
-    ${prefix}-side-nav-menu,
-    ${prefix}-side-nav-menu-item,
-    ${prefix}-slug
-  `;
+  const selectorTabbable = selectorTabbableCarbon.replace(
+    `${carbonPrefix}-button`,
+    `${carbonPrefix}-button:not([disabled]), ${carbonPrefix}-selectable-tag`
+  );
+
   if (containers && containers.length > 0) {
     _containers = containers;
   }

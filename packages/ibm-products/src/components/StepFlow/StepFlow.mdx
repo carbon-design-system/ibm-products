@@ -20,15 +20,17 @@ Included assets:
 
 ## Example usage
 
-Wrap your stepped component in the `StepProvider` from the utility. Use `<StepGroup>` and step components with your new step enabled side panel component. Any content outside of the `<StepGroup>` will render on every step.
+Wrap your stepped component in the `StepProvider` from the utility. Use `<StepGroup>` and step components with your new step enabled tearsheet component. Any content outside of the `<StepGroup>` will render on every step.
 ```tsx
 const Example = () => {
   return <StepProvider>
-    <StepGroup>
-      <Step1 />
-      <Step2 />
-      {someCondition && <ConditionalStep />}
-    </StepGroup>
+    <Tearsheet>
+      <StepGroup>
+        <Step1 />
+        <Step2 />
+        {someCondition && <ConditionalStep />}
+      </StepGroup>
+    <Tearsheet>
   </StepProvider>
 }
 ```

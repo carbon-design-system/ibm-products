@@ -29,29 +29,34 @@ const DraggableDiv = () => {
   const dragRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     if (dialogRef.current && headerRef.current && dragRef.current) {
-      const draggable = makeDraggable({
+      makeDraggable({
         el: dialogRef.current,
         dragHandle: headerRef.current,
         focusableDragHandle: dragRef.current,
       });
 
-      draggable.subscribe((val) => {
+      const onDragStart = () => {
         if (dialogRef.current) {
-          if (val) {
-            dialogRef.current.classList.add('is-dragging');
-            dialogRef.current.setAttribute(
-              'aria-label',
-              'Picked up the draggable Dialog'
-            );
-          } else {
-            dialogRef.current.classList.remove('is-dragging');
-            dialogRef.current.setAttribute(
-              'aria-label',
-              'draggable Dialog was dropped'
-            );
-          }
+          dialogRef.current.classList.add('is-dragging');
+          dialogRef.current.setAttribute(
+            'aria-label',
+            'Picked up the draggable Dialog'
+          );
         }
-      });
+      };
+
+      const onDragEnd = () => {
+        if (dialogRef.current) {
+          dialogRef.current.classList.remove('is-dragging');
+          dialogRef.current.setAttribute(
+            'aria-label',
+            'draggable Dialog was dropped'
+          );
+        }
+      };
+
+      dialogRef.current.addEventListener('dragstart', onDragStart);
+      dialogRef.current.addEventListener('dragend', onDragEnd);
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dialogRef.current, headerRef.current, dragRef.current]);
@@ -100,28 +105,34 @@ const DraggablePopoverTemplate = () => {
         dragContainer.style.transform = 'none';
         dragContainer.style.left = '0px';
         dragContainer.style.top = '0px';
-        const draggable = makeDraggable({
+        makeDraggable({
           el: dragContainer,
           dragHandle: headerRef.current,
           focusableDragHandle: dragRef.current,
         });
-        draggable.subscribe((val) => {
+
+        const onDragStart = () => {
           if (dragContainer && dragStyleContainer) {
-            if (val) {
-              dragStyleContainer.classList.add('is-dragging');
-              dragStyleContainer.setAttribute(
-                'aria-label',
-                'Picked up the draggable popover'
-              );
-            } else {
-              dragStyleContainer.classList.remove('is-dragging');
-              dragStyleContainer.setAttribute(
-                'aria-label',
-                'draggable popover was dropped'
-              );
-            }
+            dragStyleContainer.classList.add('is-dragging');
+            dragStyleContainer.setAttribute(
+              'aria-label',
+              'Picked up the draggable popover'
+            );
           }
-        });
+        };
+
+        const onDragEnd = () => {
+          if (dragContainer && dragStyleContainer) {
+            dragStyleContainer.classList.remove('is-dragging');
+            dragStyleContainer.setAttribute(
+              'aria-label',
+              'draggable popover was dropped'
+            );
+          }
+        };
+
+        dragContainer.addEventListener('dragstart', onDragStart);
+        dragContainer.addEventListener('dragend', onDragEnd);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

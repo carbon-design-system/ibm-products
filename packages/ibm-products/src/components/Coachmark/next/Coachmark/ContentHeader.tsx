@@ -67,30 +67,30 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
         handleRef.current &&
         dragRef.current
       ) {
-        const draggable = makeDraggable({
+        makeDraggable({
           el: contentRef,
           dragHandle: handleRef.current,
           focusableDragHandle: dragRef.current,
         });
 
-        draggable.subscribe((val) => {
+        const onDragStart = () => {
           if (contentRef) {
-            if (val) {
-              contentRef.classList.add(
-                `${contentHeaderBlockClass}--is-dragging`
-              );
-              contentRef.setAttribute(
-                'aria-label',
-                'Coachmark is being dragged'
-              );
-            } else {
-              contentRef.classList.remove(
-                `${contentHeaderBlockClass}--is-dragging`
-              );
-              contentRef.removeAttribute('aria-label');
-            }
+            contentRef.classList.add(`${contentHeaderBlockClass}--is-dragging`);
+            contentRef.setAttribute('aria-label', 'Coachmark is being dragged');
           }
-        });
+        };
+
+        const onDragEnd = () => {
+          if (contentRef) {
+            contentRef.classList.remove(
+              `${contentHeaderBlockClass}--is-dragging`
+            );
+            contentRef.removeAttribute('aria-label');
+          }
+        };
+
+        contentRef.addEventListener('dragstart', onDragStart);
+        contentRef.addEventListener('dragend', onDragEnd);
       }
     });
 

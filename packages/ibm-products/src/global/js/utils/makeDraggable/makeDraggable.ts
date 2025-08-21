@@ -49,14 +49,20 @@ export function makeDraggable({
   let offsetX = 0;
   let offsetY = 0;
 
-  const listeners: ((val: boolean) => void)[] = [];
-  const notify = () => listeners.forEach((callback) => callback(isDragging));
+  function dispatch(type: string, detail: any = {}) {
+    el.dispatchEvent(new CustomEvent(type, { detail, bubbles: true }));
+  }
 
   function onKeyDown(e: KeyboardEvent) {
     if (e.key === 'Enter') {
       isDragging = !isDragging;
-      notify();
     }
+    if (isDragging) {
+      dispatch('dragstart', { keyboard: true });
+    } else {
+      dispatch('dragend', { keyboard: true });
+    }
+
     if (!isDragging) {
       return;
     }
@@ -93,7 +99,7 @@ export function makeDraggable({
     offsetX = e.clientX - el.offsetLeft;
     offsetY = e.clientY - el.offsetTop;
     isDragging = true;
-    notify();
+    dispatch('dragstart', { mouse: true });
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp, { once: true });
@@ -112,7 +118,7 @@ export function makeDraggable({
       return;
     }
     isDragging = false;
-    notify();
+    dispatch('dragend', { mouse: true });
 
     document.removeEventListener('mousemove', onMouseMove);
   }
@@ -122,19 +128,4 @@ export function makeDraggable({
     el.addEventListener('mousedown', onMouseDown);
   }
   focusableDragHandle?.addEventListener('keydown', onKeyDown);
-
-  return {
-    get isDragging() {
-      return isDragging;
-    },
-    subscribe(callback: (val: boolean) => void) {
-      listeners.push(callback);
-      return () => {
-        const index = listeners.indexOf(callback);
-        if (index > -1) {
-          listeners.splice(index, 1);
-        }
-      };
-    },
-  };
 }

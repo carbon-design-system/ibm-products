@@ -384,8 +384,10 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     const target = e.target as HTMLSlotElement;
     const customHeaderElms = target?.assignedElements();
     customHeaderElms.forEach((el) => {
-      el.style.opacity = `calc(1 - var(--${blockClass}--scroll-animation-progress))`;
-      this._customHeaderElements.push(el);
+      if (el instanceof HTMLElement) {
+        el.style.opacity = `calc(1 - var(--${blockClass}--scroll-animation-progress))`;
+        this._customHeaderElements.push(el);
+      }
     });
   }
 

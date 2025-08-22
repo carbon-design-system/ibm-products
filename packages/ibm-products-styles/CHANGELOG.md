@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.69.0-rc.0`
+## `@carbon/ibm-products-styles@2.69.0`
 ### Features :rocket:
 - feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)
 

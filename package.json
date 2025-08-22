@@ -134,17 +134,17 @@
     "brace-expansion@^2.0.1": "2.0.2"
   },
   "lint-staged": {
-    "!(examples/**/*)**/*.{js,jsx,ts,tsx,mjs}": [
+    "*.{js,jsx,ts,tsx,mjs}": [
       "npx prettier --cache --write",
       "npx eslint --fix",
       "npx cspell --no-must-find-files",
       "yarn lint:license:staged"
     ],
-    "**/*.scss": [
+    "*.scss": [
       "npx prettier --cache --write",
       "npx stylelint --allow-empty-input --fix"
     ],
-    "!(examples/**/*).md,mdx": [
+    "*.{md,mdx}": [
       "npx prettier --cache --write",
       "npx cspell --no-must-find-files",
       "yarn lint:license:staged"

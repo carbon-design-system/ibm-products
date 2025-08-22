@@ -18,3 +18,5 @@ CHANGELOG.md
 # specific files
 telemetry.yml
 welcome-lottie.json
+# prettier + mdx + lit = wonky formatting
+packages/ibm-products-web-components/**/*.mdx

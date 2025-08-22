@@ -25,6 +25,7 @@ To build this pattern, we recommend including the following components:
 - [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input)
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button)
 
+
 > 💡 Check our
 > [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/api-key-modal)
 > example implementation.
@@ -50,7 +51,7 @@ import '@carbon/web-components/es/components/toggle/index.js';
 ### HTML
 
 ```html
-<cds-modal>
+<cds-modal >
   <cds-modal-header>
     <cds-modal-label>An example of Generate API key</cds-modal-label>
     <cds-modal-heading>Generate an API key</cds-modal-heading>
@@ -87,12 +88,15 @@ import '@carbon/web-components/es/components/toggle/index.js';
         helper-text="Providing the application name will help you identify your API key later."
       ></cds-text-input> </cds-form-item
     >` : null} ${this.loading ? html`
-    <cds-inline-loading ?icon-description="Generating"
+    <cds-inline-loading
+      ?icon-description="Generating"
       >Generating...</cds-inline-loading
     >
     ` : null} ${this.copyError || this.error ? html`
     <div>
-      <div>${ErrorFilled16({ slot: 'icon'})}</div>
+      <div>
+        ${ErrorFilled16({ slot: 'icon'})}
+      </div>
       <p
         class="${`${blockClass}__messaging-text`}"
         role="alert"
@@ -111,7 +115,10 @@ import '@carbon/web-components/es/components/toggle/index.js';
         fileType="json"
         downloadLinkLabel="Download API Key in Java Script File format"
       />` : html`
-      <div role="alert" aria-live="assertive">
+      <div
+        role="alert"
+        aria-live="assertive"
+      >
         <p>
           This is your unique API key and is non-recoverable. If you lose this
           API key, you will have to reset it.
@@ -122,7 +129,12 @@ import '@carbon/web-components/es/components/toggle/index.js';
     ` : null} ${this.editSuccess || this.apiKeyLoaded ? html`
     <div>
       ${CheckmarkFilled16({ slot: 'icon'})}
-      <p role="alert" aria-live="assertive">API key successfully created</p>
+      <p
+        role="alert"
+        aria-live="assertive"
+      >
+        API key successfully created
+      </p>
     </div>
     ` : null}
   </cds-modal-body>
@@ -131,8 +143,7 @@ import '@carbon/web-components/es/components/toggle/index.js';
       kind="secondary"
       data-modal-close
       @click="${onCloseHandler}"
-      >Close</cds-modal-footer-button
-    >
+    >Close</cds-modal-footer-button>
     <cds-modal-footer-button
       ?disabled="${this.isPrimaryButtonDisabled()}"
       @click="${this._submitHandler}"

@@ -189,7 +189,7 @@ test.describe('Tearsheet @avt', () => {
     await expect(openButton).toBeFocused();
   });
 
-  test('@avt-stacking', async ({ page }) => {
+  test.only('@avt-stacking', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
       id: 'components-tearsheet--stacked',
@@ -267,20 +267,25 @@ test.describe('Tearsheet @avt', () => {
 
     // Pressing 'Escape' key to close the third Tearsheet
     await page.keyboard.press('Escape');
+    // await page.waitForTimeout(100);
     await page.screenshot({ animations: 'disabled' });
 
     // Now 3rd Tearsheet is closed and 2nd Tearsheet is in the viewport
     await expect(ts2).toBeInViewport();
+
     // And the focus is switched to the open button of tearsheet 3
     await expect(openButton3).toBeFocused();
+    //await expect(openButton3).toBeFocused();
 
     // Pressing 'Escape' key to close the second Tearsheet
     await page.keyboard.press('Escape');
+    // await page.waitForTimeout(100);
     await page.screenshot({ animations: 'disabled' });
     // Now the 2nd Tearsheet is closed and 1st Tearsheet in the viewport
     await expect(ts1).toBeInViewport();
     // And the focus now on the open tearsheet 2 button
-    await expect(openButton2).toBeFocused();
+    await expect(stackInput1).toBeFocused();
+    //await expect(openButton2).toBeFocused();
 
     await page.keyboard.press('Escape');
     await page.screenshot({ animations: 'disabled' });

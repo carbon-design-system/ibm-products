@@ -29,24 +29,50 @@ export const useCreateComponentFocus = ({
     };
     // FUNCTION TO ENSURE THE ELEMENT TARGETED IS NOT CONTAINED IN AN ELEMENT MARKED 'INERT'
     const isNotContainedInInert = (elm) => {
-      return elm && !elm.closest(`[inert]`);
+      if (!elm) return false;
+      const inertParent = elm.closest('[inert]');
+      return (
+        !inertParent || (!inertParent.hasAttribute('inert') && !elm.disabled)
+      );
+    };
+
+    const getActiveSteps = () => {
+      const allSteps = Array.from(document.querySelectorAll(blockClass));
+      return allSteps.filter((el) => {
+        let currentStep = el;
+        while (currentStep) {
+          if (currentStep.hasAttribute('inert')) return false;
+          currentStep = currentStep.parentElement;
+        }
+        return true;
+      });
+    };
+
+    const getFocusableElement = (containingElement) => {
+      const focusElementQuery = `button, input[type="button"], input, select, textarea, a[href]`;
+      // PREFER THE USER DEFINED firstFocusElement IF IT EXISTS
+      const firstFocusEl = containingElement.querySelector(firstFocusElement);
+      if (
+        firstFocusEl &&
+        isNotContainedInInert(firstFocusEl) &&
+        !firstFocusEl.disabled
+      ) {
+        return firstFocusEl;
+      }
+      // BACKUP TO INTERACTIVE ELEMENT LIST
+      const bakFocusEl = Array.from(
+        containingElement.querySelectorAll(focusElementQuery)
+      );
+      return bakFocusEl.find((el) => isNotContainedInInert(el) && !el.disabled);
     };
 
     if (previousState?.currentStep !== currentStep && currentStep > 0) {
       // GET THE CURRENT STEP ELEMENT
-      const containingElement =
-        document.querySelectorAll(blockClass)[currentStep - 1];
-      // INTERACTIVE ELEMENTS WE CAN QUERY FOR TO SET FOCUS ON
-      const focusElementQuery = `button, input, select, textarea, a`;
-      if (containingElement && isNotContainedInInert(containingElement)) {
-        // PREFER THE USER DEFINED firstFocusElement IF IT EXISTS
-        const firstFocusEl = containingElement.querySelector(firstFocusElement);
-        // BACKUP TO INTERACTIVE ELEMENT LIST
-        const bakFocusEl = containingElement.querySelector(focusElementQuery);
-        // PRIMARY AND BACKUP ELEMENTS TO FOCUS ON
-        const elm = firstFocusEl || bakFocusEl;
-        if (elm) {
-          awaitFocus(elm);
+      const activeStepElement = getActiveSteps()[0];
+      if (activeStepElement && isNotContainedInInert(activeStepElement)) {
+        const focusEl = getFocusableElement(activeStepElement);
+        if (focusEl) {
+          awaitFocus(focusEl);
         }
       }
     }

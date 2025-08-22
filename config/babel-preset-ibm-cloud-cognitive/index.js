@@ -25,6 +25,7 @@ module.exports = () => {
     ],
     plugins: [
       'dev-expression',
+      '@babel/plugin-transform-class-static-block',
       '@babel/plugin-proposal-class-properties',
       '@babel/plugin-proposal-export-namespace-from',
       '@babel/plugin-proposal-export-default-from',

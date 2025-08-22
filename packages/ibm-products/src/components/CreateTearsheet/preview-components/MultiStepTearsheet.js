@@ -156,29 +156,6 @@ export const MultiStepTearsheet = (
         >
           <Grid>
             <Column xlg={8} lg={8} md={8} sm={4}>
-              <div>
-                <ContentSwitcher
-                  onChange={({ name }) => {
-                    name === 'one' ? setSelIndex(0) : setSelIndex(1);
-                  }}
-                  selectedIndex={selIndex}
-                  selectionMode="automatic"
-                >
-                  <Switch name="one" text="First section" />
-                  <Switch name="two" text="Second section" />
-                </ContentSwitcher>
-                {selIndex === 0 ? (
-                  <>
-                    <p>first section</p>
-                    {/* <TextInput /> */}
-                  </>
-                ) : (
-                  <>
-                    <p>second section</p>
-                    {/* <TextInput /> */}
-                  </>
-                )}
-              </div>
               <TextInput
                 labelText="Topic name"
                 placeholder="Enter topic name"
@@ -210,6 +187,7 @@ export const MultiStepTearsheet = (
                 placeholder="Enter topic version"
                 onChange={(event) => setTopicVersionValue(event.target.value)}
               />
+
               {hasSubmitError && (
                 <InlineNotification
                   kind="error"
@@ -234,6 +212,29 @@ export const MultiStepTearsheet = (
                 }
                 checked={shouldIncludeAdditionalStep}
               />
+              <div>
+                <ContentSwitcher
+                  onChange={({ name }) => {
+                    name === 'one' ? setSelIndex(0) : setSelIndex(1);
+                  }}
+                  selectedIndex={selIndex}
+                  selectionMode="automatic"
+                >
+                  <Switch name="one" text="First section" />
+                  <Switch name="two" text="Second section" />
+                </ContentSwitcher>
+                {selIndex === 0 ? (
+                  <>
+                    <p>first section</p>
+                    {/* <TextInput /> */}
+                  </>
+                ) : (
+                  <>
+                    <p>second section</p>
+                    {/* <TextInput /> */}
+                  </>
+                )}
+              </div>
             </Column>
           </Grid>
         </CreateTearsheetStep>

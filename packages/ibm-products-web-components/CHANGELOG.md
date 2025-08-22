@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.22.0-rc.0`
+## `@carbon/ibm-products-web-components@0.22.0`
 ### Features :rocket:
 - feat: add unit tests, accessibility fixes  , example for interstitial screen web component (#8015)
 - feat(notificationsPanel): empty state (#8032)

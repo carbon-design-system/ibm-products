@@ -6,7 +6,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 # About Modal
 
-[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/about-modal/usage/) | [Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage) | [Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/about-modal/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
 
 ## Table of Contents
 
@@ -18,40 +22,43 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-The About modal component conveys product information, including the version number, copyright information, and license details.
-The About modal is triggered by a user’s action which appears on top of the main page content and is persistent until dismissed. 
-The purpose of this modal should be immediately apparent to the user, with a clear and obvious path to completion.
+The About modal component conveys product information, including the version
+number, copyright information, and license details. The About modal is triggered
+by a user’s action which appears on top of the main page content and is
+persistent until dismissed. The purpose of this modal should be immediately
+apparent to the user, with a clear and obvious path to completion.
 
 ### About Modal
 
 <Canvas
   of={stories.aboutModal}
   additionalActions={[
-      {
-        title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig({
-          'story': stories.aboutModal,
-          'styles': stories.default.parameters.styles
-      }),
-      },
-    ]}>
-</Canvas>
-
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.aboutModal,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
 
 ### About Modal With All Props Set
 
 <Canvas
   of={stories.aboutModalWithAllPropsSet}
   additionalActions={[
-      {
-        title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig({
-          'story': stories.aboutModalWithAllPropsSet,
-          'styles': stories.default.parameters.styles
-      }),
-      },
-    ]}>
-</Canvas>
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.aboutModalWithAllPropsSet,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
 
 ## Component API
 

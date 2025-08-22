@@ -66,6 +66,14 @@ export type option = Item & { icon?: CarbonIconType };
 
 export type PropertyConfigOption = {
   type: 'option';
+  isDisabled?: (args: {
+    conditionState: Condition;
+    group: ConditionGroup;
+  }) => boolean;
+  isHidden?: (args: {
+    conditionState: Condition;
+    group: ConditionGroup;
+  }) => boolean;
   config?: {
     options?: option[];
     operators?: (Item & { isMultiSelect?: boolean })[];

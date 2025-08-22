@@ -74,6 +74,39 @@ const statementConfigCustom = [
   },
 ];
 ```
+
+### Disable/hide specific property
+
+Each property in the condition builder can be dynamically disabled or hidden while conditions are being built. 
+For this, the property config supports isDisabled and isHidden callbacks. These functions are evaluated during rendering 
+of each property option in the dropdown, and they receive the current condition and group state so they can decide whether the 
+property should be available.
+
+```
+properties: [
+    {
+      id: 'continent',
+      label: 'Continent',
+      icon: Earth,
+      type: 'option',
+      description: 'Continent',
+      isDisabled: ({ conditionState, group }) => {
+       
+        return true or false;
+      },
+       isHidden: ({ conditionState, group }) => {
+       
+        return true or false;
+      },
+      config: {
+        options: [
+          ...
+        ],
+      },
+    },
+    ...]
+```
+
 ### Dynamic options
 If the input type is set to option and you want to load options dynamically during condition building—rather than
  supplying them directly in the inputConfig—you can use the getOptions callback prop. This asynchronous function returns

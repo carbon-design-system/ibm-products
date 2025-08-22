@@ -61,6 +61,22 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   padding-inline: $spacing-05;
 }
 
+.#{$block-class}__item-option__option[aria-disabled] {
+  color: $text-disabled;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    cursor: not-allowed;
+    outline: none;
+  }
+}
+.#{$block-class}__item-option__option[aria-hidden] {
+  display: none;
+}
+
 .#{$block-class}__item-option__option:hover {
   background-color: $layer-hover;
 }

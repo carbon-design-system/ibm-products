@@ -56,10 +56,7 @@ ${dirtyInput && status !== 'default' ? html`
 <div class="${blockClass}__buttons">
   <cds-button
     kind="secondary"
-    ?disabled="${status"
-    !=""
-    ="in-progress"
-    }
+    ?disabled="${status !== 'in-progress'}"
     type="button"
   >
     Cancel
@@ -67,11 +64,7 @@ ${dirtyInput && status !== 'default' ? html`
   <cds-button
     @click="${onRequestSave}"
     kind="primary"
-    ?disabled="${status"
-    =""
-    =""
-    ="in-progress"
-    }
+    ?disabled="${status === 'in-progress'}"
     type="button"
   >
     ${statusObj[status]?.text} ${icon}

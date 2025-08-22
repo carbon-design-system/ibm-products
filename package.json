@@ -33,8 +33,8 @@
     "clean:packages": "yarn run-all --no-sort clean",
     "coverage": "echo 'you can pass a name argument to specify which tests are ran such as `yarn coverage decorator` and then view the results with `yarn coverage:report`'; yarn test:c4p --coverage",
     "coverage:report": "open ./packages/ibm-products/coverage/index.html",
-    "format": "prettier --cache --write '**/*.{js,jsx,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd,examples}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,jsx,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd,examples}/**'",
+    "format": "prettier --cache --write '**/*.{js,jsx,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd,examples,scripts}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,jsx,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd,examples,scripts}/**'",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
     "lint:license": "scripts/check-license.cjs -a",
@@ -144,7 +144,7 @@
       "npx prettier --cache --write",
       "npx stylelint --allow-empty-input --fix"
     ],
-    "!(examples/**/*).md": [
+    "!(examples/**/*).md,mdx": [
       "npx prettier --cache --write",
       "npx cspell --no-must-find-files",
       "yarn lint:license:staged"

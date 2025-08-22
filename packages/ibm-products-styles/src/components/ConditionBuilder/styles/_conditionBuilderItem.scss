@@ -77,7 +77,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   display: none;
 }
 
-.#{$block-class}__item-option__option:hover {
+.#{$block-class}__item-option__option:not([aria-disabled]):hover {
   background-color: $layer-hover;
 }
 
@@ -107,17 +107,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   border-block-start: 0.0625rem solid $border-subtle;
 }
 
-.#{$block-class}__item-option__option:hover
-  .#{$block-class}__item-option__option-content,
-.#{$block-class}__item-option__option[aria-selected='true']
-  .#{$block-class}__item-option__option-content,
-.#{$block-class}__item-option__option:hover
-  + .#{$block-class}__item-option__option
-  .#{$block-class}__item-option__option-content,
-.#{$block-class}__item-option__option[aria-selected='true']
-  + .#{$block-class}__item-option__option
-  .#{$block-class}__item-option__option-content {
-  border-block-start-color: transparent;
+.#{$block-class}__item-option__option:not([aria-disabled]) {
+  &:hover,
+  &[aria-selected='true'],
+  &:hover + .#{$block-class}__item-option__option,
+  &[aria-selected='true'] + .#{$block-class}__item-option__option {
+    .#{$block-class}__item-option__option-content {
+      border-block-start-color: transparent;
+    }
+  }
 }
 
 .#{$block-class}__item-option__option[aria-selected='true'] {

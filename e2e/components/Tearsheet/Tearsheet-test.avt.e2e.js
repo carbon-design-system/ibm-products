@@ -189,7 +189,7 @@ test.describe('Tearsheet @avt', () => {
     await expect(openButton).toBeFocused();
   });
 
-  test.only('@avt-stacking', async ({ page }) => {
+  test('@avt-stacking', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
       id: 'components-tearsheet--stacked',

@@ -284,8 +284,8 @@ test.describe('Tearsheet @avt', () => {
     // Now the 2nd Tearsheet is closed and 1st Tearsheet in the viewport
     await expect(ts1).toBeInViewport();
     // And the focus now on the open tearsheet 2 button
-    await expect(stackInput1).toBeFocused();
-    //await expect(openButton2).toBeFocused();
+    //await expect(stackInput1).toBeFocused();
+    await expect(openButton2).toBeFocused();
 
     await page.keyboard.press('Escape');
     await page.screenshot({ animations: 'disabled' });

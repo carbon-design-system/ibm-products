@@ -1,0 +1,58 @@
+@use '@carbon/react/scss/spacing';
+@use '@carbon/styles/scss/theme' as *;
+
+.example {
+  block-size: 100vh;
+  overflow: hidden;
+}
+
+.content-area.content-area {
+  block-size: calc(100% - #{spacing.$spacing-09});
+  padding: 0;
+  margin-top: spacing.$spacing-09;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.sample-page__dummy-content {
+  margin-top: $spacing-05;
+}
+
+.sample-page__dummy-content-block {
+  block-size: 120vh;
+  background-clip: content-box;
+  background-color: $layer-01;
+}
+
+.sample-page__dummy-content-text {
+  padding: $spacing-05;
+}
+
+.sample-page__status-icon {
+  fill: $support-success;
+  vertical-align: middle;
+}
+
+.page-header-story--tall-tab-panel {
+  block-size: 200vh;
+}
+
+.breadcrumb-bar-button {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  block-size: 40px;
+  inline-size: 40px;
+}
+
+.breadcrumb-bar-action-button {
+  align-items: center;
+  block-size: 40px;
+}
+
+// Fixes to make in page header
+.c4p--page-header__breadcrumb__content-actions-with-global-actions {
+  opacity: 0;
+}

@@ -120,7 +120,7 @@ release team will need to do the following:
   - [ ] Check the generated
         [release](https://github.com/carbon-design-system/ibm-products/releases)
         to ensure the release notes are correct.
-- [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
+- [ ] Post a message to the `#carbon-for-ibmproducts` Slack channel to announce the
       new version of `@carbon/ibm-products`.
 
   - For **release candidates**, an example message:
@@ -187,7 +187,7 @@ from the release branch for further testing. To publish subsequent prereleases,
   - [ ] Check the generated
         [release](https://github.com/carbon-design-system/ibm-products/releases)
         to ensure the release notes are correct.
-- [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
+- [ ] Post a message to the `#carbon-for-ibmproducts` Slack channel to announce the
       new version of `@carbon/ibm-products`.
 
   - For **release candidates**, an example message:
@@ -267,7 +267,7 @@ validated. During this stage, the release team will do the following:
   - [ ] Edit the generated release, and change the release from `pre-release` to
         `latest`.
         ![Screenshot of release label with latest option selected](https://github.com/user-attachments/assets/0be18f12-380e-45f2-b8aa-cfd01b9aa50c)
-- [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
+- [ ] Post a message to the `#carbon-for-ibmproducts` Slack channel to announce the
       new version of `@carbon/ibm-products`.
 
   - For **full releases**, list some of the features included in the release.

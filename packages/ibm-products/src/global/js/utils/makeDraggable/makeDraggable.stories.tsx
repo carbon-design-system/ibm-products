@@ -34,6 +34,29 @@ const DraggableDiv = () => {
         dragHandle: headerRef.current,
         focusableDragHandle: dragRef.current,
       });
+
+      const onDragStart = () => {
+        if (dialogRef.current) {
+          dialogRef.current.classList.add('is-dragging');
+          dialogRef.current.setAttribute(
+            'aria-label',
+            'Picked up the draggable Dialog'
+          );
+        }
+      };
+
+      const onDragEnd = () => {
+        if (dialogRef.current) {
+          dialogRef.current.classList.remove('is-dragging');
+          dialogRef.current.setAttribute(
+            'aria-label',
+            'draggable Dialog was dropped'
+          );
+        }
+      };
+
+      dialogRef.current.addEventListener('dragstart', onDragStart);
+      dialogRef.current.addEventListener('dragend', onDragEnd);
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dialogRef.current, headerRef.current, dragRef.current]);
@@ -43,9 +66,19 @@ const DraggableDiv = () => {
       <div ref={dialogRef} className="draggable__div">
         <div ref={headerRef} className="draggable__div-header">
           <header ref={headerRef} className={`div-header`}>
-            <Button kind="ghost" ref={dragRef} className="drag-icon-div">
+            <Button
+              kind="ghost"
+              ref={dragRef}
+              className="drag-icon-div"
+              aria-describedby="drag-instructions"
+            >
               <Draggable />
             </Button>
+            <span id="drag-instructions" className="sr-only">
+              To pick up the draggable item, press Enter. While dragging, use
+              the arrow keys to move the item. Press Enter again to leave the
+              item in its new position.
+            </span>
           </header>
         </div>
         <div className="draggable__div-body">
@@ -65,6 +98,9 @@ const DraggablePopoverTemplate = () => {
   useEffect(() => {
     if (isOpen && dialogRef.current && headerRef.current && dragRef.current) {
       const dragContainer = dialogRef.current.querySelector('.cds--popover');
+      const dragStyleContainer = dialogRef.current.querySelector(
+        '.cds--popover-content'
+      );
       if (dragContainer instanceof HTMLElement) {
         dragContainer.style.transform = 'none';
         dragContainer.style.left = '0px';
@@ -74,13 +110,36 @@ const DraggablePopoverTemplate = () => {
           dragHandle: headerRef.current,
           focusableDragHandle: dragRef.current,
         });
+
+        const onDragStart = () => {
+          if (dragContainer && dragStyleContainer) {
+            dragStyleContainer.classList.add('is-dragging');
+            dragStyleContainer.setAttribute(
+              'aria-label',
+              'Picked up the draggable popover'
+            );
+          }
+        };
+
+        const onDragEnd = () => {
+          if (dragContainer && dragStyleContainer) {
+            dragStyleContainer.classList.remove('is-dragging');
+            dragStyleContainer.setAttribute(
+              'aria-label',
+              'draggable popover was dropped'
+            );
+          }
+        };
+
+        dragContainer.addEventListener('dragstart', onDragStart);
+        dragContainer.addEventListener('dragend', onDragEnd);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, dialogRef.current, dragRef.current]);
   return (
     <div className="mt-10 flex justify-center">
-      <Popover open={isOpen} ref={dialogRef} className="popover">
+      <Popover open={isOpen} caret={false} ref={dialogRef} className="popover">
         <Button
           aria-expanded={isOpen}
           onClick={() => {
@@ -97,9 +156,15 @@ const DraggablePopoverTemplate = () => {
               ref={dragRef}
               className="drag-icon"
               onClick={() => console.log('clicked')}
+              aria-describedby="drag-instructions"
             >
               <Draggable />
             </Button>
+            <span id="drag-instructions" className="sr-only">
+              To pick up the draggable item, press Enter. While dragging, use
+              the arrow keys to move the item. Press Enter again to leave the
+              item in its new position.
+            </span>
             <Button
               kind="ghost"
               onClick={() => setIsOpen(false)}

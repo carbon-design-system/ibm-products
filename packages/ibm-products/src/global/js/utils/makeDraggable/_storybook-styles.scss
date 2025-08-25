@@ -26,6 +26,12 @@
   padding: 6px;
 }
 
+.is-dragging {
+  border-radius: 0;
+  box-shadow: 0 0 0 $spacing-02 $background-inverse;
+  outline: $spacing-01 solid $icon-inverse;
+}
+
 //Popover
 .popover-header {
   display: flex;
@@ -60,4 +66,14 @@
 
 .justify-center {
   justify-content: center;
+}
+
+.cds--popover .is-dragging {
+  border-radius: 0;
+  box-shadow: 0 0 0 $spacing-02 $background-inverse;
+  outline: $spacing-01 solid $icon-inverse;
+}
+
+.sr-only {
+  visibility: hidden;
 }

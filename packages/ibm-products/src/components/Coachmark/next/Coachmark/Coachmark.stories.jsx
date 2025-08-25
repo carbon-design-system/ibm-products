@@ -117,7 +117,6 @@ const TooltipTemplate = (args) => {
   return (
     <Theme theme={carbonTheme}>
       <Coachmark
-        ariaLabel="Coachmark"
         position={{ x: 151, y: 155 }}
         open={isOpen}
         onClose={handleClose}
@@ -158,13 +157,7 @@ const FloatingTemplate = (args) => {
   };
   return (
     <Theme theme={carbonTheme}>
-      <Coachmark
-        open={isOpen}
-        onClose={handleClose}
-        ariaLabel="Coachmark"
-        floating={true}
-        {...args}
-      >
+      <Coachmark open={isOpen} onClose={handleClose} floating={true} {...args}>
         <Button
           id="CoachmarkBtn"
           kind="tertiary"

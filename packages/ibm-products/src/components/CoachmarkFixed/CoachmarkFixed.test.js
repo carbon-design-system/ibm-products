@@ -84,6 +84,7 @@ describe(componentName, () => {
       portalTarget: '#FixedContainer',
       onClose: () => console.log('CLOSE'),
       'data-testid': dataTestId,
+      closeIconDescription: 'Close',
     });
     expect(container.querySelector(`.${taglineCTAClass}`)).not.toBeNull();
     await act(() => user.click(container.querySelector(`.${taglineCTAClass}`)));

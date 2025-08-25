@@ -174,6 +174,10 @@ const toggleButton = () => {
   document.querySelector('c4p-interstitial-screen')?.toggleAttribute('open');
 };
 
+const handleClose = () => {
+  document.getElementById('launcherButton')?.focus();
+};
+
 export const Modal = {
   argTypes,
   render: (args) => {
@@ -185,7 +189,7 @@ export const Modal = {
     };
     return html`
       <div id="page-content-selector">
-        <cds-button @click="${toggleButton}"
+        <cds-button id="launcherButton" @click="${toggleButton}"
           >Show Interstitial modal</cds-button
         >
       </div>
@@ -198,6 +202,7 @@ export const Modal = {
           disableActionButton = e.detail.setDisableActionButtons;
           disableActionButton?.({ start: true });
         }}
+        @c4p-interstitial-closed=${handleClose}
       >
         <c4p-interstitial-screen-header
           header-title="Use case-specific title"
@@ -224,19 +229,19 @@ export const Modal = {
 
 export const ModalWithMultipleSteps = {
   render: (args) => {
-    const { open, size, title, titleId } = args;
     return html`
       <div id="page-content-selector">
-        <cds-button @click="${toggleButton}"
+        <cds-button id="launcherButton" @click="${toggleButton}"
           >Show Interstitial modal</cds-button
         >
       </div>
       <c4p-interstitial-screen
-        ?fullscreen=${false}
-        ?open=${true}
+        ?fullscreen=${args.fullscreen}
+        ?open=${args.open}
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
         }}
+        @c4p-interstitial-closed=${handleClose}
       >
         <style>
           c4p-interstitial-screen-body {
@@ -259,19 +264,19 @@ export const ModalWithMultipleSteps = {
 };
 export const ModalWithAsynchronousAction = {
   render: (args) => {
-    const { open } = args;
     return html`
       <div id="page-content-selector">
-        <cds-button @click="${toggleButton}"
+        <cds-button id="launcherButton" @click="${toggleButton}"
           >Show Interstitial modal</cds-button
         >
       </div>
       <c4p-interstitial-screen
-        ?fullscreen=${false}
-        ?open=${true}
+        ?fullscreen=${args.fullscreen}
+        ?open=${args.open}
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
         }}
+        @c4p-interstitial-closed=${handleClose}
       >
         <c4p-interstitial-screen-header
           header-title="Use case-specific title"
@@ -331,13 +336,13 @@ export const WithCustomActionButtons = {
       litRender(
         html`
           <div id="page-content-selector">
-            <cds-button @click="${toggleButton}"
+            <cds-button id="launcherButton" @click="${toggleButton}"
               >Show Interstitial modal</cds-button
             >
           </div>
           <c4p-interstitial-screen
-            ?fullscreen=${false}
-            ?open=${true}
+            ?fullscreen=${args.fullscreen}
+            ?open=${args.open}
             @c4p-interstitial-opened=${(e) => {
               if (!initialized) {
                 config = e.detail;
@@ -345,6 +350,7 @@ export const WithCustomActionButtons = {
                 rerender();
               }
             }}
+            @c4p-interstitial-closed=${handleClose}
           >
             <c4p-interstitial-screen-header
               header-title="Use case-specific title"
@@ -434,19 +440,20 @@ export const FullScreen = {
     };
     return html`
       <div id="page-content-selector">
-        <cds-button @click="${toggleButton}"
+        <cds-button id="launcherButton" @click="${toggleButton}"
           >Show Interstitial modal</cds-button
         >
       </div>
       <c4p-interstitial-screen
-        ?fullscreen=${true}
         role="main"
-        ?open=${true}
+        ?fullscreen=${true}
+        ?open=${args.open}
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
           disableActionButton = e.detail.setDisableActionButtons;
           disableActionButton?.({ start: true });
         }}
+        @c4p-interstitial-closed=${handleClose}
       >
         <c4p-interstitial-screen-header
           header-title="Use case-specific title"
@@ -469,17 +476,18 @@ export const FullScreenWithMultipleSteps = {
     const { open, size, title, titleId } = args;
     return html`
       <div id="page-content-selector">
-        <cds-button @click="${toggleButton}"
+        <cds-button id="launcherButton" @click="${toggleButton}"
           >Show Interstitial modal</cds-button
         >
       </div>
       <c4p-interstitial-screen
         ?fullscreen=${true}
-        ?open=${true}
+        ?open=${args.open}
         role="main"
         @c4p-interstitial-opened=${(e) => {
           console.log('event initialize', e.detail);
         }}
+        @c4p-interstitial-closed=${handleClose}
       >
         <c4p-interstitial-screen-header
           header-title="Use case-specific title"

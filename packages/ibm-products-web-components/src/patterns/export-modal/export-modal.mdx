@@ -110,6 +110,7 @@ import '@carbon/web-components/es/components/loading/index';
   >`:null}
 </cds-modal>
 ```
+
 ## With Extension
 
 Similar as standard Export Modal with valid Extension property.
@@ -175,7 +176,8 @@ Here's a quick example to get you started.
       kind="secondary"
       data-modal-close
       @click="${onCloseHandler()}"
-      >Cancel</cds-modal-footer-button>
+      >Cancel</cds-modal-footer-button
+    >
     <cds-modal-footer-button
       ?disabled="${!this.filename || this.loading}"
       @click="${this.submitHandler()}"

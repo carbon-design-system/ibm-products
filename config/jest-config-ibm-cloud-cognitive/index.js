@@ -11,7 +11,7 @@ module.exports = {
   coverageReporters: ['json', 'html'],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
-    '!**/*.stories.{js,jsx}',
+    '!**/*.stories.{js,jsx,ts,tsx}',
     '!**/*.story.{js,jsx}',
     '!**/*.docs-page.{js,jsx}',
     '!**/src/globals/decorators/*',
@@ -85,6 +85,7 @@ module.exports = {
     '/vendor/',
     '/scripts/',
     'test-helper.js',
+    '<rootDir>/src/globals/decorators/.*\\.stories\\.ts$',
   ],
   transformIgnorePatterns: [
     '/build/',

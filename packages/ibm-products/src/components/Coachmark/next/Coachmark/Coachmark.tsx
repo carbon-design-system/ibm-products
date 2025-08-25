@@ -22,13 +22,13 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../../../global/js/utils/devtools';
-import { pkg } from '../../../../settings';
+import { CoachmarkContext, blockClass } from './context';
 import CoachmarkContent, { CoachmarkContentProps } from './CoachmarkContent';
 import { NewPopoverAlignment } from '@carbon/react';
 import { useIsomorphicEffect } from '../../../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-export const blockClass = `${pkg.prefix}--coachmark__next`;
+
 const componentName = 'Coachmark';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -52,10 +52,6 @@ export interface CoachmarkProps {
    * Provide an optional class to be applied to the containing node.
    */
   className?: string;
-  /**
-   * The aria label applied to the Coachmark component
-   */
-  ariaLabel?: string;
   /**
    * Specifies whether the component is currently open.
    */
@@ -84,28 +80,7 @@ export type CoachmarkComponent = ForwardRefExoticComponent<
 > & {
   Content: FC<CoachmarkContentProps>;
 };
-interface CoachmarkContextType {
-  onClose?: () => void;
-  open?: boolean;
-  setOpen: (value: boolean) => void;
-  align?: NewPopoverAlignment;
-  triggerRef: RefObject<HTMLElement | null>;
-  position: { x: number; y: number };
-  contentRef: HTMLElement | null;
-  setContentRef: (value: any) => void;
-  floating?: boolean;
-}
 
-export const CoachmarkContext = createContext<CoachmarkContextType>({
-  open: false,
-  setOpen: () => {},
-  align: 'bottom',
-  triggerRef: { current: null },
-  position: { x: 0, y: 0 },
-  contentRef: null,
-  setContentRef: (value: boolean) => {},
-  floating: false,
-});
 /**
  * Coachmarks are used to call out specific functionality or concepts
  * within the UI that may not be intuitive but are important for the
@@ -116,7 +91,6 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkProps>(
     const {
       children,
       className,
-      ariaLabel,
       onClose,
       align = 'bottom',
       open,
@@ -198,7 +172,6 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkProps>(
             className, // Apply any supplied class names to the main HTML element.
             { [`${blockClass}--floating`]: floating }
           )}
-          aria-label={ariaLabel}
           ref={setRef}
           {...getDevtoolsProps(componentName)}
         >
@@ -222,10 +195,6 @@ Coachmark.propTypes = {
    * Where to render the Coachmark relative to its target.
    */
   align: PropTypes.string,
-  /**
-   * The aria label applied to the Coachmark component
-   */
-  ariaLabel: PropTypes.string,
   /**
    * Provide the contents of the CoachmarkV2.
    */

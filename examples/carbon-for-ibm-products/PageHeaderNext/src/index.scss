@@ -1,0 +1,17 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/react' with (
+  $font-path: '@ibm/plex'
+);
+@use '@carbon/ibm-products/css/index';
+@use './Example/example';
+@use './Example/SamplePage/sample-page';
+
+.carbon-router-link-element {
+  inline-size: 100%;
+}

@@ -17,10 +17,10 @@ export const Gallery = ({ site }) => {
   const getLink = (dir) => {
     switch (site) {
       case 'stackblitz':
-        return `https://stackblitz.com/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
+        return `https://stackblitz.com/${packagePath}/${dir}`;
       default:
         // codesandbox
-        return `https://codesandbox.io/p/sandbox/${packagePath}/${dir}?file=%2Fsrc%2FExample%2FExample.jsx`;
+        return `https://codesandbox.io/p/sandbox/${packagePath}/${dir}`;
     }
   };
 

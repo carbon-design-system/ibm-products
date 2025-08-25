@@ -125,7 +125,13 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
         entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
       }),
       copy({
-        targets: [{ src: 'src/components/**/*.scss', dest: 'scss' }],
+        targets: [
+          {
+            src: 'src/components/**/*.scss',
+            dest: 'scss',
+            ignore: 'src/components/**/story-styles.scss',
+          },
+        ],
         flatten: false,
       }),
       [json()],

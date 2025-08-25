@@ -9,6 +9,10 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 [Source code](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/components/AboutModal)
 &nbsp;|&nbsp;
 [Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/about-modal/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
 
 ## Table of Contents
 
@@ -20,31 +24,35 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-The `AboutModal` component conveys product information, including the version number, copyright information, and license details.
-The about modal is triggered by a user’s action which appears on top of the main page content and is persistent until dismissed. 
-The purpose of this modal should be immediately apparent to the user, with a clear and obvious path to completion.
+The `AboutModal` component conveys product information, including the version
+number, copyright information, and license details. The about modal is triggered
+by a user’s action which appears on top of the main page content and is
+persistent until dismissed. The purpose of this modal should be immediately
+apparent to the user, with a clear and obvious path to completion.
 
 <Canvas
   of={stories.Default}
   additionalActions={[
-      {
-        title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig({
-          'story': stories.Default,
-          'styles': stories.default.parameters.styles
-      }),
-      },
-    ]}>
-</Canvas>
-
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Default,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
 
 ### With additional content
 
-Some products may be legally required to display logos of technologies used to build the product.
-These can be provided through the `additionalInfo` prop and will be displayed in the footer.
+Some products may be legally required to display logos of technologies used to
+build the product. These can be provided through the `additionalInfo` prop and
+will be displayed in the footer.
 
-While the about modal supports an array of Carbon `Link` components via the `links` prop, these
-should be used to display product information and not to direct users to find help content.
+While the about modal supports an array of Carbon `Link` components via the
+`links` prop, these should be used to display product information and not to
+direct users to find help content.
 
 ```jsx
 <AboutModal
@@ -65,15 +73,16 @@ should be used to display product information and not to direct users to find he
 <Canvas
   of={stories.withAdditionalContent}
   additionalActions={[
-      {
-        title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig({
-          'story': stories.withAdditionalContent,
-          'styles': stories.default.parameters.styles
-      }),
-      },
-    ]}>
-</Canvas>
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.withAdditionalContent,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
 
 ## Component API
 
@@ -81,8 +90,9 @@ should be used to display product information and not to direct users to find he
 
 ## References
 
-The `AboutModal` is built using the `ComposedModal`. Any additional props will be passed to the `ComposedModal`.
-For a full list of props, please see the [ComposedModal](https://react.carbondesignsystem.com/?path=/docs/components-modal).
+The `AboutModal` is built using the `ComposedModal`. Any additional props will
+be passed to the `ComposedModal`. For a full list of props, please see the
+[ComposedModal](https://react.carbondesignsystem.com/?path=/docs/components-modal).
 
 ## Feedback
 

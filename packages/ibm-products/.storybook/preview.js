@@ -128,7 +128,7 @@ const parameters = {
       method: 'alphabetical',
       order: [
         'Overview',
-        ['Welcome', 'Getting started', 'Examples', '*'],
+        ['Welcome', 'Examples', '*'],
         'Components',
         'Patterns',
         ['*', 'Prebuilt patterns'],

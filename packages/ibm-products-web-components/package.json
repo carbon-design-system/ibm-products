@@ -54,7 +54,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@carbon-labs/wc-empty-state": "^0.4.0",
+    "@carbon-labs/wc-empty-state": "^0.5.0",
     "@carbon/ibm-products-styles": "^2.69.0",
     "@carbon/styles": "1.85.0",
     "@carbon/web-components": "2.33.0",

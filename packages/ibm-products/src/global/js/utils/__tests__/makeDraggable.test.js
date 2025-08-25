@@ -39,16 +39,13 @@ describe('makeDraggable', () => {
     expect(el.style.cursor).toBe('default');
   });
 
-  it('should set position as relative', () => {
+  it('should keep position as absolute when already absolute', () => {
     const { el } = createDraggableElement();
     expect(el.style.position).toBe('absolute');
   });
 
   it('should move element with arrowRight with default dragStep value', () => {
     const { el, focusableHandle } = createDraggableElement();
-    el.style.left = '0px';
-    el.style.top = '0px';
-
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowRight' })
     );
@@ -58,9 +55,6 @@ describe('makeDraggable', () => {
 
   it('should move element with arrowUp with default dragStep value', () => {
     const { el, focusableHandle } = createDraggableElement();
-    el.style.left = '0px';
-    el.style.top = '0px';
-
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowUp' })
     );
@@ -70,9 +64,6 @@ describe('makeDraggable', () => {
 
   it('should move element with arrowLeft with default dragStep value', () => {
     const { el, focusableHandle } = createDraggableElement();
-    el.style.left = '0px';
-    el.style.top = '0px';
-
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowLeft' })
     );
@@ -82,9 +73,6 @@ describe('makeDraggable', () => {
 
   it('should move element with arrowDown with default shiftDragStep value', () => {
     const { el, focusableHandle } = createDraggableElement();
-    el.style.left = '0px';
-    el.style.top = '0px';
-
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowRight', shiftKey: true })
     );
@@ -94,9 +82,6 @@ describe('makeDraggable', () => {
 
   it('should move element with arrow keys(dragStep)', () => {
     const { el, focusableHandle } = createDraggableElement({ dragStep: 10 });
-    el.style.left = '0px';
-    el.style.top = '0px';
-
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowRight' })
     );

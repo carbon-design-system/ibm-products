@@ -17,7 +17,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../../../settings';
-import { blockClass, CoachmarkContext } from './Coachmark';
+import { blockClass, CoachmarkContext } from './context';
 import { CoachmarkBubble } from './CoachmarkBubble';
 import ContentHeader, { ContentHeaderProps } from './ContentHeader';
 import ContentBody, { ContentBodyProps } from './ContentBody';

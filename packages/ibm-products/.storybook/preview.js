@@ -116,7 +116,11 @@ const parameters = {
       },
     ],
   },
-  controls: { expanded: true, hideNoControlsWarning: true },
+  controls: {
+    expanded: true,
+    hideNoControlsWarning: true,
+    sort: 'alpha',
+  },
   layout: 'centered',
   options: {
     showPanel: true,

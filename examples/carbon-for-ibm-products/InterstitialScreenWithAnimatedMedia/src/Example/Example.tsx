@@ -34,7 +34,7 @@ export const Example = () => {
   const [showInterstitialModal, setShowInterstitialModal] = useState(true);
 
   const defaultProps = {
-    headerTitle: 'Welcom, Jan!',
+    headerTitle: 'Welcome, Jan!',
   };
   const getContent = ({ progStep }) => {
     return (

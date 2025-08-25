@@ -119,7 +119,7 @@ For additional information on differentiating between delete / remove and low / 
 interface PrevType {
   open: boolean;
 }
-export let RemoveModal = forwardRef(
+export const RemoveModal = forwardRef(
   (
     {
       body,
@@ -236,7 +236,6 @@ export let RemoveModal = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-RemoveModal = pkg.checkComponentEnabled(RemoveModal, componentName);
 
 RemoveModal.propTypes = {
   /**

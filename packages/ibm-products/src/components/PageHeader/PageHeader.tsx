@@ -431,7 +431,7 @@ interface HTMLElementStyled extends HTMLElement {
   style: CSSStyleDeclaration;
 }
 
-export let PageHeader = React.forwardRef(
+export const PageHeader = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -1256,7 +1256,6 @@ export let PageHeader = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-PageHeader = pkg.checkComponentEnabled(PageHeader, componentName);
 
 // copied from carbon-components-react/src/components/Tag/Tag.js for DocGen
 const TYPES = {

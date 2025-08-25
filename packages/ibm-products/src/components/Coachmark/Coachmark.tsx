@@ -139,7 +139,7 @@ export interface CoachmarkProps {
  * user to gain understanding of the product's main value and discover new use cases.
  */
 
-export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
+export const Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
   (
     {
       align = defaults.align,
@@ -383,7 +383,6 @@ const overlayRefType =
       PropTypes.instanceOf(HTMLElement);
 
 // Return a placeholder if not released and not enabled by feature flag
-Coachmark = pkg.checkComponentEnabled(Coachmark, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

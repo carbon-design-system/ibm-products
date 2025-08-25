@@ -48,7 +48,7 @@ const defaults = {
   customSteps: [],
 };
 
-export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
+export const APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -402,7 +402,6 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-APIKeyModal = pkg.checkComponentEnabled(APIKeyModal, componentName);
 
 export const deprecatedProps = {
   /**

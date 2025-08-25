@@ -99,7 +99,7 @@ interface ActionBarProps extends PropsWithChildren {
 /**
  * The ActionBar is used internally by the PageHeader to wrap ActionBarItems.
  */
-export let ActionBar = React.forwardRef(
+export const ActionBar = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -171,7 +171,6 @@ export let ActionBar = React.forwardRef(
   }
 );
 
-ActionBar = pkg.checkComponentEnabled(ActionBar, componentName);
 ActionBar.displayName = componentName;
 ActionBar.propTypes = {
   /**

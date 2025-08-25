@@ -172,7 +172,7 @@ export interface DataSpreadsheetProps {
 /**
  * DataSpreadsheet: used to organize and display large amounts of structured data, separated by columns and rows in a grid-like format.
  */
-export let DataSpreadsheet = React.forwardRef(
+export const DataSpreadsheet = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -1069,7 +1069,6 @@ export let DataSpreadsheet = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-DataSpreadsheet = pkg.checkComponentEnabled(DataSpreadsheet, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

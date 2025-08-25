@@ -37,7 +37,7 @@ export interface UnauthorizedEmptyStateProps extends EmptyStatePresetProps {
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */
-export let UnauthorizedEmptyState = React.forwardRef<
+export const UnauthorizedEmptyState = React.forwardRef<
   HTMLDivElement,
   UnauthorizedEmptyStateProps
 >(
@@ -92,12 +92,6 @@ export let UnauthorizedEmptyState = React.forwardRef<
       </div>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-UnauthorizedEmptyState = pkg.checkComponentEnabled(
-  UnauthorizedEmptyState,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

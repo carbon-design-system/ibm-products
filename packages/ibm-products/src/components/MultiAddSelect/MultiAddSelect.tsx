@@ -159,7 +159,7 @@ export interface MultiAddSelectProps {
 /**
  * Used to add or select multiple or more items from larger lists or hierarchies.
  */
-export let MultiAddSelect = forwardRef(
+export const MultiAddSelect = forwardRef(
   (props: MultiAddSelectProps, ref: ForwardedRef<HTMLDivElement>) => (
     <AddSelect
       {...(props as AddSelectProps)}
@@ -169,8 +169,6 @@ export let MultiAddSelect = forwardRef(
     />
   )
 );
-
-MultiAddSelect = pkg.checkComponentEnabled(MultiAddSelect, componentName);
 
 MultiAddSelect.propTypes = {
   /**

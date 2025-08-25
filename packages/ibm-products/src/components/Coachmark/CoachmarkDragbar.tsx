@@ -64,7 +64,7 @@ interface CoachmarkDragbarProps {
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
  */
-export let CoachmarkDragbar = React.forwardRef<
+export const CoachmarkDragbar = React.forwardRef<
   HTMLElement,
   CoachmarkDragbarProps
 >(
@@ -150,7 +150,6 @@ export let CoachmarkDragbar = React.forwardRef<
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkDragbar = pkg.checkComponentEnabled(CoachmarkDragbar, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

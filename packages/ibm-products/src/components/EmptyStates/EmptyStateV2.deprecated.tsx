@@ -12,7 +12,7 @@ import { Button, Link } from '@carbon/react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
-import EmptyStateIllustration from './EmptyStateIllustration';
+import EmptyStateIllustration from './EmptyStateIllustration.deprecated';
 
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateV2';

@@ -10,10 +10,12 @@ import React, { useState } from 'react';
 import {
   Button,
   Column,
+  ContentSwitcher,
   Grid,
   InlineNotification,
   RadioButtonGroup,
   RadioButton,
+  Switch,
   TextInput,
   Toggle,
   NumberInput,
@@ -78,7 +80,7 @@ export const MultiStepTearsheet = (
   const [isInvalid, setIsInvalid] = useState(false);
   const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
     useState(false);
-
+  const [selIndex, setSelIndex] = useState(0);
   const clearCreateData = () => {
     setStepOneTextInputValue('');
     setTopicDescriptionValue('');
@@ -185,6 +187,7 @@ export const MultiStepTearsheet = (
                 placeholder="Enter topic version"
                 onChange={(event) => setTopicVersionValue(event.target.value)}
               />
+
               {hasSubmitError && (
                 <InlineNotification
                   kind="error"
@@ -209,6 +212,29 @@ export const MultiStepTearsheet = (
                 }
                 checked={shouldIncludeAdditionalStep}
               />
+              <div>
+                <ContentSwitcher
+                  onChange={({ name }) => {
+                    name === 'one' ? setSelIndex(0) : setSelIndex(1);
+                  }}
+                  selectedIndex={selIndex}
+                  selectionMode="automatic"
+                >
+                  <Switch name="one" text="First section" />
+                  <Switch name="two" text="Second section" />
+                </ContentSwitcher>
+                {selIndex === 0 ? (
+                  <>
+                    <p>first section</p>
+                    {/* <TextInput /> */}
+                  </>
+                ) : (
+                  <>
+                    <p>second section</p>
+                    {/* <TextInput /> */}
+                  </>
+                )}
+              </div>
             </Column>
           </Grid>
         </CreateTearsheetStep>

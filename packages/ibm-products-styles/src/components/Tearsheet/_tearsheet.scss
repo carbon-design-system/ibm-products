@@ -209,6 +209,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--wide .#{$block-class}__header {
+    overflow: visible;
     padding: $spacing-06 $spacing-07;
     margin: 0;
     background-color: $layer;

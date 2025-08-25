@@ -16,6 +16,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--truncated-text;
     display: -webkit-box;
     overflow: hidden;
     -webkit-box-orient: vertical;
+    line-height: initial;
     text-overflow: clip;
   }
 

@@ -228,6 +228,8 @@ ConditionBuilder.propTypes = {
           'custom',
         ]).isRequired,
         description: PropTypes.string, //will be displayed on hover of property field
+        isDisabled: PropTypes.func,
+        isHidden: PropTypes.func,
         config: PropTypes.shape({
           options: PropTypes.arrayOf(
             PropTypes.shape({

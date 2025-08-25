@@ -630,9 +630,32 @@ function modifyPropertiesWithoutCustomOperators(inputData) {
   return { ...inputData, properties: newProperties };
 }
 
+const modifyPropertiesWithDisabledProps = (inputData) => {
+  const newProperties = inputData.properties.map((property, index) => {
+    if (index === 1 || index === 3) {
+      return {
+        ...property,
+        isDisabled: () => true,
+      };
+    }
+    if (index === 2) {
+      return {
+        ...property,
+        isHidden: () => true,
+      };
+    }
+
+    return property;
+  });
+
+  return { ...inputData, properties: newProperties };
+};
+
 export const inputDataForCustomOperator =
   modifyPropertiesWithoutCustomOperators(inputData);
 
+export const inputDataWithDisabledProperties =
+  modifyPropertiesWithDisabledProps(inputData);
 export const inputDataDynamicOptions = {
   properties: [
     {

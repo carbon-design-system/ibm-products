@@ -232,6 +232,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         onChange={onPropertyChangeHandler}
         config={{ options: inputConfig?.properties }}
         closePopover={closePopover}
+        group={group}
       />
     );
   };

@@ -22,7 +22,10 @@ import {
 } from './assets/SampleData';
 import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
 import CustomInput from './assets/CustomInput';
-import { inputDataForCustomOperator } from './assets/sampleInput';
+import {
+  inputDataForCustomOperator,
+  inputDataWithDisabledProperties,
+} from './assets/sampleInput';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = ConditionBuilder.displayName;
@@ -1905,6 +1908,26 @@ describe(componentName, () => {
 
     const groupConnector = screen.queryAllByRole('button', { name: 'or' });
     expect(groupConnector).toHaveLength(1);
+  });
+
+  it('disable and hide specific properties ', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputDataWithDisabledProperties}
+      />
+    );
+
+    // add one condition
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getByRole('option', { name: 'Continent' })).toBeVisible();
+    const optionRegion = screen.getByRole('option', { name: 'Region' });
+    const optionID = screen.getByRole('option', { name: 'ID' });
+
+    expect(optionRegion).toHaveAttribute('aria-disabled', 'true');
+    expect(optionID).toHaveAttribute('aria-disabled', 'true');
+    expect(screen.queryAllByRole('option', { name: 'Color' })).toHaveLength(0);
   });
 
   // keyboard navigation tests

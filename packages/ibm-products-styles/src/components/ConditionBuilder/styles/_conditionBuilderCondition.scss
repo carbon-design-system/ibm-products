@@ -88,3 +88,23 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   > .#{$block-class}__groupConnector {
   margin-block-end: 0;
 }
+.#{$block-class}__readOnly {
+  .#{$block-class}__conditionInnerBlock,
+  .#{$block-class}__connector,
+  .#{$block-class}__groupConnector {
+    border: 1px solid $border-subtle-00;
+    background: transparent;
+
+    button {
+      background: transparent;
+
+      svg {
+        color: $text-disabled;
+      }
+    }
+  }
+}
+
+.#{$block-class}__conditionInnerBlock {
+  display: flex;
+}

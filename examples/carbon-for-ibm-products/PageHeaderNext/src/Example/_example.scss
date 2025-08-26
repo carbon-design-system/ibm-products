@@ -17,7 +17,7 @@
 }
 
 .sample-page__dummy-content {
-  margin-top: $spacing-05;
+  margin-top: spacing.$spacing-05;
 }
 
 .sample-page__dummy-content-block {
@@ -27,7 +27,7 @@
 }
 
 .sample-page__dummy-content-text {
-  padding: $spacing-05;
+  padding: spacing.$spacing-05;
 }
 
 .sample-page__status-icon {

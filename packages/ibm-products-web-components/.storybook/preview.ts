@@ -47,6 +47,12 @@ const unwantedProperties = new Set([
   'context-provider',
   'customElements',
   'registry',
+
+  // From example custom components
+  'set-of-actions',
+  'set-of-breadcrumbs',
+  'set-of-tags',
+  'set-of-users',
 ]);
 customElements?.tags?.forEach((tag) => {
   if (tag.properties) {

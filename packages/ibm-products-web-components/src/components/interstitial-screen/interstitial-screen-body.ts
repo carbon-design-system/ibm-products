@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/modal/index.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -31,6 +31,9 @@ const blockClass = `${prefix}--interstitial-screen`;
  */
 @customElement(`${prefix}-interstitial-screen-body`)
 class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
+  @property({ reflect: true })
+  slot = 'body';
+
   @state()
   stepType: 'single' | 'multi' = 'multi';
 
@@ -38,13 +41,13 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   private carouselElement = createRef<HTMLElement>();
 
   firstUpdated(): void {
-    const slot = this.shadowRoot?.querySelector('slot') as HTMLSlotElement;
+    const bodyItems = this.querySelectorAll(
+      `${prefix}-interstitial-screen-body-item`
+    );
 
-    const assigned = slot.assignedElements({ flatten: true });
-
-    if (assigned.length === 1) {
+    if (bodyItems.length === 1) {
       this.stepType = 'single';
-    } else if (assigned.length > 1) {
+    } else if (bodyItems.length > 1) {
       this.stepType = 'multi';
       //initialize carousel for multi-step
       this._initCarousel();
@@ -61,6 +64,8 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
       ...interstitialDetailsSignal.get(),
       carouselAPI: this.carouselAPI,
     });
+
+    this.updateAriaHiddenTabIndex(0);
   }
 
   private onViewChangeStart = ({ currentIndex, lastIndex, totalViews }) => {
@@ -83,6 +88,8 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
     );
   };
   private onViewChangeEnd = ({ currentIndex, lastIndex, totalViews }) => {
+    this.updateAriaHiddenTabIndex(currentIndex);
+
     updateInterstitialDetailsSignal({
       name: 'currentStep',
       detail: currentIndex,
@@ -107,6 +114,28 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
     );
   };
 
+  private updateAriaHiddenTabIndex = (itemNumber: number) => {
+    const allViews = this.carouselAPI?.allViews;
+
+    allViews &&
+      Object.values(allViews)?.forEach((item, idx) => {
+        const isActive = idx === itemNumber;
+
+        if (item) {
+          // Set aria-hidden based on active state
+          item.setAttribute('aria-hidden', String(!isActive));
+
+          if (!isActive) {
+            item.setAttribute('inert', ''); // Disable interactivity
+          } else {
+            item.removeAttribute('inert'); // Re-enable interactivity
+          }
+
+          item.removeAttribute('tabindex');
+        }
+      });
+  };
+
   render() {
     return html`
       <div class="${blockClass}--body">
@@ -123,7 +152,6 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
       </div>
     `;
   }
-
   static styles = styles;
 
   /**

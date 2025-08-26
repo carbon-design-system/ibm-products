@@ -7,9 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement, nothing } from 'lit';
+import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
-import { prefix } from '../../globals/settings';
+import { carbonPrefix, prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { classMap } from 'lit-html/directives/class-map.js';
@@ -17,6 +17,7 @@ import '@carbon/web-components/es/components/progress-indicator/index.js';
 import styles from './interstitial-screen-header.scss?lit';
 import { interstitialDetailsSignal } from './interstitial-screen-context';
 import { SignalWatcher } from '@lit-labs/signals';
+import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--interstitial-screen`;
 const headerBlockClass = `${blockClass}--internal-header`;
@@ -34,7 +35,8 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
    */
   @property({ reflect: true, attribute: 'header-title' })
   headerTitle: string = '';
-
+  @property({ reflect: true })
+  slot = 'header';
   /**
    * Tooltip text and aria label for the Close button icon.
    */
@@ -53,6 +55,10 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
    */
   @property({ type: Boolean, reflect: true })
   hideProgressIndicator: boolean = false;
+
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    registerFocusableContainers(this.shadowRoot);
+  }
 
   private getStepState = (index) => {
     const currentStep = interstitialDetailsSignal.get().currentStep;
@@ -92,6 +98,17 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
     );
   }
 
+  getElementForAriaLive = () => {
+    const currentStep = interstitialDetailsSignal.get().currentStep;
+    const stepDetails = interstitialDetailsSignal.get().stepDetails;
+    return html` <div
+      aria-live="polite"
+      aria-atomic="true"
+      class="${carbonPrefix}--visually-hidden"
+    >
+      Step ${currentStep + 1} of ${stepDetails.length}
+    </div>`;
+  };
   getProgressIndicatorContent(stepDetails) {
     return html`
       <div class="${blockClass}--progress">
@@ -105,6 +122,7 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
               ></cds-progress-step>`
           )}
         </cds-progress-indicator>
+        ${this.getElementForAriaLive()}
       </div>
     `;
   }

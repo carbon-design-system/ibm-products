@@ -7,6 +7,8 @@ import { InterstitialScreenView } from './InterstitialScreenView/InterstitialScr
 import { InterstitialScreenViewModule } from './InterstitialScreenViewModule/InterstitialScreenViewModule';
 
 export const Example = () => {
+  // cspell:words Terminé Partiel Actuel valide
+  
   const [showInterstitialModal, setShowInterstitialModal] = useState(true);
 
   const defaultProps = {

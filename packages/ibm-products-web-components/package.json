@@ -51,14 +51,15 @@
     "storybook": "storybook dev -p 3000",
     "test": "vitest run",
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "telemetry-config": "ibmtelemetry-config generate --wc --id 8a79d901-a9c0-4672-94a4-fa8eea139832 --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components"
   },
   "dependencies": {
-    "@carbon-labs/wc-empty-state": "^0.4.0",
+    "@carbon-labs/wc-empty-state": "^0.5.0",
     "@carbon/ibm-products-styles": "^2.69.0",
     "@carbon/styles": "1.85.0",
     "@carbon/web-components": "2.33.0",
-    "@ibm/telemetry-js": "^1.9.1",
+    "@ibm/telemetry-js": "^1.10.0",
     "@lit-labs/signals": "^0.1.2",
     "@lit/context": "^1.1.5",
     "lit": "^3.1.0"
@@ -68,6 +69,7 @@
     "@carbon/icon-helpers": "^10.61.0",
     "@carbon/icons": "^11.62.0",
     "@carbon/motion": "^11.30.0",
+    "@ibm/telemetry-js-config-generator": "^2.1.0",
     "@mordech/vite-lit-loader": "^0.37.0",
     "@open-wc/testing": "^4.0.0",
     "@rollup/plugin-alias": "^5.1.1",

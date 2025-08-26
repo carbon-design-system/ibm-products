@@ -3299,6 +3299,7 @@ p.c4p--about-modal__copyright-text:first-child {
   transform: scale(var(--c4p--tearsheet--stacking-scale-factor-double));
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header {
+  overflow: visible;
   padding: 1.5rem 2rem;
   margin: 0;
   background-color: var(--cds-layer);
@@ -9895,18 +9896,22 @@ button.c4p--add-select__global-filter-toggle--open {
   }
 }
 @supports (animation-timeline: scroll()) {
-  .c4p--page-header__next .c4p--page-header-title-breadcrumb {
+  .c4p--page-header__next .c4p--page-header-title-breadcrumb.c4p--page-header-title-breadcrumb-show__with-content-element {
     animation-direction: alternate;
     animation-duration: 1ms; /* Firefox requires this to apply the animation */
     animation-name: page-header-title-breadcrumb-animation;
     animation-timeline: scroll(block nearest);
   }
   @media (prefers-reduced-motion: reduce) {
-    .c4p--page-header__next .c4p--page-header-title-breadcrumb {
+    .c4p--page-header__next .c4p--page-header-title-breadcrumb.c4p--page-header-title-breadcrumb-show__with-content-element {
       animation-name: page-header-title-breadcrumb-animation-reduced-motion;
       transform: translateY(0);
     }
   }
+}
+.c4p--page-header__next .c4p--page-header-title-breadcrumb.c4p--page-header-title-breadcrumb-show__without-content-element {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .c4p--card__productive {

@@ -61,13 +61,13 @@ export const EmptyStateContent = (props: EmptyStateProps) => {
         {title}
       </HeadingComponent>
       {subtitle && (
-        <p
+        <div
           className={cx(`${blockClass}__subtitle`, {
             [`${blockClass}__subtitle--small`]: size === 'sm',
           })}
         >
           {subtitle}
-        </p>
+        </div>
       )}
       {action?.text && action?.onClick && (
         <Button

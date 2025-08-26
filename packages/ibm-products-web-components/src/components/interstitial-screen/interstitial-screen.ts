@@ -9,7 +9,7 @@
 
 import { LitElement, html, nothing } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import { prefix } from '../../globals/settings';
+import { carbonPrefix, prefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/modal/index.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -21,6 +21,8 @@ import {
   resetInterstitialDetailsSignal,
   updateInterstitialDetailsSignal,
 } from './interstitial-screen-context';
+import HostListener from '@carbon/web-components/es/globals/decorators/host-listener';
+import { trapFocus } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 export const blockClass = `${prefix}--interstitial-screen`;
 
@@ -64,25 +66,29 @@ class CDSInterstitialScreen extends SignalWatcher(
    * @ignore
    */
   @query('cds-modal-body') modalBody!: HTMLElement;
-  private header: Element | null = null;
-  private body: Element | null = null;
-  private footer: Element | null = null;
 
   private _wasOpen = false;
+  private _trapFocusAPI: { cleanup: () => void } | null = null;
 
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener(`${prefix}-request-close`, this._handleClose);
   }
+  disconnectedCallback(): void {
+    const { carouselAPI } = interstitialDetailsSignal.get();
+    carouselAPI?.destroyEvents?.();
+    this._trapFocusAPI?.cleanup();
+  }
   firstUpdated() {
-    // This has to do since cds-modal does not accept cds-body inside a slotted children.It will append it explicitly append cds body
-    this.header = this.querySelector(`${prefix}-interstitial-screen-header`);
-    this.body = this.querySelector(`${prefix}-interstitial-screen-body`);
-    this.footer = this.querySelector(`${prefix}-interstitial-screen-footer`);
-
     this.requestUpdate(); // Ensure re-render
     resetInterstitialDetailsSignal();
+
+    updateInterstitialDetailsSignal({
+      name: 'isFullScreen',
+      detail: this.isFullScreen,
+    });
   }
+
   updated(changedProps: Map<string | number | symbol, unknown>) {
     if (changedProps.has('open')) {
       const wasOpen = this._wasOpen;
@@ -90,6 +96,12 @@ class CDSInterstitialScreen extends SignalWatcher(
 
       if (!wasOpen && isOpen) {
         this.dispatchInItializeEvent();
+        // `focusableContainers` holds the containers where we can query DOM elements.
+        // Our strategy here is to let child/slotted components register their containers,
+        // which are then passed to `trapFocus`. This allows the utility to query elements
+        // directly without being blocked by shadow DOM boundaries.
+
+        this._trapFocusAPI = trapFocus();
       }
 
       this._wasOpen = isOpen;
@@ -125,6 +137,24 @@ class CDSInterstitialScreen extends SignalWatcher(
     });
   };
 
+  /**
+   * Handles `click` event on this element.
+   *
+   * @param event The event.
+   */
+  @HostListener('click')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleOutsideClick = (event: MouseEvent) => {
+    const modal = this.shadowRoot?.querySelector(`${carbonPrefix}-modal`);
+    const modalContent = modal?.shadowRoot?.querySelector(
+      `.${carbonPrefix}--modal-container`
+    );
+    const path = event.composedPath();
+    if (modalContent && !path.includes(modalContent)) {
+      this._handleClose(event);
+    }
+  };
+
   private setDisableActionButtons = (config: disableButtonConfigType) => {
     updateInterstitialDetailsSignal({ name: 'disableActions', detail: config });
   };
@@ -132,6 +162,7 @@ class CDSInterstitialScreen extends SignalWatcher(
   _handleClose(e) {
     this.open = false;
     e.stopPropagation();
+
     const init = {
       bubbles: true,
       cancelable: true,
@@ -160,13 +191,13 @@ class CDSInterstitialScreen extends SignalWatcher(
   //template methods
 
   renderFullScreen() {
-    return this.open
-      ? html`
-          <div class="${blockClass}--container">
-            <slot></slot>
-          </div>
-        `
-      : nothing;
+    return html`
+      <div class="${blockClass}--container">
+        <slot name="header"></slot>
+        <slot name="body"></slot>
+        <slot name="footer"></slot>
+      </div>
+    `;
   }
 
   renderModal() {
@@ -177,20 +208,22 @@ class CDSInterstitialScreen extends SignalWatcher(
       size="lg"
       ?open="${this.open}"
     >
-      ${this.header ? html`${this.header}` : nothing}
+      <slot name="header"></slot>
       <cds-modal-body class="${blockClass}__body-container">
-        ${this.body ? html`${this.body}` : nothing}
+        <slot name="body"></slot>
       </cds-modal-body>
       <cds-modal-footer>
-        ${this.footer ? html`${this.footer}` : nothing}
+        <slot name="footer"></slot>
       </cds-modal-footer>
     </cds-modal>`;
   }
 
   render() {
-    return this.isFullScreen
-      ? html`${this.renderFullScreen()}`
-      : html`${this.renderModal()}`;
+    return this.open
+      ? this.isFullScreen
+        ? html`${this.renderFullScreen()}`
+        : html`${this.renderModal()}`
+      : nothing;
   }
 
   static styles = styles;

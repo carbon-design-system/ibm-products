@@ -100,7 +100,7 @@ const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = 'TagOverflow';
 const allTagsModalSearchThreshold = 10;
 
-export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
+export const TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
   (props, ref) => {
     const {
       align = 'start',
@@ -249,7 +249,6 @@ export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-TagOverflow = pkg.checkComponentEnabled(TagOverflow, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

@@ -20,7 +20,7 @@ const DocsPage = () => (
         source: {
           language: 'jsx',
           code: `
-import { unstable_FeatureFlags as FeatureFlags } from '@carbon/ibm-products';
+import { preview__FeatureFlags as FeatureFlags } from '@carbon/ibm-products';
 ...
 <FeatureFlags enableSidepanelResizer>
   <SidePanel

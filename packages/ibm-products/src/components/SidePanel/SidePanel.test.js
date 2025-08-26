@@ -16,7 +16,7 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { SidePanel } from '.';
 import { Add } from '@carbon/react/icons';
-import { unstable_FeatureFlags as FeatureFlags } from '..';
+import { preview__FeatureFlags as FeatureFlags } from '..';
 import { SIDE_PANEL_SIZES } from './constants';
 
 const { prefix } = pkg;

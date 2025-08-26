@@ -225,7 +225,7 @@ on the Carbon's grid system
 include `<Row>` and `<Column>` components inside of each `CreateFullPageStep`
 component to get the desired affect.
  */
-export let CreateFullPage = React.forwardRef(
+export const CreateFullPage = React.forwardRef(
   (
     {
       breadcrumbsOverflowAriaLabel,
@@ -461,7 +461,6 @@ export let CreateFullPage = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag.
-CreateFullPage = pkg.checkComponentEnabled(CreateFullPage, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

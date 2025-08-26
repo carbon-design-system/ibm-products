@@ -72,6 +72,25 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
           dragHandle: handleRef.current,
           focusableDragHandle: dragRef.current,
         });
+
+        const onDragStart = () => {
+          if (contentRef) {
+            contentRef.classList.add(`${contentHeaderBlockClass}--is-dragging`);
+            contentRef.setAttribute('aria-label', 'Coachmark is being dragged');
+          }
+        };
+
+        const onDragEnd = () => {
+          if (contentRef) {
+            contentRef.classList.remove(
+              `${contentHeaderBlockClass}--is-dragging`
+            );
+            contentRef.removeAttribute('aria-label');
+          }
+        };
+
+        contentRef.addEventListener('dragstart', onDragStart);
+        contentRef.addEventListener('dragend', onDragEnd);
       }
     });
 

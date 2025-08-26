@@ -47,6 +47,9 @@ describe('makeDraggable', () => {
   it('should move element with arrowRight with default dragStep value', () => {
     const { el, focusableHandle } = createDraggableElement();
     focusableHandle.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Enter' })
+    );
+    focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowRight' })
     );
     expect(el.style.left).toBe('8px');
@@ -55,6 +58,9 @@ describe('makeDraggable', () => {
 
   it('should move element with arrowUp with default dragStep value', () => {
     const { el, focusableHandle } = createDraggableElement();
+    focusableHandle.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Enter' })
+    );
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowUp' })
     );
@@ -65,6 +71,9 @@ describe('makeDraggable', () => {
   it('should move element with arrowLeft with default dragStep value', () => {
     const { el, focusableHandle } = createDraggableElement();
     focusableHandle.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Enter' })
+    );
+    focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowLeft' })
     );
     expect(el.style.left).toBe('-8px');
@@ -74,6 +83,9 @@ describe('makeDraggable', () => {
   it('should move element with arrowDown with default shiftDragStep value', () => {
     const { el, focusableHandle } = createDraggableElement();
     focusableHandle.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Enter' })
+    );
+    focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowRight', shiftKey: true })
     );
     expect(el.style.left).toBe('32px');
@@ -82,6 +94,9 @@ describe('makeDraggable', () => {
 
   it('should move element with arrow keys(dragStep)', () => {
     const { el, focusableHandle } = createDraggableElement({ dragStep: 10 });
+    focusableHandle.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Enter' })
+    );
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowRight' })
     );
@@ -117,6 +132,9 @@ describe('makeDraggable', () => {
     const { el, focusableHandle } = createDraggableElement({
       shiftDragStep: 20,
     });
+    focusableHandle.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Enter' })
+    );
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowDown', shiftKey: true })
     );

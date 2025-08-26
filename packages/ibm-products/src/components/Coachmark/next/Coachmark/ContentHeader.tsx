@@ -13,7 +13,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blockClass, CoachmarkContext } from './Coachmark';
+import { blockClass, CoachmarkContext } from './context';
 import { CoachmarkBubbleHeader } from './CoachmarkBubble';
 import { Close, Draggable } from '@carbon/react/icons';
 import { makeDraggable } from '../../../../global/js/utils/makeDraggable';

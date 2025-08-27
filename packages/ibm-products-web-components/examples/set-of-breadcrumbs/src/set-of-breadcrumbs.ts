@@ -15,7 +15,7 @@ import { repeat } from 'lit/directives/repeat.js';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
 import { createOverflowHandler } from './overflowHandler';
-import OverflowMenuHorizontal16 from '@carbon/web-components/es/icons/overflow-menu--horizontal/16.js';
+import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
 import { iconLoader } from '../../../src/globals/internal/icon-loader';
 import styles from './set-of-breadcrumbs.scss?lit';
 

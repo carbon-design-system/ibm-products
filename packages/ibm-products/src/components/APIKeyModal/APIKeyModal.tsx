@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2025
+// Copyright IBM Corp. 2021, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -35,7 +35,9 @@ import {
 import { APIKeyDownloader } from './APIKeyDownloader';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
+
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { isRequiredIf } from '../../global/js/utils/props-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { APIKeyModalProps } from './APIKeyModal.types';
 import { useFocus, usePreviousValue } from '../../global/js/hooks';
@@ -401,6 +403,18 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
   }
 );
 
+const customStepsRequiredProps = (type) =>
+  isRequiredIf(
+    type,
+    ({ customSteps }) => customSteps && customSteps.length > 1
+  );
+
+const editRequiredProps = (type) =>
+  isRequiredIf(type, ({ editing }) => editing);
+
+const downloadRequiredProps = (type) =>
+  isRequiredIf(type, ({ hasDownloadLink }) => hasDownloadLink);
+
 // Return a placeholder if not released and not enabled by feature flag
 APIKeyModal = pkg.checkComponentEnabled(APIKeyModal, componentName);
 
@@ -482,31 +496,31 @@ APIKeyModal.propTypes = {
   /**
    * designates the name of downloadable json file with the key. if not specified will default to 'apikey'
    */
-  downloadFileName: PropTypes.string,
+  downloadFileName: downloadRequiredProps(PropTypes.string),
   /**
    * designates the file type for the downloadable key
    */
-  downloadFileType: PropTypes.oneOf(['txt', 'json']),
+  downloadFileType: downloadRequiredProps(PropTypes.oneOf(['txt', 'json'])),
   /**
    * aria-label for the download link
    */
-  downloadLinkLabel: PropTypes.string,
+  downloadLinkLabel: downloadRequiredProps(PropTypes.string),
   /**
    * anchor text for the download link
    */
-  downloadLinkText: PropTypes.string,
+  downloadLinkText: downloadRequiredProps(PropTypes.string),
   /**
    * text for the edit button
    */
-  editButtonText: PropTypes.string,
+  editButtonText: editRequiredProps(PropTypes.string),
   /**
    * designates if the edit request was successful
    */
-  editSuccess: PropTypes.bool,
+  editSuccess: editRequiredProps(PropTypes.bool),
   /**
    * title for a successful edit
    */
-  editSuccessMessage: PropTypes.string,
+  editSuccessMessage: editRequiredProps(PropTypes.string),
   /**
    * designates if the modal is in the edit mode
    */
@@ -589,7 +603,7 @@ APIKeyModal.propTypes = {
   /**
    * text that displays in the primary button when using custom steps to indicate to the user that there is a next step
    */
-  nextStepButtonText: PropTypes.string,
+  nextStepButtonText: customStepsRequiredProps(PropTypes.string),
   /**
    * handler for on modal close
    */
@@ -618,7 +632,7 @@ APIKeyModal.propTypes = {
   /**
    * text that displays in the secondary button when using custom steps to indicate to the user that there is a previous step
    */
-  previousStepButtonText: PropTypes.string,
+  previousStepButtonText: customStepsRequiredProps(PropTypes.string),
   /**
    * label text that's displayed when hovering over visibility toggler to show key
    */

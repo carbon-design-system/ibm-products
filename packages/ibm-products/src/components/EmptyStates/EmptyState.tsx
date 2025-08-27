@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -199,7 +199,9 @@ EmptyState.propTypes = {
    * The alt text for custom provided illustrations
    */
   /**@ts-ignore*/
-  illustrationDescription: PropTypes.string,
+  illustrationDescription: PropTypes.string.isRequired.if(
+    ({ illustration }) => illustration
+  ),
 
   /**
    * Designates the position of the illustration relative to the content

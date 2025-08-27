@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2025
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -295,7 +295,9 @@ CreateFullPageStep.propTypes = {
    * This is the legend text that appears above a fieldset html element for accessibility purposes. It is required when the optional `hasFieldset` prop is provided to a FullPageStep.
    */
   /**@ts-ignore */
-  fieldsetLegendText: PropTypes.string,
+  fieldsetLegendText: PropTypes.string.isRequired.if(
+    ({ hasFieldset }) => hasFieldset === true
+  ),
 
   /**
    * This optional prop will render your form content inside of a fieldset html element

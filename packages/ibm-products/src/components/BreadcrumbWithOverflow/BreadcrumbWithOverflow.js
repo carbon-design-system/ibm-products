@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2025
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -389,7 +389,9 @@ BreadcrumbWithOverflow.propTypes = {
       /**
        * A string based alternative to the children, required only if children is not of type string
        */
-      title: PropTypes.string,
+      title: PropTypes.string.isRequired.if(
+        ({ label }) => typeof label !== 'string'
+      ),
     })
   ),
   /**
@@ -411,7 +413,9 @@ BreadcrumbWithOverflow.propTypes = {
   /**
    * overflowAriaLabel label for open close button overflow used for breadcrumb items that do not fit.
    */
-  overflowAriaLabel: PropTypes.string,
+  overflowAriaLabel: PropTypes.string.isRequired.if(
+    ({ breadcrumbs }) => breadcrumbs.length > 1
+  ),
   /**
    * overflowTooltipAlign: align tooltip position
    */

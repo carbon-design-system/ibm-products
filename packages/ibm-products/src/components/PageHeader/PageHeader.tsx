@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2025
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -29,7 +29,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { TagSet } from '../TagSet/TagSet';
+import { TagSet, string_required_if_more_than_10_tags } from '../TagSet/TagSet';
 import { baseFontSize, spacing } from '@carbon/layout';
 import {
   blockClass,
@@ -242,14 +242,14 @@ interface TitleIcon {
   loading?: boolean;
 
   // inline edit version properties
-  editableLabel?: string;
-  id?: string;
+  editableLabel?: string; // .isRequired.if(editInPlaceRequired),
+  id?: string; // .isRequired.if(editInPlaceRequired),
   onCancel?: () => void;
   onChange?: () => void;
   onSave?: () => void;
-  cancelDescription?: string;
-  editDescription?: string;
-  saveDescription?: string;
+  cancelDescription?: string; //.isRequired.if(editInPlaceRequired),
+  editDescription?: string; // .isRequired.if(editInPlaceRequired),
+  saveDescription?: string; //.isRequired.if(editInPlaceRequired),
   tooltipAlignment?:
     | 'top'
     | 'top-left'
@@ -850,6 +850,8 @@ export let PageHeader = React.forwardRef(
 
     useEffect(() => {
       // only has toggle if requested and withoutBackground is unset/falsy
+      // NOTE: prop-types isRequired.if for the expand and collapse
+      // icon descriptions depends on the this.
       setHasCollapseButton(
         (hasCollapseHeaderToggle && !withoutBackground) || false
       );
@@ -1330,7 +1332,9 @@ PageHeader.propTypes = {
    * NOTE: This prop is required if actionBarItems are supplied
    */
   /**@ts-ignore */
-  actionBarOverflowAriaLabel: PropTypes.string,
+  actionBarOverflowAriaLabel: PropTypes.string.isRequired.if(
+    ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
+  ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
    * menu being shown. If in the overflow menu there is still insufficient space this label is used in a dialog showing
@@ -1338,7 +1342,7 @@ PageHeader.propTypes = {
    *
    * **Note: Required if more than 10 tags**
    */
-  allTagsModalSearchLabel: PropTypes.string,
+  allTagsModalSearchLabel: string_required_if_more_than_10_tags,
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
    * menu being shown. If in the overflow menu there is still insufficient space this placeholder is used in a dialog
@@ -1346,7 +1350,7 @@ PageHeader.propTypes = {
    *
    * **Note: Required if more than 10 tags**
    */
-  allTagsModalSearchPlaceholderText: PropTypes.string,
+  allTagsModalSearchPlaceholderText: string_required_if_more_than_10_tags,
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
    * menu being shown. If in the overflow menu there is still insufficient space this title is used in a dialog showing
@@ -1354,13 +1358,15 @@ PageHeader.propTypes = {
    *
    * **Note: Required if more than 10 tags**
    */
-  allTagsModalTitle: PropTypes.string,
+  allTagsModalTitle: string_required_if_more_than_10_tags,
   /**
    * If the user supplies breadcrumbs then this property is required.
    * It is used in an overflow menu when there is insufficient space to display all breadcrumbs inline.
    */
   /**@ts-ignore */
-  breadcrumbOverflowAriaLabel: PropTypes.string,
+  breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(
+    ({ breadcrumbs }) => breadcrumbs && breadcrumbs.length > 0
+  ),
   /**
    * align breadcrumb overflow tooltip
    */
@@ -1403,7 +1409,9 @@ PageHeader.propTypes = {
        * A text version of the `label` for display, required if `label` is not a string.
        */
       /**@ts-ignore */
-      title: PropTypes.string,
+      title: PropTypes.string.isRequired.if(
+        ({ label }) => typeof label !== 'string'
+      ),
     })
   ),
   /**
@@ -1429,7 +1437,10 @@ PageHeader.propTypes = {
    * required for both the expend and collapse states of the button component used.
    */
   /**@ts-ignore */
-  collapseHeaderIconDescription: PropTypes.string,
+  collapseHeaderIconDescription: PropTypes.string.isRequired.if(
+    ({ withoutBackground, hasCollapseHeaderToggle }) =>
+      !withoutBackground && hasCollapseHeaderToggle
+  ),
   /**
    * The title row typically starts below the breadcrumb row. This option
    * preCollapses it into the breadcrumb row.
@@ -1445,7 +1456,10 @@ PageHeader.propTypes = {
    * required for both the expend and collapse states of the button component used.
    */
   /**@ts-ignore */
-  expandHeaderIconDescription: PropTypes.string,
+  expandHeaderIconDescription: PropTypes.string.isRequired.if(
+    ({ withoutBackground, hasCollapseHeaderToggle }) =>
+      !withoutBackground && hasCollapseHeaderToggle
+  ),
   /**
    * The PageHeader is hosted in a Carbon grid, this value is passed through to the Carbon grid fullWidth prop.
    * 'xl' is used to override the grid width setting. Can be used with narrowGrid: true to get the largest size.
@@ -1519,7 +1533,10 @@ PageHeader.propTypes = {
    * NOTE: This prop is required if pageActions are supplied
    */
   /**@ts-ignore */
-  pageActionsOverflowLabel: PropTypes.node,
+  pageActionsOverflowLabel: PropTypes.node.isRequired.if(
+    ({ pageActions }) =>
+      pageActions && pageActions.length > 0 && !pageActions.content
+  ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
    * menu being shown. If in the overflow menu there is still insufficient space this label is used to offer a
@@ -1527,7 +1544,7 @@ PageHeader.propTypes = {
    *
    * **Note: Required if more than 10 tags**
    */
-  showAllTagsLabel: PropTypes.string,
+  showAllTagsLabel: string_required_if_more_than_10_tags,
   /**
    * Sitting just below the title is this optional subtitle that provides additional context to
    * identify the current page.
@@ -1586,14 +1603,14 @@ PageHeader.propTypes = {
       loading: PropTypes.bool,
 
       // inline edit version properties
-      editableLabel: PropTypes.string,
-      id: PropTypes.string,
+      editableLabel: PropTypes.string, // .isRequired.if(editInPlaceRequired),
+      id: PropTypes.string, // .isRequired.if(editInPlaceRequired),
       onCancel: PropTypes.func,
       onChange: PropTypes.func,
       onSave: PropTypes.func,
-      cancelDescription: PropTypes.string,
-      editDescription: PropTypes.string,
-      saveDescription: PropTypes.string,
+      cancelDescription: PropTypes.string, //.isRequired.if(editInPlaceRequired),
+      editDescription: PropTypes.string, // .isRequired.if(editInPlaceRequired),
+      saveDescription: PropTypes.string, //.isRequired.if(editInPlaceRequired),
       tooltipAlignment: PropTypes.oneOf([
         'top',
         'top-left',

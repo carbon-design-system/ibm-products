@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -151,13 +151,13 @@ PageHeaderTitle.propTypes = {
       loading: PropTypes.bool,
 
       // inline edit version properties
-      editDescription: PropTypes.string,
-      editableLabel: PropTypes.string,
-      id: PropTypes.string,
+      editDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
+      editableLabel: PropTypes.string.isRequired.if(editInPlaceRequired),
+      id: PropTypes.string.isRequired.if(editInPlaceRequired),
       onChange: PropTypes.func,
       onSave: PropTypes.func,
-      cancelDescription: PropTypes.string,
-      saveDescription: PropTypes.string,
+      cancelDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
+      saveDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
       tooltipAlignment: PropTypes.oneOf([
         'top',
         'top-left',

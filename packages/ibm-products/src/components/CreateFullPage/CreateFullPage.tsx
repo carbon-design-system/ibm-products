@@ -25,7 +25,10 @@ import React, {
   ReactElement,
   isValidElement,
 } from 'react';
-import { SimpleHeader } from '../SimpleHeader/SimpleHeader';
+import {
+  SimpleHeader,
+  overflowAriaLabel_required_if_breadcrumbs_exist,
+} from '../SimpleHeader/SimpleHeader';
 import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
@@ -501,7 +504,7 @@ CreateFullPage.propTypes = {
   /**
    * Label for open/close overflow button used for breadcrumb items that do not fit
    */
-  breadcrumbsOverflowAriaLabel: PropTypes.string,
+  breadcrumbsOverflowAriaLabel: overflowAriaLabel_required_if_breadcrumbs_exist,
 
   /**
    * The cancel button text

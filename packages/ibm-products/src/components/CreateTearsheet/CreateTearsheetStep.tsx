@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2025
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -398,7 +398,9 @@ CreateTearsheetStep.propTypes = {
    * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
    */
   /**@ts-ignore*/
-  fieldsetLegendId: PropTypes.node,
+  fieldsetLegendId: PropTypes.node.isRequired.if(
+    ({ hasFieldset }) => !!hasFieldset
+  ),
 
   /**
    * This is the required legend text that appears above a fieldset html element for accessibility purposes.
@@ -406,7 +408,9 @@ CreateTearsheetStep.propTypes = {
    * Otherwise, use CSS to hide/remove this label text.
    */
   /**@ts-ignore*/
-  fieldsetLegendText: PropTypes.string,
+  fieldsetLegendText: PropTypes.string.isRequired.if(
+    ({ hasFieldset }) => !!hasFieldset
+  ),
 
   /**
    * This optional prop will render your form content inside of a fieldset html element

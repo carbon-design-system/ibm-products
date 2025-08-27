@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,6 +22,7 @@ import { TagOverflowModal } from './TagOverflowModal';
 import { TagOverflowPopover } from './TagOverflowPopover';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 import { useOverflowItems } from '../../global/js/hooks/useOverflowItems';
 export interface TagOverflowItem {
@@ -257,6 +258,15 @@ TagOverflow.displayName = componentName;
 
 const tagTypes = Object.keys(TYPES);
 
+/**
+ * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
+ * @returns null if no problems
+ */
+export const string_required_if_more_than_10_tags = isRequiredIf(
+  PropTypes.string,
+  ({ items }) => items?.length > allTagsModalSearchThreshold
+);
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
@@ -272,11 +282,11 @@ TagOverflow.propTypes = {
   /**
    * label text for the show all search. **Note: Required if more than 10 tags**
    */
-  allTagsModalSearchLabel: PropTypes.string,
+  allTagsModalSearchLabel: string_required_if_more_than_10_tags,
   /**
    * placeholder text for the show all search. **Note: Required if more than 10 tags**
    */
-  allTagsModalSearchPlaceholderText: PropTypes.string,
+  allTagsModalSearchPlaceholderText: string_required_if_more_than_10_tags,
   /**
    * portal target for the all tags modal
    */
@@ -284,7 +294,7 @@ TagOverflow.propTypes = {
   /**
    * title for the show all modal. **Note: Required if more than 10 tags**
    */
-  allTagsModalTitle: PropTypes.string,
+  allTagsModalTitle: string_required_if_more_than_10_tags,
   /**
    * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
@@ -358,7 +368,7 @@ TagOverflow.propTypes = {
    *
    * **Note:** Required if more than 10 tags
    */
-  showAllTagsLabel: PropTypes.string,
+  showAllTagsLabel: string_required_if_more_than_10_tags,
   /** Component definition of the items to be rendered inside TagOverflow.
    * If this is not passed, items will be rendered as Tag component
    */

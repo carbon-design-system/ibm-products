@@ -1260,7 +1260,7 @@ SidePanel.propTypes = {
    * This prop is required when using the `slideIn` variant of the side panel.
    */
   /**@ts-ignore*/
-  selectorPageContent: PropTypes.string,
+  selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
 
   /**
    * Specify a CSS selector that matches the DOM element that should
@@ -1290,7 +1290,7 @@ SidePanel.propTypes = {
    * Sets the title text
    */
   /**@ts-ignore*/
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired.if(({ labelText }) => labelText),
 
   ...deprecatedProps,
 };

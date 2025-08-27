@@ -1,0 +1,25 @@
+//
+// Copyright IBM Corp. 2025, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/ibm-products-styles/scss/config';
+@use '@carbon/ibm-products-styles/scss/components/Checklist/index' as checklist;
+
+$prefix: config.$pkg-prefix;
+$carbon-prefix: config.$carbon-prefix;
+
+$baseClass: #{$prefix}--checklist;
+
+:host(#{$prefix}-checklist) {
+  .#{$baseClass}__toggle {
+    margin-block-start: -$spacing-03;
+    margin-inline: auto -$spacing-03;
+  }
+}

@@ -2777,8 +2777,11 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--side-panel.c4p--side-panel--condensed-actions {
   --c4p--side-panel--actions-height: 3rem;
 }
-.c4p--side-panel.c4p--side-panel--slide-in, .c4p--side-panel:not(.c4p--side-panel--has-overlay) {
+.c4p--side-panel.c4p--side-panel--has-overlay {
   box-shadow: 0 0.125rem 0.25rem var(--cds-overlay, rgba(22, 22, 22, 0.5));
+}
+.c4p--side-panel.c4p--side-panel--slide-in:not(.c4p--side-panel--has-overlay) {
+  box-shadow: none;
 }
 .c4p--side-panel .c4p--side-panel__actions-container {
   inline-size: 100%;
@@ -3297,6 +3300,7 @@ p.c4p--about-modal__copyright-text:first-child {
   transform: scale(var(--c4p--tearsheet--stacking-scale-factor-double));
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header {
+  overflow: visible;
   padding: 1.5rem 2rem;
   margin: 0;
   background-color: var(--cds-layer);

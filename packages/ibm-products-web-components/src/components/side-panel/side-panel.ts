@@ -128,6 +128,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @state()
   _slugCloseSize = 'sm';
 
+  @state()
+  _customHeaderElements: Element[] = [];
+
   /**
    * Get focusable elements.
    *
@@ -377,6 +380,17 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._hasSubtitle = subtitle.length > 0;
   }
 
+  private _handleCustomHeaderSlotChange(e: Event) {
+    const target = e.target as HTMLSlotElement;
+    const customHeaderElms = target?.assignedElements();
+    customHeaderElms.forEach((el) => {
+      if (el instanceof HTMLElement) {
+        el.style.opacity = `calc(1 - var(--${blockClass}--scroll-animation-progress))`;
+        this._customHeaderElements.push(el);
+      }
+    });
+  }
+
   private _handleActionToolbarChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const toolbarActions = target?.assignedElements();
@@ -498,12 +512,22 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   private _scrollObserver = () => {
     const scrollTop = this._animateScrollWrapper?.scrollTop ?? 0;
     const scrollAnimationDistance = this._getScrollAnimationDistance();
+    const animationProgress =
+      Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance;
+
     this?._sidePanel?.style?.setProperty(
       `--${blockClass}--scroll-animation-progress`,
-      `${
-        Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance
-      }`
+      `${animationProgress}`
     );
+    if (animationProgress === 1) {
+      this._customHeaderElements.forEach((el) => {
+        el.classList.add(`cds--visually-hidden`);
+      });
+    } else {
+      this._customHeaderElements.forEach((el) => {
+        el.classList.remove(`cds--visually-hidden`);
+      });
+    }
   };
 
   private _handleCurrentStepUpdate = () => {
@@ -719,6 +743,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             </cds-icon-button>`
           : ''}
 
+        <!-- slot for custom header components -->
+        <slot
+          name="above-title"
+          @slotchange=${this._handleCustomHeaderSlotChange}
+        ></slot>
+
         <!-- render title label -->
         ${title?.length && labelText?.length
           ? html` <p class=${`${blockClass}__label-text`}>${labelText}</p>`
@@ -759,6 +789,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             @slotchange=${this._handleSubtitleChange}
           ></slot>
         </p>
+
+        <!-- slot for custom header components -->
+        <slot
+          name="below-title"
+          @slotchange=${this._handleCustomHeaderSlotChange}
+        ></slot>
 
         <div
           class=${this._hasActionToolbar ? `${blockClass}__action-toolbar` : ''}

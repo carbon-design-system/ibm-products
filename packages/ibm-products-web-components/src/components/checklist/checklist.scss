@@ -19,7 +19,7 @@ $baseClass: #{$prefix}--checklist;
 
 :host(#{$prefix}-checklist) {
   .#{$baseClass}__toggle {
-    margin-block-start: -$spacing-03;
-    margin-inline: auto -$spacing-03;
+    margin-block-start: calc(-1 * spacing.$spacing-03);
+    margin-inline: auto calc(-1 * spacing.$spacing-03);
   }
 }

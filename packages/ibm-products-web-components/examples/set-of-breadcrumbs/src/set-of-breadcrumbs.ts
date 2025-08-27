@@ -16,6 +16,7 @@ import '@carbon/web-components/es/components/breadcrumb/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
 import { createOverflowHandler } from './overflowHandler';
 import OverflowMenuHorizontal16 from '@carbon/web-components/es/icons/overflow-menu--horizontal/16.js';
+import { iconLoader } from '../../../src/globals/internal/icon-loader';
 import styles from './set-of-breadcrumbs.scss?lit';
 
 const blockClass = `c4p--set-of-breadcrumbs`;
@@ -139,7 +140,7 @@ export default class SetOfBreadcrumbs extends LitElement {
           style="display: ${this.hiddenItems?.length >= 2 ? 'flex' : 'none'}"
         >
           <cds-overflow-menu breadcrumb="" align="top">
-            ${OverflowMenuHorizontal16({
+            ${iconLoader(OverflowMenuHorizontal16, {
               slot: 'icon',
             })}
             <span slot="tooltip-content"> Breadcrumbs </span>

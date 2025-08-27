@@ -18,10 +18,11 @@ import '@carbon/web-components/es/components/inline-loading/index.js';
 import '@carbon/web-components/es/components/form-group/index.js';
 import '@carbon/web-components/es/components/radio-button/index.js';
 import '@carbon/web-components/es/components/toggle/index.js';
-import CheckmarkFilled16 from '@carbon/web-components/es/icons/checkmark--filled/16.js';
-import ErrorFilled16 from '@carbon/web-components/es/icons/error--filled/16.js';
-import InformationFilled16 from '@carbon/web-components/es/icons/information--filled/16.js';
-import Copy16 from '@carbon/web-components/es/icons/copy/16.js';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
+import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
+import InformationFilled16 from '@carbon/icons/es/information--filled/16.js';
+import Copy16 from '@carbon/icons/es/copy/16.js';
+import { iconLoader } from '../../../src/globals/internal/icon-loader';
 import { ref } from 'lit/directives/ref.js';
 import styles from './api-key-modal.scss?lit';
 import './api-key-downloader';
@@ -394,7 +395,7 @@ class CustomGenerate extends HostListenerMixin(LitElement) {
                   ? html`
                       <div class=${`${blockClass}__messaging`}>
                         <div class=${`${blockClass}__error-icon`}>
-                          ${ErrorFilled16({
+                          ${iconLoader(ErrorFilled16, {
                             slot: 'icon',
                             // class: `${blockClass}__error-icon`,
                           })}
@@ -414,7 +415,7 @@ class CustomGenerate extends HostListenerMixin(LitElement) {
                 ${this.apiKeyLoaded
                   ? html`
                       <div class=${`${blockClass}__messaging`}>
-                        ${InformationFilled16({
+                        ${iconLoader(InformationFilled16, {
                           slot: 'icon',
                         })}
                         ${this.hasDownloadLink
@@ -440,7 +441,7 @@ class CustomGenerate extends HostListenerMixin(LitElement) {
                 ${this.editSuccess || this.apiKeyLoaded
                   ? html`
                       <div class=${`${blockClass}__messaging`}>
-                        ${CheckmarkFilled16({
+                        ${iconLoader(CheckmarkFilled16, {
                           slot: 'icon',
                           class: `${blockClass}__checkmark-icon`,
                         })}
@@ -468,7 +469,7 @@ class CustomGenerate extends HostListenerMixin(LitElement) {
             ?disabled=${this.isPrimaryButtonDisabled()}
             @click=${this._submitHandler}
             >${this.apiKeyLoaded
-              ? html`Copy ${Copy16({ slot: 'icon' })}`
+              ? html`Copy ${iconLoader(Copy16, { slot: 'icon' })}`
               : this.getPrimaryButtonText()}
           </cds-modal-footer-button>
         </cds-modal-footer>

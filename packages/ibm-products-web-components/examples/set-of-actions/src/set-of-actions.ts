@@ -14,7 +14,8 @@ import { repeat } from 'lit/directives/repeat.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
 import { createOverflowHandler } from '@carbon/utilities';
-import OverflowMenuVertical16 from '@carbon/web-components/es/icons/overflow-menu--vertical/16.js';
+import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
+import { iconLoader } from '../../../src/globals/internal/icon-loader';
 import styles from './set-of-actions.scss?lit';
 
 const blockClass = `c4p--set-of-actions`;
@@ -154,7 +155,7 @@ export default class SetOfActions extends LitElement {
             leave-delay-ms="0"
             align=${this.orientation === 'horizontal' ? 'top-right' : 'right'}
           >
-            ${OverflowMenuVertical16({
+            ${iconLoader(OverflowMenuVertical16, {
               class: `${blockClass}__overflow-svg`,
               slot: 'icon',
             })}

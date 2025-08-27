@@ -69,7 +69,6 @@
     "@babel/eslint-parser": "^7.26.10",
     "@babel/preset-react": "^7.26.3",
     "@carbon/grid": "^11.38.0",
-    "@carbon/ibm-products-styles": "^2.68.0",
     "@carbon/layout": "^11.36.0",
     "@carbon/motion": "^11.30.0",
     "@carbon/react": "^1.85.1",

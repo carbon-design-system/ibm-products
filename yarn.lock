@@ -1925,21 +1925,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/ibm-products-styles@npm:^2.68.0":
-  version: 2.68.1
-  resolution: "@carbon/ibm-products-styles@npm:2.68.1"
-  dependencies:
-    "@ibm/telemetry-js": "npm:^1.9.1"
-  peerDependencies:
-    "@carbon/grid": ^11.38.0
-    "@carbon/layout": ^11.36.0
-    "@carbon/motion": ^11.30.0
-    "@carbon/themes": ^11.55.0
-    "@carbon/type": ^11.42.0
-  checksum: 10/06c386476b61d2dc7d1bba51c0ddae5b3f7c90f100af8460adc405ceecb4f6f935d4240dc76cd1f5f73ec10debbfb4e345ebdabe256157beec6ec6263274d9e7
-  languageName: node
-  linkType: hard
-
 "@carbon/ibm-products-styles@npm:^2.69.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
@@ -13409,7 +13394,6 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.26.10"
     "@babel/preset-react": "npm:^7.26.3"
     "@carbon/grid": "npm:^11.38.0"
-    "@carbon/ibm-products-styles": "npm:^2.68.0"
     "@carbon/layout": "npm:^11.36.0"
     "@carbon/motion": "npm:^11.30.0"
     "@carbon/react": "npm:^1.85.1"

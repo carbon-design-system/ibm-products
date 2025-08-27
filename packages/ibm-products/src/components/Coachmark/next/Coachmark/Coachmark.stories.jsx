@@ -123,15 +123,11 @@ const TooltipTemplate = (args) => {
         {...args}
       >
         <CoachmarkBeacon
-          id="CoachmarkBtn"
           label="Show information"
-          onClick={handleBeaconClick}
+          buttonProps={{ onClick: handleBeaconClick, id: 'CoachmarkBtn' }}
         ></CoachmarkBeacon>
         <Coachmark.Content highContrast={true}>
-          <Coachmark.Content.Header
-            closeIconDescription="Close"
-            dragIconDescription="Drag"
-          ></Coachmark.Content.Header>
+          <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
           <Coachmark.Content.Body>
             <h2>Hello World</h2>
             <p>this is a description test</p>

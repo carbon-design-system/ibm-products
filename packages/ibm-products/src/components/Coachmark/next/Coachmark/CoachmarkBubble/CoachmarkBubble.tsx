@@ -79,6 +79,9 @@ const CoachmarkBubble = forwardRef<HTMLDivElement, BubbleProps>(
     useLayoutEffect(() => {
       if (target) {
         if (typeof target === 'string') {
+          if (target === '#' || target.trim() === '') {
+            return;
+          }
           targetRef.current = document.querySelector(target);
         } else if ('current' in target) {
           targetRef.current = target.current;

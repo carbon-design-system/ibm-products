@@ -6,7 +6,8 @@
  */
 import { expect, describe, it, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-import Bee32 from '@carbon/web-components/es/icons/bee/32.js';
+import Bee32 from '@carbon/icons/es/bee/32.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import CDSPageHeader from './page-header';
 import CDSPageHeaderBreadcrumb from './page-header-breadcrumb';
 import CDSPageHeaderTabs from './page-header-tabs';
@@ -273,7 +274,7 @@ describe('c4p-page-header', function () {
       const el: CDSPageHeader = await fixture(html`
         <c4p-page-header>
           <c4p-page-header-content title="Page header content title">
-            ${Bee32({ slot: 'icon' })}
+            ${iconLoader(Bee32, { slot: 'icon' })}
           </c4p-page-header-content>
         </c4p-page-header>
       `);

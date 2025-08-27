@@ -10,7 +10,8 @@
 import { html } from 'lit';
 import './index';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
-import Group from '@carbon/web-components/es/icons/group/16';
+import Group from '@carbon/icons/es/group/16';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import headshot from './_story-assets/headshot.jpg';
 
 const storyPrefix = 'user-avatar-stories__';
@@ -113,7 +114,7 @@ export const WithIcon = {
         background-color=${args.backgroundColor}
         theme=${args.theme}
       >
-        ${Group({ slot: 'rendericon' })}
+        ${iconLoader(Group, { slot: 'rendericon' })}
       </c4p-user-avatar>
     `;
   },

@@ -12,7 +12,8 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { selectorTabbable } from '@carbon/web-components/es/globals/settings.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
-import Settings16 from '@carbon/web-components/es/icons/settings/16';
+import Settings16 from '@carbon/icons/es/settings/16';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './notification-footer.scss?lit';
 
@@ -55,7 +56,7 @@ class CDSNotificationFooter extends HostListenerMixin(LitElement) {
         class="${blockClass}__settings-button"
         @click=${onClickSettings}
       >
-        ${Settings16({ slot: 'icon' })}
+        ${iconLoader(Settings16, { slot: 'icon' })}
       </cds-button>
     `;
   }

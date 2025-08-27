@@ -188,12 +188,12 @@ async function postBuild() {
     await Promise.all(
       files.map(async (file) => {
         const content = await fs.promises.readFile(file, 'utf8');
-        let updatedContent = content.replace(/(?<!--)cds/g, 'cds-custom');
-        updatedContent = content.replace(
+        const updatedContent = content.replace(/(?<!--)cds/g, 'cds-custom');
+        const updatedContentWithImports = updatedContent.replace(
           /import\s+['"]@carbon\/web-components\/es\/components\/(.*?)['"]/g,
           "import '@carbon/web-components/es-custom/components/$1'"
         );
-        await fs.promises.writeFile(file, updatedContent);
+        await fs.promises.writeFile(file, updatedContentWithImports);
       })
     );
   }

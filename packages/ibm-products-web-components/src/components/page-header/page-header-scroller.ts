@@ -11,8 +11,9 @@ import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import Chevron20 from '@carbon/web-components/es/icons/chevron--up/20';
-import ChevronDown20 from '@carbon/web-components/es/icons/chevron--down/20';
+import Chevron20 from '@carbon/icons/es/chevron--up/20';
+import ChevronDown20 from '@carbon/icons/es/chevron--down/20';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import '@carbon/web-components/es/components/button/index.js';
 import { pageHeaderContext } from './context';
 import { consume } from '@lit/context';
@@ -147,8 +148,8 @@ export class PageHeaderScroller extends CDSButton {
       @click=${this._handleScroller}
     >
       ${context?.fullyCollapsed
-        ? html`${ChevronDown20({ slot: 'icon' })}`
-        : html`${Chevron20({ slot: 'icon' })}`}
+        ? html`${iconLoader(ChevronDown20, { slot: 'icon' })}`
+        : html`${iconLoader(Chevron20, { slot: 'icon' })}`}
       <span slot="tooltip-content">
         ${context?.fullyCollapsed ? this.expandText : this.collapseText}
       </span>

@@ -14,7 +14,8 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import styles from './options-tile.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import ChevronDown20 from '@carbon/web-components/es/icons/chevron--down/20';
+import ChevronDown20 from '@carbon/icons/es/chevron--down/20';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
 
@@ -127,7 +128,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
       >
         <summary class="${blockClass}__header">
           <div class="${blockClass}__header-left">
-            ${ChevronDown20({
+            ${iconLoader(ChevronDown20, {
               slot: 'icon',
               class: `${blockClass}__chevron`,
             })}

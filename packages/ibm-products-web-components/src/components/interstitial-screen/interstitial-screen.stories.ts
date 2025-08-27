@@ -13,9 +13,10 @@ import '@carbon/web-components/es/components/toggle/index.js';
 import '@carbon/web-components/es/components/tag/index.js';
 import styles from './story-styles.scss?lit';
 import footerStyles from './interstitial-screen-footer.scss?lit';
-import Checkmark from '@carbon/web-components/es/icons/checkmark/16.js';
 import { prefix } from '../../globals/settings';
-import ArrowRight from '@carbon/web-components/es/icons/arrow--right/16.js';
+import Checkmark from '@carbon/icons/es/checkmark/16.js';
+import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const argTypes = {
   fullscreen: {
@@ -139,7 +140,7 @@ const getSingleContent = (getConfig) => {
               disableActionButton?.({ start: false });
             }}"
           >
-            ${Checkmark({ slot: 'icon' })}
+            ${iconLoader(Checkmark, { slot: 'icon' })}
           </cds-selectable-tag>
         </section>
       </div></c4p-interstitial-screen-body-item
@@ -398,7 +399,7 @@ export const WithCustomActionButtons = {
                           size="lg"
                           @click=${handleClickNext}
                         >
-                          Next ${ArrowRight({ slot: 'icon' })}
+                          Next ${iconLoader(ArrowRight, { slot: 'icon' })}
                         </cds-button>
                       `
                     : nothing}

@@ -69,7 +69,9 @@ export function carbonIconToSVG(
   const content = iconDescriptor.content || [];
   const contentString = content
     .map((child: CarbonIconElement | string) => {
-      if (typeof child === 'string') {return child;}
+      if (typeof child === 'string') {
+        return child;
+      }
       return elementToSVG(child);
     })
     .join('');

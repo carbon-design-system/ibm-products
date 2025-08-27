@@ -6,29 +6,28 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
-
+import { action } from 'storybook/actions';
 import {
   Guidebanner,
   GuidebannerElement,
   GuidebannerElementButton,
   GuidebannerElementLink,
 } from '.';
+import mdx from './Guidebanner.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { DocsPage } from './Guidebanner.docs-page';
 
 const storyClass = 'guidebanner-stories';
 
 export default {
   title: 'Experimental/Onboarding/Guidebanner',
   component: Guidebanner,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     styles,
     layout: 'fullscreen',
     docs: {
-      page: DocsPage,
+      page: mdx,
     },
   },
   argTypes: {

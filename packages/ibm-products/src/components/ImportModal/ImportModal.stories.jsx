@@ -7,20 +7,20 @@
 
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 // import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { ImportModal } from '.';
-import DocsPage from './ImportModal.docs-page';
+import mdx from './ImportModal.mdx';
 // import mdx from './ImportModal.mdx';
 
 export default {
-  title: 'IBM Products/Patterns/Import and upload/ImportModal',
+  title: 'Patterns/Prebuilt patterns/ImportModal',
   component: ImportModal,
   tags: ['autodocs'],
   parameters: {
     // styles,
     docs: {
-      page: DocsPage,
+      page: mdx,
     },
   },
   argTypes: {
@@ -34,11 +34,6 @@ export default {
         },
       },
       options: [0, 1, 2],
-      mapping: {
-        0: ['image/png', 'image/jpeg', 'image/gif'],
-        1: ['application/doc', 'application/docx', 'application/pdf'],
-        2: ['text/plain', 'text/css', 'text/html', 'text/javascript'],
-      },
     },
     portalTarget: {
       control: false,
@@ -77,10 +72,25 @@ const defaultProps = {
 };
 
 const TemplateWithState = ({ ...args }, context) => {
+  const { accept } = args;
+  const getAcceptValues = (value) => {
+    if (value === 0) {
+      return ['image/png', 'image/jpeg', 'image/gif'];
+    } else if (value === 1) {
+      return ['application/doc', 'application/docx', 'application/pdf'];
+    } else if (value === 2) {
+      return ['text/plain', 'text/css', 'text/html', 'text/javascript'];
+    }
+  };
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   return (
     <>
-      <ImportModal {...args} open={open} onClose={() => setOpen(false)} />
+      <ImportModal
+        {...args}
+        open={open}
+        onClose={() => setOpen(false)}
+        accept={getAcceptValues(accept)}
+      />
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
     </>
   );

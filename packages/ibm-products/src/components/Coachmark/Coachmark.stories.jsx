@@ -7,7 +7,7 @@
 
 import React, { useEffect, useRef } from 'react';
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 import { Crossroads } from '@carbon/react/icons';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
@@ -26,9 +26,9 @@ import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark',
+  title: 'Experimental/Onboarding/Coachmark/Coachmark',
   component: Coachmark,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   argTypes: {
     theme: {
       control: { type: null },
@@ -73,6 +73,10 @@ export default {
     },
     className: {
       control: { type: null },
+    },
+    closeIconDescription: {
+      control: { type: 'text' },
+      description: 'Tooltip text and aria label for the Close button icon.',
     },
   },
   parameters: {
@@ -130,6 +134,7 @@ export const tooltip = Template.bind({});
 tooltip.args = {
   theme: 'dark',
   align: 'bottom',
+  closeIconDescription: 'Close',
   positionTune: { x: 0, y: 0 },
   target: (
     <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
@@ -140,6 +145,7 @@ export const floating = Template.bind({});
 floating.args = {
   theme: 'dark',
   align: 'bottom',
+  closeIconDescription: 'Close',
   overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
   target: (
     <CoachmarkButton

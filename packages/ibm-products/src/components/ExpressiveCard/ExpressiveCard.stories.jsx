@@ -22,7 +22,7 @@ import {
 
 import { ExpressiveCard } from '.';
 import DocsPage from './ExpressiveCard.docs-page';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const sampleDecorator = (decorator) => {
   switch (decorator) {
@@ -63,7 +63,7 @@ const sampleDecorator = (decorator) => {
 };
 
 export default {
-  title: 'IBM Products/Components/Cards/ExpressiveCard',
+  title: 'Components/Cards/ExpressiveCard',
   component: ExpressiveCard,
   tags: ['autodocs'],
   parameters: {

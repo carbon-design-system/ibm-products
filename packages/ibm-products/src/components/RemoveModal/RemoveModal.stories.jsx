@@ -9,16 +9,16 @@ import React, { useState } from 'react';
 import { Button, Link } from '@carbon/react';
 // import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { RemoveModal } from '.';
-import DocsPage from './RemoveModal.docs-page';
+import mdx from './RemoveModal.mdx';
 
 export default {
-  title: 'IBM Products/Patterns/Remove/RemoveModal',
+  title: 'Patterns/Prebuilt patterns/RemoveModal',
   component: RemoveModal,
   tags: ['autodocs'],
   parameters: {
     // styles,
     docs: {
-      page: DocsPage,
+      page: mdx,
     },
   },
   argTypes: {
@@ -31,7 +31,6 @@ export default {
 const resourceName = 'bx1001';
 
 const defaultProps = {
-  body: `Deleting ${resourceName} will permanently delete the configuration. This action cannot be undone.`,
   className: 'remove-modal-test',
   title: 'Confirm delete',
   iconDescription: 'Close',
@@ -54,6 +53,33 @@ const Template = ({ open: initOpen, ...args }, context) => {
   return (
     <>
       <RemoveModal {...args} open={open} onClose={() => setOpen(false)} />
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+    </>
+  );
+};
+
+const ComponentInBodyPatternTemplate = (
+  { open: initOpen, ...args },
+  context
+) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs' && initOpen);
+
+  return (
+    <>
+      <RemoveModal
+        {...args}
+        open={open}
+        onClose={() => setOpen(false)}
+        body={
+          <React.Fragment>
+            {`Before removing bx1001, you can find out more information on the `}
+            <Link href={'https://www.carbondesignsystem.com'}>
+              Carbon Design System
+            </Link>
+            {' website.'}
+          </React.Fragment>
+        }
+      />
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
     </>
   );
@@ -82,18 +108,10 @@ export const DeletePattern = Template.bind({});
 DeletePattern.args = {
   ...defaultProps,
   textConfirmation: true,
+  body: `Deleting ${resourceName} will permanently delete the configuration. This action cannot be undone.`,
 };
 
-export const ComponentInBodyPattern = Template.bind({});
+export const ComponentInBodyPattern = ComponentInBodyPatternTemplate.bind({});
 ComponentInBodyPattern.args = {
   ...defaultProps,
-  body: (
-    <React.Fragment>
-      {`Before removing ${resourceName}, you can find out more information on the `}
-      <Link href={'https://www.carbondesignsystem.com'}>
-        Carbon Design System
-      </Link>
-      {' website.'}
-    </React.Fragment>
-  ),
 };

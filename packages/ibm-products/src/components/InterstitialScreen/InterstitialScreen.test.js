@@ -41,7 +41,7 @@ const renderComponent = ({ ...rest } = {}) => {
   };
   return render(
     <InterstitialScreen
-      isOpen={true}
+      open={true}
       onClose={onClose}
       data-testid={dataTestId}
       {...{ ...rest }}
@@ -90,7 +90,7 @@ const renderComponentSingleStep = ({ ...rest } = {}) => {
   };
   return render(
     <InterstitialScreen
-      isOpen={true}
+      open={true}
       onClose={onClose}
       data-testid={dataTestId}
       {...{ ...rest }}
@@ -123,7 +123,7 @@ describe(componentName, () => {
   it('renders a component InterstitialScreen (Modal)', () => {
     renderComponent({
       className: blockClass,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
+      ariaLabel: 'Modal Interstitial Screen',
     });
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
@@ -131,7 +131,7 @@ describe(componentName, () => {
   it('renders a component InterstitialScreen (Modal) single step', () => {
     renderComponentSingleStep({
       className: blockClass,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
+      ariaLabel: 'Modal Interstitial Screen',
     });
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
@@ -143,7 +143,7 @@ describe(componentName, () => {
     renderComponent({
       className: blockClass,
       isFullScreen: true,
-      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+      ariaLabel: 'Full Screen Interstitial Screen',
     });
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
@@ -151,7 +151,7 @@ describe(componentName, () => {
   it('has no accessibility violations (Modal)', async () => {
     const { container } = renderComponent({
       className: blockClass,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
+      ariaLabel: 'Modal Interstitial Screen',
     });
     await expect(() => container.toBeAccessible());
     await expect(() => container.toHaveNoAxeViolations());
@@ -161,7 +161,7 @@ describe(componentName, () => {
     const { container } = renderComponent({
       className: blockClass,
       isFullScreen: true,
-      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+      ariaLabel: 'Full Screen Interstitial Screen',
     });
     await expect(() => container.toBeAccessible());
     await expect(() => container.toHaveNoAxeViolations());
@@ -170,7 +170,7 @@ describe(componentName, () => {
   it(`renders children (Modal)`, () => {
     renderComponent({
       className: blockClass,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
+      ariaLabel: 'Modal Interstitial Screen',
     });
     screen.getByText(InterstitialScreenViewModuleTitle);
   });
@@ -179,7 +179,7 @@ describe(componentName, () => {
     renderComponent({
       className: blockClass,
       isFullScreen: true,
-      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+      ariaLabel: 'Full Screen Interstitial Screen',
     });
     screen.getByText(InterstitialScreenViewModuleTitle);
   });
@@ -187,7 +187,7 @@ describe(componentName, () => {
   it('applies className to the containing node (Modal)', () => {
     renderComponent({
       className: className,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
+      ariaLabel: 'Modal Interstitial Screen',
     });
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
@@ -196,7 +196,7 @@ describe(componentName, () => {
     renderComponent({
       className: className,
       isFullScreen: true,
-      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+      ariaLabel: 'Full Screen Interstitial Screen',
     });
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
@@ -204,7 +204,7 @@ describe(componentName, () => {
   it('adds additional props to the containing node (Modal)', () => {
     renderComponent({
       className: blockClass,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
+      ariaLabel: 'Modal Interstitial Screen',
     });
     screen.getByTestId(dataTestId);
   });
@@ -213,7 +213,7 @@ describe(componentName, () => {
     renderComponent({
       className: blockClass,
       isFullScreen: true,
-      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+      ariaLabel: 'Full Screen Interstitial Screen',
     });
     screen.getByTestId(dataTestId);
   });
@@ -223,7 +223,7 @@ describe(componentName, () => {
     renderComponent({
       ref: tmpRef,
       className: blockClass,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
+      ariaLabel: 'Modal Interstitial Screen',
     });
     expect(tmpRef.current).toHaveClass(blockClass);
   });
@@ -234,7 +234,7 @@ describe(componentName, () => {
       ref: tmpRef,
       className: blockClass,
       isFullScreen: true,
-      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+      ariaLabel: 'Full Screen Interstitial Screen',
     });
     expect(tmpRef.current).toHaveClass(blockClass);
   });
@@ -242,7 +242,7 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node (Modal)', () => {
     renderComponent({
       className: blockClass,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
+      ariaLabel: 'Modal Interstitial Screen',
     });
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
@@ -253,7 +253,7 @@ describe(componentName, () => {
     renderComponent({
       className: blockClass,
       isFullScreen: true,
-      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+      ariaLabel: 'Full Screen Interstitial Screen',
     });
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
@@ -263,11 +263,11 @@ describe(componentName, () => {
   it('clicking on the next and back button', async () => {
     renderComponent({
       className: blockClass,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
+      ariaLabel: 'Modal Interstitial Screen',
     });
 
-    expect(screen.getByText('Next'));
-    expect(screen.getByText('Step 1'));
+    expect(screen.getByText('Next')).toBeVisible();
+    expect(screen.getByText('Step 1')).toBeVisible();
     const step1 = screen.getByText('Step 1');
     const listElement1 = step1.closest('li');
     const step2 = screen.getByText('Step 2');
@@ -311,7 +311,7 @@ describe(componentName, () => {
   it('Clicking the close button', async () => {
     renderComponent({
       className: blockClass,
-      interstitialAriaLabel: 'Modal Interstitial Screen',
+      ariaLabel: 'Modal Interstitial Screen',
     });
     const closeBtn = screen.getByLabelText('Close');
     await act(() => userEvent.click(closeBtn));
@@ -328,7 +328,7 @@ describe(componentName, () => {
       return (
         <>
           <InterstitialScreen
-            isOpen={open}
+            open={open}
             onClose={onClose}
             data-testid={dataTestId}
             launcherButtonRef={buttonRef}

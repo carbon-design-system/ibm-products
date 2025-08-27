@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -106,9 +106,8 @@ type UserAvatarBaseProps = {
 type UserAvatarProps = UserAvatarBaseProps & ImageProps;
 
 export let UserAvatar = React.forwardRef<HTMLDivElement, UserAvatarProps>(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
+  (props, ref) => {
+    const {
       backgroundColor = 'order-1-cyan',
       className,
       image,
@@ -119,11 +118,8 @@ export let UserAvatar = React.forwardRef<HTMLDivElement, UserAvatarProps>(
       size = 'md',
       tooltipText,
       tooltipAlignment = 'bottom',
-      // Collect any other property values passed in.
       ...rest
-    },
-    ref
-  ) => {
+    } = props;
     const carbonPrefix = usePrefix();
     const iconSize = {
       sm: 16,
@@ -249,7 +245,7 @@ UserAvatar.propTypes = {
    * When passing the image prop use the imageDescription prop to describe the image for screen reader.
    */
   /**@ts-ignore */
-  imageDescription: PropTypes.string.isRequired.if(({ image }) => !!image),
+  imageDescription: PropTypes.string,
   /**
    * When passing the name prop, either send the initials to be used or the user's full name. The first two capital letters of the user's name will be used as the name.
    */

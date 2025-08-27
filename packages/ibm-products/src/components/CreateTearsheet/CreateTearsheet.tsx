@@ -241,7 +241,7 @@ export let CreateTearsheet = forwardRef(
 
     useEffect(() => {
       const firstItem =
-        stepData.findIndex((item) => item.shouldIncludeStep === true) + 1;
+        stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
       const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
       if (firstItem !== firstIncludedStep) {
         setCurrentStep(firstItem);
@@ -337,7 +337,12 @@ export let CreateTearsheet = forwardRef(
         selectorPrimaryFocus={selectorPrimaryFocus}
       >
         <div className={`${blockClass}__content`} ref={contentRef}>
-          <Form aria-label={title}>
+          <Form
+            aria-label={title}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+              e.preventDefault()
+            }
+          >
             <StepsContext.Provider
               value={{
                 currentStep,

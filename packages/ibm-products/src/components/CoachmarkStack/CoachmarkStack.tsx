@@ -34,7 +34,10 @@ const elementBlockClass = `${pkg.prefix}--coachmark-stack-element`;
 import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
 import { CoachmarkStackHome } from './CoachmarkStackHome';
 import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
-import { CoachmarkContext } from '../Coachmark/utils/context';
+import {
+  CoachmarkContext,
+  CoachmarkContextType,
+} from '../Coachmark/utils/context';
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 
@@ -90,6 +93,10 @@ interface CoachmarkStackProps {
    * Label's tooltip position
    */
   tooltipAlign?: TooltipAlignment;
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
 }
 
 const defaults = {
@@ -131,6 +138,7 @@ export let CoachmarkStack = React.forwardRef<
       theme = defaults.theme,
       title,
       tooltipAlign,
+      closeIconDescription,
       ...rest
     },
     ref
@@ -203,7 +211,7 @@ export let CoachmarkStack = React.forwardRef<
       };
     }, [escFunction]);
 
-    const contextValue = {
+    const contextValue: CoachmarkContextType = {
       buttonProps: {
         tabIndex: 0,
         'aria-expanded': isOpen,
@@ -220,6 +228,7 @@ export let CoachmarkStack = React.forwardRef<
         onClick: () => handleClose(false),
       },
       isOpen: isOpen,
+      closeIconDescription,
     };
     useEffect(() => {
       mountedRef.current = true;
@@ -227,24 +236,27 @@ export let CoachmarkStack = React.forwardRef<
         mountedRef.current = false;
       };
     }, []);
-    useEffect(() => {
-      setTimeout(() => {
-        if (stackHomeRef.current) {
-          setParentHeight(stackHomeRef.current.clientHeight + 16);
-        }
-      }, 0);
-    }, [stackHomeRef]);
 
     useEffect(() => {
       const targetSelectedItem = selectedItemNumber - 1;
       if (!parentHeight) {
+        if (stackHomeRef.current) {
+          const height = stackHomeRef.current.clientHeight;
+          if (height > 0) {
+            setParentHeight(height);
+          }
+        }
         return;
       }
+
       if (stackHomeRef.current) {
         stackHomeRef.current.style.height = `${parentHeight}px`;
       }
+
       if (!isOpen || targetSelectedItem < 0) {
         if (stackHomeRef.current) {
+          stackHomeRef.current.classList.remove(`${blockClass}--scaled-home`);
+          stackHomeRef.current.classList.add(`${blockClass}--unscaled-home`);
           stackHomeRef.current.focus();
         }
         return;
@@ -254,8 +266,10 @@ export let CoachmarkStack = React.forwardRef<
         stackedCoachmarkRefs.current[targetSelectedItem].clientHeight;
 
       if (stackHomeRef.current) {
-        stackHomeRef.current.style.height = `${targetHomeHeight}px`;
+        stackHomeRef.current.style.height = `calc(${targetHomeHeight}px + 3rem)`;
         stackedCoachmarkRefs.current[targetSelectedItem].focus();
+        stackHomeRef.current.classList.remove(`${blockClass}--unscaled-home`);
+        stackHomeRef.current.classList.add(`${blockClass}--scaled-home`);
       }
     }, [selectedItemNumber, isOpen, parentHeight]);
 
@@ -363,6 +377,11 @@ CoachmarkStack.propTypes = {
    */
   closeButtonLabel: PropTypes.string,
 
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription: PropTypes.string,
+
   // Pass through to CoachmarkStackHome
   /**
    * The description of the Coachmark.
@@ -399,7 +418,6 @@ CoachmarkStack.propTypes = {
    * Determines the theme of the component.
    */
   theme: PropTypes.oneOf(['light', 'dark']),
-
   /**
    * The title of the Coachmark.
    */

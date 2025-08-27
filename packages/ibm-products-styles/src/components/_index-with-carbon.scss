@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -49,8 +49,9 @@
 @use './Datagrid/index-with-carbon' as *;
 @use './EditUpdateCards/index-with-carbon' as *;
 @use './SimpleHeader/index-with-carbon' as *;
-@use './BigNumbers/index-with-carbon' as *;
+@use './BigNumber/index-with-carbon' as *;
 @use './TruncatedList/index-with-carbon' as *;
+@use './TruncatedText/index-with-carbon' as *;
 @use './InterstitialScreen/index-with-carbon' as *;
 @use './Coachmark/index-with-carbon' as *;
 @use './CoachmarkBeacon/index-with-carbon' as *;

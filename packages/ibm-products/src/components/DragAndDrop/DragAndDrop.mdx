@@ -1,10 +1,10 @@
-import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
 import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import * as stories from './DragAndDrop.stories';
 
 # Drag and drop
 
-[Drag and drop usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/drag-and-drop/usage/)
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/drag-and-drop/usage/)
 
 ## Table of Contents
 
@@ -31,36 +31,24 @@ customizing the order of columns in the Datagrid.
 
 ### Vertical list
 
-<Canvas>
-  <Story of={stories.verticalExample} />
-</Canvas>
+<Canvas of={stories.verticalExample} />
 
 ### Horizontal list
 
-<Canvas>
-  <Story of={stories.horizontalExample} />
-</Canvas>
+<Canvas of={stories.horizontalExample} />
 
 ### Grid
 
-<Canvas>
-  <Story of={stories.gridExample} />
-</Canvas>
+<Canvas of={stories.gridExample} />
 
 ### Grid, restrict drag to window edge
 
-<Canvas>
-  <Story of={stories.gridExampleRestrictToWindow} />
-</Canvas>
+<Canvas of={stories.gridExampleRestrictToWindow} />
 
 ### Grid, with large item
 
-<Canvas>
-  <Story of={stories.gridExampleLargeItem} />
-</Canvas>
+<Canvas of={stories.gridExampleLargeItem} />
 
 ### Grid, dashboard
 
-<Canvas>
-  <Story of={stories.gridDashboard} />
-</Canvas>
+<Canvas of={stories.gridDashboard} />

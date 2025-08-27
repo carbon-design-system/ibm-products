@@ -8,7 +8,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
-import { carbon } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 const componentName = AddSelectBreadcrumbs.name;
 const defaultProps = {
@@ -35,6 +35,15 @@ describe(componentName, () => {
   afterEach(() => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
+  });
+
+  it('has no accessibility violations', async () => {
+    render(<AddSelectBreadcrumbs {...defaultProps} />);
+    const AddSelectElement = document.querySelector(
+      `.${pkg.prefix}--add-select__breadcrumbs`
+    );
+    await expect(AddSelectElement).toBeAccessible(componentName);
+    await expect(AddSelectElement).toHaveNoAxeViolations();
   });
 
   it('renders', async () => {
@@ -67,8 +76,8 @@ describe(componentName, () => {
       ],
     };
     render(<AddSelectBreadcrumbs {...newProps} />);
-    expect(screen.getByText('default'));
-    expect(screen.getByText('level 2'));
+    expect(screen.getByText('default')).toBeVisible();
+    expect(screen.getByText('level 2')).toBeVisible();
     expect(
       document.querySelectorAll(`.${carbon.prefix}--breadcrumb-item`).length
     ).toEqual(2);

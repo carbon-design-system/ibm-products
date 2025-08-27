@@ -1,3 +1,94 @@
+## `@carbon/ibm-products-web-components@0.22.0`
+### Features :rocket:
+- feat: add unit tests, accessibility fixes  , example for interstitial screen web component (#8015)
+- feat(notificationsPanel): empty state (#8032)
+- feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)
+- feat(page-header): add tag responsiveness to tab-bar story (#7947)
+
+### Bug fixes :bug:
+- fix(options-tile): design review updates (#8014)
+- fix(aboutmodal): modal reopening issue when closed via click outside (#7981)
+- fix: include ellipsis in truncated-text (#7964)
+- fix(side-panel): resolve focus trap issue in side-panel web component (#7954)
+
+### Housekeeping :house:
+- chore(Interstitial): reorganize story category (#7986)
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
+## `@carbon/ibm-products-web-components@0.21.0`
+### Features :rocket:
+- feat(interstitialScreen): webcomponent implementation (#7867)
+- feat(page-header): add breadcrumb overflow example (#7913)
+- feat(page-header): position updates when content element not provided (#7940)
+- feat(sidepanel): add prop for close button tooltip alignment (#7876)
+- feat(TruncatedText): init TruncatedText react component (#7755)
+- feat(PageHeader): create title breadcrumb sub component (#7834)
+- feat: wc add overflow patterns (#7720)
+- feat: change docs to overview in stories (#7854)
+- feat(page-header): add expand/collapse functionality (#7798)
+- feat(notification panel): add Stackblitz examples in WC (#7726)
+
+### Bug fixes :bug:
+- fix(notificationPanel): title overlaps with toggle button (#7938)
+- fix(side-panel): remove focus handle from slideIn variant (#7914)
+- fix: user avatar style inheritance on web-component (#7713)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#7840)
+- chore(deps): update dependency @storybook/addon-links to v9 (#7801)
+
+## `@carbon/ibm-products-web-components@0.20.1`
+### Bug fixes :bug:
+- fix(side-panel): remove focus handle from slideIn variant
+
+## `@carbon/ibm-products-web-components@0.20.0`
+### Features :rocket:
+- feat: add various options for description (#7708)
+- feat(storybook): use vite v7 (#7745)
+- feat(storybook): upgrade to v9 (#7734)
+- feat(page-header): add sticky support, web component (#7741)
+- feat(save): create pattern in Web Components (#7766)
+- feat(notification panel): add test coverage (#7685)
+
+### Housekeeping :house:
+- docs(storybook): restructure top level categories (#7822)
+- chore(deps-dev): bump vite (#7778)
+- build(deps): update Carbon 11 compatible versions to latest (#7757)
+- chore(deps): update dependency vite to v7 (#7746)
+
+## `@carbon/ibm-products-web-components@0.19.0`
+### Features :rocket:
+- feat(sidepanel): option to hide close button in web component (#7695)
+- feat(page-header): new web components page-header (#7658)
+- feat(notification panel): create notification panel wc (#7557)
+- feat(ExportModal): added as WC Pattern (#7578)
+
+### Housekeeping :house:
+- chore(deps): update dependency happy-dom to v18 (#7665)
+- build(deps): update Carbon 11 compatible versions to latest (#7663)
+- chore(deps-dev): bump vite (#7739)
+- chore(storybook): add a11y tab in wc and remove code tab from react (#7706)
+- refactor(instrumentation): replace amplitude with autotrack (#7710)
+
+## `@carbon/ibm-products-web-components@0.18.0`
+### Features :rocket:
+- feat(tearsheet): add decorator option (#7600)
+- feat: truncated text initial commit web component (#7397)
+- feat(APIKeyModal): added as WC pattern (#7636)
+
+### Bug fixes :bug:
+- fix: options-tile toggle button (#7576)
+- fix(tearsheet): theming issue in WC (#7598)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+- chore(deps-dev): bump vite (#7652)
+- chore: overflow handler web component stories (#7553)
+- chore(deps-dev): bump vite (#7624)
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+- chore(deps-dev): bump vite (#7599)
+- chore: add options-tile webcomponent stackblitz example (#7535)
+
 ## `@carbon/ibm-products-web-components@0.17.0`
 ### Features :rocket:
 - feat(DeleteAndRemovePattern): deletion and removal patterns using carbon web components (#7473)

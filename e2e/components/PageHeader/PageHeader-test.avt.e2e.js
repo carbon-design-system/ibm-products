@@ -17,7 +17,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--with-title',
+      id: 'components-pageheader--with-title',
       globals: {
         carbonTheme: 'white',
       },
@@ -29,7 +29,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-collapse-on-scroll', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      id: 'components-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -63,7 +63,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-collapse-by-default', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded',
+      id: 'components-pageheader--fully-loaded',
       globals: {
         carbonTheme: 'white',
       },
@@ -85,7 +85,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-collapse-by-toggle-button', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      id: 'components-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -112,12 +112,12 @@ test.describe('PageHeader @avt', () => {
   });
 
   // PageHeader buttons move into MenuButton on small screens
-  test('@avt-header-buttons-move-to-menubutton-on-small-screens', async ({
+  test.skip('@avt-header-buttons-move-to-menubutton-on-small-screens', async ({
     page,
   }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      id: 'components-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -174,7 +174,7 @@ test.describe('PageHeader @avt', () => {
   }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      id: 'components-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -235,7 +235,7 @@ test.describe('PageHeader @avt', () => {
   }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      id: 'components-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },

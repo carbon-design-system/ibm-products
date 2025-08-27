@@ -1,11 +1,11 @@
-import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
 import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { UserAvatar } from '.';
 import * as UserAvatarStories from './UserAvatar.stories';
 
 # UserAvatar
 
-[UserAvatar usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/user-avatar/usage/)
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/user-avatar/usage/)
 
 ## Table of Contents
 
@@ -54,15 +54,11 @@ the lighter and darker themes.
 
 ### Default
 
-<Canvas>
-  <Story of={UserAvatarStories.Default} />
-</Canvas>
+<Canvas of={UserAvatarStories.Default}></Canvas>
 
 ### With Image
 
-<Canvas>
-  <Story of={UserAvatarStories.WithImage} />
-</Canvas>
+<Canvas of={UserAvatarStories.WithImage}></Canvas>
 
 ## Code sample
 

@@ -1,6 +1,6 @@
 {/* <!-- `position:fixed` cause rendering issues, so do not render the modal --> */}
 
-import { Story, Controls, Canvas } from '@storybook/addon-docs';
+import { Story, Controls, Canvas } from '@storybook/addon-docs/blocks';
 import { CodesandboxLink } from '../../global/js/utils/story-helper';
 
 # Feature flags
@@ -9,16 +9,16 @@ import { CodesandboxLink } from '../../global/js/utils/story-helper';
 
 ## Current feature flags
 
-Below is a list of the current feature flags existing within `@carbon/ibm-products`. As the library continues to grow and evolve,
-any future feature flags will be updated within this table.
+Below is a list of the current feature flags existing within
+`@carbon/ibm-products`. As the library continues to grow and evolve, any future
+feature flags will be updated within this table.
 
-
-| Flag                                       | Description                                                              | Default |
-| ------------------------------------------ | ------------------------------------------------------------------------ | ------- |
-| `default-portal-target-body`               | Enable the default portal target to be the document's body               | `true`  |
-| `enable-datagrid-useInlineEdit`            | Enable the Datagrid `useInlineEdit` extension                            | `false` |
-| `enable-datagrid-useEditableCell`          | Enable the Datagrid `useEditableCell` extension                          | `false` |
-| `enable-datagrid-useCustomizeColumns`      | Enable the Datagrid `useCustomizeColumns` extension                      | `false` |
+| Flag                                  | Description                                                | Default |
+| ------------------------------------- | ---------------------------------------------------------- | ------- |
+| `default-portal-target-body`          | Enable the default portal target to be the document's body | `true`  |
+| `enable-datagrid-useInlineEdit`       | Enable the Datagrid `useInlineEdit` extension              | `false` |
+| `enable-datagrid-useEditableCell`     | Enable the Datagrid `useEditableCell` extension            | `false` |
+| `enable-datagrid-useCustomizeColumns` | Enable the Datagrid `useCustomizeColumns` extension        | `false` |
 
 ## Turning on feature flags in Javascript/react
 
@@ -33,7 +33,8 @@ import { unstable_FeatureFlags as FeatureFlags } from '@carbon/ibm-products';
   flags={{
     'default-portal-target-body': true,
     'enable-a-second-feature-flag': true,
-  }}>
+  }}
+>
   <Tile />
 </FeatureFlags>;
 ```

@@ -8,7 +8,7 @@
 
 import React, { useState } from 'react';
 import { Checkmark, Edit, TrashCan } from '@carbon/react/icons';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   Datagrid,
   useDatagrid,
@@ -30,7 +30,7 @@ import { FeatureFlags } from '../../../FeatureFlags';
 import { WithFeatureFlags } from '../../../../../.storybook/WithFeatureFlags';
 
 export default {
-  title: 'Deprecated/Datagrid/Datagrid/ColumnCustomization',
+  title: 'Deprecated/Datagrid/ColumnCustomization',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

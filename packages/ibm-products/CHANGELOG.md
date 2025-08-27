@@ -1,3 +1,130 @@
+## `@carbon/ibm-products@2.73.0`
+### Features :rocket:
+- feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)
+
+### Bug fixes :bug:
+- fix(EmptyState): Modified subtitle container to be a div (#7967)
+- fix: disable ability to submit form using the Enter key (#8019)
+- fix(sidepanel): blank space appears when the header has no content (#8029)
+- fix: add role prop to pageheader's breadcrumb overflow menu (#8017)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.6.0 (#8027)
+- fix(PageHeader): ensures expected positioning even if content component is excluded (#7946)
+
+### Housekeeping :house:
+- docs: add intro page for prebuilt patterns (#7958)
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
+## `@carbon/ibm-products@2.72.0`
+### Features :rocket:
+- feat(PageHeader): add new breadcrumb overflow utility sub-component (#7910)
+- feat(coachmarkv2): added floating variant (#7924)
+- feat(makeDraggable): utility added for drag functionality (#7908)
+- feat: api key generation pattern code init (#7882)
+- feat(sidepanel): add prop for close button tooltip alignment (#7878)
+- feat(TruncatedText): init TruncatedText react component (#7755)
+- feat(PageHeader): create title breadcrumb sub component (#7834)
+- feat(openStackblitz): remove and import modal (#7842)
+- feat: change docs to overview in stories (#7854)
+- feat(PageHeader): add expand/collapse functionality (#7815)
+
+### Bug fixes :bug:
+- fix: conditionBuilder need to close on outside click
+- fix(ProductiveCard): Added children explicitly to productiveCard (#7957)
+- fix(Storybook): render the correct story in Storybook for few components (#7960)
+- fix: include .cds--menu to selectorsFloatingMenus (#7916)
+- fix(build): update story imports in docs and fix circular deps (#7892)
+- fix(ConditionBuilder):  flickering sometimes while hovering on add new group/ condition/ subgroup and when there is scroll (#7853)
+- fix: update config to create stackblitz examples with ts support (#7901)
+- fix: condition builder issue fixes (#7891)
+- fix: layout breakage due to extra nodes added to Tearsheet (#7832)
+- fix(notification panel): clickoutside handler function exclude trigger button (#7830)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.4.0 (#7836)
+
+### Housekeeping :house:
+- chore(deps): update dependency cross-env to v10 (#7934)
+- chore: rename BigNumbers to BigNumber (#7886)
+- build(deps): update to Carbon 11 compatible versions to latest (#7840)
+- chore: remove core package (#7859)
+- chore: remove unneeded tabIndex={0} settings (#7829)
+- chore: deprecate emptystate v2 prop (#7810)
+
+## `@carbon/ibm-products@2.71.1`
+### Bug fixes :bug:
+- fix(PageHeader): export as preview from ts exports, bump resizer
+
+## `@carbon/ibm-products@2.71.0`
+### Features :rocket:
+- feat: add various options for description (#7708)
+- feat(storybook): use vite v7 (#7745)
+- feat: change to make interstitialScreen stable (#7814)
+- feat: add support for  children for InterstitialScreen.Body (#7791)
+- feat(storybook): upgrade to v9 (#7734)
+- feat(PageHeader): new experimental PageHeader component (#7733)
+
+### Bug fixes :bug:
+- fix(PageHeader): export as preview (#7872)
+- fix: percy (#7812)
+- fix(coachmarkstack): align layers (#7762)
+- fix: condition builder various issues fixes related to popover close and focus (#7748)
+- fix: ProductiveCard - actionIcons doesn't include types for data attributes (#7486)
+- fix: interstitial screen release review (#7724)
+- fix: for checkbox labels in the custom columns (#7742)
+- fix(APIKeyModal): delay claimFocus (#7770)
+- fix: sidepanel resize feature a11y (#7704)
+
+### Housekeeping :house:
+- docs(ProductiveCard): add docs about overflow menu items (#7825)
+- chore: clean up side panel resizer (#7749)
+- build(deps): update Carbon 11 compatible versions to latest (#7757)
+- chore: remove redundant upgrade scripts (#7774)
+- test: accessibility test fixes (#7728)
+- chore: add deprecation notice to userprofileimage (#7729)
+- chore: init update to react 19 (#7681)
+
+## `@carbon/ibm-products@2.70.1`
+### Bug fixes :bug:
+- fix: useClickoutside causing NotificationsPanel to reopen (#7820)
+
+## `@carbon/ibm-products@2.70.0`
+### Features :rocket:
+- feat(sidepanel): option to hide close button (#7669)
+
+### Bug fixes :bug:
+- fix: add rest props back to card overflow (#7744)
+- fix(tearsheet): incorrect color layering (#7730)
+- fix(stories): remove extra carbon style imports (#7647)
+- fix: save usage guidelines (#7721)
+- fix(CreateTearsheet): accessibility violation (#7643)
+- fix(Instrumentation): auto track follow ups (#7715)
+- fix(notification panel): clickoutside return focus to trigger button (#7707)
+- fix: adds nullish checker back into create tearsheet first step logic (#7634)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7663)
+- chore: add global mocks to jest setup (#7653)
+- chore(storybook): add a11y tab in wc and remove code tab from react (#7706)
+- docs: restructure storybook IA (#7592)
+- refactor(instrumentation): replace amplitude with autotrack (#7710)
+- test: add valid matcher for expect() (#7666)
+
+## `@carbon/ibm-products@2.69.0`
+### Features :rocket:
+- feat: resize feature changes added (#7501)
+- feat(MultiAddSelect): add floating ui to sort and filter buttons (#6389)
+
+### Bug fixes :bug:
+- fix: productive card overflow bug (#7645)
+- fix: remove usage of local carbon prefix in component files (#7642)
+- fix:  investigate and address any accessibility violations in stable components  (#7586)
+- fix(Interstitial): pass forwarded refs (#7588)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+- chore: overflow handler web component stories (#7553)
+- chore(deps): update dependency yargs to v18 (#7596)
+- chore(Coachmark): deprecation of props and coachmark components (#7499)
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+
 ## `@carbon/ibm-products@2.68.0`
 ### Features :rocket:
 - feat(openStackblitz): about modal and export Modal (#7479)

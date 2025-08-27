@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { FilterPanelSearch } from '.';
 import mdx from './FilterPanelSearch.mdx';
@@ -17,7 +17,7 @@ import { Annotation } from '../../../../.storybook/Annotation';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'Deprecated/Filter Panel/FilterPanelSearch',
+  title: 'Deprecated/Filter panel/FilterPanelSearch',
   component: FilterPanelSearch,
   tags: ['autodocs'],
   parameters: {

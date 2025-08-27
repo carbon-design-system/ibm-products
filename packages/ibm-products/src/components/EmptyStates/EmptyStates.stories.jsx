@@ -6,18 +6,15 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
-import { Add } from '@carbon/react/icons';
+import { action } from 'storybook/actions';
+import { Add, Information } from '@carbon/react/icons';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
-// import mdx from './EmptyState.mdx';
-
 import { EmptyState } from '.';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
-
-// import styles from './_storybook-styles.scss?inline';
+import { Tooltip } from '@carbon/react';
 
 export default {
-  title: 'IBM Products/Patterns/Empty state/EmptyState',
+  title: 'Patterns/Prebuilt patterns/Empty states/EmptyState',
   component: EmptyState,
   tags: ['autodocs'],
   parameters: {
@@ -28,7 +25,7 @@ export default {
           altGuidelinesHref={[
             {
               href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon Empty pattern usage guidelines',
+              label: 'Carbon empty states pattern',
             },
           ]}
         />
@@ -53,6 +50,19 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   ...emptyStateCommonProps,
+};
+
+export const WithTooltipInSubtitle = Template.bind({});
+WithTooltipInSubtitle.args = {
+  ...emptyStateCommonProps,
+  subtitle: (
+    <>
+      Click <span>here</span> to upload your data
+      <Tooltip label="Facts and statistics collected together for reference or analysis">
+        <Information size="16" />
+      </Tooltip>
+    </>
+  ),
 };
 
 export const WithCustomIllustration = Template.bind({});

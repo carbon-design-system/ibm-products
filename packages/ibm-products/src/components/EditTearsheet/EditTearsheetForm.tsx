@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -64,10 +64,12 @@ type EditTearsheetFormFieldsetTypes =
   | {
       hasFieldset?: false;
       fieldsetLegendText: string;
+      fieldsetLegendId?: React.ReactNode;
     }
   | {
       hasFieldset: true;
       fieldsetLegendText: string;
+      fieldsetLegendId: React.ReactNode;
     };
 
 type EditTearsheetFormProps = EditTearsheetFormBaseProps &
@@ -82,6 +84,7 @@ export let EditTearsheetForm = forwardRef(
       className,
       description,
       fieldsetLegendText,
+      fieldsetLegendId,
       hasFieldset = defaults.hasFieldset,
       subtitle,
       title,
@@ -113,7 +116,7 @@ export let EditTearsheetForm = forwardRef(
           <Column xlg={12} lg={12} md={8} sm={4}>
             <h4 className={`${blockClass}--title`}>{title}</h4>
             {subtitle && (
-              <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+              <h5 className={`${blockClass}--subtitle`}>{subtitle}</h5>
             )}
             {description && (
               <p className={`${blockClass}--description`}>{description}</p>
@@ -124,6 +127,7 @@ export let EditTearsheetForm = forwardRef(
               <FormGroup
                 legendText={fieldsetLegendText}
                 className={`${blockClass}--fieldset`}
+                legendId={fieldsetLegendId}
               >
                 <Grid>{children}</Grid>
               </FormGroup>
@@ -161,14 +165,18 @@ EditTearsheetForm.propTypes = {
   description: PropTypes.string,
 
   /**
+   * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
+   */
+  /**@ts-ignore */
+  fieldsetLegendId: PropTypes.node,
+
+  /**
    * This is the required legend text that appears above a fieldset html element for accessibility purposes.
    * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's form content.
    * Otherwise, use CSS to hide/remove this label text.
    */
   /**@ts-ignore */
-  fieldsetLegendText: PropTypes.string.isRequired.if(
-    ({ hasFieldset }) => !!hasFieldset
-  ),
+  fieldsetLegendText: PropTypes.string,
 
   /**
    * This optional prop will render your form content inside of a fieldset html element

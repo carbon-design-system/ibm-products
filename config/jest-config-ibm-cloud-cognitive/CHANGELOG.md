@@ -1,3 +1,26 @@
+## `@jest-config-ibm-cloud-cognitive@1.32.0`
+### Housekeeping :house:
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
+## `@jest-config-ibm-cloud-cognitive@1.31.0`
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#7840)
+
+## `@jest-config-ibm-cloud-cognitive@1.30.0`
+### Housekeeping :house:
+- chore: remove redundant upgrade scripts (#7774)
+
+## `@jest-config-ibm-cloud-cognitive@1.29.0`
+### Bug fixes :bug:
+- fix(deps): update dependency jest-watch-typeahead to v3 (#7718)
+
+### Housekeeping :house:
+- chore: add global mocks to jest setup (#7653)
+
+## `@jest-config-ibm-cloud-cognitive@1.28.0`
+### Housekeeping :house:
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+
 ## `@jest-config-ibm-cloud-cognitive@1.27.0`
 ### Housekeeping :house:
 - refactor(useResizeObserver): migrate to TS and refactor tests to include resize validation (#7548)

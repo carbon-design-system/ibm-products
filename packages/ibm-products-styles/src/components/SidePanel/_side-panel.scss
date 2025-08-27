@@ -1,3 +1,4 @@
+//cspell: disable
 //
 // Copyright IBM Corp. 2020, 2025
 //
@@ -5,7 +6,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'sass:list';
 @use 'sass:map';
 
 // Other Carbon settings.
@@ -16,6 +16,8 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities';
+@use '@carbon-labs/react-resizer/scss/resizer';
+@use '@carbon/styles/scss/components/button/tokens' as *;
 
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
@@ -29,21 +31,16 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
+$clabs-prefix: 'clabs';
 
 @property --panel-transform {
   inherits: true;
   initial-value: 320px;
-  syntax: '<integer>';
+  syntax: '<length>';
 }
 
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
-  /* any value is single value list */
-  inline-size: list.nth($size, 1);
-  @if list.length($size) > 1 {
-    min-inline-size: list.nth($size, 2);
-  }
-
-  max-inline-size: 100%;
+  inline-size: clamp(16rem, var(--c4p-side-panel-modified-size, $size), 100%);
 }
 
 @mixin setDividerStyles() {
@@ -89,19 +86,35 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   background-color: $layer-01;
   block-size: calc(100% - 3rem);
   color: $text-primary;
+
   /* if the title does not scroll then we have a child scrolling section. */
   grid-template-rows: auto 1fr auto; /* titles content and actions */
   inset-block-start: $spacing-09;
+  max-inline-size: 100%;
+  min-inline-size: map.get($side-panel-sizes, xs);
 
   transform: translateX(0);
   transition-behavior: allow-discrete;
   transition-duration: $duration-moderate-01;
   transition-property: display, opacity, transform;
+  &:not(.#{$block-class}--slide-in) {
+    // enableSidepanelResizer flag class
+    &.#{$block-class}--enable-sidepanel-resizer {
+      grid-template-columns: 0 1fr;
+      @media (prefers-reduced-motion: no-preference) {
+        transition: all $duration-moderate-01 linear;
+      }
+    }
+  }
 
   @starting-style {
     opacity: 0;
     /* stylelint-disable-next-line carbon/layout-use */
     transform: translateX(var(--panel-transform));
+  }
+
+  @include breakpoint(md) {
+    max-inline-size: 75vw;
   }
 
   @each $size, $size_value in $side-panel-sizes {
@@ -175,9 +188,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     --#{$block-class}--actions-height: #{$spacing-09};
   }
 
-  &.#{$block-class}--slide-in,
   &:not(.#{$block-class}--has-overlay) {
     box-shadow: 0 $spacing-01 $spacing-02 $overlay;
+  }
+
+  // Slide-in panels should use border not shadows since they don’t layer
+  &.#{$block-class}--slide-in,
+  &.#{$block-class}--slide-in:not(.#{$block-class}--has-overlay) {
+    box-shadow: none;
   }
 
   .#{$block-class}__actions-container {
@@ -188,6 +206,25 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     inset-inline-end: 0;
   }
   &.#{$block-class}--left-placement {
+    .#{$clabs-prefix}__resizer {
+      grid-column: 2;
+      inset-inline-start: 0;
+
+      &::before {
+        inset-inline-start: 0;
+      }
+    }
+    &:not(.#{$block-class}--slide-in) {
+      // enableSidepanelResizer FeatureFlag class
+      &.#{$block-class}--enable-sidepanel-resizer {
+        grid-template-columns: 1fr 0;
+
+        @media (prefers-reduced-motion: no-preference) {
+          transition: all $duration-moderate-01 linear;
+        }
+      }
+    }
+
     border-inline-end: 1px solid $border-subtle-02;
     inset-inline-start: 0;
   }
@@ -198,6 +235,45 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     box-shadow:
       inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
+  }
+
+  .#{$clabs-prefix}__resizer--vertical::before {
+    position: absolute;
+    z-index: -1;
+    background-color: transparent;
+    block-size: 100%;
+    content: '';
+    inline-size: $spacing-01;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    transition: background-color $duration-moderate-01
+      motion(standard, productive);
+  }
+
+  &:hover {
+    .#{$clabs-prefix}__resizer--vertical::before {
+      background-color: $button-secondary-hover;
+    }
+  }
+
+  .#{$clabs-prefix}__resizer {
+    background-color: transparent;
+    grid-row: span 4 / span 3;
+    inset-inline-start: -$spacing-02;
+
+    &--vertical::after {
+      position: absolute;
+      z-index: 10;
+      block-size: 100%;
+      content: '';
+      inline-size: $spacing-03;
+      inset-inline-start: -$spacing-01;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $border-interactive;
+    }
   }
 
   .#{$block-class}__header {
@@ -278,6 +354,11 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     &:not(.#{$block-class}__header--has-title)::before {
       background-color: transparent;
     }
+  }
+
+  // Remove min‑block‑size when the header contains no child elements to prevent unnecessary blank space
+  .#{$block-class}__header:empty {
+    min-block-size: unset;
   }
 
   &.#{$block-class}:has(.#{$block-class}__action-toolbar),
@@ -461,9 +542,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     position: absolute;
     z-index: 10; /* must be higher than title container border bottom */
     display: flex;
+    block-size: $spacing-07;
     inset-block-start: 0;
     inset-inline-end: 0;
-
     /* stylelint-disable-next-line max-nesting-depth */
     @media (prefers-reduced-motion) {
       position: absolute;
@@ -496,10 +577,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       // extra class needed to override default size
       block-size: var(--#{$block-class}--actions-height);
     }
-  }
-  &.#{$block-class}.#{$block-class}--xs
-    .#{$block-class}__actions-container.#{$action-set-block-class}--sm {
-    @include setPanelSize(map.get($side-panel-sizes, xs));
   }
 }
 

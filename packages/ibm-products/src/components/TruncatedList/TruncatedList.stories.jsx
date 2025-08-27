@@ -8,7 +8,7 @@
 import React from 'react';
 import { ListItem } from '@carbon/react';
 // TODO: import action to handle events if required.
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { TruncatedList } from '.';
 
@@ -18,7 +18,7 @@ import mdx from './TruncatedList.mdx';
 const storyClass = 'truncated-list-stories';
 
 export default {
-  title: 'Utils/Components/TruncatedList',
+  title: 'Utilities/TruncatedList',
   component: TruncatedList,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

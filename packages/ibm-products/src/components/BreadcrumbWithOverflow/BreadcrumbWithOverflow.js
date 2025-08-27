@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -71,6 +71,7 @@ export let BreadcrumbWithOverflow = ({
       <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
         <FeatureFlags enableV12Overflowmenu>
           <OverflowMenu
+            role="navigation"
             aria-label={overflowAriaLabel}
             label={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
             renderIcon={(props) => (
@@ -107,6 +108,7 @@ export let BreadcrumbWithOverflow = ({
         <Breadcrumb aria-label={`${label}-hidden`}>
           <BreadcrumbItem key={`${blockClass}-hidden-overflow-${internalId}`}>
             <OverflowMenu
+              role="navigation"
               aria-label={overflowAriaLabel}
               renderIcon={(props) => (
                 <OverflowMenuHorizontal size={32} {...props} />
@@ -387,9 +389,7 @@ BreadcrumbWithOverflow.propTypes = {
       /**
        * A string based alternative to the children, required only if children is not of type string
        */
-      title: PropTypes.string.isRequired.if(
-        ({ label }) => typeof label !== 'string'
-      ),
+      title: PropTypes.string,
     })
   ),
   /**
@@ -411,9 +411,7 @@ BreadcrumbWithOverflow.propTypes = {
   /**
    * overflowAriaLabel label for open close button overflow used for breadcrumb items that do not fit.
    */
-  overflowAriaLabel: PropTypes.string.isRequired.if(
-    ({ breadcrumbs }) => breadcrumbs.length > 1
-  ),
+  overflowAriaLabel: PropTypes.string,
   /**
    * overflowTooltipAlign: align tooltip position
    */

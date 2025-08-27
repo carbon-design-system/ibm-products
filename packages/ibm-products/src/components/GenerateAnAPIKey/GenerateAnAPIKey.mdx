@@ -1,0 +1,69 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './GenerateAnAPIKey.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# Generate an API key
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/generate-an-api-key/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+
+## Ingredients
+
+```jsx
+import { Button, Modal, TextInput, PasswordInput } from '@carbon/react';
+```
+
+## Examples
+
+### Instant generate
+
+<Canvas
+  of={stories.instantGenerate}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.instantGenerate,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+### Generate
+
+<Canvas
+  of={stories.generate}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.generate,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+### Edit
+
+<Canvas
+  of={stories.edit}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.edit,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>

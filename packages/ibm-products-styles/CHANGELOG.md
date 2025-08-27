@@ -1,3 +1,75 @@
+## `@carbon/ibm-products-styles@2.69.0`
+### Features :rocket:
+- feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)
+
+### Bug fixes :bug:
+- fix(sidepanel): blank space appears when the header has no content (#8029)
+- fix(styles): use correct syntax for custom prop (#7990)
+- fix(PageHeader): ensures expected positioning even if content component is excluded (#7946)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
+## `@carbon/ibm-products-styles@2.68.1`
+### Bug fixes :bug:
+- fix(coachmark): address bubble style import (#8010)
+
+## `@carbon/ibm-products-styles@2.68.0`
+### Features :rocket:
+- feat(PageHeader): add new breadcrumb overflow utility sub-component (#7910)
+- feat(coachmarkv2): added floating variant (#7924)
+- feat(TruncatedText): init TruncatedText react component (#7755)
+- feat(PageHeader): create title breadcrumb sub component (#7834)
+- feat(PageHeader): add expand/collapse functionality (#7815)
+
+### Bug fixes :bug:
+- fix(PageHeader): add workaround for tab focus state with scroll buttons (#7858)
+- fix(ConditionBuilder):  flickering sometimes while hovering on add new group/ condition/ subgroup and when there is scroll (#7853)
+- fix: layout breakage due to extra nodes added to Tearsheet (#7832)
+- fix: clickable card border (#7811)
+
+### Housekeeping :house:
+- chore(deps): update dependency cross-env to v10 (#7934)
+- chore: rename BigNumbers to BigNumber (#7886)
+
+## `@carbon/ibm-products-styles@2.67.0`
+### Features :rocket:
+- feat: change to make interstitialScreen stable (#7814)
+- feat(PageHeader): new experimental PageHeader component (#7733)
+
+### Bug fixes :bug:
+- fix(coachmarkstack): align layers (#7762)
+- fix: interstitial screen release review (#7724)
+- fix: for checkbox labels in the custom columns (#7742)
+
+### Housekeeping :house:
+- chore: clean up side panel resizer (#7749)
+- build(deps): update Carbon 11 compatible versions to latest (#7757)
+- chore: remove redundant upgrade scripts (#7774)
+- chore: init update to react 19 (#7681)
+
+## `@carbon/ibm-products-styles@2.66.0`
+### Features :rocket:
+- feat(sidepanel): option to hide close button in web component (#7695)
+
+### Bug fixes :bug:
+- fix(tearsheet): incorrect color layering (#7730)
+- fix(stories): remove extra carbon style imports (#7647)
+- fix(CreateTearsheet): accessibility violation (#7643)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7663)
+
+## `@carbon/ibm-products-styles@2.65.0`
+### Features :rocket:
+- feat: resize feature changes added (#7501)
+- feat(MultiAddSelect): add floating ui to sort and filter buttons (#6389)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+- chore(deps): update dependency yargs to v18 (#7596)
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+
 ## `@carbon/ibm-products-styles@2.64.0`
 ### Bug fixes :bug:
 - fix(rtl): minor updates to provide stronger rtl support (#7580)

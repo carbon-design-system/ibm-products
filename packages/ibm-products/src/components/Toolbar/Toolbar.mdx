@@ -1,11 +1,11 @@
-import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
 import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { Toolbar } from '.';
 import * as stories from './Toolbar.stories';
 
 # Toolbar
 
-[Toolbar usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/toolbar/usage/)
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/toolbar/usage/)
 
 ## Table of Contents
 
@@ -23,15 +23,11 @@ import * as stories from './Toolbar.stories';
 
 ### Default
 
-<Canvas>
-  <Story of={stories._Toolbar} />
-</Canvas>
+<Canvas of={stories._Toolbar}></Canvas>
 
 ### With Image
 
-<Canvas>
-  <Story of={stories.vertical} />
-</Canvas>
+<Canvas of={stories.vertical}></Canvas>
 
 ## Code sample
 

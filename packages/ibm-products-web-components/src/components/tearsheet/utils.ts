@@ -13,10 +13,13 @@ import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/textarea/index.js';
 import '@carbon/web-components/es/components/tabs/index.js';
 import '@carbon/web-components/es/components/slug/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
+import '@carbon/web-components/es/components/toggle-tip/index.js';
 import '@carbon/web-components/es/components/dropdown/index.js';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
 import '@carbon/web-components/es/components/progress-bar/index.js';
 import './index';
+import '../truncated-text/index';
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './story-styles.scss?lit';
@@ -291,6 +294,80 @@ export const getSlug = (index) => {
           <p class="bold">Foundation model</p>
         </div>
       </cds-slug>`;
+    default:
+      return null;
+  }
+};
+// cspell: disable
+export const getDecorator = (decorator) => {
+  switch (decorator) {
+    case 'WITH_AI_LABEL':
+      return html`
+        <cds-ai-label alignment="bottom-right" slot="decorator">
+          <div slot="body-text">
+            <p class="secondary">AI Explained</p>
+            <h2 class="ai-label-heading">84%</h2>
+            <p class="secondary bold">Confidence score</p>
+            <p class="secondary">
+              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+              do eiusmod tempor incididunt ut fsil labore et dolore magna
+              aliqua.
+            </p>
+            <hr />
+            <p class="secondary">Model type</p>
+            <p class="bold">Foundation model</p>
+          </div>
+        </cds-ai-label>
+      `;
+    case 'NON_AI_LABEL_DECORATOR':
+      return html`
+        <cds-toggletip slot="decorator" alignment="bottom">
+          <p slot="body-text">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <cds-link slot="actions">Test</cds-link>
+          <cds-button slot="actions">Button</cds-button>
+        </cds-toggletip>
+      `;
+    default:
+      return;
+  }
+};
+// cspell: enable
+
+export const getDescription = (index) => {
+  switch (index) {
+    case 1:
+      return html`
+        <span slot="description">
+          This is a description for the tearsheet, providing an opportunity to
+          describe the flow over a couple of lines in the header of the
+          tearsheet.
+        </span>
+      `;
+    case 2:
+      return html`
+        <span slot="description">
+          <c4p-truncated-text
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            lines="1"
+            autoalign="true"
+            align="bottom"
+          />
+        </span>
+      `;
+    case 3:
+      return html`
+        <span slot="description">
+          <c4p-truncated-text
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
+            lines="2"
+            autoalign="true"
+            align="bottom"
+          />
+        </span>
+      `;
     default:
       return null;
   }

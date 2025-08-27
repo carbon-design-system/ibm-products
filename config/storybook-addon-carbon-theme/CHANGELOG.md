@@ -1,3 +1,7 @@
+## `@carbon/storybook-addon-theme@2.20.0`
+### Housekeeping :house:
+- chore: remove redundant upgrade scripts (#7774)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.

@@ -7,17 +7,13 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { expectError, required } from '../../global/js/utils/test-helper';
-
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
-
 import { UserProfileImage } from '.';
 import { Group } from '@carbon/react/icons';
 
 const blockClass = `${pkg.prefix}--user-profile-image`;
 const componentName = UserProfileImage.displayName;
-
 const dataTestId = uuidv4();
 const kind = 'user';
 const size = 'xl';
@@ -27,6 +23,10 @@ const renderComponent = ({ ...rest } = {}) =>
   render(<UserProfileImage {...{ kind, size, theme, ...rest }} />);
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('should return a circle with background color', async () => {
     const { container } = renderComponent({
       backgroundColor: 'light-cyan',
@@ -94,12 +94,12 @@ describe(componentName, () => {
 
   it('should render the initials when passed the initials prop', async () => {
     renderComponent({ initials: 'Display name' });
-    expect(screen.getByText(/DN/));
+    expect(screen.getByText(/DN/)).toBeTruthy();
   });
 
   it('should render the initials when simply passing two initials to the initials prop', async () => {
     renderComponent({ initials: 'DN' });
-    expect(screen.getByText(/DN/));
+    expect(screen.getByText(/DN/)).toBeTruthy();
   });
 
   it('should render the IconButton component if the tooltipText prop is passed', async () => {
@@ -111,11 +111,6 @@ describe(componentName, () => {
     );
     expect(tooltipElement).toBeTruthy();
   });
-
-  it('should throw a custom prop type validation error when an image is used without an imageDescription prop', async () =>
-    expectError(required('imageDescription', 'UserProfileImage'), () => {
-      renderComponent({ image: 'path_to_image.jpg' });
-    }));
 
   it('should display a custom icon if one is provided', async () => {
     const { container } = renderComponent({

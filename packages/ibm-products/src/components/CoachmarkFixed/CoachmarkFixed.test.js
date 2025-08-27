@@ -57,24 +57,6 @@ const renderCoachmarkFixed = ({ ...rest } = {}) =>
 describe(componentName, () => {
   beforeEach(() => {
     jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
-    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
-      observe: () => null,
-      unobserve: () => null,
-    }));
   });
   it('renders a component CoachmarkFixed', () => {
     renderCoachmarkFixed({
@@ -102,6 +84,7 @@ describe(componentName, () => {
       portalTarget: '#FixedContainer',
       onClose: () => console.log('CLOSE'),
       'data-testid': dataTestId,
+      closeIconDescription: 'Close',
     });
     expect(container.querySelector(`.${taglineCTAClass}`)).not.toBeNull();
     await act(() => user.click(container.querySelector(`.${taglineCTAClass}`)));

@@ -42,10 +42,10 @@ export let ScrollGradient = React.forwardRef(
     },
     ref
   ) => {
-    const intersectionStartRef = useRef();
-    const intersectionEndRef = useRef();
-    const intersectionLeftRef = useRef();
-    const intersectionRightRef = useRef();
+    const intersectionStartRef = useRef(undefined);
+    const intersectionEndRef = useRef(undefined);
+    const intersectionLeftRef = useRef(undefined);
+    const intersectionRightRef = useRef(undefined);
 
     const carbonPrefix = usePrefix();
     const fallbackColor = `var(--${carbonPrefix}-layer-01)`;
@@ -168,12 +168,10 @@ export let ScrollGradient = React.forwardRef(
         role="presentation"
         {...getDevtoolsProps(componentName)}
       >
-        {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
         <div
           onScroll={onScroll}
           ref={setRefs}
           className={cx(`${blockClass}__content`, scrollElementClassName)}
-          tabIndex={0}
         >
           <span ref={intersectionStartRef} data-start-vertical />
           <span ref={intersectionLeftRef} data-start-horizontal />

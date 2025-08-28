@@ -1,3 +1,58 @@
+## `@carbon/ibm-products@2.73.1`
+### Bug fixes :bug:
+- fix: remove requiredIf props helpers (#8153)
+- fix: remove requiredIf props helpers
+
+## `@carbon/ibm-products@2.73.0`
+### Features :rocket:
+- feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)
+
+### Bug fixes :bug:
+- fix(EmptyState): Modified subtitle container to be a div (#7967)
+- fix: disable ability to submit form using the Enter key (#8019)
+- fix(sidepanel): blank space appears when the header has no content (#8029)
+- fix: add role prop to pageheader's breadcrumb overflow menu (#8017)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.6.0 (#8027)
+- fix(PageHeader): ensures expected positioning even if content component is excluded (#7946)
+
+### Housekeeping :house:
+- docs: add intro page for prebuilt patterns (#7958)
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
+## `@carbon/ibm-products@2.72.0`
+### Features :rocket:
+- feat(PageHeader): add new breadcrumb overflow utility sub-component (#7910)
+- feat(coachmarkv2): added floating variant (#7924)
+- feat(makeDraggable): utility added for drag functionality (#7908)
+- feat: api key generation pattern code init (#7882)
+- feat(sidepanel): add prop for close button tooltip alignment (#7878)
+- feat(TruncatedText): init TruncatedText react component (#7755)
+- feat(PageHeader): create title breadcrumb sub component (#7834)
+- feat(openStackblitz): remove and import modal (#7842)
+- feat: change docs to overview in stories (#7854)
+- feat(PageHeader): add expand/collapse functionality (#7815)
+
+### Bug fixes :bug:
+- fix: conditionBuilder need to close on outside click
+- fix(ProductiveCard): Added children explicitly to productiveCard (#7957)
+- fix(Storybook): render the correct story in Storybook for few components (#7960)
+- fix: include .cds--menu to selectorsFloatingMenus (#7916)
+- fix(build): update story imports in docs and fix circular deps (#7892)
+- fix(ConditionBuilder):  flickering sometimes while hovering on add new group/ condition/ subgroup and when there is scroll (#7853)
+- fix: update config to create stackblitz examples with ts support (#7901)
+- fix: condition builder issue fixes (#7891)
+- fix: layout breakage due to extra nodes added to Tearsheet (#7832)
+- fix(notification panel): clickoutside handler function exclude trigger button (#7830)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.4.0 (#7836)
+
+### Housekeeping :house:
+- chore(deps): update dependency cross-env to v10 (#7934)
+- chore: rename BigNumbers to BigNumber (#7886)
+- build(deps): update to Carbon 11 compatible versions to latest (#7840)
+- chore: remove core package (#7859)
+- chore: remove unneeded tabIndex={0} settings (#7829)
+- chore: deprecate emptystate v2 prop (#7810)
+
 ## `@carbon/ibm-products@2.71.1`
 ### Bug fixes :bug:
 - fix(PageHeader): export as preview from ts exports, bump resizer

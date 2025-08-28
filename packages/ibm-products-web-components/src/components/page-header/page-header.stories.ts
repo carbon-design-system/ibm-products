@@ -25,43 +25,9 @@ import Bee16 from '@carbon/web-components/es/icons/bee/16.js';
 import Activity16 from '@carbon/web-components/es/icons/activity/16.js';
 import AiGenerate16 from '@carbon/web-components/es/icons/ai-generate/16.js';
 import CloudFoundry16 from '@carbon/web-components/es/icons/cloud-foundry--1/16.js';
-import {
-  TAG_SIZE,
-  TAG_TYPE,
-} from '@carbon/web-components/es/components/tag/defs.js';
-
-const tags = [
-  {
-    type: 'blue',
-    text: 'Tag 1',
-    size: 'md',
-  },
-  {
-    type: 'purple',
-    text: 'Tag 2',
-    size: 'md',
-  },
-  {
-    type: 'red',
-    text: 'Tag 3',
-    size: 'md',
-  },
-  {
-    type: 'blue',
-    text: 'Tag 4',
-    size: 'md',
-  },
-  {
-    type: 'purple',
-    text: 'Tag 5',
-    size: 'md',
-  },
-  {
-    type: 'red',
-    text: 'Tag 6',
-    size: 'md',
-  },
-];
+import './_story-assets/set-of-tags';
+import './_story-assets/set-of-breadcrumbs';
+import { generateTags } from './_story-assets/set-of-tags/utils';
 
 const args = {
   border: true,
@@ -137,7 +103,9 @@ export const Default = {
               </cds-breadcrumb-item>
             </cds-breadcrumb>
             <div slot="content-actions">
-              <cds-button size="md">Button</cds-button>
+              <cds-button size="md"
+                >Primary action ${Add16({ slot: 'icon' })}</cds-button
+              >
             </div>
             <cds-icon-button
               slot="page-actions"
@@ -175,6 +143,11 @@ export const Default = {
               ship faster, scale efficiently, and stay in control every step of
               the way.
             </c4p-page-header-content-text>
+            <div slot="page-actions">
+              <cds-button size="md"
+                >Primary action ${Add16({ slot: 'icon' })}</cds-button
+              >
+            </div>
           </c4p-page-header-content>
           <c4p-page-header-tabs>
             <c4p-page-header-scroller slot="scroller">
@@ -501,7 +474,29 @@ export const ContentWithIcon = {
     </main>
   `,
 };
-
+const sampleBreadcrumbs = [
+  {
+    text: 'Breadcrumb 1',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 2',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 3',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 4',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Virtual-Machine-DAL-really-long-title-example',
+    href: 'https://www.carbondesignsystem.com',
+  },
+];
+const generatedTags = generateTags({ count: 10 });
 export const TabBarWithTabsAndTags = {
   render: () => html`
     <style>
@@ -516,17 +511,9 @@ export const TabBarWithTabsAndTags = {
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${Bee16({ slot: 'icon' })}
-          <cds-breadcrumb>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <c4p-page-header-title-breadcrumb>
-              Virtual Machine DAL
-            </c4p-page-header-title-breadcrumb>
-          </cds-breadcrumb>
+          <set-of-breadcrumbs
+            .breadcrumbsData="${sampleBreadcrumbs}"
+          ></set-of-breadcrumbs>
           <cds-icon-button
             slot="page-actions"
             kind="ghost"
@@ -591,14 +578,7 @@ export const TabBarWithTabsAndTags = {
             >
           </cds-tabs>
           <div slot="tags">
-            ${tags.map(
-              (e) =>
-                html` <cds-tag
-                  type="${e.type as TAG_TYPE}"
-                  size="${e.size as TAG_SIZE}"
-                  >${e.text}</cds-tag
-                >`
-            )}
+            <set-of-tags .tagsData="${generatedTags ?? []}"></set-of-tags>
           </div>
         </c4p-page-header-tabs>
       </c4p-page-header>

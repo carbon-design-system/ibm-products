@@ -27,10 +27,11 @@ import { Button, Modal, TextInput, PasswordInput } from '@carbon/react';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({
-        'story': stories.instantGenerate, 
-        'styles': stories.default.parameters.styles
-      }),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.instantGenerate,
+          styles: stories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -42,10 +43,11 @@ import { Button, Modal, TextInput, PasswordInput } from '@carbon/react';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({
-        'story': stories.generate, 
-        'styles': stories.default.parameters.styles
-      }),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.generate,
+          styles: stories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -57,10 +59,11 @@ import { Button, Modal, TextInput, PasswordInput } from '@carbon/react';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({
-        'story': stories.edit, 
-        'styles': stories.default.parameters.styles
-      }),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.edit,
+          styles: stories.default.parameters.styles,
+        }),
     },
   ]}
 />

@@ -242,7 +242,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
 
     const handleScrollToView = useCallback((itemNumber) => {
       updateAriaHiddenTabIndex(itemNumber);
-      childElementsRef.current[itemNumber].scrollIntoView();
+      childElementsRef.current[itemNumber]?.scrollIntoView();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

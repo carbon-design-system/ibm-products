@@ -19,6 +19,7 @@ import { SignalWatcher } from '@lit-labs/signals';
 import '@carbon/web-components/es/components/inline-loading/inline-loading.js';
 import { CDSModalFooter } from '@carbon/web-components/es/index.js';
 import ArrowRight from '@carbon/web-components/es/icons/arrow--right/16.js';
+import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--interstitial-screen`;
 
@@ -72,6 +73,12 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
 
   @state()
   loadingAction;
+
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    registerFocusableContainers(
+      this.childNodes.length > 0 ? this : this.shadowRoot
+    );
+  }
 
   protected updated(_changedProperties: PropertyValues): void {
     if (_changedProperties.size === 0) {
@@ -174,9 +181,9 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
       const { carouselAPI } = interstitialDetailsSignal.get();
 
       if (actionType == 'next') {
-        carouselAPI.next();
+        carouselAPI?.next();
       } else if (actionType === 'back') {
-        carouselAPI.prev();
+        carouselAPI?.prev();
       } else {
         this._handleUserInitiatedClose?.(actionType);
       }
@@ -189,6 +196,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
     const { start, next, back, skip } = disableActions;
     const isMulti = stepDetails?.length > 0;
     const progStepCeil = stepDetails?.length - 1;
+
     return html`<slot>
       <div class="${blockClass}--footer">
         ${isMulti

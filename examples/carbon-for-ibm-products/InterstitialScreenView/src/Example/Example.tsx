@@ -7,11 +7,12 @@ import { InterstitialScreenView } from './InterstitialScreenView/InterstitialScr
 import { InterstitialScreenViewModule } from './InterstitialScreenViewModule/InterstitialScreenViewModule';
 
 export const Example = () => {
+  // cspell:words Terminé Partiel Actuel valide
+  
   const [showInterstitialModal, setShowInterstitialModal] = useState(true);
 
   const defaultProps = {
-    headerTitle: 'Welcom, Jan!',
-    interstitialAriaLabel: 'Interstitial Screen',
+    headerTitle: 'Welcome, Jan!',
   };
   const translations = {
     'carbon.progress-step.complete': 'Terminé',
@@ -63,11 +64,10 @@ export const Example = () => {
         Show Interstitial modal
       </Button>
       <InterstitialScreen
-        isOpen={showInterstitialModal}
+        open={showInterstitialModal}
         onClose={() => {
           setShowInterstitialModal(false);
         }}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
         isFullScreen={false}
       >
         <InterstitialScreen.Header

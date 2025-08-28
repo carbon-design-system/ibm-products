@@ -88,9 +88,7 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
     );
   };
   private onViewChangeEnd = ({ currentIndex, lastIndex, totalViews }) => {
-    if (currentIndex > 0) {
-      this.updateAriaHiddenTabIndex(currentIndex);
-    }
+    this.updateAriaHiddenTabIndex(currentIndex);
 
     updateInterstitialDetailsSignal({
       name: 'currentStep',
@@ -119,22 +117,23 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   private updateAriaHiddenTabIndex = (itemNumber: number) => {
     const allViews = this.carouselAPI?.allViews;
 
-    Object.values(allViews)?.forEach((item, idx) => {
-      const isActive = idx === itemNumber;
+    allViews &&
+      Object.values(allViews)?.forEach((item, idx) => {
+        const isActive = idx === itemNumber;
 
-      if (item) {
-        // Set aria-hidden based on active state
-        item.setAttribute('aria-hidden', String(!isActive));
+        if (item) {
+          // Set aria-hidden based on active state
+          item.setAttribute('aria-hidden', String(!isActive));
 
-        if (!isActive) {
-          item.setAttribute('inert', ''); // Disable interactivity
-        } else {
-          item.removeAttribute('inert'); // Re-enable interactivity
+          if (!isActive) {
+            item.setAttribute('inert', ''); // Disable interactivity
+          } else {
+            item.removeAttribute('inert'); // Re-enable interactivity
+          }
+
+          item.removeAttribute('tabindex');
         }
-
-        item.removeAttribute('tabindex');
-      }
-    });
+      });
   };
 
   render() {

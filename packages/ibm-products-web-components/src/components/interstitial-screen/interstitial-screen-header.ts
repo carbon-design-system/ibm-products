@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement, nothing } from 'lit';
+import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonPrefix, prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -17,6 +17,7 @@ import '@carbon/web-components/es/components/progress-indicator/index.js';
 import styles from './interstitial-screen-header.scss?lit';
 import { interstitialDetailsSignal } from './interstitial-screen-context';
 import { SignalWatcher } from '@lit-labs/signals';
+import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--interstitial-screen`;
 const headerBlockClass = `${blockClass}--internal-header`;
@@ -54,6 +55,10 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
    */
   @property({ type: Boolean, reflect: true })
   hideProgressIndicator: boolean = false;
+
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    registerFocusableContainers(this.shadowRoot);
+  }
 
   private getStepState = (index) => {
     const currentStep = interstitialDetailsSignal.get().currentStep;

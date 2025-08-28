@@ -11,15 +11,35 @@ module.exports = {
   coverageReporters: ['json', 'html'],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
-    '!**/*.stories.{js,jsx}',
+    '!**/*.stories.{js,jsx,ts,tsx}',
     '!**/*.story.{js,jsx}',
     '!**/*.docs-page.{js,jsx}',
     '!**/src/globals/decorators/*',
     '!packages/ibm-products/src/globals/js/utils/props-helper.js', // This file contains utilities to help with prop-types which we're moving away from now that we've introduced TypeScript support
     '!packages/ibm-products/src/globals/js/utils/story-helper.js', // Contains bespoke storybook utilities that we want to move away from
     '!packages/ibm-products/src/globals/js/utils/StoryDocsPage.js', // Contains bespoke storybook utilities that we want to move away from
+    '!**/*.deprecated.*',
   ],
-  coveragePathIgnorePatterns: ['preview-components'],
+  coveragePathIgnorePatterns: [
+    'preview-components',
+    // for deprecated components that contain more than 1 js file
+    'Datagrid',
+    'DecoratorDualButton',
+    'DecoratorLink',
+    'DecoratorSingleButton',
+    'DescriptionList',
+    'EditFullPage',
+    'EditSidePanel',
+    'EditTearsheet',
+    'EditTearsheetNarrow',
+    'EditUpdateCards',
+    'FilterPanel',
+    'FilterSummary',
+    'HttpErrors',
+    'Nav',
+    'StatusIndicator',
+    'UserProfileImage',
+  ],
   resolver: require.resolve('./setup/resolver.js'),
   moduleFileExtensions: ['tsx', 'ts', 'jsx', 'js', 'json', 'node'],
   moduleNameMapper: {
@@ -65,6 +85,7 @@ module.exports = {
     '/vendor/',
     '/scripts/',
     'test-helper.js',
+    '<rootDir>/src/globals/decorators/.*\\.stories\\.ts$',
   ],
   transformIgnorePatterns: [
     '/build/',

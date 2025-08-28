@@ -22,9 +22,9 @@ const blockClass = `${pkg.prefix}--coachmark-tagline`;
 const componentName = 'CoachmarkTagline';
 
 const defaults = {
-  closeIconDescription: 'Close',
   onClose: () => {},
   theme: 'light',
+  closeIconDescription: 'Close',
 };
 
 interface CoachmarkTaglineProps {
@@ -65,7 +65,8 @@ export let CoachmarkTagline = React.forwardRef<
     ref
   ) => {
     const coachmark = useCoachmark();
-
+    const contextCloseIconDescription = useCoachmark()?.closeIconDescription;
+    const closeIconDesc = closeIconDescription ?? contextCloseIconDescription;
     return (
       <div
         {
@@ -96,7 +97,7 @@ export let CoachmarkTagline = React.forwardRef<
             kind="ghost"
             size="sm"
             renderIcon={Close}
-            iconDescription={closeIconDescription}
+            iconDescription={closeIconDesc}
             hasIconOnly
             className={`${blockClass}--close-btn`}
             onClick={onClose}

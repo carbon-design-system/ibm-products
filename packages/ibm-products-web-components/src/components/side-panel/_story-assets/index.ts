@@ -9,6 +9,8 @@ import styles from '../story-styles.scss?lit';
 import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs.js';
 import TrashCan16 from '@carbon/web-components/es/icons/trash-can/16';
 import Settings16 from '@carbon/web-components/es/icons/settings/16';
+import '@carbon/web-components/es/components/breadcrumb/index.js';
+import '@carbon/web-components/es/components/notification/index.js';
 
 const storyPrefix = 'side-panel-stories__';
 
@@ -207,6 +209,62 @@ export const getSlug = (index) => {
           <p class="bold">Foundation model</p>
         </div>
       </cds-slug>`;
+    default:
+      return null;
+  }
+};
+
+export const getCustomHeaderComponents = (index) => {
+  switch (index) {
+    case 1:
+      return html` <style>
+          ${styles}
+        </style>
+        <div slot="above-title" class="${storyPrefix}custom-header-content">
+          <cds-breadcrumb aria-label="">
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </div>`;
+    case 2:
+      return html` <style>
+          ${styles}
+        </style>
+        <div slot="below-title" class="${storyPrefix}custom-header-content">
+          <cds-inline-notification
+            title="Notification title"
+            subtitle="Subtitle text goes here"
+            kind="error"
+          >
+          </cds-inline-notification>
+        </div>`;
+    case 3:
+      return html` <style>
+          ${styles}
+        </style>
+        <div slot="above-title" class="${storyPrefix}custom-header-content">
+          <cds-breadcrumb aria-label="">
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </div>
+
+        <div slot="below-title" class="${storyPrefix}custom-header-content">
+          <cds-inline-notification
+            title="Notification title"
+            subtitle="Subtitle text goes here"
+            kind="error"
+          >
+          </cds-inline-notification>
+        </div>`;
     default:
       return null;
   }

@@ -1,0 +1,1 @@
+import{r as a,p as l,a7 as u}from"./iframe-D7eStwkL.js";import{u as c}from"./index-D-rF9mbQ.js";const p=e=>{const r=c("default-portal-target-body"),[t,o]=a.useState(null);return a.useEffect(()=>{e?o(e):(l.isFeatureEnabled("default-portal-target-body")||r)&&o(document.body)},[e,r]),a.useCallback(s=>t?u.createPortal(s,t):s,[t])};export{p as u};

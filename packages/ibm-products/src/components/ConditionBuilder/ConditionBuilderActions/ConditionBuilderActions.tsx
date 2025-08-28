@@ -119,7 +119,7 @@ const ConditionBuilderActions = ({
               condition={action as Action}
               data-name="valueField"
               type="option"
-              popOverClassName={`${blockClass}__actionBlock`}
+              popOverClassName={`${blockClass}__action-block`}
             >
               <ItemOptionForValueField
                 conditionState={{
@@ -159,7 +159,7 @@ const ConditionBuilderActions = ({
         {actionState.length === 0 && (
           <ConditionBuilderAdd
             onClick={addActionHandler}
-            className={`${blockClass}__gap ${blockClass}__gap-left ${blockClass}__addActionButton`}
+            className={`${blockClass}__gap ${blockClass}__gap-left ${blockClass}__add-action-button`}
             buttonLabel={addActionText}
             tabIndex={0}
           />

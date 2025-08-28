@@ -290,7 +290,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           />
         </ConditionBuilderItem>
       )}
-      <div className={`${blockClass}__conditionInnerBlock`}>
+      <div className={`${blockClass}__condition-inner-block`}>
         <ConditionBuilderItem
           label={label ?? condition?.property}
           title={propertyText}

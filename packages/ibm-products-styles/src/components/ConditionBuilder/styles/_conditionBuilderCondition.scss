@@ -89,10 +89,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   margin-block-end: 0;
 }
 .#{$block-class}__readonly {
-  .#{$block-class}__conditionInnerBlock,
+  .#{$block-class}__condition-inner-block,
   .#{$block-class}__connector,
-  .#{$block-class}__actionBlock,
-  .#{$block-class}__addActionButton,
+  .#{$block-class}__action-block,
+  .#{$block-class}__add-action-button,
   .#{$block-class}__groupConnector {
     border: 1px solid $border-subtle-00;
     background: transparent;
@@ -107,6 +107,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   }
 }
 
-.#{$block-class}__conditionInnerBlock {
+.#{$block-class}__condition-inner-block {
   display: flex;
 }

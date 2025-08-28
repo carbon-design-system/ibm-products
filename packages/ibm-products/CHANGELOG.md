@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.73.1-rc.0`
+## `@carbon/ibm-products@2.73.1`
 ### Bug fixes :bug:
 - fix: remove requiredIf props helpers (#8153)
 - fix: remove requiredIf props helpers

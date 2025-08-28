@@ -1,3 +1,8 @@
+## `@carbon/ibm-products@2.73.1`
+### Bug fixes :bug:
+- fix: remove requiredIf props helpers (#8153)
+- fix: remove requiredIf props helpers
+
 ## `@carbon/ibm-products@2.72.0`
 ### Features :rocket:
 - feat(PageHeader): add new breadcrumb overflow utility sub-component (#7910)

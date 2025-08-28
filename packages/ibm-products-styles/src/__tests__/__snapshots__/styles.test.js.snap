@@ -2563,12 +2563,10 @@ p.c4p--about-modal__copyright-text:first-child {
   outline: none;
 }
 .clabs__resizer--horizontal {
-  block-size: 0.25rem;
   cursor: ns-resize;
 }
 .clabs__resizer--vertical {
   cursor: ew-resize;
-  inline-size: 0.25rem;
 }
 
 .sr-only {
@@ -2905,6 +2903,9 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--side-panel .c4p--side-panel__header:not(.c4p--side-panel__header--has-title)::before {
   background-color: transparent;
+}
+.c4p--side-panel .c4p--side-panel__header:empty {
+  min-block-size: unset;
 }
 .c4p--side-panel.c4p--side-panel:has(.c4p--side-panel__action-toolbar), .c4p--side-panel.c4p--side-panel--has-action-toolbar, .c4p--side-panel.c4p--side-panel--has-slug, .c4p--side-panel.c4p--side-panel--has-ai-label, .c4p--side-panel.c4p--side-panel--has-decorator {
   --c4p--side-panel--title-padding-right: 4rem;
@@ -9671,7 +9672,7 @@ button.c4p--add-select__global-filter-toggle--open {
   inline-size: 100%;
 }
 .c4p--page-header__next .c4p--page-header__breadcrumb__content-actions {
-  inline-size: 100%;
+  inline-size: fit-content;
   margin-inline-end: 0.75rem;
 }
 .c4p--page-header__next .c4p--page-header__breadcrumb-wrapper {
@@ -9745,6 +9746,12 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--page-header__next .c4p--page-header__content__page-actions {
   display: flex;
   justify-content: right;
+  /* stylelint-disable-next-line carbon/motion-easing-use */
+  transition: opacity cubic-bezier(0.2, 0, 0.38, 0.9) 240ms;
+}
+.c4p--page-header__next .c4p--page-header__content__page-actions.c4p--page-header__content__page-actions--clipped {
+  opacity: 0;
+  visibility: hidden;
 }
 @media (max-width: 41.98rem) {
   .c4p--page-header__next .c4p--page-header__content__page-actions {
@@ -9877,18 +9884,21 @@ button.c4p--add-select__global-filter-toggle--open {
     opacity: 1;
   }
 }
+.c4p--page-header__next .c4p--page-header__breadcrumb__content-actions {
+  opacity: 0;
+}
+.c4p--page-header__next .c4p--page-header__breadcrumb__content-actions-with-global-actions--show {
+  opacity: 1;
+  transition: opacity cubic-bezier(0.2, 0, 0.38, 0.9) 150ms;
+}
 .c4p--page-header__next .c4p--page-header-title-breadcrumb {
   opacity: 0;
   transform: translateY(1rem);
   transition: transform cubic-bezier(0.2, 0, 0.38, 0.9) 150ms, opacity cubic-bezier(0.2, 0, 0.38, 0.9) 150ms;
 }
 @supports not (animation-timeline: scroll()) {
-  .c4p--page-header__next .c4p--page-header-title-breadcrumb.c4p--page-header-title-breadcrumb-show {
-    opacity: 1;
-    transform: translateY(0);
-  }
   @media (prefers-reduced-motion: reduce) {
-    .c4p--page-header__next .c4p--page-header-title-breadcrumb {
+    .c4p--page-header__next .c4p--page-header-title-breadcrumb.c4p--page-header-title-breadcrumb-show {
       transform: translateY(0);
       /* stylelint-disable-next-line */
       transition: opacity cubic-bezier(0.2, 0, 0.38, 0.9) 150ms;

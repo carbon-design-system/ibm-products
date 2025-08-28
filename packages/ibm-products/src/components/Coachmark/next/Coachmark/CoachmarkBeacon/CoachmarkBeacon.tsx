@@ -30,6 +30,7 @@ export interface CoachmarkButtonProps extends ButtonProps<ElementType> {
   onDoubleClick?(): void;
   tabIndex?: number;
   ['aria-expanded']?: boolean;
+  id?: string;
 }
 export interface CoachmarkBeaconProps {
   /**
@@ -64,13 +65,13 @@ export const CoachmarkBeacon = forwardRef<HTMLDivElement, CoachmarkBeaconProps>(
         className={cx(blockClass, `${blockClass}-${kind}`, className)}
         {...getDevtoolsProps(componentName)}
         role="tooltip"
+        {...rest}
+        ref={ref}
       >
         <button
-          ref={ref}
           type="button"
           {...buttonProps}
           className={`${blockClass}__target`}
-          {...rest}
         >
           <svg className={`${blockClass}__center`} aria-label={label}>
             <title>{label}</title>
@@ -97,6 +98,7 @@ CoachmarkBeacon.propTypes = {
     /**@ts-ignore*/
     ...Button.propTypes,
     /**@ts-ignore*/
+    id: PropTypes.string,
     onClick: PropTypes.func,
     onDoubleClick: PropTypes.func,
     tabIndex: PropTypes.number,

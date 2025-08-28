@@ -188,9 +188,14 @@ $clabs-prefix: 'clabs';
     --#{$block-class}--actions-height: #{$spacing-09};
   }
 
-  &.#{$block-class}--slide-in,
   &:not(.#{$block-class}--has-overlay) {
     box-shadow: 0 $spacing-01 $spacing-02 $overlay;
+  }
+
+  // Slide-in panels should use border not shadows since they don’t layer
+  &.#{$block-class}--slide-in,
+  &.#{$block-class}--slide-in:not(.#{$block-class}--has-overlay) {
+    box-shadow: none;
   }
 
   .#{$block-class}__actions-container {

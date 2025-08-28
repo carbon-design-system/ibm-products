@@ -133,6 +133,13 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkProps>(
       }
     }, [children]);
 
+    useEffect(() => {
+      const el = triggerRef.current;
+      if (el) {
+        el.setAttribute('aria-expanded', String(!!open));
+      }
+    }, [open]);
+
     useIsomorphicEffect(() => {
       const { x = 0, y = 0 } = position ?? {};
       const el = internalRef.current;
@@ -204,10 +211,6 @@ Coachmark.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Specifies whether the component is currently open.
-   */
-  defaultOpen: PropTypes.bool,
-  /**
    * Specifies whether the component is floating or not.
    */
   floating: PropTypes.bool,
@@ -215,6 +218,10 @@ Coachmark.propTypes = {
    * Function to call when the close button is clicked.
    */
   onClose: PropTypes.func,
+  /**
+   * Specifies whether the component is currently open.
+   */
+  open: PropTypes.bool,
   /**
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */

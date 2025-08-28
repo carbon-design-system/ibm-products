@@ -30,7 +30,7 @@ const checklistGroupTemplate = {
   args: {
     title: 'Checklist header',
     chartLabel: '15% complete',
-    chartValue: 0.5,
+    chartValue: 0.15,
     groupTitle: 'Section label',
     toggleLabel: 'Toggle',
     toggleLabelAlign: 'top',

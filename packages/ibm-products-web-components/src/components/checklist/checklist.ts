@@ -18,6 +18,7 @@ import ChevronIcon16 from '@carbon/web-components/es/icons/chevron--up/16.js';
 import { prefix } from '../../globals/settings';
 import styles from './checklist.scss?lit';
 import { classMap } from 'lit/directives/class-map.js';
+import './checklist-chart';
 
 const blockClass = `${prefix}--checklist`;
 
@@ -99,6 +100,7 @@ class CDSChecklist extends LitElement {
     const {
       open,
       chartLabel,
+      chartValue,
       title,
       disableToggle,
       toggleLabel,
@@ -119,6 +121,9 @@ class CDSChecklist extends LitElement {
         <!-- Header -->
         <header class="${blockClass}__header">
           <slot name="checklist-header">
+            ${html`<c4p-checklist-chart
+              value=${chartValue}
+            ></c4p-checklist-chart>`}
             ${(title || chartLabel) &&
             html`<div class="${blockClass}__titles">
               <!-- checklist title -->

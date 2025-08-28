@@ -99,7 +99,7 @@ export let ConditionBuilder = React.forwardRef(
           className={cx(
             blockClass, // Apply the block class to the main HTML element
             className, // Apply any supplied class names to the main HTML element.
-            { [`${blockClass}__readOnly`]: readOnly },
+            { [`${blockClass}__readonly`]: readOnly },
             {
               // switched classes dependant on props or state
               // example: [`${blockClass}__here-if-small`]: size === 'sm',

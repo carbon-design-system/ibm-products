@@ -1,3 +1,8 @@
+## `@carbon/ibm-products@2.73.1-rc.0`
+### Bug fixes :bug:
+- fix: remove requiredIf props helpers (#8153)
+- fix: remove requiredIf props helpers
+
 ## `@carbon/ibm-products@2.73.0`
 ### Features :rocket:
 - feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)

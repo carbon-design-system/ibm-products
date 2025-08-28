@@ -17,7 +17,7 @@ import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
 import TrashCan16 from '@carbon/icons/es/trash-can/16';
 import SubtractAlt16 from '@carbon/icons/es/subtract--alt/16';
-import { iconLoader } from '../../../src/globals/internal/icon-loader';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 
 // example implementation of low impact delete / remove pattern
 @customElement('delete-remove-low-impact')

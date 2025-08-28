@@ -25,7 +25,7 @@ import {
   dataPrevious as initialDataPrevious,
   extraData,
 } from './_story-assets/NotificationsPanel_data';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 const blockClassNotification = `${prefix}--notifications-panel__notification`;
 const storyBlockClass = `${prefix}--notifications-panel__story`;
 const blockClass = `${prefix}--notifications-panel`;

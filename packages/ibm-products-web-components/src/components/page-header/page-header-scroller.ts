@@ -13,7 +13,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import Chevron20 from '@carbon/icons/es/chevron--up/20';
 import ChevronDown20 from '@carbon/icons/es/chevron--down/20';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '@carbon/web-components/es/components/button/index.js';
 import { pageHeaderContext } from './context';
 import { consume } from '@lit/context';

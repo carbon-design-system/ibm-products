@@ -18,7 +18,7 @@ import User from '@carbon/icons/es/user/16.js';
 import Analytics from '@carbon/icons/es/analytics/16.js';
 import Async from '@carbon/icons/es/async/16.js';
 import Upload from '@carbon/icons/es/upload/16.js';
-import { iconLoader } from '../../../src/globals/internal/icon-loader';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 import { TemplateResult } from 'lit';
 
 export interface ActionData {

@@ -19,7 +19,7 @@ import { SignalWatcher } from '@lit-labs/signals';
 import '@carbon/web-components/es/components/inline-loading/inline-loading.js';
 import { CDSModalFooter } from '@carbon/web-components/es/index.js';
 import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--interstitial-screen`;

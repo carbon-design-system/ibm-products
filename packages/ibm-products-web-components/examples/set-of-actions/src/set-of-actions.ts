@@ -15,7 +15,7 @@ import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
 import { createOverflowHandler } from '@carbon/utilities';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
-import { iconLoader } from '../../../src/globals/internal/icon-loader';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 import styles from './set-of-actions.scss?lit';
 
 const blockClass = `c4p--set-of-actions`;

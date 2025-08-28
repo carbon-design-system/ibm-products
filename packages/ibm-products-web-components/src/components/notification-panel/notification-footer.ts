@@ -13,7 +13,7 @@ import { prefix } from '../../globals/settings';
 import { selectorTabbable } from '@carbon/web-components/es/globals/settings.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import Settings16 from '@carbon/icons/es/settings/16';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './notification-footer.scss?lit';
 

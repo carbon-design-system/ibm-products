@@ -16,7 +16,7 @@ import '@carbon/web-components/es/components/breadcrumb/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
 import { createOverflowHandler } from './overflowHandler';
 import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
-import { iconLoader } from '../../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '../../truncated-text';
 import styles from './set-of-breadcrumbs.scss?lit';
 import '../page-header-title-breadcrumb';

@@ -24,7 +24,7 @@ import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16';
 import InformationSquareFilled16 from '@carbon/icons/es/information--square--filled/16';
 import { getSupportedLocale } from '../../globals/js/utils/getSupportedLocale';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 
 const blockClass = `${prefix}--notifications-panel__notification`;
 const DefaultLocale = 'en-US';

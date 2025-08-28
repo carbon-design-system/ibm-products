@@ -25,7 +25,7 @@ import Bee16 from '@carbon/icons/es/bee/16.js';
 import Activity16 from '@carbon/icons/es/activity/16.js';
 import AiGenerate16 from '@carbon/icons/es/ai-generate/16.js';
 import CloudFoundry16 from '@carbon/icons/es/cloud-foundry--1/16.js';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import './_story-assets/set-of-tags';
 import './_story-assets/set-of-breadcrumbs';
 import { generateTags } from './_story-assets/set-of-tags/utils';

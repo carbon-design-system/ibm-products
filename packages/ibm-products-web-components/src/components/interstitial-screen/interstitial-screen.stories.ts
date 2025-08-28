@@ -16,7 +16,7 @@ import footerStyles from './interstitial-screen-footer.scss?lit';
 import { prefix } from '../../globals/settings';
 import Checkmark from '@carbon/icons/es/checkmark/16.js';
 import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 
 const argTypes = {
   fullscreen: {

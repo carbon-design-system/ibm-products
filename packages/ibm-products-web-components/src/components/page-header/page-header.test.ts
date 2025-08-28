@@ -7,7 +7,7 @@
 import { expect, describe, it, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import Bee32 from '@carbon/icons/es/bee/32.js';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import CDSPageHeader from './page-header';
 import CDSPageHeaderBreadcrumb from './page-header-breadcrumb';
 import CDSPageHeaderTabs from './page-header-tabs';

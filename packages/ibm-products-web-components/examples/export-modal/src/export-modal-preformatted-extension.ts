@@ -17,7 +17,7 @@ import '@carbon/web-components/es/components/form-group/index';
 import '@carbon/web-components/es/components/radio-button/index';
 import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16';
 import ErrorFilled16 from '@carbon/icons/es/error--filled/16';
-import { iconLoader } from '../../../src/globals/internal/icon-loader';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 import '@carbon/web-components/es/components/loading/index';
 import { ref } from 'lit/directives/ref.js';
 import styles from './export-modal.scss?lit';

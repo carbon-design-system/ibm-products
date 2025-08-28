@@ -19,7 +19,7 @@ import '@carbon/web-components/es/components/link/link.js';
 import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
 import Launch16 from '@carbon/icons/es/launch/16';
-import { iconLoader } from '../../../src/globals/internal/icon-loader';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 
 // example implementation of high impact batch deletion pattern
 @customElement('delete-batch')

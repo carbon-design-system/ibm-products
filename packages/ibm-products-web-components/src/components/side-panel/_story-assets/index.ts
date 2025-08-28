@@ -9,7 +9,7 @@ import styles from '../story-styles.scss?lit';
 import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs.js';
 import TrashCan16 from '@carbon/icons/es/trash-can/16';
 import Settings16 from '@carbon/icons/es/settings/16';
-import { iconLoader } from '../../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
 import '@carbon/web-components/es/components/notification/index.js';
 

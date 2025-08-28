@@ -23,7 +23,7 @@ import { selectorTabbable } from '@carbon/web-components/es/globals/settings.js'
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import ArrowLeft16 from '@carbon/icons/es/arrow--left/16';
 import Close16 from '@carbon/icons/es/close/16';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import { moderate02 } from '@carbon/motion';
 import Handle from '../../globals/internal/handle';
 import '@carbon/web-components/es/components/button/index.js';

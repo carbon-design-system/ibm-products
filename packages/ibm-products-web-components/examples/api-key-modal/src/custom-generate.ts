@@ -22,7 +22,7 @@ import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
 import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
 import InformationFilled16 from '@carbon/icons/es/information--filled/16.js';
 import Copy16 from '@carbon/icons/es/copy/16.js';
-import { iconLoader } from '../../../src/globals/internal/icon-loader';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 import { ref } from 'lit/directives/ref.js';
 import styles from './api-key-modal.scss?lit';
 import './api-key-downloader';

@@ -16,7 +16,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import styles from './user-avatar.scss?lit';
 import '@carbon/web-components/es/components/tooltip/index.js';
 import User from '@carbon/icons/es/user/16';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 
 const blockClass = `${prefix}--user-avatar`;
 

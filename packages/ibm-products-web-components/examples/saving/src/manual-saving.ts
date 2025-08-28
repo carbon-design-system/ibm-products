@@ -16,7 +16,7 @@ import '@carbon/web-components/es/components/inline-loading/index.js';
 import checkmarkOutline16 from '@carbon/icons/es/checkmark--outline/16';
 import errorOutline16 from '@carbon/icons/es/error--outline/16';
 import save16 from '@carbon/icons/es/save/16';
-import { iconLoader } from '../../../src/globals/internal/icon-loader';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 import styles from './saving.scss?lit';
 
 const blockClass = `c4p--saving`;

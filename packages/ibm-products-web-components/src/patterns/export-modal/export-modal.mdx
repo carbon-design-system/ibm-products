@@ -48,8 +48,8 @@ import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/button/index';
 import '@carbon/web-components/es/components/form-group/index';
 import '@carbon/web-components/es/components/text-input/index';
-import CheckmarkFilled16 from '@carbon/web-components/es/icons/checkmark--filled/16';
-import ErrorFilled16 from '@carbon/web-components/es/icons/error--filled/16';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16';
+import ErrorFilled16 from '@carbon/icons/es/error--filled/16';
 import '@carbon/web-components/es/components/loading/index';
 ```
 
@@ -87,9 +87,9 @@ import '@carbon/web-components/es/components/loading/index';
         .withOverlay="${false}"
       ></cds-loading>
       <p>Exporting file...</p>
-      `: null} ${this.successful ? html` ${CheckmarkFilled16({slot: 'icon',})}
+      `: null} ${this.successful ? html` ${iconLoader(CheckmarkFilled16, {slot: 'icon',})}
       <p>The file has been exported.</p>
-      `: null} ${this.error ? html` ${ErrorFilled16({slot: 'icon',})}
+      `: null} ${this.error ? html` ${iconLoader(ErrorFilled16, {slot: 'icon',})}
       <p>Server error 500</p>
       `: null}
     </div>
@@ -164,9 +164,9 @@ Here's a quick example to get you started.
         .withOverlay="${false}"
       ></cds-loading>
       <p>Exporting file...</p>
-      `: null} ${this.successful ? html` ${CheckmarkFilled16({slot: 'icon',})}
+      `: null} ${this.successful ? html` ${iconLoader(CheckmarkFilled16, {slot: 'icon',})}
       <p>The file has been exported.</p>
-      `: null} ${this.error ? html` ${ErrorFilled16({slot: 'icon',})}
+      `: null} ${this.error ? html` ${iconLoader(ErrorFilled16, {slot: 'icon',})}
       <p>Server error 500</p>
       `: null}
     </div>

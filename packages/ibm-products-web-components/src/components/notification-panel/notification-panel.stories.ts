@@ -16,15 +16,16 @@ import { prefix, carbonPrefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/ui-shell/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
-import User20 from '@carbon/web-components/es/icons/user/20.js';
-import Notification20 from '@carbon/web-components/es/icons/notification/20.js';
 import { UnreadNotificationBell } from './_story-assets/unread-notification-bell';
-import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20.js';
+import User20 from '@carbon/icons/es/user/20.js';
+import Notification20 from '@carbon/icons/es/notification/20.js';
+import SwitcherIcon20 from '@carbon/icons/es/switcher/20.js';
 import {
   dataToday as initialDataToday,
   dataPrevious as initialDataPrevious,
   extraData,
 } from './_story-assets/NotificationsPanel_data';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 const blockClassNotification = `${prefix}--notifications-panel__notification`;
 const storyBlockClass = `${prefix}--notifications-panel__story`;
 const blockClass = `${prefix}--notifications-panel`;
@@ -194,7 +195,7 @@ const defaultTemplate = {
               setExpandUserPanel((prev) => !prev);
             }}
           >
-            ${User20({ slot: 'icon' })}
+            ${iconLoader(User20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-panel
             id="user-panel"
@@ -216,7 +217,7 @@ const defaultTemplate = {
           >
             ${isNewNotification
               ? UnreadNotificationBell({ slot: 'icon' })
-              : Notification20({ slot: 'icon' })}
+              : iconLoader(Notification20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
@@ -226,7 +227,7 @@ const defaultTemplate = {
               setExpandPanel((prev) => !prev);
             }}
           >
-            ${SwitcherIcon20({ slot: 'icon' })}
+            ${iconLoader(SwitcherIcon20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-panel
             id="switcher-panel"

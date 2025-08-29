@@ -7,8 +7,9 @@
 import { html } from 'lit';
 import styles from '../story-styles.scss?lit';
 import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs.js';
-import TrashCan16 from '@carbon/web-components/es/icons/trash-can/16';
-import Settings16 from '@carbon/web-components/es/icons/settings/16';
+import TrashCan16 from '@carbon/icons/es/trash-can/16';
+import Settings16 from '@carbon/icons/es/settings/16';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
 import '@carbon/web-components/es/components/notification/index.js';
 
@@ -107,7 +108,7 @@ export const getActionToolbarItems = (index) => {
           size="sm"
           tooltip-text="Settings"
         >
-          ${Settings16({ slot: 'icon' })}
+          ${iconLoader(Settings16, { slot: 'icon' })}
         </cds-button>
         <cds-button
           slot="action-toolbar"
@@ -117,7 +118,7 @@ export const getActionToolbarItems = (index) => {
           size="sm"
           tooltip-text="Delete"
         >
-          ${TrashCan16({ slot: 'icon' })}
+          ${iconLoader(TrashCan16, { slot: 'icon' })}
         </cds-button>
       `;
     default:

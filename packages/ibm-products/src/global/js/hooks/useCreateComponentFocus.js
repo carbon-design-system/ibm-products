@@ -36,9 +36,9 @@ export const useCreateComponentFocus = ({
       );
     };
 
-    const getActiveSteps = () => {
+    const getActiveStep = () => {
       const allSteps = Array.from(document.querySelectorAll(blockClass));
-      return allSteps.filter((el) => {
+      return allSteps.find((el) => {
         let currentStep = el;
         while (currentStep) {
           if (currentStep.hasAttribute('inert')) return false;
@@ -68,7 +68,7 @@ export const useCreateComponentFocus = ({
 
     if (previousState?.currentStep !== currentStep && currentStep > 0) {
       // GET THE CURRENT STEP ELEMENT
-      const activeStepElement = getActiveSteps()[0];
+      const activeStepElement = getActiveStep();
       if (activeStepElement && isNotContainedInInert(activeStepElement)) {
         const focusEl = getFocusableElement(activeStepElement);
         if (focusEl) {

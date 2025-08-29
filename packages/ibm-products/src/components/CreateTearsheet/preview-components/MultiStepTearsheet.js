@@ -10,12 +10,10 @@ import React, { useState } from 'react';
 import {
   Button,
   Column,
-  ContentSwitcher,
   Grid,
   InlineNotification,
   RadioButtonGroup,
   RadioButton,
-  Switch,
   TextInput,
   Toggle,
   NumberInput,

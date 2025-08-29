@@ -62,10 +62,10 @@
     "wc-coverage": "cd packages/ibm-products-web-components && yarn coverage"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.3",
-    "@babel/eslint-parser": "^7.28.0",
+    "@babel/core": "^7.26.10",
+    "@babel/eslint-parser": "^7.26.10",
     "@babel/plugin-transform-class-static-block": "^7.28.3",
-    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-react": "^7.26.3",
     "@carbon/grid": "^11.38.0",
     "@carbon/layout": "^11.36.0",
     "@carbon/motion": "^11.30.0",

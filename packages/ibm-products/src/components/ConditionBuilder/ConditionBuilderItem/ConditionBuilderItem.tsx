@@ -236,10 +236,16 @@ export const ConditionBuilderItem = ({
     }
   };
   const closePopover = () => {
-    if (open) {
-      manageInvalidSelection();
+    // this is a workaround fix added until carbon fixes https://github.com/carbon-design-system/carbon/issues/20386
+    const focusMovedToDatePicker = (event?.target as Element)?.closest(
+      '.flatpickr-calendar'
+    );
+    if (!focusMovedToDatePicker) {
+      if (open) {
+        manageInvalidSelection();
+      }
+      setOpen(false);
     }
-    setOpen(false);
   };
   const openPopOver = () => setOpen(true);
   const togglePopover = () => {

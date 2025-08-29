@@ -17,6 +17,7 @@ import { useTranslations } from '../../utils/useTranslations';
 import {
   ConditionGroup,
   option,
+  Property,
   statementConfig,
 } from '../../ConditionBuilder.types';
 import { blockClass, onKeyDownHandlerForSearch } from '../../utils/util';
@@ -26,7 +27,7 @@ interface ItemOptionProps {
     label?: string;
     value?: string;
   };
-  config: { options?: option[] | statementConfig[] } & {
+  config: { options?: option[] | statementConfig[] | Property[] } & {
     isStatement?: boolean;
   };
   onChange: (value: string, e: Event) => void;
@@ -76,7 +77,6 @@ export const ItemOption = ({
     if (!evt.currentTarget.hasAttribute('aria-disabled')) {
       onChange(option.id, evt);
     }
-    return;
   };
 
   const onSearchChangeHandler = (evt) => {
@@ -122,16 +122,15 @@ export const ItemOption = ({
         {filteredItems?.map((option) => {
           const isSelected = selection === option.id;
           const Icon = (option as option).icon;
-          let disabled, hidden;
-          if (
-            'isDisabled' in option &&
-            typeof option.isDisabled === 'function'
-          ) {
-            disabled = option.isDisabled({ conditionState, group });
-          }
-          if ('isHidden' in option && typeof option.isHidden === 'function') {
-            hidden = option.isHidden({ conditionState, group });
-          }
+          const disabled = (option as Property)?.getIsDisabled?.({
+            conditionState,
+            group,
+          });
+          const hidden = (option as Property)?.getIsHidden?.({
+            conditionState,
+            group,
+          });
+
           return (
             <li
               tabIndex={0}

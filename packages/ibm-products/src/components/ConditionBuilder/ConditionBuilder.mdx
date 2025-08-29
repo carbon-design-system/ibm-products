@@ -101,7 +101,7 @@ const statementConfigCustom = [
 
 Each property in the condition builder can be dynamically disabled or hidden
 while conditions are being built. For this, the property config supports
-isDisabled and isHidden callbacks. These functions are evaluated during
+getIsDisabled and getIsHidden callbacks. These functions are evaluated during
 rendering of each property option in the dropdown, and they receive the current
 condition and group state so they can decide whether the property should be
 available.
@@ -114,11 +114,11 @@ properties: [
       icon: Earth,
       type: 'option',
       description: 'Continent',
-      isDisabled: ({ conditionState, group }) => {
+      getIsDisabled: ({ conditionState, group }) => {
 
         return true or false;
       },
-       isHidden: ({ conditionState, group }) => {
+       getIsHidden: ({ conditionState, group }) => {
 
         return true or false;
       },

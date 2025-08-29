@@ -632,20 +632,11 @@ function modifyPropertiesWithoutCustomOperators(inputData) {
 
 const modifyPropertiesWithDisabledProps = (inputData) => {
   const newProperties = inputData.properties.map((property, index) => {
-    if (index === 1 || index === 3) {
-      return {
-        ...property,
-        isDisabled: () => true,
-      };
-    }
-    if (index === 2) {
-      return {
-        ...property,
-        isHidden: () => true,
-      };
-    }
-
-    return property;
+    return {
+      ...property,
+      getIsDisabled: () => index === 1 || index === 3,
+      getIsHidden: () => index === 2,
+    };
   });
 
   return { ...inputData, properties: newProperties };

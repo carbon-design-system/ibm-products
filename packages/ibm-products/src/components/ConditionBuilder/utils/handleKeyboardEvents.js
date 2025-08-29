@@ -12,7 +12,7 @@ import {
   focusThisItem,
   HIERARCHICAL_VARIANT,
   manageTabIndexAndFocus,
-  traverseClockVise,
+  traverseClockwise,
   traverseReverse,
 } from './util';
 
@@ -54,9 +54,9 @@ const excludeKeyPress = (evt) => {
 };
 
 const getVisibleOptions = (parentContainer) => {
-  return Array.from(parentContainer.querySelectorAll(`[role="option"]`))
-    .filter((el) => !el.hasAttribute('aria-disabled'))
-    .filter((el) => !el.hasAttribute('aria-hidden'));
+  return Array.from(parentContainer.querySelectorAll(`[role="option"]`)).filter(
+    (el) => !el.hasAttribute('aria-disabled') && !el.hasAttribute('aria-hidden')
+  );
 };
 
 const handleKeyPressForPopover = (
@@ -116,7 +116,7 @@ const handleKeyPressForPopover = (
         //traverse through the popover options, search box, selectAll button
         allItems = getVisibleOptions(parentContainer);
         allItems.forEach((eachElem, index, allElements) => {
-          traverseClockVise(
+          traverseClockwise(
             eachElem,
             index,
             allElements,
@@ -149,7 +149,7 @@ const handleKeyPressForPopover = (
               conditionBuilderRef
             );
           } else {
-            traverseClockVise(
+            traverseClockwise(
               eachElem,
               index,
               allElements,
@@ -372,7 +372,7 @@ const handleCellNavigation = (evt, conditionBuilderRef) => {
     .querySelectorAll(`[role="gridcell"] button`)
     .forEach((eachElem, index, allElements) => {
       if (evt.key === 'ArrowRight') {
-        traverseClockVise(
+        traverseClockwise(
           eachElem,
           index,
           allElements,

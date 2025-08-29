@@ -232,6 +232,7 @@ export type ConditionBuilderProps = {
   translateWithId?: (id: ConditionBuilderTextKeys) => string;
   statementConfigCustom: statementConfig[];
   onAddItem?: (config: AddItemConfig) => { preventAdd: boolean };
+  readOnly?: boolean;
 };
 
 export type InitialState = {
@@ -250,8 +251,8 @@ export interface ConditionBuilderContextInputProps extends PropsWithChildren {
   variant?: string;
   translateWithId?: (id: ConditionBuilderTextKeys) => string;
   statementConfigCustom?: statementConfig[];
-
   conditionBuilderRef?: ForwardedRef<HTMLDivElement>;
+  readOnly?: boolean;
 }
 
 export type ConditionBuilderContextProps = {

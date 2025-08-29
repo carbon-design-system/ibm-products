@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,6 +11,8 @@ import './_storybook-styles.scss';
 import mdx from './makeDraggable.mdx';
 import { Button, Popover, PopoverContent } from '@carbon/react';
 import { Close, Draggable } from '@carbon/react/icons';
+
+// Note: This story is referenced in Core Carbon. Please ensure that any alterations or removals are reflected in Core Carbon as well.
 
 export default {
   title: 'Utilities/makeDraggable',
@@ -28,17 +30,18 @@ const DraggableDiv = () => {
   const headerRef = useRef<HTMLDivElement | null>(null);
   const dragRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
-    if (dialogRef.current && headerRef.current && dragRef.current) {
-      makeDraggable({
-        el: dialogRef.current,
+    const dialogElement = dialogRef.current;
+    if (dialogElement && headerRef.current && dragRef.current) {
+      const draggable = makeDraggable({
+        el: dialogElement,
         dragHandle: headerRef.current,
         focusableDragHandle: dragRef.current,
       });
 
       const onDragStart = () => {
-        if (dialogRef.current) {
-          dialogRef.current.classList.add('is-dragging');
-          dialogRef.current.setAttribute(
+        if (dialogElement) {
+          dialogElement.classList.add('is-dragging');
+          dialogElement.setAttribute(
             'aria-label',
             'Picked up the draggable Dialog'
           );
@@ -46,17 +49,26 @@ const DraggableDiv = () => {
       };
 
       const onDragEnd = () => {
-        if (dialogRef.current) {
-          dialogRef.current.classList.remove('is-dragging');
-          dialogRef.current.setAttribute(
+        if (dialogElement) {
+          dialogElement.classList.remove('is-dragging');
+          dialogElement.setAttribute(
             'aria-label',
             'draggable Dialog was dropped'
           );
         }
       };
 
-      dialogRef.current.addEventListener('dragstart', onDragStart);
-      dialogRef.current.addEventListener('dragend', onDragEnd);
+      dialogElement.addEventListener('dragstart', onDragStart);
+      dialogElement.addEventListener('dragend', onDragEnd);
+
+      // Clean up attached event listeners
+      return () => {
+        if (dialogElement) {
+          dialogElement.removeEventListener('dragstart', onDragStart);
+          dialogElement.removeEventListener('dragend', onDragEnd);
+        }
+        draggable.cleanup(); // Call the cleanup function from makeDraggable
+      };
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dialogRef.current, headerRef.current, dragRef.current]);
@@ -105,7 +117,7 @@ const DraggablePopoverTemplate = () => {
         dragContainer.style.transform = 'none';
         dragContainer.style.left = '0px';
         dragContainer.style.top = '0px';
-        makeDraggable({
+        const draggable = makeDraggable({
           el: dragContainer,
           dragHandle: headerRef.current,
           focusableDragHandle: dragRef.current,
@@ -133,6 +145,13 @@ const DraggablePopoverTemplate = () => {
 
         dragContainer.addEventListener('dragstart', onDragStart);
         dragContainer.addEventListener('dragend', onDragEnd);
+
+        //Clean up attached event listeners
+        return () => {
+          dragContainer.removeEventListener('dragstart', onDragStart);
+          dragContainer.removeEventListener('dragend', onDragEnd);
+          draggable.cleanup(); // Call the cleanup function from makeDraggable
+        };
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

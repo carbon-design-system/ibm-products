@@ -1,3 +1,24 @@
+## `@carbon/ibm-products@2.73.1`
+### Bug fixes :bug:
+- fix: remove requiredIf props helpers (#8153)
+- fix: remove requiredIf props helpers
+
+## `@carbon/ibm-products@2.73.0`
+### Features :rocket:
+- feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)
+
+### Bug fixes :bug:
+- fix(EmptyState): Modified subtitle container to be a div (#7967)
+- fix: disable ability to submit form using the Enter key (#8019)
+- fix(sidepanel): blank space appears when the header has no content (#8029)
+- fix: add role prop to pageheader's breadcrumb overflow menu (#8017)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.6.0 (#8027)
+- fix(PageHeader): ensures expected positioning even if content component is excluded (#7946)
+
+### Housekeeping :house:
+- docs: add intro page for prebuilt patterns (#7958)
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
 ## `@carbon/ibm-products@2.72.0`
 ### Features :rocket:
 - feat(PageHeader): add new breadcrumb overflow utility sub-component (#7910)

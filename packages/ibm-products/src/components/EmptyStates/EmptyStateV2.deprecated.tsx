@@ -12,7 +12,7 @@ import { Button, Link } from '@carbon/react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
-import EmptyStateIllustration from './EmptyStateIllustration';
+import EmptyStateIllustration from './EmptyStateIllustration.deprecated';
 
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateV2';
@@ -153,13 +153,13 @@ export let EmptyStateV2 = React.forwardRef<HTMLDivElement, EmptyStateV2Props>(
             {title}
           </h3>
           {subtitle && (
-            <p
+            <div
               className={cx(`${blockClass}__subtitle`, {
                 [`${blockClass}__subtitle--small`]: size === 'sm',
               })}
             >
               {subtitle}
-            </p>
+            </div>
           )}
           {action && (
             <Button

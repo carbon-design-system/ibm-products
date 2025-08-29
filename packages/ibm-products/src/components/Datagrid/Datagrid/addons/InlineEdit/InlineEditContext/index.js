@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { InlineEditProvider, InlineEditContext } from './InlineEditContext';
+export { InlineEditProvider, InlineEditContext } from './InlineEditContext.jsx';

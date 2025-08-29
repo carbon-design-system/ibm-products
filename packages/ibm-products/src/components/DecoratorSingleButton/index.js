@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { DecoratorSingleButton } from './DecoratorSingleButton';
+export { DecoratorSingleButton } from './DecoratorSingleButton.jsx';

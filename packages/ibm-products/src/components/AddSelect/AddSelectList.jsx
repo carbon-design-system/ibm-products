@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { AddSelectRow } from './AddSelectRow';
+import { AddSelectRow } from './AddSelectRow.jsx';
 import useFocus from './hooks/useFocus';
 
 const blockClass = `${pkg.prefix}--add-select__selections`;

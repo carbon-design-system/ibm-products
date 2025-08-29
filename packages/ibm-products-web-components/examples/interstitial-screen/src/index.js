@@ -11,8 +11,6 @@ import '@carbon/ibm-products-web-components/es/components/interstitial-screen/in
 // The following are used for slotted fields
 import '@carbon/web-components/es/components/toggle/index.js';
 import '@carbon/web-components/es/components/tag/index.js';
-import Checkmark from '@carbon/web-components/es/icons/checkmark/16.js';
-import ArrowRight from '@carbon/web-components/es/icons/arrow--right/16.js';
 
 const toggleButton = document.getElementById('toggle-button');
 toggleButton.addEventListener('click', function () {

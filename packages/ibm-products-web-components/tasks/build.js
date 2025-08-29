@@ -187,13 +187,13 @@ async function postBuild() {
     // Replace "cds" with "cds-custom" in all files
     await Promise.all(
       files.map(async (file) => {
-        let content = await fs.promises.readFile(file, 'utf8');
-        content = content.replace(/cds/g, 'cds-custom');
-        content = content.replace(
+        const content = await fs.promises.readFile(file, 'utf8');
+        const updatedContent = content.replace(/(?<!--)cds/g, 'cds-custom');
+        const updatedContentWithImports = updatedContent.replace(
           /import\s+['"]@carbon\/web-components\/es\/components\/(.*?)['"]/g,
           "import '@carbon/web-components/es-custom/components/$1'"
         );
-        await fs.promises.writeFile(file, content);
+        await fs.promises.writeFile(file, updatedContentWithImports);
       })
     );
   }

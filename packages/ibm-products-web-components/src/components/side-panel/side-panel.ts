@@ -21,8 +21,9 @@ import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './defs';
 import styles from './side-panel.scss?lit';
 import { selectorTabbable } from '@carbon/web-components/es/globals/settings.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import ArrowLeft16 from '@carbon/web-components/es/icons/arrow--left/16';
-import Close16 from '@carbon/web-components/es/icons/close/16';
+import ArrowLeft16 from '@carbon/icons/es/arrow--left/16';
+import Close16 from '@carbon/icons/es/close/16';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import { moderate02 } from '@carbon/motion';
 import Handle from '../../globals/internal/handle';
 import '@carbon/web-components/es/components/button/index.js';
@@ -127,6 +128,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
   @state()
   _slugCloseSize = 'sm';
+
+  @state()
+  _customHeaderElements: Element[] = [];
 
   /**
    * Get focusable elements.
@@ -377,6 +381,17 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._hasSubtitle = subtitle.length > 0;
   }
 
+  private _handleCustomHeaderSlotChange(e: Event) {
+    const target = e.target as HTMLSlotElement;
+    const customHeaderElms = target?.assignedElements();
+    customHeaderElms.forEach((el) => {
+      if (el instanceof HTMLElement) {
+        el.style.opacity = `calc(1 - var(--${blockClass}--scroll-animation-progress))`;
+        this._customHeaderElements.push(el);
+      }
+    });
+  }
+
   private _handleActionToolbarChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const toolbarActions = target?.assignedElements();
@@ -498,12 +513,22 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   private _scrollObserver = () => {
     const scrollTop = this._animateScrollWrapper?.scrollTop ?? 0;
     const scrollAnimationDistance = this._getScrollAnimationDistance();
+    const animationProgress =
+      Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance;
+
     this?._sidePanel?.style?.setProperty(
       `--${blockClass}--scroll-animation-progress`,
-      `${
-        Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance
-      }`
+      `${animationProgress}`
     );
+    if (animationProgress === 1) {
+      this._customHeaderElements.forEach((el) => {
+        el.classList.add(`cds--visually-hidden`);
+      });
+    } else {
+      this._customHeaderElements.forEach((el) => {
+        el.classList.remove(`cds--visually-hidden`);
+      });
+    }
   };
 
   private _handleCurrentStepUpdate = () => {
@@ -712,12 +737,18 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
               class=${`${prefix}--btn ${blockClass}__navigation-back-button`}
               @click=${this._handleNavigateBack}
             >
-              ${ArrowLeft16({ slot: 'icon' })}
+              ${iconLoader(ArrowLeft16, { slot: 'icon' })}
               <span slot="tooltip-content">
                 ${navigationBackIconDescription}
               </span>
             </cds-icon-button>`
           : ''}
+
+        <!-- slot for custom header components -->
+        <slot
+          name="above-title"
+          @slotchange=${this._handleCustomHeaderSlotChange}
+        ></slot>
 
         <!-- render title label -->
         ${title?.length && labelText?.length
@@ -740,7 +771,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
                 class=${`${blockClass}__close-button`}
                 @click=${this._handleCloseClick}
               >
-                ${Close16({ slot: 'icon' })}
+                ${iconLoader(Close16, { slot: 'icon' })}
                 <span slot="tooltip-content"> ${closeIconDescription} </span>
               </cds-icon-button>`
             : ''}
@@ -759,6 +790,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             @slotchange=${this._handleSubtitleChange}
           ></slot>
         </p>
+
+        <!-- slot for custom header components -->
+        <slot
+          name="below-title"
+          @slotchange=${this._handleCustomHeaderSlotChange}
+        ></slot>
 
         <div
           class=${this._hasActionToolbar ? `${blockClass}__action-toolbar` : ''}

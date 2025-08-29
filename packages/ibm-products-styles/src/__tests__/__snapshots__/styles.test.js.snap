@@ -2777,10 +2777,10 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--side-panel.c4p--side-panel--condensed-actions {
   --c4p--side-panel--actions-height: 3rem;
 }
-.c4p--side-panel.c4p--side-panel--has-overlay {
+.c4p--side-panel:not(.c4p--side-panel--has-overlay) {
   box-shadow: 0 0.125rem 0.25rem var(--cds-overlay, rgba(22, 22, 22, 0.5));
 }
-.c4p--side-panel.c4p--side-panel--slide-in:not(.c4p--side-panel--has-overlay) {
+.c4p--side-panel.c4p--side-panel--slide-in, .c4p--side-panel.c4p--side-panel--slide-in:not(.c4p--side-panel--has-overlay) {
   box-shadow: none;
 }
 .c4p--side-panel .c4p--side-panel__actions-container {

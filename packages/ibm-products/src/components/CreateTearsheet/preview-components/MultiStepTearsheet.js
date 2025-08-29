@@ -212,29 +212,6 @@ export const MultiStepTearsheet = (
                 }
                 checked={shouldIncludeAdditionalStep}
               />
-              <div>
-                <ContentSwitcher
-                  onChange={({ name }) => {
-                    name === 'one' ? setSelIndex(0) : setSelIndex(1);
-                  }}
-                  selectedIndex={selIndex}
-                  selectionMode="automatic"
-                >
-                  <Switch name="one" text="First section" />
-                  <Switch name="two" text="Second section" />
-                </ContentSwitcher>
-                {selIndex === 0 ? (
-                  <>
-                    <p>first section</p>
-                    {/* <TextInput /> */}
-                  </>
-                ) : (
-                  <>
-                    <p>second section</p>
-                    {/* <TextInput /> */}
-                  </>
-                )}
-              </div>
             </Column>
           </Grid>
         </CreateTearsheetStep>

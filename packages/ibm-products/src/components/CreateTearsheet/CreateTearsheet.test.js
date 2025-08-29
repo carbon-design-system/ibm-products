@@ -270,7 +270,6 @@ describe(CreateTearsheet.displayName, () => {
     ));
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
-    // jest.useFakeTimers();
     renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);

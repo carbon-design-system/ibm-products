@@ -267,19 +267,15 @@ test.describe('Tearsheet @avt', () => {
 
     // Pressing 'Escape' key to close the third Tearsheet
     await page.keyboard.press('Escape');
-    // await page.waitForTimeout(100);
     await page.screenshot({ animations: 'disabled' });
 
     // Now 3rd Tearsheet is closed and 2nd Tearsheet is in the viewport
     await expect(ts2).toBeInViewport();
-
     // And the focus is switched to the open button of tearsheet 3
     await expect(openButton3).toBeFocused();
-    //await expect(openButton3).toBeFocused();
 
     // Pressing 'Escape' key to close the second Tearsheet
     await page.keyboard.press('Escape');
-    // await page.waitForTimeout(100);
     await page.screenshot({ animations: 'disabled' });
     // Now the 2nd Tearsheet is closed and 1st Tearsheet in the viewport
     await expect(ts1).toBeInViewport();

@@ -74,7 +74,6 @@ test.describe('CreateTearsheet @avt', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
 
     // Expect next button to be focused
     await expect(nextButton).toBeFocused();
@@ -186,7 +185,7 @@ test.describe('CreateTearsheet @avt', () => {
 
     await expect(errorToggle).toBeFocused();
     // Enable simulate error toggle
-    await page.keyboard.press('Enter');
+    await page.keyboard.press('Space');
 
     // Navigate to next button
     await page.keyboard.press('Tab');

@@ -19,6 +19,7 @@ import {
   inputData,
   inputDataDynamicOptions,
   inputDataForCustomOperator,
+  inputDataWithDisabledProperties,
 } from './assets/sampleInput';
 import {
   sampleDataStructure_nonHierarchical,
@@ -295,6 +296,15 @@ conditionBuilderWithCustomOperators.args = {
   },
   variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
+};
+
+export const conditionBuilderWithDisabledProperties =
+  ConditionBuilderTemplate.bind({});
+conditionBuilderWithDisabledProperties.storyName = 'With disabled properties';
+conditionBuilderWithDisabledProperties.args = {
+  inputConfig: inputDataWithDisabledProperties,
+
+  variant: NON_HIERARCHICAL_VARIANT,
 };
 
 export const conditionBuilderWithActions = ConditionBuilderTemplate.bind({});

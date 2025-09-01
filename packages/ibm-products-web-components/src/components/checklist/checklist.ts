@@ -9,16 +9,16 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
+import ChevronIcon16 from '@carbon/icons/es/chevron--up/16';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
-
-// import Edit16 from '@carbon/icons/lib/edit/16.js';
-import ChevronIcon16 from '@carbon/web-components/es/icons/chevron--up/16.js';
 
 import { prefix } from '../../globals/settings';
 import styles from './checklist.scss?lit';
-import { classMap } from 'lit/directives/class-map.js';
 import './checklist-chart';
+import './checklist-icon';
 
 const blockClass = `${prefix}--checklist`;
 
@@ -147,7 +147,10 @@ class CDSChecklist extends LitElement {
             class="${blockClass}__toggle"
             @click=${onToggle}
           >
-            ${ChevronIcon16({ slot: 'icon', class: `${blockClass}__chevron` })}
+            ${iconLoader(ChevronIcon16, {
+              slot: 'icon',
+              class: `${blockClass}__chevron`,
+            })}
             <span slot="tooltip-content">${toggleLabel}</span>
           </cds-icon-button>`}
         </header>

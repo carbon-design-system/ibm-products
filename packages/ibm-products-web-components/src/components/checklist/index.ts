@@ -9,4 +9,6 @@
 
 import './checklist-group';
 import './checklist-item';
+import './checklist-chart';
+import './checklist-icon';
 import './checklist';

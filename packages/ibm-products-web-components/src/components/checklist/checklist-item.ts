@@ -26,13 +26,21 @@ class CDSChecklistItem extends LitElement {
   @property()
   label = '';
 
+  /**
+   * status of the c4p-checklist-item
+   */
+  @property()
+  status = '';
+
   render() {
-    const { label } = this;
+    const { label, status } = this;
 
     return html`
       <li class="${prefix}--checklist__list-item">
         <slot>
-          <slot name="icon"> </slot>
+          <slot name="icon">
+            <c4p-checklist-icon status="${status}" /> </c4p-checklist-icon
+          ></slot>
           <div class="${prefix}--checklist__label" title=${label}>${label}</div>
         </slot>
       </li>

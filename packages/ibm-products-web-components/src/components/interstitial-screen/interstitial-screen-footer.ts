@@ -18,7 +18,8 @@ import { interstitialDetailsSignal } from './interstitial-screen-context';
 import { SignalWatcher } from '@lit-labs/signals';
 import '@carbon/web-components/es/components/inline-loading/inline-loading.js';
 import { CDSModalFooter } from '@carbon/web-components/es/index.js';
-import ArrowRight from '@carbon/web-components/es/icons/arrow--right/16.js';
+import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--interstitial-screen`;
@@ -246,7 +247,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                   ${this.loadingAction === 'next'
                     ? html` <cds-inline-loading slot="icon" aria-live="off">
                       </cds-inline-loading>`
-                    : html` ${ArrowRight({ slot: 'icon' })}`}
+                    : html`${iconLoader(ArrowRight, { slot: 'icon' })}`}
                 </cds-button>
               `
             : nothing}

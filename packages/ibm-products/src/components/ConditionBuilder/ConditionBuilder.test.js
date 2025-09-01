@@ -1907,6 +1907,37 @@ describe(componentName, () => {
     expect(groupConnector).toHaveLength(1);
   });
 
+  it('check read only state', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        readOnly={true}
+        inputConfig={inputData}
+        initialState={{ state: sampleDataStructure_nonHierarchical }}
+      />
+    );
+
+    expect(
+      document.querySelector(`.${blockClass}__close-condition`)
+    ).not.toBeInTheDocument();
+    expect(
+      document.querySelector(`.${blockClass}__add-button`)
+    ).not.toBeInTheDocument();
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(
+      screen.queryByRole('option', { name: 'Continent' })
+    ).not.toBeInTheDocument();
+
+    const continent = screen.getByRole('button', { name: 'Continent' });
+    await act(() => userEvent.click(continent));
+
+    expect(
+      screen.queryByRole('option', { name: 'Continent' })
+    ).not.toBeInTheDocument();
+  });
+
   // keyboard navigation tests
   //for Non-Hierarchical variant
   it('add and remove conditions using keyboard', async () => {

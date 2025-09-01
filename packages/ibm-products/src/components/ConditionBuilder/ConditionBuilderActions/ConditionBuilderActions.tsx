@@ -159,7 +159,7 @@ const ConditionBuilderActions = ({
         {actionState.length === 0 && (
           <ConditionBuilderAdd
             onClick={addActionHandler}
-            className={`${blockClass}__gap ${blockClass}__gap-left ${blockClass}__add-action-button`}
+            className={`${blockClass}__gap ${blockClass}__gap-left`}
             buttonLabel={addActionText}
             tabIndex={0}
           />

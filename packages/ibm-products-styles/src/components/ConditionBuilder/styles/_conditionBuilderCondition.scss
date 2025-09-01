@@ -93,7 +93,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   .#{$block-class}__condition-inner-block,
   .#{$block-class}__connector,
   .#{$block-class}__action-block,
-  .#{$block-class}__add-action-button,
+  .#{$block-class}__add-condition-wrapper,
   .#{$block-class}__groupConnector {
     background: transparent;
     box-shadow: inset 0 0 0 1px $border-subtle-00;

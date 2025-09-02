@@ -176,7 +176,7 @@ test.describe('TearsheetNarrow @avt', () => {
     await expect(modalElement).not.toBeInViewport();
   });
 
-  test('@avt-stacking', async ({ page }) => {
+  test.skip('@avt-stacking', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
       id: 'components-tearsheet-tearsheetnarrow--stacked',

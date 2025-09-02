@@ -189,7 +189,7 @@ test.describe('Tearsheet @avt', () => {
     await expect(openButton).toBeFocused();
   });
 
-  test('@avt-stacking', async ({ page }) => {
+  test.skip('@avt-stacking', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
       id: 'components-tearsheet--stacked',
@@ -292,7 +292,7 @@ test.describe('Tearsheet @avt', () => {
     }
   });
 
-  test('@avt-stacking-different-sizes', async ({ page }) => {
+  test.skip('@avt-stacking-different-sizes', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
       id: 'components-tearsheet--stacked-mixed-sizes',

@@ -116,7 +116,11 @@ const parameters = {
       },
     ],
   },
-  controls: { expanded: true, hideNoControlsWarning: true },
+  controls: {
+    expanded: true,
+    hideNoControlsWarning: true,
+    sort: 'alpha',
+  },
   layout: 'centered',
   options: {
     showPanel: true,
@@ -124,7 +128,7 @@ const parameters = {
       method: 'alphabetical',
       order: [
         'Overview',
-        ['Welcome', 'Getting started', 'Examples', '*'],
+        ['Welcome', 'Examples', '*'],
         'Components',
         'Patterns',
         ['*', 'Prebuilt patterns'],

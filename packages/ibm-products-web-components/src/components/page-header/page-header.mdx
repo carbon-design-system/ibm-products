@@ -28,32 +28,40 @@ import '@carbon/web-components/es/components/button/index.js';
 
 ## Overview
 
-The `c4p-page-header` is a large family of components, composed of three zones; the Breadcrumb, Content, and Tabs.
+The `c4p-page-header` is a large family of components, composed of three zones;
+the Breadcrumb, Content, and Tabs.
 
-<Canvas className='page-header--docs-demo' of={PageHeaderStories.Default} />
+<Canvas className="page-header--docs-demo" of={PageHeaderStories.Default} />
 
 ## Breadcrumb
 
-The `c4p-page-header-breadcrumb` component is used to render the breadcrumb navigation area within the Page header.
-It accepts `cds-breadcrumb` and `cds-breadcrumb-item` components as children to define the breadcrumb trail. Additionally, it has
-`content-actions` and` page-actions` slots, allowing for actions, such as `cds-button` or `cds-icon-button` — alongside
-the breadcrumb content.
+The `c4p-page-header-breadcrumb` component is used to render the breadcrumb
+navigation area within the Page header. It accepts `cds-breadcrumb` and
+`cds-breadcrumb-item` components as children to define the breadcrumb trail.
+Additionally, it has `content-actions` and` page-actions` slots, allowing for
+actions, such as `cds-button` or `cds-icon-button` — alongside the breadcrumb
+content.
 
 ## Content
 
-<Canvas className='page-header--docs-demo' of={PageHeaderStories.ContentWithContextualActionsAndPageActions} />
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.ContentWithContextualActionsAndPageActions}
+/>
 
-The `c4p-page-header-content` component defines the primary content area of the Page header, including the title, subtitle, and
-any supporting text or contextual actions. It accepts a `title` attribute to display the main heading and has an `icon` slot
-to show an icon adjacent to the title. Child components such as `c4p-page-header-content-text` can be used to provide additional descriptive text.
-To support use cases such as tags, `contextual-actions` slot can be to render components beside the content.
-`page-actions` slot allows integration of action buttons aligned with the content section.
+The `c4p-page-header-content` component defines the primary content area of the
+Page header, including the title, subtitle, and any supporting text or
+contextual actions. It accepts a `title` attribute to display the main heading
+and has an `icon` slot to show an icon adjacent to the title. Child components
+such as `c4p-page-header-content-text` can be used to provide additional
+descriptive text. To support use cases such as tags, `contextual-actions` slot
+can be to render components beside the content. `page-actions` slot allows
+integration of action buttons aligned with the content section.
 
 ```html
 <c4p-page-header>
   <c4p-page-header-breadcrumb>...</c4p-page-header-breadcrumb>
-  <c4p-page-header-content
-    title="Title">
+  <c4p-page-header-content title="Title">
     <div slot="contextual-actions">
       <cds-tag type="blue" size="lg">Tag</cds-tag>
     </div>
@@ -71,10 +79,14 @@ To support use cases such as tags, `contextual-actions` slot can be to render co
 
 ### Content With Hero Image
 
-<Canvas className='page-header--docs-demo' of={PageHeaderStories.ContentWithHeroImage} />
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.ContentWithHeroImage}
+/>
 
-When including a hero image within the Page header, the Carbon Grid classes will need to be utilized. In addition,
-the `withinGrid` attribute has to be set in the `c4p-page-header-content` and `c4p-page-header-breadcrumb` components.
+When including a hero image within the Page header, the Carbon Grid classes will
+need to be utilized. In addition, the `withinGrid` attribute has to be set in
+the `c4p-page-header-content` and `c4p-page-header-breadcrumb` components.
 
 ```css
 @use '@carbon/grid';
@@ -121,21 +133,18 @@ the `withinGrid` attribute has to be set in the `c4p-page-header-content` and `c
 
 ## Tabs
 
-To render the Tabs zone, utilize the `c4p-page-header-tabs` component, passing in the `cds-tabs` and `cds-tab` components
-as within its `tabs` slot. Then set up the corresponding tab panel elements outside of `c4p-page-header`.
+To render the Tabs zone, utilize the `c4p-page-header-tabs` component, passing
+in the `cds-tabs` and `cds-tab` components as within its `tabs` slot. Then set
+up the corresponding tab panel elements outside of `c4p-page-header`.
 
 ```html
 <c4p-page-header>
   <c4p-page-header-breadcrumb>...</c4p-page-header-breadcrumb>
-  <c4p-page-header-content>
-    ...
-  </c4p-page-header-content>
+  <c4p-page-header-content> ... </c4p-page-header-content>
   <c4p-page-header-tabs>
     <cds-tabs slot="tabs" value="tab-1">
-      <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
-        >Tab 1</cds-tab>
-      <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
-        >Tab 2</cds-tab>
+      <cds-tab id="tab-1" target="tab-panel-1" value="tab-1">Tab 1</cds-tab>
+      <cds-tab id="tab-2" target="tab-panel-2" value="tab-2">Tab 2</cds-tab>
     </cds-tabs>
   </c4p-page-header-tabs>
 </c4p-page-header>
@@ -149,20 +158,21 @@ as within its `tabs` slot. Then set up the corresponding tab panel elements outs
 
 ### Tabs With Tags
 
-<Canvas className='page-header--docs-demo' of={PageHeaderStories.TabBarWithTabsAndTags} />
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.TabBarWithTabsAndTags}
+/>
 
 The `c4p-page-header-tabs` component has a `tags` slot for tag components.
 
 ```html
 <c4p-page-header>
   <c4p-page-header-breadcrumb>...</c4p-page-header-breadcrumb>
-  <c4p-page-header-content>
-    ...
-  </c4p-page-header-content>
+  <c4p-page-header-content> ... </c4p-page-header-content>
   <c4p-page-header-tabs>
     ...
-    <div slot='tags'>
-      <cds-tag type='blue' size='md'>Tag</cds-tag>
+    <div slot="tags">
+      <cds-tag type="blue" size="md">Tag</cds-tag>
     </div>
   </c4p-page-header-tabs>
 </c4p-page-header>

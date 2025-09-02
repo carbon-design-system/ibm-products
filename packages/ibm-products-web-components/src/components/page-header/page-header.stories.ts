@@ -19,12 +19,13 @@ import image1 from './_story-assets/2x1.jpg';
 import image2 from './_story-assets/3x2.jpg';
 import styles from './_story-assets/_storybook-styles.scss?lit';
 import { breakpoints } from '@carbon/layout';
-import Add16 from '@carbon/web-components/es/icons/add/16.js';
-import Bee32 from '@carbon/web-components/es/icons/bee/32.js';
-import Bee16 from '@carbon/web-components/es/icons/bee/16.js';
-import Activity16 from '@carbon/web-components/es/icons/activity/16.js';
-import AiGenerate16 from '@carbon/web-components/es/icons/ai-generate/16.js';
-import CloudFoundry16 from '@carbon/web-components/es/icons/cloud-foundry--1/16.js';
+import Add16 from '@carbon/icons/es/add/16.js';
+import Bee32 from '@carbon/icons/es/bee/32.js';
+import Bee16 from '@carbon/icons/es/bee/16.js';
+import Activity16 from '@carbon/icons/es/activity/16.js';
+import AiGenerate16 from '@carbon/icons/es/ai-generate/16.js';
+import CloudFoundry16 from '@carbon/icons/es/cloud-foundry--1/16.js';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import './_story-assets/set-of-tags';
 import './_story-assets/set-of-breadcrumbs';
 import { generateTags } from './_story-assets/set-of-tags/utils';
@@ -93,7 +94,9 @@ export const Default = {
             ?page-actions-flush="${pageActionsFlush}"
             ?content-actions-flush="${contentActionsFlush}"
           >
-            ${renderBreadcrumbIcon ? Bee16({ slot: 'icon' }) : undefined}
+            ${renderBreadcrumbIcon
+              ? iconLoader(Bee16, { slot: 'icon' })
+              : undefined}
             <cds-breadcrumb>
               <cds-breadcrumb-item>
                 <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -103,7 +106,10 @@ export const Default = {
               </cds-breadcrumb-item>
             </cds-breadcrumb>
             <div slot="content-actions">
-              <cds-button size="md">Button</cds-button>
+              <cds-button size="md"
+                >Primary action
+                ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+              >
             </div>
             <cds-icon-button
               slot="page-actions"
@@ -111,7 +117,7 @@ export const Default = {
               size="md"
               align="bottom"
             >
-              ${Activity16({ slot: 'icon' })}
+              ${iconLoader(Activity16, { slot: 'icon' })}
               <span slot="tooltip-content">action 1</span>
             </cds-icon-button>
             <cds-icon-button
@@ -120,7 +126,7 @@ export const Default = {
               size="md"
               align="bottom"
             >
-              ${AiGenerate16({ slot: 'icon' })}
+              ${iconLoader(AiGenerate16, { slot: 'icon' })}
               <span slot="tooltip-content">action 2</span>
             </cds-icon-button>
             <cds-icon-button
@@ -129,7 +135,7 @@ export const Default = {
               size="md"
               align="bottom"
             >
-              ${CloudFoundry16({ slot: 'icon' })}
+              ${iconLoader(CloudFoundry16, { slot: 'icon' })}
               <span slot="tooltip-content">action 3</span>
             </cds-icon-button>
           </c4p-page-header-breadcrumb>
@@ -141,6 +147,12 @@ export const Default = {
               ship faster, scale efficiently, and stay in control every step of
               the way.
             </c4p-page-header-content-text>
+            <div slot="page-actions">
+              <cds-button size="md"
+                >Primary action
+                ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+              >
+            </div>
           </c4p-page-header-content>
           <c4p-page-header-tabs>
             <c4p-page-header-scroller slot="scroller">
@@ -211,7 +223,7 @@ export const ContentWithContextualActions = {
       <main>
         <c4p-page-header>
           <c4p-page-header-breadcrumb>
-            ${Bee16({ slot: 'icon' })}
+            ${iconLoader(Bee16, { slot: 'icon' })}
             <cds-breadcrumb>
               <cds-breadcrumb-item>
                 <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -226,7 +238,7 @@ export const ContentWithContextualActions = {
               size="md"
               align="bottom"
             >
-              ${Activity16({ slot: 'icon' })}
+              ${iconLoader(Activity16, { slot: 'icon' })}
               <span slot="tooltip-content">action 1</span>
             </cds-icon-button>
             <cds-icon-button
@@ -235,7 +247,7 @@ export const ContentWithContextualActions = {
               size="md"
               align="bottom"
             >
-              ${AiGenerate16({ slot: 'icon' })}
+              ${iconLoader(AiGenerate16, { slot: 'icon' })}
               <span slot="tooltip-content">action 2</span>
             </cds-icon-button>
             <cds-icon-button
@@ -244,7 +256,7 @@ export const ContentWithContextualActions = {
               size="md"
               align="bottom"
             >
-              ${CloudFoundry16({ slot: 'icon' })}
+              ${iconLoader(CloudFoundry16, { slot: 'icon' })}
               <span slot="tooltip-content">action 3</span>
             </cds-icon-button>
           </c4p-page-header-breadcrumb>
@@ -279,7 +291,7 @@ export const ContentWithContextualActionsAndPageActions = {
     <main>
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
-          ${Bee16({ slot: 'icon' })}
+          ${iconLoader(Bee16, { slot: 'icon' })}
           <cds-breadcrumb>
             <cds-breadcrumb-item>
               <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -294,7 +306,7 @@ export const ContentWithContextualActionsAndPageActions = {
             size="md"
             align="bottom"
           >
-            ${Activity16({ slot: 'icon' })}
+            ${iconLoader(Activity16, { slot: 'icon' })}
             <span slot="tooltip-content">action 1</span>
           </cds-icon-button>
           <cds-icon-button
@@ -303,7 +315,7 @@ export const ContentWithContextualActionsAndPageActions = {
             size="md"
             align="bottom"
           >
-            ${AiGenerate16({ slot: 'icon' })}
+            ${iconLoader(AiGenerate16, { slot: 'icon' })}
             <span slot="tooltip-content">action 2</span>
           </cds-icon-button>
           <cds-icon-button
@@ -312,7 +324,7 @@ export const ContentWithContextualActionsAndPageActions = {
             size="md"
             align="bottom"
           >
-            ${CloudFoundry16({ slot: 'icon' })}
+            ${iconLoader(CloudFoundry16, { slot: 'icon' })}
             <span slot="tooltip-content">action 3</span>
           </cds-icon-button>
         </c4p-page-header-breadcrumb>
@@ -324,7 +336,7 @@ export const ContentWithContextualActionsAndPageActions = {
           </div>
           <div slot="page-actions">
             <cds-button size="md"
-              >Primary action ${Add16({ slot: 'icon' })}</cds-button
+              >Primary action ${iconLoader(Add16, { slot: 'icon' })}</cds-button
             >
           </div>
           <c4p-page-header-content-text subtitle="Subtitle">
@@ -356,7 +368,7 @@ export const ContentWithHeroImage = {
       <div class="cds--css-grid">
         <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
           <c4p-page-header-breadcrumb border=${false} within-grid>
-        ${Bee16({ slot: 'icon' })}
+        ${iconLoader(Bee16, { slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>
             <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -414,7 +426,7 @@ export const ContentWithIcon = {
     <main>
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
-          ${Bee16({ slot: 'icon' })}
+          ${iconLoader(Bee16, { slot: 'icon' })}
           <cds-breadcrumb>
             <cds-breadcrumb-item>
               <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
@@ -429,7 +441,7 @@ export const ContentWithIcon = {
             size="md"
             align="bottom"
           >
-            ${Activity16({ slot: 'icon' })}
+            ${iconLoader(Activity16, { slot: 'icon' })}
             <span slot="tooltip-content">action 1</span>
           </cds-icon-button>
           <cds-icon-button
@@ -438,7 +450,7 @@ export const ContentWithIcon = {
             size="md"
             align="bottom"
           >
-            ${AiGenerate16({ slot: 'icon' })}
+            ${iconLoader(AiGenerate16, { slot: 'icon' })}
             <span slot="tooltip-content">action 2</span>
           </cds-icon-button>
           <cds-icon-button
@@ -447,14 +459,14 @@ export const ContentWithIcon = {
             size="md"
             align="bottom"
           >
-            ${CloudFoundry16({ slot: 'icon' })}
+            ${iconLoader(CloudFoundry16, { slot: 'icon' })}
             <span slot="tooltip-content">action 3</span>
           </cds-icon-button>
         </c4p-page-header-breadcrumb>
         <c4p-page-header-content
           title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
         >
-          ${Bee32({ slot: 'icon' })}
+          ${iconLoader(Bee32, { slot: 'icon' })}
           <c4p-page-header-content-text subtitle="Subtitle">
             Built for modern teams, our technology platform simplifies
             complexity with powerful APIs, real-time collaboration tools, and
@@ -503,7 +515,7 @@ export const TabBarWithTabsAndTags = {
     <main>
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
-          ${Bee16({ slot: 'icon' })}
+          ${iconLoader(Bee16, { slot: 'icon' })}
           <set-of-breadcrumbs
             .breadcrumbsData="${sampleBreadcrumbs}"
           ></set-of-breadcrumbs>
@@ -513,7 +525,7 @@ export const TabBarWithTabsAndTags = {
             size="md"
             align="bottom"
           >
-            ${Activity16({ slot: 'icon' })}
+            ${iconLoader(Activity16, { slot: 'icon' })}
             <span slot="tooltip-content">action 1</span>
           </cds-icon-button>
           <cds-icon-button
@@ -522,7 +534,7 @@ export const TabBarWithTabsAndTags = {
             size="md"
             align="bottom"
           >
-            ${AiGenerate16({ slot: 'icon' })}
+            ${iconLoader(AiGenerate16, { slot: 'icon' })}
             <span slot="tooltip-content">action 2</span>
           </cds-icon-button>
           <cds-icon-button
@@ -531,7 +543,7 @@ export const TabBarWithTabsAndTags = {
             size="md"
             align="bottom"
           >
-            ${CloudFoundry16({ slot: 'icon' })}
+            ${iconLoader(CloudFoundry16, { slot: 'icon' })}
             <span slot="tooltip-content">action 3</span>
           </cds-icon-button>
         </c4p-page-header-breadcrumb>

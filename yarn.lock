@@ -1829,15 +1829,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon-labs/wc-empty-state@npm:^0.5.0":
-  version: 0.5.0
-  resolution: "@carbon-labs/wc-empty-state@npm:0.5.0"
+"@carbon-labs/wc-empty-state@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@carbon-labs/wc-empty-state@npm:0.7.0"
   dependencies:
     "@babel/runtime": "npm:^7.23.2"
     "@carbon-labs/utilities": "npm:0.14.0"
     "@carbon/web-components": "npm:2.36.0"
     uuid: "npm:^9.0.1"
-  checksum: 10/8b9e3150919656a4671bf2a03c8bc476adc2aa67bf84022dca1b022be4f5dcc6a1be6d7e510dc84ccb16c20b3144a29c1ae7b04c57a6f56591eca9f54a793dd6
+  checksum: 10/23aeb550a183abaa4ba5a31a29134e8cb8a7b114a084d48eb6ed6d2f4f834436d06e1e0e84143c4028754e2d3a0038c89e4d35c2d46cf58c0fb27d2863e903d5
   languageName: node
   linkType: hard
 
@@ -1974,7 +1974,7 @@ __metadata:
   resolution: "@carbon/ibm-products-web-components@workspace:packages/ibm-products-web-components"
   dependencies:
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
-    "@carbon-labs/wc-empty-state": "npm:^0.5.0"
+    "@carbon-labs/wc-empty-state": "npm:^0.7.0"
     "@carbon/ibm-products-styles": "npm:^2.69.0"
     "@carbon/icon-helpers": "npm:^10.61.0"
     "@carbon/icons": "npm:^11.62.0"

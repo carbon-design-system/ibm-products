@@ -1013,7 +1013,7 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
             }`
           )}
         >
-          {children}
+          <Layer>{children}</Layer>
         </div>
       );
     };
@@ -1039,32 +1039,30 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
           onAnimationStart={onAnimationStart}
           onKeyDown={handleKeyDown}
         >
-          <Layer>
-            {!slideIn && enableResizer && window.innerWidth > 768 && (
-              <Resizer
-                className={`${blockClass}__resizer`}
-                orientation="vertical"
-                aria-valuemin={getPanelWidthPercent(SIDE_PANEL_SIZES['xs'])}
-                aria-valuemax={75}
-                aria-valuenow={getPanelWidthPercent()}
-                onResize={onResize}
-                onResizeEnd={onResizeEnd}
-                onDoubleClick={onDoubleClick}
-              />
-            )}
-            {/* header */}
-            {renderHeader()}
-
-            {/* main */}
-            {renderMain()}
-
-            {/* footer */}
-            <ActionSet
-              actions={actions ?? []}
-              className={primaryActionContainerClassNames}
-              size={size === 'xs' ? 'sm' : size}
+          {!slideIn && enableResizer && window.innerWidth > 768 && (
+            <Resizer
+              className={`${blockClass}__resizer`}
+              orientation="vertical"
+              aria-valuemin={getPanelWidthPercent(SIDE_PANEL_SIZES['xs'])}
+              aria-valuemax={75}
+              aria-valuenow={getPanelWidthPercent()}
+              onResize={onResize}
+              onResizeEnd={onResizeEnd}
+              onDoubleClick={onDoubleClick}
             />
-          </Layer>
+          )}
+          {/* header */}
+          {renderHeader()}
+
+          {/* main */}
+          {renderMain()}
+
+          {/* footer */}
+          <ActionSet
+            actions={actions ?? []}
+            className={primaryActionContainerClassNames}
+            size={size === 'xs' ? 'sm' : size}
+          />
         </Section>
         {includeOverlay && (
           <div

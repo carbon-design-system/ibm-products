@@ -77,6 +77,9 @@ jobs:
       - name: Install browsers
         run: yarn playwright install --with-deps
 
+      - name: Continuous integration check (includes build)
+        run: yarn ci-check
+
       - name: Run storybook
         id: storybook
         run: |
@@ -98,9 +101,6 @@ jobs:
         with:
           name: playwright-avt-report
           path: .playwright
-
-      - name: Continuous integration check (includes build)
-        run: yarn ci-check
 
       - name: Set NPM token
         run: |

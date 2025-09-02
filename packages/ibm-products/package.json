@@ -119,7 +119,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@ibm/telemetry-js": "^1.9.1",
     "react-table": "^7.8.0",
-    "react-window": "^1.8.11"
+    "react-window": "^2.0.0"
   },
   "peerDependencies": {
     "@carbon/grid": "^11.38.0",

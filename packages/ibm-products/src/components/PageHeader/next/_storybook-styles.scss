@@ -18,8 +18,12 @@
   height: 200vh;
 }
 
-.page-header--docs-demo .docs-story div:first-child {
+.page-header--docs-demo .docs-story > div:first-child {
   padding: 0;
+}
+
+.page-header--docs-demo .docs-story > div > div:first-child {
+  inline-size: 100%;
 }
 
 .page-header--docs-demo .innerZoomElementWrapper > * {

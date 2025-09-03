@@ -1,3 +1,7 @@
+## `@carbon/storybook-addon-theme@2.23.0-rc.0`
+### Bug fixes :bug:
+- fix: update format script (#8107)
+
 ## `@carbon/storybook-addon-theme@2.20.0`
 ### Housekeeping :house:
 - chore: remove redundant upgrade scripts (#7774)

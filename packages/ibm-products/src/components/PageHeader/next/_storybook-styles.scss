@@ -7,6 +7,9 @@
 
 @use '@carbon/react/scss/spacing';
 @use '@carbon/styles/scss/theme';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--page-header;
 
 .page-header-story-wrapper {
   margin-block-start: spacing.$spacing-09;
@@ -51,5 +54,16 @@
 
 .breadcrumb-bar-action-button {
   align-items: center;
+  block-size: 40px;
+}
+
+// Fixes style issues in storybook docs page
+.page-header--docs-demo
+  .#{$block-class}__breadcrumb-bar
+  .#{c4p-settings.$carbon-prefix}--css-grid
+  .#{c4p-settings.$carbon-prefix}--css-grid-column,
+.page-header--docs-demo
+  .#{$block-class}__breadcrumb-bar
+  .#{$block-class}__breadcrumb__actions {
   block-size: 40px;
 }

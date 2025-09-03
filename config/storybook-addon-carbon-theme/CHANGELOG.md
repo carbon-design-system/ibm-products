@@ -1,4 +1,4 @@
-## `@carbon/storybook-addon-theme@2.23.0-rc.0`
+## `@carbon/storybook-addon-theme@2.23.0`
 ### Bug fixes :bug:
 - fix: update format script (#8107)
 

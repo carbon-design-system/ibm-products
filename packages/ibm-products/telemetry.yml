@@ -295,6 +295,7 @@ collect:
         - productive
         - radio
         - reactTableFiltersState
+        - readOnly
         - readOnlyTable
         - renderIcon
         - renderMedia
@@ -537,7 +538,6 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
-        - defaultOpen
         - floating
         - isOpenByDefault
         - overlayClassName

@@ -10,7 +10,7 @@
 @use '@carbon/styles/scss/theme' as theme;
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/type';
-@use './carousel/index' as carousel;
+@use '../../global/js/utils/carousel/index' as carousel;
 
 @include carousel.carousel;
 
@@ -62,19 +62,19 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark__next;
 
   .nextButton {
     position: absolute;
-    inset-inline-start: c4p-settings.$spacing-07;
+    inset-inline-start: $spacing-07;
   }
 
   .prevButton {
     position: absolute;
-    inset-inline-start: c4p-settings.$spacing-07;
+    inset-inline-start: $spacing-07;
   }
 }
 
 .cds--content-switcher {
   inline-size: 20rem;
-  margin-block: c4p-settings.$spacing-09;
-  margin-inline: c4p-settings.$spacing-07;
+  margin-block: $spacing-09;
+  margin-inline: $spacing-07;
 }
 
 .carouselControlWrapper__footer {

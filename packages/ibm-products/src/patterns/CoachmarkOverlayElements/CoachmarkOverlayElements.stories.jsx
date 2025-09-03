@@ -11,7 +11,10 @@ import styles from './_storybook-styles.scss?inline';
 import DocsPage from './CoachmarkOverlayElements.mdx';
 import { Coachmark } from '../../components/Coachmark/next/Coachmark';
 import { CoachmarkBeacon } from '../../components/Coachmark/next/Coachmark/CoachmarkBeacon';
-import { initCarousel, InitCarousel } from './carousel/carousel';
+import {
+  initCarousel,
+  InitCarousel,
+} from '../../global/js/utils/carousel/carousel';
 import sampleImage from './assets/sample-image.png';
 
 export default {

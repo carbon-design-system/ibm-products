@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.70.0-rc.0`
+## `@carbon/ibm-products-styles@2.70.0`
 ### Features :rocket:
 - feat(conditionbuilder): option to disable specific property dynamically (#8105)
 - feat: condition builder read only state (#8125)

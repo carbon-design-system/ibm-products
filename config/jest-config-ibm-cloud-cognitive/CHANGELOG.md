@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.33.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.33.0`
 ### Bug fixes :bug:
 - fix: init deprecated extension for codecov (#8039)
 

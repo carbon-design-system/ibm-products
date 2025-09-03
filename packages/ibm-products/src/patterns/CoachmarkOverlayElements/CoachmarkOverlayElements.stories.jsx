@@ -121,7 +121,6 @@ const CoachmarkOverlayElements = (args) => {
   };
 
   const handleViewStackUpdate = useCallback(({ currentIndex, lastIndex }) => {
-    console.log(currentIndex, lastIndex);
 
     setCurrentViewIndex(currentIndex);
     setLastViewIndex(lastIndex);

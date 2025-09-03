@@ -1,3 +1,28 @@
+## `@carbon/ibm-products@2.74.0`
+### Features :rocket:
+- feat(conditionbuilder): option to disable specific property dynamically (#8105)
+- feat: condition builder read only state (#8125)
+- feat(stepflows): introduce new step utility (#8020)
+
+### Bug fixes :bug:
+- fix: enableSidepanelResizer undefined issue (#8143)
+- fix: init deprecated extension for codecov (#8039)
+- fix(CoachmarkBubble): usage of ref (#8114)
+- fix: replace StringFormatter with TruncatedText (#7968)
+- fix(makeDraggable): improve accessibility (#8090)
+- fix(coachmark): resolved circular dependency (#8104)
+- fix: update format script (#8107)
+- fix(coachmark): add closeIconDescription (#7973)
+- fix: remove requiredIf props helpers (#8060)
+
+### Housekeeping :house:
+- test(coachmark): add coachmark test (#8043)
+- docs(AboutModal): update content and structure (#8040)
+- chore(deps): update dependency @percy/storybook to v9 (#8053)
+- test(makeDraggable): add tests (#8099)
+- test(coachmark): add avt tests (#8045)
+- chore(deps): update dependency typescript-config-carbon to ^0.6.0 (#8080)
+
 ## `@carbon/ibm-products@2.73.1`
 ### Bug fixes :bug:
 - fix: remove requiredIf props helpers (#8153)

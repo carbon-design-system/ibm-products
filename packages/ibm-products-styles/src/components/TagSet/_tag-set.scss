@@ -102,12 +102,6 @@ $block-class-modal: #{$_block-class}-modal;
     text-align: start;
   }
 
-  .#{$block-class-overflow}__popover-trigger {
-    /* stylelint-disable-next-line declaration-no-important */
-    border: none !important;
-    font-family: inherit;
-  }
-
   .#{$block-class-overflow}__show-all-tags-link.#{$carbon-prefix}--link:visited {
     display: inline-block;
     margin: $spacing-03 0 $spacing-02; // to match the tags

@@ -1,3 +1,14 @@
+## `@carbon/ibm-products-styles@2.70.0`
+### Features :rocket:
+- feat(conditionbuilder): option to disable specific property dynamically (#8105)
+- feat: condition builder read only state (#8125)
+
+### Bug fixes :bug:
+- fix: Update publishing-releases.md (#8096)
+- fix: replace StringFormatter with TruncatedText (#7968)
+- fix(SidePanel): remove shadow on slide-ins (#7978)
+- fix(makeDraggable): improve accessibility (#8090)
+
 ## `@carbon/ibm-products-styles@2.69.0`
 ### Features :rocket:
 - feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)

@@ -67,6 +67,7 @@ export let ConditionBuilder = React.forwardRef(
       translateWithId,
       statementConfigCustom,
       onAddItem,
+      readOnly,
       ...rest
     }: ConditionBuilderProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -88,6 +89,7 @@ export let ConditionBuilder = React.forwardRef(
         conditionBuilderRef={conditionBuilderRef}
         statementConfigCustom={statementConfigCustom}
         onAddItem={onAddItem}
+        readOnly={!!readOnly}
       >
         <div
           {
@@ -97,7 +99,7 @@ export let ConditionBuilder = React.forwardRef(
           className={cx(
             blockClass, // Apply the block class to the main HTML element
             className, // Apply any supplied class names to the main HTML element.
-            // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
+            { [`${blockClass}__readonly`]: readOnly },
             {
               // switched classes dependant on props or state
               // example: [`${blockClass}__here-if-small`]: size === 'sm',
@@ -228,6 +230,8 @@ ConditionBuilder.propTypes = {
           'custom',
         ]).isRequired,
         description: PropTypes.string, //will be displayed on hover of property field
+        getIsDisabled: PropTypes.func,
+        getIsHidden: PropTypes.func,
         config: PropTypes.shape({
           options: PropTypes.arrayOf(
             PropTypes.shape({
@@ -258,6 +262,11 @@ ConditionBuilder.propTypes = {
    * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
    */
   popOverSearchThreshold: PropTypes.number.isRequired,
+
+  /**
+   * Whether the conditionBuilder should be readOnly
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Provide a label to the button that starts condition builder

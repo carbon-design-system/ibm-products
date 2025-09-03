@@ -80,7 +80,8 @@ const CoachmarkOverlayElements = (args) => {
   const [lastViewIndex, setLastViewIndex] = useState(-1);
 
   const carouselContainerRef = useRef < HTMLDivElement > null;
-  const carouselInit = useRef < InitCarousel > null;
+  // prettier-ignore
+  const carouselInit = useRef < InitCarousel > (null);
 
   const items = [
     {

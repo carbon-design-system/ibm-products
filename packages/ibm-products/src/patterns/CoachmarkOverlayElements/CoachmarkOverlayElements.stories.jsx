@@ -81,7 +81,8 @@ const CoachmarkOverlayElements = (args) => {
 
   // prettier-ignore
   const carouselContainerRef = useRef < HTMLDivElement > (null);
-  const carouselInit = useRef < InitCarousel > null;
+  // prettier-ignore
+  const carouselInit = useRef < InitCarousel > (null);
 
   const items = [
     {

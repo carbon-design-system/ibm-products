@@ -46,12 +46,7 @@ class CDSChecklistIcon extends LitElement {
     });
 
     return html` <span class="${classes}">
-      <cds-icon
-        .icon=${icon}
-        class="blue"
-        size="16"
-        ariaLabel=${this.kind}
-      ></cds-icon>
+      <cds-icon .icon=${icon} size="16" ariaLabel=${this.kind}></cds-icon>
     </span>`;
   }
 

@@ -159,8 +159,8 @@ class CDSChecklist extends LitElement {
             <!-- Checklist body -->
             <!-- This is where you add c4p-checklist-group elements-->
             <slot></slot>
-            <!-- Checklist footer -->
 
+            <!-- Checklist footer -->
             <div class="${blockClass}__footer">
               <slot name="checklist-footer">
                 ${viewAllLabel &&

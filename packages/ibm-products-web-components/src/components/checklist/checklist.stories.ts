@@ -97,9 +97,23 @@ const checklistGroupTemplate = {
           @c4p-checklist-toggle=${action(`Clicked Toggle`)}
         >
           <c4p-checklist-group title=${groupTitle}>
-            <c4p-checklist-item label="Task name"></c4p-checklist-item>
-            <c4p-checklist-item label="Task name"></c4p-checklist-item>
-            <c4p-checklist-item label="Task name"></c4p-checklist-item>
+            <c4p-checklist-item
+              label="Task name"
+              status="completed"
+              kind="button"
+            ></c4p-checklist-item>
+            <c4p-checklist-item
+              label="Task name"
+              status="in progress"
+              @c4p-checklist-item-clicked=${action(`Clicked Checklist Item`)}
+              ?clickable=${true}
+            ></c4p-checklist-item>
+            <c4p-checklist-item
+              label="Task name"
+              status="not started"
+              @c4p-checklist-item-clicked=${action(`Clicked Checklist Item`)}
+              ?clickable=${true}
+            ></c4p-checklist-item>
           </c4p-checklist-group>
         </c4p-checklist>
       </div>

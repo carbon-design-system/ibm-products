@@ -19,3 +19,18 @@ export type Kind =
   | Kinds.checked
   | Kinds.disabled
   | Kinds.error;
+
+export enum Statuses {
+  NotStarted = 'not started',
+  InProgress = 'in progress',
+  Completed = 'completed',
+  Error = 'error',
+  Disabled = 'disabled',
+}
+
+export type Status =
+  | Statuses.NotStarted
+  | Statuses.InProgress
+  | Statuses.Completed
+  | Statuses.Error
+  | Statuses.Disabled;

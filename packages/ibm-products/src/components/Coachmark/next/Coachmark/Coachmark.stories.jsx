@@ -7,7 +7,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { Coachmark } from './Coachmark';
-import './CoachmarkBubble';
 import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 import { Button, Theme } from '@carbon/react';

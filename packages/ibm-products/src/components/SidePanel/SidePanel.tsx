@@ -13,6 +13,7 @@ import {
   ButtonProps,
   Heading,
   IconButton,
+  Layer,
   Section,
 } from '@carbon/react';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -1015,7 +1016,7 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
             }`
           )}
         >
-          {children}
+          <Layer>{children}</Layer>
         </div>
       );
     };

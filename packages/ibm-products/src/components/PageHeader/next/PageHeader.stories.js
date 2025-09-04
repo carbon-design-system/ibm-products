@@ -74,7 +74,7 @@ const tags = [
 ];
 
 export default {
-  title: 'Experimental/Patterns/PageHeader',
+  title: 'Experimental/PageHeader',
   component: PageHeader,
   subcomponents: {
     PageHeaderBreadcrumbBar,
@@ -585,6 +585,86 @@ export const TabBarWithTabsAndTags = (args) => (
         </PageHeader.ContentText>
       </PageHeader.Content>
       <PageHeader.TabBar tags={tags} scroller={<PageHeader.ScrollButton />}>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
+        </TabList>
+      </PageHeader.TabBar>
+    </PageHeader.Root>
+    <TabPanels>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 1
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 2
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 3
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 4
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 5
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 6
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 7
+      </TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+export const Compact = (args) => (
+  <Tabs>
+    <PageHeader.Root>
+      <PageHeader.BreadcrumbBar
+        border={args.border}
+        pageActionsFlush={args.pageActionsFlush}
+        contentActionsFlush={args.contentActionsFlush}
+        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+        pageActions={breadcrumbPageActions}
+        contentActions={
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}
+          />
+        }
+      >
+        <PageHeader.BreadcrumbOverflow
+          renderOverflowBreadcrumb={(hiddenItems) => (
+            <BreadcrumbItem data-floating-menu-container>
+              <OverflowMenu
+                align="bottom"
+                aria-label="Overflow menu in a breadcrumb"
+              >
+                {hiddenItems.map((el) => (
+                  <OverflowMenuItem itemText={el.innerText} />
+                ))}
+              </OverflowMenu>
+            </BreadcrumbItem>
+          )}
+        >
+          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+          <PageHeader.TitleBreadcrumb data-fixed>
+            <TruncatedText
+              value="Virtual-Machine-DAL-really-long-title-example"
+              align="bottom"
+              lines={1}
+            />
+          </PageHeader.TitleBreadcrumb>
+        </PageHeader.BreadcrumbOverflow>
+      </PageHeader.BreadcrumbBar>
+      <PageHeader.TabBar tags={tags}>
         <TabList>
           <Tab>Tab 1</Tab>
           <Tab>Tab 2</Tab>

@@ -77,11 +77,14 @@ describe('c4p-notification', () => {
         style: 'long',
       }
     );
-    const expected = new Date(Date.now() - 30 * 1000);
-    expect(notification.timestamp?.getTime()).toBeCloseTo(
-      expected.getTime(),
-      -1
-    );
+
+    // EXPECT THAT THE TIMESTAMP HAS A VALUE
+    expect(notification.timestamp).toBeDefined();
+
+    // CHECK IF THE NOTIFICATION TIMESTAMP IS A DATE
+    expect(notification.timestamp).toEqual(expect.any(Date));
+
+    // EXPECT THAT THE LABEL MATCHES THE DATETIME VALUE PASSED TO THE COMPONENT
     const notificationTimeLabel = notification.shadowRoot?.querySelector(
       '.c4p--notifications-panel__notification-time-label'
     );

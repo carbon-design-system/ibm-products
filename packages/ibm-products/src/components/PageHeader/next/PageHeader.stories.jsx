@@ -4,9 +4,9 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import React, { cloneElement } from 'react';
 import { Add } from '@carbon/icons-react';
-import { preview__PageHeader as PageHeader, TruncatedText } from '../../';
+import { preview__PageHeader as PageHeader, TruncatedText } from '../..';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar,
@@ -31,6 +31,7 @@ import {
   IconButton,
   OverflowMenu,
   OverflowMenuItem,
+  OperationalTag,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
@@ -525,6 +526,25 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
   </PageHeader.Root>
 );
 
+const tabBarTags = [
+  <Tag type="blue" id="example-tag-1">
+    Tag 1
+  </Tag>,
+  <Tag type="purple" id="example-tag-2">
+    Tag 2
+  </Tag>,
+  <Tag type="red" id="example-tag-3">
+    Tag 3
+  </Tag>,
+  <OperationalTag type="blue" id="example-tag-4" text="Tag 4" />,
+  <Tag type="purple" id="example-tag-5">
+    Tag 5
+  </Tag>,
+  <Tag type="red" id="example-tag-6">
+    Tag 6
+  </Tag>,
+];
+
 export const TabBarWithTabsAndTags = (args) => (
   <Tabs>
     <PageHeader.Root>
@@ -584,7 +604,35 @@ export const TabBarWithTabsAndTags = (args) => (
           scale efficiently, and stay in control every step of the way.
         </PageHeader.ContentText>
       </PageHeader.Content>
-      <PageHeader.TabBar tags={tags} scroller={<PageHeader.ScrollButton />}>
+      <PageHeader.TabBar
+        tags={
+          <PageHeader.TagOverflow
+            renderOverflowTag={(
+              hiddenItems,
+              handleOverflowClick,
+              openPopover
+            ) => (
+              <OperationalTag
+                onClick={handleOverflowClick}
+                aria-expanded={openPopover}
+                text={`+${hiddenItems.length}`}
+              />
+            )}
+            renderPopoverContent={(hiddenItems) => {
+              return hiddenItems.map((i, index) => {
+                const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
+                return cloneElement(foundJSXTag, {
+                  id: `cloned-tag-node-id-${index}`,
+                  key: `cloned-tag-key-${index}`,
+                });
+              });
+            }}
+          >
+            {tabBarTags}
+          </PageHeader.TagOverflow>
+        }
+        scroller={<PageHeader.ScrollButton />}
+      >
         <TabList>
           <Tab>Tab 1</Tab>
           <Tab>Tab 2</Tab>

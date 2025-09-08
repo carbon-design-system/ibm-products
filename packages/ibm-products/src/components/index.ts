@@ -15,13 +15,6 @@ export { ActionBar } from './ActionBar';
 export * from './APIKeyModal';
 export * from './Cascade';
 export * from './Checklist';
-export { Coachmark } from './Coachmark';
-export * from './CoachmarkBeacon';
-export * from './CoachmarkButton';
-export * from './CoachmarkFixed';
-export * from './CoachmarkOverlayElement';
-export * from './CoachmarkOverlayElements';
-export * from './CoachmarkStack';
 export * from './CreateFullPage';
 export * from './CreateModal';
 export * from './CreateSidePanel';
@@ -70,6 +63,13 @@ export * as preview__PageHeader from './PageHeader/next/PageHeader';
 
 // Preview candidates
 export * as previewCandidate__BigNumber from './BigNumber';
+export { Coachmark as previewCandidate__Coachmark } from './Coachmark';
+export * as previewCandidate__CoachmarkBeacon from './CoachmarkBeacon';
+export * as previewCandidate__CoachmarkButton from './CoachmarkButton';
+export * as previewCandidate__CoachmarkFixed from './CoachmarkFixed';
+export * as previewCandidate__CoachmarkOverlayElement from './CoachmarkOverlayElement';
+export * as previewCandidate__CoachmarkOverlayElements from './CoachmarkOverlayElements';
+export * as previewCandidate__CoachmarkStack from './CoachmarkStack';
 export * as previewCandidate__ConditionBuilder from './ConditionBuilder';
 export * as previewCandidate__DataSpreadsheet from './DataSpreadsheet';
 export * as previewCandidate__DelimitedList from './DelimitedList';

@@ -10,10 +10,10 @@ import React from 'react';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import {
-  Coachmark,
-  CoachmarkOverlayElement,
-  CoachmarkOverlayElements,
-  CoachmarkBeacon,
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
+  previewCandidate__CoachmarkBeacon as CoachmarkBeacon,
 } from '..';
 
 import mdx from './CoachmarkBeacon.mdx';

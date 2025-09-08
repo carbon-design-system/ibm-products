@@ -14,16 +14,6 @@ import { prefix } from '../../globals/settings';
 
 import styles from './story-styles.scss?lit';
 
-// import '@carbon/web-components/es/components/button/index.js';
-
-// import {
-//   getContent,
-//   getSubTitle,
-//   getActionToolbarItems,
-//   getActionItems,
-//   getSlug,
-// } from './_story-assets';
-
 const storyPrefix = `${prefix}--checklist-stories__`;
 
 const checklistGroupTemplate = {

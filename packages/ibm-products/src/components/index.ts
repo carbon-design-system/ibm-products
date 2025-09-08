@@ -64,12 +64,12 @@ export * as preview__PageHeader from './PageHeader/next/PageHeader';
 // Preview candidates
 export * as previewCandidate__BigNumber from './BigNumber';
 export { Coachmark as previewCandidate__Coachmark } from './Coachmark';
-export * as previewCandidate__CoachmarkBeacon from './CoachmarkBeacon';
-export * as previewCandidate__CoachmarkButton from './CoachmarkButton';
-export * as previewCandidate__CoachmarkFixed from './CoachmarkFixed';
-export * as previewCandidate__CoachmarkOverlayElement from './CoachmarkOverlayElement';
-export * as previewCandidate__CoachmarkOverlayElements from './CoachmarkOverlayElements';
-export * as previewCandidate__CoachmarkStack from './CoachmarkStack';
+export { CoachmarkBeacon as previewCandidate__CoachmarkBeacon } from './CoachmarkBeacon';
+export { CoachmarkButton as previewCandidate__CoachmarkButton } from './CoachmarkButton';
+export { CoachmarkFixed as previewCandidate__CoachmarkFixed } from './CoachmarkFixed';
+export { CoachmarkOverlayElement as previewCandidate__CoachmarkOverlayElement } from './CoachmarkOverlayElement';
+export { CoachmarkOverlayElements as previewCandidate__CoachmarkOverlayElements } from './CoachmarkOverlayElements';
+export { CoachmarkStack as previewCandidate__CoachmarkStack } from './CoachmarkStack';
 export * as previewCandidate__ConditionBuilder from './ConditionBuilder';
 export * as previewCandidate__DataSpreadsheet from './DataSpreadsheet';
 export * as previewCandidate__DelimitedList from './DelimitedList';

@@ -108,11 +108,11 @@
   "dependencies": {
     "@babel/runtime": "^7.26.10",
     "@carbon-labs/react-resizer": "^0.7.0",
-    "@carbon/feature-flags": "^0.28.1",
+    "@carbon/feature-flags": "^0.30.0",
     "@carbon/ibm-products-styles": "^2.70.0",
     "@carbon/telemetry": "^0.1.0",
-    "@carbon/utilities": "^0.7.0",
-    "@carbon/utilities-react": "0.10.0",
+    "@carbon/utilities": "^0.9.0",
+    "@carbon/utilities-react": "0.12.0",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/sortable": "^10.0.0",
@@ -122,12 +122,12 @@
     "react-window": "^1.8.11"
   },
   "peerDependencies": {
-    "@carbon/grid": "^11.38.0",
-    "@carbon/layout": "^11.36.0",
-    "@carbon/motion": "^11.30.0",
-    "@carbon/react": "^1.86.0",
-    "@carbon/themes": "^11.55.0",
-    "@carbon/type": "^11.42.0",
+    "@carbon/grid": "^11.42.0",
+    "@carbon/layout": "^11.40.0",
+    "@carbon/motion": "^11.34.0",
+    "@carbon/react": "^1.90.0",
+    "@carbon/themes": "^11.59.0",
+    "@carbon/type": "^11.46.0",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
     "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0"
   }

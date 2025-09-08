@@ -780,8 +780,6 @@ describe('PageHeader', () => {
         // Check that overflow indicator is present
         expect(screen.getByText('+3')).toBeInTheDocument();
 
-        screen.debug(undefined, Infinity);
-
         // Check that the overflow button is not expanded (popover closed)
         const overflowButton = screen.getByRole('button', { name: '+3' });
         expect(overflowButton).toHaveAttribute('aria-expanded', 'false');

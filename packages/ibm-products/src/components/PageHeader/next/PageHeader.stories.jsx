@@ -527,20 +527,25 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
 );
 
 const tabBarTags = [
-  <Tag type="blue" id="example-tag-1">
+  <Tag type="blue" id="example-tag-1" key="example-tag-1">
     Tag 1
   </Tag>,
-  <Tag type="purple" id="example-tag-2">
+  <Tag type="purple" id="example-tag-2" key="example-tag-2">
     Tag 2
   </Tag>,
-  <Tag type="red" id="example-tag-3">
+  <Tag type="red" id="example-tag-3" key="example-tag-3">
     Tag 3
   </Tag>,
-  <OperationalTag type="blue" id="example-tag-4" text="Tag 4" />,
-  <Tag type="purple" id="example-tag-5">
+  <OperationalTag
+    type="blue"
+    id="example-tag-4"
+    key="example-tag-4"
+    text="Tag 4"
+  />,
+  <Tag type="purple" id="example-tag-5" key="example-tag-5">
     Tag 5
   </Tag>,
-  <Tag type="red" id="example-tag-6">
+  <Tag type="red" id="example-tag-6" key="example-tag-6">
     Tag 6
   </Tag>,
 ];

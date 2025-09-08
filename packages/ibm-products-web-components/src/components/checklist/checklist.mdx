@@ -1,4 +1,4 @@
-import { ArgTypes, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as ChecklistStories from './checklist.stories';
 
@@ -57,10 +57,42 @@ import '@carbon/ibm-products-web-components/es/components/checklist/index.js';
 ```
 ### Usage Example
 
+<Canvas className="page-header--docs-demo" of={ChecklistStories.Default} />
+
 ### HTML
 
 ```html
-<p>Hello world</p>
+<c4p-checklist
+  title=${title}
+  chartLabel=${chartLabel}
+  chartValue=${chartValue}
+  toggleLabel=${toggleLabel}
+  toggleLabelAlign=${toggleLabelAlign}
+  toggleAriaLabel=${toggleAriaLabel}
+  open
+  viewAllLabel=${viewAllLabel}
+  @c4p-checklist-view-all=${action(`Clicked View All`)}
+  @c4p-checklist-toggle=${action(`Clicked Toggle`)}
+  >
+  <c4p-checklist-group title=${groupTitle}>
+    <c4p-checklist-item
+    label="Task name"
+    status="completed"
+    ></c4p-checklist-item>
+    <c4p-checklist-item
+    label="Task name"
+    status="in progress"
+    @c4p-checklist-item-clicked=${action(`Clicked Checklist Item`)}
+    ?clickable=${true}
+    ></c4p-checklist-item>
+    <c4p-checklist-item
+    label="Task name"
+    status="not started"
+    @c4p-checklist-item-clicked=${action(`Clicked Checklist Item`)}
+    ?clickable=${true}
+    ></c4p-checklist-item>
+  </c4p-checklist-group>
+</c4p-checklist>
 ```
 
 ## `<c4p-checklist>` attributes, properties, events and slots.

@@ -100,7 +100,6 @@ const checklistGroupTemplate = {
             <c4p-checklist-item
               label="Task name"
               status="completed"
-              kind="button"
             ></c4p-checklist-item>
             <c4p-checklist-item
               label="Task name"
@@ -121,7 +120,7 @@ const checklistGroupTemplate = {
   },
 };
 
-export const Checklist = {
+export const Default = {
   ...checklistGroupTemplate,
 };
 

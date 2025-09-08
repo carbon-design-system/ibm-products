@@ -729,7 +729,6 @@ describe('PageHeader', () => {
                 );
               }}
               renderPopoverContent={(hiddenItems) => {
-                console.log('hidden: ', hiddenItems);
                 return hiddenItems.map((i, index) => {
                   const foundJSXTag = mockTags.find(
                     (c) => c.props.id === (i.id ?? i.props.id)
@@ -774,7 +773,7 @@ describe('PageHeader', () => {
         act(() => {
           mockOverflowOnChange(
             mockTags.slice(0, 3), // visible, first 3 items
-            mockTags.slice(-3) // no hidden elements, last 3 items
+            mockTags.slice(-3) // hidden elements, last 3 items
           );
         });
 

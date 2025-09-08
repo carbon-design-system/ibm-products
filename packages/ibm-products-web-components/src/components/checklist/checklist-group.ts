@@ -17,6 +17,7 @@ import styles from './checklist.scss?lit';
 /**
  * Sections in c4p-checklist
  * @element c4p-checklist-group
+ * @slot default - Contains one or more `c4p-checklist-item` components
  */
 @customElement(`${prefix}-checklist-group`)
 class CDSChecklistGroup extends LitElement {
@@ -24,7 +25,7 @@ class CDSChecklistGroup extends LitElement {
    * Title text of the c4p-checklist-group
    */
   @property()
-  title = '';
+  title;
 
   render() {
     const { title } = this;

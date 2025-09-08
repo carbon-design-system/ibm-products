@@ -40,6 +40,9 @@ const clamp = (value: number, min: number, max: number): number | void => {
  */
 @customElement(`${prefix}-checklist-chart`)
 class CDSChecklistChart extends LitElement {
+  /**
+   * A number between 0 and 1 which indicates the progress of checklist
+   */
   @property({ type: Number })
   value = 0;
 

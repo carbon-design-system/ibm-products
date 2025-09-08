@@ -25,8 +25,17 @@ import styles from './checklist.scss?lit';
 
 const blockClass = `${prefix}--checklist__icon`;
 
+/**
+ * @element c4p-checklist-icon
+ * Represents checklist item status with different icons (unchecked, checked, indeterminate, error).
+ */
 @customElement(`${prefix}-checklist-icon`)
 class CDSChecklistIcon extends LitElement {
+  /**
+   * The icon to be displayed.
+   * Values can be 'unchecked', 'indeterminate', 'checked', 'error', 'disabled'
+
+   */
   @property({ type: String, attribute: 'kind' })
   kind = Kinds.unchecked;
 

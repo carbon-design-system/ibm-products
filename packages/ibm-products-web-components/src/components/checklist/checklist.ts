@@ -24,35 +24,65 @@ const blockClass = `${prefix}--checklist`;
 
 /**
  * @element c4p-checklist
+ * @slot checklist-header - Header area which includes the title and the progress indicator.
+ * @slot default - Contains one or more `c4p-checklist-group` components to organize tasks into logical groups.
+ * @slot checklist-footer - Optional footer area for actions like buttons, links, or additional notes.
  * @fires c4p-checklist-view-all - The custom event which is fired when a user clicks on View All button in checklist footer.
  * @fires c4p-checklist-toggle - The custom event which is fired when user clicks on toggle button in checklist header.
  */
 @customElement(`${prefix}-checklist`)
 class CDSChecklist extends LitElement {
+  /**
+   * Specifies whether the component is opened or closed.
+   */
   @property({ type: Boolean, reflect: true })
   open = false;
 
+  /**
+   * The title of the component.
+   */
   @property({ type: String })
   title;
 
+  /**
+   * The label for progress indicator chart
+   */
   @property({ type: String })
   chartLabel;
 
+  /**
+   * A number between 0 and 1 which indicates the progress of checklist
+   */
   @property({ type: Number })
   chartValue;
 
+  /**
+   * Whether or not to show the open/close toggle.
+   */
   @property({ type: Boolean })
   disableToggle = false;
 
+  /**
+   * The label for the toggle's tooltip.
+   */
   @property({ type: String })
   toggleLabel;
 
+  /**
+   * The alignment of the toggle's tooltip.
+   */
   @property({ type: String })
   toggleLabelAlign;
 
+  /**
+   * Aria-label for the Checklist's toggle component.
+   */
   @property({ type: String })
   toggleAriaLabel;
 
+  /**
+   * If defined, will show and enable the "View all (#)" button in the checklist footer.
+   */
   @property({ type: String })
   viewAllLabel;
 

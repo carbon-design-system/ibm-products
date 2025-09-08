@@ -19,6 +19,9 @@ import { classMap } from 'lit/directives/class-map.js';
 /**
  * item in c4p-checklist-group
  * @element c4p-checklist-item
+ * @slot icon - checklist item icon, usually a status indicator icon
+ * @slot content - checklist item title/description
+ * @fires c4p-checklist-item-clicked - The custom event which is fired when a user clicks on checklist item with clickable attribute.
  */
 @customElement(`${prefix}-checklist-item`)
 class CDSChecklistItem extends LitElement {
@@ -26,13 +29,14 @@ class CDSChecklistItem extends LitElement {
    * label of the c4p-checklist-item
    */
   @property()
-  label = '';
+  label;
 
   /**
    * status of the c4p-checklist-item
+   * Values can be 'not started', 'in progress', 'completed', 'error', 'disabled'
    */
   @property()
-  status = '';
+  status;
 
   /** When true, makes the checklist item label clickable */
   @property({ type: Boolean })

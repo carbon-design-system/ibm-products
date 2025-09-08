@@ -1,4 +1,38 @@
-## `@carbon/ibm-products-web-components@0.21.0-rc.0`
+## `@carbon/ibm-products-web-components@0.23.0`
+### Features :rocket:
+- feat(sidepanel): custom header components (#8100)
+- feat(telemetry): add wc scope (#8097)
+- feat: implement focus trap in interstitial screen webcomponent (#8081)
+
+### Bug fixes :bug:
+- fix: telemetry patch (#8131)
+- fix(SidePanel): remove shadow on slide-ins (#7978)
+- fix(deps): update dependency @carbon-labs/wc-empty-state to ^0.5.0 (#8118)
+- fix: update format script (#8107)
+
+### Housekeeping :house:
+- build(web-components): exclude `--cds` values in web component custom prefix build output (#8154)
+- chore: remove unwanted props from storybook doc (#8122)
+- build(web-components): do not include story styles in build output (#8073)
+
+## `@carbon/ibm-products-web-components@0.22.0`
+### Features :rocket:
+- feat: add unit tests, accessibility fixes  , example for interstitial screen web component (#8015)
+- feat(notificationsPanel): empty state (#8032)
+- feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)
+- feat(page-header): add tag responsiveness to tab-bar story (#7947)
+
+### Bug fixes :bug:
+- fix(options-tile): design review updates (#8014)
+- fix(aboutmodal): modal reopening issue when closed via click outside (#7981)
+- fix: include ellipsis in truncated-text (#7964)
+- fix(side-panel): resolve focus trap issue in side-panel web component (#7954)
+
+### Housekeeping :house:
+- chore(Interstitial): reorganize story category (#7986)
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
+## `@carbon/ibm-products-web-components@0.21.0`
 ### Features :rocket:
 - feat(interstitialScreen): webcomponent implementation (#7867)
 - feat(page-header): add breadcrumb overflow example (#7913)

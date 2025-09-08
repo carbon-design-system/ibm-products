@@ -42,7 +42,7 @@ export const focusThisItem = (currentElement, conditionBuilderRef) => {
     manageTabIndexAndFocus(currentElement, conditionBuilderRef);
   }, 0);
 };
-export const traverseClockVise = (
+export const traverseClockwise = (
   eachElem,
   index,
   allElements,

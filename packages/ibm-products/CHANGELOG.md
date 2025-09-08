@@ -1,4 +1,50 @@
-## `@carbon/ibm-products@2.72.0-rc.0`
+## `@carbon/ibm-products@2.74.0`
+### Features :rocket:
+- feat(conditionbuilder): option to disable specific property dynamically (#8105)
+- feat: condition builder read only state (#8125)
+- feat(stepflows): introduce new step utility (#8020)
+
+### Bug fixes :bug:
+- fix: enableSidepanelResizer undefined issue (#8143)
+- fix: init deprecated extension for codecov (#8039)
+- fix(CoachmarkBubble): usage of ref (#8114)
+- fix: replace StringFormatter with TruncatedText (#7968)
+- fix(makeDraggable): improve accessibility (#8090)
+- fix(coachmark): resolved circular dependency (#8104)
+- fix: update format script (#8107)
+- fix(coachmark): add closeIconDescription (#7973)
+- fix: remove requiredIf props helpers (#8060)
+
+### Housekeeping :house:
+- test(coachmark): add coachmark test (#8043)
+- docs(AboutModal): update content and structure (#8040)
+- chore(deps): update dependency @percy/storybook to v9 (#8053)
+- test(makeDraggable): add tests (#8099)
+- test(coachmark): add avt tests (#8045)
+- chore(deps): update dependency typescript-config-carbon to ^0.6.0 (#8080)
+
+## `@carbon/ibm-products@2.73.1`
+### Bug fixes :bug:
+- fix: remove requiredIf props helpers (#8153)
+- fix: remove requiredIf props helpers
+
+## `@carbon/ibm-products@2.73.0`
+### Features :rocket:
+- feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)
+
+### Bug fixes :bug:
+- fix(EmptyState): Modified subtitle container to be a div (#7967)
+- fix: disable ability to submit form using the Enter key (#8019)
+- fix(sidepanel): blank space appears when the header has no content (#8029)
+- fix: add role prop to pageheader's breadcrumb overflow menu (#8017)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.6.0 (#8027)
+- fix(PageHeader): ensures expected positioning even if content component is excluded (#7946)
+
+### Housekeeping :house:
+- docs: add intro page for prebuilt patterns (#7958)
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
+## `@carbon/ibm-products@2.72.0`
 ### Features :rocket:
 - feat(PageHeader): add new breadcrumb overflow utility sub-component (#7910)
 - feat(coachmarkv2): added floating variant (#7924)
@@ -12,6 +58,7 @@
 - feat(PageHeader): add expand/collapse functionality (#7815)
 
 ### Bug fixes :bug:
+- fix: conditionBuilder need to close on outside click
 - fix(ProductiveCard): Added children explicitly to productiveCard (#7957)
 - fix(Storybook): render the correct story in Storybook for few components (#7960)
 - fix: include .cds--menu to selectorsFloatingMenus (#7916)

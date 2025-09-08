@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -273,7 +273,7 @@ UserProfileImage.propTypes = {
    * When passing the image prop use the imageDescription prop to describe the image for screen reader.
    */
   /**@ts-ignore */
-  imageDescription: PropTypes.string.isRequired.if(({ image }) => !!image),
+  imageDescription: PropTypes.string,
 
   /**
    * When passing the initials prop, either send the initials to be used or the user's display name. The first two capital letters of the display name will be used as the initials.

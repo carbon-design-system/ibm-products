@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -314,7 +314,7 @@ EditSidePanel.propTypes = {
    * This prop is required when using the `slideIn` variant of the side panel.
    */
   /**@ts-ignore*/
-  selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
+  selectorPageContent: PropTypes.string,
 
   /**
    * Specifies which DOM element in the form should be focused.

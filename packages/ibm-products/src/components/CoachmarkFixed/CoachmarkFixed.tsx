@@ -15,7 +15,10 @@ import React, {
 } from 'react';
 
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
-import { CoachmarkContext } from '../Coachmark/utils/context';
+import {
+  CoachmarkContext,
+  CoachmarkContextType,
+} from '../Coachmark/utils/context';
 import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
 import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
 // Other standard imports.
@@ -70,6 +73,10 @@ export interface CoachmarkFixedProps {
    * Determines the theme of the component.
    */
   theme?: 'light' | 'dark';
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
 }
 
 const defaults = {
@@ -96,6 +103,7 @@ export const CoachmarkFixed = React.forwardRef<
       portalTarget,
       tagline = defaults.tagline,
       theme = defaults.theme,
+      closeIconDescription,
       // Collect any other property values passed in.
       ...rest
     },
@@ -157,7 +165,7 @@ export const CoachmarkFixed = React.forwardRef<
       };
     }, [escFunction]);
 
-    const contextValue = {
+    const contextValue: CoachmarkContextType = {
       buttonProps: {
         'aria-expanded': isOpen,
         tabIndex: 0,
@@ -172,7 +180,7 @@ export const CoachmarkFixed = React.forwardRef<
       targetRect: targetRect,
       targetOffset: targetOffset,
       isOpen: isOpen,
-      tacos: 'tacos',
+      closeIconDescription,
     };
 
     // instead of toggling on/off,
@@ -261,6 +269,10 @@ CoachmarkFixed.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription: PropTypes.string,
+  /**
    * Function to call when the Coachmark closes.
    */
   onClose: PropTypes.func,
@@ -275,11 +287,11 @@ CoachmarkFixed.propTypes = {
    * element is hidden or component is unmounted, the Coachmark will disappear.
    */
   portalTarget: PropTypes.string,
+
   /**
    * The tagline title which will be fixed to the bottom right of the window and will serve as the display trigger.
    */
   tagline: PropTypes.string.isRequired,
-
   /**
    * Determines the theme of the component.
    */

@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities' as *;
 
 $prefix: 'carousel' !default;
 $animateTime: $duration-moderate-02;
@@ -62,6 +63,11 @@ $animateTime: $duration-moderate-02;
         transition: none;
       }
     }
+
+    :host(.#{$name}:focus),
+    .#{$name}:focus {
+      @include focus-outline('outline');
+    }
   }
 }
 
@@ -86,7 +92,7 @@ $animateTime: $duration-moderate-02;
 }
 
 /// Optional: Universal (Lit + React)
-@mixin carouselStyles {
+@mixin carousel {
   @include keyframes;
   @include wrapperStyles;
   @include viewStyles;

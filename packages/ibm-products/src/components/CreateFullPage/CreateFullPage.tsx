@@ -25,15 +25,11 @@ import React, {
   ReactElement,
   isValidElement,
 } from 'react';
-import {
-  SimpleHeader,
-  overflowAriaLabel_required_if_breadcrumbs_exist,
-} from '../SimpleHeader/SimpleHeader';
+import { SimpleHeader } from '../SimpleHeader/SimpleHeader';
 import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
   usePreviousValue,
-  useResetCreateComponent,
   useValidCreateStepCount,
 } from '../../global/js/hooks';
 
@@ -388,7 +384,13 @@ export const CreateFullPage = React.forwardRef(
           <div className={`${blockClass}__body`}>
             <div className={`${blockClass}__main`}>
               <div className={`${blockClass}__content`}>
-                <Form className={`${blockClass}__form`} aria-label={title}>
+                <Form
+                  className={`${blockClass}__form`}
+                  aria-label={title}
+                  onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                    e.preventDefault()
+                  }
+                >
                   <StepsContext.Provider
                     value={
                       {
@@ -498,7 +500,7 @@ CreateFullPage.propTypes = {
   /**
    * Label for open/close overflow button used for breadcrumb items that do not fit
    */
-  breadcrumbsOverflowAriaLabel: overflowAriaLabel_required_if_breadcrumbs_exist,
+  breadcrumbsOverflowAriaLabel: PropTypes.string,
 
   /**
    * The cancel button text

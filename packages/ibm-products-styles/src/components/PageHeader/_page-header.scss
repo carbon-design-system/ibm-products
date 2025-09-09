@@ -988,7 +988,7 @@ $duration: 1000ms;
 
   .#{$block-class}--tag-overflow-container__has-no-hidden-items {
     /* stylelint-disable-next-line carbon/layout-use */
-    transform: translateX(32px);
+    transform: translateX($spacing-07);
   }
 
   .#{$block-class}__tag-item {

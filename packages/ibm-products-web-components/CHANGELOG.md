@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.23.0-rc.0`
+## `@carbon/ibm-products-web-components@0.23.0`
 ### Features :rocket:
 - feat(sidepanel): custom header components (#8100)
 - feat(telemetry): add wc scope (#8097)

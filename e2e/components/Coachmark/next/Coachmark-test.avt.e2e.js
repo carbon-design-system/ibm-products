@@ -17,7 +17,7 @@ test.describe('Coachmark @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Coachmark',
-      id: 'preview-onboarding-coachmark-coachmark--tooltip',
+      id: 'preview-onboarding-coachmark-next--tooltip',
       globals: {
         carbonTheme: 'white',
       },
@@ -28,7 +28,7 @@ test.describe('Coachmark @avt', () => {
   test('@avt-initially-focus-done-button', async ({ page }) => {
     await visitStory(page, {
       component: 'Coachmark',
-      id: 'preview-onboarding-coachmark-coachmark--tooltip',
+      id: 'preview-onboarding-coachmark-next--tooltip',
       globals: {
         carbonTheme: 'white',
       },
@@ -40,7 +40,7 @@ test.describe('Coachmark @avt', () => {
   test('@avt-dragging-happening-on-header', async ({ page }) => {
     await visitStory(page, {
       component: 'Coachmark',
-      id: 'preview-onboarding-coachmark-coachmark--floating',
+      id: 'preview-onboarding-coachmark-next--floating',
       globals: {
         carbonTheme: 'white',
       },

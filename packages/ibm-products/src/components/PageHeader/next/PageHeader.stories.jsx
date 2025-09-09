@@ -41,39 +41,6 @@ import styles from './_storybook-styles.scss?inline';
 import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
 
-const tags = [
-  {
-    type: 'blue',
-    text: 'Tag 1',
-    size: 'md',
-  },
-  {
-    type: 'purple',
-    text: 'Tag 2',
-    size: 'md',
-  },
-  {
-    type: 'red',
-    text: 'Tag 3',
-    size: 'md',
-  },
-  {
-    type: 'blue',
-    text: 'Tag 4',
-    size: 'md',
-  },
-  {
-    type: 'purple',
-    text: 'Tag 5',
-    size: 'md',
-  },
-  {
-    type: 'red',
-    text: 'Tag 6',
-    size: 'md',
-  },
-];
-
 export default {
   title: 'Experimental/PageHeader',
   component: PageHeader,
@@ -717,7 +684,34 @@ export const Compact = (args) => (
           </PageHeader.TitleBreadcrumb>
         </PageHeader.BreadcrumbOverflow>
       </PageHeader.BreadcrumbBar>
-      <PageHeader.TabBar tags={tags}>
+      <PageHeader.TabBar
+        tags={
+          <PageHeader.TagOverflow
+            renderOverflowTag={(
+              hiddenItems,
+              handleOverflowClick,
+              openPopover
+            ) => (
+              <OperationalTag
+                onClick={handleOverflowClick}
+                aria-expanded={openPopover}
+                text={`+${hiddenItems.length}`}
+              />
+            )}
+            renderPopoverContent={(hiddenItems) => {
+              return hiddenItems.map((i, index) => {
+                const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
+                return cloneElement(foundJSXTag, {
+                  id: `cloned-tag-node-id-${index}`,
+                  key: `cloned-tag-key-${index}`,
+                });
+              });
+            }}
+          >
+            {tabBarTags}
+          </PageHeader.TagOverflow>
+        }
+      >
         <TabList>
           <Tab>Tab 1</Tab>
           <Tab>Tab 2</Tab>

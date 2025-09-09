@@ -794,6 +794,7 @@ $duration: 1000ms;
 
   .#{$block-class}__content {
     padding: $spacing-06 0;
+    background-color: $layer;
   }
 
   .#{$block-class}__content__title-wrapper {
@@ -903,6 +904,7 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__tab-bar {
+    background-color: $layer;
     margin-inline-start: -$spacing-05;
   }
 

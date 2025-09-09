@@ -122,7 +122,3 @@ export * from './HTTPErrors';
 export * from './Nav';
 export * from './StatusIndicator';
 export * from './UserProfileImage';
-
-/**
- * Types
- */

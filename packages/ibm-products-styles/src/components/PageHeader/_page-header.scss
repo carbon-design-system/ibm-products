@@ -972,10 +972,10 @@ $duration: 1000ms;
     align-content: center;
     text-align: end;
     @include breakpoint(sm) {
-      transform: translateX(-1 * 24px);
+      transform: translateX(calc(-1 * #{$spacing-06}));
     }
     @include breakpoint(md) {
-      transform: translateX(-1 * 8px);
+      transform: translateX(calc(-1 * #{$spacing-03}));
     }
     @include breakpoint(lg) {
       transform: translateX($spacing-08);

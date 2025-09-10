@@ -33,7 +33,7 @@ export interface CoachmarkButtonProps extends ButtonProps<ElementType> {
   id?: string;
 }
 
-interface CoachmarkTaglineProps {
+export interface CoachmarkTaglineProps {
   /**
    * Tooltip text and aria label for the Close button icon.
    */

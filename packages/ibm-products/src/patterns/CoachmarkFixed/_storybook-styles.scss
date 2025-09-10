@@ -19,11 +19,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark__next;
 
 // BUBBLE - content styling
 .#{$block-class}--coachmark-content {
-  //transition: transform $duration-moderate-02 motion(exit, productive);
+  position: fixed;
   inline-size: 18rem;
   margin-inline-start: 18px;
-  transform: translateY(70px);
+  transform: translateY(100%);
+  transition: transform $duration-moderate-02 motion(exit, productive);
   visibility: visible;
+
+  &.is-visible {
+    transform: translateY(35%);
+    visibility: visible;
+  }
   .#{$block-class}--content-body {
     display: flex;
     flex-direction: column;
@@ -49,7 +55,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark__next;
 //carousel
 .exampleCarouselWrapper {
   block-size: 100px;
-  margin-inline-end: c4p-settings.$spacing-05;
+  margin-inline-end: $spacing-05;
 }
 
 .carousel__view > h2 {

@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Button, Theme, Link as CarbonLink } from '@carbon/react';
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './CoachmarkFixed.mdx';
@@ -77,9 +83,14 @@ const CoachmarkFixedPattern = (args) => {
 
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
+  const [fixedIsVisible, setFixedIsVisible] = useState(false);
 
-  const carouselContainerRef = useRef < HTMLDivElement > null;
-  const carouselInit = useRef < InitCarousel > null;
+  //prettier-ignore
+  const carouselContainerRef = useRef < HTMLDivElement > (null);
+  //prettier-ignore
+  const carouselInit = useRef < InitCarousel > (null);
+  //prettier-ignore
+  const nextRef = useRef<HTMLButtonElement>(null);
 
   const items = [
     {
@@ -101,10 +112,19 @@ const CoachmarkFixedPattern = (args) => {
     },
   ];
 
+  useEffect(() => {
+    setFixedIsVisible(isOpen);
+  }, [isOpen]);
+
   const handleClose = () => {
     setIsOpen(false);
+    setFixedIsVisible(false);
     carouselInit.current.reset();
   };
+
+  useLayoutEffect(() => {
+    setTimeout(() => nextRef.current?.focus(), 0);
+  }, [isOpen]);
 
   const handleTaglineClick = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -147,7 +167,10 @@ const CoachmarkFixedPattern = (args) => {
           isOpen={isOpen}
           buttonProps={{ onClick: handleTaglineClick, id: 'CoachmarkTagline' }}
         ></CoachmarkTagline>
-        <Coachmark.Content highContrast={true}>
+        <Coachmark.Content
+          className={fixedIsVisible && `is-visible`}
+          highContrast={true}
+        >
           <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
           <Coachmark.Content.Body>
             <div ref={carouselContainerRef} className="exampleCarouselWrapper">
@@ -185,7 +208,12 @@ const CoachmarkFixedPattern = (args) => {
                 )}
 
                 {lastViewIndex !== currentViewIndex ? (
-                  <Button size="sm" iconDescription="Next" onClick={onNext}>
+                  <Button
+                    ref={nextRef}
+                    size="sm"
+                    iconDescription="Next"
+                    onClick={onNext}
+                  >
                     Next
                   </Button>
                 ) : (

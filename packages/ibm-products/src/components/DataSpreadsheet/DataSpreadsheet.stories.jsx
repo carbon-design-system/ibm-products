@@ -6,7 +6,7 @@
  */
 
 import React, { useMemo, useState } from 'react';
-import { DataSpreadsheet } from '.';
+import { previewCandidate__DataSpreadsheet as DataSpreadsheet } from '..';
 import { generateData } from './utils/generateData';
 import mdx from './DataSpreadsheet.mdx';
 

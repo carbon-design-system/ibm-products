@@ -8,11 +8,11 @@
 import React from 'react';
 import { action } from 'storybook/actions';
 import {
-  Guidebanner,
-  GuidebannerElement,
-  GuidebannerElementButton,
-  GuidebannerElementLink,
-} from '.';
+  previewCandidate__Guidebanner as Guidebanner,
+  previewCandidate__GuidebannerElement as GuidebannerElement,
+  previewCandidate__GuidebannerElementButton as GuidebannerElementButton,
+  previewCandidate__GuidebannerElementLink as GuidebannerElementLink,
+} from '..';
 import mdx from './Guidebanner.mdx';
 
 import styles from './_storybook-styles.scss?inline';

@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { action } from 'storybook/actions';
 
 // TODO: import action to handle events if required.
 // import { action } from 'storybook/actions';
 import { Wikis } from '@carbon/react/icons';
-import { ConditionBuilder } from '.';
+import { previewCandidate__ConditionBuilder as ConditionBuilder } from '../';
 import mdx from './ConditionBuilder.mdx';
 
 import styles from './_storybook-styles.scss?inline';

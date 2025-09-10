@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { NonLinearReading } from '.';
+import { previewCandidate__NonLinearReading as NonLinearReading } from '..';
 import mdx from './NonLinearReading.mdx';
 
 import styles from './_storybook-styles.scss?inline';

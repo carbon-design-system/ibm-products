@@ -39,7 +39,7 @@ import {
   previewCandidate__Toolbar as Toolbar,
   previewCandidate__ToolbarButton as ToolbarButton,
   previewCandidate__ToolbarGroup as ToolbarGroup,
-} from '../..';
+} from '..';
 import mdx from './Toolbar.mdx';
 
 export default {

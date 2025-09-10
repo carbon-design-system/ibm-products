@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { Add } from '@carbon/icons-react';
-import { preview__PageHeader as PageHeader, TruncatedText } from '../../';
+import { preview__PageHeader as PageHeader, TruncatedText } from '../..';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar,

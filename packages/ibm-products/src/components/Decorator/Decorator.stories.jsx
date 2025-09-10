@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Decorator } from '.';
+import { previewCandidate__Decorator as Decorator } from '..';
 import mdx from './Decorator.mdx';
 
 import styles from './_storybook-styles.scss?inline';

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { GetStartedCard } from '.';
+import { previewCandidate__GetStartedCard as GetStartedCard } from '..';
 import React from 'react';
 import mdx from './GetStartedCard.mdx';
 

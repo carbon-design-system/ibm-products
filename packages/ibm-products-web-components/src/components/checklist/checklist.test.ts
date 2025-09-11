@@ -51,10 +51,12 @@ describe('c4p-checklist', () => {
 
   it('toggles open state and fires checklistToggle event', async () => {
     const shadow = el.shadowRoot!;
-    const toggleButton = shadow!.querySelector(`.${blockClass}__toggle`)!;
+    const toggleButton = shadow!.querySelector(
+      `.${blockClass}__toggle`
+    ) as HTMLButtonElement | null;
 
     // Listen for event before clicking
-    setTimeout(() => toggleButton.click());
+    setTimeout(() => toggleButton?.click());
     const ev = await oneEvent(el, CDSChecklist.checklistToggle);
 
     // Verify open property updated
@@ -66,9 +68,9 @@ describe('c4p-checklist', () => {
     const shadow = el.shadowRoot!;
     const link = Array.from(
       shadow!.querySelectorAll(`${carbonPrefix}-link`)
-    ).find((a) => a.textContent?.trim() === 'View All');
+    ).find((a) => a.textContent?.trim() === 'View All') as HTMLElement | null;
     expect(link).toBeTruthy();
-    setTimeout(() => link.click());
+    setTimeout(() => link?.click());
     const ev = await oneEvent(el, CDSChecklist.checklistViewAll);
     expect(ev).to.exist;
   });
@@ -175,7 +177,7 @@ describe('c4p-checklist-item', () => {
   it('dispatches "checklistItemClicked" event on click', async () => {
     const itemEl = el.shadowRoot?.querySelector(
       `.${blockClass}__label--clickable`
-    );
+    ) as HTMLElement | null;
 
     // Use oneEvent to await the custom event
     setTimeout(() => itemEl?.click());
@@ -185,7 +187,7 @@ describe('c4p-checklist-item', () => {
   });
 
   it('maps status to correct kind', () => {
-    expect(el._mapStatusToKind(status)).to.equal(Kinds.indeterminate);
-    expect(el._mapStatusToKind('unknown')).to.equal(Kinds.error);
+    expect(el['_mapStatusToKind'](status)).to.equal(Kinds.indeterminate);
+    expect(el['_mapStatusToKind']('unknown')).to.equal(Kinds.error);
   });
 });

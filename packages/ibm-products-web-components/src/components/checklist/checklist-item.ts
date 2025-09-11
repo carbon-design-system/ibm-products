@@ -89,12 +89,19 @@ class CDSChecklistItem extends LitElement {
     });
 
     return html`
-      <li class="${prefix}--checklist__list-item"> 
-          <slot name="icon">
-            <c4p-checklist-icon kind="${iconKind}" /> </c4p-checklist-icon
-          ></slot>
-          <slot name="content" >
-          <div class="${classes}" title=${label}  @click=${clickable ? handleClick : undefined}  tabindex=${clickable ? 0 : -1} >${label}</div> 
+      <li class="${prefix}--checklist__list-item">
+        <slot name="icon">
+          <c4p-checklist-icon kind="${iconKind}"></c4p-checklist-icon>
+        </slot>
+        <slot name="content">
+          <div
+            class="${classes}"
+            title=${label}
+            @click=${clickable ? handleClick : undefined}
+            tabindex=${clickable ? 0 : -1}
+          >
+            ${label}
+          </div>
         </slot>
       </li>
     `;

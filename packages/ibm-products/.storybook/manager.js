@@ -41,20 +41,5 @@ const renderComponentLabel = (label, dark, type = 'Canary') => {
 };
 
 addons.setConfig({
-  theme: theme,
-  sidebar: {
-    renderLabel: (item) => {
-      // const isUnstable = !!(
-      //   item.type === 'component' && checkCanaryStatus(item.name)
-      // );
-      // const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      // if (isUnstable) {
-      //   // Canary tag is applied if `item.name` (`displayName` of the component) is confirmed
-      //   // to be canary/not yet released via the checkCanaryStatus utility
-      //   return renderComponentLabel(item.name, dark);
-      // }
-
-      return item.name;
-    },
-  },
+  theme,
 });

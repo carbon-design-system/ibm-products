@@ -37,6 +37,8 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByText('Main view')).toBeVisible();
   });
 
+  // skip due to focus issue
+  // https://github.com/carbon-design-system/ibm-products/issues/7826#issuecomment-3271995110
   test.skip('@avt-action-toolbar', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
@@ -54,6 +56,7 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByLabel('Delete')).toBeFocused();
   });
 
+  // skip due to focus issue
   test.skip('@avt-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
@@ -68,6 +71,7 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByText('Open side panel')).toBeFocused();
   });
 
+  // skip due to focus issue
   test.skip('@avt-first-element-disabled', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',

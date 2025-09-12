@@ -61,6 +61,7 @@ $clabs-prefix: 'clabs';
   -webkit-line-clamp: 2;
   /* stylelint-disable-next-line carbon/layout-use -- custom css property set below */
   padding-inline-end: var(--#{$block-class}--title-padding-right);
+  word-break: break-all;
 }
 
 .#{$block-class}--scrolls {

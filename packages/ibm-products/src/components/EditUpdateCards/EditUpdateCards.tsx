@@ -136,7 +136,7 @@ export interface EditUpdateCardsProps {
  (ex. configuration details), account plan, etc. Editable cards allow a user to edit something within context.
  @deprecated
  */
-export let EditUpdateCards = React.forwardRef(
+export const EditUpdateCards = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -220,7 +220,6 @@ EditUpdateCards.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-EditUpdateCards = pkg.checkComponentEnabled(EditUpdateCards, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

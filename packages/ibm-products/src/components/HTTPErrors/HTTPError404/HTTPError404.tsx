@@ -57,7 +57,7 @@ interface HTTPError404Props extends PropsWithChildren {
 the user doesn’t have permission for. This HTTPError component is generic so you
 can use it when you receive an error code that isn't provided.
  */
-export let HTTPError404 = React.forwardRef<HTMLDivElement, HTTPError404Props>(
+export const HTTPError404 = React.forwardRef<HTMLDivElement, HTTPError404Props>(
   ({ className, description, errorCodeLabel, links, title, ...rest }, ref) => {
     return (
       <div
@@ -80,7 +80,6 @@ HTTPError404.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-HTTPError404 = pkg.checkComponentEnabled(HTTPError404, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

@@ -42,7 +42,7 @@ import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
 
 export default {
-  title: 'Experimental/PageHeader',
+  title: 'Preview/PageHeader',
   component: PageHeader,
   subcomponents: {
     PageHeaderBreadcrumbBar,

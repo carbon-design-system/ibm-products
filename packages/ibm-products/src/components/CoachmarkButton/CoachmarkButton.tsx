@@ -52,7 +52,7 @@ const componentName = 'CoachmarkButton';
 /**
  * Use CoachmarkButton for the target prop of a Coachmark component.
  */
-export let CoachmarkButton = React.forwardRef<
+export const CoachmarkButton = React.forwardRef<
   HTMLButtonElement,
   CoachmarkButtonProps
 >(({ className, label, ...rest }, ref) => {
@@ -98,7 +98,6 @@ CoachmarkButton.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkButton = pkg.checkComponentEnabled(CoachmarkButton, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

@@ -78,6 +78,7 @@ $animateTime: $duration-moderate-02;
     overflow: hidden;
     block-size: 100%;
     inline-size: 100%;
+    min-inline-size: 20vh;
   }
 }
 

@@ -1829,15 +1829,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon-labs/wc-empty-state@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@carbon-labs/wc-empty-state@npm:0.7.0"
+"@carbon-labs/wc-empty-state@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "@carbon-labs/wc-empty-state@npm:0.9.0"
   dependencies:
     "@babel/runtime": "npm:^7.23.2"
     "@carbon-labs/utilities": "npm:0.14.0"
     "@carbon/web-components": "npm:2.36.0"
+    "@ibm/telemetry-js": "npm:^1.10.2"
     uuid: "npm:^9.0.1"
-  checksum: 10/23aeb550a183abaa4ba5a31a29134e8cb8a7b114a084d48eb6ed6d2f4f834436d06e1e0e84143c4028754e2d3a0038c89e4d35c2d46cf58c0fb27d2863e903d5
+  checksum: 10/f5c9c6937d614033e253179e4308e26a93691afda731f70b876783361f113f4f92c08c2ddf1908eef72b4a447e422ce78ea9119ff316e6d6260ae6f09ea8346a
   languageName: node
   linkType: hard
 
@@ -1937,7 +1938,7 @@ __metadata:
   resolution: "@carbon/ibm-products-web-components@workspace:packages/ibm-products-web-components"
   dependencies:
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
-    "@carbon-labs/wc-empty-state": "npm:^0.7.0"
+    "@carbon-labs/wc-empty-state": "npm:^0.9.0"
     "@carbon/ibm-products-styles": "npm:^2.70.0"
     "@carbon/icon-helpers": "npm:^10.65.0"
     "@carbon/icons": "npm:^11.66.0"

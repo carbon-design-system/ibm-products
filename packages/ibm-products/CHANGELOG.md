@@ -1,3 +1,20 @@
+## `@carbon/ibm-products@2.75.0-rc.0`
+### Features :rocket:
+- feat(PageHeader): add compact story, fix preview styles in storybook docs page (#8190)
+- feat(sidepanel): utilizes layer in sidepanel (#8025)
+- feat(CoachmarkOverlayElements): implemented as patterns (#8178)
+
+### Bug fixes :bug:
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.7.0 (#8175)
+- fix(makeDraggable): enhacement based on carbon review comments (#8160)
+
+### Housekeeping :house:
+- chore: canary removal / add PDLC status categories to storybook (#7869)
+- chore(deps): update dependency npm-run-all2 to v8 (#8219)
+- chore(deps): replace dependency npm-run-all with npm-run-all2 ^5.0.0 (#7202)
+- build(deps): update to Carbon 11 compatible versions to latest (#8171)
+- chore(deps): update dependency typescript-config-carbon to ^0.7.0 (#8173)
+
 ## `@carbon/ibm-products@2.74.0`
 ### Features :rocket:
 - feat(conditionbuilder): option to disable specific property dynamically (#8105)

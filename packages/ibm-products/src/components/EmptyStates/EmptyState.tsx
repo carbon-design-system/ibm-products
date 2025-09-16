@@ -111,7 +111,7 @@ export type EmptyStatePresetProps = Omit<EmptyStateProps, 'illustration'>;
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */
-export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
+export const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
   ({ v2 = false, ...props }, ref) => {
     if (v2) {
       return <EmptyStateV2 {...props} />;
@@ -163,7 +163,6 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-EmptyState = pkg.checkComponentEnabled(EmptyState, componentName);
 
 EmptyState.propTypes = {
   /**

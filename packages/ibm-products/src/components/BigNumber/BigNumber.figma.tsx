@@ -35,6 +35,6 @@ figma.connect(
         XL: 'xl',
       }),
     },
-    example: (props) => <BigNumber />,
+    example: (props) => <BigNumber {...props} />,
   }
 );

@@ -27,11 +27,11 @@ figma.connect(
       total: figma.boolean('Total'),
       label: figma.boolean('Label'),
       value: figma.string('Value'),
-      label: figma.string('Label '),
+      label: figma.string('Label'),
       tooltip: figma.boolean('Tooltip'),
       size: figma.enum('Size', {
         Default: 'default',
-        Large: 'large',
+        Large: 'lg',
         XL: 'xl',
       }),
     },

@@ -23,7 +23,7 @@ figma.connect(
   {
     props: {
       trending: figma.boolean('Trending'),
-      editButton: figma.boolean('Edit button'),
+      iconButton: figma.boolean('Edit button'),
       total: figma.boolean('Total'),
       label: figma.boolean('Label'),
       value: figma.string('Value'),

@@ -1,3 +1,14 @@
+## `@carbon/ibm-products-web-components@0.24.0`
+### Bug fixes :bug:
+- fix(deps): update dependency @carbon-labs/wc-empty-state to ^0.9.0 (#8240)
+- fix(telemetry): bump version (#8228)
+
+### Housekeeping :house:
+- build(deps-dev): bump vite (#8236)
+- build(deps-dev): bump vite (#8235)
+- build(deps-dev): bump vite (#8229)
+- build(deps): update to Carbon 11 compatible versions to latest (#8171)
+
 ## `@carbon/ibm-products-web-components@0.23.0`
 ### Features :rocket:
 - feat(sidepanel): custom header components (#8100)

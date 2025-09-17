@@ -250,7 +250,7 @@ describe(componentName, () => {
     expect(tearsheetElement).toBeVisible();
   });
 
-  it.only('renders without tearsheet', async () => {
+  it('renders without tearsheet', async () => {
     render(<AddSelectBody {...singleHierarchyProps} open noTearsheet />);
     expect(screen.queryByRole('dialog')).toBeNull();
   });

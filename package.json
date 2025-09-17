@@ -151,6 +151,7 @@
     ]
   },
   "dependencies": {
+    "@figma/code-connect": "^1.3.5",
     "stylelint-plugin-carbon-tokens": "^3.2.3",
     "stylelint-use-logical": "^2.1.2"
   },

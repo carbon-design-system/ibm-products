@@ -243,6 +243,7 @@ const defaultProps = {
     'Select a term to include the full set of the governance artifacts it contains in the governance scope.',
   noSelectionTitle: 'No business terms selected',
   noResultsDescription: 'Try again',
+  noTearsheet: false,
   onCloseButtonText: 'Cancel',
   onSubmit: (selections) => console.log(selections),
   onSubmitButtonText: 'Add',

@@ -125,6 +125,7 @@ const defaultProps = {
   navIconDescription: 'View children',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
+  noTearsheet: false,
   onCloseButtonText: 'Cancel',
   onSubmit: (selection) => console.log(selection),
   onSubmitButtonText: 'Select',

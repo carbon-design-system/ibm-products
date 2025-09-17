@@ -11,7 +11,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   ExpressiveCard,
-  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=14658-105300',
+  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=9053-414333',
   {
     props: {
       actionIcons: figma.string('Action icons'),

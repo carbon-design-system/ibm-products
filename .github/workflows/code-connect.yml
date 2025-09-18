@@ -1,3 +1,5 @@
+name: Figma Code Connect, publish
+
 on:
   push:
     paths:

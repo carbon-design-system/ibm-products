@@ -25,9 +25,10 @@ figma.connect(
       trending: figma.boolean('Trending'),
       iconButton: figma.boolean('Edit button'),
       total: figma.boolean('Total'),
-      label: figma.boolean('Label'),
+      label: figma.boolean('Label', {
+        true: figma.string('Label text'),
+      }),
       value: figma.string('Value'),
-      label: figma.string('Label'),
       tooltip: figma.boolean('Tooltip'),
       size: figma.enum('Size', {
         Default: 'default',

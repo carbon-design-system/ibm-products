@@ -11,7 +11,10 @@ import React from 'react';
 import { Link as CarbonLink } from '@carbon/react';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
-import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
+import {
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
+} from '..';
 import { CoachmarkStack } from '.';
 
 import mdx from './CoachmarkStack.mdx';
@@ -19,7 +22,7 @@ import mdx from './CoachmarkStack.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark/CoachmarkStack',
+  title: 'Preview Candidate/Onboarding/Coachmark/CoachmarkStack',
   component: CoachmarkStack,
   tags: ['autodocs', 'Onboarding'],
   // TODO: Define argTypes for props not represented by standard JS types.

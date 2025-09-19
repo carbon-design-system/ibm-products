@@ -159,7 +159,7 @@ export interface ExportModalProps
 /**
  * Modal dialog version of the export pattern
  */
-export let ExportModal = forwardRef(
+export const ExportModal = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -380,7 +380,6 @@ export let ExportModal = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-ExportModal = pkg.checkComponentEnabled(ExportModal, componentName);
 
 ExportModal.propTypes = {
   /**

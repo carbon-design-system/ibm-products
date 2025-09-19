@@ -1,3 +1,8 @@
+## `@carbon/storybook-addon-theme@2.24.0-rc.0`
+### Housekeeping :house:
+- chore(deps): update dependency npm-run-all2 to v8 (#8219)
+- chore(deps): replace dependency npm-run-all with npm-run-all2 ^5.0.0 (#7202)
+
 ## `@carbon/storybook-addon-theme@2.23.0`
 ### Bug fixes :bug:
 - fix: update format script (#8107)

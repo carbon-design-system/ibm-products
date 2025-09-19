@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { DelimitedList } from '.';
+import { previewCandidate__DelimitedList as DelimitedList } from '..';
 
 import styles from './_storybook-styles.scss?inline';
 import { DocsPage } from './DelimitedList.docs-page';

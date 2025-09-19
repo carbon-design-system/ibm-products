@@ -43,7 +43,7 @@ export interface CoachmarkOverlayElementProps {
  * Can be used 1 to N number, to display content in a Coachmark's overlay
  * in a carousel fashion.
  */
-export let CoachmarkOverlayElement = React.forwardRef<
+export const CoachmarkOverlayElement = React.forwardRef<
   HTMLDivElement,
   CoachmarkOverlayElementProps
 >(
@@ -94,12 +94,6 @@ CoachmarkOverlayElement.deprecated = {
   level: 'warn',
   details: `${componentName} is deprecated.`,
 };
-
-// Return a placeholder if not released and not enabled by feature flag
-CoachmarkOverlayElement = pkg.checkComponentEnabled(
-  CoachmarkOverlayElement,
-  componentName
-);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

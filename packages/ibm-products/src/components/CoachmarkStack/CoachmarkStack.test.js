@@ -10,7 +10,10 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
+import {
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
+} from '..';
 import { CoachmarkStack } from '.';
 import userEvent from '@testing-library/user-event';
 

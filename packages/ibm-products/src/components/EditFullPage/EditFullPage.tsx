@@ -53,7 +53,7 @@ export interface EditFullPageProps {
  * See usage guidance for further details.
  * @deprecated
  */
-export let EditFullPage = React.forwardRef(
+export const EditFullPage = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -99,7 +99,6 @@ EditFullPage.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-EditFullPage = pkg.checkComponentEnabled(EditFullPage, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

@@ -1,3 +1,7 @@
+## `@carbon/ibm-products-web-components@0.24.1`
+### Bug fixes :bug:
+- fix: unintentioanl leakage of carbon webcomponents (#8271)
+
 ## `@carbon/ibm-products-web-components@0.23.0`
 ### Features :rocket:
 - feat(sidepanel): custom header components (#8100)

@@ -1,3 +1,16 @@
+## `@carbon/ibm-products-styles@2.71.0-rc.0`
+### Features :rocket:
+- feat(sidepanel): utilizes layer in sidepanel (#8025)
+
+### Bug fixes :bug:
+- fix: add wordbreak to sidepanel title (#8230)
+- fix(tagset): restore operational tag styles (#8182)
+
+### Housekeeping :house:
+- chore(deps): update dependency npm-run-all2 to v8 (#8219)
+- chore(deps): replace dependency npm-run-all with npm-run-all2 ^5.0.0 (#7202)
+- build(deps): update to Carbon 11 compatible versions to latest (#8171)
+
 ## `@carbon/ibm-products-styles@2.70.0`
 ### Features :rocket:
 - feat(conditionbuilder): option to disable specific property dynamically (#8105)

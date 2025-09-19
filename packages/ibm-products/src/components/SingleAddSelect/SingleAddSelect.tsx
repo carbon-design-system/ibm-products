@@ -54,6 +54,10 @@ export interface SingleAddSelectProps {
    */
   noResultsTitle?: string;
   /**
+   * Determines if the component should be rendered within a Tearsheet component
+   */
+  noTearsheet?: boolean;
+  /**
    * function to call when the close button clicked
    */
   onClose?: () => void;
@@ -159,6 +163,10 @@ SingleAddSelect.propTypes = {
    * title to display when no results are found from the global search
    */
   noResultsTitle: PropTypes.string,
+  /**
+   * Determines if the component should be rendered within a Tearsheet component
+   */
+  noTearsheet: PropTypes.bool,
   /**
    * function to call when the close button clicked
    */

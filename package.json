@@ -41,7 +41,7 @@
     "lint:license:staged": "scripts/check-license.cjs -w",
     "lint:js": "eslint packages --fix",
     "lint:styles": "stylelint '**/*.scss' --fix",
-    "prepare": "husky install",
+    "prepare": "husky",
     "postinstall": "husky",
     "run-all": "lerna run --stream --prefix --loglevel success",
     "test": "run-p -s 'test:*'",
@@ -64,6 +64,7 @@
   "devDependencies": {
     "@babel/core": "^7.26.10",
     "@babel/eslint-parser": "^7.26.10",
+    "@babel/plugin-transform-class-static-block": "^7.28.3",
     "@babel/preset-react": "^7.26.3",
     "@carbon/grid": "^11.42.0",
     "@carbon/layout": "^11.40.0",

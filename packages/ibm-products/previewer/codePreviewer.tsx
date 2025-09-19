@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,12 +32,14 @@ interface previewerObject {
   customImports: string[];
   customFunctionDefs: string[];
   styles: string;
+  title: string;
 }
 export const stackblitzPrefillConfig = async ({
   story,
   customImports = [],
   customFunctionDefs = [],
   styles,
+  title,
 }: previewerObject) => {
   const { args } = story;
   const productComponents = await import('../src/index');
@@ -56,7 +58,7 @@ export const stackblitzPrefillConfig = async ({
     styleImport += styles.replace(licenseCommentRegex, '');
   }
   const stackblitzFileConfig: Project = {
-    title: 'Carbon demo (TypeScript)',
+    title: title || 'Carbon demo (TypeScript)',
     description:
       'Run official live example code for a Carbon component, created by Carbon Design System on StackBlitz using TypeScript',
     template: 'node',

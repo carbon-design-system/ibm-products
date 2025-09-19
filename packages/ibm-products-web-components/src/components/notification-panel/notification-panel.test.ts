@@ -326,4 +326,76 @@ describe('c4p-notification-panel', () => {
     await elementUpdated(panel);
     expect(document.activeElement).not.toBe(triggerButton);
   });
+
+  it('should render notifications empty state', async () => {
+    const props = defaultProps;
+    const panel: CDSNotificationPanel = await fixture(
+      html` <c4p-notification-panel
+        ?open=${props.open}
+        title-text=${props.titleText}
+        dismiss-all-label=${props.dismissAllLabel}
+        donot-disturb-label=${props.doNotDisturbLabel}
+        today-text=${props.todayText}
+        previous-text=${props.previousText}
+        date-time-locale="${props.dateTimeLocale}"
+      ></c4p-notification-panel>`
+    );
+
+    const slot = panel.shadowRoot?.querySelector(
+      `slot[name="empty-state"]`
+    ) as HTMLSlotElement;
+    expect(slot).toBeTruthy();
+  });
+
+  it('should display the "emptyStateLabel" prop as the label for the empty state message', async () => {
+    const props = defaultProps;
+    const panel: CDSNotificationPanel = await fixture(
+      html` <c4p-notification-panel
+        ?open=${props.open}
+        title-text=${props.titleText}
+        dismiss-all-label=${props.dismissAllLabel}
+        empty-state-label="No notifications yet!"
+        donot-disturb-label=${props.doNotDisturbLabel}
+        today-text=${props.todayText}
+        previous-text=${props.previousText}
+        date-time-locale="${props.dateTimeLocale}"
+      ></c4p-notification-panel>`
+    );
+
+    const emptyStateEl = panel.shadowRoot?.querySelector(`clabs-empty-state`);
+    expect(emptyStateEl).toBeTruthy();
+    expect(emptyStateEl?.getAttribute('subtitle')).to.equal(
+      'No notifications yet!'
+    );
+  });
+
+  it('should render custom empty state component', async () => {
+    const props = defaultProps;
+    const panel: CDSNotificationPanel = await fixture(
+      html` <c4p-notification-panel
+        ?open=${props.open}
+        title-text=${props.titleText}
+        dismiss-all-label=${props.dismissAllLabel}
+        empty-state-label="No notifications yet!"
+        donot-disturb-label=${props.doNotDisturbLabel}
+        today-text=${props.todayText}
+        previous-text=${props.previousText}
+        date-time-locale="${props.dateTimeLocale}"
+      >
+        <div slot="empty-state">
+          <span class="empty-state-message">empty state message</span>
+        </div>
+      </c4p-notification-panel>`
+    );
+
+    const slot = panel.shadowRoot?.querySelector(
+      `slot[name="empty-state"]`
+    ) as HTMLSlotElement;
+
+    const node = slot.assignedNodes()[0] as HTMLElement;
+
+    expect(node?.querySelector('.empty-state-message')?.textContent).toBe(
+      'empty state message'
+    );
+  });
 });

@@ -15,10 +15,12 @@ import { prefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/textarea/index.js';
+
 import { ICON_BUTTON_TOOLTIP_ALIGNMENT } from '@carbon/web-components/es/components/icon-button/defs.js';
 
 import {
   getContent,
+  getCustomHeaderComponents,
   getSubTitle,
   getActionToolbarItems,
   getActionItems,
@@ -107,6 +109,13 @@ const actionItems = {
 const slugs = {
   'No Slug': 0,
   'With Slug': 1,
+};
+
+const customHeaderComponents = {
+  'No custom header components': 0,
+  'With custom components above title': 1,
+  'With custom components below title': 2,
+  'With custom components above & below title': 3,
 };
 
 const closeIconTooltipAlignmentOptions: string[] = Object.values(
@@ -341,6 +350,69 @@ export const WithoutTitle = {
     ...defaultTemplate.args,
     label: 0,
     title: '',
+  },
+};
+
+export const CustomHeader = {
+  args: {
+    ...defaultTemplate.args,
+    customHeaderComponents: 1,
+  },
+  argTypes: {
+    ...defaultTemplate.argTypes,
+    customHeaderComponents: {
+      control: 'select',
+      description: 'Slots (above-title, below-title)',
+      options: customHeaderComponents,
+    },
+  },
+  render: (args) => {
+    return html`
+      <div class="${storyPrefix}story-container">
+        <div class="${storyPrefix}story-header"></div>
+        <div id="page-content-selector" class="${storyPrefix}story-content">
+          <cds-button @click="${toggleButton}">Toggle side-panel</cds-button>
+        </div>
+      </div>
+      <c4p-side-panel
+        ?animate-title=${args.animateTitle}
+        ?condensed-actions=${args.condensedActions}
+        current-step="0"
+        ?include-overlay=${args.includeOverlay && !args.slideIn}
+        selector-initial-focus=${args.selectorInitialFocus}
+        label-text="${getLabel(args.label)}"
+        ?open=${args.open}
+        placement=${args.placement}
+        ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
+        selector-page-content=${args.selectorPageContent}
+        size=${args.size}
+        ?slide-in=${args.slideIn}
+        ?hide-close-button=${args.hideCloseButton}
+        close-icon-description=${args.closeIconDescription}
+        close-icon-tooltip-alignment=${args.closeIconTooltipAlignment}
+        .title=${args.title}
+        @c4p-side-panel-navigate-back=${prevStep}
+      >
+        <!-- slotted custom header components -->
+        ${getCustomHeaderComponents(args.customHeaderComponents)}
+
+        <!-- slotted action toolbar cds-buttons -->
+        ${getActionToolbarItems(args.actionToolbarItems)}
+
+        <!-- default slotted content -->
+        ${getContent(args.content)}
+        <cds-button @click="${nextStep}">Step two</cds-button>
+
+        <!-- slotted subtitle slotted content -->
+        ${getSubTitle(args.subtitle)}
+
+        <!-- slotted action items cds-buttons -->
+        ${getActionItems(args.actionItems)}
+
+        <!-- slotted slug -->
+        ${getSlug(args.slug)}
+      </c4p-side-panel>
+    `;
   },
 };
 

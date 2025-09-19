@@ -17,16 +17,19 @@ import * as PageHeaderStories from './PageHeader.stories';
 
 ## Overview
 
-The `PageHeader` is a large family of components, composed of three zones; the Breadcrumb, Content, and Tabs.
+The `PageHeader` is a large family of components, composed of three zones; the
+Breadcrumb, Content, and Tabs.
 
-<Canvas className='page-header--docs-demo' of={PageHeaderStories.Default} />
+<Canvas className="page-header--docs-demo" of={PageHeaderStories.Default} />
 
 ## PageHeader.BreadcrumbBar
 
-The `PageHeader.BreadcrumbBar` component is used to render the breadcrumb navigation area within the `PageHeader`.
-It accepts `Breadcrumb`, `BreadcrumbItem`, and `PageHeader.TitleBreadcrumb` components as children to define the breadcrumb trail. Additionally, it accepts
-`contentActions` and` pageActions` props, allowing for actions, such as `Button` or `IconButton` — alongside
-the breadcrumb content.
+The `PageHeader.BreadcrumbBar` component is used to render the breadcrumb
+navigation area within the `PageHeader`. It accepts `Breadcrumb`,
+`BreadcrumbItem`, and `PageHeader.TitleBreadcrumb` components as children to
+define the breadcrumb trail. Additionally, it accepts `contentActions`
+and` pageActions` props, allowing for actions, such as `Button` or `IconButton`
+— alongside the breadcrumb content.
 
 ```jsx
 import { Bee, Activity } from '@carbon/icons-react';
@@ -43,16 +46,15 @@ const pageActions = (
   />
 );
 
-const contentActions = (
-  <Button size="md">Button</Button>
-)
+const contentActions = <Button size="md">Button</Button>;
 
 return (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar
       renderIcon={BeeIcon}
       contentActions={contentActions}
-      pageActions={pageActions}>
+      pageActions={pageActions}
+    >
       <Breadcrumb>
         <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
@@ -61,21 +63,30 @@ return (
     </PageHeader.BreadcrumbBar>
     ...
   </PageHeader.Root>
-)
+);
 ```
 
 ## PageHeader.Content
 
-<Canvas className='page-header--docs-demo' of={PageHeaderStories.ContentWithContextualActionsAndPageActions} />
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.ContentWithContextualActionsAndPageActions}
+/>
 
-The `PageHeader.Content` component defines the primary content area of the `PageHeader`, including the title, subtitle, and
-any supporting text or contextual actions. It accepts a `title` prop to display the main heading and can optionally include a `renderIcon` prop
-to show an icon adjacent to the title. Child components such as `PageHeader.ContentText` can be used to provide additional descriptive text.
-To support use cases such as tags, `contextualActions` can be passed as a prop to render components beside the content.
-`pageActions` allows integration of action buttons aligned with the content section.
+The `PageHeader.Content` component defines the primary content area of the
+`PageHeader`, including the title, subtitle, and any supporting text or
+contextual actions. It accepts a `title` prop to display the main heading and
+can optionally include a `renderIcon` prop to show an icon adjacent to the
+title. Child components such as `PageHeader.ContentText` can be used to provide
+additional descriptive text. To support use cases such as tags,
+`contextualActions` can be passed as a prop to render components beside the
+content. `pageActions` allows integration of action buttons aligned with the
+content section.
 
-The `PageHeader.ContentPageActions` component provides responsive behavior by collapsing actions into a `MenuButton` when the viewport
-width is reduced. To enable this functionality, it expects an array of action objects with a specific API shape, as demonstrated below:
+The `PageHeader.ContentPageActions` component provides responsive behavior by
+collapsing actions into a `MenuButton` when the viewport width is reduced. To
+enable this functionality, it expects an array of action objects with a specific
+API shape, as demonstrated below:
 
 ```jsx
 
@@ -132,10 +143,13 @@ return (
 
 ### PageHeader.Content With Hero Image
 
-<Canvas className='page-header--docs-demo' of={PageHeaderStories.ContentWithHeroImage} />
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.ContentWithHeroImage}
+/>
 
-When including a hero image within the `PageHeader`, the `Grid` and `Column` components will need to be utilized in order
-to define the layout correctly.
+When including a hero image within the `PageHeader`, the `Grid` and `Column`
+components will need to be utilized in order to define the layout correctly.
 
 ```jsx
 import { Grid, Column } from '@carbon/react';
@@ -174,9 +188,11 @@ return (
 
 ## PageHeader.TabBar
 
-To render the Tabs zone, utilize the `PageHeader.TabBar` component, passing in the `TabList` and `Tab` components
-as its children. Then set up the `TabPanels` and `TabPanel` components outside of the `PageHeader`, making sure to
-wrap all components within the `Tabs` component to ensures proper linkage of tab and its associated panel.
+To render the Tabs zone, utilize the `PageHeader.TabBar` component, passing in
+the `TabList` and `Tab` components as its children. Then set up the `TabPanels`
+and `TabPanel` components outside of the `PageHeader`, making sure to wrap all
+components within the `Tabs` component to ensures proper linkage of tab and its
+associated panel.
 
 ```jsx
 <Tabs>
@@ -202,46 +218,88 @@ wrap all components within the `Tabs` component to ensures proper linkage of tab
 
 ### PageHeader.TabBar With Tags
 
-<Canvas className='page-header--docs-demo' of={PageHeaderStories.TabBarWithTabsAndTags} />
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.TabBarWithTabsAndTags}
+/>
 
-The `PageHeader.TabsBar` component accepts a `tags` prop expecting an array of objects as shown below. When the viewport
-width is reduced, these tags automatically collapse into a `Popover` for responsive display.
+The `PageHeader.TabsBar` component accepts a `tags` prop expecting a react node.
+If you wish to handle overflowing logic on your own, you can pass any node to
+this prop. You can also use the tag overflow sub component
+(`PageHeader.TagOverflow`), which will handle the overflowing logic for you, yet
+still remains unopinionated and composable enough to allow you to take rendering
+responsibility for the overflow/operational tag and the contents within the
+popover via two render props, `renderOverflowTag` and `renderPopoverContent`.
 
 ```jsx
 const tags = [
-  {
-    type: 'blue',
-    text: 'Tag 1',
-    size: 'md',
-  },
-  {
-    type: 'purple',
-    text: 'Tag 2',
-    size: 'md',
-  },
+  <Tag type="blue" id="example-tag-1">
+    Tag 1
+  </Tag>,
+  <Tag type="purple" id="example-tag-2">
+    Tag 2
+  </Tag>,
+  <Tag type="red" id="example-tag-3">
+    Tag 3
+  </Tag>,
+  <OperationalTag type="blue" id="example-tag-4" text="Tag 4" />,
+  <Tag type="purple" id="example-tag-5">
+    Tag 5
+  </Tag>,
+  <Tag type="red" id="example-tag-6">
+    Tag 6
+  </Tag>,
 ];
 
 return (
-<Tabs>
-  <PageHeader.Root>
-    <PageHeader.TabBar tags={tags}>
-      <TabList>
-        <Tab>Tab 1</Tab>
-        ...
-      </TabList>
-    </PageHeader.TabBar>
-  </PageHeader.Root>
-  <TabPanels>
-    <TabPanel>Tab Panel 1</TabPanel>
-    ...
-  </TabPanels>
-</Tabs>
+  <Tabs>
+    <PageHeader.Root>
+      <PageHeader.TabBar
+        tags={
+          <PageHeader.TagOverflow
+            renderOverflowTag={(
+              hiddenItems,
+              handleOverflowClick,
+              openPopover
+            ) => (
+              <OperationalTag
+                onClick={handleOverflowClick}
+                aria-expanded={openPopover}
+                text={`+${hiddenItems.length}`}
+              />
+            )}
+            renderPopoverContent={(hiddenItems) => {
+              return hiddenItems.map((i, index) => {
+                const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
+                return cloneElement(foundJSXTag, {
+                  id: `cloned-tag-node-id-${index}`,
+                  key: `cloned-tag-key-${index}`,
+                });
+              });
+            }}
+          >
+            {tags}
+          </PageHeader.TagOverflow>
+        }
+      >
+        <TabList>
+          <Tab>Tab 1</Tab>
+          ...
+        </TabList>
+      </PageHeader.TabBar>
+    </PageHeader.Root>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      ...
+    </TabPanels>
+  </Tabs>
 );
 ```
 
 ### PageHeader.TabBar With scroller button
 
-To include the scroller button to expand and collapse the header, pass `PageHeader.ScrollButton` to the `scroller` prop of the tab bar.
+To include the scroller button to expand and collapse the header, pass
+`PageHeader.ScrollButton` to the `scroller` prop of the tab bar.
 
 ```jsx
 <Tabs>

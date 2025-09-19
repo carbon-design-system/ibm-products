@@ -18,12 +18,13 @@ import { consume } from '@lit/context';
 import { dateTimeLocaleContext } from './date-time-context';
 import styles from './notification.scss?lit';
 import '@carbon/web-components/es/components/button/index.js';
-import Close16 from '@carbon/web-components/es/icons/close/16';
-import ErrorFilled16 from '@carbon/web-components/es/icons/error--filled/16';
-import CheckmarkFilled16 from '@carbon/web-components/es/icons/checkmark--filled/16';
-import WarningAltFilled16 from '@carbon/web-components/es/icons/warning--alt--filled/16';
-import InformationSquareFilled16 from '@carbon/web-components/es/icons/information--square--filled/16';
+import Close16 from '@carbon/icons/es/close/16';
+import ErrorFilled16 from '@carbon/icons/es/error--filled/16';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16';
+import InformationSquareFilled16 from '@carbon/icons/es/information--square--filled/16';
 import { getSupportedLocale } from '../../globals/js/utils/getSupportedLocale';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 
 const blockClass = `${prefix}--notifications-panel__notification`;
 const DefaultLocale = 'en-US';
@@ -100,7 +101,7 @@ class CDSNotification extends HostListenerMixin(LitElement) {
         class="${blockClass}__dismiss-single-button"
         @click=${dismissSingleNotification}
       >
-        ${Close16({ slot: 'icon' })}
+        ${iconLoader(Close16, { slot: 'icon' })}
         <span slot="tooltip-content">Dismiss</span>
       </cds-icon-button>
     `;
@@ -135,22 +136,22 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     let icon;
     switch (type) {
       case 'error':
-        icon = ErrorFilled16({
+        icon = iconLoader(ErrorFilled16, {
           class: `${blockClass}-status-icon ${blockClass}-status-icon-error`,
         });
         break;
       case 'success':
-        icon = CheckmarkFilled16({
+        icon = iconLoader(CheckmarkFilled16, {
           class: `${blockClass}-status-icon ${blockClass}-status-icon-success`,
         });
         break;
       case 'warning':
-        icon = WarningAltFilled16({
+        icon = iconLoader(WarningAltFilled16, {
           class: `${blockClass}-status-icon ${blockClass}-status-icon-warning`,
         });
         break;
       case 'informational':
-        icon = InformationSquareFilled16({
+        icon = iconLoader(InformationSquareFilled16, {
           class: `${blockClass}-status-icon ${blockClass}-status-icon-informational`,
         });
         break;

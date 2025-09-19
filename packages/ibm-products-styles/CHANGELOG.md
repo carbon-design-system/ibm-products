@@ -1,3 +1,39 @@
+## `@carbon/ibm-products-styles@2.71.0-rc.0`
+### Features :rocket:
+- feat(sidepanel): utilizes layer in sidepanel (#8025)
+
+### Bug fixes :bug:
+- fix: add wordbreak to sidepanel title (#8230)
+- fix(tagset): restore operational tag styles (#8182)
+
+### Housekeeping :house:
+- chore(deps): update dependency npm-run-all2 to v8 (#8219)
+- chore(deps): replace dependency npm-run-all with npm-run-all2 ^5.0.0 (#7202)
+- build(deps): update to Carbon 11 compatible versions to latest (#8171)
+
+## `@carbon/ibm-products-styles@2.70.0`
+### Features :rocket:
+- feat(conditionbuilder): option to disable specific property dynamically (#8105)
+- feat: condition builder read only state (#8125)
+
+### Bug fixes :bug:
+- fix: Update publishing-releases.md (#8096)
+- fix: replace StringFormatter with TruncatedText (#7968)
+- fix(SidePanel): remove shadow on slide-ins (#7978)
+- fix(makeDraggable): improve accessibility (#8090)
+
+## `@carbon/ibm-products-styles@2.69.0`
+### Features :rocket:
+- feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)
+
+### Bug fixes :bug:
+- fix(sidepanel): blank space appears when the header has no content (#8029)
+- fix(styles): use correct syntax for custom prop (#7990)
+- fix(PageHeader): ensures expected positioning even if content component is excluded (#7946)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
 ## `@carbon/ibm-products-styles@2.68.1`
 ### Bug fixes :bug:
 - fix(coachmark): address bubble style import (#8010)

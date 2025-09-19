@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2023
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -167,7 +167,7 @@ export type ExperimentalSecondarySubmit = {
   onClick?: () => void;
 };
 
-export let CreateTearsheetStep = forwardRef(
+export const CreateTearsheetStep = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -351,12 +351,6 @@ export let CreateTearsheetStep = forwardRef(
   }
 );
 
-// Return a placeholder if not released and not enabled by feature flag
-CreateTearsheetStep = pkg.checkComponentEnabled(
-  CreateTearsheetStep,
-  componentName
-);
-
 CreateTearsheetStep.propTypes = {
   /**
    * Content that shows in the tearsheet step
@@ -398,9 +392,7 @@ CreateTearsheetStep.propTypes = {
    * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
    */
   /**@ts-ignore*/
-  fieldsetLegendId: PropTypes.node.isRequired.if(
-    ({ hasFieldset }) => !!hasFieldset
-  ),
+  fieldsetLegendId: PropTypes.node,
 
   /**
    * This is the required legend text that appears above a fieldset html element for accessibility purposes.
@@ -408,9 +400,7 @@ CreateTearsheetStep.propTypes = {
    * Otherwise, use CSS to hide/remove this label text.
    */
   /**@ts-ignore*/
-  fieldsetLegendText: PropTypes.string.isRequired.if(
-    ({ hasFieldset }) => !!hasFieldset
-  ),
+  fieldsetLegendText: PropTypes.string,
 
   /**
    * This optional prop will render your form content inside of a fieldset html element

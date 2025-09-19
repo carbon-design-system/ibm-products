@@ -15,6 +15,7 @@ import { Close, Draggable } from '@carbon/react/icons';
 import { Button } from '@carbon/react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
+import { useCoachmark } from './utils/context';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -25,7 +26,6 @@ const overlayBlockClass = `${pkg.prefix}--coachmark-overlay`;
 const componentName = 'CoachmarkDragbar';
 
 const defaults = {
-  closeIconDescription: 'Close',
   onDrag: () => {},
   onClose: () => {},
   showCloseButton: true,
@@ -37,10 +37,6 @@ interface CoachmarkDragbarProps {
    * Handler to manage keyboard interactions with the dragbar.
    */
   a11yKeyboardHandler: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
-  /**
-   * Tooltip text and aria label for the Close button icon.
-   */
-  closeIconDescription?: string;
   /**
    * Function to call when the close button is clicked.
    */
@@ -68,14 +64,13 @@ interface CoachmarkDragbarProps {
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
  */
-export let CoachmarkDragbar = React.forwardRef<
+export const CoachmarkDragbar = React.forwardRef<
   HTMLElement,
   CoachmarkDragbarProps
 >(
   (
     {
       a11yKeyboardHandler,
-      closeIconDescription = defaults.closeIconDescription,
       onClose = defaults.onClose,
       onDrag = defaults.onDrag,
       showCloseButton = defaults.showCloseButton,
@@ -106,6 +101,8 @@ export let CoachmarkDragbar = React.forwardRef<
     }, [isDragging, onDrag]);
 
     const handleDragStart = () => setIsDragging(true);
+
+    const closeIconDescription = useCoachmark()?.closeIconDescription;
 
     return (
       <header
@@ -153,7 +150,6 @@ export let CoachmarkDragbar = React.forwardRef<
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkDragbar = pkg.checkComponentEnabled(CoachmarkDragbar, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -167,10 +163,6 @@ CoachmarkDragbar.propTypes = {
    * Handler to manage keyboard interactions with the dragbar.
    */
   a11yKeyboardHandler: PropTypes.func.isRequired,
-  /**
-   * Tooltip text and aria label for the Close button icon.
-   */
-  closeIconDescription: PropTypes.string,
   /**
    * Function to call when the close button is clicked.
    */

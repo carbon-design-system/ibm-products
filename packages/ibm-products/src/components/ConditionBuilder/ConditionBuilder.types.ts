@@ -66,6 +66,7 @@ export type option = Item & { icon?: CarbonIconType };
 
 export type PropertyConfigOption = {
   type: 'option';
+
   config?: {
     options?: option[];
     operators?: (Item & { isMultiSelect?: boolean })[];
@@ -125,6 +126,14 @@ export type Property = Item & {
   description?: string;
   type?: any;
   config?: any;
+  getIsDisabled?: (args: {
+    conditionState: Condition;
+    group?: ConditionGroup;
+  }) => boolean;
+  getIsHidden?: (args: {
+    conditionState: Condition;
+    group?: ConditionGroup;
+  }) => boolean;
 } & ConfigType;
 
 export type inputConfig = { properties: Property[] };
@@ -232,6 +241,7 @@ export type ConditionBuilderProps = {
   translateWithId?: (id: ConditionBuilderTextKeys) => string;
   statementConfigCustom: statementConfig[];
   onAddItem?: (config: AddItemConfig) => { preventAdd: boolean };
+  readOnly?: boolean;
 };
 
 export type InitialState = {
@@ -250,8 +260,8 @@ export interface ConditionBuilderContextInputProps extends PropsWithChildren {
   variant?: string;
   translateWithId?: (id: ConditionBuilderTextKeys) => string;
   statementConfigCustom?: statementConfig[];
-
   conditionBuilderRef?: ForwardedRef<HTMLDivElement>;
+  readOnly?: boolean;
 }
 
 export type ConditionBuilderContextProps = {

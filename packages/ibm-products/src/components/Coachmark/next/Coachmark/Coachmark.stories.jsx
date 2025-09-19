@@ -7,7 +7,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { Coachmark } from './Coachmark';
-import './CoachmarkBubble';
 import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 import { Button, Theme } from '@carbon/react';
@@ -15,7 +14,7 @@ import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark/next',
+  title: 'Preview/Onboarding/Coachmark/next',
   component: Coachmark,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
@@ -117,22 +116,17 @@ const TooltipTemplate = (args) => {
   return (
     <Theme theme={carbonTheme}>
       <Coachmark
-        ariaLabel="Coachmark"
         position={{ x: 151, y: 155 }}
         open={isOpen}
         onClose={handleClose}
         {...args}
       >
         <CoachmarkBeacon
-          id="CoachmarkBtn"
           label="Show information"
-          onClick={handleBeaconClick}
+          buttonProps={{ onClick: handleBeaconClick, id: 'CoachmarkBtn' }}
         ></CoachmarkBeacon>
         <Coachmark.Content highContrast={true}>
-          <Coachmark.Content.Header
-            closeIconDescription="Close"
-            dragIconDescription="Drag"
-          ></Coachmark.Content.Header>
+          <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
           <Coachmark.Content.Body>
             <h2>Hello World</h2>
             <p>this is a description test</p>
@@ -158,13 +152,7 @@ const FloatingTemplate = (args) => {
   };
   return (
     <Theme theme={carbonTheme}>
-      <Coachmark
-        open={isOpen}
-        onClose={handleClose}
-        ariaLabel="Coachmark"
-        floating={true}
-        {...args}
-      >
+      <Coachmark open={isOpen} onClose={handleClose} floating={true} {...args}>
         <Button
           id="CoachmarkBtn"
           kind="tertiary"

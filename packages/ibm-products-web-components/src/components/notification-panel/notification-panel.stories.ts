@@ -16,17 +16,19 @@ import { prefix, carbonPrefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/ui-shell/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
-import User20 from '@carbon/web-components/es/icons/user/20.js';
-import Notification20 from '@carbon/web-components/es/icons/notification/20.js';
 import { UnreadNotificationBell } from './_story-assets/unread-notification-bell';
-import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20.js';
+import User20 from '@carbon/icons/es/user/20.js';
+import Notification20 from '@carbon/icons/es/notification/20.js';
+import SwitcherIcon20 from '@carbon/icons/es/switcher/20.js';
 import {
   dataToday as initialDataToday,
   dataPrevious as initialDataPrevious,
   extraData,
 } from './_story-assets/NotificationsPanel_data';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 const blockClassNotification = `${prefix}--notifications-panel__notification`;
 const storyBlockClass = `${prefix}--notifications-panel__story`;
+const blockClass = `${prefix}--notifications-panel`;
 
 const dateTimeLocaleOptions = {
   undefined: undefined,
@@ -66,13 +68,14 @@ const dateTimeLocaleOptions = {
   vi: 'vi',
 };
 
-export const defaultTemplate = {
+const defaultTemplate = {
   args: {
     titleText: 'Notifications',
     open: true,
     todayText: 'Today',
     previousText: 'Previous',
     dismissAllLabel: 'Dismiss all',
+    emptyStateLabel: 'You do not have any notifications',
     doNotDisturbLabel: 'Do not disturb',
   },
   argTypes: {
@@ -96,6 +99,11 @@ export const defaultTemplate = {
       control: 'text',
       description:
         'Sets the label text for the "Dismiss all" button in the Notification panel',
+    },
+    emptyStateLabel: {
+      control: 'text',
+      description:
+        'Sets the empty state label text when there are no notifications',
     },
     doNotDisturbLabel: {
       control: 'text',
@@ -187,7 +195,7 @@ export const defaultTemplate = {
               setExpandUserPanel((prev) => !prev);
             }}
           >
-            ${User20({ slot: 'icon' })}
+            ${iconLoader(User20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-panel
             id="user-panel"
@@ -209,7 +217,7 @@ export const defaultTemplate = {
           >
             ${isNewNotification
               ? UnreadNotificationBell({ slot: 'icon' })
-              : Notification20({ slot: 'icon' })}
+              : iconLoader(Notification20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
@@ -219,7 +227,7 @@ export const defaultTemplate = {
               setExpandPanel((prev) => !prev);
             }}
           >
-            ${SwitcherIcon20({ slot: 'icon' })}
+            ${iconLoader(SwitcherIcon20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-panel
             id="switcher-panel"
@@ -241,6 +249,7 @@ export const defaultTemplate = {
         today-text="${args.todayText}"
         previous-text="${args.previousText}"
         dismiss-all-label="${args.dismissAllLabel}"
+        empty-state-label="${args.emptyStateLabel}"
         donot-disturb-label="${args.doNotDisturbLabel}"
         date-time-locale="${args.dateTimeLocale}"
         @c4p-notification-dismiss-all=${dismissAllNotification}
@@ -323,8 +332,39 @@ export const defaultTemplate = {
     `;
   },
 };
+
+async function queryShadowElement(hostSelector, targetSelector) {
+  const host = document.querySelector(hostSelector);
+  await new Promise((resolve) => {
+    const checkShadow = () => {
+      if (host && host.shadowRoot) {
+        resolve(true);
+      } else {
+        requestAnimationFrame(checkShadow);
+      }
+    };
+    checkShadow();
+  });
+  return host.shadowRoot.querySelector(targetSelector);
+}
+
 const meta = {
   title: 'Components/NotificationPanel',
+};
+
+export const Default = {
+  ...defaultTemplate,
+};
+
+export const EmptyState = {
+  ...defaultTemplate,
+  play: async ({ userEvent }) => {
+    const dismissAllButton = await queryShadowElement(
+      'c4p-notification-panel',
+      `.${blockClass}__dismiss-button`
+    );
+    await userEvent.click(dismissAllButton);
+  },
 };
 
 export default meta;

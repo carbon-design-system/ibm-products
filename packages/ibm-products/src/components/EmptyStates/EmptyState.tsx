@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { ElementType, ReactNode } from 'react';
-import { EmptyStateV2 } from './EmptyStateV2';
+import { EmptyStateV2 } from './EmptyStateV2.deprecated';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -111,7 +111,7 @@ export type EmptyStatePresetProps = Omit<EmptyStateProps, 'illustration'>;
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */
-export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
+export const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
   ({ v2 = false, ...props }, ref) => {
     if (v2) {
       return <EmptyStateV2 {...props} />;
@@ -163,7 +163,6 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-EmptyState = pkg.checkComponentEnabled(EmptyState, componentName);
 
 EmptyState.propTypes = {
   /**
@@ -199,9 +198,7 @@ EmptyState.propTypes = {
    * The alt text for custom provided illustrations
    */
   /**@ts-ignore*/
-  illustrationDescription: PropTypes.string.isRequired.if(
-    ({ illustration }) => illustration
-  ),
+  illustrationDescription: PropTypes.string,
 
   /**
    * Designates the position of the illustration relative to the content

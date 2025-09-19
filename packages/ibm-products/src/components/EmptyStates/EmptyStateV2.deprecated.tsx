@@ -12,7 +12,7 @@ import { Button, Link } from '@carbon/react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
-import EmptyStateIllustration from './EmptyStateIllustration';
+import EmptyStateIllustration from './EmptyStateIllustration.deprecated';
 
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateV2';
@@ -93,7 +93,7 @@ export interface EmptyStateV2Props {
  * @deprecated
  */
 
-export let EmptyStateV2 = React.forwardRef<HTMLDivElement, EmptyStateV2Props>(
+export const EmptyStateV2 = React.forwardRef<HTMLDivElement, EmptyStateV2Props>(
   (props, ref) => {
     const {
       action,
@@ -153,13 +153,13 @@ export let EmptyStateV2 = React.forwardRef<HTMLDivElement, EmptyStateV2Props>(
             {title}
           </h3>
           {subtitle && (
-            <p
+            <div
               className={cx(`${blockClass}__subtitle`, {
                 [`${blockClass}__subtitle--small`]: size === 'sm',
               })}
             >
               {subtitle}
-            </p>
+            </div>
           )}
           {action && (
             <Button
@@ -189,7 +189,6 @@ EmptyStateV2.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-EmptyStateV2 = pkg.checkComponentEnabled(EmptyStateV2, componentName);
 
 EmptyStateV2.propTypes = {
   /**

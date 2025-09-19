@@ -1,5 +1,8 @@
 import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
-import { CodesandboxLink, stackblitzHref } from '../../global/js/utils/story-helper';
+import {
+  CodesandboxLink,
+  stackblitzHref,
+} from '../../global/js/utils/story-helper';
 import { Saving } from '.';
 import * as stories from './Saving.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
@@ -12,11 +15,12 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 - [Overview](#overview)
 - [Example usage](#example-usage)
-    - [Auto](#auto)
-    - [Manual](##auto)
+  - [Auto](#auto)
+  - [Manual](##auto)
 - [Component API](#component-api)
 
 ## Overview
+
 ### Auto
 
 <Canvas
@@ -24,10 +28,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({
-        'story': stories.Auto, 
-        'styles': stories.default.parameters.styles
-      }),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Auto,
+          styles: stories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -39,15 +44,18 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({
-        'story': stories.Manual,
-        'styles': stories.default.parameters.styles
-      }),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Manual,
+          styles: stories.default.parameters.styles,
+        }),
     },
   ]}
 />
 
-
 ## Component API
-NOTE: Changing the controls below affects the default/primary example shown on the docs page.
+
+NOTE: Changing the controls below affects the default/primary example shown on
+the docs page.
+
 <Controls />

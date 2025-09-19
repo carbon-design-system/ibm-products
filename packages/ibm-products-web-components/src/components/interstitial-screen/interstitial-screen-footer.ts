@@ -17,7 +17,7 @@ import styles from './interstitial-screen-footer.scss?lit';
 import { interstitialDetailsSignal } from './interstitial-screen-context';
 import { SignalWatcher } from '@lit-labs/signals';
 import '@carbon/web-components/es/components/inline-loading/inline-loading.js';
-import { CDSModalFooter } from '@carbon/web-components/es/index.js';
+import CDSModalFooter from '@carbon/web-components/es/components/modal/modal-footer';
 import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.71.0-rc.0`
+## `@carbon/ibm-products-styles@2.71.0`
 ### Features :rocket:
 - feat(sidepanel): utilizes layer in sidepanel (#8025)
 

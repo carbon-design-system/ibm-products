@@ -10,6 +10,7 @@ import {
   Button,
   Checkbox,
   FormLabel,
+  InlineLoading,
   Link,
   Modal,
   TextInput,
@@ -37,19 +38,24 @@ export default {
 const HighImpactDeletion = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState('inactive');
+  const [loaderDescription, setLoaderDescription] = useState('Deleting');
   const [openNotification, setOpenNotification] = useState(false);
   const [resourceName, setResourceName] = useState('');
   const [isValidName, setIsValidName] = useState(false);
 
   const deleteItem = async () => {
-    await wait(10);
+    await wait(1000);
     return true;
   };
 
   const handleDelete = async () => {
     setLoading(true);
+    setLoadingStatus('active');
     const isDelete = await deleteItem();
     setLoading(false);
+    setLoadingStatus('finished');
+    setLoaderDescription('Deleted!');
     setOpen(false);
     isDelete && showNotification();
   };
@@ -69,6 +75,11 @@ const HighImpactDeletion = () => {
     } else {
       setIsValidName(false);
     }
+  };
+
+  const resetLoaderStatus = () => {
+    setLoadingStatus('inactive');
+    setLoaderDescription('Deleting...');
   };
 
   return (
@@ -95,7 +106,10 @@ const HighImpactDeletion = () => {
         secondaryButtonText="Cancel"
         onRequestSubmit={handleDelete}
         onSecondarySubmit={() => setOpen(false)}
-        primaryButtonDisabled={loading || !isValidName}
+        primaryButtonDisabled={!isValidName}
+        loadingStatus={loadingStatus}
+        loadingDescription={loaderDescription}
+        onLoadingSuccess={resetLoaderStatus}
       >
         <p
           style={{
@@ -148,20 +162,25 @@ const HighImpactDeletionWithConnectedItems = () => {
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState('inactive');
+  const [loaderDescription, setLoaderDescription] = useState('Deleting');
   const [openNotification, setOpenNotification] = useState(false);
   const [resourceName, setResourceName] = useState('');
   const [isValidName, setIsValidName] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
   const deleteItem = async () => {
-    await wait(10);
+    await wait(1000);
     return true;
   };
 
   const handleDelete = async () => {
     setLoading(true);
+    setLoadingStatus('active');
     const isDelete = await deleteItem();
     setLoading(false);
+    setLoadingStatus('finished');
+    setLoaderDescription('Deleted!');
     setOpen(false);
     isDelete && showNotification();
   };
@@ -181,6 +200,11 @@ const HighImpactDeletionWithConnectedItems = () => {
     } else {
       setIsValidName(false);
     }
+  };
+
+  const resetLoaderStatus = () => {
+    setLoadingStatus('inactive');
+    setLoaderDescription('Deleting...');
   };
 
   return (
@@ -210,7 +234,10 @@ const HighImpactDeletionWithConnectedItems = () => {
         secondaryButtonText="Cancel"
         onRequestSubmit={handleDelete}
         onSecondarySubmit={() => setOpen(false)}
-        primaryButtonDisabled={loading || !isValidName || !isChecked}
+        primaryButtonDisabled={!isValidName || !isChecked}
+        loadingStatus={loadingStatus}
+        loadingDescription={loaderDescription}
+        onLoadingSuccess={resetLoaderStatus}
       >
         <p
           style={{
@@ -292,18 +319,23 @@ const HighImpactBatchDeletion = () => {
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState('inactive');
+  const [loaderDescription, setLoaderDescription] = useState('Deleting');
   const [openNotification, setOpenNotification] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
   const deleteItem = async () => {
-    await wait(10);
+    await wait(1000);
     return true;
   };
 
   const handleDelete = async () => {
     setLoading(true);
+    setLoadingStatus('active');
     const isDelete = await deleteItem();
     setLoading(false);
+    setLoadingStatus('finished');
+    setLoaderDescription('Deleted!');
     setOpen(false);
     isDelete && showNotification();
   };
@@ -314,6 +346,11 @@ const HighImpactBatchDeletion = () => {
 
   const hideNotification = () => {
     setOpenNotification(false);
+  };
+
+  const resetLoaderStatus = () => {
+    setLoadingStatus('inactive');
+    setLoaderDescription('Deleting...');
   };
 
   return (
@@ -342,8 +379,11 @@ const HighImpactBatchDeletion = () => {
         secondaryButtonText="Cancel"
         onRequestSubmit={handleDelete}
         onSecondarySubmit={() => setOpen(false)}
-        primaryButtonDisabled={loading || !isChecked}
+        primaryButtonDisabled={!isChecked}
         size="sm"
+        loadingStatus={loadingStatus}
+        loadingDescription={loaderDescription}
+        onLoadingSuccess={resetLoaderStatus}
       >
         <p
           style={{
@@ -418,17 +458,22 @@ highImpactBatchDeletion.args = {};
 const MediumImpactDeletion = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState('inactive');
+  const [loaderDescription, setLoaderDescription] = useState('Deleting');
   const [openNotification, setOpenNotification] = useState(false);
 
   const deleteItem = async () => {
-    await wait(10);
+    await wait(1000);
     return true;
   };
 
   const handleDelete = async () => {
     setLoading(true);
+    setLoadingStatus('active');
     const isDelete = await deleteItem();
     setLoading(false);
+    setLoadingStatus('finished');
+    setLoaderDescription('Deleted!');
     setOpen(false);
     isDelete && showNotification();
   };
@@ -439,6 +484,11 @@ const MediumImpactDeletion = () => {
 
   const hideNotification = () => {
     setOpenNotification(false);
+  };
+
+  const resetLoaderStatus = () => {
+    setLoadingStatus('inactive');
+    setLoaderDescription('Deleting...');
   };
 
   return (
@@ -457,6 +507,9 @@ const MediumImpactDeletion = () => {
         onRequestSubmit={handleDelete}
         onSecondarySubmit={() => setOpen(false)}
         primaryButtonDisabled={loading}
+        loadingStatus={loadingStatus}
+        loadingDescription={loaderDescription}
+        onLoadingSuccess={resetLoaderStatus}
       >
         <p>
           Deleting 'Bx1001' will permanently delete the configuration. This
@@ -493,7 +546,7 @@ const LowImpactDeletion = () => {
   const [loading, setLoading] = useState(false);
 
   const deleteItem = async () => {
-    await wait(10);
+    await wait(1000);
     return true;
   };
 
@@ -514,16 +567,26 @@ const LowImpactDeletion = () => {
 
   return (
     <div className="app">
-      <Button
-        size="md"
-        renderIcon={TrashCan}
-        kind="danger"
-        iconDescription="TrashCan"
-        onClick={handleDelete}
-        disabled={loading}
-      >
-        Delete
-      </Button>
+      {loading ? (
+        <Button
+          size="md"
+          kind="danger"
+          iconDescription="Loading"
+          renderIcon={InlineLoading}
+        >
+          Deleting...
+        </Button>
+      ) : (
+        <Button
+          size="md"
+          kind="danger"
+          iconDescription="TrashCan"
+          renderIcon={TrashCan}
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
+      )}
       {open && (
         <ToastNotification
           open={open}

@@ -197,8 +197,10 @@ export const TagSetOverflow = React.forwardRef(
             className={cx(`${blockClass}__popover-trigger`)}
             size={size}
             text={`+${overflowTags.length}`}
+            aria-expanded={popoverOpen}
+            aria-controls="overflow-content"
           />
-          <PopoverContent>
+          <PopoverContent id="overflow-content" aria-hidden={!popoverOpen}>
             <div ref={overflowTagContent} className={`${blockClass}__content`}>
               <ul className={`${blockClass}__tag-list`}>
                 {overflowTags

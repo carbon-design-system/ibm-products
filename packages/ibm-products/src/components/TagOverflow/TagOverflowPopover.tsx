@@ -110,8 +110,10 @@ export const TagOverflowPopover = forwardRef(
             onClick={() => setPopoverOpen?.(!popoverOpen)}
             className={cx(`${blockClass}__trigger`)}
             text={`+${overflowTags.length}`}
+            aria-expanded={popoverOpen}
+            aria-controls="overflow-content"
           />
-          <PopoverContent>
+          <PopoverContent id="overflow-content" aria-hidden={!popoverOpen}>
             <div ref={overflowTagContent} className={`${blockClass}__content`}>
               <ul className={`${blockClass}__tag-list`}>
                 {hasItems &&

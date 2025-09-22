@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "version": "0.23.0",
+  "version": "0.24.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -55,8 +55,8 @@
     "telemetry-config": "ibmtelemetry-config generate --wc --id 8a79d901-a9c0-4672-94a4-fa8eea139832 --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components"
   },
   "dependencies": {
-    "@carbon-labs/wc-empty-state": "^0.7.0",
-    "@carbon/ibm-products-styles": "^2.70.0",
+    "@carbon-labs/wc-empty-state": "^0.9.0",
+    "@carbon/ibm-products-styles": "^2.71.0",
     "@carbon/styles": "1.89.0",
     "@carbon/web-components": "2.37.0",
     "@ibm/telemetry-js": "^1.10.2",

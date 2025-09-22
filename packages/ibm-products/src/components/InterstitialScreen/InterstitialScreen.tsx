@@ -93,7 +93,7 @@ export type InterstitialScreenComponent = React.ForwardRefExoticComponent<
  * (e.g. upon first login or first time opening a page where a
  * newly purchased capability is presented).
  */
-export let InterstitialScreen = React.forwardRef<
+export const InterstitialScreen = React.forwardRef<
   HTMLDivElement,
   InterstitialScreenProps
 >((props, ref) => {
@@ -254,11 +254,6 @@ export let InterstitialScreen = React.forwardRef<
 InterstitialScreen.Header = InterstitialScreenHeader;
 InterstitialScreen.Body = InterstitialScreenBody;
 InterstitialScreen.Footer = InterstitialScreenFooter;
-// Return a placeholder if not released and not enabled by feature flag
-InterstitialScreen = pkg.checkComponentEnabled(
-  InterstitialScreen,
-  componentName
-);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

@@ -6,32 +6,16 @@
  */
 
 import React from 'react';
-import { UserAvatar } from './UserAvatar';
+import { User } from '@carbon/react/icons';
 import figma from '@figma/code-connect';
+import { UserAvatar } from './UserAvatar';
 
-const instances = [
+figma.connect(
+  UserAvatar,
+  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=8455-379903&t=dp2JMhGgRmo6z5yt-0',
   {
-    type: 'Image, xl',
-    url: 'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=15368-59380',
-    name: 'Miles Davis',
-  },
-  {
-    type: 'Initials, xl',
-    url: 'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=15368-59389',
-    name: 'Miles Davis',
-  },
-  {
-    type: 'Icon, xl',
-    url: 'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=15368-59404',
-    name: 'Miles Davis',
-  },
-];
-
-instances.forEach(({ url, type, ...rest }) => {
-  figma.connect(UserAvatar, url, {
-    variant: { Type: type },
+    variant: { Type: 'Image' },
     props: {
-      ...rest,
       name: figma.string('Initials text'),
       size: figma.enum('Size', {
         'Extra large': 'xl',
@@ -42,11 +26,37 @@ instances.forEach(({ url, type, ...rest }) => {
     },
     example: (props) => (
       <UserAvatar
-        tooltipText="Miles David, musician"
+        image="/path/to/image"
+        imageDescription="Alt text for image"
         tooltipAlignment="bottom"
-        className="my-user-avatar"
+        tooltipText={`${props.name}, more info here`}
         {...props}
       />
     ),
-  });
-});
+  }
+);
+
+figma.connect(
+  UserAvatar,
+  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=8455-379903&t=dp2JMhGgRmo6z5yt-0',
+  {
+    variant: { Type: 'Icon' },
+    props: {
+      name: figma.string('Initials text'),
+      size: figma.enum('Size', {
+        'Extra large': 'xl',
+        Large: 'lg',
+        Medium: 'md',
+        Small: 'sm',
+      }),
+    },
+    example: (props) => (
+      <UserAvatar
+        renderIcon={User}
+        tooltipAlignment="bottom"
+        tooltipText={`${props.name}, more info here`}
+        {...props}
+      />
+    ),
+  }
+);

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,7 @@
 import { Button, IconButton } from '@carbon/react';
 import { CaretLeft, CaretRight, Close, Idea } from '@carbon/react/icons';
 // Import portions of React that are needed.
-import React, { ReactNode, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { blue90, purple70 } from '@carbon/colors';
 
 import { Carousel } from '../Carousel';
@@ -78,10 +78,6 @@ export interface GuidebannerProps {
    *  Specify whether the Guidebanner is currently open.
    * */
   open?: boolean;
-  /**
-   * Optional callback for when the GuideBanner is opened/closed.
-   */
-  onToggle?: (open: boolean) => void;
 }
 
 const defaults = {
@@ -116,18 +112,21 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
       previousIconDescription = defaults.previousIconDescription,
       title,
       open,
-      onToggle,
       ...rest
     } = props;
     const scrollRef = useRef<any>(null);
     const toggleRef = useRef<HTMLDivElement>(null);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [showNavigation, setShowNavigation] = useState(false);
-    const isCollapsed = !open;
+    const [isCollapsed, setIsCollapsed] = useState(!open);
 
     const handleClickToggle = () => {
-      onToggle?.(!open);
+      setIsCollapsed((prev) => !prev);
     };
+
+    useEffect(() => {
+      setIsCollapsed(!open);
+    }, [open]);
 
     const carouselContentId = `${uuidv4()}--carousel-content-id`;
 
@@ -295,10 +294,6 @@ Guidebanner.propTypes = {
    * callback function will be triggered when button is clicked.
    */
   onClose: PropTypes.func,
-  /**
-   * Optional callback for when the Guidebanner is opened/closed.
-   */
-  onToggle: PropTypes.func,
   /**
    * Specify whether the Guidebanner is currently open.
    */

@@ -74,11 +74,20 @@ export interface GuidebannerProps {
    * content on the page under special circumstances.
    */
   withLeftGutter?: boolean;
+  /**
+   *  Specify whether the Guidebanner is currently open.
+   * */
+  open?: boolean;
+  /**
+   * Optional callback for when the GuideBanner is opened/closed.
+   */
+  onToggle?: (open: boolean) => void;
 }
 
 const defaults = {
   collapsible: false,
   withLeftGutter: false,
+  open: true,
   // Labels
   closeIconDescription: 'Close',
   collapseButtonLabel: 'Read less',
@@ -106,17 +115,20 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
       nextIconDescription = defaults.nextIconDescription,
       previousIconDescription = defaults.previousIconDescription,
       title,
+      open,
+      onToggle,
       ...rest
     } = props;
     const scrollRef = useRef<any>(null);
     const toggleRef = useRef<HTMLDivElement>(null);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [showNavigation, setShowNavigation] = useState(false);
-    const [isCollapsed, setIsCollapsed] = useState(collapsible ? true : false);
+    const isCollapsed = !open;
 
     const handleClickToggle = () => {
-      setIsCollapsed((prevState) => !prevState);
+      onToggle?.(!open);
     };
+
     const carouselContentId = `${uuidv4()}--carousel-content-id`;
 
     return (
@@ -283,6 +295,14 @@ Guidebanner.propTypes = {
    * callback function will be triggered when button is clicked.
    */
   onClose: PropTypes.func,
+  /**
+   * Optional callback for when the Guidebanner is opened/closed.
+   */
+  onToggle: PropTypes.func,
+  /**
+   * Specify whether the Guidebanner is currently open.
+   */
+  open: PropTypes.bool,
   /**
    * Tooltip text and aria label for the Back button icon.
    */

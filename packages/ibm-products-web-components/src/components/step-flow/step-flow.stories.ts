@@ -8,19 +8,11 @@
  */
 
 import { html } from 'lit';
-import { fn } from 'storybook/test';
 import './index';
-// import '@carbon/web-components/es/components/toggle/index.js';
-// import '@carbon/web-components/es/components/dropdown/index.js';
 import styles from './story-styles.scss?lit';
 import './_story-assets/step-tearsheet';
 
-const argTypes = {};
-
-const blockClass = 'step-flow-example';
-
-const renderTemplate = (args) => {
-  // const {} = args;
+const renderTemplate = () => {
   return html`
     <style>
       ${styles}
@@ -31,9 +23,8 @@ const renderTemplate = (args) => {
 
 export const Tearsheet = {
   args: {},
-  argTypes,
   render: renderTemplate,
-  storyName: 'Tearsheet',
+  name: 'Tearsheet',
 };
 
 export default {

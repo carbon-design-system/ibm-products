@@ -49,54 +49,54 @@ the page. It should not be used on a page if it is the secondary focus of the
 page as that will distract the user.
 
 */
-export let Cascade = forwardRef<HTMLDivElement, CascadeProps>((props, ref) => {
-  const { children, className, grid = defaults.grid, ...rest } = props;
-  const childProps = {
-    ...rest,
-    className: cx(blockClass, className),
-    ref,
-    ...getDevtoolsProps(componentName),
-  };
-  const modifyChildren = (child) => {
-    const className = cx(child.props.className, `${blockClass}__element`);
-    return React.cloneElement(child, { className });
-  };
-  const getModifiedChildren = () => {
-    return React.Children.map(children, (child) => modifyChildren(child));
-  };
+export const Cascade = forwardRef<HTMLDivElement, CascadeProps>(
+  (props, ref) => {
+    const { children, className, grid = defaults.grid, ...rest } = props;
+    const childProps = {
+      ...rest,
+      className: cx(blockClass, className),
+      ref,
+      ...getDevtoolsProps(componentName),
+    };
+    const modifyChildren = (child) => {
+      const className = cx(child.props.className, `${blockClass}__element`);
+      return React.cloneElement(child, { className });
+    };
+    const getModifiedChildren = () => {
+      return React.Children.map(children, (child) => modifyChildren(child));
+    };
 
-  if (grid) {
-    let colIdx = 0;
-    const gridElm = React.Children.map(children, (row) => {
-      if (React.isValidElement<EnrichedChildren>(row)) {
-        const cols = React.Children.map(row?.props.children, (col) => {
-          if (React.isValidElement<EnrichedChildren>(col)) {
-            colIdx = colIdx + 1;
-            const colClassnames = cx(
-              col.props.className,
-              `${blockClass}__col`,
-              `${blockClass}__col-${colIdx}`
-            );
-            return React.cloneElement(col, { className: colClassnames });
-          }
-        });
-        return React.cloneElement(row, {
-          children: cols,
-        });
-      }
-      return children;
-    });
-    return (
-      <div {...childProps}>
-        <Grid>{gridElm}</Grid>
-      </div>
-    );
+    if (grid) {
+      let colIdx = 0;
+      const gridElm = React.Children.map(children, (row) => {
+        if (React.isValidElement<EnrichedChildren>(row)) {
+          const cols = React.Children.map(row?.props.children, (col) => {
+            if (React.isValidElement<EnrichedChildren>(col)) {
+              colIdx = colIdx + 1;
+              const colClassnames = cx(
+                col.props.className,
+                `${blockClass}__col`,
+                `${blockClass}__col-${colIdx}`
+              );
+              return React.cloneElement(col, { className: colClassnames });
+            }
+          });
+          return React.cloneElement(row, {
+            children: cols,
+          });
+        }
+        return children;
+      });
+      return (
+        <div {...childProps}>
+          <Grid>{gridElm}</Grid>
+        </div>
+      );
+    }
+
+    return <div {...childProps}>{getModifiedChildren()}</div>;
   }
-
-  return <div {...childProps}>{getModifiedChildren()}</div>;
-});
-
-Cascade = pkg.checkComponentEnabled(Cascade, componentName);
+);
 
 Cascade.displayName = componentName;
 

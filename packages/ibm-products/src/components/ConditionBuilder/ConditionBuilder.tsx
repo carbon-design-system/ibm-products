@@ -51,7 +51,7 @@ const componentName = 'ConditionBuilder';
  * TODO: A description of the component.
  */
 
-export let ConditionBuilder = React.forwardRef(
+export const ConditionBuilder = React.forwardRef(
   (
     {
       className,
@@ -127,7 +127,6 @@ export let ConditionBuilder = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-ConditionBuilder = pkg.checkComponentEnabled(ConditionBuilder, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

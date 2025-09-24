@@ -1828,10 +1828,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon-labs/react-resizer@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "@carbon-labs/react-resizer@npm:0.8.0"
-  checksum: 10/bae65338ae78199fe3b0ae4b22bbad6676fb58183ff0e475f917224305656974688532f48fc17c9c716833ea7a6c77d51b64d0c3a6c97f03ee0f3dcf73db6017
+"@carbon-labs/react-resizer@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "@carbon-labs/react-resizer@npm:0.10.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.10.2"
+  checksum: 10/4d7475ef59a40f850f3d7a440a41fd3b6b0750b83382cf44d541546bd17134eebccd32111192d42f22033575c0a77be2058d7d39658079c8058d63953d401631
   languageName: node
   linkType: hard
 
@@ -2014,7 +2016,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.26.3"
     "@babel/preset-typescript": "npm:^7.26.0"
     "@babel/runtime": "npm:^7.26.10"
-    "@carbon-labs/react-resizer": "npm:^0.8.0"
+    "@carbon-labs/react-resizer": "npm:^0.10.0"
     "@carbon/feature-flags": "npm:^0.30.0"
     "@carbon/ibm-products-styles": "npm:^2.71.0"
     "@carbon/telemetry": "npm:^0.1.0"
@@ -21816,9 +21818,9 @@ __metadata:
   linkType: hard
 
 "tmp@npm:^0.2.0, tmp@npm:~0.2.1":
-  version: 0.2.3
-  resolution: "tmp@npm:0.2.3"
-  checksum: 10/7b13696787f159c9754793a83aa79a24f1522d47b87462ddb57c18ee93ff26c74cbb2b8d9138f571d2e0e765c728fb2739863a672b280528512c6d83d511c6fa
+  version: 0.2.5
+  resolution: "tmp@npm:0.2.5"
+  checksum: 10/dd4b78b32385eab4899d3ae296007b34482b035b6d73e1201c4a9aede40860e90997a1452c65a2d21aee73d53e93cd167d741c3db4015d90e63b6d568a93d7ec
   languageName: node
   linkType: hard
 

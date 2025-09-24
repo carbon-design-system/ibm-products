@@ -110,6 +110,14 @@ const Welcome = () => {
             >
               v1 to v2 migration guide
             </Link>
+            <Link
+              href="https://pages.github.ibm.com/carbon/ibm-products/developing/get-started/"
+              className="welcome__link"
+              renderIcon={ArrowRight}
+              size="lg"
+            >
+              Get started
+            </Link>
           </div>
         </div>
         <div className="welcome__col--right">

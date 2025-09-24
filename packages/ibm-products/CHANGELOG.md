@@ -1,3 +1,25 @@
+## `@carbon/ibm-products@2.70.0`
+### Features :rocket:
+- feat(sidepanel): option to hide close button (#7669)
+
+### Bug fixes :bug:
+- fix: add rest props back to card overflow (#7744)
+- fix(tearsheet): incorrect color layering (#7730)
+- fix(stories): remove extra carbon style imports (#7647)
+- fix: save usage guidelines (#7721)
+- fix(CreateTearsheet): accessibility violation (#7643)
+- fix(Instrumentation): auto track follow ups (#7715)
+- fix(notification panel): clickoutside return focus to trigger button (#7707)
+- fix: adds nullish checker back into create tearsheet first step logic (#7634)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7663)
+- chore: add global mocks to jest setup (#7653)
+- chore(storybook): add a11y tab in wc and remove code tab from react (#7706)
+- docs: restructure storybook IA (#7592)
+- refactor(instrumentation): replace amplitude with autotrack (#7710)
+- test: add valid matcher for expect() (#7666)
+
 ## `@carbon/ibm-products@2.69.0`
 ### Features :rocket:
 - feat: resize feature changes added (#7501)

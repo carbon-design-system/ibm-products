@@ -65,12 +65,30 @@
     }
   };
 
-  window.onload = () => {
-    if (window.autoTrack) {
-      window.autoTrack.updateCallback(overrideCallbackFunctionTest);
+  // POLL FOR AUTOTRACK TO BE LOADED
+  const pollForAutotrack = setInterval(() => {
+    const MAX_RETRY = 30;
+    let retryCount = 0;
+
+    try {
+      if (window.autoTrack) {
+        window.autoTrack.updateCallback(overrideCallbackFunctionTest);
+        clearInterval(pollForAutotrack);
+      }
+    } catch (error) {
+      //failed to call analytics.load
+      retryCount++;
     }
-  };
+
+    if (retryCount === MAX_RETRY) {
+      clearInterval(pollForAutotrack);
+      console.error(`Autotrack could not be found in ${retryCount} tries`)
+    }
+  }, 1000);
+
 </script>
+
+<script src="//1.www.s81c.com/common/stats/ibm-common.js" type="text/javascript" async="async"></script>
 
 <!-- Storybook override -->
 <script>

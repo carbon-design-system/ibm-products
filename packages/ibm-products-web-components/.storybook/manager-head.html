@@ -1,4 +1,5 @@
-<meta name="keywords" content="IBM, IBM Software, Carbon, Carbon for IBM Products, Cloud, Cognitive, web components, lit" />
+<meta name="keywords"
+  content="IBM, IBM Software, Carbon, Carbon for IBM Products, Cloud, Cognitive, web components, lit" />
 <meta name="description"
   content="This is the web component implementation of the Carbon for IBM Products components which build on top of the Carbon Design System. It is a set of styled patterns and components, designed and implemented for IBM Products." />
 
@@ -20,20 +21,17 @@
 
 <!-- Window objects / analytics config -->
 <script>
-  window._ibmAnalytics = {
-    settings: {
-      name: '',
-      isSpa: true,
-      tealiumProfileName: 'in-app-usage-growth',
-    },
-    onLoad: [['ibmStats.pageview', []]],
-  };
-
   window.digitalData = {
     page: {
       pageInfo: {
+        language: 'en-US',
+        productTitle: 'Carbon for IBM Products',
+        analytics: {
+          category: 'KnowledgeCenter',
+        },
         ibm: {
-          siteId: '',
+          country: 'US',
+          siteId: 'C4IP',
         },
         segment: {
           autoPageEventSpa: true,
@@ -59,6 +57,21 @@
   };
 </script>
 
+<!-- Updating Autotrack -->
+<script>
+  const overrideCallbackFunctionTest = (eventName, eventData) => {
+    if (window.analytics) {
+      analytics.track(eventName, eventData);
+    }
+  };
+
+  window.onload = () => {
+    if (window.autoTrack) {
+      window.autoTrack.updateCallback(overrideCallbackFunctionTest);
+    }
+  };
+</script>
+
 <!-- Storybook override -->
 <script>
   setTimeout(function () {
@@ -68,7 +81,7 @@
 
 <!-- Footer -->
 <footer>
-  <c4d-footer-container size="micro"></c4d-footer-container>
+  <c4d-footer-container disable-locale-button="true" size="micro"></c4d-footer-container>
 </footer>
 <script type="module" src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/version/v2.29.0/footer.min.js"></script>
 
@@ -83,8 +96,18 @@
     height: calc(100vh - 48px);
   }
 
-  /* This style is required because of the compliance footer in smaller screens */
+  @media (max-width: 1056px) {
+    #root>div {
+      height: calc(100vh - 98px);
+    }
+  }
+
   @media (max-width: 671px) {
+    #root>div {
+      height: calc(100vh - 342px);
+    }
+
+    /* This style is required because of the compliance footer in smaller screens */
     nav[class^='css-'] {
       height: 281px;
     }

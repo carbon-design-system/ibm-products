@@ -14,6 +14,5 @@ export const getAutoTrack = (source: string) => {
   window._ibmAnalytics.settings.name = ${source};
   window.digitalData.page.pageInfo.ibm.siteId = IBM_${source};
 </script>
-<script type="text/javascript" async="async" src="//1.www.s81c.com/common/carbon/autotrack.min.js"></script>
-<script src="//1.www.s81c.com/common/stats/ibm-common.js" type="text/javascript" async="async"></script>`;
+<script type="text/javascript" async="async" src="//1.www.s81c.com/common/carbon/autotrack.min.js"></script>`;
 };

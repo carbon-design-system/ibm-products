@@ -17,7 +17,9 @@ figma.connect(
 	    title: figma.string('Heading text'),
 	    summary: figma.string('Summary text'),
       open: figma.boolean('Expanded'),
-      locked: figma.boolean('Locked'),
+      OptionsTile: figma.nestedProps('Summary + Validation message', {
+        locked: figma.boolean('Locked'),
+      }),
       size: figma.enum('Size', {
         Large: 'lg',
         XL: 'xl',

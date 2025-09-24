@@ -10,6 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/colors';
 
 @use '@carbon/ibm-products-styles/scss/config';
 @use '@carbon/ibm-products-styles/scss/components/Checklist/index' as checklist;
@@ -39,4 +40,13 @@ $baseClass: #{$prefix}--checklist;
 .#{$baseClass}__label--clickable:hover {
   color: theme.$link-primary-hover;
   text-decoration: underline;
+}
+
+.#{$baseClass}__chart {
+  border-radius: 50%;
+  background-image: conic-gradient(
+    colors.$purple-50 var(--#{$prefix}-num-degrees),
+    var(--#{$carbon-prefix}-tag-background-gray) var(--#{$prefix}-num-degrees)
+      360deg
+  );
 }

@@ -78,6 +78,16 @@ class CDSChecklistItem extends LitElement {
     }
   }
 
+  private _updateAttributes() {
+    this.setAttribute('role', 'listitem');
+    this.setAttribute('tabindex', '0');
+    this.classList.add(`${prefix}--checklist__list-item`);
+  }
+
+  firstUpdated() {
+    this._updateAttributes();
+  }
+
   render() {
     const { clickable, label, status, _handleClick: handleClick } = this;
 
@@ -89,21 +99,19 @@ class CDSChecklistItem extends LitElement {
     });
 
     return html`
-      <li class="${prefix}--checklist__list-item">
-        <slot name="icon">
-          <c4p-checklist-icon kind="${iconKind}"></c4p-checklist-icon>
-        </slot>
-        <slot name="content">
-          <div
-            class="${classes}"
-            title=${label}
-            @click=${clickable ? handleClick : undefined}
-            tabindex=${clickable ? 0 : -1}
-          >
-            ${label}
-          </div>
-        </slot>
-      </li>
+      <slot name="icon">
+        <c4p-checklist-icon kind="${iconKind}"></c4p-checklist-icon>
+      </slot>
+      <slot name="content">
+        <div
+          class="${classes}"
+          title=${label}
+          @click=${clickable ? handleClick : undefined}
+          tabindex=${clickable ? 0 : -1}
+        >
+          ${label}
+        </div>
+      </slot>
     `;
   }
 

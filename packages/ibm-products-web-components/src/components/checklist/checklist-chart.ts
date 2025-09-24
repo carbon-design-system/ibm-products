@@ -10,9 +10,8 @@
 import { LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import { purple50 } from '@carbon/colors';
 
-import { prefix, carbonPrefix } from '../../globals/settings';
+import { prefix } from '../../globals/settings';
 import styles from './checklist.scss?lit';
 
 const blockClass = `${prefix}--checklist__chart`;
@@ -49,18 +48,23 @@ class CDSChecklistChart extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.classList.add(`${blockClass}`);
-    this._updateChart();
   }
 
-  private _updateChart() {
-    const progressColor = purple50;
-    const numDegrees = clamp(this.value * 360, 0, 360);
-
-    this.style?.setProperty(
-      `background-image`,
-      `conic-gradient(${progressColor} ${numDegrees}deg, var(--${carbonPrefix}-tag-background-gray) ${numDegrees}deg 360deg)`
+  private _updateChart(value) {
+    this.style.setProperty(
+      `--${prefix}-num-degrees`,
+      `${clamp(value * 360, 0, 360)}deg`
     );
-    this.style.setProperty('border-radius', '50%');
+  }
+
+  static get observedAttributes() {
+    return ['value'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'value' && oldValue !== newValue) {
+      this._updateChart(newValue);
+    }
   }
 
   render() {

@@ -203,7 +203,7 @@ export const WithButtons = {
 };
 
 const meta = {
-  title: 'Experimental/Utilities/overflowHandler',
+  title: 'Utilities/overflowHandler',
 };
 
 export default meta;

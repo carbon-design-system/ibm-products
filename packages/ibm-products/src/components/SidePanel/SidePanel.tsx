@@ -6,12 +6,14 @@
  */
 
 import { ArrowLeft, Close } from '@carbon/react/icons';
+import '../../feature-flags';
 // Carbon and package components we use.
 import {
   Button,
   ButtonProps,
   Heading,
   IconButton,
+  Layer,
   Section,
 } from '@carbon/react';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -84,6 +86,11 @@ type SidePanelBaseProps = {
    * Sets the close button icon description
    */
   closeIconDescription?: string;
+
+  /**
+   * Sets the close button tooltip alignment
+   */
+  closeIconTooltipAlignment?: string;
 
   /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)
@@ -237,6 +244,7 @@ export type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
 const defaults = {
   animateTitle: true,
   closeIconDescription: 'Close',
+  closeIconTooltipAlignment: 'left',
   currentStep: 0,
   hideCloseButton: false,
   navigationBackIconDescription: 'Back',
@@ -247,7 +255,7 @@ const defaults = {
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
  */
-const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
+export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
   (props, ref) => {
     const {
       actionToolbarButtons,
@@ -257,6 +265,7 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
       children,
       className,
       closeIconDescription = defaults.closeIconDescription,
+      closeIconTooltipAlignment = defaults.closeIconTooltipAlignment,
       condensedActions,
       currentStep = defaults.currentStep,
       decorator,
@@ -906,26 +915,28 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
           {/* title */}
           {title && title.length && renderTitle()}
           {/* decorator and close */}
-          <div className={`${blockClass}__decorator-and-close`}>
-            {normalizedDecorator}
-            {!hideCloseButton && (
-              <IconButton
-                className={`${blockClass}__close-button`}
-                label={closeIconDescription}
-                onClick={onRequestClose}
-                onKeyDown={slideIn ? undefined : handleEscapeKey}
-                ref={closeRef}
-                align="left"
-              >
-                <Close
-                  size={20}
-                  aria-hidden="true"
-                  tabIndex="-1"
-                  className={`${blockClass}--btn__icon`}
-                />
-              </IconButton>
-            )}
-          </div>
+          {(normalizedDecorator || !hideCloseButton) && (
+            <div className={`${blockClass}__decorator-and-close`}>
+              {normalizedDecorator}
+              {!hideCloseButton && (
+                <IconButton
+                  className={`${blockClass}__close-button`}
+                  label={closeIconDescription}
+                  onClick={onRequestClose}
+                  onKeyDown={slideIn ? undefined : handleEscapeKey}
+                  ref={closeRef}
+                  align={closeIconTooltipAlignment}
+                >
+                  <Close
+                    size={16}
+                    aria-hidden="true"
+                    tabIndex="-1"
+                    className={`${blockClass}--btn__icon`}
+                  />
+                </IconButton>
+              )}
+            </div>
+          )}
           {/* subtitle */}
           {subtitle && (
             <p
@@ -1005,7 +1016,7 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
             }`
           )}
         >
-          {children}
+          <Layer>{children}</Layer>
         </div>
       );
     };
@@ -1067,12 +1078,6 @@ const SidePanelBase = React.forwardRef<HTMLDivElement, SidePanelProps>(
       </>
     ) : null;
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-export const SidePanel = pkg.checkComponentEnabled(
-  SidePanelBase,
-  componentName
 );
 
 const deprecatedProps = {
@@ -1169,6 +1174,11 @@ SidePanel.propTypes = {
   closeIconDescription: PropTypes.string,
 
   /**
+   * Sets the close button tooltip alignment
+   */
+  closeIconTooltipAlignment: PropTypes.string,
+
+  /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)
    */
   condensedActions: PropTypes.bool,
@@ -1246,7 +1256,7 @@ SidePanel.propTypes = {
    * This prop is required when using the `slideIn` variant of the side panel.
    */
   /**@ts-ignore*/
-  selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
+  selectorPageContent: PropTypes.string,
 
   /**
    * Specify a CSS selector that matches the DOM element that should
@@ -1276,7 +1286,7 @@ SidePanel.propTypes = {
    * Sets the title text
    */
   /**@ts-ignore*/
-  title: PropTypes.string.isRequired.if(({ labelText }) => labelText),
+  title: PropTypes.string,
 
   ...deprecatedProps,
 };

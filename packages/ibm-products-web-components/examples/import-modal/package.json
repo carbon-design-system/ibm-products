@@ -12,15 +12,15 @@
     "clean": "rimraf node_modules dist .cache"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.65.0",
-    "@carbon/styles": "1.84.0",
-    "@carbon/web-components": "2.32.1",
+    "@carbon/ibm-products-styles": "^2.69.0",
+    "@carbon/styles": "1.89.0",
+    "@carbon/web-components": "^2.37.0",
     "lit": "^3.2.1",
     "sass": "^1.64.1"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",
-    "vite": "5.4.19",
+    "vite": "^5.4.20",
     "vite-plugin-lit-css": "^2.1.0",
     "typescript": "^5.5.3"
   }

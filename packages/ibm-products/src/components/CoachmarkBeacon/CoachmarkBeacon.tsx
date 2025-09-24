@@ -54,7 +54,7 @@ export interface CoachmarkBeaconProps {
 /**
  * Use beacon for the target prop of a Coachmark component.
  */
-export let CoachmarkBeacon = React.forwardRef<
+export const CoachmarkBeacon = React.forwardRef<
   HTMLDivElement,
   CoachmarkBeaconProps
 >((props, ref) => {
@@ -77,7 +77,6 @@ export let CoachmarkBeacon = React.forwardRef<
       role="tooltip"
     >
       <button
-        tabIndex={0}
         type="button"
         {...buttonProps}
         className={`${blockClass}__target`}
@@ -92,7 +91,6 @@ export let CoachmarkBeacon = React.forwardRef<
 });
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkBeacon = pkg.checkComponentEnabled(CoachmarkBeacon, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

@@ -190,7 +190,7 @@ interface Step {
   title?: string;
 }
 
-export let CreateTearsheet = forwardRef(
+export const CreateTearsheet = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -337,7 +337,12 @@ export let CreateTearsheet = forwardRef(
         selectorPrimaryFocus={selectorPrimaryFocus}
       >
         <div className={`${blockClass}__content`} ref={contentRef}>
-          <Form aria-label={title}>
+          <Form
+            aria-label={title}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+              e.preventDefault()
+            }
+          >
             <StepsContext.Provider
               value={{
                 currentStep,
@@ -366,7 +371,6 @@ export let CreateTearsheet = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CreateTearsheet = pkg.checkComponentEnabled(CreateTearsheet, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

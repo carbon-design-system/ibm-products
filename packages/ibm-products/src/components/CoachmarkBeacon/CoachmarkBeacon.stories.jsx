@@ -10,10 +10,10 @@ import React from 'react';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import {
-  Coachmark,
-  CoachmarkOverlayElement,
-  CoachmarkOverlayElements,
-  CoachmarkBeacon,
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
+  previewCandidate__CoachmarkBeacon as CoachmarkBeacon,
 } from '..';
 
 import mdx from './CoachmarkBeacon.mdx';
@@ -22,7 +22,7 @@ import styles from './_storybook-styles.scss?inline';
 import { BEACON_KIND } from '../Coachmark/utils/enums';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark/CoachmarkBeacon',
+  title: 'Preview Candidate/Onboarding/Coachmark/CoachmarkBeacon',
   component: CoachmarkBeacon,
   tags: ['autodocs', 'Onboarding'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -46,6 +46,7 @@ const Template = (args) => {
     <Coachmark
       align={'bottom'}
       target={<CoachmarkBeacon {...args} />}
+      closeIconDescription="Close"
       theme={theme}
     >
       <CoachmarkOverlayElements closeButtonLabel="Done">

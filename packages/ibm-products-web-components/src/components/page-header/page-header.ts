@@ -8,74 +8,24 @@
  */
 
 import { LitElement, html } from 'lit';
+import { state } from 'lit/decorators.js';
+import { provide } from '@lit/context';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
+import { pageHeaderContext } from './context';
+import { getHeaderOffset } from './utils';
+import CDSPageHeaderContent from './page-header-content';
 
-/**
- * ----------
- * Utilities
- * ----------
- */
-
-const getHeaderOffset = (el: HTMLElement): number => {
-  const scrollableContainer = scrollableAncestor(el);
-  const scrollableContainerTop = scrollableContainer
-    ? (scrollableContainer as HTMLElement).getBoundingClientRect().top
-    : 0;
-  const offsetMeasuringTop = el ? el.getBoundingClientRect().top : 0;
-  const totalHeaderOffset =
-    offsetMeasuringTop !== 0 ? offsetMeasuringTop - scrollableContainerTop : 0;
-  return totalHeaderOffset;
-};
-
-const windowExists = typeof window !== `undefined`;
-
-/**
- * Determines if the given target is scrollable
- *
- * @param {HTMLElement} target
- * @returns {boolean}
- */
-const scrollable = (target: HTMLElement): boolean => {
-  const style = window.getComputedStyle(target);
-  return /(auto|scroll|hidden)/.test(style.overflow);
-};
-
-/**
- * Recursively looks for the scrollable ancestor
- */
-const scrollableAncestorInner = (target: HTMLElement) => {
-  if (target.parentNode && target.parentNode !== document) {
-    if (scrollable(target.parentNode as HTMLElement)) {
-      return target.parentNode;
-    } else {
-      return scrollableAncestorInner(target.parentNode as HTMLElement);
-    }
-  } else {
-    return document.scrollingElement;
-  }
-};
-
-/**
- * Walks up the parent nodes to identify the first scrollable ancestor
- *
- * @param {HTMLElement} target
- * @returns {HTMLElement}
- */
-const scrollableAncestor = (target: HTMLElement) => {
-  if (!windowExists || !target) {
-    return null;
-  }
-
-  // based on https://stackoverflow.com/questions/35939886/find-first-scrollable-parent
-  const style = window.getComputedStyle(target);
-
-  if (!target || !style || style.position === 'fixed') {
-    return document.scrollingElement;
-  }
-  return scrollableAncestorInner(target);
-};
+export interface pageHeaderContextType {
+  breadcrumbOffset?: number;
+  headerOffset?: number;
+  fullyCollapsed?: boolean;
+  titleClipped?: boolean;
+  contentActionsClipped?: boolean;
+  root?: CDSPageHeader | null;
+  withContent?: boolean;
+}
 
 /**
  * Page header.
@@ -83,34 +33,136 @@ const scrollableAncestor = (target: HTMLElement) => {
  */
 @customElement(`${prefix}-page-header`)
 class CDSPageHeader extends LitElement {
-  updated() {
+  @state()
+  @provide({ context: pageHeaderContext })
+  context: pageHeaderContextType = {};
+
+  private resizeObserver: ResizeObserver | undefined;
+
+  connectedCallback(): void {
+    super.connectedCallback();
     const contentElement = this.querySelector(`${prefix}-page-header-content`);
 
+    this.resizeObserver = new ResizeObserver((entries) => {
+      const pageHeaderElement = entries[0];
+      const contentEl = pageHeaderElement.target.querySelector(
+        `${prefix}-page-header-content`
+      );
+      const contentHeight =
+        contentEl instanceof CDSPageHeaderContent ? contentEl.scrollHeight : 0;
+      const padding =
+        contentEl instanceof CDSPageHeaderContent
+          ? parseFloat(getComputedStyle(contentEl)?.paddingBlockStart) +
+            parseFloat(getComputedStyle(contentEl)?.paddingBlockEnd)
+          : 0;
+      const totalContentHeight = contentHeight + padding;
+      const headerOffset = getHeaderOffset(this);
+      const contentPadding = contentEl instanceof CDSPageHeaderContent ? 48 : 0;
+
+      this.style.setProperty(
+        `--${prefix}-page-header-header-top`,
+        `${(Math.round(totalContentHeight - contentPadding) - headerOffset) * -1}px`
+      );
+      this.style.setProperty(
+        `--${prefix}-page-header-breadcrumb-top`,
+        `${headerOffset}px`
+      );
+      this.context = {
+        ...this.context,
+        breadcrumbOffset: headerOffset,
+        headerOffset: (Math.round(totalContentHeight) - headerOffset) * -1,
+        root: this,
+        withContent: !!contentEl,
+      };
+    });
+    this.resizeObserver.observe(this);
+
+    const predefinedContentPadding = 24;
+    const totalHeaderOffset = getHeaderOffset(this);
+    const contentObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            this.context = {
+              ...this.context,
+              fullyCollapsed: true,
+            };
+          } else {
+            this.context = {
+              ...this.context,
+              fullyCollapsed: false,
+            };
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+        threshold: 0.1,
+      }
+    );
+
+    const titleObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            this.context = {
+              ...this.context,
+              titleClipped: true,
+            };
+          } else {
+            this.context = {
+              ...this.context,
+              titleClipped: false,
+            };
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+        threshold: 0.95,
+      }
+    );
+
+    const actionsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            this.context = {
+              ...this.context,
+              contentActionsClipped: true,
+            };
+          } else {
+            this.context = {
+              ...this.context,
+              contentActionsClipped: false,
+            };
+          }
+        });
+      },
+      {
+        root: null,
+        // 48 -> breadcrumb bar
+        // 18 -> content padding
+        rootMargin: `${(totalHeaderOffset + 48 + 18) * -1}px 0px 0px 0px`,
+        threshold: 0.95,
+      }
+    );
     if (contentElement) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        const contentElEntry = entries[0];
-        const contentHeight = contentElEntry.contentRect.height;
-        const padding =
-          parseFloat(getComputedStyle(contentElement)?.paddingBlockStart) +
-          parseFloat(getComputedStyle(contentElement)?.paddingBlockEnd);
-        const totalContentHeight = contentHeight + padding;
-        const headerOffset = getHeaderOffset(this);
-
-        this.style.setProperty(
-          `--${prefix}-page-header-header-top`,
-          `${(Math.round(totalContentHeight) - headerOffset) * -1}px`
-        );
-        this.style.setProperty(
-          `--${prefix}-page-header-breadcrumb-top`,
-          `${headerOffset}px`
-        );
-      });
-
-      resizeObserver.observe(contentElement);
+      contentObserver.observe(contentElement);
+      titleObserver.observe(contentElement);
+      actionsObserver.observe(contentElement);
     }
   }
+
+  disconnectedCallback() {
+    this.resizeObserver?.disconnect(); // Clean up
+    super.disconnectedCallback();
+  }
+
   render() {
-    return html` <slot></slot>`;
+    return html`<slot></slot>`;
   }
 
   static styles = styles;

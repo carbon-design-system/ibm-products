@@ -1,7 +1,7 @@
 {
   "name": "ibm-products",
   "engines": {
-    "node": ">=20.x"
+    "node": ">=20.19.x"
   },
   "private": true,
   "version": "0.0.0",
@@ -33,11 +33,8 @@
     "clean:packages": "yarn run-all --no-sort clean",
     "coverage": "echo 'you can pass a name argument to specify which tests are ran such as `yarn coverage decorator` and then view the results with `yarn coverage:report`'; yarn test:c4p --coverage",
     "coverage:report": "open ./packages/ibm-products/coverage/index.html",
-    "format": "run-p -s 'format:*'",
-    "format:config": "prettier './*.{js,jsx,tsx,ts,md,scss}' --write --ignore-unknown",
-    "format:packages": "prettier './packages/**/*.{js,jsx,tsx,ts,md,scss}' --write --ignore-unknown",
-    "format:e2e": "prettier './e2e/**/*.js' --write --ignore-unknown",
-    "format:diff": "prettier --list-different '**/*.{js,jsx,md,scss,ts,tsx}' '*.{js,jsx,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!examples/**/*' '!scripts/**/*'",
+    "format": "prettier . --cache --write -u",
+    "format:diff": "prettier . --list-different -u",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
     "lint:license": "scripts/check-license.cjs -a",
@@ -68,6 +65,12 @@
     "@babel/core": "^7.26.10",
     "@babel/eslint-parser": "^7.26.10",
     "@babel/preset-react": "^7.26.3",
+    "@carbon/grid": "^11.42.0",
+    "@carbon/layout": "^11.40.0",
+    "@carbon/motion": "^11.34.0",
+    "@carbon/react": "^1.90.0",
+    "@carbon/themes": "^11.59.0",
+    "@carbon/type": "^11.46.0",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/compat": "^1.2.7",
@@ -80,12 +83,12 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/carbon__layout": "^0.0.3",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
-    "accessibility-checker": "^4.0.2",
+    "accessibility-checker": "^4.0.7",
     "commander": "^14.0.0",
     "copyfiles": "^2.4.1",
     "cspell": "^9.0.0",
     "eslint": "^9.22.0",
-    "eslint-config-carbon": "^3.24.0",
+    "eslint-config-carbon": "^3.25.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -100,16 +103,17 @@
     "json": "^11.0.0",
     "lerna": "^8.2.1",
     "lint-staged": "^16.0.0",
+    "lottie-web": "^5.13.0",
     "npm-check-updates": "^18.0.0",
-    "npm-run-all": "^4.1.5",
+    "npm-run-all2": "^8.0.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
-    "prettier-config-carbon": "^0.11.0",
+    "prettier-config-carbon": "^0.12.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "rimraf": "^6.0.1",
     "stylelint": "^16.16.0",
-    "stylelint-config-carbon": "^1.20.0",
+    "stylelint-config-carbon": "^1.21.0",
     "stylelint-use-logical": "^2.1.2",
     "typescript-eslint": "^8.26.1",
     "webpack": "^5.98.0"
@@ -120,27 +124,28 @@
     "body-parser": "2.2.0",
     "braces": "^3.0.3",
     "cross-spawn": "7.0.6",
+    "form-data": "4.0.4",
     "micromatch": "4.0.8",
     "react-is": "^19.0.0",
     "semver": "7.7.2",
     "ws": "^8.17.1",
-    "@babel/runtime": "7.27.6",
+    "@babel/runtime": "7.28.4",
     "brace-expansion@^1.1.7": "1.1.12",
     "brace-expansion@^2.0.1": "2.0.2"
   },
   "lint-staged": {
-    "!(examples/**/*)**/*.{js,jsx,ts,tsx,mjs}": [
-      "npx prettier --cache --write",
+    "*": [
+      "npx prettier --cache --write -u"
+    ],
+    "*.{js,jsx,ts,tsx,mjs}": [
       "npx eslint --fix",
       "npx cspell --no-must-find-files",
       "yarn lint:license:staged"
     ],
-    "**/*.scss": [
-      "npx prettier --cache --write",
+    "*.scss": [
       "npx stylelint --allow-empty-input --fix"
     ],
-    "!(examples/**/*).md": [
-      "npx prettier --cache --write",
+    "*.{md,mdx}": [
       "npx cspell --no-must-find-files",
       "yarn lint:license:staged"
     ]
@@ -149,5 +154,5 @@
     "stylelint-plugin-carbon-tokens": "^3.2.3",
     "stylelint-use-logical": "^2.1.2"
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.10.0"
 }

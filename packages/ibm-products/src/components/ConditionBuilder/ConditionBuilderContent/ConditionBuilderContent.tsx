@@ -51,7 +51,7 @@ const ConditionBuilderContent = ({
   initialState,
   actions,
 }: ConditionBuilderContentProps) => {
-  const { rootState, setRootState, variant, actionState, onAddItem } =
+  const { rootState, setRootState, variant, actionState, onAddItem, readOnly } =
     useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
 
   const initialConditionState = useRef(
@@ -242,7 +242,7 @@ const ConditionBuilderContent = ({
           ))}
 
         {/* button to add a new group */}
-        {variant == HIERARCHICAL_VARIANT && (
+        {!readOnly && variant == HIERARCHICAL_VARIANT && (
           <div
             role="row"
             tabIndex={-1}
@@ -268,13 +268,19 @@ const ConditionBuilderContent = ({
             }
           </div>
         )}
-        {showConditionGroupPreview && (
+
+        {variant === HIERARCHICAL_VARIANT ? (
           <ConditionPreview
             previewType="newGroup"
             colorIndex={getColorIndex()}
+            className={
+              showConditionGroupPreview
+                ? `${blockClass}__visible`
+                : `${blockClass}__hidden`
+            }
             group={{ groupOperator: rootState?.operator, id: uuidv4() }}
           />
-        )}
+        ) : null}
       </div>
       {actions && (
         <ConditionBuilderActions

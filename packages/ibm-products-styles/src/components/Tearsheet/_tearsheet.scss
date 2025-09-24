@@ -209,6 +209,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--wide .#{$block-class}__header {
+    overflow: visible;
     padding: $spacing-06 $spacing-07;
     margin: 0;
     background-color: $layer;
@@ -300,6 +301,12 @@ $motion-duration: $duration-moderate-02;
 
   .#{$block-class}__header-navigation {
     margin: $spacing-04 0 0;
+  }
+
+  // Unfortunately <Layer> creates an extra DOM element.  Try not to let it break
+  // existing layouts.
+  .#{$block-class}__layer {
+    display: contents;
   }
 
   &.#{$block-class} .#{$block-class}__body {

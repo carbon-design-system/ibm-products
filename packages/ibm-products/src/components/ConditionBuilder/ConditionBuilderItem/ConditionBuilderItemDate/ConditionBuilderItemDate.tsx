@@ -42,7 +42,7 @@ export const ConditionBuilderItemDate = ({
 
   const [dateFromState, setDateFromState] = useState<Date[] | undefined>();
 
-  const dateFormat = config.dateFormat || 'm/d/Y';
+  const dateFormat = config?.dateFormat || 'm/d/Y';
 
   const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const datePickerType =
@@ -113,6 +113,7 @@ export const ConditionBuilderItemDate = ({
       {datePickerType == 'single' && (
         <DatePicker
           {...config}
+          locale={{ locale: config.locale ?? 'en' }}
           ref={DatePickerInputRef}
           datePickerType="single"
           value={conditionState.value}
@@ -131,6 +132,7 @@ export const ConditionBuilderItemDate = ({
       {datePickerType == 'range' && (
         <DatePicker
           {...config}
+          locale={{ locale: config.locale ?? 'en' }}
           ref={DatePickerInputRef}
           datePickerType={datePickerType}
           onClose={onCloseHandler}

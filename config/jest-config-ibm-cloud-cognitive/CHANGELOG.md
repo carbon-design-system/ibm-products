@@ -1,3 +1,22 @@
+## `@jest-config-ibm-cloud-cognitive@1.33.0`
+### Bug fixes :bug:
+- fix: init deprecated extension for codecov (#8039)
+
+### Housekeeping :house:
+- test(makeDraggable): add tests (#8099)
+
+## `@jest-config-ibm-cloud-cognitive@1.32.0`
+### Housekeeping :house:
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
+## `@jest-config-ibm-cloud-cognitive@1.31.0`
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#7840)
+
+## `@jest-config-ibm-cloud-cognitive@1.30.0`
+### Housekeeping :house:
+- chore: remove redundant upgrade scripts (#7774)
+
 ## `@jest-config-ibm-cloud-cognitive@1.29.0`
 ### Bug fixes :bug:
 - fix(deps): update dependency jest-watch-typeahead to v3 (#7718)

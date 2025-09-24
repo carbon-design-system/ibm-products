@@ -47,43 +47,43 @@ class CDSChecklist extends LitElement {
   /**
    * The label for progress indicator chart
    */
-  @property({ type: String })
+  @property({ type: String, attribute: 'chart-label' })
   chartLabel;
 
   /**
    * A number between 0 and 1 which indicates the progress of checklist
    */
-  @property({ type: Number })
+  @property({ type: Number, attribute: 'chart-value' })
   chartValue;
 
   /**
    * Whether or not to show the open/close toggle.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'disable-toggle' })
   disableToggle = false;
 
   /**
    * The label for the toggle's tooltip.
    */
-  @property({ type: String })
+  @property({ type: String, attribute: 'toggle-label' })
   toggleLabel;
 
   /**
    * The alignment of the toggle's tooltip.
    */
-  @property({ type: String })
+  @property({ type: String, attribute: 'toggle-label-align' })
   toggleLabelAlign;
 
   /**
    * Aria-label for the Checklist's toggle component.
    */
-  @property({ type: String })
+  @property({ type: String, attribute: 'toggle-aria-label' })
   toggleAriaLabel;
 
   /**
    * If defined, will show and enable the "View all (#)" button in the checklist footer.
    */
-  @property({ type: String })
+  @property({ type: String, attribute: 'view-all-label' })
   viewAllLabel;
 
   private _viewAll(event: Event) {

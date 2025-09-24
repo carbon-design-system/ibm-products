@@ -76,13 +76,13 @@ const checklistGroupTemplate = {
       <div class="${storyPrefix}viewport">
         <c4p-checklist
           title=${title}
-          chartLabel=${chartLabel}
-          chartValue=${chartValue}
-          toggleLabel=${toggleLabel}
-          toggleLabelAlign=${toggleLabelAlign}
-          toggleAriaLabel=${toggleAriaLabel}
+          chart-label=${chartLabel}
+          chart-value=${chartValue}
+          toggle-label=${toggleLabel}
+          toggle-label-align=${toggleLabelAlign}
+          toggle-aria-label=${toggleAriaLabel}
           open
-          viewAllLabel=${viewAllLabel}
+          view-all-label=${viewAllLabel}
           @c4p-checklist-view-all=${action(`Clicked View All`)}
           @c4p-checklist-toggle=${action(`Clicked Toggle`)}
         >

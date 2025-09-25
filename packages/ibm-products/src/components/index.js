@@ -71,7 +71,7 @@ export {
 
 // Preview
 export { Coachmark as preview__Coachmark } from './Coachmark/next/Coachmark';
-export { Coachmark as preview__CoachmarkTagline } from './Coachmark/next/Coachmark/CoachmarkTagline';
+export { CoachmarkTagline as preview__CoachmarkTagline } from './Coachmark/next/Coachmark/CoachmarkTagline';
 export {
   FeatureFlags as preview__FeatureFlags,
   useFeatureFlag as preview__useFeatureFlag,

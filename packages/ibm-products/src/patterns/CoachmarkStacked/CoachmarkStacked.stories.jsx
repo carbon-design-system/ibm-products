@@ -299,10 +299,8 @@ const CoachmarkStackedPattern = (args) => {
   useLayoutEffect(() => {
     if (!parentHeight) {
       if (stackHomeContentRef.current) {
-        const stackHomeContent =
-          stackHomeContentRef.current.querySelector <
-          HTMLDivElement >
-          `div.${pkg.prefix}__bubble`;
+        //prettier-ignore
+        const stackHomeContent = stackHomeContentRef.current.querySelector<HTMLDivElement>(`div.${pkg.prefix}__bubble`);
         if (stackHomeContent) {
           const height = stackHomeContent.clientHeight;
 
@@ -315,10 +313,8 @@ const CoachmarkStackedPattern = (args) => {
     }
 
     if (stackHomeContentRef.current) {
-      const stackHomeContent =
-        stackHomeContentRef.current.querySelector <
-        HTMLDivElement >
-        `div.${pkg.prefix}__bubble`;
+      //prettier-ignore
+      const stackHomeContent = stackHomeContentRef.current.querySelector<HTMLDivElement>(`div.${pkg.prefix}__bubble`);
       if (stackHomeContent) {
         stackHomeContent.style.height = `${parentHeight}px`;
       }
@@ -327,10 +323,8 @@ const CoachmarkStackedPattern = (args) => {
     if (!isOpen || openId <= 0) {
       requestAnimationFrame(() => {
         if (stackHomeContentRef.current) {
-          const stackHomeContent =
-            stackHomeContentRef.current.querySelector <
-            HTMLDivElement >
-            `div.${pkg.prefix}__bubble`;
+          //prettier-ignore
+          const stackHomeContent = stackHomeContentRef.current.querySelector<HTMLDivElement>(`div.${pkg.prefix}__bubble`);
 
           if (stackHomeContent) {
             stackHomeContent.classList.remove(`${blockClass}--scaled-home`);
@@ -346,11 +340,10 @@ const CoachmarkStackedPattern = (args) => {
       const container = stackedCoachmarkContentRefs.current[openId];
       console.log(container);
 
+      //prettier-ignore
       const targetHome = Array.from(
-        container.querySelectorAll <
-          HTMLDivElement >
-          'div.dev-prefix--c4p__bubble'
-      ).filter((bubble) => bubble.parentElement === container);
+        container.querySelectorAll<HTMLDivElement>(`div.${pkg.prefix}__bubble`)
+      ).filter(bubble => bubble.parentElement === container);
 
       if (targetHome.length > 0) {
         setTimeout(() => {
@@ -358,10 +351,8 @@ const CoachmarkStackedPattern = (args) => {
             requestAnimationFrame(() => {
               const targetHomeHeight = bubble.clientHeight;
 
-              const stackHomeContent =
-                stackHomeContentRef.current.querySelector <
-                HTMLDivElement >
-                `div.dev-prefix--c4p__bubble`;
+              //prettier-ignore
+              const stackHomeContent = stackHomeContentRef.current.querySelector<HTMLDivElement>(`div.dev-prefix--c4p__bubble`);
               if (stackHomeContent) {
                 stackHomeContent.style.height = `calc(${targetHomeHeight}px + 1px)`;
                 stackHomeContent.classList.add(`${blockClass}--scaled-home`);

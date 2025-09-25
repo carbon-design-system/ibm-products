@@ -31,7 +31,7 @@ $elements-block-class: 'coachmark-stack-element';
 .#{$block-class}--coachmark-content {
   position: fixed;
   inline-size: 18rem;
-  margin-inline-start: c4p-settings.$spacing-04;
+  margin-inline-start: $spacing-04;
   visibility: visible;
 
   &.--is-visible {
@@ -101,7 +101,7 @@ $elements-block-class: 'coachmark-stack-element';
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-block-start: c4p-settings.$spacing-05;
+  padding-block-start: $spacing-05;
 }
 
 .carouselControlWrapper--controls-progress {
@@ -148,7 +148,7 @@ $elements-block-class: 'coachmark-stack-element';
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: c4p-settings.$spacing-05 $spacing-05 0 $spacing-05;
+    padding: $spacing-05 $spacing-05 0 $spacing-05;
   }
 }
 
@@ -166,14 +166,14 @@ $elements-block-class: 'stacked_element_content';
 .#{c4p-settings.$pkg-prefix}--coachmark__next--coachmark-content {
   inset-block-end: 0;
   inset-block-start: unset !important;
-  inset-inline-end: c4p-settings.$spacing-05;
+  inset-inline-end: $spacing-05;
   inset-inline-start: unset !important;
   opacity: 1;
   transform: none;
 }
 
 .#{$stack-home-class}--scaled-home {
-  inset-block-end: c4p-settings.$spacing-05;
+  inset-block-end: $spacing-05;
   opacity: 0.8;
   transform: scale(0.9);
   transform-origin: top center;

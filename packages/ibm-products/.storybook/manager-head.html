@@ -33,20 +33,17 @@
 
 <!-- Window objects / analytics config -->
 <script>
-  window._ibmAnalytics = {
-    settings: {
-      name: '',
-      isSpa: true,
-      tealiumProfileName: 'in-app-usage-growth',
-    },
-    onLoad: [['ibmStats.pageview', []]],
-  };
-
   window.digitalData = {
     page: {
       pageInfo: {
+        language: 'en-US',
+        productTitle: 'Carbon for IBM Products',
+        analytics: {
+          category: 'KnowledgeCenter',
+        },
         ibm: {
-          siteId: '',
+          country: 'US',
+          siteId: 'C4IP',
         },
         segment: {
           autoPageEventSpa: true,
@@ -72,6 +69,42 @@
   };
 </script>
 
+<script
+  src="//1.www.s81c.com/common/stats/ibm-common.js"
+  type="text/javascript"
+  async="async"
+></script>
+
+<!-- Updating Autotrack -->
+<script>
+  const overrideCallbackFunctionTest = (eventName, eventData) => {
+    if (window.analytics) {
+      analytics.track(eventName, eventData);
+    }
+  };
+
+  // POLL FOR AUTOTRACK TO BE LOADED
+  const pollForAutotrack = setInterval(() => {
+    const MAX_RETRY = 30;
+    let retryCount = 0;
+
+    try {
+      if (window.autoTrack) {
+        window.autoTrack.updateCallback(overrideCallbackFunctionTest);
+        clearInterval(pollForAutotrack);
+      }
+    } catch (error) {
+      //failed to call analytics.load
+      retryCount++;
+    }
+
+    if (retryCount === MAX_RETRY) {
+      clearInterval(pollForAutotrack);
+      console.error(`Autotrack could not be found in ${retryCount} tries`);
+    }
+  }, 1000);
+</script>
+
 <!-- Storybook override -->
 <script>
   setTimeout(function () {
@@ -81,7 +114,10 @@
 
 <!-- Footer -->
 <footer>
-  <c4d-footer-container size="micro"></c4d-footer-container>
+  <c4d-footer-container
+    disable-locale-button="true"
+    size="micro"
+  ></c4d-footer-container>
 </footer>
 <script
   type="module"
@@ -99,8 +135,18 @@
     height: calc(100vh - 48px);
   }
 
-  /* This style is required because of the compliance footer in smaller screens */
+  @media (max-width: 1056px) {
+    #root > div {
+      height: calc(100vh - 98px);
+    }
+  }
+
   @media (max-width: 671px) {
+    #root > div {
+      height: calc(100vh - 342px);
+    }
+
+    /* This style is required because of the compliance footer in smaller screens */
     nav[class^='css-'] {
       height: 281px;
     }

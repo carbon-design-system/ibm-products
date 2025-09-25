@@ -7,13 +7,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import '@carbon/ibm-products-web-components/es/components/checklist/index.js';
-import '../../../../ibm-products-web-components/src/components/checklist/index'
+import '@carbon/ibm-products-web-components/es/components/checklist/index.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('here')
   const checklist = document.querySelector('c4p-checklist');
-console.log(checklist)
   checklist.setAttribute('chart-value', 0.15);
 
   checklist.addEventListener('c4p-checklist-view-all', function (event) {

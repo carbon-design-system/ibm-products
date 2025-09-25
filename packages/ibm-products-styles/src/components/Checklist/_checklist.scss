@@ -142,6 +142,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 
 .#{$block-class}__content-inner {
   background-color: $layer-01;
+  block-size: 100%;
   transform: translate(0, 0);
   transition: all $duration-fast-02 motion(standard, productive);
 

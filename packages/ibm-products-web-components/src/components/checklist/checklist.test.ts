@@ -23,12 +23,12 @@ describe('c4p-checklist', () => {
     el = await fixture(html`
       <c4p-checklist
         title="Test Title"
-        chartLabel="5 out of 10 tasks completed"
-        chartValue="0.5"
-        toggleLabel="Toggle"
-        toggleLabelAlign="top"
-        toggleAriaLabel="Toggle"
-        viewAllLabel="View All"
+        chart-label="5 out of 10 tasks completed"
+        chart-value="0.5"
+        toggle-label="Toggle"
+        toggle-label-align="top"
+        toggle-aria-label="Toggle"
+        view-all-label="View All"
       ></c4p-checklist>
     `);
   });
@@ -79,13 +79,13 @@ describe('c4p-checklist', () => {
     el = await fixture(html`
       <c4p-checklist
         title="Test Title"
-        chartLabel="5 out of 10 tasks completed"
-        chartValue="0.5"
-        disableToggle
-        toggleLabel="Toggle"
-        toggleLabelAlign="top"
-        toggleAriaLabel="Toggle"
-        viewAllLabel="View All"
+        chart-label="5 out of 10 tasks completed"
+        chart-value="0.5"
+        disable-toggle
+        toggle-label="Toggle"
+        toggle-label-align="top"
+        toggle-aria-label="Toggle"
+        view-all-label="View All"
       ></c4p-checklist>
     `);
     await elementUpdated(el);

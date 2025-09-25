@@ -48,7 +48,7 @@ interface CoachmarkHeaderProps {
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
  */
-export let CoachmarkHeader = React.forwardRef<
+export const CoachmarkHeader = React.forwardRef<
   HTMLElement,
   CoachmarkHeaderProps
 >(
@@ -93,7 +93,6 @@ export let CoachmarkHeader = React.forwardRef<
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkHeader = pkg.checkComponentEnabled(CoachmarkHeader, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

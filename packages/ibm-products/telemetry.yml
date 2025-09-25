@@ -914,7 +914,7 @@ collect:
         - getToggleAllPageRowsSelectedProps
         - getToggleAllRowsSelectedProps
         - isAllRowsSelected
-        # SidePanelBase
+        # SidePanel
         - actionToolbarButtons
         - animateTitle
         - closeIconTooltipAlignment
@@ -922,6 +922,8 @@ collect:
         - hideCloseButton
         - includeOverlay
         - navigationBackIconDescription
+        - onNavigationBack
+        - onUnmount
         # SingleAddSelect
         - searchResultsLabel
         # Sortable

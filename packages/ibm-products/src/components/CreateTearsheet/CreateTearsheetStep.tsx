@@ -167,7 +167,7 @@ export type ExperimentalSecondarySubmit = {
   onClick?: () => void;
 };
 
-export let CreateTearsheetStep = forwardRef(
+export const CreateTearsheetStep = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -349,12 +349,6 @@ export let CreateTearsheetStep = forwardRef(
       )
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-CreateTearsheetStep = pkg.checkComponentEnabled(
-  CreateTearsheetStep,
-  componentName
 );
 
 CreateTearsheetStep.propTypes = {

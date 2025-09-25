@@ -24,7 +24,7 @@ import wait from '../../global/js/utils/wait';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/react/icons';
 
 export default {
-  title: 'Patterns/Export Modal',
+  title: 'Patterns/Export Modal Patterns',
   component: () => {},
   tags: ['autodocs'],
   parameters: {
@@ -38,7 +38,6 @@ export default {
 const StandardTemplate = () => {
   const [isOpen, setOpen] = useState(false);
   const [name, setName] = useState('Sample02.pdf');
-  let success = true;
   const [loading, setLoading] = useState(false);
   const [successful, setSuccessful] = useState(false);
   const [error, setError] = useState(false);
@@ -55,11 +54,7 @@ const StandardTemplate = () => {
   const onSubmitHandler = async () => {
     setLoading(true);
     await wait(1000);
-    if (success) {
-      setSuccessful(true);
-    } else {
-      setError(true);
-    }
+    setSuccessful(true);
     setLoading(false);
   };
   const primaryButtonDisabled = loading || !name;
@@ -142,7 +137,6 @@ const StandardTemplate = () => {
 };
 
 const WithExtensionValidationTemplate = () => {
-  let success = true;
   const [isOpen, setOpen] = useState(false);
   const [name, setName] = useState('Sample02.pdf');
   const [loading, setLoading] = useState(false);
@@ -162,11 +156,7 @@ const WithExtensionValidationTemplate = () => {
   const onSubmitHandler = async () => {
     setLoading(true);
     await wait(1000);
-    if (success) {
-      setSuccessful(true);
-    } else {
-      setError(true);
-    }
+    setSuccessful(true);
     setLoading(false);
   };
 
@@ -267,7 +257,6 @@ const WithExtensionValidationTemplate = () => {
 };
 
 const WithPreformattedExtensionsTemplate = () => {
-  let success = true;
   const [isOpen, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successful, setSuccessful] = useState(false);
@@ -304,11 +293,7 @@ const WithPreformattedExtensionsTemplate = () => {
   const onSubmitHandler = async () => {
     setLoading(true);
     await wait(1000);
-    if (success) {
-      setSuccessful(true);
-    } else {
-      setError(true);
-    }
+    setSuccessful(true);
     setLoading(false);
   };
 

@@ -338,7 +338,6 @@ const CoachmarkStackedPattern = (args) => {
 
     if (openId > 0 && isOpen && stackedCoachmarkContentRefs.current) {
       const container = stackedCoachmarkContentRefs.current[openId];
-      console.log(container);
 
       //prettier-ignore
       const targetHome = Array.from(
@@ -352,7 +351,7 @@ const CoachmarkStackedPattern = (args) => {
               const targetHomeHeight = bubble.clientHeight;
 
               //prettier-ignore
-              const stackHomeContent = stackHomeContentRef.current.querySelector<HTMLDivElement>(`div.dev-prefix--c4p__bubble`);
+              const stackHomeContent = stackHomeContentRef.current.querySelector<HTMLDivElement>(`div.${pkg.prefix}__bubble`);
               if (stackHomeContent) {
                 stackHomeContent.style.height = `calc(${targetHomeHeight}px + 1px)`;
                 stackHomeContent.classList.add(`${blockClass}--scaled-home`);

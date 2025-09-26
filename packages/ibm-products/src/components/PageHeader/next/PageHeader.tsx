@@ -748,7 +748,7 @@ const PageHeaderTabBar = React.forwardRef<
   HTMLDivElement,
   PageHeaderTabBarProps
 >(function PageHeaderTabBar(
-  { className, children, tags = [], scroller, ...other }: PageHeaderTabBarProps,
+  { className, children, tags, scroller, ...other }: PageHeaderTabBarProps,
   ref
 ) {
   const classNames = classnames(

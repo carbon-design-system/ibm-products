@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from 'storybook/actions';
 import {
   Guidebanner,
@@ -16,6 +16,7 @@ import {
 import mdx from './Guidebanner.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { useArgs } from 'storybook/internal/preview-api';
 
 const storyClass = 'guidebanner-stories';
 
@@ -88,10 +89,11 @@ const Template = ({ children, ...rest }) => {
   // but as a story we have to wrap the JSX in a React.Fragment.
   // To feed them here, we point to the list of GuidebannerElements directly.
   const childArray = children.props.children;
-
   return (
     <div className={`${storyClass}__viewport`}>
-      <Guidebanner {...rest}>{childArray}</Guidebanner>
+      <Guidebanner {...rest} open={true}>
+        {childArray}
+      </Guidebanner>
     </div>
   );
 };

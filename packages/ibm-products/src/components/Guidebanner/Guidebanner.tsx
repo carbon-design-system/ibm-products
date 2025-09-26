@@ -8,7 +8,7 @@
 import { Button, IconButton } from '@carbon/react';
 import { CaretLeft, CaretRight, Close, Idea } from '@carbon/react/icons';
 // Import portions of React that are needed.
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useRef, useState } from 'react';
 import { blue90, purple70 } from '@carbon/colors';
 
 import { Carousel } from '../Carousel';
@@ -17,6 +17,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { useControllableState } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--guidebanner`;
@@ -74,16 +75,27 @@ export interface GuidebannerProps {
    * content on the page under special circumstances.
    */
   withLeftGutter?: boolean;
+
   /**
-   *  Specify whether the Guidebanner is currently open.
-   * */
+   * A handler for managing the controlled state of open prop. If not passed the open prop will not be honored and an uncontrolled state will be used.
+   */
+  onChange?: (value: boolean) => void;
+
+  /**
+   * Provide a function which will be called each time the user
+   * interacts with the toggle.
+   */
+  onToggle?: (value: boolean) => void;
+
+  /**
+   * For controlled usage of the tile open state. This prop only works when an onChange prop is also passed, otherwise an uncontrolled state is used.
+   */
   open?: boolean;
 }
 
 const defaults = {
   collapsible: false,
   withLeftGutter: false,
-  open: true,
   // Labels
   closeIconDescription: 'Close',
   collapseButtonLabel: 'Read less',
@@ -111,34 +123,33 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
       nextIconDescription = defaults.nextIconDescription,
       previousIconDescription = defaults.previousIconDescription,
       title,
-      open,
+      onChange,
+      onToggle,
+      open: userOpen,
       ...rest
     } = props;
     const scrollRef = useRef<any>(null);
     const toggleRef = useRef<HTMLDivElement>(null);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [showNavigation, setShowNavigation] = useState(false);
-    const [isCollapsed, setIsCollapsed] = useState(!open);
+    const [open, setOpen] = useControllableState(userOpen ?? false, onChange);
 
     const handleClickToggle = () => {
-      setIsCollapsed((prev) => !prev);
+      setOpen(!open);
+      onToggle?.(!open);
     };
-
-    useEffect(() => {
-      setIsCollapsed(!open);
-    }, [open]);
 
     const carouselContentId = `${uuidv4()}--carousel-content-id`;
 
     return (
       <div
         {...rest}
-        aria-owns={!isCollapsed ? carouselContentId : undefined}
+        aria-owns={open ? carouselContentId : undefined}
         className={cx(
           blockClass,
           className,
           collapsible && `${blockClass}__collapsible`,
-          isCollapsed && `${blockClass}__collapsible-collapsed`,
+          !open && `${blockClass}__collapsible-collapsed`,
           withLeftGutter && `${blockClass}__with-left-gutter`
         )}
         ref={ref}
@@ -175,10 +186,10 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
               className={`${blockClass}__toggle-button`}
               onClick={handleClickToggle}
               ref={toggleRef}
-              aria-controls={!isCollapsed ? carouselContentId : undefined}
-              aria-expanded={!isCollapsed}
+              aria-controls={!open ? carouselContentId : undefined}
+              aria-expanded={!open}
             >
-              {isCollapsed ? expandButtonLabel : collapseButtonLabel}
+              {open ? expandButtonLabel : collapseButtonLabel}
             </Button>
           )}
 

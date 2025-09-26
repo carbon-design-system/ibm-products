@@ -28,6 +28,7 @@ export type Config = {
   onViewChangeStart?: (args: CarouselResponse) => void;
   onViewChangeEnd?: (args: CarouselResponse) => void;
   excludeSwipeSupport?: boolean;
+  useMaxHeight?: boolean;
 };
 
 interface InitCarousel {

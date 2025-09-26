@@ -68,10 +68,10 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     const targetId = open ? triggerRef?.current?.id : null;
 
     const handleRef = useRef<HTMLDivElement | null>(null);
-    const bubbleRef = ref && typeof ref !== 'function' ? ref : handleRef;
+    const bubbleRef = ref || handleRef;
 
     useEffect(() => {
-      if (open && bubbleRef.current) {
+      if (open && 'current' in bubbleRef && bubbleRef.current) {
         requestAnimationFrame(() => {
           const contentBody = bubbleRef.current?.querySelector(
             `.${contentBodyClass}`
@@ -91,7 +91,8 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     useEffect(() => {
       const handleOutsideClick = (event: MouseEvent) => {
         const targetElement = document.getElementById(targetId || '');
-        const bubbleElement = bubbleRef.current;
+        const bubbleElement =
+          bubbleRef && 'current' in bubbleRef ? bubbleRef.current : null;
 
         if (
           bubbleElement &&
@@ -122,7 +123,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     }, [open, targetId, setOpen]);
 
     useEffect(() => {
-      if (open && bubbleRef.current) {
+      if (open && 'current' in bubbleRef && bubbleRef.current) {
         const dragContainer = bubbleRef.current.querySelector(
           `.${pkg.prefix}__bubble`
         );
@@ -131,7 +132,8 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
         }
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, bubbleRef.current]);
+    }, [open, bubbleRef]);
+
     return (
       open && (
         <div ref={bubbleRef}>

@@ -151,7 +151,7 @@ export interface TagSetProps extends PropsWithChildren {
   tags?: TagType[];
 }
 
-export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
+export const TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -470,7 +470,6 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-TagSet = pkg.checkComponentEnabled(TagSet, componentName);
 
 // copied from carbon-components-react/src/components/Tag/Tag.js for DocGen
 const TYPES = {

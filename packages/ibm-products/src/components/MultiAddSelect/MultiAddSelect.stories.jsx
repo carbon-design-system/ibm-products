@@ -258,7 +258,9 @@ const Template = (args, context) => {
   return (
     <>
       <MultiAddSelect {...args} open={open} onClose={() => setOpen(false)} />
-      <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+      {args?.noTearsheet === false && (
+        <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+      )}
     </>
   );
 };

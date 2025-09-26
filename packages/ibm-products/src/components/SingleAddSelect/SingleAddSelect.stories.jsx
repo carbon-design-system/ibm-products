@@ -139,7 +139,9 @@ const Template = (args, context) => {
   return (
     <>
       <SingleAddSelect {...args} open={open} onClose={() => setOpen(false)} />
-      <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+      {args?.noTearsheet === false && (
+        <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+      )}
     </>
   );
 };

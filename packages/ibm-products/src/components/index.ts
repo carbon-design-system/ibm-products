@@ -54,6 +54,8 @@ export * from './WebTerminal';
 
 // Preview
 export * as preview__Coachmark from './Coachmark/next/Coachmark';
+export * as preview__CoachmarkTagline from './Coachmark/next/Coachmark/CoachmarkTagline';
+
 export {
   FeatureFlags as preview__FeatureFlags,
   useFeatureFlag as preview__useFeatureFlag,

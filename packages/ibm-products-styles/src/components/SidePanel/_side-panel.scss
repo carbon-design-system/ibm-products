@@ -55,13 +55,8 @@ $clabs-prefix: 'clabs';
 }
 
 @mixin setCommonTitleStyles() {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
   /* stylelint-disable-next-line carbon/layout-use -- custom css property set below */
   padding-inline-end: var(--#{$block-class}--title-padding-right);
-  word-break: break-all;
 }
 
 .#{$block-class}--scrolls {
@@ -419,11 +414,8 @@ $clabs-prefix: 'clabs';
   .#{$block-class}__label-text {
     @include type.type-style('label-01');
 
-    overflow: hidden;
     opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     padding-inline-end: var(--#{$block-class}--title-padding-right);
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .#{$block-class}__collapsed-title-text {
@@ -447,11 +439,6 @@ $clabs-prefix: 'clabs';
   .#{$block-class}__subtitle-text {
     @include type.type-style('body-compact-01');
 
-    overflow: hidden;
-
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
     opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     padding-block-end: $spacing-05;
     padding-inline-end: var(--#{$block-class}--title-padding-right);

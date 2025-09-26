@@ -125,6 +125,7 @@ const defaultProps = {
   navIconDescription: 'View children',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
+  noTearsheet: false,
   onCloseButtonText: 'Cancel',
   onSubmit: (selection) => console.log(selection),
   onSubmitButtonText: 'Select',
@@ -138,7 +139,9 @@ const Template = (args, context) => {
   return (
     <>
       <SingleAddSelect {...args} open={open} onClose={() => setOpen(false)} />
-      <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+      {args?.noTearsheet === false && (
+        <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+      )}
     </>
   );
 };

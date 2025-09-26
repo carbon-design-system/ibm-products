@@ -14,7 +14,7 @@ import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark/next',
+  title: 'Preview/Onboarding/Coachmark/next',
   component: Coachmark,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {

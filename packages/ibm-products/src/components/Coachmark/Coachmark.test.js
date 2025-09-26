@@ -20,10 +20,10 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { Coachmark } from '.';
 import {
-  CoachmarkBeacon,
-  CoachmarkButton,
-  CoachmarkOverlayElement,
-  CoachmarkOverlayElements,
+  previewCandidate__CoachmarkBeacon as CoachmarkBeacon,
+  previewCandidate__CoachmarkButton as CoachmarkButton,
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
 } from '..';
 import {
   BEACON_KIND,

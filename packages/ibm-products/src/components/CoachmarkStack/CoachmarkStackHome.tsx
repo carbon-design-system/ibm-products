@@ -93,7 +93,7 @@ const componentName = 'CoachmarkStackHome';
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
  */
-export let CoachmarkStackHome = forwardRef<
+export const CoachmarkStackHome = forwardRef<
   HTMLDivElement,
   CoachmarkStackHomeProps
 >(
@@ -272,12 +272,6 @@ export let CoachmarkStackHome = forwardRef<
         )
       : null;
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-CoachmarkStackHome = pkg.checkComponentEnabled(
-  CoachmarkStackHome,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

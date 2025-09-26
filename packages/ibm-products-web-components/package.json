@@ -66,9 +66,9 @@
   },
   "devDependencies": {
     "@blockquote/rollup-plugin-externalize-source-dependencies": "^1.0.0",
-    "@carbon/icon-helpers": "^10.65.0",
-    "@carbon/icons": "^11.66.0",
-    "@carbon/motion": "^11.34.0",
+    "@carbon/icon-helpers": "^10.66.0",
+    "@carbon/icons": "^11.67.0",
+    "@carbon/motion": "^11.35.0",
     "@ibm/telemetry-js-config-generator": "^2.1.0",
     "@mordech/vite-lit-loader": "^0.37.0",
     "@open-wc/testing": "^4.0.0",

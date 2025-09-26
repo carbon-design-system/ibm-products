@@ -75,18 +75,10 @@ export interface GuidebannerProps {
    * content on the page under special circumstances.
    */
   withLeftGutter?: boolean;
-
   /**
    * A handler for managing the controlled state of open prop. If not passed the open prop will not be honored and an uncontrolled state will be used.
    */
   onChange?: (value: boolean) => void;
-
-  /**
-   * Provide a function which will be called each time the user
-   * interacts with the toggle.
-   */
-  onToggle?: (value: boolean) => void;
-
   /**
    * For controlled usage of the tile open state. This prop only works when an onChange prop is also passed, otherwise an uncontrolled state is used.
    */
@@ -124,7 +116,6 @@ export const Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
       previousIconDescription = defaults.previousIconDescription,
       title,
       onChange,
-      onToggle,
       open: userOpen,
       ...rest
     } = props;
@@ -136,7 +127,6 @@ export const Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
 
     const handleClickToggle = () => {
       setOpen(!open);
-      onToggle?.(!open);
     };
 
     const carouselContentId = `${uuidv4()}--carousel-content-id`;
@@ -299,6 +289,10 @@ Guidebanner.propTypes = {
    * Tooltip text and aria label for the Next button icon.
    */
   nextIconDescription: PropTypes.string,
+  /**
+   * A handler for managing the controlled state of open prop. If not passed the open prop will not be honored and an uncontrolled state will be used.
+   */
+  onChange: PropTypes.func,
   /**
    * If defined, a Close button will render in the top-right corner and a
    * callback function will be triggered when button is clicked.

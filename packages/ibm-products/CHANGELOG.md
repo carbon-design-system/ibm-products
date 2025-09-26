@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.75.0-rc.0`
+## `@carbon/ibm-products@2.75.0`
 ### Features :rocket:
 - feat(PageHeader): add compact story, fix preview styles in storybook docs page (#8190)
 - feat(sidepanel): utilizes layer in sidepanel (#8025)

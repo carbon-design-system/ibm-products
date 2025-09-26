@@ -1,4 +1,8 @@
-## `@carbon/ibm-products-web-components@0.24.0-rc.0`
+## `@carbon/ibm-products-web-components@0.24.1`
+### Bug fixes :bug:
+- fix: unintentioanl leakage of carbon webcomponents (#8271)
+
+## `@carbon/ibm-products-web-components@0.24.0`
 ### Bug fixes :bug:
 - fix(deps): update dependency @carbon-labs/wc-empty-state to ^0.9.0 (#8240)
 - fix(telemetry): bump version (#8228)

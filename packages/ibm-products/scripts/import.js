@@ -5,8 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { bgGreen, bgRed, red } = require('chalk');
 const path = require('node:path');
+
+const reset = "\x1b[0m";
+const green = str => `\x1b[42m${str + reset}`;
+const red = str => `\x1b[41m${str + reset}`;
 
 /**
  * used in `yarn ci-check` to check if lib is generate in the build command
@@ -20,7 +23,7 @@ const importCheck = () => {
   } catch (error) {
     status = error;
   } finally {
-    console.log(`${status ? bgRed('FAIL') : bgGreen('PASS')} Import '${lib}'`);
+    console.log(`${status ? red('FAIL') : green('PASS')} Import '${lib}'`);
 
     if (status) {
       console.error(`\n${red(status)}`);

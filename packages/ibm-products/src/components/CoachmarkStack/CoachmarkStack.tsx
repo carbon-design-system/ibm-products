@@ -119,7 +119,7 @@ const defaults = {
  * user to gain understanding of the product's main value and discover new use cases.
  * This variant allows the stacking of multiple coachmark overlays to be displayed by interacting with the tagline.
  */
-export let CoachmarkStack = React.forwardRef<
+export const CoachmarkStack = React.forwardRef<
   HTMLDivElement,
   CoachmarkStackProps
 >(
@@ -352,7 +352,6 @@ export let CoachmarkStack = React.forwardRef<
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkStack = pkg.checkComponentEnabled(CoachmarkStack, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

@@ -37,7 +37,7 @@ export interface NotificationsEmptyStateProps extends EmptyStatePresetProps {
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */
-export let NotificationsEmptyState = React.forwardRef<
+export const NotificationsEmptyState = React.forwardRef<
   HTMLDivElement,
   NotificationsEmptyStateProps
 >(
@@ -92,12 +92,6 @@ export let NotificationsEmptyState = React.forwardRef<
       </div>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-NotificationsEmptyState = pkg.checkComponentEnabled(
-  NotificationsEmptyState,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

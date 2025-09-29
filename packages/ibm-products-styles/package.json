@@ -45,7 +45,6 @@
     "test": "jest --colors"
   },
   "devDependencies": {
-    "chalk": "4.1.2",
     "copyfiles": "^2.4.1",
     "cross-env": "^10.0.0",
     "glob": "^11.0.1",

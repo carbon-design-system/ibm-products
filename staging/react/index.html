@@ -87,18 +87,43 @@
   content="https://ibm-products.carbondesignsystem.com/social.png"
 />
 
-<footer>
-  <dds-footer-container
-    key="footer"
-    disable-locale-button="true"
-    size="micro"
-  />
-</footer>
-
-<script
-  type="module"
-  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/footer.min.js"
-></script>
+<!-- Window objects / analytics config -->
+<script>
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        language: 'en-US',
+        productTitle: 'Carbon for IBM Products',
+        analytics: {
+          category: 'KnowledgeCenter',
+        },
+        ibm: {
+          country: 'US',
+          siteId: 'C4IP',
+        },
+        segment: {
+          autoPageEventSpa: true,
+          enabled: true,
+          env: 'test',
+          key: 'aWg1ug3bDNcSTnde9iwvg1OcvVRzf0JC',
+          coremetrics: false,
+          skipIdentify: true,
+          commonProperties: {
+            productCode: 'C4IP',
+            productTitle: 'Carbon for IBM Products',
+          },
+          pageProperties: {
+            productCode: 'C4IP',
+            productTitle: 'Carbon for IBM Products',
+          },
+        },
+      },
+      category: {
+        primaryCategory: 'PC110',
+      },
+    },
+  };
+</script>
 
 <script
   src="//1.www.s81c.com/common/stats/ibm-common.js"
@@ -113,6 +138,18 @@
   }, 1000);
 </script>
 
+<!-- Footer -->
+<footer>
+  <c4d-footer-container
+    disable-locale-button="true"
+    size="micro"
+  ></c4d-footer-container>
+</footer>
+<script
+  type="module"
+  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/version/v2.29.0/footer.min.js"
+></script>
+
 <!-- Style overrides -->
 <style>
   body {
@@ -124,8 +161,18 @@
     height: calc(100vh - 48px);
   }
 
-  /* This style is required because of the compliance footer in smaller screens */
+  @media (max-width: 1056px) {
+    #root > div {
+      height: calc(100vh - 98px);
+    }
+  }
+
   @media (max-width: 671px) {
+    #root > div {
+      height: calc(100vh - 342px);
+    }
+
+    /* This style is required because of the compliance footer in smaller screens */
     nav[class^='css-'] {
       height: 281px;
     }
@@ -140,51 +187,13 @@
 </style>
 
       
-  <script>
-    window._ibmAnalytics = {
-      settings: {
-        name: 'ibm-products-react-storybook',
-        isSpa: false,
-        tealiumProfileName: 'in-app-usage-growth',
-      },
-      onLoad: [['ibmStats.pageview', []]],
-    };
-
-    window.digitalData = {
-      page: {
-        pageInfo: {
-          ibm: {
-            siteId: 'IBM_ibm-products-react-storybook',
-          },
-          segment: {
-            enabled: true,
-            env: 'test',
-            key: 'aWg1ug3bDNcSTnde9iwvg1OcvVRzf0JC',
-            coremetrics: false,
-            commonProperties: {
-              productCode: 'C4IP',
-              productTitle: 'Carbon for IBM Products',
-            },
-            pageProperties: {
-              productCode: 'C4IP',
-              productTitle: 'Carbon for IBM Products',
-            },
-          },
-        },
-        category: {
-          primaryCategory: 'PC110',
-        },
-      },
-    };
-  </script>
-  <script
-    src="//1.www.s81c.com/common/stats/ibm-common.js"
-    type="text/javascript"
-    async="async"></script>
-  <script
-    type="text/javascript"
-    async="async"
-    src="//1.www.s81c.com/common/carbon/autotrack.min.js"></script>
+<script>
+  window._ibmAnalytics = window._ibmAnalytics || {};
+  window.digitalData = window.digitalData || {};
+  window._ibmAnalytics.settings.name = 'ibm-products-react-storybook';
+  window.digitalData.page.pageInfo.ibm.siteId = 'IBM_ibm-products-react-storybook';
+</script>
+<script type="text/javascript" async="async" src="//1.www.s81c.com/common/carbon/autotrack.min.js"></script>
      
 
     <style>

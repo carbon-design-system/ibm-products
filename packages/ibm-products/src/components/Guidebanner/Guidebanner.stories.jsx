@@ -16,7 +16,6 @@ import {
 import mdx from './Guidebanner.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { useArgs } from 'storybook/internal/preview-api';
 
 const storyClass = 'guidebanner-stories';
 
@@ -91,9 +90,7 @@ const Template = ({ children, ...rest }) => {
   const childArray = children.props.children;
   return (
     <div className={`${storyClass}__viewport`}>
-      <Guidebanner {...rest} open={true}>
-        {childArray}
-      </Guidebanner>
+      <Guidebanner {...rest}>{childArray}</Guidebanner>
     </div>
   );
 };
@@ -102,6 +99,7 @@ export const collapsible = Template.bind({});
 collapsible.args = {
   ...defaultProps,
   collapsible: true,
+  open: true,
   children: (
     <React.Fragment>
       <GuidebannerElement

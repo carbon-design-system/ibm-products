@@ -96,6 +96,7 @@ class CDSChecklistItem extends LitElement {
     const classes = classMap({
       [`${prefix}--checklist__label`]: true,
       [`${prefix}--checklist__label--clickable`]: clickable,
+      [`${prefix}--checklist__label--disabled`]: status === Statuses.Disabled,
     });
 
     return html`

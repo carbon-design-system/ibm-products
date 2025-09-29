@@ -27,19 +27,25 @@ class CDSChecklistGroup extends LitElement {
   @property()
   title;
 
+  private _updateAttributes() {
+    this.classList.add(`${prefix}--checklist__list-group`);
+  }
+
+  firstUpdated() {
+    this._updateAttributes();
+  }
+
   render() {
     const { title } = this;
 
     return html`
-      <section class="${prefix}--checklist__list-group">
-        ${title &&
-        html`<h3 title=${title} class="${prefix}--checklist__list-title">
-          ${title}
-        </h3>`}
-        <ol class="${prefix}--checklist__list">
-          <slot></slot>
-        </ol>
-      </section>
+      ${title &&
+      html`<h3 title=${title} class="${prefix}--checklist__list-title">
+        ${title}
+      </h3>`}
+      <ol class="${prefix}--checklist__list">
+        <slot></slot>
+      </ol>
     `;
   }
 

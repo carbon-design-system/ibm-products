@@ -64,7 +64,7 @@ body {
   @include type.type-style('heading-05');
 }
 
-.welcome__tag--xl.cds--tag {
+.welcome__tag--xl {
   @include type.type-style('heading-03');
 
   border-radius: $spacing-06;
@@ -136,7 +136,7 @@ body {
     @include type.type-style('heading-05');
   }
 
-  .welcome__tag--xl.cds--tag {
+  .welcome__tag--xl {
     @include type.type-style('heading-02');
   }
 }
@@ -168,7 +168,7 @@ body {
     @include type.type-style('heading-03');
   }
 
-  .welcome__tag--xl.cds--tag {
+  .welcome__tag--xl {
     @include type.type-style('heading-01');
   }
 

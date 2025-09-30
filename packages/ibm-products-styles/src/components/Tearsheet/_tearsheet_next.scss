@@ -191,6 +191,9 @@ $motion-duration: $duration-moderate-02;
       position: absolute;
       inset-inline-end: -$spacing-07;
       margin-inline-end: 1px;
+      @include breakpoint-down(md) {
+        inset-inline-end: -$spacing-05;
+      }
 
       .#{$block-class__next}__scroller-button-icon-collapsed {
         transform: rotate(-180deg);

@@ -1,0 +1,274 @@
+/**
+ * Copyright IBM Corp. 2025, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useRef,
+  RefObject,
+  forwardRef,
+  ReactNode,
+  ForwardedRef,
+  FC,
+} from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import {
+  ComposedModal,
+  unstable_FeatureFlags as FeatureFlags,
+  Layer,
+  ModalBody,
+  ModalHeader,
+  usePrefix,
+} from '@carbon/react';
+import { blockClass, TearsheetContext } from './context';
+import TearsheetHeader, {
+  TearsheetHeaderProps,
+  TearsheetNavigationBar,
+  TearsheetNavigationBarProps,
+  TearsheetScrollButton,
+  TearsheetScrollButtonProps,
+} from './TearsheetHeader';
+import TearsheetHeaderContent, {
+  TearsheetHeaderContentProps,
+} from './TearsheetHeaderContent';
+import TearsheetBody, {
+  MainContent,
+  MainContentProps,
+  RightContent,
+  RightContentProps,
+  TearsheetBodyProps,
+} from './TearsheetBody';
+
+import {
+  TearsheetHeaderActionItem,
+  TearsheetHeaderActionItemProps,
+  TearsheetHeaderActions,
+  TearsheetHeaderActionsProps,
+} from './TearsheetHeaderActions';
+
+/**
+ * ----------
+ * Tearsheet
+ * ----------
+ */
+
+export interface TearsheetProps {
+  children?: React.ReactNode;
+
+  /**
+   * Specifies whether the tearsheet is currently open.
+   */
+  open?: boolean;
+
+  className?: string;
+  /**
+   * Default influencer takes 256px, this allow to override eg: 300px , 20rem
+   */
+  influencerWidth?: string;
+  /**
+   * Default rightContent takes 256px, this allow to override eg: 300px , 20rem
+   */
+  rightContentWidth?: string;
+  arialLabel?: string;
+  variant?: 'wide' | 'narrow';
+  /**
+   * Optional prop that allows you to pass any component.
+   */
+  decorator?: ReactNode;
+
+  /**
+   * Specify the CSS selectors that match the floating menus.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-composedmodal--overview#focus-management
+   */
+  selectorsFloatingMenus?: string[];
+
+  /**
+   * The aria label applied to the tearsheet
+   */
+  ariaLabel?: string;
+
+  /**
+   * An optional handler that is called when the user closes the tearsheet (by
+   * clicking the close button, if enabled, or clicking outside, if enabled).
+   * Returning `false` here prevents the modal from closing.
+   */
+  onClose?: () => void;
+  /**
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
+   */
+  selectorPrimaryFocus?: PropTypes.string;
+
+  /**
+   * This can be set to disable header collapse on scroll
+   */
+  disableHeaderCollapse?: boolean;
+}
+
+export type TearsheetComponentType = React.ForwardRefExoticComponent<
+  TearsheetProps & React.RefAttributes<HTMLDivElement>
+> & {
+  Header: FC<TearsheetHeaderProps>;
+  HeaderContent: FC<TearsheetHeaderContentProps>;
+  Influencer: FC<InfluencerProps>;
+  NavigationBar: FC<TearsheetNavigationBarProps>;
+  ScrollButton: FC<TearsheetScrollButtonProps>;
+  HeaderActions: FC<TearsheetHeaderActionsProps>;
+  HeaderActionItem: FC<TearsheetHeaderActionItemProps>;
+  MainContent: FC<MainContentProps>;
+  RightContent: FC<RightContentProps>;
+  Body: FC<TearsheetBodyProps>;
+  Footer: FC<FooterProps>;
+};
+
+export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
+  (
+    {
+      children,
+      variant = 'wide',
+      selectorsFloatingMenus = [],
+      className,
+      influencerWidth,
+      rightContentWidth,
+      ariaLabel,
+      onClose,
+      selectorPrimaryFocus,
+      open,
+      disableHeaderCollapse,
+      ...rest
+    },
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
+    const carbonPrefix = usePrefix();
+    const localRef = useRef(undefined);
+    const bodyRef = useRef(undefined);
+    const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
+
+    const [hasCloseIcon, setHasCloseIcon] = useState(true);
+    const [fullyCollapsed, setFullyCollapsed] = useState(false);
+
+    const arr = React.Children.toArray(children);
+    const header = arr.find((child: any) => child.type === TearsheetHeader);
+    const influencer = arr.find((child: any) => child.type === Influencer);
+    const body = arr.find((child: any) => child.type === TearsheetBody);
+    const footer = arr.find((child: any) => child.type === Footer);
+
+    useLayoutEffect(() => {
+      const AILabelWidth =
+        modalRef.current?.querySelector(`.${carbonPrefix}--ai-label`)
+          ?.clientWidth ?? 0;
+      const headerActionMarginRight = AILabelWidth + 24; // 24 is to compeNsate for close button
+      document.documentElement.style.setProperty(
+        '--tearsheet-header-action-offset',
+        `${headerActionMarginRight}px`
+      );
+
+      if (influencerWidth) {
+        document.documentElement.style.setProperty(
+          '--tearsheet-influencer-width',
+          `${influencerWidth}`
+        );
+      }
+      if (rightContentWidth) {
+        document.documentElement.style.setProperty(
+          '--tearsheet-right-content-width',
+          `${rightContentWidth}`
+        );
+      }
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    return (
+      <TearsheetContext.Provider
+        value={{
+          hasCloseIcon,
+          setHasCloseIcon,
+          fullyCollapsed,
+          setFullyCollapsed,
+          onClose,
+          disableHeaderCollapse,
+        }}
+      >
+        <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+          <ComposedModal
+            {...rest}
+            aria-label={ariaLabel}
+            className={cx(blockClass, className, {
+              [`${blockClass}--wide`]: variant === 'wide',
+              [`${blockClass}--narrow`]: variant === 'narrow',
+
+              [`${blockClass}--has-close`]: hasCloseIcon,
+            })}
+            containerClassName={cx(`${blockClass}__container`, {
+              // [`${bc}__container--lower`]: verticalPosition === 'lower',
+            })}
+            {...{ onClose, open, selectorPrimaryFocus }}
+            // onKeyDown={keyDownListener}
+            // preventCloseOnClickOutside={!isPassive}
+            ref={modalRef}
+            selectorsFloatingMenus={[
+              `.${carbonPrefix}--overflow-menu-options`,
+              `.${carbonPrefix}--tooltip`,
+              '.flatpickr-calendar',
+              `.${blockClass}__container`,
+              `.${carbonPrefix}--menu`,
+              ...selectorsFloatingMenus,
+            ]}
+          >
+            {header}
+            <ModalBody className={`${blockClass}__body-layout`} ref={bodyRef}>
+              {/* <div ref={ref} className={`${blockClass}__body-layout`}> */}
+              {influencer}
+
+              {body}
+
+              {footer}
+
+              {/* </div> */}
+            </ModalBody>
+          </ComposedModal>
+        </FeatureFlags>
+      </TearsheetContext.Provider>
+    );
+  }
+) as TearsheetComponentType;
+
+export interface InfluencerProps {
+  children: ReactNode;
+  className?: string;
+}
+const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
+  ({ children, className }, ref) => {
+    return (
+      <aside className={`${blockClass}__influencer ${className}`} ref={ref}>
+        {children}
+      </aside>
+    );
+  }
+);
+
+export interface FooterProps {
+  children: ReactNode;
+  className?: string;
+}
+const Footer = forwardRef<HTMLDivElement, FooterProps>(({ children }, ref) => {
+  return <footer className={`${blockClass}__footer`}>{children}</footer>;
+});
+
+Tearsheet.Header = TearsheetHeader;
+Tearsheet.HeaderContent = TearsheetHeaderContent;
+Tearsheet.Body = TearsheetBody;
+Tearsheet.Influencer = Influencer;
+Tearsheet.MainContent = MainContent;
+Tearsheet.RightContent = RightContent;
+Tearsheet.Footer = Footer;
+Tearsheet.NavigationBar = TearsheetNavigationBar;
+Tearsheet.ScrollButton = TearsheetScrollButton;
+Tearsheet.HeaderActions = TearsheetHeaderActions;
+Tearsheet.HeaderActionItem = TearsheetHeaderActionItem;

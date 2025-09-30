@@ -1,0 +1,108 @@
+/**
+ * Copyright IBM Corp. 2024, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import {
+  DefinitionTooltip,
+  usePrefix,
+  unstable_Text as Text,
+} from '@carbon/react';
+import React, { ReactNode, useLayoutEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { blockClass } from './context';
+import { TruncatedText } from '../../TruncatedText';
+import { CarbonIconType } from '@carbon/react/icons';
+
+export interface TearsheetHeaderContentProps {
+  /**
+   * Provide the optional content for header section and will be render after header titles and before progress indicator.
+   * People can make use of this if they want to have custom header.
+   */
+  children?: React.ReactNode;
+
+  title: string;
+  label?: string;
+  description?: string;
+  descriptionExpandLabel?: string;
+  descriptionCollapseLabel?: string;
+  titleIcon?: CarbonIconType;
+  titleIconPosition?: 'leading' | 'trailing';
+  /**
+   * The PageHeaderContent's page actions
+   */
+  headerActions?: React.ReactNode;
+}
+
+const TearsheetHeaderContent = React.forwardRef<
+  HTMLDivElement,
+  TearsheetHeaderContentProps
+>((props, ref) => {
+  const {
+    children,
+    label,
+    title,
+    description,
+    descriptionExpandLabel = 'Read more',
+    descriptionCollapseLabel = 'Read less',
+    titleIcon: Icon,
+    titleIconPosition = 'leading',
+    headerActions,
+    ...rest
+  } = props;
+
+  return (
+    <div className={`${blockClass}__header-content-wrapper`}>
+      <div className={`${blockClass}__header-content`}>
+        <p className={`${blockClass}__header-label`}>{label}</p>
+        <div className={`${blockClass}__content__title-wrapper`}>
+          <h2
+            className={cx(
+              `${blockClass}__header-title`,
+              {
+                [`${blockClass}__leading-icon`]:
+                  Icon && titleIconPosition === 'leading',
+              },
+              {
+                [`${blockClass}__trailing-icon`]:
+                  Icon && titleIconPosition === 'trailing',
+              }
+            )}
+          >
+            {Icon && <Icon size={32} />}
+            <TruncatedText
+              id={`${blockClass}__header-title__truncatedText`}
+              className={`${blockClass}__content__title`}
+              align="bottom"
+              autoAlign={true}
+              value={title}
+            />
+          </h2>
+        </div>
+
+        <div className={`${blockClass}__header-description`}>
+          <TruncatedText
+            id={`${blockClass}__header-description__truncatedText`}
+            expandLabel={descriptionExpandLabel}
+            collapseLabel={descriptionCollapseLabel}
+            value={description}
+            type="expand"
+          />
+        </div>
+        {children && (
+          <div className={`${blockClass}__header-content--extra`}>
+            {children}
+          </div>
+        )}
+      </div>
+      {headerActions && (
+        <div className={`${blockClass}__header-actions`}>{headerActions}</div>
+      )}
+    </div>
+  );
+});
+
+export default TearsheetHeaderContent;

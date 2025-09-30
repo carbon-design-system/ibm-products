@@ -1,0 +1,24 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/spacing' as *;
+
+.default__action-buttons {
+  display: grid;
+  grid-auto-rows: minmax(auto, auto);
+  grid-template-columns: repeat(6, 1fr);
+
+  > button {
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+
+  :first-child {
+    grid-column: span 4;
+  }
+}

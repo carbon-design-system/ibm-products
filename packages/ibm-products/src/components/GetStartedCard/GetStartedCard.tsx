@@ -80,7 +80,7 @@ export interface GetStartedCardProps extends PropsWithChildren {
 /**
  * GetStartedCard a card with icon, number, and media variants
  */
-export let GetStartedCard = React.forwardRef(
+export const GetStartedCard = React.forwardRef(
   (props: GetStartedCardProps, ref: React.Ref<HTMLDivElement>) => {
     return (
       <Card
@@ -92,7 +92,6 @@ export let GetStartedCard = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-GetStartedCard = pkg.checkComponentEnabled(GetStartedCard, componentName);
 
 GetStartedCard.displayName = componentName;
 

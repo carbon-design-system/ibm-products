@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,7 +45,7 @@ export interface InterstitialScreenViewProps extends PropsWithChildren {
 /**
  * An Onboarding component intended to be used as the child elements of the InterstitialScreen component.
  */
-export let InterstitialScreenView = React.forwardRef<
+export const InterstitialScreenView = React.forwardRef<
   HTMLDivElement,
   InterstitialScreenViewProps
 >(
@@ -83,12 +83,6 @@ export let InterstitialScreenView = React.forwardRef<
       </div>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-InterstitialScreenView = pkg.checkComponentEnabled(
-  InterstitialScreenView,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

@@ -14,12 +14,13 @@ import { StepState, useStepContext } from '../..';
 interface Props {
   children?: ReactNode;
   subtitle?: ((a: StepState) => ReactNode) | null;
-  open?: boolean;
+  open: boolean;
   onClose?: () => void;
-  title?: ReactNode;
+  title?: string;
   hasCloseIcon?: boolean;
   closeIconDescription?: string;
   selectorPrimaryFocus?: string;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }
 
 export const StepSidePanel = ({
@@ -29,6 +30,7 @@ export const StepSidePanel = ({
   onClose,
   title,
   selectorPrimaryFocus,
+  size = 'md',
   ...rest
 }: Props) => {
   const state = useStepContext();
@@ -36,6 +38,7 @@ export const StepSidePanel = ({
 
   return (
     <SidePanel
+      size={size}
       open={open}
       onRequestClose={onClose}
       title={title}

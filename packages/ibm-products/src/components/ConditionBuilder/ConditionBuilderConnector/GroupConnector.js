@@ -36,7 +36,7 @@ const GroupConnector = () => {
         label={rootState.operator}
         title={conditionText}
         data-name="connectorField"
-        popOverClassName={`${blockClass}__gap`}
+        popOverClassName={`${blockClass}__gap ${blockClass}__groupConnector`}
         className={`${blockClass}__statement-button`}
       >
         <ItemOption

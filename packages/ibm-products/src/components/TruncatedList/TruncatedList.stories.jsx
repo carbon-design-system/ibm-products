@@ -10,7 +10,7 @@ import { ListItem } from '@carbon/react';
 // TODO: import action to handle events if required.
 import { action } from 'storybook/actions';
 
-import { TruncatedList } from '.';
+import { previewCandidate__TruncatedList as TruncatedList } from '..';
 
 import styles from './_storybook-styles.scss?inline';
 import mdx from './TruncatedList.mdx';

@@ -106,7 +106,7 @@ const defaults = {
  * Composable container to allow for the displaying of CoachmarkOverlayElement
  * components in a carousel fashion.
  */
-export let CoachmarkOverlayElements = React.forwardRef<
+export const CoachmarkOverlayElements = React.forwardRef<
   HTMLDivElement,
   CoachmarkOverlayElementsProps
 >(
@@ -305,12 +305,6 @@ CoachmarkOverlayElements.deprecated = {
   level: 'warn',
   details: `${componentName} is deprecated.`,
 };
-
-// Return a placeholder if not released and not enabled by feature flag
-CoachmarkOverlayElements = pkg.checkComponentEnabled(
-  CoachmarkOverlayElements,
-  componentName
-);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

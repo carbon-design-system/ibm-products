@@ -12,12 +12,12 @@
     "clean": "rimraf node_modules dist .cache"
   },
   "dependencies": {
-    "@carbon/ibm-products-web-components": "^0.19.0",
+    "@carbon/ibm-products-web-components": "^0.22.0",
     "lit": "^3.2.1",
     "sass": "^1.64.1"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",
-    "vite": "5.4.19"
+    "vite": "^5.4.20"
   }
 }

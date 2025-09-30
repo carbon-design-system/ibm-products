@@ -41,7 +41,7 @@ jobs:
           git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: '20.x'
           registry-url: https://registry.npmjs.org
@@ -50,15 +50,21 @@ jobs:
         run: yarn install
 
       - name:
-          Run @ibm/telemetry-js-config-generator to regenerate telemetry config
-          file
+          Run @ibm/telemetry-js-config-generator to regenerate ibm-products telemetry config file
         if: github.event.inputs.dry-run == 'true'
         working-directory: ./packages/ibm-products
         run: |
           yarn telemetry-config
 
+      - name:
+          Run @ibm/telemetry-js-config-generator to regenerate telemetry ibm-products-web-components config file
+        if: github.event.inputs.dry-run == 'true'
+        working-directory: ./packages/ibm-products-web-components
+        run: |
+          yarn telemetry-config
+
       # This can be removed once @ibm/telemetry-js-config-generator has params to set the js scope
-      - name: Add js scope to telemetry config
+      - name: Add js scope to ibm-products telemetry config
         if: github.event.inputs.dry-run == 'true'
         working-directory: ./packages/ibm-products
         run: |
@@ -69,38 +75,54 @@ jobs:
             echo "Mirror is clean, exiting..."
           else
             git add telemetry.yml
-            git commit -m "chore(telemetry): update telemetry config"
+            git commit -m "chore(telemetry): update ibm-products telemetry config"
+            git push origin
+          fi
+
+      - name: Add js scope to ibm-products-web-components telemetry config
+        if: github.event.inputs.dry-run == 'true'
+        working-directory: ./packages/ibm-products-web-components
+        run: |
+          echo "  js:
+              functions: {}
+              tokens: null" >> telemetry.yml
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Mirror is clean, exiting..."
+          else
+            git add telemetry.yml
+            git commit -m "chore(telemetry): update ibm-products-web-components telemetry config"
             git push origin
           fi
 
       # For generating playwright json report for avt tests
-      - name: Install browsers
-        run: yarn playwright install --with-deps
-
-      - name: Run storybook
-        id: storybook
-        run: |
-          npx serve -l 3000 packages/ibm-products/storybook-static &
-          pid=$!
-          echo "pid=$pid" >> $GITHUB_OUTPUT
-      - uses: ./actions/wait-for-it
-        with:
-          URL: 'http://localhost:3000'
-        timeout-minutes: 3
-      - name: Run AVT
-        if: github.repository == 'carbon-design-system/ibm-products'
-        run: yarn avt
-      - name: Stop storybook
-        run: kill ${{ steps.storybook.outputs.pid }}
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: playwright-avt-report
-          path: .playwright
+      # - name: Install browsers
+      #   run: yarn playwright install --with-deps
 
       - name: Continuous integration check (includes build)
         run: yarn ci-check
+
+      # - name: Run storybook
+      #   id: storybook
+      #   run: |
+      #     npx serve -l 3000 packages/ibm-products/storybook-static &
+      #     pid=$!
+      #     echo "pid=$pid" >> $GITHUB_OUTPUT
+      # - uses: ./actions/wait-for-it
+      #   with:
+      #     URL: 'http://localhost:3000'
+      #   timeout-minutes: 3
+      # - name: Run AVT
+      #   if: github.repository == 'carbon-design-system/ibm-products'
+      #   run: |
+      #     yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
+      # - name: Stop storybook
+      #   run: kill ${{ steps.storybook.outputs.pid }}
+      # - name: Upload test results
+      #   if: always()
+      #   uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      #   with:
+      #     name: playwright-avt-report
+      #     path: .playwright
 
       - name: Set NPM token
         run: |

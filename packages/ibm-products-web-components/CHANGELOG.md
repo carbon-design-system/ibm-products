@@ -1,3 +1,35 @@
+## `@carbon/ibm-products-web-components@0.24.1`
+### Bug fixes :bug:
+- fix: unintentioanl leakage of carbon webcomponents (#8271)
+
+## `@carbon/ibm-products-web-components@0.24.0`
+### Bug fixes :bug:
+- fix(deps): update dependency @carbon-labs/wc-empty-state to ^0.9.0 (#8240)
+- fix(telemetry): bump version (#8228)
+
+### Housekeeping :house:
+- build(deps-dev): bump vite (#8236)
+- build(deps-dev): bump vite (#8235)
+- build(deps-dev): bump vite (#8229)
+- build(deps): update to Carbon 11 compatible versions to latest (#8171)
+
+## `@carbon/ibm-products-web-components@0.23.0`
+### Features :rocket:
+- feat(sidepanel): custom header components (#8100)
+- feat(telemetry): add wc scope (#8097)
+- feat: implement focus trap in interstitial screen webcomponent (#8081)
+
+### Bug fixes :bug:
+- fix: telemetry patch (#8131)
+- fix(SidePanel): remove shadow on slide-ins (#7978)
+- fix(deps): update dependency @carbon-labs/wc-empty-state to ^0.5.0 (#8118)
+- fix: update format script (#8107)
+
+### Housekeeping :house:
+- build(web-components): exclude `--cds` values in web component custom prefix build output (#8154)
+- chore: remove unwanted props from storybook doc (#8122)
+- build(web-components): do not include story styles in build output (#8073)
+
 ## `@carbon/ibm-products-web-components@0.22.0`
 ### Features :rocket:
 - feat: add unit tests, accessibility fixes  , example for interstitial screen web component (#8015)

@@ -7,7 +7,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { Coachmark } from './Coachmark';
-import './CoachmarkBubble';
 import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 import { Button, Theme } from '@carbon/react';
@@ -15,7 +14,7 @@ import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark/next',
+  title: 'Preview/Onboarding/Coachmark/next',
   component: Coachmark,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {

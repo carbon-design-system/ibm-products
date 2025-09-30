@@ -43,7 +43,7 @@ import { Activity, AiGenerate, Bee } from '@carbon/react/icons';
 const storyClass = 'tearsheet-next-stories';
 
 export default {
-  title: 'Experimental/Patterns/Tearsheet',
+  title: 'Preview Candidate/Tearsheet',
   component: Tearsheet,
   tags: ['autodocs'],
   decorators: [

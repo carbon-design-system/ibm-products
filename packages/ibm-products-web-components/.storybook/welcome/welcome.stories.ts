@@ -27,6 +27,7 @@ const meta: Meta = {
       showPanel: false,
     },
   },
+  tags: ['!autodocs'],
 };
 
 export default meta;

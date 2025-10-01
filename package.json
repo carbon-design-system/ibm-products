@@ -44,6 +44,7 @@
     "prepare": "husky install",
     "postinstall": "husky",
     "run-all": "lerna run --stream --prefix --loglevel success",
+    "release-telemetry": "cd packages/ibm-products && yarn telemetry-config && cd ../ibm-products-web-components && yarn telemetry-config",
     "test": "run-p -s 'test:*'",
     "test:c4p": "lerna run --stream --scope @carbon/ibm-products test --",
     "test:c4p:snapshot": "yarn test:c4p-styles styles -u",

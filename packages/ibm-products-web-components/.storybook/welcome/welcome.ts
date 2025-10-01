@@ -12,21 +12,25 @@ import { customElement } from 'lit/decorators.js';
 import { query } from 'lit/decorators/query.js';
 import '@carbon/web-components/es/components/tag/index.js';
 import '@carbon/web-components/es/components/link/index.js';
-import '@lottiefiles/lottie-player';
+import '@aarsteinmedia/dotlottie-player/light';
+import type DotLottiePlayer from '@aarsteinmedia/dotlottie-player';
 import welcomeStyles from './welcome.scss?lit';
 import animation from './welcome-lottie.json';
 import PackageInfo from '../../package.json';
 
 @customElement('c4p-welcome')
-export class CoolWelcome extends LitElement {
+export class CDSWelcome extends LitElement {
   static styles = welcomeStyles;
 
-  @query('lottie-player')
-  _player;
+  @query('dotlottie-player')
+  _player!: DotLottiePlayer;
 
   firstUpdated() {
-    this._player.addEventListener('rendered', () => {
-      this._player.load(animation);
+    this._player.addEventListener('rendered', async () => {
+      // Despite the docs saying "Load animation by URL or JSON object" the typing is string
+      // https://github.com/aarsteinmedia/dotlottie-player?tab=readme-ov-file#methods
+      // @ts-ignore
+      await this._player.load(animation);
     });
   }
 
@@ -93,7 +97,7 @@ export class CoolWelcome extends LitElement {
           </div>
           <div class="welcome__col--right">
             <div class="welcome__animation">
-              <lottie-player autoplay loop></lottie-player>
+              <dotlottie-player autoplay loop></dotlottie-player>
             </div>
           </div>
         </div>

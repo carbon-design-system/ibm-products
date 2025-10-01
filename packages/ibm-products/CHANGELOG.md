@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.76.0-rc.0`
+## `@carbon/ibm-products@2.76.0`
 ### Features :rocket:
 - feat(CoachmarkFixed): implemented as patterns (#8221)
 - feat(pattern): delete and remove (#8268)

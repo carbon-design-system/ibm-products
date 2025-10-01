@@ -1,3 +1,12 @@
+## `@carbon/ibm-products-styles@2.72.0-rc.0`
+### Bug fixes :bug:
+- fix: update popover link in tagset and overflow (#8249)
+
+### Housekeeping :house:
+- refactor(scripts): remove chalk dep (#8321)
+- chore: pin chalk (#8261)
+- refactor(PageHeader): change api for tags prop in tab bar (#8205)
+
 ## `@carbon/ibm-products-styles@2.71.0`
 ### Features :rocket:
 - feat(sidepanel): utilizes layer in sidepanel (#8025)

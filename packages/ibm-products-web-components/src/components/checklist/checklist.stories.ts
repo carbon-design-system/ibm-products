@@ -93,6 +93,12 @@ const checklistGroupTemplate = {
             ></c4p-checklist-item>
             <c4p-checklist-item
               label="Task name"
+              status="error"
+              @c4p-checklist-item-clicked=${action(`Clicked Checklist Item`)}
+              ?clickable=${true}
+            ></c4p-checklist-item>
+            <c4p-checklist-item
+              label="Task name"
               status="in progress"
               @c4p-checklist-item-clicked=${action(`Clicked Checklist Item`)}
               ?clickable=${true}
@@ -102,6 +108,10 @@ const checklistGroupTemplate = {
               status="not started"
               @c4p-checklist-item-clicked=${action(`Clicked Checklist Item`)}
               ?clickable=${true}
+            ></c4p-checklist-item>
+            <c4p-checklist-item
+              label="Task name"
+              status="disabled"
             ></c4p-checklist-item>
           </c4p-checklist-group>
         </c4p-checklist>

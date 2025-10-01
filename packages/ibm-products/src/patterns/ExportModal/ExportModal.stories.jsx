@@ -24,7 +24,7 @@ import wait from '../../global/js/utils/wait';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/react/icons';
 
 export default {
-  title: 'Patterns/Export Modal Patterns',
+  title: 'Patterns/Export Modal',
   component: () => {},
   tags: ['autodocs'],
   parameters: {

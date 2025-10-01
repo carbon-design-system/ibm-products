@@ -1,1 +1,0 @@
-import{e}from"./iframe-BfCV3bOI.js";import{C as s}from"./Content-Dq5nP8Rt.js";import{W as m}from"./index-CZYtjD7D.js";const E=(r,a)=>(n,l)=>{const{jsFlags:t}=l.args;return e.createElement("div",{className:`${a}container`},r(),e.createElement(s,{className:`${a}content`},t&&t.length!==0?e.createElement(m,{...t},e.createElement(n,null)):e.createElement(n,null)))};export{E as s};

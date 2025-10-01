@@ -44,6 +44,7 @@ collect:
         - breadcrumbOverflowTooltipAlign
         - breadcrumbs
         - button
+        - buttonProps
         - cancelButtonText
         - caret
         - cellSize
@@ -545,8 +546,6 @@ collect:
         - overlayRef
         - position
         - positionTune
-        # CoachmarkBeacon
-        - buttonProps
         # CoachmarkDragbar
         - a11yKeyboardHandler
         - onDrag
@@ -867,6 +866,9 @@ collect:
         - expandText
         # PageHeaderTabBar
         - scroller
+        # PageHeaderTagOverflow
+        - renderOverflowTag
+        - renderPopoverContent
         # PageHeaderTitle
         - blockClass
         - hasBreadcrumbRow

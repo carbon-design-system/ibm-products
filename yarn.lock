@@ -2058,6 +2058,7 @@ __metadata:
     react-window: "npm:^1.8.11"
     rimraf: "npm:^6.0.1"
     rollup: "npm:^4.35.0"
+    rollup-plugin-preserve-directives: "npm:^0.4.0"
     rollup-plugin-strip-banner: "npm:^3.1.0"
     sass: "npm:^1.85.1"
     storybook: "npm:^9.0.8"
@@ -4347,6 +4348,13 @@ __metadata:
   version: 1.5.0
   resolution: "@jridgewell/sourcemap-codec@npm:1.5.0"
   checksum: 10/4ed6123217569a1484419ac53f6ea0d9f3b57e5b57ab30d7c267bdb27792a27eb0e4b08e84a2680aa55cc2f2b411ffd6ec3db01c44fdc6dc43aca4b55f8374fd
+  languageName: node
+  linkType: hard
+
+"@jridgewell/sourcemap-codec@npm:^1.5.5":
+  version: 1.5.5
+  resolution: "@jridgewell/sourcemap-codec@npm:1.5.5"
+  checksum: 10/5d9d207b462c11e322d71911e55e21a4e2772f71ffe8d6f1221b8eb5ae6774458c1d242f897fb0814e8714ca9a6b498abfa74dfe4f434493342902b1a48b33a5
   languageName: node
   linkType: hard
 
@@ -16257,6 +16265,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"magic-string@npm:^0.30.5":
+  version: 0.30.19
+  resolution: "magic-string@npm:0.30.19"
+  dependencies:
+    "@jridgewell/sourcemap-codec": "npm:^1.5.5"
+  checksum: 10/5045467fad59ddfba6ccfb00fde6edbc0f841089f0da07d844cf513c73de289bbbf933bde16168cba2c9ef38d75ac68e1617a5ce74aae16d6f39285bda1d51c4
+  languageName: node
+  linkType: hard
+
 "magicast@npm:^0.3.5":
   version: 0.3.5
   resolution: "magicast@npm:0.3.5"
@@ -20005,6 +20022,18 @@ __metadata:
     globby: "npm:10.0.1"
     is-plain-object: "npm:^3.0.0"
   checksum: 10/706ba6bd2052b95d1037f12963ff4b50749730f18aefad10544f9574aff7c035c88c5dd9ae1f0c0408cf09862e595a0ea4d68e13c2717addaea2bda3ade0d0e0
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-preserve-directives@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "rollup-plugin-preserve-directives@npm:0.4.0"
+  dependencies:
+    "@rollup/pluginutils": "npm:^5.1.0"
+    magic-string: "npm:^0.30.5"
+  peerDependencies:
+    rollup: 2.x || 3.x || 4.x
+  checksum: 10/2ed0eeeb342ad87b9ec6c0521279c21b8680709e43da66b956cf111783852c01e167d463860b8e5a5b7385cf4d807d71d448eb9bf8179e1b336d777d6f7fe5b8
   languageName: node
   linkType: hard
 

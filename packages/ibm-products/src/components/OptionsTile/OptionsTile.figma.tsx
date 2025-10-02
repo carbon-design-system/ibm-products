@@ -19,6 +19,7 @@ figma.connect(
       size: figma.enum('Size', {
         Large: 'lg',
         'Extra large': 'xl',
+      enabled: figma.boolean('Toggle'),
       }),
 
       children: figma.enum('Type', {

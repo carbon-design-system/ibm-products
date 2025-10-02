@@ -47,7 +47,7 @@ export class CDSWelcome extends LitElement {
               </h2>
               <h4 class="welcome__subtitle">v${PackageInfo.version}</h4>
               <cds-tag size="md" type="purple" class="welcome__tag--xl">
-                Carbon 11 (v2)
+                Carbon 11
               </cds-tag>
             </hgroup>
             <div class="welcome__links">

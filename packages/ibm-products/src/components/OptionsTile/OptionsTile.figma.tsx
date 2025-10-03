@@ -79,6 +79,7 @@ figma.connect(
         invalidText={props.summaryProps.invalidText}
         warn={props.summaryProps.warn}
         warnText={props.summaryProps.warnText}
+        enabled={props.enabled}
       >
         {props.children}
       </OptionsTile>

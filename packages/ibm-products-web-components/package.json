@@ -65,6 +65,7 @@
     "lit": "^3.1.0"
   },
   "devDependencies": {
+    "@aarsteinmedia/dotlottie-player": "^6.0.5",
     "@blockquote/rollup-plugin-externalize-source-dependencies": "^1.0.0",
     "@carbon/icon-helpers": "^10.65.0",
     "@carbon/icons": "^11.66.0",

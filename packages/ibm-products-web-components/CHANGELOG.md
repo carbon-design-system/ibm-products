@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.25.0-rc.0`
+## `@carbon/ibm-products-web-components@0.25.0`
 ### Features :rocket:
 - feat(checklist):  web component  (#8144)
 

@@ -18,8 +18,9 @@ const __dirname = dirname(__filename);
 import fsExtra from 'fs-extra';
 const { outputFileSync, readFileSync } = fsExtra;
 
-import chalk from 'chalk';
-const { green, red } = chalk;
+const reset = "\x1b[0m";
+const green = str => `\x1b[42m${str + reset}`;
+const red = str => `\x1b[41m${str + reset}`;
 
 // https://www.npmjs.com/package/yargs#usage
 import yargs from 'yargs';

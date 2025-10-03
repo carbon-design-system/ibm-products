@@ -15,7 +15,6 @@ import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/number-input/index.js';
 import '@carbon/web-components/es/components/form/form-item.js';
 
-// example implementation of low impact delete / remove pattern
 @customElement('create-side-panel-default')
 export class CreateSidepanelDefault extends LitElement {
   @state()

@@ -105,7 +105,7 @@
     "lerna": "^8.2.1",
     "lint-staged": "^16.0.0",
     "lottie-web": "^5.13.0",
-    "npm-check-updates": "^18.0.0",
+    "npm-check-updates": "^19.0.0",
     "npm-run-all2": "^8.0.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",

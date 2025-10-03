@@ -6,24 +6,26 @@
  */
 
 import React from 'react';
-import { User } from '@carbon/react/icons';
+import { Group, User } from '@carbon/react/icons';
 import figma from '@figma/code-connect';
 import { UserAvatar } from './UserAvatar';
+
+const sharedProps = {
+  name: figma.string('Initials text'),
+  size: figma.enum('Size', {
+    'Extra large': 'xl',
+    Large: 'lg',
+    Medium: 'md',
+    Small: 'sm',
+  }),
+};
 
 figma.connect(
   UserAvatar,
   'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=15368-59379&t=lbewdWdJ4JB5izcw-4',
   {
     variant: { Type: 'Image' },
-    props: {
-      name: figma.string('Initials text'),
-      size: figma.enum('Size', {
-        'Extra large': 'xl',
-        Large: 'lg',
-        Medium: 'md',
-        Small: 'sm',
-      }),
-    },
+    props: sharedProps,
     example: (props) => (
       <UserAvatar
         image="/path/to/image"
@@ -40,19 +42,44 @@ figma.connect(
   UserAvatar,
   'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=15368-59379&t=lbewdWdJ4JB5izcw-4',
   {
-    // variant: { Type: 'Icon' },
-    // props: {
-    //   name: figma.string('Initials text'),
-    //   size: figma.enum('Size', {
-    //     'Extra large': 'xl',
-    //     Large: 'lg',
-    //     Medium: 'md',
-    //     Small: 'sm',
-    //   }),
-    },
+    variant: { Type: 'Initials' },
+    props: sharedProps,
+    example: (props) => (
+      <UserAvatar
+        tooltipAlignment="bottom"
+        tooltipText={`${props.name}, more info here`}
+        {...props}
+      />
+    ),
+  }
+);
+
+figma.connect(
+  UserAvatar,
+  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=15368-59379&t=lbewdWdJ4JB5izcw-4',
+  {
+    variant: { Type: 'Single user' },
+    props: sharedProps,
     example: (props) => (
       <UserAvatar
         renderIcon={User}
+        tooltipAlignment="bottom"
+        tooltipText={`${props.name}, more info here`}
+        {...props}
+      />
+    ),
+  }
+);
+
+figma.connect(
+  UserAvatar,
+  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=15368-59379&t=lbewdWdJ4JB5izcw-4',
+  {
+    variant: { Type: 'User group' },
+    props: sharedProps,
+    example: (props) => (
+      <UserAvatar
+        renderIcon={Group}
         tooltipAlignment="bottom"
         tooltipText={`${props.name}, more info here`}
         {...props}

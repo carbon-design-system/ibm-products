@@ -44,6 +44,7 @@
     "prepare": "husky install",
     "postinstall": "husky",
     "run-all": "lerna run --stream --prefix --loglevel success",
+    "release-telemetry": "cd packages/ibm-products && yarn telemetry-config && cd ../ibm-products-web-components && yarn telemetry-config",
     "test": "run-p -s 'test:*'",
     "test:c4p": "lerna run --stream --scope @carbon/ibm-products test --",
     "test:c4p:snapshot": "yarn test:c4p-styles styles -u",
@@ -71,8 +72,8 @@
     "@carbon/react": "^1.90.0",
     "@carbon/themes": "^11.59.0",
     "@carbon/type": "^11.46.0",
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
+    "@commitlint/cli": "^20.0.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@eslint/compat": "^1.2.7",
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.22.0",
@@ -154,5 +155,5 @@
     "stylelint-plugin-carbon-tokens": "^3.2.3",
     "stylelint-use-logical": "^2.1.2"
   },
-  "packageManager": "yarn@4.10.0"
+  "packageManager": "yarn@4.10.2"
 }

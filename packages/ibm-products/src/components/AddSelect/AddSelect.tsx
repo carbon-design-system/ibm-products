@@ -40,6 +40,7 @@ export interface AddSelectProps {
   noResultsTitle: string;
   noSelectionDescription?: string;
   noSelectionTitle?: string;
+  noTearsheet?: boolean;
   onClose: () => void;
   onCloseButtonText: string;
   onSubmit: () => void;

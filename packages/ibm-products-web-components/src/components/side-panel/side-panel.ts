@@ -698,18 +698,15 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     const actionsMultiple = ['', 'single', 'double', 'triple'][
       this._actionsCount
     ];
-    const titleTemplate = html`<div
+
+    const titleTemplate = html` <div
       class=${`${blockClass}__title`}
       ?no-label=${!!labelText}
     >
-      <h2 class=${title ? `${blockClass}__title-text` : ''} title=${title}>
-        ${title}
-      </h2>
-
+      <h2 class=${title ? `${blockClass}__title-text` : ''}>${title}</h2>
       ${this._doAnimateTitle
         ? html`<h2
             class=${`${blockClass}__collapsed-title-text`}
-            title=${title}
             aria-hidden="true"
           >
             ${title}

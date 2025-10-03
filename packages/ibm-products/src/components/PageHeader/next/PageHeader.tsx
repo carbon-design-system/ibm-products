@@ -35,6 +35,8 @@ import {
   BreadcrumbItem,
   BreadcrumbProps,
   Breadcrumb,
+  Section,
+  Heading,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import { blockClass } from '../PageHeaderUtils';
@@ -382,7 +384,7 @@ const PageHeaderContent = React.forwardRef<
   }, [title]);
 
   return (
-    <div className={classNames} ref={componentRef} {...other}>
+    <Section as="div" className={classNames} ref={componentRef} {...other}>
       <Grid>
         <Column lg={16} md={8} sm={4}>
           <div className={`${blockClass}__content__title-wrapper`}>
@@ -398,7 +400,7 @@ const PageHeaderContent = React.forwardRef<
                   <DefinitionTooltip definition={title}>
                     <Text
                       ref={titleRef}
-                      as="h4"
+                      as={Heading}
                       className={`${blockClass}__content__title`}
                     >
                       {title}
@@ -407,7 +409,7 @@ const PageHeaderContent = React.forwardRef<
                 ) : (
                   <Text
                     ref={titleRef}
-                    as="h4"
+                    as={Heading}
                     className={`${blockClass}__content__title`}
                   >
                     {title}
@@ -425,7 +427,7 @@ const PageHeaderContent = React.forwardRef<
           {children}
         </Column>
       </Grid>
-    </div>
+    </Section>
   );
 });
 PageHeaderContent.displayName = 'PageHeaderContent';
@@ -748,7 +750,7 @@ const PageHeaderTabBar = React.forwardRef<
   HTMLDivElement,
   PageHeaderTabBarProps
 >(function PageHeaderTabBar(
-  { className, children, tags = [], scroller, ...other }: PageHeaderTabBarProps,
+  { className, children, tags, scroller, ...other }: PageHeaderTabBarProps,
   ref
 ) {
   const classNames = classnames(

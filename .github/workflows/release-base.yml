@@ -50,26 +50,26 @@ jobs:
         run: yarn install
 
       - name:
-          Run @ibm/telemetry-js-config-generator to regenerate telemetry config
-          file
+          Run @ibm/telemetry-js-config-generator to regenerate ibm-products telemetry config file
         if: github.event.inputs.dry-run == 'true'
-        working-directory: ./packages/ibm-products
         run: |
-          yarn telemetry-config
+          yarn release-telemetry
 
       # This can be removed once @ibm/telemetry-js-config-generator has params to set the js scope
-      - name: Add js scope to telemetry config
+      - name: Add js scope to ibm-products telemetry config
         if: github.event.inputs.dry-run == 'true'
-        working-directory: ./packages/ibm-products
         run: |
           echo "  js:
               functions: {}
-              tokens: null" >> telemetry.yml
+              tokens: null" >> packages/ibm-products/telemetry.yml
+          echo "  js:
+              functions: {}
+              tokens: null" >> packages/ibm-products-web-components/telemetry.yml
           if [ -z "$(git status --porcelain)" ]; then
             echo "Mirror is clean, exiting..."
           else
-            git add telemetry.yml
-            git commit -m "chore(telemetry): update telemetry config"
+            git add '**/telemetry.yml'
+            git commit -m "chore(telemetry): update telemetry configs"
             git push origin
           fi
 

@@ -143,7 +143,7 @@ jobs:
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch
       - name: Dispatch staging storybook deployment workflow
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           event-type: deploy-staging-storybook
           client-payload: '{"branch": "${{ github.ref_name }}"}'
@@ -154,7 +154,7 @@ jobs:
         if:
           ${{ (github.event.inputs.type  == 'full minor release') ||
           (github.event.inputs.type  == 'full patch release') }}
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           event-type: deploy-latest-storybook
           client-payload: '{"branch": "${{ github.ref_name }}"}'

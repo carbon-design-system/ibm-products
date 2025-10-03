@@ -6,13 +6,10 @@
  */
 
 import React from 'react';
-import { action } from 'storybook/actions';
+import { action as storybookAction } from 'storybook/actions';
 import { Add } from '@carbon/react/icons';
-// import mdx from './NoDataEmptyState.mdx';
-
+import mdx from './NoDataEmptyState.mdx';
 import { NoDataEmptyState } from '.';
-import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
-
 // import styles from '../_index.scss';
 
 export default {
@@ -22,16 +19,7 @@ export default {
   parameters: {
     // styles,
     docs: {
-      page: () => (
-        <StoryDocsPage
-          altGuidelinesHref={[
-            {
-              href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon empty states pattern',
-            },
-          ]}
-        />
-      ),
+      page: mdx,
     },
   },
 };
@@ -43,8 +31,34 @@ const defaultStoryProps = {
   illustrationDescription: 'Test alt text',
 };
 
-const Template = (args) => {
-  return <NoDataEmptyState {...args} />;
+const Template = ({ ...args }, context) => {
+  const sbDocs = context.viewMode !== 'docs';
+  const { action } = args;
+  const getAction = (value) => {
+    if (value === 0) {
+      return {
+        text: 'Create new',
+        onClick: () => {
+          sbDocs
+            ? storybookAction('Clicked empty state action button')()
+            : console.log('Clicked empty state action button');
+        },
+      };
+    }
+    if (value === 1) {
+      return {
+        text: 'Create new',
+        onClick: () => {
+          sbDocs
+            ? storybookAction('Clicked empty state action button')()
+            : console.log('Clicked empty state action button');
+        },
+        renderIcon: (props) => <Add size={20} {...props} />,
+        iconDescription: 'Add icon',
+      };
+    }
+  };
+  return <NoDataEmptyState {...args} action={getAction(action)} />;
 };
 
 export const Default = Template.bind({});
@@ -61,21 +75,13 @@ WithDarkModeIllustration.args = {
 export const withAction = Template.bind({});
 withAction.args = {
   ...defaultStoryProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-  },
+  action: 0,
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
   ...defaultStoryProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-    renderIcon: (props) => <Add size={20} {...props} />,
-    iconDescription: 'Add icon',
-  },
+  action: 1,
 };
 
 export const withLink = Template.bind({});
@@ -90,12 +96,7 @@ withLink.args = {
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
   ...defaultStoryProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-    renderIcon: (props) => <Add size={20} {...props} />,
-    iconDescription: 'Add icon',
-  },
+  action: 1,
   link: {
     text: 'View documentation',
     href: 'https://www.carbondesignsystem.com',

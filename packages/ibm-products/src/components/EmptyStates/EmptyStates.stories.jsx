@@ -6,11 +6,11 @@
  */
 
 import React from 'react';
-import { action } from 'storybook/actions';
+import { action as storybookAction } from 'storybook/actions';
 import { Add, Information } from '@carbon/react/icons';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 import { EmptyState } from '.';
-import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+import mdx from './EmptyState.mdx';
 import { Tooltip } from '@carbon/react';
 
 export default {
@@ -20,31 +20,72 @@ export default {
   parameters: {
     // styles,
     docs: {
-      page: () => (
-        <StoryDocsPage
-          altGuidelinesHref={[
-            {
-              href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon empty states pattern',
-            },
-          ]}
-        />
-      ),
+      page: mdx,
     },
   },
 };
 
 const emptyStateCommonProps = {
   title: 'Start by adding data assets',
-  subtitle: (
-    <>
-      Click <span>Upload assets</span> to upload your data
-    </>
-  ),
+  subtitle: 0,
 };
 
-const Template = (args) => {
-  return <EmptyState {...args} />;
+const Template = ({ ...args }, context) => {
+  const sbDocs = context.viewMode !== 'docs';
+  const { subtitle, action } = args;
+
+  const getSubTitle = (value) => {
+    if (value === 0) {
+      return (
+        <>
+          Click <span>Upload assets</span> to upload your data
+        </>
+      );
+    }
+    if (value === 1) {
+      return (
+        <>
+          Click <span>here</span> to upload your data
+          <Tooltip label="Facts and statistics collected together for reference or analysis">
+            <Information size="16" />
+          </Tooltip>
+        </>
+      );
+    }
+  };
+
+  const getAction = (value) => {
+    if (value === 0) {
+      return {
+        text: 'Create new',
+        onClick: () => {
+          sbDocs
+            ? storybookAction('Clicked empty state action button')()
+            : console.log('Clicked empty state action button');
+        },
+      };
+    }
+    if (value === 1) {
+      return {
+        text: 'Create new',
+        onClick: () => {
+          sbDocs
+            ? storybookAction('Clicked empty state action button')()
+            : console.log('Clicked empty state action button');
+        },
+        renderIcon: (props) => <Add size={20} {...props} />,
+        iconDescription: 'Add icon',
+      };
+    }
+  };
+
+  return (
+    <EmptyState
+      {...args}
+      subtitle={getSubTitle(subtitle)}
+      action={getAction(action)}
+    />
+  );
 };
 
 export const Default = Template.bind({});
@@ -55,14 +96,7 @@ Default.args = {
 export const WithTooltipInSubtitle = Template.bind({});
 WithTooltipInSubtitle.args = {
   ...emptyStateCommonProps,
-  subtitle: (
-    <>
-      Click <span>here</span> to upload your data
-      <Tooltip label="Facts and statistics collected together for reference or analysis">
-        <Information size="16" />
-      </Tooltip>
-    </>
-  ),
+  subtitle: 1,
 };
 
 export const WithCustomIllustration = Template.bind({});
@@ -75,21 +109,13 @@ WithCustomIllustration.args = {
 export const withAction = Template.bind({});
 withAction.args = {
   ...emptyStateCommonProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-  },
+  action: 0,
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
   ...emptyStateCommonProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-    renderIcon: (props) => <Add size={20} {...props} />,
-    iconDescription: 'Add icon',
-  },
+  action: 1,
 };
 
 export const withLink = Template.bind({});
@@ -105,12 +131,7 @@ withLink.args = {
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
   ...emptyStateCommonProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-    renderIcon: (props) => <Add size={20} {...props} />,
-    iconDescription: 'Add icon',
-  },
+  action: 1,
   link: {
     text: 'View documentation',
     href: 'https://www.carbondesignsystem.com',

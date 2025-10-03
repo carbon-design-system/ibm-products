@@ -12,7 +12,7 @@ import { UserAvatar } from './UserAvatar';
 
 figma.connect(
   UserAvatar,
-  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=8455-379903&t=dp2JMhGgRmo6z5yt-0',
+  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=15368-59379&t=lbewdWdJ4JB5izcw-4',
   {
     variant: { Type: 'Image' },
     props: {
@@ -38,17 +38,17 @@ figma.connect(
 
 figma.connect(
   UserAvatar,
-  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=8455-379903&t=dp2JMhGgRmo6z5yt-0',
+  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=15368-59379&t=lbewdWdJ4JB5izcw-4',
   {
-    variant: { Type: 'Icon' },
-    props: {
-      name: figma.string('Initials text'),
-      size: figma.enum('Size', {
-        'Extra large': 'xl',
-        Large: 'lg',
-        Medium: 'md',
-        Small: 'sm',
-      }),
+    // variant: { Type: 'Icon' },
+    // props: {
+    //   name: figma.string('Initials text'),
+    //   size: figma.enum('Size', {
+    //     'Extra large': 'xl',
+    //     Large: 'lg',
+    //     Medium: 'md',
+    //     Small: 'sm',
+    //   }),
     },
     example: (props) => (
       <UserAvatar

@@ -19,9 +19,8 @@ figma.connect(
       size: figma.enum('Size', {
         Large: 'lg',
         'Extra large': 'xl',
-      enabled: figma.boolean('Toggle'),
       }),
-
+      enabled: figma.boolean('Toggle'),
       children: figma.enum('Type', {
         Static: undefined,
         Expandable: figma.instance('Swap slot'),

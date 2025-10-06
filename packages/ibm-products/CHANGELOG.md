@@ -1,4 +1,22 @@
-## `@carbon/ibm-products@2.75.0-rc.0`
+## `@carbon/ibm-products@2.76.0`
+### Features :rocket:
+- feat(CoachmarkFixed): implemented as patterns (#8221)
+- feat(pattern): delete and remove (#8268)
+- feat(code-connect): setup initial config and connect `BigNumber` (#8188)
+
+### Bug fixes :bug:
+- fix(Instrumentation): remove common script (#7722)
+- fix(tagset): expansion and collapse is not conveyed to screen readers (#8283)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.10.0 (#8282)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.8.0 (#8239)
+
+### Housekeeping :house:
+- chore(telemetry): update ibm-products telemetry config
+- refactor(scripts): remove chalk dep (#8321)
+- chore: pin chalk (#8261)
+- refactor(PageHeader): change api for tags prop in tab bar (#8205)
+
+## `@carbon/ibm-products@2.75.0`
 ### Features :rocket:
 - feat(PageHeader): add compact story, fix preview styles in storybook docs page (#8190)
 - feat(sidepanel): utilizes layer in sidepanel (#8025)

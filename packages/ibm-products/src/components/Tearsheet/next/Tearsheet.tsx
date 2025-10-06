@@ -37,6 +37,8 @@ import TearsheetHeaderContent, {
   TearsheetHeaderContentProps,
 } from './TearsheetHeaderContent';
 import TearsheetBody, {
+  Influencer,
+  InfluencerProps,
   MainContent,
   MainContentProps,
   RightContent,
@@ -50,6 +52,8 @@ import {
   TearsheetHeaderActions,
   TearsheetHeaderActionsProps,
 } from './TearsheetHeaderActions';
+import { useMatchMedia } from './useMatchMedia';
+import { breakpoints } from '@carbon/layout';
 
 /**
  * ----------
@@ -149,6 +153,8 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     const localRef = useRef(undefined);
     const bodyRef = useRef(undefined);
     const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
+    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+    const isSm = useMatchMedia(smMediaQuery);
 
     const [hasCloseIcon, setHasCloseIcon] = useState(true);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
@@ -158,12 +164,11 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     const influencer = arr.find((child: any) => child.type === Influencer);
     const body = arr.find((child: any) => child.type === TearsheetBody);
     const footer = arr.find((child: any) => child.type === Footer);
-
     useLayoutEffect(() => {
       const AILabelWidth =
         modalRef.current?.querySelector(`.${carbonPrefix}--ai-label`)
           ?.clientWidth ?? 0;
-      const headerActionMarginRight = AILabelWidth + 24; // 24 is to compeNsate for close button
+      const headerActionMarginRight = AILabelWidth + 24 + (isSm ? 8 : 0); // 24 is to compeNsate for close button
       document.documentElement.style.setProperty(
         '--tearsheet-header-action-offset',
         `${headerActionMarginRight}px`
@@ -183,7 +188,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [isSm]);
     return (
       <TearsheetContext.Provider
         value={{
@@ -220,6 +225,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
               `.${carbonPrefix}--menu`,
               ...selectorsFloatingMenus,
             ]}
+            isFullWidth={true}
           >
             {header}
             <ModalBody className={`${blockClass}__body-layout`} ref={bodyRef}>
@@ -238,20 +244,6 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     );
   }
 ) as TearsheetComponentType;
-
-export interface InfluencerProps {
-  children: ReactNode;
-  className?: string;
-}
-const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
-  ({ children, className }, ref) => {
-    return (
-      <aside className={`${blockClass}__influencer ${className}`} ref={ref}>
-        {children}
-      </aside>
-    );
-  }
-);
 
 export interface FooterProps {
   children: ReactNode;

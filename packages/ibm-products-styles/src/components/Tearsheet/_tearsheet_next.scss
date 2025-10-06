@@ -27,6 +27,9 @@ $motion-duration: $duration-moderate-02;
     inset-block-start: auto;
     max-block-size: calc(100% - #{$spacing-09});
     transform: translate3d(0, calc(min(95vh, 500px)), 0);
+    @include breakpoint-down(md) {
+      max-block-size: none;
+    }
   }
 
   &.#{$block-class__next}--has-slug .#{$block-class__next}__container,
@@ -87,6 +90,7 @@ $motion-duration: $duration-moderate-02;
     }
 
     @include breakpoint-down(md) {
+      padding-block-end: 0;
       padding-inline: $spacing-05;
     }
 
@@ -135,7 +139,7 @@ $motion-duration: $duration-moderate-02;
     }
 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-block-end: $spacing-03;
 
     svg {
@@ -300,8 +304,8 @@ $motion-duration: $duration-moderate-02;
     .#{$block-class__next}__header-content-wrapper,
     .#{$block-class__next}__header-content,
     .#{$block-class__next}__content__title-wrapper,
-    .#{$block-class__next}__header-actions,
-    .#{$block-class__next}__header-title {
+    .#{$block-class__next}__header-actions
+      .#{$block-class__next}__header-title {
       margin-block: 0;
       transition: all $motion-duration ease;
     }
@@ -337,6 +341,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class__next}__body {
+    position: relative;
     display: grid;
     overflow: hidden;
     grid-area: body;
@@ -344,6 +349,9 @@ $motion-duration: $duration-moderate-02;
         --tearsheet-right-content-width,
         calc($spacing-10 * 4)
       );
+    @include breakpoint-down(md) {
+      grid-template-columns: 1fr 0;
+    }
 
     > *:only-child {
       grid-column: 1 / -1;
@@ -364,12 +372,22 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class__next}__influencer,
   .#{$block-class__next}__main-content,
   .#{$block-class__next}__right-content {
+    overflow: auto;
     padding-block-start: $spacing-06;
+    padding-inline: $spacing-07;
   }
 
-  .#{$block-class__next}__main-content,
-  .#{$block-class__next}__right-content {
-    overflow: auto; /* allow scrolling */
-    padding-inline: $spacing-07;
+  .#{$block-class__next}__main-content {
+    position: relative;
+  }
+  .#{$pkg-prefix}--side-panel {
+    position: absolute;
+    block-size: 100%;
+    inline-size: 100%;
+    inset-block-start: 0;
+    max-inline-size: none;
+    .#{$pkg-prefix}--side-panel__header {
+      min-block-size: 0;
+    }
   }
 }

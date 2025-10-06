@@ -7,6 +7,8 @@
 
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/hide-at-breakpoint' as *;
+@use '@carbon/styles/scss/type';
 
 .default__action-buttons {
   display: grid;
@@ -21,4 +23,17 @@
   :first-child {
     grid-column: span 4;
   }
+}
+
+.rightPanelTrigger {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  @include hide-at-lg;
+  @include hide-at-md;
+  @include hide-at-xlg;
+}
+
+.rightPanelHeading {
+  @include type.type-style('heading-03');
 }

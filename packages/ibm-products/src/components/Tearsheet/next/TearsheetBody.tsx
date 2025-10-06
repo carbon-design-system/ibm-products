@@ -14,9 +14,11 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import PropTypes from 'prop-types';
 
 import { blockClass, TearsheetContext } from './context';
+import { SidePanel } from '../../SidePanel';
+import { breakpoints } from '@carbon/layout';
+import { useMatchMedia } from './useMatchMedia';
 
 /**
  * ----------------
@@ -167,14 +169,51 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
 export interface RightContentProps {
   children: ReactNode;
   className?: string;
+  /**
+   * In mobile screens right side details section wont be visible by default. This prop can be toggled to open/close right panel in this case.
+   */
+  rightPanelOpen?: boolean;
+  /**
+   * Specify a handler for closing the side panel.
+   * This handler closes the modal, e.g. changing `open` prop.
+   */
+  onRightPanelClose?(): void;
 }
 export const RightContent = forwardRef<HTMLDivElement, RightContentProps>(
+  ({ children, className, rightPanelOpen = false, onRightPanelClose }, ref) => {
+    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+    const isSm = useMatchMedia(smMediaQuery);
+
+    return !isSm ? (
+      <div className={`${blockClass}__right-content ${className}`} ref={ref}>
+        <aside>{children}</aside>
+      </div>
+    ) : (
+      <SidePanel
+        size="sm"
+        open={rightPanelOpen}
+        onRequestClose={onRightPanelClose}
+      >
+        {children}
+      </SidePanel>
+    );
+  }
+);
+
+export interface InfluencerProps {
+  children: ReactNode;
+  className?: string;
+}
+export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
   ({ children, className }, ref) => {
-    return (
-      <aside className={`${blockClass}__right-content  ${className}`} ref={ref}>
+    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+    const isSm = useMatchMedia(smMediaQuery);
+
+    return !isSm ? (
+      <aside className={`${blockClass}__influencer ${className}`} ref={ref}>
         {children}
       </aside>
-    );
+    ) : null;
   }
 );
 

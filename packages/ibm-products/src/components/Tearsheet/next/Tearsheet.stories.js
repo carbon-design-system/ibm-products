@@ -37,9 +37,8 @@ import {
 } from '@carbon/react';
 
 import { Tearsheet } from '.';
-//import mdx from './InterstitialScreen.mdx';
 import styles from './_storybook-styles.scss?inline';
-import { Activity, AiGenerate, Bee } from '@carbon/react/icons';
+import { Bee, RightPanelClose } from '@carbon/react/icons';
 const storyClass = 'tearsheet-next-stories';
 
 export default {
@@ -124,7 +123,7 @@ export const Default = () => {
   const [open, setOpen] = useState(true);
   const launcherButtonRef = useRef(null);
   const currentStep = 1;
-  const [text, setText] = useState('');
+  const [rightPanelOpen, setRightPanelOpen] = useState(false);
   return (
     <>
       <Button
@@ -206,8 +205,19 @@ export const Default = () => {
         </Tearsheet.Influencer>
         <Tearsheet.Body>
           <Tearsheet.MainContent>
+            <div className="rightPanelTrigger">
+              <IconButton
+                kind="ghost"
+                label="Open right panel"
+                onClick={() => setRightPanelOpen(true)}
+              >
+                <RightPanelClose />
+              </IconButton>
+            </div>
+
             <Section className="tearsheet-stories__dummy-content-block">
               <Heading>Main content heading</Heading>
+
               <Form>
                 <FormGroup
                   legendId="tearsheet-form-group"
@@ -293,7 +303,34 @@ export const Default = () => {
             </Section>
           </Tearsheet.MainContent>
 
-          <Tearsheet.RightContent>right side content</Tearsheet.RightContent>
+          <Tearsheet.RightContent
+            rightPanelOpen={rightPanelOpen}
+            onRightPanelClose={() => setRightPanelOpen(false)}
+          >
+            <Heading className="rightPanelHeading">Panel heading</Heading>
+            <div className="rightDetailsBody">
+              <div>
+                <label>item 1</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 2</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 3</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 4</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 5</label>
+                <p>item description</p>
+              </div>
+            </div>
+          </Tearsheet.RightContent>
         </Tearsheet.Body>
         <Tearsheet.Footer>
           <div className="default__action-buttons">

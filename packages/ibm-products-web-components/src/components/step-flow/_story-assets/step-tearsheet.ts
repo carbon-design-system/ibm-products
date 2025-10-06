@@ -143,7 +143,7 @@ export class StepTearsheet extends SignalWatcher(LitElement) {
         prevent-close-on-click-outside
       >
         <!-- default slotted content -->
-        <step-group .stepInstance=${this._stepInfo}>
+        <step-group>
           ${currentStep + 1 === 1
             ? html`<div>
                 <cds-stack gap="6" orientation="horizontal">

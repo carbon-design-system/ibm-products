@@ -30,7 +30,7 @@ jobs:
       - name: Install
         run: yarn
       - name: Run publish
-        working-directory: src/packages/${{ matrix.package }}
+        working-directory: packages/${{ matrix.package }}
         run: npx figma connect publish
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}

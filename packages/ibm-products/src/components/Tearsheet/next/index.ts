@@ -9,12 +9,12 @@ export type {
   TearsheetProps,
   TearsheetComponentType,
   FooterProps,
-  InfluencerProps,
 } from './Tearsheet';
 export type {
   MainContentProps,
   RightContentProps,
   TearsheetBodyProps,
+  InfluencerProps,
 } from './TearsheetBody';
 export type {
   TearsheetHeaderProps,

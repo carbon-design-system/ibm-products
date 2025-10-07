@@ -22,10 +22,12 @@ interface TearsheetContextType {
   refs?: any;
   onClose?: () => void;
   disableHeaderCollapse?: boolean;
+  setDisableHeaderCollapse?: (value: boolean) => void;
 }
 export const TearsheetContext = createContext<TearsheetContextType>({
   hasCloseIcon: true,
   fullyCollapsed: false,
+  disableHeaderCollapse: false,
 });
 
 export const blockClass = `${pkg.prefix}--tearsheet__next`;

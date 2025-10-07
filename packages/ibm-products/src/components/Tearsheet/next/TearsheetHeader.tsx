@@ -58,6 +58,11 @@ export interface TearsheetHeaderProps {
   hideCloseButton?: boolean;
 
   className?: string;
+
+  /**
+   * Default header collapse/expand while scrolling the main content can bd disabled  by setting this
+   */
+  disableHeaderCollapse?: boolean;
 }
 
 const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
@@ -67,17 +72,24 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
       closeIconDescription,
       hideCloseButton = false,
       className,
+      disableHeaderCollapse,
       ...rest
     } = props;
-    const { setHasCloseIcon, fullyCollapsed, onClose } =
-      useContext(TearsheetContext);
-    const [collapseCompleted, setCollapseCompleted] = useState(false);
+    const {
+      setHasCloseIcon,
+      fullyCollapsed,
+      onClose,
+      setDisableHeaderCollapse,
+    } = useContext(TearsheetContext);
     const localRef = useRef(undefined);
     const headerRef = (ref || localRef) as RefObject<HTMLDivElement>;
 
     useEffect(() => {
       setHasCloseIcon?.(!!hideCloseButton);
     }, [hideCloseButton, setHasCloseIcon]);
+    useEffect(() => {
+      setDisableHeaderCollapse?.(!!disableHeaderCollapse);
+    }, [disableHeaderCollapse, setDisableHeaderCollapse]);
 
     return (
       <ModalHeader
@@ -86,7 +98,6 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
           [`${className}`]: true,
           [`${blockClass}__header--with-close-icon`]: !!hideCloseButton,
           [`${blockClass}__header-collapsed`]: fullyCollapsed,
-          [`${blockClass}__header-collapse--completed`]: collapseCompleted,
         })}
         closeClassName={cx({
           [`${blockClass}__header--no-close-icon`]: hideCloseButton,

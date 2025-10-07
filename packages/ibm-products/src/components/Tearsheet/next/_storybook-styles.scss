@@ -9,6 +9,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/hide-at-breakpoint' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/breakpoint' as *;
 
 .default__action-buttons {
   display: grid;
@@ -34,6 +35,20 @@
   @include hide-at-xlg;
 }
 
+.influencerPanelTrigger {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  @include hide-at-lg;
+  @include hide-at-md;
+  @include hide-at-xlg;
+}
+
 .rightPanelHeading {
   @include type.type-style('heading-03');
+}
+@include breakpoint-down(md) {
+  .main-content {
+    margin-block-start: $spacing-05;
+  }
 }

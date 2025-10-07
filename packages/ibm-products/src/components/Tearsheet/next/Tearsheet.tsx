@@ -19,6 +19,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
   ComposedModal,
+  ComposedModalProps,
   unstable_FeatureFlags as FeatureFlags,
   Layer,
   ModalBody,
@@ -108,11 +109,6 @@ export interface TearsheetProps {
    * focused when the Modal opens.
    */
   selectorPrimaryFocus?: PropTypes.string;
-
-  /**
-   * This can be set to disable header collapse on scroll
-   */
-  disableHeaderCollapse?: boolean;
 }
 
 export type TearsheetComponentType = React.ForwardRefExoticComponent<
@@ -129,7 +125,7 @@ export type TearsheetComponentType = React.ForwardRefExoticComponent<
   RightContent: FC<RightContentProps>;
   Body: FC<TearsheetBodyProps>;
   Footer: FC<FooterProps>;
-};
+} & ComposedModalProps;
 
 export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
   (
@@ -144,7 +140,6 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       onClose,
       selectorPrimaryFocus,
       open,
-      disableHeaderCollapse,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -158,6 +153,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
 
     const [hasCloseIcon, setHasCloseIcon] = useState(true);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
+    const [disableHeaderCollapse, setDisableHeaderCollapse] = useState(false);
 
     const arr = React.Children.toArray(children);
     const header = arr.find((child: any) => child.type === TearsheetHeader);
@@ -198,6 +194,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
           setFullyCollapsed,
           onClose,
           disableHeaderCollapse,
+          setDisableHeaderCollapse,
         }}
       >
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
@@ -250,7 +247,11 @@ export interface FooterProps {
   className?: string;
 }
 const Footer = forwardRef<HTMLDivElement, FooterProps>(({ children }, ref) => {
-  return <footer className={`${blockClass}__footer`}>{children}</footer>;
+  return (
+    <Layer as="footer" withBackground className={`${blockClass}__footer`}>
+      {children}
+    </Layer>
+  );
 });
 
 Tearsheet.Header = TearsheetHeader;

@@ -23,6 +23,7 @@ $motion-duration: $duration-moderate-02;
   // Container
   // ──────────────────────────────────────────────────────────────
   .#{$block-class__next}__container {
+    align-self: flex-end;
     block-size: 100%;
     inset-block-start: auto;
     max-block-size: calc(100% - #{$spacing-09});
@@ -30,23 +31,6 @@ $motion-duration: $duration-moderate-02;
     @include breakpoint-down(md) {
       max-block-size: none;
     }
-  }
-
-  &.#{$block-class__next}--has-slug .#{$block-class__next}__container,
-  &.#{$block-class__next}.#{$block-class__next}--has-ai-label
-    .#{$block-class__next}__container {
-    border: 1px solid transparent;
-    background:
-      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) padding-box,
-      linear-gradient(
-          to bottom,
-          var(--cds-ai-border-start, #78a9ff),
-          var(--cds-ai-border-end, #d0e2ff)
-        )
-        border-box,
-      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
-    border-block-end: 0;
-    box-shadow: 0 4px 10px 2px $ai-drop-shadow;
   }
 
   // Extra specificity to override Carbon default transition
@@ -74,13 +58,14 @@ $motion-duration: $duration-moderate-02;
     border-block-end: 1px solid $border-subtle-01;
     margin-block: 0;
     max-block-size: 50vh;
-    padding-block: $spacing-06;
+    padding-block-end: 0;
+    padding-block-start: $spacing-06;
     padding-inline: $spacing-07;
 
     > * {
       flex-basis: 100%;
     }
-
+    // change if carbon provide flexible close button
     > *:not(
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
@@ -90,13 +75,7 @@ $motion-duration: $duration-moderate-02;
     }
 
     @include breakpoint-down(md) {
-      padding-block-end: 0;
       padding-inline: $spacing-05;
-    }
-
-    // When navigation bar present, remove bottom padding
-    &:has(.#{$block-class__next}__navigation-bar) {
-      padding-block-end: 0;
     }
   }
 
@@ -166,8 +145,6 @@ $motion-duration: $duration-moderate-02;
 
   .#{$block-class__next}__header-description {
     @include type.type-style('body-compact-01');
-
-    margin-block-end: $spacing-03;
   }
 
   .#{$block-class__next}__header--no-close-icon {
@@ -361,12 +338,6 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class__next}__footer {
     border-block-start: 1px solid $border-subtle-01;
     grid-area: footer;
-  }
-
-  // Shared background and padding
-  .#{$block-class__next}__main-content,
-  .#{$block-class__next}__footer {
-    background: $layer;
   }
 
   .#{$block-class__next}__influencer,

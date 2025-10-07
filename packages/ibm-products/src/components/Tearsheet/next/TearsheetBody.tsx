@@ -19,6 +19,7 @@ import { blockClass, TearsheetContext } from './context';
 import { SidePanel } from '../../SidePanel';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from './useMatchMedia';
+import { Layer } from '@carbon/react';
 
 /**
  * ----------------
@@ -135,7 +136,7 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
         container.removeEventListener('wheel', onWheel);
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [mainContentRef, setFullyCollapsed]);
+    }, [mainContentRef, setFullyCollapsed, disableHeaderCollapse]);
 
     const collapseHeader = (collapse: boolean, container) => {
       if (collapse) {
@@ -150,13 +151,14 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
     };
 
     return (
-      <div
+      <Layer
+        withBackground
         className={`${blockClass}__main-content  ${className}`}
         ref={mainContentRef}
         {...rest}
       >
         {children}
-      </div>
+      </Layer>
     );
   }
 );
@@ -203,9 +205,26 @@ export const RightContent = forwardRef<HTMLDivElement, RightContentProps>(
 export interface InfluencerProps {
   children: ReactNode;
   className?: string;
+  /**
+   * In mobile screens right side details section wont be visible by default. This prop can be toggled to open/close right panel in this case.
+   */
+  influencerPanelOpen?: boolean;
+  /**
+   * Specify a handler for closing the side panel.
+   * This handler closes the modal, e.g. changing `open` prop.
+   */
+  onInfluencerPanelClose?(): void;
 }
 export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
-  ({ children, className }, ref) => {
+  (
+    {
+      children,
+      className,
+      influencerPanelOpen = false,
+      onInfluencerPanelClose,
+    },
+    ref
+  ) => {
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery);
 
@@ -213,7 +232,16 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
       <aside className={`${blockClass}__influencer ${className}`} ref={ref}>
         {children}
       </aside>
-    ) : null;
+    ) : (
+      <SidePanel
+        size="sm"
+        open={influencerPanelOpen}
+        onRequestClose={onInfluencerPanelClose}
+        placement="left"
+      >
+        {children}
+      </SidePanel>
+    );
   }
 );
 

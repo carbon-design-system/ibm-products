@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.72.0-rc.0`
+## `@carbon/ibm-products-styles@2.72.0`
 ### Bug fixes :bug:
 - fix: update popover link in tagset and overflow (#8249)
 

@@ -18,6 +18,7 @@ body {
 .welcome__container--outer {
   position: fixed;
   overflow: hidden;
+  box-sizing: border-box;
   padding: $spacing-09;
   /* stylelint-disable-next-line carbon/theme-use */
   background-color: colors.$purple-10;

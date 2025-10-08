@@ -19,8 +19,8 @@ import PropTypes from 'prop-types';
 import { pkg } from '../../../../settings';
 import { blockClass, CoachmarkContext } from './context';
 import { CoachmarkBubble } from './CoachmarkBubble';
-import ContentHeader, { ContentHeaderProps } from './ContentHeader';
-import ContentBody, { ContentBodyProps } from './ContentBody';
+import { ContentHeaderProps } from './ContentHeader';
+import { ContentBodyProps } from './ContentBody';
 import { NewPopoverAlignment } from '@carbon/react';
 import cx from 'classnames';
 
@@ -152,9 +152,6 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     );
   }
 ) as CoachmarkContentComponent;
-
-CoachmarkContent.Header = ContentHeader;
-CoachmarkContent.Body = ContentBody;
 
 export default CoachmarkContent;
 

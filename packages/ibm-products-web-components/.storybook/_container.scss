@@ -79,3 +79,11 @@ body {
   block-size: 100vh;
   inline-size: 100%;
 }
+
+.docs-story {
+  background-color: theme.$background;
+}
+
+.docs-story > *:has(> .docblock-code-toggle) {
+  background-color: theme.$background;
+}

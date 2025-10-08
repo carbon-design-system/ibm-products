@@ -1,16 +1,19 @@
-name: Figma Code Connect, publish
+name: Figma Code Connect, publish both React and Web component configs
 
 on:
   push:
-    paths:
-      - src/packages/ibm-products/**/*.figma.tsx
     branches:
       - main
 
 jobs:
   code-connect:
-    name: Code Connect
+    name: Code Connect - ${{ matrix.package }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+          - ibm-products
+          - ibm-products-web-components
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -20,14 +23,14 @@ jobs:
           node-version: '20.19.5'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # 4.2.4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # 4.3.0
         with:
           path: '**/node_modules'
           key: build-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn
       - name: Run publish
-        working-directory: packages/ibm-products
+        working-directory: packages/${{ matrix.package }}
         run: npx figma connect publish
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}

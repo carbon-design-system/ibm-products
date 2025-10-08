@@ -5,6 +5,25 @@ __metadata:
   version: 8
   cacheKey: 10
 
+"@aarsteinmedia/dotlottie-player@npm:^6.0.5":
+  version: 6.0.5
+  resolution: "@aarsteinmedia/dotlottie-player@npm:6.0.5"
+  dependencies:
+    "@aarsteinmedia/lottie-web": "npm:^1.2.0"
+    fflate: "npm:^0.8.2"
+  peerDependencies:
+    "@types/react": ">= 16.0.0"
+  checksum: 10/416024a0be9d5389552399911335c337642cc5f6448bd390b7b251247980a2ef378804358f44a3b33f683d5be4dc1134d76c581b561223f2f1fdb6f266109a29
+  languageName: node
+  linkType: hard
+
+"@aarsteinmedia/lottie-web@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@aarsteinmedia/lottie-web@npm:1.2.0"
+  checksum: 10/d1eb5e12892d0ec4e9ab09b4b77a6f3ea941ccb1b2018631183f96d9a9db46346dbdf2ecdad734bc74c16c661e2b2af1a9e74e893e22345424b32565d853bea6
+  languageName: node
+  linkType: hard
+
 "@adobe/css-tools@npm:^4.4.0":
   version: 4.4.2
   resolution: "@adobe/css-tools@npm:4.4.2"
@@ -1951,6 +1970,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-web-components@workspace:packages/ibm-products-web-components"
   dependencies:
+    "@aarsteinmedia/dotlottie-player": "npm:^6.0.5"
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
     "@carbon-labs/wc-empty-state": "npm:^0.9.0"
     "@carbon/ibm-products-styles": "npm:^2.72.0"
@@ -12424,6 +12444,13 @@ __metadata:
     picomatch:
       optional: true
   checksum: 10/14ca1c9f0a0e8f4f2e9bf4e8551065a164a09545dae548c12a18d238b72e51e5a7b39bd8e5494b56463a0877672d0a6c1ef62c6fa0677db1b0c847773be939b1
+  languageName: node
+  linkType: hard
+
+"fflate@npm:^0.8.2":
+  version: 0.8.2
+  resolution: "fflate@npm:0.8.2"
+  checksum: 10/2bd26ba6d235d428de793c6a0cd1aaa96a06269ebd4e21b46c8fd1bd136abc631acf27e188d47c3936db090bf3e1ede11d15ce9eae9bffdc4bfe1b9dc66ca9cb
   languageName: node
   linkType: hard
 

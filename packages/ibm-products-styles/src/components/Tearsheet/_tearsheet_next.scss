@@ -69,7 +69,7 @@ $motion-duration: $duration-moderate-02;
     > *:not(
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
-        .cds--modal-close-button
+        .#{$carbon-prefix}--modal-close-button
       ) {
       margin-block-end: $spacing-06;
     }
@@ -228,7 +228,7 @@ $motion-duration: $duration-moderate-02;
     > *:not(
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
-        .cds--modal-close-button
+        .#{$carbon-prefix}--modal-close-button
       ),
     .#{$block-class__next}__header-content-wrapper
       .#{$block-class__next}__header-content
@@ -245,7 +245,7 @@ $motion-duration: $duration-moderate-02;
     > *:not(
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
-        .cds--modal-close-button,
+        .#{$carbon-prefix}--modal-close-button,
         .excludeFromCollapse
       ),
     .#{$block-class__next}__header-actions
@@ -256,7 +256,7 @@ $motion-duration: $duration-moderate-02;
     > *:not(
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
-        .cds--modal-close-button,
+        .#{$carbon-prefix}--modal-close-button,
         .excludeFromCollapse
       )
       * {
@@ -271,7 +271,7 @@ $motion-duration: $duration-moderate-02;
     > *:not(
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
-        .cds--modal-close-button,
+        .#{$carbon-prefix}--modal-close-button,
         .excludeFromCollapse
       ) {
       display: contents;
@@ -323,7 +323,7 @@ $motion-duration: $duration-moderate-02;
     overflow: hidden;
     grid-area: body;
     grid-template-columns: 1fr var(
-        --tearsheet-right-content-width,
+        --tearsheet-summary-content-width,
         calc($spacing-10 * 4)
       );
     @include breakpoint-down(md) {
@@ -342,7 +342,7 @@ $motion-duration: $duration-moderate-02;
 
   .#{$block-class__next}__influencer,
   .#{$block-class__next}__main-content,
-  .#{$block-class__next}__right-content {
+  .#{$block-class__next}__summary-content {
     overflow: auto;
     padding-block-start: $spacing-06;
     padding-inline: $spacing-07;

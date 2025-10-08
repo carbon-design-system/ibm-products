@@ -12,7 +12,7 @@ export type {
 } from './Tearsheet';
 export type {
   MainContentProps,
-  RightContentProps,
+  SummaryContentProps,
   TearsheetBodyProps,
   InfluencerProps,
 } from './TearsheetBody';

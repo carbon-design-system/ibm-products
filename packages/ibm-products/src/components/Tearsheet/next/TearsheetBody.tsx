@@ -165,10 +165,10 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
 
 /**
  * ----------------
- * RightContent
+ * SummaryContent
  * ----------------
  */
-export interface RightContentProps {
+export interface SummaryContentProps {
   children: ReactNode;
   className?: string;
   /**
@@ -181,13 +181,13 @@ export interface RightContentProps {
    */
   onRightPanelClose?(): void;
 }
-export const RightContent = forwardRef<HTMLDivElement, RightContentProps>(
+export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
   ({ children, className, rightPanelOpen = false, onRightPanelClose }, ref) => {
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery);
 
     return !isSm ? (
-      <div className={`${blockClass}__right-content ${className}`} ref={ref}>
+      <div className={`${blockClass}__summary-content ${className}`} ref={ref}>
         <aside>{children}</aside>
       </div>
     ) : (

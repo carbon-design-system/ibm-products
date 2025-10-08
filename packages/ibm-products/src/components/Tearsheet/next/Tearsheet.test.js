@@ -34,7 +34,7 @@ describe('Tearsheet', () => {
         <Tearsheet.Body>
           <Tearsheet.MainContent>main content</Tearsheet.MainContent>
 
-          <Tearsheet.RightContent>right content</Tearsheet.RightContent>
+          <Tearsheet.SummaryContent>right content</Tearsheet.SummaryContent>
         </Tearsheet.Body>
         <Tearsheet.Footer>footer</Tearsheet.Footer>
       </Tearsheet>

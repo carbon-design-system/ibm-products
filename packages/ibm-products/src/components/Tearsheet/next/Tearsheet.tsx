@@ -42,8 +42,8 @@ import TearsheetBody, {
   InfluencerProps,
   MainContent,
   MainContentProps,
-  RightContent,
-  RightContentProps,
+  SummaryContent,
+  SummaryContentProps,
   TearsheetBodyProps,
 } from './TearsheetBody';
 
@@ -122,7 +122,7 @@ export type TearsheetComponentType = React.ForwardRefExoticComponent<
   HeaderActions: FC<TearsheetHeaderActionsProps>;
   HeaderActionItem: FC<TearsheetHeaderActionItemProps>;
   MainContent: FC<MainContentProps>;
-  RightContent: FC<RightContentProps>;
+  SummaryContent: FC<SummaryContentProps>;
   Body: FC<TearsheetBodyProps>;
   Footer: FC<FooterProps>;
 } & ComposedModalProps;
@@ -178,7 +178,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       }
       if (rightContentWidth) {
         document.documentElement.style.setProperty(
-          '--tearsheet-right-content-width',
+          '--tearsheet-summary-content-width',
           `${rightContentWidth}`
         );
       }
@@ -259,7 +259,7 @@ Tearsheet.HeaderContent = TearsheetHeaderContent;
 Tearsheet.Body = TearsheetBody;
 Tearsheet.Influencer = Influencer;
 Tearsheet.MainContent = MainContent;
-Tearsheet.RightContent = RightContent;
+Tearsheet.SummaryContent = SummaryContent;
 Tearsheet.Footer = Footer;
 Tearsheet.NavigationBar = TearsheetNavigationBar;
 Tearsheet.ScrollButton = TearsheetScrollButton;

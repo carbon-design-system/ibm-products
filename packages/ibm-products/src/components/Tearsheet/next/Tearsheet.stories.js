@@ -36,7 +36,7 @@ import { StepProvider } from '../../StepFlow';
 const storyClass = 'tearsheet-next-stories';
 
 export default {
-  title: 'Preview Candidate/Tearsheet',
+  title: 'Preview/Tearsheet',
   component: Tearsheet,
   tags: ['autodocs'],
   decorators: [
@@ -54,7 +54,7 @@ export default {
     Influencer: Tearsheet.Influencer,
     Body: Tearsheet.Body,
     MainContent: Tearsheet.MainContent,
-    RightContent: Tearsheet.RightContent,
+    SummaryContent: Tearsheet.SummaryContent,
     Footer: Tearsheet.Footer,
   },
 
@@ -326,7 +326,7 @@ export const Default = () => {
             </Section>
           </Tearsheet.MainContent>
 
-          <Tearsheet.RightContent
+          <Tearsheet.SummaryContent
             rightPanelOpen={rightPanelOpen}
             onRightPanelClose={() => setRightPanelOpen(false)}
           >
@@ -353,7 +353,7 @@ export const Default = () => {
                 <p>item description</p>
               </div>
             </div>
-          </Tearsheet.RightContent>
+          </Tearsheet.SummaryContent>
         </Tearsheet.Body>
         <Tearsheet.Footer>
           <div className="default__action-buttons">

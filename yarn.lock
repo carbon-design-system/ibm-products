@@ -5,6 +5,25 @@ __metadata:
   version: 8
   cacheKey: 10
 
+"@aarsteinmedia/dotlottie-player@npm:^6.0.5":
+  version: 6.0.5
+  resolution: "@aarsteinmedia/dotlottie-player@npm:6.0.5"
+  dependencies:
+    "@aarsteinmedia/lottie-web": "npm:^1.2.0"
+    fflate: "npm:^0.8.2"
+  peerDependencies:
+    "@types/react": ">= 16.0.0"
+  checksum: 10/416024a0be9d5389552399911335c337642cc5f6448bd390b7b251247980a2ef378804358f44a3b33f683d5be4dc1134d76c581b561223f2f1fdb6f266109a29
+  languageName: node
+  linkType: hard
+
+"@aarsteinmedia/lottie-web@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@aarsteinmedia/lottie-web@npm:1.2.0"
+  checksum: 10/d1eb5e12892d0ec4e9ab09b4b77a6f3ea941ccb1b2018631183f96d9a9db46346dbdf2ecdad734bc74c16c661e2b2af1a9e74e893e22345424b32565d853bea6
+  languageName: node
+  linkType: hard
+
 "@adobe/css-tools@npm:^4.4.0":
   version: 4.4.2
   resolution: "@adobe/css-tools@npm:4.4.2"
@@ -1923,7 +1942,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/ibm-products-styles@npm:^2.72.0-rc.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@npm:^2.72.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -1932,7 +1951,7 @@ __metadata:
     cross-env: "npm:^10.0.0"
     glob: "npm:^11.0.1"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.35.0-rc.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.35.0"
     jest-environment-jsdom: "npm:^29.7.0"
     npm-run-all2: "npm:^8.0.0"
     rimraf: "npm:^6.0.1"
@@ -1951,9 +1970,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-web-components@workspace:packages/ibm-products-web-components"
   dependencies:
+    "@aarsteinmedia/dotlottie-player": "npm:^6.0.5"
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
     "@carbon-labs/wc-empty-state": "npm:^0.9.0"
-    "@carbon/ibm-products-styles": "npm:^2.72.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.72.0"
     "@carbon/icon-helpers": "npm:^10.65.0"
     "@carbon/icons": "npm:^11.66.0"
     "@carbon/motion": "npm:^11.34.0"
@@ -1981,8 +2001,8 @@ __metadata:
     cssnano: "npm:^7.0.6"
     eslint: "npm:^9.14.0"
     eslint-config-carbon: "npm:^3.25.0"
-    globby: "npm:^14.0.2"
-    happy-dom: "npm:^18.0.0"
+    globby: "npm:^15.0.0"
+    happy-dom: "npm:^19.0.0"
     lit: "npm:^3.1.0"
     playwright: "npm:^1.51.1"
     postcss: "npm:^8.4.47"
@@ -2017,7 +2037,7 @@ __metadata:
     "@babel/runtime": "npm:^7.26.10"
     "@carbon-labs/react-resizer": "npm:^0.10.0"
     "@carbon/feature-flags": "npm:^0.30.0"
-    "@carbon/ibm-products-styles": "npm:^2.72.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.72.0"
     "@carbon/telemetry": "npm:^0.1.0"
     "@carbon/utilities": "npm:^0.9.0"
     "@carbon/utilities-react": "npm:0.12.0"
@@ -2040,7 +2060,7 @@ __metadata:
     "@storybook/react-vite": "npm:^9.0.13"
     "@types/react-table": "npm:^7.7.20"
     babel-plugin-dev-expression: "npm:^0.2.3"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.34.0-rc.0"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.34.0"
     change-case: "npm:5.4.4"
     classnames: "npm:^2.5.1"
     copyfiles: "npm:^2.4.1"
@@ -2048,7 +2068,7 @@ __metadata:
     fs-extra: "npm:^11.3.0"
     glob: "npm:^11.0.1"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.35.0-rc.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.35.0"
     jest-environment-jsdom: "npm:^29.7.0"
     namor: "npm:^1.1.2"
     npm-run-all2: "npm:^8.0.0"
@@ -2058,6 +2078,7 @@ __metadata:
     react-window: "npm:^1.8.11"
     rimraf: "npm:^6.0.1"
     rollup: "npm:^4.35.0"
+    rollup-plugin-preserve-directives: "npm:^0.4.0"
     rollup-plugin-strip-banner: "npm:^3.1.0"
     sass: "npm:^1.85.1"
     storybook: "npm:^9.0.8"
@@ -4350,6 +4371,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jridgewell/sourcemap-codec@npm:^1.5.5":
+  version: 1.5.5
+  resolution: "@jridgewell/sourcemap-codec@npm:1.5.5"
+  checksum: 10/5d9d207b462c11e322d71911e55e21a4e2772f71ffe8d6f1221b8eb5ae6774458c1d242f897fb0814e8714ca9a6b498abfa74dfe4f434493342902b1a48b33a5
+  languageName: node
+  linkType: hard
+
 "@jridgewell/trace-mapping@npm:^0.3.12, @jridgewell/trace-mapping@npm:^0.3.18, @jridgewell/trace-mapping@npm:^0.3.23, @jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.25":
   version: 0.3.25
   resolution: "@jridgewell/trace-mapping@npm:0.3.25"
@@ -5968,10 +5996,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sindresorhus/merge-streams@npm:^2.1.0":
-  version: 2.3.0
-  resolution: "@sindresorhus/merge-streams@npm:2.3.0"
-  checksum: 10/798bcb53cd1ace9df84fcdd1ba86afdc9e0cd84f5758d26ae9b1eefd8e8887e5fc30051132b9e74daf01bb41fa5a2faf1369361f83d76a3b3d7ee938058fd71c
+"@sindresorhus/merge-streams@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@sindresorhus/merge-streams@npm:4.0.0"
+  checksum: 10/16551c787f5328c8ef05fd9831ade64369ccc992df78deb635ec6c44af217d2f1b43f8728c348cdc4e00585ff2fad6e00d8155199cbf6b154acc45fe65cbf0aa
   languageName: node
   linkType: hard
 
@@ -8665,7 +8693,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-ibm-cloud-cognitive@npm:^0.34.0-rc.0, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
+"babel-preset-ibm-cloud-cognitive@npm:^0.34.0, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive"
   dependencies:
@@ -12419,6 +12447,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fflate@npm:^0.8.2":
+  version: 0.8.2
+  resolution: "fflate@npm:0.8.2"
+  checksum: 10/2bd26ba6d235d428de793c6a0cd1aaa96a06269ebd4e21b46c8fd1bd136abc631acf27e188d47c3936db090bf3e1ede11d15ce9eae9bffdc4bfe1b9dc66ca9cb
+  languageName: node
+  linkType: hard
+
 "figures@npm:3.2.0, figures@npm:^3.0.0":
   version: 3.2.0
   resolution: "figures@npm:3.2.0"
@@ -13196,17 +13231,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:^14.0.2, globby@npm:^14.1.0":
-  version: 14.1.0
-  resolution: "globby@npm:14.1.0"
+"globby@npm:^15.0.0":
+  version: 15.0.0
+  resolution: "globby@npm:15.0.0"
   dependencies:
-    "@sindresorhus/merge-streams": "npm:^2.1.0"
+    "@sindresorhus/merge-streams": "npm:^4.0.0"
     fast-glob: "npm:^3.3.3"
-    ignore: "npm:^7.0.3"
+    ignore: "npm:^7.0.5"
     path-type: "npm:^6.0.0"
     slash: "npm:^5.1.0"
     unicorn-magic: "npm:^0.3.0"
-  checksum: 10/e527ff54f0dddf60abfabd0d9e799768619d957feecd8b13ef60481f270bfdce0d28f6b09267c60f8064798fb3003b8ec991375f7fe0233fbce5304e1741368c
+  checksum: 10/552203c6350bd1be0c472006298305290c489e525dc9e7f6cf43634194714ddcdec1a130a2ea91e31de0c676ef91d1cdefa24e48dc0590e7bb8261f92d716731
   languageName: node
   linkType: hard
 
@@ -13273,14 +13308,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^18.0.0":
-  version: 18.0.1
-  resolution: "happy-dom@npm:18.0.1"
+"happy-dom@npm:^19.0.0":
+  version: 19.0.2
+  resolution: "happy-dom@npm:19.0.2"
   dependencies:
     "@types/node": "npm:^20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
     whatwg-mimetype: "npm:^3.0.0"
-  checksum: 10/27f6638d7b8bc67f97ddde7f004e47785ae1487e14065d7c6119adbb9ba7d8a53935d5714d37d9f60efef7f9b180a41c2b7fbbdffcea57b6d04060360a1a1d03
+  checksum: 10/cca23fa7c12ed73307be93a312b389d2c9e5497a647d884ab2c8684833824e369137ee8a3496a9abdaf08a1ed02b1af925c6f661cf29ef6a90c675c0bc11ce5f
   languageName: node
   linkType: hard
 
@@ -13594,7 +13629,7 @@ __metadata:
     eslint-plugin-ssr-friendly: "npm:^1.3.0"
     gitignore-to-glob: "npm:^0.3.0"
     globals: "npm:^16.0.0"
-    globby: "npm:^14.1.0"
+    globby: "npm:^15.0.0"
     husky: "npm:^9.1.7"
     jest: "npm:^29.7.0"
     jest-canvas-mock: "npm:2.5.2"
@@ -13603,7 +13638,7 @@ __metadata:
     lerna: "npm:^8.2.1"
     lint-staged: "npm:^16.0.0"
     lottie-web: "npm:^5.13.0"
-    npm-check-updates: "npm:^18.0.0"
+    npm-check-updates: "npm:^19.0.0"
     npm-run-all2: "npm:^8.0.0"
     postcss: "npm:^8.5.3"
     prettier: "npm:^3.5.3"
@@ -13674,6 +13709,13 @@ __metadata:
   version: 7.0.3
   resolution: "ignore@npm:7.0.3"
   checksum: 10/ce5e812af3acd6607a3fe0a9f9b5f01d53f009a5ace8cbf5b6491d05a481b55d65186e6a7eaa13126e93f15276bcf3d1e8d6ff3ce5549c312f9bb313fff33365
+  languageName: node
+  linkType: hard
+
+"ignore@npm:^7.0.5":
+  version: 7.0.5
+  resolution: "ignore@npm:7.0.5"
+  checksum: 10/f134b96a4de0af419196f52c529d5c6120c4456ff8a6b5a14ceaaa399f883e15d58d2ce651c9b69b9388491d4669dda47285d307e827de9304a53a1824801bc6
   languageName: node
   linkType: hard
 
@@ -14626,7 +14668,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@npm:^1.35.0-rc.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@npm:^1.35.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:
@@ -14641,7 +14683,7 @@ __metadata:
     accessibility-checker: "npm:^4.0.7"
     axe-core: "npm:^4.10.3"
     babel-jest: "npm:^29.7.0"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.34.0-rc.0"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.34.0"
     identity-obj-proxy: "npm:^3.0.0"
     jest-circus: "npm:^29.7.0"
     jest-watch-typeahead: "npm:^3.0.0"
@@ -16257,6 +16299,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"magic-string@npm:^0.30.5":
+  version: 0.30.19
+  resolution: "magic-string@npm:0.30.19"
+  dependencies:
+    "@jridgewell/sourcemap-codec": "npm:^1.5.5"
+  checksum: 10/5045467fad59ddfba6ccfb00fde6edbc0f841089f0da07d844cf513c73de289bbbf933bde16168cba2c9ef38d75ac68e1617a5ce74aae16d6f39285bda1d51c4
+  languageName: node
+  linkType: hard
+
 "magicast@npm:^0.3.5":
   version: 0.3.5
   resolution: "magicast@npm:0.3.5"
@@ -17571,13 +17622,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-check-updates@npm:^18.0.0":
-  version: 18.0.1
-  resolution: "npm-check-updates@npm:18.0.1"
+"npm-check-updates@npm:^19.0.0":
+  version: 19.0.0
+  resolution: "npm-check-updates@npm:19.0.0"
   bin:
     ncu: build/cli.js
     npm-check-updates: build/cli.js
-  checksum: 10/c4c0dafe30760e5d7ec08cb683abea3dea05d8e092baaa008dafc8a7c4f942579aa3176d44c906f82c5e96c208cb0dae796be7fdfa687edddf7fbcbe6e63bb28
+  checksum: 10/563e012d946322c1ae63932e54b3070884103fb8e8a6dbae1940941519f211e92c438ab9a56d57f198ef0941126562ced740b008a0202769ded1f4fcfdd0a359
   languageName: node
   linkType: hard
 
@@ -20005,6 +20056,18 @@ __metadata:
     globby: "npm:10.0.1"
     is-plain-object: "npm:^3.0.0"
   checksum: 10/706ba6bd2052b95d1037f12963ff4b50749730f18aefad10544f9574aff7c035c88c5dd9ae1f0c0408cf09862e595a0ea4d68e13c2717addaea2bda3ade0d0e0
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-preserve-directives@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "rollup-plugin-preserve-directives@npm:0.4.0"
+  dependencies:
+    "@rollup/pluginutils": "npm:^5.1.0"
+    magic-string: "npm:^0.30.5"
+  peerDependencies:
+    rollup: 2.x || 3.x || 4.x
+  checksum: 10/2ed0eeeb342ad87b9ec6c0521279c21b8680709e43da66b956cf111783852c01e167d463860b8e5a5b7385cf4d807d71d448eb9bf8179e1b336d777d6f7fe5b8
   languageName: node
   linkType: hard
 

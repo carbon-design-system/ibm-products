@@ -266,6 +266,7 @@ describe('PageHeader', () => {
           <PageHeader.Content className="custom-class" title="title" />
         </PageHeader.Root>
       );
+      expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument();
       expect(container.firstChild.firstChild).toHaveClass('custom-class');
     });
 

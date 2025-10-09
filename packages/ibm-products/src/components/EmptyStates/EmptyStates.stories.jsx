@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,19 @@ export default {
   title: 'Patterns/Prebuilt patterns/Empty states/EmptyState',
   component: EmptyState,
   tags: ['autodocs'],
+  argTypes: {
+    subtitle: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'default',
+          1: 'with tooltip',
+        },
+      },
+      options: [0, 1],
+      mapping: { 0: 'default', 1: 'withTooltip' },
+    },
+  },
   parameters: {
     // styles,
     docs: {
@@ -27,63 +40,59 @@ export default {
 
 const emptyStateCommonProps = {
   title: 'Start by adding data assets',
-  subtitle: 0,
+  subtitle: 'default',
 };
 
 const Template = ({ ...args }, context) => {
   const sbDocs = context.viewMode !== 'docs';
   const { subtitle, action } = args;
 
-  const getSubTitle = (value) => {
-    if (value === 0) {
-      return (
-        <>
-          Click <span>Upload assets</span> to upload your data
-        </>
-      );
-    }
-    if (value === 1) {
-      return (
-        <>
-          Click <span>here</span> to upload your data
-          <Tooltip label="Facts and statistics collected together for reference or analysis">
-            <Information size="16" />
-          </Tooltip>
-        </>
-      );
-    }
+  const getSubTitle = () => {
+    return (
+      <>
+        Click <span>Upload assets</span> to upload your data
+      </>
+    );
+  };
+  const getSubTitleWithTooltip = () => {
+    return (
+      <>
+        Click <span>here</span> to upload your data
+        <Tooltip label="Facts and statistics collected together for reference or analysis">
+          <Information size="16" />
+        </Tooltip>
+      </>
+    );
   };
 
-  const getAction = (value) => {
-    if (value === 0) {
+  const getAction = (icon = undefined) => {
+    const actionObj = {
+      text: 'Create new',
+      onClick: () => {
+        sbDocs
+          ? storybookAction('Clicked empty state action button')()
+          : console.log('Clicked empty state action button');
+      },
+    };
+
+    if (icon) {
       return {
-        text: 'Create new',
-        onClick: () => {
-          sbDocs
-            ? storybookAction('Clicked empty state action button')()
-            : console.log('Clicked empty state action button');
-        },
-      };
-    }
-    if (value === 1) {
-      return {
-        text: 'Create new',
-        onClick: () => {
-          sbDocs
-            ? storybookAction('Clicked empty state action button')()
-            : console.log('Clicked empty state action button');
-        },
+        ...actionObj,
         renderIcon: (props) => <Add size={20} {...props} />,
         iconDescription: 'Add icon',
       };
     }
+
+    return actionObj;
   };
 
   return (
     <EmptyState
       {...args}
-      subtitle={getSubTitle(subtitle)}
-      action={getAction(action)}
+      subtitle={
+        subtitle === 'default' ? getSubTitle() : getSubTitleWithTooltip()
+      }
+      action={typeof action === 'boolean' && getAction(action)}
     />
   );
 };
@@ -96,7 +105,7 @@ Default.args = {
 export const WithTooltipInSubtitle = Template.bind({});
 WithTooltipInSubtitle.args = {
   ...emptyStateCommonProps,
-  subtitle: 1,
+  subtitle: 'withTooltip',
 };
 
 export const WithCustomIllustration = Template.bind({});
@@ -109,13 +118,13 @@ WithCustomIllustration.args = {
 export const withAction = Template.bind({});
 withAction.args = {
   ...emptyStateCommonProps,
-  action: 0,
+  action: false,
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
   ...emptyStateCommonProps,
-  action: 1,
+  action: true,
 };
 
 export const withLink = Template.bind({});
@@ -131,7 +140,7 @@ withLink.args = {
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
   ...emptyStateCommonProps,
-  action: 1,
+  action: true,
   link: {
     text: 'View documentation',
     href: 'https://www.carbondesignsystem.com',

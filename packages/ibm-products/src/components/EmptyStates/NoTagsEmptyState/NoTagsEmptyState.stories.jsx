@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,31 +36,32 @@ const defaultStoryProps = {
 const Template = ({ ...args }, context) => {
   const sbDocs = context.viewMode !== 'docs';
   const { action } = args;
-  const getAction = (value) => {
-    if (value === 0) {
+  const getAction = (icon = undefined) => {
+    const actionObj = {
+      text: 'Create new',
+      onClick: () => {
+        sbDocs
+          ? storybookAction('Clicked empty state action button')()
+          : console.log('Clicked empty state action button');
+      },
+    };
+
+    if (icon) {
       return {
-        text: 'Create new',
-        onClick: () => {
-          sbDocs
-            ? storybookAction('Clicked empty state action button')()
-            : console.log('Clicked empty state action button');
-        },
-      };
-    }
-    if (value === 1) {
-      return {
-        text: 'Create new',
-        onClick: () => {
-          sbDocs
-            ? storybookAction('Clicked empty state action button')()
-            : console.log('Clicked empty state action button');
-        },
+        ...actionObj,
         renderIcon: (props) => <Add size={20} {...props} />,
         iconDescription: 'Add icon',
       };
     }
+
+    return actionObj;
   };
-  return <NoTagsEmptyState {...args} action={getAction(action)} />;
+  return (
+    <NoTagsEmptyState
+      {...args}
+      action={typeof action === 'boolean' && getAction(action)}
+    />
+  );
 };
 
 export const Default = Template.bind({});
@@ -77,13 +78,13 @@ WithDarkModeIllustration.args = {
 export const withAction = Template.bind({});
 withAction.args = {
   ...defaultStoryProps,
-  action: 0,
+  action: false,
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
   ...defaultStoryProps,
-  action: 1,
+  action: true,
 };
 
 export const withLink = Template.bind({});
@@ -98,7 +99,7 @@ withLink.args = {
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
   ...defaultStoryProps,
-  action: 1,
+  action: true,
   link: {
     text: 'View documentation',
     href: 'https://www.carbondesignsystem.com',

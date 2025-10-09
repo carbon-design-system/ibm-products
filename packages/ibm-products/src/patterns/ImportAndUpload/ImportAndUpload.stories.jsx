@@ -20,7 +20,7 @@ import styles from './_storybook-styles.scss?inline';
 import mdx from './ImportAndUpload.mdx';
 
 export default {
-  title: 'Patterns/Import And Upload Modal',
+  title: 'Patterns/Import And Upload',
   component: () => {},
   tags: ['autodocs'],
   parameters: {
@@ -141,98 +141,93 @@ const StandardTemplate = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      {isOpen && (
-        <ComposedModal
-          open={isOpen}
-          size="sm"
-          preventCloseOnClickOutside
-          onClose={onCloseHandler}
-        >
-          <ModalHeader
-            className={`${blockClass}__header`}
-            title="Import"
-            closeModal={onCloseHandler}
+      <ComposedModal
+        open={isOpen}
+        size="sm"
+        preventCloseOnClickOutside
+        onClose={onCloseHandler}
+      >
+        <ModalHeader
+          className={`${blockClass}__header`}
+          title="Import"
+          closeModal={onCloseHandler}
+        />
+        <ModalBody className={`${blockClass}__body-container`}>
+          <p className={`${blockClass}__body`}>
+            You can specify a file to import by either dragging it into the drag
+            and drop area or by specifying a URL. (Maximum file size of 500KB)
+          </p>
+          <p className={`${blockClass}__file-drop-header`}>
+            Add files using drag and drop
+          </p>
+
+          <FileUploaderDropContainer
+            accept={['image/png', 'image/jpeg', 'image/gif']}
+            labelText="Drag and drop files here or click to upload"
+            onAddFiles={onAddFile}
+            disabled={files.length}
+            data-modal-primary-focus
           />
-          <ModalBody className={`${blockClass}__body-container`}>
-            <p className={`${blockClass}__body`}>
-              You can specify a file to import by either dragging it into the
-              drag and drop area or by specifying a URL. (Maximum file size of
-              500KB)
-            </p>
-            <p className={`${blockClass}__file-drop-header`}>
-              Add files using drag and drop
-            </p>
-
-            <FileUploaderDropContainer
-              accept={['image/png', 'image/jpeg', 'image/gif']}
-              labelText="Drag and drop files here or click to upload"
-              onAddFiles={onAddFile}
+          <p className={`${blockClass}__label`}>
+            Add a file by specifying a URL
+          </p>
+          <div className={`${blockClass}__input-group`}>
+            <TextInput
+              labelText=""
+              id={'test-id'}
+              onChange={(evt) => setImportUrl(evt.target.value)}
+              placeholder="URL"
+              value={importUrl}
               disabled={files.length}
-              data-modal-primary-focus
+              aria-label="Add a file by specifying a URL"
             />
-            <p className={`${blockClass}__label`}>
-              Add a file by specifying a URL
-            </p>
-            <div className={`${blockClass}__input-group`}>
-              <TextInput
-                labelText=""
-                id={'test-id'}
-                onChange={(evt) => setImportUrl(evt.target.value)}
-                placeholder="URL"
-                value={importUrl}
-                disabled={files.length}
-                aria-label="Add a file by specifying a URL"
-              />
-              <Button
-                onClick={fetchFile}
-                className={`${blockClass}__import-button`}
-                size="md"
-                disabled={importButtonDisabled}
-              >
-                Add file
-              </Button>
-            </div>
-            <div className={`${blockClass}__file-container`}>
-              {hasFiles && (
-                <p className={`${blockClass}__helper-text`}>
-                  {fileStatusString}
-                </p>
-              )}
-              {files.map((file) => (
-                <FileUploaderItem
-                  key={file.uuid}
-                  onDelete={() => onRemoveFile(file.uuid)}
-                  name={file.name}
-                  status={file.status}
-                  size="lg"
-                  uuid={file.uuid}
-                  iconDescription={file.iconDescription}
-                  invalid={file.invalid}
-                  errorBody={file.errorBody}
-                  errorSubject={file.errorSubject}
-                  {...{
-                    filesize: file.fileSize,
-                  }}
-                />
-              ))}
-            </div>
-          </ModalBody>
-
-          <ModalFooter className={`${blockClass}__footer`}>
-            <Button type="button" kind="secondary" onClick={onCloseHandler}>
-              Cancel
-            </Button>
             <Button
-              type="submit"
-              kind="primary"
-              onClick={onSubmitHandler}
-              disabled={primaryButtonDisabled}
+              onClick={fetchFile}
+              className={`${blockClass}__import-button`}
+              size="md"
+              disabled={importButtonDisabled}
             >
-              Import
+              Add file
             </Button>
-          </ModalFooter>
-        </ComposedModal>
-      )}
+          </div>
+          <div className={`${blockClass}__file-container`}>
+            {hasFiles && (
+              <p className={`${blockClass}__helper-text`}>{fileStatusString}</p>
+            )}
+            {files.map((file) => (
+              <FileUploaderItem
+                key={file.uuid}
+                onDelete={() => onRemoveFile(file.uuid)}
+                name={file.name}
+                status={file.status}
+                size="lg"
+                uuid={file.uuid}
+                iconDescription={file.iconDescription}
+                invalid={file.invalid}
+                errorBody={file.errorBody}
+                errorSubject={file.errorSubject}
+                {...{
+                  filesize: file.fileSize,
+                }}
+              />
+            ))}
+          </div>
+        </ModalBody>
+
+        <ModalFooter className={`${blockClass}__footer`}>
+          <Button type="button" kind="secondary" onClick={onCloseHandler}>
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            kind="primary"
+            onClick={onSubmitHandler}
+            disabled={primaryButtonDisabled}
+          >
+            Import
+          </Button>
+        </ModalFooter>
+      </ComposedModal>
     </>
   );
 };

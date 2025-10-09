@@ -159,6 +159,7 @@ export const parameters = {
   },
   docs: {
     theme,
+    codePanel: true,
   },
   viewport: {
     viewports: {

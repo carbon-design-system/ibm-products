@@ -64,7 +64,10 @@ export {
 export * as preview__PageHeader from './PageHeader/next/PageHeader';
 
 // Preview candidates
-export * as previewCandidate__BigNumber from './BigNumber';
+export {
+  BigNumber as previewCandidate__BigNumber,
+  type BigNumberProps,
+} from './BigNumber';
 export {
   Coachmark as previewCandidate__Coachmark,
   BEACON_KIND,
@@ -94,11 +97,21 @@ export {
   type CoachmarkOverlayElementsProps,
 } from './CoachmarkOverlayElements';
 export { CoachmarkStack as previewCandidate__CoachmarkStack } from './CoachmarkStack';
-export * as previewCandidate__ConditionBuilder from './ConditionBuilder';
-export * as previewCandidate__DataSpreadsheet from './DataSpreadsheet';
-export * as previewCandidate__DelimitedList from './DelimitedList';
-export * as previewCandidate__Decorator from './Decorator';
-export * as previewCandidate__GetStartedCard from './GetStartedCard';
+export { ConditionBuilder as previewCandidate__ConditionBuilder } from './ConditionBuilder';
+export * from './ConditionBuilder/ConditionBuilder.types';
+export {
+  DataSpreadsheet as previewCandidate__DataSpreadsheet,
+  type DataSpreadsheetProps,
+} from './DataSpreadsheet';
+export {
+  DelimitedList as previewCandidate__DelimitedList,
+  type DelimitedListProps,
+} from './DelimitedList';
+export { Decorator as previewCandidate__Decorator } from './Decorator';
+export {
+  GetStartedCard as previewCandidate__GetStartedCard,
+  type GetStartedCardProps,
+} from './GetStartedCard';
 export {
   Guidebanner as previewCandidate__Guidebanner,
   GuidebannerElement as previewCandidate__GuidebannerElement,
@@ -117,8 +130,14 @@ export {
   type InlineTipButtonProps,
   type InlineTipLinkProps,
 } from './InlineTip';
-export * as previewCandidate__NonLinearReading from './NonLinearReading';
-export * as previewCandidate__SearchBar from './SearchBar';
+export {
+  NonLinearReading as previewCandidate__NonLinearReading,
+  type NonLinearReadingProps,
+} from './NonLinearReading';
+export {
+  SearchBar as previewCandidate__SearchBar,
+  type SearchBarProps,
+} from './SearchBar';
 export {
   Toolbar as previewCandidate__Toolbar,
   ToolbarButton as previewCandidate__ToolbarButton,
@@ -127,7 +146,10 @@ export {
   type ToolbarButtonProps,
   type ToolbarGroupProps,
 } from './Toolbar';
-export * as previewCandidate__TruncatedList from './TruncatedList';
+export {
+  TruncatedList as previewCandidate__TruncatedList,
+  type TruncatedListProps,
+} from './TruncatedList';
 
 /**
  * Deprecated

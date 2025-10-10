@@ -131,6 +131,7 @@ const StandardTemplate = () => {
     evt.stopPropagation();
     updateFiles(addedFiles);
   };
+
   const numberOfFiles = files.length;
   const numberOfValidFiles = files.filter((f) => !f.invalid).length;
   const hasFiles = numberOfFiles > 0;

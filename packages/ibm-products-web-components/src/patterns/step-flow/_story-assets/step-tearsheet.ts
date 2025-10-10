@@ -6,7 +6,7 @@
  */
 
 import { LitElement, PropertyValues, html, nothing } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { SignalWatcher } from '@lit-labs/signals';
 import styles from '../story-styles.scss?lit';
 import { StepInstance } from '../step-flow-signal';
@@ -14,7 +14,7 @@ import '@carbon/web-components/es/components/progress-indicator/index.js';
 import '@carbon/web-components/es/components/stack/index.js';
 import '@carbon/web-components/es/components/code-snippet/index.js';
 import '../step-group';
-import '../../tearsheet/index.js';
+import '../../../components/tearsheet/index.js';
 import {
   registerFocusableContainers,
   trapFocus,
@@ -28,6 +28,8 @@ interface FormStateType {
 
 @customElement('step-tearsheet')
 export class StepTearsheet extends SignalWatcher(LitElement) {
+  @property({ type: Boolean })
+  narrow: boolean = false;
   @state()
   private _open: boolean = false;
 
@@ -138,7 +140,7 @@ export class StepTearsheet extends SignalWatcher(LitElement) {
         class=${'step-tearsheet-with-util'}
         selector-initial-focus=${'#tearsheet-story-text-input-a'}
         ?open=${this._open}
-        width=${'wide'}
+        width=${this.narrow ? 'narrow' : 'wide'}
         influencer-placement=${'left'}
         prevent-close-on-click-outside
       >

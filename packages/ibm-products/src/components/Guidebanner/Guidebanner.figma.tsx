@@ -26,12 +26,12 @@ figma.connect(
         Collapsable: true,
       }),
       title: figma.string('Header text'),
-      children: figma.enum('Type', {
-        Static: undefined,
-        Expandable: figma.instance('Swap slot'),
-      }),
+      // children: figma.enum('Type', {
+      //   "Not collapsible": undefined,
+      //   Collapsible: figma.children('_Insight'),
+      // }),
+      children: figma.children('_Insight'),
       open: figma.boolean('Expanded'),
-      expandButtonLabel: figma.textContent('Read more'),
       // No matching props could be found for these Figma properties:
       // "headerText": figma.string('Header text'),
       // "expanded": figma.boolean('Expanded'),
@@ -42,7 +42,6 @@ figma.connect(
         collapsible={props.collapsible}
         title={props.title}
         open={props.open}
-        expandButtonLabel={props.expandButtonLabel}
       >
         {props.children}
       </Guidebanner>

@@ -825,18 +825,13 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
         })}
         ref={titleRef}
       >
-        <Heading
-          className={`${blockClass}__title-text`}
-          title={title}
-          aria-hidden={false}
-        >
+        <Heading className={`${blockClass}__title-text`} aria-hidden={false}>
           {title}
         </Heading>
 
         {doAnimateTitle && !shouldReduceMotion && (
           <Heading
             className={`${blockClass}__collapsed-title-text`}
-            title={title}
             aria-hidden={true}
           >
             {title}

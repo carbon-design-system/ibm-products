@@ -347,6 +347,11 @@ const config = [
     directory: 'react-17-example',
     thumbnail: `url(${imageReact17Example}`,
   },
+    {
+    label: 'Page header (next)',
+    directory: 'PageHeaderNext',
+    thumbnail: `url(${imagePageHeader}`,
+  },
 ];
 
 export default config;

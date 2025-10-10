@@ -149,6 +149,7 @@ const parameters = {
   docs: {
     theme,
     page: () => <StoryDocsPage />,
+    codePanel: true,
   },
 };
 

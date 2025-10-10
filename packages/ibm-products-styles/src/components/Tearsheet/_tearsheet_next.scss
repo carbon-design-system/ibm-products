@@ -78,18 +78,21 @@ $motion-duration: $duration-moderate-02;
       padding-inline: $spacing-05;
     }
   }
+  .#{$carbon-prefix}--modal-container--sm .#{$carbon-prefix}--modal-header {
+    padding-inline-end: $spacing-07;
+  }
 
   // ──────────────────────────────────────────────────────────────
   // Header content wrapper (grid on desktop → flex on mobile)
   // ──────────────────────────────────────────────────────────────
   .#{$block-class__next}__header-content-wrapper {
     display: grid;
+    flex-basis: unset;
     gap: $spacing-05;
     grid-template-columns:
       auto
       minmax(var(--tearsheet-header-title-grid-width, 0), 1fr);
-    inline-size: 100%;
-    margin-inline-end: var(--tearsheet-header-action-offset);
+    inline-size: calc(100% - var(--tearsheet-header-action-offset));
 
     @include breakpoint-down(md) {
       display: flex;
@@ -192,7 +195,6 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class__next}__header-actions {
     display: flex;
     justify-content: flex-end;
-    transition: all $motion-duration motion(entrance, expressive);
   }
 
   .#{$block-class__next}__content__header-actions {
@@ -264,17 +266,10 @@ $motion-duration: $duration-moderate-02;
       padding: 0;
       margin: 0;
       max-block-size: 0;
+      min-block-size: 0;
       opacity: 0;
       transition: all $motion-duration ease;
       visibility: hidden;
-    }
-    > *:not(
-        .#{$block-class__next}__navigation-bar,
-        .#{$block-class__next}__header-content-wrapper,
-        .#{$carbon-prefix}--modal-close-button,
-        .excludeFromCollapse
-      ) {
-      display: contents;
     }
 
     // Reset margins and transitions on always-visible items
@@ -360,5 +355,24 @@ $motion-duration: $duration-moderate-02;
     .#{$pkg-prefix}--side-panel__header {
       min-block-size: 0;
     }
+  }
+}
+.#{$block-class__next}--narrow {
+  .#{$block-class__next}.#{$block-class__next}__header {
+    padding-inline: $spacing-05;
+  }
+  .#{$block-class__next}__header-content-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .#{$block-class__next}__header-title {
+    @include type.type-style('heading-03');
+  }
+  .#{$block-class__next}__content__header-actions {
+    justify-content: flex-start;
+    margin-inline-end: 0;
+  }
+  .#{$block-class__next}__influencer {
+    grid-template-columns: 1fr 0;
   }
 }

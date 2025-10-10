@@ -55,6 +55,7 @@ import {
 } from './TearsheetHeaderActions';
 import { useMatchMedia } from './useMatchMedia';
 import { breakpoints } from '@carbon/layout';
+import { usePortalTarget } from '../../../global/js/hooks/usePortalTarget';
 
 /**
  * ----------
@@ -109,6 +110,10 @@ export interface TearsheetProps {
    * focused when the Modal opens.
    */
   selectorPrimaryFocus?: PropTypes.string;
+  /**
+   * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget?: HTMLElement;
 }
 
 export type TearsheetComponentType = React.ForwardRefExoticComponent<
@@ -140,6 +145,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       onClose,
       selectorPrimaryFocus,
       open,
+      portalTarget,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -160,6 +166,9 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     const influencer = arr.find((child: any) => child.type === Influencer);
     const body = arr.find((child: any) => child.type === TearsheetBody);
     const footer = arr.find((child: any) => child.type === Footer);
+
+    const renderPortalUse = usePortalTarget(portalTarget);
+
     useLayoutEffect(() => {
       const AILabelWidth =
         modalRef.current?.querySelector(`.${carbonPrefix}--ai-label`)
@@ -185,7 +194,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isSm]);
-    return (
+    return renderPortalUse(
       <TearsheetContext.Provider
         value={{
           hasCloseIcon,
@@ -195,6 +204,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
           onClose,
           disableHeaderCollapse,
           setDisableHeaderCollapse,
+          variant,
         }}
       >
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
@@ -223,6 +233,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
               ...selectorsFloatingMenus,
             ]}
             isFullWidth={true}
+            size={variant === 'narrow' ? 'sm' : ''}
           >
             {header}
             <ModalBody className={`${blockClass}__body-layout`} ref={bodyRef}>

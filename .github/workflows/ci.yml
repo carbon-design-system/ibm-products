@@ -213,7 +213,9 @@ jobs:
 
   merge-reports:
     # Merge reports after playwright-tests, even if some shards have failed
-    if: ${{ !cancelled() }}
+    if:
+      ${{ github.repository == 'carbon-design-system/ibm-products' && !cancelled() &&
+      github.event.pull_request.draft == false }}
     needs: avt-runner
 
     runs-on: ubuntu-latest

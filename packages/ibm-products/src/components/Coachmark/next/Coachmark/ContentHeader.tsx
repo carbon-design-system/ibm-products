@@ -37,7 +37,7 @@ export interface ContentHeaderProps {
   children?: string;
 }
 
-const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
+export const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
   (props, ref) => {
     const {
       className = '',
@@ -124,8 +124,6 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
     );
   }
 );
-
-export default ContentHeader;
 
 ContentHeader.propTypes = {
   /**

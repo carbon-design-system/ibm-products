@@ -27,7 +27,7 @@ export type EnrichedChildren = {
   children: ReactNode;
 };
 
-const ContentBody = forwardRef<HTMLDivElement, ContentBodyProps>(
+export const ContentBody = forwardRef<HTMLDivElement, ContentBodyProps>(
   (props, ref) => {
     const { className = '', children, ...rest } = props;
     const ContentBodyBlockClass = `${blockClass}--content-body`;

@@ -6,3 +6,9 @@
  */
 
 export { Coachmark } from './Coachmark';
+
+export type { CoachmarkProps, CoachmarkComponent } from './Coachmark';
+
+export type { ContentBodyProps } from './ContentBody';
+export type { ContentHeaderProps } from './ContentHeader';
+export type { CoachmarkContentProps } from './CoachmarkContent';

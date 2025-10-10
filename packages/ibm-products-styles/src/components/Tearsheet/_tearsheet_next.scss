@@ -207,8 +207,9 @@ $motion-duration: $duration-moderate-02;
     inline-size: 100%;
     margin-block-start: -14px;
 
-    > *:not(:last-of-type) {
-      padding-inline-end: $spacing-03;
+    // apply spacing only between two visible items
+    > *:not([hidden]) + *:not([hidden]) {
+      padding-inline-start: $spacing-03;
     }
 
     > * {
@@ -339,8 +340,10 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class__next}__main-content,
   .#{$block-class__next}__summary-content {
     overflow: auto;
-    padding-block-start: $spacing-06;
     padding-inline: $spacing-07;
+    @include breakpoint-down(md) {
+      padding-inline: $spacing-05;
+    }
   }
 
   .#{$block-class__next}__main-content {
@@ -358,7 +361,7 @@ $motion-duration: $duration-moderate-02;
   }
 }
 .#{$block-class__next}--narrow {
-  .#{$block-class__next}.#{$block-class__next}__header {
+  .#{$block-class__next}__header {
     padding-inline: $spacing-05;
   }
   .#{$block-class__next}__header-content-wrapper {
@@ -372,7 +375,12 @@ $motion-duration: $duration-moderate-02;
     justify-content: flex-start;
     margin-inline-end: 0;
   }
-  .#{$block-class__next}__influencer {
+  .#{$block-class__next}__body {
     grid-template-columns: 1fr 0;
+  }
+  .#{$block-class__next}__influencer,
+  .#{$block-class__next}__main-content,
+  .#{$block-class__next}__summary-content {
+    padding-inline: $spacing-05;
   }
 }

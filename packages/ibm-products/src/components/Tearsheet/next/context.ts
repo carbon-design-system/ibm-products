@@ -24,12 +24,14 @@ interface TearsheetContextType {
   disableHeaderCollapse?: boolean;
   setDisableHeaderCollapse?: (value: boolean) => void;
   variant: 'wide' | 'narrow';
+  isSm: boolean;
 }
 export const TearsheetContext = createContext<TearsheetContextType>({
   hasCloseIcon: true,
   fullyCollapsed: false,
   disableHeaderCollapse: false,
   variant: 'wide',
+  isSm: false,
 });
 
 export const blockClass = `${pkg.prefix}--tearsheet__next`;

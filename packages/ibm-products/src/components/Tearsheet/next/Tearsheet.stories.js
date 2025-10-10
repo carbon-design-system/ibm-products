@@ -562,3 +562,261 @@ export const withStepsAndHorizontalProgressIndicator = () => {
     </StepProvider>
   );
 };
+export const narrowTearsheet = () => {
+  const [open, setOpen] = useState(true);
+  const [rightPanelOpen, setRightPanelOpen] = useState(false);
+  const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
+  const launcherButtonRef = useRef(null);
+  const currentStep = 1;
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setOpen(true);
+        }}
+        ref={launcherButtonRef}
+      >
+        Show Interstitial modal
+      </Button>
+      <Tabs>
+        <Tearsheet
+          open={open}
+          variant={'narrow'}
+          decorator={sampleDecorator(1)}
+          onClose={() => setOpen(false)}
+          className="narrowTearsheet"
+        >
+          <Tearsheet.Header>
+            <Tearsheet.HeaderContent
+              open
+              label="Customer data"
+              title="Customer account uniqueness SLA "
+              description="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular sized button. This issue is most found in tables. Small button should have three words or less. When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are always paired with text."
+              titleIcon={Bee}
+              titleIconPosition={'leading'}
+              headerActions={
+                <Tearsheet.HeaderActions
+                  menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
+                >
+                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+                    <Button kind="tertiary" size="sm">
+                      Action 1
+                    </Button>
+                  </Tearsheet.HeaderActionItem>
+                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
+                    <Button kind="tertiary" size="sm">
+                      Action 2
+                    </Button>
+                  </Tearsheet.HeaderActionItem>
+                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
+                    <Button kind="tertiary" size="sm">
+                      Action 3
+                    </Button>
+                  </Tearsheet.HeaderActionItem>
+                </Tearsheet.HeaderActions>
+              }
+            ></Tearsheet.HeaderContent>
+          </Tearsheet.Header>
+          <Tearsheet.Influencer
+            influencerPanelOpen={influencerPanelOpen}
+            onInfluencerPanelClose={() => setInfluencerPanelOpen(false)}
+          >
+            <ProgressIndicator vertical>
+              <ProgressStep
+                complete={currentStep > 1}
+                current={currentStep === 1}
+                label="Step 1"
+                secondaryLabel="Optional label"
+              />
+              <ProgressStep
+                complete={currentStep > 2}
+                current={currentStep === 2}
+                label="Step 2"
+              />
+              <ProgressStep
+                current={currentStep === 3}
+                label="Step 3"
+                complete={currentStep > 3}
+              />
+            </ProgressIndicator>
+          </Tearsheet.Influencer>
+          <Tearsheet.Body>
+            <Tearsheet.MainContent>
+              <div className="influencerPanelTrigger">
+                <IconButton
+                  kind="ghost"
+                  label="Open influencer"
+                  onClick={() => setInfluencerPanelOpen(true)}
+                >
+                  <RightPanelClose />
+                </IconButton>
+              </div>
+              <div className="rightPanelTrigger">
+                <IconButton
+                  kind="ghost"
+                  label="Open right panel"
+                  onClick={() => setRightPanelOpen(true)}
+                >
+                  <RightPanelClose />
+                </IconButton>
+              </div>
+
+              <Section className="main-content">
+                <Heading>Main content heading</Heading>
+
+                <Form>
+                  <FormGroup
+                    legendId="tearsheet-form-group"
+                    legendText="FormGroup Legend"
+                  >
+                    <TextInput
+                      id="tss-ft1"
+                      labelText="Enter an important value here"
+                    />
+                    <TextInput
+                      id="tss-ft2"
+                      labelText="Here is an entry field:"
+                    />
+                    <NumberInput
+                      className="some-class"
+                      id="number-input-1"
+                      label="Number Input"
+                      min={0}
+                      max={100}
+                      value={50}
+                      step={10}
+                      iconDescription="Add/decrement number"
+                    />
+                  </FormGroup>
+                  <FormGroup
+                    legendId="tearsheet-form-group"
+                    legendText="FormGroup Legend"
+                  >
+                    <TextInput
+                      id="tss-ft1"
+                      labelText="Enter an important value here"
+                    />
+                    <TextInput
+                      id="tss-ft2"
+                      labelText="Here is an entry field:"
+                    />
+                    <NumberInput
+                      className="some-class"
+                      id="number-input-1"
+                      label="Number Input"
+                      min={0}
+                      max={100}
+                      value={50}
+                      step={10}
+                      iconDescription="Add/decrement number"
+                    />
+                  </FormGroup>
+                  <FormGroup
+                    legendId="tearsheet-form-group"
+                    legendText="FormGroup Legend"
+                  >
+                    <TextInput
+                      id="tss-ft1"
+                      labelText="Enter an important value here"
+                    />
+                    <TextInput
+                      id="tss-ft2"
+                      labelText="Here is an entry field:"
+                    />
+                    <NumberInput
+                      className="some-class"
+                      id="number-input-1"
+                      label="Number Input"
+                      min={0}
+                      max={100}
+                      value={50}
+                      step={10}
+                      iconDescription="Add/decrement number"
+                    />
+                  </FormGroup>
+                  <FormGroup
+                    legendId="tearsheet-form-group"
+                    legendText="FormGroup Legend"
+                  >
+                    <TextInput
+                      id="tss-ft1"
+                      labelText="Enter an important value here"
+                    />
+                    <TextInput
+                      id="tss-ft2"
+                      labelText="Here is an entry field:"
+                    />
+                    <NumberInput
+                      className="some-class"
+                      id="number-input-1"
+                      label="Number Input"
+                      min={0}
+                      max={100}
+                      value={50}
+                      step={10}
+                      iconDescription="Add/decrement number"
+                    />
+                  </FormGroup>
+                </Form>
+              </Section>
+            </Tearsheet.MainContent>
+
+            <Tearsheet.SummaryContent
+              rightPanelOpen={rightPanelOpen}
+              onRightPanelClose={() => setRightPanelOpen(false)}
+            >
+              <Heading className="rightPanelHeading">Panel heading</Heading>
+              <div className="rightDetailsBody">
+                <div>
+                  <label>item 1</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 2</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 3</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 4</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 5</label>
+                  <p>item description</p>
+                </div>
+              </div>
+            </Tearsheet.SummaryContent>
+          </Tearsheet.Body>
+          <Tearsheet.Footer>
+            <div className="default__action-buttons">
+              <Button
+                className="step-action-button step-action-button__cancel"
+                kind="ghost"
+                onClick={() => console.log('clicked')}
+                size="xl"
+              >
+                Cancel
+              </Button>
+              <Button
+                className="step-action-button"
+                kind="secondary"
+                onClick={() => {
+                  handlePrevious();
+                }}
+                size="xl"
+              >
+                Back
+              </Button>
+              <Button size="xl" className="step-action-button">
+                {'Submit'}
+              </Button>
+            </div>
+          </Tearsheet.Footer>
+        </Tearsheet>
+      </Tabs>
+    </>
+  );
+};

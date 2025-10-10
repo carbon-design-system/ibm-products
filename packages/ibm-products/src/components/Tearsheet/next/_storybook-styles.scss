@@ -11,6 +11,13 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/breakpoint' as *;
 
+$block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
+@mixin hideAtLargeScreens() {
+  @include hide-at-lg;
+  @include hide-at-md;
+  @include hide-at-xlg;
+}
+
 .default__action-buttons {
   display: grid;
   grid-auto-rows: minmax(auto, auto);
@@ -30,25 +37,27 @@
   position: absolute;
   inset-block-start: 0;
   inset-inline-end: 0;
-  @include hide-at-lg;
-  @include hide-at-md;
-  @include hide-at-xlg;
 }
 
 .influencerPanelTrigger {
   position: absolute;
   inset-block-start: 0;
   inset-inline-start: 0;
-  @include hide-at-lg;
-  @include hide-at-md;
-  @include hide-at-xlg;
+}
+
+.#{$block-class__next}:not(.#{$block-class__next}--narrow) {
+  .rightPanelTrigger,
+  .influencerPanelTrigger {
+    @include hideAtLargeScreens();
+  }
 }
 
 .rightPanelHeading {
   @include type.type-style('heading-03');
 }
-@include breakpoint-down(md) {
-  .main-content {
-    margin-block-start: $spacing-05;
-  }
+
+.#{$block-class__next}__influencer,
+.#{$block-class__next}__main-content,
+.#{$block-class__next}__summary-content {
+  padding-block-start: $spacing-07;
 }

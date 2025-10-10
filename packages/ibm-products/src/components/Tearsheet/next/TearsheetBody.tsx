@@ -17,8 +17,6 @@ import React, {
 
 import { blockClass, TearsheetContext } from './context';
 import { SidePanel } from '../../SidePanel';
-import { breakpoints } from '@carbon/layout';
-import { useMatchMedia } from './useMatchMedia';
 import { Layer } from '@carbon/react';
 
 /**
@@ -183,9 +181,7 @@ export interface SummaryContentProps {
 }
 export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
   ({ children, className, rightPanelOpen = false, onRightPanelClose }, ref) => {
-    const { variant } = useContext(TearsheetContext);
-    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-    const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
+    const { isSm } = useContext(TearsheetContext);
 
     return !isSm ? (
       <div className={`${blockClass}__summary-content ${className}`} ref={ref}>
@@ -226,9 +222,7 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
     },
     ref
   ) => {
-    const { variant } = useContext(TearsheetContext);
-    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-    const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
+    const { isSm } = useContext(TearsheetContext);
 
     return !isSm ? (
       <aside className={`${blockClass}__influencer ${className}`} ref={ref}>

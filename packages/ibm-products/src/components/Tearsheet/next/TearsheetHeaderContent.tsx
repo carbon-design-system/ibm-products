@@ -5,15 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  DefinitionTooltip,
-  usePrefix,
-  unstable_Text as Text,
-} from '@carbon/react';
-import React, { ReactNode, useLayoutEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import cx from 'classnames';
-import { blockClass } from './context';
+import { blockClass, TearsheetContext } from './context';
 import { TruncatedText } from '../../TruncatedText';
 import { CarbonIconType } from '@carbon/react/icons';
 
@@ -53,7 +47,7 @@ const TearsheetHeaderContent = React.forwardRef<
     headerActions,
     ...rest
   } = props;
-
+  const { isSm } = useContext(TearsheetContext);
   return (
     <div className={`${blockClass}__header-content-wrapper`}>
       <div className={`${blockClass}__header-content`}>
@@ -72,7 +66,7 @@ const TearsheetHeaderContent = React.forwardRef<
               }
             )}
           >
-            {Icon && <Icon size={32} />}
+            {!isSm && Icon && <Icon size={32} />}
             <TruncatedText
               id={`${blockClass}__header-title__truncatedText`}
               className={`${blockClass}__content__title`}

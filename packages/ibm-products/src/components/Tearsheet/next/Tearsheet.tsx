@@ -155,7 +155,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     const bodyRef = useRef(undefined);
     const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-    const isSm = useMatchMedia(smMediaQuery);
+    const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
 
     const [hasCloseIcon, setHasCloseIcon] = useState(true);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
@@ -205,6 +205,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
           disableHeaderCollapse,
           setDisableHeaderCollapse,
           variant,
+          isSm,
         }}
       >
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>

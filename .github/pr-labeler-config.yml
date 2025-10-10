@@ -16,6 +16,6 @@
 #
 # @see https://github.com/marketplace/actions/regex-issue-labeler
 
-# a11y labels, case insensitive
+# Code connect label
 'status: needs code connect review':
   - '/(code connect)/i'

@@ -1,7 +1,7 @@
 name: 'PR Labeler'
 on:
-  issues:
-    types: [opened, edited]
+  pull_request:
+    types: [opened, reopened]
 
 permissions:
   issues: write

@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  label-issues:
+  label-pr:
     # do not run on forks
     if: github.repository == 'carbon-design-system/ibm-products'
     runs-on: ubuntu-latest

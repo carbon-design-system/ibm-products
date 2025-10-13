@@ -8,14 +8,30 @@
 import React from 'react';
 import { EmptyState } from './EmptyState';
 import figma from '@figma/code-connect';
+import { Add } from '@carbon/icons-react';
 
 figma.connect(
   EmptyState,
   'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=420-2434&t=lbewdWdJ4JB5izcw-4',
   {
     props: {
-      action: figma.boolean('Button'),
-      link: figma.boolean('Link'),
+      action: figma.boolean('Button', {
+        true: {
+        text: 'Button',
+        onClick: () => console.log("clicked empty state action button'),"),
+        renderIcon: (props) => <Add size={20} {...props} />,
+        iconDescription: 'Add icon',
+      },
+    false: undefined,
+    }),
+      link: figma.boolean('Link', {
+        true: {
+        text: 'Link',
+        href: 'https://www.carbondesignsystem.com',
+        target: '_blank',
+      },
+      false: undefined,
+    }),
       size: figma.enum('Size', {
         Large: 'lg',
         Small: 'sm',
@@ -26,6 +42,10 @@ figma.connect(
         Left: 'left',
         Bottom: 'bottom'
       }),
+      illustration: figma.boolean('Illustration', {
+        true: './path/to/illustration.svg',
+        false: undefined,
+      }),
       title: figma.string('Title text'),
       subtitle: figma.string('Subtitle text'),
     },
@@ -35,6 +55,7 @@ figma.connect(
         subtitle={props.subtitle}
         size={props.size}
         illustrationPosition={props.illustrationPosition}
+        illustration={props.illustration}
         action={props.action}
         link={props.link}
       >

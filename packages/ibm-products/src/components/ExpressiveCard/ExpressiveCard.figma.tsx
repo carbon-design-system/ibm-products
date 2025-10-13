@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 import { ExpressiveCard } from './ExpressiveCard';
 import { AspectRatio } from '@carbon/react';
 import { ArrowRight, Cloud } from '@carbon/react/icons';

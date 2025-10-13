@@ -2002,7 +2002,7 @@ __metadata:
     eslint: "npm:^9.14.0"
     eslint-config-carbon: "npm:^3.25.0"
     globby: "npm:^15.0.0"
-    happy-dom: "npm:^19.0.0"
+    happy-dom: "npm:^20.0.0"
     lit: "npm:^3.1.0"
     playwright: "npm:^1.51.1"
     postcss: "npm:^8.4.47"
@@ -2082,7 +2082,7 @@ __metadata:
     rollup-plugin-strip-banner: "npm:^3.1.0"
     sass: "npm:^1.85.1"
     storybook: "npm:^9.0.8"
-    typescript-config-carbon: "npm:^0.7.0"
+    typescript-config-carbon: "npm:^0.8.0"
     vite: "npm:^7.0.0"
     yargs: "npm:^18.0.0"
   peerDependencies:
@@ -13308,14 +13308,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^19.0.0":
-  version: 19.0.2
-  resolution: "happy-dom@npm:19.0.2"
+"happy-dom@npm:^20.0.0":
+  version: 20.0.0
+  resolution: "happy-dom@npm:20.0.0"
   dependencies:
     "@types/node": "npm:^20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
     whatwg-mimetype: "npm:^3.0.0"
-  checksum: 10/cca23fa7c12ed73307be93a312b389d2c9e5497a647d884ab2c8684833824e369137ee8a3496a9abdaf08a1ed02b1af925c6f661cf29ef6a90c675c0bc11ce5f
+  checksum: 10/0fa626e2051dfa5f1ea0da9e3776b5986d3700c261a8ba7c496e7ad89f4df0318920b7c286d3b310481712b378ffb7dee35ed782ff039e4166f4ba957a76b6df
   languageName: node
   linkType: hard
 
@@ -22241,12 +22241,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-config-carbon@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "typescript-config-carbon@npm:0.7.0"
+"typescript-config-carbon@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "typescript-config-carbon@npm:0.8.0"
   dependencies:
     typescript: "npm:^5.7.3"
-  checksum: 10/8db388a82e5546cf94a7c5fe334a6fe560a3d852e36903388b1ebcb71915a6a0a5b1bbefe9c21757336bd8db1956047824e65a29be033520fcefde288b835501
+  checksum: 10/c4c415ddab4439d626ca8785a2d036b6f2e635ddf6b8a0b9d06a2ae435e69097be05861509314ea4e9da489891f775e23ea40ab12b60c5629c4bd2a852f3f711
   languageName: node
   linkType: hard
 

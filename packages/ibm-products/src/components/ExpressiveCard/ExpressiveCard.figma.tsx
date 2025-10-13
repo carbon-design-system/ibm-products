@@ -134,31 +134,6 @@ figma.connect(
           'Icon only': undefined,
         }),
       }),
-
-      // actionIcons: figma.instance('Action icons'),
-      // decorator: figma.instance('Decorator'),
-      // description: figma.string('Description'),
-      // label: figma.string('Label'),
-      // media: figma.instance('Media'),
-      // mediaPosition: figma.enum('Options', {
-      //   top: 'Top',
-      //   left: 'Left',
-      // }),
-      // pictogram: figma.instance('Pictogram'),
-      // primaryButtonIcon: figma.instance('Primary button icon'),
-      // primaryButtonKind: figma.enum('Primary button kind', {
-      //   primary: 'Primary',
-      //   ghost: 'Ghost',
-      // }),
-      // primaryButtonText: figma.string('Primary button text'),
-      // secondaryButtonIcon: figma.instance('Secondary button icon'),
-      // secondaryButtonKind: figma.enum('Secondary button kind', {
-      //   secondary: 'Secondary',
-      //   ghost: 'Ghost',
-      // }),
-      // secondaryButtonText: figma.string('Secondary button text'),
-      // slug: figma.instance('Slug'),
-      // title: figma.string('Title'),
     },
     example: (props) => (
       <ExpressiveCard

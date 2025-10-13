@@ -220,6 +220,7 @@ collect:
         - noResultsTitle
         - noSelectionDescription
         - noSelectionTitle
+        - noTearsheet
         - noTrailingSlash
         - onActiveCellChange
         - onAddItem

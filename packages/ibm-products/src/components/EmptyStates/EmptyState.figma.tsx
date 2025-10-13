@@ -17,21 +17,21 @@ figma.connect(
     props: {
       action: figma.boolean('Button', {
         true: {
-        text: 'Button',
-        onClick: () => console.log("clicked empty state action button'),"),
-        renderIcon: (props) => <Add size={20} {...props} />,
-        iconDescription: 'Add icon',
-      },
-    false: undefined,
-    }),
+          text: 'Button',
+          onClick: () => console.log("clicked empty state action button'),"),
+          renderIcon: (props) => <Add size={20} {...props} />,
+          iconDescription: 'Add icon',
+        },
+        false: undefined,
+      }),
       link: figma.boolean('Link', {
         true: {
-        text: 'Link',
-        href: 'https://www.carbondesignsystem.com',
-        target: '_blank',
-      },
-      false: undefined,
-    }),
+          text: 'Link',
+          href: 'https://www.carbondesignsystem.com',
+          target: '_blank',
+        },
+        false: undefined,
+      }),
       size: figma.enum('Size', {
         Large: 'lg',
         Small: 'sm',
@@ -40,7 +40,7 @@ figma.connect(
         Top: 'top',
         Right: 'right',
         Left: 'left',
-        Bottom: 'bottom'
+        Bottom: 'bottom',
       }),
       illustration: figma.boolean('Illustration', {
         true: './path/to/illustration.svg',
@@ -58,8 +58,7 @@ figma.connect(
         illustration={props.illustration}
         action={props.action}
         link={props.link}
-      >
-      </EmptyState>
+      ></EmptyState>
     ),
   }
 );

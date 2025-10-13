@@ -114,7 +114,7 @@ const sampleDecorator = (decorator) => {
 //   ariaLabel: 'Interstitial Screen',
 // };
 export const Default = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   const currentStep = 1;
   const [rightPanelOpen, setRightPanelOpen] = useState(false);
@@ -127,7 +127,7 @@ export const Default = () => {
         }}
         ref={launcherButtonRef}
       >
-        Show Interstitial modal
+        Open Tearsheet
       </Button>
 
       <Tearsheet
@@ -390,7 +390,7 @@ export const Default = () => {
   );
 };
 export const WithTabs = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   return (
     <>
@@ -400,7 +400,7 @@ export const WithTabs = () => {
         }}
         ref={launcherButtonRef}
       >
-        Show Interstitial modal
+        Open Tearsheet
       </Button>
       <Tabs>
         <Tearsheet
@@ -520,7 +520,7 @@ export const WithTabs = () => {
 };
 
 export const withSteps = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   return (
     <StepProvider>
@@ -530,7 +530,7 @@ export const withSteps = () => {
         }}
         ref={launcherButtonRef}
       >
-        Show Interstitial modal
+        Open Tearsheet
       </Button>
 
       <TearsheetWithSteps open={open} setOpen={setOpen} />
@@ -539,7 +539,7 @@ export const withSteps = () => {
 };
 
 export const withStepsAndHorizontalProgressIndicator = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   const currentStep = 1;
   const [text, setText] = useState('');
@@ -551,7 +551,7 @@ export const withStepsAndHorizontalProgressIndicator = () => {
         }}
         ref={launcherButtonRef}
       >
-        Show Interstitial modal
+        Open Tearsheet
       </Button>
 
       <TearsheetWithSteps
@@ -563,7 +563,7 @@ export const withStepsAndHorizontalProgressIndicator = () => {
   );
 };
 export const narrowTearsheet = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [rightPanelOpen, setRightPanelOpen] = useState(false);
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
   const launcherButtonRef = useRef(null);
@@ -576,7 +576,7 @@ export const narrowTearsheet = () => {
         }}
         ref={launcherButtonRef}
       >
-        Show Interstitial modal
+        Open Tearsheet
       </Button>
       <Tabs>
         <Tearsheet

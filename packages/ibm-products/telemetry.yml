@@ -44,6 +44,7 @@ collect:
         - breadcrumbOverflowTooltipAlign
         - breadcrumbs
         - button
+        - buttonProps
         - cancelButtonText
         - caret
         - cellSize
@@ -219,6 +220,7 @@ collect:
         - noResultsTitle
         - noSelectionDescription
         - noSelectionTitle
+        - noTearsheet
         - noTrailingSlash
         - onActiveCellChange
         - onAddItem
@@ -545,8 +547,6 @@ collect:
         - overlayRef
         - position
         - positionTune
-        # CoachmarkBeacon
-        - buttonProps
         # CoachmarkDragbar
         - a11yKeyboardHandler
         - onDrag
@@ -867,6 +867,9 @@ collect:
         - expandText
         # PageHeaderTabBar
         - scroller
+        # PageHeaderTagOverflow
+        - renderOverflowTag
+        - renderPopoverContent
         # PageHeaderTitle
         - blockClass
         - hasBreadcrumbRow

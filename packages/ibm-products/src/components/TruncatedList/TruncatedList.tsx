@@ -34,7 +34,7 @@ const defaults = {
   expandedItemsLimit: 10,
   onClick: () => {},
   viewLessLabel: 'View less',
-  viewMoreLabel: (value) => `View more (${value})`,
+  viewMoreLabel: (value: number) => `View more (${value})`,
 };
 
 export interface TruncatedListProps extends PropsWithChildren {
@@ -73,7 +73,7 @@ export interface TruncatedListProps extends PropsWithChildren {
   /**
    * Callback function for building the label when the list is collapsed.
    */
-  viewMoreLabel?: (value: any) => ReactNode;
+  viewMoreLabel?: (value: number) => ReactNode;
 }
 /**
  * The `TruncatedList` allows consumers to control how many items are

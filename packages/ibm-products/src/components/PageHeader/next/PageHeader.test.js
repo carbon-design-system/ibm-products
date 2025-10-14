@@ -50,6 +50,52 @@ const carbonPrefix = 'cds';
 
 describe('PageHeader', () => {
   describe('export configuration', () => {
+    let savedObserverCb;
+
+    beforeEach(() => {
+      window.ResizeObserver = jest.fn().mockImplementation((cb) => {
+        savedObserverCb = cb;
+        return {
+          observe: jest.fn(),
+          unobserve: jest.fn(),
+          disconnect: jest.fn(),
+        };
+      });
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    // Triggers resize from the saved resize observer callback
+    const triggerResize = (element, width = 500) =>
+      act(() => {
+        savedObserverCb([{ target: element, contentRect: { width } }]);
+      });
+
+    it('should update css variable for sticky positioning', () => {
+      const testId = 'page-header-next-test-id';
+      render(
+        <PageHeader.Root data-testid={testId}>
+          <PageHeader.BreadcrumbBar />
+          <PageHeader.Content title="title" />
+          <PageHeader.TabBar />
+        </PageHeader.Root>
+      );
+      triggerResize();
+      const computedStyle = window.getComputedStyle(screen.getByTestId(testId));
+      expect(
+        computedStyle.getPropertyValue(
+          `--${pkg.prefix}--page-header-header-top`
+        )
+      ).toBeDefined();
+      expect(
+        computedStyle.getPropertyValue(
+          `--${pkg.prefix}--page-header-breadcrumb-top`
+        )
+      ).toBeDefined();
+    });
+
     it('supports dot notation component namespacing from the main entrypoint', () => {
       const { container } = render(
         <PageHeader.Root>
@@ -220,6 +266,7 @@ describe('PageHeader', () => {
           <PageHeader.Content className="custom-class" title="title" />
         </PageHeader.Root>
       );
+      expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument();
       expect(container.firstChild.firstChild).toHaveClass('custom-class');
     });
 
@@ -286,7 +333,7 @@ describe('PageHeader', () => {
     });
 
     it('should render page actions', () => {
-      const { container } = render(
+      render(
         <PageHeader.Root>
           <PageHeader.Content
             title="title"
@@ -755,7 +802,7 @@ describe('PageHeader', () => {
     );
 
     describe('Overflow functionality', () => {
-      it.only('should handle overflow items correctly', () => {
+      it('should handle overflow items correctly', () => {
         render(<WithTagOverflow />);
 
         act(() => {
@@ -785,7 +832,7 @@ describe('PageHeader', () => {
         expect(overflowButton).toHaveAttribute('aria-expanded', 'false');
       });
 
-      it.only('should not show overflow tag when all items are visible', () => {
+      it('should not show overflow tag when all items are visible', () => {
         render(<WithTagOverflow />);
 
         // All tags should be visible
@@ -807,6 +854,13 @@ describe('PageHeader', () => {
       it('should show hidden tags in popover when overflow tag is clicked', async () => {
         render(<WithTagOverflow />);
 
+        act(() => {
+          mockOverflowOnChange(
+            [], // visible tags
+            mockTags // hidden tags
+          );
+        });
+
         const overflowButton = screen.getByRole('button', { name: '+6' });
 
         // Initially popover should be closed
@@ -823,6 +877,13 @@ describe('PageHeader', () => {
 
       it('should close popover when clicked outside', async () => {
         render(<WithTagOverflow />);
+
+        act(() => {
+          mockOverflowOnChange(
+            [], // visible tags
+            mockTags // hidden tags
+          );
+        });
 
         const overflowButton = screen.getByRole('button', { name: '+6' });
 
@@ -845,6 +906,13 @@ describe('PageHeader', () => {
 
       it('should handle window resize by closing popover', async () => {
         render(<WithTagOverflow />);
+
+        act(() => {
+          mockOverflowOnChange(
+            [], // visible
+            mockTags // no hidden elements
+          );
+        });
 
         const overflowButton = screen.getByRole('button', { name: '+6' });
 

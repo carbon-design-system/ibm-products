@@ -30,8 +30,12 @@ export const initCarousel = (
 
   const minHeight = 4; // 10 rem
 
-  const { onViewChangeStart, onViewChangeEnd, excludeSwipeSupport } =
-    config || {};
+  const {
+    onViewChangeStart,
+    onViewChangeEnd,
+    excludeSwipeSupport,
+    useMaxHeight,
+  } = config || {};
 
   /**
    * Registers an HTMLElement at a specific index in the refs array.
@@ -238,6 +242,8 @@ export const initCarousel = (
    */
   const performAnimation = (isInitial: boolean) => {
     let itemHeightSmallest = 0;
+    let itemHeightMaximum = 0;
+
     Array.from(viewItems).forEach((viewItem: HTMLElement, index) => {
       const stackIndex = viewIndexStack.findIndex((idx) => idx === index);
       const stackIndexInstanceCount = previousViewIndexStack.filter(
@@ -269,15 +275,25 @@ export const initCarousel = (
         registerRef(index, viewItem);
 
         setTimeout(() => {
-          if (
-            !itemHeightSmallest ||
-            (viewItem.offsetHeight < itemHeightSmallest &&
-              itemHeightSmallest > remToPx(minHeight))
-          ) {
-            itemHeightSmallest = viewItem.offsetHeight;
+          if (useMaxHeight) {
+            const heights: number[] = Array.from(viewItems).map(
+              (viewItem) => viewItem.scrollHeight
+            );
+            itemHeightMaximum = Math.max(...heights);
+
+            viewItem.style.position = 'absolute';
+            updateHeightForWrapper(itemHeightMaximum);
+          } else {
+            if (
+              !itemHeightSmallest ||
+              (viewItem.offsetHeight < itemHeightSmallest &&
+                itemHeightSmallest > remToPx(minHeight))
+            ) {
+              itemHeightSmallest = viewItem.offsetHeight;
+            }
+            viewItem.style.position = 'absolute';
+            updateHeightForWrapper(itemHeightSmallest);
           }
-          viewItem.style.position = 'absolute';
-          updateHeightForWrapper(itemHeightSmallest);
         });
 
         const listener = (e: Event) => {

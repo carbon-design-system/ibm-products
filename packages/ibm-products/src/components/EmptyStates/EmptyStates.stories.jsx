@@ -1,50 +1,100 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import { action } from 'storybook/actions';
+import { action as storybookAction } from 'storybook/actions';
 import { Add, Information } from '@carbon/react/icons';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 import { EmptyState } from '.';
-import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+import mdx from './EmptyState.mdx';
 import { Tooltip } from '@carbon/react';
 
 export default {
   title: 'Patterns/Prebuilt patterns/Empty states/EmptyState',
   component: EmptyState,
   tags: ['autodocs'],
+  argTypes: {
+    subtitle: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'default',
+          1: 'with tooltip',
+        },
+      },
+      options: [0, 1],
+      mapping: { 0: 'default', 1: 'withTooltip' },
+    },
+  },
   parameters: {
     // styles,
     docs: {
-      page: () => (
-        <StoryDocsPage
-          altGuidelinesHref={[
-            {
-              href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon empty states pattern',
-            },
-          ]}
-        />
-      ),
+      page: mdx,
     },
   },
 };
 
 const emptyStateCommonProps = {
   title: 'Start by adding data assets',
-  subtitle: (
-    <>
-      Click <span>Upload assets</span> to upload your data
-    </>
-  ),
+  subtitle: 'default',
 };
 
-const Template = (args) => {
-  return <EmptyState {...args} />;
+const Template = ({ ...args }, context) => {
+  const sbDocs = context.viewMode !== 'docs';
+  const { subtitle, action } = args;
+
+  const getSubTitle = () => {
+    return (
+      <>
+        Click <span>Upload assets</span> to upload your data
+      </>
+    );
+  };
+  const getSubTitleWithTooltip = () => {
+    return (
+      <>
+        Click <span>here</span> to upload your data
+        <Tooltip label="Facts and statistics collected together for reference or analysis">
+          <Information size="16" />
+        </Tooltip>
+      </>
+    );
+  };
+
+  const getAction = (icon = undefined) => {
+    const actionObj = {
+      text: 'Create new',
+      onClick: () => {
+        sbDocs
+          ? storybookAction('Clicked empty state action button')()
+          : console.log('Clicked empty state action button');
+      },
+    };
+
+    if (icon) {
+      return {
+        ...actionObj,
+        renderIcon: (props) => <Add size={20} {...props} />,
+        iconDescription: 'Add icon',
+      };
+    }
+
+    return actionObj;
+  };
+
+  return (
+    <EmptyState
+      {...args}
+      subtitle={
+        subtitle === 'default' ? getSubTitle() : getSubTitleWithTooltip()
+      }
+      action={typeof action === 'boolean' && getAction(action)}
+    />
+  );
 };
 
 export const Default = Template.bind({});
@@ -55,14 +105,7 @@ Default.args = {
 export const WithTooltipInSubtitle = Template.bind({});
 WithTooltipInSubtitle.args = {
   ...emptyStateCommonProps,
-  subtitle: (
-    <>
-      Click <span>here</span> to upload your data
-      <Tooltip label="Facts and statistics collected together for reference or analysis">
-        <Information size="16" />
-      </Tooltip>
-    </>
-  ),
+  subtitle: 'withTooltip',
 };
 
 export const WithCustomIllustration = Template.bind({});
@@ -75,21 +118,13 @@ WithCustomIllustration.args = {
 export const withAction = Template.bind({});
 withAction.args = {
   ...emptyStateCommonProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-  },
+  action: false,
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
   ...emptyStateCommonProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-    renderIcon: (props) => <Add size={20} {...props} />,
-    iconDescription: 'Add icon',
-  },
+  action: true,
 };
 
 export const withLink = Template.bind({});
@@ -105,12 +140,7 @@ withLink.args = {
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
   ...emptyStateCommonProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-    renderIcon: (props) => <Add size={20} {...props} />,
-    iconDescription: 'Add icon',
-  },
+  action: true,
   link: {
     text: 'View documentation',
     href: 'https://www.carbondesignsystem.com',

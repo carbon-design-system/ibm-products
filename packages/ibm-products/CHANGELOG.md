@@ -1,4 +1,30 @@
-## `@carbon/ibm-products@2.76.0-rc.0`
+## `@carbon/ibm-products@2.77.0-rc.0`
+### Features :rocket:
+- feat(ImportAndUploadModal): implement as patterns (#8348)
+- feat(coachmarkStacked): implemented as patterns (#8317)
+- feat(UserAvatar): code connect (#8264)
+- feat(EmptyState): integration of open in Stackblitz (#8373)
+- feat: add support for react server components via `use client` directive (#8358)
+- feat(code-connect): add web component code connect config setup (#8387)
+- feat(FullPageError): Code connect file added (#8331)
+- feat: code connect file for TagSet (#8332)
+- feat(OptionsTile): Code connect (#8291)
+- feat: addselect notearsheet implementation (#8259)
+- feat(AboutModal): added code connect file (#8353)
+- feat(ExportModal): implement export modal as a pattern (#8234)
+
+### Bug fixes :bug:
+- fix(guidebanner): add prop to control open state (#8294)
+- fix(PageHeader): use section and heading components for heading levels (#8356)
+
+### Housekeeping :house:
+- chore(deps): update dependency typescript-config-carbon to ^0.8.0 (#8443)
+- chore: init code connect for cards (#8258)
+- chore(storybook): use theme tokens for sb doc previews (#8396)
+- test(coachmarkTagline): add test (#8292)
+- test(PageHeader): increases coverage, removes .only in test (#8260)
+
+## `@carbon/ibm-products@2.76.0`
 ### Features :rocket:
 - feat(CoachmarkFixed): implemented as patterns (#8221)
 - feat(pattern): delete and remove (#8268)

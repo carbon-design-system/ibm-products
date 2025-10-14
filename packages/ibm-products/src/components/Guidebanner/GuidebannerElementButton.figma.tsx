@@ -22,10 +22,7 @@ figma.connect(
   'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=17606%3A27272',
   {
     props: {
-      children: figma.enum('State', {
-        Enabled: figma.string('Text'),
-        Hover: figma.string('Text'),
-      }),
+      children: figma.textContent('Button'),
     },
     example: (props) => (
       <GuidebannerElementButton>{props.children}</GuidebannerElementButton>

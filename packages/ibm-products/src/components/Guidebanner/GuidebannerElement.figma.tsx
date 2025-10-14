@@ -26,12 +26,6 @@ figma.connect(
         'Plain text': 'plain-text',
         'Non linear': 'non-linear',
       }),
-      // button: figma.enum('CTA', {
-      //   "Tertiary button": "tertiary-button",
-      //   "Ghost button": "ghost-button",
-      //   "Link": "link",
-      //   "No CTA": "no-cta"
-      // })
       button: figma.children('_Guide banner button'),
     },
     example: (props) => (

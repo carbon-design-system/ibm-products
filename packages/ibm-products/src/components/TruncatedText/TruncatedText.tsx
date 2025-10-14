@@ -54,7 +54,7 @@ interface TruncatedTextProps {
 const blockClass = `${pkg.prefix}--truncated-text`;
 const componentName = 'TruncatedText';
 
-export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
+export const TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
   (props, ref) => {
     const {
       align = 'top',
@@ -144,7 +144,5 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
     );
   }
 );
-
-TruncatedText = pkg.checkComponentEnabled(TruncatedText, componentName);
 
 TruncatedText.displayName = componentName;

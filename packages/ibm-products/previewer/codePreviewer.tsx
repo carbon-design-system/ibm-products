@@ -27,12 +27,18 @@ interface ComponentSources {
   unknown: string[];
 }
 
+type statusType = null | {
+  preview?: string[];
+  previewCandidate?: string[];
+};
+
 interface previewerObject {
   story: any;
   customImports: string[];
   customFunctionDefs: string[];
   styles: string;
   title: string;
+  status?: statusType;
 }
 export const stackblitzPrefillConfig = async ({
   story,
@@ -40,6 +46,7 @@ export const stackblitzPrefillConfig = async ({
   customFunctionDefs = [],
   styles,
   title,
+  status = null,
 }: previewerObject) => {
   const { args } = story;
   const productComponents = await import('../src/index');
@@ -48,7 +55,13 @@ export const stackblitzPrefillConfig = async ({
     story.parameters.docs.source.originalSource,
     args
   );
-  const app = appGenerator(storyCode, customImports, customFunctionDefs, args);
+  const app = appGenerator(
+    storyCode,
+    customImports,
+    customFunctionDefs,
+    args,
+    status
+  );
   let styleImport = style;
   if (styles) {
     // This regex matches multi-line comments that start with /* and end with */
@@ -95,7 +108,7 @@ const filterStoryCode = (storyCode, args) => {
     .replace(/^"|"$/g, '')
     .replace(/onChange=\{(args\.onChange|action\('onChange'\))\}\s*/g, '')
     .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
-  Object.entries(args).forEach(([key, value]) => {
+  Object.entries((args = {})).forEach(([key, value]) => {
     const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const templateLiteralRegex = new RegExp(
       `\\$\\{\\s*args\\.${escapedKey}\\s*\\}`,
@@ -132,17 +145,35 @@ const appGenerator = (
   storyCode: string,
   customImports: Array<string>,
   customFunctionDefs: Array<string>,
-  args: any
+  args: any,
+  status: statusType
 ) => {
   const {
     carbon: matchedCarbonComponents,
     ibmProducts: matchedComponents,
     icons: matchedIcons,
     unknown: unknownComponents,
-  } = findComponentsInCode(storyCode);
+  } = findComponentsInCode(storyCode, status);
   if (unknownComponents.length > 0) {
     storyCode = removeUnknownComponents(storyCode, unknownComponents);
   }
+  const getProductsImports = (imports: string[]) => {
+    const getImportSpecifiers = (names: string[]) => {
+      return names.map((name) => {
+        if (
+          name.startsWith('preview__') ||
+          name.startsWith('previewCandidate__')
+        ) {
+          return `${name} as ${name.replace(/^(preview__|previewCandidate__)/, '')}`;
+        }
+        return name;
+      });
+    };
+    return imports.length > 0
+      ? `import { ${getImportSpecifiers(imports)} } from "@carbon/ibm-products";`
+      : '';
+  };
+
   const foundHooks = detectReactHooks(storyCode);
   const hooksString = foundHooks.join(', ');
   const regex = /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)/;
@@ -152,7 +183,7 @@ const appGenerator = (
   const app = `
   import React ${hooksString != '' ? `, { ${hooksString} }` : ''} from 'react';
   ${customImports?.length > 0 ? customImports?.map((customImport) => customImport) : ''}
-  ${matchedComponents.length > 0 ? `import { ${matchedComponents.join(', ')} } from "@carbon/ibm-products";` : ''}
+  ${getProductsImports(matchedComponents)}
   ${matchedCarbonComponents.length > 0 ? `import { ${matchedCarbonComponents.join(', ')} } from "@carbon/react";` : ''}
   ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
   export default function App() {
@@ -167,8 +198,24 @@ const appGenerator = (
   return app;
 };
 
-const findComponentsInCode = (code: string): ComponentSources => {
-  const componentRegex = /<([A-Z][a-zA-Z0-9]*)(?:\s|>)/g;
+// Returns either `preview` or `previewCandidate` if value is found within
+// one of those properties from the `status`. Otherwise we return null
+const findPropertyContainingValue = (obj: statusType, value: string) => {
+  for (const prop in obj) {
+    if (
+      Object.prototype.hasOwnProperty.call(obj, prop) &&
+      Array.isArray(obj[prop])
+    ) {
+      if (obj[prop].includes(value)) {
+        return prop;
+      }
+    }
+  }
+  return null;
+};
+
+const findComponentsInCode = (code: string, status): ComponentSources => {
+  const componentRegex = /<([A-Z][a-zA-Z0-9]*)(?:\s|>|.)/g;
   const matches: string[] = [];
 
   let match: RegExpExecArray | null;
@@ -182,11 +229,25 @@ const findComponentsInCode = (code: string): ComponentSources => {
     icons: [],
     unknown: [],
   };
+
   componentNamesInCode.forEach((component) => {
     if (carbonComponentNames.includes(component)) {
       result.carbon.push(component);
     } else if (componentNames.includes(component)) {
-      result.ibmProducts.push(component);
+      // status: {
+      //   preview: string[] of component names
+      //   previewCandidate: string[] of component names
+      // }
+      if (status) {
+        const foundStatus = findPropertyContainingValue(status, component);
+        if (foundStatus === 'preview' || foundStatus === 'previewCandidate') {
+          result.ibmProducts.push(`${foundStatus}__${component}`);
+        } else {
+          result.ibmProducts.push(component);
+        }
+      } else {
+        result.ibmProducts.push(component);
+      }
     } else if (iconsNames.includes(component)) {
       result.icons.push(component);
     } else {

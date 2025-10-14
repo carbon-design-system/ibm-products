@@ -5,10 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { cloneElement } from 'react';
-import { Add } from '@carbon/icons-react';
 import { preview__PageHeader as PageHeader, TruncatedText } from '../..';
 import {
-  PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
   PageHeaderTabBar,
@@ -38,8 +36,15 @@ import image1 from './_story-assets/2x1.jpg';
 import image2 from './_story-assets/3x2.jpg';
 import styles from './_storybook-styles.scss?inline';
 
-import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
+import {
+  Add,
+  Bee,
+  AiGenerate,
+  CloudFoundry_1,
+  Activity,
+} from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
+import { pageActionButtonItems } from './_story-assets/pageActionButtonItems';
 
 export default {
   title: 'Preview/PageHeader',
@@ -116,113 +121,116 @@ const breadcrumbPageActions = (
   </>
 );
 
-export const Default = (args) => (
-  <Tabs>
-    <PageHeader.Root>
-      <PageHeader.BreadcrumbBar
-        border={args.border}
-        pageActionsFlush={args.pageActionsFlush}
-        contentActionsFlush={args.contentActionsFlush}
-        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-        contentActions={
-          <>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 1"
-            >
-              <AiGenerate />
-            </IconButton>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 2"
-            >
-              <Activity />
-            </IconButton>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 3"
-            >
-              <Activity />
-            </IconButton>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 4"
-            >
-              <Activity />
-            </IconButton>
-            <Button className="breadcrumb-bar-action-button" size="sm">
-              Primary action
-            </Button>
-          </>
-        }
-        pageActions={breadcrumbPageActions}
-      >
-        <Breadcrumb>
-          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-        </Breadcrumb>
-      </PageHeader.BreadcrumbBar>
-      <PageHeader.Content
-        title={args.title}
-        pageActions={
-          <PageHeader.ContentPageActions
-            menuButtonLabel="Actions"
-            actions={pageActionButtonItems}
-          />
-        }
-      >
-        <PageHeader.ContentText subtitle="Subtitle">
-          Built for modern teams, our technology platform simplifies complexity
-          with powerful APIs, real-time collaboration tools, and seamless
-          integration. From deployment to monitoring, we help you ship faster,
-          scale efficiently, and stay in control every step of the way.
-        </PageHeader.ContentText>
-      </PageHeader.Content>
-      <PageHeader.TabBar>
-        <TabList>
-          <Tab>Tab 1</Tab>
-          <Tab>Tab 2</Tab>
-          <Tab>Tab 3</Tab>
-          <Tab>Tab 4</Tab>
-          <Tab>Tab 5</Tab>
-          <Tab>Tab 6</Tab>
-          <Tab>Tab 7</Tab>
-        </TabList>
-      </PageHeader.TabBar>
-    </PageHeader.Root>
-    <TabPanels>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 1
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 2
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 3
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 4
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 5
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 6
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 7
-      </TabPanel>
-    </TabPanels>
-  </Tabs>
-);
+export const Default = (args) => {
+  return (
+    <Tabs>
+      <PageHeader.Root>
+        <PageHeader.BreadcrumbBar
+          border={args.border}
+          pageActionsFlush={args.pageActionsFlush}
+          contentActionsFlush={args.contentActionsFlush}
+          renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+          contentActions={
+            <>
+              <IconButton
+                size="sm"
+                kind="ghost"
+                className="breadcrumb-bar-button"
+                label="Icon Description 1"
+              >
+                <AiGenerate />
+              </IconButton>
+              <IconButton
+                size="sm"
+                kind="ghost"
+                className="breadcrumb-bar-button"
+                label="Icon Description 2"
+              >
+                <Activity />
+              </IconButton>
+              <IconButton
+                size="sm"
+                kind="ghost"
+                className="breadcrumb-bar-button"
+                label="Icon Description 3"
+              >
+                <Activity />
+              </IconButton>
+              <IconButton
+                size="sm"
+                kind="ghost"
+                className="breadcrumb-bar-button"
+                label="Icon Description 4"
+              >
+                <Activity />
+              </IconButton>
+              <Button className="breadcrumb-bar-action-button" size="sm">
+                Primary action
+              </Button>
+            </>
+          }
+          pageActions={breadcrumbPageActions}
+        >
+          <Breadcrumb>
+            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          </Breadcrumb>
+        </PageHeader.BreadcrumbBar>
+        <PageHeader.Content
+          title={args.title}
+          pageActions={
+            <PageHeader.ContentPageActions
+              menuButtonLabel="Actions"
+              actions={pageActionButtonItems}
+            />
+          }
+        >
+          <PageHeader.ContentText subtitle="Subtitle">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </PageHeader.ContentText>
+        </PageHeader.Content>
+        <PageHeader.TabBar>
+          <TabList>
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+            <Tab>Tab 3</Tab>
+            <Tab>Tab 4</Tab>
+            <Tab>Tab 5</Tab>
+            <Tab>Tab 6</Tab>
+            <Tab>Tab 7</Tab>
+          </TabList>
+        </PageHeader.TabBar>
+      </PageHeader.Root>
+      <TabPanels>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 1
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 2
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 3
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 4
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 5
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 6
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 7
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
 
 Default.args = {
   border: true,
@@ -373,88 +381,6 @@ export const ContentWithHeroImage = (args) => (
   </PageHeader.Root>
 );
 
-const pageActionButtonItems = [
-  {
-    // props used for both collapse menu item and non-collapsed action form
-    id: 'action1',
-    onClick: () => console.log(`Action 1`),
-    // component to render when non-collapsed
-    body: (
-      <Button
-        renderIcon={AiGenerate}
-        iconDescription="Icon Description 1"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    // props to pass to the corresponding collapsed menu item
-    menuItem: {
-      label: 'action 1',
-    },
-  },
-  {
-    id: 'action2',
-    onClick: () => console.log(`Action 2`),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 2"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 2',
-    },
-  },
-  {
-    id: 'action3',
-    onClick: () => console.log(`Action 3`),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 3"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 3',
-    },
-  },
-  {
-    id: 'action4',
-    onClick: () => console.log(`Action 4`),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 4"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 4',
-    },
-  },
-  {
-    id: 'primary-action',
-    onClick: () => console.log(`Primary action`),
-    body: (
-      <Button kind="primary" renderIcon={Add} size="md">
-        Primary action
-      </Button>
-    ),
-    menuItem: {
-      label: 'Primary action',
-    },
-  },
-];
-
 export const ContentWithContextualActionsAndPageActions = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar
@@ -593,7 +519,7 @@ export const TabBarWithTabsAndTags = (args) => (
             renderPopoverContent={(hiddenItems) => {
               return hiddenItems.map((i, index) => {
                 const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
-                return cloneElement(foundJSXTag, {
+                return React.cloneElement(foundJSXTag, {
                   id: `cloned-tag-node-id-${index}`,
                   key: `cloned-tag-key-${index}`,
                 });
@@ -641,6 +567,15 @@ export const TabBarWithTabsAndTags = (args) => (
     </TabPanels>
   </Tabs>
 );
+
+TabBarWithTabsAndTags.args = {
+  border: true,
+  pageActionsFlush: false,
+  contentActionsFlush: false,
+  title:
+    'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+  renderBreadcrumbIcon: true,
+};
 
 export const Compact = (args) => (
   <Tabs>
@@ -701,7 +636,7 @@ export const Compact = (args) => (
             renderPopoverContent={(hiddenItems) => {
               return hiddenItems.map((i, index) => {
                 const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
-                return cloneElement(foundJSXTag, {
+                return React.cloneElement(foundJSXTag, {
                   id: `cloned-tag-node-id-${index}`,
                   key: `cloned-tag-key-${index}`,
                 });

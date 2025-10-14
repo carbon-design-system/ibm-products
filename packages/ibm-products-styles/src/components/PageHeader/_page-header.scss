@@ -732,6 +732,23 @@ $duration: 1000ms;
     block-size: 100%;
   }
 
+  .#{$block-class}__breadcrumb-bar
+    .#{$carbon-prefix}--css-grid
+    .#{$carbon-prefix}--css-grid-column {
+    block-size: to-rem(40px);
+  }
+
+  .#{$block-class}__breadcrumb-bar
+    .#{$carbon-prefix}--css-grid
+    .#{$carbon-prefix}--css-grid-column,
+  .#{$block-class}__breadcrumb-bar .#{$block-class}__breadcrumb-container {
+    block-size: to-rem(40px);
+
+    .#{$block-class}__breadcrumb-wrapper {
+      block-size: inherit;
+    }
+  }
+
   .#{$block-class}__breadcrumb-container {
     display: inline-flex;
     align-items: center;

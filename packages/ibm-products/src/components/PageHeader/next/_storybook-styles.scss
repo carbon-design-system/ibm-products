@@ -67,3 +67,16 @@ $block-class: #{c4p-settings.$pkg-prefix}--page-header;
   .#{$block-class}__breadcrumb__actions {
   block-size: 40px;
 }
+
+$stackblitz-block-class: c4p--page-header;
+.#{$stackblitz-block-class}__breadcrumb-bar
+  .cds--css-grid
+  .cds--css-grid-column,
+.#{$stackblitz-block-class}__breadcrumb-bar
+  .c4p--page-header__breadcrumb-container {
+  block-size: 40px;
+
+  .c4p--page-header__breadcrumb-wrapper {
+    block-size: inherit;
+  }
+}

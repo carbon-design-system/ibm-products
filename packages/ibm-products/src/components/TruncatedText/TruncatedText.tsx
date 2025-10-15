@@ -12,7 +12,7 @@ import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import useTruncatedText from './useTruncatedText';
 
-interface TruncatedTextProps {
+export interface TruncatedTextProps {
   /**
    * Specify how the tooltip should align with the content in tooltip variant. Refer to Carbon tooltip docs for additional information.
    */

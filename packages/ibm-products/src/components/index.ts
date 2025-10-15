@@ -57,9 +57,9 @@ export * as preview__Coachmark from './Coachmark/next/Coachmark';
 export * as preview__CoachmarkTagline from './Coachmark/next/Coachmark/CoachmarkTagline';
 export * as preview__CoachmarkBeacon from './Coachmark/next/Coachmark/CoachmarkBeacon';
 export {
-  TruncatedList as preview__TruncatedList,
-  type TruncatedListProps,
-} from './TruncatedList';
+  TruncatedText as preview__TruncatedText,
+  type TruncatedTextProps,
+} from './TruncatedText';
 
 export {
   FeatureFlags as preview__FeatureFlags,
@@ -151,6 +151,10 @@ export {
   type ToolbarButtonProps,
   type ToolbarGroupProps,
 } from './Toolbar';
+export {
+  TruncatedList as previewCandidate__TruncatedList,
+  type TruncatedListProps,
+} from './TruncatedList';
 
 /**
  * Deprecated

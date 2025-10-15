@@ -121,116 +121,113 @@ const breadcrumbPageActions = (
   </>
 );
 
-export const Default = (args) => {
-  return (
-    <Tabs>
-      <PageHeader.Root>
-        <PageHeader.BreadcrumbBar
-          border={args.border}
-          pageActionsFlush={args.pageActionsFlush}
-          contentActionsFlush={args.contentActionsFlush}
-          renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-          contentActions={
-            <>
-              <IconButton
-                size="sm"
-                kind="ghost"
-                className="breadcrumb-bar-button"
-                label="Icon Description 1"
-              >
-                <AiGenerate />
-              </IconButton>
-              <IconButton
-                size="sm"
-                kind="ghost"
-                className="breadcrumb-bar-button"
-                label="Icon Description 2"
-              >
-                <Activity />
-              </IconButton>
-              <IconButton
-                size="sm"
-                kind="ghost"
-                className="breadcrumb-bar-button"
-                label="Icon Description 3"
-              >
-                <Activity />
-              </IconButton>
-              <IconButton
-                size="sm"
-                kind="ghost"
-                className="breadcrumb-bar-button"
-                label="Icon Description 4"
-              >
-                <Activity />
-              </IconButton>
-              <Button className="breadcrumb-bar-action-button" size="sm">
-                Primary action
-              </Button>
-            </>
-          }
-          pageActions={breadcrumbPageActions}
-        >
-          <Breadcrumb>
-            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-          </Breadcrumb>
-        </PageHeader.BreadcrumbBar>
-        <PageHeader.Content
-          title={args.title}
-          pageActions={
-            <PageHeader.ContentPageActions
-              menuButtonLabel="Actions"
-              actions={pageActionButtonItems}
-            />
-          }
-        >
-          <PageHeader.ContentText subtitle="Subtitle">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </PageHeader.ContentText>
-        </PageHeader.Content>
-        <PageHeader.TabBar>
-          <TabList>
-            <Tab>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
-            <Tab>Tab 4</Tab>
-            <Tab>Tab 5</Tab>
-            <Tab>Tab 6</Tab>
-            <Tab>Tab 7</Tab>
-          </TabList>
-        </PageHeader.TabBar>
-      </PageHeader.Root>
-      <TabPanels>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 1
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 2
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 3
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 4
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 5
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 6
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 7
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
-  );
-};
+export const Default = (args) => (
+  <Tabs>
+    <PageHeader.Root>
+      <PageHeader.BreadcrumbBar
+        border={args.border}
+        pageActionsFlush={args.pageActionsFlush}
+        contentActionsFlush={args.contentActionsFlush}
+        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+        contentActions={
+          <>
+            <IconButton
+              size="sm"
+              kind="ghost"
+              className="breadcrumb-bar-button"
+              label="Icon Description 1"
+            >
+              <AiGenerate />
+            </IconButton>
+            <IconButton
+              size="sm"
+              kind="ghost"
+              className="breadcrumb-bar-button"
+              label="Icon Description 2"
+            >
+              <Activity />
+            </IconButton>
+            <IconButton
+              size="sm"
+              kind="ghost"
+              className="breadcrumb-bar-button"
+              label="Icon Description 3"
+            >
+              <Activity />
+            </IconButton>
+            <IconButton
+              size="sm"
+              kind="ghost"
+              className="breadcrumb-bar-button"
+              label="Icon Description 4"
+            >
+              <Activity />
+            </IconButton>
+            <Button className="breadcrumb-bar-action-button" size="sm">
+              Primary action
+            </Button>
+          </>
+        }
+        pageActions={breadcrumbPageActions}
+      >
+        <Breadcrumb>
+          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        </Breadcrumb>
+      </PageHeader.BreadcrumbBar>
+      <PageHeader.Content
+        title={args.title}
+        pageActions={
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}
+          />
+        }
+      >
+        <PageHeader.ContentText subtitle="Subtitle">
+          Built for modern teams, our technology platform simplifies complexity
+          with powerful APIs, real-time collaboration tools, and seamless
+          integration. From deployment to monitoring, we help you ship faster,
+          scale efficiently, and stay in control every step of the way.
+        </PageHeader.ContentText>
+      </PageHeader.Content>
+      <PageHeader.TabBar>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
+        </TabList>
+      </PageHeader.TabBar>
+    </PageHeader.Root>
+    <TabPanels>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 1
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 2
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 3
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 4
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 5
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 6
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 7
+      </TabPanel>
+    </TabPanels>
+  </Tabs>
+);
 
 Default.args = {
   border: true,

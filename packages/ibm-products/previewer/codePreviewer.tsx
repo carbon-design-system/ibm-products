@@ -211,9 +211,7 @@ const appGenerator = async (
   `;
 
   try {
-    const getFormattedCode = async (app: string) =>
-      await formatWithPrettier(app);
-    return await getFormattedCode(app);
+    return await formatWithPrettier(app);
   } catch (error) {
     console.error('Error formatting code:', error);
     throw error;

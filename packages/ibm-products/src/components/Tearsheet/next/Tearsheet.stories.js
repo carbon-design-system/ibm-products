@@ -33,6 +33,7 @@ import styles from './_storybook-styles.scss?inline';
 import { Bee, RightPanelClose } from '@carbon/react/icons';
 import { TearsheetWithSteps } from './_story-assets/StepTearsheet';
 import { StepProvider } from '../../StepFlow';
+import { StackProvider } from './StackContext';
 const storyClass = 'tearsheet-next-stories';
 
 export default {
@@ -820,3 +821,349 @@ export const narrowTearsheet = () => {
     </>
   );
 };
+
+export const StackingTearsheet = ({ variant }) => {
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+
+  return (
+    <>
+      <div className="stackButtons">
+        <Button onClick={() => setOpen1(!open1)}>Toggle Tearsheet 1</Button>
+        <Button onClick={() => setOpen2(!open2)}>Toggle Tearsheet 2</Button>
+        <Button onClick={() => setOpen3(!open3)}>Toggle Tearsheet 3</Button>
+      </div>
+
+      <StackProvider stackStepSize="lg">
+        <Tearsheet open={open1} onClose={() => setOpen1(false)}>
+          <Tearsheet.Header>
+            <Tearsheet.HeaderContent
+              headerActions={
+                <Tearsheet.HeaderActions
+                  menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
+                >
+                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+                    <Button
+                      kind="tertiary"
+                      size="sm"
+                      onClick={() => {
+                        setOpen2(true);
+                      }}
+                    >
+                      Open Tearsheet 2
+                    </Button>
+                  </Tearsheet.HeaderActionItem>
+                </Tearsheet.HeaderActions>
+              }
+              label="Customer data"
+              title="Tearsheet 1 "
+              description="Buttons are used to initialize an action, "
+              titleIcon={Bee}
+              titleIconPosition={'leading'}
+            ></Tearsheet.HeaderContent>
+          </Tearsheet.Header>
+          <Tearsheet.Body>
+            <Tearsheet.MainContent>
+              <Section className="main-content">
+                <Heading>Main content heading</Heading>
+
+                <Form>
+                  <FormGroup
+                    legendId="tearsheet-form-group"
+                    legendText="FormGroup Legend"
+                  >
+                    <TextInput
+                      id="tss-ft1"
+                      labelText="Enter an important value here"
+                    />
+                    <TextInput
+                      id="tss-ft2"
+                      labelText="Here is an entry field:"
+                    />
+                    <NumberInput
+                      className="some-class"
+                      id="number-input-1"
+                      label="Number Input"
+                      min={0}
+                      max={100}
+                      value={50}
+                      step={10}
+                      iconDescription="Add/decrement number"
+                    />
+                  </FormGroup>
+                </Form>
+              </Section>
+            </Tearsheet.MainContent>
+
+            <Tearsheet.SummaryContent>
+              <Heading className="rightPanelHeading">Panel heading</Heading>
+              <div className="rightDetailsBody">
+                <div>
+                  <label>item 1</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 2</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 3</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 4</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 5</label>
+                  <p>item description</p>
+                </div>
+              </div>
+            </Tearsheet.SummaryContent>
+          </Tearsheet.Body>
+          <Tearsheet.Footer>
+            <div className="default__action-buttons">
+              <Button
+                className="step-action-button step-action-button__cancel"
+                kind="ghost"
+                onClick={() => console.log('clicked')}
+                size="xl"
+              >
+                Cancel
+              </Button>
+              <Button
+                className="step-action-button"
+                kind="secondary"
+                onClick={() => {
+                  handlePrevious();
+                }}
+                size="xl"
+              >
+                Back
+              </Button>
+              <Button size="xl" className="step-action-button">
+                {'Submit'}
+              </Button>
+            </div>
+          </Tearsheet.Footer>
+        </Tearsheet>
+        <Tearsheet
+          open={open2}
+          onClose={() => setOpen2(false)}
+          variant={variant}
+        >
+          <Tearsheet.Header>
+            <Tearsheet.HeaderContent
+              label="Customer data"
+              title="Tearsheet 2"
+              description="Buttons are used to initialize an action, "
+              titleIcon={Bee}
+              titleIconPosition={'leading'}
+              headerActions={
+                <Tearsheet.HeaderActions
+                  menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
+                >
+                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+                    <Button
+                      kind="tertiary"
+                      size="sm"
+                      onClick={() => {
+                        setOpen3(true);
+                      }}
+                    >
+                      Open Tearsheet 3
+                    </Button>
+                  </Tearsheet.HeaderActionItem>
+                </Tearsheet.HeaderActions>
+              }
+            ></Tearsheet.HeaderContent>
+          </Tearsheet.Header>
+          <Tearsheet.Body>
+            <Tearsheet.MainContent>
+              <Section className="main-content">
+                <Heading>Main content heading</Heading>
+
+                <Form>
+                  <FormGroup
+                    legendId="tearsheet-form-group"
+                    legendText="FormGroup Legend"
+                  >
+                    <TextInput
+                      id="tss-ft1"
+                      labelText="Enter an important value here"
+                    />
+                    <TextInput
+                      id="tss-ft2"
+                      labelText="Here is an entry field:"
+                    />
+                    <NumberInput
+                      className="some-class"
+                      id="number-input-1"
+                      label="Number Input"
+                      min={0}
+                      max={100}
+                      value={50}
+                      step={10}
+                      iconDescription="Add/decrement number"
+                    />
+                  </FormGroup>
+                </Form>
+              </Section>
+            </Tearsheet.MainContent>
+
+            <Tearsheet.SummaryContent>
+              <Heading className="rightPanelHeading">Panel heading</Heading>
+              <div className="rightDetailsBody">
+                <div>
+                  <label>item 1</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 2</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 3</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 4</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 5</label>
+                  <p>item description</p>
+                </div>
+              </div>
+            </Tearsheet.SummaryContent>
+          </Tearsheet.Body>
+          <Tearsheet.Footer>
+            <div className="default__action-buttons">
+              <Button
+                className="step-action-button step-action-button__cancel"
+                kind="ghost"
+                onClick={() => console.log('clicked')}
+                size="xl"
+              >
+                Cancel
+              </Button>
+              <Button
+                className="step-action-button"
+                kind="secondary"
+                onClick={() => {
+                  handlePrevious();
+                }}
+                size="xl"
+              >
+                Back
+              </Button>
+              <Button size="xl" className="step-action-button">
+                {'Submit'}
+              </Button>
+            </div>
+          </Tearsheet.Footer>
+        </Tearsheet>
+        <Tearsheet open={open3} onClose={() => setOpen3(false)}>
+          <Tearsheet.Header>
+            <Tearsheet.HeaderContent
+              label="Customer data"
+              title="Tearsheet 3"
+              description="Buttons are used to initialize an action, "
+              titleIcon={Bee}
+              titleIconPosition={'leading'}
+            ></Tearsheet.HeaderContent>
+          </Tearsheet.Header>
+          <Tearsheet.Body>
+            <Tearsheet.MainContent>
+              <Section className="main-content">
+                <Heading>Main content heading</Heading>
+
+                <Form>
+                  <FormGroup
+                    legendId="tearsheet-form-group"
+                    legendText="FormGroup Legend"
+                  >
+                    <TextInput
+                      id="tss-ft1"
+                      labelText="Enter an important value here"
+                    />
+                    <TextInput
+                      id="tss-ft2"
+                      labelText="Here is an entry field:"
+                    />
+                    <NumberInput
+                      className="some-class"
+                      id="number-input-1"
+                      label="Number Input"
+                      min={0}
+                      max={100}
+                      value={50}
+                      step={10}
+                      iconDescription="Add/decrement number"
+                    />
+                  </FormGroup>
+                </Form>
+              </Section>
+            </Tearsheet.MainContent>
+
+            <Tearsheet.SummaryContent>
+              <Heading className="rightPanelHeading">Panel heading</Heading>
+              <div className="rightDetailsBody">
+                <div>
+                  <label>item 1</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 2</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 3</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 4</label>
+                  <p>item description</p>
+                </div>
+                <div>
+                  <label>item 5</label>
+                  <p>item description</p>
+                </div>
+              </div>
+            </Tearsheet.SummaryContent>
+          </Tearsheet.Body>
+          <Tearsheet.Footer>
+            <div className="default__action-buttons">
+              <Button
+                className="step-action-button step-action-button__cancel"
+                kind="ghost"
+                onClick={() => console.log('clicked')}
+                size="xl"
+              >
+                Cancel
+              </Button>
+              <Button
+                className="step-action-button"
+                kind="secondary"
+                onClick={() => {
+                  handlePrevious();
+                }}
+                size="xl"
+              >
+                Back
+              </Button>
+              <Button size="xl" className="step-action-button">
+                {'Submit'}
+              </Button>
+            </div>
+          </Tearsheet.Footer>
+        </Tearsheet>
+      </StackProvider>
+    </>
+  );
+};
+
+export const stackingWithDifferentSizes = () => (
+  <StackingTearsheet variant="narrow" />
+);

@@ -14,6 +14,7 @@ import React, {
   ReactNode,
   ForwardedRef,
   FC,
+  useId,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -23,7 +24,6 @@ import {
   unstable_FeatureFlags as FeatureFlags,
   Layer,
   ModalBody,
-  ModalHeader,
   usePrefix,
 } from '@carbon/react';
 import { blockClass, TearsheetContext } from './context';
@@ -56,6 +56,7 @@ import {
 import { useMatchMedia } from './useMatchMedia';
 import { breakpoints } from '@carbon/layout';
 import { usePortalTarget } from '../../../global/js/hooks/usePortalTarget';
+import { useStackContext } from './StackContext';
 
 /**
  * ----------
@@ -69,7 +70,7 @@ export interface TearsheetProps {
   /**
    * Specifies whether the tearsheet is currently open.
    */
-  open?: boolean;
+  open: boolean;
 
   className?: string;
   /**
@@ -167,6 +168,12 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     const body = arr.find((child: any) => child.type === TearsheetBody);
     const footer = arr.find((child: any) => child.type === Footer);
 
+    const uniqueId = useRef(useId());
+    const { notifyStack, stack, getDepth, getScaleFactor, getBlockSizeChange } =
+      useStackContext();
+
+    const [depth, setDepth] = useState(0);
+
     const renderPortalUse = usePortalTarget(portalTarget);
 
     useLayoutEffect(() => {
@@ -194,6 +201,30 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isSm]);
+
+    useLayoutEffect(() => {
+      notifyStack?.(uniqueId.current, open, modalRef);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open]);
+
+    useEffect(() => {
+      if (stack?.length > 0) {
+        const stackDepth = getDepth?.(uniqueId.current),
+          blockSizeChange = getBlockSizeChange?.(uniqueId.current),
+          scaleFactor = getScaleFactor?.(uniqueId.current);
+
+        setDepth(stackDepth as number);
+
+        modalRef.current.style.setProperty('--stack-depth', stackDepth + '');
+        modalRef.current.style.setProperty(
+          '--block-size-change',
+          blockSizeChange
+        );
+        modalRef.current.style.setProperty('--scale-factor', scaleFactor + '');
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [stack]);
+
     return renderPortalUse(
       <TearsheetContext.Provider
         value={{
@@ -215,7 +246,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
             className={cx(blockClass, className, {
               [`${blockClass}--wide`]: variant === 'wide',
               [`${blockClass}--narrow`]: variant === 'narrow',
-
+              [`${blockClass}--stacked`]: depth > 0,
               [`${blockClass}--has-close`]: hasCloseIcon,
             })}
             containerClassName={cx(`${blockClass}__container`, {
@@ -244,8 +275,6 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
               {body}
 
               {footer}
-
-              {/* </div> */}
             </ModalBody>
           </ComposedModal>
         </FeatureFlags>

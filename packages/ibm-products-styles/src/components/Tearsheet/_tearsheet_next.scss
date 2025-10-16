@@ -34,8 +34,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   // Extra specificity to override Carbon default transition
-  &.#{$block-class__next}.#{$block-class__next}
-    .#{$block-class__next}__container {
+  &.#{$block-class__next} .#{$block-class__next}__container {
     transition:
       transform $motion-duration motion(entrance, expressive),
       max-height $motion-duration motion(entrance, expressive);
@@ -359,28 +358,62 @@ $motion-duration: $duration-moderate-02;
       min-block-size: 0;
     }
   }
-}
-.#{$block-class__next}--narrow {
-  .#{$block-class__next}__header {
-    padding-inline: $spacing-05;
+
+  &.#{$block-class__next}--narrow {
+    .#{$block-class__next}__header {
+      padding-inline: $spacing-05;
+    }
+    .#{$block-class__next}__header-content-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+    .#{$block-class__next}__header-title {
+      @include type.type-style('heading-03');
+    }
+    .#{$block-class__next}__content__header-actions {
+      justify-content: flex-start;
+      margin-inline-end: 0;
+    }
+    .#{$block-class__next}__body {
+      grid-template-columns: 1fr 0;
+    }
+    .#{$block-class__next}__influencer,
+    .#{$block-class__next}__main-content,
+    .#{$block-class__next}__summary-content {
+      padding-inline: $spacing-05;
+    }
   }
-  .#{$block-class__next}__header-content-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  .#{$block-class__next}__header-title {
-    @include type.type-style('heading-03');
-  }
-  .#{$block-class__next}__content__header-actions {
-    justify-content: flex-start;
-    margin-inline-end: 0;
-  }
-  .#{$block-class__next}__body {
-    grid-template-columns: 1fr 0;
-  }
-  .#{$block-class__next}__influencer,
-  .#{$block-class__next}__main-content,
-  .#{$block-class__next}__summary-content {
-    padding-inline: $spacing-05;
+
+  &.#{$block-class__next}--stacked.is-visible {
+    --overlay-color: #{$overlay};
+    --overlay-alpha: 0.5;
+
+    z-index: calc(#{utilities.z('modal')} - var(--stack-depth, 0));
+
+    background-color: initial;
+
+    &::before {
+      position: absolute;
+      display: block;
+      background: var(--overlay-color);
+      content: '';
+      inset: 0;
+      opacity: calc(var(--overlay-alpha) - var(--stack-depth) * 0.1);
+
+      transition:
+        background-color $motion-duration motion(exit, expressive),
+        opacity $motion-duration motion(exit, expressive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &.is-visible {
+      .#{$block-class__next}__container {
+        max-block-size: calc(100% - #{$spacing-09} + var(--block-size-change));
+        transform: scaleX(var(--scale-factor));
+      }
+    }
   }
 }

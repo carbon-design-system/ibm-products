@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.26.0-rc.0`
+## `@carbon/ibm-products-web-components@0.26.0`
 ### Features :rocket:
 - feat(step-util): adds utility for stepping within lit components (#8296)
 - feat(code-connect): add web component code connect config setup (#8387)

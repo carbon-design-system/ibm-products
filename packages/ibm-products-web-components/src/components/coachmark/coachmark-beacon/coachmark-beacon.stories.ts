@@ -9,23 +9,23 @@
 
 import { html } from 'lit';
 import './index';
-import { prefix } from '../../../globals/settings';
-
-// import styles from './story-styles.scss?lit';
 
 export const Default = {
   args: {
     label: 'Show information',
-    buttonProps: {
-      id: 'coachmarkBeacon',
-      tabindex: 0,
-      onClick: () => console.log('click'),
+    onClick: () => {
+      console.log('beacon clicked');
     },
   },
 
   render: (args) => {
     return html`
-      <c4p-coachmark-beacon label=${args.label} buttonProps=${args.buttonProps}>
+      <c4p-coachmark-beacon
+        label=${args.label}
+        @c4p-coachmark-beacon-clicked=${(e: CustomEvent) => {
+          console.log('Beacon clicked!', e.detail.expanded);
+        }}
+      >
       </c4p-coachmark-beacon>
     `;
   },

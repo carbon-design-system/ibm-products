@@ -7,32 +7,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, PropertyValues, html } from 'lit';
-import { property } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './coachmark-beacon.scss?lit';
 import '@carbon/web-components/es/components/button/button.js';
-import '@carbon/web-components/es/components/icon-button/index.js';
 import { BEACON_KIND } from './defs';
 
 const blockClass = `${prefix}--coachmark-beacon`;
-
-type ButtonProps = Record<string, any>;
 
 /**
  * CoachmarkBeacon.
  *
  * @element c4p-coachmark-beacon
+ * @fires c4p-coachmark-beacon-clicked Custom event fired when beacon is clicked
  * */
 @customElement(`${prefix}-coachmark-beacon`)
 class CDSCoachmarkBeacon extends HostListenerMixin(LitElement) {
   /**
    * What style of beacon.
    * BEACON_KIND is an enum from the Coachmark and can be used for this value.
-   * @see {@link BEACON_KIND}
+   * @see {@Link BEACON_KIND}
    */
   @property({ reflect: true })
   kind?: BEACON_KIND = BEACON_KIND.DEFAULT;
@@ -41,65 +38,83 @@ class CDSCoachmarkBeacon extends HostListenerMixin(LitElement) {
    * The aria label.
    */
   @property({ type: String, reflect: true })
-  label = '';
+  label = 'Show information';
   /**
-   * button props
+   * id for the coachmark beacon
    */
-  @property({ type: Object })
-  buttonProps: ButtonProps = {};
+  @property({ type: String, reflect: true })
+  id: string = crypto.randomUUID();
 
-  private applyButtonProps(buttonProps?: ButtonProps) {
-    const button = this.shadowRoot?.querySelector('cds-button');
-    if (!button || !buttonProps) {return;}
+  @state() private expanded = false;
 
-    Object.entries(buttonProps).forEach(([key, value]) => {
-      if (value === false || value == null) {
-        button.removeAttribute(key);
-      } else {
-        button.setAttribute(key, value === true ? '' : value);
-      }
-    });
-  }
-
-  updated(_changedProperties: PropertyValues) {
-    if (_changedProperties.has('buttonProps')) {
-      this.applyButtonProps(this.buttonProps);
+  firstUpdated() {
+    this.classList.add(blockClass);
+    if (this.kind) {
+      this.classList.add(`${blockClass}-${this.kind}`);
     }
   }
 
-  render() {
-    const classes = classMap({
-      [`${blockClass}`]: true,
-      [`${blockClass}-${this.kind}`]: true,
-    });
+  private _handleClick() {
+    this.expanded = !this.expanded;
 
+    if (this.expanded) {
+      document.addEventListener('click', this.handleOutsideClick);
+    } else {
+      document.removeEventListener('click', this.handleOutsideClick);
+    }
+
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSCoachmarkBeacon).beaconClicked,
+        {
+          detail: { expanded: this.expanded },
+          bubbles: true,
+          composed: true,
+        }
+      )
+    );
+  }
+
+  private handleOutsideClick = (event: Event) => {
+    if (!this.contains(event.target as Node)) {
+      this.expanded = false;
+      document.removeEventListener('click', this.handleOutsideClick);
+    }
+  };
+
+  render() {
     return html`
-      <div class=${classes}>
-        <cds-button
-          class="${blockClass}__target"
-          type="button"
-          @click=${this.buttonProps?.onClick}
-        >
-            <svg
-              class="${blockClass}__center"
-              aria-label=${this.label}
-              width="76"
-              height="76"
-              viewBox="0 0 76 76"
-              slot: 'icon',
-            >
-              <title>${this.label}</title>
-              <circle r="1" cx="38" cy="38"></circle>
-            </svg>
- 
-        </cds-button>
-      </div>
+      <cds-button
+        class="${blockClass}__target"
+        type="button"
+        id=${this.id}
+        aria-expanded="${String(this.expanded)}"
+        @click=${this._handleClick}
+      >
+        <slot name="icon">
+          <svg
+            class="${blockClass}__center"
+            aria-label=${this.label}
+            width="76"
+            height="76"
+            viewBox="0 0 76 76"
+          >
+            <title>${this.label}</title>
+            <circle r="1" cx="36" cy="36"></circle>
+          </svg>
+        </slot>
+      </cds-button>
     `;
   }
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
+
+  static get beaconClicked() {
+    return `${prefix}-coachmark-beacon-clicked`;
+  }
+
   static styles = styles;
 }
 export default CDSCoachmarkBeacon;

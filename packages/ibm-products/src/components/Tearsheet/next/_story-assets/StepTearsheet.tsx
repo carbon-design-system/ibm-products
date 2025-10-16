@@ -12,8 +12,6 @@ import { Bee } from '@carbon/react/icons';
 import {
   Button,
   CodeSnippet,
-  Form,
-  FormGroup,
   Heading,
   ProgressIndicator,
   ProgressStep,

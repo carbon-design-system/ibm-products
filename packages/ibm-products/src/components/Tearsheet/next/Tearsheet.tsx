@@ -70,7 +70,7 @@ export interface TearsheetProps {
   /**
    * Specifies whether the tearsheet is currently open.
    */
-  open: boolean;
+  open?: boolean;
 
   className?: string;
   /**
@@ -145,7 +145,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       ariaLabel,
       onClose,
       selectorPrimaryFocus,
-      open,
+      open = false,
       portalTarget,
       ...rest
     },

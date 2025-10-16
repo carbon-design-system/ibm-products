@@ -6,6 +6,14 @@
  */
 
 /**
+ * This file has test coverage in @carbon/utilities. This is a copy of the utility
+ * that adds margin calculations to an element's size. This should ideally be
+ * merged back into the utility.
+ */
+
+/* istanbul ignore file */
+
+/**
  * Calculates the size (width or height) of a given HTML element.
  *
  * This function performs an expensive calculation by temporarily changing the

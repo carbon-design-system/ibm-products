@@ -102,12 +102,6 @@ $block-class-modal: #{$_block-class}-modal;
     text-align: start;
   }
 
-  .#{$block-class-overflow}__show-all-tags-link.#{$carbon-prefix}--link:visited {
-    display: inline-block;
-    margin: $spacing-03 0 $spacing-02; // to match the tags
-    color: $link-inverse;
-  }
-
   .#{$carbon-prefix}--link:active,
   .#{$carbon-prefix}--link:active:visited,
   .#{$carbon-prefix}--link:active:visited:hover {
@@ -122,6 +116,18 @@ $block-class-modal: #{$_block-class}-modal;
   .#{$block-class-overflow}__show-all-tags-link {
     color: $link-inverse;
     margin-block-start: $spacing-03;
+
+    &:hover {
+      color: $link-inverse-hover;
+    }
+
+    &:focus {
+      color: $focus-inverse;
+    }
+
+    &:visited {
+      color: $link-inverse;
+    }
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag

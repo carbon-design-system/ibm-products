@@ -1,3 +1,25 @@
+## `@carbon/ibm-products-styles@2.72.0`
+### Bug fixes :bug:
+- fix: update popover link in tagset and overflow (#8249)
+
+### Housekeeping :house:
+- refactor(scripts): remove chalk dep (#8321)
+- chore: pin chalk (#8261)
+- refactor(PageHeader): change api for tags prop in tab bar (#8205)
+
+## `@carbon/ibm-products-styles@2.71.0`
+### Features :rocket:
+- feat(sidepanel): utilizes layer in sidepanel (#8025)
+
+### Bug fixes :bug:
+- fix: add wordbreak to sidepanel title (#8230)
+- fix(tagset): restore operational tag styles (#8182)
+
+### Housekeeping :house:
+- chore(deps): update dependency npm-run-all2 to v8 (#8219)
+- chore(deps): replace dependency npm-run-all with npm-run-all2 ^5.0.0 (#7202)
+- build(deps): update to Carbon 11 compatible versions to latest (#8171)
+
 ## `@carbon/ibm-products-styles@2.70.0`
 ### Features :rocket:
 - feat(conditionbuilder): option to disable specific property dynamically (#8105)

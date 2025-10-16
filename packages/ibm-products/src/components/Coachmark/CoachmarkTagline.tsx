@@ -50,7 +50,7 @@ interface CoachmarkTaglineProps {
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
  */
-export let CoachmarkTagline = React.forwardRef<
+export const CoachmarkTagline = React.forwardRef<
   HTMLDivElement,
   CoachmarkTaglineProps
 >(
@@ -109,7 +109,6 @@ export let CoachmarkTagline = React.forwardRef<
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkTagline = pkg.checkComponentEnabled(CoachmarkTagline, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

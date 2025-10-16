@@ -133,7 +133,8 @@ const parameters = {
         'Patterns',
         ['*', 'Prebuilt patterns'],
         'Utilities',
-        'Experimental',
+        'Preview',
+        'Preview Candidate',
         ['*', 'FeatureFlags'],
         'Deprecated',
       ],
@@ -148,6 +149,7 @@ const parameters = {
   docs: {
     theme,
     page: () => <StoryDocsPage />,
+    codePanel: true,
   },
 };
 

@@ -105,7 +105,7 @@ type UserAvatarBaseProps = {
 
 type UserAvatarProps = UserAvatarBaseProps & ImageProps;
 
-export let UserAvatar = React.forwardRef<HTMLDivElement, UserAvatarProps>(
+export const UserAvatar = React.forwardRef<HTMLDivElement, UserAvatarProps>(
   (props, ref) => {
     const {
       backgroundColor = 'order-1-cyan',
@@ -204,7 +204,6 @@ export let UserAvatar = React.forwardRef<HTMLDivElement, UserAvatarProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-UserAvatar = pkg.checkComponentEnabled(UserAvatar, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

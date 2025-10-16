@@ -41,7 +41,7 @@ jobs:
           git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version: '20.x'
           registry-url: https://registry.npmjs.org
@@ -143,7 +143,7 @@ jobs:
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch
       - name: Dispatch staging storybook deployment workflow
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           event-type: deploy-staging-storybook
           client-payload: '{"branch": "${{ github.ref_name }}"}'
@@ -154,7 +154,7 @@ jobs:
         if:
           ${{ (github.event.inputs.type  == 'full minor release') ||
           (github.event.inputs.type  == 'full patch release') }}
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           event-type: deploy-latest-storybook
           client-payload: '{"branch": "${{ github.ref_name }}"}'

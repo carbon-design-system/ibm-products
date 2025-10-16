@@ -74,6 +74,10 @@ export interface TearsheetProps {
 
   className?: string;
   /**
+   * the defines the gap from top of the view port. Defaulted to 3rem
+   */
+  verticalGap?: string;
+  /**
    * Default influencer takes 256px, this allow to override eg: 300px , 20rem
    */
   influencerWidth?: string;
@@ -147,6 +151,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       selectorPrimaryFocus,
       open = false,
       portalTarget,
+      verticalGap,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -198,6 +203,12 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
           `${rightContentWidth}`
         );
       }
+      if (verticalGap) {
+        document.documentElement.style.setProperty(
+          '--tearsheet-vertical-gap',
+          `${verticalGap}`
+        );
+      }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isSm]);
@@ -247,6 +258,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
               [`${blockClass}--wide`]: variant === 'wide',
               [`${blockClass}--narrow`]: variant === 'narrow',
               [`${blockClass}--stacked`]: depth > 0,
+              [`${blockClass}--stack-activated`]: stack.length > 1,
               [`${blockClass}--has-close`]: hasCloseIcon,
             })}
             containerClassName={cx(`${blockClass}__container`, {

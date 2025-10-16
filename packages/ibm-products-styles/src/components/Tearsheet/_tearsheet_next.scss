@@ -26,10 +26,14 @@ $motion-duration: $duration-moderate-02;
     align-self: flex-end;
     block-size: 100%;
     inset-block-start: auto;
-    max-block-size: calc(100% - #{$spacing-09});
+    max-block-size: calc(100% - var(--tearsheet-vertical-gap, #{$spacing-09}));
     transform: translate3d(0, calc(min(95vh, 500px)), 0);
-    @include breakpoint-down(md) {
-      max-block-size: none;
+  }
+  &:not(.#{$block-class__next}--stack-activated.is-visible) {
+    .#{$block-class__next}__container {
+      @include breakpoint-down(md) {
+        max-block-size: none;
+      }
     }
   }
 
@@ -411,7 +415,10 @@ $motion-duration: $duration-moderate-02;
 
     &.is-visible {
       .#{$block-class__next}__container {
-        max-block-size: calc(100% - #{$spacing-09} + var(--block-size-change));
+        max-block-size: calc(
+          100% - var(--tearsheet-vertical-gap, #{$spacing-09}) +
+            var(--block-size-change)
+        );
         transform: scaleX(var(--scale-factor));
       }
     }

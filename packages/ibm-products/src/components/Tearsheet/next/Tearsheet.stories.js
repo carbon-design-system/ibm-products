@@ -583,6 +583,7 @@ export const narrowTearsheet = () => {
         <Tearsheet
           open={open}
           variant={'narrow'}
+          verticalGap="5.5rem"
           decorator={sampleDecorator(1)}
           onClose={() => setOpen(false)}
           className="narrowTearsheet"
@@ -822,7 +823,7 @@ export const narrowTearsheet = () => {
   );
 };
 
-export const StackingTearsheet = ({ variant }) => {
+export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -836,7 +837,12 @@ export const StackingTearsheet = ({ variant }) => {
       </div>
 
       <StackProvider stackStepSize="lg">
-        <Tearsheet open={open1} onClose={() => setOpen1(false)}>
+        <Tearsheet
+          open={open1}
+          onClose={() => setOpen1(false)}
+          variant={variant[0]}
+          verticalGap={variant[0] === 'narrow' ? '5.5rem' : ''}
+        >
           <Tearsheet.Header>
             <Tearsheet.HeaderContent
               headerActions={
@@ -951,7 +957,8 @@ export const StackingTearsheet = ({ variant }) => {
         <Tearsheet
           open={open2}
           onClose={() => setOpen2(false)}
-          variant={variant}
+          variant={variant[1]}
+          verticalGap={variant[1] === 'narrow' ? '5.5rem' : ''}
         >
           <Tearsheet.Header>
             <Tearsheet.HeaderContent
@@ -1064,7 +1071,12 @@ export const StackingTearsheet = ({ variant }) => {
             </div>
           </Tearsheet.Footer>
         </Tearsheet>
-        <Tearsheet open={open3} onClose={() => setOpen3(false)}>
+        <Tearsheet
+          open={open3}
+          variant={variant[2]}
+          verticalGap={variant[2] === 'narrow' ? '5.5rem' : ''}
+          onClose={() => setOpen3(false)}
+        >
           <Tearsheet.Header>
             <Tearsheet.HeaderContent
               label="Customer data"
@@ -1165,5 +1177,8 @@ export const StackingTearsheet = ({ variant }) => {
 };
 
 export const stackingWithDifferentSizes = () => (
-  <StackingTearsheet variant="narrow" />
+  <StackingTearsheet variant={['wide', 'narrow', 'wide']} />
+);
+export const stackingNarrowTearsheets = () => (
+  <StackingTearsheet variant={['narrow', 'narrow', 'narrow']} />
 );

@@ -25,6 +25,8 @@ import { CoachmarkContext, blockClass } from './context';
 import CoachmarkContent, { CoachmarkContentProps } from './CoachmarkContent';
 import { NewPopoverAlignment } from '@carbon/react';
 import { useIsomorphicEffect } from '../../../../global/js/hooks';
+import { ContentHeader, ContentHeaderProps } from './ContentHeader';
+import { ContentBody, ContentBodyProps } from './ContentBody';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 
@@ -73,11 +75,15 @@ export interface CoachmarkProps {
   floating?: boolean;
 }
 
+type CoachmarkContentComponent = FC<CoachmarkContentProps> & {
+  Header: FC<ContentHeaderProps>;
+  Body: FC<ContentBodyProps>;
+};
 // Define the type for Coachmark, extending it to include Trigger and Content
 export type CoachmarkComponent = ForwardRefExoticComponent<
   CoachmarkProps & RefAttributes<HTMLDivElement>
 > & {
-  Content: FC<CoachmarkContentProps>;
+  Content: CoachmarkContentComponent;
 };
 
 /**
@@ -188,7 +194,8 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkProps>(
   }
 ) as CoachmarkComponent;
 Coachmark.Content = CoachmarkContent;
-
+Coachmark.Content.Header = ContentHeader;
+Coachmark.Content.Body = ContentBody;
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 Coachmark.displayName = componentName;

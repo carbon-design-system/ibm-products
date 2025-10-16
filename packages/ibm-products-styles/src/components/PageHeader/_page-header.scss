@@ -745,6 +745,7 @@ $duration: 1000ms;
     block-size: to-rem(40px);
 
     .#{$block-class}__breadcrumb-wrapper {
+      align-items: center;
       block-size: inherit;
     }
   }

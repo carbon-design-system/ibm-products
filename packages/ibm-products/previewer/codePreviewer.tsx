@@ -16,10 +16,15 @@ import {
   viteConfig,
 } from './configFiles';
 import * as carbonComponentsReact from '@carbon/react';
-import * as carbonIconsReact from '@carbon/icons-react';
+import * as carbonIconsReact from '@carbon/react/icons';
+import * as prettier from 'prettier/standalone';
+import * as tsParser from 'prettier/plugins/typescript';
+import * as estreeParser from 'prettier/plugins/estree';
+import prettierConfig from 'prettier-config-carbon';
+
 const iconsNames = Object.keys(carbonIconsReact);
 const carbonComponentNames = Object.keys(carbonComponentsReact);
-let componentNames;
+let componentNames: string[];
 interface ComponentSources {
   carbon: string[];
   ibmProducts: string[];
@@ -55,7 +60,7 @@ export const stackblitzPrefillConfig = async ({
     story.parameters.docs.source.originalSource,
     args
   );
-  const app = appGenerator(
+  const app = await appGenerator(
     storyCode,
     customImports,
     customFunctionDefs,
@@ -108,7 +113,7 @@ const filterStoryCode = (storyCode, args) => {
     .replace(/^"|"$/g, '')
     .replace(/onChange=\{(args\.onChange|action\('onChange'\))\}\s*/g, '')
     .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
-  Object.entries((args = {})).forEach(([key, value]) => {
+  Object.entries((args = args ?? {})).forEach(([key, value]) => {
     const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const templateLiteralRegex = new RegExp(
       `\\$\\{\\s*args\\.${escapedKey}\\s*\\}`,
@@ -141,7 +146,16 @@ const filterStoryCode = (storyCode, args) => {
   return storyCodeUpdated;
 };
 
-const appGenerator = (
+const formatWithPrettier = async (code: string): Promise<string> => {
+  const formatted = await prettier.format(code, {
+    ...prettierConfig,
+    parser: 'typescript',
+    plugins: [tsParser, estreeParser],
+  });
+  return formatted;
+};
+
+const appGenerator = async (
   storyCode: string,
   customImports: Array<string>,
   customFunctionDefs: Array<string>,
@@ -182,7 +196,7 @@ const appGenerator = (
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
   const app = `
   import React ${hooksString != '' ? `, { ${hooksString} }` : ''} from 'react';
-  ${customImports?.length > 0 ? customImports?.map((customImport) => customImport) : ''}
+  ${customImports?.length > 0 ? customImports.join('\n') : ''}
   ${getProductsImports(matchedComponents)}
   ${matchedCarbonComponents.length > 0 ? `import { ${matchedCarbonComponents.join(', ')} } from "@carbon/react";` : ''}
   ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
@@ -191,11 +205,19 @@ const appGenerator = (
     const pkg = {
      prefix: 'c4p'
     }
-    ${customFunctionDefs?.map((customFunction) => customFunction)}
+    ${customFunctionDefs?.length > 0 ? customFunctionDefs.join('\n') : ''}
     ${storyCode}
   }
   `;
-  return app;
+
+  try {
+    const getFormattedCode = async (app: string) =>
+      await formatWithPrettier(app);
+    return (await getFormattedCode(app)) as string;
+  } catch (error) {
+    console.error('Error formatting code:', error);
+    throw error;
+  }
 };
 
 // Returns either `preview` or `previewCandidate` if value is found within

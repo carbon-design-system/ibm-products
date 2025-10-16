@@ -13,9 +13,7 @@ import './index';
 export const Default = {
   args: {
     label: 'Show information',
-    onClick: () => {
-      console.log('beacon clicked');
-    },
+    id: 'coachmarkBeacon',
   },
 
   render: (args) => {

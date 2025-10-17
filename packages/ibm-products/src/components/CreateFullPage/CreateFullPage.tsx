@@ -311,7 +311,7 @@ export const CreateFullPage = React.forwardRef(
     useCreateComponentFocus({
       previousState,
       currentStep,
-      blockClass,
+      blockClass: `.${blockClass} .${pkg.prefix}--create-full-page__step`,
       onMount,
       firstFocusElement,
     });

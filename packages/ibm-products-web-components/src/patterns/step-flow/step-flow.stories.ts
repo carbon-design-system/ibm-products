@@ -11,20 +11,42 @@ import { html } from 'lit';
 import './index';
 import styles from './story-styles.scss?lit';
 import './_story-assets/step-tearsheet';
+import './_story-assets/step-full-page';
 
-const renderTemplate = () => {
+const renderTemplate = ({ narrow }) => {
   return html`
     <style>
       ${styles}
     </style>
-    <step-tearsheet></step-tearsheet>
+    <step-tearsheet .narrow=${narrow}></step-tearsheet>
   `;
 };
+
+const renderFullPageTemplate = () => html`
+  <style>
+    ${styles}
+  </style>
+  <step-full-page> </step-full-page>
+`;
 
 export const Tearsheet = {
   args: {},
   render: renderTemplate,
   name: 'Tearsheet',
+};
+
+export const TearsheetNarrow = {
+  args: {
+    narrow: true,
+  },
+  render: renderTemplate,
+  name: 'Tearsheet narrow',
+};
+
+export const FullPage = {
+  args: {},
+  render: renderFullPageTemplate,
+  name: 'Full page',
 };
 
 export default {

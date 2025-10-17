@@ -19,13 +19,14 @@ on:
         type: boolean
         default: true
 
+# Required for OIDC publishing https://docs.npmjs.com/trusted-publishers
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
-    # Recommended by npm for publishing with provenance https://docs.npmjs.com/generating-provenance-statements
-    permissions:
-      id-token: write
-      contents: write
     timeout-minutes: 60
     env:
       GH_TOKEN: ${{ secrets.MERGE_ACTION }}

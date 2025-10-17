@@ -5,6 +5,11 @@ on:
   # schedule:
   # - cron: '30 4 * * TUE' # Release every Tuesday at 4:30am EST
 
+# Required for OIDC publishing https://docs.npmjs.com/trusted-publishers
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   Release:
     runs-on: ubuntu-latest

@@ -7,13 +7,14 @@ on:
         default: ''
         type: string
 
+# Required for OIDC publishing https://docs.npmjs.com/trusted-publishers
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   Release:
     runs-on: ubuntu-latest
-    # Recommended by npm for publishing with provenance https://docs.npmjs.com/generating-provenance-statements
-    permissions:
-      id-token: write
-      contents: write
 
     steps:
       - name: Checkout

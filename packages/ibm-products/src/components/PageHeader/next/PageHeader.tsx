@@ -771,7 +771,7 @@ const PageHeaderTabBar = React.forwardRef<
   if (!tags) {
     return (
       <div className={classNames} ref={ref} {...other}>
-        <Grid>
+        <Grid condensed>
           <Column lg={16} md={8} sm={4}>
             {children}
             {renderScroller()}
@@ -783,7 +783,7 @@ const PageHeaderTabBar = React.forwardRef<
 
   return (
     <div className={classNames} ref={ref} {...other}>
-      <Grid>
+      <Grid condensed>
         <Column lg={16} md={8} sm={4}>
           <div
             className={classnames(`${blockClass}__tab-bar--tablist`, {

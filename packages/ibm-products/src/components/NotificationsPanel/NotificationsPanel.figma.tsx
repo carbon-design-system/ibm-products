@@ -25,48 +25,45 @@ figma.connect(NotificationsPanel, connectionURL, {
   props: {
     ...sharedProps,
   },
-  example: (props) => {
-    const notifications = [
-      {
-        id: '1',
-        type: 'success',
-        title: 'Title.',
-        description: 'Message',
-        timestamp: new Date(new Date().getTime() - 30 * 1000),
-        unread: true,
-        onNotificationClick: () => console.log('Clicked on notification'),
-      },
-      {
-        id: '2',
-        type: 'error',
-        title: 'Title',
-        description: 'Message',
-        timestamp: new Date(new Date().getTime() - 11 * 1000),
-        unread: false,
-        onNotificationClick: () => console.log('Clicked on notification'),
-      },
-      {
-        id: '3',
-        type: 'warning',
-        title: 'Title',
-        description: 'Message',
-        timestamp: new Date(new Date().getTime() - 120 * 1000),
-        unread: false,
-        onNotificationClick: () => console.log('Clicked on notification'),
-      },
-    ];
-    return (
-      <NotificationsPanel
-        open={true}
-        data={notifications}
-        illustrationTheme="light"
-        dateTimeLocale="en-US"
-        dateTimeStyle="short"
-        title={props.title.text}
-        doNotDisturbLabel={props.doNotDisturbLabel.text}
-      />
-    );
-  },
+  example: (props) => (
+    <NotificationsPanel
+      open={true}
+      data={[
+        {
+          id: '1',
+          type: 'success',
+          title: 'Title.',
+          description: 'Message',
+          timestamp: new Date(new Date().getTime() - 30 * 1000),
+          unread: true,
+          onNotificationClick: () => console.log('Clicked on notification'),
+        },
+        {
+          id: '2',
+          type: 'error',
+          title: 'Title',
+          description: 'Message',
+          timestamp: new Date(new Date().getTime() - 11 * 1000),
+          unread: false,
+          onNotificationClick: () => console.log('Clicked on notification'),
+        },
+        {
+          id: '3',
+          type: 'warning',
+          title: 'Title',
+          description: 'Message',
+          timestamp: new Date(new Date().getTime() - 120 * 1000),
+          unread: false,
+          onNotificationClick: () => console.log('Clicked on notification'),
+        },
+      ]}
+      illustrationTheme="light"
+      dateTimeLocale="en-US"
+      dateTimeStyle="short"
+      title={props.title.text}
+      doNotDisturbLabel={props.doNotDisturbLabel.text}
+    />
+  ),
 });
 
 figma.connect(NotificationsPanel, connectionURL, {

@@ -64,7 +64,7 @@ import { useStackContext } from './StackContext';
  * ----------
  */
 
-export interface TearsheetProps {
+export interface TearsheetProps extends ComposedModalProps {
   children?: React.ReactNode;
 
   /**
@@ -135,7 +135,7 @@ export type TearsheetComponentType = React.ForwardRefExoticComponent<
   SummaryContent: FC<SummaryContentProps>;
   Body: FC<TearsheetBodyProps>;
   Footer: FC<FooterProps>;
-} & ComposedModalProps;
+};
 
 export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
   (
@@ -158,7 +158,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
   ) => {
     const carbonPrefix = usePrefix();
     const localRef = useRef(undefined);
-    const bodyRef = useRef(undefined);
+    const bodyRef = useRef<HTMLDivElement>(null);
     const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
@@ -214,7 +214,10 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     }, [isSm]);
 
     useLayoutEffect(() => {
-      notifyStack?.(uniqueId.current, open, modalRef);
+      if (bodyRef.current) {
+        notifyStack?.(uniqueId.current, open, bodyRef.current);
+      }
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open]);
 
@@ -261,12 +264,8 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
               [`${blockClass}--stack-activated`]: stack.length > 1,
               [`${blockClass}--has-close`]: hasCloseIcon,
             })}
-            containerClassName={cx(`${blockClass}__container`, {
-              // [`${bc}__container--lower`]: verticalPosition === 'lower',
-            })}
+            containerClassName={cx(`${blockClass}__container`)}
             {...{ onClose, open, selectorPrimaryFocus }}
-            // onKeyDown={keyDownListener}
-            // preventCloseOnClickOutside={!isPassive}
             ref={modalRef}
             selectorsFloatingMenus={[
               `.${carbonPrefix}--overflow-menu-options`,
@@ -281,7 +280,6 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
           >
             {header}
             <ModalBody className={`${blockClass}__body-layout`} ref={bodyRef}>
-              {/* <div ref={ref} className={`${blockClass}__body-layout`}> */}
               {influencer}
 
               {body}

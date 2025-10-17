@@ -19,7 +19,7 @@ import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 
 export interface StackContextType {
   stack: string[];
-  notifyStack: (id: string, open: boolean, ref: RefObject<HTMLElement>) => void;
+  notifyStack: (id: string, open: boolean, container: HTMLDivElement) => void;
   getScaleFactor: (id: string) => number | null;
   getBlockSizeChange: (id: string) => string | null;
   getDepth: (id: string) => number | null;
@@ -37,7 +37,7 @@ export const StackProvider: React.FC<StepProviderProps> = ({
   stackStepSize = 'lg',
 }) => {
   const [stack, setStack] = useState<string[]>([]);
-  const _containerRef = useRef(null);
+  const _containerRef = useRef<HTMLDivElement>(null);
 
   const bufferMap = {
     sm: 0.5,
@@ -48,21 +48,24 @@ export const StackProvider: React.FC<StepProviderProps> = ({
   const { width } = useResizeObserver(_containerRef);
 
   // this method will register/ unregister tearsheet ids in a simple array based on open status
-  const notifyStack = useCallback((id: string, open: boolean, containerRef) => {
-    _containerRef.current = containerRef.current;
-    setStack((prev) => {
-      if (open) {
-        // move to top if already exists
-        if (prev.includes(id)) {
-          return [...prev.filter((i) => i !== id), id];
+  const notifyStack = useCallback(
+    (id: string, open: boolean, container: HTMLDivElement | null) => {
+      _containerRef.current = container;
+      setStack((prev) => {
+        if (open) {
+          // move to top if already exists
+          if (prev.includes(id)) {
+            return [...prev.filter((i) => i !== id), id];
+          }
+          return [...prev, id];
+        } else {
+          // remove from stack
+          return prev.filter((i) => i !== id);
         }
-        return [...prev, id];
-      } else {
-        // remove from stack
-        return prev.filter((i) => i !== id);
-      }
-    });
-  }, []);
+      });
+    },
+    []
+  );
 
   // method that calculates spacing factor for the stacked items
   const getScaleFactor = (id) => {
@@ -71,7 +74,7 @@ export const StackProvider: React.FC<StepProviderProps> = ({
     const bufferInPx = remToPx(buffer);
 
     const scale = depth > -1 ? (width - bufferInPx * 2 * depth) / width : 1;
-
+    console.log('bufferInPx', bufferInPx, depth, width);
     return scale;
   };
 

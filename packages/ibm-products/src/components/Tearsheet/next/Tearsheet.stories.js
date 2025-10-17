@@ -137,6 +137,8 @@ export const Default = () => {
         decorator={sampleDecorator(1)}
         onClose={() => setOpen(false)}
         preventCloseOnClickOutside={true}
+        launcherButtonRef={launcherButtonRef}
+        selectorPrimaryFocus={'#input1'}
       >
         <Tearsheet.Header>
           <Tearsheet.HeaderContent
@@ -248,7 +250,7 @@ export const Default = () => {
                   legendText="FormGroup Legend"
                 >
                   <TextInput
-                    id="tss-ft1"
+                    id="input1"
                     labelText="Enter an important value here"
                   />
                   <TextInput id="tss-ft2" labelText="Here is an entry field:" />
@@ -409,6 +411,7 @@ export const WithTabs = () => {
           variant={'wide'}
           decorator={sampleDecorator(1)}
           onClose={() => setOpen(false)}
+          launcherButtonRef={launcherButtonRef}
         >
           <Tearsheet.Header>
             <Tearsheet.HeaderContent
@@ -534,7 +537,11 @@ export const withSteps = () => {
         Open Tearsheet
       </Button>
 
-      <TearsheetWithSteps open={open} setOpen={setOpen} />
+      <TearsheetWithSteps
+        open={open}
+        setOpen={setOpen}
+        launcherButtonRef={launcherButtonRef}
+      />
     </StepProvider>
   );
 };
@@ -559,6 +566,7 @@ export const withStepsAndHorizontalProgressIndicator = () => {
         open={open}
         setOpen={setOpen}
         progressIndicator={'horizontal'}
+        launcherButtonRef={launcherButtonRef}
       />
     </StepProvider>
   );
@@ -587,6 +595,7 @@ export const narrowTearsheet = () => {
           decorator={sampleDecorator(1)}
           onClose={() => setOpen(false)}
           className="narrowTearsheet"
+          launcherButtonRef={launcherButtonRef}
         >
           <Tearsheet.Header>
             <Tearsheet.HeaderContent

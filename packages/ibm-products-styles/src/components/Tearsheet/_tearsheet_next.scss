@@ -388,7 +388,7 @@ $motion-duration: $duration-moderate-02;
     }
   }
 
-  &.#{$block-class__next}--stacked.is-visible {
+  &.#{$block-class__next}--stack-activated.is-visible {
     --overlay-color: #{$overlay};
     --overlay-alpha: 0.5;
 

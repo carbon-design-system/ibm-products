@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, RefObject, useEffect } from 'react';
 import { StepGroup, StepState, useStepContext } from '../../../StepFlow';
 import { Tearsheet } from '../Tearsheet';
 import { Bee } from '@carbon/react/icons';
@@ -30,6 +30,7 @@ interface Props {
   selectorPrimaryFocus?: string;
   setOpen?: (open: boolean) => void;
   progressIndicator?: 'vertical' | 'horizontal';
+  launcherButtonRef?: RefObject<HTMLButtonElement | null>;
 }
 
 export const TearsheetWithSteps = ({
@@ -43,6 +44,7 @@ export const TearsheetWithSteps = ({
   closeIconDescription = 'Close',
   selectorPrimaryFocus,
   progressIndicator = 'vertical',
+  launcherButtonRef,
   ...rest
 }: Props) => {
   const {
@@ -54,7 +56,12 @@ export const TearsheetWithSteps = ({
   } = useStepContext();
 
   return (
-    <Tearsheet open={open} variant={'wide'} onClose={() => setOpen?.(false)}>
+    <Tearsheet
+      open={open}
+      variant={'wide'}
+      onClose={() => setOpen?.(false)}
+      launcherButtonRef={launcherButtonRef}
+    >
       <Tearsheet.Header>
         <Tearsheet.HeaderContent
           label="Customer data"

@@ -59,7 +59,7 @@ const newPet = (extraColumns) => {
     weight: Math.floor(Math.random() * 40),
   };
   const defaultPet = {
-    patientId: Math.floor(Math.random() * 100000000000),
+    patientId: crypto.randomUUID(),
     petType: pets[Math.floor(Math.random() * pets.length)],
     firstName: petNames[Math.floor(Math.random() * petNames.length)],
     age: Math.floor(Math.random() * 30),

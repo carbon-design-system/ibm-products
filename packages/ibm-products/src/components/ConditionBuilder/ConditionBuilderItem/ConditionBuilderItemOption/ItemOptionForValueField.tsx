@@ -171,7 +171,7 @@ export const ItemOptionForValueField = ({
   }
   return (
     <div className={`${blockClass}__item-option`} ref={contentRef}>
-      {popOverSearchThreshold && allOptions.length > popOverSearchThreshold && (
+      {allOptions.length > popOverSearchThreshold ? (
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
@@ -183,7 +183,7 @@ export const ItemOptionForValueField = ({
             }}
           />
         </div>
-      )}
+      ) : null}
 
       {multiSelectable && (
         <div className={`${blockClass}__multiselectSelectionStatusContainer`}>

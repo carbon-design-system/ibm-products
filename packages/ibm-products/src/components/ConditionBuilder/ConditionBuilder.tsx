@@ -258,7 +258,7 @@ ConditionBuilder.propTypes = {
   onAddItem: PropTypes.func,
 
   /**
-   * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
+   * This will enable search in option popovers when option list length is more than this threshold
    */
   popOverSearchThreshold: PropTypes.number.isRequired,
 

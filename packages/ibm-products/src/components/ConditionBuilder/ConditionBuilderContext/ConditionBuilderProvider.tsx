@@ -39,6 +39,7 @@ export const ConditionBuilderContext =
     rootState: {
       groups: [],
     },
+    popOverSearchThreshold: 0,
   });
 
 export const ConditionBuilderProvider: React.FC<
@@ -137,7 +138,7 @@ ConditionBuilderProvider.propTypes = {
   }).isRequired,
 
   /**
-   * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
+   * This will enable search in option popovers when option list length is more that this threshold
    */
   popOverSearchThreshold: PropTypes.number.isRequired,
   /**

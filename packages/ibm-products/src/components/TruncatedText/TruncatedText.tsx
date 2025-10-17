@@ -12,7 +12,7 @@ import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import useTruncatedText from './useTruncatedText';
 
-interface TruncatedTextProps {
+export interface TruncatedTextProps {
   /**
    * Specify how the tooltip should align with the content in tooltip variant. Refer to Carbon tooltip docs for additional information.
    */
@@ -54,7 +54,7 @@ interface TruncatedTextProps {
 const blockClass = `${pkg.prefix}--truncated-text`;
 const componentName = 'TruncatedText';
 
-export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
+export const TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
   (props, ref) => {
     const {
       align = 'top',
@@ -144,7 +144,5 @@ export let TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
     );
   }
 );
-
-TruncatedText = pkg.checkComponentEnabled(TruncatedText, componentName);
 
 TruncatedText.displayName = componentName;

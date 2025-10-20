@@ -7,6 +7,8 @@
 
 import React from 'react';
 import { EmptyState } from './EmptyState';
+import { ErrorEmptyState } from './ErrorEmptyState';
+import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 import figma from '@figma/code-connect';
 import { Add } from '@carbon/icons-react';
 
@@ -46,30 +48,68 @@ const sharedProps = {
   subtitle: figma.string('Subtitle text'),
 };
 
-// Custom
+const illustrationVariant = figma.enum(
+  'Empty state illustration | (v11) Carbon for IBM Products',
+  {
+    Error: 'Error',
+    Unauthorized: 'Unauthorized',
+  }
+);
+
+// ErrorEmptyState
 figma.connect(
   EmptyState,
   'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=420-2434&t=lbewdWdJ4JB5izcw-4',
   {
+    variant: {
+      Illustration: 'Error',
+    },
     props: sharedProps,
     example: ({
       title,
       subtitle,
       size,
       illustrationPosition,
-      illustration,
       action,
       link,
     }) => (
-      <EmptyState
+      <ErrorEmptyState
         title={title}
         subtitle={subtitle}
         size={size}
         illustrationPosition={illustrationPosition}
-        illustration={illustration}
         action={action}
         link={link}
-      ></EmptyState>
+      />
+    ),
+  }
+);
+
+// UnauthorizedEmptyState
+figma.connect(
+  EmptyState,
+  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=420-2434&t=lbewdWdJ4JB5izcw-4',
+  {
+    variant: {
+      Illustration: 'Unauthorized',
+    },
+    props: sharedProps,
+    example: ({
+      title,
+      subtitle,
+      size,
+      illustrationPosition,
+      action,
+      link,
+    }) => (
+      <UnauthorizedEmptyState
+        title={title}
+        subtitle={subtitle}
+        size={size}
+        illustrationPosition={illustrationPosition}
+        action={action}
+        link={link}
+      />
     ),
   }
 );

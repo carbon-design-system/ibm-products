@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,3 +20,5 @@ export { default as CDSPageHeaderContent } from './components/page-header/page-h
 export { default as CDSPageHeaderContentText } from './components/page-header/page-header-content-text';
 export { default as CDSPageHeaderHeroImage } from './components/page-header/page-header-hero-image';
 export { default as CDSPageHeaderTabs } from './components/page-header/page-header-tabs';
+export { default as CDSGuideBanner } from './components/guide-banner/guide-banner';
+export { default as CDSGuideBannerElement } from './components/guide-banner/guide-banner-element';

@@ -10,9 +10,9 @@ on:
   workflow_call:
     inputs:
       type:
-        required: true
         type: string
-        default: first minor rc
+      semver-type:
+        type: string
       dry-run:
         required: true
         description: 'Run dry run?'
@@ -116,27 +116,36 @@ jobs:
           fi
 
       - name: Publish full minor release (ie. v1.x.0)
-        if: github.event.inputs.type == 'full minor release'
+        if: |
+          github.event.inputs.type == 'full minor release' &&
+          github.event.inputs.semver-type == 'minor'
         run: |
           yarn lerna publish minor --conventional-graduate $(echo "${{ env.PUBLISH }}")
 
       - name: Publish first minor RC (ie. v1.x.0-rc.0)
-        if: github.event.inputs.type == 'first minor rc'
+        if: |
+          github.event.inputs.type == 'first minor rc' &&
+          github.event.inputs.semver-type == 'minor'
         run: |
           yarn lerna publish preminor --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
       - name: Publish full patch release (ie. v1.0.x)
-        if: github.event.inputs.type == 'full patch release'
+        if: |
+          github.event.inputs.type == 'full patch release' &&
+          github.event.inputs.semver-type == 'patch'
         run: |
           yarn lerna publish patch --conventional-graduate $(echo "${{ env.PUBLISH }}")
 
       - name: Publish first patch RC (ie. v1.0.x-rc.0)
-        if: github.event.inputs.type == 'first patch rc'
+        if: |
+          github.event.inputs.type == 'first patch rc' &&
+          github.event.inputs.semver-type == 'patch'
         run: |
           yarn lerna publish prepatch --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
       - name: Publish subsequent RC (ie. v1.0.0-rc.x)
-        if: github.event.inputs.type == 'subsequent rc'
+        if: |
+          github.event.inputs.type == 'subsequent rc'
         run: |
           yarn lerna publish --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
@@ -151,9 +160,7 @@ jobs:
       # After successfully publishing a full release, trigger the production storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch
       - name: Dispatch production storybook deployment workflow
-        if:
-          ${{ (github.event.inputs.type  == 'full minor release') ||
-          (github.event.inputs.type  == 'full patch release') }}
+        if: github.event.inputs.type  == 'full release'
         uses: peter-evans/repository-dispatch@v4
         with:
           event-type: deploy-latest-storybook

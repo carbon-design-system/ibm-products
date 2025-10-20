@@ -1,22 +1,28 @@
-# Publish patch releases, both rc (release candidates) and full releases
-name: Release - patch
+# Publish minor or patch releases, both rc (release candidates) and full stable releases
+name: Release start - minor / patch
 run-name:
   ${{ inputs.type }} - dry-run:${{ inputs.dry-run }}
 
 on:
   workflow_dispatch:
     inputs:
-      type:
+      semver-type:
         required: true
-        description: 'Specify the type of release'
+        description: 'Specify the type of semver release'
         type: choice
-        default: first minor rc
-        # Full patch release (ie. v2.0.0 -> v2.0.1)
-        # First patch RC (ie. v2.0.0 -> v2.0.1-rc.0)
-        # Subsequent RC (ie v2.0.1-rc.0 -> v2.0.1-rc.1)
+        default: minor
         options:
-          - full patch release
-          - first patch rc
+          - minor
+          - patch
+      type:
+        description: 'Specify the type of release (stable, preview, etc.)'
+        type: choice
+        # Full release (ie. v2.0.0 -> v2.1.0)
+        # First RC (ie. v2.0.0 -> v2.1.0-rc.0)
+        # Subsequent RC (ie v2.1.0-rc.0 -> v2.1.0-rc.1)
+        options:
+          - full release
+          - first rc
           - subsequent rc
       dry-run:
         # Check dry run to test run lerna and confirm package version bumps

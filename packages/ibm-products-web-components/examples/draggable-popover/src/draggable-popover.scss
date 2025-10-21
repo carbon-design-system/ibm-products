@@ -1,0 +1,50 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors';
+@use 'sass:map';
+@use '@carbon/styles';
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+$block-class: #{$prefix}--draggable-popover;
+
+:root {
+  @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+
+.my-div {
+  position: absolute;
+  background: theme.$layer-01;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  inline-size: 300px;
+
+}
+
+.my-popover
+{
+  position: absolute;
+}
+
+cds-popover-content::part(content) {
+  background-color: lightblue;
+  position: absolute;
+  
+  margin-top: 35px;
+  transform: translate(-50%, 0px);
+  inset-block-end: unset;
+  top: 1px;
+}

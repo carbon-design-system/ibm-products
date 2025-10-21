@@ -1,0 +1,12 @@
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+.body-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.body-elm {
+  padding: $spacing-05;
+  color: $gray-10;
+}

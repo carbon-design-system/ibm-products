@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import { fn } from 'storybook/test';
 import './index';
-// import styles from './story-styles.scss?lit';
+import styles from './story-styles.scss?lit';
 
 const argTypes = {};
 
@@ -18,7 +18,7 @@ const blockClass = 'guide-banner-story';
 
 const renderTemplate = (args) => {
   const {
-    '@c4p-guidebanner-onchange': handleOnChange,
+    '@c4p-guidebanner-ontoggle': handleToggle,
     '@c4p-guidebanner-onclose': handleOnClose,
     collapseText,
     expandText,
@@ -26,10 +26,12 @@ const renderTemplate = (args) => {
     open,
   } = args;
   return html`
-    <style></style>
+    <style>
+      ${styles}
+    </style>
     <c4p-guide-banner
-      @c4p-guidebanner-onchange=${handleOnChange}
-      @c4p-guidebanner-onclose=${handleOnClose}
+      @c4p-guidebanner-toggle=${handleToggle}
+      @c4p-guidebanner-close=${handleOnClose}
       class=${blockClass}
       collapseText=${collapseText}
       expandText=${expandText}
@@ -37,15 +39,17 @@ const renderTemplate = (args) => {
       titleText=${titleText}
     >
       <div slot="body">
-        <c4p-guide-banner-element>
-          <p>example body content</p>
-        </c4p-guide-banner-element>
-        <c4p-guide-banner-element>
-          <p>example body content</p>
-        </c4p-guide-banner-element>
-        <c4p-guide-banner-element>
-          <p>example body content</p>
-        </c4p-guide-banner-element>
+        <div class="body-container">
+          <c4p-guide-banner-element class="body-elm">
+            <p>example body content</p>
+          </c4p-guide-banner-element>
+          <c4p-guide-banner-element class="body-elm">
+            <p>example body content</p>
+          </c4p-guide-banner-element>
+          <c4p-guide-banner-element class="body-elm">
+            <p>example body content</p>
+          </c4p-guide-banner-element>
+        </div>
       </div>
     </c4p-guide-banner>
   `;
@@ -53,7 +57,7 @@ const renderTemplate = (args) => {
 
 export const Default = {
   args: {
-    '@c4p-guidebanner-onchange': fn(),
+    '@c4p-guidebanner-ontoggle': fn(),
     '@c4p-guidebanner-onclose': fn(),
     collapseText: 'Read less',
     expandText: 'Read more',

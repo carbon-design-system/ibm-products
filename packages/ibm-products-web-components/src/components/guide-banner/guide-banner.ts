@@ -27,36 +27,37 @@ const blockEvent = `${prefix}-guidebanner`;
  *
  * @element c4p-guide-banner
  * @csspart guide-banner The options tile
- * @fires c4p-guide-banner-onchange Custom event fired when tile is opened
- * @fires c4p-guide-banner-onclose Custom event fired when tile is closed
+ * @fires c4p-guide-banner-toggle Custom event fired when tile is opened
+ * @fires c4p-guide-banner-close Custom event fired when tile is closed
  * */
 
 @customElement(`${prefix}-guide-banner`)
 class CDSGuideBanner extends HostListenerMixin(LitElement) {
   @property({ type: String, reflect: true })
-  titleText?: string = '';
+  collapseText?: string = '';
 
   @property({ type: String, reflect: true })
   expandText?: string = '';
 
-  @property({ type: String, reflect: true })
-  collapseText?: string = '';
-
   @property({ type: Boolean, reflect: true })
   open: boolean = false;
 
-  static get eventOnChange() {
-    return `${blockEvent}-onchange`;
+  @property({ type: String, reflect: true })
+  titleText?: string = '';
+
+  static get eventToggle() {
+    return `${blockEvent}-toggle`;
   }
 
   static get eventOnClose() {
-    return `${blockEvent}-onclose`;
+    return `${blockEvent}-close`;
   }
 
-  private _onCloseHandler() {
+  private _handleClose() {
     const init = {
       bubbles: true,
       composed: true,
+      detail: {},
     };
     this.dispatchEvent(
       new CustomEvent(
@@ -66,7 +67,7 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
     );
   }
 
-  private _onChangeHandler() {
+  private _handleToggle() {
     const init = {
       bubbles: true,
       composed: true,
@@ -76,7 +77,7 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
     };
     this.dispatchEvent(
       new CustomEvent(
-        (this.constructor as typeof CDSGuideBanner).eventOnChange,
+        (this.constructor as typeof CDSGuideBanner).eventToggle,
         init
       )
     );
@@ -95,7 +96,7 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
       kind="ghost"
       size="md"
       class="${blockClass}__toggle-button"
-      @click=${this._onChangeHandler}
+      @click=${this._handleToggle}
     >
       ${buttonText}
     </cds-button>`;
@@ -115,16 +116,15 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
           })}
           ${this._getTitle()}
           <slot name="header"></slot>
-          <span class="${blockClass}__close-button">
-            <cds-button
-              align="bottom-end"
-              kind="ghost"
-              size="md"
-              @click="${this._onCloseHandler}"
-            >
-              ${iconLoader(Close16, { slot: 'icon' })}
-            </cds-button>
-          </span>
+          <cds-button
+            align="bottom-end"
+            class="${blockClass}__close-button"
+            kind="ghost"
+            size="md"
+            @click="${this._handleClose}"
+          >
+            ${iconLoader(Close16, { slot: 'icon' })}
+          </cds-button>
         </div>
         <details ?open=${this.open}>
           <slot name="body"></slot>

@@ -9,15 +9,19 @@ concurrency:
 on:
   workflow_call:
     inputs:
-      type:
-        type: string
       semver-type:
         type: string
-      dry-run:
+        default: minor
         required: true
-        description: 'Run dry run?'
+      type:
+        type: string
+        default: first rc
+        required: true
+      dry-run:
         type: boolean
         default: true
+        required: true
+        description: 'Run dry run?'
 
 jobs:
   release:

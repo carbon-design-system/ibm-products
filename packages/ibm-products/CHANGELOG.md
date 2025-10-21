@@ -1,3 +1,7 @@
+## `@carbon/ibm-products@2.77.1`
+### Bug fixes :bug:
+- fix(PageHeader): use correct export path (#8514)
+
 ## `@carbon/ibm-products@2.76.0`
 ### Features :rocket:
 - feat(CoachmarkFixed): implemented as patterns (#8221)

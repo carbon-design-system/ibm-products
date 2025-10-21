@@ -818,11 +818,12 @@ interface PageHeaderTagOverflowProps {
 const PageHeaderTagOverflow = React.forwardRef<
   HTMLDivElement,
   PageHeaderTagOverflowProps
->(({ renderOverflowTag, renderPopoverContent, children }) => {
+>(({ renderOverflowTag, renderPopoverContent, children }, ref) => {
   const [openPopover, setOpenPopover] = useState(false);
   const [hiddenTags, setHiddenTags] = useState<HTMLElement[]>([]);
 
-  const tagsContainerRef = useRef<HTMLDivElement>(null);
+  const localRef = useRef<HTMLDivElement>(null);
+  const tagsContainerRef = (ref || localRef) as RefObject<HTMLDivElement>;
   // To close popover when window resizes
   useEffect(() => {
     const handleResize = () => {
@@ -848,6 +849,8 @@ const PageHeaderTagOverflow = React.forwardRef<
         setHiddenTags(hidden);
       },
     });
+    // Don't want ref in dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

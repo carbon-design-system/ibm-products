@@ -140,6 +140,7 @@ function getRollupConfig(input, rootDir, outDir) {
           rootDir,
           outDir,
         },
+        exclude: ['**/patterns/**'], // pattern code doesn't need to be included in build
       }),
       babel(babelConfig),
       preserveDirectives(),

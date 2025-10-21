@@ -220,7 +220,7 @@ LabelOnly.args = {
 export const WithCaption = Template.bind({});
 WithCaption.args = {
   ...defaultProps,
-  caption: 'Description or long caption',
+  description: 'Description or long caption',
   label: '',
   mediaRatio: null,
 };

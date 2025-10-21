@@ -823,7 +823,7 @@ const PageHeaderTagOverflow = React.forwardRef<
   const [hiddenTags, setHiddenTags] = useState<HTMLElement[]>([]);
 
   const localRef = useRef<HTMLDivElement>(null);
-  const tagsContainerRef = ref || localRef;
+  const tagsContainerRef = (ref || localRef) as RefObject<HTMLDivElement>;
   // To close popover when window resizes
   useEffect(() => {
     const handleResize = () => {

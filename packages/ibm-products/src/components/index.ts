@@ -43,7 +43,6 @@ export * from './StringFormatter';
 export * from './TagOverflow';
 export * from './TagSet';
 export * from './Tearsheet';
-export * from './TruncatedText';
 export * from './UserAvatar';
 export * from './WebTerminal';
 

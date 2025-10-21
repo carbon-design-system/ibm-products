@@ -13,8 +13,6 @@ $css--plex: true !default;
 @use '@carbon/ibm-products-styles/scss/config';
 @use '@carbon/ibm-products-styles/scss/components/Coachmark/_coachmark-beacon';
 
-$beaconAnimationTime: 2s;
-
 $prefix: config.$pkg-prefix;
 $carbon-prefix: config.$carbon-prefix;
 

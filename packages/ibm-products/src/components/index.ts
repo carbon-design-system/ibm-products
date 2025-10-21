@@ -55,13 +55,14 @@ export * from './WebTerminal';
 // Preview
 export * as preview__Coachmark from './Coachmark/next/Coachmark';
 export * as preview__CoachmarkTagline from './Coachmark/next/Coachmark/CoachmarkTagline';
+export * as preview__CoachmarkBeacon from './Coachmark/next/Coachmark/CoachmarkBeacon';
 
 export {
   FeatureFlags as preview__FeatureFlags,
   useFeatureFlag as preview__useFeatureFlag,
   useFeatureFlags as preview__useFeatureFlags,
 } from './FeatureFlags';
-export * as preview__PageHeader from './PageHeader/next/PageHeader';
+export * as preview__PageHeader from './PageHeader/next';
 
 // Preview candidates
 export {

@@ -127,6 +127,10 @@ export interface MultiAddSelectProps {
    */
   noSelectionTitle?: string;
   /**
+   * Determines if the component should be rendered within a Tearsheet component
+   */
+  noTearsheet?: boolean;
+  /**
    * function to call when the close button clicked
    */
   onClose?: () => void;
@@ -274,6 +278,10 @@ MultiAddSelect.propTypes = {
    * title that displays in the sidebar when nothing is selected
    */
   noSelectionTitle: PropTypes.string,
+  /**
+   * Determines if the component should be rendered within a Tearsheet component
+   */
+  noTearsheet: PropTypes.bool,
   /**
    * function to call when the close button clicked
    */

@@ -1,3 +1,11 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import { mergeConfig } from 'vite';
 import { dirname, join } from 'node:path';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
@@ -7,6 +15,7 @@ import { getAutoTrack } from '../../../scripts/get-auto-track-script';
 
 const stories = glob.sync(
   [
+    './welcome/**/*.stories.*',
     '../docs/**/*.mdx',
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',

@@ -1,4 +1,18 @@
-## `@carbon/ibm-products-web-components@0.25.0-rc.0`
+## `@carbon/ibm-products-web-components@0.26.0`
+### Features :rocket:
+- feat(step-util): adds utility for stepping within lit components (#8296)
+- feat(code-connect): add web component code connect config setup (#8387)
+- feat: addselect notearsheet implementation (#8259)
+- feat(checklist): example (#8316)
+
+### Housekeeping :house:
+- chore(deps): update dependency happy-dom to v20 [security] (#8441)
+- chore: wc storybook welcome page (#8345)
+- chore(storybook): use theme tokens for sb doc previews (#8396)
+- chore(deps): update dependency happy-dom to v19 (#8355)
+- chore(deps): update dependency globby to v15 (#8367)
+
+## `@carbon/ibm-products-web-components@0.25.0`
 ### Features :rocket:
 - feat(checklist):  web component  (#8144)
 

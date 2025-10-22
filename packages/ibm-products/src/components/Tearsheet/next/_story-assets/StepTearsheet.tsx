@@ -56,7 +56,7 @@ export const TearsheetWithSteps = ({
   } = useStepContext();
 
   return (
-    <Tearsheet open={open} variant={'wide'} onClose={() => setOpen?.(false)}>
+    <Tearsheet open={open} variant='wide' onClose={() => setOpen?.(false)}>
       <Tearsheet.Header>
         <Tearsheet.HeaderContent
           label="Customer data"

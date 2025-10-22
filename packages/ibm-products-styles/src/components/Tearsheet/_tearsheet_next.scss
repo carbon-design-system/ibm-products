@@ -210,9 +210,15 @@ $motion-duration: $duration-moderate-02;
     inline-size: 100%;
     margin-block-start: -14px;
 
-    // apply spacing only between two visible items
-    > *:not([hidden]) + *:not([hidden]) {
-      padding-inline-start: $spacing-03;
+    > *.#{$block-class__next}__header-action-item:not([data-hidden='true']) {
+      margin-inline-end: $spacing-03; /* space between visible items */
+    }
+
+    /* Remove margin on the last visible item */
+    > *.#{$block-class__next}__header-action-item:not(
+        [data-hidden='true']
+      ):nth-last-child(2) {
+      margin-inline-end: 0;
     }
 
     > * {

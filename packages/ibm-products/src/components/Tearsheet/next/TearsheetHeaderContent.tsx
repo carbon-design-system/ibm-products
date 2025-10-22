@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useContext } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import cx from 'classnames';
 import { blockClass, TearsheetContext } from './context';
 import { TruncatedText } from '../../TruncatedText';
@@ -20,9 +20,7 @@ export interface TearsheetHeaderContentProps {
 
   title: string;
   label?: string;
-  description?: string;
-  descriptionExpandLabel?: string;
-  descriptionCollapseLabel?: string;
+  description?: ReactNode;
   titleIcon?: CarbonIconType;
   titleIconPosition?: 'leading' | 'trailing';
   /**
@@ -40,8 +38,6 @@ const TearsheetHeaderContent = React.forwardRef<
     label,
     title,
     description,
-    descriptionExpandLabel = 'Read more',
-    descriptionCollapseLabel = 'Read less',
     titleIcon: Icon,
     titleIconPosition = 'leading',
     headerActions,
@@ -77,15 +73,7 @@ const TearsheetHeaderContent = React.forwardRef<
           </h2>
         </div>
 
-        <div className={`${blockClass}__header-description`}>
-          <TruncatedText
-            id={`${blockClass}__header-description__truncatedText`}
-            expandLabel={descriptionExpandLabel}
-            collapseLabel={descriptionCollapseLabel}
-            value={description}
-            type="expand"
-          />
-        </div>
+        <div className={`${blockClass}__header-description`}>{description}</div>
         {children && (
           <div className={`${blockClass}__header-content--extra`}>
             {children}

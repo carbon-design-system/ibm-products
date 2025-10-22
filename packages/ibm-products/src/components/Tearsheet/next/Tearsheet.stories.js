@@ -29,10 +29,16 @@ import {
 
 import { Tearsheet } from '.';
 import styles from './_storybook-styles.scss?inline';
-import { Bee, RightPanelClose } from '@carbon/react/icons';
+import {
+  Bee,
+  BottomPanelOpenFilled,
+  RightPanelClose,
+} from '@carbon/react/icons';
 import { TearsheetWithSteps } from './_story-assets/StepTearsheet';
 import { StepProvider } from '../../StepFlow';
 import { StackProvider } from './StackContext';
+import mdx from './Tearsheet.mdx';
+import { TruncatedText } from '../../TruncatedText';
 const storyClass = 'tearsheet-next-stories';
 
 export default {
@@ -56,13 +62,18 @@ export default {
     MainContent: Tearsheet.MainContent,
     SummaryContent: Tearsheet.SummaryContent,
     Footer: Tearsheet.Footer,
+    StackProvider: StackProvider,
   },
-
+  argTypes: {
+    children: {
+      control: false, // ReactNode props don't work in the controls pane
+    },
+  },
   parameters: {
     styles,
-    // docs: {
-    //   page: MDXContent,
-    // },
+    docs: {
+      page: mdx,
+    },
   },
 };
 
@@ -103,6 +114,15 @@ const sampleDecorator = (decorator) => {
       return;
   }
 };
+const description = (
+  <TruncatedText
+    id={`header-description__truncatedText`}
+    expandLabel={'Read more'}
+    collapseLabel={'Read less'}
+    value="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page"
+    type="expand"
+  />
+);
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* * * * * * * * * * * * * * | STORIES | * * * * * * * * * * * * * * */
@@ -116,9 +136,8 @@ const sampleDecorator = (decorator) => {
 export const Default = () => {
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
-  const currentStep = 1;
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
-  const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
+
   return (
     <>
       <Button
@@ -143,10 +162,10 @@ export const Default = () => {
           <Tearsheet.HeaderContent
             open
             label="Customer data"
-            title="Customer account uniqueness SLA "
-            description="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular sized button. This issue is most found in tables. Small button should have three words or less. When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are always paired with text."
+            title="Title of the tearsheet "
             titleIcon={Bee}
             titleIconPosition={'leading'}
+            description={description}
             headerActions={
               <Tearsheet.HeaderActions
                 menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
@@ -169,32 +188,235 @@ export const Default = () => {
               </Tearsheet.HeaderActions>
             }
           ></Tearsheet.HeaderContent>
+        </Tearsheet.Header>
+        <Tearsheet.Body>
+          <Tearsheet.MainContent>
+            <div className="influencerPanelTrigger">
+              <IconButton
+                kind="ghost"
+                label="Open influencer"
+                onClick={() => setInfluencerPanelOpen(true)}
+              >
+                <RightPanelClose />
+              </IconButton>
+            </div>
+            <div className="summaryPanelTrigger">
+              <IconButton
+                kind="ghost"
+                label="Open right panel"
+                onClick={() => setSummaryPanelOpen(true)}
+              >
+                <RightPanelClose />
+              </IconButton>
+            </div>
 
-          <ProgressIndicator>
-            <ProgressStep
-              complete={currentStep > 1}
-              current={currentStep === 1}
-              label="Step 1"
-              secondaryLabel="Optional label"
-            />
-            <ProgressStep
-              complete={currentStep > 2}
-              current={currentStep === 2}
-              label="Step 2"
-            />
-            <ProgressStep
-              current={currentStep === 3}
-              label="Step 3"
-              complete={currentStep > 3}
-            />
-          </ProgressIndicator>
-          <Tearsheet.NavigationBar scroller={<Tearsheet.ScrollButton />}>
-            <TabList aria-label="Tab list">
-              <Tab>Tab 1</Tab>
-              <Tab>Tab 2</Tab>
-              <Tab>Tab 3</Tab>
-            </TabList>
-          </Tearsheet.NavigationBar>
+            <Section className="main-content">
+              <Heading>Main content heading</Heading>
+
+              <Form>
+                <FormGroup
+                  legendId="tearsheet-form-group"
+                  legendText="FormGroup Legend"
+                >
+                  <TextInput
+                    id="input1"
+                    labelText="Enter an important value here"
+                  />
+                  <TextInput id="tss-ft2" labelText="Here is an entry field:" />
+                  <NumberInput
+                    className="some-class"
+                    id="number-input-1"
+                    label="Number Input"
+                    min={0}
+                    max={100}
+                    value={50}
+                    step={10}
+                    iconDescription="Add/decrement number"
+                  />
+                </FormGroup>
+                <FormGroup
+                  legendId="tearsheet-form-group"
+                  legendText="FormGroup Legend"
+                >
+                  <TextInput
+                    id="tss-ft1"
+                    labelText="Enter an important value here"
+                  />
+                  <TextInput id="tss-ft2" labelText="Here is an entry field:" />
+                  <NumberInput
+                    className="some-class"
+                    id="number-input-1"
+                    label="Number Input"
+                    min={0}
+                    max={100}
+                    value={50}
+                    step={10}
+                    iconDescription="Add/decrement number"
+                  />
+                </FormGroup>
+                <FormGroup
+                  legendId="tearsheet-form-group"
+                  legendText="FormGroup Legend"
+                >
+                  <TextInput
+                    id="tss-ft1"
+                    labelText="Enter an important value here"
+                  />
+                  <TextInput id="tss-ft2" labelText="Here is an entry field:" />
+                  <NumberInput
+                    className="some-class"
+                    id="number-input-1"
+                    label="Number Input"
+                    min={0}
+                    max={100}
+                    value={50}
+                    step={10}
+                    iconDescription="Add/decrement number"
+                  />
+                </FormGroup>
+                <FormGroup
+                  legendId="tearsheet-form-group"
+                  legendText="FormGroup Legend"
+                >
+                  <TextInput
+                    id="tss-ft1"
+                    labelText="Enter an important value here"
+                  />
+                  <TextInput id="tss-ft2" labelText="Here is an entry field:" />
+                  <NumberInput
+                    className="some-class"
+                    id="number-input-1"
+                    label="Number Input"
+                    min={0}
+                    max={100}
+                    value={50}
+                    step={10}
+                    iconDescription="Add/decrement number"
+                  />
+                </FormGroup>
+              </Form>
+            </Section>
+          </Tearsheet.MainContent>
+
+          <Tearsheet.SummaryContent
+            summaryPanelOpen={summaryPanelOpen}
+            onSummaryPanelClose={() => setSummaryPanelOpen(false)}
+          >
+            <Heading className="summaryPanelHeading">Summary details</Heading>
+            <div className="rightDetailsBody">
+              <div>
+                <label>item 1</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 2</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 3</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 4</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 5</label>
+                <p>item description</p>
+              </div>
+            </div>
+          </Tearsheet.SummaryContent>
+        </Tearsheet.Body>
+        <Tearsheet.Footer>
+          <div className="default__action-buttons">
+            <Button
+              className="step-action-button step-action-button__cancel"
+              kind="ghost"
+              onClick={() => setOpen(false)}
+              size="xl"
+            >
+              Cancel
+            </Button>
+            <Button
+              className="step-action-button"
+              kind="secondary"
+              onClick={() => {
+                handlePrevious();
+              }}
+              // disabled={handleBackDisabledState(currentStep)}
+              size="xl"
+            >
+              Back
+            </Button>
+            <Button
+              // disabled={handleNextDisabledState(formState, currentStep)}
+              size="xl"
+              className="step-action-button"
+            >
+              {'Submit'}
+            </Button>
+          </div>
+        </Tearsheet.Footer>
+      </Tearsheet>
+    </>
+  );
+};
+export const WithInfluencer = () => {
+  const [open, setOpen] = useState(false);
+  const launcherButtonRef = useRef(null);
+  const currentStep = 1;
+  const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setOpen(true);
+        }}
+        ref={launcherButtonRef}
+      >
+        Open Tearsheet
+      </Button>
+
+      <Tearsheet
+        open={open}
+        variant={'wide'}
+        decorator={sampleDecorator(1)}
+        onClose={() => setOpen(false)}
+        preventCloseOnClickOutside={true}
+        launcherButtonRef={launcherButtonRef}
+        selectorPrimaryFocus={'#input1'}
+      >
+        <Tearsheet.Header>
+          <Tearsheet.HeaderContent
+            open
+            label="Customer data"
+            title="Title of the tearsheet "
+            titleIcon={Bee}
+            titleIconPosition={'leading'}
+            description={description}
+            headerActions={
+              <Tearsheet.HeaderActions
+                menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
+              >
+                <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+                  <Button kind="tertiary" size="sm">
+                    Action 1
+                  </Button>
+                </Tearsheet.HeaderActionItem>
+                <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
+                  <Button kind="tertiary" size="sm">
+                    Action 2
+                  </Button>
+                </Tearsheet.HeaderActionItem>
+                <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
+                  <Button kind="tertiary" size="sm">
+                    Action 3
+                  </Button>
+                </Tearsheet.HeaderActionItem>
+              </Tearsheet.HeaderActions>
+            }
+          ></Tearsheet.HeaderContent>
         </Tearsheet.Header>
         <Tearsheet.Influencer
           influencerPanelOpen={influencerPanelOpen}
@@ -327,42 +549,13 @@ export const Default = () => {
               </Form>
             </Section>
           </Tearsheet.MainContent>
-
-          <Tearsheet.SummaryContent
-            summaryPanelOpen={summaryPanelOpen}
-            onSummaryPanelClose={() => setSummaryPanelOpen(false)}
-          >
-            <Heading className="summaryPanelHeading">Panel heading</Heading>
-            <div className="rightDetailsBody">
-              <div>
-                <label>item 1</label>
-                <p>item description</p>
-              </div>
-              <div>
-                <label>item 2</label>
-                <p>item description</p>
-              </div>
-              <div>
-                <label>item 3</label>
-                <p>item description</p>
-              </div>
-              <div>
-                <label>item 4</label>
-                <p>item description</p>
-              </div>
-              <div>
-                <label>item 5</label>
-                <p>item description</p>
-              </div>
-            </div>
-          </Tearsheet.SummaryContent>
         </Tearsheet.Body>
         <Tearsheet.Footer>
           <div className="default__action-buttons">
             <Button
               className="step-action-button step-action-button__cancel"
               kind="ghost"
-              onClick={() => console.log('clicked')}
+              onClick={() => setOpen(false)}
               size="xl"
             >
               Cancel
@@ -416,10 +609,8 @@ export const WithTabs = () => {
             <Tearsheet.HeaderContent
               open
               label="Customer data"
-              title="Customer account uniqueness SLA "
-              description="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular sized button. This issue is most found in tables. Small button should have three words or less. When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are always paired with text."
-              titleIcon={Bee}
-              titleIconPosition={'leading'}
+              title="Title of the tearsheet "
+              description={description}
               headerActions={
                 <Tearsheet.HeaderActions
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
@@ -600,10 +791,8 @@ export const narrowTearsheet = () => {
             <Tearsheet.HeaderContent
               open
               label="Customer data"
-              title="Customer account uniqueness SLA "
-              description="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular sized button. This issue is most found in tables. Small button should have three words or less. When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are always paired with text."
-              titleIcon={Bee}
-              titleIconPosition={'leading'}
+              title="Title of the tearsheet "
+              description={description}
               headerActions={
                 <Tearsheet.HeaderActions
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
@@ -773,9 +962,9 @@ export const narrowTearsheet = () => {
 
             <Tearsheet.SummaryContent
               summaryPanelOpen={summaryPanelOpen}
-              onRightPanelClose={() => setSummaryPanelOpen(false)}
+              onSummaryPanelClose={() => setSummaryPanelOpen(false)}
             >
-              <Heading className="summaryPanelHeading">Panel heading</Heading>
+              <Heading className="summaryPanelHeading">Summary details</Heading>
               <div className="rightDetailsBody">
                 <div>
                   <label>item 1</label>
@@ -843,6 +1032,32 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
         <Button onClick={() => setOpen2(!open2)}>Toggle Tearsheet 2</Button>
         <Button onClick={() => setOpen3(!open3)}>Toggle Tearsheet 3</Button>
       </div>
+      <div className="smallScreenButton">
+        <IconButton
+          kind="ghost"
+          align="bottom"
+          onClick={() => setOpen1(!open1)}
+          label="Toggle Tearsheet 1"
+        >
+          <BottomPanelOpenFilled />
+        </IconButton>
+        <IconButton
+          kind="ghost"
+          align="bottom"
+          onClick={() => setOpen2(!open2)}
+          label="Toggle Tearsheet 2"
+        >
+          <BottomPanelOpenFilled />
+        </IconButton>
+        <IconButton
+          kind="ghost"
+          align="bottom"
+          onClick={() => setOpen3(!open3)}
+          label="Toggle Tearsheet 3"
+        >
+          <BottomPanelOpenFilled />
+        </IconButton>
+      </div>
 
       <StackProvider stackStepSize="lg">
         <Tearsheet
@@ -872,9 +1087,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
               }
               label="Customer data"
               title="Tearsheet 1 "
-              description="Buttons are used to initialize an action, "
-              titleIcon={Bee}
-              titleIconPosition={'leading'}
+              description="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
             ></Tearsheet.HeaderContent>
           </Tearsheet.Header>
           <Tearsheet.Body>
@@ -911,7 +1124,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
             </Tearsheet.MainContent>
 
             <Tearsheet.SummaryContent>
-              <Heading className="rightPanelHeading">Panel heading</Heading>
+              <Heading className="rightPanelHeading">Summary Details</Heading>
               <div className="rightDetailsBody">
                 <div>
                   <label>item 1</label>
@@ -972,9 +1185,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
             <Tearsheet.HeaderContent
               label="Customer data"
               title="Tearsheet 2"
-              description="Buttons are used to initialize an action, "
-              titleIcon={Bee}
-              titleIconPosition={'leading'}
+              description="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
               headerActions={
                 <Tearsheet.HeaderActions
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
@@ -1028,7 +1239,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
             </Tearsheet.MainContent>
 
             <Tearsheet.SummaryContent>
-              <Heading className="rightPanelHeading">Panel heading</Heading>
+              <Heading className="rightPanelHeading">Summary Details</Heading>
               <div className="rightDetailsBody">
                 <div>
                   <label>item 1</label>
@@ -1089,9 +1300,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
             <Tearsheet.HeaderContent
               label="Customer data"
               title="Tearsheet 3"
-              description="Buttons are used to initialize an action, "
-              titleIcon={Bee}
-              titleIconPosition={'leading'}
+              description="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
             ></Tearsheet.HeaderContent>
           </Tearsheet.Header>
           <Tearsheet.Body>
@@ -1128,7 +1337,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
             </Tearsheet.MainContent>
 
             <Tearsheet.SummaryContent>
-              <Heading className="rightPanelHeading">Panel heading</Heading>
+              <Heading className="rightPanelHeading">Summary Details</Heading>
               <div className="rightDetailsBody">
                 <div>
                   <label>item 1</label>

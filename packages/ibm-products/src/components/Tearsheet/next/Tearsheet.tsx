@@ -78,7 +78,6 @@ export interface TearsheetProps {
    * Default rightContent takes 256px, this allow to override eg: 300px , 20rem
    */
   rightContentWidth?: string;
-  arialLabel?: string;
   variant?: 'wide' | 'narrow';
   /**
    * Optional prop that allows you to pass any component.

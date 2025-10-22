@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -354,6 +354,7 @@ $motion-duration: $duration-moderate-02;
   }
   .#{$pkg-prefix}--side-panel {
     position: absolute;
+    z-index: 9999;
     block-size: 100%;
     inline-size: 100%;
     inset-block-start: 0;

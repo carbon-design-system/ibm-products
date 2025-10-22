@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -71,14 +71,12 @@ export const TearsheetHeaderActions = ({
     return React.isValidElement(child);
   });
   useLayoutEffect(() => {
+    //Menu button will be rendered only if they pass the items in TearsheetHeaderActionItem
     if (!containerRef.current || hasOtherChildType.current) {
       return;
     }
     createOverflowHandler({
       container: containerRef.current,
-
-      // offsetSize: offsetRef.current?.offsetWidth,
-      //  maxVisibleItems: items.length - 1,
       onChange: (visible, hidden) => {
         setHiddenItems(items?.slice(visible.length));
         if (hidden.length > 0) {
@@ -157,7 +155,6 @@ export interface TearsheetHeaderActionItemProps {
 export const TearsheetHeaderActionItem = ({
   children,
   className,
-  ...rest
 }: TearsheetHeaderActionItemProps) => {
   return (
     <div className={`${blockClass}__header-action-item  ${className}`}>

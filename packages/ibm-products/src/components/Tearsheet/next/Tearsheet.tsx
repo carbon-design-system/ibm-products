@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  useEffect,
   useLayoutEffect,
   useState,
   useRef,
@@ -53,10 +52,10 @@ import {
   TearsheetHeaderActions,
   TearsheetHeaderActionsProps,
 } from './TearsheetHeaderActions';
-import { useMatchMedia } from './useMatchMedia';
 import { breakpoints } from '@carbon/layout';
 import { usePortalTarget } from '../../../global/js/hooks/usePortalTarget';
 import { useStackContext } from './StackContext';
+import { useMatchMedia } from '../../../global/js/hooks/useMatchMedia';
 
 /**
  * ----------
@@ -84,8 +83,10 @@ export interface TearsheetProps extends ComposedModalProps {
   /**
    * Default rightContent takes 256px, this allow to override eg: 300px , 20rem
    */
-  rightContentWidth?: string;
-  arialLabel?: string;
+  summaryContentWidth?: string;
+  /**
+   * Default to wide variant. Pass in narrow for narrow tearsheet
+   */
   variant?: 'wide' | 'narrow';
   /**
    * Optional prop that allows you to pass any component.
@@ -145,7 +146,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       selectorsFloatingMenus = [],
       className,
       influencerWidth,
-      rightContentWidth,
+      summaryContentWidth,
       ariaLabel,
       onClose,
       selectorPrimaryFocus,
@@ -197,10 +198,10 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
           `${influencerWidth}`
         );
       }
-      if (rightContentWidth) {
+      if (summaryContentWidth) {
         document.documentElement.style.setProperty(
           '--tearsheet-summary-content-width',
-          `${rightContentWidth}`
+          `${summaryContentWidth}`
         );
       }
       if (verticalGap) {
@@ -299,7 +300,12 @@ export interface FooterProps {
 }
 const Footer = forwardRef<HTMLDivElement, FooterProps>(({ children }, ref) => {
   return (
-    <Layer as="footer" withBackground className={`${blockClass}__footer`}>
+    <Layer
+      as="footer"
+      withBackground
+      className={`${blockClass}__footer`}
+      ref={ref}
+    >
       {children}
     </Layer>
   );

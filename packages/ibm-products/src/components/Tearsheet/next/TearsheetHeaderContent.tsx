@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -49,7 +49,7 @@ const TearsheetHeaderContent = React.forwardRef<
   } = props;
   const { isSm } = useContext(TearsheetContext);
   return (
-    <div className={`${blockClass}__header-content-wrapper`}>
+    <div className={`${blockClass}__header-content-wrapper`} ref={ref}>
       <div className={`${blockClass}__header-content`}>
         <p className={`${blockClass}__header-label`}>{label}</p>
         <div className={`${blockClass}__content__title-wrapper`}>

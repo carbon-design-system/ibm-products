@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,18 +7,15 @@
 import React, {
   ForwardedRef,
   forwardRef,
-  isValidElement,
-  ReactElement,
   ReactNode,
   useContext,
-  useEffect,
   useRef,
 } from 'react';
 
 import { blockClass, TearsheetContext } from './context';
 import { SidePanel } from '../../SidePanel';
 import { Layer } from '@carbon/react';
-
+import { useCollapsible } from '../../../global/js/hooks/useCollapsible';
 /**
  * ----------------
  * TearsheetBody
@@ -63,90 +60,37 @@ export interface MainContentProps {
  */
 export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
   ({ children, className, ...rest }, ref: ForwardedRef<HTMLDivElement>) => {
-    const scrollSentinelRef = useRef<HTMLDivElement>(null);
-
     const localRef = useRef<HTMLDivElement>(null);
     const mainContentRef = ref || localRef;
 
     const { setFullyCollapsed, disableHeaderCollapse } =
       useContext(TearsheetContext);
 
-    useEffect(() => {
-      // This logic controls the collapsible header based on scroll position.
-      // We avoid relying solely on scroll events because of an edge case:
-      // when the header is expanded, the content might be scrollable, but collapsing the header
-      // can remove the scroll (since extra height is released). In that scenario,
-      // no further scroll events would fire, leaving the component stuck in the collapsed state.
+    const container =
+      typeof mainContentRef === 'function'
+        ? null
+        : (mainContentRef?.current ?? null);
 
-      const container =
-        mainContentRef && 'current' in mainContentRef
-          ? mainContentRef.current
-          : null;
-      if (!container || disableHeaderCollapse) {
-        return;
-      }
+    const collapseHeader = (collapse: boolean) => {
+      if (container) {
+        if (collapse) {
+          const canScroll = container.scrollHeight > container.clientHeight; // collapse header only when there is scroll
 
-      let startY: number | null = null;
-      let isDragging = false;
-
-      const onPointerDown = (e: PointerEvent) => {
-        startY = e.clientY;
-        isDragging = true;
-      };
-
-      const onPointerMove = (e: PointerEvent) => {
-        if (!isDragging || startY === null) {
-          return;
+          if (canScroll) {
+            setFullyCollapsed?.(true);
+          }
+        } else if (container.scrollTop === 0) {
+          // expand header when scroll reaches top
+          setFullyCollapsed?.(false);
         }
-
-        const diffY = startY - e.clientY;
-        if (diffY > 5) {
-          collapseHeader(true, container);
-        } else if (diffY < -5) {
-          collapseHeader(false, container);
-        }
-      };
-
-      const onPointerUp = () => {
-        isDragging = false;
-        startY = null;
-        document.body.style.cursor = 'default';
-      };
-
-      const onWheel = (e: WheelEvent) => {
-        if (e.deltaY > 0) {
-          collapseHeader(true, container);
-        } else if (e.deltaY < 0) {
-          collapseHeader(false, container);
-        }
-      };
-
-      container.addEventListener('pointerdown', onPointerDown);
-      container.addEventListener('pointermove', onPointerMove);
-      container.addEventListener('pointerup', onPointerUp);
-      container.addEventListener('wheel', onWheel);
-
-      // Cleanup on unmount
-      return () => {
-        container.removeEventListener('pointerdown', onPointerDown);
-        container.removeEventListener('pointermove', onPointerMove);
-        container.removeEventListener('pointerup', onPointerUp);
-        container.removeEventListener('wheel', onWheel);
-      };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [mainContentRef, setFullyCollapsed, disableHeaderCollapse]);
-
-    const collapseHeader = (collapse: boolean, container) => {
-      if (collapse) {
-        const canScroll = container.scrollHeight > container.clientHeight;
-
-        if (canScroll) {
-          setFullyCollapsed?.(true);
-        }
-      } else if (container.scrollTop === 0) {
-        setFullyCollapsed?.(false);
       }
     };
+
+    useCollapsible({
+      container,
+      triggerCollapse: collapseHeader,
+      disableHeaderCollapse,
+    });
 
     return (
       <Layer
@@ -172,15 +116,18 @@ export interface SummaryContentProps {
   /**
    * In mobile screens right side details section wont be visible by default. This prop can be toggled to open/close right panel in this case.
    */
-  rightPanelOpen?: boolean;
+  summaryPanelOpen?: boolean;
   /**
    * Specify a handler for closing the side panel.
    * This handler closes the modal, e.g. changing `open` prop.
    */
-  onRightPanelClose?(): void;
+  onSummaryPanelClose?(): void;
 }
 export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
-  ({ children, className, rightPanelOpen = false, onRightPanelClose }, ref) => {
+  (
+    { children, className, summaryPanelOpen = false, onSummaryPanelClose },
+    ref
+  ) => {
     const { isSm } = useContext(TearsheetContext);
 
     return !isSm ? (
@@ -190,8 +137,8 @@ export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
     ) : (
       <SidePanel
         size="sm"
-        open={rightPanelOpen}
-        onRequestClose={onRightPanelClose}
+        open={summaryPanelOpen}
+        onRequestClose={onSummaryPanelClose}
       >
         {children}
       </SidePanel>

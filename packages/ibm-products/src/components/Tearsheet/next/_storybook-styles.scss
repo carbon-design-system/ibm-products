@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -33,7 +33,7 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
   }
 }
 
-.rightPanelTrigger {
+.summaryPanelTrigger {
   position: absolute;
   inset-block-start: 0;
   inset-inline-end: 0;
@@ -46,13 +46,13 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
 }
 
 .#{$block-class__next}:not(.#{$block-class__next}--narrow) {
-  .rightPanelTrigger,
+  .summaryPanelTrigger,
   .influencerPanelTrigger {
     @include hideAtLargeScreens();
   }
 }
 
-.rightPanelHeading {
+.summaryPanelHeading {
   @include type.type-style('heading-03');
 }
 

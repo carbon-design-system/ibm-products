@@ -26,16 +26,8 @@ figma.connect(
         Collapsable: true,
       }),
       title: figma.string('Header text'),
-      // children: figma.enum('Type', {
-      //   "Not collapsible": undefined,
-      //   Collapsible: figma.children('_Insight'),
-      // }),
       children: figma.children('_Insight'),
       open: figma.boolean('Expanded'),
-      // No matching props could be found for these Figma properties:
-      // "headerText": figma.string('Header text'),
-      // "expanded": figma.boolean('Expanded'),
-      // "pagination": figma.boolean('Pagination')
     },
     example: (props) => (
       <Guidebanner

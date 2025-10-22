@@ -79,6 +79,6 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
   display: flex;
   gap: $spacing-01;
   inset-block-start: 0;
-  inset-inline-start: c4p-settings.$spacing-05;
+  inset-inline-start: $spacing-05;
   @include hideAtLargeScreens();
 }

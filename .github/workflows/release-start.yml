@@ -38,7 +38,7 @@ jobs:
     # trigger the input data to the `release-base` workflow and trigger it
     uses: ./.github/workflows/release-base.yml
     with:
-      semver-type: ${{ inputs.type }}
+      semver-type: ${{ inputs.semver-type }}
       type: ${{ inputs.type }}
       dry-run: ${{ inputs.dry-run }}
     secrets: inherit

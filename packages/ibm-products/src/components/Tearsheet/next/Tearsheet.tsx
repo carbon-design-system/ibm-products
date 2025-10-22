@@ -22,7 +22,6 @@ import {
   unstable_FeatureFlags as FeatureFlags,
   Layer,
   ModalBody,
-  ModalHeader,
   usePrefix,
 } from '@carbon/react';
 import { blockClass, TearsheetContext } from './context';

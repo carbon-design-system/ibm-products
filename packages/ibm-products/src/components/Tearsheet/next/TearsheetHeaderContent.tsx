@@ -49,7 +49,7 @@ const TearsheetHeaderContent = React.forwardRef<
   } = props;
   const { isSm } = useContext(TearsheetContext);
   return (
-    <div className={`${blockClass}__header-content-wrapper`}>
+    <div className={`${blockClass}__header-content-wrapper`} ref={ref}>
       <div className={`${blockClass}__header-content`}>
         <p className={`${blockClass}__header-label`}>{label}</p>
         <div className={`${blockClass}__content__title-wrapper`}>

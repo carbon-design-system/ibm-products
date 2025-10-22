@@ -23,7 +23,6 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
-  Tag,
   TextInput,
   Toggletip,
 } from '@carbon/react';
@@ -117,7 +116,7 @@ export const Default = () => {
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   const currentStep = 1;
-  const [rightPanelOpen, setRightPanelOpen] = useState(false);
+  const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
   return (
     <>
@@ -228,11 +227,11 @@ export const Default = () => {
                 <RightPanelClose />
               </IconButton>
             </div>
-            <div className="rightPanelTrigger">
+            <div className="summaryPanelTrigger">
               <IconButton
                 kind="ghost"
                 label="Open right panel"
-                onClick={() => setRightPanelOpen(true)}
+                onClick={() => setSummaryPanelOpen(true)}
               >
                 <RightPanelClose />
               </IconButton>
@@ -327,10 +326,10 @@ export const Default = () => {
           </Tearsheet.MainContent>
 
           <Tearsheet.SummaryContent
-            rightPanelOpen={rightPanelOpen}
-            onRightPanelClose={() => setRightPanelOpen(false)}
+            summaryPanelOpen={summaryPanelOpen}
+            onSummaryPanelClose={() => setSummaryPanelOpen(false)}
           >
-            <Heading className="rightPanelHeading">Panel heading</Heading>
+            <Heading className="summaryPanelHeading">Panel heading</Heading>
             <div className="rightDetailsBody">
               <div>
                 <label>item 1</label>
@@ -454,11 +453,11 @@ export const WithTabs = () => {
           </Tearsheet.Header>
           <Tearsheet.Body>
             <Tearsheet.MainContent>
-              <div className="rightPanelTrigger">
+              <div className="summaryPanelTrigger">
                 <IconButton
                   kind="ghost"
                   label="Open right panel"
-                  onClick={() => setRightPanelOpen(true)}
+                  onClick={() => setSummaryPanelOpen(true)}
                 >
                   <RightPanelClose />
                 </IconButton>
@@ -564,7 +563,7 @@ export const withStepsAndHorizontalProgressIndicator = () => {
 };
 export const narrowTearsheet = () => {
   const [open, setOpen] = useState(false);
-  const [rightPanelOpen, setRightPanelOpen] = useState(false);
+  const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   const currentStep = 1;
@@ -651,11 +650,11 @@ export const narrowTearsheet = () => {
                   <RightPanelClose />
                 </IconButton>
               </div>
-              <div className="rightPanelTrigger">
+              <div className="summaryPanelTrigger">
                 <IconButton
                   kind="ghost"
                   label="Open right panel"
-                  onClick={() => setRightPanelOpen(true)}
+                  onClick={() => setSummaryPanelOpen(true)}
                 >
                   <RightPanelClose />
                 </IconButton>
@@ -762,10 +761,10 @@ export const narrowTearsheet = () => {
             </Tearsheet.MainContent>
 
             <Tearsheet.SummaryContent
-              rightPanelOpen={rightPanelOpen}
-              onRightPanelClose={() => setRightPanelOpen(false)}
+              summaryPanelOpen={summaryPanelOpen}
+              onRightPanelClose={() => setSummaryPanelOpen(false)}
             >
-              <Heading className="rightPanelHeading">Panel heading</Heading>
+              <Heading className="summaryPanelHeading">Panel heading</Heading>
               <div className="rightDetailsBody">
                 <div>
                   <label>item 1</label>

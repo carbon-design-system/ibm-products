@@ -5,23 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  IconButton,
-  IconButtonProps,
-  ModalHeader,
-  ProgressIndicator,
-  ProgressStep,
-  usePrefix,
-} from '@carbon/react';
+import { IconButton, IconButtonProps, ModalHeader } from '@carbon/react';
 import React, {
   ReactNode,
   RefObject,
   useContext,
   useEffect,
   useRef,
-  useState,
 } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass, TearsheetContext } from './context';
 import classNames from 'classnames';

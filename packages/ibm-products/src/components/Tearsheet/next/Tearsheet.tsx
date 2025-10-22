@@ -51,9 +51,9 @@ import {
   TearsheetHeaderActions,
   TearsheetHeaderActionsProps,
 } from './TearsheetHeaderActions';
-import { useMatchMedia } from './useMatchMedia';
 import { breakpoints } from '@carbon/layout';
 import { usePortalTarget } from '../../../global/js/hooks/usePortalTarget';
+import { useMatchMedia } from '../../../global/js/hooks/useMatchMedia';
 
 /**
  * ----------
@@ -77,7 +77,10 @@ export interface TearsheetProps {
   /**
    * Default rightContent takes 256px, this allow to override eg: 300px , 20rem
    */
-  rightContentWidth?: string;
+  summaryContentWidth?: string;
+  /**
+   * Default to wide variant. Pass in narrow for narrow tearsheet
+   */
   variant?: 'wide' | 'narrow';
   /**
    * Optional prop that allows you to pass any component.
@@ -137,7 +140,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       selectorsFloatingMenus = [],
       className,
       influencerWidth,
-      rightContentWidth,
+      summaryContentWidth,
       ariaLabel,
       onClose,
       selectorPrimaryFocus,
@@ -182,10 +185,10 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
           `${influencerWidth}`
         );
       }
-      if (rightContentWidth) {
+      if (summaryContentWidth) {
         document.documentElement.style.setProperty(
           '--tearsheet-summary-content-width',
-          `${rightContentWidth}`
+          `${summaryContentWidth}`
         );
       }
 
@@ -215,12 +218,8 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
 
               [`${blockClass}--has-close`]: hasCloseIcon,
             })}
-            containerClassName={cx(`${blockClass}__container`, {
-              // [`${bc}__container--lower`]: verticalPosition === 'lower',
-            })}
+            containerClassName={cx(`${blockClass}__container`, {})}
             {...{ onClose, open, selectorPrimaryFocus }}
-            // onKeyDown={keyDownListener}
-            // preventCloseOnClickOutside={!isPassive}
             ref={modalRef}
             selectorsFloatingMenus={[
               `.${carbonPrefix}--overflow-menu-options`,
@@ -235,14 +234,11 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
           >
             {header}
             <ModalBody className={`${blockClass}__body-layout`} ref={bodyRef}>
-              {/* <div ref={ref} className={`${blockClass}__body-layout`}> */}
               {influencer}
 
               {body}
 
               {footer}
-
-              {/* </div> */}
             </ModalBody>
           </ComposedModal>
         </FeatureFlags>
@@ -257,7 +253,12 @@ export interface FooterProps {
 }
 const Footer = forwardRef<HTMLDivElement, FooterProps>(({ children }, ref) => {
   return (
-    <Layer as="footer" withBackground className={`${blockClass}__footer`}>
+    <Layer
+      as="footer"
+      withBackground
+      className={`${blockClass}__footer`}
+      ref={ref}
+    >
       {children}
     </Layer>
   );

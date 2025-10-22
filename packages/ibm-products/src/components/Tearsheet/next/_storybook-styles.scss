@@ -33,7 +33,7 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
   }
 }
 
-.rightPanelTrigger {
+.summaryPanelTrigger {
   position: absolute;
   inset-block-start: 0;
   inset-inline-end: 0;
@@ -46,13 +46,13 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
 }
 
 .#{$block-class__next}:not(.#{$block-class__next}--narrow) {
-  .rightPanelTrigger,
+  .summaryPanelTrigger,
   .influencerPanelTrigger {
     @include hideAtLargeScreens();
   }
 }
 
-.rightPanelHeading {
+.summaryPanelHeading {
   @include type.type-style('heading-03');
 }
 

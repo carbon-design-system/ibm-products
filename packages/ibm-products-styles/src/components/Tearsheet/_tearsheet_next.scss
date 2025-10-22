@@ -351,6 +351,7 @@ $motion-duration: $duration-moderate-02;
   }
   .#{$pkg-prefix}--side-panel {
     position: absolute;
+    z-index: 9999;
     block-size: 100%;
     inline-size: 100%;
     inset-block-start: 0;

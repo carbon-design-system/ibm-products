@@ -71,14 +71,12 @@ export const TearsheetHeaderActions = ({
     return React.isValidElement(child);
   });
   useLayoutEffect(() => {
+    //Menu button will be rendered only if they pass the items in TearsheetHeaderActionItem
     if (!containerRef.current || hasOtherChildType.current) {
       return;
     }
     createOverflowHandler({
       container: containerRef.current,
-
-      // offsetSize: offsetRef.current?.offsetWidth,
-      //  maxVisibleItems: items.length - 1,
       onChange: (visible, hidden) => {
         setHiddenItems(items?.slice(visible.length));
         if (hidden.length > 0) {
@@ -157,7 +155,6 @@ export interface TearsheetHeaderActionItemProps {
 export const TearsheetHeaderActionItem = ({
   children,
   className,
-  ...rest
 }: TearsheetHeaderActionItemProps) => {
   return (
     <div className={`${blockClass}__header-action-item  ${className}`}>

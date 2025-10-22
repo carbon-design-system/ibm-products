@@ -22,9 +22,12 @@ figma.connect(
   'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=16728%3A642201',
   {
     props: {
+      title: figma.textContent('"Use case-specific heading"'),
       description: figma.enum('Content', {
-        'Plain text': 'plain-text',
-        'Non linear': 'non-linear',
+        'Plain text': figma.textContent(
+          '"Use case-specific content that explains the concept or adds context. Use case-specific content that explains the concept or adds context. Use case-specific content that explains the concept or adds context."'
+        ),
+        'Non linear': figma.children('Non-linear reading'),
       }),
       button: figma.children('_Guide banner button'),
     },
@@ -32,6 +35,7 @@ figma.connect(
       <GuidebannerElement
         description={props.description}
         button={props.button}
+        title={props.title}
       />
     ),
   }

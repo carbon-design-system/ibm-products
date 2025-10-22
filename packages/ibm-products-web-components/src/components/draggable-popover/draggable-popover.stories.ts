@@ -17,10 +17,8 @@ export default {
 export const DraggablePopover = {
   render: (args) => {
     return html`
-     <div class="popover-story">
-      <draggable-popover 
-      >
-      </draggable-popover>
+      <div style="padding-top:100px; position: relative; display: flex; align-items: center; justify-content: center;">
+        <draggable-popover> </draggable-popover>
       </div>
     `;
   },

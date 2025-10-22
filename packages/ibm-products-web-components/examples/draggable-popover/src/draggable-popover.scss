@@ -40,7 +40,6 @@ $block-class: #{$prefix}--draggable-popover;
 }
 
 cds-popover-content::part(content) {
-  background-color: lightblue;
   position: absolute;
   
   margin-top: 35px;

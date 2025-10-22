@@ -92,12 +92,12 @@ export interface EmptyStateProps {
   /**
    * Empty state subtitle
    */
-  subtitle?: string | ReactNode;
+  subtitle?: ReactNode;
 
   /**
    * Empty state title
    */
-  title: string | ReactNode;
+  title: ReactNode;
 
   /**
    * **Deprecated:** Designates which version of the EmptyState component is being used. Refer to V2 documentation separately.
@@ -217,12 +217,12 @@ EmptyState.propTypes = {
   /**
    * Empty state subtext
    */
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  subtitle: PropTypes.node,
 
   /**
    * Empty state heading
    */
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  title: PropTypes.node.isRequired,
   /**
    * **Deprecated:** Designates which version of the EmptyState component is being used. Refer to V2 documentation separately.
    * @deprecated

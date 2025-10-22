@@ -65,3 +65,11 @@ body {
 .docblock-argstable-head ~ .docblock-argstable-body p {
   @include styles.type-style('body-01');
 }
+
+.docs-story {
+  background: styles.$background;
+}
+
+.docs-story > *:has(> .docblock-code-toggle) {
+  background-color: styles.$background;
+}

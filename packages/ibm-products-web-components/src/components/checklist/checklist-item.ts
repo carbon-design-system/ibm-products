@@ -61,6 +61,12 @@ class CDSChecklistItem extends LitElement {
     );
   }
 
+  private _handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this._handleClick(event);
+    }
+  }
+
   private _mapStatusToKind(status): Kinds {
     switch (status) {
       case Statuses.NotStarted:
@@ -80,7 +86,6 @@ class CDSChecklistItem extends LitElement {
 
   private _updateAttributes() {
     this.setAttribute('role', 'listitem');
-    this.setAttribute('tabindex', '0');
     this.classList.add(`${prefix}--checklist__list-item`);
   }
 
@@ -89,7 +94,13 @@ class CDSChecklistItem extends LitElement {
   }
 
   render() {
-    const { clickable, label, status, _handleClick: handleClick } = this;
+    const {
+      clickable,
+      label,
+      status,
+      _handleClick: handleClick,
+      _handleKeyDown: handleKeyDown,
+    } = this;
 
     const iconKind: string = this._mapStatusToKind(status);
 
@@ -107,7 +118,9 @@ class CDSChecklistItem extends LitElement {
         <div
           class="${classes}"
           title=${label}
+          role=${clickable ? 'link' : undefined}
           @click=${clickable ? handleClick : undefined}
+          @keydown=${clickable ? handleKeyDown : undefined}
           tabindex=${clickable ? 0 : -1}
         >
           ${label}

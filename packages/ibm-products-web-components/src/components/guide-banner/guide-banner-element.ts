@@ -10,7 +10,6 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
-import styles from './guide-banner-element.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 
 export const blockClass = `${prefix}--guidebanner__element`;
@@ -25,7 +24,7 @@ class CDSGuideBannerElement extends HostListenerMixin(LitElement) {
     `;
   }
 
-  static styles = styles;
+  // static styles = styles;
 }
 
 export default CDSGuideBannerElement;

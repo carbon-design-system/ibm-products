@@ -15,12 +15,16 @@ import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { pageHeaderContext } from './context';
 import { getHeaderOffset } from './utils';
+import CDSPageHeaderContent from './page-header-content';
 
-export interface offsetValues {
+export interface pageHeaderContextType {
   breadcrumbOffset?: number;
   headerOffset?: number;
   fullyCollapsed?: boolean;
+  titleClipped?: boolean;
+  contentActionsClipped?: boolean;
   root?: CDSPageHeader | null;
+  withContent?: boolean;
 }
 
 /**
@@ -31,7 +35,7 @@ export interface offsetValues {
 class CDSPageHeader extends LitElement {
   @state()
   @provide({ context: pageHeaderContext })
-  context: offsetValues = {};
+  context: pageHeaderContextType = {};
 
   private resizeObserver: ResizeObserver | undefined;
 
@@ -39,33 +43,39 @@ class CDSPageHeader extends LitElement {
     super.connectedCallback();
     const contentElement = this.querySelector(`${prefix}-page-header-content`);
 
-    if (contentElement) {
-      this.resizeObserver = new ResizeObserver((entries) => {
-        const contentElEntry = entries[0];
-        const contentHeight = contentElEntry.contentRect.height;
-        const padding =
-          parseFloat(getComputedStyle(contentElement)?.paddingBlockStart) +
-          parseFloat(getComputedStyle(contentElement)?.paddingBlockEnd);
-        const totalContentHeight = contentHeight + padding;
-        const headerOffset = getHeaderOffset(this);
+    this.resizeObserver = new ResizeObserver((entries) => {
+      const pageHeaderElement = entries[0];
+      const contentEl = pageHeaderElement.target.querySelector(
+        `${prefix}-page-header-content`
+      );
+      const contentHeight =
+        contentEl instanceof CDSPageHeaderContent ? contentEl.scrollHeight : 0;
+      const padding =
+        contentEl instanceof CDSPageHeaderContent
+          ? parseFloat(getComputedStyle(contentEl)?.paddingBlockStart) +
+            parseFloat(getComputedStyle(contentEl)?.paddingBlockEnd)
+          : 0;
+      const totalContentHeight = contentHeight + padding;
+      const headerOffset = getHeaderOffset(this);
+      const contentPadding = contentEl instanceof CDSPageHeaderContent ? 48 : 0;
 
-        this.style.setProperty(
-          `--${prefix}-page-header-header-top`,
-          `${(Math.round(totalContentHeight) - headerOffset) * -1}px`
-        );
-        this.style.setProperty(
-          `--${prefix}-page-header-breadcrumb-top`,
-          `${headerOffset}px`
-        );
-        this.context = {
-          ...this.context,
-          breadcrumbOffset: headerOffset,
-          headerOffset: (Math.round(totalContentHeight) - headerOffset) * -1,
-          root: this,
-        };
-      });
-      this.resizeObserver.observe(contentElement);
-    }
+      this.style.setProperty(
+        `--${prefix}-page-header-header-top`,
+        `${(Math.round(totalContentHeight - contentPadding) - headerOffset) * -1}px`
+      );
+      this.style.setProperty(
+        `--${prefix}-page-header-breadcrumb-top`,
+        `${headerOffset}px`
+      );
+      this.context = {
+        ...this.context,
+        breadcrumbOffset: headerOffset,
+        headerOffset: (Math.round(totalContentHeight) - headerOffset) * -1,
+        root: this,
+        withContent: !!contentEl,
+      };
+    });
+    this.resizeObserver.observe(this);
 
     const predefinedContentPadding = 24;
     const totalHeaderOffset = getHeaderOffset(this);
@@ -91,8 +101,58 @@ class CDSPageHeader extends LitElement {
         threshold: 0.1,
       }
     );
+
+    const titleObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            this.context = {
+              ...this.context,
+              titleClipped: true,
+            };
+          } else {
+            this.context = {
+              ...this.context,
+              titleClipped: false,
+            };
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+        threshold: 0.95,
+      }
+    );
+
+    const actionsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            this.context = {
+              ...this.context,
+              contentActionsClipped: true,
+            };
+          } else {
+            this.context = {
+              ...this.context,
+              contentActionsClipped: false,
+            };
+          }
+        });
+      },
+      {
+        root: null,
+        // 48 -> breadcrumb bar
+        // 18 -> content padding
+        rootMargin: `${(totalHeaderOffset + 48 + 18) * -1}px 0px 0px 0px`,
+        threshold: 0.95,
+      }
+    );
     if (contentElement) {
       contentObserver.observe(contentElement);
+      titleObserver.observe(contentElement);
+      actionsObserver.observe(contentElement);
     }
   }
 
@@ -102,7 +162,7 @@ class CDSPageHeader extends LitElement {
   }
 
   render() {
-    return html` <slot></slot>`;
+    return html`<slot></slot>`;
   }
 
   static styles = styles;

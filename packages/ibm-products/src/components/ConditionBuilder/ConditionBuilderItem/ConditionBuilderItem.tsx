@@ -41,6 +41,7 @@ import {
   getValue,
 } from '../utils/util';
 import { translationsObject } from '../ConditionBuilderContext/translationObject';
+import { useEvent } from '../utils/useEvent';
 
 interface ConditionBuilderItemProps extends PropsWithChildren {
   className?: string;
@@ -84,7 +85,7 @@ export const ConditionBuilderItem = ({
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(false);
 
-  const { conditionBuilderRef, statementConfigCustom } = useContext(
+  const { conditionBuilderRef, statementConfigCustom, readOnly } = useContext(
     ConditionBuilderContext
   );
 
@@ -202,6 +203,28 @@ export const ConditionBuilderItem = ({
     }
   }, [popoverRef, open]);
 
+  //This code is added to address the issue in ComposeModal, where popovers are not getting closed on outside click(#18872)
+  //This is added as a work around to unblock users to use conditionBuilder in Tearsheets or Compose modal
+  useEvent(popoverRef, 'focusout', (event) => {
+    const focusEvent = event as FocusEvent;
+    const relatedTarget = focusEvent.relatedTarget as Node | null;
+
+    const popoverEl = popoverRef.current;
+    if (!popoverEl) {
+      return;
+    }
+
+    const focusLeftPopover = !popoverEl.contains(relatedTarget);
+    const targetInsidePopover = popoverEl.contains(focusEvent.target as Node);
+
+    const targetEl = focusEvent.target as Element | null;
+    const focusMovedToDatePicker = targetEl?.closest('.flatpickr-calendar');
+
+    if ((focusLeftPopover || !targetInsidePopover) && !focusMovedToDatePicker) {
+      closePopover();
+    }
+  });
+
   const manageInvalidSelection = () => {
     //when the user didn't select any value , we need to show as incomplete
     if (
@@ -218,7 +241,12 @@ export const ConditionBuilderItem = ({
     }
     setOpen(false);
   };
-  const openPopOver = () => setOpen(true);
+  const openPopOver = () => {
+    if (readOnly) {
+      return;
+    }
+    setOpen(true);
+  };
   const togglePopover = () => {
     if (children || renderChildren) {
       setOpen(!open);

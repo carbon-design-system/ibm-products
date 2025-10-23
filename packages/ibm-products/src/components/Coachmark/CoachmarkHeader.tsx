@@ -16,6 +16,7 @@ import { Button } from '@carbon/react';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
+import { useCoachmark } from './utils/context';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-header`;
@@ -23,17 +24,12 @@ const overlayBlockClass = `${pkg.prefix}--coachmark-overlay`;
 const componentName = 'CoachmarkHeader';
 
 const defaults = {
-  closeIconDescription: 'Close',
   onClose: () => {},
   showCloseButton: true,
   theme: 'light',
 };
 
 interface CoachmarkHeaderProps {
-  /**
-   * Tooltip text and aria label for the Close button icon.
-   */
-  closeIconDescription?: string;
   /**
    * Function to call when the close button is clicked.
    */
@@ -52,13 +48,12 @@ interface CoachmarkHeaderProps {
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
  */
-export let CoachmarkHeader = React.forwardRef<
+export const CoachmarkHeader = React.forwardRef<
   HTMLElement,
   CoachmarkHeaderProps
 >(
   (
     {
-      closeIconDescription = defaults.closeIconDescription,
       onClose = defaults.onClose,
       showCloseButton = defaults.showCloseButton,
       theme = defaults.theme,
@@ -67,6 +62,8 @@ export let CoachmarkHeader = React.forwardRef<
     },
     ref
   ) => {
+    const closeIconDescription = useCoachmark()?.closeIconDescription;
+
     return (
       <header
         {
@@ -96,7 +93,6 @@ export let CoachmarkHeader = React.forwardRef<
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkHeader = pkg.checkComponentEnabled(CoachmarkHeader, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

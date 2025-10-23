@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { GetStartedCard } from '.';
+import { previewCandidate__GetStartedCard as GetStartedCard } from '..';
 import React from 'react';
 import mdx from './GetStartedCard.mdx';
 
@@ -39,7 +39,7 @@ const defaultProps = {
 };
 
 export default {
-  title: 'Experimental/Onboarding/GetStartedCard',
+  title: 'Preview Candidate/Onboarding/GetStartedCard',
   component: GetStartedCard,
   tags: ['autodocs', 'Onboarding'],
   parameters: {

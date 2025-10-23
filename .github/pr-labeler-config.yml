@@ -1,0 +1,21 @@
+# This is the config file for the github/issue-labeler action, which is used in
+# the pr-labeler.yml workflow.
+#
+# Keys within this file are the name of the label in the repository that we want
+# to add (eg: "package: styles", "severity: 1") and the value is the regular
+# expression for when to apply the label. Should the regular expression not
+# match, the label will not be applied.
+#
+# This only adds labels. Labels are not removed if the regex doesn't match. This
+# is because we do not configure `sync-labels: 1` in the workflow file.
+#
+# When changes are made to this file, consider updating the `not-before` config
+# in the workflow file to match the day you open the PR of your changes. This
+# will ensure that only new issues moving forward are labelled with the contents
+# of this file.
+#
+# @see https://github.com/marketplace/actions/regex-issue-labeler
+
+# Code connect label
+'status: needs code connect review':
+  - '/(code connect)/i'

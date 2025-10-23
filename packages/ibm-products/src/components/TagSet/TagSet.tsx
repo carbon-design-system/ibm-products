@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2024
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -23,7 +23,6 @@ import { TagSetModal } from './TagSetModal';
 import { TagSetOverflow } from './TagSetOverflow';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { DismissibleTag } from '@carbon/react';
@@ -152,7 +151,7 @@ export interface TagSetProps extends PropsWithChildren {
   tags?: TagType[];
 }
 
-export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
+export const TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -471,16 +470,6 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-TagSet = pkg.checkComponentEnabled(TagSet, componentName);
-
-/**
- * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
- * @returns null if no problems
- */
-export const string_required_if_more_than_10_tags = isRequiredIf(
-  PropTypes.string,
-  ({ tags }) => tags && tags.length > allTagsModalSearchThreshold
-);
 
 // copied from carbon-components-react/src/components/Tag/Tag.js for DocGen
 const TYPES = {

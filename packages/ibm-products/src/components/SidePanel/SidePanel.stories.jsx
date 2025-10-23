@@ -524,6 +524,13 @@ export default {
       default: 'Close',
       description: 'Sets the close button icon description',
     },
+    closeIconTooltipAlignment: {
+      control: {
+        type: 'text',
+      },
+      default: 'left',
+      description: 'Sets the close button tooltip alignment',
+    },
     condensedActions: {
       control: {
         type: 'boolean',
@@ -988,6 +995,7 @@ WithoutTitle.args = {
   ...defaultStoryProps,
   actions: 0,
   title: null,
+  subtitle: null,
   includeOverlay: true,
   'aria-label': 'SidePanel without title',
 };

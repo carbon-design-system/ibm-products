@@ -14,6 +14,8 @@ export {
   PageHeaderHeroImage,
   PageHeaderScrollButton,
   PageHeaderTitleBreadcrumb,
+  PageHeaderBreadcrumbOverflow,
+  PageHeaderTagOverflow,
   //
   Root,
   BreadcrumbBar,
@@ -24,6 +26,8 @@ export {
   HeroImage,
   ScrollButton,
   TitleBreadcrumb,
+  BreadcrumbOverflow,
+  TagOverflow,
 } from './PageHeader';
 export type {
   PageHeaderProps,
@@ -34,4 +38,5 @@ export type {
   PageHeaderTabBarProps,
   PageHeaderHeroImageProps,
   PageHeaderScrollButtonProps,
+  PageHeaderTagOverflowProps,
 } from './PageHeader';

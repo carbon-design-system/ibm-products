@@ -12,11 +12,11 @@ import { Crossroads } from '@carbon/react/icons';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import {
-  Coachmark,
-  CoachmarkOverlayElement,
-  CoachmarkOverlayElements,
-  CoachmarkBeacon,
-  CoachmarkButton,
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
+  previewCandidate__CoachmarkBeacon as CoachmarkBeacon,
+  previewCandidate__CoachmarkButton as CoachmarkButton,
 } from '..';
 
 import { BEACON_KIND, COACHMARK_OVERLAY_KIND } from './utils/enums';
@@ -26,7 +26,7 @@ import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark/Coachmark',
+  title: 'Preview Candidate/Onboarding/Coachmark/Coachmark',
   component: Coachmark,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
@@ -73,6 +73,10 @@ export default {
     },
     className: {
       control: { type: null },
+    },
+    closeIconDescription: {
+      control: { type: 'text' },
+      description: 'Tooltip text and aria label for the Close button icon.',
     },
   },
   parameters: {
@@ -130,6 +134,7 @@ export const tooltip = Template.bind({});
 tooltip.args = {
   theme: 'dark',
   align: 'bottom',
+  closeIconDescription: 'Close',
   positionTune: { x: 0, y: 0 },
   target: (
     <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
@@ -140,6 +145,7 @@ export const floating = Template.bind({});
 floating.args = {
   theme: 'dark',
   align: 'bottom',
+  closeIconDescription: 'Close',
   overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
   target: (
     <CoachmarkButton

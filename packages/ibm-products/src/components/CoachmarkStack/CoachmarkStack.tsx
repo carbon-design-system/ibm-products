@@ -34,7 +34,10 @@ const elementBlockClass = `${pkg.prefix}--coachmark-stack-element`;
 import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
 import { CoachmarkStackHome } from './CoachmarkStackHome';
 import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
-import { CoachmarkContext } from '../Coachmark/utils/context';
+import {
+  CoachmarkContext,
+  CoachmarkContextType,
+} from '../Coachmark/utils/context';
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 
@@ -90,6 +93,10 @@ interface CoachmarkStackProps {
    * Label's tooltip position
    */
   tooltipAlign?: TooltipAlignment;
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
 }
 
 const defaults = {
@@ -112,7 +119,7 @@ const defaults = {
  * user to gain understanding of the product's main value and discover new use cases.
  * This variant allows the stacking of multiple coachmark overlays to be displayed by interacting with the tagline.
  */
-export let CoachmarkStack = React.forwardRef<
+export const CoachmarkStack = React.forwardRef<
   HTMLDivElement,
   CoachmarkStackProps
 >(
@@ -131,6 +138,7 @@ export let CoachmarkStack = React.forwardRef<
       theme = defaults.theme,
       title,
       tooltipAlign,
+      closeIconDescription,
       ...rest
     },
     ref
@@ -203,7 +211,7 @@ export let CoachmarkStack = React.forwardRef<
       };
     }, [escFunction]);
 
-    const contextValue = {
+    const contextValue: CoachmarkContextType = {
       buttonProps: {
         tabIndex: 0,
         'aria-expanded': isOpen,
@@ -220,6 +228,7 @@ export let CoachmarkStack = React.forwardRef<
         onClick: () => handleClose(false),
       },
       isOpen: isOpen,
+      closeIconDescription,
     };
     useEffect(() => {
       mountedRef.current = true;
@@ -343,7 +352,6 @@ export let CoachmarkStack = React.forwardRef<
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkStack = pkg.checkComponentEnabled(CoachmarkStack, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -367,6 +375,11 @@ CoachmarkStack.propTypes = {
    * The label for the button that will close the Stack
    */
   closeButtonLabel: PropTypes.string,
+
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription: PropTypes.string,
 
   // Pass through to CoachmarkStackHome
   /**
@@ -404,7 +417,6 @@ CoachmarkStack.propTypes = {
    * Determines the theme of the component.
    */
   theme: PropTypes.oneOf(['light', 'dark']),
-
   /**
    * The title of the Coachmark.
    */

@@ -45,7 +45,10 @@ export interface DelimitedListProps extends PropsWithChildren {
  * `DelimitedList` converts an array of items into a single line of
  * comma-separated values.
  */
-export let DelimitedList = React.forwardRef<HTMLDivElement, DelimitedListProps>(
+export const DelimitedList = React.forwardRef<
+  HTMLDivElement,
+  DelimitedListProps
+>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -75,7 +78,6 @@ export let DelimitedList = React.forwardRef<HTMLDivElement, DelimitedListProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-DelimitedList = pkg.checkComponentEnabled(DelimitedList, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

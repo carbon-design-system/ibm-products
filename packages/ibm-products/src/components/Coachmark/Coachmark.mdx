@@ -1,6 +1,15 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import {
+  Story,
+  Controls,
+  Source,
+  Canvas,
+  Meta,
+} from '@storybook/addon-docs/blocks';
 import { CodesandboxLink } from '../../global/js/utils/story-helper';
-import { Coachmark, CoachmarkFixed } from '..';
+import {
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkFixed as CoachmarkFixed,
+} from '..';
 import * as CoachmarkStories from './Coachmark.stories';
 
 <Meta title="Coachmark" component={Coachmark} />
@@ -106,7 +115,9 @@ to display properly within your usage.
   </CoachmarkOverlayElements>
 </Coachmark>
 ```
+
 ## Stackblitz example with Animated Media
+
 [![Example with Animated media](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CoachmarkWithAnimatedMedia)
 
 ## Component API

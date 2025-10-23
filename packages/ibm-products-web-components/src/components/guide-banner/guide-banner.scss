@@ -12,8 +12,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/type';
 @use '@carbon/ibm-products-styles/scss/config';
-@use '@carbon/ibm-products-styles/scss/components/GuideBanner/index' as
-  guidebanner;
+@use '@carbon/ibm-products-styles/scss/components/GuideBanner' as *;
 
 $prefix: config.$pkg-prefix;
 $carbon-prefix: config.$carbon-prefix;

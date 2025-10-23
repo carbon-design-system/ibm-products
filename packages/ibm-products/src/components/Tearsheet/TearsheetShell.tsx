@@ -35,6 +35,7 @@ import {
   Section,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
+  Heading,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -497,18 +498,17 @@ export const TearsheetShell = React.forwardRef(
                   <Wrap className={`${bc}__header-fields`}>
                     {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
-                    <Wrap element="h2" className={`${bcModalHeader}__label`}>
+                    <Section className={`${bcModalHeader}__label`}>
                       {label}
-                    </Wrap>
-                    <Wrap
-                      element="h3"
+                    </Section>
+                    <Heading
                       className={cx(
                         `${bcModalHeader}__heading`,
                         `${bc}__heading`
                       )}
                     >
                       {title}
-                    </Wrap>
+                    </Heading>
                     <Wrap className={`${bc}__header-description`}>
                       {description}
                     </Wrap>

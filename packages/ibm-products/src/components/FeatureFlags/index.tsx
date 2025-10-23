@@ -106,7 +106,6 @@ function FeatureFlags({
     scope.mergeWithScope(parentScope);
     updateScope(scope);
   });
-  console.log('scope', scope);
 
   return (
     <FeatureFlagContext.Provider value={scope}>

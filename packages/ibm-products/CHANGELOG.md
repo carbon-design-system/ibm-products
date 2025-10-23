@@ -1,4 +1,8 @@
-## `@carbon/ibm-products@2.77.0-rc.0`
+## `@carbon/ibm-products@2.77.1`
+### Bug fixes :bug:
+- fix(PageHeader): use correct export path (#8514)
+
+## `@carbon/ibm-products@2.77.0`
 ### Features :rocket:
 - feat(ImportAndUploadModal): implement as patterns (#8348)
 - feat(coachmarkStacked): implemented as patterns (#8317)

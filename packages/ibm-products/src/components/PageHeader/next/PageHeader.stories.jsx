@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { cloneElement } from 'react';
-import { preview__PageHeader as PageHeader, TruncatedText } from '../..';
+import {
+  preview__PageHeader as PageHeader,
+  preview__TruncatedText as TruncatedText,
+} from '../..';
 import {
   PageHeaderBreadcrumbBar,
   PageHeaderContent,

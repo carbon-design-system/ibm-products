@@ -1,4 +1,11 @@
-# Storybook addon for Carbon themes
+# DEPRECATED
+
+⛔️ **This package is no longer supported or maintained.** ⛔️
+
+Please refer to the native support for including themes within
+`.storybook/preview.{js|ts}`.
+
+## Storybook addon for Carbon themes
 
 This addon for storybook allows you to change the theme used with Carbon
 Components!

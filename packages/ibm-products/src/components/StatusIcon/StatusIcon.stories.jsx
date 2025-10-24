@@ -9,7 +9,7 @@ import React from 'react';
 
 import { StatusIcon } from '.';
 
-// import styles from \'./_storybook-styles.scss?inline\'; // import storybook which includes component and additional storybook styles
+// import styles from './_storybook-styles.scss?inline'; // import storybook which includes component and additional storybook styles
 import DocsPage from './StatusIcon.docs-page';
 
 export default {

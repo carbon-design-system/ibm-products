@@ -6,7 +6,7 @@
 //
 
 import React, { useState } from 'react';
-// import styles from \'./_storybook-styles.scss?inline\'; // import index in case more files are added later.
+// import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { MultiAddSelect } from '.';
 import { Button } from '@carbon/react';
 import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line

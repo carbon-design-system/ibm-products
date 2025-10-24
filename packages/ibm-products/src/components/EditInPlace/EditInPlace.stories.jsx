@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import { action } from 'storybook/actions';
 import { EditInPlace } from '..';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
-// import mdx from \'./EditInPlace.mdx\';
+// import mdx from './EditInPlace.mdx';
 import styles from './_storybook-styles.scss?inline';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 

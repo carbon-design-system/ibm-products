@@ -13,8 +13,6 @@ import {
 } from './types';
 import { registerSwipeEvents } from './swipeEvents';
 
-export type { InitCarousel as InitCarouselTypes };
-
 /**
  * Initializes a carousel with the given configuration.
  * @param carouselContainer - The HTMLElement representing the carousel container.

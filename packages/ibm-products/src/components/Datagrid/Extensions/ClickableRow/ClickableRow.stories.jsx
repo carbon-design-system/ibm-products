@@ -18,7 +18,7 @@ import {
   useSelectRows,
 } from '../../index';
 import styles from '../../_storybook-styles.scss?inline';
-// import mdx from \'../../Datagrid.mdx\';
+// import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';

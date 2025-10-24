@@ -83,17 +83,11 @@ const CoachmarkStackedPattern = (args) => {
 
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
-  //prettier-ignore
   const [openId, setOpenId] = useState(0);
-  //prettier-ignore
   const carouselContainerRef = useRef(null);
-  //prettier-ignore
   const carouselInit = useRef(null);
-  //prettier-ignore
   const [parentHeight, setParentHeight] = useState(0);
-  //prettier-ignore
   const stackHomeContentRef = useRef(null);
-  //prettier-ignore
   const stackedCoachmarkContentRefs = useRef([]);
 
   const blockClass = `coachmark-stacked-home`;
@@ -296,8 +290,9 @@ const CoachmarkStackedPattern = (args) => {
   useLayoutEffect(() => {
     if (!parentHeight) {
       if (stackHomeContentRef.current) {
-        //prettier-ignore
-        const stackHomeContent = stackHomeContentRef.current.querySelector(`div.${pkg.prefix}__bubble`);
+        const stackHomeContent = stackHomeContentRef.current.querySelector(
+          `div.${pkg.prefix}__bubble`
+        );
         if (stackHomeContent) {
           const height = stackHomeContent.clientHeight;
 
@@ -310,8 +305,9 @@ const CoachmarkStackedPattern = (args) => {
     }
 
     if (stackHomeContentRef.current) {
-      //prettier-ignore
-      const stackHomeContent = stackHomeContentRef.current.querySelector(`div.${pkg.prefix}__bubble`);
+      const stackHomeContent = stackHomeContentRef.current.querySelector(
+        `div.${pkg.prefix}__bubble`
+      );
       if (stackHomeContent) {
         stackHomeContent.style.height = `${parentHeight}px`;
       }
@@ -320,8 +316,9 @@ const CoachmarkStackedPattern = (args) => {
     if (!isOpen || openId <= 0) {
       requestAnimationFrame(() => {
         if (stackHomeContentRef.current) {
-          //prettier-ignore
-          const stackHomeContent = stackHomeContentRef.current.querySelector(`div.${pkg.prefix}__bubble`);
+          const stackHomeContent = stackHomeContentRef.current.querySelector(
+            `div.${pkg.prefix}__bubble`
+          );
 
           if (stackHomeContent) {
             stackHomeContent.classList.remove(`${blockClass}--scaled-home`);
@@ -336,10 +333,9 @@ const CoachmarkStackedPattern = (args) => {
     if (openId > 0 && isOpen && stackedCoachmarkContentRefs.current) {
       const container = stackedCoachmarkContentRefs.current[openId];
 
-      //prettier-ignore
       const targetHome = Array.from(
         container.querySelectorAll(`div.${pkg.prefix}__bubble`)
-      ).filter(bubble => bubble.parentElement === container);
+      ).filter((bubble) => bubble.parentElement === container);
 
       if (targetHome.length > 0) {
         setTimeout(() => {
@@ -347,8 +343,10 @@ const CoachmarkStackedPattern = (args) => {
             requestAnimationFrame(() => {
               const targetHomeHeight = bubble.clientHeight;
 
-              //prettier-ignore
-              const stackHomeContent = stackHomeContentRef.current.querySelector(`div.${pkg.prefix}__bubble`);
+              const stackHomeContent =
+                stackHomeContentRef.current.querySelector(
+                  `div.${pkg.prefix}__bubble`
+                );
               if (stackHomeContent) {
                 stackHomeContent.style.height = `calc(${targetHomeHeight}px + 1px)`;
                 stackHomeContent.classList.add(`${blockClass}--scaled-home`);

@@ -82,11 +82,8 @@ const CoachmarkFixedPattern = (args) => {
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [fixedIsVisible, setFixedIsVisible] = useState(false);
 
-  //prettier-ignore
   const carouselContainerRef = useRef(null);
-  //prettier-ignore
   const carouselInit = useRef(null);
-  //prettier-ignore
   const nextRef = useRef(null);
 
   const items = [

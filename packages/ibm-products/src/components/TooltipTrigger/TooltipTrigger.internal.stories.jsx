@@ -8,8 +8,8 @@ import React from 'react';
 import { Monster } from '@carbon/react/icons';
 
 import { TooltipTrigger } from '.';
-// import { pkg } from \'../../settings.jsx\';
-// import DocsPage from \'./TooltipTrigger.docs-page.jsx\';
+// import { pkg } from '../../settings';
+// import DocsPage from './TooltipTrigger.docs-page';
 
 import styles from './_storybook-styles.scss?inline';
 

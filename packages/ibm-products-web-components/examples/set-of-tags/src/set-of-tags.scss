@@ -25,6 +25,8 @@ $block-class: #{$prefix}--set-of-tags;
     box-sizing: border-box;
     display: flex;
     white-space: nowrap;
+    // Spacing between tags.
+    gap: 4px;
 
     &__popover-container {
       padding: 0.9rem;

@@ -14,6 +14,7 @@
 @use '@carbon/styles/scss/components/tag';
 
 $story-prefix: 'overflow-handler-stories__';
+$carbon-prefix: 'cds';
 
 .slider {
   margin-block-end: spacing.$spacing-05;
@@ -28,6 +29,8 @@ $story-prefix: 'overflow-handler-stories__';
 
 .items {
   display: flex;
+  // Spacing between tags.
+  gap: spacing.$spacing-02;
   white-space: nowrap;
 
   &--vertical {

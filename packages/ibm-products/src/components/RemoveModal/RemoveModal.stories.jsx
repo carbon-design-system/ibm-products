@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import { Button, Link } from '@carbon/react';
-// import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
+// import styles from \'./_storybook-styles.scss?inline\'; // import index in case more files are added later.
 import { RemoveModal } from '.';
 import mdx from './RemoveModal.mdx';
 

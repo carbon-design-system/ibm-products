@@ -8,10 +8,10 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import { action } from 'storybook/actions';
-// import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
+// import styles from \'./_storybook-styles.scss?inline\'; // import index in case more files are added later.
 import { ImportModal } from '.';
 import mdx from './ImportModal.mdx';
-// import mdx from './ImportModal.mdx';
+// import mdx from \'./ImportModal.mdx.jsx\';
 
 export default {
   title: 'Patterns/Prebuilt patterns/ImportModal',

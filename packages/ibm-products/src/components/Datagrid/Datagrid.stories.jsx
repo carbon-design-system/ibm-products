@@ -27,7 +27,7 @@ import {
   useColumnCenterAlign,
 } from '.';
 
-// import mdx from './Datagrid.mdx';
+// import mdx from \'./Datagrid.mdx\';
 
 import styles from './_storybook-styles.scss?inline';
 import { DatagridActions } from './utils/DatagridActions';

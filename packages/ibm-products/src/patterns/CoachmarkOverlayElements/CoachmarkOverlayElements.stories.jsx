@@ -11,10 +11,7 @@ import styles from './_storybook-styles.scss?inline';
 import DocsPage from './CoachmarkOverlayElements.mdx';
 import { Coachmark } from '../../components/Coachmark/next/Coachmark';
 import { CoachmarkBeacon } from '../../components/Coachmark/next/Coachmark/CoachmarkBeacon';
-import {
-  initCarousel,
-  InitCarousel,
-} from '../../global/js/utils/carousel/carousel';
+import { initCarousel } from '../../global/js/utils/carousel/carousel';
 import sampleImage from './assets/sample-image.png';
 
 export default {
@@ -80,9 +77,9 @@ const CoachmarkOverlayElements = (args) => {
   const [lastViewIndex, setLastViewIndex] = useState(-1);
 
   // prettier-ignore
-  const carouselContainerRef = useRef < HTMLDivElement > (null);
+  const carouselContainerRef = useRef(null);
   // prettier-ignore
-  const carouselInit = useRef < InitCarousel > (null);
+  const carouselInit = useRef(null);
 
   const items = [
     {

@@ -47,7 +47,7 @@ import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
 import styles from './_storybook-styles.scss?inline';
 
-// import mdx from './PageHeader.mdx';
+// import mdx from \'./PageHeader.mdx\';
 
 const storyClass = 'page-header-stories';
 

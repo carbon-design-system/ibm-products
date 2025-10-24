@@ -6,7 +6,7 @@
 //
 
 import React, { useState } from 'react';
-// import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
+// import styles from \'./_storybook-styles.scss?inline\'; // import index in case more files are added later.
 import { SingleAddSelect } from '.';
 import { Button } from '@carbon/react';
 import DocsPage from './SingleAddSelect.docs-page';

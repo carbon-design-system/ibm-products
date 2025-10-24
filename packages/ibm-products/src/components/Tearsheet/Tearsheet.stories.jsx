@@ -43,7 +43,7 @@ import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import styles from './_storybook-styles.scss?inline';
 import { TearsheetNarrow } from './TearsheetNarrow';
 
-// import mdx from './Tearsheet.mdx';
+// import mdx from \'./Tearsheet.mdx.jsx\';
 
 export default {
   title: 'Components/Tearsheet',

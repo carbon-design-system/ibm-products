@@ -108,12 +108,12 @@ const componentIndexDataTS = readFileSync(componentIndexPathTS, 'utf-8');
 outputFileSync(
   componentIndexPath,
   componentIndexData +
-    `export { ${substitutions.DISPLAY_NAME} } from './${substitutions.DISPLAY_NAME}';\n`
+    `export { ${substitutions.DISPLAY_NAME} } from \'./${substitutions.DISPLAY_NAME}.jsx\';\n`
 );
 
 outputFileSync(
   componentIndexPathTS,
-  componentIndexDataTS + `export * from './${substitutions.DISPLAY_NAME}';\n`
+  componentIndexDataTS + `export * from \'./${substitutions.DISPLAY_NAME}.jsx\';\n`
 );
 
 // NOTE: Styles except storybook are in a separate package @carbon/ibm-products-styles

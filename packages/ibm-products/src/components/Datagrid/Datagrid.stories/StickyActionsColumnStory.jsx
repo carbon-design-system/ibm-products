@@ -6,8 +6,8 @@
  */
 
 // import React, { useState, useEffect } from 'react';
-// import { Datagrid, useActionsColumn, useDatagrid, useStickyColumn } from '..';
-// import { defaultHeader, makeData, Wrapper } from './common';
+// import { Datagrid, useActionsColumn, useDatagrid, useStickyColumn } from \'...jsx\';
+// import { defaultHeader, makeData, Wrapper } from \'./common.jsx\';
 
 // StickyActionsColumn.story = {
 //   parameters: {

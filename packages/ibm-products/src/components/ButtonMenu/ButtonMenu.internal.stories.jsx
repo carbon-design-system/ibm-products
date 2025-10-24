@@ -10,9 +10,9 @@ import React from 'react';
 import { action } from 'storybook/actions';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
-// import mdx from './ButtonMenu.mdx';
+// import mdx from \'./ButtonMenu.mdx.jsx\';
 
-// import styles from './_storybook-styles.scss?inline';
+// import styles from \'./_storybook-styles.scss?inline\';
 
 import { Add } from '@carbon/react/icons';
 import { Annotation } from '../../../.storybook/Annotation';

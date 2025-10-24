@@ -61,6 +61,7 @@ export {
   useFeatureFlags as preview__useFeatureFlags,
 } from './FeatureFlags';
 export * as preview__PageHeader from './PageHeader/next';
+export * as preview__Tearsheet from './Tearsheet/next';
 
 // Preview candidates
 export {

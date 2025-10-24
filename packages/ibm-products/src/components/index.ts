@@ -5,8 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import '../feature-flags';
-
 /**
  * Stable components
  */
@@ -62,7 +60,7 @@ export {
   useFeatureFlag as preview__useFeatureFlag,
   useFeatureFlags as preview__useFeatureFlags,
 } from './FeatureFlags';
-export * as preview__PageHeader from './PageHeader/next/PageHeader';
+export * as preview__PageHeader from './PageHeader/next';
 
 // Preview candidates
 export {

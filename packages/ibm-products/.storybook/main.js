@@ -7,7 +7,6 @@
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
-import react from '@vitejs/plugin-react';
 import { getAutoTrack } from '../../../scripts/get-auto-track-script';
 
 const require = createRequire(import.meta.url);

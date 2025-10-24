@@ -22,7 +22,7 @@ import {
   ToggletipContent,
 } from '@carbon/react';
 
-// import mdx from './TearsheetShell.mdx.jsx';
+// import mdx from './TearsheetShell.mdx';
 
 export default {
   title: 'Internal/TearsheetShell',

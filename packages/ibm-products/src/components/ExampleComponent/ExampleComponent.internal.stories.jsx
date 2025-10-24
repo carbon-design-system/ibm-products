@@ -9,7 +9,7 @@ import { action } from 'storybook/actions';
 import { Add } from '@carbon/react/icons';
 import { ExampleComponent } from '.';
 import { pkg } from '../../settings';
-// import DocsPage from './ExampleComponent.docs-page.jsx';
+// import DocsPage from './ExampleComponent.docs-page';
 
 // import styles from './_storybook-styles.scss?inline';
 

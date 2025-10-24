@@ -2145,7 +2145,7 @@ __metadata:
     storybook: "npm:^9.1.15"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.5.3"
-    vite: "npm:^7.0.0"
+    vite: "npm:rolldown-vite@latest"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^3.2.0"
     web-component-analyzer: "npm:2.0.0"
@@ -23305,7 +23305,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.0 || ^6.0.0 || ^7.0.0-0, vite@npm:^7.0.0":
+"vite@npm:^5.0.0 || ^6.0.0 || ^7.0.0-0":
   version: 7.1.11
   resolution: "vite@npm:7.1.11"
   dependencies:

@@ -101,7 +101,7 @@
     "storybook": "^9.1.15",
     "tslib": "^2.8.1",
     "typescript": "^5.5.3",
-    "vite": "^7.0.0",
+    "vite": "npm:rolldown-vite@latest",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.0",
     "web-component-analyzer": "2.0.0"

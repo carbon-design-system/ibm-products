@@ -1,3 +1,15 @@
+## `@carbon/ibm-products-styles@2.74.0-rc.0`
+### Features :rocket:
+- feat(PageHeader): add open in stackblitz config (#8469)
+
+### Bug fixes :bug:
+- fix: include `OptionsTile` style in `_index-released-only.scss` file (#8536)
+- fix(datagrid): pagination row not displaying when filters are used (#8374)
+- fix: remove truncation styling from sidepanel title (#8322)
+
+### Housekeeping :house:
+- chore(PageHeader): use condensed grid for tab bar text alignment (#8491)
+
 ## `@carbon/ibm-products-styles@2.72.0`
 ### Bug fixes :bug:
 - fix: update popover link in tagset and overflow (#8249)

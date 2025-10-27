@@ -1,3 +1,15 @@
+## `@carbon/ibm-products-web-components@0.27.0-rc.0`
+### Features :rocket:
+- feat(coachmarkbeacon): implemented as web component (#8488)
+
+### Bug fixes :bug:
+- fix(playwright): install in correct location
+- fix(checklist): accessibility violations (#8487)
+- fix: add code panel back into storybook (#8431)
+
+### Housekeeping :house:
+- chore(PageHeader): use condensed grid for tab bar text alignment (#8491)
+
 ## `@carbon/ibm-products-web-components@0.26.0`
 ### Features :rocket:
 - feat(step-util): adds utility for stepping within lit components (#8296)

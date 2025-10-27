@@ -1,3 +1,23 @@
+## `@carbon/ibm-products@2.78.0-rc.0`
+### Features :rocket:
+- feat(GuideBanner): code connect (#8411)
+- feat(tearsheet): Added code connect files (#8472)
+- feat(notificationPanel): code connect (#8408)
+- feat(PageHeader): add open in stackblitz config (#8469)
+- feat(sidepanel): code connect integration (#8444)
+
+### Bug fixes :bug:
+- fix(Feature flag): moved the merge logic from feature-flag js to FeatureFlag (#8535)
+- fix: modified expressivecard story's incorrect "caption" prop (#8473)
+- fix: remove patterns from build output (#8468)
+- fix: remove truncation styling from sidepanel title (#8322)
+- fix(cards): cards (expressive and productive) code connect files causing breaking publishes (#8445)
+- fix(coachmark): added missing exports (#8406)
+- fix: add code panel back into storybook (#8431)
+
+### Housekeeping :house:
+- chore(PageHeader): use condensed grid for tab bar text alignment (#8491)
+
 ## `@carbon/ibm-products@2.77.1`
 ### Bug fixes :bug:
 - fix(PageHeader): use correct export path (#8514)

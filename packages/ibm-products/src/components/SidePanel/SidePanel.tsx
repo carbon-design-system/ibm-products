@@ -6,7 +6,6 @@
  */
 
 import { ArrowLeft, Close } from '@carbon/react/icons';
-import '../../feature-flags';
 // Carbon and package components we use.
 import {
   Button,

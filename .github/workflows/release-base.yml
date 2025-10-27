@@ -80,7 +80,7 @@ jobs:
 
       # For generating playwright json report for avt tests
       # - name: Install browsers
-      #   run: yarn playwright install --with-deps
+      #   run: npx playwright install --with-deps
 
       - name: Continuous integration check (includes build)
         run: yarn ci-check
@@ -98,7 +98,7 @@ jobs:
       # - name: Run AVT
       #   if: github.repository == 'carbon-design-system/ibm-products'
       #   run: |
-      #     yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
+      #     npx playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
       # - name: Stop storybook
       #   run: kill ${{ steps.storybook.outputs.pid }}
       # - name: Upload test results

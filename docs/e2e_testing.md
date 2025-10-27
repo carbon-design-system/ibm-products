@@ -2,16 +2,16 @@
 
 ## Overview
 
-| Task                                                  | Command                                            |
-| :---------------------------------------------------- | :------------------------------------------------- |
-| Run playwright tests                                  | `yarn playwright test`                             |
-| Run a specific playwright test                        | `yarn playwright test path/to/test-e2e.js`         |
-| Run playwright tests in a specific browser            | `yarn playwright test --browser=chromium`          |
-| Run playwright tests in a specific project            | `yarn playwright test --project=chromium`          |
-| Debug playwright tests                                | `yarn playwright test --debug`                     |
-| Run playwright with browser visible                   | `yarn playwright test --project=chromium --headed` |
-| Run playwright tests that match a specific tag        | `yarn playwright test --grep @tag-name`            |
-| Run playwright tests that do not match a specific tag | `yarn playwright test --grep-invert @tag-name`     |
+| Task                                                  | Command                                           |
+| :---------------------------------------------------- | :------------------------------------------------ |
+| Run playwright tests                                  | `npx playwright test`                             |
+| Run a specific playwright test                        | `npx playwright test path/to/test-e2e.js`         |
+| Run playwright tests in a specific browser            | `npx playwright test --browser=chromium`          |
+| Run playwright tests in a specific project            | `npx playwright test --project=chromium`          |
+| Debug playwright tests                                | `npx playwright test --debug`                     |
+| Run playwright with browser visible                   | `npx playwright test --project=chromium --headed` |
+| Run playwright tests that match a specific tag        | `npx playwright test --grep @tag-name`            |
+| Run playwright tests that do not match a specific tag | `npx playwright test --grep-invert @tag-name`     |
 
 ### Playwright
 
@@ -54,7 +54,7 @@ will also need to run the follow installation command so that Playwright has the
 browsers specified in `playwright.config.js` to run the e2e tests:
 
 ```bash
-yarn playwright install
+npx playwright install
 ```
 
 Now you can run the playwright tests with one of the commands in the overview

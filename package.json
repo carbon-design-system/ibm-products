@@ -49,7 +49,7 @@
     "test:c4p": "lerna run --stream --scope @carbon/ibm-products test --",
     "test:c4p:snapshot": "yarn test:c4p-styles styles -u",
     "test:c4p-styles": "lerna run --stream --scope @carbon/ibm-products-styles test --",
-    "test:c4p-wc": "yarn playwright install --with-deps && lerna run --stream --scope @carbon/ibm-products-web-components test --",
+    "test:c4p-wc": "lerna run --stream --scope @carbon/ibm-products-web-components test --",
     "spellcheck": "cspell '**' -e './examples' --gitignore --quiet --no-must-find-files",
     "storybook": "cd packages/ibm-products && yarn storybook:start",
     "storybook:build": "cd packages/ibm-products && yarn storybook:build",

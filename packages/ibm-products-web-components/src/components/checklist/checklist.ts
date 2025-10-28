@@ -14,6 +14,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import ChevronIcon16 from '@carbon/icons/es/chevron--up/16';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
+import '@carbon/web-components/es/components/link/index.js';
 
 import { prefix } from '../../globals/settings';
 import styles from './checklist.scss?lit';
@@ -105,6 +106,12 @@ class CDSChecklist extends LitElement {
     );
   }
 
+  private _handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this._viewAll(event);
+    }
+  }
+
   private _onToggle(event: Event) {
     this.open = !this.open;
     // Fire custom event
@@ -139,6 +146,7 @@ class CDSChecklist extends LitElement {
       viewAllLabel,
       _viewAll: viewAll,
       _onToggle: onToggle,
+      _handleKeyDown: handleKeyDown,
     } = this;
 
     const classes = classMap({
@@ -147,7 +155,7 @@ class CDSChecklist extends LitElement {
     });
 
     return html`
-      <aside class=${classes}>
+      <aside class=${classes} aria-label="Checklist">
         <!-- Header -->
         <header class="${blockClass}__header">
           <slot name="checklist-header">
@@ -194,7 +202,13 @@ class CDSChecklist extends LitElement {
             <div class="${blockClass}__footer">
               <slot name="checklist-footer">
                 ${viewAllLabel &&
-                html`<cds-link @click=${viewAll}> ${viewAllLabel} </cds-link>`}
+                html`<cds-link
+                  role="link"
+                  @click=${viewAll}
+                  @keydown=${handleKeyDown}
+                >
+                  ${viewAllLabel}
+                </cds-link>`}
               </slot>
             </div>
           </div>

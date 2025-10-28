@@ -1,0 +1,46 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './ImportAndUpload.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# Import And Upload
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/export/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Standard](#standard)
+
+## Overview
+
+Modal dialog version of the Import and Upload pattern. The import action
+transfers data or objects from an external source into a system.
+
+To build this pattern, we recommend including the following ingredients:
+
+- [ComposedModal](https://react.carbondesignsystem.com/?path=/docs/components-composedmodal)
+- [cds-button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [TextInput](https://react.carbondesignsystem.com/?path=/docs/components-textinput)
+- [FileUploader](https://react.carbondesignsystem.com/?path=/docs/components-fileuploader)
+
+### Standard
+
+<Canvas
+  of={stories.Standard}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Standard,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>

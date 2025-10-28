@@ -50,6 +50,10 @@ export interface CoachmarkTaglineProps {
    * button props
    */
   buttonProps?: CoachmarkButtonProps;
+  /**
+   * Optional class name for this component.
+   */
+  className?: string;
 
   isOpen?: boolean;
 }
@@ -69,6 +73,7 @@ export const CoachmarkTagline = React.forwardRef<
       title,
       buttonProps,
       isOpen,
+      className,
       ...rest
     },
     ref
@@ -79,7 +84,11 @@ export const CoachmarkTagline = React.forwardRef<
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(blockClass, isOpen && `${blockClass}--is-open`)}
+        className={cx(
+          blockClass,
+          isOpen && `${blockClass}--is-open`,
+          className
+        )}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
@@ -126,6 +135,10 @@ CoachmarkTagline.propTypes = {
     tabIndex: PropTypes.number,
     ['aria-expanded']: PropTypes.bool,
   }),
+  /**
+   * Optional class name for this component.
+   */
+  className: PropTypes.string,
   /**
    * Tooltip text and aria label for the Close button icon.
    */

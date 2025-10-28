@@ -1,4 +1,8 @@
-## `@jest-config-ibm-cloud-cognitive@1.35.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.37.0-rc.0`
+### Bug fixes :bug:
+- fix(Feature flag): moved the merge logic from feature-flag js to FeatureFlag (#8535)
+
+## `@jest-config-ibm-cloud-cognitive@1.35.0`
 ### Housekeeping :house:
 - refactor(scripts): remove chalk dep (#8321)
 - chore: pin chalk (#8261)

@@ -6,6 +6,8 @@
  */
 @use '@carbon/styles/scss/spacing' as *;
 
+$carbon-prefix: 'cds';
+
 .slider {
   /* stylelint-disable-next-line carbon/layout-use */
   margin-block-end: 1rem;
@@ -25,7 +27,7 @@
     margin-block-start: $spacing-02;
   }
 
-  .cds--tag {
+  .#{$carbon-prefix}--tag {
     margin: 0 $spacing-02 $spacing-02 0;
   }
 }

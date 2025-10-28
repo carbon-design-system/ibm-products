@@ -219,22 +219,20 @@ export const Default = () => {
         <Tearsheet.Body>
           <Tearsheet.MainContent>
             <div className="influencerPanelTrigger">
-              <IconButton
+              <Button
                 kind="ghost"
                 label="Open influencer"
                 onClick={() => setInfluencerPanelOpen(true)}
-              >
-                <RightPanelClose />
-              </IconButton>
+                renderIcon={() => <RightPanelClose />}
+              ></Button>
             </div>
             <div className="summaryPanelTrigger">
-              <IconButton
+              <Button
                 kind="ghost"
                 label="Open right panel"
                 onClick={() => setSummaryPanelOpen(true)}
-              >
-                <RightPanelClose />
-              </IconButton>
+                renderIcon={() => <RightPanelClose />}
+              ></Button>
             </div>
 
             <Section className="main-content">
@@ -454,13 +452,12 @@ export const WithTabs = () => {
           <Tearsheet.Body>
             <Tearsheet.MainContent>
               <div className="summaryPanelTrigger">
-                <IconButton
+                <Button
                   kind="ghost"
                   label="Open right panel"
                   onClick={() => setSummaryPanelOpen(true)}
-                >
-                  <RightPanelClose />
-                </IconButton>
+                  renderIcon={() => <RightPanelClose />}
+                ></Button>
               </div>
               <TabPanels>
                 <TabPanel className="page-header-story--tall-tab-panel">
@@ -642,22 +639,20 @@ export const narrowTearsheet = () => {
           <Tearsheet.Body>
             <Tearsheet.MainContent>
               <div className="influencerPanelTrigger">
-                <IconButton
+                <Button
                   kind="ghost"
                   label="Open influencer"
                   onClick={() => setInfluencerPanelOpen(true)}
-                >
-                  <RightPanelClose />
-                </IconButton>
+                  renderIcon={() => <RightPanelClose />}
+                ></Button>
               </div>
               <div className="summaryPanelTrigger">
-                <IconButton
+                <Button
                   kind="ghost"
                   label="Open right panel"
                   onClick={() => setSummaryPanelOpen(true)}
-                >
-                  <RightPanelClose />
-                </IconButton>
+                  renderIcon={() => <RightPanelClose />}
+                ></Button>
               </div>
 
               <Section className="main-content">

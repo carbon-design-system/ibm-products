@@ -16,6 +16,7 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
   @include hide-at-lg;
   @include hide-at-md;
   @include hide-at-xlg;
+  @include hide-at-max;
 }
 
 .default__action-buttons {

@@ -215,7 +215,12 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
             className={cx(blockClass, className, {
               [`${blockClass}--wide`]: variant === 'wide',
               [`${blockClass}--narrow`]: variant === 'narrow',
-
+              [`${blockClass}--has-ai-label`]:
+                !!rest.decorator &&
+                rest.decorator['type']?.displayName === 'AILabel',
+              [`${blockClass}--has-decorator`]:
+                !!rest.decorator &&
+                rest.decorator['type']?.displayName !== 'AILabel',
               [`${blockClass}--has-close`]: hasCloseIcon,
             })}
             containerClassName={cx(`${blockClass}__container`, {})}

@@ -290,7 +290,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class__next}__header-collapsed {
-    padding-block-start: $spacing-04; // reduce the top spacing in collpased header
+    padding-block-start: $spacing-04; // reduce the top spacing in collapsed header
     .#{$block-class__next}__header-content-wrapper {
       block-size: $spacing-08;
     }
@@ -300,7 +300,7 @@ $motion-duration: $duration-moderate-02;
     .#{$block-class__next}__header-title {
       @include type.type-style(
         'label-02'
-      ); // change the title style to lable 02
+      ); // change the title style to label 02
 
       align-items: center;
       margin-block-start: $spacing-02;

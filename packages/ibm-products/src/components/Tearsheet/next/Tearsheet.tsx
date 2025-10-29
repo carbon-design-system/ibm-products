@@ -72,7 +72,14 @@ export interface TearsheetProps extends ComposedModalProps {
    */
   open?: boolean;
 
+  /**
+   * User can pass any class names to add to the modal wrapper
+   */
   className?: string;
+  /**
+   * User can pass any class names that will added to the modal container, rather than the wrapper
+   */
+  containerClassName?: string;
   /**
    * the defines the gap from top of the view port. Defaulted to 3rem
    */
@@ -154,6 +161,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       open = false,
       portalTarget,
       verticalGap,
+      containerClassName,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -266,7 +274,10 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
               [`${blockClass}--stack-activated`]: stack.length > 1,
               [`${blockClass}--has-close`]: hasCloseIcon,
             })}
-            containerClassName={cx(`${blockClass}__container`)}
+            containerClassName={cx(
+              `${blockClass}__container`,
+              containerClassName
+            )}
             {...{ onClose, open, selectorPrimaryFocus }}
             ref={modalRef}
             selectorsFloatingMenus={[
@@ -301,14 +312,9 @@ export interface FooterProps {
 }
 const Footer = forwardRef<HTMLDivElement, FooterProps>(({ children }, ref) => {
   return (
-    <Layer
-      as="footer"
-      withBackground
-      className={`${blockClass}__footer`}
-      ref={ref}
-    >
+    <footer className={`${blockClass}__footer`} ref={ref}>
       {children}
-    </Layer>
+    </footer>
   );
 });
 

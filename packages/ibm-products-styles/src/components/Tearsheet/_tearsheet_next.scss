@@ -38,7 +38,8 @@ $motion-duration: $duration-moderate-02;
   }
 
   // Extra specificity to override Carbon default transition
-  &.#{$block-class__next} .#{$block-class__next}__container {
+  &.#{$block-class__next}.#{$block-class__next}
+    .#{$block-class__next}__container {
     transition:
       transform $motion-duration motion(entrance, expressive),
       max-height $motion-duration motion(entrance, expressive);
@@ -92,9 +93,11 @@ $motion-duration: $duration-moderate-02;
     display: grid;
     flex-basis: unset;
     gap: $spacing-05;
-    grid-template-columns:
-      auto
-      minmax(var(--tearsheet-header-title-grid-width, 0), 1fr);
+    grid-template-columns: minmax(auto, 40rem) minmax(
+        var(--tearsheet-header-title-grid-width, 0),
+        1fr
+      );
+
     inline-size: calc(100% - var(--tearsheet-header-action-offset));
 
     @include breakpoint-down(md) {
@@ -113,6 +116,7 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class__next}__header-label {
     @include type.type-style('label-01');
 
+    color: $text-secondary;
     margin-block-end: $spacing-02;
   }
 
@@ -130,22 +134,11 @@ $motion-duration: $duration-moderate-02;
     svg {
       flex-shrink: 0;
     }
-
-    &.#{$block-class__next}__leading-icon {
-      flex-direction: row;
-
-      svg {
-        margin-inline-end: $spacing-05;
-      }
+    .#{$block-class__next}__title-start {
+      margin-inline-end: $spacing-05;
     }
-
-    &.#{$block-class__next}__trailing-icon {
-      flex-direction: row-reverse;
-      justify-content: flex-end;
-
-      svg {
-        margin-inline-start: $spacing-05;
-      }
+    .#{$block-class__next}__title-end {
+      margin-inline-start: $spacing-05;
     }
   }
 
@@ -155,10 +148,6 @@ $motion-duration: $duration-moderate-02;
 
   .#{$block-class__next}__header--no-close-icon {
     display: none;
-  }
-
-  .#{$block-class__next}__header-content {
-    max-inline-size: 40rem;
   }
 
   // ──────────────────────────────────────────────────────────────
@@ -176,8 +165,8 @@ $motion-duration: $duration-moderate-02;
 
     .#{$block-class__next}__scroller-container {
       position: absolute;
-      inset-inline-end: -$spacing-07;
-      margin-inline-end: 1px;
+      inset-block-end: $spacing-01;
+      inset-inline-end: calc(-#{$spacing-07} + #{$spacing-01});
       @include breakpoint-down(md) {
         inset-inline-end: -$spacing-05;
       }
@@ -229,7 +218,37 @@ $motion-duration: $duration-moderate-02;
       margin-inline-end: 0;
     }
   }
-
+  &.#{$block-class__next}--narrow {
+    .#{$block-class__next}__header {
+      padding-inline: $spacing-05;
+    }
+    .#{$block-class__next}__header.#{$block-class__next}__header-collapsed {
+      .#{$block-class__next}__header-actions {
+        display: none;
+      }
+    }
+    .#{$block-class__next}__header-content-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+    .#{$block-class__next}__header-title {
+      @include type.type-style('heading-03');
+    }
+    .#{$block-class__next}__content__header-actions {
+      justify-content: flex-start;
+      margin-inline-end: 0;
+    }
+    .#{$block-class__next}__body {
+      grid-template-columns: 1fr 0;
+    }
+    .#{$block-class__next}__influencer,
+    .#{$block-class__next}__main-content,
+    .#{$block-class__next}__summary-content {
+      &:not(.#{$block-class__next}__flush) {
+        padding-inline: $spacing-05;
+      }
+    }
+  }
   // ──────────────────────────────────────────────────────────────
   // Header (default vs collapsed)
   // ──────────────────────────────────────────────────────────────
@@ -253,6 +272,44 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class__next}__header-collapsed {
+    padding-block-start: $spacing-04; // reduce the top spacing in collpased header
+    .#{$block-class__next}__header-content-wrapper {
+      block-size: $spacing-08;
+    }
+    .#{$block-class__next}__header-actions {
+      margin-block-end: 0;
+    }
+    .#{$block-class__next}__header-title {
+      @include type.type-style(
+        'label-02'
+      ); // change the title style to lable 02
+
+      align-items: center;
+      margin-block-start: $spacing-02;
+
+      > span {
+        // reduce the titleEnd and titleStart dimension
+        display: flex;
+        align-items: center;
+        block-size: $spacing-06;
+      }
+    }
+
+    .#{$block-class__next}__content__header-actions {
+      margin-block-start: -$spacing-01;
+    }
+    //add margin button for header content
+    .#{$block-class__next}__header-content {
+      align-self: center;
+      //margin-block-end: $spacing-04;
+      margin-block-end: 0;
+    }
+    //hide header actions on small collapsed view
+    @include breakpoint-down(md) {
+      .#{$block-class__next}__header-actions {
+        display: none;
+      }
+    }
     // Hide everything except navigation bar, header-content-wrapper & close button
     > *:not(
         .#{$block-class__next}__navigation-bar,
@@ -349,9 +406,11 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class__next}__main-content,
   .#{$block-class__next}__summary-content {
     overflow: auto;
-    padding-inline: $spacing-07;
-    @include breakpoint-down(md) {
-      padding-inline: $spacing-05;
+    &:not(.#{$block-class__next}__flush) {
+      padding-inline: $spacing-07;
+      @include breakpoint-down(md) {
+        padding-inline: $spacing-05;
+      }
     }
   }
 
@@ -367,31 +426,6 @@ $motion-duration: $duration-moderate-02;
     max-inline-size: none;
     .#{$pkg-prefix}--side-panel__header {
       min-block-size: 0;
-    }
-  }
-
-  &.#{$block-class__next}--narrow {
-    .#{$block-class__next}__header {
-      padding-inline: $spacing-05;
-    }
-    .#{$block-class__next}__header-content-wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-    .#{$block-class__next}__header-title {
-      @include type.type-style('heading-03');
-    }
-    .#{$block-class__next}__content__header-actions {
-      justify-content: flex-start;
-      margin-inline-end: 0;
-    }
-    .#{$block-class__next}__body {
-      grid-template-columns: 1fr 0;
-    }
-    .#{$block-class__next}__influencer,
-    .#{$block-class__next}__main-content,
-    .#{$block-class__next}__summary-content {
-      padding-inline: $spacing-05;
     }
   }
 

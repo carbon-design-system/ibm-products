@@ -74,7 +74,6 @@ export const StackProvider: React.FC<StepProviderProps> = ({
     const bufferInPx = remToPx(buffer);
 
     const scale = depth > -1 ? (width - bufferInPx * 2 * depth) / width : 1;
-    console.log('bufferInPx', bufferInPx, depth, width);
     return scale;
   };
 

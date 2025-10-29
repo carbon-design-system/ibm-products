@@ -137,7 +137,6 @@ export const Default = () => {
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
-
   return (
     <>
       <Button
@@ -163,8 +162,7 @@ export const Default = () => {
             open
             label="Customer data"
             title="Title of the tearsheet "
-            titleIcon={Bee}
-            titleIconPosition={'leading'}
+            titleStart={<Bee size={32} />}
             description={description}
             headerActions={
               <Tearsheet.HeaderActions

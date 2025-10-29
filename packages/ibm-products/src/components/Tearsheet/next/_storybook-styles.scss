@@ -60,7 +60,7 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
 .#{$block-class__next}__influencer,
 .#{$block-class__next}__main-content,
 .#{$block-class__next}__summary-content {
-  padding-block-start: $spacing-07;
+  padding-block: $spacing-07;
 }
 
 .stackButtons {
@@ -81,4 +81,11 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
   inset-block-start: 0;
   inset-inline-start: $spacing-05;
   @include hideAtLargeScreens();
+}
+.#{$block-class__next}__header-collapsed {
+  .#{$block-class__next}__header-title {
+    svg {
+      inline-size: $spacing-05;
+    }
+  }
 }

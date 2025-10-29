@@ -7,9 +7,8 @@
 
 import React, { ReactNode, useContext } from 'react';
 import cx from 'classnames';
-import { blockClass, TearsheetContext } from './context';
+import { blockClass } from './context';
 import { TruncatedText } from '../../TruncatedText';
-import { CarbonIconType } from '@carbon/react/icons';
 
 export interface TearsheetHeaderContentProps {
   /**
@@ -17,12 +16,28 @@ export interface TearsheetHeaderContentProps {
    * People can make use of this if they want to have custom header.
    */
   children?: React.ReactNode;
-
+  /**
+   * The main title of the tearsheet.
+   */
   title: string;
-  label?: string;
+  /**
+   * A label for the tearsheet, displayed above the title
+   * to maintain context for the tearsheet (e.g. as the title changes from page
+   * to page of a multi-page task).
+   */
+  label?: ReactNode;
+  /**
+   * A description of the flow, displayed in the header area of the tearsheet.
+   */
   description?: ReactNode;
-  titleIcon?: CarbonIconType;
-  titleIconPosition?: 'leading' | 'trailing';
+  /**
+   * This can be used to render a content just before the title like an icon
+   */
+  titleStart?: ReactNode;
+  /**
+   * This can be used to render a content just after the title like an icon
+   */
+  titleEnd?: ReactNode;
   /**
    * The PageHeaderContent's page actions
    */
@@ -38,31 +53,21 @@ const TearsheetHeaderContent = React.forwardRef<
     label,
     title,
     description,
-    titleIcon: Icon,
-    titleIconPosition = 'leading',
     headerActions,
+    titleStart,
+    titleEnd,
     ...rest
   } = props;
-  const { isSm } = useContext(TearsheetContext);
+
   return (
     <div className={`${blockClass}__header-content-wrapper`} ref={ref}>
       <div className={`${blockClass}__header-content`}>
         <p className={`${blockClass}__header-label`}>{label}</p>
         <div className={`${blockClass}__content__title-wrapper`}>
-          <h2
-            className={cx(
-              `${blockClass}__header-title`,
-              {
-                [`${blockClass}__leading-icon`]:
-                  Icon && titleIconPosition === 'leading',
-              },
-              {
-                [`${blockClass}__trailing-icon`]:
-                  Icon && titleIconPosition === 'trailing',
-              }
-            )}
-          >
-            {!isSm && Icon && <Icon size={32} />}
+          <h2 className={cx(`${blockClass}__header-title`)}>
+            {titleStart ? (
+              <span className={`${blockClass}__title-start`}>{titleStart}</span>
+            ) : null}
             <TruncatedText
               id={`${blockClass}__header-title__truncatedText`}
               className={`${blockClass}__content__title`}
@@ -70,6 +75,9 @@ const TearsheetHeaderContent = React.forwardRef<
               autoAlign={true}
               value={title}
             />
+            {titleEnd ? (
+              <span className={`${blockClass}__title-end`}>{titleEnd}</span>
+            ) : null}
           </h2>
         </div>
 

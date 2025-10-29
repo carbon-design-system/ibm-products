@@ -4,8 +4,8 @@
 
 ## Getting started
 
-If you’re just getting started and looking to browse our React components, take
-a look at
+If you’re just getting started and looking to browse our web components, take a
+look at
 [our Storybook](https://ibm-products-web-components.carbondesignsystem.com/).
 
 ### 📦 Installing Carbon for IBM Products web components
@@ -28,9 +28,6 @@ import '@carbon/ibm-products/css/index.min.css';
 ```
 
 ### Usage
-
-The `@carbon/web-components` package provides components for the Carbon Design
-System.
 
 To use a component, you can import it directly from the package:
 

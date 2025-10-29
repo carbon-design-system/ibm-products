@@ -221,7 +221,13 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isSm]);
+    }, [
+      isSm,
+      rest.decorator,
+      influencerWidth,
+      summaryContentWidth,
+      verticalGap,
+    ]);
 
     useLayoutEffect(() => {
       if (bodyRef.current) {

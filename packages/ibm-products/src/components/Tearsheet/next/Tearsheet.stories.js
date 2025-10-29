@@ -25,6 +25,8 @@ import {
   Tabs,
   TextInput,
   Toggletip,
+  ToggletipButton,
+  ToggletipContent,
 } from '@carbon/react';
 
 import { Tearsheet } from '.';
@@ -32,6 +34,7 @@ import styles from './_storybook-styles.scss?inline';
 import {
   Bee,
   BottomPanelOpenFilled,
+  Information,
   RightPanelClose,
 } from '@carbon/react/icons';
 import { TearsheetWithSteps } from './_story-assets/StepTearsheet';
@@ -133,7 +136,13 @@ const description = (
 //   headerSubTitle: 'Use case-specific sub title',
 //   ariaLabel: 'Interstitial Screen',
 // };
-export const Default = () => {
+export const Default = ({
+  decorator,
+  influencerWidth,
+  summaryContentWidth,
+  verticalGap,
+  variant,
+}) => {
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
@@ -150,12 +159,15 @@ export const Default = () => {
 
       <Tearsheet
         open={open}
-        variant={'wide'}
-        decorator={sampleDecorator(1)}
+        variant={variant ?? 'wide'}
+        decorator={sampleDecorator(decorator)}
         onClose={() => setOpen(false)}
         preventCloseOnClickOutside={true}
         launcherButtonRef={launcherButtonRef}
         selectorPrimaryFocus={'#input1'}
+        influencerWidth={influencerWidth}
+        summaryContentWidth={summaryContentWidth}
+        verticalGap={verticalGap}
       >
         <Tearsheet.Header>
           <Tearsheet.HeaderContent
@@ -1397,3 +1409,38 @@ export const stackingWithDifferentSizes = () => (
 export const stackingNarrowTearsheets = () => (
   <StackingTearsheet variant={['narrow', 'narrow', 'narrow']} />
 );
+
+Default.argTypes = {
+  decorator: {
+    control: {
+      type: 'select',
+      labels: {
+        0: 'No AI Label',
+        1: 'with AI Label',
+        2: 'With non AI Label component',
+      },
+      default: 0,
+    },
+    description: 'Optional prop that allows you to pass any component.',
+    options: [0, 1, 2],
+  },
+  influencerWidth: {
+    control: {
+      type: 'text',
+    },
+  },
+  summaryContentWidth: {
+    control: {
+      type: 'text',
+    },
+  },
+  verticalGap: {
+    control: {
+      type: 'text',
+    },
+  },
+  variant: {
+    control: { type: 'radio' },
+    options: ['wide', 'narrow'],
+  },
+};

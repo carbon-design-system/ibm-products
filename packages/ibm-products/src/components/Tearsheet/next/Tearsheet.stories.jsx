@@ -13,7 +13,6 @@ import {
   Form,
   FormGroup,
   Heading,
-  IconButton,
   NumberInput,
   ProgressIndicator,
   ProgressStep,
@@ -202,22 +201,20 @@ export const Default = ({
         <Tearsheet.Body>
           <Tearsheet.MainContent>
             <div className="influencerPanelTrigger">
-              <IconButton
+              <Button
                 kind="ghost"
                 label="Open influencer"
                 onClick={() => setInfluencerPanelOpen(true)}
-              >
-                <RightPanelClose />
-              </IconButton>
+                renderIcon={() => <RightPanelClose />}
+              ></Button>
             </div>
             <div className="summaryPanelTrigger">
-              <IconButton
+              <Button
                 kind="ghost"
                 label="Open right panel"
                 onClick={() => setSummaryPanelOpen(true)}
-              >
-                <RightPanelClose />
-              </IconButton>
+                renderIcon={() => <RightPanelClose />}
+              ></Button>
             </div>
 
             <Section className="main-content">
@@ -454,22 +451,12 @@ export const WithInfluencer = () => {
         <Tearsheet.Body>
           <Tearsheet.MainContent>
             <div className="influencerPanelTrigger">
-              <IconButton
-                kind="ghost"
-                label="Open influencer"
-                onClick={() => setInfluencerPanelOpen(true)}
-              >
-                <RightPanelClose />
-              </IconButton>
-            </div>
-            <div className="summaryPanelTrigger">
-              <IconButton
+              <Button
                 kind="ghost"
                 label="Open right panel"
-                onClick={() => setSummaryPanelOpen(true)}
-              >
-                <RightPanelClose />
-              </IconButton>
+                onClick={() => setInfluencerPanelOpen(true)}
+                renderIcon={() => <RightPanelClose />}
+              ></Button>
             </div>
 
             <Section className="main-content">
@@ -659,13 +646,12 @@ export const WithTabs = () => {
           <Tearsheet.Body>
             <Tearsheet.MainContent>
               <div className="summaryPanelTrigger">
-                <IconButton
+                <Button
                   kind="ghost"
                   label="Open right panel"
                   onClick={() => setSummaryPanelOpen(true)}
-                >
-                  <RightPanelClose />
-                </IconButton>
+                  renderIcon={() => <RightPanelClose />}
+                ></Button>
               </div>
               <TabPanels>
                 <TabPanel className="page-header-story--tall-tab-panel">
@@ -852,22 +838,20 @@ export const narrowTearsheet = () => {
           <Tearsheet.Body>
             <Tearsheet.MainContent>
               <div className="influencerPanelTrigger">
-                <IconButton
+                <Button
                   kind="ghost"
                   label="Open influencer"
                   onClick={() => setInfluencerPanelOpen(true)}
-                >
-                  <RightPanelClose />
-                </IconButton>
+                  renderIcon={() => <RightPanelClose />}
+                ></Button>
               </div>
               <div className="summaryPanelTrigger">
-                <IconButton
+                <Button
                   kind="ghost"
                   label="Open right panel"
                   onClick={() => setSummaryPanelOpen(true)}
-                >
-                  <RightPanelClose />
-                </IconButton>
+                  renderIcon={() => <RightPanelClose />}
+                ></Button>
               </div>
 
               <Section className="main-content">
@@ -1043,30 +1027,30 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
         <Button onClick={() => setOpen3(!open3)}>Toggle Tearsheet 3</Button>
       </div>
       <div className="smallScreenButton">
-        <IconButton
+        <Button
           kind="ghost"
           align="bottom"
           onClick={() => setOpen1(!open1)}
           label="Toggle Tearsheet 1"
         >
           <BottomPanelOpenFilled />
-        </IconButton>
-        <IconButton
+        </Button>
+        <Button
           kind="ghost"
           align="bottom"
           onClick={() => setOpen2(!open2)}
           label="Toggle Tearsheet 2"
         >
           <BottomPanelOpenFilled />
-        </IconButton>
-        <IconButton
+        </Button>
+        <Button
           kind="ghost"
           align="bottom"
           onClick={() => setOpen3(!open3)}
           label="Toggle Tearsheet 3"
         >
           <BottomPanelOpenFilled />
-        </IconButton>
+        </Button>
       </div>
 
       <StackProvider stackStepSize="lg">

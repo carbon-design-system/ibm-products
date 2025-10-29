@@ -198,7 +198,7 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
 
     return !isSm ? (
       <aside
-        className={cx(`${blockClass}__influencer-content`, className, {
+        className={cx(`${blockClass}__influencer`, className, {
           [`${blockClass}__flush`]: isFlush,
         })}
         ref={ref}

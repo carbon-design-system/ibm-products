@@ -21,13 +21,11 @@ $ yarn add @carbon/ibm-products-web-components
 $ npm install @carbon/ibm-products-web-components
 ```
 
-> <mark>**NOTE:** Is it the same CSS file?</mark>
->
-> Then you can import the component styles in your `index.js`.
->
-> ```js
-> import '@carbon/ibm-products/css/index.min.css';
-> ```
+Then you can import the component styles in your `index.js`.
+
+```js
+import '@carbon/ibm-products/css/index.min.css';
+```
 
 ### Usage
 
@@ -59,15 +57,23 @@ check out:
 
 - [Storybook](https://ibm-products-web-components.carbondesignsystem.com/)
 
-### Building and running locally
+### Building and running Storybook locally
 
 To get started, run the following commands and Storybook will be built and then
 served on port `3000` on your local machine.
 
+If this is your first time running web components in Storybook, run the
+following commands:
+
 ```shell
 yarn
 yarn build
-yarn storybook
+```
+
+Then run Storybook:
+
+```shell
+yarn storybook-wc
 ```
 
 ## 🙌 Contributing

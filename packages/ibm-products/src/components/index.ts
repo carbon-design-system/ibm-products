@@ -41,7 +41,6 @@ export * from './StringFormatter';
 export * from './TagOverflow';
 export * from './TagSet';
 export * from './Tearsheet';
-export * from './TruncatedText';
 export * from './UserAvatar';
 export * from './WebTerminal';
 
@@ -54,6 +53,10 @@ export * from './WebTerminal';
 export * as preview__Coachmark from './Coachmark/next/Coachmark';
 export * as preview__CoachmarkTagline from './Coachmark/next/Coachmark/CoachmarkTagline';
 export * as preview__CoachmarkBeacon from './Coachmark/next/Coachmark/CoachmarkBeacon';
+export {
+  TruncatedText as preview__TruncatedText,
+  type TruncatedTextProps,
+} from './TruncatedText';
 
 export {
   FeatureFlags as preview__FeatureFlags,

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.27.0-rc.0`
+## `@carbon/ibm-products-web-components@0.27.0`
 ### Features :rocket:
 - feat(coachmarkbeacon): implemented as web component (#8488)
 

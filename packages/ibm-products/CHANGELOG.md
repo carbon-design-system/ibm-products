@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.78.0-rc.0`
+## `@carbon/ibm-products@2.78.0`
 ### Features :rocket:
 - feat(GuideBanner): code connect (#8411)
 - feat(tearsheet): Added code connect files (#8472)
@@ -9,6 +9,7 @@
 ### Bug fixes :bug:
 - fix(Feature flag): moved the merge logic from feature-flag js to FeatureFlag (#8535)
 - fix: modified expressivecard story's incorrect "caption" prop (#8473)
+- fix(PageHeader): use correct export path (#8514)
 - fix: remove patterns from build output (#8468)
 - fix: remove truncation styling from sidepanel title (#8322)
 - fix(cards): cards (expressive and productive) code connect files causing breaking publishes (#8445)

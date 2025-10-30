@@ -321,7 +321,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-create-class-features-plugin@npm:^7.27.1, @babel/helper-create-class-features-plugin@npm:^7.28.3":
+"@babel/helper-create-class-features-plugin@npm:^7.27.1":
   version: 7.28.3
   resolution: "@babel/helper-create-class-features-plugin@npm:7.28.3"
   dependencies:
@@ -1100,18 +1100,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-class-static-block@npm:^7.28.3":
-  version: 7.28.3
-  resolution: "@babel/plugin-transform-class-static-block@npm:7.28.3"
-  dependencies:
-    "@babel/helper-create-class-features-plugin": "npm:^7.28.3"
-    "@babel/helper-plugin-utils": "npm:^7.27.1"
-  peerDependencies:
-    "@babel/core": ^7.12.0
-  checksum: 10/c0ba8f0cbf3699287e5a711907dab3b29f346d9c107faa4e424aa26252e45845d74ca08ee6245bfccf32a8c04bc1d07a89b635e51522592c6044b810a48d3f58
-  languageName: node
-  linkType: hard
-
 "@babel/plugin-transform-classes@npm:^7.28.3":
   version: 7.28.3
   resolution: "@babel/plugin-transform-classes@npm:7.28.3"
@@ -1744,7 +1732,6 @@ __metadata:
     "@babel/plugin-transform-block-scoped-functions": "npm:^7.27.1"
     "@babel/plugin-transform-block-scoping": "npm:^7.28.0"
     "@babel/plugin-transform-class-properties": "npm:^7.27.1"
-    "@babel/plugin-transform-class-static-block": "npm:^7.28.3"
     "@babel/plugin-transform-classes": "npm:^7.28.3"
     "@babel/plugin-transform-computed-properties": "npm:^7.27.1"
     "@babel/plugin-transform-destructuring": "npm:^7.28.0"
@@ -13860,7 +13847,6 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.26.10"
     "@babel/eslint-parser": "npm:^7.26.10"
-    "@babel/plugin-transform-class-static-block": "npm:^7.28.3"
     "@babel/preset-react": "npm:^7.26.3"
     "@carbon/grid": "npm:^11.42.0"
     "@carbon/layout": "npm:^11.40.0"

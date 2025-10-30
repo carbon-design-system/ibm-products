@@ -108,13 +108,16 @@ export const makeDraggable = ({
     if (!(target instanceof Node)) {
       return;
     }
-
     const path = (e.composedPath && e.composedPath()) || [];
+    console.log(path);
+
     const isTargetInHandle = dragHandle
       ? path.includes(target)
       : path.includes(target);
 
     if (!isTargetInHandle) {
+      console.log('hello');
+
       return;
     }
 
@@ -122,7 +125,6 @@ export const makeDraggable = ({
     offsetY = e.clientY - el.offsetTop;
     isDragging = true;
     dispatch('dragstart', { mouse: true });
-
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp, { once: true });
   };
@@ -131,8 +133,9 @@ export const makeDraggable = ({
     if (!isDragging) {
       return;
     }
-    el.style.left = `${e.clientX - offsetX}px`;
-    el.style.top = `${e.clientY - offsetY}px`;
+    // el.style.left = `${e.clientX - offsetX}px`;
+    // el.style.top = `${e.clientY - offsetY}px`;
+    el.style.transform = `translate(${e.clientX - offsetX}px, ${e.clientY - offsetY}px)`;
   };
 
   const onMouseUp = () => {

@@ -77,15 +77,16 @@ release team will need to do the following:
       ![Screenshot of branch settings page](https://github.com/carbon-design-system/ibm-products/assets/54281166/45855e7f-6440-48db-856c-2cfab1e8530f)
 
 - [ ] Run the
-      [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
-      to generate the prerelease versions for the packages
+      [release start workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-start.yml)
+      (with `minor` as the selected semver type) to generate the prerelease
+      versions for the packages
 
   - [ ] Ensure the release branch is selected
-  - [ ] Specify the type of release - in this case we will select
-        `first minor rc` (rc stands for release candidate)
+  - [ ] Specify the type of release - in this case we will select `first rc` (rc
+        stands for release candidate)
   - [ ] Ensure the dry run is checked
 
-  ![Screenshot of minor release workflow](https://github.com/carbon-design-system/ibm-products/assets/54281166/8ee243b5-0933-4505-be7d-58c64d99ce40)
+  ![Screenshot of release start workflow](../../.github/assets/release-start.png)
 
 - [ ] Once the job has completed, which it should have failed, check the
       action's log. Lerna should have logged what versions it is bumping the
@@ -147,9 +148,10 @@ can be pushed to the release branch. We can then publish subsequent prereleases
 from the release branch for further testing. To publish subsequent prereleases,
 
 - [ ] Run the
-      [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
-      to generate the prerelease versions for the packages
-      ![Screenshot of minor release workflow with subsequent release selected](https://github.com/carbon-design-system/ibm-products/assets/54281166/5d2694df-251d-46f4-bb9f-b86587758236)
+      [release start workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
+      (with `minor` as the selected semver type) to generate the prerelease
+      versions for the packages
+      ![Screenshot of release start workflow with subsequent release selected](../../.github/assets/release-start-subsequent-rc.png)
   - [ ] Ensure the release branch is selected
   - [ ] Specify the type of release - in this case we will select
         `subsequent rc`
@@ -213,14 +215,14 @@ in the day. This should occur after the prerelease has been tested and
 validated. During this stage, the release team will do the following:
 
 - [ ] Run the
-      [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
-      to generate the full minor versions for the packages
+      [release start workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-start.yml)
+      (with `minor` as the selected semver type) to generate the full minor
+      versions for the packages
 
-  ![Screenshot of minor release workflow with full minor release selected](https://github.com/carbon-design-system/ibm-products/assets/54281166/9f7a5b75-5b5b-4530-b52b-7070e00a14e7)
+  ![Screenshot of release start workflow with full minor release selected](../../.github/assets/release-start-full-release.png)
 
   - [ ] Ensure the release branch is selected
-  - [ ] Specify the type of release - in this case we will select
-        `full minor release`
+  - [ ] Specify the type of release - in this case we will select `full release`
   - [ ] Ensure the dry run is checked
 
 - [ ] Once the job has completed, which it should have failed, check the
@@ -246,7 +248,6 @@ validated. During this stage, the release team will do the following:
       [production/latest environment for React](https://carbon-design-system.github.io/ibm-products/latest/react)
       and
       [production/latest environment for Web components](https://carbon-design-system.github.io/ibm-products/latest/web-components)
-
       to ensure the versions in the storybook top left header have been updated.
 
 - [ ] Run the
@@ -266,7 +267,7 @@ validated. During this stage, the release team will do the following:
         to ensure the release notes are correct.
   - [ ] Edit the generated release, and change the release from `pre-release` to
         `latest`.
-        ![Screenshot of release label with latest option selected](https://github.com/user-attachments/assets/0be18f12-380e-45f2-b8aa-cfd01b9aa50c)
+        ![Screenshot of release label with latest option selected](../../.github/assets/release-preview-to-latest.png)
 - [ ] Post a message to the `#carbon-for-ibmproducts` Slack channel to announce
       the new version of `@carbon/ibm-products`.
 
@@ -343,7 +344,6 @@ patch release:
       branch creation steps as we have already created the patch release branch
       from the steps above here),
       [subsequent prerelease](#subsequent-prerelease), and
-      [stable release](#stable-release) publishes, except instead of using the
-      [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml),
-      use the
-      [patch release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-patch.yml)
+      [stable release](#stable-release) publishes, except instead of selecting
+      `minor` as the semver type, you will select `patch` from the
+      [release start workflow](https://github.com/carbon-design-system/ibm-products/blob/main/.github/workflows/release-start.yml).

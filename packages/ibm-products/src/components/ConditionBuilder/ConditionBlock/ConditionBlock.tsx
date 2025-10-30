@@ -237,6 +237,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     );
   };
   return (
+    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
       className={cx(
         `${blockClass}__condition-block`,
@@ -257,7 +258,6 @@ const ConditionBlock = (props: ConditionBlockProps) => {
       role="row"
       aria-label={conditionRowText}
       {...getAriaAttributes()}
-      tabIndex={-1}
       onMouseEnter={showAllActionsHandler}
       onMouseLeave={hideAllActionsHandler}
       onBlur={hideAllActionsHandler}

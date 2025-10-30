@@ -127,7 +127,9 @@ function getRollupConfig(input, rootDir, outDir) {
       return new RegExp(`^${name}(/.*)?`);
     }),
     plugins: [
-      nodeResolve(),
+      nodeResolve({
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      }),
       commonjs({
         include: /node_modules/,
       }),

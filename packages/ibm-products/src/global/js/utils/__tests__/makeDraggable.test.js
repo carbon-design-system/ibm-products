@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { makeDraggable } from '../makeDraggable';
 import { fireEvent } from '@testing-library/react';
+import { makeDraggable } from '../makeDraggable';
 
 function createDraggableElement(options = {}) {
   const el = document.createElement('div');

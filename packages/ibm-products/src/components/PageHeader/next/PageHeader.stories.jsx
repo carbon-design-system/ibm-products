@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { cloneElement } from 'react';
+import React from 'react';
 import {
   preview__PageHeader as PageHeader,
   preview__TruncatedText as TruncatedText,
@@ -124,14 +124,21 @@ const breadcrumbPageActions = (
   </>
 );
 
-export const Default = (args) => (
+export const Default = ({
+  border,
+  pageActionsFlush,
+  contentActionsFlush,
+  renderBreadcrumbIcon,
+  title,
+  ...args
+}) => (
   <Tabs>
-    <PageHeader.Root>
+    <PageHeader.Root {...args}>
       <PageHeader.BreadcrumbBar
-        border={args.border}
-        pageActionsFlush={args.pageActionsFlush}
-        contentActionsFlush={args.contentActionsFlush}
-        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+        border={border}
+        pageActionsFlush={pageActionsFlush}
+        contentActionsFlush={contentActionsFlush}
+        renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
         contentActions={
           <>
             <IconButton
@@ -179,7 +186,7 @@ export const Default = (args) => (
         </Breadcrumb>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content
-        title={args.title}
+        title={title}
         pageActions={
           <PageHeader.ContentPageActions
             menuButtonLabel="Actions"

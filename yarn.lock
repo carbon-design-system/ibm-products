@@ -1964,7 +1964,7 @@ __metadata:
     jest-environment-jsdom: "npm:^29.7.0"
     npm-run-all2: "npm:^8.0.0"
     rimraf: "npm:^6.0.1"
-    sass: "npm:^1.85.1"
+    sass: "npm:^1.93.2"
     yargs: "npm:^18.0.0"
   peerDependencies:
     "@carbon/grid": ^11.42.0
@@ -2020,7 +2020,7 @@ __metadata:
     rimraf: "npm:^6.0.1"
     rollup: "npm:^4.27.3"
     rollup-plugin-copy: "npm:^3.5.0"
-    sass: "npm:^1.80.6"
+    sass: "npm:^1.93.2"
     storybook: "npm:^9.1.10"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.5.3"
@@ -2090,7 +2090,7 @@ __metadata:
     rollup: "npm:^4.35.0"
     rollup-plugin-preserve-directives: "npm:^0.4.0"
     rollup-plugin-strip-banner: "npm:^3.1.0"
-    sass: "npm:^1.85.1"
+    sass: "npm:^1.93.2"
     storybook: "npm:^9.0.8"
     typescript-config-carbon: "npm:^0.8.0"
     vite: "npm:^7.0.0"
@@ -14883,7 +14883,7 @@ __metadata:
     identity-obj-proxy: "npm:^3.0.0"
     jest-circus: "npm:^29.7.0"
     jest-watch-typeahead: "npm:^3.0.0"
-    sass: "npm:^1.85.1"
+    sass: "npm:^1.93.2"
   peerDependencies:
     jest: ^29.7.0
   languageName: unknown
@@ -20533,9 +20533,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.80.6, sass@npm:^1.85.1":
-  version: 1.85.1
-  resolution: "sass@npm:1.85.1"
+"sass@npm:^1.93.2":
+  version: 1.93.2
+  resolution: "sass@npm:1.93.2"
   dependencies:
     "@parcel/watcher": "npm:^2.4.1"
     chokidar: "npm:^4.0.0"
@@ -20546,7 +20546,7 @@ __metadata:
       optional: true
   bin:
     sass: sass.js
-  checksum: 10/2803b8d4d256a5ab6e7711776714e5bfaee957bd47d05489994d1d88e38307dc76f15ec8e35708d6f5701cf981a48cd005db574063242fcceaf056123ad644d5
+  checksum: 10/2fc0dcafdf3050f4131650a00ddd772790af1dc3e31a97c6533f323efabddce81bd139a920f13a88af80d630a255f51ee91067a7478364b2a13fcc6f5f7e8308
   languageName: node
   linkType: hard
 

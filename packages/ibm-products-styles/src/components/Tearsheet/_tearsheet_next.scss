@@ -298,13 +298,14 @@ $motion-duration: $duration-moderate-02;
     .#{$block-class__next}__header-actions,
     .#{$block-class__next}__header-content-wrapper
       .#{$block-class__next}__header-content
-      > *:not(
+      *:not(
         .#{$block-class__next}__content__title-wrapper,
         .#{$block-class__next}__header-label
       ) {
       max-block-size: 50vh;
+      opacity: 1;
       transition:
-        max-block-size $motion-duration motion(entrance, expressive),
+        all $motion-duration motion(entrance, expressive),
         opacity $motion-duration motion(entrance, expressive);
     }
   }

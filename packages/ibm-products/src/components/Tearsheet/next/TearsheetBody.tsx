@@ -11,6 +11,7 @@ import React, {
   useContext,
   useRef,
 } from 'react';
+import cx from 'classnames';
 
 import { blockClass, TearsheetContext } from './context';
 import { SidePanel } from '../../SidePanel';
@@ -52,6 +53,8 @@ const TearsheetBody = forwardRef<HTMLDivElement, TearsheetBodyProps>(
 export interface MainContentProps {
   children: ReactNode;
   className?: string;
+  /** this can be set take full width without any padding */
+  isFlush?: boolean;
 }
 /**
  * ----------------
@@ -59,7 +62,10 @@ export interface MainContentProps {
  * ----------------
  */
 export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
-  ({ children, className, ...rest }, ref: ForwardedRef<HTMLDivElement>) => {
+  (
+    { children, className, isFlush, ...rest },
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
     const localRef = useRef<HTMLDivElement>(null);
     const mainContentRef = ref || localRef;
 
@@ -95,7 +101,9 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
     return (
       <Layer
         withBackground
-        className={`${blockClass}__main-content  ${className}`}
+        className={cx(`${blockClass}__main-content`, className, {
+          [`${blockClass}__flush`]: isFlush,
+        })}
         ref={mainContentRef}
         {...rest}
       >
@@ -122,16 +130,29 @@ export interface SummaryContentProps {
    * This handler closes the modal, e.g. changing `open` prop.
    */
   onSummaryPanelClose?(): void;
+  /** this can be set take full width without any padding */
+  isFlush?: boolean;
 }
 export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
   (
-    { children, className, summaryPanelOpen = false, onSummaryPanelClose },
+    {
+      children,
+      className,
+      summaryPanelOpen = false,
+      onSummaryPanelClose,
+      isFlush,
+    },
     ref
   ) => {
     const { isSm } = useContext(TearsheetContext);
 
     return !isSm ? (
-      <div className={`${blockClass}__summary-content ${className}`} ref={ref}>
+      <div
+        className={cx(`${blockClass}__summary-content`, className, {
+          [`${blockClass}__flush`]: isFlush,
+        })}
+        ref={ref}
+      >
         <aside>{children}</aside>
       </div>
     ) : (
@@ -139,6 +160,7 @@ export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
         size="sm"
         open={summaryPanelOpen}
         onRequestClose={onSummaryPanelClose}
+        className={className}
       >
         {children}
       </SidePanel>
@@ -158,6 +180,8 @@ export interface InfluencerProps {
    * This handler closes the modal, e.g. changing `open` prop.
    */
   onInfluencerPanelClose?(): void;
+  /** this can be set take full width without any padding */
+  isFlush?: boolean;
 }
 export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
   (
@@ -166,13 +190,19 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
       className,
       influencerPanelOpen = false,
       onInfluencerPanelClose,
+      isFlush,
     },
     ref
   ) => {
     const { isSm } = useContext(TearsheetContext);
 
     return !isSm ? (
-      <aside className={`${blockClass}__influencer ${className}`} ref={ref}>
+      <aside
+        className={cx(`${blockClass}__influencer`, className, {
+          [`${blockClass}__flush`]: isFlush,
+        })}
+        ref={ref}
+      >
         {children}
       </aside>
     ) : (
@@ -181,6 +211,7 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
         open={influencerPanelOpen}
         onRequestClose={onInfluencerPanelClose}
         placement="left"
+        className={className}
       >
         {children}
       </SidePanel>

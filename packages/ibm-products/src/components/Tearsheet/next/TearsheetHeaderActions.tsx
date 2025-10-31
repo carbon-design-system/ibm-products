@@ -95,7 +95,12 @@ export const TearsheetHeaderActions = ({
       {children}
 
       {!hasOtherChildType.current && (
-        <span data-offset data-hidden ref={offsetRef}>
+        <span
+          data-offset
+          data-hidden
+          ref={offsetRef}
+          className={`${blockClass}__header-actions-menuButton`}
+        >
           <MenuButton size="sm" {...menuButtonProps}>
             {hiddenItems.map((item) => {
               if (!React.isValidElement(item)) {

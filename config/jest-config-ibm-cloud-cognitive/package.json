@@ -36,6 +36,6 @@
     "identity-obj-proxy": "^3.0.0",
     "jest-circus": "^29.7.0",
     "jest-watch-typeahead": "^3.0.0",
-    "sass": "^1.85.1"
+    "sass": "^1.93.2"
   }
 }

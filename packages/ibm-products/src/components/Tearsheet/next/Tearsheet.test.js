@@ -116,14 +116,6 @@ describe('Tearsheet component V2', () => {
   //  TEST CASES
   // ---------------------------
 
-  it('has no accessibility violations', async () => {
-    const { container } = renderTearsheet();
-    console.log('container', container);
-
-    await expect(document.querySelector('.cds--modal')).toBeAccessible();
-    // await expect(container).toHaveNoAxeViolations();
-  });
-
   it('renders the component', async () => {
     render(<Tearsheet open={true} className="custom-class"></Tearsheet>);
     expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(

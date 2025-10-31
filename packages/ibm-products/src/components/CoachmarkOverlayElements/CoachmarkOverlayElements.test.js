@@ -11,7 +11,11 @@ import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { BEACON_KIND } from '../Coachmark/utils/enums';
-import { Coachmark, CoachmarkBeacon, CoachmarkOverlayElement } from '..';
+import {
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkBeacon as CoachmarkBeacon,
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+} from '..';
 import { CoachmarkOverlayElements } from '.';
 
 const blockClass = `${pkg.prefix}--coachmark-overlay-elements`;

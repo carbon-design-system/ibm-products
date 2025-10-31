@@ -6,8 +6,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Coachmark } from './Coachmark';
-import './CoachmarkBubble';
+import { Coachmark } from '.';
 import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 import { Button, Theme } from '@carbon/react';
@@ -15,7 +14,7 @@ import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark/next',
+  title: 'Preview/Onboarding/Coachmark/next',
   component: Coachmark,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
@@ -102,8 +101,9 @@ function useCarbonTheme() {
 }
 
 //Tooltip variant
-const TooltipTemplate = (args) => {
-  const carbonTheme = useCarbonTheme();
+const TooltipTemplate = ({ ...args }, context) => {
+  const sbDocs = context.viewMode !== 'docs';
+  const carbonTheme = sbDocs ? useCarbonTheme() : 'white';
   const [isOpen, setIsOpen] = useState(true);
 
   const handleClose = () => {

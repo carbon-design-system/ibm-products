@@ -1,3 +1,76 @@
+## `@carbon/ibm-products-web-components@0.27.0`
+### Features :rocket:
+- feat(coachmarkbeacon): implemented as web component (#8488)
+
+### Bug fixes :bug:
+- fix(playwright): install in correct location
+- fix(checklist): accessibility violations (#8487)
+- fix: add code panel back into storybook (#8431)
+
+### Housekeeping :house:
+- chore(PageHeader): use condensed grid for tab bar text alignment (#8491)
+
+## `@carbon/ibm-products-web-components@0.26.0`
+### Features :rocket:
+- feat(step-util): adds utility for stepping within lit components (#8296)
+- feat(code-connect): add web component code connect config setup (#8387)
+- feat: addselect notearsheet implementation (#8259)
+- feat(checklist): example (#8316)
+
+### Housekeeping :house:
+- chore(deps): update dependency happy-dom to v20 [security] (#8441)
+- chore: wc storybook welcome page (#8345)
+- chore(storybook): use theme tokens for sb doc previews (#8396)
+- chore(deps): update dependency happy-dom to v19 (#8355)
+- chore(deps): update dependency globby to v15 (#8367)
+
+## `@carbon/ibm-products-web-components@0.25.0`
+### Features :rocket:
+- feat(checklist):  web component  (#8144)
+
+### Bug fixes :bug:
+- fix(checklist): update styles (#8335)
+- fix(Instrumentation): remove common script (#7722)
+- fix: unintentioanl leakage of carbon webcomponents (#8270)
+- fix: update lower vite versions to 5.4.20 in all examples (#8262)
+
+### Housekeeping :house:
+- chore(telemetry): update ibm-products-web-components telemetry config
+- build(deps-dev): bump vite (#8252)
+- build(deps-dev): bump vite (#8243)
+
+## `@carbon/ibm-products-web-components@0.24.1`
+### Bug fixes :bug:
+- fix: unintentioanl leakage of carbon webcomponents (#8271)
+
+## `@carbon/ibm-products-web-components@0.24.0`
+### Bug fixes :bug:
+- fix(deps): update dependency @carbon-labs/wc-empty-state to ^0.9.0 (#8240)
+- fix(telemetry): bump version (#8228)
+
+### Housekeeping :house:
+- build(deps-dev): bump vite (#8236)
+- build(deps-dev): bump vite (#8235)
+- build(deps-dev): bump vite (#8229)
+- build(deps): update to Carbon 11 compatible versions to latest (#8171)
+
+## `@carbon/ibm-products-web-components@0.23.0`
+### Features :rocket:
+- feat(sidepanel): custom header components (#8100)
+- feat(telemetry): add wc scope (#8097)
+- feat: implement focus trap in interstitial screen webcomponent (#8081)
+
+### Bug fixes :bug:
+- fix: telemetry patch (#8131)
+- fix(SidePanel): remove shadow on slide-ins (#7978)
+- fix(deps): update dependency @carbon-labs/wc-empty-state to ^0.5.0 (#8118)
+- fix: update format script (#8107)
+
+### Housekeeping :house:
+- build(web-components): exclude `--cds` values in web component custom prefix build output (#8154)
+- chore: remove unwanted props from storybook doc (#8122)
+- build(web-components): do not include story styles in build output (#8073)
+
 ## `@carbon/ibm-products-web-components@0.22.0`
 ### Features :rocket:
 - feat: add unit tests, accessibility fixes  , example for interstitial screen web component (#8015)

@@ -1,3 +1,119 @@
+## `@carbon/ibm-products@2.78.0`
+### Features :rocket:
+- feat(GuideBanner): code connect (#8411)
+- feat(tearsheet): Added code connect files (#8472)
+- feat(notificationPanel): code connect (#8408)
+- feat(PageHeader): add open in stackblitz config (#8469)
+- feat(sidepanel): code connect integration (#8444)
+
+### Bug fixes :bug:
+- fix(Feature flag): moved the merge logic from feature-flag js to FeatureFlag (#8535)
+- fix: modified expressivecard story's incorrect "caption" prop (#8473)
+- fix(PageHeader): use correct export path (#8514)
+- fix: remove patterns from build output (#8468)
+- fix: remove truncation styling from sidepanel title (#8322)
+- fix(cards): cards (expressive and productive) code connect files causing breaking publishes (#8445)
+- fix(coachmark): added missing exports (#8406)
+- fix: add code panel back into storybook (#8431)
+
+### Housekeeping :house:
+- chore(PageHeader): use condensed grid for tab bar text alignment (#8491)
+
+## `@carbon/ibm-products@2.77.1`
+### Bug fixes :bug:
+- fix(PageHeader): use correct export path (#8514)
+
+## `@carbon/ibm-products@2.77.0`
+### Features :rocket:
+- feat(ImportAndUploadModal): implement as patterns (#8348)
+- feat(coachmarkStacked): implemented as patterns (#8317)
+- feat(UserAvatar): code connect (#8264)
+- feat(EmptyState): integration of open in Stackblitz (#8373)
+- feat: add support for react server components via `use client` directive (#8358)
+- feat(code-connect): add web component code connect config setup (#8387)
+- feat(FullPageError): Code connect file added (#8331)
+- feat: code connect file for TagSet (#8332)
+- feat(OptionsTile): Code connect (#8291)
+- feat: addselect notearsheet implementation (#8259)
+- feat(AboutModal): added code connect file (#8353)
+- feat(ExportModal): implement export modal as a pattern (#8234)
+
+### Bug fixes :bug:
+- fix(guidebanner): add prop to control open state (#8294)
+- fix(PageHeader): use section and heading components for heading levels (#8356)
+
+### Housekeeping :house:
+- chore(deps): update dependency typescript-config-carbon to ^0.8.0 (#8443)
+- chore: init code connect for cards (#8258)
+- chore(storybook): use theme tokens for sb doc previews (#8396)
+- test(coachmarkTagline): add test (#8292)
+- test(PageHeader): increases coverage, removes .only in test (#8260)
+
+## `@carbon/ibm-products@2.76.0`
+### Features :rocket:
+- feat(CoachmarkFixed): implemented as patterns (#8221)
+- feat(pattern): delete and remove (#8268)
+- feat(code-connect): setup initial config and connect `BigNumber` (#8188)
+
+### Bug fixes :bug:
+- fix(Instrumentation): remove common script (#7722)
+- fix(tagset): expansion and collapse is not conveyed to screen readers (#8283)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.10.0 (#8282)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.8.0 (#8239)
+
+### Housekeeping :house:
+- chore(telemetry): update ibm-products telemetry config
+- refactor(scripts): remove chalk dep (#8321)
+- chore: pin chalk (#8261)
+- refactor(PageHeader): change api for tags prop in tab bar (#8205)
+
+## `@carbon/ibm-products@2.75.0`
+### Features :rocket:
+- feat(PageHeader): add compact story, fix preview styles in storybook docs page (#8190)
+- feat(sidepanel): utilizes layer in sidepanel (#8025)
+- feat(CoachmarkOverlayElements): implemented as patterns (#8178)
+
+### Bug fixes :bug:
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.7.0 (#8175)
+- fix(makeDraggable): enhacement based on carbon review comments (#8160)
+
+### Housekeeping :house:
+- chore: canary removal / add PDLC status categories to storybook (#7869)
+- chore(deps): update dependency npm-run-all2 to v8 (#8219)
+- chore(deps): replace dependency npm-run-all with npm-run-all2 ^5.0.0 (#7202)
+- build(deps): update to Carbon 11 compatible versions to latest (#8171)
+- chore(deps): update dependency typescript-config-carbon to ^0.7.0 (#8173)
+
+## `@carbon/ibm-products@2.74.0`
+### Features :rocket:
+- feat(conditionbuilder): option to disable specific property dynamically (#8105)
+- feat: condition builder read only state (#8125)
+- feat(stepflows): introduce new step utility (#8020)
+
+### Bug fixes :bug:
+- fix: enableSidepanelResizer undefined issue (#8143)
+- fix: init deprecated extension for codecov (#8039)
+- fix(CoachmarkBubble): usage of ref (#8114)
+- fix: replace StringFormatter with TruncatedText (#7968)
+- fix(makeDraggable): improve accessibility (#8090)
+- fix(coachmark): resolved circular dependency (#8104)
+- fix: update format script (#8107)
+- fix(coachmark): add closeIconDescription (#7973)
+- fix: remove requiredIf props helpers (#8060)
+
+### Housekeeping :house:
+- test(coachmark): add coachmark test (#8043)
+- docs(AboutModal): update content and structure (#8040)
+- chore(deps): update dependency @percy/storybook to v9 (#8053)
+- test(makeDraggable): add tests (#8099)
+- test(coachmark): add avt tests (#8045)
+- chore(deps): update dependency typescript-config-carbon to ^0.6.0 (#8080)
+
+## `@carbon/ibm-products@2.73.1`
+### Bug fixes :bug:
+- fix: remove requiredIf props helpers (#8153)
+- fix: remove requiredIf props helpers
+
 ## `@carbon/ibm-products@2.73.0`
 ### Features :rocket:
 - feat(PageHeader): page content actions moving into breadcrumb bar on scroll (#7881)

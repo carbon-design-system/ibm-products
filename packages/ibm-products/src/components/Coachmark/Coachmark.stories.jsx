@@ -12,11 +12,11 @@ import { Crossroads } from '@carbon/react/icons';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import {
-  Coachmark,
-  CoachmarkOverlayElement,
-  CoachmarkOverlayElements,
-  CoachmarkBeacon,
-  CoachmarkButton,
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
+  previewCandidate__CoachmarkBeacon as CoachmarkBeacon,
+  previewCandidate__CoachmarkButton as CoachmarkButton,
 } from '..';
 
 import { BEACON_KIND, COACHMARK_OVERLAY_KIND } from './utils/enums';
@@ -26,7 +26,7 @@ import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark/Coachmark',
+  title: 'Preview Candidate/Onboarding/Coachmark/Coachmark',
   component: Coachmark,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {

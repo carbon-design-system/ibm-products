@@ -7,6 +7,9 @@
 
 @use '@carbon/react/scss/spacing';
 @use '@carbon/styles/scss/theme';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--page-header;
 
 .page-header-story-wrapper {
   margin-block-start: spacing.$spacing-09;
@@ -18,8 +21,12 @@
   height: 200vh;
 }
 
-.page-header--docs-demo .docs-story div:first-child {
+.page-header--docs-demo .docs-story > div:first-child {
   padding: 0;
+}
+
+.page-header--docs-demo .docs-story > div > div:first-child {
+  inline-size: 100%;
 }
 
 .page-header--docs-demo .innerZoomElementWrapper > * {
@@ -48,4 +55,29 @@
 .breadcrumb-bar-action-button {
   align-items: center;
   block-size: 40px;
+}
+
+// Fixes style issues in storybook docs page
+.page-header--docs-demo
+  .#{$block-class}__breadcrumb-bar
+  .#{c4p-settings.$carbon-prefix}--css-grid
+  .#{c4p-settings.$carbon-prefix}--css-grid-column,
+.page-header--docs-demo
+  .#{$block-class}__breadcrumb-bar
+  .#{$block-class}__breadcrumb__actions {
+  block-size: 40px;
+}
+
+$stackblitz-block-class: c4p--page-header;
+.#{$stackblitz-block-class}__breadcrumb-bar
+  .cds--css-grid
+  .cds--css-grid-column,
+.#{$stackblitz-block-class}__breadcrumb-bar
+  .c4p--page-header__breadcrumb-container {
+  block-size: 40px;
+
+  .c4p--page-header__breadcrumb-wrapper {
+    align-items: center;
+    block-size: inherit;
+  }
 }

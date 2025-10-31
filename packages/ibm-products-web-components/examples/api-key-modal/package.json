@@ -15,7 +15,7 @@
     "lit": "^3.1.4"
   },
   "devDependencies": {
-    "sass": "^1.87.0",
+    "sass": "^1.93.2",
     "vite": "^6.2.3",
     "vite-plugin-lit-css": "^2.1.0"
   }

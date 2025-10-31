@@ -191,7 +191,6 @@ test.describe('CreateTearsheet @avt', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
 
     // Press on Next button
     await page.keyboard.press('Enter');

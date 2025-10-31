@@ -43,5 +43,8 @@ figma.connect(
         .links=${props.aboutModalContentProps.links}
         aria-label=""
       ></c4p-about-modal>`,
+    imports: [
+      "import '@carbon/ibm-products-web-components/es/components/about-modal/index.js'",
+    ],
   }
 );

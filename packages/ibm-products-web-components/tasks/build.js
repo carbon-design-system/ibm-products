@@ -21,6 +21,7 @@ import path from 'path';
 import postcss from 'postcss';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
+import image from '@rollup/plugin-image';
 import fs from 'fs-extra';
 
 import * as packageJson from '../package.json' with { type: 'json' };
@@ -163,6 +164,7 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
           outDir,
         },
       }),
+      image(),
     ],
   };
 }

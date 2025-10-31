@@ -367,7 +367,7 @@ export const ContentWithHeroImage = {
 <c4p-page-header>
       <div class="cds--css-grid">
         <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <c4p-page-header-breadcrumb border=${false} within-grid>
+          <c4p-page-header-breadcrumb .border=${false} within-grid>
         ${iconLoader(Bee16, { slot: 'icon' })}
         <cds-breadcrumb>
           <cds-breadcrumb-item>

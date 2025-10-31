@@ -108,7 +108,7 @@
   "dependencies": {
     "@babel/runtime": "^7.26.10",
     "@carbon-labs/react-resizer": "^0.10.0",
-    "@carbon/feature-flags": "^0.30.0",
+    "@carbon/feature-flags": "^0.32.0",
     "@carbon/ibm-products-styles": "^2.74.0",
     "@carbon/telemetry": "^0.1.0",
     "@carbon/utilities": "^0.10.0",

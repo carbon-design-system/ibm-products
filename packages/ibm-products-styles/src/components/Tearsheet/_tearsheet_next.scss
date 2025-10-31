@@ -67,7 +67,7 @@ $motion-duration: $duration-moderate-02;
     .#{$block-class__next}__container {
     transition:
       transform $motion-duration motion(entrance, expressive),
-      max-height $motion-duration motion(entrance, expressive);
+      max-block-size $motion-duration motion(entrance, expressive);
   }
 
   // Wide variant at medium breakpoint
@@ -278,64 +278,43 @@ $motion-duration: $duration-moderate-02;
   // Header (default vs collapsed)
   // ──────────────────────────────────────────────────────────────
   .#{$block-class__next}__header {
-    opacity: 1;
-
-    // Default visible: hide everything except nav-bar, header-content-wrapper & close button
+    // Animate all non-core visible elements
     > *:not(
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
-        .#{$carbon-prefix}--modal-close-button
-      ),
+        .#{$carbon-prefix}--modal-close-button,
+        .excludeFromCollapse
+      ) {
+      overflow: hidden;
+      max-block-size: 50vh; // large enough for expanded content
+      opacity: 1;
+      transition:
+        max-block-size $motion-duration motion(entrance, expressive),
+        opacity $motion-duration motion(entrance, expressive),
+        margin $motion-duration motion(entrance, expressive),
+        padding $motion-duration motion(entrance, expressive);
+    }
+
+    .#{$block-class__next}__header-actions,
     .#{$block-class__next}__header-content-wrapper
       .#{$block-class__next}__header-content
-      > *:not(.#{$block-class__next}__content__title-wrapper) {
-      overflow: hidden;
+      > *:not(
+        .#{$block-class__next}__content__title-wrapper,
+        .#{$block-class__next}__header-label
+      ) {
       max-block-size: 50vh;
-      opacity: 1;
-      transition: all $motion-duration motion(entrance, expressive);
+      transition:
+        max-block-size $motion-duration motion(entrance, expressive),
+        opacity $motion-duration motion(entrance, expressive);
     }
   }
 
+  // COLLAPSED STATE
   .#{$block-class__next}__header-collapsed {
-    padding-block-start: $spacing-04; // reduce the top spacing in collapsed header
-    .#{$block-class__next}__header-content-wrapper {
-      block-size: $spacing-08;
-    }
-    .#{$block-class__next}__header-actions {
-      margin-block-end: 0;
-    }
-    .#{$block-class__next}__header-title {
-      @include type.type-style(
-        'label-02'
-      ); // change the title style to label 02
+    padding-block-start: $spacing-04;
+    transition: padding $motion-duration motion(entrance, expressive);
 
-      align-items: center;
-      margin-block-start: $spacing-02;
-
-      > span {
-        // reduce the titleEnd and titleStart dimension
-        display: flex;
-        align-items: center;
-        block-size: $spacing-06;
-      }
-    }
-
-    .#{$block-class__next}__content__header-actions {
-      margin-block-start: -$spacing-01;
-    }
-    //add margin button for header content
-    .#{$block-class__next}__header-content {
-      align-self: center;
-      //margin-block-end: $spacing-04;
-      margin-block-end: 0;
-    }
-    //hide header actions on small collapsed view
-    @include breakpoint-down(md) {
-      .#{$block-class__next}__header-actions {
-        display: none;
-      }
-    }
-    // Hide everything except navigation bar, header-content-wrapper & close button
+    // Collapse everything except core elements
     > *:not(
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
@@ -344,8 +323,7 @@ $motion-duration: $duration-moderate-02;
       ),
     .#{$block-class__next}__header-actions
       > *:not(.#{$block-class__next}__content__header-actions),
-    .#{$block-class__next}__header-content-wrapper
-      .#{$block-class__next}__header-content
+    .#{$block-class__next}__header-content
       > *:not(.#{$block-class__next}__content__title-wrapper),
     > *:not(
         .#{$block-class__next}__navigation-bar,
@@ -353,25 +331,78 @@ $motion-duration: $duration-moderate-02;
         .#{$carbon-prefix}--modal-close-button,
         .excludeFromCollapse
       )
+      *,
+    .#{$block-class__next}__header-content-wrapper
+      .#{$block-class__next}__header-content
+      > *:not(.#{$block-class__next}__content__title-wrapper)
       * {
       overflow: hidden;
       padding: 0;
       margin: 0;
       max-block-size: 0;
-      min-block-size: 0;
       opacity: 0;
-      transition: all $motion-duration ease;
-      visibility: hidden;
+      pointer-events: none;
+      transition: all $motion-duration motion(entrance, expressive);
     }
 
-    // Reset margins and transitions on always-visible items
+    // Header title
+    .#{$block-class__next}__header-title {
+      @include type.type-style('label-02');
+
+      align-items: center;
+      margin-block-start: $spacing-02;
+      transition: all $motion-duration motion(entrance, expressive);
+
+      > span {
+        display: flex;
+        align-items: center;
+        block-size: $spacing-06;
+      }
+    }
+
+    .#{$block-class__next}__header-content {
+      align-self: center;
+      margin-block-end: 0;
+    }
+
+    .#{$block-class__next}__content__header-actions {
+      margin-block-start: -$spacing-01;
+    }
+
+    // Hide header actions on small screens
+    @include breakpoint-down(md) {
+      .#{$block-class__next}__header-actions {
+        display: none;
+      }
+    }
+
+    // Normalize visible elements
     .#{$block-class__next}__header-content-wrapper,
     .#{$block-class__next}__header-content,
     .#{$block-class__next}__content__title-wrapper,
-    .#{$block-class__next}__header-actions
-      .#{$block-class__next}__header-title {
+    .#{$block-class__next}__header-actions,
+    .#{$block-class__next}__header-title {
       margin-block: 0;
-      transition: all $motion-duration ease;
+      transition: margin-block $motion-duration ease;
+    }
+
+    .#{$block-class__next}__header-content-wrapper {
+      min-block-size: $spacing-08;
+      padding-block-end: $spacing-04;
+    }
+
+    // Divider line above navigation bar
+    .#{$block-class__next}__navigation-bar::before {
+      position: absolute;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.12);
+      block-size: 1px;
+      content: '';
+      inline-size: 100vw;
+      inset-block-start: -$spacing-02;
+      inset-inline-start: 50%;
+      pointer-events: none;
+      transform: translateX(-50%);
     }
   }
 

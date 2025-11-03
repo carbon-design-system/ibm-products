@@ -21,9 +21,7 @@ test.describe('CreateTearsheetNarrow @avt', () => {
       },
     });
 
-    await page
-      .locator(`.${pkg.prefix}--create-tearsheet-narrow`)
-      .screenshot({ animations: 'disabled' });
+    await page.screenshot({ animations: 'disabled' });
 
     await expect(page).toHaveNoACViolations(
       'CreateTearsheetNarrow @avt-default-state'

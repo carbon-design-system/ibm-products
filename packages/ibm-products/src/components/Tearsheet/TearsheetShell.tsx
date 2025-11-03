@@ -499,9 +499,11 @@ export const TearsheetShell = React.forwardRef(
                     {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
                     <Section>
-                      <Heading className={`${bcModalHeader}__label`}>
-                        {label}
-                      </Heading>
+                      {label && (
+                        <Heading className={`${bcModalHeader}__label`}>
+                          {label}
+                        </Heading>
+                      )}
                     </Section>
                     <Heading
                       className={cx(

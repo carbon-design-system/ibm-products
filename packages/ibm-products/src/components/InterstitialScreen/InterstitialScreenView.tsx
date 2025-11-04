@@ -57,7 +57,6 @@ export const InterstitialScreenView = React.forwardRef<
   ) => {
     return (
       <div
-        role="complementary"
         {
           // Pass through any other property values as HTML attributes.
           ...rest

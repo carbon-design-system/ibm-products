@@ -30,7 +30,7 @@ $block-class-modal: #{$block-class}-modal;
   display: flex;
   // Spacing for tags and center alignment for other components like user avatars.
   align-items: center;
-  gap: $spacing-02;
+  gap: $spacing-03;
 }
 
 .#{$block-class}--align-end {
@@ -111,9 +111,9 @@ $block-class-modal: #{$block-class}-modal;
 
   .#{$block-class-popover}__show-all-tags-link {
     color: $link-inverse;
-    margin-block-start: $spacing-03;
 
-    &:hover {
+    &:hover,
+    &:visited:hover {
       color: $link-inverse-hover;
     }
 
@@ -191,8 +191,8 @@ $block-class-modal: #{$block-class}-modal;
 
   .#{$block-class-modal}__body {
     .#{$carbon-prefix}--tag {
-      margin-block-end: $spacing-02;
-      margin-inline-end: $spacing-02;
+      margin-block-end: $spacing-03;
+      margin-inline-end: $spacing-03;
     }
   }
 }

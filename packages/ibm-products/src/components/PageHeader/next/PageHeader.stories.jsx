@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { cloneElement } from 'react';
-import { Add } from '@carbon/icons-react';
-import { preview__PageHeader as PageHeader, TruncatedText } from '../..';
 import {
-  PageHeader as PageHeaderDirect,
+  preview__PageHeader as PageHeader,
+  preview__TruncatedText as TruncatedText,
+} from '../..';
+import {
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
   PageHeaderTabBar,
@@ -38,8 +39,15 @@ import image1 from './_story-assets/2x1.jpg';
 import image2 from './_story-assets/3x2.jpg';
 import styles from './_storybook-styles.scss?inline';
 
-import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
+import {
+  Add,
+  Bee,
+  AiGenerate,
+  CloudFoundry_1,
+  Activity,
+} from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
+import { pageActionButtonItems } from './_story-assets/pageActionButtonItems';
 
 export default {
   title: 'Preview/PageHeader',
@@ -373,88 +381,6 @@ export const ContentWithHeroImage = (args) => (
   </PageHeader.Root>
 );
 
-const pageActionButtonItems = [
-  {
-    // props used for both collapse menu item and non-collapsed action form
-    id: 'action1',
-    onClick: () => console.log(`Action 1`),
-    // component to render when non-collapsed
-    body: (
-      <Button
-        renderIcon={AiGenerate}
-        iconDescription="Icon Description 1"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    // props to pass to the corresponding collapsed menu item
-    menuItem: {
-      label: 'action 1',
-    },
-  },
-  {
-    id: 'action2',
-    onClick: () => console.log(`Action 2`),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 2"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 2',
-    },
-  },
-  {
-    id: 'action3',
-    onClick: () => console.log(`Action 3`),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 3"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 3',
-    },
-  },
-  {
-    id: 'action4',
-    onClick: () => console.log(`Action 4`),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 4"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 4',
-    },
-  },
-  {
-    id: 'primary-action',
-    onClick: () => console.log(`Primary action`),
-    body: (
-      <Button kind="primary" renderIcon={Add} size="md">
-        Primary action
-      </Button>
-    ),
-    menuItem: {
-      label: 'Primary action',
-    },
-  },
-];
-
 export const ContentWithContextualActionsAndPageActions = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar
@@ -593,7 +519,7 @@ export const TabBarWithTabsAndTags = (args) => (
             renderPopoverContent={(hiddenItems) => {
               return hiddenItems.map((i, index) => {
                 const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
-                return cloneElement(foundJSXTag, {
+                return React.cloneElement(foundJSXTag, {
                   id: `cloned-tag-node-id-${index}`,
                   key: `cloned-tag-key-${index}`,
                 });
@@ -641,6 +567,15 @@ export const TabBarWithTabsAndTags = (args) => (
     </TabPanels>
   </Tabs>
 );
+
+TabBarWithTabsAndTags.args = {
+  border: true,
+  pageActionsFlush: false,
+  contentActionsFlush: false,
+  title:
+    'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+  renderBreadcrumbIcon: true,
+};
 
 export const Compact = (args) => (
   <Tabs>
@@ -701,7 +636,7 @@ export const Compact = (args) => (
             renderPopoverContent={(hiddenItems) => {
               return hiddenItems.map((i, index) => {
                 const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
-                return cloneElement(foundJSXTag, {
+                return React.cloneElement(foundJSXTag, {
                   id: `cloned-tag-node-id-${index}`,
                   key: `cloned-tag-key-${index}`,
                 });

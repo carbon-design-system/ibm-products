@@ -120,7 +120,6 @@ $block-class-modal: #{$block-class}-modal;
   .#{$block-class-overflow}__tag-list {
     display: flex;
     flex-direction: column;
-    gap: $spacing-02;
   }
 
   .#{$block-class-overflow}__show-all-tags-link {
@@ -144,6 +143,9 @@ $block-class-modal: #{$block-class}-modal;
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
     .#{$carbon-prefix}--tag {
     background-color: $background-inverse-hover;
+    // This adds spacing only for the overflow menu
+    // listing "tags" as opposed to just "labels".
+    margin-block-end: $spacing-01;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,

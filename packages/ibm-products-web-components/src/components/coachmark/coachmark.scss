@@ -18,17 +18,14 @@ $carbon-prefix: config.$carbon-prefix;
 
 $block-class: #{$prefix}--coachmark;
 
-/* stylelint-disable-next-line selector-type-no-unknown */
-cds-popover-content::part(content) {
+.my-popover {
   position: fixed;
-  // transform: translate(0px, 0px);
-  inset-block-end: unset;
-  inset-block-start: 1px;
-  margin-block-start: 36px;
-  //  transform: unset;
-}
 
-//   .my-popover
-// {
-//   position: absolute;
-// }
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  cds-popover-content.is-dragging::part(content) {
+    border-radius: 0;
+    box-shadow:
+      0 0 0 $spacing-01 $icon-inverse,
+      0 0 0 $spacing-02 $background-inverse;
+  }
+}

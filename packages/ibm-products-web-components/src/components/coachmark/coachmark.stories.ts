@@ -9,9 +9,14 @@
 
 import { html } from 'lit';
 import './index';
+import './coachmark-beacon/index.ts';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import '@carbon/web-components/es/components/button/index.js';
 import styles from './story-styles.scss?lit';
+import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
+import Crossroads from '@carbon/icons/es/crossroads/16.js';
+
 const storyPrefix = 'coachmark-stories__';
 
 const tooltipAlignments = {
@@ -36,37 +41,84 @@ const argTypes = {
   },
 };
 
-export const Default = {
+export const Tooltip = {
   args: {
     ...args,
     open: true,
-    floating: false,
     highContrast: true,
-    align: 'top',
+    align: 'bottom',
   },
   argTypes,
+
   render: (args) => {
+    const handleClick = () => {
+      document.querySelector('c4p-coachmark')?.toggleAttribute('open');
+    };
+
     return html`
       <style>
         ${styles}
       </style>
-      <div
-        style="padding-top:200px; position: relative; display: flex; align-items: center; justify-content: center;"
-      >
+      <div style="padding-top:200px; position: relative; display: flex;">
         <c4p-coachmark
           .open=${args.open}
           align=${args.align}
           .highContrast=${args.highContrast}
-          .floating=${args.floating}
+          .position=${{ x: 150, y: 100 }}
         >
           <c4p-coachmark-beacon
             label="Show information"
-            @c4p-coachmark-beacon-clicked=${(e: CustomEvent) => {
-              console.log('Beacon clicked!', e.detail.expanded);
-            }}
+            .expanded=${args.open}
+            @c4p-coachmark-beacon-clicked=${handleClick}
             slot="trigger"
           >
           </c4p-coachmark-beacon>
+          <c4p-coachmark-header
+            class="coachmark-header"
+            closeIconDescription="close icon"
+          ></c4p-coachmark-header>
+          <c4p-coachmark-body class="coachmark-body">
+            <h2>Hello World</h2>
+            <p>this is a description test</p>
+            <cds-button size="sm">Done</cds-button>
+          </c4p-coachmark-body>
+        </c4p-coachmark>
+      </div>
+    `;
+  },
+};
+
+export const Floating = {
+  args: {
+    ...args,
+    open: true,
+    highContrast: true,
+    align: 'bottom',
+  },
+  argTypes,
+  render: (args) => {
+    const handleClick = () => {
+      document.querySelector('c4p-coachmark')?.toggleAttribute('open');
+    };
+
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div style="padding-top:200px; position: relative;">
+        <c4p-coachmark
+          .open=${args.open}
+          align=${args.align}
+          .highContrast=${args.highContrast}
+          .floating=${Boolean(true)}
+        >
+          <cds-button
+            kind="tertiary"
+            slot="trigger"
+            class="trigger-btn"
+            @click=${handleClick}
+            >Show information ${iconLoader(ArrowRight as any, { slot: 'icon' })}
+          </cds-button>
           <c4p-coachmark-header
             class="coachmark-header"
             closeIconDescription="close icon"

@@ -19,16 +19,17 @@ import { SignalWatcher } from '@lit-labs/signals';
 import '@carbon/web-components/es/components/popover/index.js';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import { makeDraggable } from '../../utilities/makeDraggable/makeDraggable';
-import { updateCoachmarkDetailsSignal } from './coachmark-context';
+import {
+  resetCoachmarkDetailsSignal,
+  updateCoachmarkDetailsSignal,
+} from './coachmark-context';
 
 export const blockClass = `${prefix}--coachmark`;
 
 /**
  * coachmark main component
  * @element c4p-coachmark
- * @fires c4p-coachmark-closed - The name of the custom event fired after this coachmark is closed upon a user gesture.
  */
-
 @customElement(`${prefix}-coachmark`)
 class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   /**
@@ -74,7 +75,10 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    if (this.dragCleanup) {this.dragCleanup();}
+    if (this.dragCleanup) {
+      this.dragCleanup();
+    }
+    resetCoachmarkDetailsSignal();
   }
 
   private setupDraggable() {
@@ -84,36 +88,50 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     const popoverContent = popover.querySelector(
       'cds-popover-content'
     ) as HTMLElement;
-    const draggable = makeDraggable({
-      el: popoverContent,
-      // dragHandle: header,
-      // focusableDragHandle: dragHandle,
+    const wrapper = popoverContent.querySelector(
+      '.draggable-wrapper'
+    ) as HTMLElement;
+    const slot = wrapper.querySelector('slot');
+    const assignedElements = slot?.assignedElements({ flatten: true });
+    const header = assignedElements?.find(
+      (el) => el.tagName.toLowerCase() === 'c4p-coachmark-header'
+    ) as HTMLElement;
+    requestAnimationFrame(() => {
+      const dragHandle = header.shadowRoot?.querySelector(
+        '.drag-handle'
+      ) as HTMLElement;
+
+      const draggable = makeDraggable({
+        el: popoverContent,
+        dragHandle: header,
+        focusableDragHandle: dragHandle,
+      });
+
+      const onDragStart = () => {
+        popoverContent.classList.add('is-dragging');
+        popoverContent.setAttribute(
+          'aria-label',
+          'Picked up the draggable popoverContent'
+        );
+      };
+      const onDragEnd = () => {
+        popoverContent.classList.remove('is-dragging');
+        popoverContent.setAttribute(
+          'aria-label',
+          'Draggable popoverContent was dropped'
+        );
+      };
+
+      popoverContent.addEventListener('dragstart', onDragStart);
+      popoverContent.addEventListener('dragend', onDragEnd);
+
+      // store cleanup
+      this.dragCleanup = () => {
+        popoverContent.removeEventListener('dragstart', onDragStart);
+        popoverContent.removeEventListener('dragend', onDragEnd);
+        draggable.cleanup?.();
+      };
     });
-
-    const onDragStart = () => {
-      popoverContent.classList.add('is-dragging');
-      popoverContent.setAttribute(
-        'aria-label',
-        'Picked up the draggable popoverContent'
-      );
-    };
-    const onDragEnd = () => {
-      popoverContent.classList.remove('is-dragging');
-      popoverContent.setAttribute(
-        'aria-label',
-        'Draggable popoverContent was dropped'
-      );
-    };
-
-    popoverContent.addEventListener('dragstart', onDragStart);
-    popoverContent.addEventListener('dragend', onDragEnd);
-
-    // store cleanup
-    this.dragCleanup = () => {
-      popoverContent.removeEventListener('dragstart', onDragStart);
-      popoverContent.removeEventListener('dragend', onDragEnd);
-      draggable.cleanup?.();
-    };
   }
 
   firstUpdated() {

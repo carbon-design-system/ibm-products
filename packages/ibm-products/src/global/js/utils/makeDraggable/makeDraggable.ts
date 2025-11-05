@@ -55,8 +55,10 @@ export const makeDraggable = ({
   }
 
   let isDragging = false;
-  let offsetX = 0;
-  let offsetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+  let initialMouseX = 0;
+  let initialMouseY = 0;
 
   const dispatch = <T extends keyof EventDetail>(
     type: T,
@@ -109,17 +111,21 @@ export const makeDraggable = ({
       return;
     }
 
-    const path = (e.composedPath && e.composedPath()) || [];
     const isTargetInHandle = dragHandle
-      ? path.includes(target)
-      : path.includes(target);
+      ? dragHandle.contains(target)
+      : el.contains(target);
 
     if (!isTargetInHandle) {
       return;
     }
+    const style = window.getComputedStyle(el);
+    const matrix = new DOMMatrix(style.transform);
+    currentX = matrix.m41;
+    currentY = matrix.m42;
 
-    offsetX = e.clientX - el.offsetLeft;
-    offsetY = e.clientY - el.offsetTop;
+    // Store the mouse position at the start of the drag
+    initialMouseX = e.clientX;
+    initialMouseY = e.clientY;
     isDragging = true;
     dispatch('dragstart', { mouse: true });
 
@@ -131,8 +137,13 @@ export const makeDraggable = ({
     if (!isDragging) {
       return;
     }
-    el.style.left = `${e.clientX - offsetX}px`;
-    el.style.top = `${e.clientY - offsetY}px`;
+
+    // Calculate the change in mouse position from the start
+    const dx = e.clientX - initialMouseX;
+    const dy = e.clientY - initialMouseY;
+
+    // Add that change to the element's original translation
+    el.style.transform = `translate(${currentX + dx}px, ${currentY + dy}px)`;
   };
 
   const onMouseUp = () => {

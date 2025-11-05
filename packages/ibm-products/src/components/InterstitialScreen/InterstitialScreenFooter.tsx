@@ -110,7 +110,7 @@ const InterstitialScreenFooter = React.forwardRef<
 
     setLoadingAction('');
 
-    // Skip navigation if onAction explicitly returns false
+    // Skip navigation if onAction explicitly returns true
     if (abortContinue) {
       return;
     }

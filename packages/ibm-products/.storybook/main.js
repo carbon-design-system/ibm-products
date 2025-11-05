@@ -16,7 +16,7 @@ const stories = [
   './ComponentPlayground/**/*.stories.*',
   './Welcome/**/*.stories.*',
   './PrebuiltPatterns/**/*.mdx',
-  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
+  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.*',
 ];
 
 export default {
@@ -70,18 +70,6 @@ export default {
     const { mergeConfig } = await import('vite');
 
     return mergeConfig(config, {
-      esbuild: {
-        include: /\.[jt]sx?$/,
-        exclude: [],
-        loader: 'tsx',
-      },
-      optimizeDeps: {
-        esbuildOptions: {
-          loader: {
-            '.js': 'jsx',
-          },
-        },
-      },
       resolve: {
         alias: {
           ALIAS_STORY_STYLE_CONFIG: resolve(
@@ -99,6 +87,9 @@ export default {
             silenceDeprecations: ['global-builtin', 'legacy-js-api'],
           },
         },
+      },
+      experimental: {
+        enableNativePlugin: true,
       },
     });
   },

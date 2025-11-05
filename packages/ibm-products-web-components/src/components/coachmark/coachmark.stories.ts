@@ -15,7 +15,7 @@ import '@carbon/web-components/es/components/button/index.js';
 import styles from './story-styles.scss?lit';
 import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
-import Crossroads from '@carbon/icons/es/crossroads/16.js';
+// import Crossroads from '@carbon/icons/es/crossroads/16.js';
 
 const storyPrefix = 'coachmark-stories__';
 

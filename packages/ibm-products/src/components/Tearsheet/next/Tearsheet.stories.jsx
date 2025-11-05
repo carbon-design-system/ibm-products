@@ -13,7 +13,6 @@ import {
   Form,
   FormGroup,
   Heading,
-  IconButton,
   NumberInput,
   ProgressIndicator,
   ProgressStep,

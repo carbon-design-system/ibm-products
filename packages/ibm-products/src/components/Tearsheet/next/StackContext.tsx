@@ -12,7 +12,6 @@ import React, {
   useState,
   useCallback,
   useRef,
-  RefObject,
 } from 'react';
 
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
@@ -68,7 +67,7 @@ export const StackProvider: React.FC<StepProviderProps> = ({
   );
 
   // method that calculates spacing factor for the stacked items
-  const getScaleFactor = (id) => {
+  const getScaleFactor = (id: string) => {
     const depth = getDepth(id);
     const buffer = bufferMap[stackStepSize];
     const bufferInPx = remToPx(buffer);
@@ -77,7 +76,7 @@ export const StackProvider: React.FC<StepProviderProps> = ({
     return scale;
   };
 
-  const remToPx = (rem) => {
+  const remToPx = (rem: number) => {
     return (
       rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
     );
@@ -94,7 +93,7 @@ export const StackProvider: React.FC<StepProviderProps> = ({
     [stack]
   );
 
-  const getBlockSizeChange = (id) => {
+  const getBlockSizeChange = (id: string) => {
     const depth = getDepth(id);
 
     const buffer = bufferMap[stackStepSize]; //to be changed

@@ -13,7 +13,6 @@ import React, {
   ReactNode,
   ForwardedRef,
   FC,
-  useId,
   useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -57,6 +56,7 @@ import { breakpoints } from '@carbon/layout';
 import { usePortalTarget } from '../../../global/js/hooks/usePortalTarget';
 import { useStackContext } from './StackContext';
 import { useMatchMedia } from '../../../global/js/hooks/useMatchMedia';
+import { useId } from '../../../global/js/utils/useId';
 
 /**
  * ----------

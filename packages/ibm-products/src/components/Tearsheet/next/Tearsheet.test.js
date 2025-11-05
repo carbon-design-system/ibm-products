@@ -9,16 +9,21 @@ import React from 'react';
 import { AILabel, Button, IconButton, Tab, TabList } from '@carbon/react'; // Or your design system components
 import { RightPanelClose } from '@carbon/icons-react';
 import { Tearsheet } from './Tearsheet';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { blockClass } from './context';
 import { StackProvider } from './StackContext';
 
 const baseFontSize = '16px';
+let mockOverflowOnChange;
 
 jest.mock('../../../global/js/hooks/useResizeObserver', () => ({
   useResizeObserver: () => ({ width: 800 }), // arbitrary test width
 }));
-
+jest.mock('@carbon/utilities', () => ({
+  createOverflowHandler: jest.fn(({ onChange }) => {
+    mockOverflowOnChange = onChange;
+  }),
+}));
 describe('Tearsheet component V2', () => {
   let setOpen, setInfluencerPanelOpen, setSummaryPanelOpen, handlePrevious;
 
@@ -31,6 +36,8 @@ describe('Tearsheet component V2', () => {
     setInfluencerPanelOpen = jest.fn();
     setSummaryPanelOpen = jest.fn();
     handlePrevious = jest.fn();
+    jest.clearAllMocks();
+    mockOverflowOnChange = null;
   });
 
   const renderTearsheet = (open = true) =>
@@ -272,58 +279,98 @@ describe('Tearsheet component V2', () => {
     expect(header).not.toHaveClass(`${blockClass}__header-collapsed`);
   });
 
-  it('check overflow handler properly rendering action buttons', () => {
+  it('not shows menu button when hidden items does not exist (via onChange)', async () => {
     render(
-      <Tearsheet>
-        <Tearsheet.Header>
-          <Tearsheet.HeaderContent
-            headerActions={
-              <Tearsheet.HeaderActions
-                menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
-              >
-                <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                  <Button kind="tertiary" size="sm">
-                    Action 1
-                  </Button>
-                </Tearsheet.HeaderActionItem>
-                <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                  <Button kind="tertiary" size="sm">
-                    Action 2
-                  </Button>
-                </Tearsheet.HeaderActionItem>
-                <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                  <Button kind="tertiary" size="sm">
-                    Action 3
-                  </Button>
-                </Tearsheet.HeaderActionItem>
-              </Tearsheet.HeaderActions>
-            }
-          ></Tearsheet.HeaderContent>
-        </Tearsheet.Header>
-      </Tearsheet>
+      <Tearsheet.HeaderActions
+        menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
+      >
+        <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+          <Button kind="tertiary" size="sm">
+            Action 1
+          </Button>
+        </Tearsheet.HeaderActionItem>
+        <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
+          <Button kind="tertiary" size="sm">
+            Action 2
+          </Button>
+        </Tearsheet.HeaderActionItem>
+      </Tearsheet.HeaderActions>
     );
 
-    const headerActions = document.querySelector(
-      `.${blockClass}__content__header-actions`
-    );
+    // Simulate overflow event
+    await act(async () => {
+      mockOverflowOnChange?.(
+        [
+          <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+            <Button kind="tertiary" size="sm">
+              Action 1
+            </Button>
+          </Tearsheet.HeaderActionItem>,
+          <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
+            <Button kind="tertiary" size="sm">
+              Action 2
+            </Button>
+          </Tearsheet.HeaderActionItem>,
+        ],
+        []
+      );
+    });
 
     const buttons = document.querySelectorAll(
       `.${blockClass}__header-action-item`
     );
-    const menuButton = document.querySelector(
-      `.${blockClass}__header-actions-menuButton`
-    );
-    Object.defineProperty(headerActions, 'width', {
-      value: 500,
-      configurable: true,
-      writable: true,
-    });
 
-    expect(buttons).toHaveLength(3);
+    expect(buttons).toHaveLength(2);
     buttons.forEach((btn) => {
       expect(btn).not.toHaveAttribute('data-hidden', 'true');
     });
-    expect(menuButton).toHaveAttribute('data-hidden', 'true');
+    const menuButton = document.querySelector(
+      `.${blockClass}__header-actions-menuButton.${blockClass}____header-actions-menuButton--hidden`
+    );
+    expect(menuButton).not.toBeInTheDocument();
+  });
+  it('shows menu button when hidden items exist (via onChange)', async () => {
+    render(
+      <Tearsheet.HeaderActions
+        menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
+      >
+        <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+          <Button kind="tertiary" size="sm">
+            Action 1
+          </Button>
+        </Tearsheet.HeaderActionItem>
+        <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
+          <Button kind="tertiary" size="sm">
+            Action 2
+          </Button>
+        </Tearsheet.HeaderActionItem>
+      </Tearsheet.HeaderActions>
+    );
+
+    // Simulate overflow event
+    await act(async () => {
+      mockOverflowOnChange?.(
+        [
+          <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+            <Button kind="tertiary" size="sm">
+              Action 1
+            </Button>
+          </Tearsheet.HeaderActionItem>,
+        ],
+        [
+          <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
+            <Button kind="tertiary" size="sm">
+              Action 2
+            </Button>
+          </Tearsheet.HeaderActionItem>,
+        ]
+      );
+    });
+
+    const menuButton = document.querySelector(
+      `.${blockClass}__header-actions-menuButton.${blockClass}____header-actions-menuButton--hidden`
+    );
+    expect(menuButton).toBeDefined();
   });
   it('check menu button is not rendered when all items are not wrapped with HeaderActionItem', () => {
     render(

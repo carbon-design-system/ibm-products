@@ -5,18 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Button, MenuButton, MenuButtonProps, MenuItem } from '@carbon/react';
+import { MenuButton, MenuButtonProps, MenuItem } from '@carbon/react';
 import React, {
   ReactElement,
   ReactNode,
-  useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from 'react';
-import PropTypes from 'prop-types';
 import { blockClass } from './context';
 import { createOverflowHandler } from '@carbon/utilities';
+import cx from 'classnames';
 /**
  * ----------------
  * TearsheetHeaderActions
@@ -99,7 +98,10 @@ export const TearsheetHeaderActions = ({
           data-offset
           data-hidden
           ref={offsetRef}
-          className={`${blockClass}__header-actions-menuButton`}
+          className={cx(`${blockClass}__header-actions-menuButton`, {
+            [`${blockClass}__header-actions-menuButton--hidden`]:
+              hiddenItems.length === 0,
+          })}
         >
           <MenuButton size="sm" {...menuButtonProps}>
             {hiddenItems.map((item) => {

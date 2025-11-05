@@ -62,7 +62,9 @@ const TearsheetHeaderContent = React.forwardRef<
   return (
     <div className={`${blockClass}__header-content-wrapper`} ref={ref}>
       <div className={`${blockClass}__header-content`}>
-        <p className={`${blockClass}__header-label`}>{label}</p>
+        {label ? (
+          <div className={`${blockClass}__header-label`}>{label}</div>
+        ) : null}
         <div className={`${blockClass}__content__title-wrapper`}>
           <h2 className={cx(`${blockClass}__header-title`)}>
             {titleStart ? (

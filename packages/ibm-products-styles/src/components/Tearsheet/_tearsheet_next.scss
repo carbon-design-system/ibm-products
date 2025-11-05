@@ -302,7 +302,6 @@ $motion-duration: $duration-moderate-02;
         .#{$block-class__next}__content__title-wrapper,
         .#{$block-class__next}__header-label
       ) {
-      max-block-size: 50vh;
       opacity: 1;
       transition:
         all $motion-duration motion(entrance, expressive),

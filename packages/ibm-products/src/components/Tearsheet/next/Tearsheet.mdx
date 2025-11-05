@@ -164,40 +164,13 @@ pass `PageHeader.ScrollButton` to the `scroller` prop.
 
 ## Default
 
-<Canvas
-  of={stories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: stories.Default,
-          styles: stories.default.parameters.styles,
-          status: {
-            preview: ['Tearsheet'],
-          },
-        }),
-    },
-  ]}
-/>
+<Canvas of={stories.Default} />
 
 ## With Influencer
 
 <Canvas
-  of={stories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: stories.Default,
-          styles: stories.default.parameters.styles,
-          status: {
-            preview: ['Tearsheet'],
-          },
-        }),
-    },
-  ]}
+  of={stories.WithInfluencer}
+
 />
 
 ## With tabs
@@ -206,22 +179,7 @@ To render tabs, wrap the entire Tearsheet in `<Tabs></Tabs>`. You can render
 `<Tablist>` in header `<Tearsheet.NavigationBar>` and `<TabPanels>` in
 `<Tearsheet.MainContent>`
 
-<Canvas
-  of={stories.WithTabs}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: stories.WithTabs,
-          styles: stories.default.parameters.styles,
-          status: {
-            preview: ['Tearsheet'],
-          },
-        }),
-    },
-  ]}
-/>
+<Canvas of={stories.WithTabs} />
 
 ## With steps
 
@@ -230,22 +188,7 @@ the `<StepProvider>`
 [utility](https://ibm-products.carbondesignsystem.com/?path=/docs/patterns-step-flows--overview)
 as demonstrated below
 
-<Canvas
-  of={stories.withSteps}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: stories.withSteps,
-          styles: stories.default.parameters.styles,
-          status: {
-            preview: ['Tearsheet'],
-          },
-        }),
-    },
-  ]}
-/>
+<Canvas of={stories.withSteps} />
 
 ## Narrow
 
@@ -256,22 +199,7 @@ center while revealing more of the UI behind it.
 A narrow tearsheet comprises 3 zones: Header, MainContent and Footer. You can
 optionally choose to open influencer and SummaryContent in side panels
 
-<Canvas
-  of={stories.narrowTearsheet}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: stories.narrowTearsheet,
-          styles: stories.default.parameters.styles,
-          status: {
-            preview: ['Tearsheet'],
-          },
-        }),
-    },
-  ]}
-/>
+<Canvas of={stories.narrowTearsheet} />
 
 ## Stacking
 
@@ -287,22 +215,7 @@ Tearsheets. You can optionally specify a stackStepSize—sm (0.5rem), md
  <StackProvider>
 ```
 
-<Canvas
-  of={stories.StackingTearsheet}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: stories.StackingTearsheet,
-          styles: stories.default.parameters.styles,
-          status: {
-            preview: ['Tearsheet'],
-          },
-        }),
-    },
-  ]}
-/>
+<Canvas of={stories.StackingTearsheet} />
 
 ## Component API
 

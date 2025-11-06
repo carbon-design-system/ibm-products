@@ -159,16 +159,16 @@ class CDSChecklist extends LitElement {
         <!-- Header -->
         <header class="${blockClass}__header">
           <slot name="checklist-header">
-            ${html`<c4p-checklist-chart
-              value=${chartValue}
-            ></c4p-checklist-chart>`}
+            <slot name="header-chart">
+              <c4p-checklist-chart value=${chartValue}></c4p-checklist-chart>
+            </slot>
             <div class="${blockClass}__titles">
               <!-- checklist title -->
-              <slot name="title">
+              <slot name="header-title">
                 ${title && html`<h2 class="${blockClass}__title">${title}</h2>`}
               </slot>
               <!-- chart label -->
-              <slot name="chartLabel">
+              <slot name="header-chartLabel">
                 ${chartLabel &&
                 html`<p class="${blockClass}__chart-label">${chartLabel}</p>`}
               </slot>

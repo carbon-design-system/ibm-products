@@ -14,8 +14,7 @@ import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/
 import '@carbon/web-components/es/components/button/index.js';
 import styles from './story-styles.scss?lit';
 import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader.js';
-import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
-// import Crossroads from '@carbon/icons/es/crossroads/16.js';
+import Crossroads from '@carbon/icons/es/crossroads/16.js';
 
 const storyPrefix = 'coachmark-stories__';
 
@@ -117,7 +116,7 @@ export const Floating = {
             slot="trigger"
             class="trigger-btn"
             @click=${handleClick}
-            >Show information ${iconLoader(ArrowRight as any, { slot: 'icon' })}
+            >Show information ${iconLoader(Crossroads as any, { slot: 'icon' })}
           </cds-button>
           <c4p-coachmark-header
             class="coachmark-header"

@@ -24,6 +24,7 @@ $motion-duration: $duration-moderate-02;
   // ──────────────────────────────────────────────────────────────
   .#{$block-class__next}__container {
     align-self: flex-end;
+    border: 1px solid $border-subtle-01;
     block-size: 100%;
     inset-block-start: auto;
     max-block-size: calc(100% - var(--tearsheet-vertical-gap, #{$spacing-09}));
@@ -432,6 +433,7 @@ $motion-duration: $duration-moderate-02;
 
   /* Assign components to their named grid areas */
   .#{$block-class__next}__influencer {
+    border-inline-end: 1px solid $border-subtle-01;
     grid-area: influencer;
   }
 

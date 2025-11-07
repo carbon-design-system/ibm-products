@@ -324,9 +324,14 @@ export interface FooterProps {
 }
 const Footer = forwardRef<HTMLDivElement, FooterProps>(({ children }, ref) => {
   return (
-    <footer className={`${blockClass}__footer`} ref={ref}>
+    <Layer
+      as="footer"
+      withBackground
+      className={`${blockClass}__footer`}
+      ref={ref}
+    >
       {children}
-    </footer>
+    </Layer>
   );
 });
 

@@ -9,7 +9,9 @@
 
 declare module '*.scss';
 declare module '*.scss?lit';
+declare module '*.jpg';
 declare module 'vitest/config';
+declare module '@figma/code-connect/html';
 
 declare module '*.mdx' {
   let MDXComponent: (props: any) => JSX.Element;

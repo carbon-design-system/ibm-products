@@ -52,6 +52,8 @@ collect:
         - clickable
         - onc4p-checklist-item-clicked
         - status
+        # c4p-coachmark-beacon
+        - onc4p-coachmark-beacon-clicked
         # c4p-interstitial-screen
         - fullscreen
         - onc4p-interstitial-beingclosed

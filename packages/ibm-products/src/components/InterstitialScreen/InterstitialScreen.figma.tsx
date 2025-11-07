@@ -165,7 +165,7 @@ figma.connect(InterstitialScreen, fullPageConnectionURL, {
     steps: figma.boolean('Steps', {
       true: (
         <InterstitialScreenView stepTitle="Step">
-          <div> step content markup here</div>
+          <div>step content markup here</div>
         </InterstitialScreenView>
       ),
       false: undefined,

@@ -22,6 +22,8 @@
 // ActionSet
 @use '../ActionSet/action-set';
 
+@use './tearsheet_next';
+
 $block-class: #{$pkg-prefix}--tearsheet;
 
 // stylelint-disable-next-line carbon/theme-use
@@ -208,8 +210,11 @@ $motion-duration: $duration-moderate-02;
     transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
   }
 
+  .#{$block-class}__header {
+    min-block-size: fit-content;
+  }
+
   &.#{$block-class}--wide .#{$block-class}__header {
-    overflow: visible;
     padding: $spacing-06 $spacing-07;
     margin: 0;
     background-color: $layer;
@@ -311,6 +316,7 @@ $motion-duration: $duration-moderate-02;
 
   &.#{$block-class} .#{$block-class}__body {
     display: flex;
+    overflow: hidden;
     flex-direction: row;
     padding: 0;
     margin: 0;
@@ -418,6 +424,7 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__button-container {
     grid-column: 1 / -1;
     grid-row: -1 / -1;
+    min-block-size: fit-content;
     overflow-x: auto;
     @supports (overflow-inline: auto) {
       /* stylelint-disable-next-line declaration-property-value-disallowed-list */

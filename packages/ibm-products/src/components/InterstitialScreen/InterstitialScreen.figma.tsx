@@ -6,6 +6,8 @@
  */
 import React from 'react';
 import { InterstitialScreen } from './InterstitialScreen';
+import { InterstitialScreenView } from './InterstitialScreenView';
+
 import figma from '@figma/code-connect';
 
 const connectionURL =
@@ -23,23 +25,44 @@ figma.connect(InterstitialScreen, connectionURL, {
       true: undefined,
       false: true,
     }),
-    children: figma.boolean('Steps', {
-      true: undefined,
-      false: '<!-- Insert your static content here -->',
-    }),
-    slot: figma.boolean('Steps', {
-      true: undefined,
-      false: figma.boolean('Slot', {
-        true: figma.children('Slot 1'),
-        false: undefined,
-      }),
-    }),
     contentRenderer: figma.boolean('Steps', {
       true: (internalConfig) => {
-        /* ... return your step content markup here ... */
-        return <div></div>;
+        return (
+          <>
+            <InterstitialScreenView stepTitle="Step">
+              <h3>Use case-specific heading</h3>
+              <p>
+                We take the triage phase off your hands early on. We automate
+                investigations, and make sure you can see the source of all your
+                data. And we use AI to suggest findings you might not catch on
+                your own. With fewer blind spots for the hackers to hide in, you
+                can see the full picture, and take your defense to the next
+                level.
+              </p>
+            </InterstitialScreenView>
+            <InterstitialScreenView stepTitle="Step">
+              <div>steps contents here</div>
+            </InterstitialScreenView>
+            <InterstitialScreenView stepTitle="Step">
+              <div>steps contents here</div>
+            </InterstitialScreenView>
+          </>
+        );
       },
-      false: undefined,
+      false: (internalConfig) => {
+        return (
+          <InterstitialScreenView>
+            <h3>Use case-specific heading</h3>
+            <p>
+              We take the triage phase off your hands early on. We automate
+              investigations, and make sure you can see the source of all your
+              data. And we use AI to suggest findings you might not catch on
+              your own. With fewer blind spots for the hackers to hide in, you
+              can see the full picture, and take your defense to the next level.
+            </p>
+          </InterstitialScreenView>
+        );
+      },
     }),
   },
   example: (props) => (
@@ -49,10 +72,9 @@ figma.connect(InterstitialScreen, connectionURL, {
         headerSubTitle={props.headerSubTitle}
         hideProgressIndicator={props.hideProgressIndicator}
       ></InterstitialScreen.Header>
-      <InterstitialScreen.Body contentRenderer={props.contentRenderer}>
-        {props.children}
-        {props.slot}
-      </InterstitialScreen.Body>
+      <InterstitialScreen.Body
+        contentRenderer={props.contentRenderer}
+      ></InterstitialScreen.Body>
       <InterstitialScreen.Footer />
     </InterstitialScreen>
   ),
@@ -65,10 +87,11 @@ figma.connect(InterstitialScreen, connectionURL, {
     description: figma.textContent(
       'We take the triage phase off your hands early on. We automate investigations, and make sure you can see the source of all your data. And we use AI to suggest findings you might not catch on your own. With fewer blind spots for the hackers to hide in, you can see the full picture, and take your defense to the next level.'
     ),
-    children: figma.boolean('Slot', {
+    slot: figma.boolean('Slot', {
       true: figma.children('Slot 1'),
       false: undefined,
     }),
+    image: figma.children('Aspect ratio'),
   },
   example: (props) => (
     <InterstitialScreen open>
@@ -76,9 +99,12 @@ figma.connect(InterstitialScreen, connectionURL, {
         hideProgressIndicator
       ></InterstitialScreen.Header>
       <InterstitialScreen.Body>
-        <h3>{props.title}</h3>
-        <p>{props.description}</p>
-        {props.children}
+        <InterstitialScreenView>
+          <h3>{props.title}</h3>
+          <p>{props.description}</p>
+          {props.image}
+          {props.slot}
+        </InterstitialScreenView>
       </InterstitialScreen.Body>
       <InterstitialScreen.Footer />
     </InterstitialScreen>
@@ -90,8 +116,11 @@ figma.connect(InterstitialScreen, connectionURL, {
   props: {
     contentRenderer: figma.boolean('Steps', {
       true: (internalConfig) => {
-        /* ... return your custom progress indicator and step content markup here ... */
-        return <div></div>;
+        return (
+          <div>
+            Your custom progress indicator and step contents markup here
+          </div>
+        );
       },
       false: undefined,
     }),
@@ -124,22 +153,21 @@ figma.connect(InterstitialScreen, fullPageConnectionURL, {
       true: undefined,
       false: true,
     }),
-    children: figma.boolean('Steps', {
-      true: undefined,
-      false: '<!-- Insert your static content here -->',
+    title: figma.textContent('Use case-specific heading'),
+    description: figma.textContent(
+      'We take the triage phase off your hands early on. We automate investigations, and make sure you can see the source of all your data. And we use AI to suggest findings you might not catch on your own. With fewer blind spots for the hackers to hide in, you can see the full picture, and take your defense to the next level.'
+    ),
+    image: figma.children('Aspect ratio'),
+    slot: figma.boolean('Slot', {
+      true: figma.children('Slot 1'),
+      false: undefined,
     }),
-    slot: figma.boolean('Steps', {
-      true: undefined,
-      false: figma.boolean('Slot', {
-        true: figma.children('Slot 1'),
-        false: undefined,
-      }),
-    }),
-    contentRenderer: figma.boolean('Steps', {
-      true: (internalConfig) => {
-        /* ... return your step content markup here ... */
-        return <div></div>;
-      },
+    steps: figma.boolean('Steps', {
+      true: (
+        <InterstitialScreenView stepTitle="Step">
+          <div> step content markup here</div>
+        </InterstitialScreenView>
+      ),
       false: undefined,
     }),
   },
@@ -150,9 +178,14 @@ figma.connect(InterstitialScreen, fullPageConnectionURL, {
         headerSubTitle={props.headerSubTitle}
         hideProgressIndicator={props.hideProgressIndicator}
       ></InterstitialScreen.Header>
-      <InterstitialScreen.Body contentRenderer={props.contentRenderer}>
-        {props.children}
-        {props.slot}
+      <InterstitialScreen.Body>
+        <InterstitialScreenView>
+          <h3>{props.title}</h3>
+          <p>{props.description}</p>
+          {props.image}
+          {props.slot}
+        </InterstitialScreenView>
+        {props.steps}
       </InterstitialScreen.Body>
       <InterstitialScreen.Footer />
     </InterstitialScreen>
@@ -166,10 +199,11 @@ figma.connect(InterstitialScreen, fullPageConnectionURL, {
     description: figma.textContent(
       'We take the triage phase off your hands early on. We automate investigations, and make sure you can see the source of all your data. And we use AI to suggest findings you might not catch on your own. With fewer blind spots for the hackers to hide in, you can see the full picture, and take your defense to the next level.'
     ),
-    children: figma.boolean('Slot', {
+    slot: figma.boolean('Slot', {
       true: figma.children('Slot 1'),
       false: undefined,
     }),
+    image: figma.children('Aspect ratio'),
   },
   example: (props) => (
     <InterstitialScreen open isFullScreen>
@@ -177,9 +211,12 @@ figma.connect(InterstitialScreen, fullPageConnectionURL, {
         hideProgressIndicator
       ></InterstitialScreen.Header>
       <InterstitialScreen.Body>
-        <h3>{props.title}</h3>
-        <p>{props.description}</p>
-        {props.children}
+        <InterstitialScreenView>
+          <h3>{props.title}</h3>
+          <p>{props.description}</p>
+          {props.image}
+          {props.slot}
+        </InterstitialScreenView>
       </InterstitialScreen.Body>
       <InterstitialScreen.Footer />
     </InterstitialScreen>
@@ -191,8 +228,11 @@ figma.connect(InterstitialScreen, fullPageConnectionURL, {
   props: {
     contentRenderer: figma.boolean('Steps', {
       true: (internalConfig) => {
-        /* ... return your custom progress indicator and step content markup here ... */
-        return <div></div>;
+        return (
+          <div>
+            Your custom progress indicator and step contents markup here
+          </div>
+        );
       },
       false: undefined,
     }),

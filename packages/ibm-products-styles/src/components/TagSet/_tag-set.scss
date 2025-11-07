@@ -40,8 +40,6 @@ $block-class-modal: #{$block-class}-modal;
 
   .#{$block-class}__tag-container {
     display: inline-flex; // needed to register a width
-    // Spacing between tags.
-    gap: $spacing-03;
     white-space: nowrap;
   }
 
@@ -70,6 +68,11 @@ $block-class-modal: #{$block-class}-modal;
     overflow: hidden;
     max-inline-size: 0;
     visibility: hidden;
+  }
+
+  .#{$carbon-prefix}--tag {
+    margin-block-end: $spacing-03;
+    margin-inline-end: $spacing-03;
   }
 }
 

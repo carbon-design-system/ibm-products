@@ -28,9 +28,6 @@ $block-class-modal: #{$block-class}-modal;
 
 .#{$block-class}__visible-tags {
   display: flex;
-  // Spacing for tags and center alignment for other components like user avatars.
-  align-items: center;
-  gap: $spacing-03;
 }
 
 .#{$block-class}--align-end {
@@ -47,6 +44,8 @@ $block-class-modal: #{$block-class}-modal;
 
 .#{$block-class}__item--tag {
   border: none;
+  margin-block-end: $spacing-03;
+  margin-inline-end: $spacing-03;
 }
 
 .#{$block-class}__item--tag span {

@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@carbon/ibm-products-web-components": "latest",
-    "@carbon/web-components": "^2.37.0",
+    "@carbon/web-components": "^2.39.1",
     "lit": "^3.2.1",
-    "sass": "^1.64.1"
+    "sass": "^1.93.2"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",

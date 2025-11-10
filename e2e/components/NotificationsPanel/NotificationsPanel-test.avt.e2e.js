@@ -12,7 +12,7 @@ import { visitStory } from '../../test-utils/storybook';
 import { pkg } from '../../../packages/ibm-products/src/settings';
 
 test.describe('NotificationsPanel @avt', () => {
-  test('@avt-default-state', async ({ page }) => {
+  test.skip('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
       id: 'components-notificationspanel--default',

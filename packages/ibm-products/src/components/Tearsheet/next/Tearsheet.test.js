@@ -213,10 +213,6 @@ describe('Tearsheet component V2', () => {
     expect(style2.getPropertyValue('--stack-depth')).toBe('1');
     expect(style1.getPropertyValue('--stack-depth')).toBe('2');
 
-    expect(style3.getPropertyValue('--stack-depth')).toBe('0');
-    expect(style2.getPropertyValue('--stack-depth')).toBe('1');
-    expect(style1.getPropertyValue('--stack-depth')).toBe('2');
-
     const scaleFactor1 = style1.getPropertyValue('--scale-factor');
     const scaleFactor2 = style2.getPropertyValue('--scale-factor');
     const scaleFactor3 = style3.getPropertyValue('--scale-factor');

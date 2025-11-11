@@ -11,14 +11,12 @@ import { signal } from '@lit-labs/signals';
 interface CoachmarkDetailsType {
   open?: boolean;
   align?: string;
-  position: { x: number; y: number };
   floating?: boolean;
 }
 
 export const coachmarkDetailsSignal = signal<CoachmarkDetailsType>({
   open: false,
   align: 'bottom',
-  position: { x: 0, y: 0 },
   floating: false,
 });
 
@@ -26,7 +24,6 @@ export const resetCoachmarkDetailsSignal = () => {
   coachmarkDetailsSignal.set({
     open: false,
     align: 'bottom',
-    position: { x: 0, y: 0 },
     floating: false,
   });
 };
@@ -40,11 +37,6 @@ export const updateCoachmarkDetailsSignal = ({ name, detail }) => {
     coachmarkDetailsSignal.set({
       ...coachmarkDetailsSignal.get(),
       align: detail,
-    });
-  } else if (name === 'position') {
-    coachmarkDetailsSignal.set({
-      ...coachmarkDetailsSignal.get(),
-      position: detail,
     });
   } else if (name === 'floating') {
     coachmarkDetailsSignal.set({

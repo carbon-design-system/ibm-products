@@ -15,7 +15,11 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import styles from './coachmark-header.scss?lit';
 import Close from '@carbon/icons/es/close/16';
 import Draggable from '@carbon/icons/es/draggable/16';
-import { coachmarkDetailsSignal } from './coachmark-context';
+import { SignalWatcher } from '@lit-labs/signals';
+import {
+  coachmarkDetailsSignal,
+  updateCoachmarkDetailsSignal,
+} from './coachmark-context';
 import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader';
 
 const blockClass = `${prefix}--coachmark-header`;
@@ -25,11 +29,11 @@ const blockClass = `${prefix}--coachmark-header`;
  * @element c4p-coachmark-header
  */
 @customElement(`${prefix}-coachmark-header`)
-class CDSCoachmarkHeader extends HostListenerMixin(LitElement) {
+class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   /**
    * Tooltip text and aria label for the Close button icon.
    */
-  closeIconDescription?: string;
+  closeIconDescription?: string = 'close icon';
 
   /**
    * Tooltip text and aria label for the Drag button icon.
@@ -40,6 +44,13 @@ class CDSCoachmarkHeader extends HostListenerMixin(LitElement) {
   firstUpdated() {
     this.classList.add(blockClass);
   }
+
+  private _handleClick = () => {
+    updateCoachmarkDetailsSignal({
+      name: 'open',
+      detail: !coachmarkDetailsSignal.get().open,
+    });
+  };
 
   render() {
     const { floating } = coachmarkDetailsSignal.get();
@@ -66,6 +77,7 @@ class CDSCoachmarkHeader extends HostListenerMixin(LitElement) {
           size="sm"
           iconDescription="${this.closeIconDescription}"
           hasIconOnly
+          @click=${this._handleClick}
         >
            ${iconLoader(Close, { slot: 'icon', class: 'close__icon' })}
            </cds-button

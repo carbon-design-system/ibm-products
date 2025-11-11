@@ -41,7 +41,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
    * Where to render the Coachmark relative to its target.
    */
   @property({ reflect: true, type: String })
-  align: string = POPOVER_ALIGNMENT.TOP;
+  align?: string = POPOVER_ALIGNMENT.TOP;
   /**
    * Fine tune the position of the target in pixels.
    */

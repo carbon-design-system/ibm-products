@@ -51,6 +51,9 @@ module.exports = {
     // This mapping is added to resolve the alias that is set in our webpack config
     // otherwise the webpack alias does not work in the jest environment
     '\\.(css|scss)$': 'identity-obj-proxy',
+    '\\.(css|less|scss|sass)\\?inline$': require.resolve(
+      './setup/styleMock.js'
+    ),
   },
   modulePathIgnorePatterns: ['/build/', '/es/', '/lib/', '/umd/', '/examples/'],
   reporters: ['default'],

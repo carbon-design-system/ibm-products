@@ -19,7 +19,7 @@
     "react"
   ],
   "resolutions": {
-    "@octokit/plugin-paginate-rest": "^13.1.1",
+    "@octokit/plugin-paginate-rest": "^14.0.0",
     "@octokit/request": "^10.0.0",
     "undici": "^7.11.0"
   },

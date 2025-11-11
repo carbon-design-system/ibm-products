@@ -26,6 +26,8 @@ $block-class: #{$prefix}--set-of-tags;
   inline-size: 100%;
   .#{$block-class} {
     display: flex;
+    // Spacing between tags.
+    gap: $spacing-03;
     box-sizing: border-box;
     justify-content: flex-end;
     inline-size: 100%;

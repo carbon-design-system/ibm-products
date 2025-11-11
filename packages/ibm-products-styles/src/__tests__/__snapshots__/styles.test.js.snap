@@ -3584,8 +3584,10 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--tearsheet.c4p--tearsheet--stacked-1-of-3.is-visible .c4p--tearsheet__container {
   transform: scale(var(--c4p--tearsheet--stacking-scale-factor-double));
 }
+.c4p--tearsheet .c4p--tearsheet__header {
+  min-block-size: fit-content;
+}
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header {
-  overflow: visible;
   padding: 1.5rem 2rem;
   margin: 0;
   background-color: var(--cds-layer);
@@ -3662,6 +3664,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--tearsheet.c4p--tearsheet .c4p--tearsheet__body {
   display: flex;
+  overflow: hidden;
   flex-direction: row;
   padding: 0;
   margin: 0;
@@ -3742,6 +3745,7 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--tearsheet .c4p--tearsheet__button-container {
   grid-column: 1/-1;
   grid-row: -1/-1;
+  min-block-size: fit-content;
   overflow-x: auto;
 }
 @supports (overflow-inline: auto) {

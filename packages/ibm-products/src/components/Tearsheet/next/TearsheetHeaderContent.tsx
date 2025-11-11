@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useContext } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import cx from 'classnames';
-import { blockClass, TearsheetContext } from './context';
+import { blockClass } from './context';
 import { TruncatedText } from '../../TruncatedText';
-import { CarbonIconType } from '@carbon/react/icons';
 
 export interface TearsheetHeaderContentProps {
   /**
@@ -17,14 +16,28 @@ export interface TearsheetHeaderContentProps {
    * People can make use of this if they want to have custom header.
    */
   children?: React.ReactNode;
-
+  /**
+   * The main title of the tearsheet.
+   */
   title: string;
-  label?: string;
-  description?: string;
-  descriptionExpandLabel?: string;
-  descriptionCollapseLabel?: string;
-  titleIcon?: CarbonIconType;
-  titleIconPosition?: 'leading' | 'trailing';
+  /**
+   * A label for the tearsheet, displayed above the title
+   * to maintain context for the tearsheet (e.g. as the title changes from page
+   * to page of a multi-page task).
+   */
+  label?: ReactNode;
+  /**
+   * A description of the flow, displayed in the header area of the tearsheet.
+   */
+  description?: ReactNode;
+  /**
+   * This can be used to render a content just before the title like an icon
+   */
+  titleStart?: ReactNode;
+  /**
+   * This can be used to render a content just after the title like an icon
+   */
+  titleEnd?: ReactNode;
   /**
    * The PageHeaderContent's page actions
    */
@@ -40,33 +53,23 @@ const TearsheetHeaderContent = React.forwardRef<
     label,
     title,
     description,
-    descriptionExpandLabel = 'Read more',
-    descriptionCollapseLabel = 'Read less',
-    titleIcon: Icon,
-    titleIconPosition = 'leading',
     headerActions,
+    titleStart,
+    titleEnd,
     ...rest
   } = props;
-  const { isSm } = useContext(TearsheetContext);
+
   return (
     <div className={`${blockClass}__header-content-wrapper`} ref={ref}>
       <div className={`${blockClass}__header-content`}>
-        <p className={`${blockClass}__header-label`}>{label}</p>
+        {label ? (
+          <div className={`${blockClass}__header-label`}>{label}</div>
+        ) : null}
         <div className={`${blockClass}__content__title-wrapper`}>
-          <h2
-            className={cx(
-              `${blockClass}__header-title`,
-              {
-                [`${blockClass}__leading-icon`]:
-                  Icon && titleIconPosition === 'leading',
-              },
-              {
-                [`${blockClass}__trailing-icon`]:
-                  Icon && titleIconPosition === 'trailing',
-              }
-            )}
-          >
-            {!isSm && Icon && <Icon size={32} />}
+          <h2 className={cx(`${blockClass}__header-title`)}>
+            {titleStart ? (
+              <span className={`${blockClass}__title-start`}>{titleStart}</span>
+            ) : null}
             <TruncatedText
               id={`${blockClass}__header-title__truncatedText`}
               className={`${blockClass}__content__title`}
@@ -74,18 +77,13 @@ const TearsheetHeaderContent = React.forwardRef<
               autoAlign={true}
               value={title}
             />
+            {titleEnd ? (
+              <span className={`${blockClass}__title-end`}>{titleEnd}</span>
+            ) : null}
           </h2>
         </div>
 
-        <div className={`${blockClass}__header-description`}>
-          <TruncatedText
-            id={`${blockClass}__header-description__truncatedText`}
-            expandLabel={descriptionExpandLabel}
-            collapseLabel={descriptionCollapseLabel}
-            value={description}
-            type="expand"
-          />
-        </div>
+        <div className={`${blockClass}__header-description`}>{description}</div>
         {children && (
           <div className={`${blockClass}__header-content--extra`}>
             {children}

@@ -15,12 +15,16 @@ $css--plex: true !default;
 @use '@carbon/ibm-products-styles/scss/components/Guidebanner' as *;
 
 $prefix: config.$pkg-prefix;
-$carbon-prefix: config.$carbon-prefix;
-$block-class: #{$prefix}--guidebanner;
 
 :host(#{$prefix}-guide-banner) {
   details {
     display: flex;
     flex-direction: column-reverse;
+  }
+
+  ::marker,
+  ::-webkit-details-marker {
+    display: none;
+    content: '';
   }
 }

@@ -23,8 +23,6 @@ class CDSGuideBannerElement extends HostListenerMixin(LitElement) {
       </div>
     `;
   }
-
-  // static styles = styles;
 }
 
 export default CDSGuideBannerElement;

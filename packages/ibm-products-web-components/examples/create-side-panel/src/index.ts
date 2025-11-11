@@ -8,4 +8,3 @@
  */
 
 export { default as CreateSidepanelDefault } from './create-side-panel-default';
-export { default as CreateSidepanelStepped } from './create-side-panel-stepped';

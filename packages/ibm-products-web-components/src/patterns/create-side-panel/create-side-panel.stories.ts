@@ -19,9 +19,3 @@ export const Default = {
     return html`<create-side-panel-default></create-side-panel-default>`;
   },
 };
-
-export const Stepped = {
-  render: () => {
-    return html`<create-side-panel-stepped></create-side-panel-stepped>`;
-  },
-};

@@ -13,41 +13,41 @@
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins' as *;
 
-$_block-class: #{$pkg-prefix}--tag-set;
-$block-class-overflow: #{$_block-class}-overflow;
-$block-class-modal: #{$_block-class}-modal;
+$block-class: #{$pkg-prefix}--tag-set;
+$block-class-overflow: #{$block-class}-overflow;
+$block-class-modal: #{$block-class}-modal;
 
-@include block-wrap($_block-class) {
-  &.#{$_block-class} {
+@include block-wrap($block-class) {
+  &.#{$block-class} {
     display: block;
     inline-size: 100%;
   }
 
-  .#{$_block-class}__space {
+  .#{$block-class}__space {
     position: relative;
     display: block;
     inline-size: 100%;
     white-space: nowrap;
   }
 
-  .#{$_block-class}__space--align-end {
+  .#{$block-class}__space--align-end {
     text-align: end;
   }
 
-  .#{$_block-class}__space--align-center {
+  .#{$block-class}__space--align-center {
     text-align: center;
   }
 
-  .#{$_block-class}__tag-container {
+  .#{$block-class}__tag-container {
     display: inline-flex; // needed to register a width
     white-space: nowrap;
   }
 
-  .#{$_block-class}__tag-container--multiline {
+  .#{$block-class}__tag-container--multiline {
     flex-wrap: wrap;
   }
 
-  .#{$_block-class}__tag-container--hidden {
+  .#{$block-class}__tag-container--hidden {
     // This tag container is used to measure the width of all displayable tags
     @include measuring-container;
   }
@@ -68,6 +68,11 @@ $block-class-modal: #{$_block-class}-modal;
     overflow: hidden;
     max-inline-size: 0;
     visibility: hidden;
+  }
+
+  .#{$carbon-prefix}--tag {
+    margin-block-end: $spacing-03;
+    margin-inline-end: $spacing-03;
   }
 }
 
@@ -93,6 +98,13 @@ $block-class-modal: #{$_block-class}-modal;
     margin-inline-end: $spacing-05;
     padding-inline-end: 0;
   }
+
+  .#{$block-class-modal}__body {
+    .#{$carbon-prefix}--tag {
+      margin-block-end: $spacing-03;
+      margin-inline-end: $spacing-03;
+    }
+  }
 }
 
 @include block-wrap('#{$block-class-overflow}__tagset-popover') {
@@ -117,7 +129,8 @@ $block-class-modal: #{$_block-class}-modal;
     color: $link-inverse;
     margin-block-start: $spacing-03;
 
-    &:hover {
+    &:hover,
+    &:visited:hover {
       color: $link-inverse-hover;
     }
 
@@ -133,6 +146,9 @@ $block-class-modal: #{$_block-class}-modal;
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
     .#{$carbon-prefix}--tag {
     background-color: $background-inverse-hover;
+    // This adds spacing only for the overflow menu
+    // listing "tags" as opposed to just "labels".
+    margin-block-end: $spacing-01;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,

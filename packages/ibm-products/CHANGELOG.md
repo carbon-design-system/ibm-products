@@ -1,3 +1,17 @@
+## `@carbon/ibm-products@2.79.0-rc.0`
+### Features :rocket:
+- feat: composable tearsheet initial implementation (#8337)
+
+### Bug fixes :bug:
+- fix(InterstitialScreen): expanded documentation with additional usage details and issue fixes (#8585)
+- fix: condition builder popover getting closed on scrollbar click (#8571)
+- fix: remove canary check from truncatedtext component (#8471)
+
+### Housekeeping :house:
+- chore(carbon-upgrade): address default tag margin removal (#8550)
+- test(PageHeader): react tests clean up with `composeStory` (#8579)
+- chore(sass): update to v1.93.2 (#8567)
+
 ## `@carbon/ibm-products@2.78.0`
 ### Features :rocket:
 - feat(GuideBanner): code connect (#8411)

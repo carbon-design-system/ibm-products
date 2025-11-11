@@ -90,7 +90,7 @@ const Template = () => {
               </Tag>
             ))}
           </div>
-          <div>
+          <div className="child">
             <p>Hidden items:</p>
             {hiddenItems.map((tag) => (
               <Tag key={tag.id} type="blue">

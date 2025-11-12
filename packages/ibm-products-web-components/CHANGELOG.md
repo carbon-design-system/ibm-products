@@ -1,3 +1,20 @@
+## `@carbon/ibm-products-web-components@0.28.0`
+### Features :rocket:
+- feat(about-modal): code connect integration (#8568)
+- feat(fullpageerror): code connect integration (#8558)
+- feat(user-avatar): add code connect config (#8435)
+
+### Bug fixes :bug:
+- fix(playwright): bump playwright version to resolve sec issue (#8591)
+- fix(deps): update dependency @carbon-labs/wc-empty-state to ^0.11.0 (#8548)
+
+### Housekeeping :house:
+- chore(carbon-upgrade): address default tag margin removal (#8550)
+- test(page-header): increase component test coverage (#8576)
+- chore(deps): update dependency @rollup/plugin-alias to v6 (#8581)
+- chore(sass): update to v1.93.2 (#8567)
+- docs(web components): Updated root readme (#8561)
+
 ## `@carbon/ibm-products-web-components@0.27.0`
 ### Features :rocket:
 - feat(coachmarkbeacon): implemented as web component (#8488)

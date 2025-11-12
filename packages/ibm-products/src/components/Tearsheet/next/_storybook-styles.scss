@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/utilities/hide-at-breakpoint' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/breakpoint' as *;
+@use '../../StepFlow/story-assets/Tearsheet/step-tearsheet';
 
 $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
 @mixin hideAtLargeScreens() {
@@ -60,5 +61,32 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
 .#{$block-class__next}__influencer,
 .#{$block-class__next}__main-content,
 .#{$block-class__next}__summary-content {
-  padding-block-start: $spacing-07;
+  padding-block: $spacing-07;
+}
+
+.stackButtons {
+  position: absolute;
+  z-index: 9999;
+  display: flex;
+  gap: $spacing-01;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  @include hide-at-sm;
+}
+
+.smallScreenButton {
+  position: absolute;
+  z-index: 9999;
+  display: flex;
+  gap: $spacing-01;
+  inset-block-start: 0;
+  inset-inline-start: $spacing-05;
+  @include hideAtLargeScreens();
+}
+.#{$block-class__next}__header-collapsed {
+  .#{$block-class__next}__header-title {
+    svg {
+      inline-size: $spacing-05;
+    }
+  }
 }

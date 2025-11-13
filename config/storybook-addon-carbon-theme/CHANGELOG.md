@@ -1,4 +1,4 @@
-## `@carbon/storybook-addon-theme@2.28.0-rc.0`
+## `@carbon/storybook-addon-theme@2.28.0`
 ### Housekeeping :house:
 - refactor(sb-theme-addon): remove global dependency (#8588)
 - chore(sb-addon-theme): deprecate addon theme package (#8543)

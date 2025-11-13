@@ -102,7 +102,7 @@
     "jest-canvas-mock": "2.5.2",
     "jest-junit": "^16.0.0",
     "json": "^11.0.0",
-    "lerna": "^8.2.1",
+    "lerna": "^9.0.0",
     "lint-staged": "^16.0.0",
     "lottie-web": "^5.13.0",
     "npm-check-updates": "^19.0.0",

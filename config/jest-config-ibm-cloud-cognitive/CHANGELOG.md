@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.38.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.38.0`
 ### Housekeeping :house:
 - test(PageHeader): react tests clean up with `composeStory` (#8579)
 - chore(sass): update to v1.93.2 (#8567)

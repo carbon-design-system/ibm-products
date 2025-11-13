@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.28.0-rc.0`
+## `@carbon/ibm-products-web-components@0.28.0`
 ### Features :rocket:
 - feat(about-modal): code connect integration (#8568)
 - feat(fullpageerror): code connect integration (#8558)

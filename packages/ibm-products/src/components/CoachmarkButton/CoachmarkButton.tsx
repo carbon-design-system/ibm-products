@@ -51,6 +51,7 @@ const componentName = 'CoachmarkButton';
 
 /**
  * Use CoachmarkButton for the target prop of a Coachmark component.
+ * @deprecated This component is deprecated.
  */
 export const CoachmarkButton = React.forwardRef<
   HTMLButtonElement,

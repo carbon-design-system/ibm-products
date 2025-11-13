@@ -63,6 +63,7 @@ interface CoachmarkDragbarProps {
 /**
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
+ * @deprecated This component is deprecated.
  */
 export const CoachmarkDragbar = React.forwardRef<
   HTMLElement,
@@ -148,6 +149,12 @@ export const CoachmarkDragbar = React.forwardRef<
     );
   }
 );
+
+/**@ts-ignore*/
+CoachmarkDragbar.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 

@@ -42,6 +42,7 @@ export interface CoachmarkOverlayElementProps {
  * Component to be displayed within a CoachmarkOverlayElements container.
  * Can be used 1 to N number, to display content in a Coachmark's overlay
  * in a carousel fashion.
+ * @deprecated This component is deprecated.
  */
 export const CoachmarkOverlayElement = React.forwardRef<
   HTMLDivElement,

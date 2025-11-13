@@ -105,6 +105,7 @@ const defaults = {
 /**
  * Composable container to allow for the displaying of CoachmarkOverlayElement
  * components in a carousel fashion.
+ * @deprecated This component is deprecated.
  */
 export const CoachmarkOverlayElements = React.forwardRef<
   HTMLDivElement,

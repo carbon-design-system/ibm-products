@@ -88,7 +88,7 @@ export default {
           <div>
             This component is deprecated and will be removed in the next major
             version. Please migrate to {/* cspell:disable-next-line */}
-            <a href="/?path=/docs/preview-onboarding-coachmark-next--overview">
+            <a href="/?path=/docs/preview-onboarding-coachmark--overview">
               composable Coachmark
             </a>
             .

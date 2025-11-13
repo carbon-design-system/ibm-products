@@ -15,6 +15,7 @@ import { prefix, carbonPrefix } from '../../globals/settings';
 import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader';
 import Crossroads from '@carbon/icons/es/crossroads/16.js';
 
+const blockClass = `${prefix}--coachmark`;
 const templateTooltip = (args: any = {}) => {
   const handleClick = () => {
     document.querySelector('c4p-coachmark')?.toggleAttribute('open');
@@ -79,6 +80,19 @@ describe('c4p-coachmark', function () {
   beforeEach(() => {
     coachmarkDetailsSignal.get = vi.fn(() => mockDetails);
   });
+  it('has correct host classes', async () => {
+    const el = await fixture(templateTooltip({ align: 'bottom', open: true }));
+
+    expect(el.classList.contains(blockClass)).to.be.true;
+  });
+
+  it('applies className to the containing node', async () => {
+    const customClass = 'test';
+    const el = await fixture(templateTooltip({ align: 'bottom', open: true }));
+    el.classList.add(customClass);
+    expect(el.getAttribute('class')).to.include(customClass);
+  });
+
   it('should render tooltip variant with beacon and popover(includes header and body)', async () => {
     const el = await fixture<CDSCoachmark>(
       templateTooltip({ align: 'bottom', open: true })

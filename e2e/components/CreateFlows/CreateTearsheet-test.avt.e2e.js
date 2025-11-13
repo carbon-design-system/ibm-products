@@ -108,8 +108,6 @@ test.describe('CreateTearsheet @avt', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
 
     // Goto next step by pressing enter
     await page.keyboard.press('Enter');
@@ -130,8 +128,6 @@ test.describe('CreateTearsheet @avt', () => {
     await expect(step3Input1).toBeFocused();
 
     // Switch focus to back button
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
 
@@ -190,7 +186,7 @@ test.describe('CreateTearsheet @avt', () => {
 
     await expect(errorToggle).toBeFocused();
     // Enable simulate error toggle
-    await page.keyboard.press('Enter');
+    await page.keyboard.press('Space');
 
     // Navigate to next button
     await page.keyboard.press('Tab');

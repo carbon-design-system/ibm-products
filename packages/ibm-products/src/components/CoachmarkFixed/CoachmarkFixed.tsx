@@ -250,6 +250,7 @@ export const CoachmarkFixed = React.forwardRef<
   }
 );
 
+/**@ts-ignore*/
 CoachmarkFixed.deprecated = {
   level: 'warn',
   details: `${componentName} is deprecated.`,

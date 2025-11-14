@@ -38,7 +38,8 @@ $block-class: #{$prefix}--set-of-users;
     @extend .#{$carbon-prefix}--modal-scroll-content;
 
     cds-tag {
-      margin-inline-start: 0;
+      margin-block-end: $spacing-02;
+      margin-inline-end: $spacing-02;
     }
   }
 

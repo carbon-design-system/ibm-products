@@ -25,7 +25,7 @@ export const packageJson: string = `{
   "devDependencies": {
    "typescript": "^5.0.0",
     "@vitejs/plugin-react": "4.0.0",
-    "sass": "^1.77.7",
+    "sass": "^1.93.2",
     "vite": "^4.3.8"
   }
 }`;

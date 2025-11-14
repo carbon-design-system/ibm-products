@@ -6,13 +6,8 @@
  */
 
 import { MenuButton, MenuButtonProps, MenuItem } from '@carbon/react';
-import React, {
-  ReactElement,
-  ReactNode,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ReactElement, ReactNode, useRef, useState } from 'react';
+import { useIsomorphicEffect } from '../../../global/js/hooks';
 import { blockClass } from './context';
 import { createOverflowHandler } from '@carbon/utilities';
 import cx from 'classnames';
@@ -50,7 +45,7 @@ export const TearsheetHeaderActions = ({
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (menuButtonVisibility && offsetRef.current) {
       const width = offsetRef.current.offsetWidth;
       document.documentElement.style.setProperty(
@@ -69,7 +64,7 @@ export const TearsheetHeaderActions = ({
     }
     return React.isValidElement(child);
   });
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     //Menu button will be rendered only if they pass the items in TearsheetHeaderActionItem
     if (!containerRef.current || hasOtherChildType.current) {
       return;

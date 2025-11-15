@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@carbon/icons": "^11.70.0",
-    "@carbon/web-components": "^2.39.1",
+    "@carbon/web-components": "^2.42.0",
     "lit": "^3.1.4"
   },
   "devDependencies": {

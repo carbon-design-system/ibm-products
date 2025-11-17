@@ -143,8 +143,8 @@ jobs:
       - name: Install browsers
         working-directory: packages/ibm-products-web-components
         run: yarn playwright install --with-deps
-      # - name: Build web-components project
-        # run: yarn build:packages
+      - name: Build web-components project
+        run: yarn ci-check:test:c4p-wc:build
       - name: CI tests for products web components
         run: yarn ci-check:test:c4p-wc --coverage
       - name: Upload coverage reports to Codecov with GitHub Action

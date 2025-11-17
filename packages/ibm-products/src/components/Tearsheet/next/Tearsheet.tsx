@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  useLayoutEffect,
   useState,
   useRef,
   RefObject,
@@ -15,6 +14,7 @@ import React, {
   FC,
   useEffect,
 } from 'react';
+import { useIsomorphicEffect } from '../../../global/js/hooks';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
@@ -191,7 +191,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
 
     const renderPortalUse = usePortalTarget(portalTarget);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const AILabelWidth =
         modalRef.current?.querySelector(`.${carbonPrefix}--ai-label`)
           ?.clientWidth ?? 0;
@@ -229,7 +229,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       verticalGap,
     ]);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       if (bodyRef.current) {
         notifyStack?.(uniqueId.current, open, bodyRef.current);
       }

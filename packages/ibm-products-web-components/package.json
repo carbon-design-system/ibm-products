@@ -92,7 +92,7 @@
     "cssnano": "^7.0.6",
     "eslint": "^9.14.0",
     "eslint-config-carbon": "^3.25.0",
-    "globby": "^15.0.0",
+    "globby": "^16.0.0",
     "happy-dom": "^20.0.0",
     "playwright": "^1.56.1",
     "postcss": "^8.4.47",

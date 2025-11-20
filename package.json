@@ -126,7 +126,7 @@
     "body-parser": "2.2.0",
     "braces": "^3.0.3",
     "cross-spawn": "7.0.6",
-    "form-data": "4.0.4",
+    "form-data": "4.0.5",
     "micromatch": "4.0.8",
     "react-is": "^19.0.0",
     "semver": "7.7.3",

@@ -102,6 +102,10 @@ const CustomizeColumnsTearsheet = ({
   const string = searchText.trim().toLowerCase();
 
   useEffect(() => {
+    // prevent this effect from running when columns are being resized
+    if (!isOpen) {
+      return;
+    }
     if (prevColumnDefinitions.current !== columnDefinitions) {
       setColumnObjects(columnDefinitions);
     }

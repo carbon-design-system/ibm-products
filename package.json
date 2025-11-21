@@ -42,7 +42,7 @@
     "lint:license:staged": "scripts/check-license.cjs -w",
     "lint:js": "eslint packages --fix",
     "lint:styles": "stylelint '**/*.scss' --fix",
-    "prepare": "husky install",
+    "prepare": "husky",
     "postinstall": "husky",
     "run-all": "lerna run --stream --prefix --loglevel success",
     "release-telemetry": "cd packages/ibm-products && yarn telemetry-config && cd ../ibm-products-web-components && yarn telemetry-config",

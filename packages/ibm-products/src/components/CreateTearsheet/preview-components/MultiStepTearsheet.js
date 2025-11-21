@@ -78,7 +78,7 @@ export const MultiStepTearsheet = (
   const [isInvalid, setIsInvalid] = useState(false);
   const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
     useState(false);
-
+  const [selIndex, setSelIndex] = useState(0);
   const clearCreateData = () => {
     setStepOneTextInputValue('');
     setTopicDescriptionValue('');
@@ -185,6 +185,7 @@ export const MultiStepTearsheet = (
                 placeholder="Enter topic version"
                 onChange={(event) => setTopicVersionValue(event.target.value)}
               />
+
               {hasSubmitError && (
                 <InlineNotification
                   kind="error"

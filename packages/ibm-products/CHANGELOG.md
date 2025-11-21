@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.79.0-rc.0`
+## `@carbon/ibm-products@2.79.0`
 ### Features :rocket:
 - feat: composable tearsheet initial implementation (#8337)
 

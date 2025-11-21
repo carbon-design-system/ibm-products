@@ -78,6 +78,7 @@ $block-class: #{$prefix}--coachmark-beacon;
 
   .#{$block-class}__target::part(button) {
     background-color: transparent;
+    box-shadow: none;
     max-block-size: 0;
     min-block-size: 0;
     padding-inline: 0;

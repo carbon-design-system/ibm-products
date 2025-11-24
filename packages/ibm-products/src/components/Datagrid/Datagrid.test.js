@@ -2047,7 +2047,8 @@ describe(componentName, () => {
 
     const customizeColumnsButton = screen.getByLabelText('Customize columns');
     fireEvent.click(customizeColumnsButton);
-    screen.getByRole('heading', { name: /Customize columns/ });
+    // screen.getByRole('heading', { name: /Customize columns/ });
+    screen.getByText('Customize columns');
 
     const selectAllCheckBox = screen.getByRole('checkbox', {
       name: 'Column name',

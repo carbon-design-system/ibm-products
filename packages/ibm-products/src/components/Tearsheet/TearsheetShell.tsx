@@ -505,14 +505,15 @@ export const TearsheetShell = React.forwardRef(
                         </Heading>
                       </Section>
                     )}
-                    <Section
-                      level={2}
-                      className={cx(
-                        `${bcModalHeader}__heading`,
-                        `${bc}__heading`
-                      )}
-                    >
-                      {title}
+                    <Section level={2}>
+                      <Heading
+                        className={cx(
+                          `${bcModalHeader}__heading`,
+                          `${bc}__heading`
+                        )}
+                      >
+                        {title}
+                      </Heading>
                     </Section>
                     <Wrap className={`${bc}__header-description`}>
                       {description}

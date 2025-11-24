@@ -505,7 +505,7 @@ export const TearsheetShell = React.forwardRef(
                         </Heading>
                       </Section>
                     )}
-                    <Section level={2}>
+                    <Section level={3}>
                       <Heading
                         className={cx(
                           `${bcModalHeader}__heading`,

@@ -511,6 +511,7 @@ export const TearsheetShell = React.forwardRef(
                         `${bcModalHeader}__heading`,
                         `${bc}__heading`
                       )}
+                      role="heading"
                     >
                       {title}
                     </Section>

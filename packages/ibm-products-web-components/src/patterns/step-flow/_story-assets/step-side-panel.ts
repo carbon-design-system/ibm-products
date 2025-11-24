@@ -9,7 +9,7 @@
 
 import { html, LitElement, nothing } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@carbon/ibm-products-web-components/es/components/side-panel/index.js';
+import '../../../components/side-panel/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/progress-indicator/index.js';

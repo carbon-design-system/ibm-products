@@ -18,7 +18,7 @@ import { SignalWatcher } from '@lit-labs/signals';
 import '../step-group';
 import styles from './step-side-panel.scss?lit';
 
-const blockClass = 'c4p--create-side-panel';
+const blockClass = 'c4p--step-side-panel';
 
 interface FormStateType {
   email?: string;

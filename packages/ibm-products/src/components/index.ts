@@ -64,7 +64,23 @@ export {
   useFeatureFlags as preview__useFeatureFlags,
 } from './FeatureFlags';
 export * as preview__PageHeader from './PageHeader/next';
-export * as preview__Tearsheet from './Tearsheet/next';
+
+export { Tearsheet as preview__Tearsheet } from './Tearsheet/next';
+export type {
+  TearsheetProps,
+  TearsheetComponentType,
+  FooterProps,
+  MainContentProps,
+  SummaryContentProps,
+  TearsheetBodyProps,
+  InfluencerProps,
+  TearsheetHeaderProps,
+  TearsheetNavigationBarProps,
+  TearsheetScrollButtonProps,
+  TearsheetHeaderActionItemProps,
+  TearsheetHeaderActionsProps,
+  TearsheetHeaderContentProps,
+} from './Tearsheet/next';
 
 // Preview candidates
 export {

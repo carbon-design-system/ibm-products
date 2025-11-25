@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2025
+// Copyright IBM Corp. 2025, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -24,6 +24,11 @@ $baseClass: #{$prefix}--checklist;
   .#{$baseClass}__toggle {
     margin-block-start: calc(-1 * spacing.$spacing-03);
     margin-inline: auto calc(-1 * spacing.$spacing-03);
+  }
+
+  #{$carbon-prefix}-icon-button::part(button):focus {
+    box-shadow: none;
+    outline: 2px solid theme.$focus;
   }
 }
 

@@ -65,7 +65,10 @@ export {
 } from './FeatureFlags';
 export * as preview__PageHeader from './PageHeader/next';
 
-export { Tearsheet as preview__Tearsheet } from './Tearsheet/next';
+export {
+  Tearsheet as preview__Tearsheet,
+  StackProvider,
+} from './Tearsheet/next';
 export type {
   TearsheetProps,
   TearsheetComponentType,
@@ -80,6 +83,7 @@ export type {
   TearsheetHeaderActionItemProps,
   TearsheetHeaderActionsProps,
   TearsheetHeaderContentProps,
+  StackContextType,
 } from './Tearsheet/next';
 
 // Preview candidates

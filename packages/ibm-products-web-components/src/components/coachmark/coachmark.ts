@@ -166,19 +166,6 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   static styles = styles;
-
-  /**
-   * The name of the custom event fired when the coachmark is opened.
-   */
-  static get eventOnCoachmarkOpened() {
-    return `${prefix}-coachmark-opened`;
-  }
-  /**
-   * The name of the custom event fired after this coachmark is closed.
-   */
-  static get eventClose() {
-    return `${prefix}-coachmark-closed`;
-  }
 }
 
 export default CDSCoachmark;

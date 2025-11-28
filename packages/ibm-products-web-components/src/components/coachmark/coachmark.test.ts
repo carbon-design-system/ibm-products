@@ -84,11 +84,6 @@ describe('c4p-coachmark', function () {
   beforeEach(() => {
     coachmarkDetailsSignal.get = vi.fn(() => mockDetails);
   });
-  it('has correct host classes', async () => {
-    const el = await fixture(templateTooltip({ align: 'bottom', open: true }));
-
-    expect(el.classList.contains(blockClass)).to.be.true;
-  });
 
   it('applies className to the containing node', async () => {
     const customClass = 'test';

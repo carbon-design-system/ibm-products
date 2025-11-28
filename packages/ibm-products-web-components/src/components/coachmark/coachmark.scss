@@ -9,7 +9,6 @@ $css--plex: true !default;
 
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/ibm-products-styles/scss/config';
 @use '@carbon/ibm-products-styles/scss/components/Coachmark/_coachmark-beacon';
 
@@ -18,7 +17,7 @@ $carbon-prefix: config.$carbon-prefix;
 
 $block-class: #{$prefix}--coachmark;
 
-.my-popover {
+.#{$block-class}--popover {
   position: fixed;
 
   /* stylelint-disable-next-line selector-type-no-unknown */

@@ -8,14 +8,12 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/ibm-products-styles/scss/config';
 
 $prefix: config.$pkg-prefix;
 $carbon-prefix: config.$carbon-prefix;
 
-:host {
+:host(#{$prefix}-coachmark-body) {
   display: block;
   padding: 0 $spacing-05 $spacing-05;
 }

@@ -10,38 +10,26 @@ import { signal } from '@lit-labs/signals';
 
 interface CoachmarkDetailsType {
   open?: boolean;
-  align?: string;
   floating?: boolean;
 }
 
 export const coachmarkDetailsSignal = signal<CoachmarkDetailsType>({
   open: false,
-  align: 'bottom',
   floating: false,
 });
 
 export const resetCoachmarkDetailsSignal = () => {
   coachmarkDetailsSignal.set({
     open: false,
-    align: 'bottom',
     floating: false,
   });
 };
 export const updateCoachmarkDetailsSignal = ({ name, detail }) => {
-  if (name === 'open') {
-    coachmarkDetailsSignal.set({
-      ...coachmarkDetailsSignal.get(),
-      open: detail,
-    });
-  } else if (name === 'align') {
-    coachmarkDetailsSignal.set({
-      ...coachmarkDetailsSignal.get(),
-      align: detail,
-    });
-  } else if (name === 'floating') {
-    coachmarkDetailsSignal.set({
-      ...coachmarkDetailsSignal.get(),
-      floating: detail,
-    });
+  // Fetch current value once
+  const currentValue = coachmarkDetailsSignal.get();
+  // Only set if value really changes
+  if (currentValue[name] !== detail) {
+    const newValue = { ...currentValue, [name]: detail };
+    coachmarkDetailsSignal.set(newValue);
   }
 };

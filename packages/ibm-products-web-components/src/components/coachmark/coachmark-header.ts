@@ -22,8 +22,6 @@ import {
 } from './coachmark-context';
 import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader';
 
-const blockClass = `${prefix}--coachmark-header`;
-
 /**
  * coachmark-header for content header section
  * @element c4p-coachmark-header
@@ -33,17 +31,14 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   /**
    * Tooltip text and aria label for the Close button icon.
    */
-  closeIconDescription?: string = 'close icon';
+  @property({ reflect: true })
+  closeIconDescription?: string = '';
 
   /**
    * Tooltip text and aria label for the Drag button icon.
    */
   @property({ reflect: true })
-  dragIconDescription?: string = 'drag icon';
-
-  firstUpdated() {
-    this.classList.add(blockClass);
-  }
+  dragIconDescription?: string = '';
 
   private _handleClick = () => {
     updateCoachmarkDetailsSignal({
@@ -54,33 +49,30 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   render() {
     const { floating } = coachmarkDetailsSignal.get();
-
     return html`
-      ${
-        floating
-          ? html`
-              <cds-button
-                kind="ghost"
-                size="sm"
-                class="drag-handle"
-                iconDescription="${this.dragIconDescription}"
-                hasIconOnly
-              >
-                ${iconLoader(Draggable, { slot: 'icon', class: 'drag__icon' })}
-              </cds-button>
-            `
-          : nothing
-      }
-        <slot name="header"></slot>
-        <cds-button
-          kind="ghost"
-          size="sm"
-          iconDescription="${this.closeIconDescription}"
-          hasIconOnly
-          @click=${this._handleClick}
-        >
-           ${iconLoader(Close, { slot: 'icon', class: 'close__icon' })}
-           </cds-button
+      ${floating
+        ? html`
+            <cds-button
+              kind="ghost"
+              size="sm"
+              class="${prefix}--coachmark-header-drag-handle"
+              iconDescription="${this.dragIconDescription}"
+              hasIconOnly
+            >
+              ${iconLoader(Draggable, { slot: 'icon', class: 'drag__icon' })}
+            </cds-button>
+          `
+        : nothing}
+      <slot name="header"></slot>
+      <cds-button
+        kind="ghost"
+        size="sm"
+        iconDescription="${this.closeIconDescription}"
+        hasIconOnly
+        @click=${this._handleClick}
+      >
+        ${iconLoader(Close, { slot: 'icon', class: 'close__icon' })}
+      </cds-button>
     `;
   }
   static styles = styles;

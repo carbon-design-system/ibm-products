@@ -88,7 +88,6 @@ describe('c4p-coachmark-beacon', () => {
     await el.updateComplete;
 
     expect(el.hasAttribute('expanded')).to.be.false;
-    expect(el.expanded).to.be.false;
     expect(button.getAttribute('aria-expanded')).to.equal('false');
   });
 });

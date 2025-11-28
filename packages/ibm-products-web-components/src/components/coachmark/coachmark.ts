@@ -64,14 +64,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   @property({ reflect: true })
   dropShadow?: boolean = false;
 
-  @state()
-  private _open: boolean = true;
-
   private dragCleanup: (() => void) | null = null;
-
-  private handleClick = () => {
-    this._open = !this._open;
-  };
 
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -83,13 +76,13 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   private setupDraggable() {
     const popover = this.shadowRoot?.querySelector(
-      '.my-popover'
+      `.${blockClass}--popover`
     ) as HTMLElement;
     const popoverContent = popover.querySelector(
       'cds-popover-content'
     ) as HTMLElement;
     const wrapper = popoverContent.querySelector(
-      '.draggable-wrapper'
+      `.${blockClass}--wrapper`
     ) as HTMLElement;
     const slot = wrapper.querySelector('slot');
     const assignedElements = slot?.assignedElements({ flatten: true });
@@ -135,7 +128,6 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   firstUpdated() {
-    this.classList.add(blockClass);
     if (this.floating) {
       this.classList.add(`${blockClass}--floating`);
       this.setupDraggable();
@@ -158,17 +150,16 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   render() {
     return html`
       <cds-popover
-        class="my-popover"
-        ?open=${this._open}
+        class="${blockClass}--popover"
+        ?open=${this.open}
         .caret=${this.floating === true ? false : true}
         ?highContrast=${this.highContrast}
         align=${this.align}
         ?dropShadow=${this.dropShadow}
-        @click="${this.handleClick}"
       >
         <slot name="trigger"></slot>
         <cds-popover-content>
-          <div class="draggable-wrapper">
+          <div class="${blockClass}--wrapper">
             <slot></slot>
           </div>
         </cds-popover-content>
@@ -177,6 +168,19 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   static styles = styles;
+
+  /**
+   * The name of the custom event fired when the coachmark is opened.
+   */
+  static get eventOnCoachmarkOpened() {
+    return `${prefix}-coachmark-opened`;
+  }
+  /**
+   * The name of the custom event fired after this coachmark is closed.
+   */
+  static get eventClose() {
+    return `${prefix}-coachmark-closed`;
+  }
 }
 
 export default CDSCoachmark;

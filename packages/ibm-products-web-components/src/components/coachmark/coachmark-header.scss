@@ -7,26 +7,26 @@
 
 $css--plex: true !default;
 
-@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/ibm-products-styles/scss/config';
 
-:host {
+$prefix: config.$pkg-prefix;
+
+:host(#{$prefix}-coachmark-header) {
   display: flex;
   justify-content: flex-end;
 
-  .drag-handle {
+  .#{$prefix}--coachmark-header-drag-handle {
     margin-inline-end: auto;
   }
 
   .drag__icon {
     /* stylelint-disable-next-line color-named */
-    fill: white;
+    fill: $background;
   }
 
   .close__icon {
     /* stylelint-disable-next-line color-named */
-    fill: white;
+    fill: $background;
   }
 }

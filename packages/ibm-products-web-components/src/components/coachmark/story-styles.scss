@@ -38,15 +38,6 @@
   }
 }
 
-.coachmark-header {
-  display: flex;
-  /* stylelint-disable-next-line selector-type-no-unknown */
-  cds-button {
-    align-self: flex-end;
-    margin-inline-start: $spacing-04;
-  }
-}
-
 .trigger-btn {
   margin: $spacing-03;
 }

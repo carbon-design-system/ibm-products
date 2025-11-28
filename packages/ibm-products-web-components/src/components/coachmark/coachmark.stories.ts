@@ -72,7 +72,10 @@ export const Tooltip = {
             slot="trigger"
           >
           </c4p-coachmark-beacon>
-          <c4p-coachmark-header class="coachmark-header"></c4p-coachmark-header>
+          <c4p-coachmark-header
+            closeIconDescription="close icon"
+            class="coachmark-header"
+          ></c4p-coachmark-header>
           <c4p-coachmark-body class="coachmark-body">
             <h2>Hello World</h2>
             <p>this is a description test</p>
@@ -96,7 +99,6 @@ export const Floating = {
     const handleClick = () => {
       document.querySelector('c4p-coachmark')?.toggleAttribute('open');
     };
-
     return html`
       <style>
         ${styles}
@@ -115,7 +117,11 @@ export const Floating = {
             @click=${handleClick}
             >Show information ${iconLoader(Crossroads as any, { slot: 'icon' })}
           </cds-button>
-          <c4p-coachmark-header class="coachmark-header"></c4p-coachmark-header>
+          <c4p-coachmark-header
+            closeIconDescription="close icon"
+            dragIconDescription="drag icon"
+            class="coachmark-header"
+          ></c4p-coachmark-header>
           <c4p-coachmark-body class="coachmark-body">
             <h2>Hello World</h2>
             <p>this is a description test</p>

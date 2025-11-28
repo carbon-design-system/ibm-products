@@ -8,14 +8,12 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './coachmark.scss?lit';
-// import { classMap } from 'lit/directives/class-map.js';
 import { SignalWatcher } from '@lit-labs/signals';
-// import { coachmarkDetailsSignal } from './coachmark-context';
 import '@carbon/web-components/es/components/popover/index.js';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import { makeDraggable } from '../../utilities/makeDraggable/makeDraggable';

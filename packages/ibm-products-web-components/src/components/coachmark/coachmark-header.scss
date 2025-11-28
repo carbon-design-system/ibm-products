@@ -20,12 +20,12 @@ $prefix: config.$pkg-prefix;
     margin-inline-end: auto;
   }
 
-  .drag__icon {
+  .#{$prefix}--coachmark-header-drag-icon {
     /* stylelint-disable-next-line color-named */
     fill: $background;
   }
 
-  .close__icon {
+  .#{$prefix}--coachmark-header-close-icon {
     /* stylelint-disable-next-line color-named */
     fill: $background;
   }

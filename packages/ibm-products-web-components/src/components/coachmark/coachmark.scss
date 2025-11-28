@@ -21,7 +21,7 @@ $block-class: #{$prefix}--coachmark;
   position: fixed;
 
   /* stylelint-disable-next-line selector-type-no-unknown */
-  cds-popover-content.is-dragging::part(content) {
+  #{$carbon-prefix}-popover-content.is-dragging::part(content) {
     border-radius: 0;
     box-shadow:
       0 0 0 $spacing-01 $icon-inverse,

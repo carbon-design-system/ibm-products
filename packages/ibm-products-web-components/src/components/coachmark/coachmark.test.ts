@@ -15,7 +15,6 @@ import { prefix, carbonPrefix } from '../../globals/settings';
 import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader';
 import Crossroads from '@carbon/icons/es/crossroads/16.js';
 
-const blockClass = `${prefix}--coachmark`;
 const templateTooltip = (args: any = {}) => {
   const handleClick = () => {
     document.querySelector('c4p-coachmark')?.toggleAttribute('open');

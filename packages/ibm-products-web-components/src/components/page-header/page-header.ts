@@ -118,7 +118,7 @@ class CDSPageHeader extends LitElement {
       },
       {
         root: null,
-        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+        rootMargin: `${(predefinedContentPadding + headerOffset + 40) * -1}px 0px 0px 0px`,
         threshold: 0.95,
       }
     );
@@ -143,7 +143,7 @@ class CDSPageHeader extends LitElement {
         root: null,
         // 48 -> breadcrumb bar
         // 18 -> content padding
-        rootMargin: `${(totalHeaderOffset + 48 + 18) * -1}px 0px 0px 0px`,
+        rootMargin: `${(headerOffset + 48 + 18) * -1}px 0px 0px 0px`,
         threshold: 0.95,
       }
     );

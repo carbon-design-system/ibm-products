@@ -24,7 +24,7 @@ export default class SetOfTags extends LitElement {
   @state()
   hiddenTags: TagType[] = [];
 
-  @property({ type: Array, attribute: 'tags-data', reflect: true })
+  @property({ type: Array })
   tagsData: TagType[] = [];
 
   @query(`.${blockClass}`)

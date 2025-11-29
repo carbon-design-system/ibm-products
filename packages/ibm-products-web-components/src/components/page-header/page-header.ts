@@ -14,7 +14,6 @@ import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { pageHeaderContext } from './context';
-import { getHeaderOffset } from './utils';
 import CDSPageHeaderContent from './page-header-content';
 
 export interface pageHeaderContextType {
@@ -42,6 +41,7 @@ class CDSPageHeader extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     const contentElement = this.querySelector(`${prefix}-page-header-content`);
+    const headerOffset = 48;
 
     this.resizeObserver = new ResizeObserver((entries) => {
       const pageHeaderElement = entries[0];
@@ -56,7 +56,6 @@ class CDSPageHeader extends LitElement {
             parseFloat(getComputedStyle(contentEl)?.paddingBlockEnd)
           : 0;
       const totalContentHeight = contentHeight + padding;
-      const headerOffset = getHeaderOffset(this);
       const contentPadding = contentEl instanceof CDSPageHeaderContent ? 48 : 0;
 
       this.style.setProperty(
@@ -78,7 +77,6 @@ class CDSPageHeader extends LitElement {
     this.resizeObserver.observe(this);
 
     const predefinedContentPadding = 24;
-    const totalHeaderOffset = getHeaderOffset(this);
     const contentObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -97,7 +95,7 @@ class CDSPageHeader extends LitElement {
       },
       {
         root: null,
-        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+        rootMargin: `${(predefinedContentPadding + headerOffset + 40) * -1}px 0px 0px 0px`,
         threshold: 0.1,
       }
     );

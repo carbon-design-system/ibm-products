@@ -110,10 +110,13 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
     return html`
       <div class="${classes}">
         <div class="${blockClass}__header">
-          ${iconLoader(Idea20, {
-            slot: 'icon',
-            class: `${blockClass}__icon-idea`,
-          })}
+          <div class="${blockClass}__icon-idea">
+            <slot name="icon">
+              ${iconLoader(Idea20, {
+                slot: 'icon',
+              })}
+            </slot>
+          </div>
           ${this._getTitle()}
           <slot name="header"></slot>
           <cds-button
@@ -135,8 +138,7 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
             }}
           >
             <div class="${blockClass}__navigation">
-              ${this._getButton()}
-              <slot name="footer"></slot>
+              <slot name="footer">${this._getButton()}</slot>
             </div>
           </summary>
         </details>

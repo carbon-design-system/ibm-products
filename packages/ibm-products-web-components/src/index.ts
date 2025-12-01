@@ -22,3 +22,5 @@ export { default as CDSPageHeaderHeroImage } from './components/page-header/page
 export { default as CDSPageHeaderTabs } from './components/page-header/page-header-tabs';
 export { default as CDSGuideBanner } from './components/guide-banner/guide-banner';
 export { default as CDSGuideBannerElement } from './components/guide-banner/guide-banner-element';
+export { default as CDSCoachmark } from './components/coachmark/coachmark';
+export { default as CDSCoachmarkBeacon } from './components/coachmark/coachmark-beacon/coachmark-beacon';

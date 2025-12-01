@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,9 +24,10 @@ import { BEACON_KIND, COACHMARK_OVERLAY_KIND } from './utils/enums';
 import mdx from './Coachmark.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Preview Candidate/Onboarding/Coachmark/Coachmark',
+  title: 'Deprecated/Coachmark/Coachmark',
   component: Coachmark,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
@@ -79,6 +80,25 @@ export default {
       description: 'Tooltip text and aria label for the Close button icon.',
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version. Please migrate to {/* cspell:disable-next-line */}
+            <a href="/?path=/docs/preview-onboarding-coachmark--overview">
+              composable Coachmark
+            </a>
+            .
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
   parameters: {
     styles,
     docs: {
@@ -109,12 +129,12 @@ const Template = (args) => {
   );
 
   return !['fixed', 'floating', 'stacked'].includes(args.overlayKind) ? (
-    <div style={{ width: '4000px', height: '2000px' }}>
+    <div style={{ width: '1000px', height: '500px' }}>
       <div
         style={{
           position: 'absolute',
-          top: '1000px',
-          left: '2000px',
+          top: '250px',
+          left: '150px',
         }}
         ref={ref}
       >

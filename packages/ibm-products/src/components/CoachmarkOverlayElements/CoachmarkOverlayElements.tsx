@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -105,6 +105,7 @@ const defaults = {
 /**
  * Composable container to allow for the displaying of CoachmarkOverlayElement
  * components in a carousel fashion.
+ * @deprecated This component is deprecated.
  */
 export const CoachmarkOverlayElements = React.forwardRef<
   HTMLDivElement,

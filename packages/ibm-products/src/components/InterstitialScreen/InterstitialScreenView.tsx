@@ -10,12 +10,7 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { pkg } from '../../../../settings';
-import './_interstitial-screen-view.scss';
-
-// Carbon and package components we use.
-/* TODO: @import(s) of carbon components and other package components. */
+import { pkg } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--interstitial-screen-view`;
@@ -35,7 +30,7 @@ export interface InterstitialScreenViewProps extends PropsWithChildren {
   /**
    * The label to pass to the ProgressStep component.
    */
-  stepTitle: string;
+  stepTitle?: string;
 
   /**
    * Optional method that takes in a message id and returns an internationalized string.
@@ -43,7 +38,7 @@ export interface InterstitialScreenViewProps extends PropsWithChildren {
   translateWithId?: (id: string) => string;
 }
 /**
- * An Onboarding component intended to be used as the child elements of the InterstitialScreen component.
+ * An Onboarding component intended to be used as the child elements of the InterstitialScreen body component.
  */
 export const InterstitialScreenView = React.forwardRef<
   HTMLDivElement,
@@ -62,21 +57,11 @@ export const InterstitialScreenView = React.forwardRef<
   ) => {
     return (
       <div
-        role="complementary"
-        aria-label={stepTitle}
         {
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
-          {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
-          }
-        )}
+        className={`${blockClass} ${className}`}
         ref={ref}
       >
         {children}

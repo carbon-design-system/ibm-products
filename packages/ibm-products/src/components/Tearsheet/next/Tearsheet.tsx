@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  useLayoutEffect,
   useState,
   useRef,
   RefObject,
@@ -13,7 +12,9 @@ import React, {
   ReactNode,
   ForwardedRef,
   FC,
+  useEffect,
 } from 'react';
+import { useIsomorphicEffect } from '../../../global/js/hooks';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
@@ -53,7 +54,9 @@ import {
 } from './TearsheetHeaderActions';
 import { breakpoints } from '@carbon/layout';
 import { usePortalTarget } from '../../../global/js/hooks/usePortalTarget';
+import { useStackContext } from './StackContext';
 import { useMatchMedia } from '../../../global/js/hooks/useMatchMedia';
+import { useId } from '../../../global/js/utils/useId';
 
 /**
  * ----------
@@ -61,7 +64,7 @@ import { useMatchMedia } from '../../../global/js/hooks/useMatchMedia';
  * ----------
  */
 
-export interface TearsheetProps {
+export interface TearsheetProps extends ComposedModalProps {
   children?: React.ReactNode;
 
   /**
@@ -69,7 +72,18 @@ export interface TearsheetProps {
    */
   open?: boolean;
 
+  /**
+   * User can pass any class names to add to the modal wrapper
+   */
   className?: string;
+  /**
+   * User can pass any class names that will added to the modal container, rather than the wrapper
+   */
+  containerClassName?: string;
+  /**
+   * the defines the gap from top of the view port. Defaulted to 3rem
+   */
+  verticalGap?: string;
   /**
    * Default influencer takes 256px, this allow to override eg: 300px , 20rem
    */
@@ -130,7 +144,7 @@ export type TearsheetComponentType = React.ForwardRefExoticComponent<
   SummaryContent: FC<SummaryContentProps>;
   Body: FC<TearsheetBodyProps>;
   Footer: FC<FooterProps>;
-} & ComposedModalProps;
+};
 
 export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
   (
@@ -144,15 +158,17 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       ariaLabel,
       onClose,
       selectorPrimaryFocus,
-      open,
+      open = false,
       portalTarget,
+      verticalGap,
+      containerClassName,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const carbonPrefix = usePrefix();
     const localRef = useRef(undefined);
-    const bodyRef = useRef(undefined);
+    const bodyRef = useRef<HTMLDivElement>(null);
     const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
@@ -167,9 +183,15 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     const body = arr.find((child: any) => child.type === TearsheetBody);
     const footer = arr.find((child: any) => child.type === Footer);
 
+    const uniqueId = useRef(useId());
+    const { notifyStack, stack, getDepth, getScaleFactor, getBlockSizeChange } =
+      useStackContext();
+
+    const [depth, setDepth] = useState(0);
+
     const renderPortalUse = usePortalTarget(portalTarget);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const AILabelWidth =
         modalRef.current?.querySelector(`.${carbonPrefix}--ai-label`)
           ?.clientWidth ?? 0;
@@ -191,9 +213,48 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
           `${summaryContentWidth}`
         );
       }
+      if (verticalGap) {
+        document.documentElement.style.setProperty(
+          '--tearsheet-vertical-gap',
+          `${verticalGap}`
+        );
+      }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isSm]);
+    }, [
+      isSm,
+      rest.decorator,
+      influencerWidth,
+      summaryContentWidth,
+      verticalGap,
+    ]);
+
+    useIsomorphicEffect(() => {
+      if (bodyRef.current) {
+        notifyStack?.(uniqueId.current, open, bodyRef.current);
+      }
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open]);
+
+    useEffect(() => {
+      if (stack?.length > 0) {
+        const stackDepth = getDepth?.(uniqueId.current),
+          blockSizeChange = getBlockSizeChange?.(uniqueId.current),
+          scaleFactor = getScaleFactor?.(uniqueId.current);
+
+        setDepth(stackDepth as number);
+
+        modalRef.current.style.setProperty('--stack-depth', stackDepth + '');
+        modalRef.current.style.setProperty(
+          '--block-size-change',
+          blockSizeChange
+        );
+        modalRef.current.style.setProperty('--scale-factor', scaleFactor + '');
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [stack]);
+
     return renderPortalUse(
       <TearsheetContext.Provider
         value={{
@@ -215,6 +276,8 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
             className={cx(blockClass, className, {
               [`${blockClass}--wide`]: variant === 'wide',
               [`${blockClass}--narrow`]: variant === 'narrow',
+              [`${blockClass}--stacked`]: depth > 0,
+              [`${blockClass}--stack-activated`]: stack.length > 1,
               [`${blockClass}--has-ai-label`]:
                 !!rest.decorator &&
                 rest.decorator['type']?.displayName === 'AILabel',
@@ -223,7 +286,10 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
                 rest.decorator['type']?.displayName !== 'AILabel',
               [`${blockClass}--has-close`]: hasCloseIcon,
             })}
-            containerClassName={cx(`${blockClass}__container`, {})}
+            containerClassName={cx(
+              `${blockClass}__container`,
+              containerClassName
+            )}
             {...{ onClose, open, selectorPrimaryFocus }}
             ref={modalRef}
             selectorsFloatingMenus={[
@@ -258,14 +324,9 @@ export interface FooterProps {
 }
 const Footer = forwardRef<HTMLDivElement, FooterProps>(({ children }, ref) => {
   return (
-    <Layer
-      as="footer"
-      withBackground
-      className={`${blockClass}__footer`}
-      ref={ref}
-    >
+    <footer className={`${blockClass}__footer`} ref={ref}>
       {children}
-    </Layer>
+    </footer>
   );
 });
 

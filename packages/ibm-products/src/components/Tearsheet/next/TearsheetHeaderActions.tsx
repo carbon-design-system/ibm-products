@@ -5,18 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Button, MenuButton, MenuButtonProps, MenuItem } from '@carbon/react';
-import React, {
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
-import PropTypes from 'prop-types';
+import { MenuButton, MenuButtonProps, MenuItem } from '@carbon/react';
+import React, { ReactElement, ReactNode, useRef, useState } from 'react';
+import { useIsomorphicEffect } from '../../../global/js/hooks';
 import { blockClass } from './context';
 import { createOverflowHandler } from '@carbon/utilities';
+import cx from 'classnames';
 /**
  * ----------------
  * TearsheetHeaderActions
@@ -51,7 +45,7 @@ export const TearsheetHeaderActions = ({
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (menuButtonVisibility && offsetRef.current) {
       const width = offsetRef.current.offsetWidth;
       document.documentElement.style.setProperty(
@@ -70,7 +64,7 @@ export const TearsheetHeaderActions = ({
     }
     return React.isValidElement(child);
   });
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     //Menu button will be rendered only if they pass the items in TearsheetHeaderActionItem
     if (!containerRef.current || hasOtherChildType.current) {
       return;
@@ -95,7 +89,15 @@ export const TearsheetHeaderActions = ({
       {children}
 
       {!hasOtherChildType.current && (
-        <span data-offset data-hidden ref={offsetRef}>
+        <span
+          data-offset
+          data-hidden
+          ref={offsetRef}
+          className={cx(`${blockClass}__header-actions-menuButton`, {
+            [`${blockClass}__header-actions-menuButton--hidden`]:
+              hiddenItems.length === 0,
+          })}
+        >
           <MenuButton size="sm" {...menuButtonProps}>
             {hiddenItems.map((item) => {
               if (!React.isValidElement(item)) {

@@ -1,3 +1,24 @@
+## `@carbon/ibm-products@2.80.0-rc.0`
+### Features :rocket:
+- feat(InlineTip): adding figma code connect file (#8611)
+- feat(interstitialscreen): code connect integration (#8572)
+- feat(Tearsheet): stacking, unit test, design review changes and fixes (#8563)
+- feat(web-terminal): code connect integration (#8497)
+
+### Bug fixes :bug:
+- fix: tearsheet entry and exit animations not working after carbon upgrade (#8674)
+- fix(CreateTearSheet): Modified the useCreateComponentFocus hook (#8076)
+- fix: remove use client directive warnings from build (#8641)
+- fix: prevent disable buttons hook from running on column resize (#8666)
+- fix: prevent customize column hook from running on column resize (#8640)
+- fix(CoachmarkStack): stack closing issue (#8635)
+- fix: replace uselayouteffect with isomorphic effect (#8630)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#8638)
+- chore(Tearsheet): replace h2 and h3 tags with Section and Heading (#8675)
+- chore: add deprecation notice to coachmark (#8634)
+
 ## `@carbon/ibm-products@2.79.0`
 ### Features :rocket:
 - feat: composable tearsheet initial implementation (#8337)

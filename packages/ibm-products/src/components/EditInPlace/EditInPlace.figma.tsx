@@ -15,6 +15,8 @@ figma.connect(
       // These props were automatically mapped based on your linked code:
       size: figma.enum('Size', {
         Small: 'sm',
+        Medium: 'md',
+        Large: 'lg',
       }),
       invalid: figma.enum('State', {
         Active: false,

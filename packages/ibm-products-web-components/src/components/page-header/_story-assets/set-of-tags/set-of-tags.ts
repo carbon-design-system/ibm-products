@@ -124,7 +124,9 @@ export default class SetOfTags extends LitElement {
       event instanceof PointerEvent ||
       (event instanceof KeyboardEvent && [' ', 'Enter'].includes(event.key))
     ) {
-      this.isPopoverOpen = !this.isPopoverOpen;
+      requestAnimationFrame(() => {
+        this.isPopoverOpen = !this.isPopoverOpen;
+      });
     }
   }
 
@@ -175,7 +177,7 @@ export default class SetOfTags extends LitElement {
           <cds-popover
             ?open=${this.isPopoverOpen}
             ?highContrast=${true}
-            align=${document.dir === 'rtl' ? 'bottom-left' : 'bottom-right'}
+            align=${document.dir === 'rtl' ? 'right-top' : 'left-top'}
           >
             <cds-operational-tag
               size=${this.tagsData[0]?.size}

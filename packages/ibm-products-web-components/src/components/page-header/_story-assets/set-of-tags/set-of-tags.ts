@@ -124,6 +124,7 @@ export default class SetOfTags extends LitElement {
       event instanceof PointerEvent ||
       (event instanceof KeyboardEvent && [' ', 'Enter'].includes(event.key))
     ) {
+      event.preventDefault();
       requestAnimationFrame(() => {
         this.isPopoverOpen = !this.isPopoverOpen;
       });

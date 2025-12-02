@@ -1,3 +1,16 @@
+## `@carbon/ibm-products-web-components@0.29.0-rc.0`
+### Features :rocket:
+- feat(checklist): code connect integration (#8540)
+- feat(create-flows): add narrow tearsheet and full page web component examples (#8417)
+- feat(checklist): slot for header fields (#8587)
+
+### Bug fixes :bug:
+- fix: resolve loading errors (#8604)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#8638)
+- chore: add options-tile wc code connect (#8433)
+
 ## `@carbon/ibm-products-web-components@0.28.0`
 ### Features :rocket:
 - feat(about-modal): code connect integration (#8568)

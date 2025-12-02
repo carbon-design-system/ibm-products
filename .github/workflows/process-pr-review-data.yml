@@ -1,7 +1,7 @@
 name: Process saved PR data and apply appropriate labels
 
 # We have access to repo secrets from here. If the `Received PR review` workflow has completed
-# it means there has been a workflow artifact created with the data we need to apply the appropriate 
+# it means there has been a workflow artifact created with the data we need to apply the appropriate
 # review labels from the custom action used from this workflow
 on:
   workflow_run:

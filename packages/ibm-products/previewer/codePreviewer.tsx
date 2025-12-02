@@ -271,7 +271,14 @@ const findComponentsInCode = (code: string, status): ComponentSources => {
     } else if (iconsNames.includes(component)) {
       result.icons.push(component);
     } else {
-      result.unknown.push(component);
+      if (status) {
+        const foundStatus = findPropertyContainingValue(status, component);
+        if (foundStatus === 'preview' || foundStatus === 'previewCandidate') {
+          result.ibmProducts.push(`${foundStatus}__${component}`);
+        } else {
+          result.unknown.push(component);
+        }
+      }
     }
   });
   return result;

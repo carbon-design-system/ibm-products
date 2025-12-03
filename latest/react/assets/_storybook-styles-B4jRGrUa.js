@@ -1,1 +1,2 @@
 const e=".c4p--create-tearsheet-narrow--story__flex-container{display:flex;align-items:baseline}.c4p--create-tearsheet-narrow--story__flex-container .cds--form-item,.c4p--create-tearsheet-narrow--story__form .cds--form-item{margin-block-end:1rem}.c4p--create-tearsheet-narrow--story__flex-container .cds--form-item,.c4p--create-tearsheet-narrow--story__flex-container .cds--dropdown__wrapper.cds--list-box__wrapper{inline-size:50%}";export{e as s};
+//# sourceMappingURL=_storybook-styles-B4jRGrUa.js.map

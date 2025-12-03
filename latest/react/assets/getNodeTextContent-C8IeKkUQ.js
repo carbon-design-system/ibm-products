@@ -1,1 +1,2 @@
 const t=r=>{if(r==null)return"";switch(typeof r){case"string":case"number":return r.toString();case"object":return r instanceof Array?r.map(t).join(""):"props"in r?t(r.props.children):"";case"function":return t(r());default:return""}};export{t as g};
+//# sourceMappingURL=getNodeTextContent-C8IeKkUQ.js.map

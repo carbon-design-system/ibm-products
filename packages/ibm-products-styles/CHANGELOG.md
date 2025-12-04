@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.76.0-rc.0`
+## `@carbon/ibm-products-styles@2.76.0`
 ### Features :rocket:
 - feat(Tearsheet): stacking, unit test, design review changes and fixes (#8563)
 

@@ -42,7 +42,7 @@ To build this pattern, we recommend including the following ingredients:
 
 ### Example usage
 
-### Standard
+### Create Modal
 
 <Canvas
   of={stories.Standard}
@@ -59,39 +59,53 @@ To build this pattern, we recommend including the following ingredients:
   ]}
 />
 
-{/\*
+### Form validation
 
-### With Extension Validation
+All forms, including that within the `CreateModal` should follow
+`@carbon/ibm-products` guidelines for form validation.
+
+This includes the following:
+
+- The `Submit` button in the modal should be disabled, until all required inputs
+  are filled in and valid
+- All required inputs should only throw an invalid error after the element loses
+  focus
+- All optional form fields should have an `(optional)` text at the end of the
+  input `labelText`. Optional should always be in parentheses
+
+You can find more information on how to validate your form fields in
+[Carbon's Form usage page](https://carbondesignsystem.com/components/form/usage/).
+
+### Overriding Carbon theme
+
+The design recommendation is to use a dark theme for the CreateModal if the
+application is currently using a light theme, and vice versa. The theme applied
+to the CreateModal can easily be customized as follows:
+
+In SCSS:
+
+```scss
+.#{$pkg-prefix}--create-modal {
+  @include carbon--theme($theme: $carbon--theme--g90);
+}
+```
+
+Alternatively, the required Carbon theme can be set as above in a custom CSS
+class which is then applied to the CreateModal using the `className` prop.
+
+### Create Modal with form validation
 
 <Canvas
-  of={stories.WithExtensionValidation}
+  of={stories.Standard}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
       onClick: () =>
         stackblitzPrefillConfig({
-          story: stories.WithExtensionValidation,
+          story: stories.Standard,
           customFunctionDefs: customFunctionArr,
           styles: stories.default.parameters.styles,
         }),
     },
   ]}
-></Canvas>
-
-### With Preformatted Extensions
-
-<Canvas
-  of={stories.WithPreformattedExtensions}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: stories.WithPreformattedExtensions,
-          customFunctionDefs: customFunctionArr,
-          styles: stories.default.parameters.styles,
-        }),
-    },
-  ]}
-></Canvas>
-*/}
+/>

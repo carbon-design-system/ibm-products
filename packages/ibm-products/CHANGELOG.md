@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.80.0-rc.0`
+## `@carbon/ibm-products@2.80.0`
 ### Features :rocket:
 - feat(InlineTip): adding figma code connect file (#8611)
 - feat(interstitialscreen): code connect integration (#8572)

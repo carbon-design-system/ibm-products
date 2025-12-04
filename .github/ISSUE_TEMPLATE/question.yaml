@@ -22,14 +22,10 @@ body:
         all IBM Workspaces:"
   - type: markdown
     attributes:
-      value:
-        '- `#ibmproducts-pal` for design questions around the
-        @carbon/ibm-products components components'
+      value: '- `#carbon-design-system` for design questions'
   - type: markdown
     attributes:
-      value:
-        '- `#ibmproducts-pal-dev` for development questions around the
-        @carbon/ibm-products components'
+      value: '- `#carbon-for-ibmproducts` for development questions'
   - type: markdown
     attributes:
       value:

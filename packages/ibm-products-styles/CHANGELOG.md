@@ -1,4 +1,15 @@
-## `@carbon/ibm-products-styles@2.75.0-rc.0`
+## `@carbon/ibm-products-styles@2.76.0`
+### Features :rocket:
+- feat(Tearsheet): stacking, unit test, design review changes and fixes (#8563)
+
+### Bug fixes :bug:
+- fix: tearsheet entry and exit animations not working after carbon upgrade (#8674)
+- fix: replace uselayouteffect with isomorphic effect (#8630)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#8638)
+
+## `@carbon/ibm-products-styles@2.75.0`
 ### Features :rocket:
 - feat: composable tearsheet initial implementation (#8337)
 

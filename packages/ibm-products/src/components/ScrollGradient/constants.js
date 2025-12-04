@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useState, useLayoutEffect, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 export const ScrollStates = {
   // No scrolling required because content fits within container.
@@ -53,7 +54,7 @@ export const useIsOverflow = (ref) => {
     };
   });
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     const { current } = ref;
     if (current) {
       if ('ResizeObserver' in window && !resizeObserver) {

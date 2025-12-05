@@ -50,9 +50,20 @@ export * from './WebTerminal';
  */
 
 // Preview
-export * as preview__Coachmark from './Coachmark/next/Coachmark';
-export * as preview__CoachmarkTagline from './Coachmark/next/Coachmark/CoachmarkTagline';
-export * as preview__CoachmarkBeacon from './Coachmark/next/Coachmark/CoachmarkBeacon';
+export { Coachmark as preview__Coachmark } from './Coachmark/next/Coachmark';
+export type {
+  CoachmarkPropsNext,
+  CoachmarkComponent,
+  ContentBodyProps,
+  ContentHeaderProps,
+  CoachmarkContentProps,
+} from './Coachmark/next/Coachmark';
+
+export { CoachmarkTagline as preview__CoachmarkTagline } from './Coachmark/next/Coachmark/CoachmarkTagline';
+export type { CoachmarkTaglineProps } from './Coachmark/next/Coachmark/CoachmarkTagline';
+
+export { CoachmarkBeacon as preview__CoachmarkBeacon } from './Coachmark/next/Coachmark/CoachmarkBeacon';
+export type { CoachmarkBeaconPropsNext } from './Coachmark/next/Coachmark/CoachmarkBeacon';
 export {
   TruncatedText as preview__TruncatedText,
   type TruncatedTextProps,

@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { state } from 'lit/decorators.js';
+import { query, state } from 'lit/decorators.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
 import '@carbon/web-components/es/components/modal/index.js';
@@ -16,7 +16,6 @@ import '@carbon/web-components/es/components/button/index';
 import '@carbon/web-components/es/components/text-input/index';
 import '@carbon/web-components/es/components/radio-button/index';
 import '@carbon/web-components/es/components/stack/index';
-import { ref } from 'lit/directives/ref.js';
 import styles from './create-modal.scss?lit';
 
 const blockClass = `c4p--create-modal`;
@@ -49,7 +48,8 @@ class CreateModalWithFormValidation extends HostListenerMixin(LitElement) {
   @state()
   private dirtyInput = false;
 
-  private modalRef: HTMLElement | null = null;
+  @query('cds-modal')
+  private modalRef!: HTMLElement;
 
   private handleRequiredInput = (evt: Event) => {
     this.requiredInput = (evt.target as HTMLInputElement).value;
@@ -120,7 +120,6 @@ class CreateModalWithFormValidation extends HostListenerMixin(LitElement) {
         size="sm"
         ?open=${false}
         prevent-close-on-click-outside
-        ${ref((el) => (this.modalRef = el as HTMLElement))}
         @cds-modal-closed=${this.handleClose}
         aria-label="Title"
         selector-primary-focus=".cds--text-input"

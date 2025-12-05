@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { state } from 'lit/decorators.js';
+import { query, state } from 'lit/decorators.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
 import '@carbon/web-components/es/components/modal/index.js';
@@ -18,17 +18,12 @@ import '@carbon/web-components/es/components/textarea/index';
 import '@carbon/web-components/es/components/dropdown/index';
 import '@carbon/web-components/es/components/form-group/index';
 import '@carbon/web-components/es/components/stack/index';
-import { ref } from 'lit/directives/ref.js';
 import styles from './create-modal.scss?lit';
 
 const blockClass = `c4p--create-modal`;
 
 /**
  * StandardCreateModal - A self-contained example of the CreateModal pattern.
- * 
- * The CreateModal component provides a way for a user to quickly generate a new
- * resource. It is triggered by a user's action, appears on top of the main page
- * content, and is persistent until dismissed.
  *
  * @element standard-create-modal
  */
@@ -44,7 +39,8 @@ class StandardCreateModal extends HostListenerMixin(LitElement) {
   @state()
   private selectedDropdown = '';
 
-  private modalRef: HTMLElement | null = null;
+  @query('cds-modal')
+  private modalRef!: HTMLElement;
 
   private handleTextInput = (evt: Event) => {
     this.textInputValue = (evt.target as HTMLInputElement).value;
@@ -76,8 +72,6 @@ class StandardCreateModal extends HostListenerMixin(LitElement) {
   };
 
   render() {
-    const isSubmitDisabled = !this.textInputValue || this.textInputValue.trim().length === 0;
-
     return html`
       <style>
         ${styles}
@@ -93,7 +87,6 @@ class StandardCreateModal extends HostListenerMixin(LitElement) {
         size="sm"
         ?open=${false}
         prevent-close-on-click-outside
-        ${ref((el) => (this.modalRef = el as HTMLElement))}
         @cds-modal-closed=${this.handleClose}
         aria-label="Title"
         selector-primary-focus=".cds--text-input"
@@ -120,6 +113,7 @@ class StandardCreateModal extends HostListenerMixin(LitElement) {
               placeholder="Placeholder"
               value=${this.textInputValue}
               @input=${this.handleTextInput}
+              data-modal-primary-focus
             ></cds-text-input>
 
             <cds-dropdown
@@ -154,7 +148,6 @@ class StandardCreateModal extends HostListenerMixin(LitElement) {
           </cds-modal-footer-button>
           <cds-modal-footer-button
             kind="primary"
-            ?disabled=${isSubmitDisabled}
             @click=${this.handleSubmit}
           >
             Create

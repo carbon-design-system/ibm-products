@@ -8,216 +8,163 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { state } from 'lit/decorators.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
-// import '@carbon/web-components/es/components/modal/index.js';
-// import '@carbon/web-components/es/components/button/index';
-// import '@carbon/web-components/es/components/text-input/index';
-// import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16';
-// import ErrorFilled16 from '@carbon/icons/es/error--filled/16';
-// import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
-// import '@carbon/web-components/es/components/loading/index';
-// import { ref } from 'lit/directives/ref.js';
-// import styles from './export-modal.scss?lit';
+import '@carbon/web-components/es/components/modal/index.js';
+import '@carbon/web-components/es/components/button/index';
+import '@carbon/web-components/es/components/text-input/index';
+import '@carbon/web-components/es/components/textarea/index';
+import '@carbon/web-components/es/components/dropdown/index';
+import '@carbon/web-components/es/components/form-group/index';
+import '@carbon/web-components/es/components/stack/index';
+import { ref } from 'lit/directives/ref.js';
+import styles from './create-modal.scss?lit';
 
 const blockClass = `c4p--create-modal`;
 
 /**
- * StandardCreateModal.
+ * StandardCreateModal - A self-contained example of the CreateModal pattern.
+ * 
+ * The CreateModal component provides a way for a user to quickly generate a new
+ * resource. It is triggered by a user's action, appears on top of the main page
+ * content, and is persistent until dismissed.
  *
  * @element standard-create-modal
- *
- * */
+ */
 
 @customElement(`standard-create-modal`)
 class StandardCreateModal extends HostListenerMixin(LitElement) {
-  // @state()
-  // filename = '';
+  @state()
+  private textInputValue = '';
 
-  // @state()
-  // loading = false;
+  @state()
+  private textAreaValue = '';
 
-  // @state()
-  // error = false;
+  @state()
+  private selectedDropdown = '';
 
-  // @state()
-  // successful = false;
+  private modalRef: HTMLElement | null = null;
 
-  // @state()
-  // dirtyInput: Boolean = false;
+  private handleTextInput = (evt: Event) => {
+    this.textInputValue = (evt.target as HTMLInputElement).value;
+  };
 
-  // @property({ type: Array })
-  // validExtensions: string[] = [];
+  private handleTextAreaInput = (evt: Event) => {
+    this.textAreaValue = (evt.target as HTMLTextAreaElement).value;
+  };
 
-  // private wait = (ms: number) =>
-  //   new Promise((resolve) => setTimeout(resolve, ms));
+  private handleDropdownChange = (evt: Event) => {
+    this.selectedDropdown = (evt.target as any).value;
+  };
 
-  // private async submitHandler() {
-  //   this.loading = true;
-  //   await this.wait(1000);
-  //   const isSuccessful = true;
-  //   if (isSuccessful) {
-  //     this.successful = true;
-  //   } else {
-  //     this.error = true;
-  //   }
-  //   this.loading = false;
-  // }
+  private handleClose = () => {
+    this.modalRef?.removeAttribute('open');
+    // Reset form
+    this.textInputValue = '';
+    this.textAreaValue = '';
+    this.selectedDropdown = '';
+  };
 
-  // private hasInvalidExtension() {
-  //   if (
-  //     !this.dirtyInput ||
-  //     !this.validExtensions ||
-  //     !this.validExtensions.length
-  //   ) {
-  //     return false;
-  //   }
-  //   if (!this.filename.includes('.') || this.filename.endsWith('.')) {
-  //     return true;
-  //   }
-  //   const ext = this.filename.split('.').pop();
-
-  //   if (ext && !this.validExtensions.includes(ext)) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  // private initialFilenameSet = false;
-
-  // updated(changedProperties: Map<string | number | symbol, unknown>) {
-  //   if (!this.initialFilenameSet && changedProperties.has('validExtensions')) {
-  //     if (!this.validExtensions || this.validExtensions.length === 0) {
-  //       this.filename = 'sample.pdf';
-  //     }
-
-  //     this.initialFilenameSet = true;
-  //   }
-  // }
-
-  // private inputHandler = (evt: Event) => {
-  //   this.filename = (evt.target as HTMLInputElement).value;
-  //   this.dirtyInput = true;
-  // };
-
-  // private onCloseHandler = () => {
-  //   this.successful = false;
-  //   this.error = false;
-  // };
+  private handleSubmit = () => {
+    console.log('Form submitted with values:', {
+      textInput: this.textInputValue,
+      textArea: this.textAreaValue,
+      dropdown: this.selectedDropdown,
+    });
+    this.handleClose();
+  };
 
   render() {
-    let modalRef: HTMLElement | null = null;
-    // const submitted = this.loading || this.error || this.successful;
+    const isSubmitDisabled = !this.textInputValue || this.textInputValue.trim().length === 0;
 
-    return html`<div>Hello</div>`
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <cds-button
+        kind="primary"
+        @click=${() => this.modalRef?.setAttribute('open', '')}
+      >
+        Launch Modal
+      </cds-button>
+      <cds-modal
+        class="${blockClass}"
+        size="sm"
+        ?open=${false}
+        prevent-close-on-click-outside
+        ${ref((el) => (this.modalRef = el as HTMLElement))}
+        @cds-modal-closed=${this.handleClose}
+        aria-label="Title"
+        selector-primary-focus=".cds--text-input"
+      >
+        <cds-modal-close-button
+          @click=${this.handleClose}
+        ></cds-modal-close-button>
+        
+        <cds-modal-header class="${blockClass}__heading">
+          <cds-modal-heading>
+            Title
+          </cds-modal-heading>
+          <p class="${blockClass}__subtitle">Your subtitle text will appear here</p>
+        </cds-modal-header>
 
-    // return html`
-    //   <style>
-    //     ${styles}
-    //   </style>
-    //   <cds-button
-    //     kind="primary"
-    //     @click=${() => modalRef?.setAttribute('open', '')}
-    //   >
-    //     Launch Modal
-    //   </cds-button>
-    //   <cds-modal
-    //     class=${blockClass}
-    //     size="sm"
-    //     ?open="false"
-    //     ${ref((el) => (modalRef = el as HTMLElement))}
-    //     @cds-modal-closed=${() => {
-    //       modalRef?.removeAttribute('open');
-    //     }}
-    //   >
-    //     <cds-modal-close-button
-    //       @click=${() => {
-    //         modalRef?.setAttribute('open', 'false');
-    //         this.onCloseHandler();
-    //       }}
-    //     ></cds-modal-close-button>
-    //     <cds-modal-header class=${`${blockClass}__heading`}>
-    //       <cds-modal-heading>Export</cds-modal-heading>
-    //     </cds-modal-header>
-    //     <cds-modal-body class=${`${blockClass}__body-container`}>
-    //       ${!submitted
-    //         ? html` ${this.validExtensions.length > 0
-    //               ? html`<p class=${`${blockClass}__body`}>
-    //                   File must be exported in a PDF format
-    //                 </p>`
-    //               : null}
-    //             <div class=${`${blockClass}__input-container`}>
-    //               <cds-text-input
-    //                 placeholder="URL"
-    //                 label="File name"
-    //                 id="test-id"
-    //                 value=${this.filename}
-    //                 @input=${this.inputHandler}
-    //                 .invalid=${this.dirtyInput && this.hasInvalidExtension()}
-    //                 invalid-text=${this.dirtyInput && this.hasInvalidExtension()
-    //                   ? 'File must have valid extension .pdf'
-    //                   : ''}
-    //               ></cds-text-input>
-    //             </div>`
-    //         : null}
-    //       <div aria-live="polite" class=${`${blockClass}__messaging`}>
-    //         ${this.loading
-    //           ? html`
-    //               <cds-loading
-    //                 aria-live="off"
-    //                 small
-    //                 .withOverlay=${false}
-    //               ></cds-loading>
-    //               <p>Exporting file...</p>
-    //             `
-    //           : null}
-    //         ${this.successful
-    //           ? html`
-    //               ${iconLoader(CheckmarkFilled16, {
-    //                 slot: 'icon',
-    //                 class: `${blockClass}__checkmark-icon`,
-    //               })}
-    //               <p>The file has been exported.</p>
-    //             `
-    //           : null}
-    //         ${this.error
-    //           ? html`
-    //               ${iconLoader(ErrorFilled16, {
-    //                 slot: 'icon',
-    //                 class: `${blockClass}__error-icon`,
-    //               })}
-    //               <p>Server error 500</p>
-    //             `
-    //           : null}
-    //       </div>
-    //     </cds-modal-body>
-    //     ${!submitted
-    //       ? html`<cds-modal-footer>
-    //           <cds-modal-footer-button
-    //             kind="secondary"
-    //             data-modal-close
-    //             @click=${() => {
-    //               modalRef?.setAttribute('open', 'false');
-    //               this.onCloseHandler();
-    //             }}
-    //             >Cancel</cds-modal-footer-button
-    //           >
-    //           <cds-modal-footer-button
-    //             ?disabled=${!this.filename ||
-    //             this.loading ||
-    //             this.hasInvalidExtension()}
-    //             @click=${() => {
-    //               this.submitHandler();
-    //               this.onCloseHandler();
-    //             }}
-    //             >Export</cds-modal-footer-button
-    //           >
-    //         </cds-modal-footer> `
-    //       : null}
-    //   </cds-modal>
-    // `;
+        <cds-modal-body has-form>
+          <p class="${blockClass}__description">
+            This is example description text that will appear here in your modal
+          </p>
+          <cds-stack gap="4">
+            <cds-text-input
+              label="Text input label"
+              helper-text="Helper text goes here"
+              placeholder="Placeholder"
+              value=${this.textInputValue}
+              @input=${this.handleTextInput}
+            ></cds-text-input>
+
+            <cds-dropdown
+              title-text="Dropdown label"
+              helper-text="This is some helper text"
+              label="Dropdown menu options"
+              value=${this.selectedDropdown}
+              @cds-dropdown-selected=${this.handleDropdownChange}
+            >
+              <cds-dropdown-item value="option-0">Option 0</cds-dropdown-item>
+              <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+              <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+            </cds-dropdown>
+
+            <cds-textarea
+              label="Text area label"
+              helper-text="Optional helper text"
+              placeholder="Placeholder text"
+              value=${this.textAreaValue}
+              @input=${this.handleTextAreaInput}
+            ></cds-textarea>
+          </cds-stack>
+        </cds-modal-body>
+
+        <cds-modal-footer>
+          <cds-modal-footer-button
+            kind="secondary"
+            data-modal-close
+            @click=${this.handleClose}
+          >
+            Cancel
+          </cds-modal-footer-button>
+          <cds-modal-footer-button
+            kind="primary"
+            ?disabled=${isSubmitDisabled}
+            @click=${this.handleSubmit}
+          >
+            Create
+          </cds-modal-footer-button>
+        </cds-modal-footer>
+      </cds-modal>
+    `;
   }
-  // static styles = styles;
+
+  static styles = styles;
 }
+
 export default StandardCreateModal;

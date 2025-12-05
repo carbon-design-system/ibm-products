@@ -9,27 +9,26 @@
 
 import { html } from 'lit';
 import '../../../examples/create-modal/src/create-modal';
+
 export default {
   title: 'Patterns/Step flows/CreateModal',
+  parameters: {
+    docs: {
+      description: {
+        component: `The CreateModal component provides a way for a user to quickly generate a new resource. It is triggered by a user's action, appears on top of the main page content, and is persistent until dismissed. The purpose of this modal should be immediately apparent to the user, with a clear and obvious path to completion.`,
+      },
+    },
+  },
 };
 
 export const CreateModal = {
   render: () => {
-    return html` <div>hmm</div>`;
+    return html`<standard-create-modal></standard-create-modal>`;
   },
 };
 
-// export const WithExtension = {
-//   render: () => {
-//     return html` <export-modal-with-extension> </export-modal-with-extension> `;
-//   },
-// };
-
-// export const WithPreformattedExtension = {
-//   render: () => {
-//     return html`
-//       <export-modal-preformatted-extension>
-//       </export-modal-preformatted-extension>
-//     `;
-//   },
-// };
+export const CreateModalWithFormValidation = {
+  render: () => {
+    return html`<create-modal-with-form-validation></create-modal-with-form-validation>`;
+  },
+};

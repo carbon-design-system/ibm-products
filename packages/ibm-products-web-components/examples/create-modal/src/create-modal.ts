@@ -5,3 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 export { default as StandardCreateModal } from './standard-create-modal';
+export { default as CreateModalWithFormValidation } from './create-modal-with-form-validation';

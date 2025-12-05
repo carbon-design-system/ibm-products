@@ -9,6 +9,17 @@ import React from 'react';
 import { SidePanel } from './SidePanel';
 import figma from '@figma/code-connect';
 import { Add, Copy, Settings, TrashCan } from '@carbon/react/icons';
+import { ButtonProps } from '@carbon/react';
+import { CarbonIconProps } from '@carbon/icons-react';
+type ButtonKind =
+  | 'primary'
+  | 'secondary'
+  | 'danger'
+  | 'ghost'
+  | 'danger--primary'
+  | 'danger--ghost'
+  | 'danger--tertiary'
+  | 'tertiary';
 
 figma.connect(
   SidePanel,
@@ -39,8 +50,8 @@ figma.connect(
         }),
       }),
       slideIn: figma.boolean('Slide over', {
-        true: undefined,
-        false: true,
+        true: true,
+        false: undefined,
       }),
       placement: figma.boolean('Slide over', {
         true: undefined,
@@ -56,65 +67,65 @@ figma.connect(
           actionsArray: figma.enum('Buttons', {
             '1': [
               {
-                kind: 'primary',
+                kind: 'primary' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
             ],
             '2': [
               {
-                kind: 'primary',
+                kind: 'primary' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
               {
-                kind: 'secondary',
+                kind: 'secondary' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
             ],
             '3': [
               {
-                kind: 'primary',
+                kind: 'primary' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
               {
-                kind: 'secondary',
+                kind: 'secondary' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
               {
-                kind: 'secondary',
+                kind: 'secondary' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
             ],
             '1 + Ghost': [
               {
-                kind: 'primary',
+                kind: 'primary' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
               {
-                kind: 'ghost',
+                kind: 'ghost' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
             ],
             '2 + Ghost': [
               {
-                kind: 'primary',
+                kind: 'primary' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
               {
-                kind: 'secondary',
+                kind: 'secondary' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
               {
-                kind: 'ghost',
+                kind: 'ghost' as ButtonKind,
                 label: 'Button',
                 onClick: () => console.log('Clicked action button'),
               },
@@ -131,25 +142,33 @@ figma.connect(
                 {
                   leading: true,
                   label: 'Button',
-                  icon: (props) => <Add size={16} {...props} />,
+                  icon: (props: CarbonIconProps) => (
+                    <Add size={16} {...props} />
+                  ),
                   onClick: () => console.log('Clicked toolbar action button'),
                   kind: 'primary',
                 },
                 {
                   label: 'Copy',
-                  icon: (props) => <Copy size={16} {...props} />,
+                  icon: (props: CarbonIconProps) => (
+                    <Copy size={16} {...props} />
+                  ),
                   onClick: () => console.log('Clicked toolbar action button'),
                   hasIconOnly: true,
                 },
                 {
                   label: 'Settings',
-                  icon: (props) => <Settings size={16} {...props} />,
+                  icon: (props: CarbonIconProps) => (
+                    <Settings size={16} {...props} />
+                  ),
                   onClick: () => console.log('Clicked toolbar action button'),
                   hasIconOnly: true,
                 },
                 {
                   label: 'Delete',
-                  icon: (props) => <TrashCan size={16} {...props} />,
+                  icon: (props: CarbonIconProps) => (
+                    <TrashCan size={16} {...props} />
+                  ),
                   onClick: () => console.log('Clicked toolbar action button'),
                   hasIconOnly: true,
                 },
@@ -157,19 +176,25 @@ figma.connect(
               false: [
                 {
                   label: 'Copy',
-                  icon: (props) => <Copy size={16} {...props} />,
+                  icon: (props: CarbonIconProps) => (
+                    <Copy size={16} {...props} />
+                  ),
                   onClick: () => console.log('Clicked toolbar action button'),
                   hasIconOnly: true,
                 },
                 {
                   label: 'Settings',
-                  icon: (props) => <Settings size={16} {...props} />,
+                  icon: (props: CarbonIconProps) => (
+                    <Settings size={16} {...props} />
+                  ),
                   onClick: () => console.log('Clicked toolbar action button'),
                   hasIconOnly: true,
                 },
                 {
                   label: 'Delete',
-                  icon: (props) => <TrashCan size={16} {...props} />,
+                  icon: (props: CarbonIconProps) => (
+                    <TrashCan size={16} {...props} />
+                  ),
                   onClick: () => console.log('Clicked toolbar action button'),
                   hasIconOnly: true,
                 },
@@ -194,9 +219,14 @@ figma.connect(
         labelText={props.labelText.text}
         slideIn={props.slideIn}
         placement={props.placement}
-        selectorPageContent={props.selectorPageContent}
+        selectorPageContent={
+          props.selectorPageContent ||
+          "Enter 'selectorPageContent' if slideIn is true"
+        }
         actions={props.actions.actionsArray}
-        actionToolbarButtons={props.toolbar.items.actionsArray}
+        actionToolbarButtons={
+          props.toolbar.items.actionsArray as ButtonProps<React.ElementType>[]
+        }
         currentStep={props.currentStep.value}
       >
         {props.children}

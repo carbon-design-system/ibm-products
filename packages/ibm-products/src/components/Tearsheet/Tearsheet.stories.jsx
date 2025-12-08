@@ -140,6 +140,11 @@ export default {
     },
     label: { control: { type: 'text' } },
     title: { control: { type: 'text' } },
+    enablePresence: {
+      control: { type: 'boolean' },
+      description:
+        'Enable presence mode to remove DOM element after tearsheet exits (preserves animations)',
+    },
     influencer: { control: { disable: true } },
     onClose: { control: { disable: true } },
     navigation: { control: { disable: true } },

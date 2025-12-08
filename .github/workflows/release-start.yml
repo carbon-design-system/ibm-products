@@ -1,7 +1,6 @@
 # Publish minor or patch releases, both rc (release candidates) and full stable releases
 name: Release start - minor / patch
-run-name:
-  ${{ inputs.type }} - dry-run:${{ inputs.dry-run }}
+run-name: ${{ inputs.type }} - dry-run:${{ inputs.dry-run }}
 
 on:
   workflow_dispatch:

@@ -370,4 +370,68 @@ test.describe('Tearsheet @avt', () => {
     // Expect narrow Tearsheet has aria-hidden='true' attribute
     await expect(narrowTs).toHaveAttribute('aria-hidden', 'true');
   });
+
+  test('@avt-enable-presence-dom-removal', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tearsheet',
+      id: 'components-tearsheet--tearsheet',
+      globals: {
+        carbonTheme: 'white',
+      },
+      args: {
+        enablePresence: true,
+      },
+    });
+
+    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
+
+    // Expect Tearsheet to be in the viewport
+    await expect(modalElement).toBeInViewport();
+
+    // Pressing 'Escape' key to close the Tearsheet
+    await page.keyboard.press('Escape');
+
+    // Wait for animation to complete
+    await page.waitForTimeout(500);
+    await page.screenshot({ animations: 'disabled' });
+
+    // With enablePresence, the DOM element should be removed after exit
+    const allModals = await page.locator(`.${carbon.prefix}--modal`).count();
+    expect(allModals).toBe(0);
+  });
+
+  test('@avt-enable-presence-reopen-animation', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tearsheet',
+      id: 'components-tearsheet--tearsheet',
+      globals: {
+        carbonTheme: 'white',
+      },
+      args: {
+        enablePresence: true,
+      },
+    });
+
+    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
+
+    // Expect Tearsheet to be in the viewport
+    await expect(modalElement).toBeInViewport();
+
+    // Close the Tearsheet
+    await page.keyboard.press('Escape');
+
+    // Wait for animation and DOM removal
+    await page.waitForTimeout(500);
+
+    // Reopen the Tearsheet
+    const openButton = page.getByText('Open Tearsheet');
+    await openButton.click();
+
+    // Wait for entrance animation
+    await page.waitForTimeout(100);
+    await page.screenshot({ animations: 'disabled' });
+
+    // Verify Tearsheet is visible again with animation
+    await expect(modalElement).toBeInViewport();
+  });
 });

@@ -41,17 +41,21 @@ export const createCellSelectionArea = ({
       selectionAreaVariableWidth += item?.width || defaultColumn?.width;
     }
   });
-  const point1Element =
-    document.querySelector(
-      `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`
-    ) || document.querySelector(`.${blockClass}__body--td`); // if we can't find the point1 element (this can happen in the case where a virtualized row is not present anymore in the DOM), we get the default height of the first body cell we find
-
+  const point1Element = ref
+    ? ref.current.querySelector(
+        `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`
+      ) || ref.current.querySelector(`.${blockClass}__body--td`)
+    : document.querySelector(
+        `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`
+      ) || document.querySelector(`.${blockClass}__body--td`); // if we can't find the point1 element (this can happen in the case where a virtualized row is not present anymore in the DOM), we get the default height of the first body cell we find
   const selectionAreaCellHeight = point1Element.offsetHeight;
   const selectionAreaTotalHeight =
     selectionAreaCellHeight * (greatestRowIndex - lowestRowIndex + 1);
-  const bodyContainer = document.querySelector(
-    `.${blockClass}__list--container`
-  ).firstElementChild;
+  const bodyContainer = ref
+    ? ref.current.querySelector(`.${blockClass}__list--container`)
+        .firstElementChild
+    : document.querySelector(`.${blockClass}__list--container`)
+        .firstElementChild;
   const placementElement = bodyContainer.querySelector(
     `[data-row-index="${lowestRowIndex}"][data-column-index="${lowestColumnIndex}"]`
   );
@@ -71,7 +75,9 @@ export const createCellSelectionArea = ({
           (defaultColumn.rowHeaderWidth - 4), // calculate left value here if virtualized row is not in DOM, accounting for row header cell width (including borders)
   };
   const selectionAreaElement =
-    document.querySelector(`[data-matcher-id="${area.matcher}"]`) ||
+    (ref
+      ? ref.current.querySelector(`[data-matcher-id="${area.matcher}"]`)
+      : document.querySelector(`[data-matcher-id="${area.matcher}"]`)) ||
     document.createElement('div');
   selectionAreaElement.classList.add(`${blockClass}__selection-area--element`);
   selectionAreaElement.setAttribute('data-matcher-id', area.matcher);

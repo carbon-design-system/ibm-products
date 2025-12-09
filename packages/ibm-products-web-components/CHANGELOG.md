@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.29.0-rc.0`
+## `@carbon/ibm-products-web-components@0.29.0`
 ### Features :rocket:
 - feat(checklist): code connect integration (#8540)
 - feat(create-flows): add narrow tearsheet and full page web component examples (#8417)

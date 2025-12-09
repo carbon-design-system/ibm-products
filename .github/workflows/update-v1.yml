@@ -15,8 +15,8 @@ jobs:
         with:
           ref: 'v1'
 
-      - name: Install
-        run: yarn
+      - name: Install dependencies
+        run: yarn install --immutable
 
       - name: Update Carbon packages
         run: |

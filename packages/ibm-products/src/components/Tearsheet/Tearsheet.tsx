@@ -76,13 +76,6 @@ export interface TearsheetProps extends PropsWithChildren {
   description?: ReactNode;
 
   /**
-   * Specify whether the Tearsheet should opt in to presence mode.
-   * When enabled, the Tearsheet will not mount until it is opened
-   * and will unmount when it's closed, preserving exit animations.
-   */
-  enablePresence?: boolean;
-
-  /**
    * Enable a close icon ('x') in the header area of the tearsheet. By default,
    * (when this prop is omitted, or undefined or null) a tearsheet does not
    * display a close icon if there are navigation actions ("transactional
@@ -299,13 +292,6 @@ Tearsheet.propTypes = {
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
-
-  /**
-   * Specify whether the Tearsheet should opt in to presence mode.
-   * When enabled, the Tearsheet will not mount until it is opened
-   * and will unmount when it's closed, preserving exit animations.
-   */
-  enablePresence: PropTypes.bool,
 
   /**
    * Enable a close icon ('x') in the header area of the tearsheet. By default,

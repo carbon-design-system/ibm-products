@@ -397,14 +397,17 @@ describe(componentName, () => {
   });
 
   describe('enablePresence', () => {
+    beforeEach(() => {
+      pkg.feature['enable-presence'] = true;
+    });
+
+    afterEach(() => {
+      pkg.feature['enable-presence'] = false;
+    });
+
     it('renders tearsheet when enablePresence is true and open is true', () => {
       render(
-        <Tearsheet
-          open
-          enablePresence
-          title="Test Tearsheet"
-          closeIconDescription="Close"
-        >
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
           {children}
         </Tearsheet>
       );
@@ -415,7 +418,6 @@ describe(componentName, () => {
       render(
         <Tearsheet
           open={false}
-          enablePresence
           title="Test Tearsheet"
           closeIconDescription="Close"
         >
@@ -427,12 +429,7 @@ describe(componentName, () => {
 
     it('removes tearsheet from DOM after closing when enablePresence is true', async () => {
       const { rerender } = render(
-        <Tearsheet
-          open
-          enablePresence
-          title="Test Tearsheet"
-          closeIconDescription="Close"
-        >
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
           {children}
         </Tearsheet>
       );
@@ -444,7 +441,6 @@ describe(componentName, () => {
       rerender(
         <Tearsheet
           open={false}
-          enablePresence
           title="Test Tearsheet"
           closeIconDescription="Close"
         >
@@ -511,12 +507,7 @@ describe(componentName, () => {
       jest.useFakeTimers();
 
       render(
-        <Tearsheet
-          open
-          enablePresence
-          title="Test Tearsheet"
-          closeIconDescription="Close"
-        >
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
           {children}
         </Tearsheet>
       );
@@ -538,12 +529,7 @@ describe(componentName, () => {
 
     it('handles transitionend event correctly with enablePresence', async () => {
       const { rerender } = render(
-        <Tearsheet
-          open
-          enablePresence
-          title="Test Tearsheet"
-          closeIconDescription="Close"
-        >
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
           {children}
         </Tearsheet>
       );
@@ -552,7 +538,6 @@ describe(componentName, () => {
       rerender(
         <Tearsheet
           open={false}
-          enablePresence
           title="Test Tearsheet"
           closeIconDescription="Close"
         >
@@ -605,12 +590,7 @@ describe(componentName, () => {
 
     it('handles transitionend event with wrong property name', async () => {
       const { rerender } = render(
-        <Tearsheet
-          open
-          enablePresence
-          title="Test Tearsheet"
-          closeIconDescription="Close"
-        >
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
           {children}
         </Tearsheet>
       );
@@ -619,7 +599,6 @@ describe(componentName, () => {
       rerender(
         <Tearsheet
           open={false}
-          enablePresence
           title="Test Tearsheet"
           closeIconDescription="Close"
         >
@@ -651,12 +630,7 @@ describe(componentName, () => {
 
     it('reopens correctly after closing with enablePresence', async () => {
       const { rerender } = render(
-        <Tearsheet
-          open
-          enablePresence
-          title="Test Tearsheet"
-          closeIconDescription="Close"
-        >
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
           {children}
         </Tearsheet>
       );
@@ -665,7 +639,6 @@ describe(componentName, () => {
       rerender(
         <Tearsheet
           open={false}
-          enablePresence
           title="Test Tearsheet"
           closeIconDescription="Close"
         >
@@ -696,12 +669,7 @@ describe(componentName, () => {
 
       // Reopen the tearsheet
       rerender(
-        <Tearsheet
-          open
-          enablePresence
-          title="Test Tearsheet"
-          closeIconDescription="Close"
-        >
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
           {children}
         </Tearsheet>
       );
@@ -720,11 +688,18 @@ describe(componentNameNarrow, () => {
   commonTests(TearsheetNarrow, componentNameNarrow, {}, true);
 
   describe('enablePresence', () => {
+    beforeEach(() => {
+      pkg.feature['enable-presence'] = true;
+    });
+
+    afterEach(() => {
+      pkg.feature['enable-presence'] = false;
+    });
+
     it('renders narrow tearsheet when enablePresence is true and open is true', () => {
       render(
         <TearsheetNarrow
           open
-          enablePresence
           title="Test Narrow Tearsheet"
           closeIconDescription="Close"
         >
@@ -738,7 +713,6 @@ describe(componentNameNarrow, () => {
       const { rerender } = render(
         <TearsheetNarrow
           open
-          enablePresence
           title="Test Narrow Tearsheet"
           closeIconDescription="Close"
         >
@@ -753,7 +727,6 @@ describe(componentNameNarrow, () => {
       rerender(
         <TearsheetNarrow
           open={false}
-          enablePresence
           title="Test Narrow Tearsheet"
           closeIconDescription="Close"
         >

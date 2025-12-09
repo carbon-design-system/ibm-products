@@ -13,6 +13,7 @@ import {
   useEffect,
   useRef,
 } from 'react';
+import { useFeatureFlag } from '../../FeatureFlags';
 
 export interface PresenceContextValue {
   id: string;
@@ -20,11 +21,9 @@ export interface PresenceContextValue {
 
 export const PresenceContext = createContext<PresenceContextValue | null>(null);
 
-export function usePresenceContext(
-  open: boolean,
-  enablePresence: boolean = false
-) {
+export function usePresenceContext(open: boolean) {
   const context = useContext(PresenceContext);
+  const enablePresence = useFeatureFlag('enable-presence');
   const [exitState, setExitState] = useState<'active' | 'idle' | 'finished'>(
     'finished' // Always start as finished
   );

@@ -74,14 +74,6 @@ export interface TearsheetNarrowProps extends PropsWithChildren {
   hasCloseIcon?: boolean;
 
   /**
-   * Enable presence mode to remove the tearsheet from the DOM after it exits.
-   * When enabled, the tearsheet will be completely removed from the DOM after
-   * the exit animation completes, rather than just being hidden. This preserves
-   * all animations while cleaning up the DOM.
-   */
-  enablePresence?: boolean;
-
-  /**
    * A label for the tearsheet, displayed in the header area of the tearsheet
    * to maintain context for the tearsheet (e.g. as the title changes from page
    * to page of a multi-page task).
@@ -257,14 +249,6 @@ TearsheetNarrow.propTypes = {
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
-
-  /**
-   * Enable presence mode to remove the tearsheet from the DOM after it exits.
-   * When enabled, the tearsheet will be completely removed from the DOM after
-   * the exit animation completes, rather than just being hidden. This preserves
-   * all animations while cleaning up the DOM.
-   */
-  enablePresence: PropTypes.bool,
 
   /**
    * Enable a close icon ('x') in the header area of the tearsheet. By default,

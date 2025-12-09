@@ -7,20 +7,25 @@
 
 import { renderHook, act } from '@testing-library/react';
 import { usePresenceContext, PresenceContext } from './usePresenceContext';
+import { pkg } from '../../../settings';
 import React from 'react';
 
 describe('usePresenceContext', () => {
   beforeEach(() => {
     jest.useFakeTimers();
+    // Reset feature flag to default state
+    pkg.feature['enable-presence'] = false;
   });
 
   afterEach(() => {
     jest.useRealTimers();
+    // Reset feature flag to default state
+    pkg.feature['enable-presence'] = false;
   });
 
   describe('when enablePresence is false (default behavior)', () => {
     it('should mirror open state immediately', () => {
-      const { result } = renderHook(() => usePresenceContext(true, false));
+      const { result } = renderHook(() => usePresenceContext(true));
 
       expect(result.current.isPresent).toBe(true);
       expect(result.current.shouldBeOpen).toBe(true);
@@ -29,7 +34,7 @@ describe('usePresenceContext', () => {
 
     it('should update shouldBeOpen immediately when open changes', () => {
       const { result, rerender } = renderHook(
-        ({ open }) => usePresenceContext(open, false),
+        ({ open }) => usePresenceContext(open),
         { initialProps: { open: true } }
       );
 
@@ -43,7 +48,7 @@ describe('usePresenceContext', () => {
 
     it('should always be present regardless of open state', () => {
       const { result, rerender } = renderHook(
-        ({ open }) => usePresenceContext(open, false),
+        ({ open }) => usePresenceContext(open),
         { initialProps: { open: true } }
       );
 
@@ -56,8 +61,12 @@ describe('usePresenceContext', () => {
   });
 
   describe('when enablePresence is true', () => {
+    beforeEach(() => {
+      pkg.feature['enable-presence'] = true;
+    });
+
     it('should delay shouldBeOpen on initial mount with open=true', () => {
-      const { result } = renderHook(() => usePresenceContext(true, true));
+      const { result } = renderHook(() => usePresenceContext(true));
 
       // Initially shouldBeOpen should be false (before timer completes)
       // But React 18 may batch updates, so we check after advancing timers
@@ -73,7 +82,7 @@ describe('usePresenceContext', () => {
 
     it('should not delay shouldBeOpen on subsequent opens', () => {
       const { result, rerender } = renderHook(
-        ({ open }) => usePresenceContext(open, true),
+        ({ open }) => usePresenceContext(open),
         { initialProps: { open: false } }
       );
 
@@ -91,7 +100,7 @@ describe('usePresenceContext', () => {
 
     it('should transition through exit states correctly', () => {
       const { result, rerender } = renderHook(
-        ({ open }) => usePresenceContext(open, true),
+        ({ open }) => usePresenceContext(open),
         { initialProps: { open: true } }
       );
 
@@ -121,7 +130,7 @@ describe('usePresenceContext', () => {
 
     it('should not finish exit if open becomes true during exit', () => {
       const { result, rerender } = renderHook(
-        ({ open }) => usePresenceContext(open, true),
+        ({ open }) => usePresenceContext(open),
         { initialProps: { open: true } }
       );
 
@@ -151,7 +160,7 @@ describe('usePresenceContext', () => {
 
     it('should handle rapid open/close transitions', () => {
       const { result, rerender } = renderHook(
-        ({ open }) => usePresenceContext(open, true),
+        ({ open }) => usePresenceContext(open),
         { initialProps: { open: false } }
       );
 
@@ -173,13 +182,14 @@ describe('usePresenceContext', () => {
 
   describe('when used within PresenceContext', () => {
     it('should always return isPresent as true', () => {
+      pkg.feature['enable-presence'] = true;
       const wrapper = ({ children }) => (
         <PresenceContext.Provider value={{ id: 'test-id' }}>
           {children}
         </PresenceContext.Provider>
       );
 
-      const { result } = renderHook(() => usePresenceContext(false, true), {
+      const { result } = renderHook(() => usePresenceContext(false), {
         wrapper,
       });
 
@@ -188,9 +198,13 @@ describe('usePresenceContext', () => {
   });
 
   describe('handleExitComplete callback', () => {
+    beforeEach(() => {
+      pkg.feature['enable-presence'] = true;
+    });
+
     it('should be stable across renders', () => {
       const { result, rerender } = renderHook(
-        ({ open }) => usePresenceContext(open, true),
+        ({ open }) => usePresenceContext(open),
         { initialProps: { open: true } }
       );
 
@@ -208,7 +222,7 @@ describe('usePresenceContext', () => {
 
     it('should only finish exit when open is false', () => {
       const { result, rerender } = renderHook(
-        ({ open }) => usePresenceContext(open, true),
+        ({ open }) => usePresenceContext(open),
         { initialProps: { open: true } }
       );
 
@@ -237,38 +251,35 @@ describe('usePresenceContext', () => {
 
   describe('edge cases', () => {
     it('should handle enablePresence changing from false to true', () => {
-      const { result, rerender } = renderHook(
-        ({ enablePresence }) => usePresenceContext(true, enablePresence),
-        { initialProps: { enablePresence: false } }
-      );
+      pkg.feature['enable-presence'] = false;
+      const { result } = renderHook(() => usePresenceContext(true));
 
       expect(result.current.shouldBeOpen).toBe(true);
 
-      rerender({ enablePresence: true });
+      pkg.feature['enable-presence'] = true;
 
       expect(result.current.shouldBeOpen).toBe(true);
       expect(result.current.isPresent).toBe(true);
     });
 
     it('should handle enablePresence changing from true to false', () => {
-      const { result, rerender } = renderHook(
-        ({ enablePresence }) => usePresenceContext(true, enablePresence),
-        { initialProps: { enablePresence: true } }
-      );
+      pkg.feature['enable-presence'] = true;
+      const { result } = renderHook(() => usePresenceContext(true));
 
       // Fast-forward initial delay
       act(() => {
         jest.advanceTimersByTime(10);
       });
 
-      rerender({ enablePresence: false });
+      pkg.feature['enable-presence'] = false;
 
       expect(result.current.shouldBeOpen).toBe(true);
       expect(result.current.isPresent).toBe(true);
     });
 
     it('should cleanup timer on unmount during initial delay', () => {
-      const { unmount } = renderHook(() => usePresenceContext(true, true));
+      pkg.feature['enable-presence'] = true;
+      const { unmount } = renderHook(() => usePresenceContext(true));
 
       // Unmount before timer completes
       unmount();

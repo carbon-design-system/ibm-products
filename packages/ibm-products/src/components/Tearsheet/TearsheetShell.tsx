@@ -19,6 +19,7 @@ import React, {
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { usePresenceContext } from './hooks/usePresenceContext';
+import { useFeatureFlag } from '../FeatureFlags';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -62,13 +63,6 @@ interface TearsheetShellProps extends PropsWithChildren {
    * An optional class or classes to be added to the outermost element.
    */
   className?: string;
-
-  /**
-   * Specify whether the Tearsheet should opt in to presence mode.
-   * When enabled, the Tearsheet will not mount until it is opened
-   * and will unmount when it's closed, preserving exit animations.
-   */
-  enablePresence?: boolean;
 
   /**
    * The accessibility title for the close icon (if shown).
@@ -272,7 +266,6 @@ export const TearsheetShell = React.forwardRef(
       closeIconDescription = 'Close',
       currentStep,
       description,
-      enablePresence,
       hasCloseIcon,
       hasError,
       headerActions,
@@ -312,11 +305,11 @@ export const TearsheetShell = React.forwardRef(
     const modalRefValue = modalRef.current;
     const wide = size === 'wide';
 
-    // Use presence context - it handles enablePresence internally
+    // Use presence context - it handles enablePresence via feature flag internally
     const { isPresent, shouldBeOpen, handleExitComplete } = usePresenceContext(
-      open || false,
-      enablePresence || false
+      open || false
     );
+    const enablePresence = useFeatureFlag('enable-presence');
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
@@ -742,13 +735,6 @@ TearsheetShell.propTypes = {
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
-
-  /**
-   * Specify whether the Tearsheet should opt in to presence mode.
-   * When enabled, the Tearsheet will not mount until it is opened
-   * and will unmount when it's closed, preserving exit animations.
-   */
-  enablePresence: PropTypes.bool,
 
   /**
    * Enable a close icon ('x') in the header area of the tearsheet. By default,

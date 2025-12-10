@@ -1,17 +1,24 @@
-// cspell:disable
-
 /**
+ * Copyright IBM Corp. 2025
  *
- * @param body selector for element that contains the items
- * @param child selector for the item elements
- * @returns void
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
+// cspell:disable
 
 // it seems snapevent doesn't currently exist in typescript
 // https://developer.mozilla.org/en-US/docs/Web/API/SnapEvent
 interface SnapEvent extends Event {
   snapTargetInline: Element;
 }
+
+/**
+ * Initiates the snapScroll functionality
+ * @param body selector for element that contains the items
+ * @param child selector for the item elements
+ * @returns void
+ */
 
 export function snapScroll(body: string, child: string) {
   const bodyEl = document.querySelector(body);
@@ -83,10 +90,17 @@ export function snapScroll(body: string, child: string) {
   }
 }
 
+/**
+ * Retreives the currently focused element
+ * @returns currently focused element
+ */
 function getFocusedItem() {
   return document.querySelector('.snappy-selection');
 }
 
+/**
+ * Scrolls to the next sibling element of the currently focused element
+ */
 export function scrollNext() {
   const item = getFocusedItem();
   item?.nextElementSibling?.scrollIntoView({
@@ -95,6 +109,9 @@ export function scrollNext() {
   });
 }
 
+/**
+ * Scrolls to the previous sibling element of the currently focused element
+ */
 export function scrollPrevious() {
   const item = getFocusedItem();
   item?.previousElementSibling?.scrollIntoView({

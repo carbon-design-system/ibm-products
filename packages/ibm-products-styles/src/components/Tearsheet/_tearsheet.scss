@@ -51,6 +51,17 @@ $motion-duration: $duration-moderate-02;
       }
     }
 
+    &:not(.is-visible) {
+      &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+        // we want the enter/leave animation to run up most of the height of the
+        // viewport, capped at 500px to set an upper limit on the movement speed
+        // For the reason for calc() see https://github.com/sass/sass/issues/2849
+        // and https://github.com/sass/node-sass/issues/2815.
+        // stylelint-disable-next-line carbon/layout-use
+        transform: translate3d(0, calc(min(95vh, 500px)), 0);
+      }
+    }
+
     &.#{$block-class}.#{$block-class} {
       /* tearsheet uses --overlay-color and --overlay-opacity in ::before */
       background: initial;
@@ -106,12 +117,6 @@ $motion-duration: $duration-moderate-02;
     block-size: 100%;
     inset-block-start: auto;
     max-block-size: calc(100% - #{$spacing-09});
-    // we want the enter/leave animation to run up most of the height of the
-    // viewport, capped at 500px to set an upper limit on the movement speed
-    // For the reason for calc() see https://github.com/sass/sass/issues/2849
-    // and https://github.com/sass/node-sass/issues/2815.
-    // stylelint-disable-next-line carbon/layout-use
-    transform: translate3d(0, calc(min(95vh, 500px)), 0);
   }
 
   &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-slug

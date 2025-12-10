@@ -103,6 +103,7 @@ const FilterFlyout = ({
       initialValue: true,
       filtersState,
       prevFiltersRef,
+      open,
     });
 
   // Skip resize testing

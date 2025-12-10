@@ -22,6 +22,7 @@ import { allPropTypes } from '../../global/js/utils/props-helper';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { portalType } from './TearsheetShell';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const componentName = 'Tearsheet';
 
@@ -200,6 +201,7 @@ export const Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
         {...{
           ...getDevtoolsProps(componentName),
           ...rest,
+          enablePresence: useFeatureFlag('enablePresence'),
           influencerPosition,
           influencerWidth,
           ref,

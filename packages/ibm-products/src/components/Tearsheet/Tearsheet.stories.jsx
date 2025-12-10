@@ -42,6 +42,7 @@ import {
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import styles from './_storybook-styles.scss?inline';
 import { TearsheetNarrow } from './TearsheetNarrow';
+import { FeatureFlags } from '../FeatureFlags';
 
 // import mdx from './Tearsheet.mdx';
 
@@ -765,6 +766,199 @@ const StackedTemplate = (
   );
 };
 
+const PresenceStackedTemplate = (
+  { mixedSizes, actions, decorator, description, slug, ...args },
+  context
+) => {
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+  const ref = useRef(undefined);
+  const openButton1 = useRef(undefined);
+  const openButton2 = useRef(undefined);
+  const openButton3 = useRef(undefined);
+
+  const description1 = cloneElement(description, { id: 'truncated-text-01' });
+  const description2 = cloneElement(description, { id: 'truncated-text-02' });
+  const description3 = cloneElement(description, { id: 'truncated-text-03' });
+
+  const wiredActions1 = Array.prototype.map.call(actions, (action) => {
+    if (action.label === 'Cancel') {
+      const previousClick = action.onClick;
+      return {
+        ...action,
+        onClick: (evt) => {
+          setOpen1(false);
+          previousClick(evt);
+        },
+      };
+    }
+    return action;
+  });
+
+  const wiredActions2 = Array.prototype.map.call(actions, (action) => {
+    if (action.label === 'Cancel') {
+      const previousClick = action.onClick;
+      return {
+        ...action,
+        onClick: (evt) => {
+          setOpen2(false);
+          previousClick(evt);
+        },
+      };
+    }
+    return action;
+  });
+
+  const wiredActions3 = Array.prototype.map.call(actions, (action) => {
+    if (action.label === 'Cancel') {
+      const previousClick = action.onClick;
+      return {
+        ...action,
+        onClick: (evt) => {
+          setOpen3(false);
+          previousClick(evt);
+        },
+      };
+    }
+    return action;
+  });
+
+  const VariableSizeTearsheet = mixedSizes ? TearsheetNarrow : Tearsheet;
+
+  useEffect(() => {
+    setTimeout(() => {
+      setOpen1(context.viewMode !== 'docs');
+      setOpen2(context.viewMode !== 'docs');
+      setOpen3(context.viewMode !== 'docs');
+    }, 0);
+  }, []);
+
+  return (
+    <>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <div style={{ height: '3rem' }} data-reserve-space="for toggle buttons" />
+      <main>
+        <ButtonSet
+          style={{
+            display: 'flex',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            zIndex: 10000,
+          }}
+        >
+          <Button onClick={() => setOpen1(!open1)} ref={openButton1}>
+            Toggle&nbsp;tearsheet&nbsp;1
+          </Button>
+          <Button onClick={() => setOpen2(!open2)}>
+            Toggle&nbsp;tearsheet&nbsp;2
+          </Button>
+          {!mixedSizes && (
+            <Button onClick={() => setOpen3(!open3)}>
+              Toggle&nbsp;tearsheet&nbsp;3
+            </Button>
+          )}
+        </ButtonSet>
+      </main>
+      <div ref={ref}>
+        <FeatureFlags enablePresence>
+          <Tearsheet
+            {...args}
+            description={description1}
+            actions={wiredActions1}
+            headerActions={
+              <ButtonSet>
+                <Button
+                  kind="primary"
+                  size="sm"
+                  style={{ width: 'initial' }}
+                  onClick={() => setOpen2(true)}
+                  disabled={open2}
+                  ref={openButton2}
+                >
+                  Open tearsheet 2
+                </Button>
+              </ButtonSet>
+            }
+            title="Tearsheet 1"
+            open={open1}
+            onClose={() => setOpen1(false)}
+            selectorPrimaryFocus="#stacked-input-1"
+            decorator={decorator && sampleDecorator(decorator)}
+            slug={slug && sampleDecorator(slug)}
+            launcherButtonRef={openButton1}
+          >
+            <div className="tearsheet-stories__dummy-content-block">
+              Main content 1
+              <TextInput
+                id="stacked-input-1"
+                labelText="Enter an important value here"
+              />
+            </div>
+          </Tearsheet>
+          <VariableSizeTearsheet
+            {...args}
+            description={description2}
+            actions={wiredActions2}
+            headerActions={
+              <ButtonSet>
+                <Button
+                  kind="primary"
+                  size="sm"
+                  style={{ width: 'initial' }}
+                  onClick={() => setOpen3(true)}
+                  disabled={open3}
+                  ref={openButton3}
+                >
+                  Open tearsheet 3
+                </Button>
+              </ButtonSet>
+            }
+            title="Tearsheet 2"
+            open={open2}
+            onClose={() => setOpen2(false)}
+            selectorPrimaryFocus="#stacked-input-2"
+            decorator={decorator && sampleDecorator(decorator)}
+            slug={slug && sampleDecorator(slug)}
+            launcherButtonRef={openButton2}
+          >
+            <div className="tearsheet-stories__dummy-content-block">
+              Main content 2
+              <TextInput
+                id="stacked-input-2"
+                labelText="Enter an important value here"
+              />
+            </div>
+          </VariableSizeTearsheet>
+          {!mixedSizes && (
+            <Tearsheet
+              {...args}
+              description={description3}
+              actions={wiredActions3}
+              title="Tearsheet 3"
+              open={open3}
+              onClose={() => setOpen3(false)}
+              selectorPrimaryFocus="#stacked-input-3"
+              decorator={decorator && sampleDecorator(decorator)}
+              slug={slug && sampleDecorator(slug)}
+              launcherButtonRef={openButton3}
+            >
+              <div className="tearsheet-stories__dummy-content-block">
+                Main content 3
+                <TextInput
+                  id="stacked-input-3"
+                  labelText="Enter an important value here"
+                />
+              </div>
+            </Tearsheet>
+          )}
+        </FeatureFlags>
+      </div>
+    </>
+  );
+};
+
 // Stories
 export const tearsheet = Template.bind({});
 tearsheet.storyName = 'Tearsheet';
@@ -870,6 +1064,17 @@ export const stackedMixedSizes = StackedTemplate.bind({});
 stackedMixedSizes.storyName = 'Stacking tearsheets, different sizes';
 stackedMixedSizes.args = {
   mixedSizes: true,
+  closeIconDescription,
+  description: 2,
+  height: 'lower',
+  influencer,
+  label,
+  actions: 7,
+};
+
+export const enablePresence = PresenceStackedTemplate.bind({});
+enablePresence.storyName = 'Enable Presence';
+enablePresence.args = {
   closeIconDescription,
   description: 2,
   height: 'lower',

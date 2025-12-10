@@ -42,7 +42,7 @@ export const createCellSelectionArea = ({
     }
   });
 
-  const spreadsheetSelector = contextRef?.current ?? document;
+  const spreadsheetSelector = ref.current ?? document;
   const point1Element =
     spreadsheetSelector.querySelector(
       `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`
@@ -52,11 +52,10 @@ export const createCellSelectionArea = ({
   const selectionAreaCellHeight = point1Element.offsetHeight;
   const selectionAreaTotalHeight =
     selectionAreaCellHeight * (greatestRowIndex - lowestRowIndex + 1);
-  const bodyContainer = ref
-    ? ref.current.querySelector(`.${blockClass}__list--container`)
-        .firstElementChild
-    : document.querySelector(`.${blockClass}__list--container`)
-        .firstElementChild;
+
+  const bodyContainer = spreadsheetSelector.querySelector(
+    `.${blockClass}__list--container`
+  ).firstElementChild;
   const placementElement = bodyContainer.querySelector(
     `[data-row-index="${lowestRowIndex}"][data-column-index="${lowestColumnIndex}"]`
   );

@@ -7,15 +7,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// cspell:disable
+
 import { html } from 'lit';
+import { repeat } from 'lit/directives/repeat.js';
 import { fn } from 'storybook/test';
 import './index';
+//@ts-ignore
 import styles from './story-styles.scss?lit';
+import {
+  snapScroll,
+  scrollNext,
+  scrollPrevious,
+} from '../../utilities/snapscroll';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import ChevronRight16 from '@carbon/icons/es/chevron--right/';
+import ChevronLeft16 from '@carbon/icons/es/chevron--left/';
 
 const argTypes = {};
 
 const blockClass = 'guide-banner-story';
 
+const items = Array(10)
+  .fill({})
+  .map((_, idx) => {
+    return {
+      titleText: 'Title text',
+      descriptionText: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ultrices, erat ut cursus porta, erat mi lobortis lectus, et tristique sapien mi eget arcu. Maecenas gravida commodo urna, vel mollis sapien aliquam id. Pellentesque id metus vestibulum, sodales eros quis, rhoncus sem. Praesent felis justo, cursus eu malesuada vitae, ornare ac lectus. Curabitur non urna ut erat tincidunt ullamcorper. Cras id sapien justo. Pellentesque consequat mollis ex sit amet aliquet.`,
+      idx,
+    };
+  });
+
+//@ts-ignore
 const renderTemplate = (args) => {
   const {
     '@c4p-guidebanner-ontoggle': handleToggle,
@@ -25,6 +48,19 @@ const renderTemplate = (args) => {
     titleText,
     open,
   } = args;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    snapScroll('.body', '.body-elm');
+  });
+
+  const nextHandler = () => {
+    scrollNext();
+  };
+
+  const previousHandler = () => {
+    scrollPrevious();
+  };
+
   return html`
     <style>
       ${styles}
@@ -39,16 +75,41 @@ const renderTemplate = (args) => {
       titleText=${titleText}
     >
       <div slot="body">
-        <div class="body-container">
-          <c4p-guide-banner-element class="body-elm">
-            <p>example body content</p>
-          </c4p-guide-banner-element>
-          <c4p-guide-banner-element class="body-elm">
-            <p>example body content</p>
-          </c4p-guide-banner-element>
-          <c4p-guide-banner-element class="body-elm">
-            <p>example body content</p>
-          </c4p-guide-banner-element>
+        <div class="body" dir="ltr">
+          ${repeat(
+            items,
+            (item) => item.idx,
+            (item) => html`
+              <c4p-guide-banner-element
+                class="body-elm"
+                titleText="${item.titleText} ${item.idx + 1}"
+                descriptionText=${item.descriptionText}
+              >
+                <cds-button kind="ghost">Read more</cds-button>
+              </c4p-guide-banner-element>
+            `
+          )}
+        </div>
+      </div>
+      <div class="footer" slot="footer">
+        <div class="footer-left">
+          <cds-button kind="ghost" class="${blockClass}__toggle-button"
+            >${open ? collapseText : expandText}</cds-button
+          >
+        </div>
+        <div class="footer-right">
+          <cds-button
+            kind="ghost"
+            class="${blockClass}__toggle-button"
+            @click=${previousHandler}
+            >${iconLoader(ChevronLeft16, { slot: 'icon' })}</cds-button
+          >
+          <cds-button
+            kind="ghost"
+            class="${blockClass}__toggle-button"
+            @click=${nextHandler}
+            >${iconLoader(ChevronRight16, { slot: 'icon' })}</cds-button
+          >
         </div>
       </div>
     </c4p-guide-banner>

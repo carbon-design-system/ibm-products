@@ -41,13 +41,14 @@ export const createCellSelectionArea = ({
       selectionAreaVariableWidth += item?.width || defaultColumn?.width;
     }
   });
-  const point1Element = ref
-    ? ref.current.querySelector(
-        `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`
-      ) || ref.current.querySelector(`.${blockClass}__body--td`)
-    : document.querySelector(
-        `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`
-      ) || document.querySelector(`.${blockClass}__body--td`); // if we can't find the point1 element (this can happen in the case where a virtualized row is not present anymore in the DOM), we get the default height of the first body cell we find
+
+  const spreadsheetSelector = contextRef?.current ?? document;
+  const point1Element =
+    spreadsheetSelector.querySelector(
+      `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`
+    ) || spreadsheetSelector.querySelector(`.${blockClass}__body--td`);
+  // if we can't find the point1 element (this can happen in the case where a virtualized row is not present anymore in the DOM), we get the default height of the first body cell we find
+
   const selectionAreaCellHeight = point1Element.offsetHeight;
   const selectionAreaTotalHeight =
     selectionAreaCellHeight * (greatestRowIndex - lowestRowIndex + 1);

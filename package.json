@@ -1,7 +1,7 @@
 {
   "name": "ibm-products",
   "engines": {
-    "node": ">=20.19.x"
+    "node": ">=22.x"
   },
   "private": true,
   "version": "0.0.0",
@@ -154,7 +154,7 @@
     ]
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "^3.2.3",
+    "stylelint-plugin-carbon-tokens": "^4.0.0",
     "stylelint-use-logical": "^2.1.2"
   },
   "packageManager": "yarn@4.10.3"

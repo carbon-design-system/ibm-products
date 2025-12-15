@@ -29,6 +29,88 @@ $block-class: #{$pkg-prefix}--tearsheet;
 // stylelint-disable-next-line carbon/theme-use
 $motion-duration: $duration-moderate-02;
 
+// Keyframes for tearsheet animations
+@keyframes #{$block-class}-overlay-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: var(--overlay-opacity);
+  }
+}
+
+@keyframes #{$block-class}-overlay-exit {
+  from {
+    opacity: var(--overlay-opacity);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes #{$block-class}-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes #{$block-class}-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes #{$block-class}-container-enter {
+  from {
+    transform: translate3d(0, calc(min(95vh, 500px)), 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes #{$block-class}-container-exit {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, calc(min(95vh, 500px)), 0);
+  }
+}
+
+// Keyframes for presence-based animations (same as regular exit but with --presence prefix)
+@keyframes #{$block-class}--presence {
+  from {
+    opacity: var(--overlay-opacity);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes #{$block-class}--presence-container-exit {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, calc(min(95vh, 500px)), 0);
+  }
+}
+
 @include block-wrap($block-class) {
   &.#{$block-class} {
     --overlay-color: #{$overlay};
@@ -37,28 +119,17 @@ $motion-duration: $duration-moderate-02;
     &::before {
       position: absolute;
       display: block;
+
+      animation: #{$block-class}-overlay-exit $motion-duration
+        motion(exit, expressive) forwards;
       background: var(--overlay-color);
       content: '';
       inset: 0;
-      opacity: var(--overlay-opacity);
-
-      transition:
-        background-color $motion-duration motion(exit, expressive),
-        opacity $motion-duration motion(exit, expressive);
+      opacity: 0;
 
       @media (prefers-reduced-motion: reduce) {
-        transition: none;
-      }
-    }
-
-    &:not(.is-visible) {
-      &.#{$block-class}.#{$block-class} .#{$block-class}__container {
-        // we want the enter/leave animation to run up most of the height of the
-        // viewport, capped at 500px to set an upper limit on the movement speed
-        // For the reason for calc() see https://github.com/sass/sass/issues/2849
-        // and https://github.com/sass/node-sass/issues/2815.
-        // stylelint-disable-next-line carbon/layout-use
-        transform: translate3d(0, calc(min(95vh, 500px)), 0);
+        animation: none;
+        opacity: var(--overlay-opacity);
       }
     }
 
@@ -69,11 +140,15 @@ $motion-duration: $duration-moderate-02;
 
     z-index: utilities.z('modal') + 1;
     align-items: flex-end;
+    animation: #{$block-class}-exit $motion-duration motion(exit, expressive)
+      forwards;
     color: $text-primary;
-    transition:
-      visibility 0s linear $motion-duration,
-      background-color $motion-duration motion(exit, expressive),
-      opacity $motion-duration motion(exit, expressive);
+    opacity: 0;
+    visibility: hidden;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
     --#{$block-class}--stacking-scale-factor-single: 0.95;
     --#{$block-class}--stacking-scale-factor-double: 0.9;
   }
@@ -81,12 +156,23 @@ $motion-duration: $duration-moderate-02;
   &.is-visible {
     z-index: utilities.z('modal');
     align-items: flex-end;
-    transition:
-      visibility 0s linear,
-      background-color $motion-duration motion(entrance, expressive),
-      opacity $motion-duration motion(entrance, expressive);
+    animation: #{$block-class}-enter $motion-duration
+      motion(entrance, expressive) forwards;
+    visibility: visible;
+
+    &::before {
+      animation: #{$block-class}-overlay-enter $motion-duration
+        motion(entrance, expressive) forwards;
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      transition: none;
+      animation: none;
+      opacity: 1;
+
+      &::before {
+        animation: none;
+        opacity: var(--overlay-opacity);
+      }
     }
   }
 
@@ -139,11 +225,25 @@ $motion-duration: $duration-moderate-02;
     box-shadow: 0 4px 10px 2px $ai-drop-shadow;
   }
 
-  // extra specificity to ensure this transition overrides the carbon default
+  // extra specificity to ensure this animation overrides the carbon default
   &.#{$block-class}.#{$block-class} .#{$block-class}__container {
-    transition:
-      transform $motion-duration motion(entrance, expressive),
-      max-height $motion-duration motion(entrance, expressive);
+    animation: #{$block-class}-container-exit $motion-duration
+      motion(exit, expressive) forwards;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      transform: translate3d(0, calc(min(95vh, 500px)), 0);
+    }
+  }
+
+  &.is-visible.#{$block-class}.#{$block-class} .#{$block-class}__container {
+    animation: #{$block-class}-container-enter $motion-duration
+      motion(entrance, expressive) forwards;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   &.#{$block-class}--stacked-1-of-2
@@ -460,5 +560,28 @@ $motion-duration: $duration-moderate-02;
     /* stylelint-disable-next-line carbon/layout-use */
     margin-block: 6px;
     margin-inline-end: $spacing-05;
+  }
+
+  // Presence animation styles - use presence-prefixed animations
+  &.#{$block-class}--presence {
+    .#{$block-class}__container {
+      animation: #{$block-class}--presence-container-exit $motion-duration
+        motion(exit, expressive) forwards;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        transform: translate3d(0, calc(min(95vh, 500px)), 0);
+      }
+    }
+
+    &::before {
+      animation: #{$block-class}--presence-overlay-exit $motion-duration
+        motion(exit, expressive) forwards;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        opacity: 0;
+      }
+    }
   }
 }

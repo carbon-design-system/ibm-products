@@ -14,8 +14,6 @@ import Group from '@carbon/icons/es/group/16';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import headshot from './_story-assets/headshot.jpg';
 
-const storyPrefix = 'user-avatar-stories__';
-
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
   [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
@@ -26,8 +24,6 @@ const tooltipAlignments = {
   [`left`]: POPOVER_ALIGNMENT.LEFT,
   [`right`]: POPOVER_ALIGNMENT.RIGHT,
 };
-
-const args = { tooltipAlignment: POPOVER_ALIGNMENT.RIGHT, size: 'md' };
 
 const argTypes = {
   backgroundColor: {
@@ -71,10 +67,12 @@ const argTypes = {
 
 export const Default = {
   args: {
-    ...args,
+    tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
+    size: 'md',
     tooltipText: 'TW, Thomas J. Watson user profile',
     name: 'Thomas J. Watson',
     backgroundColor: 'order-1-cyan',
+    theme: 'light',
   },
   argTypes,
   render: (args) => {
@@ -84,8 +82,6 @@ export const Default = {
         tooltip-text=${args.tooltipText}
         name=${args.name}
         size=${args.size}
-        image=${args.image}
-        image-description=${args.imageDescription}
         background-color=${args.backgroundColor}
         theme=${args.theme}
       >
@@ -96,10 +92,12 @@ export const Default = {
 
 export const WithIcon = {
   args: {
-    ...args,
+    tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
+    size: 'md',
     tooltipText: 'TW, Thomas J. Watson user profile',
     name: 'Thomas J. Watson',
     backgroundColor: 'order-1-cyan',
+    theme: 'light',
   },
   argTypes,
   render: (args) => {
@@ -109,8 +107,6 @@ export const WithIcon = {
         tooltip-text=${args.tooltipText}
         name=${args.name}
         size=${args.size}
-        image=${args.image}
-        image-description=${args.imageDescription}
         background-color=${args.backgroundColor}
         theme=${args.theme}
       >
@@ -122,10 +118,12 @@ export const WithIcon = {
 
 export const WithImage = {
   args: {
-    ...args,
+    tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
+    size: 'md',
     image: headshot,
     tooltipText: 'TW, Thomas J. Watson user profile',
     imageDescription: 'Avatar of Thomas J. Watson',
+    theme: 'light',
   },
   argTypes,
   render: (args) => {
@@ -133,7 +131,6 @@ export const WithImage = {
       <c4p-user-avatar
         tooltip-alignment=${args.tooltipAlignment}
         tooltip-text=${args.tooltipText}
-        name=${args.name}
         size=${args.size}
         image=${args.image}
         image-description=${args.imageDescription}

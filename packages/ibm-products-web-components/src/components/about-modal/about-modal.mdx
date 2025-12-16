@@ -1,6 +1,23 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as AboutModalStories from './about-modal.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import * as helpers from './about-modal-helpers';
+
+export const customFunctionArr= [
+      Object.entries(helpers)
+    .map(([name, value]) => {
+      // If it's a function -> stringify function normally
+      if (typeof value === 'function') {
+        return `const ${name} = ${value.toString()}`;
+      }
+      // Otherwise treat as literal → add quotes properly
+      return `const ${name} = ${JSON.stringify(value)};`;
+    })
+    .join('\n')
+];
+
+export const customImportArr = [`import '@carbon/web-components/es/components/link/index.js';`];
 
 <Meta of={AboutModalStories} />
 
@@ -27,11 +44,49 @@ Here's a quick example to get you started.
 import '@carbon/ibm-products-web-components/es/components/about-modal/index.js';
 ```
 
-### HTML
+### HTML  
 
 ```html
 <c4p-about-modal> </c4p-about-modal>
 ```
+
+### Example Usage
+
+### Default
+
+<Canvas
+  of={AboutModalStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: AboutModalStories.Default,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          styles: AboutModalStories.Default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+### About Modal With All Props Set
+
+<Canvas
+  of={AboutModalStories.AboutModalWithAllPropsSet}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: AboutModalStories.AboutModalWithAllPropsSet,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          styles: AboutModalStories.AboutModalWithAllPropsSet.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
 
 ## `<c4p-about-modal>` attributes, properties and events
 

@@ -1,0 +1,24 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as BigNumberStories from './big-number.stories';
+
+<Meta of={BigNumberStories} />
+
+# BigNumber
+
+{/* 
+// todo:  uncomment this after adding stackblitz example
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/checklist)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/checklist) */}
+
+
+
+### Usage Example
+
+<Canvas className="page-header--docs-demo" of={BigNumberStories.Default} />
+
+<Canvas className="page-header--docs-demo" of={BigNumberStories.WithCustomIcons} />
+

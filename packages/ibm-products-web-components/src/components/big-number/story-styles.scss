@@ -6,6 +6,8 @@
 */
 @use '@carbon/ibm-products-styles/scss/config';
 @use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 $prefix: config.$pkg-prefix;
 $story-prefix: #{$prefix}--big-number-stories;
@@ -19,4 +21,18 @@ $story-prefix: #{$prefix}--big-number-stories;
   align-items: center;
   padding: spacing.$spacing-05;
   block-size: spacing.$spacing-13;
+}
+
+.custom-label {
+  @include type-style('label-01');
+
+  display: inline-block;
+  margin: 0;
+  color: $text-secondary;
+}
+
+.#{prefix}--big-number--xl {
+  .custom-label {
+    @include type-style('body-compact-01');
+  }
 }

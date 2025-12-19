@@ -14,7 +14,7 @@ $prefix: config.$pkg-prefix;
 $baseClass: #{$prefix}--big-number;
 
 :host(#{$prefix}-big-number) {
-  ::slotted(.#{$prefix}--big-number__trend) {
+  ::slotted(.#{$baseClass}__trend) {
     margin-block-start: $spacing-03;
     vertical-align: top;
   }

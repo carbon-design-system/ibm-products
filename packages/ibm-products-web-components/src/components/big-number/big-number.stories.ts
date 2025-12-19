@@ -9,10 +9,12 @@
 
 import { html } from 'lit';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import { CarbonIcon } from '@carbon/web-components/es/globals/es/globals/internal/icon-loader-utils.js';
+import '@carbon/web-components/es/components/tooltip/index.js';
 import ArrowDown16 from '@carbon/icons/es/arrow--down/16.js';
 import ArrowDown20 from '@carbon/icons/es/arrow--down/20.js';
 import ArrowDown24 from '@carbon/icons/es/arrow--down/24.js';
-
+import Information16 from '@carbon/icons/es/information/16.js';
 import Edit16 from '@carbon/icons/es/edit/16.js';
 
 import { prefix } from '../../globals/settings';
@@ -20,7 +22,6 @@ import './index';
 
 import { BigNumberSize } from './constants';
 import styles from './story-styles.scss?lit';
-import { CarbonIcon } from '@carbon/web-components/es/globals/es/globals/internal/icon-loader-utils.js';
 
 const storyPrefix = `${prefix}--big-number-stories`;
 
@@ -218,6 +219,19 @@ const customBigNumberTemplate = {
           ?percentage=${percentage}
           ?loading=${loading}
         >
+          <div slot="label">
+            <span class="custom-label"> ${label} </span>
+            <cds-tooltip align="right">
+              ${iconLoader(Information16, {
+                id: 'trigger',
+                'aria-labelledby': 'content',
+              })}
+              <cds-tooltip-content id="content"
+                >Tooltip content</cds-tooltip-content
+              >
+            </cds-tooltip>
+          </div>
+
           ${iconLoader(getTrendingIcon(size), {
             slot: 'trending-icon',
             class: `${prefix}--big-number__trend`,

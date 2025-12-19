@@ -25,8 +25,7 @@ import {
   BigNumberSizeValues,
   Characters,
   DefaultLocale,
-  formatValue,
-  getIconSize,
+  UNKNOWN,
 } from './constants';
 import styles from './big-number.scss?lit';
 
@@ -35,92 +34,98 @@ const blockClass = `${prefix}--big-number`;
 /**
  * @element c4p-big-number
  * @slot label - Header area that displays the label above the value. This slot can be customized to include an info icon and a tooltip for additional context.
- * @slot trending-icon – Displays an icon indicating trend direction. Can be customized to show a downward arrow when the trend is not upward.
- * @slot icon-button – Displays an icon button next to `value`.
+ * @slot trending-icon - Displays an icon indicating trend direction. Can be customized to show a downward arrow when the trend is not upward.
+ * @slot icon-button - Displays an icon button next to `value`.
  */
 @customElement(`${prefix}-big-number`)
 class CDSBigNumber extends LitElement {
-  @property({ type: Number })
-  fractionDigits? = 1;
+  @property({ type: Number, attribute: 'fraction-digits' })
+  fractionDigits = 1;
 
   @property({ type: String })
   label: string | undefined;
 
   @property({ type: Boolean })
-  loading? = false;
+  loading = false;
 
   @property({ type: String })
-  locale? = DefaultLocale;
+  locale = DefaultLocale;
 
   @property({ type: Boolean })
-  percentage? = false;
+  percentage = false;
 
   @property({ type: String })
-  size?: BigNumberSizeValues = BigNumberSize.Default;
+  size: BigNumberSizeValues = BigNumberSize.Default;
 
   @property({ type: Number })
   total?: number;
 
   @property({ type: Boolean })
-  trending? = false;
+  trending = false;
 
   @property({ type: Boolean })
-  truncate? = true;
+  truncate = true;
 
   @property({ type: Number })
   value?: number;
 
-  private _getSupportedLocale(locale: string): string {
+  private _getSupportedLocale(
+    locale: Intl.LocalesArgument
+  ): Intl.LocalesArgument {
     return getSupportedLocale(locale, DefaultLocale);
   }
 
   private _formatValue(
-    supportedLocale: string,
-    value: number,
+    locale: Intl.LocalesArgument,
+    value: number | null | undefined,
     fractionDigits: number,
     truncate: boolean
-  ): string {
-    return formatValue(supportedLocale, value, fractionDigits, truncate);
+  ): string | null | undefined {
+    if (value === null || value === undefined || typeof value !== 'number') {
+      return null;
+    }
+
+    return truncate
+      ? Intl.NumberFormat(locale, {
+          notation: 'compact',
+          minimumFractionDigits: fractionDigits,
+          maximumFractionDigits: Math.round(fractionDigits),
+        }).format(value)
+      : Intl.NumberFormat(locale).format(value);
   }
 
-  private _getTruncatedValue(): string {
+  private _getTruncatedValue(
+    value: number | undefined,
+    placeholder: string
+  ): string {
     const supportedLocale = this._getSupportedLocale(this.locale);
     const truncatedValue = this._formatValue(
       supportedLocale,
-      this.value,
+      value,
       this.fractionDigits,
       this.truncate
     );
-    return truncatedValue ?? Characters.Dash;
+    return truncatedValue ?? placeholder;
   }
 
-  private _getTruncatedTotal(): string {
-    const supportedLocale = this._getSupportedLocale(this.locale);
-    const truncatedTotal = this._formatValue(
-      supportedLocale,
-      this.total,
-      this.fractionDigits,
-      this.truncate
-    );
-    return truncatedTotal ?? 'Unknown';
-  }
-
-  private _shouldDisplayDenominator(): boolean {
+  private _shouldDisplayDenominator(
+    truncatedValue: string,
+    truncatedTotal: string
+  ): boolean {
     return (
       !this.percentage &&
-      this.total &&
-      this.value &&
+      !!this.total &&
+      !!this.value &&
       this.total > this.value &&
-      this._getTruncatedValue() !== this._getTruncatedTotal()
+      truncatedValue !== truncatedTotal
     );
   }
 
   private _getTrendingIcon(): CarbonIcon {
-    const iconSize: number = getIconSize(this.size);
-    switch (iconSize) {
-      case 'lg':
+    switch (this.size) {
+      case BigNumberSize.Large:
         return ArrowUp20;
-      case 'xl':
+      case BigNumberSize.XLarge:
         return ArrowUp24;
       default:
         return ArrowUp16;
@@ -128,7 +133,7 @@ class CDSBigNumber extends LitElement {
   }
 
   render() {
-    const { loading, label, percentage, size, trending } = this;
+    const { loading, label, percentage, size, total, trending, value } = this;
 
     const bigNumberClasses = classMap({
       [`${blockClass}`]: true,
@@ -136,9 +141,12 @@ class CDSBigNumber extends LitElement {
       [`${blockClass}--xl`]: size === 'xl',
     });
 
-    const truncatedValue = this._getTruncatedValue();
-    const truncatedTotal = this._getTruncatedTotal();
-    const shouldDisplayDenominator = this._shouldDisplayDenominator();
+    const truncatedValue = this._getTruncatedValue(value, Characters.Dash);
+    const truncatedTotal = this._getTruncatedValue(total, UNKNOWN);
+    const shouldDisplayDenominator: boolean = this._shouldDisplayDenominator(
+      truncatedValue,
+      truncatedTotal
+    );
 
     if (loading) {
       return html`

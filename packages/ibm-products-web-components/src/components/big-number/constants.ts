@@ -21,33 +21,4 @@ export enum Characters {
 }
 
 export const DefaultLocale = 'en-US';
-
-export const formatValue = (
-  locale: Intl.LocalesArgument,
-  value: number | null | undefined,
-  fractionDigits: number,
-  truncate: boolean
-): string | null | undefined => {
-  if (value === null || value === undefined || typeof value !== 'number') {
-    return null;
-  }
-
-  return truncate
-    ? Intl.NumberFormat(locale, {
-        notation: 'compact',
-        minimumFractionDigits: fractionDigits,
-        maximumFractionDigits: Math.round(fractionDigits),
-      }).format(value)
-    : Intl.NumberFormat(locale).format(value);
-};
-
-export const getIconSize = (size: BigNumberSizeValues): number => {
-  switch (size) {
-    case 'lg':
-      return 20;
-    case 'xl':
-      return 24;
-    default:
-      return 16;
-  }
-};
+export const UNKNOWN = 'Unknown';

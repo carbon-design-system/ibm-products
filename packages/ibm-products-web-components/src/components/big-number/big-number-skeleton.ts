@@ -20,14 +20,13 @@ import styles from './big-number-skeleton.scss?lit';
 const blockClass = `${prefix}--big-number-skeleton`;
 
 /**
- * @element c4p-big-number-skeleton display a skeleton version while
- * content is loading (handled by the c4p-big-number prop `loading').
- * Note: This component is only used within c4p-big-number.
+ * @element c4p-big-number-skeleton
+ * Note: This component is only used within c4p-big-number. It displays a skeleton version while content is loading (handled by the c4p-big-number prop `loading').
  */
 
 @customElement(`${prefix}-big-number-skeleton`)
 class CDSBigNumberSkeleton extends LitElement {
-  @property({ type: String, attribute: 'size' })
+  @property({ type: String })
   size?: BigNumberSizeValues = BigNumberSize.Default;
 
   render() {

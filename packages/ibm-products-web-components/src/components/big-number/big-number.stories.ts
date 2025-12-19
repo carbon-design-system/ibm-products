@@ -149,7 +149,7 @@ const defaultChecklistTemplate = {
       </style>
       <div class="${storyPrefix}__viewport">
         <c4p-big-number
-          .fractionDigits=${fractionDigits}
+          fraction-digits=${fractionDigits}
           label=${label}
           .value=${value}
           .total=${total}
@@ -207,7 +207,7 @@ const customBigNumberTemplate = {
       </style>
       <div class="${storyPrefix}__viewport">
         <c4p-big-number
-          .fractionDigits=${fractionDigits}
+          fraction-digits=${fractionDigits}
           label=${label}
           .value=${value}
           .total=${total}
@@ -241,6 +241,28 @@ const customBigNumberTemplate = {
 
 export const WithCustomIcons = {
   ...customBigNumberTemplate,
+};
+
+export const Skeleton = {
+  args: { size: BigNumberSize.Default },
+  argTypes: {
+    size: {
+      options: Object.values(BigNumberSize),
+      control: { type: 'radio' },
+    },
+  },
+  render: (args) => {
+    const { size } = args;
+
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div class="${storyPrefix}__viewport">
+        <c4p-big-number-skeleton size=${size}> </c4p-big-number-skeleton>
+      </div>
+    `;
+  },
 };
 
 const meta = {

@@ -26,19 +26,20 @@ $skeleton-block-class: #{$prefix}--big-number-skeleton;
   }
 
   .#{$skeleton-block-class}__label {
-    block-size: $spacing-05;
+    block-size: $spacing-04;
+    inline-size: 70%;
     margin-block: 0 $spacing-03;
   }
 
   .#{$skeleton-block-class}__value::part(placeholder) {
     margin: 0;
     block-size: $spacing-08;
-    inline-size: 80%;
+    inline-size: 100%;
   }
 
   .#{$skeleton-block-class}.#{$skeleton-block-class}--lg
     .#{$skeleton-block-class}__label {
-    block-size: $spacing-05;
+    margin-block: 0 $spacing-04;
   }
 
   .#{$skeleton-block-class}.#{$skeleton-block-class}--lg
@@ -48,7 +49,7 @@ $skeleton-block-class: #{$prefix}--big-number-skeleton;
 
   .#{$skeleton-block-class}.#{$skeleton-block-class}--xl
     .#{$skeleton-block-class}__label {
-    block-size: $spacing-05;
+    margin-block: 0 $spacing-05;
   }
 
   .#{$skeleton-block-class}.#{$skeleton-block-class}--xl

@@ -18,5 +18,5 @@ $story-prefix: #{$prefix}--big-number-stories;
   display: grid;
   align-items: center;
   padding: spacing.$spacing-05;
-  block-size: 100vh;
+  block-size: spacing.$spacing-13;
 }

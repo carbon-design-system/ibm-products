@@ -71,7 +71,8 @@ describe('c4p-big-number', () => {
     ).toBe('12,3 k');
     expect(
       shadow!.querySelector(`.${blockClass}__total`)?.textContent?.trim()
-    ).toBe(`${Characters.Slash}1,0 M`);
+      // eslint-disable-next-line no-irregular-whitespace
+    ).toBe(`${Characters.Slash}1,0 M`);
   });
 
   it('handles loading state', async () => {

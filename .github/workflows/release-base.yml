@@ -109,10 +109,6 @@ jobs:
       #     name: playwright-avt-report
       #     path: .playwright
 
-      - name: Set NPM token
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.CARBON_BOT_NPM_TOKEN }}" >> .npmrc
-
       # Set the PUBLISH environment variable to be used later in the Lerna publish command.
       # Lerna has dry run on by default, need to pass in '--yes' flag before it will go ahead and publish.
       - name: Set dry run env variable

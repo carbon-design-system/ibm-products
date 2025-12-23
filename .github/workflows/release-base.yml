@@ -30,7 +30,7 @@ permissions:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     timeout-minutes: 60
     env:
       GH_TOKEN: ${{ secrets.MERGE_ACTION }}

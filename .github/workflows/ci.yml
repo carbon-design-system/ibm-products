@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
@@ -76,7 +76,7 @@ jobs:
         run: yarn ci-check:spellcheck
 
   test-c4p:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
@@ -97,7 +97,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   test-c4p-wc:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
@@ -125,7 +125,7 @@ jobs:
       matrix:
         shardIndex: [1, 2, 3, 4]
         shardTotal: [4]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
@@ -216,7 +216,7 @@ jobs:
           retention-days: 14
 
   vrt-runner:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     if:
       ${{ github.repository == 'carbon-design-system/ibm-products' &&
       github.event.pull_request.draft == false }}

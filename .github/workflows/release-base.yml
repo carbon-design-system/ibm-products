@@ -52,7 +52,7 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: 'yarn'
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
 
       - name:
           Run @ibm/telemetry-js-config-generator to regenerate ibm-products

@@ -13,9 +13,11 @@ collect:
         - close-icon-description
         - closeIconDescription
         - collapse-label
+        - collapseText
         - defaultOpen
         - description
         - expand-label
+        - expandText
         - id
         - kind
         - label
@@ -26,6 +28,7 @@ collect:
         - size
         - slot
         - title
+        - titleText
         - type
         - value
         - view-all-label
@@ -52,8 +55,19 @@ collect:
         - clickable
         - onc4p-checklist-item-clicked
         - status
+        # c4p-coachmark
+        - dropShadow
+        - floating
+        - highContrast
+        - position
         # c4p-coachmark-beacon
+        - expanded
         - onc4p-coachmark-beacon-clicked
+        # c4p-coachmark-header
+        - dragIconDescription
+        # c4p-guide-banner
+        - onc4p-guide-banner-close
+        - onc4p-guide-banner-toggle
         # c4p-interstitial-screen
         - fullscreen
         - onc4p-interstitial-beingclosed
@@ -98,7 +112,6 @@ collect:
         - onc4p-options-tile-close
         - onc4p-options-tile-open
         - titleId
-        - titleText
         # c4p-page-header-breadcrumb
         - border
         - content-actions-flush
@@ -107,9 +120,7 @@ collect:
         - subtitle
         # c4p-page-header-scroller
         - close-on-activation
-        - collapseText
         - enter-delay-ms
-        - expandText
         - leave-delay-ms
         # c4p-side-panel
         - animate-title

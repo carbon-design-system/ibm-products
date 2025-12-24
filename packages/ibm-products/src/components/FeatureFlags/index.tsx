@@ -31,6 +31,7 @@ export interface FeatureFlagsProps {
   // exampleComponentSecondaryIcon?: boolean;
   // exampleComponentUseExample?: boolean;
   enableSidepanelResizer?: boolean;
+  enablePresence?: boolean;
   enableTestFlagA?: boolean;
   enableTestFlagB?: boolean;
 }
@@ -40,6 +41,7 @@ GlobalFeatureFlags.merge({
   'enable-datagrid-useInlineEdit': false,
   'enable-datagrid-useEditableCell': false,
   'enable-datagrid-useCustomizeColumns': false,
+  'enable-presence': false,
   'ExampleComponent.secondaryIcon': false,
   'ExampleComponent.useExample': false,
   'enable-test-flag-a': false, // used in testing
@@ -66,6 +68,7 @@ function FeatureFlags({
   enableDatagridUseCustomizeColumns = false,
   // exampleComponentSecondaryIcon = false,
   // exampleComponentUseExample = false,
+  enablePresence = false,
   enableSidepanelResizer = false,
   enableTestFlagA = false,
   enableTestFlagB = false,
@@ -80,6 +83,7 @@ function FeatureFlags({
     'enable-datagrid-useCustomizeColumns': enableDatagridUseCustomizeColumns,
     // 'ExampleComponent.secondaryIcon': exampleComponentSecondaryIcon,
     // 'ExampleComponent.useExample': exampleComponentUseExample,
+    'enable-presence': enablePresence,
     enableSidepanelResizer: enableSidepanelResizer,
     'enable-test-flag-a': enableTestFlagA,
     'enable-test-flag-b': enableTestFlagB,
@@ -124,6 +128,7 @@ FeatureFlags.propTypes = {
   enableDatagridUseCustomizeColumns: PropTypes.bool,
   enableDatagridUseEditableCell: PropTypes.bool,
   enableDatagridUseInlineEdit: PropTypes.bool,
+  enablePresence: PropTypes.bool,
   enableSidepanelResizer: PropTypes.bool,
   enableTestFlagA: PropTypes.bool,
   enableTestFlagB: PropTypes.bool,

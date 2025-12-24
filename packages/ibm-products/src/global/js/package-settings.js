@@ -139,6 +139,7 @@ const defaults = {
     'Datagrid.useCustomizeColumns': false,
     'ExampleComponent.secondaryIcon': false,
     'ExampleComponent.useExample': false,
+    'enable-presence': false,
   },
 };
 

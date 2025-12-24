@@ -395,6 +395,289 @@ describe(componentName, () => {
       expect(tab.textContent).toEqual(tabContent);
     });
   });
+
+  describe('enablePresence', () => {
+    beforeEach(() => {
+      pkg.feature['enable-presence'] = true;
+    });
+
+    afterEach(() => {
+      pkg.feature['enable-presence'] = false;
+    });
+
+    it('renders tearsheet when enablePresence is true and open is true', () => {
+      render(
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
+          {children}
+        </Tearsheet>
+      );
+      expect(screen.getByText(childFragment)).toBeInTheDocument();
+    });
+
+    it('does not render tearsheet initially when enablePresence is true and open is false', () => {
+      render(
+        <Tearsheet
+          open={false}
+          title="Test Tearsheet"
+          closeIconDescription="Close"
+        >
+          {children}
+        </Tearsheet>
+      );
+      expect(screen.queryByText(childFragment)).not.toBeInTheDocument();
+    });
+
+    it('removes tearsheet from DOM after closing when enablePresence is true', async () => {
+      const { rerender } = render(
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
+          {children}
+        </Tearsheet>
+      );
+
+      // Tearsheet should be visible
+      expect(screen.getByText(childFragment)).toBeInTheDocument();
+
+      // Close the tearsheet
+      rerender(
+        <Tearsheet
+          open={false}
+          title="Test Tearsheet"
+          closeIconDescription="Close"
+        >
+          {children}
+        </Tearsheet>
+      );
+
+      // Wait for transition to complete (using act to handle state updates)
+      await act(async () => {
+        // Simulate transitionend event
+        const modal = document.querySelector(`.${carbon.prefix}--modal`);
+        if (modal) {
+          const event = new Event('transitionend', { bubbles: true });
+          Object.defineProperty(event, 'target', {
+            value: modal.querySelector(`.${blockClass}__container`),
+            enumerable: true,
+          });
+          Object.defineProperty(event, 'propertyName', {
+            value: 'transform',
+            enumerable: true,
+          });
+          modal.dispatchEvent(event);
+        }
+        // Small delay to allow state updates
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      });
+
+      // Tearsheet should be removed from DOM
+      expect(screen.queryByText(childFragment)).not.toBeInTheDocument();
+    });
+
+    it('keeps tearsheet in DOM when enablePresence is false (default behavior)', async () => {
+      const { rerender } = render(
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
+          {children}
+        </Tearsheet>
+      );
+
+      // Tearsheet should be visible
+      expect(screen.getByText(childFragment)).toBeInTheDocument();
+
+      // Close the tearsheet
+      rerender(
+        <Tearsheet
+          open={false}
+          title="Test Tearsheet"
+          closeIconDescription="Close"
+        >
+          {children}
+        </Tearsheet>
+      );
+
+      // Tearsheet should still be in DOM (just hidden)
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      });
+
+      // With enablePresence=false, the modal stays in DOM
+      const modal = document.querySelector(`.${carbon.prefix}--modal`);
+      expect(modal).toBeInTheDocument();
+    });
+
+    it('delays opening animation when enablePresence is true', async () => {
+      jest.useFakeTimers();
+
+      render(
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
+          {children}
+        </Tearsheet>
+      );
+
+      // Initially, the modal might not be fully open due to the delay
+      const modal = document.querySelector(`.${carbon.prefix}--modal`);
+      expect(modal).toBeInTheDocument();
+
+      // Fast-forward time to trigger the delayed open
+      act(() => {
+        jest.advanceTimersByTime(20);
+      });
+
+      // Now the modal should be fully open
+      expect(screen.getByText(childFragment)).toBeInTheDocument();
+
+      jest.useRealTimers();
+    });
+
+    it('handles transitionend event correctly with enablePresence', async () => {
+      const { rerender } = render(
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
+          {children}
+        </Tearsheet>
+      );
+
+      // Close the tearsheet
+      rerender(
+        <Tearsheet
+          open={false}
+          title="Test Tearsheet"
+          closeIconDescription="Close"
+        >
+          {children}
+        </Tearsheet>
+      );
+
+      // Simulate transitionend event with wrong target (should not trigger exit)
+      await act(async () => {
+        const modal = document.querySelector(`.${carbon.prefix}--modal`);
+        if (modal) {
+          const wrongEvent = new Event('transitionend', { bubbles: true });
+          Object.defineProperty(wrongEvent, 'target', {
+            value: document.body,
+            enumerable: true,
+          });
+          Object.defineProperty(wrongEvent, 'propertyName', {
+            value: 'transform',
+            enumerable: true,
+          });
+          modal.dispatchEvent(wrongEvent);
+        }
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      });
+
+      // Should still be in DOM (wrong target)
+      expect(screen.getByText(childFragment)).toBeInTheDocument();
+
+      // Now simulate correct transitionend event
+      await act(async () => {
+        const modal = document.querySelector(`.${carbon.prefix}--modal`);
+        if (modal) {
+          const correctEvent = new Event('transitionend', { bubbles: true });
+          Object.defineProperty(correctEvent, 'target', {
+            value: modal.querySelector(`.${blockClass}__container`),
+            enumerable: true,
+          });
+          Object.defineProperty(correctEvent, 'propertyName', {
+            value: 'transform',
+            enumerable: true,
+          });
+          modal.dispatchEvent(correctEvent);
+        }
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      });
+
+      // Now should be removed
+      expect(screen.queryByText(childFragment)).not.toBeInTheDocument();
+    });
+
+    it('handles transitionend event with wrong property name', async () => {
+      const { rerender } = render(
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
+          {children}
+        </Tearsheet>
+      );
+
+      // Close the tearsheet
+      rerender(
+        <Tearsheet
+          open={false}
+          title="Test Tearsheet"
+          closeIconDescription="Close"
+        >
+          {children}
+        </Tearsheet>
+      );
+
+      // Simulate transitionend event with wrong property name
+      await act(async () => {
+        const modal = document.querySelector(`.${carbon.prefix}--modal`);
+        if (modal) {
+          const event = new Event('transitionend', { bubbles: true });
+          Object.defineProperty(event, 'target', {
+            value: modal.querySelector(`.${blockClass}__container`),
+            enumerable: true,
+          });
+          Object.defineProperty(event, 'propertyName', {
+            value: 'opacity', // Wrong property
+            enumerable: true,
+          });
+          modal.dispatchEvent(event);
+        }
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      });
+
+      // Should still be in DOM (wrong property name)
+      expect(screen.getByText(childFragment)).toBeInTheDocument();
+    });
+
+    it('reopens correctly after closing with enablePresence', async () => {
+      const { rerender } = render(
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
+          {children}
+        </Tearsheet>
+      );
+
+      // Close the tearsheet
+      rerender(
+        <Tearsheet
+          open={false}
+          title="Test Tearsheet"
+          closeIconDescription="Close"
+        >
+          {children}
+        </Tearsheet>
+      );
+
+      // Complete the exit
+      await act(async () => {
+        const modal = document.querySelector(`.${carbon.prefix}--modal`);
+        if (modal) {
+          const event = new Event('transitionend', { bubbles: true });
+          Object.defineProperty(event, 'target', {
+            value: modal.querySelector(`.${blockClass}__container`),
+            enumerable: true,
+          });
+          Object.defineProperty(event, 'propertyName', {
+            value: 'transform',
+            enumerable: true,
+          });
+          modal.dispatchEvent(event);
+        }
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      });
+
+      // Should be removed
+      expect(screen.queryByText(childFragment)).not.toBeInTheDocument();
+
+      // Reopen the tearsheet
+      rerender(
+        <Tearsheet open title="Test Tearsheet" closeIconDescription="Close">
+          {children}
+        </Tearsheet>
+      );
+
+      // Should be visible again
+      expect(screen.getByText(childFragment)).toBeInTheDocument();
+    });
+  });
 });
 
 describe(componentNameNarrow, () => {
@@ -403,6 +686,76 @@ describe(componentNameNarrow, () => {
   });
 
   commonTests(TearsheetNarrow, componentNameNarrow, {}, true);
+
+  describe('enablePresence', () => {
+    beforeEach(() => {
+      pkg.feature['enable-presence'] = true;
+    });
+
+    afterEach(() => {
+      pkg.feature['enable-presence'] = false;
+    });
+
+    it('renders narrow tearsheet when enablePresence is true and open is true', () => {
+      render(
+        <TearsheetNarrow
+          open
+          title="Test Narrow Tearsheet"
+          closeIconDescription="Close"
+        >
+          {children}
+        </TearsheetNarrow>
+      );
+      expect(screen.getByText(childFragment)).toBeInTheDocument();
+    });
+
+    it('removes narrow tearsheet from DOM after closing when enablePresence is true', async () => {
+      const { rerender } = render(
+        <TearsheetNarrow
+          open
+          title="Test Narrow Tearsheet"
+          closeIconDescription="Close"
+        >
+          {children}
+        </TearsheetNarrow>
+      );
+
+      // Tearsheet should be visible
+      expect(screen.getByText(childFragment)).toBeInTheDocument();
+
+      // Close the tearsheet
+      rerender(
+        <TearsheetNarrow
+          open={false}
+          title="Test Narrow Tearsheet"
+          closeIconDescription="Close"
+        >
+          {children}
+        </TearsheetNarrow>
+      );
+
+      // Wait for transition to complete
+      await act(async () => {
+        const modal = document.querySelector(`.${carbon.prefix}--modal`);
+        if (modal) {
+          const event = new Event('transitionend', { bubbles: true });
+          Object.defineProperty(event, 'target', {
+            value: modal.querySelector(`.${blockClass}__container`),
+            enumerable: true,
+          });
+          Object.defineProperty(event, 'propertyName', {
+            value: 'transform',
+            enumerable: true,
+          });
+          modal.dispatchEvent(event);
+        }
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      });
+
+      // Tearsheet should be removed from DOM
+      expect(screen.queryByText(childFragment)).not.toBeInTheDocument();
+    });
+  });
 });
 
 describe(componentNameCreateNarrow, () => {

@@ -24,7 +24,7 @@ export default class SetOfTags extends LitElement {
   @state()
   hiddenTags: TagType[] = [];
 
-  @property({ type: Array, attribute: 'tags-data', reflect: true })
+  @property({ type: Array })
   tagsData: TagType[] = [];
 
   @query(`.${blockClass}`)
@@ -124,7 +124,10 @@ export default class SetOfTags extends LitElement {
       event instanceof PointerEvent ||
       (event instanceof KeyboardEvent && [' ', 'Enter'].includes(event.key))
     ) {
-      this.isPopoverOpen = !this.isPopoverOpen;
+      event.preventDefault();
+      requestAnimationFrame(() => {
+        this.isPopoverOpen = !this.isPopoverOpen;
+      });
     }
   }
 
@@ -175,7 +178,7 @@ export default class SetOfTags extends LitElement {
           <cds-popover
             ?open=${this.isPopoverOpen}
             ?highContrast=${true}
-            align=${document.dir === 'rtl' ? 'bottom-left' : 'bottom-right'}
+            align=${document.dir === 'rtl' ? 'right-top' : 'left-top'}
           >
             <cds-operational-tag
               size=${this.tagsData[0]?.size}

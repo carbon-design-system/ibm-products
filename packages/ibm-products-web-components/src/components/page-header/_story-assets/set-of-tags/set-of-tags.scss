@@ -26,12 +26,16 @@ $block-class: #{$prefix}--set-of-tags;
   inline-size: 100%;
   .#{$block-class} {
     display: flex;
-    // Spacing between tags.
-    gap: $spacing-03;
     box-sizing: border-box;
     justify-content: flex-end;
     inline-size: 100%;
     white-space: nowrap;
+
+    > span:has(#{$carbon-prefix}-tag),
+    > span:has(#{$carbon-prefix}-operational-tag),
+    > span:has(#{$carbon-prefix}-dismissible-tag) {
+      padding: $spacing-02;
+    }
 
     &__popover-container {
       padding: $spacing-05;
@@ -82,14 +86,14 @@ $block-class: #{$prefix}--set-of-tags;
     display: none;
   }
 
-  cds-modal-header {
+  #{$carbon-prefix}-modal-header {
     padding-inline: $spacing-05;
   }
 
-  cds-modal-body {
+  #{$carbon-prefix}-modal-body {
     @extend .#{$carbon-prefix}--modal-scroll-content;
 
-    cds-tag {
+    #{$carbon-prefix}-tag {
       margin-inline-start: 0;
     }
   }

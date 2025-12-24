@@ -41,7 +41,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
 
       - name: Free disk space
-        uses: ./free-disk-space
+        uses: ./.github/actions/free-disk-space
 
       # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
       - run: |

@@ -1,0 +1,31 @@
+name: 'Free Disk Space'
+description: 'Free up disk space by removing build artifacts and generated files'
+runs:
+  using: 'composite'
+  steps:
+    - name: Free disk space
+      shell: bash
+      run: |
+        echo "=== Before cleanup ==="
+        df -h
+        echo ""
+        echo "=== Removing build artifacts and generated files ==="
+        
+        # Remove build outputs
+        rm -rf packages/*/dist
+        rm -rf packages/*/lib
+        rm -rf packages/*/storybook-static
+        
+        # Remove test artifacts
+        rm -rf .playwright
+        
+        # Remove cache directories (will be restored from GitHub cache if needed)
+        rm -rf .yarn/cache
+        rm -rf node_modules/.cache
+        
+        echo ""
+        echo "=== After cleanup ==="
+        df -h
+        echo ""
+        echo "=== Disk space freed successfully ==="
+        

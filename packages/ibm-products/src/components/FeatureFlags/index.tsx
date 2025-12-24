@@ -28,6 +28,7 @@ export interface FeatureFlagsProps {
   enableDatagridUseInlineEdit?: boolean;
   enableDatagridUseEditableCell?: boolean;
   enableDatagridUseCustomizeColumns?: boolean;
+  enablePresence?: boolean;
   // exampleComponentSecondaryIcon?: boolean;
   // exampleComponentUseExample?: boolean;
   enableSidepanelResizer?: boolean;
@@ -44,6 +45,7 @@ GlobalFeatureFlags.merge({
   'ExampleComponent.useExample': false,
   'enable-test-flag-a': false, // used in testing
   'enable-test-flag-b': true, // used in testing
+  enablePresence: false,
   enableSidepanelResizer: false,
 });
 /**
@@ -64,6 +66,7 @@ function FeatureFlags({
   enableDatagridUseInlineEdit = false,
   enableDatagridUseEditableCell = false,
   enableDatagridUseCustomizeColumns = false,
+  enablePresence = false,
   // exampleComponentSecondaryIcon = false,
   // exampleComponentUseExample = false,
   enableSidepanelResizer = false,
@@ -80,6 +83,7 @@ function FeatureFlags({
     'enable-datagrid-useCustomizeColumns': enableDatagridUseCustomizeColumns,
     // 'ExampleComponent.secondaryIcon': exampleComponentSecondaryIcon,
     // 'ExampleComponent.useExample': exampleComponentUseExample,
+    enablePresence: enablePresence,
     enableSidepanelResizer: enableSidepanelResizer,
     'enable-test-flag-a': enableTestFlagA,
     'enable-test-flag-b': enableTestFlagB,

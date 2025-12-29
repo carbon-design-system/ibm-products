@@ -153,16 +153,26 @@ jobs:
         run: |
           yarn lerna publish prepatch --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
-      - name: Publish subsequent RC (ie. v1.0.0-rc.x)
+      - name: Publish subsequent RC (Rescue Mode)
         if: github.event.inputs.type == 'subsequent rc'
         run: |
-          # Use --contents to specify where the package is
-          # Use --dist-tag instead of --pre-dist-tag when using from-package
+          # 1. 'from-package' skips the Git-to-Registry diff logic
+          # 2. '--no-verify-access' is added to the CLI as a fallback
           yarn lerna publish from-package \
             --dist-tag next \
             --no-verify-access \
-            --yes \
-            -- --access public
+            --yes
+        env:
+          # --- THE CRITICAL FIXES ---
+          # Force npm to skip the 'is this package here?' check and just PUSH
+          NPM_CONFIG_VERIFY_ACCESS: 'false'
+          # Tell npm exactly where to go so it doesn't try to 'discover' the registry
+          NPM_CONFIG_REGISTRY: 'https://registry.npmjs.org/'
+          # Ensure scoped packages don't trigger a 'Private' check
+          NPM_CONFIG_ACCESS: 'public'
+          # Keep OIDC/Token auth active
+          NPM_CONFIG_PROVENANCE: 'true'
+          NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
 
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch

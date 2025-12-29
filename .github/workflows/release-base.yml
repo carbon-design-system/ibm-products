@@ -153,23 +153,28 @@ jobs:
         run: |
           yarn lerna publish prepatch --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
-      - name: Publish subsequent RC (Rescue Mode)
+      - name: Manual Rescue Publish (Direct NPM)
         if: github.event.inputs.type == 'subsequent rc'
         run: |
-          # 1. 'from-package' skips the Git-to-Registry diff logic
-          # 2. '--no-verify-access' is added to the CLI as a fallback
-          yarn lerna publish from-package \
-            --dist-tag next \
-            --no-verify-access \
-            --yes
-        env:
-          # --- THE CRITICAL FIXES ---
-          # Force npm to skip the 'is this package here?' check and just PUSH
-          NPM_CONFIG_VERIFY_ACCESS: 'false'
-          # Tell npm exactly where to go so it doesn't try to 'discover' the registry
-          NPM_CONFIG_REGISTRY: 'https://registry.npmjs.org/'
-          # Ensure scoped packages don't trigger a 'Private' check
-          NPM_CONFIG_ACCESS: 'public'
+          # 1. Identify your package directories
+          # Ensure these paths match your folder structure exactly
+          PACKAGES=(
+            "packages/ibm-products-styles"
+            "packages/ibm-products"
+            "packages/ibm-products-web-components"
+          )
+
+          for pkg in "${PACKAGES[@]}"; do
+            echo "Attempting to publish $pkg..."
+            
+            # Use direct npm publish to bypass Lerna's metadata checks
+            # --access public is mandatory for scoped packages
+            # --no-git-checks ignores the existing rc.6 tags
+            npm publish "./$pkg" \
+              --tag next \
+              --access public \
+              --no-git-checks
+          done
 
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch

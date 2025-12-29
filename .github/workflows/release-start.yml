@@ -33,7 +33,7 @@ on:
         default: true
 # Required for OIDC publishing https://docs.npmjs.com/trusted-publishers
 permissions:
-  id-token: write
+  # id-token: write
   contents: write
 jobs:
   Release:

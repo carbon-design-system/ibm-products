@@ -153,41 +153,32 @@ jobs:
         run: |
           yarn lerna publish prepatch --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
-      - name: Manual Rescue Publish (Direct NPM)
+      - name: Manual Rescue Publish (Pure OIDC)
         if: github.event.inputs.type == 'subsequent rc'
         run: |
+          # 1. Clear any accidental .npmrc files from previous steps
+          rm -f .npmrc
+
           PACKAGES=(
             "packages/ibm-products-styles"
             "packages/ibm-products"
             "packages/ibm-products-web-components"
           )
+
           for pkg in "${PACKAGES[@]}"; do
-            echo "Attempting to publish $pkg..."
-            # 1. We remove --provenance for this specific run
-            # 2. We explicitly pass the token via the --//registry... config
+            echo "--------------------------------------------------"
+            echo "🚀 Attempting OIDC Publish: $pkg"
+            
+            # Use --provenance to initiate the OIDC handshake
+            # We use --loglevel info to see the exact 200/404 response
             npm publish "./$pkg" \
               --tag next \
               --access public \
               --no-git-checks \
+              --provenance \
               --registry https://registry.npmjs.org/ \
-              --//registry.npmjs.org/:_authToken=${{ secrets.CARBON_BOT_NPM_TOKEN }}
+              --loglevel info
           done
         env:
-          # Turn off provenance just for this rescue to isolate the token issue
-          NPM_CONFIG_PROVENANCE: false
-      # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
-      # Pass in the release branch name to the storybook deployment job so it build off the release branch
-      - name: Dispatch staging storybook deployment workflow
-        uses: peter-evans/repository-dispatch@v4
-        with:
-          event-type: deploy-staging-storybook
-          client-payload: '{"branch": "${{ github.ref_name }}"}'
-
-      # After successfully publishing a full release, trigger the production storybook environment deployment workflow.
-      # Pass in the release branch name to the storybook deployment job so it build off the release branch
-      - name: Dispatch production storybook deployment workflow
-        if: github.event.inputs.type  == 'full release'
-        uses: peter-evans/repository-dispatch@v4
-        with:
-          event-type: deploy-latest-storybook
-          client-payload: '{"branch": "${{ github.ref_name }}"}'
+          # ENSURE NO NODE_AUTH_TOKEN IS SET HERE
+          NPM_CONFIG_PROVENANCE: true

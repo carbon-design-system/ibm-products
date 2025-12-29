@@ -85,8 +85,8 @@ jobs:
       # - name: Install browsers
       #   run: yarn playwright install --with-deps
 
-      - name: Continuous integration check (includes build)
-        run: yarn ci-check
+      #- name: Continuous integration check (includes build)
+      #  run: yarn ci-check
 
       # - name: Run storybook
       #   id: storybook

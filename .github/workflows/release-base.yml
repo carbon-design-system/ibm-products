@@ -157,7 +157,11 @@ jobs:
         if: |
           github.event.inputs.type == 'subsequent rc'
         run: |
-          yarn lerna publish --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
+          yarn lerna publish from-package \
+            --pre-dist-tag next \
+            --access public \
+            --no-verify-access \
+            $(echo "${{ env.PUBLISH }}")
 
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch

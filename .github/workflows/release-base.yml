@@ -34,6 +34,7 @@ jobs:
     timeout-minutes: 60
     env:
       GH_TOKEN: ${{ secrets.MERGE_ACTION }}
+      NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
@@ -51,7 +52,8 @@ jobs:
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version-file: '.nvmrc'
+          node-version: '20.x'
+          registry-url: https://registry.npmjs.org
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --immutable
@@ -123,7 +125,7 @@ jobs:
             echo "PUBLISH=--yes" >> $GITHUB_ENV
           fi
       - name: Debug npm identity
-        run: npm whoami
+        run: npm whoami || true
       - name: Debug package visibility
         run: npm view @carbon/ibm-products-styles version || true
 

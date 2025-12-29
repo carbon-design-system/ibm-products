@@ -154,14 +154,15 @@ jobs:
           yarn lerna publish prepatch --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
       - name: Publish subsequent RC (ie. v1.0.0-rc.x)
-        if: |
-          github.event.inputs.type == 'subsequent rc'
+        if: github.event.inputs.type == 'subsequent rc'
         run: |
+          # Use --contents to specify where the package is
+          # Use --dist-tag instead of --pre-dist-tag when using from-package
           yarn lerna publish from-package \
-            --pre-dist-tag next \
-            --access public \
+            --dist-tag next \
             --no-verify-access \
-            $(echo "${{ env.PUBLISH }}")
+            --yes \
+            -- --access public
 
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch

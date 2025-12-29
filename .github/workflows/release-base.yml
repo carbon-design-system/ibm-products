@@ -153,10 +153,14 @@ jobs:
         run: |
           yarn lerna publish prepatch --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
-      - name: Manual Rescue Publish (Pure OIDC)
+      - name: Manual Rescue Publish (OIDC Only)
         if: github.event.inputs.type == 'subsequent rc'
         run: |
-          # 1. Clear any accidental .npmrc files from previous steps
+          # 1. FORCE LATEST NPM (Required for OIDC/Trusted Publishing)
+          sudo npm install -g npm@latest
+          echo "Using npm version: $(npm -v)"
+
+          # 2. CLEAR CONFIG (Ensure no old tokens are haunting the session)
           rm -f .npmrc
 
           PACKAGES=(
@@ -167,18 +171,14 @@ jobs:
 
           for pkg in "${PACKAGES[@]}"; do
             echo "--------------------------------------------------"
-            echo "🚀 Attempting OIDC Publish: $pkg"
+            echo "🚀 Target: $pkg"
             
-            # Use --provenance to initiate the OIDC handshake
-            # We use --loglevel info to see the exact 200/404 response
+            # --provenance is now automatic with trusted publishing on npm 11+
+            # but we keep it here to be explicit.
             npm publish "./$pkg" \
               --tag next \
               --access public \
               --no-git-checks \
               --provenance \
-              --registry https://registry.npmjs.org/ \
-              --loglevel info
+              --registry https://registry.npmjs.org/
           done
-        env:
-          # ENSURE NO NODE_AUTH_TOKEN IS SET HERE
-          NPM_CONFIG_PROVENANCE: true

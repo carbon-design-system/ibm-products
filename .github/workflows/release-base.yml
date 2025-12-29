@@ -170,9 +170,6 @@ jobs:
           NPM_CONFIG_REGISTRY: 'https://registry.npmjs.org/'
           # Ensure scoped packages don't trigger a 'Private' check
           NPM_CONFIG_ACCESS: 'public'
-          # Keep OIDC/Token auth active
-          NPM_CONFIG_PROVENANCE: 'true'
-          NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
 
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch

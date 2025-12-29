@@ -109,9 +109,9 @@ jobs:
       #     name: playwright-avt-report
       #     path: .playwright
 
-      # - name: Set NPM token
-      #   run: |
-      #     echo "//registry.npmjs.org/:_authToken=${{ secrets.CARBON_BOT_NPM_TOKEN }}" >> .npmrc
+      - name: Set NPM token
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.CARBON_BOT_NPM_TOKEN }}" >> .npmrc
 
       # Set the PUBLISH environment variable to be used later in the Lerna publish command.
       # Lerna has dry run on by default, need to pass in '--yes' flag before it will go ahead and publish.
@@ -122,8 +122,6 @@ jobs:
           fi
       - name: Debug npm identity
         run: npm whoami || true
-      - name: Debug package visibility
-        run: npm view @carbon/ibm-products-styles version || true
 
       - name: Publish full minor release (ie. v1.x.0)
         if: |
@@ -153,32 +151,25 @@ jobs:
         run: |
           yarn lerna publish prepatch --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
-      - name: Manual Rescue Publish (OIDC Only)
-        if: github.event.inputs.type == 'subsequent rc'
+      - name: Publish subsequent RC (ie. v1.0.0-rc.x)
+        if: |
+          github.event.inputs.type == 'subsequent rc'
         run: |
-          # 1. FORCE LATEST NPM (Required for OIDC/Trusted Publishing)
-          sudo npm install -g npm@latest
-          echo "Using npm version: $(npm -v)"
+          yarn lerna publish --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
-          # 2. CLEAR CONFIG (Ensure no old tokens are haunting the session)
-          rm -f .npmrc
+      # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
+      # Pass in the release branch name to the storybook deployment job so it build off the release branch
+      - name: Dispatch staging storybook deployment workflow
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          event-type: deploy-staging-storybook
+          client-payload: '{"branch": "${{ github.ref_name }}"}'
 
-          PACKAGES=(
-            "packages/ibm-products-styles"
-            "packages/ibm-products"
-            "packages/ibm-products-web-components"
-          )
-
-          for pkg in "${PACKAGES[@]}"; do
-            echo "--------------------------------------------------"
-            echo "🚀 Target: $pkg"
-            
-            # --provenance is now automatic with trusted publishing on npm 11+
-            # but we keep it here to be explicit.
-            npm publish "./$pkg" \
-              --tag next \
-              --access public \
-              --no-git-checks \
-              --provenance \
-              --registry https://registry.npmjs.org/
-          done
+      # After successfully publishing a full release, trigger the production storybook environment deployment workflow.
+      # Pass in the release branch name to the storybook deployment job so it build off the release branch
+      - name: Dispatch production storybook deployment workflow
+        if: github.event.inputs.type  == 'full release'
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          event-type: deploy-latest-storybook
+          client-payload: '{"branch": "${{ github.ref_name }}"}'

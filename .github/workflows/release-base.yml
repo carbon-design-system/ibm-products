@@ -156,26 +156,25 @@ jobs:
       - name: Manual Rescue Publish (Direct NPM)
         if: github.event.inputs.type == 'subsequent rc'
         run: |
-          # 1. Identify your package directories
-          # Ensure these paths match your folder structure exactly
           PACKAGES=(
             "packages/ibm-products-styles"
             "packages/ibm-products"
             "packages/ibm-products-web-components"
           )
-
           for pkg in "${PACKAGES[@]}"; do
             echo "Attempting to publish $pkg..."
-            
-            # Use direct npm publish to bypass Lerna's metadata checks
-            # --access public is mandatory for scoped packages
-            # --no-git-checks ignores the existing rc.6 tags
+            # 1. We remove --provenance for this specific run
+            # 2. We explicitly pass the token via the --//registry... config
             npm publish "./$pkg" \
               --tag next \
               --access public \
-              --no-git-checks
+              --no-git-checks \
+              --registry https://registry.npmjs.org/ \
+              --//registry.npmjs.org/:_authToken=${{ secrets.CARBON_BOT_NPM_TOKEN }}
           done
-
+        env:
+          # Turn off provenance just for this rescue to isolate the token issue
+          NPM_CONFIG_PROVENANCE: false
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch
       - name: Dispatch staging storybook deployment workflow

@@ -31,10 +31,7 @@ on:
         description: 'Run dry run?'
         type: boolean
         default: true
-# Required for OIDC publishing https://docs.npmjs.com/trusted-publishers
-permissions:
-  # id-token: write
-  contents: write
+
 jobs:
   Release:
     # trigger the input data to the `release-base` workflow and trigger it

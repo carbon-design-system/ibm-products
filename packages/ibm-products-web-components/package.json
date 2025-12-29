@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@carbon-labs/wc-empty-state": "^0.11.0",
-    "@carbon/ibm-products-styles": "^2.77.0-rc.6",
+    "@carbon/ibm-products-styles": "^2.76.0",
     "@carbon/styles": "^1.96.0",
     "@carbon/web-components": "2.44.0",
     "@figma/code-connect": "^1.3.6",

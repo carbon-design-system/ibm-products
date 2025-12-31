@@ -65,6 +65,12 @@ export interface TearsheetProps extends PropsWithChildren {
   className?: string;
 
   /**
+   * Enable presence animations for the tearsheet using the presence hooks.
+   * When enabled, the tearsheet will use presence-based animations for enter/exit transitions.
+   */
+  enablePresence?: boolean;
+
+  /**
    * The accessibility title for the close icon (if shown).
    *
    */
@@ -292,6 +298,12 @@ Tearsheet.propTypes = {
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
+
+  /**
+   * Enable presence animations for the tearsheet using the presence hooks.
+   * When enabled, the tearsheet will use presence-based animations for enter/exit transitions.
+   */
+  enablePresence: PropTypes.bool,
 
   /**
    * Enable a close icon ('x') in the header area of the tearsheet. By default,

@@ -44,6 +44,7 @@ import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { useIsomorphicEffect, usePreviousValue } from '../../global/js/hooks';
 import { useFocus } from '../../global/js/hooks/useFocus';
 import { TearsheetAction } from './Tearsheet';
+import { usePresenceContext } from '@carbon/react/es/internal/usePresenceContext';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -83,6 +84,12 @@ interface TearsheetShellProps extends PropsWithChildren {
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description?: ReactNode;
+
+  /**
+   * Enable presence animations for the tearsheet using the presence hooks.
+   * When enabled, the tearsheet will use presence-based animations for enter/exit transitions.
+   */
+  enablePresence?: boolean;
 
   /**
    * Enable a close icon ('x') in the header area of the tearsheet. By default,
@@ -263,6 +270,7 @@ export const TearsheetShell = React.forwardRef(
       closeIconDescription = 'Close',
       currentStep,
       description,
+      enablePresence,
       hasCloseIcon,
       hasError,
       headerActions,
@@ -301,6 +309,12 @@ export const TearsheetShell = React.forwardRef(
     );
     const modalRefValue = modalRef.current;
     const wide = size === 'wide';
+
+    // Use presence context if enablePresence is true
+    const presenceResult = usePresenceContext(open ?? false);
+    const [isPresent, presenceContext] = enablePresence
+      ? presenceResult
+      : [true, null];
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
@@ -419,7 +433,10 @@ export const TearsheetShell = React.forwardRef(
       }
     }, [modalRef, width]);
 
-    if (position <= depth) {
+    // Conditionally render based on presence when enablePresence is true
+    const shouldRender = enablePresence ? isPresent : position <= depth;
+
+    if (shouldRender && position <= depth) {
       // Include a modal header if and only if one or more of these is given.
       // We can't use a Wrap for the ModalHeader because ComposedModal requires
       // the direct child to be the ModalHeader instance.
@@ -456,6 +473,7 @@ export const TearsheetShell = React.forwardRef(
               [`${bc}--has-decorator`]:
                 !!decorator && decorator['type']?.displayName !== 'AILabel',
               [`${bc}--has-close`]: effectiveHasCloseIcon,
+              [`${bc}--presence`]: enablePresence && presenceContext?.isExiting,
             })}
             decorator={decorator || deprecated_slug}
             containerClassName={cx(`${bc}__container`, {
@@ -466,7 +484,11 @@ export const TearsheetShell = React.forwardRef(
             {...{ onClose, open, selectorPrimaryFocus }}
             onKeyDown={keyDownListener}
             preventCloseOnClickOutside={!isPassive}
-            ref={modalRef}
+            ref={
+              enablePresence && presenceContext
+                ? presenceContext.presenceRef
+                : modalRef
+            }
             selectorsFloatingMenus={[
               `.${carbonPrefix}--overflow-menu-options`,
               `.${carbonPrefix}--tooltip`,
@@ -689,6 +711,12 @@ TearsheetShell.propTypes = {
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
+
+  /**
+   * Enable presence animations for the tearsheet using the presence hooks.
+   * When enabled, the tearsheet will use presence-based animations for enter/exit transitions.
+   */
+  enablePresence: PropTypes.bool,
 
   /**
    * Enable a close icon ('x') in the header area of the tearsheet. By default,

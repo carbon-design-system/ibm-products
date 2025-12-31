@@ -12,6 +12,7 @@ import './index';
 import styles from './story-styles.scss?lit';
 import './_story-assets/step-tearsheet';
 import './_story-assets/step-full-page';
+import './_story-assets/step-side-panel';
 
 const renderTemplate = ({ narrow }) => {
   return html`
@@ -27,6 +28,13 @@ const renderFullPageTemplate = () => html`
     ${styles}
   </style>
   <step-full-page> </step-full-page>
+`;
+
+const renderSidePanel = () => html`
+  <style>
+    ${styles}
+  </style>
+  <step-side-panel> </step-side-panel>
 `;
 
 export const Tearsheet = {
@@ -47,6 +55,12 @@ export const FullPage = {
   args: {},
   render: renderFullPageTemplate,
   name: 'Full page',
+};
+
+export const SidePanel = {
+  args: {},
+  render: renderSidePanel,
+  name: 'SidePanel',
 };
 
 export default {

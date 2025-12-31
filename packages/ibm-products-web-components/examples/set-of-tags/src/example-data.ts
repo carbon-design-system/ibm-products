@@ -57,7 +57,8 @@ export function generateTags({
 
 // Example usage:
 export const tagsData = generateTags({
-  count: 100,
-  size: TAG_SIZE.SMALL,
+  count: 30,
+  size: TAG_SIZE.MEDIUM,
   dismissible: true,
 });
+  

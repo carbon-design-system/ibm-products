@@ -10,6 +10,7 @@ import React, {
   useEffect,
   useState,
   useRef,
+  useMemo,
   ComponentProps,
   PropsWithChildren,
   ReactNode,
@@ -17,6 +18,8 @@ import React, {
   RefObject,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import { usePresenceContext } from './hooks/usePresenceContext';
+import { useFeatureFlag } from '../FeatureFlags';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -302,6 +305,12 @@ export const TearsheetShell = React.forwardRef(
     const modalRefValue = modalRef.current;
     const wide = size === 'wide';
 
+    // Use presence context - it handles enablePresence via feature flag internally
+    const { isPresent, shouldBeOpen, handleExitComplete } = usePresenceContext(
+      open || false
+    );
+    const enablePresence = useFeatureFlag('enable-presence');
+
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
     const [position, setPosition] = useState(0);
@@ -355,6 +364,39 @@ export const TearsheetShell = React.forwardRef(
         claimFocus();
       }
     }, [claimFocus, hasError, modalRef]);
+
+    // Handle exit animation complete for enablePresence
+    useEffect(() => {
+      if (!enablePresence || !modalRef.current) {
+        return;
+      }
+
+      const handleTransitionEnd = (event: TransitionEvent) => {
+        // Only handle transform transitions on the container element
+        const containerElement = modalRef.current?.querySelector(
+          `.${bc}__container`
+        );
+        if (
+          event.target === containerElement &&
+          event.propertyName === 'transform'
+        ) {
+          handleExitComplete();
+        }
+      };
+
+      const element = modalRef.current;
+      element.addEventListener(
+        'transitionend',
+        handleTransitionEnd as EventListener
+      );
+
+      return () => {
+        element.removeEventListener(
+          'transitionend',
+          handleTransitionEnd as EventListener
+        );
+      };
+    }, [enablePresence, modalRef, handleExitComplete]);
 
     useEffect(() => {
       const notify = () =>
@@ -420,6 +462,10 @@ export const TearsheetShell = React.forwardRef(
     }, [modalRef, width]);
 
     if (position <= depth) {
+      // If enablePresence is true and component is not present, don't render
+      if (enablePresence && !isPresent) {
+        return null;
+      }
       // Include a modal header if and only if one or more of these is given.
       // We can't use a Wrap for the ModalHeader because ComposedModal requires
       // the direct child to be the ModalHeader instance.
@@ -463,7 +509,7 @@ export const TearsheetShell = React.forwardRef(
               [`${bc}__container--mixed-size-stacking`]:
                 !areAllSameSizeVariant(),
             })}
-            {...{ onClose, open, selectorPrimaryFocus }}
+            {...{ onClose, open: shouldBeOpen, selectorPrimaryFocus }}
             onKeyDown={keyDownListener}
             preventCloseOnClickOutside={!isPassive}
             ref={modalRef}

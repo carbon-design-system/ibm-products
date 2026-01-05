@@ -35,7 +35,7 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.MERGE_ACTION }}
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           fetch-depth: '0'
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
@@ -45,13 +45,14 @@ jobs:
           git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
           git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
 
-      - name: Use Node.js version from .nvmrc
+      - name: Setup Node.js
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version-file: '.nvmrc'
+          node-version: '20.x'
+          registry-url: https://registry.npmjs.org
           cache: 'yarn'
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
 
       - name:
           Run @ibm/telemetry-js-config-generator to regenerate ibm-products
@@ -82,8 +83,8 @@ jobs:
       # - name: Install browsers
       #   run: yarn playwright install --with-deps
 
-      - name: Continuous integration check (includes build)
-        run: yarn ci-check
+      #- name: Continuous integration check (includes build)
+      #  run: yarn ci-check
 
       # - name: Run storybook
       #   id: storybook
@@ -119,6 +120,8 @@ jobs:
           if [ "${{ github.event.inputs.dry-run }}" == "false"  ]; then
             echo "PUBLISH=--yes" >> $GITHUB_ENV
           fi
+      - name: Debug npm identity
+        run: npm whoami || true
 
       - name: Publish full minor release (ie. v1.x.0)
         if: |

@@ -11,11 +11,12 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@carbon/web-components": "^2.37.0",
+    "@carbon/icons": "^11.71.0",
+    "@carbon/web-components": "^2.44.0",
     "lit": "^3.1.4"
   },
   "devDependencies": {
-    "sass": "^1.87.0",
+    "sass": "^1.93.2",
     "vite": "^6.2.3",
     "vite-plugin-lit-css": "^2.1.0"
   }

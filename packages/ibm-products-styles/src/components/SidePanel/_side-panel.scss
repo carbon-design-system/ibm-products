@@ -45,7 +45,7 @@ $clabs-prefix: 'clabs';
 
 @mixin setDividerStyles() {
   position: absolute;
-  background-color: $border-subtle-02;
+  background-color: $border-subtle-01;
   block-size: 1px;
   content: '';
   inline-size: 100%;
@@ -55,13 +55,8 @@ $clabs-prefix: 'clabs';
 }
 
 @mixin setCommonTitleStyles() {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
   /* stylelint-disable-next-line carbon/layout-use -- custom css property set below */
   padding-inline-end: var(--#{$block-class}--title-padding-right);
-  word-break: break-all;
 }
 
 .#{$block-class}--scrolls {
@@ -203,7 +198,7 @@ $clabs-prefix: 'clabs';
     inline-size: 100%;
   }
   &.#{$block-class}--right-placement {
-    border-inline-start: 1px solid $border-subtle-02;
+    border-inline-start: 1px solid $border-subtle-01;
     inset-inline-end: 0;
   }
   &.#{$block-class}--left-placement {
@@ -226,7 +221,7 @@ $clabs-prefix: 'clabs';
       }
     }
 
-    border-inline-end: 1px solid $border-subtle-02;
+    border-inline-end: 1px solid $border-subtle-01;
     inset-inline-start: 0;
   }
   &.#{$block-class}.#{$block-class}--has-slug,
@@ -330,7 +325,7 @@ $clabs-prefix: 'clabs';
 
     &.#{$block-class}__header--reduced-motion {
       z-index: 5;
-      border-block-end: 1px solid $border-subtle-02;
+      border-block-end: 1px solid $border-subtle-01;
       margin-block-end: $spacing-05;
     }
 
@@ -419,11 +414,8 @@ $clabs-prefix: 'clabs';
   .#{$block-class}__label-text {
     @include type.type-style('label-01');
 
-    overflow: hidden;
     opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     padding-inline-end: var(--#{$block-class}--title-padding-right);
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .#{$block-class}__collapsed-title-text {
@@ -447,11 +439,6 @@ $clabs-prefix: 'clabs';
   .#{$block-class}__subtitle-text {
     @include type.type-style('body-compact-01');
 
-    overflow: hidden;
-
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
     opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     padding-block-end: $spacing-05;
     padding-inline-end: var(--#{$block-class}--title-padding-right);
@@ -555,7 +542,7 @@ $clabs-prefix: 'clabs';
   .#{$block-class}__actions-container {
     position: sticky; // stick to bottom
     background-color: $layer-01;
-    border-block-start: 1px solid $border-subtle-02;
+    border-block-start: 1px solid $border-subtle-01;
     inset-block-end: 0;
 
     &.#{$action-set-block-class}--2xl {

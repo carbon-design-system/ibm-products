@@ -5,8 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import '../feature-flags';
-
 /**
  * Stable components
  */
@@ -43,7 +41,6 @@ export * from './StringFormatter';
 export * from './TagOverflow';
 export * from './TagSet';
 export * from './Tearsheet';
-export * from './TruncatedText';
 export * from './UserAvatar';
 export * from './WebTerminal';
 
@@ -54,15 +51,46 @@ export * from './WebTerminal';
 
 // Preview
 export * as preview__Coachmark from './Coachmark/next/Coachmark';
+export * as preview__CoachmarkTagline from './Coachmark/next/Coachmark/CoachmarkTagline';
+export * as preview__CoachmarkBeacon from './Coachmark/next/Coachmark/CoachmarkBeacon';
+export {
+  TruncatedText as preview__TruncatedText,
+  type TruncatedTextProps,
+} from './TruncatedText';
+
 export {
   FeatureFlags as preview__FeatureFlags,
   useFeatureFlag as preview__useFeatureFlag,
   useFeatureFlags as preview__useFeatureFlags,
 } from './FeatureFlags';
-export * as preview__PageHeader from './PageHeader/next/PageHeader';
+export * as preview__PageHeader from './PageHeader/next';
+
+export {
+  Tearsheet as preview__Tearsheet,
+  StackProvider,
+} from './Tearsheet/next';
+export type {
+  TearsheetProps,
+  TearsheetComponentType,
+  FooterProps,
+  MainContentProps,
+  SummaryContentProps,
+  TearsheetBodyProps,
+  InfluencerProps,
+  TearsheetHeaderProps,
+  TearsheetNavigationBarProps,
+  TearsheetScrollButtonProps,
+  TearsheetHeaderActionItemProps,
+  TearsheetHeaderActionsProps,
+  TearsheetHeaderContentProps,
+  StackContextType,
+} from './Tearsheet/next';
 
 // Preview candidates
-export * as previewCandidate__BigNumber from './BigNumber';
+export {
+  BigNumber as previewCandidate__BigNumber,
+  type BigNumberProps,
+} from './BigNumber';
 export {
   Coachmark as previewCandidate__Coachmark,
   BEACON_KIND,
@@ -92,11 +120,21 @@ export {
   type CoachmarkOverlayElementsProps,
 } from './CoachmarkOverlayElements';
 export { CoachmarkStack as previewCandidate__CoachmarkStack } from './CoachmarkStack';
-export * as previewCandidate__ConditionBuilder from './ConditionBuilder';
-export * as previewCandidate__DataSpreadsheet from './DataSpreadsheet';
-export * as previewCandidate__DelimitedList from './DelimitedList';
-export * as previewCandidate__Decorator from './Decorator';
-export * as previewCandidate__GetStartedCard from './GetStartedCard';
+export { ConditionBuilder as previewCandidate__ConditionBuilder } from './ConditionBuilder';
+export * from './ConditionBuilder/ConditionBuilder.types';
+export {
+  DataSpreadsheet as previewCandidate__DataSpreadsheet,
+  type DataSpreadsheetProps,
+} from './DataSpreadsheet';
+export {
+  DelimitedList as previewCandidate__DelimitedList,
+  type DelimitedListProps,
+} from './DelimitedList';
+export { Decorator as previewCandidate__Decorator } from './Decorator';
+export {
+  GetStartedCard as previewCandidate__GetStartedCard,
+  type GetStartedCardProps,
+} from './GetStartedCard';
 export {
   Guidebanner as previewCandidate__Guidebanner,
   GuidebannerElement as previewCandidate__GuidebannerElement,
@@ -115,8 +153,14 @@ export {
   type InlineTipButtonProps,
   type InlineTipLinkProps,
 } from './InlineTip';
-export * as previewCandidate__NonLinearReading from './NonLinearReading';
-export * as previewCandidate__SearchBar from './SearchBar';
+export {
+  NonLinearReading as previewCandidate__NonLinearReading,
+  type NonLinearReadingProps,
+} from './NonLinearReading';
+export {
+  SearchBar as previewCandidate__SearchBar,
+  type SearchBarProps,
+} from './SearchBar';
 export {
   Toolbar as previewCandidate__Toolbar,
   ToolbarButton as previewCandidate__ToolbarButton,
@@ -125,7 +169,10 @@ export {
   type ToolbarButtonProps,
   type ToolbarGroupProps,
 } from './Toolbar';
-export * as previewCandidate__TruncatedList from './TruncatedList';
+export {
+  TruncatedList as previewCandidate__TruncatedList,
+  type TruncatedListProps,
+} from './TruncatedList';
 
 /**
  * Deprecated

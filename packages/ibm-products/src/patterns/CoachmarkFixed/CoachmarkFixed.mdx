@@ -1,0 +1,32 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as CoachmarkFixedStories from './CoachmarkFixed.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# CoachmarkFixed
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+
+## Overview
+
+The CoachmarkFixed pattern acts as a container element for onboarding and should
+only be used within the scope of a Coachmark.
+
+To build this pattern, we recommend including the following components:
+
+- [Coachmark](https://carbon-for-ibm-products.netlify.app/?path=/docs/preview-onboarding-coachmark--overview)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story of={CoachmarkFixedStories.CoachmarkFixed} />
+  </div>
+</Canvas>

@@ -1,4 +1,130 @@
-## `@carbon/ibm-products@2.75.0-rc.0`
+## `@carbon/ibm-products@2.81.0-rc.0`
+### Features :rocket:
+- feat(Coachmark): implementation of coachmark WC (#8599)
+
+### Bug fixes :bug:
+- fix: rc clean ups
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+- fix(DataSpreadsheet): Changed document querySelector to ref querySelector (#8717)
+- fix(code-connect): exclude node_modules (#8705)
+
+### Housekeeping :house:
+- chore: retry prerelease publish
+- build(deps): update Carbon 11 compatible versions to latest (#8726)
+- chore: init code connect for EditInPlace (#8575)
+
+## `@carbon/ibm-products@2.80.0`
+### Features :rocket:
+- feat(InlineTip): adding figma code connect file (#8611)
+- feat(interstitialscreen): code connect integration (#8572)
+- feat(Tearsheet): stacking, unit test, design review changes and fixes (#8563)
+- feat(web-terminal): code connect integration (#8497)
+
+### Bug fixes :bug:
+- fix: tearsheet entry and exit animations not working after carbon upgrade (#8674)
+- fix(CreateTearSheet): Modified the useCreateComponentFocus hook (#8076)
+- fix: remove use client directive warnings from build (#8641)
+- fix: prevent disable buttons hook from running on column resize (#8666)
+- fix: prevent customize column hook from running on column resize (#8640)
+- fix(CoachmarkStack): stack closing issue (#8635)
+- fix: replace uselayouteffect with isomorphic effect (#8630)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#8638)
+- chore(Tearsheet): replace h2 and h3 tags with Section and Heading (#8675)
+- chore: add deprecation notice to coachmark (#8634)
+
+## `@carbon/ibm-products@2.79.0`
+### Features :rocket:
+- feat: composable tearsheet initial implementation (#8337)
+
+### Bug fixes :bug:
+- fix(InterstitialScreen): expanded documentation with additional usage details and issue fixes (#8585)
+- fix: condition builder popover getting closed on scrollbar click (#8571)
+- fix: remove canary check from truncatedtext component (#8471)
+
+### Housekeeping :house:
+- chore(carbon-upgrade): address default tag margin removal (#8550)
+- test(PageHeader): react tests clean up with `composeStory` (#8579)
+- chore(sass): update to v1.93.2 (#8567)
+
+## `@carbon/ibm-products@2.78.0`
+### Features :rocket:
+- feat(GuideBanner): code connect (#8411)
+- feat(tearsheet): Added code connect files (#8472)
+- feat(notificationPanel): code connect (#8408)
+- feat(PageHeader): add open in stackblitz config (#8469)
+- feat(sidepanel): code connect integration (#8444)
+
+### Bug fixes :bug:
+- fix(Feature flag): moved the merge logic from feature-flag js to FeatureFlag (#8535)
+- fix: modified expressivecard story's incorrect "caption" prop (#8473)
+- fix(PageHeader): use correct export path (#8514)
+- fix: remove patterns from build output (#8468)
+- fix: remove truncation styling from sidepanel title (#8322)
+- fix(cards): cards (expressive and productive) code connect files causing breaking publishes (#8445)
+- fix(coachmark): added missing exports (#8406)
+- fix: add code panel back into storybook (#8431)
+
+### Housekeeping :house:
+- chore(PageHeader): use condensed grid for tab bar text alignment (#8491)
+
+## `@carbon/ibm-products@2.77.1`
+### Bug fixes :bug:
+- fix(PageHeader): use correct export path (#8514)
+
+## `@carbon/ibm-products@2.77.0`
+### Features :rocket:
+- feat(ImportAndUploadModal): implement as patterns (#8348)
+- feat(coachmarkStacked): implemented as patterns (#8317)
+- feat(UserAvatar): code connect (#8264)
+- feat(EmptyState): integration of open in Stackblitz (#8373)
+- feat: add support for react server components via `use client` directive (#8358)
+- feat(code-connect): add web component code connect config setup (#8387)
+- feat(FullPageError): Code connect file added (#8331)
+- feat: code connect file for TagSet (#8332)
+- feat(OptionsTile): Code connect (#8291)
+- feat: addselect notearsheet implementation (#8259)
+- feat(AboutModal): added code connect file (#8353)
+- feat(ExportModal): implement export modal as a pattern (#8234)
+
+### Bug fixes :bug:
+- fix(guidebanner): add prop to control open state (#8294)
+- fix(PageHeader): use section and heading components for heading levels (#8356)
+
+### Housekeeping :house:
+- chore(deps): update dependency typescript-config-carbon to ^0.8.0 (#8443)
+- chore: init code connect for cards (#8258)
+- chore(storybook): use theme tokens for sb doc previews (#8396)
+- test(coachmarkTagline): add test (#8292)
+- test(PageHeader): increases coverage, removes .only in test (#8260)
+
+## `@carbon/ibm-products@2.76.0`
+### Features :rocket:
+- feat(CoachmarkFixed): implemented as patterns (#8221)
+- feat(pattern): delete and remove (#8268)
+- feat(code-connect): setup initial config and connect `BigNumber` (#8188)
+
+### Bug fixes :bug:
+- fix(Instrumentation): remove common script (#7722)
+- fix(tagset): expansion and collapse is not conveyed to screen readers (#8283)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.10.0 (#8282)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.8.0 (#8239)
+
+### Housekeeping :house:
+- chore(telemetry): update ibm-products telemetry config
+- refactor(scripts): remove chalk dep (#8321)
+- chore: pin chalk (#8261)
+- refactor(PageHeader): change api for tags prop in tab bar (#8205)
+
+## `@carbon/ibm-products@2.75.0`
 ### Features :rocket:
 - feat(PageHeader): add compact story, fix preview styles in storybook docs page (#8190)
 - feat(sidepanel): utilizes layer in sidepanel (#8025)

@@ -8,6 +8,8 @@
 import React, { cloneElement } from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { composeStory } from '@storybook/react-vite';
+import meta, { Compact, Default } from './PageHeader.stories';
 import { preview__PageHeader as PageHeader, pkg } from '../../..';
 import {
   PageHeader as PageHeaderDirect,
@@ -50,14 +52,54 @@ const carbonPrefix = 'cds';
 
 describe('PageHeader', () => {
   describe('export configuration', () => {
+    let savedObserverCb;
+
+    beforeEach(() => {
+      window.ResizeObserver = jest.fn().mockImplementation((cb) => {
+        savedObserverCb = cb;
+        return {
+          observe: jest.fn(),
+          unobserve: jest.fn(),
+          disconnect: jest.fn(),
+        };
+      });
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    // Triggers resize from the saved resize observer callback
+    const triggerResize = (element, width = 500) =>
+      act(() => {
+        savedObserverCb([{ target: element, contentRect: { width } }]);
+      });
+
+    it('should update css variable for sticky positioning', () => {
+      const testId = 'page-header-next-test-id';
+      const DefaultStory = composeStory(Default, meta, {
+        args: {
+          'data-testid': testId,
+        },
+      });
+      render(<DefaultStory />);
+      triggerResize();
+      const computedStyle = window.getComputedStyle(screen.getByTestId(testId));
+      expect(
+        computedStyle.getPropertyValue(
+          `--${pkg.prefix}--page-header-header-top`
+        )
+      ).toBeDefined();
+      expect(
+        computedStyle.getPropertyValue(
+          `--${pkg.prefix}--page-header-breadcrumb-top`
+        )
+      ).toBeDefined();
+    });
+
     it('supports dot notation component namespacing from the main entrypoint', () => {
-      const { container } = render(
-        <PageHeader.Root>
-          <PageHeader.BreadcrumbBar />
-          <PageHeader.Content title="title" />
-          <PageHeader.TabBar />
-        </PageHeader.Root>
-      );
+      const DefaultStory = composeStory(Default, meta);
+      const { container } = render(<DefaultStory />);
       expect(container.firstChild).toBeInTheDocument();
     });
 
@@ -80,10 +122,15 @@ describe('PageHeader', () => {
     });
 
     it('should place className on the outermost element', () => {
-      const { container } = render(
-        <PageHeader.Root className="custom-class" />
-      );
-      expect(container.firstChild).toHaveClass('custom-class');
+      const DefaultStory = composeStory(Default, meta, {
+        args: {
+          className: 'custom-class',
+          role: 'banner',
+        },
+      });
+      render(<DefaultStory />);
+      const pageHeaderOuter = screen.getByRole('banner');
+      expect(pageHeaderOuter).toHaveClass('custom-class');
     });
   });
 
@@ -124,18 +171,15 @@ describe('PageHeader', () => {
     });
 
     it('should render breadcrumb items', () => {
-      const { container } = render(
-        <PageHeader.Root>
-          <PageHeader.BreadcrumbBar>
-            <Breadcrumb>
-              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-              <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-            </Breadcrumb>
-          </PageHeader.BreadcrumbBar>
-        </PageHeader.Root>
-      );
+      const DefaultStory = composeStory(Default, meta, {
+        args: {
+          role: 'banner',
+        },
+      });
+      render(<DefaultStory />);
 
-      const breadcrumbs = container.getElementsByClassName(
+      const pageHeaderOuter = screen.getByRole('banner');
+      const breadcrumbs = pageHeaderOuter.getElementsByClassName(
         `${carbonPrefix}--breadcrumb-item`
       );
 
@@ -220,6 +264,7 @@ describe('PageHeader', () => {
           <PageHeader.Content className="custom-class" title="title" />
         </PageHeader.Root>
       );
+      expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument();
       expect(container.firstChild.firstChild).toHaveClass('custom-class');
     });
 
@@ -286,7 +331,7 @@ describe('PageHeader', () => {
     });
 
     it('should render page actions', () => {
-      const { container } = render(
+      render(
         <PageHeader.Root>
           <PageHeader.Content
             title="title"
@@ -393,15 +438,9 @@ describe('PageHeader', () => {
     });
 
     it('should use a custom menuButtonLabel if provided', () => {
-      render(
-        <PageHeader.Root>
-          <PageHeader.ContentPageActions
-            actions={mockPageActions}
-            menuButtonLabel="Options"
-          />
-        </PageHeader.Root>
-      );
-      expect(screen.getByText('Options')).toBeInTheDocument();
+      const CompactStory = composeStory(Compact, meta);
+      render(<CompactStory />);
+      expect(screen.getByText('Actions')).toBeInTheDocument();
     });
 
     it('should call onClick of hidden action when MenuItem is clicked', async () => {
@@ -461,13 +500,10 @@ describe('PageHeader', () => {
     });
 
     it('should render a subtitle', () => {
-      render(
-        <PageHeader.Root>
-          <PageHeader.ContentText subtitle="subtitle" />
-        </PageHeader.Root>
-      );
+      const DefaultStory = composeStory(Default, meta);
+      render(<DefaultStory />);
 
-      expect(screen.getByText('subtitle')).toBeInTheDocument();
+      expect(screen.getByText('Subtitle')).toBeInTheDocument();
     });
   });
 
@@ -755,7 +791,7 @@ describe('PageHeader', () => {
     );
 
     describe('Overflow functionality', () => {
-      it.only('should handle overflow items correctly', () => {
+      it('should handle overflow items correctly', () => {
         render(<WithTagOverflow />);
 
         act(() => {
@@ -785,7 +821,7 @@ describe('PageHeader', () => {
         expect(overflowButton).toHaveAttribute('aria-expanded', 'false');
       });
 
-      it.only('should not show overflow tag when all items are visible', () => {
+      it('should not show overflow tag when all items are visible', () => {
         render(<WithTagOverflow />);
 
         // All tags should be visible
@@ -807,6 +843,13 @@ describe('PageHeader', () => {
       it('should show hidden tags in popover when overflow tag is clicked', async () => {
         render(<WithTagOverflow />);
 
+        act(() => {
+          mockOverflowOnChange(
+            [], // visible tags
+            mockTags // hidden tags
+          );
+        });
+
         const overflowButton = screen.getByRole('button', { name: '+6' });
 
         // Initially popover should be closed
@@ -823,6 +866,13 @@ describe('PageHeader', () => {
 
       it('should close popover when clicked outside', async () => {
         render(<WithTagOverflow />);
+
+        act(() => {
+          mockOverflowOnChange(
+            [], // visible tags
+            mockTags // hidden tags
+          );
+        });
 
         const overflowButton = screen.getByRole('button', { name: '+6' });
 
@@ -845,6 +895,13 @@ describe('PageHeader', () => {
 
       it('should handle window resize by closing popover', async () => {
         render(<WithTagOverflow />);
+
+        act(() => {
+          mockOverflowOnChange(
+            [], // visible
+            mockTags // no hidden elements
+          );
+        });
 
         const overflowButton = screen.getByRole('button', { name: '+6' });
 
@@ -935,9 +992,8 @@ describe('PageHeader', () => {
       );
       const scrollerButton = screen.getByLabelText('Collapse');
       expect(scrollerButton).toBeInTheDocument();
-
-      await act(() => {
-        userEvent.click(scrollerButton);
+      await waitFor(async () => {
+        await userEvent.click(scrollerButton);
       });
       expect(scrollerOnClick).toHaveBeenCalledTimes(1);
     });

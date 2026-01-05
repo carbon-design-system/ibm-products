@@ -13,9 +13,11 @@ collect:
         - close-icon-description
         - closeIconDescription
         - collapse-label
+        - collapseText
         - defaultOpen
         - description
         - expand-label
+        - expandText
         - id
         - kind
         - label
@@ -26,8 +28,10 @@ collect:
         - size
         - slot
         - title
+        - titleText
         - type
         - value
+        - view-all-label
         - within-grid
         # c4p-about-modal
         - additionalInfo
@@ -38,6 +42,32 @@ collect:
         - onc4p-about-modal-beingclosed
         - onc4p-about-modal-closed
         - version
+        # c4p-checklist
+        - chart-label
+        - chart-value
+        - disable-toggle
+        - onc4p-checklist-toggle
+        - onc4p-checklist-view-all
+        - toggle-aria-label
+        - toggle-label
+        - toggle-label-align
+        # c4p-checklist-item
+        - clickable
+        - onc4p-checklist-item-clicked
+        - status
+        # c4p-coachmark
+        - dropShadow
+        - floating
+        - highContrast
+        - position
+        # c4p-coachmark-beacon
+        - expanded
+        - onc4p-coachmark-beacon-clicked
+        # c4p-coachmark-header
+        - dragIconDescription
+        # c4p-guide-banner
+        - onc4p-guide-banner-close
+        - onc4p-guide-banner-toggle
         # c4p-interstitial-screen
         - fullscreen
         - onc4p-interstitial-beingclosed
@@ -65,7 +95,6 @@ collect:
         # c4p-notification-footer
         - onc4p-notification-settings
         - onc4p-notification-view-all
-        - view-all-label
         # c4p-notification-panel
         - date-time-locale
         - dismiss-all-label
@@ -83,7 +112,6 @@ collect:
         - onc4p-options-tile-close
         - onc4p-options-tile-open
         - titleId
-        - titleText
         # c4p-page-header-breadcrumb
         - border
         - content-actions-flush
@@ -92,9 +120,7 @@ collect:
         - subtitle
         # c4p-page-header-scroller
         - close-on-activation
-        - collapseText
         - enter-delay-ms
-        - expandText
         - leave-delay-ms
         # c4p-side-panel
         - animate-title
@@ -134,12 +160,17 @@ collect:
         - tags-data
       allowedAttributeStringValues:
         # General - boolean attributes
-        - 'true'
-        - 'false'
+        - "true"
+        - "false"
         # General - kind
-        - '403'
-        - '404'
+        - "403"
+        - "404"
+        - checked
         - custom
+        - disabled
+        - error
+        - indeterminate
+        - unchecked
         # General - size
         - 2xl
         - lg
@@ -168,6 +199,9 @@ collect:
         - wide
   npm:
     dependencies: null
+  js:
+    functions: {}
+    tokens: null
   js:
     functions: {}
     tokens: null

@@ -21,12 +21,17 @@ const useShouldDisableButtons = ({
   initialValue, // initially the buttons should be disabled
   filtersState,
   prevFiltersRef,
+  open,
 }) => {
   const [shouldDisableButtons, setShouldDisableButtons] =
     useState(initialValue);
 
   useEffect(
     function updateDisabledButtonsState() {
+      // prevent this effect from running when columns are being resized
+      if (!open) {
+        return;
+      }
       setShouldDisableButtons(
         deepCompareObject(filtersState, JSON.parse(prevFiltersRef.current))
       );

@@ -2,7 +2,7 @@ name: Triages labeled issues by adding them to a specific project field
 
 on:
   issues:
-    types: [ labeled ]
+    types: [labeled]
 
 jobs:
   gen-token:
@@ -22,7 +22,8 @@ jobs:
 
   move-ts-issues:
     needs: gen-token
-    if: ${{contains(github.event.label.name, format('area{0} typescript', ':'))}}
+    if:
+      ${{contains(github.event.label.name, format('area{0} typescript', ':'))}}
     uses: carbon-design-system/.github/.github/workflows/move-issue-to-project-and-set-fields.yml@main
     with:
       field: 'Area'
@@ -32,7 +33,8 @@ jobs:
       token: ${{ needs.gen-token.outputs.token }}
   move-migration-issues:
     needs: gen-token
-    if: ${{contains(github.event.label.name, format('area{0} migration ➡️', ':'))}}
+    if:
+      ${{contains(github.event.label.name, format('area{0} migration ➡️',':'))}}
     uses: carbon-design-system/.github/.github/workflows/move-issue-to-project-and-set-fields.yml@main
     with:
       field: 'Area'

@@ -5,8 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import '../feature-flags';
-
 /**
  * Stable components
  */
@@ -43,7 +41,6 @@ export * from './StringFormatter';
 export * from './TagOverflow';
 export * from './TagSet';
 export * from './Tearsheet';
-export * from './TruncatedText';
 export * from './UserAvatar';
 export * from './WebTerminal';
 
@@ -56,13 +53,38 @@ export * from './WebTerminal';
 export * as preview__Coachmark from './Coachmark/next/Coachmark';
 export * as preview__CoachmarkTagline from './Coachmark/next/Coachmark/CoachmarkTagline';
 export * as preview__CoachmarkBeacon from './Coachmark/next/Coachmark/CoachmarkBeacon';
+export {
+  TruncatedText as preview__TruncatedText,
+  type TruncatedTextProps,
+} from './TruncatedText';
 
 export {
   FeatureFlags as preview__FeatureFlags,
   useFeatureFlag as preview__useFeatureFlag,
   useFeatureFlags as preview__useFeatureFlags,
 } from './FeatureFlags';
-export * as preview__PageHeader from './PageHeader/next/PageHeader';
+export * as preview__PageHeader from './PageHeader/next';
+
+export {
+  Tearsheet as preview__Tearsheet,
+  StackProvider,
+} from './Tearsheet/next';
+export type {
+  TearsheetProps,
+  TearsheetComponentType,
+  FooterProps,
+  MainContentProps,
+  SummaryContentProps,
+  TearsheetBodyProps,
+  InfluencerProps,
+  TearsheetHeaderProps,
+  TearsheetNavigationBarProps,
+  TearsheetScrollButtonProps,
+  TearsheetHeaderActionItemProps,
+  TearsheetHeaderActionsProps,
+  TearsheetHeaderContentProps,
+  StackContextType,
+} from './Tearsheet/next';
 
 // Preview candidates
 export {

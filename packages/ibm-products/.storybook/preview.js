@@ -7,7 +7,6 @@
 
 import React, { useEffect } from 'react';
 import { white, g10, g90, g100 } from '@carbon/themes';
-import '../../ibm-products/src/feature-flags';
 
 import { pkg } from '../../ibm-products/src/settings';
 import theme from '../.storybook/theme';
@@ -116,7 +115,11 @@ const parameters = {
       },
     ],
   },
-  controls: { expanded: true, hideNoControlsWarning: true },
+  controls: {
+    expanded: true,
+    hideNoControlsWarning: true,
+    sort: 'alpha',
+  },
   layout: 'centered',
   options: {
     showPanel: true,
@@ -124,14 +127,14 @@ const parameters = {
       method: 'alphabetical',
       order: [
         'Overview',
-        ['Welcome', 'Getting started', 'Examples', '*'],
-        'IBM Products',
-        ['Components', 'Patterns', 'Internal', 'Onboarding'],
-        'Experimental',
-        ['Components', 'Patterns', 'Onboarding'],
-        'Utils',
-        ['Components'],
-        'Hooks',
+        ['Welcome', 'Examples', '*'],
+        'Components',
+        'Patterns',
+        ['*', 'Prebuilt patterns'],
+        'Utilities',
+        'Preview',
+        'Preview Candidate',
+        ['*', 'FeatureFlags'],
         'Deprecated',
       ],
     },
@@ -145,6 +148,7 @@ const parameters = {
   docs: {
     theme,
     page: () => <StoryDocsPage />,
+    codePanel: true,
   },
 };
 

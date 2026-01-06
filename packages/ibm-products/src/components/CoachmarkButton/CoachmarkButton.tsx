@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -51,8 +51,9 @@ const componentName = 'CoachmarkButton';
 
 /**
  * Use CoachmarkButton for the target prop of a Coachmark component.
+ * @deprecated This component is deprecated.
  */
-export let CoachmarkButton = React.forwardRef<
+export const CoachmarkButton = React.forwardRef<
   HTMLButtonElement,
   CoachmarkButtonProps
 >(({ className, label, ...rest }, ref) => {
@@ -98,7 +99,6 @@ CoachmarkButton.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkButton = pkg.checkComponentEnabled(CoachmarkButton, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

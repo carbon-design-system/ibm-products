@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { usePrefix, Link } from '@carbon/react';
 import { CreateFullPage } from '.';
 import { CreateFullPageStep } from './CreateFullPageStep';
@@ -47,7 +47,7 @@ const breadcrumbs = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/Create flows/CreateFullPage',
+  title: 'Patterns/Prebuilt patterns/Create flows/CreateFullPage',
   component: CreateFullPage,
   tags: ['autodocs'],
   parameters: {

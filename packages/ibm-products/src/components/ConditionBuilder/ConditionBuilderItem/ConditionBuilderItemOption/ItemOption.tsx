@@ -14,7 +14,12 @@ import { Checkmark } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
 import { useTranslations } from '../../utils/useTranslations';
-import { option, statementConfig } from '../../ConditionBuilder.types';
+import {
+  ConditionGroup,
+  option,
+  Property,
+  statementConfig,
+} from '../../ConditionBuilder.types';
 import { blockClass, onKeyDownHandlerForSearch } from '../../utils/util';
 
 interface ItemOptionProps {
@@ -22,15 +27,19 @@ interface ItemOptionProps {
     label?: string;
     value?: string;
   };
-  config: { options?: option[] | statementConfig[] } & {
+  config: { options?: option[] | statementConfig[] | Property[] } & {
     isStatement?: boolean;
   };
   onChange: (value: string, e: Event) => void;
+  closePopover?: () => void;
+  group?: ConditionGroup;
 }
 export const ItemOption = ({
   conditionState = {},
   config = {},
   onChange,
+  closePopover,
+  group,
 }: ItemOptionProps) => {
   const { popOverSearchThreshold } = useContext(ConditionBuilderContext);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -39,7 +48,7 @@ export const ItemOption = ({
     'clearSearchText',
   ]);
   const { conditionBuilderRef } = useContext(ConditionBuilderContext);
-  const allOptions = config.options;
+  const allOptions = config?.options;
   const [searchValue, setSearchValue] = useState('');
 
   const selection = conditionState.value;
@@ -65,7 +74,9 @@ export const ItemOption = ({
   }, [allOptions]);
 
   const onClickHandler = (evt, option) => {
-    onChange(option.id, evt);
+    if (!evt.currentTarget.hasAttribute('aria-disabled')) {
+      onChange(option.id, evt);
+    }
   };
 
   const onSearchChangeHandler = (evt) => {
@@ -100,9 +111,9 @@ export const ItemOption = ({
             labelText={clearSearchText}
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
-            onKeyDown={(evt: KeyboardEvent) =>
-              onKeyDownHandlerForSearch(evt, conditionBuilderRef)
-            }
+            onKeyDown={(evt: React.KeyboardEvent<HTMLInputElement>) => {
+              onKeyDownHandlerForSearch(evt, conditionBuilderRef, closePopover);
+            }}
           />
         </div>
       )}
@@ -111,6 +122,14 @@ export const ItemOption = ({
         {filteredItems?.map((option) => {
           const isSelected = selection === option.id;
           const Icon = (option as option).icon;
+          const disabled = (option as Property)?.getIsDisabled?.({
+            conditionState,
+            group,
+          });
+          const hidden = (option as Property)?.getIsHidden?.({
+            conditionState,
+            group,
+          });
 
           return (
             <li
@@ -123,11 +142,13 @@ export const ItemOption = ({
                 return false;
               }}
               onClick={(evt) => onClickHandler(evt, option)}
+              {...(disabled ? { 'aria-disabled': 'true' } : {})}
+              {...(hidden ? { 'aria-hidden': 'true' } : {})}
             >
               <div className={`${blockClass}__item-option__option-content`}>
                 <span className={`${blockClass}__item-option__option-label`}>
                   {Icon && <Icon />}
-                  {config.isStatement
+                  {config?.isStatement
                     ? getStatementContent(option)
                     : option.label}
                 </span>

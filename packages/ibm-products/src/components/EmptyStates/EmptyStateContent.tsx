@@ -40,11 +40,11 @@ interface EmptyStateProps {
   /**
    * Empty state subtitle
    */
-  subtitle?: string | ReactNode;
+  subtitle?: ReactNode;
   /**
    * Empty state title
    */
-  title: string | ReactNode;
+  title: ReactNode;
 }
 
 export const EmptyStateContent = (props: EmptyStateProps) => {
@@ -61,13 +61,13 @@ export const EmptyStateContent = (props: EmptyStateProps) => {
         {title}
       </HeadingComponent>
       {subtitle && (
-        <p
+        <div
           className={cx(`${blockClass}__subtitle`, {
             [`${blockClass}__subtitle--small`]: size === 'sm',
           })}
         >
           {subtitle}
-        </p>
+        </div>
       )}
       {action?.text && action?.onClick && (
         <Button
@@ -126,9 +126,9 @@ EmptyStateContent.propTypes = {
   /**
    * Empty state subtitle
    */
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  subtitle: PropTypes.node,
   /**
    * Empty state title
    */
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  title: PropTypes.node.isRequired,
 };

@@ -14,7 +14,7 @@ test.describe('InlineTip @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'InlineTip',
-      id: 'experimental-onboarding-inline-tip-inlinetip--inline-tip',
+      id: 'preview-candidate-onboarding-inlinetip--inline-tip',
       globals: {
         carbonTheme: 'white',
       },

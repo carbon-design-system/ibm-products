@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ import cx from 'classnames';
 import { SelectableTag } from '@carbon/react';
 import { Checkmark } from '@carbon/react/icons';
 import { pkg } from '../../../../settings';
-import { disableButtonConfigType } from '../../InterstitialScreen';
+import { disableButtonConfigType } from '../../context';
 import './_interstitial-screen-view-module.scss';
 
 // Carbon and package components we use.
@@ -57,7 +57,7 @@ export interface InterstitialScreenViewModuleProps {
 /**
  * View module to help in building interstitial screen views.
  */
-export let InterstitialScreenViewModule = React.forwardRef<
+export const InterstitialScreenViewModule = React.forwardRef<
   HTMLElement,
   InterstitialScreenViewModuleProps
 >(
@@ -110,12 +110,6 @@ export let InterstitialScreenViewModule = React.forwardRef<
       </section>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-InterstitialScreenViewModule = pkg.checkComponentEnabled(
-  InterstitialScreenViewModule,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

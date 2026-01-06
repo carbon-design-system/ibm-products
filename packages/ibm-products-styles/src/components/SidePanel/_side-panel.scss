@@ -16,6 +16,7 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities';
+@use '@carbon-labs/react-resizer/scss/resizer';
 @use '@carbon/styles/scss/components/button/tokens' as *;
 
 // Standard imports.
@@ -30,12 +31,12 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
-$clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
+$clabs-prefix: 'clabs';
 
 @property --panel-transform {
   inherits: true;
   initial-value: 320px;
-  syntax: '<integer>';
+  syntax: '<length>';
 }
 
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
@@ -44,7 +45,7 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
 
 @mixin setDividerStyles() {
   position: absolute;
-  background-color: $border-subtle-02;
+  background-color: $border-subtle-01;
   block-size: 1px;
   content: '';
   inline-size: 100%;
@@ -54,10 +55,6 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
 }
 
 @mixin setCommonTitleStyles() {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
   /* stylelint-disable-next-line carbon/layout-use -- custom css property set below */
   padding-inline-end: var(--#{$block-class}--title-padding-right);
 }
@@ -187,16 +184,21 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
     --#{$block-class}--actions-height: #{$spacing-09};
   }
 
-  &.#{$block-class}--slide-in,
   &:not(.#{$block-class}--has-overlay) {
     box-shadow: 0 $spacing-01 $spacing-02 $overlay;
+  }
+
+  // Slide-in panels should use border not shadows since they don’t layer
+  &.#{$block-class}--slide-in,
+  &.#{$block-class}--slide-in:not(.#{$block-class}--has-overlay) {
+    box-shadow: none;
   }
 
   .#{$block-class}__actions-container {
     inline-size: 100%;
   }
   &.#{$block-class}--right-placement {
-    border-inline-start: 1px solid $border-subtle-02;
+    border-inline-start: 1px solid $border-subtle-01;
     inset-inline-end: 0;
   }
   &.#{$block-class}--left-placement {
@@ -219,7 +221,7 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
       }
     }
 
-    border-inline-end: 1px solid $border-subtle-02;
+    border-inline-end: 1px solid $border-subtle-01;
     inset-inline-start: 0;
   }
   &.#{$block-class}.#{$block-class}--has-slug,
@@ -323,7 +325,7 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
 
     &.#{$block-class}__header--reduced-motion {
       z-index: 5;
-      border-block-end: 1px solid $border-subtle-02;
+      border-block-end: 1px solid $border-subtle-01;
       margin-block-end: $spacing-05;
     }
 
@@ -348,6 +350,11 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
     &:not(.#{$block-class}__header--has-title)::before {
       background-color: transparent;
     }
+  }
+
+  // Remove min‑block‑size when the header contains no child elements to prevent unnecessary blank space
+  .#{$block-class}__header:empty {
+    min-block-size: unset;
   }
 
   &.#{$block-class}:has(.#{$block-class}__action-toolbar),
@@ -407,11 +414,8 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
   .#{$block-class}__label-text {
     @include type.type-style('label-01');
 
-    overflow: hidden;
     opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     padding-inline-end: var(--#{$block-class}--title-padding-right);
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .#{$block-class}__collapsed-title-text {
@@ -435,11 +439,6 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
   .#{$block-class}__subtitle-text {
     @include type.type-style('body-compact-01');
 
-    overflow: hidden;
-
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
     opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     padding-block-end: $spacing-05;
     padding-inline-end: var(--#{$block-class}--title-padding-right);
@@ -531,9 +530,9 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
     position: absolute;
     z-index: 10; /* must be higher than title container border bottom */
     display: flex;
+    block-size: $spacing-07;
     inset-block-start: 0;
     inset-inline-end: 0;
-
     /* stylelint-disable-next-line max-nesting-depth */
     @media (prefers-reduced-motion) {
       position: absolute;
@@ -543,7 +542,7 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
   .#{$block-class}__actions-container {
     position: sticky; // stick to bottom
     background-color: $layer-01;
-    border-block-start: 1px solid $border-subtle-02;
+    border-block-start: 1px solid $border-subtle-01;
     inset-block-end: 0;
 
     &.#{$action-set-block-class}--2xl {
@@ -567,19 +566,6 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
       block-size: var(--#{$block-class}--actions-height);
     }
   }
-}
-
-// form fields should receive correct background color
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--text-input,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--text-area,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--search-input,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--select-input,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--multi-select,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--dropdown,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--dropdown-list,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--number input[type='number'],
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--date-picker__input {
-  background-color: $field-02;
 }
 
 @keyframes side-panel-overlay-entrance {
@@ -638,54 +624,3 @@ $clabs-prefix: 'clabs'; // TODO: remove when resizer available in labs
 .#{$block-class}--has-decorator + .#{$block-class}__overlay {
   background-color: $ai-overlay;
 }
-
-// TODO: remove along with prefix after resizer available in labs
-.#{$clabs-prefix}__resizer {
-  position: relative;
-  flex: none;
-  background-color: $border-subtle-01;
-
-  &:hover {
-    @media (prefers-reduced-motion: no-preference) {
-      background-color: $border-interactive;
-      transition: background-color $duration-moderate-01;
-    }
-  }
-
-  &:focus {
-    background-color: $border-interactive;
-    outline: none;
-  }
-
-  &:active {
-    background-color: $border-interactive;
-  }
-
-  &:focus:not(:focus-visible) {
-    box-shadow: none;
-    outline: none;
-  }
-
-  &--horizontal {
-    block-size: $spacing-02;
-    cursor: ns-resize;
-  }
-
-  &--vertical {
-    cursor: ew-resize;
-    inline-size: $spacing-02;
-  }
-}
-
-.sr-only {
-  position: absolute;
-  overflow: hidden;
-  padding: 0;
-  border: 0;
-  margin: -1px;
-  block-size: 1px;
-  clip: rect(0, 0, 0, 0);
-  inline-size: 1px;
-  white-space: nowrap;
-}
-// END TODO: remove along with prefix after resizer available in labs

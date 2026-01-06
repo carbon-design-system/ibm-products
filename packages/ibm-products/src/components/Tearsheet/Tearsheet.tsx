@@ -16,7 +16,6 @@ import React, {
 } from 'react';
 import { TearsheetShell } from './TearsheetShell';
 
-import { ActionSet } from '../ActionSet';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { allPropTypes } from '../../global/js/utils/props-helper';
@@ -188,33 +187,32 @@ export interface TearsheetProps extends PropsWithChildren {
  * panel on either the left or right side, the main content area, and a set of
  * action buttons.
  */
-export let Tearsheet = React.forwardRef(
-  (
-    {
+export const Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
+  (props, ref) => {
+    const {
       influencerPosition = 'left',
       influencerWidth = 'narrow',
       children,
       ...rest
-    }: TearsheetProps,
-    ref: ForwardedRef<HTMLDivElement>
-  ) => (
-    <TearsheetShell
-      {...{
-        ...getDevtoolsProps(componentName),
-        ...rest,
-        influencerPosition,
-        influencerWidth,
-        ref,
-        size: 'wide',
-      }}
-    >
-      {children}
-    </TearsheetShell>
-  )
+    } = props;
+    return (
+      <TearsheetShell
+        {...{
+          ...getDevtoolsProps(componentName),
+          ...rest,
+          influencerPosition,
+          influencerWidth,
+          ref,
+          size: 'wide',
+        }}
+      >
+        {children}
+      </TearsheetShell>
+    );
+  }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-Tearsheet = pkg.checkComponentEnabled(Tearsheet, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -254,11 +252,8 @@ Tearsheet.propTypes = {
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: allPropTypes([
-    /**@ts-ignore */
-    ActionSet.validateActions(() => '2xl'),
     PropTypes.arrayOf(
       PropTypes.shape({
-        /**@ts-ignore*/
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',

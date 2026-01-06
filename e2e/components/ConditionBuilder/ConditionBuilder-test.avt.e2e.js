@@ -13,7 +13,7 @@ test.describe('ConditionBuilder @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ConditionBuilder',
-      id: 'experimental-components-conditionbuilder--condition-builder',
+      id: 'preview-candidate-conditionbuilder--condition-builder',
       globals: {
         carbonTheme: 'white',
       },

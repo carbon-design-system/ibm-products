@@ -28,6 +28,8 @@ $story-prefix: 'overflow-handler-stories__';
 
 .items {
   display: flex;
+  // Spacing between tags.
+  gap: spacing.$spacing-03;
   white-space: nowrap;
 
   &--vertical {

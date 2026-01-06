@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ import React, {
 import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
 
 import { COACHMARK_OVERLAY_KIND } from './utils/enums';
-import { CoachmarkContext } from './utils/context';
+import { CoachmarkContext, CoachmarkContextType } from './utils/context';
 import { CoachmarkOverlay } from './CoachmarkOverlay';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
@@ -39,6 +39,7 @@ const defaults = {
   overlayKind: 'tooltip',
   theme: 'light',
   isOpenByDefault: false,
+  closeIconDescription: '',
 };
 
 export interface CoachmarkProps {
@@ -126,15 +127,20 @@ export interface CoachmarkProps {
    * Does nothing if `overlayKind=stacked`.
    */
   isOpenByDefault?: boolean;
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
 }
 
 /**
  * Coachmarks are used to call out specific functionality or concepts
  * within the UI that may not be intuitive but are important for the
  * user to gain understanding of the product's main value and discover new use cases.
+ * @deprecated This component is deprecated.
  */
 
-export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
+export const Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
   (
     {
       align = defaults.align,
@@ -150,6 +156,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       target,
       theme = defaults.theme,
       isOpenByDefault = defaults.isOpenByDefault,
+      closeIconDescription = defaults.closeIconDescription,
       // Collect any other property values passed in.
       ...rest
     },
@@ -226,7 +233,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       }
     };
 
-    const contextValue = {
+    const contextValue: CoachmarkContextType = {
       buttonProps: {
         'aria-expanded': isOpen,
         tabIndex: 0,
@@ -240,9 +247,10 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       },
       targetRect: targetRect,
       targetOffset: targetOffset,
-      align: align,
+      align: align as PopoverAlignment,
       positionTune: positionTune,
       isOpen: isOpen,
+      closeIconDescription,
     };
     const handleResize = throttle(() => {
       closeOverlay();
@@ -375,8 +383,12 @@ const overlayRefType =
     : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
       PropTypes.instanceOf(HTMLElement);
 
+/**@ts-ignore*/
+Coachmark.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
 // Return a placeholder if not released and not enabled by feature flag
-Coachmark = pkg.checkComponentEnabled(Coachmark, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -462,6 +474,11 @@ Coachmark.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription: PropTypes.string,
+
+  /**
    * Determines if the coachmark is open by default.
    * Does nothing if `overlayKind=stacked`.
    */
@@ -471,7 +488,6 @@ Coachmark.propTypes = {
    * Function to call when the Coachmark closes.
    */
   onClose: PropTypes.func,
-
   /**
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */

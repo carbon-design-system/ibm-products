@@ -1,12 +1,12 @@
 {
-  "name": "BigNumbers-component-example",
-  "description": "An example showing use of the BigNumbers component from the @carbon/ibm-products component library.",
+  "name": "BigNumber-component-example",
+  "description": "An example showing use of the BigNumber component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "bignumbers",
+    "bignumber",
     "big",
     "numbers"
   ],
@@ -22,19 +22,22 @@
     "@carbon/ibm-products": "^2.21.0",
     "@carbon/react": "^1.60.3",
     "lodash": "^4.17.21",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sass": "^1.70.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sass": "^1.93.2"
   },
   "devDependencies": {
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^4.5.3"
+    "vite": "^5.4.20"
+  },
+  "resolutions": {
+    "react-is": "^19.0.0"
   },
   "browserslist": {
     "production": [

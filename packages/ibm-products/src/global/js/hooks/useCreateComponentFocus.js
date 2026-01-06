@@ -27,11 +27,52 @@ export const useCreateComponentFocus = ({
       await wait(10);
       elm.focus();
     };
+    // FUNCTION TO ENSURE THE ELEMENT TARGETED IS NOT CONTAINED IN AN ELEMENT MARKED 'INERT'
+    const isNotContainedInInert = (elm) => {
+      if (!elm) return false;
+      const inertParent = elm.closest('[inert]');
+      return (
+        !inertParent || (!inertParent.hasAttribute('inert') && !elm.disabled)
+      );
+    };
+
+    const getActiveStep = () => {
+      const allSteps = Array.from(document.querySelectorAll(blockClass));
+      return allSteps.find((el) => {
+        let currentStep = el;
+        while (currentStep) {
+          if (currentStep.hasAttribute('inert')) return false;
+          currentStep = currentStep.parentElement;
+        }
+        return true;
+      });
+    };
+
+    const getFocusableElement = (containingElement) => {
+      const focusElementQuery = `button, input[type="button"], input, select, textarea, a[href]`;
+      // PREFER THE USER DEFINED firstFocusElement IF IT EXISTS
+      const firstFocusEl = containingElement.querySelector(firstFocusElement);
+      if (
+        firstFocusEl &&
+        isNotContainedInInert(firstFocusEl) &&
+        !firstFocusEl.disabled
+      ) {
+        return firstFocusEl;
+      }
+      // BACKUP TO INTERACTIVE ELEMENT LIST
+      const bakFocusEl = Array.from(
+        containingElement.querySelectorAll(focusElementQuery)
+      );
+      return bakFocusEl.find((el) => isNotContainedInInert(el) && !el.disabled);
+    };
+
     if (previousState?.currentStep !== currentStep && currentStep > 0) {
-      if (firstFocusElement) {
-        const elm = document.querySelector(firstFocusElement);
-        if (elm) {
-          awaitFocus(elm);
+      // GET THE CURRENT STEP ELEMENT
+      const activeStepElement = getActiveStep();
+      if (activeStepElement && isNotContainedInInert(activeStepElement)) {
+        const focusEl = getFocusableElement(activeStepElement);
+        if (focusEl) {
+          awaitFocus(focusEl);
         }
       }
     }

@@ -3,7 +3,9 @@
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- */ import {
+ */
+
+import {
   ModalHeader,
   ProgressIndicator,
   ProgressStep,
@@ -11,10 +13,10 @@
 } from '@carbon/react';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../settings';
 import cx from 'classnames';
-import { InterstitialScreenContext } from './InterstitialScreen';
+import { InterstitialScreenContext, blockClass } from './context';
 import { useId } from '../../global/js/utils/useId';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 export interface InterstitialScreenHeaderProps {
   /**
@@ -47,7 +49,7 @@ export interface InterstitialScreenHeaderProps {
 
 export type EnrichedChildren = {
   children: React.ReactNode;
-  stepTitle: string;
+  stepTitle?: string;
   translateWithId?: (id: string) => string;
 };
 
@@ -62,11 +64,11 @@ const InterstitialScreenHeader = React.forwardRef<
     closeIconDescription,
     hideProgressIndicator,
     children,
+    ...rest
   } = props;
   const { bodyChildrenData, isFullScreen, progStep, handleClose, stepCount } =
     React.useContext(InterstitialScreenContext);
 
-  const blockClass = `${pkg.prefix}--interstitial-screen`;
   const headerBlockClass = `${blockClass}--internal-header`;
   const _useId = useId();
   const carbonPrefix = usePrefix();
@@ -95,7 +97,7 @@ const InterstitialScreenHeader = React.forwardRef<
                     return (
                       <ProgressStep
                         key={stepKey}
-                        label={child.props.stepTitle || ''}
+                        label={child.props.stepTitle ?? `Step ${idx + 1}`}
                         translateWithId={child.props.translateWithId}
                       />
                     );
@@ -114,13 +116,20 @@ const InterstitialScreenHeader = React.forwardRef<
       </>
     );
   };
+
+  const closeModal = () => {
+    handleClose?.('close');
+  };
   return isFullScreen ? (
     <header
       ref={ref}
+      role="presentation"
       className={cx(headerBlockClass, className, {
         [`${headerBlockClass}--has-title`]:
           headerTitle || headerSubTitle || children,
       })}
+      {...getDevtoolsProps('InterstitialScreenHeader')}
+      {...rest}
     >
       {headerContent()}
     </header>
@@ -131,8 +140,10 @@ const InterstitialScreenHeader = React.forwardRef<
         [`${headerBlockClass}--has-title`]:
           headerTitle || headerSubTitle || children,
       })}
-      closeModal={handleClose}
+      closeModal={closeModal}
       iconDescription={closeIconDescription}
+      {...getDevtoolsProps('InterstitialScreenHeader')}
+      {...rest}
     >
       {headerContent()}
     </ModalHeader>

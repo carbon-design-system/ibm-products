@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,7 +40,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   let titleText;
   let isEditable = !!onSave;
 
-  const titleRef = useRef();
+  const titleRef = useRef(undefined);
   const isEllipsisApplied = useOverflowStringWidth(titleRef);
 
   if (text || !content) {
@@ -151,13 +151,13 @@ PageHeaderTitle.propTypes = {
       loading: PropTypes.bool,
 
       // inline edit version properties
-      editDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
-      editableLabel: PropTypes.string.isRequired.if(editInPlaceRequired),
-      id: PropTypes.string.isRequired.if(editInPlaceRequired),
+      editDescription: PropTypes.string,
+      editableLabel: PropTypes.string,
+      id: PropTypes.string,
       onChange: PropTypes.func,
       onSave: PropTypes.func,
-      cancelDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
-      saveDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
+      cancelDescription: PropTypes.string,
+      saveDescription: PropTypes.string,
       tooltipAlignment: PropTypes.oneOf([
         'top',
         'top-left',

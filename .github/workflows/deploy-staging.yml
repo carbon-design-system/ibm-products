@@ -12,27 +12,50 @@ jobs:
   deploy-staging-storybook:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           fetch-depth: '0'
           ref: ${{ github.event.client_payload.branch }}
+      - name: Free disk space
+        uses: ./.github/actions/free-disk-space
 
-      - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.x'
-          registry-url: https://registry.npmjs.org
+          node-version-file: '.nvmrc'
           cache: 'yarn'
+
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
+
       - name: Build packages and storybook
-        run: yarn build
+        run: |
+          yarn build
+          yarn storybook-wc:build
 
       # Deploy to staging Github Pages using `gh-pages` package
-      - name: Deploy
+      - name: Prepare combined staging directory with clean URL paths
         run: |
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npx gh-pages -d packages/ibm-products/storybook-static -u "github-actions-bot <support+actions@github.com>" --dest staging --message "chore(deploy): deploy to gh-pages staging"
+          mkdir -p staging-dist/react
+          cp -r packages/ibm-products/storybook-static/* staging-dist/react
+
+          mkdir -p staging-dist/web-components
+          cp -r packages/ibm-products-web-components/storybook-static/* staging-dist/web-components
+
+      # Set authenticated Git remote
+      - name: Set authenticated Git remote
+        run:
+          git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN
+          }}@github.com/${{ github.repository }}.git
+
+      - name: Deploy both Storybooks to GitHub Pages (gh-pages/staging)
+        run: |
+          npx gh-pages -d staging-dist \
+            -u "github-actions-bot <support+actions@github.com>" \
+            --dest staging \
+            --message "chore(deploy): deploy React and Web Components Storybooks to staging"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

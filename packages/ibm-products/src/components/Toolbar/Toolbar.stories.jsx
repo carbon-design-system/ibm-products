@@ -35,11 +35,15 @@ import { Dropdown, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 import React, { useState } from 'react';
 
-import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
+import {
+  previewCandidate__Toolbar as Toolbar,
+  previewCandidate__ToolbarButton as ToolbarButton,
+  previewCandidate__ToolbarGroup as ToolbarGroup,
+} from '..';
 import mdx from './Toolbar.mdx';
 
 export default {
-  title: 'Experimental/Components/Toolbars/Toolbar',
+  title: 'Preview Candidate/Toolbar',
   component: Toolbar,
   tags: ['autodocs'],
   parameters: {

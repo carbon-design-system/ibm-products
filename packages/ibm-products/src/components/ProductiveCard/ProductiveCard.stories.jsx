@@ -20,7 +20,7 @@ import {
 } from '@carbon/react';
 import { ProductiveCard } from '.';
 import DocsPage from './ProductiveCard.docs-page';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const storyClass = 'productive-card-stories';
 
@@ -63,7 +63,7 @@ const sampleDecorator = (decorator) => {
 };
 
 export default {
-  title: 'IBM Products/Components/Cards/ProductiveCard',
+  title: 'Components/Cards/ProductiveCard',
   component: ProductiveCard,
   tags: ['autodocs'],
   parameters: {
@@ -77,13 +77,13 @@ export default {
       control: {
         type: 'select',
       },
-      options: [4, 8, 12, 16],
+      options: [1, 2, 3, 4],
     },
     columnSizeMd: {
       control: {
         type: 'select',
       },
-      options: [4, 8, 12, 16],
+      options: [2, 4, 6, 8],
     },
     columnSizeLg: {
       control: {
@@ -130,7 +130,7 @@ const defaultProps = {
   title: 'Title',
   columnSizeSm: 4,
   columnSizeMd: 8,
-  columnSizeLg: 4,
+  columnSizeLg: 8,
   children: (
     <>
       <div className={`${storyClass}__graph`}>
@@ -145,12 +145,14 @@ const defaultProps = {
   actionIcons: [
     {
       id: '1',
+      'data-testid': 'test-id-1',
       icon: (props) => <Edit size={16} {...props} />,
       onClick: action('on click'),
       iconDescription: 'Edit',
     },
     {
       id: '2',
+      'data-testid': 'test-id-2',
       icon: (props) => <TrashCan size={16} {...props} />,
       onClick: action('on click'),
       iconDescription: 'Delete',

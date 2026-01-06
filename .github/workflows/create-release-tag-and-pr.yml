@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           fetch-depth: '0'
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
@@ -45,8 +45,10 @@ jobs:
           git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
       - name: Create tag and push
         run: |
-          git tag -a ${{ github.event.inputs.tag }} -m "Release ${{ github.event.inputs.tag }}"
-          git push origin ${{ github.event.inputs.tag }}
+          if ! git rev-parse "${{ github.event.inputs.tag }}" >/dev/null 2>&1; then
+            git tag -a ${{ github.event.inputs.tag }} -m "Release ${{ github.event.inputs.tag }}"
+            git push origin ${{ github.event.inputs.tag }}
+          fi
 
   create-pull-request:
     runs-on: ubuntu-latest
@@ -54,7 +56,7 @@ jobs:
     if: github.event.inputs.create-pr == 'true'
     needs: create-release-tag
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           fetch-depth: '0'
 
@@ -66,14 +68,14 @@ jobs:
       # Create a new branch off the release branch for the PR, we do this to ensure the release branch
       # is not affected
 
-      - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.x'
+          node-version-file: '.nvmrc'
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
 
       - name: Create branch
         run: |
@@ -107,17 +109,16 @@ jobs:
     timeout-minutes: 60
     needs: create-release-tag
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           fetch-depth: '0'
-      - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.x'
-          registry-url: https://registry.npmjs.org
+          node-version-file: '.nvmrc'
           cache: 'yarn'
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
 
       # Generate the changelog with the local 'get-changelog.js' script and output to 'changelog.txt' file
       - name: Run changelog script

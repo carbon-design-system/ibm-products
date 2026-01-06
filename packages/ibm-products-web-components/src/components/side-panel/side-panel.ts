@@ -21,8 +21,9 @@ import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './defs';
 import styles from './side-panel.scss?lit';
 import { selectorTabbable } from '@carbon/web-components/es/globals/settings.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import ArrowLeft16 from '@carbon/web-components/es/icons/arrow--left/16';
-import Close20 from '@carbon/web-components/es/icons/close/20';
+import ArrowLeft16 from '@carbon/icons/es/arrow--left/16';
+import Close16 from '@carbon/icons/es/close/16';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import { moderate02 } from '@carbon/motion';
 import Handle from '../../globals/internal/handle';
 import '@carbon/web-components/es/components/button/index.js';
@@ -55,34 +56,6 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
 };
 
 /**
- * Tries to focus on the given elements and bails out if one of them is successful.
- *
- * @param elements The elements.
- * @param reverse `true` to go through the list in reverse order.
- * @returns `true` if one of the attempts is successful, `false` otherwise.
- */
-function tryFocusElements(elements: NodeListOf<HTMLElement>, reverse: boolean) {
-  if (!reverse) {
-    for (let i = 0; i < elements.length; ++i) {
-      const elem = elements[i];
-      elem.focus();
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  } else {
-    for (let i = elements.length - 1; i >= 0; --i) {
-      const elem = elements[i];
-      elem.focus();
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-/**
  * SidePanel.
  *
  * @element c4p-side-panel
@@ -104,18 +77,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
    * The element that had focus before this side-panel gets open.
    */
   private _launcher: Element | null = null;
-
-  /**
-   * Node to track focus going outside of side-panel content.
-   */
-  @query('#start-sentinel')
-  private _startSentinelNode!: HTMLAnchorElement;
-
-  /**
-   * Node to track focus going outside of side-panel content.
-   */
-  @query('#end-sentinel')
-  private _endSentinelNode!: HTMLAnchorElement;
 
   /**
    * Node to track side panel.
@@ -168,62 +129,79 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @state()
   _slugCloseSize = 'sm';
 
+  @state()
+  _customHeaderElements: Element[] = [];
+
   /**
-   * Handles `blur` event on this element.
+   * Get focusable elements.
    *
-   * @param event The event.
-   * @param event.target The event target.
-   * @param event.relatedTarget The event relatedTarget.
+   * Querying all tabbable items.
+   *
+   * @returns {{first: HTMLElement, last: HTMLElement, all: HTMLElement[]}} Returns an object with various elements.
    */
-  @HostListener('shadowRoot:focusout')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
-    const {
-      open,
-      _startSentinelNode: startSentinelNode,
-      _endSentinelNode: endSentinelNode,
-    } = this;
+  private getFocusable(): {
+    first: HTMLElement | undefined;
+    last: HTMLElement | undefined;
+    all: HTMLElement[];
+  } {
+    const elements: NodeListOf<HTMLElement>[] = [];
 
-    const oldContains = target !== this && this.contains(target as Node);
-    const currentContains =
-      relatedTarget !== this &&
-      (this.contains(relatedTarget as Node) ||
-        (this.shadowRoot?.contains(relatedTarget as Node) &&
-          relatedTarget !== (startSentinelNode as Node) &&
-          relatedTarget !== (endSentinelNode as Node)));
+    // Add slug elements if present
+    if (this._hasSlug) {
+      elements.push(this.querySelectorAll(`${carbonPrefix}-slug`));
+    }
 
-    // Performs focus wrapping if _all_ of the following is met:
-    // * This side-panel is open
-    // * The viewport still has focus
-    // * SidePanel body used to have focus but no longer has focus
-    const { selectorTabbable: selectorTabbableForSidePanel } = this
-      .constructor as typeof CDSSidePanel;
-
-    if (open && relatedTarget && oldContains && !currentContains) {
-      const comparisonResult = (target as Node).compareDocumentPosition(
-        relatedTarget as Node
+    // Add close button if not hidden
+    if (!this.hideCloseButton) {
+      const closeButtons = this.shadowRoot?.querySelectorAll<HTMLElement>(
+        `${carbonPrefix}-icon-button`
       );
-      if (relatedTarget === startSentinelNode || comparisonResult) {
-        await (this.constructor as typeof CDSSidePanel)._delay();
-        if (
-          !tryFocusElements(
-            this.querySelectorAll(selectorTabbableForSidePanel),
-            true
-          ) &&
-          relatedTarget !== this
-        ) {
-          this.focus();
-        }
-      } else if (relatedTarget === endSentinelNode || comparisonResult) {
-        await (this.constructor as typeof CDSSidePanel)._delay();
-        if (
-          !tryFocusElements(
-            this.querySelectorAll(selectorTabbableForSidePanel),
-            true
-          )
-        ) {
-          this.focus();
-        }
+      if (closeButtons) {
+        elements.push(closeButtons);
+      }
+    }
+
+    // Add tabbable elements inside light DOM
+    const _tabbableItems = this.querySelectorAll<HTMLElement>(selectorTabbable);
+    if (_tabbableItems) {
+      elements.push(_tabbableItems);
+    }
+
+    // Flatten NodeList arrays and filter for focusable items
+    const all = elements
+      ?.flatMap((nodeList) => Array.from(nodeList))
+      ?.filter((el): el is HTMLElement => typeof el?.focus === 'function');
+
+    return {
+      first: all[0],
+      last: all[all.length - 1],
+      all,
+    };
+  }
+
+  /**
+   * Handle the keydown event.
+   * Trap the focus inside the side-panel by tracking keydown.key == `Tab`
+   *
+   * @param {KeyboardEvent} event The keyboard event object.
+   */
+  @HostListener('keydown')
+  protected _handleHostKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Tab' && !this.slideIn) {
+      const { first: _firstElement, last: _lastElement } = this.getFocusable();
+
+      if (
+        event.shiftKey &&
+        (this.shadowRoot?.activeElement === _firstElement ||
+          document.activeElement === _firstElement)
+      ) {
+        event.preventDefault();
+
+        _lastElement?.focus();
+      } else if (!event.shiftKey && document.activeElement === _lastElement) {
+        event.preventDefault();
+
+        _firstElement?.focus();
       }
     }
   };
@@ -403,6 +381,17 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._hasSubtitle = subtitle.length > 0;
   }
 
+  private _handleCustomHeaderSlotChange(e: Event) {
+    const target = e.target as HTMLSlotElement;
+    const customHeaderElms = target?.assignedElements();
+    customHeaderElms.forEach((el) => {
+      if (el instanceof HTMLElement) {
+        el.style.opacity = `calc(1 - var(--${blockClass}--scroll-animation-progress))`;
+        this._customHeaderElements.push(el);
+      }
+    });
+  }
+
   private _handleActionToolbarChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const toolbarActions = target?.assignedElements();
@@ -524,12 +513,22 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   private _scrollObserver = () => {
     const scrollTop = this._animateScrollWrapper?.scrollTop ?? 0;
     const scrollAnimationDistance = this._getScrollAnimationDistance();
+    const animationProgress =
+      Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance;
+
     this?._sidePanel?.style?.setProperty(
       `--${blockClass}--scroll-animation-progress`,
-      `${
-        Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance
-      }`
+      `${animationProgress}`
     );
+    if (animationProgress === 1) {
+      this._customHeaderElements.forEach((el) => {
+        el.classList.add(`cds--visually-hidden`);
+      });
+    } else {
+      this._customHeaderElements.forEach((el) => {
+        el.classList.remove(`cds--visually-hidden`);
+      });
+    }
   };
 
   private _handleCurrentStepUpdate = () => {
@@ -548,8 +547,22 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   /**
    * Sets the close button icon description
    */
-  @property({ reflect: true, attribute: 'close-icon-description' })
+  @property({
+    reflect: true,
+    attribute: 'close-icon-description',
+    type: String,
+  })
   closeIconDescription = 'Close';
+
+  /**
+   * Sets the close button tooltip alignment
+   */
+  @property({
+    reflect: true,
+    attribute: 'close-icon-tooltip-alignment',
+    type: String,
+  })
+  closeIconTooltipAlignment = 'left';
 
   /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)
@@ -616,6 +629,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   selectorPageContent = '';
 
   /**
+   * Show/hide the "X" close button
+   */
+  @property({ attribute: 'hide-close-button', type: Boolean })
+  hideCloseButton = false;
+
+  /**
    * SidePanel size.
    */
   @property({ reflect: true, type: String })
@@ -658,6 +677,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   render() {
     const {
       closeIconDescription,
+      closeIconTooltipAlignment,
       condensedActions,
       currentStep,
       includeOverlay,
@@ -665,6 +685,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       navigationBackIconDescription,
       open,
       placement,
+      hideCloseButton,
       size,
       slideIn,
       title,
@@ -677,18 +698,15 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     const actionsMultiple = ['', 'single', 'double', 'triple'][
       this._actionsCount
     ];
-    const titleTemplate = html`<div
+
+    const titleTemplate = html` <div
       class=${`${blockClass}__title`}
       ?no-label=${!!labelText}
     >
-      <h2 class=${title ? `${blockClass}__title-text` : ''} title=${title}>
-        ${title}
-      </h2>
-
+      <h2 class=${title ? `${blockClass}__title-text` : ''}>${title}</h2>
       ${this._doAnimateTitle
         ? html`<h2
             class=${`${blockClass}__collapsed-title-text`}
-            title=${title}
             aria-hidden="true"
           >
             ${title}
@@ -716,12 +734,18 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
               class=${`${prefix}--btn ${blockClass}__navigation-back-button`}
               @click=${this._handleNavigateBack}
             >
-              ${ArrowLeft16({ slot: 'icon' })}
+              ${iconLoader(ArrowLeft16, { slot: 'icon' })}
               <span slot="tooltip-content">
                 ${navigationBackIconDescription}
               </span>
             </cds-icon-button>`
           : ''}
+
+        <!-- slot for custom header components -->
+        <slot
+          name="above-title"
+          @slotchange=${this._handleCustomHeaderSlotChange}
+        ></slot>
 
         <!-- render title label -->
         ${title?.length && labelText?.length
@@ -735,17 +759,19 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         <div class=${`${blockClass}__slug-and-close`}>
           <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
           <!-- {normalizedSlug} -->
-          <cds-icon-button
-            align="bottom-right"
-            aria-label=${closeIconDescription}
-            kind="ghost"
-            size="sm"
-            class=${`${blockClass}__close-button`}
-            @click=${this._handleCloseClick}
-          >
-            ${Close20({ slot: 'icon' })}
-            <span slot="tooltip-content"> ${closeIconDescription} </span>
-          </cds-icon-button>
+          ${!hideCloseButton
+            ? html`<cds-icon-button
+                align=${closeIconTooltipAlignment}
+                aria-label=${closeIconDescription}
+                kind="ghost"
+                size="sm"
+                class=${`${blockClass}__close-button`}
+                @click=${this._handleCloseClick}
+              >
+                ${iconLoader(Close16, { slot: 'icon' })}
+                <span slot="tooltip-content"> ${closeIconDescription} </span>
+              </cds-icon-button>`
+            : ''}
         </div>
 
         <!-- render sub title -->
@@ -761,6 +787,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             @slotchange=${this._handleSubtitleChange}
           ></slot>
         </p>
+
+        <!-- slot for custom header components -->
+        <slot
+          name="below-title"
+          @slotchange=${this._handleCustomHeaderSlotChange}
+        ></slot>
 
         <div
           class=${this._hasActionToolbar ? `${blockClass}__action-toolbar` : ''}
@@ -803,14 +835,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         ?slide-in=${slideIn}
         size=${size}
       >
-        <a
-          id="start-sentinel"
-          class="sentinel"
-          hidden
-          href="javascript:void 0"
-          role="navigation"
-        ></a>
-
         ${this._doAnimateTitle
           ? html`<div class=${`${blockClass}__animated-scroll-wrapper`} scrolls>
               ${headerTemplate} ${mainTemplate}
@@ -826,14 +850,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         >
           <slot name="actions" @slotchange=${this._handleActionsChange}></slot>
         </cds-button-set-base>
-
-        <a
-          id="end-sentinel"
-          class="sentinel"
-          hidden
-          href="javascript:void 0"
-          role="navigation"
-        ></a>
       </div>
 
       ${includeOverlay
@@ -902,30 +918,23 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         this.connectObservers();
 
         this._launcher = this.ownerDocument!.activeElement;
-        const focusNode =
-          this.selectorInitialFocus &&
-          this.querySelector(this.selectorInitialFocus);
 
         await (this.constructor as typeof CDSSidePanel)._delay();
-        if (focusNode) {
-          // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
-          // where its first update/render cycle that makes it focusable happens after `<c4p-side-panel>`'s first update/render cycle
-          (focusNode as HTMLElement).focus();
-        } else if (
-          !tryFocusElements(
-            this.querySelectorAll(
-              (this.constructor as typeof CDSSidePanel).selectorTabbable
-            ),
-            true
-          )
-        ) {
-          this.focus();
+
+        if (this.selectorInitialFocus?.trim()?.length) {
+          const focusNode = this.querySelector(this.selectorInitialFocus);
+
+          (focusNode as HTMLElement)?.focus();
+        } else if (!this.slideIn) {
+          const { first: _firstElement } = this.getFocusable();
+
+          _firstElement?.focus();
         }
       } else if (
         this._launcher &&
-        typeof (this._launcher as HTMLElement).focus === 'function'
+        typeof (this._launcher as HTMLElement)?.focus === 'function'
       ) {
-        (this._launcher as HTMLElement).focus();
+        (this._launcher as HTMLElement)?.focus();
         this._launcher = null;
       }
     }

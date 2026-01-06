@@ -6,10 +6,10 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Information } from '@carbon/react/icons';
 import { pkg } from '../../settings';
-import { StringFormatter } from '../StringFormatter/StringFormatter.js';
+import { TruncatedText } from '../TruncatedText';
 
 import {
   Button,
@@ -37,7 +37,7 @@ import styles from './_storybook-styles.scss?inline';
 // import mdx from './Tearsheet.mdx';
 
 export default {
-  title: 'IBM Products/Components/Tearsheet/TearsheetNarrow',
+  title: 'Components/Tearsheet/TearsheetNarrow',
   component: TearsheetNarrow,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen', styles /* docs: { page: mdx } */ },
@@ -61,30 +61,28 @@ export default {
         type: 'select',
         labels: {
           0: 'With plain String',
-          1: 'With StringFormatter and 1 line',
-          2: 'With StringFormatter and 2 lines',
+          1: 'With TruncatedText and 1 line',
+          2: 'With TruncatedText and 2 lines',
         },
         default: 0,
       },
       description:
-        'A description of the flow, displayed in the header area of the tearsheet.\n Note: `StringFormatter` can be passed as a React node to apply custom text formatting, including ellipsis truncation and a definition tooltip when the content is too long.',
+        'A description of the flow, displayed in the header area of the tearsheet.\n Note: `TruncatedText` can be passed as a React node to apply custom text formatting, including ellipsis truncation and a definition tooltip when the content is too long.',
       options: [0, 1, 2],
       mapping: {
         0: 'This is a description for the tearsheet, providing an opportunity to describe the flow.',
         1: (
-          <StringFormatter
+          <TruncatedText
             lines={1}
-            truncate={true}
-            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
             tooltipDirection="bottom"
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
           />
         ),
         2: (
-          <StringFormatter
+          <TruncatedText
             lines={2}
-            truncate={true}
-            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
             tooltipDirection="bottom"
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
           />
         ),
       },

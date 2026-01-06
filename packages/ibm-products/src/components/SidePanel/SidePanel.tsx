@@ -12,6 +12,7 @@ import {
   ButtonProps,
   Heading,
   IconButton,
+  Layer,
   Section,
 } from '@carbon/react';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -33,7 +34,7 @@ import {
 } from '../../global/js/hooks';
 
 import { ActionSet } from '../ActionSet';
-import { Resizer } from './resizer/Resizer';
+import { Resizer } from '@carbon-labs/react-resizer';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -86,6 +87,11 @@ type SidePanelBaseProps = {
   closeIconDescription?: string;
 
   /**
+   * Sets the close button tooltip alignment
+   */
+  closeIconTooltipAlignment?: string;
+
+  /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)
    */
   condensedActions?: boolean;
@@ -94,6 +100,11 @@ type SidePanelBaseProps = {
    * Sets the current step of the side panel
    */
   currentStep?: number;
+
+  /**
+   * Show/hide the "X" close button.
+   */
+  hideCloseButton?: boolean;
 
   /**
    * Unique identifier
@@ -232,7 +243,9 @@ export type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
 const defaults = {
   animateTitle: true,
   closeIconDescription: 'Close',
+  closeIconTooltipAlignment: 'left',
   currentStep: 0,
+  hideCloseButton: false,
   navigationBackIconDescription: 'Back',
   placement: 'right',
   size: 'md',
@@ -241,11 +254,9 @@ const defaults = {
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
  */
-const SidePanelBase = React.forwardRef(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
-
+export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
+  (props, ref) => {
+    const {
       actionToolbarButtons,
       actions,
       aiLabel,
@@ -253,9 +264,11 @@ const SidePanelBase = React.forwardRef(
       children,
       className,
       closeIconDescription = defaults.closeIconDescription,
+      closeIconTooltipAlignment = defaults.closeIconTooltipAlignment,
       condensedActions,
       currentStep = defaults.currentStep,
       decorator,
+      hideCloseButton = defaults.hideCloseButton,
       id = blockClass,
       includeOverlay,
       labelText,
@@ -274,12 +287,8 @@ const SidePanelBase = React.forwardRef(
       subtitle,
       title,
       launcherButtonRef,
-
-      // Collect any other property values passed in.
       ...rest
-    }: SidePanelProps,
-    ref: ForwardedRef<HTMLDivElement>
-  ) => {
+    } = props;
     const [animationComplete, setAnimationComplete] = useState(false);
     const localRef = useRef<HTMLDivElement>(null);
     const sidePanelRef = (ref || localRef) as RefObject<HTMLDivElement>;
@@ -391,23 +400,36 @@ const SidePanelBase = React.forwardRef(
       [placement, sidePanelRef, sidePanelWidth]
     );
 
+    const getPanelWidthPercent = useCallback(
+      (customWidth?: string) => {
+        if (customWidth) {
+          const remValue = parseFloat(customWidth);
+          const remInPixels =
+            remValue *
+            parseFloat(getComputedStyle(document.documentElement).fontSize);
+          return Math.round((remInPixels / window.innerWidth) * 100);
+        }
+        return Math.round(
+          ((sidePanelRef.current?.clientWidth || 0) / window.innerWidth) * 100
+        );
+      },
+      [sidePanelRef]
+    );
+
     const onResizeEnd = useCallback(
       (_, ref) => {
         accumulatedDeltaRef.current = 0;
         sidePanelRef.current?.style?.removeProperty('transition');
-
-        const percent = Math.round(
-          ((sidePanelRef.current.clientWidth || 0) / window.innerWidth) * 100
-        );
         // custom a11y announcements
         ref.current.setAttribute(
           'aria-label',
-          `side panel is covering ${percent}% of screen`
+          `side panel is covering ${getPanelWidthPercent()}% of screen`
         );
+        ref.current.setAttribute('aria-valuenow', getPanelWidthPercent());
 
         sidePanelWidth.current = sidePanelRef.current?.clientWidth;
       },
-      [sidePanelRef]
+      [sidePanelRef, getPanelWidthPercent]
     );
 
     const onDoubleClick = useCallback(() => {
@@ -802,18 +824,13 @@ const SidePanelBase = React.forwardRef(
         })}
         ref={titleRef}
       >
-        <Heading
-          className={`${blockClass}__title-text`}
-          title={title}
-          aria-hidden={false}
-        >
+        <Heading className={`${blockClass}__title-text`} aria-hidden={false}>
           {title}
         </Heading>
 
         {doAnimateTitle && !shouldReduceMotion && (
           <Heading
             className={`${blockClass}__collapsed-title-text`}
-            title={title}
             aria-hidden={true}
           >
             {title}
@@ -892,24 +909,28 @@ const SidePanelBase = React.forwardRef(
           {/* title */}
           {title && title.length && renderTitle()}
           {/* decorator and close */}
-          <div className={`${blockClass}__decorator-and-close`}>
-            {normalizedDecorator}
-            <IconButton
-              className={`${blockClass}__close-button`}
-              label={closeIconDescription}
-              onClick={onRequestClose}
-              onKeyDown={slideIn ? undefined : handleEscapeKey}
-              ref={closeRef}
-              align="left"
-            >
-              <Close
-                size={20}
-                aria-hidden="true"
-                tabIndex="-1"
-                className={`${blockClass}--btn__icon`}
-              />
-            </IconButton>
-          </div>
+          {(normalizedDecorator || !hideCloseButton) && (
+            <div className={`${blockClass}__decorator-and-close`}>
+              {normalizedDecorator}
+              {!hideCloseButton && (
+                <IconButton
+                  className={`${blockClass}__close-button`}
+                  label={closeIconDescription}
+                  onClick={onRequestClose}
+                  onKeyDown={slideIn ? undefined : handleEscapeKey}
+                  ref={closeRef}
+                  align={closeIconTooltipAlignment}
+                >
+                  <Close
+                    size={16}
+                    aria-hidden="true"
+                    tabIndex="-1"
+                    className={`${blockClass}--btn__icon`}
+                  />
+                </IconButton>
+              )}
+            </div>
+          )}
           {/* subtitle */}
           {subtitle && (
             <p
@@ -989,7 +1010,7 @@ const SidePanelBase = React.forwardRef(
             }`
           )}
         >
-          {children}
+          <Layer>{children}</Layer>
         </div>
       );
     };
@@ -1019,7 +1040,9 @@ const SidePanelBase = React.forwardRef(
             <Resizer
               className={`${blockClass}__resizer`}
               orientation="vertical"
-              aria-valuenow={sidePanelWidth.current}
+              aria-valuemin={getPanelWidthPercent(SIDE_PANEL_SIZES['xs'])}
+              aria-valuemax={75}
+              aria-valuenow={getPanelWidthPercent()}
               onResize={onResize}
               onResizeEnd={onResizeEnd}
               onDoubleClick={onDoubleClick}
@@ -1049,12 +1072,6 @@ const SidePanelBase = React.forwardRef(
       </>
     ) : null;
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-export const SidePanel = pkg.checkComponentEnabled(
-  SidePanelBase,
-  componentName
 );
 
 const deprecatedProps = {
@@ -1106,11 +1123,8 @@ SidePanel.propTypes = {
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: allPropTypes([
-    /**@ts-ignore*/
-    ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
-        /**@ts-ignore */
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',
@@ -1154,6 +1168,11 @@ SidePanel.propTypes = {
   closeIconDescription: PropTypes.string,
 
   /**
+   * Sets the close button tooltip alignment
+   */
+  closeIconTooltipAlignment: PropTypes.string,
+
+  /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)
    */
   condensedActions: PropTypes.bool,
@@ -1162,6 +1181,11 @@ SidePanel.propTypes = {
    * Sets the current step of the side panel
    */
   currentStep: PropTypes.number,
+
+  /**
+   * Show/hide the "X" close button.
+   */
+  hideCloseButton: PropTypes.bool,
 
   /**
    * Unique identifier
@@ -1226,7 +1250,7 @@ SidePanel.propTypes = {
    * This prop is required when using the `slideIn` variant of the side panel.
    */
   /**@ts-ignore*/
-  selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
+  selectorPageContent: PropTypes.string,
 
   /**
    * Specify a CSS selector that matches the DOM element that should
@@ -1256,7 +1280,7 @@ SidePanel.propTypes = {
    * Sets the title text
    */
   /**@ts-ignore*/
-  title: PropTypes.string.isRequired.if(({ labelText }) => labelText),
+  title: PropTypes.string,
 
   ...deprecatedProps,
 };

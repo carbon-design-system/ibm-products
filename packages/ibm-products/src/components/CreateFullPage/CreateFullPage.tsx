@@ -25,15 +25,11 @@ import React, {
   ReactElement,
   isValidElement,
 } from 'react';
-import {
-  SimpleHeader,
-  overflowAriaLabel_required_if_breadcrumbs_exist,
-} from '../SimpleHeader/SimpleHeader';
+import { SimpleHeader } from '../SimpleHeader/SimpleHeader';
 import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
   usePreviousValue,
-  useResetCreateComponent,
   useValidCreateStepCount,
 } from '../../global/js/hooks';
 
@@ -229,7 +225,7 @@ on the Carbon's grid system
 include `<Row>` and `<Column>` components inside of each `CreateFullPageStep`
 component to get the desired affect.
  */
-export let CreateFullPage = React.forwardRef(
+export const CreateFullPage = React.forwardRef(
   (
     {
       breadcrumbsOverflowAriaLabel,
@@ -315,7 +311,7 @@ export let CreateFullPage = React.forwardRef(
     useCreateComponentFocus({
       previousState,
       currentStep,
-      blockClass,
+      blockClass: `.${blockClass} .${pkg.prefix}--create-full-page__step`,
       onMount,
       firstFocusElement,
     });
@@ -388,7 +384,13 @@ export let CreateFullPage = React.forwardRef(
           <div className={`${blockClass}__body`}>
             <div className={`${blockClass}__main`}>
               <div className={`${blockClass}__content`}>
-                <Form className={`${blockClass}__form`} aria-label={title}>
+                <Form
+                  className={`${blockClass}__form`}
+                  aria-label={title}
+                  onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                    e.preventDefault()
+                  }
+                >
                   <StepsContext.Provider
                     value={
                       {
@@ -459,7 +461,6 @@ export let CreateFullPage = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag.
-CreateFullPage = pkg.checkComponentEnabled(CreateFullPage, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -499,7 +500,7 @@ CreateFullPage.propTypes = {
   /**
    * Label for open/close overflow button used for breadcrumb items that do not fit
    */
-  breadcrumbsOverflowAriaLabel: overflowAriaLabel_required_if_breadcrumbs_exist,
+  breadcrumbsOverflowAriaLabel: PropTypes.string,
 
   /**
    * The cancel button text

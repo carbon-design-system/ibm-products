@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { ElementType, ReactNode } from 'react';
-import { EmptyStateV2 } from '.';
+import { EmptyStateV2 } from './EmptyStateV2.deprecated';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -92,16 +92,16 @@ export interface EmptyStateProps {
   /**
    * Empty state subtitle
    */
-  subtitle?: string | ReactNode;
+  subtitle?: ReactNode;
 
   /**
    * Empty state title
    */
-  title: string | ReactNode;
+  title: ReactNode;
 
   /**
-   * Designates which version of the EmptyState component is being used.
-   * Refer to V2 documentation separately.
+   * **Deprecated:** Designates which version of the EmptyState component is being used. Refer to V2 documentation separately.
+   * @deprecated
    */
   v2?: boolean;
 }
@@ -111,9 +111,8 @@ export type EmptyStatePresetProps = Omit<EmptyStateProps, 'illustration'>;
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */
-export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
+export const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
   ({ v2 = false, ...props }, ref) => {
-    // todo: deprecate v1
     if (v2) {
       return <EmptyStateV2 {...props} />;
     }
@@ -132,10 +131,7 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
     } = props;
     return (
       <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
+        {...rest}
         className={cx(blockClass, `${blockClass}-type--default`, className, {
           [`${blockClass}-position--${illustrationPosition}`]: !!illustration,
         })}
@@ -167,7 +163,6 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-EmptyState = pkg.checkComponentEnabled(EmptyState, componentName);
 
 EmptyState.propTypes = {
   /**
@@ -203,9 +198,7 @@ EmptyState.propTypes = {
    * The alt text for custom provided illustrations
    */
   /**@ts-ignore*/
-  illustrationDescription: PropTypes.string.isRequired.if(
-    ({ illustration }) => illustration
-  ),
+  illustrationDescription: PropTypes.string,
 
   /**
    * Designates the position of the illustration relative to the content
@@ -224,15 +217,15 @@ EmptyState.propTypes = {
   /**
    * Empty state subtext
    */
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  subtitle: PropTypes.node,
 
   /**
    * Empty state heading
    */
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  title: PropTypes.node.isRequired,
   /**
-   * Designates which version of the EmptyState component is being used.
-   * Refer to V2 documentation separately.
+   * **Deprecated:** Designates which version of the EmptyState component is being used. Refer to V2 documentation separately.
+   * @deprecated
    */
   v2: PropTypes.bool,
 };

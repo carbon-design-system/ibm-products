@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2023
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,6 @@ import React, {
   isValidElement,
   PropsWithChildren,
   useRef,
-  MutableRefObject,
   RefObject,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -47,6 +46,10 @@ type fieldsetLegendTextProps =
        * Otherwise, use CSS to hide/remove this label text.
        */
       fieldsetLegendText?: string;
+      /**
+       * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
+       */
+      fieldsetLegendId?: React.ReactNode;
     }
   | {
       /**
@@ -61,6 +64,10 @@ type fieldsetLegendTextProps =
        * Otherwise, use CSS to hide/remove this label text.
        */
       fieldsetLegendText: string;
+      /**
+       * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
+       */
+      fieldsetLegendId: React.ReactNode;
     };
 
 interface CreateTearsheetStepBaseProps extends PropsWithChildren {
@@ -159,7 +166,7 @@ export type ExperimentalSecondarySubmit = {
   onClick?: () => void;
 };
 
-export let CreateTearsheetStep = forwardRef(
+export const CreateTearsheetStep = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -170,6 +177,7 @@ export let CreateTearsheetStep = forwardRef(
       disableSubmit,
       experimentalSecondarySubmit,
       fieldsetLegendText,
+      fieldsetLegendId,
       hasFieldset = defaults.hasFieldset,
       includeStep = defaults.includeStep,
       introStep,
@@ -188,7 +196,7 @@ export let CreateTearsheetStep = forwardRef(
   ) => {
     const localRef = useRef<HTMLDivElement>(null);
     const stepRef = ref || localRef;
-    const stepRefValue = (stepRef as MutableRefObject<HTMLDivElement>).current;
+    const stepRefValue = (stepRef as RefObject<HTMLDivElement>).current;
     const stepsContext = useContext(StepsContext);
     const stepNumber = useContext(StepNumberContext);
     const [shouldIncludeStep, setShouldIncludeStep] =
@@ -232,35 +240,10 @@ export let CreateTearsheetStep = forwardRef(
       setShouldIncludeStep(includeStep);
     }, [includeStep, stepsContext, title]);
 
-    const setFocusChildrenTabIndex = (
-      childInputs: NodeListOf<Element>,
-      value: number
-    ) => {
-      if (childInputs?.length) {
-        childInputs.forEach((child) => {
-          (child as HTMLElement).tabIndex = value;
-        });
-      }
-    };
-
     // Whenever we are the current step, supply our disableSubmit and onNext values to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
-      const focusElementQuery = `button, input, select, textarea, a`;
-      if (stepNumber !== stepsContext?.currentStep) {
-        // Specify tab-index -1 for focusable elements not contained
-        // in the current step so that the useFocus hook can exclude
-        // from the focus trap
-        const childInputs = stepRefValue?.querySelectorAll(focusElementQuery);
-        setFocusChildrenTabIndex(childInputs, -1);
-      }
       if (stepNumber === stepsContext?.currentStep) {
-        // Specify tab-index 0 for current step focusable elements
-        // for the useFocus hook to know which elements to include
-        // in focus trap
-        const childInputs = stepRefValue?.querySelectorAll(focusElementQuery);
-        setFocusChildrenTabIndex(childInputs, 0);
-
         stepsContext.setIsDisabled(!!disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
         stepsContext?.setOnPrevious(onPrevious);
@@ -296,7 +279,10 @@ export let CreateTearsheetStep = forwardRef(
     };
 
     return stepsContext ? (
-      <div ref={stepRef as RefObject<HTMLDivElement>}>
+      <div
+        ref={stepRef as RefObject<HTMLDivElement>}
+        inert={stepNumber !== stepsContext?.currentStep}
+      >
         <Grid
           {
             // Pass through any other property values as HTML attributes.
@@ -313,7 +299,7 @@ export let CreateTearsheetStep = forwardRef(
             <h4 className={`${blockClass}--title`}>{title}</h4>
 
             {subtitle && (
-              <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+              <h5 className={`${blockClass}--subtitle`}>{subtitle}</h5>
             )}
 
             {renderDescription()}
@@ -324,6 +310,7 @@ export let CreateTearsheetStep = forwardRef(
               <FormGroup
                 legendText={fieldsetLegendText}
                 className={`${blockClass}--fieldset`}
+                legendId={fieldsetLegendId}
               >
                 {children}
               </FormGroup>
@@ -339,12 +326,6 @@ export let CreateTearsheetStep = forwardRef(
       )
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-CreateTearsheetStep = pkg.checkComponentEnabled(
-  CreateTearsheetStep,
-  componentName
 );
 
 CreateTearsheetStep.propTypes = {
@@ -385,14 +366,18 @@ CreateTearsheetStep.propTypes = {
   }),
 
   /**
+   * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
+   */
+  /**@ts-ignore*/
+  fieldsetLegendId: PropTypes.node,
+
+  /**
    * This is the required legend text that appears above a fieldset html element for accessibility purposes.
    * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
    * Otherwise, use CSS to hide/remove this label text.
    */
   /**@ts-ignore*/
-  fieldsetLegendText: PropTypes.string.isRequired.if(
-    ({ hasFieldset }) => !!hasFieldset
-  ),
+  fieldsetLegendText: PropTypes.string,
 
   /**
    * This optional prop will render your form content inside of a fieldset html element

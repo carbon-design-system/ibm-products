@@ -113,7 +113,7 @@ export interface CreateTearsheetNarrowProps extends PropsWithChildren {
  * Use a narrow tearsheet as an alternative to a modal when there is scrolling.
  * Use when the form fields can be broken down into sections using section headers.
  */
-export let CreateTearsheetNarrow = React.forwardRef(
+export const CreateTearsheetNarrow = React.forwardRef(
   (
     {
       children,
@@ -185,18 +185,16 @@ export let CreateTearsheetNarrow = React.forwardRef(
         >
           {formDescription}
         </p>
-        <Form className={`${blockClass}__form`} aria-labelledby={formTitleId}>
+        <Form
+          className={`${blockClass}__form`}
+          aria-labelledby={formTitleId}
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}
+        >
           {children}
         </Form>
       </TearsheetNarrow>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-CreateTearsheetNarrow = pkg.checkComponentEnabled(
-  CreateTearsheetNarrow,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

@@ -338,7 +338,7 @@ export interface NotificationsPanelProps {
  *
  * If you do not provide a locale, the deprecated props will be applied instead.
  */
-export let NotificationsPanel = React.forwardRef(
+export const NotificationsPanel = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -393,6 +393,7 @@ export let NotificationsPanel = React.forwardRef(
     const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
     const carbonPrefix = usePrefix();
     const headingId = useId();
+    const isClickOnTrigger = useRef(false);
 
     const reducedMotion = usePrefersReducedMotion();
     const exitAnimationName = reducedMotion
@@ -409,8 +410,28 @@ export let NotificationsPanel = React.forwardRef(
       setAllNotifications(data);
     }, [data]);
 
-    useClickOutside(ref || notificationPanelRef, () => {
-      onClickOutside?.();
+    useEffect(() => {
+      const button = triggerButtonRef?.current;
+      const handleClick = () => {
+        isClickOnTrigger.current = true;
+      };
+      button?.addEventListener('click', handleClick, true);
+      return () => {
+        button?.removeEventListener('click', handleClick, true);
+      };
+    }, [triggerButtonRef]);
+
+    useClickOutside(ref || notificationPanelRef, (target) => {
+      const element = target as HTMLElement;
+      if (!isClickOnTrigger.current) {
+        if (!isActionableElement(element)) {
+          setTimeout(() => {
+            triggerButtonRef?.current?.focus();
+          }, 100);
+        }
+        onClickOutside?.();
+      }
+      isClickOnTrigger.current = false;
     });
 
     const handleKeydown = (event) => {
@@ -683,6 +704,45 @@ export let NotificationsPanel = React.forwardRef(
       );
     };
 
+    const isActionableElement = (el: HTMLElement | null): boolean => {
+      if (!el) {
+        return false;
+      }
+      const interactiveRoles = new Set([
+        'button',
+        'link',
+        'textbox',
+        'checkbox',
+        'radio',
+        'slider',
+        'spinbutton',
+        'combobox',
+        'switch',
+        'menuitem',
+      ]);
+
+      const actionableAncestor = el.closest<HTMLElement>(
+        'button, a, input, select, textarea, [tabindex], [contenteditable="true"], [role]'
+      );
+
+      if (!actionableAncestor) {
+        return false;
+      }
+
+      return (
+        actionableAncestor instanceof HTMLButtonElement ||
+        actionableAncestor instanceof HTMLAnchorElement ||
+        actionableAncestor instanceof HTMLInputElement ||
+        actionableAncestor instanceof HTMLSelectElement ||
+        actionableAncestor instanceof HTMLTextAreaElement ||
+        actionableAncestor.tabIndex >= 0 ||
+        actionableAncestor.isContentEditable ||
+        interactiveRoles.has(
+          actionableAncestor.getAttribute('role')?.toLowerCase() ?? ''
+        )
+      );
+    };
+
     const dismissSingleNotification = (event, notification) => {
       event.preventDefault();
       event.stopPropagation();
@@ -703,7 +763,6 @@ export let NotificationsPanel = React.forwardRef(
         role="dialog"
         aria-labelledby={headingId}
         onKeyDown={handleKeydown}
-        tabIndex={0}
         {
           // Pass through any other property values as HTML attributes.
           ...rest
@@ -815,12 +874,6 @@ export let NotificationsPanel = React.forwardRef(
       </Section>
     ) : null;
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-NotificationsPanel = pkg.checkComponentEnabled(
-  NotificationsPanel,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

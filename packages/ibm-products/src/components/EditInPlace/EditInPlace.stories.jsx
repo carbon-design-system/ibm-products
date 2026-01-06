@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { EditInPlace } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 // import mdx from './EditInPlace.mdx';
@@ -33,7 +33,7 @@ const tooltipAlignmentOptions = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/Edit and update/EditInPlace',
+  title: 'Components/EditInPlace',
   component: EditInPlace,
   tags: ['autodocs'],
   argTypes: {

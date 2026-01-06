@@ -4,12 +4,18 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
+import { getAutoTrack } from '../../../scripts/get-auto-track-script';
+
+const require = createRequire(import.meta.url);
 
 const stories = [
   '../src/**/!(*.internal).stories.*',
-  '../../core/src/**/!(*.internal).stories.*',
+  './ComponentPlayground/**/*.stories.*',
+  './Welcome/**/*.stories.*',
+  './PrebuiltPatterns/**/*.mdx',
   '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
 ];
 
@@ -17,11 +23,9 @@ export default {
   staticDirs: ['../public'],
 
   addons: [
-    getAbsolutePath('@storybook/addon-actions'),
-    getAbsolutePath('@storybook/addon-controls'),
+    // getAbsolutePath('@storybook/addon-controls'),
     getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-storysource'),
-    getAbsolutePath('@storybook/addon-viewport'),
+    // getAbsolutePath('@storybook/addon-viewport'),
     {
       name: '@storybook/addon-docs',
       options: {
@@ -32,20 +36,13 @@ export default {
         },
       },
     },
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        actions: true,
-        backgrounds: false,
-        controls: true,
-        docs: true,
-        toolbars: true,
-        viewport: true,
-      },
-    },
-    // https://www.npmjs.com/package/storybook-addon-accessibility-checker
-    getAbsolutePath('@storybook/addon-a11y'),
   ],
+
+  features: {
+    previewCsfV3: true,
+    buildStoriesJson: true,
+    interactions: false, // disable Interactions tab
+  },
 
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
@@ -62,15 +59,7 @@ export default {
       ${head}
       ${
         process.env.NODE_ENV !== 'development'
-          ? `
-          <script src="https://cdn.amplitude.com/script/f6f1d9025934f04f5a2a8bebb74abf2f.js"></script>
-          <script>
-            window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-            window.amplitude.init('f6f1d9025934f04f5a2a8bebb74abf2f', {
-              "fetchRemoteConfig":true,
-              "autocapture":true
-            });
-          </script>`
+          ? getAutoTrack('ibm-products-react-storybook')
           : ''
       }
     `;
@@ -81,6 +70,18 @@ export default {
     const { mergeConfig } = await import('vite');
 
     return mergeConfig(config, {
+      build: {
+        sourcemap: true,
+        rollupOptions: {
+          onLog(level, log, handler) {
+            // https://github.com/vitejs/vite/issues/15012#issuecomment-1815854072
+            if (log.code === 'MODULE_LEVEL_DIRECTIVE') {
+              return;
+            }
+            handler(level, log);
+          },
+        },
+      },
       esbuild: {
         include: /\.[jt]sx?$/,
         exclude: [],
@@ -107,11 +108,7 @@ export default {
           scss: {
             api: 'modern',
             quietDeps: true,
-            silenceDeprecations: [
-              'mixed-decls',
-              'global-builtin',
-              'legacy-js-api',
-            ],
+            silenceDeprecations: ['global-builtin', 'legacy-js-api'],
           },
         },
       },
@@ -120,6 +117,7 @@ export default {
 
   docs: {
     autodocs: 'tag',
+    defaultName: 'Overview',
   },
 };
 

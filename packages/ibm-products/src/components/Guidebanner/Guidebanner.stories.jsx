@@ -5,30 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { action } from '@storybook/addon-actions';
-
+import React, { useState } from 'react';
+import { action } from 'storybook/actions';
 import {
-  Guidebanner,
-  GuidebannerElement,
-  GuidebannerElementButton,
-  GuidebannerElementLink,
-} from '.';
+  previewCandidate__Guidebanner as Guidebanner,
+  previewCandidate__GuidebannerElement as GuidebannerElement,
+  previewCandidate__GuidebannerElementButton as GuidebannerElementButton,
+  previewCandidate__GuidebannerElementLink as GuidebannerElementLink,
+} from '..';
+import mdx from './Guidebanner.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { DocsPage } from './Guidebanner.docs-page';
 
 const storyClass = 'guidebanner-stories';
 
 export default {
-  title: 'Experimental/Onboarding/Guidebanner',
+  title: 'Preview Candidate/Onboarding/Guidebanner',
   component: Guidebanner,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     styles,
     layout: 'fullscreen',
     docs: {
-      page: DocsPage,
+      page: mdx,
     },
   },
   argTypes: {
@@ -89,7 +88,6 @@ const Template = ({ children, ...rest }) => {
   // but as a story we have to wrap the JSX in a React.Fragment.
   // To feed them here, we point to the list of GuidebannerElements directly.
   const childArray = children.props.children;
-
   return (
     <div className={`${storyClass}__viewport`}>
       <Guidebanner {...rest}>{childArray}</Guidebanner>
@@ -101,6 +99,7 @@ export const collapsible = Template.bind({});
 collapsible.args = {
   ...defaultProps,
   collapsible: true,
+  open: true,
   children: (
     <React.Fragment>
       <GuidebannerElement

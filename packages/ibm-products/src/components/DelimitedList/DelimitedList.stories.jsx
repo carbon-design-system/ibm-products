@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { DelimitedList } from '.';
+import { previewCandidate__DelimitedList as DelimitedList } from '..';
 
 import styles from './_storybook-styles.scss?inline';
 import { DocsPage } from './DelimitedList.docs-page';
@@ -15,7 +15,7 @@ import { DocsPage } from './DelimitedList.docs-page';
 const storyClass = 'delimited-list-stories';
 
 export default {
-  title: 'Utils/Components/DelimitedList',
+  title: 'Utilities/DelimitedList',
   component: DelimitedList,
   tags: ['autodocs'],
   parameters: {

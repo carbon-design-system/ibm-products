@@ -6,7 +6,7 @@
  */
 
 // Carbon and package components we use.
-import { Button, ButtonProps } from '@carbon/react';
+import { Button } from '@carbon/react';
 import {
   TearsheetShell,
   tearsheetShellWideProps as blocked,
@@ -20,7 +20,6 @@ import React, {
 } from 'react';
 import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 
-import { ActionSet } from '../ActionSet';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -151,7 +150,7 @@ const defaults = {
  * main content area, and a set of action buttons.
  */
 
-export let TearsheetNarrow = React.forwardRef(
+export const TearsheetNarrow = React.forwardRef(
   (
     {
       verticalPosition = defaults.verticalPosition,
@@ -172,7 +171,6 @@ export let TearsheetNarrow = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-TearsheetNarrow = pkg.checkComponentEnabled(TearsheetNarrow, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -212,11 +210,8 @@ TearsheetNarrow.propTypes = {
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: allPropTypes([
-    /**@ts-ignore */
-    ActionSet.validateActions(() => 'lg'),
     PropTypes.arrayOf(
       PropTypes.shape({
-        /**@ts-ignore*/
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',

@@ -8,7 +8,7 @@
 
 import React from 'react';
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 import { UiShell } from './preview-components/UiShell';
 import { Breadcrumbs } from './preview-components/Breadcrumbs';
 import { Link } from '@carbon/react';
@@ -17,7 +17,7 @@ import mdx from './FullPageError.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 export default {
-  title: 'IBM Products/Components/Full-page error/FullPageError',
+  title: 'Components/FullPageError',
   component: FullPageError,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

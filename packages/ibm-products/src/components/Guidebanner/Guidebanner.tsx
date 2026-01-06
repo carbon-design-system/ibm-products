@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { useControllableState } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--guidebanner`;
@@ -74,6 +75,14 @@ export interface GuidebannerProps {
    * content on the page under special circumstances.
    */
   withLeftGutter?: boolean;
+  /**
+   * A handler for managing the controlled state of open prop. If not passed the open prop will not be honored and an uncontrolled state will be used.
+   */
+  onChange?: (value: boolean) => void;
+  /**
+   * For controlled usage of the tile open state. This prop only works when an onChange prop is also passed, otherwise an uncontrolled state is used.
+   */
+  open?: boolean;
 }
 
 const defaults = {
@@ -91,9 +100,9 @@ const defaults = {
  * The guide banner sits at the top of a page, or page-level tab,
  * to introduce foundational concepts related to the page's content.
  */
-export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
-  (
-    {
+export const Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
+  (props, ref) => {
+    const {
       children,
       className,
       collapsible = defaults.collapsible,
@@ -106,30 +115,31 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
       nextIconDescription = defaults.nextIconDescription,
       previousIconDescription = defaults.previousIconDescription,
       title,
+      onChange,
+      open: userOpen,
       ...rest
-    },
-    ref
-  ) => {
+    } = props;
     const scrollRef = useRef<any>(null);
     const toggleRef = useRef<HTMLDivElement>(null);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [showNavigation, setShowNavigation] = useState(false);
-    const [isCollapsed, setIsCollapsed] = useState(collapsible ? true : false);
+    const [open, setOpen] = useControllableState(userOpen ?? false, onChange);
 
     const handleClickToggle = () => {
-      setIsCollapsed((prevState) => !prevState);
+      setOpen(!open);
     };
+
     const carouselContentId = `${uuidv4()}--carousel-content-id`;
 
     return (
       <div
         {...rest}
-        aria-owns={!isCollapsed ? carouselContentId : undefined}
+        aria-owns={open ? carouselContentId : undefined}
         className={cx(
           blockClass,
           className,
           collapsible && `${blockClass}__collapsible`,
-          isCollapsed && `${blockClass}__collapsible-collapsed`,
+          !open && `${blockClass}__collapsible-collapsed`,
           withLeftGutter && `${blockClass}__with-left-gutter`
         )}
         ref={ref}
@@ -166,10 +176,10 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
               className={`${blockClass}__toggle-button`}
               onClick={handleClickToggle}
               ref={toggleRef}
-              aria-controls={!isCollapsed ? carouselContentId : undefined}
-              aria-expanded={!isCollapsed}
+              aria-controls={!open ? carouselContentId : undefined}
+              aria-expanded={!open}
             >
-              {isCollapsed ? expandButtonLabel : collapseButtonLabel}
+              {open ? expandButtonLabel : collapseButtonLabel}
             </Button>
           )}
 
@@ -238,7 +248,6 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-Guidebanner = pkg.checkComponentEnabled(Guidebanner, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -252,29 +261,7 @@ Guidebanner.propTypes = {
    * Provide the contents of the Guidebanner.
    * One or more GuidebannerElement components are required.
    */
-  children: (props, propName) => {
-    let error;
-    const prop = props[propName];
-    if (!prop) {
-      error = new Error(
-        '`Guidebanner` requires one or more children of type `GuidebannerElement`.'
-      );
-    }
-    React.Children.forEach(prop, (child) => {
-      if (child.type.displayName !== 'GuidebannerElement') {
-        // If child element is not `GuidebannerElement`, then show:
-        // Carbon Products component's `displayName` (child.type.displayName) or
-        // React component's `name` (child.type.name) or
-        // HTML element's tag name (child.type).
-        error = new Error(
-          `\`Guidebanner\` only accepts children of type \`GuidebannerElement\`, found \`${
-            child.type?.displayName || child.type?.name || child.type
-          }\` instead.`
-        );
-      }
-    });
-    return error;
-  },
+  children: PropTypes.node,
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -303,10 +290,18 @@ Guidebanner.propTypes = {
    */
   nextIconDescription: PropTypes.string,
   /**
+   * A handler for managing the controlled state of open prop. If not passed the open prop will not be honored and an uncontrolled state will be used.
+   */
+  onChange: PropTypes.func,
+  /**
    * If defined, a Close button will render in the top-right corner and a
    * callback function will be triggered when button is clicked.
    */
   onClose: PropTypes.func,
+  /**
+   * Specify whether the Guidebanner is currently open.
+   */
+  open: PropTypes.bool,
   /**
    * Tooltip text and aria label for the Back button icon.
    */

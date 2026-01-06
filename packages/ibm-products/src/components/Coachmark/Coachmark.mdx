@@ -1,13 +1,28 @@
-import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs';
+import {
+  Story,
+  Controls,
+  Source,
+  Canvas,
+  Meta,
+} from '@storybook/addon-docs/blocks';
 import { CodesandboxLink } from '../../global/js/utils/story-helper';
-import { Coachmark, CoachmarkFixed } from '..';
+import {
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkFixed as CoachmarkFixed,
+} from '..';
 import * as CoachmarkStories from './Coachmark.stories';
 
 <Meta title="Coachmark" component={Coachmark} />
 
 # Coachmark
 
-[Coachmark usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage/)
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage/)
+
+## Deprecation notice
+
+This component is deprecated and will be removed in the next major version.
+Please migrate to
+[composable Coachmark](https://carbon-for-ibm-products.netlify.app/?path=/docs/preview-onboarding-coachmark--overview).
 
 ## Table of Contents
 
@@ -75,7 +90,7 @@ to display properly within your usage.
 ## Floating example usage
 
 <Canvas className="coachmarkExample" withSource="none">
-  <div className="CoachmarkBaseExampleUsage">
+  <div className="CoachmarkBaseExampleUsage coachmark_annotation">
     <Story of={CoachmarkStories.floating} />
   </div>
 </Canvas>
@@ -106,7 +121,9 @@ to display properly within your usage.
   </CoachmarkOverlayElements>
 </Coachmark>
 ```
+
 ## Stackblitz example with Animated Media
+
 [![Example with Animated media](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CoachmarkWithAnimatedMedia)
 
 ## Component API

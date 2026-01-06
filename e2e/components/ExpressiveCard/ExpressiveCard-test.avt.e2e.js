@@ -15,7 +15,7 @@ test.describe('ExpressiveCard @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--default',
+      id: 'components-cards-expressivecard--default',
       globals: {
         carbonTheme: 'white',
       },
@@ -32,7 +32,7 @@ test.describe('ExpressiveCard @avt', () => {
   test('@avt-label-only-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--label-only',
+      id: 'components-cards-expressivecard--label-only',
       globals: {
         carbonTheme: 'white',
       },
@@ -44,7 +44,7 @@ test.describe('ExpressiveCard @avt', () => {
   test('@avt-with-caption-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--with-caption',
+      id: 'components-cards-expressivecard--with-caption',
       globals: {
         carbonTheme: 'white',
       },
@@ -56,7 +56,7 @@ test.describe('ExpressiveCard @avt', () => {
   test('@avt-with-media-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--with-media',
+      id: 'components-cards-expressivecard--with-media',
       globals: {
         carbonTheme: 'white',
       },
@@ -68,7 +68,7 @@ test.describe('ExpressiveCard @avt', () => {
   test('@avt-with-action-icon-link-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--with-action-icon-link',
+      id: 'components-cards-expressivecard--with-action-icon-link',
       globals: {
         carbonTheme: 'white',
       },
@@ -85,7 +85,7 @@ test.describe('ExpressiveCard @avt', () => {
   test('@avt-with-pictogram-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--with-pictogram',
+      id: 'components-cards-expressivecard--with-pictogram',
       globals: {
         carbonTheme: 'white',
       },
@@ -97,7 +97,7 @@ test.describe('ExpressiveCard @avt', () => {
   test('@avt-with-secondary-action-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--with-secondary-action',
+      id: 'components-cards-expressivecard--with-secondary-action',
       globals: {
         carbonTheme: 'white',
       },
@@ -117,7 +117,7 @@ test.describe('ExpressiveCard @avt', () => {
   test('@avt-clickable-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--clickable',
+      id: 'components-cards-expressivecard--clickable',
       globals: {
         carbonTheme: 'white',
       },
@@ -133,7 +133,7 @@ test.describe('ExpressiveCard @avt', () => {
   test('@avt-with-button-href-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--with-button-href',
+      id: 'components-cards-expressivecard--with-button-href',
       globals: {
         carbonTheme: 'white',
       },
@@ -145,7 +145,7 @@ test.describe('ExpressiveCard @avt', () => {
   test('@avt-with-button-icon-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpressiveCard',
-      id: 'ibm-products-components-cards-expressivecard--with-button-icon',
+      id: 'components-cards-expressivecard--with-button-icon',
       globals: {
         carbonTheme: 'white',
       },

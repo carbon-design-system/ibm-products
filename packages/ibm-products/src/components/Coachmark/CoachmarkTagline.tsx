@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,9 +22,9 @@ const blockClass = `${pkg.prefix}--coachmark-tagline`;
 const componentName = 'CoachmarkTagline';
 
 const defaults = {
-  closeIconDescription: 'Close',
   onClose: () => {},
   theme: 'light',
+  closeIconDescription: 'Close',
 };
 
 interface CoachmarkTaglineProps {
@@ -49,8 +49,9 @@ interface CoachmarkTaglineProps {
 /**
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
+ * @deprecated This component is deprecated.
  */
-export let CoachmarkTagline = React.forwardRef<
+export const CoachmarkTagline = React.forwardRef<
   HTMLDivElement,
   CoachmarkTaglineProps
 >(
@@ -65,7 +66,8 @@ export let CoachmarkTagline = React.forwardRef<
     ref
   ) => {
     const coachmark = useCoachmark();
-
+    const contextCloseIconDescription = useCoachmark()?.closeIconDescription;
+    const closeIconDesc = closeIconDescription ?? contextCloseIconDescription;
     return (
       <div
         {
@@ -75,7 +77,7 @@ export let CoachmarkTagline = React.forwardRef<
         className={cx(
           blockClass,
           `${blockClass}__${theme}`,
-          coachmark.isOpen && `${blockClass}--is-open`
+          coachmark?.isOpen && `${blockClass}--is-open`
         )}
         ref={ref}
         {...getDevtoolsProps(componentName)}
@@ -84,7 +86,7 @@ export let CoachmarkTagline = React.forwardRef<
           // {...rest}
           className={`${blockClass}__cta`}
           type="button"
-          {...coachmark.buttonProps}
+          {...coachmark?.buttonProps}
         >
           <div className={`${blockClass}__idea`}>
             <Idea size={16} />
@@ -96,7 +98,7 @@ export let CoachmarkTagline = React.forwardRef<
             kind="ghost"
             size="sm"
             renderIcon={Close}
-            iconDescription={closeIconDescription}
+            iconDescription={closeIconDesc}
             hasIconOnly
             className={`${blockClass}--close-btn`}
             onClick={onClose}
@@ -107,8 +109,13 @@ export let CoachmarkTagline = React.forwardRef<
   }
 );
 
+/**@ts-ignore*/
+CoachmarkTagline.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkTagline = pkg.checkComponentEnabled(CoachmarkTagline, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

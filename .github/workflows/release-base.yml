@@ -9,28 +9,33 @@ concurrency:
 on:
   workflow_call:
     inputs:
-      type:
-        required: true
+      semver-type:
         type: string
-        default: first minor rc
-      dry-run:
+        default: minor
         required: true
-        description: 'Run dry run?'
+      type:
+        type: string
+        default: first rc
+        required: true
+      dry-run:
         type: boolean
         default: true
+        required: true
+        description: 'Run dry run?'
+
+# Required for OIDC publishing https://docs.npmjs.com/trusted-publishers
+permissions:
+  id-token: write
+  contents: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    # Recommended by npm for publishing with provenance https://docs.npmjs.com/generating-provenance-statements
-    permissions:
-      id-token: write
-      contents: write
     timeout-minutes: 60
     env:
       GH_TOKEN: ${{ secrets.MERGE_ACTION }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           fetch-depth: '0'
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
@@ -40,41 +45,68 @@ jobs:
           git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
           git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.x'
-          registry-url: https://registry.npmjs.org
+          node-version-file: '.nvmrc'
           cache: 'yarn'
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
 
       - name:
-          Run @ibm/telemetry-js-config-generator to regenerate telemetry config
-          file
+          Run @ibm/telemetry-js-config-generator to regenerate ibm-products
+          telemetry config file
         if: github.event.inputs.dry-run == 'true'
-        working-directory: ./packages/ibm-products
         run: |
-          yarn telemetry-config
+          yarn release-telemetry
 
       # This can be removed once @ibm/telemetry-js-config-generator has params to set the js scope
-      - name: Add js scope to telemetry config
+      - name: Add js scope to ibm-products telemetry config
         if: github.event.inputs.dry-run == 'true'
-        working-directory: ./packages/ibm-products
         run: |
           echo "  js:
               functions: {}
-              tokens: null" >> telemetry.yml
+              tokens: null" >> packages/ibm-products/telemetry.yml
+          echo "  js:
+              functions: {}
+              tokens: null" >> packages/ibm-products-web-components/telemetry.yml
           if [ -z "$(git status --porcelain)" ]; then
             echo "Mirror is clean, exiting..."
           else
-            git add telemetry.yml
-            git commit -m "chore(telemetry): update telemetry config"
+            git add '**/telemetry.yml'
+            git commit -m "chore(telemetry): update telemetry configs"
             git push origin
           fi
 
+      # For generating playwright json report for avt tests
+      # - name: Install browsers
+      #   run: yarn playwright install --with-deps
+
       - name: Continuous integration check (includes build)
         run: yarn ci-check
+
+      # - name: Run storybook
+      #   id: storybook
+      #   run: |
+      #     npx serve -l 3000 packages/ibm-products/storybook-static &
+      #     pid=$!
+      #     echo "pid=$pid" >> $GITHUB_OUTPUT
+      # - uses: ./actions/wait-for-it
+      #   with:
+      #     URL: 'http://localhost:3000'
+      #   timeout-minutes: 3
+      # - name: Run AVT
+      #   if: github.repository == 'carbon-design-system/ibm-products'
+      #   run: |
+      #     yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
+      # - name: Stop storybook
+      #   run: kill ${{ steps.storybook.outputs.pid }}
+      # - name: Upload test results
+      #   if: always()
+      #   uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      #   with:
+      #     name: playwright-avt-report
+      #     path: .playwright
 
       - name: Set NPM token
         run: |
@@ -89,34 +121,43 @@ jobs:
           fi
 
       - name: Publish full minor release (ie. v1.x.0)
-        if: github.event.inputs.type == 'full minor release'
+        if: |
+          github.event.inputs.type == 'full release' &&
+          github.event.inputs.semver-type == 'minor'
         run: |
           yarn lerna publish minor --conventional-graduate $(echo "${{ env.PUBLISH }}")
 
       - name: Publish first minor RC (ie. v1.x.0-rc.0)
-        if: github.event.inputs.type == 'first minor rc'
+        if: |
+          github.event.inputs.type == 'first rc' &&
+          github.event.inputs.semver-type == 'minor'
         run: |
           yarn lerna publish preminor --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
       - name: Publish full patch release (ie. v1.0.x)
-        if: github.event.inputs.type == 'full patch release'
+        if: |
+          github.event.inputs.type == 'full release' &&
+          github.event.inputs.semver-type == 'patch'
         run: |
           yarn lerna publish patch --conventional-graduate $(echo "${{ env.PUBLISH }}")
 
       - name: Publish first patch RC (ie. v1.0.x-rc.0)
-        if: github.event.inputs.type == 'first patch rc'
+        if: |
+          github.event.inputs.type == 'first rc' &&
+          github.event.inputs.semver-type == 'patch'
         run: |
           yarn lerna publish prepatch --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
       - name: Publish subsequent RC (ie. v1.0.0-rc.x)
-        if: github.event.inputs.type == 'subsequent rc'
+        if: |
+          github.event.inputs.type == 'subsequent rc'
         run: |
           yarn lerna publish --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch
       - name: Dispatch staging storybook deployment workflow
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           event-type: deploy-staging-storybook
           client-payload: '{"branch": "${{ github.ref_name }}"}'
@@ -124,10 +165,8 @@ jobs:
       # After successfully publishing a full release, trigger the production storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch
       - name: Dispatch production storybook deployment workflow
-        if:
-          ${{ (github.event.inputs.type  == 'full minor release') ||
-          (github.event.inputs.type  == 'full patch release') }}
-        uses: peter-evans/repository-dispatch@v3
+        if: github.event.inputs.type  == 'full release'
+        uses: peter-evans/repository-dispatch@v4
         with:
           event-type: deploy-latest-storybook
           client-payload: '{"branch": "${{ github.ref_name }}"}'

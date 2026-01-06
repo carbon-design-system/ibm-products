@@ -105,7 +105,7 @@ interface CreateSidePanelProps {
 /**
  * Use with medium complexity creations if the user needs page context. On-page content can be seen and interacted with.
  */
-export let CreateSidePanel = React.forwardRef(
+export const CreateSidePanel = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -181,7 +181,13 @@ export let CreateSidePanel = React.forwardRef(
           >
             {formDescription}
           </p>
-          <Form className={`${blockClass}__form`} aria-labelledby={formTitleId}>
+          <Form
+            className={`${blockClass}__form`}
+            aria-labelledby={formTitleId}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+              e.preventDefault()
+            }
+          >
             {children}
           </Form>
         </SidePanel>
@@ -189,8 +195,6 @@ export let CreateSidePanel = React.forwardRef(
     );
   }
 );
-
-CreateSidePanel = pkg.checkComponentEnabled(CreateSidePanel, componentName);
 
 CreateSidePanel.displayName = componentName;
 

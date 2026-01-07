@@ -70,7 +70,7 @@ export {
   StackProvider,
 } from './Tearsheet/next';
 export type {
-  TearsheetProps,
+  TearsheetProps as preview__TearsheetProps,
   TearsheetComponentType,
   FooterProps,
   MainContentProps,

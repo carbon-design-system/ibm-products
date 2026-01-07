@@ -1,2 +1,0 @@
-import{r as c}from"./iframe-es3YFZs8.js";import{u as d}from"./useIsomorphicEffect-D6rh4akx.js";const m=()=>{const[o,e]=c.useState(!1);return d(()=>{const r=window.matchMedia("(prefers-reduced-motion: no-preference)"),{matches:s}=window.matchMedia("(prefers-reduced-motion: no-preference)");e(!s);const t=n=>{e(!n.matches)};return r.addEventListener("change",t),()=>{r.removeEventListener("change",t)}},[]),o};export{m as u};
-//# sourceMappingURL=usePrefersReducedMotion-DD4USbO9.js.map

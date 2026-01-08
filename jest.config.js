@@ -7,4 +7,7 @@
 
 'use strict';
 
-module.exports = require('jest-config-ibm-cloud-cognitive');
+module.exports = async () => {
+  const config = await import('jest-config-ibm-cloud-cognitive');
+  return config.default;
+};

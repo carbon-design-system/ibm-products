@@ -86,3 +86,5 @@ module.exports = {
       .digest('hex');
   },
 };
+
+// Made with Bob

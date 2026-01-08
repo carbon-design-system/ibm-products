@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
 let aChecker = null;
 
 async function toHaveNoACViolations(node, label) {
   if (aChecker === null) {
-    aChecker = require('accessibility-checker');
+    aChecker = (await import('accessibility-checker')).default;
 
     const denylist = new Set([
       'html_lang_exists',
@@ -48,4 +46,4 @@ async function toHaveNoACViolations(node, label) {
   }
 }
 
-module.exports = toHaveNoACViolations;
+export default toHaveNoACViolations;

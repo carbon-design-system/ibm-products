@@ -5,11 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { createRequire } = require('module');
-const require2 = createRequire(import.meta.url || __filename);
-
 // Since babel-preset-ibm-cloud-cognitive is now ESM, we need to inline its configuration
-// to maintain synchronous babel.config.js compatibility with tools like Storybook
+// to maintain synchronous babel.config.cjs compatibility with tools like Storybook and Rollup
 module.exports = {
   exclude: ['node_modules/**'],
   presets: [

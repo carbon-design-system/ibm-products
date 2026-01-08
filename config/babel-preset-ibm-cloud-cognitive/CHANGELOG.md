@@ -1,4 +1,4 @@
-## `@babel-preset-ibm-cloud-cognitive@0.39.0-rc.0`
+## `@babel-preset-ibm-cloud-cognitive@0.39.0`
 ### Bug fixes :bug:
 - fix: remove not needed tags and restore package.json
 - fix: restore all changes after deleting unnecessary tags

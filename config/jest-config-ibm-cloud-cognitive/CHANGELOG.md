@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.40.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.40.0`
 ### Bug fixes :bug:
 - fix: rc clean ups
 - fix: remove not needed tags and restore package.json

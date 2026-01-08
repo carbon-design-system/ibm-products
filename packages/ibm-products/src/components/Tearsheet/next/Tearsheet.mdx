@@ -2,6 +2,66 @@ import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
 import { Tearsheet } from '.';
 import * as stories from './Tearsheet.stories';
 import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
+import styles from './_storybook-styles.scss?inline';
+
+export const customImports = [
+  `import {
+  AILabel,
+  AILabelContent
+} from '@carbon/react';
+ import {
+  Information
+} from '@carbon/react/icons';import { preview__TruncatedText as TruncatedText } from '@carbon/ibm-products';`,
+];
+
+export const customFunctionArr = [
+  [
+    `const variant = ['wide', 'narrow', 'wide'],decorator=1,influencerWidth='',summaryContentWidth='',verticalGap='';
+    const sampleDecorator = (decorator) => {
+  switch (decorator) {
+    case 1:
+      return (
+        <AILabel className="decorator-container" size="xs">
+          <AILabelContent>
+            <div>
+              <p className="secondary">AI Explained</p>
+              <h1>84%</h1>
+              <p className="secondary bold">Confidence score</p>
+              <p className="secondary">
+                This is not really Lorem Ipsum but the spell checker did not
+                like the previous text with it&apos;s non-words which is why
+                this unwieldy sentence, should one choose to call it that, here.
+              </p>
+              <hr />
+              <p className="secondary">Model type</p>
+              <p className="bold">Foundation model</p>
+            </div>
+          </AILabelContent>
+        </AILabel>
+      );
+    case 2:
+      return (
+        <Toggletip>
+          <ToggletipButton label="Additional information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Custom content here</p>
+          </ToggletipContent>
+        </Toggletip>
+      );
+    default:
+      return;
+  }
+};const description = <TruncatedText
+    id='header-description__truncatedText'
+    expandLabel={'Read more'}
+    collapseLabel={'Read less'}
+    value="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page"
+    type="expand"
+  />;`,
+  ],
+];
 
 # Tearsheet
 
@@ -164,13 +224,52 @@ pass `PageHeader.ScrollButton` to the `scroller` prop.
 
 ## Default
 
-<Canvas of={stories.Default} />
+<Canvas
+  of={stories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Default,
+          styles: `
+            ${stories.default.parameters.styles ?? ''}
+            ${styles}
+          `,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImports,
+          status: {
+            preview: ['Tearsheet'],
+          },
+        }),
+    },
+  ]}
+/>
 
 ## With Influencer
 
 <Canvas
   of={stories.WithInfluencer}
-
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.WithInfluencer,
+          styles: `
+            ${stories.StackingTearsheet.parameters.styles ?? ''}
+            ${styles}
+          `,
+          customFunctionDefs: customFunctionArr,
+          customImports: [
+            `${customImports[0]};import {Bee} from '@carbon/react/icons';`,
+          ],
+          status: {
+            preview: ['Tearsheet'],
+          },
+        }),
+    },
+  ]}
 />
 
 ## With tabs
@@ -179,7 +278,27 @@ To render tabs, wrap the entire Tearsheet in `<Tabs></Tabs>`. You can render
 `<Tablist>` in header `<Tearsheet.NavigationBar>` and `<TabPanels>` in
 `<Tearsheet.MainContent>`
 
-<Canvas of={stories.WithTabs} />
+<Canvas
+  of={stories.WithTabs}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.WithTabs,
+          styles: `
+            ${stories.StackingTearsheet.parameters.styles ?? ''}
+            ${styles}
+          `,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImports,
+          status: {
+            preview: ['Tearsheet'],
+          },
+        }),
+    },
+  ]}
+/>
 
 ## With steps
 
@@ -199,7 +318,27 @@ center while revealing more of the UI behind it.
 A narrow tearsheet comprises 3 zones: Header, MainContent and Footer. You can
 optionally choose to open influencer and SummaryContent in side panels
 
-<Canvas of={stories.narrowTearsheet} />
+<Canvas
+  of={stories.narrowTearsheet}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.narrowTearsheet,
+          styles: `
+            ${stories.StackingTearsheet.parameters.styles ?? ''}
+            ${styles}
+          `,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImports,
+          status: {
+            preview: ['Tearsheet'],
+          },
+        }),
+    },
+  ]}
+/>
 
 ## Stacking
 
@@ -215,7 +354,27 @@ Tearsheets. You can optionally specify a stackStepSize—sm (0.5rem), md
  <StackProvider>
 ```
 
-<Canvas of={stories.StackingTearsheet} />
+<Canvas
+  of={stories.StackingTearsheet}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.StackingTearsheet,
+          styles: `
+            ${stories.StackingTearsheet.parameters.styles ?? ''}
+            ${styles}
+          `,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImports,
+          status: {
+            preview: ['Tearsheet'],
+          },
+        }),
+    },
+  ]}
+/>
 
 ## Component API
 

@@ -5,4 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = require('babel-preset-ibm-cloud-cognitive')();
+const { createRequire } = require('module');
+const require2 = createRequire(import.meta.url || __filename);
+
+// Since babel-preset-ibm-cloud-cognitive is now ESM, we need to inline its configuration
+// to maintain synchronous babel.config.js compatibility with tools like Storybook
+module.exports = {
+  exclude: ['node_modules/**'],
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        modules: false,
+        targets: {
+          browsers: ['extends browserslist-config-carbon'],
+        },
+      },
+    ],
+    '@babel/preset-react',
+    '@babel/preset-typescript',
+  ],
+  plugins: [
+    'dev-expression',
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-export-namespace-from',
+    '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-transform-react-constant-elements',
+  ],
+};

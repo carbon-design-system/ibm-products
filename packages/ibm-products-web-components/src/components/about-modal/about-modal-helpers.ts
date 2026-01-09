@@ -9,9 +9,9 @@
 
 import { html, TemplateResult } from 'lit';
 import { prefix } from '../../globals/settings';
-import ansibleLogo from './_story-assets/ansible-logo.svg';
-import grafanaLogo from './_story-assets/grafana-logo.svg';
-import jsLogo from './_story-assets/js-logo.svg';
+import ansibleLogo from './_story-assets/ansible-logo.svg?raw';
+import grafanaLogo from './_story-assets/grafana-logo.svg?raw';
+import jsLogo from './_story-assets/js-logo.svg?raw';
 
 export const blockClass = `${prefix}--about-modal`;
 export const storyPrefix = 'about-modal-stories__';

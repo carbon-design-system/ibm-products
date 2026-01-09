@@ -11,6 +11,8 @@ import { action } from 'storybook/actions';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import { Checklist } from '.';
+import { TruncatedText } from '../TruncatedText';
+
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './Checklist.docs-page';
 
@@ -114,9 +116,27 @@ checklist.args = {
     action(`toggle ${isOpen ? 'open' : 'closed'}`)();
   },
   chartValue: 0.15,
-  chartLabel: '15% complete',
+  chartLabel: (
+    <TruncatedText
+      autoAlign
+      align="bottom"
+      id="example-id-1"
+      lines={2}
+      type="tooltip"
+      value="15% complete"
+    />
+  ),
   taskLists: taskLists,
-  title: 'Checklist header',
+  title: (
+    <TruncatedText
+      autoAlign
+      align="bottom"
+      id="example-id-2"
+      lines={2}
+      type="tooltip"
+      value="A long title running over the lines to show truncation and tooltips"
+    />
+  ),
   viewAllLabel: `View all (10)`,
 };
 

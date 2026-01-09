@@ -17,7 +17,12 @@ export const customFunctionArr= [
     .join('\n')
 ];
 
-export const customImportArr = [`import '@carbon/web-components/es/components/link/index.js';`];
+export const customImportArr = [`import '@carbon/web-components/es/components/link/index.js';
+import ExampleLogo from './story-assets/example-logo.svg';
+import ansibleLogo from './story-assets/ansible-logo.svg';
+import jsLogo from './story-assets/js-logo.svg';
+import grafanaLogo from './story-assets/grafana-logo.svg';
+`];
 
 <Meta of={AboutModalStories} />
 
@@ -64,7 +69,7 @@ import '@carbon/ibm-products-web-components/es/components/about-modal/index.js';
           story: AboutModalStories.Default,
           customFunctionDefs: customFunctionArr,
           customImports: customImportArr,
-          styles: AboutModalStories.Default.parameters.styles,
+          componentName: 'about-modal', 
         }),
     },
   ]}
@@ -82,7 +87,7 @@ import '@carbon/ibm-products-web-components/es/components/about-modal/index.js';
           story: AboutModalStories.AboutModalWithAllPropsSet,
           customFunctionDefs: customFunctionArr,
           customImports: customImportArr,
-          styles: AboutModalStories.AboutModalWithAllPropsSet.parameters.styles,
+          componentName: 'about-modal',
         }),
     },
   ]}

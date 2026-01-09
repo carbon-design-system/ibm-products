@@ -76,12 +76,13 @@ import './index.scss';
 import './App';
 `;
 
-export const style: string = `
+export const rootStyleImports: string = `
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+`;
 
-
-@use '@carbon/styles/scss/config' with (
-  $font-path: '@ibm/plex'
-);
-@use '@carbon/styles';
-@use '@carbon/ibm-products/css/index';
+export const rootStyleFooter: string = `
+:root {
+  @include theme.theme(themes.$white);
+}
 `;

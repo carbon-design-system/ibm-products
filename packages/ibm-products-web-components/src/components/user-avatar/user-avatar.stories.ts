@@ -12,7 +12,6 @@ import './index';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import Group from '@carbon/icons/es/group/16';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
-import headshot from './_story-assets/headshot.jpg';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
@@ -120,7 +119,8 @@ export const WithImage = {
   args: {
     tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
     size: 'md',
-    image: headshot,
+    image:
+      'https://assets.ibm.com/is/image/ibm/christina-frohn?wid=2760&hei=1552&fit=constrain,0&qlt=85,0&fmt=png-alpha',
     tooltipText: 'TW, Thomas J. Watson user profile',
     imageDescription: 'Avatar of Thomas J. Watson',
     theme: 'light',
@@ -134,7 +134,6 @@ export const WithImage = {
         size=${args.size}
         image=${args.image}
         image-description=${args.imageDescription}
-        background-color=${args.backgroundColor}
         theme=${args.theme}
       >
       </c4p-user-avatar>

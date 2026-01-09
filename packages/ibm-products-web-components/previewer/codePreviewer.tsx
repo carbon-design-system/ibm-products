@@ -11,9 +11,10 @@ import {
   index,
   main,
   packageJson,
-  style,
   tsconfig,
   viteConfig,
+  rootStyleFooter,
+  rootStyleImports,
 } from './configFiles';
 import * as carbonComponentsWC from '@carbon/web-components/es/index.js';
 import * as carbonIconsWC from '@carbon/icons';
@@ -33,15 +34,15 @@ interface previewerObject {
   story: any;
   customImports: string[];
   customFunctionDefs: string[];
-  styles: string;
   title: string;
+  componentName: string;
 }
 export const stackblitzPrefillConfig = async ({
   story,
   customImports = [],
   customFunctionDefs = [],
-  styles,
   title,
+  componentName,
 }: previewerObject) => {
   const { args } = story;
   const productComponents = await import('../src/index');
@@ -50,21 +51,146 @@ export const stackblitzPrefillConfig = async ({
     story.parameters.docs.source.originalSource,
     args
   );
+  console.log(componentName);
 
+  //get story assets - fetch only svg
+  function getStoryAssetFiles(componentName?: string) {
+    if (!componentName) {
+      return {};
+    }
+
+    const files: Record<string, string> = {};
+
+    // Load ALL story assets
+    const modules = import.meta.glob('/src/components/*/_story-assets/*', {
+      as: 'raw',
+      eager: true,
+    });
+
+    Object.entries(modules).forEach(([path, content]) => {
+      // path example:
+      // /src/components/about-modal/_story-assets/example-logo.svg
+
+      const match = path.match(
+        /\/src\/components\/([^/]+)\/_story-assets\/(.+)$/
+      );
+      if (!match) {
+        return;
+      }
+
+      const [, folderName, fileName] = match;
+
+      // only include assets for requested component
+      if (folderName === componentName) {
+        files[`src/story-assets/${fileName}`] = content as string;
+      }
+    });
+    return files;
+  }
   const app = await appGenerator(
     storyCode,
     customImports,
     customFunctionDefs,
     args
   );
-  let styleImport = style;
-  if (styles) {
-    // This regex matches multi-line comments that start with /* and end with */
-    // It specifically looks for comments containing common license keywords
-    const licenseCommentRegex =
-      /\/\*\*?\s*\n?(?:\s*\*[^\n]*\n)*\s*\*?\s*(?:copyright|license|licensed|apache|mit|ibm corp|found in the|root directory)[^*]*\*\//gi;
-    styleImport += styles.replace(licenseCommentRegex, '');
+
+  //separate scss imports and selectors - to wrap the selectors inside :host{}
+  function wrapSelectorsWithHost(scss: string): string {
+    const lines = scss.split('\n');
+
+    let splitIndex = 0;
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      // Allow imports, variables, mixins, comments at top
+      if (
+        line.startsWith('@use') ||
+        line.startsWith('@forward') ||
+        line.startsWith('$') ||
+        line.startsWith('@mixin') ||
+        line.startsWith('//') ||
+        line.startsWith('/*') ||
+        line === ''
+      ) {
+        splitIndex = i + 1;
+        continue;
+      }
+      // First real selector reached
+      break;
+    }
+
+    const styleHeaders = lines.slice(0, splitIndex).join('\n');
+    const selectors = lines.slice(splitIndex).join('\n');
+
+    if (!selectors.trim()) {
+      return scss;
+    }
+
+    return `
+    ${styleHeaders}
+
+    :host {
+    ${selectors}
+    }
+    `;
   }
+
+  const scssImports = (c: string) =>
+    (!/@carbon\/styles\/scss\/theme/.test(c)
+      ? "@use '@carbon/styles/scss/theme';\n"
+      : '') +
+    (!/@carbon\/styles\/scss\/themes/.test(c)
+      ? "@use '@carbon/styles/scss/themes';\n"
+      : '');
+
+  //copying style file to stackblitz
+  function getStyleFile(componentName?: string) {
+    if (!componentName) {
+      return {};
+    }
+    const files: Record<string, string> = {};
+
+    // Grab all story-styles.scss in components folder
+    const modules = import.meta.glob('/src/components/*/story-styles.scss', {
+      as: 'raw',
+      eager: true,
+    });
+
+    // Track whether we found a file for this component
+    let found = false;
+
+    Object.entries(modules).forEach(([path, content]) => {
+      const match = path.match(/\/components\/([^/]+)\//);
+      const folderName = match?.[1];
+
+      if (folderName === componentName && content) {
+        found = true;
+        // Remove license comments
+        const licenseCommentRegex =
+          /\/\*\*?\s*\n?(?:\s*\*[^\n]*\n)*\s*\*?\s*(?:copyright|license|licensed|apache|mit|ibm corp|found in the|root directory)[^*]*\*\//gi;
+        const cleanContent = (content as string).replace(
+          licenseCommentRegex,
+          ''
+        );
+        // import only missing Carbon imports
+        const carbonImports = scssImports(cleanContent);
+        // Wrap selectors with :host {}
+        const wrappedContent = wrapSelectorsWithHost(cleanContent);
+
+        files['src/index.scss'] =
+          carbonImports + wrappedContent + rootStyleFooter;
+      }
+    });
+
+    // If no file found, still create index.scss with root imports + footer
+    if (!found) {
+      files['src/index.scss'] = rootStyleImports + rootStyleFooter;
+    }
+    return files;
+  }
+
+  const assetFiles = getStoryAssetFiles(componentName);
+  const styleFiles = getStyleFile(componentName);
 
   const stackblitzFileConfig: Project = {
     title: title || 'Carbon demo (TypeScript)',
@@ -78,7 +204,8 @@ export const stackblitzPrefillConfig = async ({
       'tsconfig.json': tsconfig,
       'src/main.ts': main,
       'src/App.ts': app,
-      'src/index.scss': styleImport,
+      ...styleFiles,
+      ...assetFiles,
     },
   };
 
@@ -106,8 +233,11 @@ const filterStoryCode = (storyCode, args) => {
     //Remove the args block and the render wrapper
     .replace(/{\s*args:\s*{[\s\S]*?}\s*,\s*render:\s*args\s*=>\s*{/, '')
     //replace the render closing braces
-    .replace(/}\s*$/, '');
+    .replace(/}\s*$/, '')
+    // Remove <style>${styles}</style> injections anywhere
+    .replace(/<style>\s*\$\{styles\}\s*<\/style>/g, '');
 
+  // Replace all placeholders in the code with actual arg values
   Object.entries((args = args ?? {})).forEach(([key, value]) => {
     const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const templateLiteralRegex = new RegExp(
@@ -125,14 +255,17 @@ const filterStoryCode = (storyCode, args) => {
     );
 
     if (typeof value === 'string') {
+      // Replace template literals with JSON-stringified values : html`<span>${args.label}</span>` => html`<span>"Submit"</span>`
       storyCodeUpdated = storyCodeUpdated.replace(
         templateLiteralRegex,
         JSON.stringify(value)
       );
+      // Replace JSX attribute placeholders : <cds-button label={args.label} /> => <cds-button label="Submit" />
       storyCodeUpdated = storyCodeUpdated.replace(
         jsxAttributeRegex,
         `$1"${value}"`
       );
+      // Replace strings inside template literals : `${args.label}` => "Submit"
       storyCodeUpdated = storyCodeUpdated.replace(
         stringInTemplateRegex,
         `"${value}"`
@@ -166,6 +299,14 @@ const appGenerator = async (
   const hasArgs = regex.test(storyCode);
 
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
+  const filterDerivedComponents = (arr) =>
+    arr.filter(
+      (item) =>
+        !arr.some((other) => other !== item && item.startsWith(`${other}-`))
+    );
+  const filteredCarbonComponents = filterDerivedComponents(
+    matchedCarbonComponents
+  );
 
   // Generate App.jsx code
   const app = `
@@ -184,8 +325,8 @@ const appGenerator = async (
       : ''
   }
    ${
-     matchedCarbonComponents.length > 0
-       ? matchedCarbonComponents
+     filteredCarbonComponents.length > 0
+       ? filteredCarbonComponents
            .map(
              (comp) =>
                `import '@carbon/web-components/es/components/${comp}/index.js';`
@@ -259,8 +400,6 @@ const findComponentsInCode = (code: string): ComponentSources => {
       result.unknown.push(component);
     }
   });
-  console.log(result);
-
   return result;
 };
 

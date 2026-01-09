@@ -29,8 +29,7 @@
     "src/**/*.tsx",
     "tests/**/*.ts",
     ".storybook/**/*.ts",
-    ".storybook/**/*.tsx",
-    "previewer/storyassets.ts"
+    ".storybook/**/*.tsx"
   ],
   "exclude": [
     "src/**/*.stories.ts",

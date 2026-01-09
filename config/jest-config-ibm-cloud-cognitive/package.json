@@ -1,6 +1,5 @@
 {
   "name": "jest-config-ibm-cloud-cognitive",
-  "private": true,
   "version": "1.40.0",
   "license": "Apache-2.0",
   "main": "index.js",
@@ -17,6 +16,10 @@
     "carbon for cloud & cognitive",
     "carbon for ibm products"
   ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "peerDependencies": {
     "jest": "^29.7.0"
   },

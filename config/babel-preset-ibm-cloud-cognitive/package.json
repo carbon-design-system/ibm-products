@@ -1,6 +1,5 @@
 {
   "name": "babel-preset-ibm-cloud-cognitive",
-  "private": true,
   "version": "0.39.0",
   "license": "Apache-2.0",
   "main": "index.js",
@@ -17,6 +16,10 @@
     "carbon for cloud & cognitive",
     "carbon for ibm products"
   ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "dependencies": {
     "@babel/core": "^7.26.10",
     "@babel/plugin-proposal-class-properties": "^7.18.6",

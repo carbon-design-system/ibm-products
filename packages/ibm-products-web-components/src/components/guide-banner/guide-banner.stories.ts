@@ -80,11 +80,9 @@ const renderTemplate = (args) => {
             items,
             (item) => item.idx,
             (item) => html`
-              <c4p-guide-banner-element
-                class="body-elm"
-                titleText="${item.titleText} ${item.idx + 1}"
-                descriptionText=${item.descriptionText}
-              >
+              <c4p-guide-banner-element class="body-elm">
+                <div slot="title">${item.titleText} ${item.idx + 1}</div>
+                <div slot="description">${item.descriptionText}</div>
                 <cds-button kind="ghost">Read more</cds-button>
               </c4p-guide-banner-element>
             `

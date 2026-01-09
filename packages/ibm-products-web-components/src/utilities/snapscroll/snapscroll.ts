@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { prefix } from '../../globals/settings';
+
 // cspell:disable
 
 // it seems snapevent doesn't currently exist in typescript
@@ -20,6 +22,10 @@ interface SnapEvent extends Event {
  * @returns void
  */
 
+export const blockClass = `${prefix}--snappy`;
+const elmClass = `${blockClass}__elm`;
+const selectionClass = `${blockClass}__selection`;
+
 export function snapScroll(body: string, child: string) {
   const bodyEl = document.querySelector(body);
 
@@ -29,7 +35,7 @@ export function snapScroll(body: string, child: string) {
 
   const styleElement = document.createElement('style');
   styleElement.textContent = `
-  .snappy {
+  .${blockClass} {
     display: flex;
     flex: none;
     overflow: scroll;
@@ -37,7 +43,11 @@ export function snapScroll(body: string, child: string) {
     width: 100%;
   }
 
-  .snappy-elm {
+  .${blockClass}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .${blockClass}__elm {
     scroll-snap-align: start;
     flex: none;
     width: 100%;
@@ -45,32 +55,32 @@ export function snapScroll(body: string, child: string) {
 `;
   document.head.appendChild(styleElement);
 
-  bodyEl.classList.add('snappy');
+  bodyEl.classList.add(blockClass);
 
   const scrollsnapSupported = 'onscrollsnapchange' in bodyEl;
   const children = bodyEl.querySelectorAll(child);
 
   if (children.length > 0) {
     children.forEach((el) => {
-      el.classList.add('snappy-elm');
+      el.classList.add(elmClass);
     });
   }
 
   if (scrollsnapSupported) {
     bodyEl.addEventListener('scrollsnapchange', (event) => {
       const snapevent = event as SnapEvent;
-      const currentlySnapped = document.querySelector('.snappy-selection');
+      const currentlySnapped = document.querySelector(`.${selectionClass}`);
 
       if (currentlySnapped) {
-        currentlySnapped.classList.remove('snappy-selection');
+        currentlySnapped.classList.remove(selectionClass);
       }
 
-      snapevent.snapTargetInline.classList.add('snappy-selection');
+      snapevent.snapTargetInline.classList.add(selectionClass);
     });
   } else {
     const handler: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
-        entry.target.classList.toggle('snappy-selection', entry.isIntersecting);
+        entry.target.classList.toggle(selectionClass, entry.isIntersecting);
       });
     };
     let observer;
@@ -95,7 +105,7 @@ export function snapScroll(body: string, child: string) {
  * @returns currently focused element
  */
 function getFocusedItem() {
-  return document.querySelector('.snappy-selection');
+  return document.querySelector(`.${selectionClass}`);
 }
 
 /**

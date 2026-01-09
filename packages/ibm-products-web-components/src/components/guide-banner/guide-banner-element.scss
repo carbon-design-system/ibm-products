@@ -19,11 +19,11 @@ $carbon-prefix: config.$carbon-prefix;
 $block-class: #{$prefix}--guidebanner__element;
 
 :host(#{$prefix}-guide-banner-element) {
-  .#{$block-class}-title {
+  .#{$block-class}__title {
     @include type.type-style('heading-compact-01');
   }
 
-  .#{$block-class}-content {
+  .#{$block-class}__description {
     @include type.type-style('body-01');
 
     margin-block-end: $spacing-07;

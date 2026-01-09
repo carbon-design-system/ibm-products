@@ -10,6 +10,11 @@
 declare module '*.scss';
 declare module '*.scss?lit';
 declare module '*.jpg';
+declare module '*.svg';
+declare module '*.svg?raw' {
+  const content: string;
+  export default content;
+}
 declare module 'vitest/config';
 declare module '@figma/code-connect/html';
 

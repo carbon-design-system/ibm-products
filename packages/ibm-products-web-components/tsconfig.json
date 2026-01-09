@@ -27,9 +27,11 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
+    "src/**/*.d.ts",
     "tests/**/*.ts",
     ".storybook/**/*.ts",
-    ".storybook/**/*.tsx"
+    ".storybook/**/*.tsx",
+    "previewer/storyassets.ts"
   ],
   "exclude": [
     "src/**/*.stories.ts",

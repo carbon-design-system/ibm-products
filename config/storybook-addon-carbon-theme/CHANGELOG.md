@@ -1,3 +1,17 @@
+## `@carbon/storybook-addon-theme@2.30.0`
+### Bug fixes :bug:
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+
+### Housekeeping :house:
+- chore: retry prerelease publish other packages
+
 ## `@carbon/storybook-addon-theme@2.28.0`
 ### Housekeeping :house:
 - refactor(sb-theme-addon): remove global dependency (#8588)

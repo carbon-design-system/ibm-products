@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.30.0-rc.0`
+## `@carbon/ibm-products-web-components@0.30.0`
 ### Features :rocket:
 - feat: init guide banner component (#8513)
 - feat(Coachmark): implementation of coachmark WC (#8599)

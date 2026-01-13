@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.77.0-rc.0`
+## `@carbon/ibm-products-styles@2.77.0`
 ### Features :rocket:
 - feat: init guide banner component (#8513)
 

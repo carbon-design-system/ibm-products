@@ -1,4 +1,4 @@
-## `@carbon/storybook-addon-theme@2.30.0-rc.0`
+## `@carbon/storybook-addon-theme@2.30.0`
 ### Bug fixes :bug:
 - fix: remove not needed tags and restore package.json
 - fix: restore all changes after deleting unnecessary tags

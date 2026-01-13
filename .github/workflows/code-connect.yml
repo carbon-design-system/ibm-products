@@ -26,6 +26,6 @@ jobs:
         run: yarn install --immutable
       - name: Run publish
         working-directory: packages/${{ matrix.package }}
-        run: npx figma connect publish
+        run: npx figma connect publish --skip-update-check --verbose
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}

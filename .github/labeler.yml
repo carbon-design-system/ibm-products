@@ -84,9 +84,11 @@
 'component: Interstitial screen':
   - '/(Interstitial screen)/i'
 'component: modal':
-  - '/(AboutModal|about modal|ExportModal|export modal|ImportModal|import modal|RemoveModal|remove modal)/i'
+  - '/(AboutModal|about modal|ExportModal|export modal|ImportModal|import
+    modal|RemoveModal|remove modal)/i'
 'component: NotificationsPanel':
-  - '/(NotificationsPanel|NotificationPanel|Notifications Panel|Notification Panel)/i'
+  - '/(NotificationsPanel|NotificationPanel|Notifications Panel|Notification
+    Panel)/i'
 'component: OptionsTile':
   - '/(OptionsTile|Options Tile)/i'
 'component: PageHeader':
@@ -109,7 +111,6 @@
   - '/(UserAvatar|User Avatar|UserProfileImage|User Profile Image)/i'
 'component: WebTerminal':
   - '/(WebTerminal|Web Terminal)/i'
-
 
 # Package labels
 'package: styles':

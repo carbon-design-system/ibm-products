@@ -1,3 +1,25 @@
+## `@carbon/ibm-products@2.81.0`
+### Features :rocket:
+- feat(Coachmark): implementation of coachmark WC (#8599)
+
+### Bug fixes :bug:
+- fix: rc clean ups
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+- fix(DataSpreadsheet): Changed document querySelector to ref querySelector (#8717)
+- fix(code-connect): exclude node_modules (#8705)
+
+### Housekeeping :house:
+- chore: retry prerelease publish
+- build(deps): update Carbon 11 compatible versions to latest (#8726)
+- chore: init code connect for EditInPlace (#8575)
+
 ## `@carbon/ibm-products@2.80.0`
 ### Features :rocket:
 - feat(InlineTip): adding figma code connect file (#8611)

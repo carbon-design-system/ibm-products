@@ -15,6 +15,13 @@ import styles from './guide-banner-element.scss?lit';
 
 export const blockClass = `${prefix}--guidebanner__element`;
 
+/**
+ * GuideBannerElement.
+ *
+ * @element c4p-guide-banner-element
+ * @csspart guide-banner-element
+ * */
+
 @customElement(`${prefix}-guide-banner-element`)
 class CDSGuideBannerElement extends HostListenerMixin(LitElement) {
   render() {

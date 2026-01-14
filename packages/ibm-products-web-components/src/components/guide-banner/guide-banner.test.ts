@@ -45,7 +45,7 @@ const template = (args = {}) => {
       titleText=${props.titleText}
     >
       <div slot="header">
-        <div class="body">${slots.header}</div>
+        <div class="header">${slots.header}</div>
       </div>
       <div slot="body">
         <div class="body">${slots.body}</div>
@@ -57,8 +57,8 @@ const template = (args = {}) => {
   `;
 };
 
-describe('c4p-options-tile', () => {
-  it('renders guidebanner', async () => {
+describe('c4p-guide-banner', () => {
+  it('renders guide-banner', async () => {
     const el: CDSGuideBanner = await fixture(template());
     expect(el).toBeDefined();
   });

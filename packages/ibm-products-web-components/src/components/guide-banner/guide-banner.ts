@@ -23,12 +23,12 @@ export const blockClass = `${prefix}--guidebanner`;
 const blockEvent = `${prefix}-guidebanner`;
 
 /**
- * OptionsTile.
+ * GuideBanner.
  *
  * @element c4p-guide-banner
- * @csspart guide-banner The options tile
- * @fires c4p-guide-banner-toggle Custom event fired when tile is opened
- * @fires c4p-guide-banner-close Custom event fired when tile is closed
+ * @csspart guide-banner
+ * @fires c4p-guide-banner-toggle Custom event fired when banner is opened
+ * @fires c4p-guide-banner-close Custom event fired when banner is closed
  * */
 
 @customElement(`${prefix}-guide-banner`)

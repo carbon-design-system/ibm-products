@@ -19,6 +19,8 @@ import {
   snapScroll,
   scrollNext,
   scrollPrevious,
+  getNextSibling,
+  getPreviousSibling,
 } from '../../utilities/snapscroll';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/';
@@ -61,6 +63,22 @@ const renderTemplate = (args) => {
     scrollPrevious();
   };
 
+  const scrollendHandler = () => {
+    const nextBtn = document.getElementById('next-btn');
+    if (getNextSibling()) {
+      nextBtn?.removeAttribute('disabled');
+    } else {
+      nextBtn?.setAttribute('disabled', '');
+    }
+
+    const previousBtn = document.getElementById('previous-btn');
+    if (getPreviousSibling()) {
+      previousBtn?.removeAttribute('disabled');
+    } else {
+      previousBtn?.setAttribute('disabled', '');
+    }
+  };
+
   return html`
     <style>
       ${styles}
@@ -75,7 +93,7 @@ const renderTemplate = (args) => {
       titleText=${titleText}
     >
       <div slot="body">
-        <div class="body" dir="ltr">
+        <div class="body" dir="ltr" @scrollend=${scrollendHandler}>
           ${repeat(
             items,
             (item) => item.idx,
@@ -97,17 +115,35 @@ const renderTemplate = (args) => {
         </div>
         <div class="footer-right">
           <cds-button
+            id="previous-btn"
             kind="ghost"
             class="${blockClass}__toggle-button"
             @click=${previousHandler}
-            >${iconLoader(ChevronLeft16, { slot: 'icon' })}</cds-button
+            ?disabled=${true}
           >
+            <span
+              @click=${(evt: MouseEvent) => {
+                evt.preventDefault();
+              }}
+            >
+              ${iconLoader(ChevronLeft16, { slot: 'icon' })}
+            </span>
+          </cds-button>
           <cds-button
+            id="next-btn"
             kind="ghost"
             class="${blockClass}__toggle-button"
             @click=${nextHandler}
-            >${iconLoader(ChevronRight16, { slot: 'icon' })}</cds-button
+            ?disabled=${false}
           >
+            <span
+              @click=${(evt: MouseEvent) => {
+                evt.preventDefault();
+              }}
+            >
+              ${iconLoader(ChevronRight16, { slot: 'icon' })}
+            </span>
+          </cds-button>
         </div>
       </div>
     </c4p-guide-banner>

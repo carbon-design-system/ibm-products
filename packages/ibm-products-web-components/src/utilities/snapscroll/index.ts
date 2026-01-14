@@ -12,4 +12,6 @@ export {
   scrollNext,
   scrollPrevious,
   blockClass,
+  getNextSibling,
+  getPreviousSibling,
 } from './snapscroll';

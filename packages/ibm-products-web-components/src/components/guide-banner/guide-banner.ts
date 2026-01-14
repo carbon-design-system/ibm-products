@@ -133,7 +133,7 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
           <slot name="body"></slot>
           <summary
             tabindex="-1"
-            @click=${(evt: Event) => {
+            @click=${(evt: MouseEvent) => {
               evt.preventDefault();
             }}
           >

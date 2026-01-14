@@ -104,7 +104,7 @@ export function snapScroll(body: string, child: string) {
  * Retreives the currently focused element
  * @returns currently focused element
  */
-function getFocusedItem() {
+export function getFocusedItem() {
   return document.querySelector(`.${selectionClass}`);
 }
 
@@ -112,8 +112,8 @@ function getFocusedItem() {
  * Scrolls to the next sibling element of the currently focused element
  */
 export function scrollNext() {
-  const item = getFocusedItem();
-  item?.nextElementSibling?.scrollIntoView({
+  const sibling = getNextSibling();
+  sibling?.scrollIntoView({
     behavior: 'smooth',
     inline: 'start',
   });
@@ -123,9 +123,27 @@ export function scrollNext() {
  * Scrolls to the previous sibling element of the currently focused element
  */
 export function scrollPrevious() {
-  const item = getFocusedItem();
-  item?.previousElementSibling?.scrollIntoView({
+  const sibling = getPreviousSibling();
+  sibling?.scrollIntoView({
     behavior: 'smooth',
     inline: 'start',
   });
+}
+
+export function getNextSibling() {
+  const item = getFocusedItem();
+  if (!item) {
+    return;
+  }
+
+  return item.nextElementSibling;
+}
+
+export function getPreviousSibling() {
+  const item = getFocusedItem();
+  if (!item) {
+    return;
+  }
+
+  return item.previousElementSibling;
 }

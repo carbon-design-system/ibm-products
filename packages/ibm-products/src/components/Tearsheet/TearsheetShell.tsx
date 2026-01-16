@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ import React, {
   ReactNode,
   ForwardedRef,
   RefObject,
+  useLayoutEffect,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -43,6 +44,7 @@ import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { useIsomorphicEffect, usePreviousValue } from '../../global/js/hooks';
 import { useFocus } from '../../global/js/hooks/useFocus';
+import { useTearsheetPresence } from '../../global/js/hooks/useTearsheetPresence';
 import { TearsheetAction } from './Tearsheet';
 
 // The block part of our conventional BEM class names (bc__E--M).
@@ -299,12 +301,41 @@ export const TearsheetShell = React.forwardRef(
       modalRef,
       selectorPrimaryFocus
     );
-    const modalRefValue = modalRef.current;
     const wide = size === 'wide';
+
+    // Use presence hook to manage presence state
+    const { enablePresence, isPresent, isExiting } = useTearsheetPresence(
+      open,
+      modalRef
+    );
+
+    // Determine if tearsheet should be in the open stack
+    // When presence is enabled, exclude exiting tearsheets from stack to allow
+    // below tearsheet to move to front immediately during exit animation
+    const shouldBeInOpenStack = enablePresence ? isPresent && !isExiting : open;
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
     const [position, setPosition] = useState(0);
+
+    // For presence mode: delay open state to allow entry animation
+    const [delayedOpen, setDelayedOpen] = useState(
+      enablePresence ? false : open
+    );
+
+    // When presence mode is enabled, delay setting open to true by one frame
+    // This allows ComposedModal to detect the transition and play entry animation
+    useLayoutEffect(() => {
+      if (enablePresence && open && !delayedOpen) {
+        // Use requestAnimationFrame to delay by one frame
+        const frame = requestAnimationFrame(() => {
+          setDelayedOpen(true);
+        });
+        return () => cancelAnimationFrame(frame);
+      } else if (!enablePresence || !open) {
+        setDelayedOpen(open);
+      }
+    }, [enablePresence, open, delayedOpen]);
 
     // Keep a record of the previous value of depth.
     const prevDepth = useRef<number | undefined>(undefined);
@@ -373,7 +404,7 @@ export const TearsheetShell = React.forwardRef(
       // false to true to open it then append its notification callback to
       // the end of the stack array (as its ID), and call all the callbacks
       // to notify all open tearsheets that the stacking has changed.
-      if (open) {
+      if (shouldBeInOpenStack) {
         stack.open.push(handleStackChange);
         notify();
       }
@@ -383,8 +414,15 @@ export const TearsheetShell = React.forwardRef(
       // being called again).
       return function cleanup() {
         // Remove the notification callback from the all handlers array.
-        stack.all.splice(stack.all.indexOf(handleStackChange), 1);
-        stack.sizes.splice(stack.sizes.indexOf(size), 1);
+        const allIndex = stack.all.indexOf(handleStackChange);
+        if (allIndex >= 0) {
+          stack.all.splice(allIndex, 1);
+        }
+
+        const sizeIndex = stack.sizes.indexOf(size);
+        if (sizeIndex >= 0) {
+          stack.sizes.splice(sizeIndex, 1);
+        }
 
         // Remove the notification callback from the open handlers array, if
         // it's there, and notify all open tearsheets that the stacking has
@@ -395,7 +433,7 @@ export const TearsheetShell = React.forwardRef(
           notify();
         }
       };
-    }, [open, size]);
+    }, [shouldBeInOpenStack, size]);
 
     const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
@@ -419,175 +457,179 @@ export const TearsheetShell = React.forwardRef(
       }
     }, [modalRef, width]);
 
-    if (position <= depth) {
-      // Include a modal header if and only if one or more of these is given.
-      // We can't use a Wrap for the ModalHeader because ComposedModal requires
-      // the direct child to be the ModalHeader instance.
-      const includeHeader =
-        label ||
-        title ||
-        description ||
-        headerActions ||
-        navigation ||
-        effectiveHasCloseIcon;
+    // Don't render when fully closed with presence mode
+    if (enablePresence && !isPresent && !open) {
+      return null;
+    }
 
-      // Include an ActionSet if and only if one or more actions is given.
-      const includeActions = actions && actions?.length > 0;
+    // Check stacking depth
+    if (position > depth) {
+      pconsole.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
+      return null;
+    }
 
-      const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
+    // Include a modal header if and only if one or more of these is given.
+    // We can't use a Wrap for the ModalHeader because ComposedModal requires
+    // the direct child to be the ModalHeader instance.
+    const includeHeader =
+      label ||
+      title ||
+      description ||
+      headerActions ||
+      navigation ||
+      effectiveHasCloseIcon;
 
-      return renderPortalUse(
-        <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
-          <ComposedModal
-            {
-              // Pass through any other property values.
-              ...rest
+    // Include an ActionSet if and only if one or more actions is given.
+    const includeActions = actions && actions?.length > 0;
+
+    const modalContent = (
+      <ComposedModal
+        {
+          // Pass through any other property values.
+          ...rest
+        }
+        aria-label={ariaLabel || getNodeTextContent(title)}
+        className={cx(bc, className, {
+          [`${bc}--stacked-${position}-of-${depth}`]:
+            // Don't apply this on the initial open of a single tearsheet.
+            depth > 1 || (depth === 1 && (prevDepth?.current ?? 0) > 1),
+          [`${bc}--wide`]: wide,
+          [`${bc}--narrow`]: !wide,
+          [`${bc}--has-slug`]: deprecated_slug,
+          [`${bc}--has-ai-label`]:
+            !!decorator && decorator['type']?.displayName === 'AILabel',
+          [`${bc}--has-decorator`]:
+            !!decorator && decorator['type']?.displayName !== 'AILabel',
+          [`${bc}--has-close`]: effectiveHasCloseIcon,
+        })}
+        decorator={decorator || deprecated_slug}
+        containerClassName={cx(`${bc}__container`, {
+          [`${bc}__container--lower`]: verticalPosition === 'lower',
+          [`${bc}__container--mixed-size-stacking`]: !areAllSameSizeVariant(),
+        })}
+        {...{
+          onClose,
+          open: enablePresence ? delayedOpen : open,
+          selectorPrimaryFocus,
+        }}
+        onKeyDown={keyDownListener}
+        preventCloseOnClickOutside={!isPassive}
+        ref={modalRef}
+        selectorsFloatingMenus={[
+          `.${carbonPrefix}--overflow-menu-options`,
+          `.${carbonPrefix}--tooltip`,
+          '.flatpickr-calendar',
+          `.${bc}__container`,
+          `.${carbonPrefix}--menu`,
+          ...selectorsFloatingMenus,
+        ]}
+        size="sm"
+      >
+        {includeHeader && (
+          <ModalHeader
+            className={cx(`${bc}__header`, {
+              [`${bc}__header--with-close-icon`]: effectiveHasCloseIcon,
+              [`${bc}__header--with-nav`]: navigation,
+            })}
+            closeClassName={cx({
+              [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
+            })}
+            closeModal={onClose}
+            iconDescription={
+              effectiveHasCloseIcon ? closeIconDescription : undefined
             }
-            aria-label={ariaLabel || getNodeTextContent(title)}
-            className={cx(bc, className, {
-              [`${bc}--stacked-${position}-of-${depth}`]:
-                // Don't apply this on the initial open of a single tearsheet.
-                depth > 1 || (depth === 1 && (prevDepth?.current ?? 0) > 1),
-              [`${bc}--wide`]: wide,
-              [`${bc}--narrow`]: !wide,
-              [`${bc}--has-slug`]: deprecated_slug,
-              [`${bc}--has-ai-label`]:
-                !!decorator && decorator['type']?.displayName === 'AILabel',
-              [`${bc}--has-decorator`]:
-                !!decorator && decorator['type']?.displayName !== 'AILabel',
-              [`${bc}--has-close`]: effectiveHasCloseIcon,
-            })}
-            decorator={decorator || deprecated_slug}
-            containerClassName={cx(`${bc}__container`, {
-              [`${bc}__container--lower`]: verticalPosition === 'lower',
-              [`${bc}__container--mixed-size-stacking`]:
-                !areAllSameSizeVariant(),
-            })}
-            {...{ onClose, open, selectorPrimaryFocus }}
-            onKeyDown={keyDownListener}
-            preventCloseOnClickOutside={!isPassive}
-            ref={modalRef}
-            selectorsFloatingMenus={[
-              `.${carbonPrefix}--overflow-menu-options`,
-              `.${carbonPrefix}--tooltip`,
-              '.flatpickr-calendar',
-              `.${bc}__container`,
-              `.${carbonPrefix}--menu`,
-              ...selectorsFloatingMenus,
-            ]}
-            size="sm"
           >
-            {includeHeader && (
-              <ModalHeader
-                className={cx(`${bc}__header`, {
-                  [`${bc}__header--with-close-icon`]: effectiveHasCloseIcon,
-                  [`${bc}__header--with-nav`]: navigation,
-                })}
-                closeClassName={cx({
-                  [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
-                })}
-                closeModal={onClose}
-                iconDescription={
-                  effectiveHasCloseIcon ? closeIconDescription : undefined
-                }
-              >
-                <Section
-                  className={`${bc}__header-content`}
-                  element={wide ? Layer : undefined}
-                >
-                  <Wrap className={`${bc}__header-fields`}>
-                    {/* we create the label and title here instead of passing them
-                      as modal header props so we can wrap them in layout divs */}
-                    <Wrap className={`${bcModalHeader}__label`}>{label}</Wrap>
-                    <Section
-                      className={cx(
-                        `${bcModalHeader}__heading`,
-                        `${bc}__heading`
-                      )}
-                    >
-                      <Heading>{title}</Heading>
-                    </Section>
-                    <Wrap className={`${bc}__header-description`}>
-                      {description}
-                    </Wrap>
-                  </Wrap>
-                  <Wrap className={`${bc}__header-actions`}>
-                    {headerActions}
-                  </Wrap>
-                </Section>
-                <Wrap className={`${bc}__header-navigation`}>{navigation}</Wrap>
-              </ModalHeader>
-            )}
-            <Wrap
-              ref={modalBodyRef}
-              className={`${carbonPrefix}--modal-content ${bc}__body`}
+            <Section
+              className={`${bc}__header-content`}
+              element={wide ? Layer : undefined}
             >
-              {/* Left influencer */}
+              <Wrap className={`${bc}__header-fields`}>
+                {/* we create the label and title here instead of passing them
+                      as modal header props so we can wrap them in layout divs */}
+                <Wrap className={`${bcModalHeader}__label`}>{label}</Wrap>
+                <Section
+                  className={cx(`${bcModalHeader}__heading`, `${bc}__heading`)}
+                >
+                  <Heading>{title}</Heading>
+                </Section>
+                <Wrap className={`${bc}__header-description`}>
+                  {description}
+                </Wrap>
+              </Wrap>
+              <Wrap className={`${bc}__header-actions`}>{headerActions}</Wrap>
+            </Section>
+            <Wrap className={`${bc}__header-navigation`}>{navigation}</Wrap>
+          </ModalHeader>
+        )}
+        <Wrap
+          ref={modalBodyRef}
+          className={`${carbonPrefix}--modal-content ${bc}__body`}
+        >
+          {/* Left influencer */}
+          <Wrap
+            className={cx({
+              [`${bc}__influencer`]: true,
+              [`${bc}__influencer--wide`]: influencerWidth === 'wide',
+            })}
+            neverRender={influencerPosition === 'right'}
+            element={SectionLevel3}
+          >
+            <Wrap element={Layer} className={`${bc}__layer`}>
+              {influencer}
+            </Wrap>
+          </Wrap>
+          <Wrap className={`${bc}__right`}>
+            {/* Main area */}
+            <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
+              <Wrap
+                className={`${bc}__content`}
+                alwaysRender={!!(influencer && influencerPosition === 'right')}
+                element={SectionLevel3}
+              >
+                {wide ? (
+                  children
+                ) : (
+                  <Wrap element={Layer} className={`${bc}__layer`}>
+                    {children}
+                  </Wrap>
+                )}
+              </Wrap>
+              {/* Right influencer */}
               <Wrap
                 className={cx({
                   [`${bc}__influencer`]: true,
                   [`${bc}__influencer--wide`]: influencerWidth === 'wide',
                 })}
-                neverRender={influencerPosition === 'right'}
+                neverRender={influencerPosition !== 'right'}
                 element={SectionLevel3}
               >
                 <Wrap element={Layer} className={`${bc}__layer`}>
                   {influencer}
                 </Wrap>
               </Wrap>
-              <Wrap className={`${bc}__right`}>
-                {/* Main area */}
-                <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
-                  <Wrap
-                    className={`${bc}__content`}
-                    alwaysRender={
-                      !!(influencer && influencerPosition === 'right')
-                    }
-                    element={SectionLevel3}
-                  >
-                    {wide ? (
-                      children
-                    ) : (
-                      <Wrap element={Layer} className={`${bc}__layer`}>
-                        {children}
-                      </Wrap>
-                    )}
-                  </Wrap>
-                  {/* Right influencer */}
-                  <Wrap
-                    className={cx({
-                      [`${bc}__influencer`]: true,
-                      [`${bc}__influencer--wide`]: influencerWidth === 'wide',
-                    })}
-                    neverRender={influencerPosition !== 'right'}
-                    element={SectionLevel3}
-                  >
-                    <Wrap element={Layer} className={`${bc}__layer`}>
-                      {influencer}
-                    </Wrap>
-                  </Wrap>
-                </Wrap>
-                {includeActions && (
-                  <Wrap className={`${bc}__button-container`}>
-                    <ActionSet
-                      actions={actions}
-                      buttonSize={wide ? '2xl' : undefined}
-                      className={`${bc}__buttons`}
-                      size={wide ? '2xl' : 'lg'}
-                      aria-hidden={!open}
-                    />
-                  </Wrap>
-                )}
-              </Wrap>
             </Wrap>
-            <div className={`${bc}__resize-detector`} ref={resizer} />
-          </ComposedModal>
-        </FeatureFlags>
-      );
-    } else {
-      pconsole.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
-      return null;
-    }
+            {includeActions && (
+              <Wrap className={`${bc}__button-container`}>
+                <ActionSet
+                  actions={actions}
+                  buttonSize={wide ? '2xl' : undefined}
+                  className={`${bc}__buttons`}
+                  size={wide ? '2xl' : 'lg'}
+                  aria-hidden={!open}
+                />
+              </Wrap>
+            )}
+          </Wrap>
+        </Wrap>
+        <div className={`${bc}__resize-detector`} ref={resizer} />
+      </ComposedModal>
+    );
+
+    return renderPortalUse(
+      <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+        {modalContent}
+      </FeatureFlags>
+    );
   }
 );
 

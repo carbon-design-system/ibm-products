@@ -12,6 +12,7 @@ import { expectWarn } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
+import { FeatureFlags } from '../FeatureFlags';
 
 import {
   Button,
@@ -393,6 +394,70 @@ describe(componentName, () => {
               ? tabLabel3
               : tabLabel4;
       expect(tab.textContent).toEqual(tabContent);
+    });
+  });
+
+  describe('enable-presence feature flag', () => {
+    const initialEnablePresence = pkg.isFeatureEnabled('enable-presence', true);
+
+    afterEach(() => {
+      pkg.feature['enable-presence'] = initialEnablePresence;
+    });
+
+    it('keeps tearsheet mounted during exit animation when feature flag is enabled', async () => {
+      pkg.feature['enable-presence'] = true;
+
+      const { rerender } = render(
+        <FeatureFlags flags={{ 'enable-presence': true }}>
+          <Tearsheet
+            open={true}
+            title={title}
+            closeIconDescription={closeIconDescription}
+            hasCloseIcon
+          >
+            {children}
+          </Tearsheet>
+        </FeatureFlags>
+      );
+
+      // Verify tearsheet is visible
+      const tearsheet = document.querySelector(`.${carbon.prefix}--modal`);
+      expect(tearsheet).toHaveClass('is-visible');
+      screen.getByText(childFragment);
+
+      // Close the tearsheet
+      rerender(
+        <FeatureFlags flags={{ 'enable-presence': true }}>
+          <Tearsheet
+            open={false}
+            title={title}
+            closeIconDescription={closeIconDescription}
+            hasCloseIcon
+          >
+            {children}
+          </Tearsheet>
+        </FeatureFlags>
+      );
+
+      // With presence enabled, tearsheet should still be in DOM during exit animation
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      });
+
+      // Tearsheet should still be present in DOM
+      expect(
+        document.querySelector(`.${carbon.prefix}--modal`)
+      ).toBeInTheDocument();
+
+      // Wait for animation to complete
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 400));
+      });
+
+      // After animation completes, tearsheet should be removed from DOM
+      expect(
+        document.querySelector(`.${carbon.prefix}--modal`)
+      ).not.toBeInTheDocument();
     });
   });
 });

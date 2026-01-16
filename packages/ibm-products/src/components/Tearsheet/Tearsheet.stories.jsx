@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -42,6 +42,7 @@ import {
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import styles from './_storybook-styles.scss?inline';
 import { TearsheetNarrow } from './TearsheetNarrow';
+import { FeatureFlags } from '../FeatureFlags';
 
 // import mdx from './Tearsheet.mdx';
 
@@ -297,6 +298,60 @@ const Template = ({ actions, decorator, slug, ...args }, context) => {
         >
           {mainContent}
         </Tearsheet>
+      </div>
+    </>
+  );
+};
+
+// Template with presence mode enabled
+// eslint-disable-next-line react/prop-types
+const TemplateWithPresence = (
+  { actions, decorator, slug, ...args },
+  context
+) => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
+  }, []);
+
+  const wiredActions =
+    actions &&
+    Array.prototype.map.call(actions, (action) => {
+      if (action.label === 'Cancel') {
+        const previousClick = action.onClick;
+        return {
+          ...action,
+          onClick: (evt) => {
+            setOpen(false);
+            previousClick(evt);
+          },
+        };
+      }
+      return action;
+    });
+
+  const ref = useRef(undefined);
+
+  return (
+    <>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
+      <div ref={ref}>
+        <FeatureFlags enablePresence={true}>
+          <Tearsheet
+            {...args}
+            actions={wiredActions}
+            open={open}
+            onClose={() => setOpen(false)}
+            decorator={decorator && sampleDecorator(decorator)}
+            slug={slug && sampleDecorator(slug)}
+          >
+            {mainContent}
+          </Tearsheet>
+        </FeatureFlags>
       </div>
     </>
   );
@@ -800,6 +855,17 @@ withInfluencer.args = {
   onClose: action('onClose called'),
   title,
   actions: 7,
+};
+
+export const withPresenceMode = TemplateWithPresence.bind({});
+withPresenceMode.storyName = 'FeatureFlags / Tearsheet with presence mode';
+withPresenceMode.args = {
+  closeIconDescription,
+  description: 2,
+  onClose: action('onClose called'),
+  title,
+  actions: 7,
+  selectorPrimaryFocus: '#tss-ft1',
 };
 
 export const ReturnFocusToOpenButton = ReturnFocusTemplate.bind({});

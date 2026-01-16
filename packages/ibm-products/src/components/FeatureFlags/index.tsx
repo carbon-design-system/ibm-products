@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,6 +31,7 @@ export interface FeatureFlagsProps {
   // exampleComponentSecondaryIcon?: boolean;
   // exampleComponentUseExample?: boolean;
   enableSidepanelResizer?: boolean;
+  enablePresence?: boolean;
   enableTestFlagA?: boolean;
   enableTestFlagB?: boolean;
 }
@@ -45,6 +46,7 @@ GlobalFeatureFlags.merge({
   'enable-test-flag-a': false, // used in testing
   'enable-test-flag-b': true, // used in testing
   enableSidepanelResizer: false,
+  'enable-presence': false,
 });
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
@@ -67,6 +69,7 @@ function FeatureFlags({
   // exampleComponentSecondaryIcon = false,
   // exampleComponentUseExample = false,
   enableSidepanelResizer = false,
+  enablePresence = false,
   enableTestFlagA = false,
   enableTestFlagB = false,
 }: FeatureFlagsProps): JSX.Element {
@@ -81,6 +84,7 @@ function FeatureFlags({
     // 'ExampleComponent.secondaryIcon': exampleComponentSecondaryIcon,
     // 'ExampleComponent.useExample': exampleComponentUseExample,
     enableSidepanelResizer: enableSidepanelResizer,
+    'enable-presence': enablePresence,
     'enable-test-flag-a': enableTestFlagA,
     'enable-test-flag-b': enableTestFlagB,
     ...flags,
@@ -124,6 +128,7 @@ FeatureFlags.propTypes = {
   enableDatagridUseCustomizeColumns: PropTypes.bool,
   enableDatagridUseEditableCell: PropTypes.bool,
   enableDatagridUseInlineEdit: PropTypes.bool,
+  enablePresence: PropTypes.bool,
   enableSidepanelResizer: PropTypes.bool,
   enableTestFlagA: PropTypes.bool,
   enableTestFlagB: PropTypes.bool,

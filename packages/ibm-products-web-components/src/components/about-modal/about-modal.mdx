@@ -2,22 +2,19 @@ import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as AboutModalStories from './about-modal.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
-import * as helpers from './about-modal-helpers';
+import helperSource from './about-modal-helpers.ts?raw';
 
 export const customFunctionArr= [
-      Object.entries(helpers)
-    .map(([name, value]) => {
-      // If it's a function -> stringify function normally
-      if (typeof value === 'function') {
-        return `const ${name} = ${value.toString()}`;
-      }
-      // Otherwise treat as literal → add quotes properly
-      return `const ${name} = ${JSON.stringify(value)};`;
-    })
-    .join('\n')
+  helperSource
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .trim()
 ];
 
+
 export const customImportArr = [`import '@carbon/web-components/es/components/link/index.js';
+import { TemplateResult } from 'lit';
 import ExampleLogo from './story-assets/example-logo.svg';
 import ansibleLogo from './story-assets/ansible-logo.svg';
 import jsLogo from './story-assets/js-logo.svg';

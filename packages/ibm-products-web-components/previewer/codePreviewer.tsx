@@ -291,6 +291,8 @@ const appGenerator = async (
     icons: matchedIcons,
     unknown: unknownComponents,
   } = findComponentsInCode(storyCode);
+  console.log('customFunctionDefs', customFunctionDefs);
+
   if (unknownComponents.length > 0) {
     storyCode = removeUnknownComponents(storyCode, unknownComponents);
   }
@@ -338,9 +340,10 @@ const appGenerator = async (
   @customElement('my-app')
   export class MyApp extends LitElement {
     render() { 
+      const prefix = 'c4p';
       ${customFunctionDefs?.length > 0 ? customFunctionDefs.join('\n') : ''}
       ${hasArgs ? formattedArgs : ''}
-    const prefix = 'c4p';
+   
       ${storyCode}
     }
   }

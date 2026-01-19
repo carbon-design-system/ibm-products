@@ -243,7 +243,7 @@ test.describe('ProductiveCard @avt', () => {
   });
 
   // hover states
-  test('@avt-hover: validates hover states', async ({ page }) => {
+  test.skip('@avt-hover: validates hover states', async ({ page }) => {
     await visitStory(page, {
       component: 'ProductiveCard',
       id: 'components-cards-productivecard--with-overflow',

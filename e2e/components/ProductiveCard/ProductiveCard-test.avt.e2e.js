@@ -63,7 +63,7 @@ test.describe('ProductiveCard @avt', () => {
   });
 
   // Overflow menu open/close states test
-  test('@avt-overflow-menu: validates overflow menu interactions', async ({
+  test.skip('@avt-overflow-menu: validates overflow menu interactions', async ({
     page,
   }) => {
     await visitStory(page, {

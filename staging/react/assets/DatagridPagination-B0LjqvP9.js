@@ -1,2 +1,0 @@
-import{e as p}from"./iframe-M250dlZ7.js";import{P as r}from"./Pagination-rY-OMqme.js";const d=({state:e,setPageSize:a,gotoPage:n,rows:o})=>{const i=({page:g,pageSize:t})=>{console.log(e),a(t),n(g-1)};return p.createElement(r,{page:e.pageIndex+1,pageSize:e.pageSize,pageSizes:e.pageSizes||[10,20,30,40,50],totalItems:o.length,onChange:i})};d.__docgenInfo={description:"",methods:[],displayName:"DatagridPagination"};export{d as D};
-//# sourceMappingURL=DatagridPagination-B0LjqvP9.js.map

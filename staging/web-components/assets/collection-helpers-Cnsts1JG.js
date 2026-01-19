@@ -1,0 +1,1 @@
+const t=(r,a,o)=>Array.prototype.filter.call(r,a,o),c=(r,a,o)=>Array.prototype.find.call(r,a,o),l=(r,a,o)=>Array.prototype.forEach.call(r,a,o),e=(r,a)=>Array.prototype.indexOf.call(r,a);export{c as a,t as b,l as f,e as i};

@@ -219,9 +219,9 @@ const customBigNumberTemplate = {
           ?percentage=${percentage}
           ?loading=${loading}
         >
-          <div slot="label">
+          <div slot="label" class="${storyPrefix}__label-with-tooltip">
             <span class="custom-label"> ${label} </span>
-            <cds-tooltip align="right">
+            <cds-tooltip align="right" class="${storyPrefix}__tooltip">
               ${iconLoader(Information16, {
                 id: 'trigger',
                 'aria-labelledby': 'content',

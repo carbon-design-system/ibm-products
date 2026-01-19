@@ -36,3 +36,14 @@ $story-prefix: #{$prefix}--big-number-stories;
     @include type-style('body-compact-01');
   }
 }
+
+.#{$story-prefix}__label-with-tooltip {
+  display: inline-flex;
+  align-items: center;
+  gap: spacing.$spacing-03;
+}
+
+.#{$story-prefix}__tooltip {
+  display: inline-flex;
+  align-items: center;
+}

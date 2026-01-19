@@ -2014,6 +2014,7 @@ __metadata:
     "@rollup/plugin-json": "npm:^6.1.0"
     "@rollup/plugin-node-resolve": "npm:^16.0.0"
     "@rollup/plugin-typescript": "npm:^12.1.1"
+    "@stackblitz/sdk": "npm:^1.11.0"
     "@storybook/addon-docs": "npm:^9.1.10"
     "@storybook/addon-links": "npm:^9.1.10"
     "@storybook/web-components-vite": "npm:^9.1.10"

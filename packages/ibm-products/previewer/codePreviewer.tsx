@@ -250,6 +250,23 @@ const findComponentsInCode = (code: string, status): ComponentSources => {
     unknown: [],
   };
 
+  // Helper function to handle status-based component classification
+  const addComponentWithStatus = (
+    component: string,
+    targetArray: 'ibmProducts' | 'unknown'
+  ) => {
+    if (status) {
+      const foundStatus = findPropertyContainingValue(status, component);
+      if (foundStatus === 'preview' || foundStatus === 'previewCandidate') {
+        result.ibmProducts.push(`${foundStatus}__${component}`);
+      } else {
+        result[targetArray].push(component);
+      }
+    } else if (targetArray === 'ibmProducts') {
+      result.ibmProducts.push(component);
+    }
+  };
+
   componentNamesInCode.forEach((component) => {
     if (carbonComponentNames.includes(component)) {
       result.carbon.push(component);
@@ -258,20 +275,11 @@ const findComponentsInCode = (code: string, status): ComponentSources => {
       //   preview: string[] of component names
       //   previewCandidate: string[] of component names
       // }
-      if (status) {
-        const foundStatus = findPropertyContainingValue(status, component);
-        if (foundStatus === 'preview' || foundStatus === 'previewCandidate') {
-          result.ibmProducts.push(`${foundStatus}__${component}`);
-        } else {
-          result.ibmProducts.push(component);
-        }
-      } else {
-        result.ibmProducts.push(component);
-      }
+      addComponentWithStatus(component, 'ibmProducts');
     } else if (iconsNames.includes(component)) {
       result.icons.push(component);
     } else {
-      result.unknown.push(component);
+      addComponentWithStatus(component, 'unknown');
     }
   });
   return result;

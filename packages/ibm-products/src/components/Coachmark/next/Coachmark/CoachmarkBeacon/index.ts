@@ -6,4 +6,4 @@
  */
 
 export { CoachmarkBeacon } from './CoachmarkBeacon';
-export type { CoachmarkBeaconProps } from './CoachmarkBeacon';
+export type { CoachmarkBeaconPropsNext } from './CoachmarkBeacon';

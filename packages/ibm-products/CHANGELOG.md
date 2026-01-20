@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.81.0-rc.0`
+## `@carbon/ibm-products@2.81.0`
 ### Features :rocket:
 - feat(Coachmark): implementation of coachmark WC (#8599)
 

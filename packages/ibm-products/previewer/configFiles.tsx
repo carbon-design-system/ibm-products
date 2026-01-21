@@ -17,7 +17,7 @@ export const packageJson: string = `{
   },
   "dependencies": {
     "@carbon/react": "latest",
-    "@carbon/ibm-products": "^2.75.0",
+    "@carbon/ibm-products": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.0.0"

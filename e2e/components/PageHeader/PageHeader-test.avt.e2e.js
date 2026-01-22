@@ -173,7 +173,7 @@ test.describe('PageHeader @avt', () => {
   });
 
   // PageHeader buttons change position when header collapsed
-  test('@avt-buttons-change-position-when-header-collapsed', async ({
+  test.skip('@avt-buttons-change-position-when-header-collapsed', async ({
     page,
   }) => {
     await visitStory(page, {

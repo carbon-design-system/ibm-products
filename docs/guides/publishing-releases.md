@@ -70,12 +70,6 @@ release team will need to do the following:
   - Make sure the branch name follows the `release/vx.x.x` format
     ![Screenshot of manually creating release branch from GitHub UI](https://github.com/carbon-design-system/ibm-products/assets/54281166/0920cd6f-e4cd-44e9-ad8c-a3195bbaf9ea)
 
-- [ ] Add branch protections to the release branch by going to 'Settings' in the
-      IBM Products repository > 'Branches' under 'Code and automation' side
-      panel. Change the branch name pattern from `released/v2*` to
-      `release/v2*`.
-      ![Screenshot of branch settings page](https://github.com/carbon-design-system/ibm-products/assets/54281166/45855e7f-6440-48db-856c-2cfab1e8530f)
-
 - [ ] Run the
       [release start workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-start.yml)
       (with `minor` as the selected semver type) to generate the prerelease
@@ -106,6 +100,12 @@ release team will need to do the following:
       and
       [staging environment for Web components](https://carbon-design-system.github.io/ibm-products/staging/web-components)
       and ensure the version in the storybook top left header has been updated.
+- [ ] Add branch protections to the release branch by going to 'Settings' in the
+      IBM Products repository > 'Branches' under 'Code and automation' side
+      panel. Change the branch name pattern from `released/v2*` to
+      `release/v2*`.
+      ![Screenshot of branch settings page](https://github.com/carbon-design-system/ibm-products/assets/54281166/45855e7f-6440-48db-856c-2cfab1e8530f)
+
 - [ ] Run the
       [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
       This workflow creates the release tag, generates the release with notes,
@@ -214,6 +214,10 @@ A stable release occurs on the last Wednesday of the sprint and finishes later
 in the day. This should occur after the prerelease has been tested and
 validated. During this stage, the release team will do the following:
 
+- [ ] Remove the branch protections for `release/v2.*` by changing the branch
+      name pattern to `released/v2*`
+      ![Screenshot of branch settings page with branch name pattern changed back to released](https://github.com/carbon-design-system/ibm-products/assets/54281166/690d4b71-4efa-4b70-9768-c3f4eae9ca7e)
+
 - [ ] Run the
       [release start workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-start.yml)
       (with `minor` as the selected semver type) to generate the full minor
@@ -294,10 +298,6 @@ validated. During this stage, the release team will do the following:
 
     :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
     ```
-
-- [ ] Remove the branch protections for `release/v2.*` by changing the branch
-      name pattern to `released/v2*`
-      ![Screenshot of branch settings page with branch name pattern changed back to released](https://github.com/carbon-design-system/ibm-products/assets/54281166/690d4b71-4efa-4b70-9768-c3f4eae9ca7e)
 
 - [ ] Update the release in the
       [Wiki release page](https://github.com/carbon-design-system/ibm-products/wiki/Carbon-for-IBM-Products-Releases)

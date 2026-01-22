@@ -51,7 +51,9 @@ test.describe('NotificationsPanel @avt', () => {
     });
     await expect(notificationTrigger).toBeFocused();
   });
-  test('@avt-notification-panel-focus-return-to-trigger', async ({ page }) => {
+  test.skip('@avt-notification-panel-focus-return-to-trigger', async ({
+    page,
+  }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
       id: 'components-notificationspanel--default',

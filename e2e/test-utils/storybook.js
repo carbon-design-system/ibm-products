@@ -14,14 +14,29 @@ async function visitStory(page, options) {
   // from TrustArc cookie consent and IBM privacy pill that are not part of components being tested
   await page.route('**/*', (route) => {
     const url = route.request().url();
-    if (
-      url.includes('1.www.s81c.com/common/stats/ibm-common.js') ||
-      url.includes('1.www.s81c.com/common/carbon/autotrack.min.js') ||
-      url.includes('consent.trustarc.com') ||
-      url.includes('trustarc.com')
-    ) {
-      route.abort();
-    } else {
+    try {
+      const urlObj = new URL(url);
+      const hostname = urlObj.hostname;
+      const pathname = urlObj.pathname;
+
+      // Block IBM analytics scripts
+      const isIBMAnalytics =
+        hostname === '1.www.s81c.com' &&
+        (pathname.includes('/common/stats/ibm-common.js') ||
+          pathname.includes('/common/carbon/autotrack.min.js'));
+
+      // Block TrustArc scripts
+      const isTrustArc =
+        hostname === 'consent.trustarc.com' ||
+        hostname.endsWith('.trustarc.com');
+
+      if (isIBMAnalytics || isTrustArc) {
+        route.abort();
+      } else {
+        route.continue();
+      }
+    } catch (e) {
+      // If URL parsing fails, continue with the request
       route.continue();
     }
   });

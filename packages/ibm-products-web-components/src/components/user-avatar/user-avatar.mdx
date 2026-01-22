@@ -1,8 +1,13 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as UserAvatarStories from './user-avatar.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta of={UserAvatarStories} />
+
+export const customImportArr = [`import Group from '@carbon/icons/es/group/16';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';`];
+
 
 # User-avatar
 
@@ -44,10 +49,57 @@ import '@carbon/ibm-products-web-components/es/components/user-avatar/index.js';
 ></c4p-user-avatar>
 ```
 
+### Example Usage
+<Canvas
+  of={UserAvatarStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: UserAvatarStories.Default,
+          componentName:'user-avatar'
+        }),
+    },
+  ]}
+></Canvas>
+
 ### With Icon
 
-A carbon icon can be passed as a slot in `<c4p-user-avatar>` using
-`{ slot: 'rendericon' }`. For a custom icon, specify the slot by adding the
+The user avatar with profile picture
+
+```html
+<c4p-user-avatar
+  tooltip-alignment=${args.tooltipAlignment}
+  tooltip-text=${args.tooltipText}
+  size=${args.size}
+  image=${args.image}
+  image-description=${args.imageDescription}   
+  theme=${args.theme}
+>
+</c4p-user-avatar>
+```
+
+### Example Usage
+<Canvas
+  of={UserAvatarStories.WithIcon}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: UserAvatarStories.WithIcon,
+          customImports: customImportArr,
+          componentName:'user-avatar'
+        }),
+    },
+  ]}
+></Canvas>
+
+
+### With Image
+
+For a custom icon, specify the slot by adding the
 `slot="rendericon"` attribute to the element.
 
 ```html
@@ -61,6 +113,22 @@ A carbon icon can be passed as a slot in `<c4p-user-avatar>` using
   ${Group({ slot: 'rendericon' })}
 </c4p-user-avatar>
 ```
+
+### Example Usage
+<Canvas
+  of={UserAvatarStories.WithImage}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: UserAvatarStories.WithImage,
+          customImports: customImportArr,
+          componentName:'user-avatar'
+        }),
+    },
+  ]}
+></Canvas>
 
 ## `<c4p-user-avatar>` attributes, properties and events
 

@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.41.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.41.0`
 ### Bug fixes :bug:
 - fix: convert `babel` and `jest` config packages to ESM (#8782)
 

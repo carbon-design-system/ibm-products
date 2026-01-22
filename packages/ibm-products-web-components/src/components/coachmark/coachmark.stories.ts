@@ -54,6 +54,9 @@ export const Tooltip = {
       document.querySelector('c4p-coachmark')?.toggleAttribute('open');
     };
 
+    const handleDone = () => {
+      document.querySelector('c4p-coachmark')?.removeAttribute('open');
+    };
     return html`
       <style>
         ${styles}
@@ -79,7 +82,7 @@ export const Tooltip = {
           <c4p-coachmark-body class="coachmark-body">
             <h2>Hello World</h2>
             <p>this is a description test</p>
-            <cds-button size="sm">Done</cds-button>
+            <cds-button size="sm" @click=${handleDone}>Done</cds-button>
           </c4p-coachmark-body>
         </c4p-coachmark>
       </div>
@@ -98,6 +101,9 @@ export const Floating = {
   render: (args) => {
     const handleClick = () => {
       document.querySelector('c4p-coachmark')?.toggleAttribute('open');
+    };
+    const handleDone = () => {
+      document.querySelector('c4p-coachmark')?.removeAttribute('open');
     };
     return html`
       <style>
@@ -125,7 +131,7 @@ export const Floating = {
           <c4p-coachmark-body class="coachmark-body">
             <h2>Hello World</h2>
             <p>this is a description test</p>
-            <cds-button size="sm">Done</cds-button>
+            <cds-button size="sm" @click=${handleDone}>Done</cds-button>
           </c4p-coachmark-body>
         </c4p-coachmark>
       </div>

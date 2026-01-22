@@ -144,12 +144,16 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   private handleFocusManagement() {
     setTimeout(() => {
       const popover = this.shadowRoot?.querySelector(`${carbonPrefix}-popover`);
-      if (!popover) {return;}
+      if (!popover) {
+        return;
+      }
 
       const slot = popover.querySelector(
         `.${blockClass}--wrapper slot`
       ) as HTMLSlotElement;
-      if (!slot) {return;}
+      if (!slot) {
+        return;
+      }
 
       const interactiveSelectors =
         'button, a, input, select, textarea, [tabindex]:not([tabindex="-1"]), cds-button';

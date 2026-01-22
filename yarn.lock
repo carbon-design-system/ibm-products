@@ -2204,7 +2204,7 @@ __metadata:
     "@figma/code-connect": "npm:^1.3.5"
     "@ibm/telemetry-js": "npm:^1.9.1"
     "@ibm/telemetry-js-config-generator": "npm:^2.0.1"
-    "@percy/cli": "npm:^1.31.8"
+    "@percy/cli": "npm:^1.31.0"
     "@percy/storybook": "npm:^9.0.0"
     "@rollup/plugin-babel": "npm:^6.0.4"
     "@rollup/plugin-commonjs": "npm:^29.0.0"
@@ -6010,7 +6010,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/cli@npm:^1.31.8":
+"@percy/cli@npm:^1.31.0":
   version: 1.31.8
   resolution: "@percy/cli@npm:1.31.8"
   dependencies:

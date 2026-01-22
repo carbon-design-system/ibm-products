@@ -1118,7 +1118,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
             </Tearsheet.MainContent>
 
             <Tearsheet.SummaryContent>
-              <Heading className="rightPanelHeading">Summary Details</Heading>
+              <Heading className="summaryPanelHeading">Summary Details</Heading>
               <div className="rightDetailsBody">
                 <div>
                   <label>item 1</label>

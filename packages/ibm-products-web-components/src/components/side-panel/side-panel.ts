@@ -334,7 +334,10 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       }
     } else {
       // allow the html to render before animating in the side panel
-      this._isOpen = this.open;
+      // Use requestAnimationFrame to ensure the DOM is rendered before triggering animation
+      requestAnimationFrame(() => {
+        this._isOpen = this.open;
+      });
     }
   };
 

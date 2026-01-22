@@ -241,7 +241,8 @@ const CoachmarkStackedPattern = (args) => {
     },
   ];
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.stopPropagation();
     setIsOpen(false);
   };
 

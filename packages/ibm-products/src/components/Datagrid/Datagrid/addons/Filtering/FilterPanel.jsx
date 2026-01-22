@@ -117,6 +117,7 @@ const FilterPanel = ({
       initialValue: true,
       filtersState,
       prevFiltersRef,
+      open: panelOpen,
     });
 
   const shouldReduceMotion = usePrefersReducedMotion();

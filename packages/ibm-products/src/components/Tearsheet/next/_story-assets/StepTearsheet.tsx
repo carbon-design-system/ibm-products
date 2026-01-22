@@ -5,15 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode, useEffect } from 'react';
-import { StepGroup, StepState, useStepContext } from '../../../StepFlow';
+import React, { ReactNode, RefObject, useEffect } from 'react';
+import {
+  StepGroup,
+  StepContextType,
+  useStepContext,
+} from '@carbon/utilities-react';
 import { Tearsheet } from '../Tearsheet';
-import { Bee } from '@carbon/react/icons';
 import {
   Button,
   CodeSnippet,
-  Form,
-  FormGroup,
   Heading,
   ProgressIndicator,
   ProgressStep,
@@ -23,7 +24,7 @@ import {
 
 interface Props {
   children?: ReactNode;
-  influencer?: ((a: StepState) => ReactNode) | null;
+  influencer?: ((a: StepContextType) => ReactNode) | null;
   open?: boolean;
   onClose?: () => void;
   title?: ReactNode;
@@ -32,6 +33,7 @@ interface Props {
   selectorPrimaryFocus?: string;
   setOpen?: (open: boolean) => void;
   progressIndicator?: 'vertical' | 'horizontal';
+  launcherButtonRef?: RefObject<HTMLButtonElement | null>;
 }
 
 export const TearsheetWithSteps = ({
@@ -45,6 +47,7 @@ export const TearsheetWithSteps = ({
   closeIconDescription = 'Close',
   selectorPrimaryFocus,
   progressIndicator = 'vertical',
+  launcherButtonRef,
   ...rest
 }: Props) => {
   const {
@@ -56,14 +59,17 @@ export const TearsheetWithSteps = ({
   } = useStepContext();
 
   return (
-    <Tearsheet open={open} variant="wide" onClose={() => setOpen?.(false)}>
+    <Tearsheet
+      open={open}
+      variant={'wide'}
+      onClose={() => setOpen?.(false)}
+      launcherButtonRef={launcherButtonRef}
+    >
       <Tearsheet.Header>
         <Tearsheet.HeaderContent
           label="Customer data"
-          title="Customer account uniqueness SLA "
-          description="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular sized button. This issue is most found in tables. Small button should have three words or less. When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are always paired with text."
-          titleIcon={Bee}
-          titleIconPosition="leading"
+          title="Title of the tearsheet "
+          description="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
           headerActions={
             <Tearsheet.HeaderActions
               menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}

@@ -79,30 +79,36 @@ const InterstitialScreenBody = React.forwardRef<
   const [scrollPercent, setScrollPercent] = useState(-1);
 
   useEffect(() => {
+    // Get the content either from contentRenderer or fallback to props.children
     const _bodyContent =
-      contentRenderer?.({
-        handleGotoStep,
-        progStep,
-        disableActionButton,
-      }) ?? props.children;
+      contentRenderer?.({ handleGotoStep, progStep, disableActionButton }) ??
+      props.children;
 
-    const isElement = isValidElement(_bodyContent);
-    const children = isElement
-      ? (_bodyContent.props as { children?: ReactNode }).children
-      : _bodyContent;
+    // If content is a valid React element and has children, use its children; otherwise use the content itself
+    const children =
+      isValidElement(_bodyContent) &&
+      (_bodyContent.props as { children?: ReactNode }).children != null
+        ? (_bodyContent.props as { children?: ReactNode }).children
+        : _bodyContent;
 
-    // Set body children data
-    setBodyChildrenData?.(children);
-    // If the children is an array, treat it as a multiStep
-    if (isElement && Array.isArray(children)) {
+    // Convert to a valid array of React elements
+    const validChildren =
+      React.Children.toArray(children).filter(isValidElement);
+
+    // Determine step type and count
+    if (validChildren.length > 1) {
       setStepType('multi');
-      setStepCount?.(children.length);
+      setStepCount?.(validChildren.length);
+      // Store content for rendering
+      setBodyChildrenData?.(validChildren);
     } else {
       setStepType('single');
+      setStepCount?.(1);
+      setBodyChildrenData?.(_bodyContent);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [progStep]);
+  }, [props.children, contentRenderer, progStep]);
 
   useEffect(() => {
     if (scrollPercent !== -1) {
@@ -140,6 +146,7 @@ const InterstitialScreenBody = React.forwardRef<
           <div className={`${blockClass}__carousel`}>
             <Carousel
               disableArrowScroll
+              disableResetOnResize
               ref={scrollRef}
               onScroll={onScrollHandler}
             >

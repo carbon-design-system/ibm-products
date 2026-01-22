@@ -70,6 +70,30 @@ export default {
     const { mergeConfig } = await import('vite');
 
     return mergeConfig(config, {
+      build: {
+        sourcemap: true,
+        rollupOptions: {
+          onLog(level, log, handler) {
+            // https://github.com/vitejs/vite/issues/15012#issuecomment-1815854072
+            if (log.code === 'MODULE_LEVEL_DIRECTIVE') {
+              return;
+            }
+            handler(level, log);
+          },
+        },
+      },
+      esbuild: {
+        include: /\.[jt]sx?$/,
+        exclude: [],
+        loader: 'tsx',
+      },
+      optimizeDeps: {
+        esbuildOptions: {
+          loader: {
+            '.js': 'jsx',
+          },
+        },
+      },
       resolve: {
         alias: {
           ALIAS_STORY_STYLE_CONFIG: resolve(

@@ -33,6 +33,23 @@ function createDraggableElement(options = {}) {
 }
 
 describe('makeDraggable', () => {
+  beforeAll(() => {
+    global.DOMMatrix = class {
+      constructor(transform) {
+        if (typeof transform === 'string' && transform.startsWith('matrix')) {
+          const values = transform
+            .match(/matrix.*\((.+)\)/)[1]
+            .split(',')
+            .map(parseFloat);
+          this.m41 = values[4];
+          this.m42 = values[5];
+        } else {
+          this.m41 = 0;
+          this.m42 = 0;
+        }
+      }
+    };
+  });
   it('should set cursor style on handle', () => {
     const { el, handle } = createDraggableElement();
     expect(handle.style.cursor).toBe('move');
@@ -171,14 +188,13 @@ describe('makeDraggable', () => {
     fireEvent.mouseDown(handle, { clientX: 50, clientY: 50 });
     fireEvent.mouseMove(document, { clientX: 100, clientY: 120 });
 
-    expect(el.style.left).toBe('50px');
-    expect(el.style.top).toBe('70px');
+    const transformAfterMove = el.style.transform;
+    expect(transformAfterMove).toBe('translate(50px, 70px)');
 
     fireEvent.mouseUp(handle);
 
     fireEvent.mouseMove(document, { clientX: 100, clientY: 120 });
 
-    expect(el.style.left).toBe('50px');
-    expect(el.style.top).toBe('70px');
+    expect(transformAfterMove).toBe('translate(50px, 70px)');
   });
 });

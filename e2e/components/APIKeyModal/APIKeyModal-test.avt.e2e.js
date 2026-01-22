@@ -50,7 +50,9 @@ test.describe('APIKeyModal @avt', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     // Focus the close button
-    await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
+    await expect(
+      modalElement.getByRole('button', { name: 'Close' })
+    ).toBeFocused();
 
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');

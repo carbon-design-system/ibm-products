@@ -11,7 +11,7 @@ export { default as CDSSidePanel } from './components/side-panel/side-panel';
 export { default as CDSTearsheet } from './components/tearsheet/tearsheet';
 export { default as CDSFullPageError } from './components/full-page-error/full-page-error';
 export { default as CDSAboutModal } from './components/about-modal/about-modal';
-export { default as CDSUseravatar } from './components/user-avatar/user-avatar';
+export { default as CDSUserAvatar } from './components/user-avatar/user-avatar';
 export { default as CDSOptionsTile } from './components/options-tile/options-tile';
 export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
 export { default as CDSPageHeader } from './components/page-header/page-header';
@@ -24,3 +24,5 @@ export { default as CDSGuideBanner } from './components/guide-banner/guide-banne
 export { default as CDSGuideBannerElement } from './components/guide-banner/guide-banner-element';
 export { default as CDSCoachmark } from './components/coachmark/coachmark';
 export { default as CDSCoachmarkBeacon } from './components/coachmark/coachmark-beacon/coachmark-beacon';
+export { default as CDSBigNumber } from './components/big-number/big-number';
+export { default as CDSBigNumberSkeleton } from './components/big-number/big-number-skeleton';

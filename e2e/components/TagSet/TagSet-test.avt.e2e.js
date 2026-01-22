@@ -132,7 +132,7 @@ test.describe('TagSet @avt', () => {
     await page.getByRole('searchbox').fill('One');
     await expect(modalElement.getByText('Two')).toBeHidden();
 
-    await page.getByRole('button', { name: 'Close' }).click();
+    await modalElement.getByRole('button', { name: 'Close' }).click();
     await expect(page.locator(`.${carbon.prefix}--modal`)).toBeHidden();
   });
 

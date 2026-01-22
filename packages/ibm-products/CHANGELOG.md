@@ -1,3 +1,20 @@
+## `@carbon/ibm-products@2.82.0`
+### Features :rocket:
+- feat(coachmark): open in stackblitz (#8690)
+- feat(ConditionBuilder): Added code connect files (#8483)
+- feat: added support for iframes in storybook for autotrack (#8580)
+- feat(Checklist): code connect (#8711)
+- feat(Tearsheet):  add stackblitz examples (#8718)
+
+### Bug fixes :bug:
+- fix: convert `babel` and `jest` config packages to ESM (#8782)
+- fix: avoid scroll reset on resize (#8806)
+- fix(tearsheet): add preview__ for tearsheet/next props (#8779)
+- fix: use correct type for portalTarget in RemoveModal (#8680)
+
+### Housekeeping :house:
+- chore(deps): update dependency @rollup/plugin-commonjs to v29 (#8584)
+
 ## `@carbon/ibm-products@2.81.0`
 ### Features :rocket:
 - feat(Coachmark): implementation of coachmark WC (#8599)

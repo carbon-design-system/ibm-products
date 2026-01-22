@@ -1,3 +1,7 @@
+## `@babel-preset-ibm-cloud-cognitive@0.40.0`
+### Bug fixes :bug:
+- fix: convert `babel` and `jest` config packages to ESM (#8782)
+
 ## `@babel-preset-ibm-cloud-cognitive@0.39.0`
 ### Bug fixes :bug:
 - fix: remove not needed tags and restore package.json

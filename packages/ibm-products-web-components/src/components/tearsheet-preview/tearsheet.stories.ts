@@ -316,17 +316,7 @@ export const Default = {
      
        <c4p-tearsheet-body >
        <div  slot="main-content"> 
-        <div class="influencerPanelTrigger">
-              <cds-button
-                kind="ghost"
-                label="Open influencer"
-                @click="${toggleInfluencerPanel}"
-              >
-                 ${iconLoader(RightPanelClose32, {
-                   slot: 'icon',
-                 })}
-                </cds-button>
-            </div>
+       
             <div class="summaryPanelTrigger">
               <cds-button
                 kind="ghost"
@@ -461,16 +451,6 @@ export const WithTabs = {
         <c4p-tearsheet-body>
           <div slot="main-content">
             <!-- Button to open influencer panel on small screens -->
-            <div class="influencerPanelTrigger">
-              <cds-button
-                kind="ghost"
-                tooltip-text="Open Influencer"
-                tooltip-position="right"
-                @click="${toggleInfluencerPanel}"
-              >
-                ${iconLoader(RightPanelClose32, { slot: 'icon' })}
-              </cds-button>
-            </div>
 
             <!-- Main Content -->
             <div

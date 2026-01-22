@@ -79,9 +79,9 @@ $block-class__next: #{$c4p-prefix}--tearsheet__next;
   > #{$carbon-prefix}-button {
     inline-size: 100%;
     max-inline-size: none;
-  }
 
-  :first-child {
-    grid-column: span 4;
+    &:first-child {
+      grid-column: span 4;
+    }
   }
 }

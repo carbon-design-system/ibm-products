@@ -191,7 +191,7 @@ export class StackingTearsheetDemo extends LitElement {
         </c4p-tearsheet-body>
 
         <c4p-tearsheet-footer>
-          <cds-button-set class="default__action-buttons">
+          <div class="default__action-buttons">
             <cds-button
               kind="ghost"
               size="xl"
@@ -201,7 +201,7 @@ export class StackingTearsheetDemo extends LitElement {
             </cds-button>
             <cds-button kind="secondary" size="xl"> Back </cds-button>
             <cds-button size="xl"> Submit </cds-button>
-          </cds-button-set>
+          </div>
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
 
@@ -240,7 +240,7 @@ export class StackingTearsheetDemo extends LitElement {
         </c4p-tearsheet-body>
 
         <c4p-tearsheet-footer>
-          <cds-button-set class="default__action-buttons">
+          <div class="default__action-buttons">
             <cds-button
               kind="ghost"
               size="xl"
@@ -250,7 +250,7 @@ export class StackingTearsheetDemo extends LitElement {
             </cds-button>
             <cds-button kind="secondary" size="xl"> Back </cds-button>
             <cds-button size="xl"> Submit </cds-button>
-          </cds-button-set>
+          </div>
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
 
@@ -280,7 +280,7 @@ export class StackingTearsheetDemo extends LitElement {
         </c4p-tearsheet-body>
 
         <c4p-tearsheet-footer>
-          <cds-button-set class="default__action-buttons">
+          <div class="default__action-buttons">
             <cds-button
               kind="ghost"
               size="xl"
@@ -290,7 +290,7 @@ export class StackingTearsheetDemo extends LitElement {
             </cds-button>
             <cds-button kind="secondary" size="xl"> Back </cds-button>
             <cds-button size="xl"> Submit </cds-button>
-          </cds-button-set>
+          </div>
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
     `;

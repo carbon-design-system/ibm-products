@@ -331,13 +331,15 @@ export const Default = {
        <c4p-tearsheet-summary-content   slot="summary-content">${summaryContent}</c4p-tearsheet-summary-content>
         </c4p-tearsheet-body>
         <c4p-tearsheet-footer> 
-         <cds-button-set class="default__action-buttons" >
-            <cds-button kind="ghost" size="xl" @click="${toggleButton}">
+              <div class="default__action-buttons">
+                <cds-button kind="ghost" size="xl" @click="${toggleButton}">
               Cancel
             </cds-button>
             <cds-button kind="secondary" size="xl"> Back </cds-button>
             <cds-button size="xl"> Submit </cds-button>
-         </cds-button-set > </c4p-tearsheet-footer>
+              </div>
+          
+        </c4p-tearsheet-footer>
      </<c4p-preview-tearsheet>
       
     `;
@@ -400,13 +402,13 @@ export const WithInfluencer = {
         </c4p-tearsheet-body>
 
         <c4p-tearsheet-footer>
-          <cds-button-set class="default__action-buttons">
+          <div class="default__action-buttons">
             <cds-button kind="ghost" size="xl" @click="${toggleButton}">
               Cancel
             </cds-button>
             <cds-button kind="secondary" size="xl"> Back </cds-button>
             <cds-button size="xl"> Submit </cds-button>
-          </cds-button-set>
+          </div>
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
     `;
@@ -466,13 +468,13 @@ export const WithTabs = {
         </c4p-tearsheet-body>
 
         <c4p-tearsheet-footer>
-          <cds-button-set class="default__action-buttons">
+          <div class="default__action-buttons">
             <cds-button kind="ghost" size="xl" @click="${toggleButton}">
               Cancel
             </cds-button>
             <cds-button kind="secondary" size="xl"> Back </cds-button>
             <cds-button size="xl"> Submit </cds-button>
-          </cds-button-set>
+          </div>
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
     `;
@@ -540,13 +542,13 @@ export const narrowTearsheet = {
        <c4p-tearsheet-summary-content   slot="summary-content">${summaryContent}</c4p-tearsheet-summary-content>
         </c4p-tearsheet-body>
         <c4p-tearsheet-footer> 
-         <cds-button-set class="default__action-buttons" >
+         <div class="default__action-buttons" >
             <cds-button kind="ghost" size="xl" @click="${toggleButton}">
               Cancel
             </cds-button>
             <cds-button kind="secondary" size="xl"> Back </cds-button>
             <cds-button size="xl"> Submit </cds-button>
-         </cds-button-set > </c4p-tearsheet-footer>
+         </div > </c4p-tearsheet-footer>
      </<c4p-preview-tearsheet>
       
     `;

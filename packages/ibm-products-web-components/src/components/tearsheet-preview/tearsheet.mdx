@@ -4,7 +4,7 @@ import * as TearsheetStories from './tearsheet.stories';
 
 <Meta of={TearsheetStories} />
 
-# Tearsheet (Next Generation)
+# Tearsheet (New Composable)
 
 > 💡 This is the new composable tearsheet component with enhanced features including stacking support, collapsible headers, responsive and improved composability.
 
@@ -307,28 +307,3 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. 
 |------|-------------|
 | `actions` | Action buttons (typically Cancel, Submit) |
 
-## Resources
-
-- [Full Developer Documentation](./Tearsheet.md)
-- [Carbon Design System - Tearsheet](https://carbondesignsystem.com/components/tearsheet/usage/)
-- [Lit Documentation](https://lit.dev/)
-- [Storybook Examples](./tearsheet.stories.ts)
-
-## Troubleshooting
-
-### Header Not Collapsing
-
-- Check that `disable-header-collapse` is not set
-- Ensure main content has scrollable content
-
-### Stacking Not Working
-
-- Ensure each tearsheet has a unique ID
-- Verify `stackManager.setStackStepSize()` is called
-
-### Signal Updates Not Reflecting
-
-- Check signal is updated in `connectedCallback()` for initial values
-- Ensure components are using `SignalWatcher` mixin
-
-For more detailed troubleshooting, see the [full documentation](./Tearsheet.md#troubleshooting).

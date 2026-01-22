@@ -238,7 +238,7 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
         </c4p-tearsheet-body>
 
         <c4p-tearsheet-footer>
-          <cds-button-set class="default__action-buttons">
+          <div class="default__action-buttons">
             <cds-button
               kind="ghost"
               size="xl"
@@ -257,7 +257,7 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
             <cds-button size="xl" @click="${this._handleNextButton}">
               ${currentStep < totalSteps - 1 ? 'Next' : 'Submit'}
             </cds-button>
-          </cds-button-set>
+          </div>
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
     `;

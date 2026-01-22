@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.31.0-rc.0`
+## `@carbon/ibm-products-web-components@0.31.0`
 ### Features :rocket:
 - feat: openInStackblitz in web components (#8786)
 - feat: added support for iframes in storybook for autotrack (#8580)

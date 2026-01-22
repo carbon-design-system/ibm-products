@@ -24,3 +24,5 @@ export { default as CDSGuideBanner } from './components/guide-banner/guide-banne
 export { default as CDSGuideBannerElement } from './components/guide-banner/guide-banner-element';
 export { default as CDSCoachmark } from './components/coachmark/coachmark';
 export { default as CDSCoachmarkBeacon } from './components/coachmark/coachmark-beacon/coachmark-beacon';
+export { default as CDSBigNumber } from './components/big-number/big-number';
+export { default as CDSBigNumberSkeleton } from './components/big-number/big-number-skeleton';

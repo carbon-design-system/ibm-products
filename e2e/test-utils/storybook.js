@@ -9,6 +9,23 @@ const { expect } = require('@playwright/test');
 
 async function visitStory(page, options) {
   const { component, story, id, globals, args } = options;
+
+  // Block third-party analytics scripts during tests to prevent accessibility violations
+  // from TrustArc cookie consent and IBM privacy pill that are not part of components being tested
+  await page.route('**/*', (route) => {
+    const url = route.request().url();
+    if (
+      url.includes('1.www.s81c.com/common/stats/ibm-common.js') ||
+      url.includes('1.www.s81c.com/common/carbon/autotrack.min.js') ||
+      url.includes('consent.trustarc.com') ||
+      url.includes('trustarc.com')
+    ) {
+      route.abort();
+    } else {
+      route.continue();
+    }
+  });
+
   let url = getStoryUrl({
     component,
     story,

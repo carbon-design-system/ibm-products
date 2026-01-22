@@ -28,7 +28,7 @@ export const initCarousel = (
   let previousViewIndexStack = [0];
   const refs: Record<number, HTMLElement | null> = {};
 
-  const minHeight = 10; // 10 rem
+  const minHeight = 4; // 4 rem
 
   const { onViewChangeStart, onViewChangeEnd, excludeSwipeSupport } =
     config || {};

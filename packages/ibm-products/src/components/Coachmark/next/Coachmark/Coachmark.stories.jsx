@@ -140,8 +140,9 @@ const TooltipTemplate = ({ ...args }, context) => {
 };
 
 //Floating variant
-const FloatingTemplate = (args) => {
-  const carbonTheme = useCarbonTheme();
+const FloatingTemplate = ({ ...args }, context) => {
+  const sbDocs = context.viewMode !== 'docs';
+  const carbonTheme = sbDocs ? useCarbonTheme() : 'white';
   const [isOpen, setIsOpen] = useState(true);
 
   const handleClose = () => {

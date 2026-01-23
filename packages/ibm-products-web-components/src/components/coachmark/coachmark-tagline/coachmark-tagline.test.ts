@@ -18,14 +18,14 @@ const blockClass = `${prefix}--coachmark-tagline`;
 const defaultProps = {
   title: 'This is a tagline',
   closeIconDescription: 'Close',
-  isOpen: false,
+  open: false,
 } as any;
 
 const template = (props = defaultProps) => html`
   <c4p-coachmark-tagline
     title=${props.title}
     close-icon-description=${props.closeIconDescription}
-    ?is-open=${props.isOpen}
+    ?open=${props.open}
   >
   </c4p-coachmark-tagline>
 `;
@@ -110,29 +110,29 @@ describe('c4p-coachmark-tagline', () => {
     expect(event.detail.originalEvent).to.exist;
   });
 
-  it('reflects isOpen attribute when isOpen is true', async () => {
+  it('reflects open attribute when open is true', async () => {
     const el = (await fixture(
-      template({ ...defaultProps, isOpen: true })
+      template({ ...defaultProps, open: true })
     )) as CDSCoachmarkTagline;
 
     await el.updateComplete;
 
-    expect(el.hasAttribute('is-open')).to.be.true;
-    expect(el.isOpen).to.be.true;
+    expect(el.hasAttribute('open')).to.be.true;
+    expect(el.open).to.be.true;
   });
 
-  it('updates isOpen property', async () => {
+  it('updates open property', async () => {
     const el = (await fixture(
       template({ ...defaultProps })
     )) as CDSCoachmarkTagline;
 
-    expect(el.isOpen).to.be.false;
+    expect(el.open).to.be.false;
 
-    el.isOpen = true;
+    el.open = true;
     await el.updateComplete;
 
-    expect(el.isOpen).to.be.true;
-    expect(el.hasAttribute('is-open')).to.be.true;
+    expect(el.open).to.be.true;
+    expect(el.hasAttribute('open')).to.be.true;
   });
 
   it('dispatches cta-dblclick event when CTA button is double-clicked', async () => {

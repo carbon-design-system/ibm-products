@@ -102,8 +102,6 @@ class CDSCoachmarkTagline extends HostListenerMixin(LitElement) {
     return html`
       <button
         class="${blockClass}__cta"
-        kind="ghost"
-        size="sm"
         @click="${this._handleCtaClick}"
         @dblclick="${this._handleCtaDoubleClick}"
       >

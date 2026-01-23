@@ -16,10 +16,28 @@ const args = {
   closeIconDescription: 'Close',
   open: false,
 };
+
+const argTypes = {
+  title: {
+    control: 'text',
+    description: 'The title of the tagline',
+  },
+  closeIconDescription: {
+    control: 'text',
+    description: 'Tooltip text and aria label for the Close button icon',
+  },
+  open: {
+    control: 'boolean',
+    description: 'Whether the tagline is open',
+  },
+};
+
 export const Default = {
   args,
+  argTypes,
   render: (args: any) => {
     const handleClose = () => {
+      console.log('Close button clicked');
       const tagline = document.querySelector('c4p-coachmark-tagline');
       if (tagline) {
         tagline.remove(); // Remove the tagline from DOM when close is clicked
@@ -36,11 +54,9 @@ export const Default = {
       </style>
       <div style="padding: 20px;">
         <c4p-coachmark-tagline
-          id="coachmark-tagline-example"
           title="${args.title}"
           close-icon-description="${args.closeIconDescription}"
           ?open="${args.open}"
-          aria-label="Coachmark tagline"
           @c4p-coachmark-tagline-close="${handleClose}"
           @c4p-coachmark-tagline-cta-click="${handleCtaClick}"
         >

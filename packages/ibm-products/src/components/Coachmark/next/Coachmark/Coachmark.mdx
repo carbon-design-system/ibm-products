@@ -69,6 +69,7 @@ understand.
 ## Tooltip example usage
 
 <Canvas
+  className="coachmark--docs-demo"
   of={CoachmarkStories.Tooltip}
   additionalActions={[
     {
@@ -76,6 +77,12 @@ understand.
       onClick: () =>
         stackblitzPrefillConfig({
           story: CoachmarkStories.Tooltip,
+          status: {
+            preview: ['Coachmark'],
+          },
+          customImports: [
+            `import { preview__CoachmarkBeacon as CoachmarkBeacon } from '@carbon/ibm-products';`,
+          ],
           styles: CoachmarkStories.default.parameters.styles,
         }),
     },
@@ -85,6 +92,7 @@ understand.
 ## Floating example usage
 
 <Canvas
+  className="coachmark--docs-demo"
   of={CoachmarkStories.Floating}
   additionalActions={[
     {
@@ -92,6 +100,12 @@ understand.
       onClick: () =>
         stackblitzPrefillConfig({
           story: CoachmarkStories.Floating,
+          status: {
+            preview: ['Coachmark'],
+          },
+          customImports: [
+            `import { preview__CoachmarkBeacon as CoachmarkBeacon } from '@carbon/ibm-products';`,
+          ],
           styles: CoachmarkStories.default.parameters.styles,
         }),
     },

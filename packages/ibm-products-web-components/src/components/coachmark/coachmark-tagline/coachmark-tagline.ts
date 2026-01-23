@@ -47,31 +47,13 @@ class CDSCoachmarkTagline extends HostListenerMixin(LitElement) {
   /**
    * Whether the tagline is open.
    */
-  @property({ type: Boolean, reflect: true, attribute: 'is-open' })
-  isOpen = false;
-
-  /**
-   * Button ID for accessibility.
-   */
-  @property({ type: String, attribute: 'button-id' })
-  buttonId?: string = crypto.randomUUID();
-
-  /**
-   * Tab index for the CTA button.
-   */
-  @property({ type: Number, attribute: 'button-tab-index' })
-  buttonTabIndex?: number;
-
-  /**
-   * ARIA expanded state for the CTA button.
-   */
-  @property({ type: Boolean, attribute: 'button-aria-expanded' })
-  buttonAriaExpanded?: boolean = false;
+  @property({ type: Boolean, reflect: true, attribute: 'open' })
+  open = false;
 
   firstUpdated() {
     this.classList.add(blockClass);
-    if (this.isOpen) {
-      this.classList.add(`${blockClass}--is-open`);
+    if (this.open) {
+      this.classList.add(`${blockClass}--open`);
     }
   }
   /**
@@ -122,9 +104,6 @@ class CDSCoachmarkTagline extends HostListenerMixin(LitElement) {
         class="${blockClass}__cta"
         kind="ghost"
         size="sm"
-        id="${this.buttonId || ''}"
-        tabindex="${this.buttonTabIndex ?? 0}"
-        aria-expanded="${this.buttonAriaExpanded ?? false}"
         @click="${this._handleCtaClick}"
         @dblclick="${this._handleCtaDoubleClick}"
       >

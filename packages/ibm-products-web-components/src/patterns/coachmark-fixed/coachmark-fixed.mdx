@@ -1,0 +1,67 @@
+import { Markdown, Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as CoachmarkFixedStories from './coachmark-fixed.stories.ts';
+
+<Meta of={CoachmarkFixedStories} />
+
+# CoachmarkFixedStories
+
+[CoachmarkFixedStories usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/coachmark-fixed/usage/)
+
+## Overview
+
+The CoachmarkFixed pattern acts as a container element for onboarding and should only be used within the scope of a Coachmark.
+
+## Coded examples
+
+Patterns have multiple ways of accomplishing a user need and typically use a
+combination of components with additional design considerations. The pattern
+code we share is meant to serve as an example implementation that can be built
+and extended further.
+
+#### Ingredients
+
+To build this pattern, we recommend including the following components:
+
+- [Coachmark](https://ibm-products-web-components.carbondesignsystem.com/?path=/docs/components-coachmark)
+- [Coachmark Beacon](https://web-components.carbondesignsystem.com/?path=/docs/components-button)
+- [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
+
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/coachmark-fixed)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/coachmark-fixed)
+
+### Example Usage
+
+<Canvas
+  of={CoachmarkFixedStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        window.open('https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/coachmark-fixed')
+    }
+  ]}
+></Canvas>
+
+## Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js';
+
+```
+
+### HTML
+
+```html
+
+```

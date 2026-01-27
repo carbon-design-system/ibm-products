@@ -1,10 +1,10 @@
 import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import * as AboutModalStories from './about-modal.stories';
+import AboutModalStories from './about-modal.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 import helperSource from './about-modal-helpers.ts?raw';
 
-export const customFunctionArr= [
+export const customFunctionArr = [
   helperSource
     .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
     .replace(/export\s+/g, '')

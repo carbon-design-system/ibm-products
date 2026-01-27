@@ -51,12 +51,32 @@ export const Tooltip = {
 
   render: (args) => {
     const handleClick = () => {
-      document.querySelector('c4p-coachmark')?.toggleAttribute('open');
+      const coachmark = document.querySelector('c4p-coachmark');
+      coachmark?.toggleAttribute('open');
+
+      // Focus the Done button when opening
+      if (coachmark?.hasAttribute('open')) {
+        setTimeout(() => {
+          const doneButton = document.querySelector(
+            '.coachmark-body cds-button'
+          );
+          (doneButton as HTMLElement)?.focus();
+        }, 100);
+      }
     };
 
     const handleDone = () => {
       document.querySelector('c4p-coachmark')?.removeAttribute('open');
     };
+
+    // Focus Done button on initial render if open
+    if (args.open) {
+      setTimeout(() => {
+        const doneButton = document.querySelector('.coachmark-body cds-button');
+        (doneButton as HTMLElement)?.focus();
+      }, 100);
+    }
+
     return html`
       <style>
         ${styles}
@@ -98,13 +118,34 @@ export const Floating = {
     align: 'bottom',
   },
   argTypes,
-  render: (args) => {
+  render: (args: any) => {
     const handleClick = () => {
-      document.querySelector('c4p-coachmark')?.toggleAttribute('open');
+      const coachmark = document.querySelector('c4p-coachmark');
+      coachmark?.toggleAttribute('open');
+
+      // Focus the Done button when opening
+      if (coachmark?.hasAttribute('open')) {
+        setTimeout(() => {
+          const doneButton = document.querySelector(
+            '.coachmark-body cds-button'
+          );
+          (doneButton as HTMLElement)?.focus();
+        }, 100);
+      }
     };
+
     const handleDone = () => {
       document.querySelector('c4p-coachmark')?.removeAttribute('open');
     };
+
+    // Focus Done button on initial render if open
+    if (args.open) {
+      setTimeout(() => {
+        const doneButton = document.querySelector('.coachmark-body cds-button');
+        (doneButton as HTMLElement)?.focus();
+      }, 100);
+    }
+
     return html`
       <style>
         ${styles}

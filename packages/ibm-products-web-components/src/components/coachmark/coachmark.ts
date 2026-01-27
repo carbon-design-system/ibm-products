@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { prefix, carbonPrefix } from '../../globals/settings';
+import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './coachmark.scss?lit';
@@ -134,67 +134,6 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         detail: this.floating,
       });
     }
-
-    // Handle focus management for coachmarks that start with open=true
-    if (this.open) {
-      this.handleFocusManagement();
-    }
-  }
-
-  private handleFocusManagement() {
-    setTimeout(() => {
-      const popover = this.shadowRoot?.querySelector(`${carbonPrefix}-popover`);
-      if (!popover) {
-        return;
-      }
-
-      const slot = popover.querySelector(
-        `.${blockClass}--wrapper slot`
-      ) as HTMLSlotElement;
-      if (!slot) {
-        return;
-      }
-
-      const interactiveSelectors =
-        'button, a, input, select, textarea, [tabindex]:not([tabindex="-1"]), cds-button';
-
-      const isVisible = (el: HTMLElement): boolean => {
-        const style = window.getComputedStyle(el);
-        return (
-          style.display !== 'none' &&
-          style.visibility !== 'hidden' &&
-          style.opacity !== '0'
-        );
-      };
-
-      // Search for first focusable element in slotted content(header and body)
-      for (const element of slot.assignedElements({ flatten: true })) {
-        // Check if element itself is focusable
-        if (
-          element.matches(interactiveSelectors) &&
-          isVisible(element as HTMLElement)
-        ) {
-          (element as HTMLElement).focus();
-          return;
-        }
-
-        // Search children for focusable elements - cds-button
-        const focusableChild = Array.from(
-          element.querySelectorAll(interactiveSelectors)
-        ).find((child) => isVisible(child as HTMLElement));
-
-        if (focusableChild) {
-          (focusableChild as HTMLElement).focus();
-          return;
-        }
-      }
-
-      // Fallback to close button in header
-      const closeButton = popover
-        .querySelector(`${prefix}-coachmark-header`)
-        ?.shadowRoot?.querySelector('.close-button') as HTMLElement;
-      closeButton?.focus();
-    }, 200);
   }
 
   updated(changedProps: Map<string, unknown>) {
@@ -203,9 +142,6 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
       if (x !== 0 || y !== 0) {
         this.style.transform = `translate(${x}px, ${y}px)`;
       }
-    }
-    if (changedProps.has('open')) {
-      this.handleFocusManagement();
     }
   }
 

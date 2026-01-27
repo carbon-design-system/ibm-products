@@ -33,3 +33,9 @@
   /* stylelint-disable-next-line carbon/layout-use */
   transform: translateY(-48px);
 }
+
+.page-header-story__wrapper {
+  overflow: auto;
+  block-size: calc(100vh - 3rem);
+  margin-block-start: $spacing-09;
+}

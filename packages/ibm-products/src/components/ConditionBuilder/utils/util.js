@@ -13,13 +13,27 @@ export const HIERARCHICAL_VARIANT = 'Hierarchical';
 
 export const focusThisField = (evt, conditionBuilderRef) => {
   if (evt) {
+    const target = evt.target;
+    const itemRow = evt.target.closest('[role="row"]');
+    const buttonName = evt.target
+      .closest('[role="gridcell"]')
+      ?.querySelector('button').dataset.name;
     setTimeout(() => {
-      manageTabIndexAndFocus(
-        evt.target.closest('[role="gridcell"]')?.querySelector('button'),
-        conditionBuilderRef
+      const selector = itemRow.querySelector(
+        `button[data-name="${buttonName}"]`
       );
-      evt.target.closest('[role="gridcell"]')?.querySelector('button')?.click();
-      evt.target.closest('[role="gridcell"]')?.querySelector('button')?.focus();
+
+      manageTabIndexAndFocus(selector, conditionBuilderRef);
+      if (document.contains(target)) {
+        evt.target
+          .closest('[role="gridcell"]')
+          ?.querySelector('button')
+          ?.click();
+        evt.target
+          .closest('[role="gridcell"]')
+          ?.querySelector('button')
+          ?.focus();
+      }
     }, 0);
   }
 };
@@ -28,7 +42,7 @@ export const focusThisItem = (currentElement, conditionBuilderRef) => {
     manageTabIndexAndFocus(currentElement, conditionBuilderRef);
   }, 0);
 };
-export const traverseClockVise = (
+export const traverseClockwise = (
   eachElem,
   index,
   allElements,
@@ -131,8 +145,13 @@ export const checkForMultiSelectOperator = (condition, config) => {
   );
 };
 //this will close the popover on escape key on search box
-export const onKeyDownHandlerForSearch = (evt, conditionBuilderRef) => {
+export const onKeyDownHandlerForSearch = (
+  evt,
+  conditionBuilderRef,
+  closePopover
+) => {
   if (!evt.currentTarget.value && evt.key === 'Escape') {
     focusThisField(evt, conditionBuilderRef);
+    closePopover?.();
   }
 };

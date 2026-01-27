@@ -4,4 +4,92 @@
 
 <link
   rel="stylesheet"
-  href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+  href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v2/latest/plex.css"
+/>
+
+<script>
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        language: 'en-US',
+        productTitle: 'Carbon for IBM Products',
+        analytics: {
+          category: 'KnowledgeCenter',
+        },
+        ibm: {
+          country: 'US',
+          siteId: 'C4IP',
+        },
+        segment: {
+          autoPageEventSpa: true,
+          enabled: true,
+          env: 'test',
+          key: 'aWg1ug3bDNcSTnde9iwvg1OcvVRzf0JC',
+          coremetrics: false,
+          skipIdentify: true,
+          commonProperties: {
+            productCode: 'C4IP',
+            productTitle: 'Carbon for IBM Products',
+          },
+          pageProperties: {
+            productCode: 'C4IP',
+            productTitle: 'Carbon for IBM Products',
+          },
+        },
+      },
+      category: {
+        primaryCategory: 'PC110',
+      },
+    },
+  };
+</script>
+
+<script
+  type="text/javascript"
+  async="async"
+  src="//1.www.s81c.com/common/carbon/autotrack.min.js"
+></script>
+
+<script>
+  (function () {
+    const isInIframe = () => {
+      try {
+        return window.self !== window.top;
+      } catch (e) {
+        return true;
+      }
+    };
+
+    const conditionallyLoadIBMCommon = () => {
+      if (!isInIframe()) {
+        var ibmCommonScript = document.createElement('script');
+        ibmCommonScript.type = 'text/javascript';
+        ibmCommonScript.defer = true;
+        ibmCommonScript.src = '//1.www.s81c.com/common/stats/ibm-common.js';
+        document.head.appendChild(ibmCommonScript);
+      }
+    };
+
+    const overrideCallback = (eName, eData) => {
+      if (isInIframe()) {
+        window.parent.postMessage(
+          {
+            topic: 'Autotrack',
+            eName,
+            eData,
+          },
+          window.location.origin
+        );
+      } else {
+        window.bluemixAnalytics.trackEvent(eName, eData);
+      }
+    };
+
+    window.onload = () => {
+      conditionallyLoadIBMCommon();
+      if (window.autoTrack) {
+        window.autoTrack.updateCallback(overrideCallback);
+      }
+    };
+  })();
+</script>

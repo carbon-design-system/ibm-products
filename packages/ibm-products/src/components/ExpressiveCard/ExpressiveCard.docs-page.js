@@ -24,7 +24,7 @@ const DocsPage = () => (
         story: stories.LabelOnly,
       },
       {
-        story: stories.WithActionIconHref,
+        story: stories.WithActionIconLink,
       },
       {
         story: stories.WithButtonHref,

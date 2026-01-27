@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2023
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,10 +8,16 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Settings } from '@carbon/react/icons';
-import { IconButton, Layer, Popover, PopoverContent } from '@carbon/react';
+import {
+  IconButton,
+  Layer,
+  Popover,
+  PopoverContent,
+  usePrefix,
+} from '@carbon/react';
 import cx from 'classnames';
 import RowSizeRadioGroup from './RowSizeRadioGroup';
-import { pkg, carbon } from '../../../../../settings';
+import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid__row-size`;
 
@@ -23,6 +29,7 @@ const RowSizeDropdown = ({
 }) => {
   const radioGroupRef = useRef(undefined);
   const [isOpen, setIsOpen] = React.useState(false);
+  const carbonPrefix = usePrefix();
 
   const onCloseHandler = () => {
     setIsOpen(false);
@@ -44,7 +51,7 @@ const RowSizeDropdown = ({
     if (isOpen) {
       const radioGroupParentElement = radioGroupRef?.current;
       const checkedRadioChild = radioGroupParentElement?.querySelector(
-        `.${carbon.prefix}--radio-button:checked`
+        `.${carbonPrefix}--radio-button:checked`
       );
       checkedRadioChild?.focus();
     }

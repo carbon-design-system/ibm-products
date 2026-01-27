@@ -10,7 +10,7 @@ import mdx from './FeatureFlags.mdx';
 import { WithFeatureFlags } from '../../../.storybook/WithFeatureFlags';
 
 export default {
-  title: 'Experimental/FeatureFlags',
+  title: 'Preview/FeatureFlags',
   component: FeatureFlags,
   tags: ['autodocs'],
   parameters: {
@@ -22,7 +22,7 @@ export default {
     (Story) => (
       <WithFeatureFlags
         flags={{
-          'enable-example-flag': true,
+          'enable-test-flag-a': true,
         }}
       >
         <Story />
@@ -32,9 +32,9 @@ export default {
 };
 
 const Template = () => {
-  const enableExampleFlag = useFeatureFlag('enable-example-flag');
+  const enableTestFlagA = useFeatureFlag('enable-test-flag-a');
   return (
-    enableExampleFlag && (
+    enableTestFlagA && (
       <div>I am a feature flagged component that has been enabled.</div>
     )
   );

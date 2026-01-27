@@ -1,3 +1,29 @@
+## `@babel-preset-ibm-cloud-cognitive@0.40.0`
+### Bug fixes :bug:
+- fix: convert `babel` and `jest` config packages to ESM (#8782)
+
+## `@babel-preset-ibm-cloud-cognitive@0.39.0`
+### Bug fixes :bug:
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+
+### Housekeeping :house:
+- chore: retry prerelease publish other packages
+
+## `@babel-preset-ibm-cloud-cognitive@0.29.0`
+### Housekeeping :house:
+- chore: remove redundant upgrade scripts (#7774)
+
+## `@babel-preset-ibm-cloud-cognitive@0.27.0`
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#7593)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2023
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,9 +19,10 @@ import {
   TableBatchAction,
   MenuButton,
   MenuItem,
+  usePrefix,
 } from '@carbon/react';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
-import { pkg, carbon } from '../../../settings';
+import { pkg } from '../../../settings';
 import cx from 'classnames';
 import { handleSelectAllRowData } from './addons/stateReducer';
 import { DataGridState, DatagridRowProps } from '../types';
@@ -53,6 +54,7 @@ const DatagridBatchActionsToolbar = (
     batchActionMenuButtonLabel,
     translateWithIdBatchActions,
   } = datagridState;
+  const carbonPrefix = usePrefix();
   const [availableRowsCount, setAvailableRowsCount] = useState(rows.length);
 
   const batchActionMenuButtonLabelText = batchActionMenuButtonLabel ?? 'More';
@@ -74,23 +76,23 @@ const DatagridBatchActionsToolbar = (
   useEffect(() => {
     if (totalSelected === 1 && !receivedInitialWidth) {
       const batchActionListWidth = ref?.current?.querySelector(
-        `.${carbon.prefix}--action-list`
+        `.${carbonPrefix}--action-list`
       ).offsetWidth;
       setInitialListWidth(batchActionListWidth);
       setReceivedInitialWidth(true);
     }
-  }, [totalSelected, receivedInitialWidth, ref]);
+  }, [totalSelected, receivedInitialWidth, ref, carbonPrefix]);
 
   useEffect(() => {
     const summaryWidth = ref?.current.querySelector(
-      `.${carbon.prefix}--batch-summary`
+      `.${carbonPrefix}--batch-summary`
     ).offsetWidth;
     if (width < summaryWidth + initialListWidth + 32) {
       setDisplayAllInMenu(true);
     } else {
       setDisplayAllInMenu(false);
     }
-  }, [width, ref, initialListWidth]);
+  }, [width, ref, initialListWidth, carbonPrefix]);
 
   const getSelectedRowData = () => {
     if (selectedKeys.length === 0) {
@@ -220,7 +222,7 @@ const DatagridBatchActionsToolbar = (
                 renderIcon={batchAction.renderIcon}
                 onClick={(event) => onClickHandler(event, batchAction)}
                 className={cx({
-                  [`${carbon.prefix}--noLabel`]:
+                  [`${carbonPrefix}--noLabel`]:
                     !batchAction.label || batchAction.label === '',
                 })}
                 iconDescription={batchAction.label}

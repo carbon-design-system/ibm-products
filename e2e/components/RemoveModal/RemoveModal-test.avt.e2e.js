@@ -14,7 +14,7 @@ test.describe('RemoveModal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'RemoveModal',
-      id: 'ibm-products-patterns-remove-removemodal--standard',
+      id: 'patterns-prebuilt-patterns-removemodal--standard',
       globals: {
         carbonTheme: 'white',
       },

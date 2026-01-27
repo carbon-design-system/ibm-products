@@ -1,16 +1,17 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useCallback, useLayoutEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 import cx from 'classnames';
-import { TableSelectRow } from '@carbon/react';
+import { TableSelectRow, usePrefix } from '@carbon/react';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
 import { selectionColumnId } from './common-column-ids';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import { handleToggleRowSelected } from './Datagrid/addons/stateReducer';
 import { ColumnInstance, Hooks, TableInstance } from 'react-table';
 import { DataGridState } from './types';
@@ -64,6 +65,7 @@ const useSelectRows = (hooks: Hooks) => {
 };
 
 const useHighlightSelection = (hooks) => {
+  const carbonPrefix = usePrefix();
   const getRowProps = (props, { row }) => {
     const { checked } = row.getToggleRowSelectedProps();
     return [
@@ -72,7 +74,7 @@ const useHighlightSelection = (hooks) => {
         className: cx([
           `${blockClass}__carbon-row`,
           {
-            [`${carbon.prefix}--data-table--selected`]: checked,
+            [`${carbonPrefix}--data-table--selected`]: checked,
             [`${blockClass}__active-row`]: checked,
           },
         ]),
@@ -100,7 +102,7 @@ const SelectRow = (datagridState) => {
 
   const [windowSize, setWindowSize] = useState<number>();
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     setWindowSize(window.innerWidth);
     function updateSize() {
       setWindowSize(window.innerWidth);

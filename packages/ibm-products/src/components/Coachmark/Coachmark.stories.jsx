@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,16 +7,16 @@
 
 import React, { useEffect, useRef } from 'react';
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 import { Crossroads } from '@carbon/react/icons';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import {
-  Coachmark,
-  CoachmarkOverlayElement,
-  CoachmarkOverlayElements,
-  CoachmarkBeacon,
-  CoachmarkButton,
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
+  previewCandidate__CoachmarkBeacon as CoachmarkBeacon,
+  previewCandidate__CoachmarkButton as CoachmarkButton,
 } from '..';
 
 import { BEACON_KIND, COACHMARK_OVERLAY_KIND } from './utils/enums';
@@ -24,11 +24,12 @@ import { BEACON_KIND, COACHMARK_OVERLAY_KIND } from './utils/enums';
 import mdx from './Coachmark.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark',
+  title: 'Deprecated/Coachmark/Coachmark',
   component: Coachmark,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   argTypes: {
     theme: {
       control: { type: null },
@@ -74,7 +75,30 @@ export default {
     className: {
       control: { type: null },
     },
+    closeIconDescription: {
+      control: { type: 'text' },
+      description: 'Tooltip text and aria label for the Close button icon.',
+    },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version. Please migrate to {/* cspell:disable-next-line */}
+            <a href="/?path=/docs/preview-onboarding-coachmark--overview">
+              composable Coachmark
+            </a>
+            .
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
   parameters: {
     styles,
     docs: {
@@ -105,12 +129,12 @@ const Template = (args) => {
   );
 
   return !['fixed', 'floating', 'stacked'].includes(args.overlayKind) ? (
-    <div style={{ width: '4000px', height: '2000px' }}>
+    <div style={{ width: '1000px', height: '500px' }}>
       <div
         style={{
           position: 'absolute',
-          top: '1000px',
-          left: '2000px',
+          top: '250px',
+          left: '150px',
         }}
         ref={ref}
       >
@@ -130,6 +154,7 @@ export const tooltip = Template.bind({});
 tooltip.args = {
   theme: 'dark',
   align: 'bottom',
+  closeIconDescription: 'Close',
   positionTune: { x: 0, y: 0 },
   target: (
     <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
@@ -140,6 +165,7 @@ export const floating = Template.bind({});
 floating.args = {
   theme: 'dark',
   align: 'bottom',
+  closeIconDescription: 'Close',
   overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
   target: (
     <CoachmarkButton

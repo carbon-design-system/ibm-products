@@ -6,7 +6,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { StatusIndicator, StatusIndicatorStep } from '.';
 import mdx from './StatusIndicator.mdx';
 

@@ -14,12 +14,12 @@ const DocsPage = () => {
     <StoryDocsPage
       altGuidelinesHref={[
         {
-          href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/cascade/',
-          label: 'Cascade usage guidelines',
+          href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/cascade/usage',
+          label: 'Usage guidelines',
         },
         {
           href: 'https://carbondesignsystem.com/elements/motion/overview/',
-          label: 'Carbon Motion overview',
+          label: 'Carbon motion overview',
         },
       ]}
       blocks={[

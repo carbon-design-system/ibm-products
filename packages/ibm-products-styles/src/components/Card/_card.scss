@@ -20,11 +20,13 @@
 $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class} {
+  border: 1px solid transparent;
   background-color: $layer-01;
   color: $text-primary;
 }
 
 .#{$block-class}__clickable {
+  border-color: $border-tile-01;
   cursor: pointer;
   // stylelint-disable-next-line carbon/motion-easing-use
   transition: background-color $duration-fast-02;

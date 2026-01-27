@@ -23,6 +23,7 @@ import {
   getActionToolbarItems,
   getActionItems,
   getSlug,
+  getDecorator,
   getNavigation,
   influencers,
 } from './utils';
@@ -173,6 +174,46 @@ describe('c4p-tearsheet', () => {
     expect(slug).toBeDefined();
     // Expect the default slug size is sm
     expect(slug.size).toBe('sm');
+  });
+
+  it('should render an ai label', async () => {
+    const tearsheet = (await fixture(
+      template(defaultProps, getDecorator('WITH_AI_LABEL'))
+    )) as CDSTearsheet;
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    document.body.offsetHeight;
+
+    expect(tearsheet?.open).toBeTruthy();
+    // Ensure ai label is present
+    expect(tearsheet?._hasAILabel).toBeTruthy();
+
+    // Locate ai label element
+    const aiLabel = tearsheet.querySelector('cds-ai-label') as any;
+
+    // Expect the ai label element is present
+    expect(aiLabel).toBeDefined();
+    // Expect the default ai label size is sm
+    expect(aiLabel.size).toBe('sm');
+  });
+
+  it('should render a non ai label decorator', async () => {
+    const tearsheet = (await fixture(
+      template(defaultProps, getDecorator('NON_AI_LABEL_DECORATOR'))
+    )) as CDSTearsheet;
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    document.body.offsetHeight;
+
+    expect(tearsheet?.open).toBeTruthy();
+    // Ensure ai label is present
+    expect(tearsheet?._hasDecorator).toBeTruthy();
+
+    // Locate ai label element
+    const decorator = tearsheet.querySelector('cds-toggletip') as any;
+
+    // Expect the ai label element is present
+    expect(decorator).toBeDefined();
   });
 
   it('should render navigation button', async () => {

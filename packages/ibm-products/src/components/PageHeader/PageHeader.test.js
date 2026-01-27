@@ -17,14 +17,7 @@ import { Tab, Tabs, TabList } from '@carbon/react';
 import { Lightning, Bee } from '@carbon/react/icons';
 
 import { PageHeader } from '.';
-import {
-  mockHTMLElement,
-  expectMultipleError,
-  expectWarn,
-  deprecated,
-  required,
-  checkLogging,
-} from '../../global/js/utils/test-helper';
+import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 import { TYPES as tagTypes } from '../TagSet/constants';
 
@@ -199,10 +192,8 @@ const testPropsUserDefined = {
 };
 
 describe('PageHeader', () => {
-  const { ResizeObserver } = window;
-  let mockElement;
   const mocks = [];
-  let warn;
+  let mockElement, warn;
 
   window.innerWidth = 2000;
   window.innerHeight = 1080;
@@ -226,21 +217,6 @@ describe('PageHeader', () => {
       id: 'uuidv4',
       mock: uuidv4.mockImplementation(() => 'test-id'),
     });
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-    window.matchMedia = jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(), // Deprecated
-      removeListener: jest.fn(), // Deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }));
   });
 
   afterEach(() => {
@@ -248,7 +224,6 @@ describe('PageHeader', () => {
       mock.mock.mockRestore();
     });
     mockElement.mockRestore();
-    window.ResizeObserver = ResizeObserver;
     warn.mockRestore();
   });
 
@@ -315,6 +290,7 @@ describe('PageHeader', () => {
     expect(document.querySelectorAll(`.${carbon.prefix}--tabs`)).toHaveLength(
       1
     );
+    // Commenting until issue with Tabs in React 19 is resolved
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
@@ -643,27 +619,6 @@ describe('PageHeader', () => {
     screen.getByRole('region');
   });
 
-  it('ActionBar without overflow aria label', async () =>
-    expectMultipleError(
-      [
-        required('actionBarOverflowAriaLabel', 'PageHeader'),
-        required('overflowAriaLabel', 'ActionBar'),
-        // required('ariaLabel', 'OverflowMenu'),
-      ],
-      () => {
-        const { title } = testProps;
-        render(
-          <PageHeader
-            {...{
-              title,
-              actionBarItems,
-            }}
-            aria-label="Page header" // gives section role 'region'
-          />
-        );
-      }
-    ));
-
   it('Title shows as loading', async () => {
     render(
       <PageHeader
@@ -679,26 +634,6 @@ describe('PageHeader', () => {
       `.${carbon.prefix}--skeleton__text`
     );
     expect(skeletons).toHaveLength(3);
-  });
-
-  it('Breadcrumb without overflow aria label', async () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    render(
-      <PageHeader
-        {...{
-          breadcrumbs,
-        }}
-        aria-label="Page header" // gives section role 'region'
-      />
-    );
-
-    checkLogging(
-      error,
-      /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `BreadcrumbWithOverflow`/
-    );
-
-    jest.spyOn(console, 'error').mockRestore();
   });
 
   it('Background is not there with withoutBackground is true', async () => {
@@ -720,25 +655,24 @@ describe('PageHeader', () => {
     expect(backgroundOpacity).toBe('0');
   });
 
-  it('Works, for now, with deprecated props', async () =>
-    expectWarn(deprecated('hasBackgroundAlways', 'PageHeader'), () => {
-      const dataTestId = uuidv4();
-      render(
-        <PageHeader
-          data-testid={dataTestId}
-          title={testProps.title}
-          hasBackgroundAlways={false}
-        />
-      );
+  it('Works, for now, with deprecated props', async () => {
+    const dataTestId = uuidv4();
+    render(
+      <PageHeader
+        data-testid={dataTestId}
+        title={testProps.title}
+        hasBackgroundAlways={false}
+      />
+    );
 
-      const header = screen.getByTestId(dataTestId);
+    const header = screen.getByTestId(dataTestId);
 
-      // When hasBackgroundAlways is false this should result in the value 0 for opacity
-      const backgroundOpacity = window
-        .getComputedStyle(header)
-        .getPropertyValue(`--${prefix}--page-header--background-opacity`);
-      expect(backgroundOpacity).toBe('0');
-    }));
+    // When hasBackgroundAlways is false this should result in the value 0 for opacity
+    const backgroundOpacity = window
+      .getComputedStyle(header)
+      .getPropertyValue(`--${prefix}--page-header--background-opacity`);
+    expect(backgroundOpacity).toBe('0');
+  });
 
   it('PageHeader grid settings narrow and fullWidth', async () => {
     const dataTestId = uuidv4();

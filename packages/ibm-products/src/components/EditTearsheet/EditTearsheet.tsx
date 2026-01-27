@@ -148,7 +148,7 @@ interface EditAction extends TearsheetAction {
  * Use Tearsheet with medium to complex edits. See usage guidance for further information.
  * @deprecated
  */
-export let EditTearsheet = forwardRef(
+export const EditTearsheet = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -291,7 +291,6 @@ EditTearsheet.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-EditTearsheet = pkg.checkComponentEnabled(EditTearsheet, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

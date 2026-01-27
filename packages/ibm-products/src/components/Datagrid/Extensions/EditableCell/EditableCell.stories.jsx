@@ -8,7 +8,7 @@
 
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   Datagrid,
   useDatagrid,
@@ -28,7 +28,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
 
 export default {
-  title: 'Deprecated/Datagrid/Datagrid/EditableCell',
+  title: 'Deprecated/Datagrid/EditableCell',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

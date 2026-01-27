@@ -4,7 +4,8 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { useRef, useLayoutEffect } from 'react';
+import { useRef } from 'react';
+import { useIsomorphicEffect } from './useIsomorphicEffect';
 import { scrollableAncestor } from '../utils/scrollableAncestor';
 
 const windowExists = typeof window !== `undefined`;
@@ -44,7 +45,7 @@ const useTargetScroll = function (target, effect, deps, throttleInterval) {
     throttleTimeout.current = null;
   };
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     const handleScroll = () => {
       if (throttleInterval) {
         if (throttleTimeout.current === null) {

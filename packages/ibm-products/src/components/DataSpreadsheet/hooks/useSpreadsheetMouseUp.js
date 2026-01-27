@@ -32,6 +32,10 @@ export const useSpreadsheetMouseUp = ({
 }) => {
   useEffect(() => {
     const handleMouseUp = (event) => {
+      // Only handle mouseup if it occurred within this instance
+      if (!ref.current?.contains(event.target)) {
+        return;
+      }
       let isHoldingColumn = false;
       if (
         selectionAreas?.[0]?.header &&

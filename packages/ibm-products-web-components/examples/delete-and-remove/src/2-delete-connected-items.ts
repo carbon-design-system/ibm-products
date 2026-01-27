@@ -20,7 +20,8 @@ import '@carbon/web-components/es/components/link/link.js';
 
 import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
-import Launch16 from '@carbon/web-components/es/icons/launch/16';
+import Launch16 from '@carbon/icons/es/launch/16';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 
 // example implementation of high impact deletion with connected items pattern
 @customElement('delete-connected-items')
@@ -134,7 +135,7 @@ export class DeleteConnectedItems extends LitElement {
               (item) =>
                 html`<li>
                   <cds-link>
-                    ${item.name} ${Launch16({ slot: 'icon' })}
+                    ${item.name} ${iconLoader(Launch16, { slot: 'icon' })}
                   </cds-link>
                 </li>`
             )}

@@ -1,6 +1,7 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as FullPageErrorStories from './full-page-error.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta of={FullPageErrorStories} />
 
@@ -41,6 +42,21 @@ import '@carbon/ibm-products-web-components/es/components/full-page-error/index.
   <a class="cds--link" href="#">– Forwarding link 2</a>
 </c4p-full-page-error>
 ```
+
+### Example Usage
+<Canvas
+  of={FullPageErrorStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FullPageErrorStories.Default,
+          componentName:'full-page-error'
+        }),
+    },
+  ]}
+></Canvas>
 
 ## `<c4p-full-page-error>` attributes, properties and events
 

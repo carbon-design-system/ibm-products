@@ -22,14 +22,6 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
-  // The Carousel component uses IntersectionObserver.
-  beforeEach(() => {
-    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
-      observe: () => null,
-      unobserve: () => null,
-    }));
-  });
-
   it('renders a component Carousel', () => {
     render(<Carousel data-testid={dataTestId}> </Carousel>);
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);

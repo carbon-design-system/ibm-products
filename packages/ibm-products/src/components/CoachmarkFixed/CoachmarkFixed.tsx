@@ -15,7 +15,10 @@ import React, {
 } from 'react';
 
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
-import { CoachmarkContext } from '../Coachmark/utils/context';
+import {
+  CoachmarkContext,
+  CoachmarkContextType,
+} from '../Coachmark/utils/context';
 import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
 import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
 // Other standard imports.
@@ -70,6 +73,10 @@ export interface CoachmarkFixedProps {
    * Determines the theme of the component.
    */
   theme?: 'light' | 'dark';
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
 }
 
 const defaults = {
@@ -83,8 +90,9 @@ const defaults = {
  * within the UI that may not be intuitive but are important for the
  * user to gain understanding of the product's main value and discover new use cases.
  * This variant allows the a coachmark overlay to be displayed by interacting with the tagline.
+ * @deprecated This component is deprecated.
  */
-export let CoachmarkFixed = React.forwardRef<
+export const CoachmarkFixed = React.forwardRef<
   HTMLDivElement,
   CoachmarkFixedProps
 >(
@@ -96,6 +104,7 @@ export let CoachmarkFixed = React.forwardRef<
       portalTarget,
       tagline = defaults.tagline,
       theme = defaults.theme,
+      closeIconDescription,
       // Collect any other property values passed in.
       ...rest
     },
@@ -157,7 +166,7 @@ export let CoachmarkFixed = React.forwardRef<
       };
     }, [escFunction]);
 
-    const contextValue = {
+    const contextValue: CoachmarkContextType = {
       buttonProps: {
         'aria-expanded': isOpen,
         tabIndex: 0,
@@ -172,7 +181,7 @@ export let CoachmarkFixed = React.forwardRef<
       targetRect: targetRect,
       targetOffset: targetOffset,
       isOpen: isOpen,
-      tacos: 'tacos',
+      closeIconDescription,
     };
 
     // instead of toggling on/off,
@@ -241,8 +250,13 @@ export let CoachmarkFixed = React.forwardRef<
   }
 );
 
+/**@ts-ignore*/
+CoachmarkFixed.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkFixed = pkg.checkComponentEnabled(CoachmarkFixed, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -262,6 +276,10 @@ CoachmarkFixed.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription: PropTypes.string,
+  /**
    * Function to call when the Coachmark closes.
    */
   onClose: PropTypes.func,
@@ -276,11 +294,11 @@ CoachmarkFixed.propTypes = {
    * element is hidden or component is unmounted, the Coachmark will disappear.
    */
   portalTarget: PropTypes.string,
+
   /**
    * The tagline title which will be fixed to the bottom right of the window and will serve as the display trigger.
    */
   tagline: PropTypes.string.isRequired,
-
   /**
    * Determines the theme of the component.
    */

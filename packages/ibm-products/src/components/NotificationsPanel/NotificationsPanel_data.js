@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 /**

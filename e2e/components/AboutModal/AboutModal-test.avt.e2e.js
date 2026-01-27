@@ -15,7 +15,7 @@ test.describe('AboutModal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'AboutModal',
-      id: 'ibm-products-components-about-modal-aboutmodal--about-modal',
+      id: 'components-aboutmodal--default',
       globals: {
         carbonTheme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('AboutModal @avt', () => {
   test('@avt-initially-focus-close-button', async ({ page }) => {
     await visitStory(page, {
       component: 'AboutModal',
-      id: 'ibm-products-components-about-modal-aboutmodal--about-modal',
+      id: 'components-aboutmodal--default',
       globals: {
         carbonTheme: 'white',
       },
@@ -40,7 +40,7 @@ test.describe('AboutModal @avt', () => {
   test('@avt-open-close-with-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'AboutModal',
-      id: 'ibm-products-components-about-modal-aboutmodal--about-modal-with-all-props-set',
+      id: 'components-aboutmodal--with-additional-content',
       globals: {
         carbonTheme: 'white',
       },

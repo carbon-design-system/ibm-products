@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2024
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -35,9 +35,7 @@ import {
 import { APIKeyDownloader } from './APIKeyDownloader';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { isRequiredIf } from '../../global/js/utils/props-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { APIKeyModalProps } from './APIKeyModal.types';
 import { useFocus, usePreviousValue } from '../../global/js/hooks';
@@ -50,7 +48,7 @@ const defaults = {
   customSteps: [],
 };
 
-export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
+export const APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -147,7 +145,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     useEffect(() => {
       if (open) {
         // Focusing the first element or selectorPrimaryFocus element
-        claimFocus();
+        setTimeout(() => claimFocus(), 0);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [modalRef, open, firstElement]);
@@ -403,20 +401,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
   }
 );
 
-const customStepsRequiredProps = (type) =>
-  isRequiredIf(
-    type,
-    ({ customSteps }) => customSteps && customSteps.length > 1
-  );
-
-const editRequiredProps = (type) =>
-  isRequiredIf(type, ({ editing }) => editing);
-
-const downloadRequiredProps = (type) =>
-  isRequiredIf(type, ({ hasDownloadLink }) => hasDownloadLink);
-
 // Return a placeholder if not released and not enabled by feature flag
-APIKeyModal = pkg.checkComponentEnabled(APIKeyModal, componentName);
 
 export const deprecatedProps = {
   /**
@@ -496,31 +481,31 @@ APIKeyModal.propTypes = {
   /**
    * designates the name of downloadable json file with the key. if not specified will default to 'apikey'
    */
-  downloadFileName: downloadRequiredProps(PropTypes.string),
+  downloadFileName: PropTypes.string,
   /**
    * designates the file type for the downloadable key
    */
-  downloadFileType: downloadRequiredProps(PropTypes.oneOf(['txt', 'json'])),
+  downloadFileType: PropTypes.oneOf(['txt', 'json']),
   /**
    * aria-label for the download link
    */
-  downloadLinkLabel: downloadRequiredProps(PropTypes.string),
+  downloadLinkLabel: PropTypes.string,
   /**
    * anchor text for the download link
    */
-  downloadLinkText: downloadRequiredProps(PropTypes.string),
+  downloadLinkText: PropTypes.string,
   /**
    * text for the edit button
    */
-  editButtonText: editRequiredProps(PropTypes.string),
+  editButtonText: PropTypes.string,
   /**
    * designates if the edit request was successful
    */
-  editSuccess: editRequiredProps(PropTypes.bool),
+  editSuccess: PropTypes.bool,
   /**
    * title for a successful edit
    */
-  editSuccessMessage: editRequiredProps(PropTypes.string),
+  editSuccessMessage: PropTypes.string,
   /**
    * designates if the modal is in the edit mode
    */
@@ -603,7 +588,7 @@ APIKeyModal.propTypes = {
   /**
    * text that displays in the primary button when using custom steps to indicate to the user that there is a next step
    */
-  nextStepButtonText: customStepsRequiredProps(PropTypes.string),
+  nextStepButtonText: PropTypes.string,
   /**
    * handler for on modal close
    */
@@ -632,7 +617,7 @@ APIKeyModal.propTypes = {
   /**
    * text that displays in the secondary button when using custom steps to indicate to the user that there is a previous step
    */
-  previousStepButtonText: customStepsRequiredProps(PropTypes.string),
+  previousStepButtonText: PropTypes.string,
   /**
    * label text that's displayed when hovering over visibility toggler to show key
    */

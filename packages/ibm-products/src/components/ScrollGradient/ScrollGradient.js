@@ -5,22 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
 import React, { useState, useRef, useEffect } from 'react';
-// Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import { ScrollStates, useIsOverflow } from './constants';
 import { useIsomorphicEffect } from '../../global/js/hooks';
+import { usePrefix } from '@carbon/react';
+
 const blockClass = `${pkg.prefix}--scroll-gradient`;
 const componentName = 'ScrollGradient';
 
 // Default values for props
 const defaults = {
-  color: `var(--${carbon.prefix}-layer-01)`,
   hideStartGradient: false,
   onScroll: () => {},
   getScrollElementRef: () => {},
@@ -34,7 +33,7 @@ export let ScrollGradient = React.forwardRef(
     {
       children,
       className,
-      color = defaults.color,
+      color,
       onScroll = defaults.onScroll,
       scrollElementClassName,
       getScrollElementRef = defaults.getScrollElementRef,
@@ -43,10 +42,13 @@ export let ScrollGradient = React.forwardRef(
     },
     ref
   ) => {
-    const intersectionStartRef = useRef();
-    const intersectionEndRef = useRef();
-    const intersectionLeftRef = useRef();
-    const intersectionRightRef = useRef();
+    const intersectionStartRef = useRef(undefined);
+    const intersectionEndRef = useRef(undefined);
+    const intersectionLeftRef = useRef(undefined);
+    const intersectionRightRef = useRef(undefined);
+
+    const carbonPrefix = usePrefix();
+    const fallbackColor = `var(--${carbonPrefix}-layer-01)`;
 
     const scrollContainer = useRef(undefined);
     const contentChildrenContainer = useRef(undefined);
@@ -74,18 +76,18 @@ export let ScrollGradient = React.forwardRef(
     useIsomorphicEffect(() => {
       // start vertical styles
       startVerticalRef.current.style.right = gradientRight;
-      startVerticalRef.current.style.backgroundImage = `linear-gradient(0deg, transparent, ${color} 90%)`;
+      startVerticalRef.current.style.backgroundImage = `linear-gradient(0deg, transparent, ${color ?? fallbackColor} 90%)`;
       // start horizontal styles
-      startHorizontalRef.current.backgroundImage = `linear-gradient(-90deg, transparent, ${color} 90%)`;
+      startHorizontalRef.current.backgroundImage = `linear-gradient(-90deg, transparent, ${color ?? fallbackColor} 90%)`;
       startHorizontalRef.current.bottom = gradientBottom;
       // end vertical styles
       endVerticalRef.current.style.right = gradientRight;
       endVerticalRef.current.style.bottom = gradientBottom;
-      endVerticalRef.current.style.backgroundImage = `linear-gradient(0deg, ${color} 10%, transparent)`;
+      endVerticalRef.current.style.backgroundImage = `linear-gradient(0deg, ${color ?? fallbackColor} 10%, transparent)`;
       // end horizontal styles
       endHorizontalRef.current.style.right = gradientRight;
       endHorizontalRef.current.style.bottom = gradientBottom;
-      endHorizontalRef.current.style.backgroundImage = `linear-gradient(-90deg, ${color} 10%, transparent)`;
+      endHorizontalRef.current.style.backgroundImage = `linear-gradient(-90deg, ${color ?? fallbackColor} 10%, transparent)`;
     }, [color, gradientRight, gradientBottom]);
 
     const setGradientOnIntersection = (entry, gradientRef) => {
@@ -166,12 +168,10 @@ export let ScrollGradient = React.forwardRef(
         role="presentation"
         {...getDevtoolsProps(componentName)}
       >
-        {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
         <div
           onScroll={onScroll}
           ref={setRefs}
           className={cx(`${blockClass}__content`, scrollElementClassName)}
-          tabIndex={0}
         >
           <span ref={intersectionStartRef} data-start-vertical />
           <span ref={intersectionLeftRef} data-start-horizontal />

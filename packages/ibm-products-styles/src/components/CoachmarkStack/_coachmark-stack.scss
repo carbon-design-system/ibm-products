@@ -31,6 +31,7 @@
 $elements-block-class: #{c4p-settings.$pkg-prefix}--coachmark-stack-element;
 $overlay-class: #{c4p-settings.$pkg-prefix}--coachmark-overlay;
 $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
+$style-stack-home: #{c4p-settings.$pkg-prefix}--coachmark-stack;
 
 .#{$elements-block-class} {
   $block: &;
@@ -46,7 +47,7 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
   &--is-mounted {
     inset-block-end: 0;
     /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
-    transition: $duration-moderate-02 motion(exit, productive);
+    transition: $duration-fast-02 motion(exit, productive);
     @media (prefers-reduced-motion) {
       transition: none;
     }
@@ -121,4 +122,14 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+}
+
+.#{$style-stack-home}--scaled-home {
+  opacity: 0.8;
+  transform: scale(0.9);
+}
+
+.#{$style-stack-home}--unscaled-home {
+  opacity: 1;
+  transform: none;
 }

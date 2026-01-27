@@ -14,7 +14,7 @@ test.describe('NonLinearReading @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'NonLinearReading',
-      id: 'experimental-onboarding-non-linear-reading-nonlinearreading--single-level',
+      id: 'preview-candidate-onboarding-nonlinearreading--single-level',
       globals: {
         carbonTheme: 'white',
       },

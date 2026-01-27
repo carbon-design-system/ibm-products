@@ -1,5 +1,10 @@
 # Canary explained
 
+> [!CAUTION] The canary enabling mechanism is now deprecated. Components are
+> exported prefixed with their corresponding
+> [PDLC status](https://carbondesignsystem.com/contributing/product-development-lifecycle/#definition-of-done).
+> These docs are no longer valid and will be removed in the future.
+
 In case you were thinking what, why or how with regards to the Canary lines in
 the components...
 

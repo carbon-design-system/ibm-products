@@ -16,7 +16,7 @@ test.describe('UserAvatar @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'UserAvatar',
-      id: 'ibm-products-components-user-avatar-useravatar--default',
+      id: 'components-useravatar--default',
       globals: {
         carbonTheme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('UserAvatar @avt', () => {
   test('@avt-focus-state', async ({ page }) => {
     await visitStory(page, {
       component: 'UserAvatar',
-      id: 'ibm-products-components-user-avatar-useravatar--default',
+      id: 'components-useravatar--default',
       globals: {
         carbonTheme: 'white',
       },
@@ -45,7 +45,7 @@ test.describe('UserAvatar @avt', () => {
   test('@avt-hover-state', async ({ page }) => {
     await visitStory(page, {
       component: 'UserAvatar',
-      id: 'ibm-products-components-user-avatar-useravatar--default',
+      id: 'components-useravatar--default',
       globals: {
         carbonTheme: 'white',
       },

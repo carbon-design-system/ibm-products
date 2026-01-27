@@ -6,17 +6,18 @@
  */
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { pkg } from '../../settings';
 import PropTypes from 'prop-types';
 
 import {
+  InterstitialScreenContext,
+  blockClass,
   ActionType,
   disableButtonConfigType,
-  InterstitialScreenContext,
-} from './InterstitialScreen';
+} from './context';
 import { Button, InlineLoading, ModalFooter } from '@carbon/react';
 import { clamp } from '../../global/js/utils/clamp';
 import { ArrowRight } from '@carbon/react/icons';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 type actionButtonRendererArgs = {
   handleGotoStep?: (value: number) => void;
@@ -70,8 +71,10 @@ const InterstitialScreenFooter = React.forwardRef<
     startButtonLabel = 'Get Started',
     actionButtonRenderer,
     onAction,
+    ...rest
   } = props;
-  const blockClass = `${pkg.prefix}--interstitial-screen`;
+
+  const footerBlockClass = `${blockClass}--footer`;
   const {
     handleClose,
     progStep,
@@ -80,9 +83,8 @@ const InterstitialScreenFooter = React.forwardRef<
     disableButtonConfig,
     isFullScreen,
   } = useContext(InterstitialScreenContext);
-  const startButtonRef = useRef<HTMLElement | undefined>(undefined);
-  const nextButtonRef = useRef<HTMLElement | undefined>(undefined);
-
+  const startButtonRef = useRef<HTMLButtonElement | null>(null);
+  const nextButtonRef = useRef<HTMLButtonElement | null>(null);
   const [loadingAction, setLoadingAction] = useState('');
 
   const isMultiStep = !!stepCount;
@@ -99,7 +101,7 @@ const InterstitialScreenFooter = React.forwardRef<
   const handleAction = async (actionType: ActionType) => {
     setLoadingAction(actionType);
 
-    await onAction?.(actionType, {
+    const abortContinue = await onAction?.(actionType, {
       handleGotoStep,
       progStep,
       stepCount,
@@ -107,6 +109,11 @@ const InterstitialScreenFooter = React.forwardRef<
     });
 
     setLoadingAction('');
+
+    // Skip navigation if onAction explicitly returns true
+    if (abortContinue) {
+      return;
+    }
 
     if (actionType === 'next' || actionType === 'back') {
       const stepDelta = actionType === 'next' ? 1 : -1;
@@ -135,7 +142,7 @@ const InterstitialScreenFooter = React.forwardRef<
   }, [loadingAction, isMultiStep, progStep, progStepCeil]);
 
   const getFooterContent = () => (
-    <div ref={ref} className={`${blockClass}--footer ${className}`}>
+    <>
       {isMultiStep && skipButtonLabel !== '' && (
         <Button
           className={`${blockClass}--skip-btn`}
@@ -167,7 +174,7 @@ const InterstitialScreenFooter = React.forwardRef<
         {isMultiStep && progStep < progStepCeil && (
           <Button
             className={`${blockClass}--next-btn`}
-            renderIcon={loadingAction !== 'next' ? ArrowRight : null}
+            renderIcon={loadingAction !== 'next' ? ArrowRight : undefined}
             ref={nextButtonRef}
             size="lg"
             title={nextButtonLabel}
@@ -193,7 +200,7 @@ const InterstitialScreenFooter = React.forwardRef<
           </Button>
         )}
       </div>
-    </div>
+    </>
   );
   if (actionButtonRenderer) {
     return (
@@ -209,9 +216,18 @@ const InterstitialScreenFooter = React.forwardRef<
   }
 
   return isFullScreen ? (
-    getFooterContent()
+    <div
+      ref={ref}
+      className={`${footerBlockClass} ${className}`}
+      {...getDevtoolsProps('InterstitialScreenFooter')}
+      {...(isFullScreen ? rest : {})}
+    >
+      {getFooterContent()}
+    </div>
   ) : (
-    <ModalFooter ref={ref}>{getFooterContent()}</ModalFooter>
+    <ModalFooter className={footerBlockClass} ref={ref} {...rest}>
+      {getFooterContent()}
+    </ModalFooter>
   );
 });
 

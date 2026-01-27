@@ -7,7 +7,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/styles';
+@use '@carbon/styles' with (
+  $font-path: '@ibm/plex'
+);
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/themes/scss/themes';
 @use '@carbon/styles/scss/theme';
@@ -60,6 +62,10 @@ body {
   padding: 0;
 }
 
+.sbdocs-preview {
+  background-color: theme.$background;
+}
+
 #main-content {
   position: relative;
   /* stylelint-disable-next-line carbon/layout-use */
@@ -72,4 +78,12 @@ body {
   margin: 0;
   block-size: 100vh;
   inline-size: 100%;
+}
+
+.docs-story {
+  background-color: theme.$background;
+}
+
+.docs-story > *:has(> .docblock-code-toggle) {
+  background-color: theme.$background;
 }

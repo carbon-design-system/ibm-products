@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import React, { useRef } from 'react';
+import { action } from 'storybook/actions';
 
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 import { Wikis } from '@carbon/react/icons';
-import { ConditionBuilder } from '.';
+import { previewCandidate__ConditionBuilder as ConditionBuilder } from '../';
 import mdx from './ConditionBuilder.mdx';
 
 import styles from './_storybook-styles.scss?inline';
@@ -19,6 +19,7 @@ import {
   inputData,
   inputDataDynamicOptions,
   inputDataForCustomOperator,
+  inputDataWithDisabledProperties,
 } from './assets/sampleInput';
 import {
   sampleDataStructure_nonHierarchical,
@@ -28,7 +29,7 @@ import {
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
 export default {
-  title: 'Experimental/Components/ConditionBuilder',
+  title: 'Preview Candidate/ConditionBuilder',
   component: ConditionBuilder,
   tags: ['autodocs'],
 
@@ -295,6 +296,15 @@ conditionBuilderWithCustomOperators.args = {
   },
   variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
+};
+
+export const conditionBuilderWithDisabledProperties =
+  ConditionBuilderTemplate.bind({});
+conditionBuilderWithDisabledProperties.storyName = 'With disabled properties';
+conditionBuilderWithDisabledProperties.args = {
+  inputConfig: inputDataWithDisabledProperties,
+
+  variant: NON_HIERARCHICAL_VARIANT,
 };
 
 export const conditionBuilderWithActions = ConditionBuilderTemplate.bind({});

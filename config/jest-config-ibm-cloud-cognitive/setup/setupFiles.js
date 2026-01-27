@@ -27,6 +27,27 @@ if (global.window) {
       disconnect: jest.fn(),
     };
   });
+
+  window.matchMedia = jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // Deprecated
+    removeListener: jest.fn(), // Deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  }));
+
+  window.IntersectionObserver = jest.fn().mockImplementation(() => ({
+    root: null,
+    rootMargin: '',
+    thresholds: [],
+    disconnect: () => null,
+    observe: () => null,
+    takeRecords: () => [],
+    unobserve: () => null,
+  }));
 }
 
 if (global.HTMLElement) {

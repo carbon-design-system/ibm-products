@@ -1,3 +1,5 @@
+aarsteinmedia
+argstable
 browserslist
 cdai
 codeql
@@ -5,11 +7,13 @@ codesandbox
 codesandboxes
 commitlint
 docgen
+dotlottie
 dsag
 flatpickr
 ibmproducts
 kube
 kubernetes
+litcss
 lottie
 markdownlint
 pageview
@@ -23,4 +27,3 @@ tealium
 technote
 unhover
 wcag
-litcss

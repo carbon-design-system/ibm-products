@@ -43,6 +43,8 @@ const DocsPage = () => (
       },
       {
         story: stories.WithOverflow,
+        description:
+          'To include an overflow menu within the productive card, you should provide an array of objects. These will map to the overflow items. All supported props from `OverflowItem` will be passed through to the overflow menu items created via the `overflowActions` prop.',
       },
       {
         title: 'With AI label',

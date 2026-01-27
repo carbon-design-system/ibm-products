@@ -251,15 +251,4 @@ describe(name, () => {
       UnauthorizedEmptyState.displayName
     );
   });
-
-  it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', async () =>
-    expectError(required('illustrationDescription', 'EmptyState'), () => {
-      render(
-        <EmptyState
-          title="Empty state title"
-          subtitle="Empty state subtitle"
-          illustration={CustomIllustration}
-        />
-      );
-    }));
 });

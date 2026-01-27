@@ -49,7 +49,7 @@ const defaults = {
 /**
  * One of two buttons styled specifically for the GuidebannerElement.
  */
-export let GuidebannerElementButton = React.forwardRef<
+export const GuidebannerElementButton = React.forwardRef<
   typeof Button,
   GuidebannerElementButtonProps
 >(
@@ -94,12 +94,6 @@ export let GuidebannerElementButton = React.forwardRef<
       </Button>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-GuidebannerElementButton = pkg.checkComponentEnabled(
-  GuidebannerElementButton,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

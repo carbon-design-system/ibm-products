@@ -17,7 +17,7 @@ import DocsPage from './MultiAddSelect.docs-page';
 const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 
 export default {
-  title: 'IBM Products/Patterns/Add and select/MultiAddSelect',
+  title: 'Patterns/Prebuilt patterns/Add and select/MultiAddSelect',
   component: MultiAddSelect,
   tags: ['autodocs'],
   parameters: {
@@ -243,6 +243,7 @@ const defaultProps = {
     'Select a term to include the full set of the governance artifacts it contains in the governance scope.',
   noSelectionTitle: 'No business terms selected',
   noResultsDescription: 'Try again',
+  noTearsheet: false,
   onCloseButtonText: 'Cancel',
   onSubmit: (selections) => console.log(selections),
   onSubmitButtonText: 'Add',
@@ -257,7 +258,9 @@ const Template = (args, context) => {
   return (
     <>
       <MultiAddSelect {...args} open={open} onClose={() => setOpen(false)} />
-      <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+      {args?.noTearsheet === false && (
+        <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+      )}
     </>
   );
 };

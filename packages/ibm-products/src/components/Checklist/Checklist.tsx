@@ -153,7 +153,7 @@ const defaults = {
  * an icon that defines the item's state as "not started", "in progress",
  * and "complete".
  */
-export let Checklist = React.forwardRef(
+export const Checklist = React.forwardRef(
   (
     {
       chartValue,
@@ -345,7 +345,6 @@ export let Checklist = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-Checklist = pkg.checkComponentEnabled(Checklist, componentName);
 Checklist.displayName = componentName;
 
 // The types and DocGen commentary for the component props,

@@ -1,4 +1,4 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as SidePanelStories from './side-panel.stories';
 
@@ -37,24 +37,29 @@ import '@carbon/web-components/es/components/button/index.js';
   open
   label-text="An optional label"
   size="md"
-  title="A title, can be omitted">
+  title="A title, can be omitted"
+>
   <!-- Content -->
   <h5>Side panel content</h5>
   <div class="${storyPrefix}text-inputs">
     <cds-text-input
       label="Input A"
-      id="side-panel-story-text-input-a"></cds-text-input>
+      id="side-panel-story-text-input-a"
+    ></cds-text-input>
     <cds-text-input
       label="Input B"
-      id="side-panel-story-text-input-b"></cds-text-input>
+      id="side-panel-story-text-input-b"
+    ></cds-text-input>
   </div>
   <div class="${storyPrefix}text-inputs">
     <cds-text-input
       label="Input C"
-      id="side-panel-story-text-input-c"></cds-text-input>
+      id="side-panel-story-text-input-c"
+    ></cds-text-input>
     <cds-text-input
       label="Input D"
-      id="side-panel-story-text-input-d"></cds-text-input>
+      id="side-panel-story-text-input-d"
+    ></cds-text-input>
   </div>
   <div class="${storyPrefix}textarea-container">
     <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
@@ -75,7 +80,8 @@ import '@carbon/web-components/es/components/button/index.js';
     has-icon-only="true"
     kind="${BUTTON_KIND.GHOST}"
     size="sm"
-    tooltip-text="Settings">
+    tooltip-text="Settings"
+  >
     ${Settings({ slot: 'icon' })}
   </cds-button>
   <cds-button
@@ -84,7 +90,8 @@ import '@carbon/web-components/es/components/button/index.js';
     has-icon-only="true"
     kind="${BUTTON_KIND.GHOST}"
     size="sm"
-    tooltip-text="Delete">
+    tooltip-text="Delete"
+  >
     ${Trashcan({ slot: 'icon' })}
   </cds-button>
 

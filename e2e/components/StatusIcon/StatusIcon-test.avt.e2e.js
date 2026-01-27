@@ -14,7 +14,7 @@ test.describe('StatusIcon @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'StatusIcon',
-      id: 'ibm-products-patterns-status-icons-statusicon--default',
+      id: 'patterns-prebuilt-patterns-statusicon--default',
       globals: {
         carbonTheme: 'white',
       },

@@ -18,6 +18,11 @@
     "components",
     "react"
   ],
+  "resolutions": {
+    "@octokit/plugin-paginate-rest": "^14.0.0",
+    "@octokit/request": "^10.0.0",
+    "undici": "^7.11.0"
+  },
   "dependencies": {
     "@actions/core": "^1.2.3",
     "@actions/github": "^6.0.0",

@@ -14,7 +14,7 @@ test.describe('StringFormatter @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'StringFormatter',
-      id: 'experimental-components-string-formatter-stringformatter--string-formatter',
+      id: 'utilities-stringformatter--string-formatter',
       globals: {
         carbonTheme: 'white',
       },

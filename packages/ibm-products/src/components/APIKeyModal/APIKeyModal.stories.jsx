@@ -16,7 +16,7 @@ import {
   InlineLoading,
   Form,
 } from '@carbon/react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { pkg } from '../../settings';
 import { APIKeyModal } from '.';
 import wait from '../../global/js/utils/wait';
@@ -24,7 +24,7 @@ import styles from './_storybook-styles.scss?inline'; // import index in case mo
 import mdx from './APIKeyModal.mdx';
 
 export default {
-  title: 'IBM Products/Components/Generating an API key/APIKeyModal',
+  title: 'Patterns/Prebuilt patterns/APIKeyModal',
   component: APIKeyModal,
   tags: ['autodocs'],
   parameters: {
@@ -95,7 +95,7 @@ const InstantTemplate = (args, context) => {
   };
 
   return (
-    <>
+    <main>
       <style>{`.${blockClass} { opacity: 0; }`};</style>
       <APIKeyModal
         {...args}
@@ -115,7 +115,7 @@ const InstantTemplate = (args, context) => {
           Generate
         </Button>
       )}
-    </>
+    </main>
   );
 };
 
@@ -148,7 +148,7 @@ const TemplateWithState = (args, context) => {
   };
 
   return (
-    <>
+    <main>
       <style>{`.${blockClass} { opacity: 0; }`};</style>
       <APIKeyModal
         {...args}
@@ -163,7 +163,7 @@ const TemplateWithState = (args, context) => {
       <Button onClick={() => setOpen(!open)} ref={buttonRef}>
         Generate API key
       </Button>
-    </>
+    </main>
   );
 };
 
@@ -253,6 +253,7 @@ const MultiStepTemplate = (args, context) => {
               valueSelected={permissions}
               name="permission"
               orientation="vertical"
+              aria-label="permission"
             >
               <RadioButton value="Read and write" labelText="Read and write" />
               <RadioButton value="Read only" labelText="Read only" />
@@ -312,7 +313,7 @@ const MultiStepTemplate = (args, context) => {
   ];
 
   return (
-    <>
+    <main>
       <style>{`.${blockClass} { opacity: 0; }`};</style>
       <APIKeyModal
         {...finalArgs}
@@ -330,7 +331,7 @@ const MultiStepTemplate = (args, context) => {
       <Button onClick={() => setOpen(!open)} ref={buttonRef}>
         {editing ? 'Edit API key' : 'Generate API key'}
       </Button>
-    </>
+    </main>
   );
 };
 
@@ -365,7 +366,7 @@ const EditTemplate = (args, context) => {
   };
 
   return (
-    <>
+    <main>
       <style>{`.${blockClass} { opacity: 0; }`};</style>
       <APIKeyModal
         {...args}
@@ -380,7 +381,7 @@ const EditTemplate = (args, context) => {
       <Button onClick={onOpenHandler} ref={buttonRef}>
         Edit API key
       </Button>
-    </>
+    </main>
   );
 };
 

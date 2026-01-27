@@ -14,7 +14,7 @@ test.describe('ScrollGradient @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ScrollGradient',
-      id: 'utils-components-scrollgradient--scroll-gradient-vertical',
+      id: 'utilities-scrollgradient--scroll-gradient-vertical',
       globals: {
         carbonTheme: 'white',
       },

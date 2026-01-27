@@ -21,18 +21,15 @@ import React, {
   ReactNode,
   createContext,
   useEffect,
-  useRef,
   useState,
+  ReactElement,
+  isValidElement,
 } from 'react';
-import {
-  SimpleHeader,
-  overflowAriaLabel_required_if_breadcrumbs_exist,
-} from '../SimpleHeader/SimpleHeader';
+import { SimpleHeader } from '../SimpleHeader/SimpleHeader';
 import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
   usePreviousValue,
-  useResetCreateComponent,
   useValidCreateStepCount,
 } from '../../global/js/hooks';
 
@@ -228,7 +225,7 @@ on the Carbon's grid system
 include `<Row>` and `<Column>` components inside of each `CreateFullPageStep`
 component to get the desired affect.
  */
-export let CreateFullPage = React.forwardRef(
+export const CreateFullPage = React.forwardRef(
   (
     {
       breadcrumbsOverflowAriaLabel,
@@ -270,7 +267,11 @@ export let CreateFullPage = React.forwardRef(
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
-    const invalidInitialStepWarned = useRef(false);
+    const stepLength = React.Children.toArray(children).filter(
+      (item) =>
+        isValidElement(item) &&
+        (item as ReactElement<any>).props.includeStep !== false
+    ).length;
 
     useEffect(() => {
       const firstItem =
@@ -283,8 +284,9 @@ export let CreateFullPage = React.forwardRef(
         setLastIncludedStep(lastItem);
       }
 
-      /**@ts-ignore */
-      if (initialStep) {
+      if (Number(initialStep) > stepLength || Number(initialStep) <= 0) {
+        setCurrentStep(1);
+      } else if (initialStep) {
         const numberOfHiddenSteps = getNumberOfHiddenSteps(
           stepData,
           initialStep
@@ -297,20 +299,19 @@ export let CreateFullPage = React.forwardRef(
       lastIncludedStep,
       initialStep,
       modalIsOpen,
+      stepLength,
     ]);
 
     useEffect(() => {
-      if (!invalidInitialStepWarned?.current) {
-        checkForValidInitialStep();
-      }
+      checkForValidInitialStep();
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [initialStep, stepData]);
+    }, [initialStep]);
 
     useCreateComponentFocus({
       previousState,
       currentStep,
-      blockClass,
+      blockClass: `.${blockClass} .${pkg.prefix}--create-full-page__step`,
       onMount,
       firstFocusElement,
     });
@@ -342,16 +343,10 @@ export let CreateFullPage = React.forwardRef(
     });
 
     const checkForValidInitialStep = () => {
-      // An invalid initialStep value was provided, we'll default to rendering the first step or last step
-
       if (
-        (initialStep &&
-          stepData?.length &&
-          Number(initialStep) > Number(stepData?.length)) ||
+        (initialStep && stepLength && Number(initialStep) > stepLength) ||
         Number(initialStep) <= 0
       ) {
-        invalidInitialStepWarned.current = true;
-        setCurrentStep(1);
         console.warn(
           `${componentName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${componentName} has.`
         );
@@ -389,7 +384,13 @@ export let CreateFullPage = React.forwardRef(
           <div className={`${blockClass}__body`}>
             <div className={`${blockClass}__main`}>
               <div className={`${blockClass}__content`}>
-                <Form className={`${blockClass}__form`} aria-label={title}>
+                <Form
+                  className={`${blockClass}__form`}
+                  aria-label={title}
+                  onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                    e.preventDefault()
+                  }
+                >
                   <StepsContext.Provider
                     value={
                       {
@@ -460,7 +461,6 @@ export let CreateFullPage = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag.
-CreateFullPage = pkg.checkComponentEnabled(CreateFullPage, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -500,7 +500,7 @@ CreateFullPage.propTypes = {
   /**
    * Label for open/close overflow button used for breadcrumb items that do not fit
    */
-  breadcrumbsOverflowAriaLabel: overflowAriaLabel_required_if_breadcrumbs_exist,
+  breadcrumbsOverflowAriaLabel: PropTypes.string,
 
   /**
    * The cancel button text

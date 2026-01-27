@@ -14,7 +14,7 @@ import { TooltipTrigger } from '.';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Internal/TooltipTrigger',
+  title: 'Internal/TooltipTrigger',
   component: TooltipTrigger,
   parameters: {
     styles,

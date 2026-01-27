@@ -1,16 +1,16 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, { isValidElement } from 'react';
-import { TableRow, TableCell, SkeletonText } from '@carbon/react';
+import { TableRow, TableCell, SkeletonText, usePrefix } from '@carbon/react';
 import { px } from '@carbon/layout';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
-import { pkg, carbon } from '../../../settings';
+import { pkg } from '../../../settings';
 import { DatagridAILabel } from './addons/AiLabel/DatagridAiLabel';
 import { DataGridState } from '../types';
 
@@ -40,6 +40,8 @@ const DatagridRow = (datagridState: DataGridState) => {
     visibleColumns,
     getAsyncSubRows,
   } = datagridState;
+
+  const carbonPrefix = usePrefix();
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
     let size = 0;
@@ -141,7 +143,7 @@ const DatagridRow = (datagridState: DataGridState) => {
     [`${blockClass}__carbon-row-expandable`]: row.canExpand,
     [`${blockClass}__carbon-row-expandable--async`]:
       getAsyncSubRows && row.depth > 0,
-    [`${carbon.prefix}--data-table--selected`]: row.isSelected,
+    [`${carbonPrefix}--data-table--selected`]: row.isSelected,
     [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
     [`${blockClass}__ai-label--row`]: isValidElement(row?.original?.aiLabel),
   });

@@ -14,7 +14,7 @@ test.describe('Cascade @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Cascade',
-      id: 'utils-components-cascade--without-grid',
+      id: 'utilities-cascade--without-grid',
       globals: {
         carbonTheme: 'white',
       },

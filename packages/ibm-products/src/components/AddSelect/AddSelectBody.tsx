@@ -61,6 +61,7 @@ export interface AddSelectBodyProps {
   noResultsTitle?: string;
   noSelectionDescription?: string;
   noSelectionTitle?: string;
+  noTearsheet?: boolean;
   normalizedItems?: object;
   onClose?: () => void;
   onCloseButtonText?: string;
@@ -108,6 +109,7 @@ export const AddSelectBody = forwardRef(
       noResultsTitle,
       noSelectionDescription,
       noSelectionTitle,
+      noTearsheet = false,
       normalizedItems,
       onClose,
       onCloseButtonText,
@@ -371,6 +373,10 @@ export const AddSelectBody = forwardRef(
       </>
     );
 
+    if (noTearsheet) {
+      return body;
+    }
+
     if (multi) {
       return (
         <Tearsheet
@@ -466,4 +472,4 @@ AddSelectBody.propTypes = {
   useNormalizedItems: PropTypes.bool,
 };
 
-AddSelectBreadcrumbs.displayName = componentName;
+AddSelectBody.displayName = componentName;

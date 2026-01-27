@@ -1,4 +1,4 @@
-import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
 import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { SearchBar } from '.';
 import * as SearchBarStories from './SearchBar.stories';
@@ -21,33 +21,23 @@ import * as SearchBarStories from './SearchBar.stories';
 
 ### Default
 
-<Canvas>
-  <Story of={SearchBarStories.Default} />
-</Canvas>
+<Canvas of={SearchBarStories.Default}></Canvas>
 
 ### Initial Value
 
-<Canvas>
-  <Story of={SearchBarStories.InitialValue} />
-</Canvas>
+<Canvas of={SearchBarStories.InitialValue}></Canvas>
 
 ### Scopes
 
-<Canvas>
-  <Story of={SearchBarStories.Scopes} />
-</Canvas>
+<Canvas of={SearchBarStories.Scopes}></Canvas>
 
 ### Unsorted Scopes
 
-<Canvas>
-  <Story of={SearchBarStories.UnsortedScopes} />
-</Canvas>
+<Canvas of={SearchBarStories.UnsortedScopes}></Canvas>
 
 ### Selected Scopes
 
-<Canvas>
-  <Story of={SearchBarStories.SelectedScopes} />
-</Canvas>
+<Canvas of={SearchBarStories.SelectedScopes}></Canvas>
 
 ## Code sample
 

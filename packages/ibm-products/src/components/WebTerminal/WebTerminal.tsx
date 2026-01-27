@@ -95,7 +95,7 @@ interface HTMLElementStyled extends HTMLDivElement {
 /**
  * The `WebTerminal` is prompted by the user and is persistent until dismissed. The purpose of a web terminal is to provide users with the ability to type commands manually instead of using the GUI.
  */
-export let WebTerminal = React.forwardRef(
+export const WebTerminal = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -228,7 +228,6 @@ export let WebTerminal = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-WebTerminal = pkg.checkComponentEnabled(WebTerminal, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

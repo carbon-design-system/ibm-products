@@ -1,3 +1,35 @@
+## `@carbon/storybook-addon-theme@2.30.0`
+### Bug fixes :bug:
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+
+### Housekeeping :house:
+- chore: retry prerelease publish other packages
+
+## `@carbon/storybook-addon-theme@2.28.0`
+### Housekeeping :house:
+- refactor(sb-theme-addon): remove global dependency (#8588)
+- chore(sb-addon-theme): deprecate addon theme package (#8543)
+
+## `@carbon/storybook-addon-theme@2.24.0`
+### Housekeeping :house:
+- chore(deps): update dependency npm-run-all2 to v8 (#8219)
+- chore(deps): replace dependency npm-run-all with npm-run-all2 ^5.0.0 (#7202)
+
+## `@carbon/storybook-addon-theme@2.23.0`
+### Bug fixes :bug:
+- fix: update format script (#8107)
+
+## `@carbon/storybook-addon-theme@2.20.0`
+### Housekeeping :house:
+- chore: remove redundant upgrade scripts (#7774)
+
 # Change Log
 
 All notable changes to this project will be documented in this file.

@@ -12,7 +12,7 @@ import styles from './_storybook-styles.scss?inline';
 import mdx from './OptionsTile.mdx';
 
 export default {
-  title: 'IBM Products/Components/Options tile/OptionsTile',
+  title: 'Components/OptionsTile',
   component: OptionsTile,
   tags: ['autodocs'],
   parameters: {

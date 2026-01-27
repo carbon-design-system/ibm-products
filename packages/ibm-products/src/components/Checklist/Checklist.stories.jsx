@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
@@ -60,9 +60,9 @@ const taskLists = [
 ];
 
 export default {
-  title: 'IBM Products/Onboarding/Checklist',
+  title: 'Components/Onboarding/Checklist',
   component: Checklist,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   argTypes: {
     taskLists: {
       table: {

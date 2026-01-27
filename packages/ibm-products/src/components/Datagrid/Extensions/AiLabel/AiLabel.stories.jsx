@@ -10,7 +10,7 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { usePrefix } from '@carbon/react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   Datagrid,
   useDatagrid,
@@ -26,7 +26,7 @@ import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 import { ExampleAILabel } from '../../utils/ExampleAILabel';
 
 export default {
-  title: 'Deprecated/Datagrid/Datagrid/AILabel',
+  title: 'Deprecated/Datagrid/AILabel',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

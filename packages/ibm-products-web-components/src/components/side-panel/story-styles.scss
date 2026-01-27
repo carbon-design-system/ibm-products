@@ -45,3 +45,7 @@ $story-prefix: 'side-panel-stories__';
   align-items: center;
   justify-content: center;
 }
+
+.#{$story-prefix}custom-header-content {
+  margin-block-end: $spacing-03;
+}

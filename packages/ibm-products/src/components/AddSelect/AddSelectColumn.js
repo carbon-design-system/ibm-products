@@ -7,14 +7,23 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Search, Tag, OverflowMenu, Checkbox, usePrefix } from '@carbon/react';
+import {
+  Search,
+  Tag,
+  Checkbox,
+  usePrefix,
+  unstable_FeatureFlags as FeatureFlags,
+  Popover,
+  PopoverContent,
+  IconButton,
+} from '@carbon/react';
 import { Filter } from '@carbon/react/icons';
 import { pkg } from '../../settings';
 import { AddSelectList } from './AddSelectList';
 import { AddSelectSort } from './AddSelectSort';
 import { sortItems } from './add-select-utils';
 import { useItemSort } from './hooks/useItemSort';
-import uuidv4 from '../../global/js/utils/uuidv4';
+import { useId } from '../../global/js/utils/useId';
 import useParentSelect from './hooks/useParentSelect';
 
 const blockClass = `${pkg.prefix}--add-select`;
@@ -34,11 +43,14 @@ export let AddSelectColumn = ({
   sortByLabel,
   ...props
 }) => {
-  const carbonPrefix = usePrefix();
   const { parentSelected, setParentSelected } = useParentSelect();
+  const selectAllId = useId();
+  const filterId = useId();
+  const searchId = useId();
   const [searchTerm, setSearchTerm] = useState('');
   const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
     useItemSort();
+  const [filterOpen, setFilterOpen] = useState(false);
   const [filters, setFilters] = useState([]);
   const { entries, filterBy, sortBy } = items;
   const getSelectedItem = () => {
@@ -103,6 +115,8 @@ export let AddSelectColumn = ({
     return filters.some((filter) => filter === filterByValue);
   };
 
+  const filterBtnId = `filter-${filterId}`;
+
   const sortFn = sortItems(sortAttribute, sortDirection);
 
   const colItems = entries
@@ -124,7 +138,7 @@ export let AddSelectColumn = ({
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={columnInputPlaceholder}
             className={`${colClass}-input`}
-            id={uuidv4()}
+            id={searchId}
             labelText={columnInputPlaceholder}
             size="md"
           />
@@ -139,22 +153,42 @@ export let AddSelectColumn = ({
               sortByLabel={sortByLabel}
             />
             {filterByOpts.length > 0 && (
-              <OverflowMenu
-                renderIcon={(props) => <Filter size={32} {...props} />}
-                className={`${colClass}-overflow`}
-                flipped
-                aria-label={filterByLabel}
-                iconDescription={filterByLabel}
-              >
-                {filterByOpts.map((opt) => (
-                  <div
-                    key={opt}
-                    className={`${carbonPrefix}--overflow-menu-options__option`}
+              <FeatureFlags enableV12DynamicFloatingStyles>
+                <Popover
+                  align="bottom-right"
+                  isTabTip
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') {
+                      setFilterOpen(false);
+                      e.preventDefault(); // prevent modal close
+                      e.stopPropagation();
+                      const filterBtn = document.querySelector(
+                        `#${filterBtnId}`
+                      );
+                      filterBtn?.focus(); // workaround to return focus, refs not possible on button inside popover for some reason
+                    }
+                  }}
+                  onRequestClose={() => setFilterOpen(false)}
+                  open={filterOpen}
+                >
+                  <IconButton
+                    size="md"
+                    id={filterBtnId}
+                    hasIconOnly
+                    aria-expanded={filterOpen}
+                    badgeCount={filters.length > 0 ? 0 : undefined} // setting to 0 renders an empty dot
+                    kind="ghost"
+                    label={filterByLabel || 'Filter'}
+                    onClick={() => {
+                      setFilterOpen((prev) => !prev);
+                    }}
                   >
-                    <div
-                      className={`${carbonPrefix}--overflow-menu-options__btn`}
-                    >
+                    <Filter />
+                  </IconButton>
+                  <PopoverContent className={`${colClass}-filter-popover`}>
+                    {filterByOpts.map((opt) => (
                       <Checkbox
+                        key={opt}
                         id={opt}
                         labelText={opt}
                         onChange={(event, { checked }) =>
@@ -162,16 +196,16 @@ export let AddSelectColumn = ({
                         }
                         checked={filters.find((o) => o === opt) ? true : false}
                       />
-                    </div>
-                  </div>
-                ))}
-              </OverflowMenu>
+                    ))}
+                  </PopoverContent>
+                </Popover>
+              </FeatureFlags>
             )}
           </div>
         </div>
         <div className={`${blockClass}__tags`}>
           <Checkbox
-            id={`${uuidv4()}-select-all`}
+            id={`${selectAllId}-select-all`}
             className={`${colClass}__select-all`}
             checked={allSelected}
             onChange={selectAllHandler}

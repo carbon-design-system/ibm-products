@@ -8,12 +8,23 @@
 import React from 'react';
 
 import { Content } from '@carbon/react';
+import { WithFeatureFlags } from '../../../.storybook/WithFeatureFlags';
 
-export const sidePanelDecorator = (renderHeader, prefix) => (Story) => (
-  <div className={`${prefix}container`}>
-    {renderHeader()}
-    <Content className={`${prefix}content`}>
-      <Story />
-    </Content>
-  </div>
-);
+export const sidePanelDecorator =
+  (renderHeader, prefix) => (Story, context) => {
+    const { jsFlags } = context.args;
+    return (
+      <div className={`${prefix}container`}>
+        {renderHeader()}
+        <Content className={`${prefix}content`}>
+          {jsFlags && jsFlags.length !== 0 ? (
+            <WithFeatureFlags {...jsFlags}>
+              <Story />
+            </WithFeatureFlags>
+          ) : (
+            <Story />
+          )}
+        </Content>
+      </div>
+    );
+  };

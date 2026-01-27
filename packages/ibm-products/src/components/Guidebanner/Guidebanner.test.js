@@ -28,6 +28,7 @@ const dataTestId = uuidv4();
 
 const defaultProps = {
   title: 'Guidebanner title',
+  open: true,
 };
 const guidebannerElementDefaultProps = {
   description: 'GuidebannerElement description',
@@ -50,14 +51,6 @@ const renderComponent = (customProps = {}) => {
 };
 
 describe(componentName, () => {
-  // The Carousel component uses IntersectionObserver.
-  beforeEach(() => {
-    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
-      observe: () => null,
-      unobserve: () => null,
-    }));
-  });
-
   it('renders a component Guidebanner', () => {
     const { container } = renderComponent();
     const guidebanner = container.getElementsByClassName(blockClass);
@@ -180,16 +173,5 @@ describe(componentName, () => {
 
     fireEvent.click(closeButton);
     expect(onCloseMock).toHaveBeenCalledTimes(1);
-  });
-
-  it('throws error for an invalid child', () => {
-    const errorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    render(
-      <Guidebanner title="test title">
-        <p>invalid child</p>
-      </Guidebanner>
-    );
-    expect(errorMock).toHaveBeenCalledTimes(1);
   });
 });

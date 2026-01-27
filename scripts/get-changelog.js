@@ -216,9 +216,6 @@ function generateLog() {
   if (writeChangelog) {
     //these logs are not required for release page
 
-    //update changelog.md for packages/core
-    getChangelog('@carbon/ibm-cloud-cognitive-core', './packages/core');
-
     //update changelog.md for config/babel-preset-ibm-cloud-cognitive
     getChangelog(
       '@babel-preset-ibm-cloud-cognitive',

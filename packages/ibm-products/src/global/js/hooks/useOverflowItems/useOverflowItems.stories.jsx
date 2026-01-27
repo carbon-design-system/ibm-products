@@ -14,7 +14,7 @@ import './_storybook-styles.scss';
 import mdx from './useOverflowItems.mdx';
 
 export default {
-  title: 'Hooks/useOverflowItems',
+  title: 'Utilities/useOverflowItems',
   parameters: {
     layout: 'padded',
     docs: {
@@ -90,7 +90,7 @@ const Template = () => {
               </Tag>
             ))}
           </div>
-          <div>
+          <div className="child">
             <p>Hidden items:</p>
             {hiddenItems.map((tag) => (
               <Tag key={tag.id} type="blue">

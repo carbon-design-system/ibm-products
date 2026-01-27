@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import {
   Button,
@@ -361,7 +361,7 @@ const fullWidthGrid = {
 };
 
 export default {
-  title: 'IBM Products/Components/Page header/PageHeader',
+  title: 'Components/PageHeader',
   component: PageHeader,
   tags: ['autodocs'],
   parameters: {
@@ -545,33 +545,36 @@ const actionTitleChange = action('title onChange');
 const actionTitleSave = action('title onSave');
 const actionTitleCancel = action('title change cancelled');
 
-const getNavProps = (navigation) =>
-  navigation
-    ? {
-        navigation: (
-          <TabList>
-            {navigation.map((nav) => (
-              <Tab>{nav}</Tab>
-            ))}
-          </TabList>
-        ),
-      }
-    : null;
+const getNavProps = (navigation) => {
+  if (navigation) {
+    return {
+      navigation: (
+        <TabList>
+          {navigation.map((nav) => (
+            <Tab key={nav}>{nav}</Tab>
+          ))}
+        </TabList>
+      ),
+    };
+  }
+};
 
-const ContainerDivOrTabs = ({ children, navigation, ...props }) =>
-  navigation ? (
-    <div className={props.className}>
-      <Tabs {...props}>{children}</Tabs>
-    </div>
-  ) : (
-    <div {...props}>{children}</div>
-  );
+const ContainerDivOrTabs = ({ children, navigation, ...props }) => {
+  if (navigation) {
+    return (
+      <div className={props.className}>
+        <Tabs {...props}>{children}</Tabs>
+      </div>
+    );
+  }
+  return <div {...props}>{children}</div>;
+};
 
 const ChildrenMaybeTabPanels = ({ children, navigation, ...props }) =>
   navigation ? (
     <TabPanels {...props}>
       {navigation.map((nav) => (
-        <TabPanel>
+        <TabPanel key={nav}>
           <label>Panel for "{nav}"</label>
           {children}
         </TabPanel>
@@ -646,26 +649,27 @@ const Template = ({
       <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
       <ContainerDivOrTabs
         className={`${storyClass}__content-container`}
-        tabIndex={0}
         navigation={navigation}
       >
-        <PageHeader
-          {...props}
-          {...getNavProps(navigation)}
-          title={
-            title?.onSave
-              ? {
-                  ...title,
-                  text: titleText,
-                  onChange: handleTitleChange,
-                  onSave: handleTitleSave,
-                  onCancel: handleTitleCancel,
-                }
-              : title
-          }
-        >
-          {children}
-        </PageHeader>
+        <main>
+          <PageHeader
+            {...props}
+            {...getNavProps(navigation)}
+            title={
+              title?.onSave
+                ? {
+                    ...title,
+                    text: titleText,
+                    onChange: handleTitleChange,
+                    onSave: handleTitleSave,
+                    onCancel: handleTitleCancel,
+                  }
+                : title
+            }
+          >
+            {children}
+          </PageHeader>
+        </main>
         <ChildrenMaybeTabPanels navigation={navigation}>
           {dummyPageContent}
         </ChildrenMaybeTabPanels>
@@ -859,15 +863,16 @@ const TemplateDemo = ({
       >
         <ContainerDivOrTabs
           className={`${storyClass}__content-container`}
-          tabIndex={0}
           navigation={navigation}
         >
-          <PageHeader {...props} {...getNavProps(navigation)}>
-            {children}
-          </PageHeader>
-          <ChildrenMaybeTabPanels navigation={navigation}>
-            {demoDummyPageContent}
-          </ChildrenMaybeTabPanels>
+          <main>
+            <PageHeader {...props} {...getNavProps(navigation)}>
+              {children}
+            </PageHeader>
+            <ChildrenMaybeTabPanels navigation={navigation}>
+              {demoDummyPageContent}
+            </ChildrenMaybeTabPanels>
+          </main>
         </ContainerDivOrTabs>
       </div>
     </>

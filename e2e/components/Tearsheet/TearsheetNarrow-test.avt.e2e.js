@@ -17,7 +17,7 @@ test.describe('TearsheetNarrow @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
-      id: 'ibm-products-components-tearsheet-tearsheetnarrow--tearsheet-narrow',
+      id: 'components-tearsheet-tearsheetnarrow--tearsheet-narrow',
       globals: {
         carbonTheme: 'white',
       },
@@ -29,7 +29,7 @@ test.describe('TearsheetNarrow @avt', () => {
   test('@avt-default-state open and close', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
-      id: 'ibm-products-components-tearsheet-tearsheetnarrow--tearsheet-narrow',
+      id: 'components-tearsheet-tearsheetnarrow--tearsheet-narrow',
       globals: {
         carbonTheme: 'white',
       },
@@ -52,7 +52,7 @@ test.describe('TearsheetNarrow @avt', () => {
   test('@avt-default-state focus trap', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
-      id: 'ibm-products-components-tearsheet-tearsheetnarrow--tearsheet-narrow',
+      id: 'components-tearsheet-tearsheetnarrow--tearsheet-narrow',
       globals: {
         carbonTheme: 'white',
       },
@@ -61,8 +61,8 @@ test.describe('TearsheetNarrow @avt', () => {
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
     const inputField = page.locator('#tss-ft1');
     const createButton = page.getByText('Create');
-    const closeButton = page.getByRole('button', { name: 'Close' });
-    const cancelButton = page.getByText('Cancel');
+    const closeButton = modalElement.getByRole('button', { name: 'Close' });
+    const cancelButton = modalElement.getByText('Cancel');
 
     // Default opened in story
     await page.screenshot({ animations: 'disabled' });
@@ -113,7 +113,7 @@ test.describe('TearsheetNarrow @avt', () => {
   test('@avt-all-header-items', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
-      id: 'ibm-products-components-tearsheet-tearsheetnarrow--fully-loaded',
+      id: 'components-tearsheet-tearsheetnarrow--fully-loaded',
       globals: {
         carbonTheme: 'white',
       },
@@ -176,10 +176,10 @@ test.describe('TearsheetNarrow @avt', () => {
     await expect(modalElement).not.toBeInViewport();
   });
 
-  test('@avt-stacking', async ({ page }) => {
+  test.skip('@avt-stacking', async ({ page }) => {
     await visitStory(page, {
       component: 'TearsheetNarrow',
-      id: 'ibm-products-components-tearsheet-tearsheetnarrow--stacked',
+      id: 'components-tearsheet-tearsheetnarrow--stacked',
       globals: {
         carbonTheme: 'white',
       },

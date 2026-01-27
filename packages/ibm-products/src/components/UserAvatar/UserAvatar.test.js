@@ -86,12 +86,12 @@ describe(componentName, () => {
 
   it('should render the initials when passed the name prop', async () => {
     renderComponent({ name: 'Display name' });
-    expect(screen.getByText(/DN/));
+    expect(screen.getByText(/DN/)).toBeTruthy();
   });
 
   it('should render the initials when simply passing two names to the name prop', async () => {
     renderComponent({ name: 'DN' });
-    expect(screen.getByText(/DN/));
+    expect(screen.getByText(/DN/)).toBeTruthy();
   });
 
   it('should render a tooltip if the tooltipText is supplied', async () => {
@@ -116,9 +116,4 @@ describe(componentName, () => {
     const imagePath = container.querySelector('img').getAttribute('src');
     expect(typeof imagePath).toBe('string');
   });
-
-  it('should throw a custom prop type validation error when an image is used without an imageDescription prop', async () =>
-    expectError(required('imageDescription', 'UserProfileImage'), () => {
-      renderComponent({ image: 'path_to_image.jpg' });
-    }));
 });

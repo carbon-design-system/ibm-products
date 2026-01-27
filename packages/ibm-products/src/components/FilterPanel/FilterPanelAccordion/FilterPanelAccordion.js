@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ import { Accordion } from '@carbon/react';
 
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
-import { FilterPanelGroup } from '..';
+import { FilterPanelGroup } from '../FilterPanelGroup';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--filter-panel-accordion`;

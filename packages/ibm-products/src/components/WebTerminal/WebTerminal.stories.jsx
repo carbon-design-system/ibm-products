@@ -10,7 +10,7 @@
 import React from 'react';
 // Carbon and package components we use.
 import { Code, Copy } from '@carbon/react/icons';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Navigation } from './preview-components';
 import { WebTerminal } from '.';
 import { WebTerminalContentWrapper } from './WebTerminalContentWrapper';
@@ -83,7 +83,7 @@ WithActions.args = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/Web terminal/WebTerminal',
+  title: 'Patterns/Prebuilt patterns/WebTerminal',
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',

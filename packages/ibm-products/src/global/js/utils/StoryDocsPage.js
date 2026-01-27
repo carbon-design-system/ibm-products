@@ -19,7 +19,7 @@ import {
   AnchorMdx,
   useOf,
   Markdown,
-} from '@storybook/blocks';
+} from '@storybook/addon-docs/blocks';
 import * as changeCase from 'change-case';
 
 import {
@@ -135,9 +135,7 @@ export const StoryDocsPage = ({
           ))
         ) : (
           <AnchorMdx href={guidelinesHref}>
-            {altTitle
-              ? `${altTitle} usage guidelines`
-              : storyInfo.guidelinesLinkLabel}
+            {altTitle ? `Usage guidelines` : storyInfo.guidelinesLinkLabel}
           </AnchorMdx>
         )
       ) : null}

@@ -47,7 +47,7 @@ describe(componentName, () => {
   it('renders a component DecoratorLink', async () => {
     const { container } = renderComponent();
     const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
-    expect(decorator);
+    expect(decorator).toBeInTheDocument();
   });
 
   it('renders a component DecoratorLink with a link', async () => {

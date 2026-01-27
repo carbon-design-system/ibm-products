@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,10 +14,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { carbon, pkg } from '../../settings';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button } from '@carbon/react';
+import { Button, usePrefix } from '@carbon/react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -34,7 +34,7 @@ const defaults = {
   expandedItemsLimit: 10,
   onClick: () => {},
   viewLessLabel: 'View less',
-  viewMoreLabel: (value) => `View more (${value})`,
+  viewMoreLabel: (value: number) => `View more (${value})`,
 };
 
 export interface TruncatedListProps extends PropsWithChildren {
@@ -73,14 +73,17 @@ export interface TruncatedListProps extends PropsWithChildren {
   /**
    * Callback function for building the label when the list is collapsed.
    */
-  viewMoreLabel?: (value: any) => ReactNode;
+  viewMoreLabel?: (value: number) => ReactNode;
 }
 /**
  * The `TruncatedList` allows consumers to control how many items are
  * revealed to the user while giving the user the ability to expand
  * and see the entire list.
  */
-export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
+export const TruncatedList = React.forwardRef<
+  HTMLDivElement,
+  TruncatedListProps
+>(
   (
     {
       children,
@@ -109,6 +112,7 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
     //   (difference of the guessed height to rendered height - a few pixels)
     const [listHeight, setListHeight] = useState(minItems * 16);
     const listRef = useRef<HTMLElement | undefined>(undefined);
+    const carbonPrefix = usePrefix();
 
     const handleToggle = () => {
       setIsCollapsed((prev) => !prev);
@@ -171,7 +175,7 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
           <Button
             className={cx(
               `${blockClass}__button`,
-              `${carbon.prefix}--link`,
+              `${carbonPrefix}--link`,
               buttonClassName
             )}
             kind="ghost"
@@ -189,7 +193,6 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-TruncatedList = pkg.checkComponentEnabled(TruncatedList, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { DecoratorBase } from '.';
 import mdx from './DecoratorBase.mdx';
 
@@ -30,7 +30,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: 'IBM Products/Internal/DecoratorBase',
+  title: 'Internal/DecoratorBase',
   component: DecoratorBase,
   tags: ['autodocs'],
   parameters: {

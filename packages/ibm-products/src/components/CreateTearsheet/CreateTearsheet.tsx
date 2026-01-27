@@ -190,7 +190,7 @@ interface Step {
   title?: string;
 }
 
-export let CreateTearsheet = forwardRef(
+export const CreateTearsheet = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -241,7 +241,7 @@ export let CreateTearsheet = forwardRef(
 
     useEffect(() => {
       const firstItem =
-        stepData.findIndex((item) => item.shouldIncludeStep === true) + 1;
+        stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
       const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
       if (firstItem !== firstIncludedStep) {
         setCurrentStep(firstItem);
@@ -262,9 +262,9 @@ export let CreateTearsheet = forwardRef(
     useCreateComponentFocus({
       previousState,
       currentStep,
-      blockClass,
+      blockClass: `.${blockClass} .${pkg.prefix}--tearsheet-create__step`,
       onMount,
-      firstFocusElement,
+      firstFocusElement: firstFocusElement || selectorPrimaryFocus,
     });
     useValidCreateStepCount(stepData.length, componentName);
     useResetCreateComponent({
@@ -337,7 +337,12 @@ export let CreateTearsheet = forwardRef(
         selectorPrimaryFocus={selectorPrimaryFocus}
       >
         <div className={`${blockClass}__content`} ref={contentRef}>
-          <Form aria-label={title}>
+          <Form
+            aria-label={title}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+              e.preventDefault()
+            }
+          >
             <StepsContext.Provider
               value={{
                 currentStep,
@@ -366,7 +371,6 @@ export let CreateTearsheet = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CreateTearsheet = pkg.checkComponentEnabled(CreateTearsheet, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

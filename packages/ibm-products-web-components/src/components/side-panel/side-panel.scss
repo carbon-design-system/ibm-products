@@ -134,6 +134,11 @@ $block-class-action-set: #{$prefix}--action-set;
     }
   }
 
+  // Slide-in panels should use border not shadows since they don’t layer
+  .#{$block-class}[slide-in]:not(.#{$block-class}__overlay) {
+    box-shadow: none;
+  }
+
   .#{$block-class}__header {
     &::before {
       z-index: 99; /* must be higher than action toolbar */

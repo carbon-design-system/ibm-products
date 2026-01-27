@@ -102,8 +102,12 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__influencer[wide] {
     @extend .#{$block-class}__influencer--wide;
   }
-  ::slotted(#{config.$prefix}-slug) {
+
+  ::slotted([slot='decorator']),
+  ::slotted(#{$carbon-prefix}-slug) {
+    position: absolute;
     display: flex;
+    inset-block-start: to-rem(10px);
     inset-inline-end: 0;
     /* stylelint-disable-next-line carbon/layout-use */
     margin-block: 6px;
@@ -171,7 +175,8 @@ $motion-duration: $duration-moderate-02;
   @extend .#{config.$prefix}--visually-hidden;
 }
 
-:host(#{$prefix}-tearsheet[slug]) {
+:host(#{$prefix}-tearsheet[slug]),
+:host(#{$prefix}-tearsheet[ai-label]) {
   --overlay-color: #{$ai-overlay};
 
   .#{$block-class}__container {
@@ -200,7 +205,13 @@ $motion-duration: $duration-moderate-02;
 
 :host(#{$prefix}-tearsheet[slug])
   .#{$prefix}--tearsheet__header[has-actions]
-  ::slotted(#{$prefix}-slug) {
+  ::slotted(#{$prefix}-slug),
+:host(#{$prefix}-tearsheet[ai-label])
+  .#{$prefix}--tearsheet__header[has-actions]
+  ::slotted(#{$prefix}-ai-label),
+:host(#{$prefix}-tearsheet[decorator])
+  .#{$prefix}--tearsheet__header[has-actions]
+  ::slotted([slot='decorator']) {
   inset-inline-end: 0;
 }
 
@@ -255,11 +266,13 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__header[has-close-icon],
-  .#{$block-class}__header[has-slug] {
+  .#{$block-class}__header[has-slug],
+  .#{$block-class}__header[has-decorator] {
     padding-inline-end: $spacing-11;
   }
 
-  .#{$block-class}__header[has-close-icon][has-slug] {
+  .#{$block-class}__header[has-close-icon][has-slug],
+  .#{$block-class}__header[has-close-icon][has-decorator] {
     /* stylelint-disable-next-line carbon/layout-use */
     padding-inline-end: calc(#{$spacing-11 + $spacing-09});
   }

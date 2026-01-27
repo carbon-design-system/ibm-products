@@ -15,14 +15,15 @@ import React, {
 import PropTypes from 'prop-types';
 
 import {
-  disableButtonConfigType,
   InterstitialScreenContext,
-} from './InterstitialScreen';
+  blockClass,
+  disableButtonConfigType,
+} from './context';
 import { ModalBody } from '@carbon/react';
-import { pkg } from '../../settings';
 
 import { Carousel } from '../Carousel';
 import { EnrichedChildren } from './InterstitialScreenHeader';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 type contentRendererArgs = {
   handleGotoStep?: (value: number) => void;
@@ -31,14 +32,20 @@ type contentRendererArgs = {
 };
 export interface InterstitialScreenBodyProps {
   /**
+   * Optional static content for body
+   */
+  children?: ReactNode;
+  /**
    * Provide an optional class to be applied to the containing node.
    */
   className?: string;
   /**
-   * This is a required callback that has to return the content to render in the body section.
-   * It can be a single child or an array of children depending on your need
+   *You can provide content either through a callback (contentRenderer) or as static children—but not both.
+   * If both are provided, contentRenderer always takes precedence. This optional callback should return the content
+   * to be rendered in the body section, which can be either a single element or an array of elements based on your needs.
+   * If internal state access isn’t required, you can simply use static children instead
    */
-  contentRenderer: (
+  contentRenderer?: (
     config: contentRendererArgs
   ) => ReactElement<EnrichedChildren> | ReactNode;
 }
@@ -50,7 +57,7 @@ const InterstitialScreenBody = React.forwardRef<
   InterstitialScreenBodyProps
 >((props, ref) => {
   const { className = '', contentRenderer, ...rest } = props;
-  const blockClass = `${pkg.prefix}--interstitial-screen`;
+
   const bodyBlockClass = `${blockClass}--internal-body`;
 
   const [stepType, setStepType] = useState<StepType>();
@@ -72,29 +79,36 @@ const InterstitialScreenBody = React.forwardRef<
   const [scrollPercent, setScrollPercent] = useState(-1);
 
   useEffect(() => {
-    const _bodyContent = contentRenderer({
-      handleGotoStep,
-      progStep,
-      disableActionButton,
-    });
+    // Get the content either from contentRenderer or fallback to props.children
+    const _bodyContent =
+      contentRenderer?.({ handleGotoStep, progStep, disableActionButton }) ??
+      props.children;
 
-    const isElement = isValidElement(_bodyContent);
-    const children = isElement
-      ? (_bodyContent.props as { children?: ReactNode }).children
-      : _bodyContent;
+    // If content is a valid React element and has children, use its children; otherwise use the content itself
+    const children =
+      isValidElement(_bodyContent) &&
+      (_bodyContent.props as { children?: ReactNode }).children != null
+        ? (_bodyContent.props as { children?: ReactNode }).children
+        : _bodyContent;
 
-    // Set body children data
-    setBodyChildrenData?.(children);
-    // If the children is an array, treat it as a multiStep
-    if (isElement && Array.isArray(children)) {
+    // Convert to a valid array of React elements
+    const validChildren =
+      React.Children.toArray(children).filter(isValidElement);
+
+    // Determine step type and count
+    if (validChildren.length > 1) {
       setStepType('multi');
-      setStepCount?.(children.length);
+      setStepCount?.(validChildren.length);
+      // Store content for rendering
+      setBodyChildrenData?.(validChildren);
     } else {
       setStepType('single');
+      setStepCount?.(1);
+      setBodyChildrenData?.(_bodyContent);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [progStep]);
+  }, [props.children, contentRenderer, progStep]);
 
   useEffect(() => {
     if (scrollPercent !== -1) {
@@ -124,13 +138,15 @@ const InterstitialScreenBody = React.forwardRef<
     <div
       className={`${blockClass}--body ${className}`}
       ref={bodyScrollRef ?? ref}
-      {...rest}
+      {...getDevtoolsProps('InterstitialScreenBody')}
+      {...(isFullScreen ? rest : {})}
     >
       <div className={`${blockClass}--content`}>
         {stepType === 'multi' ? (
           <div className={`${blockClass}__carousel`}>
             <Carousel
               disableArrowScroll
+              disableResetOnResize
               ref={scrollRef}
               onScroll={onScrollHandler}
             >
@@ -149,7 +165,7 @@ const InterstitialScreenBody = React.forwardRef<
   return isFullScreen ? (
     renderBody()
   ) : (
-    <ModalBody ref={ref} className={bodyBlockClass}>
+    <ModalBody ref={ref} className={bodyBlockClass} {...rest}>
       {renderBody()}
     </ModalBody>
   );
@@ -159,12 +175,18 @@ export default InterstitialScreenBody;
 
 InterstitialScreenBody.propTypes = {
   /**
+   * Optional static content for body
+   */
+  children: PropTypes.node,
+  /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
   /**
-   * This is a required callback that has to return the content to render in the body section.
-   * It can be a single child or an array of children depending on your need
+   *You can provide content either through a callback (contentRenderer) or as static children—but not both.
+   * If both are provided, contentRenderer always takes precedence. This optional callback should return the content
+   * to be rendered in the body section, which can be either a single element or an array of elements based on your needs.
+   * If internal state access isn’t required, you can simply use static children instead
    */
-  contentRenderer: PropTypes.func.isRequired,
+  contentRenderer: PropTypes.func,
 };

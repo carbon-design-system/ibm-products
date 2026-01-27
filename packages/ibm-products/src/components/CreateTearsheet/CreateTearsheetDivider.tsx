@@ -18,7 +18,7 @@ interface CreateTearsheetDividerProps {
   className?: string;
 }
 
-export let CreateTearsheetDivider: React.FC<CreateTearsheetDividerProps> =
+export const CreateTearsheetDivider: React.FC<CreateTearsheetDividerProps> =
   forwardRef(
     (
       {
@@ -31,12 +31,6 @@ export let CreateTearsheetDivider: React.FC<CreateTearsheetDividerProps> =
       return <span {...rest} ref={ref} className={cx(blockClass, className)} />;
     }
   );
-
-// Return a placeholder if not released and not enabled by feature flag
-CreateTearsheetDivider = pkg.checkComponentEnabled(
-  CreateTearsheetDivider,
-  componentName
-);
 
 CreateTearsheetDivider.propTypes = {
   /**

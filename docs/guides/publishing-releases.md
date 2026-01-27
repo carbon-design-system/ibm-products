@@ -70,22 +70,17 @@ release team will need to do the following:
   - Make sure the branch name follows the `release/vx.x.x` format
     ![Screenshot of manually creating release branch from GitHub UI](https://github.com/carbon-design-system/ibm-products/assets/54281166/0920cd6f-e4cd-44e9-ad8c-a3195bbaf9ea)
 
-- [ ] Add branch protections to the release branch by going to 'Settings' in the
-      IBM Products repository > 'Branches' under 'Code and automation' side
-      panel. Change the branch name pattern from `released/v2*` to
-      `release/v2*`.
-      ![Screenshot of branch settings page](https://github.com/carbon-design-system/ibm-products/assets/54281166/45855e7f-6440-48db-856c-2cfab1e8530f)
-
 - [ ] Run the
-      [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
-      to generate the prerelease versions for the packages
+      [release start workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-start.yml)
+      (with `minor` as the selected semver type) to generate the prerelease
+      versions for the packages
 
   - [ ] Ensure the release branch is selected
-  - [ ] Specify the type of release - in this case we will select
-        `first minor rc` (rc stands for release candidate)
+  - [ ] Specify the type of release - in this case we will select `first rc` (rc
+        stands for release candidate)
   - [ ] Ensure the dry run is checked
 
-  ![Screenshot of minor release workflow](https://github.com/carbon-design-system/ibm-products/assets/54281166/8ee243b5-0933-4505-be7d-58c64d99ce40)
+  ![Screenshot of release start workflow](../../.github/assets/release-start.png)
 
 - [ ] Once the job has completed, which it should have failed, check the
       action's log. Lerna should have logged what versions it is bumping the
@@ -101,8 +96,16 @@ release team will need to do the following:
 - [ ] The workflow should have triggered the
       [deploy staging environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-staging.yml).
       Once this workflow has completed, check the
-      [staging environment](https://carbon-design-system.github.io/ibm-products/staging)
+      [staging environment for React](https://carbon-design-system.github.io/ibm-products/staging/react)
+      and
+      [staging environment for Web components](https://carbon-design-system.github.io/ibm-products/staging/web-components)
       and ensure the version in the storybook top left header has been updated.
+- [ ] Add branch protections to the release branch by going to 'Settings' in the
+      IBM Products repository > 'Branches' under 'Code and automation' side
+      panel. Change the branch name pattern from `released/v2*` to
+      `release/v2*`.
+      ![Screenshot of branch settings page](https://github.com/carbon-design-system/ibm-products/assets/54281166/45855e7f-6440-48db-856c-2cfab1e8530f)
+
 - [ ] Run the
       [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
       This workflow creates the release tag, generates the release with notes,
@@ -118,8 +121,8 @@ release team will need to do the following:
   - [ ] Check the generated
         [release](https://github.com/carbon-design-system/ibm-products/releases)
         to ensure the release notes are correct.
-- [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
-      new version of `@carbon/ibm-products`.
+- [ ] Post a message to the `#carbon-for-ibmproducts` Slack channel to announce
+      the new version of `@carbon/ibm-products`.
 
   - For **release candidates**, an example message:
 
@@ -131,7 +134,8 @@ release team will need to do the following:
     What is a release candidate? Before releasing a full version (ie. v2.45.0), we publish prerelease versions / release candidates for testing purposes. This helps to prevent any major bugs making their way to our full versions. If you find any issues with this release candidate, you can report any issues here: https://github.com/carbon-design-system/ibm-products/issues/new/choose.
 
     Changelog: https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.45.0-rc.0
-    Storybook environment (Staging): https://carbon-design-system.github.io/ibm-products/staging/
+    Storybook environment for react (Staging): https://carbon-design-system.github.io/ibm-products/staging/react/
+    Storybook environment for web-components (Staging): https://carbon-design-system.github.io/ibm-products/staging/web-components/
 
     :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
     ```
@@ -144,9 +148,10 @@ can be pushed to the release branch. We can then publish subsequent prereleases
 from the release branch for further testing. To publish subsequent prereleases,
 
 - [ ] Run the
-      [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
-      to generate the prerelease versions for the packages
-      ![Screenshot of minor release workflow with subsequent release selected](https://github.com/carbon-design-system/ibm-products/assets/54281166/5d2694df-251d-46f4-bb9f-b86587758236)
+      [release start workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
+      (with `minor` as the selected semver type) to generate the prerelease
+      versions for the packages
+      ![Screenshot of release start workflow with subsequent release selected](../../.github/assets/release-start-subsequent-rc.png)
   - [ ] Ensure the release branch is selected
   - [ ] Specify the type of release - in this case we will select
         `subsequent rc`
@@ -165,7 +170,9 @@ from the release branch for further testing. To publish subsequent prereleases,
 - [ ] The workflow should have triggered the
       [deploy staging environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-staging.yml).
       Once this workflow has completed, check the
-      [staging environment](https://carbon-design-system.github.io/ibm-products/staging)
+      [staging environment for React](https://carbon-design-system.github.io/ibm-products/staging/react)
+      and
+      [staging environment for Web components](https://carbon-design-system.github.io/ibm-products/staging/web-components)
       and ensure the version in the storybook top left header has been updated.
 - [ ] Run the
       [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
@@ -182,8 +189,8 @@ from the release branch for further testing. To publish subsequent prereleases,
   - [ ] Check the generated
         [release](https://github.com/carbon-design-system/ibm-products/releases)
         to ensure the release notes are correct.
-- [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
-      new version of `@carbon/ibm-products`.
+- [ ] Post a message to the `#carbon-for-ibmproducts` Slack channel to announce
+      the new version of `@carbon/ibm-products`.
 
   - For **release candidates**, an example message:
 
@@ -195,7 +202,8 @@ from the release branch for further testing. To publish subsequent prereleases,
     What is a release candidate? Before releasing a full version (ie. v2.45.0), we publish prerelease versions / release candidates for testing purposes. This helps to prevent any major bugs making their way to our full versions. If you find any issues with this release candidate, you can report any issues here: https://github.com/carbon-design-system/ibm-products/issues/new/choose.
 
     Changelog: https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.45.0-rc.1
-    Storybook environment (Staging): https://carbon-design-system.github.io/ibm-products/staging/
+    Storybook environment for react (Staging): https://carbon-design-system.github.io/ibm-products/staging/react/
+    Storybook environment for web-components (Staging): https://carbon-design-system.github.io/ibm-products/staging/web-components/
 
     :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
     ```
@@ -206,15 +214,19 @@ A stable release occurs on the last Wednesday of the sprint and finishes later
 in the day. This should occur after the prerelease has been tested and
 validated. During this stage, the release team will do the following:
 
-- [ ] Run the
-      [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
-      to generate the full minor versions for the packages
+- [ ] Remove the branch protections for `release/v2.*` by changing the branch
+      name pattern to `released/v2*`
+      ![Screenshot of branch settings page with branch name pattern changed back to released](https://github.com/carbon-design-system/ibm-products/assets/54281166/690d4b71-4efa-4b70-9768-c3f4eae9ca7e)
 
-  ![Screenshot of minor release workflow with full minor release selected](https://github.com/carbon-design-system/ibm-products/assets/54281166/9f7a5b75-5b5b-4530-b52b-7070e00a14e7)
+- [ ] Run the
+      [release start workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-start.yml)
+      (with `minor` as the selected semver type) to generate the full minor
+      versions for the packages
+
+  ![Screenshot of release start workflow with full minor release selected](../../.github/assets/release-start-full-release.png)
 
   - [ ] Ensure the release branch is selected
-  - [ ] Specify the type of release - in this case we will select
-        `full minor release`
+  - [ ] Specify the type of release - in this case we will select `full release`
   - [ ] Ensure the dry run is checked
 
 - [ ] Once the job has completed, which it should have failed, check the
@@ -233,10 +245,15 @@ validated. During this stage, the release team will do the following:
       and the
       [deploy production environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-latest.yml).
       Once both these workflows have completed, check the
-      [staging environment](https://carbon-design-system.github.io/ibm-products/staging)
+      [staging environment for React](https://carbon-design-system.github.io/ibm-products/staging/react)
+      and
+      [staging environment for Web components](https://carbon-design-system.github.io/ibm-products/staging/web-components)
       and the
-      [production/latest environment](https://carbon-design-system.github.io/ibm-products/latest)
+      [production/latest environment for React](https://carbon-design-system.github.io/ibm-products/latest/react)
+      and
+      [production/latest environment for Web components](https://carbon-design-system.github.io/ibm-products/latest/web-components)
       to ensure the versions in the storybook top left header have been updated.
+
 - [ ] Run the
       [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
       This workflow creates the release tag, generates the release with notes,
@@ -254,9 +271,9 @@ validated. During this stage, the release team will do the following:
         to ensure the release notes are correct.
   - [ ] Edit the generated release, and change the release from `pre-release` to
         `latest`.
-        ![Screenshot of release label with latest option selected](https://github.com/user-attachments/assets/0be18f12-380e-45f2-b8aa-cfd01b9aa50c)
-- [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
-      new version of `@carbon/ibm-products`.
+        ![Screenshot of release label with latest option selected](../../.github/assets/release-preview-to-latest.png)
+- [ ] Post a message to the `#carbon-for-ibmproducts` Slack channel to announce
+      the new version of `@carbon/ibm-products`.
 
   - For **full releases**, list some of the features included in the release.
     These can be pulled from the release changelog. An example message:
@@ -281,10 +298,6 @@ validated. During this stage, the release team will do the following:
 
     :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
     ```
-
-- [ ] Remove the branch protections for `release/v2.*` by changing the branch
-      name pattern to `released/v2*`
-      ![Screenshot of branch settings page with branch name pattern changed back to released](https://github.com/carbon-design-system/ibm-products/assets/54281166/690d4b71-4efa-4b70-9768-c3f4eae9ca7e)
 
 - [ ] Update the release in the
       [Wiki release page](https://github.com/carbon-design-system/ibm-products/wiki/Carbon-for-IBM-Products-Releases)
@@ -331,7 +344,6 @@ patch release:
       branch creation steps as we have already created the patch release branch
       from the steps above here),
       [subsequent prerelease](#subsequent-prerelease), and
-      [stable release](#stable-release) publishes, except instead of using the
-      [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml),
-      use the
-      [patch release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-patch.yml)
+      [stable release](#stable-release) publishes, except instead of selecting
+      `minor` as the semver type, you will select `patch` from the
+      [release start workflow](https://github.com/carbon-design-system/ibm-products/blob/main/.github/workflows/release-start.yml).

@@ -604,7 +604,7 @@ export const inputData = {
         operators: customOperators,
         valueFormatter: (value) => {
           // add any customization to the value to be populated
-          return value.toLocaleUpperCase();
+          return value?.toLocaleUpperCase();
         },
       },
     },
@@ -630,9 +630,23 @@ function modifyPropertiesWithoutCustomOperators(inputData) {
   return { ...inputData, properties: newProperties };
 }
 
+const modifyPropertiesWithDisabledProps = (inputData) => {
+  const newProperties = inputData.properties.map((property, index) => {
+    return {
+      ...property,
+      getIsDisabled: () => index === 1 || index === 3,
+      getIsHidden: () => index === 2,
+    };
+  });
+
+  return { ...inputData, properties: newProperties };
+};
+
 export const inputDataForCustomOperator =
   modifyPropertiesWithoutCustomOperators(inputData);
 
+export const inputDataWithDisabledProperties =
+  modifyPropertiesWithDisabledProps(inputData);
 export const inputDataDynamicOptions = {
   properties: [
     {

@@ -76,6 +76,50 @@ see the Carbon
 and the Carbon for IBM Products
 [v2 migration guide](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/v2.md).
 
+### Installation
+
+Using npm:</br> `npm install @carbon/ibm-products`
+
+If you prefer Yarn:</br> `yarn add @carbon/ibm-products`
+
+#### Styles
+
+The `@carbon/ibm-products` package provides several options for importing the
+package styles:
+
+_// Include all the styles, including Carbon and experimental styles_</br>
+`@use '@carbon/ibm-products/css/index.min.css';`
+
+_// Include only styles from @carbon/ibm-products_</br>
+`@use '@carbon/ibm-products/css/index-without-carbon.css';`
+
+_// Include only styles from @carbon/ibm-products, excluding experimental
+styles_</br>
+`@use '@carbon/ibm-products/css/index-without-carbon-released-only.css';`
+
+_// Include all styles from carbon_</br>
+`@use '@carbon/ibm-products/css/index-full-carbon.css';`
+
+To include the styles for a specific component:
+
+_// Bring in the styles for one component_</br>
+`@use '@carbon/ibm-products/scss/components/AboutModal';`
+
+You can also leverage the Carbon for IBM Products styles independently of the
+React package using the
+[@carbon/ibm-products-styles](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products-styles)
+package.
+
+#### Usage
+
+```
+import { AboutModal } from '@carbon/ibm-products';
+
+const App = () => {
+  return <AboutModal />;
+};
+```
+
 ## 🙌 Contributing
 
 This project is made possible by several community members who have invested

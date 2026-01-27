@@ -14,7 +14,7 @@ test.describe('EditInPlace @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'EditInPlace',
-      id: 'ibm-products-patterns-edit-and-update-editinplace--default',
+      id: 'components-editinplace--default',
       globals: {
         carbonTheme: 'white',
       },

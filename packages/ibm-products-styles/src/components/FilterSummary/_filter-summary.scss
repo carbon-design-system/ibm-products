@@ -22,7 +22,7 @@ $block-class: #{$pkg-prefix}--filter-summary;
 
 .#{$block-class} {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: $spacing-03;
   background: $layer-01;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */

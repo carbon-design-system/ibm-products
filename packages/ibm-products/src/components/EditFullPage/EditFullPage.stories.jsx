@@ -6,7 +6,7 @@
  */
 import React, { useState } from 'react';
 import { carbon } from '../../settings';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { CreateFullPage } from '../CreateFullPage';
 import { CreateFullPageStep } from '../CreateFullPage/CreateFullPageStep';
 import { pkg } from '../../settings';
@@ -31,6 +31,7 @@ import {
   Column,
   Grid,
   DefinitionTooltip,
+  usePrefix,
 } from '@carbon/react';
 import DocsPage from './EditFullPage.docs-page';
 
@@ -91,10 +92,11 @@ const Template = ({ ...args }) => {
   const [simulatedDelay] = useState(750);
   const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
     useState(false);
+  const carbonPrefix = usePrefix();
 
   return (
     <>
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
       <CreateFullPage {...args}>
         <CreateFullPageStep
           className={`${storyClass}__step-fieldset--no-label`}
@@ -282,10 +284,11 @@ const TemplateWithSections = ({ ...args }) => {
   const [shouldReject, setShouldReject] = useState(false);
   const [isInvalid, setIsInvalid] = useState(false);
   const [simulatedDelay] = useState(750);
+  const carbonPrefix = usePrefix();
 
   return (
     <>
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
       <CreateFullPage className={`${blockClass}`} {...args}>
         <CreateFullPageStep
           title="Partition"

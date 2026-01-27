@@ -27,9 +27,10 @@ import {
   MenuButton,
   MenuItem,
 } from '@carbon/react';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useIsomorphicEffect } from '../../../global/js/hooks';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { pkg } from '../../../settings';
 import { useFilterContext } from '../Datagrid/addons/Filtering/hooks';
 
@@ -79,7 +80,7 @@ export const DatagridActions = (datagridState) => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [size, setSize] = useState(window.innerWidth);
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     function updateSize() {
       setSize(window.innerWidth);
     }

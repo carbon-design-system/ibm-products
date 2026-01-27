@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Fragment, useContext, useRef, useState } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import ConditionBlock from '../ConditionBlock/ConditionBlock';
 import PropTypes from 'prop-types';
 
@@ -70,6 +76,67 @@ const ConditionGroupBuilder = ({
     useState(-1);
   useState(false);
   const conditionBuilderContentRef = useRef<HTMLDivElement>(null);
+  const scrollParentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // getting scrollable parent initially
+    if (
+      typeof conditionBuilderRef !== 'function' &&
+      conditionBuilderRef?.current
+    ) {
+      scrollParentRef.current = getScrollableParent(
+        conditionBuilderRef.current
+      );
+    }
+  }, [conditionBuilderRef]);
+
+  useEffect(() => {
+    // This fix addresses a flickering issue when hovering over "Add Condition" or "Add Subgroup".
+    // On hover, the component inserts a preview element below, ideally pushing the layout downward to create space.
+    // However, if the container is scrolled to the bottom, the layout may instead shift content upward,
+    // breaking the hover chain and causing the preview to flicker.
+    // Fix: When showing the preview on hover, if the scroll position is at the bottom,
+    // scrolling up by 1px prevents layout shift from breaking the hover chain and eliminates flickering.
+
+    const parent = scrollParentRef.current;
+    let atBottom = false;
+
+    if (
+      parent instanceof Window ||
+      parent === document.body ||
+      parent === document.documentElement
+    ) {
+      atBottom =
+        window.innerHeight + window.scrollY >= document.body.scrollHeight;
+    } else if (scrollParentRef.current) {
+      const parent = scrollParentRef.current;
+      atBottom = parent.scrollTop + parent.clientHeight >= parent.scrollHeight;
+    }
+
+    if ((showConditionPreview || showConditionSubGroupPreview) && atBottom) {
+      scrollParentRef.current?.scrollBy(0, -1);
+    }
+  }, [showConditionPreview, showConditionSubGroupPreview]);
+
+  const getScrollableParent = (element) => {
+    while (element && element !== document.body) {
+      const style = getComputedStyle(element);
+      const overflowY = style.overflowY;
+      const isScrollable =
+        overflowY === 'auto' ||
+        overflowY === 'scroll' ||
+        overflowY === 'overlay';
+
+      if (isScrollable && element.scrollHeight > element.clientHeight) {
+        return element;
+      }
+
+      element = element.parentElement;
+    }
+
+    return window; // fallback to window
+  };
+
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
     if (group && group.conditions && group.conditions.length > 1) {
       if (variant == HIERARCHICAL_VARIANT) {
@@ -386,7 +453,7 @@ const ConditionGroupBuilder = ({
               label={group.statement}
               title={conditionText}
               data-name="connectorField"
-              popOverClassName={`${blockClass}__gap`}
+              popOverClassName={`${blockClass}__gap ${blockClass}__connector`}
               className={`${blockClass}__statement-button`}
             >
               <ItemOption
@@ -483,10 +550,10 @@ const ConditionGroupBuilder = ({
               </div>
             )}
 
-            {conditionIndex == showConditionSubGroupPreview && (
+            {conditionIndex === showConditionSubGroupPreview && (
               <ConditionPreview previewType="subGroup" group={group} />
             )}
-            {conditionIndex == showConditionPreview && (
+            {conditionIndex === showConditionPreview && (
               <ConditionPreview previewType="condition" group={group} />
             )}
           </Fragment>

@@ -41,7 +41,7 @@ export interface GuidebannerElementProps {
  * The GuidebannerElement is a required child component of the Guidebanner,
  * and acts as a container for a CarouselItem.
  */
-export let GuidebannerElement = React.forwardRef<
+export const GuidebannerElement = React.forwardRef<
   HTMLDivElement,
   GuidebannerElementProps
 >(({ button, className, description, title, ...rest }, ref) => {
@@ -58,12 +58,6 @@ export let GuidebannerElement = React.forwardRef<
     </div>
   );
 });
-
-// Return a placeholder if not released and not enabled by feature flag
-GuidebannerElement = pkg.checkComponentEnabled(
-  GuidebannerElement,
-  componentName
-);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

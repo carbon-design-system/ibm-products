@@ -27,7 +27,7 @@ import styles from './_storybook-styles.scss?inline';
 import DocsPage from './CreateModal.docs-page';
 
 export default {
-  title: 'IBM Products/Patterns/Create flows/CreateModal',
+  title: 'Patterns/Prebuilt patterns/Create flows/CreateModal',
   component: CreateModal,
   tags: ['autodocs'],
   parameters: {

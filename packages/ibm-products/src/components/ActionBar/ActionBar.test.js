@@ -88,21 +88,14 @@ const testSizes = (el, property) => {
 };
 
 describe(ActionBar.displayName, () => {
-  const { ResizeObserver } = window;
   let mockElement;
 
   beforeEach(() => {
     mockElement = mockHTMLElement(mockSizes());
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
   });
 
   afterEach(() => {
     mockElement.mockRestore();
-    window.ResizeObserver = ResizeObserver;
   });
 
   it('Renders an action bar', async () => {

@@ -39,7 +39,7 @@ export interface InlineTipLinkProps extends PropsWithChildren {
 /**
  * This is a standard Carbon link, styled specifically for use inside InlineTip.
  */
-export let InlineTipLink = React.forwardRef(
+export const InlineTipLink = React.forwardRef(
   (
     { children, className, ...rest }: InlineTipLinkProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -58,7 +58,6 @@ export let InlineTipLink = React.forwardRef(
   }
 );
 
-InlineTipLink = pkg.checkComponentEnabled(InlineTipLink, componentName);
 InlineTipLink.displayName = componentName;
 
 InlineTipLink.propTypes = {

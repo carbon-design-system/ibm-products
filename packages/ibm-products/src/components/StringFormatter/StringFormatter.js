@@ -26,6 +26,7 @@ const blockClass = `${pkg.prefix}--string-formatter`;
 const componentName = 'StringFormatter';
 
 const defaults = {
+  autoAlign: false,
   lines: 1,
   tooltipDirection: StringFormatterAlignment.BOTTOM_START,
   truncate: false,
@@ -40,6 +41,7 @@ export let StringFormatter = React.forwardRef(
   (
     {
       className,
+      autoAlign = defaults.autoAlign,
       lines = defaults.lines,
       tooltipDirection = defaults.tooltipDirection,
       truncate = defaults.truncate,
@@ -110,6 +112,7 @@ export let StringFormatter = React.forwardRef(
           <DefinitionTooltip
             className={`${blockClass}__tooltip`}
             align={tooltipDirection}
+            autoAlign={autoAlign}
             definition={value}
             openOnHover={true}
           >

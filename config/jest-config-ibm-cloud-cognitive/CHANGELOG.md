@@ -1,4 +1,67 @@
-## `@jest-config-ibm-cloud-cognitive@1.27.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.41.0`
+### Bug fixes :bug:
+- fix: convert `babel` and `jest` config packages to ESM (#8782)
+
+## `@jest-config-ibm-cloud-cognitive@1.40.0`
+### Bug fixes :bug:
+- fix: rc clean ups
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+
+### Housekeeping :house:
+- chore: retry prerelease publish other packages
+
+## `@jest-config-ibm-cloud-cognitive@1.38.0`
+### Housekeeping :house:
+- test(PageHeader): react tests clean up with `composeStory` (#8579)
+- chore(sass): update to v1.93.2 (#8567)
+
+## `@jest-config-ibm-cloud-cognitive@1.37.0`
+### Bug fixes :bug:
+- fix(Feature flag): moved the merge logic from feature-flag js to FeatureFlag (#8535)
+
+## `@jest-config-ibm-cloud-cognitive@1.35.0`
+### Housekeeping :house:
+- refactor(scripts): remove chalk dep (#8321)
+- chore: pin chalk (#8261)
+
+## `@jest-config-ibm-cloud-cognitive@1.33.0`
+### Bug fixes :bug:
+- fix: init deprecated extension for codecov (#8039)
+
+### Housekeeping :house:
+- test(makeDraggable): add tests (#8099)
+
+## `@jest-config-ibm-cloud-cognitive@1.32.0`
+### Housekeeping :house:
+- docs(changelog): update for v2.72.0-rc.0 (#7979)
+
+## `@jest-config-ibm-cloud-cognitive@1.31.0`
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#7840)
+
+## `@jest-config-ibm-cloud-cognitive@1.30.0`
+### Housekeeping :house:
+- chore: remove redundant upgrade scripts (#7774)
+
+## `@jest-config-ibm-cloud-cognitive@1.29.0`
+### Bug fixes :bug:
+- fix(deps): update dependency jest-watch-typeahead to v3 (#7718)
+
+### Housekeeping :house:
+- chore: add global mocks to jest setup (#7653)
+
+## `@jest-config-ibm-cloud-cognitive@1.28.0`
+### Housekeeping :house:
+- docs(changelog): update for v2.68.0-rc.0 (#7602)
+
+## `@jest-config-ibm-cloud-cognitive@1.27.0`
 ### Housekeeping :house:
 - refactor(useResizeObserver): migrate to TS and refactor tests to include resize validation (#7548)
 

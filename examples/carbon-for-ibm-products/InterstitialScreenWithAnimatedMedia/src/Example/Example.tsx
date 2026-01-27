@@ -34,10 +34,8 @@ export const Example = () => {
   const [showInterstitialModal, setShowInterstitialModal] = useState(true);
 
   const defaultProps = {
-    headerTitle: 'Welcom, Jan!',
-    interstitialAriaLabel: 'Interstitial Screen',
+    headerTitle: 'Welcome, Jan!',
   };
-  const step2Ref = useRef();
   const getContent = ({ progStep }) => {
     return (
       <>
@@ -192,11 +190,10 @@ export const Example = () => {
         Show Interstitial modal
       </Button>
       <InterstitialScreen
-        isOpen={showInterstitialModal}
+        open={showInterstitialModal}
         onClose={() => {
           setShowInterstitialModal(false);
         }}
-        interstitialAriaLabel={defaultProps.interstitialAriaLabel}
         isFullScreen={false}
       >
         <InterstitialScreen.Header

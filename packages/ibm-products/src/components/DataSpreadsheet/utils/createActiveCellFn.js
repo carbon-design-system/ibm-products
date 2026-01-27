@@ -25,10 +25,13 @@ export const createActiveCellFn = ({
   }
   // If the active cell is in the column header row (very first), we need to append this element
   // to `.${blockClass}__header--container`, otherwise it should be appended to `.${blockClass}__listContainer` firstElementChild
+  const spreadsheetSelector = contextRef?.current ?? document;
   const point1Element =
-    document.querySelector(
+    spreadsheetSelector.querySelector(
       `[data-row-index="${coords.row}"][data-column-index="${coords.column}"]`
-    ) || document.querySelector(`.${blockClass}__body--td`); // if we can't find the point1 element (this can happen in the case where a virtualized row is not present anymore in the DOM), we get the default height/width of the first body cell we find
+    ) || spreadsheetSelector.querySelector(`.${blockClass}__body--td`);
+  // if we can't find the point1 element (this can happen in the case where a virtualized row is not present anymore in the DOM), we get the default height/width of the first body cell we find
+
   const selectionAreaCellWidth = point1Element.offsetWidth;
   const selectionAreaCellHeight = point1Element.offsetHeight;
   const activeElementContainer = addToHeader

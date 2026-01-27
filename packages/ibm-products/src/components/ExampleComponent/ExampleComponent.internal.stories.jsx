@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Add } from '@carbon/react/icons';
 import { ExampleComponent } from '.';
 import { pkg } from '../../settings';
@@ -14,7 +14,7 @@ import { pkg } from '../../settings';
 // import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Internal/ExampleComponent',
+  title: 'Internal/ExampleComponent',
   component: ExampleComponent,
   tags: ['autodocs'],
   argTypes: {

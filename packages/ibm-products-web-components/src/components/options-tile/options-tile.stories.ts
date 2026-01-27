@@ -1,22 +1,25 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html } from 'lit';
+import { fn } from 'storybook/test';
 import './index';
 import '@carbon/web-components/es/components/toggle/index.js';
+import '@carbon/web-components/es/components/dropdown/index.js';
+import styles from './story-styles.scss?lit';
 
 const argTypes = {
   body: {
     control: 'text',
     description: 'Slot body content',
   },
-  open: {
+  defaultOpen: {
     control: 'boolean',
     description: 'If `true` the body of the component is shown',
   },
@@ -39,54 +42,63 @@ const argTypes = {
   },
 };
 
-const handleOpen = (evt: Event) => {
-  const tile = document.querySelector('#my-tile');
-  tile?.setAttribute('open', 'true');
-};
-
-const handleClose = (evt: Event) => {
-  const tile = document.querySelector('#my-tile');
-  tile?.removeAttribute('open');
-};
-
-const renderTemplate = (args) => {
-  const { open, size, titleText, titleId } = args;
-  return html`
-    <c4p-options-tile
-      id="my-tile"
-      ?open=${open}
-      size=${size}
-      titleId=${titleId}
-      titleText=${titleText}
-      @c4p-options-tile-open=${handleOpen}
-      @c4p-options-tile-close=${handleClose}
-    >
-      <div slot="summary">
-        <span>${args.summary}</span>
-      </div>
-      <div slot="toggle">
-        <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>
-      </div>
-      <div slot="body">${args.body}</div>
-    </c4p-options-tile>
-  `;
-};
+const blockClass = 'options-tile';
 
 export const Default = {
   args: {
-    body: 'Body content',
-    open: false,
+    defaultOpen: false,
     size: 'lg',
-    summary: 'Back up every 10min',
     titleId: 'title-01',
-    titleText: 'Auto recovery',
+    titleText: 'Language',
   },
   argTypes,
-  render: renderTemplate,
+  render: (args) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <c4p-options-tile
+        class=${blockClass}
+        ?defaultOpen=${args.defaultOpen}
+        id="my-tile"
+        size=${args.size}
+        titleId=${args.titleId}
+        titleText=${args.titleText}
+        @c4p-options-tile-open=${console.log('open option tile')}
+        @c4p-options-tile-close=${console.log('close option tile')}
+      >
+        <div slot="summary">
+          <span>English | Locale: English</span>
+        </div>
+        <div slot="toggle">
+          <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>
+        </div>
+        <div slot="body">
+          <div class=${`${blockClass}__body`}>
+            <p>
+              User interface defines the language the application is displayed
+              in. Locale sets the regional display formats for information like
+              time, date, currency and decimal delimiters.
+            </p>
+            <div class=${`${blockClass}__dropdown`}>
+              <cds-dropdown title-text="User interface" label="User interface">
+                <cds-dropdown-item value="option-0">English</cds-dropdown-item>
+              </cds-dropdown>
+            </div>
+            <div class=${`${blockClass}__dropdown`}>
+              <cds-dropdown title-text="Locale" label="Locale">
+                <cds-dropdown-item value="option-0">English</cds-dropdown-item>
+              </cds-dropdown>
+            </div>
+          </div>
+        </div>
+      </c4p-options-tile>
+    `;
+  },
 };
 
 const meta = {
-  title: 'Experimental/OptionsTile',
+  title: 'Components/OptionsTile',
 };
 
 export default meta;

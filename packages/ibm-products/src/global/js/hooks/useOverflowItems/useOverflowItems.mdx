@@ -1,4 +1,4 @@
-import { Story, Canvas } from '@storybook/addon-docs';
+import { Story, Canvas } from '@storybook/addon-docs/blocks';
 import * as UseOverflowItemsStories from './useOverflowItems.stories';
 import { useOverflowItems } from '.';
 
@@ -13,9 +13,12 @@ import { useOverflowItems } from '.';
 
 ## Overview
 
-The `useOverflowItems` hook can be used for handling overflow behavior of multiple DOM elements inside of a given area.
+The `useOverflowItems` hook can be used for handling overflow behavior of
+multiple DOM elements inside of a given area.
 
-For example, if you need to display a certain number of `Tag` elements in a container and render additional values in a popover, you could use this hook to do just that.
+For example, if you need to display a certain number of `Tag` elements in a
+container and render additional values in a popover, you could use this hook to
+do just that.
 
 ## Hook API
 
@@ -43,18 +46,8 @@ onChange?: (value: {
 ## Example usage
 
 ```jsx
-const {
-  visibleItems,
-  hiddenItems,
-  itemRefHandler,
-  offsetRefHandler
-} = useOverflowItems(
-  items,
-  containerRef,
-  offsetRef,
-  maxVisible,
-  onChange
-);
+const { visibleItems, hiddenItems, itemRefHandler, offsetRefHandler } =
+  useOverflowItems(items, containerRef, offsetRef, maxVisible, onChange);
 ```
 
 <Canvas>
@@ -63,11 +56,12 @@ const {
 
 ## Example implementation
 
-`useOverflowItems` is used in several components within the Carbon for IBM products library.
+`useOverflowItems` is used in several components within the Carbon for IBM
+products library.
 
-* ActionBar
-  * [Storybook](?path=/docs/utils-components-actionbar--docs&globals=viewport:basic)
-  * [Source](https://github.com/carbon-design-system/ibm-products/blob/4fea32f2b62cf45c6ea92a3034e9fe5fc294af62/packages/ibm-products/src/components/ActionBar/ActionBar.tsx#L129)
-* TagOverflow
-  * [Storybook](?path=/docs/utils-components-tagoverflow--docs&globals=viewport:basic)
-  * [Source](https://github.com/carbon-design-system/ibm-products/blob/4fea32f2b62cf45c6ea92a3034e9fe5fc294af62/packages/ibm-products/src/components/TagOverflow/TagOverflow.tsx#L130)
+- ActionBar
+  - [Storybook](?path=/docs/utils-components-actionbar--docs&globals=viewport:basic)
+  - [Source](https://github.com/carbon-design-system/ibm-products/blob/4fea32f2b62cf45c6ea92a3034e9fe5fc294af62/packages/ibm-products/src/components/ActionBar/ActionBar.tsx#L129)
+- TagOverflow
+  - [Storybook](?path=/docs/utils-components-tagoverflow--docs&globals=viewport:basic)
+  - [Source](https://github.com/carbon-design-system/ibm-products/blob/4fea32f2b62cf45c6ea92a3034e9fe5fc294af62/packages/ibm-products/src/components/TagOverflow/TagOverflow.tsx#L130)

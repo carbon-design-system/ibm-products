@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { BreadcrumbWithOverflow } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
@@ -18,7 +18,7 @@ const lastBreadcrumbs = [
 ];
 
 export default {
-  title: 'IBM Products/Internal/BreadcrumbWithOverflow',
+  title: 'Internal/BreadcrumbWithOverflow',
   component: BreadcrumbWithOverflow,
   tags: ['autodocs'],
   argTypes: {

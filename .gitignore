@@ -73,7 +73,9 @@ package-lock.json
 
 # Playwright
 .playwright/
+blob-report/
 
 # Actions
 /actions/**/node_modules
 /actions/**/yarn.lock
+figma.config.json

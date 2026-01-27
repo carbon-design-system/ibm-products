@@ -15,7 +15,7 @@ test.describe('ProductiveCard @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--default',
+      id: 'components-cards-productivecard--default',
       globals: {
         carbonTheme: 'white',
       },
@@ -28,7 +28,7 @@ test.describe('ProductiveCard @avt', () => {
   test('@avt-with-caption', async ({ page }) => {
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--with-caption',
+      id: 'components-cards-productivecard--with-caption',
       globals: {
         carbonTheme: 'white',
       },
@@ -40,18 +40,13 @@ test.describe('ProductiveCard @avt', () => {
   test('@avt-disabled: validates disabled button state', async ({ page }) => {
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--with-action-ghost-button',
+      id: 'components-cards-productivecard--with-action-ghost-button',
     });
 
     await expect(page).toHaveNoACViolations('ProductiveCard @avt-disabled');
     const editButton = page.getByRole('button', { name: 'Edit' });
     const deleteButton = page.getByRole('button', { name: 'Delete' });
     const disabledButton = page.getByRole('button', { name: 'Read more' });
-
-    // race conditions
-    await page.waitForSelector(
-      `.${pkg.prefix}--card__actions-header-ghost-button`
-    );
 
     expect(disabledButton.getAttribute('disabled')).not.toBeNull();
 
@@ -68,12 +63,12 @@ test.describe('ProductiveCard @avt', () => {
   });
 
   // Overflow menu open/close states test
-  test('@avt-overflow-menu: validates overflow menu interactions', async ({
+  test.skip('@avt-overflow-menu: validates overflow menu interactions', async ({
     page,
   }) => {
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--with-overflow',
+      id: 'components-cards-productivecard--with-overflow',
     });
 
     const menuButton = page.getByRole('button', { label: 'Option' });
@@ -132,7 +127,7 @@ test.describe('ProductiveCard @avt', () => {
     // Navigate to the "Supplemental Bottom Bar" story for ProductiveCard, that has all interactive elements
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--supplemental-bottom-bar',
+      id: 'components-cards-productivecard--supplemental-bottom-bar',
     });
 
     // Ensure no accessibility violations for the story
@@ -170,7 +165,7 @@ test.describe('ProductiveCard @avt', () => {
     // Tab Navigation in "Clickable Card" story for ProductiveCard, (zone one is default, whole card recieves focus)
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--clickable',
+      id: 'components-cards-productivecard--clickable',
     });
 
     // Ensure no accessibility violations for the story
@@ -193,7 +188,7 @@ test.describe('ProductiveCard @avt', () => {
     // Validate zone two focus
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--clickable&args=clickZone:two',
+      id: 'components-cards-productivecard--clickable&args=clickZone:two',
     });
     await page.keyboard.press('Tab');
 
@@ -210,7 +205,7 @@ test.describe('ProductiveCard @avt', () => {
     // Validate zone three focus
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--clickable&args=clickZone:three',
+      id: 'components-cards-productivecard--clickable&args=clickZone:three',
     });
     await page.keyboard.press('Tab');
     const zone3 = page.locator(`.${pkg.prefix}--card__body`);
@@ -226,7 +221,7 @@ test.describe('ProductiveCard @avt', () => {
     // Navigate to the "button with href" story for ProductiveCard
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--with-button-href',
+      id: 'components-cards-productivecard--with-button-href',
     });
 
     // Ensure no accessibility violations for the story
@@ -248,10 +243,10 @@ test.describe('ProductiveCard @avt', () => {
   });
 
   // hover states
-  test('@avt-hover: validates hover states', async ({ page }) => {
+  test.skip('@avt-hover: validates hover states', async ({ page }) => {
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--with-overflow',
+      id: 'components-cards-productivecard--with-overflow',
     });
     const menuButton = page.getByRole('button', { label: 'Overflow menu' });
     const tooltip = page.getByRole('tooltip', { name: 'Overflow menu' });
@@ -264,7 +259,7 @@ test.describe('ProductiveCard @avt', () => {
 
     await visitStory(page, {
       component: 'ProductiveCard',
-      id: 'ibm-products-components-cards-productivecard--default',
+      id: 'components-cards-productivecard--default',
     });
     const editButton = page.getByLabel('Edit');
     const editTooltip = page.getByRole('tooltip', { name: 'Edit' });

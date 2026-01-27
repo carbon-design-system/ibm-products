@@ -11,9 +11,9 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import {
-  Coachmark,
-  CoachmarkOverlayElement,
-  CoachmarkOverlayElements,
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
 } from '..';
 import { CoachmarkBeacon } from '.';
 import { BEACON_KIND } from '../Coachmark/utils/enums';

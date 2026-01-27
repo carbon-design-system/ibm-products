@@ -22,7 +22,7 @@ import {
 
 import { ExpressiveCard } from '.';
 import DocsPage from './ExpressiveCard.docs-page';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const sampleDecorator = (decorator) => {
   switch (decorator) {
@@ -63,7 +63,7 @@ const sampleDecorator = (decorator) => {
 };
 
 export default {
-  title: 'IBM Products/Components/Cards/ExpressiveCard',
+  title: 'Components/Cards/ExpressiveCard',
   component: ExpressiveCard,
   tags: ['autodocs'],
   parameters: {
@@ -158,18 +158,20 @@ const Template = (opts) => {
   } = opts;
 
   return (
-    <Grid>
-      <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ExpressiveCard
-          {...args}
-          decorator={
-            decorator && (decorator === 3 || sampleDecorator(decorator))
-          }
-        >
-          {children}
-        </ExpressiveCard>
-      </Column>
-    </Grid>
+    <main>
+      <Grid>
+        <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
+          <ExpressiveCard
+            {...args}
+            decorator={
+              decorator && (decorator === 3 || sampleDecorator(decorator))
+            }
+          >
+            {children}
+          </ExpressiveCard>
+        </Column>
+      </Grid>
+    </main>
   );
 };
 
@@ -184,19 +186,21 @@ const MediaTemplate = (opts) => {
     ...args
   } = opts;
   return (
-    <Grid>
-      <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ExpressiveCard
-          media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
-          decorator={
-            decorator && (decorator === 3 || sampleDecorator(decorator))
-          }
-          {...args}
-        >
-          {children}
-        </ExpressiveCard>
-      </Column>
-    </Grid>
+    <main>
+      <Grid>
+        <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
+          <ExpressiveCard
+            media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
+            decorator={
+              decorator && (decorator === 3 || sampleDecorator(decorator))
+            }
+            {...args}
+          >
+            {children}
+          </ExpressiveCard>
+        </Column>
+      </Grid>
+    </main>
   );
 };
 
@@ -216,7 +220,7 @@ LabelOnly.args = {
 export const WithCaption = Template.bind({});
 WithCaption.args = {
   ...defaultProps,
-  caption: 'Description or long caption',
+  description: 'Description or long caption',
   label: '',
   mediaRatio: null,
 };

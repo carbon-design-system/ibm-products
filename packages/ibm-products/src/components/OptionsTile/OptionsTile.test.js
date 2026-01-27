@@ -38,20 +38,6 @@ let originalAnimateFunction;
 
 describe(componentName, () => {
   beforeAll(() => {
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
-
     originalAnimateFunction = HTMLDivElement.prototype.animate;
 
     const obj = {
@@ -127,7 +113,7 @@ describe(componentName, () => {
   it('renders a toggle if props.enabled is set', async () => {
     render(<OptionsTile {...props} enabled />);
 
-    expect(screen.getByRole('switch'));
+    expect(screen.getByRole('switch')).toHaveAttribute('aria-checked', 'true');
   });
 
   it('renders as static variant if no children are provided', async () => {
@@ -245,20 +231,6 @@ describe(componentName, () => {
   });
 
   it('expands and collapses with usePrefersReducedMotion', async () => {
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: true,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
-
     const { container } = render(<OptionsTile {...props} />);
     const summaryEl = container.querySelector('summary');
     const detailsEl = container.querySelector('details');

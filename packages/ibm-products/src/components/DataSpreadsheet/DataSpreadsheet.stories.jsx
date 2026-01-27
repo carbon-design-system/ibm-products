@@ -6,7 +6,7 @@
  */
 
 import React, { useMemo, useState } from 'react';
-import { DataSpreadsheet } from '.';
+import { previewCandidate__DataSpreadsheet as DataSpreadsheet } from '..';
 import { generateData } from './utils/generateData';
 import mdx from './DataSpreadsheet.mdx';
 
@@ -14,7 +14,7 @@ import styles from './_storybook-styles.scss?inline';
 import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 export default {
-  title: 'Experimental/Components/Data spreadsheet/DataSpreadsheet',
+  title: 'Preview Candidate/DataSpreadsheet',
   component: DataSpreadsheet,
   tags: ['autodocs'],
   argTypes: {

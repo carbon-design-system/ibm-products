@@ -15,7 +15,8 @@ import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-lis
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './user-avatar.scss?lit';
 import '@carbon/web-components/es/components/tooltip/index.js';
-import User from '@carbon/web-components/es/icons/user/16';
+import User from '@carbon/icons/es/user/16';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 
 const blockClass = `${prefix}--user-avatar`;
 
@@ -106,7 +107,7 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
 
         return ''.concat(...initials);
       }
-      return html`${User({ slot: 'rendericon' })} `;
+      return html`${iconLoader(User, { slot: 'rendericon' })} `;
     };
 
     const { tooltipText, tooltipAlignment, size, backgroundColor, theme } =
@@ -140,7 +141,10 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
       return html` ${Avatar()}`;
     }
   }
-
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 export default CDSUseravatar;

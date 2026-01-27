@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
 
-      - name: Install
-        run: yarn
+      - name: Install dependencies
+        run: yarn install --immutable
 
       - name: Update Carbon packages
         run: |
@@ -29,14 +29,16 @@ jobs:
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Create PR
         id: create-pr
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
         with:
           token: ${{ steps.generate_token.outputs.token }}
-          commit-message: 'build(deps): update Carbon 11 compatible versions to latest'
+          commit-message:
+            'build(deps): update Carbon 11 compatible versions to latest'
           delete-branch: true
           branch: 'deps/update-carbon-packages'
           branch-suffix: random
-          title: 'build(deps): update to Carbon 11 compatible versions to latest'
+          title:
+            'build(deps): update to Carbon 11 compatible versions to latest'
           body: |
             This PR was automatically generated to update Carbon 11 compatible versions on a regular basis. This is not intended to create any breaking changes, and will be reflected as a minor version bump for affected packages. NB we'll run all tests and do visual verifications, but there is always the opportunity for unexpected regressions. If you're using one of the packages in a stable or production context you may want to check this before taking the next minor version, and do let us know ASAP if you see anything problematic.
 
@@ -54,54 +56,3 @@ jobs:
             - [ ] A reminder message has been posted onto the ibmproducts-pal-dev Slack channel that a version update PR is going through.
             - [ ] `yarn ci-check` runs cleanly and all tests pass (done automatically as part of the PR checks).
             - [ ] the Netlify deploy-preview has been used to ensure that storybook runs and the main published components render correctly.
-
-  dependencies:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-
-      - name: Install
-        run: yarn
-
-      - name: Update packages
-        run: |
-          yarn set version latest
-          yarn upgrade:automatic
-          rm yarn.lock
-          yarn
-          yarn update-gallery-config
-        env:
-          YARN_ENABLE_IMMUTABLE_INSTALLS: false
-
-      - name: Generate token
-        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a #v2.1.0
-        id: generate_token
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
-
-      - name: Create PR
-        id: create-pr
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
-        with:
-          token: ${{ steps.generate_token.outputs.token }}
-          commit-message: 'build(deps): update dev dependencies'
-          delete-branch: true
-          branch: 'deps/update-dev-packages'
-          branch-suffix: random
-          title: 'build(deps): update dev dependencies'
-          body: |
-            This PR was automatically generated to update versions of dev dependencies to their latest versions. This helps ensure we get fixes and improvements in a timely fashion and reduces the impact of updating the versions that can arise if versions are allowed to become stale for an extended period.
-
-            #### What did you change?
-
-            This action ran `yarn upgrade:automatic` to update `package.json` files to request the latest versions of each package. Certain critical packages are intentionally excluded.
-
-            This action also deleted the `yarn.lock` file in order to recreate it with the latest matching versions of secondary dependencies.
-
-            This PR includes the various `package.json` that pull our dependencies forward to the latest versions, the `yarn.lock` update that maps required versions to the actual versions to be used, and updates the offline mirror.
-
-            #### How did you test and verify your work?
-
-            This PR should not normally significantly affect the build outputs or runtime packages. Ensure that `yarn ci-check` runs cleanly and all tests pass (done automatically as part of the PR checks).

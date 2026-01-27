@@ -90,7 +90,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     isLastCondition,
   } = props;
   const { property, value, operator } = condition;
-  const { inputConfig, variant, conditionBuilderRef } = useContext(
+  const { inputConfig, variant, conditionBuilderRef, readOnly } = useContext(
     ConditionBuilderContext
   );
 
@@ -205,7 +205,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
       : {};
   };
 
-  const renderChildren = (popoverRef) => {
+  const renderChildren = (popoverRef, closePopover) => {
     return (
       <ItemComponent
         conditionState={{
@@ -218,10 +218,26 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         data-name="valueField"
         parentRef={popoverRef}
         type={type}
+        closePopover={closePopover}
+      />
+    );
+  };
+  const renderItemOption = (popoverRef, closePopover) => {
+    return (
+      <ItemOption
+        conditionState={{
+          value: property,
+          label: propertyText,
+        }}
+        onChange={onPropertyChangeHandler}
+        config={{ options: inputConfig?.properties }}
+        closePopover={closePopover}
+        group={group}
       />
     );
   };
   return (
+    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
       className={cx(
         `${blockClass}__condition-block`,
@@ -242,7 +258,6 @@ const ConditionBlock = (props: ConditionBlockProps) => {
       role="row"
       aria-label={conditionRowText}
       {...getAriaAttributes()}
-      tabIndex={-1}
       onMouseEnter={showAllActionsHandler}
       onMouseLeave={hideAllActionsHandler}
       onBlur={hideAllActionsHandler}
@@ -262,7 +277,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           label={group.statement}
           title={conditionText}
           data-name="connectorField"
-          popOverClassName={`${blockClass}__gap`}
+          popOverClassName={`${blockClass}__gap ${blockClass}__connector`}
           className={`${blockClass}__statement-button`}
           tabIndex={0}
         >
@@ -276,78 +291,73 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           />
         </ConditionBuilderItem>
       )}
-
-      <ConditionBuilderItem
-        label={label ?? condition?.property}
-        title={propertyText}
-        renderIcon={icon ?? undefined}
-        className={`${blockClass}__property-field`}
-        data-name="propertyField"
-        condition={condition}
-        type={type}
-        description={description}
-        onChange={onPropertyChangeHandler}
-      >
-        <ItemOption
-          conditionState={{
-            value: property,
-            label: propertyText,
-          }}
+      <div className={`${blockClass}__condition-inner-block`}>
+        <ConditionBuilderItem
+          label={label ?? condition?.property}
+          title={propertyText}
+          renderIcon={icon ?? undefined}
+          className={`${blockClass}__property-field`}
+          data-name="propertyField"
+          condition={condition}
+          type={type}
+          description={description}
           onChange={onPropertyChangeHandler}
-          config={{ options: inputConfig?.properties }}
+          renderChildren={renderItemOption}
         />
-      </ConditionBuilderItem>
-      {checkIsValid(property) && (
-        <ConditionBuilderItem
-          label={operator}
-          title={operatorText}
-          data-name="operatorField"
-          condition={condition}
-          type={type}
-          config={config as ConfigType}
-          onChange={onOperatorChangeHandler}
-        >
-          <ItemOption
-            config={{
-              options: getOperators(),
-            }}
-            conditionState={{
-              value: operator,
-              label: operatorText,
-            }}
+        {checkIsValid(property) && (
+          <ConditionBuilderItem
+            label={operator}
+            title={operatorText}
+            data-name="operatorField"
+            condition={condition}
+            type={type}
+            config={config as ConfigType}
             onChange={onOperatorChangeHandler}
+          >
+            <ItemOption
+              config={{
+                options: getOperators(),
+              }}
+              conditionState={{
+                value: operator,
+                label: operatorText,
+              }}
+              onChange={onOperatorChangeHandler}
+            />
+          </ConditionBuilderItem>
+        )}
+        {checkIsValid(property) && checkIsValid(operator) && (
+          <ConditionBuilderItem
+            label={value}
+            type={type}
+            title={label}
+            showToolTip={true}
+            data-name="valueField"
+            condition={condition}
+            config={config as ConfigType}
+            onChange={onValueChangeHandler}
+            renderChildren={renderChildren}
           />
-        </ConditionBuilderItem>
+        )}
+      </div>
+      {!readOnly && (
+        <span role="gridcell" aria-label={removeConditionText}>
+          <ConditionBuilderButton
+            hideLabel
+            label={removeConditionText}
+            onClick={onRemove}
+            onMouseEnter={handleShowDeletionPreview}
+            onMouseLeave={handleHideDeletionPreview}
+            onFocus={handleShowDeletionPreview}
+            onBlur={handleHideDeletionPreview}
+            renderIcon={Close}
+            className={`${blockClass}__close-condition`}
+            data-name="closeCondition"
+            wrapperClassName={`${blockClass}__close-condition-wrapper`}
+          />
+        </span>
       )}
-      {checkIsValid(property) && checkIsValid(operator) && (
-        <ConditionBuilderItem
-          label={value}
-          type={type}
-          title={label}
-          showToolTip={true}
-          data-name="valueField"
-          condition={condition}
-          config={config as ConfigType}
-          onChange={onValueChangeHandler}
-          renderChildren={renderChildren}
-        />
-      )}
-      <span role="gridcell" aria-label={removeConditionText}>
-        <ConditionBuilderButton
-          hideLabel
-          label={removeConditionText}
-          onClick={onRemove}
-          onMouseEnter={handleShowDeletionPreview}
-          onMouseLeave={handleHideDeletionPreview}
-          onFocus={handleShowDeletionPreview}
-          onBlur={handleHideDeletionPreview}
-          renderIcon={Close}
-          className={`${blockClass}__close-condition`}
-          data-name="closeCondition"
-          wrapperClassName={`${blockClass}__close-condition-wrapper`}
-        />
-      </span>
-      {manageActionButtons(conditionIndex, group.conditions) && (
+      {!readOnly && manageActionButtons(conditionIndex, group.conditions) ? (
         <ConditionBuilderAdd
           onClick={() => {
             addConditionHandler?.(conditionIndex);
@@ -367,7 +377,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           className={`${blockClass}__gap ${blockClass}__gap-left`}
           group={group}
         />
-      )}
+      ) : null}
     </div>
   );
 };

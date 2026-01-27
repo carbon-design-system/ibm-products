@@ -8,8 +8,6 @@
  */
 
 import React from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
 import { UserAvatar } from '.';
 import { Theme, useTheme } from '@carbon/react';
 import mdx from './UserAvatar.mdx';
@@ -18,7 +16,7 @@ import { Add, Group, User } from '@carbon/react/icons';
 import headshot from './_story-assets/headshot.jpg';
 
 export default {
-  title: 'IBM Products/Components/User avatar/UserAvatar',
+  title: 'Components/UserAvatar',
   component: UserAvatar,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -101,16 +99,18 @@ const ThemeText = () => {
  */
 const Template = (args) => {
   return (
-    <UserAvatar
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-    />
+    <main>
+      <UserAvatar
+        // TODO: handle events with action or local handler.
+        // onTodo={action('onTodo log action')}
+        {...args}
+      />
+    </main>
   );
 };
 const ThemeTemplate = (args) => {
   return (
-    <>
+    <main>
       <Theme theme="white">
         <section className="theme-section">
           <ThemeText />
@@ -135,7 +135,7 @@ const ThemeTemplate = (args) => {
           <UserAvatar {...args} />
         </section>
       </Theme>
-    </>
+    </main>
   );
 };
 /**

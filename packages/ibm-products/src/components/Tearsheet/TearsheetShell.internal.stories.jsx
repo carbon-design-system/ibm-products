@@ -25,7 +25,7 @@ import {
 // import mdx from './TearsheetShell.mdx';
 
 export default {
-  title: 'IBM Products/Internal/TearsheetShell',
+  title: 'Internal/TearsheetShell',
   component: TearsheetShell,
   tags: ['autodocs'],
   parameters: {

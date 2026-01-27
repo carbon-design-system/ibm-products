@@ -40,10 +40,13 @@ collect:
         - batchActionMenuButtonLabel
         - batchActions
         - body
+        - border
         - breadcrumbOverflowTooltipAlign
         - breadcrumbs
         - button
+        - buttonProps
         - cancelButtonText
+        - caret
         - cellSize
         - children
         - className
@@ -51,7 +54,9 @@ collect:
         - clickZone
         - closeButtonLabel
         - closeIconDescription
+        - closePopover
         - collapseButtonLabel
+        - collapseText
         - collapsible
         - column
         - columnInputPlaceholder
@@ -83,6 +88,7 @@ collect:
         - displayMetalPanel
         - downloadLinkLabel
         - draggableClass
+        - dropShadow
         - element
         - emptyStateAction
         - emptyStateDescription
@@ -98,7 +104,9 @@ collect:
         - expandedContentHeight
         - ExpandedRowContentComponent
         - expandedRowIds
+        - expandText
         - fetchMoreData
+        - fieldsetLegendId
         - fieldsetLegendText
         - filterByLabel
         - filterProps
@@ -142,10 +150,12 @@ collect:
         - headers
         - headingAs
         - headRef
+        - hideCloseButton
         - hideConditionPreviewHandler
         - hideConditionSubGroupPreviewHandler
         - hideIcon
         - hideSelectAll
+        - highContrast
         - href
         - icon
         - iconDescription
@@ -175,6 +185,7 @@ collect:
         - invalid
         - invalidText
         - isFetching
+        - isFlush
         - isOpen
         - isTableSortable
         - item
@@ -186,6 +197,7 @@ collect:
         - labelText
         - launcherButtonRef
         - legendText
+        - lines
         - link
         - links
         - listRef
@@ -212,6 +224,7 @@ collect:
         - noResultsTitle
         - noSelectionDescription
         - noSelectionTitle
+        - noTearsheet
         - noTrailingSlash
         - onActiveCellChange
         - onAddItem
@@ -267,6 +280,7 @@ collect:
         - overflowTags
         - overflowTooltipAlign
         - overflowType
+        - pageActions
         - parentId
         - path
         - pictogram
@@ -287,6 +301,7 @@ collect:
         - productive
         - radio
         - reactTableFiltersState
+        - readOnly
         - readOnlyTable
         - renderIcon
         - renderMedia
@@ -302,6 +317,7 @@ collect:
         - score
         - scoreThresholds
         - scrollBarSize
+        - scroller
         - searchResultsTitle
         - secondaryActionLabel
         - secondaryButtonDisabled
@@ -360,6 +376,7 @@ collect:
         - tableId
         - tagline
         - tags
+        - target
         - theme
         - title
         - titleSize
@@ -486,7 +503,7 @@ collect:
         - onRequestGenerate
         - previousStepButtonText
         - showAPIKeyLabel
-        # BigNumbers
+        # BigNumber
         - forceShowTotal
         - fractionDigits
         - iconButton
@@ -514,6 +531,7 @@ collect:
         - noActionIcons
         # Carousel
         - disableArrowScroll
+        - disableResetOnResize
         - fadedEdgeColor
         - isScrollMode
         - onChangeIsScrollable
@@ -528,12 +546,13 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
+        - floating
         - isOpenByDefault
         - overlayClassName
         - overlayKind
         - overlayRef
+        - position
         - positionTune
-        - target
         # CoachmarkDragbar
         - a11yKeyboardHandler
         - onDrag
@@ -582,6 +601,8 @@ collect:
         # ConditionPreview
         - colorIndex
         - previewType
+        # ContentHeader
+        - dragIconDescription
         # CreateFullPage
         - breadcrumbsOverflowAriaLabel
         - maxVisibleBreadcrumbs
@@ -625,8 +646,6 @@ collect:
         - magnitude
         # DelimitedList
         - delimiter
-        # DescriptionList
-        - border
         # DraggableElement
         - classList
         - elementId
@@ -674,6 +693,13 @@ collect:
         - successMessage
         - validExtensions
         # FeatureFlags
+        - defaultPortalTargetBody
+        - enableDatagridUseCustomizeColumns
+        - enableDatagridUseEditableCell
+        - enableDatagridUseInlineEdit
+        - enableSidepanelResizer
+        - enableTestFlagA
+        - enableTestFlagB
         - flags
         # FilterFlyout
         - flyoutIconDescription
@@ -722,6 +748,8 @@ collect:
         - maxFileSize
         - maxFileSizeErrorBody
         - maxFileSizeErrorHeader
+        # Influencer
+        - influencerPanelOpen
         # InlineEditButton
         - columnConfig
         - isActiveCell
@@ -732,7 +760,6 @@ collect:
         - narrow
         - tertiaryButtonLabel
         # InterstitialScreen
-        - interstitialAriaLabel
         - isFullScreen
         # InterstitialScreenBody
         - contentRenderer
@@ -830,10 +857,22 @@ collect:
         - hasBackgroundAlways
         - hasCollapseHeaderToggle
         - narrowGrid
-        - pageActions
         - pageActionsMenuOptionsClass
         - pageActionsOverflowLabel
         - withoutBackground
+        # PageHeaderBreadcrumbBar
+        - contentActions
+        - contentActionsFlush
+        - pageActionsFlush
+        # PageHeaderBreadcrumbOverflow
+        - renderOverflowBreadcrumb
+        # PageHeaderContent
+        - contextualActions
+        # PageHeaderContentPageActions
+        - menuButtonLabel
+        # PageHeaderTagOverflow
+        - renderOverflowTag
+        - renderPopoverContent
         # PageHeaderTitle
         - blockClass
         - hasBreadcrumbRow
@@ -881,12 +920,15 @@ collect:
         - getToggleAllPageRowsSelectedProps
         - getToggleAllRowsSelectedProps
         - isAllRowsSelected
-        # SidePanelBase
+        # SidePanel
         - actionToolbarButtons
         - animateTitle
+        - closeIconTooltipAlignment
         - condensedActions
         - includeOverlay
         - navigationBackIconDescription
+        - onNavigationBack
+        - onUnmount
         # SingleAddSelect
         - searchResultsLabel
         # Sortable
@@ -897,26 +939,46 @@ collect:
         - sortableProps
         - strategy
         - withGrid
+        # StackProvider
+        - stackStepSize
         # StatusIndicator
         - onRetry
         - retryLabel
         - showRetry
         # StringFormatter
-        - lines
         - tooltipDirection
         - width
+        # SummaryContent
+        - summaryPanelOpen
         # TagOverflow
         - tagComponent
+        # Tearsheet
+        - containerClassName
+        - summaryContentWidth
+        - verticalGap
+        # TearsheetHeader
+        - disableHeaderCollapse
+        # TearsheetHeaderActionItem
+        - overflowItemLabel
+        # TearsheetHeaderActions
+        - menuButtonProps
+        # TearsheetHeaderContent
+        - titleEnd
+        - titleStart
+        # TearsheetWithSteps
+        - progressIndicator
+        - setOpen
         # Toolbar
         - vertical
-        # ToolbarButton
-        - caret
         # TruncatedList
         - as
         - buttonClassName
         - collapsedItemsLimit
         - expandedItemsLimit
         - viewMoreLabel
+        # TruncatedText
+        - collapseLabel
+        - expandLabel
         # Underlay
         - activeId
         # UserAvatar
@@ -1120,18 +1182,22 @@ collect:
         - auto
         - checkbox
         - date
+        - expand
         - manual
         - number
         - radio
         - selection
         - text
         - textarea
+        - tooltip
         # General - updateMethod
         - batch
         - instant
         # General - variant
         - Hierarchical
+        - narrow
         - Non-Hierarchical
+        - wide
         # General - verticalPosition
         - lower
         - normal
@@ -1183,6 +1249,13 @@ collect:
         - short
         # PageHeader - fullWidthGrid
         - xl
+        # StackProvider - stackStepSize
+        - lg
+        - md
+        - sm
+        # TearsheetWithSteps - progressIndicator
+        - horizontal
+        - vertical
   npm:
     dependencies: null
   js:

@@ -29,9 +29,11 @@ const ConditionBuilderActions = ({
   actions,
   className,
 }: ConditionBuilderActionsProps) => {
-  const { actionState = [], setActionState } = useContext(
-    ConditionBuilderContext
-  );
+  const {
+    actionState = [],
+    setActionState,
+    readOnly,
+  } = useContext(ConditionBuilderContext);
   const [showDeletionPreview, setShowDeletionPreview] = useState(-1);
   const [
     actionsText,
@@ -50,6 +52,9 @@ const ConditionBuilderActions = ({
   ]);
 
   const addActionHandler = () => {
+    if (readOnly) {
+      return;
+    }
     const action = {
       id: uuidv4(),
       label: undefined,
@@ -104,7 +109,7 @@ const ConditionBuilderActions = ({
             <ConditionBuilderItem
               className={`${blockClass}__statement-button`}
               tabIndex={0}
-              popOverClassName={`${blockClass}__gap`}
+              popOverClassName={`${blockClass}__gap ${blockClass}__connector`}
               label={index === 0 ? thenText : andText}
             />
 
@@ -114,6 +119,7 @@ const ConditionBuilderActions = ({
               condition={action as Action}
               data-name="valueField"
               type="option"
+              popOverClassName={`${blockClass}__action-block`}
             >
               <ItemOptionForValueField
                 conditionState={{
@@ -123,21 +129,23 @@ const ConditionBuilderActions = ({
                 config={{ options: actions as Option[] }}
               />
             </ConditionBuilderItem>
-            <span role="gridcell" aria-label={removeActionText}>
-              <ConditionBuilderButton
-                hideLabel
-                label={removeActionText}
-                onClick={() => onRemove(action.id)}
-                onMouseEnter={() => handleShowDeletionPreview(index)}
-                onMouseLeave={handleHideDeletionPreview}
-                onFocus={() => handleShowDeletionPreview(index)}
-                onBlur={handleHideDeletionPreview}
-                renderIcon={Close}
-                className={`${blockClass}__close-condition`}
-                data-name="closeCondition"
-              />
-            </span>
-            {actionState.length === index + 1 && (
+            {!readOnly && (
+              <span role="gridcell" aria-label={removeActionText}>
+                <ConditionBuilderButton
+                  hideLabel
+                  label={removeActionText}
+                  onClick={() => onRemove(action.id)}
+                  onMouseEnter={() => handleShowDeletionPreview(index)}
+                  onMouseLeave={handleHideDeletionPreview}
+                  onFocus={() => handleShowDeletionPreview(index)}
+                  onBlur={handleHideDeletionPreview}
+                  renderIcon={Close}
+                  className={`${blockClass}__close-condition`}
+                  data-name="closeCondition"
+                />
+              </span>
+            )}
+            {!readOnly && actionState.length === index + 1 && (
               <ConditionBuilderAdd
                 onClick={addActionHandler}
                 className={`${blockClass}__gap ${blockClass}__gap-left`}

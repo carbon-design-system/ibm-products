@@ -18,7 +18,7 @@ test.describe('CreateFullPage @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateFullPage',
-      id: 'ibm-products-patterns-create-flows-createfullpage--create-full-page',
+      id: 'patterns-prebuilt-patterns-create-flows-createfullpage--create-full-page',
       globals: {
         carbonTheme: 'white',
       },
@@ -31,7 +31,7 @@ test.describe('CreateFullPage @avt', () => {
   test('@avt-error-disabled-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateFullPage',
-      id: 'ibm-products-patterns-create-flows-createfullpage--create-full-page',
+      id: 'patterns-prebuilt-patterns-create-flows-createfullpage--create-full-page',
       globals: {
         carbonTheme: 'white',
       },

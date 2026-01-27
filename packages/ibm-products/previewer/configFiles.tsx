@@ -17,15 +17,31 @@ export const packageJson: string = `{
   },
   "dependencies": {
     "@carbon/react": "latest",
-    "@carbon/ibm-products": "^v2.62.0",
+    "@carbon/ibm-products": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-is": "^18.0.0"
   },
   "devDependencies": {
+   "typescript": "^5.0.0",
     "@vitejs/plugin-react": "4.0.0",
-    "sass": "^1.77.7",
+    "sass": "^1.93.2",
     "vite": "^4.3.8"
   }
+}`;
+
+export const tsconfig: string = `{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"]
 }`;
 
 export const index: string = `
@@ -39,7 +55,7 @@ export const index: string = `
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
 
@@ -73,12 +89,15 @@ root.render(
 
 export const style: string = `
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex'
+);
 @use '@carbon/styles';
 @use '@carbon/ibm-products/css/index';
 `;

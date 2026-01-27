@@ -19,7 +19,7 @@
 @property --panel-transform {
   inherits: true;
   initial-value: 320px;
-  syntax: '<integer>';
+  syntax: '<length>';
 }
 $block-class-component: #{$block-class}-filter-panel;
 

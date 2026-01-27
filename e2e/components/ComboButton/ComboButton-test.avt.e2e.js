@@ -14,7 +14,7 @@ test.skip('ComboButton @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ComboButton',
-      id: 'ibm-products-internal-combobutton--default',
+      id: 'internal-combobutton--default',
       globals: {
         carbonTheme: 'white',
       },

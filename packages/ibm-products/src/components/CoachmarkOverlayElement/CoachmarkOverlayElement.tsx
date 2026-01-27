@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -42,8 +42,9 @@ export interface CoachmarkOverlayElementProps {
  * Component to be displayed within a CoachmarkOverlayElements container.
  * Can be used 1 to N number, to display content in a Coachmark's overlay
  * in a carousel fashion.
+ * @deprecated This component is deprecated.
  */
-export let CoachmarkOverlayElement = React.forwardRef<
+export const CoachmarkOverlayElement = React.forwardRef<
   HTMLDivElement,
   CoachmarkOverlayElementProps
 >(
@@ -94,12 +95,6 @@ CoachmarkOverlayElement.deprecated = {
   level: 'warn',
   details: `${componentName} is deprecated.`,
 };
-
-// Return a placeholder if not released and not enabled by feature flag
-CoachmarkOverlayElement = pkg.checkComponentEnabled(
-  CoachmarkOverlayElement,
-  componentName
-);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@
 //   as *;
 @use '../../../../ibm-products-styles/src/global/decorators/side-panel-decorator'
   as *;
-
+// NOTE: there is a separate decorator for side panel that adds changes to all the sidepanel patterns.
 $story-prefix: side-panel-stories__;
 
 .side-panel-stories__body-content {
@@ -57,14 +57,6 @@ $story-prefix: side-panel-stories__;
 
 .#{$story-prefix}grid {
   block-size: 100%;
-}
-
-.#{$story-prefix}story-content {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  block-size: 100vh;
 }
 
 @include side-panel-decorator($story-prefix);

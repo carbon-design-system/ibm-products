@@ -35,6 +35,7 @@ import {
   Section,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
+  Heading,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -331,8 +332,8 @@ export const TearsheetShell = React.forwardRef(
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef?.current) {
         setTimeout(() => {
-          launcherButtonRef?.current.focus();
-        }, 0);
+          launcherButtonRef?.current?.focus();
+        }, 10);
       }
     }, [open, prevOpen, launcherButtonRef]);
 
@@ -471,6 +472,7 @@ export const TearsheetShell = React.forwardRef(
               `.${carbonPrefix}--tooltip`,
               '.flatpickr-calendar',
               `.${bc}__container`,
+              `.${carbonPrefix}--menu`,
               ...selectorsFloatingMenus,
             ]}
             size="sm"
@@ -485,27 +487,26 @@ export const TearsheetShell = React.forwardRef(
                   [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
                 })}
                 closeModal={onClose}
-                iconDescription={closeIconDescription}
+                iconDescription={
+                  effectiveHasCloseIcon ? closeIconDescription : undefined
+                }
               >
-                <Wrap
+                <Section
                   className={`${bc}__header-content`}
                   element={wide ? Layer : undefined}
                 >
                   <Wrap className={`${bc}__header-fields`}>
                     {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
-                    <Wrap element="h2" className={`${bcModalHeader}__label`}>
-                      {label}
-                    </Wrap>
-                    <Wrap
-                      element="h3"
+                    <Wrap className={`${bcModalHeader}__label`}>{label}</Wrap>
+                    <Section
                       className={cx(
                         `${bcModalHeader}__heading`,
                         `${bc}__heading`
                       )}
                     >
-                      {title}
-                    </Wrap>
+                      <Heading>{title}</Heading>
+                    </Section>
                     <Wrap className={`${bc}__header-description`}>
                       {description}
                     </Wrap>
@@ -513,7 +514,7 @@ export const TearsheetShell = React.forwardRef(
                   <Wrap className={`${bc}__header-actions`}>
                     {headerActions}
                   </Wrap>
-                </Wrap>
+                </Section>
                 <Wrap className={`${bc}__header-navigation`}>{navigation}</Wrap>
               </ModalHeader>
             )}
@@ -521,6 +522,7 @@ export const TearsheetShell = React.forwardRef(
               ref={modalBodyRef}
               className={`${carbonPrefix}--modal-content ${bc}__body`}
             >
+              {/* Left influencer */}
               <Wrap
                 className={cx({
                   [`${bc}__influencer`]: true,
@@ -529,9 +531,12 @@ export const TearsheetShell = React.forwardRef(
                 neverRender={influencerPosition === 'right'}
                 element={SectionLevel3}
               >
-                {influencer}
+                <Wrap element={Layer} className={`${bc}__layer`}>
+                  {influencer}
+                </Wrap>
               </Wrap>
               <Wrap className={`${bc}__right`}>
+                {/* Main area */}
                 <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
                   <Wrap
                     className={`${bc}__content`}
@@ -540,8 +545,15 @@ export const TearsheetShell = React.forwardRef(
                     }
                     element={SectionLevel3}
                   >
-                    {children}
+                    {wide ? (
+                      children
+                    ) : (
+                      <Wrap element={Layer} className={`${bc}__layer`}>
+                        {children}
+                      </Wrap>
+                    )}
                   </Wrap>
+                  {/* Right influencer */}
                   <Wrap
                     className={cx({
                       [`${bc}__influencer`]: true,
@@ -550,7 +562,9 @@ export const TearsheetShell = React.forwardRef(
                     neverRender={influencerPosition !== 'right'}
                     element={SectionLevel3}
                   >
-                    {influencer}
+                    <Wrap element={Layer} className={`${bc}__layer`}>
+                      {influencer}
+                    </Wrap>
                   </Wrap>
                 </Wrap>
                 {includeActions && (

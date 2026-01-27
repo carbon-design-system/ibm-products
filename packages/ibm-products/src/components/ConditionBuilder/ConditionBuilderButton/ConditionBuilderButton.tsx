@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import cx from 'classnames';
 
 import PropTypes from 'prop-types';
@@ -13,6 +13,7 @@ import { PopoverAlignment, Tooltip } from '@carbon/react';
 import { CarbonIconType, WarningAltFilled } from '@carbon/react/icons';
 import { usePrefix } from '@carbon/react';
 import { blockClass } from '../utils/util';
+import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 
 interface ConditionBuilderButtonProps {
   className?: string;
@@ -55,8 +56,16 @@ export const ConditionBuilderButton = ({
   const tooltipText = description || label;
 
   const carbonPrefix = usePrefix();
+
   const Button = () => {
     const dataName = rest['data-name'] ?? '';
+    const { readOnly } = useContext(ConditionBuilderContext);
+    const handleClick = (e) => {
+      if (readOnly) {
+        return;
+      }
+      onClick?.(e);
+    };
     return (
       <button
         tabIndex={tabIndex !== undefined ? tabIndex : -1}
@@ -70,12 +79,13 @@ export const ConditionBuilderButton = ({
           { [`${blockClass}__invalid-input`]: isInvalid },
         ])}
         type="button"
-        onClick={onClick}
+        onClick={handleClick}
         onBlur={onBlur}
         onFocus={onFocus}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         data-name={dataName}
+        aria-disabled={readOnly}
         {...rest}
       >
         {Icon && <Icon />}
@@ -134,13 +144,13 @@ ConditionBuilderButton.propTypes = {
    * Optional prop to allow overriding the icon rendering.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
   /**
    */
   /**
    *decides if  tooltip to be shown
    */
   showToolTip: PropTypes.bool,
-
   /**
    * Tab index
    */

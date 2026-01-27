@@ -14,7 +14,7 @@ test.describe('NotificationsEmptyState @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'NotificationsEmptyState',
-      id: 'ibm-products-patterns-empty-state-notificationsemptystate--default',
+      id: 'patterns-prebuilt-patterns-empty-states-notificationsemptystate--default',
       globals: {
         carbonTheme: 'white',
       },

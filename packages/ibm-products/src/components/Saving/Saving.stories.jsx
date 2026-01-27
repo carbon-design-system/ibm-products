@@ -14,7 +14,7 @@ import { TextArea } from '@carbon/react';
 import mdx from './Saving.mdx';
 
 export default {
-  title: 'IBM Products/Components/Saving',
+  title: 'Patterns/Prebuilt patterns/Saving',
   component: Saving,
   tags: ['autodocs'],
   parameters: {
@@ -67,7 +67,7 @@ const AutoTemplate = (args) => {
   };
 
   return (
-    <div>
+    <main>
       <TextArea
         id="save-auto-textarea"
         onChange={onChangeHandler}
@@ -78,7 +78,7 @@ const AutoTemplate = (args) => {
       {dirtyInput && status !== 'default' && (
         <Saving {...rest} status={status} />
       )}
-    </div>
+    </main>
   );
 };
 
@@ -93,9 +93,9 @@ const ManualTemplate = (args) => {
   };
 
   return (
-    <div>
+    <main>
       <Saving {...rest} onRequestSave={onSaveHandler} status={status} />
-    </div>
+    </main>
   );
 };
 

@@ -24,6 +24,8 @@
 // ActionSet
 @use '../ActionSet/action-set';
 
+@use './tearsheet_next';
+
 $block-class: #{$pkg-prefix}--tearsheet;
 
 // stylelint-disable-next-line carbon/theme-use
@@ -48,6 +50,17 @@ $motion-duration: $duration-moderate-02;
 
       @media (prefers-reduced-motion: reduce) {
         transition: none;
+      }
+    }
+
+    &:not(.is-visible) {
+      &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+        // we want the enter/leave animation to run up most of the height of the
+        // viewport, capped at 500px to set an upper limit on the movement speed
+        // For the reason for calc() see https://github.com/sass/sass/issues/2849
+        // and https://github.com/sass/node-sass/issues/2815.
+        // stylelint-disable-next-line carbon/layout-use
+        transform: translate3d(0, calc(min(95vh, 500px)), 0);
       }
     }
 
@@ -106,12 +119,6 @@ $motion-duration: $duration-moderate-02;
     block-size: 100%;
     inset-block-start: auto;
     max-block-size: calc(100% - #{$spacing-09});
-    // we want the enter/leave animation to run up most of the height of the
-    // viewport, capped at 500px to set an upper limit on the movement speed
-    // For the reason for calc() see https://github.com/sass/sass/issues/2849
-    // and https://github.com/sass/node-sass/issues/2815.
-    // stylelint-disable-next-line carbon/layout-use
-    transform: translate3d(0, calc(min(95vh, 500px)), 0);
   }
 
   &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-slug
@@ -210,6 +217,10 @@ $motion-duration: $duration-moderate-02;
     transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
   }
 
+  .#{$block-class}__header {
+    min-block-size: fit-content;
+  }
+
   &.#{$block-class}--wide .#{$block-class}__header {
     padding: $spacing-06 $spacing-07;
     margin: 0;
@@ -304,8 +315,15 @@ $motion-duration: $duration-moderate-02;
     margin: $spacing-04 0 0;
   }
 
+  // Unfortunately <Layer> creates an extra DOM element.  Try not to let it break
+  // existing layouts.
+  .#{$block-class}__layer {
+    display: contents;
+  }
+
   &.#{$block-class} .#{$block-class}__body {
     display: flex;
+    overflow: hidden;
     flex-direction: row;
     padding: 0;
     margin: 0;
@@ -365,6 +383,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__main .#{$block-class}__influencer {
+    background-color: $layer;
     border-inline-end: none;
     border-inline-start: 1px solid $border-subtle-01;
   }
@@ -412,6 +431,7 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__button-container {
     grid-column: 1 / -1;
     grid-row: -1 / -1;
+    min-block-size: fit-content;
     overflow-x: auto;
     @supports (overflow-inline: auto) {
       /* stylelint-disable-next-line declaration-property-value-disallowed-list */

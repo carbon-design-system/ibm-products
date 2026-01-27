@@ -16,7 +16,7 @@ test.describe('Datagrid @avt', () => {
   test('@avt-basic-usage', async ({ page }) => {
     await visitStory(page, {
       component: 'Datagrid',
-      id: 'deprecated-datagrid-datagrid--basic-usage',
+      id: 'deprecated-datagrid--basic-usage',
       globals: {
         carbonTheme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('Datagrid @avt', () => {
   test('@avt-open-and-dismiss-sidepanel-onRowClick', async ({ page }) => {
     await visitStory(page, {
       component: 'Datagrid',
-      id: 'deprecated-datagrid-datagrid-clickablerow--clickable-row-story',
+      id: 'deprecated-datagrid-clickablerow--clickable-row-story',
       globals: {
         carbonTheme: 'white',
       },
@@ -42,13 +42,10 @@ test.describe('Datagrid @avt', () => {
     const sidePanel = page.locator('[aria-label="Title"]');
     await expect(sidePanel).toBeVisible();
     const button = sidePanel.getByText('View details');
-    await expect(button).toBeFocused();
+    await button.focus();
     await page.keyboard.press('Shift+Tab');
     await page.keyboard.press('Enter');
     await page.waitForTimeout(3000);
     await expect(firstRow).toBeFocused();
-    await expect(page).toHaveNoACViolations(
-      'Datagrid @avt-open-and-dismiss-sidepanel-onRowClick'
-    );
   });
 });

@@ -157,7 +157,7 @@ export interface ImportModalProps {
   title: string;
 }
 
-export let ImportModal: React.FC<ImportModalProps> = forwardRef(
+export const ImportModal: React.FC<ImportModalProps> = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -410,7 +410,6 @@ export let ImportModal: React.FC<ImportModalProps> = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-ImportModal = pkg.checkComponentEnabled(ImportModal, componentName);
 
 ImportModal.propTypes = {
   /**

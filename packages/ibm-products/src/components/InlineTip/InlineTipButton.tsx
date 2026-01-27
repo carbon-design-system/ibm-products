@@ -34,7 +34,7 @@ export interface InlineTipButtonProps {
 /**
  * This is a standard Carbon button, styled specifically for use inside InlineTip.
  */
-export let InlineTipButton = React.forwardRef(
+export const InlineTipButton = React.forwardRef(
   (
     { children, className, ...rest }: PropsWithChildren<InlineTipButtonProps>,
     ref: ForwardedRef<ButtonProps<React.ElementType>>
@@ -54,7 +54,6 @@ export let InlineTipButton = React.forwardRef(
   }
 );
 
-InlineTipButton = pkg.checkComponentEnabled(InlineTipButton, componentName);
 InlineTipButton.displayName = componentName;
 
 InlineTipButton.propTypes = {

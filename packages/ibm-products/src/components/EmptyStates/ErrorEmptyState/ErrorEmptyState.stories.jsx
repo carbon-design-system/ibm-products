@@ -1,37 +1,27 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action as storybookAction } from 'storybook/actions';
 import { Add } from '@carbon/react/icons';
-// import mdx from './ErrorEmptyState.mdx';
+import mdx from './ErrorEmptyState.mdx';
 
 import { ErrorEmptyState } from '.';
-import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 
 // import styles from '../_index.scss';
 
 export default {
-  title: 'IBM Products/Patterns/Empty state/ErrorEmptyState',
+  title: 'Patterns/Prebuilt patterns/Empty states/ErrorEmptyState',
   component: ErrorEmptyState,
   tags: ['autodocs'],
   parameters: {
     // styles,
     docs: {
-      page: () => (
-        <StoryDocsPage
-          altGuidelinesHref={[
-            {
-              href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon Empty pattern usage guidelines',
-            },
-          ]}
-        />
-      ),
+      page: mdx,
     },
   },
 };
@@ -43,8 +33,35 @@ const defaultStoryProps = {
   illustrationDescription: 'Test alt text',
 };
 
-const Template = (args) => {
-  return <ErrorEmptyState {...args} />;
+const Template = ({ ...args }, context) => {
+  const sbDocs = context.viewMode !== 'docs';
+  const { action } = args;
+  const getAction = (icon = undefined) => {
+    const actionObj = {
+      text: 'Create new',
+      onClick: () => {
+        sbDocs
+          ? storybookAction('Clicked empty state action button')()
+          : console.log('Clicked empty state action button');
+      },
+    };
+
+    if (icon) {
+      return {
+        ...actionObj,
+        renderIcon: (props) => <Add size={20} {...props} />,
+        iconDescription: 'Add icon',
+      };
+    }
+
+    return actionObj;
+  };
+  return (
+    <ErrorEmptyState
+      {...args}
+      action={typeof action === 'boolean' && getAction(action)}
+    />
+  );
 };
 
 export const Default = Template.bind({});
@@ -61,21 +78,13 @@ WithDarkModeIllustration.args = {
 export const withAction = Template.bind({});
 withAction.args = {
   ...defaultStoryProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-  },
+  action: false,
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
   ...defaultStoryProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-    renderIcon: (props) => <Add size={20} {...props} />,
-    iconDescription: 'Add icon',
-  },
+  action: true,
 };
 
 export const withLink = Template.bind({});
@@ -90,12 +99,7 @@ withLink.args = {
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
   ...defaultStoryProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-    renderIcon: (props) => <Add size={20} {...props} />,
-    iconDescription: 'Add icon',
-  },
+  action: true,
   link: {
     text: 'View documentation',
     href: 'https://www.carbondesignsystem.com',

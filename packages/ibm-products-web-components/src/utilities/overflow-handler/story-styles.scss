@@ -5,6 +5,9 @@
 * LICENSE file in the root directory of this source tree.
 */
 
+@use '@carbon/styles' with (
+  $font-path: '@ibm/plex'
+);
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/type';
@@ -18,17 +21,28 @@ $story-prefix: 'overflow-handler-stories__';
 
 .parent {
   overflow: scroll;
-  max-inline-size: 100%;
+  margin-block-start: spacing.$spacing-04;
+  max-inline-size: 1000px;
   scrollbar-width: none;
 }
 
-.child {
+.items {
+  display: flex;
+  // Spacing between tags.
+  gap: spacing.$spacing-03;
   white-space: nowrap;
+
+  &--vertical {
+    flex-direction: column;
+    block-size: calc(100% - spacing.$spacing-06);
+  }
 }
 
 // todo - create annotation component
 .annotation {
+  /* stylelint-disable-next-line carbon/theme-use */
   border: 1px dashed colors.$purple-40;
+  inline-size: 100%;
 }
 
 .annotation__label {
@@ -37,10 +51,20 @@ $story-prefix: 'overflow-handler-stories__';
   display: inline-flex;
   padding: spacing.$spacing-02;
   background: tag.$tag-background-purple;
+  /* stylelint-disable-next-line carbon/theme-use */
   color: tag.$tag-color-purple;
   column-gap: spacing.$spacing-02;
 }
 
 .annotation__content {
   padding: spacing.$spacing-05;
+  block-size: calc(100% - spacing.$spacing-06);
+}
+
+[data-hidden]:not([data-fixed]) {
+  display: none;
+}
+
+.cds-tag:not(:defined) {
+  display: none;
 }

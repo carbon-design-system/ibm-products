@@ -329,7 +329,13 @@
   .#{$block-class}-filter-panel
     + .#{$block-class}__table-container-inner
     .#{config.$prefix}--data-table-content {
-    block-size: fit-content;
+      block-size: fit-content;
+    }
+  
+  .#{$block-class}-filter-panel
+    + .#{$block-class}__table-container-inner
+  .#{c4p-settings.$carbon-prefix}--pagination {
+    background-color: $layer-02;
   }
 
   table.#{$block-class}__table-simple {
@@ -658,6 +664,10 @@
 
   .#{c4p-settings.$pkg-prefix}--datagrid__table-simple {
     block-size: 100%;
+  }
+
+  .#{c4p-settings.$carbon-prefix}--data-table-content {
+    block-size: fit-content;
   }
 }
 

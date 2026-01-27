@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,12 +8,11 @@
 // `setupFilesAfterEnv` enables running the code immediately after the test framework has been installed in the environment - https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
 
 import '@testing-library/jest-dom';
-
-import chalk from 'chalk';
 import util from 'util';
-
 import * as matchers from './matchers';
-import '../../../packages/ibm-products/src/feature-flags';
+
+const reset = '\x1b[0m';
+const gray = (str) => `\x1b[48;5;244m${str + reset}`;
 
 // `expect` can be extended using custom matchers as per https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
 expect.extend(matchers);
@@ -61,10 +60,11 @@ const oldConsole = {};
           `${message}\n` +
           `${stack
             .split('\n')
-            .map((line) => chalk.gray(line))
+            .map((line) => gray(line))
             .join('\n')}`
       );
-      const message = `Expected test not to call ${chalk.bold(
+      const message = `Expected test not to call ${util.styleText(
+        'bold',
         `console.${method}()`
       )}`;
 

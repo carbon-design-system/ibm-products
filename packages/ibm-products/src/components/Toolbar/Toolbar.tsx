@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,8 +22,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
-const { checkComponentEnabled, prefix } = pkg;
-const blockClass = `${prefix}--toolbar`;
+const blockClass = `${pkg.prefix}--toolbar`;
 
 export interface ToolbarProps {
   /** Provide an optional class to be applied to the containing node */
@@ -40,7 +39,7 @@ interface ToolbarContextType {
 const ToolbarContext = createContext<ToolbarContextType>({});
 
 /** Toolbars are a collection of action items that organize a program’s interaction patterns into a series of closely related commands. */
-let Toolbar = forwardRef(
+const Toolbar = forwardRef(
   (
     { children, className, vertical, ...rest }: PropsWithChildren<ToolbarProps>,
     r: React.Ref<HTMLDivElement>
@@ -146,7 +145,5 @@ Toolbar.propTypes = {
   /** Determines whether the `Toolbar` is rendered vertically */
   vertical: bool,
 };
-
-Toolbar = checkComponentEnabled(Toolbar, componentName);
 
 export { blockClass, componentName, Toolbar, ToolbarContext };

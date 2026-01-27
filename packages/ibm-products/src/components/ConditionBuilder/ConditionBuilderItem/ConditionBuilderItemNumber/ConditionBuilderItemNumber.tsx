@@ -27,35 +27,37 @@ export const ConditionBuilderItemNumber = ({
   const [invalidNumberWarnText] = useTranslations(['invalidNumberWarnText']);
   const onChangeHandler = (e, { value }) => {
     if (value !== '' && !isNaN(value) && checkIfValid(value)) {
-      onChange(`${value} ${config.unit ?? ''}`);
+      onChange(config?.unit ? `${value} ${config.unit}` : String(value));
     } else {
       onChange('INVALID');
     }
   };
   const checkIfValid = (value) => {
+    if (!config) {
+      return true;
+    }
+
+    const { min, max } = config;
+
+    if (max !== undefined && min === undefined && value > max) {
+      return false;
+    }
+
+    if (min !== undefined && max === undefined && value < min) {
+      return false;
+    }
+
     if (
-      config.max !== undefined &&
-      config.min === undefined &&
-      value > config.max
+      min !== undefined &&
+      max !== undefined &&
+      (value < min || value > max)
     ) {
       return false;
     }
-    if (
-      config.min !== undefined &&
-      config.max === undefined &&
-      value < config.min
-    ) {
-      return false;
-    }
-    if (
-      config.max !== undefined &&
-      config.min !== undefined &&
-      (value > config.max || value < config.min)
-    ) {
-      return false;
-    }
+
     return true;
   };
+
   const getDefaultValue = () => {
     return (conditionState.value as string)?.split(' ')?.[0] ?? '';
   };

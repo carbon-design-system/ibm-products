@@ -21,6 +21,7 @@ import path from 'path';
 import postcss from 'postcss';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
+import image from '@rollup/plugin-image';
 import fs from 'fs-extra';
 
 import * as packageJson from '../package.json' with { type: 'json' };
@@ -125,7 +126,13 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
         entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
       }),
       copy({
-        targets: [{ src: 'src/components/**/*.scss', dest: 'scss' }],
+        targets: [
+          {
+            src: 'src/components/**/*.scss',
+            dest: 'scss',
+            ignore: 'src/components/**/story-styles.scss',
+          },
+        ],
         flatten: false,
       }),
       [json()],
@@ -157,6 +164,7 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
           outDir,
         },
       }),
+      image(),
     ],
   };
 }
@@ -181,13 +189,13 @@ async function postBuild() {
     // Replace "cds" with "cds-custom" in all files
     await Promise.all(
       files.map(async (file) => {
-        let content = await fs.promises.readFile(file, 'utf8');
-        content = content.replace(/cds/g, 'cds-custom');
-        content = content.replace(
+        const content = await fs.promises.readFile(file, 'utf8');
+        const updatedContent = content.replace(/(?<!--)cds/g, 'cds-custom');
+        const updatedContentWithImports = updatedContent.replace(
           /import\s+['"]@carbon\/web-components\/es\/components\/(.*?)['"]/g,
           "import '@carbon/web-components/es-custom/components/$1'"
         );
-        await fs.promises.writeFile(file, content);
+        await fs.promises.writeFile(file, updatedContentWithImports);
       })
     );
   }

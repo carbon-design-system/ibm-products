@@ -15,7 +15,10 @@ export const useTranslations = (translationKeys, alterTranslationKeyMap) => {
     if (alterTranslationKeyMap?.[translationKey]) {
       translationKey = alterTranslationKeyMap[translationKey];
     }
-    if (translateWithId?.(translationKey)) {
+    if (
+      translateWithId?.(translationKey) &&
+      translateWithId?.(translationKey) !== translationKey
+    ) {
       return translateWithId(translationKey);
     } else if (translationsObject[translationKey]) {
       return translationsObject[translationKey];

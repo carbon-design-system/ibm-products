@@ -15,7 +15,7 @@ import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
 import { waitForPosition } from '../../global/js/utils/wait_for_position';
 
 const blockClass = `${pkg.prefix}--add-select`;
-const componentName = AddSelectBody.name;
+const componentName = AddSelectBody.displayName;
 const defaultItems = {
   entries: [
     {
@@ -221,24 +221,26 @@ const itemWithAvatar = {
 };
 
 describe(componentName, () => {
-  const { ResizeObserver } = window;
   let warn;
 
   beforeEach(() => {
     warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
     pkg.feature['default-portal-target-body'] = false;
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
     warn.mockRestore();
+  });
+
+  it('has no accessibility violations', async () => {
+    render(<AddSelectBody {...singleProps} open />);
+    const AddSelectElement = document.querySelector(
+      `.${blockClass}__selections-body`
+    );
+    await expect(AddSelectElement).toBeAccessible(componentName);
+    await expect(AddSelectElement).toHaveNoAxeViolations();
   });
 
   it('renders SingleAddSelectBody', async () => {
@@ -246,6 +248,11 @@ describe(componentName, () => {
     const tearsheetElement = screen.getByRole('dialog').parentElement;
     expect(tearsheetElement).toHaveClass(`${blockClass}__single`);
     expect(tearsheetElement).toBeVisible();
+  });
+
+  it('renders without tearsheet', async () => {
+    render(<AddSelectBody {...singleHierarchyProps} open noTearsheet />);
+    expect(screen.queryByRole('dialog')).toBeNull();
   });
 
   it('handles item focusing with keyboard', async () => {
@@ -286,12 +293,12 @@ describe(componentName, () => {
   it('filters the items', async () => {
     render(<AddSelectBody {...singleHierarchyProps} />);
     const input = screen.getByPlaceholderText('Find categories');
-    expect(screen.getByText('Categories'));
-    expect(screen.getByText('Florida'));
-    expect(screen.getByText('Kansas'));
+    expect(screen.getByText('Categories')).toBeVisible();
+    expect(screen.getByText('Florida')).toBeVisible();
+    expect(screen.getByText('Kansas')).toBeVisible();
     fireEvent.change(input, { target: { value: 'florida' } });
-    expect(screen.getByText('Search results'));
-    expect(screen.getByText('Florida'));
+    expect(screen.getByText('Search results')).toBeVisible();
+    expect(screen.getByText('Florida')).toBeVisible();
     expect(screen.queryByText('Kansas')).toBeNull();
   });
 
@@ -399,7 +406,7 @@ describe(componentName, () => {
     const metaBtn = document.querySelectorAll(
       `.${blockClass}__selections-view-meta`
     )[0];
-    expect(metaBtn);
+    expect(metaBtn).toBeVisible();
     fireEvent.click(metaBtn);
     expect(screen.getByText(newProps.metaPanelTitle));
   });

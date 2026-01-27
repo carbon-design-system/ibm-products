@@ -54,6 +54,10 @@ export interface SingleAddSelectProps {
    */
   noResultsTitle?: string;
   /**
+   * Determines if the component should be rendered within a Tearsheet component
+   */
+  noTearsheet?: boolean;
+  /**
    * function to call when the close button clicked
    */
   onClose?: () => void;
@@ -86,7 +90,7 @@ export interface SingleAddSelectProps {
 /**
  * Used to add or select one or more items from larger lists or hierarchies.
  */
-export let SingleAddSelect = forwardRef(
+export const SingleAddSelect = forwardRef(
   (props: SingleAddSelectProps, ref: ForwardedRef<HTMLDivElement>) => {
     // remove multi add select specific props
     const validProps = prepareProps(props, [
@@ -113,8 +117,6 @@ export let SingleAddSelect = forwardRef(
     );
   }
 );
-
-SingleAddSelect = pkg.checkComponentEnabled(SingleAddSelect, componentName);
 
 SingleAddSelect.propTypes = {
   /**
@@ -161,6 +163,10 @@ SingleAddSelect.propTypes = {
    * title to display when no results are found from the global search
    */
   noResultsTitle: PropTypes.string,
+  /**
+   * Determines if the component should be rendered within a Tearsheet component
+   */
+  noTearsheet: PropTypes.bool,
   /**
    * function to call when the close button clicked
    */

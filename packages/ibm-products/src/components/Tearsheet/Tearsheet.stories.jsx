@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { cloneElement, useEffect, useRef, useState } from 'react';
 import DocsPage from './Tearsheet.docs-page';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Information } from '@carbon/react/icons';
 import { pkg } from '../../settings';
-import { StringFormatter } from '../StringFormatter/StringFormatter.js';
+import { TruncatedText } from '../TruncatedText';
 import {
   Button,
   ButtonSet,
@@ -46,7 +46,7 @@ import { TearsheetNarrow } from './TearsheetNarrow';
 // import mdx from './Tearsheet.mdx';
 
 export default {
-  title: 'IBM Products/Components/Tearsheet',
+  title: 'Components/Tearsheet',
   component: Tearsheet,
   tags: ['autodocs'],
   parameters: {
@@ -78,30 +78,30 @@ export default {
         type: 'select',
         labels: {
           0: 'With plain String',
-          1: 'With StringFormatter and 1 line',
-          2: 'With StringFormatter and 2 lines',
+          1: 'With TruncatedText and 1 line',
+          2: 'With TruncatedText and 2 lines',
         },
         default: 0,
       },
       description:
-        'A description of the flow, displayed in the header area of the tearsheet.\n Note: `StringFormatter` can be passed as a React node to apply custom text formatting, including ellipsis truncation and a definition tooltip when the content is too long.',
+        'A description of the flow, displayed in the header area of the tearsheet.\n Note: `TruncatedText` can be passed as a React node to apply custom text formatting, including ellipsis truncation and a definition tooltip when the content is too long.',
       options: [0, 1, 2],
       mapping: {
         0: 'This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet.',
         1: (
-          <StringFormatter
+          <TruncatedText
+            autoAlign
             lines={1}
-            truncate={true}
-            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
             tooltipDirection="bottom"
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
           />
         ),
         2: (
-          <StringFormatter
+          <TruncatedText
+            autoAlign
             lines={2}
-            truncate={true}
-            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
             tooltipDirection="bottom"
+            value="This is a description for the tearsheet, providing an opportunity to describe the flow over a couple of lines in the header of the tearsheet."
           />
         ),
       },
@@ -283,7 +283,9 @@ const Template = ({ actions, decorator, slug, ...args }, context) => {
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
       <div ref={ref}>
         <Tearsheet
           {...args}
@@ -338,7 +340,9 @@ const TemplateWithNav = ({ actions, decorator, slug, ...args }, context) => {
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
       <div ref={ref}>
         <Tabs onChange={action('Tab selection changed')}>
           <Tearsheet
@@ -394,9 +398,11 @@ const ReturnFocusTemplate = (
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button ref={buttonRef} onClick={() => setOpen(true)}>
-        Open Tearsheet
-      </Button>
+      <main>
+        <Button ref={buttonRef} onClick={() => setOpen(true)}>
+          Open Tearsheet
+        </Button>
+      </main>
       <div ref={ref}>
         <Tearsheet
           {...args}
@@ -445,7 +451,9 @@ const FirstElementDisabledTemplate = (
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
       <div ref={ref}>
         <Tearsheet
           {...args}
@@ -519,7 +527,9 @@ const FirstElementReadOnlyTemplate = (
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
       <div ref={ref}>
         <Tearsheet
           {...args}
@@ -565,16 +575,20 @@ const FirstElementReadOnlyTemplate = (
 
 // eslint-disable-next-line react/prop-types
 const StackedTemplate = (
-  { mixedSizes, actions, decorator, slug, ...args },
+  { mixedSizes, actions, decorator, description, slug, ...args },
   context
 ) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const ref = useRef(undefined);
-  const openButton1 = useRef();
-  const openButton2 = useRef();
-  const openButton3 = useRef();
+  const openButton1 = useRef(undefined);
+  const openButton2 = useRef(undefined);
+  const openButton3 = useRef(undefined);
+
+  const description1 = cloneElement(description, { id: 'truncated-text-01' });
+  const description2 = cloneElement(description, { id: 'truncated-text-02' });
+  const description3 = cloneElement(description, { id: 'truncated-text-03' });
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {
@@ -632,30 +646,33 @@ const StackedTemplate = (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
       <div style={{ height: '3rem' }} data-reserve-space="for toggle buttons" />
-      <ButtonSet
-        style={{
-          display: 'flex',
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          zIndex: 10000,
-        }}
-      >
-        <Button onClick={() => setOpen1(!open1)} ref={openButton1}>
-          Toggle&nbsp;tearsheet&nbsp;1
-        </Button>
-        <Button onClick={() => setOpen2(!open2)}>
-          Toggle&nbsp;tearsheet&nbsp;2
-        </Button>
-        {!mixedSizes && (
-          <Button onClick={() => setOpen3(!open3)}>
-            Toggle&nbsp;tearsheet&nbsp;3
+      <main>
+        <ButtonSet
+          style={{
+            display: 'flex',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            zIndex: 10000,
+          }}
+        >
+          <Button onClick={() => setOpen1(!open1)} ref={openButton1}>
+            Toggle&nbsp;tearsheet&nbsp;1
           </Button>
-        )}
-      </ButtonSet>
+          <Button onClick={() => setOpen2(!open2)}>
+            Toggle&nbsp;tearsheet&nbsp;2
+          </Button>
+          {!mixedSizes && (
+            <Button onClick={() => setOpen3(!open3)}>
+              Toggle&nbsp;tearsheet&nbsp;3
+            </Button>
+          )}
+        </ButtonSet>
+      </main>
       <div ref={ref}>
         <Tearsheet
           {...args}
+          description={description1}
           actions={wiredActions1}
           headerActions={
             <ButtonSet>
@@ -689,6 +706,7 @@ const StackedTemplate = (
         </Tearsheet>
         <VariableSizeTearsheet
           {...args}
+          description={description2}
           actions={wiredActions2}
           headerActions={
             <ButtonSet>
@@ -723,6 +741,7 @@ const StackedTemplate = (
         {!mixedSizes && (
           <Tearsheet
             {...args}
+            description={description3}
             actions={wiredActions3}
             title="Tearsheet 3"
             open={open3}

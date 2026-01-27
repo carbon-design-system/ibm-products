@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,12 +7,24 @@
 
 import StackBlitzSDK from '@stackblitz/sdk';
 import { Project } from '@stackblitz/sdk';
-import { index, main, packageJson, style, viteConfig } from './configFiles';
+import {
+  index,
+  main,
+  packageJson,
+  style,
+  tsconfig,
+  viteConfig,
+} from './configFiles';
 import * as carbonComponentsReact from '@carbon/react';
-import * as carbonIconsReact from '@carbon/icons-react';
+import * as carbonIconsReact from '@carbon/react/icons';
+import * as prettier from 'prettier/standalone';
+import * as tsParser from 'prettier/plugins/typescript';
+import * as estreeParser from 'prettier/plugins/estree';
+import prettierConfig from 'prettier-config-carbon';
+
 const iconsNames = Object.keys(carbonIconsReact);
 const carbonComponentNames = Object.keys(carbonComponentsReact);
-let componentNames;
+let componentNames: string[];
 interface ComponentSources {
   carbon: string[];
   ibmProducts: string[];
@@ -20,17 +32,26 @@ interface ComponentSources {
   unknown: string[];
 }
 
+type statusType = null | {
+  preview?: string[];
+  previewCandidate?: string[];
+};
+
 interface previewerObject {
   story: any;
   customImports: string[];
   customFunctionDefs: string[];
   styles: string;
+  title: string;
+  status?: statusType;
 }
 export const stackblitzPrefillConfig = async ({
   story,
   customImports = [],
   customFunctionDefs = [],
   styles,
+  title,
+  status = null,
 }: previewerObject) => {
   const { args } = story;
   const productComponents = await import('../src/index');
@@ -39,7 +60,13 @@ export const stackblitzPrefillConfig = async ({
     story.parameters.docs.source.originalSource,
     args
   );
-  const app = appGenerator(storyCode, customImports, customFunctionDefs, args);
+  const app = await appGenerator(
+    storyCode,
+    customImports,
+    customFunctionDefs,
+    args,
+    status
+  );
   let styleImport = style;
   if (styles) {
     // This regex matches multi-line comments that start with /* and end with */
@@ -49,23 +76,24 @@ export const stackblitzPrefillConfig = async ({
     styleImport += styles.replace(licenseCommentRegex, '');
   }
   const stackblitzFileConfig: Project = {
-    title: 'Carbon demo',
+    title: title || 'Carbon demo (TypeScript)',
     description:
-      'Run official live example code for a Carbon component, created by Carbon Design System on StackBlitz',
+      'Run official live example code for a Carbon component, created by Carbon Design System on StackBlitz using TypeScript',
     template: 'node',
     files: {
       'package.json': packageJson,
       'index.html': index,
-      'vite.config.js': viteConfig,
-      'src/main.jsx': main,
-      'src/App.jsx': app,
+      'vite.config.ts': viteConfig,
+      'tsconfig.json': tsconfig,
+      'src/main.tsx': main,
+      'src/App.tsx': app,
       'src/index.scss': styleImport,
     },
   };
 
   StackBlitzSDK.openProject(stackblitzFileConfig, {
     newWindow: true,
-    openFile: 'src/App.jsx',
+    openFile: 'src/App.tsx',
   });
 };
 
@@ -85,7 +113,7 @@ const filterStoryCode = (storyCode, args) => {
     .replace(/^"|"$/g, '')
     .replace(/onChange=\{(args\.onChange|action\('onChange'\))\}\s*/g, '')
     .replace(/onClick=\{(args\.onClick|action\('onClick'\))\}\s*/g, '');
-  Object.entries(args).forEach(([key, value]) => {
+  Object.entries((args = args ?? {})).forEach(([key, value]) => {
     const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const templateLiteralRegex = new RegExp(
       `\\$\\{\\s*args\\.${escapedKey}\\s*\\}`,
@@ -118,21 +146,48 @@ const filterStoryCode = (storyCode, args) => {
   return storyCodeUpdated;
 };
 
-const appGenerator = (
+const formatWithPrettier = async (code: string): Promise<string> => {
+  const formatted = await prettier.format(code, {
+    ...prettierConfig,
+    parser: 'typescript',
+    plugins: [tsParser, estreeParser],
+  });
+  return formatted;
+};
+
+const appGenerator = async (
   storyCode: string,
   customImports: Array<string>,
   customFunctionDefs: Array<string>,
-  args: any
+  args: any,
+  status: statusType
 ) => {
   const {
     carbon: matchedCarbonComponents,
     ibmProducts: matchedComponents,
     icons: matchedIcons,
     unknown: unknownComponents,
-  } = findComponentsInCode(storyCode);
+  } = findComponentsInCode(storyCode, status);
   if (unknownComponents.length > 0) {
     storyCode = removeUnknownComponents(storyCode, unknownComponents);
   }
+  const getProductsImports = (imports: string[]) => {
+    const getImportSpecifiers = (names: string[]) => {
+      return names.map((name) => {
+        if (
+          name.startsWith('preview__') ||
+          name.startsWith('previewCandidate__')
+        ) {
+          return `${name} as ${name.replace(/^(preview__|previewCandidate__)/, '')}`;
+        }
+        return name;
+      });
+    };
+    return imports.length > 0
+      ? `import { ${getImportSpecifiers(imports)} } from "@carbon/ibm-products";`
+      : '';
+  };
+
   const foundHooks = detectReactHooks(storyCode);
   const hooksString = foundHooks.join(', ');
   const regex = /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)/;
@@ -141,8 +196,8 @@ const appGenerator = (
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
   const app = `
   import React ${hooksString != '' ? `, { ${hooksString} }` : ''} from 'react';
-  ${customImports?.length > 0 ? customImports?.map((customImport) => customImport) : ''}
-  ${matchedComponents.length > 0 ? `import { ${matchedComponents.join(', ')} } from "@carbon/ibm-products";` : ''}
+  ${customImports?.length > 0 ? customImports.join('\n') : ''}
+  ${getProductsImports(matchedComponents)}
   ${matchedCarbonComponents.length > 0 ? `import { ${matchedCarbonComponents.join(', ')} } from "@carbon/react";` : ''}
   ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
   export default function App() {
@@ -150,15 +205,37 @@ const appGenerator = (
     const pkg = {
      prefix: 'c4p'
     }
-    ${customFunctionDefs?.map((customFunction) => customFunction)}
+    ${customFunctionDefs?.length > 0 ? customFunctionDefs.join('\n') : ''}
     ${storyCode}
   }
   `;
-  return app;
+
+  try {
+    return await formatWithPrettier(app);
+  } catch (error) {
+    console.error('Error formatting code:', error);
+    throw error;
+  }
 };
 
-const findComponentsInCode = (code: string): ComponentSources => {
-  const componentRegex = /<([A-Z][a-zA-Z0-9]*)(?:\s|>)/g;
+// Returns either `preview` or `previewCandidate` if value is found within
+// one of those properties from the `status`. Otherwise we return null
+const findPropertyContainingValue = (obj: statusType, value: string) => {
+  for (const prop in obj) {
+    if (
+      Object.prototype.hasOwnProperty.call(obj, prop) &&
+      Array.isArray(obj[prop])
+    ) {
+      if (obj[prop].includes(value)) {
+        return prop;
+      }
+    }
+  }
+  return null;
+};
+
+const findComponentsInCode = (code: string, status): ComponentSources => {
+  const componentRegex = /<([A-Z][a-zA-Z0-9]*)(?:\s|>|.)/g;
   const matches: string[] = [];
 
   let match: RegExpExecArray | null;
@@ -172,15 +249,37 @@ const findComponentsInCode = (code: string): ComponentSources => {
     icons: [],
     unknown: [],
   };
+
+  // Helper function to handle status-based component classification
+  const addComponentWithStatus = (
+    component: string,
+    targetArray: 'ibmProducts' | 'unknown'
+  ) => {
+    if (status) {
+      const foundStatus = findPropertyContainingValue(status, component);
+      if (foundStatus === 'preview' || foundStatus === 'previewCandidate') {
+        result.ibmProducts.push(`${foundStatus}__${component}`);
+      } else {
+        result[targetArray].push(component);
+      }
+    } else if (targetArray === 'ibmProducts') {
+      result.ibmProducts.push(component);
+    }
+  };
+
   componentNamesInCode.forEach((component) => {
     if (carbonComponentNames.includes(component)) {
       result.carbon.push(component);
     } else if (componentNames.includes(component)) {
-      result.ibmProducts.push(component);
+      // status: {
+      //   preview: string[] of component names
+      //   previewCandidate: string[] of component names
+      // }
+      addComponentWithStatus(component, 'ibmProducts');
     } else if (iconsNames.includes(component)) {
       result.icons.push(component);
     } else {
-      result.unknown.push(component);
+      addComponentWithStatus(component, 'unknown');
     }
   });
   return result;

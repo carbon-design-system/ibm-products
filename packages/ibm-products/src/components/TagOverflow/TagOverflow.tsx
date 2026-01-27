@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,7 +22,6 @@ import { TagOverflowModal } from './TagOverflowModal';
 import { TagOverflowPopover } from './TagOverflowPopover';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 import { useOverflowItems } from '../../global/js/hooks/useOverflowItems';
 export interface TagOverflowItem {
@@ -101,7 +100,7 @@ const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = 'TagOverflow';
 const allTagsModalSearchThreshold = 10;
 
-export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
+export const TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
   (props, ref) => {
     const {
       align = 'start',
@@ -250,22 +249,12 @@ export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-TagOverflow = pkg.checkComponentEnabled(TagOverflow, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 TagOverflow.displayName = componentName;
 
 const tagTypes = Object.keys(TYPES);
-
-/**
- * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
- * @returns null if no problems
- */
-export const string_required_if_more_than_10_tags = isRequiredIf(
-  PropTypes.string,
-  ({ items }) => items?.length > allTagsModalSearchThreshold
-);
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
@@ -282,11 +271,11 @@ TagOverflow.propTypes = {
   /**
    * label text for the show all search. **Note: Required if more than 10 tags**
    */
-  allTagsModalSearchLabel: string_required_if_more_than_10_tags,
+  allTagsModalSearchLabel: PropTypes.string,
   /**
    * placeholder text for the show all search. **Note: Required if more than 10 tags**
    */
-  allTagsModalSearchPlaceholderText: string_required_if_more_than_10_tags,
+  allTagsModalSearchPlaceholderText: PropTypes.string,
   /**
    * portal target for the all tags modal
    */
@@ -294,7 +283,7 @@ TagOverflow.propTypes = {
   /**
    * title for the show all modal. **Note: Required if more than 10 tags**
    */
-  allTagsModalTitle: string_required_if_more_than_10_tags,
+  allTagsModalTitle: PropTypes.string,
   /**
    * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
@@ -368,7 +357,7 @@ TagOverflow.propTypes = {
    *
    * **Note:** Required if more than 10 tags
    */
-  showAllTagsLabel: string_required_if_more_than_10_tags,
+  showAllTagsLabel: PropTypes.string,
   /** Component definition of the items to be rendered inside TagOverflow.
    * If this is not passed, items will be rendered as Tag component
    */

@@ -16,7 +16,7 @@ test.describe('TagSet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'TagSet',
-      id: 'ibm-products-components-tag-set-tagset--five-tags',
+      id: 'components-tagset--five-tags',
       globals: {
         carbonTheme: 'white',
       },
@@ -26,7 +26,7 @@ test.describe('TagSet @avt', () => {
   test('@avt-many-tags', async ({ page }) => {
     await visitStory(page, {
       component: 'TagSet',
-      id: 'ibm-products-components-tag-set-tagset--many-tags',
+      id: 'components-tagset--many-tags',
       globals: {
         carbonTheme: 'white',
       },
@@ -36,7 +36,7 @@ test.describe('TagSet @avt', () => {
   test('@avt-multiline-tags', async ({ page }) => {
     await visitStory(page, {
       component: 'TagSet',
-      id: 'ibm-products-components-tag-set-tagset--multiline-tags',
+      id: 'components-tagset--multiline-tags',
       globals: {
         carbonTheme: 'white',
       },
@@ -46,7 +46,7 @@ test.describe('TagSet @avt', () => {
   test('@avt-hundreds-of-tags', async ({ page }) => {
     await visitStory(page, {
       component: 'TagSet',
-      id: 'ibm-products-components-tag-set-tagset--hundreds-of-tags',
+      id: 'components-tagset--hundreds-of-tags',
       globals: {
         carbonTheme: 'white',
       },
@@ -56,7 +56,7 @@ test.describe('TagSet @avt', () => {
   test('@avt-with-close', async ({ page }) => {
     await visitStory(page, {
       component: 'TagSet',
-      id: 'ibm-products-components-tag-set-tagset--with-close',
+      id: 'components-tagset--with-close',
       globals: {
         carbonTheme: 'white',
       },
@@ -66,7 +66,7 @@ test.describe('TagSet @avt', () => {
   test('@avt-with-close-and-overflow-tags', async ({ page }) => {
     await visitStory(page, {
       component: 'TagSet',
-      id: 'ibm-products-components-tag-set-tagset--with-close-and-overflow-tags',
+      id: 'components-tagset--with-close-and-overflow-tags',
       globals: {
         carbonTheme: 'white',
       },
@@ -80,7 +80,7 @@ test.describe('TagSet @avt', () => {
   test('@avt-open-and-close-tags', async ({ page }) => {
     await visitStory(page, {
       component: 'TagSet',
-      id: 'ibm-products-components-tag-set-tagset--many-tags',
+      id: 'components-tagset--many-tags',
       globals: {
         carbonTheme: 'white',
       },
@@ -102,7 +102,7 @@ test.describe('TagSet @avt', () => {
   test('@avt-open-and-close-all-tags-modal', async ({ page }) => {
     await visitStory(page, {
       component: 'TagSet',
-      id: 'ibm-products-components-tag-set-tagset--many-tags',
+      id: 'components-tagset--many-tags',
       globals: {
         carbonTheme: 'white',
       },
@@ -132,14 +132,14 @@ test.describe('TagSet @avt', () => {
     await page.getByRole('searchbox').fill('One');
     await expect(modalElement.getByText('Two')).toBeHidden();
 
-    await page.getByRole('button', { name: 'Close' }).click();
+    await modalElement.getByRole('button', { name: 'Close' }).click();
     await expect(page.locator(`.${carbon.prefix}--modal`)).toBeHidden();
   });
 
   test('@avt-close-tags', async ({ page }) => {
     await visitStory(page, {
       component: 'TagSet',
-      id: 'ibm-products-components-tag-set-tagset--with-close-and-overflow-tags',
+      id: 'components-tagset--with-close-and-overflow-tags',
       globals: {
         carbonTheme: 'white',
       },
@@ -157,7 +157,7 @@ test.describe('TagSet @avt', () => {
   test('@avt-keyboard', async ({ page }) => {
     await visitStory(page, {
       component: 'TagSet',
-      id: 'ibm-products-components-tag-set-tagset--with-close-and-overflow-tags',
+      id: 'components-tagset--with-close-and-overflow-tags',
       globals: {
         carbonTheme: 'white',
       },

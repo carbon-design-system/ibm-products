@@ -1,53 +1,83 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default {
   coverageReporters: ['json', 'html'],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
-    '!**/*.stories.{js,jsx}',
+    '!**/*.stories.{js,jsx,ts,tsx}',
     '!**/*.story.{js,jsx}',
     '!**/*.docs-page.{js,jsx}',
     '!**/src/globals/decorators/*',
     '!packages/ibm-products/src/globals/js/utils/props-helper.js', // This file contains utilities to help with prop-types which we're moving away from now that we've introduced TypeScript support
     '!packages/ibm-products/src/globals/js/utils/story-helper.js', // Contains bespoke storybook utilities that we want to move away from
     '!packages/ibm-products/src/globals/js/utils/StoryDocsPage.js', // Contains bespoke storybook utilities that we want to move away from
+    '!**/*.deprecated.*',
   ],
-  coveragePathIgnorePatterns: ['preview-components'],
-  resolver: require.resolve('./setup/resolver.js'),
+  coveragePathIgnorePatterns: [
+    'preview-components',
+    // for deprecated components that contain more than 1 js file
+    'Datagrid',
+    'DecoratorDualButton',
+    'DecoratorLink',
+    'DecoratorSingleButton',
+    'DescriptionList',
+    'EditFullPage',
+    'EditSidePanel',
+    'EditTearsheet',
+    'EditTearsheetNarrow',
+    'EditUpdateCards',
+    'FilterPanel',
+    'FilterSummary',
+    'HttpErrors',
+    'Nav',
+    'StatusIndicator',
+    'UserProfileImage',
+  ],
+  resolver: resolve(__dirname, './setup/resolver.cjs'),
   moduleFileExtensions: ['tsx', 'ts', 'jsx', 'js', 'json', 'node'],
   moduleNameMapper: {
     // This mapping is the result of updating to Jest 28. We currently require
     // this as the version of uuid that gets resolved is ESM but we would like
     // to work in CommonJS until Jest lands support for ESM in stable
     // Reference: https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
-    '^uuid$': require.resolve('uuid'),
+    '^uuid$': 'uuid',
     // This mapping is added to resolve the alias that is set in our webpack config
     // otherwise the webpack alias does not work in the jest environment
     '\\.(css|scss)$': 'identity-obj-proxy',
+    '\\.(css|less|scss|sass)\\?inline$': resolve(
+      __dirname,
+      './setup/styleMock.js'
+    ),
   },
   modulePathIgnorePatterns: ['/build/', '/es/', '/lib/', '/umd/', '/examples/'],
   reporters: ['default'],
-  setupFiles: [require.resolve('./setup/setupFiles.js')],
-  setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv.js')],
+  setupFiles: [resolve(__dirname, './setup/setupFiles.js')],
+  setupFilesAfterEnv: [resolve(__dirname, './setup/setupFilesAfterEnv.js')],
   testMatch: [
     '<rootDir>/**/__tests__/**/*.(js|jsx|ts|tsx)?(x)',
     '<rootDir>/**/*.(spec|test).(js|jsx|ts|tsx)?(x)',
     '<rootDir>/**/*-(spec|test).(js|jsx|ts|tsx)?(x)',
   ],
   transform: {
-    '^.+\\.(mjs|cjs|js|jsx|ts|tsx)$': require.resolve(
-      './transform/javascript.js'
+    '^.+\\.(mjs|cjs|js|jsx|ts|tsx)$': resolve(
+      __dirname,
+      './transform/javascript.cjs'
     ),
-    '^.+\\.s?css$': require.resolve('./transform/css.js'),
-    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': require.resolve(
-      './transform/file.js'
+    '^.+\\.s?css$': resolve(__dirname, './transform/css.cjs'),
+    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': resolve(
+      __dirname,
+      './transform/file.cjs'
     ),
   },
   testEnvironment: 'jsdom',
@@ -65,6 +95,7 @@ module.exports = {
     '/vendor/',
     '/scripts/',
     'test-helper.js',
+    '<rootDir>/src/globals/decorators/.*\\.stories\\.ts$',
   ],
   transformIgnorePatterns: [
     '/build/',

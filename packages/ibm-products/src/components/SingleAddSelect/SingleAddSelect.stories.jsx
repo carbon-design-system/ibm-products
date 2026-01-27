@@ -10,10 +10,10 @@ import React, { useState } from 'react';
 import { SingleAddSelect } from '.';
 import { Button } from '@carbon/react';
 import DocsPage from './SingleAddSelect.docs-page';
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 
 export default {
-  title: 'IBM Products/Patterns/Add and select/SingleAddSelect',
+  title: 'Patterns/Prebuilt patterns/Add and select/SingleAddSelect',
   component: SingleAddSelect,
   tags: ['autodocs'],
   parameters: {
@@ -125,6 +125,7 @@ const defaultProps = {
   navIconDescription: 'View children',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
+  noTearsheet: false,
   onCloseButtonText: 'Cancel',
   onSubmit: (selection) => console.log(selection),
   onSubmitButtonText: 'Select',
@@ -138,7 +139,9 @@ const Template = (args, context) => {
   return (
     <>
       <SingleAddSelect {...args} open={open} onClose={() => setOpen(false)} />
-      <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+      {args?.noTearsheet === false && (
+        <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+      )}
     </>
   );
 };

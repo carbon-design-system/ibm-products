@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { GetStartedCard } from '.';
+import { previewCandidate__GetStartedCard as GetStartedCard } from '..';
 import React from 'react';
 import mdx from './GetStartedCard.mdx';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   ArrowRight,
   Crossroads,
@@ -39,9 +39,9 @@ const defaultProps = {
 };
 
 export default {
-  title: 'Experimental/Onboarding/GetStartedCard',
+  title: 'Preview Candidate/Onboarding/GetStartedCard',
   component: GetStartedCard,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'Onboarding'],
   parameters: {
     docs: {
       page: mdx,

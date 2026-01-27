@@ -27,6 +27,7 @@ import { CreateSidePanel } from './CreateSidePanel';
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './CreateSidePanel.docs-page';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
+import { renderTrigger } from '../../global/js/utils/story-helper';
 
 const blockClass = `${pkg.prefix}--create-side-panel`;
 
@@ -77,7 +78,7 @@ const renderUIShellHeader = () => (
 );
 
 export default {
-  title: 'IBM Products/Patterns/Create flows/CreateSidePanel',
+  title: 'Patterns/Prebuilt patterns/Create flows/CreateSidePanel',
   component: CreateSidePanel,
   tags: ['autodocs'],
   parameters: {
@@ -108,14 +109,7 @@ const DefaultTemplate = ({ slug, ...args }, context) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   return (
     <>
-      {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content">
-        <Column lg={{ span: 2, start: 8 }}>
-          <Button onClick={() => setOpen(!open)}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
+      {renderTrigger({ open, setOpen, name: 'side panel' })}
       <CreateSidePanel
         {...args}
         open={open}
@@ -204,14 +198,7 @@ const TemplateWithFormValidation = ({ slug, ...args }, context) => {
   const [invalid, setInvalid] = useState(false);
   return (
     <>
-      {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content">
-        <Column lg={{ span: 2, start: 8 }}>
-          <Button onClick={() => setOpen(!open)}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
+      {renderTrigger({ open, setOpen, name: 'side panel' })}
       <CreateSidePanel
         {...args}
         open={open}
@@ -303,14 +290,7 @@ const TemplateWithMultipleForms = ({ slug, ...args }, context) => {
   const [invalid, setInvalid] = useState(false);
   return (
     <>
-      {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content">
-        <Column lg={{ span: 2, start: 8 }}>
-          <Button onClick={() => setOpen(!open)}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
+      {renderTrigger({ open, setOpen, name: 'side panel' })}
       <CreateSidePanel
         {...args}
         open={open}

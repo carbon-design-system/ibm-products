@@ -99,5 +99,5 @@ $stackblitz-block-class: c4p--page-header;
 .page-header-story__wrapper {
   overflow: auto;
   block-size: calc(100vh - 3rem);
-  margin-block-start: $spacing-09;
+  margin-block-start: spacing.$spacing-09;
 }

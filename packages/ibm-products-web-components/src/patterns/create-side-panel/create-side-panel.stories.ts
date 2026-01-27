@@ -10,9 +10,11 @@
 import { html } from 'lit';
 import '../../../examples/create-side-panel/src/index';
 
-export default {
+const meta = {
   title: 'Patterns/Create sidepanel',
 };
+
+export default meta;
 
 export const Default = {
   render: () => {

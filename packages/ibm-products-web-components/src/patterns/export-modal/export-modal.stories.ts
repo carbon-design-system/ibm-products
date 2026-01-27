@@ -9,9 +9,12 @@
 
 import { html } from 'lit';
 import '../../../examples/export-modal/src/export-modal';
-export default {
+
+const meta = {
   title: 'Patterns/Export',
 };
+
+export default meta;
 
 export const BasicModal = {
   render: () => {

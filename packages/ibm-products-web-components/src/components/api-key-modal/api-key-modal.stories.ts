@@ -10,9 +10,11 @@
 import { html } from 'lit';
 import '../../../examples/api-key-modal/src/api-key-modal';
 
-export default {
+const meta = {
   title: 'Patterns/APIKeyModal',
 };
+
+export default meta;
 
 export const Generate = {
   render: () => {

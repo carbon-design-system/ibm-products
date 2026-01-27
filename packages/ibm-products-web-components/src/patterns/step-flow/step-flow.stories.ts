@@ -63,6 +63,8 @@ export const SidePanel = {
   name: 'SidePanel',
 };
 
-export default {
+const meta = {
   title: 'Patterns/Step flows',
 };
+
+export default meta;

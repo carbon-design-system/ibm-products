@@ -10,9 +10,11 @@
 import { html, render } from 'lit';
 import '../../../examples/delete-and-remove/src/delete-and-remove';
 
-export default {
+const meta = {
   title: 'Patterns/Delete and remove',
 };
+
+export default meta;
 
 export const highImpactDeletion = {
   render: () => {

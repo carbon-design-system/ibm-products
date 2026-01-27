@@ -10,12 +10,9 @@
 import { html } from 'lit';
 import '../../../examples/saving/src/saving';
 import styles from './story-styles.scss?lit';
-
-const meta = {
+export default {
   title: 'Patterns/Saving',
 };
-
-export default meta;
 
 export const Auto = {
   render: () => {

@@ -76,6 +76,9 @@ const config = {
       },
     });
   },
+  docs: {
+    defaultName: 'Overview',
+  },
 };
 
 export default config;

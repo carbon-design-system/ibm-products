@@ -11,11 +11,9 @@ import { html } from 'lit';
 import '../../../examples/import-modal/src/import-modal';
 import { FileType } from '../../../examples/import-modal/src/import-modal';
 
-const meta = {
+export default {
   title: 'Patterns/ImportModal',
 };
-
-export default meta;
 
 export const importModal = {
   render: (args) => {

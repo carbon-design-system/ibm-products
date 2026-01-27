@@ -231,3 +231,5 @@ export const Preview = {
   globalTypes,
   decorators,
 };
+
+export const tags = ['autodocs'];

@@ -85,7 +85,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     const slot = wrapper.querySelector('slot');
     const assignedElements = slot?.assignedElements({ flatten: true });
     const header = assignedElements?.find(
-      (el) => el.tagName.toLowerCase() === 'c4p-coachmark-header'
+      (el) => el.tagName.toLowerCase() === `${prefix}-coachmark-header`
     ) as HTMLElement;
     requestAnimationFrame(() => {
       const dragHandle = header.shadowRoot?.querySelector(
@@ -145,6 +145,10 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     }
   }
 
+  private focusOut(e: FocusEvent) {
+    e.stopImmediatePropagation();
+  }
+
   render() {
     return html`
       <cds-popover
@@ -154,6 +158,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         ?highContrast=${this.highContrast}
         align=${this.align}
         ?dropShadow=${this.dropShadow}
+        @focusout=${this.focusOut}
       >
         <slot name="trigger"></slot>
         <cds-popover-content>

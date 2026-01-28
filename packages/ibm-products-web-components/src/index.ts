@@ -27,4 +27,3 @@ export { default as CDSCoachmarkBeacon } from './components/coachmark/coachmark-
 export { default as CDSCoachmarkTagline } from './components/coachmark/coachmark-tagline/coachmark-tagline';
 export { default as CDSBigNumber } from './components/big-number/big-number';
 export { default as CDSBigNumberSkeleton } from './components/big-number/big-number-skeleton';
-export { default as CDSCoachmarkTagline } from './components/coachmark/coachmark-tagline/coachmark-tagline';

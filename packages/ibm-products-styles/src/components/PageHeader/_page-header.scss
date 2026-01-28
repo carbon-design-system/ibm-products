@@ -774,6 +774,10 @@ $duration: 1000ms;
 
   .#{$block-class}__breadcrumb__icon {
     margin-inline-end: $spacing-03;
+
+    svg {
+      fill: $icon-primary;
+    }
   }
 
   .#{$block-class}__breadcrumb__actions {
@@ -870,6 +874,10 @@ $duration: 1000ms;
 
   .#{$block-class}__content__icon {
     margin-inline-end: $spacing-05;
+
+    svg {
+      fill: $icon-primary;
+    }
   }
 
   .#{$block-class}__content__page-actions {

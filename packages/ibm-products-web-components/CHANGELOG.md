@@ -1,3 +1,13 @@
+## `@carbon/ibm-products-web-components@0.31.0`
+### Features :rocket:
+- feat: openInStackblitz in web components (#8786)
+- feat: added support for iframes in storybook for autotrack (#8580)
+- feat(NotificationPanel): code connect wc (#8733)
+
+### Housekeeping :house:
+- chore: add create sidepanel wc pattern code (#8379)
+- chore(deps): update dependency @rollup/plugin-commonjs to v29 (#8584)
+
 ## `@carbon/ibm-products-web-components@0.30.0`
 ### Features :rocket:
 - feat: init guide banner component (#8513)

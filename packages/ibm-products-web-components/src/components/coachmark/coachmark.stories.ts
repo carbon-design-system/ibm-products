@@ -51,8 +51,31 @@ export const Tooltip = {
 
   render: (args) => {
     const handleClick = () => {
-      document.querySelector('c4p-coachmark')?.toggleAttribute('open');
+      const coachmark = document.querySelector('c4p-coachmark');
+      coachmark?.toggleAttribute('open');
+
+      // Focus the Done button when opening
+      if (coachmark?.hasAttribute('open')) {
+        setTimeout(() => {
+          const doneButton = document.querySelector(
+            '.coachmark-body cds-button'
+          );
+          (doneButton as HTMLElement)?.focus();
+        }, 100);
+      }
     };
+
+    const handleDone = () => {
+      document.querySelector('c4p-coachmark')?.removeAttribute('open');
+    };
+
+    // Focus Done button on initial render if open
+    if (args.open) {
+      setTimeout(() => {
+        const doneButton = document.querySelector('.coachmark-body cds-button');
+        (doneButton as HTMLElement)?.focus();
+      }, 100);
+    }
 
     return html`
       <style>
@@ -79,7 +102,7 @@ export const Tooltip = {
           <c4p-coachmark-body class="coachmark-body">
             <h2>Hello World</h2>
             <p>this is a description test</p>
-            <cds-button size="sm">Done</cds-button>
+            <cds-button size="sm" @click=${handleDone}>Done</cds-button>
           </c4p-coachmark-body>
         </c4p-coachmark>
       </div>
@@ -95,10 +118,34 @@ export const Floating = {
     align: 'bottom',
   },
   argTypes,
-  render: (args) => {
+  render: (args: any) => {
     const handleClick = () => {
-      document.querySelector('c4p-coachmark')?.toggleAttribute('open');
+      const coachmark = document.querySelector('c4p-coachmark');
+      coachmark?.toggleAttribute('open');
+
+      // Focus the Done button when opening
+      if (coachmark?.hasAttribute('open')) {
+        setTimeout(() => {
+          const doneButton = document.querySelector(
+            '.coachmark-body cds-button'
+          );
+          (doneButton as HTMLElement)?.focus();
+        }, 100);
+      }
     };
+
+    const handleDone = () => {
+      document.querySelector('c4p-coachmark')?.removeAttribute('open');
+    };
+
+    // Focus Done button on initial render if open
+    if (args.open) {
+      setTimeout(() => {
+        const doneButton = document.querySelector('.coachmark-body cds-button');
+        (doneButton as HTMLElement)?.focus();
+      }, 100);
+    }
+
     return html`
       <style>
         ${styles}
@@ -125,7 +172,7 @@ export const Floating = {
           <c4p-coachmark-body class="coachmark-body">
             <h2>Hello World</h2>
             <p>this is a description test</p>
-            <cds-button size="sm">Done</cds-button>
+            <cds-button size="sm" @click=${handleDone}>Done</cds-button>
           </c4p-coachmark-body>
         </c4p-coachmark>
       </div>

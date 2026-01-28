@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -44,13 +44,23 @@ class CDSCoachmarkBeacon extends HostListenerMixin(LitElement) {
    */
   @property({ type: String, reflect: true })
   id: string = crypto.randomUUID();
-
-  @state() private expanded = false;
+  /**
+   * specify aria-expanded of beacon
+   */
+  @property({ type: Boolean, reflect: true })
+  expanded: boolean = false;
 
   firstUpdated() {
     this.classList.add(blockClass);
     if (this.kind) {
       this.classList.add(`${blockClass}-${this.kind}`);
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.expanded) {
+      document.addEventListener('click', this.handleOutsideClick);
     }
   }
 
@@ -81,6 +91,11 @@ class CDSCoachmarkBeacon extends HostListenerMixin(LitElement) {
       document.removeEventListener('click', this.handleOutsideClick);
     }
   };
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener('click', this.handleOutsideClick);
+  }
 
   render() {
     return html`

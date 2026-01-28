@@ -45,4 +45,4 @@ ignore:
   - 'Nav/'
   - 'StatusIndicator/'
   - 'UserProfileImage/'
-  - "**/StepFlow/story-assets/**/*"
+  - '**/StepFlow/story-assets/**/*'

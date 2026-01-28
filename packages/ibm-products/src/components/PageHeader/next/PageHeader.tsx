@@ -8,13 +8,13 @@ import React, {
   type ComponentType,
   type FunctionComponent,
   useEffect,
-  useLayoutEffect,
   useState,
   useRef,
   useCallback,
   RefObject,
   forwardRef,
 } from 'react';
+import { useIsomorphicEffect } from '../../../global/js/hooks';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {
@@ -379,7 +379,7 @@ const PageHeaderContent = React.forwardRef<
     return element.offsetHeight < element.scrollHeight;
   };
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     titleRef.current && isEllipsisActive(titleRef.current);
   }, [title]);
 
@@ -518,7 +518,7 @@ const PageHeaderContentPageActions = ({
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (menuButtonVisibility && offsetRef.current) {
       const width = offsetRef.current.offsetWidth;
       document.documentElement.style.setProperty(

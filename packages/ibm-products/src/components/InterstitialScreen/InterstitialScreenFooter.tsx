@@ -101,7 +101,7 @@ const InterstitialScreenFooter = React.forwardRef<
   const handleAction = async (actionType: ActionType) => {
     setLoadingAction(actionType);
 
-    await onAction?.(actionType, {
+    const abortContinue = await onAction?.(actionType, {
       handleGotoStep,
       progStep,
       stepCount,
@@ -109,6 +109,11 @@ const InterstitialScreenFooter = React.forwardRef<
     });
 
     setLoadingAction('');
+
+    // Skip navigation if onAction explicitly returns true
+    if (abortContinue) {
+      return;
+    }
 
     if (actionType === 'next' || actionType === 'back') {
       const stepDelta = actionType === 'next' ? 1 : -1;

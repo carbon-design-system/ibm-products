@@ -49,7 +49,7 @@ export interface InterstitialScreenHeaderProps {
 
 export type EnrichedChildren = {
   children: React.ReactNode;
-  stepTitle: string;
+  stepTitle?: string;
   translateWithId?: (id: string) => string;
 };
 
@@ -97,7 +97,7 @@ const InterstitialScreenHeader = React.forwardRef<
                     return (
                       <ProgressStep
                         key={stepKey}
-                        label={child.props.stepTitle || ''}
+                        label={child.props.stepTitle ?? `Step ${idx + 1}`}
                         translateWithId={child.props.translateWithId}
                       />
                     );

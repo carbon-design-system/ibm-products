@@ -1,7 +1,7 @@
 {
   "name": "ibm-products",
   "engines": {
-    "node": ">=20.19.x"
+    "node": ">=22.x"
   },
   "private": true,
   "version": "0.0.0",
@@ -24,6 +24,7 @@
     "ci-check:tests": "run-p -s 'ci-check:test:*'",
     "ci-check:test:c4p": "yarn test:c4p --ci",
     "ci-check:test:c4p:snapshot": "yarn test:c4p:snapshot --ci",
+    "ci-check:test:c4p-wc:build": "lerna run build --scope @carbon/ibm-products-web-components --include-dependencies --stream",
     "ci-check:test:c4p-wc": "yarn test:c4p-wc",
     "ci-check:spellcheck": "yarn spellcheck",
     "clean": "run-p -s 'clean:*' && run-p -s 'clean:finally:*'",
@@ -41,7 +42,7 @@
     "lint:license:staged": "scripts/check-license.cjs -w",
     "lint:js": "eslint packages --fix",
     "lint:styles": "stylelint '**/*.scss' --fix",
-    "prepare": "husky install",
+    "prepare": "husky",
     "postinstall": "husky",
     "run-all": "lerna run --stream --prefix --loglevel success",
     "release-telemetry": "cd packages/ibm-products && yarn telemetry-config && cd ../ibm-products-web-components && yarn telemetry-config",
@@ -49,7 +50,7 @@
     "test:c4p": "lerna run --stream --scope @carbon/ibm-products test --",
     "test:c4p:snapshot": "yarn test:c4p-styles styles -u",
     "test:c4p-styles": "lerna run --stream --scope @carbon/ibm-products-styles test --",
-    "test:c4p-wc": "yarn playwright install && lerna run --stream --scope @carbon/ibm-products-web-components test --",
+    "test:c4p-wc": "lerna run --stream --scope @carbon/ibm-products-web-components test --",
     "spellcheck": "cspell '**' -e './examples' --gitignore --quiet --no-must-find-files",
     "storybook": "cd packages/ibm-products && yarn storybook:start",
     "storybook:build": "cd packages/ibm-products && yarn storybook:build",
@@ -66,18 +67,18 @@
     "@babel/core": "^7.26.10",
     "@babel/eslint-parser": "^7.26.10",
     "@babel/preset-react": "^7.26.3",
-    "@carbon/grid": "^11.42.0",
-    "@carbon/layout": "^11.40.0",
-    "@carbon/motion": "^11.34.0",
-    "@carbon/react": "^1.90.0",
-    "@carbon/themes": "^11.59.0",
-    "@carbon/type": "^11.46.0",
+    "@carbon/grid": "^11.46.0",
+    "@carbon/layout": "^11.44.0",
+    "@carbon/motion": "^11.38.0",
+    "@carbon/react": "^1.97.0",
+    "@carbon/themes": "^11.64.0",
+    "@carbon/type": "^11.50.0",
     "@commitlint/cli": "^20.0.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/compat": "^1.2.7",
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.22.0",
-    "@playwright/test": "^1.51.0",
+    "@playwright/test": "^1.56.1",
     "@stackblitz/sdk": "^1.11.0",
     "@testing-library/dom": "^8.11.4",
     "@testing-library/react": "^14.0.0",
@@ -102,7 +103,7 @@
     "jest-canvas-mock": "2.5.2",
     "jest-junit": "^16.0.0",
     "json": "^11.0.0",
-    "lerna": "^8.2.1",
+    "lerna": "^9.0.0",
     "lint-staged": "^16.0.0",
     "lottie-web": "^5.13.0",
     "npm-check-updates": "^19.0.0",
@@ -122,7 +123,7 @@
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {
-    "body-parser": "2.2.0",
+    "body-parser": "2.2.1",
     "braces": "^3.0.3",
     "cross-spawn": "7.0.6",
     "form-data": "4.0.4",
@@ -132,7 +133,8 @@
     "ws": "^8.17.1",
     "@babel/runtime": "7.28.4",
     "brace-expansion@^1.1.7": "1.1.12",
-    "brace-expansion@^2.0.1": "2.0.2"
+    "brace-expansion@^2.0.1": "2.0.2",
+    "axios": "^1.12.0"
   },
   "lint-staged": {
     "*": [
@@ -152,7 +154,7 @@
     ]
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "^3.2.3",
+    "stylelint-plugin-carbon-tokens": "^4.0.0",
     "stylelint-use-logical": "^2.1.2"
   },
   "packageManager": "yarn@4.10.3"

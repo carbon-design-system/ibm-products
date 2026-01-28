@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -47,6 +47,7 @@ interface CoachmarkHeaderProps {
 /**
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
+ * @deprecated This component is deprecated.
  */
 export const CoachmarkHeader = React.forwardRef<
   HTMLElement,
@@ -91,6 +92,12 @@ export const CoachmarkHeader = React.forwardRef<
     );
   }
 );
+
+/**@ts-ignore*/
+CoachmarkHeader.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 

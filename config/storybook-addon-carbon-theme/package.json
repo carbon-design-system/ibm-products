@@ -1,9 +1,10 @@
 {
   "name": "@carbon/storybook-addon-theme",
   "description": "Carbon theme switcher for Storybook",
-  "version": "2.26.0",
+  "version": "2.31.0",
   "license": "Apache-2.0",
   "main": "dist/react.js",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/ibm-products.git",
@@ -51,8 +52,7 @@
     "@storybook/components": "^8.6.6",
     "@storybook/core-events": "^8.6.6",
     "@storybook/theming": "^8.6.6",
-    "core-js": "^3.41.0",
-    "global": "^4.4.0"
+    "core-js": "^3.41.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",

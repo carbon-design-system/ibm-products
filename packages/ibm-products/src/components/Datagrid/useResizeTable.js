@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useLayoutEffect } from 'react';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 const useResizeTable = (hooks) => {
   const useInstanceBeforeDimensions = (instance) => {
     const { rootRef, handleResize } = instance;
     const parent = rootRef && rootRef.current && rootRef.current.parentElement;
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       if (!parent) {
         return () => {};
       }

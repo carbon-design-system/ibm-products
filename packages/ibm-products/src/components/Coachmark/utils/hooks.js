@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect, useRef, useLayoutEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { useIsomorphicEffect } from '../../../global/js/hooks';
 import { COACHMARK_OVERLAY_KIND } from './enums';
 
 /**
@@ -24,10 +25,10 @@ function useClickOutsideElement(
 ) {
   const cb = useRef(undefined);
   const isTooltip = overlayKind === COACHMARK_OVERLAY_KIND.TOOLTIP;
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     cb.current = callback;
   }, [callback]);
-  useEffect(() => {
+  useIsomorphicEffect(() => {
     function handleClickOutside(event) {
       const isOverlayOutside =
         overlayRef.current && !overlayRef.current.contains(event.target);

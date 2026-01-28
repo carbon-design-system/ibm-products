@@ -6,6 +6,7 @@
  */
 
 export { InterstitialScreen } from './InterstitialScreen';
+export { InterstitialScreenView } from './InterstitialScreenView';
 export type {
   InterstitialScreenProps,
   InterstitialScreenComponent,

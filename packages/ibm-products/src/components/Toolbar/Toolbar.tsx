@@ -22,8 +22,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
-const { checkComponentEnabled, prefix } = pkg;
-const blockClass = `${prefix}--toolbar`;
+const blockClass = `${pkg.prefix}--toolbar`;
 
 export interface ToolbarProps {
   /** Provide an optional class to be applied to the containing node */

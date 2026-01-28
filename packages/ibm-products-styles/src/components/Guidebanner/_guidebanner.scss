@@ -67,12 +67,9 @@ $purple-3: #7433e3;
 
 .#{$block-class}__icon-idea {
   position: absolute;
+  color: $gray-10;
   inset-block-start: $spacing-05;
   inset-inline-start: $spacing-05;
-
-  path {
-    fill: $gray-10;
-  }
 }
 
 .#{$block-class}__title {

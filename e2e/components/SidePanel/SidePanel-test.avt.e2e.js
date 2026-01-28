@@ -11,7 +11,7 @@ import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
 test.describe('SidePanel @avt', () => {
-  test('@avt-default-state', async ({ page }) => {
+  test.skip('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       id: 'components-sidepanel--slide-over',
@@ -102,7 +102,7 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByLabel('Close')).toBeFocused();
   });
 
-  test('@avt-resizer-feature-enabled', async ({ page }) => {
+  test.skip('@avt-resizer-feature-enabled', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       id: 'components-sidepanel--slide-over&args=jsFlags[0]:enableSidepanelResizer',

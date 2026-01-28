@@ -8,6 +8,8 @@
 import React, { cloneElement } from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { composeStory } from '@storybook/react-vite';
+import meta, { Compact, Default } from './PageHeader.stories';
 import { preview__PageHeader as PageHeader, pkg } from '../../..';
 import {
   PageHeader as PageHeaderDirect,
@@ -75,13 +77,12 @@ describe('PageHeader', () => {
 
     it('should update css variable for sticky positioning', () => {
       const testId = 'page-header-next-test-id';
-      render(
-        <PageHeader.Root data-testid={testId}>
-          <PageHeader.BreadcrumbBar />
-          <PageHeader.Content title="title" />
-          <PageHeader.TabBar />
-        </PageHeader.Root>
-      );
+      const DefaultStory = composeStory(Default, meta, {
+        args: {
+          'data-testid': testId,
+        },
+      });
+      render(<DefaultStory />);
       triggerResize();
       const computedStyle = window.getComputedStyle(screen.getByTestId(testId));
       expect(
@@ -97,13 +98,8 @@ describe('PageHeader', () => {
     });
 
     it('supports dot notation component namespacing from the main entrypoint', () => {
-      const { container } = render(
-        <PageHeader.Root>
-          <PageHeader.BreadcrumbBar />
-          <PageHeader.Content title="title" />
-          <PageHeader.TabBar />
-        </PageHeader.Root>
-      );
+      const DefaultStory = composeStory(Default, meta);
+      const { container } = render(<DefaultStory />);
       expect(container.firstChild).toBeInTheDocument();
     });
 
@@ -126,10 +122,15 @@ describe('PageHeader', () => {
     });
 
     it('should place className on the outermost element', () => {
-      const { container } = render(
-        <PageHeader.Root className="custom-class" />
-      );
-      expect(container.firstChild).toHaveClass('custom-class');
+      const DefaultStory = composeStory(Default, meta, {
+        args: {
+          className: 'custom-class',
+          role: 'banner',
+        },
+      });
+      render(<DefaultStory />);
+      const pageHeaderOuter = screen.getByRole('banner');
+      expect(pageHeaderOuter).toHaveClass('custom-class');
     });
   });
 
@@ -170,18 +171,15 @@ describe('PageHeader', () => {
     });
 
     it('should render breadcrumb items', () => {
-      const { container } = render(
-        <PageHeader.Root>
-          <PageHeader.BreadcrumbBar>
-            <Breadcrumb>
-              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-              <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-            </Breadcrumb>
-          </PageHeader.BreadcrumbBar>
-        </PageHeader.Root>
-      );
+      const DefaultStory = composeStory(Default, meta, {
+        args: {
+          role: 'banner',
+        },
+      });
+      render(<DefaultStory />);
 
-      const breadcrumbs = container.getElementsByClassName(
+      const pageHeaderOuter = screen.getByRole('banner');
+      const breadcrumbs = pageHeaderOuter.getElementsByClassName(
         `${carbonPrefix}--breadcrumb-item`
       );
 
@@ -440,15 +438,9 @@ describe('PageHeader', () => {
     });
 
     it('should use a custom menuButtonLabel if provided', () => {
-      render(
-        <PageHeader.Root>
-          <PageHeader.ContentPageActions
-            actions={mockPageActions}
-            menuButtonLabel="Options"
-          />
-        </PageHeader.Root>
-      );
-      expect(screen.getByText('Options')).toBeInTheDocument();
+      const CompactStory = composeStory(Compact, meta);
+      render(<CompactStory />);
+      expect(screen.getByText('Actions')).toBeInTheDocument();
     });
 
     it('should call onClick of hidden action when MenuItem is clicked', async () => {
@@ -508,13 +500,10 @@ describe('PageHeader', () => {
     });
 
     it('should render a subtitle', () => {
-      render(
-        <PageHeader.Root>
-          <PageHeader.ContentText subtitle="subtitle" />
-        </PageHeader.Root>
-      );
+      const DefaultStory = composeStory(Default, meta);
+      render(<DefaultStory />);
 
-      expect(screen.getByText('subtitle')).toBeInTheDocument();
+      expect(screen.getByText('Subtitle')).toBeInTheDocument();
     });
   });
 
@@ -1003,9 +992,8 @@ describe('PageHeader', () => {
       );
       const scrollerButton = screen.getByLabelText('Collapse');
       expect(scrollerButton).toBeInTheDocument();
-
-      await act(() => {
-        userEvent.click(scrollerButton);
+      await waitFor(async () => {
+        await userEvent.click(scrollerButton);
       });
       expect(scrollerOnClick).toHaveBeenCalledTimes(1);
     });

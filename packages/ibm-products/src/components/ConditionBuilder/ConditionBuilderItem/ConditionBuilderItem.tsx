@@ -214,7 +214,8 @@ export const ConditionBuilderItem = ({
       return;
     }
 
-    const focusLeftPopover = !popoverEl.contains(relatedTarget);
+    const focusLeftPopover =
+      relatedTarget && !popoverEl.contains(relatedTarget);
     const targetInsidePopover = popoverEl.contains(focusEvent.target as Node);
 
     const targetEl = focusEvent.target as Element | null;

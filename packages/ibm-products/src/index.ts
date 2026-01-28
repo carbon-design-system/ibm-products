@@ -8,8 +8,6 @@
 // prettier-ignore
 'use client'
 
-import './feature-flags';
-
 export { pkg } from './settings';
 export { usePrefix } from './global/js/hooks';
 export * from './components';

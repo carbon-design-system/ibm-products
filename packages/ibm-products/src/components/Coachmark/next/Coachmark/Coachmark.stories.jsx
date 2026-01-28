@@ -14,7 +14,7 @@ import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 
 export default {
-  title: 'Preview/Onboarding/Coachmark/next',
+  title: 'Preview/Onboarding/Coachmark',
   component: Coachmark,
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
@@ -140,8 +140,9 @@ const TooltipTemplate = ({ ...args }, context) => {
 };
 
 //Floating variant
-const FloatingTemplate = (args) => {
-  const carbonTheme = useCarbonTheme();
+const FloatingTemplate = ({ ...args }, context) => {
+  const sbDocs = context.viewMode !== 'docs';
+  const carbonTheme = sbDocs ? useCarbonTheme() : 'white';
   const [isOpen, setIsOpen] = useState(true);
 
   const handleClose = () => {

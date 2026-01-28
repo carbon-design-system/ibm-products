@@ -997,6 +997,10 @@ $duration: 1000ms;
     @include breakpoint(lg) {
       transform: translateX($spacing-08);
     }
+
+    .#{$carbon-prefix}--tag {
+      margin-inline-end: $spacing-03;
+    }
   }
 
   .#{$block-class}--tag-overflow-popover__hidden {

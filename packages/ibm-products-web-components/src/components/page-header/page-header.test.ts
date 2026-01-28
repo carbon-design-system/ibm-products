@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,10 @@ import CDSPageHeaderTabs from './page-header-tabs';
 import CDSTabs from '@carbon/web-components/es/components/tabs/tabs';
 import { carbonPrefix, prefix } from '../../globals/settings';
 import './index';
+
+import image1 from './_story-assets/2x1.jpg';
+import image2 from './_story-assets/3x2.jpg';
+import { breakpoints } from '@carbon/layout';
 
 const IntersectionObserverMock = vi.fn(() => ({
   disconnect: vi.fn(),
@@ -55,7 +59,7 @@ describe('c4p-page-header', function () {
       const pageHeader: CDSPageHeader = await fixture(
         html`<main style="height: 200vh;">
           <c4p-page-header>
-            <c4p-page-header-breadcrumb>
+            <c4p-page-header-breadcrumb .border=${true}>
               <cds-breadcrumb>
                 <cds-breadcrumb-item href="/#"
                   >Breadcrumb 1</cds-breadcrumb-item
@@ -72,24 +76,6 @@ describe('c4p-page-header', function () {
                 <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
                   >Tab 1</cds-tab
                 >
-                <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
-                  >Tab 2</cds-tab
-                >
-                <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
-                  >Tab 3</cds-tab
-                >
-                <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
-                  >Tab 4</cds-tab
-                >
-                <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
-                  >Tab 5</cds-tab
-                >
-                <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
-                  >Tab 6</cds-tab
-                >
-                <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
-                  >Tab 7</cds-tab
-                >
               </cds-tabs>
             </c4p-page-header-tabs>
           </c4p-page-header>
@@ -101,54 +87,6 @@ describe('c4p-page-header', function () {
               hidden
             >
               Tab Panel 1
-            </div>
-            <div
-              id="tab-panel-2"
-              role="tabpanel"
-              aria-labelledby="tab-2"
-              hidden
-            >
-              Tab Panel 2
-            </div>
-            <div
-              id="tab-panel-3"
-              role="tabpanel"
-              aria-labelledby="tab-3"
-              hidden
-            >
-              Tab Panel 3
-            </div>
-            <div
-              id="tab-panel-4"
-              role="tabpanel"
-              aria-labelledby="tab-4"
-              hidden
-            >
-              Tab Panel 4
-            </div>
-            <div
-              id="tab-panel-5"
-              role="tabpanel"
-              aria-labelledby="tab-5"
-              hidden
-            >
-              Tab Panel 5
-            </div>
-            <div
-              id="tab-panel-6"
-              role="tabpanel"
-              aria-labelledby="tab-6"
-              hidden
-            >
-              Tab Panel 6
-            </div>
-            <div
-              id="tab-panel-7"
-              role="tabpanel"
-              aria-labelledby="tab-7"
-              hidden
-            >
-              Tab Panel 7
             </div>
           </div>
         </main>`
@@ -164,6 +102,14 @@ describe('c4p-page-header', function () {
       ) as HTMLElement;
       expect(scrollerButton).toBeDefined();
       expect(iconButton?.textContent?.trim()).toBe('Collapse');
+      const breadcrumbBar = pageHeader.querySelector(
+        `${prefix}-page-header-breadcrumb`
+      ) as HTMLElement;
+      const breadcrumbBarBorderAttr = breadcrumbBar.getAttribute('border');
+      expect(breadcrumbBarBorderAttr).toBeTruthy();
+      const scrollButtonElement =
+        scrollerButton.shadowRoot?.querySelector('cds-icon-button');
+      (scrollButtonElement as HTMLButtonElement).click();
     });
   });
 
@@ -311,6 +257,25 @@ describe('c4p-page-header', function () {
       expect(inner?.textContent).to.include('Content text');
     });
 
+    it('should render content text with subtitle', async () => {
+      const el: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Page header content title">
+            <c4p-page-header-content-text subtitle="Content text subtitle">
+              Content text
+            </c4p-page-header-content-text>
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+
+      const inner = el.querySelector('c4p-page-header-content-text');
+      expect(inner?.textContent).to.include('Content text');
+      const subtitleHeader = el.querySelector(
+        `.${prefix}--page-header__content__subtitle`
+      );
+      expect(subtitleHeader).toBeDefined();
+    });
+
     it('should render contextual actions', async () => {
       const el: CDSPageHeader = await fixture(html`
         <c4p-page-header>
@@ -368,6 +333,39 @@ describe('c4p-page-header', function () {
 
       expect(button).to.exist;
       expect(button?.textContent).to.include('page actions');
+    });
+
+    it('should render page header hero image', async () => {
+      const el: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Page header content title">
+            <button slot="page-actions">page actions</button>
+            <c4p-page-header-content-text>
+              Content text
+            </c4p-page-header-content-text>
+          </c4p-page-header-content>
+          <c4p-page-header-hero-image>
+            <picture>
+              <source
+                srcset="${image1}"
+                media=${`(min-width: ${breakpoints.lg.width})`}
+              ></source>
+              <source
+                srcset="${image2}"
+                media=${`(max-width: ${breakpoints.lg.width})`}
+              ></source>
+              <img
+                src="${image1}"
+                alt="a default image"
+                style="max-width:100%;height:auto"
+              />
+            </picture>
+          </c4p-page-header-hero-image>
+        </c4p-page-header>
+      `);
+
+      const heroImageComponent = el.querySelector('c4p-page-header-hero-image');
+      expect(heroImageComponent).toBeTruthy();
     });
   });
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -118,6 +118,7 @@ const defaults = {
  * within the UI that may not be intuitive but are important for the
  * user to gain understanding of the product's main value and discover new use cases.
  * This variant allows the stacking of multiple coachmark overlays to be displayed by interacting with the tagline.
+ * @deprecated This component is deprecated.
  */
 export const CoachmarkStack = React.forwardRef<
   HTMLDivElement,
@@ -350,6 +351,12 @@ export const CoachmarkStack = React.forwardRef<
     );
   }
 );
+
+/**@ts-ignore*/
+CoachmarkStack.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 

@@ -22,7 +22,7 @@
     "lodash": "^4.17.21",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "sass": "^1.70.0"
+    "sass": "^1.93.2"
   },
   "devDependencies": {
     "@types/react": "^19.1.8",

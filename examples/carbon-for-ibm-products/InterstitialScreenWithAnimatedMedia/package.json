@@ -22,7 +22,7 @@
     "lottie-web": "^5.12.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "sass": "^1.77.8"
+    "sass": "^1.93.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

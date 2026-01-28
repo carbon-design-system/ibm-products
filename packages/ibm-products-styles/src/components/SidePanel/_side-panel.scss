@@ -45,7 +45,7 @@ $clabs-prefix: 'clabs';
 
 @mixin setDividerStyles() {
   position: absolute;
-  background-color: $border-subtle-02;
+  background-color: $border-subtle-01;
   block-size: 1px;
   content: '';
   inline-size: 100%;
@@ -198,7 +198,7 @@ $clabs-prefix: 'clabs';
     inline-size: 100%;
   }
   &.#{$block-class}--right-placement {
-    border-inline-start: 1px solid $border-subtle-02;
+    border-inline-start: 1px solid $border-subtle-01;
     inset-inline-end: 0;
   }
   &.#{$block-class}--left-placement {
@@ -221,7 +221,7 @@ $clabs-prefix: 'clabs';
       }
     }
 
-    border-inline-end: 1px solid $border-subtle-02;
+    border-inline-end: 1px solid $border-subtle-01;
     inset-inline-start: 0;
   }
   &.#{$block-class}.#{$block-class}--has-slug,
@@ -325,7 +325,7 @@ $clabs-prefix: 'clabs';
 
     &.#{$block-class}__header--reduced-motion {
       z-index: 5;
-      border-block-end: 1px solid $border-subtle-02;
+      border-block-end: 1px solid $border-subtle-01;
       margin-block-end: $spacing-05;
     }
 
@@ -542,7 +542,7 @@ $clabs-prefix: 'clabs';
   .#{$block-class}__actions-container {
     position: sticky; // stick to bottom
     background-color: $layer-01;
-    border-block-start: 1px solid $border-subtle-02;
+    border-block-start: 1px solid $border-subtle-01;
     inset-block-end: 0;
 
     &.#{$action-set-block-class}--2xl {

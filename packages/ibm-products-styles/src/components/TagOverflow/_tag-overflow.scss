@@ -6,7 +6,7 @@
 //
 
 // Standard imports.
-@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
@@ -22,8 +22,8 @@
 // TODO: @use(s) of IBM Products component styles used by TagOverflow
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{c4p-settings.$pkg-prefix}--tag-overflow;
-$block-class-overflow: #{$block-class}-popover;
+$block-class: #{$pkg-prefix}--tag-overflow;
+$block-class-popover: #{$block-class}-popover;
 $block-class-modal: #{$block-class}-modal;
 
 .#{$block-class}__visible-tags {
@@ -42,12 +42,10 @@ $block-class-modal: #{$block-class}-modal;
   flex-wrap: wrap;
 }
 
-.#{$block-class}__item {
-  margin: $spacing-01;
-}
-
 .#{$block-class}__item--tag {
   border: none;
+  margin-block-end: $spacing-03;
+  margin-inline-end: $spacing-03;
 }
 
 .#{$block-class}__item--tag span {
@@ -63,59 +61,58 @@ $block-class-modal: #{$block-class}-modal;
   max-inline-size: $spacing-09;
 }
 
-.#{c4p-settings.$carbon-prefix}--popover
-  .#{c4p-settings.$carbon-prefix}--popover-content {
+.#{$carbon-prefix}--popover .#{$carbon-prefix}--popover-content {
   white-space: normal;
 }
 
-.#{$block-class-overflow} {
+.#{$block-class-popover} {
   display: inline-block;
   vertical-align: bottom;
-  .#{c4p-settings.$carbon-prefix}--tag.#{c4p-settings.$carbon-prefix}--tag--interactive {
+
+  .#{$carbon-prefix}--tag.#{$carbon-prefix}--tag--interactive {
     border: 0;
   }
 
-  .#{c4p-settings.$carbon-prefix}--popover
-    .#{c4p-settings.$carbon-prefix}--popover-content {
+  .#{$carbon-prefix}--popover .#{$carbon-prefix}--popover-content {
     padding: $spacing-05;
   }
 }
 
-.#{$block-class-overflow}--hidden {
+.#{$block-class-popover}--hidden {
   overflow: hidden;
   max-inline-size: 0;
   visibility: hidden;
 }
 
-@include mixins.block-wrap('#{$block-class-overflow}__el') {
-  &.#{$block-class-overflow}__el {
+@include mixins.block-wrap('#{$block-class-popover}__el') {
+  &.#{$block-class-popover}__el {
     // removes the min width in Carbon
     min-inline-size: initial;
     text-align: start;
   }
 
-  .#{$block-class-overflow}__trigger {
+  .#{$block-class-popover}__trigger {
     /* stylelint-disable-next-line declaration-no-important */
     border: none !important;
     font-family: inherit;
   }
 
-  .#{c4p-settings.$carbon-prefix}--link:active,
-  .#{c4p-settings.$carbon-prefix}--link:active:visited,
-  .#{c4p-settings.$carbon-prefix}--link:active:visited:hover {
+  .#{$carbon-prefix}--link:active,
+  .#{$carbon-prefix}--link:active:visited,
+  .#{$carbon-prefix}--link:active:visited:hover {
     color: $text-inverse;
   }
 
-  .#{$block-class-overflow}__tag-list {
+  .#{$block-class-popover}__tag-list {
     display: flex;
     flex-direction: column;
   }
 
-  .#{$block-class-overflow}__show-all-tags-link {
+  .#{$block-class-popover}__show-all-tags-link {
     color: $link-inverse;
-    margin-block-start: $spacing-03;
 
-    &:hover {
+    &:hover,
+    &:visited:hover {
       color: $link-inverse-hover;
     }
 
@@ -128,14 +125,14 @@ $block-class-modal: #{$block-class}-modal;
     }
   }
 
-  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
-    .#{c4p-settings.$carbon-prefix}--tag {
+  .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--tag
+    .#{$carbon-prefix}--tag {
     background-color: $background-inverse-hover;
   }
 
-  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,
-  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default
-    .#{c4p-settings.$carbon-prefix}--tag {
+  .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--default,
+  .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--default
+    .#{$carbon-prefix}--tag {
     @include type.type-style('body-compact-01');
 
     display: block;
@@ -149,25 +146,21 @@ $block-class-modal: #{$block-class}-modal;
     min-inline-size: initial;
   }
 
-  .#{$block-class-overflow}__tag
-    .#{c4p-settings.$carbon-prefix}--tag__close-icon {
-    // undo override by .#{c4p-settings.$carbon-prefix}--tooltip button
+  .#{$block-class-popover}__tag .#{$carbon-prefix}--tag__close-icon {
+    // undo override by .#{$carbon-prefix}--tooltip button
     padding: 0;
   }
 
-  .#{$block-class-overflow}__tag
-    .#{c4p-settings.$carbon-prefix}--tag--high-contrast {
+  .#{$block-class-popover}__tag .#{$carbon-prefix}--tag--high-contrast {
     background-color: $background;
     color: $text-primary;
   }
 
-  .#{$block-class-overflow}__tag
-    .#{c4p-settings.$carbon-prefix}--tag__close-icon:hover {
+  .#{$block-class-popover}__tag .#{$carbon-prefix}--tag__close-icon:hover {
     background-color: $background-hover;
   }
 
-  .#{$block-class-overflow}__tag
-    .#{c4p-settings.$carbon-prefix}--tag__close-icon:focus {
+  .#{$block-class-popover}__tag .#{$carbon-prefix}--tag__close-icon:focus {
     box-shadow: inset 0 0 0 $spacing-01 $focus;
   }
 }
@@ -193,5 +186,12 @@ $block-class-modal: #{$block-class}-modal;
   .#{$block-class-modal}__header {
     margin-inline-end: $spacing-05;
     padding-inline-end: 0;
+  }
+
+  .#{$block-class-modal}__body {
+    .#{$carbon-prefix}--tag {
+      margin-block-end: $spacing-03;
+      margin-inline-end: $spacing-03;
+    }
   }
 }

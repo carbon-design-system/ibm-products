@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           fetch-depth: 0 # https://github.com/actions/checkout/issues/217
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
@@ -27,15 +27,14 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git config user.name $GITHUB_ACTOR
 
-      - name: Setup Node.js
+      - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.x'
-          registry-url: https://registry.npmjs.org
-          cache: yarn
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
 
-      - name: Install
-        run: yarn
+      - name: Install dependencies
+        run: yarn install --immutable
 
       # If this works it could be added to the end of the release
       - name: UpgradeExamples

@@ -85,6 +85,7 @@ export const multiStepTearsheet = MultiStepTearsheet.bind({});
 multiStepTearsheet.storyName = 'Create tearsheet';
 multiStepTearsheet.args = {
   ...createTearsheetProps,
+  firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
 export const withIntroStep = MultiStepWithIntro.bind({});

@@ -70,6 +70,18 @@ export default {
     const { mergeConfig } = await import('vite');
 
     return mergeConfig(config, {
+      build: {
+        sourcemap: true,
+        rollupOptions: {
+          onLog(level, log, handler) {
+            // https://github.com/vitejs/vite/issues/15012#issuecomment-1815854072
+            if (log.code === 'MODULE_LEVEL_DIRECTIVE') {
+              return;
+            }
+            handler(level, log);
+          },
+        },
+      },
       esbuild: {
         include: /\.[jt]sx?$/,
         exclude: [],
@@ -96,11 +108,7 @@ export default {
           scss: {
             api: 'modern',
             quietDeps: true,
-            silenceDeprecations: [
-              'mixed-decls',
-              'global-builtin',
-              'legacy-js-api',
-            ],
+            silenceDeprecations: ['global-builtin', 'legacy-js-api'],
           },
         },
       },

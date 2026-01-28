@@ -1,3 +1,31 @@
+## `@jest-config-ibm-cloud-cognitive@1.41.0`
+### Bug fixes :bug:
+- fix: convert `babel` and `jest` config packages to ESM (#8782)
+
+## `@jest-config-ibm-cloud-cognitive@1.40.0`
+### Bug fixes :bug:
+- fix: rc clean ups
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+
+### Housekeeping :house:
+- chore: retry prerelease publish other packages
+
+## `@jest-config-ibm-cloud-cognitive@1.38.0`
+### Housekeeping :house:
+- test(PageHeader): react tests clean up with `composeStory` (#8579)
+- chore(sass): update to v1.93.2 (#8567)
+
+## `@jest-config-ibm-cloud-cognitive@1.37.0`
+### Bug fixes :bug:
+- fix(Feature flag): moved the merge logic from feature-flag js to FeatureFlag (#8535)
+
 ## `@jest-config-ibm-cloud-cognitive@1.35.0`
 ### Housekeeping :house:
 - refactor(scripts): remove chalk dep (#8321)

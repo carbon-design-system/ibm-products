@@ -13,13 +13,7 @@ import {
   useTheme,
   usePrefix as useCarbonPrefix,
 } from '@carbon/react';
-import React, {
-  forwardRef,
-  HTMLProps,
-  RefObject,
-  useLayoutEffect,
-  useRef,
-} from 'react';
+import React, { forwardRef, HTMLProps, RefObject, useRef } from 'react';
 import {
   autoUpdate,
   computePosition,
@@ -29,6 +23,7 @@ import {
   arrow,
 } from '@floating-ui/react';
 import { pkg } from '../../../../../settings';
+import { useIsomorphicEffect } from '../../../../../global/js/hooks';
 
 interface BubbleProps extends Omit<HTMLProps<HTMLDivElement>, 'target'> {
   /**
@@ -76,7 +71,7 @@ const CoachmarkBubble = forwardRef<HTMLDivElement, BubbleProps>(
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const targetRef = useRef<Element | null>(null);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       if (target) {
         if (typeof target === 'string') {
           if (target === '#' || target.trim() === '') {

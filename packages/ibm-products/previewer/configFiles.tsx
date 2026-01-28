@@ -17,7 +17,7 @@ export const packageJson: string = `{
   },
   "dependencies": {
     "@carbon/react": "latest",
-    "@carbon/ibm-products": "^2.75.0",
+    "@carbon/ibm-products": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.0.0"
@@ -25,7 +25,7 @@ export const packageJson: string = `{
   "devDependencies": {
    "typescript": "^5.0.0",
     "@vitejs/plugin-react": "4.0.0",
-    "sass": "^1.77.7",
+    "sass": "^1.93.2",
     "vite": "^4.3.8"
   }
 }`;

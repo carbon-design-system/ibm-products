@@ -10,7 +10,6 @@
 import '@testing-library/jest-dom';
 import util from 'util';
 import * as matchers from './matchers';
-import '../../../packages/ibm-products/src/feature-flags';
 
 const reset = '\x1b[0m';
 const gray = (str) => `\x1b[48;5;244m${str + reset}`;

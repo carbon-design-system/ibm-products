@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useIsomorphicEffect } from '../../../global/js/hooks';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
@@ -39,7 +40,7 @@ const SelectAllWithToggle = ({
   }, [isAllRowsSelected, selectAllMode, onSelectAllRows]);
 
   const [windowSize, setWindowSize] = useState<number>();
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     setWindowSize(window.innerWidth);
     function updateSize() {
       setWindowSize(window.innerWidth);

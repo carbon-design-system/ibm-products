@@ -23,9 +23,9 @@ export default {
   staticDirs: ['../public'],
 
   addons: [
-    // getAbsolutePath('@storybook/addon-controls'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('storybook-addon-accessibility-checker'),
     getAbsolutePath('@storybook/addon-links'),
-    // getAbsolutePath('@storybook/addon-viewport'),
     {
       name: '@storybook/addon-docs',
       options: {

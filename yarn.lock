@@ -21608,7 +21608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@npm:^9.0.8, storybook@npm:^9.1.10":
+"storybook@npm:^9.1.10":
   version: 9.1.17
   resolution: "storybook@npm:9.1.17"
   dependencies:

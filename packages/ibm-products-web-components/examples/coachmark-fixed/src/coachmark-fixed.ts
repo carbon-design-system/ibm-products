@@ -17,7 +17,9 @@ import styles from './styles.scss?lit';
 
 // Import coachmark components
 import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
-import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-beacon/index.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js';
+
+//import '../../../src/components/coachmark/coachmark-tagline/index.js';
 
 // Carousel story data
 const items = [
@@ -104,16 +106,16 @@ export class CoachmarkFixedExample extends LitElement {
         <c4p-coachmark
           ?open=${this._open}
           align=${POPOVER_ALIGNMENT.TOP}
-          .position=${{ x: 150, y: 150 }}
           .highContrast=${true}
         >
-          <c4p-coachmark-beacon
-            label="Show information"
-            ?expanded=${this._open}
-            @c4p-coachmark-beacon-clicked=${this.handleBeaconClick}
+          <c4p-coachmark-tagline
+            title="Why are there two types of severity scores?"
+            close-icon-description="close"
+            ?open=${this._open}
+            @c4p-coachmark-tagline-cta-click=${this.handleBeaconClick}
             slot="trigger"
           >
-          </c4p-coachmark-beacon>
+          </c4p-coachmark-tagline>
           <c4p-coachmark-header
             closeIconDescription="Close"
           ></c4p-coachmark-header>

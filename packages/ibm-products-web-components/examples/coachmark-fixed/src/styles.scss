@@ -10,15 +10,38 @@
 );
 
 @use '../../../src/utilities/carousel/index' as carousel;
+@use '../../../src/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
 
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
 @include carousel.carousel();
 
-.coachmark-body {
+/* stylelint-disable-next-line selector-type-no-unknown */
+c4p-coachmark {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline-end: 160px;
+
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  // cds-popover cds-popover-content::part(content) {
+  //   transform: translateY(100%);
+  //   transition: transform $duration-moderate-02 motion(exit, productive);
+  // }
+
+  // &[open] {
+  //   /* stylelint-disable-next-line selector-type-no-unknown */
+  //   cds-popover cds-popover-content::part(content) {
+  //     transform: translateY(35%);
+  //   }
+  // }
+}
+
+/* stylelint-disable-next-line selector-type-no-unknown */
+c4p-coachmark-body {
   display: flex;
   flex-direction: column;
-  inline-size: 280px;
+  inline-size: 256px;
 
   h2 {
     @include type.type-style('productive-heading-02');
@@ -38,9 +61,9 @@
     margin-block-start: $spacing-03;
   }
 
-  .exampleCarouselWrapper
-  {
-    block-size: 10vh;
+  .exampleCarouselWrapper {
+    block-size: 100px;
+    margin-inline-end: $spacing-05;
   }
 }
 
@@ -60,3 +83,4 @@
   margin-inline-end: auto;
   @include type.type-style('helper-text-01');
 }
+

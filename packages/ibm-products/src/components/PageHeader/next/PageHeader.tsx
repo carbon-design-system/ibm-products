@@ -44,7 +44,7 @@ import { createOverflowHandler as localOverflowHandler } from './overflowHandler
 import { createOverflowHandler } from '@carbon/utilities';
 import { ChevronUp } from '@carbon/react/icons';
 import { PageHeaderContext, PageHeaderRefs, usePageHeader } from './context';
-import { getHeaderOffset, scrollableAncestor } from './utils';
+import { scrollableAncestor, ensureNonPositiveOutput } from './utils';
 import { pkg } from '../../../settings';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 
@@ -60,6 +60,7 @@ interface PageHeaderProps {
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
     const [refs, setRefs] = useState<PageHeaderRefs>({});
+    const [stickyTop, setStickyTop] = useState(0);
     const [pageActionsInstance, setPageActionsInstance] =
       useState<React.ReactNode | null>(null);
     const tempRef = useRef<HTMLDivElement>(null);
@@ -71,6 +72,10 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       },
       className
     );
+    useIsomorphicEffect(() => {
+      const rectTopVal = componentRef.current?.getBoundingClientRect().top ?? 0;
+      setStickyTop(rectTopVal + window.scrollY);
+    }, [componentRef]);
 
     // Used to set CSS custom property with PageHeaderContent height to be used
     // for sticky positioning
@@ -80,14 +85,13 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         // in which case we set it's height to 0
         const pageHeaderContentHeight =
           refs?.contentRef?.current?.offsetHeight ?? 0;
-        const totalHeaderOffset = getHeaderOffset(componentRef?.current);
         componentRef?.current.style.setProperty(
           `--${pkg.prefix}-page-header-header-top`,
-          `${(Math.round(pageHeaderContentHeight) - totalHeaderOffset) * -1}px`
+          `${ensureNonPositiveOutput(Math.round(pageHeaderContentHeight) - stickyTop)}px`
         );
         componentRef?.current.style.setProperty(
           `--${pkg.prefix}-page-header-breadcrumb-top`,
-          `${totalHeaderOffset}px`
+          `${stickyTop}px`
         );
       }
     });
@@ -104,7 +108,6 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       if (!refs?.contentRef || !componentRef?.current) {
         return;
       }
-      const totalHeaderOffset = getHeaderOffset(componentRef?.current);
       const predefinedContentPadding = 24;
       const contentObserver = new IntersectionObserver(
         (entries) => {
@@ -116,7 +119,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         },
         {
           root: null,
-          rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+          rootMargin: `${(predefinedContentPadding + stickyTop + 40) * -1}px 0px 0px 0px`,
           threshold: 0.1,
         }
       );
@@ -135,7 +138,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         },
         {
           root: null,
-          rootMargin: `${(predefinedContentPadding + totalTitleHeight + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
+          rootMargin: `${(predefinedContentPadding + totalTitleHeight + stickyTop + 24) * -1}px 0px 0px 0px`,
           threshold: 0.1,
         }
       );
@@ -153,7 +156,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         },
         {
           root: null,
-          rootMargin: `${(predefinedContentPadding + totalTitleHeight + totalHeaderOffset + 48) * -1}px 0px 0px 0px`,
+          rootMargin: `${(predefinedContentPadding + totalTitleHeight + stickyTop + 48) * -1}px 0px 0px 0px`,
           threshold: 0.1,
         }
       );
@@ -183,7 +186,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         }
         contentActionsObserver.unobserve(refs?.contentActions.current);
       };
-    }, [refs, componentRef]);
+    }, [refs, componentRef, stickyTop]);
 
     return (
       <PageHeaderContext.Provider

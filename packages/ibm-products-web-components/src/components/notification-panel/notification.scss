@@ -27,19 +27,13 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
 :host(#{$prefix}-notification) {
   position: relative;
   display: flex;
-  align-items: flex-start;
-  padding: $spacing-05;
   border: 0;
   background-color: $layer-01;
-  cursor: pointer;
-  inline-size: 100%;
-  min-block-size: 6.25rem;
-  text-align: start;
   transition: background-color $duration-moderate-02 motion(standard);
   @media screen and (prefers-reduced-motion: reduce) {
     &::before {
       position: absolute;
-      margin: 0 auto;
+      margin: 0 #{$spacing-05};
       background-color: $border-subtle-01;
       block-size: 1px;
       content: '';
@@ -51,7 +45,7 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
 
   &::before {
     position: absolute;
-    margin: 0 auto;
+    margin: 0 #{$spacing-05};
     background-color: $border-subtle-01;
     block-size: 1px;
     content: '';
@@ -60,9 +54,16 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
     transition: background-color $duration-moderate-02 motion(standard);
   }
 
-  &:hover::before {
-    background-color: transparent;
+  .#{$block-notification-class}-content--wrapper {
+    display: flex;
+    align-items: flex-start;
+    padding: $spacing-05;
+    cursor: pointer;
+    inline-size: 100%;
+    min-block-size: 6.25rem;
+    text-align: start;
   }
+
   .#{$block-notification-class}-status-icon {
     margin-inline-end: $spacing-03;
     min-inline-size: 1rem;

@@ -61,16 +61,6 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     }
   };
 
-  connectedCallback() {
-    super.connectedCallback();
-    if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'button');
-    }
-    if (!this.hasAttribute('tabindex')) {
-      this.setAttribute('tabindex', '0');
-    }
-    this.addEventListener('keydown', this._handleKeyDown);
-  }
   render() {
     const {
       type,
@@ -82,21 +72,29 @@ class CDSNotification extends HostListenerMixin(LitElement) {
     const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
     const icon = fetchIcon(type);
     return html`
-      ${icon}
-      <div class="${blockClass}-content">
-        <p class="${blockClass}-time-label">
-          ${dateTimeFormat.relative.format(timestamp as Date, {
-            locale: supportedLocale as string,
-            style: dateTimeStyle,
-          })}
-        </p>
-        <slot name="title"></slot>
-        <div class="${blockClass}-description">
-          <slot name="description"></slot>
+      <div
+        class="${blockClass}-content--wrapper"
+        role=${this.hasAttribute('role') ? this.getAttribute('role') : 'button'}
+        tabindex=${this.hasAttribute('tabindex')
+          ? this.getAttribute('tabindex')
+          : '0'}
+        @keydown=${this._handleKeyDown}
+      >
+        ${icon}
+        <div class="${blockClass}-content">
+          <p class="${blockClass}-time-label">
+            ${dateTimeFormat.relative.format(timestamp as Date, {
+              locale: supportedLocale as string,
+              style: dateTimeStyle,
+            })}
+          </p>
+          <slot name="title"></slot>
+          <div class="${blockClass}-description">
+            <slot name="description"></slot>
+          </div>
         </div>
       </div>
-      <cds-button
-        tooltip-text=""
+      <cds-icon-button
         align="left"
         kind="ghost"
         size="sm"
@@ -104,13 +102,11 @@ class CDSNotification extends HostListenerMixin(LitElement) {
         @click=${dismissSingleNotification}
       >
         ${iconLoader(Close16, { slot: 'icon' })}
-      </cds-button>
+        <span slot="tooltip-content">Dismiss</span>
+      </cds-icon-button>
     `;
   }
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('keydown', this._handleKeyDown);
-  }
+
   /**
    * Handles user-initiated dismiss request of the Notification.
    *

@@ -20,8 +20,6 @@ export const customFunctionArr = [wait];
 - [Example usage](#example-usage)
   - [Create Modal](#create-modal)
   - [From validation](#form-validation)
-  - [Overriding Carbon theme](#override-carbon-theme)
-  - [Create Modal with form validation](#create-modal-with-form-validation)
 
 ## Overview
 
@@ -47,13 +45,13 @@ To build this pattern, we recommend including the following ingredients:
 ### Create Modal
 
 <Canvas
-  of={stories.Standard}
+  of={stories.CreateModal}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
       onClick: () =>
         stackblitzPrefillConfig({
-          story: stories.Standard,
+          story: stories.CreateModal,
           customFunctionDefs: customFunctionArr,
           styles: stories.default.parameters.styles,
         }),
@@ -77,37 +75,3 @@ This includes the following:
 
 You can find more information on how to validate your form fields in
 [Carbon's Form usage page](https://carbondesignsystem.com/components/form/usage/).
-
-### Overriding Carbon theme
-
-The design recommendation is to use a dark theme for the CreateModal if the
-application is currently using a light theme, and vice versa. The theme applied
-to the CreateModal can easily be customized as follows:
-
-In SCSS:
-
-```scss
-.#{$pkg-prefix}--create-modal {
-  @include carbon--theme($theme: $carbon--theme--g90);
-}
-```
-
-Alternatively, the required Carbon theme can be set as above in a custom CSS
-class which is then applied to the CreateModal using the `className` prop.
-
-### Create Modal with form validation
-
-<Canvas
-  of={stories.Standard}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: stories.Standard,
-          customFunctionDefs: customFunctionArr,
-          styles: stories.default.parameters.styles,
-        }),
-    },
-  ]}
-/>

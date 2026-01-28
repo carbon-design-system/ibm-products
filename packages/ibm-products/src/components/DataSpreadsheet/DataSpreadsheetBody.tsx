@@ -116,12 +116,12 @@ interface DataSpreadsheetBodyProps {
   /**
    * Component next to numbering rows
    */
-  renderRowHeader?: (index: number) => any[];
+  renderRowHeader?: (index: number) => React.ReactElement;
 
   /**
    * Component next to numbering rows
    */
-  renderRowHeaderDirection?: string;
+  renderRowHeaderDirection?: 'left' | 'right';
 
   /**
    * The event handler that is called to set the rows for the empty spreadsheet
@@ -281,11 +281,11 @@ export const DataSpreadsheetBody = forwardRef(
     const contentScrollRef = useRef<HTMLDivElement | undefined>(undefined);
 
     const previousState: PrevState =
-      usePreviousValue({
+      (usePreviousValue({
         selectionAreaData,
         clickAndHoldActive,
         rowHeight: defaultColumn?.rowHeight,
-      }) || {};
+      }) as PrevState) || {};
 
     // Set custom css property containing the spreadsheet total width
     useEffect(() => {
@@ -689,6 +689,9 @@ export const DataSpreadsheetBody = forwardRef(
         if (rows && rows.length) {
           prepareRow?.(row);
           const rowProps = prepareProps(row.getRowProps({ style }), 'key');
+          const isActive =
+            activeCellCoordinates?.row === index ||
+            checkActiveHeaderCell(index, selectionAreas, 'row');
           return (
             <div
               key={{ ...row.getRowProps().key }}
@@ -701,7 +704,27 @@ export const DataSpreadsheetBody = forwardRef(
               {/* ROW HEADER BUTTON */}
               <div
                 role="rowheader"
-                className={`${blockClass}__td-th--cell-container`}
+                className={cx({
+                  [`${blockClass}__td-th--cell-container`]: true,
+                  [`${blockClass}__row-header`]: true,
+                  [`${blockClass}__row-header-reverse`]:
+                    renderRowHeaderDirection === 'right' && hasCustomRowHeader,
+                  [`${blockClass}__row-header-active`]: isActive,
+                  [`${blockClass}__row-header-selected`]:
+                    !hasCustomRowHeader &&
+                    checkSelectedHeaderCell(
+                      index,
+                      selectionAreas,
+                      'row',
+                      columns
+                    ),
+                  [`${blockClass}__row-header_custom`]: hasCustomRowHeader
+                    ? true
+                    : false,
+                })}
+                style={{
+                  width: defaultColumn?.rowHeaderWidth,
+                }}
               >
                 <button
                   id={`${blockClass}__cell--${index}--header`}
@@ -711,7 +734,7 @@ export const DataSpreadsheetBody = forwardRef(
                   type="button"
                   onClick={handleRowHeaderClickEvent(index)}
                   className={cx(
-                    `${blockClass}__td`,
+                    `${blockClass}__td-th-button`,
                     `${blockClass}__td-th`,
                     `${blockClass}--interactive-cell-element`,
                     {
@@ -719,9 +742,7 @@ export const DataSpreadsheetBody = forwardRef(
                         ? true
                         : false,
                       [`${blockClass}__td-th--active-header`]:
-                        !hasCustomRowHeader &&
-                        (activeCellCoordinates?.row === index ||
-                          checkActiveHeaderCell(index, selectionAreas, 'row')),
+                        !hasCustomRowHeader && isActive,
                       [`${blockClass}__td-th--selected-header`]:
                         !hasCustomRowHeader &&
                         checkSelectedHeaderCell(
@@ -734,18 +755,13 @@ export const DataSpreadsheetBody = forwardRef(
                   )}
                   style={{
                     width: defaultColumn?.rowHeaderWidth,
-                    flexDirection: hasCustomRowHeader
-                      ? renderRowHeaderDirection === 'Left'
-                        ? 'row-reverse'
-                        : row
-                      : undefined,
                   }}
                 >
                   {index + 1}
-                  {hasCustomRowHeader &&
-                    typeof renderRowHeader === 'function' &&
-                    renderRowHeader(index)}
                 </button>
+                {hasCustomRowHeader &&
+                  typeof renderRowHeader === 'function' &&
+                  renderRowHeader(index)}
               </div>
               {/* CELL BUTTONS */}
               {row.cells.map((cell, index) => {
@@ -929,7 +945,7 @@ DataSpreadsheetBody.propTypes = {
   /**
    * Component next to numbering rows
    */
-  renderRowHeaderDirection: PropTypes.string,
+  renderRowHeaderDirection: PropTypes.oneOf(['left', 'right']),
 
   /**
    * All of the spreadsheet row data

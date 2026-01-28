@@ -2014,8 +2014,8 @@ __metadata:
     "@rollup/plugin-json": "npm:^6.1.0"
     "@rollup/plugin-node-resolve": "npm:^16.0.0"
     "@rollup/plugin-typescript": "npm:^12.1.1"
-    "@storybook/addon-a11y": "npm:^9.1.10"
     "@stackblitz/sdk": "npm:^1.11.0"
+    "@storybook/addon-a11y": "npm:^9.1.10"
     "@storybook/addon-docs": "npm:^9.1.10"
     "@storybook/addon-links": "npm:^9.1.10"
     "@storybook/web-components-vite": "npm:^9.1.10"
@@ -9170,7 +9170,7 @@ __metadata:
   checksum: 10/18254ee95bc328aec9a909b22e4b22e8ff14a21363fdbd1a5227267e66bf1d2fc1425c186e9001759aab5827cf4ee9dc30f7ea57e8200cbf7a1cd555ed21a908
   languageName: node
   linkType: hard
-  
+
 "axios@npm:^1.12.0":
   version: 1.13.1
   resolution: "axios@npm:1.13.1"
@@ -21608,7 +21608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@npm:^9.0.8, storybook@npm:^9.1.10":
+"storybook@npm:^9.1.10":
   version: 9.1.17
   resolution: "storybook@npm:9.1.17"
   dependencies:

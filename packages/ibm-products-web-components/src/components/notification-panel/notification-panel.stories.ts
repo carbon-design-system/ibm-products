@@ -279,7 +279,15 @@ const defaultTemplate = {
                     >
                       ${item.title}
                     </h4>
-                    <div slot="description">${item.description}</div>
+                    <span slot="description">
+                      <c4p-truncated-text
+                        value=${item.description}
+                        lines="2"
+                        type="expand"
+                        expand-label="Read more"
+                        collapse-label="Read less"
+                      />
+                    </span>
                   </c4p-notification>
                 `;
               })}
@@ -308,7 +316,15 @@ const defaultTemplate = {
                     >
                       ${item.title}
                     </h4>
-                    <div slot="description">${item.description}</div>
+                    <span slot="description">
+                      <c4p-truncated-text
+                        value=${item.description}
+                        lines="2"
+                        type="expand"
+                        expand-label="Read more"
+                        collapse-label="Read less"
+                      />
+                    </span>
                   </c4p-notification>
                 `;
               })}

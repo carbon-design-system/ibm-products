@@ -145,10 +145,6 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     }
   }
 
-  private focusOut(e: FocusEvent) {
-    e.stopImmediatePropagation();
-  }
-
   render() {
     return html`
       <cds-popover
@@ -158,7 +154,6 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         ?highContrast=${this.highContrast}
         align=${this.align}
         ?dropShadow=${this.dropShadow}
-        @focusout=${this.focusOut}
       >
         <slot name="trigger"></slot>
         <cds-popover-content>

@@ -59,17 +59,6 @@ jobs:
         if: github.event.inputs.dry-run == 'true'
         run: |
           yarn release-telemetry
-
-      # This can be removed once @ibm/telemetry-js-config-generator has params to set the js scope
-      - name: Add js scope to ibm-products telemetry config
-        if: github.event.inputs.dry-run == 'true'
-        run: |
-          echo "  js:
-              functions: {}
-              tokens: null" >> packages/ibm-products/telemetry.yml
-          echo "  js:
-              functions: {}
-              tokens: null" >> packages/ibm-products-web-components/telemetry.yml
           if [ -z "$(git status --porcelain)" ]; then
             echo "Mirror is clean, exiting..."
           else

@@ -78,11 +78,8 @@ understand.
         stackblitzPrefillConfig({
           story: CoachmarkStories.Tooltip,
           status: {
-            preview: ['Coachmark'],
+            preview: ['Coachmark', 'CoachmarkBeacon'],
           },
-          customImports: [
-            `import { preview__CoachmarkBeacon as CoachmarkBeacon } from '@carbon/ibm-products';`,
-          ],
           styles: CoachmarkStories.default.parameters.styles,
         }),
     },
@@ -104,13 +101,14 @@ understand.
             preview: ['Coachmark'],
           },
           customImports: [
-            `import { preview__CoachmarkBeacon as CoachmarkBeacon } from '@carbon/ibm-products';`,
+            `import { Crossroads } from '@carbon/react/icons';`,
           ],
+
           styles: CoachmarkStories.default.parameters.styles,
         }),
     },
-  ]}
-/>
+
+]} />
 
 ## Component API
 

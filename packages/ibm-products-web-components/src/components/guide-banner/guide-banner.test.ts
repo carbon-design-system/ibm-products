@@ -4,6 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import { describe, expect, it } from 'vitest';
 import { fixture, html, oneEvent } from '@open-wc/testing';
 import CDSGuideBanner, { blockClass } from './guide-banner';
@@ -45,7 +46,7 @@ const template = (args = {}) => {
       titleText=${props.titleText}
     >
       <div slot="header">
-        <div class="body">${slots.header}</div>
+        <div class="header">${slots.header}</div>
       </div>
       <div slot="body">
         <div class="body">${slots.body}</div>
@@ -57,8 +58,8 @@ const template = (args = {}) => {
   `;
 };
 
-describe('c4p-options-tile', () => {
-  it('renders guidebanner', async () => {
+describe('c4p-guide-banner', () => {
+  it('renders guide-banner', async () => {
     const el: CDSGuideBanner = await fixture(template());
     expect(el).toBeDefined();
   });

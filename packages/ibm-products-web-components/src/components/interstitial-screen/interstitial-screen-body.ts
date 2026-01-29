@@ -14,7 +14,7 @@ import '@carbon/web-components/es/components/modal/index.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './interstitial-screen-body.scss?lit';
-import { InitCarousel, initCarousel } from '../../utilities/carousel';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
 import { ref, createRef } from 'lit/directives/ref.js';
 import {
   interstitialDetailsSignal,

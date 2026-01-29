@@ -13,6 +13,17 @@
  * ----------
  */
 
+export const getHeaderOffset = (el: HTMLElement): number => {
+  const scrollableContainer = scrollableAncestor(el);
+  const scrollableContainerTop = scrollableContainer
+    ? (scrollableContainer as HTMLElement).getBoundingClientRect().top
+    : 0;
+  const offsetMeasuringTop = el ? el.getBoundingClientRect().top : 0;
+  const totalHeaderOffset =
+    offsetMeasuringTop !== 0 ? offsetMeasuringTop - scrollableContainerTop : 0;
+  return totalHeaderOffset;
+};
+
 const windowExists = typeof window !== `undefined`;
 
 /**

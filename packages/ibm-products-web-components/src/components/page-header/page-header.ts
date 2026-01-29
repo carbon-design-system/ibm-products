@@ -14,6 +14,7 @@ import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { pageHeaderContext } from './context';
+import { getHeaderOffset } from './utils';
 import CDSPageHeaderContent from './page-header-content';
 
 export interface pageHeaderContextType {
@@ -41,7 +42,6 @@ class CDSPageHeader extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     const contentElement = this.querySelector(`${prefix}-page-header-content`);
-    const headerOffset = 48;
 
     this.resizeObserver = new ResizeObserver((entries) => {
       const pageHeaderElement = entries[0];
@@ -56,11 +56,14 @@ class CDSPageHeader extends LitElement {
             parseFloat(getComputedStyle(contentEl)?.paddingBlockEnd)
           : 0;
       const totalContentHeight = contentHeight + padding;
+      const headerOffset = getHeaderOffset(this);
       const contentPadding = contentEl instanceof CDSPageHeaderContent ? 48 : 0;
 
       this.style.setProperty(
         `--${prefix}-page-header-header-top`,
-        `${(Math.round(totalContentHeight - contentPadding) - headerOffset) * -1}px`
+        `${
+          (Math.round(totalContentHeight - contentPadding) - headerOffset) * -1
+        }px`
       );
       this.style.setProperty(
         `--${prefix}-page-header-breadcrumb-top`,
@@ -77,6 +80,7 @@ class CDSPageHeader extends LitElement {
     this.resizeObserver.observe(this);
 
     const predefinedContentPadding = 24;
+    const totalHeaderOffset = getHeaderOffset(this);
     const contentObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -95,7 +99,7 @@ class CDSPageHeader extends LitElement {
       },
       {
         root: null,
-        rootMargin: `${(predefinedContentPadding + headerOffset + 40) * -1}px 0px 0px 0px`,
+        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
         threshold: 0.1,
       }
     );
@@ -118,7 +122,7 @@ class CDSPageHeader extends LitElement {
       },
       {
         root: null,
-        rootMargin: `${(predefinedContentPadding + headerOffset + 40) * -1}px 0px 0px 0px`,
+        rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
         threshold: 0.95,
       }
     );
@@ -143,7 +147,7 @@ class CDSPageHeader extends LitElement {
         root: null,
         // 48 -> breadcrumb bar
         // 18 -> content padding
-        rootMargin: `${(headerOffset + 48 + 18) * -1}px 0px 0px 0px`,
+        rootMargin: `${(totalHeaderOffset + 48 + 18) * -1}px 0px 0px 0px`,
         threshold: 0.95,
       }
     );

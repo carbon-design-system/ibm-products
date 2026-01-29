@@ -61,9 +61,7 @@ class CDSPageHeader extends LitElement {
 
       this.style.setProperty(
         `--${prefix}-page-header-header-top`,
-        `${
-          (Math.round(totalContentHeight - contentPadding) - headerOffset) * -1
-        }px`
+        `${(Math.round(totalContentHeight - contentPadding) - headerOffset) * -1}px`
       );
       this.style.setProperty(
         `--${prefix}-page-header-breadcrumb-top`,

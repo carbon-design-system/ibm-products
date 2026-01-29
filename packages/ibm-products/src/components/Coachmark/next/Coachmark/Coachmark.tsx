@@ -43,7 +43,7 @@ const componentName = 'Coachmark';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
-export interface CoachmarkProps {
+export interface CoachmarkPropsNext {
   /**
    * Provide the contents of the Coachmark.
    */
@@ -81,7 +81,7 @@ type CoachmarkContentComponent = FC<CoachmarkContentProps> & {
 };
 // Define the type for Coachmark, extending it to include Trigger and Content
 export type CoachmarkComponent = ForwardRefExoticComponent<
-  CoachmarkProps & RefAttributes<HTMLDivElement>
+  CoachmarkPropsNext & RefAttributes<HTMLDivElement>
 > & {
   Content: CoachmarkContentComponent;
 };
@@ -91,7 +91,7 @@ export type CoachmarkComponent = ForwardRefExoticComponent<
  * within the UI that may not be intuitive but are important for the
  * user to gain understanding of the product's main value and discover new use cases.
  */
-export const Coachmark = forwardRef<HTMLDivElement, CoachmarkProps>(
+export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
   (props, ref) => {
     const {
       children,

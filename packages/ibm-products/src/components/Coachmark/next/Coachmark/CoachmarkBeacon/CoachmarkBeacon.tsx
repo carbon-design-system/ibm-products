@@ -32,7 +32,7 @@ export interface CoachmarkButtonProps extends ButtonProps<ElementType> {
   ['aria-expanded']?: boolean;
   id?: string;
 }
-export interface CoachmarkBeaconProps {
+export interface CoachmarkBeaconPropsNext {
   /**
    * Optional class name for this component.
    */
@@ -56,32 +56,33 @@ export interface CoachmarkBeaconProps {
 /**
  * Use beacon for the target prop of a Coachmark component.
  */
-export const CoachmarkBeacon = forwardRef<HTMLDivElement, CoachmarkBeaconProps>(
-  (props, ref) => {
-    const { label, className, kind = 'default', buttonProps, ...rest } = props;
+export const CoachmarkBeacon = forwardRef<
+  HTMLDivElement,
+  CoachmarkBeaconPropsNext
+>((props, ref) => {
+  const { label, className, kind = 'default', buttonProps, ...rest } = props;
 
-    return (
-      <div
-        className={cx(blockClass, `${blockClass}-${kind}`, className)}
-        {...getDevtoolsProps(componentName)}
-        role="tooltip"
-        {...rest}
-        ref={ref}
+  return (
+    <div
+      className={cx(blockClass, `${blockClass}-${kind}`, className)}
+      {...getDevtoolsProps(componentName)}
+      role="tooltip"
+      {...rest}
+      ref={ref}
+    >
+      <button
+        type="button"
+        {...buttonProps}
+        className={`${blockClass}__target`}
       >
-        <button
-          type="button"
-          {...buttonProps}
-          className={`${blockClass}__target`}
-        >
-          <svg className={`${blockClass}__center`} aria-label={label}>
-            <title>{label}</title>
-            <circle r={1} cx={38} cy={38} />
-          </svg>
-        </button>
-      </div>
-    );
-  }
-);
+        <svg className={`${blockClass}__center`} aria-label={label}>
+          <title>{label}</title>
+          <circle r={1} cx={38} cy={38} />
+        </svg>
+      </button>
+    </div>
+  );
+});
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

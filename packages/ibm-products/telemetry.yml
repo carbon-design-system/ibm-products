@@ -185,6 +185,7 @@ collect:
         - invalid
         - invalidText
         - isFetching
+        - isFlush
         - isOpen
         - isTableSortable
         - item
@@ -530,6 +531,7 @@ collect:
         - noActionIcons
         # Carousel
         - disableArrowScroll
+        - disableResetOnResize
         - fadedEdgeColor
         - isScrollMode
         - onChangeIsScrollable
@@ -937,6 +939,8 @@ collect:
         - sortableProps
         - strategy
         - withGrid
+        # StackProvider
+        - stackStepSize
         # StatusIndicator
         - onRetry
         - retryLabel
@@ -949,7 +953,9 @@ collect:
         # TagOverflow
         - tagComponent
         # Tearsheet
+        - containerClassName
         - summaryContentWidth
+        - verticalGap
         # TearsheetHeader
         - disableHeaderCollapse
         # TearsheetHeaderActionItem
@@ -957,10 +963,8 @@ collect:
         # TearsheetHeaderActions
         - menuButtonProps
         # TearsheetHeaderContent
-        - descriptionCollapseLabel
-        - descriptionExpandLabel
-        - titleIcon
-        - titleIconPosition
+        - titleEnd
+        - titleStart
         # TearsheetWithSteps
         - progressIndicator
         - setOpen
@@ -1245,9 +1249,10 @@ collect:
         - short
         # PageHeader - fullWidthGrid
         - xl
-        # TearsheetHeaderContent - titleIconPosition
-        - leading
-        - trailing
+        # StackProvider - stackStepSize
+        - lg
+        - md
+        - sm
         # TearsheetWithSteps - progressIndicator
         - horizontal
         - vertical

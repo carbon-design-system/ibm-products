@@ -284,9 +284,13 @@ export const DataSpreadsheetHeader = forwardRef(
             ? offsetXValue +
               (headerButtonCoords.left - selectionAreaCoords?.left)
             : offsetXValue;
-        const bodyContainer = document?.querySelector(
+
+        const spreadsheetSelector =
+          (ref as MutableRefObject<HTMLElement>)?.current ?? document;
+        const bodyContainer = spreadsheetSelector.querySelector(
           `.${blockClass}__list--container`
         )?.firstElementChild;
+
         const selectionAreaClonedElement =
           selectionAreaElement?.cloneNode() as HTMLElement;
         const reorderIndicatorLine =

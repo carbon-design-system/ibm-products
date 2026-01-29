@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 export { Tearsheet } from './Tearsheet';
+export { StackProvider, useStackContext } from './StackContext';
+export type { StackContextType } from './StackContext';
 export type {
   TearsheetProps,
   TearsheetComponentType,

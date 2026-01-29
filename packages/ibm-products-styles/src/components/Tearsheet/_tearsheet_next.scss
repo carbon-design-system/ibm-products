@@ -28,7 +28,6 @@ $motion-duration: $duration-moderate-02;
     block-size: 100%;
     inset-block-start: auto;
     max-block-size: calc(100% - var(--tearsheet-vertical-gap, #{$spacing-09}));
-    transform: translate3d(0, calc(min(95vh, 500px)), 0);
   }
   &:not(.#{$block-class__next}--stack-activated.is-visible) {
     .#{$block-class__next}__container {
@@ -38,6 +37,12 @@ $motion-duration: $duration-moderate-02;
     }
   }
 
+  &:not(.is-visible) {
+    &.#{$block-class__next}.#{$block-class__next}
+      .#{$block-class__next}__container {
+      transform: translate3d(0, calc(min(95vh, 500px)), 0);
+    }
+  }
   &.#{$block-class__next}.#{$block-class__next}--has-ai-label {
     .#{$block-class__next}__container {
       border: 1px solid transparent;

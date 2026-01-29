@@ -20,19 +20,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-      - name: Setup Node.js
+      - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.19.5'
-          cache: yarn
-      - name: Cache dependencies
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # 4.3.0
-        with:
-          path: '**/node_modules'
-          key: build-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      - name: Install
-        run: yarn
-
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: CI build checks
         run: yarn ci-check:build
 
@@ -41,18 +35,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-      - name: Setup Node.js
+      - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.x'
-          cache: yarn
-      - name: Cache dependencies
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # 4.3.0
-        with:
-          path: '**/node_modules'
-          key: lint-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      - name: Install
-        run: yarn
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: Check formatting of project files
         run: yarn format:diff
 
@@ -61,18 +50,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-      - name: Setup Node.js
+      - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.x'
-          cache: yarn
-      - name: Cache dependencies
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # 4.3.0
-        with:
-          path: '**/node_modules'
-          key: lint-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      - name: Install
-        run: yarn
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: CI lint checks
         run: yarn ci-check:lint
 
@@ -81,18 +65,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-      - name: Setup Node.js
+      - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.x'
-          cache: yarn
-      - name: Cache dependencies
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # 4.3.0
-        with:
-          path: '**/node_modules'
-          key: spellcheck-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      - name: Install
-        run: yarn
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: CI spellcheck checks
         run: yarn ci-check:spellcheck
 
@@ -101,24 +80,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-      - name: Setup Node.js
+      - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.x'
-          cache: yarn
-      - name: Cache dependencies
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # 4.3.0
-        with:
-          path: '**/node_modules'
-          key: test-c4p-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      - name: Install
-        run: yarn
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: CI snapshot tests for c4p
         run: yarn ci-check:test:c4p:snapshot
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p --collectCoverage
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
@@ -127,19 +101,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-      - name: Setup Node.js
+      - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.19.5'
-          cache: yarn
-      - name: Cache dependencies
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # 4.3.0
-        with:
-          path: '**/node_modules'
-          key:
-            test-c4p-wc-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      - name: Install
-        run: yarn
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: Install browsers
         working-directory: packages/ibm-products-web-components
         run: yarn playwright install --with-deps
@@ -148,7 +116,7 @@ jobs:
       - name: CI tests for products web components
         run: yarn ci-check:test:c4p-wc --coverage
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
@@ -162,13 +130,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
 
-      - name: Setup Node.js
+      - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.19.5'
-          cache: yarn
-      - name: Install
-        run: yarn
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
 
       - name: Install browsers
         run: yarn playwright install --with-deps
@@ -214,16 +182,19 @@ jobs:
   merge-reports:
     # Merge reports after playwright-tests, even if some shards have failed
     if:
-      ${{ github.repository == 'carbon-design-system/ibm-products' && !cancelled() &&
-      github.event.pull_request.draft == false }}
+      ${{ github.repository == 'carbon-design-system/ibm-products' &&
+      !cancelled() && github.event.pull_request.draft == false }}
     needs: avt-runner
 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-      - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: lts/*
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
       - name: Install dependencies
         run: yarn
 
@@ -254,13 +225,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
-      - name: Setup Node.js
+      - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: '20.19.5'
-          cache: yarn
-      - name: Install
-        run: yarn
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Build project

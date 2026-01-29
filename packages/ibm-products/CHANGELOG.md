@@ -1,3 +1,63 @@
+## `@carbon/ibm-products@2.82.0`
+### Features :rocket:
+- feat(coachmark): open in stackblitz (#8690)
+- feat(ConditionBuilder): Added code connect files (#8483)
+- feat: added support for iframes in storybook for autotrack (#8580)
+- feat(Checklist): code connect (#8711)
+- feat(Tearsheet):  add stackblitz examples (#8718)
+
+### Bug fixes :bug:
+- fix: convert `babel` and `jest` config packages to ESM (#8782)
+- fix: avoid scroll reset on resize (#8806)
+- fix(tearsheet): add preview__ for tearsheet/next props (#8779)
+- fix: use correct type for portalTarget in RemoveModal (#8680)
+
+### Housekeeping :house:
+- chore(deps): update dependency @rollup/plugin-commonjs to v29 (#8584)
+
+## `@carbon/ibm-products@2.81.0`
+### Features :rocket:
+- feat(Coachmark): implementation of coachmark WC (#8599)
+
+### Bug fixes :bug:
+- fix: rc clean ups
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+- fix(DataSpreadsheet): Changed document querySelector to ref querySelector (#8717)
+- fix(code-connect): exclude node_modules (#8705)
+
+### Housekeeping :house:
+- chore: retry prerelease publish
+- build(deps): update Carbon 11 compatible versions to latest (#8726)
+- chore: init code connect for EditInPlace (#8575)
+
+## `@carbon/ibm-products@2.80.0`
+### Features :rocket:
+- feat(InlineTip): adding figma code connect file (#8611)
+- feat(interstitialscreen): code connect integration (#8572)
+- feat(Tearsheet): stacking, unit test, design review changes and fixes (#8563)
+- feat(web-terminal): code connect integration (#8497)
+
+### Bug fixes :bug:
+- fix: tearsheet entry and exit animations not working after carbon upgrade (#8674)
+- fix(CreateTearSheet): Modified the useCreateComponentFocus hook (#8076)
+- fix: remove use client directive warnings from build (#8641)
+- fix: prevent disable buttons hook from running on column resize (#8666)
+- fix: prevent customize column hook from running on column resize (#8640)
+- fix(CoachmarkStack): stack closing issue (#8635)
+- fix: replace uselayouteffect with isomorphic effect (#8630)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#8638)
+- chore(Tearsheet): replace h2 and h3 tags with Section and Heading (#8675)
+- chore: add deprecation notice to coachmark (#8634)
+
 ## `@carbon/ibm-products@2.79.0`
 ### Features :rocket:
 - feat: composable tearsheet initial implementation (#8337)

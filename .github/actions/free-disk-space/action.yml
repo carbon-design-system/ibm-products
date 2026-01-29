@@ -1,0 +1,50 @@
+name: 'Free Disk Space'
+description:
+  'Free up disk space by removing unnecessary system files and build artifacts'
+runs:
+  using: 'composite'
+  steps:
+    - name: Free disk space
+      shell: bash
+      run: |
+        echo "=== Before cleanup ==="
+        df -h
+        echo ""
+
+        echo "=== Removing unnecessary system packages ==="
+        # Remove large packages that are not needed for Node.js builds
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
+        sudo rm -rf /opt/hostedtoolcache/CodeQL
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
+        echo ""
+        echo "=== Removing Docker images ==="
+        docker rmi $(docker image ls -aq) || true
+
+        echo ""
+        echo "=== Cleaning apt cache ==="
+        sudo apt-get clean
+
+        echo ""
+        echo "=== Removing build artifacts and generated files ==="
+        # Remove build outputs
+        rm -rf packages/*/dist
+        rm -rf packages/*/lib
+        rm -rf packages/*/storybook-static
+
+        # Remove test artifacts
+        rm -rf .playwright
+        rm -rf playwright-report
+        rm -rf blob-report
+
+        # Remove cache directories (will be restored from GitHub cache if needed)
+        rm -rf .yarn/cache
+        rm -rf node_modules/.cache
+
+        echo ""
+        echo "=== After cleanup ==="
+        df -h
+        echo ""
+        echo "=== Disk space freed successfully ==="

@@ -11,6 +11,7 @@ import { expect, describe, it } from 'vitest';
 import { fixture, html, oneEvent } from '@open-wc/testing';
 import './index';
 import { prefix } from '../../../globals/settings';
+import CDSCoachmarkBeacon from './coachmark-beacon';
 
 const blockClass = `${prefix}--coachmark-beacon`;
 
@@ -63,7 +64,9 @@ describe('c4p-coachmark-beacon', () => {
   });
 
   it('toggles expanded state and dispatches event on click', async () => {
-    const el = await fixture(template({ ...defaultProps }));
+    const el = (await fixture(
+      template({ ...defaultProps })
+    )) as CDSCoachmarkBeacon;
 
     const button = el.shadowRoot!.querySelector<HTMLElement>('cds-button')!;
 
@@ -74,5 +77,17 @@ describe('c4p-coachmark-beacon', () => {
     const event = await eventPromise;
     expect(event).to.exist;
     expect(event.detail.expanded).to.be.true;
+
+    expect(el.hasAttribute('expanded')).to.be.true;
+
+    expect(button.getAttribute('aria-expanded')).to.equal('true');
+
+    // simulate an outside click
+    document.body.click();
+
+    await el.updateComplete;
+
+    expect(el.hasAttribute('expanded')).to.be.false;
+    expect(button.getAttribute('aria-expanded')).to.equal('false');
   });
 });

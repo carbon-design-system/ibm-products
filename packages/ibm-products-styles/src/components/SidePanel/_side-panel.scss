@@ -16,6 +16,7 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/config';
 @use '@carbon-labs/react-resizer/scss/resizer';
 @use '@carbon/styles/scss/components/button/tokens' as *;
 
@@ -300,10 +301,8 @@ $clabs-prefix: 'clabs';
       padding-block-start: $spacing-07;
     }
 
-    &:has(
-        .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
-      ),
-    &.#{$block-class}__header--has-navigation-back.#{c4p-settings.$carbon-prefix}--btn--md {
+    &:has(.#{$block-class}__navigation-back-button.#{config.$prefix}--btn--md),
+    &.#{$block-class}__header--has-navigation-back.#{config.$prefix}--btn--md {
       padding-block-start: $spacing-08;
     }
 
@@ -335,7 +334,7 @@ $clabs-prefix: 'clabs';
     }
 
     &.#{$block-class}__header--on-detail-step
-      .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
+      .#{$block-class}__navigation-back-button.#{config.$prefix}--btn--md
       ~ .#{$block-class}__collapsed-title-text {
       inset-block-start: $spacing-06;
     }
@@ -490,14 +489,14 @@ $clabs-prefix: 'clabs';
     margin-inline-end: $spacing-03;
   }
 
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button {
+  .#{config.$prefix}--btn.#{$block-class}__navigation-back-button {
     position: fixed;
     z-index: 5;
     inset-block-start: 0;
     inset-inline-start: 0;
   }
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button,
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button {
+  .#{config.$prefix}--btn.#{$block-class}__navigation-back-button,
+  .#{config.$prefix}--btn.#{$block-class}__close-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -518,8 +517,8 @@ $clabs-prefix: 'clabs';
     }
   }
 
-  .#{c4p-settings.$carbon-prefix}--btn--md.#{$block-class}__navigation-back-button,
-  .#{c4p-settings.$carbon-prefix}--btn--md.#{$block-class}__close-button {
+  .#{config.$prefix}--btn--md.#{$block-class}__navigation-back-button,
+  .#{config.$prefix}--btn--md.#{$block-class}__close-button {
     block-size: $spacing-08;
     inline-size: $spacing-08;
   }
@@ -566,6 +565,23 @@ $clabs-prefix: 'clabs';
       block-size: var(--#{$block-class}--actions-height);
     }
   }
+  &.#{$block-class}.#{$block-class}--xs
+    .#{$block-class}__actions-container.#{$action-set-block-class}--sm {
+    @include setPanelSize(map.get($side-panel-sizes, xs));
+  }
+}
+
+// form fields should receive correct background color
+.#{$block-class} .#{config.$prefix}--text-input,
+.#{$block-class} .#{config.$prefix}--text-area,
+.#{$block-class} .#{config.$prefix}--search-input,
+.#{$block-class} .#{config.$prefix}--select-input,
+.#{$block-class} .#{config.$prefix}--multi-select,
+.#{$block-class} .#{config.$prefix}--dropdown,
+.#{$block-class} .#{config.$prefix}--dropdown-list,
+.#{$block-class} .#{config.$prefix}--number input[type='number'],
+.#{$block-class} .#{config.$prefix}--date-picker__input {
+  background-color: $field-02;
 }
 
 @keyframes side-panel-overlay-entrance {

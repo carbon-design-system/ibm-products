@@ -104,7 +104,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   ::slotted([slot='decorator']),
-  ::slotted(#{$carbon-prefix}-slug) {
+  ::slotted(#{config.$prefix}-slug) {
     position: absolute;
     display: flex;
     inset-block-start: to-rem(10px);

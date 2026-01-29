@@ -64,12 +64,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 
 .#{$block-class}__title {
   @include type-style('productive-heading-02');
-  @include ellipsis-2-lines();
 }
 
 .#{$block-class}__chart-label {
   @include type-style('label-01');
-  @include ellipsis-2-lines();
 
   color: $text-secondary;
 }

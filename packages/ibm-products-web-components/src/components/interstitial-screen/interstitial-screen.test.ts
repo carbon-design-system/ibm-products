@@ -371,6 +371,7 @@ describe('c4p-interstitial-screen', function () {
 
     const mockDetails = {
       currentStep: 1,
+      open: true,
       stepDetails: [
         { stepTitle: 'Step 1', id: 1 },
         { stepTitle: 'Step 2', id: 2 },

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,9 +12,6 @@ import './index';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import Group from '@carbon/icons/es/group/16';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
-import headshot from './_story-assets/headshot.jpg';
-
-const storyPrefix = 'user-avatar-stories__';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
@@ -26,8 +23,6 @@ const tooltipAlignments = {
   [`left`]: POPOVER_ALIGNMENT.LEFT,
   [`right`]: POPOVER_ALIGNMENT.RIGHT,
 };
-
-const args = { tooltipAlignment: POPOVER_ALIGNMENT.RIGHT, size: 'md' };
 
 const argTypes = {
   backgroundColor: {
@@ -71,10 +66,12 @@ const argTypes = {
 
 export const Default = {
   args: {
-    ...args,
+    tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
+    size: 'md',
     tooltipText: 'TW, Thomas J. Watson user profile',
     name: 'Thomas J. Watson',
     backgroundColor: 'order-1-cyan',
+    theme: 'light',
   },
   argTypes,
   render: (args) => {
@@ -84,8 +81,6 @@ export const Default = {
         tooltip-text=${args.tooltipText}
         name=${args.name}
         size=${args.size}
-        image=${args.image}
-        image-description=${args.imageDescription}
         background-color=${args.backgroundColor}
         theme=${args.theme}
       >
@@ -96,10 +91,12 @@ export const Default = {
 
 export const WithIcon = {
   args: {
-    ...args,
+    tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
+    size: 'md',
     tooltipText: 'TW, Thomas J. Watson user profile',
     name: 'Thomas J. Watson',
     backgroundColor: 'order-1-cyan',
+    theme: 'light',
   },
   argTypes,
   render: (args) => {
@@ -109,8 +106,6 @@ export const WithIcon = {
         tooltip-text=${args.tooltipText}
         name=${args.name}
         size=${args.size}
-        image=${args.image}
-        image-description=${args.imageDescription}
         background-color=${args.backgroundColor}
         theme=${args.theme}
       >
@@ -122,10 +117,13 @@ export const WithIcon = {
 
 export const WithImage = {
   args: {
-    ...args,
-    image: headshot,
+    tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
+    size: 'md',
+    image:
+      'https://assets.ibm.com/is/image/ibm/christina-frohn?wid=2760&hei=1552&fit=constrain,0&qlt=85,0&fmt=png-alpha',
     tooltipText: 'TW, Thomas J. Watson user profile',
     imageDescription: 'Avatar of Thomas J. Watson',
+    theme: 'light',
   },
   argTypes,
   render: (args) => {
@@ -133,11 +131,9 @@ export const WithImage = {
       <c4p-user-avatar
         tooltip-alignment=${args.tooltipAlignment}
         tooltip-text=${args.tooltipText}
-        name=${args.name}
         size=${args.size}
         image=${args.image}
         image-description=${args.imageDescription}
-        background-color=${args.backgroundColor}
         theme=${args.theme}
       >
       </c4p-user-avatar>

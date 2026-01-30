@@ -85,7 +85,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     const slot = wrapper.querySelector('slot');
     const assignedElements = slot?.assignedElements({ flatten: true });
     const header = assignedElements?.find(
-      (el) => el.tagName.toLowerCase() === 'c4p-coachmark-header'
+      (el) => el.tagName.toLowerCase() === `${prefix}-coachmark-header`
     ) as HTMLElement;
     requestAnimationFrame(() => {
       const dragHandle = header.shadowRoot?.querySelector(

@@ -18,7 +18,7 @@ import { prefix, carbonPrefix } from '../../globals/settings';
 import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import styles from './tearsheet.scss?lit';
-import { selectorTabbable } from '../../globals/settings';
+import { selectorTabbable } from '@carbon/web-components/es/globals/settings.js';
 import pconsole from '../../globals/internal/pconsole';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/button/index.js';
@@ -44,44 +44,9 @@ interface StackState {
   all: StackHandler[];
 }
 
-const PRECEDING =
-  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
-  Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
-const FOLLOWING =
-  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
-  Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
-
 const blockClass = `${prefix}--tearsheet`;
 const blockClassModalHeader = `${carbonPrefix}--modal-header`;
 const blockClassActionSet = `${prefix}--action-set`;
-
-/**
- * Tries to focus on the given elements and bails out if one of them is successful.
- *
- * @param elements The elements.
- * @param reverse `true` to go through the list in reverse order.
- * @returns `true` if one of the attempts is successful, `false` otherwise.
- */
-function tryFocusElements(elements: NodeListOf<HTMLElement>, reverse: boolean) {
-  if (!reverse) {
-    for (let i = 0; i < elements.length; ++i) {
-      const elem = elements[i];
-      elem.focus();
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  } else {
-    for (let i = elements.length - 1; i >= 0; --i) {
-      const elem = elements[i];
-      elem.focus();
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
 
 /**
  * Tearsheet.
@@ -99,18 +64,6 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
    * The element that had focus before this tearsheet gets open.
    */
   private _launcher: Element | null = null;
-
-  /**
-   * Node to track focus going outside of tearsheet content.
-   */
-  @query('#start-sentinel')
-  private _startSentinelNode!: HTMLAnchorElement;
-
-  /**
-   * Node to track focus going outside of tearsheet content.
-   */
-  @query('#end-sentinel')
-  private _endSentinelNode!: HTMLAnchorElement;
 
   /**
    * Node to track tearsheet.
@@ -177,78 +130,85 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
   };
 
   /**
-   * Handles `blur` event on this element.
+   * Get focusable elements.
    *
-   * @param event The event.
-   * @param event.target The event target.
-   * @param event.relatedTarget The event relatedTarget.
+   * Querying all tabbable items.
+   *
+   * @returns {{first: HTMLElement, last: HTMLElement, all: HTMLElement[]}} Returns an object with various elements.
    */
-  @HostListener('shadowRoot:focusout')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
-    if (!this._topOfStack()) {
-      return;
+  private getFocusable(): {
+    first: HTMLElement | undefined;
+    last: HTMLElement | undefined;
+    all: HTMLElement[];
+  } {
+    const elements: NodeListOf<HTMLElement>[] = [];
+
+    // Add slug elements if present
+    if (this._hasSlug) {
+      elements.push(this.querySelectorAll(`${carbonPrefix}-slug`));
     }
 
-    const {
-      // condensedActions,
-      open,
-      _startSentinelNode: startSentinelNode,
-      _endSentinelNode: endSentinelNode,
-    } = this;
-
-    const oldContains = target !== this && this.contains(target as Node);
-    const currentContains =
-      relatedTarget !== this &&
-      (this.contains(relatedTarget as Node) ||
-        (this.shadowRoot?.contains(relatedTarget as Node) &&
-          relatedTarget !== (startSentinelNode as Node) &&
-          relatedTarget !== (endSentinelNode as Node)));
-
-    // Performs focus wrapping if _all_ of the following is met:
-    // * This tearsheet is open
-    // * The viewport still has focus
-    // * Tearsheet body used to have focus but no longer has focus
-    const { selectorTabbable: selectorTabbableForTearsheet } = this
-      .constructor as typeof CDSTearsheet;
-
-    if (open && relatedTarget && oldContains && !currentContains) {
-      const comparisonResult = (target as Node).compareDocumentPosition(
-        relatedTarget as Node
+    // Add close button if not hidden
+    if (this.hasCloseIcon) {
+      const closeButtons = this.shadowRoot?.querySelectorAll<HTMLElement>(
+        `${carbonPrefix}-modal-close-button`
       );
-      if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
-        await (this.constructor as typeof CDSTearsheet)._delay();
-        if (
-          !tryFocusElements(
-            this.querySelectorAll(selectorTabbableForTearsheet),
-            true
-          ) &&
-          relatedTarget !== this
-        ) {
-          this.focus();
-        }
-      } else if (
-        relatedTarget === endSentinelNode ||
-        comparisonResult & FOLLOWING
-      ) {
-        await (this.constructor as typeof CDSTearsheet)._delay();
-        if (
-          !tryFocusElements(
-            this.querySelectorAll(selectorTabbableForTearsheet),
-            true
-          )
-        ) {
-          this.focus();
-        }
+      if (closeButtons) {
+        elements.push(closeButtons);
       }
     }
-  };
+
+    // Add tabbable elements inside light DOM
+    const _tabbableItems = this.querySelectorAll<HTMLElement>(selectorTabbable);
+
+    if (_tabbableItems) {
+      elements.push(_tabbableItems);
+    }
+
+    // Flatten NodeList arrays and filter for focusable items
+    const all = elements
+      ?.flatMap((nodeList) => Array.from(nodeList))
+      ?.filter((el): el is HTMLElement => typeof el?.focus === 'function');
+
+    return {
+      first: all[0],
+      last: all[all.length - 1],
+      all,
+    };
+  }
 
   @HostListener('document:keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = ({ key, target }: KeyboardEvent) => {
     if ((key === 'Esc' || key === 'Escape') && this._topOfStack()) {
       this._handleUserInitiatedClose(target);
+    }
+  };
+
+  /**
+   * Handle the keydown event.
+   * Trap the focus inside the side-panel by tracking keydown.key == `Tab`
+   *
+   * @param {KeyboardEvent} event The keyboard event object.
+   */
+  @HostListener('keydown')
+  protected _handleHostKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Tab') {
+      const { first: _firstElement, last: _lastElement } = this.getFocusable();
+
+      if (
+        event.shiftKey &&
+        (this.shadowRoot?.activeElement === _firstElement ||
+          document.activeElement === _firstElement)
+      ) {
+        event.preventDefault();
+
+        _lastElement?.focus();
+      } else if (!event.shiftKey && document.activeElement === _lastElement) {
+        event.preventDefault();
+
+        _firstElement?.focus();
+      }
     }
   };
 
@@ -601,12 +561,6 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
     </cds-modal-header>`;
     if (this._stackPosition <= this._stackDepth) {
       return html`
-        <a
-          id="start-sentinel"
-          class="${prefix}--visually-hidden"
-          href="javascript:void 0"
-          role="navigation"
-        ></a>
         <div
           aria-label=${this.ariaLabel}
           class=${`${blockClass}__container ${carbonPrefix}--modal-container ${carbonPrefix}--modal-container--sm`}
@@ -682,12 +636,6 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
             </div>
           </cds-modal-body>
         </div>
-        <a
-          id="end-sentinel"
-          class="${prefix}--visually-hidden"
-          href="javascript:void 0"
-          role="navigation"
-        ></a>
       `;
     } else {
       pconsole.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
@@ -746,24 +694,17 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
       this._checkSetOpen();
       if (this.open) {
         this._launcher = this.ownerDocument!.activeElement;
-        const focusNode =
-          this.selectorInitialFocus &&
-          this.querySelector(this.selectorInitialFocus);
 
         await (this.constructor as typeof CDSTearsheet)._delay();
-        if (focusNode) {
-          // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
-          // where its first update/render cycle that makes it focusable happens after `<c4p-tearsheet>`'s first update/render cycle
-          (focusNode as HTMLElement).focus();
-        } else if (
-          !tryFocusElements(
-            this.querySelectorAll(
-              (this.constructor as typeof CDSTearsheet).selectorTabbable
-            ),
-            true
-          )
-        ) {
-          this.focus();
+
+        if (this.selectorInitialFocus?.trim()?.length) {
+          const focusNode = this.querySelector(this.selectorInitialFocus);
+
+          (focusNode as HTMLElement)?.focus();
+        } else {
+          const { first: _firstElement } = this.getFocusable();
+
+          _firstElement?.focus();
         }
       } else if (
         this._launcher &&

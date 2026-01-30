@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.82.0-rc.0`
+## `@carbon/ibm-products@2.82.0`
 ### Features :rocket:
 - feat(coachmark): open in stackblitz (#8690)
 - feat(ConditionBuilder): Added code connect files (#8483)

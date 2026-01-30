@@ -211,11 +211,7 @@ export const Modal = {
 
 "
         ></c4p-interstitial-screen-header>
-        <style>
-          c4p-interstitial-screen-body {
-            block-size: 20rem;
-          }
-        </style>
+
         <c4p-interstitial-screen-body>
           ${getSingleContent(getConfig)}
         </c4p-interstitial-screen-body>
@@ -244,11 +240,6 @@ export const ModalWithMultipleSteps = {
         }}
         @c4p-interstitial-closed=${handleClose}
       >
-        <style>
-          c4p-interstitial-screen-body {
-            block-size: 20rem;
-          }
-        </style>
         <c4p-interstitial-screen-header
           header-title="Use case-specific title"
           header-subtitle="Use case-specific sub title"

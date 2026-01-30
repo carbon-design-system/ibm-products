@@ -2093,7 +2093,7 @@ __metadata:
     sass: "npm:^1.93.2"
     storybook: "npm:^9.1.8"
     storybook-addon-accessibility-checker: "npm:>=9.2.0-rc.0"
-    typescript-config-carbon: "npm:^0.8.0"
+    typescript-config-carbon: "npm:^0.9.0"
     vite: "npm:^7.0.0"
     yargs: "npm:^18.0.0"
   peerDependencies:
@@ -23038,12 +23038,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-config-carbon@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "typescript-config-carbon@npm:0.8.0"
+"typescript-config-carbon@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "typescript-config-carbon@npm:0.9.0"
   dependencies:
     typescript: "npm:^5.7.3"
-  checksum: 10/c4c415ddab4439d626ca8785a2d036b6f2e635ddf6b8a0b9d06a2ae435e69097be05861509314ea4e9da489891f775e23ea40ab12b60c5629c4bd2a852f3f711
+  checksum: 10/e0a8ccf5889a72dfbe8be183c926c286526e5e753a9fd69b6899d1a30602380d52dd4075443e62f05806236ecc0ed17dee9f8c9949e4cc360c78b64bd91c92a6
   languageName: node
   linkType: hard
 

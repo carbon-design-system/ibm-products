@@ -1,3 +1,22 @@
+## `@carbon/ibm-products-styles@2.77.0`
+### Features :rocket:
+- feat: init guide banner component (#8513)
+
+### Bug fixes :bug:
+- fix: rc clean ups
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+
+### Housekeeping :house:
+- chore: retry prerelease publish other packages
+- build(deps): update Carbon 11 compatible versions to latest (#8726)
+
 ## `@carbon/ibm-products-styles@2.76.0`
 ### Features :rocket:
 - feat(Tearsheet): stacking, unit test, design review changes and fixes (#8563)

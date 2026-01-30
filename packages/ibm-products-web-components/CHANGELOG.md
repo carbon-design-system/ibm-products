@@ -1,3 +1,34 @@
+## `@carbon/ibm-products-web-components@0.31.0`
+### Features :rocket:
+- feat: openInStackblitz in web components (#8786)
+- feat: added support for iframes in storybook for autotrack (#8580)
+- feat(NotificationPanel): code connect wc (#8733)
+
+### Housekeeping :house:
+- chore: add create sidepanel wc pattern code (#8379)
+- chore(deps): update dependency @rollup/plugin-commonjs to v29 (#8584)
+
+## `@carbon/ibm-products-web-components@0.30.0`
+### Features :rocket:
+- feat: init guide banner component (#8513)
+- feat(Coachmark): implementation of coachmark WC (#8599)
+
+### Bug fixes :bug:
+- fix: rc clean ups
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+- fix(code-connect): exclude node_modules (#8705)
+
+### Housekeeping :house:
+- chore: retry prerelease publish other packages
+- build(deps): update Carbon 11 compatible versions to latest (#8726)
+
 ## `@carbon/ibm-products-web-components@0.29.0`
 ### Features :rocket:
 - feat(checklist): code connect integration (#8540)

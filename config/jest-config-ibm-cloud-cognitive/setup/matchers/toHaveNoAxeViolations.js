@@ -1,13 +1,11 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const axe = require('axe-core');
+import axe from 'axe-core';
 
 const defaultOptions = {
   rules: {
@@ -65,4 +63,4 @@ ${divider}
 ${nodes.join('\n')}`;
 }
 
-module.exports = toHaveNoAxeViolations;
+export default toHaveNoAxeViolations;

@@ -6,7 +6,11 @@
  */
 
 import React, { ReactNode, RefObject, useEffect } from 'react';
-import { StepGroup, StepState, useStepContext } from '../../../StepFlow';
+import {
+  StepGroup,
+  StepContextType,
+  useStepContext,
+} from '@carbon/utilities-react';
 import { Tearsheet } from '../Tearsheet';
 import {
   Button,
@@ -20,7 +24,7 @@ import {
 
 interface Props {
   children?: ReactNode;
-  influencer?: ((a: StepState) => ReactNode) | null;
+  influencer?: ((a: StepContextType) => ReactNode) | null;
   open?: boolean;
   onClose?: () => void;
   title?: ReactNode;

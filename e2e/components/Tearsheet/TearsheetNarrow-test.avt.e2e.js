@@ -61,8 +61,8 @@ test.describe('TearsheetNarrow @avt', () => {
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
     const inputField = page.locator('#tss-ft1');
     const createButton = page.getByText('Create');
-    const closeButton = page.getByRole('button', { name: 'Close' });
-    const cancelButton = page.getByText('Cancel');
+    const closeButton = modalElement.getByRole('button', { name: 'Close' });
+    const cancelButton = modalElement.getByText('Cancel');
 
     // Default opened in story
     await page.screenshot({ animations: 'disabled' });

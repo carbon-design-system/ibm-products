@@ -75,7 +75,7 @@ export interface RemoveModalProps
   /**
    * The DOM node the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget?: ReactNode;
+  portalTarget?: HTMLElement;
   /**
    * Prevent closing on click outside of modal
    */

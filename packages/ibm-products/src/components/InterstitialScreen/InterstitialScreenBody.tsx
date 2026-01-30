@@ -146,6 +146,7 @@ const InterstitialScreenBody = React.forwardRef<
           <div className={`${blockClass}__carousel`}>
             <Carousel
               disableArrowScroll
+              disableResetOnResize
               ref={scrollRef}
               onScroll={onScrollHandler}
             >

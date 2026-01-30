@@ -15,6 +15,8 @@ import '@carbon/web-components/es/components/modal/index.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '../truncated-text';
 import styles from './tearsheet-header-content.scss?lit';
+import { MatchMediaController } from '../../globals/js/utils/match-media-controller';
+import { breakpoints } from '@carbon/layout';
 
 const blockClass = `${prefix}--tearsheet__next`;
 
@@ -51,8 +53,35 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
   @state()
   private _hasTitleEnd = false;
 
+  @state()
+  private _isMobileOrNarrow = false;
+
+  private mdMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  private isMobileDevice = new MatchMediaController(
+    this,
+    this.mdMediaQuery,
+    false
+  );
+
+  private get isNarrowVariant(): boolean {
+    const tearsheet = this.closest(`${prefix}-preview-tearsheet`);
+    return tearsheet?.getAttribute('variant') === 'narrow';
+  }
+
   protected firstUpdated(_changedProperties: PropertyValues): void {
     this._checkSlots();
+    this._isMobileOrNarrow =
+      this.isMobileDevice?.matches || this.isNarrowVariant;
+  }
+
+  protected updated(_changedProperties: PropertyValues): void {
+    const previousIsMobileOrNarrow = this._isMobileOrNarrow;
+    this._isMobileOrNarrow =
+      this.isMobileDevice?.matches || this.isNarrowVariant;
+
+    if (this._isMobileOrNarrow !== previousIsMobileOrNarrow) {
+      this.requestUpdate();
+    }
   }
 
   private _checkSlots() {
@@ -71,7 +100,13 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    return html`
+    const headerActionsTemplate = html`
+      <div class="${blockClass}__header-actions">
+        <slot name="header-actions"></slot>
+      </div>
+    `;
+
+    const headerContentTemplate = html`
       <div class="${blockClass}__header-content">
         <!-- Label -->
         <div class="${blockClass}__header-label">
@@ -129,12 +164,13 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
           <slot></slot>
         </div>
       </div>
-
-      <!-- Header actions -->
-      <div class="${blockClass}__header-actions">
-        <slot name="header-actions"></slot>
-      </div>
     `;
+
+    // Desktop/Wide: header-actions first (for accessibility), CSS order handles visual layout
+    // Mobile/Narrow: header-content first (natural DOM order)
+    return this._isMobileOrNarrow
+      ? html`${headerContentTemplate} ${headerActionsTemplate}`
+      : html`${headerActionsTemplate} ${headerContentTemplate}`;
   }
 
   static styles = styles;

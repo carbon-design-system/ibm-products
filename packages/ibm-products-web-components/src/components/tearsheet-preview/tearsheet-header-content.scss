@@ -73,7 +73,20 @@ $motion-duration: $duration-moderate-02;
 .#{$block-class__next}__header-actions {
   display: flex;
   justify-content: flex-end;
+  order: 2; /* Visual order: appears on the right on desktop */
   margin-block-start: -14px;
+
+  @include breakpoint-down(md) {
+    order: 0; /* Reset to DOM order on mobile (header-actions first) */
+  }
+}
+
+.#{$block-class__next}__header-content {
+  order: 1; /* Visual order: appears on the left on desktop */
+
+  @include breakpoint-down(md) {
+    order: 0; /* Reset to DOM order on mobile (header-content second) */
+  }
 }
 
 :host {

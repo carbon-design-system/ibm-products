@@ -164,6 +164,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       variant: this.variant,
       isSm: this.isSm,
       open: this.open,
+      hasAILabel: this.hasAILabel,
     });
   }
 

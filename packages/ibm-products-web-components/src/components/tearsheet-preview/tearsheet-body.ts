@@ -102,10 +102,13 @@ class CDSTearsheetBody extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   render() {
+    const { hasAILabel } = tearsheetSignal.get();
+
     const mainContentClasses = classMap({
       [`${blockClass}__main-content`]: true,
       [`${blockClass}__flush`]: this.isFlush,
       [`${blockClass}__main-content--no-summary`]: !this._hasSummaryContent,
+      [`${blockClass}__main-content--has-ai-label`]: hasAILabel,
     });
 
     return html`

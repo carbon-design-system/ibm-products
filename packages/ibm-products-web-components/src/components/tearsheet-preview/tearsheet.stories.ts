@@ -27,6 +27,7 @@ import '@carbon/web-components/es/components/toggle-tip/index.js';
 import '@carbon/web-components/es/components/dropdown/index.js';
 import '@carbon/web-components/es/components/progress-bar/index.js';
 import '@carbon/web-components/es/components/notification/index.js';
+import mdx from './tearsheet.mdx';
 
 const storyPrefix = 'tearsheet-preview-stories';
 
@@ -46,14 +47,7 @@ const getDecorator = (decorator) => {
           </div>
         </cds-ai-label>
       `;
-    case 'NON_AI_LABEL_DECORATOR':
-      return html`
-        <cds-toggletip slot="decorator" alignment="bottom">
-          <p slot="body-text">Any description goes here</p>
-          <cds-link slot="actions">Test</cds-link>
-          <cds-button slot="actions">Button</cds-button>
-        </cds-toggletip>
-      `;
+
     default:
       return;
   }
@@ -280,68 +274,147 @@ const dummyContent = html` <section class="main-content">
 </section>`;
 
 export const Default = {
+  args: {
+    variant: 'wide',
+    open: false,
+    decorator: 'NONE',
+    hideCloseButton: false,
+    disableHeaderCollapse: false,
+    title: 'Title of the tearsheet',
+    label: 'Label',
+    showDescription: true,
+    showTitleIcon: true,
+    showHeaderActions: true,
+    showSummaryContent: true,
+    preventCloseOnClickOutside: false,
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['wide', 'narrow'],
+      description: 'Tearsheet variant',
+    },
+    open: {
+      control: 'boolean',
+      description: 'Controls whether the tearsheet is open',
+    },
+    decorator: {
+      control: 'select',
+      options: ['NONE', 'WITH_AI_LABEL'],
+      description: 'Decorator type for the tearsheet header',
+    },
+    hideCloseButton: {
+      control: 'boolean',
+      description: 'Hide the close button in the header',
+    },
+    disableHeaderCollapse: {
+      control: 'boolean',
+      description: 'Disable header collapse/expand on scroll',
+    },
+    title: {
+      control: 'text',
+      description: 'Title of the tearsheet',
+    },
+    label: {
+      control: 'text',
+      description: 'Label above the title',
+    },
+    showDescription: {
+      control: 'boolean',
+      description: 'Show description text',
+    },
+    showTitleIcon: {
+      control: 'boolean',
+      description: 'Show icon before title',
+    },
+    showHeaderActions: {
+      control: 'boolean',
+      description: 'Show action buttons in header',
+    },
+    showSummaryContent: {
+      control: 'boolean',
+      description: 'Show summary content panel',
+    },
+    preventCloseOnClickOutside: {
+      control: 'boolean',
+      description: 'Prevent closing when clicking outside',
+    },
+  },
   render: (args) => {
     return html`
       <style>
         ${styles}
       </style>
-       <div class="${storyPrefix}story-container">
+      <div class="${storyPrefix}story-container">
         <div class="${storyPrefix}story-header"></div>
         <div id="page-content-selector" class="${storyPrefix}story-content">
           <cds-button @click="${toggleButton}">Toggle tearsheet</cds-button>
         </div>
       </div>
 
+      <c4p-preview-tearsheet
+        variant="${args.variant}"
+        ?open="${args.open}"
+        ?prevent-close-on-click-outside="${args.preventCloseOnClickOutside}"
+      >
+        <c4p-tearsheet-header
+          ?hide-close-button="${args.hideCloseButton}"
+          ?disable-header-collapse="${args.disableHeaderCollapse}"
+        >
+          <!-- slotted Decorator -->
+          ${args.decorator !== 'NONE' ? getDecorator(args.decorator) : ''}
 
-     <c4p-preview-tearsheet  variant="wide">
-     <c4p-tearsheet-header  ?hide-close-button="${true}"  >
-           <!-- slotted Decorator -->
-             
-      <c4p-tearsheet-header-content title="Tile to the tearsheet">
-      <label slot="label"> label </label>
-    ${description}
-      ${iconLoader(Bee, {
-        slot: 'title-start',
-      })}
-      
-      <div slot="header-actions">
-            <cds-button size="sm" kind="tertiary" 
-              >Primary action ${iconLoader(Add16, { slot: 'icon' })}</cds-button
-            >
+          <c4p-tearsheet-header-content title="${args.title}">
+            <label slot="label">${args.label}</label>
+            ${args.showDescription ? description : ''}
+            ${args.showTitleIcon
+              ? iconLoader(Bee, {
+                  slot: 'title-start',
+                })
+              : ''}
+            ${args.showHeaderActions
+              ? html`<div slot="header-actions">
+                  <cds-button size="sm" kind="tertiary">
+                    Primary action ${iconLoader(Add16, { slot: 'icon' })}
+                  </cds-button>
+                </div>`
+              : ''}
+          </c4p-tearsheet-header-content>
+        </c4p-tearsheet-header>
+
+        <c4p-tearsheet-body>
+          <div slot="main-content">
+            ${args.showSummaryContent
+              ? html`<div class="summaryPanelTrigger">
+                  <cds-button
+                    kind="ghost"
+                    label="Open right panel"
+                    @click="${toggleSummaryPanel}"
+                  >
+                    ${iconLoader(RightPanelClose32, {
+                      slot: 'icon',
+                    })}
+                  </cds-button>
+                </div>`
+              : ''}
+            ${dummyContent}
           </div>
-     </c4p-tearsheet-header-content>
-    
-     
-     </c4p-tearsheet-header>
-     
-       <c4p-tearsheet-body >
-       <div  slot="main-content"> 
-       
-            <div class="summaryPanelTrigger">
-              <cds-button
-                kind="ghost"
-                label="Open right panel"
-               @click="${toggleSummaryPanel}"
-               
-              > ${iconLoader(RightPanelClose32, {
-                slot: 'icon',
-              })}</cds-button>
-            </div>
-        ${dummyContent}</div>
-       <c4p-tearsheet-summary-content   slot="summary-content">${summaryContent}</c4p-tearsheet-summary-content>
+          ${args.showSummaryContent
+            ? html`<c4p-tearsheet-summary-content slot="summary-content"
+                >${summaryContent}</c4p-tearsheet-summary-content
+              >`
+            : ''}
         </c4p-tearsheet-body>
-        <c4p-tearsheet-footer> 
-              <div class="default__action-buttons">
-                <cds-button kind="ghost" size="xl" @click="${toggleButton}">
+        <c4p-tearsheet-footer>
+          <div class="default__action-buttons">
+            <cds-button kind="ghost" size="xl" @click="${toggleButton}">
               Cancel
             </cds-button>
             <cds-button kind="secondary" size="xl"> Back </cds-button>
             <cds-button size="xl"> Submit </cds-button>
-              </div>
-          
+          </div>
         </c4p-tearsheet-footer>
-     </<c4p-preview-tearsheet>
-      
+      </c4p-preview-tearsheet>
     `;
   },
 };
@@ -600,6 +673,11 @@ export const StackingWithDifferentSizes = {
 
 const meta = {
   title: 'Preview/Tearsheet',
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   decorators: [
     (story) =>
       html` <style>

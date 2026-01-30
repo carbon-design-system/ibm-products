@@ -54,16 +54,18 @@ $motion-duration: $duration-moderate-02;
 .#{$block-class__next}__main-content {
   position: relative;
 
-  @include ai-popover-gradient('default', 0, 'background');
-
-  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
-
   &.#{$block-class__next}__flush {
     padding-inline: 0;
   }
 
   &.#{$block-class__next}__main-content--no-summary {
     grid-column: 1 / -1;
+  }
+
+  &.#{$block-class__next}__main-content--has-ai-label {
+    @include ai-popover-gradient('default', 0, 'background');
+
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
   }
 }
 

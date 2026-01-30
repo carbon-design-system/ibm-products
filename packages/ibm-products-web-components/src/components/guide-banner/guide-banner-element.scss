@@ -16,17 +16,16 @@ $css--plex: true !default;
 
 $prefix: config.$pkg-prefix;
 $carbon-prefix: config.$carbon-prefix;
-$block-class: #{$prefix}--guidebanner;
+$block-class: #{$prefix}--guidebanner__element;
 
-:host(#{$prefix}-guide-banner) {
-  details {
-    display: flex;
-    flex-direction: column-reverse;
+:host(#{$prefix}-guide-banner-element) {
+  .#{$block-class}__title {
+    @include type.type-style('heading-compact-01');
   }
 
-  ::marker,
-  ::-webkit-details-marker {
-    display: none;
-    content: '';
+  .#{$block-class}__description {
+    @include type.type-style('body-01');
+
+    margin-block-end: $spacing-07;
   }
 }

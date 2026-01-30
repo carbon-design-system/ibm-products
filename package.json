@@ -123,7 +123,7 @@
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {
-    "body-parser": "2.2.1",
+    "body-parser": "2.2.2",
     "braces": "^3.0.3",
     "cross-spawn": "7.0.6",
     "form-data": "4.0.4",
@@ -131,7 +131,7 @@
     "react-is": "^19.0.0",
     "semver": "7.7.3",
     "ws": "^8.17.1",
-    "@babel/runtime": "7.28.4",
+    "@babel/runtime": "7.28.6",
     "brace-expansion@^1.1.7": "1.1.12",
     "brace-expansion@^2.0.1": "2.0.2",
     "axios": "^1.12.0"

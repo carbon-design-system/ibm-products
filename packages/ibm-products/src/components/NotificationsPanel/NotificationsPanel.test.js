@@ -19,6 +19,7 @@ import { NotificationsPanel } from '.';
 import data from './NotificationsPanel_data';
 
 const blockClass = `${pkg.prefix}--notifications-panel`;
+const componentName = NotificationsPanel.displayName;
 const dataTestId = uuidv4();
 const onNotificationClickFn = jest.fn();
 const onDismissSingleNotificationFn = jest.fn();
@@ -47,7 +48,18 @@ const renderNotifications = ({ ...rest } = {}) =>
     />
   );
 
-describe('Notifications', () => {
+describe(componentName, () => {
+  // it('has no accessibility violations', async () => {
+  //   const { container } = renderNotifications({
+  //     data: testData,
+  //   });
+
+  //   const notificationsPanelElement = container.querySelector(`.${blockClass}`);
+
+  //   await expect(notificationsPanelElement).toBeAccessible(componentName);
+  //   await expect(notificationsPanelElement).toHaveNoAxeViolations();
+  // });
+
   it('renders the notification panel', async () => {
     const { animationStart, animationEnd } = fireEvent;
     const { container, rerender } = renderNotifications({
@@ -304,7 +316,7 @@ describe('Notifications', () => {
       onDismissSingleNotification: onDismissSingleNotificationFn,
     });
     const notificationElement = screen.getByText(/Test notification title/i)
-      .parentNode.parentNode;
+      .parentNode.parentNode.parentNode;
     const dismissSingleNotificationClass = `${blockClass}__dismiss-single-button`;
     const dismissIconButtonElement = notificationElement.querySelector(
       `.${dismissSingleNotificationClass}`
@@ -334,7 +346,7 @@ describe('Notifications', () => {
       onDismissSingleNotification: onDismissSingleNotificationFn,
     });
     const notificationElement = screen.getByText(/Test notification title/i)
-      .parentNode.parentNode;
+      .parentNode.parentNode.parentNode;
     const dismissSingleNotificationClass = `${blockClass}__dismiss-single-button`;
     const dismissIconButtonElement = notificationElement.querySelector(
       `.${dismissSingleNotificationClass}`

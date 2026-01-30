@@ -32,10 +32,6 @@
     align-self: flex-end;
     margin-block-start: $spacing-03;
   }
-  /* stylelint-disable-next-line selector-type-no-unknown */
-  cds-button::part(button) {
-    box-shadow: none;
-  }
 }
 
 .trigger-btn {

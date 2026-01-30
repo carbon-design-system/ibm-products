@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,6 +22,7 @@ import { allPropTypes } from '../../global/js/utils/props-helper';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { portalType } from './TearsheetShell';
+import { useTearsheetPresence } from '../../global/js/hooks/useTearsheetPresence';
 
 const componentName = 'Tearsheet';
 
@@ -193,13 +194,16 @@ export const Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
       influencerPosition = 'left',
       influencerWidth = 'narrow',
       children,
+      open,
       ...rest
     } = props;
+
     return (
       <TearsheetShell
         {...{
           ...getDevtoolsProps(componentName),
           ...rest,
+          open,
           influencerPosition,
           influencerWidth,
           ref,

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,9 +23,9 @@ import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
 import { portalType } from './TearsheetShell';
 import { TearsheetAction } from './Tearsheet';
+import { useTearsheetPresence } from '../../global/js/hooks/useTearsheetPresence';
 
 export interface TearsheetNarrowProps extends PropsWithChildren {
   /**
@@ -154,20 +154,24 @@ export const TearsheetNarrow = React.forwardRef(
   (
     {
       verticalPosition = defaults.verticalPosition,
+      open,
       ...rest
     }: TearsheetNarrowProps,
     ref: ForwardedRef<HTMLDivElement>
-  ) => (
-    <TearsheetShell
-      {...{
-        ...getDevtoolsProps(componentName),
-        ...prepareProps(rest, blocked),
-        verticalPosition,
-        ref,
-        size: 'narrow',
-      }}
-    />
-  )
+  ) => {
+    return (
+      <TearsheetShell
+        {...{
+          ...getDevtoolsProps(componentName),
+          ...prepareProps(rest, blocked),
+          open,
+          verticalPosition,
+          ref,
+          size: 'narrow',
+        }}
+      />
+    );
+  }
 );
 
 // Return a placeholder if not released and not enabled by feature flag

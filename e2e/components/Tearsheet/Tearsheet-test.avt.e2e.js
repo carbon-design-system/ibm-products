@@ -43,6 +43,9 @@ test.describe('Tearsheet @avt', () => {
 
     // Pressing 'Escape' key to close the Tearsheet
     await page.keyboard.press('Escape');
+
+    // Wait for exit animation to complete (enable-presence feature keeps component mounted during animation)
+    await page.waitForTimeout(500);
     await page.screenshot({ animations: 'disabled' });
 
     await expect(modalElement).not.toBeInViewport();
@@ -103,6 +106,8 @@ test.describe('Tearsheet @avt', () => {
     // And pressing the 'Cancel' button to close the Tearsheet
     await page.keyboard.press('Enter');
 
+    // Wait for exit animation to complete (enable-presence feature)
+    await page.waitForTimeout(500);
     await page.screenshot({ animations: 'disabled' });
     // Tearsheet is closed
     await expect(modalElement).not.toBeInViewport();
@@ -188,6 +193,8 @@ test.describe('Tearsheet @avt', () => {
     await expect(cancelButton).toBeFocused();
     // Pressing 'Enter' key to close the Tearsheet
     await page.keyboard.press('Enter');
+    // Wait for exit animation to complete (enable-presence feature)
+    await page.waitForTimeout(500);
     // Now the focus is returned to the "Open Tearsheet" button again
     await expect(openButton).toBeFocused();
   });

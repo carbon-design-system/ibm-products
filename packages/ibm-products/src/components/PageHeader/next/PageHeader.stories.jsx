@@ -33,6 +33,9 @@ import {
   OverflowMenu,
   OverflowMenuItem,
   OperationalTag,
+  HeaderContainer,
+  Header,
+  HeaderName,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
@@ -449,27 +452,21 @@ const tabBarTags = [
     Tag 6
   </Tag>,
 ];
+const renderUIShellHeader = () => (
+  <HeaderContainer
+    render={() => (
+      <Header aria-label="Application header">
+        <HeaderName href="/">Application header</HeaderName>
+      </Header>
+    )}
+  />
+);
 
 export const TabBarWithTabsAndTags = (args) => (
   <>
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '3rem',
-        backgroundColor: '#fff',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        inlineSize: '100%',
-        borderBottom: '1px solid #eee',
-        zIndex: 10000,
-      }}
-    >
-      <span>Application header</span>
-    </div>
-    <div style={{ marginBlockStart: '3rem' }}>
+    {renderUIShellHeader()}
+
+    <div className="page-header-story__wrapper">
       <Tabs>
         <PageHeader.Root>
           <PageHeader.BreadcrumbBar

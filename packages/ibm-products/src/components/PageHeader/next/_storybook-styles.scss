@@ -82,20 +82,6 @@ $stackblitz-block-class: c4p--page-header;
   }
 }
 
-.page-header-story__application-header {
-  position: fixed;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffffff;
-  block-size: 3rem;
-  border-block-end: 1px solid #eeeeee;
-  inline-size: 100%;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-}
-
 .page-header-story__wrapper {
   overflow: auto;
   block-size: calc(100vh - 3rem);

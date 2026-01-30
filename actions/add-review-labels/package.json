@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.2.3",
-    "@actions/github": "^6.0.0",
+    "@actions/github": "^8.0.1",
     "decompress": "^4.2.1",
     "octokit": "^5.0.0"
   }

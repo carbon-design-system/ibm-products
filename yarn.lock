@@ -1869,12 +1869,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon-labs/react-resizer@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "@carbon-labs/react-resizer@npm:0.12.0"
+"@carbon-labs/react-resizer@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "@carbon-labs/react-resizer@npm:0.10.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.10.2"
-  checksum: 10/87ac0326685579d90a07eeadc7029b89a910df3c3b157744697bd2673b32c02e947384701f840d6a24fc1f2f0f06a4b7f97184520590a938c6062dfc19f345a4
+  checksum: 10/4d7475ef59a40f850f3d7a440a41fd3b6b0750b83382cf44d541546bd17134eebccd32111192d42f22033575c0a77be2058d7d39658079c8058d63953d401631
   languageName: node
   linkType: hard
 
@@ -1984,6 +1984,7 @@ __metadata:
     "@carbon/icons": "npm:^11.74.0"
     "@carbon/motion": "npm:^11.40.0"
     "@carbon/styles": "npm:^1.99.0"
+    "@carbon/utilities": "npm:^0.15.0"
     "@carbon/web-components": "npm:2.47.0"
     "@figma/code-connect": "npm:^1.3.6"
     "@ibm/telemetry-js": "npm:^1.10.2"
@@ -2046,7 +2047,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.26.3"
     "@babel/preset-typescript": "npm:^7.26.0"
     "@babel/runtime": "npm:^7.26.10"
-    "@carbon-labs/react-resizer": "npm:^0.12.0"
+    "@carbon-labs/react-resizer": "npm:^0.10.0"
     "@carbon/feature-flags": "npm:^0.32.0"
     "@carbon/ibm-products-styles": "npm:^2.78.0"
     "@carbon/styles": "npm:^1.99.0"

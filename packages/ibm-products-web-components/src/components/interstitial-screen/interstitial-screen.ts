@@ -94,6 +94,12 @@ class CDSInterstitialScreen extends SignalWatcher(
       const wasOpen = this._wasOpen;
       const isOpen = this.open;
 
+      // Update the signal with the open state
+      updateInterstitialDetailsSignal({
+        name: 'open',
+        detail: isOpen,
+      });
+
       if (!wasOpen && isOpen) {
         this.dispatchInItializeEvent();
         // `focusableContainers` holds the containers where we can query DOM elements.
@@ -185,6 +191,18 @@ class CDSInterstitialScreen extends SignalWatcher(
           init
         )
       );
+
+      // Reset carousel and step after close event is dispatched
+      const { carouselAPI } = interstitialDetailsSignal.get();
+      if (carouselAPI) {
+        carouselAPI.reset();
+      }
+
+      // Reset the current step to 0
+      updateInterstitialDetailsSignal({
+        name: 'currentStep',
+        detail: 0,
+      });
     }
   }
 

@@ -1,2 +1,0 @@
-import{u as p,c,e as d,_ as u,P as e}from"./iframe-CECvNR-E.js";const x=({className:s,value:t="",disabled:o=!1,hidden:r=!1,text:i="",...a})=>{const n=p(),l=c({[`${n}--select-option`]:!0,...s&&{[s]:s}});return d.createElement("option",u({},a,{className:l,value:t,disabled:o,hidden:r}),i)};x.propTypes={className:e.string,disabled:e.bool,hidden:e.bool,text:e.string.isRequired,value:e.any.isRequired};export{x as S};
-//# sourceMappingURL=SelectItem-C63vC68U.js.map

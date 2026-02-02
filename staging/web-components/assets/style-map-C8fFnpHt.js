@@ -1,0 +1,5 @@
+import{T as l}from"./iframe-CPwma648.js";import{a as u,i as c,t as d}from"./class-map-BjEbJ_wj.js";/**
+ * @license
+ * Copyright 2018 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */const o="important",a=" !"+o,p=u(class extends c{constructor(s){if(super(s),s.type!==d.ATTRIBUTE||s.name!=="style"||s.strings?.length>2)throw Error("The `styleMap` directive must be used in the `style` attribute and must be the only part in the attribute.")}render(s){return Object.keys(s).reduce((n,e)=>{const t=s[e];return t==null?n:n+`${e=e.includes("-")?e:e.replace(/(?:^(webkit|moz|ms|o)|)(?=[A-Z])/g,"-$&").toLowerCase()}:${t};`},"")}update(s,[n]){const{style:e}=s.element;if(this.ft===void 0)return this.ft=new Set(Object.keys(n)),this.render(n);for(const t of this.ft)n[t]==null&&(this.ft.delete(t),t.includes("-")?e.removeProperty(t):e[t]=null);for(const t in n){const r=n[t];if(r!=null){this.ft.add(t);const i=typeof r=="string"&&r.endsWith(a);t.includes("-")||i?e.setProperty(t,i?r.slice(0,-11):r,i?o:""):e[t]=r}}return l}});export{p as o};

@@ -1,2 +1,0 @@
-import{e,_ as a,P as n}from"./iframe-CECvNR-E.js";const o=e.createContext(1),m=e.forwardRef(function({as:t="section",level:s,...c},i){const l=e.useContext(o),p=s??l+1,d=t;return e.createElement(o.Provider,{value:Math.min(p,6)},e.createElement(d,a({ref:i},c)))});m.propTypes={as:n.elementType,children:n.node,className:n.string,level:n.number};const u=e.forwardRef((r,t)=>{const s=`h${e.useContext(o)}`;return e.createElement(s,a({ref:t},r))});u.propTypes={children:n.node,className:n.string};export{u as H,m as S};
-//# sourceMappingURL=index-CeDLcdNt.js.map

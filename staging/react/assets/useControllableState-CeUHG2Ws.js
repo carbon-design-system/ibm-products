@@ -1,2 +1,0 @@
-import{r}from"./iframe-CECvNR-E.js";const p=({defaultValue:s,name:i="custom",onChange:o,value:e})=>{const[u,l]=r.useState(typeof e<"u"?e:s),t=r.useRef(null);t.current===null&&(t.current=typeof e<"u");const c=n=>{const f=typeof n=="function"?n(u):n;t.current===!1&&l(f),o&&o(f)};return r.useEffect(()=>{const n=typeof e<"u";t.current,t.current},[i,e]),t.current===!0?[e,c,t.current]:[u,c,t.current]};export{p as u};
-//# sourceMappingURL=useControllableState-CeUHG2Ws.js.map

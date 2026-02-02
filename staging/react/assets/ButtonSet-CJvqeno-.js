@@ -1,2 +1,0 @@
-import{r as l,u as i,c as m,e as u,_ as x,P as e}from"./iframe-CECvNR-E.js";const t=l.forwardRef((a,r)=>{const{children:o,className:c,stacked:n,...d}=a,s=i(),p=m(c,`${s}--btn-set`,{[`${s}--btn-set--stacked`]:n});return u.createElement("div",x({},d,{className:p,ref:r}),o)});t.displayName="ButtonSet";t.propTypes={children:e.node,className:e.string,stacked:e.bool};export{t as B};
-//# sourceMappingURL=ButtonSet-CJvqeno-.js.map

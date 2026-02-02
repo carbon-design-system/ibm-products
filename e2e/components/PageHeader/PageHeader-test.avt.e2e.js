@@ -40,29 +40,24 @@ test.describe('PageHeader @avt', () => {
     });
 
     // The header starts expanded.
-    await pageTitle.waitFor({ state: 'visible' });
     await expect(pageTitle).toBeInViewport();
 
     // The header collapses when the page is scrolled down.
-    const dummyContent = page
-      .locator(`.page-header-stories__dummy-content`)
-      .first();
-    await dummyContent.waitFor({ state: 'visible' });
-    await dummyContent.hover();
+    await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, 600);
-    await page.waitForTimeout(300);
-    await expect(pageTitle).not.toBeInViewport();
-
-    // The header remains collapsed even if scrolled slightly back up.
-    await dummyContent.hover();
-    await page.mouse.wheel(0, -170);
     await page.waitForTimeout(200);
     await expect(pageTitle).not.toBeInViewport();
 
+    // The header remains collapsed even if scrolled slightly back up.
+    await page.locator(`.page-header-stories__dummy-content`).first().hover();
+    await page.mouse.wheel(0, -170);
+    await page.waitForTimeout(100);
+    await expect(pageTitle).not.toBeInViewport();
+
     // The header expands again when scrolled back to the top.
-    await dummyContent.hover();
+    await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -700);
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(200);
     await expect(pageTitle).toBeInViewport();
   });
 
@@ -79,17 +74,13 @@ test.describe('PageHeader @avt', () => {
     const pageTitle = page.getByRole('heading').getByText('Page title');
 
     // The header starts collapsed.
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(200);
     await expect(pageTitle).not.toBeInViewport();
 
     // The header expands when the page is scrolled to the top.
-    const dummyContent = page
-      .locator(`.page-header-stories__dummy-content`)
-      .first();
-    await dummyContent.waitFor({ state: 'visible' });
-    await dummyContent.hover();
+    await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -600);
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(200);
     await expect(pageTitle).toBeInViewport();
   });
 
@@ -113,17 +104,14 @@ test.describe('PageHeader @avt', () => {
     const collapseButton = page.locator(
       `.${pkg.prefix}--page-header__collapse-expand-toggle .${carbon.prefix}--btn--icon-only`
     );
-    await collapseButton.waitFor({ state: 'visible' });
     await collapseButton.click();
 
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(400);
     await expect(pageTitle).not.toBeInViewport();
 
     // The header expands when the cheveron button is toggled open.
-    const expandButton = page.getByLabel('Expand the page header');
-    await expandButton.waitFor({ state: 'visible' });
-    await expandButton.click();
-    await page.waitForTimeout(500);
+    await page.getByLabel('Expand the page header').click();
+    await page.waitForTimeout(400);
     await expect(pageTitle).toBeInViewport();
   });
 

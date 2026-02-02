@@ -512,7 +512,7 @@ export const TabBarWithTabsAndTags = {
         >[Platform]</cds-header-name
       >
     </cds-header>
-    <main>
+    <main class="page-header-story__wrapper">
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${iconLoader(Bee16, { slot: 'icon' })}

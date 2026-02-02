@@ -11,14 +11,14 @@
 // Standard imports.
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-accordion-item;
-$carbon: #{config.$prefix};
+$carbon: #{carbon-config.$prefix};
 
 // Remove top and bottom borders.
 html .#{$block-class} {

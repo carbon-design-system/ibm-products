@@ -13,7 +13,7 @@
 @use '@carbon/type/scss/font-family';
 @use '@carbon/layout' as *;
 @use '@carbon/layout/scss/convert';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../../../global/styles/project-settings' as c4p-settings;
 @use '../variables';
@@ -32,7 +32,7 @@
   padding-inline-start: spacing.$spacing-09;
 }
 
-.#{config.$prefix}--form-item.#{config.$prefix}--checkbox-wrapper.#{variables.$block-class}__customize-columns-checkbox {
+.#{carbon-config.$prefix}--form-item.#{carbon-config.$prefix}--checkbox-wrapper.#{variables.$block-class}__customize-columns-checkbox {
   display: flex;
   flex: initial;
   align-items: center;
@@ -40,7 +40,7 @@
 }
 
 .#{variables.$block-class}__customize-columns-column-list
-  .#{variables.$block-class}__customize-columns-checkbox-wrapper.#{config.$prefix}--form-item {
+  .#{variables.$block-class}__customize-columns-checkbox-wrapper.#{carbon-config.$prefix}--form-item {
   margin-block-end: 0;
 }
 
@@ -64,7 +64,7 @@
   inset-block-start: 0;
   padding-inline-start: spacing.$spacing-08;
 
-  .#{config.$prefix}--checkbox-label-text {
+  .#{carbon-config.$prefix}--checkbox-label-text {
     @include font-family.font-weight('semibold');
   }
 }

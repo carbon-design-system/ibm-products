@@ -15,7 +15,7 @@
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins' as *;
@@ -251,8 +251,8 @@ $motion-duration: $duration-moderate-02;
 
   // buttons inside button sets in the header action area have 8px gap
   .#{$block-class}__header-actions
-    .#{config.$prefix}--btn-set
-    .#{config.$prefix}--btn:not(:first-of-type) {
+    .#{carbon-config.$prefix}--btn-set
+    .#{carbon-config.$prefix}--btn:not(:first-of-type) {
     margin-inline-start: $spacing-03;
   }
 
@@ -261,7 +261,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--wide
-    .#{config.$prefix}--modal-header__heading.#{$block-class}__heading {
+    .#{carbon-config.$prefix}--modal-header__heading.#{$block-class}__heading {
     @include type.type-style('heading-04');
   }
 
@@ -403,27 +403,28 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}--wide .#{$block-class}__content {
     // Specific to the Tearsheet *and* radio buttons,
     // `readOnly` styling is not applying a grey outline.
-    .#{config.$prefix}--radio-button[readonly]
-      + .#{config.$prefix}--radio-button__label
-      .#{config.$prefix}--radio-button__appearance {
+    .#{carbon-config.$prefix}--radio-button[readonly]
+      + .#{carbon-config.$prefix}--radio-button__label
+      .#{carbon-config.$prefix}--radio-button__appearance {
       border-color: $icon-disabled;
     }
 
-    .#{config.$prefix}--select--inline .#{config.$prefix}--select-input {
+    .#{carbon-config.$prefix}--select--inline
+      .#{carbon-config.$prefix}--select-input {
       background-color: transparent;
     }
 
     // and restore the 'light' prop in case light fields are wanted
-    .#{config.$prefix}--text-input--light,
-    .#{config.$prefix}--text-area--light,
-    .#{config.$prefix}--search--light .#{config.$prefix}--search-input,
-    .#{config.$prefix}--select--light .#{config.$prefix}--select-input,
-    .#{config.$prefix}--dropdown--light,
-    .#{config.$prefix}--dropdown--light .#{config.$prefix}--dropdown-list,
+    .#{carbon-config.$prefix}--text-input--light,
+    .#{carbon-config.$prefix}--text-area--light,
+    .#{carbon-config.$prefix}--search--light .#{carbon-config.$prefix}--search-input,
+    .#{carbon-config.$prefix}--select--light .#{carbon-config.$prefix}--select-input,
+    .#{carbon-config.$prefix}--dropdown--light,
+    .#{carbon-config.$prefix}--dropdown--light .#{carbon-config.$prefix}--dropdown-list,
     /* stylelint-disable-next-line prettier/prettier */
-    .#{config.$prefix}--number--light input[type='number'],
-    .#{config.$prefix}--date-picker--light
-      .#{config.$prefix}--date-picker__input {
+    .#{carbon-config.$prefix}--number--light input[type='number'],
+    .#{carbon-config.$prefix}--date-picker--light
+      .#{carbon-config.$prefix}--date-picker__input {
       background-color: $field-02;
     }
   }
@@ -455,9 +456,9 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--has-slug:not(.#{$block-class}--has-close)
-    .#{config.$prefix}--slug,
+    .#{carbon-config.$prefix}--slug,
   &.#{$block-class}--has-ai-label:not(.#{$block-class}--has-close)
-    .#{config.$prefix}--slug {
+    .#{carbon-config.$prefix}--slug {
     inset-inline-end: 0;
     /* stylelint-disable-next-line carbon/layout-use */
     margin-block: 6px;

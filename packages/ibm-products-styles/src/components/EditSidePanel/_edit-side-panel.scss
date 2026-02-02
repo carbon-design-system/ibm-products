@@ -8,7 +8,7 @@
 // Standard imports.
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
@@ -21,11 +21,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-side-panel;
 $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 
 .#{$block-class} {
-  .#{config.$prefix}--form.#{$block-class}__form {
+  .#{carbon-config.$prefix}--form.#{$block-class}__form {
     padding-block-start: $spacing-05;
   }
 
-  .#{$block-class}__form.#{config.$prefix}--fieldset {
+  .#{$block-class}__form.#{carbon-config.$prefix}--fieldset {
     padding-block-start: $spacing-03;
   }
 
@@ -44,7 +44,7 @@ $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
   }
 
   &.#{$side-panel-block-class}
-    .#{config.$prefix}--btn.#{$side-panel-block-class}__close-button {
+    .#{carbon-config.$prefix}--btn.#{$side-panel-block-class}__close-button {
     display: none;
   }
 }

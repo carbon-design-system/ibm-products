@@ -18,7 +18,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/modal' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use 'sass:map';
 
@@ -34,7 +34,7 @@ $motion-duration: $duration-moderate-02;
 :host(#{$prefix}-tearsheet) {
   --content-padding: #{$spacing-05};
 
-  @extend .#{config.$prefix}--modal;
+  @extend .#{carbon-config.$prefix}--modal;
   @extend .#{$prefix}--tearsheet;
 
   .#{$block-class}__header,
@@ -75,12 +75,12 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__buttons[hidden] {
-    @extend .#{config.$prefix}--visually-hidden;
+    @extend .#{carbon-config.$prefix}--visually-hidden;
 
     display: none;
   }
 
-  .#{$block-class}__buttons ::slotted(#{config.$prefix}-button) {
+  .#{$block-class}__buttons ::slotted(#{carbon-config.$prefix}-button) {
     @extend .#{$block-class-action-set}__action-button;
 
     flex: 0 1 25%;
@@ -88,13 +88,14 @@ $motion-duration: $duration-moderate-02;
     max-inline-size: to-rem(232px);
   }
 
-  .#{$block-class}__buttons ::slotted(#{config.$prefix}-button[kind='ghost']) {
+  .#{$block-class}__buttons
+    ::slotted(#{carbon-config.$prefix}-button[kind='ghost']) {
     flex: 1 1 25%;
     max-inline-size: none;
   }
 
-  .#{$block-class}__buttons ::slotted(#{config.$prefix}-button[hidden]) {
-    @extend .#{config.$prefix}--visually-hidden;
+  .#{$block-class}__buttons ::slotted(#{carbon-config.$prefix}-button[hidden]) {
+    @extend .#{carbon-config.$prefix}--visually-hidden;
 
     display: none;
   }
@@ -104,7 +105,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   ::slotted([slot='decorator']),
-  ::slotted(#{config.$prefix}-slug) {
+  ::slotted(#{carbon-config.$prefix}-slug) {
     position: absolute;
     display: flex;
     inset-block-start: to-rem(10px);
@@ -172,7 +173,7 @@ $motion-duration: $duration-moderate-02;
 }
 
 :host(#{$prefix}-tearsheet[hidden]) {
-  @extend .#{config.$prefix}--visually-hidden;
+  @extend .#{carbon-config.$prefix}--visually-hidden;
 }
 
 :host(#{$prefix}-tearsheet[slug]),
@@ -261,7 +262,7 @@ $motion-duration: $duration-moderate-02;
     }
   }
 
-  .#{config.$prefix}--modal-header__heading.#{$block-class}__heading {
+  .#{carbon-config.$prefix}--modal-header__heading.#{$block-class}__heading {
     @include type.type-style('heading-04');
   }
 
@@ -284,34 +285,35 @@ $motion-duration: $duration-moderate-02;
 
   .#{$block-class}__content {
     // Revert background color overridden by Carbon's modal - https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/modal/_modal.scss#L54
-    .#{config.$prefix}--pagination,
-    .#{config.$prefix}--pagination__control-buttons,
-    .#{config.$prefix}--text-input,
-    .#{config.$prefix}--text-area,
-    .#{config.$prefix}--search-input,
-    .#{config.$prefix}--select-input,
-    .#{config.$prefix}--dropdown,
-    .#{config.$prefix}--dropdown-list,
-    .#{config.$prefix}--number input[type='number'],
-    .#{config.$prefix}--date-picker__input {
+    .#{carbon-config.$prefix}--pagination,
+    .#{carbon-config.$prefix}--pagination__control-buttons,
+    .#{carbon-config.$prefix}--text-input,
+    .#{carbon-config.$prefix}--text-area,
+    .#{carbon-config.$prefix}--search-input,
+    .#{carbon-config.$prefix}--select-input,
+    .#{carbon-config.$prefix}--dropdown,
+    .#{carbon-config.$prefix}--dropdown-list,
+    .#{carbon-config.$prefix}--number input[type='number'],
+    .#{carbon-config.$prefix}--date-picker__input {
       background-color: $field;
     }
 
-    .#{config.$prefix}--select--inline .#{config.$prefix}--select-input {
+    .#{carbon-config.$prefix}--select--inline
+      .#{carbon-config.$prefix}--select-input {
       background-color: transparent;
     }
 
     // and restore the 'light' prop in case light fields are wanted
-    .#{config.$prefix}--text-input--light,
-  .#{config.$prefix}--text-area--light,
-  .#{config.$prefix}--search--light .#{config.$prefix}--search-input,
-  .#{config.$prefix}--select--light .#{config.$prefix}--select-input,
-  .#{config.$prefix}--dropdown--light,
-  .#{config.$prefix}--dropdown--light .#{config.$prefix}--dropdown-list,
+    .#{carbon-config.$prefix}--text-input--light,
+  .#{carbon-config.$prefix}--text-area--light,
+  .#{carbon-config.$prefix}--search--light .#{carbon-config.$prefix}--search-input,
+  .#{carbon-config.$prefix}--select--light .#{carbon-config.$prefix}--select-input,
+  .#{carbon-config.$prefix}--dropdown--light,
+  .#{carbon-config.$prefix}--dropdown--light .#{carbon-config.$prefix}--dropdown-list,
   /* stylelint-disable-next-line prettier/prettier */
-  .#{config.$prefix}--number--light input[type='number'],
-  .#{config.$prefix}--date-picker--light
-    .#{config.$prefix}--date-picker__input {
+  .#{carbon-config.$prefix}--number--light input[type='number'],
+  .#{carbon-config.$prefix}--date-picker--light
+    .#{carbon-config.$prefix}--date-picker__input {
       background-color: $field-02;
     }
   }
@@ -323,10 +325,10 @@ $motion-duration: $duration-moderate-02;
 
 :host(#{$prefix}-tearsheet[width='narrow'])
   .#{$block-class}__buttons[actions-multiple='single']
-  ::slotted(#{config.$prefix}-button),
+  ::slotted(#{carbon-config.$prefix}-button),
 :host(#{$prefix}-tearsheet[width='narrow'])
   .#{$block-class}__buttons[actions-multiple='double']
-  ::slotted(#{config.$prefix}-button) {
+  ::slotted(#{carbon-config.$prefix}-button) {
   // double and single on lg use 50%
   flex: 0 1 50%;
   max-inline-size: none;
@@ -334,7 +336,7 @@ $motion-duration: $duration-moderate-02;
 
 :host(#{$prefix}-tearsheet[width='narrow'])
   .#{$block-class}__buttons
-  ::slotted(#{config.$prefix}-button) {
+  ::slotted(#{carbon-config.$prefix}-button) {
   block-size: $spacing-10;
 }
 :host(#{$prefix}-tearsheet[width='narrow']) {

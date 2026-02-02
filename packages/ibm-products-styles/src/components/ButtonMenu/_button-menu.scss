@@ -10,7 +10,7 @@
 @use '@carbon/styles/scss/components/button/tokens' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as c4p-settings;
 
@@ -23,26 +23,26 @@ $block-class: #{c4p-settings.$pkg-prefix}--button-menu;
 .#{$block-class} {
   min-inline-size: 160px;
   &.#{$block-class}__wrapper--primary,
-  &.#{$block-class}__wrapper--primary.#{config.$prefix}--overflow-menu.#{config.$prefix}--overflow-menu--open {
+  &.#{$block-class}__wrapper--primary.#{carbon-config.$prefix}--overflow-menu.#{carbon-config.$prefix}--overflow-menu--open {
     background-color: $button-primary;
   }
-  &.#{config.$prefix}--overflow-menu.#{$block-class}__wrapper--primary:hover {
+  &.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__wrapper--primary:hover {
     background-color: $button-primary-hover;
   }
 
   &.#{$block-class}__wrapper--tertiary,
-  &.#{$block-class}__wrapper--tertiary.#{config.$prefix}--overflow-menu.#{config.$prefix}--overflow-menu--open {
+  &.#{$block-class}__wrapper--tertiary.#{carbon-config.$prefix}--overflow-menu.#{carbon-config.$prefix}--overflow-menu--open {
     background-color: $button-tertiary;
   }
-  &.#{config.$prefix}--overflow-menu.#{$block-class}__wrapper--tertiary:hover {
+  &.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__wrapper--tertiary:hover {
     background-color: $button-tertiary-hover;
   }
 
   &.#{$block-class}__wrapper--ghost,
-  &.#{$block-class}__wrapper--ghost.#{config.$prefix}--overflow-menu.#{config.$prefix}--overflow-menu--open {
+  &.#{$block-class}__wrapper--ghost.#{carbon-config.$prefix}--overflow-menu.#{carbon-config.$prefix}--overflow-menu--open {
     background-color: transparent;
   }
-  &.#{config.$prefix}--overflow-menu.#{$block-class}__wrapper--ghost:hover {
+  &.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__wrapper--ghost:hover {
     background-color: $layer-hover;
   }
 
@@ -57,6 +57,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--button-menu;
   }
 }
 
-.#{$block-class}__options.#{config.$prefix}--overflow-menu-options::after {
+.#{$block-class}__options.#{carbon-config.$prefix}--overflow-menu-options::after {
   content: initial;
 }

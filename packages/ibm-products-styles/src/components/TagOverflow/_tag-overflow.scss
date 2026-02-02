@@ -12,7 +12,7 @@
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
@@ -70,7 +70,7 @@ $block-class-modal: #{$block-class}-modal;
   display: inline-block;
   vertical-align: bottom;
 
-  .#{config.$prefix}--tag.#{config.$prefix}--tag--interactive {
+  .#{carbon-config.$prefix}--tag.#{carbon-config.$prefix}--tag--interactive {
     border: 0;
   }
 
@@ -102,7 +102,7 @@ $block-class-modal: #{$block-class}-modal;
     font-family: inherit;
   }
 
-  .#{$block-class-popover}__show-all-tags-link.#{config.$prefix}--link:visited {
+  .#{$block-class-popover}__show-all-tags-link.#{carbon-config.$prefix}--link:visited {
     display: inline-block;
     margin: $spacing-03 0 $spacing-02; // to match the tags
     color: $link-inverse;
@@ -137,13 +137,13 @@ $block-class-modal: #{$block-class}-modal;
   }
 
   .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--tag
-    .#{config.$prefix}--tag {
+    .#{carbon-config.$prefix}--tag {
     background-color: $background-inverse-hover;
   }
 
   .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--default,
   .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--default
-    .#{config.$prefix}--tag {
+    .#{carbon-config.$prefix}--tag {
     @include type.type-style('body-compact-01');
 
     display: block;
@@ -157,12 +157,12 @@ $block-class-modal: #{$block-class}-modal;
     min-inline-size: initial;
   }
 
-  .#{$block-class-popover}__tag .#{config.$prefix}--tag__close-icon {
-    // undo override by .#{config.$prefix}--tooltip button
+  .#{$block-class-popover}__tag .#{carbon-config.$prefix}--tag__close-icon {
+    // undo override by .#{carbon-config.$prefix}--tooltip button
     padding: 0;
   }
 
-  .#{$block-class-popover}__tag .#{config.$prefix}--tag--high-contrast {
+  .#{$block-class-popover}__tag .#{carbon-config.$prefix}--tag--high-contrast {
     background-color: $background;
     color: $text-primary;
   }

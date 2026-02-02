@@ -9,7 +9,7 @@
 
 // Standard imports.
 @use '@carbon/styles/scss/colors' as *;
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as *;
 
@@ -117,9 +117,9 @@ $block-class: #{$pkg-prefix}--status-icon;
 @each $theme in $themes {
   @each $icon in $icons {
     @each $theme-key in $themes {
-      .#{config.$prefix}--btn--ghost:not([disabled])
+      .#{carbon-config.$prefix}--btn--ghost:not([disabled])
         .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
-      .#{config.$prefix}--btn.#{config.$prefix}--btn--icon-only.#{config.$prefix}--tooltip__trigger
+      .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only.#{carbon-config.$prefix}--tooltip__trigger
         .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
       .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon} {
         @if $icon == in-progress {

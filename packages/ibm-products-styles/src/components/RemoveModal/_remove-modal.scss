@@ -7,16 +7,18 @@
 
 // Standard imports.
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 @use '../../global/styles/project-settings' as c4p-settings;
 
 $block-class: #{c4p-settings.$pkg-prefix}--remove-modal;
 
-.#{$block-class} .#{config.$prefix}--modal-footer .#{config.$prefix}--btn {
+.#{$block-class}
+  .#{carbon-config.$prefix}--modal-footer
+  .#{carbon-config.$prefix}--btn {
   max-inline-size: none;
 }
 
-.#{$block-class} .#{config.$prefix}--modal-content {
+.#{$block-class} .#{carbon-config.$prefix}--modal-content {
   padding-inline-end: $spacing-05;
 }
 

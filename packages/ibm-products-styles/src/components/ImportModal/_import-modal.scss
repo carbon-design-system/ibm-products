@@ -9,30 +9,34 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as c4p-settings;
 
 $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
 
-.#{$block-class} .#{config.$prefix}--modal-close {
+.#{$block-class} .#{carbon-config.$prefix}--modal-close {
   display: none;
 }
 
-.#{$block-class} .#{config.$prefix}--modal-footer .#{config.$prefix}--btn {
+.#{$block-class}
+  .#{carbon-config.$prefix}--modal-footer
+  .#{carbon-config.$prefix}--btn {
   max-inline-size: none;
 }
 
-.#{$block-class}.#{config.$prefix}--modal .#{config.$prefix}--modal-content {
+.#{$block-class}.#{carbon-config.$prefix}--modal
+  .#{carbon-config.$prefix}--modal-content {
   padding-inline-end: $spacing-05;
 }
 
-.#{config.$prefix}--file .#{config.$prefix}--file-container,
-.#{config.$prefix}--file ~ .#{config.$prefix}--file-container {
+.#{carbon-config.$prefix}--file .#{carbon-config.$prefix}--file-container,
+.#{carbon-config.$prefix}--file ~ .#{carbon-config.$prefix}--file-container {
   margin-block-start: 0;
 }
 
-.#{config.$prefix}--modal-container--sm .#{config.$prefix}--modal-header {
+.#{carbon-config.$prefix}--modal-container--sm
+  .#{carbon-config.$prefix}--modal-header {
   padding-inline-end: calc(20% - #{$spacing-05});
 }
 
@@ -40,7 +44,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
   display: flex;
 }
 
-.#{$block-class}__import-button.#{config.$prefix}--btn {
+.#{$block-class}__import-button.#{carbon-config.$prefix}--btn {
   margin-inline-start: $spacing-03;
 }
 
@@ -64,15 +68,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
   padding-inline-end: calc(20% - #{$spacing-05});
 }
 
-.#{$block-class} .#{config.$prefix}--file__selected-file {
+.#{$block-class} .#{carbon-config.$prefix}--file__selected-file {
   background: $layer-02;
   max-inline-size: none;
 }
 
-.#{$block-class} .#{config.$prefix}--file {
+.#{$block-class} .#{carbon-config.$prefix}--file {
   margin-block-end: $spacing-05;
 }
 
-.#{$block-class} .#{config.$prefix}--text-input:disabled {
+.#{$block-class} .#{carbon-config.$prefix}--text-input:disabled {
   background: $layer-02;
 }

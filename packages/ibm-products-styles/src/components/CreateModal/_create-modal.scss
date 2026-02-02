@@ -10,15 +10,17 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as c4p-settings;
 
-.#{c4p-settings.$pkg-prefix}--create-modal .#{config.$prefix}--modal-close {
+.#{c4p-settings.$pkg-prefix}--create-modal
+  .#{carbon-config.$prefix}--modal-close {
   display: none;
 }
 
-.#{c4p-settings.$pkg-prefix}--create-modal .#{config.$prefix}--modal-container {
+.#{c4p-settings.$pkg-prefix}--create-modal
+  .#{carbon-config.$prefix}--modal-container {
   @include breakpoint(md) {
     max-block-size: 95%;
   }
@@ -27,7 +29,8 @@
   }
 }
 
-.#{c4p-settings.$pkg-prefix}--create-modal .#{config.$prefix}--modal-header {
+.#{c4p-settings.$pkg-prefix}--create-modal
+  .#{carbon-config.$prefix}--modal-header {
   border-block-end: 1px solid $layer-accent-01;
   margin-block-end: 0;
   padding-block-end: $spacing-03;
@@ -35,8 +38,8 @@
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal
-  .#{config.$prefix}--modal-footer
-  .#{config.$prefix}--btn {
+  .#{carbon-config.$prefix}--modal-footer
+  .#{carbon-config.$prefix}--btn {
   max-inline-size: none;
 }
 
@@ -61,7 +64,8 @@
   padding-inline-end: calc(20% - #{$spacing-05});
 }
 
-.#{c4p-settings.$pkg-prefix}--create-modal__form .#{config.$prefix}--fieldset {
+.#{c4p-settings.$pkg-prefix}--create-modal__form
+  .#{carbon-config.$prefix}--fieldset {
   margin-block-end: 0;
   min-inline-size: 100%;
 }

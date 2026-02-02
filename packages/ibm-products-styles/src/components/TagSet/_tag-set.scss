@@ -10,7 +10,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins' as *;
@@ -57,11 +57,12 @@ $block-class-modal: #{$_block-class}-modal;
   .#{$block-class-overflow} {
     display: inline-block;
     vertical-align: bottom;
-    .#{config.$prefix}--tag.#{config.$prefix}--tag--interactive {
+    .#{carbon-config.$prefix}--tag.#{carbon-config.$prefix}--tag--interactive {
       border: 0;
     }
 
-    .#{config.$prefix}--popover .#{config.$prefix}--popover-content {
+    .#{carbon-config.$prefix}--popover
+      .#{carbon-config.$prefix}--popover-content {
       padding: $spacing-05;
     }
   }
@@ -110,15 +111,15 @@ $block-class-modal: #{$_block-class}-modal;
     font-family: inherit;
   }
 
-  .#{$block-class-overflow}__show-all-tags-link.#{config.$prefix}--link:visited {
+  .#{$block-class-overflow}__show-all-tags-link.#{carbon-config.$prefix}--link:visited {
     display: inline-block;
     margin: $spacing-03 0 $spacing-02; // to match the tags
     color: $link-inverse;
   }
 
-  .#{config.$prefix}--link:active,
-  .#{config.$prefix}--link:active:visited,
-  .#{config.$prefix}--link:active:visited:hover {
+  .#{carbon-config.$prefix}--link:active,
+  .#{carbon-config.$prefix}--link:active:visited,
+  .#{carbon-config.$prefix}--link:active:visited:hover {
     color: $text-inverse;
   }
 
@@ -133,13 +134,13 @@ $block-class-modal: #{$_block-class}-modal;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
-    .#{config.$prefix}--tag {
+    .#{carbon-config.$prefix}--tag {
     background-color: $background-inverse-hover;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default
-    .#{config.$prefix}--tag {
+    .#{carbon-config.$prefix}--tag {
     @include type.type-style('body-compact-01');
 
     display: block;
@@ -155,21 +156,23 @@ $block-class-modal: #{$_block-class}-modal;
     white-space: nowrap;
   }
 
-  .#{$block-class-overflow}__tag .#{config.$prefix}--tag__close-icon {
-    // undo override by .#{config.$prefix}--tooltip button
+  .#{$block-class-overflow}__tag .#{carbon-config.$prefix}--tag__close-icon {
+    // undo override by .#{carbon-config.$prefix}--tooltip button
     padding: 0;
   }
 
-  .#{$block-class-overflow}__tag .#{config.$prefix}--tag--high-contrast {
+  .#{$block-class-overflow}__tag .#{carbon-config.$prefix}--tag--high-contrast {
     background-color: $background;
     color: $text-primary;
   }
 
-  .#{$block-class-overflow}__tag .#{config.$prefix}--tag__close-icon:hover {
+  .#{$block-class-overflow}__tag
+    .#{carbon-config.$prefix}--tag__close-icon:hover {
     background-color: $background-hover;
   }
 
-  .#{$block-class-overflow}__tag .#{config.$prefix}--tag__close-icon:focus {
+  .#{$block-class-overflow}__tag
+    .#{carbon-config.$prefix}--tag__close-icon:focus {
     box-shadow: inset 0 0 0 $spacing-01 $focus;
   }
 }

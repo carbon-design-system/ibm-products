@@ -7,7 +7,7 @@
 
 // Standard imports.
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
@@ -20,7 +20,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--search-bar;
   display: flex;
 
   .#{c4p-settings.$pkg-prefix}--search-bar__scopes {
-    .#{config.$prefix}--label {
+    .#{carbon-config.$prefix}--label {
       position: absolute;
     }
   }

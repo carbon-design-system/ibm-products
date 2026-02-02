@@ -30,7 +30,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as c4p-settings;
 
@@ -157,7 +157,7 @@ $purple-3: #7433e3;
 }
 
 // Button with crossroads icon
-.#{$block-class}__carousel .#{config.$prefix}--btn--tertiary {
+.#{$block-class}__carousel .#{carbon-config.$prefix}--btn--tertiary {
   border-color: $white-0;
   color: $white-0;
 
@@ -180,7 +180,7 @@ $purple-3: #7433e3;
   }
 }
 
-.#{$block-class}__carousel .#{config.$prefix}--btn--ghost {
+.#{$block-class}__carousel .#{carbon-config.$prefix}--btn--ghost {
   color: $blue-30;
   margin-inline-start: calc(-1 * $spacing-05);
 

@@ -8,7 +8,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as *;
 
@@ -46,7 +46,7 @@ $block-class: #{$pkg-prefix}--filter-summary;
 }
 
 .#{$block-class}__expanded
-  .#{$block-class}__clear-all-button.#{config.$prefix}--btn {
+  .#{$block-class}__clear-all-button.#{carbon-config.$prefix}--btn {
   margin-inline-end: $spacing-07;
 }
 

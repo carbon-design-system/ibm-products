@@ -7,7 +7,7 @@
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use './variables';
@@ -48,7 +48,7 @@
   padding-inline-end: 0;
 }
 
-.#{variables.$block-class}__row-expander.#{config.$prefix}--btn {
+.#{variables.$block-class}__row-expander.#{carbon-config.$prefix}--btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +62,7 @@
 }
 
 .#{variables.$block-class}
-  .#{config.$prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr:hover
   + .#{variables.$block-class}__expanded-row,
@@ -75,29 +75,29 @@
 }
 
 .#{variables.$block-class}
-  .#{config.$prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr:hover
   td.#{variables.$block-class}__expanded-row-cell-wrapper,
 .#{variables.$block-class}
-  .#{config.$prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   td.#{variables.$block-class}__expanded-row-cell-wrapper,
 .#{variables.$block-class}
-  .#{config.$prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   .#{variables.$block-class}__carbon-row-expanded
   td.#{variables.$block-class}__expandable-row-cell {
   border: none;
 }
 
 .#{variables.$block-class}
-  .#{config.$prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   .#{variables.$block-class}__carbon-row-expanded:hover
   td:not(.#{variables.$block-class}__expandable-row-cell) {
   border-block-end: 1px solid $border-subtle-02;
 }
 
 .#{variables.$block-class}
-  .#{config.$prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   td.#{variables.$block-class}__expanded-row-cell-wrapper {
   padding: 0;
 }

@@ -13,7 +13,7 @@
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as c4p-settings;
 
@@ -148,8 +148,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   position: relative;
 }
 
-.#{$block-class} .#{config.$prefix}--slug,
-.#{$block-class} .#{config.$prefix}--ai-label {
+.#{$block-class} .#{carbon-config.$prefix}--slug,
+.#{$block-class} .#{carbon-config.$prefix}--ai-label {
   position: absolute;
   inset-block-start: $spacing-05;
   inset-inline-end: $spacing-05;
@@ -160,8 +160,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   inset-block-start: $spacing-05;
   inset-inline-end: $spacing-05;
 
-  .#{config.$prefix}--slug,
-  .#{config.$prefix}--ai-label {
+  .#{carbon-config.$prefix}--slug,
+  .#{carbon-config.$prefix}--ai-label {
     position: relative;
     inset-block-start: unset;
     inset-inline-end: unset;
@@ -188,8 +188,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   position: relative;
 }
 
-.#{$block-class}__clickable .#{config.$prefix}--slug,
-.#{$block-class}__clickable .#{config.$prefix}--slug-icon {
+.#{$block-class}__clickable .#{carbon-config.$prefix}--slug,
+.#{$block-class}__clickable .#{carbon-config.$prefix}--slug-icon {
   pointer-events: none;
 }
 
@@ -229,11 +229,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   z-index: 1;
 }
 
-.#{$block-class} .#{config.$prefix}--slug-icon rect {
+.#{$block-class} .#{carbon-config.$prefix}--slug-icon rect {
   stroke: $icon-primary;
 }
 
-.#{$block-class} .#{config.$prefix}--slug-icon path {
+.#{$block-class} .#{carbon-config.$prefix}--slug-icon path {
   fill: $icon-primary;
 }
 

@@ -13,7 +13,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities';
-@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 // Standard imports.
 @use '../../global/styles/project-settings' as *;
@@ -329,18 +329,19 @@ $duration: 1000ms;
     }
   }
 
-  .#{$block-class}__breadcrumb .#{config.$prefix}--breadcrumb-item {
+  .#{$block-class}__breadcrumb .#{carbon-config.$prefix}--breadcrumb-item {
     margin-inline-end: $spacing-02;
   }
 
-  .#{$block-class}__breadcrumb .#{config.$prefix}--breadcrumb-item::after {
+  .#{$block-class}__breadcrumb
+    .#{carbon-config.$prefix}--breadcrumb-item::after {
     margin-inline-start: $spacing-02;
   }
 
-  .#{$block-class}__breadcrumb .#{config.$prefix}--breadcrumb-item,
+  .#{$block-class}__breadcrumb .#{carbon-config.$prefix}--breadcrumb-item,
   .#{$block-class}__breadcrumb
-    .#{config.$prefix}--breadcrumb-item
-    .#{config.$prefix}--link {
+    .#{carbon-config.$prefix}--breadcrumb-item
+    .#{carbon-config.$prefix}--link {
     @include type.type-style('label-01');
   }
 
@@ -505,8 +506,8 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__page-actions
-    .#{config.$prefix}--btn-set
-    .#{config.$prefix}--btn {
+    .#{carbon-config.$prefix}--btn-set
+    .#{carbon-config.$prefix}--btn {
     inline-size: initial;
   }
 
@@ -564,14 +565,15 @@ $duration: 1000ms;
     @include type.type-style('body-01');
   }
 
-  .#{$block-class}__subtitle-tooltip .#{config.$prefix}--definition-term {
+  .#{$block-class}__subtitle-tooltip
+    .#{carbon-config.$prefix}--definition-term {
     border-block-end: 0;
     letter-spacing: inherit;
   }
 
   // overwrites the existing styles to make the popover bigger because in some cases the narrow space can be too constricting for the header
   .#{$block-class}__subtitle-tooltip
-    .#{config.$prefix}--popover-content.#{config.$prefix}--definition-tooltip {
+    .#{carbon-config.$prefix}--popover-content.#{carbon-config.$prefix}--definition-tooltip {
     max-inline-size: fit-content;
   }
 
@@ -606,13 +608,13 @@ $duration: 1000ms;
     flex-wrap: wrap-reverse;
     margin-block-start: 0;
 
-    .#{config.$prefix}--content-switcher {
+    .#{carbon-config.$prefix}--content-switcher {
       box-sizing: content-box;
       padding-block-end: $spacing-05;
     }
   }
 
-  .#{$block-class}__navigation-row .#{config.$prefix}--tab-content {
+  .#{$block-class}__navigation-row .#{carbon-config.$prefix}--tab-content {
     display: none; /* need to figure out how to handle the tab content */
   }
 
@@ -658,7 +660,8 @@ $duration: 1000ms;
     text-align: initial;
   }
 
-  .#{$block-class}__navigation-row .#{config.$prefix}--content-switcher-btn {
+  .#{$block-class}__navigation-row
+    .#{carbon-config.$prefix}--content-switcher-btn {
     background-color: $background;
   }
 
@@ -669,7 +672,8 @@ $duration: 1000ms;
     inset-inline-end: 0;
   }
 
-  .#{$block-class}__collapse-expand-toggle .#{config.$prefix}--btn__icon {
+  .#{$block-class}__collapse-expand-toggle
+    .#{carbon-config.$prefix}--btn__icon {
     // transform: rotate(-90deg); // accordion does this, but it feels odd in page header
     transition: all $duration-slow-01 motion(standard, productive);
   }
@@ -691,17 +695,17 @@ $duration: 1000ms;
   inset-block-start: var(--#{$block-class}--tagset-tooltip-offset) !important;
 }
 
-.#{$block-class}__navigation-tags-overflow.#{config.$prefix}--tooltip {
+.#{$block-class}__navigation-tags-overflow.#{carbon-config.$prefix}--tooltip {
   z-index: $z-index-header-minus;
 }
 
-.#{$block-class}__action-bar-menu-options.#{config.$prefix}--overflow-menu-options,
-.#{config.$prefix}--breadcrumb-menu-options.#{config.$prefix}--overflow-menu-options,
-.#{$block-class}__button-set-menu-options.#{config.$prefix}--overflow-menu-options {
+.#{$block-class}__action-bar-menu-options.#{carbon-config.$prefix}--overflow-menu-options,
+.#{carbon-config.$prefix}--breadcrumb-menu-options.#{carbon-config.$prefix}--overflow-menu-options,
+.#{$block-class}__button-set-menu-options.#{carbon-config.$prefix}--overflow-menu-options {
   z-index: $z-index-header-minus;
 }
 
 .#{$block-class}__button-set-menu-options
-  > button.#{config.$prefix}--menu-button__trigger {
+  > button.#{carbon-config.$prefix}--menu-button__trigger {
   min-inline-size: 0;
 }

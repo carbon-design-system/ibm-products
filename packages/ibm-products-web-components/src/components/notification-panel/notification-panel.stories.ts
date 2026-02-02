@@ -16,6 +16,7 @@ import { prefix, carbonPrefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/ui-shell/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
+import './../truncated-text/index.js';
 import { UnreadNotificationBell } from './_story-assets/unread-notification-bell';
 import User20 from '@carbon/icons/es/user/20.js';
 import Notification20 from '@carbon/icons/es/notification/20.js';
@@ -279,7 +280,14 @@ const defaultTemplate = {
                     >
                       ${item.title}
                     </h4>
-                    <div slot="description">${item.description}</div>
+                    <c4p-truncated-text
+                      slot="description"
+                      value=${item.description}
+                      lines="2"
+                      type="expand"
+                      expand-label="Read more"
+                      collapse-label="Read less"
+                    />
                   </c4p-notification>
                 `;
               })}
@@ -308,7 +316,14 @@ const defaultTemplate = {
                     >
                       ${item.title}
                     </h4>
-                    <div slot="description">${item.description}</div>
+                    <c4p-truncated-text
+                      slot="description"
+                      value=${item.description}
+                      lines="2"
+                      type="expand"
+                      expand-label="Read more"
+                      collapse-label="Read less"
+                    />
                   </c4p-notification>
                 `;
               })}

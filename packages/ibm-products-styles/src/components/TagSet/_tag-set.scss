@@ -72,6 +72,11 @@ $block-class-modal: #{$_block-class}-modal;
     max-inline-size: 0;
     visibility: hidden;
   }
+
+  .#{carbon-config.$prefix}--tag {
+    margin-block-end: $spacing-03;
+    margin-inline-end: $spacing-03;
+  }
 }
 
 @include block-wrap('#{$block-class-modal}') {
@@ -95,6 +100,13 @@ $block-class-modal: #{$_block-class}-modal;
   .#{$block-class-modal}__header {
     margin-inline-end: $spacing-05;
     padding-inline-end: 0;
+  }
+
+  .#{$block-class-modal}__body {
+    .#{carbon-config.$prefix}--tag {
+      margin-block-end: $spacing-03;
+      margin-inline-end: $spacing-03;
+    }
   }
 }
 

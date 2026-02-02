@@ -709,3 +709,420 @@ $duration: 1000ms;
   > button.#{carbon-config.$prefix}--menu-button__trigger {
   min-inline-size: 0;
 }
+
+/// Experimental Page header styles
+/// @access public
+/// @group page-header
+@include block-wrap(#{$block-class}__next) {
+  &.#{$block-class} {
+    position: sticky;
+    background-color: $layer-01;
+    border-block-end: 1px solid $border-subtle-01;
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$pkg-prefix}-page-header-header-top);
+  }
+
+  .#{$block-class}__breadcrumb-bar {
+    position: sticky;
+    z-index: 1;
+    background-color: $layer;
+    block-size: to-rem(40px);
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$pkg-prefix}-page-header-breadcrumb-top);
+  }
+
+  .#{$block-class}__breadcrumb-bar .#{$carbon-prefix}--subgrid,
+  .#{$block-class}__breadcrumb-bar .#{$carbon-prefix}--css-grid {
+    block-size: 100%;
+  }
+
+  .#{$block-class}__breadcrumb-bar
+    .#{$carbon-prefix}--css-grid
+    .#{$carbon-prefix}--css-grid-column {
+    block-size: to-rem(40px);
+  }
+
+  .#{$block-class}__breadcrumb-bar
+    .#{$carbon-prefix}--css-grid
+    .#{$carbon-prefix}--css-grid-column,
+  .#{$block-class}__breadcrumb-bar .#{$block-class}__breadcrumb-container {
+    block-size: to-rem(40px);
+
+    .#{$block-class}__breadcrumb-wrapper {
+      align-items: center;
+      block-size: inherit;
+    }
+  }
+
+  .#{$block-class}__breadcrumb-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__breadcrumb__actions-flush {
+    .#{$carbon-prefix}--css-grid {
+      padding-inline-end: 0;
+    }
+
+    .#{$carbon-prefix}--css-grid-column {
+      margin-inline-end: 0;
+    }
+  }
+
+  .#{$block-class}__breadcrumb-bar-border {
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class}__breadcrumb__icon {
+    margin-inline-end: $spacing-03;
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+
+  .#{$block-class}__breadcrumb__actions {
+    display: inline-flex;
+    justify-content: flex-end;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__breadcrumb__content-actions {
+    inline-size: fit-content;
+    margin-inline-end: $spacing-04;
+  }
+
+  .#{$block-class}__breadcrumb-wrapper {
+    display: inline-flex;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__breadcrumb-wrapper .#{$block-class}-breadcrumb-overflow {
+    inline-size: 100%;
+    .#{$carbon-prefix}--breadcrumb {
+      display: flex;
+    }
+  }
+
+  .#{$block-class}__breadcrumb-wrapper
+    .#{$block-class}-breadcrumb-overflow-item {
+    display: none;
+    opacity: 0;
+  }
+  .#{$block-class}__breadcrumb-wrapper
+    .#{$block-class}-overflow-breadcrumb-item-with-items {
+    display: flex;
+    opacity: 1;
+  }
+
+  .#{$block-class}__content {
+    padding: $spacing-06 0;
+    background-color: $layer;
+  }
+
+  .#{$block-class}__content__title-wrapper {
+    @include breakpoint-down(md) {
+      display: flex;
+      flex-direction: column;
+      grid-gap: $spacing-05;
+    }
+
+    display: grid;
+    gap: $spacing-05;
+    grid-template-columns: auto minmax(
+        var(--page-header-title-grid-width, 0),
+        1fr
+      );
+    margin-block-end: $spacing-05;
+    min-block-size: to-rem(40px);
+  }
+
+  .#{$block-class}__content__start {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-05;
+  }
+
+  .#{$block-class}__content__title-container {
+    display: flex;
+  }
+
+  .#{$block-class}__content__title-container
+    .#{$carbon-prefix}--definition-term {
+    border-block-end: none;
+  }
+
+  .#{$block-class}__content__contextual-actions {
+    display: flex;
+  }
+
+  .#{$block-class}__content__title {
+    @include type.type-style('productive-heading-04');
+
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-inline-size: to-rem(640px);
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+
+  .#{$block-class}__content:has(.#{$block-class}__content__contextual-actions)
+    .#{$block-class}__content__title {
+    -webkit-line-clamp: 1;
+  }
+
+  .#{$block-class}__content__icon {
+    margin-inline-end: $spacing-05;
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+
+  .#{$block-class}__content__page-actions {
+    display: flex;
+    justify-content: right;
+    /* stylelint-disable-next-line carbon/motion-easing-use */
+    transition: opacity motion(standard, productive) $duration-moderate-02;
+
+    &.#{$block-class}__content__page-actions--clipped {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    @include breakpoint-down('md') {
+      justify-content: left;
+      margin-block-start: 0;
+    }
+  }
+
+  .#{$block-class}__content__page-actions
+    .#{$carbon-prefix}--menu-button__trigger:not(
+      .#{$carbon-prefix}--btn--ghost
+    ) {
+    min-inline-size: 0;
+  }
+
+  .#{$block-class}__content__subtitle {
+    @include type.type-style('productive-heading-03');
+
+    margin-block-end: $spacing-03;
+  }
+
+  .#{$block-class}__content__body {
+    @include type.type-style('body-01');
+
+    margin-block-start: $spacing-03;
+    max-inline-size: to-rem(640px);
+  }
+
+  [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
+  .#{$block-class}__hero-image {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: flex-end;
+    block-size: 100%;
+  }
+
+  .#{$block-class}__tab-bar {
+    background-color: $layer;
+  }
+
+  .#{$block-class}__tab-bar--tablist {
+    display: grid;
+    gap: $spacing-07;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .#{$pkg-prefix}--page-header__tab-bar--tablist
+    .#{$pkg-prefix}--page-header__tags {
+    display: flex;
+    align-self: center;
+    justify-content: flex-end;
+  }
+
+  .#{$pkg-prefix}--page-header__tab-bar--tablist.#{$pkg-prefix}--page-header__tab-bar--with-scroller
+    .#{$pkg-prefix}--page-header__tags {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    transform: translateX(calc($spacing-06 * -1));
+
+    @include breakpoint(md) {
+      padding-inline-end: $spacing-03;
+      transform: translateX(0);
+    }
+    @include breakpoint(max) {
+      padding-inline-end: $spacing-05;
+    }
+  }
+
+  .#{$carbon-prefix}--tabs .#{$carbon-prefix}--tab--overflow-nav-button {
+    background-color: $layer-01;
+
+    &.#{$carbon-prefix}--tab--overflow-nav-button--next::before {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), $layer-01);
+    }
+
+    &.#{$carbon-prefix}--tab--overflow-nav-button--previous::before {
+      background: linear-gradient(to left, rgba(255, 255, 255, 0), $layer-01);
+    }
+  }
+
+  // **** This is a temporary work-around until the focus clipping
+  // **** for overflowing tabs is resolved in core.
+  // **** https://github.com/carbon-design-system/carbon/issues/19942
+  .#{$carbon-prefix}--tabs .#{$carbon-prefix}--tabs__nav-link {
+    margin-inline-end: $spacing-01;
+  }
+
+  .#{$block-class}__tags {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+  .#{$block-class}__tags-popover-list {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-05;
+  }
+
+  .#{$block-class}--tag-overflow-container {
+    align-content: center;
+    text-align: end;
+    @include breakpoint(sm) {
+      transform: translateX(calc(-1 * #{$spacing-06}));
+    }
+    @include breakpoint(md) {
+      transform: translateX(calc(-1 * #{$spacing-03}));
+    }
+    @include breakpoint(lg) {
+      transform: translateX($spacing-08);
+    }
+
+    .#{$carbon-prefix}--tag {
+      margin-inline-end: $spacing-03;
+    }
+  }
+
+  .#{$block-class}--tag-overflow-popover__hidden {
+    visibility: hidden;
+  }
+
+  .#{$block-class}--tag-overflow-container__has-no-hidden-items {
+    /* stylelint-disable-next-line carbon/layout-use */
+    transform: translateX($spacing-07);
+  }
+
+  .#{$block-class}__tag-item {
+    flex-shrink: 0;
+  }
+
+  .#{$pkg-prefix}--page-header--scroller-button-icon {
+    /* stylelint-disable-next-line */
+    transition: transform $transition-base;
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .#{$pkg-prefix}--page-header--scroller-button-icon-collapsed {
+    transform: rotate(-180deg);
+  }
+
+  .#{$pkg-prefix}--page-header--scroller-button-container {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-end: $spacing-01;
+  }
+
+  @keyframes page-header-title-breadcrumb-animation {
+    0% {
+      opacity: 0;
+      transform: translateY($spacing-05);
+    }
+
+    5% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes page-header-title-breadcrumb-animation-reduced-motion {
+    0% {
+      opacity: 0;
+    }
+
+    5% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .#{$pkg-prefix}--page-header__breadcrumb__content-actions {
+    opacity: 0;
+  }
+
+  .#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
+    opacity: 1;
+    transition:
+      /* stylelint-disable-next-line */ opacity
+      motion(standard, productive) $duration-moderate-01;
+  }
+
+  .#{$pkg-prefix}--page-header-title-breadcrumb {
+    opacity: 0;
+    transform: translateY($spacing-05);
+    transition:
+      /* stylelint-disable-next-line */
+      transform motion(standard, productive) $duration-moderate-01,
+      opacity motion(standard, productive) $duration-moderate-01;
+    // Target browsers that do not yet support animation-timeline: scroll()
+    @supports not (animation-timeline: scroll()) {
+      &.#{$pkg-prefix}--page-header-title-breadcrumb-show {
+        @media (prefers-reduced-motion: reduce) {
+          transform: translateY(0);
+          /* stylelint-disable-next-line */
+          transition: opacity motion(standard, productive) $duration-moderate-01;
+        }
+      }
+    }
+
+    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__with-content-element {
+      // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+      @supports (animation-timeline: scroll()) {
+        animation-direction: alternate;
+        animation-duration: 1ms; /* Firefox requires this to apply the animation */
+        animation-name: page-header-title-breadcrumb-animation;
+        animation-timeline: scroll(block nearest);
+
+        @media (prefers-reduced-motion: reduce) {
+          animation-name: page-header-title-breadcrumb-animation-reduced-motion;
+          transform: translateY(0);
+        }
+      }
+    }
+    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__without-content-element {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

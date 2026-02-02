@@ -8,6 +8,7 @@
 // Standard imports.
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/config' as carbon-config;
 
@@ -47,6 +48,10 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
 
   .#{$_block-class}__breadcrumb-back {
     display: none;
+
+    svg {
+      fill: $icon-primary;
+    }
   }
 
   .#{$_block-class}__back__button.#{carbon-config.$prefix}--btn {

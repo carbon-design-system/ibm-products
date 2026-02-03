@@ -700,4 +700,47 @@ describe('PageHeader', () => {
       expect(PageHeader.tagTypes).toContain(Object.values(tagTypes)[i]);
     }
   });
+
+  it('renders subtitle with TruncatedText when subtitle is a string', async () => {
+    const { title, subtitle } = testProps;
+    render(<PageHeader {...{ title, subtitle }} />);
+
+    expect(document.querySelectorAll(`.${blockClass}__subtitle`)).toHaveLength(
+      1
+    );
+    expect(screen.getByText(subtitle)).toBeInTheDocument();
+  });
+
+  it('renders subtitle without TruncatedText when subtitle is not a string', async () => {
+    const { title } = testProps;
+    const subtitleNode = (
+      <div data-testid="custom-subtitle">Custom subtitle</div>
+    );
+    render(<PageHeader {...{ title, subtitle: subtitleNode }} />);
+
+    expect(document.querySelectorAll(`.${blockClass}__subtitle`)).toHaveLength(
+      1
+    );
+    expect(screen.getByTestId('custom-subtitle')).toBeInTheDocument();
+    expect(screen.getByText('Custom subtitle')).toBeInTheDocument();
+  });
+
+  it('renders long subtitle with ellipses when text exceeds 2 lines', async () => {
+    const { title } = testProps;
+    const longSubtitle =
+      'This is a very long subtitle that should definitely exceed two lines when rendered in the page header component. It contains enough text to trigger the truncation behavior and show ellipses at the end of the second line. This ensures that the TruncatedText component is working correctly with the tooltip functionality.';
+
+    render(<PageHeader {...{ title, subtitle: longSubtitle }} />);
+
+    expect(document.querySelectorAll(`.${blockClass}__subtitle`)).toHaveLength(
+      1
+    );
+
+    // Check that TruncatedText component is rendered with correct props
+    const truncatedTextElement = document.querySelector(
+      `.${prefix}--truncated-text`
+    );
+    expect(truncatedTextElement).toBeInTheDocument();
+    expect(screen.getByText(longSubtitle)).toBeInTheDocument();
+  });
 });

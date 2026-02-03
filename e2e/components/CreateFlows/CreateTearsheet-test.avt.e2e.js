@@ -81,10 +81,10 @@ test.describe('CreateTearsheet @avt', () => {
     // Goto next step by pressing enter
     await page.keyboard.press('Enter');
 
-    // Best Practice: Wait for step transition to complete
-    const step2Input1 = page.locator('#custom-step-input');
-    await expect(step2Input1).toBeVisible({ timeout: 2000 });
+    // Wait for step transition animation to complete
+    await page.waitForTimeout(500);
 
+    const step2Input1 = page.locator('#custom-step-input');
     // Expect the Step 2 input field is focused
     await expect(step2Input1).toBeFocused();
     // Also confirm the Next button disabled in this step
@@ -103,10 +103,10 @@ test.describe('CreateTearsheet @avt', () => {
     // Goto next step by pressing enter
     await page.keyboard.press('Enter');
 
-    // Best Practice: Wait for step transition to complete
-    const step3Input1 = page.locator('#carbon-number');
-    await expect(step3Input1).toBeVisible({ timeout: 2000 });
+    // Wait for step transition animation to complete
+    await page.waitForTimeout(500);
 
+    const step3Input1 = page.locator('#carbon-number');
     // Expect the first input element to be focused
     await expect(step3Input1).toBeFocused();
 
@@ -118,10 +118,10 @@ test.describe('CreateTearsheet @avt', () => {
     // Goto next step by pressing enter
     await page.keyboard.press('Enter');
 
-    // Best Practice: Wait for step transition to complete
-    const step4Input1 = page.locator('#one-day');
-    await expect(step4Input1).toBeVisible({ timeout: 2000 });
+    // Wait for step transition animation to complete
+    await page.waitForTimeout(500);
 
+    const step4Input1 = page.locator('#one-day');
     // Expect the first element in the last step to be focused
     await expect(step4Input1).toBeFocused();
 
@@ -133,8 +133,8 @@ test.describe('CreateTearsheet @avt', () => {
     await expect(backButton).toBeFocused();
     await page.keyboard.press('Enter');
 
-    // Best Practice: Wait for step transition to complete
-    await expect(step3Input1).toBeVisible({ timeout: 2000 });
+    // Wait for step transition animation to complete
+    await page.waitForTimeout(500);
 
     // Expect the first element in the previous step to be focused
     await expect(step3Input1).toBeFocused();
@@ -147,8 +147,8 @@ test.describe('CreateTearsheet @avt', () => {
     await expect(backButton).toBeFocused();
     await page.keyboard.press('Enter');
 
-    // Best Practice: Wait for step transition to complete
-    await expect(step2Input1).toBeVisible({ timeout: 2000 });
+    // Wait for step transition animation to complete
+    await page.waitForTimeout(500);
 
     // Expect the first element in the previous step to be focused
     await expect(step2Input1).toBeFocused();
@@ -161,8 +161,8 @@ test.describe('CreateTearsheet @avt', () => {
     await expect(backButton).toBeFocused();
     await page.keyboard.press('Enter');
 
-    // Best Practice: Wait for step transition to complete
-    await expect(step1Input1).toBeVisible({ timeout: 2000 });
+    // Wait for step transition animation to complete
+    await page.waitForTimeout(500);
     await page.screenshot({ animations: 'disabled' });
 
     // Expect the previous page first element to be focused
@@ -202,11 +202,16 @@ test.describe('CreateTearsheet @avt', () => {
     await page.keyboard.press('Tab');
 
     await expect(errorToggle).toBeFocused();
+
     // Enable simulate error toggle
     await page.keyboard.press('Space');
 
-    // Wait a moment for toggle state to update
-    await page.waitForTimeout(100);
+    // Wait for toggle state to update
+    await page.waitForTimeout(200);
+
+    // Verify the toggle is actually checked
+    const toggleInput = page.locator('#simulated-error-toggle');
+    await expect(toggleInput).toBeChecked();
 
     // Navigate to next button
     await page.keyboard.press('Tab');

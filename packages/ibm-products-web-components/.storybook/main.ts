@@ -28,6 +28,8 @@ const stories = glob.sync(
 const config = {
   stories: stories,
   addons: [
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('storybook-addon-accessibility-checker'),
     {
       name: getAbsolutePath('@storybook/addon-docs'),
       options: {

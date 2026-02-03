@@ -15,7 +15,6 @@ import {
   usePrefix,
   ButtonProps,
   PopoverAlignment,
-  DefinitionTooltip,
 } from '@carbon/react';
 import { TagProps } from '@carbon/react/lib/components/Tag/Tag';
 import React, {
@@ -52,13 +51,13 @@ import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
 import { ChevronUp } from '@carbon/react/icons';
 import { PageHeaderTitle } from './PageHeaderTitle';
+import { TruncatedText } from '../TruncatedText';
 import PropTypes from 'prop-types';
 import { breakpoints } from '@carbon/layout';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import { useOverflowStringHeight } from '../../global/js/hooks/useOverflowString';
 
 const componentName = 'PageHeader';
 
@@ -928,16 +927,6 @@ export const PageHeader = React.forwardRef(
       });
     }, [headerRef, pageHeaderStyles]);
 
-    const subtitleRef = useRef<HTMLSpanElement>(null);
-    const isOverflowing = useOverflowStringHeight(
-      subtitleRef as RefObject<HTMLElement>
-    );
-    const subtitleContent = (
-      <span ref={subtitleRef} className={`${blockClass}__subtitle-text`}>
-        {subtitle}
-      </span>
-    );
-
     return (
       <>
         <div
@@ -1077,15 +1066,20 @@ export const PageHeader = React.forwardRef(
               {subtitle && (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
-                    {isOverflowing ? (
-                      <DefinitionTooltip
-                        definition={subtitle}
-                        className={`${blockClass}__subtitle-tooltip`}
-                      >
-                        {subtitleContent}
-                      </DefinitionTooltip>
+                    {typeof subtitle === 'string' ? (
+                      <TruncatedText
+                        id={`${blockClass}__subtitle`}
+                        className={`${blockClass}__subtitle-text`}
+                        value={subtitle}
+                        lines={2}
+                        type="tooltip"
+                        align="bottom"
+                        autoAlign={true}
+                      />
                     ) : (
-                      subtitleContent
+                      <span className={`${blockClass}__subtitle-text`}>
+                        {subtitle}
+                      </span>
                     )}
                   </Column>
                 </Row>

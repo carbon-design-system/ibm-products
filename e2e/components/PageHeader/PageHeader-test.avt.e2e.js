@@ -97,10 +97,15 @@ test.describe('PageHeader @avt', () => {
     // The header starts expanded.
     await expect(pageTitle).toBeInViewport();
 
+    // Wait for the component to fully render before interacting with the collapse button
+    await page.waitForTimeout(300);
+
     // The header collapses when the cheveron button is toggled close.
-    const collapseButton = page.locator(
-      `.${pkg.prefix}--page-header__collapse-expand-toggle .${carbon.prefix}--btn--icon-only`
-    );
+    const collapseButton = page.getByRole('button', {
+      name: /^(Collapse|Expand) the page header$/,
+    });
+
+    await collapseButton.waitFor({ state: 'visible' });
     await collapseButton.focus();
     await page.keyboard.press('Enter');
 
@@ -115,8 +120,7 @@ test.describe('PageHeader @avt', () => {
   });
 
   // PageHeader buttons move into MenuButton on small screens
-  // todo - fix flaky test
-  test.skip('@avt-header-buttons-move-to-menubutton-on-small-screens', async ({
+  test('@avt-header-buttons-move-to-menubutton-on-small-screens', async ({
     page,
   }) => {
     await visitStory(page, {

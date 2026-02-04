@@ -9,32 +9,19 @@
   $font-path: '@ibm/plex'
 );
 
-@use '../../../src/utilities/carousel/index' as carousel;
+@use '@carbon/utilities/scss/carousel' as carousel;
 @use '../../../src/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
 
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
 @include carousel.carousel();
-
+@include carousel.wrapperStyles();
 /* stylelint-disable-next-line selector-type-no-unknown */
 c4p-coachmark {
   position: fixed;
   inset-block-end: 0;
   inset-inline-end: 160px;
-
-  /* stylelint-disable-next-line selector-type-no-unknown */
-  // cds-popover cds-popover-content::part(content) {
-  //   transform: translateY(100%);
-  //   transition: transform $duration-moderate-02 motion(exit, productive);
-  // }
-
-  // &[open] {
-  //   /* stylelint-disable-next-line selector-type-no-unknown */
-  //   cds-popover cds-popover-content::part(content) {
-  //     transform: translateY(35%);
-  //   }
-  // }
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */

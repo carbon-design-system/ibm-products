@@ -11,15 +11,15 @@ import { html, LitElement } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import '@carbon/web-components/es/components/button/button.js';
-import { initCarousel, InitCarousel } from '../../../src/utilities/carousel';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
 import '@carbon/web-components/es/components/link/index.js';
 import styles from './styles.scss?lit';
 
 // Import coachmark components
 import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
-import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js';
+//import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js';
 
-//import '../../../src/components/coachmark/coachmark-tagline/index.js';
+import '../../../src/components/coachmark/coachmark-tagline/index.js';
 
 // Carousel story data
 const items = [
@@ -70,6 +70,8 @@ export class CoachmarkFixedExample extends LitElement {
   };
 
   private handleNext() {
+    console.log("next");
+    
     this.carouselAPI?.next();
   }
 

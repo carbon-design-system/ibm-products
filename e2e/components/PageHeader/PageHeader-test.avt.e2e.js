@@ -266,7 +266,7 @@ test.describe('PageHeader @avt', () => {
   });
 
   // action bar buttons move into MenuButton on small screens
-  test.skip('@avt-action-buttons-move-to-menubutton-on-small-screens', async ({
+  test('@avt-action-buttons-move-to-menubutton-on-small-screens', async ({
     page,
   }) => {
     await visitStory(page, {

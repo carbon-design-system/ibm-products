@@ -59,9 +59,7 @@ test.describe('NotificationsPanel @avt', () => {
     });
     await expect(notificationTrigger).toBeFocused();
   });
-  test.skip('@avt-notification-panel-focus-return-to-trigger', async ({
-    page,
-  }) => {
+  test('@avt-notification-panel-focus-return-to-trigger', async ({ page }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
       id: 'components-notificationspanel--default',
@@ -74,8 +72,17 @@ test.describe('NotificationsPanel @avt', () => {
       'button[aria-label="Open notifications"]'
     );
     await expect(notificationPanel).toBeVisible();
+
+    // Wait for panel to be fully rendered
+    await page.waitForTimeout(300);
+
+    // Click outside to close the panel
     await page.locator('body').click({ force: true });
-    await page.waitForTimeout(150);
+
+    // Wait for close animation and focus management
+    await page.waitForTimeout(200);
+
+    // Check if focus returned to trigger button
     await expect(async () => {
       const isFocused = await notificationTrigger.evaluate(
         (el) => el === document.activeElement
@@ -88,7 +95,7 @@ test.describe('NotificationsPanel @avt', () => {
           `Expected notifications trigger to be focused, but active element was: ${activeElement}`
         );
       }
-    }).toPass({ timeout: 100 });
+    }).toPass({ timeout: 500 });
   });
   test('@avt-notification-panel-doesn-not-focus-return-to-trigger-when-clicked-on-actionable-elements', async ({
     page,

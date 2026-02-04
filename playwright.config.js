@@ -111,6 +111,21 @@ expect.extend({
       aChecker.addRuleset(customRuleset);
     }
 
+    // Remove third-party widget elements before scanning
+    await page.evaluate(() => {
+      // Remove TrustArc cookie consent elements
+      const trusteElements = document.querySelectorAll(
+        '[id^="truste-consent"], [id^="truste-"], [class*="truste-"]'
+      );
+      trusteElements.forEach((el) => el.remove());
+
+      // Remove IBM privacy choice pill elements
+      const privacyPillElements = document.querySelectorAll(
+        '[id*="ypc-pill"], [class*="dbdm--ypc-pill"], [class*="ypc-pill"]'
+      );
+      privacyPillElements.forEach((el) => el.remove());
+    });
+
     const result = await aChecker.getCompliance(page, id);
     if (aChecker.assertCompliance(result.report) === 0) {
       return {

@@ -1,2 +1,0 @@
-import{r as e,j as S}from"./iframe-CECvNR-E.js";const s=e.createContext(void 0),x=({children:o})=>{const[n,a]=e.useState(1),[d,r]=e.useState(1),[i,u]=e.useState({}),p={formState:i,setFormState:u,totalSteps:n,setTotalSteps:a,currentStep:d,handleGoToStep:t=>r(t),handleNext:()=>r(t=>t+1),handlePrevious:()=>r(t=>t-1)};return S.jsx(s.Provider,{value:p,children:o})},h=()=>{const o=e.useContext(s);if(o===void 0)throw new Error("Context hook used outside of Step provider");return o};export{x as h,h as m};
-//# sourceMappingURL=StepContext-BsKQ2aVo.js.map

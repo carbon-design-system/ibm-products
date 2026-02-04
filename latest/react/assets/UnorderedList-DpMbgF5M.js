@@ -1,2 +1,0 @@
-import{u as i,c as l,e as c,_ as p,P as e}from"./iframe-CECvNR-E.js";function d({className:r,nested:t=!1,isExpressive:o=!1,...a}){const s=i(),n=l(`${s}--list--unordered`,r,{[`${s}--list--nested`]:t,[`${s}--list--expressive`]:o});return c.createElement("ul",p({className:n},a))}d.propTypes={children:e.node,className:e.string,isExpressive:e.bool,nested:e.bool};export{d as U};
-//# sourceMappingURL=UnorderedList-DpMbgF5M.js.map

@@ -1,5 +1,0 @@
-import{e as t,c as d,p,P as a}from"./iframe-CECvNR-E.js";import{g as l}from"./devtools-4IrNVtGE.js";const c=`${p.prefix}--edit-full-page`,n="EditFullPage",e=t.forwardRef(({className:o,children:s,...i},r)=>t.createElement("div",{...i,className:d(c,o,{}),ref:r,role:"main",...l(n)},s));e.deprecated={level:"warn",details:"This component is deprecated and will be removed in the next major version."};e.displayName=n;e.propTypes={children:a.node.isRequired,className:a.string};e.__docgenInfo={description:`**This component is deprecated.** <br>
-Use when settings on a page need to always be shown in edit mode, or when the context of the page is needed to make several changes.
-See usage guidance for further details.
-@deprecated`,methods:[],displayName:"EditFullPage",props:{className:{required:!1,tsType:{name:"string"},description:"Provide an optional class to be applied to the containing node.",type:{name:"string"}},children:{required:!0,tsType:{name:"ReactNode"},description:"Provide the contents of the EditFullPage.",type:{name:"node"}}}};export{e as E};
-//# sourceMappingURL=EditFullPage-Cgoe_8nG.js.map

@@ -1,1 +1,0 @@
-var t={elem:"svg",attrs:{xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 32 32",fill:"currentColor",width:16,height:16},content:[{elem:"path",attrs:{d:"M13 24L4 15 5.414 13.586 13 21.171 26.586 7.586 28 9 13 24z"}}],name:"checkmark",size:16};export{t as _};

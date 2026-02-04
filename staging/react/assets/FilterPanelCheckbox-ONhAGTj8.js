@@ -1,0 +1,8 @@
+import{e as i,c as m,p as n,P as e}from"./iframe-BBf3bqTv.js";import{C as b}from"./Checkbox-CFWURQEX.js";import{g as h}from"./devtools-c2gfrTL0.js";import{F as u}from"./FilterPanelLabel-CFLDatg2.js";const f=`${n.prefix}--filter-panel-checkbox`,r="FilterPanelCheckbox";let t=i.forwardRef(({className:o,count:a,id:s,labelText:l,title:c,...p},d)=>i.createElement(b,{...p,className:m(f,o),id:s,labelText:i.createElement(u,{count:a,labelText:l,title:c}),ref:d,...h(r)}));t.deprecated={level:"warn",details:"This component is deprecated"};t=n.checkComponentEnabled(t,r);t.displayName=r;t.propTypes={className:e.string,count:e.oneOfType([e.number,e.string]),id:e.string.isRequired,labelText:e.node.isRequired,title:e.string};t.__docgenInfo={description:`Provides a checkbox, label, and count.
+
+This component is returning Carbon's Checkbox.
+
+All of Carbon Checkbox's props are directly available
+through "...rest", including id, onClick, etc.
+@deprecated This component is deprecated`,methods:[],displayName:"FilterPanelCheckbox",props:{className:{description:"Optional class to be applied to the containing node.",type:{name:"string"},required:!1},count:{description:"Number to be displayed with the checkbox.",type:{name:"union",value:[{name:"number"},{name:"string"}]},required:!1},id:{description:"Unique identifier.",type:{name:"string"},required:!0},labelText:{description:"Label to be displayed with the checkbox.",type:{name:"node"},required:!0},title:{description:"Optional title attribute for the label.",type:{name:"string"},required:!1}}};export{t as F};
+//# sourceMappingURL=FilterPanelCheckbox-ONhAGTj8.js.map

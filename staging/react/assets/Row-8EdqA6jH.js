@@ -1,2 +1,0 @@
-import{u as d,c as i,e as m,_ as f,P as e}from"./iframe-BbTYfv9-.js";function w({as:o="div",condensed:n=!1,narrow:r=!1,className:a,children:t,...c}){const s=d(),p=i(a,{[`${s}--row`]:!0,[`${s}--row--condensed`]:n,[`${s}--row--narrow`]:r}),l=o;return m.createElement(l,f({className:p},c),t)}w.propTypes={as:e.oneOfType([e.string,e.elementType]),children:e.node,className:e.string,condensed:e.bool,narrow:e.bool};export{w as R};
-//# sourceMappingURL=Row-8EdqA6jH.js.map

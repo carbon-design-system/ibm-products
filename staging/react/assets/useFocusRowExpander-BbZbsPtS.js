@@ -1,0 +1,2 @@
+import{r as d}from"./iframe-BBf3bqTv.js";const f=({instance:r,lastExpandedRowIndex:o=0,blockClass:e,activeElement:n})=>{d.useEffect(()=>{if(!n.classList.contains(`${e}__row-expander`))return;const a=r?.tableId,u=document.querySelectorAll(`#${a} tbody tr`),s=Array.from(u).filter(t=>t.getAttribute("data-nested-row-id")===o?t:null);s.length&&s[0].querySelector(`.${e}__row-expander`)?.focus()},[r?.tableId,r?.expandedRows,o,e,n])};export{f as u};
+//# sourceMappingURL=useFocusRowExpander-BbZbsPtS.js.map

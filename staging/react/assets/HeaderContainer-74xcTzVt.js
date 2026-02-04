@@ -1,0 +1,2 @@
+import{r as s,w as p,o as c,t as l,e as E,_ as u,P as t}from"./iframe-BBf3bqTv.js";function x({render:n,isSideNavExpanded:d=!1,...r}){const[i,e]=s.useState(d);p("keydown",a=>{c(a,l)&&e(!1)});const o=s.useCallback(()=>{e(a=>!a)},[e]);return E.createElement(n,u({},r,{isSideNavExpanded:i,onClickSideNavExpand:o}))}x.propTypes={isSideNavExpanded:t.bool,render:t.elementType.isRequired};export{x as H};
+//# sourceMappingURL=HeaderContainer-74xcTzVt.js.map

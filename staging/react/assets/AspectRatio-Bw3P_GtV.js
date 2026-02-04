@@ -1,2 +1,0 @@
-import{u as p,c as n,e as i,_ as m,P as e}from"./iframe-BbTYfv9-.js";const l=({as:a="div",className:t,children:r,ratio:x="1x1",...o})=>{const s=p(),c=n(t,`${s}--aspect-ratio`,`${s}--aspect-ratio--${x}`);return i.createElement(a,m({className:c},o),r)};l.propTypes={as:e.elementType,children:e.node,className:e.string,ratio:e.oneOf(["16x9","9x16","2x1","1x2","4x3","3x4","3x2","2x3","1x1"])};export{l as A};
-//# sourceMappingURL=AspectRatio-Bw3P_GtV.js.map

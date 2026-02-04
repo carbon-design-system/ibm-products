@@ -12,7 +12,7 @@ import { visitStory } from '../../test-utils/storybook';
 import { pkg } from '../../../packages/ibm-products/src/settings';
 
 test.describe('NotificationsPanel @avt', () => {
-  test.skip('@avt-default-state', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
       id: 'components-notificationspanel--default',
@@ -20,6 +20,14 @@ test.describe('NotificationsPanel @avt', () => {
         carbonTheme: 'white',
       },
     });
+
+    // Wait for the notification panel to be visible and stable
+    const notificationPanel = page.locator('[role="dialog"]');
+    await expect(notificationPanel).toBeVisible();
+
+    // Wait for animations to complete (Carbon standard animation duration)
+    // This ensures the panel is fully rendered before accessibility scan
+    await page.waitForTimeout(300);
 
     await expect(page).toHaveNoACViolations(
       'NotificationsPanel @avt-default-state'

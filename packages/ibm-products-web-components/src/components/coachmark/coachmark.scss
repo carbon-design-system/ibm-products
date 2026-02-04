@@ -17,6 +17,10 @@ $carbon-prefix: config.$carbon-prefix;
 
 $block-class: #{$prefix}--coachmark;
 
+:host {
+  display: inline-block;
+}
+
 .#{$block-class}--popover {
   position: fixed;
 

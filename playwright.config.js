@@ -111,52 +111,21 @@ expect.extend({
       aChecker.addRuleset(customRuleset);
     }
 
-    // Remove third-party widget elements before scanning
-    // Wait for widgets to load, then remove them with retry logic
-    const removeThirdPartyWidgets = async () => {
-      // Wait for widgets to potentially load (max 2 seconds)
-      await page.waitForTimeout(1000);
+    // Remove third-party widgets before accessibility scanning
+    // Using a more targeted approach that only removes elements if they exist
+    await page.evaluate(() => {
+      // Remove TrustArc cookie consent elements
+      const trusteElements = document.querySelectorAll(
+        '[id^="truste-consent"], [id^="truste-"], [class*="truste-"]'
+      );
+      trusteElements.forEach((el) => el.remove());
 
-      // Remove widgets with retry logic
-      for (let attempt = 0; attempt < 3; attempt++) {
-        const removed = await page.evaluate(() => {
-          let count = 0;
-
-          // Remove TrustArc cookie consent elements
-          const trusteElements = document.querySelectorAll(
-            '[id^="truste-consent"], [id^="truste-"], [class*="truste-"]'
-          );
-          trusteElements.forEach((el) => {
-            el.remove();
-            count++;
-          });
-
-          // Remove IBM privacy choice pill elements
-          const privacyPillElements = document.querySelectorAll(
-            '[id*="ypc-pill"], [class*="dbdm--ypc-pill"], [class*="ypc-pill"]'
-          );
-          privacyPillElements.forEach((el) => {
-            el.remove();
-            count++;
-          });
-
-          return count;
-        });
-
-        // If we removed elements, wait a bit and try again in case more load
-        if (removed > 0) {
-          await page.waitForTimeout(200);
-        } else {
-          // No more elements found, we're done
-          break;
-        }
-      }
-
-      // Final wait for DOM to stabilize
-      await page.waitForTimeout(100);
-    };
-
-    await removeThirdPartyWidgets();
+      // Remove IBM privacy choice pill elements
+      const privacyPillElements = document.querySelectorAll(
+        '[id*="ypc-pill"], [class*="dbdm--ypc-pill"], [class*="ypc-pill"]'
+      );
+      privacyPillElements.forEach((el) => el.remove());
+    });
 
     const result = await aChecker.getCompliance(page, id);
     if (aChecker.assertCompliance(result.report) === 0) {

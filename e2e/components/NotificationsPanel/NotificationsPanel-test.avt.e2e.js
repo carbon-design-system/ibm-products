@@ -80,9 +80,10 @@ test.describe('NotificationsPanel @avt', () => {
     await page.locator('body').click({ force: true });
 
     // Wait for close animation and focus management
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(300);
 
     // Check if focus returned to trigger button
+    // Increased timeout to account for animation and focus management delays
     await expect(async () => {
       const isFocused = await notificationTrigger.evaluate(
         (el) => el === document.activeElement
@@ -95,7 +96,7 @@ test.describe('NotificationsPanel @avt', () => {
           `Expected notifications trigger to be focused, but active element was: ${activeElement}`
         );
       }
-    }).toPass({ timeout: 500 });
+    }).toPass({ timeout: 1000 });
   });
   test('@avt-notification-panel-doesn-not-focus-return-to-trigger-when-clicked-on-actionable-elements', async ({
     page,

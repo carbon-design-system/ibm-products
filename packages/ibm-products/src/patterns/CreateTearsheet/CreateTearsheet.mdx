@@ -1,0 +1,353 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './CreateTearsheet.stories';
+
+# CreateTearsheet
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Using custom components](#using-custom-components)
+- [Using dynamic steps](#using-dynamic-steps)
+- [Error states](#error-states)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+
+## Overview
+
+The `CreateTearsheet` pattern provides a multi-step workflow interface for
+creating resources or completing complex tasks. It uses the new Tearsheet
+architecture with StepFlow from `@carbon/utilities-react` for managing step
+navigation and state.
+
+### Key Features
+
+- **Multi-step workflow**: Guide users through complex creation processes with
+  StepProvider
+- **Progress indication**: Visual feedback with vertical or horizontal progress
+  indicators
+- **Flexible layout**: Support for wide and narrow variants
+- **Step management**: Built-in navigation with back, next, and submit actions
+  using StepFlow
+- **Form state management**: Integrated with StepFlow for managing form data
+  across steps
+
+### When to use
+
+- Creating complex resources that require multiple pieces of information
+- Guiding users through a sequential workflow
+- When you need to break down a large form into manageable steps
+- For workflows that benefit from progress indication
+
+### When not to use
+
+- For simple forms that don't require multiple steps
+- When all information can be collected on a single screen
+- For quick actions that don't need a guided workflow
+
+## Example usage
+
+This is used when you have one section per step. This can be created by passing
+in the overall `<CreateTearsheet />` component wrapped in `<StepProvider>` and
+the `<CreateTearsheetStep />` component with form items as children:
+
+<Canvas>
+  <Story of={stories.multiStepTearsheet} />
+</Canvas>
+
+### Code example
+
+```jsx
+import React, { useState } from 'react';
+import { StepProvider } from '@carbon/utilities-react';
+import { CreateTearsheet, CreateTearsheetStep } from './example/components';
+import { Button, TextInput } from '@carbon/react';
+
+function MyComponent() {
+  const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({});
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Create Resource</Button>
+
+      <StepProvider>
+        <CreateTearsheet
+          open={open}
+          setOpen={setOpen}
+          title="Create topic"
+          label="Customer data"
+          description="Specify details for the new topic you want to create"
+          submitButtonText="Create"
+          cancelButtonText="Cancel"
+          backButtonText="Back"
+          nextButtonText="Next"
+          onRequestSubmit={async () => {
+            console.log('Creating resource:', formData);
+          }}
+          onClose={() => {
+            setFormData({});
+            setOpen(false);
+          }}
+        >
+          <CreateTearsheetStep
+            title="Topic name"
+            label="Topic name"
+            subtitle="This is the unique name used to recognize your topic"
+            description="It will also be used by your producers and consumers as part of the connection information"
+            primaryFocusElement="#topic-name-input"
+          >
+            <TextInput
+              id="topic-name-input"
+              labelText="Topic name"
+              placeholder="Enter topic name"
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+            />
+          </CreateTearsheetStep>
+
+          <CreateTearsheetStep
+            title="Partitions"
+            label="Partitions"
+            subtitle="One or more partitions make up a topic"
+          >
+            {/* Partition configuration */}
+          </CreateTearsheetStep>
+
+          <CreateTearsheetStep
+            title="Message retention"
+            label="Message retention"
+            subtitle="This is how long messages are retained"
+          >
+            {/* Retention settings */}
+          </CreateTearsheetStep>
+        </CreateTearsheet>
+      </StepProvider>
+    </>
+  );
+}
+```
+
+## Using custom components
+
+It is possible to use custom components that return `CreateTearsheetStep`s in
+order to help reduce the amount of logic in the component that contains the main
+`CreateTearsheet`. _It is required that each child of the `CreateTearsheet`
+either be a custom step or a `CreateTearsheetStep`_. An example of this could
+look like the following:
+
+```jsx
+const CreateStepCustom = ({ subtitle, value, setValue, ...rest }) => {
+  return (
+    <CreateTearsheetStep
+      {...rest}
+      subtitle={subtitle}
+      title="Location"
+      label="Location"
+    >
+      <TextInput
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        id="custom-step-input"
+        labelText="Location"
+        placeholder="Enter location"
+      />
+    </CreateTearsheetStep>
+  );
+};
+
+const CreateComponent = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <StepProvider>
+      <CreateTearsheet {...createTearsheetProps}>
+        <CreateStepCustom
+          subtitle="Custom step subtitle"
+          value={value}
+          setValue={setValue}
+        />
+        <CreateTearsheetStep
+          title="Topic name"
+          label="Topic name"
+          subtitle="This is the unique name used to recognize your topic"
+        >
+          Content for second step
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+    </StepProvider>
+  );
+};
+```
+
+## Using dynamic steps
+
+The use of dynamic steps can be utilized in a scenario when the user makes a
+certain selection on one step that affects which steps will follow it. With the
+new architecture, you can conditionally render steps based on state:
+
+<Canvas>
+  <Story of={stories.withIntroStep} />
+</Canvas>
+
+```jsx
+import { useState } from 'react';
+import { StepProvider } from '@carbon/utilities-react';
+
+const CreateFlow = () => {
+  const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
+    useState(false);
+
+  return (
+    <StepProvider>
+      <CreateTearsheet {...createTearsheetProps}>
+        <CreateTearsheetStep title="Step 1" label="Step 1">
+          Step 1 content
+          <Checkbox
+            labelText="Include additional step"
+            id="include-additional-step-checkbox"
+            onChange={(event, { checked }) =>
+              setShouldIncludeAdditionalStep(checked)
+            }
+            checked={shouldIncludeAdditionalStep}
+          />
+        </CreateTearsheetStep>
+
+        {shouldIncludeAdditionalStep && (
+          <CreateTearsheetStep
+            title="Dynamic step"
+            label="Dynamic step"
+            subtitle="This step only appears when checkbox is checked"
+          >
+            Dynamic step content
+          </CreateTearsheetStep>
+        )}
+
+        <CreateTearsheetStep title="Final step" label="Final step">
+          Final step content
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+    </StepProvider>
+  );
+};
+```
+
+## Error states
+
+Passing an `invalid` prop to the step will show an error icon on the progress
+indicator step indicating an error state in that step:
+
+<Canvas>
+  <Story of={stories.withErrorState} />
+</Canvas>
+
+```jsx
+<StepProvider>
+  <CreateTearsheet {...createTearsheetProps}>
+    <CreateTearsheetStep title="Topic name" label="Topic name" invalid={true}>
+      Step in error state
+    </CreateTearsheetStep>
+  </CreateTearsheet>
+</StepProvider>
+```
+
+## With AI Label
+
+An AI Label is intended for any scenario where something is being generated by
+AI to reinforce AI transparency, accountability, and explainability at the UI
+level. A Carbon AI Label can be provided to the CreateTearsheet component by
+including a `decorator` or `slug` property on it and providing the carbon
+AILabel component as its own custom component. Please note that the `slug`
+attribute is being deprecated and will soon be replaced by `decorator` to align
+with Carbon.
+
+The `decorator` is versatile and can also be used to render other components.
+
+```jsx
+import { AILabel, AILabelContent } from '@carbon/react';
+
+<StepProvider>
+  <CreateTearsheet
+    {...args}
+    decorator={
+      <AILabel
+        className="ai-label-container"
+        autoAlign={false}
+        align="bottom-right"
+      >
+        <AILabelContent>{/* AI Label content */}</AILabelContent>
+      </AILabel>
+    }
+  >
+    {/* Steps */}
+  </CreateTearsheet>
+</StepProvider>;
+```
+
+## Component API
+
+### CreateTearsheet
+
+<Controls />
+
+### CreateTearsheetStep
+
+The `CreateTearsheetStep` component represents a single step in the creation
+workflow.
+
+#### Props
+
+| Prop                  | Type        | Default | Description                                       |
+| --------------------- | ----------- | ------- | ------------------------------------------------- |
+| `title`               | `ReactNode` | -       | **Required.** The title of the step               |
+| `label`               | `string`    | -       | Label shown in the progress indicator             |
+| `subtitle`            | `string`    | -       | Optional subtitle for the step                    |
+| `description`         | `ReactNode` | -       | Optional description text                         |
+| `secondaryLabel`      | `string`    | -       | Optional secondary label for progress indicator   |
+| `primaryFocusElement` | `string`    | -       | CSS selector for element to focus when step loads |
+| `invalid`             | `boolean`   | `false` | Shows error state in progress indicator           |
+| `introStep`           | `boolean`   | `false` | Marks step as intro step (no progress indicator)  |
+| `children`            | `ReactNode` | -       | Step content                                      |
+
+## Architecture
+
+The CreateTearsheet pattern is built on top of:
+
+- **New Tearsheet component**
+  (`@carbon/ibm-products/es/components/Tearsheet/next`): Provides the modal
+  container and layout
+- **StepFlow** (`@carbon/utilities-react`): Manages step navigation and state
+  through `StepProvider` and `useStepContext`
+- **Carbon React components**: For form inputs and UI elements
+
+### Step Management
+
+Steps are managed using the `StepProvider` and `useStepContext` from
+`@carbon/utilities-react`. The provider wraps the CreateTearsheet and provides:
+
+- Current step tracking
+- Navigation methods (`handleNext`, `handlePrevious`, `handleGoToStep`)
+- Form state management
+- Total step count
+
+**Important**: Always wrap your `CreateTearsheet` with `<StepProvider>` for
+proper step management.
+
+## Accessibility
+
+- Progress indicators provide clear visual feedback on workflow progress
+- Keyboard navigation is fully supported
+- Focus management ensures proper tab order with `primaryFocusElement`
+- ARIA labels and roles are applied appropriately
+- Each step can specify a primary focus element for better UX
+
+## StackBlitz Example
+
+<CodesandboxLink exampleDirectory="CreateTearsheet" />
+
+## Feedback
+
+Help us improve this component by providing feedback through
+[GitHub issues](https://github.com/carbon-design-system/ibm-products/issues/new/choose).

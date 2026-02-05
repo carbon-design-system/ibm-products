@@ -16,10 +16,7 @@ import { Button, Theme, Link as CarbonLink } from '@carbon/react';
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './CoachmarkFixed.mdx';
 import { Coachmark } from '../../components/Coachmark/next/Coachmark';
-import {
-  initCarousel,
-  InitCarousel,
-} from '../../global/js/utils/carousel/carousel';
+import { initCarousel } from '../../global/js/utils/carousel/carousel';
 import { CoachmarkTagline } from '../../components/Coachmark/next/Coachmark/CoachmarkTagline/CoachmarkTagline';
 
 export default {
@@ -85,12 +82,9 @@ const CoachmarkFixedPattern = (args) => {
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [fixedIsVisible, setFixedIsVisible] = useState(false);
 
-  //prettier-ignore
-  const carouselContainerRef = useRef < HTMLDivElement > (null);
-  //prettier-ignore
-  const carouselInit = useRef < InitCarousel > (null);
-  //prettier-ignore
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const carouselContainerRef = useRef(null);
+  const carouselInit = useRef(null);
+  const nextRef = useRef(null);
 
   const items = [
     {

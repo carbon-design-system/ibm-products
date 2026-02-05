@@ -277,7 +277,6 @@ test.describe('PageHeader @avt', () => {
       },
     });
 
-    // Race conditions
     // Wait for the "+13" tag element to appear and be visible
     await page.waitForSelector(
       `span.${carbon.prefix}--tag__label[title="+13"]`,

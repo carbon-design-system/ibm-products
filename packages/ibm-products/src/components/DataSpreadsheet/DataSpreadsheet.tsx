@@ -143,7 +143,7 @@ export interface DataSpreadsheetProps {
   /**
    * Component next to numbering rows
    */
-  renderRowHeader?: (index: number) => any[];
+  renderRowHeader?: (index: number) => React.ReactElement;
 
   /**
    * The aria label applied to the Select all button
@@ -224,12 +224,12 @@ export const DataSpreadsheet = React.forwardRef(
     const [activeCellInsideSelectionArea, setActiveCellInsideSelectionArea] =
       useState(false);
     const previousState: PrevState =
-      usePreviousValue({
+      (usePreviousValue({
         activeCellCoordinates,
         isEditing,
         cellEditorValue,
         selectedHeaderReorderActive,
-      }) || {};
+      }) as PrevState) || {};
     const cellSizeValue = getCellSize(cellSize);
     const cellEditorRef = useRef<HTMLTextAreaElement | undefined>(undefined);
     const [activeCellContent, setActiveCellContent] = useState<any>();

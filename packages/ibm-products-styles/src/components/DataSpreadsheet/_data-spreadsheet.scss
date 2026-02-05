@@ -203,12 +203,6 @@ $header-cell-background: $layer-accent-01;
     }
   }
 
-  .#{$block-class}__td-th.#{$block-class}__td_custom {
-    align-items: center;
-    justify-content: center;
-    gap: $spacing-03;
-  }
-
   .#{$block-class}__selection-area--element {
     position: absolute;
     z-index: 2;
@@ -306,5 +300,87 @@ $header-cell-background: $layer-accent-01;
   }
   .#{$block-class}__list--container {
     overscroll-behavior: none;
+  }
+}
+
+.#{$block-class}__td-th--cell-container.#{$block-class}__row-header,
+.#{$block-class}__select-all-cell-container.#{$block-class}__row-header {
+  @include set-header-borders();
+
+  display: flex;
+  align-items: center;
+  background-color: $header-cell-background;
+
+  &:hover,
+  &:focus {
+    background-color: $background-selected-hover;
+  }
+
+  block-size: 100%;
+  cursor: pointer;
+  gap: $spacing-02;
+  padding-inline: $spacing-05 $spacing-03;
+
+  &.#{$block-class}__row-header-reverse {
+    flex-direction: row-reverse;
+    padding-inline: $spacing-03 $spacing-05;
+
+    .#{$block-class}__td-th-button {
+      text-align: end;
+    }
+  }
+
+  /* Exactly 1 child - only the row header button */
+  &:has(> :nth-child(1):last-child) {
+    padding-inline: $spacing-05;
+  }
+}
+
+.#{$block-class}__td-th--cell-container.#{$block-class}__row-header-active,
+.#{$block-class}__select-all-cell-container.#{$block-class}__row-header-active {
+  background-color: $background-selected-hover;
+}
+
+.#{$block-class}__td-th--cell-container.#{$block-class}__row-header_custom,
+.#{$block-class}__select-all-cell-container.#{$block-class}__row-header_custom {
+  align-items: center;
+  justify-content: center;
+
+  button {
+    block-size: 100%;
+  }
+}
+
+.#{$block-class}__td-th--cell-container.#{$block-class}__row-header-selected,
+.#{$block-class}__select-all-cell-container.#{$block-class}__row-header-selected {
+  background-color: $background-inverse;
+  color: $text-inverse;
+
+  > * {
+    background-color: inherit;
+    color: inherit;
+  }
+  /* stylelint-disable-next-line max-nesting-depth */
+  &:focus,
+  &:hover {
+    background-color: $background-inverse;
+  }
+}
+
+.#{$block-class}__td-th-button {
+  @include font-family.font-weight('semibold');
+
+  flex: 1 1 auto;
+  padding: 0 $spacing-03;
+  border: none;
+  background: inherit;
+  block-size: 100%;
+  border-block: none;
+  cursor: pointer;
+  text-align: start;
+
+  &:hover,
+  &:focus {
+    background-color: inherit;
   }
 }

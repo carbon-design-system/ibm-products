@@ -9452,10 +9452,12 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--action-bar-overflow-items__options .c4p--action-bar-overflow-items__item-content {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   inline-size: 100%;
 }
 .c4p--action-bar-overflow-items__options .c4p--action-bar-overflow-items__item svg {
+  flex-shrink: 0;
   margin: 0 0.25rem;
 }
 

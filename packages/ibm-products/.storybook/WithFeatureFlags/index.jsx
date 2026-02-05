@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LinkTo from '@storybook/addon-links/react';
 
-import { FeatureFlags } from '../../../ibm-products/src/components/FeatureFlags';
+import { FeatureFlags } from '../../src/components/FeatureFlags';
 import { Annotation } from '../Annotation';
 
 function WithFeatureFlags({ flags, children, ...rest }) {

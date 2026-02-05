@@ -33,8 +33,7 @@ export default {
 
 const StandardTemplate = () => {
   const [isOpen, setOpen] = useState(false);
-  // prettier-ignore
-  const [files, setFiles] = useState<Array<FileType>>([]);
+  const [files, setFiles] = useState([]);
   const blockClass = 'import-and-upload-modal';
 
   const [importUrl, setImportUrl] = useState('');

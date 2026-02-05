@@ -16,7 +16,7 @@ const stories = [
   './ComponentPlayground/**/*.stories.*',
   './Welcome/**/*.stories.*',
   './PrebuiltPatterns/**/*.mdx',
-  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
+  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.*',
 ];
 
 export default {
@@ -111,6 +111,9 @@ export default {
             silenceDeprecations: ['global-builtin', 'legacy-js-api'],
           },
         },
+      },
+      experimental: {
+        enableNativePlugin: true,
       },
     });
   },

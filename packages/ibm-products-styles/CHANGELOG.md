@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.79.0-rc.0`
+## `@carbon/ibm-products-styles@2.79.0`
 ### Bug fixes :bug:
 - fix(#8831): apply icon-primary fill to breadcrumb and page header icons (#8846)
 - fix(checklist): title and chart title do not show tooltip when truncated (#8788)

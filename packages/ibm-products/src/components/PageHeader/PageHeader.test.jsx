@@ -17,6 +17,7 @@ import { Tab, Tabs, TabList } from '@carbon/react';
 import { Lightning, Bee } from '@carbon/react/icons';
 
 import { PageHeader } from '.';
+import { TruncatedText } from '../TruncatedText';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 import { TYPES as tagTypes } from '../TagSet/constants';
@@ -701,7 +702,7 @@ describe('PageHeader', () => {
     }
   });
 
-  it('renders subtitle with TruncatedText when subtitle is a string', async () => {
+  it('renders subtitle as string', async () => {
     const { title, subtitle } = testProps;
     render(<PageHeader {...{ title, subtitle }} />);
 
@@ -711,7 +712,7 @@ describe('PageHeader', () => {
     expect(screen.getByText(subtitle)).toBeInTheDocument();
   });
 
-  it('renders subtitle without TruncatedText when subtitle is not a string', async () => {
+  it('renders subtitle as ReactNode with custom component', async () => {
     const { title } = testProps;
     const subtitleNode = (
       <div data-testid="custom-subtitle">Custom subtitle</div>
@@ -725,22 +726,33 @@ describe('PageHeader', () => {
     expect(screen.getByText('Custom subtitle')).toBeInTheDocument();
   });
 
-  it('renders long subtitle with ellipses when text exceeds 2 lines', async () => {
+  it('renders subtitle with TruncatedText component for tooltip functionality', async () => {
     const { title } = testProps;
-    const longSubtitle =
+    const longSubtitleText =
       'This is a very long subtitle that should definitely exceed two lines when rendered in the page header component. It contains enough text to trigger the truncation behavior and show ellipses at the end of the second line. This ensures that the TruncatedText component is working correctly with the tooltip functionality.';
+    const subtitleWithTruncation = (
+      <TruncatedText
+        id="test-subtitle"
+        value={longSubtitleText}
+        lines={2}
+        type="tooltip"
+        align="bottom"
+      />
+    );
 
-    render(<PageHeader {...{ title, subtitle: longSubtitle }} />);
+    render(<PageHeader {...{ title, subtitle: subtitleWithTruncation }} />);
 
     expect(document.querySelectorAll(`.${blockClass}__subtitle`)).toHaveLength(
       1
     );
 
-    // Check that TruncatedText component is rendered with correct props
+    // Check that TruncatedText component is rendered
     const truncatedTextElement = document.querySelector(
       `.${prefix}--truncated-text`
     );
     expect(truncatedTextElement).toBeInTheDocument();
-    expect(screen.getByText(longSubtitle)).toBeInTheDocument();
+
+    // Verify the text content is present
+    expect(screen.getByText(longSubtitleText)).toBeInTheDocument();
   });
 });

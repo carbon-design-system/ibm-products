@@ -51,7 +51,6 @@ import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
 import { ChevronUp } from '@carbon/react/icons';
 import { PageHeaderTitle } from './PageHeaderTitle';
-import { TruncatedText } from '../TruncatedText';
 import PropTypes from 'prop-types';
 import { breakpoints } from '@carbon/layout';
 import cx from 'classnames';
@@ -1066,21 +1065,9 @@ export const PageHeader = React.forwardRef(
               {subtitle && (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
-                    {typeof subtitle === 'string' ? (
-                      <TruncatedText
-                        id={`${blockClass}__subtitle`}
-                        className={`${blockClass}__subtitle-text`}
-                        value={subtitle}
-                        lines={2}
-                        type="tooltip"
-                        align="bottom"
-                        autoAlign={true}
-                      />
-                    ) : (
-                      <span className={`${blockClass}__subtitle-text`}>
-                        {subtitle}
-                      </span>
-                    )}
+                    <span className={`${blockClass}__subtitle-text`}>
+                      {subtitle}
+                    </span>
                   </Column>
                 </Row>
               )}

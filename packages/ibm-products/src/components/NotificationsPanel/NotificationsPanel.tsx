@@ -586,109 +586,113 @@ export const NotificationsPanel = React.forwardRef(
           [`${blockClass}__notification-title-unread`]: notification.unread,
         },
       ]);
+      let wrapperParams: any = {
+        className: `${blockClass}__notification-content--wrapper`,
+      };
+      if (typeof notification.onNotificationClick === 'function') {
+        wrapperParams = {
+          role: 'button',
+          'aria-label': 'Notification details',
+          tabIndex: 0,
+          className: `${blockClass}__notification-content--wrapper--clickable`,
+          onClick: () => notification.onNotificationClick(notification),
+          onKeyDown: (event) => {
+            if (event.which === 13) {
+              notification.onNotificationClick(notification);
+            }
+          },
+        };
+      }
+
       return (
         <Section
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
           as="div"
-          role="button"
-          tabIndex={0}
-          onClick={() => notification.onNotificationClick(notification)}
-          onKeyDown={(event) => {
-            if (
-              event.target instanceof HTMLElement &&
-              event.target.classList.contains(
-                `${blockClass}__dismiss-single-button`
-              )
-            ) {
-              return;
-            }
-            if (event.which === 13) {
-              notification.onNotificationClick(notification);
-            }
-          }}
         >
-          {notification.type === 'error' && (
-            <ErrorFilled
-              size={16}
-              className={cx([
-                `${blockClass}__notification-status-icon`,
-                `${blockClass}__notification-status-icon-error`,
-              ])}
-            />
-          )}
-          {notification.type === 'success' && (
-            <CheckmarkFilled
-              size={16}
-              className={cx([
-                `${blockClass}__notification-status-icon`,
-                `${blockClass}__notification-status-icon-success`,
-              ])}
-            />
-          )}
-          {notification.type === 'warning' && (
-            <WarningAltFilled
-              size={16}
-              className={cx([
-                `${blockClass}__notification-status-icon`,
-                `${blockClass}__notification-status-icon-warning`,
-              ])}
-            />
-          )}
-          {notification.type === 'informational' && (
-            <InformationSquareFilled
-              size={16}
-              className={cx([
-                `${blockClass}__notification-status-icon`,
-                `${blockClass}__notification-status-icon-informational`,
-              ])}
-            />
-          )}
-          <div className={`${blockClass}__notification-content`}>
-            <p className={`${blockClass}__notification-time-label`}>
-              {/**
-               * If the new dateTimeLocale has been passed a value,
-               * then use the new dateTimeFormat.relative.format(),
-               * else use the deprecated timeAgo().
-               */}
-              {dateTimeLocale
-                ? dateTimeFormat.relative.format(notification.timestamp, {
-                    locale: supportedLocale as string,
-                    style: dateTimeStyle,
-                  })
-                : timeAgo({
-                    previousTime: notification.timestamp,
-                    secondsAgoText,
-                    minuteAgoText,
-                    minutesAgoText,
-                    hoursAgoText,
-                    hourAgoText,
-                    daysAgoText,
-                    yesterdayAtText,
-                    monthsAgoText,
-                    monthAgoText,
-                    yearsAgoText,
-                    yearAgoText,
-                    nowText,
-                  })}
-            </p>
-            <Heading className={notificationHeaderClassName}>
-              {notification.title}
-            </Heading>
-            {notification.description &&
-              notification.description.length &&
-              renderDescription(notification.id)}
-            {notification.link &&
-              notification.link.text &&
-              notification.link.url && (
-                <Link
-                  href={notification.link.url}
-                  className={`${blockClass}__notifications-link`}
-                  {...prepareProps({}, notification.link, ['text', 'url'])}
-                >
-                  {notification.link.text}
-                </Link>
-              )}
+          <div {...(wrapperParams as Readonly<object>)}>
+            {notification.type === 'error' && (
+              <ErrorFilled
+                size={16}
+                className={cx([
+                  `${blockClass}__notification-status-icon`,
+                  `${blockClass}__notification-status-icon-error`,
+                ])}
+              />
+            )}
+            {notification.type === 'success' && (
+              <CheckmarkFilled
+                size={16}
+                className={cx([
+                  `${blockClass}__notification-status-icon`,
+                  `${blockClass}__notification-status-icon-success`,
+                ])}
+              />
+            )}
+            {notification.type === 'warning' && (
+              <WarningAltFilled
+                size={16}
+                className={cx([
+                  `${blockClass}__notification-status-icon`,
+                  `${blockClass}__notification-status-icon-warning`,
+                ])}
+              />
+            )}
+            {notification.type === 'informational' && (
+              <InformationSquareFilled
+                size={16}
+                className={cx([
+                  `${blockClass}__notification-status-icon`,
+                  `${blockClass}__notification-status-icon-informational`,
+                ])}
+              />
+            )}
+            <div className={`${blockClass}__notification-content`}>
+              <p className={`${blockClass}__notification-time-label`}>
+                {/**
+                 * If the new dateTimeLocale has been passed a value,
+                 * then use the new dateTimeFormat.relative.format(),
+                 * else use the deprecated timeAgo().
+                 */}
+                {dateTimeLocale
+                  ? dateTimeFormat.relative.format(notification.timestamp, {
+                      locale: supportedLocale as string,
+                      style: dateTimeStyle,
+                    })
+                  : timeAgo({
+                      previousTime: notification.timestamp,
+                      secondsAgoText,
+                      minuteAgoText,
+                      minutesAgoText,
+                      hoursAgoText,
+                      hourAgoText,
+                      daysAgoText,
+                      yesterdayAtText,
+                      monthsAgoText,
+                      monthAgoText,
+                      yearsAgoText,
+                      yearAgoText,
+                      nowText,
+                    })}
+              </p>
+              <Heading className={notificationHeaderClassName}>
+                {notification.title}
+              </Heading>
+              {notification.description &&
+                notification.description.length &&
+                renderDescription(notification.id)}
+              {notification.link &&
+                notification.link.text &&
+                notification.link.url && (
+                  <Link
+                    href={notification.link.url}
+                    className={`${blockClass}__notifications-link`}
+                    {...prepareProps({}, notification.link, ['text', 'url'])}
+                  >
+                    {notification.link.text}
+                  </Link>
+                )}
+            </div>
           </div>
           <IconButton
             align="left"

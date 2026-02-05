@@ -50,14 +50,16 @@ class CDSNotificationFooter extends HostListenerMixin(LitElement) {
       >
         ${viewAllLabel}
       </cds-button>
-      <cds-button
+      <cds-icon-button
+        align="left"
         kind="ghost"
         size="sm"
         class="${blockClass}__settings-button"
         @click=${onClickSettings}
       >
         ${iconLoader(Settings16, { slot: 'icon' })}
-      </cds-button>
+        <span slot="tooltip-content">Settings</span>
+      </cds-icon-button>
     `;
   }
 

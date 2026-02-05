@@ -42,6 +42,7 @@ import {
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import styles from './_storybook-styles.scss?inline';
 import { TearsheetNarrow } from './TearsheetNarrow';
+import { TearsheetPresence } from './TearsheetPresence';
 
 // import mdx from './Tearsheet.mdx';
 
@@ -765,6 +766,46 @@ const StackedTemplate = (
   );
 };
 
+const PresenceTemplate = ({ decorator, slug, actions, ...args }) => {
+  const [open, setOpen] = useState(false);
+
+  const wiredActions =
+    actions &&
+    Array.prototype.map.call(actions, (action) => {
+      if (action.label === 'Cancel') {
+        const previousClick = action.onClick;
+        return {
+          ...action,
+          onClick: (evt) => {
+            setOpen(false);
+            previousClick(evt);
+          },
+        };
+      }
+      return action;
+    });
+
+  return (
+    <>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <main>
+        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      </main>
+      <TearsheetPresence open={open}>
+        <Tearsheet
+          {...args}
+          actions={wiredActions}
+          onClose={() => setOpen(false)}
+          decorator={decorator && sampleDecorator(decorator)}
+          slug={slug && sampleDecorator(slug)}
+        >
+          {mainContent}
+        </Tearsheet>
+      </TearsheetPresence>
+    </>
+  );
+};
+
 // Stories
 export const tearsheet = Template.bind({});
 tearsheet.storyName = 'Tearsheet';
@@ -875,5 +916,15 @@ stackedMixedSizes.args = {
   height: 'lower',
   influencer,
   label,
+  actions: 7,
+};
+
+export const withPresence = PresenceTemplate.bind({});
+withPresence.storyName = 'Tearsheet with presence';
+withPresence.args = {
+  closeIconDescription,
+  description: 2,
+  onClose: action('onClose called'),
+  title,
   actions: 7,
 };

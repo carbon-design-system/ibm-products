@@ -21596,7 +21596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@npm:^9.1.10":
+"storybook@npm:^9.1.10, storybook@npm:^9.1.8":
   version: 9.1.17
   resolution: "storybook@npm:9.1.17"
   dependencies:
@@ -21620,33 +21620,6 @@ __metadata:
   bin:
     storybook: ./bin/index.cjs
   checksum: 10/fa7d56a7cf0c6849c8130f5b7b3fcbd6615216fce94dc4ff363a5622f7091f74dac7fe3e983cecc90b3cee922f8ca30b9997b5bb936c644971cb8d20262bc038
-  languageName: node
-  linkType: hard
-
-"storybook@npm:^9.1.8":
-  version: 9.1.9
-  resolution: "storybook@npm:9.1.9"
-  dependencies:
-    "@storybook/global": "npm:^5.0.0"
-    "@testing-library/jest-dom": "npm:^6.6.3"
-    "@testing-library/user-event": "npm:^14.6.1"
-    "@vitest/expect": "npm:3.2.4"
-    "@vitest/mocker": "npm:3.2.4"
-    "@vitest/spy": "npm:3.2.4"
-    better-opn: "npm:^3.0.2"
-    esbuild: "npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0"
-    esbuild-register: "npm:^3.5.0"
-    recast: "npm:^0.23.5"
-    semver: "npm:^7.6.2"
-    ws: "npm:^8.18.0"
-  peerDependencies:
-    prettier: ^2 || ^3
-  peerDependenciesMeta:
-    prettier:
-      optional: true
-  bin:
-    storybook: ./bin/index.cjs
-  checksum: 10/6a53c5ddacd2e891da78c0d98065e2350788b05d879dc0a144562d894609e07409d5ade270699a04f922ec4e0e53ee9293d100f7f10fdbe150421b56c07569e2
   languageName: node
   linkType: hard
 

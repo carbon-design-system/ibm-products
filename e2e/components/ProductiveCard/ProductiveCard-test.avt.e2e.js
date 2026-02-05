@@ -175,7 +175,7 @@ test.describe('ProductiveCard @avt', () => {
 
     // Move focus to the card element and validate
     await page.keyboard.press('Tab');
-    const zone1 = page.locator(`.${pkg.prefix}--card__clickable`);
+    const zone1 = page.getByRole('button', { name: /Title/i });
     await expect(zone1).toBeFocused();
     await expect(zone1).toHaveAttribute('role', 'button');
 
@@ -192,9 +192,12 @@ test.describe('ProductiveCard @avt', () => {
     });
     await page.keyboard.press('Tab');
 
-    const zone2 = page.locator(`.${pkg.prefix}--card__header-body-container`);
+    const zone2 = page.locator('*:focus');
     await expect(zone2).toBeFocused();
     await expect(zone2).toHaveAttribute('role', 'button');
+    await expect(zone2).toHaveClass(
+      new RegExp(`${pkg.prefix}--card__header-body-container`)
+    );
 
     // Move focus to the Read more button and validate
     await page.keyboard.press('Tab');
@@ -208,9 +211,10 @@ test.describe('ProductiveCard @avt', () => {
       id: 'components-cards-productivecard--clickable&args=clickZone:three',
     });
     await page.keyboard.press('Tab');
-    const zone3 = page.locator(`.${pkg.prefix}--card__body`);
+    const zone3 = page.locator('*:focus');
     await expect(zone3).toBeFocused();
     await expect(zone3).toHaveAttribute('role', 'button');
+    await expect(zone3).toHaveClass(new RegExp(`${pkg.prefix}--card__body`));
 
     // Move focus to the Read more button and validate
     await page.keyboard.press('Tab');

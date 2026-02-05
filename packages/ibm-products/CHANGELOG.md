@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.83.0-rc.0`
+## `@carbon/ibm-products@2.83.0`
 ### Features :rocket:
 - feat(CreateModal): implement `CreateModal` pattern with example (#8706)
 - feat: added side panel code connect file for wc (#8687)

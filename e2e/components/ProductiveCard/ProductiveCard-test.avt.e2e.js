@@ -63,7 +63,7 @@ test.describe('ProductiveCard @avt', () => {
   });
 
   // Overflow menu open/close states test
-  test.skip('@avt-overflow-menu: validates overflow menu interactions', async ({
+  test('@avt-overflow-menu: validates overflow menu interactions', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -105,9 +105,19 @@ test.describe('ProductiveCard @avt', () => {
     // Check menu item count and focus
     const menuItems = page.locator(`li.${carbon.prefix}--menu-item`);
     expect(await menuItems.count()).toBeGreaterThan(0);
-    expect(
-      await menuItems.first().evaluate((btn) => document.activeElement === btn)
-    ).toBe(true);
+
+    // Wait for focus to move to the first menu item
+    await expect(async () => {
+      const firstMenuItem = await menuItems.first().elementHandle();
+      const activeElement = await page.evaluateHandle(
+        () => document.activeElement
+      );
+      const isSame = await page.evaluate(
+        ([el1, el2]) => el1 === el2,
+        [firstMenuItem, activeElement]
+      );
+      expect(isSame).toBe(true);
+    }).toPass({ timeout: 2000 });
     expect(await menuButton.getAttribute('aria-expanded')).toBe('true');
 
     // Ensure the menu is closed when pressing Escape

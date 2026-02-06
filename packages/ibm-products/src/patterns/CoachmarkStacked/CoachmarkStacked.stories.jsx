@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import styles from './example/index.scss?inline';
+import styles from './_story-styles.scss?inline';
 import DocsPage from './CoachmarkStacked.mdx';
 import { CoachmarkStackedExample } from './example/components/CoachmarkStackedExample';
 

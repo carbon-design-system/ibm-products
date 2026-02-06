@@ -4,6 +4,8 @@ import * as CoachmarkOverlayElementsStories from './CoachmarkOverlayElements.sto
 
 # CoachmarkOverlayElements
 
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage)
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -14,11 +16,29 @@ import * as CoachmarkOverlayElementsStories from './CoachmarkOverlayElements.sto
 The CoachmarkOverlayElements pattern acts as a container element for onboarding
 and should only be used within the scope of a Coachmark.
 
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+#### Ingredients
+
 To build this pattern, we recommend including the following components:
 
 - [Coachmark](https://carbon-for-ibm-products.netlify.app/?path=/docs/preview-onboarding-coachmark--overview)
 - [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [Link](https://react.carbondesignsystem.com/?path=/docs/components-link)
+- [Theme](https://react.carbondesignsystem.com/?path=/docs/components-theme)
 - [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
+
+```jsx
+import { Button, Theme, Link as CarbonLink } from '@carbon/react';
+import {
+  preview__CoachmarkBeacon as CoachmarkBeacon,
+  preview__Coachmark as Coachmark,
+} from '@carbon/ibm-products';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
+```
 
 ## About Onboarding
 

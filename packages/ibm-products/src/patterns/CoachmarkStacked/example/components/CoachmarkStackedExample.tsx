@@ -22,11 +22,12 @@ import {
 import { initCarousel } from '@carbon/utilities';
 import { Idea } from '@carbon/react/icons';
 import cx from 'classnames';
+import { pkg } from '../../../../settings';
 
 //fetching theme
 function useCarbonTheme() {
-  const [themeValue, setThemeValue] = useState(() =>
-    document.documentElement.getAttribute('data-carbon-theme')
+  const [themeValue, setThemeValue] = useState(
+    () => document.documentElement.getAttribute('data-carbon-theme') || 'g10'
   );
 
   useEffect(() => {
@@ -34,7 +35,7 @@ function useCarbonTheme() {
 
     // function to read the current theme
     const readTheme = () => {
-      const newTheme = target.getAttribute('data-carbon-theme');
+      const newTheme = target.getAttribute('data-carbon-theme') || 'g10';
       setThemeValue((prev) => (prev !== newTheme ? newTheme : prev));
     };
 
@@ -66,10 +67,12 @@ function useCarbonTheme() {
   return themeValue;
 }
 
-export const CoachmarkStackedExample = (args) => {
+export const CoachmarkStackedExample = (
+  { ...args },
+  context?: { viewMode?: string }
+) => {
   const carbonTheme = useCarbonTheme();
   const [isOpen, setIsOpen] = useState(true);
-
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [openId, setOpenId] = useState(0);
@@ -280,11 +283,10 @@ export const CoachmarkStackedExample = (args) => {
   };
 
   useLayoutEffect(() => {
-    const prefix = 'c4p';
     if (!parentHeight) {
       if (stackHomeContentRef.current) {
         const stackHomeContent = stackHomeContentRef.current.querySelector(
-          `div.${prefix}__bubble`
+          `div.${pkg.prefix}__bubble`
         );
         if (stackHomeContent) {
           const height = stackHomeContent.clientHeight;
@@ -299,7 +301,7 @@ export const CoachmarkStackedExample = (args) => {
 
     if (stackHomeContentRef.current) {
       const stackHomeContent = stackHomeContentRef.current.querySelector(
-        `div.${prefix}__bubble`
+        `div.${pkg.prefix}__bubble`
       );
       if (stackHomeContent) {
         stackHomeContent.style.height = `${parentHeight}px`;
@@ -310,7 +312,7 @@ export const CoachmarkStackedExample = (args) => {
       requestAnimationFrame(() => {
         if (stackHomeContentRef.current) {
           const stackHomeContent = stackHomeContentRef.current.querySelector(
-            `div.${prefix}__bubble`
+            `div.${pkg.prefix}__bubble`
           );
 
           if (stackHomeContent) {
@@ -327,7 +329,7 @@ export const CoachmarkStackedExample = (args) => {
       const container = stackedCoachmarkContentRefs.current[openId];
 
       const targetHome = Array.from(
-        container.querySelectorAll(`div.${prefix}__bubble`)
+        container.querySelectorAll(`div.${pkg.prefix}__bubble`)
       ).filter((bubble) => bubble.parentElement === container);
 
       if (targetHome.length > 0) {
@@ -338,7 +340,7 @@ export const CoachmarkStackedExample = (args) => {
 
               const stackHomeContent =
                 stackHomeContentRef.current.querySelector(
-                  `div.${prefix}__bubble`
+                  `div.${pkg.prefix}__bubble`
                 );
               if (stackHomeContent) {
                 stackHomeContent.style.height = `calc(${targetHomeHeight}px + 1px)`;

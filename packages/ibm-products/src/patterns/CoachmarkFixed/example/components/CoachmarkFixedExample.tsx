@@ -21,8 +21,8 @@ import { InitCarousel, initCarousel } from '@carbon/utilities';
 
 //fetching theme
 function useCarbonTheme() {
-  const [themeValue, setThemeValue] = useState(() =>
-    document.documentElement.getAttribute('data-carbon-theme')
+  const [themeValue, setThemeValue] = useState(
+    () => document.documentElement.getAttribute('data-carbon-theme') || 'g10'
   );
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function useCarbonTheme() {
 
     // function to read the current theme
     const readTheme = () => {
-      const newTheme = target.getAttribute('data-carbon-theme');
+      const newTheme = target.getAttribute('data-carbon-theme') || 'g10';
       setThemeValue((prev) => (prev !== newTheme ? newTheme : prev));
     };
 
@@ -65,7 +65,6 @@ function useCarbonTheme() {
 export const CoachmarkFixedExample = (args) => {
   const carbonTheme = useCarbonTheme();
   const [isOpen, setIsOpen] = useState(true);
-
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [fixedIsVisible, setFixedIsVisible] = useState(false);

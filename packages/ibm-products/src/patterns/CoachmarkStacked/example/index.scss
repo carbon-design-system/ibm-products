@@ -6,8 +6,8 @@
 //
 
 /* stylelint-disable declaration-no-important */
-$prefix: 'c4p';
-$carbon-prefix: 'cds';
+$prefix: 'c4p' !default;
+
 @use '@carbon/styles';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as theme;

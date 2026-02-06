@@ -16,8 +16,8 @@ import sampleImage from '../assets/sample-image.png';
 
 //fetching theme
 function useCarbonTheme() {
-  const [themeValue, setThemeValue] = useState(() =>
-    document.documentElement.getAttribute('data-carbon-theme')
+  const [themeValue, setThemeValue] = useState(
+    () => document.documentElement.getAttribute('data-carbon-theme') || 'g10'
   );
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function useCarbonTheme() {
 
     // function to read the current theme
     const readTheme = () => {
-      const newTheme = target.getAttribute('data-carbon-theme');
+      const newTheme = target.getAttribute('data-carbon-theme') || 'g10';
       setThemeValue((prev) => (prev !== newTheme ? newTheme : prev));
     };
 

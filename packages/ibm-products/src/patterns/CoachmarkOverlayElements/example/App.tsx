@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { CoachmarkOverlayElementsExample } from './components/CoachmarkOverlayElementsExample';
+import '@carbon/ibm-products/css/index.min.css';
 
 function App() {
   return (

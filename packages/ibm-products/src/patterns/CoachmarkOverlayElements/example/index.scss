@@ -12,7 +12,6 @@ $carbon-prefix: 'cds';
   $font-path: '@ibm/plex'
 );
 @use '@carbon/styles';
-@use '@carbon/ibm-products/css/index';
 
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as theme;

@@ -9,6 +9,7 @@
 
 import React from 'react';
 import { CoachmarkFixedExample } from './components/CoachmarkFixedExample';
+import '@carbon/ibm-products/css/index.min.css';
 
 function App() {
   return <CoachmarkFixedExample />;

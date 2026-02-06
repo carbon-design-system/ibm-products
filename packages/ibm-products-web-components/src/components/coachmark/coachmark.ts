@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { prefix, carbonPrefix } from '../../globals/settings';
+import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './coachmark.scss?lit';
@@ -27,6 +27,9 @@ export const blockClass = `${prefix}--coachmark`;
 /**
  * coachmark main component
  * @element c4p-coachmark
+ * @fires c4p-coachmark-opened
+ *   The custom event fired when the coachmark is opened.
+ *   This event can be used to perform actions such as focusing elements when the coachmark becomes visible.
  */
 @customElement(`${prefix}-coachmark`)
 class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
@@ -134,67 +137,6 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         detail: this.floating,
       });
     }
-
-    // Handle focus management for coachmarks that start with open=true
-    if (this.open) {
-      this.handleFocusManagement();
-    }
-  }
-
-  private handleFocusManagement() {
-    setTimeout(() => {
-      const popover = this.shadowRoot?.querySelector(`${carbonPrefix}-popover`);
-      if (!popover) {
-        return;
-      }
-
-      const slot = popover.querySelector(
-        `.${blockClass}--wrapper slot`
-      ) as HTMLSlotElement;
-      if (!slot) {
-        return;
-      }
-
-      const interactiveSelectors =
-        'button, a, input, select, textarea, [tabindex]:not([tabindex="-1"]), cds-button';
-
-      const isVisible = (el: HTMLElement): boolean => {
-        const style = window.getComputedStyle(el);
-        return (
-          style.display !== 'none' &&
-          style.visibility !== 'hidden' &&
-          style.opacity !== '0'
-        );
-      };
-
-      // Search for first focusable element in slotted content(header and body)
-      for (const element of slot.assignedElements({ flatten: true })) {
-        // Check if element itself is focusable
-        if (
-          element.matches(interactiveSelectors) &&
-          isVisible(element as HTMLElement)
-        ) {
-          (element as HTMLElement).focus();
-          return;
-        }
-
-        // Search children for focusable elements - cds-button
-        const focusableChild = Array.from(
-          element.querySelectorAll(interactiveSelectors)
-        ).find((child) => isVisible(child as HTMLElement));
-
-        if (focusableChild) {
-          (focusableChild as HTMLElement).focus();
-          return;
-        }
-      }
-
-      // Fallback to close button in header
-      const closeButton = popover
-        .querySelector(`${prefix}-coachmark-header`)
-        ?.shadowRoot?.querySelector('.close-button') as HTMLElement;
-      closeButton?.focus();
-    }, 200);
   }
 
   updated(changedProps: Map<string, unknown>) {
@@ -204,15 +146,24 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         this.style.transform = `translate(${x}px, ${y}px)`;
       }
     }
-    if (changedProps.has('open')) {
-      this.handleFocusManagement();
-    }
-  }
 
-  private focusOut(e: FocusEvent) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    console.log('stopped');
+    // Dispatch custom events when coachmark opens or closes
+    if (changedProps.has('open')) {
+      const init = {
+        bubbles: true,
+        composed: true,
+        detail: { open: this.open },
+      };
+
+      if (this.open) {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSCoachmark).eventOpen,
+            init
+          )
+        );
+      }
+    }
   }
 
   render() {
@@ -224,7 +175,6 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         ?highContrast=${this.highContrast}
         align=${this.align}
         ?dropShadow=${this.dropShadow}
-        @focusout=${this.focusOut}
       >
         <slot name="trigger"></slot>
         <cds-popover-content>
@@ -234,6 +184,13 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         </cds-popover-content>
       </cds-popover>
     `;
+  }
+
+  /**
+   * The name of the custom event fired when this coachmark is opened.
+   */
+  static get eventOpen() {
+    return `${prefix}-coachmark-opened`;
   }
 
   static styles = styles;

@@ -1,27 +1,29 @@
 //
-// Copyright IBM Corp. 2025
+// Copyright IBM Corp. 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 /* stylelint-disable declaration-no-important */
+$prefix: 'c4p' !default;
 
-@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles';
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/themes' as *;
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/type';
-@use '../../global/js/utils/carousel/index' as carousel;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/layout/scss/convert';
-@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/colors' as colors;
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/utilities/scss/carousel' as carousel;
 
-@use '@carbon/styles/scss/components/button/tokens' as *;
+@include carousel.carousel();
 
-@include carousel.carousel;
+@include carousel.wrapperStyles();
 
-$block-class: #{c4p-settings.$pkg-prefix}--coachmark__next;
+$block-class: #{$prefix}--coachmark__next;
 $stack-home-class: 'coachmark-stacked-home';
 $stacked-coachmark: 'stacked-coachmark';
 
@@ -57,6 +59,16 @@ $elements-block-class: 'coachmark-stack-element';
     display: flex;
     align-self: flex-end;
     margin-block-start: $spacing-05;
+  }
+}
+
+// Fix for carousel views blocking button clicks in Storybook
+.carousel__view {
+  pointer-events: none;
+
+  // Re-enable pointer events for interactive content inside carousel views
+  * {
+    pointer-events: auto;
   }
 }
 
@@ -152,7 +164,7 @@ $elements-block-class: 'coachmark-stack-element';
   }
 }
 
-.#{c4p-settings.$pkg-prefix}__bubble__arrow {
+.#{$prefix}__bubble__arrow {
   display: none;
 }
 
@@ -163,7 +175,7 @@ $elements-block-class: 'stacked_element_content';
   inset-block-start: auto;
   inset-inline-start: auto;
 }
-.#{c4p-settings.$pkg-prefix}--coachmark__next--coachmark-content {
+.#{$prefix}--coachmark__next--coachmark-content {
   inset-block-end: 0;
   inset-block-start: unset !important;
   inset-inline-end: $spacing-05;

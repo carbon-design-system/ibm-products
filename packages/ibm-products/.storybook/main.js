@@ -101,6 +101,10 @@ export default {
               ? '../ibm-products-styles/src/config-dev.scss'
               : '../ibm-products-styles/src/config.scss'
           ),
+          '@carbon/ibm-products': resolve(
+            __dirname,
+            '../src/components/index.ts'
+          ),
         },
       },
       css: {

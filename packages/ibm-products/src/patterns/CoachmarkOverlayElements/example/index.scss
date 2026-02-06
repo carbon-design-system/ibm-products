@@ -1,35 +1,35 @@
 //
-// Copyright IBM Corp. 2025
+// Copyright IBM Corp. 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+$prefix: 'c4p' !default;
+$carbon-prefix: 'cds';
+
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex'
+);
+@use '@carbon/styles';
+
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as theme;
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/type';
-@use '../../global/js/utils/carousel/index' as carousel;
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/utilities/scss/carousel' as carousel;
 
-@include carousel.carousel;
+@include carousel.carousel();
 
-$block-class: #{c4p-settings.$pkg-prefix}--coachmark__next;
+@include carousel.wrapperStyles();
+
+$block-class: #{$prefix}--coachmark__next;
 
 // BUBBLE - content styling
 .#{$block-class}--coachmark-content {
-  position: fixed;
-  inline-size: 18rem;
-  margin-inline-start: 18px;
-  transform: translateY(100%);
-  transition: transform $duration-moderate-02 motion(exit, productive);
-  visibility: visible;
+  inline-size: 288px;
 
-  &.is-visible {
-    transform: translateY(35%);
-    visibility: visible;
-  }
   .#{$block-class}--content-body {
     display: flex;
     flex-direction: column;
@@ -54,8 +54,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark__next;
 
 //carousel
 .exampleCarouselWrapper {
-  block-size: 100px;
-  margin-inline-end: $spacing-05;
+  block-size: 60px;
+}
+
+// Fix for carousel views blocking button clicks in Storybook
+.carousel__view {
+  pointer-events: none;
+
+  // Re-enable pointer events for interactive content inside carousel views
+  * {
+    pointer-events: auto;
+  }
 }
 
 .carousel__view > h2 {

@@ -14,8 +14,7 @@ import { carbon, pkg } from '../../../packages/ibm-products/src/settings';
 const bc = `${pkg.prefix}--tearsheet`;
 
 test.describe('Tearsheet @avt', () => {
-  // todo - fix
-  test.skip('@avt-default-state', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
       id: 'components-tearsheet--tearsheet',
@@ -121,10 +120,6 @@ test.describe('Tearsheet @avt', () => {
     const input2 = page.locator('#tss-ft2');
     const closeIcon = page.getByLabel('Close the tearsheet');
 
-    // todo - fix
-    // await expect(page).toHaveNoACViolations(
-    //   'Tearsheet @avt-focus-return-to-launcher-button'
-    // );
     // Initially expect close button to be focused
     await expect(closeIcon).toBeFocused();
 
@@ -151,10 +146,6 @@ test.describe('Tearsheet @avt', () => {
 
     const openButton = page.getByText('Open Tearsheet');
 
-    // todo - fix
-    // await expect(page).toHaveNoACViolations(
-    //   'Tearsheet @avt-focus-return-to-launcher-button'
-    // );
     // Initially the focus will be on #tss-ft1 input field
     await expect(page.locator('#tss-ft1')).toBeFocused();
 
@@ -192,6 +183,9 @@ test.describe('Tearsheet @avt', () => {
     await expect(openButton).toBeFocused();
   });
 
+  // Can include after fixing this https://github.com/carbon-design-system/ibm-products/issues/8174
+  // https://github.com/carbon-design-system/carbon/issues/20426
+  // PR - https://github.com/carbon-design-system/carbon/pull/20586
   test.skip('@avt-stacking', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
@@ -295,6 +289,9 @@ test.describe('Tearsheet @avt', () => {
     }
   });
 
+  // Can include after fixing this https://github.com/carbon-design-system/ibm-products/issues/8174
+  // https://github.com/carbon-design-system/carbon/issues/20426
+  // PR - https://github.com/carbon-design-system/carbon/pull/20586
   test.skip('@avt-stacking-different-sizes', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',

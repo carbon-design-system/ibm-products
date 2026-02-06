@@ -1,14 +1,16 @@
 //
-// Copyright IBM Corp. 2022, 2023
+// Copyright IBM Corp. 2022, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-@use '../../global/styles/project-settings' as *;
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as *;
 
 $block-class: #{$pkg-prefix}--filter-summary;
 
@@ -38,7 +40,7 @@ $block-class: #{$pkg-prefix}--filter-summary;
 }
 
 .#{$block-class}__expanded
-  .#{$block-class}__clear-all-button.#{$carbon-prefix}--btn {
+  .#{$block-class}__clear-all-button.#{carbon-config.$prefix}--btn {
   margin-inline-end: $spacing-07;
 }
 

@@ -1,5 +1,5 @@
 /*
-* Copyright IBM Corp. 2023, 2024
+* Copyright IBM Corp. 2023, 2025
 *
 * This source code is licensed under the Apache-2.0 license found in the
 * LICENSE file in the root directory of this source tree.
@@ -16,9 +16,9 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
 
 $prefix: 'c4p';
-$carbon-prefix: 'cds';
 @use '@carbon/ibm-products-styles/scss/components/ActionSet/index' as *;
 @use '@carbon/ibm-products-styles/scss/components/SidePanel/index' as *;
 @use '@carbon/ibm-products-styles/scss/components/SidePanel/side-panel-variables'
@@ -169,7 +169,7 @@ $block-class-action-set: #{$prefix}--action-set;
 
   .#{$block-class}__subtitle-text {
     &[hidden] {
-      @extend .#{$carbon-prefix}--visually-hidden !optional;
+      @extend .#{carbon-config.$prefix}--visually-hidden !optional;
     }
   }
 
@@ -178,12 +178,12 @@ $block-class-action-set: #{$prefix}--action-set;
     padding-inline-start: 0;
 
     &[hidden] {
-      @extend .#{$carbon-prefix}--visually-hidden !optional;
+      @extend .#{carbon-config.$prefix}--visually-hidden !optional;
     }
   }
 
   .#{$block-class} .#{$block-class}__action-toolbar[hidden] {
-    @extend .#{$carbon-prefix}--visually-hidden !optional;
+    @extend .#{carbon-config.$prefix}--visually-hidden !optional;
   }
 
   .#{$block-class}[has-slug] {
@@ -214,14 +214,15 @@ $block-class-action-set: #{$prefix}--action-set;
     }
 
     ::slotted(#{$prefix}-button[hidden]) {
-      @extend .#{$carbon-prefix}--visually-hidden !optional;
+      @extend .#{carbon-config.$prefix}--visually-hidden !optional;
 
       display: none;
     }
 
     // -1 in @container query is for 1px left border
     @container (width <= #{map.get(spv.$side-panel-sizes, lg)}) {
-      &:not([actions-multiple='triple']) ::slotted(#{$carbon-prefix}-button) {
+      &:not([actions-multiple='triple'])
+        ::slotted(#{carbon-config.$prefix}-button) {
         // double and single on lg use 50%
         flex: 0 1 50%;
         max-inline-size: none;
@@ -232,12 +233,12 @@ $block-class-action-set: #{$prefix}--action-set;
     @container (width <= #{map.get(spv.$side-panel-sizes, md)}) {
       // md is 50% for two and 100% for one
       // column for triple
-      &[actions-multiple] ::slotted(#{$carbon-prefix}-button) {
+      &[actions-multiple] ::slotted(#{carbon-config.$prefix}-button) {
         flex: 0 0 100%;
         max-inline-size: none;
       }
 
-      &[actions-multiple='double'] ::slotted(#{$carbon-prefix}-button) {
+      &[actions-multiple='double'] ::slotted(#{carbon-config.$prefix}-button) {
         flex: 0 1 50%;
         max-inline-size: none;
       }
@@ -245,7 +246,7 @@ $block-class-action-set: #{$prefix}--action-set;
       &[actions-multiple='triple'] {
         --flex-direction: column;
 
-        ::slotted(#{$carbon-prefix}-button) {
+        ::slotted(#{carbon-config.$prefix}-button) {
           flex: initial;
           inline-size: 100%;
           max-inline-size: none;
@@ -257,7 +258,7 @@ $block-class-action-set: #{$prefix}--action-set;
     @container (width <= #{map.get(spv.$side-panel-sizes, sm)}) {
       --flex-direction: column;
 
-      ::slotted(#{$carbon-prefix}-button) {
+      ::slotted(#{carbon-config.$prefix}-button) {
         flex: initial;
         inline-size: 100%;
         max-inline-size: none;
@@ -272,12 +273,12 @@ $block-class-action-set: #{$prefix}--action-set;
     display: flex;
     inline-size: 100%;
 
-    ::slotted(#{$carbon-prefix}-button) {
+    ::slotted(#{carbon-config.$prefix}-button) {
       @extend .#{$block-class-action-set}__action-button;
     }
 
     &[hidden] {
-      @extend .#{$carbon-prefix}--visually-hidden !optional;
+      @extend .#{carbon-config.$prefix}--visually-hidden !optional;
 
       display: none;
     }
@@ -285,7 +286,7 @@ $block-class-action-set: #{$prefix}--action-set;
     $multiples: 'single' 'double' 'triple';
     @each $m in $multiples {
       &[actions-multiple='#{$m}'] {
-        @extend .#{$carbon-prefix}--action-set--row-#{$m} !optional;
+        @extend .#{carbon-config.$prefix}--action-set--row-#{$m} !optional;
       }
     }
 
@@ -298,7 +299,7 @@ $block-class-action-set: #{$prefix}--action-set;
   }
 
   .sentinel {
-    @extend .#{$carbon-prefix}--visually-hidden !optional;
+    @extend .#{carbon-config.$prefix}--visually-hidden !optional;
   }
 
   .#{$block-class}__close-button {

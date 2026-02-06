@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2022
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,6 +11,8 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
@@ -42,12 +44,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 }
 
 .#{$block-class}__toggle
-  .#{c4p-settings.$carbon-prefix}--toggle-input__label
-  .#{c4p-settings.$carbon-prefix}--toggle__switch {
+  .#{carbon-config.$prefix}--toggle-input__label
+  .#{carbon-config.$prefix}--toggle__switch {
   margin: 0;
 }
 
-.#{$block-class}__toggle .#{c4p-settings.$carbon-prefix}--toggle__label-text {
+.#{$block-class}__toggle .#{carbon-config.$prefix}--toggle__label-text {
   @include visually-hidden;
 }
 
@@ -153,8 +155,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 }
 
 .#{$block-class}__content
-  > .#{c4p-settings.$carbon-prefix}--fieldset
-  > .#{c4p-settings.$carbon-prefix}--label:empty {
+  > .#{carbon-config.$prefix}--fieldset
+  > .#{carbon-config.$prefix}--label:empty {
   display: none;
 }
 

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2023
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,6 +9,8 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 
 // CreateFullPage uses the following IBM Products components:
@@ -32,9 +34,7 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   }
 }
 
-.#{$block-class}
-  .#{$block-class}__content
-  .#{c4p-settings.$carbon-prefix}--grid {
+.#{$block-class} .#{$block-class}__content .#{carbon-config.$prefix}--grid {
   margin-inline: 0;
   padding-block-start: $spacing-06;
 }
@@ -59,7 +59,7 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   margin-block-end: $spacing-06;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--fieldset {
+.#{$block-class} .#{carbon-config.$prefix}--fieldset {
   margin-block-end: 0;
 }
 
@@ -67,7 +67,7 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   margin-block-end: $spacing-05;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
+.#{$block-class} .#{carbon-config.$prefix}--modal-close {
   display: none;
 }
 
@@ -119,11 +119,11 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   padding-block-end: $spacing-07;
 }
 
-.#{$block-class}__step .#{c4p-settings.$carbon-prefix}--css-grid {
+.#{$block-class}__step .#{carbon-config.$prefix}--css-grid {
   margin-inline-start: 0;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav--ux {
+.#{$block-class} .#{carbon-config.$prefix}--side-nav--ux {
   background-color: transparent;
   block-size: min-content;
   border-inline-end: 1px solid $border-subtle-01;
@@ -173,7 +173,7 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 }
 
 .#{$block-class}
-  .#{$block-class}__progress-indicator.#{c4p-settings.$carbon-prefix}--progress {
+  .#{$block-class}__progress-indicator.#{carbon-config.$prefix}--progress {
   padding: $spacing-06;
 }
 

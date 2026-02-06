@@ -2120,7 +2120,7 @@ __metadata:
     "@figma/code-connect": "npm:^1.3.6"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@ibm/telemetry-js-config-generator": "npm:^2.1.0"
-    "@lit-labs/signals": "npm:^0.1.2"
+    "@lit-labs/signals": "npm:^0.2.0"
     "@lit/context": "npm:^1.1.5"
     "@mordech/vite-lit-loader": "npm:^0.37.0"
     "@open-wc/testing": "npm:^4.0.0"
@@ -5176,13 +5176,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lit-labs/signals@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@lit-labs/signals@npm:0.1.2"
+"@lit-labs/signals@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@lit-labs/signals@npm:0.2.0"
   dependencies:
     lit: "npm:^2.0.0 || ^3.0.0"
-    signal-polyfill: "npm:^0.2.0"
-  checksum: 10/e2fa906002465e42b86c5e1baa57a330824c088d8f520700971f8366e48a7206440c49667bd74003879f42f7346b0251d3f300dfea0d37bc0f2bb95f86b7a8f2
+    signal-polyfill: "npm:^0.2.2"
+  checksum: 10/c5ffd88334b31e8ed51737d235010bb42fb6f0232cf00429e8046cec6848606989a9788ac2d131bb9d4f60d35aec154f468683401c46a939d0da9db528bac830
   languageName: node
   linkType: hard
 
@@ -22159,7 +22159,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"signal-polyfill@npm:^0.2.0":
+"signal-polyfill@npm:^0.2.2":
   version: 0.2.2
   resolution: "signal-polyfill@npm:0.2.2"
   checksum: 10/a54cbde85a3452086b51cc22872461246abbe60fc76e8519e85a28afd332d41c84a044e2a238414694a808960b0187a0aab7a852657280981f08dae1e41ea65c

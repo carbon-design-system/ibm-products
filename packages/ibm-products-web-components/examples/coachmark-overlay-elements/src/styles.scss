@@ -9,7 +9,7 @@
   $font-path: '@ibm/plex'
 );
 
-@use '../../../src/utilities/carousel/index' as carousel;
+@use '@carbon/utilities/scss/carousel' as carousel;
 
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';

@@ -15,13 +15,27 @@
 
 export const getHeaderOffset = (el: HTMLElement): number => {
   const scrollableContainer = scrollableAncestor(el);
-  const scrollableContainerTop = scrollableContainer
-    ? (scrollableContainer as HTMLElement).getBoundingClientRect().top
-    : 0;
+
+  // Get the element's position relative to the viewport
   const offsetMeasuringTop = el ? el.getBoundingClientRect().top : 0;
-  const totalHeaderOffset =
-    offsetMeasuringTop !== 0 ? offsetMeasuringTop - scrollableContainerTop : 0;
-  return totalHeaderOffset;
+
+  if (scrollableContainer === document.scrollingElement) {
+    // If scrolling on the document level, return the current viewport position
+    // This ensures the breadcrumb bar stays correctly positioned regardless of scroll
+    return offsetMeasuringTop >= 0 ? offsetMeasuringTop : 0;
+  } else {
+    // If there's a scrollable parent container
+    const scrollableContainerTop = scrollableContainer
+      ? (scrollableContainer as HTMLElement).getBoundingClientRect().top
+      : 0;
+
+    // Calculate offset relative to the scrollable container
+    const totalHeaderOffset =
+      offsetMeasuringTop !== 0
+        ? offsetMeasuringTop - scrollableContainerTop
+        : 0;
+    return totalHeaderOffset >= 0 ? totalHeaderOffset : 0;
+  }
 };
 
 const windowExists = typeof window !== `undefined`;

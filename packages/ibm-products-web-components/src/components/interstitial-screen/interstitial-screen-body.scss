@@ -7,8 +7,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 @use './interstitial-screen';
-@use '../../utilities/carousel/index' as carousel;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/utilities/scss/carousel' as carousel;
 
 @include carousel.wrapperStyles();
 

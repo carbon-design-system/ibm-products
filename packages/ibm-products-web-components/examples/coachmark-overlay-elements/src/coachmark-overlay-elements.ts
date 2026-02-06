@@ -11,7 +11,7 @@ import { html, LitElement } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import '@carbon/web-components/es/components/button/button.js';
-import { initCarousel, InitCarousel } from '../../../src/utilities/carousel';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
 import sampleImage from './_story-assets/sample-image.png';
 import styles from './styles.scss?lit';
 

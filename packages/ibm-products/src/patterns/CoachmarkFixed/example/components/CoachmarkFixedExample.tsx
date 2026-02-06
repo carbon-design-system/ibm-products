@@ -18,7 +18,6 @@ import {
   preview__Coachmark as Coachmark,
 } from '@carbon/ibm-products';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
-//import { CoachmarkTagline } from '../../../../components/Coachmark/next/Coachmark/CoachmarkTagline/CoachmarkTagline';
 
 //fetching theme
 function useCarbonTheme() {

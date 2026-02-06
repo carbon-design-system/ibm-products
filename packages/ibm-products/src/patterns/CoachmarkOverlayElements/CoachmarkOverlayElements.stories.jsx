@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import styles from './example/components/index.scss?inline';
+import styles from './example/index.scss?inline';
 import DocsPage from './CoachmarkOverlayElements.mdx';
 import { CoachmarkOverlayElementsExample } from './example/components/CoachmarkOverlayElementsExample.tsx';
 

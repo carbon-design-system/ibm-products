@@ -27,6 +27,9 @@ export const blockClass = `${prefix}--coachmark`;
 /**
  * coachmark main component
  * @element c4p-coachmark
+ * @fires c4p-coachmark-opened
+ *   The custom event fired when the coachmark is opened.
+ *   This event can be used to perform actions such as focusing elements when the coachmark becomes visible.
  */
 @customElement(`${prefix}-coachmark`)
 class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
@@ -85,7 +88,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     const slot = wrapper.querySelector('slot');
     const assignedElements = slot?.assignedElements({ flatten: true });
     const header = assignedElements?.find(
-      (el) => el.tagName.toLowerCase() === 'c4p-coachmark-header'
+      (el) => el.tagName.toLowerCase() === `${prefix}-coachmark-header`
     ) as HTMLElement;
     requestAnimationFrame(() => {
       const dragHandle = header.shadowRoot?.querySelector(
@@ -143,6 +146,24 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         this.style.transform = `translate(${x}px, ${y}px)`;
       }
     }
+
+    // Dispatch custom events when coachmark opens or closes
+    if (changedProps.has('open')) {
+      const init = {
+        bubbles: true,
+        composed: true,
+        detail: { open: this.open },
+      };
+
+      if (this.open) {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSCoachmark).eventOpen,
+            init
+          )
+        );
+      }
+    }
   }
 
   render() {
@@ -163,6 +184,13 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         </cds-popover-content>
       </cds-popover>
     `;
+  }
+
+  /**
+   * The name of the custom event fired when this coachmark is opened.
+   */
+  static get eventOpen() {
+    return `${prefix}-coachmark-opened`;
   }
 
   static styles = styles;

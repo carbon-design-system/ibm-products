@@ -10,7 +10,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import './components/index.scss';
+import './index.scss';
 
 // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
 const rootElement = document.getElementById('root');

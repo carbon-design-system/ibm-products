@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import styles from './example/components/index.scss?inline';
+import styles from './example/index.scss?inline';
 import DocsPage from './CoachmarkFixed.mdx';
 import { CoachmarkFixedExample } from './example/components/CoachmarkFixedExample';
 

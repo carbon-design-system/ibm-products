@@ -9,6 +9,7 @@
 
 import React from 'react';
 import { CoachmarkStackedExample } from './components/CoachmarkStackedExample';
+import '@carbon/ibm-products/css/index.min.css';
 
 function App() {
   return <CoachmarkStackedExample />;

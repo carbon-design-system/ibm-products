@@ -18,7 +18,7 @@ $block-class__next: #{$pkg-prefix}--tearsheet__next;
 $motion-duration: $duration-moderate-02;
 
 /// Experimental tearsheet styles
-@include block-wrap($block-class__next) {
+.#{$block-class__next} {
   // ──────────────────────────────────────────────────────────────
   // Container
   // ──────────────────────────────────────────────────────────────
@@ -28,6 +28,7 @@ $motion-duration: $duration-moderate-02;
     block-size: 100%;
     inset-block-start: auto;
     max-block-size: calc(100% - var(--tearsheet-vertical-gap, #{$spacing-09}));
+    max-inline-size: 1312px;
   }
   &:not(.#{$block-class__next}--stack-activated.is-visible) {
     .#{$block-class__next}__container {
@@ -43,6 +44,7 @@ $motion-duration: $duration-moderate-02;
       transform: translate3d(0, calc(min(95vh, 500px)), 0);
     }
   }
+
   &.#{$block-class__next}.#{$block-class__next}--has-ai-label {
     .#{$block-class__next}__container {
       border: 1px solid transparent;
@@ -74,13 +76,6 @@ $motion-duration: $duration-moderate-02;
     transition:
       transform $motion-duration motion(entrance, expressive),
       max-block-size $motion-duration motion(entrance, expressive);
-  }
-
-  // Wide variant at medium breakpoint
-  @include breakpoint(md) {
-    &.#{$block-class__next}--wide .#{$block-class__next}__container {
-      inline-size: calc(100% - (2 * #{$spacing-10}));
-    }
   }
 
   // ──────────────────────────────────────────────────────────────
@@ -137,149 +132,6 @@ $motion-duration: $duration-moderate-02;
     }
   }
 
-  // Header content and actions
-  .#{$block-class__next}__header-content,
-  .#{$block-class__next}__header-actions {
-    margin-block-end: $spacing-06;
-  }
-
-  // Label, title, description styles
-  .#{$block-class__next}__header-label {
-    @include type.type-style('label-01');
-
-    color: $text-secondary;
-    margin-block-end: $spacing-02;
-  }
-
-  .#{$block-class__next}__header-title {
-    @include type.type-style('heading-04');
-
-    @include breakpoint-down(md) {
-      @include type.type-style('heading-03');
-    }
-
-    display: flex;
-    align-items: flex-start;
-    margin-block-end: $spacing-03;
-
-    svg {
-      flex-shrink: 0;
-    }
-    .#{$block-class__next}__title-start {
-      margin-inline-end: $spacing-05;
-    }
-    .#{$block-class__next}__title-end {
-      margin-inline-start: $spacing-05;
-    }
-  }
-
-  .#{$block-class__next}__header-description {
-    @include type.type-style('body-compact-01');
-  }
-
-  .#{$block-class__next}__header--no-close-icon {
-    display: none;
-  }
-
-  // ──────────────────────────────────────────────────────────────
-  // Navigation bar inside header
-  // ──────────────────────────────────────────────────────────────
-  .#{$block-class__next}__navigation-bar {
-    position: relative;
-    // margin: $spacing-04 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: $spacing-10;
-    max-inline-size: 100%;
-    min-block-size: $spacing-08;
-
-    .#{$block-class__next}__scroller-container {
-      position: absolute;
-      inset-block-end: $spacing-01;
-      inset-inline-end: calc(-#{$spacing-07} + #{$spacing-01});
-      @include breakpoint-down(md) {
-        inset-inline-end: -$spacing-05;
-      }
-
-      .#{$block-class__next}__scroller-button-icon-collapsed {
-        transform: rotate(-180deg);
-      }
-    }
-
-    .#{$carbon-prefix}--tabs {
-      margin-inline-start: -$spacing-05;
-    }
-  }
-
-  // ──────────────────────────────────────────────────────────────
-  // Header actions
-  // ──────────────────────────────────────────────────────────────
-  .#{$block-class__next}__header-actions {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .#{$block-class__next}__content__header-actions {
-    display: flex;
-    overflow: hidden;
-    flex: 0 0 auto;
-    align-items: center;
-    justify-content: flex-end;
-    block-size: $spacing-07;
-    inline-size: 100%;
-    margin-block-start: -14px;
-
-    > *.#{$block-class__next}__header-action-item:not([data-hidden='true']) {
-      margin-inline-end: $spacing-03; /* space between visible items */
-    }
-
-    /* Remove margin on the last visible item */
-    > *.#{$block-class__next}__header-action-item:not(
-        [data-hidden='true']
-      ):nth-last-child(2) {
-      margin-inline-end: 0;
-    }
-
-    > * {
-      flex-shrink: 0;
-    }
-    @include breakpoint-down(md) {
-      justify-content: flex-start;
-      margin-inline-end: 0;
-    }
-  }
-  &.#{$block-class__next}--narrow {
-    .#{$block-class__next}__header {
-      padding-inline: $spacing-05;
-    }
-    .#{$block-class__next}__header.#{$block-class__next}__header-collapsed {
-      .#{$block-class__next}__header-actions {
-        display: none;
-      }
-    }
-    .#{$block-class__next}__header-content-wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-    .#{$block-class__next}__header-title {
-      @include type.type-style('heading-03');
-    }
-    .#{$block-class__next}__content__header-actions {
-      justify-content: flex-start;
-      margin-inline-end: 0;
-    }
-    .#{$block-class__next}__body {
-      grid-template-columns: 1fr 0;
-    }
-    .#{$block-class__next}__influencer,
-    .#{$block-class__next}__main-content,
-    .#{$block-class__next}__summary-content {
-      &:not(.#{$block-class__next}__flush) {
-        padding-inline: $spacing-05;
-      }
-    }
-  }
   // ──────────────────────────────────────────────────────────────
   // Header (default vs collapsed)
   // ──────────────────────────────────────────────────────────────
@@ -364,6 +216,12 @@ $motion-duration: $duration-moderate-02;
         align-items: center;
         block-size: $spacing-06;
       }
+      .#{$block-class__next}__title-start,
+      .#{$block-class__next}__title-end {
+        svg {
+          inline-size: $spacing-05;
+        }
+      }
     }
 
     .#{$block-class__next}__header-content {
@@ -412,86 +270,6 @@ $motion-duration: $duration-moderate-02;
     }
   }
 
-  // ──────────────────────────────────────────────────────────────
-  // Body layout grid
-  // ──────────────────────────────────────────────────────────────
-  .#{$block-class__next}__body-layout {
-    display: grid;
-    grid-template-areas:
-      'influencer body'
-      'influencer footer';
-    grid-template-columns:
-      var(--tearsheet-influencer-width, calc($spacing-10 * 4))
-      1fr;
-    grid-template-rows: 1fr auto;
-    padding-block: 0;
-    padding-inline-end: 0;
-
-    /* Redefine grid when influencer is absent */
-    &:not(:has(> .#{$block-class__next}__influencer)) {
-      grid-template-areas:
-        'body'
-        'footer';
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Assign components to their named grid areas */
-  .#{$block-class__next}__influencer {
-    border-inline-end: 1px solid $border-subtle-01;
-    grid-area: influencer;
-  }
-
-  .#{$block-class__next}__body {
-    position: relative;
-    display: grid;
-    overflow: hidden;
-    grid-area: body;
-    grid-template-columns: 1fr var(
-        --tearsheet-summary-content-width,
-        calc($spacing-10 * 4)
-      );
-    @include breakpoint-down(md) {
-      grid-template-columns: 1fr 0;
-    }
-
-    > *:only-child {
-      grid-column: 1 / -1;
-    }
-  }
-
-  .#{$block-class__next}__footer {
-    border-block-start: 1px solid $border-subtle-01;
-    grid-area: footer;
-  }
-
-  .#{$block-class__next}__influencer,
-  .#{$block-class__next}__main-content,
-  .#{$block-class__next}__summary-content {
-    overflow: auto;
-    &:not(.#{$block-class__next}__flush) {
-      padding-inline: $spacing-07;
-      @include breakpoint-down(md) {
-        padding-inline: $spacing-05;
-      }
-    }
-  }
-
-  .#{$block-class__next}__main-content {
-    position: relative;
-  }
-  .#{$pkg-prefix}--side-panel {
-    position: absolute;
-    z-index: 9999;
-    block-size: 100%;
-    inline-size: 100%;
-    inset-block-start: 0;
-    max-inline-size: none;
-    .#{$pkg-prefix}--side-panel__header {
-      min-block-size: 0;
-    }
-  }
-
   &.#{$block-class__next}--stack-activated.is-visible {
     --overlay-color: #{$overlay};
     --overlay-alpha: 0.5;
@@ -525,6 +303,235 @@ $motion-duration: $duration-moderate-02;
         );
         transform: scaleX(var(--scale-factor));
       }
+    }
+  }
+}
+
+// Label, title, description styles
+.#{$block-class__next}__header-label {
+  @include type.type-style('label-01');
+
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+}
+
+.#{$block-class__next}__header-title {
+  @include type.type-style('heading-04');
+
+  @include breakpoint-down(md) {
+    @include type.type-style('heading-03');
+  }
+
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-05;
+  margin-block-end: $spacing-03;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  .#{$block-class__next}__title-end {
+    margin-inline-start: $spacing-05;
+  }
+}
+
+.#{$block-class__next}__header-description {
+  @include type.type-style('body-compact-01');
+}
+
+.#{$block-class__next}__header--no-close-icon {
+  display: none;
+}
+
+// ──────────────────────────────────────────────────────────────
+// Navigation bar inside header
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__navigation-bar {
+  // margin: $spacing-04 0 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-01;
+  max-inline-size: calc(100% - $spacing-04);
+  min-block-size: $spacing-08;
+
+  .#{$carbon-prefix}--tabs {
+    margin-inline-start: -$spacing-05;
+  }
+}
+.#{$block-class__next}__scroller-container {
+  position: absolute;
+  inset-block-end: $spacing-01;
+  inset-inline-end: -$spacing-08; // padding inline end of header + adjusted -ve margin for tabs
+  @include breakpoint-down(md) {
+    inset-inline-end: -$spacing-06;
+  }
+
+  .#{$block-class__next}__scroller-button-icon-collapsed {
+    transform: rotate(-180deg);
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Header actions
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__header-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.#{$block-class__next}__content__header-actions {
+  display: flex;
+  overflow: hidden;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  block-size: $spacing-07;
+  inline-size: 100%;
+  margin-block-start: -14px;
+
+  > *.#{$block-class__next}__header-action-item:not([data-hidden='true']) {
+    margin-inline-end: $spacing-03; /* space between visible items */
+  }
+
+  /* Remove margin on the last visible item */
+  > *.#{$block-class__next}__header-action-item:not(
+      [data-hidden='true']
+    ):nth-last-child(2) {
+    margin-inline-end: 0;
+  }
+
+  > * {
+    flex-shrink: 0;
+  }
+  @include breakpoint-down(md) {
+    justify-content: flex-start;
+    margin-inline-end: 0;
+  }
+}
+// Header content and actions
+.#{$block-class__next}__header-content,
+.#{$block-class__next}__header-actions {
+  margin-block-end: $spacing-06;
+}
+// Wide variant at medium breakpoint
+@include breakpoint(md) {
+  .#{$block-class__next}--wide .#{$block-class__next}__container {
+    inline-size: calc(100% - (2 * #{$spacing-10}));
+  }
+}
+// ──────────────────────────────────────────────────────────────
+// Body layout grid
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__body-layout {
+  display: grid;
+  grid-template-areas:
+    'influencer body'
+    'influencer footer';
+  grid-template-columns:
+    var(--tearsheet-influencer-width, calc($spacing-10 * 4))
+    1fr;
+  grid-template-rows: 1fr auto;
+  padding-block: 0;
+  padding-inline-end: 0;
+
+  /* Redefine grid when influencer is absent */
+  &:not(.#{$block-class__next}__body-layout--has-influencer) {
+    grid-template-areas:
+      'body'
+      'footer';
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Assign components to their named grid areas */
+.#{$block-class__next}__influencer {
+  border-inline-end: 1px solid $border-subtle-01;
+  grid-area: influencer;
+}
+
+.#{$block-class__next}__body {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  grid-area: body;
+  grid-template-columns: 1fr var(
+      --tearsheet-summary-content-width,
+      calc($spacing-10 * 4)
+    );
+  @include breakpoint-down(md) {
+    grid-template-columns: 1fr 0;
+  }
+
+  > *:only-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.#{$block-class__next}__footer {
+  overflow: hidden;
+  block-size: $spacing-10;
+  border-block-start: 1px solid $border-subtle-01;
+  grid-area: footer;
+}
+
+.#{$block-class__next}__influencer,
+.#{$block-class__next}__main-content,
+.#{$block-class__next}__summary-content {
+  overflow: auto;
+  &:not(.#{$block-class__next}__flush) {
+    padding-inline: $spacing-07;
+    @include breakpoint-down(md) {
+      padding-inline: $spacing-05;
+    }
+  }
+}
+
+.#{$block-class__next}__main-content {
+  position: relative;
+}
+.#{$pkg-prefix}--side-panel {
+  position: absolute;
+  z-index: 9999;
+  block-size: 100%;
+  inline-size: 100% !important; /* stylelint-disable-line declaration-no-important */
+  inset-block-start: 0;
+  max-inline-size: none;
+  .#{$pkg-prefix}--side-panel__header {
+    min-block-size: 0;
+  }
+}
+
+.#{$block-class__next}--narrow {
+  .#{$block-class__next}__header {
+    padding-inline: $spacing-05;
+  }
+  .#{$block-class__next}__header.#{$block-class__next}__header-collapsed {
+    .#{$block-class__next}__header-actions {
+      display: none;
+    }
+  }
+  .#{$block-class__next}__header-content-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .#{$block-class__next}__header-title {
+    @include type.type-style('heading-03');
+  }
+  .#{$block-class__next}__content__header-actions {
+    justify-content: flex-start;
+    margin-inline-end: 0;
+  }
+  .#{$block-class__next}__body {
+    grid-template-columns: 1fr 0;
+  }
+  .#{$block-class__next}__influencer,
+  .#{$block-class__next}__main-content,
+  .#{$block-class__next}__summary-content {
+    &:not(.#{$block-class__next}__flush) {
+      padding-inline: $spacing-05;
     }
   }
 }

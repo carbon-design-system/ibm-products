@@ -332,9 +332,15 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           this._isOpen = false;
         });
       }
-    } else {
+    } else if (this.open) {
       // allow the html to render before animating in the side panel
-      this._isOpen = this.open;
+      // Use requestAnimationFrame to ensure the DOM is rendered before triggering animation
+      requestAnimationFrame(() => {
+        this._isOpen = this.open;
+      });
+    } else {
+      // When closing, set immediately
+      this._isOpen = false;
     }
   };
 

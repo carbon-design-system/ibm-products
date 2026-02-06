@@ -24,8 +24,6 @@
 // ActionSet
 @use '../ActionSet/action-set';
 
-@use './tearsheet_next';
-
 $block-class: #{$pkg-prefix}--tearsheet;
 
 // stylelint-disable-next-line carbon/theme-use

@@ -45,17 +45,19 @@ test.describe('PageHeader @avt', () => {
     // The header collapses when the page is scrolled down.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, 600);
+    await page.waitForTimeout(200);
     await expect(pageTitle).not.toBeInViewport();
 
     // The header remains collapsed even if scrolled slightly back up.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -170);
+    await page.waitForTimeout(100);
     await expect(pageTitle).not.toBeInViewport();
 
     // The header expands again when scrolled back to the top.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -700);
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(200);
     await expect(pageTitle).toBeInViewport();
   });
 
@@ -79,6 +81,7 @@ test.describe('PageHeader @avt', () => {
     // The header expands when the page is scrolled to the top.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -600);
+    await page.waitForTimeout(200);
     await expect(pageTitle).toBeInViewport();
   });
 
@@ -110,7 +113,7 @@ test.describe('PageHeader @avt', () => {
     await collapseButton.focus();
     await page.keyboard.press('Enter');
 
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(400);
     await expect(pageTitle).not.toBeInViewport();
 
     const expandButton = page.getByRole('button', {
@@ -329,6 +332,6 @@ test.describe('PageHeader @avt', () => {
 async function pressTabKey(page, number) {
   for (let i = 0; i < number; i++) {
     await page.keyboard.press('Tab');
-    await page.waitForTimeout(40);
+    await page.waitForTimeout(100);
   }
 }

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@
 @use '@carbon/type/scss/font-family';
 @use '@carbon/layout' as *;
 @use '@carbon/layout/scss/convert';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../../../global/styles/project-settings' as c4p-settings;
 @use '../variables';
@@ -31,7 +32,7 @@
   padding-inline-start: spacing.$spacing-09;
 }
 
-.#{c4p-settings.$carbon-prefix}--form-item.#{c4p-settings.$carbon-prefix}--checkbox-wrapper.#{variables.$block-class}__customize-columns-checkbox {
+.#{carbon-config.$prefix}--form-item.#{carbon-config.$prefix}--checkbox-wrapper.#{variables.$block-class}__customize-columns-checkbox {
   display: flex;
   flex: initial;
   align-items: center;
@@ -39,7 +40,7 @@
 }
 
 .#{variables.$block-class}__customize-columns-column-list
-  .#{variables.$block-class}__customize-columns-checkbox-wrapper.#{c4p-settings.$carbon-prefix}--form-item {
+  .#{variables.$block-class}__customize-columns-checkbox-wrapper.#{carbon-config.$prefix}--form-item {
   margin-block-end: 0;
 }
 
@@ -63,7 +64,7 @@
   inset-block-start: 0;
   padding-inline-start: spacing.$spacing-08;
 
-  .#{c4p-settings.$carbon-prefix}--checkbox-label-text {
+  .#{carbon-config.$prefix}--checkbox-label-text {
     @include font-family.font-weight('semibold');
   }
 }

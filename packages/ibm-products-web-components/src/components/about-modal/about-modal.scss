@@ -1,5 +1,5 @@
 /*
-* Copyright IBM Corp. 2025
+* Copyright IBM Corp. 2025, 2025
 *
 * This source code is licensed under the Apache-2.0 license found in the
 * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles' as styles;
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/themes/scss/themes';
@@ -24,7 +24,6 @@ $css--plex: true !default;
 @use 'sass:map';
 
 $prefix: 'c4p';
-$carbon-prefix: 'cds';
 
 @use '@carbon/ibm-products-styles/scss/components/AboutModal/index' as *;
 
@@ -32,12 +31,12 @@ $carbon-prefix: 'cds';
   .#{$prefix}--about-modal__logo {
     margin: $spacing-05 $spacing-05 $spacing-07 $spacing-05;
   }
-  #{$carbon-prefix}-modal-header {
+  #{carbon-config.$prefix}-modal-header {
     padding: 0 20% 0 $spacing-05;
     grid-row: auto;
     margin-block-end: 0;
   }
-  #{$carbon-prefix}-modal-body {
+  #{carbon-config.$prefix}-modal-body {
     @include type.type-style('body-compact-02');
 
     overflow: hidden auto;
@@ -50,11 +49,11 @@ $carbon-prefix: 'cds';
       padding-block-end: 0;
     }
     &.#{$prefix}--about-modal-scroll-content {
-      @extend .#{$carbon-prefix}--modal-scroll-content;
+      @extend .#{carbon-config.$prefix}--modal-scroll-content;
     }
   }
 
-  #{$carbon-prefix}-modal-heading {
+  #{carbon-config.$prefix}-modal-heading {
     @include type.type-style('heading-04');
 
     color: $text-primary;
@@ -81,20 +80,20 @@ $carbon-prefix: 'cds';
   .#{$prefix}--about-modal__copyright-text:first-child {
     margin-block-start: $spacing-07;
   }
-  #{$carbon-prefix}-link {
+  #{carbon-config.$prefix}-link {
     display: inline-flex;
   }
   .#{$prefix}--about-modal__links-container {
     @include type.type-style('body-compact-01');
 
     margin-block-start: $spacing-06;
-    #{$carbon-prefix}-link + #{$carbon-prefix}-link {
+    #{carbon-config.$prefix}-link + #{carbon-config.$prefix}-link {
       border-inline-start: 1px solid $border-strong-01;
       margin-inline-start: $spacing-03;
       padding-inline-start: $spacing-03;
     }
   }
-  #{$carbon-prefix}-modal-footer {
+  #{carbon-config.$prefix}-modal-footer {
     @include styles.theme(styles.$g100);
 
     display: block;

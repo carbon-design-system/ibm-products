@@ -14,8 +14,7 @@ import { carbon, pkg } from '../../../packages/ibm-products/src/settings';
 const bc = `${pkg.prefix}--tearsheet`;
 
 test.describe('Tearsheet @avt', () => {
-  // todo - fix
-  test.skip('@avt-default-state', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
       id: 'components-tearsheet--tearsheet',

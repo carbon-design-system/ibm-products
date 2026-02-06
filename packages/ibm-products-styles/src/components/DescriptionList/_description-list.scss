@@ -1,20 +1,22 @@
 //
-// Copyright IBM Corp. 2024, 2024
+// Copyright IBM Corp. 2024, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 // Standard imports.
-@use '../../global/styles/project-settings' as c4p-settings;
-@use '../../global/styles/mixins';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--description-list;
-$carbon-block-class: #{c4p-settings.$carbon-prefix}--structured-list;
+$carbon-block-class: #{carbon-config.$prefix}--structured-list;
 
 .#{$block-class} .#{$carbon-block-class} {
   margin-block-end: $spacing-07;

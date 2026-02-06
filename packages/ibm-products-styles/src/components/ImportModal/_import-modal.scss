@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,34 +9,34 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 
 $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
+.#{$block-class} .#{carbon-config.$prefix}--modal-close {
   display: none;
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--modal-footer
-  .#{c4p-settings.$carbon-prefix}--btn {
+  .#{carbon-config.$prefix}--modal-footer
+  .#{carbon-config.$prefix}--btn {
   max-inline-size: none;
 }
 
-.#{$block-class}.#{c4p-settings.$carbon-prefix}--modal
-  .#{c4p-settings.$carbon-prefix}--modal-content {
+.#{$block-class}.#{carbon-config.$prefix}--modal
+  .#{carbon-config.$prefix}--modal-content {
   padding-inline-end: $spacing-05;
 }
 
-.#{c4p-settings.$carbon-prefix}--file
-  .#{c4p-settings.$carbon-prefix}--file-container,
-.#{c4p-settings.$carbon-prefix}--file
-  ~ .#{c4p-settings.$carbon-prefix}--file-container {
+.#{carbon-config.$prefix}--file .#{carbon-config.$prefix}--file-container,
+.#{carbon-config.$prefix}--file ~ .#{carbon-config.$prefix}--file-container {
   margin-block-start: 0;
 }
 
-.#{c4p-settings.$carbon-prefix}--modal-container--sm
-  .#{c4p-settings.$carbon-prefix}--modal-header {
+.#{carbon-config.$prefix}--modal-container--sm
+  .#{carbon-config.$prefix}--modal-header {
   padding-inline-end: calc(20% - #{$spacing-05});
 }
 
@@ -44,7 +44,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
   display: flex;
 }
 
-.#{$block-class}__import-button.#{c4p-settings.$carbon-prefix}--btn {
+.#{$block-class}__import-button.#{carbon-config.$prefix}--btn {
   margin-inline-start: $spacing-03;
 }
 
@@ -68,15 +68,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
   padding-inline-end: calc(20% - #{$spacing-05});
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--file__selected-file {
+.#{$block-class} .#{carbon-config.$prefix}--file__selected-file {
   background: $layer-02;
   max-inline-size: none;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--file {
+.#{$block-class} .#{carbon-config.$prefix}--file {
   margin-block-end: $spacing-05;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--text-input:disabled {
+.#{$block-class} .#{carbon-config.$prefix}--text-input:disabled {
   background: $layer-02;
 }

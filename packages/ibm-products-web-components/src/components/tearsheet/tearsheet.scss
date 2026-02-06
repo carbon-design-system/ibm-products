@@ -1,5 +1,5 @@
 /*
-* Copyright IBM Corp. 2023, 2024
+* Copyright IBM Corp. 2023, 2025
 *
 * This source code is licensed under the Apache-2.0 license found in the
 * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,6 @@ $css--plex: true !default;
 /* Other Carbon settings. */
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
@@ -19,10 +18,11 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/modal' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use 'sass:map';
 
 $prefix: 'c4p';
-$carbon-prefix: 'cds';
 
 @use '@carbon/ibm-products-styles/scss/components/Tearsheet/index' as *;
 @use '@carbon/ibm-products-styles/scss/components/ActionSet/index' as *;
@@ -34,7 +34,7 @@ $motion-duration: $duration-moderate-02;
 :host(#{$prefix}-tearsheet) {
   --content-padding: #{$spacing-05};
 
-  @extend .#{$carbon-prefix}--modal;
+  @extend .#{carbon-config.$prefix}--modal;
   @extend .#{$prefix}--tearsheet;
 
   .#{$block-class}__header,
@@ -75,12 +75,12 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__buttons[hidden] {
-    @extend .#{$carbon-prefix}--visually-hidden;
+    @extend .#{carbon-config.$prefix}--visually-hidden;
 
     display: none;
   }
 
-  .#{$block-class}__buttons ::slotted(#{$carbon-prefix}-button) {
+  .#{$block-class}__buttons ::slotted(#{carbon-config.$prefix}-button) {
     @extend .#{$block-class-action-set}__action-button;
 
     flex: 0 1 25%;
@@ -88,13 +88,14 @@ $motion-duration: $duration-moderate-02;
     max-inline-size: to-rem(232px);
   }
 
-  .#{$block-class}__buttons ::slotted(#{$carbon-prefix}-button[kind='ghost']) {
+  .#{$block-class}__buttons
+    ::slotted(#{carbon-config.$prefix}-button[kind='ghost']) {
     flex: 1 1 25%;
     max-inline-size: none;
   }
 
-  .#{$block-class}__buttons ::slotted(#{$carbon-prefix}-button[hidden]) {
-    @extend .#{$carbon-prefix}--visually-hidden;
+  .#{$block-class}__buttons ::slotted(#{carbon-config.$prefix}-button[hidden]) {
+    @extend .#{carbon-config.$prefix}--visually-hidden;
 
     display: none;
   }
@@ -102,8 +103,9 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__influencer[wide] {
     @extend .#{$block-class}__influencer--wide;
   }
+
   ::slotted([slot='decorator']),
-  ::slotted(#{$carbon-prefix}-slug) {
+  ::slotted(#{carbon-config.$prefix}-slug) {
     position: absolute;
     display: flex;
     inset-block-start: to-rem(10px);
@@ -171,7 +173,7 @@ $motion-duration: $duration-moderate-02;
 }
 
 :host(#{$prefix}-tearsheet[hidden]) {
-  @extend .#{$carbon-prefix}--visually-hidden;
+  @extend .#{carbon-config.$prefix}--visually-hidden;
 }
 
 :host(#{$prefix}-tearsheet[slug]),
@@ -260,7 +262,7 @@ $motion-duration: $duration-moderate-02;
     }
   }
 
-  .#{$carbon-prefix}--modal-header__heading.#{$block-class}__heading {
+  .#{carbon-config.$prefix}--modal-header__heading.#{$block-class}__heading {
     @include type.type-style('heading-04');
   }
 
@@ -283,34 +285,35 @@ $motion-duration: $duration-moderate-02;
 
   .#{$block-class}__content {
     // Revert background color overridden by Carbon's modal - https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/modal/_modal.scss#L54
-    .#{$carbon-prefix}--pagination,
-    .#{$carbon-prefix}--pagination__control-buttons,
-    .#{$carbon-prefix}--text-input,
-    .#{$carbon-prefix}--text-area,
-    .#{$carbon-prefix}--search-input,
-    .#{$carbon-prefix}--select-input,
-    .#{$carbon-prefix}--dropdown,
-    .#{$carbon-prefix}--dropdown-list,
-    .#{$carbon-prefix}--number input[type='number'],
-    .#{$carbon-prefix}--date-picker__input {
+    .#{carbon-config.$prefix}--pagination,
+    .#{carbon-config.$prefix}--pagination__control-buttons,
+    .#{carbon-config.$prefix}--text-input,
+    .#{carbon-config.$prefix}--text-area,
+    .#{carbon-config.$prefix}--search-input,
+    .#{carbon-config.$prefix}--select-input,
+    .#{carbon-config.$prefix}--dropdown,
+    .#{carbon-config.$prefix}--dropdown-list,
+    .#{carbon-config.$prefix}--number input[type='number'],
+    .#{carbon-config.$prefix}--date-picker__input {
       background-color: $field;
     }
 
-    .#{$carbon-prefix}--select--inline .#{$carbon-prefix}--select-input {
+    .#{carbon-config.$prefix}--select--inline
+      .#{carbon-config.$prefix}--select-input {
       background-color: transparent;
     }
 
     // and restore the 'light' prop in case light fields are wanted
-    .#{$carbon-prefix}--text-input--light,
-  .#{$carbon-prefix}--text-area--light,
-  .#{$carbon-prefix}--search--light .#{$carbon-prefix}--search-input,
-  .#{$carbon-prefix}--select--light .#{$carbon-prefix}--select-input,
-  .#{$carbon-prefix}--dropdown--light,
-  .#{$carbon-prefix}--dropdown--light .#{$carbon-prefix}--dropdown-list,
+    .#{carbon-config.$prefix}--text-input--light,
+  .#{carbon-config.$prefix}--text-area--light,
+  .#{carbon-config.$prefix}--search--light .#{carbon-config.$prefix}--search-input,
+  .#{carbon-config.$prefix}--select--light .#{carbon-config.$prefix}--select-input,
+  .#{carbon-config.$prefix}--dropdown--light,
+  .#{carbon-config.$prefix}--dropdown--light .#{carbon-config.$prefix}--dropdown-list,
   /* stylelint-disable-next-line prettier/prettier */
-  .#{$carbon-prefix}--number--light input[type='number'],
-  .#{$carbon-prefix}--date-picker--light
-    .#{$carbon-prefix}--date-picker__input {
+  .#{carbon-config.$prefix}--number--light input[type='number'],
+  .#{carbon-config.$prefix}--date-picker--light
+    .#{carbon-config.$prefix}--date-picker__input {
       background-color: $field-02;
     }
   }
@@ -322,10 +325,10 @@ $motion-duration: $duration-moderate-02;
 
 :host(#{$prefix}-tearsheet[width='narrow'])
   .#{$block-class}__buttons[actions-multiple='single']
-  ::slotted(#{$carbon-prefix}-button),
+  ::slotted(#{carbon-config.$prefix}-button),
 :host(#{$prefix}-tearsheet[width='narrow'])
   .#{$block-class}__buttons[actions-multiple='double']
-  ::slotted(#{$carbon-prefix}-button) {
+  ::slotted(#{carbon-config.$prefix}-button) {
   // double and single on lg use 50%
   flex: 0 1 50%;
   max-inline-size: none;
@@ -333,7 +336,7 @@ $motion-duration: $duration-moderate-02;
 
 :host(#{$prefix}-tearsheet[width='narrow'])
   .#{$block-class}__buttons
-  ::slotted(#{$carbon-prefix}-button) {
+  ::slotted(#{carbon-config.$prefix}-button) {
   block-size: $spacing-10;
 }
 :host(#{$prefix}-tearsheet[width='narrow']) {

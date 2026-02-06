@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.32.0-rc.0`
+## `@carbon/ibm-products-web-components@0.32.0`
 ### Features :rocket:
 - feat(create-modal): implement `create-modal` pattern in web components (#8710)
 - feat: added side panel code connect file for wc (#8687)

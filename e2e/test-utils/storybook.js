@@ -9,6 +9,38 @@ const { expect } = require('@playwright/test');
 
 async function visitStory(page, options) {
   const { component, story, id, globals, args } = options;
+
+  // Block third-party analytics scripts during tests to prevent accessibility violations
+  // from TrustArc cookie consent and IBM privacy pill that are not part of components being tested
+  await page.route('**/*', (route) => {
+    const url = route.request().url();
+    try {
+      const urlObj = new URL(url);
+      const hostname = urlObj.hostname;
+      const pathname = urlObj.pathname;
+
+      // Block IBM analytics scripts
+      const isIBMAnalytics =
+        hostname === '1.www.s81c.com' &&
+        (pathname.includes('/common/stats/ibm-common.js') ||
+          pathname.includes('/common/carbon/autotrack.min.js'));
+
+      // Block TrustArc scripts
+      const isTrustArc =
+        hostname === 'consent.trustarc.com' ||
+        hostname.endsWith('.trustarc.com');
+
+      if (isIBMAnalytics || isTrustArc) {
+        route.abort();
+      } else {
+        route.continue();
+      }
+    } catch (e) {
+      // If URL parsing fails, continue with the request
+      route.continue();
+    }
+  });
+
   let url = getStoryUrl({
     component,
     story,

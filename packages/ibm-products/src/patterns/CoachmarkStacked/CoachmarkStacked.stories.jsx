@@ -16,10 +16,7 @@ import { Button, Theme, Link as CarbonLink } from '@carbon/react';
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './CoachmarkStacked.mdx';
 import { Coachmark } from '../../components/Coachmark/next/Coachmark';
-import {
-  initCarousel,
-  InitCarousel,
-} from '../../global/js/utils/carousel/carousel';
+import { initCarousel } from '../../global/js/utils/carousel/carousel';
 import { CoachmarkTagline } from '../../components/Coachmark/next/Coachmark/CoachmarkTagline/CoachmarkTagline';
 import { Idea } from '@carbon/react/icons';
 import { pkg } from '../../settings';
@@ -86,17 +83,11 @@ const CoachmarkStackedPattern = (args) => {
 
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
-  //prettier-ignore
   const [openId, setOpenId] = useState(0);
-  //prettier-ignore
-  const carouselContainerRef = useRef < HTMLDivElement > (null);
-  //prettier-ignore
-  const carouselInit = useRef < InitCarousel > (null);
-  //prettier-ignore
-  const [parentHeight, setParentHeight] = useState<number>(0);
-  //prettier-ignore
-  const stackHomeContentRef = useRef<HTMLDivElement | null>(null);
-  //prettier-ignore
+  const carouselContainerRef = useRef(null);
+  const carouselInit = useRef(null);
+  const [parentHeight, setParentHeight] = useState(0);
+  const stackHomeContentRef = useRef(null);
   const stackedCoachmarkContentRefs = useRef([]);
 
   const blockClass = `coachmark-stacked-home`;
@@ -300,8 +291,9 @@ const CoachmarkStackedPattern = (args) => {
   useLayoutEffect(() => {
     if (!parentHeight) {
       if (stackHomeContentRef.current) {
-        //prettier-ignore
-        const stackHomeContent = stackHomeContentRef.current.querySelector<HTMLDivElement>(`div.${pkg.prefix}__bubble`);
+        const stackHomeContent = stackHomeContentRef.current.querySelector(
+          `div.${pkg.prefix}__bubble`
+        );
         if (stackHomeContent) {
           const height = stackHomeContent.clientHeight;
 
@@ -314,8 +306,9 @@ const CoachmarkStackedPattern = (args) => {
     }
 
     if (stackHomeContentRef.current) {
-      //prettier-ignore
-      const stackHomeContent = stackHomeContentRef.current.querySelector<HTMLDivElement>(`div.${pkg.prefix}__bubble`);
+      const stackHomeContent = stackHomeContentRef.current.querySelector(
+        `div.${pkg.prefix}__bubble`
+      );
       if (stackHomeContent) {
         stackHomeContent.style.height = `${parentHeight}px`;
       }
@@ -324,8 +317,9 @@ const CoachmarkStackedPattern = (args) => {
     if (!isOpen || openId <= 0) {
       requestAnimationFrame(() => {
         if (stackHomeContentRef.current) {
-          //prettier-ignore
-          const stackHomeContent = stackHomeContentRef.current.querySelector<HTMLDivElement>(`div.${pkg.prefix}__bubble`);
+          const stackHomeContent = stackHomeContentRef.current.querySelector(
+            `div.${pkg.prefix}__bubble`
+          );
 
           if (stackHomeContent) {
             stackHomeContent.classList.remove(`${blockClass}--scaled-home`);
@@ -340,10 +334,9 @@ const CoachmarkStackedPattern = (args) => {
     if (openId > 0 && isOpen && stackedCoachmarkContentRefs.current) {
       const container = stackedCoachmarkContentRefs.current[openId];
 
-      //prettier-ignore
       const targetHome = Array.from(
-        container.querySelectorAll<HTMLDivElement>(`div.${pkg.prefix}__bubble`)
-      ).filter(bubble => bubble.parentElement === container);
+        container.querySelectorAll(`div.${pkg.prefix}__bubble`)
+      ).filter((bubble) => bubble.parentElement === container);
 
       if (targetHome.length > 0) {
         setTimeout(() => {
@@ -351,8 +344,10 @@ const CoachmarkStackedPattern = (args) => {
             requestAnimationFrame(() => {
               const targetHomeHeight = bubble.clientHeight;
 
-              //prettier-ignore
-              const stackHomeContent = stackHomeContentRef.current.querySelector<HTMLDivElement>(`div.${pkg.prefix}__bubble`);
+              const stackHomeContent =
+                stackHomeContentRef.current.querySelector(
+                  `div.${pkg.prefix}__bubble`
+                );
               if (stackHomeContent) {
                 stackHomeContent.style.height = `calc(${targetHomeHeight}px + 1px)`;
                 stackHomeContent.classList.add(`${blockClass}--scaled-home`);

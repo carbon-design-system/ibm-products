@@ -41,11 +41,13 @@ $block-class-overflow-items: #{$_block-class}-overflow-items;
 
   .#{$block-class-overflow-items}__item-content {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     inline-size: 100%;
   }
 
   .#{$block-class-overflow-items}__item svg {
+    flex-shrink: 0;
     margin: 0 $spacing-02;
   }
 }

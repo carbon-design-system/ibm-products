@@ -7,7 +7,7 @@
 
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
 
 $block-class: #{c4p-settings.$pkg-prefix}--truncated-text;
 
@@ -21,7 +21,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--truncated-text;
   }
 
   &__expand-toggle {
-    color: $link-primary;
+    color: theme.$link-primary;
     cursor: pointer;
   }
 }

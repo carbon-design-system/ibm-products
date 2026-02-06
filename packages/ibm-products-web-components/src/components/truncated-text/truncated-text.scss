@@ -10,7 +10,7 @@
 @use 'sass:map';
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/config' as carbon-config;
 
@@ -74,7 +74,7 @@ $block-class: #{$prefix}--truncated-text;
   @extend %reset-button;
 
   padding: 0 $spacing-01;
-  color: $link-primary;
+  color: theme.$link-primary;
 
   &.#{$block-class}_button-hide {
     display: none;
@@ -83,25 +83,25 @@ $block-class: #{$prefix}--truncated-text;
 
 .#{$block-class}_button-expand {
   &.#{$block-class}_button-layered {
-    background-color: $layer;
+    background-color: theme.$layer;
   }
 
   // Gradient LTR
   &:dir(ltr)::before {
-    @include gradient-bg(90deg, $background);
+    @include gradient-bg(90deg, theme.$background);
   }
 
   &.#{$block-class}_button-layered:dir(ltr)::before {
-    @include gradient-bg(90deg, $layer);
+    @include gradient-bg(90deg, theme.$layer);
   }
 
   // Gradient RTL
   &:dir(rtl)::before {
-    @include gradient-bg(270deg, $background);
+    @include gradient-bg(270deg, theme.$background);
   }
 
   &.#{$block-class}_button-layered:dir(rtl)::before {
-    @include gradient-bg(270deg, $layer);
+    @include gradient-bg(270deg, theme.$layer);
   }
 }
 

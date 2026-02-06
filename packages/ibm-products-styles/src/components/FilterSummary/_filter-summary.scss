@@ -14,12 +14,6 @@
 
 $block-class: #{$pkg-prefix}--filter-summary;
 
-@property --panel-transform {
-  inherits: true;
-  initial-value: 16px;
-  syntax: '<length>';
-}
-
 .#{$block-class} {
   display: flex;
   align-items: center;

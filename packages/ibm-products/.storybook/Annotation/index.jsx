@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { WarningHex, Layers, Chemistry } from '@carbon/react/icons';
-import { pkg } from '../../../ibm-products/src';
+import { pkg } from '../../src';
 
 const types = {
   'deprecation-notice': {

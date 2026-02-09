@@ -19,10 +19,6 @@
   block-size: 100%;
 }
 
-#main-content main {
-  margin-block-start: spacing.$spacing-09;
-}
-
 .page-header--docs-demo .innerZoomElementWrapper > * {
   /* Used to override storybook styling from a dynamically generated class in the canvas preview */
   /* stylelint-disable-next-line declaration-no-important */
@@ -32,4 +28,10 @@
 .page-header--docs-demo .ui-shell--header {
   /* stylelint-disable-next-line carbon/layout-use */
   transform: translateY(-48px);
+}
+
+.page-header-story__wrapper {
+  overflow: auto;
+  block-size: calc(100vh - 3rem);
+  margin-block-start: spacing.$spacing-09;
 }

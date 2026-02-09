@@ -81,3 +81,9 @@ $stackblitz-block-class: c4p--page-header;
     block-size: inherit;
   }
 }
+
+.page-header-story__wrapper {
+  overflow: auto;
+  block-size: calc(100vh - 3rem);
+  margin-block-start: spacing.$spacing-09;
+}

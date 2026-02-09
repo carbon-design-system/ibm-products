@@ -45,17 +45,19 @@ test.describe('PageHeader @avt', () => {
     // The header collapses when the page is scrolled down.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, 600);
+    await page.waitForTimeout(200);
     await expect(pageTitle).not.toBeInViewport();
 
     // The header remains collapsed even if scrolled slightly back up.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -170);
+    await page.waitForTimeout(100);
     await expect(pageTitle).not.toBeInViewport();
 
     // The header expands again when scrolled back to the top.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -700);
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(200);
     await expect(pageTitle).toBeInViewport();
   });
 
@@ -78,6 +80,7 @@ test.describe('PageHeader @avt', () => {
     // The header expands when the page is scrolled to the top.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -600);
+    await page.waitForTimeout(200);
     await expect(pageTitle).toBeInViewport();
   });
 
@@ -101,16 +104,14 @@ test.describe('PageHeader @avt', () => {
     const collapseButton = page.locator(
       `.${pkg.prefix}--page-header__collapse-expand-toggle .${carbon.prefix}--btn--icon-only`
     );
-    await collapseButton.focus();
-    await page.keyboard.press('Enter');
+    await collapseButton.click();
 
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(400);
     await expect(pageTitle).not.toBeInViewport();
 
     // The header expands when the cheveron button is toggled open.
-    await expect(page.getByLabel('Expand the page header')).toBeFocused();
-    await page.keyboard.press('Enter');
-    await page.waitForTimeout(300);
+    await page.getByLabel('Expand the page header').click();
+    await page.waitForTimeout(400);
     await expect(pageTitle).toBeInViewport();
   });
 

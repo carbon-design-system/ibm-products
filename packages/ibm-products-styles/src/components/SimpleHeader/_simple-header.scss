@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2023, 2023
+// Copyright IBM Corp. 2023, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,6 +8,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as *;
 
@@ -29,9 +30,9 @@ $block-class: #{$pkg-prefix}--simple-header;
   margin-block-start: $spacing-02;
 }
 
-.#{$block-class}__breadcrumbs .#{$carbon-prefix}--breadcrumb-item,
+.#{$block-class}__breadcrumbs .#{carbon-config.$prefix}--breadcrumb-item,
 .#{$block-class}__breadcrumbs
-  .#{$carbon-prefix}--breadcrumb-item
-  .#{$carbon-prefix}--link {
+  .#{carbon-config.$prefix}--breadcrumb-item
+  .#{carbon-config.$prefix}--link {
   @include type.type-style('label-01');
 }

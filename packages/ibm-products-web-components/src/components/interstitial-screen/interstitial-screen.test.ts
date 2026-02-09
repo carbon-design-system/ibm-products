@@ -236,6 +236,25 @@ describe('c4p-interstitial-screen', function () {
       templateMultiStep({ fullscreen: false, open: true })
     );
 
+    // Set the open signal to true to trigger carousel initialization
+    interstitialDetailsSignal.set({
+      ...interstitialDetailsSignal.get(),
+      open: true,
+    });
+
+    // Get body component to trigger update
+    const bodyComponent = el.querySelector(
+      `${prefix}-interstitial-screen-body`
+    ) as CDSInterstitialScreenBody;
+
+    // Wait for body component to process the signal change
+    await bodyComponent.updateComplete;
+
+    // Wait for carousel to initialize (happens in requestAnimationFrame)
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    await el.updateComplete;
+
     // Header
     const header = el.querySelector(
       `${prefix}-interstitial-screen-header`
@@ -371,6 +390,7 @@ describe('c4p-interstitial-screen', function () {
 
     const mockDetails = {
       currentStep: 1,
+      open: true,
       stepDetails: [
         { stepTitle: 'Step 1', id: 1 },
         { stepTitle: 'Step 2', id: 2 },

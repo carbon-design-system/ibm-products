@@ -16,16 +16,16 @@ const stories = [
   './ComponentPlayground/**/*.stories.*',
   './Welcome/**/*.stories.*',
   './PrebuiltPatterns/**/*.mdx',
-  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
+  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.*',
 ];
 
 export default {
   staticDirs: ['../public'],
 
   addons: [
-    // getAbsolutePath('@storybook/addon-controls'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('storybook-addon-accessibility-checker'),
     getAbsolutePath('@storybook/addon-links'),
-    // getAbsolutePath('@storybook/addon-viewport'),
     {
       name: '@storybook/addon-docs',
       options: {
@@ -111,6 +111,9 @@ export default {
             silenceDeprecations: ['global-builtin', 'legacy-js-api'],
           },
         },
+      },
+      experimental: {
+        enableNativePlugin: true,
       },
     });
   },

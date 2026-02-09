@@ -130,15 +130,11 @@ export const CoachmarkFixedExample = (args) => {
   };
 
   const handleViewStackUpdate = useCallback(({ currentIndex, lastIndex }) => {
-    console.log(currentIndex, lastIndex);
-
     setCurrentViewIndex(currentIndex);
     setLastViewIndex(lastIndex);
   }, []);
 
   const onNext = () => {
-    console.log('click next');
-
     carouselInit?.current?.next();
   };
   const onPrev = () => {

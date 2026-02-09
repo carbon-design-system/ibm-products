@@ -22,7 +22,6 @@ import {
 import { initCarousel } from '@carbon/utilities';
 import { Idea } from '@carbon/react/icons';
 import cx from 'classnames';
-import { pkg } from '../../../../settings';
 
 //fetching theme
 function useCarbonTheme() {
@@ -67,10 +66,8 @@ function useCarbonTheme() {
   return themeValue;
 }
 
-export const CoachmarkStackedExample = (
-  { ...args },
-  context?: { viewMode?: string }
-) => {
+// eslint-disable-next-line react/prop-types
+export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   const carbonTheme = useCarbonTheme();
   const [isOpen, setIsOpen] = useState(true);
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
@@ -286,7 +283,7 @@ export const CoachmarkStackedExample = (
     if (!parentHeight) {
       if (stackHomeContentRef.current) {
         const stackHomeContent = stackHomeContentRef.current.querySelector(
-          `div.${pkg.prefix}__bubble`
+          `div.${prefix}__bubble`
         );
         if (stackHomeContent) {
           const height = stackHomeContent.clientHeight;
@@ -301,7 +298,7 @@ export const CoachmarkStackedExample = (
 
     if (stackHomeContentRef.current) {
       const stackHomeContent = stackHomeContentRef.current.querySelector(
-        `div.${pkg.prefix}__bubble`
+        `div.${prefix}__bubble`
       );
       if (stackHomeContent) {
         stackHomeContent.style.height = `${parentHeight}px`;
@@ -312,7 +309,7 @@ export const CoachmarkStackedExample = (
       requestAnimationFrame(() => {
         if (stackHomeContentRef.current) {
           const stackHomeContent = stackHomeContentRef.current.querySelector(
-            `div.${pkg.prefix}__bubble`
+            `div.${prefix}__bubble`
           );
 
           if (stackHomeContent) {
@@ -329,7 +326,7 @@ export const CoachmarkStackedExample = (
       const container = stackedCoachmarkContentRefs.current[openId];
 
       const targetHome = Array.from(
-        container.querySelectorAll(`div.${pkg.prefix}__bubble`)
+        container.querySelectorAll(`div.${prefix}__bubble`)
       ).filter((bubble) => bubble.parentElement === container);
 
       if (targetHome.length > 0) {
@@ -340,7 +337,7 @@ export const CoachmarkStackedExample = (
 
               const stackHomeContent =
                 stackHomeContentRef.current.querySelector(
-                  `div.${pkg.prefix}__bubble`
+                  `div.${prefix}__bubble`
                 );
               if (stackHomeContent) {
                 stackHomeContent.style.height = `calc(${targetHomeHeight}px + 1px)`;

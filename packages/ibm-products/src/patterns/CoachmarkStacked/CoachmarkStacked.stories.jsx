@@ -9,6 +9,7 @@ import React from 'react';
 import styles from './_story-styles.scss?inline';
 import DocsPage from './CoachmarkStacked.mdx';
 import { CoachmarkStackedExample } from './example/components/CoachmarkStackedExample';
+import { pkg } from '../../settings';
 
 export default {
   title: 'Patterns/Coachmark Stacked',
@@ -23,7 +24,7 @@ export default {
 };
 
 const CoachmarkStackedPattern = (args) => {
-  return <CoachmarkStackedExample {...args} />;
+  return <CoachmarkStackedExample {...args} prefix={pkg.prefix} />;
 };
 
 export const CoachmarkStack = CoachmarkStackedPattern.bind({});

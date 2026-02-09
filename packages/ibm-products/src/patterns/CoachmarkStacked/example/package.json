@@ -12,9 +12,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "^2.82.0",
-    "@carbon/react": "^1.97.0",
-    "@carbon/utilities": "^0.15.0",
+    "@carbon/ibm-products": "latest",
+    "@carbon/react": "latest",
+    "@carbon/utilities": "latest",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "sass": "^1.93.2"

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2022
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,6 +8,8 @@
 // Standard imports.
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
@@ -19,11 +21,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-side-panel;
 $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 
 .#{$block-class} {
-  .#{c4p-settings.$carbon-prefix}--form.#{$block-class}__form {
+  .#{carbon-config.$prefix}--form.#{$block-class}__form {
     padding-block-start: $spacing-05;
   }
 
-  .#{$block-class}__form.#{c4p-settings.$carbon-prefix}--fieldset {
+  .#{$block-class}__form.#{carbon-config.$prefix}--fieldset {
     padding-block-start: $spacing-03;
   }
 
@@ -42,7 +44,7 @@ $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
   }
 
   &.#{$side-panel-block-class}
-    .#{c4p-settings.$carbon-prefix}--btn.#{$side-panel-block-class}__close-button {
+    .#{carbon-config.$prefix}--btn.#{$side-panel-block-class}__close-button {
     display: none;
   }
 }

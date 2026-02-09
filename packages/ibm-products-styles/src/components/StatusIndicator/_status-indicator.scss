@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2024, 2024
+// Copyright IBM Corp. 2024, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--status-indicator;
@@ -70,7 +71,7 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
   margin-inline-end: 0;
 }
 .#{$block-class-step}--active
-  .#{c4p-settings.$carbon-prefix}--inline-loading__animation {
+  .#{carbon-config.$prefix}--inline-loading__animation {
   margin-inline-end: to-rem(7px);
 }
 // /Override

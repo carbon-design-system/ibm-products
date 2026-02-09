@@ -1,7 +1,7 @@
 /* stylelint-disable function-no-unknown */
 /* stylelint-disable max-nesting-depth */
 //
-// Copyright IBM Corp. 2023, 2024
+// Copyright IBM Corp. 2023, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,14 +13,16 @@
 
 // Standard imports.
 @use '@carbon/layout/scss/convert' as *;
-@use '../../global/styles/project-settings' as c4p-settings;
-@use '../../global/styles/mixins';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/components/button/tokens' as *;
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 
@@ -145,7 +147,7 @@ $draghandle-btn-class: #{$block-class}__handle;
 
   // BODY
   &__body {
-    .#{c4p-settings.$carbon-prefix}--btn--ghost {
+    .#{carbon-config.$prefix}--btn--ghost {
       color: $link-inverse;
 
       &:hover {
@@ -241,7 +243,7 @@ $draghandle-btn-class: #{$block-class}__handle;
   // THEME
   &__light {
     .#{$block-class}__body {
-      .#{c4p-settings.$carbon-prefix}--link {
+      .#{carbon-config.$prefix}--link {
         color: $link-inverse;
 
         &:hover {
@@ -257,7 +259,7 @@ $draghandle-btn-class: #{$block-class}__handle;
         }
       }
 
-      .#{c4p-settings.$carbon-prefix}--btn--ghost {
+      .#{carbon-config.$prefix}--btn--ghost {
         border-color: transparent !important;
         border-radius: 0;
         outline: 1px solid transparent;
@@ -304,7 +306,7 @@ $draghandle-btn-class: #{$block-class}__handle;
 
   &__dark {
     .#{$block-class}__body {
-      .#{c4p-settings.$carbon-prefix}--link {
+      .#{carbon-config.$prefix}--link {
         color: #0062fe;
 
         &:hover {
@@ -321,7 +323,7 @@ $draghandle-btn-class: #{$block-class}__handle;
         }
       }
 
-      .#{c4p-settings.$carbon-prefix}--btn--primary {
+      .#{carbon-config.$prefix}--btn--primary {
         &:focus {
           background-color: $button-primary-active;
           box-shadow:
@@ -330,7 +332,7 @@ $draghandle-btn-class: #{$block-class}__handle;
         }
       }
 
-      .#{c4p-settings.$carbon-prefix}--btn--ghost {
+      .#{carbon-config.$prefix}--btn--ghost {
         border-color: transparent;
 
         &:hover {

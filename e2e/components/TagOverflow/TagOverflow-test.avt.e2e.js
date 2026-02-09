@@ -9,6 +9,7 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
+import { carbon, pkg } from '../../../packages/ibm-products/src/settings';
 
 test.describe('TagOverflow @avt', () => {
   test('@avt-default-state', async ({ page }) => {
@@ -19,6 +20,13 @@ test.describe('TagOverflow @avt', () => {
         carbonTheme: 'white',
       },
     });
+    // Wait for the overflow tag to be visible before clicking
+    await page.waitForSelector(
+      `button.${carbon.prefix}--tag.${carbon.prefix}--tag--operational`,
+      {
+        visible: true,
+      }
+    );
     await page.getByText('+2').click();
     await expect(page).toHaveNoACViolations('TagOverflow @avt-default-state');
   });

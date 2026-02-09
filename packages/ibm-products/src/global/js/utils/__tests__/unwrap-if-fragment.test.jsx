@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import unwrapIfFragment from '../unwrap-if-fragment.js';
+import unwrapIfFragment from '../unwrap-if-fragment';
 
 const AChild = () => <div>A child</div>;
 

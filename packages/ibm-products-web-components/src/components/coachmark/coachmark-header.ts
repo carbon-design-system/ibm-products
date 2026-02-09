@@ -41,9 +41,15 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   dragIconDescription?: string = '';
 
   private _handleClick = () => {
+    // Find and close the parent coachmark
+    const coachmark = this.closest(`${prefix}-coachmark`) as any;
+    if (coachmark) {
+      coachmark.open = false;
+    }
+
     updateCoachmarkDetailsSignal({
       name: 'open',
-      detail: !coachmarkDetailsSignal.get().open,
+      detail: false,
     });
   };
 

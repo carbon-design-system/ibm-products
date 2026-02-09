@@ -10,7 +10,6 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import './styles/_create-tearsheet.scss';
 
-// eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
 const root = createRoot(document.getElementById('root')!);
 
 root.render(

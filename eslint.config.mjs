@@ -83,6 +83,11 @@ export default tsEslint.config(
       '**/coverage/**',
       'packages/ibm-products/scripts/generate/templates/**/*.js*',
       'scripts/example-gallery-builder/update-example/**/*.js*',
+      // Pattern example files (StackBlitz examples)
+      'packages/ibm-products/src/patterns/*/example/main.tsx',
+      'packages/ibm-products/src/patterns/*/example/App.tsx',
+      'packages/ibm-products/src/patterns/*/example/index.html',
+      'packages/ibm-products/src/patterns/*/example/preview-components/**',
     ],
   },
   {

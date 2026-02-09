@@ -1,15 +1,17 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
 @use '@carbon/type' as *;
+
+@use '../../../global/styles/project-settings' as c4p-settings;
 @use './variables';
 
 $row-heights: (
@@ -23,32 +25,32 @@ $row-heights: (
 @each $size, $size-value in $row-heights {
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
-    .#{c4p-settings.$carbon-prefix}--text-input,
+    .#{carbon-config.$prefix}--text-input,
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
-    .#{c4p-settings.$carbon-prefix}--number
+    .#{carbon-config.$prefix}--number
     input[type='number'],
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{variables.$block-class}__inline-edit--select
-    .#{c4p-settings.$carbon-prefix}--list-box.#{c4p-settings.$carbon-prefix}--dropdown,
+    .#{carbon-config.$prefix}--list-box.#{carbon-config.$prefix}--dropdown,
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--date.#{variables.$block-class}__inline-edit--date-#{$size}
-    .#{c4p-settings.$carbon-prefix}--date-picker__input {
+    .#{carbon-config.$prefix}--date-picker__input {
     block-size: $size-value;
   }
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
-    .#{c4p-settings.$carbon-prefix}--number__control-btn::before,
+    .#{carbon-config.$prefix}--number__control-btn::before,
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
-    .#{c4p-settings.$carbon-prefix}--number__control-btn::after {
+    .#{carbon-config.$prefix}--number__control-btn::after {
     block-size: calc(#{$size-value} - 0.25rem);
   }
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{variables.$block-class}__inline-edit--select
-    .#{c4p-settings.$carbon-prefix}--list-box {
+    .#{carbon-config.$prefix}--list-box {
     max-block-size: none;
   }
 }
@@ -80,7 +82,7 @@ $row-heights: (
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-checkbox-focus
-  .cds--checkbox-label::before {
+  .#{carbon-config.$prefix}--checkbox-label::before {
   outline: $spacing-01 solid $focus;
   outline-offset: 1px;
 }
@@ -196,9 +198,9 @@ $row-heights: (
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button
-  .#{c4p-settings.$carbon-prefix}--text-input,
+  .#{carbon-config.$prefix}--text-input,
 .#{variables.$block-class}__inline-edit--outer-cell-button
-  .#{c4p-settings.$carbon-prefix}--number
+  .#{carbon-config.$prefix}--number
   input[type='number'] {
   block-size: $spacing-09;
 }
@@ -208,7 +210,7 @@ $row-heights: (
   inset-inline-end: $spacing-05;
 }
 
-.#{variables.$block-class}__table-with-inline-edit.#{c4p-settings.$carbon-prefix}--data-table
+.#{variables.$block-class}__table-with-inline-edit.#{carbon-config.$prefix}--data-table
   .#{variables.$block-class}__cell-inline-edit {
   position: relative;
   padding: 0;
@@ -216,7 +218,7 @@ $row-heights: (
     padding-inline-start: $spacing-05;
   }
 
-  .#{c4p-settings.$carbon-prefix}--number input[type='number'] {
+  .#{carbon-config.$prefix}--number input[type='number'] {
     min-inline-size: auto;
     padding-inline-end: $spacing-05;
   }
@@ -228,28 +230,28 @@ $row-heights: (
   padding-inline-start: $spacing-05;
 }
 
-.#{variables.$block-class}__inline-edit--select.#{c4p-settings.$carbon-prefix}--dropdown,
+.#{variables.$block-class}__inline-edit--select.#{carbon-config.$prefix}--dropdown,
 .#{variables.$block-class}__inline-edit--date
-  .#{c4p-settings.$carbon-prefix}--date-picker {
+  .#{carbon-config.$prefix}--date-picker {
   inline-size: inherit;
 }
 
-.#{variables.$block-class}__inline-edit--select.#{c4p-settings.$carbon-prefix}--dropdown,
+.#{variables.$block-class}__inline-edit--select.#{carbon-config.$prefix}--dropdown,
 .#{variables.$block-class}__inline-edit--date
-  .#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
-  .#{c4p-settings.$carbon-prefix}--date-picker__input {
+  .#{carbon-config.$prefix}--date-picker.#{carbon-config.$prefix}--date-picker--single
+  .#{carbon-config.$prefix}--date-picker__input {
   block-size: $spacing-09; // default row height
   inline-size: 100%;
   max-block-size: none;
 }
 
 .#{variables.$block-class}__inline-edit--date
-  .#{c4p-settings.$carbon-prefix}--date-picker-container {
+  .#{carbon-config.$prefix}--date-picker-container {
   inline-size: inherit;
 }
 
-.#{variables.$block-class}__inline-edit--date.#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
-  .#{c4p-settings.$carbon-prefix}--date-picker__input {
+.#{variables.$block-class}__inline-edit--date.#{carbon-config.$prefix}--date-picker.#{carbon-config.$prefix}--date-picker--single
+  .#{carbon-config.$prefix}--date-picker__input {
   overflow: hidden;
   inline-size: 100%;
   max-inline-size: none;
@@ -259,7 +261,7 @@ $row-heights: (
 }
 
 .#{variables.$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   .#{variables.$block-class}__carbon-row-hover-active
   td {
   background-color: $layer-hover;
@@ -299,7 +301,7 @@ $row-heights: (
 
 .#{variables.$block-class}
   .#{variables.$block-class}__grid-container-active
-  .#{c4p-settings.$carbon-prefix}--data-table-content::before {
+  .#{carbon-config.$prefix}--data-table-content::before {
   position: absolute;
   z-index: 2;
   background-color: $link-inverse;
@@ -334,11 +336,11 @@ $row-heights: (
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   [data-invalid]
-  ~ .#{c4p-settings.$carbon-prefix}--form-requirement,
+  ~ .#{carbon-config.$prefix}--form-requirement,
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   [data-invalid]
-  .#{c4p-settings.$carbon-prefix}--form-requirement {
+  .#{carbon-config.$prefix}--form-requirement {
   position: absolute;
   z-index: 3;
   padding: $spacing-03 $spacing-06 $spacing-03 $spacing-03;
@@ -352,20 +354,20 @@ $row-heights: (
 
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--list-box[data-invalid]:focus-within
-  ~ .#{c4p-settings.$carbon-prefix}--form-requirement {
+  .#{carbon-config.$prefix}--list-box[data-invalid]:focus-within
+  ~ .#{carbon-config.$prefix}--form-requirement {
   outline: $spacing-01 solid $focus;
 }
 
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--list-box__invalid-icon,
+  .#{carbon-config.$prefix}--list-box__invalid-icon,
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--text-input__invalid-icon,
+  .#{carbon-config.$prefix}--text-input__invalid-icon,
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--number__invalid {
+  .#{carbon-config.$prefix}--number__invalid {
   z-index: 4;
   inset-block-start: calc(100% + #{$spacing-04} + #{$spacing-01});
   inset-inline-end: $spacing-03;
@@ -373,13 +375,13 @@ $row-heights: (
 
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--number__invalid {
+  .#{carbon-config.$prefix}--number__invalid {
   inset-block-start: calc(100% + #{$spacing-02} + #{$spacing-01});
 }
 
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--form-requirement::before {
+  .#{carbon-config.$prefix}--form-requirement::before {
   position: absolute;
   background-color: $layer-01;
   block-size: $spacing-01;
@@ -390,7 +392,7 @@ $row-heights: (
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--form-requirement::after {
+  .#{carbon-config.$prefix}--form-requirement::after {
   position: absolute;
   background-color: $layer-accent-01;
   block-size: 1px;
@@ -402,11 +404,11 @@ $row-heights: (
 
 .#{variables.$block-class} tbody tr:hover {
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-    .#{c4p-settings.$carbon-prefix}--form-requirement::before {
+    .#{carbon-config.$prefix}--form-requirement::before {
     background-color: $layer-accent-01;
   }
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-    .#{c4p-settings.$carbon-prefix}--form-requirement::after {
+    .#{carbon-config.$prefix}--form-requirement::after {
     background-color: transparent;
   }
 }
@@ -414,32 +416,32 @@ $row-heights: (
 // Keep input focus states using $support-01 when inline edit cell is invalid
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--text-input:focus,
+  .#{carbon-config.$prefix}--text-input:focus,
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--number
+  .#{carbon-config.$prefix}--number
   input[type='number']:focus,
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--number
+  .#{carbon-config.$prefix}--number
   input[type='number']:focus
-  ~ .#{c4p-settings.$carbon-prefix}--number__controls
-  .#{c4p-settings.$carbon-prefix}--number__control-btn:hover,
+  ~ .#{carbon-config.$prefix}--number__controls
+  .#{carbon-config.$prefix}--number__control-btn:hover,
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--number__control-btn:focus {
+  .#{carbon-config.$prefix}--number__control-btn:focus {
   outline-color: $support-error;
 }
 
-.#{variables.$block-class} .#{c4p-settings.$carbon-prefix}--text-input:focus {
+.#{variables.$block-class} .#{carbon-config.$prefix}--text-input:focus {
   background: $field-01;
 }
 
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
-  .#{c4p-settings.$carbon-prefix}--number
+  .#{carbon-config.$prefix}--number
   input[type='number'][data-invalid]:focus
-  ~ .#{c4p-settings.$carbon-prefix}--number__controls
-  .#{c4p-settings.$carbon-prefix}--number__control-btn.up-icon::after {
+  ~ .#{carbon-config.$prefix}--number__controls
+  .#{carbon-config.$prefix}--number__control-btn.up-icon::after {
   background-color: $support-error;
 }

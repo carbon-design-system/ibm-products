@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2023
+// Copyright IBM Corp. 2022, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,6 +8,8 @@
 // Standard imports.
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
@@ -33,15 +35,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   display: block;
   inline-size: 100%;
 
-  :global(.#{c4p-settings.$carbon-prefix}--checkbox) {
+  :global(.#{carbon-config.$prefix}--checkbox) {
     display: none;
   }
 }
 
 .#{$block-class}
   .#{c4p-settings.$pkg-prefix}--datagrid__row-size-options-container
-  .#{c4p-settings.$carbon-prefix}--popover-container
-  .#{c4p-settings.$carbon-prefix}--btn--icon-only {
+  .#{carbon-config.$prefix}--popover-container
+  .#{carbon-config.$prefix}--btn--icon-only {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,7 +67,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
   /* stylelint-disable-next-line */
   :global {
-    .#{c4p-settings.$carbon-prefix}--pagination {
+    .#{carbon-config.$prefix}--pagination {
       // newer version of carbon pagination has scroll which doesn't make any sense, removing it
       /* stylelint-disable-next-line declaration-property-value-disallowed-list */
       overflow-x: unset;
@@ -79,8 +81,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
 // firefox fix for issue mentioned in 3442
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--menu-button__trigger:not(
-    .#{c4p-settings.$carbon-prefix}--btn--ghost
+  .#{carbon-config.$prefix}--menu-button__trigger:not(
+    .#{carbon-config.$prefix}--btn--ghost
   ) {
   min-inline-size: auto;
 }

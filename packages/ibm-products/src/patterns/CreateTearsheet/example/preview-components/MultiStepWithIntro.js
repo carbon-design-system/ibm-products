@@ -19,14 +19,14 @@ import {
   TileGroup,
   Toggle,
   NumberInput,
+  AILabel,
+  AILabelContent,
 } from '@carbon/react';
 import { StepProvider, useStepContext } from '@carbon/utilities-react';
 import cx from 'classnames';
-import { pkg } from '../../../../settings';
 import { CreateTearsheet } from '../components/CreateTearsheet';
 import { CreateTearsheetStep } from '../components/CreateTearsheetStep';
-import { NoDataIllustration } from '../../../../components/EmptyStates/assets/NoDataIllustration';
-import { sampleDecorator } from '../../../../global/js/story-parts/decorator';
+import { NoDataEmptyState } from '@carbon/ibm-products';
 
 const blockClass = `tearsheet-create-multi-step`;
 
@@ -47,41 +47,35 @@ const IntroStep = ({ selectedCategory, setSelectedCategory }) => {
         valueSelected={selectedCategory}
       >
         <RadioTile
-          className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile`}
+          className={`tearsheet-create-multi-step--custom-tile`}
           value="standard"
           id="tile-1"
           tabIndex={selectedCategory === 'standard' ? 0 : -1}
         >
-          <NoDataIllustration size="lg" />
-          <span
-            className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile-label`}
-          >
+          <NoDataEmptyState />
+          <span className={`tearsheet-create-multi-step--custom-tile-label`}>
             Standard
           </span>
         </RadioTile>
         <RadioTile
-          className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile`}
+          className={`tearsheet-create-multi-step--custom-tile`}
           value="premium"
           id="tile-2"
           tabIndex={selectedCategory === 'premium' ? 0 : -1}
         >
-          <NoDataIllustration size="lg" />
-          <span
-            className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile-label`}
-          >
+          <NoDataEmptyState size="lg" />
+          <span className={`tearsheet-create-multi-step--custom-tile-label`}>
             Premium
           </span>
         </RadioTile>
         <RadioTile
-          className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile`}
+          className={`tearsheet-create-multi-step--custom-tile`}
           value="plus"
           id="tile-3"
           tabIndex={selectedCategory === 'plus' ? 0 : -1}
         >
-          <NoDataIllustration size="lg" />
-          <span
-            className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile-label`}
-          >
+          <NoDataEmptyState size="lg" />
+          <span className={`tearsheet-create-multi-step--custom-tile-label`}>
             Plus
           </span>
         </RadioTile>
@@ -267,17 +261,17 @@ const MessageRetentionStep = () => {
 };
 
 export const MultiStepWithIntro = ({
-  backButtonText,
-  cancelButtonText,
-  className,
-  description,
-  influencerWidth,
-  label,
-  nextButtonText,
-  slug,
-  decorator,
-  submitButtonText,
-  title,
+  backButtonText = 'Back',
+  cancelButtonText = 'Cancel',
+  className = 'tearsheet-create-multi-step',
+  description = '',
+  influencerWidth = undefined,
+  label = '',
+  nextButtonText = 'Next',
+  slug = undefined,
+  decorator = undefined,
+  submitButtonText = 'Create',
+  title = 'Create',
   open,
   setOpen,
 }) => {
@@ -338,6 +332,25 @@ export const MultiStepWithIntro = ({
   const handleBackDisabledState = (currentStep) => {
     return currentStep === 1;
   };
+  const Decorator = () => (
+    <AILabel className="decorator-container" size="xs">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            This is not really Lorem Ipsum but the spell checker did not like
+            the previous text with it&apos;s non-words which is why this
+            unwieldy sentence, should one choose to call it that, here.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+      </AILabelContent>
+    </AILabel>
+  );
 
   return (
     <StepProvider>
@@ -361,8 +374,7 @@ export const MultiStepWithIntro = ({
             }, simulatedDelay);
           })
         }
-        slug={slug && sampleDecorator(slug)}
-        decorator={decorator && sampleDecorator(decorator)}
+        decorator={decorator && <Decorator />}
         hasError={hasSubmitError}
         handleNextDisabledState={handleNextDisabledState}
         handleBackDisabledState={handleBackDisabledState}

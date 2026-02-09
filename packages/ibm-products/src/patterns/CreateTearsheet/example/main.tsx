@@ -8,12 +8,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import '@carbon/styles/css/styles.css';
-import '@carbon/ibm-products/css/index.min.css';
+import './styles/_create-tearsheet.scss';
 
 // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
-const container = document.getElementById('root');
-const root = createRoot(container!);
+const root = createRoot(document.getElementById('root')!);
 
 root.render(
   <React.StrictMode>

@@ -7,28 +7,34 @@
  */
 
 import React, { useState } from 'react';
-import { Button, Column, Grid, TextInput, NumberInput } from '@carbon/react';
+import {
+  Button,
+  Column,
+  Grid,
+  TextInput,
+  NumberInput,
+  AILabel,
+  AILabelContent,
+} from '@carbon/react';
 import { StepProvider } from '@carbon/utilities-react';
 import cx from 'classnames';
-import { pkg } from '../../../../settings';
 import { CreateTearsheet } from '../components/CreateTearsheet';
 import { CreateTearsheetStep } from '../components/CreateTearsheetStep';
-import { sampleDecorator } from '../../../../global/js/story-parts/decorator';
 
 const blockClass = `tearsheet-create-multi-step`;
 
 export const MultiStepWithStepInErrorState = ({
-  backButtonText,
-  cancelButtonText,
-  className,
-  description,
-  influencerWidth,
-  label,
-  nextButtonText,
-  slug,
-  decorator,
-  submitButtonText,
-  title,
+  backButtonText = 'Back',
+  cancelButtonText = 'Cancel',
+  className = 'tearsheet-create-multi-step',
+  description = '',
+  influencerWidth = undefined,
+  label = '',
+  nextButtonText = 'Next',
+  slug = undefined,
+  decorator = undefined,
+  submitButtonText = 'Create',
+  title = 'Create',
   open,
   setOpen,
 }) => {
@@ -48,6 +54,26 @@ export const MultiStepWithStepInErrorState = ({
     setStepTwoIsInvalid(true);
     setOpen(false);
   };
+
+  const Decorator = () => (
+    <AILabel className="decorator-container" size="xs">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            This is not really Lorem Ipsum but the spell checker did not like
+            the previous text with it&apos;s non-words which is why this
+            unwieldy sentence, should one choose to call it that, here.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+      </AILabelContent>
+    </AILabel>
+  );
 
   return (
     <StepProvider>
@@ -71,8 +97,7 @@ export const MultiStepWithStepInErrorState = ({
             }, simulatedDelay);
           })
         }
-        slug={slug && sampleDecorator(slug)}
-        decorator={decorator && sampleDecorator(decorator)}
+        decorator={decorator && <Decorator />}
       >
         <CreateTearsheetStep
           title="Topic name"

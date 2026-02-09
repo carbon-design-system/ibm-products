@@ -12,13 +12,16 @@ import React, {
   isValidElement,
   useState,
   ReactElement,
+  useEffect,
 } from 'react';
 import {
   StepGroup,
   StepContextType,
   useStepContext,
 } from '@carbon/utilities-react';
+import { ArrowRight } from '@carbon/react/icons';
 import { preview__Tearsheet as Tearsheet } from '@carbon/ibm-products';
+import { CreateTearsheetProvider } from './CreateTearsheetContext';
 import {
   Button,
   ButtonSet,
@@ -102,6 +105,15 @@ export const CreateTearsheet = ({
   } = useStepContext();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
+
+  // Reset to step 1 when tearsheet closes
+  useEffect(() => {
+    if (!open && currentStep !== 1) {
+      handleGoToStep(1);
+      setFormState({});
+    }
+  }, [open, currentStep, handleGoToStep, setFormState]);
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -123,12 +135,11 @@ export const CreateTearsheet = ({
       totalSteps,
       formState,
     });
-
+    setIsLoading(false);
     if (abortAction) {
       return;
     }
     handleNext();
-    setIsLoading(false);
   };
 
   // Extract step labels from children if not provided, excluding steps with includeStep={false} and introStep={true}
@@ -192,89 +203,104 @@ export const CreateTearsheet = ({
     : currentStep === 1 || isLoading;
 
   return (
-    <Tearsheet
-      open={open}
-      variant={variant}
-      onClose={() => {
-        onClose?.();
-        setOpen?.(false);
-      }}
-      launcherButtonRef={launcherButtonRef}
-      influencerWidth={influencerWidth}
-      decorator={decorator}
-      {...rest}
-    >
-      <Tearsheet.Header>
-        <Tearsheet.HeaderContent
-          label={label || ''}
-          title={title || ''}
-          description={description || ''}
-          headerActions={headerActions}
-        />
-      </Tearsheet.Header>
-      {progressIndicator === 'vertical' && !hideSteps && (
-        <Tearsheet.Influencer>
-          <ProgressIndicator vertical className="influencer__content">
-            {stepLabels.map((step, index) => (
-              <ProgressStep
-                key={index}
-                complete={progressIndicatorStepIndex > index + 1}
-                current={progressIndicatorStepIndex === index + 1}
-                label={step.label}
-                secondaryLabel={step.secondaryLabel}
-              />
-            ))}
-          </ProgressIndicator>
-        </Tearsheet.Influencer>
-      )}
-      <Tearsheet.Body>
-        <Tearsheet.MainContent isFlush={true}>
-          <StepGroup>{children}</StepGroup>
-        </Tearsheet.MainContent>
-      </Tearsheet.Body>
-      <Tearsheet.Footer>
-        <ButtonSet className="default__action-buttons">
-          <Button
-            className="create-tearsheet__action-button create-tearsheet__action-button--cancel"
-            kind="ghost"
-            onClick={() => {
-              onClose?.();
-              setOpen?.(false);
-            }}
-            size="xl"
-            disabled={isLoading}
+    <CreateTearsheetProvider value={{ open }}>
+      <Tearsheet
+        open={open}
+        variant={variant}
+        onClose={() => {
+          onClose?.();
+          setOpen?.(false);
+        }}
+        launcherButtonRef={launcherButtonRef}
+        influencerWidth={influencerWidth}
+        decorator={decorator}
+        preventCloseOnClickOutside
+        {...rest}
+      >
+        <Tearsheet.Header hideCloseButton>
+          <Tearsheet.HeaderContent
+            label={label || ''}
+            title={title || ''}
+            description={description || ''}
+            headerActions={headerActions}
+          />
+        </Tearsheet.Header>
+        {progressIndicator === 'vertical' && !hideSteps && (
+          <Tearsheet.Influencer
+            influencerPanelOpen={influencerPanelOpen}
+            onInfluencerPanelClose={() => setInfluencerPanelOpen(false)}
           >
-            {cancelButtonText}
-          </Button>
-          <Button
-            className="create-tearsheet__action-button"
-            kind="secondary"
-            onClick={() => {
-              handlePrevious();
-            }}
-            disabled={isBackDisabled}
-            size="xl"
-          >
-            {backButtonText}
-          </Button>
-          <Button
-            size="xl"
-            className="create-tearsheet__action-button"
-            onClick={() => {
-              if (currentStep === totalSteps) {
-                handleSubmit();
-              } else {
-                handleNextClick();
-              }
-            }}
-            disabled={isNextDisabled}
-          >
-            {currentStep === totalSteps ? submitButtonText : nextButtonText}
-            {isLoading && <InlineLoading />}
-          </Button>
-        </ButtonSet>
-      </Tearsheet.Footer>
-    </Tearsheet>
+            <ProgressIndicator vertical className="influencer__content">
+              {stepLabels.map((step, index) => (
+                <ProgressStep
+                  key={index}
+                  complete={progressIndicatorStepIndex > index + 1}
+                  current={progressIndicatorStepIndex === index + 1}
+                  label={step.label}
+                  secondaryLabel={step.secondaryLabel}
+                />
+              ))}
+            </ProgressIndicator>
+          </Tearsheet.Influencer>
+        )}
+        <Tearsheet.Body>
+          <Tearsheet.MainContent isFlush={true}>
+            <Button
+              size="sm"
+              kind="ghost"
+              className="showInfluencer"
+              onClick={() => setInfluencerPanelOpen(true)}
+            >
+              Show Influencer
+              <ArrowRight size={16} />
+            </Button>
+            <StepGroup>{children}</StepGroup>
+          </Tearsheet.MainContent>
+        </Tearsheet.Body>
+        <Tearsheet.Footer>
+          <ButtonSet className="default__action-buttons">
+            <Button
+              className="create-tearsheet__action-button create-tearsheet__action-button--cancel"
+              kind="ghost"
+              onClick={() => {
+                onClose?.();
+                setOpen?.(false);
+              }}
+              size="xl"
+              disabled={isLoading}
+            >
+              {cancelButtonText}
+            </Button>
+            <Button
+              className="create-tearsheet__action-button"
+              kind="secondary"
+              onClick={() => {
+                handlePrevious();
+              }}
+              disabled={isBackDisabled}
+              size="xl"
+            >
+              {backButtonText}
+            </Button>
+            <Button
+              size="xl"
+              className="create-tearsheet__action-button"
+              onClick={() => {
+                if (currentStep === totalSteps) {
+                  handleSubmit();
+                } else {
+                  handleNextClick();
+                }
+              }}
+              disabled={isNextDisabled}
+            >
+              {currentStep === totalSteps ? submitButtonText : nextButtonText}
+              {isLoading && <InlineLoading />}
+            </Button>
+          </ButtonSet>
+        </Tearsheet.Footer>
+      </Tearsheet>
+    </CreateTearsheetProvider>
   );
 };
 

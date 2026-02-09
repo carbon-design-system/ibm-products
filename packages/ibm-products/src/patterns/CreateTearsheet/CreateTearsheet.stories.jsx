@@ -20,7 +20,7 @@ import { MultiStepWithStepInErrorState } from './example/preview-components/Mult
 import { TruncatedText } from '../../components/TruncatedText';
 
 export default {
-  title: 'Patterns/CreateTearsheet',
+  title: 'Patterns/Create flows/CreateTearsheet',
   component: MultiStepTearsheet,
   tags: ['autodocs'],
   argTypes: {
@@ -97,7 +97,6 @@ export const multiStepTearsheet = (args) => {
 multiStepTearsheet.storyName = 'Create tearsheet';
 multiStepTearsheet.args = {
   ...createTearsheetProps,
-  firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
 export const withIntroStep = (args) => {

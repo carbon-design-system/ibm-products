@@ -13,9 +13,10 @@ import React, {
   RefObject,
   useRef,
 } from 'react';
-import { Heading, Section, FormGroup, Grid, Column } from '@carbon/react';
+import { Heading, FormGroup, Grid, Column } from '@carbon/react';
 import cx from 'classnames';
 import { useStepContext } from '@carbon/utilities-react';
+import { useCreateTearsheetContext } from './CreateTearsheetContext';
 
 const blockClass = 'create-tearsheet-step';
 
@@ -46,14 +47,11 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
   label?: string;
   secondaryLabel?: string;
   onMount?: () => void;
-  disableSubmit?: boolean;
-  onNext?: () => Promise<void>;
-  onPrevious?: () => void;
   primaryFocusElement?: string;
   includeStep?: boolean;
-  introStep?: boolean;
   invalid?: boolean;
   hideSteps?: boolean;
+  disableSubmit?: boolean;
 }
 
 type CreateTearsheetStepProps = CreateTearsheetStepBaseProps &
@@ -73,16 +71,14 @@ export const CreateTearsheetStep = forwardRef<
       label,
       secondaryLabel,
       onMount,
-      disableSubmit,
-      onNext,
-      onPrevious,
       primaryFocusElement,
       fieldsetLegendText,
       fieldsetLegendId,
       hasFieldset = defaults.hasFieldset,
       includeStep = defaults.includeStep,
-      introStep,
       invalid,
+      hideSteps,
+      disableSubmit,
       ...rest
     },
     ref
@@ -90,6 +86,7 @@ export const CreateTearsheetStep = forwardRef<
     const localRef = useRef<HTMLDivElement>(null);
     const stepRef = ref || localRef;
     const { currentStep, totalSteps } = useStepContext();
+    const { open } = useCreateTearsheetContext();
 
     useEffect(() => {
       if (onMount) {
@@ -98,7 +95,7 @@ export const CreateTearsheetStep = forwardRef<
     }, [onMount]);
 
     useEffect(() => {
-      if (primaryFocusElement) {
+      if (primaryFocusElement && open) {
         const element = document.querySelector(
           primaryFocusElement
         ) as HTMLElement;
@@ -106,7 +103,7 @@ export const CreateTearsheetStep = forwardRef<
           element?.focus();
         });
       }
-    }, [primaryFocusElement, currentStep]);
+    }, [primaryFocusElement, currentStep, open]);
 
     const renderDescription = () => {
       if (description) {

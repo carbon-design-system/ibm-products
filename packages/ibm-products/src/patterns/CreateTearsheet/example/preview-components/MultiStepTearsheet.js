@@ -22,10 +22,8 @@ import {
 } from '@carbon/react';
 import { StepProvider, useStepContext } from '@carbon/utilities-react';
 import cx from 'classnames';
-import { pkg } from '../../../../settings';
 import { CreateTearsheet } from '../components/CreateTearsheet';
 import { CreateTearsheetStep } from '../components/CreateTearsheetStep';
-import { sampleDecorator } from '../../../../global/js/story-parts/decorator';
 
 const blockClass = `tearsheet-create-multi-step`;
 
@@ -49,18 +47,6 @@ const Step1 = ({
     <CreateTearsheetStep
       {...rest}
       primaryFocusElement="#tearsheet-multi-step-story-text-input-multi-step-1"
-      onNext={() => {
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            if (shouldReject) {
-              setHasSubmitError(true);
-              reject();
-            }
-            setIsInvalid(false);
-            resolve();
-          }, simulatedDelay);
-        });
-      }}
       title="Topic name"
       fieldsetLegendText="Topic information"
       subtitle="This is the unique name used to recognize your topic"
@@ -212,7 +198,6 @@ const Step3Partitions = () => {
 const Step4MessageRetention = () => {
   const { formState, setFormState } = useStepContext();
   const { messageRetention = 'one-day' } = formState || {};
-  console.log('messageRetention', messageRetention);
 
   useEffect(() => {
     setFormState((prev) => ({
@@ -224,7 +209,6 @@ const Step4MessageRetention = () => {
   return (
     <CreateTearsheetStep
       title="Message retention"
-      onNext={() => Promise.resolve()}
       subtitle="This is how long messages are retained before they are deleted."
       description="If your messages are not read by a consumer within this time, they will be missed."
       fieldsetLegendText="Message retention scheduling"
@@ -255,17 +239,17 @@ const Step4MessageRetention = () => {
 };
 
 export const MultiStepTearsheet = ({
-  backButtonText,
-  cancelButtonText,
-  className,
-  description,
-  influencerWidth,
-  label,
-  nextButtonText,
-  slug,
-  decorator,
-  submitButtonText,
-  title,
+  backButtonText = 'Back',
+  cancelButtonText = 'Cancel',
+  className = 'tearsheet-create-multi-step',
+  description = '',
+  influencerWidth = undefined,
+  label = '',
+  nextButtonText = 'Next',
+  slug = undefined,
+  decorator = undefined,
+  submitButtonText = 'Create',
+  title = 'Create',
   open,
   setOpen,
   ...rest
@@ -283,6 +267,25 @@ export const MultiStepTearsheet = ({
     setOpen(false);
     setShouldIncludeAdditionalStep(false);
   };
+  const Decorator = () => (
+    <AILabel className="decorator-container" size="xs">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            This is not really Lorem Ipsum but the spell checker did not like
+            the previous text with it&apos;s non-words which is why this
+            unwieldy sentence, should one choose to call it that, here.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+      </AILabelContent>
+    </AILabel>
+  );
 
   const handleNextDisabledState = (formState, currentStep) => {
     // Step 1: Topic name is required
@@ -331,7 +334,12 @@ export const MultiStepTearsheet = ({
         }}
         onNext={async ({ currentStep }) => {
           return new Promise((resolve) => {
-            if (currentStep == 1) {
+            if (shouldReject) {
+              setTimeout(() => {
+                resolve(true);
+                setHasSubmitError(true);
+              }, simulatedDelay);
+            } else if (currentStep == 1) {
               setTimeout(() => {
                 resolve();
               }, simulatedDelay);
@@ -340,8 +348,7 @@ export const MultiStepTearsheet = ({
             }
           });
         }}
-        slug={slug && sampleDecorator(slug)}
-        decorator={decorator && sampleDecorator(decorator)}
+        decorator={decorator && <Decorator />}
         {...rest}
         hasError={hasSubmitError}
         handleNextDisabledState={handleNextDisabledState}

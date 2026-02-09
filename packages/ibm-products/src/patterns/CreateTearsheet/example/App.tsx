@@ -10,33 +10,30 @@ import { Button } from '@carbon/react';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 import { MultiStepWithStepInErrorState } from './preview-components/MultiStepWithStepInErrorState';
+import '@carbon/styles/css/styles.css';
+import '@carbon/ibm-products/css/index.min.css';
 import './styles/_create-tearsheet.scss';
+import './styles/_story-styles.scss';
 
 export const App = () => {
   const [openMultiStep, setOpenMultiStep] = useState(false);
   const [openWithIntro, setOpenWithIntro] = useState(false);
   const [openWithError, setOpenWithError] = useState(false);
 
-  const createTearsheetProps = {
+  const commonProps = {
     title: 'Create topic',
     description: 'Specify details for the new topic you want to create',
     submitButtonText: 'Create',
     cancelButtonText: 'Cancel',
     backButtonText: 'Back',
     nextButtonText: 'Next',
-    className: 'test-class-name',
-    label: '',
-    influencerWidth: undefined,
-    slug: undefined,
-    decorator: undefined,
   };
 
   return (
     <div className="app-container" style={{ padding: '2rem' }}>
-      <h1>CreateTearsheet Pattern Examples</h1>
+      <h1>CreateTearsheet Patterns</h1>
       <p style={{ marginBottom: '2rem' }}>
-        This example demonstrates the CreateTearsheet pattern using the new
-        Tearsheet architecture with StepFlow.
+        Examples demonstrating the CreateTearsheet pattern with StepFlow.
       </p>
 
       <div
@@ -61,19 +58,19 @@ export const App = () => {
       </div>
 
       <MultiStepTearsheet
-        {...createTearsheetProps}
+        {...commonProps}
         open={openMultiStep}
         setOpen={setOpenMultiStep}
       />
 
       <MultiStepWithIntro
-        {...createTearsheetProps}
+        {...commonProps}
         open={openWithIntro}
         setOpen={setOpenWithIntro}
       />
 
       <MultiStepWithStepInErrorState
-        {...createTearsheetProps}
+        {...commonProps}
         open={openWithError}
         setOpen={setOpenWithError}
       />

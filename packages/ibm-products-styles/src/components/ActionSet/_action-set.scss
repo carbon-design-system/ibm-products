@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2023
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../global/styles/project-settings' as c4p-settings;
 
@@ -34,10 +35,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 }
 
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set
-  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--expressive,
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set
-  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn {
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set
+  .#{$action-set-block-class}__action-button.#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--expressive,
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set
+  .#{$action-set-block-class}__action-button.#{carbon-config.$prefix}--btn {
   max-inline-size: none;
 }
 
@@ -90,19 +91,19 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 // or any non-ghosts in extra large or 2xl,
 // or row-quadruple (non-ghost),
 // buttons are 25% width with a 2xl of 232px
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-triple.#{$action-set-block-class}--lg
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--row-triple.#{$action-set-block-class}--lg
   .#{$action-set-block-class}__action-button:not(
     .#{$action-set-block-class}__action-button--ghost
   ),
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--xl
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--xl
   .#{$action-set-block-class}__action-button:not(
     .#{$action-set-block-class}__action-button--ghost
   ),
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--2xl
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--2xl
   .#{$action-set-block-class}__action-button:not(
     .#{$action-set-block-class}__action-button--ghost
   ),
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--row-quadruple
   .#{$action-set-block-class}__action-button:not(
     .#{$action-set-block-class}__action-button--ghost
   ) {
@@ -111,14 +112,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   max-inline-size: to-rem(232px);
 }
 
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--row-quadruple
   .#{$action-set-block-class}__action-button--ghost {
   flex: 1 1 25%;
 }
 
 .#{$action-set-block-class}
   .#{$action-set-block-class}__action-button
-  .#{c4p-settings.$carbon-prefix}--inline-loading {
+  .#{carbon-config.$prefix}--inline-loading {
   position: absolute;
   inline-size: $spacing-07;
   inset-block-start: 0;

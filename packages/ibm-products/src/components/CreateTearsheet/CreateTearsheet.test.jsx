@@ -643,13 +643,13 @@ describe(CreateTearsheet.displayName, () => {
 
     expect(
       influencerSteps.childNodes[0].classList.contains(
-        'cds--progress-step--complete'
+        `${carbon.prefix}--progress-step--complete`
       )
     ).toBe(true);
 
     expect(
       influencerSteps.childNodes[1].classList.contains(
-        'cds--progress-step--current'
+        `${carbon.prefix}--progress-step--current`
       )
     ).toBe(true);
   });

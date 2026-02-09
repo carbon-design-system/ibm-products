@@ -1,3 +1,18 @@
+## `@carbon/ibm-products@2.83.0`
+### Features :rocket:
+- feat(CreateModal): implement `CreateModal` pattern with example (#8706)
+- feat: added side panel code connect file for wc (#8687)
+
+### Bug fixes :bug:
+- fix: pageheader position on scroll and resize (#8866)
+- fix(storybook): add a11y checker back, react/wc (#8899)
+- fix(checklist): title and chart title do not show tooltip when truncated (#8788)
+- fix(coachmark): added preview status to coachmarkBeacon (#8855)
+- fix: exception focusing launcherButton (#8827)
+
+### Housekeeping :house:
+- chore(deps): update dependency typescript-config-carbon to ^0.9.0 (#8894)
+
 ## `@carbon/ibm-products@2.82.0`
 ### Features :rocket:
 - feat(coachmark): open in stackblitz (#8690)

@@ -19,7 +19,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 @customElement(`${prefix}-page-header-tabs`)
 class CDSPageHeaderTabs extends LitElement {
   render() {
-    return html` <div class="${carbonPrefix}--css-grid">
+    return html` <div class="${carbonPrefix}--css-grid" condensed="">
       <div
         class="${carbonPrefix}--sm:col-span-4 ${carbonPrefix}--md:col-span-8 ${carbonPrefix}--lg:col-span-16 ${carbonPrefix}--css-grid-column"
       >

@@ -5,10 +5,9 @@ import {
   Canvas,
   Meta,
 } from '@storybook/addon-docs/blocks';
-import { CodesandboxLink } from '../../../../global/js/utils/story-helper';
-
+import { stackblitzPrefillConfig } from '../../../../../previewer/codePreviewer';
 import * as CoachmarkStories from './Coachmark.stories';
-import { Coachmark } from './Coachmark';
+import { Coachmark } from '.';
 
 <Meta title="Coachmark" component={Coachmark} />
 
@@ -70,19 +69,46 @@ understand.
 ## Tooltip example usage
 
 <Canvas
-  className="coachmarkExample"
-  withSource="none"
+  className="coachmark--docs-demo"
   of={CoachmarkStories.Tooltip}
-></Canvas>
-
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: CoachmarkStories.Tooltip,
+          status: {
+            preview: ['Coachmark', 'CoachmarkBeacon'],
+          },
+          styles: CoachmarkStories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
 
 ## Floating example usage
 
 <Canvas
-  className="coachmarkExample"
-  withSource="none"
+  className="coachmark--docs-demo"
   of={CoachmarkStories.Floating}
-></Canvas>
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: CoachmarkStories.Floating,
+          status: {
+            preview: ['Coachmark'],
+          },
+          customImports: [
+            `import { Crossroads } from '@carbon/react/icons';`,
+          ],
+
+          styles: CoachmarkStories.default.parameters.styles,
+        }),
+    },
+
+]} />
 
 ## Component API
 

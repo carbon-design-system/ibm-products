@@ -8,7 +8,7 @@
 import React, { forwardRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blockClass } from './Coachmark';
+import { blockClass } from './context';
 
 export interface ContentBodyProps {
   /**
@@ -27,7 +27,7 @@ export type EnrichedChildren = {
   children: ReactNode;
 };
 
-const ContentBody = forwardRef<HTMLDivElement, ContentBodyProps>(
+export const ContentBody = forwardRef<HTMLDivElement, ContentBodyProps>(
   (props, ref) => {
     const { className = '', children, ...rest } = props;
     const ContentBodyBlockClass = `${blockClass}--content-body`;

@@ -102,7 +102,7 @@ export interface SearchBarProps extends PropsWithChildren {
    */
 }
 
-export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
+export const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -238,7 +238,6 @@ export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-SearchBar = pkg.checkComponentEnabled(SearchBar, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

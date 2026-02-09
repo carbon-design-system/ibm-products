@@ -1157,7 +1157,7 @@ describe(componentName, () => {
         );
         expect(container.children.length).toEqual(0);
       },
-      2
+      1
     );
   });
 

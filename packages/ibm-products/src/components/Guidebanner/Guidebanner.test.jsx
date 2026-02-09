@@ -28,6 +28,7 @@ const dataTestId = uuidv4();
 
 const defaultProps = {
   title: 'Guidebanner title',
+  open: true,
 };
 const guidebannerElementDefaultProps = {
   description: 'GuidebannerElement description',

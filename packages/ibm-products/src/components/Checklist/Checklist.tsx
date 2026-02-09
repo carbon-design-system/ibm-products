@@ -64,7 +64,7 @@ export interface ChecklistProps {
   /**
    * Define both `chartLabel` and `chartValue` to show the chart and its label together.
    */
-  chartLabel?: string;
+  chartLabel?: ReactNode;
   /**
    * A number between 0 and 1.
    *
@@ -153,7 +153,7 @@ const defaults = {
  * an icon that defines the item's state as "not started", "in progress",
  * and "complete".
  */
-export let Checklist = React.forwardRef(
+export const Checklist = React.forwardRef(
   (
     {
       chartValue,
@@ -345,7 +345,6 @@ export let Checklist = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-Checklist = pkg.checkComponentEnabled(Checklist, componentName);
 Checklist.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
@@ -355,7 +354,7 @@ Checklist.propTypes = {
   /**
    * Define both `chartLabel` and `chartValue` to show the chart and its label together.
    */
-  chartLabel: PropTypes.string,
+  chartLabel: PropTypes.node,
   /**
    * A number between 0 and 1.
    *

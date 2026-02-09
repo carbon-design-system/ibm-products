@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,14 +11,18 @@ import React from 'react';
 import { Link as CarbonLink } from '@carbon/react';
 import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
-import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
+import {
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
+} from '..';
 import { CoachmarkFixed } from '.';
 import mdx from './CoachmarkFixed.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Onboarding/Coachmark/CoachmarkFixed',
+  title: 'Deprecated/Coachmark/CoachmarkFixed',
   component: CoachmarkFixed,
   tags: ['autodocs', 'Onboarding'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -39,6 +43,26 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version. This can be created as{' '}
+            <a href="/?path=/docs/patterns-coachmark-fixed--overview">
+              pattern
+            </a>{' '}
+            using new composable coachmark, carousel utility and other carbon
+            components.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 /**
@@ -84,4 +108,5 @@ coachmarkFixed.args = {
   onClose: () => console.log('CLOSE'),
   portalTarget: '#root:not([hidden="true"])',
   className: 'myCoachmarkFixed',
+  closeIconDescription: 'Close',
 };

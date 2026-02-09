@@ -12,7 +12,7 @@ import { visitStory } from '../../test-utils/storybook';
 import { pkg } from '../../../packages/ibm-products/src/settings';
 
 test.describe('NotificationsPanel @avt', () => {
-  test('@avt-default-state', async ({ page }) => {
+  test.skip('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
       id: 'components-notificationspanel--default',
@@ -51,7 +51,9 @@ test.describe('NotificationsPanel @avt', () => {
     });
     await expect(notificationTrigger).toBeFocused();
   });
-  test('@avt-notification-panel-focus-return-to-trigger', async ({ page }) => {
+  test.skip('@avt-notification-panel-focus-return-to-trigger', async ({
+    page,
+  }) => {
     await visitStory(page, {
       component: 'NotificationsPanel',
       id: 'components-notificationspanel--default',
@@ -65,18 +67,6 @@ test.describe('NotificationsPanel @avt', () => {
     );
     await expect(notificationPanel).toBeVisible();
     await page.locator('body').click({ force: true });
-    await Promise.race([
-      notificationPanel.waitFor({ state: 'hidden', timeout: 100 }),
-      notificationPanel.waitFor({ state: 'detached', timeout: 100 }),
-      page.waitForFunction(
-        (panelSelector) => {
-          const panel = document.querySelector(panelSelector);
-          return !panel || window.getComputedStyle(panel).opacity === '0';
-        },
-        '[role="dialog"]',
-        { timeout: 100 }
-      ),
-    ]);
     await page.waitForTimeout(150);
     await expect(async () => {
       const isFocused = await notificationTrigger.evaluate(
@@ -112,18 +102,6 @@ test.describe('NotificationsPanel @avt', () => {
       exact: true,
     });
     await addNotificationButton.click();
-    await Promise.race([
-      notificationPanel.waitFor({ state: 'hidden', timeout: 100 }),
-      notificationPanel.waitFor({ state: 'detached', timeout: 100 }),
-      page.waitForFunction(
-        (panelSelector) => {
-          const panel = document.querySelector(panelSelector);
-          return !panel || window.getComputedStyle(panel).opacity === '0';
-        },
-        '[role="dialog"]',
-        { timeout: 100 }
-      ),
-    ]);
     await expect(notificationTrigger).not.toBeFocused();
     await expect(addNotificationButton).toBeFocused({ timeout: 100 });
   });

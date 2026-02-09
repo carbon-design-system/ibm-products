@@ -7,11 +7,12 @@
 
 import React from 'react';
 import { action } from 'storybook/actions';
-import { Add } from '@carbon/react/icons';
+import { Add, Information } from '@carbon/react/icons';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 import { EmptyStateV2 } from '.';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { Annotation } from '../../../.storybook/Annotation';
+import { Tooltip } from '@carbon/react';
 
 export default {
   title: 'Deprecated/Empty state/EmptyStateV2',
@@ -86,6 +87,19 @@ const Template = (args) => <EmptyStateV2 {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   ...defaultProps,
+};
+
+export const WithTooltipInSubtitle = Template.bind({});
+WithTooltipInSubtitle.args = {
+  ...defaultProps,
+  subtitle: (
+    <>
+      Click <span>here</span> to upload your data
+      <Tooltip label="Facts and statistics collected together for reference or analysis">
+        <Information size="16" />
+      </Tooltip>
+    </>
+  ),
 };
 
 export const WithCustomIllustration = Template.bind({});

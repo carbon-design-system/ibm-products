@@ -13,9 +13,10 @@ import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-lis
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/inline-loading/index.js';
-import checkmarkOutline16 from '@carbon/web-components/es/icons/checkmark--outline/16';
-import errorOutline16 from '@carbon/web-components/es/icons/error--outline/16';
-import save16 from '@carbon/web-components/es/icons/save/16';
+import checkmarkOutline16 from '@carbon/icons/es/checkmark--outline/16';
+import errorOutline16 from '@carbon/icons/es/error--outline/16';
+import save16 from '@carbon/icons/es/save/16';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 import styles from './saving.scss?lit';
 
 const blockClass = `c4p--saving`;
@@ -24,7 +25,7 @@ type Status = 'default' | 'in-progress' | 'success' | 'fail';
 const statusObj = {
   default: {
     text: 'Save',
-    icon: () => save16({ slot: 'icon' }),
+    icon: () => iconLoader(save16, { slot: 'icon' }),
   },
   ['in-progress']: {
     text: 'Saving...',
@@ -38,11 +39,11 @@ const statusObj = {
   },
   success: {
     text: 'Saved',
-    icon: () => checkmarkOutline16({ slot: 'icon' }),
+    icon: () => iconLoader(checkmarkOutline16, { slot: 'icon' }),
   },
   fail: {
     text: 'Failed to save. Try again?',
-    icon: () => errorOutline16({ slot: 'icon' }),
+    icon: () => iconLoader(errorOutline16, { slot: 'icon' }),
   },
 };
 /**

@@ -7,7 +7,6 @@
 
 import React, { useEffect } from 'react';
 import { white, g10, g90, g100 } from '@carbon/themes';
-import '../src/feature-flags';
 
 import { pkg } from '../src/settings';
 import theme from './theme';
@@ -116,7 +115,11 @@ const parameters = {
       },
     ],
   },
-  controls: { expanded: true, hideNoControlsWarning: true },
+  controls: {
+    expanded: true,
+    hideNoControlsWarning: true,
+    sort: 'alpha',
+  },
   layout: 'centered',
   options: {
     showPanel: true,
@@ -129,7 +132,8 @@ const parameters = {
         'Patterns',
         ['*', 'Prebuilt patterns'],
         'Utilities',
-        'Experimental',
+        'Preview',
+        'Preview Candidate',
         ['*', 'FeatureFlags'],
         'Deprecated',
       ],
@@ -144,6 +148,7 @@ const parameters = {
   docs: {
     theme,
     page: () => <StoryDocsPage />,
+    codePanel: true,
   },
 };
 

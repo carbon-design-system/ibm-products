@@ -259,10 +259,12 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-tabs) {
-  margin-inline-start: -$spacing-05;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__tab-bar;
+  .#{$carbon-prefix}--css-grid .#{$carbon-prefix}--css-grid-column {
+    margin: 0;
+  }
 }
 
 :host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tab-bar--tablist {

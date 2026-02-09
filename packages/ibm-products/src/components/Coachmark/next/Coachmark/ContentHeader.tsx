@@ -13,7 +13,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blockClass, CoachmarkContext } from './Coachmark';
+import { blockClass, CoachmarkContext } from './context';
 import { CoachmarkBubbleHeader } from './CoachmarkBubble';
 import { Close, Draggable } from '@carbon/react/icons';
 import { makeDraggable } from '../../../../global/js/utils/makeDraggable';
@@ -37,7 +37,7 @@ export interface ContentHeaderProps {
   children?: string;
 }
 
-const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
+export const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
   (props, ref) => {
     const {
       className = '',
@@ -72,6 +72,25 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
           dragHandle: handleRef.current,
           focusableDragHandle: dragRef.current,
         });
+
+        const onDragStart = () => {
+          if (contentRef) {
+            contentRef.classList.add(`${contentHeaderBlockClass}--is-dragging`);
+            contentRef.setAttribute('aria-label', 'Coachmark is being dragged');
+          }
+        };
+
+        const onDragEnd = () => {
+          if (contentRef) {
+            contentRef.classList.remove(
+              `${contentHeaderBlockClass}--is-dragging`
+            );
+            contentRef.removeAttribute('aria-label');
+          }
+        };
+
+        contentRef.addEventListener('dragstart', onDragStart);
+        contentRef.addEventListener('dragend', onDragEnd);
       }
     });
 
@@ -105,8 +124,6 @@ const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
     );
   }
 );
-
-export default ContentHeader;
 
 ContentHeader.propTypes = {
   /**

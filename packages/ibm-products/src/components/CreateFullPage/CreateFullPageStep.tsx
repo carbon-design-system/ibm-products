@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2023
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -126,7 +126,7 @@ type CreateFullPageStepFieldsetProps =
 export type CreateFullPageStepProps = CreateFullPageStepBaseProps &
   CreateFullPageStepFieldsetProps;
 
-export let CreateFullPageStep = forwardRef(
+export const CreateFullPageStep = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -264,12 +264,6 @@ export let CreateFullPageStep = forwardRef(
   }
 );
 
-// Return a placeholder if not released and not enabled by feature flag
-CreateFullPageStep = pkg.checkComponentEnabled(
-  CreateFullPageStep,
-  componentName
-);
-
 CreateFullPageStep.propTypes = {
   /**
    * Content that shows in the CreateFullPage step
@@ -295,9 +289,7 @@ CreateFullPageStep.propTypes = {
    * This is the legend text that appears above a fieldset html element for accessibility purposes. It is required when the optional `hasFieldset` prop is provided to a FullPageStep.
    */
   /**@ts-ignore */
-  fieldsetLegendText: PropTypes.string.isRequired.if(
-    ({ hasFieldset }) => hasFieldset === true
-  ),
+  fieldsetLegendText: PropTypes.string,
 
   /**
    * This optional prop will render your form content inside of a fieldset html element

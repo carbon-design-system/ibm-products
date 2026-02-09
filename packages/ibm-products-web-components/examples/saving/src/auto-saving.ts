@@ -12,7 +12,8 @@ import { state } from 'lit/decorators.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/textarea/index.js';
-import errorFilled16 from '@carbon/web-components/es/icons/error--filled/16';
+import errorFilled16 from '@carbon/icons/es/error--filled/16';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 import styles from './saving.scss?lit';
 
 const blockClass = `c4p--saving`;
@@ -75,7 +76,7 @@ class AutoSaving extends HostListenerMixin(LitElement) {
                 ? html`
                     <div class="${blockClass}__error-icon">
                       <ErrorFilled size="{16}" />
-                      ${errorFilled16({})}
+                      ${iconLoader(errorFilled16, {})}
                     </div>
                   `
                 : ''}

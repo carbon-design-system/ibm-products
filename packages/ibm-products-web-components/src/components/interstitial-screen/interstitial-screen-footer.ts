@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, nothing } from 'lit';
+import { html, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -17,8 +17,10 @@ import styles from './interstitial-screen-footer.scss?lit';
 import { interstitialDetailsSignal } from './interstitial-screen-context';
 import { SignalWatcher } from '@lit-labs/signals';
 import '@carbon/web-components/es/components/inline-loading/inline-loading.js';
-import { CDSModalFooter } from '@carbon/web-components/es/index.js';
-import ArrowRight from '@carbon/web-components/es/icons/arrow--right/16.js';
+import CDSModalFooter from '@carbon/web-components/es/components/modal/modal-footer';
+import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--interstitial-screen`;
 
@@ -57,6 +59,9 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   @property({ reflect: true })
   startButtonLabel = 'Get Started';
 
+  @property({ reflect: true })
+  slot = 'footer';
+
   /**
    * Enables support for asynchronous validation or user confirmation before proceeding
    * to the next interstitial step. When set to true, the component will wait for an external
@@ -69,6 +74,43 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
 
   @state()
   loadingAction;
+
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    registerFocusableContainers(
+      this.childNodes.length > 0 ? this : this.shadowRoot
+    );
+  }
+
+  protected updated(_changedProperties: PropertyValues): void {
+    if (_changedProperties.size === 0) {
+      // This logic ensures the start/next button receives focus when focus is lost from the "next" or "back" buttons
+      // during step navigation—particularly when those buttons are not rendered.
+      this.updateComplete.then(() => {
+        const { stepDetails, currentStep } = interstitialDetailsSignal.get();
+
+        const isMultiStep =
+          Array.isArray(stepDetails) && stepDetails.length > 0;
+        const lastStepIndex = stepDetails?.length - 1;
+
+        if (!isMultiStep) {
+          return;
+        }
+
+        const focusButton = (selector: string) => {
+          const btn = this.shadowRoot?.querySelector(
+            selector
+          ) as HTMLButtonElement | null;
+          btn?.focus();
+        };
+
+        if (currentStep === lastStepIndex) {
+          focusButton(`.${prefix}--interstitial-screen--start-btn`);
+        } else if (currentStep === 0) {
+          focusButton(`.${prefix}--interstitial-screen--next-btn`);
+        }
+      });
+    }
+  }
 
   private _handleUserInitiatedClose(
     triggeredBy: EventTarget | null | ActionType
@@ -137,11 +179,12 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
     this.loadingAction = '';
 
     if (canProceed) {
-      const carouselAPI = interstitialDetailsSignal.get()?.carouselAPI;
+      const { carouselAPI } = interstitialDetailsSignal.get();
+
       if (actionType == 'next') {
-        carouselAPI.next();
+        carouselAPI?.next();
       } else if (actionType === 'back') {
-        carouselAPI.prev();
+        carouselAPI?.prev();
       } else {
         this._handleUserInitiatedClose?.(actionType);
       }
@@ -154,6 +197,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
     const { start, next, back, skip } = disableActions;
     const isMulti = stepDetails?.length > 0;
     const progStepCeil = stepDetails?.length - 1;
+
     return html`<slot>
       <div class="${blockClass}--footer">
         ${isMulti
@@ -203,7 +247,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                   ${this.loadingAction === 'next'
                     ? html` <cds-inline-loading slot="icon" aria-live="off">
                       </cds-inline-loading>`
-                    : html` ${ArrowRight({ slot: 'icon' })}`}
+                    : html`${iconLoader(ArrowRight, { slot: 'icon' })}`}
                 </cds-button>
               `
             : nothing}

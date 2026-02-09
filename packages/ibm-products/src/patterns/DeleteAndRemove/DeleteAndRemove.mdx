@@ -1,0 +1,187 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './DeleteAndRemove.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import { getCurrentTime } from './_story-assets/utils';
+import wait from '../../global/js/utils/wait';
+
+export const customImportsArr1 = [
+  `import { TrashCan } from '@carbon/react/icons';
+  import { InlineLoading } from '@carbon/react';`,
+];
+
+export const customImportsArr2 = [
+  `import { Launch } from '@carbon/react/icons';`,
+];
+
+export const customFunctionArr = [`${getCurrentTime} ${wait}`];
+
+# Delete and remove
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/delete-and-remove/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [High impact deletion](#high-impact-deletion)
+- [High impact deletion with connected items](#high-impact-deletion-with-connected-items)
+- [High impact batch deletion](#high-impact-batch-deletion)
+- [Medium impact deletion or removal](#medium-impact-deletion-or-removal)
+- [Low impact deletion or removal](#low-impact-deletion-or-removal)
+
+## Overview
+
+“Removing” is an action that moves information from one location to another.
+Removal can be both destructive and non-destructive. “Deletion” is the most
+common type of removal and is destructive
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+#### Ingredients
+
+To build these patterns, we recommend including the following components:
+
+```jsx
+import {
+  Button,
+  Checkbox,
+  FormLabel,
+  InlineLoading,
+  Link,
+  Modal,
+  TextInput,
+  ToastNotification,
+} from '@carbon/react';
+```
+
+## High impact deletion
+
+When deleting is high-impact, a confirmation dialog should be presented to the
+user which displays:
+
+- The name of the resource
+- Consequences of the deletion
+- This action cannot be undone.
+- An editable text field for the name of the resource to be entered
+
+<Canvas
+  of={stories.highImpactDeletion}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.highImpactDeletion,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+          title: `${stories.highImpactDeletion.storyName} pattern (Carbon React)`,
+        }),
+    },
+  ]}
+/>
+
+## High impact deletion with connected items
+
+It is similar to high-impact deletion pattern, but the confirmation dialog will
+display the below 2 additional content:
+
+- A list of all the connected items
+- A checkbox to confirm the deletion of all its connected items.
+
+<Canvas
+  of={stories.highImpactDeletionWithConnectedItems}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.highImpactDeletionWithConnectedItems,
+          customImports: customImportsArr2,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+          title: `${stories.highImpactDeletionWithConnectedItems.storyName} pattern (Carbon React)`,
+        }),
+    },
+  ]}
+/>
+
+## High impact batch deletion
+
+In batch deletion, a confirmation dialog should be presented to the user which
+displays:
+
+- The names of the items selected
+- The consequences of the deletion
+- The phrase, “This action cannot be undone”
+- A checkbox to confirm the deletion of the selected resources
+- A note of items that cannot be deleted in batch selection (optional)
+
+<Canvas
+  of={stories.highImpactBatchDeletion}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.highImpactBatchDeletion,
+          customImports: customImportsArr2,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+          title: `${stories.highImpactBatchDeletion.storyName} pattern (Carbon React)`,
+        }),
+    },
+  ]}
+/>
+
+## Medium impact deletion or removal
+
+When deleting is medium-impact, the user is not required to confirm the resource
+name by typing it into a text field.
+
+> NOTE: The medium-impact removal pattern is similar to medium-impact deletion
+> pattern, with the only difference being the usage of “remove” or “delete“ in
+> the text. Use “remove” when the action is reversible or not truly destructive.
+
+<Canvas
+  of={stories.mediumImpactDeletion}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.mediumImpactDeletion,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+          title: `${stories.mediumImpactDeletion.storyName} pattern (Carbon React)`,
+        }),
+    },
+  ]}
+/>
+
+## Low impact deletion or removal
+
+In low impact situations, user confirmation may not be required.
+
+> NOTE: The low-impact removal pattern is similar to low-impact deletion
+> pattern, with the only difference being the usage of “remove” or “delete“ in
+> the text.
+
+<Canvas
+  of={stories.lowImpactDeletion}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.lowImpactDeletion,
+          customImports: customImportsArr1,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+          title: `${stories.lowImpactDeletion.storyName} pattern (Carbon React)`,
+        }),
+    },
+  ]}
+/>

@@ -32,77 +32,71 @@ const componentName = 'AboutModal';
 
 export interface AboutModalProps {
   /**
-   * If you are legally required to display logos of technologies used
-   * to build your product you can provide this in the additionalInfo.
-   * Additional information will be displayed in the footer.
+   * Provide additional detail for the modal footer, such as logos of
+   * technologies used in the product, legally required for some products
    */
   additionalInfo?: ReactNode;
 
   /**
-   * Provide an optional class to be applied to the modal root node.
+   * Specify an optional className to be applied to the modal root node
    */
   className?: string;
 
   /**
-   * The accessibility title for the close icon.
+   * Provide an accessible name for the close icon
    */
   closeIconDescription: string;
 
   /**
-   * Subhead text providing any relevant product disclaimers including
-   * legal information (optional)
+   * Provide any relevant product disclaimers or legal information
    */
   content?: ReactNode;
 
   /**
-   * Trademark and copyright information. Displays first year of
-   * product release to current year.
+   * Specify the first year of product release to the current year
    */
   copyrightText: string;
 
   /**
-   * An array of Carbon `Link` component if there are additional information
-   * to call out within the card. The about modal should be used to display
-   * the product information and not where users go to find help (optional)
+   * Provide an array of Carbon `Link`s for additional detail about the
+   * product
    */
   links?: ReactNode[];
 
   /**
-   * A visual symbol used to represent the product.
+   * Provide a visual representation of the product
    */
   logo: ReactNode;
 
   /**
-   * Specifies aria label for AboutModal
+   * Specify an aria-label for the modal
    */
   modalAriaLabel?: string;
 
   /**
-   * Specifies an optional handler which is called when the AboutModal
-   * is closed. Returning `false` prevents the AboutModal from closing.
+   * Specify an optional handler for closing modal. Returning `false`
+   * prevents the modal from closing
    */
   onClose?: () => void | boolean;
 
   /**
-   * Specifies whether the AboutModal is open or not.
+   * Specify whether the modal is currently open
    */
   open?: boolean;
 
   /**
-   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   * Provide the DOM node where the modal should be rendered.
+   * Defaults to `document.body`
    */
   portalTarget?: ReactNode;
 
   /**
-   * Header text that provides the product name. The IBM Services logo
-   * consists of two discrete, but required, elements: the iconic
-   * IBM 8-bar logo represented alongside the IBM Services logotype.
-   * Please follow these guidelines to ensure proper execution.
+   * Provide the product name for the modal header
    */
   title: ReactNode;
 
   /**
-   * Text that provides information on the version number of your product.
+   * Provide the product’s version number
    */
   version: string;
 }
@@ -116,7 +110,7 @@ export interface AboutModalProps {
  * should be immediately apparent to the user, with a clear and obvious path
  * to completion.
  */
-export let AboutModal = React.forwardRef(
+export const AboutModal = React.forwardRef(
   (
     {
       additionalInfo,
@@ -217,7 +211,6 @@ export let AboutModal = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-AboutModal = pkg.checkComponentEnabled(AboutModal, componentName);
 AboutModal.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
@@ -225,77 +218,71 @@ AboutModal.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 AboutModal.propTypes = {
   /**
-   * If you are legally required to display logos of technologies used
-   * to build your product you can provide this in the additionalInfo.
-   * Additional information will be displayed in the footer.
+   * Provide additional detail for the modal footer, such as logos of
+   * technologies used in the product, legally required for some products
    */
   additionalInfo: PropTypes.node,
 
   /**
-   * Provide an optional class to be applied to the modal root node.
+   * Specify an optional className to be applied to the modal root node
    */
   className: PropTypes.string,
 
   /**
-   * The accessibility title for the close icon.
+   * Provide an accessible name for the close icon
    */
   closeIconDescription: PropTypes.string.isRequired,
 
   /**
-   * Subhead text providing any relevant product disclaimers including
-   * legal information (optional)
+   * Provide any relevant product disclaimers or legal information
    */
   content: PropTypes.node,
 
   /**
-   * Trademark and copyright information. Displays first year of
-   * product release to current year.
+   * Specify the first year of product release to the current year
    */
   copyrightText: PropTypes.string.isRequired,
 
   /**
-   * An array of Carbon `Link` component if there are additional information
-   * to call out within the card. The about modal should be used to display
-   * the product information and not where users go to find help (optional)
+   * Provide an array of Carbon `Link`s for additional detail about the
+   * product
    */
   links: PropTypes.arrayOf(PropTypes.element),
 
   /**
-   * A visual symbol used to represent the product.
+   * Provide a visual representation of the product
    */
   logo: PropTypes.node.isRequired,
 
   /**
-   * Specifies aria label for AboutModal
+   * Specify an aria-label for the modal
    */
   modalAriaLabel: PropTypes.string,
 
   /**
-   * Specifies an optional handler which is called when the AboutModal
-   * is closed. Returning `false` prevents the AboutModal from closing.
+   * Specify an optional handler for closing modal. Returning `false`
+   * prevents the modal from closing
    */
   onClose: PropTypes.func,
 
   /**
-   * Specifies whether the AboutModal is open or not.
+   * Specify whether the modal is currently open
    */
   open: PropTypes.bool,
 
   /**
-   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   * Provide the DOM node where the modal should be rendered.
+   * Defaults to `document.body`
    */
   portalTarget: PropTypes.node,
 
   /**
-   * Header text that provides the product name. The IBM Services logo
-   * consists of two discrete, but required, elements: the iconic
-   * IBM 8-bar logo represented alongside the IBM Services logotype.
-   * Please follow these guidelines to ensure proper execution.
+   * Provide the product name for the modal header
    */
   title: PropTypes.node.isRequired,
 
   /**
-   * Text that provides information on the version number of your product.
+   * Provide the product’s version number
    */
   version: PropTypes.string.isRequired,
 };

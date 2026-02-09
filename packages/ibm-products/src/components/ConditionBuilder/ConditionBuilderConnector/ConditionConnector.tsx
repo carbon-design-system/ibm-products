@@ -55,7 +55,9 @@ const ConditionConnector = ({
     focusThisField(evt, conditionBuilderRef);
   };
   return variant == HIERARCHICAL_VARIANT ? (
-    <span className={`${className} ${blockClass}__connector--disabled`}>
+    <span
+      className={`${className} ${blockClass}__connector ${blockClass}__connector--disabled`}
+    >
       <ConditionBuilderButton label={operator} />
     </span>
   ) : (
@@ -68,7 +70,7 @@ const ConditionConnector = ({
       onFocus={activeConnectorHandler}
       onBlur={inActiveConnectorHandler}
       {...rest}
-      popOverClassName={className}
+      popOverClassName={`${className} ${blockClass}__connector`}
       className={`${blockClass}__connector-button`}
     >
       <ItemOption

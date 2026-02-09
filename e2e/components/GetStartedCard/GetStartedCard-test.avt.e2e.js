@@ -14,8 +14,7 @@ test.describe('GetStartedCard @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'GetStartedCard',
-      // cspell:disable-next-line
-      id: 'experimental-onboarding-getstartedcard--default',
+      id: 'preview-candidate-onboarding-getstartedcard--default',
       globals: {
         carbonTheme: 'white',
       },

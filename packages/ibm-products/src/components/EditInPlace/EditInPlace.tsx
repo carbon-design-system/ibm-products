@@ -130,7 +130,7 @@ export interface EditInplaceProps extends PropsWithChildren {
   placeholder?: string;
 }
 
-export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
+export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
   (
     {
       cancelLabel,
@@ -365,8 +365,6 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     );
   }
 );
-
-EditInPlace = pkg.checkComponentEnabled(EditInPlace, componentName);
 
 EditInPlace.displayName = componentName;
 

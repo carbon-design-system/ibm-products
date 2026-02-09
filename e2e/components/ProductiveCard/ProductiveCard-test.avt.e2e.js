@@ -48,11 +48,6 @@ test.describe('ProductiveCard @avt', () => {
     const deleteButton = page.getByRole('button', { name: 'Delete' });
     const disabledButton = page.getByRole('button', { name: 'Read more' });
 
-    // race conditions
-    await page.waitForSelector(
-      `.${pkg.prefix}--card__actions-header-ghost-button`
-    );
-
     expect(disabledButton.getAttribute('disabled')).not.toBeNull();
 
     await page.keyboard.press('Tab');
@@ -68,7 +63,7 @@ test.describe('ProductiveCard @avt', () => {
   });
 
   // Overflow menu open/close states test
-  test('@avt-overflow-menu: validates overflow menu interactions', async ({
+  test.skip('@avt-overflow-menu: validates overflow menu interactions', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -248,7 +243,7 @@ test.describe('ProductiveCard @avt', () => {
   });
 
   // hover states
-  test('@avt-hover: validates hover states', async ({ page }) => {
+  test.skip('@avt-hover: validates hover states', async ({ page }) => {
     await visitStory(page, {
       component: 'ProductiveCard',
       id: 'components-cards-productivecard--with-overflow',

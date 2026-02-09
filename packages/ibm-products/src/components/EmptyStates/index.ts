@@ -6,7 +6,7 @@
  */
 
 export { EmptyState } from './EmptyState';
-export { EmptyStateV2 } from './EmptyStateV2';
+export { EmptyStateV2 } from './EmptyStateV2.deprecated';
 export { ErrorEmptyState } from './ErrorEmptyState';
 export { NoDataEmptyState } from './NoDataEmptyState';
 export { NoTagsEmptyState } from './NoTagsEmptyState';
@@ -15,7 +15,7 @@ export { NotificationsEmptyState } from './NotificationsEmptyState';
 export { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 
 export type { EmptyStateProps } from './EmptyState';
-export type { EmptyStateV2Props } from './EmptyStateV2';
+export type { EmptyStateV2Props } from './EmptyStateV2.deprecated';
 export type { ErrorEmptyStateProps } from './ErrorEmptyState';
 export type { NoDataEmptyStateProps } from './NoDataEmptyState';
 export type { NoTagsEmptyStateProps } from './NoTagsEmptyState';

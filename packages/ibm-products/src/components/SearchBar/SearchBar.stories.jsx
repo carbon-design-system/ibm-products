@@ -8,13 +8,13 @@
 import React from 'react';
 import { action } from 'storybook/actions';
 
-import { SearchBar } from '.';
+import { previewCandidate__SearchBar as SearchBar } from '..';
 import mdx from './SearchBar.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Experimental/SearchBar',
+  title: 'Preview Candidate/SearchBar',
   component: SearchBar,
   tags: ['autodocs'],
   argTypes: {

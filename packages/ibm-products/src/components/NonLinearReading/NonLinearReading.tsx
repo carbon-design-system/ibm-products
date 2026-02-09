@@ -45,7 +45,7 @@ export interface NonLinearReadingProps {
  * brief, at-a-glance, summary of a concept that may require
  * more explanation for some users.
  */
-export let NonLinearReading = React.forwardRef<
+export const NonLinearReading = React.forwardRef<
   HTMLSpanElement,
   NonLinearReadingProps
 >(
@@ -97,7 +97,6 @@ export let NonLinearReading = React.forwardRef<
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-NonLinearReading = pkg.checkComponentEnabled(NonLinearReading, componentName);
 NonLinearReading.displayName = componentName;
 
 NonLinearReading.propTypes = {

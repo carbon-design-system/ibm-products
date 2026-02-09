@@ -10,7 +10,10 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
+import {
+  previewCandidate__CoachmarkOverlayElement as CoachmarkOverlayElement,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
+} from '..';
 import { CoachmarkStack } from '.';
 import userEvent from '@testing-library/user-event';
 
@@ -63,6 +66,7 @@ describe(componentName, () => {
       navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
       tagline: 'Test Tagline',
       'data-testid': dataTestId,
+      closeIconDescription: 'Close',
     });
     expect(screen.getByTestId(dataTestId)).toHaveClass(overlayBlockClass);
   });
@@ -74,6 +78,7 @@ describe(componentName, () => {
       navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
       tagline: 'Test Tagline',
       'data-testid': dataTestId,
+      closeIconDescription: 'Close',
     });
     await act(async () => {
       await expect(container).toBeAccessible(componentName);
@@ -88,6 +93,7 @@ describe(componentName, () => {
       navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
       tagline: 'Test Tagline',
       'data-testid': dataTestId,
+      closeIconDescription: 'Close',
     });
     screen.getByTestId(dataTestId);
     const stackButton = screen.getByRole('button', { name: 'Test Tagline' });
@@ -102,6 +108,7 @@ describe(componentName, () => {
       navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
       tagline: 'Test Tagline',
       'data-testid': dataTestId,
+      closeIconDescription: 'Close',
       className,
     });
 
@@ -116,6 +123,7 @@ describe(componentName, () => {
       navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
       tagline: 'Test Tagline',
       'data-testid': dataTestId,
+      closeIconDescription: 'Close',
       ref,
     });
     expect(ref.current).toHaveClass(blockClass);
@@ -128,6 +136,7 @@ describe(componentName, () => {
       navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
       tagline: 'Test Tagline',
       'data-testid': dataTestId,
+      closeIconDescription: 'Close',
     });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -143,6 +152,7 @@ describe(componentName, () => {
       navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
       tagline: 'Test Tagline',
       'data-testid': dataTestId,
+      closeIconDescription: 'Close',
       onClose,
     });
     expect(onClose).not.toHaveBeenCalled();
@@ -170,6 +180,7 @@ describe(componentName, () => {
       navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
       tagline: 'Test Tagline',
       'data-testid': dataTestId,
+      closeIconDescription: 'Close',
       onClose,
     });
 

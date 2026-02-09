@@ -150,7 +150,7 @@ const defaults = {
  * main content area, and a set of action buttons.
  */
 
-export let TearsheetNarrow = React.forwardRef(
+export const TearsheetNarrow = React.forwardRef(
   (
     {
       verticalPosition = defaults.verticalPosition,
@@ -171,7 +171,6 @@ export let TearsheetNarrow = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-TearsheetNarrow = pkg.checkComponentEnabled(TearsheetNarrow, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

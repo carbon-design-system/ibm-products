@@ -36,7 +36,7 @@ export interface DatagridProps {
  * The `Datagrid` component is an extension of Carbon's DataTable component. At the most basic level, the `Datagrid` component takes in columns and rows and renders a data table. There is a set of data table extensions which this component provides support for, these can be found [here](https://pages.github.ibm.com/carbon/ibm-products/components/datagrid/overview/). This component is data driven and allows you to choose what pieces will be included based on the hooks/plugins that are provided.
  * @deprecated
  */
-export let Datagrid = React.forwardRef(
+export const Datagrid = React.forwardRef(
   (
     { datagridState, ariaToolbarLabel, ...rest }: DatagridProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -112,7 +112,6 @@ Datagrid.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-Datagrid = pkg.checkComponentEnabled(Datagrid, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

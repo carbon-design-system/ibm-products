@@ -34,7 +34,7 @@ export interface ToolbarButtonProps
 }
 
 /** Toolbar buttons are common functions performed as part of a products interface or an open window.  */
-export let ToolbarButton = forwardRef(
+export const ToolbarButton = forwardRef(
   (
     {
       caret = false,
@@ -98,5 +98,3 @@ ToolbarButton.propTypes = {
 
   ...deprecatedProps,
 };
-
-ToolbarButton = pkg.checkComponentEnabled(ToolbarButton, componentName);

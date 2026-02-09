@@ -8,14 +8,15 @@
  */
 
 import { LitElement, html } from 'lit';
-import { state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/modal/index.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './interstitial-screen-body.scss?lit';
-import { InitCarousel, initCarousel } from '../../utilities/carousel';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
 import { ref, createRef } from 'lit/directives/ref.js';
+import { SignalWatcher } from '@lit-labs/signals';
 import {
   interstitialDetailsSignal,
   updateInterstitialDetailsSignal,
@@ -30,7 +31,12 @@ const blockClass = `${prefix}--interstitial-screen`;
  * @fires c4p-on-after-step-change -  The name of the custom event fired at the end of  the step change.
  */
 @customElement(`${prefix}-interstitial-screen-body`)
-class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
+class CDSInterstitialScreenBody extends SignalWatcher(
+  HostListenerMixin(LitElement)
+) {
+  @property({ reflect: true })
+  slot = 'body';
+
   @state()
   stepType: 'single' | 'multi' = 'multi';
 
@@ -38,16 +44,29 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   private carouselElement = createRef<HTMLElement>();
 
   firstUpdated(): void {
-    const slot = this.shadowRoot?.querySelector('slot') as HTMLSlotElement;
+    const bodyItems = this.querySelectorAll(
+      `${prefix}-interstitial-screen-body-item`
+    );
 
-    const assigned = slot.assignedElements({ flatten: true });
-
-    if (assigned.length === 1) {
+    if (bodyItems.length === 1) {
       this.stepType = 'single';
-    } else if (assigned.length > 1) {
+    } else if (bodyItems.length > 1) {
       this.stepType = 'multi';
-      //initialize carousel for multi-step
-      this._initCarousel();
+    }
+  }
+
+  updated(changedProps: Map<string | number | symbol, unknown>) {
+    super.updated(changedProps);
+
+    // Watch for the open signal
+    const { open } = interstitialDetailsSignal.get();
+
+    // Initialize carousel when opened for the first time
+    if (open && !this.carouselAPI && this.stepType === 'multi') {
+      // Use requestAnimationFrame to ensure the element is fully rendered
+      requestAnimationFrame(() => {
+        this._initCarousel();
+      });
     }
   }
 
@@ -56,11 +75,14 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
       onViewChangeEnd: this.onViewChangeEnd,
       onViewChangeStart: this.onViewChangeStart,
       excludeSwipeSupport: true,
+      useMaxHeight: true,
     });
     interstitialDetailsSignal.set({
       ...interstitialDetailsSignal.get(),
       carouselAPI: this.carouselAPI,
     });
+
+    this.updateAriaHiddenTabIndex(0);
   }
 
   private onViewChangeStart = ({ currentIndex, lastIndex, totalViews }) => {
@@ -83,6 +105,8 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
     );
   };
   private onViewChangeEnd = ({ currentIndex, lastIndex, totalViews }) => {
+    this.updateAriaHiddenTabIndex(currentIndex);
+
     updateInterstitialDetailsSignal({
       name: 'currentStep',
       detail: currentIndex,
@@ -107,6 +131,28 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
     );
   };
 
+  private updateAriaHiddenTabIndex = (itemNumber: number) => {
+    const allViews = this.carouselAPI?.allViews;
+
+    allViews &&
+      Object.values(allViews)?.forEach((item, idx) => {
+        const isActive = idx === itemNumber;
+
+        if (item) {
+          // Set aria-hidden based on active state
+          item.setAttribute('aria-hidden', String(!isActive));
+
+          if (!isActive) {
+            item.setAttribute('inert', ''); // Disable interactivity
+          } else {
+            item.removeAttribute('inert'); // Re-enable interactivity
+          }
+
+          item.removeAttribute('tabindex');
+        }
+      });
+  };
+
   render() {
     return html`
       <div class="${blockClass}--body">
@@ -123,7 +169,6 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
       </div>
     `;
   }
-
   static styles = styles;
 
   /**

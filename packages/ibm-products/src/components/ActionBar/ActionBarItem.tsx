@@ -60,7 +60,7 @@ interface ActionBarItemProps extends PropsWithChildren {
 /**
  * The ActionBarItem is used in the page header to populate the action bar
  */
-export let ActionBarItem = React.forwardRef(
+export const ActionBarItem = React.forwardRef(
   (
     { label, className, renderIcon, ...rest }: ActionBarItemProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -87,7 +87,6 @@ export let ActionBarItem = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-ActionBarItem = pkg.checkComponentEnabled(ActionBarItem, componentName);
 
 // Props the user cannot change
 const reservedProps = ['kind', 'size', 'align', 'type'];

@@ -7,17 +7,17 @@
 
 import globals from 'globals';
 import { fixupPluginRules } from '@eslint/compat';
-import { FlatCompat } from '@eslint/eslintrc'
+import { FlatCompat } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
 import react from 'eslint-plugin-react';
 import pluginSsrFriendly from 'eslint-plugin-ssr-friendly';
 import tsEslint from 'typescript-eslint';
 
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: eslint.configs.recommended,
@@ -25,7 +25,7 @@ const compat = new FlatCompat({
 });
 
 export default tsEslint.config(
-  ...compat.extends('eslint-config-carbon').map(c => {
+  ...compat.extends('eslint-config-carbon').map((c) => {
     if (c.plugins?.['@typescript-eslint']) {
       return {};
     }
@@ -55,8 +55,8 @@ export default tsEslint.config(
         },
       },
       parserOptions: {
-        sourceType: 'script'
-      }
+        sourceType: 'script',
+      },
     },
     rules: {
       'no-duplicate-imports': 'error',
@@ -64,15 +64,16 @@ export default tsEslint.config(
   },
   {
     ignores: [
-      'build',
       'packages/*/build',
       'packages/*/lib/*',
       'packages/*/es/*',
       'packages/*/examples/*/build',
-      'es',
-      'lib',
-      'dist',
-      'umd',
+      '**/build/',
+      '**/es/',
+      '**/lib/',
+      '**/es-custom/',
+      '**/dist/',
+      '**/umd/',
       'examples',
       'node_modules',
       'packages/*/examples/*',
@@ -92,8 +93,8 @@ export default tsEslint.config(
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...globals.jest
-      }
+        ...globals.jest,
+      },
     },
     settings: {
       react: {
@@ -112,26 +113,24 @@ export default tsEslint.config(
       'jsx-a11y/no-noninteractive-tabindex': 1,
       'jsx-a11y/no-static-element-interactions': 1,
       'jsx-a11y/click-events-have-key-events': 1,
-      'jsdoc/check-tag-names': ['error', { definedTags: [ 'element', 'slot', 'csspart' ] }],
+      'jsdoc/check-tag-names': [
+        'error',
+        { definedTags: ['element', 'slot', 'csspart'] },
+      ],
       'ssr-friendly/no-dom-globals-in-module-scope': 2,
       'react/prop-types': 2,
       'react/forbid-dom-props': [
         2,
         {
-          'forbid': [
+          forbid: [
             {
-              'propName': 'style',
-              'disallowedFor': [
-                'Datagrid',
-                'Carousel',
-                'Checklist',
-                'Coachmark'
-              ],
-              'message': 'Avoid using style prop'
-            }
-          ]
-        }
-      ]
+              propName: 'style',
+              disallowedFor: ['Datagrid', 'Carousel', 'Checklist', 'Coachmark'],
+              message: 'Avoid using style prop',
+            },
+          ],
+        },
+      ],
     },
   }
 );

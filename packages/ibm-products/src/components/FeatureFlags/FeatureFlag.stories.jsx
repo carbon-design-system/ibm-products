@@ -10,7 +10,7 @@ import mdx from './FeatureFlags.mdx';
 import { WithFeatureFlags } from '../../../.storybook/WithFeatureFlags';
 
 export default {
-  title: 'Experimental/FeatureFlags',
+  title: 'Preview/FeatureFlags',
   component: FeatureFlags,
   tags: ['autodocs'],
   parameters: {

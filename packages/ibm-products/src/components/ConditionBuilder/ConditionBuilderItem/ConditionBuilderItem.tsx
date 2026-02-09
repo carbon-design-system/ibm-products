@@ -85,7 +85,7 @@ export const ConditionBuilderItem = ({
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(false);
 
-  const { conditionBuilderRef, statementConfigCustom } = useContext(
+  const { conditionBuilderRef, statementConfigCustom, readOnly } = useContext(
     ConditionBuilderContext
   );
 
@@ -214,7 +214,8 @@ export const ConditionBuilderItem = ({
       return;
     }
 
-    const focusLeftPopover = !popoverEl.contains(relatedTarget);
+    const focusLeftPopover =
+      relatedTarget && !popoverEl.contains(relatedTarget);
     const targetInsidePopover = popoverEl.contains(focusEvent.target as Node);
 
     const targetEl = focusEvent.target as Element | null;
@@ -241,7 +242,12 @@ export const ConditionBuilderItem = ({
     }
     setOpen(false);
   };
-  const openPopOver = () => setOpen(true);
+  const openPopOver = () => {
+    if (readOnly) {
+      return;
+    }
+    setOpen(true);
+  };
   const togglePopover = () => {
     if (children || renderChildren) {
       setOpen(!open);

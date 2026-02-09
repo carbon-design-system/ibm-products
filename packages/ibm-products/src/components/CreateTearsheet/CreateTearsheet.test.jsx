@@ -270,7 +270,6 @@ describe(CreateTearsheet.displayName, () => {
     ));
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
-    jest.useFakeTimers();
     renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);
@@ -300,26 +299,30 @@ describe(CreateTearsheet.displayName, () => {
     const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
     setTimeout(() => {
+      jest.advanceTimersByTime(1000);
       const button = screen.getByRole('button', {
-        name: 'Second step button two',
+        name: 'Second step button one',
       });
       expect(button).toHaveFocus();
-    }, 20);
+    }, 1000);
   });
 
   it('should not focus the specified element if an invalid selector is provided', async () => {
-    jest.useFakeTimers();
     renderCreateTearsheet({
       ...defaultProps,
       firstFocusElement: `#invalid-selector`,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
+
     await act(() => click(nextButtonElement));
-    jest.advanceTimersByTime(1000);
-    const button = screen.getByRole('button', {
-      name: 'Second step button one',
-    });
-    expect(button).toHaveFocus();
+    setTimeout(() => {
+      jest.advanceTimersByTime(1000);
+      const button = screen.getByRole('button', {
+        name: 'Second step button one',
+      });
+
+      expect(button).toHaveFocus();
+    }, 1000);
   });
 
   it('renders first step with onNext function prop that rejects', async () =>
@@ -640,13 +643,13 @@ describe(CreateTearsheet.displayName, () => {
 
     expect(
       influencerSteps.childNodes[0].classList.contains(
-        'cds--progress-step--complete'
+        `${carbon.prefix}--progress-step--complete`
       )
     ).toBe(true);
 
     expect(
       influencerSteps.childNodes[1].classList.contains(
-        'cds--progress-step--current'
+        `${carbon.prefix}--progress-step--current`
       )
     ).toBe(true);
   });

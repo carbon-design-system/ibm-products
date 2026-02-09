@@ -5,13 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  useEffect,
-  useRef,
-  useLayoutEffect,
-  useState,
-  MutableRefObject,
-} from 'react';
+import { useEffect, useRef, useState, MutableRefObject } from 'react';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 import { debounce } from '../../global/js/utils/debounce';
 import cx from 'classnames';
 import { pkg } from '../../settings';
@@ -44,7 +39,7 @@ const useStickyColumn = (hooks: Hooks) => {
     setWindowSize(window?.innerWidth);
   }, []);
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     /* istanbul ignore next */
     function updateSize() {
       setWindowSize(window.innerWidth);

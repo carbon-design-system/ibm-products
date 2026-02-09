@@ -44,6 +44,7 @@ collect:
         - breadcrumbOverflowTooltipAlign
         - breadcrumbs
         - button
+        - buttonProps
         - cancelButtonText
         - caret
         - cellSize
@@ -55,6 +56,7 @@ collect:
         - closeIconDescription
         - closePopover
         - collapseButtonLabel
+        - collapseText
         - collapsible
         - column
         - columnInputPlaceholder
@@ -102,6 +104,7 @@ collect:
         - expandedContentHeight
         - ExpandedRowContentComponent
         - expandedRowIds
+        - expandText
         - fetchMoreData
         - fieldsetLegendId
         - fieldsetLegendText
@@ -147,6 +150,7 @@ collect:
         - headers
         - headingAs
         - headRef
+        - hideCloseButton
         - hideConditionPreviewHandler
         - hideConditionSubGroupPreviewHandler
         - hideIcon
@@ -181,6 +185,7 @@ collect:
         - invalid
         - invalidText
         - isFetching
+        - isFlush
         - isOpen
         - isTableSortable
         - item
@@ -219,6 +224,7 @@ collect:
         - noResultsTitle
         - noSelectionDescription
         - noSelectionTitle
+        - noTearsheet
         - noTrailingSlash
         - onActiveCellChange
         - onAddItem
@@ -295,6 +301,7 @@ collect:
         - productive
         - radio
         - reactTableFiltersState
+        - readOnly
         - readOnlyTable
         - renderIcon
         - renderMedia
@@ -310,6 +317,7 @@ collect:
         - score
         - scoreThresholds
         - scrollBarSize
+        - scroller
         - searchResultsTitle
         - secondaryActionLabel
         - secondaryButtonDisabled
@@ -523,6 +531,7 @@ collect:
         - noActionIcons
         # Carousel
         - disableArrowScroll
+        - disableResetOnResize
         - fadedEdgeColor
         - isScrollMode
         - onChangeIsScrollable
@@ -537,7 +546,6 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
-        - defaultOpen
         - floating
         - isOpenByDefault
         - overlayClassName
@@ -545,8 +553,6 @@ collect:
         - overlayRef
         - position
         - positionTune
-        # CoachmarkBeacon
-        - buttonProps
         # CoachmarkDragbar
         - a11yKeyboardHandler
         - onDrag
@@ -742,6 +748,8 @@ collect:
         - maxFileSize
         - maxFileSizeErrorBody
         - maxFileSizeErrorHeader
+        # Influencer
+        - influencerPanelOpen
         # InlineEditButton
         - columnConfig
         - isActiveCell
@@ -862,11 +870,9 @@ collect:
         - contextualActions
         # PageHeaderContentPageActions
         - menuButtonLabel
-        # PageHeaderScrollButton
-        - collapseText
-        - expandText
-        # PageHeaderTabBar
-        - scroller
+        # PageHeaderTagOverflow
+        - renderOverflowTag
+        - renderPopoverContent
         # PageHeaderTitle
         - blockClass
         - hasBreadcrumbRow
@@ -914,14 +920,15 @@ collect:
         - getToggleAllPageRowsSelectedProps
         - getToggleAllRowsSelectedProps
         - isAllRowsSelected
-        # SidePanelBase
+        # SidePanel
         - actionToolbarButtons
         - animateTitle
         - closeIconTooltipAlignment
         - condensedActions
-        - hideCloseButton
         - includeOverlay
         - navigationBackIconDescription
+        - onNavigationBack
+        - onUnmount
         # SingleAddSelect
         - searchResultsLabel
         # Sortable
@@ -932,6 +939,8 @@ collect:
         - sortableProps
         - strategy
         - withGrid
+        # StackProvider
+        - stackStepSize
         # StatusIndicator
         - onRetry
         - retryLabel
@@ -939,8 +948,26 @@ collect:
         # StringFormatter
         - tooltipDirection
         - width
+        # SummaryContent
+        - summaryPanelOpen
         # TagOverflow
         - tagComponent
+        # Tearsheet
+        - containerClassName
+        - summaryContentWidth
+        - verticalGap
+        # TearsheetHeader
+        - disableHeaderCollapse
+        # TearsheetHeaderActionItem
+        - overflowItemLabel
+        # TearsheetHeaderActions
+        - menuButtonProps
+        # TearsheetHeaderContent
+        - titleEnd
+        - titleStart
+        # TearsheetWithSteps
+        - progressIndicator
+        - setOpen
         # Toolbar
         - vertical
         # TruncatedList
@@ -1168,7 +1195,9 @@ collect:
         - instant
         # General - variant
         - Hierarchical
+        - narrow
         - Non-Hierarchical
+        - wide
         # General - verticalPosition
         - lower
         - normal
@@ -1220,11 +1249,15 @@ collect:
         - short
         # PageHeader - fullWidthGrid
         - xl
+        # StackProvider - stackStepSize
+        - lg
+        - md
+        - sm
+        # TearsheetWithSteps - progressIndicator
+        - horizontal
+        - vertical
   npm:
     dependencies: null
-  js:
-    functions: {}
-    tokens: null
   js:
     functions: {}
     tokens: null

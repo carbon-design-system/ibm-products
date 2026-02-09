@@ -78,7 +78,7 @@ export interface StatusIconProps extends PropsWithChildren {
    */
   theme: Theme;
 }
-export let StatusIcon = forwardRef<ReactSVGElement | null, StatusIconProps>(
+export const StatusIcon = forwardRef<ReactSVGElement | null, StatusIconProps>(
   (
     { kind, theme, size, className, iconDescription, ...rest }: StatusIconProps,
     ref
@@ -264,8 +264,6 @@ export let StatusIcon = forwardRef<ReactSVGElement | null, StatusIconProps>(
     );
   }
 );
-
-StatusIcon = pkg.checkComponentEnabled(StatusIcon, componentName);
 
 StatusIcon.displayName = componentName;
 

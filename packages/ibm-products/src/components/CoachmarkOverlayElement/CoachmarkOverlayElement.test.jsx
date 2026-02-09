@@ -10,7 +10,11 @@ import { render, screen, act } from '@testing-library/react'; // https://testing
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { Coachmark, CoachmarkBeacon, CoachmarkOverlayElements } from '..';
+import {
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkBeacon as CoachmarkBeacon,
+  previewCandidate__CoachmarkOverlayElements as CoachmarkOverlayElements,
+} from '..';
 import { CoachmarkOverlayElement } from '.';
 import { BEACON_KIND } from '../Coachmark/utils/enums';
 
@@ -27,6 +31,7 @@ const renderCoachmarkWithOverlayElement = ({ ...rest } = {}) =>
       theme={'dark'}
       align={'bottom'}
       positionTune={{ x: 0, y: 0 }}
+      closeIconDescription="Close"
       target={
         <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
       }

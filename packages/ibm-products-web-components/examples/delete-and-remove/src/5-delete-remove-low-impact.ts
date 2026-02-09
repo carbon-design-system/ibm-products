@@ -15,8 +15,9 @@ import '@carbon/web-components/es/components/notification/toast-notification.js'
 
 import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
-import TrashCan16 from '@carbon/web-components/es/icons/trash-can/16';
-import SubtractAlt16 from '@carbon/web-components/es/icons/subtract--alt/16';
+import TrashCan16 from '@carbon/icons/es/trash-can/16';
+import SubtractAlt16 from '@carbon/icons/es/subtract--alt/16';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 
 // example implementation of low impact delete / remove pattern
 @customElement('delete-remove-low-impact')
@@ -48,8 +49,8 @@ export class DeleteRemoveLowImpact extends LitElement {
       >
         ${this.action === 'delete' ? 'Delete' : 'Remove'}
         ${this.action === 'delete'
-          ? html`${TrashCan16({ slot: 'icon' })}`
-          : html`${SubtractAlt16({ slot: 'icon' })}`}
+          ? html`${iconLoader(TrashCan16, { slot: 'icon' })}`
+          : html`${iconLoader(SubtractAlt16, { slot: 'icon' })}`}
       </cds-button>
       ${this._showNotification
         ? html`<cds-toast-notification

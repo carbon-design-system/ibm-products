@@ -88,3 +88,27 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   > .#{$block-class}__groupConnector {
   margin-block-end: 0;
 }
+
+.#{$block-class}__readonly {
+  .#{$block-class}__condition-inner-block,
+  .#{$block-class}__connector,
+  .#{$block-class}__action-block,
+  .#{$block-class}__add-condition-wrapper,
+  .#{$block-class}__groupConnector {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px $border-subtle-00;
+
+    button {
+      background: transparent;
+      cursor: default;
+
+      svg {
+        color: $icon-disabled;
+      }
+    }
+  }
+}
+
+.#{$block-class}__condition-inner-block {
+  display: flex;
+}

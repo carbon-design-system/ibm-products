@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -132,7 +132,7 @@ export interface EditSidePanelProps {
  * Use with medium complexity edits if the user needs page context.
  * @deprecated
  */
-export let EditSidePanel = React.forwardRef(
+export const EditSidePanel = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -233,7 +233,6 @@ EditSidePanel.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-EditSidePanel = pkg.checkComponentEnabled(EditSidePanel, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -315,7 +314,7 @@ EditSidePanel.propTypes = {
    * This prop is required when using the `slideIn` variant of the side panel.
    */
   /**@ts-ignore*/
-  selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
+  selectorPageContent: PropTypes.string,
 
   /**
    * Specifies which DOM element in the form should be focused.

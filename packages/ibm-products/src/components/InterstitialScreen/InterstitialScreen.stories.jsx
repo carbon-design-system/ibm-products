@@ -14,8 +14,8 @@ import styles from './_storybook-styles.scss?inline';
 import { clamp } from '../../global/js/utils/clamp';
 import { ArrowRight } from '@carbon/react/icons';
 import { pkg } from '../../settings';
-import { InterstitialScreenView } from './_story-assets/InterstitialScreenView/InterstitialScreenView';
 import { InterstitialScreenViewModule } from './_story-assets/InterstitialScreenViewModule/InterstitialScreenViewModule';
+import { InterstitialScreenView } from './InterstitialScreenView';
 const storyClass = 'interstitial-stories';
 
 // cspell:words Terminé Partiel Actuel valide
@@ -30,6 +30,7 @@ export default {
     Header: InterstitialScreen.Header,
     Body: InterstitialScreen.Body,
     Footer: InterstitialScreen.Footer,
+    InterstitialScreenView: InterstitialScreenView,
   },
   decorators: [
     (Story) => {

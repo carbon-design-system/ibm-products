@@ -1,0 +1,25 @@
+name: 'PR Labeler'
+on:
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  issues: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  label-pr:
+    # do not run on forks
+    if: github.repository == 'carbon-design-system/ibm-products'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - name: Label PR
+        uses: github/issue-labeler@c1b0f9f52a63158c4adc09425e858e87b32e9685 # v3.4
+        with:
+          configuration-path: .github/pr-labeler-config.yml
+          not-before: 2025-10-10T00:00:00Z
+          enable-versioned-regex: 0
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'

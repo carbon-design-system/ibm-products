@@ -34,7 +34,7 @@ const defaults = {
   expandedItemsLimit: 10,
   onClick: () => {},
   viewLessLabel: 'View less',
-  viewMoreLabel: (value) => `View more (${value})`,
+  viewMoreLabel: (value: number) => `View more (${value})`,
 };
 
 export interface TruncatedListProps extends PropsWithChildren {
@@ -73,14 +73,17 @@ export interface TruncatedListProps extends PropsWithChildren {
   /**
    * Callback function for building the label when the list is collapsed.
    */
-  viewMoreLabel?: (value: any) => ReactNode;
+  viewMoreLabel?: (value: number) => ReactNode;
 }
 /**
  * The `TruncatedList` allows consumers to control how many items are
  * revealed to the user while giving the user the ability to expand
  * and see the entire list.
  */
-export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
+export const TruncatedList = React.forwardRef<
+  HTMLDivElement,
+  TruncatedListProps
+>(
   (
     {
       children,
@@ -190,7 +193,6 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-TruncatedList = pkg.checkComponentEnabled(TruncatedList, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

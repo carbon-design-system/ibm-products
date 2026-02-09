@@ -29,30 +29,32 @@ set of features with ease.
 <Canvas
   of={stories.optionsTile}
   additionalActions={[
-      {
-        title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig({
-          'story': stories.optionsTile,
-          'styles': stories.default.parameters.styles
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.optionsTile,
+          styles: stories.default.parameters.styles,
         }),
-      },
-    ]}>
-</Canvas>
+    },
+  ]}
+></Canvas>
 
 ## Static Options Tile
 
 <Canvas
   of={stories.staticOptionsTile}
   additionalActions={[
-      {
-        title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig({
-          'story': stories.staticOptionsTile,
-          'styles': stories.default.parameters.styles
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.staticOptionsTile,
+          styles: stories.default.parameters.styles,
         }),
-      },
-    ]}>
-</Canvas>
+    },
+  ]}
+></Canvas>
 
 ## Component API
 

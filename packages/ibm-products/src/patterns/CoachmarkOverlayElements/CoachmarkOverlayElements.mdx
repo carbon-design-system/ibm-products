@@ -1,0 +1,38 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as CoachmarkOverlayElementsStories from './CoachmarkOverlayElements.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# CoachmarkOverlayElements
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+
+## Overview
+
+The CoachmarkOverlayElements pattern acts as a container element for onboarding
+and should only be used within the scope of a Coachmark.
+
+To build this pattern, we recommend including the following components:
+
+- [Coachmark](https://carbon-for-ibm-products.netlify.app/?path=/docs/preview-onboarding-coachmark--overview)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
+
+## About Onboarding
+
+[Onboarding](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/onboarding/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story of={CoachmarkOverlayElementsStories.coachmarkOverlayElements} />
+  </div>
+</Canvas>

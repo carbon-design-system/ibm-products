@@ -14,8 +14,9 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/button/index';
 import '@carbon/web-components/es/components/text-input/index';
-import CheckmarkFilled16 from '@carbon/web-components/es/icons/checkmark--filled/16';
-import ErrorFilled16 from '@carbon/web-components/es/icons/error--filled/16';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16';
+import ErrorFilled16 from '@carbon/icons/es/error--filled/16';
+import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 import '@carbon/web-components/es/components/loading/index';
 import { ref } from 'lit/directives/ref.js';
 import styles from './export-modal.scss?lit';
@@ -171,7 +172,7 @@ class StandardExportModal extends HostListenerMixin(LitElement) {
               : null}
             ${this.successful
               ? html`
-                  ${CheckmarkFilled16({
+                  ${iconLoader(CheckmarkFilled16, {
                     slot: 'icon',
                     class: `${blockClass}__checkmark-icon`,
                   })}
@@ -180,7 +181,7 @@ class StandardExportModal extends HostListenerMixin(LitElement) {
               : null}
             ${this.error
               ? html`
-                  ${ErrorFilled16({
+                  ${iconLoader(ErrorFilled16, {
                     slot: 'icon',
                     class: `${blockClass}__error-icon`,
                   })}

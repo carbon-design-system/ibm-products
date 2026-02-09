@@ -26,6 +26,7 @@ import { dateTimeLocaleContext } from './date-time-context';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/toggle/index.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
+import '@carbon-labs/wc-empty-state/es/index.js';
 
 const blockClass = `${prefix}--notifications-panel`;
 /**
@@ -69,6 +70,11 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   @property({ type: String, attribute: 'dismiss-all-label' })
   dismissAllLabel;
   /**
+   * Sets the empty state label text when there are no notifications
+   */
+  @property({ type: String, attribute: 'empty-state-label' })
+  emptyStateLabel;
+  /**
    * Sets the label text for the "Do Not Disturb" toggle in the Notification panel
    */
   @property({ type: String, attribute: 'donot-disturb-label' })
@@ -94,10 +100,10 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   @query('slot[name="previous"]')
   private previousSlot!: HTMLSlotElement;
   @state() // Use @state decorator
-  private _hasTodayContent = true;
+  private _hasTodayContent = false;
 
   @state() // Use @state decorator
-  private _hasPreviousContent = true;
+  private _hasPreviousContent = false;
 
   @queryAssignedElements({ slot: 'today', flatten: true })
   _todayElements!: Array<HTMLElement>;
@@ -155,6 +161,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       todayText,
       previousText,
       dismissAllLabel,
+      emptyStateLabel,
       doNotDisturbLabel,
       open,
       _hasTodayContent,
@@ -166,6 +173,12 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       [`${blockClass}__container`]: true,
       [`${blockClass}__entrance`]: open,
       [`${blockClass}__exit`]: !open,
+    });
+
+    const mainSectionClasses = classMap({
+      [`${blockClass}__main-section`]: true,
+      [`${blockClass}__main-section-empty`]:
+        !_hasTodayContent && !_hasPreviousContent,
     });
 
     return html`
@@ -192,7 +205,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
             @cds-toggle-changed=${handleToggle}
           ></cds-toggle>
         </div>
-        <div class="${blockClass}__main-section">
+        <div class=${mainSectionClasses}>
           ${_hasTodayContent
             ? html`
                 <h3
@@ -213,10 +226,21 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
               `
             : ''}
           <slot name="previous"></slot>
+          ${!_hasTodayContent && !_hasPreviousContent
+            ? html` <slot name="empty-state">
+                <clabs-empty-state
+                  subtitle="${emptyStateLabel}"
+                  kind="notifications"
+                >
+                </clabs-empty-state>
+              </slot>`
+            : ''}
         </div>
-        <div class="${blockClass}__bottom-actions-container">
-          <slot name="footer"></slot>
-        </div>
+        ${_hasTodayContent || _hasPreviousContent
+          ? html`<div class="${blockClass}__bottom-actions-container">
+              <slot name="footer"></slot>
+            </div>`
+          : ''}
       </div>
     `;
   }
@@ -462,7 +486,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   }
 
   /**
-   * The name of the custom event fired after this notification-panel is closed upon a user gesture.
+   * The name of the custom event fired after dismiss all button click
    */
   static get eventDismissAll() {
     return `${prefix}-notification-dismiss-all`;

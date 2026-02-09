@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -75,7 +75,7 @@ type EditTearsheetFormFieldsetTypes =
 type EditTearsheetFormProps = EditTearsheetFormBaseProps &
   EditTearsheetFormFieldsetTypes;
 
-export let EditTearsheetForm = forwardRef(
+export const EditTearsheetForm = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -146,7 +146,6 @@ export let EditTearsheetForm = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-EditTearsheetForm = pkg.checkComponentEnabled(EditTearsheetForm, componentName);
 
 EditTearsheetForm.propTypes = {
   /**
@@ -168,9 +167,7 @@ EditTearsheetForm.propTypes = {
    * This is the required legend id that appears as the aria-labelledby of fieldset for accessibility purposes.
    */
   /**@ts-ignore */
-  fieldsetLegendId: PropTypes.node.isRequired.if(
-    ({ hasFieldset }) => !!hasFieldset
-  ),
+  fieldsetLegendId: PropTypes.node,
 
   /**
    * This is the required legend text that appears above a fieldset html element for accessibility purposes.
@@ -178,9 +175,7 @@ EditTearsheetForm.propTypes = {
    * Otherwise, use CSS to hide/remove this label text.
    */
   /**@ts-ignore */
-  fieldsetLegendText: PropTypes.string.isRequired.if(
-    ({ hasFieldset }) => !!hasFieldset
-  ),
+  fieldsetLegendText: PropTypes.string,
 
   /**
    * This optional prop will render your form content inside of a fieldset html element

@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import { consume, ContextConsumer } from '@lit/context';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import { CDSBreadcrumbItem } from '@carbon/web-components/es/index';
+import CDSBreadcrumbItem from '@carbon/web-components/es/components/breadcrumb/breadcrumb-item';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { pageHeaderContext } from './context';

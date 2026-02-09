@@ -3,7 +3,8 @@
   "compilerOptions": {
     "jsx": "react",
     // TODO: Turn back on once stricter typings for internal utilities are complete
-    "noImplicitAny": false,
+    "noImplicitAny": false
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["**/*.figma.tsx"]
 }

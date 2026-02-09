@@ -10,7 +10,7 @@ import { Button } from '@carbon/react';
 import { Edit } from '@carbon/react/icons';
 import { action } from 'storybook/actions';
 
-import { BigNumber } from '.';
+import { previewCandidate__BigNumber as BigNumber } from '..';
 import { BigNumberSize } from './constants';
 
 import mdx from './BigNumber.mdx';
@@ -50,7 +50,7 @@ const iconButtonOptions = {
 };
 
 export default {
-  title: 'Experimental/BigNumber',
+  title: 'Preview Candidate/BigNumber',
   component: BigNumber,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

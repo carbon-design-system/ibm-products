@@ -73,6 +73,10 @@ export interface CarouselProps {
    * and other items will be hidden and inactive.
    */
   isScrollMode?: boolean;
+  /**
+   *This overrides the default behavior of resetting scrollLeft to 0 on resize.
+   */
+  disableResetOnResize?: boolean;
 }
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -112,6 +116,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       onChangeIsScrollable = defaults.onChangeIsScrollable,
       onScroll = defaults.onScroll,
       isScrollMode = false,
+      disableResetOnResize = false,
       ...rest
     } = props;
     const carouselRef = useRef<HTMLDivElement>(null);
@@ -242,7 +247,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
 
     const handleScrollToView = useCallback((itemNumber) => {
       updateAriaHiddenTabIndex(itemNumber);
-      childElementsRef.current[itemNumber].scrollIntoView();
+      childElementsRef.current[itemNumber]?.scrollIntoView();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -303,12 +308,15 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
         if (!scrollRef.current) {
           return;
         }
-        scrollRef.current.scrollLeft = 0;
-        handleOnScroll();
+        if (!disableResetOnResize) {
+          scrollRef.current.scrollLeft = 0;
+          handleOnScroll();
+        }
       };
 
       window.addEventListener('resize', handleWindowResize);
       return () => window.removeEventListener('resize', handleWindowResize);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [handleOnScroll]);
 
     // On scrollRef.scrollend, trigger a callback.

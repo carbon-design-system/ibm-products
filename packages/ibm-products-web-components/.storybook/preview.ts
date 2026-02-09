@@ -1,5 +1,7 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * @license
+ *
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -47,6 +49,12 @@ const unwantedProperties = new Set([
   'context-provider',
   'customElements',
   'registry',
+
+  // From example custom components
+  'set-of-actions',
+  'set-of-breadcrumbs',
+  'set-of-tags',
+  'set-of-users',
 ]);
 customElements?.tags?.forEach((tag) => {
   if (tag.properties) {
@@ -151,6 +159,10 @@ export const parameters = {
   },
   docs: {
     theme,
+    source: {
+      excludeDecorators: true,
+    },
+    codePanel: true,
   },
   viewport: {
     viewports: {
@@ -194,17 +206,7 @@ export const parameters = {
   options: {
     storySort: {
       method: 'alphabetical',
-      order: [
-        'Introduction',
-        [
-          'Welcome',
-          'Custom styles',
-          'Carbon CDN style helpers',
-          'Form Participation',
-        ],
-        'Components',
-        'Layout',
-      ],
+      order: ['Overview', ['Welcome'], 'Components', 'Patterns', 'Utilities'],
     },
   },
 };

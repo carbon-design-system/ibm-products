@@ -43,6 +43,7 @@ import {
 import cx from 'classnames';
 
 import { PageHeader } from './PageHeader';
+import { TruncatedText } from '../TruncatedText';
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
 import styles from './_storybook-styles.scss?inline';
@@ -480,6 +481,16 @@ const longSubtitle =
   'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on and on and on and on and on and on and on.';
 const demoSubtitle = 'This report details the monthly authentication failures';
 
+const longSubtitleReactNode = (
+  <TruncatedText
+    id="page-header-long-subtitle"
+    value={longSubtitle}
+    type="tooltip"
+    align="bottom"
+    autoAlign
+  />
+);
+
 const dummyPageContent = (
   <Grid className={`${storyClass}__dummy-content`} narrow={true}>
     <Column
@@ -805,7 +816,7 @@ export const fullyLoadedAndSome = Template.bind({});
 fullyLoadedAndSome.storyName = 'Page header with long values and many items';
 fullyLoadedAndSome.args = {
   title: 3,
-  subtitle: longSubtitle,
+  subtitle: longSubtitleReactNode,
   breadcrumbs: 3,
   pageActions: 3,
   children: 2,

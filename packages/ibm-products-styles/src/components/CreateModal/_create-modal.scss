@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,15 +10,17 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 
 .#{c4p-settings.$pkg-prefix}--create-modal
-  .#{c4p-settings.$carbon-prefix}--modal-close {
+  .#{carbon-config.$prefix}--modal-close {
   display: none;
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal
-  .#{c4p-settings.$carbon-prefix}--modal-container {
+  .#{carbon-config.$prefix}--modal-container {
   @include breakpoint(md) {
     max-block-size: 95%;
   }
@@ -28,7 +30,7 @@
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal
-  .#{c4p-settings.$carbon-prefix}--modal-header {
+  .#{carbon-config.$prefix}--modal-header {
   border-block-end: 1px solid $layer-accent-01;
   margin-block-end: 0;
   padding-block-end: $spacing-03;
@@ -36,8 +38,8 @@
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal
-  .#{c4p-settings.$carbon-prefix}--modal-footer
-  .#{c4p-settings.$carbon-prefix}--btn {
+  .#{carbon-config.$prefix}--modal-footer
+  .#{carbon-config.$prefix}--btn {
   max-inline-size: none;
 }
 
@@ -63,7 +65,7 @@
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal__form
-  .#{c4p-settings.$carbon-prefix}--fieldset {
+  .#{carbon-config.$prefix}--fieldset {
   margin-block-end: 0;
   min-inline-size: 100%;
 }

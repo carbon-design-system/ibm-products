@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,12 +8,14 @@
 // Standard imports.
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '../../global/styles/project-settings' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as *;
 
 $block-class: #{$pkg-prefix}--edit-in-place;
-$carbon-input: #{$carbon-prefix}--text-input;
+$carbon-input: #{carbon-config.$prefix}--text-input;
 
 .#{$block-class} {
   --#{$block-class}--size: #{$spacing-07};
@@ -100,12 +102,6 @@ $carbon-input: #{$carbon-prefix}--text-input;
   cursor: pointer;
   outline: none;
 }
-
-// .#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-input},
-// .#{$block-class}-readonly
-//   .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
-//   cursor: not-allowed;
-// }
 
 .#{$block-class}__text-input.#{$carbon-input}:focus,
 .#{$block-class}__text-input.#{$carbon-input}:active {

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,8 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family';
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as *;
 @use './color-map' as *;
 
@@ -72,8 +74,9 @@ $theme-keys: map-keys($themes);
   }
 }
 
-.#{$carbon-prefix}--tooltip__trigger.#{$block-class}__tooltip,
-.#{$block-class}__tooltip.#{$carbon-prefix}--btn--ghost:not([disabled]) svg {
+.#{carbon-config.$prefix}--tooltip__trigger.#{$block-class}__tooltip,
+.#{$block-class}__tooltip.#{carbon-config.$prefix}--btn--ghost:not([disabled])
+  svg {
   /* stylelint-disable-next-line max-nesting-depth */
   &:hover,
   &:focus {
@@ -93,19 +96,20 @@ $theme-keys: map-keys($themes);
   text-transform: uppercase;
 }
 
-.#{$block-class}__tooltip.#{$carbon-prefix}--btn--md.#{$carbon-prefix}--btn--icon-only {
+.#{$block-class}__tooltip.#{carbon-config.$prefix}--btn--md.#{carbon-config.$prefix}--btn--icon-only {
   padding: 0;
   border-radius: 50%;
   min-block-size: auto;
 }
 
-.#{$carbon-prefix}--btn--ghost.#{$block-class}__tooltip:focus {
+.#{carbon-config.$prefix}--btn--ghost.#{$block-class}__tooltip:focus {
   border: 0;
   box-shadow: 0 0 0 $spacing-02 $focus;
 }
 
-.#{$carbon-prefix}--tooltip__trigger .#{$block-class} svg,
-.#{$block-class}__tooltip.#{$carbon-prefix}--btn--ghost:not([disabled]) svg {
+.#{carbon-config.$prefix}--tooltip__trigger .#{$block-class} svg,
+.#{$block-class}__tooltip.#{carbon-config.$prefix}--btn--ghost:not([disabled])
+  svg {
   fill: $layer-01;
 }
 

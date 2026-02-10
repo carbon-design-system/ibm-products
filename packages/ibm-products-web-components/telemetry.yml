@@ -42,6 +42,14 @@ collect:
         - onc4p-about-modal-beingclosed
         - onc4p-about-modal-closed
         - version
+        # c4p-big-number
+        - fraction-digits
+        - loading
+        - locale
+        - percentage
+        - total
+        - trending
+        - truncate
         # c4p-checklist
         - chart-label
         - chart-value
@@ -65,6 +73,9 @@ collect:
         - onc4p-coachmark-beacon-clicked
         # c4p-coachmark-header
         - dragIconDescription
+        # c4p-coachmark-tagline
+        - onc4p-coachmark-tagline-close
+        - onc4p-coachmark-tagline-cta-click
         # c4p-guide-banner
         - onc4p-guide-banner-close
         - onc4p-guide-banner-toggle
@@ -173,6 +184,7 @@ collect:
         - unchecked
         # General - size
         - 2xl
+        - default
         - lg
         - md
         - sm
@@ -199,9 +211,6 @@ collect:
         - wide
   npm:
     dependencies: null
-  js:
-    functions: {}
-    tokens: null
   js:
     functions: {}
     tokens: null

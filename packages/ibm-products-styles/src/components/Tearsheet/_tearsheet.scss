@@ -58,7 +58,7 @@ $motion-duration: $duration-moderate-02;
       &.#{$block-class}.#{$block-class} .#{$block-class}__container {
         animation: #{$block-class}--presence-tearsheet--container__enter
           $motion-duration
-          motion(exit, expressive);
+          motion(entrance, expressive);
         transform: translate3d(0, 0, 0);
         @media screen and (prefers-reduced-motion: reduce) {
           animation: none;
@@ -77,7 +77,7 @@ $motion-duration: $duration-moderate-02;
       &[data-tearsheet-exiting] {
         animation: #{$block-class}--presence-tearsheet__exit
           $motion-duration
-          motion(entrance, expressive)
+          motion(exit, expressive)
           forwards;
 
         &.#{$block-class}.#{$block-class} .#{$block-class}__container {

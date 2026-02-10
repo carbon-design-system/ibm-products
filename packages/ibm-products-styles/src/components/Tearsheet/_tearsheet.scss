@@ -65,6 +65,15 @@ $motion-duration: $duration-moderate-02;
         }
       }
 
+      &.#{$block-class}--stacked-1-of-2.is-visible .#{$block-class}__container,
+      &.#{$block-class}--stacked-2-of-3.is-visible .#{$block-class}__container {
+        transform: scale(var(--#{$block-class}--stacking-scale-factor-single));
+      }
+
+      &.#{$block-class}--stacked-1-of-3.is-visible .#{$block-class}__container {
+        transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
+      }
+
       &[data-tearsheet-exiting] {
         animation: #{$block-class}--presence-tearsheet__exit
           $motion-duration

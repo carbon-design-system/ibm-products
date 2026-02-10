@@ -6,7 +6,6 @@
  */
 
 import React, { cloneElement, useEffect, useRef, useState } from 'react';
-import DocsPage from './Tearsheet.docs-page';
 import { action } from 'storybook/actions';
 import { Information } from '@carbon/react/icons';
 import { pkg } from '../../settings';
@@ -19,11 +18,6 @@ import {
   FormGroup,
   Heading,
   Section,
-  Tab,
-  Tabs,
-  TabPanels,
-  TabPanel,
-  TabList,
   TextInput,
   AILabel,
   AILabelContent,
@@ -42,11 +36,11 @@ import {
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import styles from './_storybook-styles.scss?inline';
 import { TearsheetNarrow } from './TearsheetNarrow';
-
-// import mdx from './Tearsheet.mdx';
+import { TearsheetPresence } from './TearsheetPresence';
+import DocsPage from './TearsheetPresence.docs-page';
 
 export default {
-  title: 'Components/Tearsheet',
+  title: 'Components/Tearsheet/Feature Flags/Presence',
   component: Tearsheet,
   tags: ['autodocs'],
   parameters: {
@@ -253,14 +247,9 @@ const sampleDecorator = (decorator) => {
   }
 };
 
-// Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, decorator, slug, ...args }, context) => {
+const Template = ({ decorator, slug, actions, ...args }) => {
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
-  }, []);
 
   const wiredActions =
     actions &&
@@ -278,47 +267,31 @@ const Template = ({ actions, decorator, slug, ...args }, context) => {
       return action;
     });
 
-  const ref = useRef(undefined);
-
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
       <main>
         <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       </main>
-      <div ref={ref}>
+      <TearsheetPresence open={open}>
         <Tearsheet
           {...args}
           actions={wiredActions}
-          open={open}
           onClose={() => setOpen(false)}
           decorator={decorator && sampleDecorator(decorator)}
           slug={slug && sampleDecorator(slug)}
         >
           {mainContent}
         </Tearsheet>
-      </div>
+      </TearsheetPresence>
     </>
   );
 };
 
-const tabs = (
-  <div className="tearsheet-stories__tabs">
-    <TabList aria-label="Tab list">
-      <Tab>Tab 1</Tab>
-      <Tab>Tab 2</Tab>
-      <Tab>Tab 3</Tab>
-      <Tab>Tab 4</Tab>
-    </TabList>
-  </div>
-);
-
-const TemplateWithNav = ({ actions, decorator, slug, ...args }, context) => {
+// eslint-disable-next-line react/prop-types
+const Narrow = ({ decorator, slug, actions, ...args }) => {
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
-  }, []);
   const wiredActions =
     actions &&
     Array.prototype.map.call(actions, (action) => {
@@ -334,8 +307,6 @@ const TemplateWithNav = ({ actions, decorator, slug, ...args }, context) => {
       }
       return action;
     });
-
-  const ref = useRef(undefined);
 
   return (
     <>
@@ -343,239 +314,24 @@ const TemplateWithNav = ({ actions, decorator, slug, ...args }, context) => {
       <main>
         <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       </main>
-      <div ref={ref}>
-        <Tabs onChange={action('Tab selection changed')}>
-          <Tearsheet
-            {...args}
-            actions={wiredActions}
-            open={open}
-            onClose={() => setOpen(false)}
-            decorator={decorator && sampleDecorator(decorator)}
-            slug={slug && sampleDecorator(slug)}
-          >
-            <TabPanels>
-              <TabPanel>Tab 1</TabPanel>
-              <TabPanel>Tab 2</TabPanel>
-              <TabPanel>Tab 3</TabPanel>
-              <TabPanel>Tab 4</TabPanel>
-            </TabPanels>
-          </Tearsheet>
-        </Tabs>
-      </div>
-    </>
-  );
-};
-
-const ReturnFocusTemplate = (
-  { actions, decorator, slug, ...args },
-  context
-) => {
-  const [open, setOpen] = useState(false);
-  const buttonRef = useRef(undefined);
-
-  const wiredActions =
-    actions &&
-    Array.prototype.map.call(actions, (action) => {
-      if (action.label === 'Cancel') {
-        const previousClick = action.onClick;
-        return {
-          ...action,
-          onClick: (evt) => {
-            setOpen(false);
-            previousClick(evt);
-          },
-        };
-      }
-      return action;
-    });
-
-  const ref = useRef(undefined);
-
-  useEffect(() => {
-    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
-  }, []);
-
-  return (
-    <>
-      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <main>
-        <Button ref={buttonRef} onClick={() => setOpen(true)}>
-          Open Tearsheet
-        </Button>
-      </main>
-      <div ref={ref}>
-        <Tearsheet
+      <TearsheetPresence open={open}>
+        <TearsheetNarrow
           {...args}
           actions={wiredActions}
-          open={open}
           onClose={() => setOpen(false)}
           decorator={decorator && sampleDecorator(decorator)}
           slug={slug && sampleDecorator(slug)}
-          launcherButtonRef={buttonRef}
         >
           {mainContent}
-        </Tearsheet>
-      </div>
-    </>
-  );
-};
-
-const FirstElementDisabledTemplate = (
-  { actions, decorator, slug, ...args },
-  context
-) => {
-  const [open, setOpen] = useState(false);
-  const [text, setText] = useState('');
-  const wiredActions =
-    actions &&
-    Array.prototype.map.call(actions, (action) => {
-      if (action.label === 'Cancel') {
-        const previousClick = action.onClick;
-        return {
-          ...action,
-          onClick: (evt) => {
-            setOpen(false);
-            previousClick(evt);
-          },
-        };
-      }
-      return action;
-    });
-
-  const ref = useRef(undefined);
-
-  useEffect(() => {
-    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
-  }, []);
-
-  return (
-    <>
-      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <main>
-        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
-      </main>
-      <div ref={ref}>
-        <Tearsheet
-          {...args}
-          actions={wiredActions}
-          open={open}
-          onClose={() => setOpen(false)}
-          decorator={decorator && sampleDecorator(decorator)}
-          slug={slug && sampleDecorator(slug)}
-        >
-          <div className="tearsheet-stories__dummy-content-block">
-            <Form>
-              <p>Main content</p>
-              <FormGroup
-                legendId="tearsheet-form-group"
-                legendText="FormGroup Legend"
-              >
-                <TextInput
-                  id="tss-ft1"
-                  labelText="Enter an important value here"
-                  style={
-                    // stylelint-disable-next-line carbon/layout-use
-                    { marginBottom: '1em' }
-                  }
-                  disabled={!text?.length > 0}
-                />
-                <TextInput
-                  id="tss-ft2"
-                  labelText="Here is an entry field:"
-                  style={
-                    // stylelint-disable-next-line carbon/layout-use
-                    { marginBottom: '1em' }
-                  }
-                  onChange={(ev) => setText(ev?.target?.value)}
-                />
-              </FormGroup>
-            </Form>
-          </div>
-        </Tearsheet>
-      </div>
-    </>
-  );
-};
-
-const FirstElementReadOnlyTemplate = (
-  { actions, decorator, slug, ...args },
-  context
-) => {
-  const [open, setOpen] = useState(false);
-  const wiredActions =
-    actions &&
-    Array.prototype.map.call(actions, (action) => {
-      if (action.label === 'Cancel') {
-        const previousClick = action.onClick;
-        return {
-          ...action,
-          onClick: (evt) => {
-            setOpen(false);
-            previousClick(evt);
-          },
-        };
-      }
-      return action;
-    });
-
-  const ref = useRef(undefined);
-
-  useEffect(() => {
-    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
-  }, []);
-
-  return (
-    <>
-      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <main>
-        <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
-      </main>
-      <div ref={ref}>
-        <Tearsheet
-          {...args}
-          actions={wiredActions}
-          open={open}
-          onClose={() => setOpen(false)}
-          decorator={decorator && sampleDecorator(decorator)}
-          slug={slug && sampleDecorator(slug)}
-        >
-          <div className="tearsheet-stories__dummy-content-block">
-            <Form>
-              <p>Main content</p>
-              <FormGroup
-                legendId="tearsheet-form-group"
-                legendText="FormGroup Legend"
-              >
-                <TextInput
-                  id="tss-ft1"
-                  labelText="This field's value is 'read only':"
-                  readOnly={true}
-                  style={
-                    // stylelint-disable-next-line carbon/layout-use
-                    { marginBottom: '1em' }
-                  }
-                  value="Value"
-                />
-                <TextInput
-                  id="tss-ft2"
-                  labelText="Here is an entry field:"
-                  style={
-                    // stylelint-disable-next-line carbon/layout-use
-                    { marginBottom: '1em' }
-                  }
-                />
-              </FormGroup>
-            </Form>
-          </div>
-        </Tearsheet>
-      </div>
+        </TearsheetNarrow>
+      </TearsheetPresence>
     </>
   );
 };
 
 // eslint-disable-next-line react/prop-types
 const StackedTemplate = (
-  { mixedSizes, actions, decorator, description, slug, ...args },
+  { actions, decorator, description, slug, ...args },
   context
 ) => {
   const [open1, setOpen1] = useState(false);
@@ -632,8 +388,6 @@ const StackedTemplate = (
     return action;
   });
 
-  const VariableSizeTearsheet = mixedSizes ? TearsheetNarrow : Tearsheet;
-
   useEffect(() => {
     setTimeout(() => {
       setOpen1(context.viewMode !== 'docs');
@@ -662,89 +416,88 @@ const StackedTemplate = (
           <Button onClick={() => setOpen2(!open2)}>
             Toggle&nbsp;tearsheet&nbsp;2
           </Button>
-          {!mixedSizes && (
-            <Button onClick={() => setOpen3(!open3)}>
-              Toggle&nbsp;tearsheet&nbsp;3
-            </Button>
-          )}
+          <Button onClick={() => setOpen3(!open3)}>
+            Toggle&nbsp;tearsheet&nbsp;3
+          </Button>
         </ButtonSet>
       </main>
       <div ref={ref}>
-        <Tearsheet
-          {...args}
-          description={description1}
-          actions={wiredActions1}
-          headerActions={
-            <ButtonSet>
-              <Button
-                kind="primary"
-                size="sm"
-                style={{ width: 'initial' }}
-                onClick={() => setOpen2(true)}
-                disabled={open2}
-                ref={openButton2}
-              >
-                Open tearsheet 2
-              </Button>
-            </ButtonSet>
-          }
-          title="Tearsheet 1"
-          open={open1}
-          onClose={() => setOpen1(false)}
-          selectorPrimaryFocus="#stacked-input-1"
-          decorator={decorator && sampleDecorator(decorator)}
-          slug={slug && sampleDecorator(slug)}
-          launcherButtonRef={openButton1}
-        >
-          <div className="tearsheet-stories__dummy-content-block">
-            Main content 1
-            <TextInput
-              id="stacked-input-1"
-              labelText="Enter an important value here"
-            />
-          </div>
-        </Tearsheet>
-        <VariableSizeTearsheet
-          {...args}
-          description={description2}
-          actions={wiredActions2}
-          headerActions={
-            <ButtonSet>
-              <Button
-                kind="primary"
-                size="sm"
-                style={{ width: 'initial' }}
-                onClick={() => setOpen3(true)}
-                disabled={open3}
-                ref={openButton3}
-              >
-                Open tearsheet 3
-              </Button>
-            </ButtonSet>
-          }
-          title="Tearsheet 2"
-          open={open2}
-          onClose={() => setOpen2(false)}
-          selectorPrimaryFocus="#stacked-input-2"
-          decorator={decorator && sampleDecorator(decorator)}
-          slug={slug && sampleDecorator(slug)}
-          launcherButtonRef={openButton2}
-        >
-          <div className="tearsheet-stories__dummy-content-block">
-            Main content 2
-            <TextInput
-              id="stacked-input-2"
-              labelText="Enter an important value here"
-            />
-          </div>
-        </VariableSizeTearsheet>
-        {!mixedSizes && (
+        <TearsheetPresence open={open1}>
+          <Tearsheet
+            {...args}
+            description={description1}
+            actions={wiredActions1}
+            headerActions={
+              <ButtonSet>
+                <Button
+                  kind="primary"
+                  size="sm"
+                  style={{ width: 'initial' }}
+                  onClick={() => setOpen2(true)}
+                  disabled={open2}
+                  ref={openButton2}
+                >
+                  Open tearsheet 2
+                </Button>
+              </ButtonSet>
+            }
+            title="Tearsheet 1"
+            onClose={() => setOpen1(false)}
+            selectorPrimaryFocus="#stacked-input-1"
+            decorator={decorator && sampleDecorator(decorator)}
+            slug={slug && sampleDecorator(slug)}
+            launcherButtonRef={openButton1}
+          >
+            <div className="tearsheet-stories__dummy-content-block">
+              Main content 1
+              <TextInput
+                id="stacked-input-1"
+                labelText="Enter an important value here"
+              />
+            </div>
+          </Tearsheet>
+        </TearsheetPresence>
+        <TearsheetPresence open={open2}>
+          <Tearsheet
+            {...args}
+            description={description2}
+            actions={wiredActions2}
+            headerActions={
+              <ButtonSet>
+                <Button
+                  kind="primary"
+                  size="sm"
+                  style={{ width: 'initial' }}
+                  onClick={() => setOpen3(true)}
+                  disabled={open3}
+                  ref={openButton3}
+                >
+                  Open tearsheet 3
+                </Button>
+              </ButtonSet>
+            }
+            title="Tearsheet 2"
+            onClose={() => setOpen2(false)}
+            selectorPrimaryFocus="#stacked-input-2"
+            decorator={decorator && sampleDecorator(decorator)}
+            slug={slug && sampleDecorator(slug)}
+            launcherButtonRef={openButton2}
+          >
+            <div className="tearsheet-stories__dummy-content-block">
+              Main content 2
+              <TextInput
+                id="stacked-input-2"
+                labelText="Enter an important value here"
+              />
+            </div>
+          </Tearsheet>
+        </TearsheetPresence>
+        <TearsheetPresence open={open3}>
           <Tearsheet
             {...args}
             description={description3}
             actions={wiredActions3}
             title="Tearsheet 3"
-            open={open3}
             onClose={() => setOpen3(false)}
             selectorPrimaryFocus="#stacked-input-3"
             decorator={decorator && sampleDecorator(decorator)}
@@ -759,7 +512,7 @@ const StackedTemplate = (
               />
             </div>
           </Tearsheet>
-        )}
+        </TearsheetPresence>
       </div>
     </>
   );
@@ -774,102 +527,23 @@ tearsheet.args = {
   onClose: action('onClose called'),
   title,
   actions: 7,
-  selectorPrimaryFocus: '#tss-ft1',
 };
 
-export const withNavigation = TemplateWithNav.bind({});
-withNavigation.storyName = 'Tearsheet with navigation';
-withNavigation.args = {
-  closeIconDescription,
-  description: 2,
-  label,
-  navigation: tabs,
-  onClose: action('onClose called'),
-  title,
-  actions: 7,
-};
-
-export const withInfluencer = Template.bind({});
-withInfluencer.storyName = 'Tearsheet with influencer';
-withInfluencer.args = {
-  closeIconDescription,
-  description: 2,
-  influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
-  onClose: action('onClose called'),
-  title,
-  actions: 7,
-};
-
-export const ReturnFocusToOpenButton = ReturnFocusTemplate.bind({});
-ReturnFocusToOpenButton.args = {
+// Stories
+export const narrow = Narrow.bind({});
+narrow.storyName = 'Narrow';
+narrow.args = {
   closeIconDescription,
   description: 2,
   onClose: action('onClose called'),
   title,
   actions: 7,
-};
-
-export const firstElementDisabled = FirstElementDisabledTemplate.bind({});
-firstElementDisabled.storyName = 'First Element Disabled';
-firstElementDisabled.args = {
-  closeIconDescription,
-  hasCloseIcon: true,
-  description: 2,
-  onClose: action('onClose called'),
-  title,
-  actions: 7,
-  selectorPrimaryFocus: '#tss-ft1',
-};
-
-export const firstElementReadOnly = FirstElementReadOnlyTemplate.bind({});
-firstElementReadOnly.storyName = 'First Element ReadOnly';
-firstElementReadOnly.args = {
-  closeIconDescription,
-  hasCloseIcon: true,
-  description: 2,
-  onClose: action('onClose called'),
-  title,
-  actions: 7,
-  selectorPrimaryFocus: '#tss-ft1',
-};
-
-export const fullyLoaded = TemplateWithNav.bind({});
-fullyLoaded.storyName = 'Tearsheet with all header items and influencer';
-fullyLoaded.args = {
-  closeIconDescription,
-  description: 2,
-  hasCloseIcon: true,
-  headerActions: 2,
-  influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
-  label,
-  navigation: tabs,
-  onClose: action('onClose called'),
-  title,
-  actions: 0,
-  decorator: 1,
-  slug: 0,
 };
 
 // eslint-disable-next-line react/prop-types
 export const stacked = StackedTemplate.bind({});
 stacked.storyName = 'Stacking tearsheets';
 stacked.args = {
-  closeIconDescription,
-  description: 2,
-  height: 'lower',
-  influencer,
-  label,
-  actions: 7,
-};
-
-export const stackedMixedSizes = StackedTemplate.bind({});
-stackedMixedSizes.storyName = 'Stacking tearsheets, different sizes';
-stackedMixedSizes.args = {
-  mixedSizes: true,
   closeIconDescription,
   description: 2,
   height: 'lower',

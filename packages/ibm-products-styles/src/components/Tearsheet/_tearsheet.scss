@@ -83,7 +83,7 @@ $motion-duration: $duration-moderate-02;
         &.#{$block-class}.#{$block-class} .#{$block-class}__container {
           animation: #{$block-class}--presence-tearsheet--container__exit
             $motion-duration
-            motion(exit, expressive)
+            motion(entrance, expressive)
             forwards;
           @media screen and (prefers-reduced-motion: reduce) {
             animation: none;

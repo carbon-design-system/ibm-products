@@ -98,6 +98,10 @@ $block-size: 38.5rem;
   border-block-end: 1px solid $border-subtle-02;
   border-inline-start: 1px solid $border-subtle-02;
   box-shadow: 0 $spacing-01 $spacing-02 $overlay;
+  clip-path: inset(
+    0 calc(-1 * var(--cds-spacing-01)) calc(-1 * var(--cds-spacing-02))
+      calc(-1 * var(--cds-spacing-01))
+  );
   color: $text-primary;
   inset-block-start: $spacing-09;
   inset-inline-end: 0;

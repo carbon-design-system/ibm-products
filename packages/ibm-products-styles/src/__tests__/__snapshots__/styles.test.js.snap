@@ -7512,6 +7512,10 @@ button.c4p--add-select__global-filter-toggle--open {
   border-block-end: 1px solid var(--cds-border-subtle-02, #e0e0e0);
   border-inline-start: 1px solid var(--cds-border-subtle-02, #e0e0e0);
   box-shadow: 0 0.125rem 0.25rem var(--cds-overlay, rgba(22, 22, 22, 0.5));
+  clip-path: inset(
+    0 calc(-1 * var(--cds-spacing-01)) calc(-1 * var(--cds-spacing-02))
+      calc(-1 * var(--cds-spacing-01))
+  );
   color: var(--cds-text-primary, #161616);
   inset-block-start: 3rem;
   inset-inline-end: 0;

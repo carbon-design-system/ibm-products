@@ -772,7 +772,7 @@ export const withSubtitle = Template.bind({});
 withSubtitle.storyName = 'Page header with title and subtitle';
 withSubtitle.args = {
   title: 2,
-  subtitle: longSubtitle,
+  subtitle: subtitle,
   breadcrumbs: 2,
   navigation: 1,
   ...commonArgs,

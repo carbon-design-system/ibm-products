@@ -320,11 +320,23 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
     // Title animation on scroll related state
     const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
 
-    const handleEscapeKey = (event) => {
-      if (event.key === 'Escape' && open) {
-        onRequestClose?.();
+    const handleEscapeKey = useCallback(
+      (event) => {
+        if (event.key === 'Escape' && open) {
+          onRequestClose?.();
+        }
+      },
+      [onRequestClose, open]
+    );
+
+    useEffect(() => {
+      if (open && !slideIn) {
+        window.addEventListener('keydown', handleEscapeKey);
+        return () => {
+          window.removeEventListener('keydown', handleEscapeKey);
+        };
       }
-    };
+    }, [handleEscapeKey, open, slideIn]);
 
     useEffect(() => {
       if (!enableResizer) {

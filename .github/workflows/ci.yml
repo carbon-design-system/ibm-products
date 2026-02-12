@@ -129,6 +129,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          fetch-depth: 0
 
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
@@ -138,32 +140,73 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
+      - name: Detect changed components
+        id: detect-changes
+        run: |
+          node scripts/get-changed-components.js > changes.txt
+          cat changes.txt
+
+          # Extract outputs from script
+          if grep -q "RUN_ALL_AVT=true" changes.txt; then
+            echo "run_all=true" >> $GITHUB_OUTPUT
+            echo "skip_avt=false" >> $GITHUB_OUTPUT
+          elif grep -q "SKIP_AVT=true" changes.txt; then
+            echo "run_all=false" >> $GITHUB_OUTPUT
+            echo "skip_avt=true" >> $GITHUB_OUTPUT
+          elif grep -q "RUN_SELECTIVE_AVT=true" changes.txt; then
+            TEST_PATTERN=$(grep "TEST_PATTERN=" changes.txt | cut -d'=' -f2)
+            echo "test_pattern=${TEST_PATTERN}" >> $GITHUB_OUTPUT
+            echo "run_all=false" >> $GITHUB_OUTPUT
+            echo "skip_avt=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Install browsers
+        if: steps.detect-changes.outputs.skip_avt != 'true'
         run: yarn playwright install --with-deps
 
       - name: Build project
+        if: steps.detect-changes.outputs.skip_avt != 'true'
         run: yarn build
 
       - name: Run storybook
+        if: steps.detect-changes.outputs.skip_avt != 'true'
         id: storybook
         run: |
           npx serve -l 3000 packages/ibm-products/storybook-static &
           pid=$!
           echo "pid=$pid" >> $GITHUB_OUTPUT
       - uses: ./actions/wait-for-it
+        if: steps.detect-changes.outputs.skip_avt != 'true'
         with:
           URL: 'http://localhost:3000'
         timeout-minutes: 3
 
-      - name: Run AVT
-        if: github.repository == 'carbon-design-system/ibm-products'
+      - name: Run AVT (All Tests)
+        if: |
+          github.repository == 'carbon-design-system/ibm-products' &&
+          steps.detect-changes.outputs.run_all == 'true'
         run: |
           yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
+
+      - name: Run AVT (Selective Tests)
+        if: |
+          github.repository == 'carbon-design-system/ibm-products' &&
+          steps.detect-changes.outputs.skip_avt != 'true' &&
+          steps.detect-changes.outputs.run_all != 'true'
+        run: |
+          TEST_PATTERN="${{ steps.detect-changes.outputs.test_pattern }}"
+          if [ -n "$TEST_PATTERN" ]; then
+            yarn playwright test --project chromium --grep @avt "$TEST_PATTERN" --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
+          fi
       - name: Stop storybook
+        if:
+          steps.detect-changes.outputs.skip_avt != 'true' &&
+          steps.storybook.outputs.pid != ''
         run: kill ${{ steps.storybook.outputs.pid }}
 
       - name: Upload blob report to GitHub Actions Artifacts
-        if: ${{ !cancelled() }}
+        if:
+          ${{ !cancelled() && steps.detect-changes.outputs.skip_avt != 'true' }}
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: blob-report-${{ matrix.shardIndex }}

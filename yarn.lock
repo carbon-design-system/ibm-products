@@ -2193,7 +2193,7 @@ __metadata:
     "@ibm/telemetry-js": "npm:^1.9.1"
     "@ibm/telemetry-js-config-generator": "npm:^2.0.1"
     "@percy/cli": "npm:^1.31.0"
-    "@percy/storybook": "npm:^9.0.0"
+    "@percy/storybook": "npm:^10.0.0"
     "@rollup/plugin-babel": "npm:^6.0.4"
     "@rollup/plugin-commonjs": "npm:^29.0.0"
     "@rollup/plugin-node-resolve": "npm:^16.0.1"
@@ -6338,16 +6338,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/storybook@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@percy/storybook@npm:9.0.0"
+"@percy/storybook@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "@percy/storybook@npm:10.0.0"
   dependencies:
     "@percy/cli-command": "npm:^1.30.7"
     cross-spawn: "npm:^7.0.3"
+    glob-to-regexp: "npm:^0.4.1"
     qs: "npm:^6.11.0"
   bin:
     percy-storybook: bin/percy-storybook.cjs
-  checksum: 10/eb42c0b377f008584687dd63098d792c116f9f1fa63018af8caf8bfa546fa443416181ddb88bfd16f658bdfbf32925a5774d029a67c6e2e080a5e46918ae8e39
+  checksum: 10/960955933a0ee65f79edbc954340427b5199c1111311a3001ac99c7608a5a5e578b2a0a0ca27d151d482a774dbb4fc6b87710fb22fe0f9ed365e6f341afa5485
   languageName: node
   linkType: hard
 

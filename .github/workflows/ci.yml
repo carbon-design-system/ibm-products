@@ -182,14 +182,14 @@ jobs:
         timeout-minutes: 3
 
       - name: Run AVT (All Tests)
-        if: |
+        if:
           github.repository == 'carbon-design-system/ibm-products' &&
           steps.detect-changes.outputs.run_all == 'true'
         run: |
           yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
 
       - name: Run AVT (Selective Tests)
-        if: |
+        if:
           github.repository == 'carbon-design-system/ibm-products' &&
           steps.detect-changes.outputs.skip_avt != 'true' &&
           steps.detect-changes.outputs.run_all != 'true'

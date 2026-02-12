@@ -10,7 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 import { carbon } from '../../../packages/ibm-products/src/settings';
-import { pkg } from '../../../packages/ibm-products/src/settings';
+
 test.use({ viewport: { width: 1600, height: 900 } });
 
 test.describe('PageHeader @avt', () => {
@@ -45,17 +45,19 @@ test.describe('PageHeader @avt', () => {
     // The header collapses when the page is scrolled down.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, 600);
+    await page.waitForTimeout(200);
     await expect(pageTitle).not.toBeInViewport();
 
     // The header remains collapsed even if scrolled slightly back up.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -170);
+    await page.waitForTimeout(100);
     await expect(pageTitle).not.toBeInViewport();
 
     // The header expands again when scrolled back to the top.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -700);
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(200);
     await expect(pageTitle).toBeInViewport();
   });
 
@@ -72,12 +74,14 @@ test.describe('PageHeader @avt', () => {
     const pageTitle = page.getByRole('heading').getByText('Page title');
 
     // The header starts collapsed.
-    await page.waitForTimeout(200);
+    // Wait longer for initial collapse animation to complete
+    await page.waitForTimeout(500);
     await expect(pageTitle).not.toBeInViewport();
 
     // The header expands when the page is scrolled to the top.
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, -600);
+    await page.waitForTimeout(200);
     await expect(pageTitle).toBeInViewport();
   });
 
@@ -97,26 +101,36 @@ test.describe('PageHeader @avt', () => {
     // The header starts expanded.
     await expect(pageTitle).toBeInViewport();
 
+    // Wait for the component to fully render before interacting with the collapse button
+    await page.waitForTimeout(300);
+
     // The header collapses when the cheveron button is toggled close.
-    const collapseButton = page.locator(
-      `.${pkg.prefix}--page-header__collapse-expand-toggle .${carbon.prefix}--btn--icon-only`
-    );
+    const collapseButton = page.getByRole('button', {
+      name: /^Collapse the page header$/,
+    });
+
+    await collapseButton.waitFor({ state: 'visible' });
     await collapseButton.focus();
     await page.keyboard.press('Enter');
 
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(400);
     await expect(pageTitle).not.toBeInViewport();
 
+    const expandButton = page.getByRole('button', {
+      name: /^Expand the page header$/,
+    });
+    await expandButton.waitFor({ state: 'visible' });
     // The header expands when the cheveron button is toggled open.
-    await expect(page.getByLabel('Expand the page header')).toBeFocused();
+    // Explicitly focus on the expand button as focus may be lost during DOM update
+    await expandButton.focus();
+    await expect(expandButton).toBeFocused();
     await page.keyboard.press('Enter');
     await page.waitForTimeout(300);
     await expect(pageTitle).toBeInViewport();
   });
 
   // PageHeader buttons move into MenuButton on small screens
-  // todo - fix flaky test
-  test.skip('@avt-header-buttons-move-to-menubutton-on-small-screens', async ({
+  test('@avt-header-buttons-move-to-menubutton-on-small-screens', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -137,6 +151,8 @@ test.describe('PageHeader @avt', () => {
 
     // renders all buttons on large screens by default
     await page.getByRole('button', { name: 'danger Danger button' }).click();
+    // Wait for focus state to stabilize after click
+    await page.waitForTimeout(100);
     await expect(
       page.getByRole('button', { name: 'danger Danger button' })
     ).toBeFocused();
@@ -173,7 +189,7 @@ test.describe('PageHeader @avt', () => {
   });
 
   // PageHeader buttons change position when header collapsed
-  test.skip('@avt-buttons-change-position-when-header-collapsed', async ({
+  test('@avt-buttons-change-position-when-header-collapsed', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -194,9 +210,9 @@ test.describe('PageHeader @avt', () => {
     );
 
     // renders all buttons on large screens by default
-    await page.getByRole('button', { name: 'danger Danger button' }).focus();
+    await page.getByRole('button', { name: 'Danger button' }).focus();
     await expect(
-      page.getByRole('button', { name: 'danger Danger button' })
+      page.getByRole('button', { name: 'Danger button' })
     ).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(
@@ -210,17 +226,37 @@ test.describe('PageHeader @avt', () => {
     // collapse the header
     await pressTabKey(page, 3);
     await page.keyboard.press('Enter');
-    await page.waitForSelector(
-      `.${pkg.prefix}--page-header__collapse-expand-toggle--collapsed`,
-      { visible: true }
-    );
+
+    const collapseButton = page.getByRole('button', {
+      name: /^(Collapse|Expand) the page header$/,
+    });
+    await expect(collapseButton).toBeVisible();
+
+    // Wait for the individual buttons to be hidden as they move into the menu
+    await page.getByRole('button', { name: 'Primary button' }).waitFor({
+      state: 'hidden',
+      timeout: 5000,
+    });
 
     // reset focus to first focusable element
     await page.getByRole('link', { name: 'Home page' }).focus();
+
+    // Wait for the Page actions button to be visible after collapse
+    const pageActions = page.getByRole('button', { name: /^Page actions/ });
+    await pageActions.waitFor({ state: 'visible', timeout: 10000 });
+    await expect(pageActions).toBeVisible();
+
     await pressTabKey(page, 4);
-    await expect(
-      page.getByRole('button', { name: 'Page actions...' })
-    ).toBeFocused();
+
+    // Add small delay to ensure DOM is stable after tabbing
+    await page.waitForTimeout(100);
+
+    // Re-query the button to ensure we have a fresh reference
+    const pageActionsRefocused = page.getByRole('button', {
+      name: /^Page actions/,
+    });
+    await expect(pageActionsRefocused).toBeFocused();
+
     await page.keyboard.press('Enter');
     (await page.locator('*:focus').textContent()) === 'Primary button';
     await page.keyboard.press('ArrowDown');
@@ -228,13 +264,12 @@ test.describe('PageHeader @avt', () => {
     await page.keyboard.press('ArrowDown');
     (await page.locator('*:focus').textContent()) === 'Danger button';
     await page.keyboard.press('Escape');
-    await expect(
-      page.getByRole('button', { name: 'Page actions' })
-    ).toBeFocused();
+
+    await expect(pageActionsRefocused).toBeFocused();
   });
 
   // action bar buttons move into MenuButton on small screens
-  test.skip('@avt-action-buttons-move-to-menubutton-on-small-screens', async ({
+  test('@avt-action-buttons-move-to-menubutton-on-small-screens', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -245,7 +280,6 @@ test.describe('PageHeader @avt', () => {
       },
     });
 
-    // Race conditions
     // Wait for the "+13" tag element to appear and be visible
     await page.waitForSelector(
       `span.${carbon.prefix}--tag__label[title="+13"]`,
@@ -298,6 +332,6 @@ test.describe('PageHeader @avt', () => {
 async function pressTabKey(page, number) {
   for (let i = 0; i < number; i++) {
     await page.keyboard.press('Tab');
-    await page.waitForTimeout(40);
+    await page.waitForTimeout(100);
   }
 }

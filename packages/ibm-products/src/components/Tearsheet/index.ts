@@ -7,5 +7,7 @@
 
 export { Tearsheet } from './Tearsheet';
 export { TearsheetNarrow } from './TearsheetNarrow';
+export { TearsheetPresence, withTearsheetPresence } from './TearsheetPresence';
 export type { TearsheetProps } from './Tearsheet';
 export type { TearsheetNarrowProps } from './TearsheetNarrow';
+export type { TearsheetPresenceProps } from './TearsheetPresence';

@@ -1,16 +1,18 @@
 //
-// Copyright IBM Corp. 2022, 2024
+// Copyright IBM Corp. 2022, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../variables' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../variables' as *;
 @use '../../../../global/styles/project-settings' as c4p-settings;
 @use './animations' as *;
 
@@ -184,28 +186,28 @@ $block-class-component: #{$block-class}-filter-panel;
 
 // Overrides
 .#{$block-class-component}__container
-  .#{c4p-settings.$carbon-prefix}--accordion__title {
+  .#{carbon-config.$prefix}--accordion__title {
   margin: 0;
 }
 
 .#{$block-class-component}__container
-  .#{c4p-settings.$carbon-prefix}--accordion__arrow {
+  .#{carbon-config.$prefix}--accordion__arrow {
   margin: $spacing-01 0 0;
 }
 
 .#{$block-class-component}__container
-  .#{c4p-settings.$carbon-prefix}--accordion__content {
+  .#{carbon-config.$prefix}--accordion__content {
   padding-inline: 0;
 }
 
 // Makes sure every child (filter) inside the accordion content has space in between
 .#{$block-class-component}__container
-  .#{c4p-settings.$carbon-prefix}--accordion__content
+  .#{carbon-config.$prefix}--accordion__content
   > *:not(:last-child) {
   margin-block-end: $spacing-05;
 }
 
-.#{c4p-settings.$carbon-prefix}--btn.#{$block-class-component}-open-button {
+.#{carbon-config.$prefix}--btn.#{$block-class-component}-open-button {
   display: flex;
   justify-content: center;
   block-size: 3rem;
@@ -214,6 +216,6 @@ $block-class-component: #{$block-class}-filter-panel;
   inline-size: 3rem;
 }
 
-.#{c4p-settings.$carbon-prefix}--btn.#{$block-class-component}__view-all-button {
+.#{carbon-config.$prefix}--btn.#{$block-class-component}__view-all-button {
   margin-inline-start: -$spacing-05;
 }

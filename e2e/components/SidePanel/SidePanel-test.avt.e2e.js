@@ -11,7 +11,7 @@ import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
 test.describe('SidePanel @avt', () => {
-  test.skip('@avt-default-state', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       id: 'components-sidepanel--slide-over',
@@ -37,9 +37,7 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByText('Main view')).toBeVisible();
   });
 
-  // skip due to focus issue
-  // https://github.com/carbon-design-system/ibm-products/issues/7826#issuecomment-3271995110
-  test.skip('@avt-action-toolbar', async ({ page }) => {
+  test('@avt-action-toolbar', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       id: 'components-sidepanel--with-action-toolbar',
@@ -56,8 +54,7 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByLabel('Delete')).toBeFocused();
   });
 
-  // skip due to focus issue
-  test.skip('@avt-focus-trap', async ({ page }) => {
+  test('@avt-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       // This used to be a specific story but using a default story to test the focus trap
@@ -71,8 +68,7 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByText('Open side panel')).toBeFocused();
   });
 
-  // skip due to focus issue
-  test.skip('@avt-first-element-disabled', async ({ page }) => {
+  test('@avt-first-element-disabled', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       // This used to be a specific story but using a default story to test the focus trap
@@ -102,7 +98,7 @@ test.describe('SidePanel @avt', () => {
     await expect(page.getByLabel('Close')).toBeFocused();
   });
 
-  test.skip('@avt-resizer-feature-enabled', async ({ page }) => {
+  test('@avt-resizer-feature-enabled', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       id: 'components-sidepanel--slide-over&args=jsFlags[0]:enableSidepanelResizer',

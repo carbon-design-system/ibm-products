@@ -143,21 +143,64 @@ jobs:
       - name: Detect changed components
         id: detect-changes
         run: |
-          node scripts/get-changed-components.js > changes.txt
-          cat changes.txt
+          BASE_REF="${{ github.base_ref }}"
+          echo "Base branch: $BASE_REF"
 
-          # Extract outputs from script
-          if grep -q "RUN_ALL_AVT=true" changes.txt; then
-            echo "run_all=true" >> $GITHUB_OUTPUT
+          # Check if this is a release branch (v1, release/v2*, etc.)
+          if [[ "$BASE_REF" == "v1" ]] || [[ "$BASE_REF" == release/* ]]; then
+            echo "🚀 Release branch detected: $BASE_REF"
+            echo "Running all AVT tests for release validation."
             echo "skip_avt=false" >> $GITHUB_OUTPUT
-          elif grep -q "SKIP_AVT=true" changes.txt; then
-            echo "run_all=false" >> $GITHUB_OUTPUT
+            echo "run_selective=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # For non-release branches (main), detect changed components
+          echo "📝 Regular PR to $BASE_REF - detecting changed components..."
+
+          # Get changed files in the PR
+          CHANGED_FILES=$(git diff --name-only origin/$BASE_REF...HEAD)
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          # Extract unique component names from changed files
+          COMPONENTS=$(echo "$CHANGED_FILES" | grep -E '^packages/ibm-products/src/components/[^/]+/' | sed -E 's|^packages/ibm-products/src/components/([^/]+)/.*|\1|' | sort -u)
+
+          if [ -z "$COMPONENTS" ]; then
+            echo "No component changes detected. Skipping AVT tests."
             echo "skip_avt=true" >> $GITHUB_OUTPUT
-          elif grep -q "RUN_SELECTIVE_AVT=true" changes.txt; then
-            TEST_PATTERN=$(grep "TEST_PATTERN=" changes.txt | cut -d'=' -f2)
-            echo "test_pattern=${TEST_PATTERN}" >> $GITHUB_OUTPUT
-            echo "run_all=false" >> $GITHUB_OUTPUT
-            echo "skip_avt=false" >> $GITHUB_OUTPUT
+            echo "run_selective=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changed components:"
+            echo "$COMPONENTS"
+            
+            # Build test pattern for changed components that have AVT tests
+            PATTERN_PARTS=""
+            for component in $COMPONENTS; do
+              TEST_FILE="e2e/components/$component/${component}-test.avt.e2e.js"
+              if [ -f "$TEST_FILE" ]; then
+                if [ -z "$PATTERN_PARTS" ]; then
+                  PATTERN_PARTS="$component"
+                else
+                  PATTERN_PARTS="$PATTERN_PARTS|$component"
+                fi
+                echo "  ✓ $component (has AVT tests)"
+              else
+                echo "  ✗ $component (no AVT tests)"
+              fi
+            done
+            
+            if [ -z "$PATTERN_PARTS" ]; then
+              echo "No AVT tests found for changed components. Skipping AVT tests."
+              echo "skip_avt=true" >> $GITHUB_OUTPUT
+              echo "run_selective=false" >> $GITHUB_OUTPUT
+            else
+              TEST_PATTERN="e2e/components/($PATTERN_PARTS)/.*-test\\.avt\\.e2e\\.js"
+              echo "Test pattern: $TEST_PATTERN"
+              echo "test_pattern=$TEST_PATTERN" >> $GITHUB_OUTPUT
+              echo "skip_avt=false" >> $GITHUB_OUTPUT
+              echo "run_selective=true" >> $GITHUB_OUTPUT
+            fi
           fi
 
       - name: Install browsers
@@ -181,22 +224,17 @@ jobs:
           URL: 'http://localhost:3000'
         timeout-minutes: 3
 
-      - name: Run AVT (All Tests)
+      - name: Run AVT
         if:
           github.repository == 'carbon-design-system/ibm-products' &&
-          steps.detect-changes.outputs.run_all == 'true'
+          steps.detect-changes.outputs.skip_avt != 'true'
         run: |
-          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
-
-      - name: Run AVT (Selective Tests)
-        if:
-          github.repository == 'carbon-design-system/ibm-products' &&
-          steps.detect-changes.outputs.skip_avt != 'true' &&
-          steps.detect-changes.outputs.run_all != 'true'
-        run: |
-          TEST_PATTERN="${{ steps.detect-changes.outputs.test_pattern }}"
-          if [ -n "$TEST_PATTERN" ]; then
-            yarn playwright test --project chromium --grep @avt "$TEST_PATTERN" --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
+          if [ "${{ steps.detect-changes.outputs.run_selective }}" == "true" ]; then
+            echo "Running selective AVT tests for changed components..."
+            yarn playwright test --project chromium --grep @avt "${{ steps.detect-changes.outputs.test_pattern }}" --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
+          else
+            echo "Running all AVT tests..."
+            yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
           fi
       - name: Stop storybook
         if:

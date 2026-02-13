@@ -29,7 +29,7 @@ type PageHeaderContextType = {
   titleClipped?: boolean;
   contentActionsClipped?: boolean;
   breadcrumbActionsClipped?: boolean;
-  isInBreadcrumbBar?: boolean;
+  isContentActionsInBreadcrumbBar?: boolean;
 };
 
 export const PageHeaderContext = createContext<

@@ -283,7 +283,7 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
     <PageHeaderContext.Provider
       value={{
         ...context,
-        isInBreadcrumbBar: true,
+        isContentActionsInBreadcrumbBar: true,
       }}
     >
       <div className={classNames} ref={ref} {...other}>
@@ -508,7 +508,7 @@ const PageHeaderContentPageActions = ({
     setRefs,
     contentActionsClipped,
     breadcrumbActionsClipped,
-    isInBreadcrumbBar,
+    isContentActionsInBreadcrumbBar: isInBreadcrumbBar,
   } = usePageHeader();
   const classNames = classnames(
     `${blockClass}__content__page-actions`,

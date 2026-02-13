@@ -791,7 +791,7 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__breadcrumb__content-actions {
-    inline-size: fit-content;
+    inline-size: 100%;
     margin-inline-end: $spacing-04;
   }
 

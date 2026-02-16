@@ -1,3 +1,18 @@
+## `@carbon/ibm-products-web-components@0.33.0-rc.0`
+### Features :rocket:
+- feat: show close icon when panels are open (#8951)
+- feat(page-header):  code connect integration (#8868)
+
+### Bug fixes :bug:
+- fix(Pageheader_preview): header calulation issue fix (#8940)
+- fix: use carbon prefix directly from @carbon/styles package config (#8904)
+- fix(coachmark): fix coachmark web component focus and position issue (#8845)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#8991)
+- build(performance): rolldown-vite integration (#8915)
+- build(deps): update to Carbon 11 compatible versions to latest (#8907)
+
 ## `@carbon/ibm-products-web-components@0.32.0`
 ### Features :rocket:
 - feat(create-modal): implement `create-modal` pattern in web components (#8710)

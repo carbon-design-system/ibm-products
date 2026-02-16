@@ -1,3 +1,19 @@
+## `@carbon/ibm-products-styles@2.80.0-rc.0`
+### Features :rocket:
+- feat: show Close icon at global header actions when expanded (#8933)
+- feat(tearsheetpresence): add tearsheet presence (#8929)
+
+### Bug fixes :bug:
+- fix(preview__PageHeader): resolve content actions responsive issue in < 1010px viewport (#8976)
+- fix(ActionBar): improve overflow items alignment and prevent icon shrinking (#8928)
+- fix: use carbon prefix directly from @carbon/styles package config (#8904)
+
+### Housekeeping :house:
+- chore: remove unwanted style changes (#8997)
+- build(deps): update to Carbon 11 compatible versions to latest (#8991)
+- build(performance): rolldown-vite integration (#8915)
+- build(deps): update to Carbon 11 compatible versions to latest (#8907)
+
 ## `@carbon/ibm-products-styles@2.79.0`
 ### Bug fixes :bug:
 - fix(#8831): apply icon-primary fill to breadcrumb and page header icons (#8846)

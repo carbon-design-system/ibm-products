@@ -2050,12 +2050,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/feature-flags@npm:>=0.32.0, @carbon/feature-flags@npm:^0.32.0":
-  version: 0.32.0
-  resolution: "@carbon/feature-flags@npm:0.32.0"
+"@carbon/feature-flags@npm:>=0.32.0, @carbon/feature-flags@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@carbon/feature-flags@npm:1.0.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/4dd3f8c4c127b3ecdd45bdd51dd28c901e26c9aab508b0aec2aca894293c407b60087811ce5da4b8b8f5363bcbb005bbdd7bfed31abecc310edf5643aff4e1f4
+  checksum: 10/0c40e6674f2a2d49355ec3dcce68faa2d81ccfad9c2324e92a4d4ca88b5e4071d19c888ff7dfbe5b733ffe454eea2cd1779722ba6b5bfb204adaf450848aa090
   languageName: node
   linkType: hard
 
@@ -2179,7 +2179,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.26.0"
     "@babel/runtime": "npm:^7.26.10"
     "@carbon-labs/react-resizer": "npm:^0.10.0"
-    "@carbon/feature-flags": "npm:^0.32.0"
+    "@carbon/feature-flags": "npm:^1.0.0"
     "@carbon/ibm-products-styles": "npm:^2.79.0"
     "@carbon/styles": "npm:^1.99.0"
     "@carbon/telemetry": "npm:^0.1.0"
@@ -2193,7 +2193,7 @@ __metadata:
     "@ibm/telemetry-js": "npm:^1.9.1"
     "@ibm/telemetry-js-config-generator": "npm:^2.0.1"
     "@percy/cli": "npm:^1.31.0"
-    "@percy/storybook": "npm:^9.0.0"
+    "@percy/storybook": "npm:^10.0.0"
     "@rollup/plugin-babel": "npm:^6.0.4"
     "@rollup/plugin-commonjs": "npm:^29.0.0"
     "@rollup/plugin-node-resolve": "npm:^16.0.1"
@@ -6338,16 +6338,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/storybook@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@percy/storybook@npm:9.0.0"
+"@percy/storybook@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "@percy/storybook@npm:10.0.0"
   dependencies:
     "@percy/cli-command": "npm:^1.30.7"
     cross-spawn: "npm:^7.0.3"
+    glob-to-regexp: "npm:^0.4.1"
     qs: "npm:^6.11.0"
   bin:
     percy-storybook: bin/percy-storybook.cjs
-  checksum: 10/eb42c0b377f008584687dd63098d792c116f9f1fa63018af8caf8bfa546fa443416181ddb88bfd16f658bdfbf32925a5774d029a67c6e2e080a5e46918ae8e39
+  checksum: 10/960955933a0ee65f79edbc954340427b5199c1111311a3001ac99c7608a5a5e578b2a0a0ca27d151d482a774dbb4fc6b87710fb22fe0f9ed365e6f341afa5485
   languageName: node
   linkType: hard
 
@@ -22066,12 +22067,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.7.3":
-  version: 7.7.3
-  resolution: "semver@npm:7.7.3"
+"semver@npm:7.7.4":
+  version: 7.7.4
+  resolution: "semver@npm:7.7.4"
   bin:
     semver: bin/semver.js
-  checksum: 10/8dbc3168e057a38fc322af909c7f5617483c50caddba135439ff09a754b20bdd6482a5123ff543dad4affa488ecf46ec5fb56d61312ad20bb140199b88dfaea9
+  checksum: 10/26bdc6d58b29528f4142d29afb8526bc335f4fc04c4a10f2b98b217f277a031c66736bf82d3d3bb354a2f6a3ae50f18fd62b053c4ac3f294a3d10a61f5075b75
   languageName: node
   linkType: hard
 

@@ -95,6 +95,8 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [titleClipped, setTitleClipped] = useState(false);
     const [contentActionsClipped, setContentActionsClipped] = useState(false);
+    const [breadcrumbActionsClipped, setBreadcrumbActionsClipped] =
+      useState(false);
 
     // Intersection Observer setup, tracks if the PageHeaderContent is visible on page.
     // If it is not visible, we should set fully collapsed to true so that the
@@ -148,6 +150,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
           entries.forEach((entry) => {
             if (entry.target === refs?.contentActions!.current) {
               setContentActionsClipped(!entry.isIntersecting);
+              setBreadcrumbActionsClipped(entry.isIntersecting);
             }
           });
         },
@@ -195,6 +198,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
           setPageActionsInstance,
           titleClipped,
           contentActionsClipped,
+          breadcrumbActionsClipped,
         }}
       >
         <div className={classNames} ref={componentRef} {...other}>
@@ -256,8 +260,8 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
   }: PageHeaderBreadcrumbBarProps,
   ref
 ) {
-  const { pageActionsInstance: globalActions, contentActionsClipped } =
-    usePageHeader();
+  const context = usePageHeader();
+  const { pageActionsInstance: globalActions, contentActionsClipped } = context;
   const classNames = classnames(
     {
       [`${blockClass}__breadcrumb-bar`]: true,
@@ -276,26 +280,33 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
   });
 
   return (
-    <div className={classNames} ref={ref} {...other}>
-      <Grid>
-        <Column lg={16} md={8} sm={4}>
-          <div className={`${blockClass}__breadcrumb-container`}>
-            <div className={`${blockClass}__breadcrumb-wrapper`}>
-              {IconElement && (
-                <div className={`${blockClass}__breadcrumb__icon`}>
-                  <IconElement />
-                </div>
-              )}
-              {children}
+    <PageHeaderContext.Provider
+      value={{
+        ...context,
+        isContentActionsInBreadcrumbBar: true,
+      }}
+    >
+      <div className={classNames} ref={ref} {...other}>
+        <Grid>
+          <Column lg={16} md={8} sm={4}>
+            <div className={`${blockClass}__breadcrumb-container`}>
+              <div className={`${blockClass}__breadcrumb-wrapper`}>
+                {IconElement && (
+                  <div className={`${blockClass}__breadcrumb__icon`}>
+                    <IconElement />
+                  </div>
+                )}
+                {children}
+              </div>
+              <div className={`${blockClass}__breadcrumb__actions`}>
+                <div className={contentActionsClasses}>{contentActions}</div>
+                {pageActions}
+              </div>
             </div>
-            <div className={`${blockClass}__breadcrumb__actions`}>
-              <div className={contentActionsClasses}>{contentActions}</div>
-              {pageActions}
-            </div>
-          </div>
-        </Column>
-      </Grid>
-    </div>
+          </Column>
+        </Grid>
+      </div>
+    </PageHeaderContext.Provider>
   );
 });
 PageHeaderBreadcrumbBar.displayName = 'PageHeaderBreadcrumbBar';
@@ -493,13 +504,20 @@ const PageHeaderContentPageActions = ({
   actions,
   ...other
 }: PageHeaderContentPageActionsProps) => {
-  const { setRefs, contentActionsClipped } = usePageHeader();
+  const {
+    setRefs,
+    contentActionsClipped,
+    breadcrumbActionsClipped,
+    isContentActionsInBreadcrumbBar: isInBreadcrumbBar,
+  } = usePageHeader();
   const classNames = classnames(
     `${blockClass}__content__page-actions`,
     {
       // Revisit this:
       // May want to only add this class if there are content actions in the breadcrumb bar as well
-      [`${blockClass}__content__page-actions--clipped`]: contentActionsClipped,
+      [`${blockClass}__content__page-actions--clipped`]: isInBreadcrumbBar
+        ? breadcrumbActionsClipped
+        : contentActionsClipped,
     },
     className
   );
@@ -529,9 +547,12 @@ const PageHeaderContentPageActions = ({
   }, [menuButtonVisibility]);
 
   useEffect(() => {
-    setRefs((prev) => ({ ...prev, contentActions: containerRef }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (isInBreadcrumbBar) {
+      setRefs((prev) => ({ ...prev, breadcrumbActions: containerRef }));
+    } else {
+      setRefs((prev) => ({ ...prev, contentActions: containerRef }));
+    }
+  }, [isInBreadcrumbBar, setRefs]);
 
   useEffect(() => {
     if (!containerRef.current || !Array.isArray(actions)) {

@@ -67,12 +67,12 @@
     "@babel/core": "^7.26.10",
     "@babel/eslint-parser": "^7.26.10",
     "@babel/preset-react": "^7.26.3",
-    "@carbon/grid": "^11.49.0",
-    "@carbon/layout": "^11.47.0",
-    "@carbon/motion": "^11.40.0",
-    "@carbon/react": "^1.100.0",
-    "@carbon/themes": "^11.67.0",
-    "@carbon/type": "^11.53.0",
+    "@carbon/grid": "^11.50.0",
+    "@carbon/layout": "^11.48.0",
+    "@carbon/motion": "^11.41.0",
+    "@carbon/react": "^1.101.0",
+    "@carbon/themes": "^11.68.0",
+    "@carbon/type": "^11.54.0",
     "@commitlint/cli": "^20.0.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/compat": "^1.2.7",
@@ -156,7 +156,7 @@
     ]
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "^4.0.1",
+    "stylelint-plugin-carbon-tokens": "^4.0.2",
     "stylelint-use-logical": "^2.1.2"
   },
   "packageManager": "yarn@4.10.3"

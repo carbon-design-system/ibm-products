@@ -7,21 +7,20 @@
 
 import React from 'react';
 import { EmptyState } from './EmptyState';
+import { NoDataEmptyState } from './NoDataEmptyState';
+import { NotFoundEmptyState } from './NotFoundEmptyState';
 import { ErrorEmptyState } from './ErrorEmptyState';
 import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
+import { NotificationsEmptyState } from './NotificationsEmptyState';
+import { NoTagsEmptyState } from './NoTagsEmptyState';
+
 import figma from '@figma/code-connect';
 import { Add } from '@carbon/icons-react';
-// import figma, { html } from '@figma/code-connect/html';
+
+const connectionURL =
+  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=420-2434';
 
 const sharedProps = {
-  // tag: figma.nestedProps('Illustration', {
-  //   name: figma.enum('Kind', {
-  //     Error: ErrorEmptyState,
-  //     // Right: 'right',
-  //     // Left: 'left',
-  //     // Bottom: 'bottom',
-  //   }),
-  // }),
   action: figma.boolean('Button', {
     true: {
       text: 'Button',
@@ -49,68 +48,134 @@ const sharedProps = {
     Left: 'left',
     Bottom: 'bottom',
   }),
-  illustration: figma.boolean('Illustration', {
-    true: './path/to/illustration.svg',
-    false: undefined,
-  }),
   title: figma.string('Title text'),
   subtitle: figma.string('Subtitle text'),
 };
 
+// EmptyState
+figma.connect(EmptyState, connectionURL, {
+  variant: {
+    Illustration: false,
+  },
+  props: sharedProps,
+  example: ({ title, subtitle, size, illustrationPosition, action, link }) => (
+    <EmptyState
+      title={title}
+      subtitle={subtitle}
+      size={size}
+      // define below props if you want to display a custom illustration
+      // illustration="./path/to/illustration.svg"
+      // illustrationPosition="top"
+      action={action}
+      link={link}
+    />
+  ),
+});
+
+// NoDataEmptyState
+figma.connect(NoDataEmptyState, connectionURL, {
+  variant: {
+    'Illustration kind': 'No data',
+  },
+  props: sharedProps,
+  example: ({ title, subtitle, size, illustrationPosition, action, link }) => (
+    <NoDataEmptyState
+      title={title}
+      subtitle={subtitle}
+      size={size}
+      illustrationPosition={illustrationPosition}
+      action={action}
+      link={link}
+    />
+  ),
+});
+
+// NotFoundEmptyState
+figma.connect(NotFoundEmptyState, connectionURL, {
+  variant: {
+    'Illustration kind': 'Not found',
+  },
+  props: sharedProps,
+  example: ({ title, subtitle, size, illustrationPosition, action, link }) => (
+    <NotFoundEmptyState
+      title={title}
+      subtitle={subtitle}
+      size={size}
+      illustrationPosition={illustrationPosition}
+      action={action}
+      link={link}
+    />
+  ),
+});
+
 // ErrorEmptyState
-figma.connect(
-  ErrorEmptyState,
-  'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=420-2434',
-  {
-    variant: {
-      'Illustration.Kind': 'Error',
-    },
-    props: sharedProps,
-    example: ({
-      title,
-      subtitle,
-      size,
-      illustrationPosition,
-      action,
-      link,
-    }) => (
-      <ErrorEmptyState
-        title={title}
-        subtitle={subtitle}
-        size={size}
-        illustrationPosition={illustrationPosition}
-        action={action}
-        link={link}
-      />
-    ),
-  }
-);
+figma.connect(ErrorEmptyState, connectionURL, {
+  variant: {
+    'Illustration kind': 'Error',
+  },
+  props: sharedProps,
+  example: ({ title, subtitle, size, illustrationPosition, action, link }) => (
+    <ErrorEmptyState
+      title={title}
+      subtitle={subtitle}
+      size={size}
+      illustrationPosition={illustrationPosition}
+      action={action}
+      link={link}
+    />
+  ),
+});
 
 // UnauthorizedEmptyState
-// figma.connect(
-//   EmptyState,
-//   'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=420-2434',
-//   {
-//     variant: {
-//       Illustration: 'Unauthorized',
-//     },
-//     props: sharedProps,
-//     example: ({
-//       title,
-//       subtitle,
-//       size,
-//       illustrationPosition,
-//       action,
-//       link,
-//     }) => (
-//       <UnauthorizedEmptyState
-//         title={title}
-//         subtitle={subtitle}
-//         size={size}
-//         illustrationPosition={illustrationPosition}
-//         action={action}
-//         link={link}
-//       />
-//     ),
-//   }
-// );
+figma.connect(UnauthorizedEmptyState, connectionURL, {
+  variant: {
+    'Illustration kind': 'Unauthorized',
+  },
+  props: sharedProps,
+  example: ({ title, subtitle, size, illustrationPosition, action, link }) => (
+    <UnauthorizedEmptyState
+      title={title}
+      subtitle={subtitle}
+      size={size}
+      illustrationPosition={illustrationPosition}
+      action={action}
+      link={link}
+    />
+  ),
+});
+
+// NotificationsEmptyState
+figma.connect(NotificationsEmptyState, connectionURL, {
+  variant: {
+    'Illustration kind': 'Notification',
+  },
+  props: sharedProps,
+  example: ({ title, subtitle, size, illustrationPosition, action, link }) => (
+    <NotificationsEmptyState
+      title={title}
+      subtitle={subtitle}
+      size={size}
+      illustrationPosition={illustrationPosition}
+      action={action}
+      link={link}
+    />
+  ),
+});
+
+// NoTagsEmptyState
+figma.connect(NoTagsEmptyState, connectionURL, {
+  variant: {
+    'Illustration kind': 'No tag',
+  },
+  props: sharedProps,
+  example: ({ title, subtitle, size, illustrationPosition, action, link }) => (
+    <NoTagsEmptyState
+      title={title}
+      subtitle={subtitle}
+      size={size}
+      illustrationPosition={illustrationPosition}
+      action={action}
+      link={link}
+    />
+  ),
+});

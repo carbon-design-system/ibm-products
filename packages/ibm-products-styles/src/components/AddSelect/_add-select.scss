@@ -200,11 +200,6 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  overflow-x: auto;
-
-  @supports (overflow-inline: auto) {
-    overflow-inline: auto;
-  }
 
   .#{$block-class}__selections-form-control-label-wrapper {
     margin-inline-start: $spacing-03;
@@ -243,7 +238,6 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 }
 
 .#{$block-class}__column {
-  overflow: auto;
   flex: 0 0 20rem;
   padding: $spacing-05;
   border-block-start: 1px solid $border-subtle-01;
@@ -251,10 +245,16 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 
   &-search-bar {
     display: flex;
+  }
 
-    label {
-      display: none;
-    }
+  .#{$carbon-prefix}--popover--tab-tip.#{$carbon-prefix}--popover--open
+    .#{$carbon-prefix}--btn {
+    background: $layer;
+  }
+
+  &-filter-popover.#{$carbon-prefix}--popover-content {
+    padding: $spacing-05;
+    min-inline-size: $spacing-13;
   }
 
   &-sort-filter {
@@ -464,9 +464,4 @@ button.#{$block-class}__global-filter-toggle {
   .#{carbon-config.$prefix}--accordion__content {
   margin-block-start: $spacing-03;
   padding-block: 0;
-}
-
-.#{$block-class} + div .#{carbon-config.$prefix}--tooltip,
-.#{$block-class} + div .#{carbon-config.$prefix}--overflow-menu-options {
-  z-index: 9000;
 }

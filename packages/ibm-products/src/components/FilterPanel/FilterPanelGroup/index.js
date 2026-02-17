@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { FilterPanelGroup } from './FilterPanelGroup';
+export { FilterPanelGroup } from './FilterPanelGroup.jsx';

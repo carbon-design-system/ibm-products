@@ -5,6 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { Nav } from './Nav';
-export { NavList } from './NavList';
-export { NavItem } from './NavItem';
+export { Decorator } from './Decorator.jsx';

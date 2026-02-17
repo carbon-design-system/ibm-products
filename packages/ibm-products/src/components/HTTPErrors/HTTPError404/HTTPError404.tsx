@@ -11,8 +11,8 @@ import React, { PropsWithChildren } from 'react';
 // Other standard imports.
 import cx from 'classnames';
 import { arrayOf, shape, string } from 'prop-types';
-import { HTTPErrorSvg404 } from '../assets/HTTPErrorSvg404';
-import { HTTPErrorContent } from '../HTTPErrorContent';
+import { HTTPErrorSvg404 } from '../assets/HTTPErrorSvg404.jsx';
+import { HTTPErrorContent } from '../HTTPErrorContent.jsx';
 
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';

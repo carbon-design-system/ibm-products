@@ -20,7 +20,7 @@ import {
   PluginHook,
 } from 'react-table';
 import useSkeletonRows from './useSkeletonRows';
-import useDefaultStringRenderer from './useDefaultStringRenderer';
+import useDefaultStringRenderer from './useDefaultStringRenderer.jsx';
 import useRowRenderer from './useRowRenderer';
 import useRowSize from './useRowSize';
 import useHeaderRow from './Datagrid/DatagridHeaderRow';

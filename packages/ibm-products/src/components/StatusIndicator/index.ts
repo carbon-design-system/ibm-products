@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { ScrollGradient } from './ScrollGradient';
+export { StatusIndicator } from './StatusIndicator.jsx';
+export { StatusIndicatorStep } from './StatusIndicatorStep.jsx';

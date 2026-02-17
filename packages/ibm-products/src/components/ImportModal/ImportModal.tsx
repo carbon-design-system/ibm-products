@@ -84,6 +84,10 @@ export interface ImportModalProps {
    */
   fileUploadLabel?: string;
   /**
+   * Hide input label
+   */
+  hideInputLabel?: boolean;
+  /**
    * Button icon for import by url button
    */
   inputButtonIcon?: boolean;
@@ -172,6 +176,7 @@ export const ImportModal: React.FC<ImportModalProps> = forwardRef(
       fileDropHeader,
       fileDropLabel,
       fileUploadLabel,
+      hideInputLabel,
       inputButtonIcon,
       inputButtonText,
       inputId,
@@ -350,6 +355,7 @@ export const ImportModal: React.FC<ImportModalProps> = forwardRef(
               value={importUrl}
               disabled={hasFiles}
               aria-label={inputLabel}
+              hideLabel={hideInputLabel}
             />
             <Button
               onClick={fetchFile}
@@ -451,6 +457,10 @@ ImportModal.propTypes = {
    * Label that appears when a file is uploaded to show number of files (1 / 1)
    */
   fileUploadLabel: PropTypes.string,
+  /**
+   * Hide input label
+   */
+  hideInputLabel: PropTypes.bool,
   /**
    * Button icon for import by url button
    */

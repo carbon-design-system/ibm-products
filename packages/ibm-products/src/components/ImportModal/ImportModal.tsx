@@ -98,7 +98,7 @@ export interface ImportModalProps {
   /**
    * Header to display above import by url
    */
-  inputLabel?: string;
+  inputLabel: string;
   /**
    * Placeholder for text input
    */
@@ -341,10 +341,9 @@ export const ImportModal: React.FC<ImportModalProps> = forwardRef(
             disabled={hasFiles}
             data-modal-primary-focus
           />
-          {inputLabel && <p className={`${blockClass}__label`}>{inputLabel}</p>}
           <div className={`${blockClass}__input-group`}>
             <TextInput
-              labelText=""
+              labelText={<p className={`${blockClass}__label`}>{inputLabel}</p>}
               id={inputId || ''}
               onChange={inputHandler}
               placeholder={inputPlaceholder}
@@ -467,7 +466,7 @@ ImportModal.propTypes = {
   /**
    * Header to display above import by url
    */
-  inputLabel: PropTypes.string,
+  inputLabel: PropTypes.string.isRequired,
   /**
    * Placeholder for text input
    */

@@ -1,0 +1,151 @@
+import{j as e,aA as p,aB as f,e as l}from"./iframe-BbXUUjd_.js";import{D as m}from"./Dropdown-2nePbHNc.js";import{useMDXComponents as b}from"./index-BoPKpxEO.js";import{O as r}from"./OptionsTile-DDsUmGHW.js";import{s as d}from"./codePreviewer-Cw9brM_-.js";import"./preload-helper-PPVm8Dsz.js";import"./index-DJIZl_dZ.js";import"./inheritsLoose-DHKJTbHM.js";import"./FormContext-DLymYVx5.js";import"./mergeRefs-BZpmU3mx.js";import"./useNormalizedInputProps-B5K2lX4C.js";import"./Text-Bbz3GFY2.js";import"./bucket-19-D_AfXLYY.js";import"./index-5wdsmiYB.js";import"./defaultItemToString-zSItMTD_.js";import"./utils-BOvPdNkn.js";import"./index-DYQz9bQ1.js";import"./Toggle-BbReo9Xi.js";import"./useControllableState-BZS90GNH.js";import"./index-Doz2zLLk.js";import"./index-DcPoEpgU.js";import"./LayerContext-Bytv4zrP.js";import"./clamp--00YEiB8.js";import"./documentLang-E105Y72C.js";import"./StepContext-ugJ615ta.js";import"./devtools-c1cFm99f.js";import"./uuidv4-BN2rGLQG.js";import"./useControllableState-CRWTKGu5.js";import"./usePrefersReducedMotion-Dkir7oBy.js";import"./useIsomorphicEffect-Ckqx_rZa.js";import"./bucket-11-BH_hM6Iv.js";import"./AccordionItem-DicmOdSc.js";import"./SkeletonText-BCMmkJwd.js";import"./AspectRatio-Cg6sdc2q.js";import"./BreadcrumbItem-WJv2hM9E.js";import"./Link-Bbu9l37B.js";import"./bucket-13-DpTpFo6N.js";import"./ButtonSet-BMnlZwEF.js";import"./Checkbox-DA1Tp4F1.js";import"./MultiSelect-Bdg83ZaU.js";import"./useAttachedMenu-kpO217Y9.js";import"./environment-DRRHKtsv.js";import"./ComposedModal-BkgIOMZV.js";import"./InlineLoading-D1aGZn20.js";import"./bucket-6-CfXH_CLd.js";import"./requiredIfGivenPropIsTruthy-C6rAip-Q.js";import"./wrapFocus-Wym4UGgT.js";import"./DataTable-BWcTjjU3.js";import"./TableRow-B-Snxy3l.js";import"./wrapComponent-BYoRkSUS.js";import"./bucket-1-DLhfM8qe.js";import"./TableToolbar-C6g4aPLu.js";import"./bucket-0-XgBeGnkT.js";import"./TableSelectRow-WNMKe7Hf.js";import"./RadioButton-khxpqx3v.js";import"./OverflowMenuItem-CKgNgQFP.js";import"./TableToolbarSearch-Dt9gP2kL.js";import"./Search-CziQ13Zm.js";import"./bucket-15-CBNpOkFH.js";import"./index-Bit37Dcs.js";import"./useOutsideClick-DTSzTXra.js";import"./bucket-16-ooxM2VmG.js";import"./DatePicker-Bz3ffG6m.js";import"./bucket-2-AIq4o4H9.js";import"./Form-DJkCaFCG.js";import"./FormGroup-RnwmISsp.js";import"./FormLabel-BLnsgnFL.js";import"./Grid-Qmt6yO_j.js";import"./Row-FhYNR9cP.js";import"./Column-CLkLCz-n.js";import"./Icon.Skeleton-CBZ4Tz7o.js";import"./ListItem-BDoP240G.js";import"./MenuItem-GM9cwDgU.js";import"./index-CAtTluKL.js";import"./Notification-CvppPIqS.js";import"./bucket-10-Z4NSZwAQ.js";import"./NumberInput-CH2coJOL.js";import"./bucket-17-D-hvZsd8.js";import"./useMatchMedia-BviuuWjl.js";import"./DefinitionTooltip-D1ZjE1pE.js";import"./Tag-DVW51ef6.js";import"./OperationalTag-DhdsaTCi.js";import"./Pagination-BVntte-W.js";import"./Select-D0q4b9P2.js";import"./SelectItem-CzvjgQz1.js";import"./TextInput-VC_1HWwj.js";import"./ProgressIndicator-CMaMgLqO.js";import"./RadioButtonGroup-B8NLcoy8.js";import"./TileGroup-BV0hHpq0.js";import"./bucket-14-BfDuqi5H.js";import"./TimePickerSelect-sT3Ohbg8.js";import"./Slider-DWrGNqdf.js";import"./StructuredList-DMbV30aZ.js";import"./Tabs-CuYIIxeF.js";import"./DismissibleTag-Bn3_7Jv_.js";import"./SelectableTag-Dgw2qtwj.js";import"./TextArea-DE92OpmW.js";import"./Tile-sJLod1ms.js";import"./Content-DynLuogi.js";import"./HeaderName-CL9bu2ok.js";import"./Link-DLDNY2-I.js";import"./HeaderContainer-C3d40tao.js";import"./HeaderGlobalBar-BX-ZamfT.js";import"./AriaPropTypes-C-6u3orL.js";import"./SideNavLink-CLGqNZFf.js";import"./bucket-12-CtM1T-Tq.js";import"./SideNavLinkText-CvCLaety.js";import"./HeaderPanel-f8qKPQiT.js";import"./SideNavMenuItem-DkKeTXwH.js";import"./UnorderedList-CVJmOFfQ.js";import"./bucket-20-xSf1LOVj.js";import"./bucket-5-FYD7Vzy5.js";import"./index-C-HJKeUB.js";import"./bucket-7-DgIxtDP7.js";import"./bucket-8-BoeoKEGH.js";import"./bucket-9-khjeEFx8.js";import"./bucket-18-Eqhj5FgP.js";const x=".c4p--options-tile{inline-size:80vw;max-inline-size:48rem;min-inline-size:16rem}.c4p--options-tile__content p{font-size:var(--cds-body-01-font-size, .875rem);font-weight:var(--cds-body-01-font-weight, 400);line-height:var(--cds-body-01-line-height, 1.42857);letter-spacing:var(--cds-body-01-letter-spacing, .16px);margin-block-end:1.5rem}.c4p--options-tile__content .cds--dropdown__wrapper:first-of-type{margin-block-end:1.5rem}";function c(t){const i={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",ul:"ul",...b(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(i.h1,{id:"optionstile",children:"OptionsTile"}),`
+`,e.jsx(i.h2,{id:"table-of-contents",children:"Table of Contents"}),`
+`,e.jsxs(i.ul,{children:[`
+`,e.jsx(i.li,{children:e.jsx(i.a,{href:"#overview",children:"Overview"})}),`
+`,e.jsx(i.li,{children:e.jsx(i.a,{href:"#example-usage",children:"Example usage"})}),`
+`,e.jsx(i.li,{children:e.jsx(i.a,{href:"#component-api",children:"Component API"})}),`
+`]}),`
+`,e.jsx(i.h2,{id:"overview",children:"Overview"}),`
+`,e.jsx(i.p,{children:`The options tile is a disclosure widget, grouping a set of related controls or
+information while providing a summary of its contents when collapsed. It is used
+to avoid overwhelming the user with too many choices and elements when they’re
+likely not interested in all available options, but only a subset.`}),`
+`,e.jsx(i.p,{children:`An options tile can also be paired with a toggle to enable or disable an entire
+set of features with ease.`}),`
+`,e.jsxs(i.p,{children:[e.jsx(i.a,{href:"https://pages.github.ibm.com/carbon/ibm-products/components/options-tile/usage",rel:"nofollow",children:"Options Tile guidelines"}),`
+(IBM internal)`]}),`
+`,e.jsx(i.h2,{id:"options-tile",children:"Options Tile"}),`
+`,e.jsx(p,{of:a,additionalActions:[{title:"Open in Stackblitz",onClick:()=>d({story:a,styles:h.parameters.styles})}]}),`
+`,e.jsx(i.h2,{id:"static-options-tile",children:"Static Options Tile"}),`
+`,e.jsx(p,{of:o,additionalActions:[{title:"Open in Stackblitz",onClick:()=>d({story:o,styles:h.parameters.styles})}]}),`
+`,e.jsx(i.h2,{id:"component-api",children:"Component API"}),`
+`,e.jsx(f,{})]})}function T(t={}){const{wrapper:i}={...b(),...t.components};return i?e.jsx(i,{...t,children:e.jsx(c,{...t})}):c(t)}const h={title:"Components/OptionsTile",component:r,tags:["autodocs"],parameters:{styles:x,docs:{page:T}},percy:{args:{open:!0}}},C=t=>{const i=[{label:"English",id:"en"},{label:"简体中文 - Chinese Simplified",id:"zh-CN"},{label:"繁體中文 - Chinese Traditional",id:"zh-TW"},{label:"Français - French",id:"fr"},{label:"Deutsch - German",id:"de"},{label:"Italiano - Italian",id:"it"},{label:"日本語 - Japanese",id:"ja"},{label:"한국어 - Korean",id:"ko"},{label:"Polski - Polish",id:"pl"},{label:"Português (brasileiro) - Portuguese (Brazilian)",id:"pt-BR"},{label:"Русский - Russian",id:"ru"},{label:"Español - Spanish",id:"es"}],n=[{label:"English",id:"en"},{label:"English-US",id:"en-US"},{label:"English-UK",id:"en-UK"},{label:"English-Canada",id:"en-CA"},{label:"English-Australia",id:"en-AU"},{label:"Japanese",id:"ja"},{label:"Korean",id:"ko"},{label:"Chinese-PRC",id:"zh-CN"},{label:"Chinese-Taiwan",id:"zh-TW"},{label:"Vietnamese",id:"vi"},{label:"Thai",id:"th"},{label:"Russian",id:"ru"},{label:"Polish",id:"pl"},{label:"Greek",id:"el"},{label:"Hebrew",id:"he"},{label:"Arabic",id:"ar"},{label:"Spanish",id:"es"},{label:"German",id:"de"},{label:"French",id:"fr"},{label:"French-Canada",id:"fr-CA"},{label:"Italian",id:"it"},{label:"Portuguese-Brazil",id:"pt-BR"},{label:"Turkish",id:"tr"}],{titleId:s,...g}=t;return l.createElement("main",null,l.createElement(r,{...g},l.createElement("p",null,"User interface defines the language the application is displayed in. Locale sets the regional display formats for information like time, date, currency and decimal delimiters."),l.createElement(m,{id:`${s}-language`,titleText:"User interface",label:"User interface",items:i,initialSelectedItem:i[0]}),l.createElement(m,{id:`${s}-locale`,titleText:"Locale",label:"Locale",items:n,initialSelectedItem:n[0]})))},y=t=>l.createElement("main",null,l.createElement(r,{...t})),u={className:"example-class",enabled:void 0,invalid:!1,invalidText:"Your system does not support this configuration",locked:!1,lockedText:"This option is managed by your administrator",open:!1,size:"lg",summary:"English | Locale: English",title:"Language",titleId:"title-id",warn:!1,warnText:"A restart is required to apply these settings"},a=C.bind({});a.args={...u};const o=y.bind({});o.args={...u};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`args => {
+  // spell-checker:disable
+  const languages = [{
+    label: 'English',
+    id: 'en'
+  }, {
+    label: '简体中文 - Chinese Simplified',
+    id: 'zh-CN'
+  }, {
+    label: '繁體中文 - Chinese Traditional',
+    id: 'zh-TW'
+  }, {
+    label: 'Français - French',
+    id: 'fr'
+  }, {
+    label: 'Deutsch - German',
+    id: 'de'
+  }, {
+    label: 'Italiano - Italian',
+    id: 'it'
+  }, {
+    label: '日本語 - Japanese',
+    id: 'ja'
+  }, {
+    label: '한국어 - Korean',
+    id: 'ko'
+  }, {
+    label: 'Polski - Polish',
+    id: 'pl'
+  }, {
+    label: 'Português (brasileiro) - Portuguese (Brazilian)',
+    id: 'pt-BR'
+  }, {
+    label: 'Русский - Russian',
+    id: 'ru'
+  }, {
+    label: 'Español - Spanish',
+    id: 'es'
+  }];
+  const locales = [{
+    label: 'English',
+    id: 'en'
+  }, {
+    label: 'English-US',
+    id: 'en-US'
+  }, {
+    label: 'English-UK',
+    id: 'en-UK'
+  }, {
+    label: 'English-Canada',
+    id: 'en-CA'
+  }, {
+    label: 'English-Australia',
+    id: 'en-AU'
+  }, {
+    label: 'Japanese',
+    id: 'ja'
+  }, {
+    label: 'Korean',
+    id: 'ko'
+  }, {
+    label: 'Chinese-PRC',
+    id: 'zh-CN'
+  }, {
+    label: 'Chinese-Taiwan',
+    id: 'zh-TW'
+  }, {
+    label: 'Vietnamese',
+    id: 'vi'
+  }, {
+    label: 'Thai',
+    id: 'th'
+  }, {
+    label: 'Russian',
+    id: 'ru'
+  }, {
+    label: 'Polish',
+    id: 'pl'
+  }, {
+    label: 'Greek',
+    id: 'el'
+  }, {
+    label: 'Hebrew',
+    id: 'he'
+  }, {
+    label: 'Arabic',
+    id: 'ar'
+  }, {
+    label: 'Spanish',
+    id: 'es'
+  }, {
+    label: 'German',
+    id: 'de'
+  }, {
+    label: 'French',
+    id: 'fr'
+  }, {
+    label: 'French-Canada',
+    id: 'fr-CA'
+  }, {
+    label: 'Italian',
+    id: 'it'
+  }, {
+    label: 'Portuguese-Brazil',
+    id: 'pt-BR'
+  }, {
+    label: 'Turkish',
+    id: 'tr'
+  }];
+  const {
+    titleId: id,
+    ...rest
+  } = args;
+  return <main>
+      <OptionsTile {...rest}>
+        <p>
+          User interface defines the language the application is displayed in.
+          Locale sets the regional display formats for information like time,
+          date, currency and decimal delimiters.
+        </p>
+        <Dropdown id={\`\${id}-language\`} titleText="User interface" label="User interface" items={languages} initialSelectedItem={languages[0]} />
+        <Dropdown id={\`\${id}-locale\`} titleText="Locale" label="Locale" items={locales} initialSelectedItem={locales[0]} />
+      </OptionsTile>
+    </main>;
+}`,...a.parameters?.docs?.source}}};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`args => {
+  return <main>
+      <OptionsTile {...args} />
+    </main>;
+}`,...o.parameters?.docs?.source}}};const Ai=["optionsTile","staticOptionsTile"];export{Ai as __namedExportsOrder,h as default,a as optionsTile,o as staticOptionsTile};
+//# sourceMappingURL=OptionsTile.stories-i-cOdMNq.js.map

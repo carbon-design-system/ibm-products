@@ -84,10 +84,6 @@ export interface ImportModalProps {
    */
   fileUploadLabel?: string;
   /**
-   * Hide input label
-   */
-  hideInputLabel?: boolean;
-  /**
    * Button icon for import by url button
    */
   inputButtonIcon?: boolean;
@@ -102,7 +98,7 @@ export interface ImportModalProps {
   /**
    * Header to display above import by url
    */
-  inputLabel: string;
+  inputLabel?: string;
   /**
    * Placeholder for text input
    */
@@ -176,7 +172,6 @@ export const ImportModal: React.FC<ImportModalProps> = forwardRef(
       fileDropHeader,
       fileDropLabel,
       fileUploadLabel,
-      hideInputLabel,
       inputButtonIcon,
       inputButtonText,
       inputId,
@@ -346,16 +341,16 @@ export const ImportModal: React.FC<ImportModalProps> = forwardRef(
             disabled={hasFiles}
             data-modal-primary-focus
           />
+          {inputLabel && <p className={`${blockClass}__label`}>{inputLabel}</p>}
           <div className={`${blockClass}__input-group`}>
             <TextInput
-              labelText={<p className={`${blockClass}__label`}>{inputLabel}</p>}
+              labelText=""
               id={inputId || ''}
               onChange={inputHandler}
               placeholder={inputPlaceholder}
               value={importUrl}
               disabled={hasFiles}
               aria-label={inputLabel}
-              hideLabel={hideInputLabel}
             />
             <Button
               onClick={fetchFile}
@@ -458,10 +453,6 @@ ImportModal.propTypes = {
    */
   fileUploadLabel: PropTypes.string,
   /**
-   * Hide input label
-   */
-  hideInputLabel: PropTypes.bool,
-  /**
    * Button icon for import by url button
    */
   inputButtonIcon: PropTypes.bool,
@@ -476,7 +467,7 @@ ImportModal.propTypes = {
   /**
    * Header to display above import by url
    */
-  inputLabel: PropTypes.string.isRequired,
+  inputLabel: PropTypes.string,
   /**
    * Placeholder for text input
    */

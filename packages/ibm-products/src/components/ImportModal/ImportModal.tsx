@@ -476,7 +476,7 @@ ImportModal.propTypes = {
   /**
    * Header to display above import by url
    */
-  inputLabel: PropTypes.string.inRequired,
+  inputLabel: PropTypes.string.isRequired,
   /**
    * Placeholder for text input
    */

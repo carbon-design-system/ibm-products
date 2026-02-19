@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/feature-flags' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/config' as carbon-config;
@@ -28,8 +29,98 @@
 
 $block-class: #{$pkg-prefix}--tearsheet;
 
+// viewport, capped at 500px to set an upper limit on the movement speed
+// For the reason for calc() see https://github.com/sass/sass/issues/2849
+// and https://github.com/sass/node-sass/issues/2815.
+// stylelint-disable-next-line carbon/layout-use
+$transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
+
 // stylelint-disable-next-line carbon/theme-use
 $motion-duration: $duration-moderate-02;
+
+@mixin tearsheet-entrance-exit($has-presence: false) {
+  @if not($has-presence) {
+    &.#{$block-class} {
+      &:not(.is-visible) {
+        &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+          transform: $transform-start;
+        }
+      }
+    }
+  } @else {
+    // handle entrance and exit via CSS animations,
+    // however keep CSS transitions for stacking animations
+    &.#{$block-class} {
+      animation: #{$block-class}--presence-tearsheet__enter
+        $motion-duration
+        motion(entrance, expressive);
+      opacity: 1;
+
+      // extra specificity to ensure this transition overrides the carbon default
+      &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+        animation: #{$block-class}--presence-tearsheet--container__enter
+          $motion-duration
+          motion(entrance, expressive);
+        transform: translate3d(0, 0, 0);
+        @media screen and (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
+      }
+
+      &.#{$block-class}--stacked-1-of-2.is-visible .#{$block-class}__container,
+      &.#{$block-class}--stacked-2-of-3.is-visible .#{$block-class}__container {
+        transform: scale(var(--#{$block-class}--stacking-scale-factor-single));
+      }
+
+      &.#{$block-class}--stacked-1-of-3.is-visible .#{$block-class}__container {
+        transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
+      }
+
+      &[data-tearsheet-exiting] {
+        animation: #{$block-class}--presence-tearsheet__exit
+          $motion-duration
+          motion(exit, expressive)
+          forwards;
+
+        &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+          animation: #{$block-class}--presence-tearsheet--container__exit
+            $motion-duration
+            motion(entrance, expressive)
+            forwards;
+          @media screen and (prefers-reduced-motion: reduce) {
+            animation: none;
+          }
+        }
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet__enter {
+      from {
+        opacity: 0;
+        transition: none;
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet__exit {
+      to {
+        opacity: 0;
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet--container__enter {
+      from {
+        transform: $transform-start;
+        transition: none;
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet--container__exit {
+      to {
+        transform: $transform-start;
+      }
+    }
+  }
+}
 
 @include block-wrap($block-class) {
   &.#{$block-class} {
@@ -50,17 +141,6 @@ $motion-duration: $duration-moderate-02;
 
       @media (prefers-reduced-motion: reduce) {
         transition: none;
-      }
-    }
-
-    &:not(.is-visible) {
-      &.#{$block-class}.#{$block-class} .#{$block-class}__container {
-        // we want the enter/leave animation to run up most of the height of the
-        // viewport, capped at 500px to set an upper limit on the movement speed
-        // For the reason for calc() see https://github.com/sass/sass/issues/2849
-        // and https://github.com/sass/node-sass/issues/2815.
-        // stylelint-disable-next-line carbon/layout-use
-        transform: translate3d(0, calc(min(95vh, 500px)), 0);
       }
     }
 
@@ -463,5 +543,13 @@ $motion-duration: $duration-moderate-02;
     /* stylelint-disable-next-line carbon/layout-use */
     margin-block: 6px;
     margin-inline-end: $spacing-05;
+  }
+
+  &.#{$block-class}--tearsheet-enable-presence {
+    @include tearsheet-entrance-exit($has-presence: true);
+  }
+
+  &:not(.#{$block-class}--tearsheet-enable-presence) {
+    @include tearsheet-entrance-exit($has-presence: enabled('enable-presence'));
   }
 }

@@ -84,8 +84,8 @@ export default tsEslint.config(
       'packages/ibm-products/scripts/generate/templates/**/*.js*',
       'scripts/example-gallery-builder/update-example/**/*.js*',
       // Pattern example files (StackBlitz examples)
-      "packages/ibm-products/src/patterns/*/example/**",
-      "!packages/ibm-products/src/patterns/*/example/components/**",
+      'packages/ibm-products/src/patterns/*/example/**',
+      '!packages/ibm-products/src/patterns/*/example/components/**',
     ],
   },
   {

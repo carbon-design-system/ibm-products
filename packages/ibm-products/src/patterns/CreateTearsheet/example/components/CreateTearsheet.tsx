@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -164,6 +164,7 @@ export const CreateTearsheet = ({
       .map((child: any, index) => ({
         label: child.props?.label || child.props?.title || `Step ${index + 1}`,
         secondaryLabel: child.props?.secondaryLabel,
+        invalid: child.props?.invalid,
       }));
 
   // Get all valid children (excluding those with includeStep={false})
@@ -182,6 +183,11 @@ export const CreateTearsheet = ({
     ? (currentStepChild as ReactElement<any>).props?.hideSteps
     : false;
 
+  // Get invalid state from current step
+  const currentStepInvalid = isValidElement(currentStepChild)
+    ? (currentStepChild as ReactElement<any>).props?.invalid
+    : false;
+
   // Calculate the progress indicator step index by counting non-hidden steps before current step
   const progressIndicatorStepIndex = validChildren
     .slice(0, currentStep)
@@ -195,8 +201,11 @@ export const CreateTearsheet = ({
 
   // Use provided validation functions or default behavior
   const isNextDisabled = handleNextDisabledState
-    ? handleNextDisabledState(formState, currentStep) || isLoading || hasError
-    : isLoading || hasError;
+    ? handleNextDisabledState(formState, currentStep) ||
+      isLoading ||
+      hasError ||
+      currentStepInvalid
+    : isLoading || hasError || currentStepInvalid;
 
   const isBackDisabled = handleBackDisabledState
     ? handleBackDisabledState(currentStep) || isLoading
@@ -238,6 +247,7 @@ export const CreateTearsheet = ({
                   current={progressIndicatorStepIndex === index + 1}
                   label={step.label}
                   secondaryLabel={step.secondaryLabel}
+                  invalid={step.invalid}
                 />
               ))}
             </ProgressIndicator>

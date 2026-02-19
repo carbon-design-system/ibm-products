@@ -19,10 +19,9 @@ const sharedConfig: UserConfig = {
   entry: ['./src/index.ts'],
   banner: () => ({
     js: banner,
-    dts: banner,
   }),
   platform: 'neutral',
-  dts: true,
+  dts: false,
   unbundle: true,
   external: ['@carbon/icons-react', '@carbon/colors', '@floating-ui/react'],
 };

@@ -18,7 +18,10 @@ $prefix: 'c4p';
 $block-class: #{$prefix}--options-tile;
 
 :host(#{$prefix}-options-tile) {
+  position: relative;
+
   .#{$block-class} {
+    position: relative;
     background: $layer-01;
     border-block-end: 1px solid $border-subtle-01;
 
@@ -34,6 +37,7 @@ $block-class: #{$prefix}--options-tile;
       justify-content: space-between;
       block-size: $spacing-09;
       cursor: pointer;
+      inline-size: calc(100% - ($spacing-09 + ($spacing-05 * 3)));
       padding-inline: $spacing-05;
       padding-inline-end: $spacing-05;
 
@@ -52,8 +56,13 @@ $block-class: #{$prefix}--options-tile;
       }
 
       &-right {
+        position: absolute;
         display: flex;
         align-items: center;
+        block-size: $spacing-09;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        padding-inline: $spacing-05;
       }
     }
 

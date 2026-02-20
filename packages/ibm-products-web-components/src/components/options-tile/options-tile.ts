@@ -139,9 +139,6 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
               </div>
             </div>
           </div>
-          <div class="${blockClass}__header-right">
-            <slot name="toggle"></slot>
-          </div>
         </summary>
         <div class="${blockClass}__body">
           <cds-layer level="1">
@@ -149,6 +146,9 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
           </cds-layer>
         </div>
       </details>
+      <div class="${blockClass}__header-right">
+        <slot name="toggle"></slot>
+      </div>
     `;
   }
 

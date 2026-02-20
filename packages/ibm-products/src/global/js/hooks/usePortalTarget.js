@@ -18,8 +18,8 @@ const usePortalTarget = (portalTargetIn) => {
     setPortalTarget(portalTargetIn);
   } else if (!portalTarget) {
     if (
-      pkg.isFeatureEnabled('default-portal-target-body') ||
-      enablePortalTarget
+      typeof window !== 'undefined' &&
+      (pkg.isFeatureEnabled('default-portal-target-body') || enablePortalTarget)
     ) {
       setPortalTarget(document.body);
     }

@@ -965,6 +965,9 @@ collect:
         # TearsheetHeaderContent
         - titleEnd
         - titleStart
+        # TearsheetPresence
+        - _autoEnablePresence
+        - _presenceId
         # TearsheetWithSteps
         - progressIndicator
         - setOpen

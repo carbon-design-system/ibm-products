@@ -15,41 +15,41 @@
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins' as *;
 
-$_block-class: #{$pkg-prefix}--tag-set;
-$block-class-overflow: #{$_block-class}-overflow;
-$block-class-modal: #{$_block-class}-modal;
+$block-class: #{$pkg-prefix}--tag-set;
+$block-class-overflow: #{$block-class}-overflow;
+$block-class-modal: #{$block-class}-modal;
 
-@include block-wrap($_block-class) {
-  &.#{$_block-class} {
+@include block-wrap($block-class) {
+  &.#{$block-class} {
     display: block;
     inline-size: 100%;
   }
 
-  .#{$_block-class}__space {
+  .#{$block-class}__space {
     position: relative;
     display: block;
     inline-size: 100%;
     white-space: nowrap;
   }
 
-  .#{$_block-class}__space--align-end {
+  .#{$block-class}__space--align-end {
     text-align: end;
   }
 
-  .#{$_block-class}__space--align-center {
+  .#{$block-class}__space--align-center {
     text-align: center;
   }
 
-  .#{$_block-class}__tag-container {
+  .#{$block-class}__tag-container {
     display: inline-flex; // needed to register a width
     white-space: nowrap;
   }
 
-  .#{$_block-class}__tag-container--multiline {
+  .#{$block-class}__tag-container--multiline {
     flex-wrap: wrap;
   }
 
-  .#{$_block-class}__tag-container--hidden {
+  .#{$block-class}__tag-container--hidden {
     // This tag container is used to measure the width of all displayable tags
     @include measuring-container;
   }
@@ -117,18 +117,6 @@ $block-class-modal: #{$_block-class}-modal;
     text-align: start;
   }
 
-  .#{$block-class-overflow}__popover-trigger {
-    /* stylelint-disable-next-line declaration-no-important */
-    border: none !important;
-    font-family: inherit;
-  }
-
-  .#{$block-class-overflow}__show-all-tags-link.#{carbon-config.$prefix}--link:visited {
-    display: inline-block;
-    margin: $spacing-03 0 $spacing-02; // to match the tags
-    color: $link-inverse;
-  }
-
   .#{carbon-config.$prefix}--link:active,
   .#{carbon-config.$prefix}--link:active:visited,
   .#{carbon-config.$prefix}--link:active:visited:hover {
@@ -143,6 +131,19 @@ $block-class-modal: #{$_block-class}-modal;
   .#{$block-class-overflow}__show-all-tags-link {
     color: $link-inverse;
     margin-block-start: $spacing-03;
+
+    &:hover,
+    &:visited:hover {
+      color: $link-inverse-hover;
+    }
+
+    &:focus {
+      color: $focus-inverse;
+    }
+
+    &:visited {
+      color: $link-inverse;
+    }
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag

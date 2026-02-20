@@ -70,10 +70,6 @@ $block-class-modal: #{$block-class}-modal;
   display: inline-block;
   vertical-align: bottom;
 
-  .#{carbon-config.$prefix}--tag.#{carbon-config.$prefix}--tag--interactive {
-    border: 0;
-  }
-
   .#{$carbon-prefix}--tag.#{$carbon-prefix}--tag--interactive {
     border: 0;
   }
@@ -100,12 +96,6 @@ $block-class-modal: #{$block-class}-modal;
     /* stylelint-disable-next-line declaration-no-important */
     border: none !important;
     font-family: inherit;
-  }
-
-  .#{$block-class-popover}__show-all-tags-link.#{carbon-config.$prefix}--link:visited {
-    display: inline-block;
-    margin: $spacing-03 0 $spacing-02; // to match the tags
-    color: $link-inverse;
   }
 
   .#{$carbon-prefix}--link:active,

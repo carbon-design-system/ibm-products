@@ -48,6 +48,14 @@ const windowExists = typeof window !== `undefined`;
  */
 export const scrollable = (target: HTMLElement): boolean => {
   const style = window.getComputedStyle(target);
+  const tagName = target.tagName.toLowerCase();
+
+  // Exclude body/html from hidden check (modals set overflow:hidden on body)
+  if (tagName === 'body' || tagName === 'html') {
+    return /(auto|scroll)/.test(style.overflow);
+  }
+
+  // For other elements, include hidden as it may be intentional scroll container
   return /(auto|scroll|hidden)/.test(style.overflow);
 };
 

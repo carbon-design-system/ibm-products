@@ -17,6 +17,7 @@ export type PageHeaderRefs = {
   contentRef?: RefObject<HTMLDivElement | null>;
   titleRef?: RefObject<HTMLHeadingElement | null>;
   contentActions?: RefObject<HTMLDivElement | null>;
+  breadcrumbActions?: RefObject<HTMLDivElement | null>;
 };
 
 type PageHeaderContextType = {
@@ -27,6 +28,8 @@ type PageHeaderContextType = {
   fullyCollapsed?: boolean;
   titleClipped?: boolean;
   contentActionsClipped?: boolean;
+  breadcrumbActionsClipped?: boolean;
+  isContentActionsInBreadcrumbBar?: boolean;
 };
 
 export const PageHeaderContext = createContext<

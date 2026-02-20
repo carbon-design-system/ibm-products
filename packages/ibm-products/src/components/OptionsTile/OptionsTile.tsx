@@ -305,20 +305,6 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        {enabled !== undefined && (
-          <div className={`${blockClass}__toggle-container`}>
-            <Toggle
-              id={`${titleId}-toggle`}
-              className={`${blockClass}__toggle`}
-              toggled={enabled}
-              aria-labelledby={titleId}
-              hideLabel
-              onToggle={onToggle}
-              size="sm"
-              disabled={isLocked}
-            />
-          </div>
-        )}
         {isExpandable ? (
           <details
             className={`${blockClass}__details`}
@@ -349,6 +335,20 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
           </details>
         ) : (
           <div className={`${blockClass}__static-content`}>{renderTitle()}</div>
+        )}
+        {enabled !== undefined && (
+          <div className={`${blockClass}__toggle-container`}>
+            <Toggle
+              id={`${titleId}-toggle`}
+              className={`${blockClass}__toggle`}
+              toggled={enabled}
+              aria-labelledby={titleId}
+              hideLabel
+              onToggle={onToggle}
+              size="sm"
+              disabled={isLocked}
+            />
+          </div>
         )}
       </Section>
     );

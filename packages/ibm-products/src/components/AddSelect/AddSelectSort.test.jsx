@@ -20,10 +20,14 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    render(<AddSelectSort />);
+    await act(async () => {
+      render(<AddSelectSort />);
+    });
     const AddSelectElement = document.querySelector(`.${blockClass}`);
-    await expect(AddSelectElement).toBeAccessible(componentName);
-    await expect(AddSelectElement).toHaveNoAxeViolations();
+    await act(async () => {
+      await expect(AddSelectElement).toBeAccessible(componentName);
+      await expect(AddSelectElement).toHaveNoAxeViolations();
+    });
   });
 
   it('renders with options', async () => {

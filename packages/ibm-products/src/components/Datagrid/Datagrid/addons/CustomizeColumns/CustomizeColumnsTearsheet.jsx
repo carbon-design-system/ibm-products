@@ -8,8 +8,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { TearsheetNarrow } from '../../../../Tearsheet';
-import Columns from './Columns';
-import Actions from './Actions';
+import Columns from './Columns.jsx';
+import Actions from './Actions.jsx';
 import { pkg } from '../../../../../settings';
 import { useCallback } from 'react';
 

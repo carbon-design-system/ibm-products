@@ -39,7 +39,6 @@ import {
   Heading,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
-import { blockClass } from '../PageHeaderUtils';
 import { createOverflowHandler as localOverflowHandler } from './overflowHandler';
 import { createOverflowHandler } from '@carbon/utilities';
 import { ChevronUp } from '@carbon/react/icons';
@@ -57,6 +56,7 @@ interface PageHeaderProps {
   children?: React.ReactNode;
   className?: string;
 }
+const blockClass = `${pkg.prefix}--page-header`;
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
     const [refs, setRefs] = useState<PageHeaderRefs>({});

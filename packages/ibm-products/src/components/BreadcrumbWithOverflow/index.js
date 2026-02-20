@@ -7,4 +7,4 @@
 
 // NOTE: An index file is most useful when you have multiple components
 
-export { BreadcrumbWithOverflow } from './BreadcrumbWithOverflow';
+export { BreadcrumbWithOverflow } from './BreadcrumbWithOverflow.jsx';

@@ -43,7 +43,7 @@
     "web components"
   ],
   "scripts": {
-    "build": "yarn clean && node tasks/build.js && yarn wca",
+    "build": "yarn clean && tsdown && yarn wca",
     "build:storybook": "storybook build --quiet",
     "clean": "rimraf es lib scss dist storybook-static",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
@@ -106,6 +106,7 @@
     "sass": "^1.93.2",
     "storybook": "^9.1.15",
     "storybook-addon-accessibility-checker": ">=9.2.0-rc.0",
+    "tsdown": "^0.14.1",
     "tslib": "^2.8.1",
     "typescript": "^5.5.3",
     "vite": "npm:rolldown-vite@latest",

@@ -5,5 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { StatusIndicator } from './StatusIndicator';
-export { StatusIndicatorStep } from './StatusIndicatorStep';
+export { DecoratorDualButton } from './DecoratorDualButton.jsx';

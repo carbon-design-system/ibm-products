@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
+export { ButtonSetWithOverflow } from './ButtonSetWithOverflow.jsx';

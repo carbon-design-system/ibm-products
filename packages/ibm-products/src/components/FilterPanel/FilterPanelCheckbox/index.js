@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { FilterPanelCheckbox } from './FilterPanelCheckbox';
+export { FilterPanelCheckbox } from './FilterPanelCheckbox.jsx';

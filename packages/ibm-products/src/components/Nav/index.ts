@@ -5,4 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { StringFormatter } from './StringFormatter';
+export { Nav } from './Nav.jsx';
+export { NavList } from './NavList.jsx';
+export { NavItem } from './NavItem.jsx';

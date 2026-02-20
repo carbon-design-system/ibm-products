@@ -1,3 +1,29 @@
+## `@carbon/ibm-products@2.84.0-rc.0`
+### Features :rocket:
+- feat(nonlinearreading): code connect integration (#8943)
+- feat: show Close icon at global header actions when expanded (#8933)
+- feat(tearsheetpresence): add tearsheet presence (#8929)
+- feat(CoachmarkPatterns): example creation for coachmark patterns (#8918)
+- feat(pageheader): code connect integration (#8716)
+
+### Bug fixes :bug:
+- fix(SidePanel): Allow closing SidePanel via ESC key (#8977)
+- fix(preview__PageHeader): resolve content actions responsive issue in < 1010px viewport (#8976)
+- fix(Pageheader_preview): header calulation issue fix (#8940)
+- fix(CoachmarkBeacon): removed role from wrapper div (#8956)
+- fix(PageHeader): use TruncatedText in PageHeader subtitle (#8917)
+- fix: use carbon prefix directly from @carbon/styles package config (#8904)
+
+### Housekeeping :house:
+- chore: remove unwanted style changes (#8997)
+- build(deps): update to Carbon 11 compatible versions to latest (#8991)
+- chore(deps): update dependency @percy/storybook to v10 (#8982)
+- chore: bump @carbon/feature-flags version (#8968)
+- chore(deps): update dependency @vitejs/plugin-react to v4.7.0 (#8967)
+- chore(deps): update dependency vite to v7 [security] (#8941)
+- build(performance): rolldown-vite integration (#8915)
+- build(deps): update to Carbon 11 compatible versions to latest (#8907)
+
 ## `@carbon/ibm-products@2.83.0`
 ### Features :rocket:
 - feat(CreateModal): implement `CreateModal` pattern with example (#8706)

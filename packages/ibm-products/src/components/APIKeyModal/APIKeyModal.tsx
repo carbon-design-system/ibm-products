@@ -48,7 +48,15 @@ const defaults = {
   customSteps: [],
 };
 
-export const APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
+export const APIKeyModal: React.FC<APIKeyModalProps> = forwardRef<
+  HTMLDivElement,
+  APIKeyModalProps
+>(({ portalTarget, ...props }, ref) => {
+  const renderPortalUse = usePortalTarget(portalTarget);
+  return renderPortalUse(<APIKeyModalDialog ref={ref} {...props} />);
+});
+
+const APIKeyModalDialog = forwardRef<HTMLDivElement, APIKeyModalProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -96,7 +104,6 @@ export const APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       onRequestEdit,
       onRequestGenerate,
       open,
-      portalTarget: portalTargetIn,
       previousStepButtonText,
       showAPIKeyLabel,
       helperText,
@@ -104,7 +111,7 @@ export const APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       // Collect any other property values passed in.
       ...rest
     },
-    ref: React.Ref<HTMLDivElement>
+    ref
   ) => {
     const [title, setTitle] = useState<string | null | undefined>(null);
     const [successMessage, setSuccessMessage] = useState<
@@ -116,7 +123,6 @@ export const APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     const copyRef = useRef<HTMLButtonElement | undefined>(undefined);
     const apiKeyInputId = useRef(uuidv4());
     const nameInputId = useRef(uuidv4());
-    const renderPortalUse = usePortalTarget(portalTargetIn);
     const hasSteps = Boolean(customSteps.length);
     const apiKeyLoaded = apiKey && !loading;
     const hasNextStep = hasSteps && currentStep < customSteps.length - 1;
@@ -258,7 +264,7 @@ export const APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       }
     };
 
-    return renderPortalUse(
+    return (
       <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
         <ComposedModal
           {...rest}

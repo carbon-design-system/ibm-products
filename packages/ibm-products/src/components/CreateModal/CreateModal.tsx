@@ -87,6 +87,13 @@ content, and is persistent until dismissed. The purpose of this modal should be
 immediately apparent to the user, with a clear and obvious path to completion.
  */
 export const CreateModal = React.forwardRef<HTMLDivElement, CreateModalProps>(
+  ({ portalTarget, ...props }, ref) => {
+    const renderPortalUse = usePortalTarget(portalTarget);
+    return renderPortalUse(<CreateModalDialog ref={ref} {...props} />);
+  }
+);
+
+const CreateModalDialog = React.forwardRef<HTMLDivElement, CreateModalProps>(
   (props, ref) => {
     const {
       className,
@@ -98,15 +105,13 @@ export const CreateModal = React.forwardRef<HTMLDivElement, CreateModalProps>(
       subtitle,
       description,
       secondaryButtonText,
-      portalTarget: portalTargetIn,
       primaryButtonText,
       disableSubmit,
       selectorPrimaryFocus,
       ...rest
     } = props;
-    const renderPortalUse = usePortalTarget(portalTargetIn);
 
-    return renderPortalUse(
+    return (
       <ComposedModal
         {...rest}
         selectorPrimaryFocus={selectorPrimaryFocus}

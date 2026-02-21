@@ -159,7 +159,18 @@ export interface ExportModalProps
 /**
  * Modal dialog version of the export pattern
  */
-export const ExportModal = forwardRef(
+export const ExportModal = forwardRef<
+  HTMLDivElement,
+  React.PropsWithChildren<ExportModalProps>
+>(({ portalTarget, ...props }, ref) => {
+  const renderPortalUse = usePortalTarget(portalTarget);
+  return renderPortalUse(<ExportModalDialog ref={ref} {...props} />);
+});
+
+const ExportModalDialog = forwardRef<
+  HTMLDivElement,
+  React.PropsWithChildren<ExportModalProps>
+>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -178,7 +189,6 @@ export const ExportModal = forwardRef(
       onClose,
       onRequestSubmit,
       open,
-      portalTarget: portalTargetIn,
       preformattedExtensions = defaults.preformattedExtensions,
       preformattedExtensionsLabel,
       primaryButtonText,
@@ -192,7 +202,7 @@ export const ExportModal = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    }: React.PropsWithChildren<ExportModalProps>,
+    },
     ref
   ) => {
     const blockClass = `${pkg.prefix}--export-modal`;
@@ -200,7 +210,6 @@ export const ExportModal = forwardRef(
     const [dirtyInput, setDirtyInput] = useState(false);
     // by default (if it exists) use the first extension in the extension array
     const [extension, setExtension] = useState('');
-    const renderPortalUse = usePortalTarget(portalTargetIn);
     const carbonPrefix = usePrefix();
 
     useEffect(() => {
@@ -270,7 +279,7 @@ export const ExportModal = forwardRef(
       onBlur: onBlurHandler,
       ['data-modal-primary-focus']: true,
     };
-    return renderPortalUse(
+    return (
       <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
         <ComposedModal
           {...rest}

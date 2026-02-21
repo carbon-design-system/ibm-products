@@ -52,6 +52,14 @@ interface TagOverflowModalProps {
 }
 
 export const TagOverflowModal = ({
+  portalTarget,
+  ...props
+}: TagOverflowModalProps) => {
+  const renderPortalUse = usePortalTarget(portalTarget);
+  return renderPortalUse(<TagOverflowModalDialog {...props} />);
+};
+
+const TagOverflowModalDialog = ({
   // The component props, in alphabetical order (for consistency).
 
   allTags,
@@ -62,7 +70,6 @@ export const TagOverflowModal = ({
   onTagClose,
   open,
   overflowType,
-  portalTarget: portalTargetIn,
   searchLabel = defaults.searchLabel,
   searchPlaceholder,
 
@@ -70,7 +77,6 @@ export const TagOverflowModal = ({
   ...rest
 }: TagOverflowModalProps) => {
   const [search, setSearch] = useState('');
-  const renderPortalUse = usePortalTarget(portalTargetIn);
 
   const getFilteredItems = (): AllTags => {
     if (open && search && allTags) {
@@ -85,7 +91,7 @@ export const TagOverflowModal = ({
     setSearch(evt.target.value || '');
   };
 
-  return renderPortalUse(
+  return (
     <ComposedModal
       {
         // Pass through any other property values as HTML attributes.

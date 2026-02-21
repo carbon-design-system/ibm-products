@@ -161,7 +161,15 @@ export interface ImportModalProps {
   title: string;
 }
 
-export const ImportModal: React.FC<ImportModalProps> = forwardRef(
+export const ImportModal: React.FC<ImportModalProps> = forwardRef<
+  HTMLDivElement,
+  ImportModalProps
+>(({ portalTarget, ...props }, ref) => {
+  const renderPortalUse = usePortalTarget(portalTarget);
+  return renderPortalUse(<ImportModalDialog {...props} ref={ref} />);
+});
+
+const ImportModalDialog = forwardRef<HTMLDivElement, ImportModalProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -191,7 +199,6 @@ export const ImportModal: React.FC<ImportModalProps> = forwardRef(
       onClose,
       onRequestSubmit,
       open,
-      portalTarget: portalTargetIn,
       primaryButtonText,
       secondaryButtonText,
       title,
@@ -199,12 +206,11 @@ export const ImportModal: React.FC<ImportModalProps> = forwardRef(
       // Collect any other property values passed in.
       ...rest
     },
-    ref: ForwardedRef<HTMLDivElement>
+    ref
   ) => {
     const carbonPrefix = usePrefix();
     const [files, setFiles] = useState<Array<FileType>>([]);
     const [importUrl, setImportUrl] = useState('');
-    const renderPortalUse = usePortalTarget(portalTargetIn);
 
     const isInvalidFileType = (file) => {
       const acceptSet = new Set(accept);
@@ -319,7 +325,7 @@ export const ImportModal: React.FC<ImportModalProps> = forwardRef(
     const fileStatusString = `${numberOfValidFiles} / ${numberOfFiles} ${fileUploadLabel}`;
     const blockClass = `${pkg.prefix}--import-modal`;
 
-    return renderPortalUse(
+    return (
       <ComposedModal
         {...rest}
         {...{ open, ref, ...getDevtoolsProps(componentName) }}

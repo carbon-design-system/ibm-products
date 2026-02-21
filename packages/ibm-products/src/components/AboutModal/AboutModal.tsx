@@ -110,7 +110,14 @@ export interface AboutModalProps {
  * should be immediately apparent to the user, with a clear and obvious path
  * to completion.
  */
-export const AboutModal = React.forwardRef(
+export const AboutModal = React.forwardRef<HTMLDivElement, AboutModalProps>(
+  ({ portalTarget, ...props }, ref) => {
+    const renderPortalUse = usePortalTarget(portalTarget);
+    return renderPortalUse(<AboutModalDialog ref={ref} {...props} />);
+  }
+);
+
+const AboutModalDialog = React.forwardRef<HTMLDivElement, AboutModalProps>(
   (
     {
       additionalInfo,
@@ -123,20 +130,18 @@ export const AboutModal = React.forwardRef(
       modalAriaLabel,
       onClose,
       open,
-      portalTarget: portalTargetIn,
       title,
       version,
       // Collect any other property values passed in.
       ...rest
-    }: AboutModalProps,
-    ref: React.Ref<HTMLDivElement>
+    },
+    ref
   ) => {
     const bodyRef = useRef<HTMLElement | null | undefined>(null);
     const localRef = useRef(undefined);
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const contentRef = useRef<HTMLDivElement>(null);
     const contentId = uuidv4();
-    const renderPortalUse = usePortalTarget(portalTargetIn);
     const { claimFocus } = useFocus(modalRef);
 
     // We can't add a ref directly to the ModalBody, so track it in a ref
@@ -152,7 +157,7 @@ export const AboutModal = React.forwardRef(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [modalRef, open]);
 
-    return renderPortalUse(
+    return (
       <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
         <ComposedModal
           {

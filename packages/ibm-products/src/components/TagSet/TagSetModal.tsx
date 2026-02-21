@@ -48,7 +48,12 @@ interface TagSetModalProps {
   searchPlaceholder?: string;
   title?: string;
 }
-export const TagSetModal = ({
+export const TagSetModal = ({ portalTarget, ...props }: TagSetModalProps) => {
+  const renderPortalUse = usePortalTarget(portalTarget);
+  return renderPortalUse(<TagSetModalDialog {...props} />);
+};
+
+const TagSetModalDialog = ({
   // The component props, in alphabetical order (for consistency).
 
   allTags,
@@ -66,7 +71,6 @@ export const TagSetModal = ({
 }: TagSetModalProps) => {
   const [filteredModalTags, setFilteredModalTags] = useState<AllTags>([]);
   const [search, setSearch] = useState('');
-  const renderPortalUse = usePortalTarget(portalTargetIn);
   useEffect(() => {
     let newFilteredModalTags: AllTags = [];
     if (open) {
@@ -96,7 +100,7 @@ export const TagSetModal = ({
     setSearch(ev.target.value || '');
   };
 
-  return renderPortalUse(
+  return (
     <ComposedModal
       {
         // Pass through any other property values as HTML attributes.

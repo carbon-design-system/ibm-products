@@ -119,7 +119,17 @@ For additional information on differentiating between delete / remove and low / 
 interface PrevType {
   open: boolean;
 }
-export const RemoveModal = forwardRef(
+export const RemoveModal = forwardRef<HTMLDivElement, RemoveModalProps>(
+  ({ portalTarget, ...props }, ref) => {
+    const renderPortalUse = usePortalTarget(portalTarget);
+    return renderPortalUse(<RemoveModalDialog ref={ref} {...props} />);
+  }
+);
+
+const RemoveModalDialog = forwardRef<
+  HTMLDivElement,
+  React.PropsWithChildren<RemoveModalProps>
+>(
   (
     {
       body,
@@ -132,7 +142,6 @@ export const RemoveModal = forwardRef(
       onClose,
       onRequestSubmit,
       open,
-      portalTarget: portalTargetIn,
       preventCloseOnClickOutside,
       primaryButtonDisabled,
       primaryButtonText,
@@ -142,13 +151,12 @@ export const RemoveModal = forwardRef(
       textConfirmation,
       title,
       ...rest
-    }: React.PropsWithChildren<RemoveModalProps>,
+    },
     ref
   ) => {
     const previousState = usePreviousValue({ open }) as PrevType | undefined;
     const [userInput, setUserInput] = useState('');
     const idRef = useRef(uuidv4());
-    const renderPortalUse = usePortalTarget(portalTargetIn);
     const onChangeHandler = (e) => {
       setUserInput(e.target.value);
     };
@@ -173,7 +181,7 @@ export const RemoveModal = forwardRef(
       }
     }, [open, previousState?.open]);
 
-    return renderPortalUse(
+    return (
       <ComposedModal
         {...rest}
         className={cx(blockClass, className)}

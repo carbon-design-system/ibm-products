@@ -265,6 +265,7 @@ export const TearsheetShell = React.forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const id = useId();
+    const renderPortalUse = usePortalTarget(props.portalTarget);
 
     const enablePresence = useFeatureFlag('enable-presence');
     const hasPresenceContext = Boolean(useContext(TearsheetPresenceContext));
@@ -281,12 +282,14 @@ export const TearsheetShell = React.forwardRef(
           // do not auto enable styles for opt-in by feature flag
           _autoEnablePresence={hasPresenceContext}
         >
-          <TearsheetShellDialog open ref={ref} {...props} />
+          {renderPortalUse(<TearsheetShellDialog open ref={ref} {...props} />)}
         </TearsheetPresence>
       );
     }
 
-    return <TearsheetShellDialog ref={ref} open={open} {...props} />;
+    return renderPortalUse(
+      <TearsheetShellDialog ref={ref} open={open} {...props} />
+    );
   }
 );
 
@@ -327,7 +330,6 @@ const TearsheetShellDialog = React.forwardRef(
   ) => {
     const carbonPrefix = usePrefix();
     const bcModalHeader = `${carbonPrefix}--modal-header`;
-    const renderPortalUse = usePortalTarget(portalTargetIn);
     const localRef = useRef(undefined);
     const resizer = useRef<HTMLDivElement | null>(null);
     const modalBodyRef = useRef(null);
@@ -500,7 +502,7 @@ const TearsheetShellDialog = React.forwardRef(
 
       const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
-      return renderPortalUse(
+      return (
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
           <ComposedModal
             {

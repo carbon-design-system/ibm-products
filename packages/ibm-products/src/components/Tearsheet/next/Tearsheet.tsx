@@ -147,6 +147,13 @@ export type TearsheetComponentType = React.ForwardRefExoticComponent<
 };
 
 export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
+  (props, ref) => {
+    const renderPortalUse = usePortalTarget(props.portalTarget);
+    return renderPortalUse(<TearsheetDialog ref={ref} {...props} />);
+  }
+) as TearsheetComponentType;
+
+export const TearsheetDialog = forwardRef<HTMLDivElement, TearsheetProps>(
   (
     {
       children,
@@ -159,7 +166,6 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       onClose,
       selectorPrimaryFocus,
       open = false,
-      portalTarget,
       verticalGap,
       containerClassName,
       ...rest
@@ -188,8 +194,6 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       useStackContext();
 
     const [depth, setDepth] = useState(0);
-
-    const renderPortalUse = usePortalTarget(portalTarget);
 
     useIsomorphicEffect(() => {
       const AILabelWidth =
@@ -255,7 +259,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stack]);
 
-    return renderPortalUse(
+    return (
       <TearsheetContext.Provider
         value={{
           hasCloseIcon,
@@ -316,7 +320,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       </TearsheetContext.Provider>
     );
   }
-) as TearsheetComponentType;
+);
 
 export interface FooterProps {
   children: ReactNode;

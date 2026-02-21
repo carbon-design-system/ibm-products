@@ -12,22 +12,28 @@ import { useFeatureFlag } from '../../../components/FeatureFlags';
 
 const usePortalTarget = (portalTargetIn) => {
   const enablePortalTarget = useFeatureFlag('default-portal-target-body');
+  const [isInitialized, setIsInitialized] = useState(false);
   const [portalTarget, setPortalTarget] = useState(null);
 
-  if (!portalTarget && portalTargetIn) {
-    setPortalTarget(portalTargetIn);
-  } else if (!portalTarget) {
-    if (
-      typeof window !== 'undefined' &&
-      (pkg.isFeatureEnabled('default-portal-target-body') || enablePortalTarget)
-    ) {
-      setPortalTarget(document.body);
+  useEffect(() => {
+    if (portalTargetIn) {
+      setPortalTarget(portalTargetIn);
+    } else {
+      if (
+        pkg.isFeatureEnabled('default-portal-target-body') ||
+        enablePortalTarget
+      ) {
+        setPortalTarget(document.body);
+      }
     }
-  }
+    setIsInitialized(true);
+  }, [portalTargetIn, enablePortalTarget]);
 
   const renderPortalUse = useCallback(
-    (children) =>
-      portalTarget ? createPortal(children, portalTarget) : children,
+    (children) => {
+      if (!isInitialized) return null;
+      return portalTarget ? createPortal(children, portalTarget) : children;
+    },
     [portalTarget]
   );
 

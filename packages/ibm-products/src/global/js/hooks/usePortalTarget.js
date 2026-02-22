@@ -13,6 +13,7 @@ import { useFeatureFlag } from '../../../components/FeatureFlags';
 const usePortalTarget = (portalTargetIn) => {
   const enablePortalTarget = useFeatureFlag('default-portal-target-body');
   const [portalTarget, setPortalTarget] = useState(null);
+  const [isInitialized, setIsInitialized] = useState(null);
 
   useEffect(() => {
     if (portalTargetIn) {
@@ -25,11 +26,14 @@ const usePortalTarget = (portalTargetIn) => {
         setPortalTarget(document.body);
       }
     }
+    setIsInitialized(true);
   }, [portalTargetIn, enablePortalTarget]);
 
   const renderPortalUse = useCallback(
-    (children) =>
-      portalTarget ? createPortal(children, portalTarget) : children,
+    (children) => {
+      if (!isInitialized) return null;
+      return portalTarget ? createPortal(children, portalTarget) : children;
+    },
     [portalTarget]
   );
 

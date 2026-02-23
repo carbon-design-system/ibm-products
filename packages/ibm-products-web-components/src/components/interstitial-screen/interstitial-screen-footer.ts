@@ -200,27 +200,27 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
 
     return html`<slot>
       <div class="${blockClass}--footer">
-        ${isMulti
-          ? html`
-              <cds-button
-                class="${blockClass}--skip-btn"
-                kind="ghost"
-                size="lg"
-                title="${this.skipButtonLabel}"
-                @click="${this.handleSkip}"
-                ?disabled="${skip}"
-              >
-                ${this.skipButtonLabel}
-              </cds-button>
-            `
-          : ''}
-        <div class="${blockClass}--footer-controls">
+        <cds-button-set>
+          ${isMulti
+            ? html`
+                <cds-button
+                  class="${blockClass}--skip-btn"
+                  kind="ghost"
+                  size="lg"
+                  title="${this.skipButtonLabel}"
+                  @click="${this.handleSkip}"
+                  ?disabled="${skip}"
+                >
+                  ${this.skipButtonLabel}
+                </cds-button>
+              `
+            : ''}
           ${isMulti && currentStep > 0
             ? html`
                 <cds-button
                   class="${blockClass}--prev-btn"
                   kind="secondary"
-                  size="lg"
+                  size="xl"
                   title="${this.previousButtonLabel}"
                   ?disabled="${back}"
                   @click="${this.handleClickPrev}"
@@ -238,7 +238,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                 <cds-button
                   class="${blockClass}--next-btn"
                   kind="primary"
-                  size="lg"
+                  size="xl"
                   title="${this.nextButtonLabel}"
                   ?disabled="${next}"
                   @click="${this.handleClickNext}"
@@ -256,7 +256,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                 <cds-button
                   class="${blockClass}--start-btn"
                   kind="primary"
-                  size="lg"
+                  size="xl"
                   title="${this.startButtonLabel}"
                   ?disabled="${start}"
                   @click="${this.handleStart}"
@@ -269,7 +269,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                 </cds-button>
               `
             : nothing}
-        </div>
+        </cds-button-set>
       </div>
     </slot>`;
   }

@@ -204,6 +204,7 @@ Thanks goes to these wonderful people
     <tr>
       <td align="center" valign="top" width="20%"><a href="https://github.com/ariellalgilmore"><img src="https://avatars.githubusercontent.com/u/20210594?v=4?s=100" width="100px;" alt="Ariella Gilmore"/><br /><sub><b>Ariella Gilmore</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=ariellalgilmore" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/wkeese"><img src="https://avatars.githubusercontent.com/u/69599?v=4?s=100" width="100px;" alt="Bill Keese"/><br /><sub><b>Bill Keese</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=wkeese" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/ruchas31"><img src="https://avatars.githubusercontent.com/u/145022372?v=4?s=100" width="100px;" alt="Rucha Sohoni"/><br /><sub><b>Rucha Sohoni</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=ruchas31" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

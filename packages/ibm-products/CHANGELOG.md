@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.84.0-rc.0`
+## `@carbon/ibm-products@2.84.0`
 ### Features :rocket:
 - feat(nonlinearreading): code connect integration (#8943)
 - feat: show Close icon at global header actions when expanded (#8933)

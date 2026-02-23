@@ -75,8 +75,10 @@ describe(componentName, () => {
     const tearsheetElement = document.querySelector(
       `.${pkg.prefix}--create-tearsheet-narrow`
     );
-    await expect(tearsheetElement).toBeAccessible(componentName);
-    await expect(tearsheetElement).toHaveNoAxeViolations();
+    await act(async () => {
+      await expect(tearsheetElement).toBeAccessible(componentName);
+      await expect(tearsheetElement).toHaveNoAxeViolations();
+    });
   });
 
   it(`renders children`, async () => {

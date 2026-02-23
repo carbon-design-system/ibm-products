@@ -14,18 +14,16 @@ const usePortalTarget = (portalTargetIn) => {
   const enablePortalTarget = useFeatureFlag('default-portal-target-body');
   const [portalTarget, setPortalTarget] = useState(null);
 
-  useEffect(() => {
-    if (portalTargetIn) {
-      setPortalTarget(portalTargetIn);
-    } else {
-      if (
-        pkg.isFeatureEnabled('default-portal-target-body') ||
-        enablePortalTarget
-      ) {
-        setPortalTarget(document.body);
-      }
+  if (!portalTarget && portalTargetIn) {
+    setPortalTarget(portalTargetIn);
+  } else if (!portalTarget) {
+    if (
+      typeof window !== 'undefined' &&
+      (pkg.isFeatureEnabled('default-portal-target-body') || enablePortalTarget)
+    ) {
+      setPortalTarget(document.body);
     }
-  }, [portalTargetIn, enablePortalTarget]);
+  }
 
   const renderPortalUse = useCallback(
     (children) =>

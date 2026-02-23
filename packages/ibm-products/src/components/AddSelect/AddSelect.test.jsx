@@ -54,12 +54,16 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    render(<AddSelect {...defaultProps} />);
+    await act(async () => {
+      render(<AddSelect {...defaultProps} />);
+    });
     const AddSelectElement = document.querySelector(
       `.${pkg.prefix}--add-select`
     );
-    await expect(AddSelectElement).toBeAccessible(componentName);
-    await expect(AddSelectElement).toHaveNoAxeViolations();
+    await act(async () => {
+      await expect(AddSelectElement).toBeAccessible(componentName);
+      await expect(AddSelectElement).toHaveNoAxeViolations();
+    });
   });
 
   it('renders single without hierarchy', async () => {

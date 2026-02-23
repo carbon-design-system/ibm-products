@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.33.0-rc.0`
+## `@carbon/ibm-products-web-components@0.33.0`
 ### Features :rocket:
 - feat: show close icon when panels are open (#8951)
 - feat(page-header):  code connect integration (#8868)

@@ -127,6 +127,9 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
         open=${defaultOpen || nothing}
       >
         <summary class="${blockClass}__header">
+          <div class="${blockClass}__header-right">
+            <slot name="toggle"></slot>
+          </div>
           <div class="${blockClass}__header-left">
             ${iconLoader(ChevronDown20, {
               slot: 'icon',
@@ -146,9 +149,6 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
           </cds-layer>
         </div>
       </details>
-      <div class="${blockClass}__header-right">
-        <slot name="toggle"></slot>
-      </div>
     `;
   }
 

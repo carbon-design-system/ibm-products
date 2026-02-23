@@ -246,7 +246,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   const handleCloseCarousel = (e) => {
     setOpenId(0);
     carouselInit.current.reset();
-    e.stopPropagation();
+    e?.stopPropagation();
   };
 
   const handleTaglineClick = () => {
@@ -520,9 +520,8 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
         <Coachmark
           key={item.id}
           open={openId === item.id}
-          onClose={(e) => {
+          onClose={() => {
             setOpenId(0);
-            e.stopPropagation();
           }}
           align="top"
         >

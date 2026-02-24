@@ -19,8 +19,8 @@ import {
   snapScroll,
   scrollNext,
   scrollPrevious,
-  getNextSibling,
-  getPreviousSibling,
+  hasNextSiblingNotInView,
+  hasPreviousSiblingNotInView,
 } from '../../utilities/snapscroll';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/';
@@ -65,14 +65,14 @@ const renderTemplate = (args) => {
 
   const scrollendHandler = () => {
     const nextBtn = document.getElementById('next-btn');
-    if (getNextSibling()) {
+    if (hasNextSiblingNotInView()) {
       nextBtn?.removeAttribute('disabled');
     } else {
       nextBtn?.setAttribute('disabled', '');
     }
 
     const previousBtn = document.getElementById('previous-btn');
-    if (getPreviousSibling()) {
+    if (hasPreviousSiblingNotInView()) {
       previousBtn?.removeAttribute('disabled');
     } else {
       previousBtn?.setAttribute('disabled', '');
@@ -109,11 +109,42 @@ const renderTemplate = (args) => {
       </div>
       <div class="footer" slot="footer">
         <div class="footer-left">
-          <cds-button kind="ghost" class="${blockClass}__toggle-button"
-            >${open ? collapseText : expandText}</cds-button
+          <cds-button
+            id="toggle-btn"
+            kind="ghost"
+            class="${blockClass}__toggle-button"
+            @click=${(evt: MouseEvent) => {
+              const guideBanner = (evt.target as HTMLElement)?.closest(
+                'c4p-guide-banner'
+              ) as any;
+              const toggleBtn = evt.target as HTMLElement;
+              const footerRight = document.querySelector(
+                '.footer-right'
+              ) as HTMLElement;
+              if (guideBanner) {
+                guideBanner._handleToggle();
+                // Update button text and navigation visibility after toggle
+                setTimeout(() => {
+                  const btn = toggleBtn.closest('cds-button');
+                  if (btn) {
+                    btn.textContent = guideBanner.open
+                      ? collapseText
+                      : expandText;
+                  }
+                  // Show/hide navigation buttons based on open state
+                  if (footerRight) {
+                    footerRight.style.display = guideBanner.open
+                      ? 'flex'
+                      : 'none';
+                  }
+                }, 0);
+              }
+            }}
           >
+            ${open ? collapseText : expandText}
+          </cds-button>
         </div>
-        <div class="footer-right">
+        <div class="footer-right" style="display: ${open ? 'flex' : 'none'}">
           <cds-button
             id="previous-btn"
             kind="ghost"
@@ -168,3 +199,39 @@ const meta = {
 };
 
 export default meta;
+
+export const Collapsed = {
+  args: {
+    '@c4p-guidebanner-ontoggle': fn(),
+    '@c4p-guidebanner-onclose': fn(),
+    collapseText: 'Read less',
+    expandText: 'Read more',
+    titleText: 'Page-related heading that can stand on its own',
+    open: false,
+  },
+  render: renderTemplate,
+};
+
+export const WithCustomLabels = {
+  args: {
+    '@c4p-guidebanner-ontoggle': fn(),
+    '@c4p-guidebanner-onclose': fn(),
+    collapseText: 'Show less',
+    expandText: 'Show more',
+    titleText: 'Page-related heading that can stand on its own',
+    open: true,
+  },
+  render: renderTemplate,
+};
+
+export const WithoutTitle = {
+  args: {
+    '@c4p-guidebanner-ontoggle': fn(),
+    '@c4p-guidebanner-onclose': fn(),
+    collapseText: 'Read less',
+    expandText: 'Read more',
+    titleText: '',
+    open: true,
+  },
+  render: renderTemplate,
+};

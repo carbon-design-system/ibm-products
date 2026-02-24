@@ -92,7 +92,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     ) as HTMLElement;
     requestAnimationFrame(() => {
       const dragHandle = header.shadowRoot?.querySelector(
-        '.drag-handle'
+        `.${prefix}--coachmark-header-drag-handle`
       ) as HTMLElement;
 
       const draggable = makeDraggable({

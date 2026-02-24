@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Checkmark, Close, Edit, WarningFilled } from '@carbon/react/icons';
+import {
+  Checkmark,
+  Close,
+  Edit,
+  WarningFilled,
+  EditOff,
+} from '@carbon/react/icons';
 import React, {
   PropsWithChildren,
   forwardRef,
@@ -15,7 +21,13 @@ import React, {
 } from 'react';
 import { pkg } from '../../settings';
 
-import { IconButton, usePrefix } from '@carbon/react';
+import {
+  IconButton,
+  usePrefix,
+  Toggletip,
+  ToggletipButton,
+  ToggletipContent,
+} from '@carbon/react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -101,15 +113,23 @@ export interface EditInplaceProps extends PropsWithChildren {
   /**
    * determines if the input is in readOnly mode
    */
-  // readOnly: PropTypes.bool,
+  readOnly: PropTypes.bool;
   /**
-   * label for the edit button that displays when in read only mode
+   * label for the edit off button that displays when in read only mode
    */
-  // readOnlyLabel: PropTypes.string,
+  readOnlyLabel?: PropTypes.string;
+  /**
+   * text for the toggletip that displays when in read only mode
+   */
+  readOnlyToggleTipText?: string;
   /**
    * label for save button
    */
   saveLabel: string;
+  /**
+   * alignment for the toggletip that displays when in read only mode
+   */
+  toggleTipAlignment?: AlignPropType;
   /**
    * vertical size of control
    */
@@ -146,10 +166,12 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       onChange,
       onSave,
       onBlur,
-      // readOnly,
-      // readOnlyLabel,
+      readOnly,
+      readOnlyLabel,
+      readOnlyToggleTipText,
       saveLabel,
       size = 'sm',
+      toggleTipAlignment,
       tooltipAlignment,
       value,
       placeholder,
@@ -196,10 +218,6 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     };
 
     const onFocusHandler = (e) => {
-      // if (readOnly) {
-      //   return;
-      // }
-
       if (!isTargetingChild(e)) {
         inputRef.current?.focus();
         setFocused(true);
@@ -272,90 +290,125 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       escaping.current = false;
     };
 
+    const inputElement = (
+      <input
+        id={id}
+        className={cx(
+          `${blockClass}__text-input`,
+          `${carbonPrefix}--text-input`,
+          `${carbonPrefix}--text-input--${size}`
+        )}
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChangeHandler}
+        ref={inputRef}
+        readOnly={readOnly}
+        onKeyDown={onKeyHandler}
+        aria-label={labelText}
+        aria-invalid={invalid}
+      />
+    );
+
+    const inputContainer = (
+      <div
+        className={cx(blockClass, `${blockClass}--${size}`, {
+          [`${blockClass}--focused`]: focused,
+          [`${blockClass}--invalid`]: invalid,
+          [`${blockClass}--inherit-type`]: inheritTypography,
+          [`${blockClass}--overflows`]:
+            inputRef.current &&
+            inputRef.current.scrollWidth > inputRef.current.offsetWidth,
+          [`${blockClass}--readonly`]: readOnly,
+        })}
+        onFocus={onFocusHandler}
+        onBlur={onBlurHandler}
+      >
+        {readOnly ? (
+          <Toggletip
+            align={toggleTipAlignment}
+            className={`${blockClass}__toggletip-wrapper`}
+          >
+            <ToggletipButton label={readOnlyLabel || 'Edit off'}>
+              {inputElement}
+            </ToggletipButton>
+            <ToggletipContent>
+              <p>
+                {readOnlyToggleTipText ||
+                  'This field is read-only and cannot be edited'}
+              </p>
+            </ToggletipContent>
+          </Toggletip>
+        ) : (
+          inputElement
+        )}
+        <div className={`${blockClass}__toolbar`}>
+          {invalid && (
+            <WarningFilled
+              size={16}
+              className={`${blockClass}__warning-icon`}
+            />
+          )}
+          {readOnly ? (
+            <IconButton
+              className={`${blockClass}__btn-readonly`}
+              size={size}
+              label={readOnlyLabel || 'Edit off'}
+              kind="ghost"
+              key="readonly"
+              onClick={onFocusHandler}
+            >
+              <EditOff size={16} />
+            </IconButton>
+          ) : focused ? (
+            <>
+              <IconButton
+                align={tipAlignments.cancel}
+                size={size}
+                label={cancelLabel}
+                onClick={onCancelHandler}
+                kind="ghost"
+                key="cancel"
+                className={`${blockClass}__btn ${blockClass}__btn-cancel`}
+              >
+                <Close size={16} />
+              </IconButton>
+
+              <IconButton
+                align={tipAlignments.save}
+                size={size}
+                label={saveLabel}
+                onClick={onSaveHandler}
+                kind="ghost"
+                key="save"
+                className={`${blockClass}__btn ${blockClass}__btn-save`}
+                disabled={!canSave}
+              >
+                <Checkmark size={16} />
+              </IconButton>
+            </>
+          ) : (
+            <IconButton
+              align={tipAlignments.edit}
+              className={cx(`${blockClass}__btn`, `${blockClass}__btn-edit`, {
+                [`${blockClass}__btn-edit--always-visible`]: editAlwaysVisible,
+              })}
+              size={size}
+              label={editLabel}
+              onClick={onFocusHandler}
+              kind="ghost"
+              key="edit"
+            >
+              <Edit size={16} />
+            </IconButton>
+          )}
+        </div>
+      </div>
+    );
+
     return (
       <div {...rest} ref={ref} {...getDevtoolsProps(componentName)}>
-        <div
-          className={cx(blockClass, `${blockClass}--${size}`, {
-            [`${blockClass}--focused`]: focused,
-            [`${blockClass}--invalid`]: invalid,
-            [`${blockClass}--inherit-type`]: inheritTypography,
-            [`${blockClass}--overflows`]:
-              inputRef.current &&
-              inputRef.current.scrollWidth > inputRef.current.offsetWidth,
-            // [`${blockClass}--readonly`]: readOnly,
-          })}
-          onFocus={onFocusHandler}
-          onBlur={onBlurHandler}
-        >
-          <input
-            id={id}
-            className={cx(
-              `${blockClass}__text-input`,
-              `${carbonPrefix}--text-input`,
-              `${carbonPrefix}--text-input--${size}`
-            )}
-            type="text"
-            placeholder={placeholder}
-            value={value}
-            onChange={onChangeHandler}
-            ref={inputRef}
-            // readOnly={readOnly}
-            onKeyDown={onKeyHandler}
-            aria-label={labelText}
-            aria-invalid={invalid}
-          />
-          <div className={`${blockClass}__toolbar`}>
-            {invalid && (
-              <WarningFilled
-                size={16}
-                className={`${blockClass}__warning-icon`}
-              />
-            )}
-            {focused ? (
-              <>
-                <IconButton
-                  align={tipAlignments.cancel}
-                  size={size}
-                  label={cancelLabel}
-                  onClick={onCancelHandler}
-                  kind="ghost"
-                  key="cancel"
-                  className={`${blockClass}__btn ${blockClass}__btn-cancel`}
-                >
-                  <Close size={16} />
-                </IconButton>
-
-                <IconButton
-                  align={tipAlignments.save}
-                  size={size}
-                  label={saveLabel}
-                  onClick={onSaveHandler}
-                  kind="ghost"
-                  key="save"
-                  className={`${blockClass}__btn ${blockClass}__btn-save`}
-                  disabled={!canSave}
-                >
-                  <Checkmark size={16} />
-                </IconButton>
-              </>
-            ) : (
-              <IconButton
-                align={tipAlignments.edit}
-                className={cx(`${blockClass}__btn`, `${blockClass}__btn-edit`, {
-                  [`${blockClass}__btn-edit--always-visible`]:
-                    editAlwaysVisible,
-                })}
-                size={size}
-                label={editLabel}
-                onClick={onFocusHandler}
-                kind="ghost"
-                key="edit"
-              >
-                <Edit size={16} />
-              </IconButton>
-            )}
-          </div>
-        </div>
+        {inputContainer}
         {invalid && (
           <p className={`${blockClass}__warning-text`}>
             {invalidText ?? deprecated_invalidLabel}
@@ -449,11 +502,15 @@ EditInPlace.propTypes = {
   /**
    * determines if the input is in readOnly mode
    */
-  // readOnly: PropTypes.bool,
+  readOnly: PropTypes.bool,
   /**
-   * label for the edit button that displays when in read only mode
+   * label for the edit off button that displays when in read only mode
    */
-  // readOnlyLabel: PropTypes.string,
+  readOnlyLabel: PropTypes.string,
+  /**
+   * text for the toggletip that displays when in read only mode
+   */
+  readOnlyToggleTipText: PropTypes.string,
   /**
    * label for save button
    */
@@ -462,6 +519,10 @@ EditInPlace.propTypes = {
    * vertical size of control
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  /**
+   * alignment for the toggletip that displays when in read only mode
+   */
+  toggleTipAlignment: alignPropType,
   /**
    * tooltipAlignment from the standard tooltip. Default center.
    *

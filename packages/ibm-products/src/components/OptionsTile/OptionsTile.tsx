@@ -311,7 +311,26 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
             open={open}
             ref={detailsRef}
           >
-            <summary className={`${blockClass}__header`} onClick={toggle}>
+            <summary
+              className={cx(`${blockClass}__header`, {
+                [`${blockClass}__header--has-toggle`]: enabled !== undefined,
+              })}
+              onClick={toggle}
+            >
+              {enabled !== undefined && (
+                <div className={`${blockClass}__toggle-container`}>
+                  <Toggle
+                    id={`${titleId}-toggle`}
+                    className={`${blockClass}__toggle`}
+                    toggled={enabled}
+                    aria-labelledby={titleId}
+                    hideLabel
+                    onToggle={onToggle}
+                    size="sm"
+                    disabled={isLocked}
+                  />
+                </div>
+              )}
               <ChevronDown
                 size={16}
                 className={cx(`${blockClass}__chevron`, {
@@ -335,20 +354,6 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
           </details>
         ) : (
           <div className={`${blockClass}__static-content`}>{renderTitle()}</div>
-        )}
-        {enabled !== undefined && (
-          <div className={`${blockClass}__toggle-container`}>
-            <Toggle
-              id={`${titleId}-toggle`}
-              className={`${blockClass}__toggle`}
-              toggled={enabled}
-              aria-labelledby={titleId}
-              hideLabel
-              onToggle={onToggle}
-              size="sm"
-              disabled={isLocked}
-            />
-          </div>
         )}
       </Section>
     );

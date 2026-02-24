@@ -78,11 +78,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
   flex-grow: 1;
   background-color: transparent;
   cursor: pointer;
-  inline-size: calc(
-    100% - (#{$spacing-05} + 2rem + #{$spacing-05})
-  ); // total width - toggle container width
+  inline-size: 100%;
 
   transition: background-color $duration-fast-01 motion(entrance, productive);
+
+  &--has-toggle {
+    inline-size: calc(
+      100% - (#{$spacing-05} + 2rem + #{$spacing-05})
+    ); // total width - toggle container width
+  }
 }
 
 .#{$block-class}__header::-webkit-details-marker {

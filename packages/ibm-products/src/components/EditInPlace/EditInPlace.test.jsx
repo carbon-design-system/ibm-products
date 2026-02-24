@@ -34,15 +34,20 @@ describe(componentName, () => {
     render(<EditInPlace {...defaultProps} />);
   });
 
-  // it('renders in readOnly mode',  async() => {
-  //  render(<EditInPlace {...defaultProps} readOnly />);
-  //   const input = screen.getByDisplayValue(defaultProps.value);
-  //   expect(input).toHaveAttribute('readOnly');
-
-  //   // for coverage
-  //   fireEvent.focus(input);
-  //   fireEvent.blur(input);
-  // });
+  it('renders in readOnly mode', async () => {
+    const readOnlyProps = {
+      ...defaultProps,
+      readOnly: true,
+      readOnlyLabel: 'Edit off',
+      readOnlyToggleTipText: 'This field is read-only',
+    };
+    const { container } = render(<EditInPlace {...readOnlyProps} />);
+    const input = screen.getByDisplayValue(defaultProps.value);
+    expect(input).toHaveAttribute('readOnly');
+    const inputContainer = container.querySelector('.c4p--edit-in-place');
+    await act(() => userEvent.click(inputContainer));
+    expect(screen.getByText('This field is read-only')).toBeInTheDocument();
+  });
 
   it('renders in invalid mode', async () => {
     render(<EditInPlace {...defaultProps} invalid />);

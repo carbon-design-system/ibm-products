@@ -86,6 +86,7 @@ export default {
         include: /\.[jt]sx?$/,
         exclude: [],
         loader: 'tsx',
+        keepNames: true,
       },
       optimizeDeps: {
         esbuildOptions: {

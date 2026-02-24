@@ -5,6 +5,5 @@ command = "yarn build"
 publish = "storybook-static"
 
 [build.environment]
-NODE_OPTIONS = "--max-old-space-size=4096"
 YARN_ENABLE_GLOBAL_CACHE = "true"
 YARN_GLOBAL_FOLDER = "/opt/buildhome/.yarn_cache"

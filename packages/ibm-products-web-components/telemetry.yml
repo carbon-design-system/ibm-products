@@ -67,6 +67,7 @@ collect:
         - dropShadow
         - floating
         - highContrast
+        - onc4p-coachmark-opened
         - position
         # c4p-coachmark-beacon
         - expanded

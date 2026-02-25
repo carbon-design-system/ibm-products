@@ -12,7 +12,7 @@ import { useFeatureFlag } from '../../../components/FeatureFlags';
 
 const usePortalTarget = (portalTargetIn) => {
   const enablePortalTarget = useFeatureFlag('default-portal-target-body');
-  const [portalTarget, setPortalTarget] = useState(null);
+  const [portalTarget, setPortalTarget] = useState(portalTargetIn ?? null);
 
   useEffect(() => {
     if (portalTargetIn) {

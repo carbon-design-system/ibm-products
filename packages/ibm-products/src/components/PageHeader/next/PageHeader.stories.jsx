@@ -143,43 +143,10 @@ export const Default = ({
         contentActionsFlush={contentActionsFlush}
         renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
         contentActions={
-          <>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 1"
-            >
-              <AiGenerate />
-            </IconButton>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 2"
-            >
-              <Activity />
-            </IconButton>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 3"
-            >
-              <Activity />
-            </IconButton>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 4"
-            >
-              <Activity />
-            </IconButton>
-            <Button className="breadcrumb-bar-action-button" size="sm">
-              Primary action
-            </Button>
-          </>
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}
+          />
         }
         pageActions={breadcrumbPageActions}
       >

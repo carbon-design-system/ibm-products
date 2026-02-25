@@ -8,7 +8,7 @@ import {
   HeaderGlobalAction,
   Button,
 } from '@carbon/react';
-import { Notification } from '@carbon/icons-react';
+import { Close, Notification } from '@carbon/icons-react';
 
 import './_example.scss';
 
@@ -46,7 +46,11 @@ export const Example = () => {
                 aria-label="Notifications"
                 onClick={() => setOpen(!open)}
               >
-                <Notification size={20} />
+                {open ? (
+                  <Close size={20} />
+                ) : (
+                  <Notification size={20} />
+                )}
               </HeaderGlobalAction>
             </HeaderGlobalBar>
           </Header>

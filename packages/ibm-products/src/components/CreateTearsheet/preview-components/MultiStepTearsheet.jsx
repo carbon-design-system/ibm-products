@@ -56,6 +56,7 @@ export const MultiStepTearsheet = (
     influencerWidth,
     label,
     nextButtonText,
+    secondaryButtonDisabled: secondaryButtonDisabledProp,
     slug,
     decorator,
     submitButtonText,
@@ -79,6 +80,7 @@ export const MultiStepTearsheet = (
   const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
     useState(false);
   const [selIndex, setSelIndex] = useState(0);
+  const [disableBackButton, setDisableBackButton] = useState(false);
   const clearCreateData = () => {
     setStepOneTextInputValue('');
     setTopicDescriptionValue('');
@@ -90,6 +92,7 @@ export const MultiStepTearsheet = (
     setOpen(false);
     setValue1('');
     setShouldIncludeAdditionalStep(false);
+    setDisableBackButton(false);
   };
 
   return (
@@ -264,6 +267,11 @@ export const MultiStepTearsheet = (
         <CreateTearsheetStep
           title="Message retention"
           disableSubmit={!stepThreeTextInputValue}
+          secondaryButtonDisabled={
+            secondaryButtonDisabledProp !== undefined
+              ? secondaryButtonDisabledProp
+              : disableBackButton
+          }
           onNext={() => Promise.resolve()}
           subtitle="This is how long messages are retained before they are deleted."
           description="If your messages are not read by a consumer within this time, they
@@ -291,6 +299,14 @@ export const MultiStepTearsheet = (
                   id="one-month"
                 />
               </RadioButtonGroup>
+              <Toggle
+                className={`${blockClass}__back-button--toggle`}
+                id="disable-back-button-toggle"
+                size="sm"
+                labelText="Disable secondary button"
+                toggled={disableBackButton}
+                onToggle={(checked) => setDisableBackButton(checked)}
+              />
             </Column>
           </Grid>
         </CreateTearsheetStep>

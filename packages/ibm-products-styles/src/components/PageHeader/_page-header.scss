@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2025
+// Copyright IBM Corp. 2020, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/layout/scss/convert' as *;
 
 // Standard imports.
 @use '../../global/styles/project-settings' as *;
@@ -791,7 +792,7 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__breadcrumb__content-actions {
-    inline-size: fit-content;
+    inline-size: 100%;
     margin-inline-end: $spacing-04;
   }
 

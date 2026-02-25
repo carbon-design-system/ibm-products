@@ -70,6 +70,8 @@ export const CoachmarkFixedExample = (args) => {
   //prettier-ignore
   const nextRef = useRef<HTMLButtonElement>(null);
   //prettier-ignore
+  const backRef = useRef<HTMLButtonElement>(null);
+  //prettier-ignore
   const doneRef = useRef<HTMLButtonElement>(null);
   //prettier-ignore
   const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -104,32 +106,24 @@ export const CoachmarkFixedExample = (args) => {
     setIsOpen((isOpen) => !isOpen);
   };
 
-  //get all focusable elements within a container
-  const getFocusableElements = (container: HTMLElement) => {
-    return container.querySelectorAll(
-      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex="0"]'
-    );
-  };
-
   const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
     carouselItemsRef.current.forEach((item, idx) => {
       if (!item) {
         return;
       }
 
-      let isActive;
-      if (activeIndex === idx) {
-        isActive = true;
+      const isActive = idx === activeIndex;
+
+      // Set aria-hidden based on active state
+      item.setAttribute('aria-hidden', String(!isActive));
+
+      if (!isActive) {
+        item.setAttribute('inert', ''); // Disable interactivity
+      } else {
+        item.removeAttribute('inert'); // Re-enable interactivity
       }
 
-      item.setAttribute('aria-hidden', String(!isActive));
-      const focusableElements = getFocusableElements(item);
-
-      //For active item: make elements focusable (tabIndex=0)
-      //For inactive items: make elements NOT focusable (tabIndex=-1)
-      focusableElements.forEach((el) => {
-        (el as HTMLElement).tabIndex = isActive ? 0 : -1;
-      });
+      item.removeAttribute('tabindex');
     });
   }, []);
 
@@ -138,10 +132,11 @@ export const CoachmarkFixedExample = (args) => {
       setCurrentViewIndex(currentIndex);
       setLastViewIndex(lastIndex);
 
-      // Update tabIndex for carousel items
+      // Update inert attribute for carousel items
       updateCarouselItemsTabIndex(currentIndex);
 
       // Focus the appropriate button after carousel navigation
+      // Use setTimeout to ensure button refs are updated after re-render
       setTimeout(() => {
         if (currentIndex === lastIndex) {
           // On last slide, focus the Done button
@@ -150,7 +145,7 @@ export const CoachmarkFixedExample = (args) => {
           // On other slides, focus the Next button
           nextRef.current?.focus();
         }
-      }, 0);
+      }, 10);
     },
     [updateCarouselItemsTabIndex]
   );
@@ -239,6 +234,7 @@ export const CoachmarkFixedExample = (args) => {
               <div className={'carouselControlWrapper--buttons'}>
                 {currentViewIndex !== 0 && (
                   <Button
+                    ref={backRef}
                     size="sm"
                     iconDescription="Previous"
                     kind="ghost"

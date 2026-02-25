@@ -79,6 +79,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   const stackHomeContentRef = useRef(null);
   const stackedCoachmarkContentRefs = useRef([]);
   const nextRef = useRef<HTMLButtonElement>(null);
+  const backRef = useRef<HTMLButtonElement>(null);
   const doneRef = useRef<HTMLButtonElement>(null);
   const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const parentButtonRefs = useRef<{ [key: number]: HTMLButtonElement | null }>(
@@ -266,19 +267,18 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
         return;
       }
 
-      let isActive;
-      if (activeIndex === idx) {
-        isActive = true;
+      const isActive = idx === activeIndex;
+
+      // Set aria-hidden based on active state
+      item.setAttribute('aria-hidden', String(!isActive));
+
+      if (!isActive) {
+        item.setAttribute('inert', ''); // Disable interactivity
+      } else {
+        item.removeAttribute('inert'); // Re-enable interactivity
       }
 
-      item.setAttribute('aria-hidden', String(!isActive));
-      const focusableElements = getFocusableElements(item);
-
-      //For active item: make elements focusable (tabIndex=0)
-      //For inactive items: make elements NOT focusable (tabIndex=-1)
-      focusableElements.forEach((el) => {
-        (el as HTMLElement).tabIndex = isActive ? 0 : -1;
-      });
+      item.removeAttribute('tabindex');
     });
   }, []);
 
@@ -354,15 +354,19 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       setCurrentViewIndex(currentIndex);
       setLastViewIndex(lastIndex);
 
-      // Update tabIndex for carousel items
+      // Update inert attribute for carousel items
       updateCarouselItemsTabIndex(currentIndex);
+
+      // Use setTimeout to ensure button refs are updated after re-render
       setTimeout(() => {
         if (currentIndex === lastIndex) {
+          // On last slide, focus the Done button
           doneRef.current?.focus();
         } else {
+          // On other slides, focus the Next button
           nextRef.current?.focus();
         }
-      }, 0);
+      }, 50);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [openId, updateCarouselItemsTabIndex]
@@ -600,6 +604,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                           <div className={'carouselControlWrapper--buttons'}>
                             {currentViewIndex !== 0 && (
                               <Button
+                                ref={backRef}
                                 size="sm"
                                 iconDescription="Previous"
                                 kind="ghost"

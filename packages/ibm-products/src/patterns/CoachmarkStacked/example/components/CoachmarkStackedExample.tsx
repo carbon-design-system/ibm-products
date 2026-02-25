@@ -254,13 +254,6 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     setIsOpen((isOpen) => !isOpen);
   };
 
-  //get all focusable elements within a container
-  const getFocusableElements = (container: HTMLElement) => {
-    return container.querySelectorAll(
-      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex="0"]'
-    );
-  };
-
   const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
     carouselItemsRef.current.forEach((item, idx) => {
       if (!item) {
@@ -283,19 +276,6 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   }, []);
 
   useEffect(() => {
-    // When a child coachmark is active, disable focus on parent coachmark
-    // When no child is active, enable focus on parent coachmark
-    if (stackHomeContentRef.current) {
-      const parentCoachmark = stackHomeContentRef.current;
-      const focusableElements = getFocusableElements(parentCoachmark);
-
-      focusableElements.forEach((el) => {
-        // If a child is open (openId > 0), make parent elements not focusable
-        // If no child is open (openId === 0 or null), make parent elements focusable
-        (el as HTMLElement).tabIndex = openId > 0 ? -1 : 0;
-      });
-    }
-
     if (openId > 0) {
       lastOpenIdRef.current = openId;
       const nestedItem = nestedItems.find((item) => item.id === openId);

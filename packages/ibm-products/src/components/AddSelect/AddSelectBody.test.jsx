@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { render, fireEvent, screen, act } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { AddSelectBody } from './AddSelectBody';
 import { pkg, carbon } from '../../settings';
@@ -235,16 +235,12 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    await act(async () => {
-      render(<AddSelectBody {...singleProps} open />);
-    });
+    render(<AddSelectBody {...singleProps} open />);
     const AddSelectElement = document.querySelector(
       `.${blockClass}__selections-body`
     );
-    await act(async () => {
-      await expect(AddSelectElement).toBeAccessible(componentName);
-      await expect(AddSelectElement).toHaveNoAxeViolations();
-    });
+    await expect(AddSelectElement).toBeAccessible(componentName);
+    await expect(AddSelectElement).toHaveNoAxeViolations();
   });
 
   it('renders SingleAddSelectBody', async () => {

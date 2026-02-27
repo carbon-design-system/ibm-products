@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import styles from './_story-styles.scss?inline';
 import DocsPage from './GenerateAnAPIKey.mdx';
 import {
   InstantGenerateExample,
@@ -19,7 +18,6 @@ export default {
   component: () => {},
   tags: ['autodocs'],
   parameters: {
-    styles,
     docs: {
       page: DocsPage,
     },

@@ -6,7 +6,32 @@
  */
 
 @use '@carbon/react';
-@use '../../ExportModal/story-styles';
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$block-class: 'export-modal';
+
+.#{$block-class}__body {
+  margin-block-end: $spacing-05;
+  padding-inline-end: calc(20% - #{$spacing-05});
+}
+
+.#{$block-class}__messaging {
+  display: flex;
+  align-items: center;
+}
+
+.#{$block-class}__messaging p {
+  margin-inline-start: $spacing-03;
+}
+
+.#{$block-class}__checkmark-icon {
+  fill: $button-primary;
+}
+
+.#{$block-class}__error-icon {
+  fill: $button-danger-primary;
+}
 
 body {
   background-color: var(--cds-background);

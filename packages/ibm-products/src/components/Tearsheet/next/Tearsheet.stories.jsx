@@ -138,6 +138,7 @@ const description = (
 export const Default = ({
   decorator,
   influencerWidth,
+  keepMounted,
   summaryContentWidth,
   verticalGap,
   variant,
@@ -165,6 +166,7 @@ export const Default = ({
         launcherButtonRef={launcherButtonRef}
         selectorPrimaryFocus={'#input1'}
         influencerWidth={influencerWidth}
+        keepMounted={keepMounted}
         summaryContentWidth={summaryContentWidth}
         verticalGap={verticalGap}
       >
@@ -1412,6 +1414,13 @@ Default.argTypes = {
     control: {
       type: 'text',
     },
+  },
+  keepMounted: {
+    control: {
+      type: 'boolean',
+    },
+    description:
+      'If true, the tearsheet will remain mounted in the DOM when closed. By default (false), the tearsheet unmounts after the exit animation completes.',
   },
   summaryContentWidth: {
     control: {

@@ -57,6 +57,8 @@ import { usePortalTarget } from '../../../global/js/hooks/usePortalTarget';
 import { useStackContext } from './StackContext';
 import { useMatchMedia } from '../../../global/js/hooks/useMatchMedia';
 import { useId } from '../../../global/js/utils/useId';
+import { usePresence } from '../usePresence';
+import { useMergedRefs } from '../../../global/js/hooks/useMergedRefs';
 
 /**
  * ----------
@@ -128,6 +130,12 @@ export interface TearsheetProps extends ComposedModalProps {
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
   portalTarget?: HTMLElement;
+  /**
+   * If true, the tearsheet will remain mounted in the DOM when closed, using CSS to hide it.
+   * By default (false), the tearsheet unmounts from the DOM after the exit animation completes.
+   * Set to true if you need to preserve component state or avoid remounting overhead.
+   */
+  keepMounted?: boolean;
 }
 
 export type TearsheetComponentType = React.ForwardRefExoticComponent<
@@ -162,6 +170,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       portalTarget,
       verticalGap,
       containerClassName,
+      keepMounted = false,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -169,6 +178,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     const carbonPrefix = usePrefix();
     const localRef = useRef(undefined);
     const bodyRef = useRef<HTMLDivElement>(null);
+    const presenceRef = useRef<HTMLDivElement>(null);
     const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
@@ -190,6 +200,13 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     const [depth, setDepth] = useState(0);
 
     const renderPortalUse = usePortalTarget(portalTarget);
+
+    // Use presence hook for enter/exit animations (unless keepMounted is true)
+    const { isPresent, isExiting } = usePresence(
+      presenceRef,
+      keepMounted ? true : open
+    );
+    const mergedRefs = useMergedRefs([modalRef, presenceRef]);
 
     useIsomorphicEffect(() => {
       const AILabelWidth =
@@ -238,7 +255,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     }, [open]);
 
     useEffect(() => {
-      if (stack?.length > 0) {
+      if (stack?.length > 0 && modalRef.current) {
         const stackDepth = getDepth?.(uniqueId.current),
           blockSizeChange = getBlockSizeChange?.(uniqueId.current),
           scaleFactor = getScaleFactor?.(uniqueId.current);
@@ -254,6 +271,11 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stack]);
+
+    // Don't render if not present (after exit animation completes) - unless keepMounted is true
+    if (!keepMounted && !isPresent) {
+      return null;
+    }
 
     return renderPortalUse(
       <TearsheetContext.Provider
@@ -285,13 +307,19 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
                 !!rest.decorator &&
                 rest.decorator['type']?.displayName !== 'AILabel',
               [`${blockClass}--has-close`]: hasCloseIcon,
+              ['is-visible']: keepMounted ? open : true, // Use open prop when keepMounted
+              [`${blockClass}--keep-mounted`]: keepMounted,
             })}
             containerClassName={cx(
               `${blockClass}__container`,
               containerClassName
             )}
-            {...{ onClose, open, selectorPrimaryFocus }}
-            ref={modalRef}
+            {...{
+              onClose,
+              open: keepMounted ? open : true,
+              selectorPrimaryFocus,
+            }}
+            ref={mergedRefs}
             selectorsFloatingMenus={[
               `.${carbonPrefix}--overflow-menu-options`,
               `.${carbonPrefix}--tooltip`,
@@ -302,6 +330,9 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
             ]}
             isFullWidth={true}
             size={variant === 'narrow' ? 'sm' : ''}
+            data-tearsheet-exiting={
+              !keepMounted && isExiting ? true : undefined
+            }
           >
             {header}
             <ModalBody className={`${blockClass}__body-layout`} ref={bodyRef}>

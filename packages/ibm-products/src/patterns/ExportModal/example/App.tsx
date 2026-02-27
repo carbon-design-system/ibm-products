@@ -6,11 +6,9 @@
  */
 
 import React from 'react';
-import {
-  StandardExportModal,
-  ExportModalWithExtensionValidation,
-  ExportModalWithPreformattedExtensions,
-} from './components/ExportModalExamples';
+import { StandardExportModal } from './preview-components/StandardExportModal';
+import { ExportModalWithExtensionValidation } from './preview-components/ExportModalWithExtensionValidation';
+import { ExportModalWithPreformattedExtensions } from './preview-components/ExportModalWithPreformattedExtensions';
 
 function App() {
   return (

@@ -6,11 +6,9 @@
  */
 
 import React from 'react';
-import {
-  InstantGenerateExample,
-  GenerateExample,
-  EditExample,
-} from './components/GenerateAnAPIKeyExamples';
+import { InstantGenerate } from './preview-components/InstantGenerate';
+import { Generate } from './preview-components/Generate';
+import { Edit } from './preview-components/Edit';
 
 function App() {
   return (
@@ -19,17 +17,17 @@ function App() {
 
       <section className="example-section">
         <h2>Instant Generate</h2>
-        <InstantGenerateExample />
+        <InstantGenerate />
       </section>
 
       <section className="example-section">
         <h2>Generate</h2>
-        <GenerateExample />
+        <Generate />
       </section>
 
       <section className="example-section">
         <h2>Edit</h2>
-        <EditExample />
+        <Edit />
       </section>
     </div>
   );

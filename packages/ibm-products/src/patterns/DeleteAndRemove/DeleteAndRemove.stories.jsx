@@ -8,13 +8,11 @@
 import React from 'react';
 import styles from './_story-styles.scss?inline';
 import DocsPage from './DeleteAndRemove.mdx';
-import {
-  HighImpactDeletionExample,
-  HighImpactDeletionWithConnectedItemsExample,
-  HighImpactBatchDeletionExample,
-  MediumImpactDeletionExample,
-  LowImpactDeletionExample,
-} from './example/components/DeleteAndRemoveExamples';
+import { HighImpactDeletion } from './example/preview-components/HighImpactDeletion';
+import { HighImpactDeletionWithConnectedItems } from './example/preview-components/HighImpactDeletionWithConnectedItems';
+import { HighImpactBatchDeletion } from './example/preview-components/HighImpactBatchDeletion';
+import { MediumImpactDeletion } from './example/preview-components/MediumImpactDeletion';
+import { LowImpactDeletion } from './example/preview-components/LowImpactDeletion';
 
 export default {
   title: 'Patterns/Delete and remove',
@@ -29,7 +27,7 @@ export default {
 };
 
 const HighImpactDeletionPattern = (args) => {
-  return <HighImpactDeletionExample {...args} />;
+  return <HighImpactDeletion {...args} />;
 };
 
 export const highImpactDeletion = HighImpactDeletionPattern.bind({});
@@ -37,7 +35,7 @@ highImpactDeletion.storyName = 'High impact deletion';
 highImpactDeletion.args = {};
 
 const HighImpactDeletionWithConnectedItemsPattern = (args) => {
-  return <HighImpactDeletionWithConnectedItemsExample {...args} />;
+  return <HighImpactDeletionWithConnectedItems {...args} />;
 };
 
 export const highImpactDeletionWithConnectedItems =
@@ -47,7 +45,7 @@ highImpactDeletionWithConnectedItems.storyName =
 highImpactDeletionWithConnectedItems.args = {};
 
 const HighImpactBatchDeletionPattern = (args) => {
-  return <HighImpactBatchDeletionExample {...args} />;
+  return <HighImpactBatchDeletion {...args} />;
 };
 
 export const highImpactBatchDeletion = HighImpactBatchDeletionPattern.bind({});
@@ -55,7 +53,7 @@ highImpactBatchDeletion.storyName = 'Batch deletion';
 highImpactBatchDeletion.args = {};
 
 const MediumImpactDeletionPattern = (args) => {
-  return <MediumImpactDeletionExample {...args} />;
+  return <MediumImpactDeletion {...args} />;
 };
 
 export const mediumImpactDeletion = MediumImpactDeletionPattern.bind({});
@@ -63,7 +61,7 @@ mediumImpactDeletion.storyName = 'Medium impact deletion';
 mediumImpactDeletion.args = {};
 
 const LowImpactDeletionPattern = (args) => {
-  return <LowImpactDeletionExample {...args} />;
+  return <LowImpactDeletion {...args} />;
 };
 
 export const lowImpactDeletion = LowImpactDeletionPattern.bind({});

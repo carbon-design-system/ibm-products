@@ -8,13 +8,11 @@
  */
 
 import React from 'react';
-import {
-  HighImpactDeletionExample,
-  HighImpactDeletionWithConnectedItemsExample,
-  HighImpactBatchDeletionExample,
-  MediumImpactDeletionExample,
-  LowImpactDeletionExample,
-} from './components/DeleteAndRemoveExamples';
+import { HighImpactDeletion } from './preview-components/HighImpactDeletion';
+import { HighImpactDeletionWithConnectedItems } from './preview-components/HighImpactDeletionWithConnectedItems';
+import { HighImpactBatchDeletion } from './preview-components/HighImpactBatchDeletion';
+import { MediumImpactDeletion } from './preview-components/MediumImpactDeletion';
+import { LowImpactDeletion } from './preview-components/LowImpactDeletion';
 
 function App() {
   return (
@@ -23,27 +21,27 @@ function App() {
 
       <section className="example-section">
         <h2>High Impact Deletion</h2>
-        <HighImpactDeletionExample />
+        <HighImpactDeletion />
       </section>
 
       <section className="example-section">
         <h2>Deletion with Connected Items</h2>
-        <HighImpactDeletionWithConnectedItemsExample />
+        <HighImpactDeletionWithConnectedItems />
       </section>
 
       <section className="example-section">
         <h2>Batch Deletion</h2>
-        <HighImpactBatchDeletionExample />
+        <HighImpactBatchDeletion />
       </section>
 
       <section className="example-section">
         <h2>Medium Impact Deletion</h2>
-        <MediumImpactDeletionExample />
+        <MediumImpactDeletion />
       </section>
 
       <section className="example-section">
         <h2>Low Impact Deletion</h2>
-        <LowImpactDeletionExample />
+        <LowImpactDeletion />
       </section>
     </div>
   );

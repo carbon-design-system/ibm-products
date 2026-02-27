@@ -8,11 +8,9 @@
 import React from 'react';
 import styles from './_story-styles.scss?inline';
 import DocsPage from './ExportModal.mdx';
-import {
-  StandardExportModal,
-  ExportModalWithExtensionValidation,
-  ExportModalWithPreformattedExtensions,
-} from './example/components/ExportModalExamples';
+import { StandardExportModal } from './example/preview-components/StandardExportModal';
+import { ExportModalWithExtensionValidation } from './example/preview-components/ExportModalWithExtensionValidation';
+import { ExportModalWithPreformattedExtensions } from './example/preview-components/ExportModalWithPreformattedExtensions';
 
 export default {
   title: 'Patterns/Export Modal',

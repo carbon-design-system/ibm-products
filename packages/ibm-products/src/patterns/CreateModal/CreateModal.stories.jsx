@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Button } from '@carbon/react';
 import styles from './_story-styles.scss?inline';
 import DocsPage from './CreateModal.mdx';
-import {
-  CreateModalExample,
-  CreateModalWithValidationExample,
-} from './example/components/CreateModalExample';
+import { StandardCreateModal } from './example/preview-components/StandardCreateModal';
+import { CreateModalWithValidation } from './example/preview-components/CreateModalWithValidation';
 
 export default {
   title: 'Patterns/Step flows/Create Modal',
@@ -26,11 +25,25 @@ export default {
 };
 
 const CreateModalPattern = (args) => {
-  return <CreateModalExample {...args} />;
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+      <StandardCreateModal open={open} setOpen={setOpen} {...args} />
+    </>
+  );
 };
 
 const CreateModalWithValidationPattern = (args) => {
-  return <CreateModalWithValidationExample {...args} />;
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>
+        Launch CreateModal with form validation
+      </Button>
+      <CreateModalWithValidation open={open} setOpen={setOpen} {...args} />
+    </>
+  );
 };
 
 export const CreateModal = CreateModalPattern.bind({});

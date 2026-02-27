@@ -7,11 +7,9 @@
 
 import React from 'react';
 import DocsPage from './GenerateAnAPIKey.mdx';
-import {
-  InstantGenerateExample,
-  GenerateExample,
-  EditExample,
-} from './example/components/GenerateAnAPIKeyExamples';
+import { InstantGenerate } from './example/preview-components/InstantGenerate';
+import { Generate } from './example/preview-components/Generate';
+import { Edit } from './example/preview-components/Edit';
 
 export default {
   title: 'Patterns/Generate an API key',
@@ -25,15 +23,15 @@ export default {
 };
 
 const InstantTemplate = (args) => {
-  return <InstantGenerateExample {...args} />;
+  return <InstantGenerate {...args} />;
 };
 
 const GenerateTemplate = (args) => {
-  return <GenerateExample {...args} />;
+  return <Generate {...args} />;
 };
 
 const EditTemplate = (args) => {
-  return <EditExample {...args} />;
+  return <Edit {...args} />;
 };
 
 export const instantGenerate = InstantTemplate.bind({});

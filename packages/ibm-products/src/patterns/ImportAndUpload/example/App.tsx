@@ -6,10 +6,19 @@
  */
 
 import React from 'react';
-import { StandardImportAndUploadExample } from './components/ImportAndUploadExamples';
+import { StandardImportAndUpload } from './preview-components/StandardImportAndUpload';
 
 function App() {
-  return <StandardImportAndUploadExample />;
+  return (
+    <div className="example-container">
+      <h1>Import and Upload Examples</h1>
+
+      <section className="example-section">
+        <h2>Standard Import and Upload</h2>
+        <StandardImportAndUpload />
+      </section>
+    </div>
+  );
 }
 
 export default App;

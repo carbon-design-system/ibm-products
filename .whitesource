@@ -1,3 +1,7 @@
 {
-  "settingsInheritedFrom": "ibm-mend-config/mend-config@main"
-}
+  "settingsInheritedFrom": "ibm-mend-config/mend-config",
+  "issueSettings": {
+     "issueRepoName": "mend-issues",
+     "issueType": "VULNERABILITY"
+  }
+ }

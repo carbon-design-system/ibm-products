@@ -128,6 +128,7 @@ test.describe('CreateTearsheet @avt', () => {
     // Switch focus to back button
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
 
     // Goto previous step by pressing enter
     await expect(backButton).toBeFocused();

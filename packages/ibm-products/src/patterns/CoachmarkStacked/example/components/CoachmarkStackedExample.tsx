@@ -78,6 +78,14 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   const [parentHeight, setParentHeight] = useState(0);
   const stackHomeContentRef = useRef(null);
   const stackedCoachmarkContentRefs = useRef([]);
+  const nextRef = useRef<HTMLButtonElement>(null);
+  const backRef = useRef<HTMLButtonElement>(null);
+  const doneRef = useRef<HTMLButtonElement>(null);
+  const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const parentButtonRefs = useRef<{ [key: number]: HTMLButtonElement | null }>(
+    {}
+  );
+  const lastOpenIdRef = useRef<number>(0);
 
   const blockClass = `coachmark-stacked-home`;
   const stackedCoachmark = `stacked-coachmark`;
@@ -106,9 +114,10 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       type: 'simple',
       button: (
         <Button
+          ref={doneRef}
           size="sm"
           onClick={(e) => {
-            setOpenId(null);
+            setOpenId(0);
             e.stopPropagation();
           }}
         >
@@ -230,20 +239,79 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     },
   ];
 
-  const handleClose = (e) => {
-    e.stopPropagation();
+  const handleClose = (e?) => {
+    e?.stopPropagation();
     setIsOpen(false);
   };
 
   const handleCloseCarousel = (e) => {
-    setOpenId(null);
+    setOpenId(0);
     carouselInit.current.reset();
-    e.stopPropagation();
+    e?.stopPropagation();
   };
 
   const handleTaglineClick = () => {
     setIsOpen((isOpen) => !isOpen);
   };
+
+  const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
+    carouselItemsRef.current.forEach((item, idx) => {
+      if (!item) {
+        return;
+      }
+
+      const isActive = idx === activeIndex;
+
+      // Set aria-hidden based on active state
+      item.setAttribute('aria-hidden', String(!isActive));
+
+      if (!isActive) {
+        item.setAttribute('inert', ''); // Disable interactivity
+      } else {
+        item.removeAttribute('inert'); // Re-enable interactivity
+      }
+
+      item.removeAttribute('tabindex');
+    });
+  }, []);
+
+  useEffect(() => {
+    if (openId > 0) {
+      lastOpenIdRef.current = openId;
+      const nestedItem = nestedItems.find((item) => item.id === openId);
+
+      if (nestedItem?.type === 'carousel') {
+        updateCarouselItemsTabIndex(0);
+        setTimeout(() => {
+          nextRef?.current?.focus();
+        }, 100);
+      } else {
+        setTimeout(() => {
+          doneRef?.current?.focus();
+        }, 100);
+      }
+    } else if ((openId === 0 || openId === null) && lastOpenIdRef.current > 0) {
+      // Child was closed, return focus to the parent button that opened it
+      setTimeout(() => {
+        const buttonToFocus = parentButtonRefs.current[lastOpenIdRef.current];
+        if (buttonToFocus) {
+          buttonToFocus.focus();
+        }
+        lastOpenIdRef.current = 0;
+      }, 100);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openId, updateCarouselItemsTabIndex]);
+
+  useEffect(() => {
+    // When parent coachmark closes, return focus to tagline button
+    if (!isOpen) {
+      setTimeout(() => {
+        const taglineButton = document.getElementById('CoachmarkTagline');
+        taglineButton?.focus();
+      }, 0);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (carouselContainerRef && carouselContainerRef.current) {
@@ -265,9 +333,23 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     ({ currentIndex, lastIndex }) => {
       setCurrentViewIndex(currentIndex);
       setLastViewIndex(lastIndex);
+
+      // Update inert attribute for carousel items
+      updateCarouselItemsTabIndex(currentIndex);
+
+      // Use setTimeout to ensure button refs are updated after re-render
+      setTimeout(() => {
+        if (currentIndex === lastIndex) {
+          // On last slide, focus the Done button
+          doneRef.current?.focus();
+        } else {
+          // On other slides, focus the Next button
+          nextRef.current?.focus();
+        }
+      }, 50);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [openId]
+    [openId, updateCarouselItemsTabIndex]
   );
 
   const onNext = (e) => {
@@ -392,6 +474,9 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                 <React.Fragment key={item.id}>
                   <li key={item.id}>
                     <Button
+                      ref={(el) => {
+                        parentButtonRefs.current[item.id] = el;
+                      }}
                       kind="ghost"
                       size="sm"
                       onClick={() => {
@@ -419,9 +504,8 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
         <Coachmark
           key={item.id}
           open={openId === item.id}
-          onClose={(e) => {
-            setOpenId(null);
-            e.stopPropagation();
+          onClose={() => {
+            setOpenId(0);
           }}
           align="top"
         >
@@ -464,8 +548,13 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                           ref={carouselContainerRef}
                           className="exampleCarouselWrapper"
                         >
-                          {nested.pages.map((page) => (
-                            <div key={page.id}>
+                          {nested.pages.map((page, index) => (
+                            <div
+                              key={page.id}
+                              ref={(el) => {
+                                carouselItemsRef.current[index] = el;
+                              }}
+                            >
                               <h2>{page.title}</h2>
                               <p>{page.text}</p>
                               <p>{page.button}</p>
@@ -495,6 +584,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                           <div className={'carouselControlWrapper--buttons'}>
                             {currentViewIndex !== 0 && (
                               <Button
+                                ref={backRef}
                                 size="sm"
                                 iconDescription="Previous"
                                 kind="ghost"
@@ -506,6 +596,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
 
                             {lastViewIndex !== currentViewIndex ? (
                               <Button
+                                ref={nextRef}
                                 size="sm"
                                 iconDescription="Next"
                                 onClick={onNext}
@@ -513,7 +604,11 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                                 Next
                               </Button>
                             ) : (
-                              <Button size="sm" onClick={handleCloseCarousel}>
+                              <Button
+                                ref={doneRef}
+                                size="sm"
+                                onClick={handleCloseCarousel}
+                              >
                                 Done
                               </Button>
                             )}

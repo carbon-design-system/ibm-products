@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.80.0-rc.0`
+## `@carbon/ibm-products-styles@2.80.0`
 ### Features :rocket:
 - feat: show Close icon at global header actions when expanded (#8933)
 - feat(tearsheetpresence): add tearsheet presence (#8929)

@@ -1,6 +1,23 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
-import CoachmarkStories from './coachmark.stories';
+import * as CoachmarkStories from './coachmark.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import helperSource from './coachmark-helpers.ts?raw';
+
+export const customFunctionArr = [
+  `const el = document?.body.querySelector('my-app');\n\n` +
+  helperSource
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .replace(/document\.querySelector\(/g, 'el?.shadowRoot?.querySelector(')
+    .trim()
+];
+
+
+export const customImportArr = [`import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import Crossroads from '@carbon/icons/es/crossroads/16.js';
+`];
 
 <Meta of={CoachmarkStories} />
 
@@ -86,6 +103,43 @@ import Crossroads from '@carbon/icons/es/crossroads/16.js';
     </c4p-coachmark-body>
   </c4p-coachmark>
 ```
+
+### Example Usage
+
+### Tooltip
+
+<Canvas
+  of={CoachmarkStories.Tooltip}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: CoachmarkStories.Tooltip,
+          customFunctionDefs: customFunctionArr,
+          componentName: 'coachmark', 
+        }),
+    },
+  ]}
+></Canvas>
+
+### Floating
+
+<Canvas
+  of={CoachmarkStories.Floating}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: CoachmarkStories.Floating,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'coachmark', 
+        }),
+    },
+  ]}
+></Canvas>
 
 
 ## `<c4p-coachmark>` attributes, properties and events

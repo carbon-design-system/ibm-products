@@ -26,7 +26,8 @@ This means that:
 - Enter & exit animations change from CSS transitions to CSS animations
 
 Note: Only Tearsheet and its children are unmounted/mounted. Use TearsheetPresence or withTearsheetPresence to shift the presence boundary to a higher level, if necessary.
-`,
+
+Note: If your animation appears to be interrupted, this is likely caused by the Tearsheet portal target’s current limitations, which can trigger a re-mount after the initial render. As a workaround, explicitly set the \`portalTarget\` for your Tearsheet.`,
         source: {
           language: 'jsx',
           code: `

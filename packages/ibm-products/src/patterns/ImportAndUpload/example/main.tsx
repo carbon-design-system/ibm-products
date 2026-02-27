@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -13,9 +11,9 @@ import App from './App';
 import './index.scss';
 
 // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  const root = createRoot(rootElement);
+const container = document.getElementById('root');
+if (container) {
+  const root = createRoot(container);
   root.render(
     <React.StrictMode>
       <App />

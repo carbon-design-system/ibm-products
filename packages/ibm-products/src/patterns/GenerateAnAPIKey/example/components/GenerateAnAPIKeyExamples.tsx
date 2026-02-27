@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,31 +7,17 @@
 
 import React, { useState } from 'react';
 import { Button, Modal, TextInput, PasswordInput } from '@carbon/react';
-import styles from './_storybook-styles.scss?inline';
-import DocsPage from './GenerateAnAPIKey.mdx';
 
-export default {
-  title: 'Patterns/Generate an API key',
-  component: () => {},
-  tags: ['autodocs'],
-  parameters: {
-    styles,
-    docs: {
-      page: DocsPage,
-    },
-  },
+// Local wait utility
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Mock API call
+const apiCall = async () => {
+  await wait(1000);
+  return '082be29c-3622-4276-bc58-695e2a12bd93';
 };
 
-const InstantTemplate = () => {
-  const wait = (ms) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
-
-  const apiCall = async () => {
-    await wait(1000);
-    return '082be29c-3622-4276-bc58-695e2a12bd93';
-  };
-
+export const InstantGenerateExample = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [key, setKey] = useState('');
@@ -70,6 +56,7 @@ const InstantTemplate = () => {
         onRequestSubmit={copyKey}
       >
         <PasswordInput
+          id="instant-api-key"
           value={key}
           helperText="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
         />
@@ -78,26 +65,13 @@ const InstantTemplate = () => {
   );
 };
 
-export const instantGenerate = InstantTemplate.bind({});
-instantGenerate.storyName = 'Instant generate';
-instantGenerate.args = {};
-
-const GenerateTemplate = () => {
-  const wait = (ms) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
-
-  const apiCall = async () => {
-    await wait(1000);
-    return '082be29c-3622-4276-bc58-695e2a12bd93';
-  };
-
+export const GenerateExample = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [key, setKey] = useState('');
   const [name, setName] = useState('');
 
-  const handleName = (evt) => {
+  const handleName = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setName(evt.target.value);
   };
 
@@ -125,7 +99,7 @@ const GenerateTemplate = () => {
     setOpen(!open);
   };
 
-  const getLoadingStatus = () => {
+  const getLoadingStatus = (): 'inactive' | 'active' | 'finished' => {
     if (key) {
       return 'finished';
     }
@@ -138,7 +112,7 @@ const GenerateTemplate = () => {
   };
 
   const getModalProps = () => {
-    const props = {
+    const props: any = {
       loadingDescription: 'Loading',
       loadingStatus: getLoadingStatus(),
       modalHeading: 'Generate an API key',
@@ -168,15 +142,13 @@ const GenerateTemplate = () => {
       <Button onClick={toggleModal}>Generate</Button>
       <Modal {...props}>
         {key ? (
-          <>
-            <TextInput
-              labelText="Unique API key"
-              value={key}
-              readOnly
-              helperText="This is your unique API key and is non-recoverable. If you lose
-              this API key, you will have to reset it."
-            />
-          </>
+          <TextInput
+            id="generated-api-key"
+            labelText="Unique API key"
+            value={key}
+            readOnly
+            helperText="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
+          />
         ) : (
           <>
             <p style={{ marginBlockEnd: '1rem' }}>
@@ -185,6 +157,7 @@ const GenerateTemplate = () => {
               access resources such as [product resource name].
             </p>
             <TextInput
+              id="app-name"
               labelText="Name your application"
               value={name}
               onChange={handleName}
@@ -198,26 +171,13 @@ const GenerateTemplate = () => {
   );
 };
 
-export const generate = GenerateTemplate.bind({});
-generate.storyName = 'Generate';
-generate.args = {};
-
-const EditTemplate = () => {
-  const wait = (ms) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
-
-  const apiCall = async () => {
-    await wait(1000);
-    return '082be29c-3622-4276-bc58-695e2a12bd93';
-  };
-
+export const EditExample = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('resource_name_1');
   const [success, setSuccess] = useState(false);
 
-  const handleName = (evt) => {
+  const handleName = (evt: React.ChangeEvent<HTMLInputElement>) => {
     if (success) {
       setSuccess(false);
     }
@@ -241,7 +201,7 @@ const EditTemplate = () => {
     setOpen(!open);
   };
 
-  const getLoadingStatus = () => {
+  const getLoadingStatus = (): 'inactive' | 'active' | 'finished' => {
     if (success) {
       return 'finished';
     }
@@ -280,6 +240,7 @@ const EditTemplate = () => {
           resources such as [product resource name].
         </p>
         <TextInput
+          id="edit-app-name"
           labelText="Name your application"
           value={name}
           onChange={handleName}
@@ -290,7 +251,3 @@ const EditTemplate = () => {
     </div>
   );
 };
-
-export const edit = EditTemplate.bind({});
-edit.storyName = 'Edit';
-edit.args = {};

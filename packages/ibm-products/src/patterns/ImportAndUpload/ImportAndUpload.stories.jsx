@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import styles from './_story-styles.scss?inline';
 import mdx from './ImportAndUpload.mdx';
 import { StandardImportAndUploadExample } from './example/components/ImportAndUploadExamples';
 
@@ -15,7 +14,6 @@ export default {
   component: () => {},
   tags: ['autodocs'],
   parameters: {
-    styles,
     docs: {
       page: mdx,
     },

@@ -140,6 +140,10 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
   }
 }
 
+:host(:focus)::before {
+  display: none;
+}
+
 :host(.#{$block-notification-class}--next) {
   &::before {
     background-color: transparent;

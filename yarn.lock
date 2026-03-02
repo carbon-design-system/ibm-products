@@ -2247,7 +2247,7 @@ __metadata:
     rollup-plugin-strip-banner: "npm:^3.1.0"
     sass: "npm:^1.93.2"
     storybook: "npm:^9.1.15"
-    storybook-addon-accessibility-checker: "npm:>=9.2.0-rc.0"
+    storybook-addon-accessibility-checker: "npm:>=9.2.0-git0"
     typescript-config-carbon: "npm:^0.9.0"
     vite: "npm:^7.0.0"
     yargs: "npm:^18.0.0"
@@ -9165,6 +9165,13 @@ __metadata:
     mime-types: "npm:~2.1.34"
     negotiator: "npm:0.6.3"
   checksum: 10/67eaaa90e2917c58418e7a9b89392002d2b1ccd69bcca4799135d0c632f3b082f23f4ae4ddeedbced5aa59bcc7bdf4699c69ebed4593696c922462b7bc5744d6
+  languageName: node
+  linkType: hard
+
+"accessibility-checker-engine@npm:^4.0.10":
+  version: 4.0.12
+  resolution: "accessibility-checker-engine@npm:4.0.12"
+  checksum: 10/49faf431a0a382a33b60fc3f9e7e7c9a43f49520caac50861cf1ce2004b031e187fd26863b9a0afa7b2c134085fede6a347e6b26e47cddf2be9df04810fa3e50
   languageName: node
   linkType: hard
 
@@ -22559,6 +22566,19 @@ __metadata:
   version: 2.14.4
   resolution: "store2@npm:2.14.4"
   checksum: 10/c92713e75544693b47053531b6e98d7b538512061017e06b8c7e99937da67866856227862f7bf1a818ecc36673b8d343c7b67c9cce03bd4ba0f68eff7cccaa8c
+  languageName: node
+  linkType: hard
+
+"storybook-addon-accessibility-checker@npm:>=9.2.0-git0":
+  version: 9.2.0-rc.4
+  resolution: "storybook-addon-accessibility-checker@npm:9.2.0-rc.4"
+  dependencies:
+    "@storybook/global": "npm:^5.0.0"
+    accessibility-checker-engine: "npm:^4.0.10"
+    axe-core: "npm:^4.2.0"
+  peerDependencies:
+    storybook: ^9.2.0
+  checksum: 10/a6619ce06c29186200e8e91823c6c915c4bed3a5310417ef5b850b8847937bce67a6201440ab4aae6e194d549eb61d9abf4c6087c6a35e4cd3112a1f2bb1c57b
   languageName: node
   linkType: hard
 

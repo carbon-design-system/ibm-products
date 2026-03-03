@@ -27,9 +27,17 @@ import '@carbon/web-components/es/components/toggle-tip/index.js';
 import '@carbon/web-components/es/components/dropdown/index.js';
 import '@carbon/web-components/es/components/progress-bar/index.js';
 import '@carbon/web-components/es/components/notification/index.js';
+import { breakpoints } from '@carbon/layout';
 import mdx from './tearsheet.mdx';
 
 const storyPrefix = 'tearsheet-preview-stories';
+
+// Helper to get button size based on screen size and variant
+const getButtonSize = (variant: string = 'wide') => {
+  const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  const isSmallScreen = window.matchMedia(smMediaQuery).matches;
+  return isSmallScreen || variant === 'narrow' ? 'xl' : '2xl';
+};
 
 const getDecorator = (decorator) => {
   switch (decorator) {
@@ -407,11 +415,19 @@ export const Default = {
         </c4p-tearsheet-body>
         <c4p-tearsheet-footer>
           <div class="default__action-buttons">
-            <cds-button kind="ghost" size="xl" @click="${toggleButton}">
+            <cds-button
+              kind="ghost"
+              size="${getButtonSize(args.variant)}"
+              @click="${toggleButton}"
+            >
               Cancel
             </cds-button>
-            <cds-button kind="secondary" size="xl"> Back </cds-button>
-            <cds-button size="xl"> Submit </cds-button>
+            <cds-button kind="secondary" size="${getButtonSize(args.variant)}">
+              Back
+            </cds-button>
+            <cds-button size="${getButtonSize(args.variant)}">
+              Submit
+            </cds-button>
           </div>
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
@@ -476,11 +492,17 @@ export const WithInfluencer = {
 
         <c4p-tearsheet-footer>
           <div class="default__action-buttons">
-            <cds-button kind="ghost" size="xl" @click="${toggleButton}">
+            <cds-button
+              kind="ghost"
+              size="${getButtonSize('wide')}"
+              @click="${toggleButton}"
+            >
               Cancel
             </cds-button>
-            <cds-button kind="secondary" size="xl"> Back </cds-button>
-            <cds-button size="xl"> Submit </cds-button>
+            <cds-button kind="secondary" size="${getButtonSize('wide')}">
+              Back
+            </cds-button>
+            <cds-button size="${getButtonSize('wide')}"> Submit </cds-button>
           </div>
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
@@ -542,11 +564,17 @@ export const WithTabs = {
 
         <c4p-tearsheet-footer>
           <div class="default__action-buttons">
-            <cds-button kind="ghost" size="xl" @click="${toggleButton}">
+            <cds-button
+              kind="ghost"
+              size="${getButtonSize('wide')}"
+              @click="${toggleButton}"
+            >
               Cancel
             </cds-button>
-            <cds-button kind="secondary" size="xl"> Back </cds-button>
-            <cds-button size="xl"> Submit </cds-button>
+            <cds-button kind="secondary" size="${getButtonSize('wide')}">
+              Back
+            </cds-button>
+            <cds-button size="${getButtonSize('wide')}"> Submit </cds-button>
           </div>
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
@@ -614,13 +642,13 @@ export const narrowTearsheet = {
         ${dummyContent}</div>
        <c4p-tearsheet-summary-content   slot="summary-content">${summaryContent}</c4p-tearsheet-summary-content>
         </c4p-tearsheet-body>
-        <c4p-tearsheet-footer> 
+        <c4p-tearsheet-footer>
          <div class="default__action-buttons" >
-            <cds-button kind="ghost" size="xl" @click="${toggleButton}">
+            <cds-button kind="ghost" size="${getButtonSize('narrow')}" @click="${toggleButton}">
               Cancel
             </cds-button>
-            <cds-button kind="secondary" size="xl"> Back </cds-button>
-            <cds-button size="xl"> Submit </cds-button>
+            <cds-button kind="secondary" size="${getButtonSize('narrow')}"> Back </cds-button>
+            <cds-button size="${getButtonSize('narrow')}"> Submit </cds-button>
          </div > </c4p-tearsheet-footer>
      </<c4p-preview-tearsheet>
       

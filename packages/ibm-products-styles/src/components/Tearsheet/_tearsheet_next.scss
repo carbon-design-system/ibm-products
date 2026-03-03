@@ -28,7 +28,7 @@ $motion-duration: $duration-moderate-02;
     block-size: 100%;
     inset-block-start: auto;
     max-block-size: calc(100% - var(--tearsheet-vertical-gap, #{$spacing-09}));
-    max-inline-size: 1312px;
+    max-inline-size: var(--tearsheet-max-inline-size, 1312px);
   }
   &:not(.#{$block-class__next}--stack-activated.is-visible) {
     .#{$block-class__next}__container {
@@ -472,9 +472,13 @@ $motion-duration: $duration-moderate-02;
 
 .#{$block-class__next}__footer {
   overflow: hidden;
-  block-size: $spacing-10;
+  block-size: $spacing-11;
   border-block-start: 1px solid $border-subtle-01;
   grid-area: footer;
+
+  @include breakpoint-down(md) {
+    block-size: $spacing-10;
+  }
 }
 
 .#{$block-class__next}__influencer,
@@ -533,5 +537,8 @@ $motion-duration: $duration-moderate-02;
     &:not(.#{$block-class__next}__flush) {
       padding-inline: $spacing-05;
     }
+  }
+  .#{$block-class__next}__footer {
+    block-size: $spacing-10;
   }
 }

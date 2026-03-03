@@ -48,7 +48,7 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   hideCloseButton: boolean = false;
 
   /**
-   * Default header collapse/expand while scrolling the main content can bd disabled  by setting this
+   * Default header collapse/expand while scrolling the main content can be disabled  by setting this
    */
   @property({
     type: Boolean,

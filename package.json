@@ -1,7 +1,7 @@
 {
   "name": "ibm-products",
   "engines": {
-    "node": ">=22.x"
+    "node": ">=20.x"
   },
   "private": true,
   "version": "0.0.0",
@@ -148,7 +148,8 @@
     "minimatch@^9.0.0": "^9.0.6",
     "js-yaml": "^4.1.1",
     "js-yaml@^3.0.0": "^3.14.2",
-    "js-yaml@^4.0.0": "^4.1.1"
+    "js-yaml@^4.0.0": "^4.1.1",
+    "pacote": "^21.1.0"
   },
   "lint-staged": {
     "*": [

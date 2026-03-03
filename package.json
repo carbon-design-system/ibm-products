@@ -137,7 +137,7 @@
     "brace-expansion@^2.0.1": "2.0.2",
     "@isaacs/brace-expansion": "^5.0.1",
     "axios": "^1.13.5",
-    "tar": "^6.2.1",
+    "tar": "^7.0.0",
     "lodash": "^4.17.23",
     "lodash-amd": "^4.17.23",
     "lodash-es": "^4.17.23",

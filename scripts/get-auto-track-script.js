@@ -6,7 +6,7 @@
  */
 
 //cspell: disable
-export const getAutoTrack = (source: string) => {
+export const getAutoTrack = (source) => {
   return `
 <script>
   window._ibmAnalytics = window._ibmAnalytics || {};

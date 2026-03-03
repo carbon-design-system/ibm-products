@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
-import { getAutoTrack } from '../../../scripts/get-auto-track-script.js';
+import { getAutoTrack } from '../../../scripts/get-auto-track-script.ts';
 
 const require = createRequire(import.meta.url);
 

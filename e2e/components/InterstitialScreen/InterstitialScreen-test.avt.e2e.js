@@ -54,7 +54,7 @@ test.describe('InterstitialScreen @avt', () => {
     const modal = page.locator(`.${carbon.prefix}--modal-container`);
     const closeButton = page.getByLabel('Close');
     const startButton = page.locator(
-      `.dev-prefix--${pkg.prefix}--interstitial-screen--start-btn`
+      `.${pkg.prefix}--interstitial-screen--start-btn`
     );
     const enableGetStartedButton = page.getByRole('button', {
       name: 'Enable Get Started',
@@ -117,21 +117,19 @@ test.describe('InterstitialScreen @avt', () => {
 
     const modal = page.locator(`.${carbon.prefix}--modal-container`);
     const modalHeader = page.locator(`.${carbon.prefix}--modal-header`);
-    const modalContent = page.locator(
-      `.dev-prefix--${pkg.prefix}--carousel__elements`
-    );
+    const modalContent = page.locator(`.${pkg.prefix}--carousel__elements`);
     const skipButton = page.locator(
-      `.dev-prefix--${pkg.prefix}--interstitial-screen--skip-btn`
+      `.${pkg.prefix}--interstitial-screen--skip-btn`
     );
     const closeButton = page.getByLabel('Close');
     const nextButton = page.locator(
-      `.dev-prefix--${pkg.prefix}--interstitial-screen--next-btn`
+      `.${pkg.prefix}--interstitial-screen--next-btn`
     );
     const backButton = page.locator(
-      `.dev-prefix--${pkg.prefix}--interstitial-screen--prev-btn`
+      `.${pkg.prefix}--interstitial-screen--prev-btn`
     );
     const startButton = page.locator(
-      `.dev-prefix--${pkg.prefix}--interstitial-screen--start-btn`
+      `.${pkg.prefix}--interstitial-screen--start-btn`
     );
     const progressIndicator = page.locator(`.${carbon.prefix}--progress`);
 
@@ -191,13 +189,13 @@ test.describe('InterstitialScreen @avt', () => {
     const closeButton = page.getByLabel('Close');
     const launcherButton = page.getByText('Show Interstitial modal');
     const startButton = page.locator(
-      `.dev-prefix--${pkg.prefix}--interstitial-screen--start-btn`
+      `.${pkg.prefix}--interstitial-screen--start-btn`
     );
     const skipButton = page.locator(
-      `.dev-prefix--${pkg.prefix}--interstitial-screen--skip-btn`
+      `.${pkg.prefix}--interstitial-screen--skip-btn`
     );
     const nextButton = page.locator(
-      `.dev-prefix--${pkg.prefix}--interstitial-screen--next-btn`
+      `.${pkg.prefix}--interstitial-screen--next-btn`
     );
 
     // Modal should be open initially
@@ -255,10 +253,10 @@ test.describe('InterstitialScreen @avt', () => {
     const progressIndicator = page.locator(`.${carbon.prefix}--progress`);
     const progressSteps = page.locator(`.${carbon.prefix}--progress-step`);
     const startButton = page.locator(
-      `.dev-prefix--${pkg.prefix}--interstitial-screen--start-btn`
+      `.${pkg.prefix}--interstitial-screen--start-btn`
     );
     const nextButton = page.locator(
-      `.dev-prefix--${pkg.prefix}--interstitial-screen--next-btn`
+      `.${pkg.prefix}--interstitial-screen--next-btn`
     );
 
     // Modal should be open with determinate progress indicator

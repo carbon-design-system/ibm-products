@@ -11,7 +11,7 @@ import { dirname, join } from 'node:path';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
-import { getAutoTrack } from '../../../scripts/get-auto-track-script';
+import { getAutoTrack } from '../../../scripts/get-auto-track-script.js';
 
 const stories = glob.sync(
   [

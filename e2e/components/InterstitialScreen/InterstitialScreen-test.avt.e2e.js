@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2026.
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,7 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
-import { carbon } from '../../../packages/ibm-products/src/settings';
+import { carbon, pkg } from '../../../packages/ibm-products/src/settings';
 
 const checkButtonsVisibleAndFocused = async (
   visibleButton1,
@@ -54,13 +54,13 @@ test.describe('InterstitialScreen @avt', () => {
     const modal = page.locator(`.${carbon.prefix}--modal-container`);
     const closeButton = page.getByLabel('Close');
     const startButton = page.locator(
-      '.dev-prefix--c4p--interstitial-screen--start-btn'
+      `.dev-prefix--${pkg.prefix}--interstitial-screen--start-btn`
     );
     const enableGetStartedButton = page.getByRole('button', {
       name: 'Enable Get Started',
     });
     const skipButton = page.getByTitle('Skip');
-    const progressIndicator = page.locator('.cds--progress');
+    const progressIndicator = page.locator(`.${carbon.prefix}--progress`);
 
     // Modal should be open
     await expect(modal).toBeVisible();
@@ -81,13 +81,13 @@ test.describe('InterstitialScreen @avt', () => {
     await page.keyboard.press('Shift+Tab');
     await expect(enableGetStartedButton).toBeVisible();
     await expect(enableGetStartedButton).not.toContainClass(
-      'cds--tag--selectable-selected'
+      `${carbon.prefix}--tag--selectable-selected`
     );
 
     // Select Enable Get Started button, the start button should be enabled now
     await page.keyboard.press('Enter');
     await expect(enableGetStartedButton).toContainClass(
-      'cds--tag--selectable-selected'
+      `${carbon.prefix}--tag--selectable-selected`
     );
     await expect(startButton).not.toBeDisabled();
 
@@ -117,21 +117,23 @@ test.describe('InterstitialScreen @avt', () => {
 
     const modal = page.locator(`.${carbon.prefix}--modal-container`);
     const modalHeader = page.locator(`.${carbon.prefix}--modal-header`);
-    const modalContent = page.locator('.dev-prefix--c4p--carousel__elements');
+    const modalContent = page.locator(
+      `.dev-prefix--${pkg.prefix}--carousel__elements`
+    );
     const skipButton = page.locator(
-      '.dev-prefix--c4p--interstitial-screen--skip-btn'
+      `.dev-prefix--${pkg.prefix}--interstitial-screen--skip-btn`
     );
     const closeButton = page.getByLabel('Close');
     const nextButton = page.locator(
-      '.dev-prefix--c4p--interstitial-screen--next-btn'
+      `.dev-prefix--${pkg.prefix}--interstitial-screen--next-btn`
     );
     const backButton = page.locator(
-      '.dev-prefix--c4p--interstitial-screen--prev-btn'
+      `.dev-prefix--${pkg.prefix}--interstitial-screen--prev-btn`
     );
     const startButton = page.locator(
-      '.dev-prefix--c4p--interstitial-screen--start-btn'
+      `.dev-prefix--${pkg.prefix}--interstitial-screen--start-btn`
     );
-    const progressIndicator = page.locator('.cds--progress');
+    const progressIndicator = page.locator(`.${carbon.prefix}--progress`);
 
     // Modal should be open with progress indicator
     await expect(modal).toBeVisible();
@@ -189,13 +191,13 @@ test.describe('InterstitialScreen @avt', () => {
     const closeButton = page.getByLabel('Close');
     const launcherButton = page.getByText('Show Interstitial modal');
     const startButton = page.locator(
-      '.dev-prefix--c4p--interstitial-screen--start-btn'
+      `.dev-prefix--${pkg.prefix}--interstitial-screen--start-btn`
     );
     const skipButton = page.locator(
-      '.dev-prefix--c4p--interstitial-screen--skip-btn'
+      `.dev-prefix--${pkg.prefix}--interstitial-screen--skip-btn`
     );
     const nextButton = page.locator(
-      '.dev-prefix--c4p--interstitial-screen--next-btn'
+      `.dev-prefix--${pkg.prefix}--interstitial-screen--next-btn`
     );
 
     // Modal should be open initially
@@ -250,13 +252,13 @@ test.describe('InterstitialScreen @avt', () => {
     });
 
     const modal = page.locator(`.${carbon.prefix}--modal-container`);
-    const progressIndicator = page.locator('.cds--progress');
-    const progressSteps = page.locator('.cds--progress-step');
+    const progressIndicator = page.locator(`.${carbon.prefix}--progress`);
+    const progressSteps = page.locator(`.${carbon.prefix}--progress-step`);
     const startButton = page.locator(
-      '.dev-prefix--c4p--interstitial-screen--start-btn'
+      `.dev-prefix--${pkg.prefix}--interstitial-screen--start-btn`
     );
     const nextButton = page.locator(
-      '.dev-prefix--c4p--interstitial-screen--next-btn'
+      `.dev-prefix--${pkg.prefix}--interstitial-screen--next-btn`
     );
 
     // Modal should be open with determinate progress indicator
@@ -268,7 +270,9 @@ test.describe('InterstitialScreen @avt', () => {
 
     // First step should be current
     const firstStep = progressSteps.first();
-    await expect(firstStep).toHaveClass(/cds--progress-step--current/);
+    await expect(firstStep).toHaveClass(
+      new RegExp(`${carbon.prefix}--progress-step--current`)
+    );
 
     // Navigate to next step
     await nextButton.click();
@@ -276,8 +280,12 @@ test.describe('InterstitialScreen @avt', () => {
 
     // Second step should be current, first should be complete
     const secondStep = progressSteps.nth(1);
-    await expect(secondStep).toHaveClass(/cds--progress-step--current/);
-    await expect(firstStep).toHaveClass(/cds--progress-step--complete/);
+    await expect(secondStep).toHaveClass(
+      new RegExp(`${carbon.prefix}--progress-step--current`)
+    );
+    await expect(firstStep).toHaveClass(
+      new RegExp(`${carbon.prefix}--progress-step--complete`)
+    );
 
     // Navigate through all steps
     await nextButton.click();
@@ -289,12 +297,14 @@ test.describe('InterstitialScreen @avt', () => {
 
     // Last step should be current
     const lastStep = progressSteps.last();
-    await expect(lastStep).toHaveClass(/cds--progress-step--current/);
+    await expect(lastStep).toHaveClass(
+      new RegExp(`${carbon.prefix}--progress-step--current`)
+    );
 
     // All previous steps should be complete
     for (let i = 0; i < 4; i++) {
       await expect(progressSteps.nth(i)).toHaveClass(
-        /cds--progress-step--complete/
+        new RegExp(`${carbon.prefix}--progress-step--complete`)
       );
     }
 
@@ -313,7 +323,7 @@ test.describe('InterstitialScreen @avt', () => {
     });
 
     const modal = page.locator(`.${carbon.prefix}--modal-container`);
-    const progressIndicator = page.locator('.cds--progress');
+    const progressIndicator = page.locator(`.${carbon.prefix}--progress`);
 
     // Modal should be open & progress indicator should not be visible for single step (indeterminate)
     await expect(modal).toBeVisible();

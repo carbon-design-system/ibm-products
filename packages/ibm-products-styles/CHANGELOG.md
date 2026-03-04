@@ -1,3 +1,20 @@
+## `@carbon/ibm-products-styles@2.81.0`
+### Features :rocket:
+- feat(editinplace): add readOnly prop (#9007)
+
+### Bug fixes :bug:
+- fix: delete tags and restore vesions to retry release 5
+- fix: delete tags and restore vesions to retry release 4
+- fix: delete tags and restore vesions to retry release 3
+- fix: delete tags and restore vesions to retry release 2
+- fix: delete tags and restore vesions to retry release
+- fix: remove global selector (#9055)
+- fix(usePortalTarget): fix render portal use (#9018)
+
+### Housekeeping :house:
+- refactor(preview__PageHeader): separate child components to separate from `PageHeader.tsx` file (#8988)
+- docs(changelog): update for v2.84.0 (#9013)
+
 ## `@carbon/ibm-products-styles@2.80.0`
 ### Features :rocket:
 - feat: show Close icon at global header actions when expanded (#8933)

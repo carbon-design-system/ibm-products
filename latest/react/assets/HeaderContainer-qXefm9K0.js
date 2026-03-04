@@ -1,0 +1,2 @@
+var c=Object.defineProperty;var n=(e,a)=>c(e,"name",{value:a,configurable:!0});import{r as d,w as l,o as E,t as u,e as x,_ as S,P as r}from"./iframe-LiaStyBs.js";function v({render:e,isSideNavExpanded:a=!1,...i}){const[o,s]=d.useState(a);l("keydown",t=>{E(t,u)&&s(!1)});const p=d.useCallback(()=>{s(t=>!t)},[s]);return x.createElement(e,S({},i,{isSideNavExpanded:o,onClickSideNavExpand:p}))}n(v,"HeaderContainer");v.propTypes={isSideNavExpanded:r.bool,render:r.elementType.isRequired};export{v as H};
+//# sourceMappingURL=HeaderContainer-qXefm9K0.js.map

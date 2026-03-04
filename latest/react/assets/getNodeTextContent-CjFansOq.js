@@ -1,0 +1,2 @@
+var i=Object.defineProperty;var e=(r,n)=>i(r,"name",{value:n,configurable:!0});const t=e(r=>{if(r==null)return"";switch(typeof r){case"string":case"number":return r.toString();case"object":return r instanceof Array?r.map(t).join(""):"props"in r?t(r.props.children):"";case"function":return t(r());default:return""}},"getNodeTextContent");export{t as g};
+//# sourceMappingURL=getNodeTextContent-CjFansOq.js.map

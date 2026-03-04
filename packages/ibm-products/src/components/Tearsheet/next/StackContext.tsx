@@ -49,7 +49,7 @@ export const StackProvider: React.FC<StepProviderProps> = ({
   };
 
   const { width } = useResizeObserver(_containerRef);
-  console.log('_containerRef', _containerRef, width);
+
   // this method will register/ unregister tearsheet ids in a simple array based on open status
   const notifyStack = useCallback(
     (id: string, open: boolean, container: HTMLDivElement | null) => {

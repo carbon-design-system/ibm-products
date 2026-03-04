@@ -18,7 +18,11 @@ import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 
 export interface StackContextType {
   stack: string[];
-  notifyStack: (id: string, open: boolean, container: HTMLDivElement) => void;
+  notifyStack: (
+    id: string,
+    open: boolean,
+    container: HTMLDivElement | null
+  ) => void;
   getScaleFactor: (id: string) => number | null;
   getBlockSizeChange: (id: string) => string | null;
   getDepth: (id: string) => number | null;
@@ -45,7 +49,7 @@ export const StackProvider: React.FC<StepProviderProps> = ({
   };
 
   const { width } = useResizeObserver(_containerRef);
-
+  console.log('_containerRef', _containerRef, width);
   // this method will register/ unregister tearsheet ids in a simple array based on open status
   const notifyStack = useCallback(
     (id: string, open: boolean, container: HTMLDivElement | null) => {

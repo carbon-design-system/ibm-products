@@ -122,7 +122,9 @@ class CDSAboutModal extends HostListenerMixin(LitElement) {
           <cds-modal-heading>${title}</cds-modal-heading>
         </cds-modal-header>
         <cds-modal-body
-          class="${this.isOverflowing ? `${blockClass}-scroll-content` : ''}"
+          class="${this.isOverflowing
+            ? `${carbonPrefix}--modal-scroll-content`
+            : ''}"
         >
           <div class=${`${blockClass}__body-content`}>
             <div class=${`${blockClass}__version`}>${version}</div>

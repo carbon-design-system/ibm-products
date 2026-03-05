@@ -44,13 +44,15 @@ $prefix: 'c4p';
     min-block-size: $spacing-10;
     padding-block-start: 0;
     padding-inline: $spacing-05 20%;
-    &:not(.#{$prefix}--about-modal-scroll-content) {
+    &:not(.#{carbon-config.$prefix}--modal-scroll-content) {
       margin-block-end: $spacing-06;
       padding-block-end: 0;
     }
-    &.#{$prefix}--about-modal-scroll-content {
-      @extend .#{carbon-config.$prefix}--modal-scroll-content;
-    }
+  }
+
+  .#{carbon-config.$prefix}--modal-content--overflow-indicator {
+    background-image: linear-gradient(to bottom, #00000000, $layer-01);
+    inset-block-end: #{$spacing-06};
   }
 
   #{carbon-config.$prefix}-modal-heading {

@@ -16,9 +16,88 @@
 
 $block-class__next: #{$pkg-prefix}--tearsheet__next;
 $motion-duration: $duration-moderate-02;
+// viewport, capped at 500px to set an upper limit on the movement speed
+$transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
 
 /// Experimental tearsheet styles
 .#{$block-class__next} {
+  // ──────────────────────────────────────────────────────────────
+  // Presence animations (enter/exit) - default behavior
+  // ──────────────────────────────────────────────────────────────
+  &.#{$block-class__next}:not(.#{$block-class__next}--keep-mounted) {
+    animation: #{$block-class__next}--presence-tearsheet__enter $motion-duration
+      motion(entrance, expressive);
+    opacity: 1;
+
+    // extra specificity to ensure this transition overrides the carbon default
+    &.#{$block-class__next}.#{$block-class__next}
+      .#{$block-class__next}__container {
+      animation: #{$block-class__next}--presence-tearsheet--container__enter
+        $motion-duration motion(entrance, expressive);
+      transform: translate3d(0, 0, 0);
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    &.#{$block-class__next}--stacked.is-visible
+      .#{$block-class__next}__container {
+      transform: scaleX(var(--scale-factor));
+    }
+
+    &[data-tearsheet-exiting] {
+      animation: #{$block-class__next}--presence-tearsheet__exit
+        $motion-duration motion(exit, expressive) forwards;
+
+      &.#{$block-class__next}.#{$block-class__next}
+        .#{$block-class__next}__container {
+        animation: #{$block-class__next}--presence-tearsheet--container__exit
+          $motion-duration motion(entrance, expressive) forwards;
+        @media screen and (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
+      }
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Traditional visibility toggle when keepMounted is true
+  // ──────────────────────────────────────────────────────────────
+  &.#{$block-class__next}--keep-mounted {
+    &:not(.is-visible) {
+      &.#{$block-class__next}.#{$block-class__next}
+        .#{$block-class__next}__container {
+        transform: $transform-start;
+      }
+    }
+  }
+
+  @keyframes #{$block-class__next}--presence-tearsheet__enter {
+    from {
+      opacity: 0;
+      transition: none;
+    }
+  }
+
+  @keyframes #{$block-class__next}--presence-tearsheet__exit {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$block-class__next}--presence-tearsheet--container__enter {
+    from {
+      transform: $transform-start;
+      transition: none;
+    }
+  }
+
+  @keyframes #{$block-class__next}--presence-tearsheet--container__exit {
+    to {
+      transform: $transform-start;
+    }
+  }
+
   // ──────────────────────────────────────────────────────────────
   // Container
   // ──────────────────────────────────────────────────────────────
@@ -71,11 +150,16 @@ $motion-duration: $duration-moderate-02;
   }
 
   // Extra specificity to override Carbon default transition
+  // Keep transitions for stacking animations only
   &.#{$block-class__next}.#{$block-class__next}
     .#{$block-class__next}__container {
     transition:
       transform $motion-duration motion(entrance, expressive),
       max-block-size $motion-duration motion(entrance, expressive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   // ──────────────────────────────────────────────────────────────

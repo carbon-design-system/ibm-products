@@ -92,6 +92,83 @@ complexity. This is structured using the compound component pattern in React,
 with distinct and well-defined sections, so that you need to import the main
 `Tearsheet` and all other subcomponents will be static properties of this one.
 
+By default, the tearsheet unmounts from the DOM after closing for optimal
+performance and smooth animations unlike in old Tearsheet. To keep the component
+mounted in the DOM when closed (preserving state), use the `keepMounted` prop:
+`<Tearsheet keepMounted={true}>`.
+
+## Migration from Legacy Tearsheet
+
+### Benefits of the New Tearsheet
+
+- **Scalable & Composable**: Built with compound components that can be easily
+  extended and customized for any use case
+- **Improved Performance**: Presence-based rendering with automatic cleanup and
+  optimized animations
+- **Collapsible Header**: Smart header that automatically collapses on scroll to
+  maximize content space (can be disabled via `disableHeaderCollapse` prop)
+- **Better Developer Experience**: Intuitive API with clear component boundaries
+  and self-documenting structure
+- **Type Safety**: Full TypeScript support with better type inference and
+  autocomplete
+
+### Migration Guide
+
+**Old Tearsheet
+(packages/ibm-products/src/components/Tearsheet/Tearsheet.tsx):**
+
+```jsx
+<Tearsheet
+  open={open}
+  title="Title"
+  description="Description"
+  actions={[
+    { label: 'Cancel', kind: 'secondary', onClick: handleCancel },
+    { label: 'Submit', kind: 'primary', onClick: handleSubmit },
+  ]}
+  influencer={<div>Influencer content</div>}
+  onClose={handleClose}
+>
+  <div>Main content</div>
+</Tearsheet>
+```
+
+**New Tearsheet (packages/ibm-products/src/components/Tearsheet/next):**
+
+```jsx
+<Tearsheet open={open} onClose={handleClose}>
+  <Tearsheet.Header>
+    <Tearsheet.HeaderContent title="Title" description="Description" />
+  </Tearsheet.Header>
+
+  <Tearsheet.Influencer>
+    <div>Influencer content</div>
+  </Tearsheet.Influencer>
+
+  <Tearsheet.Body>
+    <Tearsheet.MainContent>
+      <div>Main content</div>
+    </Tearsheet.MainContent>
+  </Tearsheet.Body>
+
+  <Tearsheet.Footer>
+    <Button kind="secondary" onClick={handleCancel}>
+      Cancel
+    </Button>
+    <Button kind="primary" onClick={handleSubmit}>
+      Submit
+    </Button>
+  </Tearsheet.Footer>
+</Tearsheet>
+```
+
+**Note on Influencer and SummaryContent:** In narrow variant or on small
+screens, `<Tearsheet.Influencer>` and `<Tearsheet.SummaryContent>` are hidden by
+default. They can be accessed via side panels using
+`influencerPanelOpen`/`onInfluencerPanelClose` and
+`summaryPanelOpen`/`onSummaryPanelClose` props, triggered by user actions (e.g.,
+button clicks).
+
 ### Usage
 
 ```jsx

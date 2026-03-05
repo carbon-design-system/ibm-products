@@ -52,6 +52,7 @@
     "test": "yarn playwright install --with-deps && vitest run",
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json",
     "coverage": "vitest run --coverage",
+    "coverage:report": "open coverage/index.html",
     "telemetry-config": "ibmtelemetry-config generate --wc --id 8a79d901-a9c0-4672-94a4-fa8eea139832 --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components"
   },
   "dependencies": {

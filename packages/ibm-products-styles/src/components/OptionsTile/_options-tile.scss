@@ -97,6 +97,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
   background-color: $background-hover;
 }
 
+.#{$block-class}__header:has(.#{$block-class}__toggle-container:hover) {
+  background-color: transparent;
+}
+
 .#{$block-class}__header:focus {
   @include focus-outline('outline');
 }

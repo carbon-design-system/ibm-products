@@ -51,7 +51,7 @@ export interface TearsheetHeaderProps {
   className?: string;
 
   /**
-   * Default header collapse/expand while scrolling the main content can bd disabled  by setting this
+   * Default header collapse/expand while scrolling the main content can be disabled  by setting this
    */
   disableHeaderCollapse?: boolean;
 }

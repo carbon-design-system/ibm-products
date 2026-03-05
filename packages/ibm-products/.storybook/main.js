@@ -7,7 +7,7 @@
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
-import { getAutoTrack } from '../../../scripts/get-auto-track-script';
+import { getAutoTrack } from '../../../scripts/get-auto-track-script.js';
 
 const require = createRequire(import.meta.url);
 

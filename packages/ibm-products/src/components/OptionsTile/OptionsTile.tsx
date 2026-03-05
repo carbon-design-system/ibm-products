@@ -239,7 +239,19 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
       }
     };
 
-    const toggle = (evt: MouseEvent) => {
+    const handleSummaryClick = (evt: React.MouseEvent<HTMLElement>) => {
+      // Check if the click originated from the toggle button
+      const target = evt.target as HTMLElement;
+      const toggleContainer = target.closest(
+        `.${blockClass}__toggle-container`
+      );
+
+      // If click is on toggle button, don't handle expand/collapse
+      if (toggleContainer) {
+        return;
+      }
+
+      // Prevent default details toggle behavior
       evt.preventDefault();
 
       if (open) {
@@ -315,10 +327,14 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
               className={cx(`${blockClass}__header`, {
                 [`${blockClass}__header--has-toggle`]: enabled !== undefined,
               })}
-              onClick={toggle}
+              onClick={handleSummaryClick}
+              data-testid="options-tile-header"
             >
               {enabled !== undefined && (
-                <div className={`${blockClass}__toggle-container`}>
+                <div
+                  className={`${blockClass}__toggle-container`}
+                  data-testid="options-tile-toggle-container"
+                >
                   <Toggle
                     id={`${titleId}-toggle`}
                     className={`${blockClass}__toggle`}
@@ -340,7 +356,11 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
               />
               {renderTitle()}
             </summary>
-            <div className={`${blockClass}__content`} ref={contentRef}>
+            <div
+              className={`${blockClass}__content`}
+              ref={contentRef}
+              data-testid="options-tile-content"
+            >
               <Layer>
                 {isLocked && (
                   <p className={`${blockClass}__locked-text`}>

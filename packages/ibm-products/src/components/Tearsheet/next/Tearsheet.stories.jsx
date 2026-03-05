@@ -27,6 +27,8 @@ import {
   ToggletipButton,
   ToggletipContent,
 } from '@carbon/react';
+import { breakpoints } from '@carbon/layout';
+import { useMatchMedia } from '../../../global/js/hooks/useMatchMedia';
 
 import { Tearsheet } from '.';
 import styles from './_storybook-styles.scss?inline';
@@ -145,6 +147,9 @@ export const Default = ({
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
+  const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
+  const buttonSize = isSm ? 'xl' : '2xl';
   return (
     <>
       <Button
@@ -340,7 +345,7 @@ export const Default = ({
               className="step-action-button step-action-button__cancel"
               kind="ghost"
               onClick={() => setOpen(false)}
-              size="xl"
+              size={buttonSize}
             >
               Cancel
             </Button>
@@ -351,13 +356,13 @@ export const Default = ({
                 handlePrevious();
               }}
               // disabled={handleBackDisabledState(currentStep)}
-              size="xl"
+              size={buttonSize}
             >
               Back
             </Button>
             <Button
               // disabled={handleNextDisabledState(formState, currentStep)}
-              size="xl"
+              size={buttonSize}
               className="step-action-button"
             >
               {'Submit'}
@@ -373,6 +378,9 @@ export const WithInfluencer = () => {
   const launcherButtonRef = useRef(null);
   const currentStep = 1;
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
+  const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  const isSm = useMatchMedia(smMediaQuery);
+  const buttonSize = isSm ? 'xl' : '2xl';
 
   return (
     <>
@@ -553,7 +561,7 @@ export const WithInfluencer = () => {
               className="step-action-button step-action-button__cancel"
               kind="ghost"
               onClick={() => setOpen(false)}
-              size="xl"
+              size={buttonSize}
             >
               Cancel
             </Button>
@@ -564,13 +572,13 @@ export const WithInfluencer = () => {
                 handlePrevious();
               }}
               // disabled={handleBackDisabledState(currentStep)}
-              size="xl"
+              size={buttonSize}
             >
               Back
             </Button>
             <Button
               // disabled={handleNextDisabledState(formState, currentStep)}
-              size="xl"
+              size={buttonSize}
               className="step-action-button"
             >
               {'Submit'}
@@ -584,6 +592,9 @@ export const WithInfluencer = () => {
 export const WithTabs = () => {
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
+  const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  const isSm = useMatchMedia(smMediaQuery);
+  const buttonSize = isSm ? 'xl' : '2xl';
   return (
     <>
       <Button
@@ -684,7 +695,7 @@ export const WithTabs = () => {
                 className="step-action-button step-action-button__cancel"
                 kind="ghost"
                 onClick={() => console.log('clicked')}
-                size="xl"
+                size={buttonSize}
               >
                 Cancel
               </Button>
@@ -694,11 +705,11 @@ export const WithTabs = () => {
                 onClick={() => {
                   handlePrevious();
                 }}
-                size="xl"
+                size={buttonSize}
               >
                 Back
               </Button>
-              <Button size="xl" className="step-action-button">
+              <Button size={buttonSize} className="step-action-button">
                 {'Submit'}
               </Button>
             </div>
@@ -763,6 +774,9 @@ export const narrowTearsheet = () => {
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   const currentStep = 1;
+  const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  const isSm = useMatchMedia(smMediaQuery) || true; // narrow variant always uses xl
+  const buttonSize = 'xl'; // narrow variant always uses xl
   return (
     <>
       <Button
@@ -1018,6 +1032,8 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  const isSm = useMatchMedia(smMediaQuery);
 
   return (
     <>
@@ -1118,7 +1134,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
             </Tearsheet.MainContent>
 
             <Tearsheet.SummaryContent>
-              <Heading className="rightPanelHeading">Summary Details</Heading>
+              <Heading className="summaryPanelHeading">Summary Details</Heading>
               <div className="rightDetailsBody">
                 <div>
                   <label>item 1</label>
@@ -1149,7 +1165,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
                 className="step-action-button step-action-button__cancel"
                 kind="ghost"
                 onClick={() => console.log('clicked')}
-                size="xl"
+                size={isSm || variant[0] === 'narrow' ? 'xl' : '2xl'}
               >
                 Cancel
               </Button>
@@ -1159,11 +1175,14 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
                 onClick={() => {
                   handlePrevious();
                 }}
-                size="xl"
+                size={isSm || variant[0] === 'narrow' ? 'xl' : '2xl'}
               >
                 Back
               </Button>
-              <Button size="xl" className="step-action-button">
+              <Button
+                size={isSm || variant[0] === 'narrow' ? 'xl' : '2xl'}
+                className="step-action-button"
+              >
                 {'Submit'}
               </Button>
             </div>
@@ -1264,7 +1283,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
                 className="step-action-button step-action-button__cancel"
                 kind="ghost"
                 onClick={() => console.log('clicked')}
-                size="xl"
+                size={isSm || variant[1] === 'narrow' ? 'xl' : '2xl'}
               >
                 Cancel
               </Button>
@@ -1274,11 +1293,14 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
                 onClick={() => {
                   handlePrevious();
                 }}
-                size="xl"
+                size={isSm || variant[1] === 'narrow' ? 'xl' : '2xl'}
               >
                 Back
               </Button>
-              <Button size="xl" className="step-action-button">
+              <Button
+                size={isSm || variant[1] === 'narrow' ? 'xl' : '2xl'}
+                className="step-action-button"
+              >
                 {'Submit'}
               </Button>
             </div>
@@ -1362,7 +1384,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
                 className="step-action-button step-action-button__cancel"
                 kind="ghost"
                 onClick={() => console.log('clicked')}
-                size="xl"
+                size={isSm || variant[2] === 'narrow' ? 'xl' : '2xl'}
               >
                 Cancel
               </Button>
@@ -1372,11 +1394,14 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
                 onClick={() => {
                   handlePrevious();
                 }}
-                size="xl"
+                size={isSm || variant[2] === 'narrow' ? 'xl' : '2xl'}
               >
                 Back
               </Button>
-              <Button size="xl" className="step-action-button">
+              <Button
+                size={isSm || variant[2] === 'narrow' ? 'xl' : '2xl'}
+                className="step-action-button"
+              >
                 {'Submit'}
               </Button>
             </div>

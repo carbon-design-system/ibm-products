@@ -38,7 +38,6 @@
   @include type.type-style('body-compact-01');
 
   color: $text-secondary;
-
   margin-block-end: $spacing-03;
 }
 
@@ -57,7 +56,6 @@
 .create-modal__form > * {
   margin-block-end: $spacing-05;
 
-  /* stylelint-disable-next-line max-nesting-depth */
   &:last-child {
     margin-block-end: 0;
   }

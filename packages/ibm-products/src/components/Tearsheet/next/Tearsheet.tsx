@@ -304,7 +304,13 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
             size={variant === 'narrow' ? 'sm' : ''}
           >
             {header}
-            <ModalBody className={`${blockClass}__body-layout`} ref={bodyRef}>
+            <ModalBody
+              className={cx(`${blockClass}__body-layout`, {
+                [`${blockClass}__body-layout--has-influencer`]:
+                  influencer && !isSm,
+              })}
+              ref={bodyRef}
+            >
               {influencer}
 
               {body}

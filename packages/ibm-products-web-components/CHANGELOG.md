@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.34.0-rc.0`
+## `@carbon/ibm-products-web-components@0.34.0`
 ### Features :rocket:
 - feat: coachmark stackblitz example (#8948)
 

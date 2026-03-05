@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.44.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.44.0`
 ### Bug fixes :bug:
 - fix: delete tags and restore vesions to retry release 5
 - fix: delete tags and restore vesions to retry release 4

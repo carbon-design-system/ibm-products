@@ -660,7 +660,10 @@ collect:
         - inheritTypography
         - invalidLabel
         - onSave
+        - readOnlyLabel
+        - readOnlyToggleTipText
         - saveLabel
+        - toggleTipAlignment
         # EditTearsheet
         - onFormChange
         # EditUpdateCards
@@ -739,6 +742,7 @@ collect:
         - fileDropHeader
         - fileDropLabel
         - fileUploadLabel
+        - hideInputLabel
         - inputButtonIcon
         - inputButtonText
         - inputId
@@ -1237,6 +1241,15 @@ collect:
         - low
         - medium
         - unknown
+        # EditInPlace - toggleTipAlignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
         # ExampleComponent - primaryKind
         - danger
         - primary

@@ -160,9 +160,7 @@ $block-size: 38.5rem;
   }
   .#{$block-class}__notification:focus {
     border-color: $focus;
-    box-shadow:
-      inset 0 0 0 2px $focus,
-      inset 0 0 0 2px $background;
+    box-shadow: inset 0 0 0 1px $focus;
     outline: 0;
   }
   .#{$block-class}__notification {
@@ -283,6 +281,9 @@ $block-size: 38.5rem;
         opacity: 1;
       }
     }
+  }
+  .#{$block-class}__notification:focus:before {
+    display: none;
   }
   .#{$block-class}__notification-today:not(:first-of-type):before,
   .#{$block-class}__notification-yesterday:not(:first-of-type):before,

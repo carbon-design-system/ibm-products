@@ -140,6 +140,17 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
   }
 }
 
+:host(:focus) {
+  border-color: $focus;
+  box-shadow: inset 0 0 0 1px $focus;
+  outline: 0;
+
+  &::before,
+  &::after {
+    display: none;
+  }
+}
+
 :host(.#{$block-notification-class}--next) {
   &::before {
     background-color: transparent;

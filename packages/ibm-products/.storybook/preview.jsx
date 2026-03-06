@@ -12,6 +12,7 @@ import { pkg } from '../src/settings';
 import theme from './theme';
 import index from './index.scss?inline';
 import { StoryDocsPage } from '../src/global/js/utils/StoryDocsPage';
+import { allModes } from './modes';
 
 // Enable all components, whether released or not, for storybook purposes
 pkg._silenceWarnings(true);
@@ -149,6 +150,14 @@ const parameters = {
     theme,
     page: () => <StoryDocsPage />,
     codePanel: true,
+  },
+  chromatic: {
+    modes: {
+      g10: allModes['g10'],
+      g90: allModes['g90'],
+      g100: allModes['g100'],
+      'breakpoint-sm': allModes['breakpoint-sm'],
+    },
   },
 };
 

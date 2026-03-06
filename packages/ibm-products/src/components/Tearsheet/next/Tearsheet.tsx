@@ -409,38 +409,6 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       />
     );
   }
-);
-
-/**
- * Wrapper component that handles presence logic and conditionally renders TearsheetInternal.
- * This ensures that all component state and effects are only initialized when the tearsheet is present.
- */
-export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
-  (props, ref: ForwardedRef<HTMLDivElement>) => {
-    const { open = false, keepMounted = false } = props;
-    const presenceRef = useRef<HTMLDivElement>(null);
-
-    // Use presence hook for enter/exit animations (unless keepMounted is true)
-    const { isPresent, isExiting } = usePresence(
-      presenceRef,
-      keepMounted ? true : open
-    );
-
-    // Don't render if not present (after exit animation completes) - unless keepMounted is true
-    if (!keepMounted && !isPresent) {
-      return null;
-    }
-
-    // When present, render the internal component with all props
-    return (
-      <TearsheetInternal
-        {...props}
-        ref={ref}
-        presenceRef={presenceRef}
-        isExiting={isExiting}
-      />
-    );
-  }
 ) as TearsheetComponentType;
 
 export interface FooterProps {

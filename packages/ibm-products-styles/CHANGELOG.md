@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.81.0-rc.0`
+## `@carbon/ibm-products-styles@2.81.0`
 ### Features :rocket:
 - feat(editinplace): add readOnly prop (#9007)
 

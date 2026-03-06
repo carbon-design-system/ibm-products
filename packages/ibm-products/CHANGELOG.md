@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.85.0-rc.0`
+## `@carbon/ibm-products@2.85.0`
 ### Features :rocket:
 - feat: create tearsheet pattern using preview_Tearsheet (#8937)
 - feat(emptystate): code connect integration (#8954)

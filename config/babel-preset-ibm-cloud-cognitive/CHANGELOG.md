@@ -1,4 +1,4 @@
-## `@babel-preset-ibm-cloud-cognitive@0.43.0-rc.0`
+## `@babel-preset-ibm-cloud-cognitive@0.43.0`
 ### Bug fixes :bug:
 - fix: delete tags and restore vesions to retry release 5
 - fix: delete tags and restore vesions to retry release 4

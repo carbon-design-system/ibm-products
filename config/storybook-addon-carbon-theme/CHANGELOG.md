@@ -1,4 +1,4 @@
-## `@carbon/storybook-addon-theme@2.34.0-rc.0`
+## `@carbon/storybook-addon-theme@2.34.0`
 ### Bug fixes :bug:
 - fix: delete tags and restore vesions to retry release 5
 - fix: delete tags and restore vesions to retry release 4

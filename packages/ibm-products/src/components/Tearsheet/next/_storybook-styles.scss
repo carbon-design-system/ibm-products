@@ -83,10 +83,3 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
   inset-inline-start: $spacing-05;
   @include hideAtLargeScreens();
 }
-.#{$block-class__next}__header-collapsed {
-  .#{$block-class__next}__header-title {
-    svg {
-      inline-size: $spacing-05;
-    }
-  }
-}

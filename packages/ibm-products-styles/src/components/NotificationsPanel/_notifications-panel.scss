@@ -160,7 +160,9 @@ $block-size: 38.5rem;
   }
   .#{$block-class}__notification:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 1px $focus;
+    box-shadow:
+      inset 0 0 0 2px $focus,
+      inset 0 0 0 2px $background;
     outline: 0;
   }
   .#{$block-class}__notification {

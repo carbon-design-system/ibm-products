@@ -129,7 +129,7 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
 }
 
 :host(:hover),
-:host(:focus) {
+:host(:focus-visible) {
   background-color: $layer-accent-01;
   .#{$block-notification-class}__dismiss-single-button {
     opacity: 1;
@@ -140,7 +140,7 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
   }
 }
 
-:host(:focus) {
+:host(:focus-visible) {
   border-color: $focus;
   box-shadow:
     inset 0 0 0 2px $focus,

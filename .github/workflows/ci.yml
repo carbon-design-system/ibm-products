@@ -16,7 +16,6 @@ concurrency:
 
 jobs:
   build:
-    if: false # Temporarily disabled to test Chromatic
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -77,7 +76,6 @@ jobs:
         run: yarn ci-check:spellcheck
 
   test-c4p:
-    if: false # Temporarily disabled to test Chromatic
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -99,7 +97,6 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   test-c4p-wc:
-    if: false # Temporarily disabled to test Chromatic
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -124,7 +121,6 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   avt-runner:
-    if: false # Temporarily disabled to test Chromatic
     strategy:
       matrix:
         shardIndex: [1, 2, 3, 4]
@@ -220,12 +216,10 @@ jobs:
           retention-days: 14
 
   vrt-runner:
-    if: false # Temporarily disabled to test Chromatic
     runs-on: ubuntu-latest
-    # Original condition:
-    # if:
-    #   ${{ github.repository == 'carbon-design-system/ibm-products' &&
-    #   github.event.pull_request.draft == false }}
+    if:
+      ${{ github.repository == 'carbon-design-system/ibm-products' &&
+      github.event.pull_request.draft == false }}
     env:
       PERCY_TOKEN: web_d04495b0b413d61c2ea6b9118d1748b43f4fdd58d17ebe453ef8e0016b5766e4
     steps:
@@ -296,7 +290,6 @@ jobs:
           autoAcceptChanges: 'main' # Option to accept all changes on main
           # 👇 Add debug: true and print dependency trace for changed files to help with debugging:
           traceChanged: 'expanded'
-          debug: true
           onlyChanged: true # 👈 Required option to enable TurboSnap
           externals: |
             packages/ibm-products/src/**

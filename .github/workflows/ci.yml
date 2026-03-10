@@ -288,12 +288,12 @@ jobs:
           buildScriptName: storybook:build
           zip: true # Runs Chromatic with the option to compress the build output
           autoAcceptChanges: 'main' # Option to accept all changes on main
-          # 👇 Add debug: true and print dependency trace for changed files to help with debugging:
-          traceChanged: 'expanded'
-          onlyChanged: true # 👈 Required option to enable TurboSnap
-          externals: |
-            packages/ibm-products/src/**
-            packages/ibm-products-styles/**
+          # 👇 TurboSnap disabled - Vite doesn't generate webpack-stats-json needed for TurboSnap
+          # Can be re-enabled when Chromatic adds full Vite support
+          # onlyChanged: true
+          # externals: |
+          #   packages/ibm-products/src/**
+          #   packages/ibm-products-styles/**
         env:
           # 👇 Set to the PR branch if it's a PR; otherwise, falls back to the pushed branch name
           CHROMATIC_BRANCH:

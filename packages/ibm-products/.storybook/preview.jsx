@@ -25,7 +25,8 @@ const Style = ({ children, styles }) => (
   </>
 );
 
-const isDev = CONFIG_TYPE === 'DEVELOPMENT';
+const isDev =
+  typeof CONFIG_TYPE !== 'undefined' && CONFIG_TYPE === 'DEVELOPMENT';
 if (isDev) {
   // use a prefix in all development storybook
   if (!pkg.originalPrefix) {

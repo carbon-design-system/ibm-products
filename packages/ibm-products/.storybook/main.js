@@ -131,6 +131,9 @@ export default {
           },
         },
       },
+      experimental: {
+        enableNativePlugin: true,
+      },
     });
   },
 

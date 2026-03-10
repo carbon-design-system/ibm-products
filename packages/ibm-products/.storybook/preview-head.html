@@ -28,9 +28,12 @@
   }
 </style>
 
-<script>
-  // Add null checks for all window properties
-  if (typeof window !== 'undefined') {
+<!-- Analytics scripts - conditionally loaded (disabled in Chromatic) -->
+<script type="module">
+  import isChromatic from 'chromatic/isChromatic';
+
+  // Only load analytics if NOT in Chromatic environment
+  if (!isChromatic() && typeof window !== 'undefined') {
     window.digitalData = {
       page: {
         pageInfo: {

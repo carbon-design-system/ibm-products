@@ -14,6 +14,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/search/index.js';
 import '@carbon/web-components/es/components/tag/index.js';
+import '../add-select-breadcrumbs/index.js';
 import { prefix } from '../../../globals/settings';
 import styles from './add-select-body.scss?lit';
 
@@ -83,6 +84,12 @@ class CDSAddSelectBody extends LitElement {
   itemCount = 0;
 
   /**
+   * Navigation path for breadcrumbs
+   */
+  @property({ type: Array })
+  path: Array<{ id: string; title: string }> = [];
+
+  /**
    * Handle search input
    */
   private _handleSearch(event: CustomEvent) {
@@ -101,6 +108,24 @@ class CDSAddSelectBody extends LitElement {
     );
   }
 
+  /**
+   * Handle breadcrumb click
+   */
+  private _handleBreadcrumbClick(event: CustomEvent) {
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: event.detail,
+    };
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSAddSelectBody).eventBreadcrumbClick,
+        init
+      )
+    );
+  }
+
   render() {
     const {
       multi,
@@ -109,8 +134,10 @@ class CDSAddSelectBody extends LitElement {
       globalSearchPlaceholder,
       searchResultsTitle,
       itemCount,
+      path,
       _searchTerm: searchTerm,
       _handleSearch: handleSearch,
+      _handleBreadcrumbClick: handleBreadcrumbClick,
     } = this;
 
     const bodyClasses = classMap({
@@ -134,12 +161,26 @@ class CDSAddSelectBody extends LitElement {
               ></cds-search>
             </div>
 
-            <!-- Sub-header with item count -->
+            <!-- Sub-header with breadcrumbs or item label -->
             <div class="${blockClass}__sub-header">
               <div class="${blockClass}__tags">
-                <p class="${blockClass}__tags-label">
-                  ${searchTerm ? searchResultsTitle : itemsLabel}
-                </p>
+                ${searchTerm
+                  ? html`
+                      <p class="${blockClass}__tags-label">
+                        ${searchResultsTitle}
+                      </p>
+                    `
+                  : path && path.length > 0
+                    ? html`
+                        <c4p-add-select-breadcrumbs
+                          ?multi=${multi}
+                          .path=${path}
+                          @c4p-add-select-breadcrumbs-click=${handleBreadcrumbClick}
+                        ></c4p-add-select-breadcrumbs>
+                      `
+                    : html`
+                        <p class="${blockClass}__tags-label">${itemsLabel}</p>
+                      `}
                 <cds-tag type="gray" size="sm">${itemCount}</cds-tag>
               </div>
             </div>
@@ -159,6 +200,13 @@ class CDSAddSelectBody extends LitElement {
    */
   static get eventSearch() {
     return `${prefix}-add-select-body-search`;
+  }
+
+  /**
+   * The name of the custom event fired when breadcrumb is clicked
+   */
+  static get eventBreadcrumbClick() {
+    return `${prefix}-add-select-body-breadcrumb-click`;
   }
 
   static styles = styles;

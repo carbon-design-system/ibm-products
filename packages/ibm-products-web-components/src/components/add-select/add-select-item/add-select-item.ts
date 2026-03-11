@@ -28,6 +28,7 @@ const blockClass = `${prefix}--add-select-item`;
  * @slot icon - Optional icon slot
  * @slot meta - Optional metadata slot
  * @fires c4p-add-select-item-select - Fired when item is selected/deselected
+ * @fires c4p-add-select-item-select - Fired when navigating to children
  */
 @customElement(`${prefix}-add-select-item`)
 class CDSAddSelectItem extends LitElement {
@@ -86,6 +87,41 @@ class CDSAddSelectItem extends LitElement {
   hasChildren = false;
 
   /**
+   * Parent ID for hierarchical navigation
+   */
+  @property({ type: String, attribute: 'parent-id' })
+  parentId = '';
+
+  /**
+   * Handle navigation to children
+   */
+  private _handleNavigate(event: Event) {
+    event.stopPropagation();
+
+    if (!this.hasChildren) {
+      return;
+    }
+
+    // Emit navigation event
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        itemId: this.itemId,
+        title: this.title,
+        parentId: this.parentId,
+      },
+    };
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSAddSelectItem).eventNavigate,
+        init
+      )
+    );
+  }
+
+  /**
    * Handle selection change
    */
   private _handleSelect(event: Event) {
@@ -122,6 +158,9 @@ class CDSAddSelectItem extends LitElement {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       this._handleSelect(event);
+    } else if (event.key === 'ArrowRight' && this.hasChildren) {
+      event.preventDefault();
+      this._handleNavigate(event);
     }
   }
 
@@ -193,7 +232,13 @@ class CDSAddSelectItem extends LitElement {
 
             ${hasChildren
               ? html`
-                  <div class="${blockClass}-nav-indicator">
+                  <div
+                    class="${blockClass}-nav-indicator"
+                    @click=${this._handleNavigate}
+                    role="button"
+                    tabindex="-1"
+                    aria-label="Navigate to children"
+                  >
                     <slot name="item-nav-icon">
                       ${iconLoader(ChevronRight16, {
                         slot: 'icon',
@@ -213,6 +258,13 @@ class CDSAddSelectItem extends LitElement {
    */
   static get eventSelect() {
     return `${prefix}-add-select-item-select`;
+  }
+
+  /**
+   * The name of the custom event fired when navigating to children
+   */
+  static get eventNavigate() {
+    return `${prefix}-add-select-item-navigate`;
   }
 
   static styles = styles;

@@ -8,7 +8,7 @@
  */
 
 import { html } from 'lit';
-import '../../../examples/single-add-select/src/single-add-select';
+import '../../../examples/add-select/src/single-add-select/single-add-select';
 
 export default {
   title: 'Patterns/Add and select/Single add select',

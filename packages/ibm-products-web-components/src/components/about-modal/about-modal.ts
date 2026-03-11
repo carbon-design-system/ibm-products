@@ -125,13 +125,11 @@ class CDSAboutModal extends HostListenerMixin(LitElement) {
           class="${this.isOverflowing
             ? `${carbonPrefix}--modal-scroll-content`
             : ''}"
+          tabindex="0"
+          role="region"
+          aria-label="Modal content"
         >
-          <div
-            class=${`${blockClass}__body-content`}
-            tabindex="0"
-            role="region"
-            aria-label="Modal content"
-          >
+          <div class=${`${blockClass}__body-content`}>
             <div class=${`${blockClass}__version`}>${version}</div>
             ${links &&
             links.length > 0 &&

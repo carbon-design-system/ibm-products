@@ -10,8 +10,9 @@
 @use '@carbon/styles/scss/spacing' as *;
 
 #main-content {
+  align-content: center;
   padding: $spacing-05;
-  margin-block: 20%;
+  min-block-size: 100vh;
 }
 
 .user-avatar-story__theme-section {

@@ -53,7 +53,11 @@ const argTypes = {
     control: 'text',
     description: 'Pass in the display name to have it shown on hover',
   },
-  name: { control: 'text', description: 'Specify the name of the user' },
+  name: {
+    control: 'text',
+    description:
+      "When passing the name prop, either send the initials to be used or the user's full name. The first two capital letters of the user's name will be used as the name.",
+  },
   size: {
     control: { type: 'radio' },
     description: 'Set the size of the avatar circle',
@@ -78,7 +82,7 @@ const argTypes = {
 
 export const Default = {
   args: {
-    tooltipAlignment: POPOVER_ALIGNMENT.BOTTOM,
+    tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
     size: 'md',
     tooltipText: 'TW, Thomas J. Watson user profile',
     name: 'thomas j. watson',
@@ -162,7 +166,7 @@ export const Default = {
 
 export const WithIcon = {
   args: {
-    tooltipAlignment: POPOVER_ALIGNMENT.BOTTOM,
+    tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
     size: 'md',
     tooltipText: 'TW, Thomas J. Watson user profile',
     name: 'Thomas J. Watson',
@@ -188,7 +192,7 @@ export const WithIcon = {
 
 export const WithImage = {
   args: {
-    tooltipAlignment: POPOVER_ALIGNMENT.BOTTOM,
+    tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
     size: 'md',
     image:
       'https://assets.ibm.com/is/image/ibm/christina-frohn?wid=2760&hei=1552&fit=constrain,0&qlt=85,0&fmt=png-alpha',

@@ -57,6 +57,8 @@ import { usePortalTarget } from '../../../global/js/hooks/usePortalTarget';
 import { useStackContext } from './StackContext';
 import { useMatchMedia } from '../../../global/js/hooks/useMatchMedia';
 import { useId } from '../../../global/js/utils/useId';
+import { usePresence } from '../usePresence';
+import { useMergedRefs } from '../../../global/js/hooks/useMergedRefs';
 
 /**
  * ----------
@@ -128,6 +130,12 @@ export interface TearsheetProps extends ComposedModalProps {
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
   portalTarget?: HTMLElement;
+  /**
+   * If true, the tearsheet will remain mounted in the DOM when closed, using CSS to hide it.
+   * By default (false), the tearsheet unmounts from the DOM after the exit animation completes.
+   * Set to true if you need to preserve component state or avoid remounting overhead.
+   */
+  keepMounted?: boolean;
 }
 
 export type TearsheetComponentType = React.ForwardRefExoticComponent<
@@ -146,7 +154,17 @@ export type TearsheetComponentType = React.ForwardRefExoticComponent<
   Footer: FC<FooterProps>;
 };
 
-export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
+/**
+ * Internal component that handles the actual tearsheet rendering.
+ * This component is always "present" when mounted - the wrapper handles presence logic.
+ */
+const TearsheetInternal = forwardRef<
+  HTMLDivElement,
+  TearsheetProps & {
+    isExiting?: boolean;
+    presenceRef?: RefObject<HTMLDivElement | null>;
+  }
+>(
   (
     {
       children,
@@ -162,14 +180,17 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
       portalTarget,
       verticalGap,
       containerClassName,
+      keepMounted = false,
+      isExiting = false,
+      presenceRef,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const carbonPrefix = usePrefix();
-    const localRef = useRef(undefined);
+    const localRef = useRef<HTMLDivElement>(null);
     const bodyRef = useRef<HTMLDivElement>(null);
-    const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
+    const mergedRefs = useMergedRefs([ref, localRef, presenceRef]);
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
 
@@ -193,9 +214,9 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
 
     useIsomorphicEffect(() => {
       const AILabelWidth =
-        modalRef.current?.querySelector(`.${carbonPrefix}--ai-label`)
+        localRef.current?.querySelector(`.${carbonPrefix}--ai-label`)
           ?.clientWidth ?? 0;
-      const headerActionMarginRight = AILabelWidth + 24 + (isSm ? 8 : 0); // 24 is to compeNsate for close button
+      const headerActionMarginRight = AILabelWidth + 24 + (isSm ? 8 : 0); // 24 is to compensate for close button
       document.documentElement.style.setProperty(
         '--tearsheet-header-action-offset',
         `${headerActionMarginRight}px`
@@ -230,27 +251,32 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
     ]);
 
     useIsomorphicEffect(() => {
-      if (bodyRef.current) {
-        notifyStack?.(uniqueId.current, open, bodyRef.current);
+      const id = uniqueId.current;
+      if (localRef.current && open) {
+        notifyStack?.(id, true, localRef.current);
       }
 
+      // Cleanup when component unmounts
+      return () => {
+        notifyStack?.(id, false, null);
+      };
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open]);
+    }, [localRef.current, open]);
 
     useEffect(() => {
-      if (stack?.length > 0) {
+      if (stack?.length > 0 && localRef.current) {
         const stackDepth = getDepth?.(uniqueId.current),
           blockSizeChange = getBlockSizeChange?.(uniqueId.current),
           scaleFactor = getScaleFactor?.(uniqueId.current);
 
         setDepth(stackDepth as number);
 
-        modalRef.current.style.setProperty('--stack-depth', stackDepth + '');
-        modalRef.current.style.setProperty(
+        localRef.current.style.setProperty('--stack-depth', stackDepth + '');
+        localRef.current.style.setProperty(
           '--block-size-change',
           blockSizeChange
         );
-        modalRef.current.style.setProperty('--scale-factor', scaleFactor + '');
+        localRef.current.style.setProperty('--scale-factor', scaleFactor + '');
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stack]);
@@ -285,13 +311,19 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
                 !!rest.decorator &&
                 rest.decorator['type']?.displayName !== 'AILabel',
               [`${blockClass}--has-close`]: hasCloseIcon,
+              ['is-visible']: keepMounted ? open : true, // When keepMounted, use open prop; otherwise always visible
+              [`${blockClass}--keep-mounted`]: keepMounted,
             })}
             containerClassName={cx(
               `${blockClass}__container`,
               containerClassName
             )}
-            {...{ onClose, open, selectorPrimaryFocus }}
-            ref={modalRef}
+            {...{
+              onClose,
+              open: keepMounted ? open : true, // When keepMounted, use actual open; otherwise always open
+              selectorPrimaryFocus,
+            }}
+            ref={mergedRefs}
             selectorsFloatingMenus={[
               `.${carbonPrefix}--overflow-menu-options`,
               `.${carbonPrefix}--tooltip`,
@@ -302,6 +334,7 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
             ]}
             isFullWidth={true}
             size={variant === 'narrow' ? 'sm' : ''}
+            data-tearsheet-exiting={isExiting ? true : undefined}
           >
             {header}
             <ModalBody
@@ -320,6 +353,38 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
           </ComposedModal>
         </FeatureFlags>
       </TearsheetContext.Provider>
+    );
+  }
+);
+
+/**
+ * Wrapper component that handles presence logic and conditionally renders TearsheetInternal.
+ * This ensures that all component state and effects are only initialized when the tearsheet is present.
+ */
+export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
+  (props, ref: ForwardedRef<HTMLDivElement>) => {
+    const { open = false, keepMounted = false } = props;
+    const presenceRef = useRef<HTMLDivElement>(null);
+
+    // Use presence hook for enter/exit animations (unless keepMounted is true)
+    const { isPresent, isExiting } = usePresence(
+      presenceRef,
+      keepMounted ? true : open
+    );
+
+    // Don't render if not present (after exit animation completes) - unless keepMounted is true
+    if (!keepMounted && !isPresent) {
+      return null;
+    }
+
+    // When present, render the internal component with all props
+    return (
+      <TearsheetInternal
+        {...props}
+        ref={ref}
+        presenceRef={presenceRef}
+        isExiting={isExiting}
+      />
     );
   }
 ) as TearsheetComponentType;

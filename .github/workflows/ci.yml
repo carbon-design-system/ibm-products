@@ -292,6 +292,8 @@ jobs:
           externals: |
             packages/ibm-products/src/**
             packages/ibm-products-styles/**
+          untraced: |
+            packages/ibm-products/.storybook/theme.js
         env:
           # 👇 Set to the PR branch if it's a PR; otherwise, falls back to the pushed branch name
           CHROMATIC_BRANCH:

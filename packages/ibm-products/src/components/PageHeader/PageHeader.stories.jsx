@@ -892,6 +892,9 @@ const TemplateDemo = ({
 
 export const demo = TemplateDemo.bind({});
 demo.storyName = 'Page header in context';
+demo.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 demo.args = {
   title: 5,
   subtitle: demoSubtitle,

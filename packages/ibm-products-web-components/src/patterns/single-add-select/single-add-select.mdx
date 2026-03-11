@@ -1,0 +1,197 @@
+import { Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import SingleAddSelectStories from './single-add-select.stories';
+
+<Meta of={SingleAddSelectStories} />
+
+# Single add select
+
+[Single add select usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/)
+
+## Overview
+
+The single add select pattern is used to add or select a single item from larger lists or hierarchies. It provides a streamlined interface for users to search, filter, and select one item from a collection.
+
+## Coded examples
+
+Patterns have multiple ways of accomplishing a user need and typically use a combination of components with additional design considerations. The pattern code we share is meant to serve as an example implementation that can be built and extended further.
+
+#### Ingredients
+
+To build this pattern, we recommend including the following components:
+
+- [c4p-add-select](/?path=/docs/components-add-select--docs) - Wrapper component
+- [c4p-add-select-body](/?path=/docs/components-add-select--docs) - Container with search and actions
+- [c4p-add-select-list](/?path=/docs/components-add-select--docs) - List container
+- [c4p-add-select-item](/?path=/docs/components-add-select--docs) - Individual selectable items
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview)
+- [cds-search](https://web-components.carbondesignsystem.com/?path=/docs/components-search--overview)
+- [cds-radio-button](https://web-components.carbondesignsystem.com/?path=/docs/components-radio-button--overview)
+- [cds-toast-notification](https://web-components.carbondesignsystem.com/?path=/docs/components-notifications-toast--overview)
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/single-add-select)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/single-add-select)
+
+## Single item selection
+
+The single add select pattern allows users to select one item from a list. It includes:
+
+- A search/filter capability to narrow down options
+- Radio button selection for single choice
+- Clear visual feedback on the selected item
+- Submit and cancel actions
+
+### Example
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/search/index.js';
+import '@carbon/web-components/es/components/radio-button/index.js';
+import '@carbon/web-components/es/components/notification/toast-notification.js';
+
+import '../../../src/components/add-select/add-select/add-select';
+import '../../../src/components/add-select/add-select-body/add-select-body';
+import '../../../src/components/add-select/add-select-list/add-select-list';
+import '../../../src/components/add-select/add-select-item/add-select-item';
+```
+
+#### HTML
+
+```html
+<cds-button
+  type="button"
+  kind="primary"
+  size="md"
+  @click="${this._openAddSelect}"
+>
+  Select an item
+</cds-button>
+
+<c4p-add-select
+  ?open="${this._open}"
+  title="Select an item"
+  description="Choose one item from the list below"
+  items-label="Available items"
+  global-search-label="Search items"
+  global-search-placeholder="Search..."
+  close-button-text="Cancel"
+  submit-button-text="Select"
+  no-results-title="No results found"
+  no-results-description="Try adjusting your search"
+  search-results-title="Search results"
+  @c4p-add-select-close="${this._handleClose}"
+  @c4p-add-select-submit="${this._handleSubmit}"
+>
+  <c4p-add-select-body
+    title="Select an item"
+    description="Choose one item from the list below"
+    items-label="Available items"
+    global-search-label="Search items"
+    global-search-placeholder="Search..."
+    close-button-text="Cancel"
+    submit-button-text="Select"
+    item-count="${this._filteredItems.length}"
+    search-results-title="Search results"
+    @c4p-add-select-body-close="${this._handleClose}"
+    @c4p-add-select-body-submit="${this._handleSubmit}"
+    @c4p-add-select-body-search="${this._handleSearch}"
+  >
+    <c4p-add-select-list>
+      ${this._filteredItems.map(
+        (item, index) => html`
+          <c4p-add-select-item
+            item-id="${item.id}"
+            title="${item.title}"
+            subtitle="${item.subtitle}"
+            value="${item.value}"
+            ?selected="${this._selectedItem === item.id}"
+            tab-index="${index === 0 ? 0 : -1}"
+          ></c4p-add-select-item>
+        `
+      )}
+    </c4p-add-select-list>
+  </c4p-add-select-body>
+</c4p-add-select>
+
+<cds-toast-notification
+  class="notification"
+  kind="success"
+  title="Success"
+  subtitle="Item has been selected."
+  low-contrast="true"
+  timeout="3000"
+  @cds-notification-closed="${this._onNotificationClose}"
+></cds-toast-notification>
+```
+
+## Key features
+
+### Search and filter
+
+The pattern includes built-in search functionality that allows users to quickly find items by typing. The search filters items in real-time based on the title and subtitle.
+
+### Single selection
+
+Users can select only one item at a time using radio buttons. The selected item is visually highlighted and the submit button is enabled only when an item is selected.
+
+### Event handling
+
+The pattern emits custom events for key interactions:
+
+- `c4p-add-select-close` - Fired when the dialog is closed
+- `c4p-add-select-submit` - Fired when selection is submitted
+- `c4p-add-select-body-search` - Fired when search term changes
+
+### Accessibility
+
+The pattern follows accessibility best practices:
+
+- Proper ARIA attributes for screen readers
+- Keyboard navigation support
+- Focus management
+- Clear visual indicators for selected items
+
+## Component properties
+
+### c4p-add-select
+
+- `open` (Boolean) - Controls dialog visibility
+- `title` (String) - Dialog title
+- `description` (String) - Dialog description
+- `items-label` (String) - Label for items section
+- `global-search-label` (String) - Search input label
+- `global-search-placeholder` (String) - Search placeholder text
+- `close-button-text` (String) - Cancel button text
+- `submit-button-text` (String) - Submit button text
+- `no-results-title` (String) - Empty state title
+- `no-results-description` (String) - Empty state description
+
+### c4p-add-select-item
+
+- `item-id` (String) - Unique identifier
+- `title` (String) - Item title
+- `subtitle` (String) - Item subtitle
+- `value` (String) - Item value
+- `selected` (Boolean) - Selection state
+- `disabled` (Boolean) - Disabled state
+- `tab-index` (Number) - Tab index for keyboard navigation
+
+## Best practices
+
+1. **Provide clear labels**: Use descriptive titles and subtitles for items to help users make informed selections.
+
+2. **Enable search for large lists**: For lists with more than 10 items, search functionality becomes essential.
+
+3. **Show feedback**: Display a success notification after selection to confirm the action.
+
+4. **Handle empty states**: Provide helpful messages when no results are found.
+
+5. **Maintain selection state**: Keep track of the selected item and display it clearly in the UI.

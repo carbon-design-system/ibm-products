@@ -93,5 +93,3 @@ class CDSAddSelectBreadcrumbs extends LitElement {
 }
 
 export default CDSAddSelectBreadcrumbs;
-
-// Made with Bob

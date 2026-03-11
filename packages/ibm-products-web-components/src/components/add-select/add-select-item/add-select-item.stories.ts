@@ -150,5 +150,3 @@ const meta = {
 };
 
 export default meta;
-
-// Made with Bob

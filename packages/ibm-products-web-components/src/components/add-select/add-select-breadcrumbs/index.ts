@@ -8,5 +8,3 @@
  */
 
 import './add-select-breadcrumbs';
-
-// Made with Bob

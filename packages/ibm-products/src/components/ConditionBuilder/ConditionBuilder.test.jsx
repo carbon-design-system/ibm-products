@@ -915,6 +915,46 @@ describe(componentName, () => {
     expect(selectedItem).toBeVisible();
   });
 
+  it('should keep the popover open when a date is selected from the flatpickr calendar', async () => {
+    render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Date',
+        })
+      )
+    );
+
+    const isOperator = screen.getByRole('option', {
+      name: 'is',
+    });
+    await act(() => userEvent.click(isOperator));
+
+    // The value field popover should be open — the date input is rendered inside it
+    expect(document.querySelector('#datePicker')).toBeInTheDocument();
+
+    // Simulate a click inside a flatpickr calendar (as if the user is picking a date).
+    // The flatpickr calendar is appended outside the popover DOM, so Carbon's Popover
+    // fires onRequestClose when it detects an outside click. Our workaround should
+    // suppress this and keep the popover open.
+    const flatpickrCalendar = document.createElement('div');
+    flatpickrCalendar.className = 'flatpickr-calendar';
+    document.body.appendChild(flatpickrCalendar);
+
+    await act(() => {
+      fireEvent.click(flatpickrCalendar);
+    });
+
+    // The date input should still be in the document (popover should remain open)
+    expect(document.querySelector('#datePicker')).toBeInTheDocument();
+
+    // Cleanup
+    document.body.removeChild(flatpickrCalendar);
+  });
+
   it('render the component with input type date range', async () => {
     render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
 

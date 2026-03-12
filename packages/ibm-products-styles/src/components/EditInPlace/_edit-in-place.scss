@@ -39,8 +39,15 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
   --#{$block-class}--size: #{$spacing-09};
 }
 
-.#{$block-class}--readonly {
-  cursor: not-allowed;
+.#{$block-class}__toggletip-wrapper {
+  display: block;
+  inline-size: 100%;
+}
+
+.#{$block-class}__toggletip-wrapper
+  .#{carbon-config.$prefix}--toggletip-button {
+  display: block;
+  inline-size: 100%;
 }
 
 .#{$block-class}:hover {
@@ -142,7 +149,8 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
   }
 }
 
-.#{$block-class}--focused .#{$block-class}__toolbar {
+.#{$block-class}--focused:not(.#{$block-class}--readonly)
+  .#{$block-class}__toolbar {
   overflow: initial;
 
   animation: slide-in $duration-moderate-01 motion(entrance, productive);

@@ -1,4 +1,23 @@
-## `@carbon/ibm-products-web-components@0.33.0-rc.0`
+## `@carbon/ibm-products-web-components@0.34.0`
+### Features :rocket:
+- feat: coachmark stackblitz example (#8948)
+
+### Bug fixes :bug:
+- fix: delete tags and restore vesions to retry release 5
+- fix: add js extension for imports
+- fix: delete tags and restore vesions to retry release 4
+- fix: delete tags and restore vesions to retry release 3
+- fix: delete tags and restore vesions to retry release 2
+- fix: delete tags and restore vesions to retry release
+- fix(coachmark): enable keyboard dragging for floating variant (#9031)
+- fix(guide-banner): Fix follow up issues related to snapscroll (#8998)
+- fix(security): upgrade @figma/code-connect to 1.4.0 (#9016)
+
+### Housekeeping :house:
+- chore(options-tile): refactor header (#9022)
+- docs(changelog): update for v2.84.0 (#9013)
+
+## `@carbon/ibm-products-web-components@0.33.0`
 ### Features :rocket:
 - feat: show close icon when panels are open (#8951)
 - feat(page-header):  code connect integration (#8868)

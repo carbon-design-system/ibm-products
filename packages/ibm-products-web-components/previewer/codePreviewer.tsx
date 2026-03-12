@@ -26,6 +26,7 @@ let componentNames: string[];
 interface ComponentSources {
   carbon: string[];
   ibmProducts: string[];
+  ibmProductsSubComp: string[];
   icons: string[];
   unknown: string[];
 }
@@ -51,8 +52,6 @@ export const stackblitzPrefillConfig = async ({
     story.parameters.docs.source.originalSource,
     args
   );
-  console.log(componentName);
-
   //get story assets - fetch only svg
   function getStoryAssetFiles(componentName?: string) {
     if (!componentName) {
@@ -230,8 +229,11 @@ const filterStoryCode = (storyCode, args) => {
     .replace(/context\.viewMode\s*!==\s*'docs'/g, 'false')
     // Remove quotes/action handlers (unchanged)
     .replace(/^"|"$/g, '')
-    //Remove the args block and the render wrapper
-    .replace(/{\s*args:\s*{[\s\S]*?}\s*,\s*render:\s*args\s*=>\s*{/, '')
+    //Remove the args block and the render wrapper (with or without TypeScript type annotations)
+    .replace(
+      /{\s*args:\s*{[\s\S]*?}\s*,\s*render:\s*\(?\s*args\s*(?::\s*any)?\s*\)?\s*=>\s*{/,
+      ''
+    )
     //replace the render closing braces
     .replace(/}\s*$/, '')
     // Remove <style>${styles}</style> injections anywhere
@@ -279,6 +281,26 @@ const filterStoryCode = (storyCode, args) => {
   return storyCodeUpdated;
 };
 
+const getComponentImportPath = (
+  comp: string,
+  allComponents: string[]
+): string => {
+  // Check if this component is a subcomponent of another component
+  // e.g., coachmark-beacon, coachmark-body are subcomponents of coachmark
+  const parts = comp.split('-');
+
+  for (let i = parts.length - 1; i >= 1; i--) {
+    const potentialParent = parts.slice(0, i).join('-');
+    // Check if the parent exists in the components list
+    if (allComponents.includes(potentialParent)) {
+      // This is a subcomponent, use nested path
+      return `${potentialParent}/${comp}`;
+    }
+  }
+  // Not a subcomponent, use regular path
+  return comp;
+};
+
 const appGenerator = async (
   storyCode: string,
   customImports: Array<string>,
@@ -291,8 +313,6 @@ const appGenerator = async (
     icons: matchedIcons,
     unknown: unknownComponents,
   } = findComponentsInCode(storyCode);
-  console.log('customFunctionDefs', customFunctionDefs);
-
   if (unknownComponents.length > 0) {
     storyCode = removeUnknownComponents(storyCode, unknownComponents);
   }
@@ -313,16 +333,16 @@ const appGenerator = async (
   // Generate App.jsx code
   const app = `
 
-  import { LitElement, html } from 'lit';
+  import { LitElement, html, unsafeCSS } from 'lit';
   import { customElement } from 'lit/decorators.js';
   ${customImports?.length > 0 ? customImports?.map((customImport) => customImport) : ''}
   ${
     matchedComponents.length > 0
       ? matchedComponents
-          .map(
-            (comp) =>
-              `import '@carbon/ibm-products-web-components/es/components/${comp}/index.js';`
-          )
+          .map((comp: string) => {
+            const importPath = getComponentImportPath(comp, matchedComponents);
+            return `import '@carbon/ibm-products-web-components/es/components/${importPath}/index.js';`;
+          })
           .join('\n')
       : ''
   }
@@ -337,9 +357,13 @@ const appGenerator = async (
        : ''
    }
   ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons";` : ''}
+  import styles from './index.scss?inline';
+  
   @customElement('my-app')
   export class MyApp extends LitElement {
-    render() { 
+    static styles = unsafeCSS(styles);
+    
+    render() {
       const prefix = 'c4p';
       ${customFunctionDefs?.length > 0 ? customFunctionDefs.join('\n') : ''}
       ${hasArgs ? formattedArgs : ''}
@@ -365,6 +389,7 @@ const findComponentsInCode = (code: string): ComponentSources => {
   const result: ComponentSources = {
     carbon: [],
     ibmProducts: [],
+    ibmProductsSubComp: [],
     icons: [],
     unknown: [],
   };
@@ -385,6 +410,7 @@ const findComponentsInCode = (code: string): ComponentSources => {
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join('')
   );
+
   componentNamesInCode.forEach((component) => {
     //c4p-user-avatar to UserAvatar
     const normalized = component
@@ -399,6 +425,32 @@ const findComponentsInCode = (code: string): ComponentSources => {
       result.ibmProducts.push(component.replace(/^(c4p-)/i, ''));
     } else if (iconsNames.includes(component)) {
       result.icons.push(component);
+    } else if (component.startsWith('c4p-')) {
+      // Check if this is a subcomponent of a known c4p component
+      // e.g., c4p-coachmark-body is a subcomponent of c4p-coachmark
+      // Extract parent component names by removing the last segment
+      const parts = component.split('-');
+      let isSubcomponent = false;
+
+      for (let i = parts.length - 1; i >= 2; i--) {
+        const potentialParent = parts.slice(0, i).join('-');
+        const parentNormalized = potentialParent
+          .replace(/^(c4p-)/i, '')
+          .split('-')
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join('');
+
+        if (normalizedProducts.includes(parentNormalized)) {
+          // This is a subcomponent of a known product component
+          result.ibmProductsSubComp.push(component.replace(/^(c4p-)/i, ''));
+          isSubcomponent = true;
+          break;
+        }
+      }
+
+      if (!isSubcomponent) {
+        result.unknown.push(component);
+      }
     } else {
       result.unknown.push(component);
     }

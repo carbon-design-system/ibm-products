@@ -2113,8 +2113,6 @@ describe(componentName, () => {
   };
 
   it('should render sticky action column and click each menu item', async () => {
-    const user = userEvent.setup({ delay: null });
-    const { click } = user;
     render(<ActionsColumnExample data-testid={dataTestId} />);
 
     const tableRows = screen.getAllByRole('row');
@@ -2137,35 +2135,53 @@ describe(componentName, () => {
     const overflowMenu = within(bodyRows[0]).getByRole('button', {
       name: 'Options',
     });
-    await click(overflowMenu);
+    fireEvent.click(overflowMenu);
 
     // Click each item inside of overflow menu, menu closes after clicking on a menu item
     // so we need to click the overflow menu again each time to view the menu items again
+    await waitFor(() => {
+      expect(getOverflowMenuItems().length).toBeGreaterThan(0);
+    });
     const editActionButton = Array.from(getOverflowMenuItems()).filter(
       (item) => item.textContent === 'Edit'
     )[0];
-    await click(editActionButton);
+    fireEvent.click(editActionButton);
     expect(editActionClickFn).toHaveBeenCalledTimes(1);
 
-    await click(overflowMenu);
+    fireEvent.click(overflowMenu);
+    await waitFor(() => {
+      expect(getOverflowMenuItems().length).toBeGreaterThan(0);
+    });
     const voteActionButton = Array.from(getOverflowMenuItems()).filter(
       (item) => item.textContent === 'Vote'
     )[0];
-    await click(voteActionButton);
+    fireEvent.click(voteActionButton);
     expect(voteActionClickFn).toHaveBeenCalledTimes(1);
 
-    await click(overflowMenu);
+    fireEvent.click(overflowMenu);
+    await waitFor(() => {
+      expect(getOverflowMenuItems().length).toBeGreaterThan(0);
+    });
     const retireActionButton = Array.from(getOverflowMenuItems()).filter(
       (item) => item.textContent === 'Retire'
     )[0];
-    await click(retireActionButton);
+    fireEvent.click(retireActionButton);
     expect(retireActionClickFn).toHaveBeenCalledTimes(1);
 
-    await click(overflowMenu);
-    const deleteActionButton = Array.from(getOverflowMenuItems()).filter(
-      (item) => item.textContent === 'Delete'
-    )[0];
-    await click(deleteActionButton);
+    fireEvent.click(overflowMenu);
+
+    let deleteActionButton;
+    await waitFor(() => {
+      const items = getOverflowMenuItems();
+      expect(items.length).toBeGreaterThan(0);
+      // Find delete button - it might have extra whitespace or be in a different format
+      deleteActionButton = Array.from(items).find((item) =>
+        item.textContent.trim().includes('Delete')
+      );
+      expect(deleteActionButton).toBeDefined();
+    });
+
+    fireEvent.click(deleteActionButton);
     expect(deleteActionClickFn).toHaveBeenCalledTimes(1);
   });
 

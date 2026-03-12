@@ -16,6 +16,6 @@ jobs:
     if: ${{ github.event_name != 'merge_group' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: amannn/action-semantic-pull-request@b439535a8eb2122b748ed2b45d1693aaabe5b0aa # cspell:disable-line
+      - uses: amannn/action-semantic-pull-request@ac7e3fc035c47465748bbcb1a822c1583cf79bbc # cspell:disable-line
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

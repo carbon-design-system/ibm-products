@@ -53,7 +53,8 @@ export const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
     const handleRef = ref || headerRef;
     const contentHeaderBlockClass = `${blockClass}--content-header`;
 
-    const closeBubble = () => {
+    const closeBubble = (e?: React.MouseEvent) => {
+      e?.stopPropagation();
       onClose?.();
       setOpen(false);
     };

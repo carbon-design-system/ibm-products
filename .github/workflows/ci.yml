@@ -354,9 +354,10 @@ jobs:
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
-      - name: Generate custom-elements.json
-        working-directory: packages/ibm-products-web-components
-        run: yarn build
+      - name: Build web components and dependencies
+        run:
+          lerna run build --scope @carbon/ibm-products-web-components
+          --include-dependencies --stream
       - id: chromatic
         name: Run Chromatic
         uses: chromaui/action@5ec258af08deb3e8c36653bd618cb7fe52090031 # v15.2.0

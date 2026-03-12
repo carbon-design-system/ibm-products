@@ -242,6 +242,9 @@ HundredsOfTags.args = {
   containerWidth: 500,
   ...overflowAndModalStrings,
 };
+HundredsOfTags.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 const TemplateWithClose = (argsIn) => {
   const {

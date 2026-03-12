@@ -387,4 +387,38 @@ describe('c4p-notification-panel', () => {
       'empty state message'
     );
   });
+
+  it('should add --next class to next sibling on focusin', async () => {
+    const panel = (await fixture(template())) as CDSNotificationPanel;
+    await elementUpdated(panel);
+    const notifications = panel.querySelectorAll(
+      'c4p-notification[slot="previous"]'
+    );
+    const first = notifications[0] as HTMLElement;
+    const second = notifications[1] as HTMLElement;
+
+    first.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+    await elementUpdated(panel);
+    expect(
+      second.classList.contains('c4p--notifications-panel__notification--next')
+    ).toBe(true);
+  });
+
+  it('should remove --next class from next sibling on focusout', async () => {
+    const panel = (await fixture(template())) as CDSNotificationPanel;
+    await elementUpdated(panel);
+    const notifications = panel.querySelectorAll(
+      'c4p-notification[slot="previous"]'
+    );
+    const first = notifications[0] as HTMLElement;
+    const second = notifications[1] as HTMLElement;
+
+    first.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+    await elementUpdated(panel);
+    first.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
+    await elementUpdated(panel);
+    expect(
+      second.classList.contains('c4p--notifications-panel__notification--next')
+    ).toBe(false);
+  });
 });

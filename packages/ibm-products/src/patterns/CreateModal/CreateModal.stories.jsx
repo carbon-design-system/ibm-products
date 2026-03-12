@@ -13,7 +13,7 @@ import { StandardCreateModal } from './example/preview-components/StandardCreate
 import { CreateModalWithValidation } from './example/preview-components/CreateModalWithValidation';
 
 export default {
-  title: 'Patterns/Step flows/Create Modal',
+  title: 'Patterns/Create flows/Create Modal',
   component: () => {},
   tags: ['autodocs'],
   parameters: {

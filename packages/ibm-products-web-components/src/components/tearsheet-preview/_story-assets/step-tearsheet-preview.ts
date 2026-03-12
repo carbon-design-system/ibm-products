@@ -16,10 +16,10 @@ import RightPanelClose32 from '@carbon/icons/es/right-panel--close/32';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/button/index.js';
-import '../../../patterns/step-flow/index.js';
+import '../../../globals/js/utils/step-flow/index.js';
 import '../index.js';
 import styles from './_storybook-styles.scss?lit';
-import { StepInstance } from '../../../patterns/step-flow/step-flow-signal';
+import { StepInstance } from '../../../globals/js/utils/step-flow/step-flow-signal';
 
 interface FormStateType {
   email?: string;

@@ -35,6 +35,7 @@ $prefix: 'c4p';
     padding: 0 20% 0 $spacing-05;
     grid-row: auto;
     margin-block-end: 0;
+    overflow-y: visible;
   }
   #{carbon-config.$prefix}-modal-body {
     @include type.type-style('body-compact-02');

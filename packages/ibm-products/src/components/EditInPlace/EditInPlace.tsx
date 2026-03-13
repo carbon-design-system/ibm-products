@@ -113,11 +113,11 @@ export interface EditInplaceProps extends PropsWithChildren {
   /**
    * determines if the input is in readOnly mode
    */
-  readOnly: PropTypes.bool;
+  readOnly?: boolean;
   /**
    * label for the edit off button that displays when in read only mode
    */
-  readOnlyLabel?: PropTypes.string;
+  readOnlyLabel?: string;
   /**
    * text for the toggletip that displays when in read only mode
    */

@@ -83,8 +83,6 @@ const defaultProps = {
   onChange: () => {},
   onSave: () => {},
   onBlur: () => {},
-  readOnly: false,
-  readOnlyLabel: 'Edit off',
   readOnlyToggleTipText: 'This field is read-only and cannot be edited',
   toggleTipAlignment: 'bottom',
   saveLabel: 'Save',
@@ -188,4 +186,5 @@ export const ReadOnly = Template.bind({});
 ReadOnly.args = {
   ...defaultProps,
   readOnly: true,
+  readOnlyLabel: 'Edit off',
 };

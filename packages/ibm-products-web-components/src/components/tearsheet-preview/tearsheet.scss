@@ -239,7 +239,7 @@ $motion-duration: $duration-moderate-02;
 
 :host {
   #{$c4p-prefix}-side-panel::part(dialog) {
-    @extend .#{$c4p-prefix}--side-panel; // Extend the side panel styles}
+    @extend .#{$block-class__next}__side-panel; // Extend the side panel styles}
   }
 }
 

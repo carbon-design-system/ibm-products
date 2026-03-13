@@ -586,6 +586,12 @@ $duration: 1000ms;
     line-clamp: 2;
   }
 
+  .#{$block-class}__subtitle-node {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+  }
+
   .#{$block-class}__available-row {
     @include type.type-style('body-01');
 

@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "typescript": "^5.0.0",
-    "@vitejs/plugin-react": "4.7.0",
+    "@vitejs/plugin-react": "5.1.4",
     "sass": "^1.93.2",
     "vite": "^7.0.0"
   }

@@ -359,56 +359,58 @@ export const WithCustomActionButtons = {
               </style>
 
               <div class="${blockClass}--footer">
-                <cds-button
-                  class="${blockClass}--skip-btn"
-                  kind="ghost"
-                  size="lg"
-                  @click=${handleSkip}
-                >
-                  Skip
-                </cds-button>
+                <cds-button-set>
+                  <cds-button
+                    class="${blockClass}--skip-btn"
+                    kind="ghost"
+                    size="lg"
+                    @click=${handleSkip}
+                  >
+                    Skip
+                  </cds-button>
 
-                <div class="${blockClass}--footer-controls">
-                  ${stepLength > 0 && currentStep > 0
-                    ? html`
-                        <cds-button
-                          class="${blockClass}--prev-btn"
-                          kind="secondary"
-                          size="lg"
-                          title="Back"
-                          @click=${handleClickPrev}
-                        >
-                          Back
-                        </cds-button>
-                      `
-                    : nothing}
-                  ${stepLength > 0 && currentStep < progStepCeil
-                    ? html`
-                        <cds-button
-                          class="${blockClass}--next-btn"
-                          kind="primary"
-                          size="lg"
-                          @click=${handleClickNext}
-                        >
-                          Next ${iconLoader(ArrowRight, { slot: 'icon' })}
-                        </cds-button>
-                      `
-                    : nothing}
-                  ${(stepLength > 0 && currentStep === progStepCeil) ||
-                  !stepLength
-                    ? html`
-                        <cds-button
-                          class="${blockClass}--start-btn"
-                          kind="primary"
-                          size="lg"
-                          title="Submit"
-                          @click=${handleStart}
-                        >
-                          Submit
-                        </cds-button>
-                      `
-                    : nothing}
-                </div>
+                  <div class="${blockClass}--footer-controls">
+                    ${stepLength > 0 && currentStep > 0
+                      ? html`
+                          <cds-button
+                            class="${blockClass}--prev-btn"
+                            kind="secondary"
+                            size="lg"
+                            title="Back"
+                            @click=${handleClickPrev}
+                          >
+                            Back
+                          </cds-button>
+                        `
+                      : nothing}
+                    ${stepLength > 0 && currentStep < progStepCeil
+                      ? html`
+                          <cds-button
+                            class="${blockClass}--next-btn"
+                            kind="primary"
+                            size="lg"
+                            @click=${handleClickNext}
+                          >
+                            Next ${iconLoader(ArrowRight, { slot: 'icon' })}
+                          </cds-button>
+                        `
+                      : nothing}
+                    ${(stepLength > 0 && currentStep === progStepCeil) ||
+                    !stepLength
+                      ? html`
+                          <cds-button
+                            class="${blockClass}--start-btn"
+                            kind="primary"
+                            size="lg"
+                            title="Submit"
+                            @click=${handleStart}
+                          >
+                            Submit
+                          </cds-button>
+                        `
+                      : nothing}
+                  </div>
+                </cds-button-set>
               </div>
             </c4p-interstitial-screen-footer>
           </c4p-interstitial-screen>

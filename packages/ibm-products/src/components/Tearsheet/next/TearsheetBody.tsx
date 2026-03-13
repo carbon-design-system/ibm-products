@@ -160,7 +160,7 @@ export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
         size="sm"
         open={summaryPanelOpen}
         onRequestClose={onSummaryPanelClose}
-        className={className}
+        className={cx(`${blockClass}__side-panel`, className)}
       >
         {children}
       </SidePanel>
@@ -211,7 +211,7 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
         open={influencerPanelOpen}
         onRequestClose={onInfluencerPanelClose}
         placement="left"
-        className={className}
+        className={cx(`${blockClass}__side-panel`, className)}
       >
         {children}
       </SidePanel>

@@ -28,7 +28,7 @@ interface Breadcrumb {
   href: string;
 }
 
-@customElement('set-of-breadcrumbs')
+@customElement('set-of-breadcrumbs-example')
 export default class SetOfBreadcrumbs extends LitElement {
   /**
    * Hidden items that will be rendered in the overflow menu.
@@ -163,6 +163,6 @@ export default class SetOfBreadcrumbs extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'set-of-breadcrumbs': SetOfBreadcrumbs;
+    'set-of-breadcrumbs-example': SetOfBreadcrumbs;
   }
 }

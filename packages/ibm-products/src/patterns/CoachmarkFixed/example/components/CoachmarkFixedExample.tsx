@@ -5,13 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Theme, Link as CarbonLink } from '@carbon/react';
 import {
   preview__CoachmarkTagline as CoachmarkTagline,
@@ -75,6 +69,12 @@ export const CoachmarkFixedExample = (args) => {
   const carouselInit = useRef < InitCarousel > (null);
   //prettier-ignore
   const nextRef = useRef<HTMLButtonElement>(null);
+  //prettier-ignore
+  const backRef = useRef<HTMLButtonElement>(null);
+  //prettier-ignore
+  const doneRef = useRef<HTMLButtonElement>(null);
+  //prettier-ignore
+  const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const items = [
     {
@@ -96,23 +96,78 @@ export const CoachmarkFixedExample = (args) => {
     },
   ];
 
-  useEffect(() => {
-    setFixedIsVisible(isOpen);
-  }, [isOpen]);
-
   const handleClose = () => {
     setIsOpen(false);
     setFixedIsVisible(false);
     carouselInit?.current?.reset();
   };
 
-  useLayoutEffect(() => {
-    setTimeout(() => nextRef.current?.focus(), 0);
-  }, [isOpen]);
-
   const handleTaglineClick = () => {
     setIsOpen((isOpen) => !isOpen);
   };
+
+  const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
+    carouselItemsRef.current.forEach((item, idx) => {
+      if (!item) {
+        return;
+      }
+
+      const isActive = idx === activeIndex;
+
+      // Set aria-hidden based on active state
+      item.setAttribute('aria-hidden', String(!isActive));
+
+      if (!isActive) {
+        item.setAttribute('inert', ''); // Disable interactivity
+      } else {
+        item.removeAttribute('inert'); // Re-enable interactivity
+      }
+
+      item.removeAttribute('tabindex');
+    });
+  }, []);
+
+  const handleViewStackUpdate = useCallback(
+    ({ currentIndex, lastIndex }) => {
+      setCurrentViewIndex(currentIndex);
+      setLastViewIndex(lastIndex);
+
+      // Update inert attribute for carousel items
+      updateCarouselItemsTabIndex(currentIndex);
+
+      // Focus the appropriate button after carousel navigation
+      // Use setTimeout to ensure button refs are updated after re-render
+      setTimeout(() => {
+        if (currentIndex === lastIndex) {
+          // On last slide, focus the Done button
+          doneRef.current?.focus();
+        } else {
+          // On other slides, focus the Next button
+          nextRef.current?.focus();
+        }
+      }, 10);
+    },
+    [updateCarouselItemsTabIndex]
+  );
+
+  const onViewChangeStart = () => {};
+  const onViewChangeEnd = (options) => {
+    handleViewStackUpdate(options);
+  };
+
+  useEffect(() => {
+    setFixedIsVisible(isOpen);
+    if (isOpen) {
+      // Initialize tabIndex for carousel items on open
+      updateCarouselItemsTabIndex(0);
+      nextRef?.current?.focus();
+    } else {
+      setTimeout(() => {
+        const taglineButton = document.getElementById('CoachmarkTagline');
+        taglineButton?.focus();
+      }, 0);
+    }
+  }, [isOpen, updateCarouselItemsTabIndex]);
 
   useEffect(() => {
     if (carouselContainerRef && carouselContainerRef.current) {
@@ -123,16 +178,6 @@ export const CoachmarkFixedExample = (args) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselInit, isOpen]);
-
-  const onViewChangeStart = () => {};
-  const onViewChangeEnd = (options) => {
-    handleViewStackUpdate(options);
-  };
-
-  const handleViewStackUpdate = useCallback(({ currentIndex, lastIndex }) => {
-    setCurrentViewIndex(currentIndex);
-    setLastViewIndex(lastIndex);
-  }, []);
 
   const onNext = () => {
     carouselInit?.current?.next();
@@ -157,8 +202,13 @@ export const CoachmarkFixedExample = (args) => {
           <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
           <Coachmark.Content.Body>
             <div ref={carouselContainerRef} className="exampleCarouselWrapper">
-              {items.map((item) => (
-                <div key={item.id}>
+              {items.map((item, index) => (
+                <div
+                  key={item.id}
+                  ref={(el) => {
+                    carouselItemsRef.current[index] = el;
+                  }}
+                >
                   <h2>{item.title}</h2>
                   <p>{item.text}</p>
                   <br></br>
@@ -184,6 +234,7 @@ export const CoachmarkFixedExample = (args) => {
               <div className={'carouselControlWrapper--buttons'}>
                 {currentViewIndex !== 0 && (
                   <Button
+                    ref={backRef}
                     size="sm"
                     iconDescription="Previous"
                     kind="ghost"
@@ -203,7 +254,7 @@ export const CoachmarkFixedExample = (args) => {
                     Next
                   </Button>
                 ) : (
-                  <Button size="sm" onClick={handleClose}>
+                  <Button ref={doneRef} size="sm" onClick={handleClose}>
                     Done
                   </Button>
                 )}

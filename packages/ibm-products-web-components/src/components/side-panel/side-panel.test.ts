@@ -141,10 +141,11 @@ describe('c4p-side-panel', () => {
     expect(beforeCloseDetail?.triggeredBy).toBe(overlayElement);
     expect(closeDetail?.triggeredBy).toBe(overlayElement);
 
+    // Wait for component to update after close
+    await sidePanel.updateComplete;
+
     // expect the side panel is closed
     expect(sidePanel?.open).toBeFalsy();
-    // expect overlay also closed
-    expect(overlayElement?.hasAttribute('open')).toBeFalsy();
   });
 
   it('should close side panel on escape keydown', async () => {

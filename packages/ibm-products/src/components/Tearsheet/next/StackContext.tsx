@@ -18,7 +18,11 @@ import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 
 export interface StackContextType {
   stack: string[];
-  notifyStack: (id: string, open: boolean, container: HTMLDivElement) => void;
+  notifyStack: (
+    id: string,
+    open: boolean,
+    container: HTMLDivElement | null
+  ) => void;
   getScaleFactor: (id: string) => number | null;
   getBlockSizeChange: (id: string) => string | null;
   getDepth: (id: string) => number | null;

@@ -15,6 +15,7 @@ export default {
   parameters: {
     styles,
     layout: 'fullscreen',
+    chromatic: { disableSnapshot: true },
   },
 };
 

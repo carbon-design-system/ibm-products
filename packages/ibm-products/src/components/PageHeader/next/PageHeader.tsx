@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useState, useRef, RefObject, useEffect } from 'react';
+import React, { useState, useRef, RefObject, useEffect, useMemo } from 'react';
 import classnames from 'classnames';
 import { blockClass } from '../PageHeaderUtils';
 import { PageHeaderContext, PageHeaderRefs } from './context';
@@ -59,10 +59,32 @@ import {
 export interface PageHeaderProps {
   children?: React.ReactNode;
   className?: string;
+  /**
+   * Callback fired when the content area becomes fully collapsed
+   */
+  onContentFullyCollapsed?: (collapsed: boolean) => void;
+  /**
+   * Callback fired when the title becomes clipped
+   */
+  onTitleClipped?: (clipped: boolean) => void;
+  /**
+   * Callback fired when the content actions become clipped
+   */
+  onContentActionsClipped?: (clipped: boolean) => void;
 }
 
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
-  function PageHeader({ className, children, ...other }: PageHeaderProps, ref) {
+  function PageHeader(
+    {
+      className,
+      children,
+      onContentFullyCollapsed,
+      onTitleClipped,
+      onContentActionsClipped,
+      ...other
+    }: PageHeaderProps,
+    ref
+  ) {
     const [refs, setRefs] = useState<PageHeaderRefs>({});
     const [pageActionsInstance, setPageActionsInstance] =
       useState<React.ReactNode | null>(null);
@@ -99,90 +121,116 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [titleClipped, setTitleClipped] = useState(false);
     const [contentActionsClipped, setContentActionsClipped] = useState(false);
-    const [breadcrumbActionsClipped, setBreadcrumbActionsClipped] =
-      useState(false);
 
     // Intersection Observer setup, tracks if the PageHeaderContent is visible on page.
     // If it is not visible, we should set fully collapsed to true so that the
     // scroller button will know if it is clicked to expand rather than
     // collapse the header.
     useEffect(() => {
-      if (!refs?.contentRef || !componentRef?.current) {
+      if (!componentRef?.current) {
         return;
       }
+
       const totalHeaderOffset = getHeaderOffset(componentRef?.current);
       const predefinedContentPadding = 24;
-      const contentObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.target === refs?.contentRef!.current) {
-              setFullyCollapsed(!entry.isIntersecting);
-            }
-          });
-        },
-        {
-          root: null,
-          rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
-          threshold: 0.1,
-        }
-      );
 
-      if (!refs?.titleRef?.current) {
-        return;
-      }
-      const totalTitleHeight = refs?.titleRef.current.offsetHeight;
-      const titleObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.target === refs?.titleRef!.current) {
-              setTitleClipped(!entry.isIntersecting);
+      // Create content observer only if contentRef exists
+      const contentObserver = refs?.contentRef?.current
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.target === refs?.contentRef!.current) {
+                  const collapsed = !entry.isIntersecting;
+                  setFullyCollapsed(collapsed);
+                  onContentFullyCollapsed?.(collapsed);
+                }
+              });
+            },
+            {
+              root: null,
+              rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+              threshold: 0.1,
             }
-          });
-        },
-        {
-          root: null,
-          rootMargin: `${(predefinedContentPadding + totalTitleHeight + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
-          threshold: 0.1,
-        }
-      );
+          )
+        : null;
 
-      if (!refs?.contentActions?.current) {
-        return;
-      }
-      const contentActionsObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.target === refs?.contentActions!.current) {
-              setContentActionsClipped(!entry.isIntersecting);
-              setBreadcrumbActionsClipped(entry.isIntersecting);
+      // Create title observer only if titleRef exists
+      const titleObserver = refs?.titleRef?.current
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.target === refs?.titleRef!.current) {
+                  const clipped = !entry.isIntersecting;
+                  setTitleClipped(clipped);
+                  onTitleClipped?.(clipped);
+                }
+              });
+            },
+            {
+              root: null,
+              rootMargin: `${(predefinedContentPadding + (refs?.titleRef.current.offsetHeight || 0) + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
+              threshold: 0.1,
             }
-          });
-        },
-        {
-          root: null,
-          rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
-          threshold: 0.1,
-        }
-      );
+          )
+        : null;
 
-      if (refs?.contentRef?.current) {
+      // Create contentActions observer only if contentActions ref exists
+      const contentActionsObserver = refs?.contentActions?.current
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.target === refs?.contentActions!.current) {
+                  const clipped = !entry.isIntersecting;
+                  setContentActionsClipped(clipped);
+                  onContentActionsClipped?.(clipped);
+                }
+              });
+            },
+            {
+              root: null,
+              rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
+              threshold: 0.1,
+            }
+          )
+        : null;
+
+      // Observe elements if observers were created
+      if (refs?.contentRef?.current && contentObserver) {
         contentObserver.observe(refs.contentRef.current);
       }
 
-      if (refs?.titleRef?.current) {
+      if (refs?.titleRef?.current && titleObserver) {
         titleObserver.observe(refs.titleRef.current);
       }
 
-      if (refs?.contentActions?.current) {
+      if (refs?.contentActions?.current && contentActionsObserver) {
         contentActionsObserver.observe(refs.contentActions.current);
       }
 
       return () => {
-        contentObserver.disconnect();
-        titleObserver.disconnect();
-        contentActionsObserver.disconnect();
+        contentObserver?.disconnect();
+        titleObserver?.disconnect();
+        contentActionsObserver?.disconnect();
       };
-    }, [refs?.contentRef, refs?.titleRef, refs?.contentActions, componentRef]);
+    }, [
+      refs?.contentRef,
+      refs?.titleRef,
+      refs?.contentActions,
+      componentRef,
+      onContentFullyCollapsed,
+      onTitleClipped,
+      onContentActionsClipped,
+    ]);
+
+    // Memoize observerState to prevent unnecessary re-renders
+    const observerState = useMemo(
+      () => ({
+        fullyCollapsed,
+        titleClipped,
+        contentActionsClipped,
+      }),
+      [fullyCollapsed, titleClipped, contentActionsClipped]
+    );
 
     return (
       <PageHeaderContext.Provider
@@ -191,10 +239,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
           setRefs,
           pageActionsInstance,
           setPageActionsInstance,
-          fullyCollapsed,
-          titleClipped,
-          contentActionsClipped,
-          breadcrumbActionsClipped,
+          observerState,
         }}
       >
         <div className={classNames} ref={componentRef} {...other}>

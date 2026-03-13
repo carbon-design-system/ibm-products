@@ -1,7 +1,7 @@
 {
   "name": "ibm-products",
   "engines": {
-    "node": ">=22.x"
+    "node": ">=20.x"
   },
   "private": true,
   "version": "0.0.0",
@@ -67,12 +67,12 @@
     "@babel/core": "^7.26.10",
     "@babel/eslint-parser": "^7.26.10",
     "@babel/preset-react": "^7.26.3",
-    "@carbon/grid": "^11.50.0",
-    "@carbon/layout": "^11.48.0",
-    "@carbon/motion": "^11.41.0",
-    "@carbon/react": "^1.101.0",
-    "@carbon/themes": "^11.68.0",
-    "@carbon/type": "^11.54.0",
+    "@carbon/grid": "^11.51.0",
+    "@carbon/layout": "^11.49.0",
+    "@carbon/motion": "^11.42.0",
+    "@carbon/react": "^1.102.0",
+    "@carbon/themes": "^11.69.0",
+    "@carbon/type": "^11.55.0",
     "@commitlint/cli": "^20.0.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/compat": "^1.2.7",
@@ -137,7 +137,7 @@
     "brace-expansion@^2.0.1": "2.0.2",
     "@isaacs/brace-expansion": "^5.0.1",
     "axios": "^1.13.5",
-    "tar": "^7.5.7",
+    "tar": "^6.2.1",
     "lodash": "^4.17.23",
     "lodash-amd": "^4.17.23",
     "lodash-es": "^4.17.23",

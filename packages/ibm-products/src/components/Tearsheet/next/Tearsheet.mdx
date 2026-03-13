@@ -11,57 +11,58 @@ export const customImports = [
 } from '@carbon/react';
  import {
   Information
-} from '@carbon/react/icons';import { preview__TruncatedText as TruncatedText } from '@carbon/ibm-products';`,
+} from '@carbon/react/icons';
+import { preview__TruncatedText as TruncatedText } from '@carbon/ibm-products';
+import { breakpoints } from '@carbon/layout';`,
 ];
 
 export const customFunctionArr = [
   [
     `const variant = ['wide', 'narrow', 'wide'],decorator=1,influencerWidth='',summaryContentWidth='',verticalGap='';
-    const sampleDecorator = (decorator) => {
-  switch (decorator) {
-    case 1:
-      return (
-        <AILabel className="decorator-container" size="xs">
-          <AILabelContent>
-            <div>
-              <p className="secondary">AI Explained</p>
-              <h1>84%</h1>
-              <p className="secondary bold">Confidence score</p>
-              <p className="secondary">
-                This is not really Lorem Ipsum but the spell checker did not
-                like the previous text with it&apos;s non-words which is why
-                this unwieldy sentence, should one choose to call it that, here.
-              </p>
-              <hr />
-              <p className="secondary">Model type</p>
-              <p className="bold">Foundation model</p>
-            </div>
-          </AILabelContent>
-        </AILabel>
-      );
-    case 2:
-      return (
-        <Toggletip>
-          <ToggletipButton label="Additional information">
-            <Information />
-          </ToggletipButton>
-          <ToggletipContent>
-            <p>Custom content here</p>
-          </ToggletipContent>
-        </Toggletip>
-      );
-    default:
-      return;
-  }
-};const description = <TruncatedText
-    id='header-description__truncatedText'
-    expandLabel={'Read more'}
-    collapseLabel={'Read less'}
-    value="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page"
-    type="expand"
-  />;`,
-  ],
-];
+    const useMatchMedia = (query) => {
+  const [matches, setMatches] = React.useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia(query).matches;
+    }
+    return false;
+  });
+
+React.useEffect(() => { if (typeof window === 'undefined') { return; }
+
+    const mediaQueryList = window.matchMedia(query);
+    const handleChange = (event) => {
+      setMatches(event.matches);
+    };
+
+    mediaQueryList.addEventListener('change', handleChange);
+    setMatches(mediaQueryList.matches);
+
+    return () => {
+      mediaQueryList.removeEventListener('change', handleChange);
+    };
+
+}, [query]);
+
+return matches; }; const sampleDecorator = (decorator) => { switch (decorator) {
+case 1: return ( <AILabel className="decorator-container" size="xs">
+
+<AILabelContent> <div> <p className="secondary">AI Explained</p> <h1>84%</h1>
+<p className="secondary bold">Confidence score</p> <p className="secondary">
+This is not really Lorem Ipsum but the spell checker did not like the previous
+text with it&apos;s non-words which is why this unwieldy sentence, should one
+choose to call it that, here. </p> <hr /> <p className="secondary">Model
+type</p> <p className="bold">Foundation model</p> </div> </AILabelContent>
+</AILabel> ); case 2: return ( <Toggletip>
+<ToggletipButton label="Additional information"> <Information />
+</ToggletipButton> <ToggletipContent> <p>Custom content here</p>
+</ToggletipContent> </Toggletip> ); default: return; } };const description =
+<TruncatedText id='header-description\_\_truncatedText' expandLabel={'Read
+more'} collapseLabel={'Read less'} value="Buttons are used to initialize an
+action, either in the background or foreground of an experience. There are
+several kinds of buttons. Primary buttons should be used for the principle call
+to action on the page. Secondary buttons should be used for secondary actions on
+each page. Danger buttons should be used for a negative action (such as Delete)
+on the page" type="expand" />;`,],];
 
 # Tearsheet
 
@@ -90,6 +91,83 @@ feature-rich and highly customizable, allowing users to adapt it to any level of
 complexity. This is structured using the compound component pattern in React,
 with distinct and well-defined sections, so that you need to import the main
 `Tearsheet` and all other subcomponents will be static properties of this one.
+
+By default, the tearsheet unmounts from the DOM after closing for optimal
+performance and smooth animations unlike in old Tearsheet. To keep the component
+mounted in the DOM when closed (preserving state), use the `keepMounted` prop:
+`<Tearsheet keepMounted={true}>`.
+
+## Migration from Legacy Tearsheet
+
+### Benefits of the New Tearsheet
+
+- **Scalable & Composable**: Built with compound components that can be easily
+  extended and customized for any use case
+- **Improved Performance**: Presence-based rendering with automatic cleanup and
+  optimized animations
+- **Collapsible Header**: Smart header that automatically collapses on scroll to
+  maximize content space (can be disabled via `disableHeaderCollapse` prop)
+- **Better Developer Experience**: Intuitive API with clear component boundaries
+  and self-documenting structure
+- **Type Safety**: Full TypeScript support with better type inference and
+  autocomplete
+
+### Migration Guide
+
+**Old Tearsheet
+(packages/ibm-products/src/components/Tearsheet/Tearsheet.tsx):**
+
+```jsx
+<Tearsheet
+  open={open}
+  title="Title"
+  description="Description"
+  actions={[
+    { label: 'Cancel', kind: 'secondary', onClick: handleCancel },
+    { label: 'Submit', kind: 'primary', onClick: handleSubmit },
+  ]}
+  influencer={<div>Influencer content</div>}
+  onClose={handleClose}
+>
+  <div>Main content</div>
+</Tearsheet>
+```
+
+**New Tearsheet (packages/ibm-products/src/components/Tearsheet/next):**
+
+```jsx
+<Tearsheet open={open} onClose={handleClose}>
+  <Tearsheet.Header>
+    <Tearsheet.HeaderContent title="Title" description="Description" />
+  </Tearsheet.Header>
+
+  <Tearsheet.Influencer>
+    <div>Influencer content</div>
+  </Tearsheet.Influencer>
+
+  <Tearsheet.Body>
+    <Tearsheet.MainContent>
+      <div>Main content</div>
+    </Tearsheet.MainContent>
+  </Tearsheet.Body>
+
+  <Tearsheet.Footer>
+    <Button kind="secondary" onClick={handleCancel}>
+      Cancel
+    </Button>
+    <Button kind="primary" onClick={handleSubmit}>
+      Submit
+    </Button>
+  </Tearsheet.Footer>
+</Tearsheet>
+```
+
+**Note on Influencer and SummaryContent:** In narrow variant or on small
+screens, `<Tearsheet.Influencer>` and `<Tearsheet.SummaryContent>` are hidden by
+default. They can be accessed via side panels using
+`influencerPanelOpen`/`onInfluencerPanelClose` and
+`summaryPanelOpen`/`onSummaryPanelClose` props, triggered by user actions (e.g.,
+button clicks).
 
 ### Usage
 

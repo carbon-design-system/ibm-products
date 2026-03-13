@@ -187,7 +187,8 @@ describe('Tearsheet component V2', () => {
 
   it('does not render when open is false', () => {
     const { container } = renderTearsheet(false);
-    expect(container).not.toHaveClass('is-visible');
+
+    expect(container.querySelector(`.${blockClass}`)).not.toBeInTheDocument();
   });
 
   it('renders footer buttons correctly', () => {
@@ -378,7 +379,7 @@ describe('Tearsheet component V2', () => {
   });
   it('check menu button is not rendered when all items are not wrapped with HeaderActionItem', () => {
     render(
-      <Tearsheet>
+      <Tearsheet open={true}>
         <Tearsheet.Header>
           <Tearsheet.HeaderContent
             headerActions={

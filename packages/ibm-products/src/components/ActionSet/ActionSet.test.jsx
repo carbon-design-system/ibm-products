@@ -299,7 +299,7 @@ describe(`${componentName}.validateActions`, () => {
     ).toBeNull();
   });
 
-  it('rejects any kind other than primary, danger, secondary, danger--ghost, ghost', async () => {
+  it('rejects any kind other than primary, danger, secondary, tertiary, danger--ghost, ghost', async () => {
     expect(
       validateActionSetProps({ size: 'md', actions: props.primary[prop] })
     ).toBeNull();
@@ -308,6 +308,9 @@ describe(`${componentName}.validateActions`, () => {
     ).toBeNull();
     expect(
       validateActionSetProps({ size: 'md', actions: props.secondary[prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.tertiary[prop] })
     ).toBeNull();
     expect(
       validateActionSetProps({ size: 'md', actions: props.dangerGhost[prop] })
@@ -327,17 +330,13 @@ describe(`${componentName}.validateActions`, () => {
     );
     expect(mockError).toHaveBeenCalledTimes(2);
     expect(
-      validateActionSetProps({ size: 'md', actions: props.tertiary[prop] })
+      validateActionSetProps({ size: 'md', actions: props.twoPrimaries[prop] })
     );
     expect(mockError).toHaveBeenCalledTimes(3);
     expect(
-      validateActionSetProps({ size: 'md', actions: props.twoPrimaries[prop] })
-    );
-    expect(mockError).toHaveBeenCalledTimes(4);
-    expect(
       validateActionSetProps({ size: 'md', actions: props.twoGhosts[prop] })
     );
-    expect(mockError).toHaveBeenCalledTimes(5);
+    expect(mockError).toHaveBeenCalledTimes(4);
   });
 
   it('should render both expressive and regular buttons inside of the button set', async () => {

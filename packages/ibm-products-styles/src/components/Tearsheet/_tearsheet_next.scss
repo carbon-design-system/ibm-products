@@ -563,6 +563,30 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
   @include breakpoint-down(md) {
     block-size: $spacing-10;
   }
+
+  // Footer overflow handling for many actions (> 3 buttons)
+  &.#{$block-class__next}__footer--three-actions {
+    @include breakpoint-down(sm) {
+      overflow-x: auto;
+      overflow-y: hidden;
+      .#{$pkg-prefix}--action-set {
+        display: inline-flex;
+        flex-shrink: 0;
+        min-inline-size: max-content;
+      }
+    }
+  }
+  &.#{$block-class__next}__footer--many-actions {
+    @include breakpoint-down(md) {
+      overflow-x: auto;
+      overflow-y: hidden;
+      .#{$pkg-prefix}--action-set {
+        display: inline-flex;
+        flex-shrink: 0;
+        min-inline-size: max-content;
+      }
+    }
+  }
 }
 
 .#{$block-class__next}__influencer,

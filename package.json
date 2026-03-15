@@ -70,7 +70,7 @@
     "@carbon/grid": "^11.51.0",
     "@carbon/layout": "^11.49.0",
     "@carbon/motion": "^11.42.0",
-    "@carbon/react": "^1.102.0",
+    "@carbon/react": "^1.103.0",
     "@carbon/themes": "^11.69.0",
     "@carbon/type": "^11.55.0",
     "@commitlint/cli": "^20.0.0",

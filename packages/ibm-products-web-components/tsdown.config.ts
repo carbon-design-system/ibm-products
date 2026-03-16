@@ -65,8 +65,16 @@ const sharedConfig: UserConfig = {
   failOnWarn: false,
   external: [
     '@carbon/utilities',
-    ...Object.keys(packageJson.dependencies),
-    ...Object.keys(packageJson.devDependencies),
+    ...Object.keys(
+      (packageJson as any).default?.dependencies ||
+        packageJson.dependencies ||
+        {}
+    ),
+    ...Object.keys(
+      (packageJson as any).default?.devDependencies ||
+        packageJson.devDependencies ||
+        {}
+    ),
   ].map((name) => {
     // Transform the name of each dependency into a regex so that imports from
     // nested paths are correctly marked as external.

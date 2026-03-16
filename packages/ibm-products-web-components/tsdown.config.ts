@@ -55,7 +55,7 @@ const sharedConfig: UserConfig = {
     js: banner,
     dts: banner,
   }),
-  platform: 'neutral',
+  platform: 'browser',
   dts: true,
   cwd: import.meta.dirname,
   unbundle: true,
@@ -64,7 +64,6 @@ const sharedConfig: UserConfig = {
   target: 'es2022',
   failOnWarn: false,
   external: [
-    '@carbon/utilities',
     ...Object.keys(
       (packageJson as any).default?.dependencies ||
         packageJson.dependencies ||
@@ -193,10 +192,10 @@ export default defineConfig([
 ]);
 
 async function postBuild() {
-  const sourceDir = path.resolve(__dirname, './es');
+  const sourceDir = path.resolve(import.meta.dirname, './es');
 
   if (sourceDir) {
-    const targetDir = path.resolve(__dirname, './es-custom');
+    const targetDir = path.resolve(import.meta.dirname, './es-custom');
 
     // Copy `es` directory to `es-custom`
     await fs.copy(sourceDir, targetDir);

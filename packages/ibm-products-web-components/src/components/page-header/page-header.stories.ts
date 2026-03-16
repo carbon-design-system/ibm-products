@@ -28,6 +28,7 @@ import CloudFoundry16 from '@carbon/icons/es/cloud-foundry--1/16.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import './_story-assets/set-of-tags';
 import './_story-assets/set-of-breadcrumbs';
+import './_story-assets/set-of-page-actions';
 import { generateTags } from './_story-assets/set-of-tags/utils';
 
 const args = {
@@ -78,6 +79,20 @@ export const Default = {
       title,
       renderBreadcrumbIcon,
     } = args ?? {};
+    const sampleBreadcrumbsDefault = [
+      {
+        text: 'Breadcrumb 1',
+        href: '#',
+      },
+      {
+        text: 'Breadcrumb 2',
+        href: '#',
+      },
+      {
+        text: 'Breadcrumb 3',
+        href: '#',
+      },
+    ];
     return html`
       <style>
         ${styles}
@@ -97,47 +112,39 @@ export const Default = {
             ${renderBreadcrumbIcon
               ? iconLoader(Bee16, { slot: 'icon' })
               : undefined}
-            <cds-breadcrumb>
-              <cds-breadcrumb-item>
-                <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-              </cds-breadcrumb-item>
-              <cds-breadcrumb-item>
-                <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-              </cds-breadcrumb-item>
-            </cds-breadcrumb>
+            <set-of-breadcrumbs
+              .breadcrumbsData="${sampleBreadcrumbsDefault}"
+              title="${title}"
+            ></set-of-breadcrumbs>
             <div slot="content-actions">
-              <cds-button size="md"
-                >Primary action
-                ${iconLoader(Add16, { slot: 'icon' })}</cds-button
-              >
+              <div class="content-actions-wrapper">
+                <cds-button size="md"
+                  >Primary action
+                  ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+                >
+              </div>
             </div>
-            <cds-icon-button
+            <set-of-page-actions
               slot="page-actions"
-              kind="ghost"
-              size="md"
-              align="bottom"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+              ]}"
             >
-              ${iconLoader(Activity16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 1</span>
-            </cds-icon-button>
-            <cds-icon-button
-              slot="page-actions"
-              kind="ghost"
-              size="md"
-              align="bottom"
-            >
-              ${iconLoader(AiGenerate16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 2</span>
-            </cds-icon-button>
-            <cds-icon-button
-              slot="page-actions"
-              kind="ghost"
-              size="md"
-              align="bottom"
-            >
-              ${iconLoader(CloudFoundry16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 3</span>
-            </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+            </set-of-page-actions>
           </c4p-page-header-breadcrumb>
           <c4p-page-header-content title="${title}">
             <c4p-page-header-content-text subtitle="Subtitle">

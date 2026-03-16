@@ -47,6 +47,7 @@ $carbon-prefix: 'cds';
 :host(#{$prefix}-page-header-breadcrumb) {
   position: sticky;
   z-index: 1;
+  overflow: visible;
   background-color: $layer-01;
   block-size: convert.to-rem(40px);
   border-block-end: $border-subtle;
@@ -68,22 +69,52 @@ $carbon-prefix: 'cds';
     block-size: 100%;
   }
 
+  .#{$carbon-prefix}--css-grid-column {
+    overflow: visible;
+    min-inline-size: 0;
+  }
+
   // TODO: remove this section when styles from React have been migrated
   .#{$prefix}--page-header__breadcrumb-container {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     block-size: 100%;
+    gap: $spacing-03;
     inline-size: 100%;
+    min-inline-size: 0;
   }
 
   .#{$prefix}--page-header__breadcrumb-wrapper {
-    display: inline-flex;
-    inline-size: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+
+    @include breakpoint-down(md) {
+      flex: 1 1 75%;
+    }
+
+    @include breakpoint(md) {
+      max-inline-size: 60%;
+    }
+
+    @include breakpoint(lg) {
+      max-inline-size: 60%;
+    }
   }
 
   .#{$prefix}--page-header__breadcrumb__actions {
-    display: inline-flex;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $spacing-03;
+    min-inline-size: 0;
+
+    @include breakpoint-down(md) {
+      flex: 0 1 25%;
+      max-inline-size: 25%;
+    }
   }
   ///////////////////////////////
 }

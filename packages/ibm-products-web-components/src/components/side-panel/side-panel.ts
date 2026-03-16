@@ -405,9 +405,21 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._hasActionToolbar = toolbarActions && toolbarActions.length > 0;
 
     if (this._hasActionToolbar) {
-      for (const toolbarAction of toolbarActions) {
+      for (let i = 0; i < toolbarActions.length; i++) {
+        const toolbarAction = toolbarActions[i];
         // toolbar actions size should always be sm
         toolbarAction.setAttribute('size', 'sm');
+
+        // Add leading button class to first button
+        if (i === 0) {
+          toolbarAction.classList.add(
+            `${blockClass}__action-toolbar-leading-button`
+          );
+        } else {
+          toolbarAction.classList.remove(
+            `${blockClass}__action-toolbar-leading-button`
+          );
+        }
       }
     }
   }

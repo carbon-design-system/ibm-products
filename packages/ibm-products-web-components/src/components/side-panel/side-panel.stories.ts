@@ -50,6 +50,8 @@ const sizes = {
   [`Small size (${SIDE_PANEL_SIZE.SMALL})`]: SIDE_PANEL_SIZE.SMALL,
   [`Medium size (default) (${SIDE_PANEL_SIZE.MEDIUM})`]: SIDE_PANEL_SIZE.MEDIUM,
   [`Large size (${SIDE_PANEL_SIZE.LARGE})`]: SIDE_PANEL_SIZE.LARGE,
+  [`Extra Large size (${SIDE_PANEL_SIZE.EXTRA_LARGE})`]:
+    SIDE_PANEL_SIZE.EXTRA_LARGE,
   [`Extra Extra Large size (${SIDE_PANEL_SIZE.EXTRA_EXTRA_LARGE})`]:
     SIDE_PANEL_SIZE.EXTRA_EXTRA_LARGE,
 };

@@ -171,14 +171,11 @@ export const getActionItems = (index) => {
           >Primary</cds-button
         >`;
     case 6:
-      return html`<cds-button
-          key="danger"
-          slot="actions"
-          kind=${BUTTON_KIND.DANGER}
-          >Danger</cds-button
+      return html`<cds-button slot="actions" kind=${BUTTON_KIND.GHOST}
+          >Ghost</cds-button
         >
-        <cds-button key="tertiary" slot="actions" kind=${BUTTON_KIND.TERTIARY}
-          >Tertiary</cds-button
+        <cds-button key="danger" slot="actions" kind=${BUTTON_KIND.DANGER}
+          >Danger</cds-button
         >
         <cds-button key="secondary" slot="actions" kind=${BUTTON_KIND.SECONDARY}
           >Secondary</cds-button

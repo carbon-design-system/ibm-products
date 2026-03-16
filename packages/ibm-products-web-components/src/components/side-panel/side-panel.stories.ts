@@ -99,13 +99,16 @@ const actionToolbarItems = {
 };
 
 const actionItems = {
-  'No actions': 0,
   'One button': 1,
-  'Two buttons with ghost': 2,
-  'Two buttons with danger': 3,
-  'Three buttons with ghost': 4,
-  'Three buttons with danger': 5,
-  'Too many buttons': 6,
+  'One button (ghost)': 2,
+  'One button (danger)': 3,
+  'Two buttons': 4,
+  'Two buttons with ghost': 5,
+  'Two buttons with danger': 6,
+  'Three buttons with ghost': 7,
+  'Three buttons with danger': 8,
+  'Three buttons': 9,
+  None: 0,
 };
 
 const slugs = {

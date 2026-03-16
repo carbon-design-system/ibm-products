@@ -341,36 +341,30 @@ export const Default = ({
             </div>
           </Tearsheet.SummaryContent>
         </Tearsheet.Body>
-        <Tearsheet.Footer>
-          <div className="default__action-buttons">
-            <Button
-              className="step-action-button step-action-button__cancel"
-              kind="ghost"
-              onClick={() => setOpen(false)}
-              size={buttonSize}
-            >
-              Cancel
-            </Button>
-            <Button
-              className="step-action-button"
-              kind="secondary"
-              onClick={() => {
-                handlePrevious();
-              }}
-              // disabled={handleBackDisabledState(currentStep)}
-              size={buttonSize}
-            >
-              Back
-            </Button>
-            <Button
-              // disabled={handleNextDisabledState(formState, currentStep)}
-              size={buttonSize}
-              className="step-action-button"
-            >
-              {'Submit'}
-            </Button>
-          </div>
-        </Tearsheet.Footer>
+        <Tearsheet.Footer
+          actions={[
+            {
+              kind: 'ghost',
+              label: 'Cancel',
+              onClick: () => setOpen(false),
+            },
+            {
+              kind: 'secondary',
+              label: 'Back',
+              onClick: () => {
+                console.log('Back clicked');
+              },
+            },
+            {
+              kind: 'primary',
+              label: 'Submit',
+              onClick: () => {
+                console.log('Submit clicked');
+              },
+            },
+          ]}
+          buttonSize={buttonSize}
+        />
       </Tearsheet>
     </>
   );
@@ -557,36 +551,30 @@ export const WithInfluencer = () => {
             </Section>
           </Tearsheet.MainContent>
         </Tearsheet.Body>
-        <Tearsheet.Footer>
-          <div className="default__action-buttons">
-            <Button
-              className="step-action-button step-action-button__cancel"
-              kind="ghost"
-              onClick={() => setOpen(false)}
-              size={buttonSize}
-            >
-              Cancel
-            </Button>
-            <Button
-              className="step-action-button"
-              kind="secondary"
-              onClick={() => {
-                handlePrevious();
-              }}
-              // disabled={handleBackDisabledState(currentStep)}
-              size={buttonSize}
-            >
-              Back
-            </Button>
-            <Button
-              // disabled={handleNextDisabledState(formState, currentStep)}
-              size={buttonSize}
-              className="step-action-button"
-            >
-              {'Submit'}
-            </Button>
-          </div>
-        </Tearsheet.Footer>
+        <Tearsheet.Footer
+          actions={[
+            {
+              kind: 'ghost',
+              label: 'Cancel',
+              onClick: () => setOpen(false),
+            },
+            {
+              kind: 'secondary',
+              label: 'Back',
+              onClick: () => {
+                console.log('Back clicked');
+              },
+            },
+            {
+              kind: 'primary',
+              label: 'Submit',
+              onClick: () => {
+                console.log('Submit clicked');
+              },
+            },
+          ]}
+          buttonSize={buttonSize}
+        ></Tearsheet.Footer>
       </Tearsheet>
     </>
   );
@@ -691,31 +679,30 @@ export const WithTabs = () => {
               </TabPanels>
             </Tearsheet.MainContent>
           </Tearsheet.Body>
-          <Tearsheet.Footer>
-            <div className="default__action-buttons">
-              <Button
-                className="step-action-button step-action-button__cancel"
-                kind="ghost"
-                onClick={() => console.log('clicked')}
-                size={buttonSize}
-              >
-                Cancel
-              </Button>
-              <Button
-                className="step-action-button"
-                kind="secondary"
-                onClick={() => {
-                  handlePrevious();
-                }}
-                size={buttonSize}
-              >
-                Back
-              </Button>
-              <Button size={buttonSize} className="step-action-button">
-                {'Submit'}
-              </Button>
-            </div>
-          </Tearsheet.Footer>
+          <Tearsheet.Footer
+            actions={[
+              {
+                kind: 'ghost',
+                label: 'Cancel',
+                onClick: () => setOpen(false),
+              },
+              {
+                kind: 'secondary',
+                label: 'Back',
+                onClick: () => {
+                  console.log('Back clicked');
+                },
+              },
+              {
+                kind: 'primary',
+                label: 'Submit',
+                onClick: () => {
+                  console.log('Submit clicked');
+                },
+              },
+            ]}
+            buttonSize={buttonSize}
+          />
         </Tearsheet>
       </Tabs>
     </>
@@ -999,31 +986,30 @@ export const narrowTearsheet = () => {
               </div>
             </Tearsheet.SummaryContent>
           </Tearsheet.Body>
-          <Tearsheet.Footer>
-            <div className="default__action-buttons">
-              <Button
-                className="step-action-button step-action-button__cancel"
-                kind="ghost"
-                onClick={() => console.log('clicked')}
-                size="xl"
-              >
-                Cancel
-              </Button>
-              <Button
-                className="step-action-button"
-                kind="secondary"
-                onClick={() => {
-                  handlePrevious();
-                }}
-                size="xl"
-              >
-                Back
-              </Button>
-              <Button size="xl" className="step-action-button">
-                {'Submit'}
-              </Button>
-            </div>
-          </Tearsheet.Footer>
+          <Tearsheet.Footer
+            actions={[
+              {
+                kind: 'ghost',
+                label: 'Cancel',
+                onClick: () => setOpen(false),
+              },
+              {
+                kind: 'secondary',
+                label: 'Back',
+                onClick: () => {
+                  console.log('Back clicked');
+                },
+              },
+              {
+                kind: 'primary',
+                label: 'Submit',
+                onClick: () => {
+                  console.log('Submit clicked');
+                },
+              },
+            ]}
+            buttonSize="xl"
+          />
         </Tearsheet>
       </Tabs>
     </>
@@ -1161,34 +1147,30 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
               </div>
             </Tearsheet.SummaryContent>
           </Tearsheet.Body>
-          <Tearsheet.Footer>
-            <div className="default__action-buttons">
-              <Button
-                className="step-action-button step-action-button__cancel"
-                kind="ghost"
-                onClick={() => console.log('clicked')}
-                size={isSm || variant[0] === 'narrow' ? 'xl' : '2xl'}
-              >
-                Cancel
-              </Button>
-              <Button
-                className="step-action-button"
-                kind="secondary"
-                onClick={() => {
-                  handlePrevious();
-                }}
-                size={isSm || variant[0] === 'narrow' ? 'xl' : '2xl'}
-              >
-                Back
-              </Button>
-              <Button
-                size={isSm || variant[0] === 'narrow' ? 'xl' : '2xl'}
-                className="step-action-button"
-              >
-                {'Submit'}
-              </Button>
-            </div>
-          </Tearsheet.Footer>
+          <Tearsheet.Footer
+            actions={[
+              {
+                kind: 'ghost',
+                label: 'Cancel',
+                onClick: () => setOpen1(false),
+              },
+              {
+                kind: 'secondary',
+                label: 'Back',
+                onClick: () => {
+                  console.log('Back clicked');
+                },
+              },
+              {
+                kind: 'primary',
+                label: 'Submit',
+                onClick: () => {
+                  console.log('Submit clicked');
+                },
+              },
+            ]}
+            buttonSize={isSm || variant[0] === 'narrow' ? 'xl' : '2xl'}
+          />
         </Tearsheet>
         <Tearsheet
           open={open2}
@@ -1279,34 +1261,30 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
               </div>
             </Tearsheet.SummaryContent>
           </Tearsheet.Body>
-          <Tearsheet.Footer>
-            <div className="default__action-buttons">
-              <Button
-                className="step-action-button step-action-button__cancel"
-                kind="ghost"
-                onClick={() => console.log('clicked')}
-                size={isSm || variant[1] === 'narrow' ? 'xl' : '2xl'}
-              >
-                Cancel
-              </Button>
-              <Button
-                className="step-action-button"
-                kind="secondary"
-                onClick={() => {
-                  handlePrevious();
-                }}
-                size={isSm || variant[1] === 'narrow' ? 'xl' : '2xl'}
-              >
-                Back
-              </Button>
-              <Button
-                size={isSm || variant[1] === 'narrow' ? 'xl' : '2xl'}
-                className="step-action-button"
-              >
-                {'Submit'}
-              </Button>
-            </div>
-          </Tearsheet.Footer>
+          <Tearsheet.Footer
+            actions={[
+              {
+                kind: 'ghost',
+                label: 'Cancel',
+                onClick: () => setOpen2(false),
+              },
+              {
+                kind: 'secondary',
+                label: 'Back',
+                onClick: () => {
+                  console.log('Back clicked');
+                },
+              },
+              {
+                kind: 'primary',
+                label: 'Submit',
+                onClick: () => {
+                  console.log('Submit clicked');
+                },
+              },
+            ]}
+            buttonSize={isSm || variant[1] === 'narrow' ? 'xl' : '2xl'}
+          />
         </Tearsheet>
         <Tearsheet
           open={open3}
@@ -1380,34 +1358,30 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
               </div>
             </Tearsheet.SummaryContent>
           </Tearsheet.Body>
-          <Tearsheet.Footer>
-            <div className="default__action-buttons">
-              <Button
-                className="step-action-button step-action-button__cancel"
-                kind="ghost"
-                onClick={() => console.log('clicked')}
-                size={isSm || variant[2] === 'narrow' ? 'xl' : '2xl'}
-              >
-                Cancel
-              </Button>
-              <Button
-                className="step-action-button"
-                kind="secondary"
-                onClick={() => {
-                  handlePrevious();
-                }}
-                size={isSm || variant[2] === 'narrow' ? 'xl' : '2xl'}
-              >
-                Back
-              </Button>
-              <Button
-                size={isSm || variant[2] === 'narrow' ? 'xl' : '2xl'}
-                className="step-action-button"
-              >
-                {'Submit'}
-              </Button>
-            </div>
-          </Tearsheet.Footer>
+          <Tearsheet.Footer
+            actions={[
+              {
+                kind: 'ghost',
+                label: 'Cancel',
+                onClick: () => setOpen3(false),
+              },
+              {
+                kind: 'secondary',
+                label: 'Back',
+                onClick: () => {
+                  console.log('Back clicked');
+                },
+              },
+              {
+                kind: 'primary',
+                label: 'Submit',
+                onClick: () => {
+                  console.log('Submit clicked');
+                },
+              },
+            ]}
+            buttonSize={isSm || variant[2] === 'narrow' ? 'xl' : '2xl'}
+          />
         </Tearsheet>
       </StackProvider>
     </>
@@ -1420,6 +1394,196 @@ export const stackingWithDifferentSizes = () => (
 export const stackingNarrowTearsheets = () => (
   <StackingTearsheet variant={['narrow', 'narrow', 'narrow']} />
 );
+
+export const WithCustomFooterActions = ({
+  decorator,
+  influencerWidth,
+  keepMounted,
+  summaryContentWidth,
+  verticalGap,
+  variant,
+}) => {
+  const [open, setOpen] = useState(false);
+  const launcherButtonRef = useRef(null);
+  const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
+  const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
+  const buttonSize = isSm ? 'xl' : '2xl';
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setOpen(true);
+        }}
+        ref={launcherButtonRef}
+      >
+        Open Tearsheet
+      </Button>
+
+      <Tearsheet
+        open={open}
+        variant={variant ?? 'wide'}
+        decorator={sampleDecorator(decorator)}
+        onClose={() => setOpen(false)}
+        preventCloseOnClickOutside={true}
+        launcherButtonRef={launcherButtonRef}
+        selectorPrimaryFocus={'#input1'}
+        influencerWidth={influencerWidth}
+        keepMounted={keepMounted}
+        summaryContentWidth={summaryContentWidth}
+        verticalGap={verticalGap}
+      >
+        <Tearsheet.Header>
+          <Tearsheet.HeaderContent
+            open
+            label="Customer data"
+            title="Title of the tearsheet "
+            titleStart={<Bee size={32} />}
+            description={description}
+            headerActions={
+              <Tearsheet.HeaderActions
+                menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
+              >
+                <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+                  <Button kind="tertiary" size="sm">
+                    Action 1
+                  </Button>
+                </Tearsheet.HeaderActionItem>
+                <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
+                  <Button kind="tertiary" size="sm">
+                    Action 2
+                  </Button>
+                </Tearsheet.HeaderActionItem>
+                <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
+                  <Button kind="tertiary" size="sm">
+                    Action 3
+                  </Button>
+                </Tearsheet.HeaderActionItem>
+              </Tearsheet.HeaderActions>
+            }
+          ></Tearsheet.HeaderContent>
+        </Tearsheet.Header>
+        <Tearsheet.Body>
+          <Tearsheet.MainContent>
+            <div className="summaryPanelTrigger">
+              <Button
+                kind="ghost"
+                label="Open right panel"
+                onClick={() => setSummaryPanelOpen(true)}
+                renderIcon={() => <RightPanelClose />}
+              ></Button>
+            </div>
+
+            <Section className="main-content">
+              <Heading>Main content heading</Heading>
+
+              <Form>
+                <FormGroup
+                  legendId="tearsheet-form-group"
+                  legendText="FormGroup Legend"
+                >
+                  <TextInput
+                    id="input1"
+                    labelText="Enter an important value here"
+                  />
+                  <TextInput id="tss-ft2" labelText="Here is an entry field:" />
+                  <NumberInput
+                    className="some-class"
+                    id="number-input-1"
+                    label="Number Input"
+                    min={0}
+                    max={100}
+                    value={50}
+                    step={10}
+                    iconDescription="Add/decrement number"
+                  />
+                </FormGroup>
+                <FormGroup
+                  legendId="tearsheet-form-group"
+                  legendText="FormGroup Legend"
+                >
+                  <TextInput
+                    id="tss-ft1"
+                    labelText="Enter an important value here"
+                  />
+                  <TextInput id="tss-ft2" labelText="Here is an entry field:" />
+                  <NumberInput
+                    className="some-class"
+                    id="number-input-1"
+                    label="Number Input"
+                    min={0}
+                    max={100}
+                    value={50}
+                    step={10}
+                    iconDescription="Add/decrement number"
+                  />
+                </FormGroup>
+              </Form>
+            </Section>
+          </Tearsheet.MainContent>
+
+          <Tearsheet.SummaryContent
+            summaryPanelOpen={summaryPanelOpen}
+            onSummaryPanelClose={() => setSummaryPanelOpen(false)}
+          >
+            <Heading className="summaryPanelHeading">Summary details</Heading>
+            <div className="rightDetailsBody">
+              <div>
+                <label>item 1</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 2</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 3</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 4</label>
+                <p>item description</p>
+              </div>
+              <div>
+                <label>item 5</label>
+                <p>item description</p>
+              </div>
+            </div>
+          </Tearsheet.SummaryContent>
+        </Tearsheet.Body>
+        <Tearsheet.Footer>
+          <div className="default__action-buttons">
+            <Button
+              kind="ghost"
+              onClick={() => setOpen(false)}
+              size={buttonSize}
+            >
+              Cancel
+            </Button>
+            <Button
+              kind="secondary"
+              onClick={() => {
+                console.log('Back clicked');
+              }}
+              size={buttonSize}
+            >
+              Back
+            </Button>
+            <Button
+              kind="primary"
+              onClick={() => {
+                console.log('Submit clicked');
+              }}
+              size={buttonSize}
+            >
+              Submit
+            </Button>
+          </div>
+        </Tearsheet.Footer>
+      </Tearsheet>
+    </>
+  );
+};
 
 Default.argTypes = {
   decorator: {

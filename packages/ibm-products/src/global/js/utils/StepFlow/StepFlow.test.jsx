@@ -10,7 +10,7 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 import userEvent from '@testing-library/user-event';
 import { Button, TextInput } from '@carbon/react';
 
-import { carbon } from '../../settings';
+import { carbon } from '../../../../settings';
 import { StepGroup, useStepContext, StepProvider } from '.';
 import { StepActions } from './story-assets/StepActions';
 

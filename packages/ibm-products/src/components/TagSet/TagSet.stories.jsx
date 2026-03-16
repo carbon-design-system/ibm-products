@@ -134,9 +134,6 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    percy: {
-      waitForTimeout: 1000,
-    },
     docs: {
       page: () => (
         <StoryDocsPage

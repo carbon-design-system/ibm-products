@@ -369,9 +369,6 @@ export default {
     styles,
     layout: 'fullscreen',
     /* docs: { page: mdx } */
-    percy: {
-      waitForTimeout: 1000,
-    },
   },
   decorators: [
     (story, { args }) => (

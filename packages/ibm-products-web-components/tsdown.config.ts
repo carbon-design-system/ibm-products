@@ -29,6 +29,9 @@ const banner = `/**
 const esInputs = [
   'src/**/*.ts',
   '!src/**/*.stories.ts',
+  '!src/**/*.test.ts',
+  '!src/**/*-helpers.ts',
+  '!src/**/_story-assets/**',
   '!src/**/*.d.ts',
   '!src/polyfills',
 ];
@@ -42,6 +45,9 @@ const libInputs = [
   '!src/globals/internal/**/*.ts',
   '!src/globals/mixins/**/*.ts',
   '!src/**/*.stories.ts',
+  '!src/**/*.test.ts',
+  '!src/**/*-helpers.ts',
+  '!src/**/_story-assets/**',
 ];
 
 const sharedConfig: UserConfig = {
@@ -54,6 +60,9 @@ const sharedConfig: UserConfig = {
   cwd: import.meta.dirname,
   unbundle: true,
   outExtensions: () => ({ js: '.js' }),
+  tsconfig: path.resolve(import.meta.dirname, 'tsconfig.json'),
+  target: 'es2022',
+  failOnWarn: false,
   external: [
     '@carbon/utilities',
     ...Object.keys(packageJson.dependencies),
@@ -72,25 +81,27 @@ const sharedConfig: UserConfig = {
       entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
     }),
     copy({
-      targets: [{ src: 'src/components/**/*.scss', dest: 'scss' }],
+      targets: [
+        {
+          src: 'src/components/**/*.scss',
+          dest: 'scss',
+          ignore: ['**/story-styles.scss', '**/_story-assets/**'],
+        },
+      ],
       flatten: false,
     }),
-    [
-      json({
-        exclude: ['./package.json'],
-      }),
-    ],
+    json({
+      exclude: ['./package.json'],
+    }),
     // Transforms .scss files into lit templates
-    // This custom rollup plugin uses sass.render api
-    // internally which is very slow, we should explore
-    // some alternative
-    litSCSS({
-      // @ts-expect-error
+    // Now uses modern sass.compileString() API for better performance
+    // Type cast needed because litSCSS is a JS plugin without TS types
+    (litSCSS as any)({
       includePaths: [
-        path.resolve(__dirname, './node_modules'),
-        path.resolve(__dirname, '../../node_modules'),
+        path.resolve(import.meta.dirname, './node_modules'),
+        path.resolve(import.meta.dirname, '../../node_modules'),
       ],
-      async preprocessor(contents, id) {
+      async preprocessor(contents: string, id: string) {
         return (
           await postcss([autoprefixer(), cssnano()]).process(contents, {
             from: id,
@@ -106,6 +117,32 @@ export default defineConfig([
     ...sharedConfig,
     entry: esInputs,
     outDir: 'es',
+    outputOptions(options) {
+      return {
+        ...options,
+        // Keep style module filenames aligned with historical rollup output.
+        // Without this, tsdown emits collision suffixes like `*2.js` for
+        // component files that also have a same-basename `.scss?lit` import.
+        chunkFileNames(chunkInfo) {
+          const id = chunkInfo.facadeModuleId ?? '';
+          if (id.endsWith('.scss') || id.endsWith('.scss?lit')) {
+            return '[name].scss.js';
+          }
+          return '[name].js';
+        },
+        entryFileNames(chunkInfo) {
+          const id = chunkInfo.facadeModuleId ?? '';
+          if (id.endsWith('.scss') || id.endsWith('.scss?lit')) {
+            return '[name].scss.js';
+          }
+          return '[name].js';
+        },
+        exports: 'named',
+        preserveModules: true,
+        preserveModulesRoot: path.resolve(import.meta.dirname, 'src'),
+        sourcemap: true,
+      };
+    },
     onSuccess() {
       console.info('✅ esm build succeeded!');
     },
@@ -118,6 +155,29 @@ export default defineConfig([
     entry: libInputs,
     outDir: 'lib',
     format: 'cjs',
+    outputOptions(options) {
+      return {
+        ...options,
+        chunkFileNames(chunkInfo) {
+          const id = chunkInfo.facadeModuleId ?? '';
+          if (id.endsWith('.scss') || id.endsWith('.scss?lit')) {
+            return '[name].scss.js';
+          }
+          return '[name].js';
+        },
+        entryFileNames(chunkInfo) {
+          const id = chunkInfo.facadeModuleId ?? '';
+          if (id.endsWith('.scss') || id.endsWith('.scss?lit')) {
+            return '[name].scss.js';
+          }
+          return '[name].js';
+        },
+        exports: 'named',
+        preserveModules: true,
+        preserveModulesRoot: path.resolve(import.meta.dirname, 'src'),
+        sourcemap: true,
+      };
+    },
     onSuccess() {
       console.info('✅ cjs build succeeded!');
     },

@@ -6,6 +6,7 @@
  */
 
 import { defineConfig, type UserConfig } from 'tsdown';
+import packageJson from './package.json' with { type: 'json' };
 
 const banner = `/**
  * Copyright IBM Corp. 2020, ${new Date().getFullYear()}
@@ -15,20 +16,40 @@ const banner = `/**
  */
 `;
 
+// Generate external patterns for all peer dependencies and dependencies
+function getExternalPatterns() {
+  const deps = [
+    ...Object.keys(packageJson.peerDependencies || {}),
+    ...Object.keys(packageJson.dependencies || {}),
+  ];
+
+  return deps.map((name) => {
+    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`^${escapedName}(/.*)?`);
+  });
+}
+
 const sharedConfig: UserConfig = {
   entry: ['./src/index.ts'],
   banner: () => ({
     js: banner,
   }),
-  platform: 'neutral',
+  platform: 'browser',
   dts: false,
   unbundle: true,
-  external: ['@carbon/icons-react', '@carbon/colors', '@floating-ui/react'],
+  external: getExternalPatterns(),
+  failOnWarn: false,
+  logLevel: 'warn',
+  loader: {
+    '.js': 'jsx',
+  },
+  target: 'es2020',
 };
 
 export default defineConfig([
   {
     ...sharedConfig,
+    format: 'esm',
     outDir: 'es',
     outExtensions: () => ({ js: '.js' }),
     onSuccess() {

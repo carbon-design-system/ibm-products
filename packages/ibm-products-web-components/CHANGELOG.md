@@ -1,3 +1,37 @@
+## `@carbon/ibm-products-web-components@0.34.0`
+### Features :rocket:
+- feat: coachmark stackblitz example (#8948)
+
+### Bug fixes :bug:
+- fix: delete tags and restore vesions to retry release 5
+- fix: add js extension for imports
+- fix: delete tags and restore vesions to retry release 4
+- fix: delete tags and restore vesions to retry release 3
+- fix: delete tags and restore vesions to retry release 2
+- fix: delete tags and restore vesions to retry release
+- fix(coachmark): enable keyboard dragging for floating variant (#9031)
+- fix(guide-banner): Fix follow up issues related to snapscroll (#8998)
+- fix(security): upgrade @figma/code-connect to 1.4.0 (#9016)
+
+### Housekeeping :house:
+- chore(options-tile): refactor header (#9022)
+- docs(changelog): update for v2.84.0 (#9013)
+
+## `@carbon/ibm-products-web-components@0.33.0`
+### Features :rocket:
+- feat: show close icon when panels are open (#8951)
+- feat(page-header):  code connect integration (#8868)
+
+### Bug fixes :bug:
+- fix(Pageheader_preview): header calulation issue fix (#8940)
+- fix: use carbon prefix directly from @carbon/styles package config (#8904)
+- fix(coachmark): fix coachmark web component focus and position issue (#8845)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#8991)
+- build(performance): rolldown-vite integration (#8915)
+- build(deps): update to Carbon 11 compatible versions to latest (#8907)
+
 ## `@carbon/ibm-products-web-components@0.32.0`
 ### Features :rocket:
 - feat(create-modal): implement `create-modal` pattern in web components (#8710)

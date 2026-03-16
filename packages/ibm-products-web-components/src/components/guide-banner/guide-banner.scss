@@ -29,4 +29,8 @@ $block-class: #{$prefix}--guidebanner;
     display: none;
     content: '';
   }
+
+  .#{$block-class}__title {
+    padding-block-end: $spacing-05;
+  }
 }

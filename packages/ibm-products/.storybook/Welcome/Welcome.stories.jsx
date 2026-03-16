@@ -18,6 +18,7 @@ export default {
     options: {
       showPanel: false,
     },
+    chromatic: { disableSnapshot: true },
   },
 };
 

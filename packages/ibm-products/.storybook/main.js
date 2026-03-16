@@ -4,21 +4,33 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+'use strict';
 import { createRequire } from 'node:module';
-import { dirname, join, resolve } from 'path';
+
 import remarkGfm from 'remark-gfm';
-import react from '@vitejs/plugin-react';
-// import { getAutoTrack } from './get-auto-track-script';
+import glob from 'fast-glob';
+import { dirname, join, resolve } from 'path';
+import { getAutoTrack } from '../../../scripts/get-auto-track-script.js';
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, 'package.json')));
+}
 
 const require = createRequire(import.meta.url);
 
-const stories = [
+// Expand glob patterns to explicit file paths for Chromatic compatibility
+const storyGlobs = [
   '../src/**/!(*.internal).stories.*',
   './ComponentPlayground/**/*.stories.*',
   './Welcome/**/*.stories.*',
   './PrebuiltPatterns/**/*.mdx',
   '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.*',
 ];
+
+const stories = glob.sync(storyGlobs, {
+  cwd: __dirname,
+});
 
 export default {
   staticDirs: ['../public'],
@@ -88,6 +100,7 @@ export default {
         include: /\.[jt]sx?$/,
         exclude: [],
         loader: 'tsx',
+        keepNames: true,
       },
       optimizeDeps: {
         esbuildOptions: {
@@ -97,6 +110,7 @@ export default {
         },
       },
       resolve: {
+        preserveSymlinks: true,
         alias: {
           ALIAS_STORY_STYLE_CONFIG: resolve(
             configType === 'DEVELOPMENT'
@@ -129,7 +143,3 @@ export default {
     defaultName: 'Overview',
   },
 };
-
-function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, 'package.json')));
-}

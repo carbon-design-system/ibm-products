@@ -1,3 +1,58 @@
+## `@carbon/ibm-products@2.85.0`
+### Features :rocket:
+- feat: create tearsheet pattern using preview_Tearsheet (#8937)
+- feat(emptystate): code connect integration (#8954)
+- feat(editinplace): add readOnly prop (#9007)
+- feat(createtearsheet): disable secondary button (#8950)
+
+### Bug fixes :bug:
+- fix: delete tags and restore vesions to retry release 5
+- fix: add js extension for imports
+- fix: delete tags and restore vesions to retry release 4
+- fix: delete tags and restore vesions to retry release 3
+- fix: delete tags and restore vesions to retry release 2
+- fix: delete tags and restore vesions to retry release
+- fix: workaround fix to prevent popover to close on date sel (#9065)
+- fix: tab stop issue in coachmark patterns (#8987)
+- fix: build warnings from CoachmarkOverlayElements and CoachmarkStacked (#9043)
+- fix(usePortalTarget): fix hydration error (#9029)
+- fix(coachmark): enable keyboard dragging for floating variant (#9031)
+- fix: preserve namespace in storycode (#8993)
+- fix(security): upgrade @figma/code-connect to 1.4.0 (#9016)
+- fix(usePortalTarget): fix render portal use (#9018)
+- fix(ImportModal): make `inputLabel` required and add new prop `hideInputLabel` (#9011)
+- fix: security vulnerability in isaacs/brace-expansion,lodash and undici (#8995)
+
+### Housekeeping :house:
+- refactor(preview__PageHeader): separate child components to separate from `PageHeader.tsx` file (#8988)
+- docs(changelog): update for v2.84.0 (#9013)
+
+## `@carbon/ibm-products@2.84.0`
+### Features :rocket:
+- feat(nonlinearreading): code connect integration (#8943)
+- feat: show Close icon at global header actions when expanded (#8933)
+- feat(tearsheetpresence): add tearsheet presence (#8929)
+- feat(CoachmarkPatterns): example creation for coachmark patterns (#8918)
+- feat(pageheader): code connect integration (#8716)
+
+### Bug fixes :bug:
+- fix(SidePanel): Allow closing SidePanel via ESC key (#8977)
+- fix(preview__PageHeader): resolve content actions responsive issue in < 1010px viewport (#8976)
+- fix(Pageheader_preview): header calulation issue fix (#8940)
+- fix(CoachmarkBeacon): removed role from wrapper div (#8956)
+- fix(PageHeader): use TruncatedText in PageHeader subtitle (#8917)
+- fix: use carbon prefix directly from @carbon/styles package config (#8904)
+
+### Housekeeping :house:
+- chore: remove unwanted style changes (#8997)
+- build(deps): update to Carbon 11 compatible versions to latest (#8991)
+- chore(deps): update dependency @percy/storybook to v10 (#8982)
+- chore: bump @carbon/feature-flags version (#8968)
+- chore(deps): update dependency @vitejs/plugin-react to v4.7.0 (#8967)
+- chore(deps): update dependency vite to v7 [security] (#8941)
+- build(performance): rolldown-vite integration (#8915)
+- build(deps): update to Carbon 11 compatible versions to latest (#8907)
+
 ## `@carbon/ibm-products@2.83.0`
 ### Features :rocket:
 - feat(CreateModal): implement `CreateModal` pattern with example (#8706)

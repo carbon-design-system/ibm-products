@@ -1,3 +1,36 @@
+## `@carbon/ibm-products-styles@2.81.0`
+### Features :rocket:
+- feat(editinplace): add readOnly prop (#9007)
+
+### Bug fixes :bug:
+- fix: delete tags and restore vesions to retry release 5
+- fix: delete tags and restore vesions to retry release 4
+- fix: delete tags and restore vesions to retry release 3
+- fix: delete tags and restore vesions to retry release 2
+- fix: delete tags and restore vesions to retry release
+- fix: remove global selector (#9055)
+- fix(usePortalTarget): fix render portal use (#9018)
+
+### Housekeeping :house:
+- refactor(preview__PageHeader): separate child components to separate from `PageHeader.tsx` file (#8988)
+- docs(changelog): update for v2.84.0 (#9013)
+
+## `@carbon/ibm-products-styles@2.80.0`
+### Features :rocket:
+- feat: show Close icon at global header actions when expanded (#8933)
+- feat(tearsheetpresence): add tearsheet presence (#8929)
+
+### Bug fixes :bug:
+- fix(preview__PageHeader): resolve content actions responsive issue in < 1010px viewport (#8976)
+- fix(ActionBar): improve overflow items alignment and prevent icon shrinking (#8928)
+- fix: use carbon prefix directly from @carbon/styles package config (#8904)
+
+### Housekeeping :house:
+- chore: remove unwanted style changes (#8997)
+- build(deps): update to Carbon 11 compatible versions to latest (#8991)
+- build(performance): rolldown-vite integration (#8915)
+- build(deps): update to Carbon 11 compatible versions to latest (#8907)
+
 ## `@carbon/ibm-products-styles@2.79.0`
 ### Bug fixes :bug:
 - fix(#8831): apply icon-primary fill to breadcrumb and page header icons (#8846)

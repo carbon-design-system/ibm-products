@@ -68,6 +68,7 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
   }
 
   private _handleToggle() {
+    this.open = !this.open;
     const init = {
       bubbles: true,
       composed: true,

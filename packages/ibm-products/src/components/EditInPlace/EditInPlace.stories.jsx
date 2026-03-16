@@ -83,8 +83,8 @@ const defaultProps = {
   onChange: () => {},
   onSave: () => {},
   onBlur: () => {},
-  // readOnly: false,
-  // readOnlyLabel: 'This value is read only',
+  readOnlyToggleTipText: 'This field is read-only and cannot be edited',
+  toggleTipAlignment: 'bottom',
   saveLabel: 'Save',
   value: 'default',
   placeholder: 'placeholder text',
@@ -182,8 +182,9 @@ CustomBlurFunction.args = {
   ...defaultProps,
 };
 
-// export const ReadOnly = Template.bind({});
-//   ReadOnly.args = {
-//     ...defaultProps,
-//     readOnly: true,
-//   };
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+  ...defaultProps,
+  readOnly: true,
+  readOnlyLabel: 'Edit off',
+};

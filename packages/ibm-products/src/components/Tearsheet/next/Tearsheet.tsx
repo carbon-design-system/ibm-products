@@ -15,6 +15,7 @@ import React, {
   useEffect,
 } from 'react';
 import { useIsomorphicEffect } from '../../../global/js/hooks';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
@@ -52,8 +53,8 @@ import {
   TearsheetHeaderActions,
   TearsheetHeaderActionsProps,
 } from './TearsheetHeaderActions';
+import TearsheetFooter, { TearsheetFooterProps } from './TearsheetFooter';
 import { breakpoints } from '@carbon/layout';
-import { usePortalTarget } from '../../../global/js/hooks/usePortalTarget';
 import { useStackContext } from './StackContext';
 import { useMatchMedia } from '../../../global/js/hooks/useMatchMedia';
 import { useId } from '../../../global/js/utils/useId';
@@ -131,6 +132,13 @@ export interface TearsheetProps extends ComposedModalProps {
    */
   portalTarget?: HTMLElement;
   /**
+   * Disable the portal behavior and render the tearsheet in the existing DOM structure.
+   * This is useful for testing, when you need to inherit React context from parent components,
+   * or when you don't need the z-index isolation that portals provide.
+   * @default false
+   */
+  disablePortal?: boolean;
+  /**
    * If true, the tearsheet will remain mounted in the DOM when closed, using CSS to hide it.
    * By default (false), the tearsheet unmounts from the DOM after the exit animation completes.
    * Set to true if you need to preserve component state or avoid remounting overhead.
@@ -151,7 +159,7 @@ export type TearsheetComponentType = React.ForwardRefExoticComponent<
   MainContent: FC<MainContentProps>;
   SummaryContent: FC<SummaryContentProps>;
   Body: FC<TearsheetBodyProps>;
-  Footer: FC<FooterProps>;
+  Footer: FC<TearsheetFooterProps>;
 };
 
 /**
@@ -178,6 +186,7 @@ const TearsheetInternal = forwardRef<
       selectorPrimaryFocus,
       open = false,
       portalTarget,
+      disablePortal = false,
       verticalGap,
       containerClassName,
       keepMounted = false,
@@ -202,15 +211,21 @@ const TearsheetInternal = forwardRef<
     const header = arr.find((child: any) => child.type === TearsheetHeader);
     const influencer = arr.find((child: any) => child.type === Influencer);
     const body = arr.find((child: any) => child.type === TearsheetBody);
-    const footer = arr.find((child: any) => child.type === Footer);
+    const footer = arr.find((child: any) => child.type === TearsheetFooter);
 
     const uniqueId = useRef(useId());
     const { notifyStack, stack, getDepth, getScaleFactor, getBlockSizeChange } =
       useStackContext();
 
     const [depth, setDepth] = useState(0);
+    const [mountNode, setMountNode] = useState<HTMLElement | null>(null);
 
-    const renderPortalUse = usePortalTarget(portalTarget);
+    // Set portal mount node using useIsomorphicEffect to avoid SSR issues and double rendering
+    useIsomorphicEffect(() => {
+      if (!disablePortal) {
+        setMountNode(portalTarget || document.body);
+      }
+    }, [portalTarget, disablePortal]);
 
     useIsomorphicEffect(() => {
       const AILabelWidth =
@@ -281,7 +296,7 @@ const TearsheetInternal = forwardRef<
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stack]);
 
-    return renderPortalUse(
+    const content = (
       <TearsheetContext.Provider
         value={{
           hasCloseIcon,
@@ -354,6 +369,14 @@ const TearsheetInternal = forwardRef<
         </FeatureFlags>
       </TearsheetContext.Provider>
     );
+
+    // If portal is disabled, return content directly
+    if (disablePortal) {
+      return content;
+    }
+
+    // Return portal if mountNode is set, otherwise return content directly (SSR-safe)
+    return mountNode ? createPortal(content, mountNode) : content;
   }
 );
 
@@ -389,25 +412,13 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
   }
 ) as TearsheetComponentType;
 
-export interface FooterProps {
-  children: ReactNode;
-  className?: string;
-}
-const Footer = forwardRef<HTMLDivElement, FooterProps>(({ children }, ref) => {
-  return (
-    <footer className={`${blockClass}__footer`} ref={ref}>
-      {children}
-    </footer>
-  );
-});
-
 Tearsheet.Header = TearsheetHeader;
 Tearsheet.HeaderContent = TearsheetHeaderContent;
 Tearsheet.Body = TearsheetBody;
 Tearsheet.Influencer = Influencer;
 Tearsheet.MainContent = MainContent;
 Tearsheet.SummaryContent = SummaryContent;
-Tearsheet.Footer = Footer;
+Tearsheet.Footer = TearsheetFooter;
 Tearsheet.NavigationBar = TearsheetNavigationBar;
 Tearsheet.ScrollButton = TearsheetScrollButton;
 Tearsheet.HeaderActions = TearsheetHeaderActions;

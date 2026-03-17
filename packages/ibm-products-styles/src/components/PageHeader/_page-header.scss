@@ -787,22 +787,32 @@ $duration: 1000ms;
 
   .#{$block-class}__breadcrumb__actions {
     display: inline-flex;
+    flex: 1 1 0%;
     justify-content: flex-end;
-    inline-size: 100%;
+    min-inline-size: 75%;
+
+    @include breakpoint(md) {
+      min-inline-size: 40%;
+    }
   }
 
   .#{$block-class}__breadcrumb__content-actions {
-    inline-size: 100%;
     margin-inline-end: $spacing-04;
   }
 
   .#{$block-class}__breadcrumb-wrapper {
     display: inline-flex;
-    inline-size: 100%;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+
+    @include breakpoint(md) {
+      min-inline-size: 60%;
+    }
   }
 
   .#{$block-class}__breadcrumb-wrapper .#{$block-class}-breadcrumb-overflow {
-    inline-size: 100%;
+    flex: 1 1 0%;
+    min-inline-size: 0;
     .#{$carbon-prefix}--breadcrumb {
       display: flex;
     }

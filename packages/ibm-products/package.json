@@ -45,17 +45,15 @@
     "build:carbon": "sass -q --quiet-deps --style=expanded --load-path ./node_modules --load-path ../../node_modules --load-path node_modules .storybook/carbon.scss:css/carbon.css",
     "build:css": "copyfiles '../ibm-products-styles/css/**/*.*' ./ -u 2",
     "build:scss": "copyfiles '../ibm-products-styles/scss/**/*.*' ./ -u 2",
-    "build:storybook": "yarn dlx cross-env \"NODE_OPTIONS=--max_old_space_size=8192\" && storybook build --quiet",
     "build:js-new": "node scripts/build",
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate/index.mjs",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
     "start": "run-s build:carbon storybook:start",
-    "storybook:build": "run-s build:carbon build:storybook",
+    "storybook:build": "yarn build:carbon && cross-env NODE_OPTIONS=--max_old_space_size=8192 storybook build --quiet",
     "storybook:start": "storybook dev ./public -p 3000",
     "telemetry-config": "ibmtelemetry-config generate --id 495342db-5046-4ecf-85ea-9ffceb6f8cdf --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)",
-    "test": "jest --colors",
-    "vrt": "percy storybook --verbose ./storybook-static"
+    "test": "jest --colors"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
@@ -67,11 +65,9 @@
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
-    "@carbon/styles": "^1.100.0",
+    "@carbon/styles": "^1.101.0",
     "@figma/code-connect": "^1.4.0",
     "@ibm/telemetry-js-config-generator": "^2.0.1",
-    "@percy/cli": "^1.31.0",
-    "@percy/storybook": "^10.0.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
@@ -126,12 +122,12 @@
     "react-window": "^1.8.11"
   },
   "peerDependencies": {
-    "@carbon/grid": "^11.50.0",
-    "@carbon/layout": "^11.48.0",
-    "@carbon/motion": "^11.41.0",
-    "@carbon/react": "^1.101.0",
-    "@carbon/themes": "^11.68.0",
-    "@carbon/type": "^11.54.0",
+    "@carbon/grid": "^11.51.0",
+    "@carbon/layout": "^11.49.0",
+    "@carbon/motion": "^11.42.0",
+    "@carbon/react": "^1.102.0",
+    "@carbon/themes": "^11.69.0",
+    "@carbon/type": "^11.55.0",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
     "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0"
   }

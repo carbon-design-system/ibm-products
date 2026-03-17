@@ -687,23 +687,16 @@ export const CustomRenderWithCallbacks = ({
   title,
   ...args
 }) => {
-  const [contentFullyCollapsed, setContentFullyCollapsed] = useState(false);
-  const [titleClipped, setTitleClipped] = useState(false);
-  const [contentActionsClipped, setContentActionsClipped] = useState(false);
-
   const handleContentFullyCollapsed = useCallback((collapsed) => {
     console.log('onContentFullyCollapsed:', collapsed);
-    setContentFullyCollapsed(collapsed);
   }, []);
 
   const handleTitleClipped = useCallback((clipped) => {
     console.log('onTitleClipped:', clipped);
-    setTitleClipped(clipped);
   }, []);
 
   const handleContentActionsClipped = useCallback((clipped) => {
     console.log('onContentActionsClipped:', clipped);
-    setContentActionsClipped(clipped);
   }, []);
 
   return (
@@ -718,8 +711,8 @@ export const CustomRenderWithCallbacks = ({
           border={border}
           contentActionsFlush={contentActionsFlush}
           renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-          contentActions={
-            contentFullyCollapsed ? (
+          contentActions={({ contentActionsClipped }) =>
+            contentActionsClipped ? (
               <PageHeader.ContentPageActions
                 menuButtonLabel="Actions"
                 actions={pageActionButtonItems}
@@ -735,8 +728,8 @@ export const CustomRenderWithCallbacks = ({
         </PageHeader.BreadcrumbBar>
         <PageHeader.Content
           title={title}
-          pageActions={
-            !contentFullyCollapsed ? (
+          pageActions={({ fullyCollapsed }) =>
+            !fullyCollapsed ? (
               <PageHeader.ContentPageActions
                 menuButtonLabel="Actions"
                 actions={pageActionButtonItems}

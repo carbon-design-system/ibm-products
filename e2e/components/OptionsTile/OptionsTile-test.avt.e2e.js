@@ -9,9 +9,6 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
-import { pkg } from '../../../packages/ibm-products/src/settings';
-
-const blockClass = `${pkg.prefix}--options-tile`;
 
 test.describe('OptionsTile @avt', () => {
   test('@avt-default-state', async ({ page }) => {
@@ -26,7 +23,7 @@ test.describe('OptionsTile @avt', () => {
     await page.getByRole('heading', { name: 'Language' }).click();
 
     await page
-      .locator(`.${blockClass}__content`)
+      .getByTestId('options-tile-content')
       .screenshot({ animations: 'disabled' });
 
     await expect(page).toHaveNoACViolations('OptionsTile @avt-default-state');
@@ -41,17 +38,19 @@ test.describe('OptionsTile @avt', () => {
       },
     });
 
-    const header = page.locator(`.${blockClass}__header`);
-    const content = page.locator(`.${blockClass}__content`);
-    const toggle = page.locator(`.${blockClass}__toggle > button`);
+    const header = page.getByTestId('options-tile-header');
+    const content = page.getByTestId('options-tile-content');
+    const toggle = page
+      .getByTestId('options-tile-toggle-container')
+      .locator('button');
 
-    await page.keyboard.press('Tab');
-    await expect(toggle).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(header).toBeFocused();
     await page.keyboard.press('Space');
     await expect(content).toBeVisible();
     await page.keyboard.press('Space');
     await expect(content).not.toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(toggle).toBeFocused();
   });
 });

@@ -9,6 +9,15 @@
 
 export { default as CDSSidePanel } from './components/side-panel/side-panel';
 export { default as CDSTearsheet } from './components/tearsheet/tearsheet';
+export { default as CDSTearsheetPreview } from './components/tearsheet-preview/tearsheet';
+export { default as CDSTearsheetBody } from './components/tearsheet-preview/tearsheet-body';
+export { default as CDSTearsheetFooter } from './components/tearsheet-preview/tearsheet-footer';
+export { default as CDSTearsheetHeader } from './components/tearsheet-preview/tearsheet-header';
+export { default as CDSTearsheetHeaderContent } from './components/tearsheet-preview/tearsheet-header-content';
+export { default as CDSTearsheetInfluencer } from './components/tearsheet-preview/tearsheet-influencer';
+export { default as CDSTearsheetNavigationBar } from './components/tearsheet-preview/tearsheet-navigation-bar';
+export { default as CDSTearsheetScroller } from './components/tearsheet-preview/tearsheet-scroller';
+export { default as CDSTearsheetSummaryContent } from './components/tearsheet-preview/tearsheet-summary-content';
 export { default as CDSFullPageError } from './components/full-page-error/full-page-error';
 export { default as CDSAboutModal } from './components/about-modal/about-modal';
 export { default as CDSUserAvatar } from './components/user-avatar/user-avatar';

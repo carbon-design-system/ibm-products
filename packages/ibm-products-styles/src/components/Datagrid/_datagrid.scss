@@ -35,7 +35,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   display: block;
   inline-size: 100%;
 
-  :global(.#{carbon-config.$prefix}--checkbox) {
+  .#{carbon-config.$prefix}--checkbox {
     display: none;
   }
 }
@@ -65,16 +65,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   block-size: 100%;
   inline-size: 100%;
 
-  /* stylelint-disable-next-line */
-  :global {
-    .#{carbon-config.$prefix}--pagination {
-      // newer version of carbon pagination has scroll which doesn't make any sense, removing it
+  .#{carbon-config.$prefix}--pagination {
+    // newer version of carbon pagination has scroll which doesn't make any sense, removing it
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-x: unset;
+    @supports (overflow-inline: unset) {
       /* stylelint-disable-next-line declaration-property-value-disallowed-list */
-      overflow-x: unset;
-      @supports (overflow-inline: unset) {
-        /* stylelint-disable-next-line declaration-property-value-disallowed-list */
-        overflow-inline: unset;
-      }
+      overflow-inline: unset;
     }
   }
 }

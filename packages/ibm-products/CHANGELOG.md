@@ -1,3 +1,32 @@
+## `@carbon/ibm-products@2.85.0`
+### Features :rocket:
+- feat: create tearsheet pattern using preview_Tearsheet (#8937)
+- feat(emptystate): code connect integration (#8954)
+- feat(editinplace): add readOnly prop (#9007)
+- feat(createtearsheet): disable secondary button (#8950)
+
+### Bug fixes :bug:
+- fix: delete tags and restore vesions to retry release 5
+- fix: add js extension for imports
+- fix: delete tags and restore vesions to retry release 4
+- fix: delete tags and restore vesions to retry release 3
+- fix: delete tags and restore vesions to retry release 2
+- fix: delete tags and restore vesions to retry release
+- fix: workaround fix to prevent popover to close on date sel (#9065)
+- fix: tab stop issue in coachmark patterns (#8987)
+- fix: build warnings from CoachmarkOverlayElements and CoachmarkStacked (#9043)
+- fix(usePortalTarget): fix hydration error (#9029)
+- fix(coachmark): enable keyboard dragging for floating variant (#9031)
+- fix: preserve namespace in storycode (#8993)
+- fix(security): upgrade @figma/code-connect to 1.4.0 (#9016)
+- fix(usePortalTarget): fix render portal use (#9018)
+- fix(ImportModal): make `inputLabel` required and add new prop `hideInputLabel` (#9011)
+- fix: security vulnerability in isaacs/brace-expansion,lodash and undici (#8995)
+
+### Housekeeping :house:
+- refactor(preview__PageHeader): separate child components to separate from `PageHeader.tsx` file (#8988)
+- docs(changelog): update for v2.84.0 (#9013)
+
 ## `@carbon/ibm-products@2.84.0`
 ### Features :rocket:
 - feat(nonlinearreading): code connect integration (#8943)

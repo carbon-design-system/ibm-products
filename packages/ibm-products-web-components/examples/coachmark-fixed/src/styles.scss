@@ -10,8 +10,7 @@
 );
 
 @use '@carbon/utilities/scss/carousel' as carousel;
-@use '../../../src/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
-
+@use '@carbon/ibm-products-web-components/scss/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
@@ -69,7 +68,7 @@ c4p-coachmark-body {
 .carouselControlWrapper__footer {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-end;   
 }
 
 .carouselControlWrapper--buttons {

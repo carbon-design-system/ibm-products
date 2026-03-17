@@ -14,12 +14,10 @@ import '@carbon/web-components/es/components/button/button.js';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import '@carbon/web-components/es/components/link/index.js';
 import styles from './styles.scss?lit';
-
-// Import coachmark components
-import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
-//import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js';
-
-import '../../../src/components/coachmark/coachmark-tagline/index.js';
+import '../../../src/components/coachmark/index.js';
+//import '../../../src/components/coachmark/coachmark-tagline/index.js';
+// import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js'; 
 
 // Carousel story data
 const items = [
@@ -67,6 +65,44 @@ export class CoachmarkFixedExample extends LitElement {
   private onViewChangeEnd = ({ currentIndex, lastIndex }: { currentIndex: number; lastIndex: number }) => {
     this._currentViewIndex = currentIndex;
     this._lastViewIndex = lastIndex;
+    
+    // Update inert attributes after view change
+    this.updateAriaHiddenTabIndex(currentIndex);
+    
+    // Focus the appropriate button after carousel navigation
+    setTimeout(() => {
+      if (currentIndex === lastIndex) {
+        // On last slide, focus the Done button
+        const doneBtn = this.shadowRoot?.querySelector('.done-btn') as HTMLElement;
+        doneBtn?.focus();
+      } else {
+        // On other slides, focus the Next button
+        const nextBtn = this.shadowRoot?.querySelector('.next-btn') as HTMLElement;
+        nextBtn?.focus();
+      }
+    }, 10);
+  };
+
+  private updateAriaHiddenTabIndex = (itemNumber: number) => {
+    const allViews = this.carouselAPI?.allViews;
+
+    allViews &&
+      Object.values(allViews)?.forEach((item, idx) => {
+        const isActive = idx === itemNumber;
+
+        if (item) {
+          // Set aria-hidden based on active state
+          item.setAttribute('aria-hidden', String(!isActive));
+
+          if (!isActive) {
+            item.setAttribute('inert', ''); // Disable interactivity
+          } else {
+            item.removeAttribute('inert'); // Re-enable interactivity
+          }
+
+          item.removeAttribute('tabindex');
+        }
+      });
   };
 
   private handleNext() {
@@ -99,8 +135,54 @@ export class CoachmarkFixedExample extends LitElement {
           onViewChangeEnd: this.onViewChangeEnd,
           excludeSwipeSupport: true,
         });
+        
+        // Set initial inert state for inactive slides
+        setTimeout(() => {
+          this.updateAriaHiddenTabIndex(0);
+        }, 50);
       }
     }, 100);
+    
+    // Listen for coachmark close (when close button is clicked)
+    const coachmark = this.shadowRoot?.querySelector('c4p-coachmark') as any;
+    if (coachmark) {
+      // Watch the coachmark's open property directly
+      const checkOpen = () => {
+        if (this._open !== coachmark.open) {
+          this._open = coachmark.open;
+        }
+      };
+      
+      // Check periodically or on property change
+      setInterval(checkOpen, 100);
+    }
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    // Watch for _open state changes (similar to React's useEffect)
+    if (changedProperties.has('_open')) {
+      if (this._open) {
+        // When coachmark opens, initialize tabIndex and focus Next button
+        this.updateAriaHiddenTabIndex(0);
+        setTimeout(() => {
+          const nextBtn = this.shadowRoot?.querySelector('.next-btn') as HTMLElement;
+          nextBtn?.focus();
+        }, 100);
+      } else {
+        // When coachmark closes, return focus to tagline trigger (same as React)
+        setTimeout(() => {
+          // Try to find by ID first (same as React)
+          let taglineButton = document.getElementById('CoachmarkTagline');
+          
+          // Fallback: query from shadowRoot if ID doesn't work
+          if (!taglineButton) {
+            taglineButton = this.shadowRoot?.querySelector('c4p-coachmark-tagline') as HTMLElement;
+          }
+          
+          taglineButton?.focus();
+        }, 100);
+      }
+    }
   }
 
   render() {
@@ -111,6 +193,7 @@ export class CoachmarkFixedExample extends LitElement {
           .highContrast=${true}
         >
           <c4p-coachmark-tagline
+            id="CoachmarkTagline"
             title="Why are there two types of severity scores?"
             close-icon-description="close"
             ?open=${this._open}

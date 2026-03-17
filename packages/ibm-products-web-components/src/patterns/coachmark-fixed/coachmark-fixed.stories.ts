@@ -16,8 +16,6 @@ export default {
 
 export const Default = {
   render: () => {
-    return html`<div style="padding-top:200px; position: relative;">
-      <coachmark-fixed-example></coachmark-fixed-example>
-    </div>`;
+    return html` <coachmark-fixed-example></coachmark-fixed-example>`;
   },
 };

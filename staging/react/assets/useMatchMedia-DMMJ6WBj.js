@@ -1,0 +1,2 @@
+var i=Object.defineProperty;var a=(e,t)=>i(e,"name",{value:t,configurable:!0});import{r}from"./iframe-D0YM396L.js";const d=a((e,t=!1)=>{const[o,c]=r.useState(t);return r.useEffect(()=>{const n=a(h=>{c(h.matches)},"listener"),s=window.matchMedia(e);return s.addEventListener("change",n),c(s.matches),()=>{s.removeEventListener("change",n)}},[e]),o},"useMatchMedia");export{d as u};
+//# sourceMappingURL=useMatchMedia-DMMJ6WBj.js.map

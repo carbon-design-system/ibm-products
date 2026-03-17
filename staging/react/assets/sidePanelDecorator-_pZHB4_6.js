@@ -1,0 +1,2 @@
+var m=Object.defineProperty;var l=(a,t)=>m(a,"name",{value:t,configurable:!0});import{e}from"./iframe-D0YM396L.js";import{C as o}from"./Content-BC_znaEf.js";import{W as c}from"./index-BtyY-4Kl.js";const p=l((a,t)=>(r,s)=>{const{jsFlags:n}=s.args;return e.createElement("div",{className:`${t}container`},a(),e.createElement(o,{className:`${t}content`},n&&n.length!==0?e.createElement(c,{...n},e.createElement(r,null)):e.createElement(r,null)))},"sidePanelDecorator");export{p as s};
+//# sourceMappingURL=sidePanelDecorator-_pZHB4_6.js.map

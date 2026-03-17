@@ -14,9 +14,9 @@ import '@carbon/web-components/es/components/button/button.js';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import '@carbon/web-components/es/components/link/index.js';
 import styles from './styles.scss?lit';
-import '../../../src/components/coachmark/index.js';
+//import '../../../src/components/coachmark/index.js';
 //import '../../../src/components/coachmark/coachmark-tagline/index.js';
-// import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
 import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js'; 
 
 // Carousel story data

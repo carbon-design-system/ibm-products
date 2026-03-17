@@ -523,9 +523,9 @@ export const TabBarWithTabsAndTags = {
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${iconLoader(Bee16, { slot: 'icon' })}
-          <set-of-breadcrumbs
+          <set-of-breadcrumbs-example
             .breadcrumbsData="${sampleBreadcrumbs}"
-          ></set-of-breadcrumbs>
+          ></set-of-breadcrumbs-example>
           <cds-icon-button
             slot="page-actions"
             kind="ghost"
@@ -590,7 +590,9 @@ export const TabBarWithTabsAndTags = {
             >
           </cds-tabs>
           <div slot="tags">
-            <set-of-tags .tagsData="${generatedTags ?? []}"></set-of-tags>
+            <set-of-tags-example
+              .tagsData="${generatedTags ?? []}"
+            ></set-of-tags-example>
           </div>
         </c4p-page-header-tabs>
       </c4p-page-header>

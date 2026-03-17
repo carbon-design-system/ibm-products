@@ -19,7 +19,7 @@ import styles from './set-of-tags.scss?lit';
 
 const blockClass = `c4p--set-of-tags`;
 
-@customElement('set-of-tags')
+@customElement('set-of-tags-example')
 export default class SetOfTags extends LitElement {
   @state()
   hiddenTags: TagType[] = [];
@@ -281,6 +281,6 @@ export default class SetOfTags extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'set-of-tags': SetOfTags;
+    'set-of-tags-example': SetOfTags;
   }
 }

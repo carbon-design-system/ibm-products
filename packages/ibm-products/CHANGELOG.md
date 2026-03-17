@@ -1,3 +1,24 @@
+## `@carbon/ibm-products@2.86.0-rc.0`
+### Features :rocket:
+- feat(preview_Tearsheet): add support for actions prop for footer (#9103)
+- feat(Tearsheet_preview): refactor portalTarget implementation in preview_Tearsheet (#9081)
+- feat: incorporate usePresence for preview_Tearsheet and doc updates (#9062)
+- feat: Composable Tearsheet webcomponent implementation (#8841)
+- feat: refactor pattern architecture (#9061)
+
+### Bug fixes :bug:
+- fix(editinplace): readonly prop as optional (#9105)
+- fix: make style specific to sidepanel in tearsheet (#9107)
+- fix(preview_PageHeader): resolve breadcrumb bar mobile view issues (#9072)
+- fix(useravatar): design parity (#9064)
+
+### Housekeeping :house:
+- chore: Remove Percy in favour of Chromatic for VRT (#9112)
+- chore: add chromatic set up ibm-products react and wc storybook (#9086)
+- chore(deps): update dependency @vitejs/plugin-react to v5 (#9027)
+- build(deps): update to Carbon 11 compatible versions to latest (#9063)
+- chore(OptionsTile): refactor header (#9021)
+
 ## `@carbon/ibm-products@2.85.0`
 ### Features :rocket:
 - feat: create tearsheet pattern using preview_Tearsheet (#8937)

@@ -49,11 +49,14 @@ $prefix: 'c4p';
       margin-block-end: $spacing-06;
       padding-block-end: 0;
     }
+    &.#{carbon-config.$prefix}--modal-scroll-content {
+      padding-block-end: $spacing-06;
+    }
   }
 
   .#{carbon-config.$prefix}--modal-content--overflow-indicator {
     background-image: linear-gradient(to bottom, #00000000, $layer-01);
-    inset-block-end: #{$spacing-06};
+    inset-block-end: 0;
   }
 
   #{carbon-config.$prefix}-modal-heading {

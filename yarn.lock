@@ -2020,6 +2020,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@blockquote/rollup-plugin-externalize-source-dependencies@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@blockquote/rollup-plugin-externalize-source-dependencies@npm:1.0.0"
+  checksum: 10/769e4ef7572c06a0c79486bb8f2028a1a3d1e734d644eab58eacde19b5d3579b093499716bfd0db910c821b512d148d541067a4f87787dd1dc59067db59427bb
+  languageName: node
+  linkType: hard
+
 "@cacheable/memory@npm:^2.0.7":
   version: 2.0.7
   resolution: "@cacheable/memory@npm:2.0.7"
@@ -2169,6 +2176,7 @@ __metadata:
   resolution: "@carbon/ibm-products-web-components@workspace:packages/ibm-products-web-components"
   dependencies:
     "@aarsteinmedia/dotlottie-player": "npm:^6.0.5"
+    "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
     "@carbon-labs/wc-empty-state": "npm:^0.13.0"
     "@carbon/ibm-products-styles": "npm:^2.82.0"
     "@carbon/icon-helpers": "npm:^10.73.0"

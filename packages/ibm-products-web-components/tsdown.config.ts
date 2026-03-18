@@ -30,14 +30,14 @@ const esInputs = [
   'src/**/*.ts',
   '!src/**/*.stories.ts',
   '!src/**/*.test.ts',
-  '!src/**/*-helpers.ts',
+  '!src/**/*.figma.ts',
+  '!src/components/**/*-helpers.ts',
   '!src/**/_story-assets/**',
   '!src/**/*.d.ts',
   '!src/polyfills',
 ];
 
 const libInputs = [
-  'src/**/*.ts',
   'src/components/**/defs.ts',
   'src/globals/**/*.ts',
   '!src/globals/decorators/**/*.ts',
@@ -46,7 +46,7 @@ const libInputs = [
   '!src/globals/mixins/**/*.ts',
   '!src/**/*.stories.ts',
   '!src/**/*.test.ts',
-  '!src/**/*-helpers.ts',
+  '!src/components/**/*-helpers.ts',
   '!src/**/_story-assets/**',
 ];
 

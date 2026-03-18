@@ -79,9 +79,6 @@ export default {
   parameters: {
     styles,
     layout: 'fullscreen',
-    percy: {
-      waitForTimeout: 1000,
-    },
     docs: {
       page: DocsPage,
     },

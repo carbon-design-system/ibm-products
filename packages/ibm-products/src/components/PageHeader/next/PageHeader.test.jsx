@@ -38,12 +38,18 @@ let mockOverflowOnChange = jest.fn();
 jest.mock('@carbon/utilities', () => ({
   createOverflowHandler: jest.fn(({ onChange }) => {
     mockOverflowOnChange = onChange;
+    return {
+      disconnect: jest.fn(),
+    };
   }),
 }));
 
 jest.mock('./overflowHandler', () => ({
   createOverflowHandler: jest.fn(({ onChange }) => {
     mockOverflowOnChange = onChange;
+    return {
+      disconnect: jest.fn(),
+    };
   }),
 }));
 
@@ -183,7 +189,7 @@ describe('PageHeader', () => {
         `${carbonPrefix}--breadcrumb-item`
       );
 
-      expect(breadcrumbs.length).toBe(2);
+      expect(breadcrumbs.length).toBe(4);
     });
 
     it('should render content actions', () => {

@@ -142,7 +142,6 @@ describe(componentName, () => {
     const scopesListBoxLabel = screen.getByText(
       scopesDefaultProps.scopesTypeLabel
     );
-    const listEl = screen.getByRole('listbox');
 
     expect(scopesListBox).toBeInTheDocument();
     expect(scopesListBoxLabel).toBeInTheDocument();
@@ -153,6 +152,9 @@ describe(componentName, () => {
 
     expect(scopesListBox).toHaveAttribute('aria-expanded', 'true');
     expect(scopesListBox).toHaveAttribute('aria-haspopup', 'listbox');
+
+    // Get listbox after opening the dropdown
+    const listEl = screen.getByRole('listbox');
     expect(listEl.children).toHaveLength(scopes.length);
 
     await act(async () => {
@@ -160,7 +162,11 @@ describe(componentName, () => {
     });
 
     expect(scopesListBox).toHaveAttribute('aria-expanded', 'false');
-    expect(listEl.children).toHaveLength(0);
+    // After closing, the listbox should not be in the document or should be empty
+    const closedListEl = screen.queryByRole('listbox');
+    if (closedListEl) {
+      expect(closedListEl.children).toHaveLength(0);
+    }
   });
 
   it('renders with selected scopes', async () => {

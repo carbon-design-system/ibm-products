@@ -284,6 +284,9 @@ $block-size: 38.5rem;
       }
     }
   }
+  .#{$block-class}__notification:focus:before {
+    display: none;
+  }
   .#{$block-class}__notification-today:not(:first-of-type):before,
   .#{$block-class}__notification-yesterday:not(:first-of-type):before,
   .#{$block-class}__notification-previous:not(:first-of-type):before {

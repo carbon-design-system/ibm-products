@@ -24,18 +24,6 @@ c4p-coachmark {
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark::part(popover-content) {
-  translate: 0 120px;
-  transition: translate $duration-moderate-02 motion(exit, productive);
-  will-change: translate;
-}
-
-/* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark[open]::part(popover-content) {
-  translate: 0 0;
-}
-
-/* stylelint-disable-next-line selector-type-no-unknown */
 c4p-coachmark-body {
   display: flex;
   flex-direction: column;

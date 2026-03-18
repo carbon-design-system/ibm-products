@@ -19,6 +19,19 @@ import styles from './styles.scss?lit';
 import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
 import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js'; 
 
+
+// Animation styles to inject into shadow DOM
+const COACHMARK_ANIMATION_STYLES = `
+  [part="content"] {
+    translate: 0 120px;
+    transition: translate 0.24s cubic-bezier(0.2, 0, 0.38, 0.9);
+    will-change: translate;
+  }
+  [part="content"].is-visible {
+    translate: 0 0;
+  }
+`;
+
 // Carousel story data
 const items = [
   {
@@ -161,7 +174,29 @@ export class CoachmarkFixedExample extends LitElement {
   updated(changedProperties: Map<string, any>) {
     // Watch for _open state changes (similar to React's useEffect)
     if (changedProperties.has('_open')) {
+      // Get shadow DOM elements (used for both opening and closing)
+      const coachmark = this.shadowRoot?.querySelector('c4p-coachmark') as any;
+      const popoverContent = coachmark?.shadowRoot?.querySelector('cds-popover cds-popover-content') as any;
+      const shadowRoot = popoverContent?.shadowRoot;
+      const contentPart = shadowRoot?.querySelector('[part="content"]');
+      
       if (this._open) {
+        // Trigger slide-up transition
+        if (shadowRoot && contentPart) {
+         
+          if (!shadowRoot.querySelector('#coachmark-animation-styles')) {
+            const style = document.createElement('style');
+            style.id = 'coachmark-animation-styles';
+            style.textContent = COACHMARK_ANIMATION_STYLES;
+            shadowRoot.appendChild(style);
+          }
+          
+          // Trigger transition by adding class after a brief delay
+          requestAnimationFrame(() => {
+            contentPart.classList.add('is-visible');
+          });
+        }
+        
         // When coachmark opens, initialize tabIndex and focus Next button
         this.updateAriaHiddenTabIndex(0);
         setTimeout(() => {
@@ -169,6 +204,11 @@ export class CoachmarkFixedExample extends LitElement {
           nextBtn?.focus();
         }, 100);
       } else {
+        // Remove is-visible class when closing
+        if (contentPart) {
+          contentPart.classList.remove('is-visible');
+        }
+        
         // When coachmark closes, return focus to tagline trigger (same as React)
         setTimeout(() => {
           // Try to find by ID first (same as React)

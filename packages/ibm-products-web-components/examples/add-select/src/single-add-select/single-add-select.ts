@@ -19,29 +19,12 @@ import '../../../../src/components/add-select/add-select-body/add-select-body';
 import '../../../../src/components/add-select/add-select-list/add-select-list';
 import '../../../../src/components/add-select/add-select-item/add-select-item';
 
+import { AddSelectData, HierarchicalItem } from '../../../../src/globals/js/utils/add-select-data';
+
 import styles from './single-add-select.scss?lit';
 
-// Sample data for the example
-// const sampleItems = [
-//   {
-//     id: '1',
-//     title: 'Kansas',
-//     value: 'kansas',
-//   },
-//   {
-//     id: '2',
-//     title: 'Texas',
-//     value: 'texas',
-//   },
-//   {
-//     id: '3',
-//     title: 'Florida',
-//     value: 'florida',
-//   },
-// ];
-
 // Sample data for the example with hierarchy
-const sampleItems =[
+const sampleItems: HierarchicalItem[] = [
             {
               id: '1',
               title: 'Kansas',
@@ -100,6 +83,9 @@ const sampleItems =[
 export class AddSelectExample extends LitElement {
   static styles = styles;
 
+  // Initialize the data utility
+  private dataManager = new AddSelectData();
+
   @state()
   private _open: boolean = false;
 
@@ -113,75 +99,70 @@ export class AddSelectExample extends LitElement {
   private _searchTerm: string = '';
 
   @state()
-  private _filteredItems = sampleItems;
+  private _filteredItems: HierarchicalItem[] = [];
 
   @state()
-  private _currentItems = sampleItems;
+  private _currentItems: HierarchicalItem[] = [];
 
   @state()
-  private _navigationStack: Array<{items: any[], parentId: string, parentTitle: string}> = [];
+  private _navigationStack: Array<{items: HierarchicalItem[], parentId: string, parentTitle: string}> = [];
+
+  constructor() {
+    super();
+    // Initialize data manager with sample items
+    this.dataManager.setItems(sampleItems);
+    this._filteredItems = this.dataManager.getItems();
+    this._currentItems = this.dataManager.getItems();
+  }
 
   private _openAddSelect() {
     this._open = true;
     this._searchTerm = '';
-    this._filteredItems = sampleItems;
-    this._currentItems = sampleItems;
+    this._filteredItems = this.dataManager.getItems();
+    this._currentItems = this.dataManager.getItems();
     this._selectedItem = '';
     this._navigationStack = [];
+    // Clear previous selections
+    this.dataManager.clearSelections();
   }
 
   private _handleClose() {
     this._open = false;
-    this._currentItems = sampleItems;
+    this._currentItems = this.dataManager.getItems();
     this._navigationStack = [];
   }
 
   private _handleItemSelect(event: CustomEvent) {
     // Update selected item when an item is selected
     const { itemId, selected } = event.detail;
-    console.log( event.detail)
+    console.log(event.detail);
     if (selected) {
       this._selectedItem = itemId;
+      // Use the data manager to set selection (exclusive mode for single select)
+      this.dataManager.setSelectedItems(itemId, true);
     }
-    console.log(this._selectedItem)
+    console.log(this._selectedItem);
   }
 
   private _handleSubmit() {
-     if (this._selectedItem) {
-        this._handleClose();
-        this._showNotification = true;
-        setTimeout(() => {
-          this._showNotification = false;
-        }, 3000);
-      }
-      
-  }
-
-  private _searchRecursive(items: any[], searchTerm: string): any[] {
-    const results: any[] = [];
-    
-    for (const item of items) {
-      // Check if current item matches
-      if (item.title.toLowerCase().includes(searchTerm)) {
-        results.push(item);
-      }
-      
-      // Recursively search in children
-      if (item.children && item.children.entries) {
-        const childResults = this._searchRecursive(item.children.entries, searchTerm);
-        results.push(...childResults);
-      }
+    if (this._selectedItem) {
+      this._handleClose();
+      this._showNotification = true;
+      setTimeout(() => {
+        this._showNotification = false;
+      }, 3000);
     }
-    
-    return results;
   }
 
   private _handleSearch(event: CustomEvent) {
     this._searchTerm = event.detail.searchTerm.toLowerCase();
     
     if (this._searchTerm) {
-      // Search recursively through all items starting from root
-      this._filteredItems = this._searchRecursive(sampleItems, this._searchTerm);
+      // Use the data manager's search functionality
+      this._filteredItems = this.dataManager.search(this._searchTerm, {
+        caseSensitive: false,
+        searchFields: ['title', 'value']
+      });
     } else {
       this._filteredItems = this._currentItems;
     }
@@ -191,10 +172,10 @@ export class AddSelectExample extends LitElement {
     const { itemId, title, parentId } = event.detail;
     console.log('Navigate to children of:', title, itemId);
     
-    // Find the item in the entire hierarchy (not just current items)
-    const item = this._findItemById(sampleItems, itemId);
+    // Use the data manager to get children
+    const children = this.dataManager.getItemChildren(itemId);
     
-    if (item && item.children && item.children.entries) {
+    if (children.length > 0) {
       // Save current state to navigation stack
       this._navigationStack = [
         ...this._navigationStack,
@@ -206,8 +187,8 @@ export class AddSelectExample extends LitElement {
       ];
       
       // Update current items to show children
-      this._currentItems = item.children.entries;
-      this._filteredItems = item.children.entries;
+      this._currentItems = children;
+      this._filteredItems = children;
       this._searchTerm = '';
       this._selectedItem = '';
     }
@@ -246,27 +227,14 @@ export class AddSelectExample extends LitElement {
     return path;
   }
 
-  private _findItemById(items: any[], itemId: string): any {
-    for (const item of items) {
-      if (item.id === itemId) {
-        return item;
-      }
-      if (item.children && item.children.entries) {
-        const found = this._findItemById(item.children.entries, itemId);
-        if (found) {
-          return found;
-        }
-      }
-    }
-    return null;
-  }
 
   private _onNotificationClose() {
     this._showNotification = false;
   }
 
   render() {
-    const selectedItemData = this._findItemById(sampleItems, this._selectedItem);
+    // Use the data manager to get the selected item
+    const selectedItemData = this.dataManager.getItem(this._selectedItem);
 
     return html`
       <div class="example-container">
@@ -325,7 +293,8 @@ export class AddSelectExample extends LitElement {
                       <c4p-add-select-list>
                         ${this._filteredItems.map(
                           (item) => {
-                            const hasChildren = !!item.children;
+                            // Use the data manager to check if item has children
+                            const hasChildren = this.dataManager.hasChildren(item.id);
                             return html`
                               <c4p-add-select-item
                                 item-id="${item.id}"

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.35.0-rc.0`
+## `@carbon/ibm-products-web-components@0.35.0`
 ### Features :rocket:
 - feat: Composable Tearsheet webcomponent implementation (#8841)
 

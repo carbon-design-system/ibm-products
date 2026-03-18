@@ -1,0 +1,2 @@
+var c=Object.defineProperty;var r=(e,t)=>c(e,"name",{value:t,configurable:!0});import{r as u}from"./iframe-DhIv2Cz2.js";function E(e,t,i){const[d,n]=u.useState(e);return u.useEffect(()=>{const s=r(o=>{!e&&o.animationName===i&&n(!1)},"handleAnimationEnd");e&&n(!0),t?.current&&t?.current.addEventListener("animationend",s);const a=t?.current;return()=>{a&&a.removeEventListener("animationend",s)}},[e,n,t,i]),{shouldRender:d}}r(E,"usePresence");export{E as u};
+//# sourceMappingURL=usePresence-BZpvy8rl.js.map

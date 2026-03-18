@@ -1,2 +1,0 @@
-var c=Object.defineProperty;var t=(s,e)=>c(s,"name",{value:e,configurable:!0});import{u as m,c as n,e as p,_ as l,P as a}from"./iframe-D0YM396L.js";import{T as x}from"./Text-B5bUU6xC.js";function f({className:s,children:e,...r}){const i=m(),o=n(`${i}--list__item`,s);return p.createElement(x,l({as:"li",className:o},r),e)}t(f,"ListItem");f.propTypes={children:a.node,className:a.string};export{f as L};
-//# sourceMappingURL=ListItem-rKeC1lAd.js.map

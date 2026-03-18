@@ -1,0 +1,2 @@
+var u=Object.defineProperty;var l=(e,t)=>u(e,"name",{value:t,configurable:!0});import{r,p as c,X as d}from"./iframe-DhIv2Cz2.js";import{u as f}from"./index-f0w4ifyk.js";const P=l(e=>{const t=f("default-portal-target-body"),[a,o]=r.useState(e??null);return r.useEffect(()=>{e?o(e):(c.isFeatureEnabled("default-portal-target-body")||t)&&o(document.body)},[e,t]),r.useCallback(s=>a?d.createPortal(s,a):s,[a])},"usePortalTarget");export{P as u};
+//# sourceMappingURL=usePortalTarget-aIXbwh_C.js.map

@@ -1,2 +1,0 @@
-var l=Object.defineProperty;var o=(s,r)=>l(s,"name",{value:r,configurable:!0});import{u as c,c as p,e as d,_ as x,P as e}from"./iframe-LiaStyBs.js";function f({className:s,nested:r=!1,isExpressive:a=!1,...n}){const t=c(),i=p(`${t}--list--unordered`,s,{[`${t}--list--nested`]:r,[`${t}--list--expressive`]:a});return d.createElement("ul",x({className:i},n))}o(f,"UnorderedList");f.propTypes={children:e.node,className:e.string,isExpressive:e.bool,nested:e.bool};export{f as U};
-//# sourceMappingURL=UnorderedList-CdjAg9L9.js.map

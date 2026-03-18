@@ -1,0 +1,2 @@
+var i=Object.defineProperty;var r=(s,o)=>i(s,"name",{value:o,configurable:!0});import{u as m,c as f,e as w,_ as u,P as e}from"./iframe-DhIv2Cz2.js";function x({as:s="div",condensed:o=!1,narrow:a=!1,className:t,children:c,...p}){const n=m(),l=f(t,{[`${n}--row`]:!0,[`${n}--row--condensed`]:o,[`${n}--row--narrow`]:a}),d=s;return w.createElement(d,u({className:l},p),c)}r(x,"Row");x.propTypes={as:e.oneOfType([e.string,e.elementType]),children:e.node,className:e.string,condensed:e.bool,narrow:e.bool};export{x as R};
+//# sourceMappingURL=Row-WVlnOiYz.js.map

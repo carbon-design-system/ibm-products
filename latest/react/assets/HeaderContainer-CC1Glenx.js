@@ -1,0 +1,2 @@
+var l=Object.defineProperty;var t=(e,a)=>l(e,"name",{value:a,configurable:!0});import{r as d,l as c,e as E,_ as u,o as x,E as S,P as r}from"./iframe-DhIv2Cz2.js";function v({render:e,isSideNavExpanded:a=!1,...i}){const[o,s]=d.useState(a);c("keydown",n=>{x(n,S)&&s(!1)});const p=d.useCallback(()=>{s(n=>!n)},[s]);return E.createElement(e,u({},i,{isSideNavExpanded:o,onClickSideNavExpand:p}))}t(v,"HeaderContainer");v.propTypes={isSideNavExpanded:r.bool,render:r.elementType.isRequired};export{v as H};
+//# sourceMappingURL=HeaderContainer-CC1Glenx.js.map

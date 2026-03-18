@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.86.0-rc.0`
+## `@carbon/ibm-products@2.86.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): add support for actions prop for footer (#9103)
 - feat(Tearsheet_preview): refactor portalTarget implementation in preview_Tearsheet (#9081)

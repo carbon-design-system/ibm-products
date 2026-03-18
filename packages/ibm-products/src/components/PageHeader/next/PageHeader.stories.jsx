@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import {
   preview__PageHeader as PageHeader,
   preview__TruncatedText as TruncatedText,
@@ -29,7 +29,6 @@ import {
   Tabs,
   TabPanels,
   TabPanel,
-  IconButton,
   OverflowMenu,
   OverflowMenuItem,
   OperationalTag,

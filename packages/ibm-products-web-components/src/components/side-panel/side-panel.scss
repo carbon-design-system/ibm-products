@@ -167,9 +167,17 @@ $block-class-action-set: #{$prefix}--action-set;
     content: initial; /* remove border below */
   }
 
+  .#{$block-class}__title-text {
+    padding-inline-end: 0;
+  }
+
   .#{$block-class}__subtitle-text {
+    @extend .#{$block-class}__subtitle-text;
+
     &[hidden] {
       @extend .#{carbon-config.$prefix}--visually-hidden !optional;
+
+      display: none;
     }
   }
 

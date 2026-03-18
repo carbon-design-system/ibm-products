@@ -7,7 +7,6 @@
 
 import { defineConfig, type UserConfig } from 'tsdown';
 import alias from '@rollup/plugin-alias';
-import json from '@rollup/plugin-json';
 import copy from 'rollup-plugin-copy';
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
@@ -53,10 +52,9 @@ const libInputs = [
 const sharedConfig: UserConfig = {
   banner: () => ({
     js: banner,
-    dts: banner,
   }),
   platform: 'browser',
-  dts: true,
+  dts: false,
   cwd: import.meta.dirname,
   unbundle: true,
   outExtensions: () => ({ js: '.js' }),
@@ -96,9 +94,6 @@ const sharedConfig: UserConfig = {
         },
       ],
       flatten: false,
-    }),
-    json({
-      exclude: ['./package.json'],
     }),
     // Transforms .scss files into lit templates
     // Now uses modern sass.compileString() API for better performance

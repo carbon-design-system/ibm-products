@@ -63,10 +63,93 @@ export class CoachmarkOverlayElementsExample extends LitElement {
   private onViewChangeEnd = ({ currentIndex, lastIndex }: { currentIndex: number; lastIndex: number }) => {
     this._currentViewIndex = currentIndex;
     this._lastViewIndex = lastIndex;
+ 
+    // Update inert attributes after view change
+    this.updateAriaHiddenTabIndex(currentIndex);
+    
+    // Focus the appropriate button after carousel navigation
+    setTimeout(() => {
+      if (currentIndex === lastIndex) {
+        // On last slide, focus the Done button
+        const doneBtn = this.shadowRoot?.querySelector('.done-btn') as HTMLElement;
+        doneBtn?.focus();
+      } else {
+        // On other slides, focus the Next button
+        const nextBtn = this.shadowRoot?.querySelector('.next-btn') as HTMLElement;
+        nextBtn?.focus();
+      }
+    }, 10);
+  };
+
+  private updateAriaHiddenTabIndex = (itemNumber: number) => {
+    const allViews = this.carouselAPI?.allViews;
+
+    allViews &&
+      Object.values(allViews)?.forEach((item, idx) => {
+        const isActive = idx === itemNumber;
+
+        if (item) {
+          // Set aria-hidden based on active state
+          item.setAttribute('aria-hidden', String(!isActive));
+
+          if (!isActive) {
+            item.setAttribute('inert', ''); // Disable interactivity
+          } else {
+            item.removeAttribute('inert'); // Re-enable interactivity
+          }
+
+          item.removeAttribute('tabindex');
+        }
+      });
   };
 
   private handleNext() {
     this.carouselAPI?.next();
+        
+    // Set initial inert state for inactive slides
+    setTimeout(() => {
+      this.updateAriaHiddenTabIndex(0);
+    }, 50);
+   // Listen for coachmark close (when close button is clicked)
+    const coachmark = this.shadowRoot?.querySelector('c4p-coachmark') as any;
+    if (coachmark) {
+      // Watch the coachmark's open property directly
+      const checkOpen = () => {
+        if (this._open !== coachmark.open) {
+          this._open = coachmark.open;
+        }
+      };
+      
+      // Check periodically or on property change
+      setInterval(checkOpen, 100);
+    }
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    // Watch for _open state changes (similar to React's useEffect)
+    if (changedProperties.has('_open')) {
+      if (this._open) {
+        // When coachmark opens, initialize tabIndex and focus Next button
+        this.updateAriaHiddenTabIndex(0);
+        setTimeout(() => {
+          const nextBtn = this.shadowRoot?.querySelector('.next-btn') as HTMLElement;
+          nextBtn?.focus();
+        }, 100);
+      } else {
+        // When coachmark closes, return focus to tagline trigger (same as React)
+        setTimeout(() => {
+          // Try to find by ID first (same as React)
+          let beacon = document.getElementById('CoachmarkBeacon');
+          
+          // Fallback: query from shadowRoot if ID doesn't work
+          if (!beacon) {
+            beacon = this.shadowRoot?.querySelector('c4p-coachmark-beacon') as HTMLElement;
+          }
+          
+          beacon?.focus();
+        }, 100);
+      }
+    }
   }
 
   private handlePrev() {
@@ -108,6 +191,7 @@ export class CoachmarkOverlayElementsExample extends LitElement {
           <c4p-coachmark-beacon
             label="Show information"
             ?expanded=${this._open}
+            id="CoachmarkBeacon"
             @c4p-coachmark-beacon-clicked=${this.handleBeaconClick}
             slot="trigger"
           >

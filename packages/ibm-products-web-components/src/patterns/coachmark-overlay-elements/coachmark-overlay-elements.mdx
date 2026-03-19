@@ -19,7 +19,7 @@ combination of components with additional design considerations. The pattern
 code we share is meant to serve as an example implementation that can be built
 and extended further.
 
-#### Ingredients
+### Ingredients
 
 To build this pattern, we recommend including the following components:
 
@@ -27,6 +27,13 @@ To build this pattern, we recommend including the following components:
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button)
 - [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
 
+### Implementation Notes
+
+#### Carousel Integration
+Use the `@carbon/utilities` carousel for managing slide navigation:
+- Initialize after component first render
+- Handle view change events to update button states
+- Manage focus and accessibility attributes
 
 > 💡 Check our
 > [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/coachmark-overlay-elements)
@@ -38,13 +45,7 @@ To build this pattern, we recommend including the following components:
 
 <Canvas
   of={CoachmarkOverlayElementsStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        window.open('https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/coachmark-overlay-elements')
-    }
-  ]}
+  title="Coachmark overlay elements"
 ></Canvas>
 
 ## Getting started
@@ -57,7 +58,8 @@ Here's a quick example to get you started.
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
 import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-beacon/index.js';
-
+import { InitCarousel, initCarousel } from '@carbon/utilities';
+import '@carbon/web-components/es/components/button/button.js';
 ```
 
 ### HTML

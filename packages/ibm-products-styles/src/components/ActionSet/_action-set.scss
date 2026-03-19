@@ -44,7 +44,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 .#{$action-set-block-class}:not(.#{$action-set-block-class}--stacking)
   .#{$action-set-block-class}__action-button--ghost {
-  padding-inline-start: $spacing-07;
+  padding-inline-start: $spacing-05;
 }
 
 // For row-single in medium,

@@ -21,11 +21,6 @@ export default {
       page: mdx,
     },
   },
-  percy: {
-    args: {
-      open: true,
-    },
-  },
 };
 const Template = (args) => {
   // spell-checker:disable

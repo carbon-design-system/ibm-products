@@ -46,7 +46,7 @@
     "build:carbon": "sass -q --quiet-deps --style=expanded --load-path ./node_modules --load-path ../../node_modules --load-path node_modules .storybook/carbon.scss:css/carbon.css",
     "build:css": "copyfiles '../ibm-products-styles/css/**/*.*' ./ -u 2",
     "build:scss": "copyfiles '../ibm-products-styles/scss/**/*.*' ./ -u 2",
-    "build:js": "tsdown && node tasks/build.js",
+    "build:js": "node tasks/build.js",
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate/index.mjs",
     "postinstall": "ibmtelemetry --config=telemetry.yml",

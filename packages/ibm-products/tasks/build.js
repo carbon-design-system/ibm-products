@@ -10,14 +10,60 @@
 const fs = require('fs-extra');
 const path = require('path');
 const ts = require('typescript');
+const packageJson = require('../package.json');
+
+const banner = `/**
+ * Copyright IBM Corp. 2020, ${new Date().getFullYear()}
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+`;
 
 async function build() {
+  const { build: tsdown } = await import('tsdown');
+
   const packageRoot = path.resolve(__dirname, '..');
+  const tsconfigPath = path.resolve(__dirname, '..', 'tsconfig.json');
   const declarationTsconfigPath = path.resolve(
     __dirname,
     '..',
     'tsconfig.declarations.json'
   );
+  const external = getExternalPatterns();
+
+  const formats = [
+    {
+      type: 'esm',
+      directory: 'es',
+    },
+    {
+      type: 'cjs',
+      directory: 'lib',
+    },
+  ];
+
+  // Build @carbon/ibm-products outputs
+  for (const format of formats) {
+    await tsdown({
+      banner,
+      clean: false,
+      dts: false,
+      entry: ['./src/index.ts'],
+      external,
+      failOnWarn: false,
+      format: format.type,
+      logLevel: 'warn',
+      loader: {
+        '.js': 'jsx',
+      },
+      outDir: path.join(packageRoot, format.directory),
+      unbundle: true,
+      platform: 'browser',
+      target: 'es2022',
+      tsconfig: tsconfigPath,
+    });
+  }
 
   // Generate declarations once to es/ directory
   console.log('Generating TypeScript declarations...');
@@ -108,6 +154,18 @@ function formatDiagnostics(diagnostics) {
     getNewLine() {
       return '\n';
     },
+  });
+}
+
+function getExternalPatterns() {
+  const deps = [
+    ...Object.keys(packageJson.peerDependencies || {}),
+    ...Object.keys(packageJson.dependencies || {}),
+  ];
+
+  return deps.map((name) => {
+    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`^${escapedName}(/.*)?`);
   });
 }
 

@@ -43,7 +43,7 @@
     "web components"
   ],
   "scripts": {
-    "build": "yarn clean && tsdown && node tasks/build.cjs && yarn wca",
+    "build": "yarn clean && node tasks/build.js && yarn wca",
     "build:storybook": "storybook build --quiet",
     "clean": "rimraf es lib scss dist storybook-static",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
@@ -77,7 +77,6 @@
     "@ibm/telemetry-js-config-generator": "^2.1.0",
     "@mordech/vite-lit-loader": "^0.37.0",
     "@open-wc/testing": "^4.0.0",
-    "@rollup/plugin-alias": "^6.0.0",
     "@stackblitz/sdk": "^1.11.0",
     "@storybook/addon-a11y": "^9.1.15",
     "@storybook/addon-docs": "^9.1.15",
@@ -97,7 +96,6 @@
     "postcss": "^8.4.47",
     "remark-gfm": "^4.0.0",
     "rimraf": "^6.0.1",
-    "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.93.2",
     "storybook": "^9.1.15",
     "storybook-addon-accessibility-checker": ">=9.2.0-rc.0",

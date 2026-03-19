@@ -9,6 +9,7 @@ commitlint
 docgen
 dotlottie
 dsag
+exportparts
 flatpickr
 ibmproducts
 kube

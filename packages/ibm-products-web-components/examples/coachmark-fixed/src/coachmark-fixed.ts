@@ -231,6 +231,7 @@ export class CoachmarkFixedExample extends LitElement {
           ?open=${this._open}
           align=${POPOVER_ALIGNMENT.TOP}
           .highContrast=${true}
+          .caret=${false}
         >
           <c4p-coachmark-tagline
             id="CoachmarkTagline"

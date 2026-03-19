@@ -16,11 +16,21 @@
 @use '@carbon/styles/scss/motion' as *;
 @include carousel.carousel();
 @include carousel.wrapperStyles();
+
 /* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark {
-  position: fixed;
+c4p-coachmark::part(popover) {
   inset-block-end: 0;
   inset-inline-end: 160px;
+}
+
+/* stylelint-disable-next-line selector-type-no-unknown */
+c4p-coachmark::part(popover-container) {
+  position: absolute;
+}
+
+/* stylelint-disable-next-line selector-type-no-unknown */
+c4p-coachmark::part(content) {
+  inset-block-start: 0px;
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */

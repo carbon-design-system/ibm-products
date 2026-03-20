@@ -65,7 +65,7 @@ function transformToTemplate(css) {
  * @param {RegExp} [options.include=/\.scss/] The files to include.
  * @param {RegExp} [options.exclude] The files to exclude.
  * @param {Function} [options.preprocessor] The CSS preprocessor to use.
- * @returns {object} The rollup plugin to transform an `.scss` file to a `lit-html` template.
+ * @returns {object} The plugin to transform an `.scss` file to a `lit-html` template.
  */
 export default function LitSCSS({
   include = /\.scss(\?lit)?$/i,

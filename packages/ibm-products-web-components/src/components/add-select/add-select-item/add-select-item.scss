@@ -1,0 +1,95 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+$prefix: 'c4p';
+$baseClass: #{$prefix}--add-select-item;
+
+:host(#{$prefix}-add-select-item) {
+  display: block;
+}
+
+.#{$baseClass}-row {
+  display: flex;
+  align-items: center;
+  padding: $spacing-03 $spacing-05;
+  border-block-end: 1px solid $border-subtle-01;
+  cursor: pointer;
+  transition: background-color 0.11s;
+
+  &:hover {
+    background-color: $layer-hover-01;
+  }
+
+  &:focus {
+    outline: 2px solid $focus;
+    outline-offset: -2px;
+  }
+}
+
+.#{$baseClass}-row--selected {
+  background-color: $layer-selected-01;
+
+  &:hover {
+    background-color: $layer-selected-hover-01;
+  }
+}
+
+.#{$baseClass}-row--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.#{$baseClass}-cell {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.#{$baseClass}-cell-wrapper {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+  inline-size: 100%;
+}
+
+.#{$baseClass}-content {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: $spacing-03;
+}
+
+.#{$baseClass}-text {
+  flex: 1;
+}
+
+.#{$baseClass}-title {
+  @include type-style('body-01');
+
+  color: $text-primary;
+}
+
+.#{$baseClass}-subtitle {
+  @include type-style('label-01');
+
+  color: $text-secondary;
+  margin-block-start: $spacing-02;
+}
+
+.#{$baseClass}-nav-indicator {
+  display: flex;
+  align-items: center;
+  margin-inline-start: auto;
+}

@@ -21,6 +21,8 @@ import {
   Section,
   TextInput,
 } from '@carbon/react';
+import { breakpoints } from '@carbon/layout';
+import { useMatchMedia } from '../../../../global/js/hooks/useMatchMedia';
 
 interface Props {
   children?: ReactNode;
@@ -57,6 +59,10 @@ export const TearsheetWithSteps = ({
     handlePrevious,
     handleGoToStep,
   } = useStepContext();
+
+  const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  const isSm = useMatchMedia(smMediaQuery);
+  const buttonSize = isSm ? 'xl' : '2xl';
 
   return (
     <Tearsheet
@@ -145,33 +151,27 @@ export const TearsheetWithSteps = ({
           </StepGroup>
         </Tearsheet.MainContent>
       </Tearsheet.Body>
-      <Tearsheet.Footer>
-        <div className="default__action-buttons">
-          <Button
-            className="step-action-button step-action-button__cancel"
-            kind="ghost"
-            onClick={() => {
+      <Tearsheet.Footer
+        actions={[
+          {
+            kind: 'ghost',
+            label: 'Cancel',
+            onClick: () => {
               setOpen?.(false);
-            }}
-            size="xl"
-          >
-            Cancel
-          </Button>
-          <Button
-            className="step-action-button"
-            kind="secondary"
-            onClick={() => {
+            },
+          },
+          {
+            kind: 'secondary',
+            label: 'Back',
+            onClick: () => {
               handlePrevious();
-            }}
-            disabled={currentStep === 1}
-            size="xl"
-          >
-            Back
-          </Button>
-          <Button
-            size="xl"
-            className="step-action-button"
-            onClick={() => {
+            },
+            disabled: currentStep === 1,
+          },
+          {
+            kind: 'primary',
+            label: currentStep === totalSteps ? 'Submit' : 'Next',
+            onClick: () => {
               if (currentStep === totalSteps) {
                 // submit
                 setOpen?.(false);
@@ -179,12 +179,11 @@ export const TearsheetWithSteps = ({
               } else {
                 handleNext();
               }
-            }}
-          >
-            {currentStep === totalSteps ? 'Submit' : 'Next'}
-          </Button>
-        </div>
-      </Tearsheet.Footer>
+            },
+          },
+        ]}
+        buttonSize={buttonSize}
+      />
     </Tearsheet>
   );
 };

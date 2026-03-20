@@ -53,6 +53,7 @@ import {
   TearsheetHeaderActions,
   TearsheetHeaderActionsProps,
 } from './TearsheetHeaderActions';
+import TearsheetFooter, { TearsheetFooterProps } from './TearsheetFooter';
 import { breakpoints } from '@carbon/layout';
 import { useStackContext } from './StackContext';
 import { useMatchMedia } from '../../../global/js/hooks/useMatchMedia';
@@ -125,7 +126,7 @@ export interface TearsheetProps extends ComposedModalProps {
    * Specify a CSS selector that matches the DOM element that should be
    * focused when the Modal opens.
    */
-  selectorPrimaryFocus?: PropTypes.string;
+  selectorPrimaryFocus?: string;
   /**
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
@@ -158,7 +159,7 @@ export type TearsheetComponentType = React.ForwardRefExoticComponent<
   MainContent: FC<MainContentProps>;
   SummaryContent: FC<SummaryContentProps>;
   Body: FC<TearsheetBodyProps>;
-  Footer: FC<FooterProps>;
+  Footer: FC<TearsheetFooterProps>;
 };
 
 /**
@@ -210,7 +211,7 @@ const TearsheetInternal = forwardRef<
     const header = arr.find((child: any) => child.type === TearsheetHeader);
     const influencer = arr.find((child: any) => child.type === Influencer);
     const body = arr.find((child: any) => child.type === TearsheetBody);
-    const footer = arr.find((child: any) => child.type === Footer);
+    const footer = arr.find((child: any) => child.type === TearsheetFooter);
 
     const uniqueId = useRef(useId());
     const { notifyStack, stack, getDepth, getScaleFactor, getBlockSizeChange } =
@@ -411,25 +412,13 @@ export const Tearsheet = forwardRef<HTMLDivElement, TearsheetProps>(
   }
 ) as TearsheetComponentType;
 
-export interface FooterProps {
-  children: ReactNode;
-  className?: string;
-}
-const Footer = forwardRef<HTMLDivElement, FooterProps>(({ children }, ref) => {
-  return (
-    <footer className={`${blockClass}__footer`} ref={ref}>
-      {children}
-    </footer>
-  );
-});
-
 Tearsheet.Header = TearsheetHeader;
 Tearsheet.HeaderContent = TearsheetHeaderContent;
 Tearsheet.Body = TearsheetBody;
 Tearsheet.Influencer = Influencer;
 Tearsheet.MainContent = MainContent;
 Tearsheet.SummaryContent = SummaryContent;
-Tearsheet.Footer = Footer;
+Tearsheet.Footer = TearsheetFooter;
 Tearsheet.NavigationBar = TearsheetNavigationBar;
 Tearsheet.ScrollButton = TearsheetScrollButton;
 Tearsheet.HeaderActions = TearsheetHeaderActions;

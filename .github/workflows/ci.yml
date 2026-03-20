@@ -215,31 +215,163 @@ jobs:
           path: playwright-report
           retention-days: 14
 
-  vrt-runner:
-    runs-on: ubuntu-latest
+  chromatic-ibm-products:
     if:
       ${{ github.repository == 'carbon-design-system/ibm-products' &&
       github.event.pull_request.draft == false }}
-    env:
-      PERCY_TOKEN: web_d04495b0b413d61c2ea6b9118d1748b43f4fdd58d17ebe453ef8e0016b5766e4
+    runs-on: ubuntu-latest
+    outputs:
+      buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
+      storybookUrl: ${{ steps.chromatic.outputs.storybookUrl }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          # 👇 Tells the checkout which commit hash to reference
+          # https://www.chromatic.com/docs/github-actions/#recommended-configuration-for-build-events
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-          cache: 'yarn'
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
       - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
-      - name: Install browsers
-        run: yarn playwright install --with-deps
-      - name: Build project
-        run: yarn build
-      - name: Run VRT
-        if:
-          ${{ env.PERCY_TOKEN != '' && github.repository ==
-          'carbon-design-system/ibm-products' && github.event.pull_request.draft
-          == false }}
-        working-directory: packages/ibm-products
-        run: yarn percy storybook storybook-static
+      - id: chromatic
+        name: Run Chromatic
+        uses: chromaui/action@0794e6939fe40ce46a88963f818092afc427da5b # v15.3.0
+        with:
+          # 👇 Token is intentionally plaintext
+          # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
+          projectToken: chpt_c0476f97d5200bd
+          workingDir: packages/ibm-products
+          buildScriptName: storybook:build
+          zip: true # Compress build output for faster uploads
+          autoAcceptChanges: 'main' # Auto-accept changes on main branch
+          onlyChanged: true # Enable TurboSnap to only test changed stories
+          # Track changes in source files and styles
+          externals: |
+            packages/ibm-products/src/**
+            packages/ibm-products-styles/**
+          # Ignore theme.js changes to reduce false positives
+          untraced: |
+            packages/ibm-products/.storybook/theme.js
+        env:
+          # 👇 Set to the PR branch if it's a PR; otherwise, falls back to the pushed branch name
+          CHROMATIC_BRANCH:
+            ${{ github.event.pull_request.head.ref || github.ref_name }}
+          # 👇 Set to the PR head commit if it's a PR; otherwise to the ref
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
+          # 👇 Makes sure this is always set to the correct owner/repo
+          CHROMATIC_SLUG: ${{ github.repository }}
+
+  # This takes the chromatic storybook url and pipes it into a github deployment
+  # environment so that PRs will have the deploy preview listed in both the
+  # PR timeline and the 'branch deployment' section at the bottom above the
+  # status checks. This avoids noisy/large comments for deploy previews.
+  ibm-products-storybook-preview:
+    runs-on: ubuntu-latest
+    needs: chromatic-ibm-products
+    steps:
+      - name: Generate job summary
+        env:
+          buildUrl: ${{ needs.chromatic-ibm-products.outputs.buildUrl }}
+          storybookUrl: ${{ needs.chromatic-ibm-products.outputs.storybookUrl }}
+        run: |
+          echo "### @carbon/ibm-products storybook deploy preview :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+          echo "- Storybook deploy preview: ${{ env.storybookUrl }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
+
+  chromatic-ibm-products-web-components:
+    if:
+      github.event_name == 'pull_request' && github.event.pull_request.draft ==
+      false
+    runs-on: ubuntu-latest
+    outputs:
+      buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
+      storybookUrl: ${{ steps.chromatic.outputs.storybookUrl }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          # https://www.chromatic.com/docs/github-actions/#recommended-configuration-for-build-events
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Build web components and dependencies
+        run:
+          lerna run build --scope @carbon/ibm-products-web-components
+          --include-dependencies --stream
+      - id: chromatic
+        name: Run Chromatic
+        uses: chromaui/action@0794e6939fe40ce46a88963f818092afc427da5b # v15.3.0
+        with:
+          # 👇 Token is intentionally plaintext
+          # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
+          projectToken: chpt_585c8a948a7079f
+          workingDir: packages/ibm-products-web-components
+          buildScriptName: build:storybook
+          zip: true # Compress build output for faster uploads
+          autoAcceptChanges: 'main' # Auto-accept changes on main branch
+          onlyChanged: true # Enable TurboSnap to only test changed stories
+          # Track changes in web components source files
+          externals: |
+            packages/ibm-products-web-components/src/**
+        env:
+          # 👇 Set to the PR branch if it's a PR; otherwise, falls back to the pushed branch name
+          CHROMATIC_BRANCH:
+            ${{ github.event.pull_request.head.ref || github.ref_name }}
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
+          CHROMATIC_SLUG: ${{ github.repository }}
+
+  # This takes the chromatic storybook url and pipes it into a github deployment
+  # environment so that PRs will have the deploy preview listed in both the
+  # PR timeline and the 'branch deployment' section at the bottom above the
+  # status checks. This avoids noisy/large comments for deploy previews.
+  ibm-products-web-components-storybook-preview:
+    runs-on: ubuntu-latest
+    needs: chromatic-ibm-products-web-components
+    steps:
+      - name: Generate job summary
+        env:
+          buildUrl:
+            ${{ needs.chromatic-ibm-products-web-components.outputs.buildUrl }}
+          storybookUrl:
+            ${{ needs.chromatic-ibm-products-web-components.outputs.storybookUrl
+            }}
+        run: |
+          echo "### @carbon/ibm-products-web-components storybook deploy preview :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+          echo "- Storybook deploy preview: ${{ env.storybookUrl }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Chromatic build URL: ${{ env.buildUrl }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Chromatic build URL: ${{ env.buildUrl }}" >> $GITHUB_STEP_SUMMARY

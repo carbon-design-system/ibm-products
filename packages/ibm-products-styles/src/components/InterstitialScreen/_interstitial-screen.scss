@@ -40,6 +40,7 @@ $one-grid-column: calc(100% / 16);
   }
 
   &--progress {
+    overflow: auto;
     margin-block-end: $spacing-04;
   }
 
@@ -67,7 +68,11 @@ $one-grid-column: calc(100% / 16);
     margin-block-end: 0 !important;
     min-block-size: $spacing-09;
     padding-block-start: $spacing-06;
-    padding-inline-start: $spacing-07 !important;
+    padding-inline-start: $spacing-07;
+
+    @include breakpoint-down(md) {
+      padding-inline: $spacing-05;
+    }
 
     &:empty {
       min-block-size: 0;
@@ -107,27 +112,50 @@ $one-grid-column: calc(100% / 16);
 
   // FOOTER
   &--footer {
-    display: flex;
-    box-sizing: initial;
-    flex-direction: row;
-    justify-content: flex-end;
     background: $background;
     border-block-start: 1px solid $border-subtle-01;
     inline-size: 100%;
 
-    #{$block}--prev-btn,
-    #{$block}--next-btn,
-    #{$block}--start-btn {
-      inline-size: calc($one-grid-column * 3);
-      min-inline-size: 12.5rem;
-      padding-block-end: $spacing-07;
+    @include breakpoint-down(md) {
+      block-size: auto;
     }
 
-    #{$block}--skip-btn {
-      flex-grow: 1 !important;
-      max-inline-size: none;
-      padding-inline-start: $spacing-07;
+    // ButtonSet wrapper
+    .#{carbon-config.$prefix}--btn-set {
+      display: flex;
+      justify-content: flex-end;
+      inline-size: 100%;
     }
+
+    // On small screens, split width equally among all buttons
+    @include breakpoint-down(md) {
+      #{$block}--prev-btn,
+      #{$block}--next-btn,
+      #{$block}--start-btn,
+      #{$block}--skip-btn {
+        flex: 1 1 0;
+        inline-size: auto;
+        max-inline-size: none;
+        min-inline-size: 0;
+      }
+    }
+
+    // On larger screens, fixed widths for action buttons, flexible skip
+    @include breakpoint(md) {
+      #{$block}--prev-btn,
+      #{$block}--next-btn,
+      #{$block}--start-btn {
+        flex-shrink: 0;
+        inline-size: calc($spacing-11 * 3); // 240px
+        max-inline-size: 15rem;
+      }
+
+      #{$block}--skip-btn {
+        flex: 1 1 auto;
+        max-inline-size: none;
+      }
+    }
+
     .#{carbon-config.$prefix}--inline-loading {
       position: absolute;
       inline-size: $spacing-07;

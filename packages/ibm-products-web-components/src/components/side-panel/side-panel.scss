@@ -77,7 +77,7 @@ $block-class-action-set: #{$prefix}--action-set;
       @extend .#{$block-class}--right-placement;
 
       /* remove if https://github.com/carbon-design-system/ibm-products/pull/3983 merged */
-      border-inline-end: 1px solid $border-subtle-02;
+      border-inline-end: none;
       inset-inline-end: 0;
     }
 
@@ -86,7 +86,7 @@ $block-class-action-set: #{$prefix}--action-set;
       @extend .#{$block-class}--left-placement;
 
       /* remove if https://github.com/carbon-design-system/ibm-products/pull/3983 merged */
-      border-inline-end: 1px solid $border-subtle-02;
+      border-inline-end: 1px solid $border-subtle-01;
       inset-inline-start: 0;
     }
 
@@ -167,9 +167,17 @@ $block-class-action-set: #{$prefix}--action-set;
     content: initial; /* remove border below */
   }
 
+  .#{$block-class}__title-text {
+    padding-inline-end: 0;
+  }
+
   .#{$block-class}__subtitle-text {
+    @extend .#{$block-class}__subtitle-text;
+
     &[hidden] {
       @extend .#{carbon-config.$prefix}--visually-hidden !optional;
+
+      display: none;
     }
   }
 
@@ -180,6 +188,10 @@ $block-class-action-set: #{$prefix}--action-set;
     &[hidden] {
       @extend .#{carbon-config.$prefix}--visually-hidden !optional;
     }
+
+    ::slotted(.#{$block-class}__action-toolbar-leading-button) {
+      margin-inline-end: $spacing-03;
+    }
   }
 
   .#{$block-class} .#{$block-class}__action-toolbar[hidden] {
@@ -188,6 +200,23 @@ $block-class-action-set: #{$prefix}--action-set;
 
   .#{$block-class}[has-slug] {
     @extend .#{$block-class}--has-slug;
+  }
+
+  .#{$block-class}[has-slug] [scrolls] {
+    /* override carbon ai removing background gradient */
+    background:
+      linear-gradient(
+          to top,
+          var(--cds-layer) 0%,
+          $ai-aura-start 0%,
+          15%,
+          $ai-aura-end 50%
+        )
+        padding-box,
+      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) padding-box,
+      linear-gradient(to bottom, $ai-border-start, $ai-border-end) border-box,
+      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
   }
 
   [scrolls] {
@@ -244,7 +273,7 @@ $block-class-action-set: #{$prefix}--action-set;
       }
 
       &[actions-multiple='triple'] {
-        --flex-direction: column;
+        --flex-direction: column-reverse;
 
         ::slotted(#{carbon-config.$prefix}-button) {
           flex: initial;
@@ -256,7 +285,7 @@ $block-class-action-set: #{$prefix}--action-set;
 
     // -1 in @container query is for 1px left border
     @container (width <= #{map.get(spv.$side-panel-sizes, sm)}) {
-      --flex-direction: column;
+      --flex-direction: column-reverse;
 
       ::slotted(#{carbon-config.$prefix}-button) {
         flex: initial;
@@ -271,6 +300,7 @@ $block-class-action-set: #{$prefix}--action-set;
     @include actions-placement();
 
     display: flex;
+    gap: 1px;
     inline-size: 100%;
 
     ::slotted(#{carbon-config.$prefix}-button) {

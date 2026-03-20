@@ -287,6 +287,7 @@ jobs:
           retention-days: 14
 
   chromatic-ibm-products:
+    needs: setup
     if:
       ${{ github.repository == 'carbon-design-system/ibm-products' &&
       github.event.pull_request.draft == false }}
@@ -305,20 +306,13 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
-        id: cache
+      - name: Restore node_modules
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: |
             node_modules
             */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
-      - name: Install dependencies
-        env:
-          YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}
       - id: chromatic
         name: Run Chromatic
         uses: chromaui/action@0794e6939fe40ce46a88963f818092afc427da5b # v15.3.0
@@ -366,6 +360,7 @@ jobs:
           echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
 
   chromatic-ibm-products-web-components:
+    needs: setup
     if:
       github.event_name == 'pull_request' && github.event.pull_request.draft ==
       false
@@ -384,20 +379,13 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
-        id: cache
+      - name: Restore node_modules
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: |
             node_modules
             */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
-      - name: Install dependencies
-        env:
-          YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}
       - name: Build web components and dependencies
         run:
           lerna run build --scope @carbon/ibm-products-web-components

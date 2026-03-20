@@ -10186,6 +10186,11 @@ button.c4p--add-select__global-filter-toggle--open {
   -webkit-line-clamp: 2;
   line-clamp: 2;
 }
+.c4p--page-header .c4p--page-header__subtitle-node {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
 .c4p--page-header .c4p--page-header__available-row {
   font-size: var(--cds-body-01-font-size, 0.875rem);
   font-weight: var(--cds-body-01-font-weight, 400);

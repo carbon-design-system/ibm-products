@@ -478,11 +478,23 @@ const longSubtitle =
   'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on and on and on and on and on and on and on.';
 const demoSubtitle = 'This report details the monthly authentication failures';
 
-const longSubtitleReactNode = (
+const longSubtitleWithTooltipReactNode = (
   <TruncatedText
-    id="page-header-long-subtitle"
+    id="page-header-long-subtitle-with-tooltip"
     value={longSubtitle}
     type="tooltip"
+    align="bottom"
+    autoAlign
+  />
+);
+
+const longSubtitleWithExpandReactNode = (
+  <TruncatedText
+    id="page-header-long-subtitle-with-tooltip"
+    value={longSubtitle}
+    type="expand"
+    collapseLabel="View less"
+    expandLabel="View more"
     align="bottom"
     autoAlign
   />
@@ -757,7 +769,7 @@ export const withSubtitle = Template.bind({});
 withSubtitle.storyName = 'Page header with title and subtitle';
 withSubtitle.args = {
   title: 2,
-  subtitle,
+  subtitle: subtitle,
   breadcrumbs: 2,
   navigation: 1,
   ...commonArgs,
@@ -809,11 +821,28 @@ fullyLoaded.args = {
   ...commonArgs,
 };
 
-export const fullyLoadedAndSome = Template.bind({});
-fullyLoadedAndSome.storyName = 'Page header with long values and many items';
-fullyLoadedAndSome.args = {
+export const fullyLoadedAndSomeWithTooltip = Template.bind({});
+fullyLoadedAndSomeWithTooltip.storyName =
+  'Page header with long values and many items with tooltip at subtitle';
+fullyLoadedAndSomeWithTooltip.args = {
   title: 3,
-  subtitle: longSubtitleReactNode,
+  subtitle: longSubtitleWithTooltipReactNode,
+  breadcrumbs: 3,
+  pageActions: 3,
+  children: 2,
+  navigation: 2,
+  tags: 2,
+  actionBarItems: 3,
+  hasCollapseHeaderToggle: true,
+  ...commonArgs,
+};
+
+export const fullyLoadedAndSomeWithExpand = Template.bind({});
+fullyLoadedAndSomeWithExpand.storyName =
+  'Page header with long values and many items with expand at subtitle';
+fullyLoadedAndSomeWithExpand.args = {
+  title: 3,
+  subtitle: longSubtitleWithExpandReactNode,
   breadcrumbs: 3,
   pageActions: 3,
   children: 2,

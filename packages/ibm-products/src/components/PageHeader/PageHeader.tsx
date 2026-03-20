@@ -27,6 +27,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  isValidElement,
 } from 'react';
 import { TagSet } from '../TagSet/TagSet';
 import { baseFontSize, spacing } from '@carbon/layout';
@@ -1065,9 +1066,15 @@ export const PageHeader = React.forwardRef(
               {subtitle && (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
-                    <span className={`${blockClass}__subtitle-text`}>
-                      {subtitle}
-                    </span>
+                    {isValidElement(subtitle) ? (
+                      <span className={`${blockClass}__subtitle-node`}>
+                        {subtitle}
+                      </span>
+                    ) : (
+                      <span className={`${blockClass}__subtitle-text`}>
+                        {subtitle}
+                      </span>
+                    )}
                   </Column>
                 </Row>
               )}

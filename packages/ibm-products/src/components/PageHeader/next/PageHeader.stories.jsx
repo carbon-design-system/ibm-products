@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import {
   preview__PageHeader as PageHeader,
   preview__TruncatedText as TruncatedText,
@@ -29,7 +29,6 @@ import {
   Tabs,
   TabPanels,
   TabPanel,
-  IconButton,
   OverflowMenu,
   OverflowMenuItem,
   OperationalTag,
@@ -764,3 +763,146 @@ export const Compact = (args) => (
     </TabPanels>
   </Tabs>
 );
+
+export const CustomRenderWithCallbacks = ({
+  border,
+  pageActionsFlush,
+  contentActionsFlush,
+  renderBreadcrumbIcon,
+  title,
+  ...args
+}) => {
+  const handleContentFullyCollapsed = useCallback((collapsed) => {
+    console.log('onContentFullyCollapsed:', collapsed);
+  }, []);
+
+  const handleTitleClipped = useCallback((clipped) => {
+    console.log('onTitleClipped:', clipped);
+  }, []);
+
+  const handleContentActionsClipped = useCallback((clipped) => {
+    console.log('onContentActionsClipped:', clipped);
+  }, []);
+
+  return (
+    <Tabs>
+      <PageHeader.Root
+        {...args}
+        onContentFullyCollapsed={handleContentFullyCollapsed}
+        onTitleClipped={handleTitleClipped}
+        onContentActionsClipped={handleContentActionsClipped}
+      >
+        <PageHeader.BreadcrumbBar
+          border={border}
+          contentActionsFlush={contentActionsFlush}
+          renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+          contentActions={({ contentActionsClipped }) =>
+            contentActionsClipped ? (
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
+              />
+            ) : null
+          }
+          pageActions={breadcrumbPageActions}
+        >
+          <Breadcrumb>
+            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          </Breadcrumb>
+        </PageHeader.BreadcrumbBar>
+        <PageHeader.Content
+          title={title}
+          pageActions={({ fullyCollapsed }) =>
+            !fullyCollapsed ? (
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
+              />
+            ) : null
+          }
+        >
+          <PageHeader.ContentText subtitle="Subtitle">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </PageHeader.ContentText>
+        </PageHeader.Content>
+        <PageHeader.TabBar>
+          <TabList>
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+            <Tab>Tab 3</Tab>
+            <Tab>Tab 4</Tab>
+            <Tab>Tab 5</Tab>
+            <Tab>Tab 6</Tab>
+            <Tab>Tab 7</Tab>
+          </TabList>
+        </PageHeader.TabBar>
+      </PageHeader.Root>
+      <TabPanels>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 1
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 2
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 3
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 4
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 5
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 6
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 7
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+CustomRenderWithCallbacks.args = {
+  border: true,
+  contentActionsFlush: false,
+  title:
+    'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+  renderBreadcrumbIcon: true,
+};
+
+CustomRenderWithCallbacks.argTypes = {
+  border: {
+    description: 'Specify whether to render BreadcrumbBar border',
+    control: {
+      type: 'boolean',
+    },
+  },
+  contentActionsFlush: {
+    description:
+      'Specify whether the content actions within BreadcrumbBar should be flush with the page actions',
+    control: {
+      type: 'boolean',
+    },
+  },
+  title: {
+    description:
+      'Provide the title text to be rendered within  PageHeaderContent',
+    control: {
+      type: 'text',
+    },
+  },
+  renderBreadcrumbIcon: {
+    description:
+      'Specify whether to render the BreadcrumbBar icon (storybook control only)',
+    control: {
+      type: 'boolean',
+    },
+  },
+};

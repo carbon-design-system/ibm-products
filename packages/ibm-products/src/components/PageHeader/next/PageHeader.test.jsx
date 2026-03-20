@@ -949,6 +949,7 @@ describe('PageHeader', () => {
       window.IntersectionObserver = jest.fn().mockImplementation(() => ({
         observe: () => null,
         unobserve: () => null,
+        disconnect: () => null,
       }));
     });
     it('should render a tab bar with scroller button and tags', () => {

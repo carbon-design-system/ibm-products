@@ -165,20 +165,24 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Download node_modules
-        id: deps
-        continue-on-error: true
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
-          name: node-modules
-      - name: Install dependencies if missing
-        if: steps.deps.outcome == 'failure'
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: CI snapshot tests for c4p
         run: yarn ci-check:test:c4p:snapshot
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p --collectCoverage
-      - name: Upload coverage reports to Codecov with GitHub Action
+      - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -358,15 +362,18 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Download node_modules
-        id: deps
-        continue-on-error: true
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
-          name: node-modules
-          path: .
-      - name: Install dependencies if missing
-        if: steps.deps.outcome == 'failure'
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - id: chromatic
         name: Run Chromatic
@@ -435,14 +442,18 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Download node_modules
-        id: deps
-        continue-on-error: true
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
-          name: node-modules
-      - name: Install dependencies if missing
-        if: steps.deps.outcome == 'failure'
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Build web components and dependencies
         run:
@@ -490,5 +501,4 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
           echo "- Storybook deploy preview: ${{ env.storybookUrl }}" >> $GITHUB_STEP_SUMMARY
           echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Chromatic build URL: ${{ env.buildUrl }}" >> $GITHUB_STEP_SUMMARY
           echo "- Chromatic build URL: ${{ env.buildUrl }}" >> $GITHUB_STEP_SUMMARY

@@ -28,13 +28,6 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Cache node_modules
-        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
 
   build:
     needs: setup
@@ -46,24 +39,21 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - name: Restore node_modules
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: Build packages and storybook
         run: yarn build
-      - name: Cache build artifacts
-        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
+          name: build-artifacts
           path: |
             packages/*/lib
             packages/*/dist
             packages/*/es
             packages/*/storybook-static
-          key: ${{ runner.os }}-build-${{ github.sha }}
+          retention-days: 1
 
   format:
     needs: setup
@@ -75,13 +65,9 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - name: Restore node_modules
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: Check formatting of project files
         run: yarn format:diff
 
@@ -95,13 +81,9 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - name: Restore node_modules
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: CI lint checks
         run: yarn ci-check:lint
 
@@ -115,13 +97,9 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - name: Restore node_modules
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: CI spellcheck checks
         run: yarn ci-check:spellcheck
 
@@ -135,13 +113,9 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - name: Restore node_modules
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: CI snapshot tests for c4p
         run: yarn ci-check:test:c4p:snapshot
       - name: CI tests for c4p
@@ -161,13 +135,9 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - name: Restore node_modules
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: Install browsers
         working-directory: packages/ibm-products-web-components
         run: yarn playwright install --with-deps
@@ -195,22 +165,22 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - name: Restore node_modules
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      # Download build artifacts with fallback
+      - name: Download build artifacts
+        id: download-artifacts
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        continue-on-error: true
         with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
-      - name: Restore build artifacts
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            packages/*/lib
-            packages/*/dist
-            packages/*/es
-            packages/*/storybook-static
-          key: ${{ runner.os }}-build-${{ github.sha }}
+          name: build-artifacts
+
+      # Fallback: rebuild if artifacts are not available (e.g., expired after 1 day)
+      - name: Build project (fallback)
+        if: steps.download-artifacts.outcome == 'failure'
+        run: yarn build
 
       - name: Install browsers
         run: yarn playwright install --with-deps
@@ -306,13 +276,9 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - name: Restore node_modules
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - id: chromatic
         name: Run Chromatic
         uses: chromaui/action@0794e6939fe40ce46a88963f818092afc427da5b # v15.3.0
@@ -379,13 +345,9 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - name: Restore node_modules
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: Build web components and dependencies
         run:
           lerna run build --scope @carbon/ibm-products-web-components

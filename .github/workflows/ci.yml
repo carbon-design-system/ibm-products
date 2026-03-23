@@ -246,6 +246,14 @@ jobs:
           name: build-artifacts
           path: .
 
+      # Debug: Check what was downloaded
+      - name: List downloaded files
+        run: |
+          echo "=== Checking for storybook-static ==="
+          find . -name "storybook-static" -type d || echo "No storybook-static found"
+          echo "=== Listing packages directory ==="
+          ls -la packages/ibm-products/ || echo "packages/ibm-products not found"
+
       # Fallback: rebuild if artifacts are not available (e.g., expired after 1 day)
       - name: Build project (fallback)
         if: steps.build-artifacts.outcome == 'failure'

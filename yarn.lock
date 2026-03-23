@@ -2154,7 +2154,7 @@ __metadata:
     "@ibm/telemetry-js": "npm:^1.9.1"
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^10.0.0"
-    glob: "npm:^11.0.1"
+    glob: "npm:^13.0.0"
     jest: "npm:^29.7.0"
     jest-config-ibm-cloud-cognitive: "npm:^1.45.0"
     jest-environment-jsdom: "npm:^29.7.0"
@@ -2269,7 +2269,7 @@ __metadata:
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^10.0.0"
     fs-extra: "npm:^11.3.0"
-    glob: "npm:^11.0.1"
+    glob: "npm:^13.0.0"
     jest: "npm:^29.7.0"
     jest-config-ibm-cloud-cognitive: "npm:^1.45.0"
     jest-environment-jsdom: "npm:^29.7.0"
@@ -14230,7 +14230,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^11.0.0, glob@npm:^11.0.1, glob@npm:^11.0.3, glob@npm:^11.0.4":
+"glob@npm:^11.0.0, glob@npm:^11.0.3, glob@npm:^11.0.4":
   version: 11.1.0
   resolution: "glob@npm:11.1.0"
   dependencies:

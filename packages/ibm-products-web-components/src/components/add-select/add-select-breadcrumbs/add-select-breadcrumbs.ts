@@ -12,6 +12,7 @@ import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
+import '@carbon/web-components/es/components/link/index.js';
 import { prefix } from '../../../globals/settings';
 import styles from './add-select-breadcrumbs.scss?lit';
 
@@ -69,12 +70,17 @@ class CDSAddSelectBreadcrumbs extends LitElement {
         ${path.map((entry, idx) => {
           const isCurrentPage = idx === path.length - 1;
           return html`
-            <cds-breadcrumb-item
-              ?is-current-page=${isCurrentPage}
-              @click=${(e: Event) => this._handleClick(e, idx)}
-              href="#"
-            >
-              ${entry.title}
+            <cds-breadcrumb-item ?is-current-page=${isCurrentPage}>
+              ${isCurrentPage
+                ? entry.title
+                : html`
+                    <cds-link
+                      href="#"
+                      @click=${(e: Event) => this._handleClick(e, idx)}
+                    >
+                      ${entry.title}
+                    </cds-link>
+                  `}
             </cds-breadcrumb-item>
           `;
         })}

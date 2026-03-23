@@ -34,7 +34,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
 
   build:
     needs: setup
@@ -54,7 +54,9 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
@@ -89,7 +91,9 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
@@ -114,7 +118,9 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
@@ -139,7 +145,9 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
@@ -232,7 +240,9 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
@@ -244,15 +254,7 @@ jobs:
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: build-artifacts
-          path: .
-
-      # Debug: Check what was downloaded
-      - name: List downloaded files
-        run: |
-          echo "=== Checking for storybook-static ==="
-          find . -name "storybook-static" -type d || echo "No storybook-static found"
-          echo "=== Listing packages directory ==="
-          ls -la packages/ibm-products/ || echo "packages/ibm-products not found"
+          path: packages
 
       # Fallback: rebuild if artifacts are not available (e.g., expired after 1 day)
       - name: Build project (fallback)

@@ -17,7 +17,7 @@ import '../add-select-item/add-select-item';
 import {
   AddSelectData,
   HierarchicalItem,
-} from '../../../globals/js/utils/add-select-data';
+} from '../../../globals/js/utils/add-select/add-select-data';
 import { prefix } from '../../../globals/settings';
 
 // Sample hierarchical data

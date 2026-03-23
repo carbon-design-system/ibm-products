@@ -28,14 +28,13 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Upload node_modules
-        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+      - name: Cache node_modules
+        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
-          name: node-modules
           path: |
             node_modules
             */**/node_modules
-          retention-days: 3
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}
 
   build:
     needs: setup
@@ -48,15 +47,16 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Download node_modules
-        id: deps
-        continue-on-error: true
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
-          name: node-modules
-          path: .
-      - name: Install dependencies if missing
-        if: steps.deps.outcome == 'failure'
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Build packages and storybook
         run: yarn build
@@ -82,15 +82,16 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Download node_modules
-        id: deps
-        continue-on-error: true
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
-          name: node-modules
-          path: .
-      - name: Install dependencies if missing
-        if: steps.deps.outcome == 'failure'
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Check formatting of project files
         run: yarn format:diff
@@ -106,15 +107,16 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Download node_modules
-        id: deps
-        continue-on-error: true
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
-          name: node-modules
-          path: .
-      - name: Install dependencies if missing
-        if: steps.deps.outcome == 'failure'
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: CI lint checks
         run: yarn ci-check:lint
@@ -130,15 +132,16 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Download node_modules
-        id: deps
-        continue-on-error: true
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
-          name: node-modules
-          path: .
-      - name: Install dependencies if missing
-        if: steps.deps.outcome == 'failure'
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: CI spellcheck checks
         run: yarn ci-check:spellcheck
@@ -183,15 +186,16 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Download node_modules
-        id: deps
-        continue-on-error: true
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
-          name: node-modules
-          path: .
-      - name: Install dependencies if missing
-        if: steps.deps.outcome == 'failure'
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Install browsers
         working-directory: packages/ibm-products-web-components
@@ -221,15 +225,16 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Download node_modules
-        id: deps
-        continue-on-error: true
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
-          name: node-modules
-          path: .
-      - name: Install dependencies if missing
-        if: steps.deps.outcome == 'failure'
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
       # Download build artifacts with fallback

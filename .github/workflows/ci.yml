@@ -54,6 +54,7 @@ jobs:
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: node-modules
+          path: .
       - name: Install dependencies if missing
         if: steps.deps.outcome == 'failure'
         run: yarn install --immutable
@@ -87,6 +88,7 @@ jobs:
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: node-modules
+          path: .
       - name: Install dependencies if missing
         if: steps.deps.outcome == 'failure'
         run: yarn install --immutable
@@ -110,6 +112,7 @@ jobs:
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: node-modules
+          path: .
       - name: Install dependencies if missing
         if: steps.deps.outcome == 'failure'
         run: yarn install --immutable
@@ -133,6 +136,7 @@ jobs:
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: node-modules
+          path: .
       - name: Install dependencies if missing
         if: steps.deps.outcome == 'failure'
         run: yarn install --immutable
@@ -185,6 +189,7 @@ jobs:
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: node-modules
+          path: .
       - name: Install dependencies if missing
         if: steps.deps.outcome == 'failure'
         run: yarn install --immutable
@@ -222,6 +227,7 @@ jobs:
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: node-modules
+          path: .
       - name: Install dependencies if missing
         if: steps.deps.outcome == 'failure'
         run: yarn install --immutable
@@ -233,6 +239,7 @@ jobs:
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: build-artifacts
+          path: .
 
       # Fallback: rebuild if artifacts are not available (e.g., expired after 1 day)
       - name: Build project (fallback)
@@ -340,6 +347,7 @@ jobs:
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: node-modules
+          path: .
       - name: Install dependencies if missing
         if: steps.deps.outcome == 'failure'
         run: yarn install --immutable

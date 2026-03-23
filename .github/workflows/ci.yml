@@ -34,7 +34,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
 
   build:
     needs: setup
@@ -54,7 +54,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)
@@ -91,7 +91,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)
@@ -118,7 +118,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)
@@ -145,7 +145,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)
@@ -201,7 +201,9 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ github.sha }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
@@ -240,7 +242,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-modules-
       - name: Install dependencies (fallback)

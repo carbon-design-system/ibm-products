@@ -13,7 +13,7 @@ import { customElement, state } from 'lit/decorators.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/notification/toast-notification.js';
 
-import '../../../../src/components/tearsheet/index';
+import '../../../../src/components/tearsheet-preview/index';
 import '../../../../src/components/add-select/add-select/add-select';
 import '../../../../src/components/add-select/add-select-body/add-select-body';
 import '../../../../src/components/add-select/add-select-list/add-select-list';
@@ -263,81 +263,89 @@ export class AddSelectExample extends LitElement {
             `
           : ''}
 
-        <!-- Single Add Select Pattern using Tearsheet -->
+        <!-- Single Add Select Pattern using Preview Tearsheet -->
         ${this._open ? html`
           <c4p-add-select>
-            <c4p-tearsheet
+            <c4p-preview-tearsheet
               ?open=${this._open}
-              width="narrow"
-              @c4p-tearsheet-closed="${this._handleClose}"
+              variant="narrow"
+              @c4p-preview-tearsheet-closed="${this._handleClose}"
             >
               <!-- Header -->
-              <h3 slot="title">Select category</h3>
-              <div slot="description">Choose one category from the list below </div>
+              <c4p-tearsheet-header>
+                <c4p-tearsheet-header-content title="Select category">
+                  <div slot="description">Choose one category from the list below</div>
+                </c4p-tearsheet-header-content>
+              </c4p-tearsheet-header>
 
               <!-- Body with Add Select Content -->
-              <c4p-add-select-body
-                global-search-label="Search categories"
-                global-search-placeholder="Search..."
-                items-label="Categories"
-                search-results-title="Search results"
-                no-results-title="No results found"
-                no-results-description="Try adjusting your search"
-                .itemCount="${this._filteredItems.length}"
-                .path="${this._getBreadcrumbPath()}"
-                @c4p-add-select-body-search="${this._handleSearch}"
-                @c4p-add-select-body-breadcrumb-click="${this._handleBreadcrumbClick}"
-              >
-                ${this._filteredItems.length > 0
-                  ? html`
-                      <c4p-add-select-list>
-                        ${this._filteredItems.map(
-                          (item) => {
-                            // Use the data manager to check if item has children
-                            const hasChildren = this.dataManager.hasChildren(item.id);
-                            return html`
-                              <c4p-add-select-item
-                                item-id="${item.id}"
-                                title="${item.title}"
-                                value="${item.value}"
-                                ?has-children="${hasChildren}"
-                                ?selected="${this._selectedItem === item.id}"
-                                @c4p-add-select-item-select="${this._handleItemSelect}"
-                                @c4p-add-select-item-navigate="${this._handleNavigate}"
-                              >
-                              </c4p-add-select-item>
-                            `;
-                          }
-                        )}
-                      </c4p-add-select-list>
-                    `
-                  : html`
-                      <div class="no-results">
-                        <h4 class="no-results__title">No results found</h4>
-                        <p class="no-results__description">
-                          Try adjusting your search or browse categories
-                        </p>
-                      </div>
-                    `}
-              </c4p-add-select-body>
+              <c4p-tearsheet-body>
+                <c4p-add-select-body
+                  slot="main-content"
+                  global-search-label="Search categories"
+                  global-search-placeholder="Search..."
+                  items-label="Categories"
+                  search-results-title="Search results"
+                  no-results-title="No results found"
+                  no-results-description="Try adjusting your search"
+                  .itemCount="${this._filteredItems.length}"
+                  .path="${this._getBreadcrumbPath()}"
+                  @c4p-add-select-body-search="${this._handleSearch}"
+                  @c4p-add-select-body-breadcrumb-click="${this._handleBreadcrumbClick}"
+                >
+                  ${this._filteredItems.length > 0
+                    ? html`
+                        <c4p-add-select-list>
+                          ${this._filteredItems.map(
+                            (item) => {
+                              // Use the data manager to check if item has children
+                              const hasChildren = this.dataManager.hasChildren(item.id);
+                              return html`
+                                <c4p-add-select-item
+                                  item-id="${item.id}"
+                                  title="${item.title}"
+                                  value="${item.value}"
+                                  ?has-children="${hasChildren}"
+                                  ?selected="${this._selectedItem === item.id}"
+                                  @c4p-add-select-item-select="${this._handleItemSelect}"
+                                  @c4p-add-select-item-navigate="${this._handleNavigate}"
+                                >
+                                </c4p-add-select-item>
+                              `;
+                            }
+                          )}
+                        </c4p-add-select-list>
+                      `
+                    : html`
+                        <div class="no-results">
+                          <h4 class="no-results__title">No results found</h4>
+                          <p class="no-results__description">
+                            Try adjusting your search or browse categories
+                          </p>
+                        </div>
+                      `}
+                </c4p-add-select-body>
+              </c4p-tearsheet-body>
 
               <!-- Footer with Action Buttons -->
-              <cds-button
-                slot="actions"
-                kind="secondary"
-                @click="${this._handleClose}"
-              >
-                Cancel
-              </cds-button>
-              <cds-button
-                slot="actions"
-                kind="primary"
-                @click="${this._handleSubmit}"
-                ?disabled="${!this._selectedItem}"
-              >
-                Select
-              </cds-button>
-            </c4p-tearsheet>
+              <c4p-tearsheet-footer>
+                <div class="default__action-buttons">
+                  <cds-button
+                    kind="secondary"
+                    @click="${this._handleClose}"
+                  >
+                    Cancel
+                  </cds-button>
+                  <cds-button
+                    kind="primary"
+                    @click="${this._handleSubmit}"
+                    ?disabled="${!this._selectedItem}"
+                  >
+                    Select
+                  </cds-button>
+                </div>
+              </c4p-tearsheet-footer>
+            </c4p-preview-tearsheet>
           </c4p-add-select>
         ` : ''}
       </div>

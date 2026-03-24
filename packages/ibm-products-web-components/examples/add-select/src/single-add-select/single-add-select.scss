@@ -129,3 +129,15 @@ cds-toast-notification {
   right: $spacing-05;
   z-index: 9999;
 }
+
+// Footer action buttons styles - equal width buttons
+.default__action-buttons {
+  display: flex;
+  width: 100%;
+
+  > #{$carbon-prefix}-button {
+    flex: 1;
+    block-size: $spacing-11;
+    max-inline-size: none;
+  }
+}

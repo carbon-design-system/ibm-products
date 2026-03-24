@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,10 +26,10 @@ import Activity16 from '@carbon/icons/es/activity/16.js';
 import AiGenerate16 from '@carbon/icons/es/ai-generate/16.js';
 import CloudFoundry16 from '@carbon/icons/es/cloud-foundry--1/16.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
-import './_story-assets/set-of-tags';
-import './_story-assets/set-of-breadcrumbs';
-import './_story-assets/set-of-page-actions';
-import { generateTags } from './_story-assets/set-of-tags/utils';
+import './page-header-breadcrumbs-set';
+import './page-header-actions-set';
+import './page-header-tags-set';
+import { generateTags } from './page-header-tags-set/utils';
 
 const args = {
   border: true,
@@ -112,10 +112,10 @@ export const Default = {
             ${renderBreadcrumbIcon
               ? iconLoader(Bee16, { slot: 'icon' })
               : undefined}
-            <set-of-breadcrumbs
+            <c4p-page-header-breadcrumbs-set
               .breadcrumbsData="${sampleBreadcrumbsDefault}"
               title="${title}"
-            ></set-of-breadcrumbs>
+            ></c4p-page-header-breadcrumbs-set>
             <div slot="content-actions">
               <div class="content-actions-wrapper">
                 <cds-button size="md"
@@ -124,7 +124,7 @@ export const Default = {
                 >
               </div>
             </div>
-            <set-of-page-actions
+            <c4p-page-header-actions-set
               slot="page-actions"
               .actionsData="${[
                 { label: 'action 1' },
@@ -144,7 +144,7 @@ export const Default = {
                 ${iconLoader(CloudFoundry16, { slot: 'icon' })}
                 <span slot="tooltip-content">action 3</span>
               </cds-icon-button>
-            </set-of-page-actions>
+            </c4p-page-header-actions-set>
           </c4p-page-header-breadcrumb>
           <c4p-page-header-content title="${title}">
             <c4p-page-header-content-text subtitle="Subtitle">
@@ -523,36 +523,31 @@ export const TabBarWithTabsAndTags = {
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${iconLoader(Bee16, { slot: 'icon' })}
-          <set-of-breadcrumbs-example
+          <c4p-page-header-breadcrumbs-set
             .breadcrumbsData="${sampleBreadcrumbs}"
-          ></set-of-breadcrumbs-example>
-          <cds-icon-button
+            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+          ></c4p-page-header-breadcrumbs-set>
+          <c4p-page-header-actions-set
             slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
+            .actionsData="${[
+              { label: 'action 1' },
+              { label: 'action 2' },
+              { label: 'action 3' },
+            ]}"
           >
-            ${iconLoader(Activity16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 1</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(AiGenerate16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 2</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(CloudFoundry16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 3</span>
-          </cds-icon-button>
+            <cds-icon-button kind="ghost" size="md" align="bottom">
+              ${iconLoader(Activity16, { slot: 'icon' })}
+              <span slot="tooltip-content">action 1</span>
+            </cds-icon-button>
+            <cds-icon-button kind="ghost" size="md" align="bottom">
+              ${iconLoader(AiGenerate16, { slot: 'icon' })}
+              <span slot="tooltip-content">action 2</span>
+            </cds-icon-button>
+            <cds-icon-button kind="ghost" size="md" align="bottom">
+              ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+              <span slot="tooltip-content">action 3</span>
+            </cds-icon-button>
+          </c4p-page-header-actions-set>
         </c4p-page-header-breadcrumb>
         <c4p-page-header-content
           title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
@@ -590,9 +585,9 @@ export const TabBarWithTabsAndTags = {
             >
           </cds-tabs>
           <div slot="tags">
-            <set-of-tags-example
+            <c4p-page-header-tags-set
               .tagsData="${generatedTags ?? []}"
-            ></set-of-tags-example>
+            ></c4p-page-header-tags-set>
           </div>
         </c4p-page-header-tabs>
       </c4p-page-header>

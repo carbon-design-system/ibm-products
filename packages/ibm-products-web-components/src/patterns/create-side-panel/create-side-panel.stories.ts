@@ -11,7 +11,7 @@ import { html } from 'lit';
 import '../../../examples/create-side-panel/src/index';
 
 export default {
-  title: 'Patterns/Create sidepanel',
+  title: 'Patterns/Create flows/Create sidepanel',
 };
 
 export const Default = {

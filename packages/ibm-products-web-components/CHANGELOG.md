@@ -1,3 +1,16 @@
+## `@carbon/ibm-products-web-components@0.35.0`
+### Features :rocket:
+- feat: Composable Tearsheet webcomponent implementation (#8841)
+
+### Bug fixes :bug:
+- fix: make style specific to sidepanel in tearsheet (#9107)
+- fix(useravatar): design parity (#9064)
+- fix(NotificationPanel): fix notification border when focused (#9066)
+
+### Housekeeping :house:
+- chore: add chromatic set up ibm-products react and wc storybook (#9086)
+- build(deps): update to Carbon 11 compatible versions to latest (#9063)
+
 ## `@carbon/ibm-products-web-components@0.34.0`
 ### Features :rocket:
 - feat: coachmark stackblitz example (#8948)

@@ -1,0 +1,122 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './AddSelect.stories';
+
+# AddSelect Pattern
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Single Selection](#single-selection)
+- [Component API](#component-api)
+
+## Overview
+
+The AddSelect pattern provides composable components for building add/select
+interfaces with single selection capabilities. It's built using the composable
+`preview__AddSelect` components, offering flexibility and customization while
+maintaining consistency.
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+To build these patterns, we recommend including the following components:
+
+- [preview\_\_AddSelect](https://react.carbondesignsystem.com/?path=/docs/ibm-products-patterns-add-select--docs)
+  (composable)
+- [Search](https://react.carbondesignsystem.com/?path=/docs/components-search--default)
+- [Tag](https://react.carbondesignsystem.com/?path=/docs/components-tag--default)
+- [RadioButton](https://react.carbondesignsystem.com/?path=/docs/components-radiobutton--default)
+
+### Key Features
+
+- **Single Selection** - Select one item from a list
+- **Search** - Built-in search functionality
+- **Keyboard Navigation** - Full keyboard support (Arrow keys, Enter, Space,
+  Home, End)
+- **Accessibility** - ARIA attributes and keyboard navigation
+
+## Example usage
+
+### Single Selection
+
+Use the `SingleAddSelect` pattern when users need to select exactly one item
+from a list.
+
+<Canvas>
+  <Story id="patterns-add-select--single-add-select" />
+</Canvas>
+
+```jsx
+import { SingleAddSelect } from './patterns/AddSelect/example/components/SingleAddSelect';
+
+const items = [
+  { id: '1', title: 'Option 1', value: 'option-1', subtitle: 'Description' },
+  { id: '2', title: 'Option 2', value: 'option-2', subtitle: 'Description' },
+];
+
+function MyComponent() {
+  const [selectedId, setSelectedId] = useState('');
+
+  return (
+    <SingleAddSelect
+      items={items}
+      itemsLabel="Select an option"
+      globalSearchLabel="Search"
+      selectedItemId={selectedId}
+      onItemSelect={(itemId, value) => setSelectedId(itemId)}
+    />
+  );
+}
+```
+
+## Component API
+
+### Composable Components
+
+For more control, use the composable components directly:
+
+```jsx
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+
+<AddSelect onItemSelect={handleSelect}>
+  <AddSelect.Body itemsLabel="Items" globalSearchLabel="Search">
+    <AddSelect.List>
+      {items.map((item) => (
+        <AddSelect.Item key={item.id} {...item} />
+      ))}
+    </AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>;
+```
+
+### Keyboard Navigation
+
+- **Arrow Up/Down** - Navigate between items
+- **Enter/Space** - Select item
+- **Ctrl+Home** - Jump to first item
+- **Ctrl+End** - Jump to last item
+
+### Accessibility
+
+- Full keyboard navigation support
+- ARIA attributes for screen readers
+- Focus management
+- Semantic HTML structure
+
+## Best Practices
+
+1. **Provide clear labels** - Use descriptive labels for search and items
+2. **Handle empty states** - Provide feedback when no results are found
+3. **Test keyboard navigation** - Ensure all functionality is keyboard
+   accessible
+
+## Related Components
+
+- [CreateModal Pattern](/docs/patterns-create-flows-create-modal--docs)
+- [Tearsheet Component](/docs/components-tearsheet--docs)
+
+<CodesandboxLink exampleDirectory="AddSelect" />

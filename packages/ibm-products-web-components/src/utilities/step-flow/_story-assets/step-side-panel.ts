@@ -13,9 +13,9 @@ import '../../../components/side-panel/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
-import { StepInstance } from '../step-flow-signal';
+import { StepInstance } from '../step-flow-signal.js';
 import { SignalWatcher } from '@lit-labs/signals';
-import '../step-group';
+import '../step-group.js';
 import styles from './step-side-panel.scss?lit';
 
 const blockClass = 'c4p--step-side-panel';

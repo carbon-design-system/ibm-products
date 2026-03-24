@@ -122,7 +122,7 @@ class CDSAddSelectItem extends LitElement {
   }
 
   /**
-   * Handle selection change
+   * Handle selection change from checkbox/radio button
    */
   private _handleSelect(event: Event) {
     if (this.disabled) {
@@ -130,9 +130,18 @@ class CDSAddSelectItem extends LitElement {
       return;
     }
 
-    this.selected = !this.selected;
+    // Get the new checked state from the event
+    const target = event.target as any;
+    this.selected = target.checked || false;
 
     // Emit selection event
+    this._emitSelectionEvent();
+  }
+
+  /**
+   * Emit selection event
+   */
+  private _emitSelectionEvent() {
     const init = {
       bubbles: true,
       cancelable: true,
@@ -151,19 +160,6 @@ class CDSAddSelectItem extends LitElement {
     );
   }
 
-  /**
-   * Handle keyboard interaction
-   */
-  private _handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      this._handleSelect(event);
-    } else if (event.key === 'ArrowRight' && this.hasChildren) {
-      event.preventDefault();
-      this._handleNavigate(event);
-    }
-  }
-
   render() {
     const {
       itemId,
@@ -175,13 +171,7 @@ class CDSAddSelectItem extends LitElement {
       tabIndex,
       hasChildren,
       _handleSelect: handleSelect,
-      _handleKeyDown: handleKeyDown,
     } = this;
-
-    // Debug log
-    if (hasChildren) {
-      console.log(`Item "${title}" has children:`, hasChildren);
-    }
 
     const rowClasses = classMap({
       [`${blockClass}-row`]: true,
@@ -195,7 +185,6 @@ class CDSAddSelectItem extends LitElement {
         role="row"
         aria-selected=${selected}
         tabindex=${tabIndex}
-        @keydown=${handleKeyDown}
       >
         <div class="${blockClass}-cell" role="gridcell">
           <div class="${blockClass}-cell-wrapper">
@@ -206,6 +195,7 @@ class CDSAddSelectItem extends LitElement {
                     ?disabled=${disabled}
                     @cds-checkbox-changed=${handleSelect}
                     label-text=${title}
+                    tabindex="-1"
                   >
                   </cds-checkbox>
                 `
@@ -216,6 +206,7 @@ class CDSAddSelectItem extends LitElement {
                     @cds-radio-button-changed=${handleSelect}
                     label-text=${title}
                     value=${itemId}
+                    tabindex="-1"
                   >
                   </cds-radio-button>
                 `}

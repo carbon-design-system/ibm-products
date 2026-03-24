@@ -141,3 +141,8 @@ cds-toast-notification {
     max-inline-size: none;
   }
 }
+// todo: this is not working, fix this style rule to remove extra padding
+// Override tearsheet padding for add-select content
+#{$c4p-prefix}-tearsheet-body .#{$c4p-prefix}--tearsheet__next__main-content {
+  padding-inline: 0;
+}

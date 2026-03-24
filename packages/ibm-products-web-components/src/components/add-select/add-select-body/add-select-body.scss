@@ -52,6 +52,5 @@ $baseClass: #{$prefix}--add-select-body;
 
 .#{$baseClass}__content {
   flex: 1;
-  padding: $spacing-05;
   overflow-y: auto;
 }

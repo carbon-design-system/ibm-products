@@ -66,7 +66,6 @@ export const Default = {
               title=${item.title}
               subtitle=${item.subtitle}
               value=${item.value}
-              tab-index="0"
             >
             </c4p-add-select-item>
           `
@@ -109,7 +108,6 @@ export const WithSelectedItems = {
               subtitle=${item.subtitle}
               value=${item.value}
               ?selected=${index < 2}
-              tab-index="0"
             >
             </c4p-add-select-item>
           `
@@ -167,7 +165,6 @@ export const WithHierarchicalItems = {
               subtitle=${item.subtitle}
               value=${item.value}
               ?has-children=${item.hasChildren}
-              tab-index="0"
             >
             </c4p-add-select-item>
           `
@@ -200,7 +197,6 @@ export const LargeList = {
               title=${item.title}
               subtitle=${item.subtitle}
               value=${item.value}
-              tab-index="0"
             >
             </c4p-add-select-item>
           `

@@ -140,6 +140,10 @@ export class AddSelectExample extends LitElement {
       this._selectedItem = itemId;
       // Use the data manager to set selection (exclusive mode for single select)
       this.dataManager.setSelectedItems(itemId, true);
+    } else {
+      // Clear selection when item is deselected
+      this._selectedItem = '';
+      this.dataManager.clearSelections();
     }
     console.log(this._selectedItem);
   }
@@ -272,7 +276,7 @@ export class AddSelectExample extends LitElement {
               @c4p-preview-tearsheet-closed="${this._handleClose}"
             >
               <!-- Header -->
-              <c4p-tearsheet-header>
+              <c4p-tearsheet-header hide-close-button>
                 <c4p-tearsheet-header-content title="Select category">
                   <div slot="description">Choose one category from the list below</div>
                 </c4p-tearsheet-header-content>

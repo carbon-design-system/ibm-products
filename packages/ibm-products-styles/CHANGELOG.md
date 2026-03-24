@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.82.0-rc.0`
+## `@carbon/ibm-products-styles@2.82.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): add support for actions prop for footer (#9103)
 - feat: incorporate usePresence for preview_Tearsheet and doc updates (#9062)

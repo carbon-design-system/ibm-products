@@ -1,27 +1,74 @@
 //
-// Copyright IBM Corp. 2021, 2025
+// Copyright IBM Corp. 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-// Standard imports.
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/config' as carbon-config;
 
-@use '../../global/styles/project-settings' as c4p-settings;
+// Import example component styles for use in Storybook
+@use './example/index';
 
-// CreateFullPage uses the following IBM Products components:
-// ActionSet, CreateInfluencer and SimpleHeader
-@use '../CreateInfluencer/index' as *;
-@use '../ActionSet/action-set' as *;
-@use '../SimpleHeader' as *;
+$story-class: 'create-full-page-stories';
+$block-class: create-full-page-pattern;
+$step-block-class: #{$block-class}__step;
 
-// The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
-$step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
+// Viewport styles for full-page display
+.sbdocs .#{$story-class}__viewport {
+  background-color: $background;
+  block-size: 100vh;
+  box-shadow: 0 0 4px 1px $border-subtle-01;
+  color: $text-primary;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$story-class}__viewport {
+  overflow: hidden;
+  block-size: 100vh;
+}
+
+.#{$story-class}__viewport .#{$story-class}__content-container {
+  block-size: 100%;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$story-class}__viewport
+  .#{$story-class}__content-container--with-global-header {
+  block-size: calc(100% - #{$spacing-09});
+  margin-block-start: $spacing-09;
+}
+
+.#{$story-class}__step-fieldset--no-label
+  .#{carbon-config.$prefix}--fieldset
+  legend {
+  position: absolute;
+  overflow: hidden;
+  block-size: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  inline-size: 1px;
+  white-space: nowrap;
+}
+
+.#{carbon-config.$prefix}--form-item {
+  margin-block-end: $spacing-05;
+}
+
+.#{$story-class}__error--text {
+  @include type.type-style('label-01');
+
+  margin-block-end: $spacing-05;
+}
 
 .#{$block-class} {
   display: grid;
@@ -39,11 +86,11 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   padding-block-start: $spacing-06;
 }
 
-.#{$block-class} .#{$step-block-class}__step--hidden-step {
+.#{$block-class} .#{$step-block-class}--hidden-step {
   display: none;
 }
 
-.#{$block-class} .#{$step-block-class}__step--visible-step {
+.#{$block-class} .#{$step-block-class}--visible-step {
   display: block;
 }
 
@@ -77,6 +124,15 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   padding: 0;
   margin: 0;
   max-block-size: 100%;
+}
+
+.#{$block-class} .#{$block-class}__influencer {
+  display: grid;
+  flex: 0 0 257px;
+  background-color: $layer-01;
+  border-inline-end: 1px solid $layer-accent-01;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
 }
 
 .#{$block-class} .#{$block-class}__left-nav {
@@ -114,6 +170,10 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   padding-block-start: $spacing-06;
 }
 
+.#{$block-class} .#{$block-class}__form {
+  block-size: 100%;
+}
+
 .#{$block-class} .#{$block-class}__step {
   position: relative;
   padding-block-end: $spacing-07;
@@ -123,73 +183,8 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   margin-inline-start: 0;
 }
 
-.#{$block-class} .#{carbon-config.$prefix}--side-nav--ux {
-  background-color: transparent;
-  block-size: min-content;
-  border-inline-end: 1px solid $border-subtle-01;
-  grid-row: 1;
-  inset-block-start: 0;
-  overflow-x: auto;
-  @supports (overflow-inline: auto) {
-    overflow-inline: auto;
-  }
-
-  padding-block-start: 0;
-}
-
-.#{$block-class} .#{$block-class}__section-divider {
-  position: relative;
-  display: block;
-  margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
-    calc(-1 * #{$spacing-08});
-  block-size: 1px;
-  inline-size: 0;
-
-  /* stylelint-disable-next-line max-nesting-depth */
-  &::after {
-    position: absolute;
-    background-color: $layer-accent-01;
-    block-size: 1px;
-    content: '';
-    inline-size: 100vw;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-  }
-}
-
-.#{$block-class} .#{$block-class}__step-title {
+.#{$block-class}__step-title {
   @include type.type-style('heading-04');
 
   margin-block-end: $spacing-05;
-}
-
-.#{$block-class} .#{$block-class}__influencer {
-  display: grid;
-  flex: 0 0 257px;
-  background-color: $layer-01;
-  border-inline-end: 1px solid $layer-accent-01;
-  grid-template-columns: 100%;
-  grid-template-rows: 1fr auto;
-}
-
-.#{$block-class}
-  .#{$block-class}__progress-indicator.#{carbon-config.$prefix}--progress {
-  padding: $spacing-06;
-}
-
-.#{$block-class} .#{$block-class}__influencer-toggle {
-  padding: $spacing-06;
-  grid-column: 1 / -1;
-  grid-row: -1 / -1;
-}
-
-.#{$block-class} .#{$block-class}__buttons {
-  border-block-start: 1px solid $layer-accent-01;
-}
-
-.#{$block-class}__header {
-  /* stylelint-disable-next-line max-nesting-depth */
-  button:first-of-type {
-    background: none;
-  }
 }

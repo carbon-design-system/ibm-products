@@ -15,7 +15,7 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Search, Tag } from '@carbon/react';
-import { blockClass, AddSelectContext } from './context';
+import { blockClass, AddSelectContext } from '../context';
 
 /**
  * ----------------
@@ -148,7 +148,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
 );
 
 // Import AddSelectBreadcrumbs after the component definition to avoid circular dependency
-import AddSelectBreadcrumbs from './AddSelectBreadcrumbs';
+import AddSelectBreadcrumbs from '../AddSelectBreadcrumbs/AddSelectBreadcrumbs';
 
 AddSelectBody.propTypes = {
   children: PropTypes.node,

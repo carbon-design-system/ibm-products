@@ -1,0 +1,82 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/blocks';
+import * as AddSelectListStories from './AddSelectList.stories';
+
+<Meta of={AddSelectListStories} />
+
+# Add Select List
+
+## Overview
+
+The Add Select List component manages the list of items and handles keyboard
+navigation. It provides:
+
+- Keyboard navigation support (arrow keys, home, end)
+- Focus management
+- Multi-select support
+- Accessible grid structure
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import { AddSelect } from '@carbon/ibm-products';
+```
+
+### Usage Example
+
+<Canvas of={AddSelectListStories.Default} />
+
+### JSX
+
+```jsx
+<AddSelect>
+  <AddSelect.Body
+    itemsLabel="All items"
+    globalSearchLabel="Search"
+    itemCount={items.length}
+  >
+    <AddSelect.List>
+      {items.map((item) => (
+        <AddSelect.Item
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          value={item.value}
+        />
+      ))}
+    </AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>
+```
+
+## Keyboard Navigation Example
+
+<Canvas of={AddSelectListStories.WithKeyboardNavigation} />
+
+## Keyboard Navigation
+
+The AddSelectList component supports full keyboard navigation:
+
+- **Arrow Down**: Move focus to next item
+- **Arrow Up**: Move focus to previous item
+- **Arrow Right**: Navigate to children (if item has children)
+- **Enter/Space**: Select/deselect the focused item
+- **Ctrl+Home**: Move focus to first item
+- **Ctrl+End**: Move focus to last item
+
+## Accessibility
+
+The component follows WCAG 2.1 AA guidelines:
+
+- Uses proper ARIA roles (`grid`, `row`, `gridcell`)
+- Supports keyboard navigation
+- Provides proper focus management
+- Uses semantic HTML elements
+- Includes proper labels and descriptions
+
+## Component API
+
+<ArgTypes of={AddSelectListStories} />

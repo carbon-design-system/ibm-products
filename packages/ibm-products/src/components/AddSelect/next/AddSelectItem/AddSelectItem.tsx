@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Checkbox, RadioButton } from '@carbon/react';
 import { ChevronRight } from '@carbon/react/icons';
-import { blockClass, AddSelectContext } from './context';
+import { blockClass, AddSelectContext } from '../context';
 
 /**
  * ----------------

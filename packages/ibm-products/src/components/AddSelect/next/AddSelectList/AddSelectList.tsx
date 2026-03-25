@@ -16,7 +16,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blockClass, AddSelectContext } from './context';
+import { blockClass, AddSelectContext } from '../context';
 
 /**
  * ----------------

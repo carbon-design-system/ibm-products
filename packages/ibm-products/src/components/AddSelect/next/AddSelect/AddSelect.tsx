@@ -15,12 +15,18 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass, AddSelectContext } from '../context';
-import AddSelectBody, { AddSelectBodyProps } from '../AddSelectBody';
-import AddSelectList, { AddSelectListProps } from '../AddSelectList';
-import AddSelectItem, { AddSelectItemProps } from '../AddSelectItem';
+import AddSelectBody, {
+  AddSelectBodyProps,
+} from '../AddSelectBody/AddSelectBody';
+import AddSelectList, {
+  AddSelectListProps,
+} from '../AddSelectList/AddSelectList';
+import AddSelectItem, {
+  AddSelectItemProps,
+} from '../AddSelectItem/AddSelectItem';
 import AddSelectBreadcrumbs, {
   AddSelectBreadcrumbsProps,
-} from '../AddSelectBreadcrumbs';
+} from '../AddSelectBreadcrumbs/AddSelectBreadcrumbs';
 
 /**
  * ----------

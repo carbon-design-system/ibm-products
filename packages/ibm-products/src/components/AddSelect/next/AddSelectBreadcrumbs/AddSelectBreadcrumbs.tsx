@@ -9,7 +9,7 @@ import React, { forwardRef, ForwardedRef, useContext, MouseEvent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Breadcrumb, BreadcrumbItem, Link } from '@carbon/react';
-import { blockClass, AddSelectContext } from './context';
+import { blockClass, AddSelectContext } from '../context';
 
 /**
  * ----------------

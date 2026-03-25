@@ -238,6 +238,9 @@ export const Default = ({
           <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
           <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
           <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+          <PageHeader.TitleBreadcrumb data-fixed>
+            {title}
+          </PageHeader.TitleBreadcrumb>
         </PageHeader.BreadcrumbOverflow>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content

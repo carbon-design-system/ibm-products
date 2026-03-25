@@ -11,9 +11,19 @@
 
 $block-class: #{$pkg-prefix}--add-select;
 
+.#{$block-class}-list-wrapper {
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.#{$block-class}-list-wrapper-multi {
+  // Additional styles for multi-select mode
+}
+
 .#{$block-class}-list {
-  display: block;
-  padding: $spacing-03;
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
 }
 
 .#{$block-class}-list-body {

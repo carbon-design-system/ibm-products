@@ -163,17 +163,22 @@ export const StandardSingleAddSelect = () => {
           </Tearsheet.MainContent>
         </Tearsheet.Body>
 
-        <Tearsheet.Footer>
-          <Button kind="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button kind="primary" onClick={handleSubmit} disabled={!selectedId}>
-            Select
-          </Button>
-        </Tearsheet.Footer>
+        <Tearsheet.Footer
+          actions={[
+            {
+              kind: 'secondary',
+              label: 'Cancel',
+              onClick: handleClose,
+            },
+            {
+              kind: 'primary',
+              label: 'Select',
+              onClick: handleSubmit,
+              disabled: !selectedId,
+            },
+          ]}
+        />
       </Tearsheet>
     </div>
   );
 };
-
-// Made with Bob

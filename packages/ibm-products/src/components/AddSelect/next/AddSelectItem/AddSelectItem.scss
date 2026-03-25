@@ -15,20 +15,18 @@ $block-class: #{$pkg-prefix}--add-select;
 .#{$block-class}-item__row {
   display: flex;
   align-items: center;
-  padding: $spacing-03;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background-color: $layer-01;
+  padding: $spacing-03 $spacing-05;
+  border-block-end: 1px solid $border-subtle-01;
   cursor: pointer;
-  transition: background-color $duration-fast-01 cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: background-color 0.11s;
 
   &:hover {
     background-color: $layer-hover-01;
   }
 
   &:focus {
-    border-color: $focus;
-    outline: none;
+    outline: 2px solid $focus;
+    outline-offset: -2px;
   }
 
   &--selected {
@@ -44,7 +42,7 @@ $block-class: #{$pkg-prefix}--add-select;
     opacity: 0.5;
 
     &:hover {
-      background-color: $layer-01;
+      background-color: transparent;
     }
   }
 }
@@ -57,78 +55,64 @@ $block-class: #{$pkg-prefix}--add-select;
 
 .#{$block-class}-item__cell-wrapper {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: $spacing-03;
   inline-size: 100%;
+
+  > * {
+    display: inline-flex;
+    align-items: center;
+  }
 }
 
 .#{$block-class}-item__content {
-  display: flex;
+  display: inline-flex;
   flex: 1;
+  flex-direction: row;
   align-items: center;
   gap: $spacing-03;
 }
 
 .#{$block-class}-item__icon {
-  display: flex;
+  display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
 }
 
 .#{$block-class}-item__text {
-  display: flex;
+  display: inline-flex;
   flex: 1;
   flex-direction: column;
-  gap: $spacing-02;
-  min-inline-size: 0;
+  align-items: flex-start;
 }
 
 .#{$block-class}-item__title {
-  @include type-style('body-compact-01');
+  @include type-style('body-01');
 
-  overflow: hidden;
-
+  display: inline-block;
   color: $text-primary;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .#{$block-class}-item__subtitle {
   @include type-style('label-01');
 
-  overflow: hidden;
-
+  display: inline-block;
   color: $text-secondary;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  margin-block-start: $spacing-02;
 }
 
 .#{$block-class}-item__meta {
-  display: flex;
+  display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   margin-inline-start: auto;
 }
 
 .#{$block-class}-item__nav-indicator {
-  display: flex;
+  display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
-  justify-content: center;
-  padding: $spacing-02;
-  border-radius: 4px;
-  color: $icon-secondary;
-  cursor: pointer;
-  margin-inline-start: $spacing-03;
-  transition: background-color $duration-fast-01 cubic-bezier(0.2, 0, 0.38, 0.9);
-
-  &:hover {
-    background-color: $layer-hover-02;
-    color: $icon-primary;
-  }
-
-  &:focus {
-    border: 1px solid $focus;
-    outline: none;
-  }
+  margin-inline-start: auto;
 }

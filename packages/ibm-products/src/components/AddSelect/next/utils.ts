@@ -198,5 +198,3 @@ export const buildPath = (
   findPath(items, itemId);
   return path;
 };
-
-// Made with Bob

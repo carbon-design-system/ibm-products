@@ -181,5 +181,3 @@ AddSelectList.propTypes = {
 AddSelectList.displayName = 'AddSelectList';
 
 export default AddSelectList;
-
-// Made with Bob

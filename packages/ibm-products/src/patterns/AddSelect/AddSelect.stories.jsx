@@ -27,5 +27,3 @@ export const SingleAddSelect = () => {
 };
 
 SingleAddSelect.storyName = 'Single selection';
-
-// Made with Bob

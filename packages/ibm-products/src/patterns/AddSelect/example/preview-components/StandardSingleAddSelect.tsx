@@ -63,5 +63,3 @@ export const StandardSingleAddSelect = () => {
     </div>
   );
 };
-
-// Made with Bob

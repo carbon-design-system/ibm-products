@@ -98,5 +98,3 @@ AddSelectBreadcrumbs.propTypes = {
 AddSelectBreadcrumbs.displayName = 'AddSelectBreadcrumbs';
 
 export default AddSelectBreadcrumbs;
-
-// Made with Bob

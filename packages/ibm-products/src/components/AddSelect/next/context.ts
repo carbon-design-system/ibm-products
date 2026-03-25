@@ -21,5 +21,3 @@ export const AddSelectContext = createContext<AddSelectContextType>({
   multi: false,
   selectedItems: new Set(),
 });
-
-// Made with Bob

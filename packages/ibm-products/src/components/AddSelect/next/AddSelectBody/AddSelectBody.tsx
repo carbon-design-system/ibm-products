@@ -175,5 +175,3 @@ AddSelectBody.propTypes = {
 AddSelectBody.displayName = 'AddSelectBody';
 
 export default AddSelectBody;
-
-// Made with Bob

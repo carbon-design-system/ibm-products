@@ -206,5 +206,3 @@ AddSelectItem.propTypes = {
 AddSelectItem.displayName = 'AddSelectItem';
 
 export default AddSelectItem;
-
-// Made with Bob

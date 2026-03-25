@@ -5,15 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { AddSelect } from './AddSelect';
-export type { AddSelectProps, AddSelectComponentType } from './AddSelect';
-export type { AddSelectBodyProps } from './AddSelectBody';
-export type { AddSelectListProps } from './AddSelectList';
-export type { AddSelectItemProps } from './AddSelectItem';
-export type { AddSelectBreadcrumbsProps } from './AddSelectBreadcrumbs';
+export { AddSelect } from './AddSelect/AddSelect';
+export type {
+  AddSelectProps,
+  AddSelectComponentType,
+} from './AddSelect/AddSelect';
+export type { AddSelectBodyProps } from './AddSelectBody/AddSelectBody';
+export type { AddSelectListProps } from './AddSelectList/AddSelectList';
+export type { AddSelectItemProps } from './AddSelectItem/AddSelectItem';
+export type { AddSelectBreadcrumbsProps } from './AddSelectBreadcrumbs/AddSelectBreadcrumbs';
 export type { AddSelectContextType } from './context';
 
 // Utils
 export * from './utils';
-
-// Made with Bob

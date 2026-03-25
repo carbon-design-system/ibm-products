@@ -14,13 +14,13 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blockClass, AddSelectContext } from './context';
-import AddSelectBody, { AddSelectBodyProps } from './AddSelectBody';
-import AddSelectList, { AddSelectListProps } from './AddSelectList';
-import AddSelectItem, { AddSelectItemProps } from './AddSelectItem';
+import { blockClass, AddSelectContext } from '../context';
+import AddSelectBody, { AddSelectBodyProps } from '../AddSelectBody';
+import AddSelectList, { AddSelectListProps } from '../AddSelectList';
+import AddSelectItem, { AddSelectItemProps } from '../AddSelectItem';
 import AddSelectBreadcrumbs, {
   AddSelectBreadcrumbsProps,
-} from './AddSelectBreadcrumbs';
+} from '../AddSelectBreadcrumbs';
 
 /**
  * ----------
@@ -133,5 +133,3 @@ AddSelect.Item = AddSelectItem;
 AddSelect.Breadcrumbs = AddSelectBreadcrumbs;
 
 AddSelect.displayName = 'AddSelect';
-
-// Made with Bob

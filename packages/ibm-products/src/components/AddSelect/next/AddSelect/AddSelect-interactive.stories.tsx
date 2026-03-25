@@ -312,5 +312,3 @@ See the source code for implementation details.
 };
 
 export default meta;
-
-// Made with Bob

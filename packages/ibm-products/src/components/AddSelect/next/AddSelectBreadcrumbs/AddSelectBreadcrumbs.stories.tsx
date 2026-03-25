@@ -164,5 +164,3 @@ The Add Select Breadcrumbs component provides hierarchical navigation for the ad
 };
 
 export default meta;
-
-// Made with Bob

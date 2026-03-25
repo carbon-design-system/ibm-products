@@ -181,5 +181,3 @@ The Add Select Item component represents an individual item in the list.
 };
 
 export default meta;
-
-// Made with Bob

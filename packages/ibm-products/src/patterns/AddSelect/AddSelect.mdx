@@ -9,13 +9,16 @@ import * as stories from './AddSelect.stories';
 - [Overview](#overview)
 - [Example usage](#example-usage)
   - [Single Selection](#single-selection)
+  - [Hierarchical Navigation](#hierarchical-navigation)
 - [Component API](#component-api)
+- [Data Management](#data-management)
 
 ## Overview
 
 The AddSelect pattern provides composable components for building add/select
-interfaces with single selection capabilities. It's built using the composable
-`preview__AddSelect` components, offering flexibility and customization while
+interfaces with single selection capabilities and hierarchical navigation. It's
+built using the composable `preview__AddSelect` components and the
+`AddSelectData` utility, offering flexibility and customization while
 maintaining consistency.
 
 > NOTE: Patterns have multiple ways of accomplishing a user need and typically
@@ -34,7 +37,11 @@ To build these patterns, we recommend including the following components:
 ### Key Features
 
 - **Single Selection** - Select one item from a list
-- **Search** - Built-in search functionality
+- **Hierarchical Navigation** - Navigate through nested data structures with
+  breadcrumbs
+- **Search** - Built-in search functionality across all levels
+- **Data Management** - Framework-agnostic `AddSelectData` utility for managing
+  hierarchical data
 - **Keyboard Navigation** - Full keyboard support (Arrow keys, Enter, Space,
   Home, End)
 - **Accessibility** - ARIA attributes and keyboard navigation
@@ -44,7 +51,7 @@ To build these patterns, we recommend including the following components:
 ### Single Selection
 
 Use the `SingleAddSelect` pattern when users need to select exactly one item
-from a list.
+from a list or hierarchy.
 
 <Canvas>
   <Story id="patterns-add-select--single-add-select" />
@@ -54,8 +61,18 @@ from a list.
 import { SingleAddSelect } from './patterns/AddSelect/example/components/SingleAddSelect';
 
 const items = [
-  { id: '1', title: 'Option 1', value: 'option-1', subtitle: 'Description' },
-  { id: '2', title: 'Option 2', value: 'option-2', subtitle: 'Description' },
+  {
+    id: '1',
+    title: 'California',
+    value: 'ca',
+    children: {
+      entries: [
+        { id: '1-1', title: 'Los Angeles', value: 'la' },
+        { id: '1-2', title: 'San Francisco', value: 'sf' },
+      ],
+    },
+  },
+  { id: '2', title: 'Texas', value: 'tx' },
 ];
 
 function MyComponent() {
@@ -64,16 +81,45 @@ function MyComponent() {
   return (
     <SingleAddSelect
       items={items}
-      itemsLabel="Select an option"
+      itemsLabel="Select a location"
       globalSearchLabel="Search"
+      rootBreadcrumbTitle="Locations"
       selectedItemId={selectedId}
       onItemSelect={(itemId, value) => setSelectedId(itemId)}
+      onNavigate={(itemId, title, parentId) =>
+        console.log('Navigated to:', title)
+      }
     />
   );
 }
 ```
 
+### Hierarchical Navigation
+
+The pattern supports nested data structures with breadcrumb navigation:
+
+- Click items with children to navigate deeper
+- Use breadcrumbs to navigate back up the hierarchy
+- Search works across all levels of the hierarchy
+- Selection is maintained when navigating
+
 ## Component API
+
+### SingleAddSelect Props
+
+| Prop                      | Type                                | Default                       | Description                 |
+| ------------------------- | ----------------------------------- | ----------------------------- | --------------------------- |
+| `items`                   | `HierarchicalItem[]`                | Required                      | Array of hierarchical items |
+| `itemsLabel`              | `string`                            | `'Items'`                     | Label for items section     |
+| `globalSearchLabel`       | `string`                            | `'Search'`                    | Search input label          |
+| `globalSearchPlaceholder` | `string`                            | `'Search items'`              | Search placeholder          |
+| `searchResultsTitle`      | `string`                            | `'Search results'`            | Title for search results    |
+| `rootBreadcrumbTitle`     | `string`                            | `'Categories'`                | Root breadcrumb title       |
+| `selectedItemId`          | `string`                            | -                             | Currently selected item ID  |
+| `onItemSelect`            | `(itemId, value) => void`           | -                             | Selection callback          |
+| `onNavigate`              | `(itemId, title, parentId) => void` | -                             | Navigation callback         |
+| `noResultsTitle`          | `string`                            | `'No results found'`          | Empty state title           |
+| `noResultsDescription`    | `string`                            | `'Try adjusting your search'` | Empty state description     |
 
 ### Composable Components
 
@@ -82,20 +128,56 @@ For more control, use the composable components directly:
 ```jsx
 import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
 
-<AddSelect onItemSelect={handleSelect}>
-  <AddSelect.Body itemsLabel="Items" globalSearchLabel="Search">
+<AddSelect onItemSelect={handleSelect} onNavigate={handleNavigate}>
+  <AddSelect.Body
+    itemsLabel="Items"
+    globalSearchLabel="Search"
+    path={breadcrumbPath}
+    onBreadcrumbClick={handleBreadcrumbClick}
+  >
     <AddSelect.List>
       {items.map((item) => (
-        <AddSelect.Item key={item.id} {...item} />
+        <AddSelect.Item
+          key={item.id}
+          {...item}
+          hasChildren={hasChildren(item.id)}
+        />
       ))}
     </AddSelect.List>
   </AddSelect.Body>
 </AddSelect>;
 ```
 
+## Data Management
+
+The pattern uses the `AddSelectData` utility for managing hierarchical data:
+
+```jsx
+import { AddSelectData } from '@carbon/ibm-products';
+
+const dataManager = new AddSelectData();
+dataManager.setItems(items);
+
+// Get children
+const children = dataManager.getItemChildren(itemId);
+
+// Search
+const results = dataManager.search('query', {
+  caseSensitive: false,
+  searchFields: ['title', 'value'],
+});
+
+// Check if item has children
+const hasChildren = dataManager.hasChildren(itemId);
+
+// Get selected items
+const selected = dataManager.getSelectedItems();
+```
+
 ### Keyboard Navigation
 
 - **Arrow Up/Down** - Navigate between items
+- **Arrow Right** - Navigate to children (if available)
 - **Enter/Space** - Select item
 - **Ctrl+Home** - Jump to first item
 - **Ctrl+End** - Jump to last item
@@ -106,6 +188,7 @@ import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
 - ARIA attributes for screen readers
 - Focus management
 - Semantic HTML structure
+- Breadcrumb navigation for hierarchy
 
 ## Best Practices
 
@@ -113,6 +196,11 @@ import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
 2. **Handle empty states** - Provide feedback when no results are found
 3. **Test keyboard navigation** - Ensure all functionality is keyboard
    accessible
+4. **Use hierarchical data thoughtfully** - Keep hierarchies shallow (2-3
+   levels) for better UX
+5. **Show breadcrumbs** - Help users understand their location in the hierarchy
+6. **Enable search for large lists** - For lists with more than 10 items, search
+   becomes essential
 
 ## Related Components
 

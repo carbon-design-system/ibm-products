@@ -6,60 +6,174 @@
  */
 
 import React, { useState } from 'react';
+import { Button } from '@carbon/react';
 import { SingleAddSelect } from '../components/SingleAddSelect';
+import { HierarchicalItem } from '../../../../global/js/utils/AddSelect/add-select-data';
+import { Tearsheet } from '../../../../components/Tearsheet/next';
 
-const sampleItems = [
+// Sample hierarchical data matching the Web Components example
+const sampleItems: HierarchicalItem[] = [
   {
     id: '1',
-    title: 'Option 1',
-    value: 'option-1',
-    subtitle: 'First option',
+    title: 'Kansas',
+    value: 'kansas',
   },
   {
     id: '2',
-    title: 'Option 2',
-    value: 'option-2',
-    subtitle: 'Second option',
+    title: 'Texas',
+    value: 'texas',
   },
   {
     id: '3',
-    title: 'Option 3',
-    value: 'option-3',
-    subtitle: 'Third option',
+    title: 'Florida',
+    value: 'florida',
   },
   {
     id: '4',
-    title: 'Option 4',
-    value: 'option-4',
-    subtitle: 'Fourth option',
+    title: 'California',
+    value: 'california',
+    children: {
+      entries: [
+        {
+          id: '5',
+          title: 'Los Angeles',
+          value: 'la',
+          children: {
+            entries: [
+              {
+                id: '6',
+                title: 'Beverly Hills',
+                value: 'bh',
+              },
+              {
+                id: '7',
+                title: 'Malibu',
+                value: 'malibu',
+                children: {
+                  entries: [
+                    {
+                      id: '8',
+                      title: 'Malibu Rd',
+                      value: 'malibu-rd',
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+        {
+          id: '9',
+          title: 'San Francisco',
+          value: 'sf',
+        },
+      ],
+    },
   },
   {
-    id: '5',
-    title: 'Option 5',
-    value: 'option-5',
-    subtitle: 'Fifth option',
-    disabled: true,
+    id: '10',
+    title: 'New York',
+    value: 'ny',
+    children: {
+      entries: [
+        {
+          id: '11',
+          title: 'Manhattan',
+          value: 'manhattan',
+        },
+        {
+          id: '12',
+          title: 'Brooklyn',
+          value: 'brooklyn',
+        },
+      ],
+    },
   },
 ];
 
 export const StandardSingleAddSelect = () => {
+  const [open, setOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string>('');
+  const [selectedValue, setSelectedValue] = useState<string>('');
+
+  const handleOpen = () => {
+    setOpen(true);
+    setSelectedId('');
+    setSelectedValue('');
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleSelect = (itemId: string, value: string) => {
     console.log('Selected:', { itemId, value });
     setSelectedId(itemId);
+    setSelectedValue(value);
+  };
+
+  const handleSubmit = () => {
+    if (selectedId) {
+      console.log('Submitted:', { selectedId, selectedValue });
+      handleClose();
+    }
+  };
+
+  const handleNavigate = (itemId: string, title: string, parentId: string) => {
+    console.log('Navigate to:', { itemId, title, parentId });
   };
 
   return (
-    <div style={{ height: '500px' }}>
-      <SingleAddSelect
-        items={sampleItems}
-        itemsLabel="Select an option"
-        globalSearchLabel="Search options"
-        globalSearchPlaceholder="Search..."
-        selectedItemId={selectedId}
-        onItemSelect={handleSelect}
-      />
+    <div>
+      <h3>Single Add Select Pattern Example</h3>
+      <p>Click the button below to open the single add select dialog.</p>
+
+      <Button kind="primary" onClick={handleOpen}>
+        Select a category
+      </Button>
+
+      {selectedValue && (
+        <p style={{ marginTop: '1rem' }}>
+          <strong>Selected:</strong> {selectedValue}
+        </p>
+      )}
+
+      <Tearsheet open={open} onClose={handleClose} variant="narrow">
+        <Tearsheet.Header>
+          <Tearsheet.HeaderContent title="Select category">
+            <p slot="description">Choose one category from the list below</p>
+          </Tearsheet.HeaderContent>
+        </Tearsheet.Header>
+
+        <Tearsheet.Body>
+          <Tearsheet.MainContent>
+            <SingleAddSelect
+              items={sampleItems}
+              itemsLabel="Categories"
+              globalSearchLabel="Search categories"
+              globalSearchPlaceholder="Search..."
+              searchResultsTitle="Search results"
+              rootBreadcrumbTitle="Categories"
+              selectedItemId={selectedId}
+              onItemSelect={handleSelect}
+              onNavigate={handleNavigate}
+              noResultsTitle="No results found"
+              noResultsDescription="Try adjusting your search or browse categories"
+            />
+          </Tearsheet.MainContent>
+        </Tearsheet.Body>
+
+        <Tearsheet.Footer>
+          <Button kind="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button kind="primary" onClick={handleSubmit} disabled={!selectedId}>
+            Select
+          </Button>
+        </Tearsheet.Footer>
+      </Tearsheet>
     </div>
   );
 };
+
+// Made with Bob

@@ -109,5 +109,3 @@ The Add Select List component manages the list of items and handles keyboard nav
 };
 
 export default meta;
-
-// Made with Bob

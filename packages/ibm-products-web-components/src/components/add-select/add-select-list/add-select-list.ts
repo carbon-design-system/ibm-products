@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { prefix } from '../../../globals/settings';
@@ -28,12 +28,6 @@ class CDSAddSelectList extends LitElement {
    */
   @property({ type: Boolean })
   multi = false;
-
-  /**
-   * Reference to the list body element
-   */
-  @query(`.${blockClass}-body`)
-  private _listBody?: HTMLElement;
 
   /**
    * Current focused item index

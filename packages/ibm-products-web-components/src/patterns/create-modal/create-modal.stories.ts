@@ -11,7 +11,7 @@ import { html } from 'lit';
 import '../../../examples/create-modal/src/create-modal';
 
 export default {
-  title: 'Patterns/Step flows/CreateModal',
+  title: 'Patterns/Create flows/CreateModal',
   parameters: {
     docs: {
       description: {

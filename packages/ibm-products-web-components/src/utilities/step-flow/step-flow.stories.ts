@@ -64,5 +64,5 @@ export const SidePanel = {
 };
 
 export default {
-  title: 'Patterns/Step flows',
+  title: 'Utilities/Step flows',
 };

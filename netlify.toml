@@ -1,0 +1,4 @@
+[build.environment]
+  NODE_VERSION = "20"
+  # Increase memory allocation to 6GB to prevent heap out of memory errors
+  NODE_OPTIONS = "--max-old-space-size=6144"

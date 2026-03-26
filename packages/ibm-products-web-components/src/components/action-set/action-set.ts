@@ -10,10 +10,12 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { ref } from 'lit/directives/ref.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
 import styles from './action-set.scss?lit';
 import pconsole from '../../globals/internal/pconsole';
+import CDSButton from '@carbon/web-components/es/components/button/button.js';
 import '@carbon/web-components/es/components/button/index.js';
 
 const blockClass = `${prefix}--action-set`;
@@ -30,12 +32,18 @@ export type ButtonKind =
   | 'ghost'
   | 'danger--ghost';
 
-export interface ActionButton {
+/**
+ * Action button configuration that extends CDSButton properties.
+ * Includes all standard button attributes plus custom action-specific properties.
+ */
+export interface ActionButton extends Partial<Omit<CDSButton, 'kind'>> {
+  // Action-specific properties (override CDSButton types where needed)
   kind?: ButtonKind;
   label?: string;
-  disabled?: boolean;
   loading?: boolean;
   onClick?: (event: Event) => void;
+
+  // Allow any other HTML attributes or custom properties
   [key: string]: any;
 }
 
@@ -397,9 +405,28 @@ export class CDSActionSet extends LitElement {
           kind === 'ghost' || kind === 'danger--ghost',
       });
 
+      // Create a ref callback to apply rest properties
+      const buttonRef = (el: Element | undefined) => {
+        if (el && rest) {
+          Object.entries(rest).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+              if (typeof value === 'boolean') {
+                if (value) {
+                  el.setAttribute(key, '');
+                } else {
+                  el.removeAttribute(key);
+                }
+              } else {
+                el.setAttribute(key, String(value));
+              }
+            }
+          });
+        }
+      };
+
       return html`
         <cds-button
-          ...="${rest}"
+          ${ref(buttonRef)}
           class="${buttonClasses}"
           kind="${kind}"
           size="${this.buttonSize || this.size}"

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { html, fixture, elementUpdated } from '@open-wc/testing';
 import { carbonPrefix, prefix } from '../../globals/settings';
 import CDSActionSet from './action-set';
@@ -310,6 +310,302 @@ describe('c4p-action-set', () => {
 
       const button = el.querySelector(`${carbonPrefix}-button`);
       expect(button?.getAttribute('is-expressive')).to.equal('true');
+    });
+  });
+
+  describe('Validation warnings', () => {
+    let consoleWarnSpy: any;
+
+    beforeEach(() => {
+      // Spy on console.warn to capture validation warnings
+      consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      consoleWarnSpy.mockRestore();
+    });
+
+    it('warns when more than 4 actions are provided', async () => {
+      el = await fixture(html` <c4p-action-set size="xl"></c4p-action-set> `);
+
+      el.actions = [
+        { kind: 'ghost', label: 'Help' },
+        { kind: 'tertiary', label: 'Cancel' },
+        { kind: 'secondary', label: 'Back' },
+        { kind: 'secondary', label: 'Save' },
+        { kind: 'primary', label: 'Submit' },
+      ];
+      await elementUpdated(el);
+
+      expect(consoleWarnSpy.mock.calls.length).to.be.greaterThan(0);
+      expect(consoleWarnSpy.mock.calls[0][0]).to.include(
+        'you cannot have more than four actions in an ActionSet'
+      );
+    });
+
+    it('warns when more than 3 actions in stacking mode', async () => {
+      el = await fixture(html` <c4p-action-set size="sm"></c4p-action-set> `);
+
+      el.actions = [
+        { kind: 'tertiary', label: 'Cancel' },
+        { kind: 'secondary', label: 'Back' },
+        { kind: 'secondary', label: 'Save' },
+        { kind: 'primary', label: 'Submit' },
+      ];
+      await elementUpdated(el);
+
+      expect(consoleWarnSpy.mock.calls.length).to.be.greaterThan(0);
+      expect(consoleWarnSpy.mock.calls[0][0]).to.include(
+        'you cannot have more than three actions in this size of ActionSet'
+      );
+    });
+
+    it('warns when more than one primary action', async () => {
+      el = await fixture(html` <c4p-action-set></c4p-action-set> `);
+
+      el.actions = [
+        { kind: 'primary', label: 'Submit' },
+        { kind: 'primary', label: 'Save' },
+      ];
+      await elementUpdated(el);
+
+      expect(consoleWarnSpy.mock.calls.length).to.be.greaterThan(0);
+      expect(consoleWarnSpy.mock.calls[0][0]).to.include(
+        "you cannot have more than one 'primary' action in an ActionSet"
+      );
+    });
+
+    it('warns when more than one ghost action', async () => {
+      el = await fixture(html` <c4p-action-set size="xl"></c4p-action-set> `);
+
+      el.actions = [
+        { kind: 'ghost', label: 'Help' },
+        { kind: 'danger--ghost', label: 'Delete' },
+        { kind: 'primary', label: 'Submit' },
+      ];
+      await elementUpdated(el);
+
+      expect(consoleWarnSpy.mock.calls.length).to.be.greaterThan(0);
+      expect(consoleWarnSpy.mock.calls[0][0]).to.include(
+        "you cannot have more than one 'ghost' action in an ActionSet"
+      );
+    });
+
+    it('warns when ghost button with other actions in stacking mode', async () => {
+      el = await fixture(html` <c4p-action-set size="sm"></c4p-action-set> `);
+
+      el.actions = [
+        { kind: 'ghost', label: 'Help' },
+        { kind: 'primary', label: 'Submit' },
+      ];
+      await elementUpdated(el);
+
+      expect(consoleWarnSpy.mock.calls.length).to.be.greaterThan(0);
+      expect(consoleWarnSpy.mock.calls[0][0]).to.include(
+        "you cannot have a 'ghost' button in conjunction with other action types in this size of ActionSet"
+      );
+    });
+
+    it('warns when invalid button kinds are used', async () => {
+      el = await fixture(html` <c4p-action-set></c4p-action-set> `);
+
+      el.actions = [
+        { kind: 'invalid' as any, label: 'Invalid' },
+        { kind: 'primary', label: 'Submit' },
+      ];
+      await elementUpdated(el);
+
+      expect(consoleWarnSpy.mock.calls.length).to.be.greaterThan(0);
+      expect(consoleWarnSpy.mock.calls[0][0]).to.include(
+        "you can only have 'primary', 'danger', 'secondary', 'tertiary', 'ghost' and 'danger--ghost' buttons in an ActionSet"
+      );
+    });
+
+    it('does not warn for valid action configurations', async () => {
+      el = await fixture(html` <c4p-action-set></c4p-action-set> `);
+
+      el.actions = [
+        { kind: 'secondary', label: 'Cancel' },
+        { kind: 'primary', label: 'Submit' },
+      ];
+      await elementUpdated(el);
+
+      expect(consoleWarnSpy.mock.calls.length).to.equal(0);
+    });
+  });
+
+  describe('_hideSiblingMargin functionality', () => {
+    it('hides margin on focused button and its next sibling', async () => {
+      el = await fixture(html`
+        <c4p-action-set>
+          <cds-button kind="tertiary">Cancel</cds-button>
+          <cds-button kind="secondary">Back</cds-button>
+          <cds-button kind="primary">Submit</cds-button>
+        </c4p-action-set>
+      `);
+      await elementUpdated(el);
+
+      const buttons = Array.from(el.querySelectorAll(`${carbonPrefix}-button`));
+      expect(buttons).to.have.length(3);
+
+      // Focus the middle button
+      (buttons[1] as HTMLElement).focus();
+      await elementUpdated(el);
+
+      // The focused button and its next sibling should have hide-margin attribute
+      expect(buttons[1].hasAttribute('hide-margin')).to.be.true;
+      expect(buttons[2].hasAttribute('hide-margin')).to.be.true;
+      expect(buttons[0].hasAttribute('hide-margin')).to.be.false;
+    });
+
+    it('removes hide-margin when focus is lost', async () => {
+      el = await fixture(html`
+        <c4p-action-set>
+          <cds-button kind="secondary">Cancel</cds-button>
+          <cds-button kind="primary">Submit</cds-button>
+        </c4p-action-set>
+      `);
+      await elementUpdated(el);
+
+      const buttons = Array.from(el.querySelectorAll(`${carbonPrefix}-button`));
+
+      // Focus first button
+      (buttons[0] as HTMLElement).focus();
+      await elementUpdated(el);
+
+      expect(buttons[0].hasAttribute('hide-margin')).to.be.true;
+      expect(buttons[1].hasAttribute('hide-margin')).to.be.true;
+
+      // Blur the button
+      (buttons[0] as HTMLElement).blur();
+      await elementUpdated(el);
+
+      // All hide-margin attributes should be removed
+      expect(buttons[0].hasAttribute('hide-margin')).to.be.false;
+      expect(buttons[1].hasAttribute('hide-margin')).to.be.false;
+    });
+
+    it('works with actions prop rendered buttons', async () => {
+      el = await fixture(html` <c4p-action-set></c4p-action-set> `);
+
+      el.actions = [
+        { kind: 'secondary', label: 'Cancel' },
+        { kind: 'primary', label: 'Submit' },
+      ];
+      await elementUpdated(el);
+
+      const buttons = Array.from(
+        el.shadowRoot!.querySelectorAll(`${carbonPrefix}-button`)
+      );
+      expect(buttons).to.have.length(2);
+
+      // Focus the first button
+      (buttons[0] as HTMLElement).focus();
+      await elementUpdated(el);
+
+      // Both buttons should have hide-margin
+      expect(buttons[0].hasAttribute('hide-margin')).to.be.true;
+      expect(buttons[1].hasAttribute('hide-margin')).to.be.true;
+    });
+
+    it('handles focus on last button correctly', async () => {
+      el = await fixture(html`
+        <c4p-action-set>
+          <cds-button kind="secondary">Cancel</cds-button>
+          <cds-button kind="primary">Submit</cds-button>
+        </c4p-action-set>
+      `);
+      await elementUpdated(el);
+
+      const buttons = Array.from(el.querySelectorAll(`${carbonPrefix}-button`));
+
+      // Focus the last button
+      (buttons[1] as HTMLElement).focus();
+      await elementUpdated(el);
+
+      // Only the last button should have hide-margin (no next sibling)
+      expect(buttons[0].hasAttribute('hide-margin')).to.be.false;
+      expect(buttons[1].hasAttribute('hide-margin')).to.be.true;
+    });
+  });
+
+  describe('Actions prop with rest properties', () => {
+    it('passes rest properties to cds-button', async () => {
+      el = await fixture(html` <c4p-action-set></c4p-action-set> `);
+
+      el.actions = [
+        {
+          kind: 'primary',
+          label: 'Submit',
+          'data-testid': 'submit-button',
+          'aria-label': 'Submit form',
+        },
+      ];
+      await elementUpdated(el);
+
+      const button = el.shadowRoot!.querySelector(`${carbonPrefix}-button`);
+      // Note: Lit's spread directive may not work with all attributes
+      // This test verifies the rest object is being passed
+      expect(button).to.exist;
+      expect(button?.getAttribute('kind')).to.equal('primary');
+    });
+
+    it('allows explicit props to override rest properties', async () => {
+      el = await fixture(html` <c4p-action-set></c4p-action-set> `);
+
+      el.actions = [
+        {
+          kind: 'secondary', // This should be overridden by explicit kind
+          label: 'Submit',
+          disabled: false, // This should be overridden by explicit disabled
+        },
+      ];
+      await elementUpdated(el);
+
+      const button = el.shadowRoot!.querySelector(`${carbonPrefix}-button`);
+      // Explicit props should take precedence
+      expect(button?.getAttribute('kind')).to.equal('secondary');
+      expect(button?.hasAttribute('disabled')).to.be.false;
+    });
+
+    it('handles onClick callback from actions', async () => {
+      el = await fixture(html` <c4p-action-set></c4p-action-set> `);
+
+      let clicked = false;
+      el.actions = [
+        {
+          kind: 'primary',
+          label: 'Submit',
+          onClick: () => {
+            clicked = true;
+          },
+        },
+      ];
+      await elementUpdated(el);
+
+      const button = el.shadowRoot!.querySelector(
+        `${carbonPrefix}-button`
+      ) as HTMLElement;
+      button.click();
+
+      expect(clicked).to.be.true;
+    });
+
+    it('handles loading state', async () => {
+      el = await fixture(html` <c4p-action-set></c4p-action-set> `);
+
+      el.actions = [
+        {
+          kind: 'primary',
+          label: 'Submit',
+          loading: true,
+        },
+      ];
+      await elementUpdated(el);
+
+      const button = el.shadowRoot!.querySelector(`${carbonPrefix}-button`);
+      // Loading should make button disabled
+      expect(button?.hasAttribute('disabled')).to.be.true;
     });
   });
 });

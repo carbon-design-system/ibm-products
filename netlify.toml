@@ -1,0 +1,3 @@
+[build.environment]
+  NODE_VERSION = "20"
+  NVMRC = "false"

@@ -388,7 +388,7 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
 .#{$block-class}__form {
   block-size: 100%;
 
-  .cds--inline-notification--error {
+  .#{carbon-config.$prefix}--inline-notification--error {
     margin-block-start: $spacing-04;
   }
 }

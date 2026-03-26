@@ -189,7 +189,7 @@ describe('PageHeader', () => {
         `${carbonPrefix}--breadcrumb-item`
       );
 
-      expect(breadcrumbs.length).toBe(4);
+      expect(breadcrumbs.length).toBe(5);
     });
 
     it('should render content actions', () => {

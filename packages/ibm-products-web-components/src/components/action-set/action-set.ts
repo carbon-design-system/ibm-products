@@ -9,7 +9,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { html, LitElement } from 'lit';
-import { property, state, queryAssignedElements } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
 import styles from './action-set.scss?lit';
@@ -194,9 +194,6 @@ export class CDSActionSet extends LitElement {
    */
   @property({ type: Array })
   actions: ActionButton[] = [];
-
-  @queryAssignedElements({ selector: `${carbonPrefix}-button` })
-  private _buttons!: Array<HTMLElement>;
 
   static styles = styles;
 
@@ -402,6 +399,7 @@ export class CDSActionSet extends LitElement {
 
       return html`
         <cds-button
+          ...="${rest}"
           class="${buttonClasses}"
           kind="${kind}"
           size="${this.buttonSize || this.size}"

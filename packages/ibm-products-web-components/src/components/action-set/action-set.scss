@@ -69,7 +69,3 @@ $block-class: #{$c4p-prefix}--action-set;
 :host(#{$c4p-prefix}-action-set[stacked]) {
   @include button-separator(vertical);
 }
-
-::part(button-set) {
-  display: contents;
-}

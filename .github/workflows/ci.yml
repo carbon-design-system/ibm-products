@@ -15,7 +15,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  # Shared setup job that installs dependencies once
+  setup:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,10 +28,16 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --immutable
-      - name: CI build checks
-        run: yarn ci-check:build
+      - name: Cache node_modules
+        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
 
-  format:
+  build:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,12 +47,61 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Install dependencies
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+      - name: Build packages and storybook
+        run: yarn build
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: build-artifacts
+          path: |
+            packages/*/lib
+            packages/*/dist
+            packages/*/es
+            packages/*/storybook-static
+          retention-days: 1
+
+  format:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Check formatting of project files
         run: yarn format:diff
 
   lint:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -55,12 +111,24 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Install dependencies
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: CI lint checks
         run: yarn ci-check:lint
 
   spellcheck:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -70,12 +138,24 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Install dependencies
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: CI spellcheck checks
         run: yarn ci-check:spellcheck
 
   test-c4p:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -85,18 +165,30 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Install dependencies
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: CI snapshot tests for c4p
         run: yarn ci-check:test:c4p:snapshot
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p --collectCoverage
-      - name: Upload coverage reports to Codecov with GitHub Action
+      - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   test-c4p-wc:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -106,7 +198,18 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Install dependencies
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Install browsers
         working-directory: packages/ibm-products-web-components
@@ -121,6 +224,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   avt-runner:
+    needs: build
     strategy:
       matrix:
         shardIndex: [1, 2, 3, 4]
@@ -135,14 +239,36 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Install dependencies
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
+
+      # Download build artifacts with fallback
+      - name: Download build artifacts
+        id: build-artifacts
+        continue-on-error: true
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        with:
+          name: build-artifacts
+          path: packages
+
+      # Fallback: rebuild if artifacts are not available (e.g., expired after 1 day)
+      - name: Build project (fallback)
+        if: steps.build-artifacts.outcome == 'failure'
+        run: yarn build
 
       - name: Install browsers
         run: yarn playwright install --with-deps
-
-      - name: Build project
-        run: yarn build
 
       - name: Run storybook
         id: storybook
@@ -216,6 +342,7 @@ jobs:
           retention-days: 14
 
   chromatic-ibm-products:
+    needs: setup
     if:
       ${{ github.repository == 'carbon-design-system/ibm-products' &&
       github.event.pull_request.draft == false }}
@@ -234,23 +361,23 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
-        id: cache
+          cache: 'yarn'
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             node_modules
             */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
-      - name: Install dependencies
-        env:
-          YARN_ENABLE_HARDENED_MODE: 0
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@5ec258af08deb3e8c36653bd618cb7fe52090031 # v15.2.0
+        uses: chromaui/action@0794e6939fe40ce46a88963f818092afc427da5b # v15.3.0
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -295,6 +422,7 @@ jobs:
           echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
 
   chromatic-ibm-products-web-components:
+    needs: setup
     if:
       github.event_name == 'pull_request' && github.event.pull_request.draft ==
       false
@@ -313,19 +441,19 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
-        id: cache
+          cache: 'yarn'
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             node_modules
             */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
-      - name: Install dependencies
-        env:
-          YARN_ENABLE_HARDENED_MODE: 0
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Build web components and dependencies
         run:
@@ -333,7 +461,7 @@ jobs:
           --include-dependencies --stream
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@5ec258af08deb3e8c36653bd618cb7fe52090031 # v15.2.0
+        uses: chromaui/action@0794e6939fe40ce46a88963f818092afc427da5b # v15.3.0
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -373,5 +501,4 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
           echo "- Storybook deploy preview: ${{ env.storybookUrl }}" >> $GITHUB_STEP_SUMMARY
           echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Chromatic build URL: ${{ env.buildUrl }}" >> $GITHUB_STEP_SUMMARY
           echo "- Chromatic build URL: ${{ env.buildUrl }}" >> $GITHUB_STEP_SUMMARY

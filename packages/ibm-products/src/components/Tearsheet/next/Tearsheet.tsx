@@ -126,7 +126,7 @@ export interface TearsheetProps extends ComposedModalProps {
    * Specify a CSS selector that matches the DOM element that should be
    * focused when the Modal opens.
    */
-  selectorPrimaryFocus?: PropTypes.string;
+  selectorPrimaryFocus?: string;
   /**
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */

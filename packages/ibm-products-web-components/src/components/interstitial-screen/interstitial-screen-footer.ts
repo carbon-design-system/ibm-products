@@ -21,6 +21,7 @@ import CDSModalFooter from '@carbon/web-components/es/components/modal/modal-foo
 import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
+import '../action-set/index.js';
 
 const blockClass = `${prefix}--interstitial-screen`;
 
@@ -200,13 +201,13 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
 
     return html`<slot>
       <div class="${blockClass}--footer">
-        <cds-button-set>
+        <c4p-action-set size="xl">
           ${isMulti
             ? html`
                 <cds-button
                   class="${blockClass}--skip-btn"
                   kind="ghost"
-                  size="lg"
+                  size="xl"
                   title="${this.skipButtonLabel}"
                   @click="${this.handleSkip}"
                   ?disabled="${skip}"
@@ -269,7 +270,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                 </cds-button>
               `
             : nothing}
-        </cds-button-set>
+        </c4p-action-set>
       </div>
     </slot>`;
   }

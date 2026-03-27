@@ -18,15 +18,7 @@ $carbon-prefix: 'cds';
 }
 
 .#{$prefix}--interstitial-screen--footer {
-  display: flex;
-  justify-content: flex-end;
   block-size: $spacing-10; //as in cds modal footer
-
-  #{$carbon-prefix}-button-set {
-    display: flex;
-    justify-content: flex-end;
-    inline-size: 100%;
-  }
 
   // On small screens, split width equally among all buttons
   @include breakpoint-down(md) {

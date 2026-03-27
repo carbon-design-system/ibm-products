@@ -6,7 +6,7 @@
  */
 
 import React, { ReactNode } from 'react';
-import { Tearsheet } from '../../../Tearsheet';
+import { Tearsheet } from '../../../../../../components/Tearsheet';
 
 import { useStepContext } from '../../StepContext';
 import { StepState } from '../../types';

@@ -396,16 +396,19 @@ export class CDSActionSet extends LitElement {
         disabled = false,
         loading = false,
         onClick,
+        class: customClass,
         ...rest
       } = action;
 
+      // Merge custom class with action-set classes
       const buttonClasses = classMap({
         [`${blockClass}__action-button`]: true,
         [`${blockClass}__action-button--ghost`]:
           kind === 'ghost' || kind === 'danger--ghost',
+        ...(customClass ? { [customClass]: true } : {}),
       });
 
-      // Create a ref callback to apply rest properties
+      // Create a ref callback to apply rest properties (excluding class which is handled above)
       const buttonRef = (el: Element | undefined) => {
         if (el && rest) {
           Object.entries(rest).forEach(([key, value]) => {
@@ -472,15 +475,14 @@ export class CDSActionSet extends LitElement {
       </div>`;
     }
 
-    // Otherwise, use cds-button-set with slot for external button content
-    const classes = classMap(defaultClasses);
-    return html`<cds-button-set
-      class="${classes}"
-      part="action-set"
-      ?stacked="${stacked}"
-    >
+    const classes = classMap({
+      ...defaultClasses,
+      [`${carbonPrefix}--btn-set--stacked`]: stacked,
+      [`${carbonPrefix}--btn-set`]: true,
+    });
+    return html`<div class="${classes}" part="action-set" role="list">
       <slot @slotchange="${this._handleSlotChange}"></slot>
-    </cds-button-set>`;
+    </div>`;
   }
 }
 

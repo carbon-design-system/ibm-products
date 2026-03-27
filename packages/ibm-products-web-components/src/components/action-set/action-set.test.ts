@@ -36,7 +36,7 @@ describe('c4p-action-set', () => {
     });
 
     it('applies correct CSS classes', () => {
-      const buttonSet = el.shadowRoot?.querySelector('cds-button-set');
+      const buttonSet = el.shadowRoot?.querySelector(`div.${blockClass}`);
       expect(buttonSet).to.exist;
       expect(buttonSet?.classList.contains(blockClass)).to.be.true;
       expect(buttonSet?.classList.contains(`${blockClass}--md`)).to.be.true;
@@ -114,7 +114,7 @@ describe('c4p-action-set', () => {
       await elementUpdated(el);
 
       expect(el.stacked).to.be.true;
-      const buttonSet = el.shadowRoot?.querySelector('cds-button-set');
+      const buttonSet = el.shadowRoot?.querySelector(`div.${blockClass}`);
       expect(buttonSet?.classList.contains(`${blockClass}--stacking`)).to.be
         .true;
     });
@@ -176,7 +176,7 @@ describe('c4p-action-set', () => {
         `);
         await elementUpdated(el);
 
-        const buttonSet = el.shadowRoot?.querySelector('cds-button-set');
+        const buttonSet = el.shadowRoot?.querySelector(`div.${blockClass}`);
         expect(buttonSet?.classList.contains(`${blockClass}--${size}`)).to.be
           .true;
       }
@@ -194,7 +194,7 @@ describe('c4p-action-set', () => {
       // Wait for slotchange to process
       await elementUpdated(el);
 
-      const buttonSet = el.shadowRoot?.querySelector('cds-button-set');
+      const buttonSet = el.shadowRoot?.querySelector(`div.${blockClass}`);
       expect(buttonSet?.classList.contains(`${blockClass}--row-single`)).to.be
         .true;
     });
@@ -210,7 +210,7 @@ describe('c4p-action-set', () => {
       // Wait for slotchange to process
       await elementUpdated(el);
 
-      const buttonSet = el.shadowRoot?.querySelector('cds-button-set');
+      const buttonSet = el.shadowRoot?.querySelector(`div.${blockClass}`);
       expect(buttonSet?.classList.contains(`${blockClass}--row-double`)).to.be
         .true;
     });
@@ -227,7 +227,7 @@ describe('c4p-action-set', () => {
       // Wait for slotchange to process
       await elementUpdated(el);
 
-      const buttonSet = el.shadowRoot?.querySelector('cds-button-set');
+      const buttonSet = el.shadowRoot?.querySelector(`div.${blockClass}`);
       expect(buttonSet?.classList.contains(`${blockClass}--row-triple`)).to.be
         .true;
     });
@@ -245,7 +245,7 @@ describe('c4p-action-set', () => {
       // Wait for slotchange to process
       await elementUpdated(el);
 
-      const buttonSet = el.shadowRoot?.querySelector('cds-button-set');
+      const buttonSet = el.shadowRoot?.querySelector(`div.${blockClass}`);
       expect(buttonSet?.classList.contains(`${blockClass}--row-quadruple`)).to
         .be.true;
     });

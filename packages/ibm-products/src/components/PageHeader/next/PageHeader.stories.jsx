@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   preview__PageHeader as PageHeader,
   preview__TruncatedText as TruncatedText,
@@ -36,6 +36,7 @@ import {
   HeaderContainer,
   Header,
   HeaderName,
+  FeatureFlags,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
@@ -49,6 +50,7 @@ import {
   CloudFoundry_1,
   Activity,
 } from '@carbon/icons-react';
+import { createOverflowHandler } from '@carbon/utilities';
 import mdx from './PageHeader.mdx';
 import { pageActionButtonItems } from './_story-assets/pageActionButtonItems';
 
@@ -101,31 +103,101 @@ const BeeIcon = () => <Bee size={32} />;
 
 const BreadcrumbBeeIcon = () => <Bee size={16} />;
 
-const breadcrumbPageActions = (
-  <>
-    <Button
-      renderIcon={Activity}
-      iconDescription="Icon Description 1"
-      hasIconOnly
-      size="md"
-      kind="ghost"
-    />
-    <Button
-      renderIcon={AiGenerate}
-      iconDescription="Icon Description 2"
-      hasIconOnly
-      size="md"
-      kind="ghost"
-    />
-    <Button
-      renderIcon={CloudFoundry_1}
-      iconDescription="Icon Description 3"
-      hasIconOnly
-      size="md"
-      kind="ghost"
-    />
-  </>
-);
+const breadcrumbPageActionItems = [
+  {
+    id: 'breadcrumb-action-1',
+    label: 'Icon Description 1',
+    renderIcon: Activity,
+    onClick: () => console.log('Breadcrumb action 1'),
+  },
+  {
+    id: 'breadcrumb-action-2',
+    label: 'Icon Description 2',
+    renderIcon: AiGenerate,
+    onClick: () => console.log('Breadcrumb action 2'),
+  },
+  {
+    id: 'breadcrumb-action-3',
+    label: 'Icon Description 3',
+    renderIcon: CloudFoundry_1,
+    onClick: () => console.log('Breadcrumb action 3'),
+  },
+];
+
+const BreadcrumbPageActions = () => {
+  const containerRef = useRef(null);
+  const [hiddenItems, setHiddenItems] = useState([]);
+
+  useEffect(() => {
+    if (!containerRef.current) {
+      return;
+    }
+    const handler = createOverflowHandler({
+      container: containerRef.current,
+      onChange: (_visible, hidden) => {
+        const hiddenIds = hidden.map((el) => el.dataset.id);
+        setHiddenItems(
+          breadcrumbPageActionItems.filter((item) =>
+            hiddenIds.includes(item.id)
+          )
+        );
+      },
+    });
+    return () => handler.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        inlineSize: '50%',
+      }}
+    >
+      {breadcrumbPageActionItems.map((item) => (
+        <div key={item.id} data-id={item.id}>
+          <Button
+            renderIcon={item.renderIcon}
+            iconDescription={item.label}
+            hasIconOnly
+            size="md"
+            kind="ghost"
+            onClick={item.onClick}
+          />
+        </div>
+      ))}
+      <div
+        data-offset
+        data-hidden
+        data-floating-menu-container
+        style={{
+          position: 'relative',
+        }}
+      >
+        <FeatureFlags enableV12OverflowMenu>
+          <OverflowMenu
+            size="md"
+            aria-label="More page actions"
+            autoAlign={true}
+            flipped
+          >
+            {hiddenItems.map((item) => (
+              <OverflowMenuItem
+                key={item.id}
+                itemText={item.label}
+                onClick={item.onClick}
+              />
+            ))}
+          </OverflowMenu>
+        </FeatureFlags>
+      </div>
+    </div>
+  );
+};
+
+const breadcrumbPageActions = <BreadcrumbPageActions />;
 
 export const Default = ({
   border,
@@ -150,10 +222,24 @@ export const Default = ({
         }
         pageActions={breadcrumbPageActions}
       >
-        <Breadcrumb>
+        <PageHeader.BreadcrumbOverflow
+          renderOverflowBreadcrumb={(hiddenItems) => (
+            <BreadcrumbItem data-floating-menu-container>
+              <OverflowMenu
+                align="bottom"
+                aria-label="Overflow menu in a breadcrumb"
+              >
+                {hiddenItems.map((el) => (
+                  <OverflowMenuItem itemText={el.innerText} />
+                ))}
+              </OverflowMenu>
+            </BreadcrumbItem>
+          )}
+        >
           <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-        </Breadcrumb>
+          <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+        </PageHeader.BreadcrumbOverflow>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content
         title={title}

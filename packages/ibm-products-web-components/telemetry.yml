@@ -18,7 +18,10 @@ collect:
         - description
         - expand-label
         - expandText
+        - hide-close-button
         - id
+        - influencer-width
+        - is-flush
         - kind
         - label
         - lines
@@ -134,12 +137,20 @@ collect:
         - close-on-activation
         - enter-delay-ms
         - leave-delay-ms
+        # c4p-preview-tearsheet
+        - container-class-name
+        - onc4p-preview-tearsheet-beingclosed
+        - onc4p-preview-tearsheet-closed
+        - selector-primary-focus
+        - selectors-floating-menus
+        - summary-content-width
+        - variant
+        - vertical-gap
         # c4p-side-panel
         - animate-title
         - close-icon-tooltip-alignment
         - condensed-actions
         - current-step
-        - hide-close-button
         - include-overlay
         - label-text
         - navigation-back-icon-description
@@ -153,10 +164,18 @@ collect:
         - aria-label
         - has-close-icon
         - influencer-placement
-        - influencer-width
         - onc4p-tearsheet-beingclosed
         - onc4p-tearsheet-closed
         - width
+        # c4p-tearsheet-header
+        - disable-header-collapse
+        - onc4p-tearsheet-header-close-button-clicked
+        # c4p-tearsheet-influencer
+        - influencer-panel-open
+        - oncds-tearsheet-influencer-closed
+        # c4p-tearsheet-summary-content
+        - oncds-tearsheet-summary-closed
+        - summary-panel-open
         # c4p-user-avatar
         - background-color
         - image
@@ -165,15 +184,22 @@ collect:
         - theme
         - tooltip-alignment
         - tooltip-text
-        # set-of-breadcrumbs
+        # set-of-breadcrumbs-example
         - breadcrumbs-data
         - hiddenItems
-        # set-of-tags
+        # set-of-tags-example
         - tags-data
+        # stacking-tearsheet-demo
+        - tearsheet-type
+        # step-tearsheet-preview
+        - horizontal
       allowedAttributeStringValues:
         # General - boolean attributes
         - "true"
         - "false"
+        # General - influencer-width
+        - narrow
+        - wide
         # General - kind
         - "403"
         - "404"
@@ -198,15 +224,15 @@ collect:
         - success
         - tooltip
         - warning
+        # c4p-preview-tearsheet - variant
+        - narrow
+        - wide
         # c4p-side-panel - placement
         - left
         - right
         # c4p-tearsheet - influencer-placement
         - left
         - right
-        # c4p-tearsheet - influencer-width
-        - narrow
-        - wide
         # c4p-tearsheet - width
         - narrow
         - wide

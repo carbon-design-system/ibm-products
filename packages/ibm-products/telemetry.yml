@@ -45,6 +45,7 @@ collect:
         - breadcrumbs
         - button
         - buttonProps
+        - buttonSize
         - cancelButtonText
         - caret
         - cellSize
@@ -427,7 +428,7 @@ collect:
         - searchText
         - setSearchText
         # ActionSet
-        - buttonSize
+        - disableStacking
         # AddSelectBody
         - defaultModifiers
         - globalFilterOpts
@@ -958,6 +959,8 @@ collect:
         - tagComponent
         # Tearsheet
         - containerClassName
+        - disablePortal
+        - keepMounted
         - summaryContentWidth
         - verticalGap
         # TearsheetHeader

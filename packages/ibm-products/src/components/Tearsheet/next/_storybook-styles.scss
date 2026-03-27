@@ -10,7 +10,7 @@
 @use '@carbon/styles/scss/utilities/hide-at-breakpoint' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '../../StepFlow/story-assets/Tearsheet/step-tearsheet';
+@use '../../../global/js/utils/StepFlow/story-assets/Tearsheet/step-tearsheet';
 
 $block-class__next: #{c4p-settings.$pkg-prefix}--tearsheet__next;
 @mixin hideAtLargeScreens() {

@@ -860,15 +860,33 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
        * can remove this condition in future release
        */
       if (slug && slug['type']?.displayName === 'AILabel') {
-        normalizedDecorator = slug;
+        normalizedDecorator = React.cloneElement(
+          slug as React.ReactElement<any>,
+          {
+            // slug size is always xs
+            size: 'xs',
+          }
+        );
       }
 
       if (aiLabel && aiLabel['type']?.displayName === 'AILabel') {
-        normalizedDecorator = aiLabel;
+        normalizedDecorator = React.cloneElement(
+          aiLabel as React.ReactElement<any>,
+          {
+            // aiLabel size is always xs
+            size: 'xs',
+          }
+        );
       }
 
       if (decorator?.['type']?.displayName === 'AILabel') {
-        normalizedDecorator = decorator;
+        normalizedDecorator = React.cloneElement(
+          decorator as React.ReactElement<any>,
+          {
+            // decorator size is always xs
+            size: 'xs',
+          }
+        );
       }
 
       return (

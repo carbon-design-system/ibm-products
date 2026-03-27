@@ -11,7 +11,9 @@
 import { html } from 'lit';
 import './index';
 import styles from './story-styles.scss?lit';
-
+import '@carbon/web-components/es/components/breadcrumb/index.js';
+import User20 from '@carbon/icons/es/user--avatar/20';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs.js';
 
 const argTypes = {
@@ -39,7 +41,42 @@ export const Default = {
         ${styles}
       </style>
       <div class="full-page-error-stories__story-container">
-        <div class="full-page-error-stories__story-header"></div>
+        <cds-header aria-label="IBM Product">
+          <cds-header-menu-button
+            button-label-active="Close menu"
+            button-label-inactive="Open menu"
+          ></cds-header-menu-button>
+          <cds-header-name href="/" prefix="IBM">Product</cds-header-name>
+          <div class="cds--header__global">
+            <cds-header-global-action
+              aria-label="User Avatar"
+              tooltip-alignment="end"
+            >
+              ${iconLoader(User20, { slot: 'icon' })}
+            </cds-header-global-action>
+          </div>
+        </cds-header>
+
+        <c4p-page-header-breadcrumb
+          border="true"
+          class="full-page-error-stories__story-breadcrumbs"
+        >
+          <cds-breadcrumb>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 0</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 3</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </c4p-page-header-breadcrumb>
+
         <c4p-full-page-error
           label=${args.label}
           class=${args.class}

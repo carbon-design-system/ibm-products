@@ -6,6 +6,7 @@
 */
 
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 $story-prefix: 'full-page-error-stories__';
 
@@ -15,8 +16,7 @@ $story-prefix: 'full-page-error-stories__';
   block-size: 100vh;
   grid-template-rows: 3rem 1fr;
   inline-size: 100vw;
-  inset-block-start: 0;
-  inset-inline-start: 0;
+  inset-block-start: $spacing-10;
 }
 
 .#{$story-prefix}story-header {

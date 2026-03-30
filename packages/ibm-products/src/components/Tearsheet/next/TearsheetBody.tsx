@@ -10,6 +10,8 @@ import React, {
   ReactNode,
   useContext,
   useRef,
+  useState,
+  useEffect,
 } from 'react';
 import cx from 'classnames';
 
@@ -68,14 +70,19 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
   ) => {
     const localRef = useRef<HTMLDivElement>(null);
     const mainContentRef = ref || localRef;
+    const [container, setContainer] = useState<HTMLDivElement | null>(null);
 
     const { setFullyCollapsed, disableHeaderCollapse } =
       useContext(TearsheetContext);
 
-    const container =
-      typeof mainContentRef === 'function'
-        ? null
-        : (mainContentRef?.current ?? null);
+    // Update container state when ref is attached
+    useEffect(() => {
+      const element =
+        typeof mainContentRef === 'function'
+          ? null
+          : (mainContentRef?.current ?? null);
+      setContainer(element);
+    }, [mainContentRef]);
 
     const collapseHeader = (collapse: boolean) => {
       if (container) {

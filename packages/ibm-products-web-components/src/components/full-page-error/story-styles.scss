@@ -11,14 +11,37 @@
 $story-prefix: 'full-page-error-stories__';
 
 .#{$story-prefix}story-container {
-  position: fixed;
+  position: relative;
   display: grid;
   block-size: 100vh;
   grid-template-rows: 3rem 1fr;
   inline-size: 100vw;
-  inset-block-start: $spacing-10;
+}
+
+.#{$story-prefix}story-breadcrumbs {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  padding: $spacing-04 $spacing-09;
+  background: $layer-01;
+  border-block-end: 1px solid $border-subtle-01;
+  inset-block-start: 0;
 }
 
 .#{$story-prefix}story-header {
   background: $background-inverse;
+}
+
+// Style the cds-header to match React component
+.#{$story-prefix}story-container {
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  cds-header {
+    --cds-text-primary: #{$text-inverse};
+    --cds-text-secondary: #{$text-inverse};
+    --cds-icon-primary: #{$text-inverse};
+    --cds-icon-secondary: #{$text-inverse};
+
+    background-color: $layer-selected-inverse;
+    border-block-end: 1px solid $border-subtle-01;
+  }
 }

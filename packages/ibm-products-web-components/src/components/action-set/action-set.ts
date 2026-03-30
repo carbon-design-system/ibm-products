@@ -435,7 +435,7 @@ export class CDSActionSet extends LitElement {
           size="${this.buttonSize || this.size}"
           ?disabled="${disabled || loading}"
           is-expressive="true"
-          @click="${onClick || (() => {})}"
+          @click="${typeof onClick === 'function' ? onClick : () => {}}"
         >
           ${label}
         </cds-button>

@@ -164,16 +164,19 @@ const validateActionSet = (
 @customElement(`${prefix}-action-set`)
 export class CDSActionSet extends LitElement {
   /**
-   * `true` if the buttons are currently stacked (computed internally).
-   */
-  @state()
-  stacked = false;
-
-  /**
    * Number of slotted buttons (computed internally).
    */
   @state()
   private _slottedButtonCount = 0;
+
+  /**
+   * Computed property: `true` if the buttons are currently stacked.
+   * This is derived from size, disableStacking, and button count.
+   */
+  get stacked(): boolean {
+    const buttonCount = this.actions?.length || this._slottedButtonCount;
+    return this.disableStacking ? false : willStack(this.size, buttonCount);
+  }
 
   /**
    * The size of buttons to use for the actions.
@@ -279,10 +282,9 @@ export class CDSActionSet extends LitElement {
     });
 
     // Process actions (validate, sort, determine stacking)
-    const { sortedActions, stacking } = this._processActions(actions);
+    const { sortedActions } = this._processActions(actions);
 
     // Update state
-    this.stacked = stacking;
     this._slottedButtonCount = childItems.length;
 
     // Reorder and style the buttons
@@ -383,11 +385,8 @@ export class CDSActionSet extends LitElement {
       return null;
     }
 
-    // Process actions (validate, sort, determine stacking)
-    const { sortedActions, stacking } = this._processActions(this.actions);
-
-    // Update stacked property
-    this.stacked = stacking;
+    // Process actions (validate, sort)
+    const { sortedActions } = this._processActions(this.actions);
 
     return sortedActions.map((action) => {
       const {
@@ -432,7 +431,7 @@ export class CDSActionSet extends LitElement {
           ${ref(buttonRef)}
           class="${buttonClasses}"
           kind="${kind}"
-          size="${this.buttonSize || this.size}"
+          size="${this.buttonSize}"
           ?disabled="${disabled || loading}"
           is-expressive="true"
           @click="${typeof onClick === 'function' ? onClick : () => {}}"
@@ -444,7 +443,7 @@ export class CDSActionSet extends LitElement {
   }
 
   render() {
-    const { stacked, actions, _slottedButtonCount } = this;
+    const { actions, _slottedButtonCount, stacked } = this;
     const buttonCount = actions?.length || _slottedButtonCount;
 
     const defaultClasses = {

@@ -369,7 +369,7 @@ export class CDSActionSet extends LitElement {
   }
 
   disconnectedCallback() {
-    super.disconnectedCallback?.();
+    super.disconnectedCallback();
     this.removeEventListener('focusin', this._hideSiblingMargin);
     this.removeEventListener('focusout', this._hideSiblingMargin);
   }

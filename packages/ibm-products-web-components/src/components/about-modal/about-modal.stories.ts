@@ -40,11 +40,11 @@ const argTypes = {
   },
   title: {
     control: 'select',
-    description: 'label',
+    description: 'Provide the product name for the modal header',
     options: {
-      'No label': 0,
-      'Shorter label': 1,
-      'Longer label': 2,
+      'short title': 0,
+      'long title': 1,
+      'short title with formatting': 2,
     },
   },
   version: {
@@ -165,7 +165,7 @@ export const AboutModalWithAllPropsSet = {
       <c4p-about-modal
         closeIconDescription=${args.closeIconDescription}
         copyrightText=${args.copyrightText}
-        ${html`
+        .logo=${html`
           <img
             src=${ExampleLogo}
             alt="Example product or service logo"

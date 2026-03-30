@@ -148,7 +148,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
             },
             {
               root: null,
-              rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 40) * -1}px 0px 0px 0px`,
+              rootMargin: `${(predefinedContentPadding + (refs?.contentRef?.current?.offsetHeight || 0) + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
               threshold: 0.1,
             }
           )
@@ -188,7 +188,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
             },
             {
               root: null,
-              rootMargin: `${(predefinedContentPadding + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
+              rootMargin: `${(predefinedContentPadding + (refs?.contentActions?.current?.offsetHeight || 0) + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
               threshold: 0.1,
             }
           )

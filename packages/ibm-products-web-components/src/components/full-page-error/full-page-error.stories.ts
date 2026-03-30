@@ -17,11 +17,26 @@ import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-load
 import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs.js';
 
 const argTypes = {
+  description: {
+    control: 'text',
+    description:
+      'String that will provide the description for the error code. This is optional for 403 and 404 kinds, and passing this would override their default descriptions.',
+  },
   kind: {
     control: {
       type: 'select',
     },
     options: ['403', '404', 'custom'],
+    description: 'The kind of error page to be displayed, default is custom',
+  },
+  label: {
+    control: 'text',
+    description: 'String that will describe the error that occurred',
+  },
+  title: {
+    control: 'text',
+    description:
+      'This will be for the main title of the FullPageError component',
   },
 };
 
@@ -108,7 +123,42 @@ export const Error403 = {
         ${styles}
       </style>
       <div class="full-page-error-stories__story-container">
-        <div class="full-page-error-stories__story-header"></div>
+        <cds-header aria-label="IBM Product">
+          <cds-header-menu-button
+            button-label-active="Close menu"
+            button-label-inactive="Open menu"
+          ></cds-header-menu-button>
+          <cds-header-name href="/" prefix="IBM">Product</cds-header-name>
+          <div class="cds--header__global">
+            <cds-header-global-action
+              aria-label="User Avatar"
+              tooltip-alignment="end"
+            >
+              ${iconLoader(User20, { slot: 'icon' })}
+            </cds-header-global-action>
+          </div>
+        </cds-header>
+
+        <c4p-page-header-breadcrumb
+          border="true"
+          class="full-page-error-stories__story-breadcrumbs"
+        >
+          <cds-breadcrumb>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 0</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 3</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </c4p-page-header-breadcrumb>
+
         <c4p-full-page-error
           label=${args.label}
           class=${args.class}
@@ -141,7 +191,42 @@ export const Error404 = {
         ${styles}
       </style>
       <div class="full-page-error-stories__story-container">
-        <div class="full-page-error-stories__story-header"></div>
+        <cds-header aria-label="IBM Product">
+          <cds-header-menu-button
+            button-label-active="Close menu"
+            button-label-inactive="Open menu"
+          ></cds-header-menu-button>
+          <cds-header-name href="/" prefix="IBM">Product</cds-header-name>
+          <div class="cds--header__global">
+            <cds-header-global-action
+              aria-label="User Avatar"
+              tooltip-alignment="end"
+            >
+              ${iconLoader(User20, { slot: 'icon' })}
+            </cds-header-global-action>
+          </div>
+        </cds-header>
+
+        <c4p-page-header-breadcrumb
+          border="true"
+          class="full-page-error-stories__story-breadcrumbs"
+        >
+          <cds-breadcrumb>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 0</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Link 3</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+        </c4p-page-header-breadcrumb>
+
         <c4p-full-page-error
           label=${args.label}
           class=${args.class}

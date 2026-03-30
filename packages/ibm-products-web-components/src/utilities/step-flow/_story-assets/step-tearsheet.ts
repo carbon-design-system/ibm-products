@@ -18,7 +18,7 @@ import '../../../components/tearsheet/index.js';
 import {
   registerFocusableContainers,
   trapFocus,
-} from '../../../utilities/manageFocusTrap/manageFocusTrap';
+} from '../../manageFocusTrap/manageFocusTrap';
 
 interface FormStateType {
   email?: string;

@@ -863,8 +863,8 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
         normalizedDecorator = React.cloneElement(
           slug as React.ReactElement<any>,
           {
-            // slug size is sm unless actions and size > md
-            size: closeSize,
+            // slug size is always xs
+            size: 'xs',
           }
         );
       }
@@ -873,8 +873,8 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
         normalizedDecorator = React.cloneElement(
           aiLabel as React.ReactElement<any>,
           {
-            // aiLabel size is sm unless actions and size > md
-            size: closeSize,
+            // aiLabel size is always xs
+            size: 'xs',
           }
         );
       }
@@ -883,8 +883,8 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
         normalizedDecorator = React.cloneElement(
           decorator as React.ReactElement<any>,
           {
-            // decorator size is sm unless actions and size > md
-            size: closeSize,
+            // decorator size is always xs
+            size: 'xs',
           }
         );
       }

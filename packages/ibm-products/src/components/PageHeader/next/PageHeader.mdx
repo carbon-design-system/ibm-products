@@ -9,7 +9,9 @@ import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
+- [Observer Callbacks](#observer-callbacks)
 - [PageHeader.BreadcrumbBar](#pageheaderbreadcrumbbar)
+  - [Dynamic Action Rendering](#dynamic-action-rendering)
 - [PageHeader.Content](#pageheadercontent)
   - [PageHeader.Content with hero image](#pageheadercontent-with-hero-image)
 - [PageHeader.TabsBar](#pageheadertabsbar)
@@ -153,14 +155,53 @@ export const customFunctionArr = [
 
 />
 
+## Observer Callbacks
+
+The
+[`PageHeader.Root`](packages/ibm-products/src/components/PageHeader/next/PageHeader.tsx:76)
+component provides callback functions that notify you when specific scroll-based
+visibility changes occur:
+
+- **`onContentFullyCollapsed`**: Called when the content area becomes fully
+  collapsed or visible
+- **`onTitleClipped`**: Called when the title becomes clipped or visible
+- **`onContentActionsClipped`**: Called when the content actions become clipped
+  or visible
+
+Each callback receives a boolean parameter (`true` when clipped/collapsed,
+`false` when visible).
+
+```jsx
+<PageHeader.Root
+  onContentFullyCollapsed={(collapsed) => {
+    console.log('Content fully collapsed:', collapsed);
+  }}
+  onTitleClipped={(clipped) => {
+    console.log('Title clipped:', clipped);
+  }}
+  onContentActionsClipped={(clipped) => {
+    console.log('Content actions clipped:', clipped);
+  }}
+>
+  {/* PageHeader children */}
+</PageHeader.Root>
+```
+
+These callbacks are useful for tracking scroll state, analytics, or coordinating
+with other UI elements.
+
 ## PageHeader.BreadcrumbBar
 
-The `PageHeader.BreadcrumbBar` component is used to render the breadcrumb
-navigation area within the `PageHeader`. It accepts `Breadcrumb`,
-`BreadcrumbItem`, and `PageHeader.TitleBreadcrumb` components as children to
-define the breadcrumb trail. Additionally, it accepts `contentActions`
-and` pageActions` props, allowing for actions, such as `Button` or `IconButton`
-— alongside the breadcrumb content.
+The
+[`PageHeader.BreadcrumbBar`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:57)
+component renders the breadcrumb navigation area within the PageHeader. It
+accepts `Breadcrumb`, `BreadcrumbItem`, and
+[`PageHeader.TitleBreadcrumb`](packages/ibm-products/src/components/PageHeader/next/PageHeaderTitleBreadcrumb.tsx:1)
+components as children to define the breadcrumb trail. Additionally, it accepts
+[`contentActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:37-39)
+and
+[`pageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:48-50)
+props for rendering action buttons alongside the breadcrumb content.
 
 ```jsx
 import { Bee, Activity } from '@carbon/icons-react';
@@ -197,6 +238,106 @@ return (
 );
 ```
 
+### Dynamic Action Rendering
+
+Both
+[`contentActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:37-39)
+and
+[`pageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:48-50)
+support two rendering patterns:
+
+1. **Static rendering**: Pass a React node directly for default behavior
+2. **Function rendering**: Pass a function that receives observer state and
+   returns a React node
+
+When using function rendering, your function receives a
+[`PageHeaderObserverState`](packages/ibm-products/src/components/PageHeader/next/context.ts:23-27)
+object with:
+
+- `fullyCollapsed`: boolean - Whether the content area is fully collapsed
+- `titleClipped`: boolean - Whether the title is clipped
+- `contentActionsClipped`: boolean - Whether the content actions are clipped
+
+This enables conditional rendering based on scroll position. For example, you
+can show actions in the breadcrumb bar only when they're clipped in the content
+area:
+
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.CustomRenderWithCallbacks}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: PageHeaderStories.CustomRenderWithCallbacks,
+          status: {
+            preview: ['PageHeader'],
+          },
+          customFunctionDefs: customFunctionArr,
+          customImports: [
+            `import { Add, Bee, CloudFoundry_1 } from '@carbon/react/icons';`,
+          ],
+          styles: PageHeaderStories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+```jsx
+<PageHeader.Root
+  onContentActionsClipped={(clipped) =>
+    console.log('Actions clipped:', clipped)
+  }
+>
+  <PageHeader.BreadcrumbBar
+    // Function rendering: show actions only when clipped
+    contentActions={({ contentActionsClipped }) =>
+      contentActionsClipped ? (
+        <PageHeader.ContentPageActions
+          menuButtonLabel="Actions"
+          actions={actionItems}
+        />
+      ) : null
+    }
+    pageActions={breadcrumbPageActions}
+  >
+    <Breadcrumb>
+      <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+      <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    </Breadcrumb>
+  </PageHeader.BreadcrumbBar>
+
+  <PageHeader.Content
+    title="Page Title"
+    // Function rendering: hide actions when fully collapsed
+    pageActions={({ fullyCollapsed }) =>
+      !fullyCollapsed ? (
+        <PageHeader.ContentPageActions
+          menuButtonLabel="Actions"
+          actions={actionItems}
+        />
+      ) : null
+    }
+  >
+    <PageHeader.ContentText subtitle="Subtitle">
+      Page description text
+    </PageHeader.ContentText>
+  </PageHeader.Content>
+</PageHeader.Root>
+```
+
+**Key benefits:**
+
+- Actions in
+  [`BreadcrumbBar`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:57)
+  and
+  [`Content`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContent.tsx:65)
+  can operate independently
+- Choose static nodes for simple cases or functions for dynamic behavior
+- Create responsive scroll-based interactions without managing state
+- Backward compatible - existing code using React nodes continues to work
+
 ## PageHeader.Content
 
 <Canvas
@@ -222,20 +363,31 @@ return (
   ]}
 />
 
-The `PageHeader.Content` component defines the primary content area of the
-`PageHeader`, including the title, subtitle, and any supporting text or
-contextual actions. It accepts a `title` prop to display the main heading and
-can optionally include a `renderIcon` prop to show an icon adjacent to the
-title. Child components such as `PageHeader.ContentText` can be used to provide
-additional descriptive text. To support use cases such as tags,
-`contextualActions` can be passed as a prop to render components beside the
-content. `pageActions` allows integration of action buttons aligned with the
-content section.
+The
+[`PageHeader.Content`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContent.tsx:65)
+component defines the primary content area of the PageHeader, including the
+title, subtitle, and any supporting text or contextual actions. It accepts a
+`title` prop to display the main heading and can optionally include a
+`renderIcon` prop to show an icon adjacent to the title. Child components such
+as
+[`PageHeader.ContentText`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContentText.tsx:1)
+can be used to provide additional descriptive text. To support use cases such as
+tags, `contextualActions` can be passed as a prop to render components beside
+the content.
 
-The `PageHeader.ContentPageActions` component provides responsive behavior by
-collapsing actions into a `MenuButton` when the viewport width is reduced. To
-enable this functionality, it expects an array of action objects with a specific
-API shape, as demonstrated below:
+The
+[`pageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContent.tsx:60-62)
+prop supports both static React nodes and function rendering. When using a
+function, it receives
+[`PageHeaderObserverState`](packages/ibm-products/src/components/PageHeader/next/context.ts:23-27)
+allowing you to conditionally render actions based on scroll position (e.g.,
+hide actions when content is fully collapsed).
+
+The
+[`PageHeader.ContentPageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContentPageActions.tsx:1)
+component provides responsive behavior by collapsing actions into a `MenuButton`
+when the viewport width is reduced. To enable this functionality, it expects an
+array of action objects with a specific API shape, as demonstrated below:
 
 ```jsx
 

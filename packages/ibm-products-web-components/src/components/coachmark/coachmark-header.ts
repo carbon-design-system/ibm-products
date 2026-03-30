@@ -62,8 +62,7 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
               kind="ghost"
               size="sm"
               class="${prefix}--coachmark-header-drag-handle"
-              iconDescription="${this.dragIconDescription}"
-              hasIconOnly
+              tooltip-text="${this.dragIconDescription}"
             >
               ${iconLoader(Draggable, {
                 slot: 'icon',
@@ -76,8 +75,7 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
       <cds-button
         kind="ghost"
         size="sm"
-        iconDescription="${this.closeIconDescription}"
-        hasIconOnly
+        tooltip-text="${this.closeIconDescription}"
         @click=${this._handleClick}
       >
         ${iconLoader(Close, {

@@ -13,7 +13,7 @@ import { Example as SidePanelExample } from './story-assets/SidePanel/Example';
 import { StepGroup } from './StepGroup';
 
 export default {
-  title: 'Patterns/Step flows',
+  title: 'Utilities/Step flows',
   component: StepGroup,
   tags: ['autodocs'],
   parameters: {

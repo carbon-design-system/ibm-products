@@ -7,7 +7,7 @@
 
 import React, { ReactNode } from 'react';
 import { Layer } from '@carbon/react';
-import { SidePanel } from '../../../SidePanel';
+import { SidePanel } from '../../../../../../components/SidePanel';
 
 import { StepState, useStepContext } from '../..';
 

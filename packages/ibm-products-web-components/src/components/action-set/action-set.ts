@@ -363,7 +363,7 @@ export class CDSActionSet extends LitElement {
   };
 
   connectedCallback() {
-    super.connectedCallback?.();
+    super.connectedCallback();
     this.addEventListener('focusin', this._hideSiblingMargin);
     this.addEventListener('focusout', this._hideSiblingMargin);
   }

@@ -166,6 +166,13 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     }
   }
 
+  private _handlePopoverClosed = (event: Event) => {
+    // Prevent closing on outside click when floating
+    if (this.floating) {
+      event.preventDefault();
+    }
+  };
+
   render() {
     return html`
       <cds-popover
@@ -175,6 +182,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         ?highContrast=${this.highContrast}
         align=${this.align}
         ?dropShadow=${this.dropShadow}
+        @cds-popover-beingclosed=${this._handlePopoverClosed}
       >
         <slot name="trigger"></slot>
         <cds-popover-content>

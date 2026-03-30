@@ -19,13 +19,15 @@ $story-prefix: 'full-page-error-stories__';
 }
 
 .#{$story-prefix}story-breadcrumbs {
-  position: sticky;
+  position: fixed;
+  z-index: 8000;
   display: flex;
   align-items: center;
   padding: $spacing-04 $spacing-09;
   background: $layer-01;
   border-block-end: 1px solid $border-subtle-01;
-  inset-block-start: 0;
+  inset-block-start: $spacing-09;
+  inset-inline: 0;
 }
 
 .#{$story-prefix}story-header {
@@ -43,5 +45,14 @@ $story-prefix: 'full-page-error-stories__';
 
     background-color: $layer-selected-inverse;
     border-block-end: 1px solid $border-subtle-01;
+  }
+
+  // Override spacing for full-page-error component to align with breadcrumb
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  c4p-full-page-error {
+    --cds-grid-gutter: 0;
+    --cds-grid-margin: 0;
+
+    margin-block-start: $spacing-07;
   }
 }

@@ -4,7 +4,7 @@
   "version": "2.87.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
-  "module": "es/index.js",
+  "module": "es/index.mjs",
   "types": "lib/index.d.ts",
   "installConfig": {
     "hoistingLimits": "none"
@@ -126,6 +126,7 @@
     "@carbon/themes": "^11.69.0",
     "@carbon/type": "^11.55.0",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
-    "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0"
+    "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
+    "react-is": "^16.13.1 || ^17.0.2 || ^18.3.1 || ^19.0.0"
   }
 }

@@ -1,0 +1,2 @@
+var m=Object.defineProperty;var o=(e,s)=>m(e,"name",{value:s,configurable:!0});import{u as c,c as i,e as p,_ as x,P as a}from"./iframe-CjBCRFVj.js";import{T as f}from"./Text-BrH4C0jF.js";function b({className:e,children:s,id:t,...l}){const r=c(),n=i(`${r}--label`,`${r}--label--no-margin`,e);return p.createElement(f,x({as:"label",htmlFor:t,className:n},l),s)}o(b,"FormLabel");b.propTypes={children:a.node,className:a.string,id:a.string};export{b as F};
+//# sourceMappingURL=FormLabel-CQgC935z.js.map

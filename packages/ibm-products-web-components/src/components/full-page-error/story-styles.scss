@@ -10,6 +10,10 @@
 
 $story-prefix: 'full-page-error-stories__';
 
+#main-content {
+  padding: $spacing-05 0;
+}
+
 .#{$story-prefix}story-container {
   position: relative;
   display: grid;
@@ -35,24 +39,26 @@ $story-prefix: 'full-page-error-stories__';
 }
 
 // Style the cds-header to match React component
-.#{$story-prefix}story-container {
-  /* stylelint-disable-next-line selector-type-no-unknown */
-  cds-header {
+.#{$story-prefix}story-container c4p-full-page-error {
+  margin-block-start: $spacing-10;
+}
+
+//  :root[data-carbon-theme='g90'],
+//   :root[data-carbon-theme='g100'] {
+//   .#{$story-prefix}story-container cds-header {
+//     // --cds-text-primary: $background-inverse;
+//     // background-color: $background;
+//   }
+// }
+:root[data-carbon-theme='white'],
+:root[data-carbon-theme='g10'] {
+  .#{$story-prefix}story-container cds-header {
     --cds-text-primary: #{$text-inverse};
     --cds-text-secondary: #{$text-inverse};
     --cds-icon-primary: #{$text-inverse};
     --cds-icon-secondary: #{$text-inverse};
 
-    background-color: $layer-selected-inverse;
+    background-color: $background-inverse;
     border-block-end: 1px solid $border-subtle-01;
-  }
-
-  // Override spacing for full-page-error component to align with breadcrumb
-  /* stylelint-disable-next-line selector-type-no-unknown */
-  c4p-full-page-error {
-    --cds-grid-gutter: 0;
-    --cds-grid-margin: 0;
-
-    margin-block-start: $spacing-07;
   }
 }

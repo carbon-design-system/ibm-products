@@ -73,15 +73,24 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     useEffect(() => {
       if (open && 'current' in bubbleRef && bubbleRef.current) {
         requestAnimationFrame(() => {
-          const contentBody = bubbleRef.current?.querySelector(
-            `.${contentBodyClass}`
-          );
+          if (floating) {
+            // Focus drag icon for floating coachmark
+            const dragIcon = bubbleRef.current?.querySelector(
+              `.${blockClass}--content-header--drag-icon`
+            ) as HTMLElement;
+            dragIcon?.focus();
+          } else {
+            // Focus first focusable element in body for non-floating coachmark
+            const contentBody = bubbleRef.current?.querySelector(
+              `.${contentBodyClass}`
+            );
 
-          if (contentBody) {
-            const firstFocusable = Array.from(
-              contentBody.querySelectorAll<HTMLElement>('*')
-            ).find((el) => el.tabIndex >= 0);
-            firstFocusable?.focus();
+            if (contentBody) {
+              const firstFocusable = Array.from(
+                contentBody.querySelectorAll<HTMLElement>('*')
+              ).find((el) => el.tabIndex >= 0);
+              firstFocusable?.focus();
+            }
           }
         });
       }
@@ -90,6 +99,11 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
 
     useEffect(() => {
       const handleOutsideClick = (event: MouseEvent) => {
+        // Don't close on outside click when floating
+        if (floating) {
+          return;
+        }
+
         const targetElement = document.getElementById(targetId || '');
         const bubbleElement =
           bubbleRef && 'current' in bubbleRef ? bubbleRef.current : null;

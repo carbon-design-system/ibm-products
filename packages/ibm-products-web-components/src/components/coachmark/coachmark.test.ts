@@ -154,8 +154,8 @@ describe('c4p-coachmark', function () {
       `${carbonPrefix}-button`
     ) as HTMLElement;
     expect(closeButton).to.exist;
-    expect(closeButton.hasAttribute('icondescription')).to.be.true;
-    expect(closeButton.getAttribute('icondescription')).to.equal('close icon');
+    expect(closeButton.hasAttribute('tooltip-text')).to.be.true;
+    expect(closeButton.getAttribute('tooltip-text')).to.equal('close icon');
 
     closeButton?.click();
 
@@ -199,6 +199,6 @@ describe('c4p-coachmark', function () {
     expect(headerSlot).to.exist;
 
     const buttons = headerShadow.querySelectorAll(`${carbonPrefix}-button`);
-    expect(buttons[0].getAttribute('icondescription')).to.equal('drag icon');
+    expect(buttons[0].getAttribute('tooltip-text')).to.equal('drag icon');
   });
 });

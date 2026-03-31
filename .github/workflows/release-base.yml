@@ -76,6 +76,10 @@ jobs:
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
+        # Build packages before publishing (required for npm package contents)
+      - name: Build packages
+        run: yarn build:packages
+
       - name:
           Run @ibm/telemetry-js-config-generator to regenerate ibm-products
           telemetry config file

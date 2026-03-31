@@ -1,3 +1,17 @@
+## `@carbon/ibm-products@2.87.0-rc.0`
+### Features :rocket:
+- feat(createFullPage): implemented as patterns in react (#9096)
+
+### Bug fixes :bug:
+- fix(SidePanel): visual issues - react (#9142)
+- fix: Coachmark design parity (#9155)
+- fix: move step flows to utilities (#9110)
+
+### Housekeeping :house:
+- chore(deps): update dependency glob to v13 (#9035)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+- chore: migrate to tsdown for react and wc (#9123)
+
 ## `@carbon/ibm-products@2.86.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): add support for actions prop for footer (#9103)

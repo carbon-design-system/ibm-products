@@ -1,3 +1,14 @@
+## `@carbon/ibm-products-styles@2.83.0-rc.0`
+### Features :rocket:
+- feat(createFullPage): implemented as patterns in react (#9096)
+
+### Bug fixes :bug:
+- fix(SidePanel): visual issues - react (#9142)
+
+### Housekeeping :house:
+- chore(deps): update dependency glob to v13 (#9035)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+
 ## `@carbon/ibm-products-styles@2.82.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): add support for actions prop for footer (#9103)

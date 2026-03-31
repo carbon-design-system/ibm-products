@@ -43,13 +43,6 @@ $story-prefix: 'full-page-error-stories__';
   margin-block-start: $spacing-10;
 }
 
-//  :root[data-carbon-theme='g90'],
-//   :root[data-carbon-theme='g100'] {
-//   .#{$story-prefix}story-container cds-header {
-//     // --cds-text-primary: $background-inverse;
-//     // background-color: $background;
-//   }
-// }
 :root[data-carbon-theme='white'],
 :root[data-carbon-theme='g10'] {
   .#{$story-prefix}story-container cds-header {

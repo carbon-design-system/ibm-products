@@ -9,9 +9,15 @@ on:
       - 'release\/v2**'
   merge_group:
     types: [checks_requested]
+  workflow_call:
+    inputs:
+      skip-for-release:
+        type: boolean
+        default: false
+        description: 'Skip Chromatic visual tests during releases'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.ref }}-${{ github.run_id }}
   cancel-in-progress: true
 
 jobs:
@@ -29,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Cache node_modules
-        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             node_modules
@@ -49,7 +55,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             node_modules
@@ -86,7 +92,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             node_modules
@@ -113,7 +119,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             node_modules
@@ -140,7 +146,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             node_modules
@@ -167,7 +173,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             node_modules
@@ -183,7 +189,7 @@ jobs:
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p --collectCoverage
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+        uses: codecov/codecov-action@1af58845a975a7985b0beb0cbe6fbbb71a41dbad # v5.5.3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
@@ -200,7 +206,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             node_modules
@@ -219,7 +225,7 @@ jobs:
       - name: CI tests for products web components
         run: yarn ci-check:test:c4p-wc --coverage
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+        uses: codecov/codecov-action@1af58845a975a7985b0beb0cbe6fbbb71a41dbad # v5.5.3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
@@ -241,7 +247,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             node_modules
@@ -345,7 +351,8 @@ jobs:
     needs: setup
     if:
       ${{ github.repository == 'carbon-design-system/ibm-products' &&
-      github.event.pull_request.draft == false }}
+      github.event.pull_request.draft == false && inputs.skip-for-release !=
+      true }}
     runs-on: ubuntu-latest
     outputs:
       buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
@@ -377,7 +384,7 @@ jobs:
         run: yarn install --immutable
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@0794e6939fe40ce46a88963f818092afc427da5b # v15.3.0
+        uses: chromaui/action@eea1606238fd97a70b5af723d103953d1f40967b # v15.3.1
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -425,7 +432,7 @@ jobs:
     needs: setup
     if:
       github.event_name == 'pull_request' && github.event.pull_request.draft ==
-      false
+      false && inputs.skip-for-release != true
     runs-on: ubuntu-latest
     outputs:
       buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
@@ -461,7 +468,7 @@ jobs:
           --include-dependencies --stream
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@0794e6939fe40ce46a88963f818092afc427da5b # v15.3.0
+        uses: chromaui/action@eea1606238fd97a70b5af723d103953d1f40967b # v15.3.1
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -502,3 +509,44 @@ jobs:
           echo "- Storybook deploy preview: ${{ env.storybookUrl }}" >> $GITHUB_STEP_SUMMARY
           echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "- Chromatic build URL: ${{ env.buildUrl }}" >> $GITHUB_STEP_SUMMARY
+  flag-agents-md-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Detect AGENTS.md changes
+        id: changes
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        with:
+          filters: |
+            added_or_modified:
+              - added|modified: '**/AGENTS.md'
+      - name: Post PR comment (if not already present)
+        if: steps.changes.outputs.added_or_modified == 'true'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const marker = "<!-- agents-md-comment -->";
+            const body = `${marker}
+            ⚠️ An AGENTS.md was added or updated in this PR. The length of these files directly correlate with token usage, increased instruction length, and spend. Please follow [best practices](https://www.aihero.dev/a-complete-guide-to-agents-md) and leave a comment explaining why this change is needed.
+            `.replace(/\n[ \t]+/g, '\n');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100
+            });
+
+            const alreadyCommented = comments.some(comment =>
+              comment.body?.includes(marker)
+            );
+
+            if (!alreadyCommented) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body
+              });
+            }

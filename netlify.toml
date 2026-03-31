@@ -1,0 +1,11 @@
+# Netlify build configuration for web components
+# This file must be in the repository root to be detected by Netlify
+
+[build]
+# Remove .nvmrc before Netlify reads it, then run the build
+command = "rm -f .nvmrc && yarn lerna run build --scope=@carbon/ibm-products-web-components --include-dependencies && cd packages/ibm-products-web-components && yarn build:storybook --quiet"
+publish = "packages/ibm-products-web-components/storybook-static"
+
+[build.environment]
+# Set Node version after .nvmrc is removed
+NODE_VERSION = "20"

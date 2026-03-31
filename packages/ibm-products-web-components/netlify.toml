@@ -1,8 +1,0 @@
-# Netlify build and deploy settings - https://docs.netlify.com/configure-builds/file-based-configuration/#sample-file
-[build]
-# Remove .nvmrc temporarily so Netlify uses NODE_VERSION instead
-command = "rm -f ../../.nvmrc"
-
-[build.environment]
-# Set desired Node version (will be used after .nvmrc is removed)
-NODE_VERSION = "20"

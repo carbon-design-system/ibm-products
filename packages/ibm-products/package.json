@@ -1,10 +1,10 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "2.87.0-rc.0",
+  "version": "2.87.0-rc.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
-  "module": "es/index.mjs",
+  "module": "es/index.js",
   "types": "lib/index.d.ts",
   "installConfig": {
     "hoistingLimits": "none"
@@ -115,6 +115,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@ibm/telemetry-js": "^1.9.1",
+    "prop-types": "^15.8.1",
     "react-table": "^7.8.0",
     "react-window": "^1.8.11"
   },

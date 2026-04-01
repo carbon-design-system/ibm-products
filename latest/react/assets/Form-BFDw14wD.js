@@ -1,0 +1,2 @@
+var m=Object.defineProperty;var e=(s,r)=>m(s,"name",{value:r,configurable:!0});import{j as p,c as n,u as t,P as o}from"./iframe-MbX6O_l3.js";function c({className:s,children:r,...a}){return p.jsx("form",{className:n(`${t()}--form`,s),...a,children:r})}e(c,"Form");c.propTypes={children:o.node,className:o.string};export{c as F};
+//# sourceMappingURL=Form-BFDw14wD.js.map

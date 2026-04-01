@@ -1,0 +1,2 @@
+var c=Object.defineProperty;var r=(t,o)=>c(t,"name",{value:o,configurable:!0});import{r as e}from"./iframe-MbX6O_l3.js";function p(t,o){if(typeof t=="function")throw new TypeError("Functions are not supported");const[n,u]=e.useState(t),l=e.useCallback(s=>{o?.(s)},[o]);return typeof o=="function"?[t,l]:[n,u]}r(p,"useControllableState");export{p as u};
+//# sourceMappingURL=useControllableState-BvY-FWWJ.js.map

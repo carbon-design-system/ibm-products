@@ -1,2 +1,0 @@
-var n=Object.defineProperty;var r=(s,a)=>n(s,"name",{value:a,configurable:!0});import{u as i,c as m,e as l,_ as d,P as e}from"./iframe-DhIv2Cz2.js";const f=r(({as:s="div",className:a,children:x,ratio:o="1x1",...c})=>{const t=i(),p=m(a,`${t}--aspect-ratio`,`${t}--aspect-ratio--${o}`);return l.createElement(s,d({className:p},c),x)},"AspectRatio");f.propTypes={as:e.elementType,children:e.node,className:e.string,ratio:e.oneOf(["16x9","9x16","2x1","1x2","4x3","3x4","3x2","2x3","1x1"])};export{f as A};
-//# sourceMappingURL=AspectRatio-DxsKh1Xw.js.map

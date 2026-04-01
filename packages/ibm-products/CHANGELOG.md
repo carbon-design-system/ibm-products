@@ -1,12 +1,10 @@
-## `@carbon/ibm-products@2.87.0-rc.3`
-### Bug fixes :bug:
-- fix: add prop type as dep
-- fix: build fixes and release CI optimisations
-## `@carbon/ibm-products@2.87.0-rc.0`
+## `@carbon/ibm-products@2.87.0`
 ### Features :rocket:
 - feat(createFullPage): implemented as patterns in react (#9096)
 
 ### Bug fixes :bug:
+- fix: add prop type as dep
+- fix: build fixes and release CI optimisations
 - fix(SidePanel): visual issues - react (#9142)
 - fix: Coachmark design parity (#9155)
 - fix: move step flows to utilities (#9110)

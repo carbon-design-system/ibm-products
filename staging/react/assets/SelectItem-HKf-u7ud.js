@@ -1,2 +1,0 @@
-var c=Object.defineProperty;var o=(e,t)=>c(e,"name",{value:t,configurable:!0});import{u as d,c as u,e as x,_ as f,P as s}from"./iframe-CjBCRFVj.js";const m=o(({className:e,value:t="",disabled:r=!1,hidden:i=!1,text:a="",...n})=>{const l=d(),p=u({[`${l}--select-option`]:!0,...e&&{[e]:e}});return x.createElement("option",f({},n,{className:p,value:t,disabled:r,hidden:i}),a)},"SelectItem");m.propTypes={className:s.string,disabled:s.bool,hidden:s.bool,text:s.string.isRequired,value:s.any.isRequired};export{m as S};
-//# sourceMappingURL=SelectItem-HKf-u7ud.js.map

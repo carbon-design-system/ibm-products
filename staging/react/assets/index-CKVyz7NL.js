@@ -1,0 +1,2 @@
+var o=Object.defineProperty;var t=(s,i)=>o(s,"name",{value:i,configurable:!0});function c(s){return`${s/16}rem`}t(c,"rem");const U={sm:{width:c(320)},md:{width:c(672)},lg:{width:c(1056)}},a=8;function n(s){return c(a*s)}t(n,"miniUnits");const p=n(.25),g=n(.5),e=n(1),r=n(1.5),m=n(2),b=n(3),d=n(4),u=n(5),h=n(6),w=n(8),f=n(10),z=n(12),F=n(20),k=[p,g,e,r,m,b,d,u,h,w,f,z,F];export{U as b,k as s};
+//# sourceMappingURL=index-CKVyz7NL.js.map

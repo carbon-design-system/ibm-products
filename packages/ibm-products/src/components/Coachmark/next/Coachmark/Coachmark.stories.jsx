@@ -132,7 +132,9 @@ const TooltipTemplate = ({ ...args }, context) => {
             <Coachmark.Content.Body>
               <h2>Hello World</h2>
               <p>this is a description test</p>
-              <Button size="sm">Done</Button>
+              <Button size="sm" onClick={handleClose}>
+                Done
+              </Button>
             </Coachmark.Content.Body>
           </Coachmark.Content>
         </Coachmark>
@@ -181,7 +183,9 @@ const FloatingTemplate = ({ ...args }, context) => {
             <Coachmark.Content.Body>
               <h2>Hello World</h2>
               <p>this is a description test</p>
-              <Button size="sm">Done</Button>
+              <Button size="sm" onClick={handleClose}>
+                Done
+              </Button>
             </Coachmark.Content.Body>
           </Coachmark.Content>
         </Coachmark>

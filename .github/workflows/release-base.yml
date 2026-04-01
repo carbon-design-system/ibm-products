@@ -29,9 +29,17 @@ permissions:
   contents: write
 
 jobs:
+  # Run all CI checks (build, test, lint, etc.) by calling the optimized CI workflow
+  ci-checks:
+    uses: ./.github/workflows/ci.yml
+    with:
+      skip-for-release: true # Skip Chromatic visual tests during releases
+
+  # Release job runs after CI checks pass
   release:
+    needs: ci-checks
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 30 # Reduced from 60 since CI checks run separately
     env:
       GH_TOKEN: ${{ secrets.MERGE_ACTION }}
     steps:
@@ -50,8 +58,27 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Install dependencies
+
+      # Restore node_modules cache created by the CI workflow's setup job
+      # This avoids redundant yarn install since dependencies were already installed during CI checks
+      - name: Restore node_modules
+        id: cache-deps
+        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      - name: Install dependencies (fallback)
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
+
+        # Build packages before publishing (required for npm package contents)
+      - name: Build packages
+        run: yarn build:packages
 
       - name:
           Run @ibm/telemetry-js-config-generator to regenerate ibm-products
@@ -66,36 +93,6 @@ jobs:
             git commit -m "chore(telemetry): update telemetry configs"
             git push origin
           fi
-
-      # For generating playwright json report for avt tests
-      # - name: Install browsers
-      #   run: yarn playwright install --with-deps
-
-      - name: Continuous integration check (includes build)
-        run: yarn ci-check
-
-      # - name: Run storybook
-      #   id: storybook
-      #   run: |
-      #     npx serve -l 3000 packages/ibm-products/storybook-static &
-      #     pid=$!
-      #     echo "pid=$pid" >> $GITHUB_OUTPUT
-      # - uses: ./actions/wait-for-it
-      #   with:
-      #     URL: 'http://localhost:3000'
-      #   timeout-minutes: 3
-      # - name: Run AVT
-      #   if: github.repository == 'carbon-design-system/ibm-products'
-      #   run: |
-      #     yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
-      # - name: Stop storybook
-      #   run: kill ${{ steps.storybook.outputs.pid }}
-      # - name: Upload test results
-      #   if: always()
-      #   uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-      #   with:
-      #     name: playwright-avt-report
-      #     path: .playwright
 
       - name: Set NPM token
         run: |

@@ -1,3 +1,8 @@
+## `@carbon/ibm-products@2.87.0-rc.3`
+### Bug fixes :bug:
+- fix: add prop type as dep
+- fix: build fixes and release CI optimisations
+
 ## `@carbon/ibm-products@2.86.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): add support for actions prop for footer (#9103)

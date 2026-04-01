@@ -1,3 +1,7 @@
+## `@carbon/ibm-products@2.87.0-rc.3`
+### Bug fixes :bug:
+- fix: add prop type as dep
+- fix: build fixes and release CI optimisations
 ## `@carbon/ibm-products@2.87.0-rc.0`
 ### Features :rocket:
 - feat(createFullPage): implemented as patterns in react (#9096)

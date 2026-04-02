@@ -5,8 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { IconButton, IconButtonProps, ModalHeader } from '@carbon/react';
+import {
+  AILabel,
+  IconButton,
+  IconButtonProps,
+  ModalHeader,
+  usePrefix,
+} from '@carbon/react';
 import React, {
+  cloneElement,
+  isValidElement,
+  ReactElement,
   ReactNode,
   RefObject,
   useContext,
@@ -16,7 +25,7 @@ import React, {
 import cx from 'classnames';
 import { blockClass, TearsheetContext } from './context';
 import classNames from 'classnames';
-import { ChevronUp } from '@carbon/react/icons';
+import { ChevronUp, Close } from '@carbon/react/icons';
 
 /**
  * ----------------
@@ -66,11 +75,13 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
       disableHeaderCollapse,
       ...rest
     } = props;
+    const carbonPrefix = usePrefix();
     const {
       setHasCloseIcon,
       fullyCollapsed,
       onClose,
       setDisableHeaderCollapse,
+      decorator,
     } = useContext(TearsheetContext);
     const localRef = useRef(undefined);
     const headerRef = (ref || localRef) as RefObject<HTMLDivElement>;
@@ -82,21 +93,48 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
       setDisableHeaderCollapse?.(!!disableHeaderCollapse);
     }, [disableHeaderCollapse, setDisableHeaderCollapse]);
 
+    // Normalize decorator (AILabel is always size `sm`)
+    const candidateIsAILabel =
+      isValidElement(decorator) && decorator.type === AILabel;
+    const normalizedDecorator = candidateIsAILabel
+      ? cloneElement(decorator as ReactElement<any>, { size: 'sm' })
+      : decorator;
+
     return (
       <ModalHeader
         ref={headerRef}
         className={cx(`${blockClass}__header`, {
           [`${className}`]: true,
-          [`${blockClass}__header--with-close-icon`]: !!hideCloseButton,
+          [`${blockClass}__header--with-close-icon`]: !hideCloseButton,
           [`${blockClass}__header-collapsed`]: fullyCollapsed,
         })}
-        closeClassName={cx({
-          [`${blockClass}__header--no-close-icon`]: hideCloseButton,
-        })}
-        closeModal={onClose}
-        iconDescription={closeIconDescription}
+        closeClassName={`${blockClass}__header--no-close-icon`}
         {...rest}
       >
+        {!hideCloseButton && (
+          <div
+            className={`${blockClass}__close-button ${carbonPrefix}--modal-close-button`}
+          >
+            <IconButton
+              className={`${carbonPrefix}--modal-close`}
+              label={closeIconDescription || 'Close'}
+              onClick={onClose}
+              align="left"
+            >
+              <Close
+                size={20}
+                aria-hidden="true"
+                tabIndex="-1"
+                className={`${carbonPrefix}--modal-close__icon`}
+              />
+            </IconButton>
+          </div>
+        )}
+        {decorator && (
+          <div className={`${blockClass}__decorator`}>
+            {normalizedDecorator}
+          </div>
+        )}
         {children}
       </ModalHeader>
     );

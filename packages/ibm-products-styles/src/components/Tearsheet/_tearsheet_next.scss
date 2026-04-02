@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/utilities';
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins' as *;
+@use '@carbon/layout/scss/convert';
 
 $block-class__next: #{$pkg-prefix}--tearsheet__next;
 $motion-duration: $duration-moderate-02;
@@ -183,7 +184,8 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     > *:not(
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
-        .#{$carbon-prefix}--modal-close-button
+        .#{$carbon-prefix}--modal-close-button,
+        .#{$block-class__next}__close-button
       ) {
       margin-block-end: $spacing-06;
     }
@@ -216,6 +218,22 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     }
   }
 
+  // Reorder elements visually for wide variant on desktop
+  // headerActions is first in DOM but should display on the right (order: 2)
+  // This only applies to wide variant on desktop (not mobile, not narrow)
+  &:not(.#{$block-class__next}--narrow) {
+    @include breakpoint(md) {
+      .#{$block-class__next}__header-content-wrapper {
+        .#{$block-class__next}__header-actions {
+          order: 2;
+        }
+        .#{$block-class__next}__header-content {
+          order: 1;
+        }
+      }
+    }
+  }
+
   // ──────────────────────────────────────────────────────────────
   // Header (default vs collapsed)
   // ──────────────────────────────────────────────────────────────
@@ -225,6 +243,8 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
         .#{$carbon-prefix}--modal-close-button,
+        .#{$block-class__next}__close-button,
+        .#{$block-class__next}__decorator,
         .excludeFromCollapse
       ) {
       overflow: hidden;
@@ -235,6 +255,7 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
         opacity $motion-duration motion(entrance, expressive),
         margin $motion-duration motion(entrance, expressive),
         padding $motion-duration motion(entrance, expressive);
+      visibility: hidden;
     }
 
     .#{$block-class__next}__header-actions,
@@ -261,6 +282,8 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
         .#{$carbon-prefix}--modal-close-button,
+        .#{$block-class__next}__close-button,
+        .#{$block-class__next}__decorator,
         .excludeFromCollapse
       ),
     .#{$block-class__next}__header-actions
@@ -271,6 +294,8 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
         .#{$block-class__next}__navigation-bar,
         .#{$block-class__next}__header-content-wrapper,
         .#{$carbon-prefix}--modal-close-button,
+        .#{$block-class__next}__close-button,
+        .#{$block-class__next}__decorator,
         .excludeFromCollapse
       )
       *,
@@ -285,6 +310,7 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
       opacity: 0;
       pointer-events: none;
       transition: all $motion-duration motion(entrance, expressive);
+      visibility: hidden;
     }
 
     // Header title
@@ -343,14 +369,13 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     .#{$block-class__next}__navigation-bar::before {
       position: absolute;
       z-index: 1;
-      background: rgba(0, 0, 0, 0.12);
+      background: $border-subtle-01;
       block-size: 1px;
       content: '';
-      inline-size: 100vw;
-      inset-block-start: -$spacing-02;
-      inset-inline-start: 50%;
+      inline-size: calc(100% + $spacing-11);
+      inset-block-start: 0;
+      inset-inline-start: -$spacing-07;
       pointer-events: none;
-      transform: translateX(-50%);
     }
   }
 
@@ -424,8 +449,16 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
   @include type.type-style('body-compact-01');
 }
 
+// Always hide Carbon's default modal close button
 .#{$block-class__next}__header--no-close-icon {
   display: none;
+}
+
+// Decorator positioning (after close button)
+.#{$block-class__next}__decorator {
+  position: absolute;
+  inset-block-start: convert.to-rem(10px);
+  inset-inline-end: convert.to-rem(48px);
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -447,7 +480,7 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
 }
 .#{$block-class__next}__scroller-container {
   position: absolute;
-  inset-block-end: $spacing-01;
+  inset-block-end: 0;
   inset-inline-end: -$spacing-08; // padding inline end of header + adjusted -ve margin for tabs
   @include breakpoint-down(md) {
     inset-inline-end: -$spacing-06;

@@ -16,7 +16,6 @@ import React, {
 } from 'react';
 import { useIsomorphicEffect } from '../../../global/js/hooks';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
   ComposedModal,
@@ -192,6 +191,7 @@ const TearsheetInternal = forwardRef<
       keepMounted = false,
       isExiting = false,
       presenceRef,
+      decorator,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -257,13 +257,7 @@ const TearsheetInternal = forwardRef<
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [
-      isSm,
-      rest.decorator,
-      influencerWidth,
-      summaryContentWidth,
-      verticalGap,
-    ]);
+    }, [isSm, decorator, influencerWidth, summaryContentWidth, verticalGap]);
 
     useIsomorphicEffect(() => {
       const id = uniqueId.current;
@@ -308,6 +302,7 @@ const TearsheetInternal = forwardRef<
           setDisableHeaderCollapse,
           variant,
           isSm,
+          decorator,
         }}
       >
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
@@ -320,11 +315,9 @@ const TearsheetInternal = forwardRef<
               [`${blockClass}--stacked`]: depth > 0,
               [`${blockClass}--stack-activated`]: stack.length > 1,
               [`${blockClass}--has-ai-label`]:
-                !!rest.decorator &&
-                rest.decorator['type']?.displayName === 'AILabel',
+                !!decorator && decorator['type']?.displayName === 'AILabel',
               [`${blockClass}--has-decorator`]:
-                !!rest.decorator &&
-                rest.decorator['type']?.displayName !== 'AILabel',
+                !!decorator && decorator['type']?.displayName !== 'AILabel',
               [`${blockClass}--has-close`]: hasCloseIcon,
               ['is-visible']: keepMounted ? open : true, // When keepMounted, use open prop; otherwise always visible
               [`${blockClass}--keep-mounted`]: keepMounted,

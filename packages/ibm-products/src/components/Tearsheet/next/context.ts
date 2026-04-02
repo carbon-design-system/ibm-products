@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { createContext, RefObject, useContext } from 'react';
+import { createContext, ReactNode, RefObject, useContext } from 'react';
 import { pkg } from '../../../settings';
 
 /**
@@ -25,6 +25,7 @@ interface TearsheetContextType {
   setDisableHeaderCollapse?: (value: boolean) => void;
   variant: 'wide' | 'narrow';
   isSm: boolean;
+  decorator?: ReactNode;
 }
 export const TearsheetContext = createContext<TearsheetContextType>({
   hasCloseIcon: true,
@@ -32,6 +33,7 @@ export const TearsheetContext = createContext<TearsheetContextType>({
   disableHeaderCollapse: false,
   variant: 'wide',
   isSm: false,
+  decorator: undefined,
 });
 
 export const blockClass = `${pkg.prefix}--tearsheet__next`;

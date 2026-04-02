@@ -7,7 +7,7 @@
 
 import React, { ReactNode, useContext } from 'react';
 import cx from 'classnames';
-import { blockClass } from './context';
+import { blockClass, TearsheetContext } from './context';
 import { TruncatedText } from '../../TruncatedText';
 
 export interface TearsheetHeaderContentProps {
@@ -59,39 +59,54 @@ const TearsheetHeaderContent = React.forwardRef<
     ...rest
   } = props;
 
+  const { isSm } = useContext(TearsheetContext);
+
+  const headerContent = (
+    <div className={`${blockClass}__header-content`}>
+      {label ? (
+        <div className={`${blockClass}__header-label`}>{label}</div>
+      ) : null}
+      <div className={`${blockClass}__content__title-wrapper`}>
+        <h2 className={cx(`${blockClass}__header-title`)}>
+          {titleStart ? (
+            <span className={`${blockClass}__title-start`}>{titleStart}</span>
+          ) : null}
+          <TruncatedText
+            id={`${blockClass}__header-title__truncatedText`}
+            className={`${blockClass}__content__title`}
+            align="bottom"
+            autoAlign={true}
+            value={title}
+          />
+          {titleEnd ? (
+            <span className={`${blockClass}__title-end`}>{titleEnd}</span>
+          ) : null}
+        </h2>
+      </div>
+
+      <div className={`${blockClass}__header-description`}>{description}</div>
+      {children && (
+        <div className={`${blockClass}__header-content--extra`}>{children}</div>
+      )}
+    </div>
+  );
+
+  const headerActionsElement = headerActions && (
+    <div className={`${blockClass}__header-actions`}>{headerActions}</div>
+  );
+
   return (
     <div className={`${blockClass}__header-content-wrapper`} ref={ref}>
-      <div className={`${blockClass}__header-content`}>
-        {label ? (
-          <div className={`${blockClass}__header-label`}>{label}</div>
-        ) : null}
-        <div className={`${blockClass}__content__title-wrapper`}>
-          <h2 className={cx(`${blockClass}__header-title`)}>
-            {titleStart ? (
-              <span className={`${blockClass}__title-start`}>{titleStart}</span>
-            ) : null}
-            <TruncatedText
-              id={`${blockClass}__header-title__truncatedText`}
-              className={`${blockClass}__content__title`}
-              align="bottom"
-              autoAlign={true}
-              value={title}
-            />
-            {titleEnd ? (
-              <span className={`${blockClass}__title-end`}>{titleEnd}</span>
-            ) : null}
-          </h2>
-        </div>
-
-        <div className={`${blockClass}__header-description`}>{description}</div>
-        {children && (
-          <div className={`${blockClass}__header-content--extra`}>
-            {children}
-          </div>
-        )}
-      </div>
-      {headerActions && (
-        <div className={`${blockClass}__header-actions`}>{headerActions}</div>
+      {!isSm ? (
+        <>
+          {headerActionsElement}
+          {headerContent}
+        </>
+      ) : (
+        <>
+          {headerContent}
+          {headerActionsElement}
+        </>
       )}
     </div>
   );

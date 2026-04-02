@@ -2,7 +2,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,22 +14,23 @@ import { classMap } from 'lit/directives/class-map.js';
 import { repeat } from 'lit/directives/repeat.js';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
-import { createOverflowHandler } from './overflowHandler';
+import { createOverflowHandler } from '../utils';
 import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '../../truncated-text';
-import styles from './set-of-breadcrumbs.scss?lit';
+import styles from './page-header-breadcrumbs-set.scss?lit';
 import '../page-header-title-breadcrumb';
+import { prefix } from '../../../globals/settings';
 
-const blockClass = `c4p--set-of-breadcrumbs`;
+const blockClass = `${prefix}--page-header-breadcrumbs-set`;
 
 interface Breadcrumb {
   text: string;
   href: string;
 }
 
-@customElement('set-of-breadcrumbs-example')
-export default class SetOfBreadcrumbs extends LitElement {
+@customElement(`${prefix}-page-header-breadcrumbs-set`)
+export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
   /**
    * Hidden items that will be rendered in the overflow menu.
    */
@@ -41,6 +42,12 @@ export default class SetOfBreadcrumbs extends LitElement {
    */
   @property({ type: Array, attribute: 'breadcrumbs-data', reflect: true })
   breadcrumbsData: Breadcrumb[] = [];
+
+  /**
+   * The page title to display in the title breadcrumb.
+   */
+  @property({ type: String })
+  title = '';
 
   /**
    * Container holding all breadcrumbs and the overflow menu.
@@ -84,7 +91,10 @@ export default class SetOfBreadcrumbs extends LitElement {
           offsetValue: 14,
           container: this.container,
           onChange: (visibleItems: HTMLElement[], _) => {
-            this.hiddenItems = this.breadcrumbsData?.slice(visibleItems.length);
+            const totalItems = (this.breadcrumbsData?.length ?? 1) - 1; // Exclude last item
+            const hiddenCount = totalItems - visibleItems.length;
+            this.hiddenItems =
+              this.breadcrumbsData?.slice(0, hiddenCount) ?? [];
           },
         });
       });
@@ -112,21 +122,10 @@ export default class SetOfBreadcrumbs extends LitElement {
           [`${blockClass}`]: true,
         })}
       >
-        ${repeat(
-          this.breadcrumbsData?.slice(0, -1) ?? [],
-          (item) => item.href ?? item.text,
-          (item) => html`
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="${item.href}">
-                ${item.text}
-              </cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-          `
-        )}
-
         <cds-breadcrumb-item
           data-fixed
-          style="display: ${this.hiddenItems?.length >= 2 ? 'flex' : 'none'}"
+          data-offset
+          style="display: ${this.hiddenItems?.length >= 1 ? 'flex' : 'none'}"
         >
           <cds-overflow-menu breadcrumb="" align="bottom">
             ${iconLoader(OverflowMenuHorizontal16, {
@@ -135,7 +134,7 @@ export default class SetOfBreadcrumbs extends LitElement {
             <span slot="tooltip-content"> Breadcrumbs </span>
             <cds-overflow-menu-body size="sm">
               ${repeat(
-                this.hiddenItems?.slice(0, -1) ?? [],
+                this.hiddenItems ?? [],
                 (item) => item.href ?? item.text,
                 (item) => html`
                   <cds-overflow-menu-item href=${item.href}>
@@ -146,10 +145,21 @@ export default class SetOfBreadcrumbs extends LitElement {
             </cds-overflow-menu-body>
           </cds-overflow-menu>
         </cds-breadcrumb-item>
+        ${repeat(
+          this.breadcrumbsData?.slice(this.hiddenItems?.length ?? 0, -1) ?? [],
+          (item) => item.href ?? item.text,
+          (item) => html`
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="${item.href}">
+                ${item.text}
+              </cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          `
+        )}
         <c4p-page-header-title-breadcrumb data-fixed>
           <cds-breadcrumb-link is-currentpage="">
             <c4p-truncated-text
-              value="${this.breadcrumbsData!.at(-1)!.text}"
+              value="${this.title}"
               lines="1"
               autoalign
             ></c4p-truncated-text>
@@ -163,6 +173,6 @@ export default class SetOfBreadcrumbs extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'set-of-breadcrumbs-example': SetOfBreadcrumbs;
+    'c4p-page-header-breadcrumbs-set': CDSPageHeaderBreadcrumbsSet;
   }
 }

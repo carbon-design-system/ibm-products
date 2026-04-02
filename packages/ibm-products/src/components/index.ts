@@ -97,6 +97,17 @@ export type {
   StackContextType,
 } from './Tearsheet/next';
 
+export { AddSelect as preview__AddSelect } from './AddSelect/next';
+export type {
+  AddSelectProps as preview__AddSelectProps,
+  AddSelectComponentType,
+  AddSelectBodyProps,
+  AddSelectListProps,
+  AddSelectItemProps,
+  AddSelectBreadcrumbsProps,
+  AddSelectContextType,
+} from './AddSelect/next';
+
 // Preview candidates
 export {
   BigNumber as previewCandidate__BigNumber,

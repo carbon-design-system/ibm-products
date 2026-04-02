@@ -1,0 +1,122 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/blocks';
+import * as AddSelectBodyStories from './AddSelectBody.stories';
+
+<Meta of={AddSelectBodyStories} />
+
+# Add Select Body
+
+## Overview
+
+The Add Select Body component contains the main content area for the add-select
+pattern. It includes:
+
+- Global search functionality
+- Breadcrumb navigation for hierarchical data
+- Item count display
+- Content area for the item list
+
+This component manages the search state and navigation path, and provides
+callbacks when users interact with search or breadcrumbs.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import { AddSelect } from '@carbon/ibm-products';
+```
+
+### Usage Example
+
+<Canvas of={AddSelectBodyStories.Default} />
+
+### JSX
+
+```jsx
+<AddSelect>
+  <AddSelect.Body
+    itemsLabel="All items"
+    globalSearchLabel="Search"
+    globalSearchPlaceholder="Search items"
+    searchResultsTitle="Search results"
+    itemCount={5}
+  >
+    <AddSelect.List>{/* Add select items here */}</AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>
+```
+
+## Multi-select Example
+
+<Canvas of={AddSelectBodyStories.MultiSelect} />
+
+### JSX
+
+```jsx
+<AddSelect multi>
+  <AddSelect.Body
+    itemsLabel="All items"
+    globalSearchLabel="Search"
+    globalSearchPlaceholder="Search items"
+    itemCount={5}
+  >
+    <AddSelect.List>{/* Add select items here */}</AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>
+```
+
+## With Breadcrumbs Example
+
+<Canvas of={AddSelectBodyStories.WithBreadcrumbs} />
+
+### JSX
+
+```jsx
+const path = [
+  { id: 'root', title: 'Root' },
+  { id: 'category', title: 'Category' },
+  { id: 'subcategory', title: 'Subcategory' },
+];
+
+<AddSelect>
+  <AddSelect.Body
+    itemsLabel="All items"
+    globalSearchLabel="Search"
+    globalSearchPlaceholder="Search items"
+    itemCount={5}
+    path={path}
+    onSearch={handleSearch}
+    onBreadcrumbClick={handleBreadcrumbClick}
+  >
+    <AddSelect.List>{/* Add select items here */}</AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>;
+```
+
+## Events
+
+### `onSearch`
+
+Callback when the search term changes.
+
+**Parameters:**
+
+```typescript
+(searchTerm: string) => void
+```
+
+### `onBreadcrumbClick`
+
+Callback when a breadcrumb item is clicked.
+
+**Parameters:**
+
+```typescript
+(index: number) => void
+```
+
+## Component API
+
+<ArgTypes of={AddSelectBodyStories} />

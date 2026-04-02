@@ -1,0 +1,52 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '../../../../global/styles/project-settings' as *;
+
+$block-class: #{$pkg-prefix}--add-select;
+
+.#{$block-class}__body {
+  display: flex;
+  flex-direction: column;
+  background-color: $layer-01;
+  block-size: 100%;
+}
+
+.#{$block-class}__header {
+  padding: $spacing-05;
+  border-block-end: 1px solid $border-subtle-01;
+}
+
+.#{$block-class}__search {
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class}__sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.#{$block-class}__tags {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+}
+
+.#{$block-class}__tags-label {
+  @include type-style('label-01');
+
+  margin: 0;
+}
+
+.#{$block-class}__content {
+  flex: 1;
+  overflow-y: auto;
+}

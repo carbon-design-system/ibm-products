@@ -1,0 +1,119 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/blocks';
+import * as AddSelectBreadcrumbsStories from './AddSelectBreadcrumbs.stories';
+
+<Meta of={AddSelectBreadcrumbsStories} />
+
+# Add Select Breadcrumbs
+
+## Overview
+
+The Add Select Breadcrumbs component provides hierarchical navigation for the
+add-select pattern. It shows the current navigation path and allows users to
+navigate back to previous levels.
+
+## Features
+
+- Shows the current navigation path
+- Clickable breadcrumb items for navigation
+- Automatically truncates long paths
+- Accessible keyboard navigation
+- Integrates with Carbon's Breadcrumb component
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import { AddSelect } from '@carbon/ibm-products';
+```
+
+### Usage Example
+
+<Canvas of={AddSelectBreadcrumbsStories.Default} />
+
+### JSX
+
+```jsx
+const path = [
+  { id: 'root', title: 'Root' },
+  { id: 'category', title: 'Category' },
+  { id: 'subcategory', title: 'Subcategory' },
+];
+
+<AddSelect>
+  <AddSelect.Body
+    itemsLabel="Items"
+    globalSearchLabel="Search"
+    itemCount={items.length}
+    path={path}
+  >
+    <AddSelect.List>{/* items */}</AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>;
+```
+
+## Interactive Example
+
+<Canvas of={AddSelectBreadcrumbsStories.Interactive} />
+
+### JSX
+
+```jsx
+const [path, setPath] = useState([
+  { id: 'root', title: 'Root' },
+  { id: 'level1', title: 'Level 1' },
+  { id: 'level2', title: 'Level 2' }
+]);
+
+const handleBreadcrumbClick = (index) => {
+  setPath(path.slice(0, index + 1));
+};
+
+<AddSelect>
+  <AddSelect.Body
+    path={path}
+    onBreadcrumbClick={handleBreadcrumbClick}
+    {/* other props */}
+  >
+    {/* content */}
+  </AddSelect.Body>
+</AddSelect>
+```
+
+## Deep Hierarchy Example
+
+<Canvas of={AddSelectBreadcrumbsStories.DeepHierarchy} />
+
+## Props
+
+### path
+
+Array of breadcrumb items, each containing:
+
+- **id** (string): Unique identifier
+- **title** (string): Display text
+
+### onBreadcrumbClick
+
+Callback function when a breadcrumb is clicked:
+
+```typescript
+(index: number) => void
+```
+
+The index parameter indicates which breadcrumb was clicked (0-based).
+
+## Accessibility
+
+The component follows WCAG 2.1 AA guidelines:
+
+- Uses Carbon's accessible Breadcrumb component
+- Supports keyboard navigation
+- Provides proper ARIA labels
+- Clear visual indication of current page
+
+## Component API
+
+<ArgTypes of={AddSelectBreadcrumbsStories} />

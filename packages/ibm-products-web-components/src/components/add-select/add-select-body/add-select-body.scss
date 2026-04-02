@@ -1,0 +1,56 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+$prefix: 'c4p';
+$baseClass: #{$prefix}--add-select-body;
+
+:host(#{$prefix}-add-select-body) {
+  display: block;
+}
+
+.#{$baseClass} {
+  display: flex;
+  flex-direction: column;
+  background-color: $layer-01;
+  block-size: 100%;
+}
+
+.#{$baseClass}__header {
+  padding: $spacing-05;
+  border-block-end: 1px solid $border-subtle-01;
+}
+
+.#{$baseClass}__search {
+  margin-block-end: $spacing-05;
+}
+
+.#{$baseClass}__sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.#{$baseClass}__tags {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+}
+
+.#{$baseClass}__tags-label {
+  @include type-style('label-01');
+
+  margin: 0;
+}
+
+.#{$baseClass}__content {
+  flex: 1;
+  overflow-y: auto;
+}

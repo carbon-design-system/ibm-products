@@ -31,7 +31,18 @@ const argTypes = {};
 
 const blockClass = 'guide-banner-story';
 
-const items = [
+type GuideBannerStoryItem = {
+  titleText: string;
+  descriptionText: string;
+  buttonType?: string;
+  buttonText: string;
+  hasIcon?: boolean;
+  isLink?: boolean;
+  linkHref?: string;
+  idx: number;
+};
+
+const manyInsightsItems: GuideBannerStoryItem[] = [
   {
     titleText: 'Use-case specific heading',
     descriptionText:
@@ -77,6 +88,27 @@ const items = [
   },
 ];
 
+const fewInsightsItems: GuideBannerStoryItem[] = [
+  {
+    titleText: 'Use-case specific heading',
+    descriptionText:
+      'Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context.',
+    buttonType: 'tertiary',
+    buttonText: 'Show Me',
+    hasIcon: true,
+    idx: 0,
+  },
+  {
+    titleText: 'Use-case specific heading',
+    descriptionText:
+      'Use-case specific content related to the heading that explains the concept or adds context.',
+    isLink: true,
+    linkHref: 'https://www.ibm.com',
+    buttonText: 'Learn more',
+    idx: 1,
+  },
+];
+
 //@ts-ignore
 const renderTemplate = (args) => {
   const {
@@ -86,6 +118,8 @@ const renderTemplate = (args) => {
     expandText,
     titleText,
     open,
+    items = manyInsightsItems,
+    withLeftGutter,
   } = args;
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -123,7 +157,9 @@ const renderTemplate = (args) => {
     <c4p-guide-banner
       @c4p-guidebanner-toggle=${handleToggle}
       @c4p-guidebanner-close=${handleOnClose}
-      class=${blockClass}
+      class=${withLeftGutter
+        ? `${blockClass} ${blockClass}--with-left-gutter`
+        : blockClass}
       collapseText=${collapseText}
       expandText=${expandText}
       ?open=${open}
@@ -133,8 +169,8 @@ const renderTemplate = (args) => {
         <div class="body" dir="ltr" @scrollend=${scrollendHandler}>
           ${repeat(
             items,
-            (item) => item.idx,
-            (item) => html`
+            (item: GuideBannerStoryItem) => item.idx,
+            (item: GuideBannerStoryItem) => html`
               <c4p-guide-banner-element class="body-elm">
                 <div slot="title">${item.titleText}</div>
                 <div slot="description">${item.descriptionText}</div>
@@ -227,14 +263,20 @@ const renderTemplate = (args) => {
   `;
 };
 
+const defaultArgs = {
+  '@c4p-guidebanner-ontoggle': fn(),
+  '@c4p-guidebanner-onclose': fn(),
+  collapseText: 'Read less',
+  expandText: 'Read more',
+  titleText: 'Page-related heading that can stand on its own',
+  open: true,
+  items: manyInsightsItems,
+  withLeftGutter: false,
+};
+
 export const Default = {
   args: {
-    '@c4p-guidebanner-ontoggle': fn(),
-    '@c4p-guidebanner-onclose': fn(),
-    collapseText: 'Read less',
-    expandText: 'Read more',
-    titleText: 'Page-related heading that can stand on its own',
-    open: true,
+    ...defaultArgs,
   },
   argTypes,
   render: renderTemplate,
@@ -248,13 +290,30 @@ export default meta;
 
 export const Collapsible = {
   args: {
-    '@c4p-guidebanner-ontoggle': fn(),
-    '@c4p-guidebanner-onclose': fn(),
-    collapseText: 'Read less',
-    expandText: 'Read more',
-    titleText: 'Page-related heading that can stand on its own',
+    ...defaultArgs,
     open: false,
   },
+  argTypes,
+  render: renderTemplate,
+};
+
+export const ManyInsights = {
+  args: {
+    ...defaultArgs,
+    open: false,
+    items: manyInsightsItems,
+  },
+  argTypes,
+  render: renderTemplate,
+};
+
+export const FewInsights = {
+  args: {
+    ...defaultArgs,
+    open: false,
+    items: fewInsightsItems,
+  },
+  argTypes,
   render: renderTemplate,
 };
 

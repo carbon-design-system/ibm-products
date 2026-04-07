@@ -25,6 +25,12 @@ $carbon-prefix: 'cds';
 
 $block-class: #{$prefix}--coachmark__next;
 
+.#{$block-class} {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline-end: 180px;
+}
+
 // BUBBLE - content styling
 .#{$block-class}--coachmark-content {
   position: fixed;

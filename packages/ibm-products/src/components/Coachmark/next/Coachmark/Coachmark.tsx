@@ -23,7 +23,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../../../global/js/utils/devtools';
 import { CoachmarkContext, blockClass } from './context';
 import CoachmarkContent, { CoachmarkContentProps } from './CoachmarkContent';
-import { NewPopoverAlignment } from '@carbon/react';
+import { Popover, NewPopoverAlignment } from '@carbon/react';
 import { useIsomorphicEffect } from '../../../../global/js/hooks';
 import { ContentHeader, ContentHeaderProps } from './ContentHeader';
 import { ContentBody, ContentBodyProps } from './ContentBody';
@@ -163,6 +163,23 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       }
     };
 
+    const handleRequestClose = (event?: Event) => {
+      onClose?.();
+      setOpen(false);
+    };
+
+    // Separate trigger and content from children
+    const childrenArray = React.Children.toArray(children);
+    const contentElement = childrenArray.find(
+      (child) => React.isValidElement(child) && child.type === CoachmarkContent
+    ); // Find Coachmark.Content
+
+    // Check if there's a trigger element (anything that's not CoachmarkContent)
+    const triggerElement = childrenArray.find(
+      (child) =>
+        !(React.isValidElement(child) && child.type === CoachmarkContent)
+    );
+
     return (
       <CoachmarkContext.Provider
         value={{
@@ -179,15 +196,23 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       >
         <div
           {...rest}
-          className={cx(
-            blockClass, // Apply the block class to the main HTML element
-            className, // Apply any supplied class names to the main HTML element.
-            { [`${blockClass}--floating`]: floating }
-          )}
           ref={setRef}
+          className={cx(blockClass, className, {
+            [`${blockClass}--floating`]: floating,
+          })}
           {...getDevtoolsProps(componentName)}
         >
-          <div className={`${blockClass}--container`}>{children}</div>
+          <Popover
+            open={currentOpen}
+            onRequestClose={handleRequestClose}
+            align={align as NewPopoverAlignment}
+            caret={!floating}
+            highContrast={true}
+            dropShadow={true}
+          >
+            {triggerElement}
+            {contentElement}
+          </Popover>
         </div>
       </CoachmarkContext.Provider>
     );

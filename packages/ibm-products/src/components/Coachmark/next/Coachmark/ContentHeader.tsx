@@ -14,7 +14,6 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass, CoachmarkContext } from './context';
-import { CoachmarkBubbleHeader } from './CoachmarkBubble';
 import { Close, Draggable } from '@carbon/react/icons';
 import { makeDraggable } from '../../../../global/js/utils/makeDraggable';
 
@@ -68,35 +67,57 @@ export const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
         handleRef.current &&
         dragRef.current
       ) {
-        makeDraggable({
+        // Find the popover-content element for styling during drag
+        const dragStyleContainer = contentRef.querySelector(
+          '.cds--popover-content'
+        );
+
+        // Reset positioning styles on the drag container
+        contentRef.style.transform = 'none';
+        contentRef.style.left = '0px';
+        contentRef.style.top = '0px';
+
+        const draggable = makeDraggable({
           el: contentRef,
           dragHandle: handleRef.current,
           focusableDragHandle: dragRef.current,
         });
 
         const onDragStart = () => {
-          if (contentRef) {
-            contentRef.classList.add(`${contentHeaderBlockClass}--is-dragging`);
-            contentRef.setAttribute('aria-label', 'Coachmark is being dragged');
+          if (dragStyleContainer) {
+            dragStyleContainer.classList.add(
+              `${contentHeaderBlockClass}--is-dragging`
+            );
+            dragStyleContainer.setAttribute(
+              'aria-label',
+              'Coachmark is being dragged'
+            );
           }
         };
 
         const onDragEnd = () => {
-          if (contentRef) {
-            contentRef.classList.remove(
+          if (dragStyleContainer) {
+            dragStyleContainer.classList.remove(
               `${contentHeaderBlockClass}--is-dragging`
             );
-            contentRef.removeAttribute('aria-label');
+            dragStyleContainer.removeAttribute('aria-label');
           }
         };
 
         contentRef.addEventListener('dragstart', onDragStart);
         contentRef.addEventListener('dragend', onDragEnd);
+
+        // Cleanup function
+        return () => {
+          contentRef.removeEventListener('dragstart', onDragStart);
+          contentRef.removeEventListener('dragend', onDragEnd);
+          draggable.cleanup();
+        };
       }
-    });
+    }, [floating, contentRef, handleRef, dragRef, contentHeaderBlockClass]);
 
     return (
-      <CoachmarkBubbleHeader
+      <div
         ref={handleRef}
         className={cx(contentHeaderBlockClass, className)}
         {...rest}
@@ -121,7 +142,7 @@ export const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
           hasIconOnly
           onClick={closeBubble}
         />
-      </CoachmarkBubbleHeader>
+      </div>
     );
   }
 );

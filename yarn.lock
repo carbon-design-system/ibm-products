@@ -2213,7 +2213,7 @@ __metadata:
     "@carbon/motion": "npm:^11.42.0"
     "@carbon/styles": "npm:^1.101.0"
     "@carbon/utilities": "npm:^0.16.0"
-    "@carbon/web-components": "npm:2.49.0"
+    "@carbon/web-components": "npm:2.50.0"
     "@figma/code-connect": "npm:^1.4.0"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@ibm/telemetry-js-config-generator": "npm:^2.1.0"
@@ -2544,7 +2544,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:^1.103.0":
+"@carbon/styles@npm:^1.102.0, @carbon/styles@npm:^1.103.0":
   version: 1.103.0
   resolution: "@carbon/styles@npm:1.103.0"
   dependencies:
@@ -2741,13 +2741,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/web-components@npm:2.49.0":
-  version: 2.49.0
-  resolution: "@carbon/web-components@npm:2.49.0"
+"@carbon/web-components@npm:2.50.0":
+  version: 2.50.0
+  resolution: "@carbon/web-components@npm:2.50.0"
   dependencies:
     "@carbon/icon-helpers": "npm:10.47.0"
     "@carbon/icons": "npm:^11.76.0"
-    "@carbon/styles": "npm:^1.101.0"
+    "@carbon/styles": "npm:^1.102.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@lit/context": "npm:^1.1.3"
@@ -2755,7 +2755,7 @@ __metadata:
     lit: "npm:^3.1.0"
     lodash-es: "npm:^4.17.21"
     tslib: "npm:^2.6.3"
-  checksum: 10/cc4ea1e61806c0248c775e514f36ac91f26afabde7a493b95a6579d2bb5ae4489547d6a9c10f66480513c90020b60db2380f2a83ea1cf8764ec939751c4bb399
+  checksum: 10/621af3df8efc034b3ba498f671d8f5ad9528e8f5bfb30839a9e3d5293c391eb49179963463490e89accd188f6d43fcaf4cf70676aed8767d10328f93bcf033cf
   languageName: node
   linkType: hard
 

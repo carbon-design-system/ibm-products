@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.36.0-rc.0`
+## `@carbon/ibm-products-web-components@0.36.0`
 ### Bug fixes :bug:
 - fix(about-modal): Parity work (#9088)
 - fix(side-panel): Parity work (#9136)

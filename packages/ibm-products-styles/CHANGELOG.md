@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.83.0-rc.0`
+## `@carbon/ibm-products-styles@2.83.0`
 ### Features :rocket:
 - feat(createFullPage): implemented as patterns in react (#9096)
 

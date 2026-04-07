@@ -150,16 +150,6 @@
   margin-block-end: $spacing-06;
 }
 
-// CreateTearsheet action buttons
-.create-tearsheet__action-buttons {
-  display: flex;
-  gap: $spacing-03;
-}
-
-.create-tearsheet__action-button {
-  // Button styles if needed
-}
-
 // CreateTearsheet divider (using pkg.prefix which is c4p)
 .c4p--tearsheet-create__section--divider {
   position: relative;
@@ -194,22 +184,6 @@
 .influencer__content,
 .create-tearsheet-step {
   margin-block-start: $spacing-06;
-}
-
-.default__action-buttons {
-  display: grid;
-  grid-auto-rows: minmax(auto, auto);
-  grid-template-columns: repeat(6, 1fr);
-
-  > button {
-    inline-size: 100%;
-    /* stylelint-disable-next-line declaration-no-important */
-    max-inline-size: none !important;
-  }
-
-  :first-child {
-    grid-column: span 4;
-  }
 }
 
 .cds--inline-loading {

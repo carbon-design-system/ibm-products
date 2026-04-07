@@ -12,7 +12,7 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '../../global/styles/project-settings' as *;
 
-$block-class__next: #{$pkg-prefix}--add-select;
+$block-class__next: #{$pkg-prefix}--add-select__next;
 
 /// Composable AddSelect styles (next)
 /// These styles support the composable AddSelect component structure
@@ -180,31 +180,32 @@ $block-class__next: #{$pkg-prefix}--add-select;
     display: flex;
     align-items: center;
     margin-inline-start: $spacing-03;
-  }@media screen and (prefers-reduced-motion: reduce) {
-&__nav-indicator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: $spacing-02;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-inline-start: $spacing-03;
-    transition: none;
+  }
+  @media screen and (prefers-reduced-motion: reduce) {
+    &__nav-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: $spacing-02;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-inline-start: $spacing-03;
+      transition: none;
 
-    &:hover {
-      background-color: $layer-hover-01;
-    }
+      &:hover {
+        background-color: $layer-hover-01;
+      }
 
-    &:focus {
-      outline: 2px solid $focus;
-      outline-offset: -2px;
-    }
+      &:focus {
+        outline: 2px solid $focus;
+        outline-offset: -2px;
+      }
 
-    svg {
-      fill: $icon-primary;
+      svg {
+        fill: $icon-primary;
+      }
     }
-}
-}
+  }
 
   &__nav-indicator {
     display: flex;

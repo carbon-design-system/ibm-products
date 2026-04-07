@@ -8,7 +8,7 @@
 import { createContext } from 'react';
 import { pkg } from '../../../settings';
 
-export const blockClass = `${pkg.prefix}--add-select`;
+export const blockClass = `${pkg.prefix}--add-select__next`;
 
 export interface AddSelectContextType {
   multi?: boolean;

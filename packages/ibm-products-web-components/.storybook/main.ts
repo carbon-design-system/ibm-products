@@ -69,12 +69,7 @@ const config = {
         exclude: ['lit', 'lit-html'],
       },
       css: {
-        transformer: 'lightningcss', // Use Lightning CSS for transformations
-        lightningcss: {
-          // Allows for build to still pass even if lightning css finds invalid syntax
-          // Doesn't seem to parse ::slotted() pseudo selector usage well
-          errorRecovery: true,
-        },
+        transformer: 'postcss',
       },
     });
   },

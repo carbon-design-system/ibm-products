@@ -342,7 +342,7 @@ describe('c4p-side-panel', () => {
       `.${prefix}--action-set__action-button`
     );
 
-    expect(actionItems).toHaveLength(3);
+    expect(actionItems).toHaveLength(2);
   });
 
   it('should display a close button by default', async () => {

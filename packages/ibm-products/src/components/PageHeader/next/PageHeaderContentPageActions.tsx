@@ -46,18 +46,23 @@ export const PageHeaderContentPageActions = ({
 }: PageHeaderContentPageActionsProps) => {
   const {
     setRefs,
-    contentActionsClipped,
-    breadcrumbActionsClipped,
+    observerState,
     isContentActionsInBreadcrumbBar: isInBreadcrumbBar,
+    isFunctionalContentActions,
   } = usePageHeader();
+
   const classNames = classnames(
     `${blockClass}__content__page-actions`,
     {
-      // Revisit this:
-      // May want to only add this class if there are content actions in the breadcrumb bar as well
+      // When in BreadcrumbBar:
+      // - If functional content actions: skip clipping logic (always show)
+      // - Otherwise: use inverse of contentActionsClipped
+      // When in Content: use contentActionsClipped directly
       [`${blockClass}__content__page-actions--clipped`]: isInBreadcrumbBar
-        ? breadcrumbActionsClipped
-        : contentActionsClipped,
+        ? isFunctionalContentActions
+          ? false
+          : !observerState.contentActionsClipped
+        : observerState.contentActionsClipped,
     },
     className
   );

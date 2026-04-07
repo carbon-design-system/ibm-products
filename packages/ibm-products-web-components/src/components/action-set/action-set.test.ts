@@ -42,7 +42,7 @@ describe('c4p-action-set', () => {
       expect(buttonSet?.classList.contains(`${blockClass}--md`)).to.be.true;
     });
 
-    it('renders buttons in correct order (ghost first, primary last)', async () => {
+    it('renders buttons in correct order (secondary first, primary last)', async () => {
       const buttons = el.querySelectorAll(`${carbonPrefix}-button`);
       expect(buttons).to.have.length(2);
 

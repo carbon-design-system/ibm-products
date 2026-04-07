@@ -59,6 +59,13 @@ async function build() {
       },
       outDir: path.join(packageRoot, format.directory),
       unbundle: true,
+      outputOptions(options) {
+        return {
+          ...options,
+          chunkFileNames: '[name].js',
+          entryFileNames: '[name].js',
+        };
+      },
       platform: 'browser',
       target: 'es2022',
       tsconfig: tsconfigPath,

@@ -73,6 +73,10 @@ export interface CoachmarkPropsNext {
    * Specifies whether the component is floating or not.
    */
   floating?: boolean;
+  /**
+   * Specify whether a caret should be rendered on the popover. This is intended to use only for coachmark patterns.
+   */
+  caret?: boolean;
 }
 
 type CoachmarkContentComponent = FC<CoachmarkContentProps> & {
@@ -101,6 +105,7 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       open,
       position = { x: 0, y: 0 },
       floating,
+      caret,
       ...rest
     } = props;
     const triggerRef = useRef<HTMLElement>(null);
@@ -118,6 +123,8 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
     };
 
     const currentOpen = open ?? openState;
+    const caretValue =
+      caret !== undefined ? caret : floating === true ? false : true;
 
     useEffect(() => {
       const container = internalRef.current;
@@ -206,7 +213,7 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
             open={currentOpen}
             onRequestClose={handleRequestClose}
             align={align as NewPopoverAlignment}
-            caret={!floating}
+            caret={caretValue}
             highContrast={true}
             dropShadow={true}
           >
@@ -233,6 +240,10 @@ Coachmark.propTypes = {
    * Where to render the Coachmark relative to its target.
    */
   align: PropTypes.string,
+  /**
+   * Specify whether a caret should be rendered on the popover. This is intended to use only for coachmark patterns.
+   */
+  caret: PropTypes.bool,
   /**
    * Provide the contents of the CoachmarkV2.
    */

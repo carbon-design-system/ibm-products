@@ -103,6 +103,8 @@ $elements-block-class: 'coachmark-stack-element';
 }
 
 .carouselControlWrapper__footer {
+  margin-block-end: $spacing-05;
+
   span {
     justify-self: flex-start;
     margin-inline-end: auto;
@@ -160,7 +162,7 @@ $elements-block-class: 'coachmark-stack-element';
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: $spacing-05 $spacing-05 0 $spacing-05;
+    padding: $spacing-05 $spacing-05 $spacing-05 $spacing-05;
   }
 }
 
@@ -170,28 +172,49 @@ $elements-block-class: 'coachmark-stack-element';
 
 $elements-block-class: 'stacked_element_content';
 
-.#{$elements-block-class} {
-  inset: logical unset unset 0 0 !important;
-  inset-block-start: auto;
-  inset-inline-start: auto;
-}
-.#{$prefix}--coachmark__next--coachmark-content {
-  inset-block-end: 0;
-  inset-block-start: unset !important;
-  inset-inline-end: $spacing-05;
-  inset-inline-start: unset !important;
-  opacity: 1;
-  transform: none;
-}
+// .#{$elements-block-class} {
+//   inset: logical unset unset 0 0 !important;
+//   inset-block-start: auto;
+//   inset-inline-start: auto;
+// }
+// .#{$prefix}--coachmark__next--coachmark-content {
+//   inset-block-end: 0;
+//   inset-block-start: unset !important;
+//   inset-inline-end: $spacing-05;
+//   inset-inline-start: unset !important;
+//   opacity: 1;
+//   transform: none;
+// }
 
 .#{$stack-home-class}--scaled-home {
   inset-block-end: $spacing-05;
   opacity: 0.8;
-  transform: scale(0.9);
+  transform: scale(0.95);
   transform-origin: top center;
   transition: transform $duration-moderate-02 motion(exit, productive);
 }
 
 .#{$stack-home-class}--unscaled-home {
   transform: none;
+}
+
+// Position parent coachmark at bottom-right (matching web component)
+.#{$stack-home-class} {
+  position: fixed;
+  z-index: 9000;
+  inset-block-end: 0;
+  inset-block-start: auto;
+  inset-inline-end: $spacing-13;
+  inset-inline-start: auto;
+}
+
+// Override the actual Carbon popover container for nested coachmarks only
+.#{$prefix}--coachmark__next:has(.#{$elements-block-class}) .cds--popover {
+  position: fixed;
+  z-index: 9001;
+  inset-block-end: 0;
+  inset-block-start: auto;
+  inset-inline-end: $spacing-13;
+  inset-inline-start: auto;
+  visibility: visible;
 }

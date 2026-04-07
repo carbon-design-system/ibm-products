@@ -50,4 +50,28 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--coachmark__next;
     box-shadow: 0 0 0 $spacing-02 $icon-inverse;
     outline: $spacing-01 solid $background-inverse;
   }
+
+  .#{$block-class-next}--coachmark-content {
+    .#{$block-class-next}--content-header {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .#{$block-class-next}--content-header--drag-icon,
+    .#{$block-class-next}--content-header .cds--btn {
+      color: $icon-inverse;
+
+      .cds--btn__icon,
+      svg {
+        color: $icon-inverse;
+        fill: $icon-inverse;
+      }
+    }
+
+    .#{$block-class-next}--content-body {
+      display: flex;
+      flex-direction: column;
+      padding: $spacing-01 $spacing-05 0;
+    }
+  }
 }

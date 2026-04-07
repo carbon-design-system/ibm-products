@@ -9,9 +9,10 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Theme, Link as CarbonLink } from '@carbon/react';
 import {
   preview__CoachmarkTagline as CoachmarkTagline,
-  preview__Coachmark as Coachmark,
+  // preview__Coachmark as Coachmark,
 } from '@carbon/ibm-products';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
+import { Coachmark } from '../../../../components/Coachmark/next/Coachmark';
 
 //fetching theme
 function useCarbonTheme() {
@@ -188,7 +189,13 @@ export const CoachmarkFixedExample = (args) => {
 
   return (
     <Theme theme={carbonTheme}>
-      <Coachmark open={isOpen} onClose={handleClose} align="top" {...args}>
+      <Coachmark
+        open={isOpen}
+        onClose={handleClose}
+        align="top"
+        caret={false}
+        {...args}
+      >
         <CoachmarkTagline
           title="Why are there two types of severity scores?"
           closeIconDescription="Close"

@@ -1,0 +1,293 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '../../global/styles/project-settings' as *;
+
+$block-class__next: #{$pkg-prefix}--add-select;
+
+/// Composable AddSelect styles (next)
+/// These styles support the composable AddSelect component structure
+
+// ──────────────────────────────────────────────────────────────
+// AddSelect - Root container
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next} {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectBody - Main content area with search and header
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__body {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.#{$block-class__next}__header {
+  padding: $spacing-05;
+  border-block-end: 1px solid $border-subtle-01;
+}
+
+.#{$block-class__next}__search {
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class__next}__sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.#{$block-class__next}__tags {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+}
+
+.#{$block-class__next}__tags-label {
+  @include type.type-style('body-compact-01');
+
+  margin: 0;
+  color: $text-secondary;
+}
+
+.#{$block-class__next}__content {
+  overflow: auto;
+  flex: 1;
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectList - Container for items with keyboard navigation
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}-list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.#{$block-class__next}-list-body {
+  display: flex;
+  flex-direction: column;
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectRow - Individual selectable row (aligns with v1 AddSelectRow)
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}-row {
+  display: flex;
+  border-inline-start: 0.125rem solid transparent;
+  cursor: pointer;
+  transition: background-color $duration-fast-01 motion(standard, productive);
+
+  &:focus {
+    outline: 2px solid $focus;
+    outline-offset: -2px;
+  }
+
+  &--selected {
+    background-color: $layer-selected-01;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:hover:not(&--disabled) {
+    background: $layer-hover-01;
+
+    .#{$block-class__next}-row__title {
+      color: $interactive;
+    }
+
+    .#{$block-class__next}-row__nav-indicator svg {
+      color: $interactive;
+    }
+  }
+
+  &__cell {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__cell-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-05;
+    block-size: 3rem;
+    border-block-end: 1px solid $layer-accent-01;
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    margin-inline-start: $spacing-05;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    margin-inline-end: $spacing-03;
+  }
+
+  &__text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  &__title {
+    @include type.type-style('body-compact-01');
+
+    display: block;
+    color: $text-primary;
+  }
+
+  &__subtitle {
+    @include type.type-style('label-01');
+
+    display: block;
+    color: $text-secondary;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    margin-inline-start: $spacing-03;
+  }@media screen and (prefers-reduced-motion: reduce) {
+&__nav-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-02;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-inline-start: $spacing-03;
+    transition: none;
+
+    &:hover {
+      background-color: $layer-hover-01;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    svg {
+      fill: $icon-primary;
+    }
+}
+}
+
+  &__nav-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-02;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-inline-start: $spacing-03;
+    transition: background-color $duration-fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer-hover-01;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectBreadcrumbs - Navigation breadcrumbs
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-02;
+
+  &--multi {
+    // Multi-select specific breadcrumb styles
+  }
+}
+
+.#{$block-class__next}__breadcrumb {
+  &-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-02;
+  }
+
+  &-button {
+    @include type.type-style('body-compact-01');
+
+    padding: 0;
+    border: none;
+    background: none;
+    color: $link-primary;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      color: $link-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: 2px;
+    }
+  }
+
+  &-separator {
+    display: flex;
+    align-items: center;
+    color: $text-secondary;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  &-current {
+    @include type.type-style('body-compact-01');
+
+    color: $text-primary;
+  }
+}
+
+// Made with Bob

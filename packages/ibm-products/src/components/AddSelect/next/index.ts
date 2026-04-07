@@ -12,7 +12,7 @@ export type {
 } from './AddSelect/AddSelect';
 export type { AddSelectBodyProps } from './AddSelectBody/AddSelectBody';
 export type { AddSelectListProps } from './AddSelectList/AddSelectList';
-export type { AddSelectItemProps } from './AddSelectItem/AddSelectItem';
+export type { AddSelectRowProps } from './AddSelectRow/AddSelectRow';
 export type { AddSelectBreadcrumbsProps } from './AddSelectBreadcrumbs/AddSelectBreadcrumbs';
 export type { AddSelectContextType } from './context';
 

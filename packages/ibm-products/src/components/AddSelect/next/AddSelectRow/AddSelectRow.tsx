@@ -20,11 +20,11 @@ import { blockClass, AddSelectContext } from '../context';
 
 /**
  * ----------------
- * AddSelectItem
+ * AddSelectRow
  * ----------------
  */
 
-export interface AddSelectItemProps {
+export interface AddSelectRowProps {
   /**
    * Unique identifier for the item
    */
@@ -71,7 +71,7 @@ export interface AddSelectItemProps {
   className?: string;
 }
 
-const AddSelectItem = forwardRef<HTMLDivElement, AddSelectItemProps>(
+const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
   (
     {
       itemId,
@@ -111,9 +111,9 @@ const AddSelectItem = forwardRef<HTMLDivElement, AddSelectItemProps>(
       onNavigate?.(itemId, title, parentId);
     };
 
-    const rowClasses = cx(`${blockClass}-item__row`, className, {
-      [`${blockClass}-item__row--selected`]: isSelected,
-      [`${blockClass}-item__row--disabled`]: disabled,
+    const rowClasses = cx(`${blockClass}-row`, className, {
+      [`${blockClass}-row--selected`]: isSelected,
+      [`${blockClass}-row--disabled`]: disabled,
     });
 
     return (
@@ -126,8 +126,8 @@ const AddSelectItem = forwardRef<HTMLDivElement, AddSelectItemProps>(
         ref={ref}
         {...rest}
       >
-        <div className={`${blockClass}-item__cell`} role="gridcell">
-          <div className={`${blockClass}-item__cell-wrapper`}>
+        <div className={`${blockClass}-row__cell`} role="gridcell">
+          <div className={`${blockClass}-row__cell-wrapper`}>
             {multi ? (
               <Checkbox
                 id={`checkbox-${itemId}`}
@@ -149,22 +149,22 @@ const AddSelectItem = forwardRef<HTMLDivElement, AddSelectItemProps>(
               />
             )}
 
-            <div className={`${blockClass}-item__content`}>
-              {icon && <div className={`${blockClass}-item__icon`}>{icon}</div>}
-              <div className={`${blockClass}-item__text`}>
-                <div className={`${blockClass}-item__title`}>{title}</div>
+            <div className={`${blockClass}-row__content`}>
+              {icon && <div className={`${blockClass}-row__icon`}>{icon}</div>}
+              <div className={`${blockClass}-row__text`}>
+                <div className={`${blockClass}-row__title`}>{title}</div>
                 {subtitle && (
-                  <div className={`${blockClass}-item__subtitle`}>
+                  <div className={`${blockClass}-row__subtitle`}>
                     {subtitle}
                   </div>
                 )}
               </div>
-              {meta && <div className={`${blockClass}-item__meta`}>{meta}</div>}
+              {meta && <div className={`${blockClass}-row__meta`}>{meta}</div>}
             </div>
 
             {hasChildren && (
               <div
-                className={`${blockClass}-item__nav-indicator`}
+                className={`${blockClass}-row__nav-indicator`}
                 onClick={handleNavigate}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -189,7 +189,7 @@ const AddSelectItem = forwardRef<HTMLDivElement, AddSelectItemProps>(
   }
 );
 
-AddSelectItem.propTypes = {
+AddSelectRow.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   hasChildren: PropTypes.bool,
@@ -203,6 +203,6 @@ AddSelectItem.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-AddSelectItem.displayName = 'AddSelectItem';
+AddSelectRow.displayName = 'AddSelectRow';
 
-export default AddSelectItem;
+export default AddSelectRow;

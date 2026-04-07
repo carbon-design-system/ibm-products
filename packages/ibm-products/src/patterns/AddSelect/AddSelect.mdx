@@ -137,7 +137,7 @@ import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
   >
     <AddSelect.List>
       {items.map((item) => (
-        <AddSelect.Item
+        <AddSelect.Row
           key={item.id}
           {...item}
           hasChildren={hasChildren(item.id)}

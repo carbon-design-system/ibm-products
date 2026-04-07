@@ -1,0 +1,49 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$block-class__next: #{c4p-settings.$pkg-prefix}--add-select;
+
+// Storybook-specific styles for AddSelect demos and examples
+// These styles are NOT part of the production component styles
+
+// Story container styling
+.add-select-story-container {
+  display: flex;
+  background-color: var(--cds-layer);
+  block-size: 600px;
+  inline-size: 100%;
+}
+
+// Demo layout helpers
+.add-select-demo-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-05;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+// Example content padding for stories
+.#{$block-class__next}__main-content,
+.#{$block-class__next}__influencer,
+.#{$block-class__next}__summary-content {
+  padding-block: $spacing-05;
+}
+
+// Story-specific button layouts
+.story-action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: $spacing-05;
+  gap: $spacing-03;
+}
+
+// Made with Bob

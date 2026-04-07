@@ -21,9 +21,7 @@ import AddSelectBody, {
 import AddSelectList, {
   AddSelectListProps,
 } from '../AddSelectList/AddSelectList';
-import AddSelectItem, {
-  AddSelectItemProps,
-} from '../AddSelectItem/AddSelectItem';
+import AddSelectRow, { AddSelectRowProps } from '../AddSelectRow/AddSelectRow';
 import AddSelectBreadcrumbs, {
   AddSelectBreadcrumbsProps,
 } from '../AddSelectBreadcrumbs/AddSelectBreadcrumbs';
@@ -63,7 +61,7 @@ export type AddSelectComponentType = React.ForwardRefExoticComponent<
 > & {
   Body: FC<AddSelectBodyProps>;
   List: FC<AddSelectListProps>;
-  Item: FC<AddSelectItemProps>;
+  Row: FC<AddSelectRowProps>;
   Breadcrumbs: FC<AddSelectBreadcrumbsProps>;
 };
 
@@ -79,7 +77,7 @@ export type AddSelectComponentType = React.ForwardRefExoticComponent<
  *   >
  *     <AddSelect.List>
  *       {items.map(item => (
- *         <AddSelect.Item
+ *         <AddSelect.Row
  *           key={item.id}
  *           itemId={item.id}
  *           title={item.title}
@@ -135,7 +133,7 @@ AddSelect.propTypes = {
 
 AddSelect.Body = AddSelectBody;
 AddSelect.List = AddSelectList;
-AddSelect.Item = AddSelectItem;
+AddSelect.Row = AddSelectRow;
 AddSelect.Breadcrumbs = AddSelectBreadcrumbs;
 
 AddSelect.displayName = 'AddSelect';

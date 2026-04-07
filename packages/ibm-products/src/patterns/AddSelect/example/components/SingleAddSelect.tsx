@@ -265,7 +265,7 @@ export const SingleAddSelect = forwardRef<HTMLDivElement, SingleAddSelectProps>(
                 const hasChildren = dataManager.hasChildren(item.id);
 
                 return (
-                  <AddSelect.Item
+                  <AddSelect.Row
                     key={item.id}
                     itemId={item.id}
                     title={item.title || ''}

@@ -53,7 +53,7 @@ export const Default = {
         >
           <AddSelect.List>
             {sampleItems.map((item) => (
-              <AddSelect.Item
+              <AddSelect.Row
                 key={item.id}
                 itemId={item.id}
                 title={item.title}
@@ -80,7 +80,7 @@ export const MultiSelect = {
         >
           <AddSelect.List>
             {sampleItems.map((item) => (
-              <AddSelect.Item
+              <AddSelect.Row
                 key={item.id}
                 itemId={item.id}
                 title={item.title}
@@ -131,7 +131,7 @@ export const WithHierarchy = {
         >
           <AddSelect.List>
             {hierarchicalItems.map((item) => (
-              <AddSelect.Item
+              <AddSelect.Row
                 key={item.id}
                 itemId={item.id}
                 title={item.title}

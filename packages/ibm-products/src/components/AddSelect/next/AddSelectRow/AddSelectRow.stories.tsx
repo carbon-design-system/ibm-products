@@ -19,19 +19,19 @@ export const Default = {
           itemCount={3}
         >
           <AddSelect.List>
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="1"
               title="Item 1"
               subtitle="Description for item 1"
               value="item-1"
             />
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="2"
               title="Item 2"
               subtitle="Description for item 2"
               value="item-2"
             />
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="3"
               title="Item 3"
               subtitle="Description for item 3"
@@ -54,21 +54,21 @@ export const WithMetadata = {
           itemCount={3}
         >
           <AddSelect.List>
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="1"
               title="Item 1"
               subtitle="Description for item 1"
               value="item-1"
               meta={<Tag type="blue">New</Tag>}
             />
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="2"
               title="Item 2"
               subtitle="Description for item 2"
               value="item-2"
               meta={<Tag type="green">Active</Tag>}
             />
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="3"
               title="Item 3"
               subtitle="Description for item 3"
@@ -92,21 +92,21 @@ export const WithChildren = {
           itemCount={3}
         >
           <AddSelect.List>
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="1"
               title="Parent Item 1"
               subtitle="Has children"
               value="parent-1"
               hasChildren
             />
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="2"
               title="Parent Item 2"
               subtitle="Has children"
               value="parent-2"
               hasChildren
             />
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="3"
               title="Regular Item"
               subtitle="No children"
@@ -129,20 +129,20 @@ export const DisabledItems = {
           itemCount={3}
         >
           <AddSelect.List>
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="1"
               title="Active Item"
               subtitle="This item is active"
               value="item-1"
             />
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="2"
               title="Disabled Item"
               subtitle="This item is disabled"
               value="item-2"
               disabled
             />
-            <AddSelect.Item
+            <AddSelect.Row
               itemId="3"
               title="Another Active Item"
               subtitle="This item is active"
@@ -156,15 +156,15 @@ export const DisabledItems = {
 };
 
 const meta = {
-  title: 'Preview/AddSelect/Add select item',
-  component: AddSelect.Item,
+  title: 'Preview/AddSelect/Add select row',
+  component: AddSelect.Row,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
     docs: {
       description: {
         component: `
-The Add Select Item component represents an individual item in the list.
+The Add Select Row component represents an individual row in the list.
 
 ## Features
 

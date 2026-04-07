@@ -88,7 +88,7 @@ export const Default = {
         >
           <AddSelect.List>
             {sampleItems.map((item) => (
-              <AddSelect.Item
+              <AddSelect.Row
                 key={item.id}
                 itemId={item.id}
                 title={item.title}
@@ -141,7 +141,7 @@ export const WithBreadcrumbs = {
         >
           <AddSelect.List>
             {sampleItems.map((item) => (
-              <AddSelect.Item
+              <AddSelect.Row
                 key={item.id}
                 itemId={item.id}
                 title={item.title}

@@ -103,7 +103,7 @@ export type {
   AddSelectComponentType,
   AddSelectBodyProps,
   AddSelectListProps,
-  AddSelectItemProps,
+  AddSelectRowProps,
   AddSelectBreadcrumbsProps,
   AddSelectContextType,
 } from './AddSelect/next';

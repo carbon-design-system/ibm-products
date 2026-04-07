@@ -223,7 +223,7 @@ const AddSelectInteractiveExample = () => {
           {filteredItems.map((item) => {
             const hasChildren = item.children && item.children.length > 0;
             return (
-              <AddSelect.Item
+              <AddSelect.Row
                 key={item.id}
                 itemId={item.id}
                 title={item.title}

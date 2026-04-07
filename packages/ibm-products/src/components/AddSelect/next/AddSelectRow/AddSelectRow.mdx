@@ -1,13 +1,13 @@
 import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/blocks';
-import * as AddSelectItemStories from './AddSelectItem.stories';
+import * as AddSelectRowStories from './AddSelectRow.stories';
 
-<Meta of={AddSelectItemStories} />
+<Meta of={AddSelectRowStories} />
 
-# Add Select Item
+# Add Select Row
 
 ## Overview
 
-The Add Select Item component represents an individual item in the list. It
+The Add Select Row component represents an individual row in the list. It
 provides:
 
 - Single or multi-select support (checkbox or radio button)
@@ -29,7 +29,7 @@ import { AddSelect } from '@carbon/ibm-products';
 
 ### Usage Example
 
-<Canvas of={AddSelectItemStories.Default} />
+<Canvas of={AddSelectRowStories.Default} />
 
 ### JSX
 
@@ -37,13 +37,13 @@ import { AddSelect } from '@carbon/ibm-products';
 <AddSelect>
   <AddSelect.Body itemsLabel="Items" globalSearchLabel="Search" itemCount={3}>
     <AddSelect.List>
-      <AddSelect.Item
+      <AddSelect.Row
         itemId="1"
         title="Item 1"
         subtitle="Description for item 1"
         value="item-1"
       />
-      <AddSelect.Item
+      <AddSelect.Row
         itemId="2"
         title="Item 2"
         subtitle="Description for item 2"
@@ -56,14 +56,14 @@ import { AddSelect } from '@carbon/ibm-products';
 
 ## With Metadata Example
 
-<Canvas of={AddSelectItemStories.WithMetadata} />
+<Canvas of={AddSelectRowStories.WithMetadata} />
 
 ### JSX
 
 ```jsx
 import { Tag } from '@carbon/react';
 
-<AddSelect.Item
+<AddSelect.Row
   itemId="1"
   title="Item 1"
   subtitle="Description"
@@ -74,12 +74,12 @@ import { Tag } from '@carbon/react';
 
 ## With Children Example
 
-<Canvas of={AddSelectItemStories.WithChildren} />
+<Canvas of={AddSelectRowStories.WithChildren} />
 
 ### JSX
 
 ```jsx
-<AddSelect.Item
+<AddSelect.Row
   itemId="1"
   title="Parent Item"
   subtitle="Has children"
@@ -90,12 +90,12 @@ import { Tag } from '@carbon/react';
 
 ## Disabled Items Example
 
-<Canvas of={AddSelectItemStories.DisabledItems} />
+<Canvas of={AddSelectRowStories.DisabledItems} />
 
 ### JSX
 
 ```jsx
-<AddSelect.Item
+<AddSelect.Row
   itemId="1"
   title="Disabled Item"
   subtitle="This item is disabled"
@@ -126,4 +126,4 @@ import { Tag } from '@carbon/react';
 
 ## Component API
 
-<ArgTypes of={AddSelectItemStories} />
+<ArgTypes of={AddSelectRowStories} />

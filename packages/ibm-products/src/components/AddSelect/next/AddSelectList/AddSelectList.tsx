@@ -100,7 +100,7 @@ const AddSelectList = forwardRef<HTMLDivElement, AddSelectListProps>(
             event.preventDefault();
             // Trigger navigation by clicking the nav indicator
             const navIndicator = currentItem.querySelector(
-              `.${blockClass}-item__nav-indicator`
+              `.${blockClass}-row__nav-indicator`
             ) as HTMLElement;
             navIndicator?.click();
             handled = true;

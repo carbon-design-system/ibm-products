@@ -23,3 +23,10 @@
     }
   }
 }
+
+.notification {
+  position: fixed;
+  z-index: 9999;
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
+}

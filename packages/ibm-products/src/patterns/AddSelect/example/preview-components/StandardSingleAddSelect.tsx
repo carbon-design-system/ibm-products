@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@carbon/react';
+import { Button, ToastNotification } from '@carbon/react';
 import { SingleAddSelect } from '../components/SingleAddSelect';
 import { HierarchicalItem } from '../../../../global/js/utils/AddSelect/add-select-data';
 import { Tearsheet } from '../../../../components/Tearsheet/next';
@@ -95,6 +95,8 @@ export const StandardSingleAddSelect = () => {
   const [open, setOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string>('');
   const [selectedValue, setSelectedValue] = useState<string>('');
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
 
   const handleOpen = () => {
     setOpen(true);
@@ -116,6 +118,8 @@ export const StandardSingleAddSelect = () => {
     if (selectedId) {
       console.log('Submitted:', { selectedId, selectedValue });
       handleClose();
+      setNotificationMessage(`Selected: ${selectedValue}`);
+      setShowNotification(true);
     }
   };
 
@@ -131,12 +135,6 @@ export const StandardSingleAddSelect = () => {
       <Button kind="primary" onClick={handleOpen}>
         Select a category
       </Button>
-
-      {selectedValue && (
-        <p style={{ marginTop: '1rem' }}>
-          <strong>Selected:</strong> {selectedValue}
-        </p>
-      )}
 
       <Tearsheet open={open} onClose={handleClose} variant="narrow">
         <Tearsheet.Header>
@@ -179,6 +177,22 @@ export const StandardSingleAddSelect = () => {
           ]}
         />
       </Tearsheet>
+
+      {showNotification && (
+        <ToastNotification
+          aria-label="closes notification"
+          caption={new Date().toLocaleTimeString()}
+          className="notification"
+          kind="success"
+          lowContrast
+          onClose={() => setShowNotification(false)}
+          role="status"
+          statusIconDescription="notification"
+          subtitle={notificationMessage}
+          // timeout={3000}
+          title="Item Selected"
+        />
+      )}
     </div>
   );
 };

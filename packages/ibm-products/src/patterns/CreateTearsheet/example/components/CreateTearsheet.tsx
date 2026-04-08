@@ -13,6 +13,7 @@ import React, {
   useState,
   ReactElement,
   useEffect,
+  useMemo,
 } from 'react';
 import {
   StepGroup,
@@ -24,7 +25,6 @@ import { preview__Tearsheet as Tearsheet } from '@carbon/ibm-products';
 import { CreateTearsheetProvider } from './CreateTearsheetContext';
 import {
   Button,
-  ButtonSet,
   InlineLoading,
   ProgressIndicator,
   ProgressStep,
@@ -62,6 +62,7 @@ export interface CreateTearsheetProps {
   hasError?: boolean;
   handleNextDisabledState?: (formState: any, currentStep: number) => boolean;
   handleBackDisabledState?: (currentStep: number) => boolean;
+  initialStep?: number;
 }
 
 export const CreateTearsheet = ({
@@ -92,6 +93,7 @@ export const CreateTearsheet = ({
   handleNextDisabledState,
   handleBackDisabledState,
   onNext,
+  initialStep,
   ...rest
 }: CreateTearsheetProps) => {
   const {
@@ -106,6 +108,13 @@ export const CreateTearsheet = ({
 
   const [isLoading, setIsLoading] = useState(false);
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
+
+  // Set initial step when tearsheet opens or when initialStep changes
+  useEffect(() => {
+    if (open && initialStep && initialStep !== currentStep) {
+      handleGoToStep(initialStep);
+    }
+  }, [open, initialStep]);
 
   // Reset to step 1 when tearsheet closes
   useEffect(() => {
@@ -211,6 +220,61 @@ export const CreateTearsheet = ({
     ? handleBackDisabledState(currentStep) || isLoading
     : currentStep === 1 || isLoading;
 
+  // Create actions array for the footer
+  const actions = useMemo(
+    () => [
+      {
+        key: 'cancel',
+        kind: 'ghost' as const,
+        label: cancelButtonText,
+        onClick: () => {
+          onClose?.();
+          setOpen?.(false);
+        },
+        disabled: isLoading,
+      },
+      {
+        key: 'back',
+        kind: 'secondary' as const,
+        label: backButtonText,
+        onClick: () => {
+          handlePrevious();
+        },
+        disabled: isBackDisabled,
+      },
+      {
+        key: 'next',
+        kind: 'primary' as const,
+        label: currentStep === totalSteps ? submitButtonText : nextButtonText,
+        onClick: () => {
+          if (currentStep === totalSteps) {
+            handleSubmit();
+          } else {
+            handleNextClick();
+          }
+        },
+        disabled: isNextDisabled,
+        renderIcon: isLoading ? () => <InlineLoading /> : undefined,
+      },
+    ],
+    [
+      cancelButtonText,
+      backButtonText,
+      submitButtonText,
+      nextButtonText,
+      currentStep,
+      totalSteps,
+      isLoading,
+      isBackDisabled,
+      isNextDisabled,
+      onClose,
+      setOpen,
+      handlePrevious,
+      handleSubmit,
+      handleNextClick,
+    ]
+  );
+
   return (
     <CreateTearsheetProvider value={{ open }}>
       <Tearsheet
@@ -267,48 +331,7 @@ export const CreateTearsheet = ({
             <StepGroup>{children}</StepGroup>
           </Tearsheet.MainContent>
         </Tearsheet.Body>
-        <Tearsheet.Footer>
-          <ButtonSet className="default__action-buttons">
-            <Button
-              className="create-tearsheet__action-button create-tearsheet__action-button--cancel"
-              kind="ghost"
-              onClick={() => {
-                onClose?.();
-                setOpen?.(false);
-              }}
-              size="xl"
-              disabled={isLoading}
-            >
-              {cancelButtonText}
-            </Button>
-            <Button
-              className="create-tearsheet__action-button"
-              kind="secondary"
-              onClick={() => {
-                handlePrevious();
-              }}
-              disabled={isBackDisabled}
-              size="xl"
-            >
-              {backButtonText}
-            </Button>
-            <Button
-              size="xl"
-              className="create-tearsheet__action-button"
-              onClick={() => {
-                if (currentStep === totalSteps) {
-                  handleSubmit();
-                } else {
-                  handleNextClick();
-                }
-              }}
-              disabled={isNextDisabled}
-            >
-              {currentStep === totalSteps ? submitButtonText : nextButtonText}
-              {isLoading && <InlineLoading />}
-            </Button>
-          </ButtonSet>
-        </Tearsheet.Footer>
+        <Tearsheet.Footer actions={actions} buttonSize="2xl" />
       </Tearsheet>
     </CreateTearsheetProvider>
   );

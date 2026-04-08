@@ -181,19 +181,20 @@ $block-class-action-set: #{$prefix}--action-set;
     &[data-synthetic-hover],
     &[data-synthetic-active] {
       background-color: var(--cds-border-interactive);
-    }@media screen and (prefers-reduced-motion: reduce) {
-&::before {
-      position: absolute;
-      z-index: -1;
-      background-color: transparent;
-      block-size: 100%;
-      content: '';
-      inline-size: 0.125rem;
-      inset-block-end: 0;
-      inset-inline-end: 0;
-      transition: none;
-}
-}
+    }
+    @media screen and (prefers-reduced-motion: reduce) {
+      &::before {
+        position: absolute;
+        z-index: -1;
+        background-color: transparent;
+        block-size: 100%;
+        content: '';
+        inline-size: 0.125rem;
+        inset-block-end: 0;
+        inset-inline-end: 0;
+        transition: none;
+      }
+    }
 
     &::before {
       position: absolute;

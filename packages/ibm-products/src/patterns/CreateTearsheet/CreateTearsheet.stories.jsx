@@ -55,6 +55,11 @@ export default {
         ),
       },
     },
+    initialStep: {
+      control: { type: 'number', min: 1 },
+      description:
+        'The step number to open when the tearsheet is first displayed. Use this to open the tearsheet at a specific step instead of starting at step 1.',
+    },
     label: { control: { type: 'text' } },
     title: { control: { type: 'text' } },
     onClose: { control: { disable: true } },

@@ -20,28 +20,34 @@ export type PageHeaderRefs = {
   breadcrumbActions?: RefObject<HTMLDivElement | null>;
 };
 
+export type PageHeaderObserverState = {
+  fullyCollapsed: boolean;
+  titleClipped: boolean;
+  contentActionsClipped: boolean;
+};
+
 type PageHeaderContextType = {
   refs?: PageHeaderRefs;
   setRefs: React.Dispatch<React.SetStateAction<PageHeaderRefs>>;
   pageActionsInstance?: React.ReactNode;
   setPageActionsInstance: React.Dispatch<React.SetStateAction<React.ReactNode>>;
-  fullyCollapsed?: boolean;
-  titleClipped?: boolean;
-  contentActionsClipped?: boolean;
-  breadcrumbActionsClipped?: boolean;
+  observerState: PageHeaderObserverState;
   isContentActionsInBreadcrumbBar?: boolean;
+  isFunctionalContentActions?: boolean;
 };
 
 export const PageHeaderContext = createContext<
   PageHeaderContextType | undefined
 >({
-  fullyCollapsed: false,
   setRefs: () => {},
   refs: {},
-  titleClipped: false,
-  contentActionsClipped: false,
   pageActionsInstance: null,
   setPageActionsInstance: () => {},
+  observerState: {
+    fullyCollapsed: false,
+    titleClipped: false,
+    contentActionsClipped: false,
+  },
 });
 
 export function usePageHeader() {

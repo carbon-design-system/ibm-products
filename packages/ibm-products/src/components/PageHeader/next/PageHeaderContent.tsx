@@ -11,6 +11,7 @@ import React, {
   useState,
   useRef,
   RefObject,
+  useMemo,
 } from 'react';
 import { useIsomorphicEffect } from '../../../global/js/hooks';
 import PropTypes from 'prop-types';
@@ -24,7 +25,7 @@ import {
   Heading,
 } from '@carbon/react';
 import { blockClass } from '../PageHeaderUtils';
-import { usePageHeader } from './context';
+import { usePageHeader, type PageHeaderObserverState } from './context';
 
 /**
  * -----------------
@@ -53,9 +54,12 @@ export interface PageHeaderContentProps {
    */
   contextualActions?: React.ReactNode;
   /**
-   * The PageHeaderContent's page actions
+   * The PageHeaderContent's page actions.
+   * Can be a ReactNode or a function that receives observer state.
    */
-  pageActions?: React.ReactNode;
+  pageActions?:
+    | React.ReactNode
+    | ((state: PageHeaderObserverState) => React.ReactNode);
 }
 
 export const PageHeaderContent = React.forwardRef<
@@ -75,7 +79,7 @@ export const PageHeaderContent = React.forwardRef<
 ) {
   const contentRef = useRef<HTMLDivElement>(null);
   const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
-  const { setRefs, setPageActionsInstance } = usePageHeader();
+  const { setRefs, setPageActionsInstance, observerState } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__content`]: true,
@@ -83,6 +87,16 @@ export const PageHeaderContent = React.forwardRef<
     className
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
+
+  // Resolve page actions - support both ReactNode and function
+  // Use useMemo to prevent infinite loops from observerState changes
+  const resolvedPageActions = useMemo(
+    () =>
+      typeof pageActions === 'function'
+        ? pageActions(observerState)
+        : pageActions,
+    [pageActions, observerState]
+  );
 
   useEffect(() => {
     if (componentRef?.current) {
@@ -92,11 +106,11 @@ export const PageHeaderContent = React.forwardRef<
   }, []);
 
   useEffect(() => {
-    if (pageActions) {
-      setPageActionsInstance(pageActions);
+    if (resolvedPageActions) {
+      setPageActionsInstance(resolvedPageActions);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageActions]);
+  }, [resolvedPageActions]);
 
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -148,7 +162,7 @@ export const PageHeaderContent = React.forwardRef<
                 </div>
               )}
             </div>
-            {pageActions}
+            {resolvedPageActions}
           </div>
           {children}
         </Column>

@@ -126,7 +126,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   /**
    * Accumulated delta for keyboard resize operations
    */
-  private _accumulatedDelta = 0;
+  // private _accumulatedDelta = 0;
 
   @state()
   _containerScrollTop = -16;

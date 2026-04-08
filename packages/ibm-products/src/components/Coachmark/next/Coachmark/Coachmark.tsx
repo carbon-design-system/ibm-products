@@ -74,6 +74,14 @@ export interface CoachmarkPropsNext {
    */
   floating?: boolean;
   /**
+   * Specify whether the component should be rendered on high-contrast.
+   */
+  highContrast?: boolean;
+  /**
+   * Specify whether a drop shadow should be rendered on the popover.
+   */
+  dropShadow?: boolean;
+  /**
    * Specify whether a caret should be rendered on the popover. This is intended to use only for coachmark patterns.
    */
   caret?: boolean;
@@ -105,6 +113,8 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       open,
       position = { x: 0, y: 0 },
       floating,
+      dropShadow,
+      highContrast,
       caret,
       ...rest
     } = props;
@@ -214,8 +224,8 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
             onRequestClose={handleRequestClose}
             align={align as NewPopoverAlignment}
             caret={caretValue}
-            highContrast={true}
-            dropShadow={true}
+            highContrast={highContrast ?? true}
+            dropShadow={dropShadow}
           >
             {triggerElement}
             {contentElement}
@@ -253,9 +263,17 @@ Coachmark.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Specify whether a drop shadow should be rendered on the popover.
+   */
+  dropShadow: PropTypes.bool,
+  /**
    * Specifies whether the component is floating or not.
    */
   floating: PropTypes.bool,
+  /**
+   * Specify whether the component should be rendered on high-contrast.
+   */
+  highContrast: PropTypes.bool,
   /**
    * Function to call when the close button is clicked.
    */

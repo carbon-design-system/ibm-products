@@ -127,7 +127,7 @@ const TooltipTemplate = ({ ...args }, context) => {
             label="Show information"
             buttonProps={{ onClick: handleBeaconClick, id: 'CoachmarkBtn' }}
           ></CoachmarkBeacon>
-          <Coachmark.Content highContrast={true}>
+          <Coachmark.Content>
             <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
             <Coachmark.Content.Body>
               <h2>Hello World</h2>
@@ -158,7 +158,7 @@ const FloatingTemplate = ({ ...args }, context) => {
   };
   return (
     <Theme theme={carbonTheme}>
-      <main>
+      <main style={{ marginLeft: '100px' }}>
         <Coachmark
           open={isOpen}
           onClose={handleClose}
@@ -175,7 +175,7 @@ const FloatingTemplate = ({ ...args }, context) => {
           >
             Show information
           </Button>
-          <Coachmark.Content highContrast={true}>
+          <Coachmark.Content>
             <Coachmark.Content.Header
               closeIconDescription="Close"
               dragIconDescription="Drag"

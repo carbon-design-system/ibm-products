@@ -534,7 +534,6 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
               {item.id}
             </Button>
             <Coachmark.Content
-              highContrast
               ref={(el) => {
                 if (el) {
                   stackedCoachmarkContentRefs.current[item.id] = el;

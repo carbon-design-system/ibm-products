@@ -130,7 +130,7 @@ export const CoachmarkOverlayElementsExample = (args) => {
           label="Show information"
           buttonProps={{ onClick: handleBeaconClick, id: 'CoachmarkBtn' }}
         ></CoachmarkBeacon>
-        <Coachmark.Content highContrast={true}>
+        <Coachmark.Content>
           <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
           <Coachmark.Content.Body>
             <div>

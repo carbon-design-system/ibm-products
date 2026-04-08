@@ -33,14 +33,6 @@ export interface CoachmarkContentProps {
    * It can be a single child or an array of children depending on your need
    */
   children: ReactElement | ReactNode;
-  /**
-   * Specify whether the component should be rendered on high-contrast.
-   */
-  highContrast?: boolean;
-  /**
-   * Specify whether a drop shadow should be rendered on the popover.
-   */
-  dropShadow?: boolean;
 }
 
 export type CoachmarkContentComponent = ForwardRefExoticComponent<
@@ -55,7 +47,8 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     const { className = '', children, ...rest } = props;
     const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
     const contentBodyClass = `${blockClass}--content-body`;
-    const { open, setContentRef } = useContext(CoachmarkContext);
+    const { open, setContentRef, onClose, setOpen, triggerRef } =
+      useContext(CoachmarkContext);
 
     const [contentId] = useState(
       () => `coachmark-content-${Math.random().toString(36).substr(2, 9)}`
@@ -96,6 +89,44 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open, contentRef]);
 
+    // Handle Escape key to close Coachmark and return focus to trigger
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape' && open) {
+          onClose?.();
+          setOpen(false);
+          // Return focus to the trigger element
+          if (triggerRef?.current) {
+            triggerRef.current.focus();
+          }
+        }
+      };
+
+      if (open) {
+        document.addEventListener('keydown', handleKeyDown);
+      }
+
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [open, onClose, setOpen, triggerRef]);
+
+    // Handle Escape key to close Coachmark
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape' && open) {
+          onClose?.();
+          setOpen(false);
+        }
+      };
+      if (open) {
+        document.addEventListener('keydown', handleKeyDown);
+      }
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [open, onClose, setOpen]);
+
     return (
       <PopoverContent
         ref={contentRef}
@@ -121,12 +152,4 @@ CoachmarkContent.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-  /**
-   * Specify whether a drop shadow should be rendered on the popover.
-   */
-  dropShadow: PropTypes.bool,
-  /**
-   * Specify whether the component should be rendered on high-contrast.
-   */
-  highContrast: PropTypes.bool,
 };

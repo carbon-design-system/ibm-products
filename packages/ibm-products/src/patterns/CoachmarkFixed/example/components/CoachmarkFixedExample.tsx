@@ -207,10 +207,7 @@ export const CoachmarkFixedExample = (args) => {
           isOpen={isOpen}
           buttonProps={{ onClick: handleTaglineClick, id: 'CoachmarkTagline' }}
         ></CoachmarkTagline>
-        <Coachmark.Content
-          className={fixedIsVisible ? `is-visible` : ''}
-          highContrast={true}
-        >
+        <Coachmark.Content className={fixedIsVisible ? `is-visible` : ''}>
           <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
           <Coachmark.Content.Body>
             <div

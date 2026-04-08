@@ -10,6 +10,7 @@ docgen
 dotlottie
 dsag
 flatpickr
+exportparts
 ibmproducts
 kube
 kubernetes

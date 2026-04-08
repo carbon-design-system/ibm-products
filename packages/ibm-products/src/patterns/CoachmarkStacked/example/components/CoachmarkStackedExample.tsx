@@ -387,9 +387,12 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       stackHomeContentRef.current
     );
 
+    console.log('stackHomeContent', stackHomeContentRef);
+
     if (!parentHeight) {
       if (stackHomeContent) {
         const height = stackHomeContent.clientHeight;
+        console.log('height', height);
 
         if (height > 0) {
           setParentHeight(height);
@@ -405,8 +408,12 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     if (!isOpen || openId <= 0) {
       requestAnimationFrame(() => {
         if (stackHomeContent) {
-          stackHomeContent.classList.remove(`${blockClass}--scaled-home`);
-          stackHomeContent.classList.add(`${blockClass}--unscaled-home`);
+          stackHomeContent.parentElement?.classList.remove(
+            `${blockClass}--scaled-home`
+          );
+          stackHomeContent.parentElement?.classList.add(
+            `${blockClass}--unscaled-home`
+          );
           stackHomeContent.focus();
         }
       });
@@ -416,15 +423,21 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     if (openId > 0 && isOpen && stackedCoachmarkContentRefs.current) {
       const container = stackedCoachmarkContentRefs.current[openId];
       const targetHome = getPopoverContentElement(container);
+      console.log('hi', openId);
 
       if (stackHomeContent && targetHome) {
+        console.log(stackHomeContent?.className);
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             const targetHomeHeight = targetHome.clientHeight;
 
             stackHomeContent.style.height = `calc(${targetHomeHeight}px + 16px)`;
-            stackHomeContent.classList.add(`${blockClass}--scaled-home`);
-            stackHomeContent.classList.remove(`${blockClass}--unscaled-home`);
+            stackHomeContent.parentElement?.classList.add(
+              `${blockClass}--scaled-home`
+            );
+            stackHomeContent.parentElement?.classList.remove(
+              `${blockClass}--unscaled-home`
+            );
             targetHome.focus();
           });
         });
@@ -479,7 +492,6 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                       onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
-                        console.log('Parent button clicked for item:', item.id);
                         setOpenId(item.id);
                       }}
                     >
@@ -502,11 +514,6 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       </Coachmark>
       {items.map((item) => {
         const isOpen = openId === item.id;
-        if (isOpen) {
-          console.log(
-            `Rendering Coachmark ${item.id} with open=${isOpen}, openId=${openId}`
-          );
-        }
         return (
           <Coachmark
             key={item.id}

@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* stylelint-disable declaration-no-important */
+
 $prefix: 'c4p' !default;
 $carbon-prefix: 'cds';
 
@@ -31,18 +33,19 @@ $block-class: #{$prefix}--coachmark__next;
   inset-inline-end: 180px;
 }
 
-// BUBBLE - content styling
+// content styling
 .#{$block-class}--coachmark-content {
   position: fixed;
   inline-size: 18rem;
+  inset-block-start: 0.2rem !important;
   margin-inline-start: 18px;
-  transform: translateY(100%);
-  transition: transform $duration-moderate-02 motion(exit, productive);
+  transition: translate $duration-moderate-02 motion(exit, productive);
+  translate: 0 0;
   visibility: visible;
+  will-change: translate;
 
   &.is-visible {
-    transform: translateY(35%);
-    visibility: visible;
+    translate: 0 0;
   }
   .#{$block-class}--content-body {
     display: flex;
@@ -68,8 +71,7 @@ $block-class: #{$prefix}--coachmark__next;
 
 //carousel
 .exampleCarouselWrapper {
-  block-size: 100px;
-  margin-inline-end: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 // Fix for carousel views blocking button clicks in Storybook

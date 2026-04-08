@@ -63,9 +63,6 @@ export const CoachmarkFixedExample = (args) => {
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [fixedIsVisible, setFixedIsVisible] = useState(false);
-
-  //prettier-ignore
-  const carouselContainerRef = useRef < HTMLDivElement > (null);
   //prettier-ignore
   const carouselInit = useRef < InitCarousel > (null);
   //prettier-ignore
@@ -74,8 +71,12 @@ export const CoachmarkFixedExample = (args) => {
   const backRef = useRef<HTMLButtonElement>(null);
   //prettier-ignore
   const doneRef = useRef<HTMLButtonElement>(null);
-  //prettier-ignore
-  const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const carouselContainerRefs = useRef<{
+    [key: number]: HTMLDivElement | null;
+  }>({});
+  const carouselItemsRef = useRef<{ [key: number]: (HTMLDivElement | null)[] }>(
+    {}
+  );
 
   const items = [
     {
@@ -108,20 +109,21 @@ export const CoachmarkFixedExample = (args) => {
   };
 
   const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
-    carouselItemsRef.current.forEach((item, idx) => {
+    const carouselItems = carouselItemsRef.current[0] || [];
+
+    carouselItems.forEach((item, idx) => {
       if (!item) {
         return;
       }
 
       const isActive = idx === activeIndex;
 
-      // Set aria-hidden based on active state
       item.setAttribute('aria-hidden', String(!isActive));
 
       if (!isActive) {
-        item.setAttribute('inert', ''); // Disable interactivity
+        item.setAttribute('inert', '');
       } else {
-        item.removeAttribute('inert'); // Re-enable interactivity
+        item.removeAttribute('inert');
       }
 
       item.removeAttribute('tabindex');
@@ -171,10 +173,13 @@ export const CoachmarkFixedExample = (args) => {
   }, [isOpen, updateCarouselItemsTabIndex]);
 
   useEffect(() => {
-    if (carouselContainerRef && carouselContainerRef.current) {
-      carouselInit.current = initCarousel(carouselContainerRef.current, {
+    const activeCarouselContainer = carouselContainerRefs.current[0];
+
+    if (isOpen && activeCarouselContainer) {
+      carouselInit.current = initCarousel(activeCarouselContainer, {
         onViewChangeStart: onViewChangeStart,
         onViewChangeEnd: onViewChangeEnd,
+        useMaxHeight: true,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -208,12 +213,20 @@ export const CoachmarkFixedExample = (args) => {
         >
           <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
           <Coachmark.Content.Body>
-            <div ref={carouselContainerRef} className="exampleCarouselWrapper">
+            <div
+              ref={(el) => {
+                carouselContainerRefs.current[0] = el;
+              }}
+              className="exampleCarouselWrapper"
+            >
               {items.map((item, index) => (
                 <div
                   key={item.id}
                   ref={(el) => {
-                    carouselItemsRef.current[index] = el;
+                    if (!carouselItemsRef.current[0]) {
+                      carouselItemsRef.current[0] = [];
+                    }
+                    carouselItemsRef.current[0][index] = el;
                   }}
                 >
                   <h2>{item.title}</h2>

@@ -33,6 +33,7 @@ $elements-block-class: 'coachmark-stack-element';
 .#{$block-class}--coachmark-content {
   position: fixed;
   inline-size: 18rem;
+  inset-block-start: 0.2rem !important;
   margin-inline-start: $spacing-04;
   visibility: visible;
 
@@ -189,7 +190,7 @@ $elements-block-class: 'stacked_element_content';
 .#{$stack-home-class}--scaled-home {
   inset-block-end: $spacing-05;
   opacity: 0.8;
-  transform: scale(0.95);
+  transform: scaleX(0.9);
   transform-origin: top center;
   transition: transform $duration-moderate-02 motion(exit, productive);
 }
@@ -198,7 +199,7 @@ $elements-block-class: 'stacked_element_content';
   transform: none;
 }
 
-// Position parent coachmark at bottom-right (matching web component)
+// Position parent coachmark at bottom-right
 .#{$stack-home-class} {
   position: fixed;
   z-index: 9000;

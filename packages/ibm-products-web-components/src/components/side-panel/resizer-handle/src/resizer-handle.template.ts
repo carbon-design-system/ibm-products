@@ -9,141 +9,32 @@
 
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
-import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './resizer-handle.scss?lit';
-
-// Type definitions
-type ResizerAxis = 'x' | 'y';
-
-interface Position {
-  x: number;
-  y: number;
-}
-
-// Constants
-const ARIA = {
-  ROLE_SEPARATOR: 'separator',
-  LIVE_ASSERTIVE: 'assertive',
-  VALUE_MIN: '0',
-  VALUE_MAX: '100',
-  VALUE_DEFAULT: '50',
-} as const;
-
-const SELECTORS = {
-  GRID: '[data-resizer-grid]',
-  PANEL: '[data-resizer-panel]',
-} as const;
-
-const SLOTS = {
-  LEFT: 'left',
-  RIGHT: 'right',
-  TOP: 'top',
-  BOTTOM: 'bottom',
-  ICON: 'icon',
-  PIVOT: 'pivot',
-} as const;
-
-const EVENTS = {
-  RESIZE_START: 'resize-start',
-  RESIZE_DRAG: 'resize-drag',
-  RESIZE_END: 'resize-end',
-  RESIZE_RESET: 'resize-reset',
-} as const;
-
-const DOUBLE_TAP = {
-  MAX_TIME_MS: 300,
-  MAX_DISTANCE_PX: 10,
-  VIBRATION_MS: 50,
-} as const;
-
-const KEYBOARD = {
-  DEFAULT_STEP_PX: 10,
-  LARGE_STEP_PX: 50,
-} as const;
-
-// Utility functions
-function safeClosest(element: Element, selector: string): Element | null {
-  try {
-    return element.closest(selector);
-  } catch {
-    return null;
-  }
-}
-
-function safeQuerySelectorAll<T extends Element>(
-  element: Element,
-  selector: string
-): T[] {
-  try {
-    return Array.from(element.querySelectorAll<T>(selector));
-  } catch {
-    return [];
-  }
-}
-
-function determineAxis(slot: string | null, cursor: string): ResizerAxis {
-  if (slot === 'left' || slot === 'right') {
-    return 'x';
-  }
-  if (slot === 'top' || slot === 'bottom') {
-    return 'y';
-  }
-  if (cursor.includes('ew-resize') || cursor.includes('col-resize')) {
-    return 'x';
-  }
-  return 'y';
-}
-
-function getOrientationFromAxis(axis: ResizerAxis): 'horizontal' | 'vertical' {
-  return axis === 'x' ? 'vertical' : 'horizontal';
-}
-
-function formatSplitRatio(percentage: number): string {
-  return `${percentage}% / ${100 - percentage}%`;
-}
-
-function createCustomEvent(
-  type: string,
-  detail?: Record<string, any>
-): CustomEvent {
-  return new CustomEvent(type, {
-    bubbles: true,
-    composed: true,
-    detail,
-  });
-}
-
-function isWithinDistance(
-  pos1: Position,
-  pos2: Position,
-  maxDistance: number
-): boolean {
-  const dx = pos1.x - pos2.x;
-  const dy = pos1.y - pos2.y;
-  return Math.sqrt(dx * dx + dy * dy) <= maxDistance;
-}
-
-function triggerHapticFeedback(duration: number): void {
-  if ('vibrate' in navigator) {
-    navigator.vibrate(duration);
-  }
-}
-
-function calculateFlexRatio(size: number, total: number): number {
-  return Math.max(0, size / total);
-}
+import type { ResizerAxis, Position } from './types.js';
+import {
+  DOUBLE_TAP,
+  KEYBOARD,
+  ARIA,
+  SELECTORS,
+  SLOTS,
+  EVENTS,
+} from './constants.js';
+import {
+  determineAxis,
+  calculateFlexRatio,
+  formatSplitRatio,
+  isWithinDistance,
+  triggerHapticFeedback,
+  createCustomEvent,
+  getOrientationFromAxis,
+  safeClosest,
+  safeQuerySelectorAll,
+} from './utils.js';
 
 /**
- * Resize handle component for resizing panels
- *
- * @element clabs-resizer-handle
- * @fires resize-start - The custom event fired when resize starts
- * @fires resize-drag - The custom event fired during resize drag
- * @fires resize-end - The custom event fired when resize ends
- * @fires resize-reset - The custom event fired when reset is triggered
+ * Resizer handle component for resizing panels
  */
-@customElement(`clabs-resizer-handle`)
-class CDSResizerHandle extends LitElement {
+class ResizerHandleTemplate extends LitElement {
   static styles = styles;
 
   /**
@@ -259,8 +150,7 @@ class CDSResizerHandle extends LitElement {
    * Initialize component state and references
    */
   private _initializeComponent(): void {
-    this._grid =
-      (safeClosest(this, SELECTORS.GRID) as HTMLElement) || undefined;
+    this._grid = safeClosest(this, SELECTORS.GRID) || undefined;
 
     // Determine axis from slot or cursor style
     const slot = this.getAttribute('slot');
@@ -649,16 +539,29 @@ class CDSResizerHandle extends LitElement {
         delta = -step;
       } else if (e.key === 'ArrowRight' && isHorizontal) {
         delta = step;
-      } else if (e.key === 'Home' && this._grid && this._startNode) {
-        const rect = this._startNode.getBoundingClientRect();
-        delta = isHorizontal ? -rect.width : -rect.height;
-      } else if (e.key === 'End' && this._grid && this._endNode) {
-        const rect = this._endNode.getBoundingClientRect();
-        delta = isHorizontal ? rect.width : rect.height;
+      } else if (e.key === 'Home') {
+        // For grid mode, calculate delta; for standalone mode, parent will handle
+        if (this._grid && this._startNode) {
+          const rect = this._startNode.getBoundingClientRect();
+          delta = isHorizontal ? -rect.width : -rect.height;
+        } else {
+          // Standalone mode: emit event with key, parent handles the logic
+          delta = 0; // Will be handled by parent based on key
+        }
+      } else if (e.key === 'End') {
+        // For grid mode, calculate delta; for standalone mode, parent will handle
+        if (this._grid && this._endNode) {
+          const rect = this._endNode.getBoundingClientRect();
+          delta = isHorizontal ? rect.width : rect.height;
+        } else {
+          // Standalone mode: emit event with key, parent handles the logic
+          delta = 0; // Will be handled by parent based on key
+        }
       }
 
-      if (delta !== 0) {
-        this._handleKeyboardResize(delta);
+      // Always call keyboard resize for Home/End to emit events, even with delta=0
+      if (e.key === 'Home' || e.key === 'End' || delta !== 0) {
+        this._handleKeyboardResize(delta, e.key);
       }
     } catch (error) {
       console.error('Error handling keyboard navigation:', error);
@@ -668,8 +571,9 @@ class CDSResizerHandle extends LitElement {
   /**
    * Handle keyboard-based resize operation
    * @param {number} delta - Movement delta in pixels
+   * @param {string} key - The key that was pressed
    */
-  private _handleKeyboardResize(delta: number): void {
+  private _handleKeyboardResize(delta: number, key: string): void {
     const position: Position = { x: 0, y: 0 };
 
     // Emit resize start event for standalone usage
@@ -677,6 +581,8 @@ class CDSResizerHandle extends LitElement {
       createCustomEvent(EVENTS.RESIZE_START, {
         axis: this.axis,
         startPosition: position,
+        isKeyboard: true,
+        key,
       })
     );
 
@@ -707,12 +613,14 @@ class CDSResizerHandle extends LitElement {
       this._updateAriaAttributes();
     }
 
-    // Emit resize event for standalone usage
+    // Emit resize event for standalone usage with keyboard flag and key
     this.dispatchEvent(
       createCustomEvent(EVENTS.RESIZE_DRAG, {
         axis: this.axis,
         delta,
         position,
+        isKeyboard: true,
+        key,
       })
     );
 
@@ -722,6 +630,8 @@ class CDSResizerHandle extends LitElement {
         axis: this.axis,
         delta,
         position,
+        isKeyboard: true,
+        key,
       })
     );
   }
@@ -758,4 +668,5 @@ class CDSResizerHandle extends LitElement {
     `;
   }
 }
-export default CDSResizerHandle;
+
+export default ResizerHandleTemplate;

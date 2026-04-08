@@ -30,7 +30,7 @@ import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/button/button-set-base.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
-import './resizer-handle';
+import './resizer-handle/resizer-handle.js';
 
 export { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT };
 
@@ -126,7 +126,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   /**
    * Accumulated delta for keyboard resize operations
    */
-  // private _accumulatedDelta = 0;
+  private _accumulatedDelta = 0;
 
   @state()
   _containerScrollTop = -16;
@@ -701,18 +701,47 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   /**
    * Handle resize start event from resizer handle
    */
-  private _handleResizeStart = () => {
+  private _handleResizeStart = (event: CustomEvent) => {
     this._sidePanelWidth = this._sidePanel?.clientWidth;
+    this._accumulatedDelta = 0;
   };
 
   /**
    * Handle resize drag event from resizer handle
    */
   private _handleResizeDrag = (event: CustomEvent) => {
-    const { delta } = event.detail;
+    const { delta, isKeyboard, key } = event.detail;
 
     if (!this._sidePanelWidth) {
       this._sidePanelWidth = this._sidePanel?.clientWidth;
+    }
+
+    // Handle Home/End keys specially (like React implementation)
+    if (isKeyboard && (key === 'Home' || key === 'End')) {
+      if (key === 'Home') {
+        // Home = maximize to 75vw
+        this.style.setProperty('--c4p-side-panel-modified-size', '75vw');
+      } else {
+        // End = minimize to 16rem
+        this.style.setProperty('--c4p-side-panel-modified-size', '16rem');
+      }
+      return;
+    }
+
+    let calculatedWidth: number;
+
+    if (isKeyboard) {
+      // For keyboard arrow keys, accumulate delta (like React implementation)
+      this._accumulatedDelta += delta;
+      calculatedWidth =
+        this._sidePanelWidth -
+        (this.placement === 'right'
+          ? this._accumulatedDelta
+          : -this._accumulatedDelta);
+    } else {
+      // For mouse events, use delta directly
+      calculatedWidth =
+        this._sidePanelWidth - (this.placement === 'right' ? delta : -delta);
     }
 
     // Remove transition during drag for smooth resizing
@@ -720,9 +749,10 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       this._sidePanel.style.transition = 'none';
     }
 
-    // Calculate new width based on placement
-    const newWidth =
-      this._sidePanelWidth - (this.placement === 'right' ? delta : -delta);
+    // Clamp width between minimum (16rem = 256px) and maximum (75% of viewport)
+    const minWidth = 256; // 16rem
+    const maxWidth = window.innerWidth * 0.75;
+    const newWidth = Math.max(minWidth, Math.min(maxWidth, calculatedWidth));
 
     // Apply the new width via CSS variable
     this.style.setProperty('--c4p-side-panel-modified-size', `${newWidth}px`);
@@ -732,12 +762,13 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
    * Handle resize end event from resizer handle
    */
   private _handleResizeEnd = () => {
+    // Reset accumulated delta
     this._accumulatedDelta = 0;
 
     // Remove inline transition style
     this._sidePanel?.style?.removeProperty('transition');
 
-    // Update stored width
+    // Update stored width to the new actual width
     this._sidePanelWidth = this._sidePanel?.clientWidth;
 
     // Update ARIA attributes on the resizer handle

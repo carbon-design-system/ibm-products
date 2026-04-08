@@ -701,7 +701,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   /**
    * Handle resize start event from resizer handle
    */
-  private _handleResizeStart = (event: CustomEvent) => {
+  private _handleResizeStart = () => {
     this._sidePanelWidth = this._sidePanel?.clientWidth;
     this._accumulatedDelta = 0;
   };

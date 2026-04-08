@@ -71,6 +71,11 @@ const config = {
       css: {
         transformer: 'postcss',
       },
+      resolve: {
+        alias: {
+          '~@ibm/plex': '@ibm/plex',
+        },
+      },
     });
   },
   docs: {

@@ -15,6 +15,33 @@ import SidePanelStories from './side-panel.stories';
 Side panels keep users in-context of a page while performing tasks like
 navigating, editing, viewing details, or configuring something new.
 
+## Resizable Side Panel
+
+The side panel can be made resizable by adding the experimental `resizable` attribute. This allows users to adjust the panel width by dragging the resize handle on the edge of the panel. The resizable feature includes:
+
+- **Drag to resize**: Click and drag the resize handle to adjust panel width
+- **Keyboard support**: Use arrow keys to resize (Shift + arrow for larger steps)
+- **Double-click reset**: Double-click the resize handle to reset to default size
+- **Min/Max constraints**: Panel width is constrained between 16rem (minimum) and 75vw (maximum)
+- **Responsive**: Resizable feature is only enabled on screens wider than 768px
+
+**Note**: The resizable feature is not available for slide-in panels.
+
+### Example
+
+```html
+<c4p-side-panel
+  resizable
+  open
+  include-overlay
+  size="md"
+  title="Resizable Side Panel"
+>
+  <!-- Content -->
+  <p>Drag the resize handle to adjust the panel width.</p>
+</c4p-side-panel>
+```
+
 ## Getting started
 
 Here's a quick example to get you started.

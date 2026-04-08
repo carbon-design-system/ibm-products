@@ -30,6 +30,7 @@ import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/button/button-set-base.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
+import './resizer-handle';
 
 export { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT };
 
@@ -99,6 +100,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @query(`.${blockClass}__inner-content`)
   private _innerContent!: HTMLElement;
 
+  /**
+   * Reference to the resizer handle element
+   */
+  @query('clabs-resizer-handle')
+  private _resizerHandle?: HTMLElement;
+
   @queryAssignedElements({
     slot: 'actions',
     selector: `${carbonPrefix}-button`,
@@ -110,6 +117,16 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
   @state()
   _isOpen = false;
+
+  /**
+   * Current width of the side panel (used for resizing)
+   */
+  private _sidePanelWidth?: number;
+
+  /**
+   * Accumulated delta for keyboard resize operations
+   */
+  private _accumulatedDelta = 0;
 
   @state()
   _containerScrollTop = -16;
@@ -145,6 +162,16 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     all: HTMLElement[];
   } {
     const elements: HTMLElement[] = [];
+
+    // Add resizer handle if present (shadow DOM)
+    if (this.resizable && !this.slideIn) {
+      const resizerHandle = this.shadowRoot?.querySelector<HTMLElement>(
+        'clabs-resizer-handle'
+      );
+      if (resizerHandle) {
+        elements.push(resizerHandle);
+      }
+    }
 
     // Add back button if present (shadow DOM)
     if (this.currentStep > 0) {
@@ -656,6 +683,101 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   };
 
   /**
+   * Get the percentage of screen width the panel is covering
+   */
+  private _getPanelWidthPercent = (customWidth?: string): number => {
+    if (customWidth) {
+      const remValue = parseFloat(customWidth);
+      const remInPixels =
+        remValue *
+        parseFloat(getComputedStyle(document.documentElement).fontSize);
+      return Math.round((remInPixels / window.innerWidth) * 100);
+    }
+    return Math.round(
+      ((this._sidePanel?.clientWidth || 0) / window.innerWidth) * 100
+    );
+  };
+
+  /**
+   * Handle resize start event from resizer handle
+   */
+  private _handleResizeStart = () => {
+    this._sidePanelWidth = this._sidePanel?.clientWidth;
+  };
+
+  /**
+   * Handle resize drag event from resizer handle
+   */
+  private _handleResizeDrag = (event: CustomEvent) => {
+    const { delta } = event.detail;
+
+    if (!this._sidePanelWidth) {
+      this._sidePanelWidth = this._sidePanel?.clientWidth;
+    }
+
+    // Remove transition during drag for smooth resizing
+    if (this._sidePanel?.style) {
+      this._sidePanel.style.transition = 'none';
+    }
+
+    // Calculate new width based on placement
+    const newWidth =
+      this._sidePanelWidth - (this.placement === 'right' ? delta : -delta);
+
+    // Apply the new width via CSS variable
+    this.style.setProperty('--c4p-side-panel-modified-size', `${newWidth}px`);
+  };
+
+  /**
+   * Handle resize end event from resizer handle
+   */
+  private _handleResizeEnd = () => {
+    this._accumulatedDelta = 0;
+
+    // Remove inline transition style
+    this._sidePanel?.style?.removeProperty('transition');
+
+    // Update stored width
+    this._sidePanelWidth = this._sidePanel?.clientWidth;
+
+    // Update ARIA attributes on the resizer handle
+    if (this._resizerHandle) {
+      this._resizerHandle.setAttribute(
+        'aria-label',
+        `side panel is covering ${this._getPanelWidthPercent()}% of screen`
+      );
+      this._resizerHandle.setAttribute(
+        'aria-valuenow',
+        this._getPanelWidthPercent().toString()
+      );
+    }
+  };
+
+  /**
+   * Handle double-click reset event from resizer handle
+   */
+  private _handleResizeReset = () => {
+    // Get the default size for current size setting
+    const sizeMap = {
+      xs: '16rem',
+      sm: '20rem',
+      md: '30rem',
+      lg: '40rem',
+      xl: '65rem',
+      '2xl': '80rem',
+    };
+
+    const defaultSize = sizeMap[this.size] || sizeMap.md;
+    const defaultSizeInPx = parseFloat(defaultSize) * 16;
+
+    // Reset to default size (or 75vw if default is larger)
+    this._sidePanelWidth = Math.min(defaultSizeInPx, window.innerWidth * 0.75);
+
+    // Remove custom size
+    this.style.removeProperty('--c4p-side-panel-modified-size');
+  };
+
+  /**
    * Determines if the title will animate on scroll
    */
   @property({ reflect: true, attribute: 'animate-title', type: Boolean })
@@ -769,6 +891,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @property({ reflect: false, type: String })
   title;
 
+  /**
+   * Determines if the side panel is resizable
+   */
+  @property({ type: Boolean, reflect: true })
+  resizable = false;
+
   async connectObservers() {
     await this.updateComplete;
     this._hObserveResize = observeResize(this._resizeObserver, this._sidePanel);
@@ -784,11 +912,44 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     super.connectedCallback();
     this.disconnectObservers();
     this.connectObservers();
+
+    // Listen for resize events from resizer handle
+    this.addEventListener(
+      'resize-start',
+      this._handleResizeStart as EventListener
+    );
+    this.addEventListener(
+      'resize-drag',
+      this._handleResizeDrag as EventListener
+    );
+    this.addEventListener('resize-end', this._handleResizeEnd as EventListener);
+    this.addEventListener(
+      'resize-reset',
+      this._handleResizeReset as EventListener
+    );
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.disconnectObservers();
+
+    // Remove resize event listeners
+    this.removeEventListener(
+      'resize-start',
+      this._handleResizeStart as EventListener
+    );
+    this.removeEventListener(
+      'resize-drag',
+      this._handleResizeDrag as EventListener
+    );
+    this.removeEventListener(
+      'resize-end',
+      this._handleResizeEnd as EventListener
+    );
+    this.removeEventListener(
+      'resize-reset',
+      this._handleResizeReset as EventListener
+    );
   }
 
   render() {
@@ -955,8 +1116,22 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         ?condensed-actions=${condensedActions}
         ?overlay=${includeOverlay || slideIn}
         ?slide-in=${slideIn}
+        ?resizable=${this.resizable && !slideIn}
         size=${size}
       >
+        ${!slideIn &&
+        this.resizable &&
+        typeof window !== 'undefined' &&
+        window.innerWidth > 768
+          ? html`<clabs-resizer-handle
+              class="${blockClass}__resizer"
+              orientation="horizontal"
+              aria-valuemin="${this._getPanelWidthPercent('16rem')}"
+              aria-valuemax="75"
+              aria-valuenow="${this._getPanelWidthPercent()}"
+              aria-label="side panel is covering ${this._getPanelWidthPercent()}% of screen"
+            ></clabs-resizer-handle>`
+          : ''}
         ${this._doAnimateTitle
           ? html`<div class=${`${blockClass}__animated-scroll-wrapper`} scrolls>
               ${headerTemplate} ${mainTemplate}
@@ -991,6 +1166,25 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   async updated(changedProperties) {
     if (changedProperties.has('condensedActions')) {
       this._checkUpdateActionSizes();
+    }
+
+    // Reset custom size when size prop changes or when resizable is disabled
+    if (
+      (changedProperties.has('size') && this.resizable && !this.slideIn) ||
+      (changedProperties.has('resizable') && !this.resizable)
+    ) {
+      this.style.removeProperty('--c4p-side-panel-modified-size');
+    }
+
+    // Update stored width when resizable changes or panel opens
+    if (
+      (changedProperties.has('resizable') || changedProperties.has('open')) &&
+      this.resizable &&
+      !this.slideIn &&
+      this.open
+    ) {
+      await this.updateComplete;
+      this._sidePanelWidth = this._sidePanel?.clientWidth;
     }
 
     if (changedProperties.has('currentStep')) {

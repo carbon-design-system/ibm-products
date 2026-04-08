@@ -99,6 +99,20 @@ $block-class-action-set: #{$prefix}--action-set;
     &[condensed-actions] {
       @extend .#{$block-class}--condensed-actions;
     }
+
+    // Resizable side panel support
+    // Note: Don't set inline-size here - let the size classes handle it
+    // Only override when custom size is actually set
+    &[resizable]:not([style*='--c4p-side-panel-modified-size']) {
+      max-inline-size: 75vw;
+      min-inline-size: 16rem;
+    }
+
+    &[resizable][style*='--c4p-side-panel-modified-size'] {
+      inline-size: var(--c4p-side-panel-modified-size);
+      max-inline-size: 75vw;
+      min-inline-size: 16rem;
+    }
   }
 
   #{$prefix}-layer {
@@ -137,6 +151,74 @@ $block-class-action-set: #{$prefix}--action-set;
   // Slide-in panels should use border not shadows since they don’t layer
   .#{$block-class}[slide-in]:not(.#{$block-class}__overlay) {
     box-shadow: none;
+  }
+
+  // Resizer handle positioning
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  clabs-resizer-handle {
+    // CSS variables with defaults
+    --resizer-thickness: 4px;
+    --resizer-grab-thickness: 4px;
+  }
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  clabs-resizer-handle.#{$block-class}__resizer {
+    position: absolute;
+    z-index: 8001;
+    inset-block-end: 0;
+    inset-block-start: 0;
+  }
+
+  // Position resizer based on placement
+  .#{$block-class}[placement='right']
+    clabs-resizer-handle.#{$block-class}__resizer {
+    background-color: transparent;
+    grid-row: span 4 / span 3;
+    inset-inline-start: -$spacing-02;
+
+    &:hover,
+    &:focus,
+    &:focus-visible,
+    &[data-synthetic-hover],
+    &[data-synthetic-active] {
+      background-color: var(--cds-border-interactive);
+    }@media screen and (prefers-reduced-motion: reduce) {
+&::before {
+      position: absolute;
+      z-index: -1;
+      background-color: transparent;
+      block-size: 100%;
+      content: '';
+      inline-size: 0.125rem;
+      inset-block-end: 0;
+      inset-inline-end: 0;
+      transition: none;
+}
+}
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      background-color: transparent;
+      block-size: 100%;
+      content: '';
+      inline-size: 0.125rem;
+      inset-block-end: 0;
+      inset-inline-end: 0;
+      transition: background-color 0.15s cubic-bezier(0.2, 0, 0.38, 0.9);
+    }
+
+    &:hover::before,
+    &:focus::before,
+    &:focus-visible::before,
+    &[data-synthetic-hover]::before,
+    &[data-synthetic-active]::before {
+      background-color: var(--cds-border-interactive);
+    }
+  }
+
+  .#{$block-class}[placement='left']
+    clabs-resizer-handle.#{$block-class}__resizer {
+    inset-inline-end: 0;
   }
 
   .#{$block-class}__header {

@@ -75,7 +75,7 @@
     "@carbon/motion": "^11.42.0",
     "@figma/code-connect": "^1.4.0",
     "@ibm/telemetry-js-config-generator": "^2.1.0",
-    "@mordech/vite-lit-loader": "^0.38.0",
+    "@mordech/vite-lit-loader": "^0.40.0",
     "@open-wc/testing": "^4.0.0",
     "@stackblitz/sdk": "^1.11.0",
     "@storybook/addon-a11y": "^9.1.15",

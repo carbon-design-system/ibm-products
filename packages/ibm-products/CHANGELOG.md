@@ -1,3 +1,7 @@
+## `@carbon/ibm-products@2.87.1`
+### Bug fixes :bug:
+- fix(build): patch CJS default export interop for tsdown migration
+
 ## `@carbon/ibm-products@2.86.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): add support for actions prop for footer (#9103)

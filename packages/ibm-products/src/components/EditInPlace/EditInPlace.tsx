@@ -221,8 +221,10 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     const onFocusHandler = (e) => {
       if (!isTargetingChild(e)) {
         inputRef.current?.focus();
-        setFocused(true);
       }
+      // Always set focused when the input receives focus
+      // The blur handler will manage exiting edit mode
+      setFocused(true);
     };
 
     const onSaveHandler = () => {
@@ -230,7 +232,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       setDirtyInput(false);
       onSave();
       setFocused(false);
-      // Return focus to the input after save
+      // Return focus to the input after saving
       requestAnimationFrame(() => {
         inputRef.current?.focus();
       });
@@ -239,11 +241,42 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     const onCancelHandler = () => {
       setDirtyInput(false);
       onCancel(initialValue);
+      setFocused(false);
+      // Return focus to the input after canceling and set cursor to end
+      requestAnimationFrame(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+          // Set cursor to end of text
+          const length = inputRef.current.value.length;
+          inputRef.current.setSelectionRange(length, length);
+        }
+      });
     };
 
     const onBlurHandler = (e: any) => {
+      // Check if we clicked within (disabled button case)
+      const clickedWithin = clickingWithin.current;
+      // Reset the clickingWithin flag immediately
+      clickingWithin.current = false;
+
+      // If clicked disabled button, restore focus and stay in edit mode
+      if (clickedWithin) {
+        requestAnimationFrame(() => {
+          inputRef.current?.focus();
+        });
+        return;
+      }
+
+      // Check if targeting child (for tab navigation)
+      const targetingChild = isTargetingChild(e);
+
+      // If tabbing to a button, allow it (don't exit edit mode)
+      if (targetingChild) {
+        return;
+      }
+
       // Use custom function provided if passed through
-      if (typeof onBlur === 'function' && !isTargetingChild(e)) {
+      if (typeof onBlur === 'function') {
         onBlur(initialValue);
         setFocused(false);
       } else {
@@ -251,17 +284,13 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
         if (escaping.current) {
           return;
         }
-        if (!isTargetingChild(e)) {
-          if (canSave) {
-            onSaveHandler();
-          } else {
-            onCancelHandler();
-            setFocused(false);
-          }
+        if (canSave) {
+          onSaveHandler();
+        } else {
+          onCancelHandler();
+          setFocused(false);
         }
       }
-      // Reset the clickingWithin flag after blur is handled
-      clickingWithin.current = false;
     };
 
     const returnHandler = () => {
@@ -318,7 +347,6 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     );
 
     const inputContainer = (
-      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
         className={cx(blockClass, `${blockClass}--${size}`, {
           [`${blockClass}--focused`]: focused,
@@ -331,11 +359,6 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
         })}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
-        onMouseDown={() => {
-          // Track that we're clicking within the component
-          // This helps handle disabled buttons which don't set relatedTarget
-          clickingWithin.current = true;
-        }}
       >
         {readOnly ? (
           <Toggletip
@@ -355,7 +378,39 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
         ) : (
           inputElement
         )}
-        <div className={`${blockClass}__toolbar`}>
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions -- This div is not interactive; onMouseDown is used only to detect clicks on disabled buttons within to prevent blur */}
+        <div
+          className={`${blockClass}__toolbar`}
+          onMouseDown={(e) => {
+            // Set flag only when clicking disabled buttons to prevent input blur
+            const element = e.target as HTMLElement;
+            let foundButton: HTMLElement | null = null;
+
+            // First, try to traverse up to find a button
+            let current = element;
+            while (current && current !== e.currentTarget) {
+              if (current.tagName === 'BUTTON') {
+                foundButton = current;
+                break;
+              }
+              current = current.parentElement as HTMLElement;
+            }
+
+            // If no button found by traversing up, search within the clicked element
+            if (!foundButton) {
+              foundButton = element.querySelector('button');
+            }
+
+            // Check if the button is disabled
+            if (
+              foundButton &&
+              (foundButton.hasAttribute('disabled') ||
+                foundButton.getAttribute('aria-disabled') === 'true')
+            ) {
+              clickingWithin.current = true;
+            }
+          }}
+        >
           {invalid && (
             <WarningFilled
               size={16}

@@ -1,6 +1,21 @@
 ## `@carbon/ibm-products@2.87.1`
 ### Bug fixes :bug:
 - fix(build): patch CJS default export interop for tsdown migration
+## `@carbon/ibm-products@2.87.0`
+### Features :rocket:
+- feat(createFullPage): implemented as patterns in react (#9096)
+
+### Bug fixes :bug:
+- fix: add prop type as dep
+- fix: build fixes and release CI optimisations
+- fix(SidePanel): visual issues - react (#9142)
+- fix: Coachmark design parity (#9155)
+- fix: move step flows to utilities (#9110)
+
+### Housekeeping :house:
+- chore(deps): update dependency glob to v13 (#9035)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+- chore: migrate to tsdown for react and wc (#9123)
 
 ## `@carbon/ibm-products@2.86.0`
 ### Features :rocket:

@@ -230,6 +230,10 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       setDirtyInput(false);
       onSave();
       setFocused(false);
+      // Return focus to the input after save
+      requestAnimationFrame(() => {
+        inputRef.current?.focus();
+      });
     };
 
     const onCancelHandler = () => {

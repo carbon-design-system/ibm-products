@@ -85,6 +85,11 @@ export interface CoachmarkPropsNext {
    * Specify whether a caret should be rendered on the popover. This is intended to use only for coachmark patterns.
    */
   caret?: boolean;
+  /**
+   * CSS selector for the element that should receive focus when the coachmark opens.
+   * If not provided, no automatic focus management will occur.
+   */
+  selectorPrimaryFocus?: string;
 }
 
 type CoachmarkContentComponent = FC<CoachmarkContentProps> & {
@@ -116,6 +121,7 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       dropShadow,
       highContrast,
       caret,
+      selectorPrimaryFocus,
       ...rest
     } = props;
     const triggerRef = useRef<HTMLElement>(null);
@@ -162,6 +168,16 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       }
     }, [open]);
 
+    // Reset position when coachmark closes
+    useEffect(() => {
+      if (!open && contentRef && floating) {
+        // Reset the dragged position
+        contentRef.style.transform = 'none';
+        contentRef.style.left = '0px';
+        contentRef.style.top = '0px';
+      }
+    }, [open, contentRef, floating]);
+
     useIsomorphicEffect(() => {
       const { x = 0, y = 0 } = position ?? {};
       const el = internalRef.current;
@@ -181,21 +197,14 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
     };
 
     const handleRequestClose = (event?: Event) => {
+      // Don't close on outside clicks when floating is enabled
+      if (floating) {
+        return;
+      }
+
       onClose?.();
       setOpen(false);
     };
-
-    // Separate trigger and content from children
-    const childrenArray = React.Children.toArray(children);
-    const contentElement = childrenArray.find(
-      (child) => React.isValidElement(child) && child.type === CoachmarkContent
-    ); // Find Coachmark.Content
-
-    // Check if there's a trigger element (anything that's not CoachmarkContent)
-    const triggerElement = childrenArray.find(
-      (child) =>
-        !(React.isValidElement(child) && child.type === CoachmarkContent)
-    );
 
     return (
       <CoachmarkContext.Provider
@@ -209,6 +218,7 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
           contentRef,
           setContentRef,
           floating,
+          selectorPrimaryFocus,
         }}
       >
         <div
@@ -227,8 +237,7 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
             highContrast={highContrast ?? true}
             dropShadow={dropShadow}
           >
-            {triggerElement}
-            {contentElement}
+            {children}
           </Popover>
         </div>
       </CoachmarkContext.Provider>
@@ -290,4 +299,8 @@ Coachmark.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
   }),
+  /**
+   * CSS selector for the element that should receive focus when the coachmark opens.
+   */
+  selectorPrimaryFocus: PropTypes.string,
 };

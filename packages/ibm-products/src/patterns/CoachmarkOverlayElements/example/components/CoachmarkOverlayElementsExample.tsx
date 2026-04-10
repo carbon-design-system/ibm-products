@@ -61,12 +61,19 @@ function useCarbonTheme() {
 export const CoachmarkOverlayElementsExample = (args) => {
   const carbonTheme = useCarbonTheme();
   const [isOpen, setIsOpen] = useState(true);
+  const [canClose, setCanClose] = useState(true);
+
+  const nextRef = useRef<HTMLButtonElement>(null);
+  const backRef = useRef<HTMLButtonElement>(null);
+  const doneRef = useRef<HTMLButtonElement>(null);
 
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
 
   const carouselContainerRef = useRef(null);
   const carouselInit = useRef(null);
+  const isNavigatingRef = useRef(false);
+  const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const items = [
     {
@@ -82,6 +89,10 @@ export const CoachmarkOverlayElementsExample = (args) => {
   ];
 
   const handleClose = () => {
+    // Prevent closing during carousel navigation
+    if (!canClose || isNavigatingRef.current) {
+      return;
+    }
     setIsOpen(false);
     carouselInit?.current?.reset();
   };
@@ -105,16 +116,72 @@ export const CoachmarkOverlayElementsExample = (args) => {
     handleViewStackUpdate(options);
   };
 
-  const handleViewStackUpdate = useCallback(({ currentIndex, lastIndex }) => {
-    setCurrentViewIndex(currentIndex);
-    setLastViewIndex(lastIndex);
+  const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
+    carouselItemsRef.current.forEach((item, idx) => {
+      if (!item) {
+        return;
+      }
+
+      const isActive = idx === activeIndex;
+
+      // Set aria-hidden based on active state
+      item.setAttribute('aria-hidden', String(!isActive));
+
+      if (!isActive) {
+        item.setAttribute('inert', ''); // Disable interactivity
+      } else {
+        item.removeAttribute('inert'); // Re-enable interactivity
+      }
+
+      item.removeAttribute('tabindex');
+    });
   }, []);
 
-  const onNext = () => {
+  const handleViewStackUpdate = useCallback(
+    ({ currentIndex, lastIndex }) => {
+      setCurrentViewIndex(currentIndex);
+      setLastViewIndex(lastIndex);
+
+      // Update inert attribute for carousel items
+      updateCarouselItemsTabIndex(currentIndex);
+
+      // Focus the appropriate button after carousel navigation
+      // Use setTimeout to ensure button refs are updated after re-render
+      setTimeout(() => {
+        if (currentIndex === lastIndex) {
+          // On last slide, focus the Done button
+          doneRef.current?.focus();
+        } else {
+          // On other slides, focus the Next button
+          nextRef.current?.focus();
+        }
+      }, 10);
+    },
+    [updateCarouselItemsTabIndex]
+  );
+
+  const onNext = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setCanClose(false);
+    isNavigatingRef.current = true;
     carouselInit?.current?.next();
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+      setCanClose(true);
+    }, 300);
   };
-  const onPrev = () => {
+
+  const onPrev = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setCanClose(false);
+    isNavigatingRef.current = true;
     carouselInit?.current?.prev();
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+      setCanClose(true);
+    }, 300);
   };
 
   return (
@@ -144,8 +211,13 @@ export const CoachmarkOverlayElementsExample = (args) => {
               />
             </div>
             <div ref={carouselContainerRef} className="exampleCarouselWrapper">
-              {items.map((item) => (
-                <div key={item.id}>
+              {items.map((item, index) => (
+                <div
+                  key={item.id}
+                  ref={(el) => {
+                    carouselItemsRef.current[index] = el;
+                  }}
+                >
                   <h2>{item.title}</h2>
                   <p>{item.text}</p>
                 </div>
@@ -173,17 +245,23 @@ export const CoachmarkOverlayElementsExample = (args) => {
                     iconDescription="Previous"
                     kind="ghost"
                     onClick={onPrev}
+                    ref={backRef}
                   >
                     Back
                   </Button>
                 )}
 
                 {lastViewIndex !== currentViewIndex ? (
-                  <Button size="sm" iconDescription="Next" onClick={onNext}>
+                  <Button
+                    size="sm"
+                    iconDescription="Next"
+                    onClick={onNext}
+                    ref={nextRef}
+                  >
                     Next
                   </Button>
                 ) : (
-                  <Button size="sm" onClick={handleClose}>
+                  <Button size="sm" onClick={handleClose} ref={doneRef}>
                     Done
                   </Button>
                 )}

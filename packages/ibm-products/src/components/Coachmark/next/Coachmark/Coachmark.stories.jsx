@@ -12,6 +12,7 @@ import styles from './_storybook-styles.scss?inline';
 import { Button, Theme } from '@carbon/react';
 import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
+import { pkg } from '../../../../settings';
 
 export default {
   title: 'Preview/Onboarding/Coachmark',
@@ -121,6 +122,7 @@ const TooltipTemplate = ({ ...args }, context) => {
           position={{ x: 151, y: 155 }}
           open={isOpen}
           onClose={handleClose}
+          selectorPrimaryFocus=".coachmark-done-button"
           {...args}
         >
           <CoachmarkBeacon
@@ -132,7 +134,11 @@ const TooltipTemplate = ({ ...args }, context) => {
             <Coachmark.Content.Body>
               <h2>Hello World</h2>
               <p>this is a description test</p>
-              <Button size="sm" onClick={handleClose}>
+              <Button
+                size="sm"
+                className="coachmark-done-button"
+                onClick={handleClose}
+              >
                 Done
               </Button>
             </Coachmark.Content.Body>
@@ -163,6 +169,7 @@ const FloatingTemplate = ({ ...args }, context) => {
           open={isOpen}
           onClose={handleClose}
           floating={true}
+          selectorPrimaryFocus={`.${pkg.prefix}--coachmark__next--content-header--drag-icon`}
           {...args}
         >
           <Button

@@ -63,8 +63,10 @@ export const CoachmarkFixedExample = (args) => {
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [fixedIsVisible, setFixedIsVisible] = useState(false);
+  const [canClose, setCanClose] = useState(true);
   //prettier-ignore
   const carouselInit = useRef < InitCarousel > (null);
+  const isNavigatingRef = useRef(false);
   //prettier-ignore
   const nextRef = useRef<HTMLButtonElement>(null);
   //prettier-ignore
@@ -99,6 +101,10 @@ export const CoachmarkFixedExample = (args) => {
   ];
 
   const handleClose = () => {
+    // Prevent closing during carousel navigation
+    if (!canClose || isNavigatingRef.current) {
+      return;
+    }
     setIsOpen(false);
     setFixedIsVisible(false);
     carouselInit?.current?.reset();
@@ -185,11 +191,28 @@ export const CoachmarkFixedExample = (args) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselInit, isOpen]);
 
-  const onNext = () => {
+  const onNext = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setCanClose(false);
+    isNavigatingRef.current = true;
     carouselInit?.current?.next();
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+      setCanClose(true);
+    }, 300);
   };
-  const onPrev = () => {
+
+  const onPrev = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setCanClose(false);
+    isNavigatingRef.current = true;
     carouselInit?.current?.prev();
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+      setCanClose(true);
+    }, 300);
   };
 
   return (

@@ -74,13 +74,16 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [openId, setOpenId] = useState(0);
+  const [canClose, setCanClose] = useState(true);
   const carouselInit = useRef(null);
+  const isNavigatingRef = useRef(false);
   const [parentHeight, setParentHeight] = useState(0);
   const stackHomeContentRef = useRef(null);
   const stackedCoachmarkContentRefs = useRef([]);
-  const nextRef = useRef<HTMLButtonElement>(null);
-  const backRef = useRef<HTMLButtonElement>(null);
-  const doneRef = useRef<HTMLButtonElement>(null);
+  // Use ref maps to store button refs for each example separately
+  const nextRefMap = useRef<{ [key: number]: HTMLButtonElement | null }>({});
+  const backRefMap = useRef<{ [key: number]: HTMLButtonElement | null }>({});
+  const doneRefMap = useRef<{ [key: number]: HTMLButtonElement | null }>({});
   const carouselContainerRefs = useRef<{
     [key: number]: HTMLDivElement | null;
   }>({});
@@ -119,7 +122,9 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       type: 'simple',
       button: (
         <Button
-          ref={doneRef}
+          ref={(el) => {
+            doneRefMap.current[1] = el;
+          }}
           size="sm"
           onClick={(e) => {
             e.stopPropagation();
@@ -246,11 +251,9 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   ];
 
   const handleClose = (e?) => {
-    console.log('handleClose called for parent coachmark, openId:', openId);
     e?.stopPropagation();
     // Don't close parent if a child is open
     if (openId > 0) {
-      console.log('Child is open, not closing parent');
       return;
     }
     setIsOpen(false);
@@ -294,18 +297,6 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   useEffect(() => {
     if (openId > 0) {
       lastOpenIdRef.current = openId;
-      const nestedItem = nestedItems.find((item) => item.id === openId);
-
-      if (nestedItem?.type === 'carousel') {
-        updateCarouselItemsTabIndex(openId, 0);
-        setTimeout(() => {
-          nextRef?.current?.focus();
-        }, 100);
-      } else {
-        setTimeout(() => {
-          doneRef?.current?.focus();
-        }, 100);
-      }
     } else if ((openId === 0 || openId === null) && lastOpenIdRef.current > 0) {
       // Child was closed, return focus to the parent button that opened it
       setTimeout(() => {
@@ -354,29 +345,51 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
 
       // Update inert attribute for carousel items
       updateCarouselItemsTabIndex(openId, currentIndex);
-
-      // Use setTimeout to ensure button refs are updated after re-render
-      setTimeout(() => {
-        if (currentIndex === lastIndex) {
-          // On last slide, focus the Done button
-          doneRef.current?.focus();
-        } else {
-          // On other slides, focus the Next button
-          nextRef.current?.focus();
-        }
-      }, 50);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [openId, updateCarouselItemsTabIndex]
   );
 
+  // Separate effect to handle focus after carousel navigation
+  useEffect(() => {
+    if (openId > 0 && currentViewIndex !== null) {
+      // Use setTimeout with requestAnimationFrame to ensure DOM is fully updated
+      setTimeout(() => {
+        if (currentViewIndex === lastViewIndex) {
+          // On last slide, focus the Done button for this specific example
+          const doneButton = doneRefMap.current[openId];
+          if (doneButton) {
+            doneButton.focus();
+          }
+        } else {
+          // On other slides, focus the Next button for this specific example
+          const nextButton = nextRefMap.current[openId];
+          if (nextButton) {
+            nextButton.focus();
+          }
+        }
+      }, 150);
+    }
+  }, [currentViewIndex, lastViewIndex, openId]);
+
   const onNext = (e) => {
+    setCanClose(false);
+    isNavigatingRef.current = true;
     carouselInit?.current?.next();
-    e.stopPropagation();
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+      setCanClose(true);
+    }, 300);
   };
+
   const onPrev = (e) => {
+    setCanClose(false);
+    isNavigatingRef.current = true;
     carouselInit?.current?.prev();
-    e.stopPropagation();
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+      setCanClose(true);
+    }, 300);
   };
 
   useLayoutEffect(() => {
@@ -387,13 +400,9 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       stackHomeContentRef.current
     );
 
-    console.log('stackHomeContent', stackHomeContentRef);
-
     if (!parentHeight) {
       if (stackHomeContent) {
         const height = stackHomeContent.clientHeight;
-        console.log('height', height);
-
         if (height > 0) {
           setParentHeight(height);
         }
@@ -423,10 +432,8 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     if (openId > 0 && isOpen && stackedCoachmarkContentRefs.current) {
       const container = stackedCoachmarkContentRefs.current[openId];
       const targetHome = getPopoverContentElement(container);
-      console.log('hi', openId);
 
       if (stackHomeContent && targetHome) {
-        console.log(stackHomeContent?.className);
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             const targetHomeHeight = targetHome.clientHeight;
@@ -455,6 +462,11 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
         {...args}
         className={`${blockClass}`}
         caret={false}
+        selectorPrimaryFocus={
+          openId === 0 && lastOpenIdRef.current === 0
+            ? `.${blockClass}__nav-links li:first-child button`
+            : undefined
+        }
       >
         <CoachmarkTagline
           title="Why are there two types of severity scores?"
@@ -514,14 +526,16 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       </Coachmark>
       {items.map((item) => {
         const isOpen = openId === item.id;
+
         return (
           <Coachmark
             key={item.id}
             open={isOpen}
-            onClose={(e) => {
-              e?.stopPropagation();
-              e?.preventDefault();
-              setOpenId(0);
+            onClose={() => {
+              // Prevent closing during carousel navigation
+              if (canClose && !isNavigatingRef.current) {
+                setOpenId(0);
+              }
             }}
             align="top"
             caret={false}
@@ -612,7 +626,9 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                             <div className={'carouselControlWrapper--buttons'}>
                               {currentViewIndex !== 0 && (
                                 <Button
-                                  ref={backRef}
+                                  ref={(el) => {
+                                    backRefMap.current[item.id] = el;
+                                  }}
                                   size="sm"
                                   iconDescription="Previous"
                                   kind="ghost"
@@ -624,7 +640,9 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
 
                               {lastViewIndex !== currentViewIndex ? (
                                 <Button
-                                  ref={nextRef}
+                                  ref={(el) => {
+                                    nextRefMap.current[item.id] = el;
+                                  }}
                                   size="sm"
                                   iconDescription="Next"
                                   onClick={onNext}
@@ -633,7 +651,9 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                                 </Button>
                               ) : (
                                 <Button
-                                  ref={doneRef}
+                                  ref={(el) => {
+                                    doneRefMap.current[item.id] = el;
+                                  }}
                                   size="sm"
                                   onClick={handleCloseCarousel}
                                 >

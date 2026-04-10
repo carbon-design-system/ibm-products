@@ -7,6 +7,7 @@
 
 /* stylelint-disable declaration-no-important */
 $prefix: 'c4p' !default;
+$carbon-prefix: 'cds';
 
 @use '@carbon/styles';
 @use '@carbon/styles/scss/spacing' as *;
@@ -26,8 +27,7 @@ $prefix: 'c4p' !default;
 $block-class: #{$prefix}--coachmark__next;
 $stack-home-class: 'coachmark-stacked-home';
 $stacked-coachmark: 'stacked-coachmark';
-
-$elements-block-class: 'coachmark-stack-element';
+$elements-block-class: 'stacked_element_content';
 
 // BUBBLE - content styling
 .#{$block-class}--coachmark-content {
@@ -95,12 +95,6 @@ $elements-block-class: 'coachmark-stack-element';
     position: absolute;
     inset-inline-start: $spacing-07;
   }
-}
-
-.cds--content-switcher {
-  inline-size: 20rem;
-  margin-block: $spacing-09;
-  margin-inline: $spacing-07;
 }
 
 .carouselControlWrapper__footer {
@@ -171,22 +165,6 @@ $elements-block-class: 'coachmark-stack-element';
   display: none;
 }
 
-$elements-block-class: 'stacked_element_content';
-
-// .#{$elements-block-class} {
-//   inset: logical unset unset 0 0 !important;
-//   inset-block-start: auto;
-//   inset-inline-start: auto;
-// }
-// .#{$prefix}--coachmark__next--coachmark-content {
-//   inset-block-end: 0;
-//   inset-block-start: unset !important;
-//   inset-inline-end: $spacing-05;
-//   inset-inline-start: unset !important;
-//   opacity: 1;
-//   transform: none;
-// }
-
 .#{$stack-home-class}--scaled-home {
   inset-block-end: $spacing-05;
   opacity: 0.8;
@@ -209,13 +187,18 @@ $elements-block-class: 'stacked_element_content';
   inset-inline-start: auto;
 }
 
-// Override the actual Carbon popover container for nested coachmarks only
-.#{$prefix}--coachmark__next:has(.#{$elements-block-class}) .cds--popover {
+// Create a fixed positioning context for nested coachmarks
+.#{$prefix}--coachmark__next:has(.#{$elements-block-class}) {
   position: fixed;
   z-index: 9001;
   inset-block-end: 0;
   inset-block-start: auto;
   inset-inline-end: $spacing-13;
   inset-inline-start: auto;
-  visibility: visible;
+
+  // Allow the popover to be positioned absolutely within the fixed container
+  .#{$carbon-prefix}--popover {
+    position: absolute;
+    visibility: visible;
+  }
 }

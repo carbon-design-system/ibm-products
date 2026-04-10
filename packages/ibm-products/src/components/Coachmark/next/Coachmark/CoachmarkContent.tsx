@@ -47,8 +47,14 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     const { className = '', children, ...rest } = props;
     const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
     const contentBodyClass = `${blockClass}--content-body`;
-    const { open, setContentRef, onClose, setOpen, triggerRef } =
-      useContext(CoachmarkContext);
+    const {
+      open,
+      setContentRef,
+      onClose,
+      setOpen,
+      triggerRef,
+      selectorPrimaryFocus,
+    } = useContext(CoachmarkContext);
 
     const [contentId] = useState(
       () => `coachmark-content-${Math.random().toString(36).substr(2, 9)}`
@@ -58,24 +64,6 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     );
     const handleRef = useRef<HTMLDivElement | null>(null);
     const contentRef = ref || handleRef;
-
-    useEffect(() => {
-      if (open && 'current' in contentRef && contentRef.current) {
-        requestAnimationFrame(() => {
-          const contentBody = contentRef.current?.querySelector(
-            `.${contentBodyClass}`
-          );
-
-          if (contentBody) {
-            const firstFocusable = Array.from(
-              contentBody.querySelectorAll<HTMLElement>('*')
-            ).find((el) => el.tabIndex >= 0);
-            firstFocusable?.focus();
-          }
-        });
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open]);
 
     useEffect(() => {
       if (open && 'current' in contentRef && contentRef.current) {
@@ -126,6 +114,27 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
         document.removeEventListener('keydown', handleKeyDown);
       };
     }, [open, onClose, setOpen]);
+
+    // Handle focus management with selectorPrimaryFocus
+    useEffect(() => {
+      if (open && selectorPrimaryFocus) {
+        // Use setTimeout to ensure DOM is ready and give time for any other focus management
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              // Try to get the element from the DOM directly using the selector
+              const elementToFocus =
+                document.querySelector<HTMLElement>(selectorPrimaryFocus);
+
+              if (elementToFocus) {
+                elementToFocus.focus();
+              }
+            });
+          });
+        }, 100);
+      }
+       
+    }, [open, selectorPrimaryFocus]);
 
     return (
       <PopoverContent

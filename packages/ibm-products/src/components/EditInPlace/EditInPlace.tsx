@@ -185,6 +185,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     const inputRef = useRef<HTMLInputElement>(null);
     const canSave = value !== initialValue && !invalid;
     const escaping = useRef(false);
+    const clickingWithin = useRef(false);
     const carbonPrefix = usePrefix();
 
     const tipAlignIsObject = typeof tooltipAlignment === 'object';
@@ -207,7 +208,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     }, [initialValue, dirtyInput, value]);
 
     const isTargetingChild = ({ currentTarget, relatedTarget }) =>
-      currentTarget.contains(relatedTarget);
+      currentTarget.contains(relatedTarget) || clickingWithin.current;
 
     const onChangeHandler = ({ target }) => {
       if (!dirtyInput) {
@@ -255,6 +256,8 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
           }
         }
       }
+      // Reset the clickingWithin flag after blur is handled
+      clickingWithin.current = false;
     };
 
     const returnHandler = () => {
@@ -311,6 +314,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     );
 
     const inputContainer = (
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
         className={cx(blockClass, `${blockClass}--${size}`, {
           [`${blockClass}--focused`]: focused,
@@ -323,6 +327,11 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
         })}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
+        onMouseDown={() => {
+          // Track that we're clicking within the component
+          // This helps handle disabled buttons which don't set relatedTarget
+          clickingWithin.current = true;
+        }}
       >
         {readOnly ? (
           <Toggletip

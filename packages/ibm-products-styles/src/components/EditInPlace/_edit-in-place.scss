@@ -128,7 +128,44 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
 
   // animation div
   display: inline-flex;
+  align-self: stretch;
   inline-size: var(--toolbar-width);
+
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
+    padding: 0;
+    min-block-size: unset;
+  }
+}
+
+// Match button heights to input heights for each size and make them square
+.#{$block-class}--sm .#{$block-class}__toolbar {
+  --toolbar-width: $spacing-08;
+  --toolbar-width-focussed: calc(2 * #{$spacing-08});
+
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
+    block-size: $spacing-08;
+    inline-size: $spacing-08;
+  }
+}
+
+.#{$block-class}--md .#{$block-class}__toolbar {
+  --toolbar-width: $spacing-09;
+  --toolbar-width-focussed: calc(2 * #{$spacing-09});
+
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
+    block-size: $spacing-09;
+    inline-size: $spacing-09;
+  }
+}
+
+.#{$block-class}--lg .#{$block-class}__toolbar {
+  --toolbar-width: $spacing-10;
+  --toolbar-width-focussed: calc(2 * #{$spacing-10});
+
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
+    block-size: $spacing-10;
+    inline-size: $spacing-10;
+  }
 }
 
 .#{$block-class}--invalid .#{$block-class}__toolbar {

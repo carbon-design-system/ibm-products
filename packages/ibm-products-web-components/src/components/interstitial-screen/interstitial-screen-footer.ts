@@ -266,7 +266,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
                   ${this.loadingAction === 'start'
                     ? html` <cds-inline-loading slot="icon" aria-live="off">
                       </cds-inline-loading>`
-                    : nothing}
+                    : html`${iconLoader(ArrowRight, { slot: 'icon' })}`}
                 </cds-button>
               `
             : nothing}

@@ -151,16 +151,6 @@
   margin-block-end: $spacing-06;
 }
 
-// CreateTearsheet action buttons
-.create-tearsheet__action-buttons {
-  display: flex;
-  gap: $spacing-03;
-}
-
-.create-tearsheet__action-button {
-  // Button styles if needed
-}
-
 // CreateTearsheet divider (using pkg.prefix which is c4p)
 .c4p--tearsheet-create__section--divider {
   position: relative;

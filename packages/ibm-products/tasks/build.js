@@ -59,11 +59,22 @@ async function build() {
       },
       outDir: path.join(packageRoot, format.directory),
       unbundle: true,
+      outputOptions(options) {
+        return {
+          ...options,
+          chunkFileNames: '[name].js',
+          entryFileNames: '[name].js',
+        };
+      },
       platform: 'browser',
       target: 'es2022',
       tsconfig: tsconfigPath,
     });
   }
+
+  // Patch CJS default exports to fix tsdown interop issue
+  console.log('Patching CJS default exports...');
+  await patchCjsDefaultInterop(path.join(packageRoot, 'lib'));
 
   // Generate declarations once to es/ directory
   console.log('Generating TypeScript declarations...');
@@ -76,7 +87,37 @@ async function build() {
     path.join(packageRoot, 'lib')
   );
 
-  console.log('✅ Declaration generation complete!');
+  console.log('✅ Build complete!');
+}
+
+async function patchCjsDefaultInterop(dir) {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      await patchCjsDefaultInterop(fullPath);
+      continue;
+    }
+
+    if (entry.name.endsWith('.js')) {
+      let contents = await fs.readFile(fullPath, 'utf8');
+
+      // Normalize to `default || module` so consumers receive the component value.
+      // This fixes the issue where `export { default as name }` creates
+      // `exports.name = require_module` which becomes `{ default: function }`
+      // instead of the function itself when using namespace imports.
+      const updated = contents.replace(
+        /^(exports\.\w+ = )(require_[\w$]+);$/gm,
+        '$1$2.default || $2;'
+      );
+
+      if (updated !== contents) {
+        await fs.writeFile(fullPath, updated, 'utf8');
+      }
+    }
+  }
 }
 
 async function copyDeclarations(fromDir, toDir) {

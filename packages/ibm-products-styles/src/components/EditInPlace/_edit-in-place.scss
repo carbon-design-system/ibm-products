@@ -75,6 +75,11 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
   outline: 2px solid $focus;
 }
 
+// Remove border when focused to avoid double border with outline
+.#{$block-class}--invalid.#{$block-class}--focused {
+  border: none;
+}
+
 .#{$block-class}__text-input {
   flex: 1;
 }

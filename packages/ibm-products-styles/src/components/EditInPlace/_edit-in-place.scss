@@ -69,6 +69,10 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
 
 .#{$block-class}--focused {
   background: $field-01;
+}
+
+// Show outline on entire component when input has focus
+.#{$block-class}--focused:has(.#{$block-class}__text-input:focus) {
   outline: 2px solid $focus;
 }
 
@@ -110,8 +114,11 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
   outline: none;
 }
 
-.#{$block-class}__text-input.#{$carbon-input}:focus,
-.#{$block-class}__text-input.#{$carbon-input}:active {
+// Remove outline when not in edit mode
+.#{$block-class}:not(.#{$block-class}--focused)
+  .#{$block-class}__text-input.#{$carbon-input}:focus,
+.#{$block-class}:not(.#{$block-class}--focused)
+  .#{$block-class}__text-input.#{$carbon-input}:active {
   outline: none;
 }
 

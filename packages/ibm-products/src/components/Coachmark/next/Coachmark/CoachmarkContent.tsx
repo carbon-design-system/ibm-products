@@ -133,7 +133,6 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
           });
         }, 100);
       }
-       
     }, [open, selectorPrimaryFocus]);
 
     return (

@@ -180,7 +180,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     ref
   ) => {
     const [focused, setFocused] = useState(false);
-    const [initialValue, setInitialValue] = useState<string>('');
+    const [initialValue, setInitialValue] = useState<string>(value);
     const [dirtyInput, setDirtyInput] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
     const canSave = value !== initialValue && !invalid;
@@ -201,12 +201,9 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       return acc;
     }, {});
 
-    useEffect(() => {
-      // Update initialValue when value prop changes and we're not currently editing
-      if (!dirtyInput) {
-        setInitialValue(value);
-      }
-    }, [value, dirtyInput]);
+    // Note: We intentionally don't sync initialValue with value prop changes
+    // initialValue represents the value when entering edit mode, not the current prop value
+    // It's only updated on mount (via useState) and after successful save
 
     const isTargetingChild = ({ currentTarget, relatedTarget }) =>
       currentTarget.contains(relatedTarget);

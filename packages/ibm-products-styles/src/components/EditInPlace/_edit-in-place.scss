@@ -27,16 +27,15 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
 }
 
 .#{$block-class}--sm {
-  --#{$block-class}--size: #{$spacing-07};
-}
-
-.#{$block-class}--md {
   --#{$block-class}--size: #{$spacing-08};
 }
 
-.#{$block-class}--lg {
-  /* April 2023 max text input size */
+.#{$block-class}--md {
   --#{$block-class}--size: #{$spacing-09};
+}
+
+.#{$block-class}--lg {
+  --#{$block-class}--size: #{$spacing-10};
 }
 
 .#{$block-class}__toggletip-wrapper {
@@ -138,34 +137,10 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
 }
 
 // Match button heights to input heights for each size and make them square
-.#{$block-class}--sm .#{$block-class}__toolbar {
-  --toolbar-width: $spacing-08;
-  --toolbar-width-focussed: calc(2 * #{$spacing-08});
-
+.#{$block-class}__toolbar
   .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
-    block-size: $spacing-08;
-    inline-size: $spacing-08;
-  }
-}
-
-.#{$block-class}--md .#{$block-class}__toolbar {
-  --toolbar-width: $spacing-09;
-  --toolbar-width-focussed: calc(2 * #{$spacing-09});
-
-  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
-    block-size: $spacing-09;
-    inline-size: $spacing-09;
-  }
-}
-
-.#{$block-class}--lg .#{$block-class}__toolbar {
-  --toolbar-width: $spacing-10;
-  --toolbar-width-focussed: calc(2 * #{$spacing-10});
-
-  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
-    block-size: $spacing-10;
-    inline-size: $spacing-10;
-  }
+  block-size: var(--#{$block-class}--size);
+  inline-size: var(--#{$block-class}--size);
 }
 
 .#{$block-class}--invalid .#{$block-class}__toolbar {

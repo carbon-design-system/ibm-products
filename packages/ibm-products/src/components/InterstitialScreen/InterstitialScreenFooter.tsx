@@ -14,7 +14,13 @@ import {
   ActionType,
   disableButtonConfigType,
 } from './context';
-import { Button, ButtonSet, InlineLoading, ModalFooter } from '@carbon/react';
+import {
+  Button,
+  ButtonSet,
+  InlineLoading,
+  ModalFooter,
+  usePrefix,
+} from '@carbon/react';
 import { clamp } from '../../global/js/utils/clamp';
 import { ArrowRight } from '@carbon/react/icons';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -86,6 +92,8 @@ const InterstitialScreenFooter = React.forwardRef<
   const startButtonRef = useRef<HTMLButtonElement | null>(null);
   const nextButtonRef = useRef<HTMLButtonElement | null>(null);
   const [loadingAction, setLoadingAction] = useState('');
+
+  const carbonPrefix = usePrefix();
 
   const isMultiStep = !!stepCount && stepCount > 1;
   const progStepFloor = 0;
@@ -201,31 +209,31 @@ const InterstitialScreenFooter = React.forwardRef<
       )}
     </ButtonSet>
   );
-  if (actionButtonRenderer) {
-    return (
-      <div className={`${blockClass}--footer`}>
-        {actionButtonRenderer({
-          handleGotoStep,
-          progStep,
-          stepCount,
-          disableButtonConfig,
-        })}
-      </div>
-    );
-  }
+  const footerContent = actionButtonRenderer
+    ? actionButtonRenderer({
+        handleGotoStep,
+        progStep,
+        stepCount,
+        disableButtonConfig,
+      })
+    : getFooterContent();
 
   return isFullScreen ? (
     <div
       ref={ref}
-      className={`${footerBlockClass} ${className}`}
+      className={`${footerBlockClass} ${className}  ${carbonPrefix}--modal-footer`}
       {...getDevtoolsProps('InterstitialScreenFooter')}
-      {...(isFullScreen ? rest : {})}
+      {...rest}
     >
-      {getFooterContent()}
+      {footerContent}
     </div>
   ) : (
-    <ModalFooter className={footerBlockClass} ref={ref} {...rest}>
-      {getFooterContent()}
+    <ModalFooter
+      className={`${footerBlockClass} ${className}`}
+      ref={ref}
+      {...rest}
+    >
+      {footerContent}
     </ModalFooter>
   );
 });

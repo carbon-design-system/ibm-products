@@ -136,12 +136,7 @@ export const PageHeaderBreadcrumbPageActions = ({
         }}
       >
         <FeatureFlags enableV12Overflowmenu>
-          <OverflowMenu
-            size={buttonSize}
-            aria-label={overflowMenuLabel}
-            autoAlign
-            flipped
-          >
+          <OverflowMenu size={buttonSize} aria-label={overflowMenuLabel}>
             {hiddenItems.map((item) => (
               <OverflowMenuItem
                 key={item.id}

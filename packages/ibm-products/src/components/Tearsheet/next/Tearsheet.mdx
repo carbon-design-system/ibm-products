@@ -298,6 +298,48 @@ pass `PageHeader.ScrollButton` to the `scroller` prop.
 </Tearsheet.Header>
 ```
 
+## Tearsheet.Footer
+
+The Footer component supports two approaches for rendering action buttons:
+
+**Using the `actions` prop (recommended):**
+
+```jsx
+<Tearsheet.Footer
+  actions={[
+    {
+      kind: 'ghost',
+      label: 'Cancel',
+      onClick: () => setOpen(false),
+    },
+    {
+      kind: 'secondary',
+      label: 'Back',
+    },
+    {
+      kind: 'primary',
+      label: 'Submit',
+    },
+  ]}
+/>
+```
+
+**Using custom buttons:**
+
+```jsx
+<Tearsheet.Footer>
+  <Button kind="ghost" onClick={() => setOpen(false)}>
+    Cancel
+  </Button>
+  <Button kind="secondary">Back</Button>
+  <Button kind="primary">Submit</Button>
+</Tearsheet.Footer>
+```
+
+The `actions` prop automatically handles button sizing based on the tearsheet
+variant and screen size, while custom buttons give you full control over the
+footer layout.
+
 # Examples
 
 ## Default

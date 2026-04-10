@@ -102,6 +102,20 @@ $motion-duration: $duration-moderate-02;
   }
 }
 
+// Hide header elements immediately when tearsheet is closing
+:host-context(#{$c4p-prefix}-preview-tearsheet:not([open])) {@media screen and (prefers-reduced-motion: reduce) {
+::slotted(*) {
+    opacity: 0;
+    transition: none;
+}
+}
+
+  ::slotted(*) {
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+  }
+}
+
 // ──────────────────────────────────────────────────────────────
 // Collapsed Header State
 // ──────────────────────────────────────────────────────────────

@@ -7,6 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+export { default as CDSActionSet } from './components/action-set/action-set';
 export { default as CDSSidePanel } from './components/side-panel/side-panel';
 export { default as CDSTearsheet } from './components/tearsheet/tearsheet';
 export { default as CDSTearsheetPreview } from './components/tearsheet-preview/tearsheet';

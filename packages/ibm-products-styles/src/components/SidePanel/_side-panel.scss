@@ -540,6 +540,10 @@ $clabs-prefix: resizer.$prefix;
       position: absolute;
     }
   }
+  .#{$block-class}__decorator-and-close
+    .#{carbon-config.$prefix}--ai-label__button--xs {
+    margin: $spacing-02;
+  }
 
   .#{$block-class}__actions-container {
     position: sticky; // stick to bottom

@@ -14,7 +14,8 @@ export const PageHeaderTitleBreadcrumb = forwardRef<
   HTMLLIElement,
   BreadcrumbItemProps
 >(({ className, children, ...other }, ref) => {
-  const { titleClipped, refs } = usePageHeader();
+  const { observerState, refs } = usePageHeader();
+  const titleClipped = observerState.titleClipped;
   // Show title breadcrumb when:
   // 1. No content element exists (compact mode), OR
   // 2. Title is clipped and titleRef exists (with content element)

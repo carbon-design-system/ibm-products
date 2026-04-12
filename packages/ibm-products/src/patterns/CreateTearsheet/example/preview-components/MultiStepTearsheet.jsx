@@ -252,6 +252,7 @@ export const MultiStepTearsheet = ({
   title = 'Create',
   open,
   setOpen,
+  initialStep,
   ...rest
 }) => {
   const [simulatedDelay] = useState(750);
@@ -349,6 +350,7 @@ export const MultiStepTearsheet = ({
           });
         }}
         decorator={decorator && <Decorator />}
+        initialStep={initialStep}
         {...rest}
         hasError={hasSubmitError}
         handleNextDisabledState={handleNextDisabledState}

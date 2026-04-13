@@ -5,17 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  AILabel,
-  IconButton,
-  IconButtonProps,
-  ModalHeader,
-  usePrefix,
-} from '@carbon/react';
+import { IconButton, IconButtonProps, ModalHeader } from '@carbon/react';
 import React, {
-  cloneElement,
-  isValidElement,
-  ReactElement,
   ReactNode,
   RefObject,
   useContext,
@@ -25,7 +16,7 @@ import React, {
 import cx from 'classnames';
 import { blockClass, TearsheetContext } from './context';
 import classNames from 'classnames';
-import { ChevronUp, Close } from '@carbon/react/icons';
+import { ChevronUp } from '@carbon/react/icons';
 
 /**
  * ----------------
@@ -44,7 +35,7 @@ export interface TearsheetHeaderProps {
    * The accessibility title for the close icon (if shown).
    *
    * **Note:** This prop is only required if a close icon is shown, i.e. if
-   * there are a no navigation actions and/or hasCloseIcon is true.
+   * there are a no navigation actions and/or hideCloseButton is false.
    */
   closeIconDescription?: string;
   /**
@@ -75,68 +66,37 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
       disableHeaderCollapse,
       ...rest
     } = props;
-    const carbonPrefix = usePrefix();
-    const {
-      setHasCloseIcon,
-      fullyCollapsed,
-      onClose,
-      setDisableHeaderCollapse,
-      decorator,
-    } = useContext(TearsheetContext);
+    const parentContext = useContext(TearsheetContext);
+    const { fullyCollapsed, setDisableHeaderCollapse } = parentContext;
     const localRef = useRef(undefined);
     const headerRef = (ref || localRef) as RefObject<HTMLDivElement>;
 
     useEffect(() => {
-      setHasCloseIcon?.(!!hideCloseButton);
-    }, [hideCloseButton, setHasCloseIcon]);
-    useEffect(() => {
       setDisableHeaderCollapse?.(!!disableHeaderCollapse);
     }, [disableHeaderCollapse, setDisableHeaderCollapse]);
 
-    // Normalize decorator (AILabel is always size `sm`)
-    const candidateIsAILabel =
-      isValidElement(decorator) && decorator.type === AILabel;
-    const normalizedDecorator = candidateIsAILabel
-      ? cloneElement(decorator as ReactElement<any>, { size: 'sm' })
-      : decorator;
+    // Create enhanced context with close button props
+    const enhancedContext = {
+      ...parentContext,
+      closeIconDescription,
+      hideCloseButton,
+    };
 
     return (
-      <ModalHeader
-        ref={headerRef}
-        className={cx(`${blockClass}__header`, {
-          [`${className}`]: true,
-          [`${blockClass}__header--with-close-icon`]: !hideCloseButton,
-          [`${blockClass}__header-collapsed`]: fullyCollapsed,
-        })}
-        closeClassName={`${blockClass}__header--no-close-icon`}
-        {...rest}
-      >
-        {!hideCloseButton && (
-          <div
-            className={`${blockClass}__close-button ${carbonPrefix}--modal-close-button`}
-          >
-            <IconButton
-              className={`${carbonPrefix}--modal-close`}
-              label={closeIconDescription || 'Close'}
-              onClick={onClose}
-              align="left"
-            >
-              <Close
-                size={20}
-                aria-hidden="true"
-                tabIndex="-1"
-                className={`${carbonPrefix}--modal-close__icon`}
-              />
-            </IconButton>
-          </div>
-        )}
-        {decorator && (
-          <div className={`${blockClass}__decorator`}>
-            {normalizedDecorator}
-          </div>
-        )}
-        {children}
-      </ModalHeader>
+      <TearsheetContext.Provider value={enhancedContext}>
+        <ModalHeader
+          ref={headerRef}
+          className={cx(`${blockClass}__header`, {
+            [`${className}`]: true,
+            [`${blockClass}__header--with-close-icon`]: !hideCloseButton,
+            [`${blockClass}__header-collapsed`]: fullyCollapsed,
+          })}
+          closeClassName={`${blockClass}__header--no-close-icon`}
+          {...rest}
+        >
+          {children}
+        </ModalHeader>
+      </TearsheetContext.Provider>
     );
   }
 );

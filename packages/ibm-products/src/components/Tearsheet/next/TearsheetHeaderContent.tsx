@@ -5,10 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode, useContext } from 'react';
+import React, {
+  cloneElement,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useContext,
+} from 'react';
 import cx from 'classnames';
 import { blockClass, TearsheetContext } from './context';
 import { TruncatedText } from '../../TruncatedText';
+import { AILabel, IconButton, usePrefix } from '@carbon/react';
+import { Close } from '@carbon/react/icons';
 
 export interface TearsheetHeaderContentProps {
   /**
@@ -59,7 +67,21 @@ const TearsheetHeaderContent = React.forwardRef<
     ...rest
   } = props;
 
-  const { isSm } = useContext(TearsheetContext);
+  const carbonPrefix = usePrefix();
+  const {
+    isSm,
+    onClose,
+    decorator,
+    closeIconDescription,
+    hideCloseButton = false,
+  } = useContext(TearsheetContext);
+
+  // Normalize decorator (AILabel is always size `sm`)
+  const candidateIsAILabel =
+    isValidElement(decorator) && decorator.type === AILabel;
+  const normalizedDecorator = candidateIsAILabel
+    ? cloneElement(decorator as ReactElement<any>, { size: 'sm' })
+    : decorator;
 
   const headerContent = (
     <div className={`${blockClass}__header-content`}>
@@ -95,15 +117,43 @@ const TearsheetHeaderContent = React.forwardRef<
     <div className={`${blockClass}__header-actions`}>{headerActions}</div>
   );
 
+  const decoratorElement = decorator && (
+    <div className={`${blockClass}__decorator`}>{normalizedDecorator}</div>
+  );
+
+  const closeButtonElement = !hideCloseButton && (
+    <div
+      className={`${blockClass}__close-button ${carbonPrefix}--modal-close-button`}
+    >
+      <IconButton
+        className={`${carbonPrefix}--modal-close`}
+        label={closeIconDescription || 'Close'}
+        onClick={onClose}
+        align="left"
+      >
+        <Close
+          size={20}
+          aria-hidden="true"
+          tabIndex="-1"
+          className={`${carbonPrefix}--modal-close__icon`}
+        />
+      </IconButton>
+    </div>
+  );
+
   return (
     <div className={`${blockClass}__header-content-wrapper`} ref={ref}>
       {!isSm ? (
         <>
           {headerActionsElement}
+          {decoratorElement}
+          {closeButtonElement}
           {headerContent}
         </>
       ) : (
         <>
+          {decoratorElement}
+          {closeButtonElement}
           {headerContent}
           {headerActionsElement}
         </>

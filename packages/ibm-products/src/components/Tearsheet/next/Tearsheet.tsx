@@ -203,7 +203,6 @@ const TearsheetInternal = forwardRef<
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
 
-    const [hasCloseIcon, setHasCloseIcon] = useState(true);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [disableHeaderCollapse, setDisableHeaderCollapse] = useState(false);
 
@@ -293,8 +292,6 @@ const TearsheetInternal = forwardRef<
     const content = (
       <TearsheetContext.Provider
         value={{
-          hasCloseIcon,
-          setHasCloseIcon,
           fullyCollapsed,
           setFullyCollapsed,
           onClose,
@@ -318,7 +315,6 @@ const TearsheetInternal = forwardRef<
                 !!decorator && decorator['type']?.displayName === 'AILabel',
               [`${blockClass}--has-decorator`]:
                 !!decorator && decorator['type']?.displayName !== 'AILabel',
-              [`${blockClass}--has-close`]: hasCloseIcon,
               ['is-visible']: keepMounted ? open : true, // When keepMounted, use open prop; otherwise always visible
               [`${blockClass}--keep-mounted`]: keepMounted,
             })}

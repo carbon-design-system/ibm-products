@@ -37,9 +37,31 @@ const args = { align: POPOVER_ALIGNMENT.TOP };
 const argTypes = {
   align: {
     control: 'select',
-    description:
-      'Specify the alignment of the Coachmark relative to its target',
+    description: 'Where to render the Coachmark relative to its target',
     options: tooltipAlignments,
+  },
+  open: {
+    control: 'boolean',
+    description: 'Specifies whether the component is currently open',
+  },
+  highContrast: {
+    control: 'boolean',
+    description:
+      'Specify whether the component should be rendered on high-contrast',
+  },
+  floating: {
+    control: 'boolean',
+    description: 'Specifies whether the component is floating or not',
+  },
+  dropShadow: {
+    control: 'boolean',
+    description:
+      'Specify whether a drop shadow should be rendered on the popover',
+  },
+  position: {
+    control: 'object',
+    description:
+      'Fine tune the position of the target in pixels. Applies only to Beacons',
   },
 };
 
@@ -52,7 +74,7 @@ export const Tooltip = {
   },
   argTypes,
 
-  render: (args) => {
+  render: (args: any) => {
     return html`
       <style>
         ${styles}
@@ -73,7 +95,7 @@ export const Tooltip = {
           >
           </c4p-coachmark-beacon>
           <c4p-coachmark-header
-            closeIconDescription="close icon"
+            closeIconDescription="Close"
             class="coachmark-header"
           ></c4p-coachmark-header>
           <c4p-coachmark-body class="coachmark-body">
@@ -116,8 +138,8 @@ export const Floating = {
             >Show information ${iconLoader(Crossroads as any, { slot: 'icon' })}
           </cds-button>
           <c4p-coachmark-header
-            closeIconDescription="close icon"
-            dragIconDescription="drag icon"
+            closeIconDescription="Close"
+            dragIconDescription="Drag"
             class="coachmark-header"
           ></c4p-coachmark-header>
           <c4p-coachmark-body class="coachmark-body">

@@ -1,3 +1,29 @@
+## `@carbon/ibm-products-web-components@0.36.0`
+### Bug fixes :bug:
+- fix(about-modal): Parity work (#9088)
+- fix(side-panel): Parity work (#9136)
+- fix: Coachmark design parity (#9155)
+- fix: move step flows to utilities (#9110)
+
+### Housekeeping :house:
+- chore: update node to 24 (#9114)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+- chore: migrate to tsdown for react and wc (#9123)
+- chore(deps): update dependency @mordech/vite-lit-loader to ^0.38.0 (#9130)
+
+## `@carbon/ibm-products-web-components@0.35.0`
+### Features :rocket:
+- feat: Composable Tearsheet webcomponent implementation (#8841)
+
+### Bug fixes :bug:
+- fix: make style specific to sidepanel in tearsheet (#9107)
+- fix(useravatar): design parity (#9064)
+- fix(NotificationPanel): fix notification border when focused (#9066)
+
+### Housekeeping :house:
+- chore: add chromatic set up ibm-products react and wc storybook (#9086)
+- build(deps): update to Carbon 11 compatible versions to latest (#9063)
+
 ## `@carbon/ibm-products-web-components@0.34.0`
 ### Features :rocket:
 - feat: coachmark stackblitz example (#8948)

@@ -144,33 +144,132 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     last: HTMLElement | undefined;
     all: HTMLElement[];
   } {
-    const elements: NodeListOf<HTMLElement>[] = [];
+    const elements: HTMLElement[] = [];
 
-    // Add slug elements if present
-    if (this._hasSlug) {
-      elements.push(this.querySelectorAll(`${carbonPrefix}-slug`));
-    }
-
-    // Add close button if not hidden
-    if (!this.hideCloseButton) {
-      const closeButtons = this.shadowRoot?.querySelectorAll<HTMLElement>(
-        `${carbonPrefix}-icon-button`
+    // Add back button if present (shadow DOM)
+    if (this.currentStep > 0) {
+      const backButton = this.shadowRoot?.querySelector<HTMLElement>(
+        `.${blockClass}__navigation-back-button`
       );
-      if (closeButtons) {
-        elements.push(closeButtons);
+      if (backButton) {
+        elements.push(backButton);
       }
     }
 
-    // Add tabbable elements inside light DOM
-    const _tabbableItems = this.querySelectorAll<HTMLElement>(selectorTabbable);
-    if (_tabbableItems) {
-      elements.push(_tabbableItems);
+    // Add tabbable elements from above-title slot (light DOM - breadcrumbs, etc.)
+    const aboveTitleSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="above-title"]'
+    );
+    if (aboveTitleSlot) {
+      const aboveTitleElements = aboveTitleSlot
+        .assignedElements({ flatten: true })
+        .flatMap((el) =>
+          Array.from(el.querySelectorAll<HTMLElement>(selectorTabbable))
+        );
+      elements.push(...aboveTitleElements);
     }
 
-    // Flatten NodeList arrays and filter for focusable items
-    const all = elements
-      ?.flatMap((nodeList) => Array.from(nodeList))
-      ?.filter((el): el is HTMLElement => typeof el?.focus === 'function');
+    // Add label text if present (shadow DOM)
+    const labelText = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__label-text`
+    );
+    if (labelText) {
+      elements.push(labelText);
+    }
+
+    // Add title if present (shadow DOM)
+    const titleText = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__title-text`
+    );
+    if (titleText) {
+      elements.push(titleText);
+    }
+
+    // Add slug elements if present (light DOM)
+    if (this._hasSlug) {
+      const slugElements = Array.from(
+        this.querySelectorAll<HTMLElement>(`${carbonPrefix}-slug`)
+      );
+      elements.push(...slugElements);
+    }
+
+    // Add close button if not hidden (shadow DOM)
+    if (!this.hideCloseButton) {
+      const closeButton = this.shadowRoot?.querySelector<HTMLElement>(
+        `.${blockClass}__close-button`
+      );
+      if (closeButton) {
+        elements.push(closeButton);
+      }
+    }
+
+    // Add subtitle if present (shadow DOM)
+    const subtitleText = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__subtitle-text`
+    );
+    if (subtitleText && !subtitleText.hidden) {
+      elements.push(subtitleText);
+    }
+
+    // Add tabbable elements from below-title slot (light DOM)
+    const belowTitleSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="below-title"]'
+    );
+    if (belowTitleSlot) {
+      const belowTitleElements = belowTitleSlot
+        .assignedElements({ flatten: true })
+        .flatMap((el) =>
+          Array.from(el.querySelectorAll<HTMLElement>(selectorTabbable))
+        );
+      elements.push(...belowTitleElements);
+    }
+
+    // Add action toolbar elements (light DOM)
+    const actionToolbarSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="action-toolbar"]'
+    );
+    if (actionToolbarSlot) {
+      const actionToolbarElements = actionToolbarSlot
+        .assignedElements({ flatten: true })
+        .filter(
+          (el): el is HTMLElement =>
+            el instanceof HTMLElement &&
+            typeof (el as HTMLElement).focus === 'function'
+        );
+      elements.push(...actionToolbarElements);
+    }
+
+    // Add body content tabbable elements (light DOM - default slot)
+    const defaultSlot =
+      this.shadowRoot?.querySelector<HTMLSlotElement>('slot:not([name])');
+    if (defaultSlot) {
+      const bodyElements = defaultSlot
+        .assignedElements({ flatten: true })
+        .flatMap((el) =>
+          Array.from(el.querySelectorAll<HTMLElement>(selectorTabbable))
+        );
+      elements.push(...bodyElements);
+    }
+
+    // Add action buttons (light DOM)
+    const actionsSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="actions"]'
+    );
+    if (actionsSlot) {
+      const actionElements = actionsSlot
+        .assignedElements({ flatten: true })
+        .filter(
+          (el): el is HTMLElement =>
+            el instanceof HTMLElement &&
+            typeof (el as HTMLElement).focus === 'function'
+        );
+      elements.push(...actionElements);
+    }
+
+    // Filter for focusable items
+    const all = elements.filter(
+      (el): el is HTMLElement => typeof el?.focus === 'function'
+    );
 
     return {
       first: all[0],
@@ -405,9 +504,21 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._hasActionToolbar = toolbarActions && toolbarActions.length > 0;
 
     if (this._hasActionToolbar) {
-      for (const toolbarAction of toolbarActions) {
+      for (let i = 0; i < toolbarActions.length; i++) {
+        const toolbarAction = toolbarActions[i];
         // toolbar actions size should always be sm
         toolbarAction.setAttribute('size', 'sm');
+
+        // Add leading button class to first button
+        if (i === 0) {
+          toolbarAction.classList.add(
+            `${blockClass}__action-toolbar-leading-button`
+          );
+        } else {
+          toolbarAction.classList.remove(
+            `${blockClass}__action-toolbar-leading-button`
+          );
+        }
       }
     }
   }
@@ -709,7 +820,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       class=${`${blockClass}__title`}
       ?no-label=${!!labelText}
     >
-      <h2 class=${title ? `${blockClass}__title-text` : ''}>${title}</h2>
+      <h2 class=${title ? `${blockClass}__title-text` : ''} tabindex="0">
+        ${title}
+      </h2>
       ${this._doAnimateTitle
         ? html`<h2
             class=${`${blockClass}__collapsed-title-text`}
@@ -755,7 +868,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
         <!-- render title label -->
         ${title?.length && labelText?.length
-          ? html` <p class=${`${blockClass}__label-text`}>${labelText}</p>`
+          ? html` <p class=${`${blockClass}__label-text`} tabindex="0">
+              ${labelText}
+            </p>`
           : ''}
 
         <!-- title -->
@@ -787,6 +902,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           ?no-title-animation=${!this._doAnimateTitle}
           ?no-action-toolbar=${!this._hasActionToolbar}
           ?no-title=${!title}
+          tabindex="0"
         >
           <slot
             name="subtitle"

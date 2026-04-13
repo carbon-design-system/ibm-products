@@ -11,7 +11,7 @@ on:
 jobs:
   deploy-latest-storybook:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 45
     permissions:
       contents: write
     steps:
@@ -20,19 +20,43 @@ jobs:
         with:
           fetch-depth: '0'
           ref: ${{ github.event.client_payload.branch }}
-      - name: Free disk space
-        uses: ./.github/actions/free-disk-space
+
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
+
+      # Add cache for node_modules to speed up dependency installation
+      - name: Cache node_modules
+        id: cache-deps
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-deploy-deps-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-deploy-deps-
+            ${{ runner.os }}-node-modules-
+
       - name: Install dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
-      - name: Build storybook
+
+      # Build all packages (needed for both storybooks)
+      - name: Build packages
+        run: yarn build:packages
+
+      # Build React Storybook (uses pre-built packages)
+      - name: Build React Storybook
+        run: yarn storybook:build
+
+      - name: Build Web Components Storybook
         run: |
-          yarn build
-          yarn storybook-wc:build
+          cd packages/ibm-products-web-components
+          yarn build:storybook --loglevel verbose
+
       # Set authenticated Git remote
       - name: Set authenticated Git remote
         run:

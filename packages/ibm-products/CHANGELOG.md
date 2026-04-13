@@ -1,3 +1,43 @@
+## `@carbon/ibm-products@2.87.1`
+### Bug fixes :bug:
+- fix(build): patch CJS default export interop for tsdown migration
+## `@carbon/ibm-products@2.87.0`
+### Features :rocket:
+- feat(createFullPage): implemented as patterns in react (#9096)
+
+### Bug fixes :bug:
+- fix: add prop type as dep
+- fix: build fixes and release CI optimisations
+- fix(SidePanel): visual issues - react (#9142)
+- fix: Coachmark design parity (#9155)
+- fix: move step flows to utilities (#9110)
+
+### Housekeeping :house:
+- chore(deps): update dependency glob to v13 (#9035)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+- chore: migrate to tsdown for react and wc (#9123)
+
+## `@carbon/ibm-products@2.86.0`
+### Features :rocket:
+- feat(preview_Tearsheet): add support for actions prop for footer (#9103)
+- feat(Tearsheet_preview): refactor portalTarget implementation in preview_Tearsheet (#9081)
+- feat: incorporate usePresence for preview_Tearsheet and doc updates (#9062)
+- feat: Composable Tearsheet webcomponent implementation (#8841)
+- feat: refactor pattern architecture (#9061)
+
+### Bug fixes :bug:
+- fix(editinplace): readonly prop as optional (#9105)
+- fix: make style specific to sidepanel in tearsheet (#9107)
+- fix(preview_PageHeader): resolve breadcrumb bar mobile view issues (#9072)
+- fix(useravatar): design parity (#9064)
+
+### Housekeeping :house:
+- chore: Remove Percy in favour of Chromatic for VRT (#9112)
+- chore: add chromatic set up ibm-products react and wc storybook (#9086)
+- chore(deps): update dependency @vitejs/plugin-react to v5 (#9027)
+- build(deps): update to Carbon 11 compatible versions to latest (#9063)
+- chore(OptionsTile): refactor header (#9021)
+
 ## `@carbon/ibm-products@2.85.0`
 ### Features :rocket:
 - feat: create tearsheet pattern using preview_Tearsheet (#8937)

@@ -1,3 +1,30 @@
+## `@carbon/ibm-products-styles@2.83.0`
+### Features :rocket:
+- feat(createFullPage): implemented as patterns in react (#9096)
+
+### Bug fixes :bug:
+- fix(SidePanel): visual issues - react (#9142)
+
+### Housekeeping :house:
+- chore(deps): update dependency glob to v13 (#9035)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+
+## `@carbon/ibm-products-styles@2.82.0`
+### Features :rocket:
+- feat(preview_Tearsheet): add support for actions prop for footer (#9103)
+- feat: incorporate usePresence for preview_Tearsheet and doc updates (#9062)
+- feat: Composable Tearsheet webcomponent implementation (#8841)
+
+### Bug fixes :bug:
+- fix: make style specific to sidepanel in tearsheet (#9107)
+- fix(preview_PageHeader): resolve breadcrumb bar mobile view issues (#9072)
+- fix(NotificationPanel): fix notification border when focused (#9066)
+- fix(SidePanel): fix action buttons stacking in size 2xl (#9074)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9063)
+- chore(OptionsTile): refactor header (#9021)
+
 ## `@carbon/ibm-products-styles@2.81.0`
 ### Features :rocket:
 - feat(editinplace): add readOnly prop (#9007)

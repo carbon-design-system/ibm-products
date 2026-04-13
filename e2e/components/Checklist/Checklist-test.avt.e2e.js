@@ -25,7 +25,9 @@ test.describe('Checklist @avt', () => {
     const viewButton = page.getByRole('button', { name: 'View all (10)' });
     const tooltipContent = await page.getByText('Toggle');
     const taskButtons = page.locator('[title="Task name"]');
-    //press tab to move focus to buttonELement
+    //press tab to move focus to truncated text title (now keyboard accessible)
+    await page.keyboard.press('Tab');
+    //press tab again to move focus to checklist toggle button
     await page.keyboard.press('Tab');
     await expect(buttonEle).toBeInViewport();
     await expect(buttonEle).toBeFocused();

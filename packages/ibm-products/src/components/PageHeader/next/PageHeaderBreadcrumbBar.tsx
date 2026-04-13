@@ -8,7 +8,11 @@ import React, { type ComponentType, type FunctionComponent } from 'react';
 import classnames from 'classnames';
 import { Column, Grid } from '@carbon/react';
 import { blockClass } from '../PageHeaderUtils';
-import { PageHeaderContext, usePageHeader } from './context';
+import {
+  PageHeaderContext,
+  usePageHeader,
+  type PageHeaderObserverState,
+} from './context';
 
 /**
  * -----------------------
@@ -27,17 +31,23 @@ export interface PageHeaderBreadcrumbBarProps {
    */
   renderIcon?: ComponentType | FunctionComponent;
   /**
-   * The PageHeaderBreadcrumbBar's content actions
+   * The PageHeaderBreadcrumbBar's content actions.
+   * Can be a ReactNode or a function that receives observer state.
    */
-  contentActions?: React.ReactNode;
+  contentActions?:
+    | React.ReactNode
+    | ((state: PageHeaderObserverState) => React.ReactNode);
   /**
    * `true` to set content actions flush against page actions
    */
   contentActionsFlush?: boolean;
   /**
-   * The PageHeaderContent's page actions
+   * The PageHeaderContent's page actions.
+   * Can be a ReactNode or a function that receives observer state.
    */
-  pageActions?: React.ReactNode;
+  pageActions?:
+    | React.ReactNode
+    | ((state: PageHeaderObserverState) => React.ReactNode);
   /**
    * `true` to set page actions flush with page
    */
@@ -62,7 +72,7 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
   ref
 ) {
   const context = usePageHeader();
-  const { pageActionsInstance: globalActions, contentActionsClipped } = context;
+  const { pageActionsInstance: globalActions, observerState } = context;
   const classNames = classnames(
     {
       [`${blockClass}__breadcrumb-bar`]: true,
@@ -72,19 +82,35 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
     className
   );
 
+  // Resolve content actions - support both ReactNode and function
+  const resolvedContentActions =
+    typeof contentActions === 'function'
+      ? contentActions(observerState)
+      : contentActions;
+
+  // Check if user provided a functional contentActions
+  const isFunctionalContentActions = typeof contentActions === 'function';
+
   const contentActionsClasses = classnames({
     [`${blockClass}__breadcrumb__content-actions`]: !contentActionsFlush,
     [`${blockClass}__breadcrumb__content-actions-with-global-actions`]:
       !!globalActions,
     [`${blockClass}__breadcrumb__content-actions-with-global-actions--show`]:
-      contentActionsClipped,
+      observerState.contentActionsClipped || isFunctionalContentActions,
   });
+
+  // Resolve page actions - support both ReactNode and function
+  const resolvedPageActions =
+    typeof pageActions === 'function'
+      ? pageActions(observerState)
+      : pageActions;
 
   return (
     <PageHeaderContext.Provider
       value={{
         ...context,
         isContentActionsInBreadcrumbBar: true,
+        isFunctionalContentActions,
       }}
     >
       <div className={classNames} ref={ref} {...other}>
@@ -100,8 +126,10 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
                 {children}
               </div>
               <div className={`${blockClass}__breadcrumb__actions`}>
-                <div className={contentActionsClasses}>{contentActions}</div>
-                {pageActions}
+                <div className={contentActionsClasses}>
+                  {resolvedContentActions}
+                </div>
+                {resolvedPageActions}
               </div>
             </div>
           </Column>

@@ -1,3 +1,16 @@
+## `@carbon/ibm-products-web-components@0.36.0`
+### Bug fixes :bug:
+- fix(about-modal): Parity work (#9088)
+- fix(side-panel): Parity work (#9136)
+- fix: Coachmark design parity (#9155)
+- fix: move step flows to utilities (#9110)
+
+### Housekeeping :house:
+- chore: update node to 24 (#9114)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+- chore: migrate to tsdown for react and wc (#9123)
+- chore(deps): update dependency @mordech/vite-lit-loader to ^0.38.0 (#9130)
+
 ## `@carbon/ibm-products-web-components@0.35.0`
 ### Features :rocket:
 - feat: Composable Tearsheet webcomponent implementation (#8841)

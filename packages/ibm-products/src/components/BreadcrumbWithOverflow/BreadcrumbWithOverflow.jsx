@@ -262,18 +262,20 @@ export let BreadcrumbWithOverflow = ({
         // if not enough space for all breadcrumb items
         if (willFit < breadcrumbWidthsIncludingMargin.length - 1) {
           // -1 for overflow item
+          // Only reserve space for overflow if we actually need it
+          if (spaceAvailable < overflowWidth) {
+            while (willFit > 0 && spaceAvailable < overflowWidth) {
+              willFit -= 1;
 
-          while (willFit > 0 && spaceAvailable < overflowWidth) {
-            willFit -= 1;
+              // Highly unlikely any useful breadcrumb-item is smaller than the overflow menu, but we loop anyway just in case
 
-            // Highly unlikely any useful breadcrumb-item is smaller than the overflow menu, but we loop anyway just in case
-
-            // item removed is based on last item added which is the current value of willFit
-            const itemToRemove = displayItemIndex(
-              breadcrumbWidthsIncludingMargin.length,
-              willFit
-            );
-            spaceAvailable += breadcrumbWidthsIncludingMargin[itemToRemove];
+              // item removed is based on last item added which is the current value of willFit
+              const itemToRemove = displayItemIndex(
+                breadcrumbWidthsIncludingMargin.length,
+                willFit
+              );
+              spaceAvailable += breadcrumbWidthsIncludingMargin[itemToRemove];
+            }
           }
         }
       }

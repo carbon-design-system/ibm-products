@@ -138,7 +138,7 @@
     "react-is": "^19.0.0",
     "semver": "7.7.4",
     "ws": "^8.17.1",
-    "@babel/runtime": "7.28.6",
+    "@babel/runtime": "7.29.2",
     "brace-expansion@^1.1.7": "1.1.13",
     "brace-expansion@^2.0.1": "2.0.3",
     "brace-expansion@^3.0.0": "3.0.2",

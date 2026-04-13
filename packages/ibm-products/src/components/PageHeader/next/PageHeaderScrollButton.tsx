@@ -32,7 +32,8 @@ export const PageHeaderScrollButton = React.forwardRef<
   }: PageHeaderScrollButtonProps,
   ref
 ) {
-  const { refs, fullyCollapsed } = usePageHeader();
+  const { refs, observerState } = usePageHeader();
+  const fullyCollapsed = observerState.fullyCollapsed;
 
   const handleScroller = (isFullyCollapsed: boolean) => {
     if (!refs?.contentRef?.current) {

@@ -9,6 +9,7 @@ commitlint
 docgen
 dotlottie
 dsag
+exportparts
 flatpickr
 exportparts
 ibmproducts
@@ -30,3 +31,4 @@ technote
 unhover
 wcag
 unbundle
+

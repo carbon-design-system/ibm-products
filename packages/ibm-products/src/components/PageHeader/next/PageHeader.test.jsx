@@ -189,7 +189,7 @@ describe('PageHeader', () => {
         `${carbonPrefix}--breadcrumb-item`
       );
 
-      expect(breadcrumbs.length).toBe(4);
+      expect(breadcrumbs.length).toBe(5);
     });
 
     it('should render content actions', () => {
@@ -949,6 +949,7 @@ describe('PageHeader', () => {
       window.IntersectionObserver = jest.fn().mockImplementation(() => ({
         observe: () => null,
         unobserve: () => null,
+        disconnect: () => null,
       }));
     });
     it('should render a tab bar with scroller button and tags', () => {

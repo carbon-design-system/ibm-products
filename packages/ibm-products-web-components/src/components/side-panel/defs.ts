@@ -32,6 +32,11 @@ export enum SIDE_PANEL_SIZE {
   LARGE = 'lg',
 
   /**
+   * Extra Large size.
+   */
+  EXTRA_LARGE = 'xl',
+
+  /**
    * 2X-Large size.
    */
   EXTRA_EXTRA_LARGE = '2xl',

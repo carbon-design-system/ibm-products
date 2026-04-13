@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@carbon/icons": "^11.70.0",
-    "@carbon/ibm-products-web-components": "^0.34.0",
+    "@carbon/ibm-products-web-components": "latest",
     "@carbon/styles": "1.98.0",
     "@carbon/web-components": "2.49.0",
     "@carbon/ibm-products-styles": "2.81.0",

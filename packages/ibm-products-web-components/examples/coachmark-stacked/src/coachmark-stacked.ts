@@ -110,9 +110,6 @@ export class CoachmarkStackedExample extends LitElement {
   @state()
   private _parentHeight: number = 0;
 
-  @query('.parent-coachmark')
-  private _parentCoachmark?: HTMLElement;
-
   private carouselAPIs: Map<number, InitCarousel> = new Map();
   private parentButtonRefs: Map<number, HTMLElement> = new Map();
   private lastOpenChildId: number = 0;
@@ -144,15 +141,32 @@ export class CoachmarkStackedExample extends LitElement {
 
   private handleParentClose() {
     this._parentOpen = false;
-    // Return focus to tagline
-    setTimeout(() => {
-      const tagline = this.shadowRoot?.querySelector('c4p-coachmark-tagline') as HTMLElement;
-      tagline?.focus();
-    }, 100);
+    
+    // Focus tagline button after parent closes
+    this.updateComplete.then(() => {
+      const tagline = this.shadowRoot?.querySelector('#CoachmarkTagline') as any;
+      
+      if (tagline && tagline.updateComplete) {
+        tagline.updateComplete.then(() => {
+          // Wait for CSS transition to complete
+          setTimeout(() => {
+            const taglineButton = tagline.shadowRoot?.querySelector('.c4p--coachmark-tagline__cta') as HTMLElement;
+            taglineButton?.focus();
+          }, 100);
+        });
+      }
+    });
   }
 
   private handleTaglineClick() {
-    this._parentOpen = !this._parentOpen;
+    const nextParentOpen = !this._parentOpen;
+    this._parentOpen = nextParentOpen;
+
+    if (nextParentOpen) {
+      requestAnimationFrame(() => {
+        (this.shadowRoot?.querySelector('#parent-button-1') as HTMLElement)?.focus();
+      });
+    }
   }
 
   private handleChildButtonClick(id: number, event: Event) {
@@ -175,6 +189,7 @@ export class CoachmarkStackedExample extends LitElement {
     const carousel = this.carouselAPIs.get(childId);
     if (carousel) {
       carousel.reset();
+      this.carouselAPIs.delete(childId);
     }
 
     // Close the child first
@@ -246,10 +261,10 @@ export class CoachmarkStackedExample extends LitElement {
   }
 
   firstUpdated() {
-    // Capture parent height on first render
-    setTimeout(() => {
-      this.captureParentHeight();
-    }, 200);
+    this.captureParentHeight();
+    requestAnimationFrame(() => {
+      (this.shadowRoot?.querySelector('#parent-button-1') as HTMLElement)?.focus();
+    });
   }
 
   private captureParentHeight() {
@@ -280,119 +295,107 @@ export class CoachmarkStackedExample extends LitElement {
 
     const popover = parentCoachmark.shadowRoot?.querySelector('cds-popover');
     const popoverContent = popover?.querySelector('cds-popover-content');
-    const parentContentPart = popoverContent?.shadowRoot?.querySelector('[part="content"]');
-    
-    // Get the wrapper element using parent class - this gets the correct wrapper
-    const parentWrapperContainer = this.shadowRoot?.querySelector('.parent-coachmark');
-    const parentWrapper = parentWrapperContainer?.querySelector('c4p-coachmark')?.shadowRoot?.querySelector('.c4p--coachmark--wrapper');
+    const parentWrapper = this.shadowRoot?.querySelector('.parent-coachmark c4p-coachmark')?.shadowRoot?.querySelector('.c4p--coachmark--wrapper') as HTMLElement;
 
-    // Capture parent height if not set
     if (this._parentHeight === 0 && parentWrapper) {
-      const height = (parentWrapper as HTMLElement).clientHeight;
+      const height = parentWrapper.clientHeight;
       if (height > 0) this._parentHeight = height;
     }
 
     if (!popoverContent || !parentWrapper) return;
 
-    if (this._openChildId > 0) {
-      // Child opening - keep parent open
-      this._parentOpen = true;
-      
-      this.updateComplete.then(() => {
-        // First, position the child content immediately
-        const childCoachmark = this.shadowRoot?.querySelector(`#child-${this._openChildId}`) as any;
-        const childContentPart = childCoachmark?.shadowRoot
-          ?.querySelector('cds-popover')
-          ?.querySelector('cds-popover-content')
-          ?.shadowRoot?.querySelector('[part="content"]');
-        
-        if (childContentPart) {
-          // Position child content to align with parent (must be done first)
-          (childContentPart as HTMLElement).style.insetInlineStart = '0px';
-        }
-        
-        // Wait for carousel to initialize before measuring height
-        setTimeout(() => {
-          if (childContentPart && parentWrapper) {
-            // Use wrapper height after carousel has initialized with useMaxHeight
-            const childWrapper = childCoachmark?.shadowRoot?.querySelector('.c4p--coachmark--wrapper') as HTMLElement;
-            const childHeight = childWrapper ? childWrapper.clientHeight : (childContentPart as HTMLElement).clientHeight;
-            
-            console.log(`[Example ${this._openChildId}] Child height measured:`, childHeight);
-            const targetHeight = childHeight + 34;
-            console.log(`[Example ${this._openChildId}] Setting parent height to: ${targetHeight}px`);
-            
-            // Set height on the wrapper element (not content part) with !important
-            (parentWrapper as HTMLElement).style.setProperty('height', `${targetHeight}px`, 'important');
-            
-            // Force parent to stay open
-            parentCoachmark.open = true;
-            
-            // Wait for height to be applied, then apply animations (matching React's setTimeout(0) approach)
-            setTimeout(() => {
-              const actualParentHeight = (parentWrapper as HTMLElement).clientHeight;
-              
-              // Apply animations to wrapper element AFTER height is confirmed
-              requestAnimationFrame(() => {
-                // Apply opacity to shadow DOM elements
-                (parentWrapper as HTMLElement).style.setProperty('opacity', '0.8', 'important');
-                
-                // Apply transform and opacity to popoverContent (not popover, to avoid scaling the trigger/tagline)
-                (popoverContent as HTMLElement).style.setProperty('opacity', '0.8', 'important');
-                (popoverContent as HTMLElement).style.setProperty('transform', 'scale(0.9)', 'important');
-                (popoverContent as HTMLElement).style.setProperty('transform-origin', 'top center', 'important');
-                (popoverContent as HTMLElement).style.setProperty('transition', 'transform 240ms cubic-bezier(0.2, 0, 0.38, 0.9), opacity 240ms cubic-bezier(0.2, 0, 0.38, 0.9)', 'important');
-                (popoverContent as HTMLElement).style.pointerEvents = 'none';
-              });
-            }, 0);
-          }
-        }, 150);
-      });
+    if (this._openChildId > 0 && this._parentOpen !== false) {
+      this.scaleParentForChild(parentCoachmark, parentWrapper, popoverContent);
     } else {
-      // Child closing - restore parent
-      requestAnimationFrame(() => {
-        if (parentWrapper) {
-          (parentWrapper as HTMLElement).style.height = `${this._parentHeight}px`;
-          
-          // Restore opacity on shadow DOM elements
-          (parentWrapper as HTMLElement).style.setProperty('opacity', '1', 'important');
-          
-          // Restore transform and opacity on popoverContent only
-          (popoverContent as HTMLElement).style.setProperty('opacity', '1', 'important');
-          (popoverContent as HTMLElement).style.setProperty('transform', 'scale(1)', 'important');
-          (popoverContent as HTMLElement).style.setProperty('transition', 'opacity 240ms cubic-bezier(0, 0, 0.38, 0.9), transform 240ms cubic-bezier(0, 0, 0.38, 0.9)', 'important');
-        }
-        
-        (popoverContent as HTMLElement).style.pointerEvents = 'auto';
-      });
+      this.restoreParentScale(parentWrapper, popoverContent);
     }
+  }
+
+  private scaleParentForChild(parentCoachmark: any, parentWrapper: HTMLElement, popoverContent: HTMLElement) {
+    this._parentOpen = true;
+    
+    this.updateComplete.then(() => {
+      const childCoachmark = this.shadowRoot?.querySelector(`#child-${this._openChildId}`) as any;
+      const childContentPart = childCoachmark?.shadowRoot
+        ?.querySelector('cds-popover cds-popover-content')
+        ?.shadowRoot?.querySelector('[part="content"]') as HTMLElement;
+      
+      if (childContentPart) {
+        childContentPart.style.insetInlineStart = '0px';
+      }
+      
+      setTimeout(() => {
+        if (childContentPart && parentWrapper) {
+          const childWrapper = childCoachmark?.shadowRoot?.querySelector('.c4p--coachmark--wrapper') as HTMLElement;
+          const childHeight = childWrapper?.clientHeight || childContentPart.clientHeight;
+          
+          parentWrapper.style.setProperty('height', `${childHeight + 16}px`);
+          parentCoachmark.open = true;
+          
+          setTimeout(() => {
+            requestAnimationFrame(() => {
+              this.applyScaleAnimation(popoverContent, false);
+            });
+          }, 0);
+        }
+      }, 150);
+    });
+  }
+
+  private restoreParentScale(parentWrapper: HTMLElement, popoverContent: HTMLElement) {
+    this.updateComplete.then(() => {
+      requestAnimationFrame(() => {
+        parentWrapper.style.setProperty('height', `${this._parentHeight}px`);
+        this.applyScaleAnimation(popoverContent, true);
+      });
+    });
+  }
+
+  private applyScaleAnimation(element: HTMLElement, restore: boolean) {
+    const transition = 'transform 240ms cubic-bezier(0.2, 0, 0.38, 0.9), opacity 240ms cubic-bezier(0.2, 0, 0.38, 0.9)';
+    
+    element.style.setProperty('opacity', restore ? '1' : '0.8');
+    element.style.setProperty('transform', restore ? 'scale(1)' : 'scaleX(0.9)');
+    element.style.setProperty('transform-origin', 'top center');
+    element.style.setProperty('transition', transition);
+    element.style.pointerEvents = restore ? 'auto' : 'none';
   }
 
   private initializeChildCarousel() {
     if (this._openChildId <= 0) return;
 
     const nestedItem = nestedItems.find((item) => item.id === this._openChildId);
-    if (nestedItem?.type === 'carousel') {
-      setTimeout(() => {
-        const carouselContainer = this.shadowRoot?.querySelector(`#child-${this._openChildId} .exampleCarouselWrapper`) as HTMLElement;
-        if (carouselContainer && !this.carouselAPIs.has(this._openChildId)) {
-          const carousel = initCarousel(carouselContainer, {
-            onViewChangeEnd: this.onViewChangeEnd(this._openChildId),
-            useMaxHeight: true,
-          });
-          this.carouselAPIs.set(this._openChildId, carousel);
+    const buttonSelector = nestedItem?.type === 'carousel' ? '.next-btn' : '.done-btn';
+
+    setTimeout(() => {
+      if (nestedItem?.type === 'carousel') {
+        const carouselContainer = this.shadowRoot?.querySelector(
+          `#child-${this._openChildId} .exampleCarouselWrapper`
+        ) as HTMLElement;
+
+        if (carouselContainer) {
+          let carousel = this.carouselAPIs.get(this._openChildId);
+          if (!carousel) {
+            carousel = initCarousel(carouselContainer, {
+              onViewChangeEnd: this.onViewChangeEnd(this._openChildId),
+              useMaxHeight: true,
+            });
+            this.carouselAPIs.set(this._openChildId, carousel);
+          } else {
+            carousel.reset();
+          }
           
-          setTimeout(() => {
+          this.updateComplete.then(() => {
             this.updateAriaHiddenTabIndex(this._openChildId, 0);
-            (this.shadowRoot?.querySelector(`#child-${this._openChildId} .next-btn`) as HTMLElement)?.focus();
-          }, 50);
+            requestAnimationFrame(() => {
+              (this.shadowRoot?.querySelector(`#child-${this._openChildId} ${buttonSelector}`) as HTMLElement)?.focus();
+            });
+          });
         }
-      }, 100);
-    } else {
-      setTimeout(() => {
-        (this.shadowRoot?.querySelector(`#child-${this._openChildId} .done-btn`) as HTMLElement)?.focus();
-      }, 100);
-    }
+      } else {
+        (this.shadowRoot?.querySelector(`#child-${this._openChildId} ${buttonSelector}`) as HTMLElement)?.focus();
+      }
+    }, 100);
   }
 
   render() {
@@ -404,6 +407,7 @@ export class CoachmarkStackedExample extends LitElement {
           align=${POPOVER_ALIGNMENT.TOP}
           .highContrast=${true}
           .caret=${false}
+          @c4p-coachmark-request-close=${this.handleParentClose}
         >
           <c4p-coachmark-tagline
             id="CoachmarkTagline"
@@ -464,6 +468,10 @@ export class CoachmarkStackedExample extends LitElement {
             align=${POPOVER_ALIGNMENT.TOP}
             .highContrast=${true}
             .caret=${false}
+            @c4p-coachmark-request-close=${(e: Event) => {
+              e.stopPropagation();
+              this.handleChildClose(e);
+            }}
           >
             <!-- Use the button as the trigger -->
             <cds-button

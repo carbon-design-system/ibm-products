@@ -30,6 +30,9 @@ export const blockClass = `${prefix}--coachmark`;
  * @fires c4p-coachmark-opened
  *   The custom event fired when the coachmark is opened.
  *   This event can be used to perform actions such as focusing elements when the coachmark becomes visible.
+ * @fires c4p-coachmark-closed
+ *   The custom event fired when the coachmark is closed.
+ *   This event can be used to perform actions such as restoring focus when the coachmark is dismissed.
  */
 @customElement(`${prefix}-coachmark`)
 class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
@@ -166,6 +169,13 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
             init
           )
         );
+      } else {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSCoachmark).eventClose,
+            init
+          )
+        );
       }
     }
   }
@@ -214,6 +224,13 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
    */
   static get eventOpen() {
     return `${prefix}-coachmark-opened`;
+  }
+
+  /**
+   * The name of the custom event fired when this coachmark is closed.
+   */
+  static get eventClose() {
+    return `${prefix}-coachmark-closed`;
   }
 
   static styles = styles;

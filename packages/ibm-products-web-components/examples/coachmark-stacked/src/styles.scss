@@ -18,9 +18,14 @@
 @include carousel.carousel();
 @include carousel.wrapperStyles();
 
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+$stack-home-class: 'coachmark-stacked-home';
+$stacked-coachmark: 'stacked-coachmark';
+
 /* Parent coachmark positioning */
 /* stylelint-disable-next-line selector-type-no-unknown */
-.parent-coachmark c4p-coachmark::part(popover) {
+.parent-coachmark #{$prefix}-coachmark::part(popover) {
   inset-block-end: 0;
   inset-inline-end: 160px;
 }
@@ -33,17 +38,17 @@
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark::part(popover-container) {
+#{$prefix}-coachmark::part(popover-container) {
   position: absolute;
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark::part(content) {
+#{$prefix}-coachmark::part(content) {
   inset-block-start: 0px;
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark-body {
+#{$prefix}-coachmark-body {
   display: flex;
   flex-direction: column;
   inline-size: 256px;
@@ -60,7 +65,7 @@ c4p-coachmark-body {
     margin: 0 0 $spacing-03;
   }
   /* stylelint-disable-next-line selector-type-no-unknown */
-  cds-button {
+  #{$carbon-prefix}-button {
     align-self: flex-end;
     justify-content: flex-end;
   }
@@ -72,7 +77,7 @@ c4p-coachmark-body {
 
   .coachmark-stacked-home__nav-links
   
-    cds-button button
+    #{$carbon-prefix}-button button
     {
       padding-inline : 0px;
     }
@@ -95,28 +100,24 @@ c4p-coachmark-body {
   margin-inline-end: auto;
   @include type.type-style('helper-text-01');
 
-$prefix: 'c4p';
-$stack-home-class: 'coachmark-stacked-home';
-$stacked-coachmark: 'stacked-coachmark';
-
-
-/* Parent coachmark scaling animations */
-.coachmark-stacked-home--scaled-home {
+.coachmark-stacked-home--scaled-content,
+.coachmark-stacked-home--scaled-content::part(popover-container) {
   opacity: 0.8 !important;
   transform: scale(0.9) !important;
   transform-origin: top center !important;
-  transition: transform $duration-moderate-02 motion(exit, productive), opacity $duration-moderate-02 motion(exit, productive) !important;
+  transition: transform $duration-moderate-02 motion(exit, productive),
+    opacity $duration-moderate-02 motion(exit, productive) !important;
+  pointer-events: none !important;
 }
 
-.coachmark-stacked-home--unscaled-home {
-  transform: none !important;
+.coachmark-stacked-home--unscaled-content,
+.coachmark-stacked-home--unscaled-content::part(popover-container) {
   opacity: 1 !important;
-  transition: transform $duration-moderate-02 motion(entrance, productive), opacity $duration-moderate-02 motion(entrance, productive) !important;
 }
 
 /* Update coachmark body width */
 /* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark-body {
+#{$prefix}-coachmark-body {
   inline-size: 18rem;
 }
 
@@ -148,13 +149,6 @@ c4p-coachmark-body {
   &-element {
     margin-block-end: $spacing-03;
   }
-
-  // &__nav-links {
-  //   /* stylelint-disable-next-line selector-type-no-unknown */
-  //   cds-button.nav-button::part(button) {
-  //     background-color: yellow !important;
-  //   }
-  // }
 
   &__title {
     @include type.type-style('productive-heading-02');

@@ -1,3 +1,6 @@
+## `@carbon/ibm-products@2.87.1`
+### Bug fixes :bug:
+- fix(build): patch CJS default export interop for tsdown migration
 ## `@carbon/ibm-products@2.87.0`
 ### Features :rocket:
 - feat(createFullPage): implemented as patterns in react (#9096)

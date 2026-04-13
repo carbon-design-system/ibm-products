@@ -1,0 +1,2 @@
+import{r as o,j as i,P as e,g as d}from"./iframe-B4rJbuYi.js";const s=o.forwardRef((a,n)=>{const{element:p,as:r,isSideNavExpanded:l,...t}=a;return i.jsx(r??p??"a",{ref:n,...t})}),m={as:e.elementType,element:d(e.elementType,"The `element` prop for `Link` has been deprecated. Please use `as` instead. This will be removed in the next major release."),isSideNavExpanded:e.bool};s.displayName="Link";s.propTypes=m;export{s as L,m as a};
+//# sourceMappingURL=Link-BgJ1bUvx.js.map

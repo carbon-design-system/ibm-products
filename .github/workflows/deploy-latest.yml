@@ -9,12 +9,13 @@ on:
     types: [deploy-latest-storybook]
 
 jobs:
-  build-and-deploy-react:
+  deploy-latest-storybook:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     permissions:
       contents: write
     steps:
+      # Checkout release branch to build storybook
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: '0'
@@ -26,6 +27,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
+      # Add cache for node_modules to speed up dependency installation
       - name: Cache node_modules
         id: cache-deps
         uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
@@ -42,88 +44,38 @@ jobs:
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
+      # Build all packages (needed for both storybooks)
       - name: Build packages
         run: yarn build:packages
 
+      # Build React Storybook (uses pre-built packages)
       - name: Build React Storybook
         run: yarn storybook:build
-
-      - name: Set authenticated Git remote
-        run:
-          git remote set-url origin https://git:${{
-          secrets.GITHUB_TOKEN}}@github.com/${{ github.repository }}.git
-
-      - name: Prepare React latest directory
-        run: |
-          mkdir -p latest-dist/react
-          cp -r packages/ibm-products/storybook-static/* latest-dist/react
-
-      - name: Deploy React Storybook to gh-pages/latest
-        run: |
-          npx gh-pages -d latest-dist \
-            -u "github-actions-bot <support+actions@github.com>" \
-            --dest latest \
-            --message "chore(deploy): deploy React Storybook to latest"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  build-and-deploy-web-components:
-    needs: build-and-deploy-react
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          fetch-depth: '0'
-          ref: ${{ github.event.client_payload.branch }}
-
-      - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-
-      - name: Cache node_modules
-        id: cache-deps
-        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-deploy-deps-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-deploy-deps-
-            ${{ runner.os }}-node-modules-
-
-      - name: Install dependencies
-        if: steps.cache-deps.outputs.cache-hit != 'true'
-        run: yarn install --immutable
-
-      - name: Build packages
-        run: yarn build:packages
 
       - name: Build Web Components Storybook
         run: |
           cd packages/ibm-products-web-components
           yarn build:storybook --loglevel verbose
 
+      # Set authenticated Git remote
       - name: Set authenticated Git remote
         run:
           git remote set-url origin https://git:${{
           secrets.GITHUB_TOKEN}}@github.com/${{ github.repository }}.git
-
-      - name: Prepare Web Components latest directory
+      # Deploy to staging Github Pages using `gh-pages` package
+      - name: Prepare latest directory
         run: |
+          mkdir -p latest-dist/react
+          cp -r packages/ibm-products/storybook-static/* latest-dist/react
+
           mkdir -p latest-dist/web-components
           cp -r packages/ibm-products-web-components/storybook-static/* latest-dist/web-components
 
-      - name: Deploy Web Components Storybook to gh-pages/latest
+      - name: Deploy latest Storybooks to gh-pages/latest
         run: |
           npx gh-pages -d latest-dist \
             -u "github-actions-bot <support+actions@github.com>" \
             --dest latest \
-            --message "chore(deploy): deploy Web Components Storybook to latest"
+            --message "chore(deploy): deploy React and Web Components Storybooks to latest"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

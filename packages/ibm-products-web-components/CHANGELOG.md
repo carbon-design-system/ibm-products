@@ -1,3 +1,15 @@
+## `@carbon/ibm-products-web-components@0.37.0-rc.0`
+### Features :rocket:
+- feat(CoachmarkOverlayElements): implemented as patterns  (#8848)
+- feat(coachmarkFixed): implemented as patterns (#8879)
+- feat: create action-set utility for webcomponents (#9154)
+
+### Bug fixes :bug:
+- fix(interstitialScreen): parity issues and small screens ui of action buttons (#9032)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.87.0-rc.0 (#9187)
+
 ## `@carbon/ibm-products-web-components@0.36.0`
 ### Bug fixes :bug:
 - fix(about-modal): Parity work (#9088)

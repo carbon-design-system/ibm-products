@@ -83,11 +83,11 @@ The list component that contains selectable items.
 
 **Slots:**
 
-- `default` - Contains c4p-add-select-item components
+- `default` - Contains c4p-add-select-row components
 
 ---
 
-### c4p-add-select-item
+### c4p-add-select-row
 
 A single selectable item component.
 
@@ -105,7 +105,7 @@ A single selectable item component.
 
 **Events:**
 
-- `c4p-add-select-item-select` - Fired when item is selected/deselected
+- `c4p-add-select-row-select` - Fired when item is selected/deselected
 
 **Slots:**
 
@@ -129,18 +129,18 @@ A single selectable item component.
 >
   <c4p-add-select-body>
     <c4p-add-select-list multi>
-      <c4p-add-select-item
+      <c4p-add-select-row
         item-id="item-1"
         title="Item 1"
         subtitle="Description for item 1"
         value="item-1"
-      ></c4p-add-select-item>
-      <c4p-add-select-item
+      ></c4p-add-select-row>
+      <c4p-add-select-row
         item-id="item-2"
         title="Item 2"
         subtitle="Description for item 2"
         value="item-2"
-      ></c4p-add-select-item>
+      ></c4p-add-select-row>
     </c4p-add-select-list>
   </c4p-add-select-body>
 </c4p-add-select>
@@ -154,7 +154,7 @@ These components are designed to work together in a hierarchical structure:
 c4p-add-select (wrapper)
   └── c4p-add-select-body (container)
       └── c4p-add-select-list (list container)
-          └── c4p-add-select-item (individual items)
+          └── c4p-add-select-row (individual items)
 ```
 
 Each component handles its own state and communicates with parent components

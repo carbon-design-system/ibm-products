@@ -19,7 +19,7 @@ const blockClass = `${prefix}--add-select-list`;
 /**
  * Add Select List component - contains the list of selectable items
  * @element c4p-add-select-list
- * @slot default - Contains c4p-add-select-item components
+ * @slot default - Contains c4p-add-select-row components
  */
 @customElement(`${prefix}-add-select-list`)
 class CDSAddSelectList extends LitElement {
@@ -45,7 +45,7 @@ class CDSAddSelectList extends LitElement {
 
     const assignedElements = slot.assignedElements({ flatten: true });
     return assignedElements.filter(
-      (el) => el.tagName.toLowerCase() === `${prefix}-add-select-item`
+      (el) => el.tagName.toLowerCase() === `${prefix}-add-select-row`
     ) as HTMLElement[];
   }
 
@@ -101,18 +101,15 @@ class CDSAddSelectList extends LitElement {
         if (currentItem && currentItem.hasAttribute('has-children')) {
           event.preventDefault();
           // Trigger the item's navigate event
-          const navigateEvent = new CustomEvent(
-            'c4p-add-select-item-navigate',
-            {
-              bubbles: true,
-              composed: true,
-              detail: {
-                itemId: currentItem.getAttribute('item-id'),
-                title: currentItem.getAttribute('title'),
-                parentId: currentItem.getAttribute('parent-id') || '',
-              },
-            }
-          );
+          const navigateEvent = new CustomEvent('c4p-add-select-row-navigate', {
+            bubbles: true,
+            composed: true,
+            detail: {
+              itemId: currentItem.getAttribute('item-id'),
+              title: currentItem.getAttribute('title'),
+              parentId: currentItem.getAttribute('parent-id') || '',
+            },
+          });
           currentItem.dispatchEvent(navigateEvent);
           handled = true;
         }
@@ -134,7 +131,7 @@ class CDSAddSelectList extends LitElement {
           }
 
           // Dispatch selection event
-          const selectEvent = new CustomEvent('c4p-add-select-item-select', {
+          const selectEvent = new CustomEvent('c4p-add-select-row-select', {
             bubbles: true,
             composed: true,
             detail: {

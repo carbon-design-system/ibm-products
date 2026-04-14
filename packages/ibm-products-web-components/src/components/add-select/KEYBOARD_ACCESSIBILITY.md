@@ -81,17 +81,17 @@ The `add-select-list` component manages focus automatically:
 ```typescript
 // The list automatically manages keyboard navigation
 <c4p-add-select-list ?multi=${false}>
-  <c4p-add-select-item
+  <c4p-add-select-row
     item-id="1"
     title="Item 1"
     value="item-1"
-  ></c4p-add-select-item>
-  <c4p-add-select-item
+  ></c4p-add-select-row>
+  <c4p-add-select-row
     item-id="2"
     title="Item 2"
     value="item-2"
     ?has-children=${true}
-  ></c4p-add-select-item>
+  ></c4p-add-select-row>
 </c4p-add-select-list>
 ```
 

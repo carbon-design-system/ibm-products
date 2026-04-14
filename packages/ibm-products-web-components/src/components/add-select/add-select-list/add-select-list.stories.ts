@@ -9,7 +9,7 @@
 
 import { html } from 'lit';
 import './add-select-list';
-import '../add-select-item/add-select-item';
+import '../add-select-row/add-select-row';
 import { prefix } from '../../../globals/settings';
 
 const sampleItems = [
@@ -60,14 +60,14 @@ export const Default = {
       <c4p-add-select-list ?multi=${args.multi}>
         ${sampleItems.map(
           (item) => html`
-            <c4p-add-select-item
+            <c4p-add-select-row
               ?multi=${args.multi}
               item-id=${item.id}
               title=${item.title}
               subtitle=${item.subtitle}
               value=${item.value}
             >
-            </c4p-add-select-item>
+            </c4p-add-select-row>
           `
         )}
       </c4p-add-select-list>
@@ -101,7 +101,7 @@ export const WithSelectedItems = {
       <c4p-add-select-list ?multi=${args.multi}>
         ${sampleItems.map(
           (item, index) => html`
-            <c4p-add-select-item
+            <c4p-add-select-row
               ?multi=${args.multi}
               item-id=${item.id}
               title=${item.title}
@@ -109,7 +109,7 @@ export const WithSelectedItems = {
               value=${item.value}
               ?selected=${index < 2}
             >
-            </c4p-add-select-item>
+            </c4p-add-select-row>
           `
         )}
       </c4p-add-select-list>
@@ -158,7 +158,7 @@ export const WithHierarchicalItems = {
       <c4p-add-select-list ?multi=${args.multi}>
         ${hierarchicalItems.map(
           (item) => html`
-            <c4p-add-select-item
+            <c4p-add-select-row
               ?multi=${args.multi}
               item-id=${item.id}
               title=${item.title}
@@ -166,7 +166,7 @@ export const WithHierarchicalItems = {
               value=${item.value}
               ?has-children=${item.hasChildren}
             >
-            </c4p-add-select-item>
+            </c4p-add-select-row>
           `
         )}
       </c4p-add-select-list>
@@ -191,14 +191,14 @@ export const LargeList = {
       <c4p-add-select-list ?multi=${args.multi}>
         ${largeItemList.map(
           (item) => html`
-            <c4p-add-select-item
+            <c4p-add-select-row
               ?multi=${args.multi}
               item-id=${item.id}
               title=${item.title}
               subtitle=${item.subtitle}
               value=${item.value}
             >
-            </c4p-add-select-item>
+            </c4p-add-select-row>
           `
         )}
       </c4p-add-select-list>

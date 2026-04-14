@@ -17,7 +17,7 @@ import '../../../../src/components/tearsheet-preview/index';
 import '../../../../src/components/add-select/add-select/add-select';
 import '../../../../src/components/add-select/add-select-body/add-select-body';
 import '../../../../src/components/add-select/add-select-list/add-select-list';
-import '../../../../src/components/add-select/add-select-item/add-select-item';
+import '../../../../src/components/add-select/add-select-row/add-select-row';
 
 import { AddSelectData, HierarchicalItem } from '@carbon/ibm-products-utilities';
 
@@ -305,16 +305,16 @@ export class AddSelectExample extends LitElement {
                               // Use the data manager to check if item has children
                               const hasChildren = this.dataManager.hasChildren(item.id);
                               return html`
-                                <c4p-add-select-item
+                                <c4p-add-select-row
                                   item-id="${item.id}"
                                   title="${item.title}"
                                   value="${item.value}"
                                   ?has-children="${hasChildren}"
                                   ?selected="${this._selectedItem === item.id}"
-                                  @c4p-add-select-item-select="${this._handleItemSelect}"
-                                  @c4p-add-select-item-navigate="${this._handleNavigate}"
+                                  @c4p-add-select-row-select="${this._handleItemSelect}"
+                                  @c4p-add-select-row-navigate="${this._handleNavigate}"
                                 >
-                                </c4p-add-select-item>
+                                </c4p-add-select-row>
                               `;
                             }
                           )}

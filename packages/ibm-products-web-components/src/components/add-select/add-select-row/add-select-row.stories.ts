@@ -8,15 +8,15 @@
  */
 
 import { html } from 'lit';
-import './add-select-item';
+import './add-select-row';
 import { prefix } from '../../../globals/settings';
 
 export const Default = {
   args: {
     itemId: '1',
-    title: 'Item title',
-    subtitle: 'Item subtitle description',
-    value: 'item-1',
+    title: 'Row title',
+    subtitle: 'Row subtitle description',
+    value: 'row-1',
     multi: false,
     selected: false,
     disabled: false,
@@ -26,19 +26,19 @@ export const Default = {
   argTypes: {
     itemId: {
       control: 'text',
-      description: 'Unique identifier for the item',
+      description: 'Unique identifier for the row',
     },
     title: {
       control: 'text',
-      description: 'Item title',
+      description: 'Row title',
     },
     subtitle: {
       control: 'text',
-      description: 'Item subtitle',
+      description: 'Row subtitle',
     },
     value: {
       control: 'text',
-      description: 'Item value',
+      description: 'Row value',
     },
     multi: {
       control: 'boolean',
@@ -46,15 +46,15 @@ export const Default = {
     },
     selected: {
       control: 'boolean',
-      description: 'Whether the item is selected',
+      description: 'Whether the row is selected',
     },
     disabled: {
       control: 'boolean',
-      description: 'Whether the item is disabled',
+      description: 'Whether the row is disabled',
     },
     hasChildren: {
       control: 'boolean',
-      description: 'Whether the item has children (for navigation)',
+      description: 'Whether the row has children (for navigation)',
     },
     tabIndex: {
       control: 'number',
@@ -63,7 +63,7 @@ export const Default = {
   },
   render: (args) => {
     const handleSelect = (event) => {
-      console.log('Item selected:', event.detail);
+      console.log('Row selected:', event.detail);
     };
 
     const handleNavigate = (event) => {
@@ -71,7 +71,7 @@ export const Default = {
     };
 
     return html`
-      <c4p-add-select-item
+      <c4p-add-select-row
         item-id=${args.itemId}
         title=${args.title}
         subtitle=${args.subtitle}
@@ -81,10 +81,10 @@ export const Default = {
         ?disabled=${args.disabled}
         ?has-children=${args.hasChildren}
         tab-index=${args.tabIndex}
-        @c4p-add-select-item-select=${handleSelect}
-        @c4p-add-select-item-navigate=${handleNavigate}
+        @c4p-add-select-row-select=${handleSelect}
+        @c4p-add-select-row-navigate=${handleNavigate}
       >
-      </c4p-add-select-item>
+      </c4p-add-select-row>
     `;
   },
 };
@@ -146,7 +146,7 @@ export const WithoutSubtitle = {
 };
 
 const meta = {
-  title: 'Components/Add and select/Add select item',
+  title: 'Components/Add and select/Add select row',
 };
 
 export default meta;

@@ -17,21 +17,21 @@ import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-load
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16';
 
 import { prefix } from '../../../globals/settings';
-import styles from './add-select-item.scss?lit';
+import styles from './add-select-row.scss?lit';
 
-const blockClass = `${prefix}--add-select-item`;
+const blockClass = `${prefix}--add-select-row`;
 
 /**
- * Add Select Item component - represents a single selectable item
- * @element c4p-add-select-item
- * @slot default - The main content of the item (title, subtitle, etc.)
+ * Add Select Row component - represents a single selectable row
+ * @element c4p-add-select-row
+ * @slot default - The main content of the row (title, subtitle, etc.)
  * @slot icon - Optional icon slot
  * @slot meta - Optional metadata slot
- * @fires c4p-add-select-item-select - Fired when item is selected/deselected
- * @fires c4p-add-select-item-select - Fired when navigating to children
+ * @fires c4p-add-select-row-select - Fired when row is selected/deselected
+ * @fires c4p-add-select-row-navigate - Fired when navigating to children
  */
-@customElement(`${prefix}-add-select-item`)
-class CDSAddSelectItem extends LitElement {
+@customElement(`${prefix}-add-select-row`)
+class CDSAddSelectRow extends LitElement {
   /**
    * Unique identifier for the item
    */
@@ -115,7 +115,7 @@ class CDSAddSelectItem extends LitElement {
     };
     this.dispatchEvent(
       new CustomEvent(
-        (this.constructor as typeof CDSAddSelectItem).eventNavigate,
+        (this.constructor as typeof CDSAddSelectRow).eventNavigate,
         init
       )
     );
@@ -154,7 +154,7 @@ class CDSAddSelectItem extends LitElement {
     };
     this.dispatchEvent(
       new CustomEvent(
-        (this.constructor as typeof CDSAddSelectItem).eventSelect,
+        (this.constructor as typeof CDSAddSelectRow).eventSelect,
         init
       )
     );
@@ -245,20 +245,20 @@ class CDSAddSelectItem extends LitElement {
   }
 
   /**
-   * The name of the custom event fired when item is selected/deselected
+   * The name of the custom event fired when row is selected/deselected
    */
   static get eventSelect() {
-    return `${prefix}-add-select-item-select`;
+    return `${prefix}-add-select-row-select`;
   }
 
   /**
    * The name of the custom event fired when navigating to children
    */
   static get eventNavigate() {
-    return `${prefix}-add-select-item-navigate`;
+    return `${prefix}-add-select-row-navigate`;
   }
 
   static styles = styles;
 }
 
-export default CDSAddSelectItem;
+export default CDSAddSelectRow;

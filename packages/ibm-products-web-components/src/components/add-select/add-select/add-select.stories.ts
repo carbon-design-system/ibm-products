@@ -11,7 +11,7 @@ import { html } from 'lit';
 import './add-select';
 import '../add-select-body/add-select-body';
 import '../add-select-list/add-select-list';
-import '../add-select-item/add-select-item';
+import '../add-select-row/add-select-row';
 import { prefix } from '../../../globals/settings';
 
 const sampleItems = [
@@ -60,14 +60,14 @@ export const Default = {
           <c4p-add-select-list>
             ${sampleItems.map(
               (item) => html`
-                <c4p-add-select-item
+                <c4p-add-select-row
                   item-id=${item.id}
                   title=${item.title}
                   subtitle=${item.subtitle}
                   value=${item.value}
                   tab-index="0"
                 >
-                </c4p-add-select-item>
+                </c4p-add-select-row>
               `
             )}
           </c4p-add-select-list>
@@ -91,7 +91,7 @@ export const MultiSelect = {
           <c4p-add-select-list multi>
             ${sampleItems.map(
               (item) => html`
-                <c4p-add-select-item
+                <c4p-add-select-row
                   multi
                   item-id=${item.id}
                   title=${item.title}
@@ -99,7 +99,7 @@ export const MultiSelect = {
                   value=${item.value}
                   tab-index="0"
                 >
-                </c4p-add-select-item>
+                </c4p-add-select-row>
               `
             )}
           </c4p-add-select-list>
@@ -146,7 +146,7 @@ export const WithHierarchy = {
           <c4p-add-select-list>
             ${hierarchicalItems.map(
               (item) => html`
-                <c4p-add-select-item
+                <c4p-add-select-row
                   item-id=${item.id}
                   title=${item.title}
                   subtitle=${item.subtitle}
@@ -154,7 +154,7 @@ export const WithHierarchy = {
                   ?has-children=${item.hasChildren}
                   tab-index="0"
                 >
-                </c4p-add-select-item>
+                </c4p-add-select-row>
               `
             )}
           </c4p-add-select-list>

@@ -28,22 +28,22 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 
 ```html
 <c4p-add-select-list>
-  <c4p-add-select-item
+  <c4p-add-select-row
     item-id="1"
     title="Item 1"
     subtitle="Description for item 1"
     value="item-1"
     tab-index="0"
   >
-  </c4p-add-select-item>
-  <c4p-add-select-item
+  </c4p-add-select-row>
+  <c4p-add-select-row
     item-id="2"
     title="Item 2"
     subtitle="Description for item 2"
     value="item-2"
     tab-index="0"
   >
-  </c4p-add-select-item>
+  </c4p-add-select-row>
 </c4p-add-select-list>
 ```
 
@@ -56,13 +56,13 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ```html
 <c4p-add-select-list>
   <!-- Items with radio buttons -->
-  <c4p-add-select-item
+  <c4p-add-select-row
     item-id="1"
     title="Item 1"
     value="item-1"
     tab-index="0"
   >
-  </c4p-add-select-item>
+  </c4p-add-select-row>
 </c4p-add-select-list>
 ```
 
@@ -75,14 +75,14 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ```html
 <c4p-add-select-list multi>
   <!-- Items with checkboxes -->
-  <c4p-add-select-item
+  <c4p-add-select-row
     multi
     item-id="1"
     title="Item 1"
     value="item-1"
     tab-index="0"
   >
-  </c4p-add-select-item>
+  </c4p-add-select-row>
 </c4p-add-select-list>
 ```
 
@@ -94,7 +94,7 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 
 ```html
 <c4p-add-select-list multi>
-  <c4p-add-select-item
+  <c4p-add-select-row
     multi
     item-id="1"
     title="Item 1"
@@ -102,8 +102,8 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
     selected
     tab-index="0"
   >
-  </c4p-add-select-item>
-  <c4p-add-select-item
+  </c4p-add-select-row>
+  <c4p-add-select-row
     multi
     item-id="2"
     title="Item 2"
@@ -111,7 +111,7 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
     selected
     tab-index="0"
   >
-  </c4p-add-select-item>
+  </c4p-add-select-row>
 </c4p-add-select-list>
 ```
 
@@ -123,7 +123,7 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 
 ```html
 <c4p-add-select-list>
-  <c4p-add-select-item
+  <c4p-add-select-row
     item-id="1"
     title="Parent 1"
     subtitle="Has children"
@@ -131,8 +131,8 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
     has-children
     tab-index="0"
   >
-  </c4p-add-select-item>
-  <c4p-add-select-item
+  </c4p-add-select-row>
+  <c4p-add-select-row
     item-id="2"
     title="Parent 2"
     subtitle="Has children"
@@ -140,15 +140,15 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
     has-children
     tab-index="0"
   >
-  </c4p-add-select-item>
-  <c4p-add-select-item
+  </c4p-add-select-row>
+  <c4p-add-select-row
     item-id="3"
     title="Item 3"
     subtitle="No children"
     value="item-3"
     tab-index="0"
   >
-  </c4p-add-select-item>
+  </c4p-add-select-row>
 </c4p-add-select-list>
 ```
 
@@ -161,14 +161,14 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ```html
 <c4p-add-select-list>
   <!-- 20+ items for performance testing -->
-  <c4p-add-select-item
+  <c4p-add-select-row
     item-id="1"
     title="Item 1"
     subtitle="Description for item 1"
     value="item-1"
     tab-index="0"
   >
-  </c4p-add-select-item>
+  </c4p-add-select-row>
   <!-- ... more items ... -->
 </c4p-add-select-list>
 ```

@@ -10,9 +10,9 @@
 @use '@carbon/styles/scss/type' as *;
 
 $prefix: 'c4p';
-$baseClass: #{$prefix}--add-select-item;
+$baseClass: #{$prefix}--add-select-row;
 
-:host(#{$prefix}-add-select-item) {
+:host(#{$prefix}-add-select-row) {
   display: block;
 }
 

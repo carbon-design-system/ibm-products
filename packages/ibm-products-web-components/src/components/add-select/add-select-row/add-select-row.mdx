@@ -1,14 +1,14 @@
 import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
-import * as AddSelectItemStories from './add-select-item.stories';
+import * as AddSelectItemStories from './add-select-row.stories';
 
 <Meta of={AddSelectItemStories} />
 
-# Add Select Item
+# Add Select Row
 
 ## Overview
 
-The Add Select Item component represents a single selectable item in the add-select pattern. It supports:
+The Add Select Row component represents a single selectable item in the add-select pattern. It supports:
 - Single-select mode (radio button)
 - Multi-select mode (checkbox)
 - Hierarchical navigation (items with children)
@@ -33,15 +33,15 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ### HTML
 
 ```html
-<c4p-add-select-item
+<c4p-add-select-row
   item-id="1"
-  title="Item title"
-  subtitle="Item subtitle description"
+  title="Row title"
+  subtitle="Row subtitle description"
   value="item-1"
   tab-index="0"
-  @c4p-add-select-item-select=${handleSelect}
+  @c4p-add-select-row-select=${handleSelect}
 >
-</c4p-add-select-item>
+</c4p-add-select-row>
 ```
 
 ## Single Select Example
@@ -51,14 +51,14 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ### HTML
 
 ```html
-<c4p-add-select-item
+<c4p-add-select-row
   item-id="1"
-  title="Item title"
-  subtitle="Item subtitle"
+  title="Row title"
+  subtitle="Row subtitle"
   value="item-1"
   tab-index="0"
 >
-</c4p-add-select-item>
+</c4p-add-select-row>
 ```
 
 ## Multi Select Example
@@ -68,15 +68,15 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ### HTML
 
 ```html
-<c4p-add-select-item
+<c4p-add-select-row
   multi
   item-id="1"
-  title="Item title"
-  subtitle="Item subtitle"
+  title="Row title"
+  subtitle="Row subtitle"
   value="item-1"
   tab-index="0"
 >
-</c4p-add-select-item>
+</c4p-add-select-row>
 ```
 
 ## Selected State Example
@@ -86,15 +86,15 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ### HTML
 
 ```html
-<c4p-add-select-item
+<c4p-add-select-row
   item-id="1"
-  title="Item title"
-  subtitle="Item subtitle"
+  title="Row title"
+  subtitle="Row subtitle"
   value="item-1"
   selected
   tab-index="0"
 >
-</c4p-add-select-item>
+</c4p-add-select-row>
 ```
 
 ## Disabled State Example
@@ -104,15 +104,15 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ### HTML
 
 ```html
-<c4p-add-select-item
+<c4p-add-select-row
   item-id="1"
-  title="Item title"
-  subtitle="Item subtitle"
+  title="Row title"
+  subtitle="Row subtitle"
   value="item-1"
   disabled
   tab-index="0"
 >
-</c4p-add-select-item>
+</c4p-add-select-row>
 ```
 
 ## With Children Example
@@ -122,16 +122,16 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ### HTML
 
 ```html
-<c4p-add-select-item
+<c4p-add-select-row
   item-id="1"
   title="Parent item"
   subtitle="This item has children"
   value="parent-1"
   has-children
   tab-index="0"
-  @c4p-add-select-item-navigate=${handleNavigate}
+  @c4p-add-select-row-navigate=${handleNavigate}
 >
-</c4p-add-select-item>
+</c4p-add-select-row>
 ```
 
 ## Without Subtitle Example
@@ -141,19 +141,19 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ### HTML
 
 ```html
-<c4p-add-select-item
+<c4p-add-select-row
   item-id="1"
-  title="Item title"
+  title="Row title"
   value="item-1"
   tab-index="0"
 >
-</c4p-add-select-item>
+</c4p-add-select-row>
 ```
 
 ## Events
 
-### `c4p-add-select-item-select`
-Fired when the item is selected or deselected.
+### `c4p-add-select-row-select`
+Fired when the row is selected or deselected.
 
 **Detail:**
 ```javascript
@@ -172,7 +172,7 @@ const handleSelect = (event) => {
 };
 ```
 
-### `c4p-add-select-item-navigate`
+### `c4p-add-select-row-navigate`
 Fired when navigating to children (only for items with `has-children` attribute).
 
 **Detail:**
@@ -195,9 +195,9 @@ const handleNavigate = (event) => {
 
 ## Keyboard Navigation
 
-- **Enter/Space**: Select/deselect the item
+- **Enter/Space**: Select/deselect the row
 - **Arrow Right**: Navigate to children (if `has-children` is true)
 
-## `<c4p-add-select-item>` attributes, properties, events and slots.
+## `<c4p-add-select-row>` attributes, properties, events and slots.
 
-<ArgTypes of="c4p-add-select-item" />
+<ArgTypes of="c4p-add-select-row" />

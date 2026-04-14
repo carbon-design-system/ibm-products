@@ -26,7 +26,7 @@ To build this pattern, we recommend including the following components:
 - [c4p-add-select-body](/?path=/docs/components-add-select--docs) - Container with search and breadcrumb navigation
 - [c4p-add-select-breadcrumbs](/?path=/docs/components-add-select--docs) - Breadcrumb navigation for hierarchical data (used internally by c4p-add-select-body)
 - [c4p-add-select-list](/?path=/docs/components-add-select--docs) - List container
-- [c4p-add-select-item](/?path=/docs/components-add-select--docs) - Individual selectable items
+- [c4p-add-select-row](/?path=/docs/components-add-select--docs) - Individual selectable items
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview) - Action buttons
 - [cds-toast-notification](https://web-components.carbondesignsystem.com/?path=/docs/components-notifications-toast--overview) - Success feedback
 
@@ -59,7 +59,7 @@ import '../../../../src/components/tearsheet/index';
 import '../../../../src/components/add-select/add-select/add-select';
 import '../../../../src/components/add-select/add-select-body/add-select-body';
 import '../../../../src/components/add-select/add-select-list/add-select-list';
-import '../../../../src/components/add-select/add-select-item/add-select-item';
+import '../../../../src/components/add-select/add-select-row/add-select-row';
 ```
 
 #### HTML
@@ -99,16 +99,16 @@ import '../../../../src/components/add-select/add-select-item/add-select-item';
     >
       <c4p-add-select-list>
         ${this._filteredItems.map((item) => html`
-          <c4p-add-select-item
+          <c4p-add-select-row
             item-id="${item.id}"
             title="${item.title}"
             value="${item.value}"
             ?has-children="${!!item.children}"
             ?selected="${this._selectedItem === item.id}"
-            @c4p-add-select-item-select="${this._handleItemSelect}"
-            @c4p-add-select-item-navigate="${this._handleNavigate}"
+            @c4p-add-select-row-select="${this._handleItemSelect}"
+            @c4p-add-select-row-navigate="${this._handleNavigate}"
           >
-          </c4p-add-select-item>
+          </c4p-add-select-row>
         `)}
       </c4p-add-select-list>
     </c4p-add-select-body>
@@ -164,8 +164,8 @@ The pattern emits custom events for key interactions:
 - `c4p-tearsheet-closed` - Fired when the tearsheet is closed
 - `c4p-add-select-body-search` - Fired when search term changes
 - `c4p-add-select-body-breadcrumb-click` - Fired when breadcrumb is clicked
-- `c4p-add-select-item-select` - Fired when item is selected/deselected
-- `c4p-add-select-item-navigate` - Fired when navigating to item children
+- `c4p-add-select-row-select` - Fired when item is selected/deselected
+- `c4p-add-select-row-navigate` - Fired when navigating to item children
 
 ### Accessibility
 
@@ -187,7 +187,7 @@ The pattern follows accessibility best practices:
 - `itemCount` (Number) - Number of items for display
 - `path` (Array) - Breadcrumb navigation path
 
-### c4p-add-select-item
+### c4p-add-select-row
 
 - `item-id` (String) - Unique identifier
 - `title` (String) - Item title

@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import './add-select-body';
 import '../add-select-list/add-select-list';
-import '../add-select-item/add-select-item';
+import '../add-select-row/add-select-row';
 import { prefix } from '../../../globals/settings';
 
 const sampleItems = [
@@ -94,7 +94,7 @@ export const Default = {
         <c4p-add-select-list ?multi=${args.multi}>
           ${sampleItems.map(
             (item) => html`
-              <c4p-add-select-item
+              <c4p-add-select-row
                 ?multi=${args.multi}
                 item-id=${item.id}
                 title=${item.title}
@@ -102,7 +102,7 @@ export const Default = {
                 value=${item.value}
                 tab-index="0"
               >
-              </c4p-add-select-item>
+              </c4p-add-select-row>
             `
           )}
         </c4p-add-select-list>
@@ -150,7 +150,7 @@ export const WithBreadcrumbs = {
         <c4p-add-select-list ?multi=${args.multi}>
           ${sampleItems.map(
             (item) => html`
-              <c4p-add-select-item
+              <c4p-add-select-row
                 ?multi=${args.multi}
                 item-id=${item.id}
                 title=${item.title}
@@ -158,7 +158,7 @@ export const WithBreadcrumbs = {
                 value=${item.value}
                 tab-index="0"
               >
-              </c4p-add-select-item>
+              </c4p-add-select-row>
             `
           )}
         </c4p-add-select-list>

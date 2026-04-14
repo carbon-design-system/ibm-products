@@ -14,7 +14,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import { prefix } from '../../../globals/settings';
 import styles from './add-select-list.scss?lit';
 
-const blockClass = `${prefix}--add-select-list`;
+const blockClass = `${prefix}--add-select__next-list`;
 
 /**
  * Add Select List component - contains the list of selectable items
@@ -24,10 +24,13 @@ const blockClass = `${prefix}--add-select-list`;
 @customElement(`${prefix}-add-select-list`)
 class CDSAddSelectList extends LitElement {
   /**
-   * Whether this is a multi-select list
+   * Whether this is a multi-select list (inherited from parent c4p-add-select)
+   * @private
    */
-  @property({ type: Boolean })
-  multi = false;
+  private get _multi(): boolean {
+    const parent = this.closest(`${prefix}-add-select`) as any;
+    return parent?.multi ?? false;
+  }
 
   /**
    * Current focused item index
@@ -212,14 +215,13 @@ class CDSAddSelectList extends LitElement {
 
   render() {
     const {
-      multi,
       _handleKeyDown: handleKeyDown,
       _handleSlotChange: handleSlotChange,
     } = this;
 
     const listClasses = classMap({
       [`${blockClass}-wrapper`]: true,
-      [`${blockClass}-wrapper-multi`]: multi,
+      [`${blockClass}-wrapper-multi`]: this._multi,
     });
 
     return html`

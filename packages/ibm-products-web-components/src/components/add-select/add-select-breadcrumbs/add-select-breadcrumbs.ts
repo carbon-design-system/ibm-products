@@ -16,7 +16,7 @@ import '@carbon/web-components/es/components/link/index.js';
 import { prefix } from '../../../globals/settings';
 import styles from './add-select-breadcrumbs.scss?lit';
 
-const blockClass = `${prefix}--add-select-breadcrumbs`;
+const blockClass = `${prefix}--add-select__next__breadcrumbs`;
 
 /**
  * Add Select Breadcrumbs component - displays navigation path
@@ -26,10 +26,13 @@ const blockClass = `${prefix}--add-select-breadcrumbs`;
 @customElement(`${prefix}-add-select-breadcrumbs`)
 class CDSAddSelectBreadcrumbs extends LitElement {
   /**
-   * Whether this is a multi-select
+   * Whether this is a multi-select (inherited from parent c4p-add-select)
+   * @private
    */
-  @property({ type: Boolean })
-  multi = false;
+  private get _multi(): boolean {
+    const parent = this.closest(`${prefix}-add-select`) as any;
+    return parent?.multi ?? false;
+  }
 
   /**
    * Navigation path array
@@ -58,11 +61,11 @@ class CDSAddSelectBreadcrumbs extends LitElement {
   }
 
   render() {
-    const { multi, path } = this;
+    const { path } = this;
 
     const breadcrumbClasses = classMap({
       [blockClass]: true,
-      [`${blockClass}--multi`]: multi,
+      [`${blockClass}--multi`]: this._multi,
     });
 
     return html`

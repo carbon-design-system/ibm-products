@@ -7,112 +7,125 @@ pattern.
 
 ### c4p-add-select
 
-The main wrapper component that manages the overall add select functionality.
+The main wrapper component that provides context for child components. This
+component should wrap all other add-select components and manages the `multi`
+prop that determines whether the selection mode is single (radio buttons) or
+multi (checkboxes).
 
 **Properties:**
 
-- `open` (Boolean) - Whether the add select is open
-- `title` (String) - The title of the add select
-- `description` (String) - The description text
-- `multi` (Boolean) - Whether this is a multi-select
-- `items-label` (String) - Label for items section
-- `global-search-label` (String) - Global search label
-- `close-button-text` (String) - Close button text (default: "Cancel")
-- `submit-button-text` (String) - Submit button text (default: "Add")
-- `no-results-title` (String) - No results title
-- `no-results-description` (String) - No results description
-
-**Events:**
-
-- `c4p-add-select-close` - Fired when the add select is closed
-- `c4p-add-select-submit` - Fired when the add select is submitted with
-  selection
+- `multi` (Boolean) - Whether this is a multi-select (checkboxes) or
+  single-select (radio buttons). Default: `false`
 
 **Slots:**
 
 - `default` - The main content area containing c4p-add-select-body
 
+**Usage:**
+
+```html
+<c4p-add-select multi>
+  <c4p-add-select-body>
+    <!-- content -->
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
 ---
 
 ### c4p-add-select-body
 
-The container/body component that contains the main content area including
-search, list, and actions.
+The container/body component that contains the search, breadcrumbs, and content
+area. The `multi` mode is automatically inherited from the parent
+`c4p-add-select` component.
 
 **Properties:**
 
-- `title` (String) - The title of the add select
-- `description` (String) - The description text
-- `multi` (Boolean) - Whether this is a multi-select
 - `items-label` (String) - Label for items section
 - `global-search-label` (String) - Global search label
 - `global-search-placeholder` (String) - Global search placeholder (default:
   "Search")
-- `close-button-text` (String) - Close button text (default: "Cancel")
-- `submit-button-text` (String) - Submit button text (default: "Add")
-- `no-results-title` (String) - No results title
-- `no-results-description` (String) - No results description
-- `search-results-title` (String) - Search results title
+- `search-results-title` (String) - Search results title (default: "Search
+  results")
 - `item-count` (Number) - Item count for display
+- `path` (Array) - Navigation path for breadcrumbs (array of
+  `{id: string, title: string}`)
 
 **Events:**
 
-- `c4p-add-select-body-close` - Fired when close is requested
-- `c4p-add-select-body-submit` - Fired when submit is requested
-- `c4p-add-select-body-search` - Fired when search term changes
+- `c4p-add-select-body-search` - Fired when search term changes. Detail:
+  `{searchTerm: string}`
+- `c4p-add-select-body-breadcrumb-click` - Fired when breadcrumb is clicked.
+  Detail: `{index: number}`
 
 **Slots:**
 
 - `default` - The main content area containing c4p-add-select-list
-- `header` - Custom header content
-- `footer` - Custom footer content
+- `header` - Custom header content (replaces default search and breadcrumbs)
 
 ---
 
 ### c4p-add-select-list
 
-The list component that contains selectable items.
+The list component that contains selectable items with full keyboard navigation
+support. The `multi` mode is automatically inherited from the parent
+`c4p-add-select` component.
 
 **Properties:**
 
-- `multi` (Boolean) - Whether this is a multi-select list
+None (inherits `multi` from parent)
 
-**Events:**
+**Keyboard Navigation:**
 
-- `c4p-add-select-list-change` - Fired when selection changes
+- `↓` Arrow Down - Move to next item
+- `↑` Arrow Up - Move to previous item
+- `→` Arrow Right - Navigate into children (if item has children)
+- `Enter` or `Space` - Toggle selection
+- `Ctrl+Home` - Jump to first item
+- `Ctrl+End` - Jump to last item
 
 **Slots:**
 
 - `default` - Contains c4p-add-select-row components
 
+**Note:** The list implements a roving tabindex pattern for efficient keyboard
+navigation.
+
 ---
 
 ### c4p-add-select-row
 
-A single selectable item component.
+A single selectable item component. The `multi` mode is automatically inherited
+from the parent `c4p-add-select` component.
 
 **Properties:**
 
-- `item-id` (String) - Unique identifier for the item
-- `title` (String) - Item title
-- `subtitle` (String) - Item subtitle
-- `value` (String) - Item value
-- `multi` (Boolean) - Whether this is part of a multi-select list
+- `item-id` (String) - Unique identifier for the item (required)
+- `title` (String) - Item title (required)
+- `subtitle` (String) - Item subtitle (optional)
+- `value` (String) - Item value (required)
 - `selected` (Boolean) - Whether the item is selected
 - `disabled` (Boolean) - Whether the item is disabled
-- `tab-index` (Number) - Tab index for keyboard navigation (default: -1)
-- `has-children` (Boolean) - Whether the item has children (for navigation)
+- `has-children` (Boolean) - Whether the item has children (shows navigation
+  indicator)
+- `parent-id` (String) - Parent ID for hierarchical navigation
 
 **Events:**
 
-- `c4p-add-select-row-select` - Fired when item is selected/deselected
+- `c4p-add-select-row-select` - Fired when item is selected/deselected. Detail:
+  `{itemId: string, selected: boolean, value: string}`
+- `c4p-add-select-row-navigate` - Fired when navigating to children. Detail:
+  `{itemId: string, title: string, parentId: string}`
 
 **Slots:**
 
-- `default` - The main content of the item (title, subtitle, etc.)
-- `icon` - Optional icon slot
-- `meta` - Optional metadata slot
-- `nav-icon` - Navigation icon for items with children
+- `icon` - Optional icon slot (displayed before title)
+- `meta` - Optional metadata slot (displayed after title)
+- `nav-icon` - Navigation icon for items with children (defaults to
+  chevron-right)
+
+**Note:** Do not manually set `tabindex` - it is managed automatically by the
+parent list component.
 
 ---
 

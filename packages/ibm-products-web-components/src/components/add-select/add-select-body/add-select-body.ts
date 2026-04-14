@@ -18,7 +18,7 @@ import '../add-select-breadcrumbs/index.js';
 import { prefix } from '../../../globals/settings';
 import styles from './add-select-body.scss?lit';
 
-const blockClass = `${prefix}--add-select-body`;
+const blockClass = `${prefix}--add-select__next`;
 
 /**
  * Add Select Body component - contains the main content area
@@ -30,10 +30,13 @@ const blockClass = `${prefix}--add-select-body`;
 @customElement(`${prefix}-add-select-body`)
 class CDSAddSelectBody extends LitElement {
   /**
-   * Whether this is a multi-select
+   * Whether this is a multi-select (inherited from parent c4p-add-select)
+   * @private
    */
-  @property({ type: Boolean })
-  multi = false;
+  private get _multi(): boolean {
+    const parent = this.closest(`${prefix}-add-select`) as any;
+    return parent?.multi ?? false;
+  }
 
   /**
    * Label for items section
@@ -128,7 +131,6 @@ class CDSAddSelectBody extends LitElement {
 
   render() {
     const {
-      multi,
       itemsLabel,
       globalSearchLabel,
       globalSearchPlaceholder,
@@ -142,8 +144,8 @@ class CDSAddSelectBody extends LitElement {
 
     const bodyClasses = classMap({
       [`${blockClass}__body`]: true,
-      [`${blockClass}__body--single`]: !multi,
-      [`${blockClass}__body--multi`]: multi,
+      [`${blockClass}__body--single`]: !this._multi,
+      [`${blockClass}__body--multi`]: this._multi,
     });
 
     return html`
@@ -173,7 +175,6 @@ class CDSAddSelectBody extends LitElement {
                   : path && path.length > 0
                     ? html`
                         <c4p-add-select-breadcrumbs
-                          ?multi=${multi}
                           .path=${path}
                           @c4p-add-select-breadcrumbs-click=${handleBreadcrumbClick}
                         ></c4p-add-select-breadcrumbs>

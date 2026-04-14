@@ -269,7 +269,7 @@ export class AddSelectExample extends LitElement {
 
         <!-- Single Add Select Pattern using Preview Tearsheet -->
         ${this._open ? html`
-          <c4p-add-select>
+          <c4p-add-select ?multi=${false}>
             <c4p-preview-tearsheet
               ?open=${this._open}
               variant="narrow"

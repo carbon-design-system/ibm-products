@@ -8,20 +8,26 @@
  */
 
 import { LitElement, html } from 'lit';
-// import { property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { prefix } from '../../../globals/settings';
 import styles from './add-select.scss?lit';
 
-const blockClass = `${prefix}--add-select`;
+const blockClass = `${prefix}--add-select__next`;
 
 /**
- * Add Select wrapper component
+ * Add Select wrapper component - provides context for child components
  * @element c4p-add-select
  * @slot default - The main content area containing c4p-add-select-body
  */
 @customElement(`${prefix}-add-select`)
 class CDSAddSelect extends LitElement {
+  /**
+   * Whether this is a multi-select (checkboxes) or single-select (radio buttons)
+   */
+  @property({ type: Boolean, reflect: true })
+  multi = false;
+
   render() {
     return html`
       <div class="${blockClass}">

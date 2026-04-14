@@ -5,33 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+$css--plex: true !default;
+
+/* Carbon and IBM Products styles */
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 
 $prefix: 'c4p';
-$baseClass: #{$prefix}--add-select-list;
 
+/* Import shared AddSelect composable/next styles from ibm-products-styles */
+@use '@carbon/ibm-products-styles/scss/components/AddSelect/add-select_next'
+  as *;
+
+/* Web Component specific overrides */
 :host(#{$prefix}-add-select-list) {
   display: block;
-}
-
-.#{$baseClass}-wrapper {
-  block-size: 100%;
-  inline-size: 100%;
-}
-
-.#{$baseClass}-wrapper-multi {
-  // Additional styles for multi-select mode
-}
-
-.#{$baseClass} {
-  display: flex;
-  flex-direction: column;
-  inline-size: 100%;
-}
-
-.#{$baseClass}-body {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-02;
 }

@@ -11,7 +11,7 @@ import DocsPage from './AddSelect.mdx';
 import { StandardSingleAddSelect } from './example/preview-components/StandardSingleAddSelect';
 
 export default {
-  title: 'Patterns/AddSelect',
+  title: 'Patterns/Add and select/SingleAddSelect',
   component: () => {},
   tags: ['autodocs'],
   parameters: {

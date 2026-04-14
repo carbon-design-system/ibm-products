@@ -19,7 +19,7 @@ import ChevronRight16 from '@carbon/icons/es/chevron--right/16';
 import { prefix } from '../../../globals/settings';
 import styles from './add-select-row.scss?lit';
 
-const blockClass = `${prefix}--add-select-row`;
+const blockClass = `${prefix}--add-select__next-row`;
 
 /**
  * Add Select Row component - represents a single selectable row
@@ -32,6 +32,14 @@ const blockClass = `${prefix}--add-select-row`;
  */
 @customElement(`${prefix}-add-select-row`)
 class CDSAddSelectRow extends LitElement {
+  /**
+   * Whether this is part of a multi-select list (inherited from parent c4p-add-select)
+   * @private
+   */
+  private get _multi(): boolean {
+    const parent = this.closest(`${prefix}-add-select`) as any;
+    return parent?.multi ?? false;
+  }
   /**
    * Unique identifier for the item
    */
@@ -57,12 +65,6 @@ class CDSAddSelectRow extends LitElement {
   value = '';
 
   /**
-   * Whether this is part of a multi-select list
-   */
-  @property({ type: Boolean })
-  multi = false;
-
-  /**
    * Whether the item is selected
    */
   @property({ type: Boolean, reflect: true })
@@ -73,12 +75,6 @@ class CDSAddSelectRow extends LitElement {
    */
   @property({ type: Boolean })
   disabled = false;
-
-  /**
-   * Tab index for keyboard navigation
-   */
-  @property({ type: Number, attribute: 'tab-index' })
-  tabIndex = -1;
 
   /**
    * Whether the item has children (for navigation)
@@ -165,10 +161,8 @@ class CDSAddSelectRow extends LitElement {
       itemId,
       title,
       subtitle,
-      multi,
       selected,
       disabled,
-      tabIndex,
       hasChildren,
       _handleSelect: handleSelect,
     } = this;
@@ -184,11 +178,11 @@ class CDSAddSelectRow extends LitElement {
         class=${rowClasses}
         role="row"
         aria-selected=${selected}
-        tabindex=${tabIndex}
+        tabindex="-1"
       >
         <div class="${blockClass}-cell" role="gridcell">
           <div class="${blockClass}-cell-wrapper">
-            ${multi
+            ${this._multi
               ? html`
                   <cds-checkbox
                     ?checked=${selected}
@@ -212,13 +206,13 @@ class CDSAddSelectRow extends LitElement {
                 `}
 
             <div class="${blockClass}-content">
-              <slot name="item-icon"></slot>
+              <slot name="icon"></slot>
               <div class="${blockClass}-text">
                 <div class="${blockClass}-title">${title}</div>
                 ${subtitle &&
                 html`<div class="${blockClass}-subtitle">${subtitle}</div>`}
               </div>
-              <slot name="item-meta"></slot>
+              <slot name="meta"></slot>
             </div>
 
             ${hasChildren
@@ -230,7 +224,7 @@ class CDSAddSelectRow extends LitElement {
                     tabindex="-1"
                     aria-label="Navigate to children"
                   >
-                    <slot name="item-nav-icon">
+                    <slot name="nav-icon">
                       ${iconLoader(ChevronRight16, {
                         slot: 'icon',
                       })}

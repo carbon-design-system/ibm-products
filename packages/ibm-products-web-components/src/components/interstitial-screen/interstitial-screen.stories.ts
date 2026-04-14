@@ -359,22 +359,21 @@ export const WithCustomActionButtons = {
               </style>
 
               <div class="${blockClass}--footer">
-                <cds-button
-                  class="${blockClass}--skip-btn"
-                  kind="ghost"
-                  size="lg"
-                  @click=${handleSkip}
-                >
-                  Skip
-                </cds-button>
-
-                <div class="${blockClass}--footer-controls">
+                <c4p-action-set size="xl">
+                  <cds-button
+                    class="${blockClass}--skip-btn"
+                    kind="ghost"
+                    size="lg"
+                    @click=${handleSkip}
+                  >
+                    Skip
+                  </cds-button>
                   ${stepLength > 0 && currentStep > 0
                     ? html`
                         <cds-button
                           class="${blockClass}--prev-btn"
                           kind="secondary"
-                          size="lg"
+                          size="xl"
                           title="Back"
                           @click=${handleClickPrev}
                         >
@@ -387,7 +386,7 @@ export const WithCustomActionButtons = {
                         <cds-button
                           class="${blockClass}--next-btn"
                           kind="primary"
-                          size="lg"
+                          size="xl"
                           @click=${handleClickNext}
                         >
                           Next ${iconLoader(ArrowRight, { slot: 'icon' })}
@@ -400,7 +399,7 @@ export const WithCustomActionButtons = {
                         <cds-button
                           class="${blockClass}--start-btn"
                           kind="primary"
-                          size="lg"
+                          size="xl"
                           title="Submit"
                           @click=${handleStart}
                         >
@@ -408,7 +407,7 @@ export const WithCustomActionButtons = {
                         </cds-button>
                       `
                     : nothing}
-                </div>
+                </c4p-action-set>
               </div>
             </c4p-interstitial-screen-footer>
           </c4p-interstitial-screen>

@@ -12,26 +12,34 @@ import {
   Action,
   ConditionBuilderContextProps,
   ConditionBuilderState,
+  StatementOperator,
 } from '../ConditionBuilder.types';
 
-export const emptyState: ConditionBuilderState = {
-  operator: 'or',
-  groups: [
-    {
-      groupOperator: 'and',
-      statement: 'ifAll',
-      id: uuidv4(),
-      conditions: [
-        {
-          property: undefined,
-          operator: '',
-          value: '',
-          popoverToOpen: 'propertyField',
-          id: uuidv4(),
-        },
-      ],
-    },
-  ],
+export const getEmptyState = (
+  statementConfigCustom?: ConditionBuilderContextProps['statementConfigCustom']
+): ConditionBuilderState => {
+  const defaultStatement = statementConfigCustom?.[0];
+  const defaultStatementId = (defaultStatement?.id ??
+    'ifAll') as StatementOperator;
+  return {
+    operator: 'or',
+    groups: [
+      {
+        groupOperator: defaultStatement?.connector ?? 'and',
+        statement: defaultStatementId,
+        id: uuidv4(),
+        conditions: [
+          {
+            property: undefined,
+            operator: '',
+            value: '',
+            popoverToOpen: 'propertyField',
+            id: uuidv4(),
+          },
+        ],
+      },
+    ],
+  };
 };
 
 export const ConditionBuilderContext =

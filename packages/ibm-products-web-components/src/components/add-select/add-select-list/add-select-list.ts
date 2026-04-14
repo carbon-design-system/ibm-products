@@ -8,7 +8,6 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { prefix } from '../../../globals/settings';
@@ -220,21 +219,19 @@ class CDSAddSelectList extends LitElement {
     } = this;
 
     const listClasses = classMap({
-      [`${blockClass}-wrapper`]: true,
-      [`${blockClass}-wrapper-multi`]: this._multi,
+      [`${blockClass}-list`]: true,
     });
 
     return html`
-      <div class=${listClasses}>
-        <div class="${blockClass}">
-          <div
-            class="${blockClass}-body"
-            role="treegrid"
-            aria-label="Add select list"
-            @keydown=${handleKeyDown}
-          >
-            <slot @slotchange=${handleSlotChange}></slot>
-          </div>
+      <div
+        class=${listClasses}
+        role="grid"
+        aria-multiselectable=${this._multi}
+        tabindex="0"
+        @keydown=${handleKeyDown}
+      >
+        <div class="${blockClass}-list-body">
+          <slot @slotchange=${handleSlotChange}></slot>
         </div>
       </div>
     `;

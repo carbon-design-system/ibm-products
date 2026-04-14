@@ -179,9 +179,10 @@ class CDSAddSelectRow extends LitElement {
         role="row"
         aria-selected=${selected}
         tabindex="-1"
+        ?data-has-children=${hasChildren}
       >
-        <div class="${blockClass}-cell" role="gridcell">
-          <div class="${blockClass}-cell-wrapper">
+        <div class="${blockClass}-row__cell" role="gridcell">
+          <div class="${blockClass}-row__cell-wrapper">
             ${this._multi
               ? html`
                   <cds-checkbox
@@ -205,12 +206,14 @@ class CDSAddSelectRow extends LitElement {
                   </cds-radio-button>
                 `}
 
-            <div class="${blockClass}-content">
+            <div class="${blockClass}-row__content">
               <slot name="icon"></slot>
-              <div class="${blockClass}-text">
-                <div class="${blockClass}-title">${title}</div>
+              <div class="${blockClass}-row__text">
+                <div class="${blockClass}-row__title">${title}</div>
                 ${subtitle &&
-                html`<div class="${blockClass}-subtitle">${subtitle}</div>`}
+                html`<div class="${blockClass}-row__subtitle">
+                  ${subtitle}
+                </div>`}
               </div>
               <slot name="meta"></slot>
             </div>
@@ -218,7 +221,7 @@ class CDSAddSelectRow extends LitElement {
             ${hasChildren
               ? html`
                   <div
-                    class="${blockClass}-nav-indicator"
+                    class="${blockClass}-row__nav-indicator"
                     @click=${this._handleNavigate}
                     role="button"
                     tabindex="-1"

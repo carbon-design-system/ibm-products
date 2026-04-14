@@ -20,4 +20,23 @@ $prefix: 'c4p';
 /* Web Component specific overrides */
 :host(#{$prefix}-add-select-list) {
   display: block;
+
+  /* Apply shared styles within shadow DOM */
+  .#{$block-class__next}-list {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    @supports (overflow-block: auto) {
+      overflow-block: auto;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$block-class__next}-list-body {
+    display: flex;
+    flex-direction: column;
+  }
 }

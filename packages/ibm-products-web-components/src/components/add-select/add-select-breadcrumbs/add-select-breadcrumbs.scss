@@ -10,6 +10,7 @@ $css--plex: true !default;
 /* Carbon and IBM Products styles */
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
 
 $prefix: 'c4p';
 
@@ -20,4 +21,59 @@ $prefix: 'c4p';
 /* Web Component specific overrides */
 :host(#{$prefix}-add-select-breadcrumbs) {
   display: inline-block;
+
+  /* Apply shared styles within shadow DOM */
+  .#{$block-class__next}__breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-02;
+
+    &--multi {
+      // Multi-select specific breadcrumb styles
+    }
+  }
+
+  .#{$block-class__next}__breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-02;
+  }
+
+  .#{$block-class__next}__breadcrumb-button {
+    @include type.type-style('body-compact-01');
+
+    padding: 0;
+    border: none;
+    background: none;
+    color: $link-primary;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      color: $link-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: 2px;
+    }
+  }
+
+  .#{$block-class__next}__breadcrumb-separator {
+    display: flex;
+    align-items: center;
+    color: $text-secondary;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  .#{$block-class__next}__breadcrumb-current {
+    @include type.type-style('body-compact-01');
+
+    color: $text-primary;
+  }
 }

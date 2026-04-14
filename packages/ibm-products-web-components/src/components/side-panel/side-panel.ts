@@ -98,12 +98,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @query(`.${blockClass}__inner-content`)
   private _innerContent!: HTMLElement;
 
-  @queryAssignedElements({
-    slot: 'actions',
-    selector: `${carbonPrefix}-button`,
-  })
-  private _actions!: Array<HTMLElement>;
-
   @state()
   _doAnimateTitle = true;
 

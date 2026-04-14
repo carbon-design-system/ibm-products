@@ -2218,6 +2218,7 @@ __metadata:
     "@aarsteinmedia/dotlottie-player": "npm:^6.0.5"
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
     "@carbon-labs/wc-empty-state": "npm:^0.13.0"
+    "@carbon/ibm-products-primitives": "npm:^1.0.0-rc.0"
     "@carbon/ibm-products-styles": "npm:^2.84.0-rc.0"
     "@carbon/icon-helpers": "npm:^10.73.0"
     "@carbon/icons": "npm:^11.76.0"

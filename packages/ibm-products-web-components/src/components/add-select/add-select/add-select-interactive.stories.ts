@@ -17,7 +17,7 @@ import '../add-select-item/add-select-item';
 import {
   AddSelectData,
   HierarchicalItem,
-} from '../../../globals/js/utils/add-select/add-select-data';
+} from '@carbon/ibm-products-primitives';
 import { prefix } from '../../../globals/settings';
 
 // Sample hierarchical data

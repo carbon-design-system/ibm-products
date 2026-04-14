@@ -1,0 +1,203 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import * as AddSelectItemStories from './add-select-item.stories';
+
+<Meta of={AddSelectItemStories} />
+
+# Add Select Item
+
+## Overview
+
+The Add Select Item component represents a single selectable item in the add-select pattern. It supports:
+- Single-select mode (radio button)
+- Multi-select mode (checkbox)
+- Hierarchical navigation (items with children)
+- Disabled state
+- Selected state
+- Keyboard navigation
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
+```
+
+### Usage Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectItemStories.Default} />
+
+### HTML
+
+```html
+<c4p-add-select-item
+  item-id="1"
+  title="Item title"
+  subtitle="Item subtitle description"
+  value="item-1"
+  tab-index="0"
+  @c4p-add-select-item-select=${handleSelect}
+>
+</c4p-add-select-item>
+```
+
+## Single Select Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectItemStories.SingleSelect} />
+
+### HTML
+
+```html
+<c4p-add-select-item
+  item-id="1"
+  title="Item title"
+  subtitle="Item subtitle"
+  value="item-1"
+  tab-index="0"
+>
+</c4p-add-select-item>
+```
+
+## Multi Select Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectItemStories.MultiSelect} />
+
+### HTML
+
+```html
+<c4p-add-select-item
+  multi
+  item-id="1"
+  title="Item title"
+  subtitle="Item subtitle"
+  value="item-1"
+  tab-index="0"
+>
+</c4p-add-select-item>
+```
+
+## Selected State Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectItemStories.Selected} />
+
+### HTML
+
+```html
+<c4p-add-select-item
+  item-id="1"
+  title="Item title"
+  subtitle="Item subtitle"
+  value="item-1"
+  selected
+  tab-index="0"
+>
+</c4p-add-select-item>
+```
+
+## Disabled State Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectItemStories.Disabled} />
+
+### HTML
+
+```html
+<c4p-add-select-item
+  item-id="1"
+  title="Item title"
+  subtitle="Item subtitle"
+  value="item-1"
+  disabled
+  tab-index="0"
+>
+</c4p-add-select-item>
+```
+
+## With Children Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectItemStories.WithChildren} />
+
+### HTML
+
+```html
+<c4p-add-select-item
+  item-id="1"
+  title="Parent item"
+  subtitle="This item has children"
+  value="parent-1"
+  has-children
+  tab-index="0"
+  @c4p-add-select-item-navigate=${handleNavigate}
+>
+</c4p-add-select-item>
+```
+
+## Without Subtitle Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectItemStories.WithoutSubtitle} />
+
+### HTML
+
+```html
+<c4p-add-select-item
+  item-id="1"
+  title="Item title"
+  value="item-1"
+  tab-index="0"
+>
+</c4p-add-select-item>
+```
+
+## Events
+
+### `c4p-add-select-item-select`
+Fired when the item is selected or deselected.
+
+**Detail:**
+```javascript
+{
+  itemId: string,
+  selected: boolean,
+  value: string
+}
+```
+
+**Example:**
+```javascript
+const handleSelect = (event) => {
+  const { itemId, selected, value } = event.detail;
+  console.log(`Item ${itemId} is now ${selected ? 'selected' : 'deselected'}`);
+};
+```
+
+### `c4p-add-select-item-navigate`
+Fired when navigating to children (only for items with `has-children` attribute).
+
+**Detail:**
+```javascript
+{
+  itemId: string,
+  title: string,
+  parentId: string
+}
+```
+
+**Example:**
+```javascript
+const handleNavigate = (event) => {
+  const { itemId, title } = event.detail;
+  console.log(`Navigating to children of ${title}`);
+  // Load and display children items
+};
+```
+
+## Keyboard Navigation
+
+- **Enter/Space**: Select/deselect the item
+- **Arrow Right**: Navigate to children (if `has-children` is true)
+
+## `<c4p-add-select-item>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-add-select-item" />

@@ -1,0 +1,37 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$prefix: 'c4p';
+$baseClass: #{$prefix}--add-select-list;
+
+:host(#{$prefix}-add-select-list) {
+  display: block;
+}
+
+.#{$baseClass}-wrapper {
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.#{$baseClass}-wrapper-multi {
+  // Additional styles for multi-select mode
+}
+
+.#{$baseClass} {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+}
+
+.#{$baseClass}-body {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-02;
+}

@@ -1,0 +1,115 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import * as AddSelectBreadcrumbsStories from './add-select-breadcrumbs.stories';
+
+<Meta of={AddSelectBreadcrumbsStories} />
+
+# Add Select Breadcrumbs
+
+## Overview
+
+The Add Select Breadcrumbs component displays the navigation path in hierarchical data structures. It shows the current location within the data hierarchy and allows users to navigate back to parent levels by clicking on breadcrumb items.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
+```
+
+### Usage Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.Default} />
+
+### HTML
+
+```javascript
+const path = [
+  { id: 'root', title: 'Root' },
+  { id: 'category', title: 'Category' },
+  { id: 'subcategory', title: 'Subcategory' }
+];
+```
+
+```html
+<c4p-add-select-breadcrumbs
+  .path=${path}
+  @c4p-add-select-breadcrumbs-click=${handleBreadcrumbClick}
+>
+</c4p-add-select-breadcrumbs>
+```
+
+## Single Level Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.SingleLevel} />
+
+### HTML
+
+```javascript
+const path = [{ id: 'root', title: 'Root' }];
+```
+
+```html
+<c4p-add-select-breadcrumbs .path=${path}>
+</c4p-add-select-breadcrumbs>
+```
+
+## Multi Level Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.MultiLevel} />
+
+### HTML
+
+```javascript
+const path = [
+  { id: 'root', title: 'Root' },
+  { id: 'level1', title: 'Level 1' },
+  { id: 'level2', title: 'Level 2' },
+  { id: 'level3', title: 'Level 3' },
+  { id: 'level4', title: 'Level 4' }
+];
+```
+
+```html
+<c4p-add-select-breadcrumbs .path=${path}>
+</c4p-add-select-breadcrumbs>
+```
+
+## Multi-select Mode Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.MultiSelectMode} />
+
+### HTML
+
+```html
+<c4p-add-select-breadcrumbs multi .path=${path}>
+</c4p-add-select-breadcrumbs>
+```
+
+## Events
+
+### `c4p-add-select-breadcrumbs-click`
+Fired when a breadcrumb item is clicked.
+
+**Detail:**
+```javascript
+{
+  index: number  // The index of the clicked breadcrumb in the path array
+}
+```
+
+**Example:**
+```javascript
+const handleBreadcrumbClick = (event) => {
+  const { index } = event.detail;
+  console.log(`Navigating to level ${index}`);
+  // Update your path state to navigate to the clicked level
+};
+```
+
+## `<c4p-add-select-breadcrumbs>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-add-select-breadcrumbs" />

@@ -1,0 +1,106 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import * as AddSelectStories from './add-select.stories';
+
+<Meta of={AddSelectStories} />
+
+# Add Select
+
+## Overview
+
+The Add Select component is a wrapper component that provides the container for the add-select pattern. It should contain the `c4p-add-select-body` component which handles the main functionality including search, breadcrumbs, and item lists.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
+```
+
+### Usage Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectStories.Default} />
+
+### HTML
+
+```html
+<c4p-add-select>
+  <c4p-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    global-search-placeholder="Search items"
+  >
+    <c4p-add-select-list>
+      <c4p-add-select-item
+        item-id="1"
+        title="Item 1"
+        subtitle="Description"
+        value="item-1"
+      >
+      </c4p-add-select-item>
+    </c4p-add-select-list>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+## Multi-select Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectStories.MultiSelect} />
+
+### HTML
+
+```html
+<c4p-add-select>
+  <c4p-add-select-body
+    multi
+    items-label="All items"
+    global-search-label="Search"
+    global-search-placeholder="Search items"
+  >
+    <c4p-add-select-list multi>
+      <c4p-add-select-item
+        multi
+        item-id="1"
+        title="Item 1"
+        subtitle="Description"
+        value="item-1"
+      >
+      </c4p-add-select-item>
+    </c4p-add-select-list>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+## With Hierarchy Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectStories.WithHierarchy} />
+
+### HTML
+
+```html
+<c4p-add-select>
+  <c4p-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    global-search-placeholder="Search items"
+  >
+    <c4p-add-select-list>
+      <c4p-add-select-item
+        item-id="1"
+        title="Parent Item"
+        subtitle="Has children"
+        value="parent-1"
+        has-children
+      >
+      </c4p-add-select-item>
+    </c4p-add-select-list>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+## `<c4p-add-select>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-add-select" />

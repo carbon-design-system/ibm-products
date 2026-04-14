@@ -1,0 +1,123 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import * as AddSelectBodyStories from './add-select-body.stories';
+
+<Meta of={AddSelectBodyStories} />
+
+# Add Select Body
+
+## Overview
+
+The Add Select Body component contains the main content area for the add-select pattern. It includes:
+- Global search functionality
+- Breadcrumb navigation for hierarchical data
+- Item count display
+- Content area for the item list
+
+This component manages the search state and navigation path, and emits events when users interact with search or breadcrumbs.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
+```
+
+### Usage Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectBodyStories.Default} />
+
+### HTML
+
+```html
+<c4p-add-select-body
+  items-label="All items"
+  global-search-label="Search"
+  global-search-placeholder="Search items"
+  search-results-title="Search results"
+  .itemCount=${5}
+>
+  <c4p-add-select-list>
+    <!-- Add select items here -->
+  </c4p-add-select-list>
+</c4p-add-select-body>
+```
+
+## Multi-select Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectBodyStories.MultiSelect} />
+
+### HTML
+
+```html
+<c4p-add-select-body
+  multi
+  items-label="All items"
+  global-search-label="Search"
+  global-search-placeholder="Search items"
+  .itemCount=${5}
+>
+  <c4p-add-select-list multi>
+    <!-- Add select items here -->
+  </c4p-add-select-list>
+</c4p-add-select-body>
+```
+
+## With Breadcrumbs Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectBodyStories.WithBreadcrumbs} />
+
+### HTML
+
+```javascript
+const path = [
+  { id: 'root', title: 'Root' },
+  { id: 'category', title: 'Category' },
+  { id: 'subcategory', title: 'Subcategory' }
+];
+```
+
+```html
+<c4p-add-select-body
+  items-label="All items"
+  global-search-label="Search"
+  global-search-placeholder="Search items"
+  .itemCount=${5}
+  .path=${path}
+  @c4p-add-select-body-search=${handleSearch}
+  @c4p-add-select-body-breadcrumb-click=${handleBreadcrumbClick}
+>
+  <c4p-add-select-list>
+    <!-- Add select items here -->
+  </c4p-add-select-list>
+</c4p-add-select-body>
+```
+
+## Events
+
+### `c4p-add-select-body-search`
+Fired when the search term changes.
+
+**Detail:**
+```javascript
+{
+  searchTerm: string
+}
+```
+
+### `c4p-add-select-body-breadcrumb-click`
+Fired when a breadcrumb item is clicked.
+
+**Detail:**
+```javascript
+{
+  index: number
+}
+```
+
+## `<c4p-add-select-body>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-add-select-body" />

@@ -235,13 +235,18 @@ export const ItemOptionForValueField = ({
                     <span
                       className={`${blockClass}__item-option__option-label`}
                     >
-                      {option.label}
-                    </span>
-                    {Icon && (
-                      <span className={`${blockClass}__option-icon`}>
-                        <Icon />
+                      <span
+                        className={`${blockClass}__item-option__option-label-text`}
+                        title={option.label}
+                      >
+                        {option.label}
                       </span>
-                    )}
+                      {Icon && (
+                        <span className={`${blockClass}__option-icon`}>
+                          <Icon />
+                        </span>
+                      )}
+                    </span>
                   </>
                 ) : (
                   <>
@@ -249,7 +254,12 @@ export const ItemOptionForValueField = ({
                       className={`${blockClass}__item-option__option-label`}
                     >
                       {Icon && <Icon />}
-                      {option.label}
+                      <span
+                        className={`${blockClass}__item-option__option-label-text`}
+                        title={option.label}
+                      >
+                        {option.label}
+                      </span>
                     </span>
                     {isSelected && (
                       <Checkmark className={`${blockClass}__checkmark`} />

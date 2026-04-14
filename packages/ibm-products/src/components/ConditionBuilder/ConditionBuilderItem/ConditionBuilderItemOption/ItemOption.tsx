@@ -148,9 +148,14 @@ export const ItemOption = ({
               <div className={`${blockClass}__item-option__option-content`}>
                 <span className={`${blockClass}__item-option__option-label`}>
                   {Icon && <Icon />}
-                  {config?.isStatement
-                    ? getStatementContent(option)
-                    : option.label}
+                  <span
+                    className={`${blockClass}__item-option__option-label-text`}
+                    title={option.label}
+                  >
+                    {config?.isStatement
+                      ? getStatementContent(option)
+                      : option.label}
+                  </span>
                 </span>
                 {isSelected && (
                   <Checkmark className={`${blockClass}__checkmark`} />

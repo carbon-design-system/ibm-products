@@ -31,8 +31,8 @@ jobs:
           WS_WSS_URL: ${{ secrets.WS_WSS_URL }}
 
           # Project Configuration
-          WS_PRODUCTNAME: "PSIRT_PRD0016052"
-          WS_PROJECTNAME: "GH_ibm-products"
+          WS_PRODUCTNAME: 'PSIRT_PRD0016052'
+          WS_PROJECTNAME: 'GH_ibm-products'
         run: |
           # Download the latest Mend Unified Agent
           curl -L https://unified-agent.s3.amazonaws.com/wss-unified-agent.jar -o wss-unified-agent.jar

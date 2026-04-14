@@ -168,9 +168,9 @@ class CDSAddSelectRow extends LitElement {
     } = this;
 
     const rowClasses = classMap({
-      [`${blockClass}-row`]: true,
-      [`${blockClass}-row--selected`]: selected,
-      [`${blockClass}-row--disabled`]: disabled,
+      [`${blockClass}`]: true,
+      [`${blockClass}--selected`]: selected,
+      [`${blockClass}--disabled`]: disabled,
     });
 
     return html`
@@ -181,8 +181,8 @@ class CDSAddSelectRow extends LitElement {
         tabindex="-1"
         ?data-has-children=${hasChildren}
       >
-        <div class="${blockClass}-row__cell" role="gridcell">
-          <div class="${blockClass}-row__cell-wrapper">
+        <div class="${blockClass}__cell" role="gridcell">
+          <div class="${blockClass}__cell-wrapper">
             ${this._multi
               ? html`
                   <cds-checkbox
@@ -206,14 +206,12 @@ class CDSAddSelectRow extends LitElement {
                   </cds-radio-button>
                 `}
 
-            <div class="${blockClass}-row__content">
+            <div class="${blockClass}__content">
               <slot name="icon"></slot>
-              <div class="${blockClass}-row__text">
-                <div class="${blockClass}-row__title">${title}</div>
+              <div class="${blockClass}__text">
+                <div class="${blockClass}__title">${title}</div>
                 ${subtitle &&
-                html`<div class="${blockClass}-row__subtitle">
-                  ${subtitle}
-                </div>`}
+                html`<div class="${blockClass}__subtitle">${subtitle}</div>`}
               </div>
               <slot name="meta"></slot>
             </div>
@@ -221,7 +219,7 @@ class CDSAddSelectRow extends LitElement {
             ${hasChildren
               ? html`
                   <div
-                    class="${blockClass}-row__nav-indicator"
+                    class="${blockClass}__nav-indicator"
                     @click=${this._handleNavigate}
                     role="button"
                     tabindex="-1"

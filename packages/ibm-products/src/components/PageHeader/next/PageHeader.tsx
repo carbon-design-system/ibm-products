@@ -50,6 +50,11 @@ import {
   PageHeaderBreadcrumbOverflow,
   type PageHeaderBreadcrumbOverflowProps,
 } from './PageHeaderBreadcrumbOverflow';
+import {
+  PageHeaderBreadcrumbPageActions,
+  type PageHeaderBreadcrumbPageActionsProps,
+  type PageHeaderBreadcrumbPageActionItem,
+} from './PageHeaderBreadcrumbPageActions';
 
 /**
  * ----------
@@ -289,6 +294,9 @@ BreadcrumbOverflow.displayName = 'PageHeaderBreadcrumbOverflow';
 const TagOverflow = PageHeaderTagOverflow;
 TagOverflow.displayName = 'PageHeaderTagOverflow';
 
+const BreadcrumbPageActions = PageHeaderBreadcrumbPageActions;
+BreadcrumbPageActions.displayName = 'PageHeaderBreadcrumbPageActions';
+
 export {
   // direct exports
   PageHeader,
@@ -302,6 +310,7 @@ export {
   PageHeaderTitleBreadcrumb,
   PageHeaderBreadcrumbOverflow,
   PageHeaderTagOverflow,
+  PageHeaderBreadcrumbPageActions,
   // namespaced
   Root,
   BreadcrumbBar,
@@ -314,6 +323,7 @@ export {
   TitleBreadcrumb,
   BreadcrumbOverflow,
   TagOverflow,
+  BreadcrumbPageActions,
 };
 export type {
   PageHeaderBreadcrumbBarProps,
@@ -325,4 +335,6 @@ export type {
   PageHeaderScrollButtonProps,
   PageHeaderTagOverflowProps,
   PageHeaderBreadcrumbOverflowProps,
+  PageHeaderBreadcrumbPageActionsProps,
+  PageHeaderBreadcrumbPageActionItem,
 };

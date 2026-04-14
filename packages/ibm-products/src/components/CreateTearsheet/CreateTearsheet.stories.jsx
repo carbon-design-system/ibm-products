@@ -56,6 +56,11 @@ export default {
     },
     label: { control: { type: 'text' } },
     title: { control: { type: 'text' } },
+    secondaryButtonDisabled: {
+      control: { type: 'boolean' },
+      description:
+        'Conditionally disable the secondary (Back) button. This can be useful during form submission or when certain conditions need to be met before allowing navigation back.',
+    },
     onClose: { control: { disable: true } },
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
@@ -85,6 +90,7 @@ export const multiStepTearsheet = MultiStepTearsheet.bind({});
 multiStepTearsheet.storyName = 'Create tearsheet';
 multiStepTearsheet.args = {
   ...createTearsheetProps,
+  firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
 export const withIntroStep = MultiStepWithIntro.bind({});

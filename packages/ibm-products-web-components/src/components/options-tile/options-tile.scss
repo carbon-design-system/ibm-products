@@ -12,13 +12,16 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 $prefix: 'c4p';
-$carbon-prefix: 'cds';
 $block-class: #{$prefix}--options-tile;
 
 :host(#{$prefix}-options-tile) {
+  position: relative;
+
   .#{$block-class} {
+    position: relative;
     background: $layer-01;
     border-block-end: 1px solid $border-subtle-01;
 
@@ -52,8 +55,17 @@ $block-class: #{$prefix}--options-tile;
       }
 
       &-right {
+        position: absolute;
         display: flex;
         align-items: center;
+        block-size: $spacing-09;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        padding-inline: $spacing-05;
+      }
+
+      &--has-toggle {
+        inline-size: calc(100% - ($spacing-09 + ($spacing-05 * 3)));
       }
     }
 

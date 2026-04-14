@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -53,6 +53,7 @@ export interface CoachmarkBeaconProps {
 
 /**
  * Use beacon for the target prop of a Coachmark component.
+ * @deprecated This component is deprecated.
  */
 export const CoachmarkBeacon = React.forwardRef<
   HTMLDivElement,
@@ -89,6 +90,12 @@ export const CoachmarkBeacon = React.forwardRef<
     </span>
   );
 });
+
+/**@ts-ignore*/
+CoachmarkBeacon.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 

@@ -69,6 +69,27 @@
   };
 </script>
 
+<script>
+  (function () {
+    const overrideParentCallback = (eName, eData) => {
+      window.bluemixAnalytics.trackEvent(eName, eData);
+    };
+
+    window.onload = () => {
+      if (window.autoTrack) {
+        window.autoTrack.updateCallback(overrideParentCallback);
+      }
+    };
+
+    window.addEventListener('message', (message) => {
+      const msg = message.data;
+      if (msg.topic === 'Autotrack') {
+        overrideParentCallback(msg.eName, msg.eData);
+      }
+    });
+  })();
+</script>
+
 <script
   src="//1.www.s81c.com/common/stats/ibm-common.js"
   type="text/javascript"

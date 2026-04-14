@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
 
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
@@ -16,7 +17,7 @@
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-container {
+.#{$block-class} .#{carbon-config.$prefix}--modal-container {
   grid-template-rows: auto auto 1fr auto;
 }
 
@@ -47,14 +48,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
   padding-block-start: 0;
   padding-inline: $spacing-05 20%;
 
-  &:not(.#{c4p-settings.$carbon-prefix}--modal-scroll-content) {
+  &:not(.#{carbon-config.$prefix}--modal-scroll-content) {
     margin-block-end: $spacing-06;
     padding-block-end: 0;
   }
 }
 
-.#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
+.#{$block-class} .#{carbon-config.$prefix}--modal-content--overflow-indicator {
   background-image: linear-gradient(to bottom, #00000000, $layer-01);
   inset-block-end: #{$spacing-06};
 }

@@ -16,9 +16,11 @@ import { prefix, carbonPrefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/ui-shell/index.js';
 import '@carbon/web-components/es/components/heading/index.js';
+import './../truncated-text/index.js';
 import { UnreadNotificationBell } from './_story-assets/unread-notification-bell';
 import User20 from '@carbon/icons/es/user/20.js';
 import Notification20 from '@carbon/icons/es/notification/20.js';
+import Close20 from '@carbon/icons/es/close/20.js';
 import SwitcherIcon20 from '@carbon/icons/es/switcher/20.js';
 import {
   dataToday as initialDataToday,
@@ -195,7 +197,9 @@ const defaultTemplate = {
               setExpandUserPanel((prev) => !prev);
             }}
           >
-            ${iconLoader(User20, { slot: 'icon' })}
+            ${expandUserPanel
+              ? iconLoader(Close20, { slot: 'icon' })
+              : iconLoader(User20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-panel
             id="user-panel"
@@ -215,9 +219,11 @@ const defaultTemplate = {
             id="trigger-button"
             @click="${toggleButton}"
           >
-            ${isNewNotification
-              ? UnreadNotificationBell({ slot: 'icon' })
-              : iconLoader(Notification20, { slot: 'icon' })}
+            ${openPanel
+              ? iconLoader(Close20, { slot: 'icon' })
+              : isNewNotification
+                ? UnreadNotificationBell({ slot: 'icon' })
+                : iconLoader(Notification20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-global-action
             aria-label="App Switcher"
@@ -227,7 +233,9 @@ const defaultTemplate = {
               setExpandPanel((prev) => !prev);
             }}
           >
-            ${iconLoader(SwitcherIcon20, { slot: 'icon' })}
+            ${expandPanel
+              ? iconLoader(Close20, { slot: 'icon' })
+              : iconLoader(SwitcherIcon20, { slot: 'icon' })}
           </cds-header-global-action>
           <cds-header-panel
             id="switcher-panel"
@@ -279,7 +287,14 @@ const defaultTemplate = {
                     >
                       ${item.title}
                     </h4>
-                    <div slot="description">${item.description}</div>
+                    <c4p-truncated-text
+                      slot="description"
+                      value=${item.description}
+                      lines="2"
+                      type="expand"
+                      expand-label="Read more"
+                      collapse-label="Read less"
+                    />
                   </c4p-notification>
                 `;
               })}
@@ -308,7 +323,14 @@ const defaultTemplate = {
                     >
                       ${item.title}
                     </h4>
-                    <div slot="description">${item.description}</div>
+                    <c4p-truncated-text
+                      slot="description"
+                      value=${item.description}
+                      lines="2"
+                      type="expand"
+                      expand-label="Read more"
+                      collapse-label="Read less"
+                    />
                   </c4p-notification>
                 `;
               })}

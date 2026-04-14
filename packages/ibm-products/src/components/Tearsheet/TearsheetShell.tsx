@@ -7,6 +7,7 @@
 
 // Import portions of React that are needed.
 import React, {
+  useContext,
   useEffect,
   useState,
   useRef,
@@ -33,6 +34,7 @@ import {
   Layer,
   ModalHeader,
   Section,
+  useFeatureFlag,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
@@ -42,7 +44,14 @@ import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { useIsomorphicEffect, usePreviousValue } from '../../global/js/hooks';
 import { useFocus } from '../../global/js/hooks/useFocus';
+import { useMergedRefs } from '../../global/js/hooks/useMergedRefs';
 import { TearsheetAction } from './Tearsheet';
+import { useId } from '../../global/js/utils/useId';
+import {
+  TearsheetPresence,
+  TearsheetPresenceContext,
+  useExclusiveTearsheetPresenceContext,
+} from './TearsheetPresence';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -252,6 +261,37 @@ const SectionLevel3 = ({
  * */
 export const TearsheetShell = React.forwardRef(
   (
+    { open, ...props }: TearsheetShellProps,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
+    const id = useId();
+
+    const enablePresence = useFeatureFlag('enable-presence');
+    const hasPresenceContext = Boolean(useContext(TearsheetPresenceContext));
+    const hasPresenceOptIn = enablePresence || hasPresenceContext;
+
+    const exclusivePresenceContext = useExclusiveTearsheetPresenceContext(id);
+
+    // if opt in and not exclusive to a presence context, wrap with presence
+    if (hasPresenceOptIn && !exclusivePresenceContext) {
+      return (
+        <TearsheetPresence
+          open={open ?? false}
+          _presenceId={id}
+          // do not auto enable styles for opt-in by feature flag
+          _autoEnablePresence={hasPresenceContext}
+        >
+          <TearsheetShellDialog open ref={ref} {...props} />
+        </TearsheetPresence>
+      );
+    }
+
+    return <TearsheetShellDialog ref={ref} open={open} {...props} />;
+  }
+);
+
+const TearsheetShellDialog = React.forwardRef(
+  (
     {
       // The component props, in alphabetical order (for consistency).
       actions,
@@ -271,7 +311,7 @@ export const TearsheetShell = React.forwardRef(
       label,
       navigation,
       onClose,
-      open,
+      open: externalOpen,
       portalTarget: portalTargetIn,
       selectorPrimaryFocus,
       selectorsFloatingMenus = [],
@@ -293,13 +333,21 @@ export const TearsheetShell = React.forwardRef(
     const modalBodyRef = useRef(null);
     const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
     const { width } = useResizeObserver(resizer as RefObject<HTMLDivElement>);
-    const prevOpen = usePreviousValue(open);
     const { keyDownListener, claimFocus } = useFocus(
       modalRef,
       selectorPrimaryFocus
     );
     const modalRefValue = modalRef.current;
     const wide = size === 'wide';
+
+    const presenceContext = useContext(TearsheetPresenceContext);
+    const mergedRefs = useMergedRefs([modalRef, presenceContext?.presenceRef]);
+    const enablePresence =
+      useFeatureFlag('enable-presence') || presenceContext?.autoEnablePresence;
+
+    // always mark as open when mounted with presence
+    const open = externalOpen || enablePresence;
+    const prevOpen = usePreviousValue(open);
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
@@ -328,13 +376,27 @@ export const TearsheetShell = React.forwardRef(
       }
     }, [open, currentStep, effectiveHasCloseIcon, claimFocus]);
 
+    // Focus launcher button on open change for non presence tearsheet
     useEffect(() => {
-      if (prevOpen && !open && launcherButtonRef?.current) {
+      if (!enablePresence && prevOpen && !open && launcherButtonRef?.current) {
         setTimeout(() => {
-          launcherButtonRef?.current.focus();
+          launcherButtonRef?.current?.focus();
         }, 10);
       }
-    }, [open, prevOpen, launcherButtonRef]);
+    }, [enablePresence, open, prevOpen, launcherButtonRef]);
+
+    // Focus launcher button on unmount for presence tearsheet
+    useEffect(() => {
+      const launcherButton = launcherButtonRef?.current;
+      if (!enablePresence || !launcherButton) {
+        return;
+      }
+      return () => {
+        setTimeout(() => {
+          launcherButton.focus();
+        }, 10);
+      };
+    }, [enablePresence, launcherButtonRef]);
 
     useEffect(() => {
       requestAnimationFrame(() => {
@@ -356,6 +418,9 @@ export const TearsheetShell = React.forwardRef(
     }, [claimFocus, hasError, modalRef]);
 
     useEffect(() => {
+      // Other tearsheets should already be notified if this tearsheet is exiting
+      const isPresent = open && !presenceContext?.isExiting;
+
       const notify = () =>
         stack.all.forEach((handler) => {
           handler(
@@ -372,7 +437,7 @@ export const TearsheetShell = React.forwardRef(
       // false to true to open it then append its notification callback to
       // the end of the stack array (as its ID), and call all the callbacks
       // to notify all open tearsheets that the stacking has changed.
-      if (open) {
+      if (isPresent) {
         stack.open.push(handleStackChange);
         notify();
       }
@@ -394,7 +459,7 @@ export const TearsheetShell = React.forwardRef(
           notify();
         }
       };
-    }, [open, size]);
+    }, [open, presenceContext?.isExiting, size]);
 
     const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
@@ -455,6 +520,9 @@ export const TearsheetShell = React.forwardRef(
               [`${bc}--has-decorator`]:
                 !!decorator && decorator['type']?.displayName !== 'AILabel',
               [`${bc}--has-close`]: effectiveHasCloseIcon,
+              ['is-visible']: enablePresence,
+              [`${bc}--tearsheet-enable-presence`]:
+                presenceContext?.autoEnablePresence,
             })}
             decorator={decorator || deprecated_slug}
             containerClassName={cx(`${bc}__container`, {
@@ -465,7 +533,7 @@ export const TearsheetShell = React.forwardRef(
             {...{ onClose, open, selectorPrimaryFocus }}
             onKeyDown={keyDownListener}
             preventCloseOnClickOutside={!isPassive}
-            ref={modalRef}
+            ref={mergedRefs}
             selectorsFloatingMenus={[
               `.${carbonPrefix}--overflow-menu-options`,
               `.${carbonPrefix}--tooltip`,
@@ -475,6 +543,7 @@ export const TearsheetShell = React.forwardRef(
               ...selectorsFloatingMenus,
             ]}
             size="sm"
+            data-tearsheet-exiting={presenceContext?.isExiting || undefined}
           >
             {includeHeader && (
               <ModalHeader
@@ -497,9 +566,7 @@ export const TearsheetShell = React.forwardRef(
                   <Wrap className={`${bc}__header-fields`}>
                     {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
-                    <Wrap element="h2" className={`${bcModalHeader}__label`}>
-                      {label}
-                    </Wrap>
+                    <Wrap className={`${bcModalHeader}__label`}>{label}</Wrap>
                     <Wrap
                       element="h3"
                       className={cx(

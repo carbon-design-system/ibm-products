@@ -4,6 +4,9 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+@use '@carbon/styles/scss/spacing' as *;
+
+$carbon-prefix: 'cds';
 
 .slider {
   /* stylelint-disable-next-line carbon/layout-use */
@@ -18,4 +21,13 @@
 
 .child {
   white-space: nowrap;
+
+  p {
+    margin-block-end: $spacing-02;
+    margin-block-start: $spacing-02;
+  }
+
+  .#{$carbon-prefix}--tag {
+    margin: 0 $spacing-03 $spacing-03 0;
+  }
 }

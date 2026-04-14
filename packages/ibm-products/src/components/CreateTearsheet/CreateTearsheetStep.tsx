@@ -13,7 +13,6 @@ import React, {
   isValidElement,
   PropsWithChildren,
   useRef,
-  MutableRefObject,
   RefObject,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -132,6 +131,11 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
   onPrevious?: () => void;
 
   /**
+   * This will conditionally disable the secondary (Back) button in the multi step Tearsheet
+   */
+  secondaryButtonDisabled?: boolean;
+
+  /**
    * Sets the optional secondary label on the progress step component
    */
   secondaryLabel?: string;
@@ -186,6 +190,7 @@ export const CreateTearsheetStep = forwardRef(
       onMount,
       onNext,
       onPrevious,
+      secondaryButtonDisabled,
       secondaryLabel,
       subtitle,
       title,
@@ -197,7 +202,7 @@ export const CreateTearsheetStep = forwardRef(
   ) => {
     const localRef = useRef<HTMLDivElement>(null);
     const stepRef = ref || localRef;
-    const stepRefValue = (stepRef as MutableRefObject<HTMLDivElement>).current;
+    const stepRefValue = (stepRef as RefObject<HTMLDivElement>).current;
     const stepsContext = useContext(StepsContext);
     const stepNumber = useContext(StepNumberContext);
     const [shouldIncludeStep, setShouldIncludeStep] =
@@ -241,38 +246,14 @@ export const CreateTearsheetStep = forwardRef(
       setShouldIncludeStep(includeStep);
     }, [includeStep, stepsContext, title]);
 
-    const setFocusChildrenTabIndex = (
-      childInputs: NodeListOf<Element>,
-      value: number
-    ) => {
-      if (childInputs?.length) {
-        childInputs.forEach((child) => {
-          (child as HTMLElement).tabIndex = value;
-        });
-      }
-    };
-
     // Whenever we are the current step, supply our disableSubmit and onNext values to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
-      const focusElementQuery = `button, input, select, textarea, a`;
-      if (stepNumber !== stepsContext?.currentStep) {
-        // Specify tab-index -1 for focusable elements not contained
-        // in the current step so that the useFocus hook can exclude
-        // from the focus trap
-        const childInputs = stepRefValue?.querySelectorAll(focusElementQuery);
-        setFocusChildrenTabIndex(childInputs, -1);
-      }
       if (stepNumber === stepsContext?.currentStep) {
-        // Specify tab-index 0 for current step focusable elements
-        // for the useFocus hook to know which elements to include
-        // in focus trap
-        const childInputs = stepRefValue?.querySelectorAll(focusElementQuery);
-        setFocusChildrenTabIndex(childInputs, 0);
-
         stepsContext.setIsDisabled(!!disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
         stepsContext?.setOnPrevious(onPrevious);
+        stepsContext?.setSecondaryButtonDisabled?.(!!secondaryButtonDisabled);
 
         //Handle props for experimentalSecondarySubmit button, depending on state change
         stepsContext?.setExperimentalSecondarySubmit(
@@ -285,6 +266,7 @@ export const CreateTearsheetStep = forwardRef(
       disableSubmit,
       onNext,
       onPrevious,
+      secondaryButtonDisabled,
       stepRef,
       stepRefValue,
       experimentalSecondarySubmit,
@@ -305,7 +287,10 @@ export const CreateTearsheetStep = forwardRef(
     };
 
     return stepsContext ? (
-      <div ref={stepRef as RefObject<HTMLDivElement>}>
+      <div
+        ref={stepRef as RefObject<HTMLDivElement>}
+        inert={stepNumber !== stepsContext?.currentStep}
+      >
         <Grid
           {
             // Pass through any other property values as HTML attributes.
@@ -443,6 +428,11 @@ CreateTearsheetStep.propTypes = {
    * Optional function to be called when you move to the previous step.
    */
   onPrevious: PropTypes.func,
+
+  /**
+   * This will conditionally disable the secondary (Back) button in the multi step Tearsheet
+   */
+  secondaryButtonDisabled: PropTypes.bool,
 
   /**
    * Sets the optional secondary label on the progress step component

@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useCallback, useLayoutEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 import cx from 'classnames';
 import { TableSelectRow, usePrefix } from '@carbon/react';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
@@ -101,7 +102,7 @@ const SelectRow = (datagridState) => {
 
   const [windowSize, setWindowSize] = useState<number>();
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     setWindowSize(window.innerWidth);
     function updateSize() {
       setWindowSize(window.innerWidth);

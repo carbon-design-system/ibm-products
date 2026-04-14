@@ -214,7 +214,8 @@ export const ConditionBuilderItem = ({
       return;
     }
 
-    const focusLeftPopover = !popoverEl.contains(relatedTarget);
+    const focusLeftPopover =
+      relatedTarget && !popoverEl.contains(relatedTarget);
     const targetInsidePopover = popoverEl.contains(focusEvent.target as Node);
 
     const targetEl = focusEvent.target as Element | null;
@@ -283,7 +284,18 @@ export const ConditionBuilderItem = ({
       role="gridcell"
       className={`${popOverClassName} ${blockClass}__popover`}
       ref={popoverRef}
-      onRequestClose={closePopover}
+      onRequestClose={() => {
+        // Workaround: prevent closing the popover when a date is selected
+        // from the flatpickr calendar, which is rendered outside the popover DOM.
+        // The flatpickr calendar is appended outside the popover DOM, so clicks on it
+        // trigger onRequestClose. We use the global event object to check the click target.
+        // carbon issue: https://github.com/carbon-design-system/carbon/issues/21690
+        const target = (event as MouseEvent)?.target as Element | null;
+        if (target?.closest('.flatpickr-calendar')) {
+          return;
+        }
+        closePopover();
+      }}
     >
       <ConditionBuilderButton
         label={getLabel()}

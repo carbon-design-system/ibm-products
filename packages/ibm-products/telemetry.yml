@@ -45,6 +45,7 @@ collect:
         - breadcrumbs
         - button
         - buttonProps
+        - buttonSize
         - cancelButtonText
         - caret
         - cellSize
@@ -56,6 +57,7 @@ collect:
         - closeIconDescription
         - closePopover
         - collapseButtonLabel
+        - collapseText
         - collapsible
         - column
         - columnInputPlaceholder
@@ -103,6 +105,7 @@ collect:
         - expandedContentHeight
         - ExpandedRowContentComponent
         - expandedRowIds
+        - expandText
         - fetchMoreData
         - fieldsetLegendId
         - fieldsetLegendText
@@ -148,6 +151,7 @@ collect:
         - headers
         - headingAs
         - headRef
+        - hideCloseButton
         - hideConditionPreviewHandler
         - hideConditionSubGroupPreviewHandler
         - hideIcon
@@ -182,6 +186,7 @@ collect:
         - invalid
         - invalidText
         - isFetching
+        - isFlush
         - isOpen
         - isTableSortable
         - item
@@ -313,6 +318,7 @@ collect:
         - score
         - scoreThresholds
         - scrollBarSize
+        - scroller
         - searchResultsTitle
         - secondaryActionLabel
         - secondaryButtonDisabled
@@ -422,7 +428,7 @@ collect:
         - searchText
         - setSearchText
         # ActionSet
-        - buttonSize
+        - disableStacking
         # AddSelectBody
         - defaultModifiers
         - globalFilterOpts
@@ -526,6 +532,7 @@ collect:
         - noActionIcons
         # Carousel
         - disableArrowScroll
+        - disableResetOnResize
         - fadedEdgeColor
         - isScrollMode
         - onChangeIsScrollable
@@ -654,7 +661,10 @@ collect:
         - inheritTypography
         - invalidLabel
         - onSave
+        - readOnlyLabel
+        - readOnlyToggleTipText
         - saveLabel
+        - toggleTipAlignment
         # EditTearsheet
         - onFormChange
         # EditUpdateCards
@@ -733,6 +743,7 @@ collect:
         - fileDropHeader
         - fileDropLabel
         - fileUploadLabel
+        - hideInputLabel
         - inputButtonIcon
         - inputButtonText
         - inputId
@@ -742,6 +753,8 @@ collect:
         - maxFileSize
         - maxFileSizeErrorBody
         - maxFileSizeErrorHeader
+        # Influencer
+        - influencerPanelOpen
         # InlineEditButton
         - columnConfig
         - isActiveCell
@@ -849,6 +862,9 @@ collect:
         - hasBackgroundAlways
         - hasCollapseHeaderToggle
         - narrowGrid
+        - onContentActionsClipped
+        - onContentFullyCollapsed
+        - onTitleClipped
         - pageActionsMenuOptionsClass
         - pageActionsOverflowLabel
         - withoutBackground
@@ -858,15 +874,13 @@ collect:
         - pageActionsFlush
         # PageHeaderBreadcrumbOverflow
         - renderOverflowBreadcrumb
+        # PageHeaderBreadcrumbPageActions
+        - buttonKind
+        - overflowMenuLabel
         # PageHeaderContent
         - contextualActions
         # PageHeaderContentPageActions
         - menuButtonLabel
-        # PageHeaderScrollButton
-        - collapseText
-        - expandText
-        # PageHeaderTabBar
-        - scroller
         # PageHeaderTagOverflow
         - renderOverflowTag
         - renderPopoverContent
@@ -922,7 +936,6 @@ collect:
         - animateTitle
         - closeIconTooltipAlignment
         - condensedActions
-        - hideCloseButton
         - includeOverlay
         - navigationBackIconDescription
         - onNavigationBack
@@ -937,6 +950,8 @@ collect:
         - sortableProps
         - strategy
         - withGrid
+        # StackProvider
+        - stackStepSize
         # StatusIndicator
         - onRetry
         - retryLabel
@@ -944,8 +959,31 @@ collect:
         # StringFormatter
         - tooltipDirection
         - width
+        # SummaryContent
+        - summaryPanelOpen
         # TagOverflow
         - tagComponent
+        # Tearsheet
+        - containerClassName
+        - disablePortal
+        - keepMounted
+        - summaryContentWidth
+        - verticalGap
+        # TearsheetHeader
+        - disableHeaderCollapse
+        # TearsheetHeaderActionItem
+        - overflowItemLabel
+        # TearsheetHeaderActions
+        - menuButtonProps
+        # TearsheetHeaderContent
+        - titleEnd
+        - titleStart
+        # TearsheetPresence
+        - _autoEnablePresence
+        - _presenceId
+        # TearsheetWithSteps
+        - progressIndicator
+        - setOpen
         # Toolbar
         - vertical
         # TruncatedList
@@ -1016,6 +1054,10 @@ collect:
         - order-7-cyan
         - order-8-gray
         - order-9-green
+        # General - buttonSize
+        - lg
+        - md
+        - sm
         # General - cellSize
         - lg
         - md
@@ -1173,7 +1215,9 @@ collect:
         - instant
         # General - variant
         - Hierarchical
+        - narrow
         - Non-Hierarchical
+        - wide
         # General - verticalPosition
         - lower
         - normal
@@ -1210,6 +1254,15 @@ collect:
         - low
         - medium
         - unknown
+        # EditInPlace - toggleTipAlignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
         # ExampleComponent - primaryKind
         - danger
         - primary
@@ -1225,11 +1278,23 @@ collect:
         - short
         # PageHeader - fullWidthGrid
         - xl
+        # PageHeaderBreadcrumbPageActions - buttonKind
+        - danger
+        - danger--ghost
+        - danger--tertiary
+        - ghost
+        - primary
+        - secondary
+        - tertiary
+        # StackProvider - stackStepSize
+        - lg
+        - md
+        - sm
+        # TearsheetWithSteps - progressIndicator
+        - horizontal
+        - vertical
   npm:
     dependencies: null
-  js:
-    functions: {}
-    tokens: null
   js:
     functions: {}
     tokens: null

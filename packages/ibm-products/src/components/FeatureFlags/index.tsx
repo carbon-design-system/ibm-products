@@ -34,6 +34,18 @@ export interface FeatureFlagsProps {
   enableTestFlagA?: boolean;
   enableTestFlagB?: boolean;
 }
+//merge c4p feature flags with carbon feature flags
+GlobalFeatureFlags.merge({
+  'default-portal-target-body': true,
+  'enable-datagrid-useInlineEdit': false,
+  'enable-datagrid-useEditableCell': false,
+  'enable-datagrid-useCustomizeColumns': false,
+  'ExampleComponent.secondaryIcon': false,
+  'ExampleComponent.useExample': false,
+  'enable-test-flag-a': false, // used in testing
+  'enable-test-flag-b': true, // used in testing
+  enableSidepanelResizer: false,
+});
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
  * or disable feature flags in a given React tree

@@ -1,4 +1,3 @@
-//cspell: disable
 //
 // Copyright IBM Corp. 2020, 2025
 //
@@ -6,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:list';
 @use 'sass:map';
 
 // Other Carbon settings.
@@ -16,7 +16,8 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities';
-@use '@carbon-labs/react-resizer/scss/resizer';
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon-labs/react-resizer/scss/resizer' as resizer;
 @use '@carbon/styles/scss/components/button/tokens' as *;
 
 // Standard imports.
@@ -31,7 +32,7 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
-$clabs-prefix: 'clabs';
+$clabs-prefix: resizer.$prefix;
 
 @property --panel-transform {
   inherits: true;
@@ -45,7 +46,7 @@ $clabs-prefix: 'clabs';
 
 @mixin setDividerStyles() {
   position: absolute;
-  background-color: $border-subtle-02;
+  background-color: $border-subtle-01;
   block-size: 1px;
   content: '';
   inline-size: 100%;
@@ -82,7 +83,6 @@ $clabs-prefix: 'clabs';
   background-color: $layer-01;
   block-size: calc(100% - 3rem);
   color: $text-primary;
-
   /* if the title does not scroll then we have a child scrolling section. */
   grid-template-rows: auto 1fr auto; /* titles content and actions */
   inset-block-start: $spacing-09;
@@ -93,6 +93,7 @@ $clabs-prefix: 'clabs';
   transition-behavior: allow-discrete;
   transition-duration: $duration-moderate-01;
   transition-property: display, opacity, transform;
+
   &:not(.#{$block-class}--slide-in) {
     // enableSidepanelResizer flag class
     &.#{$block-class}--enable-sidepanel-resizer {
@@ -198,7 +199,7 @@ $clabs-prefix: 'clabs';
     inline-size: 100%;
   }
   &.#{$block-class}--right-placement {
-    border-inline-start: 1px solid $border-subtle-02;
+    border-inline-start: 1px solid $border-subtle-01;
     inset-inline-end: 0;
   }
   &.#{$block-class}--left-placement {
@@ -221,7 +222,7 @@ $clabs-prefix: 'clabs';
       }
     }
 
-    border-inline-end: 1px solid $border-subtle-02;
+    border-inline-end: 1px solid $border-subtle-01;
     inset-inline-start: 0;
   }
   &.#{$block-class}.#{$block-class}--has-slug,
@@ -301,9 +302,9 @@ $clabs-prefix: 'clabs';
     }
 
     &:has(
-        .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
+        .#{$block-class}__navigation-back-button.#{carbon-config.$prefix}--btn--md
       ),
-    &.#{$block-class}__header--has-navigation-back.#{c4p-settings.$carbon-prefix}--btn--md {
+    &.#{$block-class}__header--has-navigation-back.#{carbon-config.$prefix}--btn--md {
       padding-block-start: $spacing-08;
     }
 
@@ -325,7 +326,7 @@ $clabs-prefix: 'clabs';
 
     &.#{$block-class}__header--reduced-motion {
       z-index: 5;
-      border-block-end: 1px solid $border-subtle-02;
+      border-block-end: 1px solid $border-subtle-01;
       margin-block-end: $spacing-05;
     }
 
@@ -335,7 +336,7 @@ $clabs-prefix: 'clabs';
     }
 
     &.#{$block-class}__header--on-detail-step
-      .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
+      .#{$block-class}__navigation-back-button.#{carbon-config.$prefix}--btn--md
       ~ .#{$block-class}__collapsed-title-text {
       inset-block-start: $spacing-06;
     }
@@ -490,14 +491,14 @@ $clabs-prefix: 'clabs';
     margin-inline-end: $spacing-03;
   }
 
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button {
+  .#{carbon-config.$prefix}--btn.#{$block-class}__navigation-back-button {
     position: fixed;
     z-index: 5;
     inset-block-start: 0;
     inset-inline-start: 0;
   }
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button,
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button {
+  .#{carbon-config.$prefix}--btn.#{$block-class}__navigation-back-button,
+  .#{carbon-config.$prefix}--btn.#{$block-class}__close-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -518,8 +519,8 @@ $clabs-prefix: 'clabs';
     }
   }
 
-  .#{c4p-settings.$carbon-prefix}--btn--md.#{$block-class}__navigation-back-button,
-  .#{c4p-settings.$carbon-prefix}--btn--md.#{$block-class}__close-button {
+  .#{carbon-config.$prefix}--btn--md.#{$block-class}__navigation-back-button,
+  .#{carbon-config.$prefix}--btn--md.#{$block-class}__close-button {
     block-size: $spacing-08;
     inline-size: $spacing-08;
   }
@@ -533,16 +534,21 @@ $clabs-prefix: 'clabs';
     block-size: $spacing-07;
     inset-block-start: 0;
     inset-inline-end: 0;
+
     /* stylelint-disable-next-line max-nesting-depth */
     @media (prefers-reduced-motion) {
       position: absolute;
     }
   }
+  .#{$block-class}__decorator-and-close
+    .#{carbon-config.$prefix}--ai-label__button--xs {
+    margin: $spacing-02;
+  }
 
   .#{$block-class}__actions-container {
     position: sticky; // stick to bottom
     background-color: $layer-01;
-    border-block-start: 1px solid $border-subtle-02;
+    border-block-start: 1px solid $border-subtle-01;
     inset-block-end: 0;
 
     &.#{$action-set-block-class}--2xl {
@@ -557,8 +563,6 @@ $clabs-prefix: 'clabs';
           inline-size: 25%;
         }
       }
-
-      flex-direction: column;
     }
 
     .#{$action-set-block-class}__action-button.#{$action-set-block-class}__action-button {
@@ -566,6 +570,23 @@ $clabs-prefix: 'clabs';
       block-size: var(--#{$block-class}--actions-height);
     }
   }
+  &.#{$block-class}.#{$block-class}--xs
+    .#{$block-class}__actions-container.#{$action-set-block-class}--sm {
+    @include setPanelSize(map.get($side-panel-sizes, xs));
+  }
+}
+
+// form fields should receive correct background color
+.#{$block-class} .#{carbon-config.$prefix}--text-input,
+.#{$block-class} .#{carbon-config.$prefix}--text-area,
+.#{$block-class} .#{carbon-config.$prefix}--search-input,
+.#{$block-class} .#{carbon-config.$prefix}--select-input,
+.#{$block-class} .#{carbon-config.$prefix}--multi-select,
+.#{$block-class} .#{carbon-config.$prefix}--dropdown,
+.#{$block-class} .#{carbon-config.$prefix}--dropdown-list,
+.#{$block-class} .#{carbon-config.$prefix}--number input[type='number'],
+.#{$block-class} .#{carbon-config.$prefix}--date-picker__input {
+  background-color: $field-02;
 }
 
 @keyframes side-panel-overlay-entrance {

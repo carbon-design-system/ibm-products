@@ -1,13 +1,17 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default {
   coverageReporters: ['json', 'html'],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
@@ -40,34 +44,40 @@ module.exports = {
     'StatusIndicator',
     'UserProfileImage',
   ],
-  resolver: require.resolve('./setup/resolver.js'),
+  resolver: resolve(__dirname, './setup/resolver.cjs'),
   moduleFileExtensions: ['tsx', 'ts', 'jsx', 'js', 'json', 'node'],
   moduleNameMapper: {
     // This mapping is the result of updating to Jest 28. We currently require
     // this as the version of uuid that gets resolved is ESM but we would like
     // to work in CommonJS until Jest lands support for ESM in stable
     // Reference: https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
-    '^uuid$': require.resolve('uuid'),
+    '^uuid$': 'uuid',
     // This mapping is added to resolve the alias that is set in our webpack config
     // otherwise the webpack alias does not work in the jest environment
     '\\.(css|scss)$': 'identity-obj-proxy',
+    '\\.(css|less|scss|sass)\\?inline$': resolve(
+      __dirname,
+      './setup/styleMock.js'
+    ),
   },
   modulePathIgnorePatterns: ['/build/', '/es/', '/lib/', '/umd/', '/examples/'],
   reporters: ['default'],
-  setupFiles: [require.resolve('./setup/setupFiles.js')],
-  setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv.js')],
+  setupFiles: [resolve(__dirname, './setup/setupFiles.js')],
+  setupFilesAfterEnv: [resolve(__dirname, './setup/setupFilesAfterEnv.js')],
   testMatch: [
     '<rootDir>/**/__tests__/**/*.(js|jsx|ts|tsx)?(x)',
     '<rootDir>/**/*.(spec|test).(js|jsx|ts|tsx)?(x)',
     '<rootDir>/**/*-(spec|test).(js|jsx|ts|tsx)?(x)',
   ],
   transform: {
-    '^.+\\.(mjs|cjs|js|jsx|ts|tsx)$': require.resolve(
-      './transform/javascript.js'
+    '^.+\\.(mjs|cjs|js|jsx|ts|tsx)$': resolve(
+      __dirname,
+      './transform/javascript.cjs'
     ),
-    '^.+\\.s?css$': require.resolve('./transform/css.js'),
-    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': require.resolve(
-      './transform/file.js'
+    '^.+\\.s?css$': resolve(__dirname, './transform/css.cjs'),
+    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': resolve(
+      __dirname,
+      './transform/file.cjs'
     ),
   },
   testEnvironment: 'jsdom',

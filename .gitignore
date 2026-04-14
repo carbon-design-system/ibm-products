@@ -11,6 +11,7 @@ dist
 umd
 css
 results
+docs/generated
 storybook-static
 
 # Config files
@@ -78,3 +79,4 @@ blob-report/
 # Actions
 /actions/**/node_modules
 /actions/**/yarn.lock
+figma.config.json

@@ -6,7 +6,6 @@
  */
 
 import { ArrowLeft, Close } from '@carbon/react/icons';
-import '../../feature-flags';
 // Carbon and package components we use.
 import {
   Button,
@@ -321,11 +320,23 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
     // Title animation on scroll related state
     const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
 
-    const handleEscapeKey = (event) => {
-      if (event.key === 'Escape' && open) {
-        onRequestClose?.();
+    const handleEscapeKey = useCallback(
+      (event) => {
+        if (event.key === 'Escape' && open) {
+          onRequestClose?.();
+        }
+      },
+      [onRequestClose, open]
+    );
+
+    useEffect(() => {
+      if (open && !slideIn) {
+        window.addEventListener('keydown', handleEscapeKey);
+        return () => {
+          window.removeEventListener('keydown', handleEscapeKey);
+        };
       }
-    };
+    }, [handleEscapeKey, open, slideIn]);
 
     useEffect(() => {
       if (!enableResizer) {
@@ -852,8 +863,8 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
         normalizedDecorator = React.cloneElement(
           slug as React.ReactElement<any>,
           {
-            // slug size is sm unless actions and size > md
-            size: closeSize,
+            // slug size is always xs
+            size: 'xs',
           }
         );
       }
@@ -862,8 +873,8 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
         normalizedDecorator = React.cloneElement(
           aiLabel as React.ReactElement<any>,
           {
-            // aiLabel size is sm unless actions and size > md
-            size: closeSize,
+            // aiLabel size is always xs
+            size: 'xs',
           }
         );
       }
@@ -872,8 +883,8 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
         normalizedDecorator = React.cloneElement(
           decorator as React.ReactElement<any>,
           {
-            // decorator size is sm unless actions and size > md
-            size: closeSize,
+            // decorator size is always xs
+            size: 'xs',
           }
         );
       }

@@ -27,6 +27,7 @@ export const useCreateComponentStepChange = ({
   submitButtonText,
   nextButtonText,
   isSubmitting,
+  secondaryButtonDisabled = false,
   componentBlockClass,
   setCreateComponentActions,
   setModalIsOpen,
@@ -138,7 +139,8 @@ export const useCreateComponentStepChange = ({
           label: backButtonText,
           onClick: handlePrevious,
           kind: 'secondary',
-          disabled: currentStep === firstIncludedStep,
+          disabled:
+            currentStep === firstIncludedStep || secondaryButtonDisabled,
           loading: loadingPrevious,
         });
       }
@@ -190,6 +192,7 @@ export const useCreateComponentStepChange = ({
     submitButtonText,
     onRequestSubmit,
     isSubmitting,
+    secondaryButtonDisabled,
     componentBlockClass,
     componentName,
     continueToNextStep,

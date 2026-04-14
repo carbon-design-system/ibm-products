@@ -4,7 +4,6 @@
 //  * This source code is licensed under the Apache-2.0 license found in the
 //  * LICENSE file in the root directory of this source tree.
 //  */
-import '../../../feature-flags';
 import { FilterContext, FilterPanel } from './addons/Filtering';
 import React, { useContext, ForwardedRef, useRef, useEffect } from 'react';
 import { Table, TableContainer, usePrefix } from '@carbon/react';

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ test.describe('Coachmark @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Coachmark',
-      id: 'preview-onboarding-coachmark-next--tooltip',
+      id: 'preview-onboarding-coachmark--tooltip',
       globals: {
         carbonTheme: 'white',
       },
@@ -28,7 +28,7 @@ test.describe('Coachmark @avt', () => {
   test('@avt-initially-focus-done-button', async ({ page }) => {
     await visitStory(page, {
       component: 'Coachmark',
-      id: 'preview-onboarding-coachmark-next--tooltip',
+      id: 'preview-onboarding-coachmark--tooltip',
       globals: {
         carbonTheme: 'white',
       },
@@ -40,7 +40,7 @@ test.describe('Coachmark @avt', () => {
   test('@avt-dragging-happening-on-header', async ({ page }) => {
     await visitStory(page, {
       component: 'Coachmark',
-      id: 'preview-onboarding-coachmark-next--floating',
+      id: 'preview-onboarding-coachmark--floating',
       globals: {
         carbonTheme: 'white',
       },

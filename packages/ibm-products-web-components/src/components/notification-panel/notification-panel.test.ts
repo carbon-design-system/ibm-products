@@ -8,6 +8,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { html, fixture, oneEvent, elementUpdated } from '@open-wc/testing';
 import './index';
+import { carbonPrefix } from '../../globals/settings';
 import CDSNotificationPanel from './notification-panel';
 
 const defaultProps = {
@@ -122,8 +123,9 @@ describe('c4p-notification-panel', () => {
     const doNotDisturbToggle = panel.shadowRoot?.querySelector(
       '.c4p--notifications-panel__do-not-disturb-toggle'
     );
-    const toggleText =
-      doNotDisturbToggle?.shadowRoot?.querySelector('.cds--toggle__text');
+    const toggleText = doNotDisturbToggle?.shadowRoot?.querySelector(
+      `.${carbonPrefix}--toggle__text`
+    );
     expect(toggleText?.textContent?.trim()).toBe(panel.doNotDisturbLabel);
   });
   it('should have "todayText" prop passed be title for Today Section', async () => {
@@ -386,5 +388,39 @@ describe('c4p-notification-panel', () => {
     expect(node?.querySelector('.empty-state-message')?.textContent).toBe(
       'empty state message'
     );
+  });
+
+  it('should add --next class to next sibling on focusin', async () => {
+    const panel = (await fixture(template())) as CDSNotificationPanel;
+    await elementUpdated(panel);
+    const notifications = panel.querySelectorAll(
+      'c4p-notification[slot="previous"]'
+    );
+    const first = notifications[0] as HTMLElement;
+    const second = notifications[1] as HTMLElement;
+
+    first.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+    await elementUpdated(panel);
+    expect(
+      second.classList.contains('c4p--notifications-panel__notification--next')
+    ).toBe(true);
+  });
+
+  it('should remove --next class from next sibling on focusout', async () => {
+    const panel = (await fixture(template())) as CDSNotificationPanel;
+    await elementUpdated(panel);
+    const notifications = panel.querySelectorAll(
+      'c4p-notification[slot="previous"]'
+    );
+    const first = notifications[0] as HTMLElement;
+    const second = notifications[1] as HTMLElement;
+
+    first.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
+    await elementUpdated(panel);
+    first.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
+    await elementUpdated(panel);
+    expect(
+      second.classList.contains('c4p--notifications-panel__notification--next')
+    ).toBe(false);
   });
 });

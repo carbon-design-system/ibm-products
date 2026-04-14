@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -137,6 +137,7 @@ export interface CoachmarkProps {
  * Coachmarks are used to call out specific functionality or concepts
  * within the UI that may not be intuitive but are important for the
  * user to gain understanding of the product's main value and discover new use cases.
+ * @deprecated This component is deprecated.
  */
 
 export const Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
@@ -382,6 +383,11 @@ const overlayRefType =
     : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
       PropTypes.instanceOf(HTMLElement);
 
+/**@ts-ignore*/
+Coachmark.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated.`,
+};
 // Return a placeholder if not released and not enabled by feature flag
 
 // The display name of the component, used by React. Note that displayName

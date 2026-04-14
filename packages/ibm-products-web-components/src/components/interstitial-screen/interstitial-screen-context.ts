@@ -11,6 +11,7 @@ import { disableButtonConfigType } from './interstitial-screen';
 
 interface InterstitialDetailsType {
   isFullScreen: boolean;
+  open: boolean;
   currentStep: number;
   stepDetails: { stepTitle: string; id: string | number }[];
   carouselAPI?: any;
@@ -18,6 +19,7 @@ interface InterstitialDetailsType {
 }
 export const interstitialDetailsSignal = signal<InterstitialDetailsType>({
   isFullScreen: false,
+  open: false,
   currentStep: 0,
   stepDetails: [],
   disableActions: {},
@@ -25,6 +27,7 @@ export const interstitialDetailsSignal = signal<InterstitialDetailsType>({
 export const resetInterstitialDetailsSignal = () => {
   interstitialDetailsSignal.set({
     isFullScreen: false,
+    open: false,
     currentStep: 0,
     stepDetails: [],
     disableActions: {},
@@ -40,6 +43,11 @@ export const updateInterstitialDetailsSignal = ({ name, detail }) => {
     interstitialDetailsSignal.set({
       ...interstitialDetailsSignal.get(),
       isFullScreen: detail,
+    });
+  } else if (name === 'open') {
+    interstitialDetailsSignal.set({
+      ...interstitialDetailsSignal.get(),
+      open: detail,
     });
   } else if (name === 'currentStep') {
     interstitialDetailsSignal.set({

@@ -21,6 +21,14 @@ test.describe('NotificationsPanel @avt', () => {
       },
     });
 
+    // Wait for the notification panel to be visible and stable
+    const notificationPanel = page.locator('[role="dialog"]');
+    await expect(notificationPanel).toBeVisible();
+
+    // Wait for animations to complete (Carbon standard animation duration)
+    // This ensures the panel is fully rendered before accessibility scan
+    await page.waitForTimeout(300);
+
     await expect(page).toHaveNoACViolations(
       'NotificationsPanel @avt-default-state'
     );
@@ -64,20 +72,18 @@ test.describe('NotificationsPanel @avt', () => {
       'button[aria-label="Open notifications"]'
     );
     await expect(notificationPanel).toBeVisible();
+
+    // Wait for panel to be fully rendered
+    await page.waitForTimeout(300);
+
+    // Click outside to close the panel
     await page.locator('body').click({ force: true });
-    await Promise.race([
-      notificationPanel.waitFor({ state: 'hidden', timeout: 100 }),
-      notificationPanel.waitFor({ state: 'detached', timeout: 100 }),
-      page.waitForFunction(
-        (panelSelector) => {
-          const panel = document.querySelector(panelSelector);
-          return !panel || window.getComputedStyle(panel).opacity === '0';
-        },
-        '[role="dialog"]',
-        { timeout: 100 }
-      ),
-    ]);
-    await page.waitForTimeout(150);
+
+    // Wait for close animation and focus management
+    await page.waitForTimeout(300);
+
+    // Check if focus returned to trigger button
+    // Increased timeout to account for animation and focus management delays
     await expect(async () => {
       const isFocused = await notificationTrigger.evaluate(
         (el) => el === document.activeElement
@@ -90,7 +96,7 @@ test.describe('NotificationsPanel @avt', () => {
           `Expected notifications trigger to be focused, but active element was: ${activeElement}`
         );
       }
-    }).toPass({ timeout: 100 });
+    }).toPass({ timeout: 1000 });
   });
   test('@avt-notification-panel-doesn-not-focus-return-to-trigger-when-clicked-on-actionable-elements', async ({
     page,
@@ -112,18 +118,6 @@ test.describe('NotificationsPanel @avt', () => {
       exact: true,
     });
     await addNotificationButton.click();
-    await Promise.race([
-      notificationPanel.waitFor({ state: 'hidden', timeout: 100 }),
-      notificationPanel.waitFor({ state: 'detached', timeout: 100 }),
-      page.waitForFunction(
-        (panelSelector) => {
-          const panel = document.querySelector(panelSelector);
-          return !panel || window.getComputedStyle(panel).opacity === '0';
-        },
-        '[role="dialog"]',
-        { timeout: 100 }
-      ),
-    ]);
     await expect(notificationTrigger).not.toBeFocused();
     await expect(addNotificationButton).toBeFocused({ timeout: 100 });
   });

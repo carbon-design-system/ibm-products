@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,7 @@ export {
   PageHeaderTitleBreadcrumb,
   PageHeaderBreadcrumbOverflow,
   PageHeaderTagOverflow,
+  PageHeaderBreadcrumbPageActions,
   //
   Root,
   BreadcrumbBar,
@@ -28,9 +29,9 @@ export {
   TitleBreadcrumb,
   BreadcrumbOverflow,
   TagOverflow,
+  BreadcrumbPageActions,
 } from './PageHeader';
 export type {
-  PageHeaderProps,
   PageHeaderBreadcrumbBarProps,
   PageHeaderContentProps,
   PageHeaderContentPageActionsProps,
@@ -39,4 +40,8 @@ export type {
   PageHeaderHeroImageProps,
   PageHeaderScrollButtonProps,
   PageHeaderTagOverflowProps,
+  PageHeaderBreadcrumbOverflowProps,
+  PageHeaderBreadcrumbPageActionsProps,
+  PageHeaderBreadcrumbPageActionItem,
 } from './PageHeader';
+export type { PageHeaderProps } from './PageHeader';

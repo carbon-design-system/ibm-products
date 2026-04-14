@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,9 +20,10 @@ import { CoachmarkStack } from '.';
 import mdx from './CoachmarkStack.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Preview Candidate/Onboarding/Coachmark/CoachmarkStack',
+  title: 'Deprecated/Coachmark/CoachmarkStack',
   component: CoachmarkStack,
   tags: ['autodocs', 'Onboarding'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -43,6 +44,26 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version. This can be created as{' '}
+            <a href="/?path=/docs/patterns-coachmark-stacked--overview">
+              pattern
+            </a>{' '}
+            using new composable coachmark, carousel utility and other carbon
+            components.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const Template = (args) => {

@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/components/tag';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 $story-prefix: 'overflow-handler-stories__';
 
@@ -28,6 +29,8 @@ $story-prefix: 'overflow-handler-stories__';
 
 .items {
   display: flex;
+  // Spacing between tags.
+  gap: spacing.$spacing-03;
   white-space: nowrap;
 
   &--vertical {
@@ -63,6 +66,6 @@ $story-prefix: 'overflow-handler-stories__';
   display: none;
 }
 
-.cds-tag:not(:defined) {
+.#{carbon-config.$prefix}-tag:not(:defined) {
   display: none;
 }

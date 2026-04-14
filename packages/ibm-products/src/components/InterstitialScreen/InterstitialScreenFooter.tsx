@@ -14,7 +14,13 @@ import {
   ActionType,
   disableButtonConfigType,
 } from './context';
-import { Button, InlineLoading, ModalFooter } from '@carbon/react';
+import {
+  Button,
+  ButtonSet,
+  InlineLoading,
+  ModalFooter,
+  usePrefix,
+} from '@carbon/react';
 import { clamp } from '../../global/js/utils/clamp';
 import { ArrowRight } from '@carbon/react/icons';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -87,7 +93,9 @@ const InterstitialScreenFooter = React.forwardRef<
   const nextButtonRef = useRef<HTMLButtonElement | null>(null);
   const [loadingAction, setLoadingAction] = useState('');
 
-  const isMultiStep = !!stepCount;
+  const carbonPrefix = usePrefix();
+
+  const isMultiStep = !!stepCount && stepCount > 1;
   const progStepFloor = 0;
   const progStepCeil = stepCount - 1;
   //this will focus the start button on last step when next button is hidden and start button is shown
@@ -101,7 +109,7 @@ const InterstitialScreenFooter = React.forwardRef<
   const handleAction = async (actionType: ActionType) => {
     setLoadingAction(actionType);
 
-    await onAction?.(actionType, {
+    const abortContinue = await onAction?.(actionType, {
       handleGotoStep,
       progStep,
       stepCount,
@@ -109,6 +117,11 @@ const InterstitialScreenFooter = React.forwardRef<
     });
 
     setLoadingAction('');
+
+    // Skip navigation if onAction explicitly returns true
+    if (abortContinue) {
+      return;
+    }
 
     if (actionType === 'next' || actionType === 'back') {
       const stepDelta = actionType === 'next' ? 1 : -1;
@@ -137,7 +150,7 @@ const InterstitialScreenFooter = React.forwardRef<
   }, [loadingAction, isMultiStep, progStep, progStepCeil]);
 
   const getFooterContent = () => (
-    <>
+    <ButtonSet>
       {isMultiStep && skipButtonLabel !== '' && (
         <Button
           className={`${blockClass}--skip-btn`}
@@ -151,77 +164,76 @@ const InterstitialScreenFooter = React.forwardRef<
           {loadingAction === 'skip' && <InlineLoading />}
         </Button>
       )}
-      <div className={`${blockClass}--footer-controls`}>
-        {isMultiStep && progStep > 0 && (
-          <Button
-            className={`${blockClass}--prev-btn`}
-            kind="secondary"
-            size="lg"
-            title={previousButtonLabel}
-            disabled={disableButtonConfig?.back}
-            onClick={handleClickPrev}
-          >
-            {previousButtonLabel}
-            {loadingAction === 'back' && <InlineLoading />}
-          </Button>
-        )}
 
-        {isMultiStep && progStep < progStepCeil && (
-          <Button
-            className={`${blockClass}--next-btn`}
-            renderIcon={loadingAction !== 'next' ? ArrowRight : undefined}
-            ref={nextButtonRef}
-            size="lg"
-            title={nextButtonLabel}
-            disabled={disableButtonConfig?.next}
-            onClick={handleClickNext}
-          >
-            {nextButtonLabel}
-            {loadingAction === 'next' && <InlineLoading />}
-          </Button>
-        )}
-        {((isMultiStep && progStep === progStepCeil) || !isMultiStep) && (
-          <Button
-            className={`${blockClass}--start-btn`}
-            ref={startButtonRef}
-            size="lg"
-            title={startButtonLabel}
-            disabled={disableButtonConfig?.start}
-            onClick={handleStart}
-            {...getRenderIcon}
-          >
-            {startButtonLabel}
-            {loadingAction === 'start' && <InlineLoading />}
-          </Button>
-        )}
-      </div>
-    </>
+      {isMultiStep && progStep > 0 && (
+        <Button
+          className={`${blockClass}--prev-btn`}
+          kind="secondary"
+          size="lg"
+          title={previousButtonLabel}
+          disabled={disableButtonConfig?.back}
+          onClick={handleClickPrev}
+        >
+          {previousButtonLabel}
+          {loadingAction === 'back' && <InlineLoading />}
+        </Button>
+      )}
+
+      {isMultiStep && progStep < progStepCeil && (
+        <Button
+          className={`${blockClass}--next-btn`}
+          renderIcon={loadingAction !== 'next' ? ArrowRight : undefined}
+          ref={nextButtonRef}
+          size="lg"
+          title={nextButtonLabel}
+          disabled={disableButtonConfig?.next}
+          onClick={handleClickNext}
+        >
+          {nextButtonLabel}
+          {loadingAction === 'next' && <InlineLoading />}
+        </Button>
+      )}
+      {((isMultiStep && progStep === progStepCeil) || !isMultiStep) && (
+        <Button
+          className={`${blockClass}--start-btn`}
+          ref={startButtonRef}
+          size="lg"
+          title={startButtonLabel}
+          disabled={disableButtonConfig?.start}
+          onClick={handleStart}
+          {...getRenderIcon}
+        >
+          {startButtonLabel}
+          {loadingAction === 'start' && <InlineLoading />}
+        </Button>
+      )}
+    </ButtonSet>
   );
-  if (actionButtonRenderer) {
-    return (
-      <div className={`${blockClass}--footer`}>
-        {actionButtonRenderer({
-          handleGotoStep,
-          progStep,
-          stepCount,
-          disableButtonConfig,
-        })}
-      </div>
-    );
-  }
+  const footerContent = actionButtonRenderer
+    ? actionButtonRenderer({
+        handleGotoStep,
+        progStep,
+        stepCount,
+        disableButtonConfig,
+      })
+    : getFooterContent();
 
   return isFullScreen ? (
     <div
       ref={ref}
-      className={`${footerBlockClass} ${className}`}
+      className={`${footerBlockClass} ${className}  ${carbonPrefix}--modal-footer`}
       {...getDevtoolsProps('InterstitialScreenFooter')}
-      {...(isFullScreen ? rest : {})}
+      {...rest}
     >
-      {getFooterContent()}
+      {footerContent}
     </div>
   ) : (
-    <ModalFooter className={footerBlockClass} ref={ref} {...rest}>
-      {getFooterContent()}
+    <ModalFooter
+      className={`${footerBlockClass} ${className}`}
+      ref={ref}
+      {...rest}
+    >
+      {footerContent}
     </ModalFooter>
   );
 });

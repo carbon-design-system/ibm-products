@@ -13,6 +13,6 @@
 
 :root {
   @include theme.theme(themes.$white);
-  background-color: $background;
-  color: $text-primary;
+  background-color: theme.$background;
+  color: theme.$text-primary;
 }

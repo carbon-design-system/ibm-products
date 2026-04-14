@@ -4,21 +4,26 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { cloneElement } from 'react';
-import { Add } from '@carbon/icons-react';
-import { preview__PageHeader as PageHeader, TruncatedText } from '../..';
+import React, { useCallback } from 'react';
 import {
-  PageHeader as PageHeaderDirect,
+  preview__PageHeader as PageHeader,
+  preview__TruncatedText as TruncatedText,
+} from '../..';
+import {
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
   PageHeaderTabBar,
   PageHeaderContentText,
   PageHeaderContentPageActions,
   PageHeaderHeroImage,
+  PageHeaderBreadcrumbPageActions,
+  PageHeaderScrollButton,
+  PageHeaderTitleBreadcrumb,
+  PageHeaderBreadcrumbOverflow,
+  PageHeaderTagOverflow,
 } from './PageHeader';
 import {
   Tag,
-  Button,
   Grid,
   Column,
   Breadcrumb,
@@ -28,18 +33,28 @@ import {
   Tabs,
   TabPanels,
   TabPanel,
-  IconButton,
   OverflowMenu,
   OverflowMenuItem,
   OperationalTag,
+  HeaderContainer,
+  Header,
+  HeaderName,
+  FeatureFlags,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
 import image2 from './_story-assets/3x2.jpg';
 import styles from './_storybook-styles.scss?inline';
 
-import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
+import {
+  Add,
+  Bee,
+  AiGenerate,
+  CloudFoundry_1,
+  Activity,
+} from '@carbon/icons-react';
 import mdx from './PageHeader.mdx';
+import { pageActionButtonItems } from './_story-assets/pageActionButtonItems';
 
 export default {
   title: 'Preview/PageHeader',
@@ -51,6 +66,11 @@ export default {
     PageHeaderTabBar,
     PageHeaderContentText,
     PageHeaderContentPageActions,
+    PageHeaderBreadcrumbPageActions,
+    PageHeaderScrollButton,
+    PageHeaderTitleBreadcrumb,
+    PageHeaderBreadcrumbOverflow,
+    PageHeaderTagOverflow,
   },
   tags: ['autodocs'],
   argTypes: {
@@ -90,88 +110,78 @@ const BeeIcon = () => <Bee size={32} />;
 
 const BreadcrumbBeeIcon = () => <Bee size={16} />;
 
+const breadcrumbPageActionItems = [
+  {
+    id: 'breadcrumb-action-1',
+    label: 'Icon Description 1',
+    renderIcon: Activity,
+    onClick: () => console.log('Breadcrumb action 1'),
+  },
+  {
+    id: 'breadcrumb-action-2',
+    label: 'Icon Description 2',
+    renderIcon: AiGenerate,
+    onClick: () => console.log('Breadcrumb action 2'),
+  },
+  {
+    id: 'breadcrumb-action-3',
+    label: 'Icon Description 3',
+    renderIcon: CloudFoundry_1,
+    onClick: () => console.log('Breadcrumb action 3'),
+  },
+];
+
 const breadcrumbPageActions = (
-  <>
-    <Button
-      renderIcon={Activity}
-      iconDescription="Icon Description 1"
-      hasIconOnly
-      size="md"
-      kind="ghost"
-    />
-    <Button
-      renderIcon={AiGenerate}
-      iconDescription="Icon Description 2"
-      hasIconOnly
-      size="md"
-      kind="ghost"
-    />
-    <Button
-      renderIcon={CloudFoundry_1}
-      iconDescription="Icon Description 3"
-      hasIconOnly
-      size="md"
-      kind="ghost"
-    />
-  </>
+  <PageHeader.BreadcrumbPageActions actions={breadcrumbPageActionItems} />
 );
 
-export const Default = (args) => (
+export const Default = ({
+  border,
+  pageActionsFlush,
+  contentActionsFlush,
+  renderBreadcrumbIcon,
+  title,
+  ...args
+}) => (
   <Tabs>
-    <PageHeader.Root>
+    <PageHeader.Root {...args}>
       <PageHeader.BreadcrumbBar
-        border={args.border}
-        pageActionsFlush={args.pageActionsFlush}
-        contentActionsFlush={args.contentActionsFlush}
-        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+        border={border}
+        pageActionsFlush={pageActionsFlush}
+        contentActionsFlush={contentActionsFlush}
+        renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
         contentActions={
-          <>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 1"
-            >
-              <AiGenerate />
-            </IconButton>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 2"
-            >
-              <Activity />
-            </IconButton>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 3"
-            >
-              <Activity />
-            </IconButton>
-            <IconButton
-              size="sm"
-              kind="ghost"
-              className="breadcrumb-bar-button"
-              label="Icon Description 4"
-            >
-              <Activity />
-            </IconButton>
-            <Button className="breadcrumb-bar-action-button" size="sm">
-              Primary action
-            </Button>
-          </>
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}
+          />
         }
         pageActions={breadcrumbPageActions}
       >
-        <Breadcrumb>
+        <PageHeader.BreadcrumbOverflow
+          renderOverflowBreadcrumb={(hiddenItems) => (
+            <BreadcrumbItem data-floating-menu-container>
+              <OverflowMenu
+                align="bottom"
+                aria-label="Overflow menu in a breadcrumb"
+              >
+                {hiddenItems.map((el) => (
+                  <OverflowMenuItem itemText={el.innerText} />
+                ))}
+              </OverflowMenu>
+            </BreadcrumbItem>
+          )}
+        >
           <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-        </Breadcrumb>
+          <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+          <PageHeader.TitleBreadcrumb data-fixed>
+            {title}
+          </PageHeader.TitleBreadcrumb>
+        </PageHeader.BreadcrumbOverflow>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content
-        title={args.title}
+        title={title}
         pageActions={
           <PageHeader.ContentPageActions
             menuButtonLabel="Actions"
@@ -373,88 +383,6 @@ export const ContentWithHeroImage = (args) => (
   </PageHeader.Root>
 );
 
-const pageActionButtonItems = [
-  {
-    // props used for both collapse menu item and non-collapsed action form
-    id: 'action1',
-    onClick: () => console.log(`Action 1`),
-    // component to render when non-collapsed
-    body: (
-      <Button
-        renderIcon={AiGenerate}
-        iconDescription="Icon Description 1"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    // props to pass to the corresponding collapsed menu item
-    menuItem: {
-      label: 'action 1',
-    },
-  },
-  {
-    id: 'action2',
-    onClick: () => console.log(`Action 2`),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 2"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 2',
-    },
-  },
-  {
-    id: 'action3',
-    onClick: () => console.log(`Action 3`),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 3"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 3',
-    },
-  },
-  {
-    id: 'action4',
-    onClick: () => console.log(`Action 4`),
-    body: (
-      <Button
-        renderIcon={Activity}
-        iconDescription="Icon Description 4"
-        hasIconOnly
-        size="md"
-        kind="ghost"
-      />
-    ),
-    menuItem: {
-      label: 'action 4',
-    },
-  },
-  {
-    id: 'primary-action',
-    onClick: () => console.log(`Primary action`),
-    body: (
-      <Button kind="primary" renderIcon={Add} size="md">
-        Primary action
-      </Button>
-    ),
-    menuItem: {
-      label: 'Primary action',
-    },
-  },
-];
-
 export const ContentWithContextualActionsAndPageActions = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar
@@ -516,131 +444,158 @@ const tabBarTags = [
     Tag 6
   </Tag>,
 ];
+const renderUIShellHeader = () => (
+  <HeaderContainer
+    render={() => (
+      <Header aria-label="Application header">
+        <HeaderName href="/">Application header</HeaderName>
+      </Header>
+    )}
+  />
+);
 
 export const TabBarWithTabsAndTags = (args) => (
-  <Tabs>
-    <PageHeader.Root>
-      <PageHeader.BreadcrumbBar
-        border={args.border}
-        pageActionsFlush={args.pageActionsFlush}
-        contentActionsFlush={args.contentActionsFlush}
-        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-        pageActions={breadcrumbPageActions}
-        contentActions={
-          <PageHeader.ContentPageActions
-            menuButtonLabel="Actions"
-            actions={pageActionButtonItems}
-          />
-        }
-      >
-        <PageHeader.BreadcrumbOverflow
-          renderOverflowBreadcrumb={(hiddenItems) => (
-            <BreadcrumbItem data-floating-menu-container>
-              <OverflowMenu
-                align="bottom"
-                aria-label="Overflow menu in a breadcrumb"
-              >
-                {hiddenItems.map((el) => (
-                  <OverflowMenuItem itemText={el.innerText} />
-                ))}
-              </OverflowMenu>
-            </BreadcrumbItem>
-          )}
-        >
-          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-          <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
-          <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
-          <PageHeader.TitleBreadcrumb data-fixed>
-            <TruncatedText
-              value="Virtual-Machine-DAL-really-long-title-example"
-              align="bottom"
-              lines={1}
-            />
-          </PageHeader.TitleBreadcrumb>
-        </PageHeader.BreadcrumbOverflow>
-      </PageHeader.BreadcrumbBar>
-      <PageHeader.Content
-        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-        pageActions={
-          <PageHeader.ContentPageActions
-            menuButtonLabel="Actions"
-            actions={pageActionButtonItems}
-          />
-        }
-        {...args}
-      >
-        <PageHeader.ContentText subtitle="Subtitle">
-          Built for modern teams, our technology platform simplifies complexity
-          with powerful APIs, real-time collaboration tools, and seamless
-          integration. From deployment to monitoring, we help you ship faster,
-          scale efficiently, and stay in control every step of the way.
-        </PageHeader.ContentText>
-      </PageHeader.Content>
-      <PageHeader.TabBar
-        tags={
-          <PageHeader.TagOverflow
-            renderOverflowTag={(
-              hiddenItems,
-              handleOverflowClick,
-              openPopover
-            ) => (
-              <OperationalTag
-                onClick={handleOverflowClick}
-                aria-expanded={openPopover}
-                text={`+${hiddenItems.length}`}
+  <>
+    {renderUIShellHeader()}
+
+    <div className="page-header-story__wrapper">
+      <Tabs>
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar
+            border={args.border}
+            pageActionsFlush={args.pageActionsFlush}
+            contentActionsFlush={args.contentActionsFlush}
+            renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+            pageActions={breadcrumbPageActions}
+            contentActions={
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
               />
-            )}
-            renderPopoverContent={(hiddenItems) => {
-              return hiddenItems.map((i, index) => {
-                const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
-                return cloneElement(foundJSXTag, {
-                  id: `cloned-tag-node-id-${index}`,
-                  key: `cloned-tag-key-${index}`,
-                });
-              });
-            }}
+            }
           >
-            {tabBarTags}
-          </PageHeader.TagOverflow>
-        }
-        scroller={<PageHeader.ScrollButton />}
-      >
-        <TabList>
-          <Tab>Tab 1</Tab>
-          <Tab>Tab 2</Tab>
-          <Tab>Tab 3</Tab>
-          <Tab>Tab 4</Tab>
-          <Tab>Tab 5</Tab>
-          <Tab>Tab 6</Tab>
-          <Tab>Tab 7</Tab>
-        </TabList>
-      </PageHeader.TabBar>
-    </PageHeader.Root>
-    <TabPanels>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 1
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 2
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 3
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 4
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 5
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 6
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 7
-      </TabPanel>
-    </TabPanels>
-  </Tabs>
+            <PageHeader.BreadcrumbOverflow
+              renderOverflowBreadcrumb={(hiddenItems) => (
+                <BreadcrumbItem data-floating-menu-container>
+                  <OverflowMenu
+                    align="bottom"
+                    aria-label="Overflow menu in a breadcrumb"
+                  >
+                    {hiddenItems.map((el) => (
+                      <OverflowMenuItem itemText={el.innerText} />
+                    ))}
+                  </OverflowMenu>
+                </BreadcrumbItem>
+              )}
+            >
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+              <PageHeader.TitleBreadcrumb data-fixed>
+                <TruncatedText
+                  value="Virtual-Machine-DAL-really-long-title-example"
+                  align="bottom"
+                  lines={1}
+                />
+              </PageHeader.TitleBreadcrumb>
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+          <PageHeader.Content
+            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+            pageActions={
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
+              />
+            }
+            {...args}
+          >
+            <PageHeader.ContentText subtitle="Subtitle">
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </PageHeader.ContentText>
+          </PageHeader.Content>
+          <PageHeader.TabBar
+            tags={
+              <PageHeader.TagOverflow
+                renderOverflowTag={(
+                  hiddenItems,
+                  handleOverflowClick,
+                  openPopover
+                ) => (
+                  <OperationalTag
+                    onClick={handleOverflowClick}
+                    aria-expanded={openPopover}
+                    text={`+${hiddenItems.length}`}
+                  />
+                )}
+                renderPopoverContent={(hiddenItems) => {
+                  return hiddenItems.map((i, index) => {
+                    const foundJSXTag = tabBarTags.find(
+                      (c) => c.props.id === i.id
+                    );
+                    return React.cloneElement(foundJSXTag, {
+                      id: `cloned-tag-node-id-${index}`,
+                      key: `cloned-tag-key-${index}`,
+                    });
+                  });
+                }}
+              >
+                {tabBarTags}
+              </PageHeader.TagOverflow>
+            }
+            scroller={<PageHeader.ScrollButton />}
+          >
+            <TabList>
+              <Tab>Tab 1</Tab>
+              <Tab>Tab 2</Tab>
+              <Tab>Tab 3</Tab>
+              <Tab>Tab 4</Tab>
+              <Tab>Tab 5</Tab>
+              <Tab>Tab 6</Tab>
+              <Tab>Tab 7</Tab>
+            </TabList>
+          </PageHeader.TabBar>
+        </PageHeader.Root>
+        <TabPanels>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 1
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 2
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 3
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 4
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 5
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 6
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 7
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </div>
+  </>
 );
+
+TabBarWithTabsAndTags.args = {
+  border: true,
+  pageActionsFlush: false,
+  contentActionsFlush: false,
+  title:
+    'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+  renderBreadcrumbIcon: true,
+};
 
 export const Compact = (args) => (
   <Tabs>
@@ -701,7 +656,7 @@ export const Compact = (args) => (
             renderPopoverContent={(hiddenItems) => {
               return hiddenItems.map((i, index) => {
                 const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
-                return cloneElement(foundJSXTag, {
+                return React.cloneElement(foundJSXTag, {
                   id: `cloned-tag-node-id-${index}`,
                   key: `cloned-tag-key-${index}`,
                 });
@@ -748,3 +703,146 @@ export const Compact = (args) => (
     </TabPanels>
   </Tabs>
 );
+
+export const CustomRenderWithCallbacks = ({
+  border,
+  pageActionsFlush,
+  contentActionsFlush,
+  renderBreadcrumbIcon,
+  title,
+  ...args
+}) => {
+  const handleContentFullyCollapsed = useCallback((collapsed) => {
+    console.log('onContentFullyCollapsed:', collapsed);
+  }, []);
+
+  const handleTitleClipped = useCallback((clipped) => {
+    console.log('onTitleClipped:', clipped);
+  }, []);
+
+  const handleContentActionsClipped = useCallback((clipped) => {
+    console.log('onContentActionsClipped:', clipped);
+  }, []);
+
+  return (
+    <Tabs>
+      <PageHeader.Root
+        {...args}
+        onContentFullyCollapsed={handleContentFullyCollapsed}
+        onTitleClipped={handleTitleClipped}
+        onContentActionsClipped={handleContentActionsClipped}
+      >
+        <PageHeader.BreadcrumbBar
+          border={border}
+          contentActionsFlush={contentActionsFlush}
+          renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+          contentActions={({ contentActionsClipped }) =>
+            contentActionsClipped ? (
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
+              />
+            ) : null
+          }
+          pageActions={breadcrumbPageActions}
+        >
+          <Breadcrumb>
+            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          </Breadcrumb>
+        </PageHeader.BreadcrumbBar>
+        <PageHeader.Content
+          title={title}
+          pageActions={({ fullyCollapsed }) =>
+            !fullyCollapsed ? (
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
+              />
+            ) : null
+          }
+        >
+          <PageHeader.ContentText subtitle="Subtitle">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </PageHeader.ContentText>
+        </PageHeader.Content>
+        <PageHeader.TabBar>
+          <TabList>
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+            <Tab>Tab 3</Tab>
+            <Tab>Tab 4</Tab>
+            <Tab>Tab 5</Tab>
+            <Tab>Tab 6</Tab>
+            <Tab>Tab 7</Tab>
+          </TabList>
+        </PageHeader.TabBar>
+      </PageHeader.Root>
+      <TabPanels>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 1
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 2
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 3
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 4
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 5
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 6
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 7
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+CustomRenderWithCallbacks.args = {
+  border: true,
+  contentActionsFlush: false,
+  title:
+    'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+  renderBreadcrumbIcon: true,
+};
+
+CustomRenderWithCallbacks.argTypes = {
+  border: {
+    description: 'Specify whether to render BreadcrumbBar border',
+    control: {
+      type: 'boolean',
+    },
+  },
+  contentActionsFlush: {
+    description:
+      'Specify whether the content actions within BreadcrumbBar should be flush with the page actions',
+    control: {
+      type: 'boolean',
+    },
+  },
+  title: {
+    description:
+      'Provide the title text to be rendered within  PageHeaderContent',
+    control: {
+      type: 'text',
+    },
+  },
+  renderBreadcrumbIcon: {
+    description:
+      'Specify whether to render the BreadcrumbBar icon (storybook control only)',
+    control: {
+      type: 'boolean',
+    },
+  },
+};

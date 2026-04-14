@@ -1,5 +1,4 @@
 .avt
-.github
 .playwright
 .vscode
 .yarn
@@ -16,6 +15,7 @@ umd
 CHANGELOG.md
 
 # specific files
+.all-contributorsrc
 telemetry.yml
 welcome-lottie.json
 # prettier + mdx + lit = wonky formatting

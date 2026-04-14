@@ -15,7 +15,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { InterstitialScreenContext, blockClass } from './context';
-import { useId } from '../../global/js/utils/useId';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 export interface InterstitialScreenHeaderProps {
@@ -49,7 +48,7 @@ export interface InterstitialScreenHeaderProps {
 
 export type EnrichedChildren = {
   children: React.ReactNode;
-  stepTitle: string;
+  stepTitle?: string;
   translateWithId?: (id: string) => string;
 };
 
@@ -70,7 +69,6 @@ const InterstitialScreenHeader = React.forwardRef<
     React.useContext(InterstitialScreenContext);
 
   const headerBlockClass = `${blockClass}--internal-header`;
-  const _useId = useId();
   const carbonPrefix = usePrefix();
 
   const headerContent = () => {
@@ -92,12 +90,12 @@ const InterstitialScreenHeader = React.forwardRef<
               <ProgressIndicator vertical={false} currentIndex={progStep}>
                 {bodyChildrenData?.map((child: React.ReactNode, idx) => {
                   if (React.isValidElement<EnrichedChildren>(child)) {
-                    const stepKey = `${_useId}_${child.props?.stepTitle?.replace(/\s+/g, '') || idx}`;
+                    const stepKey = `${child.props?.stepTitle?.replace(/\s+/g, '') || 'step'}-${idx}`;
 
                     return (
                       <ProgressStep
                         key={stepKey}
-                        label={child.props.stepTitle || ''}
+                        label={child.props.stepTitle ?? `Step ${idx + 1}`}
                         translateWithId={child.props.translateWithId}
                       />
                     );

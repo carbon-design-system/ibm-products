@@ -71,8 +71,9 @@ const ConditionGroupBuilder = ({
       'conditionBuilderText',
     ]);
   const { statementConfig } = useDataConfigs();
-  const { variant, conditionBuilderRef, statementConfigCustom } =
-    useContext(ConditionBuilderContext);
+  const { variant, conditionBuilderRef, statementConfigCustom } = useContext(
+    ConditionBuilderContext
+  );
   const [showConditionPreview, setShowConditionPreview] = useState(-1);
   const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
     useState(-1);

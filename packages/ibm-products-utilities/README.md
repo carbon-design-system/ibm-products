@@ -1,6 +1,6 @@
-# @carbon/ibm-products-primitives
+# @carbon/ibm-products-utilities
 
-> Framework-agnostic primitives and utilities for Carbon for IBM Products
+> Framework-agnostic utilities for Carbon for IBM Products
 
 This package provides framework-agnostic JavaScript/TypeScript utilities and
 primitives that can be shared across both React and Web Components
@@ -9,13 +9,13 @@ implementations of Carbon for IBM Products.
 ## Installation
 
 ```bash
-npm install @carbon/ibm-products-primitives
+npm install @carbon/ibm-products-utilities
 ```
 
 or
 
 ```bash
-yarn add @carbon/ibm-products-primitives
+yarn add @carbon/ibm-products-utilities
 ```
 
 ## Purpose

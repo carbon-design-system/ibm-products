@@ -19,7 +19,7 @@ import '../../../../src/components/add-select/add-select-body/add-select-body';
 import '../../../../src/components/add-select/add-select-list/add-select-list';
 import '../../../../src/components/add-select/add-select-item/add-select-item';
 
-import { AddSelectData, HierarchicalItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, HierarchicalItem } from '@carbon/ibm-products-utilities';
 
 import styles from './single-add-select.scss?lit';
 

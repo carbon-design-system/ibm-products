@@ -18,7 +18,7 @@ import { AddSelect } from '../../../../components/AddSelect/next';
 import {
   AddSelectData,
   HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+} from '@carbon/ibm-products-utilities';
 
 const blockClass = `single-add-select-pattern`;
 

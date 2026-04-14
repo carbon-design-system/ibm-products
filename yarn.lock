@@ -2175,6 +2175,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/ibm-products-primitives@npm:^1.0.0-rc.0, @carbon/ibm-products-primitives@workspace:packages/ibm-products-primitives":
+  version: 0.0.0-use.local
+  resolution: "@carbon/ibm-products-primitives@workspace:packages/ibm-products-primitives"
+  dependencies:
+    jest: "npm:^29.7.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.47.0-rc.0"
+    npm-run-all2: "npm:^8.0.0"
+    rimraf: "npm:^6.0.1"
+    typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
+
 "@carbon/ibm-products-styles@npm:^2.84.0-rc.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
@@ -2270,6 +2282,7 @@ __metadata:
     "@babel/runtime": "npm:^7.26.10"
     "@carbon-labs/react-resizer": "npm:^0.10.0"
     "@carbon/feature-flags": "npm:^1.0.0"
+    "@carbon/ibm-products-primitives": "npm:^1.0.0-rc.0"
     "@carbon/ibm-products-styles": "npm:^2.84.0-rc.0"
     "@carbon/styles": "npm:^1.101.0"
     "@carbon/telemetry": "npm:^0.1.0"
@@ -23839,7 +23852,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.9.3":
+"typescript@npm:5.9.3, typescript@npm:^5.3.3":
   version: 5.9.3
   resolution: "typescript@npm:5.9.3"
   bin:
@@ -23869,7 +23882,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>":
   version: 5.9.3
   resolution: "typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"
   bin:

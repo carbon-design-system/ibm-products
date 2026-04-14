@@ -18,7 +18,7 @@ frameworks.
 import {
   AddSelectData,
   HierarchicalItem,
-} from '@carbon/ibm-products-web-components/es/globals/js/utils/add-select-data';
+} from '@carbon/ibm-products-primitives';
 ```
 
 ## Data Structure
@@ -233,7 +233,10 @@ dataManager.sort((a, b) => a.title!.localeCompare(b.title!), true);
 ## Usage Example
 
 ```typescript
-import { AddSelectData, HierarchicalItem } from './add-select-data';
+import {
+  AddSelectData,
+  HierarchicalItem,
+} from '@carbon/ibm-products-primitives';
 
 // Initialize the data manager
 const dataManager = new AddSelectData();
@@ -283,7 +286,10 @@ The utility is designed to work seamlessly with Lit-based Web Components:
 ```typescript
 import { LitElement, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { AddSelectData, HierarchicalItem } from './add-select-data';
+import {
+  AddSelectData,
+  HierarchicalItem,
+} from '@carbon/ibm-products-primitives';
 
 @customElement('my-component')
 export class MyComponent extends LitElement {

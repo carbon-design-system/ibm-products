@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.84.0-rc.0`
+## `@carbon/ibm-products-styles@2.84.0`
 ### Features :rocket:
 - feat(preview__PageHeader): implement callbacks for intesecting observers (#9087)
 

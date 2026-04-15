@@ -100,8 +100,6 @@ $prefix: 'c4p';
     }
   }
   #{carbon-config.$prefix}-modal-footer {
-    @include styles.theme(styles.$g100);
-
     display: block;
     padding: $spacing-05;
     background-color: $layer-02;

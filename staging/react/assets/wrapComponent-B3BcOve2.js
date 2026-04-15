@@ -1,2 +1,0 @@
-var m=Object.defineProperty;var n=(o,e)=>m(o,"name",{value:e,configurable:!0});import{P as i,u as f,c as u,e as l}from"./iframe-B4rJbuYi.js";const N=n(({name:o,className:e,type:r})=>{function s({className:t,...a}){const c=f(),p=u(typeof e=="function"?e(c):e,t);return l.createElement(r,{...a,className:p||void 0})}return n(s,"Component"),s.displayName=o,s.propTypes={className:i.string},s},"wrapComponent");export{N as w};
-//# sourceMappingURL=wrapComponent-B3BcOve2.js.map

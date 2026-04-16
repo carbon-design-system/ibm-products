@@ -65,7 +65,7 @@ const config = {
     return mergeConfig(config, {
       plugins: [litStyleLoader(), litTemplateLoader()],
       optimizeDeps: {
-        include: ['@storybook/web-components-vite'],
+        include: ['@storybook/web-components-vite', 'lodash'],
         exclude: ['lit', 'lit-html'],
       },
       css: {

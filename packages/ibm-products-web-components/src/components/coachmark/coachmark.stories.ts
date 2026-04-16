@@ -153,6 +153,6 @@ export const Floating = {
   },
 };
 
-const meta = { title: 'Components/Coachmark' };
+const meta = { title: 'Preview/Onboarding/Coachmark' };
 
 export default meta;

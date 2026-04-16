@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { Button, ToastNotification } from '@carbon/react';
 import { SingleAddSelect } from '../components/SingleAddSelect';
-import { HierarchicalItem } from '@carbon/ibm-products-utilities';
+import { HierarchicalItem } from '@carbon/ibm-products-primitives';
 import { Tearsheet } from '../../../../components/Tearsheet/next';
 
 // Sample hierarchical data matching the Web Components example

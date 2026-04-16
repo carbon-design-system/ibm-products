@@ -2199,9 +2199,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/ibm-products-utilities@npm:^1.0.0-rc.0, @carbon/ibm-products-utilities@workspace:packages/ibm-products-utilities":
+"@carbon/ibm-products-primitives@npm:^1.0.0-rc.0, @carbon/ibm-products-primitives@workspace:packages/ibm-products-primitives":
   version: 0.0.0-use.local
-  resolution: "@carbon/ibm-products-utilities@workspace:packages/ibm-products-utilities"
+  resolution: "@carbon/ibm-products-primitives@workspace:packages/ibm-products-primitives"
   dependencies:
     jest: "npm:^29.7.0"
     jest-config-ibm-cloud-cognitive: "npm:^1.47.0-rc.0"
@@ -2219,7 +2219,7 @@ __metadata:
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
     "@carbon-labs/wc-empty-state": "npm:^0.13.0"
     "@carbon/ibm-products-styles": "npm:^2.84.0"
-    "@carbon/ibm-products-utilities": "npm:^1.0.0-rc.0"
+    "@carbon/ibm-products-primitives": "npm:^1.0.0-rc.0"
     "@carbon/icon-helpers": "npm:^10.73.0"
     "@carbon/icons": "npm:^11.76.0"
     "@carbon/layout": "npm:^11.42.0"
@@ -2284,7 +2284,7 @@ __metadata:
     "@carbon-labs/react-resizer": "npm:^0.10.0"
     "@carbon/feature-flags": "npm:^1.0.0"
     "@carbon/ibm-products-styles": "npm:^2.84.0"
-    "@carbon/ibm-products-utilities": "npm:^1.0.0-rc.0"
+    "@carbon/ibm-products-primitives": "npm:^1.0.0-rc.0"
     "@carbon/styles": "npm:^1.101.0"
     "@carbon/telemetry": "npm:^0.1.0"
     "@carbon/utilities": "npm:^0.16.0"

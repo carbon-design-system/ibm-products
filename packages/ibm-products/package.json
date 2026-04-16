@@ -107,7 +107,7 @@
     "@carbon-labs/react-resizer": "^0.10.0",
     "@carbon/feature-flags": "^1.0.0",
     "@carbon/ibm-products-styles": "^2.84.0",
-    "@carbon/ibm-products-utilities": "^1.0.0-rc.0",
+    "@carbon/ibm-products-primitives": "^1.0.0-rc.0",
     "@carbon/telemetry": "^0.1.0",
     "@carbon/utilities": "^0.16.0",
     "@carbon/utilities-react": "0.19.0",

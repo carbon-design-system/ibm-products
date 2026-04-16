@@ -1,0 +1,129 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/blocks';
+import * as AddSelectRowStories from './AddSelectRow.stories';
+
+<Meta of={AddSelectRowStories} />
+
+# Add Select Row
+
+## Overview
+
+The Add Select Row component represents an individual row in the list. It
+provides:
+
+- Single or multi-select support (checkbox or radio button)
+- Optional subtitle for additional context
+- Optional metadata slot for tags or badges
+- Hierarchical navigation support with chevron indicator
+- Disabled state
+- Keyboard accessible
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import { AddSelect } from '@carbon/ibm-products';
+```
+
+### Usage Example
+
+<Canvas of={AddSelectRowStories.Default} />
+
+### JSX
+
+```jsx
+<AddSelect>
+  <AddSelect.Body itemsLabel="Items" globalSearchLabel="Search" itemCount={3}>
+    <AddSelect.List>
+      <AddSelect.Row
+        itemId="1"
+        title="Item 1"
+        subtitle="Description for item 1"
+        value="item-1"
+      />
+      <AddSelect.Row
+        itemId="2"
+        title="Item 2"
+        subtitle="Description for item 2"
+        value="item-2"
+      />
+    </AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>
+```
+
+## With Metadata Example
+
+<Canvas of={AddSelectRowStories.WithMetadata} />
+
+### JSX
+
+```jsx
+import { Tag } from '@carbon/react';
+
+<AddSelect.Row
+  itemId="1"
+  title="Item 1"
+  subtitle="Description"
+  value="item-1"
+  meta={<Tag type="blue">New</Tag>}
+/>;
+```
+
+## With Children Example
+
+<Canvas of={AddSelectRowStories.WithChildren} />
+
+### JSX
+
+```jsx
+<AddSelect.Row
+  itemId="1"
+  title="Parent Item"
+  subtitle="Has children"
+  value="parent-1"
+  hasChildren
+/>
+```
+
+## Disabled Items Example
+
+<Canvas of={AddSelectRowStories.DisabledItems} />
+
+### JSX
+
+```jsx
+<AddSelect.Row
+  itemId="1"
+  title="Disabled Item"
+  subtitle="This item is disabled"
+  value="item-1"
+  disabled
+/>
+```
+
+## Props
+
+### Required Props
+
+- **itemId** (string): Unique identifier for the item
+- **title** (string): Item title
+- **value** (string): Item value
+
+### Optional Props
+
+- **subtitle** (string): Item subtitle for additional context
+- **selected** (boolean): Whether the item is selected
+- **disabled** (boolean): Whether the item is disabled
+- **hasChildren** (boolean): Whether the item has children (shows navigation
+  indicator)
+- **parentId** (string): Parent ID for hierarchical navigation
+- **icon** (ReactNode): Optional icon slot
+- **meta** (ReactNode): Optional metadata slot (e.g., tags, badges)
+- **className** (string): Optional class name
+
+## Component API
+
+<ArgTypes of={AddSelectRowStories} />

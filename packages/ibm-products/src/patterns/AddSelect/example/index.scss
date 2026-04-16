@@ -1,0 +1,50 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/react';
+
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.example-container {
+  padding: $spacing-07;
+  margin: 0 auto;
+  max-inline-size: 1200px;
+
+  h1 {
+    margin-block-end: $spacing-07;
+  }
+}
+
+.example-section {
+  padding: $spacing-07;
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 4px;
+  margin-block-end: $spacing-09;
+
+  h2 {
+    margin-block: 0 $spacing-03;
+  }
+
+  p {
+    color: var(--cds-text-secondary);
+    margin-block-end: $spacing-06;
+  }
+}
+
+.notification {
+  position: fixed;
+  z-index: 9999;
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
+}

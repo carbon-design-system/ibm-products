@@ -180,11 +180,12 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     ref
   ) => {
     const [focused, setFocused] = useState(false);
-    const [initialValue, setInitialValue] = useState<string>('');
+    const [initialValue, setInitialValue] = useState<string>(value);
     const [dirtyInput, setDirtyInput] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
     const canSave = value !== initialValue && !invalid;
     const escaping = useRef(false);
+    const clickingWithin = useRef(false);
     const carbonPrefix = usePrefix();
 
     const tipAlignIsObject = typeof tooltipAlignment === 'object';
@@ -200,11 +201,9 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       return acc;
     }, {});
 
-    useEffect(() => {
-      if (!initialValue && !dirtyInput) {
-        setInitialValue(value);
-      }
-    }, [initialValue, dirtyInput, value]);
+    // Note: We intentionally don't sync initialValue with value prop changes
+    // initialValue represents the value when entering edit mode, not the current prop value
+    // It's only updated on mount (via useState) and after successful save
 
     const isTargetingChild = ({ currentTarget, relatedTarget }) =>
       currentTarget.contains(relatedTarget);
@@ -220,25 +219,74 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     const onFocusHandler = (e) => {
       if (!isTargetingChild(e)) {
         inputRef.current?.focus();
-        setFocused(true);
       }
+      // Always set focused when the input receives focus
+      // The blur handler will manage exiting edit mode
+      setFocused(true);
     };
 
-    const onSaveHandler = () => {
+    const onSaveHandler = (exitEditMode = false) => {
       setInitialValue(value);
       setDirtyInput(false);
       onSave();
-      setFocused(false);
+      if (exitEditMode) {
+        // Exit edit mode (for auto-save on blur)
+        setFocused(false);
+      } else {
+        // Stay in edit mode (for manual save button click)
+        requestAnimationFrame(() => {
+          inputRef.current?.focus();
+        });
+      }
     };
 
-    const onCancelHandler = () => {
+    const onCancelHandler = (exitEditMode = false) => {
       setDirtyInput(false);
       onCancel(initialValue);
+      if (exitEditMode) {
+        // Exit edit mode (for auto-cancel on blur)
+        setFocused(false);
+      } else {
+        // Stay in edit mode (for manual cancel button click)
+        requestAnimationFrame(() => {
+          if (inputRef.current) {
+            inputRef.current.focus();
+            // Set cursor to end of text
+            const length = inputRef.current.value.length;
+            inputRef.current.setSelectionRange(length, length);
+          }
+        });
+      }
     };
 
     const onBlurHandler = (e: any) => {
+      // Check if we clicked within (any button click)
+      const clickedWithin = clickingWithin.current;
+
+      // Check if targeting child (for tab navigation or clicking within)
+      const targetingChild = isTargetingChild(e);
+
+      // If clicked any button AND focus is staying within the component, don't exit edit mode
+      // This handles clicking enabled buttons within the toolbar
+      if (clickedWithin && targetingChild) {
+        clickingWithin.current = false; // Reset for next interaction
+        return;
+      }
+
+      // If clicked within but focus is leaving the component, exit edit mode
+      // This handles clicking outside after clicking a disabled button
+      if (clickedWithin && !targetingChild) {
+        clickingWithin.current = false; // Reset the flag
+        // Continue to exit edit mode below
+      }
+
+      // If tabbing to a button within the component, allow it (don't exit edit mode)
+      if (!clickedWithin && targetingChild) {
+        return;
+      }
+
       // Use custom function provided if passed through
-      if (typeof onBlur === 'function' && !isTargetingChild(e)) {
+      if (typeof onBlur === 'function') {
         onBlur(initialValue);
         setFocused(false);
       } else {
@@ -246,13 +294,11 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
         if (escaping.current) {
           return;
         }
-        if (!isTargetingChild(e)) {
-          if (canSave) {
-            onSaveHandler();
-          } else {
-            onCancelHandler();
-            setFocused(false);
-          }
+        if (canSave) {
+          onSaveHandler(true); // Exit edit mode after auto-save
+        } else {
+          onCancelHandler(true); // Exit edit mode after auto-cancel
+          setFocused(false);
         }
       }
     };
@@ -342,7 +388,43 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
         ) : (
           inputElement
         )}
-        <div className={`${blockClass}__toolbar`}>
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions -- This div is not interactive; onMouseDown is used only to detect clicks on disabled buttons within to prevent blur */}
+        <div
+          className={`${blockClass}__toolbar`}
+          onMouseDown={(e) => {
+            // Set flag when clicking any button to prevent blur handler from running
+            const element = e.target as HTMLElement;
+            let foundButton: HTMLElement | null = null;
+
+            // First, try to traverse up to find a button
+            let current = element;
+            while (current && current !== e.currentTarget) {
+              if (current.tagName === 'BUTTON') {
+                foundButton = current;
+                break;
+              }
+              current = current.parentElement as HTMLElement;
+            }
+
+            // If no button found by traversing up, search within the clicked element
+            if (!foundButton) {
+              foundButton = element.querySelector('button');
+            }
+
+            if (foundButton) {
+              clickingWithin.current = true;
+
+              // For disabled buttons, prevent default to stop blur from firing
+              // This keeps the input focused when clicking disabled buttons
+              const isDisabled =
+                foundButton.hasAttribute('disabled') ||
+                foundButton.getAttribute('aria-disabled') === 'true';
+              if (isDisabled) {
+                e.preventDefault();
+              }
+            }
+          }}
+        >
           {invalid && (
             <WarningFilled
               size={16}
@@ -366,7 +448,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
                 align={tipAlignments.cancel}
                 size={size}
                 label={cancelLabel}
-                onClick={onCancelHandler}
+                onClick={() => onCancelHandler(false)}
                 kind="ghost"
                 key="cancel"
                 className={`${blockClass}__btn ${blockClass}__btn-cancel`}
@@ -378,7 +460,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
                 align={tipAlignments.save}
                 size={size}
                 label={saveLabel}
-                onClick={onSaveHandler}
+                onClick={() => onSaveHandler(false)}
                 kind="ghost"
                 key="save"
                 className={`${blockClass}__btn ${blockClass}__btn-save`}

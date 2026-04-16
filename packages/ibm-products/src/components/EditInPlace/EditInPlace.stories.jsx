@@ -82,7 +82,7 @@ const defaultProps = {
   onCancel: () => {},
   onChange: () => {},
   onSave: () => {},
-  onBlur: () => {},
+  // onBlur is intentionally omitted to use default auto-save/cancel behavior
   readOnlyToggleTipText: 'This field is read-only and cannot be edited',
   toggleTipAlignment: 'bottom',
   saveLabel: 'Save',
@@ -131,6 +131,8 @@ const TemplateBlur = ({ containerWidth, ...args }) => {
   };
 
   const onSave = () => {
+    // Update parent state so the value prop changes and component can sync initialValue
+    setValue(value);
     actionSave(value);
   };
 
@@ -142,6 +144,8 @@ const TemplateBlur = ({ containerWidth, ...args }) => {
   const onBlur = (initialVal) => {
     const shouldSaveValue = false;
     if (shouldSaveValue) {
+      // Update parent state when saving via blur
+      setValue(value);
       actionSave(value);
     } else {
       setValue(initialVal);

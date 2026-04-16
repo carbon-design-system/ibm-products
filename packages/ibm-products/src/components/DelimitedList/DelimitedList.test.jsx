@@ -21,6 +21,10 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders a component DelimitedList', async () => {
     render(<DelimitedList />);
     expect(document.querySelectorAll(`.${blockClass}`).length).toBe(1);

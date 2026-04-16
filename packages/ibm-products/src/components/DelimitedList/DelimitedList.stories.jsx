@@ -11,11 +11,12 @@ import { previewCandidate__DelimitedList as DelimitedList } from '..';
 
 import styles from './_storybook-styles.scss?inline';
 import { DocsPage } from './DelimitedList.docs-page';
+import { Annotation } from '../../../.storybook/Annotation';
 
 const storyClass = 'delimited-list-stories';
 
 export default {
-  title: 'Utilities/DelimitedList',
+  title: 'Deprecated/DelimitedList',
   component: DelimitedList,
   tags: ['autodocs'],
   parameters: {
@@ -24,6 +25,23 @@ export default {
       page: DocsPage,
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version.
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
 };
 
 const Template = (args) => {

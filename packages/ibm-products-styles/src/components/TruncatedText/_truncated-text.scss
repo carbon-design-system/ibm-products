@@ -24,4 +24,20 @@ $block-class: #{c4p-settings.$pkg-prefix}--truncated-text;
     color: theme.$link-primary;
     cursor: pointer;
   }
+
+  &__tooltip-trigger {
+    display: inline;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: default;
+    font: inherit;
+    text-align: inherit;
+
+    &:focus {
+      outline: 2px solid theme.$focus;
+      outline-offset: 2px;
+    }
+  }
 }

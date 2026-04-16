@@ -9,9 +9,10 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Theme, Link as CarbonLink } from '@carbon/react';
 import {
   preview__CoachmarkTagline as CoachmarkTagline,
-  preview__Coachmark as Coachmark,
+  // preview__Coachmark as Coachmark,
 } from '@carbon/ibm-products';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
+import { Coachmark } from '../../../../components/Coachmark/next/Coachmark';
 
 //fetching theme
 function useCarbonTheme() {
@@ -62,19 +63,22 @@ export const CoachmarkFixedExample = (args) => {
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [fixedIsVisible, setFixedIsVisible] = useState(false);
-
-  //prettier-ignore
-  const carouselContainerRef = useRef < HTMLDivElement > (null);
+  const [canClose, setCanClose] = useState(true);
   //prettier-ignore
   const carouselInit = useRef < InitCarousel > (null);
+  const isNavigatingRef = useRef(false);
   //prettier-ignore
   const nextRef = useRef<HTMLButtonElement>(null);
   //prettier-ignore
   const backRef = useRef<HTMLButtonElement>(null);
   //prettier-ignore
   const doneRef = useRef<HTMLButtonElement>(null);
-  //prettier-ignore
-  const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const carouselContainerRefs = useRef<{
+    [key: number]: HTMLDivElement | null;
+  }>({});
+  const carouselItemsRef = useRef<{ [key: number]: (HTMLDivElement | null)[] }>(
+    {}
+  );
 
   const items = [
     {
@@ -97,6 +101,10 @@ export const CoachmarkFixedExample = (args) => {
   ];
 
   const handleClose = () => {
+    // Prevent closing during carousel navigation
+    if (!canClose || isNavigatingRef.current) {
+      return;
+    }
     setIsOpen(false);
     setFixedIsVisible(false);
     carouselInit?.current?.reset();
@@ -107,20 +115,21 @@ export const CoachmarkFixedExample = (args) => {
   };
 
   const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
-    carouselItemsRef.current.forEach((item, idx) => {
+    const carouselItems = carouselItemsRef.current[0] || [];
+
+    carouselItems.forEach((item, idx) => {
       if (!item) {
         return;
       }
 
       const isActive = idx === activeIndex;
 
-      // Set aria-hidden based on active state
       item.setAttribute('aria-hidden', String(!isActive));
 
       if (!isActive) {
-        item.setAttribute('inert', ''); // Disable interactivity
+        item.setAttribute('inert', '');
       } else {
-        item.removeAttribute('inert'); // Re-enable interactivity
+        item.removeAttribute('inert');
       }
 
       item.removeAttribute('tabindex');
@@ -170,43 +179,74 @@ export const CoachmarkFixedExample = (args) => {
   }, [isOpen, updateCarouselItemsTabIndex]);
 
   useEffect(() => {
-    if (carouselContainerRef && carouselContainerRef.current) {
-      carouselInit.current = initCarousel(carouselContainerRef.current, {
+    const activeCarouselContainer = carouselContainerRefs.current[0];
+
+    if (isOpen && activeCarouselContainer) {
+      carouselInit.current = initCarousel(activeCarouselContainer, {
         onViewChangeStart: onViewChangeStart,
         onViewChangeEnd: onViewChangeEnd,
+        useMaxHeight: true,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselInit, isOpen]);
 
-  const onNext = () => {
+  const onNext = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setCanClose(false);
+    isNavigatingRef.current = true;
     carouselInit?.current?.next();
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+      setCanClose(true);
+    }, 300);
   };
-  const onPrev = () => {
+
+  const onPrev = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setCanClose(false);
+    isNavigatingRef.current = true;
     carouselInit?.current?.prev();
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+      setCanClose(true);
+    }, 300);
   };
 
   return (
     <Theme theme={carbonTheme}>
-      <Coachmark open={isOpen} onClose={handleClose} align="top" {...args}>
+      <Coachmark
+        open={isOpen}
+        onClose={handleClose}
+        align="top"
+        caret={false}
+        {...args}
+      >
         <CoachmarkTagline
           title="Why are there two types of severity scores?"
           closeIconDescription="Close"
           isOpen={isOpen}
           buttonProps={{ onClick: handleTaglineClick, id: 'CoachmarkTagline' }}
         ></CoachmarkTagline>
-        <Coachmark.Content
-          className={fixedIsVisible && `is-visible`}
-          highContrast={true}
-        >
+        <Coachmark.Content className={fixedIsVisible ? `is-visible` : ''}>
           <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
           <Coachmark.Content.Body>
-            <div ref={carouselContainerRef} className="exampleCarouselWrapper">
+            <div
+              ref={(el) => {
+                carouselContainerRefs.current[0] = el;
+              }}
+              className="exampleCarouselWrapper"
+            >
               {items.map((item, index) => (
                 <div
                   key={item.id}
                   ref={(el) => {
-                    carouselItemsRef.current[index] = el;
+                    if (!carouselItemsRef.current[0]) {
+                      carouselItemsRef.current[0] = [];
+                    }
+                    carouselItemsRef.current[0][index] = el;
                   }}
                 >
                   <h2>{item.title}</h2>

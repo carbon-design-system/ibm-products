@@ -102,6 +102,7 @@ export default {
         keepNames: true,
       },
       optimizeDeps: {
+        include: ['lodash'],
         esbuildOptions: {
           loader: {
             '.js': 'jsx',

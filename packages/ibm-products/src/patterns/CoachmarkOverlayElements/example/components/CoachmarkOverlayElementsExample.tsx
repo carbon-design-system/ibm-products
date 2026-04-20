@@ -61,20 +61,14 @@ function useCarbonTheme() {
 export const CoachmarkOverlayElementsExample = (args) => {
   const carbonTheme = useCarbonTheme();
   const [isOpen, setIsOpen] = useState(true);
-  const [canClose, setCanClose] = useState(true);
-
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const primaryButtonRef = useRef<HTMLButtonElement>(null);
   const backRef = useRef<HTMLButtonElement>(null);
-  const doneRef = useRef<HTMLButtonElement>(null);
-
+  const beaconButtonRef = useRef<HTMLButtonElement>(null);
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
-
   const carouselContainerRef = useRef(null);
   const carouselInit = useRef(null);
-  const isNavigatingRef = useRef(false);
   const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
-
   const items = [
     {
       id: 1,
@@ -89,12 +83,12 @@ export const CoachmarkOverlayElementsExample = (args) => {
   ];
 
   const handleClose = () => {
-    // Prevent closing during carousel navigation
-    if (!canClose || isNavigatingRef.current) {
-      return;
-    }
     setIsOpen(false);
     carouselInit?.current?.reset();
+    // Return focus to the beacon button after closing
+    setTimeout(() => {
+      beaconButtonRef.current?.focus();
+    }, 0);
   };
 
   const handleBeaconClick = () => {
@@ -144,46 +138,20 @@ export const CoachmarkOverlayElementsExample = (args) => {
 
       // Update inert attribute for carousel items
       updateCarouselItemsTabIndex(currentIndex);
-
-      // Focus the appropriate button after carousel navigation
-      // Use setTimeout to ensure button refs are updated after re-render
-      setTimeout(() => {
-        if (currentIndex === lastIndex) {
-          // On last slide, focus the Done button
-          doneRef.current?.focus();
-        } else {
-          // On other slides, focus the Next button
-          nextRef.current?.focus();
-        }
-      }, 10);
     },
     [updateCarouselItemsTabIndex]
   );
-
   const onNext = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setCanClose(false);
-    isNavigatingRef.current = true;
     carouselInit?.current?.next();
-    setTimeout(() => {
-      isNavigatingRef.current = false;
-      setCanClose(true);
-    }, 300);
   };
 
   const onPrev = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setCanClose(false);
-    isNavigatingRef.current = true;
+    // Focus the primary button before navigation if Back button will be hidden
+    if (currentViewIndex === 1) {
+      primaryButtonRef.current?.focus();
+    }
     carouselInit?.current?.prev();
-    setTimeout(() => {
-      isNavigatingRef.current = false;
-      setCanClose(true);
-    }, 300);
   };
-
   return (
     <Theme theme={carbonTheme}>
       <Coachmark
@@ -191,11 +159,16 @@ export const CoachmarkOverlayElementsExample = (args) => {
         open={isOpen}
         onClose={handleClose}
         align="top"
+        selectorPrimaryFocus="#coachmark-primary-button"
         {...args}
       >
         <CoachmarkBeacon
           label="Show information"
-          buttonProps={{ onClick: handleBeaconClick, id: 'CoachmarkBtn' }}
+          buttonProps={{
+            onClick: handleBeaconClick,
+            id: 'CoachmarkBtn',
+            ref: beaconButtonRef,
+          }}
         ></CoachmarkBeacon>
         <Coachmark.Content>
           <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
@@ -250,21 +223,19 @@ export const CoachmarkOverlayElementsExample = (args) => {
                     Back
                   </Button>
                 )}
-
-                {lastViewIndex !== currentViewIndex ? (
-                  <Button
-                    size="sm"
-                    iconDescription="Next"
-                    onClick={onNext}
-                    ref={nextRef}
-                  >
-                    Next
-                  </Button>
-                ) : (
-                  <Button size="sm" onClick={handleClose} ref={doneRef}>
-                    Done
-                  </Button>
-                )}
+                <Button
+                  id="coachmark-primary-button"
+                  size="sm"
+                  iconDescription={
+                    currentViewIndex < items.length - 1 ? 'Next' : 'Done'
+                  }
+                  onClick={
+                    currentViewIndex < items.length - 1 ? onNext : handleClose
+                  }
+                  ref={primaryButtonRef}
+                >
+                  {currentViewIndex < items.length - 1 ? 'Next' : 'Done'}
+                </Button>
               </div>
             </div>
           </Coachmark.Content.Body>

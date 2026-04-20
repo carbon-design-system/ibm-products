@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Coachmark } from '.';
 import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
@@ -106,9 +106,14 @@ const TooltipTemplate = ({ ...args }, context) => {
   const sbDocs = context.viewMode !== 'docs';
   const carbonTheme = sbDocs ? useCarbonTheme() : 'white';
   const [isOpen, setIsOpen] = useState(true);
+  const beaconButtonRef = useRef(null);
 
   const handleClose = () => {
     setIsOpen(false);
+    // Return focus to the beacon button after closing
+    setTimeout(() => {
+      beaconButtonRef.current?.focus();
+    }, 0);
   };
 
   const handleBeaconClick = () => {
@@ -127,7 +132,11 @@ const TooltipTemplate = ({ ...args }, context) => {
         >
           <CoachmarkBeacon
             label="Show information"
-            buttonProps={{ onClick: handleBeaconClick, id: 'CoachmarkBtn' }}
+            buttonProps={{
+              onClick: handleBeaconClick,
+              id: 'CoachmarkBtn',
+              ref: beaconButtonRef,
+            }}
           ></CoachmarkBeacon>
           <Coachmark.Content>
             <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
@@ -154,9 +163,14 @@ const FloatingTemplate = ({ ...args }, context) => {
   const sbDocs = context.viewMode !== 'docs';
   const carbonTheme = sbDocs ? useCarbonTheme() : 'white';
   const [isOpen, setIsOpen] = useState(true);
+  const triggerButtonRef = useRef(null);
 
   const handleClose = () => {
     setIsOpen(false);
+    // Return focus to the trigger button after closing
+    setTimeout(() => {
+      triggerButtonRef.current?.focus();
+    }, 0);
   };
 
   const handleButtonClick = () => {
@@ -179,6 +193,7 @@ const FloatingTemplate = ({ ...args }, context) => {
             label="Show information"
             renderIcon={Crossroads}
             onClick={handleButtonClick}
+            ref={triggerButtonRef}
           >
             Show information
           </Button>

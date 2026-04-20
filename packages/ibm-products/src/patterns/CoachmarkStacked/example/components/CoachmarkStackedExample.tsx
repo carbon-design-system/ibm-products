@@ -74,16 +74,15 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [openId, setOpenId] = useState(0);
-  const [canClose, setCanClose] = useState(true);
   const carouselInit = useRef(null);
-  const isNavigatingRef = useRef(false);
   const [parentHeight, setParentHeight] = useState(0);
   const stackHomeContentRef = useRef(null);
   const stackedCoachmarkContentRefs = useRef([]);
   // Use ref maps to store button refs for each example separately
-  const nextRefMap = useRef<{ [key: number]: HTMLButtonElement | null }>({});
+  const primaryButtonRefMap = useRef<{
+    [key: number]: HTMLButtonElement | null;
+  }>({});
   const backRefMap = useRef<{ [key: number]: HTMLButtonElement | null }>({});
-  const doneRefMap = useRef<{ [key: number]: HTMLButtonElement | null }>({});
   const carouselContainerRefs = useRef<{
     [key: number]: HTMLDivElement | null;
   }>({});
@@ -123,7 +122,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       button: (
         <Button
           ref={(el) => {
-            doneRefMap.current[1] = el;
+            primaryButtonRefMap.current[1] = el;
           }}
           size="sm"
           onClick={(e) => {
@@ -355,41 +354,28 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     if (openId > 0 && currentViewIndex !== null) {
       // Use setTimeout with requestAnimationFrame to ensure DOM is fully updated
       setTimeout(() => {
-        if (currentViewIndex === lastViewIndex) {
-          // On last slide, focus the Done button for this specific example
-          const doneButton = doneRefMap.current[openId];
-          if (doneButton) {
-            doneButton.focus();
-          }
-        } else {
-          // On other slides, focus the Next button for this specific example
-          const nextButton = nextRefMap.current[openId];
-          if (nextButton) {
-            nextButton.focus();
-          }
+        // Focus the primary button for this specific example
+        const primaryButton = primaryButtonRefMap.current[openId];
+        if (primaryButton) {
+          primaryButton.focus();
         }
       }, 150);
     }
   }, [currentViewIndex, lastViewIndex, openId]);
 
   const onNext = (e) => {
-    setCanClose(false);
-    isNavigatingRef.current = true;
     carouselInit?.current?.next();
-    setTimeout(() => {
-      isNavigatingRef.current = false;
-      setCanClose(true);
-    }, 300);
   };
 
   const onPrev = (e) => {
-    setCanClose(false);
-    isNavigatingRef.current = true;
+    // Focus the primary button before navigation if Back button will be hidden
+    if (currentViewIndex === 1) {
+      const primaryButton = primaryButtonRefMap.current[openId];
+      if (primaryButton) {
+        primaryButton.focus();
+      }
+    }
     carouselInit?.current?.prev();
-    setTimeout(() => {
-      isNavigatingRef.current = false;
-      setCanClose(true);
-    }, 300);
   };
 
   useLayoutEffect(() => {
@@ -533,9 +519,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
             open={isOpen}
             onClose={() => {
               // Prevent closing during carousel navigation
-              if (canClose && !isNavigatingRef.current) {
-                setOpenId(0);
-              }
+              setOpenId(0);
             }}
             align="top"
             caret={false}
@@ -637,29 +621,27 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                                   Back
                                 </Button>
                               )}
-
-                              {lastViewIndex !== currentViewIndex ? (
-                                <Button
-                                  ref={(el) => {
-                                    nextRefMap.current[item.id] = el;
-                                  }}
-                                  size="sm"
-                                  iconDescription="Next"
-                                  onClick={onNext}
-                                >
-                                  Next
-                                </Button>
-                              ) : (
-                                <Button
-                                  ref={(el) => {
-                                    doneRefMap.current[item.id] = el;
-                                  }}
-                                  size="sm"
-                                  onClick={handleCloseCarousel}
-                                >
-                                  Done
-                                </Button>
-                              )}
+                              <Button
+                                id="coachmark-primary-button"
+                                size="sm"
+                                iconDescription={
+                                  currentViewIndex < nested.pages.length - 1
+                                    ? 'Next'
+                                    : 'Done'
+                                }
+                                onClick={
+                                  currentViewIndex < nested.pages.length - 1
+                                    ? onNext
+                                    : handleCloseCarousel
+                                }
+                                ref={(el) => {
+                                  primaryButtonRefMap.current[item.id] = el;
+                                }}
+                              >
+                                {currentViewIndex < nested.pages.length - 1
+                                  ? 'Next'
+                                  : 'Done'}
+                              </Button>
                             </div>
                           </div>
                         </React.Fragment>

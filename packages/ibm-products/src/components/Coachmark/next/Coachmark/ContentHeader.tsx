@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass, CoachmarkContext } from './context';
 import { Close, Draggable } from '@carbon/react/icons';
+import { carbon } from '../../../../settings';
 import { makeDraggable } from '../../../../global/js/utils/makeDraggable';
 
 export interface ContentHeaderProps {
@@ -69,7 +70,7 @@ export const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
       ) {
         // Find the popover-content element for styling during drag
         const dragStyleContainer = contentRef.querySelector(
-          '.cds--popover-content'
+          `${carbon.prefix}--popover-content`
         );
 
         // Reset positioning styles on the drag container

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2023, 2024
+// Copyright IBM Corp. 2023, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -58,10 +58,10 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--coachmark__next;
     }
 
     .#{$block-class-next}--content-header--drag-icon,
-    .#{$block-class-next}--content-header .cds--btn {
+    .#{$block-class-next}--content-header .#{carbon-config.$prefix}--btn {
       color: $icon-inverse;
 
-      .cds--btn__icon,
+      .#{carbon-config.$prefix}--btn__icon,
       svg {
         color: $icon-inverse;
         fill: $icon-inverse;

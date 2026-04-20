@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,13 +14,13 @@ import React, {
   useContext,
   useEffect,
   useRef,
-  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import { blockClass, CoachmarkContext } from './context';
 import { ContentHeaderProps } from './ContentHeader';
 import { ContentBodyProps } from './ContentBody';
 import { PopoverContent } from '@carbon/react';
+import { carbon } from '../../../../settings';
 import cx from 'classnames';
 
 export interface CoachmarkContentProps {
@@ -46,7 +46,6 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
   (props, ref) => {
     const { className = '', children, ...rest } = props;
     const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
-    const contentBodyClass = `${blockClass}--content-body`;
     const {
       open,
       setContentRef,
@@ -56,12 +55,6 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
       selectorPrimaryFocus,
     } = useContext(CoachmarkContext);
 
-    const [contentId] = useState(
-      () => `coachmark-content-${Math.random().toString(36).substr(2, 9)}`
-    );
-    const [labelId] = useState(
-      () => `coachmark-label-${Math.random().toString(36).substr(2, 9)}`
-    );
     const handleRef = useRef<HTMLDivElement | null>(null);
     const contentRef = ref || handleRef;
 
@@ -69,7 +62,9 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
       if (open && 'current' in contentRef && contentRef.current) {
         // Find the actual popover container (parent of PopoverContent)
         const popoverContent = contentRef.current;
-        const popoverContainer = popoverContent?.closest('.cds--popover');
+        const popoverContainer = popoverContent?.closest(
+          `${carbon.prefix}--popover`
+        );
         if (popoverContainer instanceof HTMLElement) {
           setContentRef(popoverContainer);
         }
@@ -121,15 +116,13 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
         // Use setTimeout to ensure DOM is ready and give time for any other focus management
         setTimeout(() => {
           requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              // Try to get the element from the DOM directly using the selector
-              const elementToFocus =
-                document.querySelector<HTMLElement>(selectorPrimaryFocus);
+            // Try to get the element from the DOM directly using the selector
+            const elementToFocus =
+              document.querySelector<HTMLElement>(selectorPrimaryFocus);
 
-              if (elementToFocus) {
-                elementToFocus.focus();
-              }
-            });
+            if (elementToFocus) {
+              elementToFocus.focus();
+            }
           });
         }, 100);
       }
@@ -138,7 +131,6 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     return (
       <PopoverContent
         ref={contentRef}
-        id={contentId}
         className={cx(coachmarkContentBlockClass, className) || ''}
         {...rest}
       >

@@ -70,7 +70,7 @@ export const ContentHeader = forwardRef<HTMLDivElement, ContentHeaderProps>(
       ) {
         // Find the popover-content element for styling during drag
         const dragStyleContainer = contentRef.querySelector(
-          `${carbon.prefix}--popover-content`
+          `.${carbon.prefix}--popover-content`
         );
 
         // Reset positioning styles on the drag container

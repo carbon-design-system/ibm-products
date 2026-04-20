@@ -63,7 +63,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
         // Find the actual popover container (parent of PopoverContent)
         const popoverContent = contentRef.current;
         const popoverContainer = popoverContent?.closest(
-          `${carbon.prefix}--popover`
+          `.${carbon.prefix}--popover`
         );
         if (popoverContainer instanceof HTMLElement) {
           setContentRef(popoverContainer);

@@ -17,9 +17,8 @@ import React, {
 import { Button, Theme, Link as CarbonLink } from '@carbon/react';
 import {
   preview__CoachmarkTagline as CoachmarkTagline,
-  // preview__Coachmark as Coachmark,
+  preview__Coachmark as Coachmark,
 } from '@carbon/ibm-products';
-import { Coachmark } from '../../../../components/Coachmark/next/Coachmark';
 import { initCarousel } from '@carbon/utilities';
 import { Idea } from '@carbon/react/icons';
 import cx from 'classnames';

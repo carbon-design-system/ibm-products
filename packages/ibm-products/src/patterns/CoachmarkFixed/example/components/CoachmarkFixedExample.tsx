@@ -9,10 +9,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Theme, Link as CarbonLink } from '@carbon/react';
 import {
   preview__CoachmarkTagline as CoachmarkTagline,
-  // preview__Coachmark as Coachmark,
+  preview__Coachmark as Coachmark,
 } from '@carbon/ibm-products';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
-import { Coachmark } from '../../../../components/Coachmark/next/Coachmark';
 
 //fetching theme
 function useCarbonTheme() {

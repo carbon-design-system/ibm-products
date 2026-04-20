@@ -9,9 +9,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Theme } from '@carbon/react';
 import {
   preview__CoachmarkBeacon as CoachmarkBeacon,
-  // preview__Coachmark as Coachmark,
+  preview__Coachmark as Coachmark,
 } from '@carbon/ibm-products';
-import { Coachmark } from '../../../../components/Coachmark/next/Coachmark';
 import { initCarousel } from '@carbon/utilities';
 import sampleImage from '../assets/sample-image.png';
 

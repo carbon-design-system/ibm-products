@@ -14,8 +14,8 @@ import '@carbon/web-components/es/components/button/button.js';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import '@carbon/web-components/es/components/link/index.js';
 import styles from './styles.scss?lit';
-import '../../../src/components/coachmark/index.js';
-import '../../../src/components/coachmark/coachmark-tagline/index.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js'; 
 import Idea20 from '@carbon/icons/es/idea/20.js';
 import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 

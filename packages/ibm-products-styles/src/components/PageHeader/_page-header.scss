@@ -787,7 +787,7 @@ $duration: 1000ms;
 
   .#{$block-class}__breadcrumb__actions {
     display: inline-flex;
-    flex: 1 1 0%;
+    flex: 0 0 auto;
     justify-content: flex-end;
     min-inline-size: 75%;
 
@@ -813,8 +813,32 @@ $duration: 1000ms;
   .#{$block-class}__breadcrumb-wrapper .#{$block-class}-breadcrumb-overflow {
     flex: 1 1 0%;
     min-inline-size: 0;
+
     .#{$carbon-prefix}--breadcrumb {
       display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .#{$carbon-prefix}--breadcrumb-item[data-fixed='true'] {
+      .#{$carbon-prefix}--link {
+        display: block;
+        overflow: hidden;
+        inline-size: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      @include breakpoint-down(lg) {
+        .#{$carbon-prefix}--link {
+          inline-size: 75%;
+        }
+      }
+
+      @include breakpoint-down(md) {
+        .#{$carbon-prefix}--link {
+          inline-size: 25%;
+        }
+      }
     }
   }
 

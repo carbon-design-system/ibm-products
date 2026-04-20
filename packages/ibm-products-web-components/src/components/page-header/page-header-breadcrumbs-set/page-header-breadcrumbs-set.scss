@@ -18,7 +18,7 @@ $css--plex: true !default;
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
 
-$block-class: #{$prefix}--set-of-breadcrumbs;
+$block-class: #{$prefix}--page-header-breadcrumbs-set;
 
 :host {
   display: block;

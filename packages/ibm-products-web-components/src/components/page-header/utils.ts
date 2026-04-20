@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -93,3 +93,19 @@ export const scrollableAncestor = (target: HTMLElement) => {
   }
   return scrollableAncestorInner(target);
 };
+
+/**
+ * ----------
+ * Overflow Handler Utilities
+ * ----------
+ * Re-exported from _story-assets/overflowHandler.ts
+ * TODO: delete after overflowHandler from carbon/utils gets updated
+ */
+export {
+  getSize,
+  updateOverflowHandler,
+  createOverflowHandler,
+  type UpdateOverflowHandlerOptions,
+  type OverflowHandlerOptions,
+  type OverflowHandler,
+} from './_story-assets/overflowHandler';

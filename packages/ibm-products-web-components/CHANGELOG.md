@@ -1,3 +1,28 @@
+## `@carbon/ibm-products-web-components@0.37.0`
+### Features :rocket:
+- feat(CoachmarkOverlayElements): implemented as patterns  (#8848)
+- feat(coachmarkFixed): implemented as patterns (#8879)
+- feat: create action-set utility for webcomponents (#9154)
+
+### Bug fixes :bug:
+- fix(interstitialScreen): parity issues and small screens ui of action buttons (#9032)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.87.0-rc.0 (#9187)
+
+## `@carbon/ibm-products-web-components@0.36.0`
+### Bug fixes :bug:
+- fix(about-modal): Parity work (#9088)
+- fix(side-panel): Parity work (#9136)
+- fix: Coachmark design parity (#9155)
+- fix: move step flows to utilities (#9110)
+
+### Housekeeping :house:
+- chore: update node to 24 (#9114)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+- chore: migrate to tsdown for react and wc (#9123)
+- chore(deps): update dependency @mordech/vite-lit-loader to ^0.38.0 (#9130)
+
 ## `@carbon/ibm-products-web-components@0.35.0`
 ### Features :rocket:
 - feat: Composable Tearsheet webcomponent implementation (#8841)

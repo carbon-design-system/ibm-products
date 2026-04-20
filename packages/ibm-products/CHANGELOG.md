@@ -1,3 +1,35 @@
+## `@carbon/ibm-products@2.88.0`
+### Features :rocket:
+- feat(preview__PageHeader): implement callbacks for intesecting observers (#9087)
+- feat: add initialState support and footer actions prop (#9171)
+
+### Bug fixes :bug:
+- fix(interstitialScreen): parity issues and small screens ui of action buttons (#9032)
+- fix(build): patch CJS default export interop for tsdown migration
+
+### Housekeeping :house:
+- chore(preview_PageHeader): refactor `breadcrumbPageActions` to a standalone component (#9230)
+- docs(changelog): update for v2.87.0-rc.0 (#9187)
+
+## `@carbon/ibm-products@2.87.1`
+### Bug fixes :bug:
+- fix(build): patch CJS default export interop for tsdown migration
+## `@carbon/ibm-products@2.87.0`
+### Features :rocket:
+- feat(createFullPage): implemented as patterns in react (#9096)
+
+### Bug fixes :bug:
+- fix: add prop type as dep
+- fix: build fixes and release CI optimisations
+- fix(SidePanel): visual issues - react (#9142)
+- fix: Coachmark design parity (#9155)
+- fix: move step flows to utilities (#9110)
+
+### Housekeeping :house:
+- chore(deps): update dependency glob to v13 (#9035)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+- chore: migrate to tsdown for react and wc (#9123)
+
 ## `@carbon/ibm-products@2.86.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): add support for actions prop for footer (#9103)

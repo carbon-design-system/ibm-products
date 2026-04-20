@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback } from 'react';
 import {
   preview__PageHeader as PageHeader,
   preview__TruncatedText as TruncatedText,
@@ -16,10 +16,14 @@ import {
   PageHeaderContentText,
   PageHeaderContentPageActions,
   PageHeaderHeroImage,
+  PageHeaderBreadcrumbPageActions,
+  PageHeaderScrollButton,
+  PageHeaderTitleBreadcrumb,
+  PageHeaderBreadcrumbOverflow,
+  PageHeaderTagOverflow,
 } from './PageHeader';
 import {
   Tag,
-  Button,
   Grid,
   Column,
   Breadcrumb,
@@ -29,7 +33,6 @@ import {
   Tabs,
   TabPanels,
   TabPanel,
-  IconButton,
   OverflowMenu,
   OverflowMenuItem,
   OperationalTag,
@@ -50,7 +53,6 @@ import {
   CloudFoundry_1,
   Activity,
 } from '@carbon/icons-react';
-import { createOverflowHandler } from '@carbon/utilities';
 import mdx from './PageHeader.mdx';
 import { pageActionButtonItems } from './_story-assets/pageActionButtonItems';
 
@@ -64,6 +66,11 @@ export default {
     PageHeaderTabBar,
     PageHeaderContentText,
     PageHeaderContentPageActions,
+    PageHeaderBreadcrumbPageActions,
+    PageHeaderScrollButton,
+    PageHeaderTitleBreadcrumb,
+    PageHeaderBreadcrumbOverflow,
+    PageHeaderTagOverflow,
   },
   tags: ['autodocs'],
   argTypes: {
@@ -124,80 +131,9 @@ const breadcrumbPageActionItems = [
   },
 ];
 
-const BreadcrumbPageActions = () => {
-  const containerRef = useRef(null);
-  const [hiddenItems, setHiddenItems] = useState([]);
-
-  useEffect(() => {
-    if (!containerRef.current) {
-      return;
-    }
-    const handler = createOverflowHandler({
-      container: containerRef.current,
-      onChange: (_visible, hidden) => {
-        const hiddenIds = hidden.map((el) => el.dataset.id);
-        setHiddenItems(
-          breadcrumbPageActionItems.filter((item) =>
-            hiddenIds.includes(item.id)
-          )
-        );
-      },
-    });
-    return () => handler.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={containerRef}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        inlineSize: '50%',
-      }}
-    >
-      {breadcrumbPageActionItems.map((item) => (
-        <div key={item.id} data-id={item.id}>
-          <Button
-            renderIcon={item.renderIcon}
-            iconDescription={item.label}
-            hasIconOnly
-            size="md"
-            kind="ghost"
-            onClick={item.onClick}
-          />
-        </div>
-      ))}
-      <div
-        data-offset
-        data-hidden
-        data-floating-menu-container
-        style={{
-          position: 'relative',
-        }}
-      >
-        <FeatureFlags enableV12OverflowMenu>
-          <OverflowMenu
-            size="md"
-            aria-label="More page actions"
-            autoAlign={true}
-            flipped
-          >
-            {hiddenItems.map((item) => (
-              <OverflowMenuItem
-                key={item.id}
-                itemText={item.label}
-                onClick={item.onClick}
-              />
-            ))}
-          </OverflowMenu>
-        </FeatureFlags>
-      </div>
-    </div>
-  );
-};
-
-const breadcrumbPageActions = <BreadcrumbPageActions />;
+const breadcrumbPageActions = (
+  <PageHeader.BreadcrumbPageActions actions={breadcrumbPageActionItems} />
+);
 
 export const Default = ({
   border,
@@ -239,6 +175,9 @@ export const Default = ({
           <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
           <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
           <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+          <PageHeader.TitleBreadcrumb data-fixed>
+            {title}
+          </PageHeader.TitleBreadcrumb>
         </PageHeader.BreadcrumbOverflow>
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content
@@ -764,3 +703,146 @@ export const Compact = (args) => (
     </TabPanels>
   </Tabs>
 );
+
+export const CustomRenderWithCallbacks = ({
+  border,
+  pageActionsFlush,
+  contentActionsFlush,
+  renderBreadcrumbIcon,
+  title,
+  ...args
+}) => {
+  const handleContentFullyCollapsed = useCallback((collapsed) => {
+    console.log('onContentFullyCollapsed:', collapsed);
+  }, []);
+
+  const handleTitleClipped = useCallback((clipped) => {
+    console.log('onTitleClipped:', clipped);
+  }, []);
+
+  const handleContentActionsClipped = useCallback((clipped) => {
+    console.log('onContentActionsClipped:', clipped);
+  }, []);
+
+  return (
+    <Tabs>
+      <PageHeader.Root
+        {...args}
+        onContentFullyCollapsed={handleContentFullyCollapsed}
+        onTitleClipped={handleTitleClipped}
+        onContentActionsClipped={handleContentActionsClipped}
+      >
+        <PageHeader.BreadcrumbBar
+          border={border}
+          contentActionsFlush={contentActionsFlush}
+          renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+          contentActions={({ contentActionsClipped }) =>
+            contentActionsClipped ? (
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
+              />
+            ) : null
+          }
+          pageActions={breadcrumbPageActions}
+        >
+          <Breadcrumb>
+            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          </Breadcrumb>
+        </PageHeader.BreadcrumbBar>
+        <PageHeader.Content
+          title={title}
+          pageActions={({ fullyCollapsed }) =>
+            !fullyCollapsed ? (
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
+              />
+            ) : null
+          }
+        >
+          <PageHeader.ContentText subtitle="Subtitle">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </PageHeader.ContentText>
+        </PageHeader.Content>
+        <PageHeader.TabBar>
+          <TabList>
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+            <Tab>Tab 3</Tab>
+            <Tab>Tab 4</Tab>
+            <Tab>Tab 5</Tab>
+            <Tab>Tab 6</Tab>
+            <Tab>Tab 7</Tab>
+          </TabList>
+        </PageHeader.TabBar>
+      </PageHeader.Root>
+      <TabPanels>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 1
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 2
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 3
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 4
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 5
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 6
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 7
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+CustomRenderWithCallbacks.args = {
+  border: true,
+  contentActionsFlush: false,
+  title:
+    'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+  renderBreadcrumbIcon: true,
+};
+
+CustomRenderWithCallbacks.argTypes = {
+  border: {
+    description: 'Specify whether to render BreadcrumbBar border',
+    control: {
+      type: 'boolean',
+    },
+  },
+  contentActionsFlush: {
+    description:
+      'Specify whether the content actions within BreadcrumbBar should be flush with the page actions',
+    control: {
+      type: 'boolean',
+    },
+  },
+  title: {
+    description:
+      'Provide the title text to be rendered within  PageHeaderContent',
+    control: {
+      type: 'text',
+    },
+  },
+  renderBreadcrumbIcon: {
+    description:
+      'Specify whether to render the BreadcrumbBar icon (storybook control only)',
+    control: {
+      type: 'boolean',
+    },
+  },
+};

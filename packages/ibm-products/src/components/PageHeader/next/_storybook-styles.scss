@@ -70,8 +70,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--page-header;
 
 $stackblitz-block-class: c4p--page-header;
 .#{$stackblitz-block-class}__breadcrumb-bar
-  .cds--css-grid
-  .cds--css-grid-column,
+  .#{c4p-settings.$carbon-prefix}--css-grid
+  .#{c4p-settings.$carbon-prefix}--css-grid-column,
 .#{$stackblitz-block-class}__breadcrumb-bar
   .c4p--page-header__breadcrumb-container {
   block-size: 40px;
@@ -86,4 +86,11 @@ $stackblitz-block-class: c4p--page-header;
   overflow: auto;
   block-size: calc(100vh - 3rem);
   margin-block-start: spacing.$spacing-09;
+}
+
+// Hide content actions on small screens (story level)
+@media (width <= 671px) {
+  .#{$block-class}__breadcrumb__content-actions {
+    display: none;
+  }
 }

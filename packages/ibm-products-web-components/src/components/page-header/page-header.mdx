@@ -88,6 +88,15 @@ When including a hero image within the Page header, the Carbon Grid classes will
 need to be utilized. In addition, the `withinGrid` attribute has to be set in
 the `c4p-page-header-content` and `c4p-page-header-breadcrumb` components.
 
+The `c4p-page-header-hero-image` component maintains a consistent aspect ratio
+(3×2 on mobile/tablet, 2×1 on desktop) and automatically prevents horizontal
+overflow. The image is centered within its container using flexbox, ensuring it
+stays within viewport boundaries while maintaining proper aspect ratio.
+
+You can control how the image fills the container using CSS custom properties:
+- `--object-fit`: Controls image sizing (`cover` (default), `contain`, `fill`, `none`)
+- `--object-position`: Controls image positioning (default: `center`)
+
 ```css
 @use '@carbon/grid';
 
@@ -108,7 +117,7 @@ the `c4p-page-header-content` and `c4p-page-header-breadcrumb` components.
       </c4p-page-header-content>
       </div>
       <div class="cds--sm:col-span-0 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-        <c4p-page-header-hero-image>
+        <c4p-page-header-hero-image object-fit="cover">
           <picture>
             <source
               srcset="..."
@@ -121,7 +130,6 @@ the `c4p-page-header-content` and `c4p-page-header-breadcrumb` components.
             <img
               src="..."
               alt="a default image"
-              style="max-width:100%;height:auto"
             />
           </picture>
         </c4p-page-header-hero-image>
@@ -130,6 +138,10 @@ the `c4p-page-header-content` and `c4p-page-header-breadcrumb` components.
   </div>
 </c4p-page-header>
 ```
+
+**Note:** The hero image is automatically constrained to prevent horizontal
+overflow. The `picture` element uses flexbox with centered alignment to ensure
+the image stays within its container boundaries across all viewport sizes.
 
 ## Tabs
 

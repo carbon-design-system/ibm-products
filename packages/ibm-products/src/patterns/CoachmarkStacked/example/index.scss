@@ -18,7 +18,7 @@ $carbon-prefix: 'cds';
 @use '@carbon/layout/scss/convert';
 @use '@carbon/styles/scss/colors' as colors;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
-@use '@carbon/utilities/scss/carousel' as carousel;
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
 
 @include carousel.carousel();
 

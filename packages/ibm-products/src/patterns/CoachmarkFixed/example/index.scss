@@ -8,7 +8,6 @@
 /* stylelint-disable declaration-no-important */
 
 $prefix: 'c4p' !default;
-$carbon-prefix: 'cds';
 
 @use '@carbon/styles/scss/config' with (
   $font-path: '@ibm/plex'
@@ -20,7 +19,7 @@ $carbon-prefix: 'cds';
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
-@use '@carbon/utilities/scss/carousel' as carousel;
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
 @include carousel.carousel();
 
 @include carousel.wrapperStyles();

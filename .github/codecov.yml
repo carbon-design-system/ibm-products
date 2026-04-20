@@ -53,5 +53,9 @@ ignore:
   - '**/*.figma.tsx'
   - '**/*.figma.ts'
 
-  # Pattern documentation and examples (not production code)
+  # Storybook story assets
+  - '**/_story-assets/**'
+  - '**/story-assets/**'
+
+  # Patterns
   - '**/patterns/**'

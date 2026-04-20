@@ -9,13 +9,10 @@ on:
     types: [deploy-latest-storybook]
 
 jobs:
-  deploy-latest-storybook:
+  build-react:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-    permissions:
-      contents: write
+    timeout-minutes: 30
     steps:
-      # Checkout release branch to build storybook
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: '0'
@@ -27,7 +24,6 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
-      # Add cache for node_modules to speed up dependency installation
       - name: Cache node_modules
         id: cache-deps
         uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
@@ -44,34 +40,95 @@ jobs:
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
-      # Build all packages (needed for both storybooks)
       - name: Build packages
         run: yarn build:packages
 
-      # Build React Storybook (uses pre-built packages)
       - name: Build React Storybook
         run: yarn storybook:build
+
+      - name: Upload React Storybook artifact
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: react-storybook-static
+          path: packages/ibm-products/storybook-static
+          retention-days: 1
+
+  build-web-components:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: '0'
+          ref: ${{ github.event.client_payload.branch }}
+
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - name: Cache node_modules
+        id: cache-deps
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-deploy-deps-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-deploy-deps-
+            ${{ runner.os }}-node-modules-
+
+      - name: Install dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Build packages
+        run: yarn build:packages
 
       - name: Build Web Components Storybook
         run: |
           cd packages/ibm-products-web-components
           yarn build:storybook --loglevel verbose
 
-      # Set authenticated Git remote
+      - name: Upload Web Components Storybook artifact
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: web-components-storybook-static
+          path: packages/ibm-products-web-components/storybook-static
+          retention-days: 1
+
+  deploy-latest-storybook:
+    needs: [build-react, build-web-components]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: '0'
+          ref: ${{ github.event.client_payload.branch }}
+
+      - name: Download React Storybook artifact
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        with:
+          name: react-storybook-static
+          path: latest-dist/react
+
+      - name: Download Web Components Storybook artifact
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        with:
+          name: web-components-storybook-static
+          path: latest-dist/web-components
+
       - name: Set authenticated Git remote
         run:
-          git remote set-url origin https://git:${{
-          secrets.GITHUB_TOKEN}}@github.com/${{ github.repository }}.git
-      # Deploy to staging Github Pages using `gh-pages` package
-      - name: Prepare latest directory
-        run: |
-          mkdir -p latest-dist/react
-          cp -r packages/ibm-products/storybook-static/* latest-dist/react
+          git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN
+          }}@github.com/${{ github.repository }}.git
 
-          mkdir -p latest-dist/web-components
-          cp -r packages/ibm-products-web-components/storybook-static/* latest-dist/web-components
-
-      - name: Deploy latest Storybooks to gh-pages/latest
+      - name: Deploy both Storybooks to GitHub Pages (gh-pages/latest)
         run: |
           npx gh-pages -d latest-dist \
             -u "github-actions-bot <support+actions@github.com>" \

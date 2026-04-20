@@ -1,3 +1,13 @@
+## `@carbon/ibm-products-styles@2.84.0`
+### Features :rocket:
+- feat(preview__PageHeader): implement callbacks for intesecting observers (#9087)
+
+### Bug fixes :bug:
+- fix(interstitialScreen): parity issues and small screens ui of action buttons (#9032)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.87.0-rc.0 (#9187)
+
 ## `@carbon/ibm-products-styles@2.83.0`
 ### Features :rocket:
 - feat(createFullPage): implemented as patterns in react (#9096)

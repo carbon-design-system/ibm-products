@@ -8,7 +8,7 @@
  */
 @use './interstitial-screen';
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/utilities/scss/carousel' as carousel;
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
 @use '@carbon/styles/scss/utilities' as *;
 
 @include carousel.wrapperStyles();

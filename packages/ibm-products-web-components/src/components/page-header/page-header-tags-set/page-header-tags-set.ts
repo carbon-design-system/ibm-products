@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,12 +15,13 @@ import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/search/index.js';
 import { createOverflowHandler } from '@carbon/utilities';
 import { TagType } from './utils';
-import styles from './set-of-tags.scss?lit';
+import styles from './page-header-tags-set.scss?lit';
+import { prefix } from '../../../globals/settings';
 
-const blockClass = `c4p--set-of-tags`;
+const blockClass = `${prefix}--page-header-tags-set`;
 
-@customElement('set-of-tags-example')
-export default class SetOfTags extends LitElement {
+@customElement(`${prefix}-page-header-tags-set`)
+export default class CDSPageHeaderTagsSet extends LitElement {
   @state()
   hiddenTags: TagType[] = [];
 
@@ -281,6 +282,6 @@ export default class SetOfTags extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'set-of-tags-example': SetOfTags;
+    'c4p-page-header-tags-set': CDSPageHeaderTagsSet;
   }
 }

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.37.0-rc.0`
+## `@carbon/ibm-products-web-components@0.37.0`
 ### Features :rocket:
 - feat(CoachmarkOverlayElements): implemented as patterns  (#8848)
 - feat(coachmarkFixed): implemented as patterns (#8879)

@@ -1,34 +1,39 @@
 # @carbon/ibm-products-primitives
 
-> Framework-agnostic primitives for Carbon for IBM Products
+> **Private Package**: Internal framework-agnostic primitives for Carbon for IBM
+> Products
 
-This package provides framework-agnostic JavaScript/TypeScript utilities and
-primitives that can be shared across both React and Web Components
-implementations of Carbon for IBM Products.
+This is a **private package** that provides framework-agnostic
+JavaScript/TypeScript utilities and primitives shared internally between
+`@carbon/ibm-products` and `@carbon/ibm-products-web-components` packages.
 
-## Installation
+## ⚠️ Important Notice
 
-```bash
-npm install @carbon/ibm-products-primitives
-```
+**This package is not intended for direct public consumption.** It is a private,
+internal dependency used by:
 
-or
+- `@carbon/ibm-products` - React components
+- `@carbon/ibm-products-web-components` - Web Components
 
-```bash
-yarn add @carbon/ibm-products-primitives
-```
+These consumer packages selectively re-export only the necessary utilities for
+public usage. End users should import from the appropriate consumer package
+rather than directly from `@carbon/ibm-products-primitives`.
 
 ## Purpose
 
-The `@carbon/ibm-products-primitives` package encapsulates business logic and
-data management utilities that are independent of any UI framework. This
-promotes:
+The `@carbon/ibm-products-primitives` package serves as a shared foundation
+that:
 
-- **Code Reusability**: Share the same logic between React and Web Components
-- **Maintainability**: Single source of truth for business logic
-- **Framework Agnostic**: Pure TypeScript/JavaScript with no framework
-  dependencies
-- **Type Safety**: Full TypeScript support with comprehensive type definitions
+- **Enables Code Reusability**: Provides common business logic and utilities
+  shared between React and Web Components implementations
+- **Improves Maintainability**: Establishes a single source of truth for
+  framework-agnostic logic
+- **Ensures Framework Agnosticism**: Contains pure TypeScript/JavaScript with no
+  framework dependencies
+- **Provides Type Safety**: Offers full TypeScript support with comprehensive
+  type definitions
+- **Supports Selective Exposure**: Allows consumer packages to re-export only
+  the utilities appropriate for public use
 
 ## Available Utilities
 
@@ -61,11 +66,17 @@ const children = dataManager.getItemChildren('1');
 
 [View full AddSelectData documentation](./src/add-select/add-select-data.md)
 
-## Usage
+## Internal Usage
 
-### With React
+This package is consumed internally by the following packages:
+
+### @carbon/ibm-products (React)
+
+The React package imports primitives and selectively re-exports utilities that
+are appropriate for public consumption:
 
 ```typescript
+// Internal usage within @carbon/ibm-products
 import {
   AddSelectData,
   HierarchicalItem,
@@ -80,13 +91,20 @@ function MyComponent() {
 
   // Use dataManager methods...
 }
+
+// Public re-export (example)
+export {
+  AddSelectData,
+  HierarchicalItem,
+} from '@carbon/ibm-products-primitives';
 ```
 
-### With Web Components (Lit)
+### @carbon/ibm-products-web-components
+
+The Web Components package similarly imports and selectively re-exports:
 
 ```typescript
-import { LitElement, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+// Internal usage within @carbon/ibm-products-web-components
 import {
   AddSelectData,
   HierarchicalItem,
@@ -106,6 +124,37 @@ export class MyComponent extends LitElement {
 
   // Use dataManager methods...
 }
+
+// Public re-export (example)
+export {
+  AddSelectData,
+  HierarchicalItem,
+} from '@carbon/ibm-products-primitives';
+```
+
+## For End Users
+
+**Do not install or import from this package directly.** Instead, use the
+appropriate consumer package:
+
+### React Users
+
+```typescript
+// ✅ Correct - Import from @carbon/ibm-products
+import { AddSelectData } from '@carbon/ibm-products';
+
+// ❌ Incorrect - Do not import directly
+import { AddSelectData } from '@carbon/ibm-products-primitives';
+```
+
+### Web Components Users
+
+```typescript
+// ✅ Correct - Import from @carbon/ibm-products-web-components
+import { AddSelectData } from '@carbon/ibm-products-web-components';
+
+// ❌ Incorrect - Do not import directly
+import { AddSelectData } from '@carbon/ibm-products-primitives';
 ```
 
 ## Package Structure
@@ -163,10 +212,29 @@ src/my-primitive/
 
 ## Contributing
 
-This package is part of the Carbon for IBM Products monorepo and is published to
-npm. Please follow the
-[contribution guidelines](../../docs/MAINTAINER_GUIDELINES.md) when making
-changes.
+This package is part of the Carbon for IBM Products monorepo. As a **private
+internal package**, it is not published to npm independently. Changes to this
+package should be made with consideration for both consumer packages
+(`@carbon/ibm-products` and `@carbon/ibm-products-web-components`).
+
+Please follow the [contribution guidelines](../../docs/MAINTAINER_GUIDELINES.md)
+when making changes.
+
+### Guidelines for Maintainers
+
+When working with this package:
+
+1. **Keep it Framework-Agnostic**: Ensure all code remains free of
+   framework-specific dependencies
+2. **Consider Both Consumers**: Changes should work for both React and Web
+   Components implementations
+3. **Document Public APIs**: Clearly document which utilities are intended for
+   public re-export
+4. **Maintain Type Safety**: Provide comprehensive TypeScript types for all
+   exports
+5. **Test Thoroughly**: Ensure changes don't break either consumer package
+6. **Coordinate Re-exports**: When adding new utilities, coordinate with
+   maintainers of consumer packages to determine appropriate public exposure
 
 ## License
 

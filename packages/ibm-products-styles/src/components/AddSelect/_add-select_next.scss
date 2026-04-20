@@ -97,13 +97,13 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 // ──────────────────────────────────────────────────────────────
 .#{$block-class__next}-row {
   display: flex;
-  border-inline-start: 0.125rem solid transparent;
+  border-inline-start: $spacing-01 solid transparent;
   cursor: pointer;
   transition: background-color $duration-fast-01 motion(standard, productive);
 
   &:focus {
-    outline: 2px solid $focus;
-    outline-offset: -2px;
+    outline: $spacing-01 solid $focus;
+    outline-offset: calc(-1 * $spacing-01);
   }
 
   &--selected {
@@ -139,7 +139,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     align-items: center;
     justify-content: space-between;
     padding: 0 $spacing-05;
-    block-size: 3rem;
+    block-size: $spacing-09;
     border-block-end: 1px solid $layer-accent-01;
   }
 
@@ -187,7 +187,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
       align-items: center;
       justify-content: center;
       padding: $spacing-02;
-      border-radius: 4px;
+      border-radius: $spacing-02;
       cursor: pointer;
       margin-inline-start: $spacing-03;
       transition: none;
@@ -197,8 +197,8 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
       }
 
       &:focus {
-        outline: 2px solid $focus;
-        outline-offset: -2px;
+        outline: $spacing-01 solid $focus;
+        outline-offset: calc(-1 * $spacing-01);
       }
 
       svg {
@@ -212,7 +212,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     align-items: center;
     justify-content: center;
     padding: $spacing-02;
-    border-radius: 4px;
+    border-radius: $spacing-02;
     cursor: pointer;
     margin-inline-start: $spacing-03;
     transition: background-color $duration-fast-01 motion(standard, productive);
@@ -222,8 +222,8 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     }
 
     &:focus {
-      outline: 2px solid $focus;
-      outline-offset: -2px;
+      outline: $spacing-01 solid $focus;
+      outline-offset: calc(-1 * $spacing-01);
     }
 
     svg {
@@ -269,8 +269,8 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     }
 
     &:focus {
-      outline: 2px solid $focus;
-      outline-offset: 2px;
+      outline: $spacing-01 solid $focus;
+      outline-offset: $spacing-01;
     }
   }
 

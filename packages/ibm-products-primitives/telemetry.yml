@@ -33,5 +33,3 @@ collect:
         - getFilteredItems
         - reset
     tokens: null
-
-# Made with Bob

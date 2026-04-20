@@ -431,8 +431,9 @@ jobs:
   chromatic-ibm-products-web-components:
     needs: setup
     if:
-      github.event_name == 'pull_request' && github.event.pull_request.draft ==
-      false && inputs.skip-for-release != true
+      ${{ github.repository == 'carbon-design-system/ibm-products' &&
+      github.event.pull_request.draft == false && inputs.skip-for-release !=
+      true }}
     runs-on: ubuntu-latest
     outputs:
       buildUrl: ${{ steps.chromatic.outputs.buildUrl }}

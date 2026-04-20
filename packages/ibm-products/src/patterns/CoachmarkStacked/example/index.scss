@@ -17,7 +17,7 @@ $prefix: 'c4p' !default;
 @use '@carbon/layout/scss/convert';
 @use '@carbon/styles/scss/colors' as colors;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
-@use '@carbon/utilities/scss/carousel' as carousel;
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
 
 @include carousel.carousel();
 
@@ -94,12 +94,6 @@ $elements-block-class: 'coachmark-stack-element';
     position: absolute;
     inset-inline-start: $spacing-07;
   }
-}
-
-.cds--content-switcher {
-  inline-size: 20rem;
-  margin-block: $spacing-09;
-  margin-inline: $spacing-07;
 }
 
 .carouselControlWrapper__footer {

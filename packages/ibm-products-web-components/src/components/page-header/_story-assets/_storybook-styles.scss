@@ -35,3 +35,20 @@
   block-size: calc(100vh - 3rem);
   margin-block-start: spacing.$spacing-09;
 }
+
+main {
+  margin-block-start: spacing.$spacing-09;
+}
+
+.content-actions-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+
+  @media (width <= 671px) {
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    cds-button {
+      display: none;
+    }
+  }
+}

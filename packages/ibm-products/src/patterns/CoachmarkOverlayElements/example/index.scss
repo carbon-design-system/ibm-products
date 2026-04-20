@@ -17,7 +17,7 @@ $prefix: 'c4p' !default;
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
-@use '@carbon/utilities/scss/carousel' as carousel;
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
 
 @include carousel.carousel();
 

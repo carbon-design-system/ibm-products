@@ -183,7 +183,10 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     const [initialValue, setInitialValue] = useState<string>(value);
     const [dirtyInput, setDirtyInput] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
-    const canSave = value !== initialValue && !invalid;
+    // Compare trimmed values to determine if there's a real change
+    const hasValueChanged = value.trim() !== initialValue.trim();
+    const canSave = hasValueChanged && !invalid;
+    const canCancel = hasValueChanged;
     const escaping = useRef(false);
     const clickingWithin = useRef(false);
     const carbonPrefix = usePrefix();
@@ -452,6 +455,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
                 kind="ghost"
                 key="cancel"
                 className={`${blockClass}__btn ${blockClass}__btn-cancel`}
+                disabled={!canCancel}
               >
                 <Close size={16} />
               </IconButton>

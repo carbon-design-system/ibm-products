@@ -62,19 +62,19 @@ export const CoachmarkFixedExample = (args) => {
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [fixedIsVisible, setFixedIsVisible] = useState(false);
-
-  //prettier-ignore
-  const carouselContainerRef = useRef < HTMLDivElement > (null);
   //prettier-ignore
   const carouselInit = useRef < InitCarousel > (null);
   //prettier-ignore
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const primaryButtonRef = useRef<HTMLButtonElement>(null);
   //prettier-ignore
   const backRef = useRef<HTMLButtonElement>(null);
-  //prettier-ignore
-  const doneRef = useRef<HTMLButtonElement>(null);
-  //prettier-ignore
-  const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const carouselContainerRefs = useRef<{
+    [key: number]: HTMLDivElement | null;
+  }>({});
+  const carouselItemsRef = useRef<{ [key: number]: (HTMLDivElement | null)[] }>(
+    {}
+  );
+  const taglineRef = useRef<HTMLButtonElement>(null);
 
   const items = [
     {
@@ -98,8 +98,11 @@ export const CoachmarkFixedExample = (args) => {
 
   const handleClose = () => {
     setIsOpen(false);
-    setFixedIsVisible(false);
     carouselInit?.current?.reset();
+    // Return focus to the beacon button after closing
+    setTimeout(() => {
+      taglineRef.current?.focus();
+    }, 0);
   };
 
   const handleTaglineClick = () => {
@@ -107,20 +110,21 @@ export const CoachmarkFixedExample = (args) => {
   };
 
   const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
-    carouselItemsRef.current.forEach((item, idx) => {
+    const carouselItems = carouselItemsRef.current[0] || [];
+
+    carouselItems.forEach((item, idx) => {
       if (!item) {
         return;
       }
 
       const isActive = idx === activeIndex;
 
-      // Set aria-hidden based on active state
       item.setAttribute('aria-hidden', String(!isActive));
 
       if (!isActive) {
-        item.setAttribute('inert', ''); // Disable interactivity
+        item.setAttribute('inert', '');
       } else {
-        item.removeAttribute('inert'); // Re-enable interactivity
+        item.removeAttribute('inert');
       }
 
       item.removeAttribute('tabindex');
@@ -134,18 +138,6 @@ export const CoachmarkFixedExample = (args) => {
 
       // Update inert attribute for carousel items
       updateCarouselItemsTabIndex(currentIndex);
-
-      // Focus the appropriate button after carousel navigation
-      // Use setTimeout to ensure button refs are updated after re-render
-      setTimeout(() => {
-        if (currentIndex === lastIndex) {
-          // On last slide, focus the Done button
-          doneRef.current?.focus();
-        } else {
-          // On other slides, focus the Next button
-          nextRef.current?.focus();
-        }
-      }, 10);
     },
     [updateCarouselItemsTabIndex]
   );
@@ -160,7 +152,6 @@ export const CoachmarkFixedExample = (args) => {
     if (isOpen) {
       // Initialize tabIndex for carousel items on open
       updateCarouselItemsTabIndex(0);
-      nextRef?.current?.focus();
     } else {
       setTimeout(() => {
         const taglineButton = document.getElementById('CoachmarkTagline');
@@ -170,43 +161,67 @@ export const CoachmarkFixedExample = (args) => {
   }, [isOpen, updateCarouselItemsTabIndex]);
 
   useEffect(() => {
-    if (carouselContainerRef && carouselContainerRef.current) {
-      carouselInit.current = initCarousel(carouselContainerRef.current, {
+    const activeCarouselContainer = carouselContainerRefs.current[0];
+
+    if (isOpen && activeCarouselContainer) {
+      carouselInit.current = initCarousel(activeCarouselContainer, {
         onViewChangeStart: onViewChangeStart,
         onViewChangeEnd: onViewChangeEnd,
+        useMaxHeight: true,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselInit, isOpen]);
 
-  const onNext = () => {
+  const onNext = (e) => {
     carouselInit?.current?.next();
   };
-  const onPrev = () => {
+
+  const onPrev = (e) => {
+    // Focus the primary button before navigation if Back button will be hidden
+    if (currentViewIndex === 1) {
+      primaryButtonRef.current?.focus();
+    }
     carouselInit?.current?.prev();
   };
 
   return (
     <Theme theme={carbonTheme}>
-      <Coachmark open={isOpen} onClose={handleClose} align="top" {...args}>
+      <Coachmark
+        open={isOpen}
+        onClose={handleClose}
+        align="top"
+        caret={false}
+        selectorPrimaryFocus="#coachmark-primary-button"
+        {...args}
+      >
         <CoachmarkTagline
           title="Why are there two types of severity scores?"
           closeIconDescription="Close"
           isOpen={isOpen}
-          buttonProps={{ onClick: handleTaglineClick, id: 'CoachmarkTagline' }}
+          buttonProps={{
+            onClick: handleTaglineClick,
+            id: 'CoachmarkTagline',
+            ref: taglineRef,
+          }}
         ></CoachmarkTagline>
-        <Coachmark.Content
-          className={fixedIsVisible && `is-visible`}
-          highContrast={true}
-        >
+        <Coachmark.Content className={fixedIsVisible ? `is-visible` : ''}>
           <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
           <Coachmark.Content.Body>
-            <div ref={carouselContainerRef} className="exampleCarouselWrapper">
+            <div
+              ref={(el) => {
+                carouselContainerRefs.current[0] = el;
+              }}
+              className="exampleCarouselWrapper"
+            >
               {items.map((item, index) => (
                 <div
                   key={item.id}
                   ref={(el) => {
-                    carouselItemsRef.current[index] = el;
+                    if (!carouselItemsRef.current[0]) {
+                      carouselItemsRef.current[0] = [];
+                    }
+                    carouselItemsRef.current[0][index] = el;
                   }}
                 >
                   <h2>{item.title}</h2>
@@ -234,30 +249,28 @@ export const CoachmarkFixedExample = (args) => {
               <div className={'carouselControlWrapper--buttons'}>
                 {currentViewIndex !== 0 && (
                   <Button
-                    ref={backRef}
                     size="sm"
                     iconDescription="Previous"
                     kind="ghost"
                     onClick={onPrev}
+                    ref={backRef}
                   >
                     Back
                   </Button>
                 )}
-
-                {lastViewIndex !== currentViewIndex ? (
-                  <Button
-                    ref={nextRef}
-                    size="sm"
-                    iconDescription="Next"
-                    onClick={onNext}
-                  >
-                    Next
-                  </Button>
-                ) : (
-                  <Button ref={doneRef} size="sm" onClick={handleClose}>
-                    Done
-                  </Button>
-                )}
+                <Button
+                  id="coachmark-primary-button"
+                  size="sm"
+                  iconDescription={
+                    currentViewIndex < items.length - 1 ? 'Next' : 'Done'
+                  }
+                  onClick={
+                    currentViewIndex < items.length - 1 ? onNext : handleClose
+                  }
+                  ref={primaryButtonRef}
+                >
+                  {currentViewIndex < items.length - 1 ? 'Next' : 'Done'}
+                </Button>
               </div>
             </div>
           </Coachmark.Content.Body>

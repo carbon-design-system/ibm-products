@@ -5,9 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 $block-class__next: #{c4p-settings.$pkg-prefix}--add-select;
 
@@ -17,31 +17,23 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select;
 // Story container styling
 .add-select-story-container {
   display: flex;
-  background-color: var(--cds-layer);
-  block-size: 600px;
-  inline-size: 100%;
+  flex-direction: column;
+  padding: $spacing-11 $spacing-10;
+  gap: $spacing-07;
+  inline-size: 600px;
+  max-inline-size: 600px;
 }
 
-// Demo layout helpers
-.add-select-demo-wrapper {
+// Variant container for showing single and multi side by side
+.add-select-variant-container {
   display: flex;
   flex-direction: column;
-  padding: $spacing-05;
-  block-size: 100%;
-  inline-size: 100%;
-}
-
-// Example content padding for stories
-.#{$block-class__next}__main-content,
-.#{$block-class__next}__influencer,
-.#{$block-class__next}__summary-content {
-  padding-block: $spacing-05;
-}
-
-// Story-specific button layouts
-.story-action-buttons {
-  display: flex;
-  justify-content: flex-end;
-  padding: $spacing-05;
   gap: $spacing-03;
+
+  h4 {
+    @include type.type-style('label-02');
+
+    margin: 0;
+    color: var(--cds-text-secondary);
+  }
 }

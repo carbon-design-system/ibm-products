@@ -1,62 +1,72 @@
-import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/blocks';
-import * as AddSelectListStories from './AddSelectList.stories';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectList.stories';
 
-<Meta of={AddSelectListStories} />
+# AddSelectList
 
-# Add Select List
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 ## Overview
 
 The Add Select List component manages the list of items and handles keyboard
 navigation. It provides:
 
+- Single or multi-select support (checkbox or radio button)
 - Keyboard navigation support (arrow keys, home, end)
 - Focus management
-- Multi-select support
 - Accessible grid structure
 
-## Getting started
+### Getting started
 
 Here's a quick example to get you started.
 
-### JS (via import)
+#### JS (via import)
 
 ```javascript
 import { AddSelect } from '@carbon/ibm-products';
 ```
 
-### Usage Example
+#### Usage Example
 
-<Canvas of={AddSelectListStories.Default} />
-
-### JSX
+<Canvas of={stories.Default}></Canvas>
 
 ```jsx
+// Single-select list
 <AddSelect>
-  <AddSelect.Body
-    itemsLabel="All items"
-    globalSearchLabel="Search"
-    itemCount={items.length}
-  >
-    <AddSelect.List>
-      {items.map((item) => (
-        <AddSelect.Row
-          key={item.id}
-          itemId={item.id}
-          title={item.title}
-          value={item.value}
-        />
-      ))}
-    </AddSelect.List>
-  </AddSelect.Body>
+  <AddSelect.List>
+    {items.map((item) => (
+      <AddSelect.Row
+        key={item.id}
+        itemId={item.id}
+        title={item.title}
+        subtitle={item.subtitle}
+        value={item.value}
+      />
+    ))}
+  </AddSelect.List>
+</AddSelect>
+
+// Multi-select list
+<AddSelect multi>
+  <AddSelect.List>
+    {items.map((item) => (
+      <AddSelect.Row
+        key={item.id}
+        itemId={item.id}
+        title={item.title}
+        subtitle={item.subtitle}
+        value={item.value}
+      />
+    ))}
+  </AddSelect.List>
 </AddSelect>
 ```
 
-## Keyboard Navigation Example
-
-<Canvas of={AddSelectListStories.WithKeyboardNavigation} />
-
-## Keyboard Navigation
+### Keyboard Navigation
 
 The AddSelectList component supports full keyboard navigation:
 
@@ -67,7 +77,7 @@ The AddSelectList component supports full keyboard navigation:
 - **Ctrl+Home**: Move focus to first item
 - **Ctrl+End**: Move focus to last item
 
-## Accessibility
+### Accessibility
 
 The component follows WCAG 2.1 AA guidelines:
 
@@ -79,4 +89,10 @@ The component follows WCAG 2.1 AA guidelines:
 
 ## Component API
 
-<ArgTypes of={AddSelectListStories} />
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelectList/AddSelectList.mdx).

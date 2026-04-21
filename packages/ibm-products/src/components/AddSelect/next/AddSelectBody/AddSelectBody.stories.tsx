@@ -7,6 +7,9 @@
 
 import React from 'react';
 import { AddSelect } from '../AddSelect/AddSelect';
+import styles from '../_storybook-styles.scss?inline';
+
+import mdx from './AddSelectBody.mdx';
 
 const sampleItems = [
   {
@@ -41,128 +44,163 @@ const sampleItems = [
   },
 ];
 
+/**
+ * Story 1: Default
+ * Shows body component with placeholder for list children
+ */
 export const Default = {
-  args: {
-    multi: false,
-    itemsLabel: 'All items',
-    globalSearchLabel: 'Search',
-    globalSearchPlaceholder: 'Search items',
-    searchResultsTitle: 'Search results',
-    itemCount: 5,
-  },
-  argTypes: {
-    multi: {
-      control: 'boolean',
-      description: 'Whether this is a multi-select',
-    },
-    itemsLabel: {
-      control: 'text',
-      description: 'Label for items section',
-    },
-    globalSearchLabel: {
-      control: 'text',
-      description: 'Global search label',
-    },
-    globalSearchPlaceholder: {
-      control: 'text',
-      description: 'Global search placeholder',
-    },
-    searchResultsTitle: {
-      control: 'text',
-      description: 'Search results title',
-    },
-    itemCount: {
-      control: 'number',
-      description: 'Item count for display',
-    },
-  },
-  render: (args) => {
+  render: () => {
     return (
-      <AddSelect multi={args.multi}>
+      <AddSelect>
         <AddSelect.Body
-          itemsLabel={args.itemsLabel}
-          globalSearchLabel={args.globalSearchLabel}
-          globalSearchPlaceholder={args.globalSearchPlaceholder}
-          searchResultsTitle={args.searchResultsTitle}
-          itemCount={args.itemCount}
+          itemsLabel="All items"
+          globalSearchLabel="Search"
+          globalSearchPlaceholder="Search items"
+          searchResultsTitle="Search results"
+          itemCount={0}
         >
-          <AddSelect.List>
-            {sampleItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-              />
-            ))}
-          </AddSelect.List>
+          <div
+            style={{
+              padding: '1rem',
+              textAlign: 'center',
+              color: 'var(--cds-text-secondary)',
+            }}
+          >
+            List children go here
+          </div>
         </AddSelect.Body>
       </AddSelect>
     );
   },
 };
 
-export const MultiSelect = {
-  args: {
-    ...Default.args,
-    multi: true,
+/**
+ * Story 2: SingleSelectionList
+ * Shows single-select body with search and item list
+ */
+export const SingleSelectionList = {
+  render: () => {
+    return (
+      <div className="add-select-variant-container">
+        <h4>Single select list</h4>
+        <AddSelect>
+          <AddSelect.Body
+            itemsLabel="All items"
+            globalSearchLabel="Search"
+            globalSearchPlaceholder="Search items"
+            searchResultsTitle="Search results"
+            itemCount={sampleItems.length}
+          >
+            <AddSelect.List>
+              {sampleItems.map((item) => (
+                <AddSelect.Row
+                  key={item.id}
+                  itemId={item.id}
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  value={item.value}
+                />
+              ))}
+            </AddSelect.List>
+          </AddSelect.Body>
+        </AddSelect>
+      </div>
+    );
   },
-  argTypes: Default.argTypes,
-  render: Default.render,
 };
 
+/**
+ * Story 3: MultiSelect
+ * Shows multi-select body with search and item list
+ */
+export const MultiSelect = {
+  render: () => {
+    return (
+      <div className="add-select-variant-container">
+        <h4>Multi-select list</h4>
+        <AddSelect multi>
+          <AddSelect.Body
+            itemsLabel="All items"
+            globalSearchLabel="Search"
+            globalSearchPlaceholder="Search items"
+            searchResultsTitle="Search results"
+            itemCount={sampleItems.length}
+          >
+            <AddSelect.List>
+              {sampleItems.map((item) => (
+                <AddSelect.Row
+                  key={item.id}
+                  itemId={item.id}
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  value={item.value}
+                />
+              ))}
+            </AddSelect.List>
+          </AddSelect.Body>
+        </AddSelect>
+      </div>
+    );
+  },
+};
+
+/**
+ * Story 3: WithBreadcrumbs
+ * Shows body with breadcrumb navigation
+ */
 export const WithBreadcrumbs = {
-  args: {
-    ...Default.args,
-    path: [
+  render: () => {
+    const path = [
       { id: 'root', title: 'Root' },
       { id: 'category', title: 'Category' },
       { id: 'subcategory', title: 'Subcategory' },
-    ],
-  },
-  argTypes: {
-    ...Default.argTypes,
-    path: {
-      control: 'object',
-      description: 'Navigation path for breadcrumbs',
-    },
-  },
-  render: (args) => {
+    ];
+
     return (
-      <AddSelect multi={args.multi}>
-        <AddSelect.Body
-          itemsLabel={args.itemsLabel}
-          globalSearchLabel={args.globalSearchLabel}
-          globalSearchPlaceholder={args.globalSearchPlaceholder}
-          searchResultsTitle={args.searchResultsTitle}
-          itemCount={args.itemCount}
-          path={args.path}
-        >
-          <AddSelect.List>
-            {sampleItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-              />
-            ))}
-          </AddSelect.List>
-        </AddSelect.Body>
-      </AddSelect>
+      <div className="add-select-variant-container">
+        <h4>Body with breadcrumbs</h4>
+        <AddSelect>
+          <AddSelect.Body
+            itemsLabel="All items"
+            globalSearchLabel="Search"
+            globalSearchPlaceholder="Search items"
+            searchResultsTitle="Search results"
+            itemCount={sampleItems.length}
+            path={path}
+          >
+            <AddSelect.List>
+              {sampleItems.map((item) => (
+                <AddSelect.Row
+                  key={item.id}
+                  itemId={item.id}
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  value={item.value}
+                />
+              ))}
+            </AddSelect.List>
+          </AddSelect.Body>
+        </AddSelect>
+      </div>
     );
   },
 };
 
-const meta = {
-  title: 'Preview/AddSelect/Add select body',
+export default {
+  title: 'Preview/Add and select/AddSelectBody',
   component: AddSelect.Body,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <div className="add-select-story-container">
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
-    layout: 'fullscreen',
+    styles,
+    docs: {
+      page: mdx,
+    },
   },
 };
-
-export default meta;

@@ -7,6 +7,9 @@
 
 import React from 'react';
 import { AddSelect } from '../AddSelect/AddSelect';
+import styles from '../_storybook-styles.scss?inline';
+
+import mdx from './AddSelectList.mdx';
 
 const sampleItems = [
   {
@@ -29,83 +32,66 @@ const sampleItems = [
   },
 ];
 
+/**
+ * Story 1: Default
+ * Shows both single-select (radio) and multi-select (checkbox) lists
+ */
 export const Default = {
   render: () => {
     return (
-      <AddSelect>
-        <AddSelect.Body
-          itemsLabel="All items"
-          globalSearchLabel="Search"
-          globalSearchPlaceholder="Search items"
-          itemCount={sampleItems.length}
-        >
-          <AddSelect.List>
-            {sampleItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-              />
-            ))}
-          </AddSelect.List>
-        </AddSelect.Body>
-      </AddSelect>
+      <>
+        <div className="add-select-variant-container">
+          <h4>Single-select list</h4>
+          <AddSelect>
+            <AddSelect.List>
+              {sampleItems.map((item) => (
+                <AddSelect.Row
+                  key={item.id}
+                  itemId={item.id}
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  value={item.value}
+                />
+              ))}
+            </AddSelect.List>
+          </AddSelect>
+        </div>
+        <div className="add-select-variant-container">
+          <h4>Multi-select list</h4>
+          <AddSelect multi>
+            <AddSelect.List>
+              {sampleItems.map((item) => (
+                <AddSelect.Row
+                  key={item.id}
+                  itemId={item.id}
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  value={item.value}
+                />
+              ))}
+            </AddSelect.List>
+          </AddSelect>
+        </div>
+      </>
     );
   },
 };
 
-export const WithKeyboardNavigation = {
-  render: () => {
-    return (
-      <AddSelect>
-        <AddSelect.Body
-          itemsLabel="Navigate with keyboard"
-          globalSearchLabel="Search"
-          globalSearchPlaceholder="Use arrow keys to navigate"
-          itemCount={sampleItems.length}
-        >
-          <AddSelect.List>
-            {sampleItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-              />
-            ))}
-          </AddSelect.List>
-        </AddSelect.Body>
-      </AddSelect>
-    );
-  },
-};
-
-const meta = {
-  title: 'Preview/AddSelect/Add select list',
+export default {
+  title: 'Preview/Add and select/AddSelectList',
   component: AddSelect.List,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <div className="add-select-story-container">
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
-    layout: 'fullscreen',
+    styles,
     docs: {
-      description: {
-        component: `
-The Add Select List component manages the list of items and handles keyboard navigation.
-
-## Keyboard Navigation
-
-- **Arrow Down**: Move focus to next item
-- **Arrow Up**: Move focus to previous item
-- **Arrow Right**: Navigate to children (if item has children)
-- **Enter/Space**: Select/deselect the focused item
-- **Ctrl+Home**: Move focus to first item
-- **Ctrl+End**: Move focus to last item
-        `,
-      },
+      page: mdx,
     },
   },
 };
-
-export default meta;

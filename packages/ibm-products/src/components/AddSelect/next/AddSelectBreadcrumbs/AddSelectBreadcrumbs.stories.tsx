@@ -7,160 +7,96 @@
 
 import React, { useState } from 'react';
 import { AddSelect } from '../AddSelect/AddSelect';
+import styles from '../_storybook-styles.scss?inline';
 
-const sampleItems = [
-  {
-    id: '1',
-    title: 'Item 1',
-    subtitle: 'Description for item 1',
-    value: 'item-1',
-  },
-  {
-    id: '2',
-    title: 'Item 2',
-    subtitle: 'Description for item 2',
-    value: 'item-2',
-  },
-  {
-    id: '3',
-    title: 'Item 3',
-    subtitle: 'Description for item 3',
-    value: 'item-3',
-  },
-];
+import mdx from './AddSelectBreadcrumbs.mdx';
 
-export const Default = {
-  render: () => {
-    const path = [
-      { id: 'root', title: 'Root' },
-      { id: 'category', title: 'Category' },
-      { id: 'subcategory', title: 'Subcategory' },
-    ];
-
-    return (
-      <AddSelect>
-        <AddSelect.Body
-          itemsLabel="Items"
-          globalSearchLabel="Search"
-          itemCount={sampleItems.length}
-          path={path}
-        >
-          <AddSelect.List>
-            {sampleItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-              />
-            ))}
-          </AddSelect.List>
-        </AddSelect.Body>
-      </AddSelect>
-    );
-  },
-};
-
-const InteractiveExample = () => {
+const DefaultStory = () => {
   const [path, setPath] = useState([
-    { id: 'root', title: 'Root' },
-    { id: 'level1', title: 'Level 1' },
-    { id: 'level2', title: 'Level 2' },
-    { id: 'level3', title: 'Level 3' },
+    { id: 'root', title: 'All Items' },
+    { id: 'category-1', title: 'Category 1' },
+    { id: 'subcategory-1', title: 'Subcategory 1' },
   ]);
 
   const handleBreadcrumbClick = (index: number) => {
     // Navigate back to the clicked level
     setPath(path.slice(0, index + 1));
+    console.log('Navigated to:', path[index].title);
   };
 
   return (
-    <AddSelect>
-      <AddSelect.Body
-        itemsLabel="Items"
-        globalSearchLabel="Search"
-        itemCount={sampleItems.length}
-        path={path}
-        onBreadcrumbClick={handleBreadcrumbClick}
-      >
-        <AddSelect.List>
-          {sampleItems.map((item) => (
-            <AddSelect.Row
-              key={item.id}
-              itemId={item.id}
-              title={item.title}
-              subtitle={item.subtitle}
-              value={item.value}
-            />
-          ))}
-        </AddSelect.List>
-      </AddSelect.Body>
-    </AddSelect>
+    <div className="add-select-variant-container">
+      <h4>Breadcrumb navigation</h4>
+      <AddSelect>
+        <AddSelect.Breadcrumbs
+          path={path}
+          onBreadcrumbClick={handleBreadcrumbClick}
+        />
+      </AddSelect>
+    </div>
   );
 };
 
-export const Interactive = {
-  render: () => <InteractiveExample />,
+/**
+ * Story 1: Default
+ * Shows breadcrumb navigation with clickable path
+ */
+export const Default = {
+  render: () => <DefaultStory />,
 };
 
-export const DeepHierarchy = {
-  render: () => {
-    const path = [
-      { id: 'root', title: 'Root' },
-      { id: 'level1', title: 'Level 1' },
-      { id: 'level2', title: 'Level 2' },
-      { id: 'level3', title: 'Level 3' },
-      { id: 'level4', title: 'Level 4' },
-      { id: 'level5', title: 'Level 5' },
-    ];
+const DeepNavigationStory = () => {
+  const [path, setPath] = useState([
+    { id: 'root', title: 'All Items' },
+    { id: 'category-1', title: 'Electronics' },
+    { id: 'subcategory-1', title: 'Computers' },
+    { id: 'subcategory-2', title: 'Laptops' },
+    { id: 'subcategory-3', title: 'Gaming Laptops' },
+  ]);
 
-    return (
+  const handleBreadcrumbClick = (index: number) => {
+    setPath(path.slice(0, index + 1));
+    console.log('Navigated to:', path[index].title);
+  };
+
+  return (
+    <div className="add-select-variant-container">
+      <h4>Deep navigation path</h4>
       <AddSelect>
-        <AddSelect.Body
-          itemsLabel="Items"
-          globalSearchLabel="Search"
-          itemCount={sampleItems.length}
+        <AddSelect.Breadcrumbs
           path={path}
-        >
-          <AddSelect.List>
-            {sampleItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-              />
-            ))}
-          </AddSelect.List>
-        </AddSelect.Body>
+          onBreadcrumbClick={handleBreadcrumbClick}
+        />
       </AddSelect>
-    );
-  },
+    </div>
+  );
 };
 
-const meta = {
-  title: 'Preview/AddSelect/Add select breadcrumbs',
+/**
+ * Story 2: DeepNavigation
+ * Shows breadcrumb with deeper navigation path
+ */
+export const DeepNavigation = {
+  render: () => <DeepNavigationStory />,
+};
+
+export default {
+  title: 'Preview/Add and select/AddSelectBreadcrumbs',
   component: AddSelect.Breadcrumbs,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <div className="add-select-story-container">
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
-    layout: 'fullscreen',
+    styles,
     docs: {
-      description: {
-        component: `
-The Add Select Breadcrumbs component provides hierarchical navigation for the add-select pattern.
-
-## Features
-
-- Shows the current navigation path
-- Clickable breadcrumb items for navigation
-- Automatically truncates long paths
-- Accessible keyboard navigation
-        `,
-      },
+      page: mdx,
     },
   },
 };
 
-export default meta;
+// Made with Bob

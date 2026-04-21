@@ -1,119 +1,94 @@
-import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/blocks';
-import * as AddSelectBreadcrumbsStories from './AddSelectBreadcrumbs.stories';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectBreadcrumbs.stories';
 
-<Meta of={AddSelectBreadcrumbsStories} />
+# AddSelectBreadcrumbs
 
-# Add Select Breadcrumbs
+## Table of Contents
+
+- [Overview](#overview)
+  - [Deep Navigation](#deep-navigation)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 ## Overview
 
-The Add Select Breadcrumbs component provides hierarchical navigation for the
-add-select pattern. It shows the current navigation path and allows users to
-navigate back to previous levels.
+The Add Select Breadcrumbs component provides hierarchical navigation within the
+Add Select interface. It displays the current navigation path and allows users
+to navigate back to previous levels by clicking on breadcrumb items.
 
-## Features
+### Features
 
-- Shows the current navigation path
+- Displays current navigation path
 - Clickable breadcrumb items for navigation
-- Automatically truncates long paths
-- Accessible keyboard navigation
-- Integrates with Carbon's Breadcrumb component
+- Automatically highlights current page
+- Supports deep navigation hierarchies
+- Integrates with Carbon Breadcrumb component
 
-## Getting started
+### Getting started
 
 Here's a quick example to get you started.
 
-### JS (via import)
+#### JS (via import)
 
 ```javascript
 import { AddSelect } from '@carbon/ibm-products';
 ```
 
-### Usage Example
+#### Usage Example
 
-<Canvas of={AddSelectBreadcrumbsStories.Default} />
-
-### JSX
-
-```jsx
-const path = [
-  { id: 'root', title: 'Root' },
-  { id: 'category', title: 'Category' },
-  { id: 'subcategory', title: 'Subcategory' },
-];
-
-<AddSelect>
-  <AddSelect.Body
-    itemsLabel="Items"
-    globalSearchLabel="Search"
-    itemCount={items.length}
-    path={path}
-  >
-    <AddSelect.List>{/* items */}</AddSelect.List>
-  </AddSelect.Body>
-</AddSelect>;
-```
-
-## Interactive Example
-
-<Canvas of={AddSelectBreadcrumbsStories.Interactive} />
-
-### JSX
+<Canvas of={stories.Default}></Canvas>
 
 ```jsx
 const [path, setPath] = useState([
-  { id: 'root', title: 'Root' },
-  { id: 'level1', title: 'Level 1' },
-  { id: 'level2', title: 'Level 2' }
+  { id: 'root', title: 'All Items' },
+  { id: 'category-1', title: 'Category 1' },
+  { id: 'subcategory-1', title: 'Subcategory 1' },
 ]);
 
 const handleBreadcrumbClick = (index) => {
+  // Navigate back to the clicked level
   setPath(path.slice(0, index + 1));
 };
 
 <AddSelect>
-  <AddSelect.Body
+  <AddSelect.Breadcrumbs
     path={path}
     onBreadcrumbClick={handleBreadcrumbClick}
-    {/* other props */}
-  >
-    {/* content */}
-  </AddSelect.Body>
-</AddSelect>
+  />
+</AddSelect>;
 ```
 
-## Deep Hierarchy Example
+#### Deep Navigation
 
-<Canvas of={AddSelectBreadcrumbsStories.DeepHierarchy} />
+The breadcrumbs component supports deep navigation hierarchies with multiple
+levels.
 
-## Props
+<Canvas of={stories.DeepNavigation}></Canvas>
 
-### path
+```jsx
+const [path, setPath] = useState([
+  { id: 'root', title: 'All Items' },
+  { id: 'category-1', title: 'Electronics' },
+  { id: 'subcategory-1', title: 'Computers' },
+  { id: 'subcategory-2', title: 'Laptops' },
+  { id: 'subcategory-3', title: 'Gaming Laptops' },
+]);
 
-Array of breadcrumb items, each containing:
-
-- **id** (string): Unique identifier
-- **title** (string): Display text
-
-### onBreadcrumbClick
-
-Callback function when a breadcrumb is clicked:
-
-```typescript
-(index: number) => void
+<AddSelect>
+  <AddSelect.Breadcrumbs
+    path={path}
+    onBreadcrumbClick={handleBreadcrumbClick}
+  />
+</AddSelect>;
 ```
-
-The index parameter indicates which breadcrumb was clicked (0-based).
-
-## Accessibility
-
-The component follows WCAG 2.1 AA guidelines:
-
-- Uses Carbon's accessible Breadcrumb component
-- Supports keyboard navigation
-- Provides proper ARIA labels
-- Clear visual indication of current page
 
 ## Component API
 
-<ArgTypes of={AddSelectBreadcrumbsStories} />
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelectBreadcrumbs/AddSelectBreadcrumbs.mdx).

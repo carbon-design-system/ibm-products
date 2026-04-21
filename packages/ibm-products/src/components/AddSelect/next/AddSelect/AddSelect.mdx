@@ -1,224 +1,210 @@
-import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/blocks';
-import * as AddSelectStories from './AddSelect.stories';
+import { Story, Controls, Source } from '@storybook/addon-docs/blocks';
+import { AddSelect } from './AddSelect';
+import * as stories from './AddSelect.stories';
 
-<Meta of={AddSelectStories} />
+# AddSelect
 
-# Add Select
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 ## Overview
 
-The Add Select component is a composable component that provides the container
-for the add-select pattern. It should contain the `AddSelect.Body` component
-which handles the main functionality including search, breadcrumbs, and item
-lists.
+The AddSelect component is the main wrapper component for the add-select
+pattern. It provides context and manages state for all child components
+including Body, List, Row, and Breadcrumbs.
 
-## Getting started
+### Features
+
+- Composable architecture with sub-components
+- Single or multi-select support
+- Context-based state management
+- Hierarchical navigation support
+- Keyboard accessible
+- Fully customizable through composition
+
+### Getting started
 
 Here's a quick example to get you started.
 
-### JS (via import)
+#### JS (via import)
 
 ```javascript
 import { AddSelect } from '@carbon/ibm-products';
 ```
 
-### Usage Example
-
-<Canvas of={AddSelectStories.Default} />
-
-### JSX
+#### Usage Example
 
 ```jsx
-<AddSelect>
-  <AddSelect.Body
-    itemsLabel="All items"
-    globalSearchLabel="Search"
-    globalSearchPlaceholder="Search items"
-    itemCount={items.length}
-  >
-    <AddSelect.List>
-      {items.map((item) => (
-        <AddSelect.Item
-          key={item.id}
-          itemId={item.id}
-          title={item.title}
-          subtitle={item.subtitle}
-          value={item.value}
-        />
-      ))}
-    </AddSelect.List>
-  </AddSelect.Body>
-</AddSelect>
+<AddSelect>{/* AddSelect children go here */}</AddSelect>
 ```
 
-## Multi-select Example
+### Complete Example
 
-<Canvas of={AddSelectStories.MultiSelect} />
-
-### JSX
+Here's a complete example showing how to compose the AddSelect component with
+all its sub-components:
 
 ```jsx
-<AddSelect multi>
-  <AddSelect.Body
-    itemsLabel="All items"
-    globalSearchLabel="Search"
-    globalSearchPlaceholder="Search items"
-    itemCount={items.length}
-  >
-    <AddSelect.List>
-      {items.map((item) => (
-        <AddSelect.Item
-          key={item.id}
-          itemId={item.id}
-          title={item.title}
-          subtitle={item.subtitle}
-          value={item.value}
-        />
-      ))}
-    </AddSelect.List>
-  </AddSelect.Body>
-</AddSelect>
+import { AddSelect } from '@carbon/ibm-products';
+
+const items = [
+  { id: '1', title: 'Item 1', subtitle: 'Description', value: 'item-1' },
+  { id: '2', title: 'Item 2', subtitle: 'Description', value: 'item-2' },
+  { id: '3', title: 'Item 3', subtitle: 'Description', value: 'item-3' },
+];
+
+function MyComponent() {
+  const [selectedItems, setSelectedItems] = useState(new Set());
+
+  const handleItemSelect = (itemId, selected, value) => {
+    const newSelected = new Set(selectedItems);
+    if (selected) {
+      newSelected.add(itemId);
+    } else {
+      newSelected.delete(itemId);
+    }
+    setSelectedItems(newSelected);
+  };
+
+  return (
+    <AddSelect
+      multi
+      selectedItems={selectedItems}
+      onItemSelect={handleItemSelect}
+    >
+      <AddSelect.Body
+        itemsLabel="All items"
+        globalSearchLabel="Search"
+        globalSearchPlaceholder="Search items"
+        itemCount={items.length}
+      >
+        <AddSelect.List>
+          {items.map((item) => (
+            <AddSelect.Row
+              key={item.id}
+              itemId={item.id}
+              title={item.title}
+              subtitle={item.subtitle}
+              value={item.value}
+            />
+          ))}
+        </AddSelect.List>
+      </AddSelect.Body>
+    </AddSelect>
+  );
+}
 ```
 
-## With Hierarchy Example
+### Sub-components
 
-<Canvas of={AddSelectStories.WithHierarchy} />
+The AddSelect component is composed of several sub-components that work together
+to create a complete add-select experience. Each sub-component can be used
+independently or composed together.
 
-### JSX
+#### AddSelect.Body
+
+The Body component contains the main content area including search
+functionality, breadcrumbs, and the list container.
+
+**Key features:**
+
+- Global search with customizable labels and placeholders
+- Breadcrumb navigation for hierarchical data
+- Item count display with tag
+- Search state management
+- Callbacks for search and breadcrumb interactions
+
+[View AddSelect.Body documentation →](../?path=/docs/preview-add-and-select-addselectbody--docs)
+
+#### AddSelect.List
+
+The List component manages the list of items and handles keyboard navigation.
+
+**Key features:**
+
+- Keyboard navigation (Arrow keys, Home, End, Enter, Space)
+- Focus management
+- Accessible grid structure with ARIA roles
+- Supports both single and multi-select modes
+
+[View AddSelect.List documentation →](../?path=/docs/preview-add-and-select-addselectlist--docs)
+
+#### AddSelect.Row
+
+The Row component represents an individual selectable item in the list.
+
+**Key features:**
+
+- Single or multi-select support (radio or checkbox)
+- Optional subtitle for additional context
+- Optional icon slot (e.g., UserAvatar)
+- Optional metadata slot (e.g., tags, badges)
+- Hierarchical navigation support with chevron indicator
+- Disabled state
+- Keyboard accessible
+
+[View AddSelect.Row documentation →](../?path=/docs/preview-add-and-select-addselectrow--docs)
+
+#### AddSelect.Breadcrumbs
+
+The Breadcrumbs component provides hierarchical navigation within the add-select
+interface.
+
+**Key features:**
+
+- Displays current navigation path
+- Clickable breadcrumb items for navigation
+- Automatically highlights current page
+- Supports deep navigation hierarchies
+- Integrates with Carbon Breadcrumb component
+
+[View AddSelect.Breadcrumbs documentation →](../?path=/docs/preview-add-and-select-addselectbreadcrumbs--docs)
+
+### Props
+
+#### `multi`
+
+Set to `true` for multi-select (checkboxes) or `false` for single-select (radio
+buttons).
 
 ```jsx
-<AddSelect>
-  <AddSelect.Body
-    itemsLabel="All items"
-    globalSearchLabel="Search"
-    globalSearchPlaceholder="Search items"
-    itemCount={items.length}
-  >
-    <AddSelect.List>
-      {items.map((item) => (
-        <AddSelect.Item
-          key={item.id}
-          itemId={item.id}
-          title={item.title}
-          subtitle={item.subtitle}
-          value={item.value}
-          hasChildren={item.hasChildren}
-        />
-      ))}
-    </AddSelect.List>
-  </AddSelect.Body>
-</AddSelect>
+<AddSelect multi>{/* ... */}</AddSelect>
+```
+
+#### `selectedItems`
+
+A Set of selected item IDs for controlled selection state.
+
+```jsx
+const [selectedItems, setSelectedItems] = useState(new Set(['1', '2']));
+
+<AddSelect selectedItems={selectedItems}>{/* ... */}</AddSelect>;
+```
+
+#### `onItemSelect`
+
+Callback when an item is selected or deselected.
+
+```typescript
+(itemId: string, selected: boolean, value: string) => void
+```
+
+#### `onNavigate`
+
+Callback when navigating to child items in hierarchical data.
+
+```typescript
+(itemId: string, title: string, parentId: string) => void
 ```
 
 ## Component API
 
-### AddSelect
+<Controls />
 
-The main wrapper component that provides context for all child components.
+## Feedback
 
-#### Props
-
-| Prop            | Type                                                         | Default     | Description                                  |
-| --------------- | ------------------------------------------------------------ | ----------- | -------------------------------------------- |
-| `children`      | `ReactNode`                                                  | -           | Child components                             |
-| `className`     | `string`                                                     | -           | Optional class name                          |
-| `multi`         | `boolean`                                                    | `false`     | Whether this is a multi-select               |
-| `onItemSelect`  | `(itemId: string, selected: boolean, value: string) => void` | -           | Callback when an item is selected/deselected |
-| `onNavigate`    | `(itemId: string, title: string, parentId: string) => void`  | -           | Callback when navigating to children         |
-| `selectedItems` | `Set<string>`                                                | `new Set()` | Set of selected item IDs                     |
-
-### AddSelect.Body
-
-The body component that contains the search, breadcrumbs, and content area.
-
-#### Props
-
-| Prop                      | Type                                   | Default            | Description                                 |
-| ------------------------- | -------------------------------------- | ------------------ | ------------------------------------------- |
-| `children`                | `ReactNode`                            | -                  | Child components (typically AddSelect.List) |
-| `className`               | `string`                               | -                  | Optional class name                         |
-| `itemsLabel`              | `string`                               | `''`               | Label for items section                     |
-| `globalSearchLabel`       | `string`                               | `'Search'`         | Global search label                         |
-| `globalSearchPlaceholder` | `string`                               | `'Search'`         | Global search placeholder                   |
-| `searchResultsTitle`      | `string`                               | `'Search results'` | Search results title                        |
-| `itemCount`               | `number`                               | `0`                | Item count for display                      |
-| `path`                    | `Array<{ id: string; title: string }>` | `[]`               | Navigation path for breadcrumbs             |
-| `onSearch`                | `(searchTerm: string) => void`         | -                  | Callback when search term changes           |
-| `onBreadcrumbClick`       | `(index: number) => void`              | -                  | Callback when breadcrumb is clicked         |
-| `headerContent`           | `ReactNode`                            | -                  | Custom header content (slot)                |
-
-### AddSelect.List
-
-The list container component that manages keyboard navigation.
-
-#### Props
-
-| Prop        | Type        | Default | Description                                  |
-| ----------- | ----------- | ------- | -------------------------------------------- |
-| `children`  | `ReactNode` | -       | Child components (AddSelect.Item components) |
-| `className` | `string`    | -       | Optional class name                          |
-
-### AddSelect.Item
-
-The individual item component.
-
-#### Props
-
-| Prop          | Type        | Default | Description                                    |
-| ------------- | ----------- | ------- | ---------------------------------------------- |
-| `itemId`      | `string`    | -       | **Required.** Unique identifier for the item   |
-| `title`       | `string`    | -       | **Required.** Item title                       |
-| `value`       | `string`    | -       | **Required.** Item value                       |
-| `subtitle`    | `string`    | -       | Item subtitle                                  |
-| `selected`    | `boolean`   | `false` | Whether the item is selected                   |
-| `disabled`    | `boolean`   | `false` | Whether the item is disabled                   |
-| `hasChildren` | `boolean`   | `false` | Whether the item has children (for navigation) |
-| `parentId`    | `string`    | `''`    | Parent ID for hierarchical navigation          |
-| `icon`        | `ReactNode` | -       | Optional icon slot                             |
-| `meta`        | `ReactNode` | -       | Optional metadata slot                         |
-| `className`   | `string`    | -       | Optional class name                            |
-
-### AddSelect.Breadcrumbs
-
-The breadcrumbs component for hierarchical navigation.
-
-#### Props
-
-| Prop                | Type                                   | Default | Description                         |
-| ------------------- | -------------------------------------- | ------- | ----------------------------------- |
-| `path`              | `Array<{ id: string; title: string }>` | `[]`    | Navigation path array               |
-| `onBreadcrumbClick` | `(index: number) => void`              | -       | Callback when breadcrumb is clicked |
-| `className`         | `string`                               | -       | Optional class name                 |
-
-## Utility Functions
-
-The component provides several utility functions for data management:
-
-- `flattenItems(items)` - Flatten hierarchical data for searching
-- `filterItems(items, searchTerm)` - Filter items by search term
-- `normalizeItems(items, parentId)` - Normalize item structure
-- `getItemById(items, id)` - Find item by ID
-- `buildPath(items, itemId)` - Build navigation path
-
-## Keyboard Navigation
-
-The AddSelect component supports full keyboard navigation:
-
-- **Arrow Down**: Move focus to next item
-- **Arrow Up**: Move focus to previous item
-- **Arrow Right**: Navigate to children (if item has children)
-- **Enter/Space**: Select/deselect the focused item
-- **Ctrl+Home**: Move focus to first item
-- **Ctrl+End**: Move focus to last item
-
-## Accessibility
-
-The component follows WCAG 2.1 AA guidelines:
-
-- Uses proper ARIA roles (`grid`, `row`, `gridcell`)
-- Supports keyboard navigation
-- Provides proper focus management
-- Uses semantic HTML elements
-- Includes proper labels and descriptions
-
-<ArgTypes of={AddSelectStories} />
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelect/AddSelect.mdx).

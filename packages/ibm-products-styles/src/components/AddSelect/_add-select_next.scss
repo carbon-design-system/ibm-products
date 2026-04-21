@@ -147,7 +147,17 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     display: flex;
     flex: 1;
     align-items: center;
-    margin-inline-start: $spacing-05;
+  }
+
+  &__checkbox {
+    flex: none;
+    margin-inline-end: $spacing-05;
+  }
+
+  &__radio {
+    .cds--radio-button__appearance {
+      margin-inline-end: 0;
+    }
   }
 
   &__icon {

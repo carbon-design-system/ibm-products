@@ -1,8 +1,6 @@
 # AddSelect - Composable Components
 
-This directory contains the composable version of the AddSelect components,
-inspired by the web components implementation and following the pattern
-established by the composable Tearsheet.
+This directory contains the composable version of the AddSelect components.
 
 ## Overview
 
@@ -19,12 +17,6 @@ compose the UI using smaller, focused components.
 - **`AddSelect.List`** - Container for items with keyboard navigation
 - **`AddSelect.Item`** - Individual selectable item
 - **`AddSelect.Breadcrumbs`** - Navigation breadcrumbs for hierarchical data
-
-### Pre-built Patterns
-
-- **`SingleAddSelect`** - Pre-configured pattern for single selection
-- **`MultiAddSelect`** - Pre-configured pattern for multi-selection with
-  hierarchical navigation
 
 ## Usage
 
@@ -74,56 +66,6 @@ function MyComponent() {
 }
 ```
 
-### Using Pre-built Patterns
-
-#### SingleAddSelect
-
-```jsx
-import { SingleAddSelect } from '@carbon/ibm-products';
-
-function MyComponent() {
-  const [selectedId, setSelectedId] = useState('');
-
-  const handleSelect = (itemId, value) => {
-    setSelectedId(itemId);
-  };
-
-  return (
-    <SingleAddSelect
-      items={items}
-      itemsLabel="Select an item"
-      globalSearchLabel="Search items"
-      selectedItemId={selectedId}
-      onItemSelect={handleSelect}
-    />
-  );
-}
-```
-
-#### MultiAddSelect
-
-```jsx
-import { MultiAddSelect } from '@carbon/ibm-products';
-
-function MyComponent() {
-  const [selectedIds, setSelectedIds] = useState(new Set());
-
-  const handleSelect = (newSelectedIds) => {
-    setSelectedIds(newSelectedIds);
-  };
-
-  return (
-    <MultiAddSelect
-      items={hierarchicalItems}
-      itemsLabel="Select items"
-      globalSearchLabel="Search items"
-      selectedItemIds={selectedIds}
-      onItemsSelect={handleSelect}
-    />
-  );
-}
-```
-
 ## Features
 
 ### Keyboard Navigation
@@ -135,14 +77,6 @@ The `AddSelect.List` component provides full keyboard navigation:
 - **Enter/Space** - Select/deselect item
 - **Ctrl+Home** - Jump to first item
 - **Ctrl+End** - Jump to last item
-
-### Hierarchical Navigation
-
-The `MultiAddSelect` pattern supports hierarchical data with:
-
-- Breadcrumb navigation
-- Parent-child relationships
-- Automatic path building
 
 ### Search
 
@@ -207,6 +141,3 @@ To migrate from legacy AddSelect to composable:
 3. Add `<AddSelect.List>` for the item container
 4. Map items to `<AddSelect.Item>` components
 5. Update event handlers to use new callback signatures
-
-Or use the pre-built patterns (`SingleAddSelect` or `MultiAddSelect`) for a
-simpler migration path.

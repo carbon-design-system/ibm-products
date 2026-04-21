@@ -131,21 +131,23 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
             {multi ? (
               <Checkbox
                 id={`checkbox-${itemId}`}
+                className={`${blockClass}-row__checkbox`}
                 checked={isSelected}
                 disabled={disabled}
                 labelText={title}
+                hideLabel
                 onChange={handleSelect}
-                tabIndex={-1}
               />
             ) : (
               <RadioButton
                 id={`radio-${itemId}`}
+                className={`${blockClass}-row__radio`}
                 checked={isSelected}
                 disabled={disabled}
                 labelText={title}
+                hideLabel
                 value={itemId}
                 onChange={handleSelect}
-                tabIndex={-1}
               />
             )}
 

@@ -5,310 +5,259 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AddSelect } from './AddSelect';
-import { filterItems, flattenItems, NormalizedItem } from '../utils';
+import {
+  AddSelectData,
+  HierarchicalItem,
+} from '@carbon/ibm-products-primitives';
+import styles from '../_storybook-styles.scss?inline';
+
+import mdx from './AddSelect-interactive.mdx';
 
 // Sample hierarchical data
-const sampleHierarchicalData: NormalizedItem[] = [
+const hierarchicalData: HierarchicalItem[] = [
   {
     id: '1',
     title: 'United States',
     value: 'us',
-    children: [
-      {
-        id: '1-1',
-        title: 'California',
-        value: 'ca',
-        parentId: '1',
-        children: [
-          { id: '1-1-1', title: 'Los Angeles', value: 'la', parentId: '1-1' },
-          { id: '1-1-2', title: 'San Francisco', value: 'sf', parentId: '1-1' },
-          { id: '1-1-3', title: 'San Diego', value: 'sd', parentId: '1-1' },
-        ],
-      },
-      {
-        id: '1-2',
-        title: 'Texas',
-        value: 'tx',
-        parentId: '1',
-        children: [
-          { id: '1-2-1', title: 'Houston', value: 'houston', parentId: '1-2' },
-          { id: '1-2-2', title: 'Dallas', value: 'dallas', parentId: '1-2' },
-          { id: '1-2-3', title: 'Austin', value: 'austin', parentId: '1-2' },
-        ],
-      },
-      {
-        id: '1-3',
-        title: 'New York',
-        value: 'ny',
-        parentId: '1',
-        children: [
-          {
-            id: '1-3-1',
-            title: 'New York City',
-            value: 'nyc',
-            parentId: '1-3',
+    children: {
+      entries: [
+        {
+          id: '1-1',
+          title: 'California',
+          value: 'ca',
+          children: {
+            entries: [
+              { id: '1-1-1', title: 'Los Angeles', value: 'la' },
+              { id: '1-1-2', title: 'San Francisco', value: 'sf' },
+              { id: '1-1-3', title: 'San Diego', value: 'sd' },
+            ],
           },
-          { id: '1-3-2', title: 'Buffalo', value: 'buffalo', parentId: '1-3' },
-        ],
-      },
-    ],
+        },
+        {
+          id: '1-2',
+          title: 'Texas',
+          value: 'tx',
+          children: {
+            entries: [
+              { id: '1-2-1', title: 'Houston', value: 'houston' },
+              { id: '1-2-2', title: 'Dallas', value: 'dallas' },
+              { id: '1-2-3', title: 'Austin', value: 'austin' },
+            ],
+          },
+        },
+        {
+          id: '1-3',
+          title: 'New York',
+          value: 'ny',
+          children: {
+            entries: [
+              { id: '1-3-1', title: 'New York City', value: 'nyc' },
+              { id: '1-3-2', title: 'Buffalo', value: 'buffalo' },
+            ],
+          },
+        },
+      ],
+    },
   },
   {
     id: '2',
     title: 'Canada',
     value: 'ca',
-    children: [
-      {
-        id: '2-1',
-        title: 'Ontario',
-        value: 'on',
-        parentId: '2',
-        children: [
-          { id: '2-1-1', title: 'Toronto', value: 'toronto', parentId: '2-1' },
-          { id: '2-1-2', title: 'Ottawa', value: 'ottawa', parentId: '2-1' },
-        ],
-      },
-      {
-        id: '2-2',
-        title: 'British Columbia',
-        value: 'bc',
-        parentId: '2',
-        children: [
-          {
-            id: '2-2-1',
-            title: 'Vancouver',
-            value: 'vancouver',
-            parentId: '2-2',
+    children: {
+      entries: [
+        {
+          id: '2-1',
+          title: 'Ontario',
+          value: 'on',
+          children: {
+            entries: [
+              { id: '2-1-1', title: 'Toronto', value: 'toronto' },
+              { id: '2-1-2', title: 'Ottawa', value: 'ottawa' },
+            ],
           },
-          {
-            id: '2-2-2',
-            title: 'Victoria',
-            value: 'victoria',
-            parentId: '2-2',
+        },
+        {
+          id: '2-2',
+          title: 'British Columbia',
+          value: 'bc',
+          children: {
+            entries: [
+              { id: '2-2-1', title: 'Vancouver', value: 'vancouver' },
+              { id: '2-2-2', title: 'Victoria', value: 'victoria' },
+            ],
           },
-        ],
-      },
-    ],
+        },
+      ],
+    },
   },
   {
     id: '3',
     title: 'Mexico',
     value: 'mx',
-    children: [
-      { id: '3-1', title: 'Mexico City', value: 'mexico-city', parentId: '3' },
-      { id: '3-2', title: 'Guadalajara', value: 'guadalajara', parentId: '3' },
-      { id: '3-3', title: 'Monterrey', value: 'monterrey', parentId: '3' },
-    ],
+    children: {
+      entries: [
+        { id: '3-1', title: 'Mexico City', value: 'mexico-city' },
+        { id: '3-2', title: 'Guadalajara', value: 'guadalajara' },
+        { id: '3-3', title: 'Monterrey', value: 'monterrey' },
+      ],
+    },
   },
 ];
 
-/**
- * Interactive example demonstrating hierarchical navigation and search
- */
-const AddSelectInteractiveExample = () => {
+const InteractiveStory = () => {
+  const [dataManager] = useState(() => new AddSelectData());
+  const [currentItems, setCurrentItems] = useState<HierarchicalItem[]>([]);
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentItems, setCurrentItems] = useState<NormalizedItem[]>(
-    sampleHierarchicalData
-  );
-  const [selectedItem, setSelectedItem] = useState('');
-  const [navigationStack, setNavigationStack] = useState<
-    Array<{
-      items: NormalizedItem[];
-      parentId: string;
-      parentTitle: string;
-    }>
-  >([]);
+  const [path, setPath] = useState<Array<{ id: string; title: string }>>([]);
+  const [currentParentId, setCurrentParentId] = useState<string>('');
 
-  // Get all items for searching
-  const allItems = useMemo(() => flattenItems(sampleHierarchicalData), []);
+  // Initialize data
+  useEffect(() => {
+    dataManager.setItems(hierarchicalData);
+    setCurrentItems(hierarchicalData);
+  }, [dataManager]);
 
-  // Filter items based on search term
-  const filteredItems = useMemo(() => {
-    if (searchTerm) {
-      return filterItems(allItems, searchTerm);
-    }
-    return currentItems;
-  }, [searchTerm, currentItems, allItems]);
-
-  const handleSearch = (term: string) => {
-    setSearchTerm(term);
-  };
-
-  const handleItemSelect = (
-    itemId: string,
-    selected: boolean,
-    value: string
-  ) => {
+  // Handle item selection (single-select mode)
+  const handleItemSelect = (itemId: string, selected: boolean) => {
     if (selected) {
-      setSelectedItem(itemId);
+      // Use exclusive mode for single-select
+      dataManager.setSelectedItems(itemId, true);
+      setSelectedItems(new Set([itemId]));
+
+      const selectedItem = dataManager.getItem(itemId);
+      console.log('Selected item:', {
+        id: selectedItem?.id,
+        title: selectedItem?.title,
+        value: selectedItem?.value,
+      });
     } else {
-      setSelectedItem('');
+      dataManager.clearSelections();
+      setSelectedItems(new Set());
+      console.log('Selection cleared');
     }
   };
 
-  const handleNavigate = (itemId: string, title: string, parentId: string) => {
-    // Find the item and get its children
-    const item = allItems.find((i) => i.id === itemId);
-    if (item && item.children && item.children.length > 0) {
-      // Save current state to navigation stack
-      setNavigationStack([
-        ...navigationStack,
-        {
-          items: currentItems,
-          parentId: itemId,
-          parentTitle: title,
-        },
-      ]);
+  // Handle navigation to children
+  const handleNavigate = (itemId: string, title: string) => {
+    const children = dataManager.getItemChildren(itemId);
+    if (children.length > 0) {
+      setCurrentItems(children);
+      setCurrentParentId(itemId);
 
-      // Update current items to show children
-      setCurrentItems(item.children);
-      setSearchTerm('');
-      setSelectedItem('');
+      // Build breadcrumb path
+      const parents = dataManager.getItemParents(itemId);
+      const newPath = [
+        { id: 'root', title: 'All Locations' },
+        ...parents.reverse().map((p) => ({ id: p.id, title: p.title || '' })),
+        { id: itemId, title },
+      ];
+      setPath(newPath);
     }
   };
 
+  // Handle breadcrumb navigation
   const handleBreadcrumbClick = (index: number) => {
-    // Navigate back to the clicked breadcrumb level
-    const levelsToGoBack = navigationStack.length - index;
-
-    if (levelsToGoBack > 0) {
-      const newStack = navigationStack.slice(0, index);
-      const targetLevel =
-        index === 0 ? sampleHierarchicalData : navigationStack[index - 1].items;
-
-      setNavigationStack(newStack);
-      setCurrentItems(targetLevel);
-      setSearchTerm('');
-      setSelectedItem('');
+    if (index === 0) {
+      // Navigate to root
+      setCurrentItems(hierarchicalData);
+      setCurrentParentId('');
+      setPath([]);
+    } else {
+      const targetId = path[index].id;
+      const children = dataManager.getItemChildren(targetId);
+      setCurrentItems(children);
+      setCurrentParentId(targetId);
+      setPath(path.slice(0, index + 1));
     }
   };
 
-  const getBreadcrumbPath = () => {
-    const path = [{ id: 'root', title: 'Locations' }];
+  // Handle search
+  const handleSearch = (query: string) => {
+    setSearchTerm(query);
 
-    navigationStack.forEach((item) => {
-      path.push({ id: item.parentId, title: item.parentTitle });
+    if (query) {
+      const results = dataManager.search(query);
+      setCurrentItems(results);
+      setPath([]);
+    } else {
+      // Reset to current level or root
+      if (currentParentId) {
+        const children = dataManager.getItemChildren(currentParentId);
+        setCurrentItems(children);
+      } else {
+        setCurrentItems(hierarchicalData);
+      }
+    }
+  };
+
+  // Render items with proper hasChildren flag
+  const renderItems = () => {
+    return currentItems.map((item) => {
+      const hasChildren = dataManager.hasChildren(item.id);
+      return (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title || ''}
+          subtitle={item.value}
+          value={item.value || ''}
+          hasChildren={hasChildren}
+        />
+      );
     });
-
-    return path;
   };
-
-  const selectedItems = useMemo(() => {
-    const set = new Set<string>();
-    if (selectedItem) {
-      set.add(selectedItem);
-    }
-    return set;
-  }, [selectedItem]);
 
   return (
-    <AddSelect
-      onItemSelect={handleItemSelect}
-      onNavigate={handleNavigate}
-      selectedItems={selectedItems}
-    >
-      <AddSelect.Body
-        itemsLabel="Locations"
-        globalSearchLabel="Search locations"
-        globalSearchPlaceholder="Search..."
-        searchResultsTitle="Search results"
-        itemCount={filteredItems.length}
-        path={getBreadcrumbPath()}
-        onSearch={handleSearch}
-        onBreadcrumbClick={handleBreadcrumbClick}
+    <div className="add-select-variant-container">
+      <h4>Interactive AddSelect with AddSelectData utility</h4>
+      <AddSelect
+        selectedItems={selectedItems}
+        onItemSelect={handleItemSelect}
+        onNavigate={handleNavigate}
       >
-        <AddSelect.List>
-          {filteredItems.map((item) => {
-            const hasChildren = item.children && item.children.length > 0;
-            return (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                value={item.value}
-                hasChildren={hasChildren}
-              />
-            );
-          })}
-        </AddSelect.List>
-      </AddSelect.Body>
-    </AddSelect>
+        <AddSelect.Body
+          itemsLabel="All Locations"
+          globalSearchLabel="Search"
+          globalSearchPlaceholder="Search locations..."
+          searchResultsTitle="Search results"
+          itemCount={currentItems.length}
+          path={path}
+          onSearch={handleSearch}
+          onBreadcrumbClick={handleBreadcrumbClick}
+        >
+          <AddSelect.List>{renderItems()}</AddSelect.List>
+        </AddSelect.Body>
+      </AddSelect>
+    </div>
   );
 };
 
 /**
- * Interactive story demonstrating hierarchical navigation and search
- * This example shows:
- * - Hierarchical navigation through nested data
- * - Search functionality across all levels
- * - Selection management
- * - Breadcrumb navigation
+ * Story: Interactive
+ * Shows complete implementation using AddSelectData utility
  */
-export const InteractiveWithDataUtility = {
-  render: () => <AddSelectInteractiveExample />,
-  parameters: {
-    docs: {
-      description: {
-        story: `
-This interactive example demonstrates how to manage hierarchical data in Add Select components.
-
-## Key Features Demonstrated:
-
-- **Hierarchical Navigation**: Navigate through nested data structures
-- **Search Functionality**: Search across all levels of the hierarchy
-- **Selection Management**: Handle single-select scenarios
-- **Breadcrumb Navigation**: Navigate back through the hierarchy
-- **Data Utility Integration**: Uses utility functions for data management
-
-## Utility Functions Used:
-
-- \`flattenItems()\` - Flatten hierarchical data for searching
-- \`filterItems()\` - Filter items by search term
-- \`normalizeItems()\` - Normalize item structure
-
-See the source code for implementation details.
-        `,
-      },
-    },
-  },
+export const Interactive = {
+  render: () => <InteractiveStory />,
 };
 
-const meta = {
-  title: 'Preview/AddSelect/Interactive Examples',
+export default {
+  title: 'Preview/Add and select/Interactive',
   component: AddSelect,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <div className="add-select-story-container">
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
-    layout: 'fullscreen',
+    styles,
     docs: {
-      description: {
-        component: `
-This interactive example demonstrates how to use the AddSelect component for managing hierarchical data.
-
-## Key Features:
-
-- **Hierarchical Navigation**: Navigate through nested data structures
-- **Search Functionality**: Search across all levels of the hierarchy
-- **Selection Management**: Handle single-select scenarios
-- **Breadcrumb Navigation**: Navigate back through the hierarchy
-- **Data Utility Integration**: All data operations use utility functions
-
-## Utility Functions:
-
-The component provides several utility functions for data management:
-
-- \`flattenItems()\` - Flatten hierarchical data for searching
-- \`filterItems()\` - Filter items by search term
-- \`normalizeItems()\` - Normalize item structure
-- \`getItemById()\` - Find item by ID
-- \`buildPath()\` - Build navigation path
-
-See the source code for implementation details.
-        `,
-      },
+      page: mdx,
     },
   },
 };
-
-export default meta;

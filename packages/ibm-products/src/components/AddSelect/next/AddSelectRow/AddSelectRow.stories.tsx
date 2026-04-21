@@ -7,177 +7,223 @@
 
 import React from 'react';
 import { AddSelect } from '../AddSelect/AddSelect';
+import { UserAvatar } from '../../../UserAvatar';
 import { Tag } from '@carbon/react';
+import styles from '../_storybook-styles.scss?inline';
 
+import mdx from './AddSelectRow.mdx';
+
+/**
+ * Story 1: Default
+ * Shows both single-select (radio) and multi-select (checkbox) variants
+ */
 export const Default = {
   render: () => {
     return (
-      <AddSelect>
-        <AddSelect.Body
-          itemsLabel="Items"
-          globalSearchLabel="Search"
-          itemCount={3}
-        >
-          <AddSelect.List>
-            <AddSelect.Row
-              itemId="1"
-              title="Item 1"
-              subtitle="Description for item 1"
-              value="item-1"
-            />
-            <AddSelect.Row
-              itemId="2"
-              title="Item 2"
-              subtitle="Description for item 2"
-              value="item-2"
-            />
-            <AddSelect.Row
-              itemId="3"
-              title="Item 3"
-              subtitle="Description for item 3"
-              value="item-3"
-            />
-          </AddSelect.List>
-        </AddSelect.Body>
-      </AddSelect>
+      <>
+        <div className="add-select-variant-container">
+          <h4>Single-select (Radio button)</h4>
+          <AddSelect.Row itemId="1" title="Item 1" value="item-1" />
+        </div>
+        <div className="add-select-variant-container">
+          <h4>Multi-select (Checkbox)</h4>
+          <AddSelect multi>
+            <AddSelect.Row itemId="2" title="Item 1" value="item-1" />
+          </AddSelect>
+        </div>
+      </>
     );
   },
 };
 
-export const WithMetadata = {
+/**
+ * Story 2: WithSubtitle
+ * Shows subtitle with both single and multi-select variants
+ */
+export const WithSubtitle = {
   render: () => {
     return (
-      <AddSelect>
-        <AddSelect.Body
-          itemsLabel="Items with metadata"
-          globalSearchLabel="Search"
-          itemCount={3}
-        >
-          <AddSelect.List>
-            <AddSelect.Row
-              itemId="1"
-              title="Item 1"
-              subtitle="Description for item 1"
-              value="item-1"
-              meta={<Tag type="blue">New</Tag>}
-            />
+      <>
+        <div className="add-select-variant-container">
+          <h4>Single-select with subtitle</h4>
+          <AddSelect.Row
+            itemId="1"
+            title="Item 1"
+            subtitle="This is a description for item 1"
+            value="item-1"
+          />
+        </div>
+        <div className="add-select-variant-container">
+          <h4>Multi-select with subtitle</h4>
+          <AddSelect multi>
             <AddSelect.Row
               itemId="2"
-              title="Item 2"
-              subtitle="Description for item 2"
-              value="item-2"
-              meta={<Tag type="green">Active</Tag>}
+              title="Item 1"
+              subtitle="This is a description for item 1"
+              value="item-1"
             />
-            <AddSelect.Row
-              itemId="3"
-              title="Item 3"
-              subtitle="Description for item 3"
-              value="item-3"
-              meta={<Tag type="gray">Archived</Tag>}
-            />
-          </AddSelect.List>
-        </AddSelect.Body>
-      </AddSelect>
+          </AddSelect>
+        </div>
+      </>
     );
   },
 };
 
+/**
+ * Story 3: WithChildren
+ * Shows navigation arrow with subtitle in both single and multi-select variants
+ */
 export const WithChildren = {
   render: () => {
     return (
-      <AddSelect>
-        <AddSelect.Body
-          itemsLabel="Items with children"
-          globalSearchLabel="Search"
-          itemCount={3}
-        >
-          <AddSelect.List>
+      <>
+        <div className="add-select-variant-container">
+          <h4>Single-select with navigation</h4>
+          <AddSelect.Row
+            itemId="1"
+            title="Parent Item"
+            subtitle="Navigate to view children"
+            value="parent-1"
+            hasChildren
+          />
+        </div>
+        <div className="add-select-variant-container">
+          <h4>Multi-select with navigation</h4>
+          <AddSelect multi>
             <AddSelect.Row
-              itemId="1"
-              title="Parent Item 1"
-              subtitle="Has children"
+              itemId="2"
+              title="Parent Item"
+              subtitle="Navigate to view children"
               value="parent-1"
               hasChildren
             />
-            <AddSelect.Row
-              itemId="2"
-              title="Parent Item 2"
-              subtitle="Has children"
-              value="parent-2"
-              hasChildren
-            />
-            <AddSelect.Row
-              itemId="3"
-              title="Regular Item"
-              subtitle="No children"
-              value="item-3"
-            />
-          </AddSelect.List>
-        </AddSelect.Body>
-      </AddSelect>
+          </AddSelect>
+        </div>
+      </>
     );
   },
 };
 
-export const DisabledItems = {
+/**
+ * Story 4: WithAvatar
+ * Shows UserAvatar icon with both single and multi-select variants
+ */
+export const WithAvatar = {
   render: () => {
     return (
-      <AddSelect>
-        <AddSelect.Body
-          itemsLabel="Items with disabled state"
-          globalSearchLabel="Search"
-          itemCount={3}
-        >
-          <AddSelect.List>
+      <>
+        <div className="add-select-variant-container">
+          <h4>Single-select with avatar</h4>
+          <AddSelect.Row
+            itemId="1"
+            title="John Doe"
+            subtitle="Software Engineer"
+            value="user-1"
+            icon={<UserAvatar name="John Doe" />}
+          />
+        </div>
+        <div className="add-select-variant-container">
+          <h4>Multi-select with avatar</h4>
+          <AddSelect multi>
             <AddSelect.Row
-              itemId="1"
-              title="Active Item"
-              subtitle="This item is active"
-              value="item-1"
+              itemId="2"
+              title="John Doe"
+              subtitle="Software Engineer"
+              value="user-1"
+              icon={<UserAvatar name="John Doe" />}
             />
+          </AddSelect>
+        </div>
+      </>
+    );
+  },
+};
+
+/**
+ * Story 5: WithMetadata
+ * Shows metadata tag with both single and multi-select variants
+ */
+export const WithMetadata = {
+  render: () => {
+    return (
+      <>
+        <div className="add-select-variant-container">
+          <h4>Single-select with metadata</h4>
+          <AddSelect.Row
+            itemId="1"
+            title="Item 1"
+            subtitle="This item has metadata"
+            value="item-1"
+            meta={<Tag type="blue">New</Tag>}
+          />
+        </div>
+        <div className="add-select-variant-container">
+          <h4>Multi-select with metadata</h4>
+          <AddSelect multi>
+            <AddSelect.Row
+              itemId="2"
+              title="Item 1"
+              subtitle="This item has metadata"
+              value="item-1"
+              meta={<Tag type="blue">New</Tag>}
+            />
+          </AddSelect>
+        </div>
+      </>
+    );
+  },
+};
+
+/**
+ * Story 6: DisabledItems
+ * Shows disabled state with subtitle in both single and multi-select variants
+ */
+export const DisabledItem = {
+  render: () => {
+    return (
+      <>
+        <div className="add-select-variant-container">
+          <h4>Single-select disabled</h4>
+          <AddSelect.Row
+            itemId="1"
+            title="Disabled Item"
+            subtitle="This item cannot be selected"
+            value="item-1"
+            disabled
+          />
+        </div>
+        <div className="add-select-variant-container">
+          <h4>Multi-select disabled</h4>
+          <AddSelect multi>
             <AddSelect.Row
               itemId="2"
               title="Disabled Item"
-              subtitle="This item is disabled"
-              value="item-2"
+              subtitle="This item cannot be selected"
+              value="item-1"
               disabled
             />
-            <AddSelect.Row
-              itemId="3"
-              title="Another Active Item"
-              subtitle="This item is active"
-              value="item-3"
-            />
-          </AddSelect.List>
-        </AddSelect.Body>
-      </AddSelect>
+          </AddSelect>
+        </div>
+      </>
     );
   },
 };
 
-const meta = {
-  title: 'Preview/AddSelect/Add select row',
+export default {
+  title: 'Preview/Add and select/AddSelectRow',
   component: AddSelect.Row,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <div className="add-select-story-container">
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
-    layout: 'fullscreen',
+    styles,
     docs: {
-      description: {
-        component: `
-The Add Select Row component represents an individual row in the list.
-
-## Features
-
-- Single or multi-select support
-- Optional subtitle
-- Optional metadata slot
-- Hierarchical navigation support
-- Disabled state
-- Keyboard accessible
-        `,
-      },
+      page: mdx,
     },
   },
 };
-
-export default meta;

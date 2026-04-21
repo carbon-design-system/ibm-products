@@ -137,7 +137,7 @@ export const StandardSingleAddSelect = () => {
       </Button>
 
       <Tearsheet open={open} onClose={handleClose} variant="narrow">
-        <Tearsheet.Header>
+        <Tearsheet.Header hideCloseButton>
           <Tearsheet.HeaderContent title="Select category">
             <p slot="description">Choose one category from the list below</p>
           </Tearsheet.HeaderContent>

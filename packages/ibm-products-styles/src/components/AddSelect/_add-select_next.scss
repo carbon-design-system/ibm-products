@@ -98,12 +98,16 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 .#{$block-class__next}-row {
   display: flex;
   border-inline-start: $spacing-01 solid transparent;
-  cursor: pointer;
   transition: background-color $duration-fast-01 motion(standard, productive);
 
   &:focus {
     outline: $spacing-01 solid $focus;
     outline-offset: calc(-1 * $spacing-01);
+  }
+
+  // Only show focus outline when navigating via keyboard, not mouse clicks
+  &:focus:not(:focus-visible) {
+    outline: none;
   }
 
   &--selected {

@@ -15,6 +15,3 @@ export type { AddSelectListProps } from './AddSelectList/AddSelectList';
 export type { AddSelectRowProps } from './AddSelectRow/AddSelectRow';
 export type { AddSelectBreadcrumbsProps } from './AddSelectBreadcrumbs/AddSelectBreadcrumbs';
 export type { AddSelectContextType } from './context';
-
-// Utils
-export * from './utils';

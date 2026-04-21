@@ -246,6 +246,7 @@ export class AddSelectExample extends LitElement {
         <p>Click the button below to open the single add select dialog.</p>
         
         <cds-button
+          class="launch-button"
           type="button"
           kind="primary"
           size="md"
@@ -332,7 +333,7 @@ export class AddSelectExample extends LitElement {
               </c4p-tearsheet-body>
 
               <!-- Footer with Action Buttons -->
-              <c4p-tearsheet-footer>
+              <c4p-tearsheet-footer slot="footer">
                 <div class="default__action-buttons">
                   <cds-button
                     kind="secondary"

@@ -49,7 +49,7 @@ const AddSelectList = forwardRef<HTMLDivElement, AddSelectListProps>(
     };
 
     // Update focus on items - only one item should have tabindex="0"
-    const updateItemFocus = (focusIndex: number) => {
+    const updateItemFocus = (focusIndex: number, shouldFocus = true) => {
       const items = getItems();
       if (items.length === 0) {
         return;
@@ -64,7 +64,9 @@ const AddSelectList = forwardRef<HTMLDivElement, AddSelectListProps>(
       items.forEach((item, index) => {
         if (index === focusedIndexRef.current) {
           item.setAttribute('tabindex', '0');
-          item.focus();
+          if (shouldFocus) {
+            item.focus();
+          }
         } else {
           item.setAttribute('tabindex', '-1');
         }
@@ -144,7 +146,7 @@ const AddSelectList = forwardRef<HTMLDivElement, AddSelectListProps>(
 
     // Initialize focus management after mount
     useEffect(() => {
-      updateItemFocus(0);
+      updateItemFocus(0, false);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [children]);
 

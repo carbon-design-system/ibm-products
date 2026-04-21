@@ -11,7 +11,7 @@ import { SingleAddSelect } from '../components/SingleAddSelect';
 import { HierarchicalItem } from '@carbon/ibm-products-primitives';
 import { Tearsheet } from '../../../../components/Tearsheet/next';
 
-// Sample hierarchical data matching the Web Components example
+// Sample hierarchical data
 const sampleItems: HierarchicalItem[] = [
   {
     id: '1',
@@ -132,7 +132,7 @@ export const StandardSingleAddSelect = () => {
       <h3>Single Add Select Pattern Example</h3>
       <p>Click the button below to open the single add select dialog.</p>
 
-      <Button kind="primary" onClick={handleOpen}>
+      <Button kind="primary" className="launch-button" onClick={handleOpen}>
         Select a category
       </Button>
 

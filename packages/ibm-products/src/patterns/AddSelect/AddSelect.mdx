@@ -2,7 +2,7 @@ import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
 import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import * as stories from './AddSelect.stories';
 
-# AddSelect Pattern
+# SingleAddSelect Pattern
 
 ## Table of Contents
 
@@ -58,74 +58,6 @@ from a list or hierarchy.
 </Canvas>
 
 ```jsx
-import { SingleAddSelect } from './patterns/AddSelect/example/components/SingleAddSelect';
-
-const items = [
-  {
-    id: '1',
-    title: 'California',
-    value: 'ca',
-    children: {
-      entries: [
-        { id: '1-1', title: 'Los Angeles', value: 'la' },
-        { id: '1-2', title: 'San Francisco', value: 'sf' },
-      ],
-    },
-  },
-  { id: '2', title: 'Texas', value: 'tx' },
-];
-
-function MyComponent() {
-  const [selectedId, setSelectedId] = useState('');
-
-  return (
-    <SingleAddSelect
-      items={items}
-      itemsLabel="Select a location"
-      globalSearchLabel="Search"
-      rootBreadcrumbTitle="Locations"
-      selectedItemId={selectedId}
-      onItemSelect={(itemId, value) => setSelectedId(itemId)}
-      onNavigate={(itemId, title, parentId) =>
-        console.log('Navigated to:', title)
-      }
-    />
-  );
-}
-```
-
-### Hierarchical Navigation
-
-The pattern supports nested data structures with breadcrumb navigation:
-
-- Click items with children to navigate deeper
-- Use breadcrumbs to navigate back up the hierarchy
-- Search works across all levels of the hierarchy
-- Selection is maintained when navigating
-
-## Component API
-
-### SingleAddSelect Props
-
-| Prop                      | Type                                | Default                       | Description                 |
-| ------------------------- | ----------------------------------- | ----------------------------- | --------------------------- |
-| `items`                   | `HierarchicalItem[]`                | Required                      | Array of hierarchical items |
-| `itemsLabel`              | `string`                            | `'Items'`                     | Label for items section     |
-| `globalSearchLabel`       | `string`                            | `'Search'`                    | Search input label          |
-| `globalSearchPlaceholder` | `string`                            | `'Search items'`              | Search placeholder          |
-| `searchResultsTitle`      | `string`                            | `'Search results'`            | Title for search results    |
-| `rootBreadcrumbTitle`     | `string`                            | `'Categories'`                | Root breadcrumb title       |
-| `selectedItemId`          | `string`                            | -                             | Currently selected item ID  |
-| `onItemSelect`            | `(itemId, value) => void`           | -                             | Selection callback          |
-| `onNavigate`              | `(itemId, title, parentId) => void` | -                             | Navigation callback         |
-| `noResultsTitle`          | `string`                            | `'No results found'`          | Empty state title           |
-| `noResultsDescription`    | `string`                            | `'Try adjusting your search'` | Empty state description     |
-
-### Composable Components
-
-For more control, use the composable components directly:
-
-```jsx
 import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
 
 <AddSelect onItemSelect={handleSelect} onNavigate={handleNavigate}>
@@ -147,6 +79,15 @@ import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
   </AddSelect.Body>
 </AddSelect>;
 ```
+
+### Hierarchical Navigation
+
+The pattern supports nested data structures with breadcrumb navigation:
+
+- Click items with children to navigate deeper
+- Use breadcrumbs to navigate back up the hierarchy
+- Search works across all levels of the hierarchy
+- Selection is maintained when navigating
 
 ## Data Management
 

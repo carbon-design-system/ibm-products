@@ -5,16 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/react';
-
-body {
-  margin: 0;
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@use '@carbon/react/scss/spacing' as *;
 
 .example-container {
   padding: $spacing-07;
@@ -47,4 +38,8 @@ body {
   z-index: 9999;
   inset-block-start: $spacing-05;
   inset-inline-end: $spacing-05;
+}
+
+.launch-button {
+  margin-block-start: $spacing-05;
 }

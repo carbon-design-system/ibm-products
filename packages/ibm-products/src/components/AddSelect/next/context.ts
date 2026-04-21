@@ -19,5 +19,5 @@ export interface AddSelectContextType {
 
 export const AddSelectContext = createContext<AddSelectContextType>({
   multi: false,
-  selectedItems: new Set(),
+  selectedItems: undefined,
 });

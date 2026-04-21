@@ -97,7 +97,7 @@ export const AddSelect = forwardRef<HTMLDivElement, AddSelectProps>(
       multi = false,
       onItemSelect,
       onNavigate,
-      selectedItems = new Set(),
+      selectedItems,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>

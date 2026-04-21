@@ -9,6 +9,7 @@ import * as AddSelectRowStories from './add-select-row.stories';
 ## Table of Contents
 
 - [Overview](#overview)
+  - [Selected State](#selected-state)
   - [With Subtitle](#with-subtitle)
   - [With Children](#with-children)
   - [With Avatar](#with-avatar)
@@ -50,6 +51,34 @@ import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
   value="item-1"
 >
 </c4p-add-select-row>
+```
+
+### Selected State
+
+Items can be pre-selected using the `selected` attribute. This works for both single-select (radio button) and multi-select (checkbox) modes.
+
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.Selected} />
+
+```html
+<!-- Single-select with selected state -->
+<c4p-add-select-row
+  item-id="1"
+  title="Item 1"
+  value="item-1"
+  selected
+>
+</c4p-add-select-row>
+
+<!-- Multi-select with selected state -->
+<c4p-add-select multi>
+  <c4p-add-select-row
+    item-id="2"
+    title="Item 1"
+    value="item-1"
+    selected
+  >
+  </c4p-add-select-row>
+</c4p-add-select>
 ```
 
 ### With Subtitle

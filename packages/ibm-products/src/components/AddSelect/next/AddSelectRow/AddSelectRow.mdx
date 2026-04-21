@@ -7,6 +7,7 @@ import * as stories from './AddSelectRow.stories';
 ## Table of Contents
 
 - [Overview](#overview)
+  - [Selected State](#selected-state)
   - [With Subtitle](#with-subtitle)
   - [With Children](#with-children)
   - [With Avatar](#with-avatar)
@@ -43,6 +44,23 @@ import { AddSelect } from '@carbon/ibm-products';
 
 ```jsx
 <AddSelect.Row itemId="1" title="Item 1" value="item-1" />
+```
+
+#### Selected State
+
+Items can be pre-selected using the `selected` prop. This works for both
+single-select (radio button) and multi-select (checkbox) modes.
+
+<Canvas of={stories.Selected}></Canvas>
+
+```jsx
+// Single-select with selected state
+<AddSelect.Row itemId="1" title="Item 1" value="item-1" selected />
+
+// Multi-select with selected state
+<AddSelect multi>
+  <AddSelect.Row itemId="2" title="Item 1" value="item-1" selected />
+</AddSelect>
 ```
 
 #### With Subtitle

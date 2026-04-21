@@ -37,7 +37,30 @@ export const Default = {
 };
 
 /**
- * Story 2: WithSubtitle
+ * Story 2: Selected
+ * Shows selected state with both single-select (radio) and multi-select (checkbox) variants
+ */
+export const Selected = {
+  render: () => {
+    return (
+      <>
+        <div className="add-select-story-variant-container">
+          <h4>Single-select (Radio button) - Selected</h4>
+          <AddSelect.Row itemId="1" title="Item 1" value="item-1" selected />
+        </div>
+        <div className="add-select-story-variant-container">
+          <h4>Multi-select (Checkbox) - Selected</h4>
+          <AddSelect multi>
+            <AddSelect.Row itemId="2" title="Item 1" value="item-1" selected />
+          </AddSelect>
+        </div>
+      </>
+    );
+  },
+};
+
+/**
+ * Story 3: WithSubtitle
  * Shows subtitle with both single and multi-select variants
  */
 export const WithSubtitle = {
@@ -70,7 +93,7 @@ export const WithSubtitle = {
 };
 
 /**
- * Story 3: WithChildren
+ * Story 4: WithChildren
  * Shows navigation arrow with subtitle in both single and multi-select variants
  */
 export const WithChildren = {
@@ -105,7 +128,7 @@ export const WithChildren = {
 };
 
 /**
- * Story 4: WithAvatar
+ * Story 5: WithAvatar
  * Shows UserAvatar icon with both single and multi-select variants
  */
 export const WithAvatar = {
@@ -140,7 +163,7 @@ export const WithAvatar = {
 };
 
 /**
- * Story 5: WithMetadata
+ * Story 6: WithMetadata
  * Shows metadata tag with both single and multi-select variants
  */
 export const WithMetadata = {
@@ -175,7 +198,7 @@ export const WithMetadata = {
 };
 
 /**
- * Story 6: DisabledItems
+ * Story 7: DisabledItems
  * Shows disabled state with subtitle in both single and multi-select variants
  */
 export const DisabledItem = {

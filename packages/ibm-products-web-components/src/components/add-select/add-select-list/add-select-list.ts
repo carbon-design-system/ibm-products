@@ -37,6 +37,11 @@ class CDSAddSelectList extends LitElement {
   private _focusedIndex = 0;
 
   /**
+   * Track if user has interacted with keyboard navigation
+   */
+  private _hasKeyboardInteraction = false;
+
+  /**
    * Get all item elements
    */
   private _getItems(): HTMLElement[] {
@@ -54,7 +59,7 @@ class CDSAddSelectList extends LitElement {
   /**
    * Update focus on items - only one item should have tabindex="0"
    */
-  private _updateItemFocus(focusIndex: number) {
+  private _updateItemFocus(focusIndex: number, shouldFocus = true) {
     const items = this._getItems();
     if (items.length === 0) {
       return;
@@ -66,7 +71,9 @@ class CDSAddSelectList extends LitElement {
     items.forEach((item, index) => {
       if (index === this._focusedIndex) {
         item.setAttribute('tabindex', '0');
-        item.focus();
+        if (shouldFocus) {
+          item.focus();
+        }
       } else {
         item.setAttribute('tabindex', '-1');
       }
@@ -81,6 +88,9 @@ class CDSAddSelectList extends LitElement {
     if (items.length === 0) {
       return;
     }
+
+    // Mark that keyboard interaction has occurred
+    this._hasKeyboardInteraction = true;
 
     const currentItem = items[this._focusedIndex];
     let handled = false;
@@ -173,8 +183,8 @@ class CDSAddSelectList extends LitElement {
    * Initialize focus management after first update
    */
   firstUpdated() {
-    // Set initial focus state
-    this._updateItemFocus(0);
+    // Set initial tabindex but don't focus
+    this._updateItemFocus(0, false);
   }
 
   /**
@@ -188,8 +198,8 @@ class CDSAddSelectList extends LitElement {
       if (this._focusedIndex >= items.length) {
         this._focusedIndex = 0;
       }
-      // Re-apply focus management to new items
-      this._updateItemFocus(this._focusedIndex);
+      // Re-apply focus management to new items, but only actually focus if keyboard interaction occurred
+      this._updateItemFocus(this._focusedIndex, this._hasKeyboardInteraction);
     }
   }
 
@@ -207,7 +217,8 @@ class CDSAddSelectList extends LitElement {
         (item) => item.getAttribute('tabindex') === '0'
       );
       if (!hasFocusableItem) {
-        this._updateItemFocus(0);
+        // Set tabindex but don't focus unless keyboard interaction occurred
+        this._updateItemFocus(0, this._hasKeyboardInteraction);
       }
     }
   }

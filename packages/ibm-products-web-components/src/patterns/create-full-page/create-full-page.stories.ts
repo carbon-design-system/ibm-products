@@ -27,7 +27,7 @@ export default {
 
 export const CreateFullPage = {
   render: () => {
-    return html`<standard-create-full-page-example></standard-create-full-page-example>`;
+    return html`<standard-create-full-page></standard-create-full-page>`;
   },
 };
 

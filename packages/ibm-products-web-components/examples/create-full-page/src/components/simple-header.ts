@@ -10,6 +10,7 @@ import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
+import styles from './create-full-page.scss?lit';
 
 const blockClass = 'simple-header';
 
@@ -53,7 +54,7 @@ export class SimpleHeader extends LitElement {
    * Overflow aria label
    */
   @property({ type: String, attribute: 'overflow-aria-label' })
-  overflowAriaLabel = 'Open breadcrumb overflow menu';
+  overflowAriaLabel = 'Open and close additional breadcrumb item list.';
 
   /**
    * Overflow tooltip alignment
@@ -61,12 +62,9 @@ export class SimpleHeader extends LitElement {
   @property({ type: String, attribute: 'overflow-tooltip-align' })
   overflowTooltipAlign = 'bottom';
 
-  // Disable shadow DOM to use Carbon styles
-  createRenderRoot() {
-    return this;
-  }
-
   connectedCallback() {
+    console.log(this.breadcrumbs);
+    
     super.connectedCallback();
     if (!this.title && (!this.breadcrumbs || this.breadcrumbs.length === 0)) {
       console.warn(
@@ -102,5 +100,6 @@ export class SimpleHeader extends LitElement {
       </header>
     `;
   }
+  static styles = styles;
 }
 

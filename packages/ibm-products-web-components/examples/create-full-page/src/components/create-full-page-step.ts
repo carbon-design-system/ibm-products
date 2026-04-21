@@ -7,7 +7,9 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
+import '@carbon/web-components/es/components/grid/index';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
+import styles from './create-full-page.scss?lit';
 
 const blockClass = 'create-full-page-pattern';
 const stepBlockClass = `${blockClass}__step`;
@@ -56,7 +58,7 @@ export class CreateFullPageStep extends LitElement {
   /**
    * Whether to disable submit on this step
    */
-  @property({ type: Boolean, attribute: 'disable-submit' })
+  @property({ type: Boolean, attribute: 'disable-submit', reflect: true })
   disableSubmit = false;
 
   /**
@@ -70,11 +72,6 @@ export class CreateFullPageStep extends LitElement {
    */
   @property({ attribute: false })
   onPrevious?: () => void | Promise<void>;
-
-  // Disable shadow DOM to use Carbon styles
-  createRenderRoot() {
-    return this;
-  }
 
   firstUpdated() {
     this.reorganizeContent();
@@ -102,36 +99,44 @@ export class CreateFullPageStep extends LitElement {
 
     return html`
       <section class="${stepBlockClass}">
-            <div class="cds--grid">
-              <h2 class="${blockClass}__step-title cds--col-lg-8 cds--col-md-4">
-                ${this.title}
-              </h2>
-
+            <cds-grid>
+              <cds-column lg="8" md="4">
+                <h2 class="${blockClass}__step-title">
+                  ${this.title}
+                </h2>
               ${this.subtitle
                 ? html`
-                    <p class="${blockClass}__step-subtitle cds--col-lg-8 cds--col-md-4">
-                      ${this.subtitle}
-                    </p>
+                      <p class="${blockClass}__step-subtitle">
+                        ${this.subtitle}
+                      </p>
                   `
                 : ''}
               ${this.description
                 ? html`
-                    <p class="${blockClass}__step-description cds--col-lg-8 cds--col-md-4">
-                      ${this.description}
-                    </p>
+                      <p class="${blockClass}__step-description">
+                        ${this.description}
+                      </p>
                   `
                 : ''}
-        </div>
+              <div class="${blockClass}__step-description">
+                <slot name="description"></slot>
+              </div>
+                 </cds-column>
+        </cds-grid>
 
         ${this.hasFieldset
           ? html`
               <fieldset class="${blockClass}__step-fieldset">
                 <legend>${this.fieldsetLegendText}</legend>
+                <slot></slot>
               </fieldset>
             `
-          : html`<div class="${blockClass}__step-content"></div>`}
+          : html`<div class="${blockClass}__step-content"><slot></slot></div>`}
       </section>
     `;
   }
+
+  static styles = styles;
 }
+
 

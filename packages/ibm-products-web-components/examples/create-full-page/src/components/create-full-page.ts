@@ -11,7 +11,8 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import '@carbon/web-components/es/components/modal/index.js';
 import type { Breadcrumb } from './simple-header';
 import type { StepData } from './create-influencer';
-import type { ActionButton } from './action-set';
+import type { ActionButton } from '@carbon/ibm-products-web-components/es/components/action-set/index.js';
+import styles from './create-full-page.scss?lit';
 
 const blockClass = 'create-full-page-pattern';
 
@@ -42,7 +43,7 @@ export class CreateFullPage extends LitElement {
    * Breadcrumbs overflow aria label
    */
   @property({ type: String, attribute: 'breadcrumbs-overflow-aria-label' })
-  breadcrumbsOverflowAriaLabel = 'Open breadcrumb overflow menu';
+  breadcrumbsOverflowAriaLabel = 'Open and close additional breadcrumb item list.';
 
   /**
    * Breadcrumb overflow tooltip alignment
@@ -146,10 +147,6 @@ export class CreateFullPage extends LitElement {
   @state()
   private stepData: StepData[] = [];
 
-  // Disable shadow DOM to use Carbon styles
-  createRenderRoot() {
-    return this;
-  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -247,12 +244,19 @@ export class CreateFullPage extends LitElement {
     this.modalIsOpen = false;
   }
 
-  private get currentStepData() {
-    return this.stepData[this.currentStep - 1];
-  }
-
   private get isNextDisabled() {
-    return this.currentStepData?.disableSubmit || false;
+    // Get the current step element directly from Light DOM
+    const steps = Array.from(this.querySelectorAll('create-full-page-step')) as any[];
+    const currentStepElement = steps[this.currentStep - 1];
+    
+    if (!currentStepElement) {
+      return false;
+    }
+    
+    // Check both the property and attribute for disableSubmit
+    const disableSubmit = currentStepElement.disableSubmit ||
+                         currentStepElement.hasAttribute('disable-submit');   
+    return Boolean(disableSubmit);
   }
 
   private get actions(): ActionButton[] {
@@ -360,12 +364,12 @@ export class CreateFullPage extends LitElement {
                   <slot name="steps"></slot>
                 </form>
               </div>
-              <action-set
+              <c4p-action-set
                 class="${blockClass}__buttons"
                 .actions="${this.actions}"
                 button-size="2xl"
                 size="2xl"
-              ></action-set>
+              ></c4p-action-set>
             </div>
           </div>
 
@@ -400,4 +404,6 @@ export class CreateFullPage extends LitElement {
       </div>
     `;
   }
+
+  static styles = styles;
 }

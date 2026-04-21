@@ -8,8 +8,10 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { keyed } from 'lit/directives/keyed.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
+import styles from './create-full-page.scss?lit';
 
 const blockClass = 'create-influencer';
 
@@ -51,11 +53,6 @@ export class CreateInfluencer extends LitElement {
   @property({ attribute: false })
   onClickStep?: (step: number) => void;
 
-  // Disable shadow DOM to use Carbon styles
-  createRenderRoot() {
-    return this;
-  }
-
   private getNumberOfDynamicStepsBeforeCurrentStep(
     array: StepData[],
     key: keyof StepData
@@ -95,6 +92,9 @@ export class CreateInfluencer extends LitElement {
         ? this.currentStep - totalDynamicSteps - 2 // minus 2 because we need to account for the intro step
         : this.currentStep - totalDynamicSteps - 1; // minus 1 because ProgressIndicator currentIndex prop is 0 index based
 
+    // Use step count as a key to force complete re-render when steps change
+    const stepCountKey = progressSteps.length;
+    
     return html`
       <div class="${blockClass}__left-nav">
         ${this.title
@@ -102,25 +102,29 @@ export class CreateInfluencer extends LitElement {
           : ''}
         ${this.currentStep === 1 && this.stepData[0]?.introStep
           ? ''
-          : html`
-              <cds-progress-indicator
-                class="${blockClass}__progress-indicator"
-                vertical
-                space-equally
-                current-index="${currentIndex}"
-                @cds-progress-indicator-changed="${this.handleStepChange}"
-              >
-                ${progressSteps.map(
-                  (step: StepData, stepIndex: number) => html`
-                    <cds-progress-step
-                      label="${step?.title || ''}"
-                      secondary-label="${step.secondaryLabel || ''}"
-                      ?invalid="${step.invalid}"
-                    ></cds-progress-step>
-                  `
-                )}
-              </cds-progress-indicator>
-            `}
+          : keyed(
+              stepCountKey,
+              html`
+                <cds-progress-indicator
+                  class="${blockClass}__progress-indicator"
+                  vertical
+                  space-equally
+                  current-index="${currentIndex}"
+                  @cds-progress-indicator-changed="${this.handleStepChange}"
+                >
+                  ${progressSteps.map(
+                    (step: StepData, stepIndex: number) => html`
+                      <cds-progress-step
+                        label="${step?.title || ''}"
+                        secondary-label="${step.secondaryLabel || ''}"
+                        ?invalid="${step.invalid}"
+                        ?complete="${stepIndex < currentIndex}"
+                      ></cds-progress-step>
+                    `
+                  )}
+                </cds-progress-indicator>
+              `
+            )}
       </div>
     `;
   }
@@ -134,4 +138,6 @@ export class CreateInfluencer extends LitElement {
       <div class="${classMap(classes)}">${this.renderProgressSteps()}</div>
     `;
   }
+
+  static styles = styles;
 }

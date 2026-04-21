@@ -1,6 +1,8 @@
-import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
-import { AddSelect } from './AddSelect';
-import * as stories from './AddSelect-interactive.stories';
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import * as AddSelectStories from './add-select-interactive.stories';
+
+<Meta of={AddSelectStories} />
+
 
 # AddSelect interactive example with AddSelectData utility
 
@@ -26,36 +28,35 @@ The example includes:
 - Breadcrumb navigation
 - Dynamic item counts
 
-<Canvas of={stories.Interactive}></Canvas>
+<Canvas of={AddSelectStories.Interactive}></Canvas>
 
 ## Implementation Steps
 
 Follow these steps to implement AddSelect with the AddSelectData utility in your
-application:
+web component application:
 
 ### Step 1: Install Dependencies
 
 ```bash
-npm install @carbon/ibm-products @carbon/ibm-products-primitives
+npm install @carbon/ibm-products-web-components @carbon/ibm-products-primitives
 ```
 
 ### Step 2: Import Required Modules
 
 ```typescript
-import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 import {
   AddSelectData,
-  HierarchicalItem,
+  AddSelectItem,
 } from '@carbon/ibm-products-primitives';
-import { useState, useEffect } from 'react';
 ```
 
 ### Step 3: Define Your Hierarchical Data
 
-Structure your data according to the `HierarchicalItem` interface:
+Structure your data according to the `AddSelectItem` interface:
 
 ```typescript
-const hierarchicalData: HierarchicalItem[] = [
+const hierarchicalData: AddSelectItem[] = [
   {
     id: '1',
     title: 'Parent Item',
@@ -80,17 +81,14 @@ const hierarchicalData: HierarchicalItem[] = [
 Create an instance of AddSelectData and set up state management:
 
 ```typescript
-const [dataManager] = useState(() => new AddSelectData());
-const [currentItems, setCurrentItems] = useState<HierarchicalItem[]>([]);
-const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-const [searchTerm, setSearchTerm] = useState('');
-const [path, setPath] = useState<Array<{ id: string; title: string }>>([]);
-const [currentParentId, setCurrentParentId] = useState<string>('');
+const dataManager = new AddSelectData();
+dataManager.setItems(hierarchicalData);
 
-useEffect(() => {
-  dataManager.setItems(hierarchicalData);
-  setCurrentItems(hierarchicalData);
-}, [dataManager]);
+let currentItems = hierarchicalData;
+let selectedItems = new Set<string>();
+let searchTerm = '';
+let path: Array<{ id: string; title: string }> = [];
+let currentParentId = '';
 ```
 
 ### Step 5: Implement Selection Handler
@@ -98,20 +96,28 @@ useEffect(() => {
 Handle item selection using the utility:
 
 ```typescript
-const handleItemSelect = (itemId: string, selected: boolean) => {
-  dataManager.setSelectedItems(itemId, false);
+const handleItemSelect = (event: CustomEvent) => {
+  const { itemId, selected } = event.detail;
 
-  const newSelected = new Set(selectedItems);
   if (selected) {
-    newSelected.add(itemId);
-  } else {
-    newSelected.delete(itemId);
-  }
-  setSelectedItems(newSelected);
+    // Use exclusive mode for single-select
+    dataManager.setSelectedItems(itemId, true);
+    selectedItems = new Set([itemId]);
 
-  // Get all selected items
-  const selectedItemsList = dataManager.getSelectedItems();
-  console.log('Selected:', selectedItemsList);
+    const selectedItem = dataManager.getItem(itemId);
+    console.log('Selected item:', {
+      id: selectedItem?.id,
+      title: selectedItem?.title,
+      value: selectedItem?.value,
+    });
+  } else {
+    dataManager.clearSelections();
+    selectedItems = new Set();
+    console.log('Selection cleared');
+  }
+
+  // Re-render your component
+  updateView();
 };
 ```
 
@@ -120,20 +126,23 @@ const handleItemSelect = (itemId: string, selected: boolean) => {
 Handle hierarchical navigation:
 
 ```typescript
-const handleNavigate = (itemId: string, title: string) => {
+const handleNavigate = (event: CustomEvent) => {
+  const { itemId, title } = event.detail;
   const children = dataManager.getItemChildren(itemId);
+
   if (children.length > 0) {
-    setCurrentItems(children);
-    setCurrentParentId(itemId);
+    currentItems = children;
+    currentParentId = itemId;
 
     // Build breadcrumb path
     const parents = dataManager.getItemParents(itemId);
-    const newPath = [
+    path = [
       { id: 'root', title: 'All Items' },
       ...parents.reverse().map((p) => ({ id: p.id, title: p.title || '' })),
       { id: itemId, title },
     ];
-    setPath(newPath);
+
+    updateView();
   }
 };
 ```
@@ -143,19 +152,23 @@ const handleNavigate = (itemId: string, title: string) => {
 Handle breadcrumb navigation:
 
 ```typescript
-const handleBreadcrumbClick = (index: number) => {
+const handleBreadcrumbClick = (event: CustomEvent) => {
+  const { index } = event.detail;
+
   if (index === 0) {
     // Navigate to root
-    setCurrentItems(hierarchicalData);
-    setCurrentParentId('');
-    setPath([]);
+    currentItems = hierarchicalData;
+    currentParentId = '';
+    path = [];
   } else {
     const targetId = path[index].id;
     const children = dataManager.getItemChildren(targetId);
-    setCurrentItems(children);
-    setCurrentParentId(targetId);
-    setPath(path.slice(0, index + 1));
+    currentItems = children;
+    currentParentId = targetId;
+    path = path.slice(0, index + 1);
   }
+
+  updateView();
 };
 ```
 
@@ -164,22 +177,25 @@ const handleBreadcrumbClick = (index: number) => {
 Handle search functionality:
 
 ```typescript
-const handleSearch = (query: string) => {
-  setSearchTerm(query);
+const handleSearch = (event: CustomEvent) => {
+  const query = event.detail.searchTerm || '';
+  searchTerm = query;
 
   if (query) {
     const results = dataManager.search(query);
-    setCurrentItems(results);
-    setPath([]);
+    currentItems = results;
+    path = [];
   } else {
     // Reset to current level or root
     if (currentParentId) {
       const children = dataManager.getItemChildren(currentParentId);
-      setCurrentItems(children);
+      currentItems = children;
     } else {
-      setCurrentItems(hierarchicalData);
+      currentItems = hierarchicalData;
     }
   }
+
+  updateView();
 };
 ```
 
@@ -188,49 +204,60 @@ const handleSearch = (query: string) => {
 Render items with proper `hasChildren` flags:
 
 ```typescript
-const renderItems = () => {
-  return currentItems.map((item) => {
-    const hasChildren = dataManager.hasChildren(item.id);
-    return (
-      <AddSelect.Row
-        key={item.id}
-        itemId={item.id}
-        title={item.title || ''}
-        subtitle={item.value}
-        value={item.value || ''}
-        hasChildren={hasChildren}
-      />
-    );
-  });
-};
+currentItems.forEach((item) => {
+  const hasChildren = dataManager.hasChildren(item.id);
+  const isSelected = selectedItems.has(item.id);
+
+  const row = document.createElement('c4p-add-select-row');
+  row.setAttribute('item-id', item.id);
+  row.setAttribute('title', item.title || '');
+  row.setAttribute('subtitle', item.value);
+  row.setAttribute('value', item.value || '');
+  if (hasChildren) {
+    row.setAttribute('has-children', '');
+  }
+  if (isSelected) {
+    row.setAttribute('selected', '');
+  }
+
+  row.addEventListener('c4p-add-select-row-select', handleItemSelect);
+  row.addEventListener('c4p-add-select-row-navigate', handleNavigate);
+
+  list.appendChild(row);
+});
 ```
 
 ### Step 10: Compose the AddSelect Component
 
 Put it all together:
 
-```typescript
-<AddSelect
-  multi
-  selectedItems={selectedItems}
-  onItemSelect={handleItemSelect}
-  onNavigate={handleNavigate}
->
-  <AddSelect.Body
-    itemsLabel="All Items"
-    globalSearchLabel="Search"
-    globalSearchPlaceholder="Search items..."
-    searchResultsTitle="Search results"
-    itemCount={currentItems.length}
-    path={path}
-    onSearch={handleSearch}
-    onBreadcrumbClick={handleBreadcrumbClick}
+```html
+<c4p-add-select>
+  <c4p-add-select-body
+    items-label="All Items"
+    global-search-label="Search"
+    global-search-placeholder="Search items..."
+    search-results-title="Search results"
   >
-    <AddSelect.List>
-      {renderItems()}
-    </AddSelect.List>
-  </AddSelect.Body>
-</AddSelect>
+    <c4p-add-select-list>
+      <!-- Rows added dynamically -->
+    </c4p-add-select-list>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+### Step 11: Set Up Event Listeners
+
+Connect event listeners to the body component:
+
+```typescript
+const body = document.querySelector('c4p-add-select-body');
+body.addEventListener('c4p-add-select-body-search', handleSearch);
+body.addEventListener('c4p-add-select-body-breadcrumb-click', handleBreadcrumbClick);
+
+// Update path and itemCount properties
+body.path = path;
+body.itemCount = currentItems.length;
 ```
 
 ## AddSelectData Utility
@@ -277,12 +304,58 @@ Key features:
   the hierarchy
 - **Breadcrumb Navigation**: Click breadcrumbs to navigate back up
 - **Search**: Type to search across all items in the hierarchy
-- **Multi-select**: Select multiple items at any level
+- **Single-select**: Select one item at a time (use `multi` attribute for multi-select)
 - **State Management**: All state managed through AddSelectData utility
 - **Console Logging**: Selected items logged for debugging
+
+## Events
+
+The AddSelect web components emit the following custom events:
+
+### c4p-add-select-row-select
+
+Fired when a row is selected or deselected.
+
+```typescript
+event.detail = {
+  itemId: string,
+  selected: boolean
+}
+```
+
+### c4p-add-select-row-navigate
+
+Fired when navigating to an item's children.
+
+```typescript
+event.detail = {
+  itemId: string,
+  title: string
+}
+```
+
+### c4p-add-select-body-search
+
+Fired when the search term changes.
+
+```typescript
+event.detail = {
+  searchTerm: string
+}
+```
+
+### c4p-add-select-body-breadcrumb-click
+
+Fired when a breadcrumb is clicked.
+
+```typescript
+event.detail = {
+  index: number
+}
+```
 
 ## Feedback
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelect/AddSelect-interactive.mdx).
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products-web-components/src/components/add-select/add-select/add-select-interactive.mdx).

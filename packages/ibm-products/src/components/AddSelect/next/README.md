@@ -23,7 +23,7 @@ compose the UI using smaller, focused components.
 ### Basic Composable Usage
 
 ```jsx
-import { AddSelect } from '@carbon/ibm-products';
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
 
 function MyComponent() {
   const [selectedItems, setSelectedItems] = useState(new Set());

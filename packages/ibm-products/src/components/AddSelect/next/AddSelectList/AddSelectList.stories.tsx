@@ -40,7 +40,7 @@ export const Default = {
   render: () => {
     return (
       <>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Single-select list</h4>
           <AddSelect>
             <AddSelect.List>
@@ -56,7 +56,7 @@ export const Default = {
             </AddSelect.List>
           </AddSelect>
         </div>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Multi-select list</h4>
           <AddSelect multi>
             <AddSelect.List>

@@ -12,6 +12,7 @@ import './add-select-row';
 import '../add-select/add-select';
 import '../../user-avatar/user-avatar';
 import { prefix } from '../../../globals/settings';
+import styles from '../story-styles.scss?lit';
 
 /**
  * Story 1: Default
@@ -20,12 +21,15 @@ import { prefix } from '../../../globals/settings';
 export const Default = {
   render: () => {
     return html`
-      <div class="add-select-variant-container">
+      <style>
+        ${styles}
+      </style>
+      <div class="add-select-story-variant-container">
         <h4>Single-select (Radio button)</h4>
         <c4p-add-select-row item-id="1" title="Item 1" value="item-1">
         </c4p-add-select-row>
       </div>
-      <div class="add-select-variant-container">
+      <div class="add-select-story-variant-container">
         <h4>Multi-select (Checkbox)</h4>
         <c4p-add-select multi>
           <c4p-add-select-row item-id="2" title="Item 1" value="item-1">
@@ -43,7 +47,10 @@ export const Default = {
 export const WithSubtitle = {
   render: () => {
     return html`
-      <div class="add-select-variant-container">
+      <style>
+        ${styles}
+      </style>
+      <div class="add-select-story-variant-container">
         <h4>Single-select with subtitle</h4>
         <c4p-add-select-row
           item-id="1"
@@ -53,7 +60,7 @@ export const WithSubtitle = {
         >
         </c4p-add-select-row>
       </div>
-      <div class="add-select-variant-container">
+      <div class="add-select-story-variant-container">
         <h4>Multi-select with subtitle</h4>
         <c4p-add-select multi>
           <c4p-add-select-row
@@ -76,7 +83,10 @@ export const WithSubtitle = {
 export const WithChildren = {
   render: () => {
     return html`
-      <div class="add-select-variant-container">
+      <style>
+        ${styles}
+      </style>
+      <div class="add-select-story-variant-container">
         <h4>Single-select with navigation</h4>
         <c4p-add-select-row
           item-id="1"
@@ -87,7 +97,7 @@ export const WithChildren = {
         >
         </c4p-add-select-row>
       </div>
-      <div class="add-select-variant-container">
+      <div class="add-select-story-variant-container">
         <h4>Multi-select with navigation</h4>
         <c4p-add-select multi>
           <c4p-add-select-row
@@ -111,7 +121,10 @@ export const WithChildren = {
 export const WithAvatar = {
   render: () => {
     return html`
-      <div class="add-select-variant-container">
+      <style>
+        ${styles}
+      </style>
+      <div class="add-select-story-variant-container">
         <h4>Single-select with avatar</h4>
         <c4p-add-select-row
           item-id="1"
@@ -126,7 +139,7 @@ export const WithAvatar = {
           ></c4p-user-avatar>
         </c4p-add-select-row>
       </div>
-      <div class="add-select-variant-container">
+      <div class="add-select-story-variant-container">
         <h4>Multi-select with avatar</h4>
         <c4p-add-select multi>
           <c4p-add-select-row
@@ -154,7 +167,10 @@ export const WithAvatar = {
 export const WithMetadata = {
   render: () => {
     return html`
-      <div class="add-select-variant-container">
+      <style>
+        ${styles}
+      </style>
+      <div class="add-select-story-variant-container">
         <h4>Single-select with metadata</h4>
         <c4p-add-select-row
           item-id="1"
@@ -165,7 +181,7 @@ export const WithMetadata = {
           <cds-tag slot="meta" type="blue">New</cds-tag>
         </c4p-add-select-row>
       </div>
-      <div class="add-select-variant-container">
+      <div class="add-select-story-variant-container">
         <h4>Multi-select with metadata</h4>
         <c4p-add-select multi>
           <c4p-add-select-row
@@ -189,7 +205,10 @@ export const WithMetadata = {
 export const DisabledItem = {
   render: () => {
     return html`
-      <div class="add-select-variant-container">
+      <style>
+        ${styles}
+      </style>
+      <div class="add-select-story-variant-container">
         <h4>Single-select disabled</h4>
         <c4p-add-select-row
           item-id="1"
@@ -200,7 +219,7 @@ export const DisabledItem = {
         >
         </c4p-add-select-row>
       </div>
-      <div class="add-select-variant-container">
+      <div class="add-select-story-variant-container">
         <h4>Multi-select disabled</h4>
         <c4p-add-select multi>
           <c4p-add-select-row
@@ -220,6 +239,12 @@ export const DisabledItem = {
 const meta = {
   title: 'Preview/Add and select/AddSelectRow',
   tags: ['autodocs'],
+  decorators: [
+    (story) => html` <div class="add-select-story-container">${story()}</div> `,
+  ],
+  parameters: {
+    styles,
+  },
 };
 
 export default meta;

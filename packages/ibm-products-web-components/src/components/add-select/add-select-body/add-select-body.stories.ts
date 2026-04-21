@@ -13,6 +13,7 @@ import '../add-select/add-select';
 import '../add-select-list/add-select-list';
 import '../add-select-row/add-select-row';
 import { prefix } from '../../../globals/settings';
+import styles from '../story-styles.scss?lit';
 
 const sampleItems = [
   {
@@ -54,6 +55,9 @@ const sampleItems = [
 export const Default = {
   render: () => {
     return html`
+      <style>
+        ${styles}
+      </style>
       <c4p-add-select>
         <c4p-add-select-body
           items-label="All items"
@@ -80,7 +84,10 @@ export const Default = {
 export const SingleSelectionList = {
   render: () => {
     return html`
-      <div class="add-select-variant-container">
+      <style>
+        ${styles}
+      </style>
+      <div class="add-select-story-variant-container">
         <h4>Single select list</h4>
         <c4p-add-select>
           <c4p-add-select-body
@@ -117,7 +124,10 @@ export const SingleSelectionList = {
 export const MultiSelect = {
   render: () => {
     return html`
-      <div class="add-select-variant-container">
+      <style>
+        ${styles}
+      </style>
+      <div class="add-select-story-variant-container">
         <h4>Multi-select list</h4>
         <c4p-add-select multi>
           <c4p-add-select-body
@@ -160,7 +170,10 @@ export const WithBreadcrumbs = {
     ];
 
     return html`
-      <div class="add-select-variant-container">
+      <style>
+        ${styles}
+      </style>
+      <div class="add-select-story-variant-container">
         <h4>Body with breadcrumbs</h4>
         <c4p-add-select>
           <c4p-add-select-body
@@ -194,6 +207,12 @@ export const WithBreadcrumbs = {
 const meta = {
   title: 'Preview/Add and select/AddSelectBody',
   tags: ['autodocs'],
+  decorators: [
+    (story) => html` <div class="add-select-story-container">${story()}</div> `,
+  ],
+  parameters: {
+    styles,
+  },
 };
 
 export default meta;

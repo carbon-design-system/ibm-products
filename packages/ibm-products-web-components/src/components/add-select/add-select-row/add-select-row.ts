@@ -209,7 +209,7 @@ class CDSAddSelectRow extends LitElement {
                 `}
 
             <div class="${blockClass}__content">
-              <slot name="icon"></slot>
+              <slot name="icon" class="${blockClass}__icon"></slot>
               <div class="${blockClass}__text">
                 <div class="${blockClass}__title">${title}</div>
                 ${subtitle &&

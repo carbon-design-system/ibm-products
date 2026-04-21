@@ -9,7 +9,6 @@ import * as AddSelectBreadcrumbsStories from './add-select-breadcrumbs.stories';
 ## Table of Contents
 
 - [Overview](#overview)
-  - [Deep Navigation](#deep-navigation)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -53,33 +52,6 @@ const handleBreadcrumbClick = (event) => {
   // Navigate back to the clicked level
   console.log('Navigated to:', path[index].title);
 };
-```
-
-```html
-<c4p-add-select>
-  <c4p-add-select-breadcrumbs
-    .path=${path}
-    @c4p-add-select-breadcrumbs-click=${handleBreadcrumbClick}
-  >
-  </c4p-add-select-breadcrumbs>
-</c4p-add-select>
-```
-
-#### Deep Navigation
-
-The breadcrumbs component supports deep navigation hierarchies with multiple
-levels.
-
-<Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.DeepNavigation} />
-
-```javascript
-const path = [
-  { id: 'root', title: 'All Items' },
-  { id: 'category-1', title: 'Electronics' },
-  { id: 'subcategory-1', title: 'Computers' },
-  { id: 'subcategory-2', title: 'Laptops' },
-  { id: 'subcategory-3', title: 'Gaming Laptops' },
-];
 ```
 
 ```html

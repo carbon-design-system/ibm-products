@@ -21,11 +21,11 @@ export const Default = {
   render: () => {
     return (
       <>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Single-select (Radio button)</h4>
           <AddSelect.Row itemId="1" title="Item 1" value="item-1" />
         </div>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Multi-select (Checkbox)</h4>
           <AddSelect multi>
             <AddSelect.Row itemId="2" title="Item 1" value="item-1" />
@@ -44,7 +44,7 @@ export const WithSubtitle = {
   render: () => {
     return (
       <>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Single-select with subtitle</h4>
           <AddSelect.Row
             itemId="1"
@@ -53,7 +53,7 @@ export const WithSubtitle = {
             value="item-1"
           />
         </div>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Multi-select with subtitle</h4>
           <AddSelect multi>
             <AddSelect.Row
@@ -77,7 +77,7 @@ export const WithChildren = {
   render: () => {
     return (
       <>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Single-select with navigation</h4>
           <AddSelect.Row
             itemId="1"
@@ -87,7 +87,7 @@ export const WithChildren = {
             hasChildren
           />
         </div>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Multi-select with navigation</h4>
           <AddSelect multi>
             <AddSelect.Row
@@ -112,7 +112,7 @@ export const WithAvatar = {
   render: () => {
     return (
       <>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Single-select with avatar</h4>
           <AddSelect.Row
             itemId="1"
@@ -122,7 +122,7 @@ export const WithAvatar = {
             icon={<UserAvatar name="John Doe" />}
           />
         </div>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Multi-select with avatar</h4>
           <AddSelect multi>
             <AddSelect.Row
@@ -147,7 +147,7 @@ export const WithMetadata = {
   render: () => {
     return (
       <>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Single-select with metadata</h4>
           <AddSelect.Row
             itemId="1"
@@ -157,7 +157,7 @@ export const WithMetadata = {
             meta={<Tag type="blue">New</Tag>}
           />
         </div>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Multi-select with metadata</h4>
           <AddSelect multi>
             <AddSelect.Row
@@ -182,7 +182,7 @@ export const DisabledItem = {
   render: () => {
     return (
       <>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Single-select disabled</h4>
           <AddSelect.Row
             itemId="1"
@@ -192,7 +192,7 @@ export const DisabledItem = {
             disabled
           />
         </div>
-        <div className="add-select-variant-container">
+        <div className="add-select-story-variant-container">
           <h4>Multi-select disabled</h4>
           <AddSelect multi>
             <AddSelect.Row

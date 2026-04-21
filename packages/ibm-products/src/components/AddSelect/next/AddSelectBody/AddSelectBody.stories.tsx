@@ -81,7 +81,7 @@ export const Default = {
 export const SingleSelectionList = {
   render: () => {
     return (
-      <div className="add-select-variant-container">
+      <div className="add-select-story-variant-container">
         <h4>Single select list</h4>
         <AddSelect>
           <AddSelect.Body
@@ -116,7 +116,7 @@ export const SingleSelectionList = {
 export const MultiSelect = {
   render: () => {
     return (
-      <div className="add-select-variant-container">
+      <div className="add-select-story-variant-container">
         <h4>Multi-select list</h4>
         <AddSelect multi>
           <AddSelect.Body
@@ -157,7 +157,7 @@ export const WithBreadcrumbs = {
     ];
 
     return (
-      <div className="add-select-variant-container">
+      <div className="add-select-story-variant-container">
         <h4>Body with breadcrumbs</h4>
         <AddSelect>
           <AddSelect.Body

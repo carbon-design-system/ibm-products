@@ -208,7 +208,7 @@ const InteractiveStory = () => {
   };
 
   return (
-    <div className="add-select-variant-container">
+    <div className="add-select-story-variant-container">
       <h4>Interactive AddSelect with AddSelectData utility</h4>
       <AddSelect
         selectedItems={selectedItems}

@@ -13,6 +13,7 @@ import '../add-select-body/add-select-body';
 import '../add-select-list/add-select-list';
 import '../add-select-row/add-select-row';
 import { prefix } from '../../../globals/settings';
+import styles from '../story-styles.scss?lit';
 
 const items = [
   {
@@ -54,6 +55,9 @@ const items = [
 export const Default = {
   render: () => {
     return html`
+      <style>
+        ${styles}
+      </style>
       <c4p-add-select multi>
         <c4p-add-select-body
           items-label="All items"
@@ -83,6 +87,12 @@ export const Default = {
 const meta = {
   title: 'Preview/Add and select/AddSelect',
   tags: ['autodocs'],
+  decorators: [
+    (story) => html` <div class="add-select-story-container">${story()}</div> `,
+  ],
+  parameters: {
+    styles,
+  },
 };
 
 export default meta;

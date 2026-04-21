@@ -25,7 +25,7 @@ const DefaultStory = () => {
   };
 
   return (
-    <div className="add-select-variant-container">
+    <div className="add-select-story-variant-container">
       <h4>Breadcrumb navigation</h4>
       <AddSelect>
         <AddSelect.Breadcrumbs
@@ -43,41 +43,6 @@ const DefaultStory = () => {
  */
 export const Default = {
   render: () => <DefaultStory />,
-};
-
-const DeepNavigationStory = () => {
-  const [path, setPath] = useState([
-    { id: 'root', title: 'All Items' },
-    { id: 'category-1', title: 'Electronics' },
-    { id: 'subcategory-1', title: 'Computers' },
-    { id: 'subcategory-2', title: 'Laptops' },
-    { id: 'subcategory-3', title: 'Gaming Laptops' },
-  ]);
-
-  const handleBreadcrumbClick = (index: number) => {
-    setPath(path.slice(0, index + 1));
-    console.log('Navigated to:', path[index].title);
-  };
-
-  return (
-    <div className="add-select-variant-container">
-      <h4>Deep navigation path</h4>
-      <AddSelect>
-        <AddSelect.Breadcrumbs
-          path={path}
-          onBreadcrumbClick={handleBreadcrumbClick}
-        />
-      </AddSelect>
-    </div>
-  );
-};
-
-/**
- * Story 2: DeepNavigation
- * Shows breadcrumb with deeper navigation path
- */
-export const DeepNavigation = {
-  render: () => <DeepNavigationStory />,
 };
 
 export default {

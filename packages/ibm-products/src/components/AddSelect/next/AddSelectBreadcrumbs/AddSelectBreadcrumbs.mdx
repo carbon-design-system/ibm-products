@@ -7,7 +7,6 @@ import * as stories from './AddSelectBreadcrumbs.stories';
 ## Table of Contents
 
 - [Overview](#overview)
-  - [Deep Navigation](#deep-navigation)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -50,30 +49,6 @@ const handleBreadcrumbClick = (index) => {
   // Navigate back to the clicked level
   setPath(path.slice(0, index + 1));
 };
-
-<AddSelect>
-  <AddSelect.Breadcrumbs
-    path={path}
-    onBreadcrumbClick={handleBreadcrumbClick}
-  />
-</AddSelect>;
-```
-
-#### Deep Navigation
-
-The breadcrumbs component supports deep navigation hierarchies with multiple
-levels.
-
-<Canvas of={stories.DeepNavigation}></Canvas>
-
-```jsx
-const [path, setPath] = useState([
-  { id: 'root', title: 'All Items' },
-  { id: 'category-1', title: 'Electronics' },
-  { id: 'subcategory-1', title: 'Computers' },
-  { id: 'subcategory-2', title: 'Laptops' },
-  { id: 'subcategory-3', title: 'Gaming Laptops' },
-]);
 
 <AddSelect>
   <AddSelect.Breadcrumbs

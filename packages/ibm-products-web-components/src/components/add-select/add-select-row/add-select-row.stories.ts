@@ -9,144 +9,217 @@
 
 import { html } from 'lit';
 import './add-select-row';
+import '../add-select/add-select';
+import '../../user-avatar/user-avatar';
 import { prefix } from '../../../globals/settings';
 
+/**
+ * Story 1: Default
+ * Shows both single-select (radio) and multi-select (checkbox) variants
+ */
 export const Default = {
-  args: {
-    itemId: '1',
-    title: 'Row title',
-    subtitle: 'Row subtitle description',
-    value: 'row-1',
-    multi: false,
-    selected: false,
-    disabled: false,
-    hasChildren: false,
-    tabIndex: 0,
-  },
-  argTypes: {
-    itemId: {
-      control: 'text',
-      description: 'Unique identifier for the row',
-    },
-    title: {
-      control: 'text',
-      description: 'Row title',
-    },
-    subtitle: {
-      control: 'text',
-      description: 'Row subtitle',
-    },
-    value: {
-      control: 'text',
-      description: 'Row value',
-    },
-    multi: {
-      control: 'boolean',
-      description: 'Whether this is part of a multi-select list',
-    },
-    selected: {
-      control: 'boolean',
-      description: 'Whether the row is selected',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Whether the row is disabled',
-    },
-    hasChildren: {
-      control: 'boolean',
-      description: 'Whether the row has children (for navigation)',
-    },
-    tabIndex: {
-      control: 'number',
-      description: 'Tab index for keyboard navigation',
-    },
-  },
-  render: (args) => {
-    const handleSelect = (event) => {
-      console.log('Row selected:', event.detail);
-    };
-
-    const handleNavigate = (event) => {
-      console.log('Navigate to children:', event.detail);
-    };
-
+  render: () => {
     return html`
-      <c4p-add-select-row
-        item-id=${args.itemId}
-        title=${args.title}
-        subtitle=${args.subtitle}
-        value=${args.value}
-        ?multi=${args.multi}
-        ?selected=${args.selected}
-        ?disabled=${args.disabled}
-        ?has-children=${args.hasChildren}
-        tab-index=${args.tabIndex}
-        @c4p-add-select-row-select=${handleSelect}
-        @c4p-add-select-row-navigate=${handleNavigate}
-      >
-      </c4p-add-select-row>
+      <div class="add-select-variant-container">
+        <h4>Single-select (Radio button)</h4>
+        <c4p-add-select-row item-id="1" title="Item 1" value="item-1">
+        </c4p-add-select-row>
+      </div>
+      <div class="add-select-variant-container">
+        <h4>Multi-select (Checkbox)</h4>
+        <c4p-add-select multi>
+          <c4p-add-select-row item-id="2" title="Item 1" value="item-1">
+          </c4p-add-select-row>
+        </c4p-add-select>
+      </div>
     `;
   },
 };
 
-export const SingleSelect = {
-  args: {
-    ...Default.args,
-    multi: false,
+/**
+ * Story 2: WithSubtitle
+ * Shows subtitle with both single and multi-select variants
+ */
+export const WithSubtitle = {
+  render: () => {
+    return html`
+      <div class="add-select-variant-container">
+        <h4>Single-select with subtitle</h4>
+        <c4p-add-select-row
+          item-id="1"
+          title="Item 1"
+          subtitle="This is a description for item 1"
+          value="item-1"
+        >
+        </c4p-add-select-row>
+      </div>
+      <div class="add-select-variant-container">
+        <h4>Multi-select with subtitle</h4>
+        <c4p-add-select multi>
+          <c4p-add-select-row
+            item-id="2"
+            title="Item 1"
+            subtitle="This is a description for item 1"
+            value="item-1"
+          >
+          </c4p-add-select-row>
+        </c4p-add-select>
+      </div>
+    `;
   },
-  argTypes: Default.argTypes,
-  render: Default.render,
 };
 
-export const MultiSelect = {
-  args: {
-    ...Default.args,
-    multi: true,
-  },
-  argTypes: Default.argTypes,
-  render: Default.render,
-};
-
-export const Selected = {
-  args: {
-    ...Default.args,
-    selected: true,
-  },
-  argTypes: Default.argTypes,
-  render: Default.render,
-};
-
-export const Disabled = {
-  args: {
-    ...Default.args,
-    disabled: true,
-  },
-  argTypes: Default.argTypes,
-  render: Default.render,
-};
-
+/**
+ * Story 3: WithChildren
+ * Shows navigation arrow with subtitle in both single and multi-select variants
+ */
 export const WithChildren = {
-  args: {
-    ...Default.args,
-    hasChildren: true,
-    title: 'Parent item',
-    subtitle: 'This item has children',
+  render: () => {
+    return html`
+      <div class="add-select-variant-container">
+        <h4>Single-select with navigation</h4>
+        <c4p-add-select-row
+          item-id="1"
+          title="Parent Item"
+          subtitle="Navigate to view children"
+          value="parent-1"
+          has-children
+        >
+        </c4p-add-select-row>
+      </div>
+      <div class="add-select-variant-container">
+        <h4>Multi-select with navigation</h4>
+        <c4p-add-select multi>
+          <c4p-add-select-row
+            item-id="2"
+            title="Parent Item"
+            subtitle="Navigate to view children"
+            value="parent-1"
+            has-children
+          >
+          </c4p-add-select-row>
+        </c4p-add-select>
+      </div>
+    `;
   },
-  argTypes: Default.argTypes,
-  render: Default.render,
 };
 
-export const WithoutSubtitle = {
-  args: {
-    ...Default.args,
-    subtitle: '',
+/**
+ * Story 4: WithAvatar
+ * Shows UserAvatar icon with both single and multi-select variants
+ */
+export const WithAvatar = {
+  render: () => {
+    return html`
+      <div class="add-select-variant-container">
+        <h4>Single-select with avatar</h4>
+        <c4p-add-select-row
+          item-id="1"
+          title="John Doe"
+          subtitle="Software Engineer"
+          value="user-1"
+        >
+          <c4p-user-avatar
+            slot="icon"
+            name="John Doe"
+            size="md"
+          ></c4p-user-avatar>
+        </c4p-add-select-row>
+      </div>
+      <div class="add-select-variant-container">
+        <h4>Multi-select with avatar</h4>
+        <c4p-add-select multi>
+          <c4p-add-select-row
+            item-id="2"
+            title="John Doe"
+            subtitle="Software Engineer"
+            value="user-1"
+          >
+            <c4p-user-avatar
+              slot="icon"
+              name="John Doe"
+              size="md"
+            ></c4p-user-avatar>
+          </c4p-add-select-row>
+        </c4p-add-select>
+      </div>
+    `;
   },
-  argTypes: Default.argTypes,
-  render: Default.render,
+};
+
+/**
+ * Story 5: WithMetadata
+ * Shows metadata tag with both single and multi-select variants
+ */
+export const WithMetadata = {
+  render: () => {
+    return html`
+      <div class="add-select-variant-container">
+        <h4>Single-select with metadata</h4>
+        <c4p-add-select-row
+          item-id="1"
+          title="Item 1"
+          subtitle="This item has metadata"
+          value="item-1"
+        >
+          <cds-tag slot="meta" type="blue">New</cds-tag>
+        </c4p-add-select-row>
+      </div>
+      <div class="add-select-variant-container">
+        <h4>Multi-select with metadata</h4>
+        <c4p-add-select multi>
+          <c4p-add-select-row
+            item-id="2"
+            title="Item 1"
+            subtitle="This item has metadata"
+            value="item-1"
+          >
+            <cds-tag slot="meta" type="blue">New</cds-tag>
+          </c4p-add-select-row>
+        </c4p-add-select>
+      </div>
+    `;
+  },
+};
+
+/**
+ * Story 6: DisabledItems
+ * Shows disabled state with subtitle in both single and multi-select variants
+ */
+export const DisabledItem = {
+  render: () => {
+    return html`
+      <div class="add-select-variant-container">
+        <h4>Single-select disabled</h4>
+        <c4p-add-select-row
+          item-id="1"
+          title="Disabled Item"
+          subtitle="This item cannot be selected"
+          value="item-1"
+          disabled
+        >
+        </c4p-add-select-row>
+      </div>
+      <div class="add-select-variant-container">
+        <h4>Multi-select disabled</h4>
+        <c4p-add-select multi>
+          <c4p-add-select-row
+            item-id="2"
+            title="Disabled Item"
+            subtitle="This item cannot be selected"
+            value="item-1"
+            disabled
+          >
+          </c4p-add-select-row>
+        </c4p-add-select>
+      </div>
+    `;
+  },
 };
 
 const meta = {
-  title: 'Components/Add and select/Add select row',
+  title: 'Preview/Add and select/AddSelectRow',
+  tags: ['autodocs'],
 };
 
 export default meta;

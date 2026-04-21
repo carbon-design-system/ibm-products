@@ -4,179 +4,107 @@ import * as AddSelectListStories from './add-select-list.stories';
 
 <Meta of={AddSelectListStories} />
 
-# Add Select List
+# AddSelectList
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 ## Overview
 
-The Add Select List component is a container for add-select items. It provides the structure for displaying a list of selectable items in either single-select or multi-select mode. The list uses a treegrid role for accessibility and keyboard navigation support.
+The Add Select List component manages the list of items and handles keyboard
+navigation. It provides:
 
-## Getting started
+- Single or multi-select support (checkbox or radio button)
+- Keyboard navigation support (arrow keys, home, end)
+- Focus management
+- Accessible grid structure
+
+### Getting started
 
 Here's a quick example to get you started.
 
-### JS (via import)
+#### JS (via import)
 
 ```javascript
 import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ```
 
-### Usage Example
+#### Usage Example
 
 <Canvas className="page-header--docs-demo" of={AddSelectListStories.Default} />
 
-### HTML
-
 ```html
-<c4p-add-select-list>
-  <c4p-add-select-row
-    item-id="1"
-    title="Item 1"
-    subtitle="Description for item 1"
-    value="item-1"
-    tab-index="0"
-  >
-  </c4p-add-select-row>
-  <c4p-add-select-row
-    item-id="2"
-    title="Item 2"
-    subtitle="Description for item 2"
-    value="item-2"
-    tab-index="0"
-  >
-  </c4p-add-select-row>
-</c4p-add-select-list>
+<!-- Single-select list -->
+<c4p-add-select>
+  <c4p-add-select-list>
+    <c4p-add-select-row
+      item-id="1"
+      title="Item 1"
+      subtitle="Description for item 1"
+      value="item-1"
+    >
+    </c4p-add-select-row>
+    <c4p-add-select-row
+      item-id="2"
+      title="Item 2"
+      subtitle="Description for item 2"
+      value="item-2"
+    >
+    </c4p-add-select-row>
+  </c4p-add-select-list>
+</c4p-add-select>
+
+<!-- Multi-select list -->
+<c4p-add-select multi>
+  <c4p-add-select-list>
+    <c4p-add-select-row
+      item-id="1"
+      title="Item 1"
+      subtitle="Description for item 1"
+      value="item-1"
+    >
+    </c4p-add-select-row>
+    <c4p-add-select-row
+      item-id="2"
+      title="Item 2"
+      subtitle="Description for item 2"
+      value="item-2"
+    >
+    </c4p-add-select-row>
+  </c4p-add-select-list>
+</c4p-add-select>
 ```
 
-## Single Select Example
+### Keyboard Navigation
 
-<Canvas className="page-header--docs-demo" of={AddSelectListStories.SingleSelect} />
+The AddSelectList component supports full keyboard navigation:
 
-### HTML
+- **Arrow Down**: Move focus to next item
+- **Arrow Up**: Move focus to previous item
+- **Arrow Right**: Navigate to children (if item has children)
+- **Enter/Space**: Select/deselect the focused item
+- **Ctrl+Home**: Move focus to first item
+- **Ctrl+End**: Move focus to last item
 
-```html
-<c4p-add-select-list>
-  <!-- Items with radio buttons -->
-  <c4p-add-select-row
-    item-id="1"
-    title="Item 1"
-    value="item-1"
-    tab-index="0"
-  >
-  </c4p-add-select-row>
-</c4p-add-select-list>
-```
+### Accessibility
 
-## Multi Select Example
+The component follows WCAG 2.1 AA guidelines:
 
-<Canvas className="page-header--docs-demo" of={AddSelectListStories.MultiSelect} />
+- Uses proper ARIA roles (`grid`, `row`, `gridcell`)
+- Supports keyboard navigation
+- Provides proper focus management
+- Uses semantic HTML elements
+- Includes proper labels and descriptions
 
-### HTML
-
-```html
-<c4p-add-select-list multi>
-  <!-- Items with checkboxes -->
-  <c4p-add-select-row
-    multi
-    item-id="1"
-    title="Item 1"
-    value="item-1"
-    tab-index="0"
-  >
-  </c4p-add-select-row>
-</c4p-add-select-list>
-```
-
-## With Selected Items Example
-
-<Canvas className="page-header--docs-demo" of={AddSelectListStories.WithSelectedItems} />
-
-### HTML
-
-```html
-<c4p-add-select-list multi>
-  <c4p-add-select-row
-    multi
-    item-id="1"
-    title="Item 1"
-    value="item-1"
-    selected
-    tab-index="0"
-  >
-  </c4p-add-select-row>
-  <c4p-add-select-row
-    multi
-    item-id="2"
-    title="Item 2"
-    value="item-2"
-    selected
-    tab-index="0"
-  >
-  </c4p-add-select-row>
-</c4p-add-select-list>
-```
-
-## With Hierarchical Items Example
-
-<Canvas className="page-header--docs-demo" of={AddSelectListStories.WithHierarchicalItems} />
-
-### HTML
-
-```html
-<c4p-add-select-list>
-  <c4p-add-select-row
-    item-id="1"
-    title="Parent 1"
-    subtitle="Has children"
-    value="parent-1"
-    has-children
-    tab-index="0"
-  >
-  </c4p-add-select-row>
-  <c4p-add-select-row
-    item-id="2"
-    title="Parent 2"
-    subtitle="Has children"
-    value="parent-2"
-    has-children
-    tab-index="0"
-  >
-  </c4p-add-select-row>
-  <c4p-add-select-row
-    item-id="3"
-    title="Item 3"
-    subtitle="No children"
-    value="item-3"
-    tab-index="0"
-  >
-  </c4p-add-select-row>
-</c4p-add-select-list>
-```
-
-## Large List Example
-
-<Canvas className="page-header--docs-demo" of={AddSelectListStories.LargeList} />
-
-### HTML
-
-```html
-<c4p-add-select-list>
-  <!-- 20+ items for performance testing -->
-  <c4p-add-select-row
-    item-id="1"
-    title="Item 1"
-    subtitle="Description for item 1"
-    value="item-1"
-    tab-index="0"
-  >
-  </c4p-add-select-row>
-  <!-- ... more items ... -->
-</c4p-add-select-list>
-```
-
-## Accessibility
-
-The list uses the `treegrid` role for proper accessibility support. Each item should have a `tab-index` attribute for keyboard navigation. The first item in the list should have `tab-index="0"`, while subsequent items should have `tab-index="-1"` to support roving tabindex pattern.
-
-## `<c4p-add-select-list>` attributes, properties, events and slots.
+## Component API
 
 <ArgTypes of="c4p-add-select-list" />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products-web-components/src/components/add-select/add-select-list/add-select-list.mdx).

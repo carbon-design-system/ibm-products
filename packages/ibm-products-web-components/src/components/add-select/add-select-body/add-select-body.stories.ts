@@ -9,6 +9,7 @@
 
 import { html } from 'lit';
 import './add-select-body';
+import '../add-select/add-select';
 import '../add-select-list/add-select-list';
 import '../add-select-row/add-select-row';
 import { prefix } from '../../../globals/settings';
@@ -46,129 +47,153 @@ const sampleItems = [
   },
 ];
 
+/**
+ * Story 1: Default
+ * Shows body component with placeholder for list children
+ */
 export const Default = {
-  args: {
-    multi: false,
-    itemsLabel: 'All items',
-    globalSearchLabel: 'Search',
-    globalSearchPlaceholder: 'Search items',
-    searchResultsTitle: 'Search results',
-    itemCount: 5,
-  },
-  argTypes: {
-    multi: {
-      control: 'boolean',
-      description: 'Whether this is a multi-select',
-    },
-    itemsLabel: {
-      control: 'text',
-      description: 'Label for items section',
-    },
-    globalSearchLabel: {
-      control: 'text',
-      description: 'Global search label',
-    },
-    globalSearchPlaceholder: {
-      control: 'text',
-      description: 'Global search placeholder',
-    },
-    searchResultsTitle: {
-      control: 'text',
-      description: 'Search results title',
-    },
-    itemCount: {
-      control: 'number',
-      description: 'Item count for display',
-    },
-  },
-  render: (args) => {
+  render: () => {
     return html`
-      <c4p-add-select-body
-        ?multi=${args.multi}
-        items-label=${args.itemsLabel}
-        global-search-label=${args.globalSearchLabel}
-        global-search-placeholder=${args.globalSearchPlaceholder}
-        search-results-title=${args.searchResultsTitle}
-        .itemCount=${args.itemCount}
-      >
-        <c4p-add-select-list ?multi=${args.multi}>
-          ${sampleItems.map(
-            (item) => html`
-              <c4p-add-select-row
-                ?multi=${args.multi}
-                item-id=${item.id}
-                title=${item.title}
-                subtitle=${item.subtitle}
-                value=${item.value}
-                tab-index="0"
-              >
-              </c4p-add-select-row>
-            `
-          )}
-        </c4p-add-select-list>
-      </c4p-add-select-body>
+      <c4p-add-select>
+        <c4p-add-select-body
+          items-label="All items"
+          global-search-label="Search"
+          global-search-placeholder="Search items"
+          search-results-title="Search results"
+          .itemCount=${0}
+        >
+          <div
+            style="padding: 1rem; text-align: center; color: var(--cds-text-secondary);"
+          >
+            List children go here
+          </div>
+        </c4p-add-select-body>
+      </c4p-add-select>
     `;
   },
 };
 
-export const MultiSelect = {
-  args: {
-    ...Default.args,
-    multi: true,
+/**
+ * Story 2: SingleSelectionList
+ * Shows single-select body with search and item list
+ */
+export const SingleSelectionList = {
+  render: () => {
+    return html`
+      <div class="add-select-variant-container">
+        <h4>Single select list</h4>
+        <c4p-add-select>
+          <c4p-add-select-body
+            items-label="All items"
+            global-search-label="Search"
+            global-search-placeholder="Search items"
+            search-results-title="Search results"
+            .itemCount=${sampleItems.length}
+          >
+            <c4p-add-select-list>
+              ${sampleItems.map(
+                (item) => html`
+                  <c4p-add-select-row
+                    item-id=${item.id}
+                    title=${item.title}
+                    subtitle=${item.subtitle}
+                    value=${item.value}
+                  >
+                  </c4p-add-select-row>
+                `
+              )}
+            </c4p-add-select-list>
+          </c4p-add-select-body>
+        </c4p-add-select>
+      </div>
+    `;
   },
-  argTypes: Default.argTypes,
-  render: Default.render,
 };
 
+/**
+ * Story 3: MultiSelect
+ * Shows multi-select body with search and item list
+ */
+export const MultiSelect = {
+  render: () => {
+    return html`
+      <div class="add-select-variant-container">
+        <h4>Multi-select list</h4>
+        <c4p-add-select multi>
+          <c4p-add-select-body
+            items-label="All items"
+            global-search-label="Search"
+            global-search-placeholder="Search items"
+            search-results-title="Search results"
+            .itemCount=${sampleItems.length}
+          >
+            <c4p-add-select-list>
+              ${sampleItems.map(
+                (item) => html`
+                  <c4p-add-select-row
+                    item-id=${item.id}
+                    title=${item.title}
+                    subtitle=${item.subtitle}
+                    value=${item.value}
+                  >
+                  </c4p-add-select-row>
+                `
+              )}
+            </c4p-add-select-list>
+          </c4p-add-select-body>
+        </c4p-add-select>
+      </div>
+    `;
+  },
+};
+
+/**
+ * Story 3: WithBreadcrumbs
+ * Shows body with breadcrumb navigation
+ */
 export const WithBreadcrumbs = {
-  args: {
-    ...Default.args,
-    path: [
+  render: () => {
+    const path = [
       { id: 'root', title: 'Root' },
       { id: 'category', title: 'Category' },
       { id: 'subcategory', title: 'Subcategory' },
-    ],
-  },
-  argTypes: {
-    ...Default.argTypes,
-    path: {
-      control: 'object',
-      description: 'Navigation path for breadcrumbs',
-    },
-  },
-  render: (args) => {
+    ];
+
     return html`
-      <c4p-add-select-body
-        ?multi=${args.multi}
-        items-label=${args.itemsLabel}
-        global-search-label=${args.globalSearchLabel}
-        global-search-placeholder=${args.globalSearchPlaceholder}
-        search-results-title=${args.searchResultsTitle}
-        .itemCount=${args.itemCount}
-        .path=${args.path}
-      >
-        <c4p-add-select-list ?multi=${args.multi}>
-          ${sampleItems.map(
-            (item) => html`
-              <c4p-add-select-row
-                ?multi=${args.multi}
-                item-id=${item.id}
-                title=${item.title}
-                subtitle=${item.subtitle}
-                value=${item.value}
-                tab-index="0"
-              >
-              </c4p-add-select-row>
-            `
-          )}
-        </c4p-add-select-list>
-      </c4p-add-select-body>
+      <div class="add-select-variant-container">
+        <h4>Body with breadcrumbs</h4>
+        <c4p-add-select>
+          <c4p-add-select-body
+            items-label="All items"
+            global-search-label="Search"
+            global-search-placeholder="Search items"
+            search-results-title="Search results"
+            .itemCount=${sampleItems.length}
+            .path=${path}
+          >
+            <c4p-add-select-list>
+              ${sampleItems.map(
+                (item) => html`
+                  <c4p-add-select-row
+                    item-id=${item.id}
+                    title=${item.title}
+                    subtitle=${item.subtitle}
+                    value=${item.value}
+                  >
+                  </c4p-add-select-row>
+                `
+              )}
+            </c4p-add-select-list>
+          </c4p-add-select-body>
+        </c4p-add-select>
+      </div>
     `;
   },
 };
 
 const meta = {
-  title: 'Components/Add and select/Add select body',
+  title: 'Preview/Add and select/AddSelectBody',
+  tags: ['autodocs'],
 };
 
 export default meta;

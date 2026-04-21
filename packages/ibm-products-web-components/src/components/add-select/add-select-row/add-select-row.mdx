@@ -1,203 +1,147 @@
 import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
-import * as AddSelectItemStories from './add-select-row.stories';
+import * as AddSelectRowStories from './add-select-row.stories';
 
-<Meta of={AddSelectItemStories} />
+<Meta of={AddSelectRowStories} />
 
-# Add Select Row
+# AddSelectRow
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [With Subtitle](#with-subtitle)
+  - [With Children](#with-children)
+  - [With Avatar](#with-avatar)
+  - [With Metadata](#with-metadata)
+  - [Disabled Item](#disabled-item)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 ## Overview
 
-The Add Select Row component represents a single selectable item in the add-select pattern. It supports:
-- Single-select mode (radio button)
-- Multi-select mode (checkbox)
-- Hierarchical navigation (items with children)
-- Disabled state
-- Selected state
-- Keyboard navigation
+The Add Select Row component represents an individual row in the list. It
+provides:
 
-## Getting started
+- Single or multi-select support (checkbox or radio button)
+- Optional subtitle for additional context
+- Optional metadata slot for tags or badges
+- Hierarchical navigation support with chevron indicator
+- Disabled state
+- Keyboard accessible
+
+### Getting started
 
 Here's a quick example to get you started.
 
-### JS (via import)
+#### JS (via import)
 
 ```javascript
 import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ```
 
-### Usage Example
+#### Usage Example
 
-<Canvas className="page-header--docs-demo" of={AddSelectItemStories.Default} />
-
-### HTML
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.Default} />
 
 ```html
 <c4p-add-select-row
   item-id="1"
-  title="Row title"
-  subtitle="Row subtitle description"
+  title="Item 1"
   value="item-1"
-  tab-index="0"
-  @c4p-add-select-row-select=${handleSelect}
 >
 </c4p-add-select-row>
 ```
 
-## Single Select Example
+### With Subtitle
 
-<Canvas className="page-header--docs-demo" of={AddSelectItemStories.SingleSelect} />
+Add descriptive text below the title for additional context.
 
-### HTML
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.WithSubtitle} />
 
 ```html
 <c4p-add-select-row
   item-id="1"
-  title="Row title"
-  subtitle="Row subtitle"
+  title="Item 1"
+  subtitle="This is a description for item 1"
   value="item-1"
-  tab-index="0"
 >
 </c4p-add-select-row>
 ```
 
-## Multi Select Example
+### With Children
 
-<Canvas className="page-header--docs-demo" of={AddSelectItemStories.MultiSelect} />
+Items can have children and show a navigation indicator.
 
-### HTML
-
-```html
-<c4p-add-select-row
-  multi
-  item-id="1"
-  title="Row title"
-  subtitle="Row subtitle"
-  value="item-1"
-  tab-index="0"
->
-</c4p-add-select-row>
-```
-
-## Selected State Example
-
-<Canvas className="page-header--docs-demo" of={AddSelectItemStories.Selected} />
-
-### HTML
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.WithChildren} />
 
 ```html
 <c4p-add-select-row
   item-id="1"
-  title="Row title"
-  subtitle="Row subtitle"
-  value="item-1"
-  selected
-  tab-index="0"
->
-</c4p-add-select-row>
-```
-
-## Disabled State Example
-
-<Canvas className="page-header--docs-demo" of={AddSelectItemStories.Disabled} />
-
-### HTML
-
-```html
-<c4p-add-select-row
-  item-id="1"
-  title="Row title"
-  subtitle="Row subtitle"
-  value="item-1"
-  disabled
-  tab-index="0"
->
-</c4p-add-select-row>
-```
-
-## With Children Example
-
-<Canvas className="page-header--docs-demo" of={AddSelectItemStories.WithChildren} />
-
-### HTML
-
-```html
-<c4p-add-select-row
-  item-id="1"
-  title="Parent item"
-  subtitle="This item has children"
+  title="Parent Item"
+  subtitle="Navigate to view children"
   value="parent-1"
   has-children
-  tab-index="0"
-  @c4p-add-select-row-navigate=${handleNavigate}
 >
 </c4p-add-select-row>
 ```
 
-## Without Subtitle Example
+### With Avatar
 
-<Canvas className="page-header--docs-demo" of={AddSelectItemStories.WithoutSubtitle} />
+Display icons like UserAvatar alongside the content.
 
-### HTML
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.WithAvatar} />
 
 ```html
 <c4p-add-select-row
   item-id="1"
-  title="Row title"
+  title="John Doe"
+  subtitle="Software Engineer"
+  value="user-1"
+>
+  <c4p-user-avatar slot="icon" name="John Doe"></c4p-user-avatar>
+</c4p-add-select-row>
+```
+
+### With Metadata
+
+Add metadata such as tags or badges to provide additional context.
+
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.WithMetadata} />
+
+```html
+<c4p-add-select-row
+  item-id="1"
+  title="Item 1"
+  subtitle="This item has metadata"
   value="item-1"
-  tab-index="0"
+>
+  <cds-tag slot="meta" type="blue">New</cds-tag>
+</c4p-add-select-row>
+```
+
+### Disabled Item
+
+Items can be disabled to prevent interaction.
+
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.DisabledItem} />
+
+```html
+<c4p-add-select-row
+  item-id="1"
+  title="Disabled Item"
+  subtitle="This item cannot be selected"
+  value="item-1"
+  disabled
 >
 </c4p-add-select-row>
 ```
 
-## Events
-
-### `c4p-add-select-row-select`
-Fired when the row is selected or deselected.
-
-**Detail:**
-```javascript
-{
-  itemId: string,
-  selected: boolean,
-  value: string
-}
-```
-
-**Example:**
-```javascript
-const handleSelect = (event) => {
-  const { itemId, selected, value } = event.detail;
-  console.log(`Item ${itemId} is now ${selected ? 'selected' : 'deselected'}`);
-};
-```
-
-### `c4p-add-select-row-navigate`
-Fired when navigating to children (only for items with `has-children` attribute).
-
-**Detail:**
-```javascript
-{
-  itemId: string,
-  title: string,
-  parentId: string
-}
-```
-
-**Example:**
-```javascript
-const handleNavigate = (event) => {
-  const { itemId, title } = event.detail;
-  console.log(`Navigating to children of ${title}`);
-  // Load and display children items
-};
-```
-
-## Keyboard Navigation
-
-- **Enter/Space**: Select/deselect the row
-- **Arrow Right**: Navigate to children (if `has-children` is true)
-
-## `<c4p-add-select-row>` attributes, properties, events and slots.
+## Component API
 
 <ArgTypes of="c4p-add-select-row" />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products-web-components/src/components/add-select/add-select-row/add-select-row.mdx).

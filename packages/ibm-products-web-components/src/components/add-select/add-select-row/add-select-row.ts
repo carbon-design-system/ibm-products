@@ -186,10 +186,12 @@ class CDSAddSelectRow extends LitElement {
             ${this._multi
               ? html`
                   <cds-checkbox
+                    class="${blockClass}__checkbox"
                     ?checked=${selected}
                     ?disabled=${disabled}
                     @cds-checkbox-changed=${handleSelect}
                     label-text=${title}
+                    ?hide-label=${true}
                     tabindex="-1"
                   >
                   </cds-checkbox>

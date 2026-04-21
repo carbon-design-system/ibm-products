@@ -4,112 +4,100 @@ import * as AddSelectBreadcrumbsStories from './add-select-breadcrumbs.stories';
 
 <Meta of={AddSelectBreadcrumbsStories} />
 
-# Add Select Breadcrumbs
+# AddSelectBreadcrumbs
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Deep Navigation](#deep-navigation)
+- [Component API](#component-api)
+- [Feedback](#feedback)
 
 ## Overview
 
-The Add Select Breadcrumbs component displays the navigation path in hierarchical data structures. It shows the current location within the data hierarchy and allows users to navigate back to parent levels by clicking on breadcrumb items.
+The Add Select Breadcrumbs component provides hierarchical navigation within the
+Add Select interface. It displays the current navigation path and allows users
+to navigate back to previous levels by clicking on breadcrumb items.
 
-## Getting started
+### Features
+
+- Displays current navigation path
+- Clickable breadcrumb items for navigation
+- Automatically highlights current page
+- Supports deep navigation hierarchies
+- Integrates with Carbon Breadcrumb component
+
+### Getting started
 
 Here's a quick example to get you started.
 
-### JS (via import)
+#### JS (via import)
 
 ```javascript
 import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
 ```
 
-### Usage Example
+#### Usage Example
 
 <Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.Default} />
 
-### HTML
-
 ```javascript
 const path = [
-  { id: 'root', title: 'Root' },
-  { id: 'category', title: 'Category' },
-  { id: 'subcategory', title: 'Subcategory' }
+  { id: 'root', title: 'All Items' },
+  { id: 'category-1', title: 'Category 1' },
+  { id: 'subcategory-1', title: 'Subcategory 1' },
 ];
-```
 
-```html
-<c4p-add-select-breadcrumbs
-  .path=${path}
-  @c4p-add-select-breadcrumbs-click=${handleBreadcrumbClick}
->
-</c4p-add-select-breadcrumbs>
-```
-
-## Single Level Example
-
-<Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.SingleLevel} />
-
-### HTML
-
-```javascript
-const path = [{ id: 'root', title: 'Root' }];
-```
-
-```html
-<c4p-add-select-breadcrumbs .path=${path}>
-</c4p-add-select-breadcrumbs>
-```
-
-## Multi Level Example
-
-<Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.MultiLevel} />
-
-### HTML
-
-```javascript
-const path = [
-  { id: 'root', title: 'Root' },
-  { id: 'level1', title: 'Level 1' },
-  { id: 'level2', title: 'Level 2' },
-  { id: 'level3', title: 'Level 3' },
-  { id: 'level4', title: 'Level 4' }
-];
-```
-
-```html
-<c4p-add-select-breadcrumbs .path=${path}>
-</c4p-add-select-breadcrumbs>
-```
-
-## Multi-select Mode Example
-
-<Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.MultiSelectMode} />
-
-### HTML
-
-```html
-<c4p-add-select-breadcrumbs multi .path=${path}>
-</c4p-add-select-breadcrumbs>
-```
-
-## Events
-
-### `c4p-add-select-breadcrumbs-click`
-Fired when a breadcrumb item is clicked.
-
-**Detail:**
-```javascript
-{
-  index: number  // The index of the clicked breadcrumb in the path array
-}
-```
-
-**Example:**
-```javascript
 const handleBreadcrumbClick = (event) => {
   const { index } = event.detail;
-  console.log(`Navigating to level ${index}`);
-  // Update your path state to navigate to the clicked level
+  // Navigate back to the clicked level
+  console.log('Navigated to:', path[index].title);
 };
 ```
 
-## `<c4p-add-select-breadcrumbs>` attributes, properties, events and slots.
+```html
+<c4p-add-select>
+  <c4p-add-select-breadcrumbs
+    .path=${path}
+    @c4p-add-select-breadcrumbs-click=${handleBreadcrumbClick}
+  >
+  </c4p-add-select-breadcrumbs>
+</c4p-add-select>
+```
+
+#### Deep Navigation
+
+The breadcrumbs component supports deep navigation hierarchies with multiple
+levels.
+
+<Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.DeepNavigation} />
+
+```javascript
+const path = [
+  { id: 'root', title: 'All Items' },
+  { id: 'category-1', title: 'Electronics' },
+  { id: 'subcategory-1', title: 'Computers' },
+  { id: 'subcategory-2', title: 'Laptops' },
+  { id: 'subcategory-3', title: 'Gaming Laptops' },
+];
+```
+
+```html
+<c4p-add-select>
+  <c4p-add-select-breadcrumbs
+    .path=${path}
+    @c4p-add-select-breadcrumbs-click=${handleBreadcrumbClick}
+  >
+  </c4p-add-select-breadcrumbs>
+</c4p-add-select>
+```
+
+## Component API
 
 <ArgTypes of="c4p-add-select-breadcrumbs" />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products-web-components/src/components/add-select/add-select-breadcrumbs/add-select-breadcrumbs.mdx).

@@ -9,6 +9,7 @@
 
 import { html } from 'lit';
 import './add-select-list';
+import '../add-select/add-select';
 import '../add-select-row/add-select-row';
 import { prefix } from '../../../globals/settings';
 
@@ -31,183 +32,58 @@ const sampleItems = [
     subtitle: 'Description for item 3',
     value: 'item-3',
   },
-  {
-    id: '4',
-    title: 'Item 4',
-    subtitle: 'Description for item 4',
-    value: 'item-4',
-  },
-  {
-    id: '5',
-    title: 'Item 5',
-    subtitle: 'Description for item 5',
-    value: 'item-5',
-  },
 ];
 
+/**
+ * Story 1: Default
+ * Shows both single-select (radio) and multi-select (checkbox) lists
+ */
 export const Default = {
-  args: {
-    multi: false,
-  },
-  argTypes: {
-    multi: {
-      control: 'boolean',
-      description: 'Whether this is a multi-select list',
-    },
-  },
-  render: (args) => {
+  render: () => {
     return html`
-      <c4p-add-select-list ?multi=${args.multi}>
-        ${sampleItems.map(
-          (item) => html`
-            <c4p-add-select-row
-              ?multi=${args.multi}
-              item-id=${item.id}
-              title=${item.title}
-              subtitle=${item.subtitle}
-              value=${item.value}
-            >
-            </c4p-add-select-row>
-          `
-        )}
-      </c4p-add-select-list>
-    `;
-  },
-};
-
-export const SingleSelect = {
-  args: {
-    multi: false,
-  },
-  argTypes: Default.argTypes,
-  render: Default.render,
-};
-
-export const MultiSelect = {
-  args: {
-    multi: true,
-  },
-  argTypes: Default.argTypes,
-  render: Default.render,
-};
-
-export const WithSelectedItems = {
-  args: {
-    multi: true,
-  },
-  argTypes: Default.argTypes,
-  render: (args) => {
-    return html`
-      <c4p-add-select-list ?multi=${args.multi}>
-        ${sampleItems.map(
-          (item, index) => html`
-            <c4p-add-select-row
-              ?multi=${args.multi}
-              item-id=${item.id}
-              title=${item.title}
-              subtitle=${item.subtitle}
-              value=${item.value}
-              ?selected=${index < 2}
-            >
-            </c4p-add-select-row>
-          `
-        )}
-      </c4p-add-select-list>
-    `;
-  },
-};
-
-export const WithHierarchicalItems = {
-  args: {
-    multi: false,
-  },
-  argTypes: Default.argTypes,
-  render: (args) => {
-    const hierarchicalItems = [
-      {
-        id: '1',
-        title: 'Parent 1',
-        subtitle: 'Has children',
-        value: 'parent-1',
-        hasChildren: true,
-      },
-      {
-        id: '2',
-        title: 'Parent 2',
-        subtitle: 'Has children',
-        value: 'parent-2',
-        hasChildren: true,
-      },
-      {
-        id: '3',
-        title: 'Item 3',
-        subtitle: 'No children',
-        value: 'item-3',
-        hasChildren: false,
-      },
-      {
-        id: '4',
-        title: 'Item 4',
-        subtitle: 'No children',
-        value: 'item-4',
-        hasChildren: false,
-      },
-    ];
-
-    return html`
-      <c4p-add-select-list ?multi=${args.multi}>
-        ${hierarchicalItems.map(
-          (item) => html`
-            <c4p-add-select-row
-              ?multi=${args.multi}
-              item-id=${item.id}
-              title=${item.title}
-              subtitle=${item.subtitle}
-              value=${item.value}
-              ?has-children=${item.hasChildren}
-            >
-            </c4p-add-select-row>
-          `
-        )}
-      </c4p-add-select-list>
-    `;
-  },
-};
-
-export const LargeList = {
-  args: {
-    multi: false,
-  },
-  argTypes: Default.argTypes,
-  render: (args) => {
-    const largeItemList = Array.from({ length: 20 }, (_, i) => ({
-      id: `${i + 1}`,
-      title: `Item ${i + 1}`,
-      subtitle: `Description for item ${i + 1}`,
-      value: `item-${i + 1}`,
-    }));
-
-    return html`
-      <c4p-add-select-list ?multi=${args.multi}>
-        ${largeItemList.map(
-          (item) => html`
-            <c4p-add-select-row
-              ?multi=${args.multi}
-              item-id=${item.id}
-              title=${item.title}
-              subtitle=${item.subtitle}
-              value=${item.value}
-            >
-            </c4p-add-select-row>
-          `
-        )}
-      </c4p-add-select-list>
+      <div class="add-select-variant-container">
+        <h4>Single-select list</h4>
+        <c4p-add-select>
+          <c4p-add-select-list>
+            ${sampleItems.map(
+              (item) => html`
+                <c4p-add-select-row
+                  item-id=${item.id}
+                  title=${item.title}
+                  subtitle=${item.subtitle}
+                  value=${item.value}
+                >
+                </c4p-add-select-row>
+              `
+            )}
+          </c4p-add-select-list>
+        </c4p-add-select>
+      </div>
+      <div class="add-select-variant-container">
+        <h4>Multi-select list</h4>
+        <c4p-add-select multi>
+          <c4p-add-select-list>
+            ${sampleItems.map(
+              (item) => html`
+                <c4p-add-select-row
+                  item-id=${item.id}
+                  title=${item.title}
+                  subtitle=${item.subtitle}
+                  value=${item.value}
+                >
+                </c4p-add-select-row>
+              `
+            )}
+          </c4p-add-select-list>
+        </c4p-add-select>
+      </div>
     `;
   },
 };
 
 const meta = {
-  title: 'Components/Add and select/Add select list',
+  title: 'Preview/Add and select/AddSelectList',
+  tags: ['autodocs'],
 };
 
 export default meta;

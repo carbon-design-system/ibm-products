@@ -6,8 +6,30 @@
  */
 
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
 
 // Story-specific styles for AddSelect pattern
+.example-container {
+  padding: $spacing-05;
+  max-inline-size: 800px;
+
+  h3 {
+    @include type-style('heading-03');
+
+    margin-block-end: $spacing-03;
+  }
+
+  p {
+    @include type-style('body-01');
+
+    margin-block-end: $spacing-05;
+  }
+
+  .launch-button {
+    margin-block-start: $spacing-03;
+  }
+}
+
 .single-add-select-pattern {
   &__no-results {
     padding: $spacing-07;

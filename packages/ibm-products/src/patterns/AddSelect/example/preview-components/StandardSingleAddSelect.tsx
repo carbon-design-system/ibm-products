@@ -128,7 +128,7 @@ export const StandardSingleAddSelect = () => {
   };
 
   return (
-    <div>
+    <div className="example-container">
       <h3>Single Add Select Pattern Example</h3>
       <p>Click the button below to open the single add select dialog.</p>
 

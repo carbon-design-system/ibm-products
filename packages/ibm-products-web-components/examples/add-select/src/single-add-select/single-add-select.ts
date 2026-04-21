@@ -19,12 +19,12 @@ import '../../../../src/components/add-select/add-select-body/add-select-body';
 import '../../../../src/components/add-select/add-select-list/add-select-list';
 import '../../../../src/components/add-select/add-select-row/add-select-row';
 
-import { AddSelectData, HierarchicalItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 
 import styles from './single-add-select.scss?lit';
 
 // Sample data for the example with hierarchy
-const sampleItems: HierarchicalItem[] = [
+const sampleItems: AddSelectItem[] = [
             {
               id: '1',
               title: 'Kansas',
@@ -99,13 +99,13 @@ export class AddSelectExample extends LitElement {
   private _searchTerm: string = '';
 
   @state()
-  private _filteredItems: HierarchicalItem[] = [];
+  private _filteredItems: AddSelectItem[] = [];
 
   @state()
-  private _currentItems: HierarchicalItem[] = [];
+  private _currentItems: AddSelectItem[] = [];
 
   @state()
-  private _navigationStack: Array<{items: HierarchicalItem[], parentId: string, parentTitle: string}> = [];
+  private _navigationStack: Array<{items: AddSelectItem[], parentId: string, parentTitle: string}> = [];
 
   constructor() {
     super();

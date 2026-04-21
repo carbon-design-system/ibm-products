@@ -15,10 +15,7 @@ frameworks.
 ## Installation
 
 ```typescript
-import {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 ```
 
 ## Data Structure
@@ -26,14 +23,14 @@ import {
 The utility works with hierarchical items that follow this interface:
 
 ```typescript
-interface HierarchicalItem {
+interface AddSelectItem {
   id: string;
   title?: string;
   value?: string;
   selected?: boolean;
   status?: 'checked' | 'unchecked' | 'intermediate';
   children?: {
-    entries: HierarchicalItem[];
+    entries: AddSelectItem[];
   };
   [key: string]: any; // Allow additional properties
 }
@@ -43,7 +40,7 @@ interface HierarchicalItem {
 
 ### Core Methods
 
-#### `setItems(items: HierarchicalItem[]): void`
+#### `setItems(items: AddSelectItem[]): void`
 
 Initialize or replace the hierarchical data.
 
@@ -55,7 +52,7 @@ dataManager.setItems([
 ]);
 ```
 
-#### `getItems(): HierarchicalItem[]`
+#### `getItems(): AddSelectItem[]`
 
 Get the full list of items.
 
@@ -63,7 +60,7 @@ Get the full list of items.
 const allItems = dataManager.getItems();
 ```
 
-#### `getItem(id: string): HierarchicalItem | undefined`
+#### `getItem(id: string): AddSelectItem | undefined`
 
 Retrieve a single item by its id.
 
@@ -71,7 +68,7 @@ Retrieve a single item by its id.
 const item = dataManager.getItem('1');
 ```
 
-#### `setItem(id: string, newProperties: Partial<HierarchicalItem>): boolean`
+#### `setItem(id: string, newProperties: Partial<AddSelectItem>): boolean`
 
 Update a given item with new properties. Returns `true` if successful.
 
@@ -81,7 +78,7 @@ dataManager.setItem('1', { title: 'Updated Title' });
 
 ### Selection Methods
 
-#### `getSelectedItems(): HierarchicalItem[]`
+#### `getSelectedItems(): AddSelectItem[]`
 
 Returns an array of items marked as selected.
 
@@ -125,7 +122,7 @@ dataManager.clearSelections();
 
 ### Hierarchy Methods
 
-#### `getItemChildren(id: string): HierarchicalItem[]`
+#### `getItemChildren(id: string): AddSelectItem[]`
 
 Get direct children of a node.
 
@@ -133,7 +130,7 @@ Get direct children of a node.
 const children = dataManager.getItemChildren('parent-id');
 ```
 
-#### `getItemParent(id: string): HierarchicalItem | undefined`
+#### `getItemParent(id: string): AddSelectItem | undefined`
 
 Get the parent of a node.
 
@@ -141,7 +138,7 @@ Get the parent of a node.
 const parent = dataManager.getItemParent('child-id');
 ```
 
-#### `getItemParents(id: string): HierarchicalItem[]`
+#### `getItemParents(id: string): AddSelectItem[]`
 
 Get all ancestors (parents up to the root) of a node.
 
@@ -167,7 +164,7 @@ Get the depth/level of an item in the hierarchy (0 for root level).
 const depth = dataManager.getItemDepth('nested-item');
 ```
 
-#### `getItemDescendants(id: string): HierarchicalItem[]`
+#### `getItemDescendants(id: string): AddSelectItem[]`
 
 Get all descendant items of a node.
 
@@ -196,7 +193,7 @@ dataManager.setItemStatus('1', 'checked');
 
 ### Search and Sort Methods
 
-#### `search(query: string, options?: SearchOptions): HierarchicalItem[]`
+#### `search(query: string, options?: SearchOptions): AddSelectItem[]`
 
 Search items based on a query and return matching items.
 
@@ -233,16 +230,13 @@ dataManager.sort((a, b) => a.title!.localeCompare(b.title!), true);
 ## Usage Example
 
 ```typescript
-import {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 
 // Initialize the data manager
 const dataManager = new AddSelectData();
 
 // Set up hierarchical data
-const items: HierarchicalItem[] = [
+const items: AddSelectItem[] = [
   {
     id: '1',
     title: 'California',
@@ -286,17 +280,14 @@ The utility is designed to work seamlessly with Lit-based Web Components:
 ```typescript
 import { LitElement, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 
 @customElement('my-component')
 export class MyComponent extends LitElement {
   private dataManager = new AddSelectData();
 
   @state()
-  private items: HierarchicalItem[] = [];
+  private items: AddSelectItem[] = [];
 
   constructor() {
     super();

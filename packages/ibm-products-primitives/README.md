@@ -43,10 +43,7 @@ A lightweight utility for managing hierarchical data structures with support for
 selection, traversal, searching, and sorting.
 
 ```typescript
-import {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 
 const dataManager = new AddSelectData();
 dataManager.setItems([
@@ -77,10 +74,7 @@ are appropriate for public consumption:
 
 ```typescript
 // Internal usage within @carbon/ibm-products
-import {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 
 function MyComponent() {
   const [dataManager] = useState(() => new AddSelectData());
@@ -93,10 +87,7 @@ function MyComponent() {
 }
 
 // Public re-export (example)
-export {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+export { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 ```
 
 ### @carbon/ibm-products-web-components
@@ -105,17 +96,14 @@ The Web Components package similarly imports and selectively re-exports:
 
 ```typescript
 // Internal usage within @carbon/ibm-products-web-components
-import {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 
 @customElement('my-component')
 export class MyComponent extends LitElement {
   private dataManager = new AddSelectData();
 
   @state()
-  private items: HierarchicalItem[] = [];
+  private items: AddSelectItem[] = [];
 
   connectedCallback() {
     super.connectedCallback();
@@ -126,10 +114,7 @@ export class MyComponent extends LitElement {
 }
 
 // Public re-export (example)
-export {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+export { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 ```
 
 ## For End Users

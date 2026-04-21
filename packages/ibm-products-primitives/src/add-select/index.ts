@@ -7,7 +7,7 @@
 
 export { AddSelectData } from './add-select-data';
 export type {
-  HierarchicalItem,
+  AddSelectItem,
   ItemStatus,
   SearchOptions,
 } from './add-select-data';

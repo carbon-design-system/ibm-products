@@ -8,11 +8,11 @@
 import React, { useState } from 'react';
 import { Button, ToastNotification } from '@carbon/react';
 import { SingleAddSelect } from '../components/SingleAddSelect';
-import { HierarchicalItem } from '@carbon/ibm-products-primitives';
+import { AddSelectItem } from '@carbon/ibm-products-primitives';
 import { Tearsheet } from '../../../../components/Tearsheet/next';
 
 // Sample hierarchical data
-const sampleItems: HierarchicalItem[] = [
+const sampleItems: AddSelectItem[] = [
   {
     id: '1',
     title: 'Kansas',

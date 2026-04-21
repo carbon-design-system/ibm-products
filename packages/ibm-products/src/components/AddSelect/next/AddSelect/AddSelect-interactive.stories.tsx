@@ -7,16 +7,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { AddSelect } from './AddSelect';
-import {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 import styles from '../_storybook-styles.scss?inline';
 
 import mdx from './AddSelect-interactive.mdx';
 
 // Sample hierarchical data
-const hierarchicalData: HierarchicalItem[] = [
+const hierarchicalData: AddSelectItem[] = [
   {
     id: '1',
     title: 'United States',
@@ -108,7 +105,7 @@ const hierarchicalData: HierarchicalItem[] = [
 
 const InteractiveStory = () => {
   const [dataManager] = useState(() => new AddSelectData());
-  const [currentItems, setCurrentItems] = useState<HierarchicalItem[]>([]);
+  const [currentItems, setCurrentItems] = useState<AddSelectItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
   const [searchTerm, setSearchTerm] = useState('');
   const [path, setPath] = useState<Array<{ id: string; title: string }>>([]);

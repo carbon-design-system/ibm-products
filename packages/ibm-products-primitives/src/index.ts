@@ -7,4 +7,4 @@
 
 // Re-export all from add-select
 export { AddSelectData } from './add-select';
-export type { HierarchicalItem, ItemStatus, SearchOptions } from './add-select';
+export type { AddSelectItem, ItemStatus, SearchOptions } from './add-select';

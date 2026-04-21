@@ -14,14 +14,11 @@ import './add-select';
 import '../add-select-body/add-select-body';
 import '../add-select-list/add-select-list';
 import '../add-select-row/add-select-row';
-import {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 import { prefix } from '../../../globals/settings';
 
 // Sample hierarchical data
-const sampleHierarchicalData: HierarchicalItem[] = [
+const sampleHierarchicalData: AddSelectItem[] = [
   {
     id: '1',
     title: 'United States',
@@ -123,17 +120,17 @@ class AddSelectInteractiveExample extends LitElement {
   private _searchTerm = '';
 
   @state()
-  private _filteredItems: HierarchicalItem[] = [];
+  private _filteredItems: AddSelectItem[] = [];
 
   @state()
-  private _currentItems: HierarchicalItem[] = [];
+  private _currentItems: AddSelectItem[] = [];
 
   @state()
   private _selectedItem = '';
 
   @state()
   private _navigationStack: Array<{
-    items: HierarchicalItem[];
+    items: AddSelectItem[];
     parentId: string;
     parentTitle: string;
   }> = [];

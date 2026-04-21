@@ -15,10 +15,7 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { AddSelect } from '../../../../components/AddSelect/next';
-import {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
 
 const blockClass = `single-add-select-pattern`;
 
@@ -30,7 +27,7 @@ export interface SingleAddSelectProps {
   /**
    * Array of hierarchical items to display
    */
-  items: HierarchicalItem[];
+  items: AddSelectItem[];
   /**
    * Label for items section
    */
@@ -78,7 +75,7 @@ export interface SingleAddSelectProps {
 }
 
 interface NavigationStackItem {
-  items: HierarchicalItem[];
+  items: AddSelectItem[];
   parentId: string;
   parentTitle: string;
 }
@@ -107,8 +104,8 @@ export const SingleAddSelect = forwardRef<HTMLDivElement, SingleAddSelectProps>(
 
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedId, setSelectedId] = useState(selectedItemId);
-    const [filteredItems, setFilteredItems] = useState<HierarchicalItem[]>([]);
-    const [currentItems, setCurrentItems] = useState<HierarchicalItem[]>([]);
+    const [filteredItems, setFilteredItems] = useState<AddSelectItem[]>([]);
+    const [currentItems, setCurrentItems] = useState<AddSelectItem[]>([]);
     const [navigationStack, setNavigationStack] = useState<
       NavigationStackItem[]
     >([]);

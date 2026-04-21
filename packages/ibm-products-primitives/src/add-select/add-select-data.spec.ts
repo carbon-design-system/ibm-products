@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AddSelectData, HierarchicalItem } from './add-select-data';
+import { AddSelectData, AddSelectItem } from './add-select-data';
 
 describe('AddSelectData', () => {
   let dataManager: AddSelectData;
-  let sampleData: HierarchicalItem[];
+  let sampleData: AddSelectItem[];
 
   beforeEach(() => {
     dataManager = new AddSelectData();
@@ -263,7 +263,7 @@ describe('AddSelectData', () => {
     });
 
     it('should sort items recursively', () => {
-      const dataWithUnsortedChildren: HierarchicalItem[] = [
+      const dataWithUnsortedChildren: AddSelectItem[] = [
         {
           id: '1',
           title: 'Parent',

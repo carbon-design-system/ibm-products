@@ -13,14 +13,14 @@ export type ItemStatus = 'checked' | 'unchecked' | 'intermediate';
 /**
  * Interface for hierarchical data items
  */
-export interface HierarchicalItem {
+export interface AddSelectItem {
   id: string;
   title?: string;
   value?: string;
   selected?: boolean;
   status?: ItemStatus;
   children?: {
-    entries: HierarchicalItem[];
+    entries: AddSelectItem[];
   };
   [key: string]: any; // Allow additional properties
 }
@@ -42,15 +42,15 @@ export interface SearchOptions {
  * data management functions.
  */
 export class AddSelectData {
-  private items: HierarchicalItem[] = [];
-  private itemMap: Map<string, HierarchicalItem> = new Map();
+  private items: AddSelectItem[] = [];
+  private itemMap: Map<string, AddSelectItem> = new Map();
   private parentMap: Map<string, string> = new Map(); // child id -> parent id
 
   /**
    * Initialize or replace the hierarchical data
    * @param items - Array of hierarchical items
    */
-  setItems(items: HierarchicalItem[]): void {
+  setItems(items: AddSelectItem[]): void {
     this.items = items;
     this._buildMaps(items);
   }
@@ -59,7 +59,7 @@ export class AddSelectData {
    * Get the full list of items
    * @returns Array of all items
    */
-  getItems(): HierarchicalItem[] {
+  getItems(): AddSelectItem[] {
     return this.items;
   }
 
@@ -68,7 +68,7 @@ export class AddSelectData {
    * @param id - The item id
    * @returns The item or undefined if not found
    */
-  getItem(id: string): HierarchicalItem | undefined {
+  getItem(id: string): AddSelectItem | undefined {
     return this.itemMap.get(id);
   }
 
@@ -78,7 +78,7 @@ export class AddSelectData {
    * @param newProperties - Properties to update
    * @returns true if item was found and updated, false otherwise
    */
-  setItem(id: string, newProperties: Partial<HierarchicalItem>): boolean {
+  setItem(id: string, newProperties: Partial<AddSelectItem>): boolean {
     const item = this.itemMap.get(id);
     if (!item) {
       return false;
@@ -92,8 +92,8 @@ export class AddSelectData {
    * Returns an array of items marked as selected
    * @returns Array of selected items
    */
-  getSelectedItems(): HierarchicalItem[] {
-    const selected: HierarchicalItem[] = [];
+  getSelectedItems(): AddSelectItem[] {
+    const selected: AddSelectItem[] = [];
     this._traverseItems(this.items, (item) => {
       if (item.selected) {
         selected.push(item);
@@ -133,7 +133,7 @@ export class AddSelectData {
    * @param id - The parent item id
    * @returns Array of child items or empty array if no children
    */
-  getItemChildren(id: string): HierarchicalItem[] {
+  getItemChildren(id: string): AddSelectItem[] {
     const item = this.itemMap.get(id);
     return item?.children?.entries || [];
   }
@@ -143,7 +143,7 @@ export class AddSelectData {
    * @param id - The child item id
    * @returns The parent item or undefined if no parent (root level)
    */
-  getItemParent(id: string): HierarchicalItem | undefined {
+  getItemParent(id: string): AddSelectItem | undefined {
     const parentId = this.parentMap.get(id);
     return parentId ? this.itemMap.get(parentId) : undefined;
   }
@@ -153,8 +153,8 @@ export class AddSelectData {
    * @param id - The item id
    * @returns Array of ancestor items from immediate parent to root
    */
-  getItemParents(id: string): HierarchicalItem[] {
-    const parents: HierarchicalItem[] = [];
+  getItemParents(id: string): AddSelectItem[] {
+    const parents: AddSelectItem[] = [];
     let currentId: string | undefined = id;
 
     while (currentId) {
@@ -216,7 +216,7 @@ export class AddSelectData {
    * @param options - Search options
    * @returns Array of matching items
    */
-  search(query: string, options: SearchOptions = {}): HierarchicalItem[] {
+  search(query: string, options: SearchOptions = {}): AddSelectItem[] {
     const { caseSensitive = false, searchFields = ['title', 'value'] } =
       options;
 
@@ -225,7 +225,7 @@ export class AddSelectData {
     }
 
     const searchTerm = caseSensitive ? query : query.toLowerCase();
-    const results: HierarchicalItem[] = [];
+    const results: AddSelectItem[] = [];
 
     this._traverseItems(this.items, (item) => {
       for (const field of searchFields) {
@@ -252,7 +252,7 @@ export class AddSelectData {
    * @param recursive - If true, sort children recursively (default: false)
    */
   sort(
-    compareFn: (a: HierarchicalItem, b: HierarchicalItem) => number,
+    compareFn: (a: AddSelectItem, b: AddSelectItem) => number,
     recursive: boolean = false
   ): void {
     this.items.sort(compareFn);
@@ -315,13 +315,13 @@ export class AddSelectData {
    * @param id - The parent item id
    * @returns Array of all descendant items
    */
-  getItemDescendants(id: string): HierarchicalItem[] {
+  getItemDescendants(id: string): AddSelectItem[] {
     const item = this.itemMap.get(id);
     if (!item?.children?.entries) {
       return [];
     }
 
-    const descendants: HierarchicalItem[] = [];
+    const descendants: AddSelectItem[] = [];
     this._traverseItems(item.children.entries, (child) => {
       descendants.push(child);
     });
@@ -333,7 +333,7 @@ export class AddSelectData {
    * Build internal maps for efficient lookups
    * @private
    */
-  private _buildMaps(items: HierarchicalItem[], parentId?: string): void {
+  private _buildMaps(items: AddSelectItem[], parentId?: string): void {
     if (!parentId) {
       // Clear maps when building from root
       this.itemMap.clear();
@@ -358,8 +358,8 @@ export class AddSelectData {
    * @private
    */
   private _traverseItems(
-    items: HierarchicalItem[],
-    callback: (item: HierarchicalItem) => void
+    items: AddSelectItem[],
+    callback: (item: AddSelectItem) => void
   ): void {
     items.forEach((item) => {
       callback(item);
@@ -374,8 +374,8 @@ export class AddSelectData {
    * @private
    */
   private _sortRecursive(
-    items: HierarchicalItem[],
-    compareFn: (a: HierarchicalItem, b: HierarchicalItem) => number
+    items: AddSelectItem[],
+    compareFn: (a: AddSelectItem, b: AddSelectItem) => number
   ): void {
     items.forEach((item) => {
       if (item.children?.entries) {

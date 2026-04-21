@@ -16,6 +16,7 @@ export {
   PageHeaderTitleBreadcrumb,
   PageHeaderBreadcrumbOverflow,
   PageHeaderTagOverflow,
+  PageHeaderBreadcrumbPageActions,
   //
   Root,
   BreadcrumbBar,
@@ -28,6 +29,7 @@ export {
   TitleBreadcrumb,
   BreadcrumbOverflow,
   TagOverflow,
+  BreadcrumbPageActions,
 } from './PageHeader';
 export type {
   PageHeaderBreadcrumbBarProps,
@@ -39,5 +41,7 @@ export type {
   PageHeaderScrollButtonProps,
   PageHeaderTagOverflowProps,
   PageHeaderBreadcrumbOverflowProps,
+  PageHeaderBreadcrumbPageActionsProps,
+  PageHeaderBreadcrumbPageActionItem,
 } from './PageHeader';
 export type { PageHeaderProps } from './PageHeader';

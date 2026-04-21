@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import {
   preview__PageHeader as PageHeader,
   preview__TruncatedText as TruncatedText,
@@ -16,10 +16,14 @@ import {
   PageHeaderContentText,
   PageHeaderContentPageActions,
   PageHeaderHeroImage,
+  PageHeaderBreadcrumbPageActions,
+  PageHeaderScrollButton,
+  PageHeaderTitleBreadcrumb,
+  PageHeaderBreadcrumbOverflow,
+  PageHeaderTagOverflow,
 } from './PageHeader';
 import {
   Tag,
-  Button,
   Grid,
   Column,
   Breadcrumb,
@@ -49,7 +53,6 @@ import {
   CloudFoundry_1,
   Activity,
 } from '@carbon/icons-react';
-import { createOverflowHandler } from '@carbon/utilities';
 import mdx from './PageHeader.mdx';
 import { pageActionButtonItems } from './_story-assets/pageActionButtonItems';
 
@@ -63,6 +66,11 @@ export default {
     PageHeaderTabBar,
     PageHeaderContentText,
     PageHeaderContentPageActions,
+    PageHeaderBreadcrumbPageActions,
+    PageHeaderScrollButton,
+    PageHeaderTitleBreadcrumb,
+    PageHeaderBreadcrumbOverflow,
+    PageHeaderTagOverflow,
   },
   tags: ['autodocs'],
   argTypes: {
@@ -123,80 +131,9 @@ const breadcrumbPageActionItems = [
   },
 ];
 
-const BreadcrumbPageActions = () => {
-  const containerRef = useRef(null);
-  const [hiddenItems, setHiddenItems] = useState([]);
-
-  useEffect(() => {
-    if (!containerRef.current) {
-      return;
-    }
-    const handler = createOverflowHandler({
-      container: containerRef.current,
-      onChange: (_visible, hidden) => {
-        const hiddenIds = hidden.map((el) => el.dataset.id);
-        setHiddenItems(
-          breadcrumbPageActionItems.filter((item) =>
-            hiddenIds.includes(item.id)
-          )
-        );
-      },
-    });
-    return () => handler.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={containerRef}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        inlineSize: '50%',
-      }}
-    >
-      {breadcrumbPageActionItems.map((item) => (
-        <div key={item.id} data-id={item.id}>
-          <Button
-            renderIcon={item.renderIcon}
-            iconDescription={item.label}
-            hasIconOnly
-            size="md"
-            kind="ghost"
-            onClick={item.onClick}
-          />
-        </div>
-      ))}
-      <div
-        data-offset
-        data-hidden
-        data-floating-menu-container
-        style={{
-          position: 'relative',
-        }}
-      >
-        <FeatureFlags enableV12OverflowMenu>
-          <OverflowMenu
-            size="md"
-            aria-label="More page actions"
-            autoAlign={true}
-            flipped
-          >
-            {hiddenItems.map((item) => (
-              <OverflowMenuItem
-                key={item.id}
-                itemText={item.label}
-                onClick={item.onClick}
-              />
-            ))}
-          </OverflowMenu>
-        </FeatureFlags>
-      </div>
-    </div>
-  );
-};
-
-const breadcrumbPageActions = <BreadcrumbPageActions />;
+const breadcrumbPageActions = (
+  <PageHeader.BreadcrumbPageActions actions={breadcrumbPageActionItems} />
+);
 
 export const Default = ({
   border,

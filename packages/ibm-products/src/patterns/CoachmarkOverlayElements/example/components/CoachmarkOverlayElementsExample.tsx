@@ -60,13 +60,14 @@ function useCarbonTheme() {
 export const CoachmarkOverlayElementsExample = (args) => {
   const carbonTheme = useCarbonTheme();
   const [isOpen, setIsOpen] = useState(true);
-
+  const primaryButtonRef = useRef<HTMLButtonElement>(null);
+  const backRef = useRef<HTMLButtonElement>(null);
+  const beaconButtonRef = useRef<HTMLButtonElement>(null);
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
-
   const carouselContainerRef = useRef(null);
   const carouselInit = useRef(null);
-
+  const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const items = [
     {
       id: 1,
@@ -83,6 +84,10 @@ export const CoachmarkOverlayElementsExample = (args) => {
   const handleClose = () => {
     setIsOpen(false);
     carouselInit?.current?.reset();
+    // Return focus to the beacon button after closing
+    setTimeout(() => {
+      beaconButtonRef.current?.focus();
+    }, 0);
   };
 
   const handleBeaconClick = () => {
@@ -104,18 +109,48 @@ export const CoachmarkOverlayElementsExample = (args) => {
     handleViewStackUpdate(options);
   };
 
-  const handleViewStackUpdate = useCallback(({ currentIndex, lastIndex }) => {
-    setCurrentViewIndex(currentIndex);
-    setLastViewIndex(lastIndex);
+  const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
+    carouselItemsRef.current.forEach((item, idx) => {
+      if (!item) {
+        return;
+      }
+
+      const isActive = idx === activeIndex;
+
+      // Set aria-hidden based on active state
+      item.setAttribute('aria-hidden', String(!isActive));
+
+      if (!isActive) {
+        item.setAttribute('inert', ''); // Disable interactivity
+      } else {
+        item.removeAttribute('inert'); // Re-enable interactivity
+      }
+
+      item.removeAttribute('tabindex');
+    });
   }, []);
 
-  const onNext = () => {
+  const handleViewStackUpdate = useCallback(
+    ({ currentIndex, lastIndex }) => {
+      setCurrentViewIndex(currentIndex);
+      setLastViewIndex(lastIndex);
+
+      // Update inert attribute for carousel items
+      updateCarouselItemsTabIndex(currentIndex);
+    },
+    [updateCarouselItemsTabIndex]
+  );
+  const onNext = (e) => {
     carouselInit?.current?.next();
   };
-  const onPrev = () => {
+
+  const onPrev = (e) => {
+    // Focus the primary button before navigation if Back button will be hidden
+    if (currentViewIndex === 1) {
+      primaryButtonRef.current?.focus();
+    }
     carouselInit?.current?.prev();
   };
-
   return (
     <Theme theme={carbonTheme}>
       <Coachmark
@@ -123,13 +158,18 @@ export const CoachmarkOverlayElementsExample = (args) => {
         open={isOpen}
         onClose={handleClose}
         align="top"
+        selectorPrimaryFocus="#coachmark-primary-button"
         {...args}
       >
         <CoachmarkBeacon
           label="Show information"
-          buttonProps={{ onClick: handleBeaconClick, id: 'CoachmarkBtn' }}
+          buttonProps={{
+            onClick: handleBeaconClick,
+            id: 'CoachmarkBtn',
+            ref: beaconButtonRef,
+          }}
         ></CoachmarkBeacon>
-        <Coachmark.Content highContrast={true}>
+        <Coachmark.Content>
           <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
           <Coachmark.Content.Body>
             <div>
@@ -143,8 +183,13 @@ export const CoachmarkOverlayElementsExample = (args) => {
               />
             </div>
             <div ref={carouselContainerRef} className="exampleCarouselWrapper">
-              {items.map((item) => (
-                <div key={item.id}>
+              {items.map((item, index) => (
+                <div
+                  key={item.id}
+                  ref={(el) => {
+                    carouselItemsRef.current[index] = el;
+                  }}
+                >
                   <h2>{item.title}</h2>
                   <p>{item.text}</p>
                 </div>
@@ -172,20 +217,24 @@ export const CoachmarkOverlayElementsExample = (args) => {
                     iconDescription="Previous"
                     kind="ghost"
                     onClick={onPrev}
+                    ref={backRef}
                   >
                     Back
                   </Button>
                 )}
-
-                {lastViewIndex !== currentViewIndex ? (
-                  <Button size="sm" iconDescription="Next" onClick={onNext}>
-                    Next
-                  </Button>
-                ) : (
-                  <Button size="sm" onClick={handleClose}>
-                    Done
-                  </Button>
-                )}
+                <Button
+                  id="coachmark-primary-button"
+                  size="sm"
+                  iconDescription={
+                    currentViewIndex < items.length - 1 ? 'Next' : 'Done'
+                  }
+                  onClick={
+                    currentViewIndex < items.length - 1 ? onNext : handleClose
+                  }
+                  ref={primaryButtonRef}
+                >
+                  {currentViewIndex < items.length - 1 ? 'Next' : 'Done'}
+                </Button>
               </div>
             </div>
           </Coachmark.Content.Body>

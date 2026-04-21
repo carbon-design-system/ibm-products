@@ -9,7 +9,7 @@
   $font-path: '@ibm/plex'
 );
 
-@use '@carbon/utilities/scss/carousel' as carousel;
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
 @use '@carbon/ibm-products-web-components/scss/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';

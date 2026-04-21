@@ -45,6 +45,10 @@ collect:
         - onc4p-about-modal-beingclosed
         - onc4p-about-modal-closed
         - version
+        # c4p-action-set
+        - actions
+        - button-size
+        - disable-stacking
         # c4p-big-number
         - fraction-digits
         - loading
@@ -67,6 +71,7 @@ collect:
         - onc4p-checklist-item-clicked
         - status
         # c4p-coachmark
+        - caret
         - dropShadow
         - floating
         - highContrast
@@ -224,6 +229,12 @@ collect:
         - success
         - tooltip
         - warning
+        # c4p-action-set - button-size
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
         # c4p-preview-tearsheet - variant
         - narrow
         - wide

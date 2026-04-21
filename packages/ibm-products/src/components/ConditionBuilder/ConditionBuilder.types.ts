@@ -252,7 +252,7 @@ export type InitialState = {
 export interface ConditionBuilderContextInputProps extends PropsWithChildren {
   children?: ReactNode;
   inputConfig?: inputConfig;
-  popOverSearchThreshold?: number;
+  popOverSearchThreshold: number;
   getOptions?: (
     state: ConditionBuilderState,
     condition: Condition

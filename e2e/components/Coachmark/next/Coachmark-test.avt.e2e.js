@@ -48,8 +48,7 @@ test.describe('Coachmark @avt', () => {
 
     const dragButton = page.getByRole('button', { name: 'Drag' });
     await expect(dragButton).toBeInViewport();
-
-    await dragButton.press('Enter');
+    await expect(dragButton).toBeFocused();
 
     const container = page.locator(`.${blockClass}--coachmark-content`);
     await expect(container).toBeVisible();
@@ -61,6 +60,9 @@ test.describe('Coachmark @avt', () => {
     };
 
     const position = await getPos();
+
+    // Press Enter to activate drag mode
+    await page.keyboard.press('Enter');
 
     await page.keyboard.press('ArrowLeft');
     const afterLeft = await getPos();
@@ -78,7 +80,8 @@ test.describe('Coachmark @avt', () => {
     const afterDown = await getPos();
     expect(afterDown.y).toBeGreaterThan(afterUp.y);
 
-    await dragButton.press('Enter');
+    // Press Enter to deactivate drag mode
+    await page.keyboard.press('Enter');
     await page.keyboard.press('Escape');
     await expect(container).not.toBeVisible();
 

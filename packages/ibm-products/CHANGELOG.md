@@ -1,3 +1,16 @@
+## `@carbon/ibm-products@2.88.0`
+### Features :rocket:
+- feat(preview__PageHeader): implement callbacks for intesecting observers (#9087)
+- feat: add initialState support and footer actions prop (#9171)
+
+### Bug fixes :bug:
+- fix(interstitialScreen): parity issues and small screens ui of action buttons (#9032)
+- fix(build): patch CJS default export interop for tsdown migration
+
+### Housekeeping :house:
+- chore(preview_PageHeader): refactor `breadcrumbPageActions` to a standalone component (#9230)
+- docs(changelog): update for v2.87.0-rc.0 (#9187)
+
 ## `@carbon/ibm-products@2.87.1`
 ### Bug fixes :bug:
 - fix(build): patch CJS default export interop for tsdown migration

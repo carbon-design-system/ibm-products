@@ -171,7 +171,7 @@ export const ItemOptionForValueField = ({
   }
   return (
     <div className={`${blockClass}__item-option`} ref={contentRef}>
-      {popOverSearchThreshold && allOptions.length > popOverSearchThreshold && (
+      {allOptions.length > popOverSearchThreshold ? (
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
@@ -183,7 +183,7 @@ export const ItemOptionForValueField = ({
             }}
           />
         </div>
-      )}
+      ) : null}
 
       {multiSelectable && (
         <div className={`${blockClass}__multiselectSelectionStatusContainer`}>
@@ -235,13 +235,18 @@ export const ItemOptionForValueField = ({
                     <span
                       className={`${blockClass}__item-option__option-label`}
                     >
-                      {option.label}
-                    </span>
-                    {Icon && (
-                      <span className={`${blockClass}__option-icon`}>
-                        <Icon />
+                      <span
+                        className={`${blockClass}__item-option__option-label-text`}
+                        title={option.label}
+                      >
+                        {option.label}
                       </span>
-                    )}
+                      {Icon && (
+                        <span className={`${blockClass}__option-icon`}>
+                          <Icon />
+                        </span>
+                      )}
+                    </span>
                   </>
                 ) : (
                   <>
@@ -249,7 +254,12 @@ export const ItemOptionForValueField = ({
                       className={`${blockClass}__item-option__option-label`}
                     >
                       {Icon && <Icon />}
-                      {option.label}
+                      <span
+                        className={`${blockClass}__item-option__option-label-text`}
+                        title={option.label}
+                      >
+                        {option.label}
+                      </span>
                     </span>
                     {isSelected && (
                       <Checkmark className={`${blockClass}__checkmark`} />

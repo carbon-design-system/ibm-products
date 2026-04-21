@@ -321,6 +321,40 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       setFocused(false);
     };
 
+    const handleToolbarMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+      // Set flag when clicking any button to prevent blur handler from running
+      const element = e.target as HTMLElement;
+      let foundButton: HTMLElement | null = null;
+
+      // First, try to traverse up to find a button
+      let current = element;
+      while (current && current !== e.currentTarget) {
+        if (current.tagName === 'BUTTON') {
+          foundButton = current;
+          break;
+        }
+        current = current.parentElement as HTMLElement;
+      }
+
+      // If no button found by traversing up, search within the clicked element
+      if (!foundButton) {
+        foundButton = element.querySelector('button');
+      }
+
+      if (foundButton) {
+        clickingWithin.current = true;
+
+        // For disabled buttons, prevent default to stop blur from firing
+        // This keeps the input focused when clicking disabled buttons
+        const isDisabled =
+          foundButton.hasAttribute('disabled') ||
+          foundButton.getAttribute('aria-disabled') === 'true';
+        if (isDisabled) {
+          e.preventDefault();
+        }
+      }
+    };
+
     const onKeyHandler = (e) => {
       // to prevent blur handler from being called twice add additional state to check if escape is being used
       escaping.current = true;
@@ -394,39 +428,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
         {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions -- This div is not interactive; onMouseDown is used only to detect clicks on disabled buttons within to prevent blur */}
         <div
           className={`${blockClass}__toolbar`}
-          onMouseDown={(e) => {
-            // Set flag when clicking any button to prevent blur handler from running
-            const element = e.target as HTMLElement;
-            let foundButton: HTMLElement | null = null;
-
-            // First, try to traverse up to find a button
-            let current = element;
-            while (current && current !== e.currentTarget) {
-              if (current.tagName === 'BUTTON') {
-                foundButton = current;
-                break;
-              }
-              current = current.parentElement as HTMLElement;
-            }
-
-            // If no button found by traversing up, search within the clicked element
-            if (!foundButton) {
-              foundButton = element.querySelector('button');
-            }
-
-            if (foundButton) {
-              clickingWithin.current = true;
-
-              // For disabled buttons, prevent default to stop blur from firing
-              // This keeps the input focused when clicking disabled buttons
-              const isDisabled =
-                foundButton.hasAttribute('disabled') ||
-                foundButton.getAttribute('aria-disabled') === 'true';
-              if (isDisabled) {
-                e.preventDefault();
-              }
-            }
-          }}
+          onMouseDown={handleToolbarMouseDown}
         >
           {invalid && (
             <WarningFilled

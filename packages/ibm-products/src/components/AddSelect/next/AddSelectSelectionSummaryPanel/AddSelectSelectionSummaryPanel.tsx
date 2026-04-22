@@ -109,14 +109,14 @@ const AddSelectSelectionSummaryPanel = forwardRef<
           <p className={`${blockClass}__selection-summary-panel-title`}>
             {title}
           </p>
+          {showCount && (
+            <Tag type="gray" size="sm">
+              {selectedItems.length}
+            </Tag>
+          )}
           <div
             className={`${blockClass}__selection-summary-panel-header-actions`}
           >
-            {showCount && (
-              <Tag type="gray" size="sm">
-                {selectedItems.length}
-              </Tag>
-            )}
             {showEditIcon && onEdit && (
               <IconButton
                 label={editIconDescription}

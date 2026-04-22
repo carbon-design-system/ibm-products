@@ -107,6 +107,23 @@ const AddSelectSelectionSummaryPanelItem = forwardRef<
             </p>
           )}
         </div>
+        {onRemove && (
+          <div
+            className={`${blockClass}__selection-summary-panel-item-remove-button-container`}
+          >
+            <IconButton
+              label={removeButtonLabel}
+              onClick={(e) => {
+                e.stopPropagation();
+                onRemove(item.id);
+              }}
+              kind="ghost"
+              className={`${blockClass}__selection-summary-panel-item-remove-button`}
+            >
+              <SubtractAlt size={16} />
+            </IconButton>
+          </div>
+        )}
       </div>
     );
 
@@ -167,20 +184,6 @@ const AddSelectSelectionSummaryPanelItem = forwardRef<
           <Accordion align="start">
             <AccordionItem title={titleContent}>{bodyContent}</AccordionItem>
           </Accordion>
-          {onRemove && (
-            <IconButton
-              label={removeButtonLabel}
-              onClick={(e) => {
-                e.stopPropagation();
-                onRemove(item.id);
-              }}
-              kind="ghost"
-              size="sm"
-              className={`${blockClass}__selection-summary-panel-item-remove-button`}
-            >
-              <SubtractAlt size={16} />
-            </IconButton>
-          )}
         </div>
       );
     }
@@ -198,20 +201,6 @@ const AddSelectSelectionSummaryPanelItem = forwardRef<
             </div>
           )}
         </div>
-        {onRemove && (
-          <IconButton
-            label={removeButtonLabel}
-            onClick={(e) => {
-              e.stopPropagation();
-              onRemove(item.id);
-            }}
-            kind="ghost"
-            size="sm"
-            className={`${blockClass}__selection-summary-panel-item-remove-button`}
-          >
-            <SubtractAlt size={16} />
-          </IconButton>
-        )}
       </div>
     );
   }

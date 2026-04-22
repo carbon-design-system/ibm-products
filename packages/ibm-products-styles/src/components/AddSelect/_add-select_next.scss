@@ -408,27 +408,28 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     @include type.type-style('body-01');
 
     margin-block-end: $spacing-05;
-  }@media screen and (prefers-reduced-motion: reduce) {
-&-remove-button {
-    position: absolute;
-    z-index: 1;
-    inset-block-start: $spacing-03;
-    inset-inline-end: $spacing-03;
-    opacity: 0;
-    transition: none;
-}
-}
-
-  &-remove-button {
-    position: absolute;
-    z-index: 1;
-    inset-block-start: $spacing-03;
-    inset-inline-end: $spacing-03;
-    opacity: 0;
-    transition: opacity $duration-fast-01 motion(standard, productive);
   }
 
-  &:hover &-remove-button {
+  &-remove-button-container {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inset-inline-end: 0;
+    padding-inline-start: $spacing-05;
+  }
+
+  &-remove-button {
+    opacity: 0;
+    transition: opacity $duration-fast-01 motion(standard, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &:hover &-remove-button,
+  &:focus-within &-remove-button {
     opacity: 1;
   }
 

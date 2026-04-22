@@ -373,6 +373,28 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 .#{$block-class__next}__selection-summary-panel-item {
   position: relative;
 
+  // Mode-specific variants
+  &--accordion {
+    // Accordion-specific styles handled by Carbon Accordion
+  }
+
+  &--simple {
+    // Simple mode specific styles
+    .#{$block-class__next}__selection-summary-panel-item-title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: $spacing-05;
+    }
+    .#{$block-class__next}__selection-summary-panel-item-content {
+      padding-inline: $spacing-05;
+    }
+  }
+
+  &--template {
+    // Custom template mode - minimal styling
+  }
+
   &-title-wrapper {
     display: flex;
     align-items: center;
@@ -410,13 +432,24 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     margin-block-end: $spacing-05;
   }
 
+  // Remove button - works in all modes
   &-remove-button-container {
-    position: absolute;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    inset-inline-end: 0;
     padding-inline-start: $spacing-05;
+
+    // In accordion mode, position absolutely
+    .#{$block-class__next}__selection-summary-panel-item--accordion & {
+      position: absolute;
+      inset-inline-end: 0;
+    }
+
+    // In simple mode, position in flex layout
+    .#{$block-class__next}__selection-summary-panel-item--simple & {
+      position: relative;
+      margin-inline-start: auto;
+    }
   }
 
   &-remove-button {
@@ -428,6 +461,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     }
   }
 
+  // Show remove button on hover/focus for all modes
   &:hover &-remove-button,
   &:focus-within &-remove-button {
     opacity: 1;

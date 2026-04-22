@@ -13,8 +13,12 @@ import * as stories from './AddSelectSelectionSummaryPanelItem.stories';
 ## Overview
 
 The AddSelectSelectionSummaryPanelItem component displays an individual selected
-item with optional accordion for expandable details. It supports custom title
-and content rendering, and can include a remove button.
+item with flexible rendering options. It supports:
+
+- **Accordion mode** for expandable details
+- **Simple key-value display mode** (default)
+- **Custom templates** for complete control over rendering
+- **Remove button** available in all modes
 
 ### Getting started
 
@@ -26,29 +30,45 @@ Here's a quick example to get you started.
 import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
 ```
 
-#### Usage Example
+#### Default Usage (Key-Value Pairs)
+
+By default, the component renders in simple mode with key-value pairs.
 
 <Canvas of={stories.Default}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem item={item} />
+```
+
+## With Remove Button
+
+The remove button appears on hover when `onRemove` is provided.
+
+<Canvas of={stories.WithRemoveButton}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem
+  item={item}
+  onRemove={handleRemove}
+  removeButtonLabel="Remove item"
+/>
+```
+
+## Accordion Mode
+
+Enable accordion mode for expandable content.
+
+<Canvas of={stories.Accordion}></Canvas>
 
 ```jsx
 <AddSelect.SelectionSummaryPanelItem item={item} useAccordion />
 ```
 
-## Without Accordion
+## Accordion with Remove Button
 
-Display the item without the accordion pattern for a simpler layout.
+Combine accordion mode with remove functionality.
 
-<Canvas of={stories.WithoutAccordion}></Canvas>
-
-```jsx
-<AddSelect.SelectionSummaryPanelItem item={item} useAccordion={false} />
-```
-
-## With Remove Button
-
-Add a remove button that appears on hover for quick item removal.
-
-<Canvas of={stories.WithRemoveButton}></Canvas>
+<Canvas of={stories.AccordionWithRemoveButton}></Canvas>
 
 ```jsx
 <AddSelect.SelectionSummaryPanelItem
@@ -59,11 +79,13 @@ Add a remove button that appears on hover for quick item removal.
 />
 ```
 
-## With Custom Title
+## Accordion with Custom Title
+
+**Note:** Custom title rendering only works with `useAccordion={true}`.
 
 Customize how the item title is displayed using the `renderTitle` prop.
 
-<Canvas of={stories.WithCustomTitle}></Canvas>
+<Canvas of={stories.AccordionWithCustomTitle}></Canvas>
 
 ```jsx
 <AddSelect.SelectionSummaryPanelItem
@@ -78,11 +100,13 @@ Customize how the item title is displayed using the `renderTitle` prop.
 />
 ```
 
-## With Custom Content
+## Accordion with Custom Content
+
+**Note:** Custom content rendering only works with `useAccordion={true}`.
 
 Customize the accordion body content using the `renderContent` prop.
 
-<Canvas of={stories.WithCustomContent}></Canvas>
+<Canvas of={stories.AccordionWithCustomContent}></Canvas>
 
 ```jsx
 <AddSelect.SelectionSummaryPanelItem
@@ -97,23 +121,49 @@ Customize the accordion body content using the `renderContent` prop.
 />
 ```
 
-## With Children
+## Custom Template Rendering
 
-Use the `children` prop for complete control over the accordion body content.
+Use `renderTemplate` for complete control over item rendering. This works in
+**all modes** and takes precedence over other rendering props (`renderTitle`,
+`renderContent`).
 
-<Canvas of={stories.WithChildren}></Canvas>
+The template receives the item data and the `onRemove` callback (if provided).
+
+<Canvas of={stories.WithCustomTemplate}></Canvas>
 
 ```jsx
-<AddSelect.SelectionSummaryPanelItem item={item} useAccordion>
-  <div>Custom children content</div>
-</AddSelect.SelectionSummaryPanelItem>
+<AddSelect.SelectionSummaryPanelItem
+  item={item}
+  renderTemplate={(item, onRemove) => (
+    <div>
+      <h4>{item.title}</h4>
+      {onRemove && <button onClick={() => onRemove(item.id)}>Remove</button>}
+    </div>
+  )}
+  onRemove={handleRemove}
+/>
 ```
 
-## Multiple Items
+## Rendering Priority
 
-Display multiple items in a list.
+The component follows this priority order for rendering:
 
-<Canvas of={stories.MultipleItems}></Canvas>
+1. **`renderTemplate`** - Takes precedence over everything (works in all modes)
+2. **Accordion mode** (`useAccordion={true}`):
+   - `renderContent` OR default key-value content
+   - `renderTitle` OR default title
+3. **Simple mode** (`useAccordion={false}`):
+   - Default key-value rendering only
+   - `renderTitle` and `renderContent` are ignored
+
+## Props Compatibility
+
+| Prop             | Accordion Mode | Simple Mode | Template Mode         |
+| ---------------- | -------------- | ----------- | --------------------- |
+| `renderTemplate` | ✅             | ✅          | ✅ (takes precedence) |
+| `renderTitle`    | ✅             | ❌          | ❌                    |
+| `renderContent`  | ✅             | ❌          | ❌                    |
+| `onRemove`       | ✅             | ✅          | ✅                    |
 
 ## Component API
 

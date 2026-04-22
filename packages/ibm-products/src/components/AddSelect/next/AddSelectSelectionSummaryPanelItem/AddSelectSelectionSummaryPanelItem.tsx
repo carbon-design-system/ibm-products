@@ -25,17 +25,21 @@ export interface AddSelectSelectionSummaryPanelItemProps {
    */
   item: AddSelectItem;
   /**
-   * Custom content for accordion body
-   */
-  children?: ReactNode;
-  /**
-   * Custom title renderer
+   * Custom title renderer (only works with useAccordion mode)
    */
   renderTitle?: (item: AddSelectItem) => ReactNode;
   /**
-   * Custom content renderer
+   * Custom content renderer (only works with useAccordion mode)
    */
   renderContent?: (item: AddSelectItem) => ReactNode;
+  /**
+   * Custom template for rendering the entire item content
+   * Takes precedence over all other rendering props and works in all modes
+   */
+  renderTemplate?: (
+    item: AddSelectItem,
+    onRemove?: (id: string) => void
+  ) => ReactNode;
   /**
    * Remove button handler
    */
@@ -45,7 +49,7 @@ export interface AddSelectSelectionSummaryPanelItemProps {
    */
   removeButtonLabel?: string;
   /**
-   * Use accordion pattern
+   * Use accordion pattern (default: false)
    */
   useAccordion?: boolean;
   /**
@@ -72,12 +76,12 @@ const AddSelectSelectionSummaryPanelItem = forwardRef<
   (
     {
       item,
-      children,
       renderTitle,
       renderContent,
+      renderTemplate,
       onRemove,
       removeButtonLabel = 'Remove item',
-      useAccordion = true,
+      useAccordion = false,
       className,
       ...rest
     },
@@ -85,8 +89,30 @@ const AddSelectSelectionSummaryPanelItem = forwardRef<
   ) => {
     const itemClasses = cx(
       `${blockClass}__selection-summary-panel-item`,
+      {
+        [`${blockClass}__selection-summary-panel-item--accordion`]:
+          useAccordion,
+        [`${blockClass}__selection-summary-panel-item--simple`]: !useAccordion,
+        [`${blockClass}__selection-summary-panel-item--template`]:
+          renderTemplate,
+      },
       className
     );
+
+    // Remove button component (reusable in all modes)
+    const RemoveButton = onRemove ? (
+      <IconButton
+        label={removeButtonLabel}
+        onClick={(e) => {
+          e.stopPropagation();
+          onRemove(item.id);
+        }}
+        kind="ghost"
+        className={`${blockClass}__selection-summary-panel-item-remove-button`}
+      >
+        <SubtractAlt size={16} />
+      </IconButton>
+    ) : null;
 
     // Default title rendering
     const defaultTitle = (
@@ -107,21 +133,11 @@ const AddSelectSelectionSummaryPanelItem = forwardRef<
             </p>
           )}
         </div>
-        {onRemove && (
+        {!useAccordion && onRemove && (
           <div
             className={`${blockClass}__selection-summary-panel-item-remove-button-container`}
           >
-            <IconButton
-              label={removeButtonLabel}
-              onClick={(e) => {
-                e.stopPropagation();
-                onRemove(item.id);
-              }}
-              kind="ghost"
-              className={`${blockClass}__selection-summary-panel-item-remove-button`}
-            >
-              <SubtractAlt size={16} />
-            </IconButton>
+            {RemoveButton}
           </div>
         )}
       </div>
@@ -171,35 +187,58 @@ const AddSelectSelectionSummaryPanelItem = forwardRef<
       );
     };
 
-    const titleContent = renderTitle ? renderTitle(item) : defaultTitle;
-    const bodyContent = children
-      ? children
-      : renderContent
+    // Priority 1: If custom template provided, use it (works in all modes)
+    if (renderTemplate) {
+      return (
+        <div className={itemClasses} ref={ref} {...rest}>
+          {renderTemplate(item, onRemove)}
+        </div>
+      );
+    }
+
+    // Priority 2: Accordion mode
+    if (useAccordion) {
+      const titleContent = renderTitle ? renderTitle(item) : defaultTitle;
+      const bodyContent = renderContent
         ? renderContent(item)
         : defaultContent();
 
-    if (useAccordion) {
       return (
         <div className={itemClasses} ref={ref} {...rest}>
           <Accordion align="start">
-            <AccordionItem title={titleContent}>{bodyContent}</AccordionItem>
+            <AccordionItem
+              title={
+                <div
+                  className={`${blockClass}__selection-summary-panel-item-title-wrapper`}
+                >
+                  {titleContent}
+                  {onRemove && (
+                    <div
+                      className={`${blockClass}__selection-summary-panel-item-remove-button-container`}
+                    >
+                      {RemoveButton}
+                    </div>
+                  )}
+                </div>
+              }
+            >
+              {bodyContent}
+            </AccordionItem>
           </Accordion>
         </div>
       );
     }
 
-    // Simple non-accordion rendering
+    // Priority 3: Non-accordion mode (default key-value rendering only)
     return (
       <div className={itemClasses} ref={ref} {...rest}>
         <div className={`${blockClass}__selection-summary-panel-item-simple`}>
-          {titleContent}
-          {bodyContent && (
-            <div
-              className={`${blockClass}__selection-summary-panel-item-content`}
-            >
-              {bodyContent}
-            </div>
-          )}
+          {defaultTitle}
+          <div
+            className={`${blockClass}__selection-summary-panel-item-content`}
+          >
+            {defaultContent()}
+          </div>
         </div>
       </div>
     );
@@ -207,7 +246,6 @@ const AddSelectSelectionSummaryPanelItem = forwardRef<
 );
 
 AddSelectSelectionSummaryPanelItem.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
   /**@ts-ignore */
   item: PropTypes.object.isRequired,
@@ -217,6 +255,8 @@ AddSelectSelectionSummaryPanelItem.propTypes = {
   /**@ts-ignore */
   renderContent: PropTypes.func,
   /**@ts-ignore */
+  renderTemplate: PropTypes.func,
+  /**@ts-ignore */
   renderTitle: PropTypes.func,
   useAccordion: PropTypes.bool,
 };
@@ -225,3 +265,5 @@ AddSelectSelectionSummaryPanelItem.displayName =
   'AddSelectSelectionSummaryPanelItem';
 
 export default AddSelectSelectionSummaryPanelItem;
+
+// Made with Bob

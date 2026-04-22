@@ -7,6 +7,9 @@
 
 import React from 'react';
 import { AddSelect } from '../AddSelect/AddSelect';
+import { UserAvatar } from '../../../UserAvatar';
+import { IconButton } from '@carbon/react';
+import { SubtractAlt } from '@carbon/react/icons';
 import styles from '../_storybook-styles.scss?inline';
 
 import mdx from './AddSelectSelectionSummaryPanelItem.mdx';
@@ -21,10 +24,49 @@ const sampleItem = {
   created: '2024-01-15',
 };
 
+const userItem = {
+  id: '1',
+  // cspell:disable-next-line
+  title: 'Marleah Eagleston',
+  email: 'jdoe@ibm.com',
+  role: 'Editor',
+  value: 'user-1',
+};
+
 /**
- * Story 1: Default with accordion
+ * Story 1: Default (simple mode with key-value pairs)
  */
 export const Default = {
+  render: () => {
+    return (
+      <div style={{ width: '360px', border: '1px solid #ccc' }}>
+        <AddSelect.SelectionSummaryPanelItem item={sampleItem} />
+      </div>
+    );
+  },
+};
+
+/**
+ * Story 2: Simple mode with remove button
+ */
+export const WithRemoveButton = {
+  render: () => {
+    return (
+      <div style={{ width: '360px', border: '1px solid #ccc' }}>
+        <AddSelect.SelectionSummaryPanelItem
+          item={sampleItem}
+          onRemove={(id) => console.log('Remove item:', id)}
+          removeButtonLabel="Remove item"
+        />
+      </div>
+    );
+  },
+};
+
+/**
+ * Story 3: Accordion mode
+ */
+export const Accordion = {
   render: () => {
     return (
       <div style={{ width: '360px', border: '1px solid #ccc' }}>
@@ -35,25 +77,9 @@ export const Default = {
 };
 
 /**
- * Story 2: Without accordion
+ * Story 4: Accordion mode with remove button
  */
-export const WithoutAccordion = {
-  render: () => {
-    return (
-      <div style={{ width: '360px', border: '1px solid #ccc' }}>
-        <AddSelect.SelectionSummaryPanelItem
-          item={sampleItem}
-          useAccordion={false}
-        />
-      </div>
-    );
-  },
-};
-
-/**
- * Story 3: With remove button
- */
-export const WithRemoveButton = {
+export const AccordionWithRemoveButton = {
   render: () => {
     return (
       <div style={{ width: '360px', border: '1px solid #ccc' }}>
@@ -69,9 +95,9 @@ export const WithRemoveButton = {
 };
 
 /**
- * Story 4: With custom title
+ * Story 5: Accordion with custom title
  */
-export const WithCustomTitle = {
+export const AccordionWithCustomTitle = {
   render: () => {
     return (
       <div style={{ width: '360px', border: '1px solid #ccc' }}>
@@ -93,9 +119,9 @@ export const WithCustomTitle = {
 };
 
 /**
- * Story 5: With custom content
+ * Story 6: Accordion with custom content
  */
-export const WithCustomContent = {
+export const AccordionWithCustomContent = {
   render: () => {
     return (
       <div style={{ width: '360px', border: '1px solid #ccc' }}>
@@ -109,7 +135,7 @@ export const WithCustomContent = {
               </p>
               <p>ID: {item.id}</p>
               <p>Value: {item.value}</p>
-              <p>Status: {item.status}</p>
+              <p>Status: {item.itemStatus}</p>
             </div>
           )}
         />
@@ -119,44 +145,80 @@ export const WithCustomContent = {
 };
 
 /**
- * Story 6: With children
+ * Story 7: Custom template (works in all modes)
+ * Demonstrates a user design with avatar, name, email, role, and remove button
  */
-export const WithChildren = {
+export const WithCustomTemplate = {
   render: () => {
     return (
-      <div style={{ width: '360px', border: '1px solid #ccc' }}>
-        <AddSelect.SelectionSummaryPanelItem item={sampleItem} useAccordion>
-          <div style={{ padding: '1rem', background: '#f4f4f4' }}>
-            <p>Custom children content</p>
-            <p>This overrides the default content rendering</p>
-          </div>
-        </AddSelect.SelectionSummaryPanelItem>
-      </div>
-    );
-  },
-};
+      <div style={{ width: '400px', border: '1px solid #e0e0e0' }}>
+        <AddSelect.SelectionSummaryPanelItem
+          item={userItem}
+          onRemove={(id) => console.log('Remove user:', id)}
+          renderTemplate={(item, onRemove) => (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '1rem',
+                borderBottom: '1px solid #e0e0e0',
+                gap: '1rem',
+              }}
+            >
+              {/* User Avatar */}
+              <UserAvatar
+                name={item.title}
+                size="md"
+                backgroundColor="order-1-cyan"
+              />
 
-/**
- * Story 7: Multiple items
- */
-export const MultipleItems = {
-  render: () => {
-    const items = [
-      { id: '1', title: 'Item 1', subtitle: 'Subtitle 1', value: 'value-1' },
-      { id: '2', title: 'Item 2', subtitle: 'Subtitle 2', value: 'value-2' },
-      { id: '3', title: 'Item 3', subtitle: 'Subtitle 3', value: 'value-3' },
-    ];
+              {/* User Info */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div
+                  style={{
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                    color: '#161616',
+                    marginBottom: '0.125rem',
+                  }}
+                >
+                  {item.title}
+                </div>
+                <div
+                  style={{
+                    fontSize: '0.75rem',
+                    color: '#525252',
+                  }}
+                >
+                  {item.email}
+                </div>
+              </div>
 
-    return (
-      <div style={{ width: '360px', border: '1px solid #ccc' }}>
-        {items.map((item) => (
-          <AddSelect.SelectionSummaryPanelItem
-            key={item.id}
-            item={item}
-            useAccordion
-            onRemove={(id) => console.log('Remove:', id)}
-          />
-        ))}
+              {/* Role */}
+              <div
+                style={{
+                  fontSize: '0.875rem',
+                  color: '#525252',
+                  marginRight: '0.5rem',
+                }}
+              >
+                {item.role}
+              </div>
+
+              {/* Remove Button */}
+              {onRemove && (
+                <IconButton
+                  kind="ghost"
+                  size="sm"
+                  label="Remove user"
+                  onClick={() => onRemove(item.id)}
+                >
+                  <SubtractAlt />
+                </IconButton>
+              )}
+            </div>
+          )}
+        />
       </div>
     );
   },
@@ -179,11 +241,11 @@ export default {
     },
     useAccordion: {
       control: 'boolean',
-      description: 'Use accordion pattern',
+      description: 'Use accordion pattern (default: false)',
     },
     onRemove: {
       control: false,
-      description: 'Remove button handler',
+      description: 'Remove button handler (available in all modes)',
     },
     removeButtonLabel: {
       control: 'text',
@@ -191,15 +253,16 @@ export default {
     },
     renderTitle: {
       control: false,
-      description: 'Custom title renderer function',
+      description: 'Custom title renderer function (accordion mode only)',
     },
     renderContent: {
       control: false,
-      description: 'Custom content renderer function',
+      description: 'Custom content renderer function (accordion mode only)',
     },
-    children: {
+    renderTemplate: {
       control: false,
-      description: 'Custom content for accordion body',
+      description:
+        'Custom template renderer function (works in all modes, takes precedence)',
     },
     className: {
       control: 'text',
@@ -207,3 +270,5 @@ export default {
     },
   },
 };
+
+// Made with Bob

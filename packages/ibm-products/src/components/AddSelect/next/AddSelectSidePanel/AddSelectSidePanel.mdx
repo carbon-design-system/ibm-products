@@ -1,0 +1,58 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectSidePanel.stories';
+
+# AddSelectSidePanel
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The AddSelectSidePanel component is an optional wrapper that provides consistent
+layout and styling for the side panel area. It supports different width variants
+and serves as a container for other side panel components like
+SelectionSummaryPanel and ItemDetailsPanel.
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Usage Example
+
+<Canvas of={stories.Default}></Canvas>
+
+```jsx
+<AddSelect.SidePanel width="default">
+  <AddSelect.SelectionSummaryPanel {...props} />
+</AddSelect.SidePanel>
+```
+
+## Width Variants
+
+The side panel supports three width variants:
+
+- **narrow** (16rem) - For compact side panels
+- **default** (22.5rem) - Standard width, matches legacy implementation
+- **wide** (28rem) - For side panels with more content
+
+<Canvas of={stories.WidthVariants}></Canvas>
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/components/AddSelect/next/AddSelectSidePanel).

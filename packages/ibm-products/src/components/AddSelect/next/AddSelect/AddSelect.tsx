@@ -25,6 +25,18 @@ import AddSelectRow, { AddSelectRowProps } from '../AddSelectRow/AddSelectRow';
 import AddSelectBreadcrumbs, {
   AddSelectBreadcrumbsProps,
 } from '../AddSelectBreadcrumbs/AddSelectBreadcrumbs';
+import AddSelectSidePanel, {
+  AddSelectSidePanelProps,
+} from '../AddSelectSidePanel/AddSelectSidePanel';
+import AddSelectSelectionSummaryPanel, {
+  AddSelectSelectionSummaryPanelProps,
+} from '../AddSelectSelectionSummaryPanel/AddSelectSelectionSummaryPanel';
+import AddSelectSelectionSummaryPanelItem, {
+  AddSelectSelectionSummaryPanelItemProps,
+} from '../AddSelectSelectionSummaryPanelItem/AddSelectSelectionSummaryPanelItem';
+import AddSelectItemDetailsPanel, {
+  AddSelectItemDetailsPanelProps,
+} from '../AddSelectItemDetailsPanel/AddSelectItemDetailsPanel';
 
 /**
  * ----------
@@ -63,6 +75,10 @@ export type AddSelectComponentType = React.ForwardRefExoticComponent<
   List: FC<AddSelectListProps>;
   Row: FC<AddSelectRowProps>;
   Breadcrumbs: FC<AddSelectBreadcrumbsProps>;
+  SidePanel: FC<AddSelectSidePanelProps>;
+  SelectionSummaryPanel: FC<AddSelectSelectionSummaryPanelProps>;
+  SelectionSummaryPanelItem: FC<AddSelectSelectionSummaryPanelItemProps>;
+  ItemDetailsPanel: FC<AddSelectItemDetailsPanelProps>;
 };
 
 /**
@@ -135,5 +151,9 @@ AddSelect.Body = AddSelectBody;
 AddSelect.List = AddSelectList;
 AddSelect.Row = AddSelectRow;
 AddSelect.Breadcrumbs = AddSelectBreadcrumbs;
+AddSelect.SidePanel = AddSelectSidePanel;
+AddSelect.SelectionSummaryPanel = AddSelectSelectionSummaryPanel;
+AddSelect.SelectionSummaryPanelItem = AddSelectSelectionSummaryPanelItem;
+AddSelect.ItemDetailsPanel = AddSelectItemDetailsPanel;
 
 AddSelect.displayName = 'AddSelect';

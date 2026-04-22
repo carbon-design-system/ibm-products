@@ -1,0 +1,126 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectSelectionSummaryPanelItem.stories';
+
+# AddSelectSelectionSummaryPanelItem
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The AddSelectSelectionSummaryPanelItem component displays an individual selected
+item with optional accordion for expandable details. It supports custom title
+and content rendering, and can include a remove button.
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Usage Example
+
+<Canvas of={stories.Default}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem item={item} useAccordion />
+```
+
+## Without Accordion
+
+Display the item without the accordion pattern for a simpler layout.
+
+<Canvas of={stories.WithoutAccordion}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem item={item} useAccordion={false} />
+```
+
+## With Remove Button
+
+Add a remove button that appears on hover for quick item removal.
+
+<Canvas of={stories.WithRemoveButton}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem
+  item={item}
+  useAccordion
+  onRemove={handleRemove}
+  removeButtonLabel="Remove item"
+/>
+```
+
+## With Custom Title
+
+Customize how the item title is displayed using the `renderTitle` prop.
+
+<Canvas of={stories.WithCustomTitle}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem
+  item={item}
+  useAccordion
+  renderTitle={(item) => (
+    <div>
+      <strong>{item.title}</strong>
+      <div>{item.value}</div>
+    </div>
+  )}
+/>
+```
+
+## With Custom Content
+
+Customize the accordion body content using the `renderContent` prop.
+
+<Canvas of={stories.WithCustomContent}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem
+  item={item}
+  useAccordion
+  renderContent={(item) => (
+    <div>
+      <p>ID: {item.id}</p>
+      <p>Value: {item.value}</p>
+    </div>
+  )}
+/>
+```
+
+## With Children
+
+Use the `children` prop for complete control over the accordion body content.
+
+<Canvas of={stories.WithChildren}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem item={item} useAccordion>
+  <div>Custom children content</div>
+</AddSelect.SelectionSummaryPanelItem>
+```
+
+## Multiple Items
+
+Display multiple items in a list.
+
+<Canvas of={stories.MultipleItems}></Canvas>
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/components/AddSelect/next/AddSelectSelectionSummaryPanelItem).

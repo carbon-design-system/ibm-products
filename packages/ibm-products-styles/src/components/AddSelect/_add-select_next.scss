@@ -304,3 +304,198 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     color: $text-primary;
   }
 }
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectSidePanel - Optional wrapper for side panel area
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__side-panel {
+  display: flex;
+  flex-direction: column;
+  background: $layer-01;
+
+  &--narrow {
+    flex-basis: 16rem;
+  }
+
+  &--default {
+    flex-basis: 22.5rem; // Matches legacy implementation
+  }
+
+  &--wide {
+    flex-basis: 28rem;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectSelectionSummaryPanel - Selected items display
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__selection-summary-panel {
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    padding: $spacing-07 $spacing-05 $spacing-03 $spacing-05;
+    border-block-end: 1px solid $layer-accent-01;
+  }
+
+  &-title {
+    @include type.type-style('heading-compact-02');
+
+    margin-inline-end: $spacing-03;
+  }
+
+  &-header-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+    margin-inline-start: auto;
+  }
+
+  &-edit-button {
+    // Edit icon button styles
+  }
+
+  &-body {
+    padding: 0 $spacing-05;
+  }
+
+  &-item-simple {
+    padding: $spacing-05 0;
+    border-block-end: 1px solid $layer-accent-01;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectSelectionSummaryPanelItem - Individual selected item
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__selection-summary-panel-item {
+  position: relative;
+
+  &-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-selected-item {
+    flex: 1;
+  }
+
+  &-title {
+    color: $text-primary;
+  }
+
+  &-subtitle {
+    @include type.type-style('label-01');
+
+    color: $text-secondary;
+  }
+
+  &-entry {
+    margin-block-end: $spacing-05;
+  }
+
+  &-header {
+    @include type.type-style('label-01');
+
+    color: $text-secondary;
+    margin-block-end: $spacing-03;
+  }
+
+  &-body {
+    @include type.type-style('body-01');
+
+    margin-block-end: $spacing-05;
+  }@media screen and (prefers-reduced-motion: reduce) {
+&-remove-button {
+    position: absolute;
+    z-index: 1;
+    inset-block-start: $spacing-03;
+    inset-inline-end: $spacing-03;
+    opacity: 0;
+    transition: none;
+}
+}
+
+  &-remove-button {
+    position: absolute;
+    z-index: 1;
+    inset-block-start: $spacing-03;
+    inset-inline-end: $spacing-03;
+    opacity: 0;
+    transition: opacity $duration-fast-01 motion(standard, productive);
+  }
+
+  &:hover &-remove-button {
+    opacity: 1;
+  }
+
+  &-content {
+    margin-block-start: $spacing-03;
+  }
+}
+
+// Accordion overrides for selection summary items
+.#{$block-class__next}__selection-summary-panel {
+  .cds--accordion__arrow {
+    transform: rotate(0deg);
+  }
+
+  .cds--accordion__item--active .cds--accordion__arrow {
+    transform: rotate(90deg);
+  }
+
+  .cds--accordion--start .cds--accordion__arrow {
+    margin: 0 0 0 $spacing-05;
+  }
+
+  .cds--accordion--start .cds--accordion__title {
+    margin: 0 $spacing-05 0 $spacing-03;
+    padding-inline-end: $spacing-09; // Add padding to prevent overlap with remove button
+  }
+
+  .cds--accordion__item--active .cds--accordion__content {
+    margin-block-start: $spacing-03;
+    padding-block: 0;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectItemDetailsPanel - Item details view
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__item-details-panel {
+  padding: $spacing-05;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: $spacing-05;
+  }
+
+  &-title {
+    @include type.type-style('heading-03');
+  }
+
+  &-close {
+    // Close button styles
+  }
+
+  &-body {
+    // Body content styles
+  }
+
+  &-entry {
+    margin-block-end: $spacing-05;
+
+    &-title {
+      @include type.type-style('heading-compact-01');
+    }
+
+    &-body {
+      @include type.type-style('body-compact-01');
+    }
+  }
+}

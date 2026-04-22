@@ -10,7 +10,7 @@ import React from 'react';
 import { previewCandidate__DelimitedList as DelimitedList } from '..';
 
 import styles from './_storybook-styles.scss?inline';
-import { DocsPage } from './DelimitedList.docs-page';
+import mdx from './DelimitedList.mdx';
 import { Annotation } from '../../../.storybook/Annotation';
 
 const storyClass = 'delimited-list-stories';
@@ -22,7 +22,7 @@ export default {
   parameters: {
     styles,
     docs: {
-      page: DocsPage,
+      page: mdx,
     },
   },
   decorators: [

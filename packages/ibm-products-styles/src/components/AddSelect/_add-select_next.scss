@@ -257,6 +257,109 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 // ──────────────────────────────────────────────────────────────
+// AddSelectColumn - Column container with search, sort, filter
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}-column {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  border-inline-end: 1px solid $border-subtle-01;
+  min-inline-size: 300px;
+
+  &:last-child {
+    border-inline-end: none;
+  }
+
+  // Search bar section
+  &__search-bar {
+    padding: $spacing-05;
+    padding-block-end: 0;
+  }
+
+  &__search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  &__search-input {
+    flex: 1;
+  }
+
+  // Controls (sort and filter buttons) - positioned outside search input
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  &__sort-button,
+  &__filter-button {
+    flex: none;
+  }
+
+  &__filter-popover {
+    padding: $spacing-05;
+
+    .cds--checkbox-wrapper {
+      margin-block-end: $spacing-03;
+
+      &:last-child {
+        margin-block-end: 0;
+      }
+    }
+  }
+
+  // Header section with select all
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: $spacing-05;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  &__select-all {
+    .cds--checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .cds--checkbox-label-text {
+      display: flex;
+      align-items: center;
+      gap: $spacing-03;
+      margin-inline-start: $spacing-03;
+    }
+  }
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
+  &__title {
+    @include type.type-style('body-compact-01');
+
+    color: $text-secondary;
+    font-weight: 600;
+  }
+
+  // Rows container
+  &__rows {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow-y: auto;
+
+    @supports (overflow-block: auto) {
+      overflow-block: auto;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
 // AddSelectBreadcrumbs - Navigation breadcrumbs
 // ──────────────────────────────────────────────────────────────
 .#{$block-class__next}__breadcrumbs {

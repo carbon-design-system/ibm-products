@@ -1,0 +1,156 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectColumn.stories';
+
+# AddSelectColumn
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Basic Column with Multi-Selection](#basic-column-with-multi-selection)
+  - [Column with Search](#column-with-search)
+  - [Column with All Features](#column-with-all-features)
+  - [Single Selection Column](#single-selection-column)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The Add Select Column component provides a column structure for the AddSelect
+pattern. It wraps `AddSelectRow` items and provides optional search, sort, and
+filter functionality. Multiple columns can be placed within an `AddSelectList`.
+
+Key features:
+
+- **Purely Presentational**: No business logic, only UI rendering
+- **Highly Configurable**: All features (search, sort, filter) are optional
+- **Multi/Single Selection**: Supports both checkbox (multi) and radio button
+  (single) selection modes
+- **Context Integration**: Uses `AddSelectContext` to pass the `multi` prop to
+  child `AddSelectRow` components
+
+### Component Hierarchy
+
+```
+AddSelectList (container)
+└── AddSelectColumn (can have multiple)
+    ├── Search Bar (optional)
+    ├── Sort/Filter Controls (optional)
+    ├── Header with Select All (optional)
+    └── AddSelectRow items (multiple)
+```
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Basic Column with Multi-Selection
+
+<Canvas of={stories.Default}></Canvas>
+
+```jsx
+<AddSelect.List>
+  <AddSelect.Column title="Users" multi={true} itemCount={3}>
+    <AddSelect.Row itemId="1" title="User 1" value="user1" />
+    <AddSelect.Row itemId="2" title="User 2" value="user2" />
+    <AddSelect.Row itemId="3" title="User 3" value="user3" />
+  </AddSelect.Column>
+</AddSelect.List>
+```
+
+#### Column with Search
+
+Add a search bar to filter items within the column.
+
+<Canvas of={stories.WithSearch}></Canvas>
+
+```jsx
+<AddSelect.List>
+  <AddSelect.Column
+    title="Users"
+    multi={true}
+    showSearch={true}
+    searchPlaceholder="Search users..."
+    onSearchChange={(value) => console.log('Search:', value)}
+    itemCount={3}
+  >
+    <AddSelect.Row itemId="1" title="User 1" value="user1" />
+    <AddSelect.Row itemId="2" title="User 2" value="user2" />
+    <AddSelect.Row itemId="3" title="User 3" value="user3" />
+  </AddSelect.Column>
+</AddSelect.List>
+```
+
+#### Column with All Features
+
+Enable search, sort, filter, and select-all functionality.
+
+<Canvas of={stories.WithAllFeatures}></Canvas>
+
+```jsx
+<AddSelect.List>
+  <AddSelect.Column
+    title="Users"
+    multi={true}
+    showSearch={true}
+    searchPlaceholder="Find users..."
+    showSort={true}
+    sortOptions={[
+      { id: 'name', label: 'Name' },
+      { id: 'date', label: 'Date added' },
+    ]}
+    sortLabel="Sort by"
+    onSortChange={(option) => console.log('Sort:', option)}
+    showFilter={true}
+    filterOptions={['Active', 'Inactive', 'Pending']}
+    filterLabel="Filter by status"
+    onFilterChange={(filters) => console.log('Filters:', filters)}
+    showSelectAll={true}
+    onSelectAll={(checked) => console.log('Select all:', checked)}
+    itemCount={5}
+  >
+    <AddSelect.Row itemId="1" title="User 1" subtitle="Active" value="user1" />
+    <AddSelect.Row itemId="2" title="User 2" subtitle="Active" value="user2" />
+    <AddSelect.Row
+      itemId="3"
+      title="User 3"
+      subtitle="Inactive"
+      value="user3"
+    />
+    <AddSelect.Row itemId="4" title="User 4" subtitle="Pending" value="user4" />
+    <AddSelect.Row itemId="5" title="User 5" subtitle="Active" value="user5" />
+  </AddSelect.Column>
+</AddSelect.List>
+```
+
+#### Single Selection Column
+
+Use radio buttons for single-selection mode.
+
+<Canvas of={stories.SingleSelection}></Canvas>
+
+```jsx
+<AddSelect.List>
+  <AddSelect.Column title="Select one user" multi={false} itemCount={3}>
+    <AddSelect.Row itemId="1" title="User 1" value="user1" />
+    <AddSelect.Row itemId="2" title="User 2" value="user2" />
+    <AddSelect.Row itemId="3" title="User 3" value="user3" />
+  </AddSelect.Column>
+</AddSelect.List>
+```
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelectColumn/AddSelectColumn.mdx).

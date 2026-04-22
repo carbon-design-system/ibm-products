@@ -18,7 +18,7 @@ export type { AddSelectSidePanelProps } from './AddSelectSidePanel/AddSelectSide
 export type { AddSelectSelectionSummaryPanelProps } from './AddSelectSelectionSummaryPanel/AddSelectSelectionSummaryPanel';
 export type { AddSelectSelectionSummaryPanelItemProps } from './AddSelectSelectionSummaryPanelItem/AddSelectSelectionSummaryPanelItem';
 export type {
-  AddSelectItemDetailsPanelProps,
+  AddSelectItemInfoPanelProps,
   ItemDetailEntry,
-} from './AddSelectItemDetailsPanel/AddSelectItemDetailsPanel';
+} from './AddSelectItemInfoPanel/AddSelectItemInfoPanel';
 export type { AddSelectContextType } from './context';

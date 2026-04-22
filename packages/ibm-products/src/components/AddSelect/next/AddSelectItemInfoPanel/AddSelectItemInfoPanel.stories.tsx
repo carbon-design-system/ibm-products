@@ -9,8 +9,8 @@ import React from 'react';
 import { AddSelect } from '../AddSelect/AddSelect';
 import styles from '../_storybook-styles.scss?inline';
 
-import mdx from './AddSelectItemDetailsPanel.mdx';
-import { ItemDetailEntry } from './AddSelectItemDetailsPanel';
+import mdx from './AddSelectItemInfoPanel.mdx';
+import { ItemDetailEntry } from './AddSelectItemInfoPanel';
 
 const sampleItem = {
   id: '1',
@@ -37,7 +37,7 @@ export const Default = {
   render: () => {
     return (
       <div style={{ width: '360px', border: '1px solid #ccc' }}>
-        <AddSelect.ItemDetailsPanel
+        <AddSelect.ItemInfoPanel
           title="Item details"
           item={sampleItem}
           onClose={() => console.log('Close clicked')}
@@ -55,7 +55,7 @@ export const WithItemDetailEntries = {
   render: () => {
     return (
       <div style={{ width: '360px', border: '1px solid #ccc' }}>
-        <AddSelect.ItemDetailsPanel
+        <AddSelect.ItemInfoPanel
           title="User details"
           item={sampleDetailEntries}
           onClose={() => console.log('Close clicked')}
@@ -73,7 +73,7 @@ export const WithCustomContent = {
   render: () => {
     return (
       <div style={{ width: '360px', border: '1px solid #ccc' }}>
-        <AddSelect.ItemDetailsPanel
+        <AddSelect.ItemInfoPanel
           title="Custom details"
           onClose={() => console.log('Close clicked')}
           closeIconDescription="Close details"
@@ -87,7 +87,7 @@ export const WithCustomContent = {
               <li>Item 3</li>
             </ul>
           </div>
-        </AddSelect.ItemDetailsPanel>
+        </AddSelect.ItemInfoPanel>
       </div>
     );
   },
@@ -100,7 +100,7 @@ export const WithRenderContent = {
   render: () => {
     return (
       <div style={{ width: '360px', border: '1px solid #ccc' }}>
-        <AddSelect.ItemDetailsPanel
+        <AddSelect.ItemInfoPanel
           title="Item details"
           item={sampleItem}
           onClose={() => console.log('Close clicked')}
@@ -133,7 +133,7 @@ export const WithoutCloseButton = {
   render: () => {
     return (
       <div style={{ width: '360px', border: '1px solid #ccc' }}>
-        <AddSelect.ItemDetailsPanel title="Item details" item={sampleItem} />
+        <AddSelect.ItemInfoPanel title="Item details" item={sampleItem} />
       </div>
     );
   },
@@ -146,7 +146,7 @@ export const WithReactElement = {
   render: () => {
     return (
       <div style={{ width: '360px', border: '1px solid #ccc' }}>
-        <AddSelect.ItemDetailsPanel
+        <AddSelect.ItemInfoPanel
           title="Custom element"
           item={
             <div style={{ padding: '1rem', background: '#f4f4f4' }}>
@@ -162,8 +162,8 @@ export const WithReactElement = {
 };
 
 export default {
-  title: 'Preview/Add and select/AddSelectItemDetailsPanel',
-  component: AddSelect.ItemDetailsPanel,
+  title: 'Preview/Add and select/AddSelectItemInfoPanel',
+  component: AddSelect.ItemInfoPanel,
   tags: ['autodocs'],
   parameters: {
     styles,

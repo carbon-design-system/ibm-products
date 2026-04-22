@@ -14,8 +14,8 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Checkbox, RadioButton } from '@carbon/react';
-import { ChevronRight } from '@carbon/react/icons';
+import { Checkbox, RadioButton, IconButton } from '@carbon/react';
+import { ChevronRight, View } from '@carbon/react/icons';
 import { blockClass, AddSelectContext } from '../context';
 
 /**
@@ -62,9 +62,21 @@ export interface AddSelectRowProps {
    */
   icon?: ReactNode;
   /**
-   * Optional metadata slot
+   * Whether to show the info panel view icon for this item
    */
-  meta?: ReactNode;
+  hasInfoPanel?: boolean;
+  /**
+   * Callback when info panel view icon is clicked
+   */
+  onInfoPanelClick?: (itemId: string) => void;
+  /**
+   * Description for the info panel icon button
+   */
+  infoPanelIconDescription?: string;
+  /**
+   * Whether the info panel is currently open for this item
+   */
+  infoPanelOpen?: boolean;
   /**
    * Optional class name
    */
@@ -83,7 +95,10 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       hasChildren = false,
       parentId = '',
       icon,
-      meta,
+      hasInfoPanel = false,
+      onInfoPanelClick,
+      infoPanelIconDescription = 'View details',
+      infoPanelOpen = false,
       className,
       ...rest
     },
@@ -111,9 +126,15 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       onNavigate?.(itemId, title, parentId);
     };
 
+    const handleInfoPanelClick = (event: MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      onInfoPanelClick?.(itemId);
+    };
+
     const rowClasses = cx(`${blockClass}-row`, className, {
       [`${blockClass}-row--selected`]: isSelected,
       [`${blockClass}-row--disabled`]: disabled,
+      [`${blockClass}-row-info-panel--selected`]: infoPanelOpen,
     });
 
     return (
@@ -161,8 +182,19 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
                   </div>
                 )}
               </div>
-              {meta && <div className={`${blockClass}-row__meta`}>{meta}</div>}
             </div>
+
+            {hasInfoPanel && (
+              <IconButton
+                label={infoPanelIconDescription}
+                onClick={handleInfoPanelClick}
+                kind="ghost"
+                size="sm"
+                className={`${blockClass}-row__view-info-panel`}
+              >
+                <View size={16} />
+              </IconButton>
+            )}
 
             {hasChildren && (
               <div
@@ -195,9 +227,13 @@ AddSelectRow.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   hasChildren: PropTypes.bool,
+  hasInfoPanel: PropTypes.bool,
   icon: PropTypes.node,
+  infoPanelIconDescription: PropTypes.string,
+  infoPanelOpen: PropTypes.bool,
   itemId: PropTypes.string.isRequired,
-  meta: PropTypes.node,
+  /**@ts-ignore */
+  onInfoPanelClick: PropTypes.func,
   parentId: PropTypes.string,
   selected: PropTypes.bool,
   subtitle: PropTypes.string,

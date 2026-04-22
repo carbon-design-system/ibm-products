@@ -8,7 +8,6 @@
 import React from 'react';
 import { AddSelect } from '../AddSelect/AddSelect';
 import { UserAvatar } from '../../../UserAvatar';
-import { Tag } from '@carbon/react';
 import styles from '../_storybook-styles.scss?inline';
 
 import mdx from './AddSelectRow.mdx';
@@ -163,34 +162,56 @@ export const WithAvatar = {
 };
 
 /**
- * Story 6: WithMetadata
- * Shows metadata tag with both single and multi-select variants
+ * Story 6: WithInfoPanel
+ * Shows info panel view icon with both single and multi-select variants
  */
-export const WithMetadata = {
+export const WithInfoPanel = {
   render: () => {
+    const handleInfoPanelClick = (itemId: string) => {
+      console.log('Show info panel for item:', itemId);
+    };
+
     return (
       <>
         <div className="add-select-story-variant-container">
-          <h4>Single-select with metadata</h4>
+          <h4>Single-select with info panel</h4>
           <AddSelect.Row
             itemId="1"
             title="Item 1"
-            subtitle="This item has metadata"
+            subtitle="Click the view icon to see details"
             value="item-1"
-            meta={<Tag type="blue">New</Tag>}
+            hasInfoPanel
+            onInfoPanelClick={handleInfoPanelClick}
+            infoPanelIconDescription="View item details"
           />
         </div>
         <div className="add-select-story-variant-container">
-          <h4>Multi-select with metadata</h4>
+          <h4>Multi-select with info panel</h4>
           <AddSelect multi>
             <AddSelect.Row
               itemId="2"
               title="Item 1"
-              subtitle="This item has metadata"
+              subtitle="Click the view icon to see details"
               value="item-1"
-              meta={<Tag type="blue">New</Tag>}
+              hasInfoPanel
+              onInfoPanelClick={handleInfoPanelClick}
+              infoPanelIconDescription="View item details"
             />
           </AddSelect>
+        </div>
+
+        <div className="add-select-story-variant-container">
+          <h4>Info panel open</h4>
+          <AddSelect.Row
+            itemId="3"
+            title="Item 1"
+            subtitle="Click the view icon to see details"
+            value="item-1"
+            hasInfoPanel
+            onInfoPanelClick={handleInfoPanelClick}
+            infoPanelIconDescription="View item details"
+            infoPanelOpen={true}
+          />
         </div>
       </>
     );

@@ -11,7 +11,7 @@ import * as stories from './AddSelectRow.stories';
   - [With Subtitle](#with-subtitle)
   - [With Children](#with-children)
   - [With Avatar](#with-avatar)
-  - [With Metadata](#with-metadata)
+  - [With Info Panel](#with-info-panel)
   - [Disabled Item](#disabled-item)
 - [Component API](#component-api)
 - [Feedback](#feedback)
@@ -23,7 +23,7 @@ provides:
 
 - Single or multi-select support (checkbox or radio button)
 - Optional subtitle for additional context
-- Optional metadata slot for tags or badges
+- Optional info panel view icon to display additional details
 - Hierarchical navigation support with chevron indicator
 - Disabled state
 - Keyboard accessible
@@ -112,22 +112,23 @@ import { UserAvatar } from '@carbon/ibm-products';
 />;
 ```
 
-#### With Metadata
+#### With Info Panel
 
-Add metadata such as tags or badges to provide additional context.
+Display a view icon that allows users to see additional details about the item
+in an info panel.
 
-<Canvas of={stories.WithMetadata}></Canvas>
+<Canvas of={stories.WithInfoPanel}></Canvas>
 
 ```jsx
-import { Tag } from '@carbon/react';
-
 <AddSelect.Row
   itemId="1"
   title="Item 1"
-  subtitle="This item has metadata"
+  subtitle="Click the view icon to see details"
   value="item-1"
-  meta={<Tag type="blue">New</Tag>}
-/>;
+  hasInfoPanel
+  onInfoPanelClick={(itemId) => console.log('Show info for:', itemId)}
+  infoPanelIconDescription="View item details"
+/>
 ```
 
 #### Disabled Item

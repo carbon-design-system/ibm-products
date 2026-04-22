@@ -195,6 +195,16 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     align-items: center;
     margin-inline-start: $spacing-03;
   }
+
+  &__view-info-panel {
+    margin-inline-start: auto;
+  }
+
+  &-info-panel--selected {
+    background-color: $layer-hover-01;
+    border-inline-start: 0.125rem solid $interactive;
+  }
+
   @media screen and (prefers-reduced-motion: reduce) {
     &__nav-indicator {
       display: flex;

@@ -8,50 +8,60 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, TextInput, InlineLoading } from '@carbon/react';
 import { GenerateAnAPIKey } from '../components/GenerateAnAPIKey';
-import { CheckmarkFilled } from '@carbon/react/icons';
+import { CheckmarkFilled, ErrorFilled } from '@carbon/react/icons';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const apiCall = async () => {
   await wait(1000);
-  return true;
+  throw new Error('Failed to edit API key');
 };
 
-export const Edit = () => {
+export const EditWithError = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('test_key_1');
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const textInputRef = useRef<HTMLInputElement>(null);
   const blockClass = `apikey-modal-pattern`;
 
   useEffect(() => {
-    if (open && success && textInputRef.current) {
+    if (open && (success || error) && textInputRef.current) {
       setTimeout(() => {
         textInputRef.current?.focus();
       }, 0);
     }
-  }, [open, success]);
+  }, [open, success, error]);
 
   const handleName = (evt: React.ChangeEvent<HTMLInputElement>) => {
     if (success) {
       setSuccess(false);
+    }
+    if (error) {
+      setError(false);
     }
     setName(evt.target.value);
   };
 
   const submitHandler = async () => {
     setSuccess(false);
+    setError(false);
     setLoading(true);
-    await apiCall();
+    try {
+      await apiCall();
+      setSuccess(true);
+    } catch (e) {
+      setError(true);
+    }
     setLoading(false);
-    setSuccess(true);
   };
 
   const toggleModal = () => {
     if (open) {
       setName('test_key_1');
       setSuccess(false);
+      setError(false);
       setLoading(false);
     }
     setOpen(!open);
@@ -85,7 +95,7 @@ export const Edit = () => {
           resources such as [product resource name].
         </p>
         <TextInput
-          id="edit-app-name"
+          id="edit-app-name-error"
           labelText="Name your application"
           placeholder="Application name"
           value={name}
@@ -100,6 +110,21 @@ export const Edit = () => {
             description="Saving..."
             className={`${blockClass}__loader`}
           />
+        )}
+        {error && (
+          <div className={`${blockClass}__messaging`}>
+            <div className={`${blockClass}__error-icon`}>
+              {/* @ts-ignore */}
+              <ErrorFilled size={16} />
+            </div>
+            <p
+              className={`${blockClass}__messaging-text`}
+              role="alert"
+              aria-live="assertive"
+            >
+              Failed to edit API key
+            </p>
+          </div>
         )}
         {success && (
           <div className={`${blockClass}__messaging`}>

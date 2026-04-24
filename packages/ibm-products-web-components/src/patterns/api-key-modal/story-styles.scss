@@ -8,3 +8,8 @@
 @use '@carbon/styles/scss/spacing' as *;
 
 $story-prefix: 'import-modal-stories__';
+
+#main-content {
+  padding: $spacing-05;
+  inset-block-start: 50vh;
+}

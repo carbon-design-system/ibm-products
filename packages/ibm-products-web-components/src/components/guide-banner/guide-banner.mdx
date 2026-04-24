@@ -6,9 +6,21 @@ import * as GuideBannerStories from './guide-banner.stories';
 
 # GuideBanner
 
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/guide-banner/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Getting started](#getting-started)
+- [Example Usage](#example-usage)
+  - [Collapsible](#collapsible)
+  - [Many insights](#many-insights)
+  - [Few insights](#few-insights)
+- [Component API](#component-api)
+
 ## Overview
 
-The GuideBanner component is a collapsible banner that provides guidance or information to users. It features a horizontal scrollable list of guide elements with navigation controls, and can be expanded or collapsed to show or hide detailed content.
+The guide banner sits at the top of a page, or page-level tab, to introduce foundational concepts related to the page's content. The component is a collapsible banner that provides guidance or information to users. It features a horizontal scrollable list of guide elements with navigation controls, and can be expanded or collapsed to show or hide detailed content.
 
 #### Component Dependencies
 
@@ -60,12 +72,24 @@ import '@carbon/ibm-products-web-components/es/components/guide-banner/index.js'
 
 ## Example Usage
 
+### Collapsible
+
 <Canvas of={GuideBannerStories.Default} />
 
-## `<c4p-guide-banner>` attributes, properties, events and slots
+### Many insights
+
+<Canvas of={GuideBannerStories.ManyInsights} />
+
+### Few insights
+
+<Canvas of={GuideBannerStories.FewInsights} />
+
+## Component API
+
+### `<c4p-guide-banner>` attributes, properties, events and slots
 
 <ArgTypes of="c4p-guide-banner" />
 
-## `<c4p-guide-banner-element>` attributes, properties, events and slots
+### `<c4p-guide-banner-element>` attributes, properties, events and slots
 
 <ArgTypes of="c4p-guide-banner-element" />

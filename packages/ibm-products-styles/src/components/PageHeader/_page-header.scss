@@ -966,6 +966,81 @@ $duration: 1000ms;
     align-items: center;
     justify-content: flex-end;
     block-size: 100%;
+
+    // Default object-fit styles for images
+    &--object-fit-cover,
+    &--object-fit-contain,
+    &--object-fit-fill,
+    &--object-fit-none {
+      // React: direct children
+      picture,
+      img {
+        block-size: 100%;
+        inline-size: 100%;
+      }
+
+      // Web Components: slotted content uses CSS custom properties
+      ::slotted(picture) {
+        display: block;
+        block-size: 100%;
+        inline-size: 100%;
+      }
+
+      ::slotted(img) {
+        block-size: 100%;
+        inline-size: 100%;
+      }
+    }
+
+    &--object-fit-cover {
+      // React: direct children
+      picture,
+      img {
+        object-fit: cover;
+        object-position: center;
+      }
+
+      // Web Components: set CSS variable
+      --object-fit: cover;
+      --object-position: center;
+    }
+
+    &--object-fit-contain {
+      // React: direct children
+      picture,
+      img {
+        object-fit: contain;
+        object-position: center;
+      }
+
+      // Web Components: set CSS variable
+      --object-fit: contain;
+      --object-position: center;
+    }
+
+    &--object-fit-fill {
+      // React: direct children
+      picture,
+      img {
+        object-fit: fill;
+      }
+
+      // Web Components: set CSS variable
+      --object-fit: fill;
+    }
+
+    &--object-fit-none {
+      // React: direct children
+      picture,
+      img {
+        object-fit: none;
+        object-position: center;
+      }
+
+      // Web Components: set CSS variable
+      --object-fit: none;
+      --object-position: center;
+    }
   }
 
   .#{$block-class}__tab-bar {

@@ -395,7 +395,7 @@ export const ContentWithHeroImage = {
           </c4p-page-header-content>
         </div>
         <div class="cds--sm:col-span-0 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <c4p-page-header-hero-image>
+          <c4p-page-header-hero-image object-fit="cover">
             <picture>
               <source
                 srcset="${image1}"
@@ -408,7 +408,6 @@ export const ContentWithHeroImage = {
               <img
                 src="${image1}"
                 alt="a default image"
-                style="max-width:100%;height:auto"
               />
             </picture>
           </c4p-page-header-hero-image>

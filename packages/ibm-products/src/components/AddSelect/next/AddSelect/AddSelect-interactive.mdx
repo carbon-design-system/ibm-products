@@ -1,0 +1,288 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from './AddSelect';
+import * as stories from './AddSelect-interactive.stories';
+
+# AddSelect interactive example with AddSelectData utility
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Implementation Steps](#implementation-steps)
+- [AddSelectData Utility](#addselectdata-utility)
+- [Complete Example](#complete-example)
+- [Feedback](#feedback)
+
+## Overview
+
+This interactive example demonstrates a complete, production-ready
+implementation of AddSelect using the AddSelectData utility from
+`@carbon/ibm-products-primitives`.
+
+The example includes:
+
+- Hierarchical data navigation (countries → states/provinces → cities)
+- Real-time search functionality
+- Single-select with state management
+- Breadcrumb navigation
+- Dynamic item counts
+
+<Canvas of={stories.Interactive}></Canvas>
+
+## Implementation Steps
+
+Follow these steps to implement AddSelect with the AddSelectData utility in your
+application:
+
+### Step 1: Install Dependencies
+
+```bash
+npm install @carbon/ibm-products @carbon/ibm-products-primitives
+```
+
+### Step 2: Import Required Modules
+
+```typescript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+import {
+  AddSelectData,
+  HierarchicalItem,
+} from '@carbon/ibm-products-primitives';
+import { useState, useEffect } from 'react';
+```
+
+### Step 3: Define Your Hierarchical Data
+
+Structure your data according to the `HierarchicalItem` interface:
+
+```typescript
+const hierarchicalData: HierarchicalItem[] = [
+  {
+    id: '1',
+    title: 'Parent Item',
+    value: 'parent-1',
+    children: {
+      entries: [
+        { id: '1-1', title: 'Child Item 1', value: 'child-1' },
+        { id: '1-2', title: 'Child Item 2', value: 'child-2' },
+      ],
+    },
+  },
+  {
+    id: '2',
+    title: 'Another Parent',
+    value: 'parent-2',
+  },
+];
+```
+
+### Step 4: Initialize AddSelectData
+
+Create an instance of AddSelectData and set up state management:
+
+```typescript
+const [dataManager] = useState(() => new AddSelectData());
+const [currentItems, setCurrentItems] = useState<HierarchicalItem[]>([]);
+const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+const [searchTerm, setSearchTerm] = useState('');
+const [path, setPath] = useState<Array<{ id: string; title: string }>>([]);
+const [currentParentId, setCurrentParentId] = useState<string>('');
+
+useEffect(() => {
+  dataManager.setItems(hierarchicalData);
+  setCurrentItems(hierarchicalData);
+}, [dataManager]);
+```
+
+### Step 5: Implement Selection Handler
+
+Handle item selection using the utility:
+
+```typescript
+const handleItemSelect = (itemId: string, selected: boolean) => {
+  dataManager.setSelectedItems(itemId, false);
+
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+
+  // Get all selected items
+  const selectedItemsList = dataManager.getSelectedItems();
+  console.log('Selected:', selectedItemsList);
+};
+```
+
+### Step 6: Implement Navigation Handler
+
+Handle hierarchical navigation:
+
+```typescript
+const handleNavigate = (itemId: string, title: string) => {
+  const children = dataManager.getItemChildren(itemId);
+  if (children.length > 0) {
+    setCurrentItems(children);
+    setCurrentParentId(itemId);
+
+    // Build breadcrumb path
+    const parents = dataManager.getItemParents(itemId);
+    const newPath = [
+      { id: 'root', title: 'All Items' },
+      ...parents.reverse().map((p) => ({ id: p.id, title: p.title || '' })),
+      { id: itemId, title },
+    ];
+    setPath(newPath);
+  }
+};
+```
+
+### Step 7: Implement Breadcrumb Handler
+
+Handle breadcrumb navigation:
+
+```typescript
+const handleBreadcrumbClick = (index: number) => {
+  if (index === 0) {
+    // Navigate to root
+    setCurrentItems(hierarchicalData);
+    setCurrentParentId('');
+    setPath([]);
+  } else {
+    const targetId = path[index].id;
+    const children = dataManager.getItemChildren(targetId);
+    setCurrentItems(children);
+    setCurrentParentId(targetId);
+    setPath(path.slice(0, index + 1));
+  }
+};
+```
+
+### Step 8: Implement Search Handler
+
+Handle search functionality:
+
+```typescript
+const handleSearch = (query: string) => {
+  setSearchTerm(query);
+
+  if (query) {
+    const results = dataManager.search(query);
+    setCurrentItems(results);
+    setPath([]);
+  } else {
+    // Reset to current level or root
+    if (currentParentId) {
+      const children = dataManager.getItemChildren(currentParentId);
+      setCurrentItems(children);
+    } else {
+      setCurrentItems(hierarchicalData);
+    }
+  }
+};
+```
+
+### Step 9: Render Items with Navigation Indicators
+
+Render items with proper `hasChildren` flags:
+
+```typescript
+const renderItems = () => {
+  return currentItems.map((item) => {
+    const hasChildren = dataManager.hasChildren(item.id);
+    return (
+      <AddSelect.Row
+        key={item.id}
+        itemId={item.id}
+        title={item.title || ''}
+        subtitle={item.value}
+        value={item.value || ''}
+        hasChildren={hasChildren}
+      />
+    );
+  });
+};
+```
+
+### Step 10: Compose the AddSelect Component
+
+Put it all together:
+
+```typescript
+<AddSelect
+  multi
+  selectedItems={selectedItems}
+  onItemSelect={handleItemSelect}
+  onNavigate={handleNavigate}
+>
+  <AddSelect.Body
+    itemsLabel="All Items"
+    globalSearchLabel="Search"
+    globalSearchPlaceholder="Search items..."
+    searchResultsTitle="Search results"
+    itemCount={currentItems.length}
+    path={path}
+    onSearch={handleSearch}
+    onBreadcrumbClick={handleBreadcrumbClick}
+  >
+    <AddSelect.List>
+      {renderItems()}
+    </AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>
+```
+
+## AddSelectData Utility
+
+The AddSelectData utility provides powerful methods for managing hierarchical
+data:
+
+### Core Methods
+
+- **`setItems(items)`** - Initialize or replace data
+- **`getItems()`** - Get all items
+- **`getItem(id)`** - Get a specific item by ID
+
+### Selection Methods
+
+- **`setSelectedItems(ids, exclusive)`** - Select items (exclusive for
+  single-select)
+- **`getSelectedItems()`** - Get all selected items
+- **`isSelected(id)`** - Check if an item is selected
+- **`clearSelections()`** - Clear all selections
+
+### Hierarchy Methods
+
+- **`getItemChildren(id)`** - Get direct children
+- **`getItemParent(id)`** - Get parent item
+- **`getItemParents(id)`** - Get all ancestors
+- **`hasChildren(id)`** - Check if item has children
+- **`getItemDescendants(id)`** - Get all descendants
+- **`getItemDepth(id)`** - Get hierarchy depth
+
+### Search and Sort
+
+- **`search(query, options)`** - Search items
+- **`sort(compareFn, recursive)`** - Sort items
+
+[View full AddSelectData documentation →](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-primitives/src/add-select/add-select-data.md)
+
+## Complete Example
+
+The interactive story above demonstrates all these concepts working together.
+Key features:
+
+- **Hierarchical Navigation**: Click items with children to drill down through
+  the hierarchy
+- **Breadcrumb Navigation**: Click breadcrumbs to navigate back up
+- **Search**: Type to search across all items in the hierarchy
+- **Multi-select**: Select multiple items at any level
+- **State Management**: All state managed through AddSelectData utility
+- **Console Logging**: Selected items logged for debugging
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelect/AddSelect-interactive.mdx).

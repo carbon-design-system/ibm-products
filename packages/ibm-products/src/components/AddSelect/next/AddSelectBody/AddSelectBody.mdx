@@ -1,0 +1,163 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectBody.stories';
+
+# AddSelectBody
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Single Selection List](#single-selection-list)
+  - [Multi-select](#multi-select)
+  - [With Breadcrumbs](#with-breadcrumbs)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The Add Select Body component contains the main content area for the add-select
+pattern. It provides:
+
+- Global search functionality
+- Breadcrumb navigation for hierarchical data
+- Item count display with tag
+- Content area for the item list
+- Search state management
+- Callbacks for search and breadcrumb interactions
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Usage Example
+
+<Canvas of={stories.Default}></Canvas>
+
+```jsx
+<AddSelect>
+  <AddSelect.Body
+    itemsLabel="All items"
+    globalSearchLabel="Search"
+    globalSearchPlaceholder="Search items"
+    searchResultsTitle="Search results"
+    itemCount={0}
+  >
+    {/* List children go here */}
+  </AddSelect.Body>
+</AddSelect>
+```
+
+#### Single Selection List
+
+The body component with a complete single-select list.
+
+<Canvas of={stories.SingleSelectionList}></Canvas>
+
+```jsx
+<AddSelect>
+  <AddSelect.Body
+    itemsLabel="All items"
+    globalSearchLabel="Search"
+    globalSearchPlaceholder="Search items"
+    searchResultsTitle="Search results"
+    itemCount={5}
+  >
+    <AddSelect.List>
+      {items.map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+        />
+      ))}
+    </AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>
+```
+
+#### Multi-select
+
+The body component supports multi-select mode with checkboxes.
+
+<Canvas of={stories.MultiSelect}></Canvas>
+
+```jsx
+<AddSelect multi>
+  <AddSelect.Body
+    itemsLabel="All items"
+    globalSearchLabel="Search"
+    globalSearchPlaceholder="Search items"
+    itemCount={5}
+  >
+    <AddSelect.List>{/* Add select items here */}</AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>
+```
+
+#### With Breadcrumbs
+
+Display breadcrumb navigation for hierarchical data structures.
+
+<Canvas of={stories.WithBreadcrumbs}></Canvas>
+
+```jsx
+const path = [
+  { id: 'root', title: 'Root' },
+  { id: 'category', title: 'Category' },
+  { id: 'subcategory', title: 'Subcategory' },
+];
+
+const handleBreadcrumbClick = (index) => {
+  // Navigate back to the clicked level
+  console.log('Navigate to:', path[index].title);
+};
+
+<AddSelect>
+  <AddSelect.Body
+    itemsLabel="All items"
+    globalSearchLabel="Search"
+    globalSearchPlaceholder="Search items"
+    itemCount={5}
+    path={path}
+    onBreadcrumbClick={handleBreadcrumbClick}
+  >
+    <AddSelect.List>{/* Add select items here */}</AddSelect.List>
+  </AddSelect.Body>
+</AddSelect>;
+```
+
+### Events
+
+#### `onSearch`
+
+Callback when the search term changes.
+
+```typescript
+(searchTerm: string) => void
+```
+
+#### `onBreadcrumbClick`
+
+Callback when a breadcrumb item is clicked.
+
+```typescript
+(index: number) => void
+```
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelectBody/AddSelectBody.mdx).

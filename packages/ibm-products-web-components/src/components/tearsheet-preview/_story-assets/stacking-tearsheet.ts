@@ -9,7 +9,6 @@
 
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { stackManager } from '../stack-signal.js';
 import '../index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
@@ -33,14 +32,10 @@ export class StackingTearsheetDemo extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    // Set stack step size
-    stackManager.setStackStepSize('lg');
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    // Clean up stack
-    stackManager.reset();
   }
 
   private _toggleTearsheet1() {
@@ -111,43 +106,15 @@ export class StackingTearsheetDemo extends LitElement {
     return html`
       <div class="stackButtons">
         <cds-button @click="${this._toggleTearsheet1}">
-          Toggle Tearsheet 1
-        </cds-button>
-        <cds-button @click="${this._toggleTearsheet2}">
-          Toggle Tearsheet 2
-        </cds-button>
-        <cds-button @click="${this._toggleTearsheet3}">
-          Toggle Tearsheet 3
+          Open Tearsheet 1
         </cds-button>
       </div>
       <div class="smallScreenButton">
         <cds-button
           kind="ghost"
           @click="${this._toggleTearsheet1}"
-          aria-label="Toggle Tearsheet 1"
-          tooltip-text="Toggle Tearsheet 1"
-          tooltip-position="right"
-        >
-          ${iconLoader(BottomPanelOpen32, {
-            slot: 'icon',
-          })}
-        </cds-button>
-        <cds-button
-          kind="ghost"
-          @click="${this._toggleTearsheet2}"
-          aria-label="Toggle Tearsheet 2"
-          tooltip-text="Toggle Tearsheet 2"
-          tooltip-position="right"
-        >
-          ${iconLoader(BottomPanelOpen32, {
-            slot: 'icon',
-          })}
-        </cds-button>
-        <cds-button
-          kind="ghost"
-          @click="${this._toggleTearsheet3}"
-          aria-label="Toggle Tearsheet 3"
-          tooltip-text="Toggle Tearsheet 3"
+          aria-label="Open Tearsheet 1"
+          tooltip-text="Open Tearsheet 1"
           tooltip-position="right"
         >
           ${iconLoader(BottomPanelOpen32, {
@@ -156,143 +123,161 @@ export class StackingTearsheetDemo extends LitElement {
         </cds-button>
       </div>
 
-      <!-- Tearsheet 1 -->
-      <c4p-preview-tearsheet
-        ?open="${this._open1}"
-        variant="${getTearsheetVariant(1)}"
-        @c4p-preview-tearsheet-closed="${() => (this._open1 = false)}"
-      >
-        <c4p-tearsheet-header>
-          <c4p-tearsheet-header-content title="Tearsheet 1">
-            <label slot="label">Customer data</label>
-            <span slot="description">
-              This is a description for the tearsheet, providing an opportunity
-              to describe the flow over a couple of lines in the header of the
-              tearsheet.
-            </span>
-            <div slot="header-actions">
-              <cds-button
-                size="sm"
-                kind="tertiary"
-                @click="${this._toggleTearsheet2}"
-              >
-                Open Tearsheet 2
-              </cds-button>
-            </div>
-          </c4p-tearsheet-header-content>
-        </c4p-tearsheet-header>
+      <!-- Wrap tearsheets in stack provider to enable stacking -->
+      <c4p-tearsheet-stack stack-step-size="lg">
+        <!-- Tearsheet 1 -->
+        <c4p-preview-tearsheet
+          ?open="${this._open1}"
+          variant="${getTearsheetVariant(1)}"
+          @c4p-preview-tearsheet-closed="${() => (this._open1 = false)}"
+        >
+          <c4p-tearsheet-header>
+            <c4p-tearsheet-header-content title="Tearsheet 1">
+              <label slot="label">Customer data</label>
+              <span slot="description">
+                This is a description for the tearsheet, providing an
+                opportunity to describe the flow over a couple of lines in the
+                header of the tearsheet.
+              </span>
+              <div slot="header-actions">
+                <cds-button
+                  size="sm"
+                  kind="tertiary"
+                  @click="${this._toggleTearsheet2}"
+                >
+                  Open Tearsheet 2
+                </cds-button>
+              </div>
+            </c4p-tearsheet-header-content>
+          </c4p-tearsheet-header>
 
-        <c4p-tearsheet-body>
-          <div slot="main-content">${dummyContent}</div>
-          <c4p-tearsheet-summary-content slot="summary-content">
-            <h4 class="rightPanelHeading">Summary Details</h4>
-            ${summaryContent}
-          </c4p-tearsheet-summary-content>
-        </c4p-tearsheet-body>
+          <c4p-tearsheet-body>
+            <div slot="main-content">${dummyContent}</div>
+            <c4p-tearsheet-summary-content slot="summary-content">
+              <h4 class="rightPanelHeading">Summary Details</h4>
+              ${summaryContent}
+            </c4p-tearsheet-summary-content>
+          </c4p-tearsheet-body>
 
-        <c4p-tearsheet-footer>
-          <div class="default__action-buttons">
-            <cds-button
-              kind="ghost"
-              size="xl"
-              @click="${this._toggleTearsheet1}"
-            >
-              Cancel
-            </cds-button>
-            <cds-button kind="secondary" size="xl"> Back </cds-button>
-            <cds-button size="xl"> Submit </cds-button>
-          </div>
-        </c4p-tearsheet-footer>
-      </c4p-preview-tearsheet>
+          <c4p-tearsheet-footer
+            .actions="${[
+              {
+                kind: 'ghost',
+                label: 'Cancel',
+                onClick: () => this._toggleTearsheet1(),
+              },
+              {
+                kind: 'secondary',
+                label: 'Back',
+              },
+              {
+                kind: 'primary',
+                label: 'Submit',
+              },
+            ]}"
+          >
+          </c4p-tearsheet-footer>
+        </c4p-preview-tearsheet>
 
-      <!-- Tearsheet 2 -->
-      <c4p-preview-tearsheet
-        ?open="${this._open2}"
-        variant="${getTearsheetVariant(2)}"
-        @c4p-preview-tearsheet-closed="${() => (this._open2 = false)}"
-      >
-        <c4p-tearsheet-header>
-          <c4p-tearsheet-header-content title="Tearsheet 2">
-            <label slot="label">Customer data</label>
-            <span slot="description">
-              This is a description for the tearsheet, providing an opportunity
-              to describe the flow over a couple of lines in the header of the
-              tearsheet.
-            </span>
-            <div slot="header-actions">
-              <cds-button
-                size="sm"
-                kind="tertiary"
-                @click="${this._toggleTearsheet3}"
-              >
-                Open Tearsheet 3
-              </cds-button>
-            </div>
-          </c4p-tearsheet-header-content>
-        </c4p-tearsheet-header>
+        <!-- Tearsheet 2 -->
+        <c4p-preview-tearsheet
+          ?open="${this._open2}"
+          variant="${getTearsheetVariant(2)}"
+          @c4p-preview-tearsheet-closed="${() => (this._open2 = false)}"
+        >
+          <c4p-tearsheet-header>
+            <c4p-tearsheet-header-content title="Tearsheet 2">
+              <label slot="label">Customer data</label>
+              <span slot="description">
+                This is a description for the tearsheet, providing an
+                opportunity to describe the flow over a couple of lines in the
+                header of the tearsheet.
+              </span>
+              <div slot="header-actions">
+                <cds-button
+                  size="sm"
+                  kind="tertiary"
+                  @click="${this._toggleTearsheet3}"
+                >
+                  Open Tearsheet 3
+                </cds-button>
+              </div>
+            </c4p-tearsheet-header-content>
+          </c4p-tearsheet-header>
 
-        <c4p-tearsheet-body>
-          <div slot="main-content">${dummyContent}</div>
-          <c4p-tearsheet-summary-content slot="summary-content">
-            <h4 class="rightPanelHeading">Summary Details</h4>
-            ${summaryContent}
-          </c4p-tearsheet-summary-content>
-        </c4p-tearsheet-body>
+          <c4p-tearsheet-body>
+            <div slot="main-content">${dummyContent}</div>
+            <c4p-tearsheet-summary-content slot="summary-content">
+              <h4 class="rightPanelHeading">Summary Details</h4>
+              ${summaryContent}
+            </c4p-tearsheet-summary-content>
+          </c4p-tearsheet-body>
 
-        <c4p-tearsheet-footer>
-          <div class="default__action-buttons">
-            <cds-button
-              kind="ghost"
-              size="xl"
-              @click="${this._toggleTearsheet2}"
-            >
-              Cancel
-            </cds-button>
-            <cds-button kind="secondary" size="xl"> Back </cds-button>
-            <cds-button size="xl"> Submit </cds-button>
-          </div>
-        </c4p-tearsheet-footer>
-      </c4p-preview-tearsheet>
+          <c4p-tearsheet-footer
+            .actions="${[
+              {
+                kind: 'ghost',
+                label: 'Cancel',
+                onClick: () => this._toggleTearsheet2(),
+              },
+              {
+                kind: 'secondary',
+                label: 'Back',
+              },
+              {
+                kind: 'primary',
+                label: 'Submit',
+              },
+            ]}"
+          >
+          </c4p-tearsheet-footer>
+        </c4p-preview-tearsheet>
 
-      <!-- Tearsheet 3 -->
-      <c4p-preview-tearsheet
-        ?open="${this._open3}"
-        variant="${getTearsheetVariant(3)}"
-        @c4p-preview-tearsheet-closed="${() => (this._open3 = false)}"
-      >
-        <c4p-tearsheet-header>
-          <c4p-tearsheet-header-content title="Tearsheet 3">
-            <label slot="label">Customer data</label>
-            <span slot="description">
-              This is a description for the tearsheet, providing an opportunity
-              to describe the flow over a couple of lines in the header of the
-              tearsheet.
-            </span>
-          </c4p-tearsheet-header-content>
-        </c4p-tearsheet-header>
+        <!-- Tearsheet 3 -->
+        <c4p-preview-tearsheet
+          ?open="${this._open3}"
+          variant="${getTearsheetVariant(3)}"
+          @c4p-preview-tearsheet-closed="${() => (this._open3 = false)}"
+        >
+          <c4p-tearsheet-header>
+            <c4p-tearsheet-header-content title="Tearsheet 3">
+              <label slot="label">Customer data</label>
+              <span slot="description">
+                This is a description for the tearsheet, providing an
+                opportunity to describe the flow over a couple of lines in the
+                header of the tearsheet.
+              </span>
+            </c4p-tearsheet-header-content>
+          </c4p-tearsheet-header>
 
-        <c4p-tearsheet-body>
-          <div slot="main-content">${dummyContent}</div>
-          <c4p-tearsheet-summary-content slot="summary-content">
-            <h4 class="rightPanelHeading">Summary Details</h4>
-            ${summaryContent}
-          </c4p-tearsheet-summary-content>
-        </c4p-tearsheet-body>
+          <c4p-tearsheet-body>
+            <div slot="main-content">${dummyContent}</div>
+            <c4p-tearsheet-summary-content slot="summary-content">
+              <h4 class="rightPanelHeading">Summary Details</h4>
+              ${summaryContent}
+            </c4p-tearsheet-summary-content>
+          </c4p-tearsheet-body>
 
-        <c4p-tearsheet-footer>
-          <div class="default__action-buttons">
-            <cds-button
-              kind="ghost"
-              size="xl"
-              @click="${this._toggleTearsheet3}"
-            >
-              Cancel
-            </cds-button>
-            <cds-button kind="secondary" size="xl"> Back </cds-button>
-            <cds-button size="xl"> Submit </cds-button>
-          </div>
-        </c4p-tearsheet-footer>
-      </c4p-preview-tearsheet>
+          <c4p-tearsheet-footer
+            .actions="${[
+              {
+                kind: 'ghost',
+                label: 'Cancel',
+                onClick: () => this._toggleTearsheet3(),
+              },
+              {
+                kind: 'secondary',
+                label: 'Back',
+              },
+              {
+                kind: 'primary',
+                label: 'Submit',
+              },
+            ]}"
+          >
+          </c4p-tearsheet-footer>
+        </c4p-preview-tearsheet>
+      </c4p-tearsheet-stack>
     `;
   }
 

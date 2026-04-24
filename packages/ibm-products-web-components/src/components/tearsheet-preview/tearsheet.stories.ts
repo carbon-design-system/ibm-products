@@ -413,22 +413,24 @@ export const Default = {
               >`
             : ''}
         </c4p-tearsheet-body>
-        <c4p-tearsheet-footer>
-          <div class="default__action-buttons">
-            <cds-button
-              kind="ghost"
-              size="${getButtonSize(args.variant)}"
-              @click="${toggleButton}"
-            >
-              Cancel
-            </cds-button>
-            <cds-button kind="secondary" size="${getButtonSize(args.variant)}">
-              Back
-            </cds-button>
-            <cds-button size="${getButtonSize(args.variant)}">
-              Submit
-            </cds-button>
-          </div>
+        <c4p-tearsheet-footer
+          variant="${args.variant}"
+          .actions="${[
+            {
+              kind: 'ghost',
+              label: 'Cancel',
+              onClick: toggleButton,
+            },
+            {
+              kind: 'secondary',
+              label: 'Back',
+            },
+            {
+              kind: 'primary',
+              label: 'Submit',
+            },
+          ]}"
+        >
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
     `;
@@ -490,20 +492,24 @@ export const WithInfluencer = {
           </div>
         </c4p-tearsheet-body>
 
-        <c4p-tearsheet-footer>
-          <div class="default__action-buttons">
-            <cds-button
-              kind="ghost"
-              size="${getButtonSize('wide')}"
-              @click="${toggleButton}"
-            >
-              Cancel
-            </cds-button>
-            <cds-button kind="secondary" size="${getButtonSize('wide')}">
-              Back
-            </cds-button>
-            <cds-button size="${getButtonSize('wide')}"> Submit </cds-button>
-          </div>
+        <c4p-tearsheet-footer
+          variant="wide"
+          .actions="${[
+            {
+              kind: 'ghost',
+              label: 'Cancel',
+              onClick: toggleButton,
+            },
+            {
+              kind: 'secondary',
+              label: 'Back',
+            },
+            {
+              kind: 'primary',
+              label: 'Submit',
+            },
+          ]}"
+        >
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
     `;
@@ -562,20 +568,24 @@ export const WithTabs = {
           </div>
         </c4p-tearsheet-body>
 
-        <c4p-tearsheet-footer>
-          <div class="default__action-buttons">
-            <cds-button
-              kind="ghost"
-              size="${getButtonSize('wide')}"
-              @click="${toggleButton}"
-            >
-              Cancel
-            </cds-button>
-            <cds-button kind="secondary" size="${getButtonSize('wide')}">
-              Back
-            </cds-button>
-            <cds-button size="${getButtonSize('wide')}"> Submit </cds-button>
-          </div>
+        <c4p-tearsheet-footer
+          variant="wide"
+          .actions="${[
+            {
+              kind: 'ghost',
+              label: 'Cancel',
+              onClick: toggleButton,
+            },
+            {
+              kind: 'secondary',
+              label: 'Back',
+            },
+            {
+              kind: 'primary',
+              label: 'Submit',
+            },
+          ]}"
+        >
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
     `;
@@ -642,14 +652,25 @@ export const narrowTearsheet = {
         ${dummyContent}</div>
        <c4p-tearsheet-summary-content   slot="summary-content">${summaryContent}</c4p-tearsheet-summary-content>
         </c4p-tearsheet-body>
-        <c4p-tearsheet-footer>
-         <div class="default__action-buttons" >
-            <cds-button kind="ghost" size="${getButtonSize('narrow')}" @click="${toggleButton}">
-              Cancel
-            </cds-button>
-            <cds-button kind="secondary" size="${getButtonSize('narrow')}"> Back </cds-button>
-            <cds-button size="${getButtonSize('narrow')}"> Submit </cds-button>
-         </div > </c4p-tearsheet-footer>
+        <c4p-tearsheet-footer
+         variant="narrow"
+         .actions="${[
+           {
+             kind: 'ghost',
+             label: 'Cancel',
+             onClick: toggleButton,
+           },
+           {
+             kind: 'secondary',
+             label: 'Back',
+           },
+           {
+             kind: 'primary',
+             label: 'Submit',
+           },
+         ]}"
+       >
+       </c4p-tearsheet-footer>
      </<c4p-preview-tearsheet>
       
     `;
@@ -695,6 +716,113 @@ export const StackingWithDifferentSizes = {
         ${styles}
       </style>
       <stacking-tearsheet-demo tearsheet-type="mixed"></stacking-tearsheet-demo>
+    `;
+  },
+};
+
+export const WithCustomFooterActions = {
+  args: {
+    variant: 'wide',
+    open: false,
+    showSummaryContent: true,
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['wide', 'narrow'],
+      description: 'Tearsheet variant',
+    },
+    open: {
+      control: 'boolean',
+      description: 'Controls whether the tearsheet is open',
+    },
+    showSummaryContent: {
+      control: 'boolean',
+      description: 'Show summary content panel',
+    },
+  },
+  render: (args) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div class="${storyPrefix}story-container">
+        <div class="${storyPrefix}story-header"></div>
+        <div id="page-content-selector" class="${storyPrefix}story-content">
+          <cds-button @click="${toggleButton}">Toggle tearsheet</cds-button>
+        </div>
+      </div>
+
+      <c4p-preview-tearsheet
+        variant="${args.variant}"
+        ?open="${args.open}"
+        prevent-close-on-click-outside
+      >
+        <c4p-tearsheet-header ?hide-close-button="${false}">
+          <c4p-tearsheet-header-content title="Title of the tearsheet">
+            <label slot="label">Customer data</label>
+            ${description}
+            ${iconLoader(Bee, {
+              slot: 'title-start',
+            })}
+
+            <div slot="header-actions">
+              <cds-button size="sm" kind="tertiary">
+                Action 1 ${iconLoader(Add16, { slot: 'icon' })}
+              </cds-button>
+            </div>
+          </c4p-tearsheet-header-content>
+        </c4p-tearsheet-header>
+
+        <c4p-tearsheet-body>
+          <div slot="main-content">
+            ${args.showSummaryContent
+              ? html`<div class="summaryPanelTrigger">
+                  <cds-button
+                    kind="ghost"
+                    label="Open right panel"
+                    @click="${toggleSummaryPanel}"
+                  >
+                    ${iconLoader(RightPanelClose32, {
+                      slot: 'icon',
+                    })}
+                  </cds-button>
+                </div>`
+              : ''}
+            ${dummyContent}
+          </div>
+          ${args.showSummaryContent
+            ? html`<c4p-tearsheet-summary-content slot="summary-content"
+                >${summaryContent}</c4p-tearsheet-summary-content
+              >`
+            : ''}
+        </c4p-tearsheet-body>
+
+        <c4p-tearsheet-footer>
+          <div class="default__action-buttons">
+            <cds-button
+              kind="ghost"
+              size="${getButtonSize(args.variant)}"
+              @click="${toggleButton}"
+            >
+              Cancel
+            </cds-button>
+            <cds-button
+              kind="secondary"
+              size="${getButtonSize(args.variant)}"
+              @click="${() => console.log('Back clicked')}"
+            >
+              Back
+            </cds-button>
+            <cds-button
+              size="${getButtonSize(args.variant)}"
+              @click="${() => console.log('Submit clicked')}"
+            >
+              Submit
+            </cds-button>
+          </div>
+        </c4p-tearsheet-footer>
+      </c4p-preview-tearsheet>
     `;
   },
 };

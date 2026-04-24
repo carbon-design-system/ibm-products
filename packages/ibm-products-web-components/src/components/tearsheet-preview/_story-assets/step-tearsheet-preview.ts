@@ -20,6 +20,7 @@ import '../../../utilities/step-flow/index.js';
 import '../index.js';
 import styles from './_storybook-styles.scss?lit';
 import { StepInstance } from '../../../utilities/step-flow/step-flow-signal';
+import type { ActionButton } from '../../action-set/action-set';
 
 interface FormStateType {
   email?: string;
@@ -158,9 +159,31 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
     return 'incomplete';
   }
 
-  render() {
-    const { currentStep, totalSteps } = this._stepInfo.data;
+  private _getActions(): ActionButton[] {
+    const { currentStep } = this._stepInfo.data;
 
+    return [
+      {
+        kind: 'ghost',
+        label: 'Cancel',
+        onClick: () => this._handleCancelButton(),
+      },
+      {
+        kind: 'secondary',
+        label: 'Back',
+        disabled: currentStep === 0,
+        onClick: () => this._handleBackButton(),
+      },
+      {
+        kind: 'primary',
+        label:
+          currentStep < this._stepInfo.data.totalSteps - 1 ? 'Next' : 'Submit',
+        onClick: () => this._handleNextButton(),
+      },
+    ];
+  }
+
+  render() {
     return html`
       <cds-button type="button" size="md" @click="${this._onButtonClick}">
         Start create flow
@@ -237,27 +260,7 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
           </div>
         </c4p-tearsheet-body>
 
-        <c4p-tearsheet-footer>
-          <div class="default__action-buttons">
-            <cds-button
-              kind="ghost"
-              size="xl"
-              @click="${this._handleCancelButton}"
-            >
-              Cancel
-            </cds-button>
-            <cds-button
-              kind="secondary"
-              size="xl"
-              ?disabled="${currentStep === 0}"
-              @click="${this._handleBackButton}"
-            >
-              Back
-            </cds-button>
-            <cds-button size="xl" @click="${this._handleNextButton}">
-              ${currentStep < totalSteps - 1 ? 'Next' : 'Submit'}
-            </cds-button>
-          </div>
+        <c4p-tearsheet-footer .actions="${this._getActions()}">
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
     `;

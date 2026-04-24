@@ -14,4 +14,5 @@ import './tearsheet-influencer';
 import './tearsheet-header-content';
 import './tearsheet-navigation-bar';
 import './tearsheet-scroller';
+import './tearsheet-stack';
 import './tearsheet-summary-content';

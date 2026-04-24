@@ -30,8 +30,8 @@ const renderCoachmarkWithBeacon = ({ ...rest } = {}) =>
         data-testid={childDataTestId}
         {...rest}
       ></CoachmarkBeacon>
-      <Coachmark.Content highContrast={true}>
-        <Coachmark.Content.Header></Coachmark.Content.Header>
+      <Coachmark.Content>
+        <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
         <Coachmark.Content.Body>
           <h2>Hello World</h2>
           <p>this is a description test</p>

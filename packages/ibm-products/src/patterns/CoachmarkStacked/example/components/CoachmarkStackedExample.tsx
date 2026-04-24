@@ -73,15 +73,21 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [openId, setOpenId] = useState(0);
-  const carouselContainerRef = useRef(null);
   const carouselInit = useRef(null);
   const [parentHeight, setParentHeight] = useState(0);
   const stackHomeContentRef = useRef(null);
   const stackedCoachmarkContentRefs = useRef([]);
-  const nextRef = useRef<HTMLButtonElement>(null);
-  const backRef = useRef<HTMLButtonElement>(null);
-  const doneRef = useRef<HTMLButtonElement>(null);
-  const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  // Use ref maps to store button refs for each example separately
+  const primaryButtonRefMap = useRef<{
+    [key: number]: HTMLButtonElement | null;
+  }>({});
+  const backRefMap = useRef<{ [key: number]: HTMLButtonElement | null }>({});
+  const carouselContainerRefs = useRef<{
+    [key: number]: HTMLDivElement | null;
+  }>({});
+  const carouselItemsRef = useRef<{ [key: number]: (HTMLDivElement | null)[] }>(
+    {}
+  );
   const parentButtonRefs = useRef<{ [key: number]: HTMLButtonElement | null }>(
     {}
   );
@@ -114,11 +120,14 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       type: 'simple',
       button: (
         <Button
-          ref={doneRef}
+          ref={(el) => {
+            primaryButtonRefMap.current[1] = el;
+          }}
           size="sm"
           onClick={(e) => {
-            setOpenId(0);
             e.stopPropagation();
+            e.preventDefault();
+            setOpenId(0);
           }}
         >
           Done
@@ -241,55 +250,51 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
 
   const handleClose = (e?) => {
     e?.stopPropagation();
+    // Don't close parent if a child is open
+    if (openId > 0) {
+      return;
+    }
     setIsOpen(false);
   };
 
   const handleCloseCarousel = (e) => {
-    setOpenId(0);
-    carouselInit.current.reset();
     e?.stopPropagation();
+    setOpenId(0);
+    carouselInit.current?.reset();
   };
 
   const handleTaglineClick = () => {
     setIsOpen((isOpen) => !isOpen);
   };
 
-  const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
-    carouselItemsRef.current.forEach((item, idx) => {
-      if (!item) {
-        return;
-      }
+  const updateCarouselItemsTabIndex = useCallback(
+    (itemId: number, activeIndex: number) => {
+      const carouselItems = carouselItemsRef.current[itemId] || [];
 
-      const isActive = idx === activeIndex;
+      carouselItems.forEach((item, idx) => {
+        if (!item) {
+          return;
+        }
 
-      // Set aria-hidden based on active state
-      item.setAttribute('aria-hidden', String(!isActive));
+        const isActive = idx === activeIndex;
 
-      if (!isActive) {
-        item.setAttribute('inert', ''); // Disable interactivity
-      } else {
-        item.removeAttribute('inert'); // Re-enable interactivity
-      }
+        item.setAttribute('aria-hidden', String(!isActive));
 
-      item.removeAttribute('tabindex');
-    });
-  }, []);
+        if (!isActive) {
+          item.setAttribute('inert', '');
+        } else {
+          item.removeAttribute('inert');
+        }
+
+        item.removeAttribute('tabindex');
+      });
+    },
+    []
+  );
 
   useEffect(() => {
     if (openId > 0) {
       lastOpenIdRef.current = openId;
-      const nestedItem = nestedItems.find((item) => item.id === openId);
-
-      if (nestedItem?.type === 'carousel') {
-        updateCarouselItemsTabIndex(0);
-        setTimeout(() => {
-          nextRef?.current?.focus();
-        }, 100);
-      } else {
-        setTimeout(() => {
-          doneRef?.current?.focus();
-        }, 100);
-      }
     } else if ((openId === 0 || openId === null) && lastOpenIdRef.current > 0) {
       // Child was closed, return focus to the parent button that opened it
       setTimeout(() => {
@@ -314,8 +319,10 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   }, [isOpen]);
 
   useEffect(() => {
-    if (carouselContainerRef && carouselContainerRef.current) {
-      carouselInit.current = initCarousel(carouselContainerRef.current, {
+    const activeCarouselContainer = carouselContainerRefs.current[openId];
+
+    if (openId > 0 && activeCarouselContainer) {
+      carouselInit.current = initCarousel(activeCarouselContainer, {
         onViewChangeStart: onViewChangeStart,
         onViewChangeEnd: onViewChangeEnd,
         useMaxHeight: true,
@@ -335,103 +342,97 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       setLastViewIndex(lastIndex);
 
       // Update inert attribute for carousel items
-      updateCarouselItemsTabIndex(currentIndex);
-
-      // Use setTimeout to ensure button refs are updated after re-render
-      setTimeout(() => {
-        if (currentIndex === lastIndex) {
-          // On last slide, focus the Done button
-          doneRef.current?.focus();
-        } else {
-          // On other slides, focus the Next button
-          nextRef.current?.focus();
-        }
-      }, 50);
+      updateCarouselItemsTabIndex(openId, currentIndex);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [openId, updateCarouselItemsTabIndex]
   );
 
+  // Separate effect to handle focus after carousel navigation
+  useEffect(() => {
+    if (openId > 0 && currentViewIndex !== null) {
+      // Use setTimeout with requestAnimationFrame to ensure DOM is fully updated
+      setTimeout(() => {
+        // Focus the primary button for this specific example
+        const primaryButton = primaryButtonRefMap.current[openId];
+        if (primaryButton) {
+          primaryButton.focus();
+        }
+      }, 150);
+    }
+  }, [currentViewIndex, lastViewIndex, openId]);
+
   const onNext = (e) => {
     carouselInit?.current?.next();
-    e.stopPropagation();
   };
+
   const onPrev = (e) => {
+    // Focus the primary button before navigation if Back button will be hidden
+    if (currentViewIndex === 1) {
+      const primaryButton = primaryButtonRefMap.current[openId];
+      if (primaryButton) {
+        primaryButton.focus();
+      }
+    }
     carouselInit?.current?.prev();
-    e.stopPropagation();
   };
 
   useLayoutEffect(() => {
-    if (!parentHeight) {
-      if (stackHomeContentRef.current) {
-        const stackHomeContent = stackHomeContentRef.current.querySelector(
-          `div.${prefix}__bubble`
-        );
-        if (stackHomeContent) {
-          const height = stackHomeContent.clientHeight;
+    const getPopoverContentElement = (container: HTMLElement | null) =>
+      container?.closest('.cds--popover-content') as HTMLElement | null;
 
-          if (height > 0) {
-            setParentHeight(height);
-          }
+    const stackHomeContent = getPopoverContentElement(
+      stackHomeContentRef.current
+    );
+
+    if (!parentHeight) {
+      if (stackHomeContent) {
+        const height = stackHomeContent.clientHeight;
+        if (height > 0) {
+          setParentHeight(height);
         }
       }
       return;
     }
 
-    if (stackHomeContentRef.current) {
-      const stackHomeContent = stackHomeContentRef.current.querySelector(
-        `div.${prefix}__bubble`
-      );
-      if (stackHomeContent) {
-        stackHomeContent.style.height = `${parentHeight}px`;
-      }
+    if (stackHomeContent) {
+      stackHomeContent.style.height = `${parentHeight}px`;
     }
 
     if (!isOpen || openId <= 0) {
       requestAnimationFrame(() => {
-        if (stackHomeContentRef.current) {
-          const stackHomeContent = stackHomeContentRef.current.querySelector(
-            `div.${prefix}__bubble`
+        if (stackHomeContent) {
+          stackHomeContent.parentElement?.classList.remove(
+            `${blockClass}--scaled-home`
           );
-
-          if (stackHomeContent) {
-            stackHomeContent.classList.remove(`${blockClass}--scaled-home`);
-            stackHomeContent.classList.add(`${blockClass}--unscaled-home`);
-            stackHomeContent.focus();
-          }
+          stackHomeContent.parentElement?.classList.add(
+            `${blockClass}--unscaled-home`
+          );
+          stackHomeContent.focus();
         }
-        return;
-      }, 0);
+      });
+      return;
     }
 
     if (openId > 0 && isOpen && stackedCoachmarkContentRefs.current) {
       const container = stackedCoachmarkContentRefs.current[openId];
+      const targetHome = getPopoverContentElement(container);
 
-      const targetHome = Array.from(
-        container.querySelectorAll(`div.${prefix}__bubble`)
-      ).filter((bubble) => bubble.parentElement === container);
+      if (stackHomeContent && targetHome) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            const targetHomeHeight = targetHome.clientHeight;
 
-      if (targetHome.length > 0) {
-        setTimeout(() => {
-          targetHome.forEach((bubble) => {
-            requestAnimationFrame(() => {
-              const targetHomeHeight = bubble.clientHeight;
-
-              const stackHomeContent =
-                stackHomeContentRef.current.querySelector(
-                  `div.${prefix}__bubble`
-                );
-              if (stackHomeContent) {
-                stackHomeContent.style.height = `calc(${targetHomeHeight}px + 1px)`;
-                stackHomeContent.classList.add(`${blockClass}--scaled-home`);
-                stackHomeContent.classList.remove(
-                  `${blockClass}--unscaled-home`
-                );
-                stackedCoachmarkContentRefs.current[openId].focus();
-              }
-            });
+            stackHomeContent.style.height = `calc(${targetHomeHeight}px + 16px)`;
+            stackHomeContent.parentElement?.classList.add(
+              `${blockClass}--scaled-home`
+            );
+            stackHomeContent.parentElement?.classList.remove(
+              `${blockClass}--unscaled-home`
+            );
+            targetHome.focus();
           });
-        }, 0);
+        });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -445,6 +446,12 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
         align="top"
         {...args}
         className={`${blockClass}`}
+        caret={false}
+        selectorPrimaryFocus={
+          openId === 0 && lastOpenIdRef.current === 0
+            ? `.${blockClass}__nav-links li:first-child button`
+            : undefined
+        }
       >
         <CoachmarkTagline
           title="Why are there two types of severity scores?"
@@ -454,7 +461,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
           buttonProps={{ onClick: handleTaglineClick, id: 'CoachmarkTagline' }}
         ></CoachmarkTagline>
         <Coachmark.Content
-          className={isOpen && `--is-visible`}
+          className={isOpen ? `--is-visible` : ''}
           highContrast={true}
           ref={stackHomeContentRef}
         >
@@ -479,7 +486,9 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                       }}
                       kind="ghost"
                       size="sm"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
                         setOpenId(item.id);
                       }}
                     >
@@ -500,129 +509,150 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
           </Coachmark.Content.Body>
         </Coachmark.Content>
       </Coachmark>
-      {items.map((item) => (
-        <Coachmark
-          key={item.id}
-          open={openId === item.id}
-          onClose={() => {
-            setOpenId(0);
-          }}
-          align="top"
-        >
-          <Coachmark.Content
-            highContrast
-            ref={(el) => {
-              if (el) {
-                stackedCoachmarkContentRefs.current[item.id] = el;
-              }
+      {items.map((item) => {
+        const isOpen = openId === item.id;
+
+        return (
+          <Coachmark
+            key={item.id}
+            open={isOpen}
+            onClose={() => {
+              // Prevent closing during carousel navigation
+              setOpenId(0);
             }}
-            className={cx(`${elementBlockClass}`)}
+            align="top"
+            caret={false}
           >
-            <Coachmark.Content.Header closeIconDescription="Close" />
-            <Coachmark.Content.Body>
-              {nestedItems
-                .filter((nested) => nested.id === item.id)
-                .map((nested) => {
-                  if (nested.type === 'simple') {
-                    return (
-                      <div
-                        key={nested.id}
-                        className={`${stackedCoachmark}__content`}
-                      >
-                        <h2 className={`${stackedCoachmark}__title`}>
-                          {nested.title}
-                        </h2>
-                        <p className={`${stackedCoachmark}__body`}>
-                          {nested.text}
-                        </p>
-                        <div className={`${stackedCoachmark}__button`}>
-                          {nested.button}
-                        </div>
-                      </div>
-                    );
-                  }
-                  if (nested.type === 'carousel') {
-                    return (
-                      <React.Fragment key={nested.id}>
+            <Button
+              style={{
+                display: 'none',
+              }}
+            >
+              {item.id}
+            </Button>
+            <Coachmark.Content
+              ref={(el) => {
+                if (el) {
+                  stackedCoachmarkContentRefs.current[item.id] = el;
+                }
+              }}
+              className={cx(`${elementBlockClass}`)}
+            >
+              <Coachmark.Content.Header closeIconDescription="Close" />
+              <Coachmark.Content.Body>
+                {nestedItems
+                  .filter((nested) => nested.id === item.id)
+                  .map((nested) => {
+                    if (nested.type === 'simple') {
+                      return (
                         <div
-                          ref={carouselContainerRef}
-                          className="exampleCarouselWrapper"
+                          key={nested.id}
+                          className={`${stackedCoachmark}__content`}
                         >
-                          {nested.pages.map((page, index) => (
-                            <div
-                              key={page.id}
-                              ref={(el) => {
-                                carouselItemsRef.current[index] = el;
-                              }}
-                            >
-                              <h2>{page.title}</h2>
-                              <p>{page.text}</p>
-                              <p>{page.button}</p>
-                            </div>
-                          ))}
+                          <h2 className={`${stackedCoachmark}__title`}>
+                            {nested.title}
+                          </h2>
+                          <p className={`${stackedCoachmark}__body`}>
+                            {nested.text}
+                          </p>
+                          <div className={`${stackedCoachmark}__button`}>
+                            {nested.button}
+                          </div>
                         </div>
-
-                        <div className={'carouselControlWrapper__footer'}>
+                      );
+                    }
+                    if (nested.type === 'carousel') {
+                      return (
+                        <React.Fragment key={nested.id}>
                           <div
-                            className={
-                              'carouselControlWrapper--controls-progress'
-                            }
+                            ref={(el) => {
+                              carouselContainerRefs.current[item.id] = el;
+                            }}
+                            className="exampleCarouselWrapper"
                           >
-                            {nested.pages.map((page, index) => {
-                              if (
-                                carouselInit.current?.getActiveItem?.()
-                                  ?.index === index
-                              ) {
-                                return (
-                                  <span key={item.id}>
-                                    {`${carouselInit.current?.getActiveItem?.()?.index + 1} / ${nested.pages.length}`}
-                                  </span>
-                                );
-                              }
-                            })}
-                          </div>
-                          <div className={'carouselControlWrapper--buttons'}>
-                            {currentViewIndex !== 0 && (
-                              <Button
-                                ref={backRef}
-                                size="sm"
-                                iconDescription="Previous"
-                                kind="ghost"
-                                onClick={onPrev}
+                            {nested.pages.map((page, index) => (
+                              <div
+                                key={page.id}
+                                ref={(el) => {
+                                  if (!carouselItemsRef.current[item.id]) {
+                                    carouselItemsRef.current[item.id] = [];
+                                  }
+                                  carouselItemsRef.current[item.id][index] = el;
+                                }}
                               >
-                                Back
-                              </Button>
-                            )}
+                                <h2>{page.title}</h2>
+                                <p>{page.text}</p>
+                                <p>{page.button}</p>
+                              </div>
+                            ))}
+                          </div>
 
-                            {lastViewIndex !== currentViewIndex ? (
+                          <div className={'carouselControlWrapper__footer'}>
+                            <div
+                              className={
+                                'carouselControlWrapper--controls-progress'
+                              }
+                            >
+                              {nested.pages.map((page, index) => {
+                                if (
+                                  carouselInit.current?.getActiveItem?.()
+                                    ?.index === index
+                                ) {
+                                  return (
+                                    <span key={item.id}>
+                                      {`${carouselInit.current?.getActiveItem?.()?.index + 1} / ${nested.pages.length}`}
+                                    </span>
+                                  );
+                                }
+                              })}
+                            </div>
+                            <div className={'carouselControlWrapper--buttons'}>
+                              {currentViewIndex !== 0 && (
+                                <Button
+                                  ref={(el) => {
+                                    backRefMap.current[item.id] = el;
+                                  }}
+                                  size="sm"
+                                  iconDescription="Previous"
+                                  kind="ghost"
+                                  onClick={onPrev}
+                                >
+                                  Back
+                                </Button>
+                              )}
                               <Button
-                                ref={nextRef}
+                                id="coachmark-primary-button"
                                 size="sm"
-                                iconDescription="Next"
-                                onClick={onNext}
+                                iconDescription={
+                                  currentViewIndex < nested.pages.length - 1
+                                    ? 'Next'
+                                    : 'Done'
+                                }
+                                onClick={
+                                  currentViewIndex < nested.pages.length - 1
+                                    ? onNext
+                                    : handleCloseCarousel
+                                }
+                                ref={(el) => {
+                                  primaryButtonRefMap.current[item.id] = el;
+                                }}
                               >
-                                Next
+                                {currentViewIndex < nested.pages.length - 1
+                                  ? 'Next'
+                                  : 'Done'}
                               </Button>
-                            ) : (
-                              <Button
-                                ref={doneRef}
-                                size="sm"
-                                onClick={handleCloseCarousel}
-                              >
-                                Done
-                              </Button>
-                            )}
+                            </div>
                           </div>
-                        </div>
-                      </React.Fragment>
-                    );
-                  }
-                  return null;
-                })}
-            </Coachmark.Content.Body>
-          </Coachmark.Content>
-        </Coachmark>
-      ))}
+                        </React.Fragment>
+                      );
+                    }
+                    return null;
+                  })}
+              </Coachmark.Content.Body>
+            </Coachmark.Content>
+          </Coachmark>
+        );
+      })}
     </Theme>
   );
 };

@@ -18,7 +18,7 @@ import { Add, TextNewLine } from '@carbon/react/icons';
 import ConditionGroupBuilder from '../ConditionGroupBuilder/ConditionGroupBuilder';
 import {
   ConditionBuilderContext,
-  emptyState,
+  getEmptyState,
 } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import uuidv4 from '../../../global/js/utils/uuidv4';
@@ -51,8 +51,15 @@ const ConditionBuilderContent = ({
   initialState,
   actions,
 }: ConditionBuilderContentProps) => {
-  const { rootState, setRootState, variant, actionState, onAddItem, readOnly } =
-    useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
+  const {
+    rootState,
+    setRootState,
+    variant,
+    actionState,
+    onAddItem,
+    readOnly,
+    statementConfigCustom,
+  } = useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
 
   const initialConditionState = useRef(
     initialState?.state ? JSON.parse(JSON.stringify(initialState?.state)) : null
@@ -111,7 +118,7 @@ const ConditionBuilderContent = ({
       setRootState?.(initialConditionState.current);
       initialConditionState.current = null;
     } else {
-      setRootState?.(emptyState); //here we can set an empty skeleton object for an empty condition builder,
+      setRootState?.(getEmptyState(statementConfigCustom)); //here we can set an empty skeleton object for an empty condition builder,
     }
 
     //or we can even pre-populate some existing builder and continue editing
@@ -159,20 +166,8 @@ const ConditionBuilderContent = ({
         state: rootState as ConditionBuilderState,
       }) ?? {};
     if (!preventAdd) {
-      const newGroup: ConditionGroup = {
-        statement: 'ifAll',
-        groupOperator: 'and',
-        id: uuidv4(),
-        conditions: [
-          {
-            property: undefined,
-            operator: '',
-            value: '',
-            popoverToOpen: 'propertyField',
-            id: uuidv4(),
-          },
-        ],
-      };
+      const newGroup = getEmptyState(statementConfigCustom)
+        .groups?.[0] as ConditionGroup;
       setRootState?.({
         ...rootState,
         groups:

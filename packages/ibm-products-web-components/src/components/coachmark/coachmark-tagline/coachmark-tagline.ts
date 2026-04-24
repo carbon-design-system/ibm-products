@@ -63,6 +63,7 @@ class CDSCoachmarkTagline extends HostListenerMixin(LitElement) {
       }
     }
   }
+
   /**
    * Handles the close button click event.
    */

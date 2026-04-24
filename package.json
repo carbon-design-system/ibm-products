@@ -167,7 +167,13 @@
     "picomatch": "^4.0.4",
     "picomatch@^2.0.0": "^2.3.2",
     "picomatch@^3.0.0": "^3.0.2",
-    "picomatch@^4.0.0": "^4.0.4"
+    "picomatch@^4.0.0": "^4.0.4",
+    "minimatch@^5.0.1": "^5.1.8",
+    "minimatch@^5.1.0": "^5.1.8",
+    "minimatch@^9.0.3": "^9.0.7",
+    "minimatch@^9.0.4": "^9.0.7",
+    "minimatch@^9.0.5": "^9.0.7",
+    "brace-expansion@^5.0.2": "^5.0.5"
   },
   "lint-staged": {
     "*": [

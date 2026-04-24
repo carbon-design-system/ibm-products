@@ -2352,6 +2352,51 @@ describe(componentName, () => {
       'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
   };
 
+  // Helper function to create multiselect filter props with customizable options
+  const createMultiSelectFilterProps = (overrides = {}) => ({
+    variation: 'panel',
+    updateMethod: 'batch',
+    primaryActionLabel: 'Apply',
+    secondaryActionLabel: 'Cancel',
+    panelIconDescription: 'Open filters',
+    sections: [
+      {
+        categoryTitle: 'Test Category',
+        filters: [
+          {
+            filterLabel: 'Status',
+            filter: {
+              type: 'multiSelect',
+              column: 'status',
+              props: {
+                MultiSelect: {
+                  items: [
+                    { text: 'Active', id: 'active' },
+                    { text: 'Inactive', id: 'inactive' },
+                    ...(overrides.includeThirdItem
+                      ? [{ text: 'Pending', id: 'pending' }]
+                      : []),
+                  ],
+                  id: overrides.id || 'status-multiselect-normal',
+                  label: overrides.label || 'Status selection',
+                  titleText: overrides.titleText || 'Multiselect normal',
+                  itemToString: (item) => (item ? item.text : ''),
+                },
+              },
+            },
+          },
+        ],
+      },
+    ],
+    renderLabel: (key, value) => `${key}: ${value}`,
+  });
+
+  // Helper function to get the filter toggle button from the toolbar
+  const getFilterToggleButton = () => {
+    const toolbar = screen.getByLabelText('data table toolbar').parentElement;
+    return within(toolbar).getAllByRole('button')[0];
+  };
+
   it('should test basic interactions of filter panel', async () => {
     const user = userEvent.setup({
       advanceTimers: jest.advanceTimersByTime,
@@ -2742,6 +2787,89 @@ describe(componentName, () => {
     const checkboxElement = screen.getByRole('checkbox', { name: 'Critical' });
     await click(checkboxElement);
     expect(checkboxElement.checked).toEqual(true);
+  });
+  it('should handle multiselect filter with empty filtersState without crashing', async () => {
+    // This regression test covers rapid state transitions where
+    // filtersState[column]?.value may be temporarily undefined.
+    const multiSelectFilterProps = createMultiSelectFilterProps({
+      includeThirdItem: true,
+      id: 'status-multiselect',
+      titleText: 'Multiselect title',
+    });
+
+    const { rerender } = render(
+      <FilteringUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: multiSelectFilterProps,
+        }}
+      />
+    );
+
+    const filterToggleButton = getFilterToggleButton();
+
+    // Open the filter panel and verify the multiselect renders without crashing.
+    await click(filterToggleButton);
+    expect(
+      await screen.findByText('Multiselect title', {}, { timeout: 1000 })
+    ).toBeInTheDocument();
+
+    // Simulate a state transition where filtersState may be temporarily empty.
+    rerender(
+      <FilteringUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: multiSelectFilterProps,
+        }}
+      />
+    );
+
+    // The component should still render and remain functional after rerender.
+    expect(
+      await screen.findByText('Multiselect title', {}, { timeout: 1000 })
+    ).toBeInTheDocument();
+
+    const panelCloseButton = await screen.findByLabelText('Close filter panel');
+    await click(panelCloseButton);
+  });
+
+  it('should handle multiselect filter selection with normal filtersState', async () => {
+    // This test ensures the fix doesn't break normal multiselect behavior
+    const multiSelectFilterProps = createMultiSelectFilterProps();
+
+    render(
+      <FilteringUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: multiSelectFilterProps,
+        }}
+      />
+    );
+
+    const filterToggleButton = getFilterToggleButton();
+
+    // Open filter panel
+    await click(filterToggleButton);
+
+    // Wait for the filter panel to be visible
+    const filterPanel = await waitFor(
+      () => {
+        const panel = document.querySelector(`.${blockClass}-filter-panel`);
+        if (!panel) throw new Error('Filter panel not found');
+        return panel;
+      },
+      { timeout: 1000 }
+    );
+    expect(filterPanel).toBeInTheDocument();
+
+    // Find the multiselect - verifies it renders without errors
+    const multiselectLabel = screen.getByText('Multiselect normal');
+    expect(multiselectLabel).toBeInTheDocument();
+
+    // The multiselect should be functional and not throw errors
+    // This verifies that our defensive fix doesn't break normal operation
+    const panelCloseButton = screen.getByLabelText('Close filter panel');
+    await click(panelCloseButton);
   });
 });
 

@@ -93,6 +93,7 @@ class CustomGenerate extends HostListenerMixin(LitElement) {
   private nameRequired = true;
   private hasNextStep: Boolean = false;
   private modalRef: HTMLElement | null = null;
+  private passwordInputRef: HTMLElement | null = null;
 
   firstUpdated() {
     if (this.editing && !this.name) {
@@ -103,6 +104,16 @@ class CustomGenerate extends HostListenerMixin(LitElement) {
     }
     if (this.editing && !this.resource) {
       this.resource = 'resource_1';
+    }
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('apiKeyLoaded') && this.apiKeyLoaded && this.passwordInputRef) {
+      setTimeout(() => {
+        const input = this.passwordInputRef?.shadowRoot?.querySelector('input');
+        input?.focus();
+      }, 0);
     }
   }
 
@@ -356,6 +367,7 @@ class CustomGenerate extends HostListenerMixin(LitElement) {
                 ${this.apiKey
                   ? html`
                       <cds-text-input
+                        ${ref((el) => (this.passwordInputRef = el as HTMLElement))}
                         value=${this.apiKey}
                         label="API key"
                         showPasswordLabel="Show key"

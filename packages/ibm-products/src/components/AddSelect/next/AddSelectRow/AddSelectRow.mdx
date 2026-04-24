@@ -1,0 +1,158 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectRow.stories';
+
+# AddSelectRow
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Selected State](#selected-state)
+  - [With Subtitle](#with-subtitle)
+  - [With Children](#with-children)
+  - [With Avatar](#with-avatar)
+  - [With Info Panel](#with-info-panel)
+  - [Disabled Item](#disabled-item)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The Add Select Row component represents an individual row in the list. It
+provides:
+
+- Single or multi-select support (checkbox or radio button)
+- Optional subtitle for additional context
+- Optional info panel view icon to display additional details
+- Hierarchical navigation support with chevron indicator
+- Disabled state
+- Keyboard accessible
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Usage Example
+
+<Canvas of={stories.Default}></Canvas>
+
+```jsx
+<AddSelect.Row itemId="1" title="Item 1" value="item-1" />
+```
+
+#### Selected State
+
+Items can be pre-selected using the `selected` prop. This works for both
+single-select (radio button) and multi-select (checkbox) modes.
+
+<Canvas of={stories.Selected}></Canvas>
+
+```jsx
+// Single-select with selected state
+<AddSelect.Row itemId="1" title="Item 1" value="item-1" selected />
+
+// Multi-select with selected state
+<AddSelect multi>
+  <AddSelect.Row itemId="2" title="Item 1" value="item-1" selected />
+</AddSelect>
+```
+
+#### With Subtitle
+
+Add descriptive text below the title for additional context.
+
+<Canvas of={stories.WithSubtitle}></Canvas>
+
+```jsx
+<AddSelect.Row
+  itemId="1"
+  title="Item 1"
+  subtitle="This is a description for item 1"
+  value="item-1"
+/>
+```
+
+#### With Children
+
+Items can have children and show a navigation indicator.
+
+<Canvas of={stories.WithChildren}></Canvas>
+
+```jsx
+<AddSelect.Row
+  itemId="1"
+  title="Parent Item"
+  subtitle="Navigate to view children"
+  value="parent-1"
+  hasChildren
+/>
+```
+
+#### With Avatar
+
+Display icons like UserAvatar alongside the content.
+
+<Canvas of={stories.WithAvatar}></Canvas>
+
+```jsx
+import { UserAvatar } from '@carbon/ibm-products';
+
+<AddSelect.Row
+  itemId="1"
+  title="John Doe"
+  subtitle="Software Engineer"
+  value="user-1"
+  icon={<UserAvatar name="John Doe" />}
+/>;
+```
+
+#### With Info Panel
+
+Display a view icon that allows users to see additional details about the item
+in an info panel.
+
+<Canvas of={stories.WithInfoPanel}></Canvas>
+
+```jsx
+<AddSelect.Row
+  itemId="1"
+  title="Item 1"
+  subtitle="Click the view icon to see details"
+  value="item-1"
+  hasInfoPanel
+  onInfoPanelClick={(itemId) => console.log('Show info for:', itemId)}
+  infoPanelIconDescription="View item details"
+/>
+```
+
+#### Disabled Item
+
+Items can be disabled to prevent interaction.
+
+<Canvas of={stories.DisabledItem}></Canvas>
+
+```jsx
+<AddSelect.Row
+  itemId="1"
+  title="Disabled Item"
+  subtitle="This item cannot be selected"
+  value="item-1"
+  disabled
+/>
+```
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelectRow/AddSelectRow.mdx).

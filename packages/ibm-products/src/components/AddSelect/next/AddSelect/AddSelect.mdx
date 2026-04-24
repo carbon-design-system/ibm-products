@@ -1,0 +1,211 @@
+import { Story, Controls, Source } from '@storybook/addon-docs/blocks';
+import { AddSelect } from './AddSelect';
+import * as stories from './AddSelect.stories';
+
+# AddSelect
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The AddSelect component is the main wrapper component for the Add and select
+pattern.
+
+### Features
+
+- Composable architecture with sub-components
+- Single or multi-select support
+- Context-based state management
+- Hierarchical navigation support
+- Keyboard accessible
+- Fully customizable through composition
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Usage Example
+
+```jsx
+<AddSelect>{/* AddSelect children go here */}</AddSelect>
+```
+
+#### Complete Example
+
+Here's a complete example showing how to compose the AddSelect component with
+all its sub-components:
+
+```jsx
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+
+const items = [
+  { id: '1', title: 'Item 1', subtitle: 'Description', value: 'item-1' },
+  { id: '2', title: 'Item 2', subtitle: 'Description', value: 'item-2' },
+  { id: '3', title: 'Item 3', subtitle: 'Description', value: 'item-3' },
+];
+
+function MyComponent() {
+  const [selectedItems, setSelectedItems] = useState(new Set());
+
+  const handleItemSelect = (itemId, selected, value) => {
+    const newSelected = new Set(selectedItems);
+    if (selected) {
+      newSelected.add(itemId);
+    } else {
+      newSelected.delete(itemId);
+    }
+    setSelectedItems(newSelected);
+  };
+
+  return (
+    <AddSelect
+      multi
+      selectedItems={selectedItems}
+      onItemSelect={handleItemSelect}
+    >
+      <AddSelect.Body
+        itemsLabel="All items"
+        globalSearchLabel="Search"
+        globalSearchPlaceholder="Search items"
+        itemCount={items.length}
+      >
+        <AddSelect.List>
+          {items.map((item) => (
+            <AddSelect.Row
+              key={item.id}
+              itemId={item.id}
+              title={item.title}
+              subtitle={item.subtitle}
+              value={item.value}
+            />
+          ))}
+        </AddSelect.List>
+      </AddSelect.Body>
+    </AddSelect>
+  );
+}
+```
+
+### Sub-components
+
+The AddSelect component is composed of several sub-components that work together
+to create a complete add-select experience. Each sub-component can be used
+independently or composed together.
+
+#### AddSelect.Body
+
+The Body component contains the main content area including search
+functionality, breadcrumbs, and the list container.
+
+**Key features:**
+
+- Global search with customizable labels and placeholders
+- Breadcrumb navigation for hierarchical data
+- Item count display with tag
+- Search state management
+- Callbacks for search and breadcrumb interactions
+
+[View AddSelect.Body documentation →](../?path=/docs/preview-add-and-select-addselectbody--docs)
+
+#### AddSelect.List
+
+The List component manages the list of items and handles keyboard navigation.
+
+**Key features:**
+
+- Keyboard navigation (Arrow keys, Home, End, Enter, Space)
+- Focus management
+- Accessible grid structure with ARIA roles
+- Supports both single and multi-select modes
+
+[View AddSelect.List documentation →](../?path=/docs/preview-add-and-select-addselectlist--docs)
+
+#### AddSelect.Row
+
+The Row component represents an individual selectable item in the list.
+
+**Key features:**
+
+- Single or multi-select support (radio or checkbox)
+- Optional subtitle for additional context
+- Optional icon slot (e.g., UserAvatar)
+- Optional metadata slot (e.g., tags, badges)
+- Hierarchical navigation support with chevron indicator
+- Disabled state
+- Keyboard accessible
+
+[View AddSelect.Row documentation →](../?path=/docs/preview-add-and-select-addselectrow--docs)
+
+#### AddSelect.Breadcrumbs
+
+The Breadcrumbs component provides hierarchical navigation within the add-select
+interface.
+
+**Key features:**
+
+- Displays current navigation path
+- Clickable breadcrumb items for navigation
+- Automatically highlights current page
+- Supports deep navigation hierarchies
+- Integrates with Carbon Breadcrumb component
+
+[View AddSelect.Breadcrumbs documentation →](../?path=/docs/preview-add-and-select-addselectbreadcrumbs--docs)
+
+### Props
+
+#### `multi`
+
+Set to `true` for multi-select (checkboxes) or `false` for single-select (radio
+buttons).
+
+```jsx
+<AddSelect multi>{/* ... */}</AddSelect>
+```
+
+#### `selectedItems`
+
+A Set of selected item IDs for controlled selection state.
+
+```jsx
+const [selectedItems, setSelectedItems] = useState(new Set(['1', '2']));
+
+<AddSelect selectedItems={selectedItems}>{/* ... */}</AddSelect>;
+```
+
+#### `onItemSelect`
+
+Callback when an item is selected or deselected.
+
+```typescript
+(itemId: string, selected: boolean, value: string) => void
+```
+
+#### `onNavigate`
+
+Callback when navigating to child items in hierarchical data.
+
+```typescript
+(itemId: string, title: string, parentId: string) => void
+```
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelect/AddSelect.mdx).

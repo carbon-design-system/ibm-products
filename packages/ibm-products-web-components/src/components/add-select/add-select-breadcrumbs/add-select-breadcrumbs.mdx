@@ -1,0 +1,75 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import * as AddSelectBreadcrumbsStories from './add-select-breadcrumbs.stories';
+
+<Meta of={AddSelectBreadcrumbsStories} />
+
+# AddSelectBreadcrumbs
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The Add Select Breadcrumbs component provides hierarchical navigation within the
+Add Select interface. It displays the current navigation path and allows users
+to navigate back to previous levels by clicking on breadcrumb items.
+
+### Features
+
+- Displays current navigation path
+- Clickable breadcrumb items for navigation
+- Automatically highlights current page
+- Supports deep navigation hierarchies
+- Integrates with Carbon Breadcrumb component
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
+```
+
+#### Usage Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectBreadcrumbsStories.Default} />
+
+```javascript
+const path = [
+  { id: 'root', title: 'All Items' },
+  { id: 'category-1', title: 'Category 1' },
+  { id: 'subcategory-1', title: 'Subcategory 1' },
+];
+
+const handleBreadcrumbClick = (event) => {
+  const { index } = event.detail;
+  // Navigate back to the clicked level
+  console.log('Navigated to:', path[index].title);
+};
+```
+
+```html
+<c4p-add-select>
+  <c4p-add-select-breadcrumbs
+    .path=${path}
+    @c4p-add-select-breadcrumbs-click=${handleBreadcrumbClick}
+  >
+  </c4p-add-select-breadcrumbs>
+</c4p-add-select>
+```
+
+## Component API
+
+<ArgTypes of="c4p-add-select-breadcrumbs" />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products-web-components/src/components/add-select/add-select-breadcrumbs/add-select-breadcrumbs.mdx).

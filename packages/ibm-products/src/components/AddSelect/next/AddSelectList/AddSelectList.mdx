@@ -1,0 +1,98 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectList.stories';
+
+# AddSelectList
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The Add Select List component manages the list of items and handles keyboard
+navigation. It provides:
+
+- Single or multi-select support (checkbox or radio button)
+- Keyboard navigation support (arrow keys, home, end)
+- Focus management
+- Accessible grid structure
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Usage Example
+
+<Canvas of={stories.Default}></Canvas>
+
+```jsx
+// Single-select list
+<AddSelect>
+  <AddSelect.List>
+    {items.map((item) => (
+      <AddSelect.Row
+        key={item.id}
+        itemId={item.id}
+        title={item.title}
+        subtitle={item.subtitle}
+        value={item.value}
+      />
+    ))}
+  </AddSelect.List>
+</AddSelect>
+
+// Multi-select list
+<AddSelect multi>
+  <AddSelect.List>
+    {items.map((item) => (
+      <AddSelect.Row
+        key={item.id}
+        itemId={item.id}
+        title={item.title}
+        subtitle={item.subtitle}
+        value={item.value}
+      />
+    ))}
+  </AddSelect.List>
+</AddSelect>
+```
+
+### Keyboard Navigation
+
+The AddSelectList component supports full keyboard navigation:
+
+- **Arrow Down**: Move focus to next item
+- **Arrow Up**: Move focus to previous item
+- **Arrow Right**: Navigate to children (if item has children)
+- **Enter/Space**: Select/deselect the focused item
+- **Ctrl+Home**: Move focus to first item
+- **Ctrl+End**: Move focus to last item
+
+### Accessibility
+
+The component follows WCAG 2.1 AA guidelines:
+
+- Uses proper ARIA roles (`grid`, `row`, `gridcell`)
+- Supports keyboard navigation
+- Provides proper focus management
+- Uses semantic HTML elements
+- Includes proper labels and descriptions
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelectList/AddSelectList.mdx).

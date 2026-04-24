@@ -1,0 +1,176 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import * as AddSelectRowStories from './add-select-row.stories';
+
+<Meta of={AddSelectRowStories} />
+
+# AddSelectRow
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Selected State](#selected-state)
+  - [With Subtitle](#with-subtitle)
+  - [With Children](#with-children)
+  - [With Avatar](#with-avatar)
+  - [With Metadata](#with-metadata)
+  - [Disabled Item](#disabled-item)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The Add Select Row component represents an individual row in the list. It
+provides:
+
+- Single or multi-select support (checkbox or radio button)
+- Optional subtitle for additional context
+- Optional metadata slot for tags or badges
+- Hierarchical navigation support with chevron indicator
+- Disabled state
+- Keyboard accessible
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
+```
+
+#### Usage Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.Default} />
+
+```html
+<c4p-add-select-row
+  item-id="1"
+  title="Item 1"
+  value="item-1"
+>
+</c4p-add-select-row>
+```
+
+### Selected State
+
+Items can be pre-selected using the `selected` attribute. This works for both single-select (radio button) and multi-select (checkbox) modes.
+
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.Selected} />
+
+```html
+<!-- Single-select with selected state -->
+<c4p-add-select-row
+  item-id="1"
+  title="Item 1"
+  value="item-1"
+  selected
+>
+</c4p-add-select-row>
+
+<!-- Multi-select with selected state -->
+<c4p-add-select multi>
+  <c4p-add-select-row
+    item-id="2"
+    title="Item 1"
+    value="item-1"
+    selected
+  >
+  </c4p-add-select-row>
+</c4p-add-select>
+```
+
+### With Subtitle
+
+Add descriptive text below the title for additional context.
+
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.WithSubtitle} />
+
+```html
+<c4p-add-select-row
+  item-id="1"
+  title="Item 1"
+  subtitle="This is a description for item 1"
+  value="item-1"
+>
+</c4p-add-select-row>
+```
+
+### With Children
+
+Items can have children and show a navigation indicator.
+
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.WithChildren} />
+
+```html
+<c4p-add-select-row
+  item-id="1"
+  title="Parent Item"
+  subtitle="Navigate to view children"
+  value="parent-1"
+  has-children
+>
+</c4p-add-select-row>
+```
+
+### With Avatar
+
+Display icons like UserAvatar alongside the content.
+
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.WithAvatar} />
+
+```html
+<c4p-add-select-row
+  item-id="1"
+  title="John Doe"
+  subtitle="Software Engineer"
+  value="user-1"
+>
+  <c4p-user-avatar slot="icon" name="John Doe"></c4p-user-avatar>
+</c4p-add-select-row>
+```
+
+### With Metadata
+
+Add metadata such as tags or badges to provide additional context.
+
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.WithMetadata} />
+
+```html
+<c4p-add-select-row
+  item-id="1"
+  title="Item 1"
+  subtitle="This item has metadata"
+  value="item-1"
+>
+  <cds-tag slot="meta" type="blue">New</cds-tag>
+</c4p-add-select-row>
+```
+
+### Disabled Item
+
+Items can be disabled to prevent interaction.
+
+<Canvas className="page-header--docs-demo" of={AddSelectRowStories.DisabledItem} />
+
+```html
+<c4p-add-select-row
+  item-id="1"
+  title="Disabled Item"
+  subtitle="This item cannot be selected"
+  value="item-1"
+  disabled
+>
+</c4p-add-select-row>
+```
+
+## Component API
+
+<ArgTypes of="c4p-add-select-row" />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products-web-components/src/components/add-select/add-select-row/add-select-row.mdx).

@@ -115,6 +115,80 @@ describe(componentName, () => {
     expect(onCancel).toHaveBeenCalled();
   });
 
+  it('disables cancel button when no value change', async () => {
+    const props = {
+      ...defaultProps,
+    };
+    render(<EditInPlace {...props} />);
+    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    const cancelBtn = screen.getByLabelText(props.cancelLabel);
+    expect(cancelBtn).toBeDisabled();
+  });
+
+  it('enables cancel button when value changes', async () => {
+    const props = {
+      ...defaultProps,
+    };
+    const { rerender } = render(<EditInPlace {...props} />);
+    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+
+    // Change the value
+    rerender(<EditInPlace {...props} value="new value" />);
+
+    const cancelBtn = screen.getByLabelText(props.cancelLabel);
+    expect(cancelBtn).not.toBeDisabled();
+  });
+
+  it('disables cancel button when value changes to whitespace only', async () => {
+    const props = {
+      ...defaultProps,
+      value: 'test',
+    };
+    const { rerender } = render(<EditInPlace {...props} />);
+    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+
+    // Change to whitespace only (trimmed values are the same)
+    rerender(<EditInPlace {...props} value="test   " />);
+
+    const cancelBtn = screen.getByLabelText(props.cancelLabel);
+    expect(cancelBtn).toBeDisabled();
+  });
+
+  it('enables cancel button when trimmed value actually changes', async () => {
+    const props = {
+      ...defaultProps,
+      value: 'test',
+    };
+    const { rerender } = render(<EditInPlace {...props} />);
+    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+
+    // Change to different value with whitespace
+    rerender(<EditInPlace {...props} value="  new value  " />);
+
+    const cancelBtn = screen.getByLabelText(props.cancelLabel);
+    expect(cancelBtn).not.toBeDisabled();
+  });
+
+  it('disables save button when value is invalid even if changed', async () => {
+    const props = {
+      ...defaultProps,
+      invalid: true,
+    };
+    const { rerender } = render(<EditInPlace {...props} />);
+    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+
+    // Change the value
+    rerender(<EditInPlace {...props} value="new value" invalid={true} />);
+
+    const saveBtn = screen.getByLabelText(props.saveLabel);
+    const cancelBtn = screen.getByLabelText(props.cancelLabel);
+
+    // Save should be disabled due to invalid state
+    expect(saveBtn).toBeDisabled();
+    // Cancel should be enabled since value changed
+    expect(cancelBtn).not.toBeDisabled();
+  });
+
   it('handles blur save', async () => {
     const onSave = jest.fn();
     const props = {

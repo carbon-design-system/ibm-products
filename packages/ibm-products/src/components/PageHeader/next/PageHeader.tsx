@@ -91,8 +91,9 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
     ref
   ) {
     const [refs, setRefs] = useState<PageHeaderRefs>({});
-    const [pageActionsInstance, setPageActionsInstance] =
-      useState<React.ReactNode | null>(null);
+    const [pageActionsInstance, setPageActionsInstance] = useState<
+      React.ReactNode | ((state: any) => React.ReactNode) | null
+    >(null);
     const tempRef = useRef<HTMLDivElement>(null);
     const componentRef = (ref ?? tempRef) as RefObject<HTMLDivElement>;
     const classNames = classnames(

@@ -29,8 +29,14 @@ export type PageHeaderObserverState = {
 type PageHeaderContextType = {
   refs?: PageHeaderRefs;
   setRefs: React.Dispatch<React.SetStateAction<PageHeaderRefs>>;
-  pageActionsInstance?: React.ReactNode;
-  setPageActionsInstance: React.Dispatch<React.SetStateAction<React.ReactNode>>;
+  pageActionsInstance?:
+    | React.ReactNode
+    | ((state: PageHeaderObserverState) => React.ReactNode);
+  setPageActionsInstance: React.Dispatch<
+    React.SetStateAction<
+      React.ReactNode | ((state: PageHeaderObserverState) => React.ReactNode)
+    >
+  >;
   observerState: PageHeaderObserverState;
   isContentActionsInBreadcrumbBar?: boolean;
   isFunctionalContentActions?: boolean;

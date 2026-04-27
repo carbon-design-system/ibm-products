@@ -1,0 +1,167 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import * as AddSelectBodyStories from './add-select-body.stories';
+
+<Meta of={AddSelectBodyStories} />
+
+# AddSelectBody
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Single Selection List](#single-selection-list)
+  - [Multi-select](#multi-select)
+  - [With Breadcrumbs](#with-breadcrumbs)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The Add Select Body component contains the main content area for the add-select
+pattern. It provides:
+
+- Global search functionality
+- Breadcrumb navigation for hierarchical data
+- Item count display with tag
+- Content area for the item list
+- Search state management
+- Callbacks for search and breadcrumb interactions
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
+```
+
+#### Usage Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectBodyStories.Default} />
+
+```html
+<c4p-add-select>
+  <c4p-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    global-search-placeholder="Search items"
+    search-results-title="Search results"
+  >
+    <!-- List children go here -->
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+#### Single Selection List
+
+The body component with a complete single-select list.
+
+<Canvas className="page-header--docs-demo" of={AddSelectBodyStories.SingleSelectionList} />
+
+```html
+<c4p-add-select>
+  <c4p-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    global-search-placeholder="Search items"
+    search-results-title="Search results"
+  >
+    <c4p-add-select-list>
+      <c4p-add-select-row
+        item-id="1"
+        title="Item 1"
+        subtitle="Description for item 1"
+        value="item-1"
+      >
+      </c4p-add-select-row>
+      <!-- More items... -->
+    </c4p-add-select-list>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+#### Multi-select
+
+The body component supports multi-select mode with checkboxes.
+
+<Canvas className="page-header--docs-demo" of={AddSelectBodyStories.MultiSelect} />
+
+```html
+<c4p-add-select multi>
+  <c4p-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    global-search-placeholder="Search items"
+  >
+    <c4p-add-select-list>
+      <!-- Add select items here -->
+    </c4p-add-select-list>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+#### With Breadcrumbs
+
+Display breadcrumb navigation for hierarchical data structures.
+
+<Canvas className="page-header--docs-demo" of={AddSelectBodyStories.WithBreadcrumbs} />
+
+```javascript
+const path = [
+  { id: 'root', title: 'Root' },
+  { id: 'category', title: 'Category' },
+  { id: 'subcategory', title: 'Subcategory' },
+];
+
+const handleBreadcrumbClick = (event) => {
+  const { index } = event.detail;
+  // Navigate back to the clicked level
+  console.log('Navigate to:', path[index].title);
+};
+```
+
+```html
+<c4p-add-select>
+  <c4p-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    global-search-placeholder="Search items"
+    .path=${path}
+    @c4p-add-select-body-breadcrumb-click=${handleBreadcrumbClick}
+  >
+    <c4p-add-select-list>
+      <!-- Add select items here -->
+    </c4p-add-select-list>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+### Events
+
+#### `c4p-add-select-body-search`
+
+Callback when the search term changes.
+
+```typescript
+(event: CustomEvent<{ searchTerm: string }>) => void
+```
+
+#### `c4p-add-select-body-breadcrumb-click`
+
+Callback when a breadcrumb item is clicked.
+
+```typescript
+(event: CustomEvent<{ index: number }>) => void
+```
+
+## Component API
+
+<ArgTypes of="c4p-add-select-body" />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products-web-components/src/components/add-select/add-select-body/add-select-body.mdx).

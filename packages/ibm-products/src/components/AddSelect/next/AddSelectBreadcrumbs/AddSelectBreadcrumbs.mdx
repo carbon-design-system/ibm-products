@@ -1,0 +1,69 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectBreadcrumbs.stories';
+
+# AddSelectBreadcrumbs
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The Add Select Breadcrumbs component provides hierarchical navigation within the
+Add Select interface. It displays the current navigation path and allows users
+to navigate back to previous levels by clicking on breadcrumb items.
+
+### Features
+
+- Displays current navigation path
+- Clickable breadcrumb items for navigation
+- Automatically highlights current page
+- Supports deep navigation hierarchies
+- Integrates with Carbon Breadcrumb component
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Usage Example
+
+<Canvas of={stories.Default}></Canvas>
+
+```jsx
+const [path, setPath] = useState([
+  { id: 'root', title: 'All Items' },
+  { id: 'category-1', title: 'Category 1' },
+  { id: 'subcategory-1', title: 'Subcategory 1' },
+]);
+
+const handleBreadcrumbClick = (index) => {
+  // Navigate back to the clicked level
+  setPath(path.slice(0, index + 1));
+};
+
+<AddSelect>
+  <AddSelect.Breadcrumbs
+    path={path}
+    onBreadcrumbClick={handleBreadcrumbClick}
+  />
+</AddSelect>;
+```
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AddSelect/next/AddSelectBreadcrumbs/AddSelectBreadcrumbs.mdx).

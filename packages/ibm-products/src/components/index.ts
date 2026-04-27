@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2024, 2025
+// Copyright IBM Corp. 2024, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -96,6 +96,17 @@ export type {
   TearsheetHeaderContentProps,
   StackContextType,
 } from './Tearsheet/next';
+
+export { AddSelect as preview__AddSelect } from './AddSelect/next';
+export type {
+  AddSelectProps as preview__AddSelectProps,
+  AddSelectComponentType,
+  AddSelectBodyProps,
+  AddSelectListProps,
+  AddSelectRowProps,
+  AddSelectBreadcrumbsProps,
+  AddSelectContextType,
+} from './AddSelect/next';
 
 // Preview candidates
 export {

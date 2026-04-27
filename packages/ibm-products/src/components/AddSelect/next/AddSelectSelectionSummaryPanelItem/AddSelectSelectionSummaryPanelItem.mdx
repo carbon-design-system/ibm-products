@@ -1,0 +1,176 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectSelectionSummaryPanelItem.stories';
+
+# AddSelectSelectionSummaryPanelItem
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The AddSelectSelectionSummaryPanelItem component displays an individual selected
+item with flexible rendering options. It supports:
+
+- **Accordion mode** for expandable details
+- **Simple key-value display mode** (default)
+- **Custom templates** for complete control over rendering
+- **Remove button** available in all modes
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Default Usage (Key-Value Pairs)
+
+By default, the component renders in simple mode with key-value pairs.
+
+<Canvas of={stories.Default}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem item={item} />
+```
+
+## With Remove Button
+
+The remove button appears on hover when `onRemove` is provided.
+
+<Canvas of={stories.WithRemoveButton}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem
+  item={item}
+  onRemove={handleRemove}
+  removeButtonLabel="Remove item"
+/>
+```
+
+## Accordion Mode
+
+Enable accordion mode for expandable content.
+
+<Canvas of={stories.Accordion}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem item={item} useAccordion />
+```
+
+## Accordion with Remove Button
+
+Combine accordion mode with remove functionality.
+
+<Canvas of={stories.AccordionWithRemoveButton}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem
+  item={item}
+  useAccordion
+  onRemove={handleRemove}
+  removeButtonLabel="Remove item"
+/>
+```
+
+## Accordion with Custom Title
+
+**Note:** Custom title rendering only works with `useAccordion={true}`.
+
+Customize how the item title is displayed using the `renderTitle` prop.
+
+<Canvas of={stories.AccordionWithCustomTitle}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem
+  item={item}
+  useAccordion
+  renderTitle={(item) => (
+    <div>
+      <strong>{item.title}</strong>
+      <div>{item.value}</div>
+    </div>
+  )}
+/>
+```
+
+## Accordion with Custom Content
+
+**Note:** Custom content rendering only works with `useAccordion={true}`.
+
+Customize the accordion body content using the `renderContent` prop.
+
+<Canvas of={stories.AccordionWithCustomContent}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem
+  item={item}
+  useAccordion
+  renderContent={(item) => (
+    <div>
+      <p>ID: {item.id}</p>
+      <p>Value: {item.value}</p>
+    </div>
+  )}
+/>
+```
+
+## Custom Template Rendering
+
+Use `renderTemplate` for complete control over item rendering. This works in
+**all modes** and takes precedence over other rendering props (`renderTitle`,
+`renderContent`).
+
+The template receives the item data and the `onRemove` callback (if provided).
+
+<Canvas of={stories.WithCustomTemplate}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanelItem
+  item={item}
+  renderTemplate={(item, onRemove) => (
+    <div>
+      <h4>{item.title}</h4>
+      {onRemove && <button onClick={() => onRemove(item.id)}>Remove</button>}
+    </div>
+  )}
+  onRemove={handleRemove}
+/>
+```
+
+## Rendering Priority
+
+The component follows this priority order for rendering:
+
+1. **`renderTemplate`** - Takes precedence over everything (works in all modes)
+2. **Accordion mode** (`useAccordion={true}`):
+   - `renderContent` OR default key-value content
+   - `renderTitle` OR default title
+3. **Simple mode** (`useAccordion={false}`):
+   - Default key-value rendering only
+   - `renderTitle` and `renderContent` are ignored
+
+## Props Compatibility
+
+| Prop             | Accordion Mode | Simple Mode | Template Mode         |
+| ---------------- | -------------- | ----------- | --------------------- |
+| `renderTemplate` | ✅             | ✅          | ✅ (takes precedence) |
+| `renderTitle`    | ✅             | ❌          | ❌                    |
+| `renderContent`  | ✅             | ❌          | ❌                    |
+| `onRemove`       | ✅             | ✅          | ✅                    |
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/components/AddSelect/next/AddSelectSelectionSummaryPanelItem).

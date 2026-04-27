@@ -1,0 +1,129 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectItemInfoPanel.stories';
+
+# AddSelectItemInfoPanel
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/#additional-context)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The AddSelectItemInfoPanel component displays detailed information about a
+specific item with a close button. It supports multiple content types including
+AddSelectItem objects, arrays of item detail entries, React elements, and custom
+rendering via render props or children.
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Usage Example
+
+<Canvas of={stories.Default}></Canvas>
+
+```jsx
+<AddSelect.ItemInfoPanel
+  title="Item details"
+  item={item}
+  onClose={handleClose}
+  closeIconDescription="Close details"
+/>
+```
+
+## With Detail Entries
+
+Pass an array of detail entry objects for structured data display.
+
+<Canvas of={stories.WithItemDetailEntries}></Canvas>
+
+```jsx
+<AddSelect.ItemInfoPanel
+  title="User details"
+  item={[
+    { id: '1', title: 'Name', value: 'John Doe' },
+    { id: '2', title: 'Email', value: 'john@example.com' },
+  ]}
+  onClose={handleClose}
+/>
+```
+
+## With Custom Content
+
+Use the `children` prop for complete control over the panel content.
+
+<Canvas of={stories.WithCustomContent}></Canvas>
+
+```jsx
+<AddSelect.ItemInfoPanel title="Custom details" onClose={handleClose}>
+  <div>
+    <h4>Custom Content</h4>
+    <p>Your custom content here</p>
+  </div>
+</AddSelect.ItemInfoPanel>
+```
+
+## With Render Content
+
+Use the `renderContent` prop to customize how an AddSelectItem is displayed.
+
+<Canvas of={stories.WithRenderContent}></Canvas>
+
+```jsx
+<AddSelect.ItemInfoPanel
+  title="Item details"
+  item={item}
+  onClose={handleClose}
+  renderContent={(item) => (
+    <div>
+      <strong>ID:</strong> {item.id}
+      <strong>Title:</strong> {item.title}
+    </div>
+  )}
+/>
+```
+
+## Without Close Button
+
+Omit the `onClose` prop to hide the close button.
+
+<Canvas of={stories.WithoutCloseButton}></Canvas>
+
+```jsx
+<AddSelect.ItemInfoPanel title="Item details" item={item} />
+```
+
+## With React Element
+
+Pass a React element directly as the item prop.
+
+<Canvas of={stories.WithReactElement}></Canvas>
+
+```jsx
+<AddSelect.ItemInfoPanel
+  title="Custom element"
+  item={<div>Custom JSX content</div>}
+  onClose={handleClose}
+/>
+```
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/components/AddSelect/next/AddSelectItemInfoPanel).

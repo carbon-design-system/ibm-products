@@ -1,0 +1,169 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import * as AddSelectStories from './add-select.stories';
+
+<Meta of={AddSelectStories} />
+
+# AddSelect
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The AddSelect component is the main wrapper component for the Add and select
+pattern. 
+
+### Features
+
+- Composable architecture with sub-components
+- Single or multi-select support
+- Hierarchical navigation support
+- Keyboard accessible
+- Fully customizable through composition
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
+```
+
+#### Usage Example
+
+<Canvas className="page-header--docs-demo" of={AddSelectStories.Default} />
+
+#### Complete Example
+
+Here's a complete example showing how to compose the AddSelect component with
+all its sub-components:
+
+```html
+<c4p-add-select multi>
+  <c4p-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    global-search-placeholder="Search items"
+  >
+    <c4p-add-select-list>
+      <c4p-add-select-row
+        item-id="1"
+        title="Item 1"
+        subtitle="Description for item 1"
+        value="item-1"
+      >
+      </c4p-add-select-row>
+      <c4p-add-select-row
+        item-id="2"
+        title="Item 2"
+        subtitle="Description for item 2"
+        value="item-2"
+      >
+      </c4p-add-select-row>
+      <c4p-add-select-row
+        item-id="3"
+        title="Item 3"
+        subtitle="Description for item 3"
+        value="item-3"
+      >
+      </c4p-add-select-row>
+    </c4p-add-select-list>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+### Sub-components
+
+The AddSelect component is composed of several sub-components that work together
+to create a complete add-select experience. Each sub-component can be used
+independently or composed together.
+
+#### c4p-add-select-body
+
+The Body component contains the main content area including search
+functionality, breadcrumbs, and the list container.
+
+**Key features:**
+
+- Global search with customizable labels and placeholders
+- Breadcrumb navigation for hierarchical data
+- Item count display with tag
+- Search state management
+- Callbacks for search and breadcrumb interactions
+
+[View c4p-add-select-body documentation →](../?path=/docs/preview-add-and-select-addselectbody--docs)
+
+#### c4p-add-select-list
+
+The List component manages the list of items and handles keyboard navigation.
+
+**Key features:**
+
+- Keyboard navigation (Arrow keys, Home, End, Enter, Space)
+- Focus management
+- Accessible grid structure with ARIA roles
+- Supports both single and multi-select modes
+
+[View c4p-add-select-list documentation →](../?path=/docs/preview-add-and-select-addselectlist--docs)
+
+#### c4p-add-select-row
+
+The Row component represents an individual selectable item in the list.
+
+**Key features:**
+
+- Single or multi-select support (radio or checkbox)
+- Optional subtitle for additional context
+- Optional icon slot (e.g., UserAvatar)
+- Optional metadata slot (e.g., tags, badges)
+- Hierarchical navigation support with chevron indicator
+- Disabled state
+- Keyboard accessible
+
+[View c4p-add-select-row documentation →](../?path=/docs/preview-add-and-select-addselectrow--docs)
+
+#### c4p-add-select-breadcrumbs
+
+The Breadcrumbs component provides hierarchical navigation within the add-select
+interface.
+
+**Key features:**
+
+- Displays current navigation path
+- Clickable breadcrumb items for navigation
+- Automatically highlights current page
+- Supports deep navigation hierarchies
+- Integrates with Carbon Breadcrumb component
+
+[View c4p-add-select-breadcrumbs documentation →](../?path=/docs/preview-add-and-select-addselectbreadcrumbs--docs)
+
+### Props
+
+#### `multi`
+
+Set to `true` for multi-select (checkboxes) or `false` for single-select (radio
+buttons).
+
+```html
+<c4p-add-select multi>
+  <!-- ... -->
+</c4p-add-select>
+```
+
+## Component API
+
+<ArgTypes of="c4p-add-select" />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products-web-components/src/components/add-select/add-select/add-select.mdx).

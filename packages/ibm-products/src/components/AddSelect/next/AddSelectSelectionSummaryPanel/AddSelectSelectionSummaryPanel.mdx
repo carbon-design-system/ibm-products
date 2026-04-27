@@ -1,0 +1,105 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '../AddSelect/AddSelect';
+import * as stories from './AddSelectSelectionSummaryPanel.stories';
+
+# AddSelectSelectionSummaryPanel
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+The AddSelectSelectionSummaryPanel component displays a list of selected items
+with a count badge and optional edit icon. It supports custom empty states,
+custom item rendering, and can accept SelectionSummaryPanelItem components as
+children for full control.
+
+### Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
+```
+
+#### Usage Example
+
+<Canvas of={stories.Default}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanel
+  title="Selected items"
+  selectedItems={items}
+  showCount
+/>
+```
+
+## With Edit Icon
+
+Add an edit icon next to the count badge for quick access to edit functionality.
+
+<Canvas of={stories.WithEditIcon}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanel
+  title="Selected items"
+  selectedItems={items}
+  showCount
+  showEditIcon
+  onEdit={handleEdit}
+  editIconDescription="Edit selections"
+/>
+```
+
+## With Empty State
+
+Provide a custom empty state component when no items are selected.
+
+<Canvas of={stories.WithEmptyState}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanel
+  title="Selected items"
+  selectedItems={[]}
+  emptyState={
+    <NoDataEmptyState
+      title="No items selected"
+      subtitle="Select items to see them here"
+    />
+  }
+/>
+```
+
+## With Custom Rendering
+
+Use the `renderItem` prop to customize how each item is displayed.
+
+<Canvas of={stories.WithCustomRendering}></Canvas>
+
+```jsx
+<AddSelect.SelectionSummaryPanel
+  title="Selected items"
+  selectedItems={items}
+  renderItem={(item) => (
+    <div>
+      <strong>{item.title}</strong>
+      <div>{item.value}</div>
+    </div>
+  )}
+/>
+```
+
+## Component API
+
+<Controls />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/components/AddSelect/next/AddSelectSelectionSummaryPanel).

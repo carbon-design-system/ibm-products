@@ -52,22 +52,10 @@ $block-class__next: #{$c4p-prefix}--tearsheet__next;
 }
 
 .stackButtons {
-  position: absolute;
-  z-index: 9999;
-  display: flex;
-  gap: $spacing-01;
-  inset-block-start: 0;
-  inset-inline-start: 0;
   @include hide-at-sm;
 }
 
 .smallScreenButton {
-  position: absolute;
-  z-index: 9999;
-  display: flex;
-  gap: $spacing-01;
-  inset-block-start: 0;
-  inset-inline-start: $spacing-05;
   @include hideAtLargeScreens();
 }
 //footer actions styles

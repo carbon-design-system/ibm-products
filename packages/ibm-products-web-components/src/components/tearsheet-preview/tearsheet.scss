@@ -146,11 +146,9 @@ $motion-duration: $duration-moderate-02;
   --overlay-color: #{$overlay};
   --overlay-alpha: 0.5;
 
-  z-index: calc(#{utilities.z('modal')} - var(--stack-depth, 0));
-
   &::before {
     position: fixed;
-    z-index: -1;
+    z-index: calc(#{utilities.z('modal')} - var(--stack-depth, 0));
     display: block;
     background: var(--overlay-color);
     content: '';

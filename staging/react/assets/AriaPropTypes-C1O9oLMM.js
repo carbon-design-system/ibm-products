@@ -1,2 +1,0 @@
-var u=Object.defineProperty;var o=(n,e)=>u(n,"name",{value:e,configurable:!0});import{P as s}from"./iframe-DgruYanb.js";const b=o(n=>{const e=Object.keys(n),a=o(i=>(r,l,t,...c)=>e.every(f=>typeof r[f]>"u")?new Error(`${t} requires one of the following props: ${e.join(", ")}`):i(r,l,t,...c),"checker");return e.reduce((i,r)=>({...i,[r]:a(n[r])}),{})},"isRequiredOneOf"),g=b({"aria-label":s.string,"aria-labelledby":s.string});export{g as A};
-//# sourceMappingURL=AriaPropTypes-C1O9oLMM.js.map

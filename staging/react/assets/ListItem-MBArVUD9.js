@@ -1,0 +1,2 @@
+var i=Object.defineProperty;var r=(s,e)=>i(s,"name",{value:e,configurable:!0});import{j as o,c as m,u as p,P as t}from"./iframe-BlOC0pA1.js";import{T as n}from"./Text-Cp4U2L1v.js";function x({className:s,children:e,...a}){return o.jsx(n,{as:"li",className:m(`${p()}--list__item`,s),...a,children:e})}r(x,"ListItem");x.propTypes={children:t.node,className:t.string};export{x as L};
+//# sourceMappingURL=ListItem-MBArVUD9.js.map

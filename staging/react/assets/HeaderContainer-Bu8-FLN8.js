@@ -1,0 +1,2 @@
+var x=Object.defineProperty;var t=(e,a)=>x(e,"name",{value:a,configurable:!0});import{r as d,A as c,j as l,G as u,H as E,P as r}from"./iframe-BlOC0pA1.js";function S({render:e,isSideNavExpanded:a=!1,...i}){const[o,s]=d.useState(a);c("keydown",n=>{u(n,E)&&s(!1)});const p=d.useCallback(()=>{s(n=>!n)},[s]);return l.jsx(e,{...i,isSideNavExpanded:o,onClickSideNavExpand:p})}t(S,"HeaderContainer");S.propTypes={isSideNavExpanded:r.bool,render:r.elementType.isRequired};export{S as H};
+//# sourceMappingURL=HeaderContainer-Bu8-FLN8.js.map

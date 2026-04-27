@@ -1,0 +1,1 @@
+let o=(function(t){return t.TOP="top",t.TOP_LEFT="top-left",t.TOP_RIGHT="top-right",t.BOTTOM="bottom",t.BOTTOM_LEFT="bottom-left",t.BOTTOM_RIGHT="bottom-right",t.LEFT="left",t.RIGHT="right",t})({});export{o as I};

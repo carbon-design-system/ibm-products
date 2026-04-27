@@ -8,6 +8,7 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family';
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
 
 // Preview component styles for create-tearsheet-step
 .step__description {
@@ -24,12 +25,12 @@ p.step__description:last-of-type {
   @include font-family.font-weight('semibold');
 }
 
-.create-tearsheet-step__fieldset .cds--form-item {
+.create-tearsheet-step__fieldset .#{carbon-config.$prefix}--form-item {
   margin-block-end: $spacing-05;
 }
 
 // Tile group styles
-.cds--tile-group div {
+.#{carbon-config.$prefix}--tile-group div {
   display: flex;
   flex-wrap: wrap;
 }

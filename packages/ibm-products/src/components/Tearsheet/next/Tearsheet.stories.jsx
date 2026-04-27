@@ -144,6 +144,9 @@ export const Default = ({
   summaryContentWidth,
   verticalGap,
   variant,
+  hideCloseButton,
+  disableHeaderCollapse,
+  closeIconDescription,
 }) => {
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
@@ -175,7 +178,11 @@ export const Default = ({
         summaryContentWidth={summaryContentWidth}
         verticalGap={verticalGap}
       >
-        <Tearsheet.Header>
+        <Tearsheet.Header
+          hideCloseButton={hideCloseButton}
+          disableHeaderCollapse={disableHeaderCollapse}
+          closeIconDescription={closeIconDescription}
+        >
           <Tearsheet.HeaderContent
             open
             label="Customer data"
@@ -1624,5 +1631,25 @@ Default.argTypes = {
   variant: {
     control: { type: 'radio' },
     options: ['wide', 'narrow'],
+  },
+  hideCloseButton: {
+    control: {
+      type: 'boolean',
+    },
+    description:
+      'Enable a close icon ("x") in the header area of the tearsheet. By default, a tearsheet displays a close icon.',
+  },
+  disableHeaderCollapse: {
+    control: {
+      type: 'boolean',
+    },
+    description:
+      'Default header collapse/expand while scrolling the main content can be disabled by setting this to true.',
+  },
+  closeIconDescription: {
+    control: {
+      type: 'text',
+    },
+    description: 'The accessibility title for the close icon (if shown).',
   },
 };

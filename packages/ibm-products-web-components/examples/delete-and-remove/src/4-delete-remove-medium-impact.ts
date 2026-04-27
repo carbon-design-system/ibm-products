@@ -58,7 +58,7 @@ export class DeleteRemoveMediumImpact extends LitElement {
       >
         ${this.action === 'delete' ? 'Delete' : 'Remove'}
       </cds-button>
-      <cds-modal size="sm" ?open="${this._open}" prevent-close>
+      <cds-modal ?open="${this._open}" prevent-close>
         <cds-modal-header>
           <cds-modal-close-button
             @click="${this._close}"

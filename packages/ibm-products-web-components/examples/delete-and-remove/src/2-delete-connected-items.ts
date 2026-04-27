@@ -95,7 +95,7 @@ export class DeleteConnectedItems extends LitElement {
       >
         Delete
       </cds-button>
-      <cds-modal size="sm" ?open="${this._open}" prevent-close>
+      <cds-modal class="deletion-connected-items" ?open="${this._open}" prevent-close>
         <cds-modal-header>
           <cds-modal-close-button
             @click="${this._close}"

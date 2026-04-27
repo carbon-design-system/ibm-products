@@ -8,8 +8,10 @@ collect:
     elements:
       allowedAttributeNames:
         # General
+        - actions
         - align
         - autoalign
+        - button-size
         - close-icon-description
         - closeIconDescription
         - collapse-label
@@ -46,8 +48,6 @@ collect:
         - onc4p-about-modal-closed
         - version
         # c4p-action-set
-        - actions
-        - button-size
         - disable-stacking
         # c4p-big-number
         - fraction-digits
@@ -75,6 +75,7 @@ collect:
         - dropShadow
         - floating
         - highContrast
+        - onc4p-coachmark-closed
         - onc4p-coachmark-opened
         - position
         # c4p-coachmark-beacon
@@ -132,16 +133,23 @@ collect:
         - onc4p-options-tile-close
         - onc4p-options-tile-open
         - titleId
+        # c4p-page-header-actions-set
+        - actions-data
         # c4p-page-header-breadcrumb
         - border
         - content-actions-flush
         - page-actions-flush
+        # c4p-page-header-breadcrumbs-set
+        - breadcrumbs-data
+        - hiddenItems
         # c4p-page-header-content-text
         - subtitle
         # c4p-page-header-scroller
         - close-on-activation
         - enter-delay-ms
         - leave-delay-ms
+        # c4p-page-header-tags-set
+        - tags-data
         # c4p-preview-tearsheet
         - container-class-name
         - onc4p-preview-tearsheet-beingclosed
@@ -178,6 +186,8 @@ collect:
         # c4p-tearsheet-influencer
         - influencer-panel-open
         - oncds-tearsheet-influencer-closed
+        # c4p-tearsheet-stack
+        - stack-step-size
         # c4p-tearsheet-summary-content
         - oncds-tearsheet-summary-closed
         - summary-panel-open
@@ -189,11 +199,6 @@ collect:
         - theme
         - tooltip-alignment
         - tooltip-text
-        # set-of-breadcrumbs-example
-        - breadcrumbs-data
-        - hiddenItems
-        # set-of-tags-example
-        - tags-data
         # stacking-tearsheet-demo
         - tearsheet-type
         # step-tearsheet-preview
@@ -202,6 +207,12 @@ collect:
         # General - boolean attributes
         - "true"
         - "false"
+        # General - button-size
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
         # General - influencer-width
         - narrow
         - wide
@@ -229,12 +240,6 @@ collect:
         - success
         - tooltip
         - warning
-        # c4p-action-set - button-size
-        - 2xl
-        - lg
-        - md
-        - sm
-        - xl
         # c4p-preview-tearsheet - variant
         - narrow
         - wide
@@ -247,6 +252,10 @@ collect:
         # c4p-tearsheet - width
         - narrow
         - wide
+        # c4p-tearsheet-stack - stack-step-size
+        - lg
+        - md
+        - sm
   npm:
     dependencies: null
   js:

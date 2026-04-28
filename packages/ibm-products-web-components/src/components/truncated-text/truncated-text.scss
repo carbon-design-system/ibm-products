@@ -49,7 +49,7 @@ $block-class: #{$prefix}--truncated-text;
     text-overflow: clip;
     white-space: normal;
 
-    &:focus {
+    &:focus-visible {
       @include focus-outline('outline');
     }
   }
@@ -72,14 +72,14 @@ $block-class: #{$prefix}--truncated-text;
     font: inherit;
     text-align: inherit;
 
-    &:focus {
+    &:focus-visible {
       @include focus-outline('outline');
     }
   }
 
-  button:focus,
-  .#{$block-class}_button-expand:focus,
-  .#{$block-class}_button-collapse:focus {
+  button:focus-visible,
+  .#{$block-class}_button-expand:focus-visible,
+  .#{$block-class}_button-collapse:focus-visible {
     @include focus-outline('outline');
   }
 }

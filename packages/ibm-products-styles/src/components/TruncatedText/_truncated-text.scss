@@ -23,6 +23,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--truncated-text;
   &__expand-toggle {
     color: theme.$link-primary;
     cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid theme.$focus;
+      outline-offset: 2px;
+    }
   }
 
   &__tooltip-trigger {
@@ -35,7 +40,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--truncated-text;
     font: inherit;
     text-align: inherit;
 
-    &:focus {
+    &:focus-visible {
       outline: 2px solid theme.$focus;
       outline-offset: 2px;
     }

@@ -1,0 +1,2 @@
+var i=Object.defineProperty;var a=(s,o)=>i(s,"name",{value:o,configurable:!0});import{u as l,j as d,c as f,P as e}from"./iframe-DU3fWsEq.js";function m({as:s="div",condensed:o=!1,narrow:n=!1,className:p,children:t,...c}){const r=l();return d.jsx(s,{className:f(p,{[`${r}--row`]:!0,[`${r}--row--condensed`]:o,[`${r}--row--narrow`]:n}),...c,children:t})}a(m,"Row");m.propTypes={as:e.oneOfType([e.string,e.elementType]),children:e.node,className:e.string,condensed:e.bool,narrow:e.bool};export{m as R};
+//# sourceMappingURL=Row-D-sl0xWA.js.map

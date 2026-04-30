@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "version": "0.37.0",
+  "version": "0.38.0-rc.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -57,7 +57,7 @@
   },
   "dependencies": {
     "@carbon-labs/wc-empty-state": "^0.14.0",
-    "@carbon/ibm-products-styles": "^2.84.0",
+    "@carbon/ibm-products-styles": "^2.85.0-rc.0",
     "@carbon/layout": "^11.51.0",
     "@carbon/styles": "^1.104.0",
     "@carbon/utilities": "^0.18.0",

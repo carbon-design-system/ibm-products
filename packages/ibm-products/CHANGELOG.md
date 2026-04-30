@@ -1,3 +1,24 @@
+## `@carbon/ibm-products@2.89.0-rc.0`
+### Features :rocket:
+- feat(preview_Tearsheet): stacking wrapper, actions prop for footer and story updates (#9242)
+- feat(ConditionBuilder): title and text ellipsis of dropdown and default statement fix (#9252)
+- feat(coachmark): replaces bubble with popover (#9220)
+
+### Bug fixes :bug:
+- fix(apikeymodal): document parity (#9293)
+- fix: correct header tab order and alignemnt issue (#9179)
+- fix(useFilters): updated selectedFilters to check filtersState is an array (#9270)
+- fix(about-modal): fix colors / theming for react and wc (#9262)
+- fix: replace hardcoded instance of cds (#9165)
+
+### Housekeeping :house:
+- chore(DelimitedList): deprecate `DelimitedList` (#9219)
+- chore(deps): update dependency @vitejs/plugin-react to v5.2.0 (#9236)
+- chore(StringFormatter): deprecate `StringFormatter` (#9217)
+- chore(deps): update dependency vite to v8 [security] (#9259)
+- build(deps): update to Carbon 11 compatible versions to latest (#9257)
+- docs(changelog): update for v2.88.0-rc.0 (#9247)
+
 ## `@carbon/ibm-products@2.88.0`
 ### Features :rocket:
 - feat(preview__PageHeader): implement callbacks for intesecting observers (#9087)

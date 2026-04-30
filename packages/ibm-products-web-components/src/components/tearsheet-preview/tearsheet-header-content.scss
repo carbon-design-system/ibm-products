@@ -188,3 +188,13 @@ $motion-duration: $duration-moderate-02;
     transition: all $motion-duration motion(entrance, expressive);
   }
 }
+
+// Hide header content elements immediately when tearsheet is closing
+:host-context(#{$c4p-prefix}-preview-tearsheet:not([open])) {
+  .#{$block-class__next}__header-actions,
+  .#{$block-class__next}__header-content,
+  .#{$block-class__next}__header-content * {
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+  }
+}

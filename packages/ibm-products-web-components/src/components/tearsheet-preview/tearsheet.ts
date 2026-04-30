@@ -94,6 +94,11 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   private uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
 
   /**
+   * Internal flag to track if stacking is enabled (via wrapper)
+   */
+  private _stackingEnabled: boolean = false;
+
+  /**
    * Internal state for tracking if the tearsheet is in small screen mode
    */
   @state()
@@ -141,6 +146,20 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   connectedCallback(): void {
     super.connectedCallback();
+
+    // Listen for stack wrapper events first
+    this.addEventListener(
+      `${prefix}-tearsheet-stack-connected`,
+      this.handleStackConnected as EventListener
+    );
+    this.addEventListener(
+      `${prefix}-tearsheet-stack-step-size-changed`,
+      this.handleStackStepSizeChanged as EventListener
+    );
+
+    // Check if this tearsheet is wrapped in a stack provider
+    // This handles the case where the stack wrapper connected before this tearsheet
+    this._checkForStackWrapper();
 
     // Set visibility class
     if (this.open) {
@@ -200,12 +219,17 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
     updateTearsheetSignals({ open: this.open });
 
-    if (this.modalBodyElement) {
+    // Only register with stack manager if stacking is enabled
+    if (this._stackingEnabled && this.modalBodyElement) {
       stackManager.notifyStack(this.uniqueId, this.open, this.modalBodyElement);
     }
 
     this.classList.toggle('is-visible', this.open);
-    this.updateStackProperties();
+
+    // Only update stack properties if stacking is enabled
+    if (this._stackingEnabled) {
+      this.updateStackProperties();
+    }
   }
 
   private updateCSSPropertiesIfNeeded(
@@ -222,6 +246,11 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   private updateStackPropertiesIfNeeded(): void {
+    // Only update if stacking is enabled
+    if (!this._stackingEnabled) {
+      return;
+    }
+
     const stackState = stackManager.state;
     if (stackState.stack.length > 0) {
       this.updateStackProperties();
@@ -254,14 +283,24 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    // Remove event listener
+    // Remove event listeners
     this.removeEventListener(
       `${prefix}-tearsheet-header-close-button-clicked`,
       this.handleHeaderCloseButtonClick as EventListener
     );
+    this.removeEventListener(
+      `${prefix}-tearsheet-stack-connected`,
+      this.handleStackConnected as EventListener
+    );
+    this.removeEventListener(
+      `${prefix}-tearsheet-stack-step-size-changed`,
+      this.handleStackStepSizeChanged as EventListener
+    );
 
-    // Notify stack manager that this tearsheet is closing
-    stackManager.notifyStack(this.uniqueId, false, null);
+    // Notify stack manager that this tearsheet is closing (only if stacking was enabled)
+    if (this._stackingEnabled) {
+      stackManager.notifyStack(this.uniqueId, false, null);
+    }
 
     // Clean up CSS custom properties
     if (this.influencerWidth) {
@@ -335,6 +374,42 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       }
     }
   }
+
+  /**
+   * Check if this tearsheet is wrapped in a stack provider
+   */
+  private _checkForStackWrapper(): void {
+    // Check if there's a c4p-tearsheet-stack ancestor
+    let parent = this.parentElement;
+    while (parent) {
+      if (parent.tagName.toLowerCase() === `${prefix}-tearsheet-stack`) {
+        this._stackingEnabled = true;
+        return;
+      }
+      parent = parent.parentElement;
+    }
+    this._stackingEnabled = false;
+  }
+
+  /**
+   * Handle stack wrapper connected event
+   */
+  private handleStackConnected = (event: Event) => {
+    event.stopPropagation();
+    this._stackingEnabled = true;
+  };
+
+  /**
+   * Handle stack step size changed event
+   */
+  private handleStackStepSizeChanged = (event: Event) => {
+    event.stopPropagation();
+    // Stack manager is already updated by the wrapper
+    // Just trigger a re-render of stack properties if needed
+    if (this._stackingEnabled && this.open) {
+      this.updateStackProperties();
+    }
+  };
 
   /**
    * Handle influencer slot change

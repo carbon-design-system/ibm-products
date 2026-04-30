@@ -223,6 +223,9 @@ const ConditionBuilderTemplate = (args) => {
       ref={ref}
       {...requiredProps}
       onAddItem={(type) => action(`onAddItem is triggered , type: ${type}`)()}
+      onRemoveItem={(config) =>
+        action(`onRemoveItem is triggered , type: ${config?.type}`)(config)
+      }
     />
   );
 };

@@ -33,6 +33,8 @@ const ConditionBuilderActions = ({
     actionState = [],
     setActionState,
     readOnly,
+    onRemoveItem,
+    rootState,
   } = useContext(ConditionBuilderContext);
   const [showDeletionPreview, setShowDeletionPreview] = useState(-1);
   const [
@@ -76,7 +78,20 @@ const ConditionBuilderActions = ({
   };
 
   const onRemove = (selectedId) => {
-    setActionState?.(actionState.filter((action) => action.id !== selectedId));
+    const actionToRemove = actionState.find(
+      (action) => action.id === selectedId
+    );
+    const { preventRemove } =
+      onRemoveItem?.({
+        type: 'action',
+        state: rootState as any,
+        item: actionToRemove,
+      }) ?? {};
+    if (!preventRemove) {
+      setActionState?.(
+        actionState.filter((action) => action.id !== selectedId)
+      );
+    }
   };
   const handleShowDeletionPreview = (index: number) => {
     setShowDeletionPreview(index);

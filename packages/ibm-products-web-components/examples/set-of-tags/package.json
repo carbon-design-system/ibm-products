@@ -12,12 +12,12 @@
     "clean": "rimraf node_modules dist .cache"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "^10.74.0",
-    "@carbon/icons": "^11.78.0",
-    "@carbon/utilities": "^0.18.0",
-    "@carbon/ibm-products-styles": "^2.83.0",
-    "@carbon/styles": "1.104.0",
-    "@carbon/web-components": "2.52.0",
+    "@carbon/icon-helpers": "^10.75.0",
+    "@carbon/icons": "^11.79.0",
+    "@carbon/utilities": "^0.19.0",
+    "@carbon/ibm-products-styles": "^2.85.0",
+    "@carbon/styles": "1.105.0",
+    "@carbon/web-components": "2.53.0",
     "lit": "^3.2.1",
     "sass": "^1.64.1"
   },

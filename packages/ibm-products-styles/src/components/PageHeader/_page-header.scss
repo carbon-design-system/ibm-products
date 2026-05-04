@@ -892,6 +892,7 @@ $duration: 1000ms;
 
   .#{$block-class}__content__contextual-actions {
     display: flex;
+    align-items: center;
   }
 
   .#{$block-class}__content__title {

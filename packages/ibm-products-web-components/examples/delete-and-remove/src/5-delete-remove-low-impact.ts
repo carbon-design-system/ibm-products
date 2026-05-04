@@ -12,12 +12,15 @@ import { customElement, property, state } from 'lit/decorators.js';
 
 import '@carbon/web-components/es/components/button/button.js';
 import '@carbon/web-components/es/components/notification/toast-notification.js';
+import '@carbon/web-components/es/components/inline-loading/index.js';
 
 import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
 import TrashCan16 from '@carbon/icons/es/trash-can/16';
 import SubtractAlt16 from '@carbon/icons/es/subtract--alt/16';
 import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
+
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // example implementation of low impact delete / remove pattern
 @customElement('delete-remove-low-impact')
@@ -30,13 +33,25 @@ export class DeleteRemoveLowImpact extends LitElement {
   @state()
   private _showNotification: boolean = false;
 
+  @state()
+  private _loading: boolean = false;
+
   private _onNotificationClose() {
     this._showNotification = false;
   }
 
-  private _onDeleteButtonClick() {
-    // add your logic to delete/remove the resource
-    this._showNotification = true;
+  private async _deleteItem() {
+    await wait(1000);
+    return true;
+  }
+
+  private async _onDeleteButtonClick() {
+    this._loading = true;
+    const isDelete = await this._deleteItem();
+    this._loading = false;
+    if (isDelete) {
+      this._showNotification = true;
+    }
   }
 
   render() {
@@ -45,12 +60,17 @@ export class DeleteRemoveLowImpact extends LitElement {
         type="button"
         kind="danger"
         size="md"
+        ?disabled="${this._loading}"
         @click="${this._onDeleteButtonClick}"
       >
-        ${this.action === 'delete' ? 'Delete' : 'Remove'}
-        ${this.action === 'delete'
-          ? html`${iconLoader(TrashCan16, { slot: 'icon' })}`
-          : html`${iconLoader(SubtractAlt16, { slot: 'icon' })}`}
+        ${this._loading
+          ? html`${this.action === 'delete' ? 'Deleting...' : 'Removing...'}`
+          : html`${this.action === 'delete' ? 'Delete' : 'Remove'}`}
+        ${this._loading
+          ? html`<cds-inline-loading slot="icon"></cds-inline-loading>`
+          : this.action === 'delete'
+            ? html`${iconLoader(TrashCan16, { slot: 'icon' })}`
+            : html`${iconLoader(SubtractAlt16, { slot: 'icon' })}`}
       </cds-button>
       ${this._showNotification
         ? html`<cds-toast-notification

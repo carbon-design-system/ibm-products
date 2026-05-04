@@ -6,7 +6,9 @@
 */
 @use '@carbon/styles/scss/spacing' as *;
 
-:host cds-modal-body {
+$carbon-prefix: 'cds';
+
+:host #{$carbon-prefix}-modal-body {
   padding-bottom: 0;
 }
 
@@ -17,7 +19,17 @@
 }
 
 .notification {
-  position: absolute;
+  position: fixed;
   right: $spacing-04;
   top: $spacing-04;
+}
+
+#{$carbon-prefix}-button #{$carbon-prefix}-inline-loading {
+  position: absolute;
+  inset-block-start: 0;
+}
+
+.deletion-connected-items #{$carbon-prefix}-modal-body
+{
+  padding-block-end: 1rem;
 }

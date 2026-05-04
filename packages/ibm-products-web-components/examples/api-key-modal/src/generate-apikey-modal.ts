@@ -67,9 +67,20 @@ class GenerateApiKeyModal extends HostListenerMixin(LitElement) {
 
   private apiKey: string = '';
   private nameRequired = true;
+  private passwordInputRef: HTMLElement | null = null;
 
   private _inputHandler(e: Event) {
     this.apiKeyName = (e.target as HTMLInputElement).value;
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('apiKeyLoaded') && this.apiKeyLoaded && this.passwordInputRef) {
+      setTimeout(() => {
+        const input = this.passwordInputRef?.shadowRoot?.querySelector('input');
+        input?.focus();
+      }, 0);
+    }
   }
 
   private onCloseHandler() {
@@ -151,6 +162,7 @@ class GenerateApiKeyModal extends HostListenerMixin(LitElement) {
           ${this.apiKey
             ? html`
                 <cds-text-input
+                  ${ref((el) => (this.passwordInputRef = el as HTMLElement))}
                   value=${this.apiKey}
                   label="API key"
                   showPasswordLabel="Show key"

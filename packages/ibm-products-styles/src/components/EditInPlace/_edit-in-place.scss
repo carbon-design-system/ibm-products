@@ -27,16 +27,15 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
 }
 
 .#{$block-class}--sm {
-  --#{$block-class}--size: #{$spacing-07};
-}
-
-.#{$block-class}--md {
   --#{$block-class}--size: #{$spacing-08};
 }
 
-.#{$block-class}--lg {
-  /* April 2023 max text input size */
+.#{$block-class}--md {
   --#{$block-class}--size: #{$spacing-09};
+}
+
+.#{$block-class}--lg {
+  --#{$block-class}--size: #{$spacing-10};
 }
 
 .#{$block-class}__toggletip-wrapper {
@@ -69,7 +68,16 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
 
 .#{$block-class}--focused {
   background: $field-01;
+}
+
+// Show outline on entire component when input has focus
+.#{$block-class}--focused:has(.#{$block-class}__text-input:focus) {
   outline: 2px solid $focus;
+}
+
+// Remove border when focused to avoid double border with outline
+.#{$block-class}--invalid.#{$block-class}--focused {
+  border: none;
 }
 
 .#{$block-class}__text-input {
@@ -110,8 +118,11 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
   outline: none;
 }
 
-.#{$block-class}__text-input.#{$carbon-input}:focus,
-.#{$block-class}__text-input.#{$carbon-input}:active {
+// Remove outline when not in edit mode
+.#{$block-class}:not(.#{$block-class}--focused)
+  .#{$block-class}__text-input.#{$carbon-input}:focus,
+.#{$block-class}:not(.#{$block-class}--focused)
+  .#{$block-class}__text-input.#{$carbon-input}:active {
   outline: none;
 }
 
@@ -121,7 +132,20 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
 
   // animation div
   display: inline-flex;
+  align-self: stretch;
   inline-size: var(--toolbar-width);
+
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
+    padding: 0;
+    min-block-size: unset;
+  }
+}
+
+// Match button heights to input heights for each size and make them square
+.#{$block-class}__toolbar
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
+  block-size: var(--#{$block-class}--size);
+  inline-size: var(--#{$block-class}--size);
 }
 
 .#{$block-class}--invalid .#{$block-class}__toolbar {

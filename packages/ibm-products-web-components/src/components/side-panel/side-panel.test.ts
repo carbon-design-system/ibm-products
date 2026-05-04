@@ -326,22 +326,27 @@ describe('c4p-side-panel', () => {
       template(defaultProps, getActionItems(1))
     )) as CDSSidePanel;
 
+    await sidePanel.updateComplete;
+
     const actionItems = sidePanel.querySelectorAll(
-      `.${prefix}--action-set__action-button`
+      'cds-button[slot="actions"]'
     );
 
     expect(actionItems).toHaveLength(1);
   });
 
-  it('should render only 3 action items even if too many items exists', async () => {
+  it('should render action items', async () => {
     const sidePanel = (await fixture(
       template(defaultProps, getActionItems(6))
     )) as CDSSidePanel;
 
+    await sidePanel.updateComplete;
+
     const actionItems = sidePanel.querySelectorAll(
-      `.${prefix}--action-set__action-button`
+      'cds-button[slot="actions"]'
     );
 
+    // getActionItems(6) returns 2 buttons (danger + primary)
     expect(actionItems).toHaveLength(2);
   });
 

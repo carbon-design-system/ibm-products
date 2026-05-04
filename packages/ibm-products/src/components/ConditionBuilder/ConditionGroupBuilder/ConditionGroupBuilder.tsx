@@ -71,9 +71,13 @@ const ConditionGroupBuilder = ({
       'conditionBuilderText',
     ]);
   const { statementConfig } = useDataConfigs();
-  const { variant, conditionBuilderRef, statementConfigCustom } = useContext(
-    ConditionBuilderContext
-  );
+  const {
+    variant,
+    conditionBuilderRef,
+    statementConfigCustom,
+    onRemoveItem,
+    rootState,
+  } = useContext(ConditionBuilderContext);
   const [showConditionPreview, setShowConditionPreview] = useState(-1);
   const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
     useState(-1);
@@ -141,6 +145,24 @@ const ConditionGroupBuilder = ({
   };
 
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
+    const itemToRemove = group?.conditions?.find(
+      (condition) => condition.id === conditionId
+    ) as ConditionGroup | Condition | undefined;
+    const removeType = (itemToRemove as ConditionGroup)?.conditions
+      ? 'subgroup'
+      : 'condition';
+    const { preventRemove } =
+      onRemoveItem?.({
+        type: removeType,
+        state: rootState as any,
+        item: itemToRemove,
+        group,
+      }) ?? {};
+
+    if (preventRemove) {
+      return;
+    }
+
     if (group && group.conditions && group.conditions.length > 1) {
       if (variant == HIERARCHICAL_VARIANT) {
         handleFocusOnCloseHierarchical(evt);

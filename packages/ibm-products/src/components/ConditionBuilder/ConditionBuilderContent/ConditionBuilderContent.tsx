@@ -57,6 +57,7 @@ const ConditionBuilderContent = ({
     variant,
     actionState,
     onAddItem,
+    onRemoveItem,
     readOnly,
     statementConfigCustom,
   } = useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
@@ -126,19 +127,32 @@ const ConditionBuilderContent = ({
 
   const onRemove = useCallback(
     (groupId) => {
-      const groups = rootState?.groups?.filter(
-        (group) => groupId !== group?.id
+      const groupToRemove = rootState?.groups?.find(
+        (group) => group?.id === groupId
       );
-      setRootState?.({
-        ...rootState,
-        groups: rootState ? groups : [],
-      });
-      //set the initial state to empty.
-      if (groups?.length === 0) {
-        initialConditionState.current = null;
+
+      const { preventRemove } =
+        onRemoveItem?.({
+          type: 'group',
+          state: rootState as ConditionBuilderState,
+          item: groupToRemove,
+        }) ?? {};
+
+      if (!preventRemove) {
+        const groups = rootState?.groups?.filter(
+          (group) => groupId !== group?.id
+        );
+        setRootState?.({
+          ...rootState,
+          groups: rootState ? groups : [],
+        });
+        //set the initial state to empty.
+        if (groups?.length === 0) {
+          initialConditionState.current = null;
+        }
       }
     },
-    [setRootState, rootState]
+    [setRootState, rootState, onRemoveItem]
   );
 
   const onChangeHandler = (updatedGroup, groupIndex) => {

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.38.0-rc.0`
+## `@carbon/ibm-products-web-components@0.38.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): stacking wrapper, actions prop for footer and story updates (#9242)
 - feat(coachmarkStacked): implement as patterns (#9248)

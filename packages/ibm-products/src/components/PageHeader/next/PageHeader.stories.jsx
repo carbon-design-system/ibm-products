@@ -361,7 +361,7 @@ export const ContentWithHeroImage = (args) => (
         </PageHeader.Content>
       </Column>
       <Column lg={8} md={4} sm={0}>
-        <PageHeader.HeroImage>
+        <PageHeader.HeroImage objectFit="cover">
           <picture>
             <source
               srcset={image1}
@@ -371,11 +371,7 @@ export const ContentWithHeroImage = (args) => (
               srcset={image2}
               media={`(max-width: ${breakpoints.lg.width})`}
             />
-            <img
-              src={image1}
-              alt="a default image"
-              style={{ maxWidth: '100%', height: 'auto' }}
-            />
+            <img src={image1} alt="a default image" />
           </picture>
         </PageHeader.HeroImage>
       </Column>

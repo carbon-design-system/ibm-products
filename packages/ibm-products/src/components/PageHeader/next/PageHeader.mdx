@@ -556,6 +556,17 @@ return (
 When including a hero image within the `PageHeader`, the `Grid` and `Column`
 components will need to be utilized in order to define the layout correctly.
 
+The
+[`PageHeader.HeroImage`](packages/ibm-products/src/components/PageHeader/next/PageHeaderHeroImage.tsx:38)
+component uses Carbon's `AspectRatio` component to maintain a consistent aspect
+ratio (3×2 on mobile/tablet, 2×1 on desktop). It accepts an `objectFit` prop to
+control how the image fills the container:
+
+- `'cover'` (default): Image fills container, may crop edges
+- `'contain'`: Image fits within container, may show empty space
+- `'fill'`: Image stretches to fill container
+- `'none'`: Image uses its natural size
+
 ```jsx
 import { Grid, Column } from '@carbon/react';
 
@@ -567,7 +578,7 @@ return (
         <PageHeader.Content ... />
       </Column>
       <Column lg={8} md={4} sm={0}>
-        <PageHeader.HeroImage>
+        <PageHeader.HeroImage objectFit="cover">
           <picture>
             <source
               srcset={image1}
@@ -580,7 +591,6 @@ return (
             <img
               src={image1}
               alt="a default image"
-              style={{ maxWidth: '100%', height: 'auto' }}
             />
           </picture>
         </PageHeader.HeroImage>
@@ -590,6 +600,10 @@ return (
 )
 
 ```
+
+**Note:** The hero image is automatically constrained to prevent horizontal
+overflow. The image will be centered within its container and maintain the
+specified aspect ratio across all viewport sizes.
 
 ## PageHeader.TabBar
 

@@ -977,7 +977,16 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__tab-bar {
+    // On smaller screens, use flex to keep scroller button in flow
+    position: relative;
+    display: flex;
+    align-items: center;
     background-color: $layer;
+
+    // On max breakpoint and above, use block to maintain Carbon alignment (scroller uses absolute positioning)
+    @include breakpoint(max) {
+      display: block;
+    }
   }
 
   .#{$block-class}__tab-bar--tablist {
@@ -1051,20 +1060,17 @@ $duration: 1000ms;
     align-content: center;
     justify-content: flex-end;
     inline-size: 40%;
+    padding-inline-end: $spacing-03;
     text-align: end;
 
     .#{$carbon-prefix}--tag {
       flex-shrink: 0;
       margin-inline-end: $spacing-03;
     }
-
-    @include breakpoint-down(md) {
-      inline-size: auto;
-    }
   }
 
   .#{$block-class}--tag-overflow-popover__hidden {
-    visibility: hidden;
+    display: none;
   }
 
   .#{$block-class}__tag-item {
@@ -1085,8 +1091,18 @@ $duration: 1000ms;
 
   .#{$pkg-prefix}--page-header--scroller-button-container {
     position: relative;
+    display: inline-flex;
+    align-items: center;
     margin-inline-start: $spacing-03;
-    padding-inline-end: $spacing-05;
+
+    // On max breakpoint and above, position absolutely to the right (enough gutter space)
+    @include breakpoint(max) {
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      margin-inline-start: 0;
+      padding-inline-end: 0;
+    }
   }
 
   @keyframes page-header-title-breadcrumb-animation {

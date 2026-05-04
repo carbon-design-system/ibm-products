@@ -82,13 +82,6 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
     className
   );
 
-  // Resolve content actions - support both ReactNode and function
-  const resolvedContentActions =
-    typeof contentActions === 'function'
-      ? contentActions(observerState)
-      : contentActions;
-
-  // Check if user provided a functional contentActions
   const isFunctionalContentActions = typeof contentActions === 'function';
 
   const contentActionsClasses = classnames({
@@ -98,12 +91,6 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
     [`${blockClass}__breadcrumb__content-actions-with-global-actions--show`]:
       observerState.contentActionsClipped || isFunctionalContentActions,
   });
-
-  // Resolve page actions - support both ReactNode and function
-  const resolvedPageActions =
-    typeof pageActions === 'function'
-      ? pageActions(observerState)
-      : pageActions;
 
   return (
     <PageHeaderContext.Provider
@@ -127,9 +114,13 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
               </div>
               <div className={`${blockClass}__breadcrumb__actions`}>
                 <div className={contentActionsClasses}>
-                  {resolvedContentActions}
+                  {typeof contentActions === 'function'
+                    ? contentActions(observerState)
+                    : contentActions}
                 </div>
-                {resolvedPageActions}
+                {typeof pageActions === 'function'
+                  ? pageActions(observerState)
+                  : pageActions}
               </div>
             </div>
           </Column>

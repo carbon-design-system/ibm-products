@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { html, fixture, oneEvent, elementUpdated } from '@open-wc/testing';
 import { prefix } from '../../globals/settings';
+import { stackManager } from './stack-signal';
 import CDSTearsheet from './tearsheet';
 import CDSTearsheetHeader from './tearsheet-header';
 import CDSTearsheetBody from './tearsheet-body';
@@ -123,6 +124,261 @@ describe('c4p-preview-tearsheet', () => {
     await elementUpdated(el);
     const modal = el.shadowRoot?.querySelector('cds-modal');
     expect(modal?.hasAttribute('prevent-close-on-click-outside')).to.be.true;
+  });
+});
+
+describe('c4p-tearsheet-stack', () => {
+  afterEach(() => {
+    stackManager.reset();
+  });
+
+  it('updates the stack step size when connected', async () => {
+    const el = await fixture(html`
+      <c4p-tearsheet-stack stack-step-size="md"></c4p-tearsheet-stack>
+    `);
+
+    expect(el).to.exist;
+    expect(stackManager.state.stackStepSize).to.equal('md');
+  });
+
+  it('dispatches a connected event with the current stack step size', async () => {
+    const el = await fixture(html`
+      <c4p-tearsheet-stack stack-step-size="sm"></c4p-tearsheet-stack>
+    `);
+
+    setTimeout(() => {
+      el.dispatchEvent(
+        new CustomEvent(`${prefix}-tearsheet-stack-connected`, {
+          bubbles: true,
+          composed: true,
+          detail: { stackStepSize: 'sm' },
+        })
+      );
+    });
+
+    const event = await oneEvent(el, `${prefix}-tearsheet-stack-connected`);
+    expect(event).to.exist;
+    expect(event.detail.stackStepSize).to.equal('sm');
+  });
+
+  it('updates stack step size when the property changes', async () => {
+    const el = (await fixture(html`
+      <c4p-tearsheet-stack stack-step-size="sm"></c4p-tearsheet-stack>
+    `)) as HTMLElement & { stackStepSize: 'sm' | 'md' | 'lg' };
+
+    el.stackStepSize = 'lg';
+    await elementUpdated(el);
+
+    expect(stackManager.state.stackStepSize).to.equal('lg');
+  });
+
+  it('resets the stack manager when disconnected', async () => {
+    const el = await fixture(html`
+      <c4p-tearsheet-stack stack-step-size="md"></c4p-tearsheet-stack>
+    `);
+
+    const container = document.createElement('div');
+    Object.defineProperty(container, 'offsetWidth', {
+      configurable: true,
+      value: 320,
+    });
+    stackManager.notifyStack('stacked-sheet', true, container);
+
+    el.remove();
+
+    expect(stackManager.state.stack).to.deep.equal([]);
+    expect(stackManager.state.containers.size).to.equal(0);
+    expect(stackManager.state.stackStepSize).to.equal('lg');
+  });
+});
+
+describe('c4p-preview-tearsheet stacking', () => {
+  afterEach(() => {
+    stackManager.reset();
+  });
+
+  it('does not register with the stack manager without a stack wrapper', async () => {
+    const tearsheet = await fixture<CDSTearsheet>(html`
+      <c4p-preview-tearsheet open>
+        <c4p-tearsheet-header>
+          <c4p-tearsheet-header-content title="Standalone Tearsheet">
+          </c4p-tearsheet-header-content>
+        </c4p-tearsheet-header>
+        <c4p-tearsheet-body>
+          <div slot="main-content">Main content</div>
+        </c4p-tearsheet-body>
+      </c4p-preview-tearsheet>
+    `);
+
+    await elementUpdated(tearsheet);
+
+    expect(stackManager.state.stack).to.deep.equal([]);
+    expect(tearsheet.classList.contains(`${blockClass}--stack-activated`)).to.be
+      .false;
+  });
+
+  it('registers stacked tearsheets and applies stack properties', async () => {
+    const wrapper = await fixture<HTMLDivElement>(html`
+      <div>
+        <c4p-tearsheet-stack stack-step-size="md">
+          <c4p-preview-tearsheet id="sheet-1" open>
+            <c4p-tearsheet-header>
+              <c4p-tearsheet-header-content title="Tearsheet 1">
+              </c4p-tearsheet-header-content>
+            </c4p-tearsheet-header>
+            <c4p-tearsheet-body>
+              <div slot="main-content">Main content 1</div>
+            </c4p-tearsheet-body>
+          </c4p-preview-tearsheet>
+          <c4p-preview-tearsheet id="sheet-2" open>
+            <c4p-tearsheet-header>
+              <c4p-tearsheet-header-content title="Tearsheet 2">
+              </c4p-tearsheet-header-content>
+            </c4p-tearsheet-header>
+            <c4p-tearsheet-body>
+              <div slot="main-content">Main content 2</div>
+            </c4p-tearsheet-body>
+          </c4p-preview-tearsheet>
+        </c4p-tearsheet-stack>
+      </div>
+    `);
+
+    const tearsheets = Array.from(
+      wrapper.querySelectorAll('c4p-preview-tearsheet')
+    ) as CDSTearsheet[];
+
+    tearsheets.forEach((tearsheet, index) => {
+      const modalBody = tearsheet.shadowRoot?.querySelector(
+        'cds-modal-body'
+      ) as HTMLElement;
+      Object.defineProperty(modalBody, 'offsetWidth', {
+        configurable: true,
+        value: 320 - index * 20,
+      });
+      tearsheet.open = false;
+      tearsheet.open = true;
+    });
+
+    await Promise.all(tearsheets.map((tearsheet) => elementUpdated(tearsheet)));
+
+    expect(stackManager.state.stack).to.have.length(2);
+    expect(tearsheets[0].classList.contains(`${blockClass}--stack-activated`))
+      .to.be.true;
+    expect(tearsheets[1].classList.contains(`${blockClass}--stack-activated`))
+      .to.be.true;
+    expect(tearsheets[0].style.getPropertyValue('--stack-depth')).to.equal('1');
+    expect(tearsheets[1].style.getPropertyValue('--stack-depth')).to.equal('0');
+    expect(
+      tearsheets[0].style.getPropertyValue('--block-size-change')
+    ).to.equal('12px');
+  });
+
+  it('recomputes stack styles when stack step size changes', async () => {
+    const wrapper = await fixture<HTMLDivElement>(html`
+      <div>
+        <c4p-tearsheet-stack stack-step-size="sm">
+          <c4p-preview-tearsheet id="sheet-1" open>
+            <c4p-tearsheet-header>
+              <c4p-tearsheet-header-content title="Tearsheet 1">
+              </c4p-tearsheet-header-content>
+            </c4p-tearsheet-header>
+            <c4p-tearsheet-body>
+              <div slot="main-content">Main content 1</div>
+            </c4p-tearsheet-body>
+          </c4p-preview-tearsheet>
+          <c4p-preview-tearsheet id="sheet-2" open>
+            <c4p-tearsheet-header>
+              <c4p-tearsheet-header-content title="Tearsheet 2">
+              </c4p-tearsheet-header-content>
+            </c4p-tearsheet-header>
+            <c4p-tearsheet-body>
+              <div slot="main-content">Main content 2</div>
+            </c4p-tearsheet-body>
+          </c4p-preview-tearsheet>
+        </c4p-tearsheet-stack>
+      </div>
+    `);
+
+    const stack = wrapper.querySelector(
+      'c4p-tearsheet-stack'
+    ) as HTMLElement & {
+      stackStepSize: 'sm' | 'md' | 'lg';
+    };
+    const tearsheets = Array.from(
+      wrapper.querySelectorAll('c4p-preview-tearsheet')
+    ) as CDSTearsheet[];
+
+    tearsheets.forEach((tearsheet) => {
+      const modalBody = tearsheet.shadowRoot?.querySelector(
+        'cds-modal-body'
+      ) as HTMLElement;
+      Object.defineProperty(modalBody, 'offsetWidth', {
+        configurable: true,
+        value: 320,
+      });
+      tearsheet.open = false;
+      tearsheet.open = true;
+    });
+
+    await Promise.all(tearsheets.map((tearsheet) => elementUpdated(tearsheet)));
+    expect(
+      tearsheets[0].style.getPropertyValue('--block-size-change')
+    ).to.equal('8px');
+
+    stack.stackStepSize = 'lg';
+    await elementUpdated(stack);
+    await Promise.all(tearsheets.map((tearsheet) => elementUpdated(tearsheet)));
+
+    expect(
+      tearsheets[0].style.getPropertyValue('--block-size-change')
+    ).to.equal('16px');
+  });
+
+  it('closes through the header action and unregister from the stack', async () => {
+    const notifyStackSpy = vi.spyOn(stackManager, 'notifyStack');
+
+    const wrapper = await fixture<HTMLDivElement>(html`
+      <div>
+        <c4p-tearsheet-stack>
+          <c4p-preview-tearsheet open>
+            <c4p-tearsheet-header>
+              <c4p-tearsheet-header-content title="Closable Tearsheet">
+              </c4p-tearsheet-header-content>
+            </c4p-tearsheet-header>
+            <c4p-tearsheet-body>
+              <div slot="main-content">Main content</div>
+            </c4p-tearsheet-body>
+          </c4p-preview-tearsheet>
+        </c4p-tearsheet-stack>
+      </div>
+    `);
+
+    const tearsheet = wrapper.querySelector(
+      'c4p-preview-tearsheet'
+    ) as CDSTearsheet;
+    const modalBody = tearsheet.shadowRoot?.querySelector(
+      'cds-modal-body'
+    ) as HTMLElement;
+    Object.defineProperty(modalBody, 'offsetWidth', {
+      configurable: true,
+      value: 320,
+    });
+
+    tearsheet.open = false;
+    tearsheet.open = true;
+    await elementUpdated(tearsheet);
+
+    tearsheet.dispatchEvent(
+      new CustomEvent(`${prefix}-tearsheet-header-close-button-clicked`, {
+        bubbles: true,
+        composed: true,
+      })
+    );
+    await elementUpdated(tearsheet);
+
+    expect(tearsheet.open).to.be.false;
+    expect(stackManager.state.stack).to.deep.equal([]);
+    expect(notifyStackSpy.mock.calls.length).to.be.greaterThan(0);
   });
 });
 

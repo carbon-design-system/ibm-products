@@ -943,6 +943,14 @@ $duration: 1000ms;
     min-inline-size: 0;
   }
 
+  // Ensure menu dropdown stays within viewport bounds
+  // Note: Carbon MenuButton renders the menu in a portal at body level
+  .#{$carbon-prefix}--menu.#{$carbon-prefix}--menu--open {
+    // Prevent menu from being cut off at top of viewport
+    max-block-size: calc(100vh - #{$spacing-05});
+    overflow-y: auto;
+  }
+
   .#{$block-class}__content__subtitle {
     @include type.type-style('productive-heading-03');
 
@@ -973,16 +981,22 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__tab-bar--tablist {
-    display: grid;
-    gap: $spacing-07;
-    grid-template-columns: auto minmax(0, 1fr);
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$block-class}__tab-bar--tablist > .#{$carbon-prefix}--tabs {
+    display: inline-flex;
+    margin-inline-end: $spacing-03;
   }
 
   .#{$pkg-prefix}--page-header__tab-bar--tablist
     .#{$pkg-prefix}--page-header__tags {
-    display: flex;
-    align-self: center;
+    display: inline-flex;
+    align-items: center;
     justify-content: flex-end;
+    margin-inline-start: auto;
+    min-inline-size: 0;
   }
 
   .#{$pkg-prefix}--page-header__tab-bar--tablist.#{$pkg-prefix}--page-header__tab-bar--with-scroller
@@ -1033,30 +1047,24 @@ $duration: 1000ms;
   }
 
   .#{$block-class}--tag-overflow-container {
+    display: inline-flex;
     align-content: center;
+    justify-content: flex-end;
+    inline-size: 40%;
     text-align: end;
-    @include breakpoint(sm) {
-      transform: translateX(calc(-1 * #{$spacing-06}));
-    }
-    @include breakpoint(md) {
-      transform: translateX(calc(-1 * #{$spacing-03}));
-    }
-    @include breakpoint(lg) {
-      transform: translateX($spacing-08);
-    }
 
     .#{$carbon-prefix}--tag {
+      flex-shrink: 0;
       margin-inline-end: $spacing-03;
+    }
+
+    @include breakpoint-down(md) {
+      inline-size: auto;
     }
   }
 
   .#{$block-class}--tag-overflow-popover__hidden {
     visibility: hidden;
-  }
-
-  .#{$block-class}--tag-overflow-container__has-no-hidden-items {
-    /* stylelint-disable-next-line carbon/layout-use */
-    transform: translateX($spacing-07);
   }
 
   .#{$block-class}__tag-item {
@@ -1076,9 +1084,9 @@ $duration: 1000ms;
   }
 
   .#{$pkg-prefix}--page-header--scroller-button-container {
-    position: absolute;
-    inset-block-end: 0;
-    inset-inline-end: $spacing-01;
+    position: relative;
+    margin-inline-start: $spacing-03;
+    padding-inline-end: $spacing-05;
   }
 
   @keyframes page-header-title-breadcrumb-animation {

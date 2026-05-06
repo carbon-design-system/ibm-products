@@ -1,3 +1,19 @@
+## `@carbon/ibm-products-web-components@0.38.0`
+### Features :rocket:
+- feat(preview_Tearsheet): stacking wrapper, actions prop for footer and story updates (#9242)
+- feat(coachmarkStacked): implement as patterns (#9248)
+
+### Bug fixes :bug:
+- fix(apikeymodal): document parity (#9293)
+- fix(about-modal): fix colors / theming for react and wc (#9262)
+- fix(full-page-error): WC parity work (#9180)
+- fix: replace hardcoded instance of cds (#9165)
+- fix(page-header): make the top bar responsive (#9126)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9257)
+- docs(changelog): update for v2.88.0-rc.0 (#9247)
+
 ## `@carbon/ibm-products-web-components@0.37.0`
 ### Features :rocket:
 - feat(CoachmarkOverlayElements): implemented as patterns  (#8848)

@@ -265,5 +265,3 @@ AddSelectSelectionSummaryPanelItem.displayName =
   'AddSelectSelectionSummaryPanelItem';
 
 export default AddSelectSelectionSummaryPanelItem;
-
-// Made with Bob

@@ -332,5 +332,3 @@ AddSelectColumn.propTypes = {
 AddSelectColumn.displayName = 'AddSelectColumn';
 
 export default AddSelectColumn;
-
-// Made with Bob

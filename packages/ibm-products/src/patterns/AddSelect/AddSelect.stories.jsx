@@ -9,6 +9,7 @@ import React from 'react';
 import styles from './_story-styles.scss?inline';
 import DocsPage from './AddSelect.mdx';
 import { StandardSingleAddSelect } from './example/preview-components/StandardSingleAddSelect';
+import { StandardMultiAddSelect } from './example/preview-components/MultiAddSelect/MultiAddSelect';
 
 export default {
   title: 'Patterns/Add and select/SingleAddSelect',
@@ -27,3 +28,9 @@ export const SingleAddSelect = () => {
 };
 
 SingleAddSelect.storyName = 'Single selection';
+
+export const MultiAddSelect = () => {
+  return <StandardMultiAddSelect />;
+};
+
+MultiAddSelect.storyName = 'Multi selection';

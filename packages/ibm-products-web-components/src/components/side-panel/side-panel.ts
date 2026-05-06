@@ -115,6 +115,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   _actionsCount = 0;
 
   @state()
+  _actionsMultiple: 'single' | 'double' | 'triple' | '' = '';
+
+  @state()
   _slugCloseSize = 'sm';
 
   @state()
@@ -520,6 +523,17 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
     const actionsCount = actions?.length ?? 0;
     this._actionsCount = actionsCount;
+
+    // Set actions-multiple attribute for container query styling
+    if (actionsCount === 1) {
+      this._actionsMultiple = 'single';
+    } else if (actionsCount === 2) {
+      this._actionsMultiple = 'double';
+    } else if (actionsCount === 3) {
+      this._actionsMultiple = 'triple';
+    } else {
+      this._actionsMultiple = '';
+    }
   }
 
   private _checkSetDoAnimateTitle = () => {
@@ -917,8 +931,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         <c4p-action-set
           class=${`${blockClass}__actions-container`}
           ?hidden=${this._actionsCount === 0}
-          size=${condensedActions ? 'lg' : 'xl'}
-          button-size=${condensedActions ? 'lg' : 'xl'}
+          size="md"
+          button-size=${condensedActions ? 'md' : 'lg'}
+          actions-multiple=${this._actionsMultiple}
         >
           <slot name="actions" @slotchange=${this._handleActionsChange}></slot>
         </c4p-action-set>

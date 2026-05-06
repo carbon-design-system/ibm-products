@@ -247,7 +247,7 @@ export const WithCustomHeader = {
 };
 
 const meta = {
-  title: 'Preview/Onboarding/Checklist',
+  title: 'Components/Onboarding/Checklist',
 };
 
 export default meta;

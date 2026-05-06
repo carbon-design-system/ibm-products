@@ -496,7 +496,7 @@ export const FullScreenWithMultipleSteps = {
 };
 
 const meta = {
-  title: 'Preview/Onboarding/InterstitialScreen',
+  title: 'Components/Onboarding/InterstitialScreen',
 };
 
 export default meta;

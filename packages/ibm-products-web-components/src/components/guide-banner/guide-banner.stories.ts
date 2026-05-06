@@ -283,7 +283,7 @@ export const Default = {
 };
 
 const meta = {
-  title: 'Preview/Onboarding/GuideBanner',
+  title: 'Components/Onboarding/GuideBanner',
 };
 
 export default meta;

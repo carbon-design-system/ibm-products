@@ -14,6 +14,10 @@ import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-lis
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet.scss?lit';
+import type { ActionButton, ButtonSize } from '../action-set/index.js';
+import { tearsheetSignal } from './tearsheet-signal';
+import { SignalWatcher } from '@lit-labs/signals';
+import '../action-set/index.js';
 
 const blockClass = `${prefix}--tearsheet__next`;
 
@@ -21,22 +25,65 @@ const blockClass = `${prefix}--tearsheet__next`;
  * Tearsheet Footer component - Contains action buttons at the bottom of the tearsheet.
  *
  * @element c4p-tearsheet-footer
- * @slot actions - Action buttons (typically Cancel, Submit, etc.)
+ * @slot - Default slot for custom footer content (rendered before actions)
  */
 @customElement(`${prefix}-tearsheet-footer`)
-class CDSTearsheetFooter extends HostListenerMixin(LitElement) {
+class CDSTearsheetFooter extends SignalWatcher(HostListenerMixin(LitElement)) {
   @property({ reflect: true })
   slot = 'footer';
 
+  /**
+   * Array of action button configurations. Each action is an object with properties
+   * like 'kind', 'label', 'disabled', 'onClick', etc.
+   * These are passed directly to the action-set component which handles rendering.
+   */
+  @property({ type: Array })
+  actions: ActionButton[] = [];
+
+  /**
+   * Optional button size override. If not provided, defaults based on tearsheet variant.
+   */
+  @property({ attribute: 'button-size' })
+  buttonSize?: ButtonSize;
+
+  /**
+   * Renders the action-set component with actions
+   */
+  private _renderActions() {
+    if (!this.actions || this.actions.length === 0) {
+      return null;
+    }
+
+    const variant = tearsheetSignal.get().variant;
+    const actionSetSize = variant === 'wide' ? '2xl' : 'lg';
+    const buttonSize = this.buttonSize || (variant === 'wide' ? '2xl' : 'xl');
+
+    return html`
+      <c4p-action-set
+        size="${actionSetSize}"
+        button-size="${buttonSize}"
+        .actions="${this.actions}"
+        ?disable-stacking="${true}"
+      >
+      </c4p-action-set>
+    `;
+  }
+
   render() {
+    const actionCount = this.actions?.length || 0;
     const classes = classMap({
       [`${blockClass}__footer`]: true,
+      [`${blockClass}__footer--three-actions`]: actionCount === 3,
+      [`${blockClass}__footer--many-actions`]: actionCount > 3,
     });
-    return html`<footer class="${classes}" ref="{ref}">
+
+    return html`<footer class="${classes}">
       <slot></slot>
+      ${this._renderActions()}
     </footer>`;
   }
 
   static styles = styles;
 }
+
 export default CDSTearsheetFooter;

@@ -145,30 +145,25 @@ import '@carbon/web-components/es/components/button/index.js';
 
 ## Stacking Tearsheets
 
-Multiple tearsheets can be opened simultaneously and will automatically stack:
-
-```javascript
-import { stackManager } from '@carbon/ibm-products-web-components/es/components/tearsheet-preview/stack-signal.js';
-
-// Set stack step size (affects scaling). This is optional and is default to lg
-stackManager.setStackStepSize('md'); // 'sm' | 'md' | 'lg' | 'xlg'
-```
+To enable stacking for multiple tearsheets, wrap them in a `<c4p-tearsheet-stack>` component. This opt-in approach provides better performance and explicit control over which tearsheets participate in stacking, similar to React's `StackProvider`. The `stack-step-size` attribute controls the visual offset between stacked tearsheets (`sm`, `md`, or `lg`).
 
 ```html
-<!-- First tearsheet -->
-<c4p-preview-tearsheet id="tearsheet-1" open>
-  <c4p-tearsheet-header slot="header">
-    <cds-button slot="header-actions" @click="${openSecondTearsheet}">
-      Open details
-    </cds-button>
-  </c4p-tearsheet-header>
-  <!-- ... -->
-</c4p-preview-tearsheet>
+<c4p-tearsheet-stack stack-step-size="lg">
+  <!-- First tearsheet -->
+  <c4p-preview-tearsheet id="tearsheet-1" open>
+    <c4p-tearsheet-header slot="header">
+      <cds-button slot="header-actions" @click="${openSecondTearsheet}">
+        Open details
+      </cds-button>
+    </c4p-tearsheet-header>
+    <!-- ... -->
+  </c4p-preview-tearsheet>
 
-<!-- Second tearsheet - will stack on top -->
-<c4p-preview-tearsheet id="tearsheet-2" open>
-  <!-- ... -->
-</c4p-preview-tearsheet>
+  <!-- Second tearsheet - will stack on top -->
+  <c4p-preview-tearsheet id="tearsheet-2" open>
+    <!-- ... -->
+  </c4p-preview-tearsheet>
+</c4p-tearsheet-stack>
 ```
 
 ## With AI Label Decorator
@@ -207,8 +202,44 @@ The header automatically collapses when scrolling in the main content area. To d
 </c4p-preview-tearsheet>
 ```
 
+## Footer Actions
 
+The `c4p-tearsheet-footer` component supports two approaches for rendering action buttons:
 
+**Using the `.actions` property (recommended):**
+
+```html
+<c4p-tearsheet-footer
+  slot="footer"
+  .actions="${[
+    {
+      kind: 'ghost',
+      label: 'Cancel',
+      onClick: () => setOpen(false),
+    },
+    {
+      kind: 'secondary',
+      label: 'Back',
+    },
+    {
+      kind: 'primary',
+      label: 'Submit',
+    },
+  ]}">
+</c4p-tearsheet-footer>
+```
+
+**Using custom buttons:**
+
+```html
+<c4p-tearsheet-footer slot="footer">
+  <cds-button kind="ghost">Cancel</cds-button>
+  <cds-button kind="secondary">Back</cds-button>
+  <cds-button kind="primary">Submit</cds-button>
+</c4p-tearsheet-footer>
+```
+
+The `.actions` property automatically handles button sizing based on the tearsheet variant and screen size, while custom buttons give you full control over the footer layout.
 
 ## Migration from Legacy Tearsheet
 

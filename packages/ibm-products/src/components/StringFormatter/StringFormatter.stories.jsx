@@ -14,9 +14,10 @@ import mdx from './StringFormatter.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 import { Wrap } from '../../global/js/utils/Wrap';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Utilities/StringFormatter',
+  title: 'Deprecated/StringFormatter',
   component: StringFormatter,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -35,6 +36,27 @@ export default {
     },
     layout: 'fullscreen',
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version. Please migrate to {/* cspell:disable-next-line */}
+              <a href="/?path=/docs/utilities-truncatedtext--overview">
+                TruncatedText
+              </a>
+              .
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
 };
 
 /**

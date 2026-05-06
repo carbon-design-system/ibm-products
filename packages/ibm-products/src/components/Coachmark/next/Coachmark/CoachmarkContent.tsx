@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,12 +16,11 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../../../settings';
 import { blockClass, CoachmarkContext } from './context';
-import { CoachmarkBubble } from './CoachmarkBubble';
 import { ContentHeaderProps } from './ContentHeader';
 import { ContentBodyProps } from './ContentBody';
-import { NewPopoverAlignment } from '@carbon/react';
+import { PopoverContent } from '@carbon/react';
+import { carbon } from '../../../../settings';
 import cx from 'classnames';
 
 export interface CoachmarkContentProps {
@@ -34,14 +33,6 @@ export interface CoachmarkContentProps {
    * It can be a single child or an array of children depending on your need
    */
   children: ReactElement | ReactNode;
-  /**
-   * Specify whether the component should be rendered on high-contrast.
-   */
-  highContrast?: boolean;
-  /**
-   * Specify whether a drop shadow should be rendered on the popover.
-   */
-  dropShadow?: boolean;
 }
 
 export type CoachmarkContentComponent = ForwardRefExoticComponent<
@@ -53,118 +44,98 @@ export type CoachmarkContentComponent = ForwardRefExoticComponent<
 
 const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
   (props, ref) => {
-    const {
-      className = '',
-      children,
-      highContrast,
-      dropShadow,
-      ...rest
-    } = props;
+    const { className = '', children, ...rest } = props;
     const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
-    const contentBodyClass = `${blockClass}--content-body`;
-    const { align, open, setOpen, triggerRef, setContentRef, floating } =
-      useContext(CoachmarkContext);
-
-    const targetId = open ? triggerRef?.current?.id : null;
+    const {
+      open,
+      setContentRef,
+      onClose,
+      setOpen,
+      triggerRef,
+      selectorPrimaryFocus,
+    } = useContext(CoachmarkContext);
 
     const handleRef = useRef<HTMLDivElement | null>(null);
-    const bubbleRef = ref || handleRef;
+    const contentRef = ref || handleRef;
 
     useEffect(() => {
-      if (open && 'current' in bubbleRef && bubbleRef.current) {
-        requestAnimationFrame(() => {
-          if (floating) {
-            // Focus drag icon for floating coachmark
-            const dragIcon = bubbleRef.current?.querySelector(
-              `.${blockClass}--content-header--drag-icon`
-            ) as HTMLElement;
-            dragIcon?.focus();
-          } else {
-            // Focus first focusable element in body for non-floating coachmark
-            const contentBody = bubbleRef.current?.querySelector(
-              `.${contentBodyClass}`
-            );
-
-            if (contentBody) {
-              const firstFocusable = Array.from(
-                contentBody.querySelectorAll<HTMLElement>('*')
-              ).find((el) => el.tabIndex >= 0);
-              firstFocusable?.focus();
-            }
-          }
-        });
+      if (open && 'current' in contentRef && contentRef.current) {
+        // Find the actual popover container (parent of PopoverContent)
+        const popoverContent = contentRef.current;
+        const popoverContainer = popoverContent?.closest(
+          `.${carbon.prefix}--popover`
+        );
+        if (popoverContainer instanceof HTMLElement) {
+          setContentRef(popoverContainer);
+        }
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open]);
+    }, [open, contentRef]);
 
+    // Handle Escape key to close Coachmark and return focus to trigger
     useEffect(() => {
-      const handleOutsideClick = (event: MouseEvent) => {
-        // Don't close on outside click when floating
-        if (floating) {
-          return;
-        }
-
-        const targetElement = document.getElementById(targetId || '');
-        const bubbleElement =
-          bubbleRef && 'current' in bubbleRef ? bubbleRef.current : null;
-
-        if (
-          bubbleElement &&
-          !bubbleElement.contains(event.target as Node) &&
-          targetElement &&
-          !targetElement.contains(event.target as Node)
-        ) {
-          setOpen?.(false);
-        }
-      };
-
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          setOpen?.(false);
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape' && open) {
+          onClose?.();
+          setOpen(false);
+          // Return focus to the trigger element
+          if (triggerRef?.current) {
+            triggerRef.current.focus();
+          }
         }
       };
 
       if (open) {
-        document.addEventListener('click', handleOutsideClick);
-        window.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keydown', handleKeyDown);
       }
 
       return () => {
-        document.removeEventListener('click', handleOutsideClick);
-        window.removeEventListener('keydown', handleKeyDown);
+        document.removeEventListener('keydown', handleKeyDown);
       };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, targetId, setOpen]);
+    }, [open, onClose, setOpen, triggerRef]);
 
+    // Handle Escape key to close Coachmark
     useEffect(() => {
-      if (open && 'current' in bubbleRef && bubbleRef.current) {
-        const dragContainer = bubbleRef.current.querySelector(
-          `.${pkg.prefix}__bubble`
-        );
-        if (dragContainer instanceof HTMLElement) {
-          setContentRef(dragContainer);
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape' && open) {
+          onClose?.();
+          setOpen(false);
         }
+      };
+      if (open) {
+        document.addEventListener('keydown', handleKeyDown);
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, bubbleRef]);
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [open, onClose, setOpen]);
+
+    // Handle focus management with selectorPrimaryFocus
+    useEffect(() => {
+      if (open && selectorPrimaryFocus) {
+        // Use setTimeout to ensure DOM is ready and give time for any other focus management
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            // Try to get the element from the DOM directly using the selector
+            const elementToFocus =
+              document.querySelector<HTMLElement>(selectorPrimaryFocus);
+
+            if (elementToFocus) {
+              elementToFocus.focus();
+            }
+          });
+        }, 100);
+      }
+    }, [open, selectorPrimaryFocus]);
 
     return (
-      open && (
-        <div ref={bubbleRef}>
-          <CoachmarkBubble
-            className={cx(coachmarkContentBlockClass, className)}
-            highContrast={highContrast}
-            dropShadow={dropShadow}
-            align={align as NewPopoverAlignment}
-            open={open}
-            target={`#${targetId}`}
-            caret={floating}
-            {...rest}
-          >
-            {children}
-          </CoachmarkBubble>
-        </div>
-      )
+      <PopoverContent
+        ref={contentRef}
+        className={cx(coachmarkContentBlockClass, className) || ''}
+        {...rest}
+      >
+        {children}
+      </PopoverContent>
     );
   }
 ) as CoachmarkContentComponent;
@@ -181,12 +152,4 @@ CoachmarkContent.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-  /**
-   * Specify whether a drop shadow should be rendered on the popover.
-   */
-  dropShadow: PropTypes.bool,
-  /**
-   * Specify whether the component should be rendered on high-contrast.
-   */
-  highContrast: PropTypes.bool,
 };

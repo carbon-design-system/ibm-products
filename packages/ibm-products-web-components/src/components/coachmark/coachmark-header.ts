@@ -40,11 +40,21 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   @property({ reflect: true })
   dragIconDescription?: string = '';
 
-  private _handleClick = () => {
-    // Find and close the parent coachmark
-    const coachmark = this.closest(`${prefix}-coachmark`) as any;
+  private _handleClick = (event: Event) => {
+    event.stopPropagation();
+
+    const coachmark = this.closest(`${prefix}-coachmark`) as HTMLElement | null;
     if (coachmark) {
-      coachmark.open = false;
+      coachmark.dispatchEvent(
+        new CustomEvent(`${prefix}-coachmark-request-close`, {
+          bubbles: true,
+          composed: true,
+          cancelable: true,
+          detail: { source: 'header-close-button' },
+        })
+      );
+
+      (coachmark as any).open = false;
     }
 
     updateCoachmarkDetailsSignal({

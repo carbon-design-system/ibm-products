@@ -29,7 +29,7 @@ const renderCoachmark = ({ ...rest } = {}) =>
         id="CoachmarkBtn"
         label="Show information"
       ></CoachmarkBeacon>
-      <Coachmark.Content highContrast={true}>
+      <Coachmark.Content>
         <Coachmark.Content.Header
           closeIconDescription="Close"
           dragIconDescription="Drag"
@@ -55,7 +55,7 @@ const renderCoachmarkFloating = ({ ...rest } = {}) =>
       >
         Show information
       </Button>
-      <Coachmark.Content highContrast={true}>
+      <Coachmark.Content>
         <Coachmark.Content.Header
           closeIconDescription="Close"
           dragIconDescription="Drag"

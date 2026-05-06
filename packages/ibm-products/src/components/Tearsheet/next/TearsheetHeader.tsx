@@ -35,7 +35,7 @@ export interface TearsheetHeaderProps {
    * The accessibility title for the close icon (if shown).
    *
    * **Note:** This prop is only required if a close icon is shown, i.e. if
-   * there are a no navigation actions and/or hasCloseIcon is true.
+   * there are a no navigation actions and/or hideCloseButton is false.
    */
   closeIconDescription?: string;
   /**
@@ -66,39 +66,37 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
       disableHeaderCollapse,
       ...rest
     } = props;
-    const {
-      setHasCloseIcon,
-      fullyCollapsed,
-      onClose,
-      setDisableHeaderCollapse,
-    } = useContext(TearsheetContext);
+    const parentContext = useContext(TearsheetContext);
+    const { fullyCollapsed, setDisableHeaderCollapse } = parentContext;
     const localRef = useRef(undefined);
     const headerRef = (ref || localRef) as RefObject<HTMLDivElement>;
 
     useEffect(() => {
-      setHasCloseIcon?.(!!hideCloseButton);
-    }, [hideCloseButton, setHasCloseIcon]);
-    useEffect(() => {
       setDisableHeaderCollapse?.(!!disableHeaderCollapse);
     }, [disableHeaderCollapse, setDisableHeaderCollapse]);
 
+    // Create enhanced context with close button props
+    const enhancedContext = {
+      ...parentContext,
+      closeIconDescription,
+      hideCloseButton,
+    };
+
     return (
-      <ModalHeader
-        ref={headerRef}
-        className={cx(`${blockClass}__header`, {
-          [`${className}`]: true,
-          [`${blockClass}__header--with-close-icon`]: !!hideCloseButton,
-          [`${blockClass}__header-collapsed`]: fullyCollapsed,
-        })}
-        closeClassName={cx({
-          [`${blockClass}__header--no-close-icon`]: hideCloseButton,
-        })}
-        closeModal={onClose}
-        iconDescription={closeIconDescription}
-        {...rest}
-      >
-        {children}
-      </ModalHeader>
+      <TearsheetContext.Provider value={enhancedContext}>
+        <ModalHeader
+          ref={headerRef}
+          className={cx(`${blockClass}__header`, {
+            [`${className}`]: true,
+            [`${blockClass}__header--with-close-icon`]: !hideCloseButton,
+            [`${blockClass}__header-collapsed`]: fullyCollapsed,
+          })}
+          closeClassName={`${blockClass}__header--no-close-icon`}
+          {...rest}
+        >
+          {children}
+        </ModalHeader>
+      </TearsheetContext.Provider>
     );
   }
 );

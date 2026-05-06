@@ -7,11 +7,16 @@
 
 import { useEffect } from 'react';
 
+const DRAG_THRESHOLD = 5;
+
 interface UseCollapsibleHeaderOptions {
   container: HTMLDivElement | null;
   triggerCollapse: (collapsed: boolean) => void;
   disableHeaderCollapse?: boolean;
 }
+
+type PointerEventHandler = (e: PointerEvent) => void;
+type WheelEventHandler = (e: WheelEvent) => void;
 
 /**
  * Custom hook to manage collapsible header behavior based on scroll and drag gestures.
@@ -32,36 +37,36 @@ export function useCollapsible({
     let startY: number | null = null;
     let isDragging = false;
 
-    const onPointerDown = (e: PointerEvent) => {
+    const evaluateDragDirection = (diffY: number): void => {
+      if (diffY > DRAG_THRESHOLD) {
+        triggerCollapse(true);
+      } else if (diffY < -DRAG_THRESHOLD) {
+        triggerCollapse(false);
+      }
+    };
+
+    const onPointerDown: PointerEventHandler = (e) => {
       startY = e.clientY;
       isDragging = true;
     };
 
-    const onPointerMove = (e: PointerEvent) => {
+    const onPointerMove: PointerEventHandler = (e) => {
       if (!isDragging || startY === null) {
         return;
       }
 
       const diffY = startY - e.clientY;
-      if (diffY > 5) {
-        triggerCollapse(true);
-      } else if (diffY < -5) {
-        triggerCollapse(false);
-      }
+      evaluateDragDirection(diffY);
     };
 
-    const onPointerUp = () => {
+    const onPointerUp: PointerEventHandler = () => {
       isDragging = false;
       startY = null;
       document.body.style.cursor = 'default';
     };
 
-    const onWheel = (e: WheelEvent) => {
-      if (e.deltaY > 0) {
-        triggerCollapse(true);
-      } else if (e.deltaY < 0) {
-        triggerCollapse(false);
-      }
+    const onWheel: WheelEventHandler = (e) => {
+      triggerCollapse(e.deltaY > 0);
     };
 
     container.addEventListener('pointerdown', onPointerDown);

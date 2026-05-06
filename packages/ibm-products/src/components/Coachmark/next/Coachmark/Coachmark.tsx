@@ -23,7 +23,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../../../global/js/utils/devtools';
 import { CoachmarkContext, blockClass } from './context';
 import CoachmarkContent, { CoachmarkContentProps } from './CoachmarkContent';
-import { NewPopoverAlignment } from '@carbon/react';
+import { Popover, NewPopoverAlignment } from '@carbon/react';
 import { useIsomorphicEffect } from '../../../../global/js/hooks';
 import { ContentHeader, ContentHeaderProps } from './ContentHeader';
 import { ContentBody, ContentBodyProps } from './ContentBody';
@@ -73,6 +73,23 @@ export interface CoachmarkPropsNext {
    * Specifies whether the component is floating or not.
    */
   floating?: boolean;
+  /**
+   * Specify whether the component should be rendered on high-contrast.
+   */
+  highContrast?: boolean;
+  /**
+   * Specify whether a drop shadow should be rendered on the popover.
+   */
+  dropShadow?: boolean;
+  /**
+   * Specify whether a caret should be rendered on the popover. This is intended to use only for coachmark patterns.
+   */
+  caret?: boolean;
+  /**
+   * CSS selector for the element that should receive focus when the coachmark opens.
+   * If not provided, no automatic focus management will occur.
+   */
+  selectorPrimaryFocus?: string;
 }
 
 type CoachmarkContentComponent = FC<CoachmarkContentProps> & {
@@ -101,6 +118,10 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       open,
       position = { x: 0, y: 0 },
       floating,
+      dropShadow,
+      highContrast,
+      caret,
+      selectorPrimaryFocus,
       ...rest
     } = props;
     const triggerRef = useRef<HTMLElement>(null);
@@ -118,6 +139,8 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
     };
 
     const currentOpen = open ?? openState;
+    const caretValue =
+      caret !== undefined ? caret : floating === true ? false : true;
 
     useEffect(() => {
       const container = internalRef.current;
@@ -145,6 +168,16 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       }
     }, [open]);
 
+    // Reset position when coachmark closes
+    useEffect(() => {
+      if (!open && contentRef && floating) {
+        // Reset the dragged position
+        contentRef.style.transform = 'none';
+        contentRef.style.left = '0px';
+        contentRef.style.top = '0px';
+      }
+    }, [open, contentRef, floating]);
+
     useIsomorphicEffect(() => {
       const { x = 0, y = 0 } = position ?? {};
       const el = internalRef.current;
@@ -163,6 +196,16 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       }
     };
 
+    const handleRequestClose = (event?: Event) => {
+      // Don't close on outside clicks when floating is enabled
+      if (floating) {
+        return;
+      }
+
+      onClose?.();
+      setOpen(false);
+    };
+
     return (
       <CoachmarkContext.Provider
         value={{
@@ -175,19 +218,27 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
           contentRef,
           setContentRef,
           floating,
+          selectorPrimaryFocus,
         }}
       >
         <div
           {...rest}
-          className={cx(
-            blockClass, // Apply the block class to the main HTML element
-            className, // Apply any supplied class names to the main HTML element.
-            { [`${blockClass}--floating`]: floating }
-          )}
           ref={setRef}
+          className={cx(blockClass, className, {
+            [`${blockClass}--floating`]: floating,
+          })}
           {...getDevtoolsProps(componentName)}
         >
-          <div className={`${blockClass}--container`}>{children}</div>
+          <Popover
+            open={currentOpen}
+            onRequestClose={handleRequestClose}
+            align={align as NewPopoverAlignment}
+            caret={caretValue}
+            highContrast={highContrast ?? true}
+            dropShadow={dropShadow}
+          >
+            {children}
+          </Popover>
         </div>
       </CoachmarkContext.Provider>
     );
@@ -209,6 +260,10 @@ Coachmark.propTypes = {
    */
   align: PropTypes.string,
   /**
+   * Specify whether a caret should be rendered on the popover. This is intended to use only for coachmark patterns.
+   */
+  caret: PropTypes.bool,
+  /**
    * Provide the contents of the CoachmarkV2.
    */
   children: PropTypes.node.isRequired,
@@ -217,9 +272,17 @@ Coachmark.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Specify whether a drop shadow should be rendered on the popover.
+   */
+  dropShadow: PropTypes.bool,
+  /**
    * Specifies whether the component is floating or not.
    */
   floating: PropTypes.bool,
+  /**
+   * Specify whether the component should be rendered on high-contrast.
+   */
+  highContrast: PropTypes.bool,
   /**
    * Function to call when the close button is clicked.
    */
@@ -236,4 +299,8 @@ Coachmark.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
   }),
+  /**
+   * CSS selector for the element that should receive focus when the coachmark opens.
+   */
+  selectorPrimaryFocus: PropTypes.string,
 };

@@ -245,7 +245,6 @@ $carbon-prefix: 'cds';
   // and use the extend below
   // @extend .#{$prefix}--page-header__content__body;
   display: block;
-  margin-block-start: $spacing-05;
   max-inline-size: convert.to-rem(640px);
 
   .#{$prefix}--page-header__content__subtitle {

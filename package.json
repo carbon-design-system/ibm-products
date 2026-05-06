@@ -138,7 +138,7 @@
     "react-is": "^19.0.0",
     "semver": "7.7.4",
     "ws": "^8.17.1",
-    "@babel/runtime": "7.28.6",
+    "@babel/runtime": "7.29.2",
     "brace-expansion@^1.1.7": "1.1.13",
     "brace-expansion@^2.0.1": "2.0.3",
     "brace-expansion@^3.0.0": "3.0.2",
@@ -167,7 +167,13 @@
     "picomatch": "^4.0.4",
     "picomatch@^2.0.0": "^2.3.2",
     "picomatch@^3.0.0": "^3.0.2",
-    "picomatch@^4.0.0": "^4.0.4"
+    "picomatch@^4.0.0": "^4.0.4",
+    "minimatch@^5.0.1": "^5.1.8",
+    "minimatch@^5.1.0": "^5.1.8",
+    "minimatch@^9.0.3": "^9.0.7",
+    "minimatch@^9.0.4": "^9.0.7",
+    "minimatch@^9.0.5": "^9.0.7",
+    "brace-expansion@^5.0.2": "^5.0.5"
   },
   "lint-staged": {
     "*": [

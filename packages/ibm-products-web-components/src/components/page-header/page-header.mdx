@@ -93,9 +93,11 @@ The `c4p-page-header-hero-image` component maintains a consistent aspect ratio
 overflow. The image is centered within its container using flexbox, ensuring it
 stays within viewport boundaries while maintaining proper aspect ratio.
 
-You can control how the image fills the container using CSS custom properties:
-- `--object-fit`: Controls image sizing (`cover` (default), `contain`, `fill`, `none`)
-- `--object-position`: Controls image positioning (default: `center`)
+You can control how the image fills the container using the `object-fit` prop:
+- `cover`: Image fills container, may crop edges (default)
+- `contain`: Image fits within container, may show empty space
+- `fill`: Image stretches to fill container
+- `none`: Image uses its natural size
 
 ```css
 @use '@carbon/grid';
@@ -209,6 +211,10 @@ The `c4p-page-header-tabs` component has a `tags` slot for tag components.
 ## `c4p-page-header-tabs`
 
 <ArgTypes of="c4p-page-header-tabs" />
+
+## `c4p-page-header-hero-image`
+
+<ArgTypes of="c4p-page-header-hero-image" />
 
 <Markdown>{`${cdnJs({ components: ['page-header'] })}`}</Markdown>
 

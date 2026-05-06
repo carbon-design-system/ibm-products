@@ -11,3 +11,11 @@
 export { pkg } from './settings';
 export { usePrefix } from './global/js/hooks';
 export * from './components';
+
+// Re-export primitives utilities for public consumption
+export { AddSelectData } from '@carbon/ibm-products-primitives';
+export type {
+  AddSelectItem,
+  //   ItemStatus,
+  //   SearchOptions,
+} from '@carbon/ibm-products-primitives';

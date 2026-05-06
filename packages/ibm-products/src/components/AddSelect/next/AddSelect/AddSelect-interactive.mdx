@@ -15,8 +15,7 @@ import * as stories from './AddSelect-interactive.stories';
 ## Overview
 
 This interactive example demonstrates a complete, production-ready
-implementation of AddSelect using the AddSelectData utility from
-`@carbon/ibm-products-primitives`.
+implementation of AddSelect using the AddSelectData utility.
 
 The example includes:
 
@@ -36,26 +35,23 @@ application:
 ### Step 1: Install Dependencies
 
 ```bash
-npm install @carbon/ibm-products @carbon/ibm-products-primitives
+npm install @carbon/ibm-products
 ```
 
 ### Step 2: Import Required Modules
 
 ```typescript
 import { preview__AddSelect as AddSelect } from '@carbon/ibm-products';
-import {
-  AddSelectData,
-  HierarchicalItem,
-} from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
 import { useState, useEffect } from 'react';
 ```
 
 ### Step 3: Define Your Hierarchical Data
 
-Structure your data according to the `HierarchicalItem` interface:
+Structure your data according to the `AddSelectItem` interface:
 
 ```typescript
-const hierarchicalData: HierarchicalItem[] = [
+const hierarchicalData: AddSelectItem[] = [
   {
     id: '1',
     title: 'Parent Item',
@@ -81,7 +77,7 @@ Create an instance of AddSelectData and set up state management:
 
 ```typescript
 const [dataManager] = useState(() => new AddSelectData());
-const [currentItems, setCurrentItems] = useState<HierarchicalItem[]>([]);
+const [currentItems, setCurrentItems] = useState<AddSelectItem[]>([]);
 const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
 const [searchTerm, setSearchTerm] = useState('');
 const [path, setPath] = useState<Array<{ id: string; title: string }>>([]);

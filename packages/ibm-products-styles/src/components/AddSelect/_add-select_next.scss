@@ -90,6 +90,11 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 .#{$block-class__next}-list-body {
   display: flex;
   flex-direction: column;
+
+  // Horizontal layout for hierarchy view (columns side-by-side)
+  &--horizontal {
+    flex-direction: row;
+  }
 }
 
 // ──────────────────────────────────────────────────────────────

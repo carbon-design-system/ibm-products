@@ -30,10 +30,17 @@ export interface AddSelectListProps {
    * Optional class name
    */
   className?: string;
+  /**
+   * Layout direction for columns: 'vertical' (default) or 'horizontal' (for hierarchy)
+   */
+  layout?: 'vertical' | 'horizontal';
 }
 
 const AddSelectList = forwardRef<HTMLDivElement, AddSelectListProps>(
-  ({ children, className, ...rest }, ref: ForwardedRef<HTMLDivElement>) => {
+  (
+    { children, className, layout = 'vertical', ...rest },
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
     const { multi } = useContext(AddSelectContext);
     const listRef = useRef<HTMLDivElement>(null);
     const focusedIndexRef = useRef(0);
@@ -151,6 +158,9 @@ const AddSelectList = forwardRef<HTMLDivElement, AddSelectListProps>(
     }, [children]);
 
     const listClasses = cx(`${blockClass}-list`, className);
+    const listBodyClasses = cx(`${blockClass}-list-body`, {
+      [`${blockClass}-list-body--horizontal`]: layout === 'horizontal',
+    });
 
     return (
       <div
@@ -169,7 +179,7 @@ const AddSelectList = forwardRef<HTMLDivElement, AddSelectListProps>(
         onKeyDown={handleKeyDown}
         {...rest}
       >
-        <div className={`${blockClass}-list-body`}>{children}</div>
+        <div className={listBodyClasses}>{children}</div>
       </div>
     );
   }
@@ -178,6 +188,8 @@ const AddSelectList = forwardRef<HTMLDivElement, AddSelectListProps>(
 AddSelectList.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  /**@ts-ignore */
+  layout: PropTypes.oneOf(['vertical', 'horizontal']),
 };
 
 AddSelectList.displayName = 'AddSelectList';

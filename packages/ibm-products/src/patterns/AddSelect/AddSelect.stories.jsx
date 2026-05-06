@@ -10,6 +10,7 @@ import styles from './_story-styles.scss?inline';
 import DocsPage from './AddSelect.mdx';
 import { StandardSingleAddSelect } from './example/preview-components/StandardSingleAddSelect';
 import { StandardMultiAddSelect } from './example/preview-components/MultiAddSelect/MultiAddSelect';
+import { MultiAddSelectWithHierarchy } from './example/preview-components/MultiAddSelect/MultiAddSelectWithHierarchy';
 
 export default {
   title: 'Patterns/Add and select/SingleAddSelect',
@@ -34,3 +35,9 @@ export const MultiAddSelect = () => {
 };
 
 MultiAddSelect.storyName = 'Multi selection';
+
+export const MultiAddSelectHierarchy = () => {
+  return <MultiAddSelectWithHierarchy />;
+};
+
+MultiAddSelectHierarchy.storyName = 'Multi selection with hierarchy';

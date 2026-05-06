@@ -723,6 +723,14 @@ $duration: 1000ms;
     inset-block-start: var(--#{$pkg-prefix}-page-header-header-top);
   }
 
+  // When disableStickyTabBar is true, remove sticky positioning from root
+  // This allows breadcrumb to stick to viewport while tab bar scrolls normally
+  &.#{$block-class}.#{$block-class}__next--disable-sticky-tab-bar {
+    position: static;
+    // Add padding to compensate for fixed breadcrumb (40px height)
+    padding-block-start: to-rem(40px);
+  }
+
   .#{$block-class}__breadcrumb-bar {
     position: sticky;
     z-index: 1;
@@ -730,6 +738,15 @@ $duration: 1000ms;
     block-size: to-rem(40px);
     /* stylelint-disable-next-line carbon/layout-use */
     inset-block-start: var(--#{$pkg-prefix}-page-header-breadcrumb-top);
+  }
+
+  // When disableStickyTabBar is true, breadcrumb uses fixed positioning at top of viewport
+  &.#{$block-class}.#{$block-class}__next--disable-sticky-tab-bar
+    .#{$block-class}__breadcrumb-bar {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
   }
 
   .#{$block-class}__breadcrumb-bar .#{$carbon-prefix}--subgrid,
@@ -977,7 +994,17 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__tab-bar {
+    position: sticky;
+    z-index: 1;
     background-color: $layer;
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$pkg-prefix}-page-header-breadcrumb-top);
+  }
+
+  // Disable sticky positioning for tab bar when disableStickyTabBar prop is true
+  &.#{$block-class}.#{$block-class}__next--disable-sticky-tab-bar
+    .#{$block-class}__tab-bar {
+    position: static;
   }
 
   .#{$block-class}__tab-bar--tablist {

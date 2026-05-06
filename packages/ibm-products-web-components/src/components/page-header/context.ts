@@ -15,4 +15,5 @@ export const pageHeaderContext = createContext({
   fullyCollapsed: false,
   root: null,
   titleClipped: false,
+  disableStickyTabBar: false,
 });

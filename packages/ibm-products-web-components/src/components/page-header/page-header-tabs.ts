@@ -8,9 +8,11 @@
  */
 
 import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
+import CDSPageHeader from './page-header';
 
 /**
  * Page header Tabs Bar.
@@ -18,6 +20,37 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
  */
 @customElement(`${prefix}-page-header-tabs`)
 class CDSPageHeaderTabs extends LitElement {
+  /**
+   * Disable sticky positioning for the tab bar
+   */
+  @property({ type: Boolean, attribute: 'disable-sticky-tab-bar' })
+  disableStickyTabBar = false;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.updateContext();
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('disableStickyTabBar')) {
+      this.updateContext();
+    }
+  }
+
+  private updateContext() {
+    const pageHeader = this.closest(`${prefix}-page-header`) as CDSPageHeader;
+    if (pageHeader) {
+      // Create a new object to trigger reactivity
+      pageHeader.context = {
+        ...pageHeader.context,
+        disableStickyTabBar: this.disableStickyTabBar,
+      };
+      // Force update
+      pageHeader.requestUpdate('context');
+    }
+  }
+
   render() {
     return html` <div class="${carbonPrefix}--css-grid" condensed="">
       <div

@@ -34,6 +34,8 @@ type PageHeaderContextType = {
   observerState: PageHeaderObserverState;
   isContentActionsInBreadcrumbBar?: boolean;
   isFunctionalContentActions?: boolean;
+  disableStickyTabBar?: boolean;
+  setDisableStickyTabBar?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const PageHeaderContext = createContext<
@@ -48,6 +50,8 @@ export const PageHeaderContext = createContext<
     titleClipped: false,
     contentActionsClipped: false,
   },
+  disableStickyTabBar: false,
+  setDisableStickyTabBar: () => {},
 });
 
 export function usePageHeader() {

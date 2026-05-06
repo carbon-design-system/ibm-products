@@ -16,6 +16,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/utilities/convert';
+@use '@carbon/styles/scss/utilities/z-index' as *;
 @use '@carbon/grid';
 @use '@carbon/styles/scss/components/page-header/index' as *;
 @use 'sass:map';
@@ -36,6 +37,13 @@ $carbon-prefix: 'cds';
   inset-block-start: var(--c4p-page-header-header-top);
 }
 
+// When disableStickyTabBar is true, remove sticky positioning from root and add padding
+:host(#{$prefix}-page-header.#{$prefix}--page-header--disable-sticky-tab-bar) {
+  position: static;
+  // Add padding to compensate for fixed breadcrumb (40px height)
+  padding-block-start: convert.to-rem(40px);
+}
+
 :host(#{$prefix}-page-header-breadcrumb),
 :host(#{$prefix}-page-header-content),
 :host(#{$prefix}-page-header-tabs) {
@@ -50,7 +58,6 @@ $carbon-prefix: 'cds';
   overflow: visible;
   background-color: $layer-01;
   block-size: convert.to-rem(40px);
-  border-block-end: $border-subtle;
 
   /* custom css property used from calculation of breadcrumb offset */
   /* stylelint-disable-next-line carbon/layout-use */
@@ -58,6 +65,35 @@ $carbon-prefix: 'cds';
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__breadcrumb-bar;
+}
+
+// Apply border only when border attribute is true (default)
+:host(#{$prefix}-page-header-breadcrumb[border]) {
+  border-block-end: 1px solid $border-subtle-01;
+}
+
+// When breadcrumb has fixed class, use fixed positioning below UI Shell header
+:host(
+  #{$prefix}-page-header-breadcrumb.#{$prefix}--page-header-breadcrumb--fixed
+) {
+  position: fixed;
+  z-index: z('header') - 1;
+  background-color: $layer-01;
+  block-size: convert.to-rem(40px);
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: var(--c4p-page-header-breadcrumb-top);
+  inset-inline-end: 0;
+  inset-inline-start: 0;
+}
+
+// Apply border to fixed breadcrumb only when border attribute is true (default)
+:host(
+  #{$prefix}-page-header-breadcrumb.#{$prefix}--page-header-breadcrumb--fixed[border]
+) {
+  border-block-end: 1px solid $border-subtle-01;
+}
+
+:host(#{$prefix}-page-header-breadcrumb) {
   ::slotted([slot='icon']) {
     margin-inline-end: $spacing-03;
     // TODO: remove above styles when styles from React have been migrated
@@ -134,14 +170,6 @@ $carbon-prefix: 'cds';
   .#{$carbon-prefix}--css-grid-column {
     margin-inline-end: 0;
   }
-}
-
-:host(#{$prefix}-page-header-breadcrumb[border='true']) {
-  border-block-end: 1px solid $border-subtle-01;
-  // TODO: remove above styles when styles from React have been migrated
-  // and use the extend below
-
-  // @extend .#{$prefix}--page-header__breadcrumb-bar-border;
 }
 
 :host(#{$prefix}-page-header-content) {
@@ -289,12 +317,23 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-tabs) {
+  position: sticky;
+  z-index: 1;
+  background-color: $layer-01;
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: var(--c4p-page-header-breadcrumb-top);
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__tab-bar;
   .#{$carbon-prefix}--css-grid .#{$carbon-prefix}--css-grid-column {
     margin: 0;
   }
+}
+
+// Disable sticky positioning for tab bar when disableStickyTabBar prop is true
+:host-context(.#{$prefix}--page-header--disable-sticky-tab-bar)
+  :host(#{$prefix}-page-header-tabs) {
+  position: static;
 }
 
 :host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tab-bar--tablist {

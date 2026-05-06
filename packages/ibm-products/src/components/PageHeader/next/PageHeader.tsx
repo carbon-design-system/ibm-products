@@ -93,12 +93,14 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
     const [refs, setRefs] = useState<PageHeaderRefs>({});
     const [pageActionsInstance, setPageActionsInstance] =
       useState<React.ReactNode | null>(null);
+    const [disableStickyTabBar, setDisableStickyTabBar] = useState(false);
     const tempRef = useRef<HTMLDivElement>(null);
     const componentRef = (ref ?? tempRef) as RefObject<HTMLDivElement>;
     const classNames = classnames(
       {
         [`${blockClass}`]: true,
         [`${blockClass}__next`]: true,
+        [`${blockClass}__next--disable-sticky-tab-bar`]: disableStickyTabBar,
       },
       className
     );
@@ -245,6 +247,8 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
           pageActionsInstance,
           setPageActionsInstance,
           observerState,
+          disableStickyTabBar,
+          setDisableStickyTabBar,
         }}
       >
         <div className={classNames} ref={componentRef} {...other}>

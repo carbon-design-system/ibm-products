@@ -9,6 +9,7 @@
 
 import { html, render } from 'lit';
 import '../../../examples/delete-and-remove/src/delete-and-remove';
+import './story-styles.scss';
 
 export default {
   title: 'Patterns/Delete and remove',

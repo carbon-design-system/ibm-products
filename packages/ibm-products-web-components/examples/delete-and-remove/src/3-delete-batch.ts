@@ -126,10 +126,10 @@ export class DeleteBatch extends LitElement {
           </ul>
           ${this._protectedItems.length
             ? html`<p>
-                Note - the following selected items cannot be deleted:
+                Note - the following selected items cannot be deleted:<br />
                 ${map(
                   this._protectedItems,
-                  (item) => html`<cds-link> ${item.name}</cds-link>,`
+                  (item, index) => html`<cds-link> ${item.name} ${iconLoader(Launch16, { slot: 'icon' })} </cds-link>${index < this._protectedItems.length - 1 ? ', ' : ''}`
                 )}
               </p>`
             : null}
@@ -163,3 +163,4 @@ export class DeleteBatch extends LitElement {
 }
 
 export default DeleteBatch;
+

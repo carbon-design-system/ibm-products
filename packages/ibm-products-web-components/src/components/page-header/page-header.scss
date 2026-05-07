@@ -221,6 +221,7 @@ $carbon-prefix: 'cds';
 
   ::slotted([slot='contextual-actions']) {
     display: flex;
+    align-items: center;
     // TODO: remove above styles when styles from React have been migrated
     // and use the extend below
     // @extend .#{$prefix}--page-header__content__contextual-actions;

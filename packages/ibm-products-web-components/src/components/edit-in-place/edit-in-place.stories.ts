@@ -10,6 +10,7 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
+import './_story-assets/_storybook-styles.scss';
 import { prefix } from '../../globals/settings';
 import { EDIT_IN_PLACE_SIZE, TOOLTIP_ALIGNMENT } from './defs';
 
@@ -34,26 +35,32 @@ const tooltipAlignments = {
 
 const defaultArgs = {
   cancelLabel: 'Cancel',
+  containerWidth: 300,
   editAlwaysVisible: false,
   editLabel: 'Edit',
-  id: 'edit-in-place-story',
+  id: 'story-id',
   inheritTypography: false,
   invalid: false,
   invalidText: 'This field is required',
-  labelText: 'Edit in place label',
-  placeholder: 'Placeholder text',
+  labelText: 'Label text',
+  placeholder: 'placeholder text',
   readOnly: false,
   readOnlyLabel: 'Edit off',
   saveLabel: 'Save',
   size: EDIT_IN_PLACE_SIZE.SMALL,
   tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
-  value: 'Default value',
+  value: 'default',
 };
 
 const controls = {
   cancelLabel: {
     control: 'text',
     description: 'Label for the cancel button',
+  },
+  containerWidth: {
+    control: { type: 'range', min: 20, max: 800, step: 10 },
+    description:
+      'Controls containing element width. Used for demonstration purposes, not property of the component.',
   },
   editAlwaysVisible: {
     control: 'boolean',
@@ -158,6 +165,7 @@ The EditInPlace component allows users to edit text inline with save and cancel 
 const Template = (args: any) => {
   const {
     cancelLabel,
+    containerWidth,
     editAlwaysVisible,
     editLabel,
     id,
@@ -175,7 +183,7 @@ const Template = (args: any) => {
   } = args;
 
   return html`
-    <div style="width: 300px; margin: 100px;">
+    <div style="width: ${containerWidth}px; margin: 100px;">
       <c4p-edit-in-place
         id=${ifDefined(id)}
         cancel-label=${ifDefined(cancelLabel)}
@@ -223,51 +231,76 @@ export const Invalid = {
   render: Template,
 };
 
+const CustomBlurTemplate = (args: any) => {
+  const {
+    cancelLabel,
+    containerWidth,
+    editAlwaysVisible,
+    editLabel,
+    id,
+    inheritTypography,
+    invalid,
+    invalidText,
+    labelText,
+    placeholder,
+    readOnly,
+    readOnlyLabel,
+    saveLabel,
+    size,
+    tooltipAlignment,
+    value,
+  } = args;
+
+  return html`
+    <div style="width: ${containerWidth}px; margin: 100px;">
+      <c4p-edit-in-place
+        id=${ifDefined(id)}
+        cancel-label=${ifDefined(cancelLabel)}
+        ?edit-always-visible=${editAlwaysVisible}
+        edit-label=${ifDefined(editLabel)}
+        ?inherit-typography=${inheritTypography}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        label-text=${ifDefined(labelText)}
+        placeholder=${ifDefined(placeholder)}
+        ?read-only=${readOnly}
+        read-only-label=${ifDefined(readOnlyLabel)}
+        save-label=${ifDefined(saveLabel)}
+        size=${ifDefined(size)}
+        tooltip-alignment=${ifDefined(tooltipAlignment)}
+        value=${ifDefined(value)}
+        @c4p-edit-in-place-change=${(e: CustomEvent) => {
+          console.log('Change:', e.detail);
+        }}
+        @c4p-edit-in-place-save=${(e: CustomEvent) => {
+          console.log('Save:', e.detail);
+        }}
+        @c4p-edit-in-place-cancel=${(e: CustomEvent) => {
+          console.log('Cancel:', e.detail);
+        }}
+        @c4p-edit-in-place-blur=${(e: CustomEvent) => {
+          const shouldSaveValue = false;
+          if (shouldSaveValue) {
+            console.log('Save on blur:', e.detail);
+          } else {
+            console.log('Cancel on blur:', e.detail);
+          }
+        }}
+      ></c4p-edit-in-place>
+    </div>
+  `;
+};
+
+export const CustomBlurFunction = {
+  args: defaultArgs,
+  render: CustomBlurTemplate,
+};
+
 export const ReadOnly = {
   args: {
     ...defaultArgs,
     readOnly: true,
+    readOnlyLabel: 'Edit off',
   },
   render: Template,
-};
-
-export const AlwaysVisibleEdit = {
-  args: {
-    ...defaultArgs,
-    editAlwaysVisible: true,
-  },
-  render: Template,
-};
-
-export const MediumSize = {
-  args: {
-    ...defaultArgs,
-    size: EDIT_IN_PLACE_SIZE.MEDIUM,
-  },
-  render: Template,
-};
-
-export const LargeSize = {
-  args: {
-    ...defaultArgs,
-    size: EDIT_IN_PLACE_SIZE.LARGE,
-  },
-  render: Template,
-};
-
-export const InheritTypography = {
-  args: {
-    ...defaultArgs,
-    inheritTypography: true,
-  },
-  render: Template,
-  decorators: [
-    (story: any) => html`
-      <div
-        style="font-size: 24px; font-weight: 600; width: 400px; margin: 100px;"
-      >
-        ${story()}
-      </div>
-    `,
-  ],
 };

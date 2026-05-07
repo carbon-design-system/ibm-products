@@ -11,7 +11,6 @@ export { CreateInfluencer } from './create-influencer';
 export { BreadcrumbWithOverflow } from './breadcrumb-with-overflow';
 
 // Import all components to register them
-import '@carbon/ibm-products-web-components/es/components/action-set/index.js';
 import './create-full-page';
 import './create-full-page-step';
 import './create-influencer';

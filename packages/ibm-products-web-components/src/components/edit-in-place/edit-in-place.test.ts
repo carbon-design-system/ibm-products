@@ -427,5 +427,3 @@ describe(`${prefix}-edit-in-place`, () => {
     });
   });
 });
-
-// Made with Bob

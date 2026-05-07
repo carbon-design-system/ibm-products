@@ -71,5 +71,3 @@ export enum TOOLTIP_ALIGNMENT {
    */
   RIGHT = 'right',
 }
-
-// Made with Bob

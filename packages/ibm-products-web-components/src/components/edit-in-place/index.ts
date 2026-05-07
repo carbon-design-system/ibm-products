@@ -8,5 +8,3 @@
  */
 
 import './edit-in-place';
-
-// Made with Bob

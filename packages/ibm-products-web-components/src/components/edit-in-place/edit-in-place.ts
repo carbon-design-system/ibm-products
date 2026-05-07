@@ -521,5 +521,3 @@ class C4PEditInPlace extends LitElement {
 }
 
 export default C4PEditInPlace;
-
-// Made with Bob

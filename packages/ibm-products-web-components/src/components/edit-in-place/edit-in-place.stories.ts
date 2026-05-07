@@ -271,5 +271,3 @@ export const InheritTypography = {
     `,
   ],
 };
-
-// Made with Bob

@@ -56,8 +56,8 @@
     "telemetry-config": "ibmtelemetry-config generate --wc --id 8a79d901-a9c0-4672-94a4-fa8eea139832 --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components"
   },
   "dependencies": {
-    "@carbon/ibm-products-primitives": "^1.0.0-rc.0",
     "@carbon-labs/wc-empty-state": "^0.15.0",
+    "@carbon/ibm-products-primitives": "^1.0.0-rc.0",
     "@carbon/ibm-products-styles": "^2.85.0",
     "@carbon/layout": "^11.51.0",
     "@carbon/styles": "^1.104.0",

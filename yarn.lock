@@ -2233,8 +2233,8 @@ __metadata:
   dependencies:
     "@aarsteinmedia/dotlottie-player": "npm:^6.0.5"
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
-    "@carbon/ibm-products-primitives": "npm:^1.0.0-rc.0"
     "@carbon-labs/wc-empty-state": "npm:^0.15.0"
+    "@carbon/ibm-products-primitives": "npm:^1.0.0-rc.0"
     "@carbon/ibm-products-styles": "npm:^2.85.0"
     "@carbon/icon-helpers": "npm:^10.74.0"
     "@carbon/icons": "npm:^11.78.0"
@@ -15774,7 +15774,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@npm:^1.48.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@npm:^1.47.0-rc.0, jest-config-ibm-cloud-cognitive@npm:^1.48.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:

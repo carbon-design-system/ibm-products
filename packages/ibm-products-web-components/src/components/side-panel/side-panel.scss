@@ -297,15 +297,8 @@ $block-class-action-set: #{$prefix}--action-set;
 
   .#{$block-class}__actions-container {
     @extend .#{$block-class-action-set};
-    @include actions-placement();
 
-    display: flex;
-    gap: 1px;
     inline-size: 100%;
-
-    ::slotted(#{carbon-config.$prefix}-button) {
-      @extend .#{$block-class-action-set}__action-button;
-    }
 
     &[hidden] {
       @extend .#{carbon-config.$prefix}--visually-hidden !optional;
@@ -313,18 +306,23 @@ $block-class-action-set: #{$prefix}--action-set;
       display: none;
     }
 
-    $multiples: 'single' 'double' 'triple';
-    @each $m in $multiples {
-      &[actions-multiple='#{$m}'] {
-        @extend .#{carbon-config.$prefix}--action-set--row-#{$m} !optional;
-      }
+    // Override ActionSet styles for side-panel specific behavior
+    // Single button should always be full width in side-panel
+    &[actions-multiple='single'] ::slotted(#{carbon-config.$prefix}-button) {
+      flex: 0 0 100%;
+      max-inline-size: none;
     }
 
-    $sizes: 'xs' 'sm';
-    @each $s in $sizes {
-      &[size='#{$s}'] {
-        @extend .#{$block-class-action-set}--#{$s} !optional;
-      }
+    // Double buttons should be 50% width each
+    &[actions-multiple='double'] ::slotted(#{carbon-config.$prefix}-button) {
+      flex: 0 1 50%;
+      max-inline-size: none;
+    }
+
+    // Triple buttons should be 33% width each
+    &[actions-multiple='triple'] ::slotted(#{carbon-config.$prefix}-button) {
+      flex: 0 1 33.33%;
+      max-inline-size: none;
     }
   }
 

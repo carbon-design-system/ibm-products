@@ -69,3 +69,31 @@ $block-class: #{$c4p-prefix}--action-set;
 :host(#{$c4p-prefix}-action-set[stacked]) {
   @include button-separator(vertical);
 }
+
+// Side-panel specific overrides for button widths
+:host(#{$c4p-prefix}-action-set[actions-multiple='single']) {
+  // Single button should be full width
+  ::slotted(#{$carbon-prefix}-button),
+  #{$carbon-prefix}-button {
+    flex: 0 0 100%;
+    max-inline-size: none;
+  }
+}
+
+:host(#{$c4p-prefix}-action-set[actions-multiple='double']) {
+  // Double buttons should be 50% width each
+  ::slotted(#{$carbon-prefix}-button),
+  #{$carbon-prefix}-button {
+    flex: 0 1 50%;
+    max-inline-size: none;
+  }
+}
+
+:host(#{$c4p-prefix}-action-set[actions-multiple='triple']) {
+  // Triple buttons should be ~33% width each
+  ::slotted(#{$carbon-prefix}-button),
+  #{$carbon-prefix}-button {
+    flex: 0 1 33.33%;
+    max-inline-size: none;
+  }
+}

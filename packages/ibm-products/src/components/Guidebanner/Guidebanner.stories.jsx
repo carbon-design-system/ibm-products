@@ -134,6 +134,8 @@ collapsible.args = {
 export const manyInsights = Template.bind({});
 manyInsights.args = {
   ...defaultProps,
+  collapsible: true,
+  open: false,
   children: (
     <React.Fragment>
       <GuidebannerElement
@@ -168,6 +170,8 @@ manyInsights.args = {
 export const fewInsights = Template.bind({});
 fewInsights.args = {
   ...defaultProps,
+  collapsible: true,
+  open: false,
   children: (
     <React.Fragment>
       <GuidebannerElement

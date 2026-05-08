@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.85.0-rc.0`
+## `@carbon/ibm-products-styles@2.85.0`
 ### Features :rocket:
 - feat(ConditionBuilder): title and text ellipsis of dropdown and default statement fix (#9252)
 - feat(coachmark): replaces bubble with popover (#9220)

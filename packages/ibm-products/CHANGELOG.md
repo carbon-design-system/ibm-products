@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.89.0-rc.0`
+## `@carbon/ibm-products@2.89.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): stacking wrapper, actions prop for footer and story updates (#9242)
 - feat(ConditionBuilder): title and text ellipsis of dropdown and default statement fix (#9252)

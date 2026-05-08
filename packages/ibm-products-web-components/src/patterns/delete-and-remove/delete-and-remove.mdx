@@ -1,13 +1,23 @@
-import { Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { Markdown, Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
 
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import DeleteStories from './delete-and-remove.stories';
 
 <Meta of={DeleteStories} />
 
-# Delete and remove
+# Delete and remove 
 
-[Delete and remove usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/delete-and-remove/usage/)
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/delete-and-remove/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [High impact deletion](#high-impact-deletion)
+- [High impact deletion with connected items](#high-impact-deletion-with-connected-items)
+- [High impact batch deletion](#high-impact-batch-deletion)
+- [Medium impact deletion or removal](#medium-impact-deletion-or-removal)
+- [Low impact deletion or removal](#low-impact-deletion-or-removal)
 
 ## Overview
 
@@ -15,14 +25,10 @@ import DeleteStories from './delete-and-remove.stories';
 Removal can be both destructive and non-destructive. “Deletion” is the most
 common type of removal and is destructive
 
-## Coded examples
-
-Patterns have multiple ways of accomplishing a user need and typically use a
-combination of components with additional design considerations. The pattern
-code we share is meant to serve as an example implementation that can be built
-and extended further.
-
-#### Ingredients
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
 
 To build this pattern, we recommend including the following components:
 
@@ -33,28 +39,6 @@ To build this pattern, we recommend including the following components:
 - [cds-checkbox](https://web-components.carbondesignsystem.com/?path=/docs/components-checkbox--overview)
 - [cds-link](https://web-components.carbondesignsystem.com/?path=/docs/components-link--overview)
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/delete-and-remove)
-> example implementation.
-
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/delete-and-remove)
-
-## High impact deletion
-
-When deleting is high-impact, a confirmation dialog should be presented to the
-user which displays:
-
-- The name of the resource
-- Consequences of the deletion
-- This action cannot be undone.
-- An editable text field for the name of the resource to be entered
-
-### Example
-
-Here's a quick example to get you started.
-
-#### JS (via import)
-
 ```javascript
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/form/form-item.js';
@@ -63,6 +47,22 @@ import '@carbon/web-components/es/components/notification/toast-notification.js'
 import '@carbon/web-components/es/components/checkbox/checkbox.js';
 import '@carbon/web-components/es/components/link/link.js';
 ```
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/delete-and-remove)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/delete-and-remove)
+
+<Canvas withSource="none">
+  <Story of={DeleteStories.highImpactDeletion} />
+</Canvas>
+
+### Example
+
+Here's a quick example of high impact deletion to get you started.
 
 #### HTML
 
@@ -113,7 +113,18 @@ import '@carbon/web-components/es/components/link/link.js';
 ></cds-toast-notification>
 ```
 
-### Deletion with connected items
+## High impact deletion
+
+When deleting is high-impact, a confirmation dialog should be presented to the
+user which displays:
+
+- The name of the resource
+- Consequences of the deletion
+- This action cannot be undone.
+- An editable text field for the name of the resource to be entered
+
+
+### High impact deletion with connected items
 
 It is similar to high-impact deletion pattern, but the confirmation dialog will
 display the below 2 additional content:
@@ -121,7 +132,7 @@ display the below 2 additional content:
 - A list of all the connected items
 - A checkbox to confirm the deletion of all its connected items.
 
-### Batch deletion
+### High impact batch deletion
 
 In batch deletion, a confirmation dialog should be presented to the user which
 displays:
@@ -131,68 +142,6 @@ displays:
 - The phrase, “This action cannot be undone”
 - A checkbox to confirm the deletion of the selected resources
 - A note of items that cannot be deleted in batch selection (optional)
-
-### Example
-
-Here's a quick example to get you started.
-
-#### HTML
-
-```html
-<cds-modal size="sm" ?open="${this._open}" prevent-close>
-  <cds-modal-header>
-    <cds-modal-close-button @click="${this._close}"></cds-modal-close-button>
-    <cds-modal-label>Delete selected items</cds-modal-label>
-    <cds-modal-heading>Confirm delete</cds-modal-heading>
-  </cds-modal-header>
-  <cds-modal-body>
-    <cds-modal-body-content description="">
-      Decide if you want to keep these items. Deleting these items is permanent.
-      This action cannot be undone.
-    </cds-modal-body-content>
-    <cds-modal-label
-      >The following items will be deleted. Review each item to confirm that
-      they can be deleted.</cds-modal-label
-    >
-    <cds-checkbox
-      ?checked="${this._isCheckboxChecked}"
-      @cds-checkbox-changed="${this._onCheckboxChange}"
-      >3 items:</cds-checkbox
-    >
-    <ul class="no-bullets">
-      <li><cds-link> Route1_name ${Launch16} </cds-link></li>
-      <li><cds-link> Hpt-392-ser ${Launch16} </cds-link></li>
-      <li><cds-link> Route2_name ${Launch16} </cds-link></li>
-    </ul>
-
-    <p>
-      Note - the following selected items cannot be deleted:
-      <cds-link>Route3_name</cds-link>, <cds-link>Route4_name</cds-link>
-    </p>
-  </cds-modal-body>
-  <cds-modal-footer>
-    <cds-modal-footer-button kind="secondary" @click="${this._close}"
-      >Cancel</cds-modal-footer-button
-    >
-    <cds-modal-footer-button
-      ?disabled="${!this._enableDelete}"
-      kind="danger"
-      @click="${this._onDelete}"
-      >Delete</cds-modal-footer-button
-    >
-  </cds-modal-footer>
-</cds-modal>
-<cds-toast-notification
-  class="notification"
-  kind="success"
-  title="Success"
-  subtitle="Selected items have been successfully deleted."
-  caption="${getCurrentTime()}"
-  low-contrast="true"
-  timeout="3000"
-  @cds-notification-closed="${this._onNotificationClose}"
-></cds-toast-notification>
-```
 
 ## Medium impact deletion or removal
 
@@ -207,46 +156,6 @@ user which displays:
 > pattern, with the only difference being the usage of “remove” or “delete“ in
 > the text. Use “remove” when the action is reversible or not truly destructive.
 
-### Example
-
-Here's a quick example to get you started.
-
-#### HTML
-
-```html
-<cds-modal size="sm" ?open="${this._open}" prevent-close>
-  <cds-modal-header>
-    <cds-modal-close-button @click="${this._close}"></cds-modal-close-button>
-    <cds-modal-label>Delete Bx1001</cds-modal-label>
-    <cds-modal-heading>Confirm delete</cds-modal-heading>
-  </cds-modal-header>
-  <cds-modal-body>
-    <cds-modal-body-content description="">
-      Deleting 'Bx1001' will permanently delete the configuration. This action
-      cannot be undone.
-    </cds-modal-body-content>
-  </cds-modal-body>
-  <cds-modal-footer>
-    <cds-modal-footer-button kind="secondary" @click="${this._close}"
-      >Cancel</cds-modal-footer-button
-    >
-    <cds-modal-footer-button kind="danger" @click="${this._onDelete}">
-      Delete
-    </cds-modal-footer-button>
-  </cds-modal-footer>
-</cds-modal>
-<cds-toast-notification
-  class="notification"
-  kind="success"
-  title="Success"
-  subtitle="Bx1001 has been successfully deleted"
-  caption="${getCurrentTime()}"
-  low-contrast="true"
-  timeout="3000"
-  @cds-notification-closed="${this._onNotificationClose}"
-></cds-toast-notification>
-```
-
 ## Low impact deletion or removal
 
 Requiring the user to confirm deletion is generally recommended. However, in low
@@ -256,30 +165,3 @@ not be required.
 > NOTE: The low-impact removal pattern is similar to low-impact deletion
 > pattern, with the only difference being the usage of “remove” or “delete“ in
 > the text. Use “remove” when the action is reversible or not truly destructive.
-
-### Example
-
-Here's a quick example to get you started.
-
-#### HTML
-
-```html
-<cds-button
-  type="button"
-  kind="danger"
-  size="md"
-  @click="${this._onDeleteButtonClick}"
->
-  Delete ${TrashCan16}
-</cds-button>
-<cds-toast-notification
-  class="notification"
-  kind="success"
-  title="Success"
-  subtitle="Bx1001 has been successfully deleted"
-  caption="${getCurrentTime()}"
-  low-contrast="true"
-  timeout="3000"
-  @cds-notification-closed="${this._onNotificationClose}"
-></cds-toast-notification>
-```

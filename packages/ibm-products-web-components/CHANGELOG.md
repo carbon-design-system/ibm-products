@@ -1,3 +1,109 @@
+## `@carbon/ibm-products-web-components@0.38.0`
+### Features :rocket:
+- feat(preview_Tearsheet): stacking wrapper, actions prop for footer and story updates (#9242)
+- feat(coachmarkStacked): implement as patterns (#9248)
+
+### Bug fixes :bug:
+- fix(apikeymodal): document parity (#9293)
+- fix(about-modal): fix colors / theming for react and wc (#9262)
+- fix(full-page-error): WC parity work (#9180)
+- fix: replace hardcoded instance of cds (#9165)
+- fix(page-header): make the top bar responsive (#9126)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9257)
+- docs(changelog): update for v2.88.0-rc.0 (#9247)
+
+## `@carbon/ibm-products-web-components@0.37.0`
+### Features :rocket:
+- feat(CoachmarkOverlayElements): implemented as patterns  (#8848)
+- feat(coachmarkFixed): implemented as patterns (#8879)
+- feat: create action-set utility for webcomponents (#9154)
+
+### Bug fixes :bug:
+- fix(interstitialScreen): parity issues and small screens ui of action buttons (#9032)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.87.0-rc.0 (#9187)
+
+## `@carbon/ibm-products-web-components@0.36.0`
+### Bug fixes :bug:
+- fix(about-modal): Parity work (#9088)
+- fix(side-panel): Parity work (#9136)
+- fix: Coachmark design parity (#9155)
+- fix: move step flows to utilities (#9110)
+
+### Housekeeping :house:
+- chore: update node to 24 (#9114)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+- chore: migrate to tsdown for react and wc (#9123)
+- chore(deps): update dependency @mordech/vite-lit-loader to ^0.38.0 (#9130)
+
+## `@carbon/ibm-products-web-components@0.35.0`
+### Features :rocket:
+- feat: Composable Tearsheet webcomponent implementation (#8841)
+
+### Bug fixes :bug:
+- fix: make style specific to sidepanel in tearsheet (#9107)
+- fix(useravatar): design parity (#9064)
+- fix(NotificationPanel): fix notification border when focused (#9066)
+
+### Housekeeping :house:
+- chore: add chromatic set up ibm-products react and wc storybook (#9086)
+- build(deps): update to Carbon 11 compatible versions to latest (#9063)
+
+## `@carbon/ibm-products-web-components@0.34.0`
+### Features :rocket:
+- feat: coachmark stackblitz example (#8948)
+
+### Bug fixes :bug:
+- fix: delete tags and restore vesions to retry release 5
+- fix: add js extension for imports
+- fix: delete tags and restore vesions to retry release 4
+- fix: delete tags and restore vesions to retry release 3
+- fix: delete tags and restore vesions to retry release 2
+- fix: delete tags and restore vesions to retry release
+- fix(coachmark): enable keyboard dragging for floating variant (#9031)
+- fix(guide-banner): Fix follow up issues related to snapscroll (#8998)
+- fix(security): upgrade @figma/code-connect to 1.4.0 (#9016)
+
+### Housekeeping :house:
+- chore(options-tile): refactor header (#9022)
+- docs(changelog): update for v2.84.0 (#9013)
+
+## `@carbon/ibm-products-web-components@0.33.0`
+### Features :rocket:
+- feat: show close icon when panels are open (#8951)
+- feat(page-header):  code connect integration (#8868)
+
+### Bug fixes :bug:
+- fix(Pageheader_preview): header calulation issue fix (#8940)
+- fix: use carbon prefix directly from @carbon/styles package config (#8904)
+- fix(coachmark): fix coachmark web component focus and position issue (#8845)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#8991)
+- build(performance): rolldown-vite integration (#8915)
+- build(deps): update to Carbon 11 compatible versions to latest (#8907)
+
+## `@carbon/ibm-products-web-components@0.32.0`
+### Features :rocket:
+- feat(create-modal): implement `create-modal` pattern in web components (#8710)
+- feat: added side panel code connect file for wc (#8687)
+- feat: snapscroll (#8720)
+- feat(coachmarktagline): implement coachmarkTagline in WC (#8803)
+- feat(bignumber): web component  (#8739)
+
+### Bug fixes :bug:
+- fix(notification-panel): use truncated-text in notification-panel story (#8902)
+- fix(interstitial-screen): replace local util with @carbon/utilities for carousel (#8885)
+- fix: pageheader position on scroll and resize (#8866)
+- fix(storybook): add a11y checker back, react/wc (#8899)
+- fix(tearsheet): implement focus trap without sentinel elements (#8761)
+
+### Housekeeping :house:
+- chore(interstitialscreen): spellcheck (#8709)
+
 ## `@carbon/ibm-products-web-components@0.31.0`
 ### Features :rocket:
 - feat: openInStackblitz in web components (#8786)

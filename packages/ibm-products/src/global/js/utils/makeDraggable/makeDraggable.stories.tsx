@@ -9,6 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { makeDraggable } from './makeDraggable';
 import './_storybook-styles.scss';
 import mdx from './makeDraggable.mdx';
+import { carbon } from '../../../../settings';
 import { Button, Popover, PopoverContent } from '@carbon/react';
 import { Close, Draggable } from '@carbon/react/icons';
 
@@ -109,9 +110,11 @@ const DraggablePopoverTemplate = () => {
 
   useEffect(() => {
     if (isOpen && dialogRef.current && headerRef.current && dragRef.current) {
-      const dragContainer = dialogRef.current.querySelector('.cds--popover');
+      const dragContainer = dialogRef.current.querySelector(
+        `.${carbon.prefix}--popover`
+      );
       const dragStyleContainer = dialogRef.current.querySelector(
-        '.cds--popover-content'
+        `.${carbon.prefix}--popover-content`
       );
       if (dragContainer instanceof HTMLElement) {
         dragContainer.style.transform = 'none';

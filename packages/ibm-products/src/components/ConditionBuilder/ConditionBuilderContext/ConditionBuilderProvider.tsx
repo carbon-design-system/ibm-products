@@ -12,26 +12,34 @@ import {
   Action,
   ConditionBuilderContextProps,
   ConditionBuilderState,
+  StatementOperator,
 } from '../ConditionBuilder.types';
 
-export const emptyState: ConditionBuilderState = {
-  operator: 'or',
-  groups: [
-    {
-      groupOperator: 'and',
-      statement: 'ifAll',
-      id: uuidv4(),
-      conditions: [
-        {
-          property: undefined,
-          operator: '',
-          value: '',
-          popoverToOpen: 'propertyField',
-          id: uuidv4(),
-        },
-      ],
-    },
-  ],
+export const getEmptyState = (
+  statementConfigCustom?: ConditionBuilderContextProps['statementConfigCustom']
+): ConditionBuilderState => {
+  const defaultStatement = statementConfigCustom?.[0];
+  const defaultStatementId = (defaultStatement?.id ??
+    'ifAll') as StatementOperator;
+  return {
+    operator: 'or',
+    groups: [
+      {
+        groupOperator: defaultStatement?.connector ?? 'and',
+        statement: defaultStatementId,
+        id: uuidv4(),
+        conditions: [
+          {
+            property: undefined,
+            operator: '',
+            value: '',
+            popoverToOpen: 'propertyField',
+            id: uuidv4(),
+          },
+        ],
+      },
+    ],
+  };
 };
 
 export const ConditionBuilderContext =
@@ -39,6 +47,7 @@ export const ConditionBuilderContext =
     rootState: {
       groups: [],
     },
+    popOverSearchThreshold: 0,
   });
 
 export const ConditionBuilderProvider: React.FC<
@@ -137,7 +146,7 @@ ConditionBuilderProvider.propTypes = {
   }).isRequired,
 
   /**
-   * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
+   * This will enable search in option popovers when option list length is more that this threshold
    */
   popOverSearchThreshold: PropTypes.number.isRequired,
   /**

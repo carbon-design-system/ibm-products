@@ -38,9 +38,6 @@ export default {
     docs: {
       page: mdx,
     },
-    percy: {
-      waitForTimeout: 1000,
-    },
   },
 };
 

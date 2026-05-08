@@ -12,6 +12,7 @@ import './index';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import Group from '@carbon/icons/es/group/16';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import styles from './story-styles.scss?lit';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
@@ -27,6 +28,7 @@ const tooltipAlignments = {
 const argTypes = {
   backgroundColor: {
     control: { type: 'select' },
+    description: 'Provide the background color need to be set for UserAvatar.',
     options: [
       'order-1-cyan',
       'order-2-gray',
@@ -44,24 +46,38 @@ const argTypes = {
   },
   tooltipAlignment: {
     control: 'select',
-    description: 'Specify the alignment of the tooltip.',
+    description: 'Specify how the trigger should align with the tooltip',
     options: tooltipAlignments,
   },
   tooltipText: {
     control: 'text',
-    description: 'Specify the text of the tooltip',
+    description: 'Pass in the display name to have it shown on hover',
   },
-  name: { control: 'text', description: 'Specify the name of the user' },
-  size: { control: { type: 'radio' }, options: ['xl', 'lg', 'md', 'sm'] },
+  name: {
+    control: 'text',
+    description:
+      "When passing the name prop, either send the initials to be used or the user's full name. The first two capital letters of the user's name will be used as the name.",
+  },
+  size: {
+    control: { type: 'radio' },
+    description: 'Set the size of the avatar circle',
+    options: ['xl', 'lg', 'md', 'sm'],
+  },
   image: {
     control: 'textNullable',
-    description: 'Specify the full path to the image to be displayed',
+    description:
+      'When passing the image prop, supply a full path to the image to be displayed.',
   },
   imageDescription: {
     control: 'text',
-    description: 'Specify the to description of image for screen reader users',
+    description:
+      'When passing the image prop use the imageDescription prop to describe the image for screen reader.',
   },
-  theme: { control: { type: 'select' }, options: ['light', 'dark'] },
+  theme: {
+    control: { type: 'select' },
+    description: 'Set theme in which the component will be rendered.',
+    options: ['light', 'dark'],
+  },
 };
 
 export const Default = {
@@ -69,22 +85,81 @@ export const Default = {
     tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
     size: 'md',
     tooltipText: 'TW, Thomas J. Watson user profile',
-    name: 'Thomas J. Watson',
+    name: 'thomas j. watson',
     backgroundColor: 'order-1-cyan',
-    theme: 'light',
   },
   argTypes,
   render: (args) => {
     return html`
-      <c4p-user-avatar
-        tooltip-alignment=${args.tooltipAlignment}
-        tooltip-text=${args.tooltipText}
-        name=${args.name}
-        size=${args.size}
-        background-color=${args.backgroundColor}
-        theme=${args.theme}
-      >
-      </c4p-user-avatar>
+      <style>
+        ${styles}
+      </style>
+      <div class="user-avatar-story__wrapper">
+        <div
+          class="user-avatar-story__theme-section user-avatar-story__theme-section--white"
+        >
+          <p class="user-avatar-story__theme-text">
+            useTheme reveals theme: 'white', isDark: 'false'
+          </p>
+          <c4p-user-avatar
+            tooltip-alignment=${args.tooltipAlignment}
+            tooltip-text=${args.tooltipText}
+            name=${args.name}
+            size=${args.size}
+            background-color=${args.backgroundColor}
+            theme="light"
+          >
+          </c4p-user-avatar>
+        </div>
+        <div
+          class="user-avatar-story__theme-section user-avatar-story__theme-section--g10"
+        >
+          <p class="user-avatar-story__theme-text">
+            useTheme reveals theme: 'g10', isDark: 'false'
+          </p>
+          <c4p-user-avatar
+            tooltip-alignment=${args.tooltipAlignment}
+            tooltip-text=${args.tooltipText}
+            name=${args.name}
+            size=${args.size}
+            background-color=${args.backgroundColor}
+            theme="light"
+          >
+          </c4p-user-avatar>
+        </div>
+        <div
+          class="user-avatar-story__theme-section user-avatar-story__theme-section--g90"
+        >
+          <p class="user-avatar-story__theme-text">
+            useTheme reveals theme: 'g90', isDark: 'true'
+          </p>
+          <c4p-user-avatar
+            tooltip-alignment=${args.tooltipAlignment}
+            tooltip-text=${args.tooltipText}
+            name=${args.name}
+            size=${args.size}
+            background-color=${args.backgroundColor}
+            theme="dark"
+          >
+          </c4p-user-avatar>
+        </div>
+        <div
+          class="user-avatar-story__theme-section user-avatar-story__theme-section--g100"
+        >
+          <p class="user-avatar-story__theme-text">
+            useTheme reveals theme: 'g100', isDark: 'true'
+          </p>
+          <c4p-user-avatar
+            tooltip-alignment=${args.tooltipAlignment}
+            tooltip-text=${args.tooltipText}
+            name=${args.name}
+            size=${args.size}
+            background-color=${args.backgroundColor}
+            theme="dark"
+          >
+          </c4p-user-avatar>
+        </div>
+      </div>
     `;
   },
 };

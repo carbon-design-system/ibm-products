@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2022
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,6 +11,8 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
@@ -22,33 +24,45 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
 .#{$block-class} {
   position: relative;
+  display: flex;
+  justify-content: space-between;
   background-color: $layer;
   border-block-end: 1px solid $border-subtle;
 }
 
 .#{$block-class}__toggle-container {
   position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   inline-size: calc(
     #{$spacing-05} + 2rem + #{$spacing-05}
   ); // spacing + toggle width + spacing
 
   inset-block: 0;
   inset-inline-end: 0;
+  padding-inline-end: $spacing-05;
+  padding-inline-start: $spacing-05;
 }
 
 .#{$block-class}__toggle {
   position: absolute;
-  inset-inline-end: $spacing-05;
 }
 
 .#{$block-class}__toggle
-  .#{c4p-settings.$carbon-prefix}--toggle-input__label
-  .#{c4p-settings.$carbon-prefix}--toggle__switch {
+  .#{carbon-config.$prefix}--toggle-input__label
+  .#{carbon-config.$prefix}--toggle__switch {
   margin: 0;
 }
 
-.#{$block-class}__toggle .#{c4p-settings.$carbon-prefix}--toggle__label-text {
+.#{$block-class}__toggle .#{carbon-config.$prefix}--toggle__label-text {
   @include visually-hidden;
+}
+
+.#{$block-class}__details {
+  display: inline-flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .#{$block-class}__header,
@@ -56,14 +70,23 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
   display: grid;
   box-sizing: border-box;
   align-items: center;
-  grid-template-columns: 3rem 1fr 2rem; // chevron container, heading, toggle width
+  grid-template-columns: 3rem 1fr 0; // chevron container, heading, toggle width
   padding-inline-end: $spacing-05;
 }
 
 .#{$block-class}__header {
+  flex-grow: 1;
   background-color: transparent;
   cursor: pointer;
+  inline-size: 100%;
+
   transition: background-color $duration-fast-01 motion(entrance, productive);
+
+  &--has-toggle {
+    inline-size: calc(
+      100% - (#{$spacing-05} + 2rem + #{$spacing-05})
+    ); // total width - toggle container width
+  }
 }
 
 .#{$block-class}__header::-webkit-details-marker {
@@ -72,6 +95,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
 .#{$block-class}__header:hover {
   background-color: $background-hover;
+}
+
+.#{$block-class}__header:has(.#{$block-class}__toggle-container:hover) {
+  background-color: transparent;
 }
 
 .#{$block-class}__header:focus {
@@ -133,9 +160,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 .#{$block-class}__summary-text {
   overflow: hidden;
   block-size: max-content;
-  // spacing-05 + toggle width
-  // stylelint-disable-next-line carbon/layout-use
-  padding-inline-end: calc(#{$spacing-05} + 2rem);
+  padding-inline-end: $spacing-05;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -148,13 +173,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
 .#{$block-class}__content {
   padding-inline: $spacing-09 $spacing-05;
-  // spacing-05 + chevron size + spacing-05
-  // stylelint-disable-next-line carbon/layout-use
 }
 
 .#{$block-class}__content
-  > .#{c4p-settings.$carbon-prefix}--fieldset
-  > .#{c4p-settings.$carbon-prefix}--label:empty {
+  > .#{carbon-config.$prefix}--fieldset
+  > .#{carbon-config.$prefix}--label:empty {
   display: none;
 }
 

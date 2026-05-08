@@ -52,10 +52,18 @@ class CDSCoachmarkTagline extends HostListenerMixin(LitElement) {
 
   firstUpdated() {
     this.classList.add(blockClass);
-    if (this.open) {
-      this.classList.add(`${blockClass}--open`);
+  }
+
+  updated(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has('open')) {
+      if (this.open) {
+        this.classList.add(`${blockClass}--open`);
+      } else {
+        this.classList.remove(`${blockClass}--open`);
+      }
     }
   }
+
   /**
    * Handles the close button click event.
    */

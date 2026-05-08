@@ -65,12 +65,24 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   @state()
   private _open = false;
 
+  /**
+   * Tracks whether the toggle slot has content
+   */
+  @state()
+  private _hasToggle = false;
+
   static get eventOpen() {
     return `${blockEvent}-open`;
   }
 
   static get eventClose() {
     return `${blockEvent}-close`;
+  }
+
+  private _handleToggleSlotChange(e: Event) {
+    const target = e.target as HTMLSlotElement;
+    const toggleElements = target?.assignedElements();
+    this._hasToggle = toggleElements && toggleElements.length > 0;
   }
 
   private _toggle(evt: ToggleEvent) {
@@ -112,11 +124,16 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    const { _open, defaultOpen, size, titleId, titleText } = this;
+    const { _open, _hasToggle, defaultOpen, size, titleId, titleText } = this;
     const classes = classMap({
       [`${blockClass}`]: true,
       [`${blockClass}--xl`]: size === 'xl',
       [`${blockClass}--open`]: _open,
+    });
+
+    const headerClasses = classMap({
+      [`${blockClass}__header`]: true,
+      [`${blockClass}__header--has-toggle`]: _hasToggle,
     });
 
     return html`
@@ -126,7 +143,13 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
         part="options-tile"
         open=${defaultOpen || nothing}
       >
-        <summary class="${blockClass}__header">
+        <summary class="${headerClasses}">
+          <div class="${blockClass}__header-right">
+            <slot
+              name="toggle"
+              @slotchange=${this._handleToggleSlotChange}
+            ></slot>
+          </div>
           <div class="${blockClass}__header-left">
             ${iconLoader(ChevronDown20, {
               slot: 'icon',
@@ -138,9 +161,6 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
                 <slot name="summary"></slot>
               </div>
             </div>
-          </div>
-          <div class="${blockClass}__header-right">
-            <slot name="toggle"></slot>
           </div>
         </summary>
         <div class="${blockClass}__body">

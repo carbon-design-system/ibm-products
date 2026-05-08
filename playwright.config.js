@@ -34,7 +34,10 @@ const config = {
 
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 2 : undefined,
   use: {
+    actionTimeout: 15_000,
+    navigationTimeout: 30_000,
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
   },
@@ -110,6 +113,22 @@ expect.extend({
 
       aChecker.addRuleset(customRuleset);
     }
+
+    // Remove third-party widgets before accessibility scanning
+    // Using a more targeted approach that only removes elements if they exist
+    await page.evaluate(() => {
+      // Remove TrustArc cookie consent elements
+      const trusteElements = document.querySelectorAll(
+        '[id^="truste-consent"], [id^="truste-"], [class*="truste-"]'
+      );
+      trusteElements.forEach((el) => el.remove());
+
+      // Remove IBM privacy choice pill elements
+      const privacyPillElements = document.querySelectorAll(
+        '[id*="ypc-pill"], [class*="dbdm--ypc-pill"], [class*="ypc-pill"]'
+      );
+      privacyPillElements.forEach((el) => el.remove());
+    });
 
     const result = await aChecker.getCompliance(page, id);
     if (aChecker.assertCompliance(result.report) === 0) {

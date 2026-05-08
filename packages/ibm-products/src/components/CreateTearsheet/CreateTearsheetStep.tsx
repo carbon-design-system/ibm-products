@@ -131,6 +131,11 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
   onPrevious?: () => void;
 
   /**
+   * This will conditionally disable the secondary (Back) button in the multi step Tearsheet
+   */
+  secondaryButtonDisabled?: boolean;
+
+  /**
    * Sets the optional secondary label on the progress step component
    */
   secondaryLabel?: string;
@@ -185,6 +190,7 @@ export const CreateTearsheetStep = forwardRef(
       onMount,
       onNext,
       onPrevious,
+      secondaryButtonDisabled,
       secondaryLabel,
       subtitle,
       title,
@@ -247,6 +253,7 @@ export const CreateTearsheetStep = forwardRef(
         stepsContext.setIsDisabled(!!disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
         stepsContext?.setOnPrevious(onPrevious);
+        stepsContext?.setSecondaryButtonDisabled?.(!!secondaryButtonDisabled);
 
         //Handle props for experimentalSecondarySubmit button, depending on state change
         stepsContext?.setExperimentalSecondarySubmit(
@@ -259,6 +266,7 @@ export const CreateTearsheetStep = forwardRef(
       disableSubmit,
       onNext,
       onPrevious,
+      secondaryButtonDisabled,
       stepRef,
       stepRefValue,
       experimentalSecondarySubmit,
@@ -420,6 +428,11 @@ CreateTearsheetStep.propTypes = {
    * Optional function to be called when you move to the previous step.
    */
   onPrevious: PropTypes.func,
+
+  /**
+   * This will conditionally disable the secondary (Back) button in the multi step Tearsheet
+   */
+  secondaryButtonDisabled: PropTypes.bool,
 
   /**
    * Sets the optional secondary label on the progress step component

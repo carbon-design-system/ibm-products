@@ -271,7 +271,7 @@ const actionSets = [
 ];
 
 const sampleAILabel = (
-  <AILabel className="aiLabel-container" size="xs" align="left-start">
+  <AILabel className="aiLabel-container" size="xs" align="bottom">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>

@@ -27,6 +27,12 @@ export const blockClass = `${prefix}--coachmark`;
 /**
  * coachmark main component
  * @element c4p-coachmark
+ * @fires c4p-coachmark-opened
+ *   The custom event fired when the coachmark is opened.
+ *   This event can be used to perform actions such as focusing elements when the coachmark becomes visible.
+ * @fires c4p-coachmark-closed
+ *   The custom event fired when the coachmark is closed.
+ *   This event can be used to perform actions such as restoring focus when the coachmark is dismissed.
  */
 @customElement(`${prefix}-coachmark`)
 class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
@@ -55,12 +61,16 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
    */
   @property({ reflect: true })
   highContrast?: boolean = false;
-
   /**
    * Specify whether a drop shadow should be rendered on the popover.
    */
   @property({ reflect: true })
   dropShadow?: boolean = false;
+  /**
+   * Specify whether a caret should be rendered on the popover. This is intended to use only for coachmark patterns.
+   */
+  @property({ reflect: true })
+  caret?: boolean = false;
 
   private dragCleanup: (() => void) | null = null;
 
@@ -85,11 +95,11 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     const slot = wrapper.querySelector('slot');
     const assignedElements = slot?.assignedElements({ flatten: true });
     const header = assignedElements?.find(
-      (el) => el.tagName.toLowerCase() === 'c4p-coachmark-header'
+      (el) => el.tagName.toLowerCase() === `${prefix}-coachmark-header`
     ) as HTMLElement;
     requestAnimationFrame(() => {
       const dragHandle = header.shadowRoot?.querySelector(
-        '.drag-handle'
+        `.${prefix}--coachmark-header-drag-handle`
       ) as HTMLElement;
 
       const draggable = makeDraggable({
@@ -143,26 +153,84 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         this.style.transform = `translate(${x}px, ${y}px)`;
       }
     }
+
+    // Dispatch custom events when coachmark opens or closes
+    if (changedProps.has('open')) {
+      const init = {
+        bubbles: true,
+        composed: true,
+        detail: { open: this.open },
+      };
+
+      if (this.open) {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSCoachmark).eventOpen,
+            init
+          )
+        );
+      } else {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSCoachmark).eventClose,
+            init
+          )
+        );
+      }
+    }
   }
 
+  private handlePopoverClosed = () => {
+    // Sync coachmark's open state when popover closes
+    // This ensures the states stay in sync for outside clicks
+    if (this.open) {
+      this.open = false;
+    }
+  };
+
   render() {
+    // Use explicit caret value if provided, otherwise derive from floating state
+    const caretValue =
+      this.caret !== undefined
+        ? this.caret
+        : this.floating === true
+          ? false
+          : true;
+
     return html`
       <cds-popover
+        part="popover"
+        exportparts="popover-container"
         class="${blockClass}--popover"
         ?open=${this.open}
-        .caret=${this.floating === true ? false : true}
+        .caret=${caretValue}
         ?highContrast=${this.highContrast}
         align=${this.align}
         ?dropShadow=${this.dropShadow}
+        @cds-popover-closed=${this.handlePopoverClosed}
       >
         <slot name="trigger"></slot>
-        <cds-popover-content>
+        <cds-popover-content part="popover-content" exportparts="content">
           <div class="${blockClass}--wrapper">
             <slot></slot>
           </div>
         </cds-popover-content>
       </cds-popover>
     `;
+  }
+
+  /**
+   * The name of the custom event fired when this coachmark is opened.
+   */
+  static get eventOpen() {
+    return `${prefix}-coachmark-opened`;
+  }
+
+  /**
+   * The name of the custom event fired when this coachmark is closed.
+   */
+  static get eventClose() {
+    return `${prefix}-coachmark-closed`;
   }
 
   static styles = styles;

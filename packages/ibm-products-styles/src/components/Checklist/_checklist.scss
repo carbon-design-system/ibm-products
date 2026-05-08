@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2023, 2023
+// Copyright IBM Corp. 2023, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,6 +11,8 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 
 @mixin ellipsis-2-lines {
@@ -78,7 +80,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 // The <IconButton> itself (class="...__toggle") is embedded inside two more tags,
 // which do not accept any class names passed via the <IconButton>.
 // So, we have to refer to it via it's "tooltip" wrapper element. :/
-.#{$block-class}__header .#{c4p-settings.$carbon-prefix}--tooltip {
+.#{$block-class}__header .#{carbon-config.$prefix}--tooltip {
   block-size: 2rem;
   margin-block-start: calc(-1 * $spacing-03);
   margin-inline: auto calc(-1 * $spacing-03);
@@ -102,7 +104,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 // Button to appear more like a link so it aligns better with the list text.
 // Override Primary button styling to appear more like a link.
 // "Unset" some settings to allow an inner div to enable multiple lines and an ellipsis if req'd.
-.#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary {
+.#{$block-class}__button.#{carbon-config.$prefix}--btn--primary {
   @include type-style('body-short-01');
   // override bx--btn to allow two-line ellipsis
   /* stylelint-disable-next-line declaration-property-value-disallowed-list */
@@ -117,17 +119,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 // The CSS for the Carbon button's label is incompatible with two-line ellipsis,
 // but a div inside a Carbon button works.
-.#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary div {
+.#{$block-class}__button.#{carbon-config.$prefix}--btn--primary div {
   @include ellipsis-2-lines();
 }
 
-.#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary:hover {
+.#{$block-class}__button.#{carbon-config.$prefix}--btn--primary:hover {
   background: transparent;
   color: $link-primary-hover;
   text-decoration: underline;
 }
 
-.#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary:active {
+.#{$block-class}__button.#{carbon-config.$prefix}--btn--primary:active {
   background: transparent;
   color: $text-primary;
   text-decoration: underline;

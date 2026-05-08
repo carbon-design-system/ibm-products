@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2024
+// Copyright IBM Corp. 2022, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/layout' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
 
 @use '../../../../global/styles/project-settings' as c4p-settings;
 @use '../variables';
@@ -86,22 +87,21 @@ $action-set-height: to-rem(64px);
 }
 
 // Carbon overrides
-.#{variables.$block-class}-filter-flyout__trigger.#{c4p-settings.$carbon-prefix}--btn {
+.#{variables.$block-class}-filter-flyout__trigger.#{carbon-config.$prefix}--btn {
   display: flex;
   justify-content: center;
   block-size: 3rem;
   inline-size: 3rem;
 }
 
-.#{variables.$block-class}-filter-flyout__trigger--open.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--icon-only {
+.#{variables.$block-class}-filter-flyout__trigger--open.#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
   position: relative;
   background-color: $layer-02;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   box-shadow: 0 1px to-rem(8px) 0 rgba(0, 0, 0, 0.25);
 }
 
-.#{variables.$block-class}-filter-flyout
-  .#{c4p-settings.$carbon-prefix}--fieldset {
+.#{variables.$block-class}-filter-flyout .#{carbon-config.$prefix}--fieldset {
   margin-block-end: 0;
 }
 

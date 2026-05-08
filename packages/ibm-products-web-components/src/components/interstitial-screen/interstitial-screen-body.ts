@@ -14,8 +14,9 @@ import '@carbon/web-components/es/components/modal/index.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './interstitial-screen-body.scss?lit';
-import { InitCarousel, initCarousel } from '../../utilities/carousel';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
 import { ref, createRef } from 'lit/directives/ref.js';
+import { SignalWatcher } from '@lit-labs/signals';
 import {
   interstitialDetailsSignal,
   updateInterstitialDetailsSignal,
@@ -30,7 +31,9 @@ const blockClass = `${prefix}--interstitial-screen`;
  * @fires c4p-on-after-step-change -  The name of the custom event fired at the end of  the step change.
  */
 @customElement(`${prefix}-interstitial-screen-body`)
-class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
+class CDSInterstitialScreenBody extends SignalWatcher(
+  HostListenerMixin(LitElement)
+) {
   @property({ reflect: true })
   slot = 'body';
 
@@ -49,8 +52,21 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
       this.stepType = 'single';
     } else if (bodyItems.length > 1) {
       this.stepType = 'multi';
-      //initialize carousel for multi-step
-      this._initCarousel();
+    }
+  }
+
+  updated(changedProps: Map<string | number | symbol, unknown>) {
+    super.updated(changedProps);
+
+    // Watch for the open signal
+    const { open } = interstitialDetailsSignal.get();
+
+    // Initialize carousel when opened for the first time
+    if (open && !this.carouselAPI && this.stepType === 'multi') {
+      // Use requestAnimationFrame to ensure the element is fully rendered
+      requestAnimationFrame(() => {
+        this._initCarousel();
+      });
     }
   }
 
@@ -59,6 +75,7 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
       onViewChangeEnd: this.onViewChangeEnd,
       onViewChangeStart: this.onViewChangeStart,
       excludeSwipeSupport: true,
+      useMaxHeight: true,
     });
     interstitialDetailsSignal.set({
       ...interstitialDetailsSignal.get(),

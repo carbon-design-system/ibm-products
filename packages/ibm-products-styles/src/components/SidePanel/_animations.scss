@@ -29,7 +29,7 @@
   0% {
     opacity: 0;
     /* stylelint-disable-next-line carbon/layout-use */
-    transform: translateX(var(--panel-transform));
+    transform: translateX(var(--panel-transform, 320px));
   }
 
   100% {
@@ -42,7 +42,7 @@
   0% {
     opacity: 0;
     /* stylelint-disable-next-line carbon/layout-use */
-    transform: translateX(calc(var(--panel-transform) * -1));
+    transform: translateX(calc(var(--panel-transform, 320px) * -1));
   }
 
   100% {
@@ -60,7 +60,7 @@
   100% {
     opacity: 0;
     /* stylelint-disable-next-line carbon/layout-use */
-    transform: translateX(var(--panel-transform));
+    transform: translateX(var(--panel-transform, 320px));
   }
 }
 
@@ -73,6 +73,6 @@
   100% {
     opacity: 0;
     /* stylelint-disable-next-line carbon/layout-use */
-    transform: translateX(calc(var(--panel-transform) * -1));
+    transform: translateX(calc(var(--panel-transform, 320px) * -1));
   }
 }

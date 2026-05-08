@@ -8,12 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import {
-  property,
-  query,
-  queryAssignedElements,
-  state,
-} from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -27,14 +22,13 @@ import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-load
 import { moderate02 } from '@carbon/motion';
 import Handle from '../../globals/internal/handle';
 import '@carbon/web-components/es/components/button/index.js';
-import '@carbon/web-components/es/components/button/button-set-base.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
+import '../action-set/index.js';
 
 export { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT };
 
 const blockClass = `${prefix}--side-panel`;
-const blockClassActionSet = `${prefix}--action-set`;
 
 /**
  * Observes resize of the given element with the given resize observer.
@@ -99,12 +93,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @query(`.${blockClass}__inner-content`)
   private _innerContent!: HTMLElement;
 
-  @queryAssignedElements({
-    slot: 'actions',
-    selector: `${carbonPrefix}-button`,
-  })
-  private _actions!: Array<HTMLElement>;
-
   @state()
   _doAnimateTitle = true;
 
@@ -127,6 +115,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   _actionsCount = 0;
 
   @state()
+  _actionsMultiple: 'single' | 'double' | 'triple' | '' = '';
+
+  @state()
   _slugCloseSize = 'sm';
 
   @state()
@@ -144,33 +135,132 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     last: HTMLElement | undefined;
     all: HTMLElement[];
   } {
-    const elements: NodeListOf<HTMLElement>[] = [];
+    const elements: HTMLElement[] = [];
 
-    // Add slug elements if present
-    if (this._hasSlug) {
-      elements.push(this.querySelectorAll(`${carbonPrefix}-slug`));
-    }
-
-    // Add close button if not hidden
-    if (!this.hideCloseButton) {
-      const closeButtons = this.shadowRoot?.querySelectorAll<HTMLElement>(
-        `${carbonPrefix}-icon-button`
+    // Add back button if present (shadow DOM)
+    if (this.currentStep > 0) {
+      const backButton = this.shadowRoot?.querySelector<HTMLElement>(
+        `.${blockClass}__navigation-back-button`
       );
-      if (closeButtons) {
-        elements.push(closeButtons);
+      if (backButton) {
+        elements.push(backButton);
       }
     }
 
-    // Add tabbable elements inside light DOM
-    const _tabbableItems = this.querySelectorAll<HTMLElement>(selectorTabbable);
-    if (_tabbableItems) {
-      elements.push(_tabbableItems);
+    // Add tabbable elements from above-title slot (light DOM - breadcrumbs, etc.)
+    const aboveTitleSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="above-title"]'
+    );
+    if (aboveTitleSlot) {
+      const aboveTitleElements = aboveTitleSlot
+        .assignedElements({ flatten: true })
+        .flatMap((el) =>
+          Array.from(el.querySelectorAll<HTMLElement>(selectorTabbable))
+        );
+      elements.push(...aboveTitleElements);
     }
 
-    // Flatten NodeList arrays and filter for focusable items
-    const all = elements
-      ?.flatMap((nodeList) => Array.from(nodeList))
-      ?.filter((el): el is HTMLElement => typeof el?.focus === 'function');
+    // Add label text if present (shadow DOM)
+    const labelText = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__label-text`
+    );
+    if (labelText) {
+      elements.push(labelText);
+    }
+
+    // Add title if present (shadow DOM)
+    const titleText = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__title-text`
+    );
+    if (titleText) {
+      elements.push(titleText);
+    }
+
+    // Add slug elements if present (light DOM)
+    if (this._hasSlug) {
+      const slugElements = Array.from(
+        this.querySelectorAll<HTMLElement>(`${carbonPrefix}-slug`)
+      );
+      elements.push(...slugElements);
+    }
+
+    // Add close button if not hidden (shadow DOM)
+    if (!this.hideCloseButton) {
+      const closeButton = this.shadowRoot?.querySelector<HTMLElement>(
+        `.${blockClass}__close-button`
+      );
+      if (closeButton) {
+        elements.push(closeButton);
+      }
+    }
+
+    // Add subtitle if present (shadow DOM)
+    const subtitleText = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__subtitle-text`
+    );
+    if (subtitleText && !subtitleText.hidden) {
+      elements.push(subtitleText);
+    }
+
+    // Add tabbable elements from below-title slot (light DOM)
+    const belowTitleSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="below-title"]'
+    );
+    if (belowTitleSlot) {
+      const belowTitleElements = belowTitleSlot
+        .assignedElements({ flatten: true })
+        .flatMap((el) =>
+          Array.from(el.querySelectorAll<HTMLElement>(selectorTabbable))
+        );
+      elements.push(...belowTitleElements);
+    }
+
+    // Add action toolbar elements (light DOM)
+    const actionToolbarSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="action-toolbar"]'
+    );
+    if (actionToolbarSlot) {
+      const actionToolbarElements = actionToolbarSlot
+        .assignedElements({ flatten: true })
+        .filter(
+          (el): el is HTMLElement =>
+            el instanceof HTMLElement &&
+            typeof (el as HTMLElement).focus === 'function'
+        );
+      elements.push(...actionToolbarElements);
+    }
+
+    // Add body content tabbable elements (light DOM - default slot)
+    const defaultSlot =
+      this.shadowRoot?.querySelector<HTMLSlotElement>('slot:not([name])');
+    if (defaultSlot) {
+      const bodyElements = defaultSlot
+        .assignedElements({ flatten: true })
+        .flatMap((el) =>
+          Array.from(el.querySelectorAll<HTMLElement>(selectorTabbable))
+        );
+      elements.push(...bodyElements);
+    }
+
+    // Add action buttons (light DOM)
+    const actionsSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="actions"]'
+    );
+    if (actionsSlot) {
+      const actionElements = actionsSlot
+        .assignedElements({ flatten: true })
+        .filter(
+          (el): el is HTMLElement =>
+            el instanceof HTMLElement &&
+            typeof (el as HTMLElement).focus === 'function'
+        );
+      elements.push(...actionElements);
+    }
+
+    // Filter for focusable items
+    const all = elements.filter(
+      (el): el is HTMLElement => typeof el?.focus === 'function'
+    );
 
     return {
       first: all[0],
@@ -332,9 +422,15 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           this._isOpen = false;
         });
       }
-    } else {
+    } else if (this.open) {
       // allow the html to render before animating in the side panel
-      this._isOpen = this.open;
+      // Use requestAnimationFrame to ensure the DOM is rendered before triggering animation
+      requestAnimationFrame(() => {
+        this._isOpen = this.open;
+      });
+    } else {
+      // When closing, set immediately
+      this._isOpen = false;
     }
   };
 
@@ -399,25 +495,25 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._hasActionToolbar = toolbarActions && toolbarActions.length > 0;
 
     if (this._hasActionToolbar) {
-      for (const toolbarAction of toolbarActions) {
+      for (let i = 0; i < toolbarActions.length; i++) {
+        const toolbarAction = toolbarActions[i];
         // toolbar actions size should always be sm
         toolbarAction.setAttribute('size', 'sm');
+
+        // Add leading button class to first button
+        if (i === 0) {
+          toolbarAction.classList.add(
+            `${blockClass}__action-toolbar-leading-button`
+          );
+        } else {
+          toolbarAction.classList.remove(
+            `${blockClass}__action-toolbar-leading-button`
+          );
+        }
       }
     }
   }
 
-  private _checkUpdateActionSizes = () => {
-    if (this._actions) {
-      for (let i = 0; i < this._actions.length; i++) {
-        this._actions[i].setAttribute(
-          'size',
-          this.condensedActions ? 'lg' : 'xl'
-        );
-      }
-    }
-  };
-
-  private _maxActions = 3;
   private _handleActionsChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const actions = target?.assignedElements();
@@ -426,28 +522,18 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._checkUpdateIconButtonSizes();
 
     const actionsCount = actions?.length ?? 0;
-    if (actionsCount > this._maxActions) {
-      this._actionsCount = this._maxActions;
-      if (process.env.NODE_ENV === 'development') {
-        console.error(`Too many side-panel actions, max ${this._maxActions}.`);
-      }
-    } else {
-      this._actionsCount = actionsCount;
-    }
+    this._actionsCount = actionsCount;
 
-    for (let i = 0; i < actions?.length; i++) {
-      if (i + 1 > this._maxActions) {
-        // hide excessive side panel actions
-        actions[i].setAttribute('hidden', 'true');
-        actions[i].setAttribute(
-          `data-actions-limit-${this._maxActions}-exceeded`,
-          `${actions.length}`
-        );
-      } else {
-        actions[i].classList.add(`${blockClassActionSet}__action-button`);
-      }
+    // Set actions-multiple attribute for container query styling
+    if (actionsCount === 1) {
+      this._actionsMultiple = 'single';
+    } else if (actionsCount === 2) {
+      this._actionsMultiple = 'double';
+    } else if (actionsCount === 3) {
+      this._actionsMultiple = 'triple';
+    } else {
+      this._actionsMultiple = '';
     }
-    this._checkUpdateActionSizes();
   }
 
   private _checkSetDoAnimateTitle = () => {
@@ -695,15 +781,13 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       return html``;
     }
 
-    const actionsMultiple = ['', 'single', 'double', 'triple'][
-      this._actionsCount
-    ];
-
     const titleTemplate = html` <div
       class=${`${blockClass}__title`}
       ?no-label=${!!labelText}
     >
-      <h2 class=${title ? `${blockClass}__title-text` : ''}>${title}</h2>
+      <h2 class=${title ? `${blockClass}__title-text` : ''} tabindex="0">
+        ${title}
+      </h2>
       ${this._doAnimateTitle
         ? html`<h2
             class=${`${blockClass}__collapsed-title-text`}
@@ -749,7 +833,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
         <!-- render title label -->
         ${title?.length && labelText?.length
-          ? html` <p class=${`${blockClass}__label-text`}>${labelText}</p>`
+          ? html` <p class=${`${blockClass}__label-text`} tabindex="0">
+              ${labelText}
+            </p>`
           : ''}
 
         <!-- title -->
@@ -781,6 +867,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           ?no-title-animation=${!this._doAnimateTitle}
           ?no-action-toolbar=${!this._hasActionToolbar}
           ?no-title=${!title}
+          tabindex="0"
         >
           <slot
             name="subtitle"
@@ -841,15 +928,15 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             </div>`
           : html` ${headerTemplate} ${mainTemplate}`}
 
-        <cds-button-set-base
+        <c4p-action-set
           class=${`${blockClass}__actions-container`}
           ?hidden=${this._actionsCount === 0}
-          ?condensed=${condensedActions}
-          actions-multiple=${actionsMultiple}
-          size=${size}
+          size="md"
+          button-size=${condensedActions ? 'md' : 'lg'}
+          actions-multiple=${this._actionsMultiple}
         >
           <slot name="actions" @slotchange=${this._handleActionsChange}></slot>
-        </cds-button-set-base>
+        </c4p-action-set>
       </div>
 
       ${includeOverlay
@@ -867,10 +954,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   }
 
   async updated(changedProperties) {
-    if (changedProperties.has('condensedActions')) {
-      this._checkUpdateActionSizes();
-    }
-
     if (changedProperties.has('currentStep')) {
       this._handleCurrentStepUpdate();
     }

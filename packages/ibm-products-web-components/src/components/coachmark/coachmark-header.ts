@@ -40,10 +40,26 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   @property({ reflect: true })
   dragIconDescription?: string = '';
 
-  private _handleClick = () => {
+  private _handleClick = (event: Event) => {
+    event.stopPropagation();
+
+    const coachmark = this.closest(`${prefix}-coachmark`) as HTMLElement | null;
+    if (coachmark) {
+      coachmark.dispatchEvent(
+        new CustomEvent(`${prefix}-coachmark-request-close`, {
+          bubbles: true,
+          composed: true,
+          cancelable: true,
+          detail: { source: 'header-close-button' },
+        })
+      );
+
+      (coachmark as any).open = false;
+    }
+
     updateCoachmarkDetailsSignal({
       name: 'open',
-      detail: !coachmarkDetailsSignal.get().open,
+      detail: false,
     });
   };
 
@@ -56,8 +72,7 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
               kind="ghost"
               size="sm"
               class="${prefix}--coachmark-header-drag-handle"
-              iconDescription="${this.dragIconDescription}"
-              hasIconOnly
+              tooltip-text="${this.dragIconDescription}"
             >
               ${iconLoader(Draggable, {
                 slot: 'icon',
@@ -70,8 +85,7 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
       <cds-button
         kind="ghost"
         size="sm"
-        iconDescription="${this.closeIconDescription}"
-        hasIconOnly
+        tooltip-text="${this.closeIconDescription}"
         @click=${this._handleClick}
       >
         ${iconLoader(Close, {

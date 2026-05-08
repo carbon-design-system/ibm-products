@@ -35,6 +35,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark__next;
   .#{$block-class}--content-body > button {
     display: flex;
     align-self: flex-end;
+    margin-block-end: $spacing-05;
     margin-block-start: $spacing-05;
   }
 }

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2023, 2023
+// Copyright IBM Corp. 2023, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -30,6 +30,8 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 
 // Guidebanner uses the following Carbon for IBM Products components:
@@ -155,7 +157,7 @@ $purple-3: #7433e3;
 }
 
 // Button with crossroads icon
-.#{$block-class}__carousel .#{c4p-settings.$carbon-prefix}--btn--tertiary {
+.#{$block-class}__carousel .#{carbon-config.$prefix}--btn--tertiary {
   border-color: $white-0;
   color: $white-0;
 
@@ -178,7 +180,7 @@ $purple-3: #7433e3;
   }
 }
 
-.#{$block-class}__carousel .#{c4p-settings.$carbon-prefix}--btn--ghost {
+.#{$block-class}__carousel .#{carbon-config.$prefix}--btn--ghost {
   color: $blue-30;
   margin-inline-start: calc(-1 * $spacing-05);
 

@@ -83,7 +83,7 @@ export {
 export type {
   TearsheetProps as preview__TearsheetProps,
   TearsheetComponentType,
-  FooterProps,
+  TearsheetFooterProps,
   MainContentProps,
   SummaryContentProps,
   TearsheetBodyProps,

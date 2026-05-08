@@ -26,6 +26,7 @@ const meta: Meta = {
     options: {
       showPanel: false,
     },
+    chromatic: { disableSnapshot: true },
   },
   tags: ['!autodocs'],
 };

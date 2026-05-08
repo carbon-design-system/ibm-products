@@ -14,4 +14,6 @@ export {
   blockClass,
   getNextSibling,
   getPreviousSibling,
+  hasNextSiblingNotInView,
+  hasPreviousSiblingNotInView,
 } from './snapscroll';

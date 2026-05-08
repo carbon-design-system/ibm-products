@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2022
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,6 +9,8 @@
 
 // Standard imports.
 @use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as *;
 
 $colors: (
@@ -115,9 +117,9 @@ $block-class: #{$pkg-prefix}--status-icon;
 @each $theme in $themes {
   @each $icon in $icons {
     @each $theme-key in $themes {
-      .#{$carbon-prefix}--btn--ghost:not([disabled])
+      .#{carbon-config.$prefix}--btn--ghost:not([disabled])
         .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
-      .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger
+      .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only.#{carbon-config.$prefix}--tooltip__trigger
         .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
       .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon} {
         @if $icon == in-progress {

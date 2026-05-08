@@ -66,7 +66,6 @@ export const CoachmarkBeacon = forwardRef<
     <div
       className={cx(blockClass, `${blockClass}-${kind}`, className)}
       {...getDevtoolsProps(componentName)}
-      role="tooltip"
       {...rest}
       ref={ref}
     >
@@ -74,9 +73,13 @@ export const CoachmarkBeacon = forwardRef<
         type="button"
         {...buttonProps}
         className={`${blockClass}__target`}
+        aria-label={label}
       >
-        <svg className={`${blockClass}__center`} aria-label={label}>
-          <title>{label}</title>
+        <svg
+          className={`${blockClass}__center`}
+          aria-hidden="true"
+          focusable="false"
+        >
           <circle r={1} cx={38} cy={38} />
         </svg>
       </button>

@@ -63,7 +63,7 @@ test.describe('ProductiveCard @avt', () => {
   });
 
   // Overflow menu open/close states test
-  test.skip('@avt-overflow-menu: validates overflow menu interactions', async ({
+  test('@avt-overflow-menu: validates overflow menu interactions', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -105,9 +105,19 @@ test.describe('ProductiveCard @avt', () => {
     // Check menu item count and focus
     const menuItems = page.locator(`li.${carbon.prefix}--menu-item`);
     expect(await menuItems.count()).toBeGreaterThan(0);
-    expect(
-      await menuItems.first().evaluate((btn) => document.activeElement === btn)
-    ).toBe(true);
+
+    // Wait for focus to move to the first menu item
+    await expect(async () => {
+      const firstMenuItem = await menuItems.first().elementHandle();
+      const activeElement = await page.evaluateHandle(
+        () => document.activeElement
+      );
+      const isSame = await page.evaluate(
+        ([el1, el2]) => el1 === el2,
+        [firstMenuItem, activeElement]
+      );
+      expect(isSame).toBe(true);
+    }).toPass({ timeout: 2000 });
     expect(await menuButton.getAttribute('aria-expanded')).toBe('true');
 
     // Ensure the menu is closed when pressing Escape
@@ -175,7 +185,7 @@ test.describe('ProductiveCard @avt', () => {
 
     // Move focus to the card element and validate
     await page.keyboard.press('Tab');
-    const zone1 = page.locator(`.${pkg.prefix}--card__clickable`);
+    const zone1 = page.getByRole('button', { name: /Title/i });
     await expect(zone1).toBeFocused();
     await expect(zone1).toHaveAttribute('role', 'button');
 
@@ -192,9 +202,12 @@ test.describe('ProductiveCard @avt', () => {
     });
     await page.keyboard.press('Tab');
 
-    const zone2 = page.locator(`.${pkg.prefix}--card__header-body-container`);
+    const zone2 = page.locator('*:focus');
     await expect(zone2).toBeFocused();
     await expect(zone2).toHaveAttribute('role', 'button');
+    await expect(zone2).toHaveClass(
+      new RegExp(`${pkg.prefix}--card__header-body-container`)
+    );
 
     // Move focus to the Read more button and validate
     await page.keyboard.press('Tab');
@@ -208,9 +221,10 @@ test.describe('ProductiveCard @avt', () => {
       id: 'components-cards-productivecard--clickable&args=clickZone:three',
     });
     await page.keyboard.press('Tab');
-    const zone3 = page.locator(`.${pkg.prefix}--card__body`);
+    const zone3 = page.locator('*:focus');
     await expect(zone3).toBeFocused();
     await expect(zone3).toHaveAttribute('role', 'button');
+    await expect(zone3).toHaveClass(new RegExp(`${pkg.prefix}--card__body`));
 
     // Move focus to the Read more button and validate
     await page.keyboard.press('Tab');
@@ -243,7 +257,7 @@ test.describe('ProductiveCard @avt', () => {
   });
 
   // hover states
-  test.skip('@avt-hover: validates hover states', async ({ page }) => {
+  test('@avt-hover: validates hover states', async ({ page }) => {
     await visitStory(page, {
       component: 'ProductiveCard',
       id: 'components-cards-productivecard--with-overflow',

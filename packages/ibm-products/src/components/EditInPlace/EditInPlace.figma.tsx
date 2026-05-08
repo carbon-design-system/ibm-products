@@ -38,6 +38,7 @@ figma.connect(
     },
     example: (props) => (
       <EditInPlace
+        readOnly={false}
         cancelLabel="Cancel"
         editLabel="Edit"
         id="Example-ID"

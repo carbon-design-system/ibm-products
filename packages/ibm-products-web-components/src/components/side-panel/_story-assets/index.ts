@@ -129,26 +129,43 @@ export const getActionToolbarItems = (index) => {
 // TODO: There are problems switching this
 export const getActionItems = (index) => {
   switch (index) {
-    case 1:
-      return html`<cds-button key="p" slot="actions" kind=${BUTTON_KIND.PRIMARY}
+    case 1: // One button
+      return html`<cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}
         >Primary</cds-button
       >`;
-    case 2:
+    case 2: // One button (ghost)
+      return html`<cds-button slot="actions" kind=${BUTTON_KIND.GHOST}
+        >Ghost</cds-button
+      >`;
+    case 3: // One button (danger)
+      return html`<cds-button slot="actions" kind=${BUTTON_KIND.DANGER}
+        >Danger</cds-button
+      >`;
+    case 4: // Two buttons
+      return html`
+        <cds-button slot="actions" kind=${BUTTON_KIND.SECONDARY}
+          >Secondary</cds-button
+        >
+        <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}
+          >Primary</cds-button
+        >
+      `;
+    case 5: // Two buttons with ghost
       return html`
         <cds-button slot="actions" kind=${BUTTON_KIND.GHOST}>Ghost</cds-button>
         <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}
           >Primary</cds-button
         >
       `;
-    case 3:
-      return html` <cds-button slot="actions" kind=${BUTTON_KIND.DANGER}
+    case 6: // Two buttons with danger
+      return html`<cds-button slot="actions" kind=${BUTTON_KIND.DANGER}
           >Danger</cds-button
         >
         <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}
           >Primary</cds-button
         >`;
-    case 4:
-      return html` <cds-button slot="actions" kind=${BUTTON_KIND.GHOST}
+    case 7: // Three buttons with ghost
+      return html`<cds-button slot="actions" kind=${BUTTON_KIND.GHOST}
           >Ghost</cds-button
         >
         <cds-button slot="actions" kind=${BUTTON_KIND.SECONDARY}
@@ -157,33 +174,24 @@ export const getActionItems = (index) => {
         <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}
           >Primary</cds-button
         >`;
-    case 5:
-      return html`<cds-button
-          key="danger"
-          slot="actions"
-          kind=${BUTTON_KIND.DANGER}
+    case 8: // Three buttons with danger
+      return html`<cds-button slot="actions" kind=${BUTTON_KIND.DANGER}
           >Danger</cds-button
         >
-        <cds-button key="secondary" slot="actions" kind=${BUTTON_KIND.SECONDARY}
+        <cds-button slot="actions" kind=${BUTTON_KIND.SECONDARY}
           >Secondary</cds-button
         >
-        <cds-button key="primary" slot="actions" kind=${BUTTON_KIND.PRIMARY}
+        <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}
           >Primary</cds-button
         >`;
-    case 6:
-      return html`<cds-button
-          key="danger"
-          slot="actions"
-          kind=${BUTTON_KIND.DANGER}
-          >Danger</cds-button
-        >
-        <cds-button key="tertiary" slot="actions" kind=${BUTTON_KIND.TERTIARY}
-          >Tertiary</cds-button
-        >
-        <cds-button key="secondary" slot="actions" kind=${BUTTON_KIND.SECONDARY}
+    case 9: // Three buttons
+      return html`<cds-button slot="actions" kind=${BUTTON_KIND.SECONDARY}
           >Secondary</cds-button
         >
-        <cds-button key="primary" slot="actions" kind=${BUTTON_KIND.PRIMARY}
+        <cds-button slot="actions" kind=${BUTTON_KIND.SECONDARY}
+          >Secondary</cds-button
+        >
+        <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}
           >Primary</cds-button
         >`;
     default:

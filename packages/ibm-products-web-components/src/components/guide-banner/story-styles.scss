@@ -8,12 +8,14 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 
+$horizontal-margin: $spacing-09;
+
 .body {
   color: $text-primary;
 
   &-elm {
-    padding: $spacing-07;
     inline-size: 600px;
+    padding-inline-start: $horizontal-margin;
   }
 }
 
@@ -21,4 +23,8 @@
   display: flex;
   justify-content: space-between;
   inline-size: 100%;
+
+  &-left .guide-banner-story__toggle-button {
+    margin-inline-start: $spacing-07;
+  }
 }

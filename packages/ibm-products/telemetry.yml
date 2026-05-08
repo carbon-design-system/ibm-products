@@ -45,6 +45,7 @@ collect:
         - breadcrumbs
         - button
         - buttonProps
+        - buttonSize
         - cancelButtonText
         - caret
         - cellSize
@@ -427,7 +428,7 @@ collect:
         - searchText
         - setSearchText
         # ActionSet
-        - buttonSize
+        - disableStacking
         # AddSelectBody
         - defaultModifiers
         - globalFilterOpts
@@ -660,7 +661,10 @@ collect:
         - inheritTypography
         - invalidLabel
         - onSave
+        - readOnlyLabel
+        - readOnlyToggleTipText
         - saveLabel
+        - toggleTipAlignment
         # EditTearsheet
         - onFormChange
         # EditUpdateCards
@@ -739,6 +743,7 @@ collect:
         - fileDropHeader
         - fileDropLabel
         - fileUploadLabel
+        - hideInputLabel
         - inputButtonIcon
         - inputButtonText
         - inputId
@@ -857,6 +862,9 @@ collect:
         - hasBackgroundAlways
         - hasCollapseHeaderToggle
         - narrowGrid
+        - onContentActionsClipped
+        - onContentFullyCollapsed
+        - onTitleClipped
         - pageActionsMenuOptionsClass
         - pageActionsOverflowLabel
         - withoutBackground
@@ -866,6 +874,9 @@ collect:
         - pageActionsFlush
         # PageHeaderBreadcrumbOverflow
         - renderOverflowBreadcrumb
+        # PageHeaderBreadcrumbPageActions
+        - buttonKind
+        - overflowMenuLabel
         # PageHeaderContent
         - contextualActions
         # PageHeaderContentPageActions
@@ -954,6 +965,8 @@ collect:
         - tagComponent
         # Tearsheet
         - containerClassName
+        - disablePortal
+        - keepMounted
         - summaryContentWidth
         - verticalGap
         # TearsheetHeader
@@ -965,6 +978,9 @@ collect:
         # TearsheetHeaderContent
         - titleEnd
         - titleStart
+        # TearsheetPresence
+        - _autoEnablePresence
+        - _presenceId
         # TearsheetWithSteps
         - progressIndicator
         - setOpen
@@ -1038,6 +1054,10 @@ collect:
         - order-7-cyan
         - order-8-gray
         - order-9-green
+        # General - buttonSize
+        - lg
+        - md
+        - sm
         # General - cellSize
         - lg
         - md
@@ -1234,6 +1254,15 @@ collect:
         - low
         - medium
         - unknown
+        # EditInPlace - toggleTipAlignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
         # ExampleComponent - primaryKind
         - danger
         - primary
@@ -1249,6 +1278,14 @@ collect:
         - short
         # PageHeader - fullWidthGrid
         - xl
+        # PageHeaderBreadcrumbPageActions - buttonKind
+        - danger
+        - danger--ghost
+        - danger--tertiary
+        - ghost
+        - primary
+        - secondary
+        - tertiary
         # StackProvider - stackStepSize
         - lg
         - md
@@ -1258,9 +1295,6 @@ collect:
         - vertical
   npm:
     dependencies: null
-  js:
-    functions: {}
-    tokens: null
   js:
     functions: {}
     tokens: null

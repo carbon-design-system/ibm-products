@@ -74,11 +74,16 @@ export const makeDraggable = ({
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       isDragging = !isDragging;
-    }
-    if (isDragging) {
-      dispatch('dragstart', { keyboard: true });
-    } else {
-      dispatch('dragend', { keyboard: true });
+      if (isDragging) {
+        // Get current transform values when starting keyboard drag
+        const style = window.getComputedStyle(el);
+        const matrix = new DOMMatrix(style.transform);
+        currentX = matrix.m41;
+        currentY = matrix.m42;
+        dispatch('dragstart', { keyboard: true });
+      } else {
+        dispatch('dragend', { keyboard: true });
+      }
     }
 
     if (!isDragging) {
@@ -91,16 +96,20 @@ export const makeDraggable = ({
         e.preventDefault();
         break;
       case 'ArrowLeft':
-        el.style.left = `${el.offsetLeft - distance}px`;
+        currentX -= distance;
+        el.style.transform = `translate(${currentX}px, ${currentY}px)`;
         break;
       case 'ArrowRight':
-        el.style.left = `${el.offsetLeft + distance}px`;
+        currentX += distance;
+        el.style.transform = `translate(${currentX}px, ${currentY}px)`;
         break;
       case 'ArrowUp':
-        el.style.top = `${el.offsetTop - distance}px`;
+        currentY -= distance;
+        el.style.transform = `translate(${currentX}px, ${currentY}px)`;
         break;
       case 'ArrowDown':
-        el.style.top = `${el.offsetTop + distance}px`;
+        currentY += distance;
+        el.style.transform = `translate(${currentX}px, ${currentY}px)`;
         break;
     }
   };

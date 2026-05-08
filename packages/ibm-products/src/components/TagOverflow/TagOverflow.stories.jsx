@@ -77,6 +77,9 @@ TagsWithOverflowCount.args = {
   items: fiveTags,
   onOverflowTagChange: (items) => console.log(items),
 };
+TagsWithOverflowCount.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const TagsWithTruncation = Template.bind({});
 TagsWithTruncation.args = {
@@ -105,6 +108,9 @@ UserAvatarsWithOverflowCount.args = {
   items: UserAvatarArr,
   tagComponent: UserAvatar,
 };
+UserAvatarsWithOverflowCount.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const UserAvatarsWithOverflowModal = Template.bind({});
 UserAvatarsWithOverflowModal.args = {
@@ -112,6 +118,9 @@ UserAvatarsWithOverflowModal.args = {
   items: ManyUserAvatarArr,
   tagComponent: UserAvatar,
   ...overflowAndModalStrings,
+};
+UserAvatarsWithOverflowModal.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const CustomComponentsWithOverflowModal = Template.bind({});

@@ -1,3 +1,147 @@
+## `@carbon/ibm-products@2.89.0`
+### Features :rocket:
+- feat(preview_Tearsheet): stacking wrapper, actions prop for footer and story updates (#9242)
+- feat(ConditionBuilder): title and text ellipsis of dropdown and default statement fix (#9252)
+- feat(coachmark): replaces bubble with popover (#9220)
+
+### Bug fixes :bug:
+- fix(apikeymodal): document parity (#9293)
+- fix: correct header tab order and alignemnt issue (#9179)
+- fix(useFilters): updated selectedFilters to check filtersState is an array (#9270)
+- fix(about-modal): fix colors / theming for react and wc (#9262)
+- fix: replace hardcoded instance of cds (#9165)
+
+### Housekeeping :house:
+- chore(DelimitedList): deprecate `DelimitedList` (#9219)
+- chore(deps): update dependency @vitejs/plugin-react to v5.2.0 (#9236)
+- chore(StringFormatter): deprecate `StringFormatter` (#9217)
+- chore(deps): update dependency vite to v8 [security] (#9259)
+- build(deps): update to Carbon 11 compatible versions to latest (#9257)
+- docs(changelog): update for v2.88.0-rc.0 (#9247)
+
+## `@carbon/ibm-products@2.88.0`
+### Features :rocket:
+- feat(preview__PageHeader): implement callbacks for intesecting observers (#9087)
+- feat: add initialState support and footer actions prop (#9171)
+
+### Bug fixes :bug:
+- fix(interstitialScreen): parity issues and small screens ui of action buttons (#9032)
+- fix(build): patch CJS default export interop for tsdown migration
+
+### Housekeeping :house:
+- chore(preview_PageHeader): refactor `breadcrumbPageActions` to a standalone component (#9230)
+- docs(changelog): update for v2.87.0-rc.0 (#9187)
+
+## `@carbon/ibm-products@2.87.1`
+### Bug fixes :bug:
+- fix(build): patch CJS default export interop for tsdown migration
+## `@carbon/ibm-products@2.87.0`
+### Features :rocket:
+- feat(createFullPage): implemented as patterns in react (#9096)
+
+### Bug fixes :bug:
+- fix: add prop type as dep
+- fix: build fixes and release CI optimisations
+- fix(SidePanel): visual issues - react (#9142)
+- fix: Coachmark design parity (#9155)
+- fix: move step flows to utilities (#9110)
+
+### Housekeeping :house:
+- chore(deps): update dependency glob to v13 (#9035)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+- chore: migrate to tsdown for react and wc (#9123)
+
+## `@carbon/ibm-products@2.86.0`
+### Features :rocket:
+- feat(preview_Tearsheet): add support for actions prop for footer (#9103)
+- feat(Tearsheet_preview): refactor portalTarget implementation in preview_Tearsheet (#9081)
+- feat: incorporate usePresence for preview_Tearsheet and doc updates (#9062)
+- feat: Composable Tearsheet webcomponent implementation (#8841)
+- feat: refactor pattern architecture (#9061)
+
+### Bug fixes :bug:
+- fix(editinplace): readonly prop as optional (#9105)
+- fix: make style specific to sidepanel in tearsheet (#9107)
+- fix(preview_PageHeader): resolve breadcrumb bar mobile view issues (#9072)
+- fix(useravatar): design parity (#9064)
+
+### Housekeeping :house:
+- chore: Remove Percy in favour of Chromatic for VRT (#9112)
+- chore: add chromatic set up ibm-products react and wc storybook (#9086)
+- chore(deps): update dependency @vitejs/plugin-react to v5 (#9027)
+- build(deps): update to Carbon 11 compatible versions to latest (#9063)
+- chore(OptionsTile): refactor header (#9021)
+
+## `@carbon/ibm-products@2.85.0`
+### Features :rocket:
+- feat: create tearsheet pattern using preview_Tearsheet (#8937)
+- feat(emptystate): code connect integration (#8954)
+- feat(editinplace): add readOnly prop (#9007)
+- feat(createtearsheet): disable secondary button (#8950)
+
+### Bug fixes :bug:
+- fix: delete tags and restore vesions to retry release 5
+- fix: add js extension for imports
+- fix: delete tags and restore vesions to retry release 4
+- fix: delete tags and restore vesions to retry release 3
+- fix: delete tags and restore vesions to retry release 2
+- fix: delete tags and restore vesions to retry release
+- fix: workaround fix to prevent popover to close on date sel (#9065)
+- fix: tab stop issue in coachmark patterns (#8987)
+- fix: build warnings from CoachmarkOverlayElements and CoachmarkStacked (#9043)
+- fix(usePortalTarget): fix hydration error (#9029)
+- fix(coachmark): enable keyboard dragging for floating variant (#9031)
+- fix: preserve namespace in storycode (#8993)
+- fix(security): upgrade @figma/code-connect to 1.4.0 (#9016)
+- fix(usePortalTarget): fix render portal use (#9018)
+- fix(ImportModal): make `inputLabel` required and add new prop `hideInputLabel` (#9011)
+- fix: security vulnerability in isaacs/brace-expansion,lodash and undici (#8995)
+
+### Housekeeping :house:
+- refactor(preview__PageHeader): separate child components to separate from `PageHeader.tsx` file (#8988)
+- docs(changelog): update for v2.84.0 (#9013)
+
+## `@carbon/ibm-products@2.84.0`
+### Features :rocket:
+- feat(nonlinearreading): code connect integration (#8943)
+- feat: show Close icon at global header actions when expanded (#8933)
+- feat(tearsheetpresence): add tearsheet presence (#8929)
+- feat(CoachmarkPatterns): example creation for coachmark patterns (#8918)
+- feat(pageheader): code connect integration (#8716)
+
+### Bug fixes :bug:
+- fix(SidePanel): Allow closing SidePanel via ESC key (#8977)
+- fix(preview__PageHeader): resolve content actions responsive issue in < 1010px viewport (#8976)
+- fix(Pageheader_preview): header calulation issue fix (#8940)
+- fix(CoachmarkBeacon): removed role from wrapper div (#8956)
+- fix(PageHeader): use TruncatedText in PageHeader subtitle (#8917)
+- fix: use carbon prefix directly from @carbon/styles package config (#8904)
+
+### Housekeeping :house:
+- chore: remove unwanted style changes (#8997)
+- build(deps): update to Carbon 11 compatible versions to latest (#8991)
+- chore(deps): update dependency @percy/storybook to v10 (#8982)
+- chore: bump @carbon/feature-flags version (#8968)
+- chore(deps): update dependency @vitejs/plugin-react to v4.7.0 (#8967)
+- chore(deps): update dependency vite to v7 [security] (#8941)
+- build(performance): rolldown-vite integration (#8915)
+- build(deps): update to Carbon 11 compatible versions to latest (#8907)
+
+## `@carbon/ibm-products@2.83.0`
+### Features :rocket:
+- feat(CreateModal): implement `CreateModal` pattern with example (#8706)
+- feat: added side panel code connect file for wc (#8687)
+
+### Bug fixes :bug:
+- fix: pageheader position on scroll and resize (#8866)
+- fix(storybook): add a11y checker back, react/wc (#8899)
+- fix(checklist): title and chart title do not show tooltip when truncated (#8788)
+- fix(coachmark): added preview status to coachmarkBeacon (#8855)
+- fix: exception focusing launcherButton (#8827)
+
+### Housekeeping :house:
+- chore(deps): update dependency typescript-config-carbon to ^0.9.0 (#8894)
+
 ## `@carbon/ibm-products@2.82.0`
 ### Features :rocket:
 - feat(coachmark): open in stackblitz (#8690)

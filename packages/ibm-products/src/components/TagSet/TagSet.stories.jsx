@@ -134,9 +134,6 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    percy: {
-      waitForTimeout: 1000,
-    },
     docs: {
       page: () => (
         <StoryDocsPage
@@ -241,6 +238,9 @@ HundredsOfTags.args = {
   tags: hundredsOfTags,
   containerWidth: 500,
   ...overflowAndModalStrings,
+};
+HundredsOfTags.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 const TemplateWithClose = (argsIn) => {

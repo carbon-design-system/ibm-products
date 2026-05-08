@@ -67,6 +67,10 @@ class CreateFullPageWithStepInErrorState extends HostListenerMixin(LitElement) {
     if (changedProperties.has('textInput') || changedProperties.has('isFirstStepInvalid')) {
       const createFullPage = this.shadowRoot?.querySelector('create-full-page') as any;
       if (createFullPage) {
+        // Re-extract step data to update the progress indicator with new invalid state
+        if (createFullPage.extractStepData) {
+          createFullPage.extractStepData();
+        }
         createFullPage.requestUpdate();
       }
     }
@@ -100,6 +104,7 @@ class CreateFullPageWithStepInErrorState extends HostListenerMixin(LitElement) {
             title="Partition"
             subtitle="One or more partitions make up a topic. A partition is an ordered list of messages."
             ?disable-submit=${this.isFirstStepInvalid}
+            ?invalid=${this.isFirstStepInvalid}
           >
             <cds-grid>
               <cds-column xlg="5" lg="5" md="4" sm="4">

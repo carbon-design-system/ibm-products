@@ -62,6 +62,12 @@ export class CreateFullPageStep extends LitElement {
   disableSubmit = false;
 
   /**
+   * Whether this step is in an invalid/error state
+   */
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
+
+  /**
    * Callback for next action
    */
   @property({ attribute: false })

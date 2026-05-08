@@ -40,8 +40,8 @@ $block-class: 'create-full-page-pattern';
 }
 
 .#{$story-class}__content-container--with-global-header {
-  block-size: calc(100% - 48px); // Subtract header height
-  margin-block-start: 48px; // Header height
+  block-size: calc(100% - $spacing-10); // Subtract header height
+  margin-block-start: $spacing-10; // Header height
 }
 
 .form-field-wrapper {
@@ -73,19 +73,20 @@ $block-class: 'create-full-page-pattern';
   }
 }
 
-.#{$block-class}__step-title
-{
+.#{$block-class}__step-title {
   @include type.type-style('heading-04');
-  margin-block-end: 1rem;
+
+  margin-block-end: $spacing-05;
 }
 
-.#{$block-class}__step-subtitle
-{
+.#{$block-class}__step-subtitle {
   @include type.type-style('heading-compact-01');
-  margin-block-end: 1rem;
+
+  margin-block-end: $spacing-05;
 }
 
-.#{$block-class}__step-description{
-   @include type.type-style('body-01');
-   margin-block-end: 1.5rem;
+.#{$block-class}__step-description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-06;
 }

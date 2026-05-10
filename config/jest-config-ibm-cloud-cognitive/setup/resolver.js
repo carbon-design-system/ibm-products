@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = (path, options) => {
+const resolver = (path, options) => {
   // Call the defaultResolver, so we leverage its cache, error handling, etc.
   return options.defaultResolver(path, {
     ...options,
@@ -18,3 +18,6 @@ module.exports = (path, options) => {
     },
   });
 };
+
+export { resolver as sync };
+export default resolver;

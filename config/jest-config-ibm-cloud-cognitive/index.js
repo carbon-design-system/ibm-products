@@ -44,7 +44,7 @@ export default {
     'StatusIndicator',
     'UserProfileImage',
   ],
-  resolver: resolve(__dirname, './setup/resolver.cjs'),
+  resolver: resolve(__dirname, './setup/resolver.js'),
   moduleFileExtensions: ['tsx', 'ts', 'jsx', 'js', 'json', 'node'],
   moduleNameMapper: {
     // This mapping is the result of updating to Jest 28. We currently require
@@ -72,12 +72,12 @@ export default {
   transform: {
     '^.+\\.(mjs|cjs|js|jsx|ts|tsx)$': resolve(
       __dirname,
-      './transform/javascript.cjs'
+      './transform/javascript.js'
     ),
-    '^.+\\.s?css$': resolve(__dirname, './transform/css.cjs'),
+    '^.+\\.s?css$': resolve(__dirname, './transform/css.js'),
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': resolve(
       __dirname,
-      './transform/file.cjs'
+      './transform/file.js'
     ),
   },
   testEnvironment: 'jsdom',

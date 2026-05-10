@@ -41,7 +41,7 @@ DescriptionListCell.propTypes = {
   /** Provide an optional class to be applied to the containing node */
   className: PropTypes.string,
 };
-DescriptionListCell = pkg.checkComponentEnabled(
+DescriptionListCell = /* @__PURE__ */ pkg.checkComponentEnabled(
   DescriptionListCell,
   componentName
 );

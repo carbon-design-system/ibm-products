@@ -133,7 +133,10 @@ StringFormatter.deprecated = {
   details: `Please replace ${componentName} with TruncatedText`,
 };
 
-StringFormatter = pkg.checkComponentEnabled(StringFormatter, componentName);
+StringFormatter = /* @__PURE__ */ pkg.checkComponentEnabled(
+  StringFormatter,
+  componentName
+);
 
 StringFormatter.displayName = componentName;
 

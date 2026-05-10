@@ -175,6 +175,6 @@ NavItem.propTypes = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-NavItem = pkg.checkComponentEnabled(NavItem, componentName);
+NavItem = /* @__PURE__ */ pkg.checkComponentEnabled(NavItem, componentName);
 
 export default NavItem;

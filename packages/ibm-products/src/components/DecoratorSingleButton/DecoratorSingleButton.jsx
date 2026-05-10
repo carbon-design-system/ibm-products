@@ -46,7 +46,7 @@ DecoratorSingleButton.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-DecoratorSingleButton = pkg.checkComponentEnabled(
+DecoratorSingleButton = /* @__PURE__ */ pkg.checkComponentEnabled(
   DecoratorSingleButton,
   componentName
 );

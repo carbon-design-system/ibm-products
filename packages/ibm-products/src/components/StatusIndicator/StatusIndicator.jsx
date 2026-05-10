@@ -74,7 +74,10 @@ StatusIndicator.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-StatusIndicator = pkg.checkComponentEnabled(StatusIndicator, componentName);
+StatusIndicator = /* @__PURE__ */ pkg.checkComponentEnabled(
+  StatusIndicator,
+  componentName
+);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

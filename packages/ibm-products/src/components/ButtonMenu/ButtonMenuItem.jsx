@@ -27,6 +27,9 @@ export let ButtonMenuItem = React.forwardRef((props, ref) => (
 ));
 
 // Return a placeholder if not released and not enabled by feature flag
-ButtonMenuItem = pkg.checkComponentEnabled(ButtonMenuItem, componentName);
+ButtonMenuItem = /* @__PURE__ */ pkg.checkComponentEnabled(
+  ButtonMenuItem,
+  componentName
+);
 
 ButtonMenuItem.propTypes = OverflowMenuItem.propTypes;

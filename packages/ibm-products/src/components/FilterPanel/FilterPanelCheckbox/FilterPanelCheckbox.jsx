@@ -51,7 +51,7 @@ FilterPanelCheckbox.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-FilterPanelCheckbox = pkg.checkComponentEnabled(
+FilterPanelCheckbox = /* @__PURE__ */ pkg.checkComponentEnabled(
   FilterPanelCheckbox,
   componentName
 );

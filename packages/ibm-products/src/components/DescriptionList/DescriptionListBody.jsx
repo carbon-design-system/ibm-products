@@ -41,7 +41,7 @@ DescriptionListBody.propTypes = {
   /** Provide an optional class to be applied to the containing node */
   className: PropTypes.string,
 };
-DescriptionListBody = pkg.checkComponentEnabled(
+DescriptionListBody = /* @__PURE__ */ pkg.checkComponentEnabled(
   DescriptionListBody,
   componentName
 );

@@ -42,7 +42,7 @@ DescriptionListRow.propTypes = {
   /** Provide an optional class to be applied to the containing node */
   className: PropTypes.string,
 };
-DescriptionListRow = pkg.checkComponentEnabled(
+DescriptionListRow = /* @__PURE__ */ pkg.checkComponentEnabled(
   DescriptionListRow,
   componentName
 );

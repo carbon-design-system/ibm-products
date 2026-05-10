@@ -44,7 +44,7 @@ DecoratorDualButton.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-DecoratorDualButton = pkg.checkComponentEnabled(
+DecoratorDualButton = /* @__PURE__ */ pkg.checkComponentEnabled(
   DecoratorDualButton,
   componentName
 );

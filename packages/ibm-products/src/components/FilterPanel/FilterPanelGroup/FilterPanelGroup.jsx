@@ -52,7 +52,10 @@ FilterPanelGroup.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-FilterPanelGroup = pkg.checkComponentEnabled(FilterPanelGroup, componentName);
+FilterPanelGroup = /* @__PURE__ */ pkg.checkComponentEnabled(
+  FilterPanelGroup,
+  componentName
+);
 
 FilterPanelGroup.displayName = componentName;
 

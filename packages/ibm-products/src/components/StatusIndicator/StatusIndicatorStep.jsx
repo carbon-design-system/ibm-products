@@ -70,7 +70,7 @@ StatusIndicatorStep.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-StatusIndicatorStep = pkg.checkComponentEnabled(
+StatusIndicatorStep = /* @__PURE__ */ pkg.checkComponentEnabled(
   StatusIndicatorStep,
   componentName
 );

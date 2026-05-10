@@ -355,7 +355,7 @@ export let BreadcrumbWithOverflow = ({
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-BreadcrumbWithOverflow = pkg.checkComponentEnabled(
+BreadcrumbWithOverflow = /* @__PURE__ */ pkg.checkComponentEnabled(
   BreadcrumbWithOverflow,
   componentName
 );

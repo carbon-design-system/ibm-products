@@ -77,7 +77,10 @@ FilterPanelSearch.deprecated = {
   details: `This component is deprecated`,
 };
 // Return a placeholder if not released and not enabled by feature flag
-FilterPanelSearch = pkg.checkComponentEnabled(FilterPanelSearch, componentName);
+FilterPanelSearch = /* @__PURE__ */ pkg.checkComponentEnabled(
+  FilterPanelSearch,
+  componentName
+);
 
 FilterPanelSearch.displayName = componentName;
 

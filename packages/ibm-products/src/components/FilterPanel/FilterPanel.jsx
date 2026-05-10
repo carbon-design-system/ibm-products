@@ -43,7 +43,10 @@ FilterPanel.deprecated = {
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-FilterPanel = pkg.checkComponentEnabled(FilterPanel, componentName);
+FilterPanel = /* @__PURE__ */ pkg.checkComponentEnabled(
+  FilterPanel,
+  componentName
+);
 
 FilterPanel.displayName = componentName;
 

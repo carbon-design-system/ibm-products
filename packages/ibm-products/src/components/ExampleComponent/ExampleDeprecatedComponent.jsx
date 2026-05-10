@@ -26,7 +26,7 @@ ExampleDeprecatedComponent.deprecated = {
 };
 
 // The component enable should log the deprecation
-ExampleDeprecatedComponent = pkg.checkComponentEnabled(
+ExampleDeprecatedComponent = /* @__PURE__ */ pkg.checkComponentEnabled(
   ExampleDeprecatedComponent,
   componentName
 );

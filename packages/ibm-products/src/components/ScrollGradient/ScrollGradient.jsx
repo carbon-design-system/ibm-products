@@ -220,7 +220,10 @@ export let ScrollGradient = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-ScrollGradient = pkg.checkComponentEnabled(ScrollGradient, componentName);
+ScrollGradient = /* @__PURE__ */ pkg.checkComponentEnabled(
+  ScrollGradient,
+  componentName
+);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

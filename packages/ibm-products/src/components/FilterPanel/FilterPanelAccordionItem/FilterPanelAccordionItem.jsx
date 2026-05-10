@@ -78,7 +78,7 @@ FilterPanelAccordionItem.deprecated = {
   details: `This component is deprecated`,
 };
 // Return a placeholder if not released and not enabled by feature flag
-FilterPanelAccordionItem = pkg.checkComponentEnabled(
+FilterPanelAccordionItem = /* @__PURE__ */ pkg.checkComponentEnabled(
   FilterPanelAccordionItem,
   componentName
 );

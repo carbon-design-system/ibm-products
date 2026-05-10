@@ -39,7 +39,10 @@ export let FilterPanelLabel = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-FilterPanelLabel = pkg.checkComponentEnabled(FilterPanelLabel, componentName);
+FilterPanelLabel = /* @__PURE__ */ pkg.checkComponentEnabled(
+  FilterPanelLabel,
+  componentName
+);
 
 FilterPanelLabel.displayName = componentName;
 

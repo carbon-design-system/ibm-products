@@ -178,6 +178,6 @@ NavList.propTypes = {
 NavList.displayName = componentName;
 
 // Return a placeholder if not released and not enabled by feature flag
-NavList = pkg.checkComponentEnabled(NavList, componentName);
+NavList = /* @__PURE__ */ pkg.checkComponentEnabled(NavList, componentName);
 
 export default NavList;

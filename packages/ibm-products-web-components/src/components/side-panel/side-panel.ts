@@ -8,12 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import {
-  property,
-  query,
-  queryAssignedElements,
-  state,
-} from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -27,14 +22,13 @@ import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-load
 import { moderate02 } from '@carbon/motion';
 import Handle from '../../globals/internal/handle';
 import '@carbon/web-components/es/components/button/index.js';
-import '@carbon/web-components/es/components/button/button-set-base.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
+import '../action-set/index.js';
 
 export { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT };
 
 const blockClass = `${prefix}--side-panel`;
-const blockClassActionSet = `${prefix}--action-set`;
 
 /**
  * Observes resize of the given element with the given resize observer.
@@ -99,12 +93,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @query(`.${blockClass}__inner-content`)
   private _innerContent!: HTMLElement;
 
-  @queryAssignedElements({
-    slot: 'actions',
-    selector: `${carbonPrefix}-button`,
-  })
-  private _actions!: Array<HTMLElement>;
-
   @state()
   _doAnimateTitle = true;
 
@@ -125,6 +113,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
   @state()
   _actionsCount = 0;
+
+  @state()
+  _actionsMultiple: 'single' | 'double' | 'triple' | '' = '';
 
   @state()
   _slugCloseSize = 'sm';
@@ -523,18 +514,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     }
   }
 
-  private _checkUpdateActionSizes = () => {
-    if (this._actions) {
-      for (let i = 0; i < this._actions.length; i++) {
-        this._actions[i].setAttribute(
-          'size',
-          this.condensedActions ? 'lg' : 'xl'
-        );
-      }
-    }
-  };
-
-  private _maxActions = 3;
   private _handleActionsChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const actions = target?.assignedElements();
@@ -543,28 +522,18 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._checkUpdateIconButtonSizes();
 
     const actionsCount = actions?.length ?? 0;
-    if (actionsCount > this._maxActions) {
-      this._actionsCount = this._maxActions;
-      if (process.env.NODE_ENV === 'development') {
-        console.error(`Too many side-panel actions, max ${this._maxActions}.`);
-      }
-    } else {
-      this._actionsCount = actionsCount;
-    }
+    this._actionsCount = actionsCount;
 
-    for (let i = 0; i < actions?.length; i++) {
-      if (i + 1 > this._maxActions) {
-        // hide excessive side panel actions
-        actions[i].setAttribute('hidden', 'true');
-        actions[i].setAttribute(
-          `data-actions-limit-${this._maxActions}-exceeded`,
-          `${actions.length}`
-        );
-      } else {
-        actions[i].classList.add(`${blockClassActionSet}__action-button`);
-      }
+    // Set actions-multiple attribute for container query styling
+    if (actionsCount === 1) {
+      this._actionsMultiple = 'single';
+    } else if (actionsCount === 2) {
+      this._actionsMultiple = 'double';
+    } else if (actionsCount === 3) {
+      this._actionsMultiple = 'triple';
+    } else {
+      this._actionsMultiple = '';
     }
-    this._checkUpdateActionSizes();
   }
 
   private _checkSetDoAnimateTitle = () => {
@@ -812,10 +781,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       return html``;
     }
 
-    const actionsMultiple = ['', 'single', 'double', 'triple'][
-      this._actionsCount
-    ];
-
     const titleTemplate = html` <div
       class=${`${blockClass}__title`}
       ?no-label=${!!labelText}
@@ -963,15 +928,15 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             </div>`
           : html` ${headerTemplate} ${mainTemplate}`}
 
-        <cds-button-set-base
+        <c4p-action-set
           class=${`${blockClass}__actions-container`}
           ?hidden=${this._actionsCount === 0}
-          ?condensed=${condensedActions}
-          actions-multiple=${actionsMultiple}
-          size=${size}
+          size="md"
+          button-size=${condensedActions ? 'md' : 'lg'}
+          actions-multiple=${this._actionsMultiple}
         >
           <slot name="actions" @slotchange=${this._handleActionsChange}></slot>
-        </cds-button-set-base>
+        </c4p-action-set>
       </div>
 
       ${includeOverlay
@@ -989,10 +954,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   }
 
   async updated(changedProperties) {
-    if (changedProperties.has('condensedActions')) {
-      this._checkUpdateActionSizes();
-    }
-
     if (changedProperties.has('currentStep')) {
       this._handleCurrentStepUpdate();
     }

@@ -23,7 +23,6 @@ const storyClass = 'create-full-page-stories';
  *
  * @element create-full-page-with-step-in-error-state
  */
-
 @customElement(`create-full-page-with-step-in-error-state`)
 class CreateFullPageWithStepInErrorState extends HostListenerMixin(LitElement) {
   @state()

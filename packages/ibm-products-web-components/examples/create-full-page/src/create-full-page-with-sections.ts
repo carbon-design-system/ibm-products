@@ -30,7 +30,6 @@ const storyClass = 'create-full-page-stories';
  *
  * @element create-full-page-with-sections
  */
-
 @customElement(`create-full-page-with-sections`)
 class CreateFullPageWithSections extends HostListenerMixin(LitElement) {
   @state()

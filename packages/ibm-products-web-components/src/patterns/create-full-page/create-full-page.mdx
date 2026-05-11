@@ -50,9 +50,10 @@ The CreateFullPage pattern consists of:
 - `create-full-page.ts` - Main full-page wrapper web component
 - `create-full-page-step.ts` - Individual step web component
 - `create-influencer.ts` - Progress indicator web component
-- `simple-header.ts` - Header with breadcrumbs and title
-- `breadcrumb-with-overflow.ts` - Breadcrumb with overflow handling
+- `index.ts` - Exports and component registration
 - Styles and utilities
+
+The pattern uses Carbon's `@carbon/ibm-products-web-components` page-header components for breadcrumbs and title display.
 
 ## Getting Started
 
@@ -68,7 +69,8 @@ The pattern uses:
 - **LitElement**: Base class for creating web components with reactive properties
 - **Shadow DOM**: Encapsulation for component styles and structure
 - **Carbon Web Components**: For form inputs (`cds-text-input`, `cds-number-input`, etc.), layout (`cds-grid`, `cds-column`), and UI elements
-- **Custom web components**: `simple-header`, `create-influencer`, `breadcrumb-with-overflow` for layout structure
+- **Carbon IBM Products Web Components**: `c4p-page-header`, `c4p-page-header-breadcrumbs-set` for page header and breadcrumbs
+- **Custom web components**: `create-influencer` for progress indication
 
 ### Key Features
 
@@ -187,10 +189,11 @@ The CreateFullPage pattern is built on top of:
 - **LitElement**: Base class for creating reactive web components with Shadow DOM
 - **Lit Reactive Properties**: Using `@state()` and `@property()` decorators for reactive state management
 - **Carbon Web Components**: For form inputs (`cds-text-input`, `cds-number-input`, `cds-radio-button`, etc.), layout (`cds-grid`, `cds-column`), and UI elements
+- **Carbon IBM Products Web Components**:
+  - `c4p-page-header`: Handles page header layout
+  - `c4p-page-header-breadcrumbs-set`: Handles breadcrumbs with overflow
 - **Custom Web Components**:
-  - `simple-header`: Handles breadcrumbs and page title
   - `create-influencer`: Displays vertical progress indicator
-  - `breadcrumb-with-overflow`: Handles breadcrumb overflow
 
 ### Step Management
 
@@ -207,9 +210,9 @@ Steps are managed internally by the `create-full-page` web component:
 
 The full-page layout consists of:
 
-1. **Header** (optional): Breadcrumbs and page title via SimpleHeader
+1. **Header** (optional): Breadcrumbs and page title via `c4p-page-header` and `c4p-page-header-breadcrumbs-set`
 2. **Main Content Area**:
-   - **Influencer Panel** (left): Vertical progress indicator
+   - **Influencer Panel** (left): Vertical progress indicator via `create-influencer`
    - **Form Area** (right): Step content with form fields
 3. **Footer**: Action buttons (Cancel, Back, Next/Submit)
 

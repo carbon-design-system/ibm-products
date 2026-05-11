@@ -32,7 +32,6 @@ const storyClass = 'create-full-page-stories';
  *
  * @element create-full-page-with-global-header
  */
-
 @customElement(`create-full-page-with-global-header`)
 class CreateFullPageWithGlobalHeader extends HostListenerMixin(LitElement) {
   @state()

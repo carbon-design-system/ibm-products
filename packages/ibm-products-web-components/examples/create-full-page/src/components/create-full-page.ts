@@ -12,7 +12,6 @@ import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/inline-loading/index.js';
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/ibm-products-web-components/es/components/page-header/index.js';
-import type { Breadcrumb } from './simple-header';
 import type { StepData } from './create-influencer';
 import type { ActionButton } from '@carbon/ibm-products-web-components/es/components/action-set/index.js';
 import '@carbon/ibm-products-web-components/es/components/action-set/index.js';
@@ -41,7 +40,7 @@ export class CreateFullPage extends LitElement {
    * Breadcrumbs array
    */
   @property({ type: Array })
-  breadcrumbs: Breadcrumb[] = [];
+  breadcrumbs: any[] = [];
 
   /**
    * Breadcrumbs overflow aria label

@@ -31,7 +31,6 @@ const storyClass = 'create-full-page-stories';
  *
  * @element create-full-page-with-header
  */
-
 @customElement(`create-full-page-with-header`)
 class CreateFullPageWithHeader extends HostListenerMixin(LitElement) {
   @state()

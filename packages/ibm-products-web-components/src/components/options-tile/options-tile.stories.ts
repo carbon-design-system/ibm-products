@@ -44,6 +44,49 @@ const argTypes = {
 
 const blockClass = 'options-tile';
 
+// spell-checker:disable
+const languages = [
+  { label: 'English', value: 'en' },
+  { label: '简体中文 - Chinese Simplified', value: 'zh-CN' },
+  { label: '繁體中文 - Chinese Traditional', value: 'zh-TW' },
+  { label: 'Français - French', value: 'fr' },
+  { label: 'Deutsch - German', value: 'de' },
+  { label: 'Italiano - Italian', value: 'it' },
+  { label: '日本語 - Japanese', value: 'ja' },
+  { label: '한국어 - Korean', value: 'ko' },
+  { label: 'Polski - Polish', value: 'pl' },
+  { label: 'Português (brasileiro) - Portuguese (Brazilian)', value: 'pt-BR' },
+  { label: 'Русский - Russian', value: 'ru' },
+  { label: 'Español - Spanish', value: 'es' },
+];
+
+const locales = [
+  { label: 'English', value: 'en' },
+  { label: 'English-US', value: 'en-US' },
+  { label: 'English-UK', value: 'en-UK' },
+  { label: 'English-Canada', value: 'en-CA' },
+  { label: 'English-Australia', value: 'en-AU' },
+  { label: 'Japanese', value: 'ja' },
+  { label: 'Korean', value: 'ko' },
+  { label: 'Chinese-PRC', value: 'zh-CN' },
+  { label: 'Chinese-Taiwan', value: 'zh-TW' },
+  { label: 'Vietnamese', value: 'vi' },
+  { label: 'Thai', value: 'th' },
+  { label: 'Russian', value: 'ru' },
+  { label: 'Polish', value: 'pl' },
+  { label: 'Greek', value: 'el' },
+  { label: 'Hebrew', value: 'he' },
+  { label: 'Arabic', value: 'ar' },
+  { label: 'Spanish', value: 'es' },
+  { label: 'German', value: 'de' },
+  { label: 'French', value: 'fr' },
+  { label: 'French-Canada', value: 'fr-CA' },
+  { label: 'Italian', value: 'it' },
+  { label: 'Portuguese-Brazil', value: 'pt-BR' },
+  { label: 'Turkish', value: 'tr' },
+];
+// spell-checker:enable
+
 export const Default = {
   args: {
     defaultOpen: false,
@@ -57,42 +100,57 @@ export const Default = {
       <style>
         ${styles}
       </style>
-      <c4p-options-tile
-        class=${blockClass}
-        ?defaultOpen=${args.defaultOpen}
-        id="my-tile"
-        size=${args.size}
-        titleId=${args.titleId}
-        titleText=${args.titleText}
-        @c4p-options-tile-open=${console.log('open option tile')}
-        @c4p-options-tile-close=${console.log('close option tile')}
-      >
-        <div slot="summary">
-          <span>English | Locale: English</span>
-        </div>
-        <div slot="toggle">
-          <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>
-        </div>
-        <div slot="body">
-          <div class=${`${blockClass}__body`}>
-            <p>
-              User interface defines the language the application is displayed
-              in. Locale sets the regional display formats for information like
-              time, date, currency and decimal delimiters.
-            </p>
-            <div class=${`${blockClass}__dropdown`}>
-              <cds-dropdown title-text="User interface" label="User interface">
-                <cds-dropdown-item value="option-0">English</cds-dropdown-item>
-              </cds-dropdown>
-            </div>
-            <div class=${`${blockClass}__dropdown`}>
-              <cds-dropdown title-text="Locale" label="Locale">
-                <cds-dropdown-item value="option-0">English</cds-dropdown-item>
-              </cds-dropdown>
+      <div class="${blockClass}-wrapper">
+        <c4p-options-tile
+          class=${blockClass}
+          ?defaultOpen=${args.defaultOpen}
+          id="my-tile"
+          size=${args.size}
+          titleId=${args.titleId}
+          titleText=${args.titleText}
+          @c4p-options-tile-open=${console.log('open option tile')}
+          @c4p-options-tile-close=${console.log('close option tile')}
+        >
+          <div slot="summary">
+            <span>English | Locale: English</span>
+          </div>
+          <div slot="toggle">
+            <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>
+          </div>
+          <div slot="body">
+            <div class=${`${blockClass}__body`}>
+              <p>
+                User interface defines the language the application is displayed
+                in. Locale sets the regional display formats for information
+                like time, date, currency and decimal delimiters.
+              </p>
+              <div class=${`${blockClass}__dropdown`}>
+                <cds-dropdown
+                  title-text="User interface"
+                  value="${languages[0].value}"
+                >
+                  ${languages.map(
+                    (lang) =>
+                      html`<cds-dropdown-item value="${lang.value}"
+                        >${lang.label}</cds-dropdown-item
+                      >`
+                  )}
+                </cds-dropdown>
+              </div>
+              <div class=${`${blockClass}__dropdown`}>
+                <cds-dropdown title-text="Locale" value="${locales[0].value}">
+                  ${locales.map(
+                    (locale) =>
+                      html`<cds-dropdown-item value="${locale.value}"
+                        >${locale.label}</cds-dropdown-item
+                      >`
+                  )}
+                </cds-dropdown>
+              </div>
             </div>
           </div>
-        </div>
-      </c4p-options-tile>
+        </c4p-options-tile>
+      </div>
     `;
   },
 };

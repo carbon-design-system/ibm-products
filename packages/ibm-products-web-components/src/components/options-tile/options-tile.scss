@@ -81,7 +81,32 @@ $block-class: #{$prefix}--options-tile;
     &__summary {
       @include type.type-style('helper-text-01');
 
+      display: flex;
+      align-items: center;
       color: $text-secondary;
+      gap: $spacing-02;
+
+      &--warn {
+        color: $text-primary;
+
+        svg {
+          color: $support-warning;
+
+          path[fill='none'] {
+            fill: $text-primary;
+          }
+        }
+      }
+
+      &-icon {
+        flex-shrink: 0;
+      }
+
+      &-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
 
     &__body {

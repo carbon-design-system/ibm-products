@@ -15,6 +15,7 @@ import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-lis
 import styles from './options-tile.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
@@ -56,6 +57,18 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
    */
   @property({ type: String, reflect: true })
   titleText: string = '';
+
+  /**
+   * Whether the OptionsTile is in warning validation state.
+   */
+  @property({ type: Boolean, reflect: true })
+  warn?: boolean = false;
+
+  /**
+   * Provide a text explaining why the OptionsTile is in warning state.
+   */
+  @property({ type: String, reflect: true })
+  warnText?: string = '';
 
   /**
    * Using the native toggle event handler in details can cause an infinite loop
@@ -124,7 +137,16 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    const { _open, _hasToggle, defaultOpen, size, titleId, titleText } = this;
+    const {
+      _open,
+      _hasToggle,
+      defaultOpen,
+      size,
+      titleId,
+      titleText,
+      warn,
+      warnText,
+    } = this;
     const classes = classMap({
       [`${blockClass}`]: true,
       [`${blockClass}--xl`]: size === 'xl',
@@ -134,6 +156,11 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
     const headerClasses = classMap({
       [`${blockClass}__header`]: true,
       [`${blockClass}__header--has-toggle`]: _hasToggle,
+    });
+
+    const summaryClasses = classMap({
+      [`${blockClass}__summary`]: true,
+      [`${blockClass}__summary--warn`]: !!warn,
     });
 
     return html`
@@ -157,8 +184,17 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
             })}
             <div class="${blockClass}__title-block">
               <p class="${blockClass}__title" id="${titleId}">${titleText}</p>
-              <div class="${blockClass}__summary">
-                <slot name="summary"></slot>
+              <div class="${summaryClasses}">
+                ${warn && warnText
+                  ? html`
+                      ${iconLoader(WarningAltFilled16, {
+                        class: `${blockClass}__summary-icon`,
+                      })}
+                      <span class="${blockClass}__summary-text"
+                        >${warnText}</span
+                      >
+                    `
+                  : html`<slot name="summary"></slot>`}
               </div>
             </div>
           </div>

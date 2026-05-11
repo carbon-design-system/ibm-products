@@ -23,6 +23,11 @@ const argTypes = {
     control: 'boolean',
     description: 'If `true` the body of the component is shown',
   },
+  enabled: {
+    control: 'boolean',
+    description:
+      'Whether the toggle is enabled or disabled. If nothing is passed, no toggle will be rendered.',
+  },
   size: {
     control: 'radio',
     options: ['lg', 'xl'],
@@ -39,6 +44,15 @@ const argTypes = {
   titleText: {
     control: 'text',
     description: 'Text for the title',
+  },
+  warn: {
+    control: 'boolean',
+    description: 'Whether the OptionsTile is in warning validation state.',
+  },
+  warnText: {
+    control: 'text',
+    description:
+      'Provide a text explaining why the OptionsTile is in warning state.',
   },
 };
 
@@ -90,9 +104,12 @@ const locales = [
 export const Default = {
   args: {
     defaultOpen: false,
+    enabled: true,
     size: 'lg',
     titleId: 'title-01',
     titleText: 'Language',
+    warn: false,
+    warnText: 'A restart is required to apply these settings',
   },
   argTypes,
   render: (args) => {
@@ -108,15 +125,21 @@ export const Default = {
           size=${args.size}
           titleId=${args.titleId}
           titleText=${args.titleText}
+          ?warn=${args.warn}
+          warnText=${args.warnText}
           @c4p-options-tile-open=${console.log('open option tile')}
           @c4p-options-tile-close=${console.log('close option tile')}
         >
           <div slot="summary">
             <span>English | Locale: English</span>
           </div>
-          <div slot="toggle">
-            <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>
-          </div>
+          ${args.enabled
+            ? html`
+                <div slot="toggle">
+                  <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>
+                </div>
+              `
+            : ''}
           <div slot="body">
             <div class=${`${blockClass}__body`}>
               <p>

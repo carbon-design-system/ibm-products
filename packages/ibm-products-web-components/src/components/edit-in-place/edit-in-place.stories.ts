@@ -14,6 +14,8 @@ import './_story-assets/_storybook-styles.scss';
 import { prefix } from '../../globals/settings';
 import { EDIT_IN_PLACE_SIZE, TOOLTIP_ALIGNMENT } from './defs';
 
+const storyClass = 'edit-in-place-example';
+
 const sizes = {
   [`Small (${EDIT_IN_PLACE_SIZE.SMALL})`]: EDIT_IN_PLACE_SIZE.SMALL,
   [`Medium (${EDIT_IN_PLACE_SIZE.MEDIUM})`]: EDIT_IN_PLACE_SIZE.MEDIUM,
@@ -160,6 +162,21 @@ The EditInPlace component allows users to edit text inline with save and cancel 
     },
   },
   argTypes: controls,
+  decorators: [
+    (story: any) => html`
+      <div class="ccs-sb--display-box ${storyClass}__viewport">
+        <div class="ccs-sb--display-box__indicator">
+          <div class="ccs-sb--display-box__message">
+            width available to component<br />(use containerWidth control to
+            adjust)
+          </div>
+          <div class="ccs-sb--display-box__indicator--left"></div>
+          <div class="ccs-sb--display-box__indicator--right"></div>
+        </div>
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 const Template = (args: any) => {
@@ -183,7 +200,7 @@ const Template = (args: any) => {
   } = args;
 
   return html`
-    <div style="width: ${containerWidth}px; margin: 100px;">
+    <div style="width: ${containerWidth}px;">
       <c4p-edit-in-place
         id=${ifDefined(id)}
         cancel-label=${ifDefined(cancelLabel)}
@@ -252,7 +269,7 @@ const CustomBlurTemplate = (args: any) => {
   } = args;
 
   return html`
-    <div style="width: ${containerWidth}px; margin: 100px;">
+    <div style="width: ${containerWidth}px;">
       <c4p-edit-in-place
         id=${ifDefined(id)}
         cancel-label=${ifDefined(cancelLabel)}

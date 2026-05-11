@@ -16,6 +16,7 @@ import styles from './options-tile.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16';
+import Locked16 from '@carbon/icons/es/locked/16';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
@@ -57,6 +58,18 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
    */
   @property({ type: String, reflect: true })
   titleText: string = '';
+
+  /**
+   * Whether the OptionsTile is in locked validation state.
+   */
+  @property({ type: Boolean, reflect: true })
+  locked?: boolean = false;
+
+  /**
+   * Provide a text explaining why the OptionsTile is in locked state.
+   */
+  @property({ type: String, reflect: true })
+  lockedText?: string = '';
 
   /**
    * Whether the OptionsTile is in warning validation state.
@@ -144,6 +157,8 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
       size,
       titleId,
       titleText,
+      locked,
+      lockedText,
       warn,
       warnText,
     } = this;
@@ -161,6 +176,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
     const summaryClasses = classMap({
       [`${blockClass}__summary`]: true,
       [`${blockClass}__summary--warn`]: !!warn,
+      [`${blockClass}__summary--locked`]: !!locked,
     });
 
     return html`
@@ -185,16 +201,25 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
             <div class="${blockClass}__title-block">
               <p class="${blockClass}__title" id="${titleId}">${titleText}</p>
               <div class="${summaryClasses}">
-                ${warn && warnText
+                ${locked && lockedText
                   ? html`
-                      ${iconLoader(WarningAltFilled16, {
+                      ${iconLoader(Locked16, {
                         class: `${blockClass}__summary-icon`,
                       })}
                       <span class="${blockClass}__summary-text"
-                        >${warnText}</span
+                        >${lockedText}</span
                       >
                     `
-                  : html`<slot name="summary"></slot>`}
+                  : warn && warnText
+                    ? html`
+                        ${iconLoader(WarningAltFilled16, {
+                          class: `${blockClass}__summary-icon`,
+                        })}
+                        <span class="${blockClass}__summary-text"
+                          >${warnText}</span
+                        >
+                      `
+                    : html`<slot name="summary"></slot>`}
               </div>
             </div>
           </div>

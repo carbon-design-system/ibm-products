@@ -45,6 +45,15 @@ const argTypes = {
     control: 'text',
     description: 'Text for the title',
   },
+  locked: {
+    control: 'boolean',
+    description: 'Whether the OptionsTile is in locked validation state.',
+  },
+  lockedText: {
+    control: 'text',
+    description:
+      'Provide a text explaining why the OptionsTile is in locked state.',
+  },
   warn: {
     control: 'boolean',
     description: 'Whether the OptionsTile is in warning validation state.',
@@ -108,6 +117,8 @@ export const Default = {
     size: 'lg',
     titleId: 'title-01',
     titleText: 'Language',
+    locked: false,
+    lockedText: 'This option is managed by your administrator',
     warn: false,
     warnText: 'A restart is required to apply these settings',
   },
@@ -125,6 +136,8 @@ export const Default = {
           size=${args.size}
           titleId=${args.titleId}
           titleText=${args.titleText}
+          ?locked=${args.locked}
+          lockedText=${args.lockedText}
           ?warn=${args.warn}
           warnText=${args.warnText}
           @c4p-options-tile-open=${console.log('open option tile')}

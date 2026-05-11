@@ -10,6 +10,7 @@ $css--plex: true !default;
 @use 'sass:map';
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/config' as carbon-config;
@@ -86,6 +87,10 @@ $block-class: #{$prefix}--options-tile;
       color: $text-secondary;
       gap: $spacing-02;
 
+      &--locked {
+        color: $text-secondary;
+      }
+
       &--warn {
         color: $text-primary;
 
@@ -93,7 +98,7 @@ $block-class: #{$prefix}--options-tile;
           color: $support-warning;
 
           path[fill='none'] {
-            fill: $text-primary;
+            fill: $black-100;
           }
         }
       }

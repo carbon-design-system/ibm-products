@@ -31,26 +31,26 @@ export const CreateFullPage = {
   },
 };
 
-export const CreateFullPageWithSections = {
-  render: () => {
-    return html`<create-full-page-with-sections></<create-full-page-with-sections>`;
-  },
-};
+// export const CreateFullPageWithSections = {
+//   render: () => {
+//     return html`<create-full-page-with-sections></<create-full-page-with-sections>`;
+//   },
+// };
 
-export const CreateFullPageWithHeader = {
-  render: () => {
-    return html`<create-full-page-with-header></<create-full-page-with-header>`;
-  },
-};
+// export const CreateFullPageWithHeader = {
+//   render: () => {
+//     return html`<create-full-page-with-header></<create-full-page-with-header>`;
+//   },
+// };
 
-export const CreateFullPageWithStepInErrorState = {
-  render: () => {
-    return html`<create-full-page-with-step-in-error-state></<create-full-page-with-step-in-error-state>`;
-  },
-};
+// export const CreateFullPageWithStepInErrorState = {
+//   render: () => {
+//     return html`<create-full-page-with-step-in-error-state></<create-full-page-with-step-in-error-state>`;
+//   },
+// };
 
-export const CreateFullPageWithGlobalHeader = {
-  render: () => {
-    return html`<create-full-page-with-global-header></<create-full-page-with-global-header>`;
-  },
-};
+// export const CreateFullPageWithGlobalHeader = {
+//   render: () => {
+//     return html`<create-full-page-with-global-header></<create-full-page-with-global-header>`;
+//   },
+// };

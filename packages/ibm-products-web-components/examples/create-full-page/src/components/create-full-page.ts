@@ -11,11 +11,15 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/inline-loading/index.js';
 import '@carbon/web-components/es/components/modal/index.js';
-import '@carbon/ibm-products-web-components/es/components/page-header/index.js';
 import type { StepData } from './create-influencer';
 import type { ActionButton } from '@carbon/ibm-products-web-components/es/components/action-set/index.js';
 import '@carbon/ibm-products-web-components/es/components/action-set/index.js';
 import styles from './create-full-page.scss?lit';
+if (!customElements.get('c4p-page-header')) {
+  await import(
+    '@carbon/ibm-products-web-components/es/components/page-header/index.js'
+  );
+}
 
 const blockClass = 'create-full-page-pattern';
 

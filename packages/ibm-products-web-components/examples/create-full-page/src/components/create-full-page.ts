@@ -15,11 +15,6 @@ import type { StepData } from './create-influencer';
 import type { ActionButton } from '@carbon/ibm-products-web-components/es/components/action-set/index.js';
 import '@carbon/ibm-products-web-components/es/components/action-set/index.js';
 import styles from './create-full-page.scss?lit';
-if (!customElements.get('c4p-page-header')) {
-  await import(
-    '@carbon/ibm-products-web-components/es/components/page-header/index.js'
-  );
-}
 
 const blockClass = 'create-full-page-pattern';
 

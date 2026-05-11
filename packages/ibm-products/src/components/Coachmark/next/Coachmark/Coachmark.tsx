@@ -90,6 +90,10 @@ export interface CoachmarkPropsNext {
    * If not provided, no automatic focus management will occur.
    */
   selectorPrimaryFocus?: string;
+  /**
+   * Optional ref for an external trigger element, used when the trigger is not part of the coachmark.
+   */
+  triggerRef?: RefObject<HTMLElement>;
 }
 
 type CoachmarkContentComponent = FC<CoachmarkContentProps> & {
@@ -122,9 +126,11 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       highContrast,
       caret,
       selectorPrimaryFocus,
+      triggerRef: triggerRefProp,
       ...rest
     } = props;
-    const triggerRef = useRef<HTMLElement>(null);
+    const internalTriggerRef = useRef<HTMLElement>(null);
+    const triggerRef = triggerRefProp ?? internalTriggerRef;
     const internalRef = useRef<HTMLDivElement | null>(null);
     const [contentRef, setContentRef] = useState<HTMLElement | null>(null);
     const [openState, setOpenState] = useState(false);
@@ -143,6 +149,10 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       caret !== undefined ? caret : floating === true ? false : true;
 
     useEffect(() => {
+      if (triggerRefProp?.current) {
+        return;
+      }
+
       const container = internalRef.current;
       if (!container) {
         return;
@@ -159,14 +169,14 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       if (firstFocusable) {
         triggerRef.current = firstFocusable;
       }
-    }, [children]);
+    }, [children, triggerRef, triggerRefProp]);
 
     useEffect(() => {
       const el = triggerRef.current;
       if (el) {
         el.setAttribute('aria-expanded', String(!!open));
       }
-    }, [open]);
+    }, [open, triggerRef]);
 
     // Reset position when coachmark closes
     useEffect(() => {
@@ -237,6 +247,17 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
             highContrast={highContrast ?? true}
             dropShadow={dropShadow}
           >
+            {triggerRefProp?.current ? (
+              <span
+                aria-hidden="true"
+                style={{ display: 'contents' }}
+                ref={(node) => {
+                  if (node && triggerRefProp.current) {
+                    node.replaceWith(triggerRefProp.current);
+                  }
+                }}
+              />
+            ) : null}
             {children}
           </Popover>
         </div>
@@ -303,4 +324,10 @@ Coachmark.propTypes = {
    * CSS selector for the element that should receive focus when the coachmark opens.
    */
   selectorPrimaryFocus: PropTypes.string,
+  /**
+   * Optional ref for an external trigger element, used when the trigger is not part of the coachmark.
+   */
+  triggerRef: PropTypes.shape({
+    current: PropTypes.any,
+  }),
 };

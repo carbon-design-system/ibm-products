@@ -149,7 +149,12 @@ export const Default = {
           ${args.enabled
             ? html`
                 <div slot="toggle">
-                  <cds-toggle id="my-toggle" size="sm" hideLabel></cds-toggle>
+                  <cds-toggle
+                    id="my-toggle"
+                    size="sm"
+                    hideLabel
+                    ?disabled=${args.locked}
+                  ></cds-toggle>
                 </div>
               `
             : ''}

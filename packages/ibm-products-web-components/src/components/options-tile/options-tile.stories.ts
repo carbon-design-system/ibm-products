@@ -196,6 +196,45 @@ export const Default = {
   },
 };
 
+export const StaticOptionsTile = {
+  args: {
+    defaultOpen: false,
+    enabled: false,
+    locked: false,
+    lockedText: 'This option is managed by your administrator',
+    size: 'lg',
+    titleId: 'title-id-static',
+    titleText: 'Language',
+    warn: false,
+    warnText: 'A restart is required to apply these settings',
+  },
+  argTypes,
+  render: (args) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div class="${blockClass}-wrapper">
+        <c4p-options-tile
+          class=${blockClass}
+          id="my-tile-static"
+          size=${args.size}
+          titleId=${args.titleId}
+          titleText=${args.titleText}
+          ?locked=${args.locked}
+          lockedText=${args.lockedText}
+          ?warn=${args.warn}
+          warnText=${args.warnText}
+        >
+          <div slot="summary">
+            <span>English | Locale: English</span>
+          </div>
+        </c4p-options-tile>
+      </div>
+    `;
+  },
+};
+
 const meta = {
   title: 'Components/OptionsTile',
 };

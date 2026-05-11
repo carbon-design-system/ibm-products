@@ -97,6 +97,12 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
   @state()
   private _hasToggle = false;
 
+  /**
+   * Tracks whether the body slot has content
+   */
+  @state()
+  private _hasBody = false;
+
   static get eventOpen() {
     return `${blockEvent}-open`;
   }
@@ -109,6 +115,12 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
     const target = e.target as HTMLSlotElement;
     const toggleElements = target?.assignedElements();
     this._hasToggle = toggleElements && toggleElements.length > 0;
+  }
+
+  private _handleBodySlotChange(e: Event) {
+    const target = e.target as HTMLSlotElement;
+    const bodyElements = target?.assignedElements();
+    this._hasBody = bodyElements && bodyElements.length > 0;
   }
 
   private _toggle(evt: ToggleEvent) {
@@ -153,6 +165,7 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
     const {
       _open,
       _hasToggle,
+      _hasBody,
       defaultOpen,
       size,
       titleId,
@@ -179,58 +192,79 @@ class CDSOptionsTile extends HostListenerMixin(LitElement) {
       [`${blockClass}__summary--locked`]: !!locked,
     });
 
-    return html`
-      <details
-        @toggle=${this._toggle}
-        class="${classes}"
-        part="options-tile"
-        open=${defaultOpen || nothing}
-      >
-        <summary class="${headerClasses}">
-          <div class="${blockClass}__header-right">
-            <slot
-              name="toggle"
-              @slotchange=${this._handleToggleSlotChange}
-            ></slot>
-          </div>
-          <div class="${blockClass}__header-left">
-            ${iconLoader(ChevronDown16, {
-              slot: 'icon',
-              class: `${blockClass}__chevron`,
-            })}
-            <div class="${blockClass}__title-block">
-              <p class="${blockClass}__title" id="${titleId}">${titleText}</p>
-              <div class="${summaryClasses}">
-                ${locked && lockedText
-                  ? html`
-                      ${iconLoader(Locked16, {
-                        class: `${blockClass}__summary-icon`,
-                      })}
-                      <span class="${blockClass}__summary-text"
-                        >${lockedText}</span
-                      >
-                    `
-                  : warn && warnText
-                    ? html`
-                        ${iconLoader(WarningAltFilled16, {
-                          class: `${blockClass}__summary-icon`,
-                        })}
-                        <span class="${blockClass}__summary-text"
-                          >${warnText}</span
-                        >
-                      `
-                    : html`<slot name="summary"></slot>`}
+    const renderTitle = () => html`
+      <div class="${blockClass}__title-block">
+        <p class="${blockClass}__title" id="${titleId}">${titleText}</p>
+        <div class="${summaryClasses}">
+          ${locked && lockedText
+            ? html`
+                ${iconLoader(Locked16, {
+                  class: `${blockClass}__summary-icon`,
+                })}
+                <span class="${blockClass}__summary-text">${lockedText}</span>
+              `
+            : warn && warnText
+              ? html`
+                  ${iconLoader(WarningAltFilled16, {
+                    class: `${blockClass}__summary-icon`,
+                  })}
+                  <span class="${blockClass}__summary-text">${warnText}</span>
+                `
+              : html`<slot name="summary"></slot>`}
+        </div>
+      </div>
+    `;
+
+    return _hasBody
+      ? html`
+          <details
+            @toggle=${this._toggle}
+            class="${classes}"
+            part="options-tile"
+            open=${defaultOpen || nothing}
+          >
+            <summary class="${headerClasses}">
+              <div class="${blockClass}__header-right">
+                <slot
+                  name="toggle"
+                  @slotchange=${this._handleToggleSlotChange}
+                ></slot>
               </div>
+              <div class="${blockClass}__header-left">
+                ${iconLoader(ChevronDown16, {
+                  slot: 'icon',
+                  class: `${blockClass}__chevron`,
+                })}
+                ${renderTitle()}
+              </div>
+            </summary>
+            <div class="${blockClass}__body">
+              <cds-layer level="1">
+                <slot
+                  name="body"
+                  @slotchange=${this._handleBodySlotChange}
+                ></slot>
+              </cds-layer>
+            </div>
+          </details>
+        `
+      : html`
+          <div class="${classes}">
+            <div class="${blockClass}__static-content">
+              <slot
+                name="toggle"
+                @slotchange=${this._handleToggleSlotChange}
+                style="display: none;"
+              ></slot>
+              <slot
+                name="body"
+                @slotchange=${this._handleBodySlotChange}
+                style="display: none;"
+              ></slot>
+              ${renderTitle()}
             </div>
           </div>
-        </summary>
-        <div class="${blockClass}__body">
-          <cds-layer level="1">
-            <slot name="body"></slot>
-          </cds-layer>
-        </div>
-      </details>
-    `;
+        `;
   }
 
   static styles = styles;

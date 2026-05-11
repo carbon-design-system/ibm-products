@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,6 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import './_story-assets/_storybook-styles.scss';
-import { prefix } from '../../globals/settings';
 import { EDIT_IN_PLACE_SIZE, TOOLTIP_ALIGNMENT } from './defs';
 
 const storyClass = 'edit-in-place-example';

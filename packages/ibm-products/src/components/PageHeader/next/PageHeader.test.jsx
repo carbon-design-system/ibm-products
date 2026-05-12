@@ -82,12 +82,7 @@ describe('PageHeader', () => {
 
     it('should update css variable for sticky positioning', () => {
       const testId = 'page-header-next-test-id';
-      const DefaultStory = composeStory(Default, meta, {
-        args: {
-          'data-testid': testId,
-        },
-      });
-      render(<DefaultStory />);
+      render(<Default {...Default.args} data-testid={testId} />);
       triggerResize();
       const computedStyle = window.getComputedStyle(screen.getByTestId(testId));
       expect(
@@ -103,8 +98,7 @@ describe('PageHeader', () => {
     });
 
     it('supports dot notation component namespacing from the main entrypoint', () => {
-      const DefaultStory = composeStory(Default, meta);
-      const { container } = render(<DefaultStory />);
+      const { container } = render(<Default {...Default.args} />);
       expect(container.firstChild).toBeInTheDocument();
     });
 
@@ -127,13 +121,9 @@ describe('PageHeader', () => {
     });
 
     it('should place className on the outermost element', () => {
-      const DefaultStory = composeStory(Default, meta, {
-        args: {
-          className: 'custom-class',
-          role: 'banner',
-        },
-      });
-      render(<DefaultStory />);
+      render(
+        <Default {...Default.args} className="custom-class" role="banner" />
+      );
       const pageHeaderOuter = screen.getByRole('banner');
       expect(pageHeaderOuter).toHaveClass('custom-class');
     });
@@ -176,12 +166,7 @@ describe('PageHeader', () => {
     });
 
     it('should render breadcrumb items', () => {
-      const DefaultStory = composeStory(Default, meta, {
-        args: {
-          role: 'banner',
-        },
-      });
-      render(<DefaultStory />);
+      render(<Default {...Default.args} role="banner" />);
 
       const pageHeaderOuter = screen.getByRole('banner');
       const breadcrumbs = pageHeaderOuter.getElementsByClassName(
@@ -481,8 +466,7 @@ describe('PageHeader', () => {
     });
 
     it('should use a custom menuButtonLabel if provided', () => {
-      const CompactStory = composeStory(Compact, meta);
-      render(<CompactStory />);
+      render(<Compact {...Compact.args} />);
       expect(screen.getByText('Actions')).toBeInTheDocument();
     });
 
@@ -543,8 +527,7 @@ describe('PageHeader', () => {
     });
 
     it('should render a subtitle', () => {
-      const DefaultStory = composeStory(Default, meta);
-      render(<DefaultStory />);
+      render(<Default {...Default.args} />);
 
       expect(screen.getByText('Subtitle')).toBeInTheDocument();
     });

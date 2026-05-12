@@ -8,8 +8,7 @@
 import React, { cloneElement } from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { composeStory } from '@storybook/react-vite';
-import meta, { Compact, Default } from './PageHeader.stories';
+import { Compact, Default } from './PageHeader.stories';
 import { preview__PageHeader as PageHeader, pkg } from '../../..';
 import {
   PageHeader as PageHeaderDirect,

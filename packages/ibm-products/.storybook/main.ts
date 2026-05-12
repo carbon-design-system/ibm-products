@@ -1,23 +1,22 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import type { StorybookConfig } from '@storybook/react-vite';
+
 import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 
 import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
-import { dirname, join, resolve } from 'path';
+import { resolve } from 'path';
 import { getAutoTrack } from '../../../scripts/get-auto-track-script.js';
 
-function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, 'package.json')));
-}
-
 const require = createRequire(import.meta.url);
+const configDir = fileURLToPath(new URL('.', import.meta.url));
 
 // Expand glob patterns to explicit file paths for Chromatic compatibility
 const storyGlobs = [
@@ -29,16 +28,16 @@ const storyGlobs = [
 ];
 
 const stories = glob.sync(storyGlobs, {
-  cwd: __dirname,
+  cwd: configDir,
 });
 
-export default {
+const config: StorybookConfig = {
   staticDirs: ['../public'],
 
   addons: [
-    getAbsolutePath('@storybook/addon-a11y'),
-    getAbsolutePath('storybook-addon-accessibility-checker'),
-    getAbsolutePath('@storybook/addon-links'),
+    '@storybook/addon-a11y',
+    'storybook-addon-accessibility-checker',
+    '@storybook/addon-links',
     {
       name: '@storybook/addon-docs',
       options: {
@@ -52,13 +51,12 @@ export default {
   ],
 
   features: {
-    previewCsfV3: true,
-    buildStoriesJson: true,
     interactions: false, // disable Interactions tab
   },
 
   framework: {
-    name: getAbsolutePath('@storybook/react-vite'),
+    name: '@storybook/react-vite',
+    options: {},
   },
 
   stories,
@@ -86,7 +84,7 @@ export default {
       build: {
         sourcemap: true,
         rollupOptions: {
-          onLog(level, log, handler) {
+          onLog(level: any, log: any, handler: any) {
             // https://github.com/vitejs/vite/issues/15012#issuecomment-1815854072
             if (log.code === 'MODULE_LEVEL_DIRECTIVE') {
               return;
@@ -117,7 +115,7 @@ export default {
               : '../ibm-products-styles/src/config.scss'
           ),
           '@carbon/ibm-products': resolve(
-            __dirname,
+            configDir,
             '../src/components/index.ts'
           ),
         },
@@ -138,7 +136,8 @@ export default {
   },
 
   docs: {
-    autodocs: 'tag',
     defaultName: 'Overview',
   },
 };
+
+export default config;

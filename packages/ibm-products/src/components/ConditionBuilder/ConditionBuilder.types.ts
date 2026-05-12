@@ -174,6 +174,14 @@ type AddItemConfig = {
   group?: ConditionGroup;
 };
 
+type RemoveItemType = 'condition' | 'subgroup' | 'group' | 'action';
+type RemoveItemConfig = {
+  type: RemoveItemType;
+  state: ConditionBuilderState;
+  item?: Condition | ConditionGroup | Action;
+  group?: ConditionGroup;
+};
+
 type ConditionBuilderTextKeys =
   | 'ifText'
   | 'unlessText'
@@ -241,6 +249,7 @@ export type ConditionBuilderProps = {
   translateWithId?: (id: ConditionBuilderTextKeys) => string;
   statementConfigCustom: statementConfig[];
   onAddItem?: (config: AddItemConfig) => { preventAdd: boolean };
+  onRemoveItem?: (config: RemoveItemConfig) => { preventRemove: boolean };
   readOnly?: boolean;
 };
 
@@ -270,4 +279,5 @@ export type ConditionBuilderContextProps = {
   actionState?: Action[];
   setActionState?: Dispatch<SetStateAction<Action[]>>;
   onAddItem?: (config: AddItemConfig) => { preventAdd: boolean };
+  onRemoveItem?: (config: RemoveItemConfig) => { preventRemove: boolean };
 } & ConditionBuilderContextInputProps;

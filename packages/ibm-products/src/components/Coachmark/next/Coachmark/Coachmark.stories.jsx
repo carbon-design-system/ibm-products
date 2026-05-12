@@ -216,6 +216,63 @@ const FloatingTemplate = ({ ...args }, context) => {
   );
 };
 
+const TriggerRefTemplate = ({ ...args }, context) => {
+  const sbDocs = context.viewMode !== 'docs';
+  const carbonTheme = sbDocs ? useCarbonTheme() : 'white';
+  const [isOpen, setIsOpen] = useState(true);
+  const triggerButtonRef = useRef(null);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setTimeout(() => {
+      triggerButtonRef.current?.focus();
+    }, 0);
+  };
+
+  const handleButtonClick = () => {
+    setIsOpen((open) => !open);
+  };
+
+  return (
+    <Theme theme={carbonTheme}>
+      <main style={{ marginLeft: '100px' }}>
+        <Button
+          id="CoachmarkTriggerRefBtn"
+          kind="tertiary"
+          size="md"
+          renderIcon={Crossroads}
+          onClick={handleButtonClick}
+          ref={triggerButtonRef}
+        >
+          Show information
+        </Button>
+        <Coachmark
+          open={isOpen}
+          onClose={handleClose}
+          triggerRef={triggerButtonRef}
+          selectorPrimaryFocus=".coachmark-trigger-ref-done-button"
+          {...args}
+        >
+          <Coachmark.Content>
+            <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
+            <Coachmark.Content.Body>
+              <h2>Hello World</h2>
+              <p>Coachmark using the triggerRef prop.</p>
+              <Button
+                size="sm"
+                className="coachmark-trigger-ref-done-button"
+                onClick={handleClose}
+              >
+                Done
+              </Button>
+            </Coachmark.Content.Body>
+          </Coachmark.Content>
+        </Coachmark>
+      </main>
+    </Theme>
+  );
+};
+
 /**
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
@@ -227,5 +284,10 @@ Tooltip.args = {
 
 export const Floating = FloatingTemplate.bind({});
 Floating.args = {
+  align: 'bottom',
+};
+
+export const TriggerRef = TriggerRefTemplate.bind({});
+TriggerRef.args = {
   align: 'bottom',
 };

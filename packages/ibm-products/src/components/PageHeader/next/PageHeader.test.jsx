@@ -349,6 +349,44 @@ describe('PageHeader', () => {
       const buttonElement = screen.getByText(/page actions/i);
       expect(buttonElement).toBeInTheDocument();
     });
+
+    it('should render functional content page actions', () => {
+      render(
+        <PageHeader.Root>
+          <PageHeader.Content
+            title="title"
+            pageActions={() => <button>functional page actions</button>}
+          />
+        </PageHeader.Root>
+      );
+
+      expect(screen.getByText(/functional page actions/i)).toBeInTheDocument();
+    });
+
+    it('should render functional breadcrumb actions without errors', () => {
+      render(
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar
+            contentActions={() => <button>functional content actions</button>}
+            pageActions={() => (
+              <button>functional breadcrumb page actions</button>
+            )}
+          >
+            <Breadcrumb>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+            </Breadcrumb>
+          </PageHeader.BreadcrumbBar>
+        </PageHeader.Root>
+      );
+
+      expect(
+        screen.getByText(/functional content actions/i)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(/functional breadcrumb page actions/i)
+      ).toBeInTheDocument();
+    });
   });
 
   describe('PageHeader.ContentPageActions component api', () => {

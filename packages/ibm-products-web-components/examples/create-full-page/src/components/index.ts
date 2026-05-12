@@ -8,17 +8,6 @@ export { CreateFullPage } from './create-full-page';
 export { CreateFullPageStep } from './create-full-page-step';
 export { CreateInfluencer } from './create-influencer';
 
-const globalScope = globalThis as typeof globalThis & {
-  __c4pPageHeaderLoaded?: boolean;
-};
-
-if (!globalScope.__c4pPageHeaderLoaded) {
-  globalScope.__c4pPageHeaderLoaded = true;
-
-  await import(
-    '@carbon/ibm-products-web-components/es/components/page-header/index.js'
-  );
-}
 // Import all components to register them
 import './create-full-page';
 import './create-full-page-step';

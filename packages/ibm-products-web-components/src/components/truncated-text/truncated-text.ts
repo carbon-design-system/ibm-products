@@ -230,17 +230,25 @@ export class CDSTruncatedText extends LitElement {
       </div>
     `;
 
-    const tooltipVariant = html`
-      <cds-tooltip
-        align=${this.align}
-        autoalign=${this.autoalign}
-        enter-delay-ms="0"
-        leave-delay-ms="0"
-      >
-        ${valueBody}
-        <cds-tooltip-content>${this.value}</cds-tooltip-content>
-      </cds-tooltip>
-    `;
+    const tooltipVariant = this._isOverflowing
+      ? html`
+          <cds-tooltip
+            align=${this.align}
+            autoalign=${this.autoalign}
+            enter-delay-ms="0"
+            leave-delay-ms="0"
+          >
+            <button
+              type="button"
+              class="${blockClass}_tooltip-trigger"
+              aria-label=${this.value}
+            >
+              ${valueBody}
+            </button>
+            <cds-tooltip-content>${this.value}</cds-tooltip-content>
+          </cds-tooltip>
+        `
+      : valueBody;
 
     const expandVariant = html`${valueBody} ${this._renderToggleButton()}`;
 

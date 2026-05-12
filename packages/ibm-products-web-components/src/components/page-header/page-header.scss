@@ -258,24 +258,39 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-hero-image) {
-  // TODO: remove above styles when styles from React have been migrated
-  // and use the extend below
-  // @extend .#{$prefix}--page-header__hero-image;
+  // Aspect ratio container - matches Carbon's AspectRatio component
   position: relative;
-  display: flex;
+  display: block;
   overflow: hidden;
-  align-items: center;
-  justify-content: flex-end;
   block-size: 100%;
+
+  // The inner div with hero-image class needs to be absolutely positioned
+  // to overlay on the aspect ratio padding
+  .#{$prefix}--page-header__hero-image {
+    position: absolute;
+    inset: 0;
+  }
+
+  // Styles for slotted content - needed for shadow DOM
+  ::slotted(picture) {
+    display: flex;
+    justify-content: center;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  ::slotted(img) {
+    display: block;
+    block-size: 100%;
+    inline-size: 100%;
+    object-fit: var(--object-fit, cover);
+    object-position: var(--object-position, center);
+  }
 }
 
 :host(#{$prefix}-page-header-hero-image)::before {
-  block-size: 0;
+  display: block;
   content: '';
-  float: inline-start;
-  inline-size: 1px;
-  margin-inline-start: -1px;
-
   padding-block-start: math.percentage(math.div(2, 3));
 
   @include grid.breakpoint-up('lg') {

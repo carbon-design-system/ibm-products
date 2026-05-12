@@ -975,6 +975,49 @@ $duration: 1000ms;
     align-items: center;
     justify-content: flex-end;
     block-size: 100%;
+
+    // Object-fit styles for images
+    &--object-fit-cover,
+    &--object-fit-contain,
+    &--object-fit-fill,
+    &--object-fit-none {
+      picture,
+      img {
+        block-size: 100%;
+        inline-size: 100%;
+      }
+    }
+
+    &--object-fit-cover {
+      picture,
+      img {
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    &--object-fit-contain {
+      picture,
+      img {
+        object-fit: contain;
+        object-position: center;
+      }
+    }
+
+    &--object-fit-fill {
+      picture,
+      img {
+        object-fit: fill;
+      }
+    }
+
+    &--object-fit-none {
+      picture,
+      img {
+        object-fit: none;
+        object-position: center;
+      }
+    }
   }
 
   .#{$block-class}__tab-bar {

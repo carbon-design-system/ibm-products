@@ -78,6 +78,7 @@ export const PageHeaderContentPageActions = ({
   const offsetRef = useRef<HTMLDivElement>(null);
   const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
   const [hiddenItems, setHiddenItems] = useState<action[]>([]);
+  const [hasMounted, setHasMounted] = useState(false);
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
@@ -92,6 +93,10 @@ export const PageHeaderContentPageActions = ({
   }, [menuButtonVisibility]);
 
   useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
     if (isInBreadcrumbBar) {
       setRefs((prev) => ({ ...prev, breadcrumbActions: containerRef }));
     } else {
@@ -100,7 +105,7 @@ export const PageHeaderContentPageActions = ({
   }, [isInBreadcrumbBar, setRefs]);
 
   useEffect(() => {
-    if (!containerRef.current || !Array.isArray(actions)) {
+    if (!hasMounted || !containerRef.current || !Array.isArray(actions)) {
       return;
     }
     createOverflowHandler({
@@ -115,7 +120,7 @@ export const PageHeaderContentPageActions = ({
         }
       },
     });
-  }, [actions]);
+  }, [actions, hasMounted]);
 
   return (
     <div className={classNames} ref={containerRef} {...other}>
@@ -130,19 +135,21 @@ export const PageHeaderContentPageActions = ({
             </div>
           ))}
           <span data-offset data-hidden ref={offsetRef}>
-            <MenuButton
-              menuAlignment="bottom-end"
-              label={menuButtonLabel}
-              size="md"
-            >
-              {[...hiddenItems].reverse().map((item) => (
-                <MenuItem
-                  key={item.id}
-                  onClick={item.onClick}
-                  {...item.menuItem}
-                />
-              ))}
-            </MenuButton>
+            {hasMounted ? (
+              <MenuButton
+                menuAlignment="bottom-end"
+                label={menuButtonLabel}
+                size="md"
+              >
+                {[...hiddenItems].reverse().map((item) => (
+                  <MenuItem
+                    key={item.id}
+                    onClick={item.onClick}
+                    {...item.menuItem}
+                  />
+                ))}
+              </MenuButton>
+            ) : null}
           </span>
         </>
       )}

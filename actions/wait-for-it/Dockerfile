@@ -1,7 +1,8 @@
-FROM node:slim
+FROM node:22.22.2-slim
 
 WORKDIR /usr/src/action
-COPY . .
-RUN yarn install --production
+COPY package.json ./
+RUN corepack enable && yarn install --production
+COPY src ./src
 ENTRYPOINT ["node", "/usr/src/action/src/index.js"]
 

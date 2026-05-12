@@ -293,32 +293,71 @@ $carbon-prefix: 'cds';
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__tab-bar;
+  position: relative;
+
+  .#{$carbon-prefix}--css-grid {
+    // On small screens, use flex to keep grid and scroller on same line
+    display: flex;
+    align-items: center;
+
+    // On max breakpoint and above, use grid for proper Carbon alignment
+    @include breakpoint(max) {
+      display: grid;
+    }
+  }
+
   .#{$carbon-prefix}--css-grid .#{$carbon-prefix}--css-grid-column {
+    // On small screens, allow column to flex
+    flex: 1;
     margin: 0;
+    min-inline-size: 0;
+
+    @include breakpoint(max) {
+      flex: none;
+    }
   }
 }
 
 :host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tab-bar--tablist {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  inline-size: 100%;
+  align-items: center;
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='tags']) {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: right;
-  inline-size: 100%;
-  max-inline-size: 500px;
+  justify-content: flex-end;
+  inline-size: 40%;
+  margin-inline-start: auto;
+  min-inline-size: 0;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__tags;
 }
 
+// When scroller is present, adjust tags styling
+:host(#{$prefix}-page-header-tabs:has([slot='scroller']))
+  ::slotted([slot='tags']) {
+  transform: translateX(calc($spacing-06 * -1));
+
+  @include breakpoint(md) {
+    padding-inline-end: $spacing-03;
+    transform: translateX(0);
+  }
+  @include breakpoint(max) {
+    padding-inline-end: $spacing-05;
+  }
+}
+
+// Scroller positioning: relative on small screens, absolute on max+
 :host(#{$prefix}-page-header-tabs) ::slotted([slot='scroller']) {
-  position: absolute;
-  inset-inline-end: 0;
+  position: relative;
+
+  @include breakpoint(max) {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
 }
 
 :host(#{$prefix}-page-header-breadcrumb),

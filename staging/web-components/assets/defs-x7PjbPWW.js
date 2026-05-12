@@ -1,0 +1,1 @@
+let r=(function(e){return e.LARGE="lg",e.MEDIUM="md",e.SMALL="sm",e})({}),a=(function(e){return e.RED="red",e.MAGENTA="magenta",e.PURPLE="purple",e.BLUE="blue",e.CYAN="cyan",e.TEAL="teal",e.GREEN="green",e.GRAY="gray",e["COOL-GRAY"]="cool-gray",e["WARM-GRAY"]="warm-gray",e})({});export{r as T,a};

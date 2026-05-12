@@ -1,0 +1,1 @@
+let R=(function(r){return r.PRIMARY="primary",r.SECONDARY="secondary",r.TERTIARY="tertiary",r.GHOST="ghost",r.DANGER="danger",r.DANGER_PRIMARY="danger-primary",r.DANGER_TERTIARY="danger-tertiary",r.DANGER_GHOST="danger-ghost",r})({});export{R as B};

@@ -49,7 +49,7 @@ $block-class: #{$prefix}--truncated-text;
     text-overflow: clip;
     white-space: normal;
 
-    &:focus {
+    &:focus-visible {
       @include focus-outline('outline');
     }
   }
@@ -62,9 +62,24 @@ $block-class: #{$prefix}--truncated-text;
     display: inline-flex;
   }
 
-  button:focus,
-  .#{$block-class}_button-expand:focus,
-  .#{$block-class}_button-collapse:focus {
+  .#{$block-class}_tooltip-trigger {
+    display: inline;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: default;
+    font: inherit;
+    text-align: inherit;
+
+    &:focus-visible {
+      @include focus-outline('outline');
+    }
+  }
+
+  button:focus-visible,
+  .#{$block-class}_button-expand:focus-visible,
+  .#{$block-class}_button-collapse:focus-visible {
     @include focus-outline('outline');
   }
 }

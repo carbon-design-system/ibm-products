@@ -11,7 +11,6 @@ import React, {
   useState,
   useRef,
   RefObject,
-  useMemo,
 } from 'react';
 import { useIsomorphicEffect } from '../../../global/js/hooks';
 import PropTypes from 'prop-types';
@@ -79,7 +78,7 @@ export const PageHeaderContent = React.forwardRef<
 ) {
   const contentRef = useRef<HTMLDivElement>(null);
   const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
-  const { setRefs, setPageActionsInstance, observerState } = usePageHeader();
+  const { setRefs, setPageActionsInstance } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__content`]: true,
@@ -87,16 +86,6 @@ export const PageHeaderContent = React.forwardRef<
     className
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
-
-  // Resolve page actions - support both ReactNode and function
-  // Use useMemo to prevent infinite loops from observerState changes
-  const resolvedPageActions = useMemo(
-    () =>
-      typeof pageActions === 'function'
-        ? pageActions(observerState)
-        : pageActions,
-    [pageActions, observerState]
-  );
 
   useEffect(() => {
     if (componentRef?.current) {
@@ -106,11 +95,13 @@ export const PageHeaderContent = React.forwardRef<
   }, []);
 
   useEffect(() => {
-    if (resolvedPageActions) {
-      setPageActionsInstance(resolvedPageActions);
+    if (typeof pageActions === 'function') {
+      setPageActionsInstance(() => pageActions);
+    } else {
+      setPageActionsInstance(pageActions ?? null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resolvedPageActions]);
+  }, [pageActions]);
 
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
@@ -162,7 +153,13 @@ export const PageHeaderContent = React.forwardRef<
                 </div>
               )}
             </div>
-            {resolvedPageActions}
+            {typeof pageActions === 'function'
+              ? pageActions({
+                  fullyCollapsed: false,
+                  titleClipped: false,
+                  contentActionsClipped: false,
+                })
+              : pageActions}
           </div>
           {children}
         </Column>
@@ -203,3 +200,5 @@ PageHeaderContent.propTypes = {
    */
   title: PropTypes.string.isRequired,
 };
+
+// Made with Bob

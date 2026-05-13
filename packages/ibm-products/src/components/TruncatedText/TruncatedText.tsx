@@ -97,7 +97,6 @@ export const TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
 
     const valueBody = (
       <span
-        {...(type === 'tooltip' ? { role: 'button' } : {})}
         ref={contentRef}
         className={textContentClasses}
         id={id}
@@ -107,10 +106,18 @@ export const TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
       </span>
     );
 
-    const tooltipVariant = (
+    const tooltipVariant = truncated ? (
       <Tooltip align={align} autoAlign={autoAlign} label={value}>
-        {valueBody}
+        <button
+          type="button"
+          className={`${blockClass}__tooltip-trigger`}
+          aria-label={value}
+        >
+          {valueBody}
+        </button>
       </Tooltip>
+    ) : (
+      valueBody
     );
 
     const expandVariant = (

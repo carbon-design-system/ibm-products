@@ -1,0 +1,1 @@
+function p(o,f,n,r){var c=arguments.length,e=c<3?f:r,t;if(typeof Reflect=="object"&&typeof Reflect.decorate=="function")e=Reflect.decorate(o,f,n,r);else for(var l=o.length-1;l>=0;l--)(t=o[l])&&(e=(c<3?t(e):c>3?t(f,n,e):t(f,n))||e);return c>3&&e&&Object.defineProperty(f,n,e),e}export{p as _};

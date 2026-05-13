@@ -70,6 +70,11 @@ export default {
     // to work in CommonJS until Jest lands support for ESM in stable
     // Reference: https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
     '^uuid$': 'uuid',
+    // Mock Storybook actions for Jest tests (Storybook 10 is ESM-only)
+    '^storybook/actions$': resolve(
+      __dirname,
+      './setup/storybookActionsMock.js'
+    ),
     // This mapping is added to resolve the alias that is set in our webpack config
     // otherwise the webpack alias does not work in the jest environment
     '\\.(css|scss)$': 'identity-obj-proxy',

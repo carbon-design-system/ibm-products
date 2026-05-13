@@ -148,7 +148,6 @@ const InterstitialScreenBody = React.forwardRef<
         carouselInitRef.current?.prev?.();
       }
     }
-     
   }, [progStep, stepType]);
 
   const disableActionButton = (config: disableButtonConfigType) => {

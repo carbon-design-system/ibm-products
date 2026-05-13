@@ -12,6 +12,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import './_story-assets/_storybook-styles.scss';
 import { EDIT_IN_PLACE_SIZE, TOOLTIP_ALIGNMENT } from './defs';
+import '@carbon/web-components/es/components/tooltip/index.js';
 
 const storyClass = 'edit-in-place-example';
 
@@ -47,8 +48,10 @@ const defaultArgs = {
   placeholder: 'placeholder text',
   readOnly: false,
   readOnlyLabel: 'Edit off',
+  readOnlyToggleTipText: 'This field is read-only and cannot be edited',
   saveLabel: 'Save',
   size: EDIT_IN_PLACE_SIZE.SMALL,
+  toggleTipAlignment: TOOLTIP_ALIGNMENT.BOTTOM,
   tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
   value: 'default',
 };
@@ -103,9 +106,18 @@ const controls = {
     control: 'text',
     description: 'Label for the edit off button in read-only mode',
   },
+  readOnlyToggleTipText: {
+    control: 'text',
+    description: 'Text for the toggletip that displays when in read-only mode',
+  },
   saveLabel: {
     control: 'text',
     description: 'Label for the save button',
+  },
+  toggleTipAlignment: {
+    control: 'select',
+    description: 'Alignment for the toggletip in read-only mode',
+    options: tooltipAlignments,
   },
   size: {
     control: 'select',
@@ -192,8 +204,10 @@ const Template = (args: any) => {
     placeholder,
     readOnly,
     readOnlyLabel,
+    readOnlyToggleTipText,
     saveLabel,
     size,
+    toggleTipAlignment,
     tooltipAlignment,
     value,
   } = args;
@@ -212,8 +226,10 @@ const Template = (args: any) => {
         placeholder=${ifDefined(placeholder)}
         ?read-only=${readOnly}
         read-only-label=${ifDefined(readOnlyLabel)}
+        read-only-toggletip-text=${ifDefined(readOnlyToggleTipText)}
         save-label=${ifDefined(saveLabel)}
         size=${ifDefined(size)}
+        toggletip-alignment=${ifDefined(toggleTipAlignment)}
         tooltip-alignment=${ifDefined(tooltipAlignment)}
         value=${ifDefined(value)}
         @c4p-edit-in-place-change=${(e: CustomEvent) => {
@@ -261,8 +277,10 @@ const CustomBlurTemplate = (args: any) => {
     placeholder,
     readOnly,
     readOnlyLabel,
+    readOnlyToggleTipText,
     saveLabel,
     size,
+    toggleTipAlignment,
     tooltipAlignment,
     value,
   } = args;
@@ -281,8 +299,10 @@ const CustomBlurTemplate = (args: any) => {
         placeholder=${ifDefined(placeholder)}
         ?read-only=${readOnly}
         read-only-label=${ifDefined(readOnlyLabel)}
+        read-only-toggletip-text=${ifDefined(readOnlyToggleTipText)}
         save-label=${ifDefined(saveLabel)}
         size=${ifDefined(size)}
+        toggletip-alignment=${ifDefined(toggleTipAlignment)}
         tooltip-alignment=${ifDefined(tooltipAlignment)}
         value=${ifDefined(value)}
         @c4p-edit-in-place-change=${(e: CustomEvent) => {

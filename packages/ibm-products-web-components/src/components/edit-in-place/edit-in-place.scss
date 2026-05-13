@@ -19,35 +19,40 @@ $carbon-prefix: config.$carbon-prefix;
 $block-class: #{$prefix}--edit-in-place;
 
 :host(#{$prefix}-edit-in-place) {
+  display: block;
+}
+
+// Container that wraps input and toolbar (excludes warning text)
+.#{$block-class}__container {
   display: flex;
   align-items: center;
   background: transparent;
   cursor: pointer;
 }
 
-// Show outline on host when in focused/edit mode
-:host(.#{$block-class}--focused) {
+// Hover state on container
+.#{$block-class}__container:hover {
+  background: $field-01;
+}
+
+// Show outline on container when in focused/edit mode
+.#{$block-class}__container.#{$block-class}--focused {
   background: $field-01;
   outline: 2px solid $focus;
   outline-offset: 0;
 }
 
-// Hover state on host
-:host(:hover) {
-  background: $field-01;
-}
-
-// Invalid state on host
-:host(.#{$block-class}--invalid) {
+// Invalid state on container (not on warning text)
+.#{$block-class}__container.#{$block-class}--invalid {
   border: 2px solid $support-error;
 }
 
 // Remove border when focused to avoid double border with outline
-:host(.#{$block-class}--invalid.#{$block-class}--focused) {
+.#{$block-class}__container.#{$block-class}--invalid.#{$block-class}--focused {
   border: none;
 }
 
-// Remove default input outline since we're showing it on the host
+// Remove default input outline since we're showing it on the container
 .#{$block-class}__text-input:focus {
   outline: none;
 }
@@ -69,4 +74,17 @@ $block-class: #{$prefix}--edit-in-place;
 .#{$block-class}__toolbar #{$carbon-prefix}-icon-button {
   block-size: var(--#{$block-class}--size);
   inline-size: var(--#{$block-class}--size);
+}
+
+// Toggletip wrapper styling for read-only mode
+.#{$block-class}__toggletip-wrapper {
+  display: flex;
+  flex: 1;
+
+  button[slot='tooltip-trigger'] {
+    all: unset;
+    display: flex;
+    flex: 1;
+    cursor: pointer;
+  }
 }

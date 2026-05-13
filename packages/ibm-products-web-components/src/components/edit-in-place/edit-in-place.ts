@@ -14,6 +14,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import { prefix, carbonPrefix } from '../../globals/settings';
 import styles from './edit-in-place.scss?lit';
 import '@carbon/web-components/es/components/icon-button/index.js';
+import '@carbon/web-components/es/components/tooltip/index.js';
 import Edit16 from '@carbon/icons/es/edit/16';
 import EditOff16 from '@carbon/icons/es/edit--off/16';
 import Checkmark16 from '@carbon/icons/es/checkmark/16';
@@ -115,6 +116,12 @@ class C4PEditInPlace extends LitElement {
   readOnlyLabel = 'Edit off';
 
   /**
+   * Text for the toggletip that displays when in read only mode
+   */
+  @property({ type: String, attribute: 'read-only-toggletip-text' })
+  readOnlyToggleTipText = 'This field is read-only and cannot be edited';
+
+  /**
    * Label for the save button
    */
   @property({ type: String, attribute: 'save-label' })
@@ -125,6 +132,12 @@ class C4PEditInPlace extends LitElement {
    */
   @property({ type: String })
   size: EditInPlaceSize = 'sm';
+
+  /**
+   * Alignment for the toggletip that displays when in read only mode
+   */
+  @property({ type: String, attribute: 'toggletip-alignment' })
+  toggleTipAlignment: TooltipAlignment = 'bottom';
 
   /**
    * Tooltip alignment for buttons
@@ -396,7 +409,7 @@ class C4PEditInPlace extends LitElement {
       [`${carbonPrefix}--text-input--${this.size}`]: true,
     };
 
-    return html`
+    const inputElement = html`
       <input
         id=${this.id}
         class=${classMap(inputClasses)}
@@ -412,6 +425,22 @@ class C4PEditInPlace extends LitElement {
         ?readonly=${this.readOnly}
       />
     `;
+
+    if (this.readOnly) {
+      return html`
+        <cds-tooltip
+          align=${this.toggleTipAlignment}
+          class="${blockClass}__toggletip-wrapper"
+        >
+          ${inputElement}
+          <cds-tooltip-content
+            >${this.readOnlyToggleTipText}</cds-tooltip-content
+          >
+        </cds-tooltip>
+      `;
+    }
+
+    return inputElement;
   }
 
   /**
@@ -481,19 +510,30 @@ class C4PEditInPlace extends LitElement {
   }
 
   render() {
+    const containerClasses = {
+      [`${blockClass}__container`]: true,
+      [`${blockClass}--${this.size}`]: true,
+      [`${blockClass}--focused`]: this._focused,
+      [`${blockClass}--invalid`]: this.invalid,
+      [`${blockClass}--inherit-type`]: this.inheritTypography,
+      [`${blockClass}--readonly`]: this.readOnly,
+    };
+
     return html`
-      ${this._renderInput()}
-      <div
-        class="${blockClass}__toolbar"
-        part="actions"
-        @mousedown=${this._handleToolbarMouseDown}
-      >
-        ${this.invalid
-          ? iconLoader(WarningFilled16, {
-              class: `${blockClass}__warning-icon`,
-            })
-          : ''}
-        ${this._renderActions()}
+      <div class=${classMap(containerClasses)} @blur=${this._handleBlur}>
+        ${this._renderInput()}
+        <div
+          class="${blockClass}__toolbar"
+          part="actions"
+          @mousedown=${this._handleToolbarMouseDown}
+        >
+          ${this.invalid
+            ? iconLoader(WarningFilled16, {
+                class: `${blockClass}__warning-icon`,
+              })
+            : ''}
+          ${this._renderActions()}
+        </div>
       </div>
       ${this.invalid
         ? html`<p class="${blockClass}__warning-text" part="invalid-text">
@@ -501,40 +541,6 @@ class C4PEditInPlace extends LitElement {
           </p>`
         : ''}
     `;
-  }
-
-  /**
-   * Update host element classes and attributes
-   */
-  updated(changedProperties: Map<string, any>) {
-    super.updated(changedProperties);
-
-    // Update host classes
-    const hostClasses = [
-      blockClass,
-      `${blockClass}--${this.size}`,
-      this._focused ? `${blockClass}--focused` : '',
-      this.invalid ? `${blockClass}--invalid` : '',
-      this.inheritTypography ? `${blockClass}--inherit-type` : '',
-      this.readOnly ? `${blockClass}--readonly` : '',
-    ].filter(Boolean);
-
-    this.className = hostClasses.join(' ');
-
-    // Add event listeners to host
-    if (changedProperties.size === 0 || changedProperties.has('_focused')) {
-      this.addEventListener('focus', this._handleFocus as EventListener);
-      this.addEventListener('blur', this._handleBlur as EventListener);
-    }
-  }
-
-  /**
-   * Cleanup event listeners
-   */
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('focus', this._handleFocus as EventListener);
-    this.removeEventListener('blur', this._handleBlur as EventListener);
   }
 
   static styles = styles;

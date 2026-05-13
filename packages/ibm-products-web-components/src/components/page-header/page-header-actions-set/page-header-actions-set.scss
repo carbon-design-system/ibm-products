@@ -54,26 +54,20 @@ $block-class: #{$prefix}--page-header-actions-set;
 @media screen and (prefers-reduced-motion: reduce) {
   [data-offset] {
     flex-shrink: 0;
-    opacity: 1;
     transition: none;
 
     &[data-hidden] {
-      opacity: 0;
-      pointer-events: none;
-      visibility: hidden;
+      display: none;
     }
   }
 }
 
 [data-offset] {
   flex-shrink: 0;
-  opacity: 1;
   transition: opacity 0.15s ease-in-out;
 
   &[data-hidden] {
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
+    display: none;
   }
 }
 

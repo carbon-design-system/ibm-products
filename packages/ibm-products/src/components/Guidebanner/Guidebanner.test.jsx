@@ -147,21 +147,21 @@ describe(componentName, () => {
   it('expands/collapses the guidebanner', () => {
     renderComponent({ collapsible: true });
 
-    const toggleButton = screen.getByRole('button', { name: /read more/i });
+    const toggleButton = screen.getByRole('button', { name: /read less/i });
     expect(toggleButton).toHaveClass(`${blockClass}__toggle-button`);
 
-    // starts collapsed
-    expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
-
-    // Expands on click
-    fireEvent.click(toggleButton);
-    expect(toggleButton).toHaveTextContent('Read less');
+    // starts expanded (open: true is in defaultProps)
     expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
 
-    // Collapses back on second click
+    // Collapses on click
     fireEvent.click(toggleButton);
     expect(toggleButton).toHaveTextContent('Read more');
     expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+
+    // Expands back on second click
+    fireEvent.click(toggleButton);
+    expect(toggleButton).toHaveTextContent('Read less');
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
   });
 
   it('renders the close button and triggers the onClose callback when provided', () => {

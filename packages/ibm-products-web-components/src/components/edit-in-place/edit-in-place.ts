@@ -481,34 +481,19 @@ class C4PEditInPlace extends LitElement {
   }
 
   render() {
-    const containerClasses = {
-      [blockClass]: true,
-      [`${blockClass}--${this.size}`]: true,
-      [`${blockClass}--focused`]: this._focused,
-      [`${blockClass}--invalid`]: this.invalid,
-      [`${blockClass}--inherit-type`]: this.inheritTypography,
-      [`${blockClass}--readonly`]: this.readOnly,
-    };
-
     return html`
+      ${this._renderInput()}
       <div
-        class=${classMap(containerClasses)}
-        @focus=${this._handleFocus}
-        @blur=${this._handleBlur}
+        class="${blockClass}__toolbar"
+        part="actions"
+        @mousedown=${this._handleToolbarMouseDown}
       >
-        ${this._renderInput()}
-        <div
-          class="${blockClass}__toolbar"
-          part="actions"
-          @mousedown=${this._handleToolbarMouseDown}
-        >
-          ${this.invalid
-            ? iconLoader(WarningFilled16, {
-                class: `${blockClass}__warning-icon`,
-              })
-            : ''}
-          ${this._renderActions()}
-        </div>
+        ${this.invalid
+          ? iconLoader(WarningFilled16, {
+              class: `${blockClass}__warning-icon`,
+            })
+          : ''}
+        ${this._renderActions()}
       </div>
       ${this.invalid
         ? html`<p class="${blockClass}__warning-text" part="invalid-text">
@@ -516,6 +501,40 @@ class C4PEditInPlace extends LitElement {
           </p>`
         : ''}
     `;
+  }
+
+  /**
+   * Update host element classes and attributes
+   */
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties);
+
+    // Update host classes
+    const hostClasses = [
+      blockClass,
+      `${blockClass}--${this.size}`,
+      this._focused ? `${blockClass}--focused` : '',
+      this.invalid ? `${blockClass}--invalid` : '',
+      this.inheritTypography ? `${blockClass}--inherit-type` : '',
+      this.readOnly ? `${blockClass}--readonly` : '',
+    ].filter(Boolean);
+
+    this.className = hostClasses.join(' ');
+
+    // Add event listeners to host
+    if (changedProperties.size === 0 || changedProperties.has('_focused')) {
+      this.addEventListener('focus', this._handleFocus as EventListener);
+      this.addEventListener('blur', this._handleBlur as EventListener);
+    }
+  }
+
+  /**
+   * Cleanup event listeners
+   */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('focus', this._handleFocus as EventListener);
+    this.removeEventListener('blur', this._handleBlur as EventListener);
   }
 
   static styles = styles;

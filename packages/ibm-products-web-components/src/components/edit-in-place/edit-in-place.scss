@@ -19,16 +19,35 @@ $carbon-prefix: config.$carbon-prefix;
 $block-class: #{$prefix}--edit-in-place;
 
 :host(#{$prefix}-edit-in-place) {
-  display: block;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
 }
 
-// Show outline on entire component when in focused/edit mode
-.#{$block-class}--focused {
+// Show outline on host when in focused/edit mode
+:host(.#{$block-class}--focused) {
+  background: $field-01;
   outline: 2px solid $focus;
   outline-offset: 0;
 }
 
-// Remove default input outline since we're showing it on the container
+// Hover state on host
+:host(:hover) {
+  background: $field-01;
+}
+
+// Invalid state on host
+:host(.#{$block-class}--invalid) {
+  border: 2px solid $support-error;
+}
+
+// Remove border when focused to avoid double border with outline
+:host(.#{$block-class}--invalid.#{$block-class}--focused) {
+  border: none;
+}
+
+// Remove default input outline since we're showing it on the host
 .#{$block-class}__text-input:focus {
   outline: none;
 }

@@ -405,6 +405,7 @@ class C4PEditInPlace extends LitElement {
         placeholder=${this.placeholder}
         .value=${this.value}
         @input=${this._handleChange}
+        @focus=${this._handleFocus}
         @keydown=${this._handleKeyDown}
         aria-label=${this.labelText}
         ?aria-invalid=${this.invalid}

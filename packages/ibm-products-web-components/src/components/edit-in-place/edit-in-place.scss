@@ -22,6 +22,22 @@ $block-class: #{$prefix}--edit-in-place;
   display: block;
 }
 
+// Show outline on entire component when in focused/edit mode
+.#{$block-class}--focused {
+  outline: 2px solid $focus;
+  outline-offset: 0;
+}
+
+// Remove default input outline since we're showing it on the container
+.#{$block-class}__text-input:focus {
+  outline: none;
+}
+
+// Also remove any browser default focus styles
+.#{$block-class}__text-input {
+  outline: none;
+}
+
 // Web component specific overrides for icon buttons
 .#{$block-class}__toolbar {
   #{$carbon-prefix}-icon-button {

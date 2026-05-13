@@ -1,3 +1,20 @@
+## `@carbon/ibm-products-web-components@0.39.0`
+### Bug fixes :bug:
+- fix(TruncatedText): provide keyboard accessibility (#9245)
+- fix(preview_PageHeader): `HeroImage` not taking the full height (#9268)
+- fix(page-header): resolve scroller button overlapping issue (#9345)
+- fix: remove unwanted paths from code coverage report (#9363)
+- fix(side-panel): use wc action set utility (#9253)
+- fix(guide-banner): WC parity work (#9221)
+- fix: security issues uuid, axios,basic-ftp (#9351)
+- fix(preview_PageHeader): fix tag height (#9327)
+- fix(deleteandRemove): wc parity (#9322)
+- fix(page-header): remove unwanted margin from subtitle (#9329)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9347)
+- chore(deps): update dependency tsdown to ^0.21.0 (#9317)
+
 ## `@carbon/ibm-products-web-components@0.38.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): stacking wrapper, actions prop for footer and story updates (#9242)

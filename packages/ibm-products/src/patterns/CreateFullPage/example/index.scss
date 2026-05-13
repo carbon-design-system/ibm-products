@@ -22,7 +22,6 @@ $block-class: create-full-page-pattern;
 $action-set-block-class: action-set;
 $breadcrumb-block-class: breadcrumb-with-overflow;
 $influencer-block-class: create-influencer;
-$simple-header-block-class: simple-header;
 
 // ActionSet styles
 .#{$action-set-block-class} {
@@ -289,31 +288,6 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
     animation: none;
     opacity: 1;
   }
-}
-
-// SimpleHeader styles
-.#{$simple-header-block-class} {
-  padding: $spacing-04 $spacing-07;
-  background-color: $layer-01;
-  border-block-end: 1px solid $border-subtle-01;
-  inline-size: 100%;
-}
-
-.#{$simple-header-block-class}__title {
-  @include type.type-style('heading-04');
-}
-
-.#{$simple-header-block-class}__breadcrumbs
-  + .#{$simple-header-block-class}__title {
-  margin-block-start: $spacing-02;
-}
-
-.#{$simple-header-block-class}__breadcrumbs
-  .#{carbon-config.$prefix}--breadcrumb-item,
-.#{$simple-header-block-class}__breadcrumbs
-  .#{carbon-config.$prefix}--breadcrumb-item
-  .#{carbon-config.$prefix}--link {
-  @include type.type-style('label-01');
 }
 
 // CreateFullPage pattern styles

@@ -69,7 +69,6 @@ export default {
   },
   parameters: {
     styles,
-    chromatic: { disableSnapshot: true },
     docs: {
       page: mdx,
     },

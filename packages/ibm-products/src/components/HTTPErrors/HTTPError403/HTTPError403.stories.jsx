@@ -19,7 +19,6 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    chromatic: { disableSnapshot: true },
     docs: {
       page: () => (
         <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage#403-error" />

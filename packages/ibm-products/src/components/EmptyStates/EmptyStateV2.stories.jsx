@@ -19,7 +19,6 @@ export default {
   component: EmptyStateV2,
   tags: ['autodocs'],
   parameters: {
-    chromatic: { disableSnapshot: true },
     docs: {
       page: () => (
         <StoryDocsPage

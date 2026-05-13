@@ -41,7 +41,6 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    chromatic: { disableSnapshot: true },
     layout: 'fullscreen',
     docs: { page: DocsPage },
     controls: { sort: 'requiredFirst' },

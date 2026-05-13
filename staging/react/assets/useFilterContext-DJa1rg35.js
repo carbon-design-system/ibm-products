@@ -1,0 +1,2 @@
+var o=Object.defineProperty;var e=(t,r)=>o(t,"name",{value:r,configurable:!0});import{F as s}from"./useDatagrid-Bxzktirq.js";import{r as n}from"./iframe-t6K2KT89.js";const a=e(()=>{const t=n.useContext(s);if(Object.entries(t).length===0)throw new Error("useFilterContext was used outside of its Provider");return t},"useFilterContext");export{a as u};
+//# sourceMappingURL=useFilterContext-DJa1rg35.js.map

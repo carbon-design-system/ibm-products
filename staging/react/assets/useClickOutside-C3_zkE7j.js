@@ -1,0 +1,2 @@
+var s=Object.defineProperty;var r=(t,e)=>s(t,"name",{value:e,configurable:!0});import{r as i}from"./iframe-t6K2KT89.js";const a=r((t,e)=>{i.useEffect(()=>{const c=r(n=>{t.current&&!t.current.contains(n.target)&&e(n.target)},"handleClick");return document.addEventListener("click",c),()=>{document.removeEventListener("click",c)}},[e,t])},"useClickOutside");export{a as u};
+//# sourceMappingURL=useClickOutside-C3_zkE7j.js.map

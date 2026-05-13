@@ -163,6 +163,23 @@ const getOptions = async (conditionState, condition) => {
 };
 ```
 
+### Custom remove interception
+
+Use `onRemoveItem` to intercept removal of a condition, subgroup, group, or
+action. Return `{ preventRemove: true }` to block the removal.
+
+```jsx
+<ConditionBuilder
+  {...props}
+  onRemoveItem={({ type, item, group, state }) => {
+    if (type === 'condition' && item?.property === 'region') {
+      return { preventRemove: true };
+    }
+    return { preventRemove: false };
+  }}
+/>
+```
+
 ## Example usage
 
 {/* TODO: One example per designed use case. */}

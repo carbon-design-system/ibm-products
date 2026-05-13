@@ -9,9 +9,10 @@
  */
 
 import { LitElement, html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { repeat } from 'lit/directives/repeat.js';
+import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
 import { createOverflowHandler } from '../utils';

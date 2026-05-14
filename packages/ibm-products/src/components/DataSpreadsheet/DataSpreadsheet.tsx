@@ -171,6 +171,7 @@ export interface DataSpreadsheetProps {
 
 /**
  * DataSpreadsheet: used to organize and display large amounts of structured data, separated by columns and rows in a grid-like format.
+ * @deprecated This component is deprecated and will be removed in a future major version. Please migrate to AG Grid, TanStack Table, or Carbon DataTable.
  */
 export const DataSpreadsheet = React.forwardRef(
   (
@@ -1072,6 +1073,11 @@ export const DataSpreadsheet = React.forwardRef(
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
+/**@ts-ignore*/
+DataSpreadsheet.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated and will be removed in a future major version. Please migrate to AG Grid (https://www.ag-grid.com/), TanStack Table (https://tanstack.com/table/), or Carbon DataTable.`,
+};
 DataSpreadsheet.displayName = componentName;
 
 // The types and DocGen commentary for the component props,

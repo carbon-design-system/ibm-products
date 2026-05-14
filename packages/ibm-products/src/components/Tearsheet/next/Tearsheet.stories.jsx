@@ -1033,32 +1033,14 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
   return (
     <>
       <div className="stackButtons">
-        <Button onClick={() => setOpen1(!open1)}>Toggle Tearsheet 1</Button>
-        <Button onClick={() => setOpen2(!open2)}>Toggle Tearsheet 2</Button>
-        <Button onClick={() => setOpen3(!open3)}>Toggle Tearsheet 3</Button>
+        <Button onClick={() => setOpen1(!open1)}>Open Tearsheet 1</Button>
       </div>
       <div className="smallScreenButton">
         <Button
           kind="ghost"
           align="bottom"
           onClick={() => setOpen1(!open1)}
-          label="Toggle Tearsheet 1"
-        >
-          <BottomPanelOpenFilled />
-        </Button>
-        <Button
-          kind="ghost"
-          align="bottom"
-          onClick={() => setOpen2(!open2)}
-          label="Toggle Tearsheet 2"
-        >
-          <BottomPanelOpenFilled />
-        </Button>
-        <Button
-          kind="ghost"
-          align="bottom"
-          onClick={() => setOpen3(!open3)}
-          label="Toggle Tearsheet 3"
+          label="Open Tearsheet 1"
         >
           <BottomPanelOpenFilled />
         </Button>

@@ -14,7 +14,10 @@ import React, {
   FC,
   useEffect,
 } from 'react';
-import { useIsomorphicEffect } from '../../../global/js/hooks';
+import {
+  useIsomorphicEffect,
+  useCarbonFeatureFlagsObject,
+} from '../../../global/js/hooks';
 import { createPortal } from 'react-dom';
 import cx from 'classnames';
 import {
@@ -202,6 +205,7 @@ const TearsheetInternal = forwardRef<
     const mergedRefs = useMergedRefs([ref, localRef, presenceRef]);
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
+    const parentFlagsObject = useCarbonFeatureFlagsObject();
 
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [disableHeaderCollapse, setDisableHeaderCollapse] = useState(false);
@@ -302,7 +306,12 @@ const TearsheetInternal = forwardRef<
           decorator,
         }}
       >
-        <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+        <FeatureFlags
+          flags={{
+            ...parentFlagsObject,
+            'enable-experimental-focus-wrap-without-sentinels': true,
+          }}
+        >
           <ComposedModal
             {...rest}
             aria-label={ariaLabel}

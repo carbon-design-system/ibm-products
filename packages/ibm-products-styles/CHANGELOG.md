@@ -1,3 +1,28 @@
+## `@carbon/ibm-products-styles@2.86.0-rc.0`
+### Bug fixes :bug:
+- fix(TruncatedText): provide keyboard accessibility (#9245)
+- fix(preview_PageHeader): `HeroImage` not taking the full height (#9268)
+- fix(page-header): resolve scroller button overlapping issue (#9345)
+- fix: security issues uuid, axios,basic-ftp (#9351)
+- fix(preview_PageHeader): fix tag height (#9327)
+- fix(EditInPlace): resolve focus missing and few other issue (#9243)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9347)
+
+## `@carbon/ibm-products-styles@2.85.0`
+### Features :rocket:
+- feat(ConditionBuilder): title and text ellipsis of dropdown and default statement fix (#9252)
+- feat(coachmark): replaces bubble with popover (#9220)
+
+### Bug fixes :bug:
+- fix: correct header tab order and alignemnt issue (#9179)
+- fix(preview_PageHeader): make tabs,tags and collapse button responsive (#9278)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9257)
+- docs(changelog): update for v2.88.0-rc.0 (#9247)
+
 ## `@carbon/ibm-products-styles@2.84.0`
 ### Features :rocket:
 - feat(preview__PageHeader): implement callbacks for intesecting observers (#9087)

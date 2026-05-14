@@ -23,6 +23,9 @@ export default {
     '!packages/ibm-products/src/globals/js/utils/story-helper.js', // Contains bespoke storybook utilities that we want to move away from
     '!packages/ibm-products/src/globals/js/utils/StoryDocsPage.js', // Contains bespoke storybook utilities that we want to move away from
     '!**/*.deprecated.*',
+    '!**/*.figma.*',
+    '!**/assets/**.*',
+    '!**/_story-assets/**.*',
   ],
   coveragePathIgnorePatterns: [
     'preview-components',
@@ -43,6 +46,21 @@ export default {
     'Nav',
     'StatusIndicator',
     'UserProfileImage',
+    'ComboButton',
+    'CoachmarkButton',
+    'CoachmarkBeacon',
+    'CoachmarkFixed',
+    'CoachmarkOverlayElement',
+    'CoachmarkOverlayElements',
+    'CoachmarkStack',
+    'APIKeyModal',
+    'CreateModal',
+    'CreateTearsheetNarrow',
+    'EmptyStates',
+    'ExportModal',
+    'HTTPErrors',
+    'RemoveModal',
+    'src/patterns',
   ],
   resolver: resolve(__dirname, './setup/resolver.cjs'),
   moduleFileExtensions: ['tsx', 'ts', 'jsx', 'js', 'json', 'node'],
@@ -52,6 +70,11 @@ export default {
     // to work in CommonJS until Jest lands support for ESM in stable
     // Reference: https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
     '^uuid$': 'uuid',
+    // Mock Storybook actions for Jest tests (Storybook 10 is ESM-only)
+    '^storybook/actions$': resolve(
+      __dirname,
+      './setup/storybookActionsMock.js'
+    ),
     // This mapping is added to resolve the alias that is set in our webpack config
     // otherwise the webpack alias does not work in the jest environment
     '\\.(css|scss)$': 'identity-obj-proxy',
@@ -98,11 +121,11 @@ export default {
     '<rootDir>/src/globals/decorators/.*\\.stories\\.ts$',
   ],
   transformIgnorePatterns: [
-    '/build/',
-    '/es/',
-    '/lib/',
-    '/umd/',
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
+    '<rootDir>/build/',
+    '<rootDir>/es/',
+    '<rootDir>/lib/',
+    '<rootDir>/umd/',
+    'node_modules/(?!@carbon-labs|uuid)',
     'ace-node\\.js',
     'ace-node-([a-zA-Z0-9_-]+).(js|ts)$',
   ],

@@ -26,9 +26,6 @@ import Activity16 from '@carbon/icons/es/activity/16.js';
 import AiGenerate16 from '@carbon/icons/es/ai-generate/16.js';
 import CloudFoundry16 from '@carbon/icons/es/cloud-foundry--1/16.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
-import './page-header-breadcrumbs-set';
-import './page-header-actions-set';
-import './page-header-tags-set';
 import { generateTags } from './page-header-tags-set/utils';
 
 const args = {
@@ -395,7 +392,7 @@ export const ContentWithHeroImage = {
           </c4p-page-header-content>
         </div>
         <div class="cds--sm:col-span-0 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <c4p-page-header-hero-image>
+          <c4p-page-header-hero-image object-fit="cover">
             <picture>
               <source
                 srcset="${image1}"
@@ -408,7 +405,6 @@ export const ContentWithHeroImage = {
               <img
                 src="${image1}"
                 alt="a default image"
-                style="max-width:100%;height:auto"
               />
             </picture>
           </c4p-page-header-hero-image>

@@ -68,9 +68,9 @@ export const PageHeaderTabBar = React.forwardRef<
         <Grid condensed>
           <Column lg={16} md={8} sm={4}>
             {children}
-            {renderScroller()}
           </Column>
         </Grid>
+        {renderScroller()}
       </div>
     );
   }
@@ -87,10 +87,10 @@ export const PageHeaderTabBar = React.forwardRef<
           >
             {children}
             {tags}
-            {renderScroller()}
           </div>
         </Column>
       </Grid>
+      {renderScroller()}
     </div>
   );
 });

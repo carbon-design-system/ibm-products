@@ -71,6 +71,7 @@ export const ConditionBuilderProvider: React.FC<
     conditionBuilderRef: props.conditionBuilderRef,
     statementConfigCustom: props.statementConfigCustom,
     onAddItem: props.onAddItem,
+    onRemoveItem: props.onRemoveItem,
     readOnly: props.readOnly,
   };
 

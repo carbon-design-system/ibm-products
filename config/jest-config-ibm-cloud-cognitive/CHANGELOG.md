@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.49.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.49.0`
 ### Bug fixes :bug:
 - fix: remove unwanted paths from code coverage report (#9363)
 - fix: security issues uuid, axios,basic-ftp (#9351)

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.90.0-rc.0`
+## `@carbon/ibm-products@2.90.0`
 ### Features :rocket:
 - feat: add onRemoveItem handler to intercept remove (#9350)
 - feat(coachmark): add triggerRef prop (#9326)

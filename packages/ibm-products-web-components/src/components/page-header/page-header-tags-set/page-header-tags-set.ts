@@ -8,7 +8,8 @@
  */
 
 import { LitElement, html, nothing } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
+import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/tag/index.js';
 import '@carbon/web-components/es/components/link/index.js';
 import '@carbon/web-components/es/components/modal/index.js';

@@ -25,11 +25,20 @@ export interface PageHeaderHeroImageProps {
    * Specify an optional className to be added to your PageHeaderHeroImage
    */
   className?: string;
+  /**
+   * Specify how the image should fit within the container.
+   * - 'cover': Image fills container, may crop edges (default for hero images)
+   * - 'contain': Image fits within container, may show empty space
+   * - 'fill': Image stretches to fill container
+   * - 'none': Image uses its natural size
+   */
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none';
 }
 
 export const PageHeaderHeroImage = ({
   className,
   children,
+  objectFit = 'cover',
   ...other
 }: PageHeaderHeroImageProps) => {
   const [lgBreakpoint, setLgBreakpoint] = useState(false);
@@ -37,6 +46,7 @@ export const PageHeaderHeroImage = ({
   const classNames = classnames(
     {
       [`${blockClass}__hero-image`]: true,
+      [`${blockClass}__hero-image--object-fit-${objectFit}`]: objectFit,
     },
     className
   );
@@ -81,4 +91,8 @@ PageHeaderHeroImage.propTypes = {
    * Specify an optional className to be added to your PageHeaderHeroImage
    */
   className: PropTypes.string,
+  /**
+   * Specify how the image should fit within the container.
+   */
+  objectFit: PropTypes.oneOf(['cover', 'contain', 'fill', 'none']),
 };

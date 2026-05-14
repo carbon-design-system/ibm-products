@@ -55,7 +55,6 @@ export const CreateFullPageWithHeader = () => {
           { key: '2', label: 'Breadcrumb 3', href: '/' },
           { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
         ]}
-        maxVisibleBreadcrumbs={3}
         breadcrumbOverflowTooltipAlign="right"
         nextButtonText="Next"
         backButtonText="Back"

@@ -89,7 +89,6 @@ collect:
         - displayMetalPanel
         - downloadLinkLabel
         - draggableClass
-        - dropShadow
         - element
         - emptyStateAction
         - emptyStateDescription
@@ -156,7 +155,6 @@ collect:
         - hideConditionSubGroupPreviewHandler
         - hideIcon
         - hideSelectAll
-        - highContrast
         - href
         - icon
         - iconDescription
@@ -255,6 +253,7 @@ collect:
         - onPrevious
         - onPrimaryButtonClick
         - onRemove
+        - onRemoveItem
         - onRequestClose
         - onRequestSubmit
         - onRowClick
@@ -377,7 +376,6 @@ collect:
         - tableId
         - tagline
         - tags
-        - target
         - theme
         - title
         - titleSize
@@ -547,13 +545,17 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
+        - dropShadow
         - floating
+        - highContrast
         - isOpenByDefault
         - overlayClassName
         - overlayKind
         - overlayRef
         - position
         - positionTune
+        - target
+        - triggerRef
         # CoachmarkDragbar
         - a11yKeyboardHandler
         - onDrag
@@ -881,6 +883,8 @@ collect:
         - contextualActions
         # PageHeaderContentPageActions
         - menuButtonLabel
+        # PageHeaderHeroImage
+        - objectFit
         # PageHeaderTagOverflow
         - renderOverflowTag
         - renderPopoverContent
@@ -1286,6 +1290,11 @@ collect:
         - primary
         - secondary
         - tertiary
+        # PageHeaderHeroImage - objectFit
+        - contain
+        - cover
+        - fill
+        - none
         # StackProvider - stackStepSize
         - lg
         - md

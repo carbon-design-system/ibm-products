@@ -90,7 +90,6 @@ export const CreateFullPageWithGlobalHeader = () => {
             { key: '2', label: 'Breadcrumb 3', href: '/' },
             { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
           ]}
-          maxVisibleBreadcrumbs={3}
           breadcrumbOverflowTooltipAlign="right"
           secondaryTitle="Create topic"
           nextButtonText="Next"

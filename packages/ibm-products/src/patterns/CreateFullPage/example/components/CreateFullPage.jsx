@@ -14,13 +14,16 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  BreadcrumbItem,
+  OverflowMenu,
+  OverflowMenuItem,
 } from '@carbon/react';
 import {
   StepProvider,
   StepGroup,
   useStepContext,
 } from '@carbon/utilities-react';
-import { SimpleHeader } from './SimpleHeader';
+import { preview__PageHeader as PageHeader } from '@carbon/ibm-products';
 import { CreateInfluencer } from './CreateInfluencer';
 import { ActionSet } from './ActionSet';
 
@@ -43,8 +46,6 @@ const CreateFullPage = ({
   modalSecondaryButtonText,
   onClose,
   onRequestSubmit,
-  noTrailingSlash,
-  maxVisibleBreadcrumbs,
 }) => {
   return (
     <StepProvider>
@@ -64,8 +65,6 @@ const CreateFullPage = ({
         modalSecondaryButtonText={modalSecondaryButtonText}
         onClose={onClose}
         onRequestSubmit={onRequestSubmit}
-        noTrailingSlash={noTrailingSlash}
-        maxVisibleBreadcrumbs={maxVisibleBreadcrumbs}
       >
         {children}
       </CreateFullPageContent>
@@ -90,8 +89,6 @@ const CreateFullPageContent = ({
   modalSecondaryButtonText,
   onClose,
   onRequestSubmit,
-  noTrailingSlash,
-  maxVisibleBreadcrumbs,
   onClickInfluencerStep,
 }) => {
   const {
@@ -207,15 +204,37 @@ const CreateFullPageContent = ({
   return (
     <div className={blockClass}>
       {(title || breadcrumbs) && (
-        <SimpleHeader
-          title={title}
-          breadcrumbs={breadcrumbs}
-          noTrailingSlash={noTrailingSlash}
-          overflowAriaLabel={breadcrumbsOverflowAriaLabel}
-          overflowTooltipAlign={breadcrumbOverflowTooltipAlign}
-          maxVisible={maxVisibleBreadcrumbs}
-          className={`${blockClass}__header`}
-        />
+        <PageHeader.Root className={`${blockClass}__header`}>
+          <PageHeader.BreadcrumbBar>
+            <PageHeader.BreadcrumbOverflow
+              renderOverflowBreadcrumb={(hiddenItems) => (
+                <BreadcrumbItem data-floating-menu-container>
+                  <OverflowMenu
+                    align="bottom"
+                    aria-label={
+                      breadcrumbsOverflowAriaLabel ||
+                      'Open and close additional breadcrumb item list.'
+                    }
+                  >
+                    {hiddenItems.map((el, index) => (
+                      <OverflowMenuItem key={index} itemText={el.innerText} />
+                    ))}
+                  </OverflowMenu>
+                </BreadcrumbItem>
+              )}
+            >
+              {breadcrumbs?.map((crumb, index) => (
+                <BreadcrumbItem
+                  key={crumb.key || index}
+                  href={crumb.href || '/#'}
+                >
+                  {crumb.label}
+                </BreadcrumbItem>
+              ))}
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+          <PageHeader.Content title={title} />
+        </PageHeader.Root>
       )}
       <div className={`${blockClass}__influencer-and-body-container`}>
         <div className={`${blockClass}__influencer`}>

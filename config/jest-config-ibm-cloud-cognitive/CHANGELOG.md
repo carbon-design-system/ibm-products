@@ -1,3 +1,11 @@
+## `@jest-config-ibm-cloud-cognitive@1.49.0`
+### Bug fixes :bug:
+- fix: remove unwanted paths from code coverage report (#9363)
+- fix: security issues uuid, axios,basic-ftp (#9351)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9347)
+
 ## `@jest-config-ibm-cloud-cognitive@1.44.0`
 ### Bug fixes :bug:
 - fix: delete tags and restore vesions to retry release 5

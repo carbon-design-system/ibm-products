@@ -6,7 +6,6 @@
 //
 
 $prefix: 'c4p' !default;
-$carbon-prefix: 'cds';
 
 @use '@carbon/styles/scss/config' with (
   $font-path: '@ibm/plex'
@@ -18,7 +17,7 @@ $carbon-prefix: 'cds';
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
-@use '@carbon/utilities/scss/carousel' as carousel;
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
 
 @include carousel.carousel();
 
@@ -91,12 +90,6 @@ $block-class: #{$prefix}--coachmark__next;
   }
 }
 
-.cds--content-switcher {
-  inline-size: 20rem;
-  margin-block: $spacing-09;
-  margin-inline: $spacing-07;
-}
-
 .carouselControlWrapper__footer {
   span {
     justify-self: flex-start;
@@ -108,6 +101,7 @@ $block-class: #{$prefix}--coachmark__next;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-block-end: $spacing-05;
 }
 
 .carouselControlWrapper--controls-progress {

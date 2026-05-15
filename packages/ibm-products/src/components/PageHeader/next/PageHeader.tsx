@@ -50,6 +50,11 @@ import {
   PageHeaderBreadcrumbOverflow,
   type PageHeaderBreadcrumbOverflowProps,
 } from './PageHeaderBreadcrumbOverflow';
+import {
+  PageHeaderBreadcrumbPageActions,
+  type PageHeaderBreadcrumbPageActionsProps,
+  type PageHeaderBreadcrumbPageActionItem,
+} from './PageHeaderBreadcrumbPageActions';
 
 /**
  * ----------
@@ -86,8 +91,9 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
     ref
   ) {
     const [refs, setRefs] = useState<PageHeaderRefs>({});
-    const [pageActionsInstance, setPageActionsInstance] =
-      useState<React.ReactNode | null>(null);
+    const [pageActionsInstance, setPageActionsInstance] = useState<
+      React.ReactNode | ((state: any) => React.ReactNode) | null
+    >(null);
     const tempRef = useRef<HTMLDivElement>(null);
     const componentRef = (ref ?? tempRef) as RefObject<HTMLDivElement>;
     const classNames = classnames(
@@ -289,6 +295,9 @@ BreadcrumbOverflow.displayName = 'PageHeaderBreadcrumbOverflow';
 const TagOverflow = PageHeaderTagOverflow;
 TagOverflow.displayName = 'PageHeaderTagOverflow';
 
+const BreadcrumbPageActions = PageHeaderBreadcrumbPageActions;
+BreadcrumbPageActions.displayName = 'PageHeaderBreadcrumbPageActions';
+
 export {
   // direct exports
   PageHeader,
@@ -302,6 +311,7 @@ export {
   PageHeaderTitleBreadcrumb,
   PageHeaderBreadcrumbOverflow,
   PageHeaderTagOverflow,
+  PageHeaderBreadcrumbPageActions,
   // namespaced
   Root,
   BreadcrumbBar,
@@ -314,6 +324,7 @@ export {
   TitleBreadcrumb,
   BreadcrumbOverflow,
   TagOverflow,
+  BreadcrumbPageActions,
 };
 export type {
   PageHeaderBreadcrumbBarProps,
@@ -325,4 +336,6 @@ export type {
   PageHeaderScrollButtonProps,
   PageHeaderTagOverflowProps,
   PageHeaderBreadcrumbOverflowProps,
+  PageHeaderBreadcrumbPageActionsProps,
+  PageHeaderBreadcrumbPageActionItem,
 };

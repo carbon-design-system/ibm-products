@@ -8,6 +8,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { html, fixture, oneEvent, elementUpdated } from '@open-wc/testing';
 import './index';
+import { carbonPrefix } from '../../globals/settings';
 import CDSNotificationPanel from './notification-panel';
 
 const defaultProps = {
@@ -122,8 +123,9 @@ describe('c4p-notification-panel', () => {
     const doNotDisturbToggle = panel.shadowRoot?.querySelector(
       '.c4p--notifications-panel__do-not-disturb-toggle'
     );
-    const toggleText =
-      doNotDisturbToggle?.shadowRoot?.querySelector('.cds--toggle__text');
+    const toggleText = doNotDisturbToggle?.shadowRoot?.querySelector(
+      `.${carbonPrefix}--toggle__text`
+    );
     expect(toggleText?.textContent?.trim()).toBe(panel.doNotDisturbLabel);
   });
   it('should have "todayText" prop passed be title for Today Section', async () => {

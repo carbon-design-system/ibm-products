@@ -45,6 +45,10 @@ const renderComponent = ({ ...rest } = {}) =>
  * Tests...
  */
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders a component StringFormatter', async () => {
     renderComponent({
       'data-testid': dataTestId,

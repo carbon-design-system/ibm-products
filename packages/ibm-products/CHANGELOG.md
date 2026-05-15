@@ -1,3 +1,60 @@
+## `@carbon/ibm-products@2.90.0`
+### Features :rocket:
+- feat: add onRemoveItem handler to intercept remove (#9350)
+- feat(coachmark): add triggerRef prop (#9326)
+
+### Bug fixes :bug:
+- fix(TruncatedText): provide keyboard accessibility (#9245)
+- fix(preview_PageHeader): resolve SSR hydration error (#9264)
+- fix(preview_PageHeader): `HeroImage` not taking the full height (#9268)
+- fix(page-header): resolve scroller button overlapping issue (#9345)
+- fix: remove unwanted paths from code coverage report (#9363)
+- fix(guide-banner): WC parity work (#9221)
+- fix(guidebanner): fix expand collapse labels and aria-expand values (#9321)
+- fix(deleteandRemove): wc parity (#9322)
+- fix(EditInPlace): resolve focus missing and few other issue (#9243)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9347)
+- chore(deps): update dependency tsdown to ^0.21.0 (#9317)
+
+## `@carbon/ibm-products@2.89.0`
+### Features :rocket:
+- feat(preview_Tearsheet): stacking wrapper, actions prop for footer and story updates (#9242)
+- feat(ConditionBuilder): title and text ellipsis of dropdown and default statement fix (#9252)
+- feat(coachmark): replaces bubble with popover (#9220)
+
+### Bug fixes :bug:
+- fix(apikeymodal): document parity (#9293)
+- fix: correct header tab order and alignemnt issue (#9179)
+- fix(useFilters): updated selectedFilters to check filtersState is an array (#9270)
+- fix(about-modal): fix colors / theming for react and wc (#9262)
+- fix: replace hardcoded instance of cds (#9165)
+
+### Housekeeping :house:
+- chore(DelimitedList): deprecate `DelimitedList` (#9219)
+- chore(deps): update dependency @vitejs/plugin-react to v5.2.0 (#9236)
+- chore(StringFormatter): deprecate `StringFormatter` (#9217)
+- chore(deps): update dependency vite to v8 [security] (#9259)
+- build(deps): update to Carbon 11 compatible versions to latest (#9257)
+- docs(changelog): update for v2.88.0-rc.0 (#9247)
+
+## `@carbon/ibm-products@2.88.0`
+### Features :rocket:
+- feat(preview__PageHeader): implement callbacks for intesecting observers (#9087)
+- feat: add initialState support and footer actions prop (#9171)
+
+### Bug fixes :bug:
+- fix(interstitialScreen): parity issues and small screens ui of action buttons (#9032)
+- fix(build): patch CJS default export interop for tsdown migration
+
+### Housekeeping :house:
+- chore(preview_PageHeader): refactor `breadcrumbPageActions` to a standalone component (#9230)
+- docs(changelog): update for v2.87.0-rc.0 (#9187)
+
+## `@carbon/ibm-products@2.87.1`
+### Bug fixes :bug:
+- fix(build): patch CJS default export interop for tsdown migration
 ## `@carbon/ibm-products@2.87.0`
 ### Features :rocket:
 - feat(createFullPage): implemented as patterns in react (#9096)

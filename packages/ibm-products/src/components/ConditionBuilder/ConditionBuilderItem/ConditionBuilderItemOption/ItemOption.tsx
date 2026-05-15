@@ -104,7 +104,7 @@ export const ItemOption = ({
   }
   return (
     <div className={`${blockClass}__item-option`} ref={contentRef}>
-      {popOverSearchThreshold && allOptions.length > popOverSearchThreshold && (
+      {allOptions.length > popOverSearchThreshold ? (
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
@@ -116,7 +116,7 @@ export const ItemOption = ({
             }}
           />
         </div>
-      )}
+      ) : null}
 
       <ul aria-label={getAriaLabel()} role="listbox">
         {filteredItems?.map((option) => {
@@ -148,9 +148,14 @@ export const ItemOption = ({
               <div className={`${blockClass}__item-option__option-content`}>
                 <span className={`${blockClass}__item-option__option-label`}>
                   {Icon && <Icon />}
-                  {config?.isStatement
-                    ? getStatementContent(option)
-                    : option.label}
+                  <span
+                    className={`${blockClass}__item-option__option-label-text`}
+                    title={option.label}
+                  >
+                    {config?.isStatement
+                      ? getStatementContent(option)
+                      : option.label}
+                  </span>
                 </span>
                 {isSelected && (
                   <Checkmark className={`${blockClass}__checkmark`} />

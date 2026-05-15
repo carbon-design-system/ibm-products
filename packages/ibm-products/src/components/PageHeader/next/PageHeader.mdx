@@ -203,6 +203,87 @@ and
 [`pageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:48-50)
 props for rendering action buttons alongside the breadcrumb content.
 
+### PageHeader.BreadcrumbPageActions
+
+The
+[`PageHeader.BreadcrumbPageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbPageActions.tsx:1)
+component provides a reusable way to render action buttons in the breadcrumb bar
+with automatic overflow handling. When the viewport width is reduced, actions
+automatically collapse into an overflow menu, ensuring a responsive experience.
+
+```jsx
+import { Activity, AiGenerate, CloudFoundry_1 } from '@carbon/icons-react';
+
+const breadcrumbPageActionItems = [
+  {
+    id: 'breadcrumb-action-1',
+    label: 'Icon Description 1',
+    renderIcon: Activity,
+    onClick: () => console.log('Breadcrumb action 1'),
+  },
+  {
+    id: 'breadcrumb-action-2',
+    label: 'Icon Description 2',
+    renderIcon: AiGenerate,
+    onClick: () => console.log('Breadcrumb action 2'),
+  },
+  {
+    id: 'breadcrumb-action-3',
+    label: 'Icon Description 3',
+    renderIcon: CloudFoundry_1,
+    onClick: () => console.log('Breadcrumb action 3'),
+  },
+];
+
+return (
+  <PageHeader.Root>
+    <PageHeader.BreadcrumbBar
+      pageActions={
+        <PageHeader.BreadcrumbPageActions
+          actions={breadcrumbPageActionItems}
+          buttonSize="md"
+          buttonKind="ghost"
+          overflowMenuLabel="More page actions"
+        />
+      }
+    >
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
+    ...
+  </PageHeader.Root>
+);
+```
+
+**Action Item Type:**
+
+Each action item in the `actions` array must conform to the
+[`PageHeaderBreadcrumbPageActionItem`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbPageActions.tsx:20-37)
+interface:
+
+```typescript
+interface PageHeaderBreadcrumbPageActionItem {
+  id: string; // Unique identifier
+  label: string; // Used for icon description and overflow menu text
+  renderIcon: React.ComponentType; // Icon component to render
+  onClick?: () => void; // Optional click handler
+}
+```
+
+**Props:**
+
+- `actions` (required): Array of
+  [`PageHeaderBreadcrumbPageActionItem`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbPageActions.tsx:20-37)
+  objects
+- `buttonSize`: Size of action buttons (`'sm'`, `'md'`, `'lg'`). Default: `'md'`
+- `buttonKind`: Kind of action buttons (`'ghost'`, `'primary'`, `'secondary'`,
+  etc.). Default: `'ghost'`
+- `overflowMenuLabel`: Aria label for the overflow menu. Default:
+  `'More page actions'`
+- `className`: Optional CSS class name for custom styling
+
 ```jsx
 import { Bee, Activity } from '@carbon/icons-react';
 
@@ -475,6 +556,17 @@ return (
 When including a hero image within the `PageHeader`, the `Grid` and `Column`
 components will need to be utilized in order to define the layout correctly.
 
+The
+[`PageHeader.HeroImage`](packages/ibm-products/src/components/PageHeader/next/PageHeaderHeroImage.tsx:38)
+component uses Carbon's `AspectRatio` component to maintain a consistent aspect
+ratio (3×2 on mobile/tablet, 2×1 on desktop). It accepts an `objectFit` prop to
+control how the image fills the container:
+
+- `'cover'` (default): Image fills container, may crop edges
+- `'contain'`: Image fits within container, may show empty space
+- `'fill'`: Image stretches to fill container
+- `'none'`: Image uses its natural size
+
 ```jsx
 import { Grid, Column } from '@carbon/react';
 
@@ -486,7 +578,7 @@ return (
         <PageHeader.Content ... />
       </Column>
       <Column lg={8} md={4} sm={0}>
-        <PageHeader.HeroImage>
+        <PageHeader.HeroImage objectFit="cover">
           <picture>
             <source
               srcset={image1}
@@ -499,7 +591,6 @@ return (
             <img
               src={image1}
               alt="a default image"
-              style={{ maxWidth: '100%', height: 'auto' }}
             />
           </picture>
         </PageHeader.HeroImage>
@@ -509,6 +600,10 @@ return (
 )
 
 ```
+
+**Note:** The hero image is automatically constrained to prevent horizontal
+overflow. The image will be centered within its container and maintain the
+specified aspect ratio across all viewport sizes.
 
 ## PageHeader.TabBar
 

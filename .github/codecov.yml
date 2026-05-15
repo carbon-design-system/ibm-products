@@ -28,7 +28,10 @@ component_management:
         - packages/ibm-products-web-components/**
 
 ignore:
+  # Deprecated files
   - '**/*.deprecated.*'
+
+  # Deprecated components
   - 'Datagrid/'
   - 'DecoratorDualButton/'
   - 'DecoratorLink/'
@@ -45,4 +48,14 @@ ignore:
   - 'Nav/'
   - 'StatusIndicator/'
   - 'UserProfileImage/'
-  - '**/StepFlow/story-assets/**/*'
+
+  # Figma design integration files (not production code)
+  - '**/*.figma.tsx'
+  - '**/*.figma.ts'
+
+  # Storybook story assets
+  - '**/_story-assets/**'
+  - '**/story-assets/**'
+
+  # Patterns
+  - '**/patterns/**'

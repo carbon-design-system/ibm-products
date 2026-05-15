@@ -144,6 +144,9 @@ export const Default = ({
   summaryContentWidth,
   verticalGap,
   variant,
+  hideCloseButton,
+  disableHeaderCollapse,
+  closeIconDescription,
 }) => {
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
@@ -175,7 +178,11 @@ export const Default = ({
         summaryContentWidth={summaryContentWidth}
         verticalGap={verticalGap}
       >
-        <Tearsheet.Header>
+        <Tearsheet.Header
+          hideCloseButton={hideCloseButton}
+          disableHeaderCollapse={disableHeaderCollapse}
+          closeIconDescription={closeIconDescription}
+        >
           <Tearsheet.HeaderContent
             open
             label="Customer data"
@@ -1026,32 +1033,14 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
   return (
     <>
       <div className="stackButtons">
-        <Button onClick={() => setOpen1(!open1)}>Toggle Tearsheet 1</Button>
-        <Button onClick={() => setOpen2(!open2)}>Toggle Tearsheet 2</Button>
-        <Button onClick={() => setOpen3(!open3)}>Toggle Tearsheet 3</Button>
+        <Button onClick={() => setOpen1(!open1)}>Open Tearsheet 1</Button>
       </div>
       <div className="smallScreenButton">
         <Button
           kind="ghost"
           align="bottom"
           onClick={() => setOpen1(!open1)}
-          label="Toggle Tearsheet 1"
-        >
-          <BottomPanelOpenFilled />
-        </Button>
-        <Button
-          kind="ghost"
-          align="bottom"
-          onClick={() => setOpen2(!open2)}
-          label="Toggle Tearsheet 2"
-        >
-          <BottomPanelOpenFilled />
-        </Button>
-        <Button
-          kind="ghost"
-          align="bottom"
-          onClick={() => setOpen3(!open3)}
-          label="Toggle Tearsheet 3"
+          label="Open Tearsheet 1"
         >
           <BottomPanelOpenFilled />
         </Button>
@@ -1624,5 +1613,25 @@ Default.argTypes = {
   variant: {
     control: { type: 'radio' },
     options: ['wide', 'narrow'],
+  },
+  hideCloseButton: {
+    control: {
+      type: 'boolean',
+    },
+    description:
+      'Enable a close icon ("x") in the header area of the tearsheet. By default, a tearsheet displays a close icon.',
+  },
+  disableHeaderCollapse: {
+    control: {
+      type: 'boolean',
+    },
+    description:
+      'Default header collapse/expand while scrolling the main content can be disabled by setting this to true.',
+  },
+  closeIconDescription: {
+    control: {
+      type: 'text',
+    },
+    description: 'The accessibility title for the close icon (if shown).',
   },
 };

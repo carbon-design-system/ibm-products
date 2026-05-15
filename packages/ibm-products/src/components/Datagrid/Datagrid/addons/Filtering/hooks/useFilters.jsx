@@ -351,9 +351,9 @@ const useFilters = ({
         const isStringArray =
           components.MultiSelect.items.length &&
           typeof components.MultiSelect.items[0] === 'string';
-        const selectedFilters = filtersState[column]?.value.filter(
-          (i) => i.selected
-        );
+        const selectedFilters = Array.isArray(filtersState[column]?.value)
+          ? filtersState[column].value.filter((i) => i.selected)
+          : [];
         const filteredItems = components.MultiSelect.items
           .map((item) => {
             if (

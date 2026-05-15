@@ -59,7 +59,6 @@ test.describe('InterstitialScreen @avt', () => {
     const enableGetStartedButton = page.getByRole('button', {
       name: 'Enable Get Started',
     });
-    const skipButton = page.getByTitle('Skip');
     const progressIndicator = page.locator(`.${carbon.prefix}--progress`);
 
     // Modal should be open
@@ -68,17 +67,10 @@ test.describe('InterstitialScreen @avt', () => {
     // Initial focus should be on close button
     await expect(closeButton).toBeFocused();
 
-    // Tab to navigate, start button should be disabled
+    // Tab to navigate to Enable Get Started button, start button should be disabled
     await page.keyboard.press('Tab');
     await expect(startButton).toBeDisabled();
     await expect(closeButton).not.toBeFocused();
-
-    // Tab to skip button
-    await page.keyboard.press('Tab');
-    await expect(skipButton).toBeFocused();
-
-    // Shift+Tab should go back to Enable Get Started button
-    await page.keyboard.press('Shift+Tab');
     await expect(enableGetStartedButton).toBeVisible();
     await expect(enableGetStartedButton).not.toContainClass(
       `${carbon.prefix}--tag--selectable-selected`
@@ -91,9 +83,7 @@ test.describe('InterstitialScreen @avt', () => {
     );
     await expect(startButton).not.toBeDisabled();
 
-    // Tab twice to navigate to the start button
-    await page.keyboard.press('Tab');
-    await expect(skipButton).toBeFocused();
+    // Tab to navigate to the start button (no skip button in single-step)
     await page.keyboard.press('Tab');
     await expect(startButton).toBeFocused();
 

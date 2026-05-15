@@ -37,6 +37,7 @@ import {
   LogicalOperator,
 } from '../ConditionBuilder.types';
 import { useDataConfigs } from '../utils/useDataConfigs';
+import { getEmptyState } from '../ConditionBuilderContext/ConditionBuilderProvider';
 /**
  *
  *  state - this is the current group that is being rendered . This can be a inner group or outer group
@@ -70,7 +71,13 @@ const ConditionGroupBuilder = ({
       'conditionBuilderText',
     ]);
   const { statementConfig } = useDataConfigs();
-  const { variant, conditionBuilderRef } = useContext(ConditionBuilderContext);
+  const {
+    variant,
+    conditionBuilderRef,
+    statementConfigCustom,
+    onRemoveItem,
+    rootState,
+  } = useContext(ConditionBuilderContext);
   const [showConditionPreview, setShowConditionPreview] = useState(-1);
   const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
     useState(-1);
@@ -138,6 +145,24 @@ const ConditionGroupBuilder = ({
   };
 
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
+    const itemToRemove = group?.conditions?.find(
+      (condition) => condition.id === conditionId
+    ) as ConditionGroup | Condition | undefined;
+    const removeType = (itemToRemove as ConditionGroup)?.conditions
+      ? 'subgroup'
+      : 'condition';
+    const { preventRemove } =
+      onRemoveItem?.({
+        type: removeType,
+        state: rootState as any,
+        item: itemToRemove,
+        group,
+      }) ?? {};
+
+    if (preventRemove) {
+      return;
+    }
+
     if (group && group.conditions && group.conditions.length > 1) {
       if (variant == HIERARCHICAL_VARIANT) {
         handleFocusOnCloseHierarchical(evt);
@@ -324,26 +349,15 @@ const ConditionGroupBuilder = ({
   };
 
   const addConditionSubGroupHandler = (conditionIndex) => {
+    const newSubGroup = getEmptyState(statementConfigCustom)
+      .groups?.[0] as ConditionGroup;
     onChange({
       ...group,
       conditions: [
         ...(group.conditions
           ? group.conditions.slice(0, conditionIndex + 1)
           : []),
-        {
-          statement: 'ifAll',
-          groupOperator: 'and',
-          conditions: [
-            {
-              property: undefined,
-              operator: '',
-              value: '',
-              popoverToOpen: 'propertyField',
-              id: uuidv4(),
-            },
-          ],
-          id: uuidv4(),
-        },
+        newSubGroup,
         ...(group.conditions ? group.conditions.slice(conditionIndex + 1) : []),
       ],
     });

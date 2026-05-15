@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2023, 2024
+// Copyright IBM Corp. 2023, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -49,5 +49,29 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--coachmark__next;
     border-radius: 0;
     box-shadow: 0 0 0 $spacing-02 $icon-inverse;
     outline: $spacing-01 solid $background-inverse;
+  }
+
+  .#{$block-class-next}--coachmark-content {
+    .#{$block-class-next}--content-header {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .#{$block-class-next}--content-header--drag-icon,
+    .#{$block-class-next}--content-header .#{carbon-config.$prefix}--btn {
+      color: $icon-inverse;
+
+      .#{carbon-config.$prefix}--btn__icon,
+      svg {
+        color: $icon-inverse;
+        fill: $icon-inverse;
+      }
+    }
+
+    .#{$block-class-next}--content-body {
+      display: flex;
+      flex-direction: column;
+      padding: $spacing-01 $spacing-05 0;
+    }
   }
 }

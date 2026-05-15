@@ -14,9 +14,11 @@ import React, {
   FC,
   useEffect,
 } from 'react';
-import { useIsomorphicEffect } from '../../../global/js/hooks';
+import {
+  useIsomorphicEffect,
+  useCarbonFeatureFlagsObject,
+} from '../../../global/js/hooks';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
   ComposedModal,
@@ -192,6 +194,7 @@ const TearsheetInternal = forwardRef<
       keepMounted = false,
       isExiting = false,
       presenceRef,
+      decorator,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -202,8 +205,8 @@ const TearsheetInternal = forwardRef<
     const mergedRefs = useMergedRefs([ref, localRef, presenceRef]);
     const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
     const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
+    const parentFlagsObject = useCarbonFeatureFlagsObject();
 
-    const [hasCloseIcon, setHasCloseIcon] = useState(true);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [disableHeaderCollapse, setDisableHeaderCollapse] = useState(false);
 
@@ -257,13 +260,7 @@ const TearsheetInternal = forwardRef<
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [
-      isSm,
-      rest.decorator,
-      influencerWidth,
-      summaryContentWidth,
-      verticalGap,
-    ]);
+    }, [isSm, decorator, influencerWidth, summaryContentWidth, verticalGap]);
 
     useIsomorphicEffect(() => {
       const id = uniqueId.current;
@@ -299,8 +296,6 @@ const TearsheetInternal = forwardRef<
     const content = (
       <TearsheetContext.Provider
         value={{
-          hasCloseIcon,
-          setHasCloseIcon,
           fullyCollapsed,
           setFullyCollapsed,
           onClose,
@@ -308,9 +303,15 @@ const TearsheetInternal = forwardRef<
           setDisableHeaderCollapse,
           variant,
           isSm,
+          decorator,
         }}
       >
-        <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+        <FeatureFlags
+          flags={{
+            ...parentFlagsObject,
+            'enable-experimental-focus-wrap-without-sentinels': true,
+          }}
+        >
           <ComposedModal
             {...rest}
             aria-label={ariaLabel}
@@ -320,12 +321,9 @@ const TearsheetInternal = forwardRef<
               [`${blockClass}--stacked`]: depth > 0,
               [`${blockClass}--stack-activated`]: stack.length > 1,
               [`${blockClass}--has-ai-label`]:
-                !!rest.decorator &&
-                rest.decorator['type']?.displayName === 'AILabel',
+                !!decorator && decorator['type']?.displayName === 'AILabel',
               [`${blockClass}--has-decorator`]:
-                !!rest.decorator &&
-                rest.decorator['type']?.displayName !== 'AILabel',
-              [`${blockClass}--has-close`]: hasCloseIcon,
+                !!decorator && decorator['type']?.displayName !== 'AILabel',
               ['is-visible']: keepMounted ? open : true, // When keepMounted, use open prop; otherwise always visible
               [`${blockClass}--keep-mounted`]: keepMounted,
             })}

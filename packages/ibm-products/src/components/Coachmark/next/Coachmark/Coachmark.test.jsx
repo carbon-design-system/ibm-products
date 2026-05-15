@@ -29,7 +29,7 @@ const renderCoachmark = ({ ...rest } = {}) =>
         id="CoachmarkBtn"
         label="Show information"
       ></CoachmarkBeacon>
-      <Coachmark.Content highContrast={true}>
+      <Coachmark.Content>
         <Coachmark.Content.Header
           closeIconDescription="Close"
           dragIconDescription="Drag"
@@ -37,7 +37,9 @@ const renderCoachmark = ({ ...rest } = {}) =>
         <Coachmark.Content.Body>
           <h2>Hello World</h2>
           <p>this is a description test</p>
-          <Button size="sm">Done</Button>
+          <Button size="sm" id="DoneBtn">
+            Done
+          </Button>
         </Coachmark.Content.Body>
       </Coachmark.Content>
     </Coachmark>
@@ -55,7 +57,7 @@ const renderCoachmarkFloating = ({ ...rest } = {}) =>
       >
         Show information
       </Button>
-      <Coachmark.Content highContrast={true}>
+      <Coachmark.Content>
         <Coachmark.Content.Header
           closeIconDescription="Close"
           dragIconDescription="Drag"
@@ -63,7 +65,9 @@ const renderCoachmarkFloating = ({ ...rest } = {}) =>
         <Coachmark.Content.Body>
           <h2>Hello World</h2>
           <p>this is a description test</p>
-          <Button size="sm">Done</Button>
+          <Button size="sm" id="DoneBtn">
+            Done
+          </Button>
         </Coachmark.Content.Body>
       </Coachmark.Content>
     </Coachmark>
@@ -183,5 +187,60 @@ describe(componentName, () => {
       name: dragIconDescription,
     });
     expect(dragButton).toBeInTheDocument();
+  });
+
+  it('handles Escape key press to close coachmark', async () => {
+    const onCloseMock = jest.fn();
+    renderCoachmark({
+      'data-testid': dataTestId,
+      open: true,
+      onClose: onCloseMock,
+    });
+    expect(isCoachmarkVisible()).toBeTruthy();
+
+    // Simulate Escape key press
+    const event = new KeyboardEvent('keydown', {
+      key: 'Escape',
+      bubbles: true,
+      cancelable: true,
+    });
+
+    await act(async () => {
+      document.dispatchEvent(event);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    expect(onCloseMock).toHaveBeenCalled();
+  });
+
+  it('handles selectorPrimaryFocus prop', async () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      open: true,
+      selectorPrimaryFocus: '#DoneBtn',
+    });
+
+    await waitFor(() => {
+      const focusedElement = document.querySelector('#DoneBtn');
+      expect(focusedElement).toHaveFocus();
+    });
+  });
+
+  it('does not close on outside click when floating is enabled', async () => {
+    const onCloseMock = jest.fn();
+    renderCoachmarkFloating({
+      'data-testid': dataTestId,
+      open: true,
+      floating: true,
+      onClose: onCloseMock,
+    });
+
+    expect(isCoachmarkVisible()).toBeTruthy();
+
+    // Click outside should not close when floating
+    await act(() => userEvent.click(document.body));
+
+    // onClose should not be called for outside clicks when floating
+    expect(onCloseMock).not.toHaveBeenCalled();
   });
 });

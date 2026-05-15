@@ -36,6 +36,7 @@ const defaults = {
 /**
  * StringFormatter allows for truncating text while displaying a tooltip
  * overlay on hover or focus with the entirety of the provided copy.
+ * @deprecated This component is deprecated and will be removed in the next major version. Please use TruncatedText instead.
  */
 export let StringFormatter = React.forwardRef(
   (
@@ -125,6 +126,12 @@ export let StringFormatter = React.forwardRef(
     );
   }
 );
+
+/**@ts-ignore*/
+StringFormatter.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with TruncatedText`,
+};
 
 StringFormatter = pkg.checkComponentEnabled(StringFormatter, componentName);
 

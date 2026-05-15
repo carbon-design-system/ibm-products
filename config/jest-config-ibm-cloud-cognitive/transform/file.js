@@ -5,14 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const path = require('path');
+import path from 'path';
 
 // This is a custom Jest transformer turning file imports into filenames.
 // https://jestjs.io/docs/upgrading-to-jest28#transformer
 
-module.exports = {
+export default {
   process(sourceText, sourcePath) {
     return {
       code: `module.exports = ${JSON.stringify(path.basename(sourcePath))};`,

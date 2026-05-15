@@ -60,9 +60,6 @@ import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 const componentName = 'PageHeader';
 
-pkg._silenceWarnings(true);
-pkg.component.ActionBar = true;
-
 // Default values for props
 const defaults = {
   fullWidthGrid: false,

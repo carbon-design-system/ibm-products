@@ -26,6 +26,7 @@ $block-class: #{$prefix}--edit-in-place;
 .#{$block-class}__container {
   display: flex;
   align-items: center;
+  padding: 0 $spacing-05;
   background: transparent;
   cursor: pointer;
 }
@@ -44,6 +45,7 @@ $block-class: #{$prefix}--edit-in-place;
 
 // Invalid state on container (not on warning text)
 .#{$block-class}__container.#{$block-class}--invalid {
+  padding: 0 $spacing-05;
   border: 2px solid $support-error;
 }
 

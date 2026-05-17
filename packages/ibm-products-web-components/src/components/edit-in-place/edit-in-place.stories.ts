@@ -135,7 +135,7 @@ const controls = {
   },
 };
 
-export default {
+const meta = {
   title: 'Components/EditInPlace',
   parameters: {
     docs: {
@@ -189,6 +189,8 @@ The EditInPlace component allows users to edit text inline with save and cancel 
     `,
   ],
 };
+
+export default meta;
 
 const Template = (args: any) => {
   const {
@@ -250,15 +252,49 @@ const Template = (args: any) => {
 };
 
 export const Default = {
-  args: defaultArgs,
+  args: {
+    cancelLabel: 'Cancel',
+    containerWidth: 300,
+    editAlwaysVisible: false,
+    editLabel: 'Edit',
+    id: 'story-id',
+    inheritTypography: false,
+    invalid: false,
+    invalidText: 'This field is required',
+    labelText: 'Label text',
+    placeholder: 'placeholder text',
+    readOnly: false,
+    readOnlyLabel: 'Edit off',
+    readOnlyToggleTipText: 'This field is read-only and cannot be edited',
+    saveLabel: 'Save',
+    size: EDIT_IN_PLACE_SIZE.SMALL,
+    toggleTipAlignment: TOOLTIP_ALIGNMENT.BOTTOM,
+    tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
+    value: 'default',
+  },
   render: Template,
 };
 
 export const Invalid = {
   args: {
-    ...defaultArgs,
+    cancelLabel: 'Cancel',
+    containerWidth: 300,
+    editAlwaysVisible: false,
+    editLabel: 'Edit',
+    id: 'story-id',
+    inheritTypography: false,
     invalid: true,
     invalidText: 'This field is required',
+    labelText: 'Label text',
+    placeholder: 'placeholder text',
+    readOnly: false,
+    readOnlyLabel: 'Edit off',
+    readOnlyToggleTipText: 'This field is read-only and cannot be edited',
+    saveLabel: 'Save',
+    size: EDIT_IN_PLACE_SIZE.SMALL,
+    toggleTipAlignment: TOOLTIP_ALIGNMENT.BOTTOM,
+    tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
+    value: 'default',
   },
   render: Template,
 };
@@ -328,15 +364,49 @@ const CustomBlurTemplate = (args: any) => {
 };
 
 export const CustomBlurFunction = {
-  args: defaultArgs,
+  args: {
+    cancelLabel: 'Cancel',
+    containerWidth: 300,
+    editAlwaysVisible: false,
+    editLabel: 'Edit',
+    id: 'story-id',
+    inheritTypography: false,
+    invalid: false,
+    invalidText: 'This field is required',
+    labelText: 'Label text',
+    placeholder: 'placeholder text',
+    readOnly: false,
+    readOnlyLabel: 'Edit off',
+    readOnlyToggleTipText: 'This field is read-only and cannot be edited',
+    saveLabel: 'Save',
+    size: EDIT_IN_PLACE_SIZE.SMALL,
+    toggleTipAlignment: TOOLTIP_ALIGNMENT.BOTTOM,
+    tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
+    value: 'default',
+  },
   render: CustomBlurTemplate,
 };
 
 export const ReadOnly = {
   args: {
-    ...defaultArgs,
+    cancelLabel: 'Cancel',
+    containerWidth: 300,
+    editAlwaysVisible: false,
+    editLabel: 'Edit',
+    id: 'story-id',
+    inheritTypography: false,
+    invalid: false,
+    invalidText: 'This field is required',
+    labelText: 'Label text',
+    placeholder: 'placeholder text',
     readOnly: true,
     readOnlyLabel: 'Edit off',
+    readOnlyToggleTipText: 'This field is read-only and cannot be edited',
+    saveLabel: 'Save',
+    size: EDIT_IN_PLACE_SIZE.SMALL,
+    toggleTipAlignment: TOOLTIP_ALIGNMENT.BOTTOM,
+    tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
+    value: 'default',
   },
   render: Template,
 };

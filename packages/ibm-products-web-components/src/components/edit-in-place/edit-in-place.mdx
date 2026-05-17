@@ -1,23 +1,130 @@
 import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as EditInPlaceStories from './edit-in-place.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+export const customFunctionArr = [];
+export const customImportArr = [];
 
 <Meta of={EditInPlaceStories} />
 
 # Edit in place
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Component API](#component-api)
-- [Events](#events)
-- [CSS Parts](#css-parts)
-- [Accessibility](#accessibility)
-- [Feedback](#feedback)
-
-## Overview
-
 The EditInPlace component allows users to edit text inline with save and cancel actions. It provides a seamless editing experience with keyboard support and validation.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/edit-in-place/index.js';
+```
+
+### HTML
+
+```html
+<c4p-edit-in-place
+  id="my-edit"
+  value="Edit me"
+  label-text="Editable field"
+  edit-label="Edit"
+  save-label="Save"
+  cancel-label="Cancel"
+></c4p-edit-in-place>
+```
+
+### JavaScript (Event Handling)
+
+```javascript
+const editInPlace = document.querySelector('c4p-edit-in-place');
+
+editInPlace.addEventListener('c4p-edit-in-place-change', (e) => {
+  console.log('Value changed:', e.detail.value);
+});
+
+editInPlace.addEventListener('c4p-edit-in-place-save', (e) => {
+  console.log('Saved:', e.detail.value);
+});
+
+editInPlace.addEventListener('c4p-edit-in-place-cancel', (e) => {
+  console.log('Cancelled:', e.detail.value);
+});
+```
+
+### Example Usage
+
+### Default
+
+<Canvas
+  of={EditInPlaceStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: EditInPlaceStories.Default,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'edit-in-place',
+        }),
+    },
+  ]}
+></Canvas>
+
+### Invalid
+
+<Canvas
+  of={EditInPlaceStories.Invalid}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: EditInPlaceStories.Invalid,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'edit-in-place',
+        }),
+    },
+  ]}
+></Canvas>
+
+### Custom Blur Function
+
+<Canvas
+  of={EditInPlaceStories.CustomBlurFunction}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: EditInPlaceStories.CustomBlurFunction,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'edit-in-place',
+        }),
+    },
+  ]}
+></Canvas>
+
+### Read Only
+
+<Canvas
+  of={EditInPlaceStories.ReadOnly}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: EditInPlaceStories.ReadOnly,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'edit-in-place',
+        }),
+    },
+  ]}
+></Canvas>
 
 ## Component API
 
@@ -99,83 +206,6 @@ c4p-edit-in-place::part(invalid-text) {
   - **Tab**: Navigate between input and action buttons
 - All buttons have accessible labels via tooltips
 - Invalid state is properly announced to screen readers
-
-## Usage Examples
-
-### Basic Usage
-
-```html
-<c4p-edit-in-place
-  id="basic-example"
-  value="Edit me"
-  label-text="Editable field"
-  edit-label="Edit"
-  save-label="Save"
-  cancel-label="Cancel"
-></c4p-edit-in-place>
-```
-
-### With Validation
-
-```html
-<c4p-edit-in-place
-  id="validated-example"
-  value="Required field"
-  label-text="Required field"
-  invalid
-  invalid-text="This field is required"
-  edit-label="Edit"
-  save-label="Save"
-  cancel-label="Cancel"
-></c4p-edit-in-place>
-```
-
-### Read-Only Mode
-
-```html
-<c4p-edit-in-place
-  id="readonly-example"
-  value="Read-only value"
-  label-text="Read-only field"
-  read-only
-  read-only-label="Edit off"
-></c4p-edit-in-place>
-```
-
-### With Event Handlers
-
-```javascript
-const editInPlace = document.querySelector('c4p-edit-in-place');
-
-editInPlace.addEventListener('c4p-edit-in-place-change', (e) => {
-  console.log('Value changed:', e.detail.value);
-});
-
-editInPlace.addEventListener('c4p-edit-in-place-save', (e) => {
-  console.log('Saved:', e.detail.value);
-  // Perform save operation
-});
-
-editInPlace.addEventListener('c4p-edit-in-place-cancel', (e) => {
-  console.log('Cancelled:', e.detail.value);
-});
-```
-
-### Inherit Typography
-
-```html
-<div style="font-size: 24px; font-weight: 600;">
-  <c4p-edit-in-place
-    id="inherit-example"
-    value="Large text"
-    label-text="Large editable field"
-    inherit-typography
-    edit-label="Edit"
-    save-label="Save"
-    cancel-label="Cancel"
-  ></c4p-edit-in-place>
-</div>
-```
 
 ## Feedback
 

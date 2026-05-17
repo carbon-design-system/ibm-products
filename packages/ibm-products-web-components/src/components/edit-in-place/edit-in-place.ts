@@ -468,7 +468,7 @@ class C4PEditInPlace extends LitElement {
           class="${blockClass}__btn ${blockClass}__btn-cancel"
           size=${this.size}
           align=${this.tooltipAlignment}
-          kind="ghost"
+          kind="tertiary"
           ?disabled=${!this._canCancel}
           @click=${() => this._handleCancel(false)}
         >
@@ -479,7 +479,7 @@ class C4PEditInPlace extends LitElement {
           class="${blockClass}__btn ${blockClass}__btn-save"
           size=${this.size}
           align=${this.tooltipAlignment}
-          kind="ghost"
+          kind="tertiary"
           ?disabled=${!this._canSave}
           @click=${() => this._handleSave(false)}
         >

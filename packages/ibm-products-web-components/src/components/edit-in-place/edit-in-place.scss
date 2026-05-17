@@ -62,6 +62,17 @@ $block-class: #{$prefix}--edit-in-place;
   outline: none;
 }
 
+// Edit button visibility - hidden by default, shown on hover
+.#{$block-class}__btn-edit {
+  visibility: hidden;
+}
+
+// Show edit button on container hover or when always visible
+.#{$block-class}__container:hover .#{$block-class}__btn-edit,
+.#{$block-class}__btn-edit.#{$block-class}__btn-edit--always-visible {
+  visibility: visible;
+}
+
 // Web component specific overrides for icon buttons
 .#{$block-class}__toolbar {
   #{$carbon-prefix}-icon-button {
@@ -74,6 +85,25 @@ $block-class: #{$prefix}--edit-in-place;
 .#{$block-class}__toolbar #{$carbon-prefix}-icon-button {
   block-size: var(--#{$block-class}--size);
   inline-size: var(--#{$block-class}--size);
+}
+
+// Remove borders from save and cancel buttons to match React
+// Target the button element inside the web component with higher specificity
+.#{$block-class}__toolbar .#{$block-class}__btn-save::part(button),
+.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button) {
+  border: none;
+  border-color: transparent;
+}
+
+// Also handle all button states
+.#{$block-class}__toolbar .#{$block-class}__btn-save::part(button):hover,
+.#{$block-class}__toolbar .#{$block-class}__btn-save::part(button):focus,
+.#{$block-class}__toolbar .#{$block-class}__btn-save::part(button):disabled,
+.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):hover,
+.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):focus,
+.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):disabled {
+  border: none;
+  border-color: transparent;
 }
 
 // Toggletip wrapper styling for read-only mode

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.39.0-rc.0`
+## `@carbon/ibm-products-web-components@0.39.0`
 ### Bug fixes :bug:
 - fix(TruncatedText): provide keyboard accessibility (#9245)
 - fix(preview_PageHeader): `HeroImage` not taking the full height (#9268)

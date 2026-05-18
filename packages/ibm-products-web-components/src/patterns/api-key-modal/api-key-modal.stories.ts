@@ -9,6 +9,7 @@
 
 import { html } from 'lit';
 import '../../../examples/api-key-modal/src/api-key-modal';
+import './story-styles.scss';
 
 export default {
   title: 'Patterns/APIKeyModal',

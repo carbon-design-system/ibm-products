@@ -726,7 +726,7 @@ $duration: 1000ms;
 
   // When disableStickyTabBar is true, remove sticky positioning from root
   // This allows breadcrumb to stick to viewport while tab bar scrolls normally
-  &.#{$block-class}.#{$block-class}__next--disable-sticky-tab-bar {
+  &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar {
     position: static;
     // Add padding to compensate for fixed breadcrumb (40px height)
     padding-block-start: to-rem(40px);
@@ -742,7 +742,7 @@ $duration: 1000ms;
   }
 
   // When disableStickyTabBar is true, breadcrumb uses fixed positioning at top of viewport
-  &.#{$block-class}.#{$block-class}__next--disable-sticky-tab-bar
+  &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar
     .#{$block-class}__breadcrumb-bar {
     position: fixed;
     inset-block-start: 0;
@@ -1047,7 +1047,7 @@ $duration: 1000ms;
   }
 
   // Disable sticky positioning for tab bar when disableStickyTabBar prop is true
-  &.#{$block-class}.#{$block-class}__next--disable-sticky-tab-bar
+  &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar
     .#{$block-class}__tab-bar {
     position: static;
     // On smaller screens, use flex to keep scroller button in flow

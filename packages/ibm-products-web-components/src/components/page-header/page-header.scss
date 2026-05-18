@@ -333,7 +333,7 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-tabs) {
-  position: relative;
+  position: sticky;
   z-index: 1;
   background-color: $layer-01;
   /* stylelint-disable-next-line carbon/layout-use */
@@ -366,8 +366,9 @@ $carbon-prefix: 'cds';
 }
 
 // Disable sticky positioning for tab bar when disableStickyTabBar prop is true
-:host-context(.#{$prefix}--page-header--disable-sticky-tab-bar)
-  :host(#{$prefix}-page-header-tabs) {
+:host(
+  #{$prefix}-page-header-tabs.#{$prefix}--page-header-tabs--disable-sticky
+) {
   position: static;
 }
 

@@ -100,7 +100,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       {
         [`${blockClass}`]: true,
         [`${blockClass}__next`]: true,
-        [`${blockClass}__next--disable-sticky-tab-bar`]: disableStickyTabBar,
+        [`${blockClass}--disable-sticky-tab-bar`]: disableStickyTabBar,
       },
       className
     );

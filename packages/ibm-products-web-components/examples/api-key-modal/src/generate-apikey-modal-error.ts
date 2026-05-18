@@ -67,9 +67,30 @@ class GenerateApiKeyModalError extends HostListenerMixin(LitElement) {
 
   private apiKey: string = '';
   private nameRequired = true;
+  private passwordInputRef: HTMLElement | null = null;
+  private textInputRef: HTMLElement | null = null;
 
   private _inputHandler(e: Event) {
     this.apiKeyName = (e.target as HTMLInputElement).value;
+    if (this.error) {
+      this.error = false;
+    }
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('apiKeyLoaded') && this.apiKeyLoaded && this.passwordInputRef) {
+      setTimeout(() => {
+        const input = this.passwordInputRef?.shadowRoot?.querySelector('input');
+        input?.focus();
+      }, 0);
+    }
+    if (changedProperties.has('error') && this.error && this.textInputRef) {
+      setTimeout(() => {
+        const input = this.textInputRef?.shadowRoot?.querySelector('input');
+        input?.focus();
+      }, 0);
+    }
   }
 
   private onCloseHandler() {
@@ -151,6 +172,7 @@ class GenerateApiKeyModalError extends HostListenerMixin(LitElement) {
           ${this.apiKey
             ? html`
                 <cds-text-input
+                  ${ref((el) => (this.passwordInputRef = el as HTMLElement))}
                   value=${this.apiKey}
                   label="API key"
                   showPasswordLabel="Show key"
@@ -166,6 +188,7 @@ class GenerateApiKeyModalError extends HostListenerMixin(LitElement) {
           ${!this.apiKeyLoaded && this.nameRequired
             ? html` <cds-form-item>
                 <cds-text-input
+                  ${ref((el) => (this.textInputRef = el as HTMLElement))}
                   label="Name your application"
                   id="test-id"
                   .value=${this.apiKeyName}

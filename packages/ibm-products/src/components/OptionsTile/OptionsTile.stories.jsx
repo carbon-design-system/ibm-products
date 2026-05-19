@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { Dropdown } from '@carbon/react';
+import React, { useState } from 'react';
+import { Dropdown, Toggle } from '@carbon/react';
 import { OptionsTile } from '.';
 import styles from './_storybook-styles.scss?inline';
 import mdx from './OptionsTile.mdx';
@@ -65,10 +65,19 @@ const Template = (args) => {
     { label: 'Turkish', id: 'tr' },
   ];
 
-  const { titleId: id, ...rest } = args;
+  const { titleId: id, enabled: enabledControl, ...rest } = args;
+  const [toggleChecked, setToggleChecked] = useState(true);
+
   return (
     <main>
-      <OptionsTile {...rest}>
+      <OptionsTile
+        {...rest}
+        enabled={enabledControl ? toggleChecked : undefined}
+        onToggle={(checked) => {
+          setToggleChecked(checked);
+          console.log('Toggle changed:', checked);
+        }}
+      >
         <p>
           User interface defines the language the application is displayed in.
           Locale sets the regional display formats for information like time,
@@ -103,7 +112,7 @@ const TemplateStatic = (args) => {
 
 const defaultProps = {
   className: 'example-class',
-  enabled: undefined,
+  enabled: true,
   invalid: false,
   invalidText: 'Your system does not support this configuration',
   locked: false,

@@ -8,7 +8,18 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/spacing' as *;
 
+.options-tile-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  min-block-size: 100vh;
+}
+
 .options-tile {
+  inline-size: 80vw;
+  max-inline-size: 48rem;
+  min-inline-size: 16rem;
+
   &__body p {
     @include type.type-style('body-01');
 

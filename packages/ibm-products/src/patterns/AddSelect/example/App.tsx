@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { StandardSingleAddSelect } from './preview-components/StandardSingleAddSelect';
+import { SingleAddSelectDefaultPreview } from './preview-components/SingleAddSelectDefault/SingleAddSelectDefault';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <section className="example-section">
         <h2>Single Selection</h2>
         <p>Select one item from a list</p>
-        <StandardSingleAddSelect />
+        <SingleAddSelectDefaultPreview />
       </section>
     </div>
   );

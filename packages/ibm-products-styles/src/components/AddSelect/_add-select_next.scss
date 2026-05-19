@@ -45,6 +45,20 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 
 .#{$block-class__next}__search {
   margin-block-end: $spacing-05;
+
+  &--with-actions {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+.#{$block-class__next}__search-input {
+  flex: 1;
+}
+
+.#{$block-class__next}__global-actions {
+  display: flex;
+  align-items: flex-end;
 }
 
 .#{$block-class__next}__sub-header {
@@ -64,6 +78,13 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 
   margin: 0;
   color: $text-secondary;
+}
+
+.#{$block-class__next}__sub-header-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+  margin-inline-start: $spacing-05;
 }
 
 .#{$block-class__next}__content {
@@ -445,9 +466,9 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 // ──────────────────────────────────────────────────────────────
-// AddSelectSelectionSummaryPanel - Selected items display
+// AddSelectSelectionSummary - Selected items display
 // ──────────────────────────────────────────────────────────────
-.#{$block-class__next}__selection-summary-panel {
+.#{$block-class__next}__selection-summary {
   display: flex;
   flex-direction: column;
 
@@ -483,12 +504,22 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     padding: $spacing-05 0;
     border-block-end: 1px solid $layer-accent-01;
   }
+
+  &-item-title {
+    color: $text-primary;
+  }
+
+  &-item-subtitle {
+    @include type.type-style('label-01');
+
+    color: $text-secondary;
+  }
 }
 
 // ──────────────────────────────────────────────────────────────
-// AddSelectSelectionSummaryPanelItem - Individual selected item
+// AddSelectSelectionSummaryItem - Individual selected item
 // ──────────────────────────────────────────────────────────────
-.#{$block-class__next}__selection-summary-panel-item {
+.#{$block-class__next}__selection-summary-item {
   position: relative;
 
   // Mode-specific variants
@@ -498,13 +529,13 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 
   &--simple {
     // Simple mode specific styles
-    .#{$block-class__next}__selection-summary-panel-item-title-wrapper {
+    .#{$block-class__next}__selection-summary-item-title-wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: $spacing-05;
     }
-    .#{$block-class__next}__selection-summary-panel-item-content {
+    .#{$block-class__next}__selection-summary-item-content {
       padding-inline: $spacing-05;
     }
   }
@@ -558,13 +589,13 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     padding-inline-start: $spacing-05;
 
     // In accordion mode, position absolutely
-    .#{$block-class__next}__selection-summary-panel-item--accordion & {
+    .#{$block-class__next}__selection-summary-item--accordion & {
       position: absolute;
       inset-inline-end: 0;
     }
 
     // In simple mode, position in flex layout
-    .#{$block-class__next}__selection-summary-panel-item--simple & {
+    .#{$block-class__next}__selection-summary-item--simple & {
       position: relative;
       margin-inline-start: auto;
     }
@@ -591,7 +622,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 // Accordion overrides for selection summary items
-.#{$block-class__next}__selection-summary-panel {
+.#{$block-class__next}__selection-summary {
   .cds--accordion__arrow {
     transform: rotate(0deg);
   }
@@ -616,9 +647,9 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 // ──────────────────────────────────────────────────────────────
-// AddSelectItemInfoPanel - Item info view
+// AddSelectItemSummaryPanel - Item summary view
 // ──────────────────────────────────────────────────────────────
-.#{$block-class__next}__item-info-panel {
+.#{$block-class__next}__item-summary-panel {
   padding: $spacing-05;
 
   &-header {

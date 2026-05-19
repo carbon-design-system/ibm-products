@@ -1,0 +1,213 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../../global/js/utils/story-helper';
+import * as stories from './SingleAddSelect.stories';
+
+# SingleAddSelect Pattern
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+- [Copy-paste ready code](#copy-paste-ready-code)
+
+## Overview
+
+The SingleAddSelect pattern provides a complete, production-ready implementation
+for single-selection workflows with hierarchical navigation. It includes a
+Tearsheet container, AddSelect component with breadcrumb navigation, and success
+notifications.
+
+> **Copy-paste ready**: The component in
+> `example/components/SingleAddSelect/SingleAddSelect.tsx` includes everything
+> you need - Tearsheet, breadcrumb navigation, Toast notifications, and all
+> interaction logic. Simply copy the file and customize the props.
+
+### Key Features
+
+- **Complete pattern** - Includes Tearsheet, AddSelect, breadcrumb navigation,
+  and toast notifications
+- **Single selection** - Select exactly one item with radio buttons
+- **Hierarchical navigation** - Navigate through nested data structures with
+  breadcrumbs
+- **Search** - Built-in global search across all levels
+- **Breadcrumb navigation** - Clear indication of current location in hierarchy
+- **Success feedback** - Toast notification on successful submission
+- **Accessible** - Full keyboard navigation and ARIA support
+
+## Example usage
+
+### Default
+
+<Canvas>
+  <Story id="patterns-add-and-select-single-add-select--default" />
+</Canvas>
+
+## Copy-paste ready code
+
+The SingleAddSelect component is located at:
+
+```
+packages/ibm-products/src/patterns/AddSelect/example/components/SingleAddSelect/SingleAddSelect.tsx
+```
+
+### Basic usage
+
+```jsx
+import { SingleAddSelect } from './components/SingleAddSelect';
+
+const MyComponent = () => {
+  const [open, setOpen] = useState(false);
+
+  const items = [
+    { id: '1', title: 'Category 1', value: 'cat1' },
+    {
+      id: '2',
+      title: 'Category 2',
+      value: 'cat2',
+      children: {
+        entries: [{ id: '2-1', title: 'Subcategory 1', value: 'subcategory1' }],
+      },
+    },
+  ];
+
+  const handleSubmit = (itemId, value) => {
+    console.log('Selected:', itemId, value);
+  };
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Select category</Button>
+
+      <SingleAddSelect
+        open={open}
+        setOpen={setOpen}
+        items={items}
+        onSubmit={handleSubmit}
+        title="Select category"
+        description="Choose one category from the list below"
+      />
+    </>
+  );
+};
+```
+
+## Component API
+
+### Props
+
+| Prop                          | Type                                      | Default                                            | Description                                   |
+| ----------------------------- | ----------------------------------------- | -------------------------------------------------- | --------------------------------------------- |
+| `open`                        | `boolean`                                 | Required                                           | Whether the tearsheet is open                 |
+| `setOpen`                     | `(open: boolean) => void`                 | Required                                           | Callback to set open state                    |
+| `items`                       | `AddSelectItem[]`                         | Required                                           | Array of hierarchical items to display        |
+| `onSubmit`                    | `(itemId: string, value: string) => void` | -                                                  | Callback when an item is submitted            |
+| `title`                       | `string`                                  | `'Select category'`                                | Title for the tearsheet                       |
+| `description`                 | `ReactNode`                               | `'Choose one category from the list below'`        | Description for the tearsheet                 |
+| `itemsLabel`                  | `string`                                  | `'Categories'`                                     | Label for items section                       |
+| `globalSearchLabel`           | `string`                                  | `'Search'`                                         | Global search label                           |
+| `globalSearchPlaceholder`     | `string`                                  | `'Search...'`                                      | Global search placeholder                     |
+| `rootBreadcrumbTitle`         | `string`                                  | `'Categories'`                                     | Root breadcrumb title                         |
+| `noResultsTitle`              | `string`                                  | `'No results found'`                               | No results title                              |
+| `noResultsDescription`        | `string`                                  | `'Try adjusting your search or browse categories'` | No results description                        |
+| `primaryButtonText`           | `string`                                  | `'Select'`                                         | Primary button text                           |
+| `secondaryButtonText`         | `string`                                  | `'Cancel'`                                         | Secondary button text                         |
+| `successNotificationTitle`    | `string`                                  | `'Item Selected'`                                  | Success notification title                    |
+| `successNotificationSubtitle` | `string`                                  | `'Selected: \{value\}'`                            | Success notification subtitle (use \{value\}) |
+
+### Item structure
+
+```typescript
+interface AddSelectItem {
+  id: string;
+  title?: string;
+  value?: string;
+  subtitle?: string;
+  icon?: ReactNode;
+  disabled?: boolean;
+  children?: {
+    entries: AddSelectItem[];
+  };
+}
+```
+
+## Hierarchical Navigation
+
+The pattern supports nested data structures with breadcrumb navigation:
+
+- Click items with children to navigate deeper
+- Use breadcrumbs to navigate back up the hierarchy
+- Search works across all levels of the hierarchy
+- Selection is maintained when navigating
+
+### Example hierarchical data
+
+```jsx
+const hierarchicalItems = [
+  {
+    id: '1',
+    title: 'California',
+    value: 'california',
+    children: {
+      entries: [
+        {
+          id: '1-1',
+          title: 'Los Angeles',
+          value: 'la',
+          children: {
+            entries: [
+              { id: '1-1-1', title: 'Beverly Hills', value: 'bh' },
+              { id: '1-1-2', title: 'Malibu', value: 'malibu' },
+            ],
+          },
+        },
+        { id: '1-2', title: 'San Francisco', value: 'sf' },
+      ],
+    },
+  },
+  { id: '2', title: 'Texas', value: 'texas' },
+];
+```
+
+## Customization
+
+### Custom labels and text
+
+```jsx
+<SingleAddSelect
+  title="Select location"
+  description="Choose a location from the hierarchy"
+  itemsLabel="Locations"
+  globalSearchLabel="Search locations"
+  rootBreadcrumbTitle="All locations"
+  primaryButtonText="Select"
+  successNotificationSubtitle="Selected: {value}"
+  // ... other props
+/>
+```
+
+## Best Practices
+
+1. **Keep hierarchies shallow** - Limit to 2-3 levels for better UX
+2. **Provide clear labels** - Use descriptive titles that match your domain
+3. **Handle submission** - Always provide an `onSubmit` callback
+4. **Test navigation** - Ensure breadcrumb navigation works correctly
+5. **Consider search** - For deep hierarchies, search becomes essential
+6. **Show breadcrumbs** - Help users understand their location in the hierarchy
+
+## Keyboard Navigation
+
+- **Arrow Up/Down** - Navigate between items
+- **Arrow Right** - Navigate to children (if available)
+- **Enter/Space** - Select item
+- **Ctrl+Home** - Jump to first item
+- **Ctrl+End** - Jump to last item
+
+## Related Patterns
+
+- [MultiAddSelect Pattern](/docs/patterns-add-and-select-multiaddselect--docs) -
+  For multi-selection workflows
+- [CreateModal Pattern](/docs/patterns-create-flows-create-modal--docs) - For
+  create workflows
+
+<CodesandboxLink exampleDirectory="AddSelect" />

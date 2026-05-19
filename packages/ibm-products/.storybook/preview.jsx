@@ -132,7 +132,12 @@ const parameters = {
         ['Welcome', 'Examples', '*'],
         'Components',
         'Patterns',
-        ['*', 'Prebuilt patterns'],
+        [
+          'Add and select',
+          ['Overview', 'SingleAddSelect', 'MultiAddSelect'],
+          '*',
+          'Prebuilt patterns',
+        ],
         'Utilities',
         'Preview',
         'Preview Candidate',

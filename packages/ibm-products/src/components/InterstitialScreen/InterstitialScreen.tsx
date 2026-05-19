@@ -109,7 +109,6 @@ export const InterstitialScreen = React.forwardRef<
   } = props;
   const backupRef = useRef<HTMLDivElement>(null);
   const _forwardedRef = ref || backupRef;
-  const scrollRef = useRef<any>(undefined);
   const startButtonRef = useRef<HTMLElement | undefined>(undefined);
   const nextButtonRef = useRef<HTMLElement | undefined>(undefined);
   const [isVisibleClass, setIsVisibleClass] = useState<string | null>(null);
@@ -218,15 +217,12 @@ export const InterstitialScreen = React.forwardRef<
 
   const handleGotoStep = (targetStep) => {
     setProgStep(targetStep as number);
-    scrollRef.current.scrollToView(targetStep as number);
-
     scrollBodyToTop();
   };
 
   const scrollBodyToTop = () => {
-    bodyScrollRef.current?.scroll?.({
+    bodyScrollRef?.current?.scroll?.({
       top: 0,
-      behavior: 'smooth',
     });
   };
   return (
@@ -239,7 +235,6 @@ export const InterstitialScreen = React.forwardRef<
         progStep,
         setProgStep,
         bodyScrollRef,
-        scrollRef,
         handleGotoStep,
         stepCount,
         setStepCount,

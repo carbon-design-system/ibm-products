@@ -10,6 +10,7 @@ import React, {
   ReactNode,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -20,8 +21,8 @@ import {
   disableButtonConfigType,
 } from './context';
 import { ModalBody } from '@carbon/react';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
 
-import { Carousel } from '../Carousel';
 import { EnrichedChildren } from './InterstitialScreenHeader';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
@@ -68,7 +69,6 @@ const InterstitialScreenBody = React.forwardRef<
     isFullScreen,
     setProgStep,
     bodyScrollRef,
-    scrollRef,
     handleGotoStep,
     progStep,
     setStepCount,
@@ -76,7 +76,8 @@ const InterstitialScreenBody = React.forwardRef<
     setDisableButtonConfig,
   } = useContext(InterstitialScreenContext);
 
-  const [scrollPercent, setScrollPercent] = useState(-1);
+  const carouselContainerRef = useRef<HTMLDivElement | null>(null);
+  const carouselInitRef = useRef<InitCarousel | null>(null);
 
   useEffect(() => {
     // Get the content either from contentRenderer or fallback to props.children
@@ -108,22 +109,46 @@ const InterstitialScreenBody = React.forwardRef<
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.children, contentRenderer, progStep]);
+  }, [props.children, contentRenderer]);
 
   useEffect(() => {
-    if (scrollPercent !== -1) {
-      const stepSize =
-        bodyChildrenData && (bodyChildrenData as ReactNode[]).length > 1
-          ? parseFloat(
-              (1 / ((bodyChildrenData as ReactNode[]).length - 1)).toFixed(2)
-            )
-          : 0;
-      const currentStep = scrollPercent / stepSize;
-
-      setProgStep?.(Math.ceil(currentStep));
+    if (
+      stepType !== 'multi' ||
+      !carouselContainerRef.current ||
+      !bodyChildrenData
+    ) {
+      return;
     }
+
+    carouselInitRef.current?.destroyEvents?.();
+    carouselInitRef.current = initCarousel(carouselContainerRef.current, {
+      onViewChangeStart: () => {},
+      onViewChangeEnd: ({ currentIndex }) => {
+        setProgStep?.(currentIndex);
+      },
+      excludeSwipeSupport: true,
+      useMaxHeight: true,
+    });
+
+    return () => {
+      carouselInitRef.current?.destroyEvents?.();
+      carouselInitRef.current = null;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scrollPercent]);
+  }, [stepType, bodyChildrenData]);
+
+  useEffect(() => {
+    if (stepType === 'multi' && typeof progStep === 'number') {
+      const activeItem = carouselInitRef.current?.getActiveItem?.();
+      const activeIndex = activeItem?.index ?? -1;
+
+      if (activeIndex !== -1 && activeIndex < progStep) {
+        carouselInitRef.current?.next?.();
+      } else if (activeIndex !== -1 && activeIndex > progStep) {
+        carouselInitRef.current?.prev?.();
+      }
+    }
+  }, [progStep, stepType]);
 
   const disableActionButton = (config: disableButtonConfigType) => {
     setDisableButtonConfig?.({
@@ -132,26 +157,26 @@ const InterstitialScreenBody = React.forwardRef<
     });
   };
 
-  const onScrollHandler = (scrollPercent) => setScrollPercent(scrollPercent);
-
   const renderBody = () => (
     <div
       className={`${blockClass}--body ${className}`}
-      ref={bodyScrollRef ?? ref}
+      ref={isFullScreen ? (bodyScrollRef ?? ref) : ref}
       {...getDevtoolsProps('InterstitialScreenBody')}
       {...(isFullScreen ? rest : {})}
     >
       <div className={`${blockClass}--content`}>
         {stepType === 'multi' ? (
-          <div className={`${blockClass}__carousel`}>
-            <Carousel
-              disableArrowScroll
-              disableResetOnResize
-              ref={scrollRef}
-              onScroll={onScrollHandler}
-            >
-              {bodyChildrenData}
-            </Carousel>
+          <div
+            className={`${blockClass}__carousel `}
+            ref={(node) => {
+              carouselContainerRef.current = node;
+            }}
+          >
+            {React.Children.map(bodyChildrenData, (child, index) =>
+              isValidElement(child) ? (
+                <div data-index={index}>{child}</div>
+              ) : null
+            )}
           </div>
         ) : stepType === 'single' ? (
           bodyChildrenData
@@ -165,7 +190,7 @@ const InterstitialScreenBody = React.forwardRef<
   return isFullScreen ? (
     renderBody()
   ) : (
-    <ModalBody ref={ref} className={bodyBlockClass} {...rest}>
+    <ModalBody ref={bodyScrollRef ?? ref} className={bodyBlockClass} {...rest}>
       {renderBody()}
     </ModalBody>
   );

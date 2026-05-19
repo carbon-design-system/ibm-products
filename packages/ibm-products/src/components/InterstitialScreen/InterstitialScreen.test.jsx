@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg, carbon } from '../../settings';
@@ -365,5 +365,631 @@ describe(componentName, () => {
 
     await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
     expect(launchButtonEl).toHaveFocus();
+  });
+
+  describe('Disabled button configurations', () => {
+    it('should disable skip button when disableButtonConfig.skip is true', async () => {
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={({ disableActionButton }) => (
+                <>
+                  <InterstitialScreenView
+                    stepTitle="Step 1"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test"
+                      description="Test description"
+                      disableActionButton={() =>
+                        disableActionButton({ skip: true })
+                      }
+                    />
+                  </InterstitialScreenView>
+                  <InterstitialScreenView
+                    stepTitle="Step 2"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test 2"
+                      description="Test description 2"
+                    />
+                  </InterstitialScreenView>
+                </>
+              )}
+            />
+            <InterstitialScreen.Footer />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+      await waitFor(() => {
+        const skipButton = screen.getByText('Skip');
+        expect(skipButton).toBeDisabled();
+      });
+    });
+
+    it('should disable back button when disableButtonConfig.back is true', async () => {
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={({ disableActionButton }) => (
+                <>
+                  <InterstitialScreenView
+                    stepTitle="Step 1"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test"
+                      description="Test description"
+                    />
+                  </InterstitialScreenView>
+                  <InterstitialScreenView
+                    stepTitle="Step 2"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test 2"
+                      description="Test description 2"
+                      disableActionButton={() =>
+                        disableActionButton({ back: true })
+                      }
+                    />
+                  </InterstitialScreenView>
+                </>
+              )}
+            />
+            <InterstitialScreen.Footer />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+
+      // Navigate to step 2
+      const nextButton = screen.getByText('Next');
+      await act(() => userEvent.click(nextButton));
+
+      // Check if back button is disabled
+      await waitFor(() => {
+        const backButton = screen.getByText('Back');
+        expect(backButton).toBeDisabled();
+      });
+    });
+
+    it('should disable next button when disableButtonConfig.next is true', async () => {
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={({ disableActionButton }) => (
+                <>
+                  <InterstitialScreenView
+                    stepTitle="Step 1"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test"
+                      description="Test description"
+                      disableActionButton={() =>
+                        disableActionButton({ next: true })
+                      }
+                    />
+                  </InterstitialScreenView>
+                  <InterstitialScreenView
+                    stepTitle="Step 2"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test 2"
+                      description="Test description 2"
+                    />
+                  </InterstitialScreenView>
+                </>
+              )}
+            />
+            <InterstitialScreen.Footer />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+      await waitFor(() => {
+        const nextButton = screen.getByText('Next');
+        expect(nextButton).toBeDisabled();
+      });
+    });
+
+    it('should disable start button when disableButtonConfig.start is true (single step)', async () => {
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={({ disableActionButton }) => (
+                <InterstitialScreenView
+                  stepTitle="Step 1"
+                  translateWithId={(id) => id}
+                >
+                  <InterstitialScreenViewModule
+                    title="Test"
+                    description="Test description"
+                    disableActionButton={() =>
+                      disableActionButton({ start: true })
+                    }
+                  />
+                </InterstitialScreenView>
+              )}
+            />
+            <InterstitialScreen.Footer />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+      // InterstitialScreenViewModule disables start button by default in useEffect
+      await waitFor(() => {
+        const startButton = screen.getByText('Get Started');
+        expect(startButton).toBeDisabled();
+      });
+    });
+
+    it('should disable multiple buttons simultaneously', async () => {
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={({ disableActionButton }) => (
+                <>
+                  <InterstitialScreenView
+                    stepTitle="Step 1"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test"
+                      description="Test description"
+                      disableActionButton={() =>
+                        disableActionButton({ skip: true, next: true })
+                      }
+                    />
+                  </InterstitialScreenView>
+                  <InterstitialScreenView
+                    stepTitle="Step 2"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test 2"
+                      description="Test description 2"
+                    />
+                  </InterstitialScreenView>
+                </>
+              )}
+            />
+            <InterstitialScreen.Footer />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+      await waitFor(() => {
+        const skipButton = screen.getByText('Skip');
+        const nextButton = screen.getByText('Next');
+
+        expect(skipButton).toBeDisabled();
+        expect(nextButton).toBeDisabled();
+      });
+    });
+  });
+
+  describe('Edge cases', () => {
+    it('should handle escape key press when modal is open', async () => {
+      const onCloseMock = jest.fn();
+      renderComponent({
+        className: blockClass,
+        ariaLabel: 'Modal Interstitial Screen',
+        onClose: onCloseMock,
+      });
+
+      await act(() => {
+        const escapeEvent = new KeyboardEvent('keydown', { key: 'Escape' });
+        window.dispatchEvent(escapeEvent);
+      });
+
+      expect(onCloseMock).toHaveBeenCalledWith('close');
+    });
+
+    it('should not render when open is false', () => {
+      const { container } = render(
+        <InterstitialScreen open={false} onClose={onClose}>
+          <InterstitialScreen.Header
+            headerTitle="Test"
+            headerSubTitle="Test subtitle"
+          />
+          <InterstitialScreen.Body
+            contentRenderer={() => (
+              <InterstitialScreenView stepTitle="Step 1">
+                <div>Content</div>
+              </InterstitialScreenView>
+            )}
+          />
+          <InterstitialScreen.Footer />
+        </InterstitialScreen>
+      );
+
+      expect(container.firstChild).toBeNull();
+    });
+
+    it('should handle empty skipButtonLabel', () => {
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={() => (
+                <>
+                  <InterstitialScreenView
+                    stepTitle="Step 1"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test"
+                      description="Test description"
+                    />
+                  </InterstitialScreenView>
+                  <InterstitialScreenView
+                    stepTitle="Step 2"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test 2"
+                      description="Test description 2"
+                    />
+                  </InterstitialScreenView>
+                </>
+              )}
+            />
+            <InterstitialScreen.Footer skipButtonLabel="" />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+      const skipButton = screen.queryByText('Skip');
+      expect(skipButton).not.toBeInTheDocument();
+    });
+
+    it('should handle onAction callback returning true to abort navigation', async () => {
+      const onActionMock = jest.fn(() => true);
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={() => (
+                <>
+                  <InterstitialScreenView
+                    stepTitle="Step 1"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test"
+                      description="Test description"
+                    />
+                  </InterstitialScreenView>
+                  <InterstitialScreenView
+                    stepTitle="Step 2"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test 2"
+                      description="Test description 2"
+                    />
+                  </InterstitialScreenView>
+                </>
+              )}
+            />
+            <InterstitialScreen.Footer onAction={onActionMock} />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+
+      const nextButton = screen.getByText('Next');
+      await act(() => userEvent.click(nextButton));
+
+      expect(onActionMock).toHaveBeenCalledWith('next', expect.any(Object));
+      // Should still be on step 1 since onAction returned true
+      expect(screen.getByText('Step 1')).toBeInTheDocument();
+    });
+
+    it('should handle onAction callback with async operations', async () => {
+      const onActionMock = jest.fn(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return false;
+      });
+
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={() => (
+                <>
+                  <InterstitialScreenView
+                    stepTitle="Step 1"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test"
+                      description="Test description"
+                    />
+                  </InterstitialScreenView>
+                  <InterstitialScreenView
+                    stepTitle="Step 2"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test 2"
+                      description="Test description 2"
+                    />
+                  </InterstitialScreenView>
+                </>
+              )}
+            />
+            <InterstitialScreen.Footer onAction={onActionMock} />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+
+      const nextButton = screen.getByText('Next');
+      await act(async () => {
+        await userEvent.click(nextButton);
+        await new Promise((resolve) => setTimeout(resolve, 150));
+      });
+
+      expect(onActionMock).toHaveBeenCalledWith('next', expect.any(Object));
+    });
+
+    it('should reset progStep to 0 when modal closes', async () => {
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <>
+            <Button onClick={() => setOpen(true)}>Open</Button>
+            <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+              <InterstitialScreen.Header
+                headerTitle="Test"
+                headerSubTitle="Test subtitle"
+              />
+              <InterstitialScreen.Body
+                contentRenderer={() => (
+                  <>
+                    <InterstitialScreenView
+                      stepTitle="Step 1"
+                      translateWithId={(id) => id}
+                    >
+                      <InterstitialScreenViewModule
+                        title="Test"
+                        description="Test description"
+                      />
+                    </InterstitialScreenView>
+                    <InterstitialScreenView
+                      stepTitle="Step 2"
+                      translateWithId={(id) => id}
+                    >
+                      <InterstitialScreenViewModule
+                        title="Test 2"
+                        description="Test description 2"
+                      />
+                    </InterstitialScreenView>
+                  </>
+                )}
+              />
+              <InterstitialScreen.Footer />
+            </InterstitialScreen>
+          </>
+        );
+      };
+
+      const { rerender } = render(<TestComponent />);
+
+      // Navigate to step 2
+      const nextButton = screen.getByText('Next');
+      await act(() => userEvent.click(nextButton));
+
+      // Close modal
+      const closeButton = screen.getByLabelText('Close');
+      await act(() => userEvent.click(closeButton));
+
+      // Reopen modal
+      rerender(<TestComponent />);
+      const openButton = screen.getByText('Open');
+      await act(() => userEvent.click(openButton));
+
+      // Should be back at step 1
+      await waitFor(() => {
+        expect(screen.getByText('Step 1')).toBeInTheDocument();
+      });
+    });
+
+    it('should handle full screen mode with disabled buttons', async () => {
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen
+            open={open}
+            onClose={() => setOpen(false)}
+            isFullScreen={true}
+          >
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={({ disableActionButton }) => (
+                <InterstitialScreenView
+                  stepTitle="Step 1"
+                  translateWithId={(id) => id}
+                >
+                  <InterstitialScreenViewModule
+                    title="Test"
+                    description="Test description"
+                    disableActionButton={() =>
+                      disableActionButton({ start: true })
+                    }
+                  />
+                </InterstitialScreenView>
+              )}
+            />
+            <InterstitialScreen.Footer />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+      await waitFor(() => {
+        const startButton = screen.getByText('Get Started');
+        expect(startButton).toBeDisabled();
+      });
+    });
+
+    it('should handle custom button labels', () => {
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={() => (
+                <>
+                  <InterstitialScreenView
+                    stepTitle="Step 1"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test"
+                      description="Test description"
+                    />
+                  </InterstitialScreenView>
+                  <InterstitialScreenView
+                    stepTitle="Step 2"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test 2"
+                      description="Test description 2"
+                    />
+                  </InterstitialScreenView>
+                </>
+              )}
+            />
+            <InterstitialScreen.Footer
+              skipButtonLabel="Skip Tour"
+              previousButtonLabel="Previous"
+              nextButtonLabel="Continue"
+              startButtonLabel="Begin"
+            />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+      expect(screen.getByText('Skip Tour')).toBeInTheDocument();
+      expect(screen.getByText('Continue')).toBeInTheDocument();
+    });
+
+    it('should handle navigation to last step and show start button', async () => {
+      const TestComponent = () => {
+        const [open, setOpen] = useState(true);
+        return (
+          <InterstitialScreen open={open} onClose={() => setOpen(false)}>
+            <InterstitialScreen.Header
+              headerTitle="Test"
+              headerSubTitle="Test subtitle"
+            />
+            <InterstitialScreen.Body
+              contentRenderer={() => (
+                <>
+                  <InterstitialScreenView
+                    stepTitle="Step 1"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test"
+                      description="Test description"
+                    />
+                  </InterstitialScreenView>
+                  <InterstitialScreenView
+                    stepTitle="Step 2"
+                    translateWithId={(id) => id}
+                  >
+                    <InterstitialScreenViewModule
+                      title="Test 2"
+                      description="Test description 2"
+                    />
+                  </InterstitialScreenView>
+                </>
+              )}
+            />
+            <InterstitialScreen.Footer />
+          </InterstitialScreen>
+        );
+      };
+
+      render(<TestComponent />);
+
+      // Navigate to last step
+      const nextButton = screen.getByText('Next');
+      await act(() => userEvent.click(nextButton));
+
+      // Next button should be hidden, start button should be visible
+      expect(screen.queryByText('Next')).not.toBeInTheDocument();
+      expect(screen.getByText('Get Started')).toBeInTheDocument();
+    });
   });
 });

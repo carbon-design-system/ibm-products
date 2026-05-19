@@ -392,6 +392,17 @@ class C4PEditInPlace extends LitElement {
   }
 
   /**
+   * Handle keydown on save button to exit edit mode on Tab
+   */
+  private _handleSaveButtonKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Tab' && !e.shiftKey) {
+      // Tab forward from save button - exit edit mode
+      this._focused = false;
+      this._inputElement?.blur();
+    }
+  }
+
+  /**
    * Initialize component
    */
   connectedCallback() {
@@ -468,7 +479,7 @@ class C4PEditInPlace extends LitElement {
           class="${blockClass}__btn ${blockClass}__btn-cancel"
           size=${this.size}
           align=${this.tooltipAlignment}
-          kind="tertiary"
+          kind="ghost"
           ?disabled=${!this._canCancel}
           @click=${() => this._handleCancel(false)}
         >
@@ -479,9 +490,10 @@ class C4PEditInPlace extends LitElement {
           class="${blockClass}__btn ${blockClass}__btn-save"
           size=${this.size}
           align=${this.tooltipAlignment}
-          kind="tertiary"
+          kind="ghost"
           ?disabled=${!this._canSave}
           @click=${() => this._handleSave(false)}
+          @keydown=${this._handleSaveButtonKeyDown}
         >
           ${iconLoader(Checkmark16, { slot: 'icon' })}
           <span slot="tooltip-content">${this.saveLabel}</span>

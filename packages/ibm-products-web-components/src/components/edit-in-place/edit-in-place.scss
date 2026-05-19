@@ -26,7 +26,7 @@ $block-class: #{$prefix}--edit-in-place;
 .#{$block-class}__container {
   display: flex;
   align-items: center;
-  padding: 0 $spacing-05;
+  padding: 0 0 0 $spacing-05;
   background: transparent;
   cursor: pointer;
 }
@@ -43,9 +43,16 @@ $block-class: #{$prefix}--edit-in-place;
   outline-offset: 0;
 }
 
+// Remove container outline when focus is on buttons (to avoid double focus ring)
+.#{$block-class}__container.#{$block-class}--focused:has(
+    .#{$block-class}__btn:focus-within
+  ) {
+  outline: none;
+}
+
 // Invalid state on container (not on warning text)
 .#{$block-class}__container.#{$block-class}--invalid {
-  padding: 0 $spacing-05;
+  padding: 0 0 0 $spacing-05;
   border: 2px solid $support-error;
 }
 
@@ -99,13 +106,26 @@ $block-class: #{$prefix}--edit-in-place;
 
 // Also handle all button states
 .#{$block-class}__toolbar .#{$block-class}__btn-save::part(button):hover,
+.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):hover {
+  border: none;
+  border-color: transparent;
+}
+
+// Focus state - 2px outline
 .#{$block-class}__toolbar .#{$block-class}__btn-save::part(button):focus,
+.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):focus {
+  border: none;
+  border-color: transparent;
+  outline: 2px solid $focus;
+  outline-offset: -2px;
+}
+
+// Disabled button styling - make icons greyed out
 .#{$block-class}__toolbar .#{$block-class}__btn-save::part(button):disabled,
-.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):hover,
-.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):focus,
 .#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):disabled {
   border: none;
   border-color: transparent;
+  opacity: 0.5;
 }
 
 // Toggletip wrapper styling for read-only mode

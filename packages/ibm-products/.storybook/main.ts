@@ -35,7 +35,6 @@ const config: StorybookConfig = {
   staticDirs: ['../public'],
 
   addons: [
-    '@storybook/addon-a11y',
     'storybook-addon-accessibility-checker',
     '@storybook/addon-links',
     {

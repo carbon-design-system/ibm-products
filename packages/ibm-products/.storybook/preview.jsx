@@ -40,13 +40,11 @@ if (isDev) {
 const decorators = [
   (storyFn, context) => {
     const {
-      args,
       globals,
       parameters: { styles },
     } = context;
     const { theme, dir } = globals;
     const story = storyFn();
-    JSON.stringify(args.featureFlags);
 
     useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);

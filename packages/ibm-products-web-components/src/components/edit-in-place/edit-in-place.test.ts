@@ -9,6 +9,7 @@
 
 import { html, render } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { describe, beforeEach, afterEach, it, expect } from 'vitest';
 import { prefix } from '../../globals/settings';
 import './index';
 

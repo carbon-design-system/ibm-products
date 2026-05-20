@@ -11,7 +11,12 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/inline-loading/index.js';
 import '@carbon/web-components/es/components/modal/index.js';
-import '@carbon/ibm-products-web-components/es/components/page-header/index.js';
+// import '@carbon/ibm-products-web-components/es/components/page-header/index.js';
+import '../../../../src/components/page-header/page-header.ts'
+import '../../../../src/components/page-header/page-header-breadcrumb.ts'
+import '../../../../src/components/page-header/page-header-breadcrumbs-set/page-header-breadcrumbs-set.ts'
+import '../../../../src/components/page-header/page-header-content.ts'
+import '../../../../src/components/page-header/page-header-content-text.ts'
 import type { StepData } from './create-influencer';
 import type { ActionButton } from '@carbon/ibm-products-web-components/es/components/action-set/index.js';
 import '@carbon/ibm-products-web-components/es/components/action-set/index.js';
@@ -328,8 +333,6 @@ export class CreateFullPage extends LitElement {
                   ></c4p-page-header-breadcrumbs-set>
                 </c4p-page-header-breadcrumb>
                 <c4p-page-header-content title="${this.title}">
-                  <c4p-page-header-content-text>
-                  </c4p-page-header-content-text>
                 </c4p-page-header-content>
               </c4p-page-header>
             `

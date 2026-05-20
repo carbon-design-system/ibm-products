@@ -139,16 +139,28 @@ class C4PEditInPlace extends LitElement {
   tooltipAlignment: TooltipAlignment = 'top';
 
   /**
-   * Current value of the input
+   * Current value of the input (controlled mode)
    */
   @property({ type: String })
   value = '';
+
+  /**
+   * Default value for uncontrolled mode
+   */
+  @property({ type: String, attribute: 'default-value' })
+  defaultValue = '';
 
   /**
    * Internal state for focused mode
    */
   @state()
   private _focused = false;
+
+  /**
+   * Internal value for managing state
+   */
+  @state()
+  private _internalValue = '';
 
   /**
    * Internal state for initial value (when entering edit mode)
@@ -182,7 +194,7 @@ class C4PEditInPlace extends LitElement {
    * Check if value has changed from initial
    */
   private get _hasValueChanged(): boolean {
-    return this.value.trim() !== this._initialValue.trim();
+    return this._internalValue.trim() !== this._initialValue.trim();
   }
 
   /**
@@ -208,12 +220,12 @@ class C4PEditInPlace extends LitElement {
       this._dirtyInput = true;
     }
 
-    this.value = input.value;
+    this._internalValue = input.value;
 
     const init = {
       bubbles: true,
       composed: true,
-      detail: { value: this.value },
+      detail: { value: this._internalValue },
     };
     this.dispatchEvent(new CustomEvent(`${prefix}-edit-in-place-change`, init));
   }
@@ -235,13 +247,13 @@ class C4PEditInPlace extends LitElement {
    * Handle save
    */
   private _handleSave(exitEditMode = false) {
-    this._initialValue = this.value;
+    this._initialValue = this._internalValue;
     this._dirtyInput = false;
 
     const init = {
       bubbles: true,
       composed: true,
-      detail: { value: this.value },
+      detail: { value: this._internalValue },
     };
     this.dispatchEvent(new CustomEvent(`${prefix}-edit-in-place-save`, init));
 
@@ -259,7 +271,7 @@ class C4PEditInPlace extends LitElement {
    */
   private _handleCancel(exitEditMode = false) {
     this._dirtyInput = false;
-    this.value = this._initialValue;
+    this._internalValue = this._initialValue;
 
     const init = {
       bubbles: true,
@@ -349,28 +361,15 @@ class C4PEditInPlace extends LitElement {
 
   /**
    * Handle toolbar mousedown to track button clicks
+   * Uses composedPath() to properly handle Shadow DOM boundaries
    */
   private _handleToolbarMouseDown(e: MouseEvent) {
-    const element = e.target as HTMLElement;
-    let foundButton: HTMLElement | null = null;
-
-    // Traverse up to find a button
-    let current = element;
-    while (current && current !== e.currentTarget) {
-      if (
-        current.tagName === 'BUTTON' ||
-        current.tagName === 'CDS-ICON-BUTTON'
-      ) {
-        foundButton = current;
-        break;
-      }
-      current = current.parentElement as HTMLElement;
-    }
-
-    // Search within the clicked element
-    if (!foundButton) {
-      foundButton = element.querySelector('button, cds-icon-button');
-    }
+    const path = e.composedPath();
+    const foundButton = path.find(
+      (el) =>
+        el instanceof HTMLElement &&
+        (el.tagName === 'BUTTON' || el.tagName === 'CDS-ICON-BUTTON')
+    ) as HTMLElement | undefined;
 
     if (foundButton) {
       this._clickingWithin = true;
@@ -401,7 +400,18 @@ class C4PEditInPlace extends LitElement {
    */
   connectedCallback() {
     super.connectedCallback();
-    this._initialValue = this.value;
+    this._internalValue = this.value || this.defaultValue;
+    this._initialValue = this._internalValue;
+  }
+
+  /**
+   * Cleanup component state when removed from DOM
+   */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._escaping = false;
+    this._clickingWithin = false;
+    this._focused = false;
   }
 
   /**
@@ -421,7 +431,7 @@ class C4PEditInPlace extends LitElement {
         type="text"
         part="input"
         placeholder=${this.placeholder}
-        .value=${this.value}
+        .value=${this._internalValue}
         @input=${this._handleChange}
         @focus=${this._handleFocus}
         @keydown=${this._handleKeyDown}

@@ -9,7 +9,7 @@
 
 import { html, render } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { describe, beforeEach, afterEach, it, expect } from 'vitest';
+import { describe, beforeEach, afterEach, it, expect, vi } from 'vitest';
 import { prefix } from '../../globals/settings';
 import './index';
 
@@ -216,7 +216,7 @@ describe(`${prefix}-edit-in-place`, () => {
         'input'
       ) as HTMLInputElement;
 
-      const changeHandler = jest.fn();
+      const changeHandler = vi.fn();
       editInPlace.addEventListener(
         `${prefix}-edit-in-place-change`,
         changeHandler
@@ -248,7 +248,7 @@ describe(`${prefix}-edit-in-place`, () => {
       input.dispatchEvent(new Event('input', { bubbles: true }));
       await Promise.resolve();
 
-      const saveHandler = jest.fn();
+      const saveHandler = vi.fn();
       editInPlace.addEventListener(`${prefix}-edit-in-place-save`, saveHandler);
 
       const saveBtn = editInPlace.shadowRoot?.querySelector(
@@ -278,7 +278,7 @@ describe(`${prefix}-edit-in-place`, () => {
       input.dispatchEvent(new Event('input', { bubbles: true }));
       await Promise.resolve();
 
-      const cancelHandler = jest.fn();
+      const cancelHandler = vi.fn();
       editInPlace.addEventListener(
         `${prefix}-edit-in-place-cancel`,
         cancelHandler
@@ -313,7 +313,7 @@ describe(`${prefix}-edit-in-place`, () => {
       input.dispatchEvent(new Event('input', { bubbles: true }));
       await Promise.resolve();
 
-      const saveHandler = jest.fn();
+      const saveHandler = vi.fn();
       editInPlace.addEventListener(`${prefix}-edit-in-place-save`, saveHandler);
 
       // Press Enter
@@ -345,7 +345,7 @@ describe(`${prefix}-edit-in-place`, () => {
       input.dispatchEvent(new Event('input', { bubbles: true }));
       await Promise.resolve();
 
-      const cancelHandler = jest.fn();
+      const cancelHandler = vi.fn();
       editInPlace.addEventListener(
         `${prefix}-edit-in-place-cancel`,
         cancelHandler

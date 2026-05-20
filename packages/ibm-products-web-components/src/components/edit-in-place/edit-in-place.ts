@@ -436,7 +436,7 @@ class C4PEditInPlace extends LitElement {
         @focus=${this._handleFocus}
         @keydown=${this._handleKeyDown}
         aria-label=${this.labelText}
-        ?aria-invalid=${this.invalid}
+        aria-invalid=${this.invalid ? 'true' : 'false'}
         ?readonly=${this.readOnly}
       />
     `;

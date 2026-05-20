@@ -10,6 +10,7 @@ import styles from '../_story-styles.scss?inline';
 import DocsPage from './SingleAddSelect.mdx';
 import { SingleAddSelectDefaultPreview } from '../example/preview-components/SingleAddSelectDefault/SingleAddSelectDefault';
 import { SingleAddSelectWithHierarchyPreview } from '../example/preview-components/SingleAddSelectWithHierarchy/SingleAddSelectWithHierarchy';
+import { AddSingleItemFromHierarchyPreview } from '../example/preview-components/AddSingleItemFromHierarchy/AddSingleItemFromHierarchy';
 
 export default {
   title: 'Patterns/Add and select/SingleAddSelect',
@@ -41,6 +42,10 @@ export const Overview = {
           <strong>With Hierarchy</strong> - Single selection with hierarchical
           navigation and breadcrumbs
         </li>
+        <li>
+          <strong>With Hierarchy and Side Panel</strong> - Single selection with
+          hierarchical navigation and side panel for item details
+        </li>
       </ul>
       <h2>When to use</h2>
       <ul>
@@ -63,3 +68,9 @@ export const WithHierarchy = {
 };
 
 WithHierarchy.storyName = 'With Hierarchy';
+
+export const WithHierarchyAndSidePanel = {
+  render: () => <AddSingleItemFromHierarchyPreview />,
+};
+
+WithHierarchyAndSidePanel.storyName = 'With Hierarchy and Side Panel';

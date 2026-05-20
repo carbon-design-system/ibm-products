@@ -32,6 +32,7 @@ notifications.
   breadcrumbs
 - **Search** - Built-in global search across all levels
 - **Breadcrumb navigation** - Clear indication of current location in hierarchy
+- **Side panel support** - Optional side panel for displaying item details
 - **Success feedback** - Toast notification on successful submission
 - **Accessible** - Full keyboard navigation and ARIA support
 
@@ -41,6 +42,16 @@ notifications.
 
 <Canvas>
   <Story id="patterns-add-and-select-single-add-select--default" />
+</Canvas>
+
+### With Hierarchy and Side Panel
+
+For use cases where users need additional context about items before making a
+selection, the pattern supports a side panel that displays detailed information
+about the selected item.
+
+<Canvas>
+  <Story id="patterns-add-and-select-single-add-select--with-hierarchy-and-side-panel" />
 </Canvas>
 
 ## Copy-paste ready code
@@ -114,6 +125,10 @@ const MyComponent = () => {
 | `secondaryButtonText`         | `string`                                  | `'Cancel'`                                         | Secondary button text                         |
 | `successNotificationTitle`    | `string`                                  | `'Item Selected'`                                  | Success notification title                    |
 | `successNotificationSubtitle` | `string`                                  | `'Selected: \{value\}'`                            | Success notification subtitle (use \{value\}) |
+| `sidePanelTitle`              | `string`                                  | `'Selected asset'`                                 | Side panel title (AddSingleItemFromHierarchy) |
+| `sidePanelDescriptionLabel`   | `string`                                  | `'Description'`                                    | Side panel description label                  |
+| `sidePanelDetailsLabel`       | `string`                                  | `'Asset details'`                                  | Side panel details label                      |
+| `sidePanelTagsLabel`          | `string`                                  | `'Tags'`                                           | Side panel tags label                         |
 
 ### Item structure
 
@@ -125,10 +140,39 @@ interface AddSelectItem {
   subtitle?: string;
   icon?: ReactNode;
   disabled?: boolean;
+  meta?: {
+    description?: string;
+    details?: Record<string, string | number>;
+    tags?: string[];
+  };
   children?: {
     entries: AddSelectItem[];
   };
 }
+```
+
+### Item metadata for side panel
+
+When using the `AddSingleItemFromHierarchy` pattern with side panel, you can
+provide additional metadata in the `meta` property:
+
+```jsx
+const itemWithMetadata = {
+  id: 'table-1',
+  title: 'Buenos Aires table',
+  value: 'buenos-aires-table',
+  subtitle: 'CSV from local',
+  icon: <Table size={20} />,
+  meta: {
+    description: 'Description text can go here in multiple lines...',
+    details: {
+      Columns: '19',
+      Rows: '1,852',
+      Size: '89.834 MB',
+    },
+    tags: ['Tag here', 'Long tag name here'],
+  },
+};
 ```
 
 ## Hierarchical Navigation
@@ -186,6 +230,26 @@ const hierarchicalItems = [
 />
 ```
 
+## Side Panel Pattern
+
+The `AddSingleItemFromHierarchy` pattern extends the basic hierarchy pattern
+with a side panel that displays detailed information about the selected item.
+This is useful when:
+
+- Users need additional context to make an informed decision
+- Items have rich metadata (descriptions, details, tags)
+- The selection involves significant resources or further steps
+
+### When to use the side panel
+
+- **Complex items** - When items have multiple attributes that help with
+  selection
+- **Need for context** - When users benefit from seeing details before
+  committing
+- **Rich metadata** - When items have descriptions, specifications, or tags
+- **Wide tearsheet** - The pattern uses a wide tearsheet to accommodate the side
+  panel
+
 ## Best Practices
 
 1. **Keep hierarchies shallow** - Limit to 2-3 levels for better UX
@@ -194,6 +258,10 @@ const hierarchicalItems = [
 4. **Test navigation** - Ensure breadcrumb navigation works correctly
 5. **Consider search** - For deep hierarchies, search becomes essential
 6. **Show breadcrumbs** - Help users understand their location in the hierarchy
+7. **Use side panel wisely** - Only include it when users need additional
+   context
+8. **Limit description length** - Keep descriptions to 4 lines maximum for
+   readability
 
 ## Keyboard Navigation
 

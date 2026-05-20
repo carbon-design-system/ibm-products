@@ -21,19 +21,12 @@ import Checkmark16 from '@carbon/icons/es/checkmark/16';
 import Close16 from '@carbon/icons/es/close/16';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import { EDIT_IN_PLACE_SIZE, TOOLTIP_ALIGNMENT } from './defs';
 
 const blockClass = `${prefix}--edit-in-place`;
 
-export type EditInPlaceSize = 'sm' | 'md' | 'lg';
-export type TooltipAlignment =
-  | 'top'
-  | 'top-left'
-  | 'top-right'
-  | 'bottom'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left'
-  | 'right';
+export type EditInPlaceSize = `${EDIT_IN_PLACE_SIZE}`;
+export type TooltipAlignment = `${TOOLTIP_ALIGNMENT}`;
 
 /**
  * EditInPlace component for inline text editing.
@@ -231,7 +224,9 @@ class C4PEditInPlace extends LitElement {
   private _handleFocus(e: FocusEvent) {
     const relatedTarget = e.relatedTarget as Node;
     if (!this.contains(relatedTarget)) {
-      this._inputElement?.focus();
+      requestAnimationFrame(() => {
+        this._inputElement?.focus();
+      });
     }
     this._focused = true;
   }
@@ -294,15 +289,13 @@ class C4PEditInPlace extends LitElement {
     const clickedWithin = this._clickingWithin;
     const targetingChild = this.contains(relatedTarget);
 
-    // If clicked any button AND focus is staying within, don't exit edit mode
-    if (clickedWithin && targetingChild) {
+    // Reset clicking flag if we clicked within
+    if (clickedWithin) {
       this._clickingWithin = false;
-      return;
-    }
-
-    // If clicked within but focus is leaving, exit edit mode
-    if (clickedWithin && !targetingChild) {
-      this._clickingWithin = false;
+      // If focus is staying within, don't exit edit mode
+      if (targetingChild) {
+        return;
+      }
     }
 
     // If tabbing to a button within, allow it
@@ -319,7 +312,6 @@ class C4PEditInPlace extends LitElement {
       this._handleSave(true);
     } else {
       this._handleCancel(true);
-      this._focused = false;
     }
 
     // Dispatch blur event
@@ -335,22 +327,24 @@ class C4PEditInPlace extends LitElement {
    * Handle keyboard events
    */
   private _handleKeyDown(e: KeyboardEvent) {
-    this._escaping = true;
     switch (e.key) {
       case 'Escape':
+        this._escaping = true;
         this._inputElement?.blur();
         this._handleCancel(false);
+        this._escaping = false;
         break;
       case 'Enter':
+        this._escaping = true;
         this._inputElement?.blur();
         if (this._canSave) {
           this._handleSave(false);
         }
+        this._escaping = false;
         break;
       default:
         break;
     }
-    this._escaping = false;
   }
 
   /**

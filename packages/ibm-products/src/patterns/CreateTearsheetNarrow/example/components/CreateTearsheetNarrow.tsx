@@ -99,7 +99,7 @@ export const CreateTearsheetNarrow = ({
       className={className}
       {...rest}
     >
-      <Tearsheet.Header hideCloseButton={hasCloseIcon}>
+      <Tearsheet.Header hideCloseButton={hasCloseIcon} disableHeaderCollapse>
         <Tearsheet.HeaderContent
           label={label || ''}
           title={title || ''}

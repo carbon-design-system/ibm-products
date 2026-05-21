@@ -658,10 +658,6 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
       display: none;
     }
   }
-  .#{$block-class__next}__header-content-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
   .#{$block-class__next}__header-title {
     @include type.type-style('heading-03');
   }

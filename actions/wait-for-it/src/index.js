@@ -10,6 +10,9 @@ import got from 'got';
 
 async function main() {
   let url = core.getInput('URL', {
+      required: true,
+      trimWhitespace: true
+    });
     required: true,
   });
 
@@ -22,12 +25,27 @@ async function main() {
   }
 
   // As of got v12, legacy Url instances are not supported anymore. You need to use WHATWG URL instead.
-  url = new URL(url);
+  try {
+      url = new URL(url);
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+        throw new Error('Invalid protocol');
+      }
+    } catch (error) {
+      core.setFailed('Invalid URL');
+      return;
+    }
 
   core.info(`Waiting for a 200 response from ${url}`);
 
   try {
     await got(url, {
+      method: 'GET',
+      retry: {
+        limit: 5,
+        maxRetryAfter: 500,
+      },
+      timeout: { request: 5000 },
+    }
       method: 'GET',
       retry: {
         limit: 10,

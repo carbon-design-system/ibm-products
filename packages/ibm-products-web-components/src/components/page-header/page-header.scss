@@ -79,7 +79,7 @@ $carbon-prefix: 'cds';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    block-size: convert.to-rem(40px);
+    block-size: $spacing-08;
     gap: $spacing-03;
     inline-size: 100%;
     min-inline-size: 0;

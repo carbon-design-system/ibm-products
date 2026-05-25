@@ -1,3 +1,8 @@
+## `@jest-config-ibm-cloud-cognitive@1.50.0-rc.0`
+### Housekeeping :house:
+- chore: upgrade jest config to pure esm (#9407)
+- chore(storybook): upgrade Storybook to 10 (#9392)
+
 ## `@jest-config-ibm-cloud-cognitive@1.49.0`
 ### Bug fixes :bug:
 - fix: remove unwanted paths from code coverage report (#9363)

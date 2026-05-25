@@ -14,7 +14,14 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Checkbox, RadioButton, IconButton } from '@carbon/react';
+import {
+  Checkbox,
+  RadioButton,
+  IconButton,
+  type CheckboxProps,
+  type RadioButtonProps,
+  type IconButtonProps,
+} from '@carbon/react';
 import { ChevronRight, View } from '@carbon/react/icons';
 import { blockClass, AddSelectContext } from './context';
 
@@ -86,6 +93,40 @@ export interface AddSelectRowProps {
    * Optional class name
    */
   className?: string;
+  /**
+   * Additional props to pass to the Checkbox component (when multi=true)
+   */
+  checkboxProps?: Omit<
+    CheckboxProps,
+    | 'id'
+    | 'className'
+    | 'checked'
+    | 'disabled'
+    | 'labelText'
+    | 'hideLabel'
+    | 'onChange'
+  >;
+  /**
+   * Additional props to pass to the RadioButton component (when multi=false)
+   */
+  radioButtonProps?: Omit<
+    RadioButtonProps,
+    | 'id'
+    | 'className'
+    | 'checked'
+    | 'disabled'
+    | 'labelText'
+    | 'hideLabel'
+    | 'value'
+    | 'onChange'
+  >;
+  /**
+   * Additional props to pass to the IconButton component (info panel)
+   */
+  itemPanelIconButtonProps?: Omit<
+    IconButtonProps,
+    'label' | 'onClick' | 'kind' | 'size' | 'className' | 'children'
+  >;
 }
 
 const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
@@ -106,6 +147,9 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       infoPanelIconDescription = 'View details',
       infoPanelOpen = false,
       className,
+      checkboxProps,
+      radioButtonProps,
+      itemPanelIconButtonProps,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -164,6 +208,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
                 labelText={title}
                 hideLabel
                 onChange={handleSelect}
+                {...checkboxProps}
               />
             ) : (
               <RadioButton
@@ -175,6 +220,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
                 hideLabel
                 value={itemId}
                 onChange={handleSelect}
+                {...radioButtonProps}
               />
             )}
 
@@ -198,6 +244,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
                 kind="ghost"
                 size="sm"
                 className={`${blockClass}-row__view-info-panel`}
+                {...itemPanelIconButtonProps}
               >
                 <View size={16} />
               </IconButton>
@@ -231,6 +278,8 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
 );
 
 AddSelectRow.propTypes = {
+  /**@ts-ignore */
+  checkboxProps: PropTypes.object,
   children: PropTypes.node,
   className: PropTypes.string,
   disabled: PropTypes.bool,
@@ -241,8 +290,12 @@ AddSelectRow.propTypes = {
   infoPanelOpen: PropTypes.bool,
   itemId: PropTypes.string.isRequired,
   /**@ts-ignore */
+  itemPanelIconButtonProps: PropTypes.object,
+  /**@ts-ignore */
   onInfoPanelClick: PropTypes.func,
   parentId: PropTypes.string,
+  /**@ts-ignore */
+  radioButtonProps: PropTypes.object,
   selected: PropTypes.bool,
   subtitle: PropTypes.string,
   title: PropTypes.string.isRequired,

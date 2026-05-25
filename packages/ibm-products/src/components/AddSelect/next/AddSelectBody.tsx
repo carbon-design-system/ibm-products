@@ -15,7 +15,18 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Search, Tag, Breadcrumb, BreadcrumbItem, Link } from '@carbon/react';
+import {
+  Search,
+  Tag,
+  Breadcrumb,
+  BreadcrumbItem,
+  Link,
+  type SearchProps,
+  type TagProps,
+  type BreadcrumbProps,
+  type BreadcrumbItemProps,
+  type LinkProps,
+} from '@carbon/react';
 import { blockClass, AddSelectContext } from './context';
 
 /**
@@ -74,6 +85,35 @@ export interface AddSelectBodyProps {
    * Sub-header actions - custom content/actions rendered after breadcrumbs and item count
    */
   subHeaderActions?: ReactNode;
+  /**
+   * Additional props to pass to the Search component
+   */
+  searchProps?: Omit<
+    SearchProps,
+    'labelText' | 'placeholder' | 'size' | 'onChange' | 'value'
+  >;
+  /**
+   * Additional props to pass to the Tag component (for item count)
+   */
+  tagProps?: Omit<TagProps<'div'>, 'type' | 'size' | 'children'>;
+  /**
+   * Additional props to pass to the Breadcrumb component
+   */
+  breadcrumbProps?: Omit<
+    BreadcrumbProps,
+    'noTrailingSlash' | 'className' | 'children'
+  >;
+  /**
+   * Additional props to pass to BreadcrumbItem components
+   */
+  breadcrumbItemProps?: Omit<
+    BreadcrumbItemProps,
+    'key' | 'isCurrentPage' | 'children'
+  >;
+  /**
+   * Additional props to pass to Link components in breadcrumbs
+   */
+  linkProps?: Omit<LinkProps<'a'>, 'href' | 'onClick' | 'children'>;
 }
 
 const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
@@ -92,6 +132,11 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
       headerContent,
       actionsSlot,
       subHeaderActions,
+      searchProps,
+      tagProps,
+      breadcrumbProps,
+      breadcrumbItemProps,
+      linkProps,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -133,6 +178,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
                     size="lg"
                     onChange={handleSearch}
                     value={searchTerm}
+                    {...searchProps}
                   />
                 </div>
                 {actionsSlot && (
@@ -155,6 +201,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
                       className={cx(`${blockClass}__breadcrumbs`, {
                         [`${blockClass}__breadcrumbs--multi`]: multi,
                       })}
+                      {...breadcrumbProps}
                     >
                       {path.map((entry, idx) => {
                         const isCurrentPage = idx === path.length - 1;
@@ -162,6 +209,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
                           <BreadcrumbItem
                             key={entry.id}
                             isCurrentPage={isCurrentPage}
+                            {...breadcrumbItemProps}
                           >
                             {isCurrentPage ? (
                               entry.title
@@ -172,6 +220,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
                                   e.preventDefault();
                                   onBreadcrumbClick?.(idx);
                                 }}
+                                {...linkProps}
                               >
                                 {entry.title}
                               </Link>
@@ -183,7 +232,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
                   ) : (
                     <p className={`${blockClass}__tags-label`}>{itemsLabel}</p>
                   )}
-                  <Tag type="gray" size="sm">
+                  <Tag type="gray" size="sm" {...tagProps}>
                     {itemCount}
                   </Tag>
                 </div>
@@ -206,6 +255,10 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
 
 AddSelectBody.propTypes = {
   actionsSlot: PropTypes.node,
+  /**@ts-ignore */
+  breadcrumbItemProps: PropTypes.object,
+  /**@ts-ignore */
+  breadcrumbProps: PropTypes.object,
   children: PropTypes.node,
   className: PropTypes.string,
   globalSearchLabel: PropTypes.string,
@@ -213,6 +266,8 @@ AddSelectBody.propTypes = {
   headerContent: PropTypes.node,
   itemCount: PropTypes.number,
   itemsLabel: PropTypes.string,
+  /**@ts-ignore */
+  linkProps: PropTypes.object,
   /**@ts-ignore */
   onBreadcrumbClick: PropTypes.func,
   /**@ts-ignore */
@@ -224,8 +279,12 @@ AddSelectBody.propTypes = {
       title: PropTypes.string.isRequired,
     })
   ),
+  /**@ts-ignore */
+  searchProps: PropTypes.object,
   searchResultsTitle: PropTypes.string,
   subHeaderActions: PropTypes.node,
+  /**@ts-ignore */
+  tagProps: PropTypes.object,
 };
 
 AddSelectBody.displayName = 'AddSelectBody';

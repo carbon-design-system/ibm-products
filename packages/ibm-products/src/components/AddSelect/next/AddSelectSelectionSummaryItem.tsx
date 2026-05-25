@@ -8,7 +8,14 @@
 import React, { forwardRef, ForwardedRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Accordion, AccordionItem, IconButton } from '@carbon/react';
+import {
+  Accordion,
+  AccordionItem,
+  IconButton,
+  type AccordionProps,
+  type AccordionItemProps,
+  type IconButtonProps,
+} from '@carbon/react';
 import { SubtractAlt } from '@carbon/react/icons';
 import type { AddSelectItem } from '@carbon/ibm-products-primitives';
 import { blockClass } from './context';
@@ -56,6 +63,21 @@ export interface AddSelectSelectionSummaryItemProps {
    * Optional class name
    */
   className?: string;
+  /**
+   * Additional props to pass to the Accordion component
+   */
+  accordionProps?: Omit<AccordionProps, 'align' | 'children'>;
+  /**
+   * Additional props to pass to the AccordionItem component
+   */
+  accordionItemProps?: Omit<AccordionItemProps, 'title' | 'children'>;
+  /**
+   * Additional props to pass to the remove IconButton
+   */
+  removeIconButtonProps?: Omit<
+    IconButtonProps,
+    'label' | 'onClick' | 'kind' | 'className' | 'children'
+  >;
 }
 
 /**
@@ -83,6 +105,9 @@ const AddSelectSelectionSummaryItem = forwardRef<
       removeButtonLabel = 'Remove item',
       useAccordion = false,
       className,
+      accordionProps,
+      accordionItemProps,
+      removeIconButtonProps,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -107,6 +132,7 @@ const AddSelectSelectionSummaryItem = forwardRef<
         }}
         kind="ghost"
         className={`${blockClass}__selection-summary-item-remove-button`}
+        {...removeIconButtonProps}
       >
         <SubtractAlt size={16} />
       </IconButton>
@@ -191,7 +217,7 @@ const AddSelectSelectionSummaryItem = forwardRef<
 
       return (
         <div className={itemClasses} ref={ref} {...rest}>
-          <Accordion align="start">
+          <Accordion align="start" {...accordionProps}>
             <AccordionItem
               title={
                 <div
@@ -207,6 +233,7 @@ const AddSelectSelectionSummaryItem = forwardRef<
                   )}
                 </div>
               }
+              {...accordionItemProps}
             >
               {bodyContent}
             </AccordionItem>
@@ -230,12 +257,18 @@ const AddSelectSelectionSummaryItem = forwardRef<
 );
 
 AddSelectSelectionSummaryItem.propTypes = {
+  /**@ts-ignore */
+  accordionItemProps: PropTypes.object,
+  /**@ts-ignore */
+  accordionProps: PropTypes.object,
   className: PropTypes.string,
   /**@ts-ignore */
   item: PropTypes.object.isRequired,
   /**@ts-ignore */
   onRemove: PropTypes.func,
   removeButtonLabel: PropTypes.string,
+  /**@ts-ignore */
+  removeIconButtonProps: PropTypes.object,
   /**@ts-ignore */
   renderContent: PropTypes.func,
   /**@ts-ignore */

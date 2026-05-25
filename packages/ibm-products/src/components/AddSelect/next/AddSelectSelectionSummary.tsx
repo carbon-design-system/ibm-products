@@ -8,7 +8,12 @@
 import React, { forwardRef, ForwardedRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Tag, IconButton } from '@carbon/react';
+import {
+  Tag,
+  IconButton,
+  type TagProps,
+  type IconButtonProps,
+} from '@carbon/react';
 import { Edit } from '@carbon/react/icons';
 import type { AddSelectItem } from '@carbon/ibm-products-primitives';
 import { blockClass } from './context';
@@ -68,6 +73,17 @@ export interface AddSelectSelectionSummaryProps {
    * Header actions slot - adds custom actions alongside the edit icon
    */
   headerActions?: ReactNode;
+  /**
+   * Additional props to pass to the Tag component
+   */
+  tagProps?: Omit<TagProps<'div'>, 'type' | 'size' | 'children'>;
+  /**
+   * Additional props to pass to the edit IconButton
+   */
+  editIconButtonProps?: Omit<
+    IconButtonProps,
+    'label' | 'onClick' | 'kind' | 'size' | 'className' | 'children'
+  >;
 }
 
 /**
@@ -134,6 +150,8 @@ const AddSelectSelectionSummary = forwardRef<
       renderItem,
       headerContent,
       headerActions,
+      tagProps,
+      editIconButtonProps,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -152,7 +170,7 @@ const AddSelectSelectionSummary = forwardRef<
                 {title}
               </p>
               {showCount && (
-                <Tag type="gray" size="sm">
+                <Tag type="gray" size="sm" {...tagProps}>
                   {selectedItems.length}
                 </Tag>
               )}
@@ -166,6 +184,7 @@ const AddSelectSelectionSummary = forwardRef<
                     kind="ghost"
                     size="sm"
                     className={`${blockClass}__selection-summary-edit-button`}
+                    {...editIconButtonProps}
                   >
                     <Edit size={16} />
                   </IconButton>
@@ -221,6 +240,8 @@ const AddSelectSelectionSummary = forwardRef<
 AddSelectSelectionSummary.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  /**@ts-ignore */
+  editIconButtonProps: PropTypes.object,
   editIconDescription: PropTypes.string,
   emptyState: PropTypes.node,
   headerActions: PropTypes.node,
@@ -233,6 +254,8 @@ AddSelectSelectionSummary.propTypes = {
   selectedItems: PropTypes.arrayOf(PropTypes.object),
   showCount: PropTypes.bool,
   showEditIcon: PropTypes.bool,
+  /**@ts-ignore */
+  tagProps: PropTypes.object,
   title: PropTypes.string,
 };
 

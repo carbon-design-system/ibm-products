@@ -14,7 +14,14 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Search, Tag, Checkbox } from '@carbon/react';
+import {
+  Search,
+  Tag,
+  Checkbox,
+  type SearchProps,
+  type TagProps,
+  type CheckboxProps,
+} from '@carbon/react';
 import { blockClass, AddSelectContext } from './context';
 
 /**
@@ -83,6 +90,24 @@ export interface AddSelectColumnProps {
    * Optional class name
    */
   className?: string;
+  /**
+   * Additional props to pass to the Search component
+   */
+  searchProps?: Omit<
+    SearchProps,
+    'labelText' | 'placeholder' | 'size' | 'onChange' | 'value'
+  >;
+  /**
+   * Additional props to pass to the Tag component
+   */
+  tagProps?: Omit<TagProps<'div'>, 'type' | 'size' | 'children'>;
+  /**
+   * Additional props to pass to the Checkbox component (Select All)
+   */
+  selectAllCheckboxProps?: Omit<
+    CheckboxProps,
+    'id' | 'className' | 'checked' | 'onChange' | 'labelText'
+  >;
 }
 
 const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
@@ -102,6 +127,9 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
       onSelectAll,
       onNavigate,
       className,
+      searchProps,
+      tagProps,
+      selectAllCheckboxProps,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -152,6 +180,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
                   size="md"
                   onChange={handleSearch}
                   value={searchTerm}
+                  {...searchProps}
                 />
               </div>
               {actionsSlot && (
@@ -177,18 +206,19 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
                         {title}
                       </span>
                       {itemCount > 0 && (
-                        <Tag type="gray" size="sm">
+                        <Tag type="gray" size="sm" {...tagProps}>
                           {itemCount}
                         </Tag>
                       )}
                     </>
                   }
+                  {...selectAllCheckboxProps}
                 />
               ) : (
                 <div className={`${blockClass}-column__title-wrapper`}>
                   <span className={`${blockClass}-column__title`}>{title}</span>
                   {itemCount > 0 && (
-                    <Tag type="gray" size="sm">
+                    <Tag type="gray" size="sm" {...tagProps}>
                       {itemCount}
                     </Tag>
                   )}
@@ -221,7 +251,13 @@ AddSelectColumn.propTypes = {
   onSelectAll: PropTypes.func,
   searchLabel: PropTypes.string,
   searchPlaceholder: PropTypes.string,
+  /**@ts-ignore */
+  searchProps: PropTypes.object,
+  /**@ts-ignore */
+  selectAllCheckboxProps: PropTypes.object,
   showSelectAll: PropTypes.bool,
+  /**@ts-ignore */
+  tagProps: PropTypes.object,
   title: PropTypes.string,
 };
 

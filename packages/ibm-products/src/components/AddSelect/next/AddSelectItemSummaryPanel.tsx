@@ -13,7 +13,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { IconButton } from '@carbon/react';
+import { IconButton, type IconButtonProps } from '@carbon/react';
 import { Close } from '@carbon/react/icons';
 import type { AddSelectItem } from '@carbon/ibm-products-primitives';
 import { blockClass } from './context';
@@ -59,6 +59,13 @@ export interface AddSelectItemSummaryPanelProps {
    * Optional class name
    */
   className?: string;
+  /**
+   * Additional props to pass to the close IconButton
+   */
+  closeIconButtonProps?: Omit<
+    IconButtonProps,
+    'label' | 'onClick' | 'kind' | 'size' | 'className' | 'children'
+  >;
 }
 
 /**
@@ -86,6 +93,7 @@ const AddSelectItemSummaryPanel = forwardRef<
       children,
       renderContent,
       className,
+      closeIconButtonProps,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -197,6 +205,7 @@ const AddSelectItemSummaryPanel = forwardRef<
               kind="ghost"
               size="sm"
               className={`${blockClass}__item-summary-panel-close`}
+              {...closeIconButtonProps}
             >
               <Close size={16} />
             </IconButton>
@@ -215,6 +224,8 @@ const AddSelectItemSummaryPanel = forwardRef<
 AddSelectItemSummaryPanel.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  /**@ts-ignore */
+  closeIconButtonProps: PropTypes.object,
   closeIconDescription: PropTypes.string,
   /**@ts-ignore */
   item: PropTypes.oneOfType([

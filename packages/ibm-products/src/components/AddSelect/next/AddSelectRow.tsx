@@ -243,6 +243,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
                 onClick={handleItemPanelClick}
                 kind="ghost"
                 size="sm"
+                autoAlign
                 className={`${blockClass}-row__view-item-panel`}
                 {...itemPanelIconButtonProps}
               >

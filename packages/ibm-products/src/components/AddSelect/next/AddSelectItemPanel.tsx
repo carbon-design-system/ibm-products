@@ -201,6 +201,7 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
               onClick={onClose}
               kind="ghost"
               size="sm"
+              autoAlign
               className={`${blockClass}__item-summary-panel-close`}
               {...closeIconButtonProps}
             >

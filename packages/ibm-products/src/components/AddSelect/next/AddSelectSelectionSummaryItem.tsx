@@ -131,6 +131,7 @@ const AddSelectSelectionSummaryItem = forwardRef<
           onRemove(item.id);
         }}
         kind="ghost"
+        autoAlign
         className={`${blockClass}__selection-summary-item-remove-button`}
         {...removeIconButtonProps}
       >

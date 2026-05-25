@@ -183,6 +183,7 @@ const AddSelectSelectionSummary = forwardRef<
                     onClick={onEdit}
                     kind="ghost"
                     size="sm"
+                    autoAlign
                     className={`${blockClass}__selection-summary-edit-button`}
                     {...editIconButtonProps}
                   >

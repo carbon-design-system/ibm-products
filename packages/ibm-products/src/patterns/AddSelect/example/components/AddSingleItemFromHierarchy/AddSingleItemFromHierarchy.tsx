@@ -427,49 +427,53 @@ export const AddSingleItemFromHierarchy = forwardRef<
           </div>
 
           {/* Description section */}
-          {item.meta?.description && (
+          {item.itemDetails?.description && (
             <div className={`${blockClass}__side-panel-section`}>
               <h5 className={`${blockClass}__side-panel-section-title`}>
                 {sidePanelDescriptionLabel}
               </h5>
               <p className={`${blockClass}__side-panel-description`}>
-                {item.meta.description}
+                {item.itemDetails.description}
               </p>
             </div>
           )}
 
           {/* Asset details section */}
-          {item.meta?.details && (
+          {item.itemDetails?.details && (
             <div className={`${blockClass}__side-panel-section`}>
               <h5 className={`${blockClass}__side-panel-section-title`}>
                 {sidePanelDetailsLabel}
               </h5>
               <div className={`${blockClass}__side-panel-details`}>
-                {Object.entries(item.meta.details).map(([key, value]) => (
-                  <div
-                    key={key}
-                    className={`${blockClass}__side-panel-detail-item`}
-                  >
-                    <span className={`${blockClass}__side-panel-detail-key`}>
-                      {key}:
-                    </span>{' '}
-                    <span className={`${blockClass}__side-panel-detail-value`}>
-                      {String(value)}
-                    </span>
-                  </div>
-                ))}
+                {Object.entries(item.itemDetails.details).map(
+                  ([key, value]) => (
+                    <div
+                      key={key}
+                      className={`${blockClass}__side-panel-detail-item`}
+                    >
+                      <span className={`${blockClass}__side-panel-detail-key`}>
+                        {key}:
+                      </span>{' '}
+                      <span
+                        className={`${blockClass}__side-panel-detail-value`}
+                      >
+                        {String(value)}
+                      </span>
+                    </div>
+                  )
+                )}
               </div>
             </div>
           )}
 
           {/* Tags section */}
-          {item.meta?.tags && item.meta.tags.length > 0 && (
+          {item.itemDetails?.tags && item.itemDetails.tags.length > 0 && (
             <div className={`${blockClass}__side-panel-section`}>
               <h5 className={`${blockClass}__side-panel-section-title`}>
                 {sidePanelTagsLabel}
               </h5>
               <div className={`${blockClass}__side-panel-tags`}>
-                {item.meta.tags.map((tag: string, index: number) => (
+                {item.itemDetails.tags.map((tag: string, index: number) => (
                   <Tag key={index} type="gray" size="sm">
                     {tag}
                   </Tag>
@@ -624,7 +628,7 @@ AddSingleItemFromHierarchy.propTypes = {
       disabled: PropTypes.bool,
       icon: PropTypes.node,
       id: PropTypes.string.isRequired,
-      meta: PropTypes.object,
+      itemDetails: PropTypes.object,
       subtitle: PropTypes.string,
       title: PropTypes.string,
       value: PropTypes.string,

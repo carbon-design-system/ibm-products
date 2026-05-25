@@ -408,7 +408,7 @@ SingleAddSelectWithHierarchy.propTypes = {
       disabled: PropTypes.bool,
       icon: PropTypes.node,
       id: PropTypes.string.isRequired,
-      meta: PropTypes.node,
+      itemDetails: PropTypes.node,
       subtitle: PropTypes.string,
       title: PropTypes.string,
       value: PropTypes.string,

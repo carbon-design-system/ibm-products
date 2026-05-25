@@ -36,7 +36,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'data-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description:
                     'Description text can go here in multiple lines to describe this category a little more and give the user more metadata. No more than 4 lines of text will be show.',
                   details: {
@@ -53,7 +53,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'quito-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description:
                     'This table contains data from Quito region with comprehensive information.',
                   details: {
@@ -70,7 +70,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'hyderabad-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description:
                     'Hyderabad regional data with detailed metrics and analytics.',
                   details: {
@@ -87,7 +87,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'durban-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description: 'Durban data collection with various metrics.',
                   details: {
                     Columns: '22',
@@ -103,7 +103,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'durham-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description: 'Durham regional statistics and data points.',
                   details: {
                     Columns: '20',
@@ -119,7 +119,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'kiev-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description:
                     'Kiev data with comprehensive regional information.',
                   details: {
@@ -136,7 +136,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'baltimore-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description: 'Baltimore regional data collection.',
                   details: {
                     Columns: '21',
@@ -152,7 +152,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'oslo-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description: 'Oslo data with detailed regional metrics.',
                   details: {
                     Columns: '16',
@@ -168,7 +168,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'caracas-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description: 'Caracas regional statistics and analytics.',
                   details: {
                     Columns: '23',
@@ -184,7 +184,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'buenos-aires-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description:
                     'Description text can go here in multiple lines to describe this category a little more and give the user more metadata. No more than 4 lines of text will be show.',
                   details: {
@@ -201,7 +201,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'lahore-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description:
                     'Lahore regional data with comprehensive metrics.',
                   details: {
@@ -218,7 +218,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'hamilton-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description:
                     'Hamilton data collection with various analytics.',
                   details: {
@@ -235,7 +235,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'portland-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description: 'Portland regional statistics and data.',
                   details: {
                     Columns: '20',
@@ -251,7 +251,7 @@ const sampleItems: AddSelectItem[] = [
                 value: 'montreal-table',
                 subtitle: 'CSV from local',
                 icon: <Table size={20} />,
-                meta: {
+                itemDetails: {
                   description: 'Montreal data with comprehensive information.',
                   details: {
                     Columns: '22',

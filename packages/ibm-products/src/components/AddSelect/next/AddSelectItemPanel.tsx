@@ -160,7 +160,7 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
           key !== 'title' &&
           key !== 'subtitle' &&
           key !== 'value' &&
-          key !== 'meta' &&
+          key !== 'itemDetails' &&
           key !== 'icon' &&
           key !== 'avatar' &&
           key !== 'children' &&

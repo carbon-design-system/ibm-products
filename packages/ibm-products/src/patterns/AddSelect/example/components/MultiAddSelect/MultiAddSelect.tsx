@@ -247,7 +247,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
     // Handle show info
     const handleShowInfo = (itemId: string) => {
       const item = dataManager.getItem(itemId);
-      if (item && item.meta) {
+      if (item && item.itemDetails) {
         setInfoPanel({ item, show: true });
       }
     };
@@ -305,7 +305,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                               value={item.value || ''}
                               icon={item.icon}
                               disabled={item.disabled}
-                              hasItemPanel={!!item.meta}
+                              hasItemPanel={!!item.itemDetails}
                               onItemPanelClick={handleShowInfo}
                             />
                           );
@@ -325,7 +325,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                 {infoPanel.show && infoPanel.item ? (
                   <AddSelect.ItemPanel
                     title="Item details"
-                    item={infoPanel.item.meta}
+                    item={infoPanel.item.itemDetails}
                     onClose={handleCloseInfo}
                     closeIconDescription="Close details"
                   />
@@ -406,7 +406,7 @@ MultiAddSelect.propTypes = {
       disabled: PropTypes.bool,
       icon: PropTypes.node,
       id: PropTypes.string.isRequired,
-      meta: PropTypes.node,
+      itemDetails: PropTypes.node,
       subtitle: PropTypes.string,
       title: PropTypes.string,
       value: PropTypes.string,

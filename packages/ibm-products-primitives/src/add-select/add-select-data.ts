@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { ReactNode } from 'react';
+
 /**
  * Status types for items in the hierarchical data structure
  */
@@ -14,14 +16,28 @@ export type ItemStatus = 'checked' | 'unchecked' | 'intermediate';
  * Interface for hierarchical data items
  */
 export interface AddSelectItem {
+  /** Unique identifier for the item */
   id: string;
+  /** Display title for the item */
   title?: string;
+  /** Value associated with the item */
   value?: string;
+  /** Subtitle or secondary text */
+  subtitle?: string;
+  /** Whether the item is currently selected */
   selected?: boolean;
+  /** Selection status (checked, unchecked, or intermediate for parent nodes) */
   status?: ItemStatus;
+  /** Whether the item is disabled and cannot be selected */
+  disabled?: boolean;
+  /** Icon or visual element to display with the item */
+  icon?: ReactNode;
+  /** Nested children items */
   children?: {
     entries: AddSelectItem[];
   };
+  /** Additional metadata and details about the item */
+  itemDetails?: any;
   [key: string]: any; // Allow additional properties
 }
 

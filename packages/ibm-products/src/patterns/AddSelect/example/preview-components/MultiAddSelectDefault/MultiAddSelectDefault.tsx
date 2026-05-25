@@ -18,10 +18,10 @@ const sampleItems: AddSelectItem[] = [
     value: '1',
     title: 'item 1',
     subtitle: 'item 1 subtitle',
-    meta: (
+    itemDetails: (
       <div>
         <p style={{ fontWeight: 600 }}>HTML support</p>
-        <p>Also supports nodes in the meta attribute</p>
+        <p>Also supports nodes in the itemDetails attribute</p>
       </div>
     ),
   },
@@ -29,7 +29,7 @@ const sampleItems: AddSelectItem[] = [
     id: '2',
     value: '2',
     title: 'item 2',
-    meta: [
+    itemDetails: [
       {
         id: 'description',
         title: 'Description',

@@ -161,9 +161,10 @@ const AddSelectSelectionSummaryItem = forwardRef<
       </div>
     );
 
-    // Default content rendering - show all item properties except meta, icon, avatar
+    // Default content rendering - show all item properties except itemDetails, icon, avatar
     const defaultContent = () => {
-      const { meta, icon, avatar, id, title, subtitle, value, ...rest } = item;
+      const { itemDetails, icon, avatar, id, title, subtitle, value, ...rest } =
+        item;
       const entries = Object.entries(rest);
 
       if (entries.length === 0 && !value) {

@@ -5,570 +5,161 @@ import styles from './_storybook-styles.scss?inline';
 
 # AddSelect
 
-[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/add-select/usage/)
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/)
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Usage](#usage)
+- [Component Hierarchy](#component-hierarchy)
+- [Subcomponents](#subcomponents)
+- [Usage Patterns](#usage-patterns)
 - [Examples](#examples)
 - [Component API](#component-api)
 
 ## Overview
 
-AddSelect is a composable component system for building add/select interfaces.
-It provides a flexible, component-based approach where you can compose the UI
-using smaller, focused components instead of a monolithic component.
+AddSelect is a composable component system for building flexible add/select
+interfaces. It provides a component-based approach where you compose the UI
+using smaller, focused components instead of a monolithic component. This design
+enables maximum flexibility while maintaining consistency and accessibility.
 
 The implementation uses the compound component pattern in React, with distinct
-and well-defined sections. You need to import the main `AddSelect` component,
-and all other subcomponents are available as static properties.
+and well-defined sections. You need to import the main
+[`AddSelect`](./AddSelect.tsx) component, and all other subcomponents are
+available as static properties.
 
-## Main Anatomy
+### Key Features
 
-The AddSelect component is composed of several sections:
+- **Composable Architecture**: Build complex selection interfaces by combining
+  simple, focused components
+- **Multi-select & Single-select**: Support for both checkbox-based
+  multi-selection and radio button-based single selection
+- **Hierarchical Navigation**: Built-in support for navigating through nested
+  item structures
+- **Search & Filter**: Global and column-level search with custom filter actions
+- **Selection Summary**: Display and manage selected items with optional
+  accordion view
+- **Item Details Panel**: Show detailed information about individual items
+- **Keyboard Navigation**: Full keyboard support for accessibility
+- **Flexible Layouts**: Vertical and horizontal layouts for different use cases
 
-```jsx
-<AddSelect multi onItemSelect={handleSelect} selectedItems={selectedItems}>
-  <AddSelect.Body
-    itemsLabel="Items"
-    globalSearchLabel="Search"
-    itemCount={items.length}
-  >
-    <AddSelect.Content>
-      {items.map((item) => (
-        <AddSelect.Row
-          key={item.id}
-          itemId={item.id}
-          title={item.title}
-          value={item.value}
-        />
-      ))}
-    </AddSelect.Content>
-  </AddSelect.Body>
+## Component Hierarchy
 
-  {/* Optional selection summary */}
-  <AddSelect.SelectionSummary
-    title="Selected items"
-    selectedItems={selectedItems}
-  />
-</AddSelect>
+The AddSelect component system follows a clear hierarchical structure:
+
+```
+AddSelect (Root Container)
+├── AddSelect.Body (Main Content Area)
+│   ├── Header Section (Search, Breadcrumbs, Item Count)
+│   └── AddSelect.Content (Items Container)
+│       ├── AddSelect.Column (Optional Column Wrapper)
+│       │   ├── Column Header (Search, Title, Select All)
+│       │   └── AddSelect.Row (Individual Items)
+│       └── AddSelect.Row (Direct Items, no column)
+│
+├── AddSelect.SelectionSummary (Selected Items Panel)
+│   └── AddSelect.SelectionSummaryItem (Individual Selected Item)
+│
+└── AddSelect.ItemPanel (Item Details Panel)
 ```
 
-## Core Components
+### Component Flow
 
-### AddSelect (Main Container)
+1. **AddSelect** - Root container that manages selection state
+2. **AddSelect.Body** - Contains search, filters, and item list
+3. **AddSelect.Content** - Handles keyboard navigation and layout
+4. **AddSelect.Column** (Optional) - Groups items with column-specific features
+5. **AddSelect.Row** - Individual selectable items
+6. **AddSelect.SelectionSummary** (Optional) - Shows selected items
+7. **AddSelect.SelectionSummaryItem** (Optional) - Individual selected item
+   display
+8. **AddSelect.ItemPanel** (Optional) - Detailed item information
 
-The root component that provides context for selection state and callbacks.
+## Subcomponents
 
-**Props:**
+### AddSelect (Root)
 
-- `multi` - Enable multi-select (checkboxes) or single-select (radio buttons)
-- `selectedItems` - Set of selected item IDs
-- `onItemSelect` - Callback when an item is selected/deselected
-- `onNavigate` - Callback for hierarchical navigation
+The main container component that provides context for selection state and
+callbacks. All child components access selection state through this context.
+
+**When to use**: Always required as the root wrapper for any AddSelect
+interface.
 
 ### AddSelect.Body
 
-Contains the search bar, breadcrumbs, and main content area.
+Contains the header section (search, breadcrumbs, item count) and the main
+content area. Handles global search and navigation.
 
-**Props:**
-
-- `itemsLabel` - Label for the items section
-- `globalSearchLabel` - Label for the search input
-- `globalSearchPlaceholder` - Placeholder text for search
-- `itemCount` - Total number of items
-- `path` - Navigation path for breadcrumbs
-- `onSearch` - Search callback
-- `onBreadcrumbClick` - Breadcrumb navigation callback
-- `headerContent` - Custom header content (replaces entire header)
-- `actionsSlot` - Custom actions next to default search
-- `subHeaderActions` - Custom content/actions after breadcrumbs and item count
+**When to use**: Required for displaying the main item selection interface.
 
 ### AddSelect.Content
 
-Container for items with keyboard navigation support.
+Container for items with built-in keyboard navigation support. Manages focus and
+provides grid-based navigation.
 
-**Props:**
-
-- `layout` - Layout direction: 'vertical' (default) or 'horizontal'
-
-**Keyboard Navigation:**
-
-- **Arrow Up/Down** - Navigate between items
-- **Arrow Right** - Navigate into children (if available)
-- **Enter/Space** - Select/deselect item
+**When to use**: Required as a wrapper for AddSelect.Row or AddSelect.Column
+components.
 
 ### AddSelect.Column
 
-A composable column component that wraps AddSelectRow items. Provides optional
-search functionality with custom actions slot.
+Optional column wrapper that provides column-specific features like column
+title, column-level search, and "Select All" functionality.
 
-**Props:**
+**When to use**:
 
-- `title` - Column title displayed in the header
-- `searchLabel` - Label text for the search input
-- `searchPlaceholder` - Placeholder text for the search input
-- `onSearch` - Callback when search value changes
-- `actionsSlot` - Custom actions (filter/sort buttons) next to search
-- `multi` - Enable multi-selection (checkboxes) or single selection (radio
-  buttons)
-- `showSelectAll` - Show the "Select All" checkbox (only when multi is true)
-- `itemCount` - Total number of items in the column
-- `allSelected` - Whether all items are currently selected
-- `onSelectAll` - Callback when "Select All" is toggled
-
-**Example with custom actions:**
-
-```jsx
-<AddSelect.Column
-  title="Available items"
-  searchPlaceholder="Search items"
-  onSearch={handleSearch}
-  actionsSlot={
-    <>
-      <IconButton kind="ghost" label="Sort">
-        <ArrowsVertical />
-      </IconButton>
-      <IconButton kind="ghost" label="Filter">
-        <Filter />
-      </IconButton>
-    </>
-  }
->
-  {items.map((item) => (
-    <AddSelect.Row key={item.id} {...item} />
-  ))}
-</AddSelect.Column>
-```
-
-- **Ctrl+Home** - Jump to first item
-- **Ctrl+End** - Jump to last item
-
-### AddSelect.Column
-
-Provides column layout with optional search, sort, and filter.
-
-**Props:**
-
-- `title` - Column title
-- `showSearch` - Enable search input
-- `showSort` - Enable sort button
-- `showFilter` - Enable filter button
-- `showSelectAll` - Show "Select All" checkbox (multi-select only)
-- `itemCount` - Number of items in column
+- When organizing items into distinct columns
+- When you need column-level search or "Select All"
+- For hierarchical navigation with multiple levels
 
 ### AddSelect.Row
 
-Individual selectable item.
+Individual selectable item with support for checkboxes (multi-select) or radio
+buttons (single-select).
 
-**Props:**
-
-- `itemId` - Unique identifier
-- `title` - Item title
-- `subtitle` - Optional subtitle
-- `value` - Item value
-- `selected` - Whether item is selected
-- `disabled` - Whether item is disabled
-- `hasChildren` - Whether item has children for navigation
-- `hasInfoPanel` - Show info panel icon
-- `onInfoPanelClick` - Info panel click callback
+**When to use**: For every selectable item in your interface.
 
 ### AddSelect.SelectionSummary
 
-Displays list of selected items with customizable header.
+Displays a list of selected items with optional count badge and edit
+functionality.
 
-**Props:**
+**When to use**:
 
-- `title` - Panel title
-- `selectedItems` - Array of selected items
-- `showCount` - Show count badge
-- `showEditIcon` - Show edit icon
-- `onEdit` - Edit icon click handler
-- `editIconDescription` - Edit icon aria-label
-- `headerContent` - Custom header content (replaces entire header)
-- `headerActions` - Custom actions alongside the edit icon
-- `renderItem` - Custom item renderer function
-- `emptyState` - Custom empty state component
+- When you need to show selected items separately
+- For review/confirmation workflows
+- When building multi-step selection processes
 
-**Example with header actions:**
+### AddSelect.SelectionSummaryItem
 
-```jsx
-<AddSelect.SelectionSummary
-  title="Selected items"
-  selectedItems={selectedItems}
-  showCount
-  headerActions={
-    <>
-      <IconButton label="Filter" kind="ghost" size="sm">
-        <Filter />
-      </IconButton>
-      <IconButton label="Sort" kind="ghost" size="sm">
-        <Sort />
-      </IconButton>
-    </>
-  }
-/>
-```
+Individual item display within the selection summary, with optional accordion
+view and remove functionality.
 
-**Example with custom header:**
+**When to use**:
 
-```jsx
-<AddSelect.SelectionSummary
-  selectedItems={selectedItems}
-  headerContent={
-    <div className="custom-header">
-      <h3>My Custom Header</h3>
-      <Button size="sm">Export</Button>
-    </div>
-  }
-/>
-```
+- For custom rendering of selected items
+- When you need accordion-style item details
+- When items need individual remove buttons
 
-### AddSelect.ItemSummaryPanel
+### AddSelect.ItemPanel
 
-Displays detailed information about a specific item.
+Side panel that displays detailed information about a specific item.
 
-**Props:**
+**When to use**:
 
-- `title` - Panel title
-- `item` - Item data or custom content
-
-## Using Default Search with Custom Actions
-
-The `actionsSlot` prop allows you to add custom filter/sort controls alongside
-the built-in search functionality. This is the simplest approach when you want
-to keep the default search behavior.
-
-### Example: Default Search + Filter + Sort
-
-```jsx
-<AddSelect.Body
-  globalSearchLabel="Search"
-  globalSearchPlaceholder="Search items..."
-  onSearch={handleSearch}
-  itemCount={filteredItems.length}
-  actionsSlot={
-    <>
-      <Dropdown items={filterOptions} onChange={handleFilter} />
-      <OverflowMenu renderIcon={ArrowsVertical}>
-        <OverflowMenuItem itemText="Sort A-Z" onClick={handleSort} />
-      </OverflowMenu>
-    </>
-  }
->
-  <AddSelect.Content>
-    {filteredItems.map((item) => (
-      <AddSelect.Row {...item} />
-    ))}
-  </AddSelect.Content>
-</AddSelect.Body>
-```
-
-### When to Use Each Approach
-
-**Use `actionsSlot`** when:
-
-- ✅ You want the default search behavior
-- ✅ You only need to add filter/sort controls
-- ✅ You want the simplest implementation
-
-**Use `headerContent`** when:
-
-- ✅ You need complete control over the header
-- ✅ You want custom search behavior
-- ✅ You need a custom layout
-
-## Using Sub-Header Actions
-
-The `subHeaderActions` prop allows you to add custom content or actions in the
-sub-header area, positioned after the breadcrumbs and item count. This is useful
-for adding contextual actions like "Refresh", "Clear all", or status indicators.
-
-### Example: Sub-Header Actions
-
-```jsx
-<AddSelect.Body
-  itemsLabel="All items"
-  itemCount={items.length}
-  subHeaderActions={
-    <>
-      <Button kind="ghost" size="sm" onClick={handleRefresh}>
-        Refresh
-      </Button>
-      <Button
-        kind="ghost"
-        size="sm"
-        onClick={handleClearAll}
-        disabled={selectedItems.size === 0}
-      >
-        Clear all ({selectedItems.size})
-      </Button>
-    </>
-  }
->
-  <AddSelect.Content>
-    {items.map((item) => (
-      <AddSelect.Row {...item} />
-    ))}
-  </AddSelect.Content>
-</AddSelect.Body>
-```
-
-### Common Use Cases
-
-- **Refresh button**: Reload data from the server
-- **Clear all button**: Deselect all selected items
-- **Status indicators**: Show loading state or item counts
-- **Quick actions**: Provide shortcuts for common operations
-- **Custom text**: Display additional context or information
-
-## Custom Search, Filter, and Sort
-
-The composable AddSelect gives you complete control over search, filter, and
-sort functionality. Instead of providing built-in components, you use the
-`headerContent` prop to add your own UI using Carbon components.
-
-### Why This Approach?
-
-- **Full Control**: You manage the state and logic
-- **Flexibility**: Use any Carbon components or custom UI
-- **Simplicity**: Clear separation between UI (component) and logic (your code)
-- **Composability**: True to the composable pattern
-
-### Basic Search Example
-
-```jsx
-import { Search } from '@carbon/react';
-
-function MyComponent() {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // You handle the filtering
-  const filteredItems = items.filter((item) =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  return (
-    <AddSelect.Body
-      itemCount={filteredItems.length}
-      headerContent={
-        <div style={{ padding: '1rem' }}>
-          <Search
-            placeholder="Search items..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onClear={() => setSearchTerm('')}
-          />
-        </div>
-      }
-    >
-      <AddSelect.Content>
-        {filteredItems.map((item) => (
-          <AddSelect.Row key={item.id} {...item} />
-        ))}
-      </AddSelect.Content>
-    </AddSelect.Body>
-  );
-}
-```
-
-### Search + Sort Example
-
-```jsx
-import { Search, OverflowMenu, OverflowMenuItem } from '@carbon/react';
-import { ArrowsVertical } from '@carbon/react/icons';
-
-function MyComponent() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState('title');
-  const [sortDirection, setSortDirection] = useState('asc');
-
-  // You handle all data processing
-  const processedItems = useMemo(() => {
-    let result = items.filter((item) => item.title.includes(searchTerm));
-
-    result.sort((a, b) => {
-      const comparison = a[sortBy].localeCompare(b[sortBy]);
-      return sortDirection === 'asc' ? comparison : -comparison;
-    });
-
-    return result;
-  }, [items, searchTerm, sortBy, sortDirection]);
-
-  return (
-    <AddSelect.Body
-      itemCount={processedItems.length}
-      headerContent={
-        <div style={{ padding: '1rem', display: 'flex', gap: '1rem' }}>
-          <Search
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <OverflowMenu renderIcon={ArrowsVertical}>
-            <OverflowMenuItem
-              itemText="Title (A-Z)"
-              onClick={() => {
-                setSortBy('title');
-                setSortDirection('asc');
-              }}
-            />
-            <OverflowMenuItem
-              itemText="Title (Z-A)"
-              onClick={() => {
-                setSortBy('title');
-                setSortDirection('desc');
-              }}
-            />
-          </OverflowMenu>
-        </div>
-      }
-    >
-      <AddSelect.Content>
-        {processedItems.map((item) => (
-          <AddSelect.Row key={item.id} {...item} />
-        ))}
-      </AddSelect.Content>
-    </AddSelect.Body>
-  );
-}
-```
-
-### Search + Filter + Sort Example
-
-```jsx
-import {
-  Search,
-  Dropdown,
-  OverflowMenu,
-  OverflowMenuItem,
-  Button,
-} from '@carbon/react';
-
-function MyComponent() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterType, setFilterType] = useState('all');
-  const [sortBy, setSortBy] = useState('title');
-
-  // You control all the logic
-  const processedItems = useMemo(() => {
-    let result = items;
-
-    // Apply search
-    if (searchTerm) {
-      result = result.filter((item) =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    // Apply filter
-    if (filterType !== 'all') {
-      result = result.filter((item) => item.type === filterType);
-    }
-
-    // Apply sort
-    result = [...result].sort((a, b) => a[sortBy].localeCompare(b[sortBy]));
-
-    return result;
-  }, [items, searchTerm, filterType, sortBy]);
-
-  return (
-    <AddSelect.Body
-      itemCount={processedItems.length}
-      headerContent={
-        <div style={{ padding: '1rem' }}>
-          <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-            <Search
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <Dropdown
-              id="filter"
-              items={[
-                { id: 'all', text: 'All' },
-                { id: 'type1', text: 'Type 1' },
-                { id: 'type2', text: 'Type 2' },
-              ]}
-              onChange={({ selectedItem }) => setFilterType(selectedItem.id)}
-            />
-            <OverflowMenu renderIcon={ArrowsVertical}>
-              <OverflowMenuItem
-                itemText="Sort by Title"
-                onClick={() => setSortBy('title')}
-              />
-              <OverflowMenuItem
-                itemText="Sort by Date"
-                onClick={() => setSortBy('date')}
-              />
-            </OverflowMenu>
-          </div>
-          {(searchTerm || filterType !== 'all') && (
-            <div>
-              <Button size="sm" kind="ghost" onClick={() => setSearchTerm('')}>
-                Clear search
-              </Button>
-              <Button
-                size="sm"
-                kind="ghost"
-                onClick={() => setFilterType('all')}
-              >
-                Clear filter
-              </Button>
-            </div>
-          )}
-        </div>
-      }
-    >
-      <AddSelect.Content>
-        {processedItems.map((item) => (
-          <AddSelect.Row key={item.id} {...item} />
-        ))}
-      </AddSelect.Content>
-    </AddSelect.Body>
-  );
-}
-```
-
-### Key Points
-
-1. **You manage state**: Use `useState` for search terms, filters, sort options
-2. **You process data**: Use `useMemo` to filter and sort items efficiently
-3. **You control UI**: Use `headerContent` to render any Carbon components
-4. **Component provides structure**: AddSelect.Body provides the layout and
-   container
-
-### Benefits
-
-- ✅ **Simple**: No complex prop APIs to learn
-- ✅ **Flexible**: Use any UI components you want
-- ✅ **Performant**: You control when to re-render with `useMemo`
-- ✅ **Testable**: Easy to test your filtering/sorting logic separately
-- ✅ **Maintainable**: Clear separation of concerns
-
-For complete working examples, see the "Search Filter Sort Examples" stories in
-Storybook.
-
-- `onClose` - Close button handler
-- `renderContent` - Custom content renderer
+- When items have additional details to display
+- For preview/inspection workflows
+- When users need more context before selecting
 
 ## Usage Patterns
 
-### Basic Multi-Select
+### Pattern 1: Single Select
+
+Simple list with radio button for selection.
 
 ```jsx
-const [selectedItems, setSelectedItems] = useState(new Set());
+const [selectedItem, setSelectedItem] = useState(null);
 
-const handleItemSelect = (itemId, selected) => {
-  const newSelected = new Set(selectedItems);
-  if (selected) {
-    newSelected.add(itemId);
-  } else {
-    newSelected.delete(itemId);
-  }
-  setSelectedItems(newSelected);
-};
-
-<AddSelect multi selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
   <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
     <AddSelect.Content>
       {items.map((item) => (
@@ -576,6 +167,7 @@ const handleItemSelect = (itemId, selected) => {
           key={item.id}
           itemId={item.id}
           title={item.title}
+          subtitle={item.subtitle}
           value={item.value}
         />
       ))}
@@ -584,77 +176,153 @@ const handleItemSelect = (itemId, selected) => {
 </AddSelect>;
 ```
 
-### Single Select
+### Pattern 1: Basic Multi-Select List
+
+Simple list with checkboxes for multiple selection. Use the `multi` prop on
+AddSelect.Column to control selection mode.
 
 ```jsx
-<AddSelect
-  multi={false}
-  selectedItems={selectedItems}
-  onItemSelect={handleItemSelect}
->
-  {/* Same structure as multi-select */}
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
+    <AddSelect.Content>
+      <AddSelect.Column multi={false}>
+        {items.map((item) => (
+          <AddSelect.Row key={item.id} {...item} />
+        ))}
+      </AddSelect.Column>
+    </AddSelect.Content>
+  </AddSelect.Body>
 </AddSelect>
 ```
 
-### With Columns
+### Pattern 3: With Search and Filters
+
+Add global search and custom filter actions.
 
 ```jsx
-<AddSelect.Content>
+<AddSelect.Body
+  itemsLabel="Items"
+  globalSearchLabel="Search"
+  globalSearchPlaceholder="Search items"
+  itemCount={filteredItems.length}
+  onSearch={setSearchTerm}
+  actionsSlot={
+    <Dropdown
+      id="filter"
+      label="Filter"
+      items={filterOptions}
+      onChange={handleFilterChange}
+    />
+  }
+>
+  <AddSelect.Content>
+    {filteredItems.map((item) => (
+      <AddSelect.Row key={item.id} {...item} />
+    ))}
+  </AddSelect.Content>
+</AddSelect.Body>
+```
+
+### Pattern 4: With Columns and Select All
+
+Organize items into columns with "Select All" functionality.
+
+```jsx
+<AddSelect.Content layout="horizontal">
   <AddSelect.Column
     title="Available items"
-    showSearch
     showSelectAll
+    multi
     itemCount={items.length}
+    allSelected={allSelected}
+    onSelectAll={handleSelectAll}
   >
     {items.map((item) => (
-      <AddSelect.Row {...item} />
+      <AddSelect.Row key={item.id} {...item} />
     ))}
   </AddSelect.Column>
 </AddSelect.Content>
 ```
 
-### With Selection Summary
+### Pattern 5: With Selection Summary
+
+Display selected items in a separate panel.
 
 ```jsx
-<AddSelect multi selectedItems={selectedItems} onItemSelect={handleSelect}>
+<AddSelect selectedItems={selectedItems} onItemSelect={handleSelect}>
   <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
-    <AddSelect.Content layout="horizontal">{/* Items */}</AddSelect.Content>
+    <AddSelect.Content>
+      {items.map((item) => (
+        <AddSelect.Row key={item.id} {...item} />
+      ))}
+    </AddSelect.Content>
   </AddSelect.Body>
 
   <AddSelect.SelectionSummary
     title="Selected items"
     selectedItems={selectedItemsArray}
     showCount
-  />
+    showEditIcon
+    onEdit={handleEdit}
+  >
+    {selectedItemsArray.map((item) => (
+      <AddSelect.SelectionSummaryItem
+        key={item.id}
+        item={item}
+        useAccordion
+        onRemove={handleRemove}
+      />
+    ))}
+  </AddSelect.SelectionSummary>
 </AddSelect>
 ```
 
-# Examples
+### Pattern 6: With Item Details Panel
 
-## Default
+Show detailed information about items.
 
-<Canvas of={stories.Default} />
+```jsx
+<AddSelect.Row
+  itemId={item.id}
+  title={item.title}
+  value={item.value}
+  hasItemPanel
+  onItemPanelClick={handleItemPanelClick}
+  itemPanelOpen={itemPanelOpen && selectedItem?.id === item.id}
+/>;
 
-## Single Select
+{
+  itemPanelOpen && (
+    <AddSelect.ItemPanel
+      title="Item details"
+      item={selectedItem}
+      onClose={() => setItemPanelOpen(false)}
+    />
+  );
+}
+```
 
-<Canvas of={stories.SingleSelect} />
+### Pattern 7: Hierarchical Navigation
 
-## With Columns
+Navigate through nested item structures.
 
-<Canvas of={stories.WithColumns} />
-
-## With Search and Filters
-
-<Canvas of={stories.WithSearchAndFilters} />
-
-## With Selection Summary
-
-<Canvas of={stories.WithSelectionSummary} />
-
-## With Item Summary Panel
-
-<Canvas of={stories.WithItemSummaryPanel} />
+```jsx
+<AddSelect.Content layout="horizontal">
+  <AddSelect.Column title={currentLevel.title} onNavigate={handleNavigate}>
+    {currentLevel.items.map((item) => (
+      <AddSelect.Row
+        key={item.id}
+        {...item}
+        hasChildren={item.children?.length > 0}
+      />
+    ))}
+  </AddSelect.Column>
+</AddSelect.Content>
+```
 
 ## Component API
+
+The AddSelect component system provides a comprehensive API across all
+subcomponents. Use the tabs below to explore the props for each component.
 
 <Controls />

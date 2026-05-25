@@ -5,23 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// @ts-nocheck
 import React, { useState, useMemo } from 'react';
-import {
-  Search,
-  Dropdown,
-  Button,
-  OverflowMenu,
-  OverflowMenuItem,
-} from '@carbon/react';
-import { ArrowsVertical } from '@carbon/react/icons';
+import { Dropdown, Tag } from '@carbon/react';
 import { AddSelect } from '.';
+import type { AddSelectItem } from '@carbon/ibm-products-primitives';
 import styles from './_storybook-styles.scss?inline';
 import mdx from './AddSelect.mdx';
 
 const storyClass = 'add-select-next-stories';
 
+interface SampleItem extends AddSelectItem {
+  type: string;
+}
+
 export default {
-  title: 'Preview/Add and select/AddSelect',
+  title: 'Preview/Add and select',
   component: AddSelect,
   tags: ['autodocs'],
   decorators: [
@@ -30,18 +29,13 @@ export default {
     },
   ],
   subcomponents: {
-    Body: AddSelect.Body,
-    Content: AddSelect.Content,
-    Column: AddSelect.Column,
-    Row: AddSelect.Row,
-    SelectionSummary: AddSelect.SelectionSummary,
-    SelectionSummaryItem: AddSelect.SelectionSummaryItem,
-    ItemPanel: AddSelect.ItemPanel,
-  },
-  argTypes: {
-    children: {
-      control: false,
-    },
+    'AddSelect.Body': AddSelect.Body,
+    'AddSelect.Content': AddSelect.Content,
+    'AddSelect.Column': AddSelect.Column,
+    'AddSelect.Row': AddSelect.Row,
+    'AddSelect.SelectionSummary': AddSelect.SelectionSummary,
+    'AddSelect.SelectionSummaryItem': AddSelect.SelectionSummaryItem,
+    'AddSelect.ItemPanel': AddSelect.ItemPanel,
   },
   parameters: {
     styles,
@@ -52,41 +46,7 @@ export default {
 };
 
 // Sample data
-const simpleItems = [
-  {
-    id: '1',
-    title: 'Item 1',
-    subtitle: 'Description for item 1',
-    value: 'item-1',
-  },
-  {
-    id: '2',
-    title: 'Item 2',
-    subtitle: 'Description for item 2',
-    value: 'item-2',
-  },
-  {
-    id: '3',
-    title: 'Item 3',
-    subtitle: 'Description for item 3',
-    value: 'item-3',
-  },
-  {
-    id: '4',
-    title: 'Item 4',
-    subtitle: 'Description for item 4',
-    value: 'item-4',
-  },
-  {
-    id: '5',
-    title: 'Item 5',
-    subtitle: 'Description for item 5',
-    value: 'item-5',
-  },
-];
-
-// Extended sample data with types for filter examples
-const itemsWithTypes = [
+const sampleItems: SampleItem[] = [
   {
     id: '1',
     title: 'Apple',
@@ -146,147 +106,14 @@ const itemsWithTypes = [
 ];
 
 /**
- * Default story - Basic multi-select with AddSelect.Body and AddSelect.Content
+ * AddSelect.Body Story
  */
-export const Default = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-
-  const handleItemSelect = (itemId: string, selected: boolean) => {
-    const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
-    } else {
-      newSelected.delete(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
-
-  return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="All items"
-        globalSearchLabel="Search"
-        globalSearchPlaceholder="Search items"
-        itemCount={simpleItems.length}
-      >
-        <AddSelect.Content>
-          {simpleItems.map((item) => (
-            <AddSelect.Row
-              key={item.id}
-              itemId={item.id}
-              title={item.title}
-              subtitle={item.subtitle}
-              value={item.value}
-            />
-          ))}
-        </AddSelect.Content>
-      </AddSelect.Body>
-    </AddSelect>
-  );
-};
-
-/**
- * Single select story - Radio button selection
- */
-export const SingleSelect = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-
-  const handleItemSelect = (itemId: string, selected: boolean) => {
-    const newSelected = new Set<string>();
-    if (selected) {
-      newSelected.add(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
-
-  return (
-    <AddSelect
-      multi={false}
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="Select one item"
-        globalSearchLabel="Search"
-        itemCount={simpleItems.length}
-      >
-        <AddSelect.Content>
-          {simpleItems.map((item) => (
-            <AddSelect.Row
-              key={item.id}
-              itemId={item.id}
-              title={item.title}
-              subtitle={item.subtitle}
-              value={item.value}
-            />
-          ))}
-        </AddSelect.Content>
-      </AddSelect.Body>
-    </AddSelect>
-  );
-};
-
-/**
- * With columns - Using AddSelect.Column for organized layout
- */
-export const WithColumns = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-
-  const handleItemSelect = (itemId: string, selected: boolean) => {
-    const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
-    } else {
-      newSelected.delete(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
-
-  return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="Items"
-        globalSearchLabel="Search"
-        itemCount={simpleItems.length}
-      >
-        <AddSelect.Content>
-          <AddSelect.Column
-            title="Available items"
-            showSelectAll
-            itemCount={simpleItems.length}
-          >
-            {simpleItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-              />
-            ))}
-          </AddSelect.Column>
-        </AddSelect.Content>
-      </AddSelect.Body>
-    </AddSelect>
-  );
-};
-
-/**
- * With search and filters - Column with search, sort, and filter capabilities
- */
-export const WithSearchAndFilters = () => {
+const BodyTemplate = (args) => {
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterType, setFilterType] = useState('all');
 
-  const handleItemSelect = (itemId: string, selected: boolean) => {
+  const handleItemSelect = (itemId, selected) => {
     const newSelected = new Set(selectedItems);
     if (selected) {
       newSelected.add(itemId);
@@ -296,219 +123,45 @@ export const WithSearchAndFilters = () => {
     setSelectedItems(newSelected);
   };
 
-  const filteredItems = simpleItems.filter((item) =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body itemsLabel="Items" itemCount={filteredItems.length}>
-        <AddSelect.Content>
-          <AddSelect.Column
-            title="Available items"
-            searchPlaceholder="Search items"
-            onSearch={setSearchTerm}
-            itemCount={filteredItems.length}
-            actionsSlot={
-              <Button
-                kind="ghost"
-                size="md"
-                hasIconOnly
-                iconDescription="Sort"
-                tooltipPosition="bottom"
-              >
-                <ArrowsVertical />
-              </Button>
-            }
-          >
-            {filteredItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-              />
-            ))}
-          </AddSelect.Column>
-        </AddSelect.Content>
-      </AddSelect.Body>
-    </AddSelect>
-  );
-};
-
-/**
- * With selection summary
- */
-export const WithSelectionSummary = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-
-  const handleItemSelect = (itemId: string, selected: boolean) => {
-    const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
-    } else {
-      newSelected.delete(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
-
-  const selectedItemsArray = simpleItems.filter((item) =>
-    selectedItems.has(item.id)
-  );
-
-  return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="All items"
-        globalSearchLabel="Search"
-        itemCount={simpleItems.length}
-      >
-        <AddSelect.Content layout="horizontal">
-          <AddSelect.Column
-            title="Available items"
-            itemCount={simpleItems.length}
-          >
-            {simpleItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-              />
-            ))}
-          </AddSelect.Column>
-        </AddSelect.Content>
-      </AddSelect.Body>
-      <AddSelect.SelectionSummary
-        title="Selected items"
-        selectedItems={selectedItemsArray}
-        showCount
-      />
-    </AddSelect>
-  );
-};
-
-/**
- * With item panel - Detailed item information
- */
-export const WithItemPanel = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-  const [infoPanelItemId, setInfoPanelItemId] = useState<string | null>(null);
-
-  const handleItemSelect = (itemId: string, selected: boolean) => {
-    const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
-    } else {
-      newSelected.delete(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
-
-  const infoPanelItem = simpleItems.find((item) => item.id === infoPanelItemId);
-
-  return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="All items"
-        globalSearchLabel="Search"
-        itemCount={simpleItems.length}
-      >
-        <AddSelect.Content layout="horizontal">
-          <AddSelect.Column
-            title="Available items"
-            itemCount={simpleItems.length}
-          >
-            {simpleItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-                hasItemPanel
-                onItemPanelClick={setInfoPanelItemId}
-                itemPanelOpen={infoPanelItemId === item.id}
-              />
-            ))}
-          </AddSelect.Column>
-        </AddSelect.Content>
-      </AddSelect.Body>
-      {infoPanelItem && (
-        <AddSelect.ItemPanel
-          title="Item details"
-          item={infoPanelItem}
-          onClose={() => setInfoPanelItemId(null)}
-        />
-      )}
-    </AddSelect>
-  );
-};
-
-/**
- * With custom search using headerContent
- *
- * This example demonstrates how to use the `headerContent` prop to add custom search functionality.
- * The user manages the search state and filtering logic.
- */
-export const WithCustomSearch = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleItemSelect = (itemId: string, selected: boolean) => {
-    const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
-    } else {
-      newSelected.delete(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
-
-  // User handles filtering logic
   const filteredItems = useMemo(() => {
-    if (!searchTerm) {
-      return itemsWithTypes;
+    let result = sampleItems;
+    if (searchTerm && args.showSearch) {
+      result = result.filter((item) =>
+        item.title?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     }
-    return itemsWithTypes.filter((item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [searchTerm]);
+    if (filterType !== 'all' && args.showFilter) {
+      result = result.filter((item) => item.type === filterType);
+    }
+    return result;
+  }, [searchTerm, filterType, args.showSearch, args.showFilter]);
 
   return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
+    <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
       <AddSelect.Body
-        itemsLabel="Items"
+        itemsLabel={args.itemsLabel}
+        globalSearchLabel={args.globalSearchLabel}
+        globalSearchPlaceholder={args.globalSearchPlaceholder}
         itemCount={filteredItems.length}
-        headerContent={
-          <div style={{ padding: '1rem', borderBottom: '1px solid #e0e0e0' }}>
-            <Search
-              size="lg"
-              placeholder="Search items..."
-              labelText="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onClear={() => setSearchTerm('')}
+        onSearch={args.showSearch ? setSearchTerm : undefined}
+        actionsSlot={
+          args.showFilter ? (
+            <Dropdown
+              id="filter-dropdown"
+              titleText=""
+              label="Filter"
+              items={[
+                { id: 'all', text: 'All types' },
+                { id: 'Fruit', text: 'Fruits' },
+                { id: 'Vegetable', text: 'Vegetables' },
+              ]}
+              itemToString={(item) => (item ? item.text : '')}
+              onChange={({ selectedItem }) =>
+                setFilterType(selectedItem?.id || 'all')
+              }
+              size="sm"
             />
-          </div>
+          ) : undefined
         }
       >
         <AddSelect.Content>
@@ -516,9 +169,9 @@ export const WithCustomSearch = () => {
             <AddSelect.Row
               key={item.id}
               itemId={item.id}
-              title={item.title}
+              title={item.title || ''}
               subtitle={item.subtitle}
-              value={item.value}
+              value={item.value || ''}
             />
           ))}
         </AddSelect.Content>
@@ -527,608 +180,463 @@ export const WithCustomSearch = () => {
   );
 };
 
+export const AddSelectBody = {
+  render: BodyTemplate,
+  args: {
+    itemsLabel: 'All items',
+    globalSearchLabel: 'Search',
+    globalSearchPlaceholder: 'Search items',
+    showSearch: true,
+    showFilter: false,
+  },
+  argTypes: {
+    itemsLabel: {
+      control: 'text',
+      description: 'Label for the items section',
+    },
+    globalSearchLabel: {
+      control: 'text',
+      description: 'Label for the global search input',
+    },
+    globalSearchPlaceholder: {
+      control: 'text',
+      description: 'Placeholder text for global search',
+    },
+    showSearch: {
+      control: 'boolean',
+      description: 'Show global search input',
+    },
+    showFilter: {
+      control: 'boolean',
+      description: 'Show filter dropdown in actions slot',
+    },
+  },
+};
+
 /**
- * With search and sort
- *
- * This example shows how to combine search and sort functionality using `headerContent`.
- * Users can search items and sort them by different attributes.
+ * AddSelect.Content Story
  */
-export const WithSearchAndSort = () => {
+const ContentTemplate = (args) => {
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+
+  const handleItemSelect = (itemId, selected) => {
+    const newSelected = new Set(selectedItems);
+    if (selected) {
+      newSelected.add(itemId);
+    } else {
+      newSelected.delete(itemId);
+    }
+    setSelectedItems(newSelected);
+  };
+
+  return (
+    <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+      <AddSelect.Body itemsLabel="Items" itemCount={sampleItems.length}>
+        <AddSelect.Content layout={args.layout}>
+          {sampleItems.slice(0, 4).map((item) => (
+            <AddSelect.Row
+              key={item.id}
+              itemId={item.id}
+              title={item.title || ''}
+              subtitle={item.subtitle}
+              value={item.value || ''}
+            />
+          ))}
+        </AddSelect.Content>
+      </AddSelect.Body>
+    </AddSelect>
+  );
+};
+
+export const AddSelectContent = {
+  render: ContentTemplate,
+  args: {
+    layout: 'vertical',
+  },
+  argTypes: {
+    layout: {
+      control: 'select',
+      options: ['vertical', 'horizontal'],
+      description: 'Layout direction for content',
+    },
+  },
+};
+
+/**
+ * AddSelect.Column Story
+ */
+const ColumnTemplate = (args) => {
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState<'title' | 'id'>('title');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
-  const handleItemSelect = (itemId: string, selected: boolean) => {
+  const handleItemSelect = (itemId, selected) => {
     const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
+    if (args.multi) {
+      if (selected) {
+        newSelected.add(itemId);
+      } else {
+        newSelected.delete(itemId);
+      }
     } else {
-      newSelected.delete(itemId);
+      newSelected.clear();
+      if (selected) {
+        newSelected.add(itemId);
+      }
     }
     setSelectedItems(newSelected);
   };
 
-  // User handles all data processing
-  const processedItems = useMemo(() => {
-    let result = itemsWithTypes;
-
-    // Apply search filter
-    if (searchTerm) {
-      result = result.filter((item) =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+  const handleSelectAll = (checked) => {
+    if (checked) {
+      setSelectedItems(new Set(filteredItems.map((item) => item.id)));
+    } else {
+      setSelectedItems(new Set());
     }
+  };
 
-    // Apply sort
-    result = [...result].sort((a, b) => {
-      const aVal = a[sortBy];
-      const bVal = b[sortBy];
-      const comparison = aVal.localeCompare(bVal);
-      return sortDirection === 'asc' ? comparison : -comparison;
-    });
+  const filteredItems = useMemo(() => {
+    if (!searchTerm) {
+      return sampleItems;
+    }
+    return sampleItems.filter((item) =>
+      item.title?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
 
-    return result;
-  }, [searchTerm, sortBy, sortDirection]);
+  const allSelected =
+    filteredItems.length > 0 &&
+    filteredItems.every((item) => selectedItems.has(item.id));
 
   return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="Items"
-        itemCount={processedItems.length}
-        headerContent={
-          <div
-            style={{
-              padding: '1rem',
-              borderBottom: '1px solid #e0e0e0',
-              display: 'flex',
-              gap: '1rem',
-              alignItems: 'flex-end',
-            }}
-          >
-            <div style={{ flex: 1 }}>
-              <Search
-                size="lg"
-                placeholder="Search items..."
-                labelText="Search"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onClear={() => setSearchTerm('')}
-              />
-            </div>
-            <OverflowMenu
-              renderIcon={ArrowsVertical}
-              iconDescription="Sort options"
-              aria-label="Sort options"
-            >
-              <OverflowMenuItem
-                itemText="Title (A-Z)"
-                onClick={() => {
-                  setSortBy('title');
-                  setSortDirection('asc');
-                }}
-              />
-              <OverflowMenuItem
-                itemText="Title (Z-A)"
-                onClick={() => {
-                  setSortBy('title');
-                  setSortDirection('desc');
-                }}
-              />
-              <OverflowMenuItem
-                itemText="ID (Low-High)"
-                onClick={() => {
-                  setSortBy('id');
-                  setSortDirection('asc');
-                }}
-              />
-              <OverflowMenuItem
-                itemText="ID (High-Low)"
-                onClick={() => {
-                  setSortBy('id');
-                  setSortDirection('desc');
-                }}
-              />
-            </OverflowMenu>
-          </div>
-        }
-      >
+    <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+      <AddSelect.Body itemsLabel="Items" itemCount={filteredItems.length}>
         <AddSelect.Content>
-          {processedItems.map((item) => (
-            <AddSelect.Row
-              key={item.id}
-              itemId={item.id}
-              title={item.title}
-              subtitle={item.subtitle}
-              value={item.value}
-            />
-          ))}
-        </AddSelect.Content>
-      </AddSelect.Body>
-    </AddSelect>
-  );
-};
-
-/**
- * With search, filter and sort
- *
- * Complete example demonstrating search, filter, and sort functionality.
- * This shows the full power of the composable approach where users have complete control.
- */
-export const WithSearchFilterAndSort = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterType, setFilterType] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'title' | 'id'>('title');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-
-  const handleItemSelect = (itemId: string, selected: boolean) => {
-    const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
-    } else {
-      newSelected.delete(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
-
-  // User handles all data processing
-  const processedItems = useMemo(() => {
-    let result = itemsWithTypes;
-
-    // Apply search filter
-    if (searchTerm) {
-      result = result.filter((item) =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    // Apply type filter
-    if (filterType !== 'all') {
-      result = result.filter((item) => item.type === filterType);
-    }
-
-    // Apply sort
-    result = [...result].sort((a, b) => {
-      const aVal = a[sortBy];
-      const bVal = b[sortBy];
-      const comparison = aVal.localeCompare(bVal);
-      return sortDirection === 'asc' ? comparison : -comparison;
-    });
-
-    return result;
-  }, [searchTerm, filterType, sortBy, sortDirection]);
-
-  const filterOptions = [
-    { id: 'all', text: 'All types' },
-    { id: 'Fruit', text: 'Fruits' },
-    { id: 'Vegetable', text: 'Vegetables' },
-  ];
-
-  const hasActiveFilters = searchTerm || filterType !== 'all';
-
-  return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="Items"
-        itemCount={processedItems.length}
-        headerContent={
-          <div
-            style={{
-              padding: '1rem',
-              borderBottom: '1px solid #e0e0e0',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                gap: '1rem',
-                alignItems: 'flex-end',
-                marginBottom: hasActiveFilters ? '1rem' : 0,
-              }}
-            >
-              <div style={{ flex: 1 }}>
-                <Search
-                  size="lg"
-                  placeholder="Search items..."
-                  labelText="Search"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onClear={() => setSearchTerm('')}
-                />
-              </div>
-              <Dropdown
-                id="filter-dropdown"
-                titleText="Filter by type"
-                label="Select type"
-                items={filterOptions}
-                itemToString={(item) => (item ? item.text : '')}
-                selectedItem={
-                  filterOptions.find((opt) => opt.id === filterType) ||
-                  filterOptions[0]
-                }
-                onChange={({ selectedItem }) =>
-                  setFilterType(selectedItem?.id || 'all')
-                }
-              />
-              <OverflowMenu
-                renderIcon={ArrowsVertical}
-                iconDescription="Sort options"
-                aria-label="Sort options"
-              >
-                <OverflowMenuItem
-                  itemText="Title (A-Z)"
-                  onClick={() => {
-                    setSortBy('title');
-                    setSortDirection('asc');
-                  }}
-                />
-                <OverflowMenuItem
-                  itemText="Title (Z-A)"
-                  onClick={() => {
-                    setSortBy('title');
-                    setSortDirection('desc');
-                  }}
-                />
-                <OverflowMenuItem
-                  itemText="ID (Low-High)"
-                  onClick={() => {
-                    setSortBy('id');
-                    setSortDirection('asc');
-                  }}
-                />
-                <OverflowMenuItem
-                  itemText="ID (High-Low)"
-                  onClick={() => {
-                    setSortBy('id');
-                    setSortDirection('desc');
-                  }}
-                />
-              </OverflowMenu>
-            </div>
-            {hasActiveFilters && (
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                {searchTerm && (
-                  <Button
-                    kind="ghost"
-                    size="sm"
-                    onClick={() => setSearchTerm('')}
-                  >
-                    Clear search: &quot;{searchTerm}&quot;
-                  </Button>
-                )}
-                {filterType !== 'all' && (
-                  <Button
-                    kind="ghost"
-                    size="sm"
-                    onClick={() => setFilterType('all')}
-                  >
-                    Clear filter: {filterType}
-                  </Button>
-                )}
-              </div>
-            )}
-          </div>
-        }
-      >
-        <AddSelect.Content>
-          {processedItems.length > 0 ? (
-            processedItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={`${item.subtitle} • ${item.type}`}
-                value={item.value}
-              />
-            ))
-          ) : (
-            <div
-              style={{ padding: '2rem', textAlign: 'center', color: '#525252' }}
-            >
-              No items match your search and filter criteria
-            </div>
-          )}
-        </AddSelect.Content>
-      </AddSelect.Body>
-    </AddSelect>
-  );
-};
-
-/**
- * With default search and custom actions
- *
- * This example shows how to use the default search with custom filter/sort actions
- * using the `actionsSlot` prop. This is the simplest way to add filter/sort while
- * keeping the built-in search functionality.
- */
-export const WithDefaultSearchAndActions = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-  const [filterType, setFilterType] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'title' | 'id'>('title');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-
-  const handleItemSelect = (itemId: string, selected: boolean) => {
-    const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
-    } else {
-      newSelected.delete(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
-
-  // User handles filtering and sorting
-  const processedItems = useMemo(() => {
-    let result = itemsWithTypes;
-
-    // Apply type filter
-    if (filterType !== 'all') {
-      result = result.filter((item) => item.type === filterType);
-    }
-
-    // Apply sort
-    result = [...result].sort((a, b) => {
-      const aVal = a[sortBy];
-      const bVal = b[sortBy];
-      const comparison = aVal.localeCompare(bVal);
-      return sortDirection === 'asc' ? comparison : -comparison;
-    });
-
-    return result;
-  }, [filterType, sortBy, sortDirection]);
-
-  const filterOptions = [
-    { id: 'all', text: 'All types' },
-    { id: 'Fruit', text: 'Fruits' },
-    { id: 'Vegetable', text: 'Vegetables' },
-  ];
-
-  return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="Items"
-        globalSearchLabel="Search"
-        globalSearchPlaceholder="Search items..."
-        itemCount={processedItems.length}
-        actionsSlot={
-          <>
-            <Dropdown
-              id="filter-dropdown-actions"
-              titleText="Filter by type"
-              label="Select type"
-              items={filterOptions}
-              itemToString={(item) => (item ? item.text : '')}
-              selectedItem={
-                filterOptions.find((opt) => opt.id === filterType) ||
-                filterOptions[0]
-              }
-              onChange={({ selectedItem }) =>
-                setFilterType(selectedItem?.id || 'all')
-              }
-            />
-            <OverflowMenu
-              renderIcon={ArrowsVertical}
-              iconDescription="Sort options"
-              aria-label="Sort options"
-            >
-              <OverflowMenuItem
-                itemText="Title (A-Z)"
-                onClick={() => {
-                  setSortBy('title');
-                  setSortDirection('asc');
-                }}
-              />
-              <OverflowMenuItem
-                itemText="Title (Z-A)"
-                onClick={() => {
-                  setSortBy('title');
-                  setSortDirection('desc');
-                }}
-              />
-            </OverflowMenu>
-          </>
-        }
-      >
-        <AddSelect.Content>
-          {processedItems.map((item) => (
-            <AddSelect.Row
-              key={item.id}
-              itemId={item.id}
-              title={item.title}
-              subtitle={`${item.subtitle} • ${item.type}`}
-              value={item.value}
-            />
-          ))}
-        </AddSelect.Content>
-      </AddSelect.Body>
-    </AddSelect>
-  );
-};
-
-/**
- * With sub-header actions
- *
- * This example demonstrates the `subHeaderActions` prop which allows you to add
- * custom content or actions in the sub-header area after the breadcrumbs and item count.
- * This is useful for adding contextual actions like "Clear all", "Refresh", or status indicators.
- */
-export const WithSubHeaderActions = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-  const [items, setItems] = useState(simpleItems);
-
-  const handleItemSelect = (itemId: string, selected: boolean) => {
-    const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
-    } else {
-      newSelected.delete(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
-
-  const handleRefresh = () => {
-    // Simulate refresh - in real app, this would fetch new data
-    setItems([...simpleItems]);
-  };
-
-  const handleClearAll = () => {
-    setSelectedItems(new Set());
-  };
-
-  return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="All items"
-        itemCount={items.length}
-        subHeaderActions={
-          <>
-            <Button kind="ghost" size="sm" onClick={handleRefresh}>
-              Refresh
-            </Button>
-            <Button
-              kind="ghost"
-              size="sm"
-              onClick={handleClearAll}
-              disabled={selectedItems.size === 0}
-            >
-              Clear all ({selectedItems.size})
-            </Button>
-          </>
-        }
-      >
-        <AddSelect.Content>
-          {items.map((item) => (
-            <AddSelect.Row
-              key={item.id}
-              itemId={item.id}
-              title={item.title}
-              subtitle={item.subtitle}
-              value={item.value}
-            />
-          ))}
-        </AddSelect.Content>
-      </AddSelect.Body>
-    </AddSelect>
-  );
-};
-
-/**
- * Selection Summary with Header Actions
- *
- * This example demonstrates the `headerActions` prop which allows you to add
- * custom actions alongside the edit icon in the SelectionSummary header.
- */
-export const SelectionSummaryWithHeaderActions = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-  const [sortBy, setSortBy] = useState<'title' | 'id'>('title');
-
-  const handleItemSelect = (itemId: string, selected: boolean) => {
-    const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
-    } else {
-      newSelected.delete(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
-
-  const selectedItemsArray = simpleItems.filter((item) =>
-    selectedItems.has(item.id)
-  );
-
-  // Sort selected items
-  const sortedSelectedItems = [...selectedItemsArray].sort((a, b) => {
-    return a[sortBy].localeCompare(b[sortBy]);
-  });
-
-  return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="All items"
-        globalSearchLabel="Search"
-        itemCount={simpleItems.length}
-      >
-        <AddSelect.Content layout="horizontal">
           <AddSelect.Column
-            title="Available items"
-            itemCount={simpleItems.length}
+            title={args.title}
+            searchLabel={args.searchLabel}
+            searchPlaceholder={args.searchPlaceholder}
+            onSearch={args.showSearch ? setSearchTerm : undefined}
+            hideSearch={!args.showSearch}
+            showSelectAll={args.showSelectAll && args.multi}
+            itemCount={filteredItems.length}
+            allSelected={allSelected}
+            onSelectAll={handleSelectAll}
+            multi={args.multi}
           >
-            {simpleItems.map((item) => (
+            {filteredItems.map((item) => (
               <AddSelect.Row
                 key={item.id}
                 itemId={item.id}
-                title={item.title}
+                title={item.title || ''}
                 subtitle={item.subtitle}
-                value={item.value}
+                value={item.value || ''}
               />
             ))}
           </AddSelect.Column>
+        </AddSelect.Content>
+      </AddSelect.Body>
+    </AddSelect>
+  );
+};
+
+export const AddSelectColumn = {
+  render: ColumnTemplate,
+  args: {
+    title: 'Available items',
+    searchLabel: 'Search',
+    searchPlaceholder: 'Search items',
+    showSearch: true,
+    showSelectAll: true,
+    multi: true,
+  },
+  argTypes: {
+    title: {
+      control: 'text',
+      description: 'Column title',
+    },
+    searchLabel: {
+      control: 'text',
+      description: 'Label for column search input',
+    },
+    searchPlaceholder: {
+      control: 'text',
+      description: 'Placeholder for column search',
+    },
+    showSearch: {
+      control: 'boolean',
+      description: 'Show search input in column',
+    },
+    showSelectAll: {
+      control: 'boolean',
+      description: 'Show "Select All" checkbox (multi-select only)',
+    },
+    multi: {
+      control: 'boolean',
+      description: 'Enable multi-select mode',
+    },
+  },
+};
+
+/**
+ * AddSelect.Row Story
+ */
+const RowTemplate = (args) => {
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+  const [itemPanelOpen, setItemPanelOpen] = useState(false);
+  const [selectedItemForPanel, setSelectedItemForPanel] =
+    useState<SampleItem | null>(null);
+
+  const handleItemSelect = (itemId, selected) => {
+    const newSelected = new Set(selectedItems);
+    if (selected) {
+      newSelected.add(itemId);
+    } else {
+      newSelected.delete(itemId);
+    }
+    setSelectedItems(newSelected);
+  };
+
+  const handleItemPanelClick = (itemId) => {
+    const item = sampleItems.find((i) => i.id === itemId);
+    setSelectedItemForPanel(item || null);
+    setItemPanelOpen(true);
+  };
+
+  return (
+    <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+      <AddSelect.Body itemsLabel="Items" itemCount={sampleItems.length}>
+        <AddSelect.Content>
+          {sampleItems.slice(0, 3).map((item) => (
+            <AddSelect.Row
+              key={item.id}
+              itemId={item.id}
+              title={item.title || ''}
+              subtitle={args.showSubtitle ? item.subtitle : undefined}
+              value={item.value || ''}
+              disabled={args.disabled && item.id === '2'}
+              hasItemPanel={args.hasItemPanel}
+              onItemPanelClick={handleItemPanelClick}
+              itemPanelOpen={
+                itemPanelOpen && selectedItemForPanel?.id === item.id
+              }
+            >
+              {args.showTag && (
+                <Tag type="blue" size="sm">
+                  {item.type}
+                </Tag>
+              )}
+            </AddSelect.Row>
+          ))}
+        </AddSelect.Content>
+      </AddSelect.Body>
+      {itemPanelOpen && selectedItemForPanel && (
+        <AddSelect.ItemPanel
+          title="Item details"
+          item={selectedItemForPanel}
+          onClose={() => {
+            setItemPanelOpen(false);
+            setSelectedItemForPanel(null);
+          }}
+        />
+      )}
+    </AddSelect>
+  );
+};
+
+export const AddSelectRow = {
+  render: RowTemplate,
+  args: {
+    showSubtitle: true,
+    showTag: false,
+    hasItemPanel: false,
+    disabled: false,
+  },
+  argTypes: {
+    showSubtitle: {
+      control: 'boolean',
+      description: 'Show item subtitles',
+    },
+    showTag: {
+      control: 'boolean',
+      description: 'Show type tags on items',
+    },
+    hasItemPanel: {
+      control: 'boolean',
+      description: 'Show item panel view icon',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disable second item (demo)',
+    },
+  },
+};
+
+/**
+ * AddSelect.SelectionSummary Story
+ */
+const SelectionSummaryTemplate = (args) => {
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(
+    new Set(['1', '3', '5'])
+  );
+
+  const handleItemSelect = (itemId, selected) => {
+    const newSelected = new Set(selectedItems);
+    if (selected) {
+      newSelected.add(itemId);
+    } else {
+      newSelected.delete(itemId);
+    }
+    setSelectedItems(newSelected);
+  };
+
+  const selectedItemsArray = useMemo(() => {
+    return Array.from(selectedItems)
+      .map((id) => sampleItems.find((item) => item.id === id))
+      .filter((item): item is SampleItem => item !== undefined);
+  }, [selectedItems]);
+
+  return (
+    <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+      <AddSelect.Body itemsLabel="Items" itemCount={sampleItems.length}>
+        <AddSelect.Content>
+          {sampleItems.map((item) => (
+            <AddSelect.Row
+              key={item.id}
+              itemId={item.id}
+              title={item.title || ''}
+              subtitle={item.subtitle}
+              value={item.value || ''}
+            />
+          ))}
+        </AddSelect.Content>
+      </AddSelect.Body>
+      <AddSelect.SelectionSummary
+        title={args.title}
+        selectedItems={selectedItemsArray}
+        showCount={args.showCount}
+        showEditIcon={args.showEditIcon}
+        onEdit={() => console.log('Edit clicked')}
+      />
+    </AddSelect>
+  );
+};
+
+export const AddSelectSelectionSummary = {
+  render: SelectionSummaryTemplate,
+  args: {
+    title: 'Selected items',
+    showCount: true,
+    showEditIcon: false,
+  },
+  argTypes: {
+    title: {
+      control: 'text',
+      description: 'Title for selection summary',
+    },
+    showCount: {
+      control: 'boolean',
+      description: 'Show count badge in selection summary',
+    },
+    showEditIcon: {
+      control: 'boolean',
+      description: 'Show edit icon in selection summary',
+    },
+  },
+};
+
+/**
+ * AddSelect.SelectionSummaryItem Story
+ */
+const SelectionSummaryItemTemplate = (args) => {
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(
+    new Set(['1', '3'])
+  );
+
+  const handleItemSelect = (itemId, selected) => {
+    const newSelected = new Set(selectedItems);
+    if (selected) {
+      newSelected.add(itemId);
+    } else {
+      newSelected.delete(itemId);
+    }
+    setSelectedItems(newSelected);
+  };
+
+  const handleRemove = (itemId: string) => {
+    const newSelected = new Set(selectedItems);
+    newSelected.delete(itemId);
+    setSelectedItems(newSelected);
+  };
+
+  const selectedItemsArray = useMemo(() => {
+    return Array.from(selectedItems)
+      .map((id) => sampleItems.find((item) => item.id === id))
+      .filter((item): item is SampleItem => item !== undefined);
+  }, [selectedItems]);
+
+  return (
+    <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+      <AddSelect.Body itemsLabel="Items" itemCount={sampleItems.length}>
+        <AddSelect.Content>
+          {sampleItems.map((item) => (
+            <AddSelect.Row
+              key={item.id}
+              itemId={item.id}
+              title={item.title || ''}
+              subtitle={item.subtitle}
+              value={item.value || ''}
+            />
+          ))}
         </AddSelect.Content>
       </AddSelect.Body>
       <AddSelect.SelectionSummary
         title="Selected items"
-        selectedItems={sortedSelectedItems}
+        selectedItems={selectedItemsArray}
         showCount
-        showEditIcon
-        onEdit={() => console.log('Edit clicked')}
-        headerActions={
-          <>
-            <Button
-              kind="ghost"
-              size="sm"
-              hasIconOnly
-              iconDescription="Sort"
-              tooltipPosition="bottom"
-              onClick={() => setSortBy(sortBy === 'title' ? 'id' : 'title')}
-            >
-              <ArrowsVertical />
-            </Button>
-            <Button
-              kind="ghost"
-              size="sm"
-              onClick={() => setSelectedItems(new Set())}
-              disabled={selectedItems.size === 0}
-            >
-              Clear all
-            </Button>
-          </>
-        }
-      />
+      >
+        {selectedItemsArray.map((item) => (
+          <AddSelect.SelectionSummaryItem
+            key={item.id}
+            item={item}
+            useAccordion={args.useAccordion}
+            onRemove={args.showRemoveButton ? handleRemove : undefined}
+            removeButtonLabel="Remove item"
+          />
+        ))}
+      </AddSelect.SelectionSummary>
     </AddSelect>
   );
 };
 
-/**
- * Selection Summary with Custom Header
- *
- * This example demonstrates the `headerContent` prop which allows you to
- * completely replace the default header with custom content.
- */
-export const SelectionSummaryWithCustomHeader = () => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+export const AddSelectSelectionSummaryItem = {
+  render: SelectionSummaryItemTemplate,
+  args: {
+    useAccordion: false,
+    showRemoveButton: true,
+  },
+  argTypes: {
+    useAccordion: {
+      control: 'boolean',
+      description: 'Use accordion pattern for items',
+    },
+    showRemoveButton: {
+      control: 'boolean',
+      description: 'Show remove button on items',
+    },
+  },
+};
 
-  const handleItemSelect = (itemId: string, selected: boolean) => {
+/**
+ * AddSelect.ItemPanel Story
+ */
+const ItemPanelTemplate = (args) => {
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+  const [itemPanelOpen, setItemPanelOpen] = useState(true);
+  const [selectedItemForPanel, setSelectedItemForPanel] = useState<SampleItem>(
+    sampleItems[0]
+  );
+
+  const handleItemSelect = (itemId, selected) => {
     const newSelected = new Set(selectedItems);
     if (selected) {
       newSelected.add(itemId);
@@ -1138,90 +646,65 @@ export const SelectionSummaryWithCustomHeader = () => {
     setSelectedItems(newSelected);
   };
 
-  const selectedItemsArray = simpleItems.filter((item) =>
-    selectedItems.has(item.id)
-  );
-
-  const handleExport = () => {
-    console.log('Exporting:', selectedItemsArray);
+  const handleItemPanelClick = (itemId) => {
+    const item = sampleItems.find((i) => i.id === itemId);
+    setSelectedItemForPanel(item || sampleItems[0]);
+    setItemPanelOpen(true);
   };
 
   return (
-    <AddSelect
-      multi
-      selectedItems={selectedItems}
-      onItemSelect={handleItemSelect}
-    >
-      <AddSelect.Body
-        itemsLabel="All items"
-        globalSearchLabel="Search"
-        itemCount={simpleItems.length}
-      >
-        <AddSelect.Content layout="horizontal">
-          <AddSelect.Column
-            title="Available items"
-            itemCount={simpleItems.length}
-          >
-            {simpleItems.map((item) => (
-              <AddSelect.Row
-                key={item.id}
-                itemId={item.id}
-                title={item.title}
-                subtitle={item.subtitle}
-                value={item.value}
-              />
-            ))}
-          </AddSelect.Column>
+    <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+      <AddSelect.Body itemsLabel="Items" itemCount={sampleItems.length}>
+        <AddSelect.Content>
+          {sampleItems.slice(0, 4).map((item) => (
+            <AddSelect.Row
+              key={item.id}
+              itemId={item.id}
+              title={item.title || ''}
+              subtitle={item.subtitle}
+              value={item.value || ''}
+              hasItemPanel
+              onItemPanelClick={handleItemPanelClick}
+              itemPanelOpen={
+                itemPanelOpen && selectedItemForPanel?.id === item.id
+              }
+            />
+          ))}
         </AddSelect.Content>
       </AddSelect.Body>
-      <AddSelect.SelectionSummary
-        selectedItems={selectedItemsArray}
-        headerContent={
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '1rem',
-              borderBottom: '1px solid #e0e0e0',
-            }}
-          >
-            <div>
-              <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 600 }}>
-                My Custom Selection Header
-              </h3>
-              <p
-                style={{
-                  margin: '0.25rem 0 0',
-                  fontSize: '0.875rem',
-                  color: '#525252',
-                }}
-              >
-                {selectedItems.size} item{selectedItems.size !== 1 ? 's' : ''}{' '}
-                selected
-              </p>
-            </div>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <Button
-                size="sm"
-                kind="tertiary"
-                onClick={handleExport}
-                disabled={selectedItems.size === 0}
-              >
-                Export
-              </Button>
-              <Button
-                size="sm"
-                kind="ghost"
-                onClick={() => setSelectedItems(new Set())}
-                disabled={selectedItems.size === 0}
-              >
-                Clear
-              </Button>
-            </div>
-          </div>
-        }
-      />
+      {itemPanelOpen && (
+        <AddSelect.ItemPanel
+          title={args.title}
+          item={selectedItemForPanel}
+          onClose={
+            args.showCloseButton ? () => setItemPanelOpen(false) : undefined
+          }
+          closeIconDescription={args.closeIconDescription}
+        />
+      )}
     </AddSelect>
   );
+};
+
+export const AddSelectItemPanel = {
+  render: ItemPanelTemplate,
+  args: {
+    title: 'Item details',
+    showCloseButton: true,
+    closeIconDescription: 'Close',
+  },
+  argTypes: {
+    title: {
+      control: 'text',
+      description: 'Title for item details panel',
+    },
+    showCloseButton: {
+      control: 'boolean',
+      description: 'Show close button',
+    },
+    closeIconDescription: {
+      control: 'text',
+      description: 'Close button aria-label',
+    },
+  },
 };

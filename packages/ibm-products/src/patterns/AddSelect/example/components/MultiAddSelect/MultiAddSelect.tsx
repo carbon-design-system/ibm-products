@@ -283,7 +283,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
             </Tearsheet.Header>
 
             <Tearsheet.Body>
-              <Tearsheet.MainContent>
+              <Tearsheet.MainContent isFlush>
                 <AddSelect.Body
                   itemsLabel={itemsLabel}
                   globalSearchLabel={globalSearchLabel}
@@ -321,7 +321,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                 </AddSelect.Body>
               </Tearsheet.MainContent>
 
-              <Tearsheet.SummaryContent className="summary-content-no-padding">
+              <Tearsheet.SummaryContent isFlush>
                 {infoPanel.show && infoPanel.item ? (
                   <AddSelect.ItemSummaryPanel
                     title="Item details"

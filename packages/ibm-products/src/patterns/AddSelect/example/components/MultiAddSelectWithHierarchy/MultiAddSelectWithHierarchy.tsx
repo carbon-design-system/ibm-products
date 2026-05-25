@@ -487,7 +487,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
             </Tearsheet.Header>
 
             <Tearsheet.Body>
-              <Tearsheet.MainContent>
+              <Tearsheet.MainContent isFlush>
                 <AddSelect.Body
                   itemsLabel={itemsLabel}
                   globalSearchLabel={globalSearchLabel}
@@ -540,7 +540,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                 </AddSelect.Body>
               </Tearsheet.MainContent>
 
-              <Tearsheet.SummaryContent className="summary-content-no-padding">
+              <Tearsheet.SummaryContent isFlush>
                 {infoPanel.show && infoPanel.item ? (
                   <AddSelect.ItemSummaryPanel
                     title="Item details"

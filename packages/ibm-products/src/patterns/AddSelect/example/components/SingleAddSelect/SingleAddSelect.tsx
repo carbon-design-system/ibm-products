@@ -236,7 +236,7 @@ export const SingleAddSelect = forwardRef<HTMLDivElement, SingleAddSelectProps>(
             </Tearsheet.Header>
 
             <Tearsheet.Body>
-              <Tearsheet.MainContent>
+              <Tearsheet.MainContent isFlush>
                 <AddSelect.Body
                   itemsLabel={itemsLabel}
                   globalSearchLabel={globalSearchLabel}

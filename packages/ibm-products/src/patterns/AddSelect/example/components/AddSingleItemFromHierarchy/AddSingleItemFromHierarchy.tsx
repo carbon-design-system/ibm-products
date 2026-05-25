@@ -503,7 +503,7 @@ export const AddSingleItemFromHierarchy = forwardRef<
             </Tearsheet.Header>
 
             <Tearsheet.Body>
-              <Tearsheet.MainContent>
+              <Tearsheet.MainContent isFlush>
                 <AddSelect.Body
                   itemsLabel={itemsLabel}
                   globalSearchLabel={globalSearchLabel}
@@ -553,7 +553,7 @@ export const AddSingleItemFromHierarchy = forwardRef<
               </Tearsheet.MainContent>
 
               {/* Side panel for selected item details using SelectionSummary - always visible */}
-              <Tearsheet.SummaryContent className="summary-content-no-padding">
+              <Tearsheet.SummaryContent isFlush>
                 <AddSelect.SelectionSummary
                   title={sidePanelTitle}
                   showCount={false}
@@ -652,5 +652,3 @@ AddSingleItemFromHierarchy.propTypes = {
 };
 
 AddSingleItemFromHierarchy.displayName = 'AddSingleItemFromHierarchy';
-
-// Made with Bob

@@ -9,12 +9,6 @@
 
 // Multi Add Select Pattern Component Styles
 .multi-add-select-pattern {
-  // Remove default padding from Tearsheet.SummaryContent
-  // to allow AddSelect panels to control their own spacing
-  .summary-content-no-padding {
-    padding-inline: 0;
-  }
-
   // No results state
   &__no-results {
     display: flex;

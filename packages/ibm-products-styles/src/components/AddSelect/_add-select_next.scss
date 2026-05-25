@@ -445,27 +445,6 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 // ──────────────────────────────────────────────────────────────
-// AddSelectSidePanel - Optional wrapper for side panel area
-// ──────────────────────────────────────────────────────────────
-.#{$block-class__next}__side-panel {
-  display: flex;
-  flex-direction: column;
-  background: $layer-01;
-
-  &--narrow {
-    flex-basis: 16rem;
-  }
-
-  &--default {
-    flex-basis: 22.5rem; // Matches legacy implementation
-  }
-
-  &--wide {
-    flex-basis: 28rem;
-  }
-}
-
-// ──────────────────────────────────────────────────────────────
 // AddSelectSelectionSummary - Selected items display
 // ──────────────────────────────────────────────────────────────
 .#{$block-class__next}__selection-summary {

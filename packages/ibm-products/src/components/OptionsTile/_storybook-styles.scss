@@ -11,6 +11,13 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
+main {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  min-block-size: 100vh;
+}
+
 .#{$block-class} {
   inline-size: 80vw;
   max-inline-size: 48rem;

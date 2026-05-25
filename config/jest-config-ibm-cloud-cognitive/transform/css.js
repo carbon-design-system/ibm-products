@@ -1,22 +1,25 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import { createHash } from 'crypto';
+import fs from 'fs';
+import * as sass from 'sass';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const { createHash } = require('crypto');
-const fs = require('fs');
-const sass = require('sass');
-const path = require('path');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const THIS_FILE = fs.readFileSync(__filename);
 const { root: ROOT_DIR } = path.parse(__dirname);
 
 /**
- * Returns an array of the the directory and its ancestors
+ * Returns an array of the directory and its ancestors
  * @param {string} directory
  * @returns {Array<string>}
  */
@@ -37,7 +40,7 @@ function ancestors(directory) {
   return result;
 }
 
-module.exports = {
+export default {
   process(_file, filepath) {
     const nodeModules = ancestors(path.dirname(filepath))
       .map((directory) => {
@@ -47,14 +50,15 @@ module.exports = {
         return fs.existsSync(directory);
       });
 
-    const result = sass.renderSync({
-      file: filepath,
-      outputStyle: 'compressed',
-      includePaths: [...nodeModules],
+    const result = sass.compile(filepath, {
+      style: 'compressed',
+      loadPaths: [...nodeModules],
     });
+    const cssString =
+      typeof result.css === 'string' ? result.css : String(result.css);
     return {
       code: `
-        const css = \`${result.css.toString()}\`;
+        const css = ${JSON.stringify(cssString)};
         let style;
         beforeAll(() => {
           style = document.createElement('style');
@@ -82,7 +86,7 @@ module.exports = {
       .update('\0', 'utf8')
       .update(process.version)
       .update('\0', 'utf8')
-      .update(sass.info)
+      .update(String(sass.info))
       .digest('hex');
   },
 };

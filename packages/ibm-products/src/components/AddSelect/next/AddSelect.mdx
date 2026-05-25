@@ -11,9 +11,8 @@ import styles from './_storybook-styles.scss?inline';
 
 - [Overview](#overview)
 - [Component Hierarchy](#component-hierarchy)
-- [Subcomponents](#subcomponents)
+- [Subcomponents & Usage](#subcomponents--usage)
 - [Usage Patterns](#usage-patterns)
-- [Examples](#examples)
 - [Component API](#component-api)
 
 ## Overview
@@ -63,47 +62,48 @@ AddSelect (Root Container)
 └── AddSelect.ItemPanel (Item Details Panel)
 ```
 
-### Component Flow
+## Subcomponents & Usage
 
-1. **AddSelect** - Root container that manages selection state
-2. **AddSelect.Body** - Contains search, filters, and item list
-3. **AddSelect.Content** - Handles keyboard navigation and layout
-4. **AddSelect.Column** (Optional) - Groups items with column-specific features
-5. **AddSelect.Row** - Individual selectable items
-6. **AddSelect.SelectionSummary** (Optional) - Shows selected items
-7. **AddSelect.SelectionSummaryItem** (Optional) - Individual selected item
-   display
-8. **AddSelect.ItemPanel** (Optional) - Detailed item information
+### 1. AddSelect (Root)
 
-## Subcomponents
-
-### AddSelect (Root)
-
-The main container component that provides context for selection state and
-callbacks. All child components access selection state through this context.
+**Purpose**: The main container component that provides context for selection
+state and callbacks. All child components access selection state through this
+context.
 
 **When to use**: Always required as the root wrapper for any AddSelect
 interface.
 
-### AddSelect.Body
+**Component flow position**: Root container that manages selection state
 
-Contains the header section (search, breadcrumbs, item count) and the main
-content area. Handles global search and navigation.
+---
+
+### 2. AddSelect.Body
+
+**Purpose**: Contains the header section (search, breadcrumbs, item count) and
+the main content area. Handles global search and navigation.
 
 **When to use**: Required for displaying the main item selection interface.
 
-### AddSelect.Content
+**Component flow position**: Contains search, filters, and item list
 
-Container for items with built-in keyboard navigation support. Manages focus and
-provides grid-based navigation.
+---
+
+### 3. AddSelect.Content
+
+**Purpose**: Container for items with built-in keyboard navigation support.
+Manages focus and provides grid-based navigation.
 
 **When to use**: Required as a wrapper for AddSelect.Row or AddSelect.Column
 components.
 
-### AddSelect.Column
+**Component flow position**: Handles keyboard navigation and layout
 
-Optional column wrapper that provides column-specific features like column
-title, column-level search, and "Select All" functionality.
+---
+
+### 4. AddSelect.Column (Optional)
+
+**Purpose**: Optional column wrapper that provides column-specific features like
+column title, column-level search, and "Select All" functionality.
 
 **When to use**:
 
@@ -111,17 +111,25 @@ title, column-level search, and "Select All" functionality.
 - When you need column-level search or "Select All"
 - For hierarchical navigation with multiple levels
 
-### AddSelect.Row
+**Component flow position**: Groups items with column-specific features
 
-Individual selectable item with support for checkboxes (multi-select) or radio
-buttons (single-select).
+---
+
+### 5. AddSelect.Row
+
+**Purpose**: Individual selectable item with support for checkboxes
+(multi-select) or radio buttons (single-select).
 
 **When to use**: For every selectable item in your interface.
 
-### AddSelect.SelectionSummary
+**Component flow position**: Individual selectable items
 
-Displays a list of selected items with optional count badge and edit
-functionality.
+---
+
+### 6. AddSelect.SelectionSummary (Optional)
+
+**Purpose**: Displays a list of selected items with optional count badge and
+edit functionality.
 
 **When to use**:
 
@@ -129,10 +137,14 @@ functionality.
 - For review/confirmation workflows
 - When building multi-step selection processes
 
-### AddSelect.SelectionSummaryItem
+**Component flow position**: Shows selected items
 
-Individual item display within the selection summary, with optional accordion
-view and remove functionality.
+---
+
+### 7. AddSelect.SelectionSummaryItem (Optional)
+
+**Purpose**: Individual item display within the selection summary, with optional
+accordion view and remove functionality.
 
 **When to use**:
 
@@ -140,9 +152,14 @@ view and remove functionality.
 - When you need accordion-style item details
 - When items need individual remove buttons
 
-### AddSelect.ItemPanel
+**Component flow position**: Individual selected item display
 
-Side panel that displays detailed information about a specific item.
+---
+
+### 8. AddSelect.ItemPanel (Optional)
+
+**Purpose**: Side panel that displays detailed information about a specific
+item.
 
 **When to use**:
 
@@ -150,14 +167,24 @@ Side panel that displays detailed information about a specific item.
 - For preview/inspection workflows
 - When users need more context before selecting
 
+**Component flow position**: Detailed item information
+
 ## Usage Patterns
 
-### Pattern 1: Single Select
+### Pattern 1: Basic Single Select
 
-Simple list with radio button for selection.
+Simple list with radio buttons for single selection.
 
 ```jsx
-const [selectedItem, setSelectedItem] = useState(null);
+const [selectedItems, setSelectedItems] = useState(new Set());
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set();
+  if (selected) {
+    newSelected.add(itemId);
+  }
+  setSelectedItems(newSelected);
+};
 
 <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
   <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
@@ -176,84 +203,203 @@ const [selectedItem, setSelectedItem] = useState(null);
 </AddSelect>;
 ```
 
-### Pattern 1: Basic Multi-Select List
+---
+
+### Pattern 2: Basic Multi-Select List
 
 Simple list with checkboxes for multiple selection. Use the `multi` prop on
 AddSelect.Column to control selection mode.
 
 ```jsx
+const [selectedItems, setSelectedItems] = useState(new Set());
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
 <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
   <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
     <AddSelect.Content>
-      <AddSelect.Column multi={false}>
+      <AddSelect.Column multi={true}>
         {items.map((item) => (
-          <AddSelect.Row key={item.id} {...item} />
+          <AddSelect.Row
+            key={item.id}
+            itemId={item.id}
+            title={item.title}
+            subtitle={item.subtitle}
+            value={item.value}
+          />
         ))}
       </AddSelect.Column>
     </AddSelect.Content>
   </AddSelect.Body>
-</AddSelect>
+</AddSelect>;
 ```
+
+---
 
 ### Pattern 3: With Search and Filters
 
 Add global search and custom filter actions.
 
 ```jsx
-<AddSelect.Body
-  itemsLabel="Items"
-  globalSearchLabel="Search"
-  globalSearchPlaceholder="Search items"
-  itemCount={filteredItems.length}
-  onSearch={setSearchTerm}
-  actionsSlot={
-    <Dropdown
-      id="filter"
-      label="Filter"
-      items={filterOptions}
-      onChange={handleFilterChange}
-    />
+const [selectedItems, setSelectedItems] = useState(new Set());
+const [searchTerm, setSearchTerm] = useState('');
+const [filterType, setFilterType] = useState('all');
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
   }
->
-  <AddSelect.Content>
-    {filteredItems.map((item) => (
-      <AddSelect.Row key={item.id} {...item} />
-    ))}
-  </AddSelect.Content>
-</AddSelect.Body>
+  setSelectedItems(newSelected);
+};
+
+const filteredItems = items.filter((item) => {
+  const matchesSearch = item.title
+    .toLowerCase()
+    .includes(searchTerm.toLowerCase());
+  const matchesFilter = filterType === 'all' || item.type === filterType;
+  return matchesSearch && matchesFilter;
+});
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body
+    itemsLabel="Items"
+    globalSearchLabel="Search"
+    globalSearchPlaceholder="Search items"
+    itemCount={filteredItems.length}
+    onSearch={setSearchTerm}
+    actionsSlot={
+      <Dropdown
+        id="filter"
+        label="Filter"
+        items={filterOptions}
+        onChange={({ selectedItem }) =>
+          setFilterType(selectedItem?.id || 'all')
+        }
+      />
+    }
+  >
+    <AddSelect.Content>
+      {filteredItems.map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+        />
+      ))}
+    </AddSelect.Content>
+  </AddSelect.Body>
+</AddSelect>;
 ```
+
+---
 
 ### Pattern 4: With Columns and Select All
 
 Organize items into columns with "Select All" functionality.
 
 ```jsx
-<AddSelect.Content layout="horizontal">
-  <AddSelect.Column
-    title="Available items"
-    showSelectAll
-    multi
-    itemCount={items.length}
-    allSelected={allSelected}
-    onSelectAll={handleSelectAll}
-  >
-    {items.map((item) => (
-      <AddSelect.Row key={item.id} {...item} />
-    ))}
-  </AddSelect.Column>
-</AddSelect.Content>
+const [selectedItems, setSelectedItems] = useState(new Set());
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+const handleSelectAll = (checked) => {
+  if (checked) {
+    setSelectedItems(new Set(items.map((item) => item.id)));
+  } else {
+    setSelectedItems(new Set());
+  }
+};
+
+const allSelected =
+  items.length > 0 && items.every((item) => selectedItems.has(item.id));
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
+    <AddSelect.Content layout="horizontal">
+      <AddSelect.Column
+        title="Available items"
+        showSelectAll
+        multi
+        itemCount={items.length}
+        allSelected={allSelected}
+        onSelectAll={handleSelectAll}
+      >
+        {items.map((item) => (
+          <AddSelect.Row
+            key={item.id}
+            itemId={item.id}
+            title={item.title}
+            subtitle={item.subtitle}
+            value={item.value}
+          />
+        ))}
+      </AddSelect.Column>
+    </AddSelect.Content>
+  </AddSelect.Body>
+</AddSelect>;
 ```
+
+---
 
 ### Pattern 5: With Selection Summary
 
 Display selected items in a separate panel.
 
 ```jsx
-<AddSelect selectedItems={selectedItems} onItemSelect={handleSelect}>
+const [selectedItems, setSelectedItems] = useState(new Set());
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+const handleRemove = (itemId) => {
+  const newSelected = new Set(selectedItems);
+  newSelected.delete(itemId);
+  setSelectedItems(newSelected);
+};
+
+const selectedItemsArray = Array.from(selectedItems)
+  .map((id) => items.find((item) => item.id === id))
+  .filter((item) => item !== undefined);
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
   <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
     <AddSelect.Content>
       {items.map((item) => (
-        <AddSelect.Row key={item.id} {...item} />
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+        />
       ))}
     </AddSelect.Content>
   </AddSelect.Body>
@@ -263,7 +409,7 @@ Display selected items in a separate panel.
     selectedItems={selectedItemsArray}
     showCount
     showEditIcon
-    onEdit={handleEdit}
+    onEdit={() => console.log('Edit clicked')}
   >
     {selectedItemsArray.map((item) => (
       <AddSelect.SelectionSummaryItem
@@ -274,50 +420,119 @@ Display selected items in a separate panel.
       />
     ))}
   </AddSelect.SelectionSummary>
-</AddSelect>
+</AddSelect>;
 ```
+
+---
 
 ### Pattern 6: With Item Details Panel
 
 Show detailed information about items.
 
 ```jsx
-<AddSelect.Row
-  itemId={item.id}
-  title={item.title}
-  value={item.value}
-  hasItemPanel
-  onItemPanelClick={handleItemPanelClick}
-  itemPanelOpen={itemPanelOpen && selectedItem?.id === item.id}
-/>;
+const [selectedItems, setSelectedItems] = useState(new Set());
+const [itemPanelOpen, setItemPanelOpen] = useState(false);
+const [selectedItemForPanel, setSelectedItemForPanel] = useState(null);
 
-{
-  itemPanelOpen && (
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+const handleItemPanelClick = (itemId) => {
+  const item = items.find((i) => i.id === itemId);
+  setSelectedItemForPanel(item);
+  setItemPanelOpen(true);
+};
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
+    <AddSelect.Content>
+      {items.map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+          hasItemPanel
+          onItemPanelClick={handleItemPanelClick}
+          itemPanelOpen={itemPanelOpen && selectedItemForPanel?.id === item.id}
+        />
+      ))}
+    </AddSelect.Content>
+  </AddSelect.Body>
+
+  {itemPanelOpen && selectedItemForPanel && (
     <AddSelect.ItemPanel
       title="Item details"
-      item={selectedItem}
-      onClose={() => setItemPanelOpen(false)}
+      item={selectedItemForPanel}
+      onClose={() => {
+        setItemPanelOpen(false);
+        setSelectedItemForPanel(null);
+      }}
     />
-  );
-}
+  )}
+</AddSelect>;
 ```
 
-### Pattern 7: Hierarchical Navigation
+---
+
+### Pattern 7: Single Select With Hierarchical Navigation
 
 Navigate through nested item structures.
 
 ```jsx
-<AddSelect.Content layout="horizontal">
-  <AddSelect.Column title={currentLevel.title} onNavigate={handleNavigate}>
-    {currentLevel.items.map((item) => (
-      <AddSelect.Row
-        key={item.id}
-        {...item}
-        hasChildren={item.children?.length > 0}
-      />
-    ))}
-  </AddSelect.Column>
-</AddSelect.Content>
+const [selectedItems, setSelectedItems] = useState(new Set());
+const [currentLevel, setCurrentLevel] = useState({
+  title: 'Root',
+  items: rootItems,
+});
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+const handleNavigate = (itemId, title, parentId) => {
+  const item = currentLevel.items.find((i) => i.id === itemId);
+  if (item && item.children) {
+    setCurrentLevel({
+      title: item.title,
+      items: item.children,
+      parentId: itemId,
+    });
+  }
+};
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body itemsLabel="Items" itemCount={currentLevel.items.length}>
+    <AddSelect.Content layout="horizontal">
+      <AddSelect.Column title={currentLevel.title} onNavigate={handleNavigate}>
+        {currentLevel.items.map((item) => (
+          <AddSelect.Row
+            key={item.id}
+            itemId={item.id}
+            title={item.title}
+            subtitle={item.subtitle}
+            value={item.value}
+            hasChildren={item.children && item.children.length > 0}
+          />
+        ))}
+      </AddSelect.Column>
+    </AddSelect.Content>
+  </AddSelect.Body>
+</AddSelect>;
 ```
 
 ## Component API

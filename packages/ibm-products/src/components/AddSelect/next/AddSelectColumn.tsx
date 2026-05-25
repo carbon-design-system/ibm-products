@@ -52,6 +52,10 @@ export interface AddSelectColumnProps {
    */
   actionsSlot?: ReactNode;
   /**
+   * Whether to hide the search input
+   */
+  hideSearch?: boolean;
+  /**
    * Whether to enable multi-selection (checkboxes) or single selection (radio buttons)
    */
   multi?: boolean;
@@ -90,6 +94,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
       searchPlaceholder = 'Search',
       onSearch,
       actionsSlot,
+      hideSearch = false,
       multi = false,
       showSelectAll = false,
       itemCount = 0,
@@ -130,30 +135,32 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
       <AddSelectContext.Provider value={columnContext}>
         <div className={columnClasses} ref={ref} {...rest}>
           {/* Search with optional actions */}
-          <div
-            className={cx(`${blockClass}-column__search`, {
-              [`${blockClass}-column__search--with-actions`]: actionsSlot,
-            })}
-          >
+          {!hideSearch && (
             <div
-              className={
-                actionsSlot ? `${blockClass}-column__search-input` : undefined
-              }
+              className={cx(`${blockClass}-column__search`, {
+                [`${blockClass}-column__search--with-actions`]: actionsSlot,
+              })}
             >
-              <Search
-                labelText={searchLabel}
-                placeholder={searchPlaceholder}
-                size="md"
-                onChange={handleSearch}
-                value={searchTerm}
-              />
-            </div>
-            {actionsSlot && (
-              <div className={`${blockClass}-column__actions`}>
-                {actionsSlot}
+              <div
+                className={
+                  actionsSlot ? `${blockClass}-column__search-input` : undefined
+                }
+              >
+                <Search
+                  labelText={searchLabel}
+                  placeholder={searchPlaceholder}
+                  size="md"
+                  onChange={handleSearch}
+                  value={searchTerm}
+                />
               </div>
-            )}
-          </div>
+              {actionsSlot && (
+                <div className={`${blockClass}-column__actions`}>
+                  {actionsSlot}
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Header with Select All */}
           {(showSelectAll || title) && (
@@ -203,6 +210,7 @@ AddSelectColumn.propTypes = {
   allSelected: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
+  hideSearch: PropTypes.bool,
   itemCount: PropTypes.number,
   multi: PropTypes.bool,
   /**@ts-ignore */

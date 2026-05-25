@@ -293,7 +293,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                   onSearch={handleSearch}
                 >
                   <AddSelect.Content>
-                    <AddSelect.Column multi={true}>
+                    <AddSelect.Column multi={true} hideSearch>
                       {filteredItems.length > 0 ? (
                         filteredItems.map((item) => {
                           return (

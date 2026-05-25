@@ -327,7 +327,7 @@ export const SingleAddSelectWithHierarchy = forwardRef<
                   onBreadcrumbClick={handleBreadcrumbClick}
                 >
                   <AddSelect.Content>
-                    <AddSelect.Column onNavigate={handleNavigate}>
+                    <AddSelect.Column onNavigate={handleNavigate} hideSearch>
                       {filteredItems.length > 0 ? (
                         filteredItems.map((item) => {
                           const hasChildren = dataManager.hasChildren(item.id);

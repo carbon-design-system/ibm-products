@@ -483,28 +483,28 @@ export const AddSingleItemFromHierarchy = forwardRef<
 
     return (
       <>
-        <Tearsheet
-          ref={ref}
-          open={open}
-          onClose={handleClose}
-          variant="wide"
-          summaryContentWidth="22.5rem"
-          className={cx(blockClass, className)}
-          {...rest}
+        <AddSelect
+          multi={false}
+          onItemSelect={handleItemSelect}
+          selectedItems={selectedItems}
         >
-          <Tearsheet.Header hideCloseButton>
-            <Tearsheet.HeaderContent title={title}>
-              <p slot="description">{description}</p>
-            </Tearsheet.HeaderContent>
-          </Tearsheet.Header>
+          <Tearsheet
+            ref={ref}
+            open={open}
+            onClose={handleClose}
+            variant="wide"
+            summaryContentWidth="22.5rem"
+            className={cx(blockClass, className)}
+            {...rest}
+          >
+            <Tearsheet.Header hideCloseButton>
+              <Tearsheet.HeaderContent title={title}>
+                <p slot="description">{description}</p>
+              </Tearsheet.HeaderContent>
+            </Tearsheet.Header>
 
-          <Tearsheet.Body>
-            <Tearsheet.MainContent>
-              <AddSelect
-                multi={false}
-                onItemSelect={handleItemSelect}
-                selectedItems={selectedItems}
-              >
+            <Tearsheet.Body>
+              <Tearsheet.MainContent>
                 <AddSelect.Body
                   itemsLabel={itemsLabel}
                   globalSearchLabel={globalSearchLabel}
@@ -551,44 +551,44 @@ export const AddSingleItemFromHierarchy = forwardRef<
                     )}
                   </AddSelect.Content>
                 </AddSelect.Body>
-              </AddSelect>
-            </Tearsheet.MainContent>
+              </Tearsheet.MainContent>
 
-            {/* Side panel for selected item details using SelectionSummary - always visible */}
-            <Tearsheet.SummaryContent className="summary-content-no-padding">
-              <AddSelect.SelectionSummary
-                title={sidePanelTitle}
-                showCount={false}
-                selectedItems={selectedItem ? [selectedItem] : []}
-                renderItem={renderSidePanelContent}
-                emptyState={
-                  <div className={`${blockClass}__empty-state`}>
-                    <p className={`${blockClass}__empty-state-text`}>
-                      Select an item to view details
-                    </p>
-                  </div>
-                }
-              />
-            </Tearsheet.SummaryContent>
-          </Tearsheet.Body>
+              {/* Side panel for selected item details using SelectionSummary - always visible */}
+              <Tearsheet.SummaryContent className="summary-content-no-padding">
+                <AddSelect.SelectionSummary
+                  title={sidePanelTitle}
+                  showCount={false}
+                  selectedItems={selectedItem ? [selectedItem] : []}
+                  renderItem={renderSidePanelContent}
+                  emptyState={
+                    <div className={`${blockClass}__empty-state`}>
+                      <p className={`${blockClass}__empty-state-text`}>
+                        Select an item to view details
+                      </p>
+                    </div>
+                  }
+                />
+              </Tearsheet.SummaryContent>
+            </Tearsheet.Body>
 
-          <Tearsheet.Footer
-            actions={[
-              {
-                kind: 'secondary',
-                label: secondaryButtonText,
-                onClick: handleClose,
-              },
-              {
-                kind: 'primary',
-                label: primaryButtonText,
-                onClick: handleSubmit,
-                disabled: !selectedId,
-              },
-            ]}
-            buttonSize={buttonSize}
-          />
-        </Tearsheet>
+            <Tearsheet.Footer
+              actions={[
+                {
+                  kind: 'secondary',
+                  label: secondaryButtonText,
+                  onClick: handleClose,
+                },
+                {
+                  kind: 'primary',
+                  label: primaryButtonText,
+                  onClick: handleSubmit,
+                  disabled: !selectedId,
+                },
+              ]}
+              buttonSize={buttonSize}
+            />
+          </Tearsheet>
+        </AddSelect>
 
         {showNotification && (
           <ToastNotification

@@ -217,27 +217,27 @@ export const SingleAddSelect = forwardRef<HTMLDivElement, SingleAddSelectProps>(
 
     return (
       <>
-        <Tearsheet
-          ref={ref}
-          open={open}
-          onClose={handleClose}
-          variant="narrow"
-          className={cx(blockClass, className)}
-          {...rest}
+        <AddSelect
+          multi={false}
+          onItemSelect={handleItemSelect}
+          selectedItems={selectedItems}
         >
-          <Tearsheet.Header hideCloseButton>
-            <Tearsheet.HeaderContent title={title}>
-              <p slot="description">{description}</p>
-            </Tearsheet.HeaderContent>
-          </Tearsheet.Header>
+          <Tearsheet
+            ref={ref}
+            open={open}
+            onClose={handleClose}
+            variant="narrow"
+            className={cx(blockClass, className)}
+            {...rest}
+          >
+            <Tearsheet.Header hideCloseButton>
+              <Tearsheet.HeaderContent title={title}>
+                <p slot="description">{description}</p>
+              </Tearsheet.HeaderContent>
+            </Tearsheet.Header>
 
-          <Tearsheet.Body>
-            <Tearsheet.MainContent>
-              <AddSelect
-                multi={false}
-                onItemSelect={handleItemSelect}
-                selectedItems={selectedItems}
-              >
+            <Tearsheet.Body>
+              <Tearsheet.MainContent>
                 <AddSelect.Body
                   itemsLabel={itemsLabel}
                   globalSearchLabel={globalSearchLabel}
@@ -269,26 +269,26 @@ export const SingleAddSelect = forwardRef<HTMLDivElement, SingleAddSelectProps>(
                     )}
                   </AddSelect.Content>
                 </AddSelect.Body>
-              </AddSelect>
-            </Tearsheet.MainContent>
-          </Tearsheet.Body>
+              </Tearsheet.MainContent>
+            </Tearsheet.Body>
 
-          <Tearsheet.Footer
-            actions={[
-              {
-                kind: 'secondary',
-                label: secondaryButtonText,
-                onClick: handleClose,
-              },
-              {
-                kind: 'primary',
-                label: primaryButtonText,
-                onClick: handleSubmit,
-                disabled: !selectedId,
-              },
-            ]}
-          />
-        </Tearsheet>
+            <Tearsheet.Footer
+              actions={[
+                {
+                  kind: 'secondary',
+                  label: secondaryButtonText,
+                  onClick: handleClose,
+                },
+                {
+                  kind: 'primary',
+                  label: primaryButtonText,
+                  onClick: handleSubmit,
+                  disabled: !selectedId,
+                },
+              ]}
+            />
+          </Tearsheet>
+        </AddSelect>
 
         {showNotification && (
           <ToastNotification

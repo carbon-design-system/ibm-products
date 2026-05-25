@@ -470,28 +470,28 @@ export const MultiAddSelectWithHierarchy = forwardRef<
 
     return (
       <>
-        <Tearsheet
-          ref={ref}
-          open={open}
-          onClose={handleClose}
-          variant="wide"
-          summaryContentWidth="22.5rem"
-          className={cx(blockClass, className)}
-          {...rest}
+        <AddSelect
+          multi={true}
+          onItemSelect={handleItemSelect}
+          selectedItems={selectedIds}
         >
-          <Tearsheet.Header hideCloseButton>
-            <Tearsheet.HeaderContent title={title}>
-              <p slot="description">{description}</p>
-            </Tearsheet.HeaderContent>
-          </Tearsheet.Header>
+          <Tearsheet
+            ref={ref}
+            open={open}
+            onClose={handleClose}
+            variant="wide"
+            summaryContentWidth="22.5rem"
+            className={cx(blockClass, className)}
+            {...rest}
+          >
+            <Tearsheet.Header hideCloseButton>
+              <Tearsheet.HeaderContent title={title}>
+                <p slot="description">{description}</p>
+              </Tearsheet.HeaderContent>
+            </Tearsheet.Header>
 
-          <Tearsheet.Body>
-            <Tearsheet.MainContent>
-              <AddSelect
-                multi={true}
-                onItemSelect={handleItemSelect}
-                selectedItems={selectedIds}
-              >
+            <Tearsheet.Body>
+              <Tearsheet.MainContent>
                 <AddSelect.Body
                   itemsLabel={itemsLabel}
                   globalSearchLabel={globalSearchLabel}
@@ -542,62 +542,62 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                     )}
                   </AddSelect.Content>
                 </AddSelect.Body>
-              </AddSelect>
-            </Tearsheet.MainContent>
+              </Tearsheet.MainContent>
 
-            <Tearsheet.SummaryContent className="summary-content-no-padding">
-              {infoPanel.show && infoPanel.item ? (
-                <AddSelect.ItemSummaryPanel
-                  title="Item details"
-                  item={infoPanel.item.meta}
-                  onClose={handleCloseInfo}
-                  closeIconDescription="Close details"
-                />
-              ) : (
-                <AddSelect.SelectionSummary
-                  title={selectionSummaryTitle}
-                  selectedItems={selectedItemsForDisplay}
-                  emptyState={
-                    <div style={{ marginBlockStart: '3rem' }}>
-                      <NoDataEmptyState
-                        illustrationTheme="light"
-                        size="sm"
-                        title={noSelectionTitle}
-                        subtitle={noSelectionDescription}
+              <Tearsheet.SummaryContent className="summary-content-no-padding">
+                {infoPanel.show && infoPanel.item ? (
+                  <AddSelect.ItemSummaryPanel
+                    title="Item details"
+                    item={infoPanel.item.meta}
+                    onClose={handleCloseInfo}
+                    closeIconDescription="Close details"
+                  />
+                ) : (
+                  <AddSelect.SelectionSummary
+                    title={selectionSummaryTitle}
+                    selectedItems={selectedItemsForDisplay}
+                    emptyState={
+                      <div style={{ marginBlockStart: '3rem' }}>
+                        <NoDataEmptyState
+                          illustrationTheme="light"
+                          size="sm"
+                          title={noSelectionTitle}
+                          subtitle={noSelectionDescription}
+                        />
+                      </div>
+                    }
+                  >
+                    {selectedItemsForDisplay.map((item) => (
+                      <AddSelect.SelectionSummaryItem
+                        key={item.id}
+                        item={item}
+                        onRemove={handleRemoveItem}
+                        useAccordion={true}
                       />
-                    </div>
-                  }
-                >
-                  {selectedItemsForDisplay.map((item) => (
-                    <AddSelect.SelectionSummaryItem
-                      key={item.id}
-                      item={item}
-                      onRemove={handleRemoveItem}
-                      useAccordion={true}
-                    />
-                  ))}
-                </AddSelect.SelectionSummary>
-              )}
-            </Tearsheet.SummaryContent>
-          </Tearsheet.Body>
+                    ))}
+                  </AddSelect.SelectionSummary>
+                )}
+              </Tearsheet.SummaryContent>
+            </Tearsheet.Body>
 
-          <Tearsheet.Footer
-            actions={[
-              {
-                kind: 'secondary',
-                label: secondaryButtonText,
-                onClick: handleClose,
-              },
-              {
-                kind: 'primary',
-                label: primaryButtonText,
-                onClick: handleSubmit,
-                disabled: selectedIds.size === 0,
-              },
-            ]}
-            buttonSize={buttonSize}
-          />
-        </Tearsheet>
+            <Tearsheet.Footer
+              actions={[
+                {
+                  kind: 'secondary',
+                  label: secondaryButtonText,
+                  onClick: handleClose,
+                },
+                {
+                  kind: 'primary',
+                  label: primaryButtonText,
+                  onClick: handleSubmit,
+                  disabled: selectedIds.size === 0,
+                },
+              ]}
+              buttonSize={buttonSize}
+            />
+          </Tearsheet>
+        </AddSelect>
 
         {showNotification && (
           <ToastNotification

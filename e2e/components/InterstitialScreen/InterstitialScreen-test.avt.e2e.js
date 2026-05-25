@@ -32,7 +32,7 @@ test.describe('InterstitialScreen @avt', () => {
   test('@avt-full-screen-state', async ({ page }) => {
     await visitStory(page, {
       component: 'InterstitialScreen',
-      id: 'components-onboarding-interstitialscreen--modal',
+      id: 'components-onboarding-interstitialscreen--full-screen',
       globals: {
         carbonTheme: 'white',
       },
@@ -107,7 +107,6 @@ test.describe('InterstitialScreen @avt', () => {
 
     const modal = page.locator(`.${carbon.prefix}--modal-container`);
     const modalHeader = page.locator(`.${carbon.prefix}--modal-header`);
-    const modalContent = page.locator(`.${pkg.prefix}--carousel__elements`);
     const skipButton = page.locator(
       `.${pkg.prefix}--interstitial-screen--skip-btn`
     );
@@ -130,16 +129,14 @@ test.describe('InterstitialScreen @avt', () => {
     // Initial focus should be on close button
     await expect(closeButton).toBeFocused();
 
-    // Tab to navigate to next button (first step, no prev button)
-    await page.keyboard.press('Tab');
-    await expect(modalContent).toBeFocused();
-
-    // Tab should cycle back to close button
+    // Tab to navigate to skip button first, then next button
     await page.keyboard.press('Tab');
     await expect(skipButton).toBeFocused();
 
-    // Navigate to next button and click to go to step 2
     await page.keyboard.press('Tab');
+    await expect(nextButton).toBeFocused();
+
+    // Navigate to step 2
     await page.keyboard.press('Enter');
     await page.waitForTimeout(300); // Wait for transition
 
@@ -206,14 +203,14 @@ test.describe('InterstitialScreen @avt', () => {
     await expect(launcherButton).toBeVisible();
 
     // Reopen modal by clicking launcher button, close using Skip button
-    openModal(page, launcherButton, modal);
+    await openModal(page, launcherButton, modal);
     await skipButton.click();
     await page.waitForTimeout(500);
     await expect(modal).not.toBeVisible();
     await expect(launcherButton).toBeVisible();
 
     // Reopen modal, go to last step and click start to close modal
-    openModal(page, launcherButton, modal);
+    await openModal(page, launcherButton, modal);
     await nextButton.click();
     await page.waitForTimeout(300);
     await nextButton.click();

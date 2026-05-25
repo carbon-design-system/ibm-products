@@ -20,7 +20,7 @@ import { blockClass } from './context';
 
 /**
  * ----------------
- * AddSelectItemSummaryPanel
+ * AddSelectItemPanel
  * ----------------
  */
 
@@ -30,7 +30,7 @@ export interface ItemDetailEntry {
   value?: string;
 }
 
-export interface AddSelectItemSummaryPanelProps {
+export interface AddSelectItemPanelProps {
   /**
    * Panel title
    */
@@ -69,10 +69,10 @@ export interface AddSelectItemSummaryPanelProps {
 }
 
 /**
- * AddSelectItemSummaryPanel - Displays detailed information about a specific item
+ * AddSelectItemPanel - Displays detailed information about a specific item
  * @example
  * ```jsx
- * <AddSelect.ItemSummaryPanel
+ * <AddSelect.ItemPanel
  *   title="Item details"
  *   item={item}
  *   onClose={handleClose}
@@ -80,10 +80,7 @@ export interface AddSelectItemSummaryPanelProps {
  * />
  * ```
  */
-const AddSelectItemSummaryPanel = forwardRef<
-  HTMLDivElement,
-  AddSelectItemSummaryPanelProps
->(
+const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
   (
     {
       title = 'Item details',
@@ -221,7 +218,7 @@ const AddSelectItemSummaryPanel = forwardRef<
   }
 );
 
-AddSelectItemSummaryPanel.propTypes = {
+AddSelectItemPanel.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   /**@ts-ignore */
@@ -240,6 +237,6 @@ AddSelectItemSummaryPanel.propTypes = {
   title: PropTypes.string,
 };
 
-AddSelectItemSummaryPanel.displayName = 'AddSelectItemSummaryPanel';
+AddSelectItemPanel.displayName = 'AddSelectItemPanel';
 
-export default AddSelectItemSummaryPanel;
+export default AddSelectItemPanel;

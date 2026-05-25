@@ -222,11 +222,11 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     margin-inline-start: $spacing-03;
   }
 
-  &__view-info-panel {
+  &__view-item-panel {
     margin-inline-start: auto;
   }
 
-  &-info-panel--selected {
+  &-item-panel--selected {
     background-color: $layer-hover-01;
     border-inline-start: 0.125rem solid $interactive;
   }

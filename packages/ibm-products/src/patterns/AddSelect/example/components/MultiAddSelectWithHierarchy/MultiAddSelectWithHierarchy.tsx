@@ -237,8 +237,8 @@ const ControlledColumn: React.FC<ColumnProps> = ({
             icon={item.icon}
             disabled={item.disabled}
             hasChildren={hasChildren}
-            hasInfoPanel={!!item.meta}
-            onInfoPanelClick={onShowInfo}
+            hasItemPanel={!!item.meta}
+            onItemPanelClick={onShowInfo}
           />
         );
       })}
@@ -542,7 +542,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
 
               <Tearsheet.SummaryContent isFlush>
                 {infoPanel.show && infoPanel.item ? (
-                  <AddSelect.ItemSummaryPanel
+                  <AddSelect.ItemPanel
                     title="Item details"
                     item={infoPanel.item.meta}
                     onClose={handleCloseInfo}

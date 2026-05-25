@@ -74,21 +74,21 @@ export interface AddSelectRowProps {
    */
   children?: ReactNode;
   /**
-   * Whether to show the info panel view icon for this item
+   * Whether to show the item panel view icon for this item
    */
-  hasInfoPanel?: boolean;
+  hasItemPanel?: boolean;
   /**
-   * Callback when info panel view icon is clicked
+   * Callback when item panel view icon is clicked
    */
-  onInfoPanelClick?: (itemId: string) => void;
+  onItemPanelClick?: (itemId: string) => void;
   /**
-   * Description for the info panel icon button
+   * Description for the item panel icon button
    */
-  infoPanelIconDescription?: string;
+  itemPanelIconDescription?: string;
   /**
-   * Whether the info panel is currently open for this item
+   * Whether the item panel is currently open for this item
    */
-  infoPanelOpen?: boolean;
+  itemPanelOpen?: boolean;
   /**
    * Optional class name
    */
@@ -142,10 +142,10 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       parentId = '',
       icon,
       children,
-      hasInfoPanel = false,
-      onInfoPanelClick,
-      infoPanelIconDescription = 'View details',
-      infoPanelOpen = false,
+      hasItemPanel = false,
+      onItemPanelClick,
+      itemPanelIconDescription = 'View details',
+      itemPanelOpen = false,
       className,
       checkboxProps,
       radioButtonProps,
@@ -176,15 +176,15 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       onNavigate?.(itemId, title, parentId);
     };
 
-    const handleInfoPanelClick = (event: MouseEvent<HTMLButtonElement>) => {
+    const handleItemPanelClick = (event: MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
-      onInfoPanelClick?.(itemId);
+      onItemPanelClick?.(itemId);
     };
 
     const rowClasses = cx(`${blockClass}-row`, className, {
       [`${blockClass}-row--selected`]: isSelected,
       [`${blockClass}-row--disabled`]: disabled,
-      [`${blockClass}-row-info-panel--selected`]: infoPanelOpen,
+      [`${blockClass}-row-item-panel--selected`]: itemPanelOpen,
     });
 
     return (
@@ -237,13 +237,13 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
               {children}
             </div>
 
-            {hasInfoPanel && (
+            {hasItemPanel && (
               <IconButton
-                label={infoPanelIconDescription}
-                onClick={handleInfoPanelClick}
+                label={itemPanelIconDescription}
+                onClick={handleItemPanelClick}
                 kind="ghost"
                 size="sm"
-                className={`${blockClass}-row__view-info-panel`}
+                className={`${blockClass}-row__view-item-panel`}
                 {...itemPanelIconButtonProps}
               >
                 <View size={16} />
@@ -284,15 +284,15 @@ AddSelectRow.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   hasChildren: PropTypes.bool,
-  hasInfoPanel: PropTypes.bool,
+  hasItemPanel: PropTypes.bool,
   icon: PropTypes.node,
-  infoPanelIconDescription: PropTypes.string,
-  infoPanelOpen: PropTypes.bool,
   itemId: PropTypes.string.isRequired,
   /**@ts-ignore */
   itemPanelIconButtonProps: PropTypes.object,
+  itemPanelIconDescription: PropTypes.string,
+  itemPanelOpen: PropTypes.bool,
   /**@ts-ignore */
-  onInfoPanelClick: PropTypes.func,
+  onItemPanelClick: PropTypes.func,
   parentId: PropTypes.string,
   /**@ts-ignore */
   radioButtonProps: PropTypes.object,

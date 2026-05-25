@@ -25,9 +25,9 @@ import AddSelectSelectionSummary, {
 import AddSelectSelectionSummaryItem, {
   AddSelectSelectionSummaryItemProps,
 } from './AddSelectSelectionSummaryItem';
-import AddSelectItemSummaryPanel, {
-  AddSelectItemSummaryPanelProps,
-} from './AddSelectItemSummaryPanel';
+import AddSelectItemPanel, {
+  AddSelectItemPanelProps,
+} from './AddSelectItemPanel';
 
 /**
  * ----------
@@ -60,7 +60,7 @@ export type AddSelectComponentType = React.ForwardRefExoticComponent<
   Row: FC<AddSelectRowProps>;
   SelectionSummary: FC<AddSelectSelectionSummaryProps>;
   SelectionSummaryItem: FC<AddSelectSelectionSummaryItemProps>;
-  ItemSummaryPanel: FC<AddSelectItemSummaryPanelProps>;
+  ItemPanel: FC<AddSelectItemPanelProps>;
 };
 
 /**
@@ -122,6 +122,6 @@ AddSelect.Column = AddSelectColumn;
 AddSelect.Row = AddSelectRow;
 AddSelect.SelectionSummary = AddSelectSelectionSummary;
 AddSelect.SelectionSummaryItem = AddSelectSelectionSummaryItem;
-AddSelect.ItemSummaryPanel = AddSelectItemSummaryPanel;
+AddSelect.ItemPanel = AddSelectItemPanel;
 
 AddSelect.displayName = 'AddSelect';

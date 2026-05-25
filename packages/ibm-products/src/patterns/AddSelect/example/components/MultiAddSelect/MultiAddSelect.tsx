@@ -305,8 +305,8 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                               value={item.value || ''}
                               icon={item.icon}
                               disabled={item.disabled}
-                              hasInfoPanel={!!item.meta}
-                              onInfoPanelClick={handleShowInfo}
+                              hasItemPanel={!!item.meta}
+                              onItemPanelClick={handleShowInfo}
                             />
                           );
                         })
@@ -323,7 +323,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
 
               <Tearsheet.SummaryContent isFlush>
                 {infoPanel.show && infoPanel.item ? (
-                  <AddSelect.ItemSummaryPanel
+                  <AddSelect.ItemPanel
                     title="Item details"
                     item={infoPanel.item.meta}
                     onClose={handleCloseInfo}

@@ -1,0 +1,2 @@
+var x=Object.defineProperty;var t=(e,a)=>x(e,"name",{value:a,configurable:!0});import{r as d,h as E,m as c,E as l,j as u,P as r}from"./iframe-Dwk9YmAN.js";function S({render:e,isSideNavExpanded:a=!1,...i}){const[o,s]=d.useState(a);E("keydown",n=>{c(n,l)&&s(!1)});const p=d.useCallback(()=>{s(n=>!n)},[s]);return u.jsx(e,{...i,isSideNavExpanded:o,onClickSideNavExpand:p})}t(S,"HeaderContainer");S.propTypes={isSideNavExpanded:r.bool,render:r.elementType.isRequired};export{S as H};
+//# sourceMappingURL=HeaderContainer-B1ReRsN0.js.map

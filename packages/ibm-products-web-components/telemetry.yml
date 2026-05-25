@@ -130,9 +130,13 @@ collect:
         - today-text
         - triggerButtonRef
         # c4p-options-tile
+        - locked
+        - lockedText
         - onc4p-options-tile-close
         - onc4p-options-tile-open
         - titleId
+        - warn
+        - warnText
         # c4p-page-header-actions-set
         - actions-data
         # c4p-page-header-breadcrumb

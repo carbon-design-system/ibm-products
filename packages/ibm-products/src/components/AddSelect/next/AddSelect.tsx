@@ -42,10 +42,6 @@ export interface AddSelectProps {
    */
   className?: string;
   /**
-   * Whether this is a multi-select
-   */
-  multi?: boolean;
-  /**
    * Callback when an item is selected/deselected
    */
   onItemSelect?: (itemId: string, selected: boolean, value: string) => void;
@@ -71,13 +67,13 @@ export type AddSelectComponentType = React.ForwardRefExoticComponent<
  * AddSelect - Composable component for adding/selecting items
  * @example
  * ```jsx
- * <AddSelect multi onItemSelect={handleSelect}>
+ * <AddSelect onItemSelect={handleSelect}>
  *   <AddSelect.Body
  *     itemsLabel="Items"
  *     globalSearchLabel="Search"
  *     itemCount={items.length}
  *   >
- *     <AddSelect.List>
+ *     <AddSelect.Column multi={true} title="Categories">
  *       {items.map(item => (
  *         <AddSelect.Row
  *           key={item.id}
@@ -86,27 +82,19 @@ export type AddSelectComponentType = React.ForwardRefExoticComponent<
  *           value={item.value}
  *         />
  *       ))}
- *     </AddSelect.List>
+ *     </AddSelect.Column>
  *   </AddSelect.Body>
  * </AddSelect>
  * ```
  */
 export const AddSelect = forwardRef<HTMLDivElement, AddSelectProps>(
   (
-    {
-      children,
-      className,
-      multi = false,
-      onItemSelect,
-      selectedItems,
-      ...rest
-    },
+    { children, className, onItemSelect, selectedItems, ...rest },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     return (
       <AddSelectContext.Provider
         value={{
-          multi,
           onItemSelect,
           selectedItems,
         }}
@@ -122,7 +110,6 @@ export const AddSelect = forwardRef<HTMLDivElement, AddSelectProps>(
 AddSelect.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  multi: PropTypes.bool,
   /**@ts-ignore */
   onItemSelect: PropTypes.func,
   /**@ts-ignore */

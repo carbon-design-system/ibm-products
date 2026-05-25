@@ -484,7 +484,6 @@ export const AddSingleItemFromHierarchy = forwardRef<
     return (
       <>
         <AddSelect
-          multi={false}
           onItemSelect={handleItemSelect}
           selectedItems={selectedItems}
         >

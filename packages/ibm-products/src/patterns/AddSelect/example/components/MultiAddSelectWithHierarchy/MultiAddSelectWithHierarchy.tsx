@@ -470,11 +470,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
 
     return (
       <>
-        <AddSelect
-          multi={true}
-          onItemSelect={handleItemSelect}
-          selectedItems={selectedIds}
-        >
+        <AddSelect onItemSelect={handleItemSelect} selectedItems={selectedIds}>
           <Tearsheet
             ref={ref}
             open={open}

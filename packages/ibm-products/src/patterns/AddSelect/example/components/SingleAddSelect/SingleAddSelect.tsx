@@ -218,7 +218,6 @@ export const SingleAddSelect = forwardRef<HTMLDivElement, SingleAddSelectProps>(
     return (
       <>
         <AddSelect
-          multi={false}
           onItemSelect={handleItemSelect}
           selectedItems={selectedItems}
         >

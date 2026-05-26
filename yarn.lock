@@ -2488,7 +2488,7 @@ __metadata:
     storybook-addon-accessibility-checker: "npm:>=9.2.0-git0"
     tsdown: "npm:^0.21.0"
     typescript: "npm:^5.7.3"
-    typescript-config-carbon: "npm:^0.9.0"
+    typescript-config-carbon: "npm:^0.10.0"
     vite: "npm:^7.0.0"
     yargs: "npm:^18.0.0"
   peerDependencies:
@@ -23919,12 +23919,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-config-carbon@npm:^0.9.0":
-  version: 0.9.0
-  resolution: "typescript-config-carbon@npm:0.9.0"
+"typescript-config-carbon@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "typescript-config-carbon@npm:0.10.0"
   dependencies:
     typescript: "npm:^5.7.3"
-  checksum: 10/e0a8ccf5889a72dfbe8be183c926c286526e5e753a9fd69b6899d1a30602380d52dd4075443e62f05806236ecc0ed17dee9f8c9949e4cc360c78b64bd91c92a6
+  checksum: 10/e7aa0c717b7ee8e5d7b1dda6a3f39c18799293d508f57bb48c3ffb09e6d0454ed94545e579891489ce146ebaa887ae6f3865990b683a90d07f486043f98b500a
   languageName: node
   linkType: hard
 

@@ -262,6 +262,7 @@ export const AddSelectBody = {
     globalSearchLabel: 'Search items',
     globalSearchPlaceholder: 'Search by name',
     searchResultsTitle: 'Search results',
+    itemCount: 3,
     showActionsSlot: true,
     showSubHeaderActions: false,
     showPath: true,
@@ -288,6 +289,10 @@ export const AddSelectBody = {
       control: 'text',
       description: 'Title shown when search returns filtered results',
     },
+    itemCount: {
+      control: 'number',
+      description: 'Item count for display in tag badge',
+    },
     showActionsSlot: {
       control: 'boolean',
       description: 'Toggle example content for the actionsSlot prop',
@@ -305,34 +310,93 @@ export const AddSelectBody = {
     },
     path: {
       control: 'object',
-      description: 'Breadcrumb entries used for hierarchical navigation',
+      description:
+        'Breadcrumb entries used for hierarchical navigation. Array of objects with id and title properties.',
     },
-    children: { table: { disable: true } },
-    headerContent: { table: { disable: true } },
-    actionsSlot: { table: { disable: true } },
-    subHeaderActions: { table: { disable: true } },
-    onSearch: { table: { disable: true } },
-    onBreadcrumbClick: { table: { disable: true } },
-    searchProps: { table: { disable: true } },
-    tagProps: { table: { disable: true } },
-    breadcrumbProps: { table: { disable: true } },
-    breadcrumbItemProps: { table: { disable: true } },
-    linkProps: { table: { disable: true } },
-    className: { table: { disable: true } },
+    children: {
+      control: false,
+      description: 'Child components (typically AddSelect.Content)',
+      table: { disable: true },
+    },
+    headerContent: {
+      control: false,
+      description: 'Custom header content (slot) - replaces entire header',
+      table: { disable: true },
+    },
+    actionsSlot: {
+      control: false,
+      description:
+        'Actions slot - adds custom actions (filter/sort) next to default search',
+      table: { disable: true },
+    },
+    subHeaderActions: {
+      control: false,
+      description:
+        'Sub-header actions - custom content/actions rendered after breadcrumbs and item count',
+      table: { disable: true },
+    },
+    onSearch: {
+      control: false,
+      description:
+        'Callback when search term changes. Signature: (searchTerm: string) => void',
+      table: { disable: true },
+    },
+    onBreadcrumbClick: {
+      control: false,
+      description:
+        'Callback when breadcrumb is clicked. Signature: (index: number) => void',
+      table: { disable: true },
+    },
+    searchProps: {
+      control: false,
+      description: 'Additional props to pass to the Search component',
+      table: { disable: true },
+    },
+    tagProps: {
+      control: false,
+      description:
+        'Additional props to pass to the Tag component (for item count)',
+      table: { disable: true },
+    },
+    breadcrumbProps: {
+      control: false,
+      description: 'Additional props to pass to the Breadcrumb component',
+      table: { disable: true },
+    },
+    breadcrumbItemProps: {
+      control: false,
+      description: 'Additional props to pass to BreadcrumbItem components',
+      table: { disable: true },
+    },
+    linkProps: {
+      control: false,
+      description: 'Additional props to pass to Link components in breadcrumbs',
+      table: { disable: true },
+    },
+    className: {
+      control: 'text',
+      description: 'Optional CSS class name',
+      table: { disable: true },
+    },
   },
 };
 
 const AddSelectColumnStory = (args) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterType, setFilterType] = useState('all');
   const [selectedItems, setSelectedItems] = useState<Set<string>>(
     new Set(['1', '4'])
   );
 
   const filteredItems = useMemo(() => {
-    return sampleItems.filter((item) =>
-      item.title?.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [searchTerm]);
+    return sampleItems.filter((item) => {
+      const matchesSearch = item.title
+        ?.toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const matchesFilter = filterType === 'all' || item.type === filterType;
+      return matchesSearch && matchesFilter;
+    });
+  }, [searchTerm, filterType]);
 
   const handleItemSelect = (itemId, selected) => {
     const nextSelection = args.multi
@@ -361,14 +425,27 @@ const AddSelectColumnStory = (args) => {
     filteredItems.every((item) => selectedItems.has(item.id));
 
   const actionsSlot = args.showActionsSlot ? (
-    <Button kind="ghost" size="sm">
-      Placeholder action
-    </Button>
+    <Dropdown
+      id="add-select-column-filter"
+      titleText=""
+      label="Filter items"
+      items={filterOptions}
+      itemToString={(item) => (item ? item.text : '')}
+      onChange={({ selectedItem }) => setFilterType(selectedItem?.id || 'all')}
+      size="md"
+    />
   ) : undefined;
 
   return (
     <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-      <PlaceholderShell>
+      <div
+        style={{
+          width: '360px',
+          border: '1px dashed var(--cds-border-subtle)',
+          padding: '1rem',
+          background: 'var(--cds-layer)',
+        }}
+      >
         <AddSelect.Content>
           <AddSelect.Column
             title={args.title}
@@ -396,7 +473,7 @@ const AddSelectColumnStory = (args) => {
             ))}
           </AddSelect.Column>
         </AddSelect.Content>
-      </PlaceholderShell>
+      </div>
     </AddSelect>
   );
 };
@@ -409,7 +486,7 @@ export const AddSelectColumn = {
     searchLabel: 'Search within column',
     searchPlaceholder: 'Search items',
     showSearch: true,
-    showActionsSlot: true,
+    showActionsSlot: false,
     multi: true,
     showSelectAll: true,
     enableNavigation: false,
@@ -487,30 +564,26 @@ const AddSelectRowStory = (args) => {
 
   return (
     <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-      <PlaceholderShell>
-        <AddSelect.Content>
-          <AddSelect.Column multi={args.multi} title="Component focus">
-            <AddSelect.Row
-              itemId="1"
-              title="folder 1"
-              subtitle={args.showSubtitle ? '3 files' : undefined}
-              value="folder 1"
-              selected={args.selected}
-              disabled={args.disabled}
-              hasChildren={args.hasChildren}
-              hasItemPanel={args.hasItemPanel}
-              onItemPanelClick={() => setItemPanelOpen(true)}
-              itemPanelOpen={args.hasItemPanel && itemPanelOpen}
-            >
-              {args.showTag ? (
-                <Tag type="blue" size="sm">
-                  Folder
-                </Tag>
-              ) : null}
-            </AddSelect.Row>
-          </AddSelect.Column>
-        </AddSelect.Content>
-      </PlaceholderShell>
+      <AddSelect.Content>
+        <AddSelect.Row
+          itemId="1"
+          title="folder 1"
+          subtitle={args.showSubtitle ? '3 files' : undefined}
+          value="folder 1"
+          selected={args.selected}
+          disabled={args.disabled}
+          hasChildren={args.hasChildren}
+          hasItemPanel={args.hasItemPanel}
+          onItemPanelClick={() => setItemPanelOpen(true)}
+          itemPanelOpen={args.hasItemPanel && itemPanelOpen}
+        >
+          {args.showTag ? (
+            <Tag type="blue" size="sm">
+              Folder
+            </Tag>
+          ) : null}
+        </AddSelect.Row>
+      </AddSelect.Content>
     </AddSelect>
   );
 };
@@ -553,30 +626,67 @@ export const AddSelectRow = {
       control: 'boolean',
       description: 'Show the item details icon button',
     },
-    itemPanelOpen: {
-      control: 'boolean',
-      description: 'Show the item panel as open for this row',
-      table: { category: 'Story controls' },
-    },
     disabled: {
       control: 'boolean',
       description: 'Disable the example row',
     },
-    itemId: { table: { disable: true } },
-    title: { table: { disable: true } },
-    subtitle: { table: { disable: true } },
-    value: { table: { disable: true } },
+    itemId: {
+      control: 'text',
+      description: 'Unique identifier for the item (required)',
+      table: { disable: true },
+    },
+    title: {
+      control: 'text',
+      description: 'Item title (required)',
+      table: { disable: true },
+    },
+    subtitle: {
+      control: 'text',
+      description: 'Item subtitle (optional)',
+      table: { disable: true },
+    },
+    value: {
+      control: 'text',
+      description: 'Item value (required)',
+      table: { disable: true },
+    },
     selected: {
       control: 'boolean',
       description: 'Set the row selection state',
       table: { category: 'Story controls' },
     },
-    parentId: { table: { disable: true } },
-    icon: { table: { disable: true } },
-    children: { table: { disable: true } },
-    onItemPanelClick: { table: { disable: true } },
-    itemPanelIconDescription: { table: { disable: true } },
-    itemPanelOpen: { table: { disable: true } },
+    parentId: {
+      control: 'text',
+      description: 'Parent ID for hierarchical navigation',
+      table: { disable: true },
+    },
+    icon: {
+      control: false,
+      description: 'Optional icon slot (ReactNode)',
+      table: { disable: true },
+    },
+    children: {
+      control: false,
+      description:
+        'Custom content to render after the title/subtitle section (badges, tags, metadata)',
+      table: { disable: true },
+    },
+    onItemPanelClick: {
+      control: false,
+      description:
+        'Callback when item panel view icon is clicked. Signature: (itemId: string) => void',
+      table: { disable: true },
+    },
+    itemPanelIconDescription: {
+      control: 'text',
+      description: 'Description for the item panel icon button',
+      table: { disable: true },
+    },
+    itemPanelOpen: {
+      control: 'boolean',
+      description: 'Whether the item panel is currently open for this item',
+      table: { category: 'Story controls' },
+    },
     className: { table: { disable: true } },
     checkboxProps: { table: { disable: true } },
     radioButtonProps: { table: { disable: true } },
@@ -588,14 +698,21 @@ const AddSelectSelectionSummaryStory = (args) => {
   const selectedItemsArray = summaryItems;
 
   return (
-    <PlaceholderShell>
+    <div
+      style={{
+        width: '256px',
+        border: '1px dashed var(--cds-border-subtle)',
+        padding: '1rem',
+        background: 'var(--cds-layer)',
+      }}
+    >
       <AddSelect.SelectionSummary
         title={args.title}
         selectedItems={selectedItemsArray}
         showCount={args.showCount}
         showEditIcon={args.showEditIcon}
         onEdit={args.showEditIcon ? () => {} : undefined}
-        emptyState={args.emptyState ? <p>No selected items</p> : undefined}
+        emptyState={args.showEmptyState ? <p>No selected items</p> : undefined}
         headerActions={
           args.showHeaderActions ? (
             <Button kind="ghost" size="sm">
@@ -604,7 +721,7 @@ const AddSelectSelectionSummaryStory = (args) => {
           ) : undefined
         }
       />
-    </PlaceholderShell>
+    </div>
   );
 };
 
@@ -616,7 +733,7 @@ export const AddSelectSelectionSummary = {
     showCount: true,
     showEditIcon: true,
     showHeaderActions: false,
-    emptyState: false,
+    showEmptyState: false,
   },
   argTypes: {
     title: {
@@ -636,22 +753,69 @@ export const AddSelectSelectionSummary = {
       description: 'Toggle example content for the headerActions prop',
       table: { category: 'Story controls' },
     },
-    emptyState: {
+    showEmptyState: {
       control: 'boolean',
       description: 'Show the emptyState slot usage',
       table: { category: 'Story controls' },
     },
-    selectedItems: { table: { disable: true } },
-    children: { table: { disable: true } },
-    emptyState: { table: { disable: true } },
-    onEdit: { table: { disable: true } },
-    editIconDescription: { table: { disable: true } },
-    className: { table: { disable: true } },
-    renderItem: { table: { disable: true } },
-    headerContent: { table: { disable: true } },
-    headerActions: { table: { disable: true } },
-    tagProps: { table: { disable: true } },
-    editIconButtonProps: { table: { disable: true } },
+    selectedItems: {
+      control: false,
+      description: 'Array of selected items (AddSelectItem[])',
+      table: { disable: true },
+    },
+    children: {
+      control: false,
+      description: 'Custom content or SelectionSummaryItem components',
+      table: { disable: true },
+    },
+    emptyState: {
+      control: false,
+      description: 'Custom empty state component',
+      table: { disable: true },
+    },
+    onEdit: {
+      control: false,
+      description: 'Edit icon click handler. Signature: () => void',
+      table: { disable: true },
+    },
+    editIconDescription: {
+      control: 'text',
+      description: 'Edit icon aria-label',
+      table: { disable: true },
+    },
+    className: {
+      control: 'text',
+      description: 'Optional CSS class name',
+      table: { disable: true },
+    },
+    renderItem: {
+      control: false,
+      description:
+        'Custom item renderer. Signature: (item: AddSelectItem) => ReactNode',
+      table: { disable: true },
+    },
+    headerContent: {
+      control: false,
+      description:
+        'Custom header content (slot) - replaces entire header section',
+      table: { disable: true },
+    },
+    headerActions: {
+      control: false,
+      description:
+        'Header actions slot - adds custom actions alongside the edit icon',
+      table: { disable: true },
+    },
+    tagProps: {
+      control: false,
+      description: 'Additional props to pass to the Tag component',
+      table: { disable: true },
+    },
+    editIconButtonProps: {
+      control: false,
+      description: 'Additional props to pass to the edit IconButton',
+      table: { disable: true },
+    },
   },
 };
 
@@ -664,47 +828,52 @@ const AddSelectSelectionSummaryItemStory = (args) => {
   };
 
   return (
-    <PlaceholderShell>
-      <div style={{ display: 'grid', gap: '0.75rem' }}>
-        {visible ? (
-          <AddSelect.SelectionSummaryItem
-            item={item}
-            useAccordion={args.useAccordion}
-            onRemove={
-              args.showRemoveButton ? () => setVisible(false) : undefined
-            }
-            removeButtonLabel={args.removeButtonLabel}
-            renderTitle={
-              args.useCustomTitle
-                ? (currentItem) => (
-                    <div>
-                      <p style={{ margin: 0, fontWeight: 600 }}>
-                        {currentItem.title}
-                      </p>
-                      <p style={{ margin: '0.25rem 0 0' }}>
-                        Custom title renderer
-                      </p>
-                    </div>
-                  )
-                : undefined
-            }
-            renderContent={
-              args.useCustomContent
-                ? (currentItem) => (
-                    <div>
-                      <p style={{ margin: 0 }}>
-                        Custom content for {currentItem.title}
-                      </p>
-                    </div>
-                  )
-                : undefined
-            }
-          />
-        ) : (
-          <p style={{ margin: 0 }}>Item removed in story preview.</p>
-        )}
-      </div>
-    </PlaceholderShell>
+    <div
+      style={{
+        width: '256px',
+        display: 'grid',
+        gap: '0.75rem',
+        border: '1px dashed var(--cds-border-subtle)',
+        padding: '1rem',
+        background: 'var(--cds-layer)',
+      }}
+    >
+      {visible ? (
+        <AddSelect.SelectionSummaryItem
+          item={item}
+          useAccordion={args.useAccordion}
+          onRemove={args.showRemoveButton ? () => setVisible(false) : undefined}
+          removeButtonLabel={args.removeButtonLabel}
+          renderTitle={
+            args.useCustomTitle
+              ? (currentItem) => (
+                  <div>
+                    <p style={{ margin: 0, fontWeight: 600 }}>
+                      {currentItem.title}
+                    </p>
+                    <p style={{ margin: '0.25rem 0 0' }}>
+                      Custom title renderer
+                    </p>
+                  </div>
+                )
+              : undefined
+          }
+          renderContent={
+            args.useCustomContent
+              ? (currentItem) => (
+                  <div>
+                    <p style={{ margin: 0 }}>
+                      Custom content for {currentItem.title}
+                    </p>
+                  </div>
+                )
+              : undefined
+          }
+        />
+      ) : (
+        <p style={{ margin: 0 }}>Item removed in story preview.</p>
+      )}
+    </div>
   );
 };
 
@@ -764,7 +933,14 @@ const AddSelectItemPanelStory = (args) => {
   const panelItem = sampleItems[0];
 
   return (
-    <PlaceholderShell>
+    <div
+      style={{
+        width: '256px',
+        border: '1px dashed var(--cds-border-subtle)',
+        padding: '1rem',
+        background: 'var(--cds-layer)',
+      }}
+    >
       <AddSelect.ItemPanel
         title={args.title}
         item={
@@ -799,7 +975,7 @@ const AddSelectItemPanelStory = (args) => {
             : undefined
         }
       />
-    </PlaceholderShell>
+    </div>
   );
 };
 
@@ -816,16 +992,38 @@ export const AddSelectItemPanel = {
   argTypes: {
     title: {
       control: 'text',
-      description: 'Header title for the details panel',
+      description: 'Panel title',
+    },
+    item: {
+      control: false,
+      description:
+        'Item data, array of entries, or custom content (AddSelectItem | ItemDetailEntry[] | ReactNode)',
+      table: { disable: true },
+    },
+    onClose: {
+      control: false,
+      description: 'Close button handler. Signature: () => void',
+      table: { disable: true },
+    },
+    closeIconDescription: {
+      control: 'text',
+      description: 'Close button aria-label',
+    },
+    children: {
+      control: false,
+      description: 'Custom content (alternative to item prop)',
+      table: { disable: true },
+    },
+    renderContent: {
+      control: false,
+      description:
+        'Custom content renderer. Signature: (item: AddSelectItem) => ReactNode',
+      table: { disable: true },
     },
     showCloseButton: {
       control: 'boolean',
       description: 'Toggle the close button by passing onClose',
       table: { category: 'Story controls' },
-    },
-    closeIconDescription: {
-      control: 'text',
-      description: 'Accessible label for the close icon button',
     },
     useArrayData: {
       control: 'boolean',
@@ -838,12 +1036,16 @@ export const AddSelectItemPanel = {
         'Demonstrate custom content rendering for AddSelectItem data',
       table: { category: 'Story controls' },
     },
-    item: { table: { disable: true } },
-    onClose: { table: { disable: true } },
-    children: { table: { disable: true } },
-    renderContent: { table: { disable: true } },
-    className: { table: { disable: true } },
-    closeIconButtonProps: { table: { disable: true } },
+    className: {
+      control: 'text',
+      description: 'Optional CSS class name',
+      table: { disable: true },
+    },
+    closeIconButtonProps: {
+      control: false,
+      description: 'Additional props to pass to the close IconButton',
+      table: { disable: true },
+    },
   },
 };
 

@@ -544,14 +544,245 @@ subcomponents.
 
 ### AddSelect (Root Component)
 
-The root `AddSelect` component has the following props:
+The root `AddSelect` component manages selection state and provides context to
+all child components.
+
+**Props:**
 
 - **children** (ReactNode) - Child components
-- **className** (string) - Optional CSS class name
-- **onItemSelect** (function) - Callback when an item is selected/deselected
+- **className** (string, optional) - Optional CSS class name
+- **onItemSelect** (function, optional) - Callback when an item is
+  selected/deselected
   - Signature: `(itemId: string, selected: boolean, value: string) => void`
-- **selectedItems** (Set\<string\>) - Set of selected item IDs
+- **selectedItems** (Set of strings, optional) - Set of selected item IDs
 
-### All Component Props
+---
 
-<Controls />
+### AddSelect.Body
+
+Contains the header section (search, breadcrumbs, item count) and the main
+content area.
+
+**Props:**
+
+- **children** (ReactNode, optional) - Child components (typically
+  AddSelect.Content)
+- **className** (string, optional) - Optional CSS class name
+- **itemsLabel** (string, optional) - Label for items section (shown when
+  breadcrumbs are not used)
+- **globalSearchLabel** (string, optional, default: "Search") - Global search
+  label for accessibility
+- **globalSearchPlaceholder** (string, optional, default: "Search") - Global
+  search placeholder text
+- **searchResultsTitle** (string, optional, default: "Search results") - Title
+  shown when search returns filtered results
+- **itemCount** (number, optional, default: 0) - Item count for display in tag
+  badge
+- **path** (Array of objects with id and title properties, optional, default:
+  []) - Navigation path for breadcrumbs
+- **onSearch** (function, optional) - Callback when search term changes
+  - Signature: `(searchTerm: string) => void`
+- **onBreadcrumbClick** (function, optional) - Callback when breadcrumb is
+  clicked
+  - Signature: `(index: number) => void`
+- **headerContent** (ReactNode, optional) - Custom header content (slot) -
+  replaces entire header
+- **actionsSlot** (ReactNode, optional) - Actions slot - adds custom actions
+  (filter/sort) next to default search
+- **subHeaderActions** (ReactNode, optional) - Sub-header actions - custom
+  content/actions rendered after breadcrumbs and item count
+- **searchProps** (object, optional) - Additional props to pass to the Search
+  component
+- **tagProps** (object, optional) - Additional props to pass to the Tag
+  component (for item count)
+- **breadcrumbProps** (object, optional) - Additional props to pass to the
+  Breadcrumb component
+- **breadcrumbItemProps** (object, optional) - Additional props to pass to
+  BreadcrumbItem components
+- **linkProps** (object, optional) - Additional props to pass to Link components
+  in breadcrumbs
+
+---
+
+### AddSelect.Content
+
+Container for items with built-in keyboard navigation support. Manages focus and
+provides grid-based navigation.
+
+**Props:**
+
+- **children** (ReactNode, optional) - Child components (AddSelect.Row or
+  AddSelect.Column)
+- **className** (string, optional) - Optional CSS class name
+- **layout** ('vertical' | 'horizontal', optional, default: 'vertical') - Layout
+  direction for columns
+
+---
+
+### AddSelect.Column
+
+Optional column wrapper that provides column-specific features like column
+title, column-level search, and "Select All" functionality.
+
+**Props:**
+
+- **children** (ReactNode, optional) - AddSelectRow children
+- **title** (string, optional) - Column title displayed in the header
+- **searchLabel** (string, optional, default: "Search") - Label text for the
+  search input (accessibility)
+- **searchPlaceholder** (string, optional, default: "Search") - Placeholder text
+  for the search input
+- **onSearch** (function, optional) - Callback when search value changes
+  - Signature: `(value: string) => void`
+- **actionsSlot** (ReactNode, optional) - Actions slot - adds custom actions
+  (filter/sort) next to search
+- **hideSearch** (boolean, optional, default: false) - Whether to hide the
+  search input
+- **multi** (boolean, optional, default: false) - Whether to enable
+  multi-selection (checkboxes) or single selection (radio buttons)
+- **showSelectAll** (boolean, optional, default: false) - Whether to show the
+  "Select All" checkbox (only applicable when multi is true)
+- **itemCount** (number, optional, default: 0) - Total number of items in the
+  column (for display in tag)
+- **allSelected** (boolean, optional, default: false) - Whether all items are
+  currently selected
+- **onSelectAll** (function, optional) - Callback when "Select All" is toggled
+  - Signature: `(checked: boolean) => void`
+- **onNavigate** (function, optional) - Callback when navigating to children
+  - Signature: `(itemId: string, title: string, parentId: string) => void`
+- **className** (string, optional) - Optional CSS class name
+- **searchProps** (object, optional) - Additional props to pass to the Search
+  component
+- **tagProps** (object, optional) - Additional props to pass to the Tag
+  component
+- **selectAllCheckboxProps** (object, optional) - Additional props to pass to
+  the Checkbox component (Select All)
+
+---
+
+### AddSelect.Row
+
+Individual selectable item with support for checkboxes (multi-select) or radio
+buttons (single-select).
+
+**Props:**
+
+- **itemId** (string, required) - Unique identifier for the item
+- **title** (string, required) - Item title
+- **value** (string, required) - Item value
+- **subtitle** (string, optional) - Item subtitle
+- **selected** (boolean, optional, default: false) - Whether the item is
+  selected
+- **disabled** (boolean, optional, default: false) - Whether the item is
+  disabled
+- **hasChildren** (boolean, optional, default: false) - Whether the item has
+  children (for navigation)
+- **parentId** (string, optional) - Parent ID for hierarchical navigation
+- **icon** (ReactNode, optional) - Optional icon slot
+- **children** (ReactNode, optional) - Custom content to render after the
+  title/subtitle section (badges, tags, metadata)
+- **hasItemPanel** (boolean, optional, default: false) - Whether to show the
+  item panel view icon for this item
+- **onItemPanelClick** (function, optional) - Callback when item panel view icon
+  is clicked
+  - Signature: `(itemId: string) => void`
+- **itemPanelIconDescription** (string, optional, default: "View details") -
+  Description for the item panel icon button
+- **itemPanelOpen** (boolean, optional, default: false) - Whether the item panel
+  is currently open for this item
+- **className** (string, optional) - Optional CSS class name
+- **checkboxProps** (object, optional) - Additional props to pass to the
+  Checkbox component (when multi=true)
+- **radioButtonProps** (object, optional) - Additional props to pass to the
+  RadioButton component (when multi=false)
+- **itemPanelIconButtonProps** (object, optional) - Additional props to pass to
+  the IconButton component (info panel)
+
+---
+
+### AddSelect.SelectionSummary
+
+Displays a list of selected items with optional count badge and edit
+functionality.
+
+**Props:**
+
+- **title** (string, optional, default: "Selected items") - Panel title
+- **selectedItems** (AddSelectItem[], optional, default: []) - Array of selected
+  items
+- **children** (ReactNode, optional) - Custom content or SelectionSummaryItem
+  components
+- **emptyState** (ReactNode, optional) - Custom empty state component
+- **showCount** (boolean, optional, default: true) - Show count badge
+- **showEditIcon** (boolean, optional, default: false) - Show edit icon next to
+  count
+- **onEdit** (function, optional) - Edit icon click handler
+  - Signature: `() => void`
+- **editIconDescription** (string, optional, default: "Edit selections") - Edit
+  icon aria-label
+- **className** (string, optional) - Optional CSS class name
+- **renderItem** (function, optional) - Custom item renderer
+  - Signature: `(item: AddSelectItem) => ReactNode`
+- **headerContent** (ReactNode, optional) - Custom header content (slot) -
+  replaces entire header section
+- **headerActions** (ReactNode, optional) - Header actions slot - adds custom
+  actions alongside the edit icon
+- **tagProps** (object, optional) - Additional props to pass to the Tag
+  component
+- **editIconButtonProps** (object, optional) - Additional props to pass to the
+  edit IconButton
+
+---
+
+### AddSelect.SelectionSummaryItem
+
+Individual item display within the selection summary, with optional accordion
+view and remove functionality.
+
+**Props:**
+
+- **item** (AddSelectItem, required) - Item data
+- **renderTitle** (function, optional) - Custom title renderer (only works with
+  useAccordion mode)
+  - Signature: `(item: AddSelectItem) => ReactNode`
+- **renderContent** (function, optional) - Custom content renderer (only works
+  with useAccordion mode)
+  - Signature: `(item: AddSelectItem) => ReactNode`
+- **renderTemplate** (function, optional) - Custom template for rendering the
+  entire item content (takes precedence over all other rendering props)
+  - Signature:
+    `(item: AddSelectItem, onRemove?: (id: string) => void) => ReactNode`
+- **onRemove** (function, optional) - Remove button handler
+  - Signature: `(itemId: string) => void`
+- **removeButtonLabel** (string, optional, default: "Remove item") - Remove
+  button aria-label
+- **useAccordion** (boolean, optional, default: false) - Use accordion pattern
+- **className** (string, optional) - Optional CSS class name
+- **accordionProps** (object, optional) - Additional props to pass to the
+  Accordion component
+- **accordionItemProps** (object, optional) - Additional props to pass to the
+  AccordionItem component
+- **removeIconButtonProps** (object, optional) - Additional props to pass to the
+  remove IconButton
+
+---
+
+### AddSelect.ItemPanel
+
+Side panel that displays detailed information about a specific item.
+
+**Props:**
+
+- **title** (string, optional, default: "Item details") - Panel title
+- **item** (AddSelectItem | ItemDetailEntry[] | ReactNode, optional) - Item
+  data, array of entries, or custom content
+- **onClose** (function, optional) - Close button handler
+  - Signature: `() => void`
+- **closeIconDescription** (string, optional, default: "Close") - Close button
+  aria-label
+- **children** (ReactNode, optional) - Custom content (alternative to item prop)
+- **renderContent** (function, optional) - Custom content renderer
+  - Signature: `(item: AddSelectItem) => ReactNode`
+- **className** (string, optional) - Optional CSS class name
+- **closeIconButtonProps** (object, optional) - Additional props to pass to the
+  close IconButton

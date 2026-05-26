@@ -196,7 +196,9 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__container {
     block-size: 100%;
     inset-block-start: auto;
-    max-block-size: calc(100% - (#{$spacing-11} + #{$spacing-03}));
+    max-block-size: calc(
+      100% - (#{$spacing-11} + #{$spacing-03} + #{$spacing-01})
+    );
   }
 
   &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-slug
@@ -235,7 +237,7 @@ $motion-duration: $duration-moderate-02;
       .#{$block-class}__container--mixed-size-stacking
     ) {
     max-block-size: calc(
-      100% - (#{$spacing-11} + #{$spacing-03}) + #{$spacing-05}
+      100% - (#{$spacing-11} + #{$spacing-03} + #{$spacing-01}) + #{$spacing-05}
     );
   }
 
@@ -244,13 +246,15 @@ $motion-duration: $duration-moderate-02;
       .#{$block-class}__container--mixed-size-stacking
     ) {
     max-block-size: calc(
-      100% - (#{$spacing-11} + #{$spacing-03}) + (2 * #{$spacing-05})
+      100% - (#{$spacing-11} + #{$spacing-03} + #{$spacing-01}) +
+        (2 * #{$spacing-05})
     );
   }
 
   .#{$block-class}__container--lower {
     max-block-size: calc(
-      100% - ((#{$spacing-11} + #{$spacing-03}) + #{$spacing-08})
+      100% -
+        ((#{$spacing-11} + #{$spacing-03} + #{$spacing-01}) + #{$spacing-08})
     );
   }
 
@@ -263,7 +267,8 @@ $motion-duration: $duration-moderate-02;
       .#{$block-class}__container--mixed-size-stacking
     ) {
     max-block-size: calc(
-      100% - ((#{$spacing-11} + #{$spacing-03}) + #{$spacing-08}) +
+      100% -
+        ((#{$spacing-11} + #{$spacing-03} + #{$spacing-01}) + #{$spacing-08}) +
         #{$spacing-05}
     );
   }
@@ -273,7 +278,8 @@ $motion-duration: $duration-moderate-02;
       .#{$block-class}__container--mixed-size-stacking
     ) {
     max-block-size: calc(
-      100% - ((#{$spacing-11} + #{$spacing-03}) + #{$spacing-08}) +
+      100% -
+        ((#{$spacing-11} + #{$spacing-03} + #{$spacing-01}) + #{$spacing-08}) +
         (2 * #{$spacing-05})
     );
   }

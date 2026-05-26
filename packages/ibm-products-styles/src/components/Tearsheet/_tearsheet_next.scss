@@ -414,7 +414,7 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
         max-block-size: calc(
           100% - var(
               --tearsheet-vertical-gap,
-              calc(#{$spacing-11} + #{$spacing-03})
+              calc(#{$spacing-11} + #{$spacing-03} + #{$spacing-01})
             ) +
             var(--block-size-change)
         );

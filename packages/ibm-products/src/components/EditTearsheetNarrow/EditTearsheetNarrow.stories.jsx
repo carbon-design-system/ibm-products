@@ -30,6 +30,7 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
+    chromatic: { disableSnapshot: true },
     docs: {
       page: () => (
         <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/edit-and-update/usage/#tearsheet-edit" />

@@ -74,6 +74,17 @@ class InstantGenerate extends HostListenerMixin(LitElement) {
 
   private apiKey: string = '123-456-789';
   private nameRequired = false;
+  private passwordInputRef: HTMLElement | null = null;
+
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('apiKeyLoaded') && this.apiKeyLoaded && this.passwordInputRef) {
+      setTimeout(() => {
+        const input = this.passwordInputRef?.shadowRoot?.querySelector('input');
+        input?.focus();
+      }, 0);
+    }
+  }
 
   private onCloseHandler() {
     this.apiKey = '';
@@ -168,6 +179,7 @@ class InstantGenerate extends HostListenerMixin(LitElement) {
           ${this.apiKey
             ? html`
                 <cds-text-input
+                  ${ref((el) => (this.passwordInputRef = el as HTMLElement))}
                   value=${this.apiKey}
                   label="Unique API key"
                   showPasswordLabel="Show key"

@@ -1,3 +1,25 @@
+## `@carbon/ibm-products-styles@2.87.0-rc.0`
+### Features :rocket:
+- feat: Replace Interstitial Screen internal carousel with Carbon utility carousel (#9399)
+
+### Bug fixes :bug:
+- fix(preview_PageHeader): fix header padding (#9440)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#9405)
+
+## `@carbon/ibm-products-styles@2.86.0`
+### Bug fixes :bug:
+- fix(TruncatedText): provide keyboard accessibility (#9245)
+- fix(preview_PageHeader): `HeroImage` not taking the full height (#9268)
+- fix(page-header): resolve scroller button overlapping issue (#9345)
+- fix: security issues uuid, axios,basic-ftp (#9351)
+- fix(preview_PageHeader): fix tag height (#9327)
+- fix(EditInPlace): resolve focus missing and few other issue (#9243)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9347)
+
 ## `@carbon/ibm-products-styles@2.85.0`
 ### Features :rocket:
 - feat(ConditionBuilder): title and text ellipsis of dropdown and default statement fix (#9252)

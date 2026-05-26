@@ -130,9 +130,13 @@ collect:
         - today-text
         - triggerButtonRef
         # c4p-options-tile
+        - locked
+        - lockedText
         - onc4p-options-tile-close
         - onc4p-options-tile-open
         - titleId
+        - warn
+        - warnText
         # c4p-page-header-actions-set
         - actions-data
         # c4p-page-header-breadcrumb
@@ -144,6 +148,8 @@ collect:
         - hiddenItems
         # c4p-page-header-content-text
         - subtitle
+        # c4p-page-header-hero-image
+        - object-fit
         # c4p-page-header-scroller
         - close-on-activation
         - enter-delay-ms
@@ -240,6 +246,11 @@ collect:
         - success
         - tooltip
         - warning
+        # c4p-page-header-hero-image - object-fit
+        - contain
+        - cover
+        - fill
+        - none
         # c4p-preview-tearsheet - variant
         - narrow
         - wide

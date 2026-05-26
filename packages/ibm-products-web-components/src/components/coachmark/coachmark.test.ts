@@ -4,13 +4,21 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { expect, describe, it, vi, beforeEach } from 'vitest';
+import { expect, describe, it, vi, beforeEach, afterEach } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import './index';
 import CDSCoachmark from './coachmark';
 import CDSCoachmarkHeader from './coachmark-header';
 import CDSCoachmarkBody from './coachmark-body';
-import { coachmarkDetailsSignal } from './coachmark-context';
+import {
+  coachmarkDetailsSignal,
+  resetCoachmarkDetailsSignal,
+} from './coachmark-context';
+import {
+  handleClick,
+  handleDone,
+  handleCoachmarkOpened,
+} from './coachmark-helpers';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader';
 import Crossroads from '@carbon/icons/es/crossroads/16.js';
@@ -24,6 +32,9 @@ const templateTooltip = (args: any = {}) => {
       .open=${args.open}
       align=${args.align}
       .position=${{ x: 150, y: 100 }}
+      .caret=${args.caret}
+      .highContrast=${args.highContrast}
+      .dropShadow=${args.dropShadow}
     >
       <c4p-coachmark-beacon
         label="Show information"
@@ -80,8 +91,19 @@ describe('c4p-coachmark', function () {
     open: false,
     floating: false,
   };
+
+  let originalGet: any;
+
   beforeEach(() => {
+    originalGet = coachmarkDetailsSignal.get;
     coachmarkDetailsSignal.get = vi.fn(() => mockDetails);
+  });
+
+  afterEach(() => {
+    if (originalGet) {
+      coachmarkDetailsSignal.get = originalGet;
+    }
+    resetCoachmarkDetailsSignal();
   });
 
   it('applies className to the containing node', async () => {
@@ -200,5 +222,167 @@ describe('c4p-coachmark', function () {
 
     const buttons = headerShadow.querySelectorAll(`${carbonPrefix}-button`);
     expect(buttons[0].getAttribute('tooltip-text')).to.equal('drag icon');
+  });
+
+  it('should dispatch c4p-coachmark-opened event when opened', async () => {
+    const el = await fixture<CDSCoachmark>(
+      templateTooltip({ align: 'bottom', open: false })
+    );
+
+    let eventFired = false;
+    let eventDetail: any = null;
+
+    el.addEventListener('c4p-coachmark-opened', (e: Event) => {
+      eventFired = true;
+      eventDetail = (e as CustomEvent).detail;
+    });
+
+    el.open = true;
+    await el.updateComplete;
+
+    expect(eventFired).to.be.true;
+    expect(eventDetail).to.exist;
+    expect(eventDetail.open).to.be.true;
+  });
+
+  it('should dispatch c4p-coachmark-closed event when closed', async () => {
+    const el = await fixture<CDSCoachmark>(
+      templateTooltip({ align: 'bottom', open: true })
+    );
+
+    let eventFired = false;
+    let eventDetail: any = null;
+
+    el.addEventListener('c4p-coachmark-closed', (e: Event) => {
+      eventFired = true;
+      eventDetail = (e as CustomEvent).detail;
+    });
+
+    el.open = false;
+    await el.updateComplete;
+
+    expect(eventFired).to.be.true;
+    expect(eventDetail).to.exist;
+    expect(eventDetail.open).to.be.false;
+  });
+
+  it('should handle caret property correctly', async () => {
+    const el = (await fixture(
+      templateTooltip({ align: 'bottom', open: true, caret: false })
+    )) as CDSCoachmark;
+
+    await el.updateComplete;
+
+    expect(el.caret).to.equal(false);
+    const popover = el.shadowRoot?.querySelector('cds-popover');
+    expect(popover).to.exist;
+    expect((popover as any)?.caret).to.equal(false);
+  });
+
+  it('should render with highContrast property', async () => {
+    const el = (await fixture(
+      templateTooltip({ align: 'bottom', open: true, highContrast: true })
+    )) as CDSCoachmark;
+
+    await el.updateComplete;
+
+    expect(el.highContrast).to.equal(true);
+    const popover = el.shadowRoot?.querySelector('cds-popover');
+    expect(popover).to.exist;
+  });
+
+  it('should render with dropShadow property', async () => {
+    const el = (await fixture(
+      templateTooltip({ align: 'bottom', open: true, dropShadow: true })
+    )) as CDSCoachmark;
+
+    await el.updateComplete;
+
+    expect(el.dropShadow).to.equal(true);
+    const popover = el.shadowRoot?.querySelector('cds-popover');
+    expect(popover).to.exist;
+  });
+});
+
+describe('coachmark-helpers', () => {
+  beforeEach(() => {
+    // Clean up any existing coachmarks
+    document.querySelectorAll('c4p-coachmark').forEach((el) => el.remove());
+  });
+
+  afterEach(() => {
+    document.querySelectorAll('c4p-coachmark').forEach((el) => el.remove());
+  });
+
+  it('handleClick should toggle open attribute on coachmark', async () => {
+    const el = await fixture<CDSCoachmark>(
+      templateTooltip({ align: 'bottom', open: false })
+    );
+
+    expect(el.hasAttribute('open')).to.be.false;
+
+    handleClick();
+    await el.updateComplete;
+
+    expect(el.hasAttribute('open')).to.be.true;
+
+    handleClick();
+    await el.updateComplete;
+
+    expect(el.hasAttribute('open')).to.be.false;
+  });
+
+  it('handleDone should remove open attribute from coachmark', async () => {
+    const el = await fixture<CDSCoachmark>(
+      templateTooltip({ align: 'bottom', open: true })
+    );
+
+    expect(el.hasAttribute('open')).to.be.true;
+
+    handleDone();
+    await el.updateComplete;
+
+    expect(el.hasAttribute('open')).to.be.false;
+  });
+
+  it('handleCoachmarkOpened should focus done button for non-floating coachmark', async () => {
+    const el = await fixture<CDSCoachmark>(
+      templateTooltip({ align: 'bottom', open: true })
+    );
+
+    const doneButton = el.querySelector('.coachmark-body cds-button');
+    const focusSpy = vi.spyOn(doneButton as HTMLElement, 'focus');
+
+    handleCoachmarkOpened();
+
+    // Wait for setTimeout
+    await new Promise((resolve) => setTimeout(resolve, 150));
+
+    expect(focusSpy).toHaveBeenCalled();
+  });
+
+  it('handleCoachmarkOpened should focus drag handle for floating coachmark', async () => {
+    const el = await fixture<CDSCoachmark>(
+      templateFloating({ align: 'bottom', open: true, floating: true })
+    );
+
+    // Set floating in signal
+    coachmarkDetailsSignal.set({ open: true, floating: true });
+
+    const header = el.querySelector(
+      `${prefix}-coachmark-header`
+    ) as CDSCoachmarkHeader;
+    const dragHandle = header.shadowRoot?.querySelector(
+      `.${prefix}--coachmark-header-drag-handle`
+    ) as HTMLElement;
+
+    const focusSpy = vi.spyOn(dragHandle, 'focus');
+
+    handleCoachmarkOpened();
+
+    // Wait for setTimeout
+    await new Promise((resolve) => setTimeout(resolve, 150));
+
+    expect(focusSpy).toHaveBeenCalled();
   });
 });

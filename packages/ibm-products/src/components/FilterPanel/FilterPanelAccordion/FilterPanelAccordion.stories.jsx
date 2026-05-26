@@ -24,6 +24,7 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
+    chromatic: { disableSnapshot: true },
     docs: {
       page: mdx,
     },

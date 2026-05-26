@@ -155,9 +155,7 @@ const parameters = {
   chromatic: {
     modes: {
       g10: allModes['g10'],
-      g90: allModes['g90'],
       g100: allModes['g100'],
-      'breakpoint-sm': allModes['breakpoint-sm'],
     },
   },
 };

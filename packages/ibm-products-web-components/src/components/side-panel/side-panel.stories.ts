@@ -311,6 +311,13 @@ export const SlideIn = {
     ...defaultTemplate.args,
     slideIn: true,
   },
+  argTypes: {
+    resizable: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const WithActionToolbar = {
@@ -426,15 +433,6 @@ export const CustomHeader = {
         ${getSlug(args.slug)}
       </c4p-side-panel>
     `;
-  },
-};
-
-export const Resizable = {
-  ...defaultTemplate,
-  args: {
-    ...defaultTemplate.args,
-    resizable: true,
-    open: true,
   },
 };
 

@@ -553,7 +553,9 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                     title={selectionSummaryTitle}
                     selectedItems={selectedItemsForDisplay}
                     emptyState={
-                      <div style={{ marginBlockStart: '3rem' }}>
+                      <div
+                        style={{ marginBlockStart: '3rem', padding: '1rem' }}
+                      >
                         <NoDataEmptyState
                           illustrationTheme="light"
                           size="sm"

@@ -55,9 +55,9 @@
   &__side-panel-header {
     display: flex;
     align-items: flex-start;
+    padding: $spacing-05;
     border-block-end: 1px solid $border-subtle-01;
     gap: $spacing-04;
-    padding-block-end: $spacing-05;
   }
 
   &__side-panel-icon {
@@ -98,6 +98,7 @@
   &__side-panel-section {
     display: flex;
     flex-direction: column;
+    padding: $spacing-05;
     gap: $spacing-03;
   }
 

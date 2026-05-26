@@ -115,6 +115,9 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   // Horizontal layout for hierarchy view (columns side-by-side)
   &--horizontal {
     flex-direction: row;
+    .#{$block-class__next}-column {
+      padding: $spacing-05;
+    }
   }
 }
 
@@ -476,7 +479,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &-body {
-    padding: 0 $spacing-05;
+    // padding: 0 $spacing-05;
   }
 
   &-item-simple {

@@ -299,7 +299,27 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     border-inline-end: none;
   }
 
-  // Search bar section
+  // Search section with actions
+  &__search {
+    padding: $spacing-05;
+    padding-block-end: 0;
+
+    &--with-actions {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  &__search-input {
+    flex: 1;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  // Search bar section (legacy)
   &__search-bar {
     padding: $spacing-05;
     padding-block-end: 0;

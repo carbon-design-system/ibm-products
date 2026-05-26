@@ -333,4 +333,22 @@ $block-class-action-set: #{$prefix}--action-set;
   .#{$block-class}__close-button {
     inline-size: 2rem;
   }
+
+  .#{$block-class}__resizer {
+    position: absolute;
+    z-index: 8000;
+    inset-block-end: 0;
+    inset-block-start: 0;
+    --resizer-thickness: 4px;
+    --resizer-grab-thickness: 4px;
+    --resizer-grab-color: transparent;
+  }
+
+  .#{$block-class}[placement='right'] .#{$block-class}__resizer {
+    inset-inline-start: 0;
+  }
+
+  .#{$block-class}[placement='left'] .#{$block-class}__resizer {
+    inset-inline-end: 0;
+  }
 }

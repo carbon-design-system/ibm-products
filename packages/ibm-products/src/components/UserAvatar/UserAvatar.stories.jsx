@@ -108,6 +108,18 @@ const Template = (args) => {
     </main>
   );
 };
+
+const CenteredTemplate = (args) => {
+  return (
+    <main className="user-avatar-centered">
+      <UserAvatar
+        // TODO: handle events with action or local handler.
+        // onTodo={action('onTodo log action')}
+        {...args}
+      />
+    </main>
+  );
+};
 const ThemeTemplate = (args) => {
   return (
     <main>
@@ -151,7 +163,7 @@ Default.args = {
   renderIcon: 'No icon',
 };
 
-export const WithImage = Template.bind({});
+export const WithImage = CenteredTemplate.bind({});
 WithImage.storyName = 'WithImage';
 WithImage.args = {
   image: headshot,

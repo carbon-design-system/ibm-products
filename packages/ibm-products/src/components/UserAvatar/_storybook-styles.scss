@@ -10,6 +10,14 @@
 @use '@carbon/styles/scss/spacing' as *;
 
 // TODO: add any additional styles used by UserAvatar.stories.js
+.user-avatar-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-05;
+  min-block-size: 100vh;
+}
+
 .theme-section {
   padding: $spacing-05;
   background: $background;

@@ -107,7 +107,12 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     border: 1px solid $border-subtle-01;
     block-size: 100%;
     inset-block-start: auto;
-    max-block-size: calc(100% - var(--tearsheet-vertical-gap, #{$spacing-09}));
+    max-block-size: calc(
+      100% - var(
+          --tearsheet-vertical-gap,
+          calc(#{$spacing-11} + #{$spacing-03})
+        )
+    );
     max-inline-size: var(--tearsheet-max-inline-size, 1312px);
   }
   &:not(.#{$block-class__next}--stack-activated.is-visible) {
@@ -407,7 +412,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     &.is-visible {
       .#{$block-class__next}__container {
         max-block-size: calc(
-          100% - var(--tearsheet-vertical-gap, #{$spacing-09}) +
+          100% - var(
+              --tearsheet-vertical-gap,
+              calc(#{$spacing-11} + #{$spacing-03})
+            ) +
             var(--block-size-change)
         );
         transform: scaleX(var(--scale-factor));

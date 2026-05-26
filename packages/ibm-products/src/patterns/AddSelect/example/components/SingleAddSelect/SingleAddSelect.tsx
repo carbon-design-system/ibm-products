@@ -229,7 +229,7 @@ export const SingleAddSelect = forwardRef<HTMLDivElement, SingleAddSelectProps>(
             className={cx(blockClass, className)}
             {...rest}
           >
-            <Tearsheet.Header hideCloseButton>
+            <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>
                 <p slot="description">{description}</p>
               </Tearsheet.HeaderContent>

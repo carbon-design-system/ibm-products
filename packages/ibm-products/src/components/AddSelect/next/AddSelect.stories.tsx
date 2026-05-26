@@ -152,39 +152,20 @@ const PlaceholderRows = () => {
     <div
       style={{
         display: 'grid',
-        gap: '0.75rem',
+        gap: '0.25rem',
       }}
     >
       {sampleItems.slice(0, 3).map((item) => (
         <div
           key={item.id}
           style={{
-            border: '1px solid var(--cds-border-subtle)',
-            padding: '0.75rem',
+            padding: '0.25rem',
             background: 'var(--cds-layer-accent)',
           }}
         >
-          <p style={{ margin: 0, fontWeight: 600 }}>{item.title}</p>
-          <p style={{ margin: '0.25rem 0 0' }}>{item.subtitle}</p>
+          <p style={{ margin: 0 }}>AddSelect.Row</p>
         </div>
       ))}
-    </div>
-  );
-};
-
-const PlaceholderSummary = () => {
-  return (
-    <div
-      style={{
-        display: 'grid',
-        gap: '0.75rem',
-      }}
-    >
-      <p style={{ margin: 0, fontWeight: 600 }}>Placeholder summary context</p>
-      <Tag type="gray">3 selected</Tag>
-      <p style={{ margin: 0 }}>
-        This area intentionally avoids other AddSelect subcomponents.
-      </p>
     </div>
   );
 };
@@ -237,7 +218,7 @@ const AddSelectBodyStory = (args) => {
       items={filterOptions}
       itemToString={(item) => (item ? item.text : '')}
       onChange={({ selectedItem }) => setFilterType(selectedItem?.id || 'all')}
-      size="sm"
+      size="lg"
     />
   ) : undefined;
 
@@ -253,7 +234,7 @@ const AddSelectBodyStory = (args) => {
 
   return (
     <AddSelect selectedItems={new Set()} onItemSelect={() => {}}>
-      <PlaceholderShell aside={<PlaceholderSummary />}>
+      <PlaceholderShell>
         <AddSelect.Body
           itemsLabel={args.itemsLabel}
           globalSearchLabel={args.globalSearchLabel}
@@ -285,9 +266,9 @@ export const AddSelectBody = {
     showSubHeaderActions: false,
     showPath: true,
     path: [
-      { id: 'root', title: 'Inventory' },
-      { id: 'produce', title: 'Produce' },
-      { id: 'current', title: 'Fruits' },
+      { id: 'root', title: 'Category' },
+      { id: 'folders', title: 'Folders' },
+      { id: 'files', title: 'Files' },
     ],
   },
   argTypes: {

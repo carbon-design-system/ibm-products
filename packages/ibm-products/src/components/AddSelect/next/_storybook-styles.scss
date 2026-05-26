@@ -9,9 +9,15 @@
 @use '@carbon/styles/scss/type';
 
 $story-prefix: 'add-select-story';
+$next-story-prefix: 'add-select-next-stories';
 
 // Storybook-specific styles for AddSelect demos and examples
 // These styles are NOT part of the production component styles
+
+// Viewport container for next stories
+.#{$next-story-prefix}__viewport {
+  inline-size: 50%;
+}
 
 // Story container styling
 .#{$story-prefix}-container {

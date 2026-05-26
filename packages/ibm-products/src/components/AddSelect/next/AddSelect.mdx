@@ -538,6 +538,20 @@ const handleNavigate = (itemId, title, parentId) => {
 ## Component API
 
 The AddSelect component system provides a comprehensive API across all
-subcomponents. Use the tabs below to explore the props for each component.
+subcomponents. The Controls panel below shows props for all components in the
+system. Use the component selector tabs to view props for specific
+subcomponents.
+
+### AddSelect (Root Component)
+
+The root `AddSelect` component has the following props:
+
+- **children** (ReactNode) - Child components
+- **className** (string) - Optional CSS class name
+- **onItemSelect** (function) - Callback when an item is selected/deselected
+  - Signature: `(itemId: string, selected: boolean, value: string) => void`
+- **selectedItems** (Set\<string\>) - Set of selected item IDs
+
+### All Component Props
 
 <Controls />

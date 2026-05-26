@@ -205,10 +205,12 @@ export const AddSelectBody = {
     showSearch: {
       control: 'boolean',
       description: 'Show global search input',
+      table: { category: 'Story controls' },
     },
     showFilter: {
       control: 'boolean',
       description: 'Show filter dropdown in actions slot',
+      table: { category: 'Story controls' },
     },
   },
 };
@@ -365,6 +367,7 @@ export const AddSelectColumn = {
     showSearch: {
       control: 'boolean',
       description: 'Show search input in column',
+      table: { category: 'Story controls' },
     },
     showSelectAll: {
       control: 'boolean',
@@ -381,20 +384,20 @@ export const AddSelectColumn = {
  * AddSelect.Row Story
  */
 const RowTemplate = (args) => {
-  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+  // const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
   const [itemPanelOpen, setItemPanelOpen] = useState(false);
   const [selectedItemForPanel, setSelectedItemForPanel] =
     useState<SampleItem | null>(null);
 
-  const handleItemSelect = (itemId, selected) => {
-    const newSelected = new Set(selectedItems);
-    if (selected) {
-      newSelected.add(itemId);
-    } else {
-      newSelected.delete(itemId);
-    }
-    setSelectedItems(newSelected);
-  };
+  // const handleItemSelect = (itemId, selected) => {
+  //   const newSelected = new Set(selectedItems);
+  //   if (selected) {
+  //     newSelected.add(itemId);
+  //   } else {
+  //     newSelected.delete(itemId);
+  //   }
+  //   setSelectedItems(newSelected);
+  // };
 
   const handleItemPanelClick = (itemId) => {
     const item = sampleItems.find((i) => i.id === itemId);
@@ -403,43 +406,43 @@ const RowTemplate = (args) => {
   };
 
   return (
-    <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-      <AddSelect.Body itemsLabel="Items" itemCount={sampleItems.length}>
-        <AddSelect.Content>
-          {sampleItems.slice(0, 3).map((item) => (
-            <AddSelect.Row
-              key={item.id}
-              itemId={item.id}
-              title={item.title || ''}
-              subtitle={args.showSubtitle ? item.subtitle : undefined}
-              value={item.value || ''}
-              disabled={args.disabled && item.id === '2'}
-              hasItemPanel={args.hasItemPanel}
-              onItemPanelClick={handleItemPanelClick}
-              itemPanelOpen={
-                itemPanelOpen && selectedItemForPanel?.id === item.id
-              }
-            >
-              {args.showTag && (
-                <Tag type="blue" size="sm">
-                  {item.type}
-                </Tag>
-              )}
-            </AddSelect.Row>
-          ))}
-        </AddSelect.Content>
-      </AddSelect.Body>
-      {itemPanelOpen && selectedItemForPanel && (
-        <AddSelect.ItemPanel
-          title="Item details"
-          item={selectedItemForPanel}
-          onClose={() => {
-            setItemPanelOpen(false);
-            setSelectedItemForPanel(null);
-          }}
-        />
-      )}
-    </AddSelect>
+    // <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+    //   <AddSelect.Body itemsLabel="Items" itemCount={sampleItems.length}>
+    //     <AddSelect.Content>
+    <>
+      {sampleItems.slice(0, 3).map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title || ''}
+          subtitle={args.showSubtitle ? item.subtitle : undefined}
+          value={item.value || ''}
+          disabled={args.disabled && item.id === '2'}
+          hasItemPanel={args.hasItemPanel}
+          onItemPanelClick={handleItemPanelClick}
+          itemPanelOpen={itemPanelOpen && selectedItemForPanel?.id === item.id}
+        >
+          {args.showTag && (
+            <Tag type="blue" size="sm">
+              {item.type}
+            </Tag>
+          )}
+        </AddSelect.Row>
+      ))}
+    </>
+    //     </AddSelect.Content>
+    //   </AddSelect.Body>
+    //   {itemPanelOpen && selectedItemForPanel && (
+    //     <AddSelect.ItemPanel
+    //       title="Item details"
+    //       item={selectedItemForPanel}
+    //       onClose={() => {
+    //         setItemPanelOpen(false);
+    //         setSelectedItemForPanel(null);
+    //       }}
+    //     />
+    //   )}
+    // </AddSelect>
   );
 };
 
@@ -455,10 +458,12 @@ export const AddSelectRow = {
     showSubtitle: {
       control: 'boolean',
       description: 'Show item subtitles',
+      table: { category: 'Story controls' },
     },
     showTag: {
       control: 'boolean',
       description: 'Show type tags on items',
+      table: { category: 'Story controls' },
     },
     hasItemPanel: {
       control: 'boolean',
@@ -622,6 +627,7 @@ export const AddSelectSelectionSummaryItem = {
     showRemoveButton: {
       control: 'boolean',
       description: 'Show remove button on items',
+      table: { category: 'Story controls' },
     },
   },
 };
@@ -701,6 +707,7 @@ export const AddSelectItemPanel = {
     showCloseButton: {
       control: 'boolean',
       description: 'Show close button',
+      table: { category: 'Story controls' },
     },
     closeIconDescription: {
       control: 'text',

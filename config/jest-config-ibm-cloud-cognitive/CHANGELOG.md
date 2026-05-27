@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.50.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.50.0`
 ### Housekeeping :house:
 - chore: upgrade jest config to pure esm (#9407)
 - chore(storybook): upgrade Storybook to 10 (#9392)

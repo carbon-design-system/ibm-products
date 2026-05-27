@@ -1,3 +1,13 @@
+## `@carbon/ibm-products-styles@2.87.0-rc.0`
+### Features :rocket:
+- feat: Replace Interstitial Screen internal carousel with Carbon utility carousel (#9399)
+
+### Bug fixes :bug:
+- fix(preview_PageHeader): fix header padding (#9440)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#9405)
+
 ## `@carbon/ibm-products-styles@2.86.0`
 ### Bug fixes :bug:
 - fix(TruncatedText): provide keyboard accessibility (#9245)

@@ -328,8 +328,6 @@ export class CreateFullPage extends LitElement {
                   ></c4p-page-header-breadcrumbs-set>
                 </c4p-page-header-breadcrumb>
                 <c4p-page-header-content title="${this.title}">
-                  <c4p-page-header-content-text>
-                  </c4p-page-header-content-text>
                 </c4p-page-header-content>
               </c4p-page-header>
             `

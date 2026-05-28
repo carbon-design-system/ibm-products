@@ -5,13 +5,14 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 import helperSource from './edit-in-place-helpers.ts?raw';
 
 export const customFunctionArr = [
-  `const prefix = 'c4p';`,
   helperSource
     .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/import\s+\{[^}]*\}\s+from\s+['"].*?['"];?\s*/g, '')
     .replace(/export\s+/g, '')
-    .replace(/const componentPrefix = prefix;/g, '')
-    .replace(/componentPrefix/g, 'prefix')
     .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .replace(/const\s+prefix\s*=.*?;/g, '')
+    .replace(/\$\{prefix\}/g, '${\'c4p\'}')
+    .replace(/\s*\{\s+args:\s*defaultArgs,\s+render:\s*\(args:\s*any\)\s*=>\s*\{\s*/g, '')
     .trim()
 ];
 

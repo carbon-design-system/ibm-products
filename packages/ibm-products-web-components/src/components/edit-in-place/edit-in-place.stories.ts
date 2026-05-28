@@ -11,52 +11,15 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import './_story-assets/_storybook-styles.scss';
-import { EDIT_IN_PLACE_SIZE, TOOLTIP_ALIGNMENT } from './defs';
 import '@carbon/web-components/es/components/tooltip/index.js';
+import {
+  storyClass,
+  sizes,
+  tooltipAlignments,
+  defaultArgs,
+} from './edit-in-place-helpers';
 
-const storyClass = 'edit-in-place-example';
-
-const sizes = {
-  [`Small (${EDIT_IN_PLACE_SIZE.SMALL})`]: EDIT_IN_PLACE_SIZE.SMALL,
-  [`Medium (${EDIT_IN_PLACE_SIZE.MEDIUM})`]: EDIT_IN_PLACE_SIZE.MEDIUM,
-  [`Large (${EDIT_IN_PLACE_SIZE.LARGE})`]: EDIT_IN_PLACE_SIZE.LARGE,
-};
-
-const tooltipAlignments = {
-  [`Top (${TOOLTIP_ALIGNMENT.TOP})`]: TOOLTIP_ALIGNMENT.TOP,
-  [`Top left (${TOOLTIP_ALIGNMENT.TOP_LEFT})`]: TOOLTIP_ALIGNMENT.TOP_LEFT,
-  [`Top right (${TOOLTIP_ALIGNMENT.TOP_RIGHT})`]: TOOLTIP_ALIGNMENT.TOP_RIGHT,
-  [`Bottom (${TOOLTIP_ALIGNMENT.BOTTOM})`]: TOOLTIP_ALIGNMENT.BOTTOM,
-  [`Bottom left (${TOOLTIP_ALIGNMENT.BOTTOM_LEFT})`]:
-    TOOLTIP_ALIGNMENT.BOTTOM_LEFT,
-  [`Bottom right (${TOOLTIP_ALIGNMENT.BOTTOM_RIGHT})`]:
-    TOOLTIP_ALIGNMENT.BOTTOM_RIGHT,
-  [`Left (${TOOLTIP_ALIGNMENT.LEFT})`]: TOOLTIP_ALIGNMENT.LEFT,
-  [`Right (${TOOLTIP_ALIGNMENT.RIGHT})`]: TOOLTIP_ALIGNMENT.RIGHT,
-};
-
-const defaultArgs = {
-  cancelLabel: 'Cancel',
-  containerWidth: 300,
-  editAlwaysVisible: false,
-  editLabel: 'Edit',
-  id: 'story-id',
-  inheritTypography: false,
-  invalid: false,
-  invalidText: 'This field is required',
-  labelText: 'Label text',
-  placeholder: 'placeholder text',
-  readOnly: false,
-  readOnlyLabel: 'Edit off',
-  readOnlyToggleTipText: 'This field is read-only and cannot be edited',
-  saveLabel: 'Save',
-  size: EDIT_IN_PLACE_SIZE.SMALL,
-  toggleTipAlignment: TOOLTIP_ALIGNMENT.BOTTOM,
-  tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
-  value: 'default',
-};
-
-const controls = {
+const argTypes = {
   cancelLabel: {
     control: 'text',
     description: 'Label for the cancel button',
@@ -135,6 +98,185 @@ const controls = {
   },
 };
 
+export const Default = {
+  args: defaultArgs,
+  argTypes,
+  render: (args: any) => {
+    return html`
+      <div style="width: ${args.containerWidth}px;">
+        <c4p-edit-in-place
+          id=${ifDefined(args.id)}
+          cancel-label=${ifDefined(args.cancelLabel)}
+          ?edit-always-visible=${args.editAlwaysVisible}
+          edit-label=${ifDefined(args.editLabel)}
+          ?inherit-typography=${args.inheritTypography}
+          ?invalid=${args.invalid}
+          invalid-text=${ifDefined(args.invalidText)}
+          label-text=${ifDefined(args.labelText)}
+          placeholder=${ifDefined(args.placeholder)}
+          ?read-only=${args.readOnly}
+          read-only-label=${ifDefined(args.readOnlyLabel)}
+          read-only-toggletip-text=${ifDefined(args.readOnlyToggleTipText)}
+          save-label=${ifDefined(args.saveLabel)}
+          size=${ifDefined(args.size)}
+          toggletip-alignment=${ifDefined(args.toggleTipAlignment)}
+          tooltip-alignment=${ifDefined(args.tooltipAlignment)}
+          value=${ifDefined(args.value)}
+          @c4p-edit-in-place-change=${(e: CustomEvent) => {
+            console.log('Change:', e.detail);
+          }}
+          @c4p-edit-in-place-save=${(e: CustomEvent) => {
+            console.log('Save:', e.detail);
+          }}
+          @c4p-edit-in-place-cancel=${(e: CustomEvent) => {
+            console.log('Cancel:', e.detail);
+          }}
+          @c4p-edit-in-place-blur=${(e: CustomEvent) => {
+            console.log('Blur:', e.detail);
+          }}
+        ></c4p-edit-in-place>
+      </div>
+    `;
+  },
+};
+
+export const Invalid = {
+  args: {
+    ...defaultArgs,
+    invalid: true,
+  },
+  argTypes,
+  render: (args: any) => {
+    return html`
+      <div style="width: ${args.containerWidth}px;">
+        <c4p-edit-in-place
+          id=${ifDefined(args.id)}
+          cancel-label=${ifDefined(args.cancelLabel)}
+          ?edit-always-visible=${args.editAlwaysVisible}
+          edit-label=${ifDefined(args.editLabel)}
+          ?inherit-typography=${args.inheritTypography}
+          ?invalid=${args.invalid}
+          invalid-text=${ifDefined(args.invalidText)}
+          label-text=${ifDefined(args.labelText)}
+          placeholder=${ifDefined(args.placeholder)}
+          ?read-only=${args.readOnly}
+          read-only-label=${ifDefined(args.readOnlyLabel)}
+          read-only-toggletip-text=${ifDefined(args.readOnlyToggleTipText)}
+          save-label=${ifDefined(args.saveLabel)}
+          size=${ifDefined(args.size)}
+          toggletip-alignment=${ifDefined(args.toggleTipAlignment)}
+          tooltip-alignment=${ifDefined(args.tooltipAlignment)}
+          value=${ifDefined(args.value)}
+          @c4p-edit-in-place-change=${(e: CustomEvent) => {
+            console.log('Change:', e.detail);
+          }}
+          @c4p-edit-in-place-save=${(e: CustomEvent) => {
+            console.log('Save:', e.detail);
+          }}
+          @c4p-edit-in-place-cancel=${(e: CustomEvent) => {
+            console.log('Cancel:', e.detail);
+          }}
+          @c4p-edit-in-place-blur=${(e: CustomEvent) => {
+            console.log('Blur:', e.detail);
+          }}
+        ></c4p-edit-in-place>
+      </div>
+    `;
+  },
+};
+
+export const CustomBlurFunction = {
+  args: defaultArgs,
+  argTypes,
+  render: (args: any) => {
+    return html`
+      <div style="width: ${args.containerWidth}px;">
+        <c4p-edit-in-place
+          id=${ifDefined(args.id)}
+          cancel-label=${ifDefined(args.cancelLabel)}
+          ?edit-always-visible=${args.editAlwaysVisible}
+          edit-label=${ifDefined(args.editLabel)}
+          ?inherit-typography=${args.inheritTypography}
+          ?invalid=${args.invalid}
+          invalid-text=${ifDefined(args.invalidText)}
+          label-text=${ifDefined(args.labelText)}
+          placeholder=${ifDefined(args.placeholder)}
+          ?read-only=${args.readOnly}
+          read-only-label=${ifDefined(args.readOnlyLabel)}
+          read-only-toggletip-text=${ifDefined(args.readOnlyToggleTipText)}
+          save-label=${ifDefined(args.saveLabel)}
+          size=${ifDefined(args.size)}
+          toggletip-alignment=${ifDefined(args.toggleTipAlignment)}
+          tooltip-alignment=${ifDefined(args.tooltipAlignment)}
+          value=${ifDefined(args.value)}
+          @c4p-edit-in-place-change=${(e: CustomEvent) => {
+            console.log('Change:', e.detail);
+          }}
+          @c4p-edit-in-place-save=${(e: CustomEvent) => {
+            console.log('Save:', e.detail);
+          }}
+          @c4p-edit-in-place-cancel=${(e: CustomEvent) => {
+            console.log('Cancel:', e.detail);
+          }}
+          @c4p-edit-in-place-blur=${(e: CustomEvent) => {
+            const shouldSaveValue = false;
+            if (shouldSaveValue) {
+              console.log('Save on blur:', e.detail);
+            } else {
+              console.log('Cancel on blur:', e.detail);
+            }
+          }}
+        ></c4p-edit-in-place>
+      </div>
+    `;
+  },
+};
+
+export const ReadOnly = {
+  args: {
+    ...defaultArgs,
+    readOnly: true,
+  },
+  argTypes,
+  render: (args: any) => {
+    return html`
+      <div style="width: ${args.containerWidth}px;">
+        <c4p-edit-in-place
+          id=${ifDefined(args.id)}
+          cancel-label=${ifDefined(args.cancelLabel)}
+          ?edit-always-visible=${args.editAlwaysVisible}
+          edit-label=${ifDefined(args.editLabel)}
+          ?inherit-typography=${args.inheritTypography}
+          ?invalid=${args.invalid}
+          invalid-text=${ifDefined(args.invalidText)}
+          label-text=${ifDefined(args.labelText)}
+          placeholder=${ifDefined(args.placeholder)}
+          ?read-only=${args.readOnly}
+          read-only-label=${ifDefined(args.readOnlyLabel)}
+          read-only-toggletip-text=${ifDefined(args.readOnlyToggleTipText)}
+          save-label=${ifDefined(args.saveLabel)}
+          size=${ifDefined(args.size)}
+          toggletip-alignment=${ifDefined(args.toggleTipAlignment)}
+          tooltip-alignment=${ifDefined(args.tooltipAlignment)}
+          value=${ifDefined(args.value)}
+          @c4p-edit-in-place-change=${(e: CustomEvent) => {
+            console.log('Change:', e.detail);
+          }}
+          @c4p-edit-in-place-save=${(e: CustomEvent) => {
+            console.log('Save:', e.detail);
+          }}
+          @c4p-edit-in-place-cancel=${(e: CustomEvent) => {
+            console.log('Cancel:', e.detail);
+          }}
+          @c4p-edit-in-place-blur=${(e: CustomEvent) => {
+            console.log('Blur:', e.detail);
+          }}
+        ></c4p-edit-in-place>
+      </div>
+    `;
+  },
+};
+
 const meta = {
   title: 'Components/EditInPlace',
   parameters: {
@@ -172,7 +314,6 @@ The EditInPlace component allows users to edit text inline with save and cancel 
       },
     },
   },
-  argTypes: controls,
   decorators: [
     (story: any) => html`
       <div class="ccs-sb--display-box ${storyClass}__viewport">
@@ -192,221 +333,4 @@ The EditInPlace component allows users to edit text inline with save and cancel 
 
 export default meta;
 
-const Template = (args: any) => {
-  const {
-    cancelLabel,
-    containerWidth,
-    editAlwaysVisible,
-    editLabel,
-    id,
-    inheritTypography,
-    invalid,
-    invalidText,
-    labelText,
-    placeholder,
-    readOnly,
-    readOnlyLabel,
-    readOnlyToggleTipText,
-    saveLabel,
-    size,
-    toggleTipAlignment,
-    tooltipAlignment,
-    value,
-  } = args;
-
-  return html`
-    <div style="width: ${containerWidth}px;">
-      <c4p-edit-in-place
-        id=${ifDefined(id)}
-        cancel-label=${ifDefined(cancelLabel)}
-        ?edit-always-visible=${editAlwaysVisible}
-        edit-label=${ifDefined(editLabel)}
-        ?inherit-typography=${inheritTypography}
-        ?invalid=${invalid}
-        invalid-text=${ifDefined(invalidText)}
-        label-text=${ifDefined(labelText)}
-        placeholder=${ifDefined(placeholder)}
-        ?read-only=${readOnly}
-        read-only-label=${ifDefined(readOnlyLabel)}
-        read-only-toggletip-text=${ifDefined(readOnlyToggleTipText)}
-        save-label=${ifDefined(saveLabel)}
-        size=${ifDefined(size)}
-        toggletip-alignment=${ifDefined(toggleTipAlignment)}
-        tooltip-alignment=${ifDefined(tooltipAlignment)}
-        value=${ifDefined(value)}
-        @c4p-edit-in-place-change=${(e: CustomEvent) => {
-          console.log('Change:', e.detail);
-        }}
-        @c4p-edit-in-place-save=${(e: CustomEvent) => {
-          console.log('Save:', e.detail);
-        }}
-        @c4p-edit-in-place-cancel=${(e: CustomEvent) => {
-          console.log('Cancel:', e.detail);
-        }}
-        @c4p-edit-in-place-blur=${(e: CustomEvent) => {
-          console.log('Blur:', e.detail);
-        }}
-      ></c4p-edit-in-place>
-    </div>
-  `;
-};
-
-export const Default = {
-  args: {
-    cancelLabel: 'Cancel',
-    containerWidth: 300,
-    editAlwaysVisible: false,
-    editLabel: 'Edit',
-    id: 'story-id',
-    inheritTypography: false,
-    invalid: false,
-    invalidText: 'This field is required',
-    labelText: 'Label text',
-    placeholder: 'placeholder text',
-    readOnly: false,
-    readOnlyLabel: 'Edit off',
-    readOnlyToggleTipText: 'This field is read-only and cannot be edited',
-    saveLabel: 'Save',
-    size: EDIT_IN_PLACE_SIZE.SMALL,
-    toggleTipAlignment: TOOLTIP_ALIGNMENT.BOTTOM,
-    tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
-    value: 'default',
-  },
-  render: Template,
-};
-
-export const Invalid = {
-  args: {
-    cancelLabel: 'Cancel',
-    containerWidth: 300,
-    editAlwaysVisible: false,
-    editLabel: 'Edit',
-    id: 'story-id',
-    inheritTypography: false,
-    invalid: true,
-    invalidText: 'This field is required',
-    labelText: 'Label text',
-    placeholder: 'placeholder text',
-    readOnly: false,
-    readOnlyLabel: 'Edit off',
-    readOnlyToggleTipText: 'This field is read-only and cannot be edited',
-    saveLabel: 'Save',
-    size: EDIT_IN_PLACE_SIZE.SMALL,
-    toggleTipAlignment: TOOLTIP_ALIGNMENT.BOTTOM,
-    tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
-    value: 'default',
-  },
-  render: Template,
-};
-
-const CustomBlurTemplate = (args: any) => {
-  const {
-    cancelLabel,
-    containerWidth,
-    editAlwaysVisible,
-    editLabel,
-    id,
-    inheritTypography,
-    invalid,
-    invalidText,
-    labelText,
-    placeholder,
-    readOnly,
-    readOnlyLabel,
-    readOnlyToggleTipText,
-    saveLabel,
-    size,
-    toggleTipAlignment,
-    tooltipAlignment,
-    value,
-  } = args;
-
-  return html`
-    <div style="width: ${containerWidth}px;">
-      <c4p-edit-in-place
-        id=${ifDefined(id)}
-        cancel-label=${ifDefined(cancelLabel)}
-        ?edit-always-visible=${editAlwaysVisible}
-        edit-label=${ifDefined(editLabel)}
-        ?inherit-typography=${inheritTypography}
-        ?invalid=${invalid}
-        invalid-text=${ifDefined(invalidText)}
-        label-text=${ifDefined(labelText)}
-        placeholder=${ifDefined(placeholder)}
-        ?read-only=${readOnly}
-        read-only-label=${ifDefined(readOnlyLabel)}
-        read-only-toggletip-text=${ifDefined(readOnlyToggleTipText)}
-        save-label=${ifDefined(saveLabel)}
-        size=${ifDefined(size)}
-        toggletip-alignment=${ifDefined(toggleTipAlignment)}
-        tooltip-alignment=${ifDefined(tooltipAlignment)}
-        value=${ifDefined(value)}
-        @c4p-edit-in-place-change=${(e: CustomEvent) => {
-          console.log('Change:', e.detail);
-        }}
-        @c4p-edit-in-place-save=${(e: CustomEvent) => {
-          console.log('Save:', e.detail);
-        }}
-        @c4p-edit-in-place-cancel=${(e: CustomEvent) => {
-          console.log('Cancel:', e.detail);
-        }}
-        @c4p-edit-in-place-blur=${(e: CustomEvent) => {
-          const shouldSaveValue = false;
-          if (shouldSaveValue) {
-            console.log('Save on blur:', e.detail);
-          } else {
-            console.log('Cancel on blur:', e.detail);
-          }
-        }}
-      ></c4p-edit-in-place>
-    </div>
-  `;
-};
-
-export const CustomBlurFunction = {
-  args: {
-    cancelLabel: 'Cancel',
-    containerWidth: 300,
-    editAlwaysVisible: false,
-    editLabel: 'Edit',
-    id: 'story-id',
-    inheritTypography: false,
-    invalid: false,
-    invalidText: 'This field is required',
-    labelText: 'Label text',
-    placeholder: 'placeholder text',
-    readOnly: false,
-    readOnlyLabel: 'Edit off',
-    readOnlyToggleTipText: 'This field is read-only and cannot be edited',
-    saveLabel: 'Save',
-    size: EDIT_IN_PLACE_SIZE.SMALL,
-    toggleTipAlignment: TOOLTIP_ALIGNMENT.BOTTOM,
-    tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
-    value: 'default',
-  },
-  render: CustomBlurTemplate,
-};
-
-export const ReadOnly = {
-  args: {
-    cancelLabel: 'Cancel',
-    containerWidth: 300,
-    editAlwaysVisible: false,
-    editLabel: 'Edit',
-    id: 'story-id',
-    inheritTypography: false,
-    invalid: false,
-    invalidText: 'This field is required',
-    labelText: 'Label text',
-    placeholder: 'placeholder text',
-    readOnly: true,
-    readOnlyLabel: 'Edit off',
-    readOnlyToggleTipText: 'This field is read-only and cannot be edited',
-    saveLabel: 'Save',
-    size: EDIT_IN_PLACE_SIZE.SMALL,
-    toggleTipAlignment: TOOLTIP_ALIGNMENT.BOTTOM,
-    tooltipAlignment: TOOLTIP_ALIGNMENT.TOP,
-    value: 'default',
-  },
-  render: Template,
-};
+// Made with Bob

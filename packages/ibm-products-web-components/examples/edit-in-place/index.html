@@ -1,0 +1,86 @@
+<!--
+@license
+
+Copyright IBM Corp. 2026
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>EditInPlace - Carbon for IBM Products Web Components</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="src/styles.scss" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    c4p-edit-in-place:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <div class="example-container">
+    <div class="example-header"></div>
+    <div class="example-content">
+      <h2>EditInPlace Component Examples</h2>
+      
+      <div class="edit-in-place-demo">
+        <h3>Default</h3>
+        <c4p-edit-in-place
+          id="default-example"
+          value="Edit me"
+          label-text="Editable field"
+          edit-label="Edit"
+          save-label="Save"
+          cancel-label="Cancel"
+          placeholder="Enter text here"
+        ></c4p-edit-in-place>
+      </div>
+
+      <div class="edit-in-place-demo">
+        <h3>Invalid State</h3>
+        <c4p-edit-in-place
+          id="invalid-example"
+          value="Invalid value"
+          label-text="Editable field with validation"
+          edit-label="Edit"
+          save-label="Save"
+          cancel-label="Cancel"
+          invalid
+          invalid-text="This field is required"
+        ></c4p-edit-in-place>
+      </div>
+
+      <div class="edit-in-place-demo">
+        <h3>Read Only</h3>
+        <c4p-edit-in-place
+          id="readonly-example"
+          value="Read only value"
+          label-text="Read only field"
+          edit-label="Edit"
+          save-label="Save"
+          cancel-label="Cancel"
+          read-only
+          read-only-label="Edit off"
+          read-only-toggletip-text="This field is read-only and cannot be edited"
+        ></c4p-edit-in-place>
+      </div>
+
+      <div class="edit-in-place-demo">
+        <h3>Large Size</h3>
+        <c4p-edit-in-place
+          id="large-example"
+          value="Large size example"
+          label-text="Large editable field"
+          edit-label="Edit"
+          save-label="Save"
+          cancel-label="Cancel"
+          size="lg"
+        ></c4p-edit-in-place>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

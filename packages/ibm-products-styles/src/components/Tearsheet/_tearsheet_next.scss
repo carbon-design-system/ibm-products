@@ -657,6 +657,9 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     .#{$block-class__next}__header-actions {
       display: none;
     }
+    .#{$block-class__next}__header-content {
+      align-self: flex-start;
+    }
   }
   .#{$block-class__next}__header-content-wrapper {
     display: flex;

@@ -90,7 +90,7 @@ jobs:
       - name: Build Web Components Storybook
         run: |
           cd packages/ibm-products-web-components
-          yarn build:storybook --loglevel verbose
+          yarn build:storybook --loglevel info
 
       - name: Upload Web Components Storybook artifact
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0

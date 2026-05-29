@@ -2354,7 +2354,7 @@ __metadata:
   resolution: "@carbon/ibm-products-primitives@workspace:packages/ibm-products-primitives"
   dependencies:
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.50.0-rc.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.50.0"
     npm-run-all2: "npm:^8.0.0"
     rimraf: "npm:^6.0.1"
     typescript: "npm:^5.3.3"

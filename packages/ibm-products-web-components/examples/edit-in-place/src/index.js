@@ -31,5 +31,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-// Made with Bob

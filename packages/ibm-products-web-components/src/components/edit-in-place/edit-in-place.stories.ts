@@ -332,5 +332,3 @@ The EditInPlace component allows users to edit text inline with save and cancel 
 };
 
 export default meta;
-
-// Made with Bob

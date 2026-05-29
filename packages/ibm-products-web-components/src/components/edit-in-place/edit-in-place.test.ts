@@ -9,9 +9,57 @@
 
 import { html, render } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { describe, beforeEach, afterEach, it, expect, vi } from 'vitest';
+import {
+  describe,
+  beforeAll,
+  afterAll,
+  beforeEach,
+  afterEach,
+  it,
+  expect,
+  vi,
+} from 'vitest';
 import { prefix } from '../../globals/settings';
 import './index';
+
+// Suppress unhandled errors from Carbon tooltip cleanup during test teardown.
+const originalAddEventListener = document.addEventListener;
+
+beforeAll(() => {
+  document.addEventListener = function (
+    type: string,
+    listener: any,
+    options?: any
+  ) {
+    if (type === 'click') {
+      const wrappedListener = (e: Event) => {
+        try {
+          listener(e);
+        } catch (error) {
+          // Suppress only tooltip cleanup errors during test teardown
+          if (
+            error instanceof TypeError &&
+            error.message.includes('assignedElements')
+          ) {
+            return;
+          }
+          throw error;
+        }
+      };
+      return originalAddEventListener.call(
+        this,
+        type,
+        wrappedListener,
+        options
+      );
+    }
+    return originalAddEventListener.call(this, type, listener, options);
+  };
+});
+
+afterAll(() => {
+  document.addEventListener = originalAddEventListener;
+});
 
 const template = (props: any = {}) => {
   const {

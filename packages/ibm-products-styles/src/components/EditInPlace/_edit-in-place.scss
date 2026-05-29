@@ -148,6 +148,10 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
   inline-size: var(--#{$block-class}--size);
 }
 
+.#{$block-class}__toolbar cds-icon-button {
+  padding: $spacing-02;
+}
+
 .#{$block-class}--invalid .#{$block-class}__toolbar {
   // width of invalid icon is always $spacing-07 ($spacing-05 + 2 * $spacing-03 margin)
   --toolbar-width: calc(var(--#{$block-class}--size) + #{$spacing-07});

@@ -79,7 +79,7 @@ $carbon-prefix: 'cds';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    block-size: 100%;
+    block-size: $spacing-08;
     gap: $spacing-03;
     inline-size: 100%;
     min-inline-size: 0;
@@ -145,7 +145,7 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-content) {
-  padding: $spacing-06 0;
+  padding-block-start: $spacing-06;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__content;
@@ -247,6 +247,7 @@ $carbon-prefix: 'cds';
   // @extend .#{$prefix}--page-header__content__body;
   display: block;
   max-inline-size: convert.to-rem(640px);
+  padding-block-end: $spacing-06;
 
   .#{$prefix}--page-header__content__subtitle {
     @include type-style('productive-heading-03');

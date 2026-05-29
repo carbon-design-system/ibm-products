@@ -25,8 +25,14 @@ import { CoachmarkContext, blockClass } from './context';
 import CoachmarkContent, { CoachmarkContentProps } from './CoachmarkContent';
 import { Popover, NewPopoverAlignment } from '@carbon/react';
 import { useIsomorphicEffect } from '../../../../global/js/hooks';
-import { ContentHeader, ContentHeaderProps } from './ContentHeader';
-import { ContentBody, ContentBodyProps } from './ContentBody';
+import {
+  CoachmarkContentHeader,
+  CoachmarkContentHeaderProps,
+} from './CoachmarkContentHeader';
+import {
+  CoachmarkContentBody,
+  CoachmarkContentBodyProps,
+} from './CoachmarkContentBody';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 
@@ -96,15 +102,15 @@ export interface CoachmarkPropsNext {
   triggerRef?: RefObject<HTMLElement>;
 }
 
-type CoachmarkContentComponent = FC<CoachmarkContentProps> & {
-  Header: FC<ContentHeaderProps>;
-  Body: FC<ContentBodyProps>;
-};
-// Define the type for Coachmark, extending it to include Trigger and Content
+type CoachmarkContentComponent = FC<CoachmarkContentProps>;
+
+// Define the type for Coachmark, extending it to include sub-components
 export type CoachmarkComponent = ForwardRefExoticComponent<
   CoachmarkPropsNext & RefAttributes<HTMLDivElement>
 > & {
   Content: CoachmarkContentComponent;
+  ContentHeader: FC<CoachmarkContentHeaderProps>;
+  ContentBody: FC<CoachmarkContentBodyProps>;
 };
 
 /**
@@ -266,8 +272,8 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
   }
 ) as CoachmarkComponent;
 Coachmark.Content = CoachmarkContent;
-Coachmark.Content.Header = ContentHeader;
-Coachmark.Content.Body = ContentBody;
+Coachmark.ContentHeader = CoachmarkContentHeader;
+Coachmark.ContentBody = CoachmarkContentBody;
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 Coachmark.displayName = componentName;
@@ -315,7 +321,7 @@ Coachmark.propTypes = {
   /**
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */
-  // @ts-ignore
+  // @ts-ignore - Position prop is conditionally used based on Coachmark type (Beacon vs Tagline)
   position: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,

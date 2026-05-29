@@ -17,11 +17,14 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { blockClass, CoachmarkContext } from './context';
-import { ContentHeaderProps } from './ContentHeader';
-import { ContentBodyProps } from './ContentBody';
+import { CoachmarkContentHeaderProps } from './CoachmarkContentHeader';
+import { CoachmarkContentBodyProps } from './CoachmarkContentBody';
 import { PopoverContent } from '@carbon/react';
 import { carbon } from '../../../../settings';
 import cx from 'classnames';
+import { getDevtoolsProps } from '../../../../global/js/utils/devtools';
+
+const componentName = 'CoachmarkContent';
 
 export interface CoachmarkContentProps {
   /**
@@ -38,8 +41,8 @@ export interface CoachmarkContentProps {
 export type CoachmarkContentComponent = ForwardRefExoticComponent<
   CoachmarkContentProps & RefAttributes<HTMLDivElement>
 > & {
-  Header: FC<ContentHeaderProps>;
-  Body: FC<ContentBodyProps>;
+  Header: FC<CoachmarkContentHeaderProps>;
+  Body: FC<CoachmarkContentBodyProps>;
 };
 
 const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
@@ -69,6 +72,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
           setContentRef(popoverContainer);
         }
       }
+      // setContentRef is a stable function from useState and doesn't need to be in dependencies
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open, contentRef]);
 
@@ -133,6 +137,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
         ref={contentRef}
         className={cx(coachmarkContentBlockClass, className) || ''}
         {...rest}
+        {...getDevtoolsProps(componentName)}
       >
         {children}
       </PopoverContent>

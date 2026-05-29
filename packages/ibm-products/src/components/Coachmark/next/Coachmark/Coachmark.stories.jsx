@@ -139,8 +139,8 @@ const TooltipTemplate = ({ ...args }, context) => {
             }}
           ></CoachmarkBeacon>
           <Coachmark.Content>
-            <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-            <Coachmark.Content.Body>
+            <Coachmark.ContentHeader closeIconDescription="Close" />
+            <Coachmark.ContentBody>
               <h2>Hello World</h2>
               <p>this is a description test</p>
               <Button
@@ -150,7 +150,7 @@ const TooltipTemplate = ({ ...args }, context) => {
               >
                 Done
               </Button>
-            </Coachmark.Content.Body>
+            </Coachmark.ContentBody>
           </Coachmark.Content>
         </Coachmark>
       </main>
@@ -198,17 +198,17 @@ const FloatingTemplate = ({ ...args }, context) => {
             Show information
           </Button>
           <Coachmark.Content>
-            <Coachmark.Content.Header
+            <Coachmark.ContentHeader
               closeIconDescription="Close"
               dragIconDescription="Drag"
-            ></Coachmark.Content.Header>
-            <Coachmark.Content.Body>
+            />
+            <Coachmark.ContentBody>
               <h2>Hello World</h2>
               <p>this is a description test</p>
               <Button size="sm" onClick={handleClose}>
                 Done
               </Button>
-            </Coachmark.Content.Body>
+            </Coachmark.ContentBody>
           </Coachmark.Content>
         </Coachmark>
       </main>
@@ -254,8 +254,8 @@ const TriggerRefTemplate = ({ ...args }, context) => {
           {...args}
         >
           <Coachmark.Content>
-            <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-            <Coachmark.Content.Body>
+            <Coachmark.ContentHeader closeIconDescription="Close" />
+            <Coachmark.ContentBody>
               <h2>Hello World</h2>
               <p>Coachmark using the triggerRef prop.</p>
               <Button
@@ -265,7 +265,7 @@ const TriggerRefTemplate = ({ ...args }, context) => {
               >
                 Done
               </Button>
-            </Coachmark.Content.Body>
+            </Coachmark.ContentBody>
           </Coachmark.Content>
         </Coachmark>
       </main>
@@ -287,7 +287,7 @@ Floating.args = {
   align: 'bottom',
 };
 
-export const TriggerRef = TriggerRefTemplate.bind({});
-TriggerRef.args = {
+export const WithExternalTriggerRef = TriggerRefTemplate.bind({});
+WithExternalTriggerRef.args = {
   align: 'bottom',
 };

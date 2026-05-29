@@ -7,7 +7,7 @@
 
 import React, { act, createRef } from 'react';
 import { render, screen, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-import { pkg } from '../../../../settings';
+import { pkg, carbon } from '../../../../settings';
 import uuidv4 from '../../../../global/js/utils/uuidv4';
 
 import { Coachmark } from '.';
@@ -30,17 +30,17 @@ const renderCoachmark = ({ ...rest } = {}) =>
         label="Show information"
       ></CoachmarkBeacon>
       <Coachmark.Content>
-        <Coachmark.Content.Header
+        <Coachmark.ContentHeader
           closeIconDescription="Close"
           dragIconDescription="Drag"
-        ></Coachmark.Content.Header>
-        <Coachmark.Content.Body>
+        />
+        <Coachmark.ContentBody>
           <h2>Hello World</h2>
           <p>this is a description test</p>
           <Button size="sm" id="DoneBtn">
             Done
           </Button>
-        </Coachmark.Content.Body>
+        </Coachmark.ContentBody>
       </Coachmark.Content>
     </Coachmark>
   );
@@ -58,17 +58,17 @@ const renderCoachmarkFloating = ({ ...rest } = {}) =>
         Show information
       </Button>
       <Coachmark.Content>
-        <Coachmark.Content.Header
+        <Coachmark.ContentHeader
           closeIconDescription="Close"
           dragIconDescription="Drag"
-        ></Coachmark.Content.Header>
-        <Coachmark.Content.Body>
+        />
+        <Coachmark.ContentBody>
           <h2>Hello World</h2>
           <p>this is a description test</p>
           <Button size="sm" id="DoneBtn">
             Done
           </Button>
-        </Coachmark.Content.Body>
+        </Coachmark.ContentBody>
       </Coachmark.Content>
     </Coachmark>
   );
@@ -82,6 +82,26 @@ const isCoachmarkVisible = () => {
 
 describe(componentName, () => {
   const originalRAF = global.requestAnimationFrame;
+
+  beforeAll(() => {
+    // Mock DOMMatrix for drag functionality tests
+    global.DOMMatrix = class {
+      constructor(transform) {
+        if (typeof transform === 'string' && transform.startsWith('matrix')) {
+          const values = transform
+            .match(/matrix.*\((.+)\)/)[1]
+            .split(',')
+            .map(parseFloat);
+          this.m41 = values[4];
+          this.m42 = values[5];
+        } else {
+          this.m41 = 0;
+          this.m42 = 0;
+        }
+      }
+    };
+  });
+
   beforeEach(() => {
     global.requestAnimationFrame = (callback) => setTimeout(callback, 0);
     jest.spyOn(console, 'warn').mockImplementation(() => {});
@@ -242,5 +262,298 @@ describe(componentName, () => {
 
     // onClose should not be called for outside clicks when floating
     expect(onCloseMock).not.toHaveBeenCalled();
+  });
+
+  it('renders with align prop and applies correct popover class', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      open: true,
+      align: 'right',
+    });
+    expect(isCoachmarkVisible()).toBeTruthy();
+    const popoverContainer = document.querySelector('.cds--popover-container');
+    expect(popoverContainer).toHaveClass('cds--popover--right');
+  });
+
+  it('renders with highContrast prop set to false and does not apply high-contrast class', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      open: true,
+      highContrast: false,
+    });
+    expect(isCoachmarkVisible()).toBeTruthy();
+    const popoverContainer = document.querySelector('.cds--popover-container');
+    expect(popoverContainer).not.toHaveClass('cds--popover--high-contrast');
+  });
+
+  it('renders with highContrast prop set to true and applies high-contrast class', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      open: true,
+      highContrast: true,
+    });
+    expect(isCoachmarkVisible()).toBeTruthy();
+    const popoverContainer = document.querySelector('.cds--popover-container');
+    expect(popoverContainer).toHaveClass('cds--popover--high-contrast');
+  });
+
+  it('renders with dropShadow prop and applies drop-shadow class', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      open: true,
+      dropShadow: true,
+    });
+    expect(isCoachmarkVisible()).toBeTruthy();
+    const popoverContainer = document.querySelector('.cds--popover-container');
+    expect(popoverContainer).toHaveClass('cds--popover--drop-shadow');
+  });
+
+  it('renders with caret prop set to true and applies caret class', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      open: true,
+      caret: true,
+    });
+    expect(isCoachmarkVisible()).toBeTruthy();
+    const popoverContainer = document.querySelector('.cds--popover-container');
+    expect(popoverContainer).toHaveClass('cds--popover--caret');
+  });
+
+  it('applies floating class when floating prop is true', () => {
+    renderCoachmarkFloating({
+      'data-testid': dataTestId,
+      open: true,
+      floating: true,
+    });
+    const coachmark = screen.getByTestId(dataTestId);
+    expect(coachmark).toHaveClass(`${blockClass}--floating`);
+  });
+
+  it('handles triggerRef prop to use external trigger element', async () => {
+    const triggerRef = createRef();
+    const TestComponent = () => {
+      return (
+        <div>
+          <button ref={triggerRef} id="external-trigger">
+            External Trigger
+          </button>
+          <Coachmark
+            triggerRef={triggerRef}
+            open={true}
+            data-testid={dataTestId}
+          >
+            <CoachmarkBeacon
+              id="CoachmarkBtn"
+              label="Show information"
+            ></CoachmarkBeacon>
+            <Coachmark.Content>
+              <Coachmark.Content.Header
+                closeIconDescription="Close"
+                dragIconDescription="Drag"
+              ></Coachmark.Content.Header>
+              <Coachmark.Content.Body>
+                <h2>Hello World</h2>
+              </Coachmark.Content.Body>
+            </Coachmark.Content>
+          </Coachmark>
+        </div>
+      );
+    };
+    render(<TestComponent />);
+
+    await waitFor(() => {
+      const externalTrigger = screen.getByText('External Trigger');
+      expect(externalTrigger).toHaveAttribute('aria-expanded', 'true');
+    });
+  });
+
+  it('applies kind prop to CoachmarkBeacon and renders correct class', () => {
+    const { container } = render(
+      <Coachmark data-testid={dataTestId}>
+        <CoachmarkBeacon
+          id="CoachmarkBtn"
+          label="Show information"
+          kind="default"
+        ></CoachmarkBeacon>
+        <Coachmark.Content>
+          <Coachmark.Content.Header
+            closeIconDescription="Close"
+            dragIconDescription="Drag"
+          ></Coachmark.Content.Header>
+          <Coachmark.Content.Body>
+            <h2>Hello World</h2>
+          </Coachmark.Content.Body>
+        </Coachmark.Content>
+      </Coachmark>
+    );
+    const beacon = container.querySelector(
+      `.${pkg.prefix}--coachmark-beacon-default`
+    );
+    expect(beacon).toBeInTheDocument();
+  });
+
+  it('applies buttonProps to CoachmarkBeacon button element', async () => {
+    const onClickMock = jest.fn();
+    render(
+      <Coachmark data-testid={dataTestId}>
+        <CoachmarkBeacon
+          id="CoachmarkBtn"
+          label="Show information"
+          buttonProps={{
+            onClick: onClickMock,
+            'data-custom': 'test-value',
+            tabIndex: 0,
+          }}
+        ></CoachmarkBeacon>
+        <Coachmark.Content>
+          <Coachmark.Content.Header
+            closeIconDescription="Close"
+            dragIconDescription="Drag"
+          ></Coachmark.Content.Header>
+          <Coachmark.Content.Body>
+            <h2>Hello World</h2>
+          </Coachmark.Content.Body>
+        </Coachmark.Content>
+      </Coachmark>
+    );
+
+    const button = screen.getByRole('button', { name: 'Show information' });
+    expect(button).toHaveAttribute('data-custom', 'test-value');
+    expect(button).toHaveAttribute('tabIndex', '0');
+
+    await act(() => userEvent.click(button));
+    expect(onClickMock).toHaveBeenCalled();
+  });
+
+  // Helper component for controlled Coachmark tests
+  const ControlledCoachmark = ({ initialOpen = false, onClose }) => {
+    const [isOpen, setIsOpen] = React.useState(initialOpen);
+
+    const handleClose = () => {
+      onClose?.();
+      setIsOpen(false);
+    };
+
+    return (
+      <Coachmark data-testid={dataTestId} open={isOpen} onClose={handleClose}>
+        <CoachmarkBeacon
+          label="Show information"
+          buttonProps={{
+            onClick: () => setIsOpen(!isOpen),
+          }}
+        />
+        <Coachmark.Content>
+          <Coachmark.ContentHeader closeIconDescription="Close" />
+          <Coachmark.ContentBody>
+            <h2>Hello World</h2>
+          </Coachmark.ContentBody>
+        </Coachmark.Content>
+      </Coachmark>
+    );
+  };
+
+  it('opens coachmark when beacon is clicked in controlled mode', async () => {
+    const user = userEvent.setup();
+
+    render(<ControlledCoachmark initialOpen={false} />);
+
+    const beacon = screen.getByRole('button', { name: 'Show information' });
+    expect(beacon).toHaveAttribute('aria-expanded', 'false');
+
+    // Click beacon to open coachmark
+    await act(async () => {
+      await user.click(beacon);
+    });
+
+    // Verify coachmark is now open
+    await waitFor(() => {
+      expect(beacon).toHaveAttribute('aria-expanded', 'true');
+      expect(isCoachmarkVisible()).toBeTruthy();
+    });
+  });
+
+  it('closes coachmark when close button is clicked in controlled mode', async () => {
+    const user = userEvent.setup();
+    const onCloseMock = jest.fn();
+
+    render(<ControlledCoachmark initialOpen={true} onClose={onCloseMock} />);
+
+    const beacon = screen.getByRole('button', { name: 'Show information' });
+    expect(beacon).toHaveAttribute('aria-expanded', 'true');
+    expect(isCoachmarkVisible()).toBeTruthy();
+
+    // Click close button
+    const closeButton = screen.getByLabelText('Close');
+    await act(async () => {
+      await user.click(closeButton);
+    });
+
+    // Verify onClose was called
+    expect(onCloseMock).toHaveBeenCalled();
+
+    // Verify coachmark is now closed
+    await waitFor(() => {
+      expect(beacon).toHaveAttribute('aria-expanded', 'false');
+      expect(isCoachmarkVisible()).toBeFalsy();
+    });
+  });
+
+  it('supports keyboard drag functionality with arrow keys', async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <Coachmark data-testid={dataTestId} open={true} floating={true}>
+        <Button
+          id="CoachmarkBtn"
+          kind="tertiary"
+          size="md"
+          label="Show information"
+          renderIcon={Crossroads}
+        >
+          Show information
+        </Button>
+        <Coachmark.Content>
+          <Coachmark.ContentHeader
+            closeIconDescription="Close"
+            dragIconDescription="Drag"
+          />
+          <Coachmark.ContentBody>
+            <h2>Hello World</h2>
+            <p>this is a description test</p>
+            <Button size="sm" id="DoneBtn">
+              Done
+            </Button>
+          </Coachmark.ContentBody>
+        </Coachmark.Content>
+      </Coachmark>
+    );
+
+    await waitFor(() => {
+      expect(isCoachmarkVisible()).toBeTruthy();
+    });
+
+    const dragButton = screen.getByLabelText('Drag');
+    // Find the popover content element that gets transformed
+    const popoverContent = container.querySelector(
+      `.${carbon.prefix}--popover-content`
+    );
+    expect(popoverContent).toBeInTheDocument();
+
+    // Focus on drag button and activate drag mode with Enter
+    await act(async () => {
+      dragButton.focus();
+      await user.keyboard('{Enter}');
+    });
+
+    // Press ArrowRight to move 8px to the right
+    await act(async () => {
+      await user.keyboard('{ArrowRight}');
+    });
+
+    // Check if transform has been applied (moved 8px to the right)
+    await waitFor(() => {
+      const currentTransform = popoverContent.parentElement.style.transform;
+      expect(currentTransform).toContain('translate');
+      expect(currentTransform).toContain('8px');
+    });
   });
 });

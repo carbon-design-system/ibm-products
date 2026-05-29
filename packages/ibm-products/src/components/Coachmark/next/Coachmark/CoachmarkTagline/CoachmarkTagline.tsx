@@ -126,9 +126,9 @@ CoachmarkTagline.propTypes = {
    * button props
    */
   buttonProps: PropTypes.shape({
-    /**@ts-ignore*/
+    // @ts-ignore - PropTypes from Carbon Button are spread here to inherit base button props
     ...Button.propTypes,
-    /**@ts-ignore*/
+    // @ts-ignore - Overriding id prop type to be more specific than Button's base type
     id: PropTypes.string,
     onClick: PropTypes.func,
     onDoubleClick: PropTypes.func,

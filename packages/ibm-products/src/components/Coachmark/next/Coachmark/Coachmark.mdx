@@ -21,12 +21,13 @@ import { Coachmark } from '.';
 - [Coachmark code sample](#coachmark-code-sample)
 - [Tooltip example usage](#tooltip-example-usage)
 - [Floating example usage](#floating-example-usage)
+- [With external trigger ref example usage](#with-external-trigger-ref-example-usage)
 - [Component API](#component-api)
 
 ## Overview
 
 [Coachmarks](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage)
-are just-in-time messages used to draw a user’s attention to a particular spot,
+are just-in-time messages used to draw a user's attention to a particular spot,
 and explain new functionality or concepts they might not otherwise notice or
 understand.
 
@@ -34,13 +35,15 @@ understand.
 
 - The trigger element or first child of `Coachmark` should always be either a
   CoachmarkBeacon or a Button.
+- When using an external trigger element (not a child of Coachmark), use the
+  `triggerRef` prop to pass a ref to the trigger element. This allows the
+  Coachmark to properly manage focus and accessibility attributes.
 
 ## Coachmark code sample
 
 ```jsx
 <Theme theme="white">
   <Coachmark
-    ariaLabel="Coachmark"
     position={{ x: 151, y: 155 }}
     open={isOpen}
     onClose={handleClose}
@@ -49,18 +52,23 @@ understand.
     <CoachmarkBeacon
       id="CoachmarkBtn"
       label="Show information"
-      onClick={handleBeaconClick}
-    ></CoachmarkBeacon>
-    <Coachmark.Content highContrast={true}>
-      <Coachmark.Content.Header
+      buttonProps={{
+        onClick: handleBeaconClick,
+        id: 'CoachmarkBtn',
+      }}
+    />
+    <Coachmark.Content>
+      <Coachmark.ContentHeader
         closeIconDescription="Close"
         dragIconDescription="Drag"
-      ></Coachmark.Content.Header>
-      <Coachmark.Content.Body>
+      />
+      <Coachmark.ContentBody>
         <h2>Hello World</h2>
         <p>this is a description test</p>
-        <Button size="sm">Done</Button>
-      </Coachmark.Content.Body>
+        <Button size="sm" onClick={handleClose}>
+          Done
+        </Button>
+      </Coachmark.ContentBody>
     </Coachmark.Content>
   </Coachmark>
 </Theme>
@@ -110,6 +118,47 @@ understand.
 
 ]} />
 
+## With external trigger ref example usage
+
+Use the `triggerRef` prop when you need to attach the Coachmark to a trigger
+element that exists outside the Coachmark component tree. This is useful when
+the trigger button needs to be positioned independently or when integrating with
+existing UI elements.
+
+<Canvas className="coachmark--docs-demo"
+  of={CoachmarkStories.WithExternalTriggerRef}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: CoachmarkStories.WithExternalTriggerRef,
+          status: {
+            preview: ['Coachmark'],
+          },
+          customImports: [
+            `import { Crossroads } from '@carbon/react/icons';`,
+          ],
+          styles: CoachmarkStories.default.parameters.styles,
+        }),
+    },
+]}
+</Canvas>
+
 ## Component API
 
+### Coachmark
+
 <Controls />
+
+### Sub-components
+
+The Coachmark component includes the following sub-components:
+
+- **Coachmark.Content** - Container for the coachmark content
+- **Coachmark.ContentHeader** - Header section with close and optional drag
+  controls
+- **Coachmark.ContentBody** - Body section for main content
+
+For detailed prop information on sub-components, refer to the TypeScript
+definitions in the source code.

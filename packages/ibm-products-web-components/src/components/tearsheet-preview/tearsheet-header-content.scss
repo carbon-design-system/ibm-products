@@ -38,6 +38,9 @@ $motion-duration: $duration-moderate-02;
     .#{$block-class__next}__header-actions {
       display: none;
     }
+    .#{$block-class__next}__header-content {
+      align-self: flex-start;
+    }
   }
   .#{$block-class__next}__title-start {
     align-items: center;

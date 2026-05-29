@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.40.0-rc.0`
+## `@carbon/ibm-products-web-components@0.40.0`
 ### Features :rocket:
 - feat(createfullpage): implemented as patterns in wc (#9275)
 

@@ -104,7 +104,7 @@
     "typescript": "^5.5.3",
     "vite": "npm:rolldown-vite@latest",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.0",
+    "vitest": "^4.1.0",
     "web-component-analyzer": "2.0.0"
   }
 }

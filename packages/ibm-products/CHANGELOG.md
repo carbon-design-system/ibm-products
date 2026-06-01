@@ -1,3 +1,22 @@
+## `@carbon/ibm-products@2.91.0`
+### Features :rocket:
+- feat: Replace Interstitial Screen internal carousel with Carbon utility carousel (#9399)
+
+### Bug fixes :bug:
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.24.0 (#9421)
+- fix(options-tile): WC parity work  (#9387)
+- fix: increase code coverage > 80 (#9376)
+- fix(apikeymodal): parity  (#9313)
+- fix: hook to fetch and pass in parent feature flags to Tearsheet (#9341)
+- fix: replace simpleHeader with preview_pageheader (#9375)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#9405)
+- chore: upgrade jest config to pure esm (#9407)
+- chore: optimise chromatic setup (#9394)
+- chore: data spreadsheet depreciation (#9395)
+- chore(storybook): upgrade Storybook to 10 (#9392)
+
 ## `@carbon/ibm-products@2.90.0`
 ### Features :rocket:
 - feat: add onRemoveItem handler to intercept remove (#9350)

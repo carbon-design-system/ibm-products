@@ -434,4 +434,3 @@ class CreateFullPageWithHeader extends HostListenerMixin(LitElement) {
 }
 
 export default CreateFullPageWithHeader;
-

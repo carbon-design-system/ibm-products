@@ -854,8 +854,8 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__content {
-    padding: $spacing-06 0;
     background-color: $layer;
+    padding-block-start: $spacing-06;
   }
 
   .#{$block-class}__content__title-wrapper {
@@ -963,6 +963,7 @@ $duration: 1000ms;
 
     margin-block-start: $spacing-03;
     max-inline-size: to-rem(640px);
+    padding-block-end: $spacing-06;
   }
 
   [data-hidden]:not([data-fixed]) {

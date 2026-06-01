@@ -17,6 +17,7 @@ import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet-header.scss?lit';
 import { tearsheetSignal, updateTearsheetSignals } from './tearsheet-signal';
 import { SignalWatcher } from '@lit-labs/signals';
+import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--tearsheet__next`;
 
@@ -100,6 +101,8 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   protected firstUpdated() {
     this.updateHeaderOffset();
+    registerFocusableContainers(this.shadowRoot);
+    registerFocusableContainers(this);
   }
 
   protected updated(_changedProperties: PropertyValues) {

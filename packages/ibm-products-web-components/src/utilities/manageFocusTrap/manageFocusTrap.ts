@@ -71,17 +71,30 @@ export const trapFocus = (containers?: HTMLElement[]) => {
   const getRealActiveElement = () => {
     let activeElement = document.activeElement;
 
-    // If inside shadow DOM
-    if (
+    // Traverse through nested shadow DOMs, but stop at tabbable elements
+    // This ensures we stop at cds-button level, not go deeper into its shadow root
+    while (
       activeElement &&
-      selectorTabbable.indexOf(activeElement.tagName.toLocaleLowerCase()) ==
-        -1 &&
-      activeElement?.shadowRoot?.activeElement
+      activeElement.shadowRoot &&
+      activeElement.shadowRoot.activeElement
     ) {
-      activeElement = activeElement.shadowRoot.activeElement;
+      const nextElement = activeElement.shadowRoot.activeElement;
+
+      // Check if current element is a tabbable element (like cds-button)
+      // If so, stop here instead of going deeper
+      const tagName = activeElement.tagName.toLowerCase();
+      if (
+        selectorTabbable.indexOf(tagName) !== -1 ||
+        tagName.includes('-button') ||
+        activeElement.hasAttribute('tabindex')
+      ) {
+        break;
+      }
+
+      activeElement = nextElement;
     }
 
-    // If active element is a slot
+    // If active element is a slot, resolve to the assigned element
     if (activeElement?.tagName === 'SLOT') {
       let assigned: Element[] | undefined;
 
@@ -112,6 +125,7 @@ export const trapFocus = (containers?: HTMLElement[]) => {
 
     // Flatten all focusable elements from all containers
     const elements = getAllFocusableElements(_containers);
+    console.log('elements', elements);
 
     const first = elements[0];
     const last = elements[elements.length - 1];
@@ -125,6 +139,8 @@ export const trapFocus = (containers?: HTMLElement[]) => {
       }
     } else {
       // Tab wrap
+      console.log(active, last);
+
       if (active === last || last.contains(active)) {
         e.preventDefault();
         getFocusTarget(first)?.focus();

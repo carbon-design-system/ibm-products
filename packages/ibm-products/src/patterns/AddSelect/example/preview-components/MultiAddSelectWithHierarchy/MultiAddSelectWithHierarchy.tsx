@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
-import { AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectItem } from '@carbon/ibm-products-utilities';
 import { Document } from '@carbon/react/icons';
 import { MultiAddSelectWithHierarchy as MultiAddSelectHierarchyComponent } from '../../components/MultiAddSelectWithHierarchy/MultiAddSelectWithHierarchy';
 import './MultiAddSelectWithHierarchy.scss';

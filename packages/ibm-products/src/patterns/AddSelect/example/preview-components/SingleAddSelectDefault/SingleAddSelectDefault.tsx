@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import { SingleAddSelect } from '../../components/SingleAddSelect/SingleAddSelect';
-import { AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectItem } from '@carbon/ibm-products-utilities';
 // import './SingleAddSelectDefault.scss';
 
 // Sample hierarchical data (same structure as WithHierarchy, but only first level will be shown)

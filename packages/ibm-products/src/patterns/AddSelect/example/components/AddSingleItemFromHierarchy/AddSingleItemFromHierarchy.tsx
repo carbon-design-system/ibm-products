@@ -18,7 +18,7 @@ import cx from 'classnames';
 import { ToastNotification, Tag } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 import { Tearsheet } from '../../../../../components/Tearsheet/next';
 import { useMatchMedia } from '../../../../../global/js/hooks/useMatchMedia';
 import './AddSingleItemFromHierarchy.scss';

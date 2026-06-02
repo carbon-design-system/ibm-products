@@ -19,7 +19,7 @@ import cx from 'classnames';
 import { ToastNotification } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 import { AddSelectContext } from '../../../../../components/AddSelect/next/context';
 import { Tearsheet } from '../../../../../components/Tearsheet/next';
 import { NoDataEmptyState } from '../../../../../components/EmptyStates';

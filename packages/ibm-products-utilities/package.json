@@ -1,8 +1,7 @@
 {
-  "name": "@carbon/ibm-products-primitives",
-  "description": "Framework-agnostic primitives for Carbon for IBM Products",
+  "name": "@carbon/ibm-products-utilities",
+  "description": "Framework-agnostic utilities for Carbon for IBM Products",
   "version": "1.0.0-rc.0",
-  "private": true,
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -18,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/ibm-products.git",
-    "directory": "packages/ibm-products-primitives"
+    "directory": "packages/ibm-products-utilities"
   },
   "bugs": "https://github.com/carbon-design-system/ibm-products/issues",
   "files": [
@@ -32,7 +31,6 @@
     "carbon",
     "carbon design system",
     "carbon for ibm products",
-    "primitives",
     "utilities",
     "framework-agnostic"
   ],

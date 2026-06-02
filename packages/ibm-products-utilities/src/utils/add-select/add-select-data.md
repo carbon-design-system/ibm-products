@@ -15,7 +15,7 @@ frameworks.
 ## Installation
 
 ```typescript
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 ```
 
 ## Data Structure
@@ -230,7 +230,7 @@ dataManager.sort((a, b) => a.title!.localeCompare(b.title!), true);
 ## Usage Example
 
 ```typescript
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 
 // Initialize the data manager
 const dataManager = new AddSelectData();
@@ -280,7 +280,7 @@ The utility is designed to work seamlessly with Lit-based Web Components:
 ```typescript
 import { LitElement, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 
 @customElement('my-component')
 export class MyComponent extends LitElement {

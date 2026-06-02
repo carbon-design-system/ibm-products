@@ -17,7 +17,7 @@ import {
   type IconButtonProps,
 } from '@carbon/react';
 import { SubtractAlt } from '@carbon/react/icons';
-import type { AddSelectItem } from '@carbon/ibm-products-primitives';
+import type { AddSelectItem } from '@carbon/ibm-products-utilities';
 import { blockClass } from './context';
 
 /**

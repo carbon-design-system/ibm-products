@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import { SingleAddSelectWithHierarchy } from '../../components/SingleAddSelectWithHierarchy/SingleAddSelectWithHierarchy';
-import { AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectItem } from '@carbon/ibm-products-utilities';
 import './SingleAddSelectWithHierarchy.scss';
 
 // Sample hierarchical data

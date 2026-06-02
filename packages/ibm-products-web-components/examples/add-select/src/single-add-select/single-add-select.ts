@@ -19,7 +19,7 @@ import '../../../../src/components/add-select/add-select-body';
 import '../../../../src/components/add-select/add-select-content';
 import '../../../../src/components/add-select/add-select-row';
 
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 
 import styles from './single-add-select.scss?lit';
 

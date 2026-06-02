@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ToastNotification } from '@carbon/react';
 import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 import { Tearsheet } from '../../../../../components/Tearsheet/next';
 import './SingleAddSelectWithHierarchy.scss';
 

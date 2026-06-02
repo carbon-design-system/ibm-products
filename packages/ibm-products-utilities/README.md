@@ -1,28 +1,25 @@
-# @carbon/ibm-products-primitives
+# @carbon/ibm-products-utilities
 
-> **Private Package**: Internal framework-agnostic primitives for Carbon for IBM
-> Products
+> Framework-agnostic utilities for Carbon for IBM Products
 
-This is a **private package** that provides framework-agnostic
-JavaScript/TypeScript utilities and primitives shared internally between
-`@carbon/ibm-products` and `@carbon/ibm-products-web-components` packages.
+This package provides framework-agnostic JavaScript/TypeScript utilities shared
+between `@carbon/ibm-products` and `@carbon/ibm-products-web-components`
+packages.
 
-## ⚠️ Important Notice
+## Usage
 
-**This package is not intended for direct public consumption.** It is a private,
-internal dependency used by:
+This package can be used directly by consumers who need framework-agnostic
+utilities, or indirectly through:
 
 - `@carbon/ibm-products` - React components
 - `@carbon/ibm-products-web-components` - Web Components
 
-These consumer packages selectively re-export only the necessary utilities for
-public usage. End users should import from the appropriate consumer package
-rather than directly from `@carbon/ibm-products-primitives`.
+End users can import directly from this package or from the appropriate consumer
+package based on their needs.
 
 ## Purpose
 
-The `@carbon/ibm-products-primitives` package serves as a shared foundation
-that:
+The `@carbon/ibm-products-utilities` package serves as a shared foundation that:
 
 - **Enables Code Reusability**: Provides common business logic and utilities
   shared between React and Web Components implementations
@@ -43,7 +40,7 @@ A lightweight utility for managing hierarchical data structures with support for
 selection, traversal, searching, and sorting.
 
 ```typescript
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 
 const dataManager = new AddSelectData();
 dataManager.setItems([
@@ -74,7 +71,7 @@ are appropriate for public consumption:
 
 ```typescript
 // Internal usage within @carbon/ibm-products
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 
 function MyComponent() {
   const [dataManager] = useState(() => new AddSelectData());
@@ -87,7 +84,7 @@ function MyComponent() {
 }
 
 // Public re-export (example)
-export { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+export { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 ```
 
 ### @carbon/ibm-products-web-components
@@ -96,7 +93,7 @@ The Web Components package similarly imports and selectively re-exports:
 
 ```typescript
 // Internal usage within @carbon/ibm-products-web-components
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 
 @customElement('my-component')
 export class MyComponent extends LitElement {
@@ -114,7 +111,7 @@ export class MyComponent extends LitElement {
 }
 
 // Public re-export (example)
-export { AddSelectData, AddSelectItem } from '@carbon/ibm-products-primitives';
+export { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 ```
 
 ## For End Users
@@ -129,7 +126,7 @@ appropriate consumer package:
 import { AddSelectData } from '@carbon/ibm-products';
 
 // ❌ Incorrect - Do not import directly
-import { AddSelectData } from '@carbon/ibm-products-primitives';
+import { AddSelectData } from '@carbon/ibm-products-utilities';
 ```
 
 ### Web Components Users
@@ -139,21 +136,22 @@ import { AddSelectData } from '@carbon/ibm-products-primitives';
 import { AddSelectData } from '@carbon/ibm-products-web-components';
 
 // ❌ Incorrect - Do not import directly
-import { AddSelectData } from '@carbon/ibm-products-primitives';
+import { AddSelectData } from '@carbon/ibm-products-utilities';
 ```
 
 ## Package Structure
 
 ```
-@carbon/ibm-products-primitives/
+@carbon/ibm-products-utilities/
 ├── es/                    # ESM build output
 ├── lib/                   # CommonJS build output
 ├── src/
-│   ├── add-select/       # AddSelect utility
-│   │   ├── add-select-data.ts
-│   │   ├── add-select-data.spec.ts
-│   │   ├── add-select-data.md
-│   │   └── index.ts
+│   ├── utils/            # Utilities directory
+│   │   └── add-select/   # AddSelect utility
+│   │       ├── add-select-data.ts
+│   │       ├── add-select-data.spec.ts
+│   │       ├── add-select-data.md
+│   │       └── index.ts
 │   └── index.ts          # Main entry point
 ├── package.json
 ├── tsconfig.json
@@ -176,9 +174,9 @@ yarn test
 
 ### Adding New Primitives
 
-When adding new primitives to this package:
+When adding new utilities to this package:
 
-1. Create a new directory under `src/` (e.g., `src/my-primitive/`)
+1. Create a new directory under `src/utils/` (e.g., `src/utils/my-utility/`)
 2. Add your implementation file (e.g., `my-primitive.ts`)
 3. Add tests (e.g., `my-primitive.spec.ts`)
 4. Add documentation (e.g., `my-primitive.md`)
@@ -188,17 +186,16 @@ When adding new primitives to this package:
 Example structure:
 
 ```
-src/my-primitive/
+src/utils/my-utility/
 ├── index.ts
-├── my-primitive.ts
-├── my-primitive.spec.ts
-└── my-primitive.md
+├── my-utility.ts
+├── my-utility.spec.ts
+└── my-utility.md
 ```
 
 ## Contributing
 
-This package is part of the Carbon for IBM Products monorepo. As a **private
-internal package**, it is not published to npm independently. Changes to this
+This package is part of the Carbon for IBM Products monorepo. Changes to this
 package should be made with consideration for both consumer packages
 (`@carbon/ibm-products` and `@carbon/ibm-products-web-components`).
 

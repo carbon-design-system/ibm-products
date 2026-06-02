@@ -41,7 +41,7 @@ async function build() {
     },
   ];
 
-  // Build @carbon/ibm-products-primitives outputs
+  // Build @carbon/ibm-products-utilities outputs
   for (const format of formats) {
     await tsdown({
       banner,

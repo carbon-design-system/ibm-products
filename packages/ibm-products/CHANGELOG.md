@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.91.0-rc.0`
+## `@carbon/ibm-products@2.91.0`
 ### Features :rocket:
 - feat: Replace Interstitial Screen internal carousel with Carbon utility carousel (#9399)
 

@@ -125,7 +125,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
       globalSearchLabel = 'Search',
       globalSearchPlaceholder = 'Search',
       searchResultsTitle = 'Search results',
-      itemCount = 0,
+      itemCount,
       path = [],
       onSearch,
       onBreadcrumbClick,
@@ -232,9 +232,11 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
                   ) : (
                     <p className={`${blockClass}__tags-label`}>{itemsLabel}</p>
                   )}
-                  <Tag type="gray" size="sm" {...tagProps}>
-                    {itemCount}
-                  </Tag>
+                  {itemCount !== undefined && (
+                    <Tag type="gray" size="sm" {...tagProps}>
+                      {itemCount}
+                    </Tag>
+                  )}
                 </div>
                 {subHeaderActions && (
                   <div className={`${blockClass}__sub-header-actions`}>

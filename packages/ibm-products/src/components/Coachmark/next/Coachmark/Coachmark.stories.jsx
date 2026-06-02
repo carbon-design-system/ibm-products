@@ -7,16 +7,27 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Coachmark } from '.';
+import CoachmarkContent from './CoachmarkContent';
+import { CoachmarkContentHeader } from './CoachmarkContentHeader';
+import { CoachmarkContentBody } from './CoachmarkContentBody';
+import { CoachmarkBeacon } from './CoachmarkBeacon';
+import { CoachmarkTagline } from './CoachmarkTagline';
 import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 import { Button, Theme } from '@carbon/react';
-import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 import { pkg } from '../../../../settings';
 
 export default {
   title: 'Preview/Onboarding/Coachmark',
   component: Coachmark,
+  subcomponents: {
+    CoachmarkContent,
+    CoachmarkContentHeader,
+    CoachmarkContentBody,
+    CoachmarkBeacon,
+    CoachmarkTagline,
+  },
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
     children: {

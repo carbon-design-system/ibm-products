@@ -9,7 +9,7 @@
 import React, { useMemo, useState } from 'react';
 import { Button, Dropdown, Tag, Toggle } from '@carbon/react';
 import { AddSelect } from '.';
-import type { AddSelectItem } from '@carbon/ibm-products-utilities';
+import type { AddSelectItem } from '@carbon/ibm-products';
 import styles from './_storybook-styles.scss?inline';
 import mdx from './AddSelect.mdx';
 import { Document } from '@carbon/react/icons';

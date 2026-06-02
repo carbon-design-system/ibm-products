@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { IconButton, type IconButtonProps } from '@carbon/react';
 import { Close } from '@carbon/react/icons';
-import type { AddSelectItem } from '@carbon/ibm-products-utilities';
+import type { AddSelectItem } from '@carbon/ibm-products';
 import { blockClass } from './context';
 
 /**

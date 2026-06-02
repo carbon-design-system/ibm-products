@@ -1,21 +1,23 @@
 # @carbon/ibm-products-utilities
 
-> Framework-agnostic utilities for Carbon for IBM Products
+> **Private package** - Framework-agnostic utilities for Carbon for IBM Products
 
-This package provides framework-agnostic JavaScript/TypeScript utilities shared
-between `@carbon/ibm-products` and `@carbon/ibm-products-web-components`
-packages.
+This is a **private internal package** that provides framework-agnostic
+JavaScript/TypeScript utilities shared between `@carbon/ibm-products` and
+`@carbon/ibm-products-web-components` packages.
 
 ## Usage
 
-This package can be used directly by consumers who need framework-agnostic
-utilities, or indirectly through:
+**This package is not published to npm and should not be imported directly by
+end users.**
+
+Utilities from this package are re-exported through:
 
 - `@carbon/ibm-products` - React components
 - `@carbon/ibm-products-web-components` - Web Components
 
-End users can import directly from this package or from the appropriate consumer
-package based on their needs.
+End users should always import from the appropriate consumer package, never
+directly from this package.
 
 ## Purpose
 
@@ -40,7 +42,13 @@ A lightweight utility for managing hierarchical data structures with support for
 selection, traversal, searching, and sorting.
 
 ```typescript
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
+// Import from the main packages, not directly from utilities
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
+// or
+import {
+  AddSelectData,
+  AddSelectItem,
+} from '@carbon/ibm-products-web-components';
 
 const dataManager = new AddSelectData();
 dataManager.setItems([
@@ -58,7 +66,7 @@ const results = dataManager.search('Item 1');
 const children = dataManager.getItemChildren('1');
 ```
 
-[View full AddSelectData documentation](./src/add-select/add-select-data.md)
+[View full AddSelectData documentation](./src/utils/add-select/add-select-data.md)
 
 ## Internal Usage
 
@@ -116,28 +124,36 @@ export { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 
 ## For End Users
 
-**Do not install or import from this package directly.** Instead, use the
-appropriate consumer package:
+**This is a private package and cannot be installed or imported directly.** All
+utilities are re-exported through the main packages.
 
 ### React Users
 
 ```typescript
 // ✅ Correct - Import from @carbon/ibm-products
-import { AddSelectData } from '@carbon/ibm-products';
-
-// ❌ Incorrect - Do not import directly
-import { AddSelectData } from '@carbon/ibm-products-utilities';
+import {
+  AddSelectData,
+  AddSelectItem,
+  ItemStatus,
+  SearchOptions,
+} from '@carbon/ibm-products';
 ```
 
 ### Web Components Users
 
 ```typescript
 // ✅ Correct - Import from @carbon/ibm-products-web-components
-import { AddSelectData } from '@carbon/ibm-products-web-components';
-
-// ❌ Incorrect - Do not import directly
-import { AddSelectData } from '@carbon/ibm-products-utilities';
+import {
+  AddSelectData,
+  AddSelectItem,
+  ItemStatus,
+  SearchOptions,
+} from '@carbon/ibm-products-web-components';
 ```
+
+**Note:** Since this package is private and not published to npm, direct imports
+like `import { AddSelectData } from '@carbon/ibm-products-utilities'` will not
+work in external projects.
 
 ## Package Structure
 

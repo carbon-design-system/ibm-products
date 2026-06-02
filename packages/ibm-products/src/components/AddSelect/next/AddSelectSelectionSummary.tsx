@@ -15,7 +15,7 @@ import {
   type IconButtonProps,
 } from '@carbon/react';
 import { Edit } from '@carbon/react/icons';
-import type { AddSelectItem } from '@carbon/ibm-products-utilities';
+import type { AddSelectItem } from '@carbon/ibm-products';
 import { blockClass } from './context';
 
 /**

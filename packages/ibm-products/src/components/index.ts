@@ -43,6 +43,13 @@ export * from './TagSet';
 export * from './Tearsheet';
 export * from './UserAvatar';
 export * from './WebTerminal';
+// Re-export utilities from @carbon/ibm-products-utilities
+export { AddSelectData } from '@carbon/ibm-products-utilities';
+export type {
+  AddSelectItem,
+  ItemStatus,
+  SearchOptions,
+} from '@carbon/ibm-products-utilities';
 
 /**
  * Non-stable components

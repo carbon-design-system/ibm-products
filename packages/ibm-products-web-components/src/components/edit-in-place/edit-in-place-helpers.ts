@@ -8,26 +8,10 @@
  */
 
 import { prefix } from '../../globals/settings';
+import { EDIT_IN_PLACE_SIZE, TOOLTIP_ALIGNMENT } from './defs';
 
 export const blockClass = `${prefix}--edit-in-place`;
 export const storyClass = 'edit-in-place-example';
-
-export enum EDIT_IN_PLACE_SIZE {
-  SMALL = 'sm',
-  MEDIUM = 'md',
-  LARGE = 'lg',
-}
-
-export enum TOOLTIP_ALIGNMENT {
-  TOP = 'top',
-  TOP_LEFT = 'top-left',
-  TOP_RIGHT = 'top-right',
-  BOTTOM = 'bottom',
-  BOTTOM_LEFT = 'bottom-left',
-  BOTTOM_RIGHT = 'bottom-right',
-  LEFT = 'left',
-  RIGHT = 'right',
-}
 
 export const sizes = {
   [`Small (${EDIT_IN_PLACE_SIZE.SMALL})`]: EDIT_IN_PLACE_SIZE.SMALL,

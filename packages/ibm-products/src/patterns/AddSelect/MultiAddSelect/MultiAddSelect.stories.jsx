@@ -10,6 +10,7 @@ import styles from '../_story-styles.scss?inline';
 import DocsPage from './MultiAddSelect.mdx';
 import { MultiAddSelectDefault } from '../example/preview-components/MultiAddSelectDefault/MultiAddSelectDefault';
 import { MultiAddSelectWithHierarchyPreview } from '../example/preview-components/MultiAddSelectWithHierarchy/MultiAddSelectWithHierarchy';
+import { MultiAddSelectWithModifiers } from '../example/preview-components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
 
 export default {
   title: 'Patterns/Add and select/MultiAddSelect',
@@ -47,6 +48,10 @@ export const Overview = {
           <strong>With Hierarchy</strong> - Multi-selection with hierarchical
           navigation and recursive columns
         </li>
+        <li>
+          <strong>With Modifiers</strong> - Multi-selection with role assignment
+          using Dropdown or MultiSelect modifiers
+        </li>
       </ul>
       <h2>Component structure</h2>
       <p>
@@ -68,3 +73,9 @@ export const WithHierarchy = {
 };
 
 WithHierarchy.storyName = 'With Hierarchy';
+
+export const WithModifiers = {
+  render: () => <MultiAddSelectWithModifiers />,
+};
+
+WithModifiers.storyName = 'With Modifiers';

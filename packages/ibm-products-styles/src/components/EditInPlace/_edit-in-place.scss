@@ -148,7 +148,7 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
   inline-size: var(--#{$block-class}--size);
 }
 
-.#{$block-class}__toolbar cds-icon-button {
+.#{$block-class}__toolbar #{$carbon-prefix}-icon-button {
   padding: $spacing-02;
 }
 

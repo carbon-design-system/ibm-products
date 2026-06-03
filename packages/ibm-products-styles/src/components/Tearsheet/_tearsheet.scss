@@ -338,6 +338,22 @@ $motion-duration: $duration-moderate-02;
     display: none;
   }
 
+  // Custom close button positioning (rendered in correct DOM order)
+  .#{$block-class}__close-button {
+    position: absolute;
+    z-index: 1;
+    inset-block-start: $spacing-03;
+    inset-inline-end: $spacing-05;
+  }
+
+  // Decorator positioning (rendered before close button in DOM for correct focus order)
+  .#{$block-class}__decorator {
+    position: absolute;
+    z-index: 1;
+    inset-block-start: $spacing-03;
+    inset-inline-end: $spacing-09;
+  }
+
   &.#{$block-class}--wide
     .#{carbon-config.$prefix}--modal-header__heading.#{$block-class}__heading {
     @include type.type-style('heading-04');

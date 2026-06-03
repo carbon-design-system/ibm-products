@@ -101,8 +101,11 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   protected firstUpdated() {
     this.updateHeaderOffset();
-    registerFocusableContainers(this.shadowRoot);
-    registerFocusableContainers(this);
+    // Register with the current tearsheet's uniqueId
+    const uniqueId = tearsheetSignal.get().uniqueId;
+    if (uniqueId) {
+      registerFocusableContainers(this.shadowRoot, uniqueId);
+    }
   }
 
   protected updated(_changedProperties: PropertyValues) {

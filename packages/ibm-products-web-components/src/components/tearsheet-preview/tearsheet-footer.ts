@@ -50,14 +50,26 @@ class CDSTearsheetFooter extends SignalWatcher(HostListenerMixin(LitElement)) {
   @query('c4p-action-set')
   private actionSetElement?: HTMLElement;
 
+  private _actionSetRegistered = false;
+
   protected firstUpdated(_changedProperties: PropertyValues): void {
-    registerFocusableContainers(this);
+    // Register with the current tearsheet's uniqueId
+    const uniqueId = tearsheetSignal.get().uniqueId;
+    if (uniqueId) {
+      registerFocusableContainers(this, uniqueId);
+    }
   }
 
   protected updated(_changedProperties: PropertyValues): void {
-    // Register action-set shadow root after it's rendered
-    if (this.actionSetElement?.shadowRoot) {
-      registerFocusableContainers(this.actionSetElement.shadowRoot);
+    // Register action-set shadow root after it's rendered (only once)
+    const uniqueId = tearsheetSignal.get().uniqueId;
+    if (
+      this.actionSetElement?.shadowRoot &&
+      uniqueId &&
+      !this._actionSetRegistered
+    ) {
+      registerFocusableContainers(this.actionSetElement.shadowRoot, uniqueId);
+      this._actionSetRegistered = true;
     }
   }
 

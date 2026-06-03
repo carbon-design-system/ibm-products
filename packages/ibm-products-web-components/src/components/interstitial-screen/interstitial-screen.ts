@@ -22,7 +22,10 @@ import {
   updateInterstitialDetailsSignal,
 } from './interstitial-screen-context';
 import HostListener from '@carbon/web-components/es/globals/decorators/host-listener';
-import { trapFocus } from '../../utilities/manageFocusTrap/manageFocusTrap';
+import {
+  trapFocus,
+  clearFocusableContainers,
+} from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 export const blockClass = `${prefix}--interstitial-screen`;
 
@@ -78,6 +81,7 @@ class CDSInterstitialScreen extends SignalWatcher(
     const { carouselAPI } = interstitialDetailsSignal.get();
     carouselAPI?.destroyEvents?.();
     this._trapFocusAPI?.cleanup();
+    clearFocusableContainers();
   }
   firstUpdated() {
     this.requestUpdate(); // Ensure re-render

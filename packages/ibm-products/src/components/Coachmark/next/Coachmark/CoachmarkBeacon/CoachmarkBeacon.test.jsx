@@ -31,12 +31,12 @@ const renderCoachmarkWithBeacon = ({ ...rest } = {}) =>
         {...rest}
       ></CoachmarkBeacon>
       <Coachmark.Content>
-        <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-        <Coachmark.Content.Body>
+        <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
+        <Coachmark.ContentBody>
           <h2>Hello World</h2>
           <p>this is a description test</p>
           <Button size="sm">Done</Button>
-        </Coachmark.Content.Body>
+        </Coachmark.ContentBody>
       </Coachmark.Content>
     </Coachmark>
   );
@@ -68,7 +68,7 @@ describe(componentName, () => {
     renderCoachmarkWithBeacon({
       label: testingLabel,
     });
-    screen.getByLabelText(testingLabel)[1];
+    screen.getAllByLabelText(testingLabel)[1];
   });
 
   it('forwards a ref to an appropriate node', () => {

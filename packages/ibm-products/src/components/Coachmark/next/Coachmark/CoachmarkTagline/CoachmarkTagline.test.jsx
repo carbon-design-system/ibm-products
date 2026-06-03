@@ -32,12 +32,12 @@ const renderCoachmarkWithTagline = ({ ...rest } = {}) =>
         {...rest}
       ></CoachmarkTagline>
       <Coachmark.Content>
-        <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-        <Coachmark.Content.Body>
+        <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
+        <Coachmark.ContentBody>
           <h2>Hello World</h2>
           <p>this is a description test</p>
           <Button size="sm">Done</Button>
-        </Coachmark.Content.Body>
+        </Coachmark.ContentBody>
       </Coachmark.Content>
     </Coachmark>
   );

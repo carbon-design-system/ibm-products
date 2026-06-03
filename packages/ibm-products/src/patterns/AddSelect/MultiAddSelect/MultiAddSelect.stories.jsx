@@ -10,6 +10,7 @@ import styles from '../_story-styles.scss?inline';
 import DocsPage from './MultiAddSelect.mdx';
 import { MultiAddSelectDefault } from '../example/preview-components/MultiAddSelectDefault/MultiAddSelectDefault';
 import { MultiAddSelectWithHierarchyPreview } from '../example/preview-components/MultiAddSelectWithHierarchy/MultiAddSelectWithHierarchy';
+import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
 
 export default {
   title: 'Patterns/Add and select/MultiAddSelect',
@@ -47,6 +48,11 @@ export const Overview = {
           <strong>With Hierarchy</strong> - Multi-selection with hierarchical
           navigation and recursive columns
         </li>
+        <li>
+          <strong>With Hierarchy (No Select All)</strong> - Multi-selection with
+          hierarchical navigation but without column-level select-all
+          checkboxes. Only individual items can be selected.
+        </li>
       </ul>
       <h2>Component structure</h2>
       <p>
@@ -68,3 +74,9 @@ export const WithHierarchy = {
 };
 
 WithHierarchy.storyName = 'With Hierarchy';
+
+export const WithHierarchyNoSelectAll = {
+  render: () => <MultiAddSelectWithHierarchyNoSelectAllPreview />,
+};
+
+WithHierarchyNoSelectAll.storyName = 'With Hierarchy (No Select All)';

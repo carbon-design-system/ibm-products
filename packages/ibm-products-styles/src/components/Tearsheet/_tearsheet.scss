@@ -352,6 +352,12 @@ $motion-duration: $duration-moderate-02;
     z-index: 1;
     inset-block-start: $spacing-03;
     inset-inline-end: $spacing-09;
+
+    // Add margin to AI label and slug buttons for proper spacing
+    .#{carbon-config.$prefix}--ai-label__button--sm,
+    .#{carbon-config.$prefix}--slug__button--sm {
+      margin: $spacing-03 $spacing-05 0 0;
+    }
   }
 
   &.#{$block-class}--wide

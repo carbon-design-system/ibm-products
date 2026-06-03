@@ -346,6 +346,101 @@ export class AddSelectData {
   }
 
   /**
+   * Check if an item has any selected descendants
+   * @param id - The item id
+   * @param selectedIds - Set of selected item IDs
+   * @returns true if any descendant is selected, false otherwise
+   */
+  hasSelectedDescendants(id: string, selectedIds: Set<string>): boolean {
+    const item = this.itemMap.get(id);
+    if (!item?.children?.entries) {
+      return false;
+    }
+
+    return item.children.entries.some(
+      (child) =>
+        selectedIds.has(child.id) ||
+        this.hasSelectedDescendants(child.id, selectedIds)
+    );
+  }
+
+  /**
+   * Check if all descendants of an item are selected
+   * @param id - The item id
+   * @param selectedIds - Set of selected item IDs
+   * @returns true if all descendants are selected, false otherwise
+   */
+  allDescendantsSelected(id: string, selectedIds: Set<string>): boolean {
+    const item = this.itemMap.get(id);
+    if (!item) {
+      return false;
+    }
+
+    if (!item.children?.entries || item.children.entries.length === 0) {
+      return selectedIds.has(item.id);
+    }
+
+    return item.children.entries.every(
+      (child) =>
+        selectedIds.has(child.id) &&
+        this.allDescendantsSelected(child.id, selectedIds)
+    );
+  }
+
+  /**
+   * Get all descendant IDs from an item (including the item itself)
+   * @param id - The item id
+   * @returns Array of all descendant IDs including the item itself
+   */
+  getAllDescendantIds(id: string): string[] {
+    const item = this.itemMap.get(id);
+    if (!item) {
+      return [];
+    }
+
+    const ids: string[] = [id];
+
+    if (item.children?.entries) {
+      item.children.entries.forEach((child) => {
+        ids.push(...this.getAllDescendantIds(child.id));
+      });
+    }
+
+    return ids;
+  }
+
+  /**
+   * Get only top-level selected items (items without selected ancestors)
+   * @param selectedIds - Set of selected item IDs
+   * @returns Array of top-level selected items
+   */
+  getTopLevelSelectedItems(selectedIds: Set<string>): AddSelectItem[] {
+    const topLevelItems: AddSelectItem[] = [];
+    const processedIds = new Set<string>();
+
+    // Helper to check if any ancestor is selected
+    const hasSelectedAncestor = (itemId: string): boolean => {
+      const parents = this.getItemParents(itemId);
+      return parents.some((parent) => selectedIds.has(parent.id));
+    };
+
+    // Collect all selected items that don't have a selected ancestor
+    selectedIds.forEach((id) => {
+      if (!processedIds.has(id) && !hasSelectedAncestor(id)) {
+        const item = this.itemMap.get(id);
+        if (item) {
+          topLevelItems.push(item);
+          // Mark all descendants as processed
+          const descendantIds = this.getAllDescendantIds(id);
+          descendantIds.forEach((descId) => processedIds.add(descId));
+        }
+      }
+    });
+
+    return topLevelItems;
+  }
+
+  /**
    * Build internal maps for efficient lookups
    * @private
    */

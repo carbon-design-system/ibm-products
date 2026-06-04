@@ -160,6 +160,7 @@ FlyoutBatch.args = {
   emptyStateDescription:
     'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
   filterProps: {
+    clearFiltersText: 'Clear filters',
     variation: 'flyout',
     updateMethod: 'batch',
     primaryActionLabel: 'Apply',

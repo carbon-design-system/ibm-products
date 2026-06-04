@@ -1,15 +1,16 @@
 //
-// Copyright IBM Corp. 2024, 2024
+// Copyright IBM Corp. 2024, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 // Standard imports.
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-
-@use '@carbon/styles/scss/utilities' as *;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--search-bar;
@@ -19,7 +20,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--search-bar;
   display: flex;
 
   .#{c4p-settings.$pkg-prefix}--search-bar__scopes {
-    .#{c4p-settings.$carbon-prefix}--label {
+    .#{carbon-config.$prefix}--label {
       position: absolute;
     }
   }

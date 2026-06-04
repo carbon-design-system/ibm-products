@@ -1,13 +1,12 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import babelJest from 'babel-jest';
 
-const { default: babelJest } = require('babel-jest');
 const { createTransformer } = babelJest;
 
 const babelOptions = {
@@ -36,4 +35,4 @@ const babelOptions = {
   ],
 };
 
-module.exports = createTransformer(babelOptions);
+export default createTransformer(babelOptions);

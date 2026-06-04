@@ -3,3 +3,7 @@
 # be requested for review when someone opens a pull request.
 
 * @carbon-design-system/carbon-for-ibm-products-reviewers
+
+# Admins and leads should be notified of changes to these.
+# This should always be the last entry in this file.
+**/AGENTS.md @carbon-design-system/carbon-for-ibm-products-reviewers

@@ -57,7 +57,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__item-option__option {
   display: grid;
   cursor: pointer;
+  inline-size: 100%;
   min-block-size: 2rem;
+  min-inline-size: 0;
   padding-inline: $spacing-05;
 }
 
@@ -85,6 +87,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   display: flex;
   align-items: center;
   block-size: 100%;
+  inline-size: 100%;
+  min-inline-size: 0;
 }
 
 .#{$block-class}__item-option__option-label {
@@ -92,6 +96,18 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   overflow: hidden;
   align-items: center;
   column-gap: $spacing-03;
+  inline-size: 100%;
+  min-inline-size: 0;
+
+  > svg {
+    flex-shrink: 0;
+  }
+}
+
+.#{$block-class}__item-option__option-label-text {
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-inline-size: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

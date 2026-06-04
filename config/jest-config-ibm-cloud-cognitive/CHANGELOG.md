@@ -1,3 +1,44 @@
+## `@jest-config-ibm-cloud-cognitive@1.50.0`
+### Housekeeping :house:
+- chore: upgrade jest config to pure esm (#9407)
+- chore(storybook): upgrade Storybook to 10 (#9392)
+
+## `@jest-config-ibm-cloud-cognitive@1.49.0`
+### Bug fixes :bug:
+- fix: remove unwanted paths from code coverage report (#9363)
+- fix: security issues uuid, axios,basic-ftp (#9351)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9347)
+
+## `@jest-config-ibm-cloud-cognitive@1.44.0`
+### Bug fixes :bug:
+- fix: delete tags and restore vesions to retry release 5
+- fix: delete tags and restore vesions to retry release 4
+- fix: delete tags and restore vesions to retry release 3
+- fix: delete tags and restore vesions to retry release 2
+- fix: delete tags and restore vesions to retry release
+- fix: add resolutions and update accessibilioty checker (#9028)
+
+## `@jest-config-ibm-cloud-cognitive@1.41.0`
+### Bug fixes :bug:
+- fix: convert `babel` and `jest` config packages to ESM (#8782)
+
+## `@jest-config-ibm-cloud-cognitive@1.40.0`
+### Bug fixes :bug:
+- fix: rc clean ups
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+
+### Housekeeping :house:
+- chore: retry prerelease publish other packages
+
 ## `@jest-config-ibm-cloud-cognitive@1.38.0`
 ### Housekeeping :house:
 - test(PageHeader): react tests clean up with `composeStory` (#8579)

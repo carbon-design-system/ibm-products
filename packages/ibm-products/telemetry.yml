@@ -45,6 +45,7 @@ collect:
         - breadcrumbs
         - button
         - buttonProps
+        - buttonSize
         - cancelButtonText
         - caret
         - cellSize
@@ -88,7 +89,6 @@ collect:
         - displayMetalPanel
         - downloadLinkLabel
         - draggableClass
-        - dropShadow
         - element
         - emptyStateAction
         - emptyStateDescription
@@ -155,7 +155,6 @@ collect:
         - hideConditionSubGroupPreviewHandler
         - hideIcon
         - hideSelectAll
-        - highContrast
         - href
         - icon
         - iconDescription
@@ -254,6 +253,7 @@ collect:
         - onPrevious
         - onPrimaryButtonClick
         - onRemove
+        - onRemoveItem
         - onRequestClose
         - onRequestSubmit
         - onRowClick
@@ -376,7 +376,6 @@ collect:
         - tableId
         - tagline
         - tags
-        - target
         - theme
         - title
         - titleSize
@@ -427,7 +426,7 @@ collect:
         - searchText
         - setSearchText
         # ActionSet
-        - buttonSize
+        - disableStacking
         # AddSelectBody
         - defaultModifiers
         - globalFilterOpts
@@ -531,6 +530,7 @@ collect:
         - noActionIcons
         # Carousel
         - disableArrowScroll
+        - disableResetOnResize
         - fadedEdgeColor
         - isScrollMode
         - onChangeIsScrollable
@@ -545,13 +545,17 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
+        - dropShadow
         - floating
+        - highContrast
         - isOpenByDefault
         - overlayClassName
         - overlayKind
         - overlayRef
         - position
         - positionTune
+        - target
+        - triggerRef
         # CoachmarkDragbar
         - a11yKeyboardHandler
         - onDrag
@@ -659,7 +663,10 @@ collect:
         - inheritTypography
         - invalidLabel
         - onSave
+        - readOnlyLabel
+        - readOnlyToggleTipText
         - saveLabel
+        - toggleTipAlignment
         # EditTearsheet
         - onFormChange
         # EditUpdateCards
@@ -738,6 +745,7 @@ collect:
         - fileDropHeader
         - fileDropLabel
         - fileUploadLabel
+        - hideInputLabel
         - inputButtonIcon
         - inputButtonText
         - inputId
@@ -856,6 +864,9 @@ collect:
         - hasBackgroundAlways
         - hasCollapseHeaderToggle
         - narrowGrid
+        - onContentActionsClipped
+        - onContentFullyCollapsed
+        - onTitleClipped
         - pageActionsMenuOptionsClass
         - pageActionsOverflowLabel
         - withoutBackground
@@ -865,10 +876,15 @@ collect:
         - pageActionsFlush
         # PageHeaderBreadcrumbOverflow
         - renderOverflowBreadcrumb
+        # PageHeaderBreadcrumbPageActions
+        - buttonKind
+        - overflowMenuLabel
         # PageHeaderContent
         - contextualActions
         # PageHeaderContentPageActions
         - menuButtonLabel
+        # PageHeaderHeroImage
+        - objectFit
         # PageHeaderTagOverflow
         - renderOverflowTag
         - renderPopoverContent
@@ -953,6 +969,8 @@ collect:
         - tagComponent
         # Tearsheet
         - containerClassName
+        - disablePortal
+        - keepMounted
         - summaryContentWidth
         - verticalGap
         # TearsheetHeader
@@ -964,6 +982,9 @@ collect:
         # TearsheetHeaderContent
         - titleEnd
         - titleStart
+        # TearsheetPresence
+        - _autoEnablePresence
+        - _presenceId
         # TearsheetWithSteps
         - progressIndicator
         - setOpen
@@ -1037,6 +1058,10 @@ collect:
         - order-7-cyan
         - order-8-gray
         - order-9-green
+        # General - buttonSize
+        - lg
+        - md
+        - sm
         # General - cellSize
         - lg
         - md
@@ -1233,6 +1258,15 @@ collect:
         - low
         - medium
         - unknown
+        # EditInPlace - toggleTipAlignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
         # ExampleComponent - primaryKind
         - danger
         - primary
@@ -1248,6 +1282,19 @@ collect:
         - short
         # PageHeader - fullWidthGrid
         - xl
+        # PageHeaderBreadcrumbPageActions - buttonKind
+        - danger
+        - danger--ghost
+        - danger--tertiary
+        - ghost
+        - primary
+        - secondary
+        - tertiary
+        # PageHeaderHeroImage - objectFit
+        - contain
+        - cover
+        - fill
+        - none
         # StackProvider - stackStepSize
         - lg
         - md
@@ -1257,9 +1304,6 @@ collect:
         - vertical
   npm:
     dependencies: null
-  js:
-    functions: {}
-    tokens: null
   js:
     functions: {}
     tokens: null

@@ -1,17 +1,22 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import type { StorybookConfig } from '@storybook/web-components-vite';
+
 import { mergeConfig } from 'vite';
-import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
-import { getAutoTrack } from '../../../scripts/get-auto-track-script';
+import { getAutoTrack } from '../../../scripts/get-auto-track-script.js';
+
+const configDir = fileURLToPath(new URL('.', import.meta.url));
 
 const stories = glob.sync(
   [
@@ -21,15 +26,25 @@ const stories = glob.sync(
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   {
-    ignore: ['../src/**/docs/*.mdx'],
-    cwd: __dirname,
+    ignore: [
+      '../src/**/docs/*.mdx',
+      // TODO: Enable add-select stories once the components are updated to be equivalent to their React counterpart
+      '../src/components/add-select/**/*.stories.*',
+      '../src/components/add-select/**/*.mdx',
+      '../src/patterns/add-select/**/*.stories.*',
+      '../src/patterns/add-select/**/*.mdx',
+    ],
+    cwd: configDir,
   }
 );
-const config = {
+
+const config: StorybookConfig = {
   stories: stories,
   addons: [
+    '@storybook/addon-a11y',
+    'storybook-addon-accessibility-checker',
     {
-      name: getAbsolutePath('@storybook/addon-docs'),
+      name: '@storybook/addon-docs',
       options: {
         mdxPluginOptions: {
           mdxCompileOptions: {
@@ -45,11 +60,9 @@ const config = {
     options: {},
   },
   features: {
-    previewCsfV3: true,
-    buildStoriesJson: true,
     interactions: false, // disable Interactions tab
   },
-  managerHead: (head: string) => {
+  managerHead: (head) => {
     return `
       ${head}
       ${
@@ -66,6 +79,12 @@ const config = {
         include: ['@storybook/web-components-vite'],
         exclude: ['lit', 'lit-html'],
       },
+      css: {
+        transformer: 'postcss',
+      },
+      resolve: {
+        preserveSymlinks: true,
+      },
     });
   },
   docs: {
@@ -74,7 +93,3 @@ const config = {
 };
 
 export default config;
-
-function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, 'package.json')));
-}

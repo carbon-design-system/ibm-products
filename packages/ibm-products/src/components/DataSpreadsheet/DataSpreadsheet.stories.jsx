@@ -9,12 +9,13 @@ import React, { useMemo, useState } from 'react';
 import { previewCandidate__DataSpreadsheet as DataSpreadsheet } from '..';
 import { generateData } from './utils/generateData';
 import mdx from './DataSpreadsheet.mdx';
+import { Annotation } from '../../../.storybook/Annotation';
 
 import styles from './_storybook-styles.scss?inline';
 import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 export default {
-  title: 'Preview Candidate/DataSpreadsheet',
+  title: 'Deprecated/DataSpreadsheet',
   component: DataSpreadsheet,
   tags: ['autodocs'],
   argTypes: {
@@ -30,10 +31,28 @@ export default {
   },
   parameters: {
     styles,
+    chromatic: { disableSnapshot: true },
     docs: {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version.
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
 };
 
 const NumericLayout = ({ value }) => {

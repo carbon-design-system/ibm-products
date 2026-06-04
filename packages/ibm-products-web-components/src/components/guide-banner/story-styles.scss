@@ -5,15 +5,26 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 
-.body-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+$horizontal-margin: $spacing-09;
+
+.body {
+  color: $text-primary;
+
+  &-elm {
+    inline-size: 600px;
+    padding-inline-start: $horizontal-margin;
+  }
 }
 
-.body-elm {
-  padding: $spacing-05;
-  color: $gray-10;
+.footer {
+  display: flex;
+  justify-content: space-between;
+  inline-size: 100%;
+
+  &-left .guide-banner-story__toggle-button {
+    margin-inline-start: $spacing-07;
+  }
 }

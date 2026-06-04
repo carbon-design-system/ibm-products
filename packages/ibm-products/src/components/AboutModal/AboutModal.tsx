@@ -11,7 +11,6 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
-  Theme,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
 // Import portions of React that are needed.
@@ -198,11 +197,9 @@ export const AboutModal = React.forwardRef(
             </div>
           </ModalBody>
           {additionalInfo && (
-            <Theme theme="g100">
-              <ModalFooter className={`${blockClass}__footer`}>
-                {additionalInfo}
-              </ModalFooter>
-            </Theme>
+            <ModalFooter className={`${blockClass}__footer`}>
+              {additionalInfo}
+            </ModalFooter>
           )}
         </ComposedModal>
       </FeatureFlags>

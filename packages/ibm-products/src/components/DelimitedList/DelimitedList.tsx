@@ -44,6 +44,7 @@ export interface DelimitedListProps extends PropsWithChildren {
 /**
  * `DelimitedList` converts an array of items into a single line of
  * comma-separated values.
+ * @deprecated This component is deprecated and will be removed in the next major version.
  */
 export const DelimitedList = React.forwardRef<
   HTMLDivElement,
@@ -76,6 +77,12 @@ export const DelimitedList = React.forwardRef<
     );
   }
 );
+
+/**@ts-ignore*/
+DelimitedList.deprecated = {
+  level: 'warn',
+  details: `${componentName} is deprecated and will be removed in the next major version`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 

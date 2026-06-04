@@ -37,6 +37,7 @@ export default {
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
+    chromatic: { disableSnapshot: true },
     styles,
     docs: {
       page: () => (

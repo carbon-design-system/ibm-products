@@ -15,7 +15,7 @@ import {
   HeaderGlobalBar,
   HeaderGlobalAction,
 } from '@carbon/react';
-import { User, Notification, Switcher } from '@carbon/react/icons';
+import { User, Notification, Switcher, Close } from '@carbon/react/icons';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import styles from './_storybook-styles.scss?inline';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -79,9 +79,6 @@ export default {
   parameters: {
     styles,
     layout: 'fullscreen',
-    percy: {
-      waitForTimeout: 1000,
-    },
     docs: {
       page: DocsPage,
     },
@@ -213,7 +210,7 @@ const Template = (args) => {
               }, 0);
             }}
           >
-            <User size={20} />
+            {userOpen ? <Close size={20} /> : <User size={20} />}
           </HeaderGlobalAction>
           <HeaderPanel expanded={userOpen}>
             <div className={`${storyBlockClass}__header-panel`}>
@@ -242,7 +239,9 @@ const Template = (args) => {
               setSwitcherOpen(false);
             }}
           >
-            {!notificationsOpen && hasUnreadNotifications ? (
+            {notificationsOpen ? (
+              <Close size={20} />
+            ) : hasUnreadNotifications ? (
               <UnreadNotificationBell />
             ) : (
               <Notification size={20} />
@@ -289,7 +288,7 @@ const Template = (args) => {
               }, 0);
             }}
           >
-            <Switcher size={20} />
+            {switcherOpen ? <Close size={20} /> : <Switcher size={20} />}
           </HeaderGlobalAction>
           <HeaderPanel expanded={switcherOpen}>
             <div className={`${storyBlockClass}__header-panel`}>

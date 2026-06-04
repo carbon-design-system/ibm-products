@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,6 +10,8 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins' as *;
 
@@ -55,11 +57,12 @@ $block-class-modal: #{$block-class}-modal;
   .#{$block-class-overflow} {
     display: inline-block;
     vertical-align: bottom;
-    .#{$carbon-prefix}--tag.#{$carbon-prefix}--tag--interactive {
+    .#{carbon-config.$prefix}--tag.#{carbon-config.$prefix}--tag--interactive {
       border: 0;
     }
 
-    .#{$carbon-prefix}--popover .#{$carbon-prefix}--popover-content {
+    .#{carbon-config.$prefix}--popover
+      .#{carbon-config.$prefix}--popover-content {
       padding: $spacing-05;
     }
   }
@@ -70,7 +73,7 @@ $block-class-modal: #{$block-class}-modal;
     visibility: hidden;
   }
 
-  .#{$carbon-prefix}--tag {
+  .#{carbon-config.$prefix}--tag {
     margin-block-end: $spacing-03;
     margin-inline-end: $spacing-03;
   }
@@ -100,7 +103,7 @@ $block-class-modal: #{$block-class}-modal;
   }
 
   .#{$block-class-modal}__body {
-    .#{$carbon-prefix}--tag {
+    .#{carbon-config.$prefix}--tag {
       margin-block-end: $spacing-03;
       margin-inline-end: $spacing-03;
     }
@@ -114,9 +117,9 @@ $block-class-modal: #{$block-class}-modal;
     text-align: start;
   }
 
-  .#{$carbon-prefix}--link:active,
-  .#{$carbon-prefix}--link:active:visited,
-  .#{$carbon-prefix}--link:active:visited:hover {
+  .#{carbon-config.$prefix}--link:active,
+  .#{carbon-config.$prefix}--link:active:visited,
+  .#{carbon-config.$prefix}--link:active:visited:hover {
     color: $text-inverse;
   }
 
@@ -144,16 +147,13 @@ $block-class-modal: #{$block-class}-modal;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
-    .#{$carbon-prefix}--tag {
+    .#{carbon-config.$prefix}--tag {
     background-color: $background-inverse-hover;
-    // This adds spacing only for the overflow menu
-    // listing "tags" as opposed to just "labels".
-    margin-block-end: $spacing-01;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default
-    .#{$carbon-prefix}--tag {
+    .#{carbon-config.$prefix}--tag {
     @include type.type-style('body-compact-01');
 
     display: block;
@@ -169,21 +169,23 @@ $block-class-modal: #{$block-class}-modal;
     white-space: nowrap;
   }
 
-  .#{$block-class-overflow}__tag .#{$carbon-prefix}--tag__close-icon {
-    // undo override by .#{$carbon-prefix}--tooltip button
+  .#{$block-class-overflow}__tag .#{carbon-config.$prefix}--tag__close-icon {
+    // undo override by .#{carbon-config.$prefix}--tooltip button
     padding: 0;
   }
 
-  .#{$block-class-overflow}__tag .#{$carbon-prefix}--tag--high-contrast {
+  .#{$block-class-overflow}__tag .#{carbon-config.$prefix}--tag--high-contrast {
     background-color: $background;
     color: $text-primary;
   }
 
-  .#{$block-class-overflow}__tag .#{$carbon-prefix}--tag__close-icon:hover {
+  .#{$block-class-overflow}__tag
+    .#{carbon-config.$prefix}--tag__close-icon:hover {
     background-color: $background-hover;
   }
 
-  .#{$block-class-overflow}__tag .#{$carbon-prefix}--tag__close-icon:focus {
+  .#{$block-class-overflow}__tag
+    .#{carbon-config.$prefix}--tag__close-icon:focus {
     box-shadow: inset 0 0 0 $spacing-01 $focus;
   }
 }

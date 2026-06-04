@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/components/button/tokens' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion';
+@use '@carbon/styles/scss/config' as carbon-config;
 
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
@@ -74,9 +75,7 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fi
   padding-block: $spacing-06;
 }
 
-.#{$block-class}
-  .#{$block-class}__content
-  .#{c4p-settings.$carbon-prefix}--css-grid {
+.#{$block-class} .#{$block-class}__content .#{carbon-config.$prefix}--css-grid {
   margin-inline-start: 0;
   padding-inline: $spacing-03;
 }
@@ -86,23 +85,23 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fi
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--btn-set
-  .#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--disabled {
+  .#{carbon-config.$prefix}--btn-set
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--disabled {
   box-shadow: -0.0625rem 0 0 0 $button-separator;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav--ux {
+.#{$block-class} .#{carbon-config.$prefix}--side-nav--ux {
   position: initial;
   background-color: transparent;
   inline-size: 100%;
   max-inline-size: 100%;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav__link:hover {
+.#{$block-class} .#{carbon-config.$prefix}--side-nav__link:hover {
   cursor: pointer;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav__overlay-active {
+.#{$block-class} .#{carbon-config.$prefix}--side-nav__overlay-active {
   display: none;
 }
 
@@ -125,7 +124,7 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fi
   margin-block-end: $spacing-06;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--fieldset {
+.#{$block-class} .#{carbon-config.$prefix}--fieldset {
   margin-block-end: 0;
 }
 

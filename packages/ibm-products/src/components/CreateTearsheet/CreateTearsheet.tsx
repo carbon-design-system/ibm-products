@@ -53,6 +53,7 @@ export interface StepsContextType {
   setOnPrevious: (fn: any) => void;
   setOnNext: (fn: any) => void;
   setOnMount: (fn: any) => void;
+  setSecondaryButtonDisabled?: Dispatch<SetStateAction<boolean>>;
   setStepData: Dispatch<SetStateAction<Step[]>>;
   stepData: Step[];
 }
@@ -231,6 +232,8 @@ export const CreateTearsheet = forwardRef(
     const [onPrevious, setOnPrevious] = useState();
     const [onNext, setOnNext] = useState();
     const [onMount, setOnMount] = useState();
+    const [secondaryButtonDisabled, setSecondaryButtonDisabled] =
+      useState(false);
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
@@ -302,6 +305,7 @@ export const CreateTearsheet = forwardRef(
       submitButtonText,
       nextButtonText,
       isSubmitting,
+      secondaryButtonDisabled,
       componentBlockClass: blockClass,
       experimentalSecondarySubmit,
       experimentalSecondarySubmitText: experimentalSecondarySubmit?.labelText
@@ -351,6 +355,7 @@ export const CreateTearsheet = forwardRef(
                 setOnPrevious: (fn) => setOnPrevious(() => fn),
                 setOnNext: (fn) => setOnNext(() => fn),
                 setOnMount: (fn) => setOnMount(() => fn),
+                setSecondaryButtonDisabled,
                 setStepData,
                 stepData,
               }}

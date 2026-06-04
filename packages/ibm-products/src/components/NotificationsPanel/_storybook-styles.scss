@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/themes';
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/config' as carbon-config;
 
 $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
 
@@ -29,7 +30,7 @@ $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
   text-align: center;
 }
 
-.cds--header__global {
+.#{c4p-settings.$carbon-prefix}--header__global {
   z-index: 2;
 }
 

@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cancel incomplete runs except the latest
-        uses: styfle/cancel-workflow-action@bdaa46e4662006504ca6b0cfb7488010126dc98c # cspell:disable-line
+        uses: styfle/cancel-workflow-action@3155a141048f8f89c06b4cdae32e7853e97536bc # cspell:disable-line
         with:
           all_but_latest: true
           workflow_id: ${{ github.event.workflow.id }}

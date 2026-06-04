@@ -67,6 +67,7 @@ export const ConditionBuilder = React.forwardRef(
       translateWithId,
       statementConfigCustom,
       onAddItem,
+      onRemoveItem,
       readOnly,
       ...rest
     }: ConditionBuilderProps,
@@ -89,6 +90,7 @@ export const ConditionBuilder = React.forwardRef(
         conditionBuilderRef={conditionBuilderRef}
         statementConfigCustom={statementConfigCustom}
         onAddItem={onAddItem}
+        onRemoveItem={onRemoveItem}
         readOnly={!!readOnly}
       >
         <div
@@ -256,9 +258,14 @@ ConditionBuilder.propTypes = {
    * User can optionally perform any validation and can stop add action if they return back {preventAdd:true}
    */
   onAddItem: PropTypes.func,
+  /**
+   * this is an optional callback triggered before removing any condition , subgroup, group or action.
+   * User can optionally perform any validation and can stop remove action if they return back {preventRemove:true}
+   */
+  onRemoveItem: PropTypes.func,
 
   /**
-   * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
+   * This will enable search in option popovers when option list length is more than this threshold
    */
   popOverSearchThreshold: PropTypes.number.isRequired,
 

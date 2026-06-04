@@ -7,11 +7,7 @@
 export { Tearsheet } from './Tearsheet';
 export { StackProvider, useStackContext } from './StackContext';
 export type { StackContextType } from './StackContext';
-export type {
-  TearsheetProps,
-  TearsheetComponentType,
-  FooterProps,
-} from './Tearsheet';
+export type { TearsheetProps, TearsheetComponentType } from './Tearsheet';
 export type {
   MainContentProps,
   SummaryContentProps,
@@ -28,3 +24,4 @@ export type {
   TearsheetHeaderActionsProps,
 } from './TearsheetHeaderActions';
 export type { TearsheetHeaderContentProps } from './TearsheetHeaderContent';
+export type { TearsheetFooterProps } from './TearsheetFooter';

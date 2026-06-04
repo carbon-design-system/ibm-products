@@ -1,3 +1,132 @@
+## `@carbon/ibm-products-styles@2.87.0`
+### Features :rocket:
+- feat: Replace Interstitial Screen internal carousel with Carbon utility carousel (#9399)
+
+### Bug fixes :bug:
+- fix(preview_PageHeader): fix header padding (#9440)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#9405)
+
+## `@carbon/ibm-products-styles@2.86.0`
+### Bug fixes :bug:
+- fix(TruncatedText): provide keyboard accessibility (#9245)
+- fix(preview_PageHeader): `HeroImage` not taking the full height (#9268)
+- fix(page-header): resolve scroller button overlapping issue (#9345)
+- fix: security issues uuid, axios,basic-ftp (#9351)
+- fix(preview_PageHeader): fix tag height (#9327)
+- fix(EditInPlace): resolve focus missing and few other issue (#9243)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9347)
+
+## `@carbon/ibm-products-styles@2.85.0`
+### Features :rocket:
+- feat(ConditionBuilder): title and text ellipsis of dropdown and default statement fix (#9252)
+- feat(coachmark): replaces bubble with popover (#9220)
+
+### Bug fixes :bug:
+- fix: correct header tab order and alignemnt issue (#9179)
+- fix(preview_PageHeader): make tabs,tags and collapse button responsive (#9278)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9257)
+- docs(changelog): update for v2.88.0-rc.0 (#9247)
+
+## `@carbon/ibm-products-styles@2.84.0`
+### Features :rocket:
+- feat(preview__PageHeader): implement callbacks for intesecting observers (#9087)
+
+### Bug fixes :bug:
+- fix(interstitialScreen): parity issues and small screens ui of action buttons (#9032)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.87.0-rc.0 (#9187)
+
+## `@carbon/ibm-products-styles@2.83.0`
+### Features :rocket:
+- feat(createFullPage): implemented as patterns in react (#9096)
+
+### Bug fixes :bug:
+- fix(SidePanel): visual issues - react (#9142)
+
+### Housekeeping :house:
+- chore(deps): update dependency glob to v13 (#9035)
+- chore(AGENTS.md): add AGENTS.md (#9172)
+
+## `@carbon/ibm-products-styles@2.82.0`
+### Features :rocket:
+- feat(preview_Tearsheet): add support for actions prop for footer (#9103)
+- feat: incorporate usePresence for preview_Tearsheet and doc updates (#9062)
+- feat: Composable Tearsheet webcomponent implementation (#8841)
+
+### Bug fixes :bug:
+- fix: make style specific to sidepanel in tearsheet (#9107)
+- fix(preview_PageHeader): resolve breadcrumb bar mobile view issues (#9072)
+- fix(NotificationPanel): fix notification border when focused (#9066)
+- fix(SidePanel): fix action buttons stacking in size 2xl (#9074)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9063)
+- chore(OptionsTile): refactor header (#9021)
+
+## `@carbon/ibm-products-styles@2.81.0`
+### Features :rocket:
+- feat(editinplace): add readOnly prop (#9007)
+
+### Bug fixes :bug:
+- fix: delete tags and restore vesions to retry release 5
+- fix: delete tags and restore vesions to retry release 4
+- fix: delete tags and restore vesions to retry release 3
+- fix: delete tags and restore vesions to retry release 2
+- fix: delete tags and restore vesions to retry release
+- fix: remove global selector (#9055)
+- fix(usePortalTarget): fix render portal use (#9018)
+
+### Housekeeping :house:
+- refactor(preview__PageHeader): separate child components to separate from `PageHeader.tsx` file (#8988)
+- docs(changelog): update for v2.84.0 (#9013)
+
+## `@carbon/ibm-products-styles@2.80.0`
+### Features :rocket:
+- feat: show Close icon at global header actions when expanded (#8933)
+- feat(tearsheetpresence): add tearsheet presence (#8929)
+
+### Bug fixes :bug:
+- fix(preview__PageHeader): resolve content actions responsive issue in < 1010px viewport (#8976)
+- fix(ActionBar): improve overflow items alignment and prevent icon shrinking (#8928)
+- fix: use carbon prefix directly from @carbon/styles package config (#8904)
+
+### Housekeeping :house:
+- chore: remove unwanted style changes (#8997)
+- build(deps): update to Carbon 11 compatible versions to latest (#8991)
+- build(performance): rolldown-vite integration (#8915)
+- build(deps): update to Carbon 11 compatible versions to latest (#8907)
+
+## `@carbon/ibm-products-styles@2.79.0`
+### Bug fixes :bug:
+- fix(#8831): apply icon-primary fill to breadcrumb and page header icons (#8846)
+- fix(checklist): title and chart title do not show tooltip when truncated (#8788)
+
+## `@carbon/ibm-products-styles@2.77.0`
+### Features :rocket:
+- feat: init guide banner component (#8513)
+
+### Bug fixes :bug:
+- fix: rc clean ups
+- fix: remove not needed tags and restore package.json
+- fix: restore all changes after deleting unnecessary tags
+- fix: stabilize npm package with rc
+- fix: restore npm token and add logs
+- fix: add permission for release start
+- fix: skip ci for next rc
+- fix: remove npm token to use OIDC and empty changes for re publish
+- fix: retry publish for rc.2
+
+### Housekeeping :house:
+- chore: retry prerelease publish other packages
+- build(deps): update Carbon 11 compatible versions to latest (#8726)
+
 ## `@carbon/ibm-products-styles@2.76.0`
 ### Features :rocket:
 - feat(Tearsheet): stacking, unit test, design review changes and fixes (#8563)

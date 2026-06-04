@@ -193,7 +193,7 @@ describe('c4p-about-modal', () => {
     element['_checkOverflow']();
     await element.updateComplete;
     expect(
-      container.classList.contains('c4p--about-modal-scroll-content')
+      container.classList.contains(`${carbonPrefix}--modal-scroll-content`)
     ).toBe(true);
   });
   it('No scrollable body if content fits', async () => {

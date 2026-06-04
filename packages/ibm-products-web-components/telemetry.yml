@@ -8,15 +8,22 @@ collect:
     elements:
       allowedAttributeNames:
         # General
+        - actions
         - align
         - autoalign
+        - button-size
         - close-icon-description
         - closeIconDescription
         - collapse-label
+        - collapseText
         - defaultOpen
         - description
         - expand-label
+        - expandText
+        - hide-close-button
         - id
+        - influencer-width
+        - is-flush
         - kind
         - label
         - lines
@@ -26,6 +33,7 @@ collect:
         - size
         - slot
         - title
+        - titleText
         - type
         - value
         - view-all-label
@@ -39,6 +47,16 @@ collect:
         - onc4p-about-modal-beingclosed
         - onc4p-about-modal-closed
         - version
+        # c4p-action-set
+        - disable-stacking
+        # c4p-big-number
+        - fraction-digits
+        - loading
+        - locale
+        - percentage
+        - total
+        - trending
+        - truncate
         # c4p-checklist
         - chart-label
         - chart-value
@@ -52,8 +70,25 @@ collect:
         - clickable
         - onc4p-checklist-item-clicked
         - status
+        # c4p-coachmark
+        - caret
+        - dropShadow
+        - floating
+        - highContrast
+        - onc4p-coachmark-closed
+        - onc4p-coachmark-opened
+        - position
         # c4p-coachmark-beacon
+        - expanded
         - onc4p-coachmark-beacon-clicked
+        # c4p-coachmark-header
+        - dragIconDescription
+        # c4p-coachmark-tagline
+        - onc4p-coachmark-tagline-close
+        - onc4p-coachmark-tagline-cta-click
+        # c4p-guide-banner
+        - onc4p-guide-banner-close
+        - onc4p-guide-banner-toggle
         # c4p-interstitial-screen
         - fullscreen
         - onc4p-interstitial-beingclosed
@@ -95,28 +130,46 @@ collect:
         - today-text
         - triggerButtonRef
         # c4p-options-tile
+        - locked
+        - lockedText
         - onc4p-options-tile-close
         - onc4p-options-tile-open
         - titleId
-        - titleText
+        - warn
+        - warnText
+        # c4p-page-header-actions-set
+        - actions-data
         # c4p-page-header-breadcrumb
         - border
         - content-actions-flush
         - page-actions-flush
+        # c4p-page-header-breadcrumbs-set
+        - breadcrumbs-data
+        - hiddenItems
         # c4p-page-header-content-text
         - subtitle
+        # c4p-page-header-hero-image
+        - object-fit
         # c4p-page-header-scroller
         - close-on-activation
-        - collapseText
         - enter-delay-ms
-        - expandText
         - leave-delay-ms
+        # c4p-page-header-tags-set
+        - tags-data
+        # c4p-preview-tearsheet
+        - container-class-name
+        - onc4p-preview-tearsheet-beingclosed
+        - onc4p-preview-tearsheet-closed
+        - selector-primary-focus
+        - selectors-floating-menus
+        - summary-content-width
+        - variant
+        - vertical-gap
         # c4p-side-panel
         - animate-title
         - close-icon-tooltip-alignment
         - condensed-actions
         - current-step
-        - hide-close-button
         - include-overlay
         - label-text
         - navigation-back-icon-description
@@ -130,10 +183,20 @@ collect:
         - aria-label
         - has-close-icon
         - influencer-placement
-        - influencer-width
         - onc4p-tearsheet-beingclosed
         - onc4p-tearsheet-closed
         - width
+        # c4p-tearsheet-header
+        - disable-header-collapse
+        - onc4p-tearsheet-header-close-button-clicked
+        # c4p-tearsheet-influencer
+        - influencer-panel-open
+        - oncds-tearsheet-influencer-closed
+        # c4p-tearsheet-stack
+        - stack-step-size
+        # c4p-tearsheet-summary-content
+        - oncds-tearsheet-summary-closed
+        - summary-panel-open
         # c4p-user-avatar
         - background-color
         - image
@@ -142,15 +205,23 @@ collect:
         - theme
         - tooltip-alignment
         - tooltip-text
-        # set-of-breadcrumbs
-        - breadcrumbs-data
-        - hiddenItems
-        # set-of-tags
-        - tags-data
+        # stacking-tearsheet-demo
+        - tearsheet-type
+        # step-tearsheet-preview
+        - horizontal
       allowedAttributeStringValues:
         # General - boolean attributes
         - "true"
         - "false"
+        # General - button-size
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        # General - influencer-width
+        - narrow
+        - wide
         # General - kind
         - "403"
         - "404"
@@ -162,6 +233,7 @@ collect:
         - unchecked
         # General - size
         - 2xl
+        - default
         - lg
         - md
         - sm
@@ -174,23 +246,29 @@ collect:
         - success
         - tooltip
         - warning
+        # c4p-page-header-hero-image - object-fit
+        - contain
+        - cover
+        - fill
+        - none
+        # c4p-preview-tearsheet - variant
+        - narrow
+        - wide
         # c4p-side-panel - placement
         - left
         - right
         # c4p-tearsheet - influencer-placement
         - left
         - right
-        # c4p-tearsheet - influencer-width
-        - narrow
-        - wide
         # c4p-tearsheet - width
         - narrow
         - wide
+        # c4p-tearsheet-stack - stack-step-size
+        - lg
+        - md
+        - sm
   npm:
     dependencies: null
-  js:
-    functions: {}
-    tokens: null
   js:
     functions: {}
     tokens: null

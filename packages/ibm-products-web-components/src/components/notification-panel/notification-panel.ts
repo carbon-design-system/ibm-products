@@ -134,18 +134,29 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     );
     this._markFirstNotification();
 
-    const slot = this.shadowRoot?.querySelector(
-      'slot[name="previous"]'
-    ) as HTMLSlotElement | null;
-    const slottedElements = slot?.assignedElements({ flatten: true }) || [];
-    for (const el of slottedElements) {
-      el.addEventListener('mouseenter', () => {
-        this._handleMouseEnter(el);
-      });
-      el.addEventListener('mouseleave', () => {
-        this._handleMouseLeave(el);
-      });
-    }
+    const addNotificationListeners = (slotName: string) => {
+      const slot = this.shadowRoot?.querySelector(
+        `slot[name="${slotName}"]`
+      ) as HTMLSlotElement | null;
+      const slottedElements = slot?.assignedElements({ flatten: true }) || [];
+      for (const el of slottedElements) {
+        el.addEventListener('mouseenter', () => {
+          this._handleMouseEnter(el);
+        });
+        el.addEventListener('mouseleave', () => {
+          this._handleMouseLeave(el);
+        });
+        el.addEventListener('focusin', () => {
+          this._handleFocusIn(el);
+        });
+        el.addEventListener('focusout', () => {
+          this._handleFocusOut(el);
+        });
+      }
+    };
+
+    addNotificationListeners('today');
+    addNotificationListeners('previous');
   }
 
   updated() {
@@ -251,13 +262,25 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
 
   private _handleMouseEnter(el: Element) {
     const next = el.nextElementSibling;
-    if (next?.tagName.toLowerCase() === 'c4p-notification') {
+    if (next?.tagName.toLowerCase() === `${prefix}-notification`) {
       next.classList.add(`${blockClass}__notification--next`);
     }
   }
   private _handleMouseLeave(el: Element) {
     const next = el.nextElementSibling;
-    if (next?.tagName.toLowerCase() === 'c4p-notification') {
+    if (next?.tagName.toLowerCase() === `${prefix}-notification`) {
+      next.classList.remove(`${blockClass}__notification--next`);
+    }
+  }
+  private _handleFocusIn(el: Element) {
+    const next = el.nextElementSibling;
+    if (next?.tagName.toLowerCase() === `${prefix}-notification`) {
+      next.classList.add(`${blockClass}__notification--next`);
+    }
+  }
+  private _handleFocusOut(el: Element) {
+    const next = el.nextElementSibling;
+    if (next?.tagName.toLowerCase() === `${prefix}-notification`) {
       next.classList.remove(`${blockClass}__notification--next`);
     }
   }

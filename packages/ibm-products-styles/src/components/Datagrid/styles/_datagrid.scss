@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2024
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,8 +10,10 @@
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/button/tokens' as *;
-@use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/breakpoint';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../../global/styles/project-settings' as c4p-settings;
 @use './variables' as *;
 
 .#{$block-class}__table-toolbar > section {
@@ -35,7 +37,7 @@
 
   &.#{$block-class}__vertical-align-center {
     .#{$block-class}__head {
-      .#{c4p-settings.$carbon-prefix}--table-header-label {
+      .#{carbon-config.$prefix}--table-header-label {
         display: flex;
         align-items: center;
         block-size: 100%;
@@ -54,8 +56,8 @@
       padding-block: 0;
     }
 
-    td.#{c4p-settings.$carbon-prefix}--table-column-checkbox,
-    th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
+    td.#{carbon-config.$prefix}--table-column-checkbox,
+    th.#{carbon-config.$prefix}--table-column-checkbox {
       /* stylelint-disable-next-line carbon/layout-use */
       padding-block-start: 0.6875rem;
 
@@ -72,7 +74,7 @@
     }
 
     .#{$block-class}__checkbox-cell {
-      th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
+      th.#{carbon-config.$prefix}--table-column-checkbox {
         display: flex;
         align-items: center;
         block-size: 100%;
@@ -81,22 +83,22 @@
     }
 
     &.#{$block-class}__variable-row-height {
-      &.#{c4p-settings.$carbon-prefix}--data-table--xs {
+      &.#{carbon-config.$prefix}--data-table--xs {
         .#{$block-class}__cell {
           padding-block: $spacing-01;
         }
       }
 
-      &.#{c4p-settings.$carbon-prefix}--data-table--sm,
-      &.#{c4p-settings.$carbon-prefix}--data-table--md {
+      &.#{carbon-config.$prefix}--data-table--sm,
+      &.#{carbon-config.$prefix}--data-table--md {
         .#{$block-class}__cell {
           /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
           padding-block: to-rem(7px) to-rem(6px);
         }
       }
 
-      &.#{c4p-settings.$carbon-prefix}--data-table--lg,
-      &.#{c4p-settings.$carbon-prefix}--data-table--xl {
+      &.#{carbon-config.$prefix}--data-table--lg,
+      &.#{carbon-config.$prefix}--data-table--xl {
         .#{$block-class}__cell {
           padding-block: $spacing-05;
         }
@@ -105,30 +107,30 @@
   }
 
   &.#{$block-class}__vertical-align-top {
-    &.#{c4p-settings.$carbon-prefix}--data-table--lg,
-    &.#{c4p-settings.$carbon-prefix}--data-table--xl {
+    &.#{carbon-config.$prefix}--data-table--lg,
+    &.#{carbon-config.$prefix}--data-table--xl {
       .#{$block-class}__cell {
         padding-block-start: $spacing-05;
       }
 
-      .#{c4p-settings.$carbon-prefix}--table-header-label {
+      .#{carbon-config.$prefix}--table-header-label {
         padding-block-start: $spacing-05;
       }
 
-      .#{c4p-settings.$carbon-prefix}--table-column-checkbox {
+      .#{carbon-config.$prefix}--table-column-checkbox {
         /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
         padding-block-start: to-rem(13px);
       }
     }
 
     &.#{$block-class}__variable-row-height {
-      &.#{c4p-settings.$carbon-prefix}--data-table--lg,
-      &.#{c4p-settings.$carbon-prefix}--data-table--xl {
+      &.#{carbon-config.$prefix}--data-table--lg,
+      &.#{carbon-config.$prefix}--data-table--xl {
         .#{$block-class}__cell {
           padding-block-end: $spacing-05;
         }
 
-        .#{c4p-settings.$carbon-prefix}--table-header-label {
+        .#{carbon-config.$prefix}--table-header-label {
           padding-block-end: $spacing-05;
         }
       }
@@ -162,11 +164,11 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__slug--row,
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__slug--row
   + .#{$block-class}__expanded-row {
@@ -176,7 +178,7 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__slug--row {
   /* stylelint-disable-next-line carbon/theme-use */
@@ -184,27 +186,27 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__slug--row:hover,
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
-  tr.#{$block-class}__slug--row.#{c4p-settings.$carbon-prefix}--data-table--selected:hover,
+  tr.#{$block-class}__slug--row.#{carbon-config.$prefix}--data-table--selected:hover,
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__slug--row.#{$block-class}__carbon-row-expanded:hover
   + .#{$block-class}__expanded-row,
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__expandable-row--hover.#{$block-class}__slug--row {
   @include ai-table-gradient('hover');
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__expandable-row--hover.#{$block-class}__slug--row
   td {
@@ -212,15 +214,13 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
-  tr.#{$block-class}__slug--row.#{c4p-settings.$carbon-prefix}--data-table--selected {
+  tr.#{$block-class}__slug--row.#{carbon-config.$prefix}--data-table--selected {
   @include ai-table-gradient('selected');
 }
 
-.#{$block-class}
-  th.#{$block-class}__with-slug
-  .#{c4p-settings.$carbon-prefix}--slug {
+.#{$block-class} th.#{$block-class}__with-slug .#{carbon-config.$prefix}--slug {
   margin-inline-start: $spacing-03;
 }
 /* This section to be removed after support for slug dropped  - end */
@@ -235,11 +235,11 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__ai-label--row,
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__ai-label--row
   + .#{$block-class}__expanded-row {
@@ -249,34 +249,34 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__ai-label--row {
   box-shadow: inset 1px 0 $ai-border-strong;
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__ai-label--row:hover,
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
-  tr.#{$block-class}__ai-label--row.#{c4p-settings.$carbon-prefix}--data-table--selected:hover,
+  tr.#{$block-class}__ai-label--row.#{carbon-config.$prefix}--data-table--selected:hover,
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__ai-label--row.#{$block-class}__carbon-row-expanded:hover
   + .#{$block-class}__expanded-row,
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__expandable-row--hover.#{$block-class}__ai-label--row {
   @include ai-table-gradient('hover');
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr.#{$block-class}__expandable-row--hover.#{$block-class}__ai-label--row
   td {
@@ -284,15 +284,15 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
-  tr.#{$block-class}__ai-label--row.#{c4p-settings.$carbon-prefix}--data-table--selected {
+  tr.#{$block-class}__ai-label--row.#{carbon-config.$prefix}--data-table--selected {
   @include ai-table-gradient('selected');
 }
 
 .#{$block-class}
   th.#{$block-class}__with-ai-label
-  .#{c4p-settings.$carbon-prefix}--slug {
+  .#{carbon-config.$prefix}--slug {
   margin-inline-start: $spacing-03;
 }
 
@@ -301,13 +301,13 @@
   inline-size: 100%;
   padding-block-start: 0;
 
-  .#{c4p-settings.$carbon-prefix}--data-table-header__description {
+  .#{carbon-config.$prefix}--data-table-header__description {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  .#{c4p-settings.$carbon-prefix}--data-table-header__title {
+  .#{carbon-config.$prefix}--data-table-header__title {
     overflow: hidden;
     max-inline-size: 80ch;
     text-overflow: ellipsis;
@@ -318,7 +318,7 @@
     }
   }
 
-  .#{c4p-settings.$carbon-prefix}--data-table-content {
+  .#{carbon-config.$prefix}--data-table-content {
     block-size: 100%;
     inline-size: 100%;
     overflow-x: auto;
@@ -425,27 +425,27 @@
     background-color: $layer-hover-01;
   }
 
-  .#{c4p-settings.$carbon-prefix}--data-table--selected
+  .#{carbon-config.$prefix}--data-table--selected
     .#{$block-class}__left-sticky-column-cell,
-  .#{c4p-settings.$carbon-prefix}--data-table--selected
+  .#{carbon-config.$prefix}--data-table--selected
     .#{$block-class}__right-sticky-column-cell,
-  .#{c4p-settings.$carbon-prefix}--data-table--selected
+  .#{carbon-config.$prefix}--data-table--selected
     .#{$block-class}__checkbox-cell-sticky-left {
     /* stylelint-disable-next-line declaration-no-important */
     background-color: $layer-selected-01;
   }
 
-  .#{c4p-settings.$carbon-prefix}--select-input {
+  .#{carbon-config.$prefix}--select-input {
     -webkit-appearance: none; // could be fixed by post-css plugin
     appearance: none; // could be fixed by post-css plugin
   }
 
-  th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
+  th.#{carbon-config.$prefix}--table-column-checkbox {
     display: block;
   }
 
-  td.#{c4p-settings.$carbon-prefix}--table-column-checkbox,
-  th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
+  td.#{carbon-config.$prefix}--table-column-checkbox,
+  th.#{carbon-config.$prefix}--table-column-checkbox {
     /* stylelint-disable-next-line declaration-no-important */
     inline-size: $spacing-09 !important;
     /* stylelint-disable-next-line declaration-no-important */
@@ -463,7 +463,7 @@
 }
 
 .#{$block-class}__empty-state
-  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{carbon-config.$prefix}--data-table
   tbody
   tr:not([data-child-row]):hover {
   background: inherit;
@@ -513,7 +513,7 @@
 }
 
 .#{$block-class}__grid-container
-  table.#{$block-class}__table-simple.#{c4p-settings.$carbon-prefix}--data-table.#{$block-class}__table-is-resizing {
+  table.#{$block-class}__table-simple.#{carbon-config.$prefix}--data-table.#{$block-class}__table-is-resizing {
   overflow-y: hidden;
   @supports (overflow-block: hidden) {
     overflow-block: hidden;
@@ -548,22 +548,22 @@
 .#{$block-class}
   .#{$block-class}__carbon-row
   .#{$block-class}__actions-column-cell-non-sticky
-  .#{c4p-settings.$carbon-prefix}--btn--icon-only {
+  .#{carbon-config.$prefix}--btn--icon-only {
   opacity: 0;
 }
 
 .#{$block-class}
   .#{$block-class}__carbon-row:hover
   .#{$block-class}__actions-column-cell-non-sticky
-  .#{c4p-settings.$carbon-prefix}--btn--icon-only,
+  .#{carbon-config.$prefix}--btn--icon-only,
 .#{$block-class}
   .#{$block-class}__carbon-row
   .#{$block-class}__actions-column-cell-non-sticky
-  .#{c4p-settings.$carbon-prefix}--btn--icon-only:focus,
+  .#{carbon-config.$prefix}--btn--icon-only:focus,
 .#{$block-class}
   .#{$block-class}__carbon-row
   .#{$block-class}__actions-column-cell-non-sticky
-  .#{c4p-settings.$carbon-prefix}--btn--icon-only[aria-expanded='true'] {
+  .#{carbon-config.$prefix}--btn--icon-only[aria-expanded='true'] {
   opacity: 1;
 }
 
@@ -698,7 +698,7 @@
   }
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--data-table-header {
+.#{$block-class} .#{carbon-config.$prefix}--data-table-header {
   background: transparent;
 }
 
@@ -706,7 +706,7 @@
   display: flex;
   flex-wrap: wrap;
 
-  .#{c4p-settings.$carbon-prefix}--data-table-header {
+  .#{carbon-config.$prefix}--data-table-header {
     flex: 1 1 auto;
     padding-block-end: $spacing-05;
   }
@@ -717,11 +717,11 @@
     align-items: flex-end;
   }
 
-  .#{c4p-settings.$carbon-prefix}--table-toolbar {
+  .#{carbon-config.$prefix}--table-toolbar {
     background: transparent;
   }
 
-  .#{c4p-settings.$carbon-prefix}__table-container {
+  .#{carbon-config.$prefix}__table-container {
     flex: 1 1 100%;
   }
 
@@ -742,14 +742,14 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(
+  .#{carbon-config.$prefix}--data-table--selected:not(
     .#{$block-class}__active-row
   ) {
   position: relative;
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(
+  .#{carbon-config.$prefix}--data-table--selected:not(
     .#{$block-class}__active-row
   )::before {
   position: absolute;
@@ -762,13 +762,13 @@
 }
 
 .#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
-  .#{c4p-settings.$carbon-prefix}--batch-summary__para {
+  .#{carbon-config.$prefix}--batch-summary__para {
   white-space: nowrap;
 }
 
 .#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
-  .#{c4p-settings.$carbon-prefix}--batch-actions
-  .#{c4p-settings.$carbon-prefix}--batch-actions--active {
+  .#{carbon-config.$prefix}--batch-actions
+  .#{carbon-config.$prefix}--batch-actions--active {
   overflow-x: hidden;
   @supports (overflow-inline: hidden) {
     /* stylelint-disable-next-line declaration-property-value-disallowed-list */
@@ -799,7 +799,7 @@
   inline-size: 100%;
   min-inline-size: $spacing-09;
 
-  .#{c4p-settings.$carbon-prefix}--btn__icon {
+  .#{carbon-config.$prefix}--btn__icon {
     margin: 0;
   }
 }
@@ -815,7 +815,7 @@
   inline-size: $spacing-09;
 }
 
-.#{$block-class}__customize-columns-checkbox-wrapper.#{c4p-settings.$carbon-prefix}--form-item {
+.#{$block-class}__customize-columns-checkbox-wrapper.#{carbon-config.$prefix}--form-item {
   flex: 0 0 auto;
   margin-inline-end: $spacing-03;
 }
@@ -835,7 +835,7 @@
 
 .#{$block-class}__virtualScrollContainer {
   inline-size: 100%;
-  .#{c4p-settings.$carbon-prefix}--data-table-content {
+  .#{carbon-config.$prefix}--data-table-content {
     // overrides default scroll overflow as we handle overflow in thead and tbody separately for virtualScrollContainer variant
     overflow-x: hidden;
     @supports (overflow-inline: hidden) {
@@ -845,23 +845,23 @@
   }
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal {
+.#{$block-class} .#{carbon-config.$prefix}--modal {
   inline-size: 100%;
 }
 
-.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
+.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
   flex-shrink: 0;
   background-color: $interactive;
 }
 
-.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger
+.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger
   svg {
   fill: $background;
 }
 
-.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger:hover,
-.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{c4p-settings.$carbon-prefix}--overflow-menu--open:hover,
-.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
+.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger:hover,
+.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{carbon-config.$prefix}--overflow-menu--open:hover,
+.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{carbon-config.$prefix}--overflow-menu--open {
   background-color: $button-primary-hover;
 }
 
@@ -870,12 +870,12 @@
   background-color: $layer-02;
 }
 
-.#{$block-class}__toolbar-options.#{c4p-settings.$carbon-prefix}--overflow-menu-options::after {
+.#{$block-class}__toolbar-options.#{carbon-config.$prefix}--overflow-menu-options::after {
   background-color: transparent;
 }
 
 .#{$block-class}__mobile-toolbar-modal
-  .#{c4p-settings.$carbon-prefix}--modal-container {
+  .#{carbon-config.$prefix}--modal-container {
   position: absolute;
 }
 
@@ -899,20 +899,20 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--action-list
-  .#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$pkg-prefix}--button-menu {
+  .#{carbon-config.$prefix}--action-list
+  .#{carbon-config.$prefix}--btn.#{c4p-settings.$pkg-prefix}--button-menu {
   padding: 0;
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--noLabel
-  svg.#{c4p-settings.$carbon-prefix}--btn__icon {
+  .#{carbon-config.$prefix}--noLabel
+  svg.#{carbon-config.$prefix}--btn__icon {
   margin-inline-start: 0;
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--action-list
-  .#{c4p-settings.$carbon-prefix}--btn__icon {
+  .#{carbon-config.$prefix}--action-list
+  .#{carbon-config.$prefix}--btn__icon {
   margin-block-start: 0;
 }
 

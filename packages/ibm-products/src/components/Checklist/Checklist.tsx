@@ -64,7 +64,7 @@ export interface ChecklistProps {
   /**
    * Define both `chartLabel` and `chartValue` to show the chart and its label together.
    */
-  chartLabel?: string;
+  chartLabel?: ReactNode;
   /**
    * A number between 0 and 1.
    *
@@ -354,7 +354,7 @@ Checklist.propTypes = {
   /**
    * Define both `chartLabel` and `chartValue` to show the chart and its label together.
    */
-  chartLabel: PropTypes.string,
+  chartLabel: PropTypes.node,
   /**
    * A number between 0 and 1.
    *

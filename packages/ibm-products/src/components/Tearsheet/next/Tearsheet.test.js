@@ -9,7 +9,13 @@ import React from 'react';
 import { AILabel, Button, IconButton, Tab, TabList } from '@carbon/react'; // Or your design system components
 import { RightPanelClose } from '@carbon/icons-react';
 import { Tearsheet } from './Tearsheet';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  act,
+  waitFor,
+} from '@testing-library/react';
 import { blockClass } from './context';
 import { StackProvider } from './StackContext';
 
@@ -181,7 +187,8 @@ describe('Tearsheet component V2', () => {
 
   it('does not render when open is false', () => {
     const { container } = renderTearsheet(false);
-    expect(container).not.toHaveClass('is-visible');
+
+    expect(container.querySelector(`.${blockClass}`)).not.toBeInTheDocument();
   });
 
   it('renders footer buttons correctly', () => {
@@ -209,7 +216,9 @@ describe('Tearsheet component V2', () => {
     const style2 = window.getComputedStyle(t2);
     const style3 = window.getComputedStyle(t3);
 
-    expect(style3.getPropertyValue('--stack-depth')).toBe('0');
+    await waitFor(() =>
+      expect(style3.getPropertyValue('--stack-depth')).toBe('0')
+    );
     expect(style2.getPropertyValue('--stack-depth')).toBe('1');
     expect(style1.getPropertyValue('--stack-depth')).toBe('2');
 
@@ -370,7 +379,7 @@ describe('Tearsheet component V2', () => {
   });
   it('check menu button is not rendered when all items are not wrapped with HeaderActionItem', () => {
     render(
-      <Tearsheet>
+      <Tearsheet open={true}>
         <Tearsheet.Header>
           <Tearsheet.HeaderContent
             headerActions={

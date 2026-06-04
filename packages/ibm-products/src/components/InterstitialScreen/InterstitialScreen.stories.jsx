@@ -6,7 +6,7 @@
  */
 
 import React, { useRef, useState } from 'react';
-import { Button } from '@carbon/react';
+import { Button, ButtonSet } from '@carbon/react';
 
 import { InterstitialScreen } from '.';
 import mdx from './InterstitialScreen.mdx';
@@ -247,7 +247,7 @@ export const WithCustomActionButtons = () => {
         <InterstitialScreen.Footer
           actionButtonRenderer={({ handleGotoStep, progStep, stepCount }) => {
             return (
-              <>
+              <ButtonSet>
                 <Button
                   className={`${blockClass}--skip-btn`}
                   kind="ghost"
@@ -257,62 +257,61 @@ export const WithCustomActionButtons = () => {
                 >
                   Explore on my own
                 </Button>
-                <div className={`${blockClass}--footer-controls`}>
-                  {progStep > 0 && (
-                    <Button
-                      className={`${blockClass}--prev-btn`}
-                      kind="secondary"
-                      size="lg"
-                      title={'Previous'}
-                      onClick={() => {
-                        const progStepFloor = 0;
-                        const progStepCeil = stepCount - 1;
-                        const targetStep = clamp(
-                          progStep - 1,
-                          progStepFloor,
-                          progStepCeil
-                        );
-                        handleGotoStep(targetStep);
-                      }}
-                    >
-                      Previous
-                    </Button>
-                  )}
 
-                  {progStep < stepCount - 1 && (
-                    <Button
-                      className={`${blockClass}--next-btn`}
-                      renderIcon={ArrowRight}
-                      size="lg"
-                      title={'Next'}
-                      onClick={() => {
-                        const progStepFloor = 0;
-                        const progStepCeil = stepCount - 1;
-                        const targetStep = clamp(
-                          progStep + 1,
-                          progStepFloor,
-                          progStepCeil
-                        );
-                        handleGotoStep(targetStep);
-                      }}
-                    >
-                      Next
-                    </Button>
-                  )}
+                {progStep > 0 && (
+                  <Button
+                    className={`${blockClass}--prev-btn`}
+                    kind="secondary"
+                    size="lg"
+                    title={'Previous'}
+                    onClick={() => {
+                      const progStepFloor = 0;
+                      const progStepCeil = stepCount - 1;
+                      const targetStep = clamp(
+                        progStep - 1,
+                        progStepFloor,
+                        progStepCeil
+                      );
+                      handleGotoStep(targetStep);
+                    }}
+                  >
+                    Previous
+                  </Button>
+                )}
 
-                  {progStep === stepCount - 1 && (
-                    <Button
-                      className={`${blockClass}--start-btn`}
-                      renderIcon={ArrowRight}
-                      size="lg"
-                      title={'Start'}
-                      onClick={() => setShowInterstitialScreen(false)}
-                    >
-                      Start
-                    </Button>
-                  )}
-                </div>
-              </>
+                {progStep < stepCount - 1 && (
+                  <Button
+                    className={`${blockClass}--next-btn`}
+                    renderIcon={ArrowRight}
+                    size="lg"
+                    title={'Next'}
+                    onClick={() => {
+                      const progStepFloor = 0;
+                      const progStepCeil = stepCount - 1;
+                      const targetStep = clamp(
+                        progStep + 1,
+                        progStepFloor,
+                        progStepCeil
+                      );
+                      handleGotoStep(targetStep);
+                    }}
+                  >
+                    Next
+                  </Button>
+                )}
+
+                {progStep === stepCount - 1 && (
+                  <Button
+                    className={`${blockClass}--start-btn`}
+                    renderIcon={ArrowRight}
+                    size="lg"
+                    title={'Start'}
+                    onClick={() => setShowInterstitialScreen(false)}
+                  >
+                    Start
+                  </Button>
+                )}
+              </ButtonSet>
             );
           }}
         />

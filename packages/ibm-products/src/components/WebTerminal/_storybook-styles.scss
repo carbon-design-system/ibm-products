@@ -15,7 +15,7 @@
 
 $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
 
-.cds--header {
+.#{c4p-settings.$carbon-prefix}--header {
   @include theme(themes.$g100);
 }
 

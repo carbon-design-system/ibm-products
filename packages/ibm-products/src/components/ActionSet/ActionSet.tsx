@@ -74,6 +74,7 @@ ActionSetButton.propTypes = {
   kind: PropTypes.oneOf([
     'ghost',
     'danger--ghost',
+    'tertiary',
     'secondary',
     'danger',
     'primary',
@@ -114,6 +115,13 @@ export interface ActionSetProps {
   className?: string;
 
   /**
+   * When true, prevents automatic stacking of buttons even when size would
+   * normally trigger stacking (e.g., 'sm' size or 'md' with 3+ actions).
+   * Buttons will remain in a horizontal layout.
+   */
+  disableStacking?: boolean;
+
+  /**
    * The size of the action set. Different button arrangements are used at
    * different sizes, to make best use of the available space.
    */
@@ -134,6 +142,7 @@ export const validateActionSetProps = ({ actions, size }) => {
 
     const primaryActions = countActions('primary');
     const secondaryActions = countActions('secondary');
+    const tertiaryActions = countActions('tertiary');
     const dangerActions = countActions('danger');
     const ghostActions = countActions('ghost') + countActions('danger--ghost');
 
@@ -168,10 +177,14 @@ export const validateActionSetProps = ({ actions, size }) => {
 
     if (
       actions.length >
-      primaryActions + secondaryActions + dangerActions + ghostActions
+      primaryActions +
+        secondaryActions +
+        tertiaryActions +
+        dangerActions +
+        ghostActions
     ) {
       problems.push(
-        `you can only have 'primary', 'danger', 'secondary', 'ghost' and 'danger--ghost' buttons in a ${componentName}`
+        `you can only have 'primary', 'danger', 'secondary', 'tertiary', 'ghost' and 'danger--ghost' buttons in a ${componentName}`
       );
     }
     return problems.length > 0
@@ -202,6 +215,7 @@ export const ActionSet = React.forwardRef<HTMLDivElement, ActionSetProps>(
       actions,
       buttonSize,
       className,
+      disableStacking = false,
       size = defaults.size as ButtonSize,
       ...rest
     } = props;
@@ -209,17 +223,19 @@ export const ActionSet = React.forwardRef<HTMLDivElement, ActionSetProps>(
     const buttons = (actions && actions.slice?.(0)) || [];
 
     // We stack the buttons in a sm set, or if there are three or more in a md set.
-    const stacking = willStack(size, buttons.length);
+    // Unless disableStacking is true, in which case we never stack.
+    const stacking = disableStacking ? false : willStack(size, buttons.length);
 
-    // Order of button kinds: ghost first, then danger--ghost, then most other types,
-    // then danger, and finally primary
+    // Order of button kinds: ghost first, then danger--ghost, then tertiary,
+    // then most other types, then danger, and finally primary
     const buttonOrder = (kind) =>
       ({
         ghost: 1,
         'danger--ghost': 2,
-        danger: 4,
-        primary: 5,
-      })[kind] ?? 3;
+        tertiary: 3,
+        danger: 5,
+        primary: 6,
+      })[kind] ?? 4;
 
     // order the actions with ghost/ghost-danger buttons first and primary/danger buttons last
     // (or the opposite way if we're stacking)
@@ -304,6 +320,7 @@ ActionSet.propTypes = {
         kind: PropTypes.oneOf([
           'ghost',
           'danger--ghost',
+          'tertiary',
           'secondary',
           'danger',
           'primary',
@@ -330,6 +347,13 @@ ActionSet.propTypes = {
    * An optional class or classes to be added to the outermost element.
    */
   className: PropTypes.string,
+
+  /**
+   * When true, prevents automatic stacking of buttons even when size would
+   * normally trigger stacking (e.g., 'sm' size or 'md' with 3+ actions).
+   * Buttons will remain in a horizontal layout.
+   */
+  disableStacking: PropTypes.bool,
 
   /**
    * The size of the action set. Different button arrangements are used at

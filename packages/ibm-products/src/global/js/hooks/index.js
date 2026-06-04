@@ -21,3 +21,5 @@ export { useFocus } from './useFocus';
 export { useIsomorphicEffect } from './useIsomorphicEffect';
 export { usePresence } from './usePresence';
 export { usePrefersReducedMotion } from './usePrefersReducedMotion';
+export { useMatchMedia } from './useMatchMedia';
+export { useCarbonFeatureFlagsObject } from './useCarbonFeatureFlagsObject';

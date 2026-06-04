@@ -31,49 +31,94 @@
   content="https://ibm-products.carbondesignsystem.com/social.png"
 />
 
-<!-- Window objects / analytics config -->
+<!-- Window objects / analytics config - Skip in Chromatic -->
 <script>
-  window.digitalData = {
-    page: {
-      pageInfo: {
-        language: 'en-US',
-        productTitle: 'Carbon for IBM Products',
-        analytics: {
-          category: 'KnowledgeCenter',
-        },
-        ibm: {
-          country: 'US',
-          siteId: 'C4IP',
-        },
-        segment: {
-          autoPageEventSpa: true,
-          enabled: true,
-          env: 'test',
-          key: 'aWg1ug3bDNcSTnde9iwvg1OcvVRzf0JC',
-          coremetrics: false,
-          skipIdentify: true,
-          commonProperties: {
-            productCode: 'C4IP',
-            productTitle: 'Carbon for IBM Products',
-          },
-          pageProperties: {
-            productCode: 'C4IP',
-            productTitle: 'Carbon for IBM Products',
-          },
-        },
-      },
-      category: {
-        primaryCategory: 'PC110',
-      },
-    },
-  };
-</script>
+  // Detect Chromatic environment (shared across scripts)
+  window.__isChromatic =
+    window.location.href.includes('chromatic.com') ||
+    window.location.href.includes('chromatic-builds');
 
-<script
-  src="//1.www.s81c.com/common/stats/ibm-common.js"
-  type="text/javascript"
-  async="async"
-></script>
+  // Only load analytics if NOT in Chromatic
+  if (!window.__isChromatic) {
+    window.digitalData = {
+      page: {
+        pageInfo: {
+          language: 'en-US',
+          productTitle: 'Carbon for IBM Products',
+          analytics: {
+            category: 'KnowledgeCenter',
+          },
+          ibm: {
+            country: 'US',
+            siteId: 'C4IP',
+          },
+          segment: {
+            autoPageEventSpa: true,
+            enabled: true,
+            env: 'test',
+            key: 'aWg1ug3bDNcSTnde9iwvg1OcvVRzf0JC',
+            coremetrics: false,
+            skipIdentify: true,
+            commonProperties: {
+              productCode: 'C4IP',
+              productTitle: 'Carbon for IBM Products',
+            },
+            pageProperties: {
+              productCode: 'C4IP',
+              productTitle: 'Carbon for IBM Products',
+            },
+          },
+        },
+        category: {
+          primaryCategory: 'PC110',
+        },
+      },
+    };
+
+    // Analytics callback setup
+    (function () {
+      const overrideParentCallback = (eName, eData) => {
+        if (
+          window.bluemixAnalytics &&
+          typeof window.bluemixAnalytics.trackEvent === 'function'
+        ) {
+          window.bluemixAnalytics.trackEvent(eName, eData);
+        }
+      };
+
+      if (window.addEventListener) {
+        window.addEventListener('load', () => {
+          if (
+            window.autoTrack &&
+            typeof window.autoTrack.updateCallback === 'function'
+          ) {
+            window.autoTrack.updateCallback(overrideParentCallback);
+          }
+        });
+
+        window.addEventListener('message', (message) => {
+          const msg = message.data;
+          if (msg && msg.topic === 'Autotrack') {
+            overrideParentCallback(msg.eName, msg.eData);
+          }
+        });
+      }
+    })();
+
+    // Load IBM common stats script dynamically
+    if (
+      typeof document !== 'undefined' &&
+      document.createElement &&
+      document.head
+    ) {
+      var ibmStatsScript = document.createElement('script');
+      ibmStatsScript.type = 'text/javascript';
+      ibmStatsScript.async = true;
+      ibmStatsScript.src = '//1.www.s81c.com/common/stats/ibm-common.js';
+      document.head.appendChild(ibmStatsScript);
+    }
+  }
+</script>
 
 <!-- Storybook override -->
 <script>
@@ -82,17 +127,24 @@
   }, 1000);
 </script>
 
-<!-- Footer -->
-<footer>
-  <c4d-footer-container
-    disable-locale-button="true"
-    size="micro"
-  ></c4d-footer-container>
-</footer>
-<script
-  type="module"
-  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/version/v2.29.0/footer.min.js"
-></script>
+<!-- Footer - Disabled in Chromatic to prevent custom element conflicts -->
+<script>
+  // Only load footer if NOT in Chromatic (reuse global check)
+  if (!window.__isChromatic) {
+    // Create footer element
+    const footer = document.createElement('footer');
+    footer.innerHTML =
+      '<c4d-footer-container disable-locale-button="true" size="micro"></c4d-footer-container>';
+    document.body.appendChild(footer);
+
+    // Load footer script
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src =
+      'https://1.www.s81c.com/common/carbon-for-ibm-dotcom/version/v2.29.0/footer.min.js';
+    document.head.appendChild(script);
+  }
+</script>
 
 <!-- Style overrides -->
 <style>

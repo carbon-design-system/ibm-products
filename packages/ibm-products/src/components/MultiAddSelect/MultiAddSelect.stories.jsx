@@ -304,6 +304,9 @@ WithModifiers.args = {
 };
 
 export const WithAvatars = Template.bind({});
+WithAvatars.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 WithAvatars.args = {
   items: 4,
   ...defaultProps,

@@ -199,7 +199,7 @@
     ]
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "^5.0.5",
+    "stylelint-plugin-carbon-tokens": "^4.0.6",
     "stylelint-use-logical": "^2.1.2"
   },
   "packageManager": "yarn@4.10.3"

@@ -34,7 +34,7 @@ export default defineConfig({
       instances: [{ browser: 'chromium' }],
     },
     coverage: {
-      provider: 'v8',
+      provider: 'istanbul',
       include: ['src/**/*'],
       exclude: [
         'src/**/*.stories.{js,ts}',

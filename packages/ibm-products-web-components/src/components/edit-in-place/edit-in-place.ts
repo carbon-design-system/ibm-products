@@ -191,6 +191,11 @@ class C4PEditInPlace extends LitElement {
   private _inputElement!: HTMLInputElement;
 
   /**
+   * Bound handler for document clicks (for cleanup)
+   */
+  private _boundHandleDocumentClick: ((e: MouseEvent) => void) | null = null;
+
+  /**
    * Check if value has changed from initial
    */
   private get _hasValueChanged(): boolean {
@@ -354,6 +359,15 @@ class C4PEditInPlace extends LitElement {
         }
         this._escaping = false;
         break;
+      case 'Tab':
+        // When tabbing from input, check if we're going outside the component
+        // If shift+tab, we're going backwards (let it handle naturally)
+        // If tab forward and no changes, we should exit edit mode
+        if (!e.shiftKey && !this._hasValueChanged) {
+          // Exit edit mode when tabbing out without changes
+          this._handleCancel(true);
+        }
+        break;
       default:
         break;
     }
@@ -396,12 +410,39 @@ class C4PEditInPlace extends LitElement {
   }
 
   /**
+   * Handle clicks outside the component
+   */
+  private _handleDocumentClick(e: MouseEvent) {
+    // Only handle if we're in focused mode
+    if (!this._focused) {
+      return;
+    }
+
+    // Check if click is outside the component
+    const path = e.composedPath();
+    const clickedInside = path.includes(this);
+
+    if (!clickedInside) {
+      // Click was outside - exit edit mode
+      if (this._canSave) {
+        this._handleSave(true);
+      } else {
+        this._handleCancel(true);
+      }
+    }
+  }
+
+  /**
    * Initialize component
    */
   connectedCallback() {
     super.connectedCallback();
     this._internalValue = this.value || this.defaultValue;
     this._initialValue = this._internalValue;
+
+    // Set up document click listener
+    this._boundHandleDocumentClick = this._handleDocumentClick.bind(this);
+    document.addEventListener('click', this._boundHandleDocumentClick, true);
   }
 
   /**
@@ -412,6 +453,16 @@ class C4PEditInPlace extends LitElement {
     this._escaping = false;
     this._clickingWithin = false;
     this._focused = false;
+
+    // Clean up document click listener
+    if (this._boundHandleDocumentClick) {
+      document.removeEventListener(
+        'click',
+        this._boundHandleDocumentClick,
+        true
+      );
+      this._boundHandleDocumentClick = null;
+    }
   }
 
   /**

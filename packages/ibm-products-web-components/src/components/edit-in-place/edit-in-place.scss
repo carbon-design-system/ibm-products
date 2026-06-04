@@ -84,7 +84,11 @@ $block-class: #{$prefix}--edit-in-place;
 
 // Web component specific overrides for icon buttons
 .#{$block-class}__toolbar {
+  justify-content: end;
+
   #{$carbon-prefix}-icon-button {
+    display: flex;
+    align-items: stretch;
     padding: 0;
     min-block-size: unset;
   }
@@ -92,8 +96,7 @@ $block-class: #{$prefix}--edit-in-place;
 
 // Match button heights to input heights for each size and make them square
 .#{$block-class}__toolbar #{$carbon-prefix}-icon-button {
-  block-size: var(--#{$block-class}--size);
-  inline-size: var(--#{$block-class}--size);
+  block-size: 100%;
 }
 
 // Remove borders from save and cancel buttons to match React

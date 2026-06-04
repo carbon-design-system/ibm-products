@@ -439,6 +439,192 @@ describe(`${prefix}-edit-in-place`, () => {
     });
   });
 
+  describe('Focus behavior', () => {
+    it('should exit edit mode when clicking outside the component', async () => {
+      render(template(), elem);
+      await Promise.resolve();
+
+      const editInPlace = elem.querySelector(`${prefix}-edit-in-place`) as any;
+      const input = editInPlace.shadowRoot?.querySelector(
+        'input'
+      ) as HTMLInputElement;
+
+      // Enter edit mode
+      input.focus();
+      await Promise.resolve();
+
+      // Verify we're in edit mode (save/cancel buttons should be visible)
+      let saveBtn = editInPlace.shadowRoot?.querySelector(
+        `.${prefix}--edit-in-place__btn-save`
+      );
+      expect(saveBtn).toBeTruthy();
+
+      // Change value
+      input.value = 'New value';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await Promise.resolve();
+
+      // Create an element outside the component to click on
+      const outsideElement = document.createElement('button');
+      document.body.appendChild(outsideElement);
+
+      // Simulate click outside by dispatching click event on the outside element
+      outsideElement.click();
+      await Promise.resolve();
+
+      // Verify we've exited edit mode (save/cancel buttons should be gone)
+      saveBtn = editInPlace.shadowRoot?.querySelector(
+        `.${prefix}--edit-in-place__btn-save`
+      );
+      expect(saveBtn).toBeFalsy();
+
+      // Cleanup
+      outsideElement.remove();
+    });
+
+    it('should auto-save when clicking outside with valid changes', async () => {
+      render(template(), elem);
+      await Promise.resolve();
+
+      const editInPlace = elem.querySelector(`${prefix}-edit-in-place`) as any;
+      const input = editInPlace.shadowRoot?.querySelector(
+        'input'
+      ) as HTMLInputElement;
+
+      const saveHandler = vi.fn();
+      editInPlace.addEventListener(`${prefix}-edit-in-place-save`, saveHandler);
+
+      // Enter edit mode
+      input.focus();
+      await Promise.resolve();
+
+      // Change value
+      input.value = 'New value';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await Promise.resolve();
+
+      // Create an element outside the component to click on
+      const outsideElement = document.createElement('button');
+      document.body.appendChild(outsideElement);
+
+      // Simulate click outside by dispatching click event on the outside element
+      outsideElement.click();
+      await Promise.resolve();
+
+      // Verify save was called
+      expect(saveHandler).toHaveBeenCalled();
+
+      // Cleanup
+      outsideElement.remove();
+    });
+
+    it('should auto-cancel when clicking outside without changes', async () => {
+      render(template(), elem);
+      await Promise.resolve();
+
+      const editInPlace = elem.querySelector(`${prefix}-edit-in-place`) as any;
+      const input = editInPlace.shadowRoot?.querySelector(
+        'input'
+      ) as HTMLInputElement;
+
+      const cancelHandler = vi.fn();
+      editInPlace.addEventListener(
+        `${prefix}-edit-in-place-cancel`,
+        cancelHandler
+      );
+
+      // Enter edit mode
+      input.focus();
+      await Promise.resolve();
+
+      // Don't change value, just click outside
+      const outsideElement = document.createElement('button');
+      document.body.appendChild(outsideElement);
+
+      // Simulate click outside by dispatching click event on the outside element
+      outsideElement.click();
+      await Promise.resolve();
+
+      // Verify cancel was called
+      expect(cancelHandler).toHaveBeenCalled();
+
+      // Cleanup
+      outsideElement.remove();
+    });
+
+    it('should remain in edit mode when clicking within the component', async () => {
+      render(template(), elem);
+      await Promise.resolve();
+
+      const editInPlace = elem.querySelector(`${prefix}-edit-in-place`) as any;
+      const input = editInPlace.shadowRoot?.querySelector(
+        'input'
+      ) as HTMLInputElement;
+
+      // Enter edit mode
+      input.focus();
+      await Promise.resolve();
+
+      // Change value
+      input.value = 'New value';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await Promise.resolve();
+
+      // Click on the input itself (within component)
+      input.click();
+      await Promise.resolve();
+
+      // Verify we're still in edit mode
+      const saveBtn = editInPlace.shadowRoot?.querySelector(
+        `.${prefix}--edit-in-place__btn-save`
+      );
+      expect(saveBtn).toBeTruthy();
+    });
+
+    it('should exit edit mode when tabbing out without changes', async () => {
+      render(template(), elem);
+      await Promise.resolve();
+
+      const editInPlace = elem.querySelector(`${prefix}-edit-in-place`) as any;
+      const input = editInPlace.shadowRoot?.querySelector(
+        'input'
+      ) as HTMLInputElement;
+
+      const cancelHandler = vi.fn();
+      editInPlace.addEventListener(
+        `${prefix}-edit-in-place-cancel`,
+        cancelHandler
+      );
+
+      // Enter edit mode
+      input.focus();
+      await Promise.resolve();
+
+      // Verify we're in edit mode
+      let saveBtn = editInPlace.shadowRoot?.querySelector(
+        `.${prefix}--edit-in-place__btn-save`
+      );
+      expect(saveBtn).toBeTruthy();
+
+      // Don't change value, just press Tab
+      const tabEvent = new KeyboardEvent('keydown', {
+        key: 'Tab',
+        bubbles: true,
+      });
+      input.dispatchEvent(tabEvent);
+      await Promise.resolve();
+
+      // Verify cancel was called
+      expect(cancelHandler).toHaveBeenCalled();
+
+      // Verify we've exited edit mode
+      saveBtn = editInPlace.shadowRoot?.querySelector(
+        `.${prefix}--edit-in-place__btn-save`
+      );
+      expect(saveBtn).toBeFalsy();
+    });
+  });
+
   describe('CSS Parts', () => {
     it('should expose input part', async () => {
       render(template(), elem);

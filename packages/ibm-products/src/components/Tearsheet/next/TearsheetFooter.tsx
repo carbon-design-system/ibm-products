@@ -38,7 +38,7 @@ const TearsheetFooter = forwardRef<HTMLDivElement, TearsheetFooterProps>(
     const actionCount = actions?.length || 0;
 
     return (
-      <footer
+      <div
         className={cx(`${blockClass}__footer`, className, {
           [`${blockClass}__footer--three-actions`]: actionCount == 3,
           [`${blockClass}__footer--many-actions`]: actionCount > 3,
@@ -54,7 +54,7 @@ const TearsheetFooter = forwardRef<HTMLDivElement, TearsheetFooterProps>(
             size={variant == 'wide' ? '2xl' : 'lg'}
           />
         )}
-      </footer>
+      </div>
     );
   }
 );

@@ -110,11 +110,15 @@ export const TearsheetWithSteps = ({
               complete={currentStep > 2}
               current={currentStep === 2}
               label="Step 2"
+              disabled={currentStep < 2}
+              aria-disabled={currentStep < 2}
             />
             <ProgressStep
               current={currentStep === 3}
               label="Step 3"
               complete={currentStep > 3}
+              disabled={currentStep < 3}
+              aria-disabled={currentStep < 3}
             />
           </ProgressIndicator>
         )}
@@ -132,11 +136,15 @@ export const TearsheetWithSteps = ({
               complete={currentStep > 2}
               current={currentStep === 2}
               label="Step 2"
+              disabled={currentStep < 2}
+              aria-disabled={currentStep < 2}
             />
             <ProgressStep
               current={currentStep === 3}
               label="Step 3"
               complete={currentStep > 3}
+              disabled={currentStep < 3}
+              aria-disabled={currentStep < 3}
             />
           </ProgressIndicator>
         </Tearsheet.Influencer>
@@ -199,6 +207,15 @@ function Step1() {
   const { setFormState, formState } = useStepContext();
   const { email } = formState ?? {};
   useStepFocus('#email');
+
+  // Email validation and suggestion logic
+  const emailValue = String(email ?? '');
+  const isInvalidEmail = emailValue && !emailValue.includes('@');
+  const emailSuggestion =
+    isInvalidEmail && emailValue.includes('gmail')
+      ? `Did you mean ${emailValue}@gmail.com?`
+      : '';
+
   return (
     <Section className="step-container">
       <Heading className="step-heading">Step 1</Heading>
@@ -211,8 +228,21 @@ function Step1() {
           }));
         }}
         labelText="Email"
-        value={email ?? ''}
+        value={emailValue}
+        invalid={isInvalidEmail}
+        invalidText={emailSuggestion || 'Please enter a valid email address'}
+        aria-describedby={emailSuggestion ? 'email-suggestion' : undefined}
       />
+      {emailSuggestion && (
+        <div
+          id="email-suggestion"
+          className="email-suggestion"
+          role="status"
+          aria-live="polite"
+        >
+          {emailSuggestion}
+        </div>
+      )}
     </Section>
   );
 }
@@ -221,6 +251,21 @@ function Step2() {
   const { setFormState, formState } = useStepContext();
   const { city, state } = formState || {};
   useStepFocus('#city');
+
+  // City validation and suggestion logic
+  const cityValue = String(city ?? '');
+  const isInvalidCity = cityValue && cityValue.length < 2;
+  const citySuggestion = isInvalidCity
+    ? 'City name must be at least 2 characters'
+    : '';
+
+  // State validation and suggestion logic
+  const stateValue = String(state ?? '');
+  const isInvalidState = stateValue && stateValue.length < 2;
+  const stateSuggestion = isInvalidState
+    ? 'State name must be at least 2 characters'
+    : '';
+
   return (
     <Section className="step-container">
       <Heading className="step-heading">Step 2</Heading>
@@ -234,8 +279,21 @@ function Step2() {
             }));
           }}
           labelText="City"
-          value={city ?? ''}
+          value={cityValue}
+          invalid={isInvalidCity}
+          invalidText={citySuggestion}
+          aria-describedby={citySuggestion ? 'city-suggestion' : undefined}
         />
+        {citySuggestion && (
+          <div
+            id="city-suggestion"
+            className="field-suggestion"
+            role="status"
+            aria-live="polite"
+          >
+            {citySuggestion}
+          </div>
+        )}
         <TextInput
           id="state"
           onChange={(e) => {
@@ -245,8 +303,21 @@ function Step2() {
             }));
           }}
           labelText="State"
-          value={state ?? ''}
+          value={stateValue}
+          invalid={isInvalidState}
+          invalidText={stateSuggestion}
+          aria-describedby={stateSuggestion ? 'state-suggestion' : undefined}
         />
+        {stateSuggestion && (
+          <div
+            id="state-suggestion"
+            className="field-suggestion"
+            role="status"
+            aria-live="polite"
+          >
+            {stateSuggestion}
+          </div>
+        )}
       </div>
     </Section>
   );
@@ -255,12 +326,34 @@ function Step2() {
 function Step3() {
   // Example showing how to get step state via hook
   const { formState } = useStepContext();
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  // Focus management: Move focus to first interactive element when step loads
+  useEffect(() => {
+    // Small delay to ensure DOM is ready and step transition is complete
+    const timeoutId = setTimeout(() => {
+      // Find the copy button within the CodeSnippet component
+      const copyButton = containerRef.current?.querySelector(
+        'button[aria-label*="Copy"], button.cds--copy-btn, button.cds--snippet-button'
+      ) as HTMLButtonElement;
+
+      if (copyButton) {
+        copyButton.focus();
+      } else {
+        // Fallback: focus the container itself if button not found
+        containerRef.current?.focus();
+      }
+    }, 150);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   return (
     <Section className="step-container">
       <Heading className="step-heading">Step 3</Heading>
-      <div>
+      <div ref={containerRef} tabIndex={-1}>
         Form state
-        <CodeSnippet type="multi">
+        <CodeSnippet type="multi" aria-label="Copy form state to clipboard">
           {JSON.stringify(formState, null, 2)}
         </CodeSnippet>
       </div>

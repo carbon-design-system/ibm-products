@@ -12,7 +12,6 @@ import {
   Button,
   Form,
   FormGroup,
-  Heading,
   NumberInput,
   ProgressIndicator,
   ProgressStep,
@@ -89,7 +88,7 @@ const sampleDecorator = (decorator) => {
           <AILabelContent>
             <div>
               <p className="secondary">AI Explained</p>
-              <h1>84%</h1>
+              <h3>84%</h3>
               <p className="secondary bold">Confidence score</p>
               <p className="secondary">
                 This is not really Lorem Ipsum but the spell checker did not
@@ -123,6 +122,7 @@ const description = (
     id={`header-description__truncatedText`}
     expandLabel={'Read more'}
     collapseLabel={'Read less'}
+    expandAriaLabel={'Read more about tearsheet description'}
     value="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page"
     type="expand"
   />
@@ -161,6 +161,7 @@ export const Default = ({
           setOpen(true);
         }}
         ref={launcherButtonRef}
+        aria-haspopup="dialog"
       >
         Open Tearsheet
       </Button>
@@ -232,18 +233,18 @@ export const Default = ({
             </div>
 
             <Section className="main-content">
-              <Heading>Main content heading</Heading>
+              <h3>Main content heading</h3>
 
               <Form>
                 <FormGroup
-                  legendId="tearsheet-form-group"
-                  legendText="FormGroup Legend"
+                  legendId="tearsheet-form-group-1"
+                  legendText="Personal Information"
                 >
                   <TextInput
                     id="input1"
                     labelText="Enter an important value here"
                   />
-                  <TextInput id="tss-ft2" labelText="Here is an entry field:" />
+                  <TextInput id="tss-ft2" labelText="Additional information" />
                   <NumberInput
                     className="some-class"
                     id="number-input-1"
@@ -256,8 +257,8 @@ export const Default = ({
                   />
                 </FormGroup>
                 <FormGroup
-                  legendId="tearsheet-form-group"
-                  legendText="FormGroup Legend"
+                  legendId="tearsheet-form-group-2"
+                  legendText="Contact Details"
                 >
                   <TextInput
                     id="tss-ft1"
@@ -276,8 +277,8 @@ export const Default = ({
                   />
                 </FormGroup>
                 <FormGroup
-                  legendId="tearsheet-form-group"
-                  legendText="FormGroup Legend"
+                  legendId="tearsheet-form-group-3"
+                  legendText="Address Information"
                 >
                   <TextInput
                     id="tss-ft1"
@@ -296,8 +297,8 @@ export const Default = ({
                   />
                 </FormGroup>
                 <FormGroup
-                  legendId="tearsheet-form-group"
-                  legendText="FormGroup Legend"
+                  legendId="tearsheet-form-group-4"
+                  legendText="Additional Details"
                 >
                   <TextInput
                     id="tss-ft1"
@@ -323,26 +324,26 @@ export const Default = ({
             summaryPanelOpen={summaryPanelOpen}
             onSummaryPanelClose={() => setSummaryPanelOpen(false)}
           >
-            <Heading className="summaryPanelHeading">Summary details</Heading>
+            <h3 className="summaryPanelHeading">Summary details</h3>
             <div className="rightDetailsBody">
               <div>
-                <label>item 1</label>
+                <strong>item 1</strong>
                 <p>item description</p>
               </div>
               <div>
-                <label>item 2</label>
+                <strong>item 2</strong>
                 <p>item description</p>
               </div>
               <div>
-                <label>item 3</label>
+                <strong>item 3</strong>
                 <p>item description</p>
               </div>
               <div>
-                <label>item 4</label>
+                <strong>item 4</strong>
                 <p>item description</p>
               </div>
               <div>
-                <label>item 5</label>
+                <strong>item 5</strong>
                 <p>item description</p>
               </div>
             </div>
@@ -392,6 +393,7 @@ export const WithInfluencer = () => {
           setOpen(true);
         }}
         ref={launcherButtonRef}
+        aria-haspopup="dialog"
       >
         Open Tearsheet
       </Button>
@@ -471,11 +473,11 @@ export const WithInfluencer = () => {
             </div>
 
             <Section className="main-content">
-              <Heading>Main content heading</Heading>
+              <h3>Main content heading</h3>
 
               <Form>
                 <FormGroup
-                  legendId="tearsheet-form-group"
+                  legendId="tearsheet-form-group-1"
                   legendText="FormGroup Legend"
                 >
                   <TextInput
@@ -495,7 +497,7 @@ export const WithInfluencer = () => {
                   />
                 </FormGroup>
                 <FormGroup
-                  legendId="tearsheet-form-group"
+                  legendId="tearsheet-form-group-2"
                   legendText="FormGroup Legend"
                 >
                   <TextInput
@@ -515,7 +517,7 @@ export const WithInfluencer = () => {
                   />
                 </FormGroup>
                 <FormGroup
-                  legendId="tearsheet-form-group"
+                  legendId="tearsheet-form-group-3"
                   legendText="FormGroup Legend"
                 >
                   <TextInput
@@ -535,7 +537,7 @@ export const WithInfluencer = () => {
                   />
                 </FormGroup>
                 <FormGroup
-                  legendId="tearsheet-form-group"
+                  legendId="tearsheet-form-group-4"
                   legendText="FormGroup Legend"
                 >
                   <TextInput
@@ -599,6 +601,7 @@ export const WithTabs = () => {
           setOpen(true);
         }}
         ref={launcherButtonRef}
+        aria-haspopup="dialog"
       >
         Open Tearsheet
       </Button>
@@ -726,6 +729,7 @@ export const withSteps = () => {
           setOpen(true);
         }}
         ref={launcherButtonRef}
+        aria-haspopup="dialog"
       >
         Open Tearsheet
       </Button>
@@ -751,6 +755,7 @@ export const withStepsAndHorizontalProgressIndicator = () => {
           setOpen(true);
         }}
         ref={launcherButtonRef}
+        aria-haspopup="dialog"
       >
         Open Tearsheet
       </Button>
@@ -780,6 +785,7 @@ export const narrowTearsheet = () => {
           setOpen(true);
         }}
         ref={launcherButtonRef}
+        aria-haspopup="dialog"
       >
         Open Tearsheet
       </Button>
@@ -865,11 +871,11 @@ export const narrowTearsheet = () => {
               </div>
 
               <Section className="main-content">
-                <Heading>Main content heading</Heading>
+                <h3>Main content heading</h3>
 
                 <Form>
                   <FormGroup
-                    legendId="tearsheet-form-group"
+                    legendId="tearsheet-form-group-5"
                     legendText="FormGroup Legend"
                   >
                     <TextInput
@@ -892,7 +898,7 @@ export const narrowTearsheet = () => {
                     />
                   </FormGroup>
                   <FormGroup
-                    legendId="tearsheet-form-group"
+                    legendId="tearsheet-form-group-6"
                     legendText="FormGroup Legend"
                   >
                     <TextInput
@@ -915,7 +921,7 @@ export const narrowTearsheet = () => {
                     />
                   </FormGroup>
                   <FormGroup
-                    legendId="tearsheet-form-group"
+                    legendId="tearsheet-form-group-7"
                     legendText="FormGroup Legend"
                   >
                     <TextInput
@@ -938,7 +944,7 @@ export const narrowTearsheet = () => {
                     />
                   </FormGroup>
                   <FormGroup
-                    legendId="tearsheet-form-group"
+                    legendId="tearsheet-form-group-8"
                     legendText="FormGroup Legend"
                   >
                     <TextInput
@@ -968,26 +974,26 @@ export const narrowTearsheet = () => {
               summaryPanelOpen={summaryPanelOpen}
               onSummaryPanelClose={() => setSummaryPanelOpen(false)}
             >
-              <Heading className="summaryPanelHeading">Summary details</Heading>
+              <h3 className="summaryPanelHeading">Summary details</h3>
               <div className="rightDetailsBody">
                 <div>
-                  <label>item 1</label>
+                  <strong>item 1</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 2</label>
+                  <strong>item 2</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 3</label>
+                  <strong>item 3</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 4</label>
+                  <strong>item 4</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 5</label>
+                  <strong>item 5</strong>
                   <p>item description</p>
                 </div>
               </div>
@@ -1027,13 +1033,22 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const launcherButtonRef1 = useRef(null);
+  const launcherButtonRef2 = useRef(null);
+  const launcherButtonRef3 = useRef(null);
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
   const isSm = useMatchMedia(smMediaQuery);
 
   return (
     <>
       <div className="stackButtons">
-        <Button onClick={() => setOpen1(!open1)}>Open Tearsheet 1</Button>
+        <Button
+          onClick={() => setOpen1(!open1)}
+          aria-haspopup="dialog"
+          ref={launcherButtonRef1}
+        >
+          Open Tearsheet 1
+        </Button>
       </div>
       <div className="smallScreenButton">
         <Button
@@ -1041,6 +1056,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
           align="bottom"
           onClick={() => setOpen1(!open1)}
           label="Open Tearsheet 1"
+          aria-haspopup="dialog"
         >
           <BottomPanelOpenFilled />
         </Button>
@@ -1052,6 +1068,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
           onClose={() => setOpen1(false)}
           variant={variant[0]}
           verticalGap={variant[0] === 'narrow' ? '5.5rem' : ''}
+          launcherButtonRef={launcherButtonRef1}
         >
           <Tearsheet.Header>
             <Tearsheet.HeaderContent
@@ -1059,13 +1076,15 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
                 <Tearsheet.HeaderActions
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
                 >
-                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+                  <Tearsheet.HeaderActionItem overflowItemLabel="Open Tearsheet 2">
                     <Button
+                      ref={launcherButtonRef2}
                       kind="tertiary"
                       size="sm"
                       onClick={() => {
                         setOpen2(true);
                       }}
+                      aria-haspopup="dialog"
                     >
                       Open Tearsheet 2
                     </Button>
@@ -1080,11 +1099,11 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
           <Tearsheet.Body>
             <Tearsheet.MainContent>
               <Section className="main-content">
-                <Heading>Main content heading</Heading>
+                <h3>Main content heading</h3>
 
                 <Form>
                   <FormGroup
-                    legendId="tearsheet-form-group"
+                    legendId="tearsheet-form-group-9"
                     legendText="FormGroup Legend"
                   >
                     <TextInput
@@ -1111,26 +1130,26 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
             </Tearsheet.MainContent>
 
             <Tearsheet.SummaryContent>
-              <Heading className="summaryPanelHeading">Summary Details</Heading>
+              <h3 className="summaryPanelHeading">Summary Details</h3>
               <div className="rightDetailsBody">
                 <div>
-                  <label>item 1</label>
+                  <strong>item 1</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 2</label>
+                  <strong>item 2</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 3</label>
+                  <strong>item 3</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 4</label>
+                  <strong>item 4</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 5</label>
+                  <strong>item 5</strong>
                   <p>item description</p>
                 </div>
               </div>
@@ -1166,6 +1185,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
           onClose={() => setOpen2(false)}
           variant={variant[1]}
           verticalGap={variant[1] === 'narrow' ? '5.5rem' : ''}
+          launcherButtonRef={launcherButtonRef2}
         >
           <Tearsheet.Header>
             <Tearsheet.HeaderContent
@@ -1176,13 +1196,15 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
                 <Tearsheet.HeaderActions
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
                 >
-                  <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+                  <Tearsheet.HeaderActionItem overflowItemLabel="Open Tearsheet 3">
                     <Button
+                      ref={launcherButtonRef3}
                       kind="tertiary"
                       size="sm"
                       onClick={() => {
                         setOpen3(true);
                       }}
+                      aria-haspopup="dialog"
                     >
                       Open Tearsheet 3
                     </Button>
@@ -1194,11 +1216,11 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
           <Tearsheet.Body>
             <Tearsheet.MainContent>
               <Section className="main-content">
-                <Heading>Main content heading</Heading>
+                <h3>Main content heading</h3>
 
                 <Form>
                   <FormGroup
-                    legendId="tearsheet-form-group"
+                    legendId="tearsheet-form-group-10"
                     legendText="FormGroup Legend"
                   >
                     <TextInput
@@ -1225,26 +1247,26 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
             </Tearsheet.MainContent>
 
             <Tearsheet.SummaryContent>
-              <Heading className="rightPanelHeading">Summary Details</Heading>
+              <h3 className="rightPanelHeading">Summary Details</h3>
               <div className="rightDetailsBody">
                 <div>
-                  <label>item 1</label>
+                  <strong>item 1</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 2</label>
+                  <strong>item 2</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 3</label>
+                  <strong>item 3</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 4</label>
+                  <strong>item 4</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 5</label>
+                  <strong>item 5</strong>
                   <p>item description</p>
                 </div>
               </div>
@@ -1280,6 +1302,7 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
           variant={variant[2]}
           verticalGap={variant[2] === 'narrow' ? '5.5rem' : ''}
           onClose={() => setOpen3(false)}
+          launcherButtonRef={launcherButtonRef3}
         >
           <Tearsheet.Header>
             <Tearsheet.HeaderContent
@@ -1291,11 +1314,11 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
           <Tearsheet.Body>
             <Tearsheet.MainContent>
               <Section className="main-content">
-                <Heading>Main content heading</Heading>
+                <h3>Main content heading</h3>
 
                 <Form>
                   <FormGroup
-                    legendId="tearsheet-form-group"
+                    legendId="tearsheet-form-group-11"
                     legendText="FormGroup Legend"
                   >
                     <TextInput
@@ -1322,26 +1345,26 @@ export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
             </Tearsheet.MainContent>
 
             <Tearsheet.SummaryContent>
-              <Heading className="rightPanelHeading">Summary Details</Heading>
+              <h3 className="rightPanelHeading">Summary Details</h3>
               <div className="rightDetailsBody">
                 <div>
-                  <label>item 1</label>
+                  <strong>item 1</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 2</label>
+                  <strong>item 2</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 3</label>
+                  <strong>item 3</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 4</label>
+                  <strong>item 4</strong>
                   <p>item description</p>
                 </div>
                 <div>
-                  <label>item 5</label>
+                  <strong>item 5</strong>
                   <p>item description</p>
                 </div>
               </div>
@@ -1405,6 +1428,7 @@ export const WithCustomFooterActions = ({
           setOpen(true);
         }}
         ref={launcherButtonRef}
+        aria-haspopup="dialog"
       >
         Open Tearsheet
       </Button>
@@ -1464,11 +1488,11 @@ export const WithCustomFooterActions = ({
             </div>
 
             <Section className="main-content">
-              <Heading>Main content heading</Heading>
+              <h3>Main content heading</h3>
 
               <Form>
                 <FormGroup
-                  legendId="tearsheet-form-group"
+                  legendId="tearsheet-form-group-12"
                   legendText="FormGroup Legend"
                 >
                   <TextInput
@@ -1488,7 +1512,7 @@ export const WithCustomFooterActions = ({
                   />
                 </FormGroup>
                 <FormGroup
-                  legendId="tearsheet-form-group"
+                  legendId="tearsheet-form-group-13"
                   legendText="FormGroup Legend"
                 >
                   <TextInput
@@ -1515,26 +1539,26 @@ export const WithCustomFooterActions = ({
             summaryPanelOpen={summaryPanelOpen}
             onSummaryPanelClose={() => setSummaryPanelOpen(false)}
           >
-            <Heading className="summaryPanelHeading">Summary details</Heading>
+            <h3 className="summaryPanelHeading">Summary details</h3>
             <div className="rightDetailsBody">
               <div>
-                <label>item 1</label>
+                <strong>item 1</strong>
                 <p>item description</p>
               </div>
               <div>
-                <label>item 2</label>
+                <strong>item 2</strong>
                 <p>item description</p>
               </div>
               <div>
-                <label>item 3</label>
+                <strong>item 3</strong>
                 <p>item description</p>
               </div>
               <div>
-                <label>item 4</label>
+                <strong>item 4</strong>
                 <p>item description</p>
               </div>
               <div>
-                <label>item 5</label>
+                <strong>item 5</strong>
                 <p>item description</p>
               </div>
             </div>

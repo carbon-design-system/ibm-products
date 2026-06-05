@@ -132,11 +132,6 @@ const description = (
 /* * * * * * * * * * * * * * | STORIES | * * * * * * * * * * * * * * */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-// const defaultProps = {
-//   headerTitle: 'Use case-specific title',
-//   headerSubTitle: 'Use case-specific sub title',
-//   ariaLabel: 'Interstitial Screen',
-// };
 export const Default = ({
   decorator,
   influencerWidth,
@@ -151,6 +146,7 @@ export const Default = ({
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
+  const summaryPanelTriggerRef = useRef(null);
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
   const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
   const buttonSize = isSm ? 'xl' : '2xl';
@@ -215,20 +211,15 @@ export const Default = ({
         </Tearsheet.Header>
         <Tearsheet.Body>
           <Tearsheet.MainContent>
-            <div className="influencerPanelTrigger">
-              <Button
-                kind="ghost"
-                label="Open influencer"
-                onClick={() => setInfluencerPanelOpen(true)}
-                renderIcon={() => <RightPanelClose />}
-              ></Button>
-            </div>
             <div className="summaryPanelTrigger">
               <Button
+                ref={summaryPanelTriggerRef}
                 kind="ghost"
                 label="Open right panel"
                 onClick={() => setSummaryPanelOpen(true)}
                 renderIcon={() => <RightPanelClose />}
+                aria-expanded={summaryPanelOpen}
+                aria-controls="summary-panel"
               ></Button>
             </div>
 
@@ -323,6 +314,7 @@ export const Default = ({
           <Tearsheet.SummaryContent
             summaryPanelOpen={summaryPanelOpen}
             onSummaryPanelClose={() => setSummaryPanelOpen(false)}
+            summaryPanelTriggerRef={summaryPanelTriggerRef}
           >
             <h3 className="summaryPanelHeading">Summary details</h3>
             <div className="rightDetailsBody">
@@ -380,6 +372,7 @@ export const Default = ({
 export const WithInfluencer = () => {
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
+  const influencerPanelTriggerRef = useRef(null);
   const currentStep = 1;
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
@@ -441,6 +434,7 @@ export const WithInfluencer = () => {
         <Tearsheet.Influencer
           influencerPanelOpen={influencerPanelOpen}
           onInfluencerPanelClose={() => setInfluencerPanelOpen(false)}
+          influencerPanelTriggerRef={influencerPanelTriggerRef}
         >
           <ProgressIndicator vertical>
             <ProgressStep
@@ -465,10 +459,13 @@ export const WithInfluencer = () => {
           <Tearsheet.MainContent>
             <div className="influencerPanelTrigger">
               <Button
+                ref={influencerPanelTriggerRef}
                 kind="ghost"
-                label="Open right panel"
+                label="Open influencer panel"
                 onClick={() => setInfluencerPanelOpen(true)}
                 renderIcon={() => <RightPanelClose />}
+                aria-expanded={influencerPanelOpen}
+                aria-controls="influencer-panel"
               ></Button>
             </div>
 
@@ -774,6 +771,8 @@ export const narrowTearsheet = () => {
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
   const launcherButtonRef = useRef(null);
+  const summaryPanelTriggerRef = useRef(null);
+  const influencerPanelTriggerRef = useRef(null);
   const currentStep = 1;
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
   const isSm = useMatchMedia(smMediaQuery) || true; // narrow variant always uses xl
@@ -831,6 +830,7 @@ export const narrowTearsheet = () => {
           <Tearsheet.Influencer
             influencerPanelOpen={influencerPanelOpen}
             onInfluencerPanelClose={() => setInfluencerPanelOpen(false)}
+            influencerPanelTriggerRef={influencerPanelTriggerRef}
           >
             <ProgressIndicator vertical>
               <ProgressStep
@@ -855,18 +855,24 @@ export const narrowTearsheet = () => {
             <Tearsheet.MainContent>
               <div className="influencerPanelTrigger">
                 <Button
+                  ref={influencerPanelTriggerRef}
                   kind="ghost"
                   label="Open influencer"
                   onClick={() => setInfluencerPanelOpen(true)}
                   renderIcon={() => <RightPanelClose />}
+                  aria-expanded={influencerPanelOpen}
+                  aria-controls="influencer-panel"
                 ></Button>
               </div>
               <div className="summaryPanelTrigger">
                 <Button
+                  ref={summaryPanelTriggerRef}
                   kind="ghost"
-                  label="Open right panel"
+                  label="Open summary panel"
                   onClick={() => setSummaryPanelOpen(true)}
                   renderIcon={() => <RightPanelClose />}
+                  aria-expanded={summaryPanelOpen}
+                  aria-controls="summary-panel"
                 ></Button>
               </div>
 
@@ -973,6 +979,7 @@ export const narrowTearsheet = () => {
             <Tearsheet.SummaryContent
               summaryPanelOpen={summaryPanelOpen}
               onSummaryPanelClose={() => setSummaryPanelOpen(false)}
+              summaryPanelTriggerRef={summaryPanelTriggerRef}
             >
               <h3 className="summaryPanelHeading">Summary details</h3>
               <div className="rightDetailsBody">

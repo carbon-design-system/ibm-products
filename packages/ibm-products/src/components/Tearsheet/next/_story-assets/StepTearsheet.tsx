@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode, RefObject, useEffect } from 'react';
+import React, { ReactNode, RefObject, useEffect, useState } from 'react';
 import {
   StepGroup,
   StepContextType,
@@ -64,6 +64,9 @@ export const TearsheetWithSteps = ({
   const isSm = useMatchMedia(smMediaQuery);
   const buttonSize = isSm ? 'xl' : '2xl';
 
+  // State for submission status message (Issue 25)
+  const [submissionStatus, setSubmissionStatus] = useState('');
+
   return (
     <Tearsheet
       open={open}
@@ -103,22 +106,27 @@ export const TearsheetWithSteps = ({
             <ProgressStep
               complete={currentStep > 1}
               current={currentStep === 1}
-              label="Step 1"
-              secondaryLabel="Optional label"
+              label="Step 1 - Personal Information"
+              secondaryLabel="Enter your email"
+              aria-label="Step 1 of 3: Personal Information - Enter your email"
             />
             <ProgressStep
               complete={currentStep > 2}
               current={currentStep === 2}
-              label="Step 2"
+              label="Step 2 - Location Details"
+              secondaryLabel="Enter city and state"
               disabled={currentStep < 2}
               aria-disabled={currentStep < 2}
+              aria-label={`Step 2 of 3: Location Details - Enter city and state${currentStep < 2 ? ' (Not available)' : ''}`}
             />
             <ProgressStep
               current={currentStep === 3}
-              label="Step 3"
+              label="Step 3 - Review and Submit"
+              secondaryLabel="Review your information"
               complete={currentStep > 3}
               disabled={currentStep < 3}
               aria-disabled={currentStep < 3}
+              aria-label={`Step 3 of 3: Review and Submit - Review your information${currentStep < 3 ? ' (Not available)' : ''}`}
             />
           </ProgressIndicator>
         )}
@@ -129,28 +137,51 @@ export const TearsheetWithSteps = ({
             <ProgressStep
               complete={currentStep > 1}
               current={currentStep === 1}
-              label="Step 1"
-              secondaryLabel="Optional label"
+              label="Step 1 - Personal Information"
+              secondaryLabel="Enter your email"
+              aria-label="Step 1 of 3: Personal Information - Enter your email"
             />
             <ProgressStep
               complete={currentStep > 2}
               current={currentStep === 2}
-              label="Step 2"
+              label="Step 2 - Location Details"
+              secondaryLabel="Enter city and state"
               disabled={currentStep < 2}
               aria-disabled={currentStep < 2}
+              aria-label={`Step 2 of 3: Location Details - Enter city and state${currentStep < 2 ? ' (Not available)' : ''}`}
             />
             <ProgressStep
               current={currentStep === 3}
-              label="Step 3"
+              label="Step 3 - Review and Submit"
+              secondaryLabel="Review your information"
               complete={currentStep > 3}
               disabled={currentStep < 3}
               aria-disabled={currentStep < 3}
+              aria-label={`Step 3 of 3: Review and Submit - Review your information${currentStep < 3 ? ' (Not available)' : ''}`}
             />
           </ProgressIndicator>
         </Tearsheet.Influencer>
       )}
       <Tearsheet.Body>
         <Tearsheet.MainContent>
+          {/* Status message announcement for submission (Issue 25) */}
+          {submissionStatus && (
+            <div
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              className="submission-status-message"
+              style={{
+                position: 'absolute',
+                left: '-10000px',
+                width: '1px',
+                height: '1px',
+                overflow: 'hidden',
+              }}
+            >
+              {submissionStatus}
+            </div>
+          )}
           <StepGroup>
             <Step1 />
             <Step2 />
@@ -181,9 +212,17 @@ export const TearsheetWithSteps = ({
             label: currentStep === totalSteps ? 'Submit' : 'Next',
             onClick: () => {
               if (currentStep === totalSteps) {
-                // submit
-                setOpen?.(false);
-                handleGoToStep(1);
+                // Issue 25: Announce submission status
+                setSubmissionStatus(
+                  'Form submitted successfully. Your information has been saved.'
+                );
+
+                // Close after a brief delay to allow announcement
+                setTimeout(() => {
+                  setOpen?.(false);
+                  handleGoToStep(1);
+                  setSubmissionStatus('');
+                }, 1000);
               } else {
                 handleNext();
               }
@@ -217,8 +256,10 @@ function Step1() {
       : '';
 
   return (
-    <Section className="step-container">
-      <Heading className="step-heading">Step 1</Heading>
+    <Section className="step-container" aria-labelledby="step1-heading">
+      <h3 id="step1-heading" className="step-heading">
+        Step 1 - Personal Information
+      </h3>
       <TextInput
         id="email"
         onChange={(e) => {
@@ -232,6 +273,7 @@ function Step1() {
         invalid={isInvalidEmail}
         invalidText={emailSuggestion || 'Please enter a valid email address'}
         aria-describedby={emailSuggestion ? 'email-suggestion' : undefined}
+        autoComplete="off"
       />
       {emailSuggestion && (
         <div
@@ -267,8 +309,10 @@ function Step2() {
     : '';
 
   return (
-    <Section className="step-container">
-      <Heading className="step-heading">Step 2</Heading>
+    <Section className="step-container" aria-labelledby="step2-heading">
+      <h3 id="step2-heading" className="step-heading">
+        Step 2 - Location Details
+      </h3>
       <div className="step-form-items">
         <TextInput
           id="city"
@@ -327,6 +371,7 @@ function Step3() {
   // Example showing how to get step state via hook
   const { formState } = useStepContext();
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const [copyStatus, setCopyStatus] = useState('');
 
   // Focus management: Move focus to first interactive element when step loads
   useEffect(() => {
@@ -339,9 +384,18 @@ function Step3() {
 
       if (copyButton) {
         copyButton.focus();
-      } else {
-        // Fallback: focus the container itself if button not found
-        containerRef.current?.focus();
+
+        // Issue 24: Add event listener for better copy feedback
+        const handleCopy = () => {
+          setCopyStatus('Code copied to clipboard successfully');
+          setTimeout(() => setCopyStatus(''), 3000);
+        };
+
+        copyButton.addEventListener('click', handleCopy);
+
+        return () => {
+          copyButton.removeEventListener('click', handleCopy);
+        };
       }
     }, 150);
 
@@ -349,11 +403,35 @@ function Step3() {
   }, []);
 
   return (
-    <Section className="step-container">
-      <Heading className="step-heading">Step 3</Heading>
-      <div ref={containerRef} tabIndex={-1}>
-        Form state
-        <CodeSnippet type="multi" aria-label="Copy form state to clipboard">
+    <Section className="step-container" aria-labelledby="step3-heading">
+      <h3 id="step3-heading" className="step-heading">
+        Step 3 - Review and Submit
+      </h3>
+      {/* Issue 24: Copy status announcement */}
+      {copyStatus && (
+        <div
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          style={{
+            position: 'absolute',
+            left: '-10000px',
+            width: '1px',
+            height: '1px',
+            overflow: 'hidden',
+          }}
+        >
+          {copyStatus}
+        </div>
+      )}
+      {/* Issue 23: Remove tabIndex to prevent focus on non-interactive content */}
+      <div ref={containerRef}>
+        <p id="form-state-label">Review your submitted information:</p>
+        <CodeSnippet
+          type="multi"
+          aria-label="Copy form state to clipboard"
+          aria-describedby="form-state-label"
+        >
           {JSON.stringify(formState, null, 2)}
         </CodeSnippet>
       </div>

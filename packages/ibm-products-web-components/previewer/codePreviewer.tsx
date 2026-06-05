@@ -234,6 +234,11 @@ const filterStoryCode = (storyCode, args) => {
       /{\s*args:\s*{[\s\S]*?}\s*,\s*render:\s*\(?\s*args\s*(?::\s*any)?\s*\)?\s*=>\s*{/,
       ''
     )
+    //Remove the args block with defaultArgs reference
+    .replace(
+      /\{\s*args:\s*defaultArgs\s*,\s*render:\s*\(?\s*args\s*(?::\s*any)?\s*\)?\s*=>\s*\{/g,
+      ''
+    )
     //replace the render closing braces
     .replace(/}\s*$/, '')
     // Remove <style>${styles}</style> injections anywhere

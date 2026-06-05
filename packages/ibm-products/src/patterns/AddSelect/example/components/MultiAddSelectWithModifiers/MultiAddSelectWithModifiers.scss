@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
 
 .multi-add-select-with-modifiers-pattern {
   &__modifier {

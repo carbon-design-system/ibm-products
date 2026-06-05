@@ -6,6 +6,7 @@
  */
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
 
 .non-hierarchical-peek-inside-pattern {
   &__modifier {
@@ -75,21 +76,22 @@
   &__peek-list {
     display: flex;
     flex-direction: column;
-  }@media screen and (prefers-reduced-motion: reduce) {
-&__peek-item {
-    display: flex;
-    border-inline-start: $spacing-01 solid transparent;
-    transition: none;
+  }
+  @media screen and (prefers-reduced-motion: reduce) {
+    &__peek-item {
+      display: flex;
+      border-inline-start: $spacing-01 solid transparent;
+      transition: none;
 
-    &:hover {
-      background: $layer-hover-01;
+      &:hover {
+        background: $layer-hover-01;
 
-      .non-hierarchical-peek-inside-pattern__peek-item-title {
-        color: $interactive;
+        .non-hierarchical-peek-inside-pattern__peek-item-title {
+          color: $interactive;
+        }
       }
     }
-}
-}
+  }
 
   &__peek-item {
     display: flex;

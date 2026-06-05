@@ -3,6 +3,7 @@
   "description": "Framework-agnostic utilities for Carbon for IBM Products",
   "version": "1.0.0-rc.0",
   "license": "Apache-2.0",
+  "private": true,
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",

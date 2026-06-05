@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import { MultiAddSelect } from '../../components/MultiAddSelect/MultiAddSelect';
-import { AddSelectItem } from '@carbon/ibm-products-utilities';
+import { AddSelectItem } from '@carbon/ibm-products';
 import './MultiAddSelectDefault.scss';
 
 // Sample data for the default variant

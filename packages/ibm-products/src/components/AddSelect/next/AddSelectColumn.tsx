@@ -79,6 +79,10 @@ export interface AddSelectColumnProps {
    */
   allSelected?: boolean;
   /**
+   * Whether the "Select All" checkbox is in an indeterminate state
+   */
+  allIndeterminate?: boolean;
+  /**
    * Callback when "Select All" is toggled
    */
   onSelectAll?: (checked: boolean) => void;
@@ -124,6 +128,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
       showSelectAll = false,
       itemCount = 0,
       allSelected = false,
+      allIndeterminate = false,
       onSelectAll,
       onNavigate,
       className,
@@ -199,6 +204,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
                   id={`select-all-${title}`}
                   className={`${blockClass}-column__select-all`}
                   checked={allSelected}
+                  indeterminate={allIndeterminate}
                   onChange={handleSelectAll}
                   labelText={
                     <>
@@ -237,6 +243,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
 
 AddSelectColumn.propTypes = {
   actionsSlot: PropTypes.node,
+  allIndeterminate: PropTypes.bool,
   allSelected: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,

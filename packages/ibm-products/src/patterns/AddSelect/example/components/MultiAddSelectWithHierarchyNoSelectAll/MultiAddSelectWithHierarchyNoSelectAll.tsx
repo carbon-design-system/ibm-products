@@ -12,7 +12,6 @@ import React, {
   useState,
   useMemo,
   useEffect,
-  useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -20,20 +19,20 @@ import { ToastNotification } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 import { AddSelect } from '../../../../../components/AddSelect/next';
 import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
-import { AddSelectContext } from '../../../../../components/AddSelect/next/context';
 import { Tearsheet } from '../../../../../components/Tearsheet/next';
 import { NoDataEmptyState } from '../../../../../components/EmptyStates';
 import { useMatchMedia } from '../../../../../global/js/hooks/useMatchMedia';
-import './MultiAddSelectWithHierarchy.scss';
+import './MultiAddSelectWithHierarchyNoSelectAll.scss';
 
-const blockClass = `multi-add-select-hierarchy-pattern`;
+const blockClass = `multi-add-select-hierarchy-no-select-all-pattern`;
 
 /**
- * MultiAddSelectWithHierarchy Pattern - A complete pattern with Tearsheet for multi-selection with hierarchy
+ * MultiAddSelectWithHierarchyNoSelectAll Pattern - Multi-selection with hierarchy without select-all
  * Uses recursive column generation to display hierarchy levels side-by-side
+ * No select-all checkbox - only individual item selection allowed
  */
 
-export interface MultiAddSelectWithHierarchyProps {
+export interface MultiAddSelectWithHierarchyNoSelectAllProps {
   /**
    * Whether the tearsheet is open
    */
@@ -140,6 +139,7 @@ interface NavigationLevel {
 /**
  * Controlled Column Component
  * Renders a single column with items, controlled by parent state
+ * NO SELECT ALL functionality
  */
 interface ColumnProps {
   items: AddSelectItem[];
@@ -154,8 +154,6 @@ interface ColumnProps {
     children: AddSelectItem[]
   ) => void;
   selectedItems: Set<string>;
-  onSelectAll?: (itemIds: string[], selected: boolean) => void;
-  partiallySelectedItems: Set<string>;
 }
 
 const ControlledColumn: React.FC<ColumnProps> = ({
@@ -167,8 +165,6 @@ const ControlledColumn: React.FC<ColumnProps> = ({
   dataManager,
   onNavigate,
   selectedItems,
-  onSelectAll,
-  partiallySelectedItems,
 }) => {
   const [columnSearchTerm, setColumnSearchTerm] = useState('');
 
@@ -188,32 +184,6 @@ const ControlledColumn: React.FC<ColumnProps> = ({
     });
   }, [items, columnSearchTerm]);
 
-  // Check if all items in this column are selected or partially selected
-  const { allSelected, someSelected } = useMemo(() => {
-    if (filteredItems.length === 0)
-      return { allSelected: false, someSelected: false };
-
-    const allFullySelected = filteredItems.every((item) => {
-      const hasChildren = dataManager.hasChildren(item.id);
-      if (hasChildren) {
-        return dataManager.allDescendantsSelected(item.id, selectedItems);
-      }
-      return selectedItems.has(item.id);
-    });
-
-    const someItemsSelected = filteredItems.some((item) => {
-      return (
-        selectedItems.has(item.id) ||
-        dataManager.hasSelectedDescendants(item.id, selectedItems)
-      );
-    });
-
-    return {
-      allSelected: allFullySelected,
-      someSelected: someItemsSelected && !allFullySelected,
-    };
-  }, [filteredItems, selectedItems]);
-
   const handleColumnSearch = (term: string) => {
     setColumnSearchTerm(term);
   };
@@ -228,17 +198,6 @@ const ControlledColumn: React.FC<ColumnProps> = ({
     }
   };
 
-  // Handle select all for this column (including all descendants)
-  const handleSelectAll = (checked: boolean) => {
-    const allItemIds: string[] = [];
-    filteredItems.forEach((item) => {
-      allItemIds.push(item.id);
-      const descendants = dataManager.getItemDescendants(item.id);
-      descendants.forEach((desc) => allItemIds.push(desc.id));
-    });
-    onSelectAll?.(allItemIds, checked);
-  };
-
   return (
     <AddSelect.Column
       title={columnTitle}
@@ -247,16 +206,11 @@ const ControlledColumn: React.FC<ColumnProps> = ({
       itemCount={filteredItems.length}
       multi={true}
       onNavigate={handleNavigate}
-      showSelectAll={true}
-      allSelected={allSelected}
-      onSelectAll={handleSelectAll}
-      allIndeterminate={someSelected}
+      showSelectAll={false}
     >
       {filteredItems.map((item) => {
         const hasChildren =
           item.children?.entries && item.children.entries.length > 0;
-        const isPartiallySelected = partiallySelectedItems.has(item.id);
-
         return (
           <AddSelect.Row
             key={item.id}
@@ -269,7 +223,6 @@ const ControlledColumn: React.FC<ColumnProps> = ({
             hasChildren={hasChildren}
             hasItemPanel={!!item.itemDetails}
             onItemPanelClick={onShowInfo}
-            indeterminate={isPartiallySelected}
           />
         );
       })}
@@ -277,9 +230,9 @@ const ControlledColumn: React.FC<ColumnProps> = ({
   );
 };
 
-export const MultiAddSelectWithHierarchy = forwardRef<
+export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
   HTMLDivElement,
-  MultiAddSelectWithHierarchyProps
+  MultiAddSelectWithHierarchyNoSelectAllProps
 >(
   (
     {
@@ -336,190 +289,41 @@ export const MultiAddSelectWithHierarchy = forwardRef<
     const isSm = useMatchMedia(smMediaQuery);
     const buttonSize = isSm ? 'xl' : '2xl';
 
-    // Calculate partially selected items (parents with some but not all children selected)
-    const partiallySelectedItems = useMemo(() => {
-      const partial = new Set<string>();
-
-      const checkPartialSelection = (item: AddSelectItem) => {
-        if (dataManager.hasChildren(item.id)) {
-          const hasSelected = dataManager.hasSelectedDescendants(
-            item.id,
-            selectedIds
-          );
-          const allSelected = dataManager.allDescendantsSelected(
-            item.id,
-            selectedIds
-          );
-
-          if (hasSelected && !allSelected) {
-            partial.add(item.id);
-          }
-
-          // Recursively check children
-          const children = dataManager.getItemChildren(item.id);
-          children.forEach((child) => checkPartialSelection(child));
-        }
-      };
-
-      items.forEach((item) => checkPartialSelection(item));
-      navigationLevels.forEach((level) => {
-        level.items.forEach((item) => checkPartialSelection(item));
-      });
-
-      return partial;
-    }, [selectedIds, items, navigationLevels]);
-
     // Initialize data manager with items
     useEffect(() => {
       dataManager.setItems(items);
       setCurrentItems(items);
     }, [items, dataManager]);
 
-    // Reset state when tearsheet opens and pre-select disabled items
+    // Reset state when tearsheet opens
     useEffect(() => {
       if (open) {
-        // Collect all disabled (pre-added) items
-        const disabledIds = new Set<string>();
-        const collectDisabledIds = (itemList: AddSelectItem[]) => {
-          itemList.forEach((item) => {
-            if (item.disabled) {
-              disabledIds.add(item.id);
-            }
-            if (item.children?.entries) {
-              collectDisabledIds(item.children.entries);
-            }
-          });
-        };
-        collectDisabledIds(items);
-
-        // Pre-select disabled items and mark them in dataManager
-        disabledIds.forEach((id) => {
-          dataManager.setItemStatus(id, 'checked');
-        });
-
-        setSelectedIds(disabledIds);
+        setSelectedIds(new Set());
         setSearchTerm('');
         setInfoPanel({ item: null, show: false });
         setNavigationLevels([]);
         setBreadcrumbPath([{ id: 'root', title: rootBreadcrumbTitle }]);
       }
-    }, [open, rootBreadcrumbTitle, items, dataManager]);
+    }, [open, rootBreadcrumbTitle]);
 
-    // Handle item selection with hierarchical logic
-    const handleItemSelect = useCallback(
-      (itemId: string, selected: boolean, value: string) => {
-        const item = dataManager.getItem(itemId);
-        if (!item) return;
+    // Handle item selection
+    const handleItemSelect = (
+      itemId: string,
+      selected: boolean,
+      value: string
+    ) => {
+      const newSelectedIds = new Set(selectedIds);
 
-        const newSelectedIds = new Set(selectedIds);
-        const hasChildren = dataManager.hasChildren(itemId);
+      if (selected) {
+        newSelectedIds.add(itemId);
+        dataManager.setSelectedItems(itemId, true);
+      } else {
+        newSelectedIds.delete(itemId);
+        dataManager.setSelectedItems(itemId, false);
+      }
 
-        // Get all descendant IDs for this item
-        const descendants = dataManager.getItemDescendants(itemId);
-        const allIds = [itemId, ...descendants.map((d) => d.id)];
-
-        if (selected) {
-          // Select the item and all its descendants
-          allIds.forEach((id) => {
-            newSelectedIds.add(id);
-            dataManager.setItemStatus(id, 'checked');
-          });
-
-          // Check if selecting this child means all siblings are now selected
-          // If so, automatically select the parent
-          if (!hasChildren) {
-            const parents = dataManager.getItemParents(itemId);
-            parents.forEach((parent) => {
-              const siblings = dataManager.getItemChildren(parent.id);
-              const allSiblingsSelected = siblings.every(
-                (sibling) => newSelectedIds.has(sibling.id) || sibling.disabled
-              );
-
-              if (allSiblingsSelected && !newSelectedIds.has(parent.id)) {
-                newSelectedIds.add(parent.id);
-                dataManager.setItemStatus(parent.id, 'checked');
-              }
-            });
-          }
-        } else {
-          // Deselect the item and all its descendants
-          allIds.forEach((id) => {
-            newSelectedIds.delete(id);
-            dataManager.setItemStatus(id, 'unchecked');
-          });
-
-          // If deselecting a child, also deselect the parent (if selected)
-          if (!hasChildren) {
-            const parents = dataManager.getItemParents(itemId);
-            parents.forEach((parent) => {
-              if (newSelectedIds.has(parent.id)) {
-                newSelectedIds.delete(parent.id);
-                dataManager.setItemStatus(parent.id, 'unchecked');
-              }
-            });
-          }
-        }
-
-        setSelectedIds(newSelectedIds);
-      },
-      [selectedIds, dataManager]
-    );
-
-    // Handle select all for a column (including all descendants)
-    const handleSelectAll = useCallback(
-      (itemIds: string[], selected: boolean) => {
-        const newSelectedIds = new Set(selectedIds);
-
-        itemIds.forEach((itemId) => {
-          const item = dataManager.getItem(itemId);
-          if (!item) return;
-
-          const hasChildren = dataManager.hasChildren(itemId);
-
-          if (selected) {
-            // Select the item
-            newSelectedIds.add(itemId);
-            dataManager.setItemStatus(itemId, 'checked');
-
-            // If selecting a child, check if all siblings are now selected
-            // If so, automatically select the parent
-            if (!hasChildren) {
-              const parents = dataManager.getItemParents(itemId);
-              parents.forEach((parent) => {
-                const siblings = dataManager.getItemChildren(parent.id);
-                const allSiblingsSelected = siblings.every(
-                  (sibling) =>
-                    newSelectedIds.has(sibling.id) || sibling.disabled
-                );
-
-                if (allSiblingsSelected && !newSelectedIds.has(parent.id)) {
-                  newSelectedIds.add(parent.id);
-                  dataManager.setItemStatus(parent.id, 'checked');
-                }
-              });
-            }
-          } else {
-            // Deselect the item
-            newSelectedIds.delete(itemId);
-            dataManager.setItemStatus(itemId, 'unchecked');
-
-            // If deselecting a child, also deselect the parent (if selected)
-            if (!hasChildren) {
-              const parents = dataManager.getItemParents(itemId);
-              parents.forEach((parent) => {
-                if (newSelectedIds.has(parent.id)) {
-                  newSelectedIds.delete(parent.id);
-                  dataManager.setItemStatus(parent.id, 'unchecked');
-                }
-              });
-            }
-          }
-        });
-
-        setSelectedIds(newSelectedIds);
-      },
-      [selectedIds, dataManager]
-    );
+      setSelectedIds(newSelectedIds);
+    };
 
     // Handle global search
     const handleGlobalSearch = (term: string) => {
@@ -624,13 +428,11 @@ export const MultiAddSelectWithHierarchy = forwardRef<
       setInfoPanel({ item: null, show: false });
     };
 
-    // Get selected items for display (show only top-level parents, hide disabled and children)
+    // Get selected items for display
     const selectedItemsForDisplay = useMemo(() => {
-      // Get top-level selected items (items without selected ancestors)
-      const topLevelItems = dataManager.getTopLevelSelectedItems(selectedIds);
-
-      // Filter out disabled (pre-added) items
-      return topLevelItems.filter((item) => !item.disabled);
+      return Array.from(selectedIds)
+        .map((id) => dataManager.getItem(id))
+        .filter((item): item is AddSelectItem => item !== undefined);
     }, [selectedIds, dataManager]);
 
     return (
@@ -676,8 +478,6 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                           dataManager={dataManager}
                           onNavigate={handleNavigateToChild}
                           selectedItems={selectedIds}
-                          onSelectAll={handleSelectAll}
-                          partiallySelectedItems={partiallySelectedItems}
                         />
 
                         {/* Additional columns based on navigation levels */}
@@ -692,8 +492,6 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                             dataManager={dataManager}
                             onNavigate={handleNavigateToChild}
                             selectedItems={selectedIds}
-                            onSelectAll={handleSelectAll}
-                            partiallySelectedItems={partiallySelectedItems}
                           />
                         ))}
                       </>
@@ -783,7 +581,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
   }
 );
 
-MultiAddSelectWithHierarchy.propTypes = {
+MultiAddSelectWithHierarchyNoSelectAll.propTypes = {
   className: PropTypes.string,
   columnSearchPlaceholder: PropTypes.string,
   columnTitle: PropTypes.string,
@@ -812,6 +610,7 @@ MultiAddSelectWithHierarchy.propTypes = {
   /**@ts-ignore */
   open: PropTypes.bool.isRequired,
   primaryButtonText: PropTypes.string,
+  rootBreadcrumbTitle: PropTypes.string,
   searchResultsTitle: PropTypes.string,
   secondaryButtonText: PropTypes.string,
   selectionSummaryTitle: PropTypes.string,
@@ -822,4 +621,7 @@ MultiAddSelectWithHierarchy.propTypes = {
   title: PropTypes.string,
 };
 
-MultiAddSelectWithHierarchy.displayName = 'MultiAddSelectWithHierarchy';
+MultiAddSelectWithHierarchyNoSelectAll.displayName =
+  'MultiAddSelectWithHierarchyNoSelectAll';
+
+// Made with Bob

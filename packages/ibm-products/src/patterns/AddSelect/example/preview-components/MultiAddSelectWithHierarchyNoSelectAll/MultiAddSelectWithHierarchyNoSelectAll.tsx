@@ -9,8 +9,8 @@ import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import { AddSelectItem } from '@carbon/ibm-products';
 import { Document } from '@carbon/react/icons';
-import { MultiAddSelectWithHierarchy as MultiAddSelectHierarchyComponent } from '../../components/MultiAddSelectWithHierarchy/MultiAddSelectWithHierarchy';
-import './MultiAddSelectWithHierarchy.scss';
+import { MultiAddSelectWithHierarchyNoSelectAll as MultiAddSelectHierarchyNoSelectAllComponent } from '../../components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
+import './MultiAddSelectWithHierarchyNoSelectAll.scss';
 
 // Hierarchical sample data for demo
 const hierarchicalItems: AddSelectItem[] = [
@@ -79,9 +79,8 @@ const hierarchicalItems: AddSelectItem[] = [
   },
 ];
 
-export const MultiAddSelectWithHierarchyPreview = () => {
+export const MultiAddSelectWithHierarchyNoSelectAllPreview = () => {
   const [open, setOpen] = useState(false);
-  const [addedItems, setAddedItems] = useState<Set<string>>(new Set(['1-2'])); // Pre-add some items to demonstrate disabled state
 
   const handleOpen = () => {
     setOpen(true);
@@ -89,55 +88,36 @@ export const MultiAddSelectWithHierarchyPreview = () => {
 
   const handleSubmit = (itemIds: string[], values: string[]) => {
     console.log('Submitted:', { itemIds, values });
-    // Add newly selected items to the added items set
-    setAddedItems((prev) => new Set([...prev, ...itemIds]));
   };
-
-  // Mark already added items as disabled in the hierarchical items
-  const itemsWithDisabledState = hierarchicalItems.map((item) => {
-    const markDisabled = (itm: AddSelectItem): AddSelectItem => {
-      const isAdded = addedItems.has(itm.id);
-      return {
-        ...itm,
-        disabled: isAdded,
-        children: itm.children
-          ? {
-              ...itm.children,
-              entries: itm.children.entries.map(markDisabled),
-            }
-          : undefined,
-      };
-    };
-    return markDisabled(item);
-  });
 
   return (
     <div className="example-container">
-      <h3>Multi Add Select with Hierarchy Pattern Example</h3>
+      <h3>Multi Add Select with Hierarchy (No Select All) Pattern Example</h3>
       <p>
         Click the button below to open the multi add select dialog with
-        hierarchical navigation. Columns are automatically generated
-        side-by-side as you navigate.
+        hierarchical navigation. This variant does not include a "select all"
+        checkbox at the column level - only individual items can be selected.
+        All individually selected items are listed in the sidepanel.
       </p>
 
       <Button kind="primary" className="launch-button" onClick={handleOpen}>
         Add files
       </Button>
 
-      <MultiAddSelectHierarchyComponent
+      <MultiAddSelectHierarchyNoSelectAllComponent
         open={open}
         setOpen={setOpen}
-        items={itemsWithDisabledState}
+        items={hierarchicalItems}
         onSubmit={handleSubmit}
         title="Add files"
-        description="Select files from the folders below. Click the chevron to navigate into folders."
+        description="Select individual files from the folders below. Click the chevron to navigate into folders. Note: No select-all option is available."
         itemsLabel="Files"
         globalSearchLabel="Search files"
         globalSearchPlaceholder="Find files"
         searchResultsTitle="Search results"
         selectionSummaryTitle="Selected files"
         noSelectionTitle="No files selected"
-        noSelectionDescription="Select files to include them in your selection."
+        noSelectionDescription="Select individual files to include them in your selection."
         noResultsTitle="No results"
         noResultsDescription="Try again"
         columnSearchPlaceholder="Find"
@@ -149,3 +129,5 @@ export const MultiAddSelectWithHierarchyPreview = () => {
     </div>
   );
 };
+
+// Made with Bob

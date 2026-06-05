@@ -53,6 +53,10 @@ export interface AddSelectRowProps {
    */
   selected?: boolean;
   /**
+   * Whether the item is in an indeterminate state (for hierarchical selections)
+   */
+  indeterminate?: boolean;
+  /**
    * Whether the item is disabled
    */
   disabled?: boolean;
@@ -137,6 +141,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       subtitle,
       value,
       selected = false,
+      indeterminate = false,
       disabled = false,
       hasChildren = false,
       parentId = '',
@@ -204,6 +209,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
                 id={`checkbox-${itemId}`}
                 className={`${blockClass}-row__checkbox`}
                 checked={isSelected}
+                indeterminate={indeterminate}
                 disabled={disabled}
                 labelText={title}
                 hideLabel
@@ -287,6 +293,7 @@ AddSelectRow.propTypes = {
   hasChildren: PropTypes.bool,
   hasItemPanel: PropTypes.bool,
   icon: PropTypes.node,
+  indeterminate: PropTypes.bool,
   itemId: PropTypes.string.isRequired,
   /**@ts-ignore */
   itemPanelIconButtonProps: PropTypes.object,

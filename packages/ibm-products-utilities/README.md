@@ -163,10 +163,10 @@ work in external projects.
  ├── src/
  │ ├── utils/ # Utilities directory
  │ │ └── add-select/ #AddSelect utility
- │ │ ├── add-select-data.ts
- │ │ ├── add-select-data.spec.ts
- │ │ ├── add-select-data.md
- │ │ └── index.ts
+ │ │   ├── add-select-data.ts
+ │ │   ├── add-select-data.spec.ts
+ │ │   ├── add-select-data.md
+ │ │   └── index.ts
  │ └── index.ts # Main entry point
  ├── package.json
  ├── tsconfig.json

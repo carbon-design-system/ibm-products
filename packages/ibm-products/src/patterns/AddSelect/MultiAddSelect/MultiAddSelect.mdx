@@ -1,0 +1,179 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../../global/js/utils/story-helper';
+import * as stories from './MultiAddSelect.stories';
+
+# MultiAddSelect Pattern
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+- [Copy-paste ready code](#copy-paste-ready-code)
+
+## Overview
+
+The MultiAddSelect pattern provides a complete, production-ready implementation
+for multi-selection workflows. It includes a Tearsheet container, AddSelect
+component with search and filtering, selection summary panel, and success
+notifications.
+
+> **Copy-paste ready**: The component in
+> `example/components/MultiAddSelect/MultiAddSelect.tsx` includes everything you
+> need - Tearsheet, Toast notifications, and all interaction logic. Simply copy
+> the file and customize the props.
+
+### Key Features
+
+- **Complete pattern** - Includes Tearsheet, AddSelect, selection summary, and
+  toast notifications
+- **Multi-selection** - Select multiple items with checkboxes
+- **Search & filter** - Built-in global search across all items
+- **Selection summary** - Real-time display of selected items in side panel
+- **Info panel** - View detailed information about items with metadata
+- **Success feedback** - Toast notification on successful submission
+- **Responsive** - Adapts button sizes based on screen size
+- **Accessible** - Full keyboard navigation and ARIA support
+
+## Example usage
+
+### Default
+
+<Canvas>
+  <Story id="patterns-add-and-select-multi-add-select--default" />
+</Canvas>
+
+## Copy-paste ready code
+
+The MultiAddSelect component is located at:
+
+```
+packages/ibm-products/src/patterns/AddSelect/example/components/MultiAddSelect/MultiAddSelect.tsx
+```
+
+### Basic usage
+
+```jsx
+import { MultiAddSelect } from './components/MultiAddSelect';
+
+const MyComponent = () => {
+  const [open, setOpen] = useState(false);
+
+  const items = [
+    { id: '1', title: 'Item 1', value: '1' },
+    { id: '2', title: 'Item 2', value: '2' },
+  ];
+
+  const handleSubmit = (itemIds, values) => {
+    console.log('Selected:', itemIds, values);
+  };
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Add items</Button>
+
+      <MultiAddSelect
+        open={open}
+        setOpen={setOpen}
+        items={items}
+        onSubmit={handleSubmit}
+        title="Add items"
+        description="Select items from the list below"
+      />
+    </>
+  );
+};
+```
+
+## Component API
+
+### Props
+
+| Prop                          | Type                                            | Default                              | Description                                                  |
+| ----------------------------- | ----------------------------------------------- | ------------------------------------ | ------------------------------------------------------------ |
+| `open`                        | `boolean`                                       | Required                             | Whether the tearsheet is open                                |
+| `setOpen`                     | `(open: boolean) => void`                       | Required                             | Callback to set open state                                   |
+| `items`                       | `AddSelectItem[]`                               | Required                             | Array of items to display                                    |
+| `onSubmit`                    | `(itemIds: string[], values: string[]) => void` | -                                    | Callback when items are submitted                            |
+| `title`                       | `string`                                        | `'Add items'`                        | Title for the tearsheet                                      |
+| `description`                 | `ReactNode`                                     | `'Select items from the list below'` | Description for the tearsheet                                |
+| `itemsLabel`                  | `string`                                        | `'Items'`                            | Label for items section                                      |
+| `globalSearchLabel`           | `string`                                        | `'Search'`                           | Global search label                                          |
+| `globalSearchPlaceholder`     | `string`                                        | `'Search items'`                     | Global search placeholder                                    |
+| `selectionSummaryTitle`       | `string`                                        | `'Selected items'`                   | Title for selection summary panel                            |
+| `noSelectionTitle`            | `string`                                        | `'No items selected'`                | Empty state title                                            |
+| `noSelectionDescription`      | `string`                                        | `'Select items from the list'`       | Empty state description                                      |
+| `primaryButtonText`           | `string`                                        | `'Add'`                              | Primary button text                                          |
+| `secondaryButtonText`         | `string`                                        | `'Cancel'`                           | Secondary button text                                        |
+| `successNotificationTitle`    | `string`                                        | `'Success'`                          | Success notification title                                   |
+| `successNotificationSubtitle` | `string`                                        | `'\{count\} item\{plural\} added'`   | Success notification subtitle (use \{count\} and \{plural\}) |
+
+### Item structure
+
+```typescript
+interface AddSelectItem {
+  id: string;
+  title?: string;
+  value?: string;
+  subtitle?: string;
+  icon?: ReactNode;
+  disabled?: boolean;
+  meta?: ReactNode | Array<{ id: string; title: string; value: string }>;
+}
+```
+
+## Customization
+
+### Custom labels and text
+
+```jsx
+<MultiAddSelect
+  title="Add business terms"
+  description="Select business terms from the list below"
+  itemsLabel="Business terms"
+  globalSearchLabel="Search business terms"
+  selectionSummaryTitle="Selected business terms"
+  primaryButtonText="Add"
+  successNotificationSubtitle="{count} business term{plural} added"
+  // ... other props
+/>
+```
+
+### Items with metadata
+
+Items can include metadata that displays in an info panel:
+
+```jsx
+const items = [
+  {
+    id: '1',
+    title: 'Item 1',
+    value: '1',
+    meta: [
+      { id: 'desc', title: 'Description', value: 'Item description' },
+      { id: 'category', title: 'Category', value: 'Business' },
+    ],
+  },
+];
+```
+
+## Best Practices
+
+1. **Provide clear labels** - Use descriptive titles and labels that match your
+   domain
+2. **Handle submission** - Always provide an `onSubmit` callback to handle
+   selected items
+3. **Customize notifications** - Update success messages to match your use case
+4. **Test with real data** - Ensure the pattern works with your actual data
+   structure
+5. **Consider item count** - For large lists (>100 items), consider pagination
+   or virtualization
+
+## Related Patterns
+
+- [SingleAddSelect Pattern](/docs/patterns-add-and-select-singleaddselect--docs) -
+  For single-selection workflows
+- [CreateModal Pattern](/docs/patterns-create-flows-create-modal--docs) - For
+  create workflows
+
+<CodesandboxLink exampleDirectory="AddSelect" />

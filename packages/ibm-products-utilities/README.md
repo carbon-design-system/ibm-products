@@ -124,10 +124,10 @@ export { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
 
 ## For End Users
 
-<<<<<<< HEAD **Do not install or import from this package directly.** Instead,
-use the appropriate consumer package: ======= **This is a private package and
-cannot be installed or imported directly.** All utilities are re-exported
-through the main packages.
+**Do not install or import from this package directly.** Instead, use the
+appropriate consumer package. **This is a private package and cannot be
+installed or imported directly.** All utilities are re-exported through the main
+packages.
 
 ### React Users
 
@@ -137,13 +137,6 @@ import { AddSelectData } from '@carbon/ibm-products';
 
 // ❌ Incorrect - Do not import directly
 import { AddSelectData } from '@carbon/ibm-products-utilities';
-
-import {
-  AddSelectData,
-  AddSelectItem,
-  ItemStatus,
-  SearchOptions,
-} from '@carbon/ibm-products';
 ```
 
 ### Web Components Users
@@ -156,11 +149,6 @@ import { AddSelectData } from '@carbon/ibm-products-web-components';
 import { AddSelectData } from '@carbon/ibm-products-utilities';
 ```
 
-import { AddSelectData, AddSelectItem, ItemStatus, SearchOptions, } from
-'@carbon/ibm-products-web-components';
-
-```
-
 **Note:** Since this package is private and not published to npm, direct imports
 like `import { AddSelectData } from '@carbon/ibm-products-utilities'` will not
 work in external projects.
@@ -169,13 +157,22 @@ work in external projects.
 
 ```
 
-@carbon/ibm-products-utilities/ ├── es/ # ESM build output ├── lib/ # CommonJS
-build output ├── src/ │ ├── utils/ # Utilities directory │ │ └── add-select/ #
-AddSelect utility │ │ ├── add-select-data.ts │ │ ├── add-select-data.spec.ts │ │
-├── add-select-data.md │ │ └── index.ts │ └── index.ts # Main entry point ├──
-package.json ├── tsconfig.json └── README.md
+@carbon/ibm-products-utilities/
+ ├── es/ # ESM build output
+ ├── lib/ # CommonJS build output
+ ├── src/
+ │ ├── utils/ # Utilities directory
+ │ │ └── add-select/ #AddSelect utility
+ │ │ ├── add-select-data.ts
+ │ │ ├── add-select-data.spec.ts
+ │ │ ├── add-select-data.md
+ │ │ └── index.ts
+ │ └── index.ts # Main entry point
+ ├── package.json
+ ├── tsconfig.json
+ └── README.md
 
-````
+```
 
 ## Development
 
@@ -183,7 +180,7 @@ package.json ├── tsconfig.json └── README.md
 
 ```bash
 yarn build
-````
+```
 
 ### Testing
 

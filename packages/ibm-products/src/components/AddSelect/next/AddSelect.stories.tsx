@@ -229,6 +229,7 @@ const AddSelectBodyStory = (args) => {
       labelB="On"
       labelText="Placeholder action"
       size="sm"
+      hideLabel
     />
   ) : undefined;
 
@@ -240,12 +241,13 @@ const AddSelectBodyStory = (args) => {
           globalSearchLabel={args.globalSearchLabel}
           globalSearchPlaceholder={args.globalSearchPlaceholder}
           searchResultsTitle={args.searchResultsTitle}
-          itemCount={filteredItems.length}
+          itemCount={args.itemCount ?? filteredItems.length}
           path={args.showPath ? args.path : []}
           onSearch={setSearchTerm}
           onBreadcrumbClick={() => {}}
           actionsSlot={actionsSlot}
           subHeaderActions={subHeaderActions}
+          hideSearch={args.hideSearch}
         >
           <PlaceholderRows />
         </AddSelect.Body>
@@ -263,14 +265,15 @@ export const AddSelectBody = {
     globalSearchPlaceholder: 'Search by name',
     searchResultsTitle: 'Search results',
     itemCount: 3,
-    showActionsSlot: true,
+    showActionsSlot: false,
     showSubHeaderActions: false,
-    showPath: true,
+    showPath: false,
     path: [
       { id: 'root', title: 'Category' },
       { id: 'folders', title: 'Folders' },
       { id: 'files', title: 'Files' },
     ],
+    hideSearch: false,
   },
   argTypes: {
     itemsLabel: {
@@ -290,7 +293,7 @@ export const AddSelectBody = {
       description: 'Title shown when search returns filtered results',
     },
     itemCount: {
-      control: 'number',
+      control: { type: 'number', min: 0 },
       description: 'Item count for display in tag badge',
     },
     showActionsSlot: {
@@ -372,6 +375,10 @@ export const AddSelectBody = {
       control: false,
       description: 'Additional props to pass to Link components in breadcrumbs',
       table: { disable: true },
+    },
+    hideSearch: {
+      control: 'boolean',
+      description: 'Whether to hide the search input',
     },
     className: {
       control: 'text',

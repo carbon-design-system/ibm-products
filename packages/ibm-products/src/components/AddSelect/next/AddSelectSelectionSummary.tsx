@@ -174,24 +174,26 @@ const AddSelectSelectionSummary = forwardRef<
                   {selectedItems.length}
                 </Tag>
               )}
-              <div
-                className={`${blockClass}__selection-summary-header-actions`}
-              >
-                {showEditIcon && onEdit && (
-                  <IconButton
-                    label={editIconDescription}
-                    onClick={onEdit}
-                    kind="ghost"
-                    size="sm"
-                    autoAlign
-                    className={`${blockClass}__selection-summary-edit-button`}
-                    {...editIconButtonProps}
-                  >
-                    <Edit size={16} />
-                  </IconButton>
-                )}
-                {headerActions}
-              </div>
+              {(showEditIcon || headerActions) && (
+                <div
+                  className={`${blockClass}__selection-summary-header-actions`}
+                >
+                  {headerActions}
+                  {showEditIcon && (
+                    <IconButton
+                      label={editIconDescription}
+                      onClick={onEdit}
+                      kind="ghost"
+                      size="sm"
+                      autoAlign
+                      className={`${blockClass}__selection-summary-edit-button`}
+                      {...editIconButtonProps}
+                    >
+                      <Edit size={16} />
+                    </IconButton>
+                  )}
+                </div>
+              )}
             </>
           )}
         </div>
@@ -211,16 +213,16 @@ const AddSelectSelectionSummary = forwardRef<
                 {selectedItems.map((item) => (
                   <div
                     key={item.id}
-                    className={`${blockClass}__selection-summary-item-simple`}
+                    className={`${blockClass}__selection-summary-item-default`}
                   >
                     <div
-                      className={`${blockClass}__selection-summary-item-title`}
+                      className={`${blockClass}__selection-summary-item-default-title`}
                     >
                       {item.title}
                     </div>
                     {item.subtitle && (
                       <div
-                        className={`${blockClass}__selection-summary-item-subtitle`}
+                        className={`${blockClass}__selection-summary-item-default-subtitle`}
                       >
                         {item.subtitle}
                       </div>

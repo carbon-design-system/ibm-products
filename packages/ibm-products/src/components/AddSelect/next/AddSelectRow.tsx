@@ -78,6 +78,12 @@ export interface AddSelectRowProps {
    */
   children?: ReactNode;
   /**
+   * Custom row content (slot) - replaces the entire row content section
+   * (title, subtitle, and children).
+   * When provided, only the selection control and navigation indicators remain.
+   */
+  rowContent?: ReactNode;
+  /**
    * Whether to show the item panel view icon for this item
    */
   hasItemPanel?: boolean;
@@ -147,6 +153,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       parentId = '',
       icon,
       children,
+      rowContent,
       hasItemPanel = false,
       onItemPanelClick,
       itemPanelIconDescription = 'View details',
@@ -232,15 +239,19 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
 
             <div className={`${blockClass}-row__content`}>
               {icon && <div className={`${blockClass}-row__icon`}>{icon}</div>}
-              <div className={`${blockClass}-row__text`}>
-                <div className={`${blockClass}-row__title`}>{title}</div>
-                {subtitle && (
-                  <div className={`${blockClass}-row__subtitle`}>
-                    {subtitle}
+              {rowContent || (
+                <>
+                  <div className={`${blockClass}-row__text`}>
+                    <div className={`${blockClass}-row__title`}>{title}</div>
+                    {subtitle && (
+                      <div className={`${blockClass}-row__subtitle`}>
+                        {subtitle}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-              {children}
+                  {children}
+                </>
+              )}
             </div>
 
             {hasItemPanel && (
@@ -292,6 +303,7 @@ AddSelectRow.propTypes = {
   disabled: PropTypes.bool,
   hasChildren: PropTypes.bool,
   hasItemPanel: PropTypes.bool,
+  headerContent: PropTypes.node,
   icon: PropTypes.node,
   indeterminate: PropTypes.bool,
   itemId: PropTypes.string.isRequired,

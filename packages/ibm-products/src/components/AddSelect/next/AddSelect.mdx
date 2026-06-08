@@ -12,6 +12,7 @@ import styles from './_storybook-styles.scss?inline';
 - [Overview](#overview)
 - [Component Hierarchy](#component-hierarchy)
 - [Subcomponents & Usage](#subcomponents--usage)
+- [Data Utilities](#data-utilities)
 - [Usage Patterns](#usage-patterns)
 - [Component API](#component-api)
 
@@ -168,6 +169,88 @@ item.
 - When users need more context before selecting
 
 **Component flow position**: Detailed item information
+
+## Data Utilities
+
+The AddSelect component system includes the **`AddSelectData`** utility class
+for managing hierarchical selection data. This framework-agnostic utility
+encapsulates data logic separate from UI components, enabling efficient data
+operations and state management.
+
+### AddSelectData Class
+
+The `AddSelectData` class is a lightweight utility for managing hierarchical
+data structures with built-in support for:
+
+- **Selection Management**: Track selected items with O(1) lookup performance
+- **Hierarchical Navigation**: Traverse parent-child relationships efficiently
+- **Search & Filter**: Built-in search with customizable options
+- **Sorting**: Sort items at any level with optional recursion
+- **Status Tracking**: Manage checked/unchecked/indeterminate states
+- **Performance Optimized**: Uses Maps and Sets for efficient operations
+
+### Import
+
+```jsx
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
+```
+
+### Basic Usage
+
+```jsx
+import { AddSelectData } from '@carbon/ibm-products';
+
+// Initialize with hierarchical data
+const dataManager = new AddSelectData();
+dataManager.setItems(hierarchicalItems);
+
+// Select items
+dataManager.setSelectedItems(['item-1', 'item-2']);
+
+// Get selected items
+const selected = dataManager.getSelectedItems();
+
+// Search items
+const results = dataManager.search('query', {
+  caseSensitive: false,
+  searchFields: ['title', 'value'],
+});
+
+// Navigate hierarchy
+const children = dataManager.getItemChildren('parent-id');
+const parent = dataManager.getItemParent('child-id');
+const ancestors = dataManager.getItemParents('child-id');
+
+// Check selection status
+if (dataManager.isSelected('item-1')) {
+  console.log('Item is selected');
+}
+
+// Sort items
+dataManager.sort((a, b) => a.title.localeCompare(b.title), true);
+```
+
+### Key Features
+
+- **Framework Agnostic**: Works with React, Web Components, or vanilla
+  JavaScript
+- **Type Safe**: Full TypeScript support with comprehensive type definitions
+- **Efficient**: Optimized with caching, memoization, and efficient data
+  structures (Maps, Sets)
+- **Flexible**: Supports custom search fields, sorting, filtering, and
+  extensible data structures
+- **Comprehensive**: Covers all common hierarchical data operations (selection,
+  navigation, search, sort)
+
+### Complete API Reference
+
+For complete API documentation, detailed usage examples, and advanced patterns,
+see:
+
+**[AddSelectData API Documentation](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-utilities/src/utils/add-select/add-select-data.md)**
+
+The utility is designed to work seamlessly with AddSelect components but can
+also be used independently for any hierarchical data management needs.
 
 ## Usage Patterns
 
@@ -757,11 +840,11 @@ view and remove functionality.
 **Props:**
 
 - **item** (AddSelectItem, required) - Item data
-- **renderTitle** (function, optional) - Custom title renderer (only works with
-  useAccordion mode)
+- **renderAccordionTitle** (function, optional) - Custom title renderer (only
+  works with useAccordion mode)
   - Signature: `(item: AddSelectItem) => ReactNode`
-- **renderContent** (function, optional) - Custom content renderer (only works
-  with useAccordion mode)
+- **renderAccordionBody** (function, optional) - Custom content renderer (only
+  works with useAccordion mode)
   - Signature: `(item: AddSelectItem) => ReactNode`
 - **renderTemplate** (function, optional) - Custom template for rendering the
   entire item content (takes precedence over all other rendering props)

@@ -34,14 +34,14 @@ export interface AddSelectSelectionSummaryItemProps {
   /**
    * Custom title renderer (only works with useAccordion mode)
    */
-  renderTitle?: (item: AddSelectItem) => ReactNode;
+  renderAccordionTitle?: (item: AddSelectItem) => ReactNode;
   /**
    * Custom content renderer (only works with useAccordion mode)
    */
-  renderContent?: (item: AddSelectItem) => ReactNode;
+  renderAccordionBody?: (item: AddSelectItem) => ReactNode;
   /**
    * Custom template for rendering the entire item content
-   * Takes precedence over all other rendering props and works in all modes
+   * Takes precedence over all other rendering props
    */
   renderTemplate?: (
     item: AddSelectItem,
@@ -98,8 +98,8 @@ const AddSelectSelectionSummaryItem = forwardRef<
   (
     {
       item,
-      renderTitle,
-      renderContent,
+      renderAccordionTitle,
+      renderAccordionBody,
       renderTemplate,
       onRemove,
       removeButtonLabel = 'Remove item',
@@ -116,7 +116,7 @@ const AddSelectSelectionSummaryItem = forwardRef<
       `${blockClass}__selection-summary-item`,
       {
         [`${blockClass}__selection-summary-item--accordion`]: useAccordion,
-        [`${blockClass}__selection-summary-item--simple`]: !useAccordion,
+        [`${blockClass}__selection-summary-item--default`]: !useAccordion,
         [`${blockClass}__selection-summary-item--template`]: renderTemplate,
       },
       className
@@ -162,28 +162,18 @@ const AddSelectSelectionSummaryItem = forwardRef<
       </div>
     );
 
-    // Default content rendering - show all item properties except itemDetails, icon, avatar
+    // Default content rendering - show all key-value data from itemDetails
     const defaultContent = () => {
-      const { itemDetails, icon, avatar, id, title, subtitle, value, ...rest } =
-        item;
-      const entries = Object.entries(rest);
+      const { itemDetails } = item;
 
-      if (entries.length === 0 && !value) {
+      if (!itemDetails || Object.keys(itemDetails).length === 0) {
         return null;
       }
 
+      const entries = Object.entries(itemDetails);
+
       return (
         <>
-          {value && (
-            <div className={`${blockClass}__selection-summary-item-entry`}>
-              <p className={`${blockClass}__selection-summary-item-header`}>
-                value
-              </p>
-              <p className={`${blockClass}__selection-summary-item-body`}>
-                {value}
-              </p>
-            </div>
-          )}
           {entries.map(([key, val]) => (
             <div
               key={key}
@@ -212,9 +202,11 @@ const AddSelectSelectionSummaryItem = forwardRef<
 
     // Priority 2: Accordion mode
     if (useAccordion) {
-      const titleContent = renderTitle ? renderTitle(item) : defaultTitle;
-      const bodyContent = renderContent
-        ? renderContent(item)
+      const titleContent = renderAccordionTitle
+        ? renderAccordionTitle(item)
+        : defaultTitle;
+      const bodyContent = renderAccordionBody
+        ? renderAccordionBody(item)
         : defaultContent();
 
       return (
@@ -247,11 +239,9 @@ const AddSelectSelectionSummaryItem = forwardRef<
     // Priority 3: Non-accordion mode (default key-value rendering only)
     return (
       <div className={itemClasses} ref={ref} {...rest}>
-        <div className={`${blockClass}__selection-summary-item-simple`}>
-          {defaultTitle}
-          <div className={`${blockClass}__selection-summary-item-content`}>
-            {defaultContent()}
-          </div>
+        {defaultTitle}
+        <div className={`${blockClass}__selection-summary-item-content`}>
+          {defaultContent()}
         </div>
       </div>
     );
@@ -272,11 +262,11 @@ AddSelectSelectionSummaryItem.propTypes = {
   /**@ts-ignore */
   removeIconButtonProps: PropTypes.object,
   /**@ts-ignore */
-  renderContent: PropTypes.func,
+  renderAccordionBody: PropTypes.func,
+  /**@ts-ignore */
+  renderAccordionTitle: PropTypes.func,
   /**@ts-ignore */
   renderTemplate: PropTypes.func,
-  /**@ts-ignore */
-  renderTitle: PropTypes.func,
   useAccordion: PropTypes.bool,
 };
 

@@ -168,26 +168,28 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
       <AddSelectContext.Provider value={columnContext}>
         <div className={columnClasses} ref={ref} {...rest}>
           {/* Search with optional actions */}
-          {!hideSearch && (
+          {(!hideSearch || actionsSlot) && (
             <div
               className={cx(`${blockClass}-column__search`, {
                 [`${blockClass}-column__search--with-actions`]: actionsSlot,
               })}
             >
-              <div
-                className={
-                  actionsSlot ? `${blockClass}-column__search-input` : undefined
-                }
-              >
-                <Search
-                  labelText={searchLabel}
-                  placeholder={searchPlaceholder}
-                  size="md"
-                  onChange={handleSearch}
-                  value={searchTerm}
-                  {...searchProps}
-                />
-              </div>
+              {!hideSearch && (
+                <div
+                  className={
+                    actionsSlot ? `${blockClass}-column__search-input` : ''
+                  }
+                >
+                  <Search
+                    labelText={searchLabel}
+                    placeholder={searchPlaceholder}
+                    size="md"
+                    onChange={handleSearch}
+                    value={searchTerm}
+                    {...searchProps}
+                  />
+                </div>
+              )}
               {actionsSlot && (
                 <div className={`${blockClass}-column__actions`}>
                   {actionsSlot}

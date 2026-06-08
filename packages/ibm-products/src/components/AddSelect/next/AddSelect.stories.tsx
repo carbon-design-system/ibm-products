@@ -424,6 +424,11 @@ const AddSelectColumnStory = (args) => {
     filteredItems.length > 0 &&
     filteredItems.every((item) => selectedItems.has(item.id));
 
+  const allIndeterminate =
+    selectedItems.size > 0 &&
+    selectedItems.size < filteredItems.length &&
+    !allSelected;
+
   const actionsSlot = args.showActionsSlot ? (
     <Dropdown
       id="add-select-column-filter"
@@ -437,15 +442,8 @@ const AddSelectColumnStory = (args) => {
   ) : undefined;
 
   return (
-    <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-      <div
-        style={{
-          width: '360px',
-          border: '1px dashed var(--cds-border-subtle)',
-          padding: '1rem',
-          background: 'var(--cds-layer)',
-        }}
-      >
+    <div className={`${storyClass}-column-container`}>
+      <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
         <AddSelect.Content>
           <AddSelect.Column
             title={args.title}
@@ -458,8 +456,19 @@ const AddSelectColumnStory = (args) => {
             showSelectAll={args.showSelectAll}
             itemCount={filteredItems.length}
             allSelected={allSelected}
+            allIndeterminate={allIndeterminate}
             onSelectAll={handleSelectAll}
             onNavigate={args.enableNavigation ? () => {} : undefined}
+            className="custom-column-class"
+            searchProps={{
+              closeButtonLabelText: 'Clear search',
+            }}
+            tagProps={{
+              className: 'custom-tag-class',
+            }}
+            selectAllCheckboxProps={{
+              hideLabel: false,
+            }}
           >
             {filteredItems.map((item) => (
               <AddSelect.Row
@@ -473,8 +482,8 @@ const AddSelectColumnStory = (args) => {
             ))}
           </AddSelect.Column>
         </AddSelect.Content>
-      </div>
-    </AddSelect>
+      </AddSelect>
+    </div>
   );
 };
 
@@ -533,6 +542,7 @@ export const AddSelectColumn = {
     hideSearch: { table: { disable: true } },
     itemCount: { table: { disable: true } },
     allSelected: { table: { disable: true } },
+    allIndeterminate: { table: { disable: true } },
     onSelectAll: { table: { disable: true } },
     onNavigate: { table: { disable: true } },
     className: { table: { disable: true } },
@@ -547,6 +557,16 @@ const AddSelectRowStory = (args) => {
     args.selected ? new Set(['1']) : new Set()
   );
   const [itemPanelOpen, setItemPanelOpen] = useState(args.itemPanelOpen);
+
+  // Sync selectedItems with args.selected control
+  React.useEffect(() => {
+    setSelectedItems(args.selected ? new Set(['1']) : new Set());
+  }, [args.selected]);
+
+  // Sync itemPanelOpen with args.itemPanelOpen control
+  React.useEffect(() => {
+    setItemPanelOpen(args.itemPanelOpen);
+  }, [args.itemPanelOpen]);
 
   const handleItemSelect = (itemId, selected) => {
     const nextSelection = args.multi
@@ -563,28 +583,50 @@ const AddSelectRowStory = (args) => {
   };
 
   return (
-    <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-      <AddSelect.Content>
-        <AddSelect.Row
-          itemId="1"
-          title="folder 1"
-          subtitle={args.showSubtitle ? '3 files' : undefined}
-          value="folder 1"
-          selected={args.selected}
-          disabled={args.disabled}
-          hasChildren={args.hasChildren}
-          hasItemPanel={args.hasItemPanel}
-          onItemPanelClick={() => setItemPanelOpen(true)}
-          itemPanelOpen={args.hasItemPanel && itemPanelOpen}
-        >
-          {args.showTag ? (
-            <Tag type="blue" size="sm">
-              Folder
-            </Tag>
-          ) : null}
-        </AddSelect.Row>
-      </AddSelect.Content>
-    </AddSelect>
+    <div className={`${storyClass}-container--single`}>
+      <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+        <AddSelect.Content>
+          <AddSelect.Column multi={args.multi} hideSearch>
+            <AddSelect.Row
+              itemId="1"
+              title="folder 1"
+              subtitle={args.showSubtitle ? '3 files' : undefined}
+              value="folder 1"
+              selected={args.selected}
+              indeterminate={args.indeterminate}
+              disabled={args.disabled}
+              hasChildren={args.hasChildren}
+              hasItemPanel={args.hasItemPanel}
+              onItemPanelClick={() => setItemPanelOpen(true)}
+              itemPanelOpen={args.hasItemPanel && itemPanelOpen}
+              icon={args.showIcon ? <Document size={24} /> : undefined}
+              rowContent={
+                args.useRowContent ? (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                    }}
+                  >
+                    <strong>Custom row content</strong>
+                    <Tag type="purple" size="sm">
+                      Custom
+                    </Tag>
+                  </div>
+                ) : undefined
+              }
+            >
+              {args.showTag ? (
+                <Tag type="blue" size="sm">
+                  Folder
+                </Tag>
+              ) : null}
+            </AddSelect.Row>
+          </AddSelect.Column>
+        </AddSelect.Content>
+      </AddSelect>
+    </div>
   );
 };
 
@@ -592,11 +634,14 @@ export const AddSelectRow = {
   name: 'AddSelect.Row',
   render: AddSelectRowStory,
   args: {
-    multi: true,
-    selected: true,
+    multi: false,
+    selected: false,
+    indeterminate: false,
     showSubtitle: true,
-    showTag: true,
-    hasChildren: false,
+    showTag: false,
+    showIcon: false,
+    useRowContent: false,
+    hasChildren: true,
     hasItemPanel: false,
     itemPanelOpen: false,
     disabled: false,
@@ -616,6 +661,17 @@ export const AddSelectRow = {
     showTag: {
       control: 'boolean',
       description: 'Render custom row children content',
+      table: { category: 'Story controls' },
+    },
+    showIcon: {
+      control: 'boolean',
+      description: 'Demonstrate the optional icon prop',
+      table: { category: 'Story controls' },
+    },
+    useRowContent: {
+      control: 'boolean',
+      description:
+        'Demonstrate custom rowContent slot (replaces title/subtitle/children)',
       table: { category: 'Story controls' },
     },
     hasChildren: {
@@ -655,6 +711,11 @@ export const AddSelectRow = {
       description: 'Set the row selection state',
       table: { category: 'Story controls' },
     },
+    indeterminate: {
+      control: 'boolean',
+      description:
+        'Whether the item is in an indeterminate state (for multi hierarchical selections)',
+    },
     parentId: {
       control: 'text',
       description: 'Parent ID for hierarchical navigation',
@@ -662,13 +723,20 @@ export const AddSelectRow = {
     },
     icon: {
       control: false,
-      description: 'Optional icon slot (ReactNode)',
+      description:
+        'Optional icon slot (ReactNode). Toggle with showIcon control.',
       table: { disable: true },
     },
     children: {
       control: false,
       description:
         'Custom content to render after the title/subtitle section (badges, tags, metadata)',
+      table: { disable: true },
+    },
+    rowContent: {
+      control: false,
+      description:
+        'Custom row content (slot) - replaces the entire row content section (title, subtitle, and children). When provided, only the selection control and navigation indicators remain. Toggle with useRowContent control.',
       table: { disable: true },
     },
     onItemPanelClick: {
@@ -687,10 +755,29 @@ export const AddSelectRow = {
       description: 'Whether the item panel is currently open for this item',
       table: { category: 'Story controls' },
     },
-    className: { table: { disable: true } },
-    checkboxProps: { table: { disable: true } },
-    radioButtonProps: { table: { disable: true } },
-    itemPanelIconButtonProps: { table: { disable: true } },
+    className: {
+      control: 'text',
+      description: 'Optional CSS class name',
+      table: { disable: true },
+    },
+    checkboxProps: {
+      control: false,
+      description:
+        'Additional props to pass to the Checkbox component (when multi=true)',
+      table: { disable: true },
+    },
+    radioButtonProps: {
+      control: false,
+      description:
+        'Additional props to pass to the RadioButton component (when multi=false)',
+      table: { disable: true },
+    },
+    itemPanelIconButtonProps: {
+      control: false,
+      description:
+        'Additional props to pass to the IconButton component (info panel)',
+      table: { disable: true },
+    },
   },
 };
 
@@ -844,7 +931,7 @@ const AddSelectSelectionSummaryItemStory = (args) => {
           useAccordion={args.useAccordion}
           onRemove={args.showRemoveButton ? () => setVisible(false) : undefined}
           removeButtonLabel={args.removeButtonLabel}
-          renderTitle={
+          renderAccordionTitle={
             args.useCustomTitle
               ? (currentItem) => (
                   <div>
@@ -858,7 +945,7 @@ const AddSelectSelectionSummaryItemStory = (args) => {
                 )
               : undefined
           }
-          renderContent={
+          renderAccordionBody={
             args.useCustomContent
               ? (currentItem) => (
                   <div>
@@ -909,17 +996,17 @@ export const AddSelectSelectionSummaryItem = {
     },
     useCustomTitle: {
       control: 'boolean',
-      description: 'Demonstrate renderTitle in accordion mode',
+      description: 'Demonstrate renderAccordionTitle in accordion mode',
       table: { category: 'Story controls' },
     },
     useCustomContent: {
       control: 'boolean',
-      description: 'Demonstrate renderContent in accordion mode',
+      description: 'Demonstrate renderAccordionBody in accordion mode',
       table: { category: 'Story controls' },
     },
     item: { table: { disable: true } },
-    renderTitle: { table: { disable: true } },
-    renderContent: { table: { disable: true } },
+    renderAccordionTitle: { table: { disable: true } },
+    renderAccordionBody: { table: { disable: true } },
     renderTemplate: { table: { disable: true } },
     onRemove: { table: { disable: true } },
     className: { table: { disable: true } },

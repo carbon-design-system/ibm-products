@@ -24,21 +24,15 @@ import { blockClass } from './context';
  * ----------------
  */
 
-export interface ItemDetailEntry {
-  id?: string;
-  title?: string;
-  value?: string;
-}
-
 export interface AddSelectItemPanelProps {
   /**
    * Panel title
    */
   title?: string;
   /**
-   * Item data, array of entries, or custom content
+   * Item data
    */
-  item?: AddSelectItem | ItemDetailEntry[] | ReactNode;
+  item?: AddSelectItem;
   /**
    * Close button handler
    */
@@ -48,13 +42,14 @@ export interface AddSelectItemPanelProps {
    */
   closeIconDescription?: string;
   /**
-   * Custom content (alternative to item prop)
+   * Custom content - takes highest priority
    */
   children?: ReactNode;
   /**
-   * Custom content renderer
+   * Custom template for rendering the entire panel body content
+   * Takes precedence over default rendering
    */
-  renderContent?: (item: AddSelectItem) => ReactNode;
+  renderTemplate?: (item: AddSelectItem) => ReactNode;
   /**
    * Optional class name
    */
@@ -88,7 +83,7 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
       onClose,
       closeIconDescription = 'Close',
       children,
-      renderContent,
+      renderTemplate,
       className,
       closeIconButtonProps,
       ...rest
@@ -97,97 +92,53 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
   ) => {
     const panelClasses = cx(`${blockClass}__item-summary-panel`, className);
 
-    // Render content based on item type
-    const renderItemContent = () => {
-      if (children) {
-        return children;
-      }
-
+    // Default content rendering - show all key-value data from itemDetails
+    const defaultContent = () => {
       if (!item) {
         return null;
       }
 
-      // If item is a React element, render it directly
-      if (isValidElement(item)) {
-        return item;
+      const { itemDetails } = item;
+
+      if (!itemDetails || Object.keys(itemDetails).length === 0) {
+        return null;
       }
 
-      // If renderContent is provided, use it
-      if (renderContent && !Array.isArray(item)) {
-        return renderContent(item as AddSelectItem);
+      const entries = Object.entries(itemDetails);
+
+      return (
+        <>
+          {entries.map(([key, val]) => (
+            <div
+              key={key}
+              className={`${blockClass}__item-summary-panel-entry`}
+            >
+              <p className={`${blockClass}__item-summary-panel-entry-title`}>
+                {key}
+              </p>
+              <p className={`${blockClass}__item-summary-panel-entry-body`}>
+                {String(val)}
+              </p>
+            </div>
+          ))}
+        </>
+      );
+    };
+
+    // Render content based on priority
+    const renderItemContent = () => {
+      // Priority 1: children takes highest precedence
+      if (children) {
+        return children;
       }
 
-      // If item is an array of ItemDetailEntry objects
-      if (Array.isArray(item)) {
-        return item.map((entry) => (
-          <div
-            key={entry.id || entry.title}
-            className={`${blockClass}__item-summary-panel-entry`}
-          >
-            <p className={`${blockClass}__item-summary-panel-entry-title`}>
-              {entry.title}
-            </p>
-            <p className={`${blockClass}__item-summary-panel-entry-body`}>
-              {entry.value}
-            </p>
-          </div>
-        ));
+      // Priority 2: renderTemplate
+      if (renderTemplate && item) {
+        return renderTemplate(item);
       }
 
-      // If item is an AddSelectItem object, render all properties
-      const itemObj = item as AddSelectItem;
-      const entries: ItemDetailEntry[] = [];
-
-      // Add standard properties
-      if (itemObj.title) {
-        entries.push({ id: 'title', title: 'Title', value: itemObj.title });
-      }
-      if (itemObj.subtitle) {
-        entries.push({
-          id: 'subtitle',
-          title: 'Subtitle',
-          value: itemObj.subtitle,
-        });
-      }
-      if (itemObj.value) {
-        entries.push({ id: 'value', title: 'Value', value: itemObj.value });
-      }
-
-      // Add any additional properties
-      Object.entries(itemObj).forEach(([key, val]) => {
-        if (
-          key !== 'id' &&
-          key !== 'title' &&
-          key !== 'subtitle' &&
-          key !== 'value' &&
-          key !== 'itemDetails' &&
-          key !== 'icon' &&
-          key !== 'avatar' &&
-          key !== 'children' &&
-          key !== 'selected' &&
-          key !== 'status'
-        ) {
-          entries.push({
-            id: key,
-            title: key.charAt(0).toUpperCase() + key.slice(1),
-            value: String(val),
-          });
-        }
-      });
-
-      return entries.map((entry) => (
-        <div
-          key={entry.id}
-          className={`${blockClass}__item-summary-panel-entry`}
-        >
-          <p className={`${blockClass}__item-summary-panel-entry-title`}>
-            {entry.title}
-          </p>
-          <p className={`${blockClass}__item-summary-panel-entry-body`}>
-            {entry.value}
-          </p>
-        </div>
-      ));
+      // Priority 3: default template
+      return defaultContent();
     };
 
     return (
@@ -226,15 +177,11 @@ AddSelectItemPanel.propTypes = {
   closeIconButtonProps: PropTypes.object,
   closeIconDescription: PropTypes.string,
   /**@ts-ignore */
-  item: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.arrayOf(PropTypes.object),
-    PropTypes.node,
-  ]),
+  item: PropTypes.object,
   /**@ts-ignore */
   onClose: PropTypes.func,
   /**@ts-ignore */
-  renderContent: PropTypes.func,
+  renderTemplate: PropTypes.func,
   title: PropTypes.string,
 };
 

@@ -232,9 +232,9 @@ const ControlledColumn: React.FC<ColumnProps> = ({
   const handleSelectAll = (checked: boolean) => {
     const allItemIds: string[] = [];
     filteredItems.forEach((item) => {
-      allItemIds.push(item.id);
-      const descendants = dataManager.getItemDescendants(item.id);
-      descendants.forEach((desc) => allItemIds.push(desc.id));
+      // Use optimized getAllDescendantIds which includes the item itself
+      const descendantIds = dataManager.getAllDescendantIds(item.id);
+      allItemIds.push(...descendantIds);
     });
     onSelectAll?.(allItemIds, checked);
   };
@@ -414,12 +414,11 @@ export const MultiAddSelectWithHierarchy = forwardRef<
         const newSelectedIds = new Set(selectedIds);
         const hasChildren = dataManager.hasChildren(itemId);
 
-        // Get all descendant IDs for this item
-        const descendants = dataManager.getItemDescendants(itemId);
-        const allIds = [itemId, ...descendants.map((d) => d.id)];
+        // Use optimized getAllDescendantIds method to get all IDs at once
+        const allIds = dataManager.getAllDescendantIds(itemId);
 
         if (selected) {
-          // Select the item and all its descendants
+          // Select the item and all its descendants using optimized batch operation
           allIds.forEach((id) => {
             newSelectedIds.add(id);
             dataManager.setItemStatus(id, 'checked');
@@ -442,7 +441,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
             });
           }
         } else {
-          // Deselect the item and all its descendants
+          // Deselect the item and all its descendants using optimized batch operation
           allIds.forEach((id) => {
             newSelectedIds.delete(id);
             dataManager.setItemStatus(id, 'unchecked');
@@ -477,7 +476,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
           const hasChildren = dataManager.hasChildren(itemId);
 
           if (selected) {
-            // Select the item
+            // Select the item using optimized batch operation
             newSelectedIds.add(itemId);
             dataManager.setItemStatus(itemId, 'checked');
 
@@ -499,7 +498,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
               });
             }
           } else {
-            // Deselect the item
+            // Deselect the item using optimized batch operation
             newSelectedIds.delete(itemId);
             dataManager.setItemStatus(itemId, 'unchecked');
 

@@ -93,9 +93,20 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   preventCloseOnClickOutside: boolean = false;
 
   /**
+   * Optional ref to the trigger button that opened the tearsheet. Focus will return here when tearsheet closes.
+   */
+  @property({ attribute: false })
+  launcherButtonRef?: HTMLElement;
+
+  /**
    * Unique ID for this tearsheet instance
    */
   private uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
+
+  /**
+   * Unique ID for the title element (used for aria-labelledby)
+   */
+  private titleId: string = `${blockClass}__title-${Math.random().toString(36).substr(2, 9)}`;
 
   /**
    * Internal flag to track if stacking is enabled (via wrapper)
@@ -116,6 +127,11 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   private _trapFocusAPI: { cleanup: () => void } | null = null;
   private _wasOpen = false;
+  /**
+   * Query the header content element to get its titleId
+   */
+  @query(`${prefix}-tearsheet-header-content`)
+  private headerContentElement?: any;
 
   private smMediaQuery = `(max-width: ${breakpoints.md.width})`;
   private isSmallDevice = new MatchMediaController(
@@ -255,12 +271,43 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       requestAnimationFrame(() => {
         this._trapFocusAPI = trapFocus(this as HTMLElement, this.uniqueId);
       });
-    } else if (wasOpen && !isOpen) {
-      // Clear containers when closing
-      clearFocusableContainers(this.uniqueId);
     }
 
     this._wasOpen = isOpen;
+    //  Return focus to launcher button when tearsheet closes
+    if (!this.open && this.launcherButtonRef) {
+      // Use a small delay to ensure the tearsheet has fully closed
+      setTimeout(() => {
+        if (this.launcherButtonRef instanceof HTMLElement) {
+          // Check if the button is inside a TearsheetHeaderActions component
+          const headerActionItem = this.launcherButtonRef.closest(
+            `.${blockClass}__header-action-item`
+          );
+
+          if (headerActionItem) {
+            // This is a button inside TearsheetHeaderActions
+            // Check if it's currently visible or if items are collapsed to menu
+            const headerActionsContainer = headerActionItem.closest(
+              `.${blockClass}__content__header-actions`
+            );
+            const menuButton = headerActionsContainer?.querySelector(
+              `.${blockClass}__header-actions-menuButton:not(.${blockClass}__header-actions-menuButton--hidden) button`
+            );
+
+            if (menuButton instanceof HTMLElement) {
+              // On small screens, action buttons collapse to menu - focus the menu button
+              menuButton.focus();
+            } else {
+              // On large screens, focus the action button directly
+              this.launcherButtonRef.focus();
+            }
+          } else {
+            // Regular button ref (not inside TearsheetHeaderActions): focus directly
+            this.launcherButtonRef.focus();
+          }
+        }
+      }, 100);
+    }
   }
 
   private updateCSSPropertiesIfNeeded(
@@ -549,6 +596,11 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
     const containerClasses = `${blockClass}__container ${this.containerClassName}`;
 
+    const computedAriaLabelledby =
+      !this.ariaLabel && this.headerContentElement?.titleId
+        ? this.headerContentElement.titleId
+        : undefined;
+
     return html`<cds-modal
       class=${classes}
       size=${this.variant === 'narrow' ? 'sm' : 'lg'}
@@ -556,6 +608,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       container-class="${containerClasses}"
       ?prevent-close-on-click-outside="${this.preventCloseOnClickOutside}"
       aria-label="${ifDefined(this.ariaLabel || undefined)}"
+      aria-labelledby="${ifDefined(computedAriaLabelledby)}"
       selector-primary-focus="${ifDefined(
         this.selectorPrimaryFocus || undefined
       )}"

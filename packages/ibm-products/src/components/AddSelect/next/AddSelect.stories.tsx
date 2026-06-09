@@ -7,12 +7,13 @@
 
 // @ts-nocheck
 import React, { useMemo, useState } from 'react';
-import { Button, Dropdown, Tag, Toggle } from '@carbon/react';
+import { Button, Dropdown, IconButton, Tag, Toggle } from '@carbon/react';
 import { AddSelect } from '.';
 import type { AddSelectItem } from '@carbon/ibm-products';
+import { NoDataEmptyState } from '../../EmptyStates';
 import styles from './_storybook-styles.scss?inline';
 import mdx from './AddSelect.mdx';
-import { Document } from '@carbon/react/icons';
+import { Document, Filter, Popup } from '@carbon/react/icons';
 
 const storyClass = 'add-select-next-stories';
 
@@ -33,35 +34,40 @@ const sampleItems: AddSelectItem[] = [
     value: '1',
     title: 'item 1',
     subtitle: 'item 1 subtitle',
-    itemDetails: (
-      <div>
-        <p style={{ fontWeight: 600 }}>HTML support</p>
-        <p>Also supports nodes in the itemDetails attribute</p>
-      </div>
-    ),
+    itemDetails: {
+      id: 'description',
+      title: 'Description',
+      value: 'Description text for item 1',
+    },
   },
   {
     id: '2',
     value: '2',
     title: 'item 2',
-    itemDetails: [
-      {
-        id: 'description',
-        title: 'Description',
-        value: 'Description text for item 2',
-      },
-      {
-        id: 'secondary_category',
-        title: 'Secondary category',
-        value: 'Knowledge accelerator',
-      },
-    ],
+    subtitle: 'item 2 subtitle',
+    itemDetails: {
+      id: 'description',
+      title: 'Description',
+      value: 'Description text for item 2',
+    },
   },
   {
     id: '3',
     value: '3',
     title: 'item 3',
     subtitle: 'item 3 subtitle',
+  },
+  {
+    id: '4',
+    value: '4',
+    title: 'item 4',
+    subtitle: 'item 4 subtitle',
+  },
+  {
+    id: '5',
+    value: '5',
+    title: 'item 5',
+    subtitle: 'item 5 subtitle',
   },
 ];
 
@@ -76,18 +82,13 @@ const hierarchicalItems: AddSelectItem[] = [
           id: '1-1',
           value: 'file1.pdf',
           title: 'file1.pdf',
-          fileType: 'pdf',
-          size: '100',
           icon: (props) => <Document size={16} {...props} />,
-          tag: 'business',
           children: {
             entries: [
               {
-                id: '9000',
-                value: '9000.html',
-                title: '9000.html',
-                fileType: 'html',
-                size: '9000',
+                id: '1-1-1',
+                value: 'nested.html',
+                title: 'nested.html',
                 icon: (props) => <Document size={16} {...props} />,
               },
             ],
@@ -97,16 +98,12 @@ const hierarchicalItems: AddSelectItem[] = [
           id: '1-2',
           value: 'index.js',
           title: 'index.js',
-          fileType: 'js',
-          size: '200',
           icon: (props) => <Document size={16} {...props} />,
         },
         {
           id: '1-3',
           value: 'sitemap.xml',
           title: 'sitemap.xml',
-          fileType: 'xml',
-          size: '10',
           icon: (props) => <Document size={16} {...props} />,
         },
       ],
@@ -119,11 +116,60 @@ const hierarchicalItems: AddSelectItem[] = [
     children: {
       entries: [
         {
-          id: '7000',
-          value: '7000.html',
-          title: '7000.html',
-          fileType: 'html',
-          size: '7000',
+          id: '2-1',
+          value: 'document.html',
+          title: 'document.html',
+          icon: (props) => <Document size={16} {...props} />,
+        },
+      ],
+    },
+  },
+  {
+    id: '3',
+    value: 'folder 3',
+    title: 'folder 3',
+    children: {
+      entries: [
+        {
+          id: '3-1',
+          value: 'readme.md',
+          title: 'readme.md',
+          icon: (props) => <Document size={16} {...props} />,
+        },
+        {
+          id: '3-2',
+          value: 'config.json',
+          title: 'config.json',
+          icon: (props) => <Document size={16} {...props} />,
+        },
+      ],
+    },
+  },
+  {
+    id: '4',
+    value: 'folder 4',
+    title: 'folder 4',
+    children: {
+      entries: [
+        {
+          id: '4-1',
+          value: 'styles.css',
+          title: 'styles.css',
+          icon: (props) => <Document size={16} {...props} />,
+        },
+      ],
+    },
+  },
+  {
+    id: '5',
+    value: 'folder 5',
+    title: 'folder 5',
+    children: {
+      entries: [
+        {
+          id: '5-1',
+          value: 'app.tsx',
+          title: 'app.tsx',
           icon: (props) => <Document size={16} {...props} />,
         },
       ],
@@ -789,32 +835,103 @@ export const AddSelectRow = {
 };
 
 const AddSelectSelectionSummaryStory = (args) => {
-  const selectedItemsArray = summaryItems;
+  const selectedItemsArray = args.showEmptyState ? [] : summaryItems;
 
   return (
-    <div
-      style={{
-        width: '256px',
-        border: '1px dashed var(--cds-border-subtle)',
-        padding: '1rem',
-        background: 'var(--cds-layer)',
-      }}
-    >
+    <div className={`${storyClass}-summary-container`}>
       <AddSelect.SelectionSummary
         title={args.title}
         selectedItems={selectedItemsArray}
         showCount={args.showCount}
         showEditIcon={args.showEditIcon}
         onEdit={args.showEditIcon ? () => {} : undefined}
-        emptyState={args.showEmptyState ? <p>No selected items</p> : undefined}
-        headerActions={
-          args.showHeaderActions ? (
-            <Button kind="ghost" size="sm">
-              Placeholder action
-            </Button>
+        editIconDescription={args.editIconDescription}
+        emptyState={
+          args.showEmptyState ? (
+            <div
+              style={{
+                padding: '1rem 0.5rem',
+              }}
+            >
+              <NoDataEmptyState
+                subtitle={
+                  <>
+                    No selected items.
+                    <br />
+                    Select items to see them here.
+                  </>
+                }
+              />
+            </div>
           ) : undefined
         }
-      />
+        className={args.className}
+        renderItem={
+          args.useCustomRenderer
+            ? (item) => (
+                <div
+                  style={{
+                    padding: '0.5rem',
+                    borderBottom: '1px solid var(--cds-border-subtle)',
+                  }}
+                >
+                  <strong>{item.title}</strong>
+                  {item.subtitle && (
+                    <div
+                      style={{
+                        fontSize: '0.875rem',
+                        color: 'var(--cds-text-secondary)',
+                      }}
+                    >
+                      {item.subtitle}
+                    </div>
+                  )}
+                </div>
+              )
+            : undefined
+        }
+        headerContent={
+          args.useCustomHeader ? (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '100%',
+              }}
+            >
+              <h3 style={{ margin: 0, fontSize: '1rem' }}>Custom Header</h3>
+              <IconButton label="popup" kind="ghost" size="sm">
+                <Popup />
+              </IconButton>
+            </div>
+          ) : undefined
+        }
+        headerActions={
+          args.showHeaderActions ? (
+            <>
+              <IconButton label="Filter" kind="ghost" size="sm">
+                <Filter />
+              </IconButton>
+              <IconButton label="popup" kind="ghost" size="sm">
+                <Popup />
+              </IconButton>
+            </>
+          ) : undefined
+        }
+      >
+        {args.useCustomChildren &&
+          selectedItemsArray
+            .slice(0, 3)
+            .map((item) => (
+              <AddSelect.SelectionSummaryItem
+                key={item.id}
+                item={item}
+                onRemove={() => {}}
+                useAccordion
+              />
+            ))}
+      </AddSelect.SelectionSummary>
     </div>
   );
 };
@@ -828,6 +945,11 @@ export const AddSelectSelectionSummary = {
     showEditIcon: true,
     showHeaderActions: false,
     showEmptyState: false,
+    editIconDescription: 'Edit selections',
+    className: '',
+    useCustomRenderer: false,
+    useCustomHeader: false,
+    useCustomChildren: false,
   },
   argTypes: {
     title: {
@@ -842,6 +964,30 @@ export const AddSelectSelectionSummary = {
       control: 'boolean',
       description: 'Show the edit icon button when onEdit is provided',
     },
+    editIconDescription: {
+      control: 'text',
+      description: 'Edit icon aria-label',
+    },
+    className: {
+      control: 'text',
+      description: 'Optional CSS class name',
+    },
+    useCustomChildren: {
+      control: 'boolean',
+      description:
+        'Toggle example custom children (SelectionSummaryItem components)',
+      table: { category: 'Story controls' },
+    },
+    useCustomRenderer: {
+      control: 'boolean',
+      description: 'Toggle example custom item renderer (renderItem prop)',
+      table: { category: 'Story controls' },
+    },
+    useCustomHeader: {
+      control: 'boolean',
+      description: 'Toggle example custom header content (headerContent prop)',
+      table: { category: 'Story controls' },
+    },
     showHeaderActions: {
       control: 'boolean',
       description: 'Toggle example content for the headerActions prop',
@@ -855,60 +1001,41 @@ export const AddSelectSelectionSummary = {
     selectedItems: {
       control: false,
       description: 'Array of selected items (AddSelectItem[])',
-      table: { disable: true },
     },
     children: {
       control: false,
       description: 'Custom content or SelectionSummaryItem components',
-      table: { disable: true },
     },
     emptyState: {
       control: false,
       description: 'Custom empty state component',
-      table: { disable: true },
     },
     onEdit: {
       control: false,
       description: 'Edit icon click handler. Signature: () => void',
-      table: { disable: true },
-    },
-    editIconDescription: {
-      control: 'text',
-      description: 'Edit icon aria-label',
-      table: { disable: true },
-    },
-    className: {
-      control: 'text',
-      description: 'Optional CSS class name',
-      table: { disable: true },
     },
     renderItem: {
       control: false,
       description:
         'Custom item renderer. Signature: (item: AddSelectItem) => ReactNode',
-      table: { disable: true },
     },
     headerContent: {
       control: false,
       description:
         'Custom header content (slot) - replaces entire header section',
-      table: { disable: true },
     },
     headerActions: {
       control: false,
       description:
         'Header actions slot - adds custom actions alongside the edit icon',
-      table: { disable: true },
     },
     tagProps: {
       control: false,
       description: 'Additional props to pass to the Tag component',
-      table: { disable: true },
     },
     editIconButtonProps: {
       control: false,
       description: 'Additional props to pass to the edit IconButton',
-      table: { disable: true },
     },
   },
 };
@@ -963,6 +1090,69 @@ const AddSelectSelectionSummaryItemStory = (args) => {
                 )
               : undefined
           }
+          renderTemplate={
+            args.useCustomTemplate
+              ? (currentItem, onRemoveHandler) => (
+                  <div
+                    style={{
+                      padding: '1rem',
+                      border: '2px solid var(--cds-border-interactive)',
+                      borderRadius: '4px',
+                      background: 'var(--cds-layer-01)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <div>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontWeight: 700,
+                            color: 'var(--cds-text-primary)',
+                          }}
+                        >
+                          {currentItem.title}
+                        </p>
+                        {currentItem.subtitle && (
+                          <p
+                            style={{
+                              margin: '0.25rem 0 0',
+                              fontSize: '0.875rem',
+                              color: 'var(--cds-text-secondary)',
+                            }}
+                          >
+                            {currentItem.subtitle}
+                          </p>
+                        )}
+                      </div>
+                      {onRemoveHandler && (
+                        <Button
+                          kind="danger--ghost"
+                          size="sm"
+                          onClick={() => onRemoveHandler(currentItem.id)}
+                        >
+                          Remove
+                        </Button>
+                      )}
+                    </div>
+                    <p
+                      style={{
+                        margin: '0.5rem 0 0',
+                        fontSize: '0.75rem',
+                        fontStyle: 'italic',
+                      }}
+                    >
+                      Custom template rendering
+                    </p>
+                  </div>
+                )
+              : undefined
+          }
         />
       ) : (
         <p style={{ margin: 0 }}>Item removed in story preview.</p>
@@ -981,6 +1171,7 @@ export const AddSelectSelectionSummaryItem = {
     removeButtonLabel: 'Remove item',
     useCustomTitle: false,
     useCustomContent: false,
+    useCustomTemplate: false,
   },
   argTypes: {
     useAccordion: {
@@ -1011,6 +1202,12 @@ export const AddSelectSelectionSummaryItem = {
       description: 'Demonstrate renderAccordionBody in accordion mode',
       table: { category: 'Story controls' },
     },
+    useCustomTemplate: {
+      control: 'boolean',
+      description:
+        'Demonstrate renderTemplate prop with custom rendering (takes precedence over all other rendering props)',
+      table: { category: 'Story controls' },
+    },
     item: { table: { disable: true } },
     renderAccordionTitle: { table: { disable: true } },
     renderAccordionBody: { table: { disable: true } },
@@ -1027,37 +1224,15 @@ const AddSelectItemPanelStory = (args) => {
   const panelItem = sampleItems[0];
 
   return (
-    <div
-      style={{
-        width: '256px',
-        border: '1px dashed var(--cds-border-subtle)',
-        padding: '1rem',
-        background: 'var(--cds-layer)',
-      }}
-    >
+    <div className={`${storyClass}-summary-container`}>
       <AddSelect.ItemPanel
         title={args.title}
-        item={
-          args.useArrayData
-            ? [
-                { id: 'title', title: 'Title', value: panelItem.title || '' },
-                {
-                  id: 'subtitle',
-                  title: 'Subtitle',
-                  value: panelItem.subtitle || '',
-                },
-                {
-                  id: 'region',
-                  title: 'Region',
-                  value: panelItem.region || '',
-                },
-              ]
-            : panelItem
-        }
+        item={panelItem}
         onClose={args.showCloseButton ? () => {} : undefined}
         closeIconDescription={args.closeIconDescription}
-        renderContent={
-          args.useCustomRender
+        className={args.className}
+        renderTemplate={
+          args.useRenderTemplate
             ? (item) => (
                 <div>
                   <p style={{ margin: 0, fontWeight: 600 }}>{item.title}</p>
@@ -1068,7 +1243,18 @@ const AddSelectItemPanelStory = (args) => {
               )
             : undefined
         }
-      />
+      >
+        {args.useChildren ? (
+          <div>
+            <p style={{ margin: 0, fontWeight: 600 }}>
+              Custom children content
+            </p>
+            <p style={{ margin: '0.25rem 0 0' }}>
+              This content is passed as children and takes highest priority
+            </p>
+          </div>
+        ) : undefined}
+      </AddSelect.ItemPanel>
     </div>
   );
 };
@@ -1080,8 +1266,9 @@ export const AddSelectItemPanel = {
     title: 'Item details',
     showCloseButton: true,
     closeIconDescription: 'Close item details',
-    useArrayData: false,
-    useCustomRender: false,
+    className: '',
+    useChildren: false,
+    useRenderTemplate: false,
   },
   argTypes: {
     title: {
@@ -1090,8 +1277,7 @@ export const AddSelectItemPanel = {
     },
     item: {
       control: false,
-      description:
-        'Item data, array of entries, or custom content (AddSelectItem | ItemDetailEntry[] | ReactNode)',
+      description: 'Item data (AddSelectItem)',
       table: { disable: true },
     },
     onClose: {
@@ -1103,15 +1289,24 @@ export const AddSelectItemPanel = {
       control: 'text',
       description: 'Close button aria-label',
     },
+    className: {
+      control: 'text',
+      description: 'Optional CSS class name',
+    },
     children: {
       control: false,
-      description: 'Custom content (alternative to item prop)',
+      description: 'Custom content - takes highest priority (ReactNode)',
       table: { disable: true },
     },
-    renderContent: {
+    renderTemplate: {
       control: false,
       description:
-        'Custom content renderer. Signature: (item: AddSelectItem) => ReactNode',
+        'Custom template for rendering the entire panel body content. Signature: (item: AddSelectItem) => ReactNode',
+      table: { disable: true },
+    },
+    closeIconButtonProps: {
+      control: false,
+      description: 'Additional props to pass to the close IconButton',
       table: { disable: true },
     },
     showCloseButton: {
@@ -1119,26 +1314,15 @@ export const AddSelectItemPanel = {
       description: 'Toggle the close button by passing onClose',
       table: { category: 'Story controls' },
     },
-    useArrayData: {
+    useChildren: {
       control: 'boolean',
-      description: 'Use ItemDetailEntry[] as the item prop',
+      description: 'Demonstrate custom children content (highest priority)',
       table: { category: 'Story controls' },
     },
-    useCustomRender: {
+    useRenderTemplate: {
       control: 'boolean',
-      description:
-        'Demonstrate custom content rendering for AddSelectItem data',
+      description: 'Demonstrate custom renderTemplate for AddSelectItem data',
       table: { category: 'Story controls' },
-    },
-    className: {
-      control: 'text',
-      description: 'Optional CSS class name',
-      table: { disable: true },
-    },
-    closeIconButtonProps: {
-      control: false,
-      description: 'Additional props to pass to the close IconButton',
-      table: { disable: true },
     },
   },
 };

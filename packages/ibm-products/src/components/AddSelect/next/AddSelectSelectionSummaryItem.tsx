@@ -162,19 +162,29 @@ const AddSelectSelectionSummaryItem = forwardRef<
       </div>
     );
 
-    // Default content rendering - show all key-value data from itemDetails
+    // Default content rendering - show all props from item (except title, subtitle) and itemDetails
     const defaultContent = () => {
-      const { itemDetails } = item;
+      // Collect all item props except title, subtitle, and itemDetails
+      const itemProps = Object.entries(item).filter(
+        ([key]) =>
+          key !== 'title' && key !== 'subtitle' && key !== 'itemDetails'
+      );
 
-      if (!itemDetails || Object.keys(itemDetails).length === 0) {
+      // Collect itemDetails props if they exist
+      const itemDetailsProps = item.itemDetails
+        ? Object.entries(item.itemDetails)
+        : [];
+
+      // Combine both sets of properties
+      const allEntries = [...itemProps, ...itemDetailsProps];
+
+      if (allEntries.length === 0) {
         return null;
       }
 
-      const entries = Object.entries(itemDetails);
-
       return (
         <>
-          {entries.map(([key, val]) => (
+          {allEntries.map(([key, val]) => (
             <div
               key={key}
               className={`${blockClass}__selection-summary-item-entry`}

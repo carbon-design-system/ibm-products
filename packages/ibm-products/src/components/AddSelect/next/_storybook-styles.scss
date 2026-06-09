@@ -41,6 +41,16 @@ $next-story-prefix: 'add-select-next-stories';
   inline-size: 360px;
 }
 
+// Column story container
+.#{$next-story-prefix}-summary-container {
+  overflow: auto;
+  padding: 0 $spacing-05;
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+  block-size: 500px;
+  inline-size: 16rem;
+}
+
 // Variant container for showing single and multi side by side
 .#{$next-story-prefix}-variant-container {
   display: flex;

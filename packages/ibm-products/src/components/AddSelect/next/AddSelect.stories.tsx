@@ -1326,5 +1326,3 @@ export const AddSelectItemPanel = {
     },
   },
 };
-
-// Made with Bob

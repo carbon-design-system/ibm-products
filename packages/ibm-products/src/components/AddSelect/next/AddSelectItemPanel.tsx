@@ -49,7 +49,7 @@ export interface AddSelectItemPanelProps {
    * Custom template for rendering the entire panel body content
    * Takes precedence over default rendering
    */
-  renderTemplate?: (item: AddSelectItem) => ReactNode;
+  renderItem?: (item: AddSelectItem) => ReactNode;
   /**
    * Optional class name
    */
@@ -83,7 +83,7 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
       onClose,
       closeIconDescription = 'Close',
       children,
-      renderTemplate,
+      renderItem,
       className,
       closeIconButtonProps,
       ...rest
@@ -132,9 +132,9 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
         return children;
       }
 
-      // Priority 2: renderTemplate
-      if (renderTemplate && item) {
-        return renderTemplate(item);
+      // Priority 2: renderItem
+      if (renderItem && item) {
+        return renderItem(item);
       }
 
       // Priority 3: default template
@@ -181,7 +181,7 @@ AddSelectItemPanel.propTypes = {
   /**@ts-ignore */
   onClose: PropTypes.func,
   /**@ts-ignore */
-  renderTemplate: PropTypes.func,
+  renderItem: PropTypes.func,
   title: PropTypes.string,
 };
 

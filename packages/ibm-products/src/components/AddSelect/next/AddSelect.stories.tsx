@@ -1043,10 +1043,7 @@ export const AddSelectSelectionSummary = {
 const AddSelectSelectionSummaryItemStory = (args) => {
   const [visible, setVisible] = useState(true);
 
-  const item = {
-    ...summaryItems[0],
-    subtitle: args.showSubtitle ? summaryItems[0].subtitle : undefined,
-  };
+  const item = summaryItems[0];
 
   return (
     <div
@@ -1090,8 +1087,8 @@ const AddSelectSelectionSummaryItemStory = (args) => {
                 )
               : undefined
           }
-          renderTemplate={
-            args.useCustomTemplate
+          renderItem={
+            args.useCustomRenderer
               ? (currentItem, onRemoveHandler) => (
                   <div
                     style={{
@@ -1147,13 +1144,29 @@ const AddSelectSelectionSummaryItemStory = (args) => {
                         fontStyle: 'italic',
                       }}
                     >
-                      Custom template rendering
+                      Custom item rendering
                     </p>
                   </div>
                 )
               : undefined
           }
-        />
+        >
+          {args.useChildren ? (
+            <div
+              style={{
+                padding: '1rem',
+                border: '2px solid var(--cds-support-success)',
+                borderRadius: '4px',
+                background: 'var(--cds-layer-01)',
+              }}
+            >
+              <p style={{ margin: 0, fontWeight: 700 }}>{item.title}</p>
+              <p style={{ margin: '0.25rem 0 0', fontSize: '0.875rem' }}>
+                Custom children content
+              </p>
+            </div>
+          ) : undefined}
+        </AddSelect.SelectionSummaryItem>
       ) : (
         <p style={{ margin: 0 }}>Item removed in story preview.</p>
       )}
@@ -1166,22 +1179,17 @@ export const AddSelectSelectionSummaryItem = {
   render: AddSelectSelectionSummaryItemStory,
   args: {
     useAccordion: false,
-    showSubtitle: true,
     showRemoveButton: true,
     removeButtonLabel: 'Remove item',
     useCustomTitle: false,
     useCustomContent: false,
-    useCustomTemplate: false,
+    useCustomRenderer: false,
+    useChildren: false,
   },
   argTypes: {
     useAccordion: {
       control: 'boolean',
       description: 'Render the item with Carbon Accordion markup',
-    },
-    showSubtitle: {
-      control: 'boolean',
-      description: 'Toggle the item subtitle content',
-      table: { category: 'Story controls' },
     },
     showRemoveButton: {
       control: 'boolean',
@@ -1202,16 +1210,23 @@ export const AddSelectSelectionSummaryItem = {
       description: 'Demonstrate renderAccordionBody in accordion mode',
       table: { category: 'Story controls' },
     },
-    useCustomTemplate: {
+    useCustomRenderer: {
       control: 'boolean',
       description:
-        'Demonstrate renderTemplate prop with custom rendering (takes precedence over all other rendering props)',
+        'Demonstrate renderItem prop with custom rendering (takes precedence over default rendering)',
+      table: { category: 'Story controls' },
+    },
+    useChildren: {
+      control: 'boolean',
+      description:
+        'Demonstrate custom children content (takes highest priority)',
       table: { category: 'Story controls' },
     },
     item: { table: { disable: true } },
     renderAccordionTitle: { table: { disable: true } },
     renderAccordionBody: { table: { disable: true } },
-    renderTemplate: { table: { disable: true } },
+    renderItem: { table: { disable: true } },
+    children: { table: { disable: true } },
     onRemove: { table: { disable: true } },
     className: { table: { disable: true } },
     accordionProps: { table: { disable: true } },
@@ -1231,8 +1246,8 @@ const AddSelectItemPanelStory = (args) => {
         onClose={args.showCloseButton ? () => {} : undefined}
         closeIconDescription={args.closeIconDescription}
         className={args.className}
-        renderTemplate={
-          args.useRenderTemplate
+        renderItem={
+          args.useRenderItem
             ? (item) => (
                 <div>
                   <p style={{ margin: 0, fontWeight: 600 }}>{item.title}</p>
@@ -1268,7 +1283,7 @@ export const AddSelectItemPanel = {
     closeIconDescription: 'Close item details',
     className: '',
     useChildren: false,
-    useRenderTemplate: false,
+    useRenderItem: false,
   },
   argTypes: {
     title: {
@@ -1298,7 +1313,7 @@ export const AddSelectItemPanel = {
       description: 'Custom content - takes highest priority (ReactNode)',
       table: { disable: true },
     },
-    renderTemplate: {
+    renderItem: {
       control: false,
       description:
         'Custom template for rendering the entire panel body content. Signature: (item: AddSelectItem) => ReactNode',
@@ -1319,9 +1334,9 @@ export const AddSelectItemPanel = {
       description: 'Demonstrate custom children content (highest priority)',
       table: { category: 'Story controls' },
     },
-    useRenderTemplate: {
+    useRenderItem: {
       control: 'boolean',
-      description: 'Demonstrate custom renderTemplate for AddSelectItem data',
+      description: 'Demonstrate custom renderItem for AddSelectItem data',
       table: { category: 'Story controls' },
     },
   },

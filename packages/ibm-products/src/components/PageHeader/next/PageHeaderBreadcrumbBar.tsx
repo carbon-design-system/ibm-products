@@ -112,7 +112,11 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
                 )}
                 {children}
               </div>
-              <div className={`${blockClass}__breadcrumb__actions`}>
+              <div
+                className={`${blockClass}__breadcrumb__actions`}
+                role="navigation"
+                aria-label="Page header actions"
+              >
                 <div className={contentActionsClasses}>
                   {typeof contentActions === 'function'
                     ? contentActions(observerState)

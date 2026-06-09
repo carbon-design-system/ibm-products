@@ -258,6 +258,16 @@ describe('PageHeader', () => {
       expect(container.firstChild.firstChild).toHaveClass('custom-class');
     });
 
+    it('should support a custom titleAs heading level', () => {
+      render(
+        <PageHeader.Root>
+          <PageHeader.Content title="title" titleAs="h1" />
+        </PageHeader.Root>
+      );
+
+      expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
+    });
+
     it('should render a title', () => {
       render(
         <PageHeader.Root>
@@ -373,6 +383,14 @@ describe('PageHeader', () => {
     });
   });
 
+  describe('PageHeader.ContentText component api', () => {
+    it('should support a custom subtitleAs heading level', () => {
+      render(<PageHeader.ContentText subtitle="Subtitle" subtitleAs="h4" />);
+
+      expect(screen.getByRole('heading', { level: 4 })).toBeInTheDocument();
+    });
+  });
+
   describe('PageHeader.ContentPageActions component api', () => {
     const onClickMock = jest.fn();
     const mockPageActions = [
@@ -467,7 +485,9 @@ describe('PageHeader', () => {
 
     it('should use a custom menuButtonLabel if provided', () => {
       render(<Compact {...Compact.args} />);
-      expect(screen.getByText('Actions')).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /actions/i })
+      ).toBeInTheDocument();
     });
 
     it('should call onClick of hidden action when MenuItem is clicked', async () => {

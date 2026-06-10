@@ -16,7 +16,6 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ToastNotification, Tag } from '@carbon/react';
-
 import {
   preview__AddSelect as AddSelect,
   preview__Tearsheet as Tearsheet,

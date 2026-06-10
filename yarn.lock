@@ -25245,7 +25245,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.20.1":
+"ws@npm:^8.17.1":
   version: 8.21.0
   resolution: "ws@npm:8.21.0"
   peerDependencies:

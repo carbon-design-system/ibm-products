@@ -128,7 +128,11 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
           data-offset
           style="display: ${this.hiddenItems?.length >= 1 ? 'flex' : 'none'}"
         >
-          <cds-overflow-menu breadcrumb="" align="bottom">
+          <cds-overflow-menu
+            breadcrumb=""
+            align="bottom"
+            aria-label="More breadcrumbs"
+          >
             ${iconLoader(OverflowMenuHorizontal16, {
               slot: 'icon',
             })}

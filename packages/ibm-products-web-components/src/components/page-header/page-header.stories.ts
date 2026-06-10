@@ -99,7 +99,7 @@ export const Default = {
           >[Platform]</cds-header-name
         >
       </cds-header>
-      <main>
+      <main aria-label="Header">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
             border=${border}
@@ -143,8 +143,11 @@ export const Default = {
               </cds-icon-button>
             </c4p-page-header-actions-set>
           </c4p-page-header-breadcrumb>
-          <c4p-page-header-content title="${title}">
-            <c4p-page-header-content-text subtitle="Subtitle">
+          <c4p-page-header-content title="${title}" title-level="h1">
+            <c4p-page-header-content-text
+              subtitle="Subtitle"
+              subtitle-level="h2"
+            >
               Built for modern teams, our technology platform simplifies
               complexity with powerful APIs, real-time collaboration tools, and
               seamless integration. From deployment to monitoring, we help you
@@ -152,7 +155,7 @@ export const Default = {
               the way.
             </c4p-page-header-content-text>
             <div slot="page-actions">
-              <cds-button size="md"
+              <cds-button size="md" aria-label="Add Primary action"
                 >Primary action
                 ${iconLoader(Add16, { slot: 'icon' })}</cds-button
               >
@@ -224,7 +227,7 @@ export const ContentWithContextualActions = {
           >[Platform]</cds-header-name
         >
       </cds-header>
-      <main>
+      <main aria-label="Header">
         <c4p-page-header>
           <c4p-page-header-breadcrumb>
             ${iconLoader(Bee16, { slot: 'icon' })}
@@ -266,11 +269,15 @@ export const ContentWithContextualActions = {
           </c4p-page-header-breadcrumb>
           <c4p-page-header-content
             title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+            title-level="h1"
           >
             <div slot="contextual-actions">
               <cds-tag type="blue" size="lg">Tag</cds-tag>
             </div>
-            <c4p-page-header-content-text subtitle="Subtitle">
+            <c4p-page-header-content-text
+              subtitle="Subtitle"
+              subtitle-level="h2"
+            >
               Built for modern teams, our technology platform simplifies
               complexity with powerful APIs, real-time collaboration tools, and
               seamless integration. From deployment to monitoring, we help you
@@ -292,7 +299,7 @@ export const ContentWithContextualActionsAndPageActions = {
         >[Platform]</cds-header-name
       >
     </cds-header>
-    <main>
+    <main aria-label="Header">
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${iconLoader(Bee16, { slot: 'icon' })}
@@ -334,16 +341,17 @@ export const ContentWithContextualActionsAndPageActions = {
         </c4p-page-header-breadcrumb>
         <c4p-page-header-content
           title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+          title-level="h1"
         >
           <div slot="contextual-actions">
             <cds-tag type="blue" size="lg">Tag</cds-tag>
           </div>
           <div slot="page-actions">
-            <cds-button size="md"
+            <cds-button size="md" aria-label="Add Primary action"
               >Primary action ${iconLoader(Add16, { slot: 'icon' })}</cds-button
             >
           </div>
-          <c4p-page-header-content-text subtitle="Subtitle">
+          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
             Built for modern teams, our technology platform simplifies
             complexity with powerful APIs, real-time collaboration tools, and
             seamless integration. From deployment to monitoring, we help you
@@ -367,7 +375,7 @@ export const ContentWithHeroImage = {
           >[Platform]</cds-header-name
         >
       </cds-header>
-      <main>
+      <main aria-label="Header">
 <c4p-page-header>
       <div class="cds--css-grid">
         <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
@@ -385,8 +393,9 @@ export const ContentWithHeroImage = {
           <c4p-page-header-content
             within-grid
             title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+            title-level="h1"
             >
-            <c4p-page-header-content-text subtitle="Subtitle">
+            <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
              Built for modern teams, our technology platform simplifies complexity with powerful APIs, real-time collaboration tools, and seamless integration. From deployment to monitoring, we help you ship faster, scale efficiently, and stay in control every step of the way.
             </c4p-page-header-content-text>
           </c4p-page-header-content>
@@ -426,7 +435,7 @@ export const ContentWithIcon = {
         >[Platform]</cds-header-name
       >
     </cds-header>
-    <main>
+    <main aria-label="Header">
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${iconLoader(Bee16, { slot: 'icon' })}
@@ -468,9 +477,10 @@ export const ContentWithIcon = {
         </c4p-page-header-breadcrumb>
         <c4p-page-header-content
           title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+          title-level="h1"
         >
           ${iconLoader(Bee32, { slot: 'icon' })}
-          <c4p-page-header-content-text subtitle="Subtitle">
+          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
             Built for modern teams, our technology platform simplifies
             complexity with powerful APIs, real-time collaboration tools, and
             seamless integration. From deployment to monitoring, we help you
@@ -515,7 +525,7 @@ export const TabBarWithTabsAndTags = {
         >[Platform]</cds-header-name
       >
     </cds-header>
-    <main class="page-header-story__wrapper">
+    <main class="page-header-story__wrapper" aria-label="Header">
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${iconLoader(Bee16, { slot: 'icon' })}
@@ -547,8 +557,9 @@ export const TabBarWithTabsAndTags = {
         </c4p-page-header-breadcrumb>
         <c4p-page-header-content
           title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+          title-level="h1"
         >
-          <c4p-page-header-content-text subtitle="Subtitle">
+          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
             Built for modern teams, our technology platform simplifies
             complexity with powerful APIs, real-time collaboration tools, and
             seamless integration. From deployment to monitoring, we help you

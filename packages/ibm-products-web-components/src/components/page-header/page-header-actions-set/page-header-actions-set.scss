@@ -28,8 +28,11 @@ $block-class: #{$prefix}--page-header-actions-set;
 .#{$block-class} {
   display: flex;
   align-items: center;
+  padding: 0;
+  margin: 0;
   gap: 0;
   inline-size: 100%;
+  list-style: none;
   min-inline-size: 0;
 
   &__items {
@@ -38,6 +41,7 @@ $block-class: #{$prefix}--page-header-actions-set;
     flex: 1;
     align-items: center;
     gap: 0;
+    list-style: none;
     min-inline-size: 0;
 
     ::slotted(*) {

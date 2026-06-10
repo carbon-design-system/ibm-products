@@ -1,48 +1,55 @@
 # @carbon/ibm-products-utilities
 
-> **Private package** - Framework-agnostic utilities for Carbon for IBM Products
+> **Private internal package** - Framework-agnostic utilities for Carbon for IBM
+> Products
 
-This is a **private internal package** that provides framework-agnostic
-JavaScript/TypeScript utilities shared between `@carbon/ibm-products` and
-`@carbon/ibm-products-web-components` packages.
+## Overview
 
-## Usage
+This package provides framework-agnostic JavaScript/TypeScript utilities shared
+between `@carbon/ibm-products` (React) and `@carbon/ibm-products-web-components`
+(Web Components).
 
-**This package is not published to npm and should not be imported directly by
-end users.**
-
-Utilities from this package are re-exported through:
-
-- `@carbon/ibm-products` - React components
-- `@carbon/ibm-products-web-components` - Web Components
-
-End users should always import from the appropriate consumer package, never
-directly from this package.
+**⚠️ Important:** This is a private package not published to npm. All utilities
+are re-exported through the main consumer packages. Always import from
+`@carbon/ibm-products` or `@carbon/ibm-products-web-components`, never directly
+from this package.
 
 ## Purpose
 
 The `@carbon/ibm-products-utilities` package serves as a shared foundation that:
 
-- **Enables Code Reusability**: Provides common business logic and utilities
-  shared between React and Web Components implementations
-- **Improves Maintainability**: Establishes a single source of truth for
-  framework-agnostic logic
-- **Ensures Framework Agnosticism**: Contains pure TypeScript/JavaScript with no
+- **Enables Code Reusability**: Common business logic shared between React and
+  Web Components
+- **Improves Maintainability**: Single source of truth for framework-agnostic
+  logic
+- **Ensures Framework Agnosticism**: Pure TypeScript/JavaScript with no
   framework dependencies
-- **Provides Type Safety**: Offers full TypeScript support with comprehensive
-  type definitions
-- **Supports Selective Exposure**: Allows consumer packages to re-export only
-  the utilities appropriate for public use
+- **Provides Type Safety**: Full TypeScript support with comprehensive type
+  definitions
+- **Supports Selective Exposure**: Consumer packages re-export only appropriate
+  utilities
 
 ## Available Utilities
 
 ### AddSelectData
 
-A lightweight utility for managing hierarchical data structures with support for
-selection, traversal, searching, and sorting.
+A lightweight, framework-agnostic utility for managing hierarchical data
+structures.
+
+**Key Features:**
+
+- Hierarchical data management with parent-child relationships
+- Item selection (single and multi-select modes)
+- Search functionality with customizable options
+- Sorting with recursive support
+- Status tracking (checked, unchecked, indeterminate)
+- Efficient O(1) lookups using internal maps
+- Full TypeScript support
+
+**Quick Example:**
 
 ```typescript
-// Import from the main packages, not directly from utilities
+// Import from the main packages
 import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
 // or
 import {
@@ -66,112 +73,43 @@ const results = dataManager.search('Item 1');
 const children = dataManager.getItemChildren('1');
 ```
 
-[View full AddSelectData documentation](./src/utils/add-select/add-select-data.md)
+**📖
+[View full AddSelectData documentation](./src/utils/add-select/add-select-data.md)**
 
-## Internal Usage
+## Usage Guidelines
 
-This package is consumed internally by the following packages:
-
-### @carbon/ibm-products (React)
-
-The React package imports primitives and selectively re-exports utilities that
-are appropriate for public consumption:
+Always import from the consumer packages:
 
 ```typescript
-// Internal usage within @carbon/ibm-products
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
+// ✅ React Users
+import { AddSelectData } from '@carbon/ibm-products';
 
-function MyComponent() {
-  const [dataManager] = useState(() => new AddSelectData());
+// ✅ Web Components Users
+import { AddSelectData } from '@carbon/ibm-products-web-components';
 
-  useEffect(() => {
-    dataManager.setItems(myData);
-  }, [myData]);
-
-  // Use dataManager methods...
-}
-
-// Public re-export (example)
-export { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
+// ❌ Never import directly from utilities
+import { AddSelectData } from '@carbon/ibm-products-utilities';
 ```
-
-### @carbon/ibm-products-web-components
-
-The Web Components package similarly imports and selectively re-exports:
-
-```typescript
-// Internal usage within @carbon/ibm-products-web-components
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
-
-@customElement('my-component')
-export class MyComponent extends LitElement {
-  private dataManager = new AddSelectData();
-
-  @state()
-  private items: AddSelectItem[] = [];
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.dataManager.setItems(this.items);
-  }
-
-  // Use dataManager methods...
-}
-
-// Public re-export (example)
-export { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
-```
-
-## For End Users
-
-**This is a private package and cannot be installed or imported directly.** All
-utilities are re-exported through the main packages.
-
-### React Users
-
-```typescript
-// ✅ Correct - Import from @carbon/ibm-products
-import {
-  AddSelectData,
-  AddSelectItem,
-  ItemStatus,
-  SearchOptions,
-} from '@carbon/ibm-products';
-```
-
-### Web Components Users
-
-```typescript
-// ✅ Correct - Import from @carbon/ibm-products-web-components
-import {
-  AddSelectData,
-  AddSelectItem,
-  ItemStatus,
-  SearchOptions,
-} from '@carbon/ibm-products-web-components';
-```
-
-**Note:** Since this package is private and not published to npm, direct imports
-like `import { AddSelectData } from '@carbon/ibm-products-utilities'` will not
-work in external projects.
 
 ## Package Structure
 
 ```
+
 @carbon/ibm-products-utilities/
-├── es/                    # ESM build output
-├── lib/                   # CommonJS build output
-├── src/
-│   ├── utils/            # Utilities directory
-│   │   └── add-select/   # AddSelect utility
-│   │       ├── add-select-data.ts
-│   │       ├── add-select-data.spec.ts
-│   │       ├── add-select-data.md
-│   │       └── index.ts
-│   └── index.ts          # Main entry point
-├── package.json
-├── tsconfig.json
-└── README.md
+ ├── es/ # ESM build output
+ ├── lib/ # CommonJS build output
+ ├── src/
+ │ ├── utils/ # Utilities directory
+ │ │ └── add-select/ #AddSelect utility
+ │ │   ├── add-select-data.ts
+ │ │   ├── add-select-data.spec.ts
+ │ │   ├── add-select-data.md
+ │ │   └── index.ts
+ │ └── index.ts # Main entry point
+ ├── package.json
+ ├── tsconfig.json
+ └── README.md
+
 ```
 
 ## Development
@@ -188,14 +126,14 @@ yarn build
 yarn test
 ```
 
-### Adding New Primitives
+### Adding New Utilities
 
 When adding new utilities to this package:
 
 1. Create a new directory under `src/utils/` (e.g., `src/utils/my-utility/`)
-2. Add your implementation file (e.g., `my-primitive.ts`)
-3. Add tests (e.g., `my-primitive.spec.ts`)
-4. Add documentation (e.g., `my-primitive.md`)
+2. Add your implementation file (e.g., `my-utility.ts`)
+3. Add tests (e.g., `my-utility.spec.ts`)
+4. Add documentation (e.g., `my-utility.md`)
 5. Create a barrel export (`index.ts`)
 6. Export from the main `src/index.ts`
 
@@ -234,13 +172,8 @@ When working with this package:
 6. **Coordinate Re-exports**: When adding new utilities, coordinate with
    maintainers of consumer packages to determine appropriate public exposure
 
-## License
-
-Licensed under the Apache-2.0 license. See [LICENSE](./LICENSE) for details.
-
 ## Related Packages
 
 - [@carbon/ibm-products](../ibm-products) - React components
 - [@carbon/ibm-products-web-components](../ibm-products-web-components) - Web
   Components
-- [@carbon/ibm-products-styles](../ibm-products-styles) - Shared styles

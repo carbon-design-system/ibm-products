@@ -16,12 +16,13 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ToastNotification } from '@carbon/react';
-import { breakpoints } from '@carbon/layout';
-import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
-import { Tearsheet } from '../../../../../components/Tearsheet/next';
-import { NoDataEmptyState } from '../../../../../components/EmptyStates';
-import { useMatchMedia } from '../../../../../global/js/hooks/useMatchMedia';
+import {
+  preview__AddSelect as AddSelect,
+  preview__Tearsheet as Tearsheet,
+  AddSelectData,
+  AddSelectItem,
+  NoDataEmptyState,
+} from '@carbon/ibm-products';
 import './MultiAddSelect.scss';
 
 const blockClass = `multi-add-select-pattern`;
@@ -153,11 +154,6 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
       show: boolean;
     }>({ item: null, show: false });
 
-    // Calculate button size based on screen size
-    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-    const isSm = useMatchMedia(smMediaQuery);
-    const buttonSize = isSm ? 'xl' : '2xl';
-
     // Initialize data manager with items
     useEffect(() => {
       dataManager.setItems(items);
@@ -266,7 +262,11 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
 
     return (
       <>
-        <AddSelect onItemSelect={handleItemSelect} selectedItems={selectedIds}>
+        <AddSelect
+          onItemSelect={handleItemSelect}
+          selectedItems={selectedIds}
+          {...rest}
+        >
           <Tearsheet
             ref={ref}
             open={open}
@@ -274,11 +274,10 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
             variant="wide"
             summaryContentWidth="22.5rem"
             className={cx(blockClass, className)}
-            {...rest}
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>
-                <p slot="description">{description}</p>
+                {description}
               </Tearsheet.HeaderContent>
             </Tearsheet.Header>
 
@@ -293,7 +292,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                   onSearch={handleSearch}
                 >
                   <AddSelect.Content>
-                    <AddSelect.Column multi={true} hideSearch>
+                    <AddSelect.Column multi hideSearch>
                       {filteredItems.length > 0 ? (
                         filteredItems.map((item) => {
                           return (
@@ -325,7 +324,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                 {infoPanel.show && infoPanel.item ? (
                   <AddSelect.ItemPanel
                     title="Item details"
-                    item={infoPanel.item.itemDetails}
+                    item={infoPanel.item}
                     onClose={handleCloseInfo}
                     closeIconDescription="Close details"
                   />
@@ -373,7 +372,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                   disabled: selectedIds.size === 0,
                 },
               ]}
-              buttonSize={buttonSize}
+              buttonSize="2xl"
             />
           </Tearsheet>
         </AddSelect>

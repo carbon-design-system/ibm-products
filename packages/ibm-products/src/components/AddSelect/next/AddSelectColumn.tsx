@@ -79,6 +79,10 @@ export interface AddSelectColumnProps {
    */
   allSelected?: boolean;
   /**
+   * Whether the "Select All" checkbox is in an indeterminate state
+   */
+  allIndeterminate?: boolean;
+  /**
    * Callback when "Select All" is toggled
    */
   onSelectAll?: (checked: boolean) => void;
@@ -124,6 +128,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
       showSelectAll = false,
       itemCount = 0,
       allSelected = false,
+      allIndeterminate = false,
       onSelectAll,
       onNavigate,
       className,
@@ -163,26 +168,28 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
       <AddSelectContext.Provider value={columnContext}>
         <div className={columnClasses} ref={ref} {...rest}>
           {/* Search with optional actions */}
-          {!hideSearch && (
+          {(!hideSearch || actionsSlot) && (
             <div
               className={cx(`${blockClass}-column__search`, {
                 [`${blockClass}-column__search--with-actions`]: actionsSlot,
               })}
             >
-              <div
-                className={
-                  actionsSlot ? `${blockClass}-column__search-input` : undefined
-                }
-              >
-                <Search
-                  labelText={searchLabel}
-                  placeholder={searchPlaceholder}
-                  size="md"
-                  onChange={handleSearch}
-                  value={searchTerm}
-                  {...searchProps}
-                />
-              </div>
+              {!hideSearch && (
+                <div
+                  className={
+                    actionsSlot ? `${blockClass}-column__search-input` : ''
+                  }
+                >
+                  <Search
+                    labelText={searchLabel}
+                    placeholder={searchPlaceholder}
+                    size="md"
+                    onChange={handleSearch}
+                    value={searchTerm}
+                    {...searchProps}
+                  />
+                </div>
+              )}
               {actionsSlot && (
                 <div className={`${blockClass}-column__actions`}>
                   {actionsSlot}
@@ -199,6 +206,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
                   id={`select-all-${title}`}
                   className={`${blockClass}-column__select-all`}
                   checked={allSelected}
+                  indeterminate={allIndeterminate}
                   onChange={handleSelectAll}
                   labelText={
                     <>
@@ -237,6 +245,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
 
 AddSelectColumn.propTypes = {
   actionsSlot: PropTypes.node,
+  allIndeterminate: PropTypes.bool,
   allSelected: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,

@@ -35,11 +35,11 @@ export interface ExpressiveCardProps extends PropsWithChildren {
   /**
    * Optional header description
    */
-  description?: string | object | ReactNode;
+  description?: string | ReactNode;
   /**
    * Optional label for the top of the card
    */
-  label?: string | object | ReactNode;
+  label?: string | ReactNode;
   /**
    * Optional media content like an image to be placed in the card
    */
@@ -106,7 +106,7 @@ export interface ExpressiveCardProps extends PropsWithChildren {
   /**
    * Title that's displayed at the top of the card
    */
-  title?: string | object | ReactNode;
+  title?: string | ReactNode;
 }
 
 const componentName = 'ExpressiveCard';
@@ -164,19 +164,11 @@ ExpressiveCard.propTypes = {
   /**
    * Optional header description
    */
-  description: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /**
    * Optional label for the top of the card
    */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /**
    * Optional media content like an image to be placed in the card
    */
@@ -246,11 +238,7 @@ ExpressiveCard.propTypes = {
   /**
    * Title that's displayed at the top of the card
    */
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 ExpressiveCard.displayName = componentName;

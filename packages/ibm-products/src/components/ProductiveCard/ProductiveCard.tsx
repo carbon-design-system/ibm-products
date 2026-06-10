@@ -55,11 +55,11 @@ export interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Optional header description
    */
-  description?: string | object | ReactNode;
+  description?: string | ReactNode;
   /**
    * Optional label for the top of the card
    */
-  label?: string | object | ReactNode;
+  label?: string | ReactNode;
 
   /**
    * Provides the callback for a clickable card
@@ -134,7 +134,7 @@ export interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Title that's displayed at the top of the card
    */
-  title?: string | object | ReactNode;
+  title?: string | ReactNode;
 
   /**
    * Determines title size
@@ -225,11 +225,7 @@ ProductiveCard.propTypes = {
   /**
    * Optional header description
    */
-  description: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /**
    * Sets the text for the OverflowMenu trigger button tooltip and OverflowMenu aria label,
    * gets overridden by the `overflowAriaLabel` prop.
@@ -240,11 +236,7 @@ ProductiveCard.propTypes = {
   /**
    * Optional label for the top of the card
    */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /**
    * Provides the callback for a clickable card
    */
@@ -322,11 +314,7 @@ ProductiveCard.propTypes = {
   /**
    * Title that's displayed at the top of the card
    */
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
    * Determines title size

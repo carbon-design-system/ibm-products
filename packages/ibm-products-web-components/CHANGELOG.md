@@ -1,4 +1,28 @@
-## `@carbon/ibm-products-web-components@0.39.0-rc.0`
+## `@carbon/ibm-products-web-components@0.41.0-rc.0`
+### Features :rocket:
+- feat(EditInPlace): Web component implementation (#9384)
+- feat(AddSelect): composable add select with patterns (#9368)
+- feat(createTearsheetNarrow): implemented as pattern (#9404)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+
+## `@carbon/ibm-products-web-components@0.40.0`
+### Features :rocket:
+- feat(createfullpage): implemented as patterns in wc (#9275)
+
+### Bug fixes :bug:
+- fix(preview_PageHeader): fix header padding (#9440)
+- fix(options-tile): WC parity work  (#9387)
+- fix: increase code coverage > 80 (#9376)
+- fix(apikeymodal): parity  (#9313)
+
+### Housekeeping :house:
+- chore(deps): update dependency @mordech/vite-lit-loader to ^0.40.0 (#9235)
+- build(deps): update Carbon 11 compatible versions to latest (#9405)
+- chore(storybook): upgrade Storybook to 10 (#9392)
+
+## `@carbon/ibm-products-web-components@0.39.0`
 ### Bug fixes :bug:
 - fix(TruncatedText): provide keyboard accessibility (#9245)
 - fix(preview_PageHeader): `HeroImage` not taking the full height (#9268)

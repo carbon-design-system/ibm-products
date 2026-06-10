@@ -35,6 +35,7 @@ export default {
     docs: {
       page: mdx,
     },
+    chromatic: { disableSnapshot: true },
   },
   decorators: [
     (story) => (
@@ -361,9 +362,6 @@ statusIndicator.args = {
 };
 
 export const success = TemplateSuccess.bind({});
-success.parameters = {
-  chromatic: { disableSnapshot: true },
-};
 success.args = {
   title: 'Success, synchronous',
 };

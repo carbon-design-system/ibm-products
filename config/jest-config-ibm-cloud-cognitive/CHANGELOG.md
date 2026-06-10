@@ -1,4 +1,13 @@
-## `@jest-config-ibm-cloud-cognitive@1.49.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.51.0-rc.0`
+### Housekeeping :house:
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+
+## `@jest-config-ibm-cloud-cognitive@1.50.0`
+### Housekeeping :house:
+- chore: upgrade jest config to pure esm (#9407)
+- chore(storybook): upgrade Storybook to 10 (#9392)
+
+## `@jest-config-ibm-cloud-cognitive@1.49.0`
 ### Bug fixes :bug:
 - fix: remove unwanted paths from code coverage report (#9363)
 - fix: security issues uuid, axios,basic-ftp (#9351)

@@ -11,8 +11,12 @@
 .non-hierarchical-peek-inside-pattern {
   &__modifier {
     flex: 0 0 auto;
-    margin-inline-start: auto;
-    min-inline-size: 200px;
+    margin-inline-start: $spacing-09;
+
+    .cds--dropdown--inline .cds--list-box__menu {
+      max-inline-size: 9rem;
+      min-inline-size: 9rem;
+    }
   }
 
   &__summary-title {
@@ -69,7 +73,7 @@
   &__notification {
     position: fixed;
     z-index: 9999;
-    inset-block-end: $spacing-09;
+    inset-block-start: $spacing-09;
     inset-inline-end: $spacing-05;
   }
 

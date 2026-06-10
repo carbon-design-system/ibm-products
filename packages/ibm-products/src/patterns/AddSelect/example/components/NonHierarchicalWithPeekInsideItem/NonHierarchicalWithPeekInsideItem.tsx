@@ -16,12 +16,13 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Dropdown, Layer, MultiSelect, ToastNotification } from '@carbon/react';
-import { breakpoints } from '@carbon/layout';
-import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
-import { Tearsheet } from '../../../../../components/Tearsheet/next';
-import { NoDataEmptyState } from '../../../../../components/EmptyStates';
-import { useMatchMedia } from '../../../../../global/js/hooks/useMatchMedia';
+import {
+  preview__AddSelect as AddSelect,
+  preview__Tearsheet as Tearsheet,
+  AddSelectData,
+  AddSelectItem,
+  NoDataEmptyState,
+} from '@carbon/ibm-products';
 import './NonHierarchicalWithPeekInsideItem.scss';
 
 const blockClass = `non-hierarchical-peek-inside-pattern`;
@@ -190,11 +191,6 @@ export const NonHierarchicalWithPeekInsideItem = forwardRef<
       item: AddSelectItem | null;
       show: boolean;
     }>({ item: null, show: false });
-
-    // Calculate button size based on screen size
-    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-    const isSm = useMatchMedia(smMediaQuery);
-    const buttonSize = isSm ? 'xl' : '2xl';
 
     // Initialize data manager with items
     useEffect(() => {
@@ -375,7 +371,7 @@ export const NonHierarchicalWithPeekInsideItem = forwardRef<
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>
-                <p slot="description">{description}</p>
+                {description}
               </Tearsheet.HeaderContent>
             </Tearsheet.Header>
 
@@ -525,73 +521,62 @@ export const NonHierarchicalWithPeekInsideItem = forwardRef<
               </Tearsheet.MainContent>
 
               <Tearsheet.SummaryContent isFlush>
-                {infoPanel.show && infoPanel.item ? (
-                  <AddSelect.ItemPanel
-                    title="Item details"
-                    item={infoPanel.item.itemDetails}
-                    onClose={handleCloseInfo}
-                    closeIconDescription="Close details"
-                  />
-                ) : (
-                  <AddSelect.SelectionSummary
-                    title={selectionSummaryTitle}
-                    selectedItems={selectedItemsForDisplay}
-                    emptyState={
-                      <div
-                        style={{ marginBlockStart: '3rem', padding: '1rem' }}
-                      >
-                        <NoDataEmptyState
-                          illustrationTheme="light"
-                          size="sm"
-                          title={noSelectionTitle}
-                          subtitle={noSelectionDescription}
-                        />
-                      </div>
-                    }
-                  >
-                    {selectedItemsForDisplay.map((item) => {
-                      const modifierValue = item[modifierConfig.id];
-                      const modifierDisplay = Array.isArray(modifierValue)
-                        ? modifierValue.join(', ')
-                        : modifierValue || 'None';
+                <AddSelect.SelectionSummary
+                  title={selectionSummaryTitle}
+                  selectedItems={selectedItemsForDisplay}
+                  emptyState={
+                    <div style={{ marginBlockStart: '3rem', padding: '1rem' }}>
+                      <NoDataEmptyState
+                        illustrationTheme="light"
+                        size="sm"
+                        title={noSelectionTitle}
+                        subtitle={noSelectionDescription}
+                      />
+                    </div>
+                  }
+                >
+                  {selectedItemsForDisplay.map((item) => {
+                    const modifierValue = item[modifierConfig.id];
+                    const modifierDisplay = Array.isArray(modifierValue)
+                      ? modifierValue.join(', ')
+                      : modifierValue || 'None';
 
-                      return (
-                        <AddSelect.SelectionSummaryItem
-                          key={item.id}
-                          item={item}
-                          onRemove={handleRemoveItem}
-                          useAccordion={true}
-                          renderTitle={(item) => (
-                            <div className={`${blockClass}__summary-title`}>
-                              <span className={`${blockClass}__summary-name`}>
-                                {item.title}
-                              </span>
-                              <span
-                                className={`${blockClass}__summary-modifier-value`}
-                              >
-                                {modifierDisplay}
-                              </span>
-                            </div>
-                          )}
-                          renderContent={(item) => (
-                            <div className={`${blockClass}__summary-content`}>
-                              {item.subtitle && (
-                                <div className={`${blockClass}__summary-field`}>
-                                  <strong>Email:</strong> {item.subtitle}
-                                </div>
-                              )}
-                              {item.value && (
-                                <div className={`${blockClass}__summary-field`}>
-                                  <strong>ID:</strong> {item.value}
-                                </div>
-                              )}
-                            </div>
-                          )}
-                        />
-                      );
-                    })}
-                  </AddSelect.SelectionSummary>
-                )}
+                    return (
+                      <AddSelect.SelectionSummaryItem
+                        key={item.id}
+                        item={item}
+                        onRemove={handleRemoveItem}
+                        useAccordion={true}
+                        renderAccordionTitle={(item) => (
+                          <div className={`${blockClass}__summary-title`}>
+                            <span className={`${blockClass}__summary-name`}>
+                              {item.title}
+                            </span>
+                            <span
+                              className={`${blockClass}__summary-modifier-value`}
+                            >
+                              {modifierDisplay}
+                            </span>
+                          </div>
+                        )}
+                        renderAccordionBody={(item) => (
+                          <div className={`${blockClass}__summary-content`}>
+                            {item.subtitle && (
+                              <div className={`${blockClass}__summary-field`}>
+                                <strong>Email:</strong> {item.subtitle}
+                              </div>
+                            )}
+                            {item.value && (
+                              <div className={`${blockClass}__summary-field`}>
+                                <strong>ID:</strong> {item.value}
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      />
+                    );
+                  })}
+                </AddSelect.SelectionSummary>
               </Tearsheet.SummaryContent>
             </Tearsheet.Body>
 
@@ -609,7 +594,7 @@ export const NonHierarchicalWithPeekInsideItem = forwardRef<
                   disabled: selectedIds.size === 0,
                 },
               ]}
-              buttonSize={buttonSize}
+              buttonSize="2xl"
             />
           </Tearsheet>
         </AddSelect>

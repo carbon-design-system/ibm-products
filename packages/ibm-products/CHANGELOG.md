@@ -1,3 +1,8 @@
+## `@carbon/ibm-products@2.92.0-rc.1`
+### Features :rocket:
+- feat(addselect): code refactoring and patterns (#9515)
+- feat: #9174 Added support for clearFiltersText prop (#9508)
+
 ## `@carbon/ibm-products@2.92.0-rc.0`
 ### Features :rocket:
 - feat(AddSelect): composable add select with patterns (#9368)

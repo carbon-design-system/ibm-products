@@ -347,13 +347,13 @@ describe(componentName, () => {
               label="Show information"
             ></CoachmarkBeacon>
             <Coachmark.Content>
-              <Coachmark.Content.Header
+              <Coachmark.ContentHeader
                 closeIconDescription="Close"
                 dragIconDescription="Drag"
-              ></Coachmark.Content.Header>
-              <Coachmark.Content.Body>
+              ></Coachmark.ContentHeader>
+              <Coachmark.ContentBody>
                 <h2>Hello World</h2>
-              </Coachmark.Content.Body>
+              </Coachmark.ContentBody>
             </Coachmark.Content>
           </Coachmark>
         </div>
@@ -376,13 +376,13 @@ describe(componentName, () => {
           kind="default"
         ></CoachmarkBeacon>
         <Coachmark.Content>
-          <Coachmark.Content.Header
+          <Coachmark.ContentHeader
             closeIconDescription="Close"
             dragIconDescription="Drag"
-          ></Coachmark.Content.Header>
-          <Coachmark.Content.Body>
+          ></Coachmark.ContentHeader>
+          <Coachmark.ContentBody>
             <h2>Hello World</h2>
-          </Coachmark.Content.Body>
+          </Coachmark.ContentBody>
         </Coachmark.Content>
       </Coachmark>
     );
@@ -406,13 +406,13 @@ describe(componentName, () => {
           }}
         ></CoachmarkBeacon>
         <Coachmark.Content>
-          <Coachmark.Content.Header
+          <Coachmark.ContentHeader
             closeIconDescription="Close"
             dragIconDescription="Drag"
-          ></Coachmark.Content.Header>
-          <Coachmark.Content.Body>
+          ></Coachmark.ContentHeader>
+          <Coachmark.ContentBody>
             <h2>Hello World</h2>
-          </Coachmark.Content.Body>
+          </Coachmark.ContentBody>
         </Coachmark.Content>
       </Coachmark>
     );

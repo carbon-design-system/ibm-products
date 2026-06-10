@@ -1,6 +1,6 @@
 {
   "name": "@carbon/ibm-products-utilities",
-  "description": "Framework-agnostic utilities for Carbon for IBM Products",
+  "description": "Utilities for Carbon for IBM Products",
   "version": "1.1.0-rc.0",
   "license": "Apache-2.0",
   "private": true,
@@ -25,8 +25,7 @@
     "es",
     "lib",
     "LICENSE",
-    "README.md",
-    "telemetry.yml"
+    "README.md"
   ],
   "keywords": [
     "carbon",

@@ -10,6 +10,9 @@ import styles from '../_story-styles.scss?inline';
 import DocsPage from './MultiAddSelect.mdx';
 import { MultiAddSelectDefault } from '../example/preview-components/MultiAddSelectDefault/MultiAddSelectDefault';
 import { MultiAddSelectWithHierarchyPreview } from '../example/preview-components/MultiAddSelectWithHierarchy/MultiAddSelectWithHierarchy';
+import { MultiAddSelectWithModifiers } from '../example/preview-components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
+import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
+import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
 
 export default {
   title: 'Patterns/Add and select/MultiAddSelect',
@@ -47,6 +50,18 @@ export const Overview = {
           <strong>With Hierarchy</strong> - Multi-selection with hierarchical
           navigation and recursive columns
         </li>
+        <li>
+          <strong>With Modifiers</strong> - Multi-selection with role assignment
+          using Dropdown or MultiSelect modifiers
+        </li>
+        <li>
+          <strong>Non-Hierarchical with Peek Inside Item</strong> -
+          Multi-selection with the ability to peek inside items to view their
+          contents in a middle panel
+          <strong>With Hierarchy (No Select All)</strong> - Multi-selection with
+          hierarchical navigation but without column-level select-all
+          checkboxes. Only individual items can be selected.
+        </li>
       </ul>
       <h2>Component structure</h2>
       <p>
@@ -68,3 +83,21 @@ export const WithHierarchy = {
 };
 
 WithHierarchy.storyName = 'With Hierarchy';
+
+export const WithModifiers = {
+  render: () => <MultiAddSelectWithModifiers />,
+};
+
+WithModifiers.storyName = 'With Modifiers';
+
+export const NonHierarchicalWithPeekInsideItem = {
+  render: () => <NonHierarchicalWithPeekInsideItemPreview />,
+};
+
+NonHierarchicalWithPeekInsideItem.storyName =
+  'Non-Hierarchical with Peek Inside Item';
+export const WithHierarchyNoSelectAll = {
+  render: () => <MultiAddSelectWithHierarchyNoSelectAllPreview />,
+};
+
+WithHierarchyNoSelectAll.storyName = 'With Hierarchy (No Select All)';

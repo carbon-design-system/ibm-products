@@ -9,6 +9,7 @@
 export { AddSelectData } from './utils/add-select';
 export type {
   AddSelectItem,
+  ItemDetails,
   ItemStatus,
   SearchOptions,
 } from './utils/add-select';

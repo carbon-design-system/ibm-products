@@ -580,6 +580,7 @@ export const AddSingleItemFromHierarchy = forwardRef<
         <AddSelect
           onItemSelect={handleItemSelect}
           selectedItems={selectedItems}
+          {...rest}
         >
           <Tearsheet
             ref={ref}
@@ -588,7 +589,6 @@ export const AddSingleItemFromHierarchy = forwardRef<
             variant="wide"
             summaryContentWidth="22.5rem"
             className={cx(blockClass, className)}
-            {...rest}
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>

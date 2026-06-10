@@ -359,7 +359,11 @@ export const NonHierarchicalWithPeekInsideItem = forwardRef<
 
     return (
       <>
-        <AddSelect onItemSelect={handleItemSelect} selectedItems={selectedIds}>
+        <AddSelect
+          onItemSelect={handleItemSelect}
+          selectedItems={selectedIds}
+          {...rest}
+        >
           <Tearsheet
             ref={ref}
             open={open}
@@ -367,7 +371,6 @@ export const NonHierarchicalWithPeekInsideItem = forwardRef<
             variant="wide"
             summaryContentWidth="22.5rem"
             className={cx(blockClass, className)}
-            {...rest}
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>

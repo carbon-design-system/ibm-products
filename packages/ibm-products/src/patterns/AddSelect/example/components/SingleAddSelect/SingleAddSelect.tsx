@@ -222,6 +222,7 @@ export const SingleAddSelect = forwardRef<HTMLDivElement, SingleAddSelectProps>(
         <AddSelect
           onItemSelect={handleItemSelect}
           selectedItems={selectedItems}
+          {...rest}
         >
           <Tearsheet
             ref={ref}
@@ -229,7 +230,6 @@ export const SingleAddSelect = forwardRef<HTMLDivElement, SingleAddSelectProps>(
             onClose={handleClose}
             variant="narrow"
             className={cx(blockClass, className)}
-            {...rest}
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>

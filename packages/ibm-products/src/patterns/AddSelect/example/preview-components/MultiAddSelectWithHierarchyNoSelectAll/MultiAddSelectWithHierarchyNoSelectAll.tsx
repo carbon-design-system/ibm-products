@@ -108,9 +108,10 @@ export const MultiAddSelectWithHierarchyNoSelectAllPreview = () => {
         open={open}
         setOpen={setOpen}
         items={hierarchicalItems}
+        preSelectedItemIds={['1-2']}
         onSubmit={handleSubmit}
         title="Add files"
-        description="Select individual files from the folders below. Click the chevron to navigate into folders. Note: No select-all option is available."
+        description="Select individual files from the folders below. Click the chevron to navigate into folders. Note: No select-all option is available. The file 'index.js' is pre-selected and cannot be deselected."
         itemsLabel="Files"
         globalSearchLabel="Search files"
         globalSearchPlaceholder="Find files"

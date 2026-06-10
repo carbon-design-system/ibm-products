@@ -16,12 +16,13 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ToastNotification } from '@carbon/react';
-import { breakpoints } from '@carbon/layout';
-import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
-import { Tearsheet } from '../../../../../components/Tearsheet/next';
-import { NoDataEmptyState } from '../../../../../components/EmptyStates';
-import { useMatchMedia } from '../../../../../global/js/hooks/useMatchMedia';
+import {
+  preview__AddSelect as AddSelect,
+  preview__Tearsheet as Tearsheet,
+  AddSelectData,
+  AddSelectItem,
+  NoDataEmptyState,
+} from '@carbon/ibm-products';
 import './MultiAddSelectWithHierarchyNoSelectAll.scss';
 
 const blockClass = `multi-add-select-hierarchy-no-select-all-pattern`;
@@ -45,6 +46,10 @@ export interface MultiAddSelectWithHierarchyNoSelectAllProps {
    * Array of hierarchical items to display
    */
   items: AddSelectItem[];
+  /**
+   * Array of pre-selected item IDs that should appear as disabled with checkmark
+   */
+  preSelectedItemIds?: string[];
   /**
    * Callback when items are submitted
    */
@@ -148,12 +153,13 @@ interface ColumnProps {
   columnTitle: string;
   level: number;
   dataManager: AddSelectData;
-  onNavigate?: (
+  onNavigateToChild?: (
     itemId: string,
     title: string,
     children: AddSelectItem[]
   ) => void;
   selectedItems: Set<string>;
+  preSelectedItems: Set<string>;
 }
 
 const ControlledColumn: React.FC<ColumnProps> = ({
@@ -163,8 +169,9 @@ const ControlledColumn: React.FC<ColumnProps> = ({
   columnTitle,
   level,
   dataManager,
-  onNavigate,
+  onNavigateToChild,
   selectedItems,
+  preSelectedItems,
 }) => {
   const [columnSearchTerm, setColumnSearchTerm] = useState('');
 
@@ -194,7 +201,7 @@ const ControlledColumn: React.FC<ColumnProps> = ({
     const children = parent?.children?.entries || [];
 
     if (children.length > 0) {
-      onNavigate?.(itemId, title, children);
+      onNavigateToChild?.(itemId, title, children);
     }
   };
 
@@ -211,6 +218,7 @@ const ControlledColumn: React.FC<ColumnProps> = ({
       {filteredItems.map((item) => {
         const hasChildren =
           item.children?.entries && item.children.entries.length > 0;
+        const isPreSelected = preSelectedItems.has(item.id);
         return (
           <AddSelect.Row
             key={item.id}
@@ -219,7 +227,7 @@ const ControlledColumn: React.FC<ColumnProps> = ({
             subtitle={item.subtitle}
             value={item.value || ''}
             icon={item.icon}
-            disabled={item.disabled}
+            disabled={item.disabled || isPreSelected}
             hasChildren={hasChildren}
             hasItemPanel={!!item.itemDetails}
             onItemPanelClick={onShowInfo}
@@ -239,6 +247,7 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
       open,
       setOpen,
       items,
+      preSelectedItemIds = [],
       onSubmit,
       title = 'Add items',
       description = 'Select items from the list below',
@@ -268,6 +277,7 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
 
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+    const [preSelectedIds] = useState<Set<string>>(new Set(preSelectedItemIds));
     const [currentItems, setCurrentItems] = useState<AddSelectItem[]>([]);
     const [showNotification, setShowNotification] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
@@ -284,11 +294,6 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
       Array<{ id: string; title: string }>
     >([{ id: 'root', title: rootBreadcrumbTitle }]);
 
-    // Calculate button size based on screen size
-    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-    const isSm = useMatchMedia(smMediaQuery);
-    const buttonSize = isSm ? 'xl' : '2xl';
-
     // Initialize data manager with items
     useEffect(() => {
       dataManager.setItems(items);
@@ -298,13 +303,14 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
     // Reset state when tearsheet opens
     useEffect(() => {
       if (open) {
-        setSelectedIds(new Set());
+        // Initialize with pre-selected items
+        setSelectedIds(new Set(preSelectedItemIds));
         setSearchTerm('');
         setInfoPanel({ item: null, show: false });
         setNavigationLevels([]);
         setBreadcrumbPath([{ id: 'root', title: rootBreadcrumbTitle }]);
       }
-    }, [open, rootBreadcrumbTitle]);
+    }, [open, rootBreadcrumbTitle, preSelectedItemIds]);
 
     // Handle item selection
     const handleItemSelect = (
@@ -312,6 +318,11 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
       selected: boolean,
       value: string
     ) => {
+      // Prevent selection/deselection of pre-selected items
+      if (preSelectedIds.has(itemId)) {
+        return;
+      }
+
       const newSelectedIds = new Set(selectedIds);
 
       if (selected) {
@@ -346,24 +357,117 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
       }
     };
 
-    // Handle navigation to child level
+    // Handle navigation to child level with smart column management
     const handleNavigateToChild = (
       itemId: string,
       title: string,
       children: AddSelectItem[]
     ) => {
-      // Add new level to navigation
-      setNavigationLevels((prev) => [
-        ...prev,
-        {
+      setNavigationLevels((prev) => {
+        // Find which column the clicked item is in
+        let sourceColumnIndex = -1;
+
+        // Check if it's in the root items (column 0)
+        if (currentItems.some((item) => item.id === itemId)) {
+          sourceColumnIndex = 0;
+        } else {
+          // Check which navigation level contains this item
+          for (let i = 0; i < prev.length; i++) {
+            if (prev[i].items.some((item) => item.id === itemId)) {
+              sourceColumnIndex = i + 1; // +1 because root is 0
+              break;
+            }
+          }
+        }
+
+        const newLevel = {
           items: children,
           parentId: itemId,
           parentTitle: title,
-        },
-      ]);
+        };
+
+        // If clicking from root column (first column)
+        if (sourceColumnIndex === 0) {
+          // Check if we already have 2 columns (total 3 with root)
+          if (prev.length >= 2) {
+            // Replace the second column, remove the third
+            return [newLevel];
+          } else if (prev.length === 1) {
+            // We have 2 columns total, replace the second
+            return [newLevel];
+          } else {
+            // We only have root, add first child column
+            return [newLevel];
+          }
+        }
+
+        // If clicking from second column
+        if (sourceColumnIndex === 1) {
+          // Check if column already exists for this item
+          if (prev.length >= 2 && prev[1].parentId === itemId) {
+            // Same item, don't add duplicate
+            return prev;
+          }
+          // Replace the third column if it exists, otherwise add it
+          return [prev[0], newLevel];
+        }
+
+        // If clicking from third column
+        if (sourceColumnIndex === 2) {
+          // Check if column already exists for this item
+          if (prev.length >= 3 && prev[2].parentId === itemId) {
+            // Same item, don't add duplicate
+            return prev;
+          }
+          // Replace the third column
+          return [prev[0], prev[1], newLevel];
+        }
+
+        // Fallback: just add to the end
+        return [...prev, newLevel];
+      });
 
       // Update breadcrumb path
-      setBreadcrumbPath((prev) => [...prev, { id: itemId, title }]);
+      setBreadcrumbPath((prev) => {
+        // Find if this item already exists in breadcrumb
+        const existingIndex = prev.findIndex((crumb) => crumb.id === itemId);
+
+        if (existingIndex !== -1) {
+          // Item exists, truncate to that point
+          return prev.slice(0, existingIndex + 1);
+        }
+
+        // Determine the correct breadcrumb depth based on navigation levels
+        // Root is always index 0, so we need to manage the path carefully
+        let sourceColumnIndex = -1;
+
+        // Check if it's in the root items
+        if (currentItems.some((item) => item.id === itemId)) {
+          sourceColumnIndex = 0;
+        } else {
+          // Check navigation levels
+          navigationLevels.forEach((level, i) => {
+            if (level.items.some((item) => item.id === itemId)) {
+              sourceColumnIndex = i + 1;
+            }
+          });
+        }
+
+        // Build appropriate breadcrumb path
+        if (sourceColumnIndex === 0) {
+          // Clicking from root, breadcrumb should be: root -> new item
+          return [prev[0], { id: itemId, title }];
+        } else if (sourceColumnIndex > 0 && sourceColumnIndex < prev.length) {
+          // Clicking from middle column, truncate and add
+          return [
+            ...prev.slice(0, sourceColumnIndex + 1),
+            { id: itemId, title },
+          ];
+        }
+
+        // Default: append to end
+        return [...prev, { id: itemId, title }];
+      });
     };
 
     // Handle breadcrumb click to navigate back
@@ -449,7 +553,7 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>
-                <p slot="description">{description}</p>
+                {description}
               </Tearsheet.HeaderContent>
             </Tearsheet.Header>
 
@@ -476,8 +580,9 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
                           columnTitle={columnTitle || itemsLabel}
                           level={1}
                           dataManager={dataManager}
-                          onNavigate={handleNavigateToChild}
+                          onNavigateToChild={handleNavigateToChild}
                           selectedItems={selectedIds}
+                          preSelectedItems={preSelectedIds}
                         />
 
                         {/* Additional columns based on navigation levels */}
@@ -490,8 +595,9 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
                             columnTitle={navLevel.parentTitle}
                             level={index + 2}
                             dataManager={dataManager}
-                            onNavigate={handleNavigateToChild}
+                            onNavigateToChild={handleNavigateToChild}
                             selectedItems={selectedIds}
+                            preSelectedItems={preSelectedIds}
                           />
                         ))}
                       </>
@@ -509,7 +615,7 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
                 {infoPanel.show && infoPanel.item ? (
                   <AddSelect.ItemPanel
                     title="Item details"
-                    item={infoPanel.item.itemDetails}
+                    item={infoPanel.item}
                     onClose={handleCloseInfo}
                     closeIconDescription="Close details"
                   />
@@ -530,14 +636,19 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
                       </div>
                     }
                   >
-                    {selectedItemsForDisplay.map((item) => (
-                      <AddSelect.SelectionSummaryItem
-                        key={item.id}
-                        item={item}
-                        onRemove={handleRemoveItem}
-                        useAccordion={true}
-                      />
-                    ))}
+                    {selectedItemsForDisplay.map((item) => {
+                      const isPreSelected = preSelectedIds.has(item.id);
+                      return (
+                        <AddSelect.SelectionSummaryItem
+                          key={item.id}
+                          item={item}
+                          onRemove={
+                            isPreSelected ? undefined : handleRemoveItem
+                          }
+                          useAccordion={true}
+                        />
+                      );
+                    })}
                   </AddSelect.SelectionSummary>
                 )}
               </Tearsheet.SummaryContent>
@@ -557,7 +668,7 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
                   disabled: selectedIds.size === 0,
                 },
               ]}
-              buttonSize={buttonSize}
+              buttonSize="2xl"
             />
           </Tearsheet>
         </AddSelect>
@@ -609,6 +720,8 @@ MultiAddSelectWithHierarchyNoSelectAll.propTypes = {
   onSubmit: PropTypes.func,
   /**@ts-ignore */
   open: PropTypes.bool.isRequired,
+  /**@ts-ignore */
+  preSelectedItemIds: PropTypes.arrayOf(PropTypes.string),
   primaryButtonText: PropTypes.string,
   rootBreadcrumbTitle: PropTypes.string,
   searchResultsTitle: PropTypes.string,

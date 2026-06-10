@@ -1,3 +1,15 @@
+## `@carbon/ibm-products@2.92.0`
+### Features :rocket:
+- feat(addselect): code refactoring and patterns (#9515)
+- feat: #9174 Added support for clearFiltersText prop (#9508)
+- feat(AddSelect): composable add select with patterns (#9368)
+- feat(createTearsheetNarrow): implemented as pattern (#9404)
+- feat: add carousel utility story examples (#9416)
+
+### Housekeeping :house:
+- chore(deps): update dependency typescript-config-carbon to ^0.10.0 (#9469)
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+
 ## `@carbon/ibm-products@2.92.0-rc.0`
 ### Features :rocket:
 - feat(AddSelect): composable add select with patterns (#9368)

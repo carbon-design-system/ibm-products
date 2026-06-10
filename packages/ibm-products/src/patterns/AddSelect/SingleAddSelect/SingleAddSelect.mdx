@@ -1,283 +1,81 @@
-import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { CodesandboxLink } from '../../../global/js/utils/story-helper';
 import * as stories from './SingleAddSelect.stories';
 
-# SingleAddSelect Pattern
+<Meta of={stories} />
+
+# SingleAddSelect pattern
 
 [Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/)
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Example usage](#example-usage)
-- [Component API](#component-api)
-- [Copy-paste ready code](#copy-paste-ready-code)
-
 ## Overview
 
-The SingleAddSelect pattern provides a complete, production-ready implementation
-for single-selection workflows with hierarchical navigation. It includes a
-Tearsheet container, AddSelect component with breadcrumb navigation, and success
-notifications.
+The SingleAddSelect pattern supports workflows where users need to add or choose
+exactly one item in a tearsheet experience.
 
-> **Copy-paste ready**: The component in
-> `example/components/SingleAddSelect/SingleAddSelect.tsx` includes everything
-> you need - Tearsheet, breadcrumb navigation, Toast notifications, and all
-> interaction logic. Simply copy the file and customize the props.
+These patterns are created using composable AddSelect presentational components
+and the AddSelect utility. They are intended to be copied, adapted, and composed
+to fit product-specific data, labels, and submission logic.
 
-### Key Features
+## Choosing the right pattern
 
-- **Complete pattern** - Includes Tearsheet, AddSelect, breadcrumb navigation,
-  and toast notifications
-- **Single selection** - Select exactly one item with radio buttons
-- **Hierarchical navigation** - Navigate through nested data structures with
-  breadcrumbs
-- **Search** - Built-in global search across all levels
-- **Breadcrumb navigation** - Clear indication of current location in hierarchy
-- **Side panel support** - Optional side panel for displaying item details
-- **Success feedback** - Toast notification on successful submission
-- **Accessible** - Full keyboard navigation and ARIA support
+### Single add and select
+
+Use this pattern when users need to select exactly one item and complete the
+task in a straightforward flow.
+
+Choose it when:
+
+- only one item can be selected
+- users do not need to compare many selected items at once
+- the workflow benefits from a focused tearsheet experience
+
+### Single add and select with hierarchy and side panel
+
+Use this variation when users need to select one item from hierarchical content
+and may need more detail before making a decision.
+
+Choose it when:
+
+- items are organized in parent-child relationships
+- users need breadcrumb-based navigation through levels
+- users benefit from seeing metadata or details in a side panel before
+  confirming
+
+## How this pattern can be used
+
+SingleAddSelect can be used to support tasks such as selecting one asset, one
+location, one category, or one resource from a list or hierarchy.
+
+Typical usage includes:
+
+- opening the pattern from a primary task flow
+- letting users browse or search available items
+- optionally navigating through hierarchy levels
+- selecting one item and confirming the choice
+- returning the selected value to the parent workflow
 
 ## Example usage
 
 ### Default
 
-<Canvas>
-  <Story id="patterns-add-and-select-single-add-select--default" />
-</Canvas>
+<Canvas of={stories.Default} />
 
-### With Hierarchy and Side Panel
+### With hierarchy
 
-For use cases where users need additional context about items before making a
-selection, the pattern supports a side panel that displays detailed information
-about the selected item.
+<Canvas of={stories.WithHierarchy} />
 
-<Canvas>
-  <Story id="patterns-add-and-select-single-add-select--with-hierarchy-and-side-panel" />
-</Canvas>
+### With hierarchy and side panel
+
+Use this variation when users need additional context about the selected item
+before confirming.
+
+<Canvas of={stories.WithHierarchyAndSidePanel} />
 
 ## Copy-paste ready code
 
-The SingleAddSelect component is located at:
+Reference implementation:
 
-```
+```text
 packages/ibm-products/src/patterns/AddSelect/example/components/SingleAddSelect/SingleAddSelect.tsx
 ```
-
-### Basic usage
-
-```jsx
-import { SingleAddSelect } from './components/SingleAddSelect';
-
-const MyComponent = () => {
-  const [open, setOpen] = useState(false);
-
-  const items = [
-    { id: '1', title: 'Category 1', value: 'cat1' },
-    {
-      id: '2',
-      title: 'Category 2',
-      value: 'cat2',
-      children: {
-        entries: [{ id: '2-1', title: 'Subcategory 1', value: 'subcategory1' }],
-      },
-    },
-  ];
-
-  const handleSubmit = (itemId, value) => {
-    console.log('Selected:', itemId, value);
-  };
-
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Select category</Button>
-
-      <SingleAddSelect
-        open={open}
-        setOpen={setOpen}
-        items={items}
-        onSubmit={handleSubmit}
-        title="Select category"
-        description="Choose one category from the list below"
-      />
-    </>
-  );
-};
-```
-
-## Component API
-
-### Props
-
-| Prop                          | Type                                      | Default                                            | Description                                   |
-| ----------------------------- | ----------------------------------------- | -------------------------------------------------- | --------------------------------------------- |
-| `open`                        | `boolean`                                 | Required                                           | Whether the tearsheet is open                 |
-| `setOpen`                     | `(open: boolean) => void`                 | Required                                           | Callback to set open state                    |
-| `items`                       | `AddSelectItem[]`                         | Required                                           | Array of hierarchical items to display        |
-| `onSubmit`                    | `(itemId: string, value: string) => void` | -                                                  | Callback when an item is submitted            |
-| `title`                       | `string`                                  | `'Select category'`                                | Title for the tearsheet                       |
-| `description`                 | `ReactNode`                               | `'Choose one category from the list below'`        | Description for the tearsheet                 |
-| `itemsLabel`                  | `string`                                  | `'Categories'`                                     | Label for items section                       |
-| `globalSearchLabel`           | `string`                                  | `'Search'`                                         | Global search label                           |
-| `globalSearchPlaceholder`     | `string`                                  | `'Search...'`                                      | Global search placeholder                     |
-| `rootBreadcrumbTitle`         | `string`                                  | `'Categories'`                                     | Root breadcrumb title                         |
-| `noResultsTitle`              | `string`                                  | `'No results found'`                               | No results title                              |
-| `noResultsDescription`        | `string`                                  | `'Try adjusting your search or browse categories'` | No results description                        |
-| `primaryButtonText`           | `string`                                  | `'Select'`                                         | Primary button text                           |
-| `secondaryButtonText`         | `string`                                  | `'Cancel'`                                         | Secondary button text                         |
-| `successNotificationTitle`    | `string`                                  | `'Item Selected'`                                  | Success notification title                    |
-| `successNotificationSubtitle` | `string`                                  | `'Selected: \{value\}'`                            | Success notification subtitle (use \{value\}) |
-| `sidePanelTitle`              | `string`                                  | `'Selected asset'`                                 | Side panel title (AddSingleItemFromHierarchy) |
-| `sidePanelDescriptionLabel`   | `string`                                  | `'Description'`                                    | Side panel description label                  |
-| `sidePanelDetailsLabel`       | `string`                                  | `'Asset details'`                                  | Side panel details label                      |
-| `sidePanelTagsLabel`          | `string`                                  | `'Tags'`                                           | Side panel tags label                         |
-
-### Item structure
-
-```typescript
-interface AddSelectItem {
-  id: string;
-  title?: string;
-  value?: string;
-  subtitle?: string;
-  icon?: ReactNode;
-  disabled?: boolean;
-  meta?: {
-    description?: string;
-    details?: Record<string, string | number>;
-    tags?: string[];
-  };
-  children?: {
-    entries: AddSelectItem[];
-  };
-}
-```
-
-### Item metadata for side panel
-
-When using the `AddSingleItemFromHierarchy` pattern with side panel, you can
-provide additional metadata in the `meta` property:
-
-```jsx
-const itemWithMetadata = {
-  id: 'table-1',
-  title: 'Buenos Aires table',
-  value: 'buenos-aires-table',
-  subtitle: 'CSV from local',
-  icon: <Table size={20} />,
-  meta: {
-    description: 'Description text can go here in multiple lines...',
-    details: {
-      Columns: '19',
-      Rows: '1,852',
-      Size: '89.834 MB',
-    },
-    tags: ['Tag here', 'Long tag name here'],
-  },
-};
-```
-
-## Hierarchical Navigation
-
-The pattern supports nested data structures with breadcrumb navigation:
-
-- Click items with children to navigate deeper
-- Use breadcrumbs to navigate back up the hierarchy
-- Search works across all levels of the hierarchy
-- Selection is maintained when navigating
-
-### Example hierarchical data
-
-```jsx
-const hierarchicalItems = [
-  {
-    id: '1',
-    title: 'California',
-    value: 'california',
-    children: {
-      entries: [
-        {
-          id: '1-1',
-          title: 'Los Angeles',
-          value: 'la',
-          children: {
-            entries: [
-              { id: '1-1-1', title: 'Beverly Hills', value: 'bh' },
-              { id: '1-1-2', title: 'Malibu', value: 'malibu' },
-            ],
-          },
-        },
-        { id: '1-2', title: 'San Francisco', value: 'sf' },
-      ],
-    },
-  },
-  { id: '2', title: 'Texas', value: 'texas' },
-];
-```
-
-## Customization
-
-### Custom labels and text
-
-```jsx
-<SingleAddSelect
-  title="Select location"
-  description="Choose a location from the hierarchy"
-  itemsLabel="Locations"
-  globalSearchLabel="Search locations"
-  rootBreadcrumbTitle="All locations"
-  primaryButtonText="Select"
-  successNotificationSubtitle="Selected: {value}"
-  // ... other props
-/>
-```
-
-## Side Panel Pattern
-
-The `AddSingleItemFromHierarchy` pattern extends the basic hierarchy pattern
-with a side panel that displays detailed information about the selected item.
-This is useful when:
-
-- Users need additional context to make an informed decision
-- Items have rich metadata (descriptions, details, tags)
-- The selection involves significant resources or further steps
-
-### When to use the side panel
-
-- **Complex items** - When items have multiple attributes that help with
-  selection
-- **Need for context** - When users benefit from seeing details before
-  committing
-- **Rich metadata** - When items have descriptions, specifications, or tags
-- **Wide tearsheet** - The pattern uses a wide tearsheet to accommodate the side
-  panel
-
-## Best Practices
-
-1. **Keep hierarchies shallow** - Limit to 2-3 levels for better UX
-2. **Provide clear labels** - Use descriptive titles that match your domain
-3. **Handle submission** - Always provide an `onSubmit` callback
-4. **Test navigation** - Ensure breadcrumb navigation works correctly
-5. **Consider search** - For deep hierarchies, search becomes essential
-6. **Show breadcrumbs** - Help users understand their location in the hierarchy
-7. **Use side panel wisely** - Only include it when users need additional
-   context
-8. **Limit description length** - Keep descriptions to 4 lines maximum for
-   readability
-
-## Keyboard Navigation
-
-- **Arrow Up/Down** - Navigate between items
-- **Arrow Right** - Navigate to children (if available)
-- **Enter/Space** - Select item
-- **Ctrl+Home** - Jump to first item
-- **Ctrl+End** - Jump to last item
-
-## Related Patterns
-
-- [MultiAddSelect Pattern](/docs/patterns-add-and-select-multiaddselect--docs) -
-  For multi-selection workflows
-- [CreateModal Pattern](/docs/patterns-create-flows-create-modal--docs) - For
-  create workflows
-
-<CodesandboxLink exampleDirectory="AddSelect" />

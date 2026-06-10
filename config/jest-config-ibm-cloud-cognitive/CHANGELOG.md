@@ -1,3 +1,7 @@
+## `@jest-config-ibm-cloud-cognitive@1.51.0-rc.0`
+### Housekeeping :house:
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+
 ## `@jest-config-ibm-cloud-cognitive@1.50.0`
 ### Housekeeping :house:
 - chore: upgrade jest config to pure esm (#9407)

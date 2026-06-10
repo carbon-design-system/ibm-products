@@ -16,9 +16,12 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ToastNotification } from '@carbon/react';
-import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
-import { Tearsheet } from '../../../../../components/Tearsheet/next';
+import {
+  preview__AddSelect as AddSelect,
+  preview__Tearsheet as Tearsheet,
+  AddSelectData,
+  AddSelectItem,
+} from '@carbon/ibm-products';
 import './SingleAddSelectWithHierarchy.scss';
 
 const blockClass = `single-add-select-with-hierarchy-pattern`;
@@ -310,7 +313,7 @@ export const SingleAddSelectWithHierarchy = forwardRef<
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>
-                <p slot="description">{description}</p>
+                {description}
               </Tearsheet.HeaderContent>
             </Tearsheet.Header>
 

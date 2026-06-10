@@ -10,7 +10,6 @@ import React, {
   ForwardedRef,
   ReactNode,
   useState,
-  useContext,
   MouseEvent,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -27,7 +26,7 @@ import {
   type BreadcrumbItemProps,
   type LinkProps,
 } from '@carbon/react';
-import { blockClass, AddSelectContext } from './context';
+import { blockClass } from './context';
 
 /**
  * ----------------
@@ -86,6 +85,10 @@ export interface AddSelectBodyProps {
    */
   subHeaderActions?: ReactNode;
   /**
+   * Whether to hide the search input
+   */
+  hideSearch?: boolean;
+  /**
    * Additional props to pass to the Search component
    */
   searchProps?: Omit<
@@ -125,13 +128,14 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
       globalSearchLabel = 'Search',
       globalSearchPlaceholder = 'Search',
       searchResultsTitle = 'Search results',
-      itemCount = 0,
+      itemCount,
       path = [],
       onSearch,
       onBreadcrumbClick,
       headerContent,
       actionsSlot,
       subHeaderActions,
+      hideSearch = false,
       searchProps,
       tagProps,
       breadcrumbProps,
@@ -141,7 +145,6 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
     },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const { multi } = useContext(AddSelectContext);
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -150,10 +153,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
       onSearch?.(value);
     };
 
-    const bodyClasses = cx(`${blockClass}__body`, className, {
-      [`${blockClass}__body--single`]: !multi,
-      [`${blockClass}__body--multi`]: multi,
-    });
+    const bodyClasses = cx(`${blockClass}__body`, className);
 
     return (
       <div className={bodyClasses} ref={ref} {...rest}>
@@ -162,31 +162,35 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
           {headerContent || (
             <>
               {/* Search with optional actions */}
-              <div
-                className={cx(`${blockClass}__search`, {
-                  [`${blockClass}__search--with-actions`]: actionsSlot,
-                })}
-              >
+              {(!hideSearch || actionsSlot) && (
                 <div
-                  className={
-                    actionsSlot ? `${blockClass}__search-input` : undefined
-                  }
+                  className={cx(`${blockClass}__search`, {
+                    [`${blockClass}__search--with-actions`]: actionsSlot,
+                  })}
                 >
-                  <Search
-                    labelText={globalSearchLabel}
-                    placeholder={globalSearchPlaceholder}
-                    size="lg"
-                    onChange={handleSearch}
-                    value={searchTerm}
-                    {...searchProps}
-                  />
+                  {!hideSearch && (
+                    <div
+                      className={
+                        actionsSlot ? `${blockClass}__search-input` : ''
+                      }
+                    >
+                      <Search
+                        labelText={globalSearchLabel}
+                        placeholder={globalSearchPlaceholder}
+                        size="lg"
+                        onChange={handleSearch}
+                        value={searchTerm}
+                        {...searchProps}
+                      />
+                    </div>
+                  )}
+                  {actionsSlot && (
+                    <div className={`${blockClass}__global-actions`}>
+                      {actionsSlot}
+                    </div>
+                  )}
                 </div>
-                {actionsSlot && (
-                  <div className={`${blockClass}__global-actions`}>
-                    {actionsSlot}
-                  </div>
-                )}
-              </div>
+              )}
 
               {/* Sub-header with breadcrumbs or item label */}
               <div className={`${blockClass}__sub-header`}>
@@ -198,9 +202,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
                   ) : path && path.length > 0 ? (
                     <Breadcrumb
                       noTrailingSlash
-                      className={cx(`${blockClass}__breadcrumbs`, {
-                        [`${blockClass}__breadcrumbs--multi`]: multi,
-                      })}
+                      className={`${blockClass}__breadcrumbs`}
                       {...breadcrumbProps}
                     >
                       {path.map((entry, idx) => {
@@ -232,9 +234,11 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
                   ) : (
                     <p className={`${blockClass}__tags-label`}>{itemsLabel}</p>
                   )}
-                  <Tag type="gray" size="sm" {...tagProps}>
-                    {itemCount}
-                  </Tag>
+                  {itemCount !== undefined && (
+                    <Tag type="gray" size="sm" {...tagProps}>
+                      {itemCount}
+                    </Tag>
+                  )}
                 </div>
                 {subHeaderActions && (
                   <div className={`${blockClass}__sub-header-actions`}>
@@ -264,6 +268,7 @@ AddSelectBody.propTypes = {
   globalSearchLabel: PropTypes.string,
   globalSearchPlaceholder: PropTypes.string,
   headerContent: PropTypes.node,
+  hideSearch: PropTypes.bool,
   itemCount: PropTypes.number,
   itemsLabel: PropTypes.string,
   /**@ts-ignore */

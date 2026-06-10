@@ -15,7 +15,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ToastNotification } from '@carbon/react';
+import { Dropdown, Layer, MultiSelect, ToastNotification } from '@carbon/react';
 import {
   preview__AddSelect as AddSelect,
   preview__Tearsheet as Tearsheet,
@@ -23,15 +23,31 @@ import {
   AddSelectItem,
   NoDataEmptyState,
 } from '@carbon/ibm-products';
-import './MultiAddSelect.scss';
+import './MultiAddSelectWithModifiers.scss';
 
-const blockClass = `multi-add-select-pattern`;
+const blockClass = `multi-add-select-with-modifiers-pattern`;
 
 /**
- * MultiAddSelect Pattern - A complete pattern with Tearsheet for multi-selection
+ * MultiAddSelectWithModifiers Pattern - A complete pattern with Tearsheet for multi-selection with modifiers
  */
 
-export interface MultiAddSelectProps {
+export interface ModifierConfig {
+  id: string;
+  label: string;
+  title: string;
+  options: string[];
+  multiSelect?: boolean;
+}
+
+interface ItemWithModifier extends AddSelectItem {
+  [key: string]: any;
+}
+
+interface ModifierState {
+  [itemId: string]: string | string[];
+}
+
+export interface MultiAddSelectWithModifiersProps {
   /**
    * Whether the tearsheet is open
    */
@@ -43,11 +59,19 @@ export interface MultiAddSelectProps {
   /**
    * Array of items to display
    */
-  items: AddSelectItem[];
+  items: ItemWithModifier[];
   /**
-   * Callback when items are submitted
+   * Modifier configuration
    */
-  onSubmit?: (itemIds: string[], values: string[]) => void;
+  modifierConfig: ModifierConfig;
+  /**
+   * Callback when items are submitted with their modifier values
+   */
+  onSubmit?: (
+    itemIds: string[],
+    values: string[],
+    modifiers: ModifierState
+  ) => void;
   /**
    * Title for the tearsheet
    */
@@ -114,15 +138,19 @@ export interface MultiAddSelectProps {
   className?: string;
 }
 
-export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
+export const MultiAddSelectWithModifiers = forwardRef<
+  HTMLDivElement,
+  MultiAddSelectWithModifiersProps
+>(
   (
     {
       open,
       setOpen,
       items,
+      modifierConfig,
       onSubmit,
-      title = 'Add items',
-      description = 'Select items from the list below',
+      title = 'Add items with modifiers',
+      description = 'Select items and assign modifiers',
       itemsLabel = 'Items',
       globalSearchLabel = 'Search',
       globalSearchPlaceholder = 'Search items',
@@ -131,11 +159,11 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
       noResultsDescription = 'Try adjusting your search',
       selectionSummaryTitle = 'Selected items',
       noSelectionTitle = 'No items selected',
-      noSelectionDescription = 'Select items from the list',
+      noSelectionDescription = 'Select items from the list and assign modifiers',
       primaryButtonText = 'Add',
       secondaryButtonText = 'Cancel',
       successNotificationTitle = 'Success',
-      successNotificationSubtitle = '{count} item{plural} added',
+      successNotificationSubtitle = '{count} item{plural} added with modifiers',
       className,
       ...rest
     },
@@ -146,9 +174,10 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
 
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-    const [filteredItems, setFilteredItems] = useState<AddSelectItem[]>([]);
+    const [filteredItems, setFilteredItems] = useState<ItemWithModifier[]>([]);
     const [showNotification, setShowNotification] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
+    const [modifierStates, setModifierStates] = useState<ModifierState>({});
     const [infoPanel, setInfoPanel] = useState<{
       item: AddSelectItem | null;
       show: boolean;
@@ -158,8 +187,17 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
     useEffect(() => {
       dataManager.setItems(items);
       const rootItems = dataManager.getItems();
-      setFilteredItems(rootItems);
-    }, [items, dataManager]);
+      setFilteredItems(rootItems as ItemWithModifier[]);
+
+      // Initialize modifier states with default values from items
+      const initialModifiers: ModifierState = {};
+      items.forEach((item) => {
+        if (item[modifierConfig.id]) {
+          initialModifiers[item.id] = item[modifierConfig.id];
+        }
+      });
+      setModifierStates(initialModifiers);
+    }, [items, dataManager, modifierConfig.id]);
 
     // Reset state when tearsheet opens
     useEffect(() => {
@@ -167,8 +205,16 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
         setSelectedIds(new Set());
         setSearchTerm('');
         setInfoPanel({ item: null, show: false });
+        // Reset modifier states to initial values
+        const initialModifiers: ModifierState = {};
+        items.forEach((item) => {
+          if (item[modifierConfig.id]) {
+            initialModifiers[item.id] = item[modifierConfig.id];
+          }
+        });
+        setModifierStates(initialModifiers);
       }
-    }, [open]);
+    }, [open, items, modifierConfig.id]);
 
     // Handle item selection
     const handleItemSelect = (
@@ -189,6 +235,14 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
       setSelectedIds(newSelectedIds);
     };
 
+    // Handle modifier change
+    const handleModifierChange = (itemId: string, value: string | string[]) => {
+      setModifierStates((prev) => ({
+        ...prev,
+        [itemId]: value,
+      }));
+    };
+
     // Handle search
     const handleSearch = (term: string) => {
       setSearchTerm(term);
@@ -198,10 +252,10 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
           caseSensitive: false,
           searchFields: ['title', 'value', 'subtitle'],
         });
-        setFilteredItems(results);
+        setFilteredItems(results as ItemWithModifier[]);
       } else {
         const rootItems = dataManager.getItems();
-        setFilteredItems(rootItems);
+        setFilteredItems(rootItems as ItemWithModifier[]);
       }
     };
 
@@ -227,7 +281,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
           return item?.value || '';
         });
 
-        onSubmit?.(selectedIdsArray, selectedValues);
+        onSubmit?.(selectedIdsArray, selectedValues, modifierStates);
         handleClose();
 
         // Show success notification
@@ -256,9 +310,19 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
     // Get selected items for display
     const selectedItemsForDisplay = useMemo(() => {
       return Array.from(selectedIds)
-        .map((id) => dataManager.getItem(id))
-        .filter((item): item is AddSelectItem => item !== undefined);
-    }, [selectedIds, dataManager]);
+        .map((id) => {
+          const item = dataManager.getItem(id);
+          if (item) {
+            return {
+              ...item,
+              [modifierConfig.id]:
+                modifierStates[id] || item[modifierConfig.id] || [],
+            };
+          }
+          return undefined;
+        })
+        .filter((item): item is ItemWithModifier => item !== undefined);
+    }, [selectedIds, dataManager, modifierStates, modifierConfig.id]);
 
     return (
       <>
@@ -292,9 +356,15 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                   onSearch={handleSearch}
                 >
                   <AddSelect.Content>
-                    <AddSelect.Column multi hideSearch>
+                    <AddSelect.Column multi={true} hideSearch>
                       {filteredItems.length > 0 ? (
                         filteredItems.map((item) => {
+                          const isSelected = selectedIds.has(item.id);
+                          const currentModifierValue =
+                            modifierStates[item.id] ||
+                            item[modifierConfig.id] ||
+                            [];
+
                           return (
                             <AddSelect.Row
                               key={item.id}
@@ -306,7 +376,55 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                               disabled={item.disabled}
                               hasItemPanel={!!item.itemDetails}
                               onItemPanelClick={handleShowInfo}
-                            />
+                            >
+                              <div className={`${blockClass}__modifier`}>
+                                <Layer>
+                                  {modifierConfig.multiSelect ? (
+                                    <MultiSelect
+                                      id={`modifier-${item.id}`}
+                                      titleText={modifierConfig.title}
+                                      type="inline"
+                                      label={modifierConfig.label}
+                                      items={modifierConfig.options}
+                                      initialSelectedItems={
+                                        Array.isArray(currentModifierValue)
+                                          ? currentModifierValue
+                                          : []
+                                      }
+                                      onChange={({ selectedItems }) =>
+                                        handleModifierChange(
+                                          item.id,
+                                          selectedItems || []
+                                        )
+                                      }
+                                      disabled={!isSelected}
+                                      size="sm"
+                                    />
+                                  ) : (
+                                    <Dropdown
+                                      id={`modifier-${item.id}`}
+                                      titleText={modifierConfig.title}
+                                      type="inline"
+                                      label={modifierConfig.label}
+                                      items={modifierConfig.options}
+                                      initialSelectedItem={
+                                        typeof currentModifierValue === 'string'
+                                          ? currentModifierValue
+                                          : currentModifierValue[0]
+                                      }
+                                      onChange={({ selectedItem }) =>
+                                        handleModifierChange(
+                                          item.id,
+                                          selectedItem
+                                        )
+                                      }
+                                      disabled={!isSelected}
+                                      size="sm"
+                                    />
+                                  )}
+                                </Layer>
+                              </div>
+                            </AddSelect.Row>
                           );
                         })
                       ) : (
@@ -345,14 +463,47 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                       </div>
                     }
                   >
-                    {selectedItemsForDisplay.map((item) => (
-                      <AddSelect.SelectionSummaryItem
-                        key={item.id}
-                        item={item}
-                        onRemove={handleRemoveItem}
-                        useAccordion={true}
-                      />
-                    ))}
+                    {selectedItemsForDisplay.map((item) => {
+                      const modifierValue = item[modifierConfig.id];
+                      const modifierDisplay = Array.isArray(modifierValue)
+                        ? modifierValue.join(', ')
+                        : modifierValue || 'None';
+
+                      return (
+                        <AddSelect.SelectionSummaryItem
+                          key={item.id}
+                          item={item}
+                          onRemove={handleRemoveItem}
+                          useAccordion={true}
+                          renderAccordionTitle={(item) => (
+                            <div className={`${blockClass}__summary-title`}>
+                              <span className={`${blockClass}__summary-name`}>
+                                {item.title}
+                              </span>
+                              <span
+                                className={`${blockClass}__summary-modifier-value`}
+                              >
+                                {modifierDisplay}
+                              </span>
+                            </div>
+                          )}
+                          renderAccordionBody={(item) => (
+                            <div className={`${blockClass}__summary-content`}>
+                              {item.subtitle && (
+                                <div className={`${blockClass}__summary-field`}>
+                                  <strong>Email:</strong> {item.subtitle}
+                                </div>
+                              )}
+                              {item.value && (
+                                <div className={`${blockClass}__summary-field`}>
+                                  <strong>ID:</strong> {item.value}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        />
+                      );
+                    })}
                   </AddSelect.SelectionSummary>
                 )}
               </Tearsheet.SummaryContent>
@@ -381,7 +532,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
           <ToastNotification
             aria-label="closes notification"
             caption={new Date().toLocaleTimeString()}
-            className="notification"
+            className={`${blockClass}__notification`}
             kind="success"
             lowContrast
             onClose={() => setShowNotification(false)}
@@ -396,7 +547,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
   }
 );
 
-MultiAddSelect.propTypes = {
+MultiAddSelectWithModifiers.propTypes = {
   className: PropTypes.string,
   description: PropTypes.node,
   globalSearchLabel: PropTypes.string,
@@ -414,6 +565,14 @@ MultiAddSelect.propTypes = {
     })
   ).isRequired,
   itemsLabel: PropTypes.string,
+  /**@ts-ignore */
+  modifierConfig: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    multiSelect: PropTypes.bool,
+    options: PropTypes.arrayOf(PropTypes.string).isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
   noResultsDescription: PropTypes.string,
   noResultsTitle: PropTypes.string,
   noSelectionDescription: PropTypes.string,
@@ -432,4 +591,4 @@ MultiAddSelect.propTypes = {
   title: PropTypes.string,
 };
 
-MultiAddSelect.displayName = 'MultiAddSelect';
+MultiAddSelectWithModifiers.displayName = 'MultiAddSelectWithModifiers';

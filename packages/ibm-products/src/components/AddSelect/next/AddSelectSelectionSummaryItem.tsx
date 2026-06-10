@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, ForwardedRef, ReactNode } from 'react';
+import React, { Children, forwardRef, ForwardedRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
@@ -34,19 +34,23 @@ export interface AddSelectSelectionSummaryItemProps {
   /**
    * Custom title renderer (only works with useAccordion mode)
    */
-  renderTitle?: (item: AddSelectItem) => ReactNode;
+  renderAccordionTitle?: (item: AddSelectItem) => ReactNode;
   /**
    * Custom content renderer (only works with useAccordion mode)
    */
-  renderContent?: (item: AddSelectItem) => ReactNode;
+  renderAccordionBody?: (item: AddSelectItem) => ReactNode;
   /**
-   * Custom template for rendering the entire item content
-   * Takes precedence over all other rendering props and works in all modes
+   * Custom renderer for rendering the entire item content
+   * Takes precedence over all other rendering props
    */
-  renderTemplate?: (
+  renderItem?: (
     item: AddSelectItem,
     onRemove?: (id: string) => void
   ) => ReactNode;
+  /**
+   * Custom content - takes highest priority
+   */
+  children?: ReactNode;
   /**
    * Remove button handler
    */
@@ -98,9 +102,10 @@ const AddSelectSelectionSummaryItem = forwardRef<
   (
     {
       item,
-      renderTitle,
-      renderContent,
-      renderTemplate,
+      renderAccordionTitle,
+      renderAccordionBody,
+      renderItem,
+      children,
       onRemove,
       removeButtonLabel = 'Remove item',
       useAccordion = false,
@@ -116,8 +121,9 @@ const AddSelectSelectionSummaryItem = forwardRef<
       `${blockClass}__selection-summary-item`,
       {
         [`${blockClass}__selection-summary-item--accordion`]: useAccordion,
-        [`${blockClass}__selection-summary-item--simple`]: !useAccordion,
-        [`${blockClass}__selection-summary-item--template`]: renderTemplate,
+        [`${blockClass}__selection-summary-item--default`]: !useAccordion,
+        [`${blockClass}__selection-summary-item--template`]:
+          renderItem || Children.count(children) > 0,
       },
       className
     );
@@ -162,29 +168,37 @@ const AddSelectSelectionSummaryItem = forwardRef<
       </div>
     );
 
-    // Default content rendering - show all item properties except itemDetails, icon, avatar
+    // Default content rendering - show all props from item (except title, subtitle) and itemDetails
     const defaultContent = () => {
-      const { itemDetails, icon, avatar, id, title, subtitle, value, ...rest } =
-        item;
-      const entries = Object.entries(rest);
+      // Collect all item props except title, subtitle, and itemDetails
+      const itemProps = Object.entries(item).filter(
+        ([key]) =>
+          key !== 'title' &&
+          key !== 'subtitle' &&
+          key !== 'icon' &&
+          key !== 'id' &&
+          key !== 'children' &&
+          key !== 'selected' &&
+          key !== 'status' &&
+          key !== 'disabled' &&
+          key !== 'itemDetails'
+      );
 
-      if (entries.length === 0 && !value) {
+      // Collect itemDetails props if they exist
+      const itemDetailsProps = item.itemDetails
+        ? Object.entries(item.itemDetails)
+        : [];
+
+      // Combine both sets of properties
+      const allEntries = [...itemProps, ...itemDetailsProps];
+
+      if (allEntries.length === 0) {
         return null;
       }
 
       return (
         <>
-          {value && (
-            <div className={`${blockClass}__selection-summary-item-entry`}>
-              <p className={`${blockClass}__selection-summary-item-header`}>
-                value
-              </p>
-              <p className={`${blockClass}__selection-summary-item-body`}>
-                {value}
-              </p>
-            </div>
-          )}
-          {entries.map(([key, val]) => (
+          {allEntries.map(([key, val]) => (
             <div
               key={key}
               className={`${blockClass}__selection-summary-item-entry`}
@@ -201,20 +215,31 @@ const AddSelectSelectionSummaryItem = forwardRef<
       );
     };
 
-    // Priority 1: If custom template provided, use it (works in all modes)
-    if (renderTemplate) {
+    // Priority 1: If children provided, use them (works in all modes)
+    if (Children.count(children) > 0) {
       return (
         <div className={itemClasses} ref={ref} {...rest}>
-          {renderTemplate(item, onRemove)}
+          {children}
         </div>
       );
     }
 
-    // Priority 2: Accordion mode
+    // Priority 2: If custom item renderer provided, use it (works in all modes)
+    if (renderItem) {
+      return (
+        <div className={itemClasses} ref={ref} {...rest}>
+          {renderItem(item, onRemove)}
+        </div>
+      );
+    }
+
+    // Priority 3: Accordion mode
     if (useAccordion) {
-      const titleContent = renderTitle ? renderTitle(item) : defaultTitle;
-      const bodyContent = renderContent
-        ? renderContent(item)
+      const titleContent = renderAccordionTitle
+        ? renderAccordionTitle(item)
+        : defaultTitle;
+      const bodyContent = renderAccordionBody
+        ? renderAccordionBody(item)
         : defaultContent();
 
       return (
@@ -244,14 +269,12 @@ const AddSelectSelectionSummaryItem = forwardRef<
       );
     }
 
-    // Priority 3: Non-accordion mode (default key-value rendering only)
+    // Priority 4: Non-accordion mode (default key-value rendering only)
     return (
       <div className={itemClasses} ref={ref} {...rest}>
-        <div className={`${blockClass}__selection-summary-item-simple`}>
-          {defaultTitle}
-          <div className={`${blockClass}__selection-summary-item-content`}>
-            {defaultContent()}
-          </div>
+        {defaultTitle}
+        <div className={`${blockClass}__selection-summary-item-content`}>
+          {defaultContent()}
         </div>
       </div>
     );
@@ -263,6 +286,8 @@ AddSelectSelectionSummaryItem.propTypes = {
   accordionItemProps: PropTypes.object,
   /**@ts-ignore */
   accordionProps: PropTypes.object,
+  /**@ts-ignore */
+  children: PropTypes.node,
   className: PropTypes.string,
   /**@ts-ignore */
   item: PropTypes.object.isRequired,
@@ -272,11 +297,11 @@ AddSelectSelectionSummaryItem.propTypes = {
   /**@ts-ignore */
   removeIconButtonProps: PropTypes.object,
   /**@ts-ignore */
-  renderContent: PropTypes.func,
+  renderAccordionBody: PropTypes.func,
   /**@ts-ignore */
-  renderTemplate: PropTypes.func,
+  renderAccordionTitle: PropTypes.func,
   /**@ts-ignore */
-  renderTitle: PropTypes.func,
+  renderItem: PropTypes.func,
   useAccordion: PropTypes.bool,
 };
 

@@ -1,3 +1,12 @@
+## `@carbon/ibm-products-styles@2.88.0-rc.0`
+### Features :rocket:
+- feat(EditInPlace): Web component implementation (#9384)
+- feat(AddSelect): composable add select with patterns (#9368)
+- feat(createTearsheetNarrow): implemented as pattern (#9404)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+
 ## `@carbon/ibm-products-styles@2.87.0`
 ### Features :rocket:
 - feat: Replace Interstitial Screen internal carousel with Carbon utility carousel (#9399)

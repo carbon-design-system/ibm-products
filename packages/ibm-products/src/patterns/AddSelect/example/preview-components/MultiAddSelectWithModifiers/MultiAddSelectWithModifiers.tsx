@@ -206,5 +206,3 @@ export const MultiAddSelectWithModifiers = () => {
     </div>
   );
 };
-
-// Made with Bob

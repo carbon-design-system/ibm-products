@@ -16,12 +16,13 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Dropdown, Layer, MultiSelect, ToastNotification } from '@carbon/react';
-import { breakpoints } from '@carbon/layout';
-import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-utilities';
-import { Tearsheet } from '../../../../../components/Tearsheet/next';
-import { NoDataEmptyState } from '../../../../../components/EmptyStates';
-import { useMatchMedia } from '../../../../../global/js/hooks/useMatchMedia';
+import {
+  preview__AddSelect as AddSelect,
+  preview__Tearsheet as Tearsheet,
+  AddSelectData,
+  AddSelectItem,
+  NoDataEmptyState,
+} from '@carbon/ibm-products';
 import './MultiAddSelectWithModifiers.scss';
 
 const blockClass = `multi-add-select-with-modifiers-pattern`;
@@ -182,11 +183,6 @@ export const MultiAddSelectWithModifiers = forwardRef<
       show: boolean;
     }>({ item: null, show: false });
 
-    // Calculate button size based on screen size
-    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-    const isSm = useMatchMedia(smMediaQuery);
-    const buttonSize = isSm ? 'xl' : '2xl';
-
     // Initialize data manager with items
     useEffect(() => {
       dataManager.setItems(items);
@@ -342,7 +338,7 @@ export const MultiAddSelectWithModifiers = forwardRef<
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>
-                <p slot="description">{description}</p>
+                {description}
               </Tearsheet.HeaderContent>
             </Tearsheet.Header>
 
@@ -443,7 +439,7 @@ export const MultiAddSelectWithModifiers = forwardRef<
                 {infoPanel.show && infoPanel.item ? (
                   <AddSelect.ItemPanel
                     title="Item details"
-                    item={infoPanel.item.itemDetails}
+                    item={infoPanel.item}
                     onClose={handleCloseInfo}
                     closeIconDescription="Close details"
                   />
@@ -476,7 +472,7 @@ export const MultiAddSelectWithModifiers = forwardRef<
                           item={item}
                           onRemove={handleRemoveItem}
                           useAccordion={true}
-                          renderTitle={(item) => (
+                          renderAccordionTitle={(item) => (
                             <div className={`${blockClass}__summary-title`}>
                               <span className={`${blockClass}__summary-name`}>
                                 {item.title}
@@ -488,7 +484,7 @@ export const MultiAddSelectWithModifiers = forwardRef<
                               </span>
                             </div>
                           )}
-                          renderContent={(item) => (
+                          renderAccordionBody={(item) => (
                             <div className={`${blockClass}__summary-content`}>
                               {item.subtitle && (
                                 <div className={`${blockClass}__summary-field`}>
@@ -524,7 +520,7 @@ export const MultiAddSelectWithModifiers = forwardRef<
                   disabled: selectedIds.size === 0,
                 },
               ]}
-              buttonSize={buttonSize}
+              buttonSize="2xl"
             />
           </Tearsheet>
         </AddSelect>
@@ -593,5 +589,3 @@ MultiAddSelectWithModifiers.propTypes = {
 };
 
 MultiAddSelectWithModifiers.displayName = 'MultiAddSelectWithModifiers';
-
-// Made with Bob

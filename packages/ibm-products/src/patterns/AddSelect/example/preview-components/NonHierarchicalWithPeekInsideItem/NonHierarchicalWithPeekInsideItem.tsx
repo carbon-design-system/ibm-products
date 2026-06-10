@@ -487,5 +487,3 @@ export const NonHierarchicalWithPeekInsideItemPreview = () => {
     </div>
   );
 };
-
-// Made with Bob

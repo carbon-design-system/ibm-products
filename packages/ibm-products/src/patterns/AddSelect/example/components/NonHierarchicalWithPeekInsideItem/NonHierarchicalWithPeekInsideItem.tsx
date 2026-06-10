@@ -680,5 +680,3 @@ NonHierarchicalWithPeekInsideItem.propTypes = {
 
 NonHierarchicalWithPeekInsideItem.displayName =
   'NonHierarchicalWithPeekInsideItem';
-
-// Made with Bob

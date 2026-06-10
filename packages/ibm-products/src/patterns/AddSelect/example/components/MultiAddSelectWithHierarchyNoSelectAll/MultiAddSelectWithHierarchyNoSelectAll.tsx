@@ -623,5 +623,3 @@ MultiAddSelectWithHierarchyNoSelectAll.propTypes = {
 
 MultiAddSelectWithHierarchyNoSelectAll.displayName =
   'MultiAddSelectWithHierarchyNoSelectAll';
-
-// Made with Bob

@@ -68,9 +68,7 @@
   &__notification {
     position: fixed;
     z-index: 9999;
-    inset-block-end: $spacing-09;
+    inset-block-start: $spacing-05;
     inset-inline-end: $spacing-05;
   }
 }
-
-// Made with Bob

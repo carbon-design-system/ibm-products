@@ -158,6 +158,7 @@ collect:
         - hideConditionPreviewHandler
         - hideConditionSubGroupPreviewHandler
         - hideIcon
+        - hideSearch
         - hideSelectAll
         - href
         - icon
@@ -309,8 +310,8 @@ collect:
         - reactTableFiltersState
         - readOnly
         - readOnlyTable
-        - renderContent
         - renderIcon
+        - renderItem
         - renderMedia
         - renderRowHeader
         - renderRowHeaderDirection
@@ -451,9 +452,9 @@ collect:
         - subHeaderActions
         - useNormalizedItems
         # AddSelectColumn
+        - allIndeterminate
         - allSelected
         - header
-        - hideSearch
         - onNavigate
         - onSelectAll
         - searchLabel
@@ -488,25 +489,26 @@ collect:
         - checkboxProps
         - hasChildren
         - hasItemPanel
+        - indeterminate
         - itemId
         - itemPanelIconButtonProps
         - itemPanelIconDescription
         - itemPanelOpen
         - onItemPanelClick
         - radioButtonProps
+        - rowContent
         # AddSelectSelectionSummary
         - editIconButtonProps
         - editIconDescription
         - emptyState
         - onEdit
-        - renderItem
         - showCount
         - showEditIcon
         # AddSelectSelectionSummaryItem
         - removeButtonLabel
         - removeIconButtonProps
-        - renderTemplate
-        - renderTitle
+        - renderAccordionBody
+        - renderAccordionTitle
         - useAccordion
         # AddSelectSort
         - setSortAttribute

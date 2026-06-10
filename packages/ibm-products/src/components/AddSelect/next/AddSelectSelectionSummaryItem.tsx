@@ -173,7 +173,15 @@ const AddSelectSelectionSummaryItem = forwardRef<
       // Collect all item props except title, subtitle, and itemDetails
       const itemProps = Object.entries(item).filter(
         ([key]) =>
-          key !== 'title' && key !== 'subtitle' && key !== 'itemDetails'
+          key !== 'title' &&
+          key !== 'subtitle' &&
+          key !== 'icon' &&
+          key !== 'id' &&
+          key !== 'children' &&
+          key !== 'selected' &&
+          key !== 'status' &&
+          key !== 'disabled' &&
+          key !== 'itemDetails'
       );
 
       // Collect itemDetails props if they exist

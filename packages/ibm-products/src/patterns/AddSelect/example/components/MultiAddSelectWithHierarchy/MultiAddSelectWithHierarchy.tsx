@@ -17,13 +17,13 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ToastNotification } from '@carbon/react';
-import { breakpoints } from '@carbon/layout';
-import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
-import { AddSelectContext } from '../../../../../components/AddSelect/next/context';
-import { Tearsheet } from '../../../../../components/Tearsheet/next';
-import { NoDataEmptyState } from '../../../../../components/EmptyStates';
-import { useMatchMedia } from '../../../../../global/js/hooks/useMatchMedia';
+import {
+  preview__AddSelect as AddSelect,
+  preview__Tearsheet as Tearsheet,
+  AddSelectData,
+  AddSelectItem,
+  NoDataEmptyState,
+} from '@carbon/ibm-products';
 import './MultiAddSelectWithHierarchy.scss';
 
 const blockClass = `multi-add-select-hierarchy-pattern`;
@@ -331,11 +331,6 @@ export const MultiAddSelectWithHierarchy = forwardRef<
       Array<{ id: string; title: string }>
     >([{ id: 'root', title: rootBreadcrumbTitle }]);
 
-    // Calculate button size based on screen size
-    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-    const isSm = useMatchMedia(smMediaQuery);
-    const buttonSize = isSm ? 'xl' : '2xl';
-
     // Calculate partially selected items (parents with some but not all children selected)
     const partiallySelectedItems = useMemo(() => {
       const partial = new Set<string>();
@@ -375,35 +370,16 @@ export const MultiAddSelectWithHierarchy = forwardRef<
       setCurrentItems(items);
     }, [items, dataManager]);
 
-    // Reset state when tearsheet opens and pre-select disabled items
+    // Reset state when tearsheet opens
     useEffect(() => {
       if (open) {
-        // Collect all disabled (pre-added) items
-        const disabledIds = new Set<string>();
-        const collectDisabledIds = (itemList: AddSelectItem[]) => {
-          itemList.forEach((item) => {
-            if (item.disabled) {
-              disabledIds.add(item.id);
-            }
-            if (item.children?.entries) {
-              collectDisabledIds(item.children.entries);
-            }
-          });
-        };
-        collectDisabledIds(items);
-
-        // Pre-select disabled items and mark them in dataManager
-        disabledIds.forEach((id) => {
-          dataManager.setItemStatus(id, 'checked');
-        });
-
-        setSelectedIds(disabledIds);
+        setSelectedIds(new Set());
         setSearchTerm('');
         setInfoPanel({ item: null, show: false });
         setNavigationLevels([]);
         setBreadcrumbPath([{ id: 'root', title: rootBreadcrumbTitle }]);
       }
-    }, [open, rootBreadcrumbTitle, items, dataManager]);
+    }, [open, rootBreadcrumbTitle]);
 
     // Handle item selection with hierarchical logic
     const handleItemSelect = useCallback(
@@ -547,18 +523,111 @@ export const MultiAddSelectWithHierarchy = forwardRef<
       title: string,
       children: AddSelectItem[]
     ) => {
-      // Add new level to navigation
-      setNavigationLevels((prev) => [
-        ...prev,
-        {
+      setNavigationLevels((prev) => {
+        // Find which column the clicked item is in
+        let sourceColumnIndex = -1;
+
+        // Check if it's in the root items (column 0)
+        if (currentItems.some((item) => item.id === itemId)) {
+          sourceColumnIndex = 0;
+        } else {
+          // Check which navigation level contains this item
+          for (let i = 0; i < prev.length; i++) {
+            if (prev[i].items.some((item) => item.id === itemId)) {
+              sourceColumnIndex = i + 1; // +1 because root is 0
+              break;
+            }
+          }
+        }
+
+        const newLevel = {
           items: children,
           parentId: itemId,
           parentTitle: title,
-        },
-      ]);
+        };
+
+        // If clicking from root column (first column)
+        if (sourceColumnIndex === 0) {
+          // Check if we already have 2 columns (total 3 with root)
+          if (prev.length >= 2) {
+            // Replace the second column, remove the third
+            return [newLevel];
+          } else if (prev.length === 1) {
+            // We have 2 columns total, replace the second
+            return [newLevel];
+          } else {
+            // We only have root, add first child column
+            return [newLevel];
+          }
+        }
+
+        // If clicking from second column
+        if (sourceColumnIndex === 1) {
+          // Check if column already exists for this item
+          if (prev.length >= 2 && prev[1].parentId === itemId) {
+            // Same item, don't add duplicate
+            return prev;
+          }
+          // Replace the third column if it exists, otherwise add it
+          return [prev[0], newLevel];
+        }
+
+        // If clicking from third column
+        if (sourceColumnIndex === 2) {
+          // Check if column already exists for this item
+          if (prev.length >= 3 && prev[2].parentId === itemId) {
+            // Same item, don't add duplicate
+            return prev;
+          }
+          // Replace the third column
+          return [prev[0], prev[1], newLevel];
+        }
+
+        // Fallback: just add to the end
+        return [...prev, newLevel];
+      });
 
       // Update breadcrumb path
-      setBreadcrumbPath((prev) => [...prev, { id: itemId, title }]);
+      setBreadcrumbPath((prev) => {
+        // Find if this item already exists in breadcrumb
+        const existingIndex = prev.findIndex((crumb) => crumb.id === itemId);
+
+        if (existingIndex !== -1) {
+          // Item exists, truncate to that point
+          return prev.slice(0, existingIndex + 1);
+        }
+
+        // Determine the correct breadcrumb depth based on navigation levels
+        // Root is always index 0, so we need to manage the path carefully
+        let sourceColumnIndex = -1;
+
+        // Check if it's in the root items
+        if (currentItems.some((item) => item.id === itemId)) {
+          sourceColumnIndex = 0;
+        } else {
+          // Check navigation levels
+          navigationLevels.forEach((level, i) => {
+            if (level.items.some((item) => item.id === itemId)) {
+              sourceColumnIndex = i + 1;
+            }
+          });
+        }
+
+        // Build appropriate breadcrumb path
+        if (sourceColumnIndex === 0) {
+          // Clicking from root, breadcrumb should be: root -> new item
+          return [prev[0], { id: itemId, title }];
+        } else if (sourceColumnIndex > 0 && sourceColumnIndex < prev.length) {
+          // Clicking from middle column, truncate and add
+          return [
+            ...prev.slice(0, sourceColumnIndex + 1),
+            { id: itemId, title },
+          ];
+        }
+
+        // Default: append to end
+        return [...prev, { id: itemId, title }];
+      });
     };
 
     // Handle breadcrumb click to navigate back
@@ -626,10 +695,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
     // Get selected items for display (show only top-level parents, hide disabled and children)
     const selectedItemsForDisplay = useMemo(() => {
       // Get top-level selected items (items without selected ancestors)
-      const topLevelItems = dataManager.getTopLevelSelectedItems(selectedIds);
-
-      // Filter out disabled (pre-added) items
-      return topLevelItems.filter((item) => !item.disabled);
+      return dataManager.getTopLevelSelectedItems(selectedIds);
     }, [selectedIds, dataManager]);
 
     return (
@@ -646,7 +712,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>
-                <p slot="description">{description}</p>
+                {description}
               </Tearsheet.HeaderContent>
             </Tearsheet.Header>
 
@@ -758,7 +824,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                   disabled: selectedIds.size === 0,
                 },
               ]}
-              buttonSize={buttonSize}
+              buttonSize="2xl"
             />
           </Tearsheet>
         </AddSelect>

@@ -81,7 +81,6 @@ const hierarchicalItems: AddSelectItem[] = [
 
 export const MultiAddSelectWithHierarchyPreview = () => {
   const [open, setOpen] = useState(false);
-  const [addedItems, setAddedItems] = useState<Set<string>>(new Set(['1-2'])); // Pre-add some items to demonstrate disabled state
 
   const handleOpen = () => {
     setOpen(true);
@@ -89,27 +88,7 @@ export const MultiAddSelectWithHierarchyPreview = () => {
 
   const handleSubmit = (itemIds: string[], values: string[]) => {
     console.log('Submitted:', { itemIds, values });
-    // Add newly selected items to the added items set
-    setAddedItems((prev) => new Set([...prev, ...itemIds]));
   };
-
-  // Mark already added items as disabled in the hierarchical items
-  const itemsWithDisabledState = hierarchicalItems.map((item) => {
-    const markDisabled = (itm: AddSelectItem): AddSelectItem => {
-      const isAdded = addedItems.has(itm.id);
-      return {
-        ...itm,
-        disabled: isAdded,
-        children: itm.children
-          ? {
-              ...itm.children,
-              entries: itm.children.entries.map(markDisabled),
-            }
-          : undefined,
-      };
-    };
-    return markDisabled(item);
-  });
 
   return (
     <div className="example-container">
@@ -127,7 +106,7 @@ export const MultiAddSelectWithHierarchyPreview = () => {
       <MultiAddSelectHierarchyComponent
         open={open}
         setOpen={setOpen}
-        items={itemsWithDisabledState}
+        items={hierarchicalItems}
         onSubmit={handleSubmit}
         title="Add files"
         description="Select files from the folders below. Click the chevron to navigate into folders."

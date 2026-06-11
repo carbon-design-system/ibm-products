@@ -47,6 +47,7 @@ export * from './WebTerminal';
 export { AddSelectData } from '@carbon/ibm-products-utilities';
 export type {
   AddSelectItem,
+  ItemDetails,
   ItemStatus,
   SearchOptions,
 } from '@carbon/ibm-products-utilities';

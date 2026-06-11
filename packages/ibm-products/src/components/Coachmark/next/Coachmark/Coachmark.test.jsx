@@ -29,7 +29,7 @@ const renderCoachmark = ({ ...rest } = {}) =>
         id="CoachmarkBtn"
         label="Show information"
       ></CoachmarkBeacon>
-      <Coachmark.Content>
+      <Coachmark.Content aria-label="Coachmark content">
         <Coachmark.ContentHeader
           closeIconDescription="Close"
           dragIconDescription="Drag"
@@ -57,7 +57,7 @@ const renderCoachmarkFloating = ({ ...rest } = {}) =>
       >
         Show information
       </Button>
-      <Coachmark.Content>
+      <Coachmark.Content aria-label="Coachmark content">
         <Coachmark.ContentHeader
           closeIconDescription="Close"
           dragIconDescription="Drag"

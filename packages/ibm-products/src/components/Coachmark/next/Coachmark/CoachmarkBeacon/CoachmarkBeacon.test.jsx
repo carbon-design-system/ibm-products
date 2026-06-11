@@ -30,7 +30,7 @@ const renderCoachmarkWithBeacon = ({ ...rest } = {}) =>
         data-testid={childDataTestId}
         {...rest}
       ></CoachmarkBeacon>
-      <Coachmark.Content>
+      <Coachmark.Content aria-label="Coachmark content">
         <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
         <Coachmark.ContentBody>
           <h2>Hello World</h2>

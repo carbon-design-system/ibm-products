@@ -18,29 +18,21 @@ const sampleItems: AddSelectItem[] = [
     value: '1',
     title: 'item 1',
     subtitle: 'item 1 subtitle',
-    itemDetails: (
-      <div>
-        <p style={{ fontWeight: 600 }}>HTML support</p>
-        <p>Also supports nodes in the itemDetails attribute</p>
-      </div>
-    ),
+    itemDetails: {
+      id: 'description',
+      title: 'Description',
+      value: 'Description text for item 1',
+    },
   },
   {
     id: '2',
     value: '2',
     title: 'item 2',
-    itemDetails: [
-      {
-        id: 'description',
-        title: 'Description',
-        value: 'Description text for item 2',
-      },
-      {
-        id: 'secondary_category',
-        title: 'Secondary category',
-        value: 'Knowledge accelerator',
-      },
-    ],
+    itemDetails: {
+      id: 'description',
+      title: 'Description',
+      value: 'Description text for item 2',
+    },
   },
   {
     id: '3',

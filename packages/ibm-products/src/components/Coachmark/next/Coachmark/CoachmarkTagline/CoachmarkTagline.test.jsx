@@ -31,7 +31,7 @@ const renderCoachmarkWithTagline = ({ ...rest } = {}) =>
         data-testid={childDataTestId}
         {...rest}
       ></CoachmarkTagline>
-      <Coachmark.Content>
+      <Coachmark.Content aria-label="Coachmark content">
         <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
         <Coachmark.ContentBody>
           <h2>Hello World</h2>

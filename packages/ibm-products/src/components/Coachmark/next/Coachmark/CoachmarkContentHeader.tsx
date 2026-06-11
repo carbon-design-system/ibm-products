@@ -10,6 +10,7 @@ import React, {
   useContext,
   useEffect,
   useRef,
+  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -17,7 +18,6 @@ import { blockClass, CoachmarkContext } from './context';
 import { Close, Draggable } from '@carbon/react/icons';
 import { carbon } from '../../../../settings';
 import { makeDraggable } from '../../../../global/js/utils/makeDraggable';
-import { getDevtoolsProps } from '../../../../global/js/utils/devtools';
 
 const componentName = 'CoachmarkContentHeader';
 
@@ -62,6 +62,12 @@ export const CoachmarkContentHeader = forwardRef<
   const dragRef = useRef<HTMLButtonElement | null>(null);
   const handleRef = ref || headerRef;
   const contentHeaderBlockClass = `${blockClass}--content-header`;
+  const [isDragging, setIsDragging] = useState<boolean | null>(null);
+  const [moveAnnouncement, setMoveAnnouncement] = useState('');
+  const moveCounterRef = useRef(0);
+  const dragInstructionsId = `${contentHeaderBlockClass}--drag-instructions`;
+  const dragStatusId = `${contentHeaderBlockClass}--drag-status`;
+  const dragMoveId = `${contentHeaderBlockClass}--drag-move`;
 
   const closeBubble = (e?: React.MouseEvent) => {
     e?.stopPropagation();
@@ -95,6 +101,8 @@ export const CoachmarkContentHeader = forwardRef<
       });
 
       const onDragStart = () => {
+        setIsDragging(true);
+        setMoveAnnouncement('');
         if (dragStyleContainer) {
           dragStyleContainer.classList.add(
             `${contentHeaderBlockClass}--is-dragging`
@@ -104,6 +112,8 @@ export const CoachmarkContentHeader = forwardRef<
       };
 
       const onDragEnd = () => {
+        setIsDragging(false);
+        setMoveAnnouncement('');
         if (dragStyleContainer) {
           dragStyleContainer.classList.remove(
             `${contentHeaderBlockClass}--is-dragging`
@@ -112,13 +122,29 @@ export const CoachmarkContentHeader = forwardRef<
         }
       };
 
+      const onDragMove = (event: Event) => {
+        const customEvent = event as CustomEvent<{
+          direction: string;
+          distance: number;
+        }>;
+        const { direction, distance } = customEvent.detail;
+        // Increment counter to make each announcement unique
+        moveCounterRef.current += 1;
+        // Add zero-width space multiplied by counter to make string unique without being announced
+        const uniqueMarker = '\u200B'.repeat(moveCounterRef.current);
+        setMoveAnnouncement(
+          `Moved ${direction} ${distance} pixels${uniqueMarker}`
+        );
+      };
+
       contentRef.addEventListener('dragstart', onDragStart);
       contentRef.addEventListener('dragend', onDragEnd);
-
+      contentRef.addEventListener('dragmove', onDragMove as EventListener);
       // Cleanup function
       return () => {
         contentRef.removeEventListener('dragstart', onDragStart);
         contentRef.removeEventListener('dragend', onDragEnd);
+        contentRef.removeEventListener('dragmove', onDragMove as EventListener);
         draggable.cleanup();
       };
     }
@@ -136,18 +162,49 @@ export const CoachmarkContentHeader = forwardRef<
       ref={handleRef}
       className={cx(contentHeaderBlockClass, className)}
       {...rest}
-      {...getDevtoolsProps(componentName)}
     >
       {floating && (
-        <Button
-          kind="ghost"
-          size="sm"
-          ref={dragRef}
-          renderIcon={Draggable}
-          iconDescription={dragIconDescription}
-          hasIconOnly
-          className={`${contentHeaderBlockClass}--drag-icon`}
-        />
+        <>
+          <span id={dragInstructionsId} className="cds--visually-hidden">
+            {isDragging
+              ? 'Use arrow keys to move the coachmark. Press Enter or Space to exit drag mode.'
+              : 'Press Enter or Space to activate drag mode.'}
+          </span>
+          <div
+            id={dragStatusId}
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            className="cds--visually-hidden"
+          >
+            {isDragging === true
+              ? 'Drag mode active.'
+              : isDragging === false
+                ? 'Drag mode ended.'
+                : ''}
+          </div>
+          <div
+            id={dragMoveId}
+            role="status"
+            aria-live="assertive"
+            aria-atomic="true"
+            className="cds--visually-hidden"
+          >
+            {moveAnnouncement}
+          </div>
+          <Button
+            kind="ghost"
+            size="sm"
+            ref={dragRef}
+            renderIcon={Draggable}
+            iconDescription={dragIconDescription}
+            hasIconOnly
+            className={`${contentHeaderBlockClass}--drag-icon`}
+            aria-label={dragIconDescription}
+            aria-describedby={dragInstructionsId}
+            aria-pressed={isDragging}
+          />
+        </>
       )}
       {children}
       <Button
@@ -157,6 +214,7 @@ export const CoachmarkContentHeader = forwardRef<
         iconDescription={closeIconDescription}
         hasIconOnly
         onClick={closeBubble}
+        className={`${contentHeaderBlockClass}--close-button`}
       />
     </div>
   );

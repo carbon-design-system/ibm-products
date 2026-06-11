@@ -75,6 +75,7 @@ export const multiSelectProps = {
 
 export const getFilterProps = (id = 'id') => ({
   variation: 'panel',
+  clearFiltersText: 'Clear filters',
   updateMethod: 'batch',
   primaryActionLabel: 'Apply',
   secondaryActionLabel: 'Cancel',

@@ -11,8 +11,7 @@ import {
   NonHierarchicalWithPeekInsideItem as NonHierarchicalWithPeekInsideItemComponent,
   ModifierConfig,
 } from '../../components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
-import { AddSelectItem } from '@carbon/ibm-products-utilities';
-import { UserAvatar } from '../../../../../components/UserAvatar';
+import { AddSelectItem, UserAvatar } from '@carbon/ibm-products';
 import './NonHierarchicalWithPeekInsideItem.scss';
 
 // Sample data matching the image - access groups with members

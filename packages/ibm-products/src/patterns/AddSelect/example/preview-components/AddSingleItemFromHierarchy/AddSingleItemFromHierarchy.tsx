@@ -20,14 +20,34 @@ const sampleItems: AddSelectItem[] = [
     value: 'connection',
     subtitle: '7 schemas',
     icon: <DataBase size={20} />,
+    itemDetails: {
+      description:
+        'Description text can go here in multiple lines to describe this category a little more and give the user more metadata. No more than 4 lines of text will be show.',
+      details: {
+        Columns: '19',
+        Rows: '1,852',
+        Size: '89.834 MB',
+      },
+      tags: ['Tag here', 'Long tag name here'],
+    },
     children: {
       entries: [
         {
           id: 'schema-1',
-          title: 'Schema',
+          title: 'Schema 1',
           value: 'schema',
           subtitle: '54 tables',
           icon: <Table size={20} />,
+          itemDetails: {
+            description:
+              'Primary schema containing 54 tables with comprehensive data collections and regional information.',
+            details: {
+              Tables: '54',
+              'Total Rows': '78,456',
+              'Total Size': '3.8 GB',
+            },
+            tags: ['Schema', 'Primary', 'Regional Data'],
+          },
           children: {
             entries: [
               {
@@ -270,6 +290,16 @@ const sampleItems: AddSelectItem[] = [
           value: 'schema-2',
           subtitle: '32 tables',
           icon: <Table size={20} />,
+          itemDetails: {
+            description:
+              'Schema 2 contains 32 tables with various data collections and analytics information.',
+            details: {
+              Tables: '32',
+              'Total Rows': '45,234',
+              'Total Size': '2.1 GB',
+            },
+            tags: ['Schema', 'Database'],
+          },
         },
         {
           id: 'schema-3',
@@ -277,6 +307,16 @@ const sampleItems: AddSelectItem[] = [
           value: 'schema-3',
           subtitle: '18 tables',
           icon: <Table size={20} />,
+          itemDetails: {
+            description:
+              'Schema 3 provides access to 18 specialized tables for data analysis.',
+            details: {
+              Tables: '18',
+              'Total Rows': '28,567',
+              'Total Size': '1.3 GB',
+            },
+            tags: ['Schema', 'Analytics'],
+          },
         },
         {
           id: 'schema-4',
@@ -284,6 +324,16 @@ const sampleItems: AddSelectItem[] = [
           value: 'schema-4',
           subtitle: '45 tables',
           icon: <Table size={20} />,
+          itemDetails: {
+            description:
+              'Schema 4 is the largest schema with 45 tables containing comprehensive datasets.',
+            details: {
+              Tables: '45',
+              'Total Rows': '67,890',
+              'Total Size': '3.2 GB',
+            },
+            tags: ['Schema', 'Large Dataset'],
+          },
         },
         {
           id: 'schema-5',
@@ -291,6 +341,16 @@ const sampleItems: AddSelectItem[] = [
           value: 'schema-5',
           subtitle: '27 tables',
           icon: <Table size={20} />,
+          itemDetails: {
+            description:
+              'Schema 5 contains 27 tables with regional and temporal data.',
+            details: {
+              Tables: '27',
+              'Total Rows': '38,421',
+              'Total Size': '1.8 GB',
+            },
+            tags: ['Schema', 'Regional'],
+          },
         },
         {
           id: 'schema-6',
@@ -298,6 +358,16 @@ const sampleItems: AddSelectItem[] = [
           value: 'schema-6',
           subtitle: '39 tables',
           icon: <Table size={20} />,
+          itemDetails: {
+            description:
+              'Schema 6 provides 39 tables with business intelligence data.',
+            details: {
+              Tables: '39',
+              'Total Rows': '52,345',
+              'Total Size': '2.5 GB',
+            },
+            tags: ['Schema', 'Business Intelligence'],
+          },
         },
         {
           id: 'schema-7',
@@ -305,6 +375,16 @@ const sampleItems: AddSelectItem[] = [
           value: 'schema-7',
           subtitle: '21 tables',
           icon: <Table size={20} />,
+          itemDetails: {
+            description:
+              'Schema 7 contains 21 tables with historical and archived data.',
+            details: {
+              Tables: '21',
+              'Total Rows': '31,256',
+              'Total Size': '1.5 GB',
+            },
+            tags: ['Schema', 'Historical'],
+          },
         },
       ],
     },

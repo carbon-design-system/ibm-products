@@ -8,10 +8,13 @@ collect:
     elements:
       allowedAttributeNames:
         # General
+        - accordionItemProps
+        - accordionProps
         - action
         - actionIcons
         - actions
         - actionsPlacement
+        - actionsSlot
         - activeCellCoordinates
         - activeHref
         - addConditionSubGroupHandler
@@ -145,6 +148,7 @@ collect:
         - hasError
         - hasFieldset
         - headerActions
+        - headerContent
         - headerGroups
         - HeaderRow
         - headers
@@ -188,6 +192,7 @@ collect:
         - isOpen
         - isTableSortable
         - item
+        - itemCount
         - items
         - itemsLabel
         - key
@@ -259,6 +264,7 @@ collect:
         - onRowClick
         - onRowExpand
         - onScroll
+        - onSearch
         - onSecondaryButtonClick
         - onSelectAllRows
         - onSelectColumn
@@ -303,6 +309,7 @@ collect:
         - reactTableFiltersState
         - readOnly
         - readOnlyTable
+        - renderContent
         - renderIcon
         - renderMedia
         - renderRowHeader
@@ -318,6 +325,8 @@ collect:
         - scoreThresholds
         - scrollBarSize
         - scroller
+        - searchPlaceholder
+        - searchProps
         - searchResultsTitle
         - secondaryActionLabel
         - secondaryButtonDisabled
@@ -332,6 +341,7 @@ collect:
         - selectAllToggle
         - selected
         - selectedHeaderReorderActive
+        - selectedItems
         - selectedOption
         - selectionAreas
         - selectorPageContent
@@ -375,6 +385,7 @@ collect:
         - tableHeight
         - tableId
         - tagline
+        - tagProps
         - tags
         - theme
         - title
@@ -427,14 +438,30 @@ collect:
         - setSearchText
         # ActionSet
         - disableStacking
+        # AddSelect
+        - onItemSelect
         # AddSelectBody
+        - breadcrumbItemProps
+        - breadcrumbProps
         - defaultModifiers
         - globalFilterOpts
+        - linkProps
         - normalizedItems
+        - onBreadcrumbClick
+        - subHeaderActions
         - useNormalizedItems
         # AddSelectColumn
+        - allSelected
         - header
+        - hideSearch
+        - onNavigate
+        - onSelectAll
+        - searchLabel
+        - selectAllCheckboxProps
         - setPath
+        - showSelectAll
+        # AddSelectContent
+        - layout
         # AddSelectFilter
         - appliedFilters
         - filterOpts
@@ -443,6 +470,8 @@ collect:
         - handleSearch
         - hasFiltersApplied
         - searchTerm
+        # AddSelectItemPanel
+        - closeIconButtonProps
         # AddSelectList
         - filteredItems
         - focus
@@ -455,6 +484,30 @@ collect:
         - singleSelection
         # AddSelectMetaPanel
         - meta
+        # AddSelectRow
+        - checkboxProps
+        - hasChildren
+        - hasItemPanel
+        - itemId
+        - itemPanelIconButtonProps
+        - itemPanelIconDescription
+        - itemPanelOpen
+        - onItemPanelClick
+        - radioButtonProps
+        # AddSelectSelectionSummary
+        - editIconButtonProps
+        - editIconDescription
+        - emptyState
+        - onEdit
+        - renderItem
+        - showCount
+        - showEditIcon
+        # AddSelectSelectionSummaryItem
+        - removeButtonLabel
+        - removeIconButtonProps
+        - renderTemplate
+        - renderTitle
+        - useAccordion
         # AddSelectSort
         - setSortAttribute
         - setSortDirection
@@ -718,17 +771,11 @@ collect:
         - onPanelClose
         - onPanelOpen
         - searchLabelText
-        - searchPlaceholder
         - showFilterSearch
-        # FilterPanelAccordion
-        - accordionProps
         # FilterPanelAccordionItem
-        - accordionItemProps
         - truncatedListProps
         # FilterPanelCheckboxWithOverflow
         - overflowMenuProps
-        # FilterPanelSearch
-        - searchProps
         # FilterSummary
         - clearButtonInline
         - clearFilters
@@ -949,7 +996,6 @@ collect:
         # Sortable
         - adjustScale
         - Container
-        - itemCount
         - restrictToParent
         - sortableProps
         - strategy
@@ -1225,6 +1271,9 @@ collect:
         # General - verticalPosition
         - lower
         - normal
+        # AddSelectContent - layout
+        - horizontal
+        - vertical
         # APIKeyDownloader - fileType
         - json
         - txt

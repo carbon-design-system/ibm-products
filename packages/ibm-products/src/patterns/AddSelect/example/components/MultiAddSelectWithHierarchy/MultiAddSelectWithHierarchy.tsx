@@ -12,18 +12,18 @@ import React, {
   useState,
   useMemo,
   useEffect,
-  useContext,
+  useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ToastNotification } from '@carbon/react';
-import { breakpoints } from '@carbon/layout';
-import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
-import { AddSelectContext } from '../../../../../components/AddSelect/next/context';
-import { Tearsheet } from '../../../../../components/Tearsheet/next';
-import { NoDataEmptyState } from '../../../../../components/EmptyStates';
-import { useMatchMedia } from '../../../../../global/js/hooks/useMatchMedia';
+import {
+  preview__AddSelect as AddSelect,
+  preview__Tearsheet as Tearsheet,
+  AddSelectData,
+  AddSelectItem,
+  NoDataEmptyState,
+} from '@carbon/ibm-products';
 import './MultiAddSelectWithHierarchy.scss';
 
 const blockClass = `multi-add-select-hierarchy-pattern`;
@@ -155,6 +155,7 @@ interface ColumnProps {
   ) => void;
   selectedItems: Set<string>;
   onSelectAll?: (itemIds: string[], selected: boolean) => void;
+  partiallySelectedItems: Set<string>;
 }
 
 const ControlledColumn: React.FC<ColumnProps> = ({
@@ -167,6 +168,7 @@ const ControlledColumn: React.FC<ColumnProps> = ({
   onNavigate,
   selectedItems,
   onSelectAll,
+  partiallySelectedItems,
 }) => {
   const [columnSearchTerm, setColumnSearchTerm] = useState('');
 
@@ -186,10 +188,30 @@ const ControlledColumn: React.FC<ColumnProps> = ({
     });
   }, [items, columnSearchTerm]);
 
-  // Check if all items in this column are selected
-  const allSelected = useMemo(() => {
-    if (filteredItems.length === 0) return false;
-    return filteredItems.every((item) => selectedItems.has(item.id));
+  // Check if all items in this column are selected or partially selected
+  const { allSelected, someSelected } = useMemo(() => {
+    if (filteredItems.length === 0)
+      return { allSelected: false, someSelected: false };
+
+    const allFullySelected = filteredItems.every((item) => {
+      const hasChildren = dataManager.hasChildren(item.id);
+      if (hasChildren) {
+        return dataManager.allDescendantsSelected(item.id, selectedItems);
+      }
+      return selectedItems.has(item.id);
+    });
+
+    const someItemsSelected = filteredItems.some((item) => {
+      return (
+        selectedItems.has(item.id) ||
+        dataManager.hasSelectedDescendants(item.id, selectedItems)
+      );
+    });
+
+    return {
+      allSelected: allFullySelected,
+      someSelected: someItemsSelected && !allFullySelected,
+    };
   }, [filteredItems, selectedItems]);
 
   const handleColumnSearch = (term: string) => {
@@ -206,10 +228,15 @@ const ControlledColumn: React.FC<ColumnProps> = ({
     }
   };
 
-  // Handle select all for this column
+  // Handle select all for this column (including all descendants)
   const handleSelectAll = (checked: boolean) => {
-    const itemIds = filteredItems.map((item) => item.id);
-    onSelectAll?.(itemIds, checked);
+    const allItemIds: string[] = [];
+    filteredItems.forEach((item) => {
+      // Use optimized getAllDescendantIds which includes the item itself
+      const descendantIds = dataManager.getAllDescendantIds(item.id);
+      allItemIds.push(...descendantIds);
+    });
+    onSelectAll?.(allItemIds, checked);
   };
 
   return (
@@ -223,10 +250,13 @@ const ControlledColumn: React.FC<ColumnProps> = ({
       showSelectAll={true}
       allSelected={allSelected}
       onSelectAll={handleSelectAll}
+      allIndeterminate={someSelected}
     >
       {filteredItems.map((item) => {
         const hasChildren =
           item.children?.entries && item.children.entries.length > 0;
+        const isPartiallySelected = partiallySelectedItems.has(item.id);
+
         return (
           <AddSelect.Row
             key={item.id}
@@ -239,6 +269,7 @@ const ControlledColumn: React.FC<ColumnProps> = ({
             hasChildren={hasChildren}
             hasItemPanel={!!item.itemDetails}
             onItemPanelClick={onShowInfo}
+            indeterminate={isPartiallySelected}
           />
         );
       })}
@@ -300,10 +331,38 @@ export const MultiAddSelectWithHierarchy = forwardRef<
       Array<{ id: string; title: string }>
     >([{ id: 'root', title: rootBreadcrumbTitle }]);
 
-    // Calculate button size based on screen size
-    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-    const isSm = useMatchMedia(smMediaQuery);
-    const buttonSize = isSm ? 'xl' : '2xl';
+    // Calculate partially selected items (parents with some but not all children selected)
+    const partiallySelectedItems = useMemo(() => {
+      const partial = new Set<string>();
+
+      const checkPartialSelection = (item: AddSelectItem) => {
+        if (dataManager.hasChildren(item.id)) {
+          const hasSelected = dataManager.hasSelectedDescendants(
+            item.id,
+            selectedIds
+          );
+          const allSelected = dataManager.allDescendantsSelected(
+            item.id,
+            selectedIds
+          );
+
+          if (hasSelected && !allSelected) {
+            partial.add(item.id);
+          }
+
+          // Recursively check children
+          const children = dataManager.getItemChildren(item.id);
+          children.forEach((child) => checkPartialSelection(child));
+        }
+      };
+
+      items.forEach((item) => checkPartialSelection(item));
+      navigationLevels.forEach((level) => {
+        level.items.forEach((item) => checkPartialSelection(item));
+      });
+
+      return partial;
+    }, [selectedIds, items, navigationLevels]);
 
     // Initialize data manager with items
     useEffect(() => {
@@ -322,41 +381,120 @@ export const MultiAddSelectWithHierarchy = forwardRef<
       }
     }, [open, rootBreadcrumbTitle]);
 
-    // Handle item selection
-    const handleItemSelect = (
-      itemId: string,
-      selected: boolean,
-      value: string
-    ) => {
-      const newSelectedIds = new Set(selectedIds);
+    // Handle item selection with hierarchical logic
+    const handleItemSelect = useCallback(
+      (itemId: string, selected: boolean, value: string) => {
+        const item = dataManager.getItem(itemId);
+        if (!item) return;
 
-      if (selected) {
-        newSelectedIds.add(itemId);
-        dataManager.setSelectedItems(itemId, true);
-      } else {
-        newSelectedIds.delete(itemId);
-        dataManager.setSelectedItems(itemId, false);
-      }
+        const newSelectedIds = new Set(selectedIds);
+        const hasChildren = dataManager.hasChildren(itemId);
 
-      setSelectedIds(newSelectedIds);
-    };
+        // Use optimized getAllDescendantIds method to get all IDs at once
+        const allIds = dataManager.getAllDescendantIds(itemId);
 
-    // Handle select all for a column
-    const handleSelectAll = (itemIds: string[], selected: boolean) => {
-      const newSelectedIds = new Set(selectedIds);
-
-      itemIds.forEach((itemId) => {
         if (selected) {
-          newSelectedIds.add(itemId);
-          dataManager.setSelectedItems(itemId, true);
-        } else {
-          newSelectedIds.delete(itemId);
-          dataManager.setSelectedItems(itemId, false);
-        }
-      });
+          // Select the item and all its descendants using optimized batch operation
+          allIds.forEach((id) => {
+            newSelectedIds.add(id);
+            dataManager.setItemStatus(id, 'checked');
+          });
 
-      setSelectedIds(newSelectedIds);
-    };
+          // Check if selecting this child means all siblings are now selected
+          // If so, automatically select the parent
+          if (!hasChildren) {
+            const parents = dataManager.getItemParents(itemId);
+            parents.forEach((parent) => {
+              const siblings = dataManager.getItemChildren(parent.id);
+              const allSiblingsSelected = siblings.every(
+                (sibling) => newSelectedIds.has(sibling.id) || sibling.disabled
+              );
+
+              if (allSiblingsSelected && !newSelectedIds.has(parent.id)) {
+                newSelectedIds.add(parent.id);
+                dataManager.setItemStatus(parent.id, 'checked');
+              }
+            });
+          }
+        } else {
+          // Deselect the item and all its descendants using optimized batch operation
+          allIds.forEach((id) => {
+            newSelectedIds.delete(id);
+            dataManager.setItemStatus(id, 'unchecked');
+          });
+
+          // If deselecting a child, also deselect the parent (if selected)
+          if (!hasChildren) {
+            const parents = dataManager.getItemParents(itemId);
+            parents.forEach((parent) => {
+              if (newSelectedIds.has(parent.id)) {
+                newSelectedIds.delete(parent.id);
+                dataManager.setItemStatus(parent.id, 'unchecked');
+              }
+            });
+          }
+        }
+
+        setSelectedIds(newSelectedIds);
+      },
+      [selectedIds, dataManager]
+    );
+
+    // Handle select all for a column (including all descendants)
+    const handleSelectAll = useCallback(
+      (itemIds: string[], selected: boolean) => {
+        const newSelectedIds = new Set(selectedIds);
+
+        itemIds.forEach((itemId) => {
+          const item = dataManager.getItem(itemId);
+          if (!item) return;
+
+          const hasChildren = dataManager.hasChildren(itemId);
+
+          if (selected) {
+            // Select the item using optimized batch operation
+            newSelectedIds.add(itemId);
+            dataManager.setItemStatus(itemId, 'checked');
+
+            // If selecting a child, check if all siblings are now selected
+            // If so, automatically select the parent
+            if (!hasChildren) {
+              const parents = dataManager.getItemParents(itemId);
+              parents.forEach((parent) => {
+                const siblings = dataManager.getItemChildren(parent.id);
+                const allSiblingsSelected = siblings.every(
+                  (sibling) =>
+                    newSelectedIds.has(sibling.id) || sibling.disabled
+                );
+
+                if (allSiblingsSelected && !newSelectedIds.has(parent.id)) {
+                  newSelectedIds.add(parent.id);
+                  dataManager.setItemStatus(parent.id, 'checked');
+                }
+              });
+            }
+          } else {
+            // Deselect the item using optimized batch operation
+            newSelectedIds.delete(itemId);
+            dataManager.setItemStatus(itemId, 'unchecked');
+
+            // If deselecting a child, also deselect the parent (if selected)
+            if (!hasChildren) {
+              const parents = dataManager.getItemParents(itemId);
+              parents.forEach((parent) => {
+                if (newSelectedIds.has(parent.id)) {
+                  newSelectedIds.delete(parent.id);
+                  dataManager.setItemStatus(parent.id, 'unchecked');
+                }
+              });
+            }
+          }
+        });
+
+        setSelectedIds(newSelectedIds);
+      },
+      [selectedIds, dataManager]
+    );
 
     // Handle global search
     const handleGlobalSearch = (term: string) => {
@@ -385,18 +523,111 @@ export const MultiAddSelectWithHierarchy = forwardRef<
       title: string,
       children: AddSelectItem[]
     ) => {
-      // Add new level to navigation
-      setNavigationLevels((prev) => [
-        ...prev,
-        {
+      setNavigationLevels((prev) => {
+        // Find which column the clicked item is in
+        let sourceColumnIndex = -1;
+
+        // Check if it's in the root items (column 0)
+        if (currentItems.some((item) => item.id === itemId)) {
+          sourceColumnIndex = 0;
+        } else {
+          // Check which navigation level contains this item
+          for (let i = 0; i < prev.length; i++) {
+            if (prev[i].items.some((item) => item.id === itemId)) {
+              sourceColumnIndex = i + 1; // +1 because root is 0
+              break;
+            }
+          }
+        }
+
+        const newLevel = {
           items: children,
           parentId: itemId,
           parentTitle: title,
-        },
-      ]);
+        };
+
+        // If clicking from root column (first column)
+        if (sourceColumnIndex === 0) {
+          // Check if we already have 2 columns (total 3 with root)
+          if (prev.length >= 2) {
+            // Replace the second column, remove the third
+            return [newLevel];
+          } else if (prev.length === 1) {
+            // We have 2 columns total, replace the second
+            return [newLevel];
+          } else {
+            // We only have root, add first child column
+            return [newLevel];
+          }
+        }
+
+        // If clicking from second column
+        if (sourceColumnIndex === 1) {
+          // Check if column already exists for this item
+          if (prev.length >= 2 && prev[1].parentId === itemId) {
+            // Same item, don't add duplicate
+            return prev;
+          }
+          // Replace the third column if it exists, otherwise add it
+          return [prev[0], newLevel];
+        }
+
+        // If clicking from third column
+        if (sourceColumnIndex === 2) {
+          // Check if column already exists for this item
+          if (prev.length >= 3 && prev[2].parentId === itemId) {
+            // Same item, don't add duplicate
+            return prev;
+          }
+          // Replace the third column
+          return [prev[0], prev[1], newLevel];
+        }
+
+        // Fallback: just add to the end
+        return [...prev, newLevel];
+      });
 
       // Update breadcrumb path
-      setBreadcrumbPath((prev) => [...prev, { id: itemId, title }]);
+      setBreadcrumbPath((prev) => {
+        // Find if this item already exists in breadcrumb
+        const existingIndex = prev.findIndex((crumb) => crumb.id === itemId);
+
+        if (existingIndex !== -1) {
+          // Item exists, truncate to that point
+          return prev.slice(0, existingIndex + 1);
+        }
+
+        // Determine the correct breadcrumb depth based on navigation levels
+        // Root is always index 0, so we need to manage the path carefully
+        let sourceColumnIndex = -1;
+
+        // Check if it's in the root items
+        if (currentItems.some((item) => item.id === itemId)) {
+          sourceColumnIndex = 0;
+        } else {
+          // Check navigation levels
+          navigationLevels.forEach((level, i) => {
+            if (level.items.some((item) => item.id === itemId)) {
+              sourceColumnIndex = i + 1;
+            }
+          });
+        }
+
+        // Build appropriate breadcrumb path
+        if (sourceColumnIndex === 0) {
+          // Clicking from root, breadcrumb should be: root -> new item
+          return [prev[0], { id: itemId, title }];
+        } else if (sourceColumnIndex > 0 && sourceColumnIndex < prev.length) {
+          // Clicking from middle column, truncate and add
+          return [
+            ...prev.slice(0, sourceColumnIndex + 1),
+            { id: itemId, title },
+          ];
+        }
+
+        // Default: append to end
+        return [...prev, { id: itemId, title }];
+      });
     };
 
     // Handle breadcrumb click to navigate back
@@ -461,16 +692,19 @@ export const MultiAddSelectWithHierarchy = forwardRef<
       setInfoPanel({ item: null, show: false });
     };
 
-    // Get selected items for display
+    // Get selected items for display (show only top-level parents, hide disabled and children)
     const selectedItemsForDisplay = useMemo(() => {
-      return Array.from(selectedIds)
-        .map((id) => dataManager.getItem(id))
-        .filter((item): item is AddSelectItem => item !== undefined);
+      // Get top-level selected items (items without selected ancestors)
+      return dataManager.getTopLevelSelectedItems(selectedIds);
     }, [selectedIds, dataManager]);
 
     return (
       <>
-        <AddSelect onItemSelect={handleItemSelect} selectedItems={selectedIds}>
+        <AddSelect
+          onItemSelect={handleItemSelect}
+          selectedItems={selectedIds}
+          {...rest}
+        >
           <Tearsheet
             ref={ref}
             open={open}
@@ -478,11 +712,10 @@ export const MultiAddSelectWithHierarchy = forwardRef<
             variant="wide"
             summaryContentWidth="22.5rem"
             className={cx(blockClass, className)}
-            {...rest}
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>
-                <p slot="description">{description}</p>
+                {description}
               </Tearsheet.HeaderContent>
             </Tearsheet.Header>
 
@@ -512,6 +745,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                           onNavigate={handleNavigateToChild}
                           selectedItems={selectedIds}
                           onSelectAll={handleSelectAll}
+                          partiallySelectedItems={partiallySelectedItems}
                         />
 
                         {/* Additional columns based on navigation levels */}
@@ -527,6 +761,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                             onNavigate={handleNavigateToChild}
                             selectedItems={selectedIds}
                             onSelectAll={handleSelectAll}
+                            partiallySelectedItems={partiallySelectedItems}
                           />
                         ))}
                       </>
@@ -592,7 +827,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                   disabled: selectedIds.size === 0,
                 },
               ]}
-              buttonSize={buttonSize}
+              buttonSize="2xl"
             />
           </Tearsheet>
         </AddSelect>

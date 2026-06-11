@@ -16,11 +16,12 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ToastNotification, Tag } from '@carbon/react';
-import { breakpoints } from '@carbon/layout';
-import { AddSelect } from '../../../../../components/AddSelect/next';
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
-import { Tearsheet } from '../../../../../components/Tearsheet/next';
-import { useMatchMedia } from '../../../../../global/js/hooks/useMatchMedia';
+import {
+  preview__AddSelect as AddSelect,
+  preview__Tearsheet as Tearsheet,
+  AddSelectData,
+  AddSelectItem,
+} from '@carbon/ibm-products';
 import './AddSingleItemFromHierarchy.scss';
 
 const blockClass = `add-single-item-from-hierarchy-pattern`;
@@ -203,7 +204,6 @@ const ControlledColumn: React.FC<ColumnProps> = ({
       searchPlaceholder={columnSearchPlaceholder}
       onSearch={handleColumnSearch}
       itemCount={filteredItems.length}
-      multi={false}
       onNavigate={handleNavigate}
     >
       {filteredItems.map((item) => {
@@ -278,11 +278,6 @@ export const AddSingleItemFromHierarchy = forwardRef<
       Array<{ id: string; title: string }>
     >([{ id: 'root', title: rootBreadcrumbTitle }]);
 
-    // Calculate button size based on screen size
-    const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-    const isSm = useMatchMedia(smMediaQuery);
-    const buttonSize = isSm ? 'xl' : '2xl';
-
     // Initialize data manager with items
     useEffect(() => {
       dataManager.setItems(items);
@@ -345,18 +340,107 @@ export const AddSingleItemFromHierarchy = forwardRef<
       title: string,
       children: AddSelectItem[]
     ) => {
-      // Add new level to navigation
-      setNavigationLevels((prev) => [
-        ...prev,
-        {
-          items: children,
-          parentId: itemId,
-          parentTitle: title,
-        },
-      ]);
+      setNavigationLevels((prev) => {
+        // Find which column level this navigation is coming from
+        const currentColumnLevel = prev.findIndex(
+          (level) => level.parentId === itemId
+        );
 
-      // Update breadcrumb path
-      setBreadcrumbPath((prev) => [...prev, { id: itemId, title }]);
+        // Case 1: If column already exists for this item at same level, replace it
+        if (currentColumnLevel !== -1) {
+          const newLevels = [...prev];
+          newLevels[currentColumnLevel] = {
+            items: children,
+            parentId: itemId,
+            parentTitle: title,
+          };
+          return newLevels;
+        }
+
+        // Determine which column the navigation is coming from
+        let sourceColumnIndex = -1; // -1 means root column (first column)
+
+        for (let i = 0; i < prev.length; i++) {
+          if (prev[i].items.some((item) => item.id === itemId)) {
+            sourceColumnIndex = i;
+            break;
+          }
+        }
+
+        // Check if navigation is from root column
+        const isFromRootColumn = sourceColumnIndex === -1;
+
+        // Case 2: If we have 2 navigation levels (3 columns total) and navigating from first column (root)
+        // Remove 3rd column and replace 2nd column with new data
+        if (prev.length === 2 && isFromRootColumn) {
+          return [
+            {
+              items: children,
+              parentId: itemId,
+              parentTitle: title,
+            },
+          ];
+        }
+
+        // Case 3: If navigating from a middle column, remove all columns after it
+        if (sourceColumnIndex >= 0) {
+          return [
+            ...prev.slice(0, sourceColumnIndex + 1),
+            {
+              items: children,
+              parentId: itemId,
+              parentTitle: title,
+            },
+          ];
+        }
+
+        // Case 4: Add new column if not already present (normal case)
+        return [
+          ...prev,
+          {
+            items: children,
+            parentId: itemId,
+            parentTitle: title,
+          },
+        ];
+      });
+
+      // Update breadcrumb path accordingly
+      setBreadcrumbPath((prev) => {
+        const existingIndex = prev.findIndex((crumb) => crumb.id === itemId);
+
+        // If item already exists in breadcrumb, truncate to that point
+        if (existingIndex !== -1) {
+          return prev.slice(0, existingIndex + 1);
+        }
+
+        // Determine which column the navigation is coming from
+        let sourceColumnIndex = -1;
+        for (let i = 0; i < navigationLevels.length; i++) {
+          if (navigationLevels[i].items.some((item) => item.id === itemId)) {
+            sourceColumnIndex = i;
+            break;
+          }
+        }
+
+        const isFromRootColumn = sourceColumnIndex === -1;
+
+        // If we're navigating from root with 2 levels already, reset breadcrumb
+        if (navigationLevels.length === 2 && isFromRootColumn) {
+          return [prev[0], { id: itemId, title }];
+        }
+
+        // If navigating from a middle column, truncate breadcrumb
+        if (sourceColumnIndex >= 0) {
+          return [
+            ...prev.slice(0, sourceColumnIndex + 2),
+            { id: itemId, title },
+          ];
+        }
+
+        // Normal case: append to breadcrumb
+        return [...prev, { id: itemId, title }];
+      });
     };
 
     // Handle breadcrumb click to navigate back
@@ -404,14 +488,14 @@ export const AddSingleItemFromHierarchy = forwardRef<
     };
 
     // Render side panel content using renderItem prop
-    const renderSidePanelContent = (item: AddSelectItem) => {
+    const renderSidePanelContent = (item: AddSelectItem): ReactNode => {
       return (
         <div className={`${blockClass}__side-panel-content`}>
           {/* Item header with icon and title */}
           <div className={`${blockClass}__side-panel-header`}>
             {item.icon && (
               <div className={`${blockClass}__side-panel-icon`}>
-                {item.icon}
+                {item.icon as ReactNode}
               </div>
             )}
             <div className={`${blockClass}__side-panel-title-section`}>
@@ -433,20 +517,23 @@ export const AddSingleItemFromHierarchy = forwardRef<
                 {sidePanelDescriptionLabel}
               </h5>
               <p className={`${blockClass}__side-panel-description`}>
-                {item.itemDetails.description}
+                {String(item.itemDetails.description)}
               </p>
             </div>
           )}
 
           {/* Asset details section */}
-          {item.itemDetails?.details && (
-            <div className={`${blockClass}__side-panel-section`}>
-              <h5 className={`${blockClass}__side-panel-section-title`}>
-                {sidePanelDetailsLabel}
-              </h5>
-              <div className={`${blockClass}__side-panel-details`}>
-                {Object.entries(item.itemDetails.details).map(
-                  ([key, value]) => (
+          {item.itemDetails?.details &&
+            typeof item.itemDetails.details === 'object' &&
+            item.itemDetails.details !== null && (
+              <div className={`${blockClass}__side-panel-section`}>
+                <h5 className={`${blockClass}__side-panel-section-title`}>
+                  {sidePanelDetailsLabel}
+                </h5>
+                <div className={`${blockClass}__side-panel-details`}>
+                  {Object.entries(
+                    item.itemDetails.details as Record<string, unknown>
+                  ).map(([key, value]) => (
                     <div
                       key={key}
                       className={`${blockClass}__side-panel-detail-item`}
@@ -460,27 +547,30 @@ export const AddSingleItemFromHierarchy = forwardRef<
                         {String(value)}
                       </span>
                     </div>
-                  )
-                )}
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
           {/* Tags section */}
-          {item.itemDetails?.tags && item.itemDetails.tags.length > 0 && (
-            <div className={`${blockClass}__side-panel-section`}>
-              <h5 className={`${blockClass}__side-panel-section-title`}>
-                {sidePanelTagsLabel}
-              </h5>
-              <div className={`${blockClass}__side-panel-tags`}>
-                {item.itemDetails.tags.map((tag: string, index: number) => (
-                  <Tag key={index} type="gray" size="sm">
-                    {tag}
-                  </Tag>
-                ))}
+          {item.itemDetails?.tags &&
+            Array.isArray(item.itemDetails.tags) &&
+            item.itemDetails.tags.length > 0 && (
+              <div className={`${blockClass}__side-panel-section`}>
+                <h5 className={`${blockClass}__side-panel-section-title`}>
+                  {sidePanelTagsLabel}
+                </h5>
+                <div className={`${blockClass}__side-panel-tags`}>
+                  {(item.itemDetails.tags as string[]).map(
+                    (tag: string, index: number) => (
+                      <Tag key={index} type="gray" size="sm">
+                        {tag}
+                      </Tag>
+                    )
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       );
     };
@@ -490,6 +580,7 @@ export const AddSingleItemFromHierarchy = forwardRef<
         <AddSelect
           onItemSelect={handleItemSelect}
           selectedItems={selectedItems}
+          {...rest}
         >
           <Tearsheet
             ref={ref}
@@ -498,11 +589,10 @@ export const AddSingleItemFromHierarchy = forwardRef<
             variant="wide"
             summaryContentWidth="22.5rem"
             className={cx(blockClass, className)}
-            {...rest}
           >
             <Tearsheet.Header hideCloseButton disableHeaderCollapse>
               <Tearsheet.HeaderContent title={title}>
-                <p slot="description">{description}</p>
+                {description}
               </Tearsheet.HeaderContent>
             </Tearsheet.Header>
 
@@ -588,7 +678,7 @@ export const AddSingleItemFromHierarchy = forwardRef<
                   disabled: !selectedId,
                 },
               ]}
-              buttonSize={buttonSize}
+              buttonSize="2xl"
             />
           </Tearsheet>
         </AddSelect>

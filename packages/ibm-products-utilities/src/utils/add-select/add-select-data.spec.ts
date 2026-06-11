@@ -208,6 +208,58 @@ describe('AddSelectData', () => {
       expect(descendants[0].id).toBe('2-1');
       expect(descendants[1].id).toBe('2-2');
     });
+
+    it('should check if item has selected descendants', () => {
+      dataManager.setSelectedItems('2-1');
+      expect(dataManager.hasSelectedDescendants('2')).toBe(true);
+      expect(dataManager.hasSelectedDescendants('1')).toBe(false);
+    });
+
+    it('should check if all descendants are selected', () => {
+      dataManager.setSelectedItems(['2-1', '2-2']);
+      expect(dataManager.allDescendantsSelected('2')).toBe(true);
+
+      dataManager.clearSelections();
+      dataManager.setSelectedItems('2-1');
+      expect(dataManager.allDescendantsSelected('2')).toBe(false);
+    });
+
+    it('should get all descendant IDs including the item itself', () => {
+      const ids = dataManager.getAllDescendantIds('2');
+      expect(ids).toContain('2');
+      expect(ids).toContain('2-1');
+      expect(ids).toContain('2-2');
+      expect(ids.length).toBe(3);
+    });
+
+    it('should return empty array for non-existent item', () => {
+      const ids = dataManager.getAllDescendantIds('non-existent');
+      expect(ids.length).toBe(0);
+    });
+
+    it('should get top-level selected items', () => {
+      // Select parent and one child
+      dataManager.setSelectedItems(['2', '2-1']);
+      const topLevel = dataManager.getTopLevelSelectedItems();
+
+      // Should only return parent since child is descendant of selected parent
+      expect(topLevel.length).toBe(1);
+      expect(topLevel[0].id).toBe('2');
+    });
+
+    it('should get multiple top-level selected items', () => {
+      // Select items at different levels without parent-child relationship
+      dataManager.setSelectedItems(['1', '3']);
+      const topLevel = dataManager.getTopLevelSelectedItems();
+
+      expect(topLevel.length).toBe(2);
+      expect(topLevel.map((item) => item.id)).toContain('1');
+      expect(topLevel.map((item) => item.id)).toContain('3');
+    });
+
+    it('should return -1 for depth of non-existent item', () => {
+      expect(dataManager.getItemDepth('non-existent')).toBe(-1);
+    });
   });
 
   describe('Search functionality', () => {
@@ -247,6 +299,21 @@ describe('AddSelectData', () => {
       expect(results.length).toBe(1);
       expect(results[0].value).toBe('item1');
     });
+
+    it('should limit search results with maxResults option', () => {
+      const results = dataManager.search('Item', { maxResults: 2 });
+      expect(results.length).toBeLessThanOrEqual(2);
+    });
+
+    it('should search with multiple options', () => {
+      const results = dataManager.search('Item', {
+        caseSensitive: false,
+        searchFields: ['title', 'value'],
+        maxResults: 3,
+      });
+      expect(results.length).toBeGreaterThan(0);
+      expect(results.length).toBeLessThanOrEqual(3);
+    });
   });
 
   describe('Sort functionality', () => {
@@ -270,9 +337,9 @@ describe('AddSelectData', () => {
           value: 'parent',
           children: {
             entries: [
-              { id: '3', title: 'C', value: 'c' },
-              { id: '1', title: 'A', value: 'a' },
-              { id: '2', title: 'B', value: 'b' },
+              { id: '1-1', title: 'A', value: 'a' },
+              { id: '1-2', title: 'B', value: 'b' },
+              { id: '1-3', title: 'C', value: 'c' },
             ],
           },
         },

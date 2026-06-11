@@ -65,6 +65,9 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
       setOpen,
       triggerRef,
       selectorPrimaryFocus,
+      contentId,
+      labelId,
+      triggerPosition,
     } = useContext(CoachmarkContext);
 
     const handleRef = useRef<HTMLDivElement | null>(null);
@@ -75,15 +78,46 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
         // Find the actual popover container (parent of PopoverContent)
         const popoverContent = contentRef.current;
         const popoverContainer = popoverContent?.closest(
-          `.${carbon.prefix}--popover`
+          `.${carbon.prefix}--popover-container`
         );
         if (popoverContainer instanceof HTMLElement) {
           setContentRef(popoverContainer);
+
+          // For external trigger, manually position the popover based on trigger position
+          if (triggerPosition) {
+            console.log('Applying trigger position to popover:', {
+              left: triggerPosition.left,
+              top: triggerPosition.top,
+              bottom: triggerPosition.bottom,
+              right: triggerPosition.right,
+              width: triggerPosition.width,
+              height: triggerPosition.height,
+            });
+
+            // Position the popover to align with the trigger
+            // Use the trigger's position as the anchor point
+            popoverContainer.style.position = 'fixed';
+            popoverContainer.style.left = `${triggerPosition.left}px`;
+            popoverContainer.style.top = `${triggerPosition.top}px`;
+            popoverContainer.style.zIndex = '9999';
+
+            const rect = popoverContainer.getBoundingClientRect();
+            console.log('Popover positioned at:', {
+              left: rect.left,
+              top: rect.top,
+              bottom: rect.bottom,
+              right: rect.right,
+              width: rect.width,
+              height: rect.height,
+              triggerTop: triggerPosition.top,
+              triggerLeft: triggerPosition.left,
+            });
+          }
         }
       }
       // setContentRef is a stable function from useState and doesn't need to be in dependencies
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, contentRef]);
+    }, [open, contentRef, triggerPosition]);
 
     // Handle Escape key to close Coachmark and return focus to trigger
     useEffect(() => {
@@ -125,7 +159,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
 
     // Handle focus management with selectorPrimaryFocus or default to close button
     useEffect(() => {
-      if (open) {
+      if (open && selectorPrimaryFocus) {
         // Use setTimeout to ensure DOM is ready and give time for any other focus management
         setTimeout(() => {
           requestAnimationFrame(() => {
@@ -159,7 +193,9 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
 
     return (
       <PopoverContent
+        id={contentId}
         ref={contentRef}
+        aria-labelledby={labelId}
         className={cx(coachmarkContentBlockClass, className) || ''}
         role="region"
         aria-label={ariaLabel}

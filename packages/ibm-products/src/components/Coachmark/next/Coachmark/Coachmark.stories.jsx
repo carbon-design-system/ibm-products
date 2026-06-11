@@ -257,6 +257,16 @@ const TriggerRefTemplate = ({ ...args }, context) => {
         >
           Show information
         </Button>
+        <p>
+          Let me check the context around line 173 in the CoachmarkContent.tsx
+          file to understand the issueLet me check the context around line 173
+          in the CoachmarkContent.tsx file to understand the issueLet me check
+          the context around line 173 in the CoachmarkContent.tsx file to
+          understand the issueLet me check the context around line 173 in the
+          CoachmarkContent.tsx file to understand the issueLet me check the
+          context around line 173 in the CoachmarkContent.tsx file to understand
+          the issue
+        </p>
         <Coachmark
           open={isOpen}
           onClose={handleClose}
@@ -300,4 +310,126 @@ Floating.args = {
 export const WithExternalTriggerRef = TriggerRefTemplate.bind({});
 WithExternalTriggerRef.args = {
   align: 'bottom',
+};
+
+const DualCoachmarksTemplate = ({ ...args }, context) => {
+  const sbDocs = context.viewMode !== 'docs';
+  const carbonTheme = sbDocs ? useCarbonTheme() : 'white';
+  const [tooltipOpen, setTooltipOpen] = useState(true);
+  const [externalTriggerOpen, setExternalTriggerOpen] = useState(true);
+  const tooltipBeaconButtonRef = useRef(null);
+  const externalTriggerButtonRef = useRef(null);
+
+  const handleTooltipClose = () => {
+    setTooltipOpen(false);
+    setTimeout(() => {
+      tooltipBeaconButtonRef.current?.focus();
+    }, 0);
+  };
+
+  const handleExternalTriggerClose = () => {
+    setExternalTriggerOpen(false);
+    setTimeout(() => {
+      externalTriggerButtonRef.current?.focus();
+    }, 0);
+  };
+
+  const handleTooltipBeaconClick = () => {
+    setTooltipOpen((open) => !open);
+  };
+
+  const handleExternalTriggerButtonClick = () => {
+    setExternalTriggerOpen((open) => !open);
+  };
+
+  return (
+    <Theme theme={carbonTheme}>
+      <main
+        style={{
+          display: 'flex',
+          gap: '8rem',
+          alignItems: 'flex-start',
+          padding: '6rem 3rem',
+        }}
+      >
+        <div>
+          <Coachmark
+            position={{ x: 251, y: 395 }}
+            open={tooltipOpen}
+            onClose={handleTooltipClose}
+            align="bottom"
+            selectorPrimaryFocus=".coachmark-dual-tooltip-done-button"
+          >
+            <CoachmarkBeacon
+              label="Show tooltip coachmark"
+              buttonProps={{
+                onClick: handleTooltipBeaconClick,
+                id: 'DualCoachmarkTooltipBtn',
+                ref: tooltipBeaconButtonRef,
+              }}
+            />
+            <Coachmark.Content>
+              <Coachmark.ContentHeader closeIconDescription="Close" />
+              <Coachmark.ContentBody>
+                <h2>Tooltip coachmark</h2>
+                <p>This coachmark uses the tooltip variant.</p>
+                <Button
+                  size="sm"
+                  className="coachmark-dual-tooltip-done-button"
+                  onClick={handleTooltipClose}
+                >
+                  Done
+                </Button>
+              </Coachmark.ContentBody>
+            </Coachmark.Content>
+          </Coachmark>
+        </div>
+
+        <div>
+          <Button
+            id="DualCoachmarkTriggerRefBtn"
+            kind="tertiary"
+            size="md"
+            renderIcon={Crossroads}
+            onClick={handleExternalTriggerButtonClick}
+            ref={externalTriggerButtonRef}
+          >
+            Show external trigger coachmark
+          </Button>
+          <Coachmark
+            open={externalTriggerOpen}
+            onClose={handleExternalTriggerClose}
+            triggerRef={externalTriggerButtonRef}
+            align="bottom"
+          >
+            <Coachmark.Content>
+              <Coachmark.ContentHeader closeIconDescription="Close" />
+              <Coachmark.ContentBody>
+                <h2>External trigger coachmark</h2>
+                <p>This coachmark uses the external trigger ref variant.</p>
+                <Button
+                  size="sm"
+                  className="coachmark-dual-trigger-ref-done-button"
+                  onClick={handleExternalTriggerClose}
+                >
+                  Done
+                </Button>
+              </Coachmark.ContentBody>
+            </Coachmark.Content>
+          </Coachmark>
+        </div>
+      </main>
+    </Theme>
+  );
+};
+
+export const DualCoachmarks = DualCoachmarksTemplate.bind({});
+DualCoachmarks.args = {};
+DualCoachmarks.parameters = {
+  docs: {
+    description: {
+      story:
+        'This story demonstrates two Coachmarks (tooltip and triggerRef variants) on the same page to verify they work correctly together without interfering with each other.',
+    },
+  },
 };

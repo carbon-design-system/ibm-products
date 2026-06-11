@@ -2,7 +2,7 @@ import { Story, Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks';
 import { stackblitzPrefillConfig } from '../../../../../previewer/codePreviewer';
 import * as CoachmarkStories from './Coachmark.stories';
 
-<Meta isTemplate />
+<Meta of={CoachmarkStories} />
 
 # Coachmark
 
@@ -12,7 +12,7 @@ import * as CoachmarkStories from './Coachmark.stories';
 - [Coachmark code sample](#coachmark-code-sample)
 - [Tooltip example usage](#tooltip-example-usage)
 - [Floating example usage](#floating-example-usage)
-- [With external triggerRef example usage](#with-external-trigger-ref-example-usage)
+- [With external trigger ref example usage](#with-external-trigger-ref-example-usage)
 - [Component API](#component-api)
 
 ## Overview
@@ -116,6 +116,25 @@ element that exists outside the Coachmark component tree. This is useful when
 the trigger button needs to be positioned independently or when integrating with
 existing UI elements.
 
+<Canvas
+  className="coachmark--docs-demo"
+  of={CoachmarkStories.WithExternalTriggerRef}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: CoachmarkStories.WithExternalTriggerRef,
+          status: {
+            preview: ['Coachmark'],
+          },
+          customImports: [`import { Crossroads } from '@carbon/react/icons';`],
+          styles: CoachmarkStories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
 ## Component API
 
 <ArgTypes />
@@ -124,4 +143,4 @@ existing UI elements.
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/PageHeader/PageHeader.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon-for-ibm-products/edit/main/packages/ibm-products/src/components/Coachmark/next/Coachmark/Coachmark.mdx)

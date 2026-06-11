@@ -74,6 +74,7 @@ export const CoachmarkBeacon = forwardRef<
         {...buttonProps}
         className={`${blockClass}__target`}
         aria-label={label}
+        title={label}
       >
         <svg
           className={`${blockClass}__center`}

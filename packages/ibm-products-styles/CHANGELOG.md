@@ -7,6 +7,9 @@
 
 ### Housekeeping :house:
 - docs(changelog): update for v2.91.0-rc.0 (#9462)
+## `@carbon/ibm-products-styles@2.88.0-rc.1`
+### Features :rocket:
+- feat(addselect): code refactoring and patterns (#9515)
 
 ## `@carbon/ibm-products-styles@2.88.0-rc.0`
 ### Features :rocket:

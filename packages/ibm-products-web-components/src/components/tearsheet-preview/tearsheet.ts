@@ -104,11 +104,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   private uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
 
   /**
-   * Unique ID for the title element (used for aria-labelledby)
-   */
-  private titleId: string = `${blockClass}__title-${Math.random().toString(36).substr(2, 9)}`;
-
-  /**
    * Internal flag to track if stacking is enabled (via wrapper)
    */
   private _stackingEnabled: boolean = false;

@@ -1,6 +1,6 @@
 {
   "name": "@carbon/ibm-products-utilities",
-  "description": "Utilities for Carbon for IBM Products",
+  "description": "Internal utilities for Carbon for IBM Products - embedded at build time",
   "version": "1.1.0-rc.1",
   "license": "Apache-2.0",
   "private": true,

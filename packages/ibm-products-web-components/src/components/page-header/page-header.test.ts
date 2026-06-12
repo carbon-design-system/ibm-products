@@ -105,8 +105,7 @@ describe('c4p-page-header', function () {
       const breadcrumbBar = pageHeader.querySelector(
         `${prefix}-page-header-breadcrumb`
       ) as HTMLElement;
-      const breadcrumbBarBorderAttr = breadcrumbBar.getAttribute('border');
-      expect(breadcrumbBarBorderAttr).toBeTruthy();
+      expect(breadcrumbBar.hasAttribute('border')).toBe(true);
       const scrollButtonElement =
         scrollerButton.shadowRoot?.querySelector('cds-icon-button');
       (scrollButtonElement as HTMLButtonElement).click();

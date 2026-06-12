@@ -721,6 +721,15 @@ $duration: 1000ms;
     border-block-end: 1px solid $border-subtle-01;
     /* stylelint-disable-next-line carbon/layout-use */
     inset-block-start: var(--#{$pkg-prefix}-page-header-header-top);
+    overflow-x: clip;
+  }
+
+  // When disableStickyTabBar is true, remove sticky positioning from root
+  // This allows breadcrumb to stick to viewport while tab bar scrolls normally
+  &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar {
+    position: static;
+    // Add padding to compensate for fixed breadcrumb (40px height)
+    padding-block-start: to-rem(40px);
   }
 
   .#{$block-class}__breadcrumb-bar {
@@ -730,6 +739,15 @@ $duration: 1000ms;
     block-size: to-rem(40px);
     /* stylelint-disable-next-line carbon/layout-use */
     inset-block-start: var(--#{$pkg-prefix}-page-header-breadcrumb-top);
+  }
+
+  // When disableStickyTabBar is true, breadcrumb uses fixed positioning at top of viewport
+  &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar
+    .#{$block-class}__breadcrumb-bar {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
   }
 
   .#{$block-class}__breadcrumb-bar .#{$carbon-prefix}--subgrid,
@@ -1026,14 +1044,25 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__tab-bar {
+    position: sticky;
+    z-index: 1;
+    background-color: $layer;
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$pkg-prefix}-page-header-breadcrumb-top);
+  }
+
+  // Disable sticky positioning for tab bar when disableStickyTabBar prop is true
+  &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar
+    .#{$block-class}__tab-bar {
+    position: static;
     // On smaller screens, use flex to keep scroller button in flow
-    position: relative;
+    // position: relative;
     display: flex;
     align-items: center;
-    background-color: $layer;
+    // background-color: $layer;
 
-    // On max breakpoint and above, use block to maintain Carbon alignment (scroller uses absolute positioning)
-    @include breakpoint(max) {
+    // // On max breakpoint and above, use block to maintain Carbon alignment (scroller uses absolute positioning)
+    @include breakpoint(sm) {
       display: block;
     }
   }
@@ -1109,12 +1138,16 @@ $duration: 1000ms;
     align-content: center;
     justify-content: flex-end;
     inline-size: 40%;
-    padding-inline-end: $spacing-03;
+    padding-inline-end: $spacing-06;
     text-align: end;
 
     .#{$carbon-prefix}--tag {
       flex-shrink: 0;
       margin-inline-end: $spacing-03;
+    }
+
+    @include breakpoint-down(lg) {
+      padding-inline-end: $spacing-06;
     }
   }
 
@@ -1145,12 +1178,11 @@ $duration: 1000ms;
     margin-inline-start: $spacing-03;
 
     // On max breakpoint and above, position absolutely to the right (enough gutter space)
-    @include breakpoint(max) {
+    @include breakpoint(sm) {
       position: absolute;
       inset-block-start: 0;
       inset-inline-end: 0;
       margin-inline-start: 0;
-      padding-inline-end: 0;
     }
   }
 

@@ -829,14 +829,18 @@ $duration: 1000ms;
       }
 
       @include breakpoint-down(lg) {
+        max-inline-size: 75vw;
+
         .#{$carbon-prefix}--link {
           inline-size: 75%;
         }
       }
 
       @include breakpoint-down(md) {
+        max-inline-size: 35vw;
+
         .#{$carbon-prefix}--link {
-          inline-size: 25%;
+          inline-size: 100%;
         }
       }
     }

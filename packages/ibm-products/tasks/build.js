@@ -204,7 +204,12 @@ function getExternalPatterns() {
     ...Object.keys(packageJson.dependencies || {}),
   ];
 
-  return deps.map((name) => {
+  // Filter out @carbon/ibm-products-utilities to embed it at build time
+  const filteredDeps = deps.filter(
+    (name) => name !== '@carbon/ibm-products-utilities'
+  );
+
+  return filteredDeps.map((name) => {
     const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     return new RegExp(`^${escapedName}(/.*)?`);
   });

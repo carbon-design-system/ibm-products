@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useCallback, useLayoutEffect, useState, type RefObject } from 'react';
+import { useCallback, useState, type RefObject } from 'react';
 import { pkg } from '../../settings';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 export const usePresence = (
   ref: RefObject<HTMLElement | null>,
@@ -32,7 +33,7 @@ export const usePresence = (
     setExitState('finished');
   }, []);
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (!ref.current || !isExiting) {
       return;
     }

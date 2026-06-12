@@ -1,3 +1,24 @@
+## `@carbon/ibm-products-web-components@0.41.1-rc.0`
+### Bug fixes :bug:
+- fix(release): remove private utilities package from dependencies (#9532)
+## `@carbon/ibm-products-web-components@0.41.0`
+### Features :rocket:
+- feat(EditInPlace): Web component implementation (#9384)
+- feat(AddSelect): composable add select with patterns (#9368)
+- feat(createTearsheetNarrow): implemented as pattern (#9404)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+
+## `@carbon/ibm-products-web-components@0.41.0-rc.0`
+### Features :rocket:
+- feat(EditInPlace): Web component implementation (#9384)
+- feat(AddSelect): composable add select with patterns (#9368)
+- feat(createTearsheetNarrow): implemented as pattern (#9404)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+
 ## `@carbon/ibm-products-web-components@0.40.0`
 ### Features :rocket:
 - feat(createfullpage): implemented as patterns in wc (#9275)

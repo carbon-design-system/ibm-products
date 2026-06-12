@@ -20,6 +20,10 @@ import { SignalWatcher } from '@lit-labs/signals';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { stackManager } from './stack-signal';
+import {
+  trapFocus,
+  clearFocusableContainers,
+} from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 /**
  * Tearsheet component - A slide-out panel for displaying detailed content.
@@ -110,6 +114,9 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   @query('cds-modal-body')
   private modalBodyElement?: HTMLElement;
 
+  private _trapFocusAPI: { cleanup: () => void } | null = null;
+  private _wasOpen = false;
+
   private smMediaQuery = `(max-width: ${breakpoints.md.width})`;
   private isSmallDevice = new MatchMediaController(
     this,
@@ -178,12 +185,13 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   protected firstUpdated(_changedProperties: PropertyValues): void {
     this.updateCSSCustomProperties();
     this.isSm = this.isSmallDevice?.matches || this.variant === 'narrow';
-    // Initialize all signals on first update
+    // Initialize all signals on first update, including uniqueId so children can register
     updateTearsheetSignals({
       variant: this.variant,
       isSm: this.isSm,
       open: this.open,
       hasAILabel: this.hasAILabel,
+      uniqueId: this.uniqueId,
     });
   }
 
@@ -216,6 +224,8 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     if (!_changedProperties.has('open')) {
       return;
     }
+    const wasOpen = this._wasOpen;
+    const isOpen = this.open;
 
     updateTearsheetSignals({ open: this.open });
 
@@ -230,6 +240,27 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     if (this._stackingEnabled) {
       this.updateStackProperties();
     }
+
+    // Initialize focus trap when tearsheet opens
+    if (!wasOpen && isOpen) {
+      // `focusableContainers` holds the containers where we can query DOM elements.
+      // Our strategy here is to let child/slotted components register their containers,
+      // which are then passed to `trapFocus`. This allows the utility to query elements
+      // directly without being blocked by shadow DOM boundaries.
+
+      // Update signal with current uniqueId FIRST so children can register
+      updateTearsheetSignals({ uniqueId: this.uniqueId });
+
+      // Use requestAnimationFrame to ensure child components have registered their containers
+      requestAnimationFrame(() => {
+        this._trapFocusAPI = trapFocus(this as HTMLElement, this.uniqueId);
+      });
+    } else if (wasOpen && !isOpen) {
+      // Clear containers when closing
+      clearFocusableContainers(this.uniqueId);
+    }
+
+    this._wasOpen = isOpen;
   }
 
   private updateCSSPropertiesIfNeeded(
@@ -282,6 +313,11 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   disconnectedCallback() {
     super.disconnectedCallback();
+
+    // Cleanup focus trap and clear all registered containers
+    this._trapFocusAPI?.cleanup();
+
+    clearFocusableContainers();
 
     // Remove event listeners
     this.removeEventListener(

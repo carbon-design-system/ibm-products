@@ -75,7 +75,11 @@ class CDSPageHeaderBreadcrumb extends LitElement {
               <slot name="icon"></slot>
               <slot></slot>
             </div>
-            <div class="${prefix}--page-header__breadcrumb__actions">
+            <div
+              class="${prefix}--page-header__breadcrumb__actions"
+              role="navigation"
+              aria-label="Page header actions"
+            >
               <div class="${contentActionClasses}">
                 <slot name="content-actions"></slot>
               </div>

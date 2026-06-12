@@ -206,12 +206,12 @@ export default class CDSPageHeaderActionsSet extends LitElement {
 
   render() {
     return html`
-      <div class="${blockClass}">
-        <div class="${blockClass}__items">
+      <ul class="${blockClass}">
+        <li class="${blockClass}__items">
           <slot></slot>
-        </div>
+        </li>
 
-        <div data-offset ?data-hidden=${this.hiddenItems.length === 0}>
+        <li data-offset ?data-hidden=${this.hiddenItems.length === 0}>
           <cds-overflow-menu
             size="md"
             close-on-activation
@@ -219,6 +219,7 @@ export default class CDSPageHeaderActionsSet extends LitElement {
             leave-delay-ms="0"
             align="left"
             data-floating-menu-container
+            aria-label="More page actions"
           >
             ${iconLoader(OverflowMenuVertical16, {
               class: `${blockClass}__overflow-svg`,
@@ -239,8 +240,8 @@ export default class CDSPageHeaderActionsSet extends LitElement {
               )}
             </cds-overflow-menu-body>
           </cds-overflow-menu>
-        </div>
-      </div>
+        </li>
+      </ul>
     `;
   }
   static styles = styles;

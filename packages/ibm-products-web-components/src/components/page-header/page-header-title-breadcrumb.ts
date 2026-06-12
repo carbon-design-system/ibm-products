@@ -27,18 +27,24 @@ class CDSPageHeaderTitleBreadcrumb extends CDSBreadcrumbItem {
 
   constructor() {
     super();
+    // Set initial aria-hidden since the element starts with opacity: 0
+    this.setAttribute('aria-hidden', 'true');
     new ContextConsumer(this, {
       context: pageHeaderContext,
       subscribe: true,
       callback: (state) => {
-        if ((state as pageHeaderContextType).titleClipped) {
+        const isVisible = (state as pageHeaderContextType).titleClipped;
+
+        if (isVisible) {
           this.classList.add(
             `${prefix}--page-header-title-breadcrumb-show__fallback`
           );
+          this.setAttribute('aria-hidden', 'false');
         } else {
           this.classList.remove(
             `${prefix}--page-header-title-breadcrumb-show__fallback`
           );
+          this.setAttribute('aria-hidden', 'true');
         }
         if ((state as pageHeaderContextType).withContent) {
           this.classList.add(
@@ -54,6 +60,8 @@ class CDSPageHeaderTitleBreadcrumb extends CDSBreadcrumbItem {
           this.classList.add(
             `${prefix}--page-header-title-breadcrumb-show__by-default`
           );
+          // When showing by default, it should be visible to screen readers
+          this.setAttribute('aria-hidden', 'false');
         }
       },
     });

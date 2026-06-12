@@ -16,8 +16,8 @@ import { createContext, RefObject, useContext } from 'react';
 export type PageHeaderRefs = {
   contentRef?: RefObject<HTMLDivElement | null>;
   titleRef?: RefObject<HTMLHeadingElement | null>;
-  contentActions?: RefObject<HTMLDivElement | null>;
-  breadcrumbActions?: RefObject<HTMLDivElement | null>;
+  contentActions?: RefObject<HTMLElement | null>;
+  breadcrumbActions?: RefObject<HTMLElement | null>;
 };
 
 export type PageHeaderObserverState = {

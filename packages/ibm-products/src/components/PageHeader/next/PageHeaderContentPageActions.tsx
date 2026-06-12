@@ -74,8 +74,8 @@ export const PageHeaderContentPageActions = ({
     menuItem: MenuItemProps;
   };
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const offsetRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLUListElement>(null);
+  const offsetRef = useRef<HTMLLIElement>(null);
   const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
   const [hiddenItems, setHiddenItems] = useState<action[]>([]);
   const [hasMounted, setHasMounted] = useState(false);
@@ -123,18 +123,18 @@ export const PageHeaderContentPageActions = ({
   }, [actions, hasMounted]);
 
   return (
-    <div className={classNames} ref={containerRef} {...other}>
+    <ul className={classNames} ref={containerRef} {...other}>
       {Array.isArray(actions) && (
         <>
           {actions.map((action) => (
-            <div key={action.id}>
+            <li key={action.id}>
               {React.cloneElement(action.body, {
                 ...action.body.props,
                 onClick: action.onClick,
               })}
-            </div>
+            </li>
           ))}
-          <span data-offset data-hidden ref={offsetRef}>
+          <li data-offset data-hidden ref={offsetRef}>
             {hasMounted ? (
               <MenuButton
                 menuAlignment="bottom-end"
@@ -150,10 +150,10 @@ export const PageHeaderContentPageActions = ({
                 ))}
               </MenuButton>
             ) : null}
-          </span>
+          </li>
         </>
       )}
-    </div>
+    </ul>
   );
 };
 

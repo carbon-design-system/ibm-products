@@ -152,7 +152,7 @@ export const Default = ({
         renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
         contentActions={
           <PageHeader.ContentPageActions
-            menuButtonLabel="Actions"
+            menuButtonLabel="Page Header Actions"
             actions={pageActionButtonItems}
           />
         }
@@ -182,14 +182,15 @@ export const Default = ({
       </PageHeader.BreadcrumbBar>
       <PageHeader.Content
         title={title}
+        titleAs="h1"
         pageActions={
           <PageHeader.ContentPageActions
-            menuButtonLabel="Actions"
+            menuButtonLabel="Page Header Actions"
             actions={pageActionButtonItems}
           />
         }
       >
-        <PageHeader.ContentText subtitle="Subtitle">
+        <PageHeader.ContentText subtitle="Subtitle" subtitleAs="h2">
           Built for modern teams, our technology platform simplifies complexity
           with powerful APIs, real-time collaboration tools, and seamless
           integration. From deployment to monitoring, we help you ship faster,
@@ -443,7 +444,7 @@ const tabBarTags = [
 const renderUIShellHeader = () => (
   <HeaderContainer
     render={() => (
-      <Header aria-label="Application header">
+      <Header aria-label="Header">
         <HeaderName href="/">Application header</HeaderName>
       </Header>
     )}
@@ -525,6 +526,7 @@ export const TabBarWithTabsAndTags = (args) => (
                   <OperationalTag
                     onClick={handleOverflowClick}
                     aria-expanded={openPopover}
+                    aria-label={`Show ${hiddenItems.length} more tags`}
                     text={`+${hiddenItems.length}`}
                   />
                 )}
@@ -646,6 +648,7 @@ export const Compact = (args) => (
               <OperationalTag
                 onClick={handleOverflowClick}
                 aria-expanded={openPopover}
+                aria-label={`Show ${hiddenItems.length} more tags`}
                 text={`+${hiddenItems.length}`}
               />
             )}

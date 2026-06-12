@@ -863,12 +863,6 @@ $duration: 1000ms;
   }
 
   .#{$block-class}__content__title-wrapper {
-    @include breakpoint-down(md) {
-      display: flex;
-      flex-direction: column;
-      grid-gap: $spacing-05;
-    }
-
     display: grid;
     gap: $spacing-05;
     grid-template-columns: auto minmax(
@@ -877,6 +871,12 @@ $duration: 1000ms;
       );
     margin-block-end: $spacing-05;
     min-block-size: to-rem(40px);
+
+    @include breakpoint-down(md) {
+      display: flex;
+      flex-direction: column;
+      grid-gap: $spacing-05;
+    }
   }
 
   .#{$block-class}__content__start {

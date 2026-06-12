@@ -142,6 +142,7 @@ const defaultTemplate = {
     open: false,
     placement: SIDE_PANEL_PLACEMENT.RIGHT,
     preventCloseOnClickOutside: false,
+    resizable: false,
     selectorPageContent: '#page-content-selector',
     selectorInitialFocus: '#side-panel-story-text-input-a',
     hideCloseButton: false,
@@ -211,6 +212,11 @@ const defaultTemplate = {
       control: 'boolean',
       description: 'prevent-close-on-click-outside',
     },
+    resizable: {
+      control: 'boolean',
+      description:
+        'resizable (enables panel resizing). Note: Does not affect slide-in variant.',
+    },
     selectorPageContent: {
       control: 'text',
       description: 'selector-page-content',
@@ -265,6 +271,7 @@ const defaultTemplate = {
         ?open=${args.open}
         placement=${args.placement}
         ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
+        ?resizable=${args.resizable}
         selector-page-content=${args.selectorPageContent}
         size=${args.size}
         ?slide-in=${args.slideIn}
@@ -303,6 +310,13 @@ export const SlideIn = {
   args: {
     ...defaultTemplate.args,
     slideIn: true,
+  },
+  argTypes: {
+    resizable: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -389,6 +403,7 @@ export const CustomHeader = {
         ?open=${args.open}
         placement=${args.placement}
         ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
+        ?resizable=${args.resizable}
         selector-page-content=${args.selectorPageContent}
         size=${args.size}
         ?slide-in=${args.slideIn}

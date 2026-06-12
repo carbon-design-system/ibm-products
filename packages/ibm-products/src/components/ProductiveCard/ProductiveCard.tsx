@@ -55,11 +55,11 @@ export interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Optional header description
    */
-  description?: string | ReactNode;
+  description?: ReactNode;
   /**
    * Optional label for the top of the card
    */
-  label?: string | ReactNode;
+  label?: ReactNode;
 
   /**
    * Provides the callback for a clickable card
@@ -134,7 +134,7 @@ export interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Title that's displayed at the top of the card
    */
-  title?: string | ReactNode;
+  title?: ReactNode;
 
   /**
    * Determines title size

@@ -35,11 +35,11 @@ export interface ExpressiveCardProps extends PropsWithChildren {
   /**
    * Optional header description
    */
-  description?: string | ReactNode;
+  description?: ReactNode;
   /**
    * Optional label for the top of the card
    */
-  label?: string | ReactNode;
+  label?: ReactNode;
   /**
    * Optional media content like an image to be placed in the card
    */
@@ -106,7 +106,7 @@ export interface ExpressiveCardProps extends PropsWithChildren {
   /**
    * Title that's displayed at the top of the card
    */
-  title?: string | ReactNode;
+  title?: ReactNode;
 }
 
 const componentName = 'ExpressiveCard';

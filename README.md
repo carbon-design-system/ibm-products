@@ -152,14 +152,14 @@ import { previewCandidate__Toolbar as Toolbar } from '@carbon/ibm-products';
 
 **Migrating from feature flags:** If you're currently using the deprecated
 canary feature flag mechanism (`pkg.component.*`), see the
-[Canary Migration Guide](../../docs/guides/CANARY_MIGRATION_GUIDE.md) for
-step-by-step instructions on updating your code.
+[Canary Migration Guide](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/CANARY_MIGRATION_GUIDE.md)
+for step-by-step instructions on updating your code.
 
 **For more information:**
 
-- [Component Status Definitions](../../docs/guides/COMPONENT_STATUS_DEFINITIONS.md) -
+- [Component Status Definitions](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/COMPONENT_STATUS_DEFINITIONS.md) -
   Detailed status definitions and usage guidelines
-- [Canary Migration Guide](../../docs/guides/CANARY_MIGRATION_GUIDE.md) -
+- [Canary Migration Guide](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/CANARY_MIGRATION_GUIDE.md) -
   Migration from feature flags to PDLC exports
 
 ## 🙌 Contributing

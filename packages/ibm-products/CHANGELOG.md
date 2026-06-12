@@ -1,3 +1,6 @@
+## `@carbon/ibm-products@2.92.1`
+### Bug fixes :bug:
+- fix(release): remove private utilities package from dependencies (#9532)
 ## `@carbon/ibm-products@2.92.1-rc.0`
 ### Bug fixes :bug:
 - fix(release): remove private utilities package from dependencies (#9532)

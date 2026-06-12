@@ -20,6 +20,9 @@ interface CoachmarkContextType {
   setContentRef: (value: any) => void;
   floating?: boolean;
   selectorPrimaryFocus?: string;
+  contentId?: string;
+  labelId?: string;
+  triggerPosition?: DOMRect | null;
 }
 
 export const CoachmarkContext = createContext<CoachmarkContextType>({

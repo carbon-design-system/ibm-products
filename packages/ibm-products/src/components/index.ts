@@ -62,8 +62,8 @@ export { Coachmark as preview__Coachmark } from './Coachmark/next/Coachmark';
 export type {
   CoachmarkPropsNext,
   CoachmarkComponent,
-  ContentBodyProps,
-  ContentHeaderProps,
+  CoachmarkContentBodyProps,
+  CoachmarkContentHeaderProps,
   CoachmarkContentProps,
 } from './Coachmark/next/Coachmark';
 

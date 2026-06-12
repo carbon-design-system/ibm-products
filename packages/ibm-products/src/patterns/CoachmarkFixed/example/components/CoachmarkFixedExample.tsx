@@ -206,8 +206,8 @@ export const CoachmarkFixedExample = (args) => {
           }}
         ></CoachmarkTagline>
         <Coachmark.Content className={fixedIsVisible ? `is-visible` : ''}>
-          <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-          <Coachmark.Content.Body>
+          <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
+          <Coachmark.ContentBody>
             <div
               ref={(el) => {
                 carouselContainerRefs.current[0] = el;
@@ -273,7 +273,7 @@ export const CoachmarkFixedExample = (args) => {
                 </Button>
               </div>
             </div>
-          </Coachmark.Content.Body>
+          </Coachmark.ContentBody>
         </Coachmark.Content>
       </Coachmark>
     </Theme>

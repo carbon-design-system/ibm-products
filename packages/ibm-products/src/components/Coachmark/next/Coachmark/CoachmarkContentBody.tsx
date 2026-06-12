@@ -9,8 +9,11 @@ import React, { forwardRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass } from './context';
+import { getDevtoolsProps } from '../../../../global/js/utils/devtools';
 
-export interface ContentBodyProps {
+const componentName = 'CoachmarkContentBody';
+
+export interface CoachmarkContentBodyProps {
   /**
    * Provide the optional content for header section and will be render after header titles and before progress indicator.
    * People can make use of this if they want to have custom header.
@@ -27,21 +30,29 @@ export type EnrichedChildren = {
   children: ReactNode;
 };
 
-export const ContentBody = forwardRef<HTMLDivElement, ContentBodyProps>(
-  (props, ref) => {
-    const { className = '', children, ...rest } = props;
-    const ContentBodyBlockClass = `${blockClass}--content-body`;
-    return (
-      <div ref={ref} className={cx(ContentBodyBlockClass, className)}>
-        {children}
-      </div>
-    );
-  }
-);
+export const CoachmarkContentBody = forwardRef<
+  HTMLDivElement,
+  CoachmarkContentBodyProps
+>((props, ref) => {
+  const { className = '', children, ...rest } = props;
+  const ContentBodyBlockClass = `${blockClass}--content-body`;
+  return (
+    <div
+      ref={ref}
+      className={cx(ContentBodyBlockClass, className)}
+      {...rest}
+      {...getDevtoolsProps(componentName)}
+    >
+      {children}
+    </div>
+  );
+});
 
-export default ContentBody;
+CoachmarkContentBody.displayName = 'CoachmarkContentBody';
 
-ContentBody.propTypes = {
+export default CoachmarkContentBody;
+
+CoachmarkContentBody.propTypes = {
   /**
    * Provide the optional content for header section and will be render after header titles and before progress indicator.
    * People can make use of this if they want to have custom header.

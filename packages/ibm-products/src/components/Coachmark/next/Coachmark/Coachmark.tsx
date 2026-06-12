@@ -15,6 +15,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  useId,
 } from 'react';
 
 // Other standard imports.
@@ -23,10 +24,17 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../../../global/js/utils/devtools';
 import { CoachmarkContext, blockClass } from './context';
 import CoachmarkContent, { CoachmarkContentProps } from './CoachmarkContent';
-import { Popover, NewPopoverAlignment } from '@carbon/react';
+import { Popover, PopoverContent, NewPopoverAlignment } from '@carbon/react';
 import { useIsomorphicEffect } from '../../../../global/js/hooks';
-import { ContentHeader, ContentHeaderProps } from './ContentHeader';
-import { ContentBody, ContentBodyProps } from './ContentBody';
+import {
+  CoachmarkContentHeader,
+  CoachmarkContentHeaderProps,
+} from './CoachmarkContentHeader';
+import {
+  CoachmarkContentBody,
+  CoachmarkContentBodyProps,
+} from './CoachmarkContentBody';
+import { PopoverTriggerWithRef } from './PopoverTriggerWithRef';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 
@@ -96,15 +104,15 @@ export interface CoachmarkPropsNext {
   triggerRef?: RefObject<HTMLElement>;
 }
 
-type CoachmarkContentComponent = FC<CoachmarkContentProps> & {
-  Header: FC<ContentHeaderProps>;
-  Body: FC<ContentBodyProps>;
-};
-// Define the type for Coachmark, extending it to include Trigger and Content
+type CoachmarkContentComponent = FC<CoachmarkContentProps>;
+
+// Define the type for Coachmark, extending it to include sub-components
 export type CoachmarkComponent = ForwardRefExoticComponent<
   CoachmarkPropsNext & RefAttributes<HTMLDivElement>
 > & {
   Content: CoachmarkContentComponent;
+  ContentHeader: FC<CoachmarkContentHeaderProps>;
+  ContentBody: FC<CoachmarkContentBodyProps>;
 };
 
 /**
@@ -134,6 +142,14 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
     const internalRef = useRef<HTMLDivElement | null>(null);
     const [contentRef, setContentRef] = useState<HTMLElement | null>(null);
     const [openState, setOpenState] = useState(false);
+    const [triggerPosition, setTriggerPosition] = useState<DOMRect | null>(
+      null
+    );
+    const contentId = useId();
+    const labelId = useId();
+
+    // Track the last click target to handle external trigger clicks
+    const lastClickTargetRef = useRef<EventTarget | null>(null);
 
     const setOpen = (value: boolean) => {
       if (!value) {
@@ -171,12 +187,52 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       }
     }, [children, triggerRef, triggerRefProp]);
 
+    // Enhance external trigger with ARIA attributes
     useEffect(() => {
+      if (!triggerRefProp?.current) {
+        return;
+      }
+      const element = triggerRefProp.current;
+      // Store original attributes
+      const originalExpanded = element.getAttribute('aria-expanded');
+      const originalHaspopup = element.getAttribute('aria-haspopup');
+      const originalControls = element.getAttribute('aria-controls');
+      // Set ARIA attributes
+      element.setAttribute('aria-expanded', String(currentOpen));
+      element.setAttribute('aria-haspopup', 'dialog');
+      if (currentOpen) {
+        element.setAttribute('aria-controls', contentId);
+      }
+      // Cleanup: restore original attributes
+      return () => {
+        if (originalExpanded !== null) {
+          element.setAttribute('aria-expanded', originalExpanded);
+        } else {
+          element.removeAttribute('aria-expanded');
+        }
+        if (originalHaspopup !== null) {
+          element.setAttribute('aria-haspopup', originalHaspopup);
+        } else {
+          element.removeAttribute('aria-haspopup');
+        }
+        if (originalControls !== null) {
+          element.setAttribute('aria-controls', originalControls);
+        } else {
+          element.removeAttribute('aria-controls');
+        }
+      };
+    }, [currentOpen, contentId, triggerRefProp]);
+
+    // Set aria-expanded for internal trigger
+    useEffect(() => {
+      if (triggerRefProp?.current) {
+        return;
+      }
       const el = triggerRef.current;
       if (el) {
-        el.setAttribute('aria-expanded', String(!!open));
+        el.setAttribute('aria-expanded', String(!!currentOpen));
       }
-    }, [open, triggerRef]);
+    }, [currentOpen, triggerRef, triggerRefProp]);
 
     // Reset position when coachmark closes
     useEffect(() => {
@@ -206,16 +262,106 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       }
     };
 
+    // Focus management - return focus to trigger when closed
+    useEffect(() => {
+      if (!currentOpen && triggerRefProp?.current) {
+        triggerRefProp.current.focus();
+      }
+    }, [currentOpen, triggerRefProp]);
+
+    // Capture click events globally to track what was clicked
+    useEffect(() => {
+      const handleGlobalClick = (e: MouseEvent) => {
+        lastClickTargetRef.current = e.target;
+      };
+      // Use capture phase to get the click before anyone else
+      document.addEventListener('click', handleGlobalClick, true);
+      return () => {
+        document.removeEventListener('click', handleGlobalClick, true);
+      };
+    }, []);
+
     const handleRequestClose = (event?: Event) => {
       // Don't close on outside clicks when floating is enabled
       if (floating) {
         return;
       }
 
+      // Check if the last click was on the external trigger
+      if (triggerRefProp?.current) {
+        const trigger = triggerRefProp.current;
+        const clickTarget = lastClickTargetRef.current;
+        if (trigger && clickTarget && trigger.contains(clickTarget as Node)) {
+          // Click was on the trigger, don't close
+          // The trigger's onClick will handle toggling
+          return;
+        }
+      }
       onClose?.();
       setOpen(false);
     };
 
+    // Capture external trigger position when it opens
+    useEffect(() => {
+      if (triggerRefProp?.current && currentOpen) {
+        const rect = triggerRefProp.current.getBoundingClientRect();
+        setTriggerPosition(rect);
+        console.log('Captured trigger position:', {
+          left: rect.left,
+          top: rect.top,
+          bottom: rect.bottom,
+          right: rect.right,
+          width: rect.width,
+          height: rect.height,
+        });
+      }
+    }, [triggerRefProp, currentOpen]);
+
+    // Render with external triggerRef
+    if (triggerRefProp?.current) {
+      return (
+        <CoachmarkContext.Provider
+          value={{
+            onClose,
+            open: currentOpen,
+            setOpen,
+            align,
+            triggerRef,
+            position,
+            contentRef,
+            setContentRef,
+            floating,
+            selectorPrimaryFocus,
+            contentId,
+            labelId,
+            triggerPosition,
+          }}
+        >
+          <div
+            {...rest}
+            ref={setRef}
+            className={cx(blockClass, className, {
+              [`${blockClass}--floating`]: floating,
+            })}
+            {...getDevtoolsProps(componentName)}
+          >
+            <Popover
+              open={currentOpen}
+              onRequestClose={handleRequestClose}
+              align={align as NewPopoverAlignment}
+              caret={caretValue}
+              highContrast={highContrast ?? true}
+              dropShadow={dropShadow}
+            >
+              <PopoverTriggerWithRef targetRef={triggerRef} />
+              {children}
+            </Popover>
+          </div>
+        </CoachmarkContext.Provider>
+      );
+    }
+
+    // Render with internal trigger
     return (
       <CoachmarkContext.Provider
         value={{
@@ -229,6 +375,8 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
           setContentRef,
           floating,
           selectorPrimaryFocus,
+          contentId,
+          labelId,
         }}
       >
         <div
@@ -247,17 +395,6 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
             highContrast={highContrast ?? true}
             dropShadow={dropShadow}
           >
-            {triggerRefProp?.current ? (
-              <span
-                aria-hidden="true"
-                style={{ display: 'contents' }}
-                ref={(node) => {
-                  if (node && triggerRefProp.current) {
-                    node.replaceWith(triggerRefProp.current);
-                  }
-                }}
-              />
-            ) : null}
             {children}
           </Popover>
         </div>
@@ -266,8 +403,8 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
   }
 ) as CoachmarkComponent;
 Coachmark.Content = CoachmarkContent;
-Coachmark.Content.Header = ContentHeader;
-Coachmark.Content.Body = ContentBody;
+Coachmark.ContentHeader = CoachmarkContentHeader;
+Coachmark.ContentBody = CoachmarkContentBody;
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 Coachmark.displayName = componentName;
@@ -315,7 +452,7 @@ Coachmark.propTypes = {
   /**
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */
-  // @ts-ignore
+  // @ts-ignore - Position prop is conditionally used based on Coachmark type (Beacon vs Tagline)
   position: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,

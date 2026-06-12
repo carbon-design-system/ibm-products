@@ -139,6 +139,14 @@ export interface SummaryContentProps {
   onSummaryPanelClose?(): void;
   /** this can be set take full width without any padding */
   isFlush?: boolean;
+  /**
+   * Optional ref to the trigger button that opened the panel. Focus will return here when panel closes.
+   */
+  summaryPanelTriggerRef?: React.RefObject<HTMLElement>;
+  /**
+   * Optional aria-label for the summary panel. Defaults to "Summary panel".
+   */
+  summaryPanelAriaLabel?: string;
 }
 export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
   (
@@ -148,10 +156,27 @@ export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
       summaryPanelOpen = false,
       onSummaryPanelClose,
       isFlush,
+      summaryPanelTriggerRef,
+      summaryPanelAriaLabel = 'Summary panel',
     },
     ref
   ) => {
     const { isSm } = useContext(TearsheetContext);
+    const prevOpenRef = useRef(summaryPanelOpen);
+
+    // Return focus to trigger button when panel closes
+    useEffect(() => {
+      if (
+        prevOpenRef.current &&
+        !summaryPanelOpen &&
+        summaryPanelTriggerRef?.current
+      ) {
+        setTimeout(() => {
+          summaryPanelTriggerRef.current?.focus();
+        }, 100);
+      }
+      prevOpenRef.current = summaryPanelOpen;
+    }, [summaryPanelOpen, summaryPanelTriggerRef]);
 
     return !isSm ? (
       <div
@@ -168,6 +193,8 @@ export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
         open={summaryPanelOpen}
         onRequestClose={onSummaryPanelClose}
         className={cx(`${blockClass}__side-panel`, className)}
+        aria-label={summaryPanelAriaLabel}
+        aria-modal="true"
       >
         {children}
       </SidePanel>
@@ -189,6 +216,14 @@ export interface InfluencerProps {
   onInfluencerPanelClose?(): void;
   /** this can be set take full width without any padding */
   isFlush?: boolean;
+  /**
+   * Optional ref to the trigger button that opened the panel. Focus will return here when panel closes.
+   */
+  influencerPanelTriggerRef?: React.RefObject<HTMLElement>;
+  /**
+   * Optional aria-label for the influencer panel. Defaults to "Influencer panel".
+   */
+  influencerPanelAriaLabel?: string;
 }
 export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
   (
@@ -198,10 +233,27 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
       influencerPanelOpen = false,
       onInfluencerPanelClose,
       isFlush,
+      influencerPanelTriggerRef,
+      influencerPanelAriaLabel = 'Influencer panel',
     },
     ref
   ) => {
     const { isSm } = useContext(TearsheetContext);
+    const prevOpenRef = useRef(influencerPanelOpen);
+
+    // Return focus to trigger button when panel closes
+    useEffect(() => {
+      if (
+        prevOpenRef.current &&
+        !influencerPanelOpen &&
+        influencerPanelTriggerRef?.current
+      ) {
+        setTimeout(() => {
+          influencerPanelTriggerRef.current?.focus();
+        }, 100);
+      }
+      prevOpenRef.current = influencerPanelOpen;
+    }, [influencerPanelOpen, influencerPanelTriggerRef]);
 
     return !isSm ? (
       <aside
@@ -219,6 +271,8 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
         onRequestClose={onInfluencerPanelClose}
         placement="left"
         className={cx(`${blockClass}__side-panel`, className)}
+        aria-label={influencerPanelAriaLabel}
+        aria-modal="true"
       >
         {children}
       </SidePanel>

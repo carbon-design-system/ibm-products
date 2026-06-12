@@ -16,6 +16,9 @@ import React, {
   ReactNode,
   ForwardedRef,
   RefObject,
+  cloneElement,
+  isValidElement,
+  ReactElement,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -37,7 +40,10 @@ import {
   useFeatureFlag,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
+  IconButton,
+  AILabel,
 } from '@carbon/react';
+import { Close } from '@carbon/react/icons';
 
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
@@ -500,6 +506,13 @@ const TearsheetShellDialog = React.forwardRef(
 
       const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
+      // Normalize decorator (AILabel is always size `sm`)
+      const candidateIsAILabel =
+        isValidElement(decorator) && decorator.type === AILabel;
+      const normalizedDecorator = candidateIsAILabel
+        ? cloneElement(decorator as ReactElement<any>, { size: 'sm' })
+        : decorator;
+
       return renderPortalUse(
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
           <ComposedModal
@@ -524,7 +537,6 @@ const TearsheetShellDialog = React.forwardRef(
               [`${bc}--tearsheet-enable-presence`]:
                 presenceContext?.autoEnablePresence,
             })}
-            decorator={decorator || deprecated_slug}
             containerClassName={cx(`${bc}__container`, {
               [`${bc}__container--lower`]: verticalPosition === 'lower',
               [`${bc}__container--mixed-size-stacking`]:
@@ -551,14 +563,33 @@ const TearsheetShellDialog = React.forwardRef(
                   [`${bc}__header--with-close-icon`]: effectiveHasCloseIcon,
                   [`${bc}__header--with-nav`]: navigation,
                 })}
-                closeClassName={cx({
-                  [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
-                })}
-                closeModal={onClose}
-                iconDescription={
-                  effectiveHasCloseIcon ? closeIconDescription : undefined
-                }
+                closeClassName={cx(`${bc}__header--no-close-icon`)}
               >
+                {/* Render decorator and close button in correct DOM order for proper focus sequence */}
+                {(decorator || deprecated_slug) && (
+                  <div className={`${bc}__decorator`}>
+                    {normalizedDecorator || deprecated_slug}
+                  </div>
+                )}
+                {effectiveHasCloseIcon && (
+                  <div
+                    className={`${bc}__close-button ${carbonPrefix}--modal-close-button`}
+                  >
+                    <IconButton
+                      className={`${carbonPrefix}--modal-close`}
+                      label={closeIconDescription}
+                      onClick={onClose}
+                      align="left"
+                    >
+                      <Close
+                        size={20}
+                        aria-hidden="true"
+                        tabIndex="-1"
+                        className={`${carbonPrefix}--modal-close__icon`}
+                      />
+                    </IconButton>
+                  </div>
+                )}
                 <Wrap
                   className={`${bc}__header-content`}
                   element={wide ? Layer : undefined}

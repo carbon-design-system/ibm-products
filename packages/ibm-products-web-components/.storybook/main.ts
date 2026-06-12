@@ -26,7 +26,14 @@ const stories = glob.sync(
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   {
-    ignore: ['../src/**/docs/*.mdx'],
+    ignore: [
+      '../src/**/docs/*.mdx',
+      // TODO: Enable add-select stories once the components are updated to be equivalent to their React counterpart
+      '../src/components/add-select/**/*.stories.*',
+      '../src/components/add-select/**/*.mdx',
+      '../src/patterns/add-select/**/*.stories.*',
+      '../src/patterns/add-select/**/*.mdx',
+    ],
     cwd: configDir,
   }
 );

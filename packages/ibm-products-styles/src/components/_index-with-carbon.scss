@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2025
+// Copyright IBM Corp. 2021, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@
 @use './APIKeyModal/index-with-carbon' as *;
 @use './AboutModal/index-with-carbon' as *;
 @use './ActionSet/index-with-carbon' as *;
+@use './AddSelect/index-with-carbon' as *;
 @use './ButtonMenu/index-with-carbon' as *;
 @use './Cascade/index-with-carbon' as *;
 @use './Checklist/index-with-carbon' as *;

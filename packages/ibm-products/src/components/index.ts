@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2024, 2025
+// Copyright IBM Corp. 2024, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -43,6 +43,14 @@ export * from './TagSet';
 export * from './Tearsheet';
 export * from './UserAvatar';
 export * from './WebTerminal';
+// Re-export utilities from @carbon/ibm-products-utilities
+export { AddSelectData } from '@carbon/ibm-products-utilities';
+export type {
+  AddSelectItem,
+  ItemDetails,
+  ItemStatus,
+  SearchOptions,
+} from '@carbon/ibm-products-utilities';
 
 /**
  * Non-stable components
@@ -96,6 +104,16 @@ export type {
   TearsheetHeaderContentProps,
   StackContextType,
 } from './Tearsheet/next';
+
+export { AddSelect as preview__AddSelect } from './AddSelect/next';
+export type {
+  AddSelectProps as preview__AddSelectProps,
+  AddSelectComponentType,
+  AddSelectBodyProps,
+  AddSelectContentProps,
+  AddSelectRowProps,
+  AddSelectContextType,
+} from './AddSelect/next';
 
 // Preview candidates
 export {

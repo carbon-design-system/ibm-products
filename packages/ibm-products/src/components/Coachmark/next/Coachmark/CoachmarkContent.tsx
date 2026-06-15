@@ -33,6 +33,10 @@ export interface CoachmarkContentProps {
    * It can be a single child or an array of children depending on your need
    */
   children: ReactElement | ReactNode;
+  /**
+   * Accessible label for the coachmark content region.
+   */
+  'aria-label': string;
 }
 
 export type CoachmarkContentComponent = ForwardRefExoticComponent<
@@ -44,7 +48,12 @@ export type CoachmarkContentComponent = ForwardRefExoticComponent<
 
 const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
   (props, ref) => {
-    const { className = '', children, ...rest } = props;
+    const {
+      className = '',
+      children,
+      'aria-label': ariaLabel,
+      ...rest
+    } = props;
     const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
     const {
       open,
@@ -110,15 +119,31 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
       };
     }, [open, onClose, setOpen]);
 
-    // Handle focus management with selectorPrimaryFocus
+    // Handle focus management with selectorPrimaryFocus or default to close button
     useEffect(() => {
-      if (open && selectorPrimaryFocus) {
+      if (open) {
         // Use setTimeout to ensure DOM is ready and give time for any other focus management
         setTimeout(() => {
           requestAnimationFrame(() => {
-            // Try to get the element from the DOM directly using the selector
-            const elementToFocus =
-              document.querySelector<HTMLElement>(selectorPrimaryFocus);
+            let elementToFocus: HTMLElement | null = null;
+
+            // If selectorPrimaryFocus is provided, use it
+            if (selectorPrimaryFocus) {
+              elementToFocus =
+                document.querySelector<HTMLElement>(selectorPrimaryFocus);
+            }
+
+            // If no selectorPrimaryFocus or element not found, default to close button
+            if (
+              !elementToFocus &&
+              contentRef &&
+              'current' in contentRef &&
+              contentRef.current
+            ) {
+              elementToFocus = contentRef.current.querySelector<HTMLElement>(
+                `.${blockClass}--content-header--close-button`
+              );
+            }
 
             if (elementToFocus) {
               elementToFocus.focus();
@@ -126,12 +151,14 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
           });
         }, 100);
       }
-    }, [open, selectorPrimaryFocus]);
+    }, [open, selectorPrimaryFocus, contentRef]);
 
     return (
       <PopoverContent
         ref={contentRef}
         className={cx(coachmarkContentBlockClass, className) || ''}
+        role="region"
+        aria-label={ariaLabel}
         {...rest}
       >
         {children}
@@ -143,6 +170,10 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
 export default CoachmarkContent;
 
 CoachmarkContent.propTypes = {
+  /**
+   * Accessible label for the coachmark content region.
+   */
+  'aria-label': PropTypes.string.isRequired,
   /**
    * This is a required callback that has to return the content to render in the body section.
    * It can be a single child or an array of children depending on your need

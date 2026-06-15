@@ -17,6 +17,8 @@ import '../truncated-text';
 import styles from './tearsheet-header-content.scss?lit';
 import { MatchMediaController } from '../../globals/js/utils/match-media-controller';
 import { breakpoints } from '@carbon/layout';
+import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
+import { tearsheetSignal } from './tearsheet-signal';
 
 const blockClass = `${prefix}--tearsheet__next`;
 
@@ -72,6 +74,12 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
     this._checkSlots();
     this._isMobileOrNarrow =
       this.isMobileDevice?.matches || this.isNarrowVariant;
+
+    // Register with the current tearsheet's uniqueId
+    const uniqueId = tearsheetSignal.get().uniqueId;
+    if (uniqueId) {
+      registerFocusableContainers(this.shadowRoot, uniqueId);
+    }
   }
 
   protected updated(_changedProperties: PropertyValues): void {

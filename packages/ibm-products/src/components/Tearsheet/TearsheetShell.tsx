@@ -565,7 +565,10 @@ const TearsheetShellDialog = React.forwardRef(
                 })}
                 closeClassName={cx(`${bc}__header--no-close-icon`)}
               >
-                {/* Render decorator and close button in correct DOM order for proper focus sequence */}
+                {/* Render header actions, decorator and close button in correct DOM order for proper focus sequence */}
+                {headerActions && (
+                  <div className={`${bc}__header-actions`}>{headerActions}</div>
+                )}
                 {(decorator || deprecated_slug) && (
                   <div className={`${bc}__decorator`}>
                     {normalizedDecorator || deprecated_slug}
@@ -610,9 +613,6 @@ const TearsheetShellDialog = React.forwardRef(
                     <Wrap className={`${bc}__header-description`}>
                       {description}
                     </Wrap>
-                  </Wrap>
-                  <Wrap className={`${bc}__header-actions`}>
-                    {headerActions}
                   </Wrap>
                 </Wrap>
                 <Wrap className={`${bc}__header-navigation`}>{navigation}</Wrap>

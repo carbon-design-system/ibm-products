@@ -323,8 +323,10 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__header-actions {
-    flex: 0 0 auto;
-    padding-inline-start: $spacing-06;
+    position: absolute;
+    z-index: 1;
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-13;
   }
 
   // buttons inside button sets in the header action area have 8px gap

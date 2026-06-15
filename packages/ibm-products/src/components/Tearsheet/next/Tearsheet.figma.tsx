@@ -74,6 +74,9 @@ figma.connect(
   Tearsheet,
   'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=9837%3A338113',
   {
+    imports: [
+      "import { preview__Tearsheet as Tearsheet } from '@carbon/ibm-products'",
+    ],
     props: {
       header: figma.nestedProps('_Tearsheet header', {
         ...headerProps,
@@ -219,6 +222,9 @@ figma.connect(
   Tearsheet,
   'https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?node-id=9837-338231',
   {
+    imports: [
+      "import { preview__Tearsheet as Tearsheet } from '@carbon/ibm-products'",
+    ],
     props: {
       header: figma.nestedProps('_Tearsheet header', { ...headerProps }),
       children: figma.children('Slot'),

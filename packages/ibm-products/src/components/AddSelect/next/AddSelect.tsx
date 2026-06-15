@@ -5,13 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {
-  forwardRef,
-  ForwardedRef,
-  ReactNode,
-  useState,
-  FC,
-} from 'react';
+import React, { forwardRef, ForwardedRef, ReactNode, FC } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass, AddSelectContext } from './context';

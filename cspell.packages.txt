@@ -8,6 +8,7 @@ codesandboxes
 commitlint
 docgen
 dotlottie
+dragmove
 dsag
 exportparts
 flatpickr

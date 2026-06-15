@@ -182,7 +182,12 @@ function getExternalPatterns() {
     ),
   ];
 
-  return deps.map((name) => {
+  // Filter out @carbon/ibm-products-utilities to embed it at build time
+  const filteredDeps = deps.filter(
+    (name) => name !== '@carbon/ibm-products-utilities'
+  );
+
+  return filteredDeps.map((name) => {
     // Transform the name of each dependency into a regex so that imports from
     // nested paths are correctly marked as external.
     //

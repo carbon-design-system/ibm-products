@@ -36,6 +36,7 @@ export { default as CDSCoachmark } from './components/coachmark/coachmark';
 export { default as CDSCoachmarkBeacon } from './components/coachmark/coachmark-beacon/coachmark-beacon';
 export { default as CDSCoachmarkTagline } from './components/coachmark/coachmark-tagline/coachmark-tagline';
 export { default as CDSBigNumber } from './components/big-number/big-number';
+export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
 export { default as CDSBigNumberSkeleton } from './components/big-number/big-number-skeleton';
 
 // Re-export utilities from @carbon/ibm-products-utilities

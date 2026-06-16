@@ -112,6 +112,7 @@ const CreateFullPageContent = ({
         secondaryLabel: child.props.secondaryLabel,
         shouldIncludeStep: true,
         disableSubmit: child.props.disableSubmit,
+        invalid: child.props.invalid,
         onNext: child.props.onNext,
         onPrevious: child.props.onPrevious,
       };

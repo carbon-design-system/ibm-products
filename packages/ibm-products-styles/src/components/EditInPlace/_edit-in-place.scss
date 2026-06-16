@@ -135,7 +135,9 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
   align-self: stretch;
   inline-size: var(--toolbar-width);
 
-  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only:not(
+      #{$carbon-prefix}-icon-button
+    ) {
     padding: 0;
     min-block-size: unset;
   }
@@ -143,9 +145,15 @@ $carbon-input: #{carbon-config.$prefix}--text-input;
 
 // Match button heights to input heights for each size and make them square
 .#{$block-class}__toolbar
-  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only {
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only:not(
+    #{$carbon-prefix}-icon-button
+  ) {
   block-size: var(--#{$block-class}--size);
   inline-size: var(--#{$block-class}--size);
+}
+
+.#{$block-class}__toolbar #{$carbon-prefix}-icon-button::part(button) {
+  padding: $spacing-02;
 }
 
 .#{$block-class}--invalid .#{$block-class}__toolbar {

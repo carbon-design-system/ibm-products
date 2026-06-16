@@ -150,6 +150,7 @@ export interface FilterFlyoutProps {
   panelTitle?: string;
   sections?: Section[];
   autoHideFilters: boolean;
+  clearFiltersText?: string;
 }
 
 export interface DataGridToggleAllRowsProps

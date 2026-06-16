@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect, useState, useRef } from 'react';
+import { action } from 'storybook/actions';
 import { Coachmark } from '.';
 import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
@@ -127,7 +128,6 @@ const TooltipTemplate = ({ ...args }, context) => {
           position={{ x: 151, y: 155 }}
           open={isOpen}
           onClose={handleClose}
-          selectorPrimaryFocus=".coachmark-done-button"
           {...args}
         >
           <CoachmarkBeacon
@@ -138,7 +138,7 @@ const TooltipTemplate = ({ ...args }, context) => {
               ref: beaconButtonRef,
             }}
           ></CoachmarkBeacon>
-          <Coachmark.Content>
+          <Coachmark.Content aria-label="Coachmark content">
             <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
             <Coachmark.Content.Body>
               <h2>Hello World</h2>
@@ -146,7 +146,7 @@ const TooltipTemplate = ({ ...args }, context) => {
               <Button
                 size="sm"
                 className="coachmark-done-button"
-                onClick={handleClose}
+                onClick={action('Done button clicked')}
               >
                 Done
               </Button>
@@ -197,7 +197,7 @@ const FloatingTemplate = ({ ...args }, context) => {
           >
             Show information
           </Button>
-          <Coachmark.Content>
+          <Coachmark.Content aria-label="Coachmark content">
             <Coachmark.Content.Header
               closeIconDescription="Close"
               dragIconDescription="Drag"
@@ -205,7 +205,7 @@ const FloatingTemplate = ({ ...args }, context) => {
             <Coachmark.Content.Body>
               <h2>Hello World</h2>
               <p>this is a description test</p>
-              <Button size="sm" onClick={handleClose}>
+              <Button size="sm" onClick={action('Done button clicked')}>
                 Done
               </Button>
             </Coachmark.Content.Body>
@@ -250,10 +250,9 @@ const TriggerRefTemplate = ({ ...args }, context) => {
           open={isOpen}
           onClose={handleClose}
           triggerRef={triggerButtonRef}
-          selectorPrimaryFocus=".coachmark-trigger-ref-done-button"
           {...args}
         >
-          <Coachmark.Content>
+          <Coachmark.Content aria-label="Coachmark content">
             <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
             <Coachmark.Content.Body>
               <h2>Hello World</h2>

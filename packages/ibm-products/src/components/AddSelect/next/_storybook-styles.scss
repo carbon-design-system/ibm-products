@@ -8,7 +8,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 
-$story-prefix: 'add-select-story';
 $next-story-prefix: 'add-select-next-stories';
 
 // Storybook-specific styles for AddSelect demos and examples
@@ -20,7 +19,7 @@ $next-story-prefix: 'add-select-next-stories';
 }
 
 // Story container styling
-.#{$story-prefix}-container {
+.#{$next-story-prefix}-container {
   display: flex;
   flex-direction: column;
   padding: $spacing-11 $spacing-10;
@@ -29,8 +28,30 @@ $next-story-prefix: 'add-select-next-stories';
   max-inline-size: 600px;
 }
 
+.#{$next-story-prefix}-container--single {
+  inline-size: 26rem;
+}
+
+// Column story container
+.#{$next-story-prefix}-column-container {
+  padding: $spacing-05;
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+  inline-size: 360px;
+}
+
+// Column story container
+.#{$next-story-prefix}-summary-container {
+  overflow: auto;
+  padding: 0 $spacing-05;
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+  block-size: 500px;
+  inline-size: 16rem;
+}
+
 // Variant container for showing single and multi side by side
-.#{$story-prefix}-variant-container {
+.#{$next-story-prefix}-variant-container {
   display: flex;
   flex-direction: column;
   gap: $spacing-03;

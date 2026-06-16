@@ -70,32 +70,32 @@ body {
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-.release-notes__filter-btn {
-  @include type.type-style('body-compact-01');
+  .release-notes__filter-btn {
+    @include type.type-style('body-compact-01');
 
-  padding: $spacing-03 $spacing-04;
-  border: 1px solid $border-subtle-01;
-  border-radius: 1rem;
-  background-color: $layer-01;
-  color: $text-secondary;
-  cursor: pointer;
-  transition: none;
+    padding: $spacing-03 $spacing-04;
+    border: 1px solid $border-subtle-01;
+    border-radius: 1rem;
+    background-color: $layer-01;
+    color: $text-secondary;
+    cursor: pointer;
+    transition: none;
 
-  &:hover {
-    background-color: $layer-hover-01;
+    &:hover {
+      background-color: $layer-hover-01;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      border-color: $border-subtle-selected-01;
+      background-color: $layer-selected-01;
+      color: $text-primary;
+    }
   }
-
-  &:focus {
-    outline: 2px solid $focus;
-    outline-offset: 2px;
-  }
-
-  &--active {
-    border-color: $border-subtle-selected-01;
-    background-color: $layer-selected-01;
-    color: $text-primary;
-  }
-}
 }
 
 .release-notes__filter-btn {

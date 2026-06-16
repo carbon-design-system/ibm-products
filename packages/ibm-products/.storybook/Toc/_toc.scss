@@ -8,6 +8,7 @@
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/colors' as *;
 @use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 
 $prefix: 'clabs--whats-new' !default;

@@ -8697,20 +8697,20 @@ __metadata:
   linkType: hard
 
 "@vitest/browser@npm:^3.2.0":
-  version: 3.2.4
-  resolution: "@vitest/browser@npm:3.2.4"
+  version: 3.2.6
+  resolution: "@vitest/browser@npm:3.2.6"
   dependencies:
     "@testing-library/dom": "npm:^10.4.0"
     "@testing-library/user-event": "npm:^14.6.1"
-    "@vitest/mocker": "npm:3.2.4"
-    "@vitest/utils": "npm:3.2.4"
+    "@vitest/mocker": "npm:3.2.6"
+    "@vitest/utils": "npm:3.2.6"
     magic-string: "npm:^0.30.17"
     sirv: "npm:^3.0.1"
     tinyrainbow: "npm:^2.0.0"
     ws: "npm:^8.18.2"
   peerDependencies:
     playwright: "*"
-    vitest: 3.2.4
+    vitest: 3.2.6
     webdriverio: ^7.0.0 || ^8.0.0 || ^9.0.0
   peerDependenciesMeta:
     playwright:
@@ -8719,7 +8719,7 @@ __metadata:
       optional: true
     webdriverio:
       optional: true
-  checksum: 10/f8ec0bff4006a81c3b843b5cf04f4ba1ffd8226eb5d4a98b134eddb83de8decced8788d2569aa632920ed6a346d3cfd856fcd53ee9083080a78c5baae3aae2de
+  checksum: 10/40fe7c5246239a0789505ec3e80d22549105110b7ffae6aac55a837b4d43c8a9c5c1d239e3dd0b6a5a11a5bf1f1954ad1ad4596de12323d5a203306ce4a4abba
   languageName: node
   linkType: hard
 
@@ -8773,25 +8773,6 @@ __metadata:
     chai: "npm:^5.2.0"
     tinyrainbow: "npm:^2.0.0"
   checksum: 10/4116f27c13352a84217529c55b0b0a808cf651c2f5818901895fde2655d3e62bbe1d580303cad3e30377a7cbf10d32997a136fed9a32f51cafa8f4dcfb4ca2c4
-  languageName: node
-  linkType: hard
-
-"@vitest/mocker@npm:3.2.4":
-  version: 3.2.4
-  resolution: "@vitest/mocker@npm:3.2.4"
-  dependencies:
-    "@vitest/spy": "npm:3.2.4"
-    estree-walker: "npm:^3.0.3"
-    magic-string: "npm:^0.30.17"
-  peerDependencies:
-    msw: ^2.4.9
-    vite: ^5.0.0 || ^6.0.0 || ^7.0.0-0
-  peerDependenciesMeta:
-    msw:
-      optional: true
-    vite:
-      optional: true
-  checksum: 10/5e92431b6ed9fc1679060e4caef3e4623f4750542a5d7cd944774f8217c4d231e273202e8aea00bab33260a5a9222ecb7005d80da0348c3c829bd37d123071a8
   languageName: node
   linkType: hard
 

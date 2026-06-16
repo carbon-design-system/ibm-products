@@ -91,6 +91,10 @@ export interface CoachmarkPropsNext {
    */
   selectorPrimaryFocus?: string;
   /**
+   * Prevents the Coachmark from closing when clicking outside of it.
+   */
+  preventCloseOnClickOutside?: boolean;
+  /**
    * Optional ref for an external trigger element, used when the trigger is not part of the coachmark.
    */
   triggerRef?: RefObject<HTMLElement>;
@@ -127,6 +131,7 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       caret,
       selectorPrimaryFocus,
       triggerRef: triggerRefProp,
+      preventCloseOnClickOutside,
       ...rest
     } = props;
     const internalTriggerRef = useRef<HTMLElement>(null);
@@ -134,6 +139,11 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
     const internalRef = useRef<HTMLDivElement | null>(null);
     const [contentRef, setContentRef] = useState<HTMLElement | null>(null);
     const [openState, setOpenState] = useState(false);
+
+    const shouldPreventClose =
+      preventCloseOnClickOutside !== undefined
+        ? preventCloseOnClickOutside
+        : floating === true;
 
     const setOpen = (value: boolean) => {
       if (!value) {
@@ -206,9 +216,8 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       }
     };
 
-    const handleRequestClose = (event?: Event) => {
-      // Don't close on outside clicks when floating is enabled
-      if (floating) {
+    const handleRequestClose = () => {
+      if (shouldPreventClose) {
         return;
       }
 

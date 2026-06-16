@@ -107,7 +107,7 @@ body {
   background-color: $layer-01;
   color: $text-secondary;
   cursor: pointer;
-  transition: c4p-settings.all $duration-fast-01 cubic-bezier(0, 0, 0.38, 0.9);
+  transition: all 70ms cubic-bezier(0, 0, 0.38, 0.9);
 
   &:hover {
     background-color: $layer-hover-01;

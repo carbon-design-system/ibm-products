@@ -330,6 +330,10 @@ Coachmark.propTypes = {
     y: PropTypes.number,
   }),
   /**
+   * Prevents the Coachmark from closing when clicking outside of it.
+   */
+  preventCloseOnClickOutside: PropTypes.bool,
+  /**
    * CSS selector for the element that should receive focus when the coachmark opens.
    */
   selectorPrimaryFocus: PropTypes.string,

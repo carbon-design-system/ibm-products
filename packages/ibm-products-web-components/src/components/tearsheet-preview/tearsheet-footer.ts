@@ -7,8 +7,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
+import { html, LitElement, PropertyValues } from 'lit';
+import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -18,6 +18,7 @@ import type { ActionButton, ButtonSize } from '../action-set/index.js';
 import { tearsheetSignal } from './tearsheet-signal';
 import { SignalWatcher } from '@lit-labs/signals';
 import '../action-set/index.js';
+import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--tearsheet__next`;
 
@@ -45,6 +46,32 @@ class CDSTearsheetFooter extends SignalWatcher(HostListenerMixin(LitElement)) {
    */
   @property({ attribute: 'button-size' })
   buttonSize?: ButtonSize;
+
+  @query('c4p-action-set')
+  private actionSetElement?: HTMLElement;
+
+  private _actionSetRegistered = false;
+
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    // Register with the current tearsheet's uniqueId
+    const uniqueId = tearsheetSignal.get().uniqueId;
+    if (uniqueId) {
+      registerFocusableContainers(this, uniqueId);
+    }
+  }
+
+  protected updated(_changedProperties: PropertyValues): void {
+    // Register action-set shadow root after it's rendered (only once)
+    const uniqueId = tearsheetSignal.get().uniqueId;
+    if (
+      this.actionSetElement?.shadowRoot &&
+      uniqueId &&
+      !this._actionSetRegistered
+    ) {
+      registerFocusableContainers(this.actionSetElement.shadowRoot, uniqueId);
+      this._actionSetRegistered = true;
+    }
+  }
 
   /**
    * Renders the action-set component with actions

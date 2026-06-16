@@ -25,7 +25,7 @@ test.describe('Coachmark @avt', () => {
     await expect(page).toHaveNoACViolations('Coachmark @avt-default-state');
   });
 
-  test('@avt-initially-focus-done-button', async ({ page }) => {
+  test('@avt-initially-focus-close-button', async ({ page }) => {
     await visitStory(page, {
       component: 'Coachmark',
       id: 'preview-onboarding-coachmark--tooltip',
@@ -33,8 +33,8 @@ test.describe('Coachmark @avt', () => {
         carbonTheme: 'white',
       },
     });
-    const primaryButton = page.getByRole('button', { name: 'Done' });
-    await expect(primaryButton).toBeFocused();
+    const closeButton = page.getByRole('button', { name: 'Close' });
+    await expect(closeButton).toBeFocused();
   });
 
   test('@avt-dragging-happening-on-header', async ({ page }) => {

@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/type';
+@use './create-tearsheet.scss';
 
 :root {
   @include theme.theme(themes.$white);

@@ -1,0 +1,237 @@
+//
+// Copyright IBM Corp. 2024, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+body {
+  @include type.reset();
+}
+
+.announcements__container {
+  padding: $spacing-09 $spacing-07;
+  background-color: $layer-01;
+  min-block-size: 100vh;
+}
+
+.announcements__header {
+  margin: 0 auto $spacing-09;
+  max-inline-size: 1200px;
+}
+
+.announcements__title {
+  @include type.type-style('heading-05');
+
+  color: $text-primary;
+
+  margin-block-end: $spacing-05;
+}
+
+.announcements__description {
+  @include type.type-style('body-02');
+
+  color: $text-secondary;
+  max-inline-size: 800px;
+}
+
+.announcements__list {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  gap: $spacing-05;
+  max-inline-size: 1200px;
+}
+
+.announcements__tile {
+  background-color: $layer-02;
+}
+
+.announcements__tile-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-05;
+  inline-size: 100%;
+}
+
+.announcements__tile-date {
+  @include type.type-style('label-01');
+
+  color: $text-secondary;
+  white-space: nowrap;
+}
+
+.announcements__tile-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-03;
+}
+
+.announcements__tile-summary-text {
+  @include type.type-style('body-01');
+}
+
+.announcements__content {
+  @include type.type-style('body-01');
+
+  color: $text-primary;
+
+  h1 {
+    @include type.type-style('heading-04');
+
+    color: $text-primary;
+
+    margin-block: $spacing-06 $spacing-05;
+  }
+
+  h2 {
+    @include type.type-style('heading-03');
+
+    color: $text-primary;
+
+    margin-block: $spacing-05 $spacing-04;
+  }
+
+  h3 {
+    @include type.type-style('heading-02');
+
+    color: $text-primary;
+
+    margin-block: $spacing-05 $spacing-03;
+  }
+
+  p {
+    color: $text-primary;
+    margin-block-end: $spacing-05;
+  }
+
+  ul,
+  ol {
+    margin-block-end: $spacing-05;
+    padding-inline-start: $spacing-06;
+  }
+
+  li {
+    margin-block-end: $spacing-03;
+  }
+
+  code {
+    padding: $spacing-01 $spacing-02;
+    border-radius: 2px;
+    background-color: $layer-accent-01;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 85%;
+  }
+
+  pre {
+    padding: $spacing-05;
+    border-radius: 4px;
+    background-color: $layer-accent-01;
+    margin-block-end: $spacing-05;
+    overflow-x: auto;
+
+    code {
+      padding: 0;
+      background-color: transparent;
+    }
+  }
+
+  a {
+    color: $link-primary;
+    text-decoration: none;
+
+    &:hover {
+      color: $link-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:visited {
+      color: $link-visited;
+    }
+  }
+
+  blockquote {
+    border-inline-start: 4px solid $border-subtle-01;
+    color: $text-secondary;
+    font-style: italic;
+    margin-block: $spacing-05;
+    padding-inline-start: $spacing-05;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  hr {
+    border: none;
+    border-block-start: 1px solid $border-subtle-01;
+    margin-block: $spacing-06;
+  }
+}
+
+.announcements__footer {
+  @include type.type-style('body-01');
+
+  margin: $spacing-09 auto 0;
+  border-block-start: 1px solid $border-subtle-01;
+  color: $text-secondary;
+
+  max-inline-size: 1200px;
+  padding-block-start: $spacing-07;
+  text-align: center;
+
+  a {
+    color: $link-primary;
+    text-decoration: none;
+
+    &:hover {
+      color: $link-primary-hover;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (width <= 1056px) {
+  .announcements__container {
+    padding: $spacing-07 $spacing-06;
+  }
+
+  .announcements__title {
+    @include type.type-style('heading-04');
+  }
+}
+
+@media (width <= 672px) {
+  .announcements__container {
+    padding: $spacing-06 $spacing-05;
+  }
+
+  .announcements__title {
+    @include type.type-style('heading-03');
+  }
+
+  .announcements__tile-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-03;
+  }
+
+  .announcements__tile-date {
+    align-self: flex-start;
+  }
+}
+
+// Made with Bob

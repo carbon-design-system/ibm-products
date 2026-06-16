@@ -35,6 +35,7 @@ const defaultProps = {
   size: SIDE_PANEL_SIZE.MEDIUM,
   title: 'Side panel title',
   condensedActions: false,
+  resizable: false,
 };
 
 const blockClass = `${prefix}--side-panel`;
@@ -372,6 +373,263 @@ describe('c4p-side-panel', () => {
     const closeButton = sidePanel.shadowRoot?.querySelector('cds-icon-button');
     // ensure the close button is not present
     expect(closeButton).to.be.null;
+  });
+
+  describe('Resizer functionality', () => {
+    it('should not render resizer handle when resizable is false', async () => {
+      const sidePanel = (await fixture(
+        template({ ...defaultProps, resizable: false })
+      )) as CDSSidePanel;
+
+      const resizerHandle = sidePanel.shadowRoot?.querySelector(
+        'clabs-resizer-handle'
+      );
+      expect(resizerHandle).to.be.null;
+    });
+
+    it('should render resizer handle when resizable is true and viewport is wide enough', async () => {
+      // Mock window.innerWidth to be greater than 768
+      const originalInnerWidth = window.innerWidth;
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      const sidePanelTemplate = html`
+        <c4p-side-panel
+          ?animate-title=${defaultProps.animateTitle}
+          ?include-overlay=${defaultProps.includeOverlay}
+          ?open=${defaultProps.open}
+          placement=${defaultProps.placement}
+          size=${defaultProps.size}
+          .title=${defaultProps.title}
+          ?resizable=${true}
+        >
+          ${getContent(1)}
+        </c4p-side-panel>
+      `;
+
+      const sidePanel = (await fixture(sidePanelTemplate)) as CDSSidePanel;
+      await sidePanel.updateComplete;
+
+      const resizerHandle = sidePanel.shadowRoot?.querySelector(
+        'clabs-resizer-handle'
+      );
+      expect(resizerHandle).to.exist;
+      expect(resizerHandle?.getAttribute('orientation')).to.equal('horizontal');
+
+      // Restore original innerWidth
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: originalInnerWidth,
+      });
+    });
+
+    it('should not render resizer handle in slide-in mode even when resizable is true', async () => {
+      const sidePanelTemplate = html`
+        <c4p-side-panel
+          ?animate-title=${defaultProps.animateTitle}
+          ?open=${defaultProps.open}
+          placement=${defaultProps.placement}
+          size=${defaultProps.size}
+          .title=${defaultProps.title}
+          ?resizable=${true}
+          ?slide-in=${true}
+        >
+          ${getContent(1)}
+        </c4p-side-panel>
+      `;
+
+      const sidePanel = (await fixture(sidePanelTemplate)) as CDSSidePanel;
+
+      await sidePanel.updateComplete;
+
+      const resizerHandle = sidePanel.shadowRoot?.querySelector(
+        'clabs-resizer-handle'
+      );
+      expect(resizerHandle).to.be.null;
+    });
+
+    it('should handle resize-start event', async () => {
+      const sidePanelTemplate = html`
+        <c4p-side-panel
+          ?open=${true}
+          placement=${SIDE_PANEL_PLACEMENT.RIGHT}
+          size=${SIDE_PANEL_SIZE.MEDIUM}
+          .title=${'Test Panel'}
+          ?resizable=${true}
+        >
+          ${getContent(1)}
+        </c4p-side-panel>
+      `;
+
+      const sidePanel = (await fixture(sidePanelTemplate)) as CDSSidePanel;
+      await sidePanel.updateComplete;
+
+      // Dispatch resize-start event
+      const resizeStartEvent = new CustomEvent('resize-start', {
+        bubbles: true,
+        composed: true,
+        detail: {},
+      });
+
+      sidePanel.dispatchEvent(resizeStartEvent);
+      await sidePanel.updateComplete;
+
+      // Verify the panel width is captured
+      expect((sidePanel as any)._sidePanelWidth).to.be.greaterThan(0);
+    });
+
+    it('should handle resize-drag event and update panel width', async () => {
+      const sidePanelTemplate = html`
+        <c4p-side-panel
+          ?open=${true}
+          placement=${SIDE_PANEL_PLACEMENT.RIGHT}
+          size=${SIDE_PANEL_SIZE.MEDIUM}
+          .title=${'Test Panel'}
+          ?resizable=${true}
+        >
+          ${getContent(1)}
+        </c4p-side-panel>
+      `;
+
+      const sidePanel = (await fixture(sidePanelTemplate)) as CDSSidePanel;
+      await sidePanel.updateComplete;
+
+      // Start resize
+      const resizeStartEvent = new CustomEvent('resize-start', {
+        bubbles: true,
+        composed: true,
+      });
+      sidePanel.dispatchEvent(resizeStartEvent);
+      await sidePanel.updateComplete;
+
+      // Drag resize
+      const resizeDragEvent = new CustomEvent('resize-drag', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          delta: 50,
+          isKeyboard: false,
+        },
+      });
+
+      sidePanel.dispatchEvent(resizeDragEvent);
+      await sidePanel.updateComplete;
+
+      // Check that CSS custom property is set
+      const customProperty = sidePanel.style.getPropertyValue(
+        '--c4p-side-panel-modified-size'
+      );
+      expect(customProperty).to.not.be.empty;
+    });
+
+    it('should handle resize-end event and update ARIA attributes', async () => {
+      const sidePanelTemplate = html`
+        <c4p-side-panel
+          ?open=${true}
+          placement=${SIDE_PANEL_PLACEMENT.RIGHT}
+          size=${SIDE_PANEL_SIZE.MEDIUM}
+          .title=${'Test Panel'}
+          ?resizable=${true}
+        >
+          ${getContent(1)}
+        </c4p-side-panel>
+      `;
+
+      const sidePanel = (await fixture(sidePanelTemplate)) as CDSSidePanel;
+      await sidePanel.updateComplete;
+
+      // Dispatch resize-end event
+      const resizeEndEvent = new CustomEvent('resize-end', {
+        bubbles: true,
+        composed: true,
+      });
+
+      sidePanel.dispatchEvent(resizeEndEvent);
+      await sidePanel.updateComplete;
+
+      // Verify accumulated delta is reset
+      expect((sidePanel as any)._accumulatedDelta).to.equal(0);
+    });
+
+    it('should handle resize-reset event and remove custom size', async () => {
+      const sidePanelTemplate = html`
+        <c4p-side-panel
+          ?open=${true}
+          placement=${SIDE_PANEL_PLACEMENT.RIGHT}
+          size=${SIDE_PANEL_SIZE.MEDIUM}
+          .title=${'Test Panel'}
+          ?resizable=${true}
+        >
+          ${getContent(1)}
+        </c4p-side-panel>
+      `;
+
+      const sidePanel = (await fixture(sidePanelTemplate)) as CDSSidePanel;
+      await sidePanel.updateComplete;
+
+      // Set a custom size first
+      sidePanel.style.setProperty('--c4p-side-panel-modified-size', '500px');
+
+      // Dispatch resize-reset event
+      const resizeResetEvent = new CustomEvent('resize-reset', {
+        bubbles: true,
+        composed: true,
+      });
+
+      sidePanel.dispatchEvent(resizeResetEvent);
+      await sidePanel.updateComplete;
+
+      // Verify custom property is removed
+      const customProperty = sidePanel.style.getPropertyValue(
+        '--c4p-side-panel-modified-size'
+      );
+      expect(customProperty).to.be.empty;
+    });
+
+    it('should have correct ARIA attributes on resizer handle', async () => {
+      // Mock window.innerWidth to be greater than 768
+      const originalInnerWidth = window.innerWidth;
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 1024,
+      });
+
+      const sidePanelTemplate = html`
+        <c4p-side-panel
+          ?open=${true}
+          placement=${SIDE_PANEL_PLACEMENT.RIGHT}
+          size=${SIDE_PANEL_SIZE.MEDIUM}
+          .title=${'Test Panel'}
+          ?resizable=${true}
+        >
+          ${getContent(1)}
+        </c4p-side-panel>
+      `;
+
+      const sidePanel = (await fixture(sidePanelTemplate)) as CDSSidePanel;
+      await sidePanel.updateComplete;
+
+      const resizerHandle = sidePanel.shadowRoot?.querySelector(
+        'clabs-resizer-handle'
+      );
+
+      expect(resizerHandle?.hasAttribute('aria-valuemin')).to.be.true;
+      expect(resizerHandle?.hasAttribute('aria-valuemax')).to.be.true;
+      expect(resizerHandle?.hasAttribute('aria-valuenow')).to.be.true;
+      expect(resizerHandle?.hasAttribute('aria-label')).to.be.true;
+
+      // Restore original innerWidth
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: originalInnerWidth,
+      });
+    });
   });
 
   afterEach(() => {

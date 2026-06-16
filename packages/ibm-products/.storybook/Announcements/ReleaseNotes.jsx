@@ -6,13 +6,7 @@
  */
 
 import React, { useMemo } from 'react';
-import {
-  Toc,
-  TocList,
-  TocItem,
-  TocSections,
-  TocSection,
-} from '@carbon-labs/react-whats-new';
+import { Toc, TocList, TocItem, TocSections, TocSection } from '../Toc';
 import { Tag, CodeSnippet } from '@carbon/react';
 //import '../Toc/_toc.scss';
 

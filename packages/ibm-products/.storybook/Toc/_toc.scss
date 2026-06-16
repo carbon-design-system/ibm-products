@@ -1,0 +1,49 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+
+$prefix: 'clabs--whats-new' !default;
+
+.#{$prefix}__toc-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  min-inline-size: 10rem;
+}
+
+.#{$prefix}__toc-item a {
+  display: inline-block;
+  border-inline-start: 0.25rem solid var(--cds-border-subtle-01, #c6c6c6);
+  color: var(--cds-text-secondary, #525252);
+  font-size: var(--cds-body-02-font-size, 1rem);
+  font-weight: var(--cds-body-02-font-weight, 400);
+  inline-size: 100%;
+  letter-spacing: var(--cds-body-02-letter-spacing, 0);
+  line-height: var(--cds-body-02-line-height, 1.5);
+  padding-block: $spacing-04;
+  padding-inline-start: $spacing-04;
+  text-decoration: none;
+  transition: border $duration-slow-01 ease-out;
+}
+
+.#{$prefix}__toc-item-active a {
+  border-inline-start-color: var(--cds-border-interactive, #0f62fe);
+  color: var(--cds-text-primary, #161616);
+}
+
+.#{$prefix}__toc-sections {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
+}

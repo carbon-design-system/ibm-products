@@ -7,14 +7,14 @@
 
 import React from 'react';
 import styles from './_release-notes-styles.scss?inline';
-// import tocStyles from '../Toc/_toc.scss?inline';
+import tocStyles from '../Toc/_toc.scss?inline';
 import ReleaseNotes from './ReleaseNotes';
 import Announcements from './Announcements';
 
 export default {
   title: 'Overview/Announcements',
   parameters: {
-    // styles: `${styles}\n${tocStyles}`,
+    styles: `${styles}\n${tocStyles}`,
     layout: 'fullscreen',
     options: {
       showPanel: false,

@@ -11,7 +11,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon-labs/react-whats-new/scss/styles/_toc.scss' as *;
 
 body {
   @include type.reset();

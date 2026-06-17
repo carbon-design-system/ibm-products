@@ -17,6 +17,7 @@ import { MultiAddSelectWithModifiers } from './preview-components/MultiAddSelect
 import { NonHierarchicalWithPeekInsideItemPreview } from './preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
 import { MultiAddSelectWithHierarchyNoSelectAllPreview } from './preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
 import { MultiAddSelectWithGlobalActionsPreview } from './preview-components/MultiAddSelectWithGlobalActions/MultiAddSelectWithGlobalActions';
+import { MultiAddSelectWithColumnActionsPreview } from './preview-components/MultiAddSelectWithColumnActions/MultiAddSelectWithColumnActions';
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
           <NonHierarchicalWithPeekInsideItemPreview />
           <MultiAddSelectWithHierarchyNoSelectAllPreview />
           <MultiAddSelectWithGlobalActionsPreview />
+          <MultiAddSelectWithColumnActionsPreview />
         </div>
       </section>
     </div>

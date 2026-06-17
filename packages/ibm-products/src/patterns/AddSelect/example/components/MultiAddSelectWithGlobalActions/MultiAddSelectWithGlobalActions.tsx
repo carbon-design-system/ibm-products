@@ -15,7 +15,13 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ToastNotification } from '@carbon/react';
+import {
+  ToastNotification,
+  Dropdown,
+  OverflowMenu,
+  MenuItem,
+} from '@carbon/react';
+import { ArrowsVertical } from '@carbon/react/icons';
 import {
   preview__AddSelect as AddSelect,
   preview__Tearsheet as Tearsheet,
@@ -286,6 +292,11 @@ export const MultiAddSelectWithGlobalActions = forwardRef<
       show: boolean;
     }>({ item: null, show: false });
 
+    // Filter and sort state
+    const [filterType, setFilterType] = useState<string>('all');
+    const [sortAttribute, setSortAttribute] = useState<string>('');
+    const [sortDirection, setSortDirection] = useState<'asc' | 'desc' | ''>('');
+
     // Navigation state for breadcrumbs and column management
     const [navigationLevels, setNavigationLevels] = useState<NavigationLevel[]>(
       []
@@ -306,6 +317,9 @@ export const MultiAddSelectWithGlobalActions = forwardRef<
         // Initialize with pre-selected items
         setSelectedIds(new Set(preSelectedItemIds));
         setSearchTerm('');
+        setFilterType('all');
+        setSortAttribute('');
+        setSortDirection('');
         setInfoPanel({ item: null, show: false });
         setNavigationLevels([]);
         setBreadcrumbPath([{ id: 'root', title: rootBreadcrumbTitle }]);
@@ -336,6 +350,80 @@ export const MultiAddSelectWithGlobalActions = forwardRef<
       setSelectedIds(newSelectedIds);
     };
 
+    // Recursive function to filter items and their children
+    const filterItemsRecursively = (
+      items: AddSelectItem[],
+      type: string
+    ): AddSelectItem[] => {
+      if (type === 'all') return items;
+
+      return items.reduce((acc: AddSelectItem[], item: any) => {
+        // Check if item itself matches the filter
+        const itemMatches = item.fileType === type;
+
+        // Check if item has children that might match
+        const hasChildren =
+          item.children?.entries && item.children.entries.length > 0;
+
+        if (itemMatches) {
+          // Item matches, include it
+          acc.push(item);
+        } else if (hasChildren) {
+          // Item doesn't match but has children, check children recursively
+          const filteredChildren = filterItemsRecursively(
+            item.children.entries,
+            type
+          );
+
+          if (filteredChildren.length > 0) {
+            // Some children match, include parent with filtered children
+            acc.push({
+              ...item,
+              children: {
+                ...item.children,
+                entries: filteredChildren,
+              },
+            });
+          }
+        }
+
+        return acc;
+      }, []);
+    };
+
+    // Apply filter and sort to items
+    const filteredAndSortedItems = useMemo(() => {
+      // Apply filter recursively
+      let result = filterItemsRecursively(currentItems, filterType);
+
+      // Apply sort if attribute and direction are set
+      if (sortAttribute && sortDirection) {
+        result = [...result].sort((a: any, b: any) => {
+          const aVal = a[sortAttribute];
+          const bVal = b[sortAttribute];
+
+          if (aVal === undefined || bVal === undefined) return 0;
+
+          // Handle numeric sorting
+          if (typeof aVal === 'number' && typeof bVal === 'number') {
+            return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
+          }
+
+          // Handle string sorting
+          const aStr = String(aVal).toLowerCase();
+          const bStr = String(bVal).toLowerCase();
+
+          if (sortDirection === 'asc') {
+            return aStr.localeCompare(bStr);
+          } else {
+            return bStr.localeCompare(aStr);
+          }
+        });
+      }
+
+      return result;
+    }, [currentItems, filterType, sortAttribute, sortDirection]);
+
     // Handle global search
     const handleGlobalSearch = (term: string) => {
       setSearchTerm(term);
@@ -350,10 +438,11 @@ export const MultiAddSelectWithGlobalActions = forwardRef<
         // Clear navigation when searching
         setNavigationLevels([]);
       } else {
-        // Reset to root items
+        // Reset to root items when search is cleared
         setCurrentItems(items);
         setNavigationLevels([]);
         setBreadcrumbPath([{ id: 'root', title: rootBreadcrumbTitle }]);
+        // Keep filter and sort active even when search is cleared
       }
     };
 
@@ -539,6 +628,80 @@ export const MultiAddSelectWithGlobalActions = forwardRef<
         .filter((item): item is AddSelectItem => item !== undefined);
     }, [selectedIds, dataManager]);
 
+    // Filter options for the dropdown
+    const filterOptions = [
+      { id: 'all', text: 'All types' },
+      { id: 'pdf', text: 'PDF' },
+      { id: 'js', text: 'JavaScript' },
+      { id: 'xml', text: 'XML' },
+      { id: 'html', text: 'HTML' },
+    ];
+
+    // Sort options
+    const sortOptions = [
+      {
+        id: 'title-asc',
+        label: 'Title',
+        attribute: 'title',
+        direction: 'asc' as const,
+      },
+      {
+        id: 'title-desc',
+        label: 'Title',
+        attribute: 'title',
+        direction: 'desc' as const,
+      },
+      {
+        id: 'size-asc',
+        label: 'Size',
+        attribute: 'size',
+        direction: 'asc' as const,
+      },
+      {
+        id: 'size-desc',
+        label: 'Size',
+        attribute: 'size',
+        direction: 'desc' as const,
+      },
+    ];
+
+    // Filter dropdown component for actionsSlot - always visible
+    const filterDropdown = (
+      <Dropdown
+        id="add-select-filter"
+        titleText=""
+        label="Filter by type"
+        items={filterOptions}
+        itemToString={(item) => (item ? item.text : '')}
+        selectedItem={filterOptions.find((opt) => opt.id === filterType)}
+        onChange={({ selectedItem }) =>
+          setFilterType(selectedItem?.id || 'all')
+        }
+        size="lg"
+      />
+    );
+
+    // Sort menu component for subHeaderActions
+    const sortMenu = searchTerm ? (
+      <OverflowMenu
+        renderIcon={(props) => <ArrowsVertical size={16} {...props} />}
+        iconDescription="Sort"
+        flipped
+        aria-label="Sort options"
+      >
+        {sortOptions.map((opt) => (
+          <MenuItem
+            key={opt.id}
+            label={`${opt.label} ${opt.direction === 'asc' ? '↑' : '↓'}`}
+            onClick={() => {
+              setSortAttribute(opt.attribute);
+              setSortDirection(opt.direction);
+            }}
+          />
+        ))}
+      </OverflowMenu>
+    ) : null;
+
     return (
       <>
         <AddSelect
@@ -567,17 +730,19 @@ export const MultiAddSelectWithGlobalActions = forwardRef<
                   globalSearchLabel={globalSearchLabel}
                   globalSearchPlaceholder={globalSearchPlaceholder}
                   searchResultsTitle={searchResultsTitle}
-                  itemCount={currentItems.length}
+                  itemCount={filteredAndSortedItems.length}
                   onSearch={handleGlobalSearch}
                   path={searchTerm ? [] : breadcrumbPath}
                   onBreadcrumbClick={handleBreadcrumbClick}
+                  actionsSlot={filterDropdown}
+                  subHeaderActions={sortMenu}
                 >
                   <AddSelect.Content layout="horizontal">
-                    {currentItems.length > 0 ? (
+                    {filteredAndSortedItems.length > 0 ? (
                       <>
                         {/* First column - root level */}
                         <ControlledColumn
-                          items={currentItems}
+                          items={filteredAndSortedItems}
                           onShowInfo={handleShowInfo}
                           columnSearchPlaceholder={columnSearchPlaceholder}
                           columnTitle={columnTitle || itemsLabel}

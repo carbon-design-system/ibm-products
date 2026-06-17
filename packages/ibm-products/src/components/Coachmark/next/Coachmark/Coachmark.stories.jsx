@@ -14,10 +14,18 @@ import { Button, Theme } from '@carbon/react';
 import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 import { pkg } from '../../../../settings';
+import { CoachmarkTagline } from './CoachmarkTagline';
 
 export default {
   title: 'Preview/Onboarding/Coachmark',
   component: Coachmark,
+  subcomponents: {
+    CoachmarkContent: Coachmark.Content,
+    CoachmarkContentHeader: Coachmark.ContentHeader,
+    CoachmarkContentBody: Coachmark.ContentBody,
+    CoachmarkBeacon,
+    CoachmarkTagline,
+  },
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
     children: {

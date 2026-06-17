@@ -132,9 +132,9 @@ CoachmarkTagline.propTypes = {
    * button props
    */
   buttonProps: PropTypes.shape({
-    /**@ts-ignore*/
+    // @ts-ignore - Spreading Button.propTypes is not type-safe but necessary for PropTypes validation
     ...Button.propTypes,
-    /**@ts-ignore*/
+    // @ts-ignore - Adding id to the shape after spreading Button.propTypes
     id: PropTypes.string,
     onClick: PropTypes.func,
     onDoubleClick: PropTypes.func,

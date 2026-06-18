@@ -14,10 +14,18 @@ import { Button, Theme } from '@carbon/react';
 import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 import { pkg } from '../../../../settings';
+import { CoachmarkTagline } from './CoachmarkTagline';
 
 export default {
   title: 'Preview/Onboarding/Coachmark',
   component: Coachmark,
+  subcomponents: {
+    CoachmarkContent: Coachmark.Content,
+    CoachmarkContentHeader: Coachmark.ContentHeader,
+    CoachmarkContentBody: Coachmark.ContentBody,
+    CoachmarkBeacon,
+    CoachmarkTagline,
+  },
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
     children: {
@@ -139,8 +147,8 @@ const TooltipTemplate = ({ ...args }, context) => {
             }}
           ></CoachmarkBeacon>
           <Coachmark.Content aria-label="Coachmark content">
-            <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-            <Coachmark.Content.Body>
+            <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
+            <Coachmark.ContentBody>
               <h2>Hello World</h2>
               <p>this is a description test</p>
               <Button
@@ -150,7 +158,7 @@ const TooltipTemplate = ({ ...args }, context) => {
               >
                 Done
               </Button>
-            </Coachmark.Content.Body>
+            </Coachmark.ContentBody>
           </Coachmark.Content>
         </Coachmark>
       </main>
@@ -198,73 +206,18 @@ const FloatingTemplate = ({ ...args }, context) => {
             Show information
           </Button>
           <Coachmark.Content aria-label="Coachmark content">
-            <Coachmark.Content.Header
+            <Coachmark.ContentHeader
               closeIconDescription="Close"
               dragIconDescription="Drag"
-            ></Coachmark.Content.Header>
-            <Coachmark.Content.Body>
+              dragAriaLabel="Coachmark is being dragged"
+            ></Coachmark.ContentHeader>
+            <Coachmark.ContentBody>
               <h2>Hello World</h2>
               <p>this is a description test</p>
               <Button size="sm" onClick={action('Done button clicked')}>
                 Done
               </Button>
-            </Coachmark.Content.Body>
-          </Coachmark.Content>
-        </Coachmark>
-      </main>
-    </Theme>
-  );
-};
-
-const TriggerRefTemplate = ({ ...args }, context) => {
-  const sbDocs = context.viewMode !== 'docs';
-  const carbonTheme = sbDocs ? useCarbonTheme() : 'white';
-  const [isOpen, setIsOpen] = useState(true);
-  const triggerButtonRef = useRef(null);
-
-  const handleClose = () => {
-    setIsOpen(false);
-    setTimeout(() => {
-      triggerButtonRef.current?.focus();
-    }, 0);
-  };
-
-  const handleButtonClick = () => {
-    setIsOpen((open) => !open);
-  };
-
-  return (
-    <Theme theme={carbonTheme}>
-      <main style={{ marginLeft: '100px' }}>
-        <Button
-          id="CoachmarkTriggerRefBtn"
-          kind="tertiary"
-          size="md"
-          renderIcon={Crossroads}
-          onClick={handleButtonClick}
-          ref={triggerButtonRef}
-        >
-          Show information
-        </Button>
-        <Coachmark
-          open={isOpen}
-          onClose={handleClose}
-          triggerRef={triggerButtonRef}
-          {...args}
-        >
-          <Coachmark.Content aria-label="Coachmark content">
-            <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-            <Coachmark.Content.Body>
-              <h2>Hello World</h2>
-              <p>Coachmark using the triggerRef prop.</p>
-              <Button
-                size="sm"
-                className="coachmark-trigger-ref-done-button"
-                onClick={handleClose}
-              >
-                Done
-              </Button>
-            </Coachmark.Content.Body>
+            </Coachmark.ContentBody>
           </Coachmark.Content>
         </Coachmark>
       </main>
@@ -283,10 +236,5 @@ Tooltip.args = {
 
 export const Floating = FloatingTemplate.bind({});
 Floating.args = {
-  align: 'bottom',
-};
-
-export const TriggerRef = TriggerRefTemplate.bind({});
-TriggerRef.args = {
   align: 'bottom',
 };

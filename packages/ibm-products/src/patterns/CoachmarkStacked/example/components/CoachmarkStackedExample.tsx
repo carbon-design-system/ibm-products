@@ -462,11 +462,11 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
         ></CoachmarkTagline>
         <Coachmark.Content
           className={isOpen ? `--is-visible` : ''}
-          highContrast={true}
           ref={stackHomeContentRef}
+          aria-label="Coachmark content"
         >
-          <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-          <Coachmark.Content.Body className={`${blockClass}__body`}>
+          <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
+          <Coachmark.ContentBody className={`${blockClass}__body`}>
             <div className={`${blockClass}-element`}>
               <Idea size={20} className={`${blockClass}__icon-idea`} />
             </div>
@@ -506,7 +506,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
               Close
             </Button>
             <br></br>
-          </Coachmark.Content.Body>
+          </Coachmark.ContentBody>
         </Coachmark.Content>
       </Coachmark>
       {items.map((item) => {
@@ -538,8 +538,8 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
               }}
               className={cx(`${elementBlockClass}`)}
             >
-              <Coachmark.Content.Header closeIconDescription="Close" />
-              <Coachmark.Content.Body>
+              <Coachmark.ContentHeader closeIconDescription="Close" />
+              <Coachmark.ContentBody>
                 {nestedItems
                   .filter((nested) => nested.id === item.id)
                   .map((nested) => {
@@ -648,7 +648,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                     }
                     return null;
                   })}
-              </Coachmark.Content.Body>
+              </Coachmark.ContentBody>
             </Coachmark.Content>
           </Coachmark>
         );

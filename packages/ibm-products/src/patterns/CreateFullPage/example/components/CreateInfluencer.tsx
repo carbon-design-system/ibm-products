@@ -17,6 +17,7 @@ const componentName = 'CreateInfluencer';
 
 interface Step {
   introStep?: boolean;
+  invalid?: boolean;
   secondaryLabel?: string;
   shouldIncludeStep?: boolean;
   title?: ReactNode;
@@ -81,7 +82,7 @@ export const CreateInfluencer = ({
                   label={step?.title as string}
                   key={stepIndex}
                   secondaryLabel={step.secondaryLabel || undefined}
-                  invalid={(step as any).invalid}
+                  invalid={step.invalid}
                 />
               );
             })}

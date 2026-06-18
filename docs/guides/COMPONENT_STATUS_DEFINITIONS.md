@@ -336,7 +336,8 @@ import {
 
 ### Q: What's the difference between Preview Candidate and Preview?
 
-**A:** 
+**A:**
+
 - **Preview Candidate (Discovery):** Partially complete, gathering validation
   and feedback. API may still change significantly.
 - **Preview (Delivery):** Mostly complete, passed composability review,

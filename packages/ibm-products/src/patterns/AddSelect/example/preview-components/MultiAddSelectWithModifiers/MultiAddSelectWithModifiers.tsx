@@ -11,8 +11,7 @@ import {
   MultiAddSelectWithModifiers as MultiAddSelectWithModifiersComponent,
   ModifierConfig,
 } from '../../components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
-import { AddSelectItem } from '@carbon/ibm-products-utilities';
-import { UserAvatar } from '../../../../../components/UserAvatar';
+import { AddSelectItem, UserAvatar } from '@carbon/ibm-products';
 import './MultiAddSelectWithModifiers.scss';
 
 // Sample data for the with modifiers variant

@@ -169,9 +169,9 @@ export const CoachmarkOverlayElementsExample = (args) => {
             ref: beaconButtonRef,
           }}
         ></CoachmarkBeacon>
-        <Coachmark.Content>
-          <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-          <Coachmark.Content.Body>
+        <Coachmark.Content aria-label="Coachmark content">
+          <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
+          <Coachmark.ContentBody>
             <div>
               <img
                 src={sampleImage}
@@ -237,7 +237,7 @@ export const CoachmarkOverlayElementsExample = (args) => {
                 </Button>
               </div>
             </div>
-          </Coachmark.Content.Body>
+          </Coachmark.ContentBody>
         </Coachmark.Content>
       </Coachmark>
     </Theme>

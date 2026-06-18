@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,7 +25,7 @@ test.describe('Coachmark @avt', () => {
     await expect(page).toHaveNoACViolations('Coachmark @avt-default-state');
   });
 
-  test('@avt-initially-focus-done-button', async ({ page }) => {
+  test('@avt-initially-focus-close-button', async ({ page }) => {
     await visitStory(page, {
       component: 'Coachmark',
       id: 'preview-onboarding-coachmark--tooltip',
@@ -33,8 +33,8 @@ test.describe('Coachmark @avt', () => {
         carbonTheme: 'white',
       },
     });
-    const primaryButton = page.getByRole('button', { name: 'Done' });
-    await expect(primaryButton).toBeFocused();
+    const closeButton = page.getByRole('button', { name: 'Close' });
+    await expect(closeButton).toBeFocused();
   });
 
   test('@avt-dragging-happening-on-header', async ({ page }) => {
@@ -94,5 +94,31 @@ test.describe('Coachmark @avt', () => {
     const newPosition = await getPos();
     expect(position.x).toEqual(newPosition.x);
     expect(position.y).toEqual(newPosition.y);
+  });
+
+  test('@avt-click-to-open', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Coachmark',
+      id: 'preview-onboarding-coachmark--tooltip',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+
+    // Close the initially open coachmark
+    const closeButton = page.getByRole('button', { name: 'Close' });
+    await closeButton.click();
+
+    const container = page.locator(`.${blockClass}--coachmark-content`);
+    await expect(container).not.toBeVisible();
+
+    // Click the trigger button to open the coachmark
+    const triggerButton = page.getByRole('button', {
+      name: 'Show information',
+    });
+    await triggerButton.click();
+
+    // Verify the coachmark is now visible
+    await expect(container).toBeVisible();
   });
 });

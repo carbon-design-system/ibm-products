@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,13 +30,13 @@ const renderCoachmarkWithBeacon = ({ ...rest } = {}) =>
         data-testid={childDataTestId}
         {...rest}
       ></CoachmarkBeacon>
-      <Coachmark.Content>
-        <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-        <Coachmark.Content.Body>
+      <Coachmark.Content aria-label="Coachmark content">
+        <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
+        <Coachmark.ContentBody>
           <h2>Hello World</h2>
           <p>this is a description test</p>
           <Button size="sm">Done</Button>
-        </Coachmark.Content.Body>
+        </Coachmark.ContentBody>
       </Coachmark.Content>
     </Coachmark>
   );
@@ -82,6 +82,17 @@ describe(componentName, () => {
 
     expect(screen.getByTestId(childDataTestId)).toHaveDevtoolsAttribute(
       componentName
+    );
+  });
+
+  it('applies kind class to the containing node', () => {
+    renderCoachmarkWithBeacon({
+      label: 'Show information',
+      kind: 'default',
+    });
+
+    expect(screen.getByTestId(childDataTestId)).toHaveClass(
+      `${blockClass}-default`
     );
   });
 });

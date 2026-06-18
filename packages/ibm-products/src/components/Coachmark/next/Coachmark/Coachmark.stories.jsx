@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect, useState, useRef } from 'react';
+import { action } from 'storybook/actions';
 import { Coachmark } from '.';
 import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
@@ -13,10 +14,18 @@ import { Button, Theme } from '@carbon/react';
 import { CoachmarkBeacon } from './CoachmarkBeacon';
 import { Crossroads } from '@carbon/react/icons';
 import { pkg } from '../../../../settings';
+import { CoachmarkTagline } from './CoachmarkTagline';
 
 export default {
   title: 'Preview/Onboarding/Coachmark',
   component: Coachmark,
+  subcomponents: {
+    CoachmarkContent: Coachmark.Content,
+    CoachmarkContentHeader: Coachmark.ContentHeader,
+    CoachmarkContentBody: Coachmark.ContentBody,
+    CoachmarkBeacon,
+    CoachmarkTagline,
+  },
   tags: ['autodocs', 'Onboarding'],
   argTypes: {
     children: {
@@ -127,7 +136,6 @@ const TooltipTemplate = ({ ...args }, context) => {
           position={{ x: 151, y: 155 }}
           open={isOpen}
           onClose={handleClose}
-          selectorPrimaryFocus=".coachmark-done-button"
           {...args}
         >
           <CoachmarkBeacon
@@ -138,19 +146,19 @@ const TooltipTemplate = ({ ...args }, context) => {
               ref: beaconButtonRef,
             }}
           ></CoachmarkBeacon>
-          <Coachmark.Content>
-            <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-            <Coachmark.Content.Body>
+          <Coachmark.Content aria-label="Coachmark content">
+            <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
+            <Coachmark.ContentBody>
               <h2>Hello World</h2>
               <p>this is a description test</p>
               <Button
                 size="sm"
                 className="coachmark-done-button"
-                onClick={handleClose}
+                onClick={action('Done button clicked')}
               >
                 Done
               </Button>
-            </Coachmark.Content.Body>
+            </Coachmark.ContentBody>
           </Coachmark.Content>
         </Coachmark>
       </main>
@@ -197,75 +205,19 @@ const FloatingTemplate = ({ ...args }, context) => {
           >
             Show information
           </Button>
-          <Coachmark.Content>
-            <Coachmark.Content.Header
+          <Coachmark.Content aria-label="Coachmark content">
+            <Coachmark.ContentHeader
               closeIconDescription="Close"
               dragIconDescription="Drag"
-            ></Coachmark.Content.Header>
-            <Coachmark.Content.Body>
+              dragAriaLabel="Coachmark is being dragged"
+            ></Coachmark.ContentHeader>
+            <Coachmark.ContentBody>
               <h2>Hello World</h2>
               <p>this is a description test</p>
-              <Button size="sm" onClick={handleClose}>
+              <Button size="sm" onClick={action('Done button clicked')}>
                 Done
               </Button>
-            </Coachmark.Content.Body>
-          </Coachmark.Content>
-        </Coachmark>
-      </main>
-    </Theme>
-  );
-};
-
-const TriggerRefTemplate = ({ ...args }, context) => {
-  const sbDocs = context.viewMode !== 'docs';
-  const carbonTheme = sbDocs ? useCarbonTheme() : 'white';
-  const [isOpen, setIsOpen] = useState(true);
-  const triggerButtonRef = useRef(null);
-
-  const handleClose = () => {
-    setIsOpen(false);
-    setTimeout(() => {
-      triggerButtonRef.current?.focus();
-    }, 0);
-  };
-
-  const handleButtonClick = () => {
-    setIsOpen((open) => !open);
-  };
-
-  return (
-    <Theme theme={carbonTheme}>
-      <main style={{ marginLeft: '100px' }}>
-        <Button
-          id="CoachmarkTriggerRefBtn"
-          kind="tertiary"
-          size="md"
-          renderIcon={Crossroads}
-          onClick={handleButtonClick}
-          ref={triggerButtonRef}
-        >
-          Show information
-        </Button>
-        <Coachmark
-          open={isOpen}
-          onClose={handleClose}
-          triggerRef={triggerButtonRef}
-          selectorPrimaryFocus=".coachmark-trigger-ref-done-button"
-          {...args}
-        >
-          <Coachmark.Content>
-            <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-            <Coachmark.Content.Body>
-              <h2>Hello World</h2>
-              <p>Coachmark using the triggerRef prop.</p>
-              <Button
-                size="sm"
-                className="coachmark-trigger-ref-done-button"
-                onClick={handleClose}
-              >
-                Done
-              </Button>
-            </Coachmark.Content.Body>
+            </Coachmark.ContentBody>
           </Coachmark.Content>
         </Coachmark>
       </main>
@@ -284,10 +236,5 @@ Tooltip.args = {
 
 export const Floating = FloatingTemplate.bind({});
 Floating.args = {
-  align: 'bottom',
-};
-
-export const TriggerRef = TriggerRefTemplate.bind({});
-TriggerRef.args = {
   align: 'bottom',
 };

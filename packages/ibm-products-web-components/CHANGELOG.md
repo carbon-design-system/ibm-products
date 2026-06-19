@@ -1,4 +1,60 @@
-## `@carbon/ibm-products-web-components@0.38.0-rc.0`
+## `@carbon/ibm-products-web-components@0.41.1`
+### Bug fixes :bug:
+- fix(release): remove private utilities package from dependencies (#9532)
+## `@carbon/ibm-products-web-components@0.41.1-rc.0`
+### Bug fixes :bug:
+- fix(release): remove private utilities package from dependencies (#9532)
+## `@carbon/ibm-products-web-components@0.41.0`
+### Features :rocket:
+- feat(EditInPlace): Web component implementation (#9384)
+- feat(AddSelect): composable add select with patterns (#9368)
+- feat(createTearsheetNarrow): implemented as pattern (#9404)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+
+## `@carbon/ibm-products-web-components@0.41.0-rc.0`
+### Features :rocket:
+- feat(EditInPlace): Web component implementation (#9384)
+- feat(AddSelect): composable add select with patterns (#9368)
+- feat(createTearsheetNarrow): implemented as pattern (#9404)
+
+### Housekeeping :house:
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+
+## `@carbon/ibm-products-web-components@0.40.0`
+### Features :rocket:
+- feat(createfullpage): implemented as patterns in wc (#9275)
+
+### Bug fixes :bug:
+- fix(preview_PageHeader): fix header padding (#9440)
+- fix(options-tile): WC parity work  (#9387)
+- fix: increase code coverage > 80 (#9376)
+- fix(apikeymodal): parity  (#9313)
+
+### Housekeeping :house:
+- chore(deps): update dependency @mordech/vite-lit-loader to ^0.40.0 (#9235)
+- build(deps): update Carbon 11 compatible versions to latest (#9405)
+- chore(storybook): upgrade Storybook to 10 (#9392)
+
+## `@carbon/ibm-products-web-components@0.39.0`
+### Bug fixes :bug:
+- fix(TruncatedText): provide keyboard accessibility (#9245)
+- fix(preview_PageHeader): `HeroImage` not taking the full height (#9268)
+- fix(page-header): resolve scroller button overlapping issue (#9345)
+- fix: remove unwanted paths from code coverage report (#9363)
+- fix(side-panel): use wc action set utility (#9253)
+- fix(guide-banner): WC parity work (#9221)
+- fix: security issues uuid, axios,basic-ftp (#9351)
+- fix(preview_PageHeader): fix tag height (#9327)
+- fix(deleteandRemove): wc parity (#9322)
+- fix(page-header): remove unwanted margin from subtitle (#9329)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9347)
+- chore(deps): update dependency tsdown to ^0.21.0 (#9317)
+
+## `@carbon/ibm-products-web-components@0.38.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): stacking wrapper, actions prop for footer and story updates (#9242)
 - feat(coachmarkStacked): implement as patterns (#9248)

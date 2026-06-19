@@ -67,9 +67,20 @@ class EditApiKeyModal extends HostListenerMixin(LitElement) {
 
   private apiKey: string = '';
   private nameRequired = true;
+  private textInputRef: HTMLElement | null = null;
 
   protected firstUpdated() {
     this.apiKeyName = 'test_key_1';
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('editSuccess') && this.editSuccess && this.textInputRef) {
+      setTimeout(() => {
+        const input = this.textInputRef?.shadowRoot?.querySelector('input');
+        input?.focus();
+      }, 0);
+    }
   }
   private _inputHandler(e: Event) {
     this.apiKeyName = (e.target as HTMLInputElement).value;
@@ -169,6 +180,7 @@ class EditApiKeyModal extends HostListenerMixin(LitElement) {
           ${!this.apiKeyLoaded && this.nameRequired
             ? html` <cds-form-item>
                 <cds-text-input
+                  ${ref((el) => (this.textInputRef = el as HTMLElement))}
                   label="Name your application"
                   id="test-id"
                   .value=${this.apiKeyName}

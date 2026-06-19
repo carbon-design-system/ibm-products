@@ -29,6 +29,7 @@ export default {
     docs: {
       page: mdx,
     },
+    chromatic: { disableSnapshot: true },
   },
   decorators: [
     (story) => (

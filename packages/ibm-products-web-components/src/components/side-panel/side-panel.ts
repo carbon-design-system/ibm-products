@@ -8,12 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import {
-  property,
-  query,
-  queryAssignedElements,
-  state,
-} from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
@@ -27,14 +22,14 @@ import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-load
 import { moderate02 } from '@carbon/motion';
 import Handle from '../../globals/internal/handle';
 import '@carbon/web-components/es/components/button/index.js';
-import '@carbon/web-components/es/components/button/button-set-base.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
+import '../action-set/index.js';
+import '@carbon-labs/wc-resizer/es/index.js';
 
 export { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT };
 
 const blockClass = `${prefix}--side-panel`;
-const blockClassActionSet = `${prefix}--action-set`;
 
 /**
  * Observes resize of the given element with the given resize observer.
@@ -99,11 +94,11 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @query(`.${blockClass}__inner-content`)
   private _innerContent!: HTMLElement;
 
-  @queryAssignedElements({
-    slot: 'actions',
-    selector: `${carbonPrefix}-button`,
-  })
-  private _actions!: Array<HTMLElement>;
+  /**
+   * Reference to the resizer handle element
+   */
+  @query('clabs-resizer-handle')
+  private _resizerHandle?: HTMLElement;
 
   @state()
   _doAnimateTitle = true;
@@ -127,10 +122,19 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   _actionsCount = 0;
 
   @state()
+  _actionsMultiple: 'single' | 'double' | 'triple' | '' = '';
+
+  @state()
   _slugCloseSize = 'sm';
 
   @state()
   _customHeaderElements: Element[] = [];
+
+  @state()
+  _sidePanelWidth?: number;
+
+  @state()
+  _accumulatedDelta = 0;
 
   /**
    * Get focusable elements.
@@ -523,18 +527,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     }
   }
 
-  private _checkUpdateActionSizes = () => {
-    if (this._actions) {
-      for (let i = 0; i < this._actions.length; i++) {
-        this._actions[i].setAttribute(
-          'size',
-          this.condensedActions ? 'lg' : 'xl'
-        );
-      }
-    }
-  };
-
-  private _maxActions = 3;
   private _handleActionsChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const actions = target?.assignedElements();
@@ -543,28 +535,18 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._checkUpdateIconButtonSizes();
 
     const actionsCount = actions?.length ?? 0;
-    if (actionsCount > this._maxActions) {
-      this._actionsCount = this._maxActions;
-      if (process.env.NODE_ENV === 'development') {
-        console.error(`Too many side-panel actions, max ${this._maxActions}.`);
-      }
-    } else {
-      this._actionsCount = actionsCount;
-    }
+    this._actionsCount = actionsCount;
 
-    for (let i = 0; i < actions?.length; i++) {
-      if (i + 1 > this._maxActions) {
-        // hide excessive side panel actions
-        actions[i].setAttribute('hidden', 'true');
-        actions[i].setAttribute(
-          `data-actions-limit-${this._maxActions}-exceeded`,
-          `${actions.length}`
-        );
-      } else {
-        actions[i].classList.add(`${blockClassActionSet}__action-button`);
-      }
+    // Set actions-multiple attribute for container query styling
+    if (actionsCount === 1) {
+      this._actionsMultiple = 'single';
+    } else if (actionsCount === 2) {
+      this._actionsMultiple = 'double';
+    } else if (actionsCount === 3) {
+      this._actionsMultiple = 'triple';
+    } else {
+      this._actionsMultiple = '';
     }
-    this._checkUpdateActionSizes();
   }
 
   private _checkSetDoAnimateTitle = () => {
@@ -646,6 +628,127 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         el.classList.remove(`cds--visually-hidden`);
       });
     }
+  };
+
+  /**
+   * Handles resize start event from the resizer handle
+   */
+  private _handleResizeStart = () => {
+    this._sidePanelWidth = this._sidePanel?.clientWidth;
+    this._accumulatedDelta = 0;
+  };
+
+  /**
+   * Handles resize drag event from the resizer handle
+   */
+  private _handleResizeDrag = (event: CustomEvent) => {
+    const { delta, isKeyboard, key } = event.detail;
+
+    if (!this._sidePanelWidth) {
+      this._sidePanelWidth = this._sidePanel?.clientWidth;
+    }
+
+    // Handle Home/End keys specially (like React implementation)
+    if (isKeyboard && (key === 'Home' || key === 'End')) {
+      if (key === 'Home') {
+        // Home = maximize to 75vw
+        this.style.setProperty('--c4p-side-panel-modified-size', '75vw');
+      } else {
+        // End = minimize to 16rem
+        this.style.setProperty('--c4p-side-panel-modified-size', '16rem');
+      }
+      return;
+    }
+
+    let calculatedWidth: number;
+
+    if (isKeyboard) {
+      // For keyboard arrow keys, accumulate delta (like React implementation)
+      this._accumulatedDelta += delta;
+      calculatedWidth =
+        this._sidePanelWidth -
+        (this.placement === 'right'
+          ? this._accumulatedDelta
+          : -this._accumulatedDelta);
+    } else {
+      // For mouse events, use delta directly
+      calculatedWidth =
+        this._sidePanelWidth - (this.placement === 'right' ? delta : -delta);
+    }
+
+    // Remove transition during drag for smooth resizing
+    if (this._sidePanel?.style) {
+      this._sidePanel.style.transition = 'none';
+    }
+
+    // Clamp width between minimum (16rem = 256px) and maximum (75% of viewport)
+    const minWidth = 256; // 16rem
+    const maxWidth = window.innerWidth * 0.75;
+    const newWidth = Math.max(minWidth, Math.min(maxWidth, calculatedWidth));
+
+    // Apply the new width via CSS variable
+    this.style.setProperty('--c4p-side-panel-modified-size', `${newWidth}px`);
+  };
+
+  /**
+   * Handles resize end event from the resizer handle
+   */
+  private _handleResizeEnd = () => {
+    this._accumulatedDelta = 0;
+    this._sidePanel?.style?.removeProperty('transition');
+    this._sidePanelWidth = this._sidePanel?.clientWidth;
+
+    // Update ARIA attributes on the resizer handle
+    if (this._resizerHandle) {
+      this._resizerHandle.setAttribute(
+        'aria-label',
+        `side panel is covering ${this._getPanelWidthPercent()}% of screen`
+      );
+      this._resizerHandle.setAttribute(
+        'aria-valuenow',
+        this._getPanelWidthPercent().toString()
+      );
+    }
+  };
+
+  /**
+   * Handles double-click/double-tap on resizer to reset size
+   */
+  private _handleResizeReset = () => {
+    // Get the default size for current size setting
+    const sizeMap = {
+      xs: '16rem',
+      sm: '20rem',
+      md: '30rem',
+      lg: '40rem',
+      xl: '65rem',
+      '2xl': '80rem',
+    };
+
+    const defaultSize = sizeMap[this.size] || sizeMap.md;
+    const defaultSizeInPx = parseFloat(defaultSize) * 16;
+
+    // Reset to default size (or 75vw if default is larger)
+    this._sidePanelWidth = Math.min(defaultSizeInPx, window.innerWidth * 0.75);
+
+    // Remove custom size
+    this.style.removeProperty('--c4p-side-panel-modified-size');
+  };
+
+  /**
+   * Get the percentage of screen width the panel is covering
+   */
+  private _getPanelWidthPercent = (customWidth?: string): number => {
+    if (customWidth) {
+      const remValue = parseFloat(customWidth);
+      const remInPixels =
+        remValue *
+        parseFloat(getComputedStyle(document.documentElement).fontSize);
+      return Math.round((remInPixels / window.innerWidth) * 100);
+    }
+    return Math.round(
+      ((this._sidePanel?.clientWidth || 0) / window.innerWidth) * 100
+    );
   };
 
   private _handleCurrentStepUpdate = () => {
@@ -764,6 +867,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   slideIn = false;
 
   /**
+   * Determines if the side panel is resizable
+   */
+  @property({ type: Boolean, reflect: true })
+  resizable = false;
+
+  /**
    * Sets the title text
    */
   @property({ reflect: false, type: String })
@@ -784,11 +893,44 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     super.connectedCallback();
     this.disconnectObservers();
     this.connectObservers();
+
+    // Listen for resize events from resizer handle
+    this.addEventListener(
+      'resize-start',
+      this._handleResizeStart as EventListener
+    );
+    this.addEventListener(
+      'resize-drag',
+      this._handleResizeDrag as EventListener
+    );
+    this.addEventListener('resize-end', this._handleResizeEnd as EventListener);
+    this.addEventListener(
+      'resize-reset',
+      this._handleResizeReset as EventListener
+    );
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.disconnectObservers();
+
+    // Remove resize event listeners
+    this.removeEventListener(
+      'resize-start',
+      this._handleResizeStart as EventListener
+    );
+    this.removeEventListener(
+      'resize-drag',
+      this._handleResizeDrag as EventListener
+    );
+    this.removeEventListener(
+      'resize-end',
+      this._handleResizeEnd as EventListener
+    );
+    this.removeEventListener(
+      'resize-reset',
+      this._handleResizeReset as EventListener
+    );
   }
 
   render() {
@@ -811,10 +953,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     if (!open && !this._isOpen) {
       return html``;
     }
-
-    const actionsMultiple = ['', 'single', 'double', 'triple'][
-      this._actionsCount
-    ];
 
     const titleTemplate = html` <div
       class=${`${blockClass}__title`}
@@ -955,23 +1093,41 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         ?condensed-actions=${condensedActions}
         ?overlay=${includeOverlay || slideIn}
         ?slide-in=${slideIn}
+        ?resizable=${this.resizable && !slideIn}
         size=${size}
       >
+        ${!slideIn &&
+        this.resizable &&
+        typeof window !== 'undefined' &&
+        window.innerWidth > 768
+          ? html`<clabs-resizer-handle
+              class="${blockClass}__resizer"
+              orientation="horizontal"
+              aria-valuemin="${this._getPanelWidthPercent('16rem')}"
+              aria-valuemax="75"
+              aria-valuenow="${this._getPanelWidthPercent()}"
+              aria-label="side panel is covering ${this._getPanelWidthPercent()}% of screen"
+              @resize-start=${this._handleResizeStart}
+              @resize-drag=${this._handleResizeDrag}
+              @resize-end=${this._handleResizeEnd}
+              @resize-reset=${this._handleResizeReset}
+            ></clabs-resizer-handle>`
+          : ''}
         ${this._doAnimateTitle
           ? html`<div class=${`${blockClass}__animated-scroll-wrapper`} scrolls>
               ${headerTemplate} ${mainTemplate}
             </div>`
           : html` ${headerTemplate} ${mainTemplate}`}
 
-        <cds-button-set-base
+        <c4p-action-set
           class=${`${blockClass}__actions-container`}
           ?hidden=${this._actionsCount === 0}
-          ?condensed=${condensedActions}
-          actions-multiple=${actionsMultiple}
-          size=${size}
+          size="md"
+          button-size=${condensedActions ? 'md' : 'lg'}
+          actions-multiple=${this._actionsMultiple}
         >
           <slot name="actions" @slotchange=${this._handleActionsChange}></slot>
-        </cds-button-set-base>
+        </c4p-action-set>
       </div>
 
       ${includeOverlay
@@ -989,10 +1145,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   }
 
   async updated(changedProperties) {
-    if (changedProperties.has('condensedActions')) {
-      this._checkUpdateActionSizes();
-    }
-
     if (changedProperties.has('currentStep')) {
       this._handleCurrentStepUpdate();
     }
@@ -1059,6 +1211,25 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         (this._launcher as HTMLElement)?.focus();
         this._launcher = null;
       }
+    }
+
+    // Reset custom size when size prop changes or when resizable is disabled
+    if (
+      (changedProperties.has('size') && this.resizable && !this.slideIn) ||
+      (changedProperties.has('resizable') && !this.resizable)
+    ) {
+      this.style.removeProperty('--c4p-side-panel-modified-size');
+    }
+
+    // Update stored width when resizable changes or panel opens
+    if (
+      (changedProperties.has('resizable') || changedProperties.has('open')) &&
+      this.resizable &&
+      !this.slideIn &&
+      this.open
+    ) {
+      await this.updateComplete;
+      this._sidePanelWidth = this._sidePanel?.clientWidth;
     }
   }
 

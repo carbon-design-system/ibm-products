@@ -24,7 +24,6 @@ export interface InterstitialScreenContextType {
   progStep: number;
   setProgStep?: (value: number) => void;
   bodyScrollRef?: RefObject<HTMLDivElement | null>;
-  scrollRef?: RefObject<HTMLDivElement>;
   handleGotoStep?: (value: number) => void;
   stepCount: number;
   setStepCount?: (value: number) => void;

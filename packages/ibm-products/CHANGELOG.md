@@ -1,4 +1,75 @@
-## `@carbon/ibm-products@2.89.0-rc.0`
+## `@carbon/ibm-products@2.92.1`
+### Bug fixes :bug:
+- fix(release): remove private utilities package from dependencies (#9532)
+## `@carbon/ibm-products@2.92.1-rc.0`
+### Bug fixes :bug:
+- fix(release): remove private utilities package from dependencies (#9532)
+## `@carbon/ibm-products@2.92.0`
+### Features :rocket:
+- feat(addselect): code refactoring and patterns (#9515)
+- feat: #9174 Added support for clearFiltersText prop (#9508)
+- feat(AddSelect): composable add select with patterns (#9368)
+- feat(createTearsheetNarrow): implemented as pattern (#9404)
+- feat: add carousel utility story examples (#9416)
+
+### Housekeeping :house:
+- chore(deps): update dependency typescript-config-carbon to ^0.10.0 (#9469)
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+## `@carbon/ibm-products@2.92.0-rc.1`
+### Features :rocket:
+- feat(addselect): code refactoring and patterns (#9515)
+- feat: #9174 Added support for clearFiltersText prop (#9508)
+
+## `@carbon/ibm-products@2.92.0-rc.0`
+### Features :rocket:
+- feat(AddSelect): composable add select with patterns (#9368)
+- feat(createTearsheetNarrow): implemented as pattern (#9404)
+- feat: add carousel utility story examples (#9416)
+
+### Housekeeping :house:
+- chore(deps): update dependency typescript-config-carbon to ^0.10.0 (#9469)
+- docs(changelog): update for v2.91.0-rc.0 (#9462)
+
+## `@carbon/ibm-products@2.91.0`
+### Features :rocket:
+- feat: Replace Interstitial Screen internal carousel with Carbon utility carousel (#9399)
+
+### Bug fixes :bug:
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.24.0 (#9421)
+- fix(options-tile): WC parity work  (#9387)
+- fix: increase code coverage > 80 (#9376)
+- fix(apikeymodal): parity  (#9313)
+- fix: hook to fetch and pass in parent feature flags to Tearsheet (#9341)
+- fix: replace simpleHeader with preview_pageheader (#9375)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#9405)
+- chore: upgrade jest config to pure esm (#9407)
+- chore: optimise chromatic setup (#9394)
+- chore: data spreadsheet depreciation (#9395)
+- chore(storybook): upgrade Storybook to 10 (#9392)
+
+## `@carbon/ibm-products@2.90.0`
+### Features :rocket:
+- feat: add onRemoveItem handler to intercept remove (#9350)
+- feat(coachmark): add triggerRef prop (#9326)
+
+### Bug fixes :bug:
+- fix(TruncatedText): provide keyboard accessibility (#9245)
+- fix(preview_PageHeader): resolve SSR hydration error (#9264)
+- fix(preview_PageHeader): `HeroImage` not taking the full height (#9268)
+- fix(page-header): resolve scroller button overlapping issue (#9345)
+- fix: remove unwanted paths from code coverage report (#9363)
+- fix(guide-banner): WC parity work (#9221)
+- fix(guidebanner): fix expand collapse labels and aria-expand values (#9321)
+- fix(deleteandRemove): wc parity (#9322)
+- fix(EditInPlace): resolve focus missing and few other issue (#9243)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9347)
+- chore(deps): update dependency tsdown to ^0.21.0 (#9317)
+
+## `@carbon/ibm-products@2.89.0`
 ### Features :rocket:
 - feat(preview_Tearsheet): stacking wrapper, actions prop for footer and story updates (#9242)
 - feat(ConditionBuilder): title and text ellipsis of dropdown and default statement fix (#9252)

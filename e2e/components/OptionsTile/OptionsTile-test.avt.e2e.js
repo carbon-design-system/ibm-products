@@ -32,7 +32,7 @@ test.describe('OptionsTile @avt', () => {
   test('@avt-keyboard-navigation', async ({ page }) => {
     await visitStory(page, {
       component: 'OptionsTile',
-      id: 'components-optionstile--options-tile&args=enabled',
+      id: 'components-optionstile--options-tile',
       globals: {
         carbonTheme: 'white',
       },

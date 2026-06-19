@@ -8,10 +8,13 @@ collect:
     elements:
       allowedAttributeNames:
         # General
+        - accordionItemProps
+        - accordionProps
         - action
         - actionIcons
         - actions
         - actionsPlacement
+        - actionsSlot
         - activeCellCoordinates
         - activeHref
         - addConditionSubGroupHandler
@@ -89,7 +92,6 @@ collect:
         - displayMetalPanel
         - downloadLinkLabel
         - draggableClass
-        - dropShadow
         - element
         - emptyStateAction
         - emptyStateDescription
@@ -146,6 +148,7 @@ collect:
         - hasError
         - hasFieldset
         - headerActions
+        - headerContent
         - headerGroups
         - HeaderRow
         - headers
@@ -155,8 +158,8 @@ collect:
         - hideConditionPreviewHandler
         - hideConditionSubGroupPreviewHandler
         - hideIcon
+        - hideSearch
         - hideSelectAll
-        - highContrast
         - href
         - icon
         - iconDescription
@@ -190,6 +193,7 @@ collect:
         - isOpen
         - isTableSortable
         - item
+        - itemCount
         - items
         - itemsLabel
         - key
@@ -255,11 +259,13 @@ collect:
         - onPrevious
         - onPrimaryButtonClick
         - onRemove
+        - onRemoveItem
         - onRequestClose
         - onRequestSubmit
         - onRowClick
         - onRowExpand
         - onScroll
+        - onSearch
         - onSecondaryButtonClick
         - onSelectAllRows
         - onSelectColumn
@@ -305,6 +311,7 @@ collect:
         - readOnly
         - readOnlyTable
         - renderIcon
+        - renderItem
         - renderMedia
         - renderRowHeader
         - renderRowHeaderDirection
@@ -319,6 +326,8 @@ collect:
         - scoreThresholds
         - scrollBarSize
         - scroller
+        - searchPlaceholder
+        - searchProps
         - searchResultsTitle
         - secondaryActionLabel
         - secondaryButtonDisabled
@@ -333,6 +342,7 @@ collect:
         - selectAllToggle
         - selected
         - selectedHeaderReorderActive
+        - selectedItems
         - selectedOption
         - selectionAreas
         - selectorPageContent
@@ -376,8 +386,8 @@ collect:
         - tableHeight
         - tableId
         - tagline
+        - tagProps
         - tags
-        - target
         - theme
         - title
         - titleSize
@@ -429,14 +439,30 @@ collect:
         - setSearchText
         # ActionSet
         - disableStacking
+        # AddSelect
+        - onItemSelect
         # AddSelectBody
+        - breadcrumbItemProps
+        - breadcrumbProps
         - defaultModifiers
         - globalFilterOpts
+        - linkProps
         - normalizedItems
+        - onBreadcrumbClick
+        - subHeaderActions
         - useNormalizedItems
         # AddSelectColumn
+        - allIndeterminate
+        - allSelected
         - header
+        - onNavigate
+        - onSelectAll
+        - searchLabel
+        - selectAllCheckboxProps
         - setPath
+        - showSelectAll
+        # AddSelectContent
+        - layout
         # AddSelectFilter
         - appliedFilters
         - filterOpts
@@ -445,6 +471,8 @@ collect:
         - handleSearch
         - hasFiltersApplied
         - searchTerm
+        # AddSelectItemPanel
+        - closeIconButtonProps
         # AddSelectList
         - filteredItems
         - focus
@@ -457,6 +485,31 @@ collect:
         - singleSelection
         # AddSelectMetaPanel
         - meta
+        # AddSelectRow
+        - checkboxProps
+        - hasChildren
+        - hasItemPanel
+        - indeterminate
+        - itemId
+        - itemPanelIconButtonProps
+        - itemPanelIconDescription
+        - itemPanelOpen
+        - onItemPanelClick
+        - radioButtonProps
+        - rowContent
+        # AddSelectSelectionSummary
+        - editIconButtonProps
+        - editIconDescription
+        - emptyState
+        - onEdit
+        - showCount
+        - showEditIcon
+        # AddSelectSelectionSummaryItem
+        - removeButtonLabel
+        - removeIconButtonProps
+        - renderAccordionBody
+        - renderAccordionTitle
+        - useAccordion
         # AddSelectSort
         - setSortAttribute
         - setSortDirection
@@ -547,13 +600,17 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
+        - dropShadow
         - floating
+        - highContrast
         - isOpenByDefault
         - overlayClassName
         - overlayKind
         - overlayRef
         - position
         - positionTune
+        - target
+        - triggerRef
         # CoachmarkDragbar
         - a11yKeyboardHandler
         - onDrag
@@ -716,17 +773,11 @@ collect:
         - onPanelClose
         - onPanelOpen
         - searchLabelText
-        - searchPlaceholder
         - showFilterSearch
-        # FilterPanelAccordion
-        - accordionProps
         # FilterPanelAccordionItem
-        - accordionItemProps
         - truncatedListProps
         # FilterPanelCheckboxWithOverflow
         - overflowMenuProps
-        # FilterPanelSearch
-        - searchProps
         # FilterSummary
         - clearButtonInline
         - clearFilters
@@ -881,6 +932,8 @@ collect:
         - contextualActions
         # PageHeaderContentPageActions
         - menuButtonLabel
+        # PageHeaderHeroImage
+        - objectFit
         # PageHeaderTagOverflow
         - renderOverflowTag
         - renderPopoverContent
@@ -945,7 +998,6 @@ collect:
         # Sortable
         - adjustScale
         - Container
-        - itemCount
         - restrictToParent
         - sortableProps
         - strategy
@@ -1221,6 +1273,9 @@ collect:
         # General - verticalPosition
         - lower
         - normal
+        # AddSelectContent - layout
+        - horizontal
+        - vertical
         # APIKeyDownloader - fileType
         - json
         - txt
@@ -1286,6 +1341,11 @@ collect:
         - primary
         - secondary
         - tertiary
+        # PageHeaderHeroImage - objectFit
+        - contain
+        - cover
+        - fill
+        - none
         # StackProvider - stackStepSize
         - lg
         - md

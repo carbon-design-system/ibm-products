@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -74,6 +74,7 @@ export const CoachmarkBeacon = forwardRef<
         {...buttonProps}
         className={`${blockClass}__target`}
         aria-label={label}
+        title={label}
       >
         <svg
           className={`${blockClass}__center`}
@@ -99,9 +100,9 @@ CoachmarkBeacon.propTypes = {
    * button props
    */
   buttonProps: PropTypes.shape({
-    /**@ts-ignore*/
+    // @ts-ignore - Spreading Button.propTypes is not type-safe but necessary for PropTypes validation
     ...Button.propTypes,
-    /**@ts-ignore*/
+    // @ts-ignore - Adding id to the shape after spreading Button.propTypes
     id: PropTypes.string,
     onClick: PropTypes.func,
     onDoubleClick: PropTypes.func,

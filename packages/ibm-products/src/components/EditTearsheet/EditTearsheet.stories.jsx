@@ -25,7 +25,11 @@ export default {
     open: { control: { disable: true } },
     ...slugArgTypes(),
   },
-  parameters: { styles, docs: { page: DocsPage } },
+  parameters: {
+    styles,
+    chromatic: { disableSnapshot: true },
+    docs: { page: DocsPage },
+  },
   decorators: [
     (story) => (
       <Annotation

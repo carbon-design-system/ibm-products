@@ -243,21 +243,27 @@ export class CreateTearsheetBase extends HostListenerMixin(LitElement) {
     const progressStep =
       currentStepKey === 'intro' ? -1 : progressSteps.indexOf(currentStepKey);
 
-    return html`
-      <cds-progress-indicator vertical class="${blockClass}__progress" current-index="${progressStep}">
-        ${stepLabels.map(
-          (step, index) => html`
-            <cds-progress-step
-              label="${step.label}"
-              description="${step.secondaryLabel}"
-              ?complete=${index < progressStep}
-              ?current=${index === progressStep}
-              ?invalid=${this.isStepInvalid(progressSteps[index], index)}
-            ></cds-progress-step>
-          `
-        )}
-      </cds-progress-indicator>
-    `;
+    // Use step count as a key to force complete re-render when steps change
+    const stepCountKey = stepLabels.length;
+
+    return keyed(
+      stepCountKey,
+      html`
+        <cds-progress-indicator vertical class="${blockClass}__progress" current-index="${progressStep}">
+          ${stepLabels.map(
+            (step, index) => html`
+              <cds-progress-step
+                label="${step.label}"
+                description="${step.secondaryLabel}"
+                ?complete=${index < progressStep}
+                ?current=${index === progressStep}
+                ?invalid=${this.isStepInvalid(progressSteps[index], index)}
+              ></cds-progress-step>
+            `
+          )}
+        </cds-progress-indicator>
+      `
+    );
   }
 
   render() {

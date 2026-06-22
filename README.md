@@ -42,12 +42,6 @@ npm:
 | [`@carbon/ibm-cloud-cognitive-cdai`](https://github.com/carbon-design-system/ibm-products/tree/v1/packages/cdai) | (**v1 only**) Legacy and non-curated design implementations used in application integration                       |
 | [`@carbon/ibm-security`](https://github.com/carbon-design-system/ibm-products/tree/v1/packages/security)         | (**v1 only**) Legacy and non-curated design implementations used in security                                      |
 
-Also the following additional utility packages are published on npm:
-
-| Package name                                                             | Description                                       |
-| ------------------------------------------------------------------------ | ------------------------------------------------- |
-| [`@carbon/storybook-addon-theme`](./config/storybook-addon-carbon-theme) | A storybook addon enabling Carbon theme switching |
-
 The remaining packages are part of our project infrastructure and are not
 published on npm.
 
@@ -119,6 +113,54 @@ const App = () => {
   return <AboutModal />;
 };
 ```
+
+### Component Status and PDLC Export Naming
+
+Components are exported with prefixes that indicate their PDLC (Product
+Development Lifecycle) status:
+
+- **Stable components** (no prefix): Production-ready, fully reviewed
+
+  ```js
+  import { PageHeader, SidePanel, Tearsheet } from '@carbon/ibm-products';
+  ```
+
+- **Preview components** (`preview__` prefix): Production-ready, minor API
+  changes possible
+
+  ```js
+  import { preview__Coachmark } from '@carbon/ibm-products';
+  ```
+
+- **Preview Candidate components** (`previewCandidate__` prefix): Feature
+  complete, undergoing validation
+  ```js
+  import {
+    previewCandidate__Toolbar,
+    previewCandidate__SearchBar,
+  } from '@carbon/ibm-products';
+  ```
+
+**Using aliases for cleaner code:**
+
+```js
+import { previewCandidate__Toolbar as Toolbar } from '@carbon/ibm-products';
+
+// Use without prefix in your code
+<Toolbar>...</Toolbar>;
+```
+
+**Migrating from feature flags:** If you're currently using the deprecated
+canary feature flag mechanism (`pkg.component.*`), see the
+[Canary Migration Guide](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/CANARY_MIGRATION_GUIDE.md)
+for step-by-step instructions on updating your code.
+
+**For more information:**
+
+- [Component Status Definitions](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/COMPONENT_STATUS_DEFINITIONS.md) -
+  Detailed status definitions and usage guidelines
+- [Canary Migration Guide](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/CANARY_MIGRATION_GUIDE.md) -
+  Migration from feature flags to PDLC exports
 
 ## 🙌 Contributing
 

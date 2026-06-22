@@ -1,0 +1,2 @@
+var n=Object.defineProperty;var i=(e,r)=>n(e,"name",{value:r,configurable:!0});import{a as l,j as p,c as x,P as s}from"./iframe-nyWj9AFG.js";function d({className:e,nested:r=!1,isExpressive:t=!1,...a}){const o=l();return p.jsx("ul",{className:x(`${o}--list--unordered`,e,{[`${o}--list--nested`]:r,[`${o}--list--expressive`]:t}),...a})}i(d,"UnorderedList");d.propTypes={children:s.node,className:s.string,isExpressive:s.bool,nested:s.bool};export{d as U};
+//# sourceMappingURL=UnorderedList-DlXVQg9d.js.map

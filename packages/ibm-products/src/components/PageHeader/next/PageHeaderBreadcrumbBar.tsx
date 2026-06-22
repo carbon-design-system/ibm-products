@@ -52,6 +52,10 @@ export interface PageHeaderBreadcrumbBarProps {
    * `true` to set page actions flush with page
    */
   pageActionsFlush?: boolean;
+  /**
+   * Aria label for the page header actions navigation.
+   */
+  actionsAriaLabel?: string;
 }
 
 export const PageHeaderBreadcrumbBar = React.forwardRef<
@@ -67,6 +71,7 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
     contentActionsFlush,
     pageActions,
     pageActionsFlush,
+    actionsAriaLabel = 'Page header actions',
     ...other
   }: PageHeaderBreadcrumbBarProps,
   ref
@@ -115,7 +120,7 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
               <div
                 className={`${blockClass}__breadcrumb__actions`}
                 role="navigation"
-                aria-label="Page header actions"
+                aria-label={actionsAriaLabel}
               >
                 <div className={contentActionsClasses}>
                   {typeof contentActions === 'function'

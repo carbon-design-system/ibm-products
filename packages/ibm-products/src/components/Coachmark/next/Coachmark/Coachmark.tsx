@@ -96,6 +96,10 @@ export interface CoachmarkPropsNext {
    * If not provided, no automatic focus management will occur.
    */
   selectorPrimaryFocus?: string;
+  /**
+   * Prevents the Coachmark from closing when clicking outside of it.
+   */
+  preventCloseOnClickOutside?: boolean;
 }
 
 // Define the type for Coachmark, extending it to include Content, ContentHeader, and ContentBody
@@ -126,12 +130,18 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       highContrast,
       caret,
       selectorPrimaryFocus,
+      preventCloseOnClickOutside,
       ...rest
     } = props;
     const triggerRef = useRef<HTMLElement>(null);
     const internalRef = useRef<HTMLDivElement | null>(null);
     const [contentRef, setContentRef] = useState<HTMLElement | null>(null);
     const [openState, setOpenState] = useState(false);
+
+    const shouldPreventClose =
+      preventCloseOnClickOutside !== undefined
+        ? preventCloseOnClickOutside
+        : floating === true;
 
     const setOpen = (value: boolean) => {
       if (!value) {
@@ -200,9 +210,8 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       }
     };
 
-    const handleRequestClose = (event?: Event) => {
-      // Don't close on outside clicks when floating is enabled
-      if (floating) {
+    const handleRequestClose = () => {
+      if (shouldPreventClose) {
         return;
       }
 
@@ -303,6 +312,10 @@ Coachmark.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
   }),
+  /**
+   * Prevents the Coachmark from closing when clicking outside of it.
+   */
+  preventCloseOnClickOutside: PropTypes.bool,
   /**
    * CSS selector for the element that should receive focus when the coachmark opens.
    */

@@ -216,6 +216,152 @@ export const Default = {
     `;
   },
 };
+export const WithDisabledStickyTabBar = {
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      border,
+      pageActionsFlush,
+      contentActionsFlush,
+      title,
+      renderBreadcrumbIcon,
+    } = args ?? {};
+    const sampleBreadcrumbsDefault = [
+      {
+        text: 'Breadcrumb 1',
+        href: '#',
+      },
+      {
+        text: 'Breadcrumb 2',
+        href: '#',
+      },
+      {
+        text: 'Breadcrumb 3',
+        href: '#',
+      },
+    ];
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
+        <cds-header-name href="javascript:void 0" prefix="IBM"
+          >[Platform]</cds-header-name
+        >
+      </cds-header>
+      <main>
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb
+            border=${border}
+            ?page-actions-flush="${pageActionsFlush}"
+            ?content-actions-flush="${contentActionsFlush}"
+          >
+            ${renderBreadcrumbIcon
+              ? iconLoader(Bee16, { slot: 'icon' })
+              : undefined}
+            <c4p-page-header-breadcrumbs-set
+              .breadcrumbsData="${sampleBreadcrumbsDefault}"
+              title="${title}"
+            ></c4p-page-header-breadcrumbs-set>
+            <div slot="content-actions">
+              <div class="content-actions-wrapper">
+                <cds-button size="md"
+                  >Primary action
+                  ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+                >
+              </div>
+            </div>
+            <c4p-page-header-actions-set
+              slot="page-actions"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+              ]}"
+            >
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+            </c4p-page-header-actions-set>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content title="${title}">
+            <c4p-page-header-content-text subtitle="Subtitle">
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </c4p-page-header-content-text>
+            <div slot="page-actions">
+              <cds-button size="md"
+                >Primary action
+                ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+              >
+            </div>
+          </c4p-page-header-content>
+          <c4p-page-header-tabs disable-sticky-tab-bar>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+                >Tab 2</cds-tab
+              >
+              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+                >Tab 3</cds-tab
+              >
+              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+                >Tab 4</cds-tab
+              >
+              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+                >Tab 5</cds-tab
+              >
+              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+                >Tab 6</cds-tab
+              >
+              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+                >Tab 7</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+        <div class="tabs-demo">
+          <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+            Tab Panel 1
+          </div>
+          <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+            Tab Panel 2
+          </div>
+          <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+            Tab Panel 3
+          </div>
+          <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+            Tab Panel 4
+          </div>
+          <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
+            Tab Panel 5
+          </div>
+          <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>
+            Tab Panel 6
+          </div>
+          <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
+            Tab Panel 7
+          </div>
+        </div>
+      </main>
+    `;
+  },
+};
 
 export const ContentWithContextualActions = {
   render: () =>
@@ -624,7 +770,6 @@ export const TabBarWithTabsAndTags = {
     </main>
   `,
 };
-
 const meta = {
   title: 'Components/PageHeader',
   decorators: [
@@ -635,6 +780,7 @@ const meta = {
           }
 
           .tabs-demo {
+            block-size: 200vh;
             padding: 1rem;
           }
         </style>

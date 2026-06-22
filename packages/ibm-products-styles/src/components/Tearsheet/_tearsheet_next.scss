@@ -14,6 +14,7 @@
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins' as *;
 @use '@carbon/layout/scss/convert';
+@use '@carbon/styles/scss/utilities/focus-outline';
 
 $block-class__next: #{$pkg-prefix}--tearsheet__next;
 $motion-duration: $duration-moderate-02;
@@ -631,6 +632,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     @include breakpoint-down(md) {
       padding-inline: $spacing-05;
     }
+  }
+
+  &:focus {
+    @include focus-outline.focus-outline('outline');
   }
 }
 

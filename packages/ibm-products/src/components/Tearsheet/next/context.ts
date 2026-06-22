@@ -26,6 +26,7 @@ interface TearsheetContextType {
   decorator?: ReactNode;
   closeIconDescription?: string;
   hideCloseButton?: boolean;
+  titleId?: string;
 }
 export const TearsheetContext = createContext<TearsheetContextType>({
   fullyCollapsed: false,

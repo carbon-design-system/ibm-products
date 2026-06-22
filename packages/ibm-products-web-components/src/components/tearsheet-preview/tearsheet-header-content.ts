@@ -43,6 +43,18 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
   @property({ reflect: true })
   title: string = '';
 
+  /**
+   * Internal ID for the title element (auto-generated, used for aria-labelledby on the modal)
+   */
+  private _titleId: string = `${blockClass}__title-${Math.random().toString(36).substr(2, 9)}`;
+
+  /**
+   * Public getter for the title ID (used by parent tearsheet for aria-labelledby)
+   */
+  get titleId(): string {
+    return this._titleId;
+  }
+
   @query('slot[name="title-start"]')
   private _titleStartSlot?: HTMLSlotElement;
 
@@ -122,7 +134,7 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
         </div>
 
         <div class="${blockClass}__content__title-wrapper">
-          <h2 class="${blockClass}__header-title">
+          <h2 class="${blockClass}__header-title" id="${this._titleId}">
             <!-- Title Start -->
             ${this._hasTitleStart
               ? html`

@@ -6,7 +6,13 @@
  */
 
 import { MenuButton, MenuButtonProps, MenuItem } from '@carbon/react';
-import React, { ReactElement, ReactNode, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  ReactElement,
+  ReactNode,
+  useRef,
+  useState,
+} from 'react';
 import { useIsomorphicEffect } from '../../../global/js/hooks';
 import { blockClass } from './context';
 import { createOverflowHandler } from '@carbon/utilities';
@@ -31,13 +37,13 @@ export interface TearsheetHeaderActionsProps {
    */
   menuButtonProps?: MenuButtonProps;
 }
-export const TearsheetHeaderActions = ({
-  className,
-  children,
-  menuButtonProps,
-}: TearsheetHeaderActionsProps) => {
+export const TearsheetHeaderActions = forwardRef<
+  HTMLDivElement,
+  TearsheetHeaderActionsProps
+>(({ className, children, menuButtonProps }, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef<HTMLDivElement>(null);
+  const menuButtonContainerRef = useRef<HTMLDivElement>(null);
   const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
   const [hiddenItems, setHiddenItems] = useState<ReactElement[]>([]);
 
@@ -98,7 +104,11 @@ export const TearsheetHeaderActions = ({
               hiddenItems.length === 0,
           })}
         >
-          <MenuButton size="sm" {...menuButtonProps}>
+          <MenuButton
+            ref={menuButtonContainerRef}
+            size="sm"
+            {...menuButtonProps}
+          >
             {hiddenItems.map((item) => {
               if (!React.isValidElement(item)) {
                 return null;
@@ -130,7 +140,9 @@ export const TearsheetHeaderActions = ({
       )}
     </div>
   );
-};
+});
+
+TearsheetHeaderActions.displayName = 'TearsheetHeaderActions';
 
 /**
  * ----------------

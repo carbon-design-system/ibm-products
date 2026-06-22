@@ -51,6 +51,18 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
   title = '';
 
   /**
+   * Aria label for the breadcrumb navigation.
+   */
+  @property({ type: String, attribute: 'breadcrumb-aria-label', reflect: true })
+  breadcrumbAriaLabel = 'breadcrumbs';
+
+  /**
+   * Aria label for the breadcrumb overflow menu button.
+   */
+  @property({ type: String, attribute: 'overflow-aria-label', reflect: true })
+  overflowAriaLabel = 'More breadcrumbs';
+
+  /**
    * Container holding all breadcrumbs and the overflow menu.
    */
   @query(`.${blockClass}`)
@@ -118,7 +130,7 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
   render() {
     return html`
       <cds-breadcrumb
-        aria-label="breadcrumbs"
+        aria-label="${this.breadcrumbAriaLabel}"
         class=${classMap({
           [`${blockClass}`]: true,
         })}
@@ -131,7 +143,7 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
           <cds-overflow-menu
             breadcrumb=""
             align="bottom"
-            aria-label="More breadcrumbs"
+            aria-label="${this.overflowAriaLabel}"
           >
             ${iconLoader(OverflowMenuHorizontal16, {
               slot: 'icon',

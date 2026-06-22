@@ -47,6 +47,12 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   @property({ attribute: 'content-actions-flush', type: Boolean })
   contentActionsFlush = false;
 
+  /**
+   * Aria label for the page header actions navigation.
+   */
+  @property({ type: String, attribute: 'actions-aria-label', reflect: true })
+  actionsAriaLabel = 'Page header actions';
+
   @consume({ context: pageHeaderContext, subscribe: true })
   context;
 
@@ -78,7 +84,7 @@ class CDSPageHeaderBreadcrumb extends LitElement {
             <div
               class="${prefix}--page-header__breadcrumb__actions"
               role="navigation"
-              aria-label="Page header actions"
+              aria-label="${this.actionsAriaLabel}"
             >
               <div class="${contentActionClasses}">
                 <slot name="content-actions"></slot>

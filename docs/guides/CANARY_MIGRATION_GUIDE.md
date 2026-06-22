@@ -135,7 +135,7 @@ import {
 import { PageHeader, SidePanel } from '@carbon/ibm-products';
 ```
 
-### Step 5: Remove Feature Flag Configuration
+### Step 4: Remove Feature Flag Configuration
 
 Remove all feature flag setup code:
 

@@ -11,6 +11,8 @@ import { LitElement, html, nothing, type TemplateResult } from 'lit';
 import { keyed } from 'lit/directives/keyed.js';
 import { state } from 'lit/decorators.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import ArrowRight16 from '@carbon/icons/es/arrow--right/16';
 import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';
 import './create-tearsheet-step';
 import '@carbon/web-components/es/components/button/index.js';
@@ -75,6 +77,9 @@ export class CreateTearsheetBase extends HostListenerMixin(LitElement) {
 
   @state()
   protected isSubmitting = false;
+
+  @state()
+  protected influencerPanelOpen = false;
 
   @state()
   protected formData: TearsheetFormData = defaultFormData();
@@ -228,6 +233,14 @@ export class CreateTearsheetBase extends HostListenerMixin(LitElement) {
       };
     };
 
+  protected handleToggleInfluencer = () => {
+    this.influencerPanelOpen = !this.influencerPanelOpen;
+  };
+
+  protected handleInfluencerPanelClose = () => {
+    this.influencerPanelOpen = false;
+  };
+
   protected renderProgressIndicator() {
     const visibleSteps = this.getVisibleSteps();
     const currentStepKey = this.getCurrentStepKey();
@@ -302,7 +315,10 @@ export class CreateTearsheetBase extends HostListenerMixin(LitElement) {
 
               ${showInfluencer
                 ? html`
-                    <c4p-tearsheet-influencer>
+                    <c4p-tearsheet-influencer
+                      ?influencer-panel-open=${this.influencerPanelOpen}
+                      @cds-tearsheet-influencer-closed=${this.handleInfluencerPanelClose}
+                    >
                       <div class="${blockClass}__influencer">
                         ${this.renderProgressIndicator()}
                       </div>
@@ -312,6 +328,15 @@ export class CreateTearsheetBase extends HostListenerMixin(LitElement) {
 
               <c4p-tearsheet-body>
                 <div slot="main-content" class="${blockClass}__body">
+                  <cds-button
+                    size="sm"
+                    kind="ghost"
+                    class="${blockClass}__show-influencer"
+                    @click=${this.handleToggleInfluencer}
+                  >
+                    Show Influencer
+                    ${iconLoader(ArrowRight16, { slot: 'icon' })}
+                  </cds-button>
                   ${keyed(currentStepKey, this.renderStep(currentStepKey))}
                 </div>
               </c4p-tearsheet-body>

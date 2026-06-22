@@ -92,7 +92,13 @@ export const CoachmarkTagline = React.forwardRef<
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <button className={`${blockClass}__cta`} type="button" {...buttonProps}>
+        <button
+          className={`${blockClass}__cta`}
+          type="button"
+          aria-label={title}
+          title={title}
+          {...buttonProps}
+        >
           <div className={`${blockClass}__idea`} aria-hidden="true">
             <Idea size={16} />
           </div>
@@ -126,9 +132,9 @@ CoachmarkTagline.propTypes = {
    * button props
    */
   buttonProps: PropTypes.shape({
-    /**@ts-ignore*/
+    // @ts-ignore - Spreading Button.propTypes is not type-safe but necessary for PropTypes validation
     ...Button.propTypes,
-    /**@ts-ignore*/
+    // @ts-ignore - Adding id to the shape after spreading Button.propTypes
     id: PropTypes.string,
     onClick: PropTypes.func,
     onDoubleClick: PropTypes.func,

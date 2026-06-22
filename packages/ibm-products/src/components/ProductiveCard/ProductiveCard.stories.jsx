@@ -73,6 +73,21 @@ export default {
     },
   },
   argTypes: {
+    title: {
+      control: {
+        type: 'text',
+      },
+    },
+    label: {
+      control: {
+        type: 'text',
+      },
+    },
+    description: {
+      control: {
+        type: 'text',
+      },
+    },
     columnSizeSm: {
       control: {
         type: 'select',

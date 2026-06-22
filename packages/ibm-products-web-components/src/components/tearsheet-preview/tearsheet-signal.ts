@@ -22,6 +22,7 @@ interface TearsheetSignalType {
   isSm: boolean;
   open: boolean;
   hasAILabel: boolean;
+  uniqueId: string;
 }
 export const defaultTearsheetSignal: TearsheetSignalType = {
   hasCloseIcon: true,
@@ -31,6 +32,7 @@ export const defaultTearsheetSignal: TearsheetSignalType = {
   isSm: false,
   open: false,
   hasAILabel: false,
+  uniqueId: '',
 };
 export const tearsheetSignal = signal<TearsheetSignalType>(
   defaultTearsheetSignal

@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import styles from './page-header.scss?lit';
 import { consume } from '@lit/context';
 import { pageHeaderContext } from './context';
@@ -25,7 +25,7 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   /**
    * Specify if breadcrumb bar has bottom border.
    */
-  @property({ reflect: true })
+  @property({ reflect: true, type: Boolean })
   border = true;
 
   /**
@@ -48,7 +48,29 @@ class CDSPageHeaderBreadcrumb extends LitElement {
   contentActionsFlush = false;
 
   @consume({ context: pageHeaderContext, subscribe: true })
+  @state()
   context;
+
+  connectedCallback() {
+    super.connectedCallback();
+    // Apply class on initial connection
+    this.updateFixedClass();
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('context')) {
+      this.updateFixedClass();
+    }
+  }
+
+  private updateFixedClass() {
+    if (this.context?.disableStickyTabBar) {
+      this.classList.add(`${prefix}--page-header-breadcrumb--fixed`);
+    } else {
+      this.classList.remove(`${prefix}--page-header-breadcrumb--fixed`);
+    }
+  }
 
   render() {
     const { withinGrid, context } = this;

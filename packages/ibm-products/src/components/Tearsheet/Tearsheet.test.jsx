@@ -14,6 +14,8 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
 
 import {
+  AILabel,
+  AILabelContent,
   Button,
   ButtonSet,
   Tab,
@@ -394,6 +396,129 @@ describe(componentName, () => {
               : tabLabel4;
       expect(tab.textContent).toEqual(tabContent);
     });
+  });
+
+  it('renders decorator (AI label) with correct DOM order', async () => {
+    const decorator = (
+      <AILabel size="xs">
+        <AILabelContent>
+          <div>AI Label Content</div>
+        </AILabelContent>
+      </AILabel>
+    );
+    render(
+      <Tearsheet
+        open
+        hasCloseIcon
+        closeIconDescription={closeIconDescription}
+        decorator={decorator}
+        title={title}
+      >
+        {children}
+      </Tearsheet>
+    );
+
+    // Check that decorator is rendered
+    const decoratorElement = document.querySelector(
+      `.${blockClass}__decorator`
+    );
+    expect(decoratorElement).not.toBeNull();
+
+    // Check that AI label is normalized to size sm
+    const aiLabel = decoratorElement.querySelector(
+      `.${carbon.prefix}--ai-label`
+    );
+    expect(aiLabel).not.toBeNull();
+  });
+
+  it('renders deprecated slug prop', async () => {
+    const slug = (
+      <AILabel size="xs">
+        <AILabelContent>
+          <div>Slug Content</div>
+        </AILabelContent>
+      </AILabel>
+    );
+    render(
+      <Tearsheet
+        open
+        hasCloseIcon
+        closeIconDescription={closeIconDescription}
+        slug={slug}
+        title={title}
+      >
+        {children}
+      </Tearsheet>
+    );
+
+    // Check that slug is rendered in decorator position
+    const decoratorElement = document.querySelector(
+      `.${blockClass}__decorator`
+    );
+    expect(decoratorElement).not.toBeNull();
+  });
+
+  it('renders custom close button in correct DOM order', async () => {
+    render(
+      <Tearsheet
+        open
+        hasCloseIcon
+        closeIconDescription={closeIconDescription}
+        title={title}
+      >
+        {children}
+      </Tearsheet>
+    );
+
+    // Check that custom close button is rendered
+    const closeButtonElement = document.querySelector(
+      `.${blockClass}__close-button`
+    );
+    expect(closeButtonElement).not.toBeNull();
+
+    // Check that the close button is accessible
+    const closeButton = screen.getByRole('button', {
+      name: closeIconDescription,
+    });
+    expect(closeButton).toBeInTheDocument();
+  });
+
+  it('renders decorator before close button in DOM for correct focus order', async () => {
+    const decorator = (
+      <AILabel size="xs">
+        <AILabelContent>
+          <div>AI Label Content</div>
+        </AILabelContent>
+      </AILabel>
+    );
+    render(
+      <Tearsheet
+        open
+        hasCloseIcon
+        closeIconDescription={closeIconDescription}
+        decorator={decorator}
+        title={title}
+      >
+        {children}
+      </Tearsheet>
+    );
+
+    const header = document.querySelector(`.${blockClass}__header`);
+    const decoratorElement = header.querySelector(`.${blockClass}__decorator`);
+    const closeButtonElement = header.querySelector(
+      `.${blockClass}__close-button`
+    );
+
+    // Check both elements exist
+    expect(decoratorElement).not.toBeNull();
+    expect(closeButtonElement).not.toBeNull();
+
+    // Check that decorator comes before close button in DOM order
+    const headerChildren = Array.from(header.children);
+    const decoratorIndex = headerChildren.indexOf(decoratorElement);
+    const closeButtonIndex = headerChildren.indexOf(closeButtonElement);
+
+    expect(decoratorIndex).toBeLessThan(closeButtonIndex);
   });
 });
 

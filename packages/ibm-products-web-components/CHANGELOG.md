@@ -1,3 +1,14 @@
+## `@carbon/ibm-products-web-components@0.42.0-rc.0`
+### Features :rocket:
+- feat(preview_PageHeader): implement disable sticky tab bar (#9365)
+- feat: focus trap for tearsheet wc (#9482)
+
+### Bug fixes :bug:
+- fix(deps): update dependency @carbon-labs/wc-empty-state to ^0.22.0 (#9422)
+- fix(preview__Tearsheet): accessibilty review issues fixes (#9512)
+- fix(deps): update dependency @lit-labs/signals to ^0.3.0 (#9555)
+- fix(sidepanel): consume resizer from carbon labs (#9472)
+
 ## `@carbon/ibm-products-web-components@0.41.1`
 ### Bug fixes :bug:
 - fix(release): remove private utilities package from dependencies (#9532)

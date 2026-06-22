@@ -172,7 +172,7 @@ A codemods is available to help consumers update their imports when components
 change status:
 
 ```bash
-npx @carbon/upgrade migrate ibm-products-update-pdlc-status --write
+npx @carbon/upgrade migrate rename-ibm-products-imports-to-preview --write
 ```
 
 **What it does:**
@@ -197,15 +197,6 @@ import {
 
 **Note:** Run without `--write` flag first to preview changes before applying
 them.
-
-**Manual updates still required:**
-
-- Component implementation (export name changes)
-- Documentation
-- Storybook configuration
-- SCSS imports (for stable promotion)
-- Changelog entries
-- Test snapshots
 
 ### Coverage Requirements
 

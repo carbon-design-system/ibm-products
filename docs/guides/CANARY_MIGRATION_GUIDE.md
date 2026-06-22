@@ -33,6 +33,12 @@ import { previewCandidate__ExampleComponent } from '@carbon/ibm-products';
 function MyApp() {
   return <previewCandidate__ExampleComponent />;
 }
+// Using alias
+import { previewCandidate__ExampleComponent as ExampleComponent } from '@carbon/ibm-products';
+
+function MyApp() {
+  return <ExampleComponent />;
+}
 ```
 
 ## Understanding PDLC Export Naming
@@ -42,8 +48,8 @@ Components are now exported with prefixes that indicate their stability:
 | Export Name                       | Status                | Description                                   |
 | --------------------------------- | --------------------- | --------------------------------------------- |
 | `ComponentName`                   | **Stable**            | Production-ready, fully reviewed and released |
-| `previewCandidate__ComponentName` | **Preview Candidate** | Feature complete, undergoing final review     |
-| `preview__ComponentName`          | **Preview**           | Early access, API may change                  |
+| `preview__ComponentName`.         | **Preview**           | Feature complete, undergoing final review     |
+| `previewCandidate__ComponentName` | **Preview Candidate** | Early access, API may change                  |
 | Not exported                      | **Draft**             | Internal development, not available publicly  |
 
 ## Migration Steps
@@ -104,29 +110,7 @@ function MyToolbar() {
 }
 ```
 
-#### Example 2: Multiple Components
-
-**Before:**
-
-```js
-import { pkg, BigNumber, SearchBar, Toolbar } from '@carbon/ibm-products';
-
-pkg.component.BigNumber = true;
-pkg.component.SearchBar = true;
-pkg.component.Toolbar = true;
-```
-
-**After:**
-
-```js
-import {
-  previewCandidate__BigNumber,
-  previewCandidate__SearchBar,
-  previewCandidate__Toolbar,
-} from '@carbon/ibm-products';
-```
-
-#### Example 3: Using setAllComponents
+#### Example 2: Using setAllComponents
 
 **Before:**
 
@@ -151,30 +135,6 @@ import {
 import { PageHeader, SidePanel } from '@carbon/ibm-products';
 ```
 
-### Step 4: Update Component Usage
-
-If you aliased components to remove the prefix, update your JSX:
-
-**Option A: Use the prefixed name directly**
-
-```js
-import { previewCandidate__Toolbar } from '@carbon/ibm-products';
-
-function MyApp() {
-  return <previewCandidate__Toolbar>...</previewCandidate__Toolbar>;
-}
-```
-
-**Option B: Alias the import**
-
-```js
-import { previewCandidate__Toolbar as Toolbar } from '@carbon/ibm-products';
-
-function MyApp() {
-  return <Toolbar>...</Toolbar>;
-}
-```
-
 ### Step 5: Remove Feature Flag Configuration
 
 Remove all feature flag setup code:
@@ -191,7 +151,7 @@ pkg.setAllComponents(true);
 A codemods is available to help automate the import updates:
 
 ```bash
-npx @carbon/upgrade migrate ibm-products-update-pdlc-status --write
+npx @carbon/upgrade migrate rename-ibm-products-imports-to-preview --write
 ```
 
 **What it does:**

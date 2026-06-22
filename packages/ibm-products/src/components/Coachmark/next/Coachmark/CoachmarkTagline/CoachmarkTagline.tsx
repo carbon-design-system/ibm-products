@@ -92,7 +92,13 @@ export const CoachmarkTagline = React.forwardRef<
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <button className={`${blockClass}__cta`} type="button" {...buttonProps}>
+        <button
+          className={`${blockClass}__cta`}
+          type="button"
+          aria-label={title}
+          title={title}
+          {...buttonProps}
+        >
           <div className={`${blockClass}__idea`} aria-hidden="true">
             <Idea size={16} />
           </div>

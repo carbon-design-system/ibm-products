@@ -233,6 +233,7 @@ export const DatagridContent = ({
         }}
         renderLabel={filterProps?.renderLabel}
         overflowType="tag"
+        clearFiltersText={filterProps?.clearFiltersText}
       />
     );
 

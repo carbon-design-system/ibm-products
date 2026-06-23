@@ -1,3 +1,13 @@
+## `@carbon/ibm-products-styles@2.89.0-rc.0`
+### Features :rocket:
+- feat(preview_PageHeader): implement disable sticky tab bar (#9365)
+
+### Bug fixes :bug:
+- fix(preview__Tearsheet): accessibilty review issues fixes (#9512)
+- fix(Tearsheet): fix focus order of close button (#9496)
+- fix(coachmark): release review updates (#9558)
+- fix(PageHeader): resolve horizontal scroll issue (#9507)
+
 ## `@carbon/ibm-products-styles@2.88.0`
 ### Features :rocket:
 - feat(addselect): code refactoring and patterns (#9515)

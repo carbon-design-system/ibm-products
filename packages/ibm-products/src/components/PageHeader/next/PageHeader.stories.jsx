@@ -447,7 +447,7 @@ const tabBarTags = [
 const renderUIShellHeader = () => (
   <HeaderContainer
     render={() => (
-      <Header aria-label="Application header">
+      <Header aria-label="Header">
         <HeaderName href="/">Application header</HeaderName>
       </Header>
     )}
@@ -529,6 +529,7 @@ export const TabBarWithTabsAndTags = (args) => (
                   <OperationalTag
                     onClick={handleOverflowClick}
                     aria-expanded={openPopover}
+                    aria-label={`Show ${hiddenItems.length} more tags`}
                     text={`+${hiddenItems.length}`}
                   />
                 )}
@@ -650,6 +651,7 @@ export const Compact = (args) => (
               <OperationalTag
                 onClick={handleOverflowClick}
                 aria-expanded={openPopover}
+                aria-label={`Show ${hiddenItems.length} more tags`}
                 text={`+${hiddenItems.length}`}
               />
             )}

@@ -79,7 +79,7 @@ export const PageHeaderBreadcrumbPageActions = ({
   buttonKind = 'ghost',
   ...other
 }: PageHeaderBreadcrumbPageActionsProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLUListElement>(null);
   const [hiddenItems, setHiddenItems] = useState<
     PageHeaderBreadcrumbPageActionItem[]
   >([]);
@@ -104,7 +104,7 @@ export const PageHeaderBreadcrumbPageActions = ({
   }, [actions]);
 
   return (
-    <div
+    <ul
       ref={containerRef}
       className={classNames}
       style={{
@@ -116,7 +116,7 @@ export const PageHeaderBreadcrumbPageActions = ({
       {...other}
     >
       {actions.map((item) => (
-        <div key={item.id} data-id={item.id}>
+        <li key={item.id} data-id={item.id}>
           <Button
             renderIcon={item.renderIcon}
             iconDescription={item.label}
@@ -125,9 +125,9 @@ export const PageHeaderBreadcrumbPageActions = ({
             kind={buttonKind}
             onClick={item.onClick}
           />
-        </div>
+        </li>
       ))}
-      <div
+      <li
         data-offset
         data-hidden
         data-floating-menu-container
@@ -146,8 +146,8 @@ export const PageHeaderBreadcrumbPageActions = ({
             ))}
           </OverflowMenu>
         </FeatureFlags>
-      </div>
-    </div>
+      </li>
+    </ul>
   );
 };
 

@@ -142,37 +142,13 @@ See the
 [example gallery](https://ibm-products.carbondesignsystem.com/?path=/story/overview-examples--c-4-p-gallery-code-sandbox)
 for the most up-to-date prefix examples.
 
-### Using pre-release components
+### Enabling Canary components and flagged features
 
-> [!WARNING] **The component feature flag (canary) mechanism is deprecated.**
-> Components that have not yet completed the release review process are now
-> published with a
-> [PDLC status](https://carbondesignsystem.com/contributing/product-development-lifecycle/)
-> prefix and can be imported directly — there is no longer any need to enable
-> them through `pkg.component.X`, `pkg.setAllComponents`, or a `config.js` file.
-> The `pkg.component` flags continue to work for now but will emit a deprecation
-> warning and be removed in a future release.
+Components that have not yet completed the release review process are considered
+to be canary and require the consumer to enable via a feature flag in a
+`config.js` file.
 
-Import the prefixed export that matches the component's PDLC status:
-
-```js
-// `preview__` for components in the preview stage
-import { preview__Tearsheet } from '@carbon/ibm-products';
-
-// `previewCandidate__` for components in the preview candidate stage
-import { previewCandidate__ConditionBuilder } from '@carbon/ibm-products';
-```
-
-Released components are exported without a prefix and require no opt-in:
-
-```js
-import { AboutModal, SidePanel } from '@carbon/ibm-products';
-```
-
-#### Deprecated: enabling canary components via feature flags
-
-The flow below is **deprecated** and only documented for existing consumers
-migrating away from it. Prefer the PDLC-prefixed exports shown above.
+For example, create a `config.js` in your `src` directory:
 
 ```js
 import { pkg } from '@carbon/ibm-products';
@@ -184,17 +160,6 @@ pkg.component.SidePanel = true;
 
 // Live dangerously: enable all components!
 pkg.setAllComponents(true);
-```
-
-### Enabling flagged features
-
-Features (`pkg.feature.X`) are unaffected by the canary deprecation and continue
-to be enabled through a `config.js` file.
-
-For example, create a `config.js` in your `src` directory:
-
-```js
-import { pkg } from '@carbon/ibm-products';
 
 // Enable a feature flagged examples
 pkg.feature.nameOfFeature = true;

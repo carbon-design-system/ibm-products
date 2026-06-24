@@ -74,6 +74,7 @@ const TearsheetHeaderContent = React.forwardRef<
     decorator,
     closeIconDescription,
     hideCloseButton = false,
+    titleId,
   } = useContext(TearsheetContext);
 
   // Normalize decorator (AILabel is always size `sm`)
@@ -89,7 +90,7 @@ const TearsheetHeaderContent = React.forwardRef<
         <div className={`${blockClass}__header-label`}>{label}</div>
       ) : null}
       <div className={`${blockClass}__content__title-wrapper`}>
-        <h2 className={cx(`${blockClass}__header-title`)}>
+        <h2 className={cx(`${blockClass}__header-title`)} id={titleId}>
           {titleStart ? (
             <span className={`${blockClass}__title-start`}>{titleStart}</span>
           ) : null}
@@ -118,7 +119,9 @@ const TearsheetHeaderContent = React.forwardRef<
   );
 
   const decoratorElement = decorator && (
-    <div className={`${blockClass}__decorator`}>{normalizedDecorator}</div>
+    <div className={`${blockClass}__decorator`} role="complementary">
+      {normalizedDecorator}
+    </div>
   );
 
   const closeButtonElement = !hideCloseButton && (

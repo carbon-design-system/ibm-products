@@ -356,7 +356,9 @@ export const Default = {
       <div class="${storyPrefix}story-container">
         <div class="${storyPrefix}story-header"></div>
         <div id="page-content-selector" class="${storyPrefix}story-content">
-          <cds-button @click="${toggleButton}">Toggle tearsheet</cds-button>
+          <cds-button @click="${toggleButton}" aria-haspopup="dialog"
+            >Toggle tearsheet</cds-button
+          >
         </div>
       </div>
 
@@ -398,6 +400,8 @@ export const Default = {
                     kind="ghost"
                     label="Open right panel"
                     @click="${toggleSummaryPanel}"
+                    aria-expanded="false"
+                    aria-controls="summary-panel"
                   >
                     ${iconLoader(RightPanelClose32, {
                       slot: 'icon',

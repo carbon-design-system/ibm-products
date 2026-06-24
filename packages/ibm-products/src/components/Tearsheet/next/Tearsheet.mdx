@@ -162,6 +162,56 @@ default. They can be accessed via side panels using
 `summaryPanelOpen`/`onSummaryPanelClose` props, triggered by user actions (e.g.,
 button clicks).
 
+### Accessibility
+
+#### Trigger Button Announcement
+
+When implementing a button or control that opens a Tearsheet, it's important to
+inform screen reader users that the action will open a dialog. Add the
+`aria-haspopup="dialog"` attribute to your trigger button:
+
+```jsx
+<Button onClick={() => setOpen(true)} aria-haspopup="dialog">
+  Open Tearsheet
+</Button>
+```
+
+This ensures that assistive technologies announce "opens dialog" or similar
+text, helping users understand the behavior of the control before activating it.
+
+#### Landmark Regions
+
+For better accessibility, wrap your Tearsheet content in a proper landmark
+region. If your Tearsheet contains form inputs, wrap the content in a `<form>`
+element:
+
+```jsx
+<Tearsheet open={open} onClose={handleClose}>
+  <Tearsheet.Header>
+    <Tearsheet.HeaderContent title="Form Title" />
+  </Tearsheet.Header>
+
+  <Tearsheet.Body>
+    <Tearsheet.MainContent>
+      <form onSubmit={handleSubmit}>{/* Your form content */}</form>
+    </Tearsheet.MainContent>
+  </Tearsheet.Body>
+
+  <Tearsheet.Footer>
+    <Button kind="secondary" onClick={handleClose}>
+      Cancel
+    </Button>
+    <Button kind="primary" onClick={handleSubmit}>
+      Submit
+    </Button>
+  </Tearsheet.Footer>
+</Tearsheet>
+```
+
+For non-form content, consider using semantic HTML elements like `<section>` or
+`<article>` with appropriate ARIA roles to create proper landmark regions for
+screen reader navigation.
+
 ### Usage
 
 ```jsx

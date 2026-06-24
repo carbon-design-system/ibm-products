@@ -135,104 +135,108 @@ const breadcrumbPageActions = (
   <PageHeader.BreadcrumbPageActions actions={breadcrumbPageActionItems} />
 );
 
-export const Default = ({
-  border,
-  pageActionsFlush,
-  contentActionsFlush,
-  renderBreadcrumbIcon,
-  title,
-  ...args
-}) => (
-  <Tabs>
-    <PageHeader.Root {...args}>
-      <PageHeader.BreadcrumbBar
-        border={border}
-        pageActionsFlush={pageActionsFlush}
-        contentActionsFlush={contentActionsFlush}
-        renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-        contentActions={
-          <PageHeader.ContentPageActions
-            menuButtonLabel="Actions"
-            actions={pageActionButtonItems}
-          />
-        }
-        pageActions={breadcrumbPageActions}
-      >
-        <PageHeader.BreadcrumbOverflow
-          renderOverflowBreadcrumb={(hiddenItems) => (
-            <BreadcrumbItem data-floating-menu-container>
-              <OverflowMenu
-                align="bottom"
-                aria-label="Overflow menu in a breadcrumb"
-              >
-                {hiddenItems.map((el) => (
-                  <OverflowMenuItem itemText={el.innerText} />
-                ))}
-              </OverflowMenu>
-            </BreadcrumbItem>
-          )}
+export const Default = (args) => {
+  const {
+    border,
+    pageActionsFlush,
+    contentActionsFlush,
+    renderBreadcrumbIcon,
+    title,
+    ...rootArgs
+  } = args;
+  return (
+    <Tabs>
+      <PageHeader.Root {...rootArgs}>
+        <PageHeader.BreadcrumbBar
+          border={border}
+          pageActionsFlush={pageActionsFlush}
+          contentActionsFlush={contentActionsFlush}
+          renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+          contentActions={
+            <PageHeader.ContentPageActions
+              menuButtonLabel="Actions"
+              actions={pageActionButtonItems}
+            />
+          }
+          pageActions={breadcrumbPageActions}
         >
-          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-          <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
-          <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
-          <PageHeader.TitleBreadcrumb data-fixed>
-            {title}
-          </PageHeader.TitleBreadcrumb>
-        </PageHeader.BreadcrumbOverflow>
-      </PageHeader.BreadcrumbBar>
-      <PageHeader.Content
-        title={title}
-        pageActions={
-          <PageHeader.ContentPageActions
-            menuButtonLabel="Actions"
-            actions={pageActionButtonItems}
-          />
-        }
-      >
-        <PageHeader.ContentText subtitle="Subtitle">
-          Built for modern teams, our technology platform simplifies complexity
-          with powerful APIs, real-time collaboration tools, and seamless
-          integration. From deployment to monitoring, we help you ship faster,
-          scale efficiently, and stay in control every step of the way.
-        </PageHeader.ContentText>
-      </PageHeader.Content>
-      <PageHeader.TabBar>
-        <TabList>
-          <Tab>Tab 1</Tab>
-          <Tab>Tab 2</Tab>
-          <Tab>Tab 3</Tab>
-          <Tab>Tab 4</Tab>
-          <Tab>Tab 5</Tab>
-          <Tab>Tab 6</Tab>
-          <Tab>Tab 7</Tab>
-        </TabList>
-      </PageHeader.TabBar>
-    </PageHeader.Root>
-    <TabPanels>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 1
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 2
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 3
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 4
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 5
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 6
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 7
-      </TabPanel>
-    </TabPanels>
-  </Tabs>
-);
+          <PageHeader.BreadcrumbOverflow
+            renderOverflowBreadcrumb={(hiddenItems) => (
+              <BreadcrumbItem data-floating-menu-container>
+                <OverflowMenu
+                  align="bottom"
+                  aria-label="Overflow menu in a breadcrumb"
+                >
+                  {hiddenItems.map((el) => (
+                    <OverflowMenuItem itemText={el.innerText} />
+                  ))}
+                </OverflowMenu>
+              </BreadcrumbItem>
+            )}
+          >
+            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+            <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+            <PageHeader.TitleBreadcrumb data-fixed>
+              {title}
+            </PageHeader.TitleBreadcrumb>
+          </PageHeader.BreadcrumbOverflow>
+        </PageHeader.BreadcrumbBar>
+        <PageHeader.Content
+          title={title}
+          pageActions={
+            <PageHeader.ContentPageActions
+              menuButtonLabel="Actions"
+              actions={pageActionButtonItems}
+            />
+          }
+        >
+          <PageHeader.ContentText subtitle="Subtitle">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </PageHeader.ContentText>
+        </PageHeader.Content>
+        <PageHeader.TabBar>
+          <TabList>
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+            <Tab>Tab 3</Tab>
+            <Tab>Tab 4</Tab>
+            <Tab>Tab 5</Tab>
+            <Tab>Tab 6</Tab>
+            <Tab>Tab 7</Tab>
+          </TabList>
+        </PageHeader.TabBar>
+      </PageHeader.Root>
+      <TabPanels>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 1
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 2
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 3
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 4
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 5
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 6
+        </TabPanel>
+        <TabPanel className="page-header-story--tall-tab-panel">
+          Tab Panel 7
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
 
 Default.args = {
   border: true,
@@ -700,14 +704,16 @@ export const Compact = (args) => (
   </Tabs>
 );
 
-export const CustomRenderWithCallbacks = ({
-  border,
-  pageActionsFlush,
-  contentActionsFlush,
-  renderBreadcrumbIcon,
-  title,
-  ...args
-}) => {
+export const CustomRenderWithCallbacks = (args) => {
+  const {
+    border,
+    pageActionsFlush,
+    contentActionsFlush,
+    renderBreadcrumbIcon,
+    title,
+    ...rootArgs
+  } = args;
+
   const handleContentFullyCollapsed = useCallback((collapsed) => {
     console.log('onContentFullyCollapsed:', collapsed);
   }, []);
@@ -723,7 +729,7 @@ export const CustomRenderWithCallbacks = ({
   return (
     <Tabs>
       <PageHeader.Root
-        {...args}
+        {...rootArgs}
         onContentFullyCollapsed={handleContentFullyCollapsed}
         onTitleClipped={handleTitleClipped}
         onContentActionsClipped={handleContentActionsClipped}
@@ -830,6 +836,151 @@ CustomRenderWithCallbacks.argTypes = {
   title: {
     description:
       'Provide the title text to be rendered within  PageHeaderContent',
+    control: {
+      type: 'text',
+    },
+  },
+  renderBreadcrumbIcon: {
+    description:
+      'Specify whether to render the BreadcrumbBar icon (storybook control only)',
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
+export const WithDisabledStickyTabBar = ({
+  border,
+  pageActionsFlush,
+  contentActionsFlush,
+  renderBreadcrumbIcon,
+  title,
+  ...args
+}) => (
+  <Tabs>
+    <PageHeader.Root {...args}>
+      <PageHeader.BreadcrumbBar
+        border={border}
+        pageActionsFlush={pageActionsFlush}
+        contentActionsFlush={contentActionsFlush}
+        renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+        contentActions={
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}
+          />
+        }
+        pageActions={breadcrumbPageActions}
+      >
+        <PageHeader.BreadcrumbOverflow
+          renderOverflowBreadcrumb={(hiddenItems) => (
+            <BreadcrumbItem data-floating-menu-container>
+              <OverflowMenu
+                align="bottom"
+                aria-label="Overflow menu in a breadcrumb"
+              >
+                {hiddenItems.map((el) => (
+                  <OverflowMenuItem itemText={el.innerText} />
+                ))}
+              </OverflowMenu>
+            </BreadcrumbItem>
+          )}
+        >
+          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+          <PageHeader.TitleBreadcrumb data-fixed>
+            {title}
+          </PageHeader.TitleBreadcrumb>
+        </PageHeader.BreadcrumbOverflow>
+      </PageHeader.BreadcrumbBar>
+      <PageHeader.Content
+        title={title}
+        pageActions={
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}
+          />
+        }
+      >
+        <PageHeader.ContentText subtitle="Subtitle">
+          Built for modern teams, our technology platform simplifies complexity
+          with powerful APIs, real-time collaboration tools, and seamless
+          integration. From deployment to monitoring, we help you ship faster,
+          scale efficiently, and stay in control every step of the way.
+        </PageHeader.ContentText>
+      </PageHeader.Content>
+      <PageHeader.TabBar disableStickyTabBar>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+          <Tab>Tab 6</Tab>
+          <Tab>Tab 7</Tab>
+        </TabList>
+      </PageHeader.TabBar>
+    </PageHeader.Root>
+    <TabPanels>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 1
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 2
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 3
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 4
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 5
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 6
+      </TabPanel>
+      <TabPanel className="page-header-story--tall-tab-panel">
+        Tab Panel 7
+      </TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+WithDisabledStickyTabBar.args = {
+  border: true,
+  pageActionsFlush: false,
+  contentActionsFlush: false,
+  title:
+    'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+  renderBreadcrumbIcon: true,
+};
+
+WithDisabledStickyTabBar.argTypes = {
+  border: {
+    description: 'Specify whether to render BreadcrumbBar border',
+    control: {
+      type: 'boolean',
+    },
+  },
+  pageActionsFlush: {
+    description:
+      'Specify whether the page actions within BreadcrumbBar should be flush',
+    control: {
+      type: 'boolean',
+    },
+  },
+  contentActionsFlush: {
+    description:
+      'Specify whether the content actions within BreadcrumbBar should be flush with the page actions',
+    control: {
+      type: 'boolean',
+    },
+  },
+  title: {
+    description:
+      'Provide the title text to be rendered within PageHeaderContent',
     control: {
       type: 'text',
     },

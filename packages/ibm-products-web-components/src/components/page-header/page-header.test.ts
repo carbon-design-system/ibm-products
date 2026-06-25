@@ -37,7 +37,10 @@ describe('c4p-page-header', function () {
             <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
           </cds-breadcrumb>
         </c4p-page-header-breadcrumb>
-        <c4p-page-header-content title="Page header content title">
+        <c4p-page-header-content
+          title="Page header content title"
+          title-level="h1"
+        >
         </c4p-page-header-content>
       </c4p-page-header>`
     );
@@ -57,7 +60,7 @@ describe('c4p-page-header', function () {
   describe('c4p-page-header-scroller', () => {
     it('should collapse the page header/scroll', async () => {
       const pageHeader: CDSPageHeader = await fixture(
-        html`<main style="height: 200vh;">
+        html`<main style="height: 200vh;" aria-label="Header">
           <c4p-page-header>
             <c4p-page-header-breadcrumb .border=${true}>
               <cds-breadcrumb>
@@ -67,7 +70,10 @@ describe('c4p-page-header', function () {
                 <cds-breadcrumb-item href="#">Breadcrumb 2</cds-breadcrumb-item>
               </cds-breadcrumb>
             </c4p-page-header-breadcrumb>
-            <c4p-page-header-content title="Page header content title">
+            <c4p-page-header-content
+              title="Page header content title"
+              title-level="h1"
+            >
             </c4p-page-header-content>
             <c4p-page-header-tabs>
               <c4p-page-header-scroller slot="scroller">
@@ -202,7 +208,10 @@ describe('c4p-page-header', function () {
     it('should render a title', async () => {
       const el: CDSPageHeader = await fixture(html`
         <c4p-page-header>
-          <c4p-page-header-content title="Page header content title">
+          <c4p-page-header-content
+            title="Page header content title"
+            title-level="h1"
+          >
           </c4p-page-header-content>
         </c4p-page-header>
       `);
@@ -218,7 +227,10 @@ describe('c4p-page-header', function () {
     it('should render an icon', async () => {
       const el: CDSPageHeader = await fixture(html`
         <c4p-page-header>
-          <c4p-page-header-content title="Page header content title">
+          <c4p-page-header-content
+            title="Page header content title"
+            title-level="h1"
+          >
             ${iconLoader(Bee32, { slot: 'icon' })}
           </c4p-page-header-content>
         </c4p-page-header>
@@ -244,7 +256,10 @@ describe('c4p-page-header', function () {
     it('should render children', async () => {
       const el: CDSPageHeader = await fixture(html`
         <c4p-page-header>
-          <c4p-page-header-content title="Page header content title">
+          <c4p-page-header-content
+            title="Page header content title"
+            title-level="h1"
+          >
             <c4p-page-header-content-text>
               Content text
             </c4p-page-header-content-text>
@@ -259,8 +274,14 @@ describe('c4p-page-header', function () {
     it('should render content text with subtitle', async () => {
       const el: CDSPageHeader = await fixture(html`
         <c4p-page-header>
-          <c4p-page-header-content title="Page header content title">
-            <c4p-page-header-content-text subtitle="Content text subtitle">
+          <c4p-page-header-content
+            title="Page header content title"
+            title-level="h1"
+          >
+            <c4p-page-header-content-text
+              subtitle="Content text subtitle"
+              subtitle-level="h2"
+            >
               Content text
             </c4p-page-header-content-text>
           </c4p-page-header-content>
@@ -278,7 +299,10 @@ describe('c4p-page-header', function () {
     it('should render contextual actions', async () => {
       const el: CDSPageHeader = await fixture(html`
         <c4p-page-header>
-          <c4p-page-header-content title="Page header content title">
+          <c4p-page-header-content
+            title="Page header content title"
+            title-level="h1"
+          >
             <div slot="contextual-actions">
               <div>action 1</div>
               <div>action 2</div>
@@ -308,7 +332,10 @@ describe('c4p-page-header', function () {
     it('should render page actions', async () => {
       const el: CDSPageHeader = await fixture(html`
         <c4p-page-header>
-          <c4p-page-header-content title="Page header content title">
+          <c4p-page-header-content
+            title="Page header content title"
+            title-level="h1"
+          >
             <button slot="page-actions">page actions</button>
             <c4p-page-header-content-text>
               Content text
@@ -337,7 +364,7 @@ describe('c4p-page-header', function () {
     it('should render page header hero image', async () => {
       const el: CDSPageHeader = await fixture(html`
         <c4p-page-header>
-          <c4p-page-header-content title="Page header content title">
+          <c4p-page-header-content title="Page header content title" title-level="h1">
             <button slot="page-actions">page actions</button>
             <c4p-page-header-content-text>
               Content text

@@ -15,9 +15,6 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// Other Carbon settings.
-@use '@carbon/styles/scss/grid' as *;
-
 // EditTearsheet uses the following IBM Products components:
 // TearsheetShell
 @use '../Tearsheet/tearsheet';

@@ -11,6 +11,7 @@ import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property, state } from 'lit/decorators.js';
 import { consume } from '@lit/context';
+import { unsafeStatic, html as staticHtml } from 'lit/static-html.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import '@carbon/web-components/es/components/tooltip/index.js';
 import styles from './page-header.scss?lit';
@@ -48,6 +49,12 @@ class CDSPageHeaderContent extends LitElement {
    */
   @property()
   title = '';
+
+  /**
+   * Heading level for the title (h1-h6).
+   */
+  @property({ type: String, attribute: 'title-level' })
+  titleLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h1';
 
   /**
    * Set to `true` if the tag text has ellipsis applied
@@ -100,6 +107,8 @@ class CDSPageHeaderContent extends LitElement {
         contentActionsClipped,
     });
 
+    const titleTag = unsafeStatic(this.titleLevel);
+
     return html` <div class="${gridClasses}">
       <div
         class="${carbonPrefix}--sm:col-span-4 ${carbonPrefix}--md:col-span-8 ${carbonPrefix}--lg:col-span-16 ${carbonPrefix}--css-grid-column"
@@ -112,15 +121,15 @@ class CDSPageHeaderContent extends LitElement {
                 ? html`
                     <cds-definition-tooltip>
                       <span slot="definition">${title}</span>
-                      <h4 class="${prefix}--page-header__content__title">
+                      ${staticHtml`<${titleTag} class="${prefix}--page-header__content__title">
                         ${title}
-                      </h4>
+                      </${titleTag}>`}
                     </cds-definition-tooltip>
                   `
-                : html`
-                    <h4 class="${prefix}--page-header__content__title">
+                : staticHtml`
+                    <${titleTag} class="${prefix}--page-header__content__title">
                       ${title}
-                    </h4>
+                    </${titleTag}>
                   `}
             </div>
             <slot

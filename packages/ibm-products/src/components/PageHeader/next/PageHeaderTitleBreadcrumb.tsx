@@ -27,6 +27,7 @@ export const PageHeaderTitleBreadcrumb = forwardRef<
       ref={ref}
       isCurrentPage
       {...other}
+      aria-hidden={hasContentElement && !titleClipped ? true : undefined}
       className={classnames(
         className,
         `${pkg.prefix}--page-header-title-breadcrumb`,

@@ -9,6 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
+import { unsafeStatic, html as staticHtml } from 'lit/static-html.js';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -25,14 +26,21 @@ class CDSPageHeaderContentText extends LitElement {
   @property()
   subtitle = '';
 
+  /**
+   * Heading level for the subtitle (h2-h6).
+   */
+  @property({ type: String, attribute: 'subtitle-level' })
+  subtitleLevel: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2';
+
   render() {
-    const { subtitle } = this;
+    const { subtitle, subtitleLevel } = this;
+    const subtitleTag = unsafeStatic(subtitleLevel);
 
     return html`
       ${subtitle &&
-      html`<h3 class="${prefix}--page-header__content__subtitle">
+      staticHtml`<${subtitleTag} class="${prefix}--page-header__content__subtitle">
         ${subtitle}
-      </h3>`}
+      </${subtitleTag}>`}
       <slot></slot>
     `;
   }

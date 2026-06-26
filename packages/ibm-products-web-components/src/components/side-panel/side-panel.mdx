@@ -15,6 +15,11 @@ import SidePanelStories from './side-panel.stories';
 Side panels keep users in-context of a page while performing tasks like
 navigating, editing, viewing details, or configuring something new.
 
+The side panel supports an optional resizer feature that allows users to adjust
+the panel width by dragging a handle. This feature uses the
+`@carbon-labs/wc-resizer` component and can be enabled by setting the
+`enable-resizer` attribute.
+
 ## Getting started
 
 Here's a quick example to get you started.
@@ -38,6 +43,7 @@ import '@carbon/web-components/es/components/button/index.js';
   label-text="An optional label"
   size="md"
   title="A title, can be omitted"
+  enable-resizer
 >
   <!-- Content -->
   <h5>Side panel content</h5>

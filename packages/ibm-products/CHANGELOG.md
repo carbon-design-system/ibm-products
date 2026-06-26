@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.93.0-rc.0`
+## `@carbon/ibm-products@2.93.0`
 ### Features :rocket:
 - feat(preview_PageHeader): implement disable sticky tab bar (#9365)
 - feat: add preventCloseOnClickOutside prop to Coachmark to prevent outside click close (#9548)

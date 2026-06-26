@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.42.0-rc.0`
+## `@carbon/ibm-products-web-components@0.42.0`
 ### Features :rocket:
 - feat(preview_PageHeader): implement disable sticky tab bar (#9365)
 - feat: focus trap for tearsheet wc (#9482)

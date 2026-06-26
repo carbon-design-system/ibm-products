@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.89.0-rc.0`
+## `@carbon/ibm-products-styles@2.89.0`
 ### Features :rocket:
 - feat(preview_PageHeader): implement disable sticky tab bar (#9365)
 

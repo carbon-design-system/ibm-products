@@ -9769,10 +9769,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"basic-ftp@npm:^5.3.0":
-  version: 5.3.1
-  resolution: "basic-ftp@npm:5.3.1"
-  checksum: 10/9232ee155114efafadf5adee86a6750208653a9071e53e9803dceac61a66b3ba3974771ff2490ff28f1a118fdfb806ffcc488f64609e61a9cedb52480b312843
+"basic-ftp@npm:^6.0.0":
+  version: 6.0.1
+  resolution: "basic-ftp@npm:6.0.1"
+  checksum: 10/23e8a1fee9d3a521c95d533284e0d54d26ff2bf84afb110787ceece2042e1dd24381eefdbaad64719c85981e00162a5dd8adabca7d52e58ffba7b7ef0ac4cd1b
   languageName: node
   linkType: hard
 

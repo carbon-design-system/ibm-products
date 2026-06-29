@@ -213,10 +213,9 @@ export const MultiAddSelectWithColumnActionsPreview = () => {
         open={open}
         setOpen={setOpen}
         items={hierarchicalItems.entries}
-        preSelectedItemIds={['1-2']}
         onSubmit={handleSubmit}
         title="Add files"
-        description="Select individual files from the folders below. Click the chevron to navigate into folders. Filter and sort options are available at the column level. Note: No select-all option is available. The file 'budget-2024.pdf' is pre-selected and cannot be deselected."
+        description="Select individual files from the folders below. Click the chevron to navigate into folders. Filter and sort options are available at the column level."
         itemsLabel="Files"
         globalSearchLabel="Search files"
         globalSearchPlaceholder="Find files"
@@ -235,5 +234,3 @@ export const MultiAddSelectWithColumnActionsPreview = () => {
     </div>
   );
 };
-
-// Made with Bob

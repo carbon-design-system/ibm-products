@@ -56,10 +56,6 @@ export interface MultiAddSelectWithColumnActionsProps {
    */
   items: AddSelectItem[];
   /**
-   * Array of pre-selected item IDs that should appear as disabled with checkmark
-   */
-  preSelectedItemIds?: string[];
-  /**
    * Callback when items are submitted
    */
   onSubmit?: (itemIds: string[], values: string[]) => void;
@@ -170,7 +166,6 @@ interface ColumnProps {
     filterBy?: string
   ) => void;
   selectedItems: Set<string>;
-  preSelectedItems: Set<string>;
   sortBy?: string[];
   filterBy?: string;
 }
@@ -184,7 +179,6 @@ const ControlledColumn: React.FC<ColumnProps> = ({
   dataManager,
   onNavigateToChild,
   selectedItems,
-  preSelectedItems,
   sortBy = [],
   filterBy,
 }) => {
@@ -387,7 +381,6 @@ const ControlledColumn: React.FC<ColumnProps> = ({
       {sortedItems.map((item) => {
         const hasChildren =
           item.children?.entries && item.children.entries.length > 0;
-        const isPreSelected = preSelectedItems.has(item.id);
         return (
           <AddSelect.Row
             key={item.id}
@@ -396,7 +389,7 @@ const ControlledColumn: React.FC<ColumnProps> = ({
             subtitle={item.subtitle}
             value={item.value || ''}
             icon={item.icon}
-            disabled={item.disabled || isPreSelected}
+            disabled={item.disabled}
             hasChildren={hasChildren}
             hasItemPanel={!!item.itemDetails}
             onItemPanelClick={onShowInfo}
@@ -416,7 +409,6 @@ export const MultiAddSelectWithColumnActions = forwardRef<
       open,
       setOpen,
       items,
-      preSelectedItemIds = [],
       onSubmit,
       title = 'Add items',
       description = 'Select items from the list below',
@@ -446,7 +438,6 @@ export const MultiAddSelectWithColumnActions = forwardRef<
 
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-    const [preSelectedIds] = useState<Set<string>>(new Set(preSelectedItemIds));
     const [currentItems, setCurrentItems] = useState<AddSelectItem[]>([]);
     const [showNotification, setShowNotification] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
@@ -472,14 +463,13 @@ export const MultiAddSelectWithColumnActions = forwardRef<
     // Reset state when tearsheet opens
     useEffect(() => {
       if (open) {
-        // Initialize with pre-selected items
-        setSelectedIds(new Set(preSelectedItemIds));
+        setSelectedIds(new Set());
         setSearchTerm('');
         setInfoPanel({ item: null, show: false });
         setNavigationLevels([]);
         setBreadcrumbPath([{ id: 'root', title: rootBreadcrumbTitle }]);
       }
-    }, [open, rootBreadcrumbTitle, preSelectedItemIds]);
+    }, [open, rootBreadcrumbTitle]);
 
     // Handle item selection
     const handleItemSelect = (
@@ -487,11 +477,6 @@ export const MultiAddSelectWithColumnActions = forwardRef<
       selected: boolean,
       value: string
     ) => {
-      // Prevent selection/deselection of pre-selected items
-      if (preSelectedIds.has(itemId)) {
-        return;
-      }
-
       const newSelectedIds = new Set(selectedIds);
 
       if (selected) {
@@ -762,7 +747,6 @@ export const MultiAddSelectWithColumnActions = forwardRef<
                           dataManager={dataManager}
                           onNavigateToChild={handleNavigateToChild}
                           selectedItems={selectedIds}
-                          preSelectedItems={preSelectedIds}
                           sortBy={rootSortBy}
                           filterBy={rootFilterBy}
                         />
@@ -779,7 +763,6 @@ export const MultiAddSelectWithColumnActions = forwardRef<
                             dataManager={dataManager}
                             onNavigateToChild={handleNavigateToChild}
                             selectedItems={selectedIds}
-                            preSelectedItems={preSelectedIds}
                             sortBy={navLevel.sortBy}
                             filterBy={navLevel.filterBy}
                           />
@@ -820,19 +803,14 @@ export const MultiAddSelectWithColumnActions = forwardRef<
                       </div>
                     }
                   >
-                    {selectedItemsForDisplay.map((item) => {
-                      const isPreSelected = preSelectedIds.has(item.id);
-                      return (
-                        <AddSelect.SelectionSummaryItem
-                          key={item.id}
-                          item={item}
-                          onRemove={
-                            isPreSelected ? undefined : handleRemoveItem
-                          }
-                          useAccordion={true}
-                        />
-                      );
-                    })}
+                    {selectedItemsForDisplay.map((item) => (
+                      <AddSelect.SelectionSummaryItem
+                        key={item.id}
+                        item={item}
+                        onRemove={handleRemoveItem}
+                        useAccordion={true}
+                      />
+                    ))}
                   </AddSelect.SelectionSummary>
                 )}
               </Tearsheet.SummaryContent>
@@ -904,8 +882,6 @@ MultiAddSelectWithColumnActions.propTypes = {
   onSubmit: PropTypes.func,
   /**@ts-ignore */
   open: PropTypes.bool.isRequired,
-  /**@ts-ignore */
-  preSelectedItemIds: PropTypes.arrayOf(PropTypes.string),
   primaryButtonText: PropTypes.string,
   rootBreadcrumbTitle: PropTypes.string,
   searchResultsTitle: PropTypes.string,
@@ -919,5 +895,3 @@ MultiAddSelectWithColumnActions.propTypes = {
 };
 
 MultiAddSelectWithColumnActions.displayName = 'MultiAddSelectWithColumnActions';
-
-// Made with Bob

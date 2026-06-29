@@ -13,6 +13,8 @@ import { MultiAddSelectWithHierarchyPreview } from '../example/preview-component
 import { MultiAddSelectWithModifiers } from '../example/preview-components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
 import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
 import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
+import { MultiAddSelectWithGlobalActionsPreview } from '../example/preview-components/MultiAddSelectWithGlobalActions/MultiAddSelectWithGlobalActions';
+import { MultiAddSelectWithColumnActionsPreview } from '../example/preview-components/MultiAddSelectWithColumnActions/MultiAddSelectWithColumnActions';
 
 export default {
   title: 'Patterns/Add and select/MultiAddSelect',
@@ -58,9 +60,21 @@ export const Overview = {
           <strong>Non-Hierarchical with Peek Inside Item</strong> -
           Multi-selection with the ability to peek inside items to view their
           contents in a middle panel
+        </li>
+        <li>
           <strong>With Hierarchy (No Select All)</strong> - Multi-selection with
           hierarchical navigation but without column-level select-all
           checkboxes. Only individual items can be selected.
+        </li>
+        <li>
+          <strong>With Global Actions</strong> - Multi-selection with
+          hierarchical navigation and global search, filter, and sort
+          capabilities across all columns.
+        </li>
+        <li>
+          <strong>With Column Actions</strong> - Multi-selection with
+          hierarchical navigation and column-level filter and sort capabilities,
+          without global actions.
         </li>
       </ul>
       <h2>Component structure</h2>
@@ -101,3 +115,15 @@ export const WithHierarchyNoSelectAll = {
 };
 
 WithHierarchyNoSelectAll.storyName = 'With Hierarchy (No Select All)';
+
+export const WithGlobalActions = {
+  render: () => <MultiAddSelectWithGlobalActionsPreview />,
+};
+
+WithGlobalActions.storyName = 'With Global Actions';
+
+export const WithColumnActions = {
+  render: () => <MultiAddSelectWithColumnActionsPreview />,
+};
+
+WithColumnActions.storyName = 'With Column Actions';

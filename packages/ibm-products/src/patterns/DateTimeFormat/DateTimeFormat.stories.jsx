@@ -9,47 +9,47 @@ import React, { useMemo, useState } from 'react';
 import {
   DatePicker,
   DatePickerInput,
-  Select,
-  SelectItem,
+  Dropdown,
   TextInput,
 } from '@carbon/react';
 import { dateTimeFormat } from '@carbon/utilities';
+import styles from './_story-styles.scss?inline';
 import DocsPage from './DateTimeFormat.mdx';
 
 const localeOptions = [
   {
-    text: 'en-US / English (United States)',
+    label: 'en-US / English (United States)',
     value: 'en-US',
   },
   {
-    text: 'en-GB / English (United Kingdom)',
+    label: 'en-GB / English (United Kingdom)',
     value: 'en-GB',
   },
   {
-    text: 'de-DE / German (Germany)',
+    label: 'de-DE / German (Germany)',
     value: 'de-DE',
   },
   {
-    text: 'fr-FR / French (France)',
+    label: 'fr-FR / French (France)',
     value: 'fr-FR',
   },
 ];
 
 const formatOptions = [
   {
-    text: 'Absolute date and time',
+    label: 'Absolute date and time',
     value: 'absolute',
   },
   {
-    text: 'Absolute date',
+    label: 'Absolute date',
     value: 'date',
   },
   {
-    text: 'Absolute time',
+    label: 'Absolute time',
     value: 'time',
   },
   {
-    text: 'Relative time',
+    label: 'Relative time',
     value: 'relative',
   },
 ];
@@ -173,39 +173,21 @@ const DateTimeFormatDemo = () => {
 
   const [dateValue, setDateValue] = useState(formatDateInputValue(initialDate));
   const [timeValue, setTimeValue] = useState(formatTimeInputValue(initialDate));
-  const [locale, setLocale] = useState(localeOptions[0].value);
-  const [selectedFormat, setSelectedFormat] = useState(formatOptions[0].value);
+  const [locale, setLocale] = useState(localeOptions[0]);
+  const [selectedFormat, setSelectedFormat] = useState(formatOptions[0]);
 
   const timestamp = useMemo(() => {
     return parseDateTime(dateValue, timeValue);
   }, [dateValue, timeValue]);
 
   const outputValues = useMemo(() => {
-    return getOutputValues(timestamp, locale, selectedFormat);
+    return getOutputValues(timestamp, locale.value, selectedFormat.value);
   }, [timestamp, locale, selectedFormat]);
 
   return (
-    <div
-      style={{
-        background: '#f4f4f4',
-        padding: '2rem',
-      }}
-    >
-      <div
-        style={{
-          background: '#ffffff',
-          padding: '1rem',
-          maxWidth: '960px',
-        }}
-      >
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, minmax(0, 16rem))',
-            gap: '1.5rem',
-            marginBottom: '1.5rem',
-          }}
-        >
+    <div className="date-time-format-story">
+      <div className="date-time-format-story__panel">
+        <div className="date-time-format-story__controls">
           <DatePicker
             datePickerType="single"
             value={dateValue}
@@ -227,74 +209,44 @@ const DateTimeFormatDemo = () => {
             value={timeValue}
             onChange={(event) => setTimeValue(event.target.value)}
           />
-          <Select
+          <Dropdown
             id="date-time-format-locale"
-            labelText="Locale"
-            value={locale}
-            onChange={(event) => setLocale(event.target.value)}
-          >
-            {localeOptions.map((option) => (
-              <SelectItem
-                key={option.value}
-                text={option.text}
-                value={option.value}
-              />
-            ))}
-          </Select>
-          <Select
+            titleText="Locale"
+            items={localeOptions}
+            itemToString={(item) => item?.label ?? ''}
+            selectedItem={locale}
+            onChange={({ selectedItem }) => {
+              if (selectedItem) {
+                setLocale(selectedItem);
+              }
+            }}
+          />
+          <Dropdown
             id="date-time-format-format"
-            labelText="Format"
-            value={selectedFormat}
-            onChange={(event) => setSelectedFormat(event.target.value)}
-          >
-            {formatOptions.map((option) => (
-              <SelectItem
-                key={option.value}
-                text={option.text}
-                value={option.value}
-              />
-            ))}
-          </Select>
+            titleText="Format"
+            items={formatOptions}
+            itemToString={(item) => item?.label ?? ''}
+            selectedItem={selectedFormat}
+            onChange={({ selectedItem }) => {
+              if (selectedItem) {
+                setSelectedFormat(selectedItem);
+              }
+            }}
+          />
         </div>
 
         <div>
-          <p
-            style={{
-              margin: '0 0 0.75rem',
-              fontSize: '0.875rem',
-            }}
-          >
-            Output
-          </p>
-          <div
-            style={{
-              background: '#f4f4f4',
-              padding: '1rem',
-            }}
-          >
+          <p className="date-time-format-story__output-label">Output</p>
+          <div className="date-time-format-story__output-panel">
             {outputStyles.map((styleName) => (
               <div
                 key={styleName}
-                style={{
-                  marginBottom: styleName === 'short' ? 0 : '1.5rem',
-                }}
+                className="date-time-format-story__output-group"
               >
-                <div
-                  style={{
-                    color: '#525252',
-                    fontSize: '0.875rem',
-                    marginBottom: '0.25rem',
-                    textTransform: 'capitalize',
-                  }}
-                >
+                <div className="date-time-format-story__output-name">
                   {styleName}
                 </div>
-                <div
-                  style={{
-                    fontSize: '1.25rem',
-                    lineHeight: 1.4,
-                  }}
-                >
+                <div className="date-time-format-story__output-value">
                   {outputValues[styleName]}
                 </div>
               </div>
@@ -311,6 +263,7 @@ export default {
   component: DateTimeFormatDemo,
   tags: ['autodocs'],
   parameters: {
+    styles,
     docs: {
       page: DocsPage,
     },
@@ -323,5 +276,3 @@ export const DateTimeFormat = () => {
 };
 
 DateTimeFormat.storyName = 'Date Time Format';
-
-// Made with Bob

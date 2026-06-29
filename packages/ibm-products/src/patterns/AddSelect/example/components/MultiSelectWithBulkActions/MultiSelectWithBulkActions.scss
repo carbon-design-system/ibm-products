@@ -114,13 +114,12 @@
   &__batch-role-action {
     display: flex;
     align-items: center;
-    margin-inline-start: $spacing-05;
 
-    .cds--dropdown {
-      min-inline-size: 10rem;
+    .cds--list-box__wrapper--inline {
+      min-inline-size: 12rem;
     }
 
-    .cds--list-box__label {
+    .cds--list-box--inline .cds--list-box__label {
       color: var(--cds-text-on-color);
     }
   }

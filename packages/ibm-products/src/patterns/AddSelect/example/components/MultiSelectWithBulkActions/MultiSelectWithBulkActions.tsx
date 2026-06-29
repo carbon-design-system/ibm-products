@@ -496,6 +496,7 @@ export const MultiSelectWithBulkActions = forwardRef<
                                 <Layer>
                                   {modifierConfig.multiSelect ? (
                                     <MultiSelect
+                                      autoAlign
                                       id={`modifier-${item.id}`}
                                       titleText={modifierConfig.title}
                                       type="inline"
@@ -517,6 +518,7 @@ export const MultiSelectWithBulkActions = forwardRef<
                                     />
                                   ) : (
                                     <Dropdown
+                                      autoAlign
                                       id={`modifier-${item.id}`}
                                       titleText={modifierConfig.title}
                                       type="inline"
@@ -568,6 +570,7 @@ export const MultiSelectWithBulkActions = forwardRef<
                     headerActions={
                       selectedItemsForDisplay.length > 0 ? (
                         <IconButton
+                          autoAlign
                           label="Edit selection"
                           align="bottom"
                           onClick={handleOpenEditTearsheet}
@@ -687,15 +690,16 @@ export const MultiSelectWithBulkActions = forwardRef<
                         Remove
                       </TableBatchAction>
                       <div className={`${blockClass}__batch-role-action`}>
-                        <Dropdown
-                          id="batch-role-dropdown"
+                        <MultiSelect
+                          autoAlign
+                          id="batch-role-multiselect"
                           titleText=""
                           label="Assign role"
                           type="inline"
                           items={modifierConfig.options}
-                          onChange={({ selectedItem }) => {
-                            if (selectedItem) {
-                              handleBatchAssignRole(selectedItem);
+                          onChange={({ selectedItems }) => {
+                            if (selectedItems && selectedItems.length > 0) {
+                              handleBatchAssignRole(selectedItems);
                             }
                           }}
                           size="sm"
@@ -775,6 +779,7 @@ export const MultiSelectWithBulkActions = forwardRef<
                               <Layer>
                                 {modifierConfig.multiSelect ? (
                                   <MultiSelect
+                                    autoAlign
                                     id={`edit-modifier-${item.id}`}
                                     titleText=""
                                     type="inline"
@@ -798,6 +803,7 @@ export const MultiSelectWithBulkActions = forwardRef<
                                   />
                                 ) : (
                                   <Dropdown
+                                    autoAlign
                                     id={`edit-modifier-${item.id}`}
                                     titleText=""
                                     type="inline"

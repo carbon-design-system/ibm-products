@@ -566,5 +566,3 @@ MultiAddSelectWithDataTable.propTypes = {
 };
 
 MultiAddSelectWithDataTable.displayName = 'MultiAddSelectWithDataTable';
-
-// Made with Bob

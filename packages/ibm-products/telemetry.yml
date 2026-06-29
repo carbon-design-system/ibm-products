@@ -610,7 +610,11 @@ collect:
         - position
         - positionTune
         - target
-        - triggerRef
+        # CoachmarkContent
+        - aria-label
+        # CoachmarkContentHeader
+        - dragAriaLabel
+        - dragIconDescription
         # CoachmarkDragbar
         - a11yKeyboardHandler
         - onDrag
@@ -659,8 +663,6 @@ collect:
         # ConditionPreview
         - colorIndex
         - previewType
-        # ContentHeader
-        - dragIconDescription
         # CreateFullPage
         - breadcrumbsOverflowAriaLabel
         - maxVisibleBreadcrumbs
@@ -805,7 +807,9 @@ collect:
         - maxFileSizeErrorBody
         - maxFileSizeErrorHeader
         # Influencer
+        - influencerPanelAriaLabel
         - influencerPanelOpen
+        - influencerPanelTriggerRef
         # InlineEditButton
         - columnConfig
         - isActiveCell
@@ -934,6 +938,8 @@ collect:
         - menuButtonLabel
         # PageHeaderHeroImage
         - objectFit
+        # PageHeaderTabBar
+        - disableStickyTabBar
         # PageHeaderTagOverflow
         - renderOverflowTag
         - renderPopoverContent
@@ -1012,7 +1018,9 @@ collect:
         - tooltipDirection
         - width
         # SummaryContent
+        - summaryPanelAriaLabel
         - summaryPanelOpen
+        - summaryPanelTriggerRef
         # TagOverflow
         - tagComponent
         # Tearsheet

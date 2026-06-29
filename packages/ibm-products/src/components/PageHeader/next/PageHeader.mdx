@@ -146,7 +146,8 @@ export const customFunctionArr = [
           },
           customFunctionDefs: customFunctionArr,
           customImports: [
-            `import { Add, Bee, CloudFoundry_1 } from '@carbon/react/icons';`,
+            `import { Button } from '@carbon/react';`,
+            `import { Add, Bee, CloudFoundry_1, AiGenerate, Activity } from '@carbon/react/icons';`,
           ],
           styles: PageHeaderStories.default.parameters.styles,
         }),
@@ -357,7 +358,8 @@ area:
           },
           customFunctionDefs: customFunctionArr,
           customImports: [
-            `import { Add, Bee, CloudFoundry_1 } from '@carbon/react/icons';`,
+            `import { Button } from '@carbon/react';`,
+            `import { Add, Bee, CloudFoundry_1, AiGenerate, Activity } from '@carbon/react/icons';`,
           ],
           styles: PageHeaderStories.default.parameters.styles,
         }),
@@ -651,6 +653,15 @@ associated panel.
           },
           customFunctionDefs: [
             ...customFunctionArr,
+            `const renderUIShellHeader = () => (
+              <HeaderContainer
+                render={() => (
+                  <Header aria-label="Application header">
+                    <HeaderName href="/">Application header</HeaderName>
+                  </Header>
+                )}
+              />
+            );`,
             `const tabBarTags = [
               <Tag type="blue" id="example-tag-1" key="example-tag-1">
                 Tag 1
@@ -676,7 +687,7 @@ associated panel.
             ];`,
           ],
           customImports: [
-            `import { Button, Tag } from '@carbon/react';`,
+            `import { Button, Tag, HeaderContainer, Header, HeaderName } from '@carbon/react';`,
             `import { Add, AiGenerate, Activity, Bee, CloudFoundry_1 } from '@carbon/react/icons';`,
           ],
           styles: PageHeaderStories.default.parameters.styles,

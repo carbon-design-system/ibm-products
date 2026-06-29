@@ -191,6 +191,8 @@ collect:
         - close-on-activation
         - enter-delay-ms
         - leave-delay-ms
+        # c4p-page-header-tabs
+        - disable-sticky-tab-bar
         # c4p-page-header-tags-set
         - tags-data
         # c4p-preview-tearsheet
@@ -213,6 +215,7 @@ collect:
         - onc4p-side-panel-closed
         - onc4p-side-panel-navigate-back
         - placement
+        - resizable
         - selector-page-content
         - slide-in
         # c4p-tearsheet
@@ -226,12 +229,14 @@ collect:
         - disable-header-collapse
         - onc4p-tearsheet-header-close-button-clicked
         # c4p-tearsheet-influencer
+        - influencer-panel-aria-label
         - influencer-panel-open
         - oncds-tearsheet-influencer-closed
         # c4p-tearsheet-stack
         - stack-step-size
         # c4p-tearsheet-summary-content
         - oncds-tearsheet-summary-closed
+        - summary-panel-aria-label
         - summary-panel-open
         # c4p-user-avatar
         - background-color

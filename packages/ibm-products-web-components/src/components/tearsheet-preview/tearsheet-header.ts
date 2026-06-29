@@ -179,11 +179,16 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
       [`${blockClass}__header-collapsed`]: !!fullyCollapsed,
     });
     return html`<cds-modal-header class="${classes}">
-      <slot
-        name="decorator"
+      <div
         slot="ai-label"
-        @slotchange=${this._handleDecoratorChange}
-      ></slot>
+        role="${this._hasDecorator ? 'complementary' : undefined}"
+        aria-label="${this._hasDecorator ? 'Decorator' : undefined}"
+      >
+        <slot
+          name="decorator"
+          @slotchange=${this._handleDecoratorChange}
+        ></slot>
+      </div>
       <cds-modal-close-button
         close-button-label=${this.closeIconDescription}
         @click="${this._handleUserInitiatedClose}"

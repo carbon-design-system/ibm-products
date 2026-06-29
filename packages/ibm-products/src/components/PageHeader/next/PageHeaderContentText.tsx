@@ -28,12 +28,17 @@ export interface PageHeaderContentTextProps {
    * The PageHeaderContent's subtitle
    */
   subtitle?: string;
+  /**
+   * Specify the element or component used to render the subtitle.
+   */
+  subtitleAs?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
 export const PageHeaderContentText = ({
   className,
   children,
   subtitle,
+  subtitleAs = 'h2',
   ...other
 }: PageHeaderContentTextProps) => {
   const classNames = classnames(
@@ -46,7 +51,7 @@ export const PageHeaderContentText = ({
   return (
     <div className={classNames} {...other}>
       {subtitle && (
-        <Text as="h3" className={`${blockClass}__content__subtitle`}>
+        <Text as={subtitleAs} className={`${blockClass}__content__subtitle`}>
           {subtitle}
         </Text>
       )}
@@ -70,4 +75,8 @@ PageHeaderContentText.propTypes = {
    * The PageHeaderContent's subtitle
    */
   subtitle: PropTypes.string,
+  /**
+   * Specify the element used to render the subtitle.
+   */
+  subtitleAs: PropTypes.oneOf(['h2', 'h3', 'h4', 'h5', 'h6']),
 };

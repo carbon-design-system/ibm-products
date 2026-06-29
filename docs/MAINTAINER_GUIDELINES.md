@@ -2,10 +2,8 @@
 
 # Maintainer guide
 
-Pull requests are automatically assigned to the IBM Cloud & Cognitive
-Development team. (Pull requests related to the
-[`security` package](https://github.com/carbon-design-system/ibm-products/tree/main/packages/security)
-are assigned the individual maintainers of that package.)
+Pull requests are automatically assigned to the Carbon For IBM Products
+Development team.
 
 ## Reviewing code
 
@@ -14,10 +12,49 @@ Pull requests should be reviewed in a timely manner.
 Code review should follow the process and standards documented in our
 [PR review guidelines](https://github.com/carbon-design-system/ibm-products/blob/main/docs/reviews/PR_REVIEW_GUIDELINES.md).
 
-Once a PR is approved, you can add the label **`status: ready to merge`**, to
-allow Kodiak to handle automatic updates and merging. PRs can be merged by their
-authors although for PRs contributed by those outside of the core contributor
-team, you may also merge and delete the branches on their behalf.
+### DCO (Developer Certificate of Origin)
+
+All contributions must be covered by the Developer Certificate of Origin (DCO).
+Contributors must sign the DCO by adding a comment to their pull request.
+
+**For maintainers reviewing PRs:**
+
+1. Check if the PR has the DCO signed (look for the DCO bot check)
+2. If DCO is not signed, request the contributor to add a comment with:
+   ```
+   I have read the DCO document and I hereby sign the DCO.
+   ```
+3. The DCO bot will automatically verify the signature once the comment is
+   posted
+
+**Note:** The PR cannot be merged until the DCO is signed.
+
+### Merging pull requests
+
+Once a PR is approved and DCO is signed, you can add the label
+**`status: ready to merge`**, to allow Kodiak to handle automatic updates and
+merging. PRs can be merged by their authors although for PRs contributed by
+those outside of the core contributor team, you may also merge and delete the
+branches on their behalf.
+
+## Component status and promotion
+
+Components in Carbon for IBM Products follow a PDLC (Product Development
+Lifecycle) status system:
+
+**Draft → Preview Candidate → Preview → Stable**
+
+For detailed information about each status level and how to promote components,
+see:
+
+- [Component Status Definitions](./guides/COMPONENT_STATUS_DEFINITIONS.md)
+- [Release Review Template](.github/ISSUE_TEMPLATE/release-review.md)
+
+### Coverage requirements by status
+
+- **Preview Candidate:** Test coverage approaching 80%
+- **Preview:** Test coverage ≥ 80%
+- **Stable:** Test coverage ≥ 90%
 
 ## Performing release reviews
 
@@ -48,7 +85,7 @@ scheduled to run on a regular cadence, they can also be triggered manually
 through GitHub Actions.
 
 After each release, our contributors should announce the latest version of
-`@carbon/ibm-products` in the `ibmproducts-pal-dev` Slack channel.
+`@carbon/ibm-products` in the `#carbon-for-ibmproducts` Slack channel.
 
 For more detail on publishing releases, please see our guidelines on
 [publishing releases](https://github.com/carbon-design-system/ibm-products/blob/main/docs/PUBLISHING_RELEASES.md)

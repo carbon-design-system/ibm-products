@@ -305,6 +305,10 @@ function detectReactHooks(sanitizedCode: string): string[] {
     'useEffect',
     'useContext',
     'useRef',
+    'useCallback',
+    'useMemo',
+    'useReducer',
+    'useLayoutEffect',
   ] as const;
   const foundHooks: string[] = [];
 

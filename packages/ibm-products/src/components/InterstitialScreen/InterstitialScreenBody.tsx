@@ -135,7 +135,7 @@ const InterstitialScreenBody = React.forwardRef<
       carouselInitRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stepType, bodyChildrenData]);
+  }, [stepType]);
 
   useEffect(() => {
     if (stepType === 'multi' && typeof progStep === 'number') {

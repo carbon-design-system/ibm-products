@@ -1,3 +1,23 @@
+## `@carbon/ibm-products@2.93.0`
+### Features :rocket:
+- feat(preview_PageHeader): implement disable sticky tab bar (#9365)
+- feat: add preventCloseOnClickOutside prop to Coachmark to prevent outside click close (#9548)
+
+### Bug fixes :bug:
+- fix(preview__Tearsheet): accessibilty review issues fixes (#9512)
+- fix: interstitialScreen getting reset on re-renders (#9560)
+- fix(preview_PageHeader): resolve all issues in examples (#9543)
+- fix(Tearsheet): fix focus order of close button (#9496)
+- fix(coachmark): release review updates (#9558)
+- fix(CreateFullPage): show step error state in pure pattern progress indicator (#9514)
+- fix(ExpressiveCard): fix types for the description, label, and title (#9524)
+- fix(deps): update dependency @carbon-labs/react-resizer to ^0.25.0 (#9535)
+- fix(coachmark): a11y issues (#9470)
+- fix: replace useLayoutEffect with useIsomorphicEffect in Tearsheet usePresence (#9513)
+
+## `@carbon/ibm-products@2.92.1`
+### Bug fixes :bug:
+- fix(release): remove private utilities package from dependencies (#9532)
 ## `@carbon/ibm-products@2.92.1-rc.0`
 ### Bug fixes :bug:
 - fix(release): remove private utilities package from dependencies (#9532)

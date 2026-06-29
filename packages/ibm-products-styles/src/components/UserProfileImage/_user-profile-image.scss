@@ -47,7 +47,7 @@ $themes: (
   ),
 );
 
-$theme-keys: map-keys($themes);
+$theme-keys: map.keys($themes);
 
 @function carbon-get-background-color($color, $key, $contrast-key) {
   @return map.get(

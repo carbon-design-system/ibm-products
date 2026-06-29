@@ -38,6 +38,12 @@ export default class CDSPageHeaderActionsSet extends LitElement {
   actionsData: PageAction[] = [];
 
   /**
+   * Aria label for the overflow menu button.
+   */
+  @property({ type: String, attribute: 'overflow-aria-label', reflect: true })
+  overflowAriaLabel = 'More page actions';
+
+  /**
    * Container holding all action buttons and the overflow menu.
    */
   @query(`.${blockClass}`)
@@ -206,12 +212,12 @@ export default class CDSPageHeaderActionsSet extends LitElement {
 
   render() {
     return html`
-      <div class="${blockClass}">
-        <div class="${blockClass}__items">
+      <ul class="${blockClass}">
+        <li class="${blockClass}__items">
           <slot></slot>
-        </div>
+        </li>
 
-        <div data-offset ?data-hidden=${this.hiddenItems.length === 0}>
+        <li data-offset ?data-hidden=${this.hiddenItems.length === 0}>
           <cds-overflow-menu
             size="md"
             close-on-activation
@@ -219,6 +225,7 @@ export default class CDSPageHeaderActionsSet extends LitElement {
             leave-delay-ms="0"
             align="left"
             data-floating-menu-container
+            aria-label="${this.overflowAriaLabel}"
           >
             ${iconLoader(OverflowMenuVertical16, {
               class: `${blockClass}__overflow-svg`,
@@ -239,8 +246,8 @@ export default class CDSPageHeaderActionsSet extends LitElement {
               )}
             </cds-overflow-menu-body>
           </cds-overflow-menu>
-        </div>
-      </div>
+        </li>
+      </ul>
     `;
   }
   static styles = styles;

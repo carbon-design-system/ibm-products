@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2025
+// Copyright IBM Corp. 2020, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -106,6 +106,7 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
+    CoachmarkTagline: false,
     Decorator: false,
     DecoratorLink: false,
     DecoratorSingleButton: false,
@@ -142,14 +143,26 @@ const defaults = {
   },
 };
 
+// The component feature flag (canary) mechanism is deprecated in favour of
+// PDLC-prefixed exports. See the Product Development Lifecycle documentation:
+// https://carbondesignsystem.com/contributing/product-development-lifecycle/
+const componentFlagDeprecationNote =
+  'The component feature flag (canary) mechanism is deprecated and will be ' +
+  'removed in a future release. Components are now published with a PDLC ' +
+  'status prefix and can be imported directly, e.g. ' +
+  '`import { previewCandidate__ComponentName } from "@carbon/ibm-products"`. ' +
+  'See https://carbondesignsystem.com/contributing/product-development-lifecycle/';
+
 const warningMessageComponent = (property) =>
-  `Carbon for IBM Products (WARNING): Component "${property}" enabled via feature flags. This component has not yet completed its review process.`;
+  `Carbon for IBM Products (WARNING): Component "${property}" enabled via feature flags. This component has not yet completed its review process.\n` +
+  `Carbon for IBM Products (DEPRECATION): ${componentFlagDeprecationNote}`;
 const warningMessageFeature = (property) =>
   `Carbon for IBM Products (WARNING): Feature "${property}" enabled via feature flags.`;
 const errorMessageFeature = (property) =>
   `Carbon for IBM Products (Error): Feature "${property}" not enabled. To enable see the notes on feature flags in the README.`;
 const warningMessageAllComponents =
-  'Carbon for IBM Products (WARNING): All components enabled through use of setAllComponents. This includes components that have not yet completed their review process.';
+  'Carbon for IBM Products (WARNING): All components enabled through use of setAllComponents. This includes components that have not yet completed their review process.\n' +
+  `Carbon for IBM Products (DEPRECATION): ${componentFlagDeprecationNote}`;
 const warningMessageAllFeatures =
   'Carbon for IBM Products (WARNING): All features enabled through use of setAllFeatures';
 

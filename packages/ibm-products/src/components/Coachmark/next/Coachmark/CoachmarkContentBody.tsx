@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,8 +9,9 @@ import React, { forwardRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass } from './context';
+import { getDevtoolsProps } from '../../../../global/js/utils/devtools';
 
-export interface ContentBodyProps {
+export interface CoachmarkContentBodyProps {
   /**
    * Provide the optional content for header section and will be render after header titles and before progress indicator.
    * People can make use of this if they want to have custom header.
@@ -27,21 +28,29 @@ export type EnrichedChildren = {
   children: ReactNode;
 };
 
-export const ContentBody = forwardRef<HTMLDivElement, ContentBodyProps>(
-  (props, ref) => {
-    const { className = '', children, ...rest } = props;
-    const ContentBodyBlockClass = `${blockClass}--content-body`;
-    return (
-      <div ref={ref} className={cx(ContentBodyBlockClass, className)}>
-        {children}
-      </div>
-    );
-  }
-);
+export const CoachmarkContentBody = forwardRef<
+  HTMLDivElement,
+  CoachmarkContentBodyProps
+>((props, ref) => {
+  const { className = '', children, ...rest } = props;
+  const ContentBodyBlockClass = `${blockClass}--content-body`;
+  return (
+    <div
+      ref={ref}
+      className={cx(ContentBodyBlockClass, className)}
+      {...rest}
+      {...getDevtoolsProps('CoachmarkContentBody')}
+    >
+      {children}
+    </div>
+  );
+});
 
-export default ContentBody;
+export default CoachmarkContentBody;
 
-ContentBody.propTypes = {
+CoachmarkContentBody.displayName = 'CoachmarkContentBody';
+
+CoachmarkContentBody.propTypes = {
   /**
    * Provide the optional content for header section and will be render after header titles and before progress indicator.
    * People can make use of this if they want to have custom header.

@@ -195,6 +195,7 @@ const TearsheetInternal = forwardRef<
       isExiting = false,
       presenceRef,
       decorator,
+      launcherButtonRef,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
@@ -217,6 +218,7 @@ const TearsheetInternal = forwardRef<
     const footer = arr.find((child: any) => child.type === TearsheetFooter);
 
     const uniqueId = useRef(useId());
+    const titleId = useRef(`${blockClass}__title-${uniqueId.current}`);
     const { notifyStack, stack, getDepth, getScaleFactor, getBlockSizeChange } =
       useStackContext();
 
@@ -293,6 +295,47 @@ const TearsheetInternal = forwardRef<
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stack]);
 
+    // Return focus to launcher button when tearsheet closes
+    useEffect(() => {
+      if (!open && launcherButtonRef?.current) {
+        // Use a small delay to ensure the tearsheet has fully closed
+        const timeoutId = setTimeout(() => {
+          const refCurrent = launcherButtonRef.current;
+
+          if (refCurrent instanceof HTMLElement) {
+            // Check if the button is inside a TearsheetHeaderActions component
+            const headerActionItem = refCurrent.closest(
+              `.${blockClass}__header-action-item`
+            );
+
+            if (headerActionItem) {
+              // This is a button inside TearsheetHeaderActions
+              // Check if it's currently visible or if items are collapsed to menu
+              const headerActionsContainer = headerActionItem.closest(
+                `.${blockClass}__content__header-actions`
+              );
+              const menuButton = headerActionsContainer?.querySelector(
+                `.${blockClass}__header-actions-menuButton:not(.${blockClass}__header-actions-menuButton--hidden) button`
+              );
+
+              if (menuButton instanceof HTMLElement) {
+                // On small screens, action buttons collapse to menu - focus the menu button
+                menuButton.focus();
+              } else {
+                // On large screens, focus the action button directly
+                refCurrent.focus();
+              }
+            } else {
+              // Regular button ref (not inside TearsheetHeaderActions): focus directly
+              refCurrent.focus();
+            }
+          }
+        }, 100);
+
+        return () => clearTimeout(timeoutId);
+      }
+    }, [open, launcherButtonRef]);
+
     const content = (
       <TearsheetContext.Provider
         value={{
@@ -304,6 +347,7 @@ const TearsheetInternal = forwardRef<
           variant,
           isSm,
           decorator,
+          titleId: titleId.current,
         }}
       >
         <FeatureFlags
@@ -315,6 +359,7 @@ const TearsheetInternal = forwardRef<
           <ComposedModal
             {...rest}
             aria-label={ariaLabel}
+            aria-labelledby={!ariaLabel ? titleId.current : undefined}
             className={cx(blockClass, className, {
               [`${blockClass}--wide`]: variant === 'wide',
               [`${blockClass}--narrow`]: variant === 'narrow',

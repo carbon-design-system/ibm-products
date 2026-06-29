@@ -298,6 +298,8 @@ test.describe('PageHeader @avt', () => {
 
     // collapses into menu button on small screens
     await page.setViewportSize({ width: 1024, height: 768 });
+    // Wait for layout to stabilize after viewport resize
+    await page.waitForTimeout(300);
     // reset focus to first focusable element
     await page
       .getByLabel('Breadcrumb', { exact: true })

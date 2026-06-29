@@ -81,12 +81,17 @@ export const pageActionButtonItems = [
     id: 'primary-action',
     onClick: () => console.log(`Primary action`),
     body: (
-      <Button kind="primary" renderIcon={Add} size="md">
+      <Button
+        kind="primary"
+        renderIcon={Add}
+        size="md"
+        aria-label="Add Primary action"
+      >
         Primary action
       </Button>
     ),
     menuItem: {
-      label: 'Primary action',
+      label: 'Add Primary action',
     },
   },
 ];

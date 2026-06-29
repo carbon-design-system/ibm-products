@@ -46,6 +46,12 @@ class CDSTearsheetSummaryContent extends SignalWatcher(
   summaryPanelOpen: boolean = false;
 
   /**
+   * Optional aria-label for the summary panel. Defaults to "Summary panel".
+   */
+  @property({ attribute: 'summary-panel-aria-label' })
+  summaryPanelAriaLabel: string = 'Summary panel';
+
+  /**
    * Handler for closing the summary panel
    */
   private handleClose = () => {
@@ -78,6 +84,8 @@ class CDSTearsheetSummaryContent extends SignalWatcher(
           ?slide-in=${true}
           ?open="${this.summaryPanelOpen}"
           placement="right"
+          aria-label="${this.summaryPanelAriaLabel}"
+          aria-modal="true"
           @c4p-side-panel-closed="${this.handleClose}"
         >
           <slot></slot>

@@ -23,6 +23,11 @@ const blockClass = `${pkg.prefix}--canary`;
 
 /**
  *  Canary component used when the component requested is not yet production
+ *
+ * @deprecated The component feature flag (canary) mechanism is deprecated in
+ * favour of PDLC-prefixed exports (e.g. `preview__`, `previewCandidate__`) and
+ * will be removed in a future release. See
+ * https://carbondesignsystem.com/contributing/product-development-lifecycle/
  */
 export const Canary = (
   { className, componentName, ...rest } /*, originalArgs*/

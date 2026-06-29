@@ -1,94 +1,221 @@
 ---
-name: (C4IBM Products team only) Release review 🐦
-about: Review process before release of a new component or pattern from Canary
+name: (C4IBM Products team only) Component Status Promotion Review
+about: Review process for promoting components between PDLC status levels
 ---
 
-## Review for release
+## Component Status Promotion Review
+
+**Component Name:** [Component Name]  
+**Current Status:** [Draft / Preview Candidate / Preview]  
+**Target Status:** [Preview Candidate / Preview / Stable]  
+**PDLC Phase:** [Discovery / Delivery / Launch & Scale]
+
+---
+
+## Status Promotion Path
+
+Components follow this progression:
+
+```
+Draft → Preview Candidate → Preview → Stable
+```
+
+Select the appropriate checklist below based on your promotion target.
+
+---
+
+## 📋 Promoting to Preview Candidate (Discovery Phase)
+
+Use this checklist when promoting from **Draft** to **Preview Candidate**.
+
+### Readiness
+
+- [ ] Basic functionality implemented
+- [ ] Initial design review completed
+- [ ] Measurable results identified and documented
+- [ ] Stakeholders identified
+- [ ] Clear business value defined
+- [ ] Component ready for broader validation
+
+### Next Steps
+
+- [ ] Announce in `#carbon-for-ibmproducts` Slack channel
+- [ ] Gather feedback from stakeholders
+- [ ] Plan for composability review
+
+---
+
+## 📋 Promoting to Preview (Delivery Phase)
+
+Use this checklist when promoting from **Preview Candidate** to **Preview**.
+
+### Readiness
+
+- [ ] Composability review (design and dev) completed
+- [ ] API is mostly stable
+- [ ] Core features complete
+- [ ] Documentation drafted
+- [ ] Feedback from stakeholders incorporated
+- [ ] Ready for production use
+
+### Testing
+
+- [ ] Test coverage ≥ 80%
+- [ ] Tests exercise all inputs (props, slots, etc)
+- [ ] Tests validate behaviors and interactions
+- [ ] No warnings, errors, or log messages in test output
+- [ ] Run: `yarn test:c4p /ComponentName/ --coverage`
+
+### Documentation
+
+- [ ] Source code satisfactorily commented with DocGen comments
+- [ ] Story for each design scenario
+- [ ] Usage documentation and code samples available
+- [ ] Props table complete
+- [ ] Examples on CodeSandbox and Stackblitz
+
+### Next Steps
+
+- [ ] Announce promotion in `#carbon-for-ibmproducts` Slack channel
+- [ ] Begin accessibility review
+- [ ] Begin design review for stable promotion
+
+## 📋 Promoting to Stable (Launch & Scale Phase)
+
+Use this checklist when promoting from **Preview** to **Stable**.
 
 ### Readiness
 
 - [ ] One or more scenarios for a design pattern have been identified as a
-      useful unit of functionality to publish.
-- [ ] A functioning component or components delivering those scenarios have been
-      delivered and merged to `main`.
-- [ ] The component or components have completed an
-      [accessibility review](https://github.com/carbon-design-system/ibm-products/blob/main/.github/ISSUE_TEMPLATE/accessibilty-review.md).
-- [ ] One or more design maintainers have approved the implementation for those
-      scenarios, preferably via
-      [design review](https://github.com/carbon-design-system/ibm-products/blob/main/.github/ISSUE_TEMPLATE/design-review.md).
+      useful unit of functionality
+- [ ] Component has completed
+      [accessibility review](https://github.com/carbon-design-system/ibm-products/blob/main/.github/ISSUE_TEMPLATE/accessibilty-review.md)
+- [ ] One or more design maintainers have approved via
+      [design review](https://github.com/carbon-design-system/ibm-products/blob/main/.github/ISSUE_TEMPLATE/design-review.md)
+- [ ] API is finalized (no breaking changes without major version)
+- [ ] No critical bugs
+- [ ] Documentation complete across code, kit, and design
 
-### Engineering review
+### Engineering Review
 
-- [ ] Breaking changes have only been introduced with prior approval, discussion
-      and are documented in release notes. Deprecation notices and/or feature
-      flags are included in the prior major version.
-- [ ] The implementation takes into account, and does not impair, remaining and
-      anticipated design scenarios.
-- [ ] Public component features (names, props, etc) are consistent with
-      Carbon-defined conventions and are consistent internally. Where there
-      isn’t an existing convention to apply, ensure robust precedents are being
-      established.
-- [ ] The UI produced is
-  - [ ] responsive,
-  - [ ] translatable[^1],
-  - [ ] cross-browser,
-  - [ ] and responds to the currently set Carbon theme.
-- [ ] Components are functional components using hooks.
-- [ ] Public components which produce DOM structures support `className`.
-- [ ] Public components support a ref (via `React.forwardRef`).
-- [ ] Public component supports a Devtools attribute
-- [ ] All significant DOM elements have meaningful classes[^2] and include the
-      package or Carbon prefix (no hardcoded prefixes).
-- [ ] Additional attributes that are not identified as props (such as `title`,
-      `aria-*`, etc) are passed through to an appropriate DOM node of the
-      component as HTML attributes.
-- [ ] No warnings, errors or log messages in the console.
-- [ ] Each public component JS is exported in `/src/components/index.js`, each
-      public component SCSS is included in `/src/components/_index.scss`, and
-      each public component has a flag in `package-settings.js`.
-- [ ] Each public component SCSS lists all of the Carbon and IBM Products
-      components imported and used by the JavaScript code and explicitly imports
-      the SCSS for each of these components.
+#### API & Implementation
 
-### Standards
+- [ ] Breaking changes have only been introduced with prior approval and are
+      documented
+- [ ] Implementation accounts for remaining and anticipated design scenarios
+- [ ] Public component features are consistent with Carbon conventions
+- [ ] The UI produced is:
+  - [ ] Responsive
+  - [ ] Translatable[^1]
+  - [ ] Cross-browser compatible
+  - [ ] Responds to currently set Carbon theme
+- [ ] Components are functional components using hooks
+- [ ] Public components support `className`
+- [ ] Public components support a ref (via `React.forwardRef`)
+- [ ] Public component supports Devtools attribute
+- [ ] All significant DOM elements have meaningful classes[^2] with
+      package/Carbon prefix
+- [ ] Additional attributes passed through to appropriate DOM node
+- [ ] No warnings, errors or log messages in console
 
-- [ ] No linter warnings or errors are produced.
-- [ ] Carbon tokens (theme, layout, motion) are used unless the design specifies
-      otherwise.
-- [ ] All components utilizing motion must include reduced-motion queries for
-      accessibility purposes.
-- [ ] Code is formatted according to prettier rules (no use of
-      `//prettier-ignore`).
-- [ ] Code is clear, maintainable and follows standard React practices and the
-      code guidelines.
-- [ ] Copyright header in every source file (js, css, scss etc.) with the
-      appropriate years.
+#### Code Standards
+
+- [ ] No linter warnings or errors
+- [ ] Carbon tokens (theme, layout, motion) used unless design specifies
+      otherwise
+- [ ] Components with motion include reduced-motion queries
+- [ ] Code formatted according to prettier rules
+- [ ] Code is clear, maintainable, follows React best practices
+- [ ] Copyright header in every source file with appropriate years
 
 ### Testing
 
-- [ ] There is a set of test cases for the components.
-- [ ] The tests exercise all inputs (props, slots, etc) and verify appropriate
-      outputs.
-- [ ] The tests validate the behaviors and interactions defined in the design
-      where practical.
-- [ ] The tests achieve at least 80% coverage. Usage of `istanbul ignore` is
-      appropriate and not extensive.
-- [ ] No warnings, errors, or log messages in the test output.
+- [ ] Test coverage ≥ 90% (required for stable)
+- [ ] Tests exercise all inputs and verify outputs
+- [ ] Tests validate behaviors and interactions
+- [ ] Usage of `istanbul ignore` is appropriate and minimal
+- [ ] No warnings, errors, or log messages in test output
+- [ ] Run: `yarn test:c4p /ComponentName/ --coverage`
+- [ ] Verify coverage: `yarn coverage:report`
+
+### Snapshots & Build
+
+- [ ] Test snapshots regenerated: `yarn test:c4p:snapshot -u`
+- [ ] Public CSS snapshot updated and committed
+- [ ] Type definitions rebuilt: `yarn build:types`
 
 ### Documentation
 
-- [ ] Source code is satisfactorily commented and provides DocGen comments for
-      all public components and their props.
-- [ ] There is a story for each design scenario. The stories expose all relevant
-      props and actions, and additional usage documentation and code samples are
-      available on the Docs story along with the props table.
-- [ ] There is an example (or multiple sandboxes if appropriate) on CodeSandbox
-      and Stackblitz for the components.
+- [ ] Complete documentation across code, kit, and design
+- [ ] All props documented with DocGen comments
+- [ ] Stories for all design scenarios
+- [ ] Usage examples and code samples complete
+- [ ] Migration guide created (if API changed from Preview)
+- [ ] Examples on CodeSandbox and Stackblitz updated
+
+### Announcement
+
+- [ ] Post in `#carbon-for-ibmproducts` Slack channel with:
+  - Component overview
+  - Key features
+  - Import example
+  - Link to documentation
+  - Test coverage percentage
+
+---
+
+## Additional Notes
+
+### Status codemods
+
+A codemods is available to help consumers update their imports when components
+change status:
+
+```bash
+npx @carbon/upgrade migrate rename-ibm-products-imports-to-preview --write
+```
+
+**What it does:**
+
+- Automatically adds PDLC status prefixes to non-stable component imports
+- Preserves local variable names using aliases
+- Handles both new imports and already-prefixed imports
+
+**Example transformation:**
+
+```javascript
+// Before
+import { Tearsheet, InlineTip, SearchBar } from '@carbon/ibm-products';
+
+// After
+import {
+  Tearsheet,
+  previewCandidate__InlineTip as InlineTip,
+  previewCandidate__SearchBar as SearchBar,
+} from '@carbon/ibm-products';
+```
+
+**Note:** Run without `--write` flag first to preview changes before applying
+them.
+
+### Coverage Requirements
+
+- **Preview Candidate:** Approaching 80%
+- **Preview:** ≥ 80%
+- **Stable:** ≥ 90%
+
+### Related Documentation
+
+- [Component Status Definitions](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/COMPONENT_STATUS_DEFINITIONS.md)
+- [Release Review Guidelines](https://github.com/carbon-design-system/ibm-products/blob/main/docs/reviews/RELEASE_REVIEW_GUIDELINES.md)
+- [Maintainer Guidelines](https://github.com/carbon-design-system/ibm-products/blob/main/docs/MAINTAINER_GUIDELINES.md)
+
+---
 
 [^1]: Any labels, text, or other strings within a component should use a prop.
 
 [^2]:
-    See Carbon’s
+    See Carbon's
     [Developer Handbook](https://github.com/carbon-design-system/carbon/blob/main/.github/CONTRIBUTING.md)
     for guidance on
     [class names](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#class-names).

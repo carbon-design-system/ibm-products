@@ -270,9 +270,9 @@ export const MultiAddSelectWithDataTable = forwardRef<
       id: item.id,
       title: item.title || '',
       subtitle: item.subtitle || '',
-      category: (item.meta as any)?.category || '',
-      owner: (item.meta as any)?.owner || '',
-      status: (item.meta as any)?.status || '',
+      category: (item.category as string) || '',
+      owner: (item.owner as string) || '',
+      status: (item.status as string) || '',
       disabled: item.disabled,
     }));
 

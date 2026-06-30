@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Card, CardHeader, CardBody, CardFooter } from './';
+import { Card, CardHeader, CardBody, CardFooter } from '.';
 
 describe('Card', () => {
   it('renders card with children', () => {
@@ -79,7 +79,7 @@ describe('Card', () => {
       </Card>
     );
 
-    const card = container.firstChild as HTMLElement;
+    const card = container.firstChild;
     await user.click(card);
 
     expect(handleClick).not.toHaveBeenCalled();

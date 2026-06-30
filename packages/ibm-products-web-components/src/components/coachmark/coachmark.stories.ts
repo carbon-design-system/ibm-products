@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,21 +15,21 @@ import '@carbon/web-components/es/components/button/index.js';
 import styles from './story-styles.scss?lit';
 import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import Crossroads from '@carbon/icons/es/crossroads/16.js';
-import {
-  handleClick,
-  handleDone,
-  handleCoachmarkOpened,
-} from './coachmark-helpers';
+import { handleClick } from './coachmark-helpers';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
-  [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
-  [`top-right`]: POPOVER_ALIGNMENT.TOP_RIGHT,
+  [`top-end`]: POPOVER_ALIGNMENT.TOP_END,
+  [`top-start`]: POPOVER_ALIGNMENT.TOP_START,
   [`bottom`]: POPOVER_ALIGNMENT.BOTTOM,
-  [`bottom-left`]: POPOVER_ALIGNMENT.BOTTOM_LEFT,
-  [`bottom-right`]: POPOVER_ALIGNMENT.BOTTOM_RIGHT,
+  [`bottom-end`]: POPOVER_ALIGNMENT.BOTTOM_END,
+  [`bottom-start`]: POPOVER_ALIGNMENT.BOTTOM_START,
   [`left`]: POPOVER_ALIGNMENT.LEFT,
+  [`left-end`]: POPOVER_ALIGNMENT.LEFT_END,
+  [`left-start`]: POPOVER_ALIGNMENT.LEFT_START,
   [`right`]: POPOVER_ALIGNMENT.RIGHT,
+  [`right-end`]: POPOVER_ALIGNMENT.RIGHT_END,
+  [`right-start`]: POPOVER_ALIGNMENT.RIGHT_START,
 };
 
 const args = { align: POPOVER_ALIGNMENT.TOP };
@@ -49,6 +49,11 @@ const argTypes = {
     description:
       'Specify whether the component should be rendered on high-contrast',
   },
+  caret: {
+    control: 'boolean',
+    description:
+      'Specify whether a caret should be rendered on the popover. This is intended to use only for coachmark patterns.',
+  },
   floating: {
     control: 'boolean',
     description: 'Specifies whether the component is floating or not',
@@ -62,6 +67,11 @@ const argTypes = {
     control: 'object',
     description:
       'Fine tune the position of the target in pixels. Applies only to Beacons',
+  },
+  selectorPrimaryFocus: {
+    control: 'text',
+    description:
+      'CSS selector for the element that should receive focus when the coachmark opens',
   },
 };
 
@@ -85,7 +95,7 @@ export const Tooltip = {
           align=${args.align}
           .highContrast=${args.highContrast}
           .position=${{ x: 150, y: 100 }}
-          @c4p-coachmark-opened=${handleCoachmarkOpened}
+          .caret=${true}
         >
           <c4p-coachmark-beacon
             label="Show information"
@@ -101,7 +111,7 @@ export const Tooltip = {
           <c4p-coachmark-body class="coachmark-body">
             <h2>Hello World</h2>
             <p>this is a description test</p>
-            <cds-button size="sm" @click=${handleDone}>Done</cds-button>
+            <cds-button size="sm">Done</cds-button>
           </c4p-coachmark-body>
         </c4p-coachmark>
       </div>
@@ -128,7 +138,7 @@ export const Floating = {
           align=${args.align}
           .highContrast=${args.highContrast}
           .floating=${Boolean(true)}
-          @c4p-coachmark-opened=${handleCoachmarkOpened}
+          drag-aria-label="Coachmark is being dragged"
         >
           <cds-button
             kind="tertiary"
@@ -145,7 +155,7 @@ export const Floating = {
           <c4p-coachmark-body class="coachmark-body">
             <h2>Hello World</h2>
             <p>this is a description test</p>
-            <cds-button size="sm" @click=${handleDone}>Done</cds-button>
+            <cds-button size="sm">Done</cds-button>
           </c4p-coachmark-body>
         </c4p-coachmark>
       </div>

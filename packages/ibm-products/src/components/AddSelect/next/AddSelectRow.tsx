@@ -219,10 +219,12 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
               <div className={`${blockClass}-row__skeleton-control`} />
 
               <div className={`${blockClass}-row__content`}>
-                {/* Skeleton icon circle */}
-                <div className={`${blockClass}-row__icon`}>
-                  <SkeletonIcon />
-                </div>
+                {/* Skeleton icon circle — only if row has an icon */}
+                {icon && (
+                  <div className={`${blockClass}-row__icon`}>
+                    <SkeletonIcon />
+                  </div>
+                )}
 
                 {/* Skeleton text lines */}
                 <div className={`${blockClass}-row__text`}>

@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
-import { UserAvatar } from '@carbon/react/icons';
+import { UserAvatar } from '@carbon/ibm-products';
 import { MultiSelectWithScroll } from '../../components/MultiSelectWithScroll/MultiSelectWithScroll';
 import { AddSelectItem } from '@carbon/ibm-products';
 import './MultiSelectWithScroll.scss';
@@ -45,6 +45,21 @@ const NAME_POOL = [
 ];
 // cspell:enable
 
+const AVATAR_COLORS = [
+  'order-1-cyan',
+  'order-2-gray',
+  'order-3-green',
+  'order-4-magenta',
+  'order-5-purple',
+  'order-6-teal',
+  'order-7-cyan',
+  'order-8-gray',
+  'order-9-green',
+  'order-10-magenta',
+  'order-11-purple',
+  'order-12-teal',
+] as const;
+
 const sampleUsers: AddSelectItem[] = Array.from({ length: 187 }, (_, i) => {
   const name = NAME_POOL[i % NAME_POOL.length];
   const id = `user-${i + 1}`;
@@ -54,7 +69,13 @@ const sampleUsers: AddSelectItem[] = Array.from({ length: 187 }, (_, i) => {
     value: id,
     title: name,
     subtitle: `${emailPart}${i + 1}@ibm.com`,
-    icon: <UserAvatar size={32} />,
+    icon: (
+      <UserAvatar
+        name={name}
+        size="md"
+        backgroundColor={AVATAR_COLORS[i % AVATAR_COLORS.length]}
+      />
+    ),
   };
 });
 

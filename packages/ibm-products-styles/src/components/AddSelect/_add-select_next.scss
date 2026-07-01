@@ -301,8 +301,19 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
       margin-inline-end: $spacing-05;
     }
 
+    .#{$block-class__next}-row__icon .cds--icon--skeleton {
+      border-radius: 50%;
+      block-size: $spacing-07;
+      inline-size: $spacing-07;
+
+      &::before {
+        border-radius: 50%;
+        animation: none;
+      }
+    }
+
     .#{$block-class__next}-row__skeleton-title {
-      margin-block-end: $spacing-02;
+      margin-block-end: 0;
     }
   }
 }

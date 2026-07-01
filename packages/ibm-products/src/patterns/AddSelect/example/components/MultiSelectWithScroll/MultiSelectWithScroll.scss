@@ -41,7 +41,7 @@
   &__notification {
     position: fixed;
     z-index: 9000;
-    inset-block-end: $spacing-09;
+    inset-block-start: $spacing-09;
     inset-inline-end: $spacing-05;
   }
 }

@@ -52,7 +52,7 @@ const SKELETON_ID_PREFIX = '__skeleton__';
 const SCROLL_THRESHOLD = 2 / 3;
 
 // Simulated async page-fetch delay (ms)
-const FETCH_DELAY_MS = 5000;
+const FETCH_DELAY_MS = 600;
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -160,8 +160,8 @@ export const MultiSelectWithScroll = forwardRef<
       show: boolean;
     }>({ item: null, show: false });
 
-    // Wrapper div ref — gives us a DOM anchor inside the tearsheet portal.
-    const bodyWrapperRef = useRef<HTMLDivElement>(null);
+    // Ref forwarded to AddSelect.Body — gives us a DOM anchor for scroll detection.
+    const bodyRef = useRef<HTMLDivElement>(null);
     // The element we attach the scroll listener to (found once on open).
     const scrollElRef = useRef<HTMLElement | null>(null);
     // Latest handleScroll, kept current via a ref so the stable listener below
@@ -252,10 +252,9 @@ export const MultiSelectWithScroll = forwardRef<
     }, [handleScroll]);
 
     // ── Locate the scroll container once on open ─────────────────
-    // AddSelectBody wraps children in a __content div (overflow:auto; flex:1).
-    // That is the height-constrained element that actually scrolls inside the
-    // tearsheet. We find it with a one-time DOM walk and attach a single stable
-    // listener. A rAF defers the query until after the tearsheet first renders.
+    // AddSelectBody's __content child div has overflow:auto and is the
+    // height-constrained element that actually scrolls inside the tearsheet.
+    // We query it directly from the Body ref rather than walking the tree.
     useEffect(() => {
       if (!open) {
         // Tearsheet closed — remove listener and forget the element
@@ -270,23 +269,16 @@ export const MultiSelectWithScroll = forwardRef<
       }
 
       // Tearsheet is opening. Wait one animation frame for the portal DOM to
-      // be fully committed before querying computed styles.
+      // be fully committed before querying the content element.
       const frameId = requestAnimationFrame(() => {
-        if (!bodyWrapperRef.current || scrollElRef.current) return;
+        if (!bodyRef.current || scrollElRef.current) return;
 
-        const walker = document.createTreeWalker(
-          bodyWrapperRef.current,
-          NodeFilter.SHOW_ELEMENT
-        );
-        let node = walker.nextNode() as HTMLElement | null;
-        while (node) {
-          const oy = window.getComputedStyle(node).overflowY;
-          if (oy === 'auto' || oy === 'scroll') {
-            scrollElRef.current = node;
-            node.addEventListener('scroll', stableScrollListener.current);
-            break;
-          }
-          node = walker.nextNode() as HTMLElement | null;
+        const contentEl = bodyRef.current.querySelector(
+          '[class*="__content"]'
+        ) as HTMLElement | null;
+        if (contentEl) {
+          scrollElRef.current = contentEl;
+          contentEl.addEventListener('scroll', stableScrollListener.current);
         }
       });
 
@@ -400,68 +392,63 @@ export const MultiSelectWithScroll = forwardRef<
 
             <Tearsheet.Body>
               <Tearsheet.MainContent isFlush>
-                {/*
-                 * AddSelect.Body renders the header (search + sub-header) above
-                 * the __content div. The header is therefore structurally above
-                 * the scrollable area and stays fixed in the tearsheet layout.
-                 */}
-                <div ref={bodyWrapperRef} style={{ display: 'contents' }}>
-                  <AddSelect.Body
-                    itemsLabel={itemsLabel}
-                    globalSearchLabel={globalSearchLabel}
-                    globalSearchPlaceholder={globalSearchPlaceholder}
-                    searchResultsTitle={searchResultsTitle}
-                    // Always show the total count so the user knows how many items exist
-                    itemCount={items.length}
-                    onSearch={handleSearch}
-                  >
-                    <AddSelect.Content>
-                      <AddSelect.Column multi hideSearch>
-                        {displayedItems.length > 0 ? (
-                          displayedItems.map((item) => {
-                            if (isSkeletonSentinel(item)) {
-                              return (
-                                <AddSelect.Row
-                                  key={item.id}
-                                  itemId={item.id}
-                                  title=""
-                                  value=""
-                                  skeleton
-                                />
-                              );
-                            }
+                <AddSelect.Body
+                  ref={bodyRef}
+                  itemsLabel={itemsLabel}
+                  globalSearchLabel={globalSearchLabel}
+                  globalSearchPlaceholder={globalSearchPlaceholder}
+                  searchResultsTitle={searchResultsTitle}
+                  // Always show the total count so the user knows how many items exist
+                  itemCount={items.length}
+                  onSearch={handleSearch}
+                >
+                  <AddSelect.Content>
+                    <AddSelect.Column multi hideSearch>
+                      {displayedItems.length > 0 ? (
+                        displayedItems.map((item) => {
+                          if (isSkeletonSentinel(item)) {
                             return (
                               <AddSelect.Row
                                 key={item.id}
                                 itemId={item.id}
-                                title={item.title || ''}
-                                subtitle={item.subtitle}
-                                value={item.value || ''}
-                                icon={item.icon}
-                                disabled={item.disabled}
-                                hasItemPanel={!!item.itemDetails}
-                                onItemPanelClick={handleShowInfo}
+                                title=""
+                                value=""
+                                icon={<span />}
+                                skeleton
                               />
                             );
-                          })
-                        ) : (
-                          <div className={`${blockClass}__no-results`}>
-                            <h4>{noResultsTitle}</h4>
-                            <p>{noResultsDescription}</p>
-                          </div>
-                        )}
+                          }
+                          return (
+                            <AddSelect.Row
+                              key={item.id}
+                              itemId={item.id}
+                              title={item.title || ''}
+                              subtitle={item.subtitle}
+                              value={item.value || ''}
+                              icon={item.icon}
+                              disabled={item.disabled}
+                              hasItemPanel={!!item.itemDetails}
+                              onItemPanelClick={handleShowInfo}
+                            />
+                          );
+                        })
+                      ) : (
+                        <div className={`${blockClass}__no-results`}>
+                          <h4>{noResultsTitle}</h4>
+                          <p>{noResultsDescription}</p>
+                        </div>
+                      )}
 
-                        {/* Bottom spacer provides the scroll hint half-row */}
-                        {!isLoading && hasMore && !searchTerm && (
-                          <div
-                            className={`${blockClass}__scroll-hint-spacer`}
-                            aria-hidden="true"
-                          />
-                        )}
-                      </AddSelect.Column>
-                    </AddSelect.Content>
-                  </AddSelect.Body>
-                </div>
+                      {/* Bottom spacer provides the scroll hint half-row */}
+                      {!isLoading && hasMore && !searchTerm && (
+                        <div
+                          className={`${blockClass}__scroll-hint-spacer`}
+                          aria-hidden="true"
+                        />
+                      )}
+                    </AddSelect.Column>
+                  </AddSelect.Content>
+                </AddSelect.Body>
               </Tearsheet.MainContent>
 
               <Tearsheet.SummaryContent isFlush>
@@ -494,7 +481,7 @@ export const MultiSelectWithScroll = forwardRef<
                         key={item.id}
                         item={item}
                         onRemove={handleRemoveItem}
-                        useAccordion={false}
+                        useAccordion
                       />
                     ))}
                   </AddSelect.SelectionSummary>

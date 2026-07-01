@@ -18,6 +18,8 @@ import {
   Checkbox,
   RadioButton,
   IconButton,
+  SkeletonText,
+  SkeletonIcon,
   type CheckboxProps,
   type RadioButtonProps,
   type IconButtonProps,
@@ -100,6 +102,12 @@ export interface AddSelectRowProps {
    */
   itemPanelOpen?: boolean;
   /**
+   * Whether to render the row as a skeleton (loading state).
+   * When true, real content is replaced with Carbon skeleton placeholders.
+   * The row is non-interactive and hidden from assistive technology.
+   */
+  skeleton?: boolean;
+  /**
    * Optional class name
    */
   className?: string;
@@ -158,6 +166,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       onItemPanelClick,
       itemPanelIconDescription = 'View details',
       itemPanelOpen = false,
+      skeleton = false,
       className,
       checkboxProps,
       radioButtonProps,
@@ -197,7 +206,36 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       [`${blockClass}-row--selected`]: isSelected,
       [`${blockClass}-row--disabled`]: disabled,
       [`${blockClass}-row-item-panel--selected`]: itemPanelOpen,
+      [`${blockClass}-row--skeleton`]: skeleton,
     });
+
+    // Skeleton (loading) state
+    if (skeleton) {
+      return (
+        <div className={rowClasses} aria-hidden="true" ref={ref}>
+          <div className={`${blockClass}-row__cell`}>
+            <div className={`${blockClass}-row__cell-wrapper`}>
+              {/* Skeleton checkbox/radio placeholder */}
+              <div className={`${blockClass}-row__skeleton-control`} />
+
+              <div className={`${blockClass}-row__content`}>
+                {/* Skeleton icon circle */}
+                <div className={`${blockClass}-row__icon`}>
+                  <SkeletonIcon />
+                </div>
+
+                {/* Skeleton text lines */}
+                <div className={`${blockClass}-row__text`}>
+                  <SkeletonText
+                    className={`${blockClass}-row__skeleton-title`}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div
@@ -317,6 +355,7 @@ AddSelectRow.propTypes = {
   /**@ts-ignore */
   radioButtonProps: PropTypes.object,
   selected: PropTypes.bool,
+  skeleton: PropTypes.bool,
   subtitle: PropTypes.string,
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,

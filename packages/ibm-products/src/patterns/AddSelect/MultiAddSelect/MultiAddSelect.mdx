@@ -74,6 +74,21 @@ Choose it when:
 - select-all behavior would be too broad or risky
 - users must make deliberate item-by-item selections
 
+### With scroll (progressive loading)
+
+Use this variation when the item list is too large to load all at once.
+
+Choose it when:
+
+- the dataset contains hundreds or thousands of items
+- loading all items upfront would be too slow
+- users are likely to browse and scroll rather than always searching
+- the experience should feel like one seamless, continuously growing list
+
+See the dedicated
+[MultiSelectWithScroll pattern](..?path=/docs/patterns-add-and-select-multiselectwithscroll--docs)
+for full documentation and a standalone story.
+
 ## How this pattern can be used
 
 MultiAddSelect can be used to support tasks such as adding multiple assets,
@@ -109,6 +124,10 @@ Typical usage includes:
 ### With hierarchy (no select all)
 
 <Canvas of={stories.WithHierarchyNoSelectAll} />
+
+### With scroll (progressive loading)
+
+<Canvas of={stories.WithScroll} />
 
 ## Copy-paste ready code
 

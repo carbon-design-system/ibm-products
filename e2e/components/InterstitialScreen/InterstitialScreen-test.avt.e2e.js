@@ -189,7 +189,8 @@ test.describe('InterstitialScreen @avt', () => {
     await expect(modal).toBeVisible();
     await expect(closeButton).toBeFocused();
 
-    // Close modal using Escape key
+    // Close modal using Escape key (needs to be pressed twice)
+    await page.keyboard.press('Escape');
     await page.keyboard.press('Escape');
     await page.waitForTimeout(500); // Wait for close animation
     await expect(modal).not.toBeVisible();

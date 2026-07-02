@@ -12,6 +12,11 @@ import { CardProps } from './Card.types';
 import { CardContext } from './CardContext';
 import { pkg } from '../../../settings';
 
+// Import separated child components
+import { CardHeader } from './CardHeader';
+import { CardBody } from './CardBody';
+import { CardFooter } from './CardFooter';
+
 const componentName = 'Card';
 const blockClass = `${pkg.prefix}--card-next`;
 
@@ -116,3 +121,40 @@ CardComponent.propTypes = {
 };
 
 export const Card = CardComponent;
+
+/**
+ * -------
+ * Exports
+ * -------
+ */
+const Root = Card;
+Root.displayName = 'Card.Root';
+
+const Header = CardHeader;
+Header.displayName = 'Card.Header';
+
+const Body = CardBody;
+Body.displayName = 'Card.Body';
+
+const Footer = CardFooter;
+Footer.displayName = 'Card.Footer';
+
+export {
+  // direct exports
+  Card as default,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  // namespaced
+  Root,
+  Header,
+  Body,
+  Footer,
+};
+
+export type {
+  CardProps,
+  CardHeaderProps,
+  CardBodyProps,
+  CardFooterProps,
+} from './Card.types';

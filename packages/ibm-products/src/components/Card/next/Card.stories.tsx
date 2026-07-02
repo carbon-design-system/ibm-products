@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { Card, Header, Body, Footer } from './';
+import { preview__Card as Card } from '../..';
+import { CardHeader, CardBody, CardFooter } from './Card';
 import { Button } from '@carbon/react';
 import './_storybook-styles.scss';
 
@@ -14,9 +15,9 @@ export default {
   title: 'Preview/Card',
   component: Card,
   subcomponents: {
-    Header,
-    Body,
-    Footer,
+    CardHeader,
+    CardBody,
+    CardFooter,
   },
   tags: ['autodocs'],
   parameters: {
@@ -35,20 +36,20 @@ export default {
 };
 
 const Template = (args) => (
-  <Card {...args}>
-    <Header>
+  <Card.Root {...args}>
+    <Card.Header>
       <h3>Card Title</h3>
-    </Header>
-    <Body>
+    </Card.Header>
+    <Card.Body>
       <p>
         This is the card body content. It can contain any custom content you
         need.
       </p>
-    </Body>
-    <Footer>
+    </Card.Body>
+    <Card.Footer>
       <Button size="sm">Action</Button>
-    </Footer>
-  </Card>
+    </Card.Footer>
+  </Card.Root>
 );
 
 export const Default = Template.bind({});
@@ -69,35 +70,35 @@ Disabled.args = {
 };
 
 export const MinimalCard = () => (
-  <Card>
-    <Body>
+  <Card.Root>
+    <Card.Body>
       <p>A minimal card with just body content.</p>
-    </Body>
-  </Card>
+    </Card.Body>
+  </Card.Root>
 );
 
 export const HeaderOnly = () => (
-  <Card>
-    <Header>
+  <Card.Root>
+    <Card.Header>
       <h3>Header Only Card</h3>
       <p>This card only has a header section.</p>
-    </Header>
-  </Card>
+    </Card.Header>
+  </Card.Root>
 );
 
 export const WithFooterActions = () => (
-  <Card>
-    <Header>
+  <Card.Root>
+    <Card.Header>
       <h3>Card with Actions</h3>
-    </Header>
-    <Body>
+    </Card.Header>
+    <Card.Body>
       <p>This card has multiple actions in the footer.</p>
-    </Body>
-    <Footer>
+    </Card.Body>
+    <Card.Footer>
       <Button kind="secondary" size="sm">
         Cancel
       </Button>
       <Button size="sm">Confirm</Button>
-    </Footer>
-  </Card>
+    </Card.Footer>
+  </Card.Root>
 );

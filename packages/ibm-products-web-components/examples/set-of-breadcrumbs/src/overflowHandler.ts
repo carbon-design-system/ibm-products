@@ -14,13 +14,18 @@
  * display style of the element if it is not currently visible. It then uses
  * `getBoundingClientRect` to retrieve the size of the element.
  *
+ * An optional `gap` value can be supplied to account for the spacing between
+ * siblings in a flex/grid container.
+ *
  * @param el - The HTML element whose size is to be calculated.
  * @param dimension - The dimension to measure ('width' or 'height').
+ * @param gap - Optional gap (in px) to add to each item's size, representing the `column-gap` (width) or `row-gap` (height) of the parent container.
  * @returns The size of the element in pixels. Returns 0 if the element is not provided.
  */
 export function getSize(
   el: HTMLElement,
-  dimension: 'width' | 'height'
+  dimension: 'width' | 'height',
+  gap = 0
 ): number {
   if (!el) return 0;
   const originalDisplay = el.style.display;
@@ -42,6 +47,7 @@ export function getSize(
         parseInt(computedStyles.paddingBottom) +
         parseInt(computedStyles.marginTop) +
         parseInt(computedStyles.marginBottom);
+  size += gap;
   return size;
 }
 
@@ -72,6 +78,7 @@ export interface UpdateOverflowHandlerOptions {
   /** An array of previously hidden items to compare against the new hidden items. */
   previousHiddenItems?: HTMLElement[];
   offsetValue?: number;
+  gap?: number;
 }
 
 /**
@@ -92,6 +99,7 @@ export function updateOverflowHandler({
   onChange,
   previousHiddenItems = [],
   offsetValue = 0,
+  gap = 0,
 }: UpdateOverflowHandlerOptions): HTMLElement[] {
   const containerSize =
     dimension === 'width' ? container.clientWidth : container.clientHeight;
@@ -108,7 +116,9 @@ export function updateOverflowHandler({
       : [...items];
     hiddenItems = maxVisibleItems ? items.slice(maxVisibleItems) : [];
   } else {
-    const available = containerSize - offsetSize - totalFixedSize - offsetValue;
+    // Each item's size includes a gap (for the space after it), but the last
+    // visible item has no gap after it — add one gap back to available space.
+    const available = containerSize - offsetSize - totalFixedSize - offsetValue + gap;
     let accumulated = 0;
     let breakIndex = items.length;
 
@@ -168,6 +178,10 @@ export interface OverflowHandlerOptions {
    */
   dimension?: 'width' | 'height';
   offsetValue?: number;
+  /**
+   * The gap (in px) between items in the container's flex/grid layout.
+   */
+  gap?: number;
 }
 
 /**
@@ -186,6 +200,7 @@ export function createOverflowHandler({
   onChange,
   dimension = 'width',
   offsetValue = 0,
+  gap = 0,
 }: OverflowHandlerOptions): OverflowHandler {
   // Error handling
   if (!(container instanceof HTMLElement)) {
@@ -212,9 +227,9 @@ export function createOverflowHandler({
     (item) => item !== offset && !fixedItems.includes(item)
   );
 
-  const fixedSizes = fixedItems.map((item) => getSize(item, dimension));
-  const sizes = items.map((item) => getSize(item, dimension));
-  const offsetSize = getSize(offset, dimension);
+  const fixedSizes = fixedItems.map((item) => getSize(item, dimension, gap));
+  const sizes = items.map((item) => getSize(item, dimension, gap));
+  const offsetSize = getSize(offset, dimension, gap);
 
   let previousHiddenItems: HTMLElement[] = [];
 
@@ -231,6 +246,7 @@ export function createOverflowHandler({
       onChange,
       previousHiddenItems,
       offsetValue,
+      gap,
     });
   }
 

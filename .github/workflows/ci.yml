@@ -384,7 +384,7 @@ jobs:
         run: yarn install --immutable
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@c8eb1dde813a34d0e86b136d8c4faedd0a7351ab # v17.7.1
+        uses: chromaui/action@7ffa9343588f15ff3f4cde30e03cd23204ed6a9c # v17.7.2
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -469,7 +469,7 @@ jobs:
           --include-dependencies --stream
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@c8eb1dde813a34d0e86b136d8c4faedd0a7351ab # v17.7.1
+        uses: chromaui/action@7ffa9343588f15ff3f4cde30e03cd23204ed6a9c # v17.7.2
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects

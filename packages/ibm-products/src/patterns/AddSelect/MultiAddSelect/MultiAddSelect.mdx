@@ -74,6 +74,18 @@ Choose it when:
 - select-all behavior would be too broad or risky
 - users must make deliberate item-by-item selections
 
+### With modifiers and bulk actions
+
+Use this variation when users need to assign modifiers (such as roles) to
+selected items and also need to perform bulk operations on the current
+selection.
+
+Choose it when:
+
+- each selected item requires an associated modifier such as a role or type
+- users need to edit or remove multiple selected items at once
+- bulk assignment of modifiers across many items is a common workflow
+
 ## How this pattern can be used
 
 MultiAddSelect can be used to support tasks such as adding multiple assets,
@@ -109,6 +121,10 @@ Typical usage includes:
 ### With hierarchy (no select all)
 
 <Canvas of={stories.WithHierarchyNoSelectAll} />
+
+### With modifiers and bulk actions
+
+<Canvas of={stories.WithModifiersAndBulkActions} />
 
 ## Copy-paste ready code
 

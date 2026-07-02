@@ -66,12 +66,27 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     } = useContext(CoachmarkContext);
 
     const handleRef = useRef<HTMLDivElement | null>(null);
-    const contentRef = ref || handleRef;
+
+    // Merge refs: both internal handleRef and external ref from adopters
+    const mergedRef = React.useCallback((node: HTMLDivElement | null) => {
+      // Always set our internal ref
+      handleRef.current = node;
+
+      // Forward to external ref if provided
+      if (ref) {
+        if (typeof ref === 'function') {
+          ref(node);
+        } else {
+          (ref as React.RefObject<HTMLDivElement | null>).current = node;
+        }
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
-      if (open && 'current' in contentRef && contentRef.current) {
+      if (open && handleRef.current) {
         // Find the actual popover container (parent of PopoverContent)
-        const popoverContent = contentRef.current;
+        const popoverContent = handleRef.current;
         const popoverContainer = popoverContent?.closest(
           `.${carbon.prefix}--popover`
         );
@@ -80,7 +95,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
         }
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps -- setContentRef is intentionally excluded as it's a stable setter function from context
-    }, [open, contentRef]);
+    }, [open]);
 
     // Handle Escape key to close Coachmark and return focus to trigger
     useEffect(() => {
@@ -135,13 +150,8 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
             }
 
             // If no selectorPrimaryFocus or element not found, default to close button
-            if (
-              !elementToFocus &&
-              contentRef &&
-              'current' in contentRef &&
-              contentRef.current
-            ) {
-              elementToFocus = contentRef.current.querySelector<HTMLElement>(
+            if (!elementToFocus && handleRef.current) {
+              elementToFocus = handleRef.current.querySelector<HTMLElement>(
                 `.${blockClass}--content-header--close-button`
               );
             }
@@ -152,11 +162,11 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
           });
         }, 100);
       }
-    }, [open, selectorPrimaryFocus, contentRef]);
+    }, [open, selectorPrimaryFocus]);
 
     return (
       <PopoverContent
-        ref={contentRef}
+        ref={mergedRef}
         className={cx(coachmarkContentBlockClass, className) || ''}
         role="region"
         aria-label={ariaLabel}

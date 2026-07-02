@@ -10,11 +10,12 @@ import React, {
   forwardRef,
   ReactElement,
   ReactNode,
+  useContext,
   useRef,
   useState,
 } from 'react';
 import { useIsomorphicEffect } from '../../../global/js/hooks';
-import { blockClass } from './context';
+import { blockClass, TearsheetContext } from './context';
 import { createOverflowHandler } from '@carbon/utilities';
 import cx from 'classnames';
 /**
@@ -46,6 +47,8 @@ export const TearsheetHeaderActions = forwardRef<
   const menuButtonContainerRef = useRef<HTMLDivElement>(null);
   const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
   const [hiddenItems, setHiddenItems] = useState<ReactElement[]>([]);
+
+  const { fullyCollapsed } = useContext(TearsheetContext);
 
   const hasOtherChildType = useRef(false);
 
@@ -106,7 +109,7 @@ export const TearsheetHeaderActions = forwardRef<
         >
           <MenuButton
             ref={menuButtonContainerRef}
-            size="sm"
+            size={fullyCollapsed ? 'xs' : 'sm'}
             {...menuButtonProps}
           >
             {hiddenItems.map((item) => {

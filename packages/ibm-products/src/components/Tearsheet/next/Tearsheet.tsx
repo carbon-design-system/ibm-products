@@ -262,7 +262,14 @@ const TearsheetInternal = forwardRef<
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isSm, decorator, influencerWidth, summaryContentWidth, verticalGap]);
+    }, [
+      isSm,
+      decorator,
+      influencerWidth,
+      summaryContentWidth,
+      verticalGap,
+      fullyCollapsed,
+    ]);
 
     useIsomorphicEffect(() => {
       const id = uniqueId.current;

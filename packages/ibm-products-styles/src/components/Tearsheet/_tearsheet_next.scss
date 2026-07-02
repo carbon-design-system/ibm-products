@@ -256,7 +256,6 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
         opacity $motion-duration motion(entrance, expressive),
         margin $motion-duration motion(entrance, expressive),
         padding $motion-duration motion(entrance, expressive);
-      visibility: hidden;
     }
 
     .#{$block-class__next}__header-actions,
@@ -273,9 +272,13 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     }
   }
 
+  .#{$carbon-prefix}--modal-close {
+    transition: all $motion-duration ease;
+  }
+
   // COLLAPSED STATE
   .#{$block-class__next}__header-collapsed {
-    padding-block-start: $spacing-04;
+    padding-block-start: 0;
     transition: padding $motion-duration motion(entrance, expressive);
 
     // Collapse everything except core elements
@@ -319,6 +322,7 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
       @include type.type-style('label-02');
 
       align-items: center;
+      gap: $spacing-03;
       margin-block-start: $spacing-02;
       transition: all $motion-duration motion(entrance, expressive);
 
@@ -340,8 +344,22 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
       margin-block-end: 0;
     }
 
+    .#{$carbon-prefix}--modal-close {
+      block-size: $spacing-08;
+      inline-size: $spacing-08;
+      transition: all $motion-duration ease;
+    }
+    .#{$block-class__next}__decorator {
+      inset-block-start: $spacing-03;
+    }
+    .#{$block-class__next}__header-title {
+      block-size: $spacing-08;
+    }
+
     .#{$block-class__next}__content__header-actions {
-      margin-block-start: -$spacing-01;
+      block-size: $spacing-06;
+      margin-block-start: $spacing-03;
+      transition: all $motion-duration ease;
     }
 
     // Hide header actions on small screens
@@ -363,7 +381,7 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
 
     .#{$block-class__next}__header-content-wrapper {
       min-block-size: $spacing-08;
-      padding-block-end: $spacing-04;
+      // padding-block-end: $spacing-04;
     }
 
     // Divider line above navigation bar
@@ -478,6 +496,9 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
   .#{$carbon-prefix}--tabs {
     margin-inline-start: -$spacing-05;
   }
+}
+.#{$carbon-prefix}--tab-content {
+  padding: 0;
 }
 .#{$block-class__next}__scroller-container {
   position: absolute;
@@ -655,6 +676,17 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
 }
 
 .#{$block-class__next}--narrow {
+  // Fixed 480px width; shrinks only when viewport is narrower than 480px
+  .#{$block-class__next}__container {
+    inline-size: 480px;
+    max-inline-size: 480px;
+
+    @media (width <= 480px) {
+      inline-size: 100%;
+      max-inline-size: 100%;
+    }
+  }
+
   .#{$block-class__next}__header {
     padding-inline: $spacing-05;
   }

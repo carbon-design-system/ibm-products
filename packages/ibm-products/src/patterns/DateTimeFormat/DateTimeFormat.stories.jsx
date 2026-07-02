@@ -145,20 +145,16 @@ const parseDateTime = (dateValue, timeValue) => {
 const getOutputValues = (timestamp, locale, selectedFormat) => {
   if (selectedFormat === 'relative') {
     return {
-      default: dateTimeFormat.relative.format(timestamp, { locale }),
-      full: dateTimeFormat.relative.format(timestamp, {
+      Default: dateTimeFormat.relative.format(timestamp, { locale }),
+      Long: dateTimeFormat.relative.format(timestamp, {
         locale,
         style: 'long',
       }),
-      long: dateTimeFormat.relative.format(timestamp, {
-        locale,
-        style: 'long',
-      }),
-      medium: dateTimeFormat.relative.format(timestamp, {
+      Short: dateTimeFormat.relative.format(timestamp, {
         locale,
         style: 'short',
       }),
-      short: dateTimeFormat.relative.format(timestamp, {
+      Narrow: dateTimeFormat.relative.format(timestamp, {
         locale,
         style: 'narrow',
       }),

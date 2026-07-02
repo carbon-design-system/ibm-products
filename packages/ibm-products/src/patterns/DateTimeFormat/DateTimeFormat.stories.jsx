@@ -22,35 +22,91 @@ const localeOptions = [
     value: 'en-US',
   },
   {
-    label: 'en-GB / English (United Kingdom)',
-    value: 'en-GB',
+    label: 'af-ZA / Afrikaans (South Africa)',
+    value: 'af-ZA',
   },
   {
     label: 'de-DE / German (Germany)',
     value: 'de-DE',
   },
   {
+    label: 'el-GR / Greek (Greece)',
+    value: 'el-GR',
+  },
+  {
+    label: 'en-GB / English (United Kingdom)',
+    value: 'en-GB',
+  },
+  {
+    label: 'en-IN / English (India)',
+    value: 'en-IN',
+  },
+  {
+    label: 'es-ES / Spanish (Spain)',
+    value: 'es-ES',
+  },
+  {
+    label: 'fr-CH / French (Switzerland)',
+    value: 'fr-CH',
+  },
+  {
     label: 'fr-FR / French (France)',
     value: 'fr-FR',
+  },
+  {
+    label: 'hi-IN / Hindi (India)',
+    value: 'hi-IN',
+  },
+  {
+    label: 'it-IT / Italian (Italy)',
+    value: 'it-IT',
+  },
+  {
+    label: 'ja-JP / Japanese (Japan)',
+    value: 'ja-JP',
+  },
+  {
+    label: 'ml-IN / Malayalam (India)',
+    value: 'ml-IN',
+  },
+  {
+    label: 'nl-NL / Dutch (Netherlands)',
+    value: 'nl-NL',
+  },
+  {
+    label: 'sv-SE / Swedish (Sweden)',
+    value: 'sv-SE',
+  },
+  {
+    label: 'zh-Hans / Chinese (Simplified)',
+    value: 'zh-Hans',
+  },
+  {
+    label: 'zh-Hant / Chinese (Traditional)',
+    value: 'zh-Hant',
   },
 ];
 
 const formatOptions = [
   {
-    label: 'Absolute date and time',
-    value: 'absolute',
-  },
-  {
-    label: 'Absolute date',
-    value: 'date',
+    label: 'Relative',
+    value: 'relative',
   },
   {
     label: 'Absolute time',
-    value: 'time',
+    value: 'absolute-time',
   },
   {
-    label: 'Relative time',
-    value: 'relative',
+    label: 'Absolute date',
+    value: 'absolute-date',
+  },
+  {
+    label: 'Absolute date and time',
+    value: 'absolute-date-time',
+  },
+  {
+    label: 'Date and time tooltip',
+    value: 'absolute-tooltip',
   },
 ];
 
@@ -63,7 +119,13 @@ const formatDateInputValue = (date) => {
 };
 
 const formatTimeInputValue = (date) => {
-  return `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+  return `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(
+    date.getSeconds()
+  )}`;
+};
+
+const isValidTimeInput = (value) => {
+  return /^\d{2}:\d{2}:\d{2}$/.test(value);
 };
 
 const parseDateTime = (dateValue, timeValue) => {
@@ -103,7 +165,7 @@ const getOutputValues = (timestamp, locale, selectedFormat) => {
     };
   }
 
-  if (selectedFormat === 'date') {
+  if (selectedFormat === 'absolute-date') {
     return {
       default: dateTimeFormat.absolute.formatDate(timestamp, { locale }),
       full: dateTimeFormat.absolute.formatDate(timestamp, {
@@ -125,7 +187,7 @@ const getOutputValues = (timestamp, locale, selectedFormat) => {
     };
   }
 
-  if (selectedFormat === 'time') {
+  if (selectedFormat === 'absolute-time') {
     return {
       default: dateTimeFormat.absolute.formatTime(timestamp, { locale }),
       full: dateTimeFormat.absolute.formatTime(timestamp, {
@@ -143,6 +205,15 @@ const getOutputValues = (timestamp, locale, selectedFormat) => {
       short: dateTimeFormat.absolute.formatTime(timestamp, {
         locale,
         style: 'short',
+      }),
+    };
+  }
+
+  if (selectedFormat === 'absolute-tooltip') {
+    return {
+      Tooltip: dateTimeFormat.absolute.format(timestamp, {
+        locale,
+        style: 'long',
       }),
     };
   }
@@ -206,8 +277,30 @@ const DateTimeFormatDemo = () => {
           <TextInput
             id="date-time-format-time"
             labelText="Time"
+            placeholder="hh:mm:ss"
             value={timeValue}
-            onChange={(event) => setTimeValue(event.target.value)}
+            onChange={(event) => {
+              const nextValue = event.target.value;
+              if (!/^[\d:]*$/.test(nextValue)) {
+                return;
+              }
+              if (nextValue.length > 8) {
+                return;
+              }
+              const parts = nextValue.split(':');
+              if (parts.length > 3) {
+                return;
+              }
+              if (parts.some((part) => part.length > 2)) {
+                return;
+              }
+              setTimeValue(nextValue);
+            }}
+            onBlur={() => {
+              if (!isValidTimeInput(timeValue)) {
+                setTimeValue(formatTimeInputValue(new Date()));
+              }
+            }}
           />
           <Dropdown
             id="date-time-format-locale"
@@ -238,7 +331,7 @@ const DateTimeFormatDemo = () => {
         <div>
           <p className="date-time-format-story__output-label">Output</p>
           <div className="date-time-format-story__output-panel">
-            {outputStyles.map((styleName) => (
+            {Object.entries(outputValues).map(([styleName, value]) => (
               <div
                 key={styleName}
                 className="date-time-format-story__output-group"
@@ -247,7 +340,7 @@ const DateTimeFormatDemo = () => {
                   {styleName}
                 </div>
                 <div className="date-time-format-story__output-value">
-                  {outputValues[styleName]}
+                  {value}
                 </div>
               </div>
             ))}

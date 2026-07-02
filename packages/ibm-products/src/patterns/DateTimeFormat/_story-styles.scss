@@ -75,3 +75,11 @@
   inline-size: 100%;
   min-inline-size: 0;
 }
+
+.date-time-format-story .#{config.$prefix}--date-picker-input__wrapper,
+.date-time-format-story .#{config.$prefix}--date-picker__input,
+.date-time-format-story .#{config.$prefix}--text-input,
+.date-time-format-story .#{config.$prefix}--list-box,
+.date-time-format-story .#{config.$prefix}--list-box__field {
+  background: $layer-02;
+}

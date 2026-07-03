@@ -134,6 +134,10 @@ $motion-duration: $duration-moderate-02;
     @include type.type-style('label-02');
 
     align-items: center;
+    // Fixed block-size keeps the title row at the same height as the close button
+    block-size: $spacing-08;
+    // Gap between title-start icon and title text when collapsed
+    gap: $spacing-03;
     margin-block-start: $spacing-02;
     transition: all $motion-duration motion(entrance, expressive);
 
@@ -160,15 +164,18 @@ $motion-duration: $duration-moderate-02;
   // Normalize visible elements
   .#{$block-class__next}__header-content,
   .#{$block-class__next}__content__title-wrapper,
-  .#{$block-class__next}__header-actions,
   .#{$block-class__next}__header-title {
     margin-block: 0;
     transition: margin-block $motion-duration ease;
   }
-  // Header actions adjustment
+
   .#{$block-class__next}__header-actions {
-    margin-block-start: -$spacing-01;
+    display: flex;
+    align-items: center;
+    margin-block: 0;
+    transition: margin-block $motion-duration ease;
   }
+  // Header actions adjustment — removed negative offset that caused misalignment
   // Style for title-start slot content (like icons)
   .#{$block-class__next}__title-start {
     display: inline-flex;

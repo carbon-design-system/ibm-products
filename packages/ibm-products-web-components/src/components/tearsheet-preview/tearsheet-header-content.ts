@@ -19,6 +19,7 @@ import { MatchMediaController } from '../../globals/js/utils/match-media-control
 import { breakpoints } from '@carbon/layout';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 import { tearsheetSignal } from './tearsheet-signal';
+import { SignalWatcher } from '@lit-labs/signals';
 
 const blockClass = `${prefix}--tearsheet__next`;
 
@@ -33,7 +34,9 @@ const blockClass = `${prefix}--tearsheet__next`;
  * @slot decorator - AI label or other decorative elements
  */
 @customElement(`${prefix}-tearsheet-header-content`)
-class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
+class CDSTearsheetHeaderContent extends SignalWatcher(
+  HostListenerMixin(LitElement)
+) {
   @property({ reflect: true })
   slot = 'header-content';
 
@@ -150,11 +153,13 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
                   @slotchange="${this._handleSlotChange}"
                 ></slot>`}
 
-            <!-- Title (main text) -->
+            <!-- Title (main text) — limit to 1 line when collapsed so it fits
+                 in the reduced-height collapsed bar -->
             <c4p-truncated-text
               class="${blockClass}__content__title"
               id="${blockClass}__header-title__truncatedText"
               value="${this.title}"
+              lines="${tearsheetSignal.get().fullyCollapsed ? 1 : 2}"
             ></c4p-truncated-text>
 
             <!-- Title End -->

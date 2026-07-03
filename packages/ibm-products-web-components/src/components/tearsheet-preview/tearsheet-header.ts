@@ -30,6 +30,8 @@ const blockClass = `${prefix}--tearsheet__next`;
  * @slot header-actions - Action buttons in the header (e.g., settings, delete)
  * @slot decorator - AI label or other decorative elements
  * @fires c4p-tearsheet-header-close-button-clicked - Internal event to notify parent tearsheet
+ * @fires c4p-tearsheet-header-collapse-change - Internal event; parent tearsheet re-dispatches
+ *   this as the public `c4p-preview-tearsheet-collapse-change` event.
  */
 @customElement(`${prefix}-tearsheet-header`)
 class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
@@ -116,10 +118,13 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
     }
     this.updateHeaderOffset();
     this.updateCollapsedAttribute();
+    // Keep decorator size in sync whenever collapsed state changes
+    this._updateDecoratorSize();
   }
 
   private updateCollapsedAttribute() {
     const { fullyCollapsed, open } = tearsheetSignal.get();
+    const wasCollapsed = this.hasAttribute('collapsed');
 
     if (open) {
       if (fullyCollapsed) {
@@ -129,6 +134,21 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
       }
     } else {
       this.removeAttribute('collapsed');
+    }
+
+    // Dispatch a single unified event only when the state actually changes
+    const isNowCollapsed = this.hasAttribute('collapsed');
+    if (isNowCollapsed !== wasCollapsed) {
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSTearsheetHeader).eventCollapseChange,
+          {
+            bubbles: true,
+            composed: true,
+            detail: { collapsed: isNowCollapsed },
+          }
+        )
+      );
     }
   }
 
@@ -161,7 +181,10 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
       }
     }
     if (this._hasAILabel || this._hasDecorator) {
-      childItems[0].setAttribute('size', 'sm');
+      // AILabel size shrinks to 'xs' when the header is collapsed so it fits
+      // in the reduced-height collapsed bar; otherwise use 'sm'.
+      const { fullyCollapsed } = tearsheetSignal.get();
+      childItems[0]?.setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
       this.setAttribute(this._hasAILabel ? 'ai-label' : 'decorator', '');
       this.removeAttribute(this._hasAILabel ? 'decorator' : 'ai-label');
     } else {
@@ -171,6 +194,15 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
 
     this.updateHeaderOffset();
   }
+
+  private _updateDecoratorSize() {
+    const { fullyCollapsed } = tearsheetSignal.get();
+    const assigned = this.decoratorSlot?.assignedElements({ flatten: true });
+    if (assigned?.length) {
+      assigned[0]?.setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
+    }
+  }
+
   render() {
     const { fullyCollapsed } = tearsheetSignal.get();
     const classes = classMap({
@@ -207,6 +239,15 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   static get eventCloseButtonClicked() {
     return `${prefix}-tearsheet-header-close-button-clicked`;
+  }
+
+  /**
+   * Internal event fired when the collapse state changes.
+   * The parent `c4p-preview-tearsheet` intercepts this and re-dispatches it as
+   * the public `c4p-preview-tearsheet-collapse-change` event.
+   */
+  static get eventCollapseChange() {
+    return `${prefix}-tearsheet-header-collapse-change`;
   }
 }
 export default CDSTearsheetHeader;

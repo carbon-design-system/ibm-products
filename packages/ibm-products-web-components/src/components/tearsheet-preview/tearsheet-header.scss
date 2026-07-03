@@ -122,7 +122,8 @@ $motion-duration: $duration-moderate-02;
 // ──────────────────────────────────────────────────────────────
 :host([collapsed]) {
   .#{$block-class__next}__header {
-    padding-block-start: $spacing-04;
+    // Collapsed: remove top padding (was $spacing-04)
+    padding-block-start: 0;
     transition: padding $motion-duration motion(entrance, expressive);
   }
 
@@ -141,8 +142,8 @@ $motion-duration: $duration-moderate-02;
   }
 
   ::slotted([slot='header-content']) {
+    // Remove bottom padding when collapsed (was $spacing-04)
     min-block-size: $spacing-08;
-    padding-block-end: $spacing-04;
   }
 
   // Divider line above navigation bar when collapsed

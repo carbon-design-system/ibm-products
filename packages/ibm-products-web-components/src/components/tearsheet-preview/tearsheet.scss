@@ -183,8 +183,24 @@ $motion-duration: $duration-moderate-02;
   }
 }
 
+──────────────────────────────────────────────────────────────
 // Narrow variant styles
+// ──────────────────────────────────────────────────────────────
+// ── Narrow container sizing ───────────────────────────────────
+// Carbon's dialog defaults to full-width on small screens and ~480 px on
+// larger ones, but its breakpoint (~672 px) is too wide for a narrow
+// tearsheet.  Pin it to exactly 480 px; below 480 px fill the viewport.
 :host(#{$c4p-prefix}-preview-tearsheet[variant='narrow']) {
+  ::part(dialog) {
+    inline-size: 480px;
+    max-inline-size: 480px;
+
+    @media (width <= 480px) {
+      inline-size: 100%;
+      max-inline-size: 100%;
+    }
+  }
+
   .#{$block-class__next}__header {
     padding-inline: $spacing-05;
   }

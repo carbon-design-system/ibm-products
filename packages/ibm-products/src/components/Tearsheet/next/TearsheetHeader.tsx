@@ -54,6 +54,12 @@ export interface TearsheetHeaderProps {
    * Default header collapse/expand while scrolling the main content can be disabled  by setting this
    */
   disableHeaderCollapse?: boolean;
+
+  /**
+   * Optional callback fired whenever the header collapse state changes.
+   * Receives the current collapsed state (`true` = collapsed, `false` = expanded).
+   */
+  onHeaderCollapse?: (collapsed: boolean) => void;
 }
 
 const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
@@ -64,6 +70,7 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
       hideCloseButton = false,
       className,
       disableHeaderCollapse,
+      onHeaderCollapse,
       ...rest
     } = props;
     const parentContext = useContext(TearsheetContext);
@@ -75,11 +82,16 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
       setDisableHeaderCollapse?.(!!disableHeaderCollapse);
     }, [disableHeaderCollapse, setDisableHeaderCollapse]);
 
-    // Create enhanced context with close button props
+    useEffect(() => {
+      onHeaderCollapse?.(!!fullyCollapsed);
+    }, [fullyCollapsed, onHeaderCollapse]);
+
+    // Create enhanced context with close button props and onHeaderCollapse callback
     const enhancedContext = {
       ...parentContext,
       closeIconDescription,
       hideCloseButton,
+      onHeaderCollapse,
     };
 
     return (

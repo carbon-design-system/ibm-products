@@ -19,6 +19,7 @@ interface TearsheetContextType {
   setFullyCollapsed?: (value: boolean) => void;
   refs?: any;
   onClose?: () => void;
+  onHeaderCollapse?: (collapsed: boolean) => void;
   disableHeaderCollapse?: boolean;
   setDisableHeaderCollapse?: (value: boolean) => void;
   variant: 'wide' | 'narrow';

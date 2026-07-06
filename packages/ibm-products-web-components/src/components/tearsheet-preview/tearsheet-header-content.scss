@@ -53,6 +53,10 @@ $motion-duration: $duration-moderate-02;
 }
 
 :host {
+  // Grid hosts header-content (col 1) and header-actions (col 2).
+  // Decorator and close button are absolutely positioned top-right,
+  // placed early in DOM order for correct keyboard tab sequence.
+  position: relative;
   display: grid;
   flex-basis: unset;
   gap: $spacing-05;
@@ -61,7 +65,7 @@ $motion-duration: $duration-moderate-02;
       1fr
     );
 
-  inline-size: calc(100% - var(--tearsheet-header-action-offset));
+  inline-size: 100%; // full width — close/decorator are abs-positioned, no offset needed
 
   @include breakpoint-down(md) {
     display: flex;
@@ -73,6 +77,36 @@ $motion-duration: $duration-moderate-02;
     }
   }
 }
+
+// ── Decorator (AI label) ─────────────────────────────────────────
+// DOM position: 2nd (after header-actions, before close, before header-content)
+// Visual position: absolute top-right (matches Carbon modal pattern)
+.#{$block-class__next}__decorator {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 0;
+  inset-inline-end: $spacing-08; // leave room for close button
+
+  @include breakpoint-down(md) {
+    position: static;
+    margin-block-end: $spacing-03;
+  }
+}
+
+// ── Close button ─────────────────────────────────────────────────
+// DOM position: 3rd (after decorator, before header-content)
+// Visual position: absolute top-right corner
+.#{$block-class__next}__close-button {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+
+  @include breakpoint-down(md) {
+    position: static;
+  }
+}
+
 .#{$block-class__next}__header-actions {
   display: flex;
   justify-content: flex-end;

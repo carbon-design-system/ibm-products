@@ -332,9 +332,8 @@ export const Default = {
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}"
         >
-          ${getDecorator(args.decorator)}
-
           <c4p-tearsheet-header-content title="${args.title}">
+            ${getDecorator(args.decorator)}
             <label slot="label">${args.label}</label>
             ${args.showDescription ? description : ''}
             ${args.showTitleIcon
@@ -430,9 +429,8 @@ export const WithInfluencer = {
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}"
         >
-          ${getDecorator(args.decorator)}
-
           <c4p-tearsheet-header-content title="Title of the tearsheet">
+            ${getDecorator(args.decorator)}
             <label slot="label">Label</label>
             ${description}
             ${iconLoader(Bee, {
@@ -522,9 +520,8 @@ export const WithTabs = {
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}"
         >
-          ${getDecorator(args.decorator)}
-
           <c4p-tearsheet-header-content title="Title of the tearsheet">
+            ${getDecorator(args.decorator)}
             <label slot="label">Label</label>
             ${description}
             ${iconLoader(Bee, {
@@ -606,8 +603,8 @@ export const narrowTearsheet = {
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}"
         >
-          ${getDecorator(args.decorator)}
           <c4p-tearsheet-header-content title="Title of the tearsheet">
+            ${getDecorator(args.decorator)}
             <label slot="label">Label</label>
             ${description}
             <div slot="header-actions">
@@ -750,8 +747,8 @@ export const WithCustomFooterActions = {
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}"
         >
-          ${getDecorator(args.decorator)}
           <c4p-tearsheet-header-content title="Title of the tearsheet">
+            ${getDecorator(args.decorator)}
             <label slot="label">Customer data</label>
             ${description}
             ${iconLoader(Bee, {

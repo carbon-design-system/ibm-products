@@ -23,6 +23,12 @@ interface TearsheetSignalType {
   open: boolean;
   hasAILabel: boolean;
   uniqueId: string;
+  /** Tooltip/aria label for the close button */
+  closeIconDescription: string;
+  /** Whether the close button should be hidden */
+  hideCloseButton: boolean;
+  /** Callback to close the tearsheet */
+  onClose: (() => void) | null;
 }
 export const defaultTearsheetSignal: TearsheetSignalType = {
   hasCloseIcon: true,
@@ -33,6 +39,9 @@ export const defaultTearsheetSignal: TearsheetSignalType = {
   open: false,
   hasAILabel: false,
   uniqueId: '',
+  closeIconDescription: 'Close',
+  hideCloseButton: false,
+  onClose: null,
 };
 export const tearsheetSignal = signal<TearsheetSignalType>(
   defaultTearsheetSignal

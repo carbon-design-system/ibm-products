@@ -211,7 +211,27 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       open: this.open,
       hasAILabel: this.hasAILabel,
       uniqueId: this.uniqueId,
+      ...this._readHeaderProps(),
+      onClose: () => this.closeTearsheet(),
     });
+  }
+
+  /** Read close-button props from the slotted c4p-tearsheet-header element */
+  private _readHeaderProps(): {
+    closeIconDescription: string;
+    hideCloseButton: boolean;
+  } {
+    const header = this.querySelector(`${prefix}-tearsheet-header`) as any;
+    return {
+      closeIconDescription:
+        header?.closeIconDescription ??
+        header?.getAttribute('close-icon-description') ??
+        'Close',
+      hideCloseButton:
+        header?.hideCloseButton ??
+        header?.hasAttribute('hide-close-button') ??
+        false,
+    };
   }
 
   protected updated(_changedProperties: PropertyValues): void {

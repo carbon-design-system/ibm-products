@@ -12,6 +12,7 @@ import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import '@carbon/web-components/es/components/modal/index.js';
+import '@carbon/web-components/es/components/icon-button/index.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '../truncated-text';
 import styles from './tearsheet-header-content.scss?lit';
@@ -20,6 +21,8 @@ import { breakpoints } from '@carbon/layout';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 import { tearsheetSignal } from './tearsheet-signal';
 import { SignalWatcher } from '@lit-labs/signals';
+import Close20 from '@carbon/icons/es/close/20.js';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 
 const blockClass = `${prefix}--tearsheet__next`;
 
@@ -64,11 +67,20 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   @query('slot[name="title-end"]')
   private _titleEndSlot?: HTMLSlotElement;
 
+  @query('slot[name="decorator"]')
+  private _decoratorSlot?: HTMLSlotElement;
+
   @state()
   private _hasTitleStart = false;
 
   @state()
   private _hasTitleEnd = false;
+
+  @state()
+  private _hasDecorator = false;
+
+  @state()
+  private _hasAILabel = false;
 
   @state()
   private _isMobileOrNarrow = false;
@@ -105,6 +117,9 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     if (this._isMobileOrNarrow !== previousIsMobileOrNarrow) {
       this.requestUpdate();
     }
+
+    this._updateDecoratorSize();
+    this._updateHeaderOffset();
   }
 
   private _checkSlots() {
@@ -122,7 +137,107 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     this._checkSlots();
   }
 
+  private _handleDecoratorChange(e: Event) {
+    this._hasAILabel = false;
+    const childItems = (e.target as HTMLSlotElement).assignedElements();
+    this._hasDecorator = childItems.length > 0;
+    if (this._hasDecorator) {
+      for (const item of childItems) {
+        if (item.tagName.toLowerCase() === 'cds-ai-label') {
+          this._hasAILabel = true;
+          break;
+        }
+      }
+      // Set decorator size based on collapse state
+      const { fullyCollapsed } = tearsheetSignal.get();
+      childItems[0].setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
+
+      // Update host attributes for CSS targeting
+      const host = this.closest(
+        `${prefix}-tearsheet-header`
+      ) as HTMLElement | null;
+      if (host) {
+        host.setAttribute(this._hasAILabel ? 'ai-label' : 'decorator', '');
+        host.removeAttribute(this._hasAILabel ? 'decorator' : 'ai-label');
+      }
+    } else {
+      const host = this.closest(
+        `${prefix}-tearsheet-header`
+      ) as HTMLElement | null;
+      if (host) {
+        host.removeAttribute('decorator');
+        host.removeAttribute('ai-label');
+      }
+    }
+    // Update header offset CSS variable
+    this._updateHeaderOffset();
+  }
+
+  private _updateDecoratorSize() {
+    const { fullyCollapsed } = tearsheetSignal.get();
+    const assigned = this._decoratorSlot?.assignedElements({ flatten: true });
+    if (assigned?.length) {
+      assigned[0].setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
+    }
+  }
+
+  private _updateHeaderOffset() {
+    const { open, isSm } = tearsheetSignal.get();
+    if (!open) {
+      return;
+    }
+    const assigned =
+      this._decoratorSlot?.assignedElements({ flatten: true }) ?? [];
+    const decoratorWidth = assigned[0]?.getBoundingClientRect().width ?? 0;
+    const { hideCloseButton } = tearsheetSignal.get();
+    const closeButtonWidth = !hideCloseButton ? 32 : 0;
+    const offset = decoratorWidth + closeButtonWidth + (isSm ? 8 : 0);
+    document.documentElement.style.setProperty(
+      '--tearsheet-header-action-offset',
+      `${offset}px`
+    );
+  }
+
   render() {
+    const { fullyCollapsed, hideCloseButton, closeIconDescription, onClose } =
+      tearsheetSignal.get();
+
+    const decoratorTemplate = html`
+      <div
+        class="${blockClass}__decorator"
+        role="${this._hasDecorator ? 'complementary' : undefined}"
+        aria-label="${this._hasDecorator ? 'Decorator' : undefined}"
+      >
+        <slot
+          name="decorator"
+          @slotchange=${this._handleDecoratorChange}
+        ></slot>
+      </div>
+    `;
+
+    const closeButtonTemplate = !hideCloseButton
+      ? html`
+          <div class="${blockClass}__close-button cds--modal-close-button">
+            <cds-icon-button
+              class="cds--modal-close"
+              kind="ghost"
+              size="${fullyCollapsed ? 'md' : 'lg'}"
+              align="left"
+              aria-label="${closeIconDescription || 'Close'}"
+              @click="${() => onClose?.()}"
+            >
+              ${iconLoader(Close20, {
+                slot: 'icon',
+                class: 'cds--modal-close__icon',
+              })}
+              <span slot="tooltip-content"
+                >${closeIconDescription || 'Close'}</span
+              >
+            </cds-icon-button>
+          </div>
+        `
+      : html``;
+
     const headerActionsTemplate = html`
       <div class="${blockClass}__header-actions">
         <slot name="header-actions"></slot>
@@ -191,11 +306,14 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
       </div>
     `;
 
-    // Desktop/Wide: header-actions first (for accessibility), CSS order handles visual layout
-    // Mobile/Narrow: header-content first (natural DOM order)
+    // DOM order drives tab order:
+    //   Desktop/Wide: header-actions → decorator → close-button → header-content
+    //   Mobile/Narrow: header-content → header-actions (natural stacking)
+    // CSS `order` property handles the visual layout independently.
     return this._isMobileOrNarrow
       ? html`${headerContentTemplate} ${headerActionsTemplate}`
-      : html`${headerActionsTemplate} ${headerContentTemplate}`;
+      : html`${headerActionsTemplate} ${decoratorTemplate}
+        ${closeButtonTemplate} ${headerContentTemplate}`;
   }
 
   static styles = styles;

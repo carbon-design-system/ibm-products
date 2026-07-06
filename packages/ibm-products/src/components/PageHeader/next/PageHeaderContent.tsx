@@ -49,6 +49,10 @@ export interface PageHeaderContentProps {
    */
   title: string;
   /**
+   * Specify the element or component used to render the title.
+   */
+  titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | typeof Heading;
+  /**
    * The PageHeaderContent's contextual actions
    */
   contextualActions?: React.ReactNode;
@@ -69,6 +73,7 @@ export const PageHeaderContent = React.forwardRef<
     className,
     children,
     title,
+    titleAs = 'h1',
     renderIcon: IconElement,
     contextualActions,
     pageActions,
@@ -131,7 +136,7 @@ export const PageHeaderContent = React.forwardRef<
                   <DefinitionTooltip definition={title}>
                     <Text
                       ref={titleRef}
-                      as={Heading}
+                      as={titleAs}
                       className={`${blockClass}__content__title`}
                     >
                       {title}
@@ -140,7 +145,7 @@ export const PageHeaderContent = React.forwardRef<
                 ) : (
                   <Text
                     ref={titleRef}
-                    as={Heading}
+                    as={titleAs}
                     className={`${blockClass}__content__title`}
                   >
                     {title}
@@ -199,6 +204,11 @@ PageHeaderContent.propTypes = {
    * The PageHeaderContent's title
    */
   title: PropTypes.string.isRequired,
+  /**
+   * Specify the element or component used to render the title.
+   */
+  titleAs: PropTypes.oneOfType([
+    PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+    PropTypes.elementType,
+  ]),
 };
-
-// Made with Bob

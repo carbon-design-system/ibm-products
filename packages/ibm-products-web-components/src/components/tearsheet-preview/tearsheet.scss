@@ -15,6 +15,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/focus-outline';
 
 @use '@carbon/ibm-products-styles/scss/components/Tearsheet/_tearsheet_next.scss'
   as *;
@@ -71,6 +72,10 @@ $motion-duration: $duration-moderate-02;
 
 :host ::slotted([slot='summary-content']) {
   @extend .#{$block-class__next}__summary-content;
+}
+
+:host ::slotted([slot='summary-content']:focus) {
+  @include focus-outline.focus-outline('outline');
 }
 
 :host ::slotted([slot='summary-content'][is-flush]) {

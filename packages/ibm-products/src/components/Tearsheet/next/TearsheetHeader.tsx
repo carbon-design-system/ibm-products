@@ -177,6 +177,10 @@ export const TearsheetScrollButton = React.forwardRef<
           handleScroller(!!fullyCollapsed);
         }}
         className={classNames(className, `${blockClass}__scroller-button`)}
+        aria-label={
+          fullyCollapsed ? `${expandText} header` : `${collapseText} header`
+        }
+        aria-expanded={!fullyCollapsed}
       >
         <ChevronUp
           className={classNames(`${blockClass}__scroller-button-icon`, {

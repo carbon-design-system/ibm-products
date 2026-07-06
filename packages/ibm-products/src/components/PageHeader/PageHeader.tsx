@@ -55,7 +55,6 @@ import PropTypes from 'prop-types';
 import { breakpoints } from '@carbon/layout';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 const componentName = 'PageHeader';

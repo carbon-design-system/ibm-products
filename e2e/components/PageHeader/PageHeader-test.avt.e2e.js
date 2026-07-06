@@ -150,11 +150,11 @@ test.describe('PageHeader @avt', () => {
     );
 
     // renders all buttons on large screens by default
-    await page.getByRole('button', { name: 'danger Danger button' }).click();
+    await page.getByRole('button', { name: 'Danger button' }).click();
     // Wait for focus state to stabilize after click
     await page.waitForTimeout(100);
     await expect(
-      page.getByRole('button', { name: 'danger Danger button' })
+      page.getByRole('button', { name: 'Danger button' })
     ).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(
@@ -298,6 +298,8 @@ test.describe('PageHeader @avt', () => {
 
     // collapses into menu button on small screens
     await page.setViewportSize({ width: 1024, height: 768 });
+    // Wait for layout to stabilize after viewport resize
+    await page.waitForTimeout(300);
     // reset focus to first focusable element
     await page
       .getByLabel('Breadcrumb', { exact: true })

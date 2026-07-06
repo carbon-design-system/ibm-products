@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,12 +32,12 @@ const renderCoachmarkWithTagline = ({ ...rest } = {}) =>
         {...rest}
       ></CoachmarkTagline>
       <Coachmark.Content aria-label="Coachmark content">
-        <Coachmark.Content.Header closeIconDescription="Close"></Coachmark.Content.Header>
-        <Coachmark.Content.Body>
+        <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
+        <Coachmark.ContentBody>
           <h2>Hello World</h2>
           <p>this is a description test</p>
           <Button size="sm">Done</Button>
-        </Coachmark.Content.Body>
+        </Coachmark.ContentBody>
       </Coachmark.Content>
     </Coachmark>
   );

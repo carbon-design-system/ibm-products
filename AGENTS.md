@@ -21,8 +21,8 @@ product teams.
 - Follow the maintainer guide, see `docs/MAINTAINER_GUIDELINES.md`
 - For procedural instructions on various tasks for maintainers, see
   `docs/guides/`
-- The approach for delivering experimental, feature-flagged, "canary" code:
-  `docs/guides/CANARY_STRUCTURE.md`
+- Component status and PDLC progression:
+  `docs/guides/COMPONENT_STATUS_DEFINITIONS.md`
 - Linting, formatting, build and tests should all pass before committing
 - Before opening or reviewing a pull request (PR), follow the instructions:
   `docs/reviews/PR_REVIEW_GUIDELINES.md`

@@ -25,6 +25,7 @@ export interface pageHeaderContextType {
   contentActionsClipped?: boolean;
   root?: CDSPageHeader | null;
   withContent?: boolean;
+  disableStickyTabBar?: boolean;
 }
 
 /**
@@ -38,6 +39,18 @@ class CDSPageHeader extends LitElement {
   context: pageHeaderContextType = {};
 
   private resizeObserver: ResizeObserver | undefined;
+
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('context')) {
+      // Update host class based on disableStickyTabBar
+      if (this.context.disableStickyTabBar) {
+        this.classList.add(`${prefix}--page-header--disable-sticky-tab-bar`);
+      } else {
+        this.classList.remove(`${prefix}--page-header--disable-sticky-tab-bar`);
+      }
+    }
+  }
 
   connectedCallback(): void {
     super.connectedCallback();

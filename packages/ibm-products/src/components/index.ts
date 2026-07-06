@@ -83,6 +83,7 @@ export {
   useFeatureFlags as preview__useFeatureFlags,
 } from './FeatureFlags';
 export * as preview__PageHeader from './PageHeader/next';
+export * as preview__Card from './Card/next';
 
 export {
   Tearsheet as preview__Tearsheet,

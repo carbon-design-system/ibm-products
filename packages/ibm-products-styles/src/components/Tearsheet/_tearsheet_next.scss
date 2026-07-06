@@ -497,9 +497,7 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     margin-inline-start: -$spacing-05;
   }
 }
-.#{$carbon-prefix}--tab-content {
-  padding: 0;
-}
+
 .#{$block-class__next}__scroller-container {
   position: absolute;
   inset-block-end: 0;
@@ -606,6 +604,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
 
   > *:only-child {
     grid-column: 1 / -1;
+  }
+
+  .#{$carbon-prefix}--tab-content {
+    padding: 0;
   }
 }
 

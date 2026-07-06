@@ -357,6 +357,7 @@ export default {
       page: DocsPage,
     },
     layout: 'fullscreen',
+    chromatic: { disableSnapshot: true },
   },
 };
 

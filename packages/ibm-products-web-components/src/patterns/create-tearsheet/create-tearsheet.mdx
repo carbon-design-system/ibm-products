@@ -1,0 +1,283 @@
+import { Meta, Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import * as stories from './create-tearsheet.stories';
+
+<Meta of={stories} />
+
+# CreateTearsheet Pattern
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#wide-tearsheet)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [What is a Pattern?](#what-is-a-pattern)
+- [Getting Started](#getting-started)
+- [Example Usage](#example-usage)
+- [Customization](#customization)
+- [Architecture](#architecture)
+
+## Overview
+
+The `CreateTearsheet` is a **pattern** (not a component) that provides a recipe
+for building multi-step workflow interfaces for creating resources or completing
+complex tasks. It demonstrates how to compose the Tearsheet component with
+Lit reactive state for managing step navigation and form state.
+
+## What is a Pattern?
+
+Unlike components that are exported from the package, **patterns are recipes**
+that you copy into your codebase and customize to fit your specific needs. This
+approach offers:
+
+- **Full Control**: Modify the code to match your exact requirements
+- **No Breaking Changes**: Updates to the pattern don't affect your
+  implementation
+- **Seamless Customization**: Adapt the pattern without workarounds or prop
+  drilling
+- **Scalability**: Build upon the foundation with your own features
+
+The CreateTearsheet pattern consists of:
+
+- `create-tearsheet-base.ts` - Main tearsheet workflow base class
+- `create-tearsheet-step.ts` - Individual step wrapper component
+- Example implementations in `examples/create-tearsheet/src/`
+- Styles and utilities
+
+## Getting Started
+
+1. **Copy the pattern code** from the
+   [example directory](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-tearsheet/src)
+   into your project
+2. **Install dependencies**: `@carbon/web-components`,
+   `@carbon/ibm-products-web-components`
+3. **Import and use** the pattern components in your application
+4. **Customize** as needed for your use case
+
+The pattern uses:
+
+- **Tearsheet component** (`@carbon/ibm-products-web-components`): Provides the
+  modal container and layout
+- **Lit reactive state**: Manages step navigation and form state
+- **Carbon Web Components**: For form inputs and UI elements
+
+### Key Features
+
+- **Multi-step workflow**: Guide users through complex creation processes
+- **Progress indication**: Visual feedback with vertical progress indicators
+- **Responsive design**: Adapts to different screen sizes
+- **Step management**: Built-in navigation with back, next, and submit actions
+- **Form state management**: Integrated state management across steps
+
+### Key Implementation Steps
+
+1. **Copy Pattern Files**: Copy the pattern components from the example
+   directory into your project
+2. **State Management**: Use LitElement's `@state()` decorators to manage step
+   state and form data
+3. **Open State**: Manage `open` state in your component
+4. **Step Navigation**: Implement `handleNext()`, `handleBack()`, and
+   `handleSubmit()` methods
+5. **Customization**: Modify the copied pattern files to fit your specific needs
+
+## Example Usage
+
+Three preview variants are available in the web components example package:
+
+- `MultiStep`: baseline multi-step create flow
+- `MultiStepWithIntro`: intro-first flow with category-specific conditional steps
+- `MultiStepWithStepInErrorState`: flow showing invalid step states in the progress indicator
+
+```typescript
+import { LitElement, html } from 'lit';
+import { customElement, state } from 'lit/decorators.js';
+import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/progress-indicator/index.js';
+
+@customElement('my-create-tearsheet')
+class MyCreateTearsheet extends LitElement {
+  @state()
+  private open = false;
+
+  @state()
+  private currentStep = 0;
+
+  private stepLabels = [
+    { label: 'Topic name', secondaryLabel: 'Name your topic' },
+    { label: 'Partitions', secondaryLabel: 'Configure partitions' },
+    { label: 'Retention', secondaryLabel: 'Set retention policy' },
+  ];
+
+  private handleNext = () => {
+    this.currentStep++;
+  };
+
+  private handleBack = () => {
+    this.currentStep--;
+  };
+
+  private handleClose = () => {
+    this.open = false;
+  };
+
+  render() {
+    return html`
+      <cds-button @click=${() => (this.open = true)}>
+        Create Resource
+      </cds-button>
+      ${this.open
+        ? html`
+            <c4p-preview-tearsheet
+              open
+              variant="wide"
+              @c4p-preview-tearsheet-closed=${this.handleClose}
+            >
+              <c4p-tearsheet-header>
+                <c4p-tearsheet-header-content title="Create Resource">
+                  <div slot="description">
+                    Specify details for the new resource you want to create
+                  </div>
+                </c4p-tearsheet-header-content>
+              </c4p-tearsheet-header>
+
+              <c4p-tearsheet-influencer>
+                <cds-progress-indicator vertical>
+                  ${this.stepLabels.map(
+                    (step, index) => html`
+                      <cds-progress-step
+                        label=${step.label}
+                        description=${step.secondaryLabel}
+                        ?complete=${index < this.currentStep}
+                        ?current=${index === this.currentStep}
+                      ></cds-progress-step>
+                    `
+                  )}
+                </cds-progress-indicator>
+              </c4p-tearsheet-influencer>
+
+              <c4p-tearsheet-body>
+                <div slot="main-content">
+                  <!-- Step content here -->
+                </div>
+              </c4p-tearsheet-body>
+
+              <c4p-tearsheet-footer
+                variant="wide"
+                .actions=${[
+                  {
+                    kind: 'ghost',
+                    label: 'Cancel',
+                    onClick: this.handleClose,
+                  },
+                  {
+                    kind: 'secondary',
+                    label: 'Back',
+                    onClick: this.handleBack,
+                    disabled: this.currentStep === 0,
+                  },
+                  {
+                    kind: 'primary',
+                    label: 'Next',
+                    onClick: this.handleNext,
+                  },
+                ]}
+              ></c4p-tearsheet-footer>
+            </c4p-preview-tearsheet>
+          `
+        : ''}
+    `;
+  }
+}
+```
+
+## Customization
+
+Since this is a pattern (not a component), you have full control to customize:
+
+### Modify Validation Logic
+
+Edit the validation logic in your copied implementation:
+
+```typescript
+protected isNextDisabledForStep(stepKey) {
+  switch (stepKey) {
+    case 'topic-information':
+      return !this.formData.topicName.trim();
+    case 'location':
+      return !this.formData.location.trim();
+    default:
+      return false;
+  }
+}
+```
+
+### Add Custom Buttons
+
+Modify the footer action rendering in your copied implementation:
+
+```typescript
+html`
+  <cds-button kind="ghost">Save draft</cds-button>
+  <cds-button kind="secondary" @click=${this.handleBack}>Back</cds-button>
+  <cds-button kind="primary" @click=${this.handleNext}>Next</cds-button>
+`;
+```
+
+### Customize Step Layout
+
+Edit your copied step component layout structure:
+
+```typescript
+html`
+  <create-tearsheet-step
+    title="Topic name"
+    subtitle="Provide topic details"
+    description="Add your custom content here"
+  >
+    <cds-text-input label="Topic name"></cds-text-input>
+  </create-tearsheet-step>
+`;
+```
+
+## Architecture
+
+The CreateTearsheet pattern is built on top of:
+
+- **Tearsheet component** (`@carbon/ibm-products-web-components`): Provides the
+  modal container and layout with responsive behavior
+- **LitElement**: Manages reactive state and rendering
+- **Progress Indicator** (`@carbon/web-components`): For step visualization
+- **Carbon Web Components**: For form inputs and UI elements
+
+### Step Management
+
+Steps are managed using Lit reactive state in the copied pattern implementation.
+The base workflow provides:
+
+- Current step tracking
+- Navigation methods like `handleNext()`, `handleBack()`, and `handleSubmit()`
+- Form state management through a shared `formData` object
+- Visible step configuration through `getVisibleSteps()`
+
+**Important**: Copy both the base workflow and step wrapper files so the step
+management and layout stay aligned.
+
+### Responsive Behavior
+
+The progress indicator adapts to screen size:
+
+- **Large screens**: Vertical progress indicator displayed in the influencer
+  panel
+- **Small screens**: Responsive tearsheet layout adapts for smaller viewports
+
+### State Management
+
+- **Step state**: Managed with Lit `@state()` properties
+- **Form state**: Shared across steps through the component's `formData`
+- **Open state**: Managed in the pattern component
+- **Auto-reset**: The tearsheet resets to the initial step when closed
+
+## Feedback
+
+Help us improve this component by providing feedback through
+[GitHub issues](https://github.com/carbon-design-system/ibm-products/issues/new/choose).

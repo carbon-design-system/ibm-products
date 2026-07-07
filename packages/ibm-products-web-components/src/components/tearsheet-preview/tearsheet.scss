@@ -89,7 +89,10 @@ $motion-duration: $duration-moderate-02;
       block-size: 100%;
       inset-block-start: auto;
       max-block-size: calc(
-        100% - var(--tearsheet-vertical-gap, #{$spacing-09})
+        100% - var(
+            --tearsheet-vertical-gap,
+            calc(#{$spacing-11} + #{$spacing-03} + #{$spacing-01})
+          )
       );
       transform: translate3d(0, min(95vh, 500px), 0);
       transition: none;
@@ -101,7 +104,12 @@ $motion-duration: $duration-moderate-02;
     border: 1px solid $border-subtle-01;
     block-size: 100%;
     inset-block-start: auto;
-    max-block-size: calc(100% - var(--tearsheet-vertical-gap, #{$spacing-09}));
+    max-block-size: calc(
+      100% - var(
+          --tearsheet-vertical-gap,
+          calc(#{$spacing-11} + #{$spacing-03} + #{$spacing-01})
+        )
+    );
     transform: translate3d(0, min(95vh, 500px), 0);
     transition:
       transform $motion-duration motion(entrance, expressive),
@@ -176,7 +184,10 @@ $motion-duration: $duration-moderate-02;
 
   ::part(dialog) {
     max-block-size: calc(
-      100% - var(--tearsheet-vertical-gap, #{$spacing-09}) +
+      100% - var(
+          --tearsheet-vertical-gap,
+          calc(#{$spacing-11} + #{$spacing-03} + #{$spacing-01})
+        ) +
         var(--block-size-change)
     );
     transform: scaleX(var(--scale-factor));

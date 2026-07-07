@@ -1,0 +1,14 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/react/scss/spacing';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--card-next;
+
+// Story-specific styles (if needed in the future)
+// Add any Storybook-specific styling here

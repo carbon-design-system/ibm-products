@@ -2,8 +2,12 @@
   "extends": "typescript-config-carbon/tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react",
+    "rootDir": "./src",
+    "types": ["node", "jest", "react"],
+    "moduleResolution": "bundler",
     // TODO: Turn back on once stricter typings for internal utilities are complete
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "strict": false
   },
   "include": ["src/**/*"],
   "exclude": ["**/*.figma.tsx"]

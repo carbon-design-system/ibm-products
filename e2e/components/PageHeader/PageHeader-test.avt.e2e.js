@@ -150,11 +150,11 @@ test.describe('PageHeader @avt', () => {
     );
 
     // renders all buttons on large screens by default
-    await page.getByRole('button', { name: 'danger Danger button' }).click();
+    await page.getByRole('button', { name: 'Danger button' }).click();
     // Wait for focus state to stabilize after click
     await page.waitForTimeout(100);
     await expect(
-      page.getByRole('button', { name: 'danger Danger button' })
+      page.getByRole('button', { name: 'Danger button' })
     ).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(

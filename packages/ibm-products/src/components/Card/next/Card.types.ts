@@ -41,6 +41,10 @@ export interface CardProps extends CardBaseProps {
    * Disables the card and all interactive elements
    */
   disabled?: boolean;
+  /**
+   * Density variant: productive uses heading-compact-02, expressive uses heading-03
+   */
+  density?: 'productive' | 'expressive';
 }
 
 /**

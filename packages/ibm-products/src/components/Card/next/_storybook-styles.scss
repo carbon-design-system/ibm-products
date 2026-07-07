@@ -10,5 +10,24 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--card-next;
 
-// Story-specific styles (if needed in the future)
-// Add any Storybook-specific styling here
+#storybook-root {
+  padding-block-start: spacing.$spacing-07; // 2rem
+}
+
+// Storybook demo styles for CardMedia content
+// These styles are for demonstration purposes only and show how adopters
+// should style their content inside CardMedia to fill the AspectRatio container
+.#{$block-class}__media {
+  // Make any direct child div fill the AspectRatio container
+  // This works with inline styles that have width/height 100%
+  > div {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+// Storybook demo styles for pictogram in icon slot
+.icon-slot-pictogram {
+  block-size: spacing.$spacing-09; // 48px
+  inline-size: spacing.$spacing-09; // 48px
+}

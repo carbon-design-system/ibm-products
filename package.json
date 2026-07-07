@@ -70,6 +70,7 @@
     "@carbon/grid": "^11.56.0",
     "@carbon/layout": "^11.53.0",
     "@carbon/motion": "^11.46.0",
+    "@carbon/pictograms-react": "^11.105.0",
     "@carbon/react": "^1.109.0",
     "@carbon/themes": "^11.75.0",
     "@carbon/type": "^11.61.0",

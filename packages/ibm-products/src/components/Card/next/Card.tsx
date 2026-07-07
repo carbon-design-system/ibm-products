@@ -17,6 +17,15 @@ import { CardHeader } from './CardHeader';
 import { CardBody } from './CardBody';
 import { CardFooter } from './CardFooter';
 
+// Import header primitive components
+import { CardHeaderMedia } from './CardHeaderMedia';
+import { CardMedia } from './CardMedia';
+import { CardLabel } from './CardLabel';
+import { CardTitle } from './CardTitle';
+import { CardCaption } from './CardCaption';
+import { CardActions } from './CardActions';
+import { CardAction } from './CardAction';
+
 const componentName = 'Card';
 const blockClass = `${pkg.prefix}--card-next`;
 
@@ -30,6 +39,7 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       onClick,
       onKeyDown,
       disabled = false,
+      density = 'productive',
       className,
       children,
       ...rest
@@ -68,6 +78,7 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
     const cardClasses = cx(blockClass, className, {
       [`${blockClass}--clickable`]: clickable && !disabled,
       [`${blockClass}--disabled`]: disabled,
+      [`${blockClass}--${density}`]: density,
     });
 
     const cardProps = {
@@ -107,6 +118,10 @@ CardComponent.propTypes = {
    */
   clickable: PropTypes.bool,
   /**
+   * Density variant: productive uses heading-compact-02, expressive uses heading-03
+   */
+  density: PropTypes.oneOf(['productive', 'expressive']),
+  /**
    * Disables the card and all interactive elements
    */
   disabled: PropTypes.bool,
@@ -139,17 +154,52 @@ Body.displayName = 'Card.Body';
 const Footer = CardFooter;
 Footer.displayName = 'Card.Footer';
 
+const HeaderMedia = CardHeaderMedia;
+HeaderMedia.displayName = 'Card.HeaderMedia';
+
+const Media = CardMedia;
+Media.displayName = 'Card.Media';
+
+const Label = CardLabel;
+Label.displayName = 'Card.Label';
+
+const Title = CardTitle;
+Title.displayName = 'Card.Title';
+
+const Caption = CardCaption;
+Caption.displayName = 'Card.Caption';
+
+const Actions = CardActions;
+Actions.displayName = 'Card.Actions';
+
+const Action = CardAction;
+Action.displayName = 'Card.Action';
+
 export {
   // direct exports
   Card as default,
   CardHeader,
   CardBody,
   CardFooter,
+  CardHeaderMedia,
+  CardMedia,
+  CardLabel,
+  CardTitle,
+  CardCaption,
+  CardActions,
+  CardAction,
   // namespaced
   Root,
   Header,
   Body,
   Footer,
+  HeaderMedia,
+  Media,
+  Label,
+  Title,
+  Caption,
+  Actions,
+  Action,
 };
 
 export type {
@@ -158,3 +208,12 @@ export type {
   CardBodyProps,
   CardFooterProps,
 } from './Card.types';
+
+// Export primitive component prop types
+export type { CardHeaderMediaProps } from './CardHeaderMedia';
+export type { CardMediaProps } from './CardMedia';
+export type { CardLabelProps } from './CardLabel';
+export type { CardTitleProps } from './CardTitle';
+export type { CardCaptionProps } from './CardCaption';
+export type { CardActionsProps } from './CardActions';
+export type { CardActionProps } from './CardAction';

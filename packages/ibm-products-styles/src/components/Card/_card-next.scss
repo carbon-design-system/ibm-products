@@ -20,6 +20,7 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
 .#{$block-class-next} {
   position: relative;
   border: 1px solid $border-subtle-01;
+  border-radius: 0; // Carbon cards don't have border radius by default
   background-color: $layer-01;
   color: $text-primary;
 }
@@ -53,10 +54,10 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
 
 // Header styles
 .#{$block-class-next}__header {
+  position: relative;
   display: flex;
   flex-direction: column;
-  padding: $spacing-05;
-  gap: $spacing-03;
+  gap: $spacing-01; // 2px gap between label, title, and caption
 }
 
 // Body styles
@@ -75,4 +76,151 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
   padding: $spacing-05;
   gap: $spacing-03;
   padding-block-start: 0;
+}
+
+// Header primitive components
+
+// Header Media styles (icon slot)
+.#{$block-class-next}__header-media {
+  display: flex;
+  flex-shrink: 0; // Don't shrink
+  align-items: flex-start; // Top-align content
+  justify-content: flex-start; // Left-align content
+  block-size: auto; // Auto height based on content
+  inline-size: auto; // Auto width based on content
+  margin-block-end: $spacing-05; // 16px bottom
+  margin-block-start: $spacing-05; // 16px top
+  margin-inline-end: $spacing-05; // 16px right
+  margin-inline-start: $spacing-05; // 16px left
+  max-block-size: $spacing-10; // 64px max height for content
+}
+
+// Inline header media margin (when NOT the first child, i.e., not header media slot)
+// This ensures inline icons align with label/title/caption text
+.#{$block-class-next}__header
+  > .#{$block-class-next}__header-media:not(:first-child) {
+  margin-inline-start: $spacing-05; // 16px left to align with text content
+}
+
+// When header media slot is followed by actions, create row layout
+.#{$block-class-next}__header:has(
+    > .#{$block-class-next}__header-media:first-child
+      + .#{$block-class-next}__actions
+  ) {
+  > .#{$block-class-next}__header-media:first-child {
+    // Header media on the left, remove right margin
+    margin-inline-end: 0;
+  }
+
+  > .#{$block-class-next}__actions {
+    // Actions on the right
+    margin-inline-start: auto;
+  }
+}
+
+// Media styles (uses Carbon AspectRatio)
+.#{$block-class-next}__media {
+  inline-size: 100%;
+}
+
+// Label styles
+.#{$block-class-next}__label {
+  @include type-style('label-01');
+
+  color: $text-secondary;
+
+  margin-block-start: $spacing-05; // 16px top
+  margin-inline: $spacing-05; // 16px left and right
+
+  &--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// Title styles
+.#{$block-class-next}__title {
+  color: $text-primary;
+  margin-inline: $spacing-05; // 16px left and right
+
+  &--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &--truncate-multi {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+  }
+}
+
+// Expressive density uses larger heading
+.#{$block-class-next}--expressive .#{$block-class-next}__title {
+  @include type-style('heading-03');
+}
+
+// Productive density uses compact heading (must come after expressive to override)
+.#{$block-class-next}--productive .#{$block-class-next}__title {
+  @include type-style('heading-compact-02');
+}
+
+// Conditional margin for title based on siblings
+// When title is standalone (no label before it), add top margin
+.#{$block-class-next}__header > .#{$block-class-next}__title:first-child,
+.#{$block-class-next}__header
+  > .#{$block-class-next}__header-media:first-child
+  + .#{$block-class-next}__title,
+.#{$block-class-next}__header
+  > .#{$block-class-next}__media:first-child
+  + .#{$block-class-next}__title {
+  margin-block-start: $spacing-05; // 16px top
+}
+
+// When title is standalone (no caption after it), add bottom margin
+.#{$block-class-next}__header > .#{$block-class-next}__title:last-child {
+  margin-block-end: $spacing-05; // 16px bottom
+}
+
+// Caption styles
+.#{$block-class-next}__caption {
+  @include type-style('label-01');
+
+  color: $text-secondary;
+
+  margin-block-end: $spacing-05; // 16px bottom
+  margin-inline: $spacing-05; // 16px left and right
+
+  &--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// Actions container styles
+.#{$block-class-next}__actions {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  block-size: $spacing-07; // 32px default height
+  gap: $spacing-02;
+  inset-block-start: $spacing-05; // 16px from top
+  inset-inline-end: $spacing-05; // 16px from right
+}
+
+// When actions are in header with header media slot, add bottom margin
+.#{$block-class-next}__header:has(
+    > .#{$block-class-next}__header-media:first-child
+  )
+  .#{$block-class-next}__actions {
+  margin-block-end: $spacing-07; // 32px gap below actions to title
+}
+
+// Action wrapper styles
+.#{$block-class-next}__action {
+  display: inline-flex;
 }

@@ -9,11 +9,37 @@ export {
   CardHeader,
   CardBody,
   CardFooter,
+  CardHeaderMedia,
+  CardMedia,
+  CardLabel,
+  CardTitle,
+  CardCaption,
+  CardActions,
+  CardAction,
   //
   Root,
   Header,
   Body,
   Footer,
+  HeaderMedia,
+  Media,
+  Label,
+  Title,
+  Caption,
+  Actions,
+  Action,
 } from './Card';
-export type { CardHeaderProps, CardBodyProps, CardFooterProps } from './Card';
-export type { CardProps } from './Card';
+
+export type {
+  CardProps,
+  CardHeaderProps,
+  CardBodyProps,
+  CardFooterProps,
+  CardHeaderMediaProps,
+  CardMediaProps,
+  CardLabelProps,
+  CardTitleProps,
+  CardCaptionProps,
+  CardActionsProps,
+  CardActionProps,
+} from './Card';

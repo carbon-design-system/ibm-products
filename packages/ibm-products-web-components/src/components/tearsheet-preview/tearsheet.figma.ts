@@ -74,31 +74,33 @@ const headerProps = {
   }),
 };
 
-const footerActions = figma.boolean('Buttons', {
-  true: figma.nestedProps('R:2 | Tearsheet footer item', {
-    buttons: figma.enum('Buttons', {
-      '1': html`<cds-button slot="footer-button" kind="primary"
-        >Button</cds-button
-      >`,
-      '2': html`<cds-button slot="footer-button" kind="secondary"
+const footerProps = {
+  actions: figma.boolean('Buttons', {
+    true: figma.nestedProps('R:2 | Tearsheet footer item', {
+      value: figma.enum('Buttons', {
+        '1': html`<cds-button slot="footer-button" kind="primary"
           >Button</cds-button
-        >
-        <cds-button slot="footer-button" kind="primary">Button</cds-button>`,
-      '3': html`<cds-button slot="footer-button" kind="ghost"
-          >Button</cds-button
-        >
-        <cds-button slot="footer-button" kind="secondary">Button</cds-button>
-        <cds-button slot="footer-button" kind="primary">Button</cds-button>`,
-      '4': html`<cds-button slot="footer-button" kind="ghost"
-          >Button</cds-button
-        >
-        <cds-button slot="footer-button" kind="tertiary">Button</cds-button>
-        <cds-button slot="footer-button" kind="secondary">Button</cds-button>
-        <cds-button slot="footer-button" kind="primary">Button</cds-button>`,
+        >`,
+        '2': html`<cds-button slot="footer-button" kind="secondary"
+            >Button</cds-button
+          >
+          <cds-button slot="footer-button" kind="primary">Button</cds-button>`,
+        '3': html`<cds-button slot="footer-button" kind="ghost"
+            >Button</cds-button
+          >
+          <cds-button slot="footer-button" kind="secondary">Button</cds-button>
+          <cds-button slot="footer-button" kind="primary">Button</cds-button>`,
+        '4': html`<cds-button slot="footer-button" kind="ghost"
+            >Button</cds-button
+          >
+          <cds-button slot="footer-button" kind="tertiary">Button</cds-button>
+          <cds-button slot="footer-button" kind="secondary">Button</cds-button>
+          <cds-button slot="footer-button" kind="primary">Button</cds-button>`,
+      }),
     }),
+    false: { value: undefined },
   }),
-  false: { buttons: undefined },
-});
+};
 
 // Wide Tearsheet
 figma.connect(
@@ -125,7 +127,7 @@ figma.connect(
         </c4p-tearsheet-summary-content>`,
         false: undefined,
       }),
-      actions: footerActions,
+      ...footerProps,
     },
     example: (props) =>
       html`<c4p-preview-tearsheet open>
@@ -147,7 +149,7 @@ figma.connect(
           ${props.summary}
         </c4p-tearsheet-body>
 
-        <c4p-tearsheet-footer>${props.actions.buttons}</c4p-tearsheet-footer>
+        <c4p-tearsheet-footer>${props.actions?.value}</c4p-tearsheet-footer>
       </c4p-preview-tearsheet>`,
   }
 );
@@ -161,7 +163,7 @@ figma.connect(
     ],
     props: {
       header: figma.nestedProps('_Tearsheet header', { ...headerProps }),
-      actions: footerActions,
+      ...footerProps,
     },
     example: (props) =>
       html`<c4p-preview-tearsheet open variant="narrow">
@@ -180,7 +182,7 @@ figma.connect(
           </div>
         </c4p-tearsheet-body>
 
-        <c4p-tearsheet-footer>${props.actions.buttons}</c4p-tearsheet-footer>
+        <c4p-tearsheet-footer>${props.actions?.value}</c4p-tearsheet-footer>
       </c4p-preview-tearsheet>`,
   }
 );

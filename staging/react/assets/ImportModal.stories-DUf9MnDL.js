@@ -1,0 +1,44 @@
+var f=Object.defineProperty;var r=(e,t)=>f(e,"name",{value:t,configurable:!0});import{u as s,j as o,aO as h,aP as g,r as x,R as n,B as j}from"./iframe-D_TgCArL.js";import{I as l}from"./ImportModal-CgSyJdKc.js";import{s as b}from"./codePreviewer-DwXHf80G.js";import"./preload-helper-Cc2_yIPf.js";import"./ComposedModal-BnfFN913.js";import"./index-rkIh3fWn.js";import"./index-ByjH8V_s.js";import"./bucket-19-DTdadaEd.js";import"./mergeRefs-BH0-8uDG.js";import"./index-C4I8n2OM.js";import"./LayerContext-cz8DORjj.js";import"./clamp-ekNJC_Xv.js";import"./isTopmostVisibleModal-BR-FkALa.js";import"./InlineLoading-BGCjZ4v_.js";import"./bucket-6-CXN0yrIs.js";import"./Text-dRt3vkhG.js";import"./ButtonSet-D4f8odRz.js";import"./wrapFocus-ETscRDcT.js";import"./FileUploaderItem-D-JnFO3Y.js";import"./bucket-20-I6CTYn6M.js";import"./TextInput-VFFCrF86.js";import"./hasHelperText-CcJ_VphT.js";import"./useNormalizedInputProps-CsURg4Bb.js";import"./FormContext-BSRgfZem.js";import"./devtools-BGZqfd5Y.js";import"./usePortalTarget-DnsJgKXA.js";import"./index-D0VNU8Gq.js";import"./props-helper-mCcBl7fc.js";import"./uuidv4-Fbcg8Vng.js";import"./bucket-0-5-RCdAp8.js";import"./AccordionItem-LnLX38WL.js";import"./SkeletonText-BDgrBTrk.js";import"./AspectRatio-BuoWtQwC.js";import"./BreadcrumbItem-luJUEVBX.js";import"./index-BndSx2mu.js";import"./Link-DfZ7aJKy.js";import"./bucket-13-B66NcEIi.js";import"./DefinitionTooltip-CCUESeVH.js";import"./Checkbox-BhroKPX1.js";import"./Form-Be-CJ4Ui.js";import"./defaultItemToString-DDHghiWu.js";import"./downshift.esm-CORxR4IN.js";import"./inheritsLoose-CdLKJotq.js";import"./MultiSelect-BkfKI35f.js";import"./useAttachedMenu-GG8vFhDR.js";import"./environment-DRRHKtsv.js";import"./MenuItem-of1z0pJX.js";import"./useControllableState-BjOxIYPS.js";import"./bucket-2-DGcWyVgA.js";import"./Search-CFE_Nkyq.js";import"./bucket-16-BxRNo6ep.js";import"./TableToolbarSearch-D-uZTPCo.js";import"./wrapComponent-CutgLoKv.js";import"./TableToolbar-Cn8G74hZ.js";import"./TableRow-Cau4cDV5.js";import"./bucket-1-lBN47QRA.js";import"./index-DSCJKvlP.js";import"./DataTable-BcVZPw6h.js";import"./requiredIfGivenPropIsTruthy-C_XlQti5.js";import"./TableSelectRow-COnOpdn9.js";import"./index-D_6p7cdU.js";import"./RadioButton-BQ30rKMg.js";import"./OverflowMenuItem-yVD7zv4H.js";import"./index-ULHrowJv.js";import"./useOutsideClick-T8mS5L4_.js";import"./DatePicker-B7VMR9AY.js";import"./Dropdown-CiTxYOtd.js";import"./FormGroup-D9G9nnoJ.js";import"./FormLabel-DhSQe8rZ.js";import"./FlexGrid-esoPK-_n.js";import"./Grid-Qez03bI8.js";import"./Row-BkqH0ygd.js";import"./Column-1_wdlDzN.js";import"./Icon.Skeleton-y7a3Gb3M.js";import"./ListItem-NR1C9GO7.js";import"./index-DDyhfRTP.js";import"./Modal-DCH8tkph.js";import"./usePreviousValue-DuLishmK.js";import"./Notification-ypcYZ2Lm.js";import"./bucket-10-pwko2831.js";import"./NumberInput-g61CL_Xu.js";import"./bucket-17-DbzW9rmA.js";import"./Tag-DwG5QxKI.js";import"./DismissibleTag-BJRFQ3-8.js";import"./OperationalTag-Cl7M_My3.js";import"./SelectableTag-DsWOjXR3.js";import"./useMatchMedia-CiE1MLqu.js";import"./index-mUy51949.js";import"./Select-BQjIUT3w.js";import"./TimePickerSelect--6-puYBT.js";import"./SelectItem-7k_H5QXZ.js";import"./Pagination-CYRzN8LQ.js";import"./PasswordInput-JUKbPylW.js";import"./ProgressIndicator-C7QsYgGL.js";import"./RadioButtonGroup-D9yh9ENA.js";import"./TileGroup-CMgGLb7Z.js";import"./bucket-15-Djauy7UT.js";import"./Slider-CQ7Ul0Rp.js";import"./StructuredList-Bf1eH0mY.js";import"./Tabs-qycxUEMV.js";import"./TextArea-1XC6Zb5v.js";import"./Tile-BYjD9RO4.js";import"./Toggle-Cac046iG.js";import"./Content-C5402HdU.js";import"./HeaderName-CLj0bssc.js";import"./Link-BZTCoTBb.js";import"./HeaderContainer-DYNakhl4.js";import"./HeaderGlobalBar-CvgdEY53.js";import"./AriaPropTypes-DDpID4oK.js";import"./SideNavLink-CG8jUIAk.js";import"./bucket-12-3PNVxFwq.js";import"./SideNavLinkText-w7p3O2lk.js";import"./HeaderPanel-CYa2SqjW.js";import"./SideNavMenuItem-D2RixOh1.js";import"./UnorderedList-CXeiZARh.js";import"./bucket-14-QfpeKxgD.js";import"./bucket-5-B7DBe_iv.js";import"./index-DSxKcDxG.js";import"./bucket-7-Cu83Tgtz.js";import"./bucket-8-Fiv9KCYs.js";import"./bucket-9-Cklpp06V.js";import"./bucket-11-JyXE3w_-.js";import"./bucket-18-B-nnxv_i.js";import"./bucket-21-CUHmy0a6.js";function m(e){const t={a:"a",h1:"h1",h2:"h2",h3:"h3",li:"li",p:"p",ul:"ul",...s(),...e.components};return o.jsxs(o.Fragment,{children:[o.jsx(t.h1,{id:"import-modal",children:"Import Modal"}),`
+`,o.jsxs(t.p,{children:[o.jsx(t.a,{href:"https://pages.github.ibm.com/carbon/ibm-products/patterns/import-and-upload/usage/",rel:"nofollow",children:"Usage guidelines"}),`
+|
+`,o.jsx(t.a,{href:"https://www.carbondesignsystem.com/components/modal/usage",rel:"nofollow",children:"Carbon modal usage guidelines"}),`
+|
+`,o.jsx(t.a,{href:"https://react.carbondesignsystem.com/?path=/docs/components-modal",rel:"nofollow",children:"Carbon modal documentation"})]}),`
+`,o.jsx(t.h2,{id:"table-of-contents",children:"Table of Contents"}),`
+`,o.jsxs(t.ul,{children:[`
+`,o.jsx(t.li,{children:o.jsx(t.a,{href:"#overview",children:"Overview"})}),`
+`,o.jsxs(t.li,{children:[o.jsx(t.a,{href:"#example-usage",children:"Example usage"}),`
+`,o.jsxs(t.ul,{children:[`
+`,o.jsx(t.li,{children:o.jsx(t.a,{href:"#standard",children:"Standard"})}),`
+`]}),`
+`]}),`
+`,o.jsx(t.li,{children:o.jsx(t.a,{href:"#component-api",children:"Component API"})}),`
+`]}),`
+`,o.jsx(t.h2,{id:"overview",children:"Overview"}),`
+`,o.jsx(t.p,{children:`Modal dialog version of the Import pattern. The import action transfers data or
+objects from an external source into a system.`}),`
+`,o.jsx(t.h3,{id:"standard",children:"Standard"}),`
+`,o.jsx(h,{of:i,additionalActions:[{title:"Open in Stackblitz",onClick:r(()=>b({story:i}),"onClick")}]}),`
+`,o.jsx(t.h2,{id:"component-api",children:"Component API"}),`
+`,o.jsx(g,{})]})}r(m,"_createMdxContent");function y(e={}){const{wrapper:t}={...s(),...e.components};return t?o.jsx(t,{...e,children:o.jsx(m,{...e})}):m(e)}r(y,"MDXContent");const{action:v}=__STORYBOOK_MODULE_ACTIONS__,Vo={title:"Patterns/Prebuilt patterns/ImportModal",component:l,tags:["autodocs"],parameters:{docs:{page:y}},argTypes:{accept:{control:{type:"select",labels:{0:"image (png, jpeg or gif)",1:"document (doc or pdf)",2:"development (html, css or javascript)"}},options:[0,1,2]},portalTarget:{control:!1}}},C={className:"test-class",defaultErrorBody:"Select a new file and try again.",defaultErrorHeader:"Import failed",description:"You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB)",fetchErrorBody:"Unable to fetch URL.",fetchErrorHeader:"Import failed",fileDropHeader:"Add files using drag and drop",fileDropLabel:"Drag and drop files here or click to upload",fileUploadLabel:"files uploaded",inputButtonIcon:!1,inputButtonText:"Add file",inputId:"test-id",inputLabel:"Add a file by specifying a URL",inputPlaceholder:"URL",invalidFileTypeErrorBody:"Invalid file type.",invalidFileTypeErrorHeader:"Import failed",invalidIconDescription:"Delete",maxFileSize:5e5,maxFileSizeErrorBody:"500kb max file size. Select a new file and try again.",maxFileSizeErrorHeader:"Import failed",onClose:v("onClose event"),onRequestSubmit:r(e=>console.log("file contents",e),"onRequestSubmit"),open:!0,primaryButtonText:"Import",secondaryButtonText:"Cancel",title:"Import"},I=r(({...e},t)=>{const{accept:c}=e,d=r(p=>{if(p===0)return["image/png","image/jpeg","image/gif"];if(p===1)return["application/doc","application/docx","application/pdf"];if(p===2)return["text/plain","text/css","text/html","text/javascript"]},"getAcceptValues"),[u,a]=x.useState(t.viewMode!=="docs");return n.createElement(n.Fragment,null,n.createElement(l,{...e,open:u,onClose:r(()=>a(!1),"onClose"),accept:d(c)}),n.createElement(j,{onClick:r(()=>a(!0),"onClick")},"Launch modal"))},"TemplateWithState"),i=I.bind({});i.args={accept:0,...C};i.parameters={...i.parameters,docs:{...i.parameters?.docs,source:{originalSource:`({
+  ...args
+}, context) => {
+  const {
+    accept
+  } = args;
+  const getAcceptValues = value => {
+    if (value === 0) {
+      return ['image/png', 'image/jpeg', 'image/gif'];
+    } else if (value === 1) {
+      return ['application/doc', 'application/docx', 'application/pdf'];
+    } else if (value === 2) {
+      return ['text/plain', 'text/css', 'text/html', 'text/javascript'];
+    }
+  };
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  return <>
+      <ImportModal {...args} open={open} onClose={() => setOpen(false)} accept={getAcceptValues(accept)} />
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+    </>;
+}`,...i.parameters?.docs?.source}}};const Xo=["Standard"];export{i as Standard,Xo as __namedExportsOrder,Vo as default};
+//# sourceMappingURL=ImportModal.stories-DUf9MnDL.js.map

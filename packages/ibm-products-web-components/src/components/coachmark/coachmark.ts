@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -59,17 +59,17 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   /**
    * Specify whether the component should be rendered on high-contrast.
    */
-  @property({ reflect: true })
+  @property({ type: Boolean, reflect: true })
   highContrast?: boolean = false;
   /**
    * Specify whether a drop shadow should be rendered on the popover.
    */
-  @property({ reflect: true })
+  @property({ type: Boolean, reflect: true })
   dropShadow?: boolean = false;
   /**
    * Specify whether a caret should be rendered on the popover. This is intended to use only for coachmark patterns.
    */
-  @property({ reflect: true })
+  @property({ type: Boolean, reflect: true })
   caret?: boolean = false;
   /**
    * CSS selector for the element that should receive focus when the coachmark opens.
@@ -86,8 +86,8 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   private dragCleanup: (() => void) | null = null;
   private keydownHandler: ((event: KeyboardEvent) => void) | null = null;
   private moveCounter: number = 0;
-  private isDragging: boolean | null = null;
-  private moveAnnouncement: string = '';
+  @state() private isDragging: boolean | null = null;
+  @state() private moveAnnouncement: string = '';
 
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -100,7 +100,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     resetCoachmarkDetailsSignal();
   }
 
-  private setupDraggable() {
+  private async setupDraggable() {
     const popover = this.shadowRoot?.querySelector(
       `.${blockClass}--popover`
     ) as HTMLElement;
@@ -114,11 +114,28 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     const assignedElements = slot?.assignedElements({ flatten: true });
     const header = assignedElements?.find(
       (el) => el.tagName.toLowerCase() === `${prefix}-coachmark-header`
-    ) as HTMLElement;
+    ) as LitElement & HTMLElement;
+    // Wait for coachmark-header to finish rendering the drag handle
+    // (it re-renders based on the signal updated just before this call)
+    if (header?.updateComplete) {
+      await header.updateComplete;
+    }
     requestAnimationFrame(() => {
       const dragHandle = header.shadowRoot?.querySelector(
         `.${prefix}--coachmark-header-drag-handle`
       ) as HTMLElement;
+
+      const dragInactiveInstruction =
+        'Press Enter or Space to activate drag mode.';
+      const dragActiveInstruction =
+        'Use arrow keys to move the coachmark. Press Enter or Space to exit drag mode.';
+
+      // Set initial instructions as aria-label so the screen reader announces
+      // them when the drag handle is focused (aria-describedby cannot cross
+      // shadow DOM boundaries, so we set the text directly on the element).
+      if (dragHandle) {
+        dragHandle.setAttribute('aria-label', dragInactiveInstruction);
+      }
 
       const draggable = makeDraggable({
         el: popoverContent,
@@ -134,7 +151,10 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         if (this.dragAriaLabel) {
           popoverContent.setAttribute('aria-label', this.dragAriaLabel);
         }
-        this.requestUpdate();
+        if (dragHandle) {
+          dragHandle.setAttribute('aria-label', dragActiveInstruction);
+        }
+        updateCoachmarkDetailsSignal({ name: 'isDragging', detail: true });
       };
 
       const onDragEnd = () => {
@@ -143,7 +163,10 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         this.moveAnnouncement = '';
         popoverContent.classList.remove(`${blockClass}--is-dragging`);
         popoverContent.removeAttribute('aria-label');
-        this.requestUpdate();
+        if (dragHandle) {
+          dragHandle.setAttribute('aria-label', dragInactiveInstruction);
+        }
+        updateCoachmarkDetailsSignal({ name: 'isDragging', detail: false });
       };
 
       const onDragMove = (event: Event) => {
@@ -157,7 +180,6 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         // Add zero-width space multiplied by counter to make string unique without being announced
         const uniqueMarker = '\u200B'.repeat(this.moveCounter);
         this.moveAnnouncement = `Moved ${direction} ${distance} pixels${uniqueMarker}`;
-        this.requestUpdate();
       };
 
       popoverContent.addEventListener('dragstart', onDragStart);
@@ -178,15 +200,6 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   firstUpdated() {
-    if (this.floating) {
-      this.classList.add(`${blockClass}--floating`);
-      this.setupDraggable();
-      updateCoachmarkDetailsSignal({
-        name: 'floating',
-        detail: this.floating,
-      });
-    }
-
     // Setup Escape key handler
     this.keydownHandler = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && this.open) {
@@ -197,6 +210,27 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   updated(changedProps: Map<string, unknown>) {
+    if (changedProps.has('floating')) {
+      if (this.floating) {
+        this.classList.add(`${blockClass}--floating`);
+        this.setupDraggable();
+        updateCoachmarkDetailsSignal({
+          name: 'floating',
+          detail: this.floating,
+        });
+      } else {
+        this.classList.remove(`${blockClass}--floating`);
+        if (this.dragCleanup) {
+          this.dragCleanup();
+          this.dragCleanup = null;
+        }
+        updateCoachmarkDetailsSignal({
+          name: 'floating',
+          detail: false,
+        });
+      }
+    }
+
     if (changedProps.has('position')) {
       const { x = 0, y = 0 } = this.position ?? {};
       if (x !== 0 || y !== 0) {
@@ -219,6 +253,20 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
             init
           )
         );
+        // Sync floating state into the signal so the header renders correctly
+        updateCoachmarkDetailsSignal({
+          name: 'floating',
+          detail: this.floating ?? false,
+        });
+        // Re-create the draggable on every open so the isDragging closure
+        // variable always starts as false (e.g. after Escape-while-dragging).
+        if (this.floating) {
+          if (this.dragCleanup) {
+            this.dragCleanup();
+            this.dragCleanup = null;
+          }
+          this.setupDraggable();
+        }
 
         // Handle focus management when coachmark opens
         // Use requestAnimationFrame to ensure DOM is ready
@@ -268,6 +316,12 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
             init
           )
         );
+        // Clear floating from the signal so the header hides the drag button
+        // while the popover is closed (signal persists across open/close cycles)
+        updateCoachmarkDetailsSignal({
+          name: 'floating',
+          detail: false,
+        });
 
         // Return focus to trigger element when coachmark closes
         requestAnimationFrame(() => {
@@ -309,40 +363,33 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         .caret=${caretValue}
         ?highContrast=${this.highContrast}
         align=${this.align}
-        ?dropShadow=${this.dropShadow}
+        .dropShadow=${this.dropShadow}
         @cds-popover-closed=${this.handlePopoverClosed}
       >
         <slot name="trigger"></slot>
         <cds-popover-content part="popover-content" exportparts="content">
-          ${this.floating
-            ? html`
-                <span class="${prefix}--visually-hidden">
-                  ${this.isDragging
-                    ? 'Use arrow keys to move the coachmark. Press Enter or Space to exit drag mode.'
-                    : 'Press Enter or Space to activate drag mode.'}
-                </span>
-                <div
-                  role="status"
-                  aria-live="polite"
-                  aria-atomic="true"
-                  class="${prefix}--visually-hidden"
-                >
-                  ${this.isDragging === true
-                    ? 'Drag mode active.'
-                    : this.isDragging === false
-                      ? 'Drag mode ended.'
-                      : ''}
-                </div>
-                <div
-                  role="status"
-                  aria-live="assertive"
-                  aria-atomic="true"
-                  class="${prefix}--visually-hidden"
-                >
-                  ${this.moveAnnouncement}
-                </div>
-              `
-            : ''}
+          <div
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            class="${prefix}--visually-hidden"
+          >
+            ${this.floating
+              ? this.isDragging === true
+                ? 'Drag mode active.'
+                : this.isDragging === false
+                  ? 'Drag mode ended.'
+                  : ''
+              : ''}
+          </div>
+          <div
+            role="status"
+            aria-live="assertive"
+            aria-atomic="true"
+            class="${prefix}--visually-hidden"
+          >
+            ${this.floating ? this.moveAnnouncement : ''}
+          </div>
           <div class="${blockClass}--wrapper">
             <slot></slot>
           </div>

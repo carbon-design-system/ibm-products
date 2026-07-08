@@ -32,7 +32,14 @@ const tooltipAlignments = {
   [`right-start`]: POPOVER_ALIGNMENT.RIGHT_START,
 };
 
-const args = { align: POPOVER_ALIGNMENT.TOP };
+const args = {
+  align: POPOVER_ALIGNMENT.TOP,
+  open: true,
+  highContrast: true,
+  caret: false,
+  floating: false,
+  dropShadow: false,
+};
 
 const argTypes = {
   align: {
@@ -78,9 +85,8 @@ const argTypes = {
 export const Tooltip = {
   args: {
     ...args,
-    open: true,
-    highContrast: true,
     align: 'bottom',
+    caret: true,
   },
   argTypes,
 
@@ -94,8 +100,10 @@ export const Tooltip = {
           .open=${args.open}
           align=${args.align}
           .highContrast=${args.highContrast}
+          .dropShadow=${args.dropShadow}
+          .floating=${args.floating}
           .position=${{ x: 150, y: 100 }}
-          .caret=${true}
+          .caret=${args.caret}
         >
           <c4p-coachmark-beacon
             label="Show information"
@@ -122,9 +130,8 @@ export const Tooltip = {
 export const Floating = {
   args: {
     ...args,
-    open: true,
-    highContrast: true,
     align: 'bottom',
+    floating: true,
   },
   argTypes,
   render: (args: any) => {
@@ -137,7 +144,9 @@ export const Floating = {
           .open=${args.open}
           align=${args.align}
           .highContrast=${args.highContrast}
-          .floating=${Boolean(true)}
+          .dropShadow=${args.dropShadow}
+          .floating=${args.floating}
+          .caret=${args.caret}
           drag-aria-label="Coachmark is being dragged"
         >
           <cds-button

@@ -21,6 +21,19 @@ $block-class: #{$prefix}--coachmark;
   display: inline-block;
 }
 
+.#{$prefix}--visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  block-size: 1px;
+  clip: rect(0, 0, 0, 0);
+  inline-size: 1px;
+  visibility: inherit;
+  white-space: nowrap;
+}
+
 .#{$block-class}--popover {
   position: fixed;
 

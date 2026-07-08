@@ -1121,3 +1121,70 @@ export const WithTitleTrailingIcon = () => (
     </Column>
   </Grid>
 );
+
+/**
+ * Video card story demonstrating video content inside Card.Media
+ * Uses a sample video to show how video elements work within cards
+ */
+export const WithVideo = () => (
+  <Grid className="card-story-grid">
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="productive">
+        <Card.Header>
+          <Card.Title>Product demo video</Card.Title>
+          <Card.Caption>Watch our latest feature walkthrough</Card.Caption>
+        </Card.Header>
+        <Card.Media ratio="16x9">
+          <video
+            controls
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          >
+            <source
+              src="https://www.youtube.com/watch?v=Veg7njIKUm4"
+              type="video/mp4"
+            />
+            <track kind="captions" />
+            Your browser does not support the video tag.
+          </video>
+        </Card.Media>
+        <Card.Body>
+          <p>
+            Video content fills the AspectRatio container and maintains the 16:9
+            aspect ratio.
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="productive">
+        <Card.Header>
+          <Card.Title>Tutorial series</Card.Title>
+          <Card.Caption>Getting started guide</Card.Caption>
+        </Card.Header>
+        <Card.Media ratio="16x9">
+          <iframe
+            width={'100%'}
+            height={'auto'}
+            src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&amp;controls=0"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </Card.Media>
+        <Card.Body>
+          <p>
+            Videos can include a poster image that displays before playback
+            starts.
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+  </Grid>
+);

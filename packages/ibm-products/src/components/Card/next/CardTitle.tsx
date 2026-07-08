@@ -46,6 +46,14 @@ export interface CardTitleProps {
    * - Expressive density: 24px icon recommended
    */
   titleStart?: ReactNode;
+
+  /**
+   * Optional trailing icon or content to display after the title text.
+   * Typically used for icons that adapt to title size:
+   * - Productive density: 16px icon recommended
+   * - Expressive density: 24px icon recommended
+   */
+  titleEnd?: ReactNode;
 }
 
 /**
@@ -61,6 +69,7 @@ export const CardTitle = ({
   truncate = false,
   maxWidth = '640px',
   titleStart,
+  titleEnd,
   ...rest
 }: CardTitleProps) => {
   const classes = cx(
@@ -68,7 +77,8 @@ export const CardTitle = ({
     {
       [`${blockClass}__title--truncate`]: truncate === true,
       [`${blockClass}__title--truncate-multi`]: typeof truncate === 'number',
-      [`${blockClass}__title--with-icon`]: titleStart,
+      [`${blockClass}__title--with-start-icon`]: titleStart,
+      [`${blockClass}__title--with-end-icon`]: titleEnd,
     },
     className
   );
@@ -89,9 +99,12 @@ export const CardTitle = ({
       {...getDevtoolsProps(componentName)}
     >
       {titleStart && (
-        <span className={`${blockClass}__title-icon`}>{titleStart}</span>
+        <span className={`${blockClass}__title-start-icon`}>{titleStart}</span>
       )}
       {children}
+      {titleEnd && (
+        <span className={`${blockClass}__title-end-icon`}>{titleEnd}</span>
+      )}
     </div>
   );
 };
@@ -111,6 +124,11 @@ CardTitle.propTypes = {
    * Maximum width for the title.
    */
   maxWidth: PropTypes.string,
+
+  /**
+   * Optional trailing icon or content to display after the title text.
+   */
+  titleEnd: PropTypes.node,
 
   /**
    * Optional leading icon or content to display before the title text.

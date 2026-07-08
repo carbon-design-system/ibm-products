@@ -211,17 +211,32 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
 }
 
 // Title with leading icon layout
-.#{$block-class-next}__title--with-icon {
+.#{$block-class-next}__title--with-start-icon {
   display: flex;
   align-items: flex-start;
-  gap: $spacing-05; // 8px between icon and text per design
+  gap: $spacing-03; // 8px between icon and text per design
+}
+
+// Title with trailing icon - no flex, icon flows inline with text
+.#{$block-class-next}__title--with-end-icon {
+  // No display: flex - let content flow naturally inline
+  // Ensure inline content can flow
+  display: block;
 }
 
 // Title leading icon wrapper
-.#{$block-class-next}__title-icon {
+.#{$block-class-next}__title-start-icon {
   display: flex;
   flex-shrink: 0; // Prevent icon from shrinking
-  padding-block: $spacing-01; // 2px top/bottom padding to center with first line of text
+  margin-block: $spacing-01; // 2px top/bottom padding to center with first line of text
+}
+
+// Title trailing icon wrapper - inline element that flows with text
+.#{$block-class-next}__title-end-icon {
+  display: inline-flex; // Inline flex to flow with text like a character
+  align-items: center; // Center icon vertically within its line
+  margin-inline-start: $spacing-03; // 8px gap before icon
+  vertical-align: middle; // Align with text baseline
 }
 
 // Conditional margin for title based on siblings

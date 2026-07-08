@@ -1061,3 +1061,63 @@ export const WithTitleLeadingIcon = () => (
     </Column>
   </Grid>
 );
+
+/**
+ * Title trailing icon story demonstrating the titleEnd prop
+ * with both productive and expressive densities
+ */
+export const WithTitleTrailingIcon = () => (
+  <Grid className="card-story-grid">
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="productive">
+        <Card.Header>
+          <Card.Title titleEnd={<BeeIcon size={16} />}>
+            Analytics dashboard
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            The trailing icon adapts to the title size. In productive density,
+            use 16px icons.
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="expressive">
+        <Card.Header>
+          <Card.Title titleEnd={<BeeIcon size={24} />}>
+            Analytics dashboard
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            The trailing icon adapts to the title size. In expressive density,
+            use 24px icons.
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="productive">
+        <Card.Header>
+          <Card.Title
+            titleEnd={<BeeIcon size={16} />}
+            truncate={2}
+            maxWidth="200px"
+          >
+            Example of long title text that wraps into three lines with icon
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            When the title wraps to multiple lines, the icon stays inline with
+            the text on the last line with 8px gap.
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+  </Grid>
+);

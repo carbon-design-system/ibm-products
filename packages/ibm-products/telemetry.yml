@@ -577,6 +577,7 @@ collect:
         # Canary
         - componentName
         # Card
+        - clickable
         - getStarted
         # CardFooter
         - hasButton
@@ -924,6 +925,7 @@ collect:
         - pageActionsOverflowLabel
         - withoutBackground
         # PageHeaderBreadcrumbBar
+        - actionsAriaLabel
         - contentActions
         - contentActionsFlush
         - pageActionsFlush
@@ -934,8 +936,11 @@ collect:
         - overflowMenuLabel
         # PageHeaderContent
         - contextualActions
+        - titleAs
         # PageHeaderContentPageActions
         - menuButtonLabel
+        # PageHeaderContentText
+        - subtitleAs
         # PageHeaderHeroImage
         - objectFit
         # PageHeaderTabBar
@@ -1349,6 +1354,19 @@ collect:
         - primary
         - secondary
         - tertiary
+        # PageHeaderContent - titleAs
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        # PageHeaderContentText - subtitleAs
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
         # PageHeaderHeroImage - objectFit
         - contain
         - cover

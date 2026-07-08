@@ -45,6 +45,11 @@ export interface CardProps extends CardBaseProps {
    * Density variant: productive uses heading-compact-02, expressive uses heading-03
    */
   density?: 'productive' | 'expressive';
+  /**
+   * Optional decorator component (typically AILabel from Carbon).
+   * Renders in the top-right corner of the card header with a blue gradient border.
+   */
+  decorator?: ReactNode;
 }
 
 /**
@@ -74,4 +79,8 @@ export interface CardContextValue {
    * Whether the card is disabled
    */
   disabled: boolean;
+  /**
+   * Optional decorator component (typically AILabel) to be rendered by CardHeader
+   */
+  decorator?: ReactNode;
 }

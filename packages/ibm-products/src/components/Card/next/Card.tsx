@@ -22,6 +22,7 @@ import { CardHeaderMedia } from './CardHeaderMedia';
 import { CardMedia } from './CardMedia';
 import { CardLabel } from './CardLabel';
 import { CardTitle } from './CardTitle';
+import { CardTitleMedia } from './CardTitleMedia';
 import { CardCaption } from './CardCaption';
 import { CardActions } from './CardActions';
 import { CardAction } from './CardAction';
@@ -40,19 +41,34 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       onKeyDown,
       disabled = false,
       density = 'productive',
+      decorator,
       className,
       children,
       ...rest
     },
     ref
   ) => {
+    // Detect if decorator is AILabel
+    const hasAILabel = decorator?.['type']?.displayName === 'AILabel';
+
+    // Normalize AILabel size to 'xs' (following SidePanel pattern)
+    const normalizedDecorator = useMemo(() => {
+      if (hasAILabel && React.isValidElement(decorator)) {
+        return React.cloneElement(decorator as React.ReactElement<any>, {
+          size: 'xs',
+        });
+      }
+      return decorator;
+    }, [decorator, hasAILabel]);
+
     // Create context value
     const contextValue = useMemo(
       () => ({
         clickable,
         disabled,
+        decorator: normalizedDecorator,
       }),
-      [clickable, disabled]
+      [clickable, disabled, normalizedDecorator]
     );
 
     // Handle keyboard interaction for clickable cards
@@ -79,6 +95,7 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       [`${blockClass}--clickable`]: clickable && !disabled,
       [`${blockClass}--disabled`]: disabled,
       [`${blockClass}--${density}`]: density,
+      [`${blockClass}--has-ai-label`]: hasAILabel,
     });
 
     const cardProps = {
@@ -117,6 +134,10 @@ CardComponent.propTypes = {
    * Makes the entire card clickable
    */
   clickable: PropTypes.bool,
+  /**
+   * Optional decorator component (typically AILabel from Carbon)
+   */
+  decorator: PropTypes.node,
   /**
    * Density variant: productive uses heading-compact-02, expressive uses heading-03
    */
@@ -166,6 +187,9 @@ Label.displayName = 'Card.Label';
 const Title = CardTitle;
 Title.displayName = 'Card.Title';
 
+const TitleMedia = CardTitleMedia;
+TitleMedia.displayName = 'Card.TitleMedia';
+
 const Caption = CardCaption;
 Caption.displayName = 'Card.Caption';
 
@@ -185,6 +209,7 @@ export {
   CardMedia,
   CardLabel,
   CardTitle,
+  CardTitleMedia,
   CardCaption,
   CardActions,
   CardAction,
@@ -197,6 +222,7 @@ export {
   Media,
   Label,
   Title,
+  TitleMedia,
   Caption,
   Actions,
   Action,
@@ -214,6 +240,7 @@ export type { CardHeaderMediaProps } from './CardHeaderMedia';
 export type { CardMediaProps } from './CardMedia';
 export type { CardLabelProps } from './CardLabel';
 export type { CardTitleProps } from './CardTitle';
+export type { CardTitleMediaProps } from './CardTitleMedia';
 export type { CardCaptionProps } from './CardCaption';
 export type { CardActionsProps } from './CardActions';
 export type { CardActionProps } from './CardAction';

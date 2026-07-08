@@ -210,6 +210,20 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
   @include type-style('heading-compact-02');
 }
 
+// Title with leading icon layout
+.#{$block-class-next}__title--with-icon {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-05; // 8px between icon and text per design
+}
+
+// Title leading icon wrapper
+.#{$block-class-next}__title-icon {
+  display: flex;
+  flex-shrink: 0; // Prevent icon from shrinking
+  padding-block: $spacing-01; // 2px top/bottom padding to center with first line of text
+}
+
 // Conditional margin for title based on siblings
 // When title is standalone (no label before it), add top margin
 .#{$block-class-next}__header > .#{$block-class-next}__title:first-child,

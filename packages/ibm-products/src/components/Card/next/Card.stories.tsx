@@ -30,7 +30,13 @@ import {
   AILabel,
   AILabelContent,
 } from '@carbon/react';
-import { Edit, TrashCan, Analytics, Favorite } from '@carbon/icons-react';
+import {
+  Edit,
+  TrashCan,
+  Analytics,
+  Favorite,
+  Bee as BeeIcon,
+} from '@carbon/icons-react';
 import { Bee } from '@carbon/pictograms-react';
 import { UserAvatar } from '../..';
 import illustration1 from './_story-assets/illustration-img-1.png';
@@ -989,6 +995,66 @@ export const WithTitleMedia = () => (
             CardTitleMedia provides a media slot positioned to the left of the
             card title. The media adapts to the heading area height (min 48px,
             max 64px).
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+  </Grid>
+);
+
+/**
+ * Title leading icon story demonstrating the titleStart prop
+ * with both productive and expressive densities
+ */
+export const WithTitleLeadingIcon = () => (
+  <Grid className="card-story-grid">
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="productive">
+        <Card.Header>
+          <Card.Title titleStart={<BeeIcon size={16} />}>
+            Analytics dashboard
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            The leading icon adapts to the title size. In productive density,
+            use 16px icons.
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="expressive">
+        <Card.Header>
+          <Card.Title titleStart={<BeeIcon size={24} />}>
+            Analytics dashboard
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            The leading icon adapts to the title size. In expressive density,
+            use 24px icons.
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="productive">
+        <Card.Header>
+          <Card.Title
+            titleStart={<BeeIcon size={16} />}
+            truncate={2}
+            maxWidth="200px"
+          >
+            Example of long title text that wraps onto two lines
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            When the title wraps to multiple lines, the icon stays top-aligned
+            with 2px padding to center with the first line.
           </p>
         </Card.Body>
       </Card.Root>

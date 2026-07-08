@@ -38,6 +38,14 @@ export interface CardTitleProps {
    * @default '640px'
    */
   maxWidth?: string;
+
+  /**
+   * Optional leading icon or content to display before the title text.
+   * Typically used for icons that adapt to title size:
+   * - Productive density: 16px icon recommended
+   * - Expressive density: 24px icon recommended
+   */
+  titleStart?: ReactNode;
 }
 
 /**
@@ -52,6 +60,7 @@ export const CardTitle = ({
   className,
   truncate = false,
   maxWidth = '640px',
+  titleStart,
   ...rest
 }: CardTitleProps) => {
   const classes = cx(
@@ -59,6 +68,7 @@ export const CardTitle = ({
     {
       [`${blockClass}__title--truncate`]: truncate === true,
       [`${blockClass}__title--truncate-multi`]: typeof truncate === 'number',
+      [`${blockClass}__title--with-icon`]: titleStart,
     },
     className
   );
@@ -78,6 +88,9 @@ export const CardTitle = ({
       style={style}
       {...getDevtoolsProps(componentName)}
     >
+      {titleStart && (
+        <span className={`${blockClass}__title-icon`}>{titleStart}</span>
+      )}
       {children}
     </div>
   );
@@ -98,6 +111,11 @@ CardTitle.propTypes = {
    * Maximum width for the title.
    */
   maxWidth: PropTypes.string,
+
+  /**
+   * Optional leading icon or content to display before the title text.
+   */
+  titleStart: PropTypes.node,
 
   /**
    * Enable text truncation with ellipsis.

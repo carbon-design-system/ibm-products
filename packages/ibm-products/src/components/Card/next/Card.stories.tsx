@@ -36,6 +36,12 @@ import {
   Analytics,
   Favorite,
   Bee as BeeIcon,
+  Share,
+  Download,
+  Settings,
+  Notification,
+  View,
+  Copy,
 } from '@carbon/icons-react';
 import { Bee } from '@carbon/pictograms-react';
 import { UserAvatar } from '../..';
@@ -1162,26 +1168,102 @@ export const WithVideo = () => (
 
     <Column lg={4} md={4} sm={4}>
       <Card.Root density="productive">
-        <Card.Header>
-          <Card.Title>Tutorial series</Card.Title>
-          <Card.Caption>Getting started guide</Card.Caption>
-        </Card.Header>
         <Card.Media ratio="16x9">
           <iframe
             width={'100%'}
-            height={'auto'}
+            height={'200px'}
             src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&amp;controls=0"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
-            allowfullscreen
           ></iframe>
         </Card.Media>
+        <Card.Header>
+          <Card.Title>Tutorial series</Card.Title>
+          <Card.Caption>Getting started guide</Card.Caption>
+        </Card.Header>
         <Card.Body>
           <p>
             Videos can include a poster image that displays before playback
             starts.
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+  </Grid>
+);
+
+/**
+ * Cards with many action items in the header.
+ * Demonstrates how multiple actions are displayed alongside label, title, and caption.
+ */
+export const WithManyActions = () => (
+  <Grid className="card-story-grid">
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="productive">
+        <Card.Header>
+          <Card.Label>Category</Card.Label>
+          <Card.Title>Project dashboard</Card.Title>
+          <Card.Caption>Last updated 2 hours ago</Card.Caption>
+          <Card.Actions>
+            <Card.Action>
+              <IconButton kind="ghost" label="Edit" size="sm">
+                <Edit />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Favorite" size="sm">
+                <Favorite />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Analytics" size="sm">
+                <Analytics />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Share" size="sm">
+                <Share />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Download" size="sm">
+                <Download />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Settings" size="sm">
+                <Settings />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Notification" size="sm">
+                <Notification />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="View" size="sm">
+                <View />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Copy" size="sm">
+                <Copy />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Delete" size="sm">
+                <TrashCan />
+              </IconButton>
+            </Card.Action>
+          </Card.Actions>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Multiple action buttons can be placed in the header alongside label,
+            title, and caption. Actions are right-aligned and maintain proper
+            spacing.
           </p>
         </Card.Body>
       </Card.Root>

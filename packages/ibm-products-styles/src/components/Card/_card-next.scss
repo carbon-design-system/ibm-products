@@ -283,12 +283,15 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
 // Actions container styles
 .#{$block-class-next}__actions {
   position: absolute;
-  display: flex;
+  display: inline-flex; // Use inline-flex for overflow handler
   align-items: center;
+  justify-content: flex-end; // Right-align actions
   block-size: $spacing-07; // 32px default height
   gap: $spacing-02;
+  inline-size: 50%; // Limit actions to 50% of available header space per design
   inset-block-start: $spacing-03; // 16px from top
   inset-inline-end: $spacing-03; // 16px from right
+  max-inline-size: 50%; // Enforce 50% maximum width
 }
 
 // When actions are in header with header media slot, add bottom margin

@@ -169,5 +169,6 @@ const TearsheetHeaderContent = React.forwardRef<
     </div>
   );
 });
+TearsheetHeaderContent.displayName = 'TearsheetHeaderContent';
 
 export default TearsheetHeaderContent;

@@ -335,7 +335,7 @@ export const WithHeaderActions = () => (
   </Grid>
 );
 
-export const WithIconSlotAndActions = () => (
+export const WithHeaderMedia = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
       <Card.Root>

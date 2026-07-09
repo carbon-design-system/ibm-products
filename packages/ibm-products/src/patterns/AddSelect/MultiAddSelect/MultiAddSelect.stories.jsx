@@ -14,6 +14,7 @@ import { MultiAddSelectWithModifiers } from '../example/preview-components/Multi
 import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
 import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
 import { MultiSelectWithBulkActionsPreview } from '../example/preview-components/MultiSelectWithBulkActions/MultiSelectWithBulkActions';
+import { MultiAddSelectWithDataTablePreview } from '../example/preview-components/MultiAddSelectWithDataTable/MultiAddSelectWithDataTable';
 
 export default {
   title: 'Patterns/Add and select/MultiAddSelect',
@@ -70,6 +71,11 @@ export const Overview = {
           with role modifiers and bulk action support for editing or removing
           multiple selected items at once.
         </li>
+        <li>
+          <strong>With DataTable</strong> - Multi-selection using a Carbon
+          DataTable with checkboxes, suited for items with multiple attributes
+          displayed in columnar form.
+        </li>
       </ul>
       <h2>Component structure</h2>
       <p>
@@ -115,3 +121,9 @@ export const WithModifiersAndBulkActions = {
 };
 
 WithModifiersAndBulkActions.storyName = 'With Modifiers and Bulk Actions';
+
+export const WithDataTable = {
+  render: () => <MultiAddSelectWithDataTablePreview />,
+};
+
+WithDataTable.storyName = 'With DataTable';

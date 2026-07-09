@@ -86,6 +86,17 @@ Choose it when:
 - users need to edit or remove multiple selected items at once
 - bulk assignment of modifiers across many items is a common workflow
 
+### Multi add and select with DataTable
+
+Use this variation when users need to select multiple items from a tabular list
+using a Carbon DataTable with checkboxes.
+
+Choose it when:
+
+- items have multiple attributes that benefit from a columnar layout
+- users are familiar with table-based selection patterns
+- the list of items does not require hierarchical navigation
+
 ## How this pattern can be used
 
 MultiAddSelect can be used to support tasks such as adding multiple assets,
@@ -125,6 +136,10 @@ Typical usage includes:
 ### With modifiers and bulk actions
 
 <Canvas of={stories.WithModifiersAndBulkActions} />
+
+### With DataTable
+
+<Canvas of={stories.WithDataTable} />
 
 ## Copy-paste ready code
 

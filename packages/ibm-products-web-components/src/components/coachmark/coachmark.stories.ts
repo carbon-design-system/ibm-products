@@ -87,9 +87,9 @@ export const Tooltip = {
     ...args,
     align: 'bottom',
     caret: true,
+    selectorPrimaryFocus: 'done-btn',
   },
   argTypes,
-
   render: (args: any) => {
     return html`
       <style>
@@ -104,6 +104,7 @@ export const Tooltip = {
           .floating=${args.floating}
           .position=${{ x: 150, y: 100 }}
           .caret=${args.caret}
+          selector-primary-focus=${args.selectorPrimaryFocus || ''}
         >
           <c4p-coachmark-beacon
             label="Show information"
@@ -119,7 +120,7 @@ export const Tooltip = {
           <c4p-coachmark-body class="coachmark-body">
             <h2>Hello World</h2>
             <p>this is a description test</p>
-            <cds-button size="sm">Done</cds-button>
+            <cds-button size="sm" class="done-btn">Done</cds-button>
           </c4p-coachmark-body>
         </c4p-coachmark>
       </div>
@@ -148,6 +149,7 @@ export const Floating = {
           .floating=${args.floating}
           .caret=${args.caret}
           drag-aria-label="Coachmark is being dragged"
+          selector-primary-focus=${args.selectorPrimaryFocus || ''}
         >
           <cds-button
             kind="tertiary"
@@ -164,7 +166,7 @@ export const Floating = {
           <c4p-coachmark-body class="coachmark-body">
             <h2>Hello World</h2>
             <p>this is a description test</p>
-            <cds-button size="sm">Done</cds-button>
+            <cds-button size="sm" class="done-btn">Done</cds-button>
           </c4p-coachmark-body>
         </c4p-coachmark>
       </div>

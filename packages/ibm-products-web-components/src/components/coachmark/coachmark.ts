@@ -269,46 +269,51 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         }
 
         // Handle focus management when coachmark opens
-        // Use requestAnimationFrame to ensure DOM is ready
-        requestAnimationFrame(() => {
-          let elementToFocus: HTMLElement | null = null;
-          // If selectorPrimaryFocus is provided, use it
-          if (this.selectorPrimaryFocus) {
-            elementToFocus = document.querySelector<HTMLElement>(
-              this.selectorPrimaryFocus
-            );
-          }
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            let elementToFocus: HTMLElement | null = null;
 
-          // If no selectorPrimaryFocus or element not found, default to drag button (floating) or close button
-          if (!elementToFocus) {
-            const wrapper = this.shadowRoot?.querySelector(
-              `.${blockClass}--popover cds-popover-content .${blockClass}--wrapper`
-            ) as HTMLElement;
-            const header = wrapper
-              ?.querySelector('slot')
-              ?.assignedElements({ flatten: true })
-              ?.find(
-                (el) =>
-                  el.tagName.toLowerCase() === `${prefix}-coachmark-header`
-              ) as HTMLElement;
-
-            if (header?.shadowRoot) {
-              // Try drag button for floating coachmarks, fallback to close button
-              const dragButton = this.floating
-                ? header.shadowRoot.querySelector<HTMLElement>(
-                    `.${prefix}--coachmark-header-drag-handle`
-                  )
-                : null;
-              const closeButton = header.shadowRoot.querySelector<HTMLElement>(
-                `.${prefix}--coachmark-header-close-button`
-              );
-              elementToFocus = dragButton || closeButton;
+            if (this.selectorPrimaryFocus) {
+              const raw = this.selectorPrimaryFocus.trim();
+              const selector = /^[#.[]]/.test(raw) ? raw : `.${raw}`;
+              const found = document.querySelector<HTMLElement>(selector);
+              elementToFocus =
+                found?.shadowRoot?.querySelector<HTMLElement>(
+                  'button, [tabindex]'
+                ) ?? found;
             }
-          }
-          if (elementToFocus) {
-            elementToFocus.focus();
-          }
-        });
+
+            if (!elementToFocus) {
+              const wrapper = this.shadowRoot?.querySelector(
+                `.${blockClass}--popover cds-popover-content .${blockClass}--wrapper`
+              ) as HTMLElement;
+              const header = wrapper
+                ?.querySelector('slot')
+                ?.assignedElements({ flatten: true })
+                ?.find(
+                  (el) =>
+                    el.tagName.toLowerCase() === `${prefix}-coachmark-header`
+                ) as HTMLElement;
+
+              if (header?.shadowRoot) {
+                // Try drag button for floating coachmarks, fallback to close button
+                const dragButton = this.floating
+                  ? header.shadowRoot.querySelector<HTMLElement>(
+                      `.${prefix}--coachmark-header-drag-handle`
+                    )
+                  : null;
+                const closeButton =
+                  header.shadowRoot.querySelector<HTMLElement>(
+                    `.${prefix}--coachmark-header-close-button`
+                  );
+                elementToFocus = dragButton || closeButton;
+              }
+            }
+            if (elementToFocus) {
+              elementToFocus.focus();
+            }
+          });
+        }, 100);
       } else {
         this.dispatchEvent(
           new CustomEvent(

@@ -61,10 +61,9 @@ export const CardActions = ({
       const id = `action-${index}`;
       // Try to extract label from IconButton props
       let label = overflowMenuLabel;
-       
+
       const childProps = child.props as any;
       if (childProps.children && React.isValidElement(childProps.children)) {
-         
         const iconButton = childProps.children as any;
         label =
           iconButton.props?.label ||
@@ -121,11 +120,10 @@ export const CardActions = ({
                 itemText={item.label || 'Action'}
                 onClick={() => {
                   // Try to trigger the click on the original button
-                   
+
                   const elementProps = item.element.props as any;
                   const button = elementProps.children;
                   if (button && React.isValidElement(button)) {
-                     
                     const buttonProps = button.props as any;
                     if (buttonProps.onClick) {
                       buttonProps.onClick();

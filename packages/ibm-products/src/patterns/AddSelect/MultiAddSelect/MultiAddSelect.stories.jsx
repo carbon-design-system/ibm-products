@@ -13,6 +13,7 @@ import { MultiAddSelectWithHierarchyPreview } from '../example/preview-component
 import { MultiAddSelectWithModifiers } from '../example/preview-components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
 import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
 import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
+import { MultiSelectWithScrollPreview } from '../example/preview-components/MultiSelectWithScroll/MultiSelectWithScroll';
 import { MultiAddSelectWithDataTablePreview } from '../example/preview-components/MultiAddSelectWithDataTable/MultiAddSelectWithDataTable';
 
 export default {
@@ -59,9 +60,16 @@ export const Overview = {
           <strong>Non-Hierarchical with Peek Inside Item</strong> -
           Multi-selection with the ability to peek inside items to view their
           contents in a middle panel
+        </li>
+        <li>
           <strong>With Hierarchy (No Select All)</strong> - Multi-selection with
           hierarchical navigation but without column-level select-all
           checkboxes. Only individual items can be selected.
+        </li>
+        <li>
+          <strong>With Scroll (progressive loading)</strong> - Multi-selection
+          from large datasets that load progressively as the user scrolls.
+          Includes skeleton loading rows and a scroll hint at the bottom.
         </li>
         <li>
           <strong>With DataTable</strong> - Multi-selection using a Carbon
@@ -107,6 +115,12 @@ export const WithHierarchyNoSelectAll = {
 };
 
 WithHierarchyNoSelectAll.storyName = 'With Hierarchy (No Select All)';
+
+export const WithScroll = {
+  render: () => <MultiSelectWithScrollPreview />,
+};
+
+WithScroll.storyName = 'With Scroll (progressive loading)';
 
 export const WithDataTable = {
   render: () => <MultiAddSelectWithDataTablePreview />,

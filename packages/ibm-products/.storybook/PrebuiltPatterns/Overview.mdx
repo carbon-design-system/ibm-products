@@ -1,0 +1,328 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Deprecated/Prebuilt Patterns/Overview" />
+
+# Overview about prebuilt patterns
+
+## Table of Contents
+
+- [How prebuilt patterns and patterns differ](#how-prebuilt-patterns-and-patterns-differ)
+- [Prebuilt patterns to patterns](#prebuilt-patterns-to-patterns)
+- [Migration guidance from prebuilt patterns to patterns](#migration-guidance-from-prebuilt-patterns-to-patterns)
+
+Patterns can be accomplished in multiple ways utilizing one or more components
+with additional design considerations. The prebuilt patterns in this library are
+based on existing
+[patterns](https://pages.github.ibm.com/carbon/ibm-products/patterns/overview/patterns/)
+documented on the Carbon for IBM Products website, however, they are built like
+traditional components that can also be imported directly for use.
+
+While these prebuilt patterns are available for use directly in code, they only
+capture a subset of use cases from the broader patterns they represent and their
+flexibility may be limited by their component APIs. For a more flexible
+approach, consider leveraging the equivalent pattern code.
+
+## How prebuilt patterns and patterns differ
+
+Prebuilt patterns can be useful, containing a number of features built-in.
+However, prebuilt patterns have stricter APIs and may have limited flexibility.
+Many of our patterns include “recipes” that list the components used to deliver
+the pattern. These are often provided as example code that you can adopt or
+extend further for your own use case.
+
+## Prebuilt patterns to patterns
+
+While many of the prebuilt patterns may not have pattern equivalents at this
+time, we will be adding more patterns in the future.
+
+| Prebuilt pattern name                | Equivalent pattern                                                                                         |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| `APIKeyModal`                        | <LinkTo title="Patterns/Generate an API key" name="Overview">Generate an API key</LinkTo>                  |
+| Create flows `CreateFullPage`        | <LinkTo title="Patterns/Create flows/Create Full Page" name="Overview">Create Full Page</LinkTo>           |
+| Create flows `CreateModal`           | <LinkTo title="Patterns/Create flows/Create Modal" name="Overview">Create Modal</LinkTo>                   |
+| Create flows `CreateSidePanel`       | —                                                                                                          |
+| Create flows `CreateTearsheet`       | <LinkTo title="Patterns/Create flows/CreateTearsheet" name="Overview">CreateTearsheet</LinkTo>             |
+| Create flows `CreateTearsheetNarrow` | <LinkTo title="Patterns/Create flows/CreateTearsheetNarrow" name="Overview">CreateTearsheetNarrow</LinkTo> |
+| `ExportModal`                        | <LinkTo title="Patterns/Export Modal" name="Overview">Export Modal</LinkTo>                                |
+| `ImportModal`                        | <LinkTo title="Patterns/Import And Upload" name="Overview">Import and Upload</LinkTo>                      |
+| `Delete and remove`                  | <LinkTo title="Patterns/Delete and remove" name="Overview">Delete and remove</LinkTo>                      |
+
+## Migration guidance from prebuilt patterns to patterns
+
+Migrating from a prebuilt pattern to its equivalent pattern means replacing an
+imported, opaque component with a composable recipe that you own and control.
+The steps below use `APIKeyModal` → `GenerateAnAPIKey` as the concrete example,
+but the same approach applies to every row in the table above.
+
+### Why migrate?
+
+|                      | Prebuilt pattern (`APIKeyModal`)           | Pattern (`GenerateAnAPIKey`)           |
+| -------------------- | ------------------------------------------ | -------------------------------------- |
+| **Ownership**        | Library-owned, versioned API               | Your codebase — you control every line |
+| **Flexibility**      | Fixed prop surface                         | Fully composable children              |
+| **Breaking changes** | Yes — next major removes it                | None — you copied it                   |
+| **Customization**    | Props only                                 | Direct code changes                    |
+| **Bundle**           | Includes all use-cases whether used or not | Include only what you need             |
+
+---
+
+### Step-by-step: `APIKeyModal` → `GenerateAnAPIKey`
+
+Here is a simple example to migrate from `APIKeyModal` to `GenerateAnAPIKey`.
+The steps below walk through each change required — from swapping the import to
+moving body content into `children`.
+
+> The same **overall idea** applies when migrating any other prebuilt pattern to
+> its equivalent — copy the pattern source into your project, update your
+> imports, adapt your existing usage to the pattern's API, and remove the old
+> library import. The specific props, children structure, and components
+> involved will differ per pattern, but the migration philosophy is the same.
+
+#### 1. Copy the pattern source into your project
+
+Copy these two files from the pattern's `example/components/` folder into your
+own codebase:
+
+```
+packages/ibm-products/src/patterns/GenerateAnAPIKey/example/components/
+├── GenerateAnAPIKey.tsx   ← the modal shell
+└── APIKeyDownloader.tsx   ← the optional download link helper
+```
+
+#### 2. Update the import
+
+**Before** — importing the prebuilt component from the library:
+
+```tsx
+import { APIKeyModal } from '@carbon/ibm-products';
+```
+
+**After** — importing your local copy:
+
+```tsx
+import { GenerateAnAPIKey } from './components/GenerateAnAPIKey';
+import { APIKeyDownloader } from './components/APIKeyDownloader';
+```
+
+#### 3. Translate props
+
+The pattern API is intentionally smaller. Props fall into two buckets:
+
+**Renamed props** — pass these directly as before, just with new names:
+
+| `APIKeyModal` prop                    | `GenerateAnAPIKey` prop                |
+| ------------------------------------- | -------------------------------------- |
+| `onClose`                             | `onRequestClose`                       |
+| `onRequestGenerate` / `onRequestEdit` | `onRequestSubmit`                      |
+| `generateTitle`                       | `modalHeading`                         |
+| `generateButtonText`                  | `primaryButtonText`                    |
+| `closeButtonText`                     | `secondaryButtonText`                  |
+| `loading` + `loadingText`             | `loadingStatus` + `loadingDescription` |
+
+All other props (`open`, `modalLabel`, `apiKey`, `apiKeyLoaded`, `customSteps`,
+`onCopy`, `nextStepButtonText`, `previousStepButtonText`) are **unchanged**.
+
+**Props replaced by `children`** — the pattern no longer controls modal body
+content through props. You render it yourself, which is covered in Step 4:
+
+| Removed props                                                                                                          | What to render in `children` instead                                                         |
+| ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `body`                                                                                                                 | `<p>` description text                                                                       |
+| `nameRequired`, `nameLabel`, `nameHelperText`, `namePlaceholder`                                                       | `<TextInput>` for the key name                                                               |
+| `apiKeyLabel`, `hasAPIKeyVisibilityToggle`, `showAPIKeyLabel`, `hideAPIKeyLabel`, `helperText`                         | `<PasswordInput>` (or `<TextInput>`) showing the generated key                               |
+| `hasDownloadLink`, `downloadBodyText`, `downloadFileName`, `downloadFileType`, `downloadLinkText`, `downloadLinkLabel` | `<APIKeyDownloader>` component                                                               |
+| `generateSuccessBody`, `generateSuccessMessage`                                                                        | success message with `<CheckmarkFilled>`                                                     |
+| `error`, `errorText`                                                                                                   | error message with `<ErrorFilled>`                                                           |
+| `editing`, `editButtonText`, `editSuccess`, `editSuccessMessage`                                                       | manage edit state in your own code; pass `primaryButtonText` to label the button accordingly |
+| `copyButtonText`, `copyIconDescription`                                                                                | use `copyIconDescription` on `<GenerateAnAPIKey>` for the copy button tooltip                |
+| `portalTarget`, `launcherButtonRef`                                                                                    | handle portal and focus-return directly in your app                                          |
+
+#### 4. Move body content to `children`
+
+The biggest structural change is that all modal body content becomes
+**`children`** instead of individual props. This gives you complete control.
+
+**Before:**
+
+```tsx
+<APIKeyModal
+  open={open}
+  onClose={() => setOpen(false)}
+  onRequestGenerate={handleGenerate}
+  generateTitle="Generate API key"
+  generateButtonText="Generate"
+  closeButtonText="Close"
+  nameRequired
+  nameLabel="Name your application"
+  namePlaceholder="Application name"
+  nameHelperText="Providing the name will help you identify your API key later."
+  loading={loading}
+  loadingText="Generating..."
+  apiKey={apiKey}
+  apiKeyLoaded={!!apiKey}
+  hasAPIKeyVisibilityToggle
+  apiKeyLabel="Unique API key"
+  showAPIKeyLabel="Show key"
+  hideAPIKeyLabel="Hide key"
+  helperText="This is your unique API key and is non-recoverable."
+  hasDownloadLink
+  downloadBodyText="Non-recoverable. Download to save."
+  downloadFileName="apikey"
+  downloadFileType="json"
+  downloadLinkText="Download as JSON"
+  generateSuccessMessage="API key successfully created"
+  error={error}
+  errorText="Failed to generate. Please try again."
+/>
+```
+
+**After:**
+
+```tsx
+<GenerateAnAPIKey
+  open={open}
+  onRequestClose={() => setOpen(false)}
+  onRequestSubmit={handleGenerate}
+  modalHeading="Generate API key"
+  primaryButtonText="Generate"
+  secondaryButtonText="Close"
+  primaryButtonDisabled={loading || name.length === 0}
+  loadingStatus={loading ? 'active' : 'inactive'}
+  loadingDescription="Generating..."
+  apiKey={apiKey}
+  apiKeyLoaded={!!apiKey}
+>
+  {apiKey ? (
+    <>
+      <PasswordInput
+        id="generated-api-key"
+        labelText="Unique API key"
+        value={apiKey}
+        readOnly
+        showPasswordLabel="Show key"
+        hidePasswordLabel="Hide key"
+        tooltipPosition="left"
+        helperText="This is your unique API key and is non-recoverable."
+      />
+      <div className="apikey-modal-pattern__messaging">
+        <InformationFilled size={16} />
+        <APIKeyDownloader
+          apiKey={apiKey}
+          body="Non-recoverable. Download to save."
+          fileName="apikey"
+          fileType="json"
+          linkText="Download as JSON"
+        />
+      </div>
+      <div className="apikey-modal-pattern__messaging">
+        <CheckmarkFilled
+          size={16}
+          className="apikey-modal-pattern__checkmark-icon"
+        />
+        <p role="alert" aria-live="assertive">
+          API key successfully created
+        </p>
+      </div>
+    </>
+  ) : (
+    <>
+      {error && (
+        <div className="apikey-modal-pattern__messaging">
+          <ErrorFilled size={16} />
+          <p role="alert" aria-live="assertive">
+            Failed to generate. Please try again.
+          </p>
+        </div>
+      )}
+      <p style={{ marginBlockEnd: '1rem' }}>Optional description text.</p>
+      <TextInput
+        id="app-name"
+        labelText="Name your application"
+        placeholder="Application name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        disabled={loading}
+        helperText="Providing the name will help you identify your API key later."
+      />
+    </>
+  )}
+</GenerateAnAPIKey>
+```
+
+#### 5. Remove the library import
+
+Remove the now-unused import:
+
+```tsx
+// Delete this line:
+import { APIKeyModal } from '@carbon/ibm-products';
+```
+
+If `APIKeyModal` was your **only** import from `@carbon/ibm-products`, you can
+also remove the package dependency entirely:
+
+```bash
+# npm
+npm uninstall @carbon/ibm-products
+
+# yarn
+yarn remove @carbon/ibm-products
+```
+
+And remove it from `package.json` if it wasn't removed automatically:
+
+```json
+// package.json — remove this entry under "dependencies" or "devDependencies"
+"@carbon/ibm-products": "^x.x.x"
+```
+
+> Most teams will still use other components from `@carbon/ibm-products` and
+> should keep the dependency. Only remove it if `APIKeyModal` was genuinely the
+> sole import.
+
+#### 6. Verify behavior
+
+Key behaviors to verify after migration:
+
+- **Generate flow** — modal opens, name input validates, primary button triggers
+  `onRequestSubmit`, loading state shown, key rendered in `PasswordInput`
+- **Copy flow** — once `apiKeyLoaded` is `true` the primary button gains the
+  copy icon and calls `onCopy` / `navigator.clipboard`
+- **Download link** — `APIKeyDownloader` creates a Blob URL on mount; confirm
+  the downloaded file contains the key
+- **Multi-step** — if you used `customSteps`, verify that `Next` / `Previous`
+  buttons advance through steps and `valid` still gates the primary button
+- **Error state** — render `<ErrorFilled>` + message in `children` when an error
+  occurs
+- **Accessibility** — use `role="alert"` + `aria-live="assertive"` on dynamic
+  status messages (success, error) as shown above
+
+---
+
+### A note on `preview-components`
+
+Inside the pattern's `example/` folder you will find two sub-directories:
+
+```
+example/
+├── components/          ← copy these into your project
+└── preview-components/  ← do NOT copy these
+```
+
+`preview-components/` exist **purely for Storybook**. Each file (e.g.
+[`Generate.tsx`](../../../packages/ibm-products/src/patterns/GenerateAnAPIKey/example/preview-components/Generate.tsx),
+`Edit.tsx`, `GenerateWithError.tsx`, …) is a self-contained demo wrapper that
+wires up local state, simulates an async API call, and renders a trigger
+`<Button>` so the story can be interactive in isolation.
+
+They were written specifically to achieve **visual and functional parity** with
+the deprecated `APIKeyModal` stories — every story variant that existed on the
+old component (`Generate`, `Generate With Error`, `Instant generate`,
+`Custom Generate`, `Edit`, `Edit With Error`, `Custom Edit`) has a matching
+preview component in the pattern, so reviewers can compare the two side-by-side
+during migration.
+
+**Do not copy `preview-components/` into your application.** They are demo
+scaffolding, not production code. The file you want is in `components/` —
+`GenerateAnAPIKey.tsx` and `APIKeyDownloader.tsx`.

@@ -1,3 +1,18 @@
+## `@carbon/ibm-products@2.94.0`
+### Features :rocket:
+- feat(Card): initial scaffolding (#9597)
+- feat(datetimeformat): add new utility story for date time format (#9586)
+- feat(tearsheet): preview component code connect integration (#9540)
+
+### Bug fixes :bug:
+- fix(preview_PageHeader): resolve a11y issues (#9519)
+
+### Housekeeping :house:
+- chore: disable chromatic for dateTime story (#9624)
+- chore: update typescript to v6 (#9591)
+- build(deps): update to Carbon 11 compatible versions to latest (#9539)
+- chore(canary): deprecate component feature flag mechanism (#9536)
+
 ## `@carbon/ibm-products@2.93.0`
 ### Features :rocket:
 - feat(preview_PageHeader): implement disable sticky tab bar (#9365)

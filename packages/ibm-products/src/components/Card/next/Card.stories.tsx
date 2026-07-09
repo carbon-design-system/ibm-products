@@ -942,6 +942,7 @@ export const WithVideo = () => (
               width: '100%',
               height: '100%',
               objectFit: 'cover',
+              position: 'absolute',
             }}
           >
             <source
@@ -966,7 +967,8 @@ export const WithVideo = () => (
         <Card.Media ratio="16x9">
           <iframe
             width={'100%'}
-            height={'200px'}
+            height={'100%'}
+            style={{ position: 'absolute' }}
             src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&amp;controls=0"
             title="YouTube video player"
             frameBorder="0"

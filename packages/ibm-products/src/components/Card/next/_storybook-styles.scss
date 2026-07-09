@@ -31,10 +31,3 @@ $block-class: #{c4p-settings.$pkg-prefix}--card-next;
   block-size: spacing.$spacing-09; // 48px
   inline-size: spacing.$spacing-09; // 48px
 }
-
-// Storybook demo styles for paragraph spacing in CardBody
-.#{$block-class}__body {
-  p {
-    margin-block-start: spacing.$spacing-05;
-  }
-}

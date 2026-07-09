@@ -953,7 +953,7 @@ export const WithVideo = () => (
           </video>
         </Card.Media>
         <Card.Body>
-          <p>
+          <p style={{ marginBlockStart: 'revert' }}>
             Video content fills the AspectRatio container and maintains the 16:9
             aspect ratio.
           </p>

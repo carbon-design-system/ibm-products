@@ -15,14 +15,27 @@ import { preview__Tearsheet as Tearsheet } from '@carbon/ibm-products';
 import {
   Button,
   CodeSnippet,
-  Heading,
   ProgressIndicator,
   ProgressStep,
   Section,
   TextInput,
 } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
-import { useMatchMedia } from '../../../../global/js/hooks/useMatchMedia';
+
+const useMatchMedia = (query: string) => {
+  const [matches, setMatches] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia(query).matches : false
+  );
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mql = window.matchMedia(query);
+    const onChange = (e: MediaQueryListEvent) => setMatches(e.matches);
+    mql.addEventListener('change', onChange);
+    setMatches(mql.matches);
+    return () => mql.removeEventListener('change', onChange);
+  }, [query]);
+  return matches;
+};
 
 interface Props {
   children?: ReactNode;
@@ -84,7 +97,10 @@ export const TearsheetWithSteps = ({
       open={open}
       variant={variant}
       decorator={decorator}
-      onClose={() => setOpen?.(false)}
+      onClose={() => {
+        handleGoToStep(1);
+        setOpen?.(false);
+      }}
       launcherButtonRef={launcherButtonRef}
       verticalGap={verticalGap}
       keepMounted={keepMounted}
@@ -136,7 +152,9 @@ export const TearsheetWithSteps = ({
               secondaryLabel="Enter city and state"
               disabled={currentStep < 2}
               aria-disabled={currentStep < 2}
-              aria-label={`Step 2 of 3: Location Details - Enter city and state${currentStep < 2 ? ' (Not available)' : ''}`}
+              aria-label={`Step 2 of 3: Location Details - Enter city and state${
+                currentStep < 2 ? ' (Not available)' : ''
+              }`}
             />
             <ProgressStep
               current={currentStep === 3}
@@ -145,7 +163,9 @@ export const TearsheetWithSteps = ({
               complete={currentStep > 3}
               disabled={currentStep < 3}
               aria-disabled={currentStep < 3}
-              aria-label={`Step 3 of 3: Review and Submit - Review your information${currentStep < 3 ? ' (Not available)' : ''}`}
+              aria-label={`Step 3 of 3: Review and Submit - Review your information${
+                currentStep < 3 ? ' (Not available)' : ''
+              }`}
             />
           </ProgressIndicator>
         )}
@@ -167,7 +187,9 @@ export const TearsheetWithSteps = ({
               secondaryLabel="Enter city and state"
               disabled={currentStep < 2}
               aria-disabled={currentStep < 2}
-              aria-label={`Step 2 of 3: Location Details - Enter city and state${currentStep < 2 ? ' (Not available)' : ''}`}
+              aria-label={`Step 2 of 3: Location Details - Enter city and state${
+                currentStep < 2 ? ' (Not available)' : ''
+              }`}
             />
             <ProgressStep
               current={currentStep === 3}
@@ -176,7 +198,9 @@ export const TearsheetWithSteps = ({
               complete={currentStep > 3}
               disabled={currentStep < 3}
               aria-disabled={currentStep < 3}
-              aria-label={`Step 3 of 3: Review and Submit - Review your information${currentStep < 3 ? ' (Not available)' : ''}`}
+              aria-label={`Step 3 of 3: Review and Submit - Review your information${
+                currentStep < 3 ? ' (Not available)' : ''
+              }`}
             />
           </ProgressIndicator>
         </Tearsheet.Influencer>
@@ -215,6 +239,7 @@ export const TearsheetWithSteps = ({
             kind: 'ghost',
             label: 'Cancel',
             onClick: () => {
+              handleGoToStep(1);
               setOpen?.(false);
             },
           },

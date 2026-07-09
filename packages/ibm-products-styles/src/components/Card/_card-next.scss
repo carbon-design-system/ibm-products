@@ -64,8 +64,14 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
 .#{$block-class-next}__body {
   @include type-style('body-compact-01');
 
-  padding: $spacing-05;
-  padding-block-start: 0;
+  margin-block: $spacing-05;
+  margin-block-start: 0;
+  margin-inline: $spacing-05;
+}
+
+// When body is the first child (no header), restore top padding
+.#{$block-class-next} > .#{$block-class-next}__body:first-child {
+  margin-block-start: $spacing-05;
 }
 
 // Footer styles

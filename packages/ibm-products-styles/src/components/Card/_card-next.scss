@@ -254,8 +254,10 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
 }
 
 // When title is standalone (no caption after it), add bottom margin
+// This applies when title is last child OR when followed by actions (but not caption)
 .#{$block-class-next}__header > .#{$block-class-next}__title:last-child,
-.#{$block-class-next}__title-content > .#{$block-class-next}__title:last-child {
+.#{$block-class-next}__title-content > .#{$block-class-next}__title:last-child,
+.#{$block-class-next}__title:not(:has(+ .#{$block-class-next}__caption)) {
   margin-block-end: $spacing-05; // 16px bottom
 }
 

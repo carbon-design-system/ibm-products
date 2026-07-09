@@ -1270,3 +1270,66 @@ export const WithManyActions = () => (
     </Column>
   </Grid>
 );
+
+/**
+ * Demonstrates text action using a Carbon small ghost button.
+ * This shows how to use a text-based action button instead of icon-only buttons.
+ */
+export const WithTextAction = () => (
+  <Grid className="card-story-grid">
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="productive">
+        <Card.Header>
+          <Card.Title>Usage metrics</Card.Title>
+          <Card.Actions>
+            <Card.Action>
+              <Button kind="tertiary" size="sm">
+                Action
+              </Button>
+            </Card.Action>
+          </Card.Actions>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Text actions use Carbon&apos;s small ghost button for actions that
+            require text labels instead of icons. This is useful when the action
+            needs to be more explicit or when an appropriate icon isn&apos;t
+            available.
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card.Root density="productive">
+        <Card.Header>
+          <Card.Title>Usage metrics</Card.Title>
+          <Card.Actions>
+            <Card.Action>
+              <Button kind="tertiary" size="sm">
+                Action
+              </Button>
+            </Card.Action>
+            <Card.Action>
+              <Button kind="tertiary" size="sm">
+                Action
+              </Button>
+            </Card.Action>
+            <Card.Action>
+              <Button kind="tertiary" size="sm">
+                Action
+              </Button>
+            </Card.Action>
+          </Card.Actions>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Text actions use Carbon&apos;s small ghost button for actions that
+            require text labels instead of icons. This is useful when the action
+            needs to be more explicit or when an appropriate icon isn&apos;t
+            available.
+          </p>
+        </Card.Body>
+      </Card.Root>
+    </Column>
+  </Grid>
+);

@@ -14,6 +14,7 @@ import { MultiAddSelectWithModifiers } from '../example/preview-components/Multi
 import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
 import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
 import { MultiSelectWithScrollPreview } from '../example/preview-components/MultiSelectWithScroll/MultiSelectWithScroll';
+import { MultiAddSelectWithDataTablePreview } from '../example/preview-components/MultiAddSelectWithDataTable/MultiAddSelectWithDataTable';
 
 export default {
   title: 'Patterns/Add and select/MultiAddSelect',
@@ -70,6 +71,11 @@ export const Overview = {
           from large datasets that load progressively as the user scrolls.
           Includes skeleton loading rows and a scroll hint at the bottom.
         </li>
+        <li>
+          <strong>With DataTable</strong> - Multi-selection using a Carbon
+          DataTable with checkboxes, suited for items with multiple attributes
+          displayed in columnar form.
+        </li>
       </ul>
       <h2>Component structure</h2>
       <p>
@@ -115,3 +121,9 @@ export const WithScroll = {
 };
 
 WithScroll.storyName = 'With Scroll (progressive loading)';
+
+export const WithDataTable = {
+  render: () => <MultiAddSelectWithDataTablePreview />,
+};
+
+WithDataTable.storyName = 'With DataTable';

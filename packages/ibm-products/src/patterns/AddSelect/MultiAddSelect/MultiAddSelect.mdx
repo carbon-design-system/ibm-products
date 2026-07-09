@@ -85,9 +85,16 @@ Choose it when:
 - users are likely to browse and scroll rather than always searching
 - the experience should feel like one seamless, continuously growing list
 
-See the dedicated
-[MultiSelectWithScroll pattern](..?path=/docs/patterns-add-and-select-multiselectwithscroll--docs)
-for full documentation and a standalone story.
+### Multi add and select with DataTable
+
+Use this variation when users need to select multiple items from a tabular list
+using a Carbon DataTable with checkboxes.
+
+Choose it when:
+
+- items have multiple attributes that benefit from a columnar layout
+- users are familiar with table-based selection patterns
+- the list of items does not require hierarchical navigation
 
 ## How this pattern can be used
 
@@ -128,6 +135,10 @@ Typical usage includes:
 ### With scroll (progressive loading)
 
 <Canvas of={stories.WithScroll} />
+
+### With DataTable
+
+<Canvas of={stories.WithDataTable} />
 
 ## Copy-paste ready code
 

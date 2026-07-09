@@ -470,9 +470,19 @@ the `<StepProvider>`
 [utility](https://ibm-products.carbondesignsystem.com/?path=/docs/patterns-step-flows--overview)
 as demonstrated below.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/Tearsheet/example)
-
-<Canvas of={stories.withSteps} />
+<Canvas
+  of={stories.withSteps}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        window.open(
+          'https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/Tearsheet/example',
+          '_blank'
+        ),
+    },
+  ]}
+/>
 
 ## Narrow
 

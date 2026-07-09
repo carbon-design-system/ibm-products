@@ -1,4 +1,17 @@
-## `@carbon/ibm-products-styles@2.89.0-rc.0`
+## `@carbon/ibm-products-styles@2.90.0`
+### Features :rocket:
+- feat(Card): initial scaffolding (#9597)
+
+### Bug fixes :bug:
+- fix(tearsheet): increase the top margin to 88px from 46px (#9471)
+- fix(UserProfileImage): css deprecation issue (#9578)
+- fix: update import of Carbon css from all component styles (#9541)
+- fix(preview_PageHeader): resolve a11y issues (#9519)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9539)
+
+## `@carbon/ibm-products-styles@2.89.0`
 ### Features :rocket:
 - feat(preview_PageHeader): implement disable sticky tab bar (#9365)
 

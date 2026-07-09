@@ -1,4 +1,17 @@
-## `@carbon/ibm-products-web-components@0.42.0-rc.0`
+## `@carbon/ibm-products-web-components@0.43.0`
+### Features :rocket:
+- feat(create-tearsheet): implemented as patterns in web components (#9552)
+
+### Bug fixes :bug:
+- fix(tearsheet): increase the top margin to 88px from 46px (#9471)
+- fix(preview_PageHeader): resolve a11y issues (#9519)
+
+### Housekeeping :house:
+- chore(deps): update dependency c8 to v11 (#9590)
+- chore: update typescript to v6 (#9591)
+- build(deps): update to Carbon 11 compatible versions to latest (#9539)
+
+## `@carbon/ibm-products-web-components@0.42.0`
 ### Features :rocket:
 - feat(preview_PageHeader): implement disable sticky tab bar (#9365)
 - feat: focus trap for tearsheet wc (#9482)

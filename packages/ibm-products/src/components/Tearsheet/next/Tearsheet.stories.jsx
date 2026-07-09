@@ -37,7 +37,7 @@ import {
   Information,
   RightPanelClose,
 } from '@carbon/react/icons';
-import { TearsheetWithSteps } from './_story-assets/StepTearsheet';
+import { TearsheetWithSteps } from '../../../patterns/TearsheetWithSteps/example/components/StepTearsheet';
 import { StepProvider } from '@carbon/utilities-react';
 import { StackProvider } from './StackContext';
 import mdx from './Tearsheet.mdx';
@@ -132,18 +132,23 @@ const description = (
 /* * * * * * * * * * * * * * | STORIES | * * * * * * * * * * * * * * */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-export const Default = ({
-  decorator,
-  influencerWidth,
-  keepMounted,
-  summaryContentWidth,
-  verticalGap,
-  variant,
-  hideCloseButton,
-  disableHeaderCollapse,
-  closeIconDescription,
-}) => {
-  const [open, setOpen] = useState(false);
+export const Default = (
+  {
+    decorator,
+    isFlush,
+    influencerWidth,
+    keepMounted,
+    summaryContentWidth,
+    verticalGap,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
   const summaryPanelTriggerRef = useRef(null);
@@ -369,8 +374,23 @@ export const Default = ({
     </>
   );
 };
-export const WithInfluencer = () => {
-  const [open, setOpen] = useState(false);
+export const WithInfluencer = (
+  {
+    decorator,
+    isFlush,
+    influencerWidth,
+    keepMounted,
+    summaryContentWidth,
+    verticalGap,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const influencerPanelTriggerRef = useRef(null);
   const currentStep = 1;
@@ -585,8 +605,23 @@ export const WithInfluencer = () => {
     </>
   );
 };
-export const WithTabs = () => {
-  const [open, setOpen] = useState(false);
+export const WithTabs = (
+  {
+    decorator,
+    isFlush,
+    influencerWidth,
+    keepMounted,
+    summaryContentWidth,
+    verticalGap,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
   const isSm = useMatchMedia(smMediaQuery);
@@ -652,7 +687,7 @@ export const WithTabs = () => {
             </Tearsheet.NavigationBar>
           </Tearsheet.Header>
           <Tearsheet.Body>
-            <Tearsheet.MainContent>
+            <Tearsheet.MainContent isFlush={isFlush}>
               <div className="summaryPanelTrigger">
                 <Button
                   kind="ghost"
@@ -715,9 +750,19 @@ export const WithTabs = () => {
     </>
   );
 };
-
-export const withSteps = () => {
-  const [open, setOpen] = useState(false);
+export const withSteps = (
+  {
+    decorator,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+    verticalGap,
+    keepMounted,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const launcherButtonRef = useRef(null);
   return (
     <StepProvider>
@@ -739,9 +784,19 @@ export const withSteps = () => {
     </StepProvider>
   );
 };
-
-export const withStepsAndHorizontalProgressIndicator = () => {
-  const [open, setOpen] = useState(false);
+export const withStepsAndHorizontalProgressIndicator = (
+  {
+    decorator,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+    verticalGap,
+    keepMounted,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const launcherButtonRef = useRef(null);
   const currentStep = 1;
   const [text, setText] = useState('');
@@ -766,8 +821,19 @@ export const withStepsAndHorizontalProgressIndicator = () => {
     </StepProvider>
   );
 };
-export const narrowTearsheet = () => {
-  const [open, setOpen] = useState(false);
+export const narrowTearsheet = (
+  {
+    decorator,
+    isFlush,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+    keepMounted,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
   const launcherButtonRef = useRef(null);
@@ -1035,9 +1101,18 @@ export const narrowTearsheet = () => {
     </>
   );
 };
-
-export const StackingTearsheet = ({ variant = ['wide', 'wide', 'wide'] }) => {
-  const [open1, setOpen1] = useState(false);
+export const StackingTearsheet = (
+  {
+    variant = ['wide', 'wide', 'wide'],
+    decorator,
+    isFlush,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+  },
+  context
+) => {
+  const [open1, setOpen1] = useState(context.viewMode !== 'docs');
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const launcherButtonRef1 = useRef(null);
@@ -1414,15 +1489,23 @@ export const stackingNarrowTearsheets = () => (
   <StackingTearsheet variant={['narrow', 'narrow', 'narrow']} />
 );
 
-export const WithCustomFooterActions = ({
-  decorator,
-  influencerWidth,
-  keepMounted,
-  summaryContentWidth,
-  verticalGap,
-  variant,
-}) => {
-  const [open, setOpen] = useState(false);
+export const WithCustomFooterActions = (
+  {
+    decorator,
+    isFlush,
+    influencerWidth,
+    keepMounted,
+    summaryContentWidth,
+    verticalGap,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;

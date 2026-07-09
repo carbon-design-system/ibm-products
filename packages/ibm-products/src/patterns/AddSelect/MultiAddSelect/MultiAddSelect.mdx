@@ -63,6 +63,29 @@ Choose it when:
 - users need more context before selecting
 - a middle panel helps users understand item contents without leaving the flow
 
+### With global actions
+
+Use this variation when users need to search, filter, and sort across the entire
+item set from a single set of controls.
+
+Choose it when:
+
+- items are hierarchical and users need to search across all levels at once
+- global filtering or sorting is more useful than per-column controls
+- the dataset is large enough that users benefit from finding items without
+  navigating folder by folder
+
+### With column actions
+
+Use this variation when filtering and sorting should be scoped to the items
+visible in each individual column.
+
+Choose it when:
+
+- items are hierarchical and users navigate through levels
+- per-column filter and sort controls give more precise results
+- global actions would be overwhelming or irrelevant to the full dataset
+
 ### With hierarchy and no select all
 
 Use this variation when users need hierarchical multi-selection but should only
@@ -131,6 +154,14 @@ Typical usage includes:
 ### With hierarchy (no select all)
 
 <Canvas of={stories.WithHierarchyNoSelectAll} />
+
+### With global actions
+
+<Canvas of={stories.WithGlobalActions} />
+
+### With column actions
+
+<Canvas of={stories.WithColumnActions} />
 
 ### With scroll (progressive loading)
 

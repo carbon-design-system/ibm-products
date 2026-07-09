@@ -156,16 +156,13 @@ CardComponent.propTypes = {
   onKeyDown: PropTypes.func,
 };
 
-export const Card = CardComponent;
-
 /**
  * -------
  * Exports
  * -------
  */
-const Root = Card;
-Root.displayName = 'Card.Root';
 
+// Create namespaced child components
 const Header = CardHeader;
 Header.displayName = 'Card.Header';
 
@@ -199,8 +196,22 @@ Actions.displayName = 'Card.Actions';
 const Action = CardAction;
 Action.displayName = 'Card.Action';
 
+// Attach child components to Card for namespaced usage (Card.Header, Card.Body, etc.)
+export const Card = Object.assign(CardComponent, {
+  Header,
+  Body,
+  Footer,
+  HeaderMedia,
+  Media,
+  Label,
+  Title,
+  TitleMedia,
+  Caption,
+  Actions,
+  Action,
+});
+
 export {
-  // direct exports
   Card as default,
   CardHeader,
   CardBody,
@@ -213,19 +224,6 @@ export {
   CardCaption,
   CardActions,
   CardAction,
-  // namespaced
-  Root,
-  Header,
-  Body,
-  Footer,
-  HeaderMedia,
-  Media,
-  Label,
-  Title,
-  TitleMedia,
-  Caption,
-  Actions,
-  Action,
 };
 
 export type {

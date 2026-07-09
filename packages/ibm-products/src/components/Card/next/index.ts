@@ -17,19 +17,6 @@ export {
   CardCaption,
   CardActions,
   CardAction,
-  //
-  Root,
-  Header,
-  Body,
-  Footer,
-  HeaderMedia,
-  Media,
-  Label,
-  Title,
-  TitleMedia,
-  Caption,
-  Actions,
-  Action,
 } from './Card';
 
 export type {

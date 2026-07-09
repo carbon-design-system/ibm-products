@@ -6,20 +6,7 @@
  */
 
 import React from 'react';
-import { preview__Card as Card } from '../..';
-import {
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardHeaderMedia,
-  CardMedia,
-  CardLabel,
-  CardTitle,
-  CardTitleMedia,
-  CardCaption,
-  CardActions,
-  CardAction,
-} from './Card';
+import { Card } from './Card';
 import {
   Button,
   IconButton,
@@ -55,17 +42,17 @@ export default {
   title: 'Preview/Card',
   component: Card,
   subcomponents: {
-    CardHeader,
-    CardBody,
-    CardFooter,
-    CardHeaderMedia,
-    CardMedia,
-    CardLabel,
-    CardTitle,
-    CardTitleMedia,
-    CardCaption,
-    CardActions,
-    CardAction,
+    CardHeader: Card.Header,
+    CardBody: Card.Body,
+    CardFooter: Card.Footer,
+    CardHeaderMedia: Card.HeaderMedia,
+    CardMedia: Card.Media,
+    CardLabel: Card.Label,
+    CardTitle: Card.Title,
+    CardTitleMedia: Card.TitleMedia,
+    CardCaption: Card.Caption,
+    CardActions: Card.Actions,
+    CardAction: Card.Action,
   },
   tags: ['autodocs'],
   parameters: {
@@ -92,7 +79,7 @@ export default {
 const Template = (args) => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root {...args}>
+      <Card {...args}>
         <Card.Header>
           <Card.Title>Card Title</Card.Title>
         </Card.Header>
@@ -107,7 +94,7 @@ const Template = (args) => (
             <Button size="sm">Action</Button>
           </Card.Action>
         </Card.Footer>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -133,11 +120,11 @@ Disabled.args = {
 export const MinimalCard = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Body>
           <p>A minimal card with just body content.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -145,7 +132,7 @@ export const MinimalCard = () => (
 export const ProductiveDensity = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="productive">
+      <Card density="productive">
         <Card.Header>
           <Card.Label>Category</Card.Label>
           <Card.Title>Productive Card</Card.Title>
@@ -157,7 +144,7 @@ export const ProductiveDensity = () => (
             more condensed layout.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -165,7 +152,7 @@ export const ProductiveDensity = () => (
 export const ExpressiveDensity = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="expressive">
+      <Card density="expressive">
         <Card.Header>
           <Card.Label>Category</Card.Label>
           <Card.Title>Expressive Card</Card.Title>
@@ -177,7 +164,7 @@ export const ExpressiveDensity = () => (
             spacious layout.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -185,7 +172,7 @@ export const ExpressiveDensity = () => (
 export const WithHeaderPrimitives = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.Label>Category</Card.Label>
           <Card.Title>Dashboard Analytics Overview</Card.Title>
@@ -197,7 +184,7 @@ export const WithHeaderPrimitives = () => (
             primitives in the header.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -205,7 +192,7 @@ export const WithHeaderPrimitives = () => (
 export const WithIcon = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.HeaderMedia>
             <Analytics />
@@ -216,7 +203,7 @@ export const WithIcon = () => (
         <Card.Body>
           <p>This card includes a small icon (16px) alongside the title.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -224,7 +211,7 @@ export const WithIcon = () => (
 export const WithLargeIcon = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.HeaderMedia>
             <Favorite size="32" />
@@ -235,7 +222,7 @@ export const WithLargeIcon = () => (
         <Card.Body>
           <p>This card includes a larger icon (32px) for more prominence.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -243,7 +230,7 @@ export const WithLargeIcon = () => (
 export const WithMedia = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.Media ratio="16x9">
             <img
@@ -259,7 +246,7 @@ export const WithMedia = () => (
         <Card.Body>
           <p>This card features a 16:9 aspect ratio media slot at the top.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -267,7 +254,7 @@ export const WithMedia = () => (
 export const WithSquareMedia = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.Media ratio="1x1">
             <img
@@ -282,7 +269,7 @@ export const WithSquareMedia = () => (
         <Card.Body>
           <p>This card uses a 1:1 (square) aspect ratio for the media.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -290,7 +277,7 @@ export const WithSquareMedia = () => (
 export const WithHeaderActions = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root clickable onClick={() => console.log('Card clicked')}>
+      <Card clickable onClick={() => console.log('Card clicked')}>
         <Card.Header>
           <Card.Label>Project</Card.Label>
           <Card.Title>Website Redesign</Card.Title>
@@ -330,7 +317,7 @@ export const WithHeaderActions = () => (
             click propagation.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -338,7 +325,7 @@ export const WithHeaderActions = () => (
 export const WithHeaderMedia = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.HeaderMedia>
             <Analytics />
@@ -380,7 +367,7 @@ export const WithHeaderMedia = () => (
             buttons on the right. The icon aligns with the title text below.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -388,7 +375,7 @@ export const WithHeaderMedia = () => (
 export const WithTruncatedTitle = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.Title truncate>
             This is a very long title that will be truncated with an ellipsis
@@ -399,7 +386,7 @@ export const WithTruncatedTitle = () => (
         <Card.Body>
           <p>The title is truncated to a single line with an ellipsis.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -407,7 +394,7 @@ export const WithTruncatedTitle = () => (
 export const WithMultiLineTruncatedTitle = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.Title truncate={3}>
             This is a very long title that will be truncated after three lines.
@@ -420,7 +407,7 @@ export const WithMultiLineTruncatedTitle = () => (
         <Card.Body>
           <p>The title is truncated to three lines with an ellipsis.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -428,7 +415,7 @@ export const WithMultiLineTruncatedTitle = () => (
 export const CompleteExample = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root clickable onClick={() => console.log('Card clicked')}>
+      <Card clickable onClick={() => console.log('Card clicked')}>
         <Card.Header>
           <Card.Media ratio="16x9">
             <img
@@ -490,7 +477,7 @@ export const CompleteExample = () => (
             <Button size="sm">View Details</Button>
           </Card.Action>
         </Card.Footer>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -498,7 +485,7 @@ export const CompleteExample = () => (
 export const WithAILabel = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root
+      <Card
         decorator={
           <AILabel align="bottom" size="xs">
             <AILabelContent>
@@ -529,10 +516,10 @@ export const WithAILabel = () => (
             border indicating AI-generated content.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root
+      <Card
         decorator={
           <AILabel align="bottom" size="xs">
             <AILabelContent>
@@ -562,10 +549,10 @@ export const WithAILabel = () => (
         <Card.Body>
           <p>Card with AI label and header media slot (icon).</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root
+      <Card
         decorator={
           <AILabel align="bottom" size="xs">
             <AILabelContent>
@@ -627,7 +614,7 @@ export const WithAILabel = () => (
             <Button size="sm">View Details</Button>
           </Card.Action>
         </Card.Footer>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -635,7 +622,7 @@ export const WithAILabel = () => (
 export const CompleteExampleWithAI = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root
+      <Card
         clickable
         decorator={
           <AILabel align="bottom" size="xs">
@@ -722,7 +709,7 @@ export const CompleteExampleWithAI = () => (
             <Button size="sm">View AI Insights</Button>
           </Card.Action>
         </Card.Footer>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -730,7 +717,7 @@ export const CompleteExampleWithAI = () => (
 export const WithFooterActions = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.Title>Card with Footer Actions</Card.Title>
         </Card.Header>
@@ -749,7 +736,7 @@ export const WithFooterActions = () => (
             <Button size="sm">Confirm</Button>
           </Card.Action>
         </Card.Footer>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -757,7 +744,7 @@ export const WithFooterActions = () => (
 export const IconSlotVariants = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.HeaderMedia>
             <img
@@ -771,10 +758,10 @@ export const IconSlotVariants = () => (
         <Card.Body>
           <p>The icon slot can contain an image element.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.HeaderMedia>
             <UserAvatar
@@ -788,10 +775,10 @@ export const IconSlotVariants = () => (
         <Card.Body>
           <p>The icon slot can contain a UserAvatar component.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.HeaderMedia>
             <Tag type="blue">New</Tag>
@@ -801,10 +788,10 @@ export const IconSlotVariants = () => (
         <Card.Body>
           <p>The icon slot can contain a Tag component.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.HeaderMedia>
             <IconIndicator kind="succeeded" size={16} label="Succeeded" />
@@ -814,10 +801,10 @@ export const IconSlotVariants = () => (
         <Card.Body>
           <p>The icon slot can contain a IconIndicator component.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.HeaderMedia>
             <Bee className="icon-slot-pictogram" />
@@ -827,7 +814,7 @@ export const IconSlotVariants = () => (
         <Card.Body>
           <p>The icon slot can contain a Carbon pictogram.</p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -839,7 +826,7 @@ export const IconSlotVariants = () => (
 export const WithTitleMedia = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.TitleMedia>
             <img
@@ -862,10 +849,10 @@ export const WithTitleMedia = () => (
             max 64px).
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.TitleMedia>
             <img
@@ -888,10 +875,10 @@ export const WithTitleMedia = () => (
             max 64px).
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.TitleMedia>
             <img
@@ -942,10 +929,10 @@ export const WithTitleMedia = () => (
             max 64px).
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root>
+      <Card>
         <Card.Header>
           <Card.Media ratio="16x9">
             <img
@@ -1003,7 +990,7 @@ export const WithTitleMedia = () => (
             max 64px).
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -1015,7 +1002,7 @@ export const WithTitleMedia = () => (
 export const WithTitleLeadingIcon = () => (
   <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="productive">
+      <Card density="productive">
         <Card.Header>
           <Card.Title titleStart={<BeeIcon size={16} />}>
             Analytics dashboard
@@ -1027,11 +1014,11 @@ export const WithTitleLeadingIcon = () => (
             use 16px icons.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
 
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="expressive">
+      <Card density="expressive">
         <Card.Header>
           <Card.Title titleStart={<BeeIcon size={24} />}>
             Analytics dashboard
@@ -1043,11 +1030,11 @@ export const WithTitleLeadingIcon = () => (
             use 24px icons.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
 
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="productive">
+      <Card density="productive">
         <Card.Header>
           <Card.Title
             titleStart={<BeeIcon size={16} />}
@@ -1063,7 +1050,7 @@ export const WithTitleLeadingIcon = () => (
             with 2px padding to center with the first line.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -1075,7 +1062,7 @@ export const WithTitleLeadingIcon = () => (
 export const WithTitleTrailingIcon = () => (
   <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="productive">
+      <Card density="productive">
         <Card.Header>
           <Card.Title titleEnd={<BeeIcon size={16} />}>
             Analytics dashboard
@@ -1087,11 +1074,11 @@ export const WithTitleTrailingIcon = () => (
             use 16px icons.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
 
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="expressive">
+      <Card density="expressive">
         <Card.Header>
           <Card.Title titleEnd={<BeeIcon size={24} />}>
             Analytics dashboard
@@ -1103,11 +1090,11 @@ export const WithTitleTrailingIcon = () => (
             use 24px icons.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
 
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="productive">
+      <Card density="productive">
         <Card.Header>
           <Card.Title
             titleEnd={<BeeIcon size={16} />}
@@ -1123,7 +1110,7 @@ export const WithTitleTrailingIcon = () => (
             the text on the last line with 8px gap.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -1135,7 +1122,7 @@ export const WithTitleTrailingIcon = () => (
 export const WithVideo = () => (
   <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="productive">
+      <Card density="productive">
         <Card.Header>
           <Card.Title>Product demo video</Card.Title>
           <Card.Caption>Watch our latest feature walkthrough</Card.Caption>
@@ -1163,11 +1150,11 @@ export const WithVideo = () => (
             aspect ratio.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
 
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="productive">
+      <Card density="productive">
         <Card.Media ratio="16x9">
           <iframe
             width={'100%'}
@@ -1189,7 +1176,7 @@ export const WithVideo = () => (
             starts.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -1201,7 +1188,7 @@ export const WithVideo = () => (
 export const WithManyActions = () => (
   <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="productive">
+      <Card density="productive">
         <Card.Header>
           <Card.Label>Category</Card.Label>
           <Card.Title>Project dashboard</Card.Title>
@@ -1266,7 +1253,7 @@ export const WithManyActions = () => (
             spacing.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );
@@ -1278,7 +1265,7 @@ export const WithManyActions = () => (
 export const WithTextAction = () => (
   <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="productive">
+      <Card density="productive">
         <Card.Header>
           <Card.Title>Usage metrics</Card.Title>
           <Card.Actions>
@@ -1297,10 +1284,10 @@ export const WithTextAction = () => (
             available.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card.Root density="productive">
+      <Card density="productive">
         <Card.Header>
           <Card.Title>Usage metrics</Card.Title>
           <Card.Actions>
@@ -1329,7 +1316,7 @@ export const WithTextAction = () => (
             available.
           </p>
         </Card.Body>
-      </Card.Root>
+      </Card>
     </Column>
   </Grid>
 );

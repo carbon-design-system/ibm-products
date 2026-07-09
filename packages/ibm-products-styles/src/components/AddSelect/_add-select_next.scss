@@ -283,6 +283,39 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
       fill: $icon-primary;
     }
   }
+
+  &--skeleton {
+    cursor: default;
+    pointer-events: none;
+
+    &:hover {
+      background: none;
+    }
+
+    .#{$block-class__next}-row__skeleton-control {
+      flex: none;
+      border-radius: $spacing-01;
+      background-color: $skeleton-element;
+      block-size: $spacing-05;
+      inline-size: $spacing-05;
+      margin-inline-end: $spacing-05;
+    }
+
+    .#{$block-class__next}-row__icon .cds--icon--skeleton {
+      border-radius: 50%;
+      block-size: $spacing-07;
+      inline-size: $spacing-07;
+
+      &::before {
+        border-radius: 50%;
+        animation: none;
+      }
+    }
+
+    .#{$block-class__next}-row__skeleton-title {
+      margin-block-end: 0;
+    }
+  }
 }
 
 // ──────────────────────────────────────────────────────────────

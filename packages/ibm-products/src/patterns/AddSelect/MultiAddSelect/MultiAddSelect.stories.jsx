@@ -15,6 +15,7 @@ import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-com
 import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
 import { MultiAddSelectWithGlobalActionsPreview } from '../example/preview-components/MultiAddSelectWithGlobalActions/MultiAddSelectWithGlobalActions';
 import { MultiAddSelectWithColumnActionsPreview } from '../example/preview-components/MultiAddSelectWithColumnActions/MultiAddSelectWithColumnActions';
+import { MultiSelectWithScrollPreview } from '../example/preview-components/MultiSelectWithScroll/MultiSelectWithScroll';
 import { MultiAddSelectWithDataTablePreview } from '../example/preview-components/MultiAddSelectWithDataTable/MultiAddSelectWithDataTable';
 
 export default {
@@ -78,6 +79,11 @@ export const Overview = {
           without global actions.
         </li>
         <li>
+          <strong>With Scroll (progressive loading)</strong> - Multi-selection
+          from large datasets that load progressively as the user scrolls.
+          Includes skeleton loading rows and a scroll hint at the bottom.
+        </li>
+        <li>
           <strong>With DataTable</strong> - Multi-selection using a Carbon
           DataTable with checkboxes, suited for items with multiple attributes
           displayed in columnar form.
@@ -116,6 +122,7 @@ export const NonHierarchicalWithPeekInsideItem = {
 
 NonHierarchicalWithPeekInsideItem.storyName =
   'Non-Hierarchical with Peek Inside Item';
+
 export const WithHierarchyNoSelectAll = {
   render: () => <MultiAddSelectWithHierarchyNoSelectAllPreview />,
 };
@@ -133,6 +140,12 @@ export const WithColumnActions = {
 };
 
 WithColumnActions.storyName = 'With Column Actions';
+
+export const WithScroll = {
+  render: () => <MultiSelectWithScrollPreview />,
+};
+
+WithScroll.storyName = 'With Scroll (progressive loading)';
 
 export const WithDataTable = {
   render: () => <MultiAddSelectWithDataTablePreview />,

@@ -15,6 +15,7 @@ import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-com
 import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
 import { MultiAddSelectWithGlobalActionsPreview } from '../example/preview-components/MultiAddSelectWithGlobalActions/MultiAddSelectWithGlobalActions';
 import { MultiAddSelectWithColumnActionsPreview } from '../example/preview-components/MultiAddSelectWithColumnActions/MultiAddSelectWithColumnActions';
+import { MultiAddSelectWithDataTablePreview } from '../example/preview-components/MultiAddSelectWithDataTable/MultiAddSelectWithDataTable';
 
 export default {
   title: 'Patterns/Add and select/MultiAddSelect',
@@ -76,6 +77,11 @@ export const Overview = {
           hierarchical navigation and column-level filter and sort capabilities,
           without global actions.
         </li>
+        <li>
+          <strong>With DataTable</strong> - Multi-selection using a Carbon
+          DataTable with checkboxes, suited for items with multiple attributes
+          displayed in columnar form.
+        </li>
       </ul>
       <h2>Component structure</h2>
       <p>
@@ -127,3 +133,9 @@ export const WithColumnActions = {
 };
 
 WithColumnActions.storyName = 'With Column Actions';
+
+export const WithDataTable = {
+  render: () => <MultiAddSelectWithDataTablePreview />,
+};
+
+WithDataTable.storyName = 'With DataTable';

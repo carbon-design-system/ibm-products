@@ -97,6 +97,17 @@ Choose it when:
 - select-all behavior would be too broad or risky
 - users must make deliberate item-by-item selections
 
+### Multi add and select with DataTable
+
+Use this variation when users need to select multiple items from a tabular list
+using a Carbon DataTable with checkboxes.
+
+Choose it when:
+
+- items have multiple attributes that benefit from a columnar layout
+- users are familiar with table-based selection patterns
+- the list of items does not require hierarchical navigation
+
 ## How this pattern can be used
 
 MultiAddSelect can be used to support tasks such as adding multiple assets,
@@ -140,6 +151,10 @@ Typical usage includes:
 ### With column actions
 
 <Canvas of={stories.WithColumnActions} />
+
+### With DataTable
+
+<Canvas of={stories.WithDataTable} />
 
 ## Copy-paste ready code
 

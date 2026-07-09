@@ -820,12 +820,12 @@ export const MultiAddSelectWithColumnActions = forwardRef<
               actions={[
                 {
                   kind: 'secondary',
-                  children: secondaryButtonText,
+                  label: secondaryButtonText,
                   onClick: handleClose,
                 },
                 {
                   kind: 'primary',
-                  children: primaryButtonText,
+                  label: primaryButtonText,
                   onClick: handleSubmit,
                   disabled: selectedIds.size === 0,
                 },

@@ -13,6 +13,7 @@ import { MultiAddSelectWithHierarchyPreview } from '../example/preview-component
 import { MultiAddSelectWithModifiers } from '../example/preview-components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
 import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
 import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
+import { MultiSelectWithBulkActionsPreview } from '../example/preview-components/MultiSelectWithBulkActions/MultiSelectWithBulkActions';
 import { MultiAddSelectWithGlobalActionsPreview } from '../example/preview-components/MultiAddSelectWithGlobalActions/MultiAddSelectWithGlobalActions';
 import { MultiAddSelectWithColumnActionsPreview } from '../example/preview-components/MultiAddSelectWithColumnActions/MultiAddSelectWithColumnActions';
 import { MultiSelectWithScrollPreview } from '../example/preview-components/MultiSelectWithScroll/MultiSelectWithScroll';
@@ -67,6 +68,11 @@ export const Overview = {
           <strong>With Hierarchy (No Select All)</strong> - Multi-selection with
           hierarchical navigation but without column-level select-all
           checkboxes. Only individual items can be selected.
+        </li>
+        <li>
+          <strong>With Modifiers and Bulk Actions</strong> - Multi-selection
+          with role modifiers and bulk action support for editing or removing
+          multiple selected items at once.
         </li>
         <li>
           <strong>With Global Actions</strong> - Multi-selection with
@@ -128,6 +134,12 @@ export const WithHierarchyNoSelectAll = {
 };
 
 WithHierarchyNoSelectAll.storyName = 'With Hierarchy (No Select All)';
+
+export const WithModifiersAndBulkActions = {
+  render: () => <MultiSelectWithBulkActionsPreview />,
+};
+
+WithModifiersAndBulkActions.storyName = 'With Modifiers and Bulk Actions';
 
 export const WithGlobalActions = {
   render: () => <MultiAddSelectWithGlobalActionsPreview />,

@@ -227,7 +227,6 @@ export default {
   ],
   subcomponents: {
     'AddSelect.Body': AddSelect.Body,
-    'AddSelect.Content': AddSelect.Content,
     'AddSelect.Column': AddSelect.Column,
     'AddSelect.Row': AddSelect.Row,
     'AddSelect.SelectionSummary': AddSelect.SelectionSummary,
@@ -364,7 +363,8 @@ export const AddSelectBody = {
     },
     children: {
       control: false,
-      description: 'Child components (typically AddSelect.Content)',
+      description:
+        'Child components (typically AddSelect.Column or AddSelect.Row)',
       table: { disable: true },
     },
     headerContent: {
@@ -497,7 +497,7 @@ const AddSelectColumnStory = (args) => {
   return (
     <div className={`${storyClass}-column-container`}>
       <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-        <AddSelect.Content>
+        <AddSelect.Body hideSearch>
           <AddSelect.Column
             title={args.title}
             searchLabel={args.searchLabel}
@@ -534,7 +534,7 @@ const AddSelectColumnStory = (args) => {
               />
             ))}
           </AddSelect.Column>
-        </AddSelect.Content>
+        </AddSelect.Body>
       </AddSelect>
     </div>
   );
@@ -638,7 +638,7 @@ const AddSelectRowStory = (args) => {
   return (
     <div className={`${storyClass}-container--single`}>
       <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-        <AddSelect.Content>
+        <AddSelect.Body hideSearch>
           <AddSelect.Column multi={args.multi} hideSearch>
             <AddSelect.Row
               itemId="1"
@@ -678,7 +678,7 @@ const AddSelectRowStory = (args) => {
               ) : null}
             </AddSelect.Row>
           </AddSelect.Column>
-        </AddSelect.Content>
+        </AddSelect.Body>
       </AddSelect>
     </div>
   );

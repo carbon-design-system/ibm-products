@@ -275,7 +275,12 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
 
             if (this.selectorPrimaryFocus) {
               const raw = this.selectorPrimaryFocus.trim();
-              const selector = /^[#.[]]/.test(raw) ? raw : `.${raw}`;
+              const selector =
+                raw.startsWith('#') ||
+                raw.startsWith('.') ||
+                raw.startsWith('[')
+                  ? raw
+                  : `.${raw}`;
               const found = document.querySelector<HTMLElement>(selector);
               elementToFocus =
                 found?.shadowRoot?.querySelector<HTMLElement>(

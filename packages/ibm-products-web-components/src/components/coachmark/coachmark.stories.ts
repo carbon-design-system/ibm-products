@@ -87,7 +87,6 @@ export const Tooltip = {
     ...args,
     align: 'bottom',
     caret: true,
-    selectorPrimaryFocus: 'done-btn',
   },
   argTypes,
   render: (args: any) => {

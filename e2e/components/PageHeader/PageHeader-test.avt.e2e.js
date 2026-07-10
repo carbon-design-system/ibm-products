@@ -17,7 +17,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'components-pageheader--with-title',
+      id: 'deprecated-pageheader--with-title',
       globals: {
         carbonTheme: 'white',
       },
@@ -29,7 +29,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-collapse-on-scroll', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'components-pageheader--fully-loaded-and-some',
+      id: 'deprecated-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -65,7 +65,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-collapse-by-default', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'components-pageheader--fully-loaded',
+      id: 'deprecated-pageheader--fully-loaded',
       globals: {
         carbonTheme: 'white',
       },
@@ -89,7 +89,7 @@ test.describe('PageHeader @avt', () => {
   test('@avt-collapse-by-toggle-button', async ({ page }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'components-pageheader--fully-loaded-and-some',
+      id: 'deprecated-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -135,7 +135,7 @@ test.describe('PageHeader @avt', () => {
   }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'components-pageheader--fully-loaded-and-some',
+      id: 'deprecated-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -194,7 +194,7 @@ test.describe('PageHeader @avt', () => {
   }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'components-pageheader--fully-loaded-and-some',
+      id: 'deprecated-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },
@@ -274,7 +274,7 @@ test.describe('PageHeader @avt', () => {
   }) => {
     await visitStory(page, {
       component: 'PageHeader',
-      id: 'components-pageheader--fully-loaded-and-some',
+      id: 'deprecated-pageheader--fully-loaded-and-some',
       globals: {
         carbonTheme: 'white',
       },

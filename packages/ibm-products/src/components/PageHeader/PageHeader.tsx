@@ -425,6 +425,12 @@ interface HTMLElementStyled extends HTMLElement {
   style: CSSStyleDeclaration;
 }
 
+/**
+ * ## Deprecation Notice
+ *
+ * @deprecated
+ * This component is deprecated and will be removed in the next major version. Please migrate to [preview_PageHeader](https://ibm-products.carbondesignsystem.com/?path=/docs/preview-pageheader--overview#migration-guidance-from-deprecated-pageheader-to-preview_pageheader).
+ */
 export const PageHeader = React.forwardRef(
   (
     {
@@ -1231,6 +1237,12 @@ export const PageHeader = React.forwardRef(
     }
   }
 );
+
+/**@ts-ignore*/
+PageHeader.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with preview__PageHeader`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 

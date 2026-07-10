@@ -388,6 +388,7 @@ export const NonHierarchicalWithPeekInsideItem = forwardRef<
                 >
                   <AddSelect.Content layout="horizontal">
                     <AddSelect.Column
+                      className={`${blockClass}__items-column`}
                       title={itemsLabel}
                       itemCount={filteredItems.length}
                       multi={true}

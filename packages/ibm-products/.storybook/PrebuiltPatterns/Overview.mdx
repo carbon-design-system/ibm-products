@@ -3,13 +3,24 @@ import LinkTo from '@storybook/addon-links/react';
 
 <Meta title="Deprecated/Prebuilt Patterns/Overview" />
 
-# Overview about prebuilt patterns
+# Prebuilt patterns — deprecation overview
 
 ## Table of Contents
 
+- [What is changing?](#what-is-changing)
+- [Why patterns instead of components?](#why-patterns-instead-of-components)
 - [How prebuilt patterns and patterns differ](#how-prebuilt-patterns-and-patterns-differ)
-- [Prebuilt patterns to patterns](#prebuilt-patterns-to-patterns)
-- [Migration guidance from prebuilt patterns to patterns](#migration-guidance-from-prebuilt-patterns-to-patterns)
+- [Affected components and their pattern equivalents](#affected-components-and-their-pattern-equivalents)
+- [How to migrate — general process](#how-to-migrate--general-process)
+- [Example: `APIKeyModal` → `GenerateAnAPIKey`](#example-apikeymodal--generateanapikey)
+- [Example: `CreateTearsheet` → `CreateTearsheet` pattern](#example-createtearsheet--createtearsheet-pattern)
+- [A note on `preview-components`](#a-note-on-preview-components)
+- [FAQ](#faq)
+- [Support and resources](#support-and-resources)
+
+---
+
+## What is changing?
 
 Patterns can be accomplished in multiple ways utilizing one or more components
 with additional design considerations. The prebuilt patterns in this library are
@@ -18,180 +29,361 @@ based on existing
 documented on the Carbon for IBM Products website, however, they are built like
 traditional components that can also be imported directly for use.
 
-While these prebuilt patterns are available for use directly in code, they only
-capture a subset of use cases from the broader patterns they represent and their
-flexibility may be limited by their component APIs. For a more flexible
-approach, consider leveraging the equivalent pattern code.
+We are transitioning these prebuilt patterns from **importable components** to
+**pure patterns** — reference implementations that you copy into your codebase
+and customize. This gives you full ownership and control over the code.
+
+### Before — prebuilt component approach
+
+```jsx
+// Import the component directly from the package
+import { SomePrebuiltPattern } from '@carbon/ibm-products';
+
+function MyApp() {
+  return (
+    <SomePrebuiltPattern
+      open={open}
+      onClose={handleClose}
+      propA="value"
+      propB="value"
+      // ...many more props to control every built-in variation
+    />
+  );
+}
+```
+
+**Limitations of this approach:**
+
+- Limited customization without prop drilling
+- Breaking changes affect all adopters on upgrade
+- Complex prop APIs required for edge cases
+- Difficult to extend for unique product requirements
+
+### After — pure pattern approach
+
+```jsx
+// Copy the pattern files from example/components/ into your project once.
+// The exact files vary per pattern — check the pattern's own migration guide.
+import { SomePattern } from './patterns/SomePattern/SomePattern';
+
+function MyApp() {
+  return (
+    <SomePattern
+      open={open}
+      onRequestClose={handleClose}
+      // Only the props your use case needs
+    >
+      {/* You compose the content directly as children */}
+      <MyFormFields />
+    </SomePattern>
+  );
+}
+```
+
+**Benefits:**
+
+- **Full control** — modify the code to match your exact requirements
+- **No breaking changes** — library updates do not touch your copy
+- **Seamless customization** — adapt without workarounds or prop drilling
+- **Smaller bundles** — include only what your product needs
+- **Reduced maintenance** — the library no longer needs to support every edge
+  case
+
+---
+
+## Why patterns instead of components?
+
+### The problem with complex components
+
+Some UI patterns are inherently complex and highly variable across different
+products:
+
+1. **Multi-step workflows** — different products need different validation,
+   navigation, and state management
+2. **Create / Edit flows** — unique business logic, data structures, and
+   submission handling
+3. **Complex forms** — product-specific validation rules, field dependencies,
+   and error handling
+
+Adding more props to solve each case compounds the API surface, increases
+maintenance cost, and still cannot cover every scenario.
+
+### When to use patterns vs components
+
+| Use a component                  | Use a pattern                              |
+| -------------------------------- | ------------------------------------------ |
+| Simple, consistent UI elements   | Complex, multi-step workflows              |
+| Minimal customization needed     | Heavy customization expected               |
+| Stable, well-defined API         | Variable business logic                    |
+| Reusable across products as-is   | Product-specific implementations           |
+| **Examples:** Button, Modal, Tag | **Examples:** CreateTearsheet, APIKeyModal |
+
+---
 
 ## How prebuilt patterns and patterns differ
 
 Prebuilt patterns can be useful, containing a number of features built-in.
 However, prebuilt patterns have stricter APIs and may have limited flexibility.
-Many of our patterns include “recipes” that list the components used to deliver
+Many of our patterns include "recipes" that list the components used to deliver
 the pattern. These are often provided as example code that you can adopt or
 extend further for your own use case.
 
-## Prebuilt patterns to patterns
-
-While many of the prebuilt patterns may not have pattern equivalents at this
-time, we will be adding more patterns in the future.
-
-| Prebuilt pattern name                | Equivalent pattern                                                                                         |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| `APIKeyModal`                        | <LinkTo title="Patterns/Generate an API key" name="Overview">Generate an API key</LinkTo>                  |
-| Create flows `CreateFullPage`        | <LinkTo title="Patterns/Create flows/Create Full Page" name="Overview">Create Full Page</LinkTo>           |
-| Create flows `CreateModal`           | <LinkTo title="Patterns/Create flows/Create Modal" name="Overview">Create Modal</LinkTo>                   |
-| Create flows `CreateSidePanel`       | —                                                                                                          |
-| Create flows `CreateTearsheet`       | <LinkTo title="Patterns/Create flows/CreateTearsheet" name="Overview">CreateTearsheet</LinkTo>             |
-| Create flows `CreateTearsheetNarrow` | <LinkTo title="Patterns/Create flows/CreateTearsheetNarrow" name="Overview">CreateTearsheetNarrow</LinkTo> |
-| `ExportModal`                        | <LinkTo title="Patterns/Export Modal" name="Overview">Export Modal</LinkTo>                                |
-| `ImportModal`                        | <LinkTo title="Patterns/Import And Upload" name="Overview">Import and Upload</LinkTo>                      |
-| `Delete and remove`                  | <LinkTo title="Patterns/Delete and remove" name="Overview">Delete and remove</LinkTo>                      |
-
-## Migration guidance from prebuilt patterns to patterns
-
-Migrating from a prebuilt pattern to its equivalent pattern means replacing an
-imported, opaque component with a composable recipe that you own and control.
-The steps below use `APIKeyModal` → `GenerateAnAPIKey` as the concrete example,
-but the same approach applies to every row in the table above.
-
-### Why migrate?
-
-|                      | Prebuilt pattern (`APIKeyModal`)           | Pattern (`GenerateAnAPIKey`)           |
+|                      | Prebuilt pattern (e.g. `APIKeyModal`)      | Pattern (e.g. `GenerateAnAPIKey`)      |
 | -------------------- | ------------------------------------------ | -------------------------------------- |
 | **Ownership**        | Library-owned, versioned API               | Your codebase — you control every line |
-| **Flexibility**      | Fixed prop surface                         | Fully composable children              |
+| **Flexibility**      | Fixed prop surface                         | Fully composable                       |
 | **Breaking changes** | Yes — next major removes it                | None — you copied it                   |
 | **Customization**    | Props only                                 | Direct code changes                    |
 | **Bundle**           | Includes all use-cases whether used or not | Include only what you need             |
 
 ---
 
-### Step-by-step: `APIKeyModal` → `GenerateAnAPIKey`
+## Affected components and their pattern equivalents
 
-Here is a simple example to migrate from `APIKeyModal` to `GenerateAnAPIKey`.
-The steps below walk through each change required — from swapping the import to
-moving body content into `children`.
+### Confirmed for deprecation
 
-> The same **overall idea** applies when migrating any other prebuilt pattern to
-> its equivalent — copy the pattern source into your project, update your
-> imports, adapt your existing usage to the pattern's API, and remove the old
-> library import. The specific props, children structure, and components
-> involved will differ per pattern, but the migration philosophy is the same.
+| Prebuilt pattern                     | Equivalent pattern                                                                                         | Live example                                                                                                                                        |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `APIKeyModal`                        | <LinkTo title="Patterns/Generate an API key" name="Overview">Generate an API key</LinkTo>                  | [StackBlitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/GenerateAnAPIKey/example) |
+| Create flows `CreateFullPage`        | <LinkTo title="Patterns/Create flows/Create Full Page" name="Overview">Create Full Page</LinkTo>           | Coming soon                                                                                                                                         |
+| Create flows `CreateModal`           | <LinkTo title="Patterns/Create flows/Create Modal" name="Overview">Create Modal</LinkTo>                   | Coming soon                                                                                                                                         |
+| Create flows `CreateSidePanel`       | —                                                                                                          | Coming soon                                                                                                                                         |
+| Create flows `CreateTearsheet`       | <LinkTo title="Patterns/Create flows/CreateTearsheet" name="Overview">CreateTearsheet</LinkTo>             | [StackBlitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CreateTearsheet/example)  |
+| Create flows `CreateTearsheetNarrow` | <LinkTo title="Patterns/Create flows/CreateTearsheetNarrow" name="Overview">CreateTearsheetNarrow</LinkTo> | Coming soon                                                                                                                                         |
+| `ExportModal`                        | <LinkTo title="Patterns/Export Modal" name="Overview">Export Modal</LinkTo>                                | Coming soon                                                                                                                                         |
+| `ImportModal`                        | <LinkTo title="Patterns/Import And Upload" name="Overview">Import and Upload</LinkTo>                      | Coming soon                                                                                                                                         |
+| `Delete and remove`                  | <LinkTo title="Patterns/Delete and remove" name="Overview">Delete and remove</LinkTo>                      | Coming soon                                                                                                                                         |
 
-#### 1. Copy the pattern source into your project
+---
 
-Copy these two files from the pattern's `example/components/` folder into your
-own codebase:
+## How to migrate — general process
 
+The general process is the same for every prebuilt pattern. The specifics (file
+names, props, any extra providers) are in each pattern's own detailed migration
+guide, linked from the table above.
+
+### Step 1 — Read the pattern's migration guide
+
+Each pattern's Storybook documentation page has a **Migrating from
+`<OldComponent>`** section with a complete prop-mapping reference and
+before/after code examples for every supported use case. Start there. See the
+two concrete examples further down this page.
+
+### Step 2 — Copy the pattern files
+
+Navigate to the pattern's `example/components/` directory on GitHub and copy the
+files into your project:
+
+| Pattern            | Files to copy                                                                                                                                                                                                                                  |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GenerateAnAPIKey` | [`example/components/`](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/GenerateAnAPIKey/example/components) — `GenerateAnAPIKey.tsx`, `APIKeyDownloader.tsx`                                |
+| `CreateTearsheet`  | [`example/components/`](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CreateTearsheet/example/components) — `CreateTearsheet.tsx`, `CreateTearsheetStep.tsx`, `CreateTearsheetContext.tsx` |
+| Others             | Check each pattern's `example/components/` directory                                                                                                                                                                                           |
+
+```bash
+mkdir -p src/patterns/<PatternName>
+# Copy the files listed above into that directory
 ```
-packages/ibm-products/src/patterns/GenerateAnAPIKey/example/components/
-├── GenerateAnAPIKey.tsx   ← the modal shell
-└── APIKeyDownloader.tsx   ← the optional download link helper
+
+Alternatively, open the StackBlitz example, download the project, and copy the
+`components` folder.
+
+> **Do not copy `preview-components/`** — see the
+> [note below](#a-note-on-preview-components).
+
+### Step 3 — Install any new dependencies
+
+Check the pattern's `example/package.json` for its dependency list. Most
+patterns only need `@carbon/react`, which you likely already have. Some patterns
+(e.g. `CreateTearsheet`) also need `@carbon/utilities-react`:
+
+```bash
+npm install @carbon/utilities-react
+# or
+yarn add @carbon/utilities-react
 ```
 
-#### 2. Update the import
+### Step 4 — Update imports
 
-**Before** — importing the prebuilt component from the library:
-
-```tsx
-import { APIKeyModal } from '@carbon/ibm-products';
-```
-
-**After** — importing your local copy:
-
-```tsx
-import { GenerateAnAPIKey } from './components/GenerateAnAPIKey';
-import { APIKeyDownloader } from './components/APIKeyDownloader';
-```
-
-#### 3. Translate props
-
-The pattern API is intentionally smaller. Props fall into two buckets:
-
-**Renamed props** — pass these directly as before, just with new names:
-
-| `APIKeyModal` prop                    | `GenerateAnAPIKey` prop                |
-| ------------------------------------- | -------------------------------------- |
-| `onClose`                             | `onRequestClose`                       |
-| `onRequestGenerate` / `onRequestEdit` | `onRequestSubmit`                      |
-| `generateTitle`                       | `modalHeading`                         |
-| `generateButtonText`                  | `primaryButtonText`                    |
-| `closeButtonText`                     | `secondaryButtonText`                  |
-| `loading` + `loadingText`             | `loadingStatus` + `loadingDescription` |
-
-All other props (`open`, `modalLabel`, `apiKey`, `apiKeyLoaded`, `customSteps`,
-`onCopy`, `nextStepButtonText`, `previousStepButtonText`) are **unchanged**.
-
-**Props replaced by `children`** — the pattern no longer controls modal body
-content through props. You render it yourself, which is covered in Step 4:
-
-| Removed props                                                                                                          | What to render in `children` instead                                                         |
-| ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `body`                                                                                                                 | `<p>` description text                                                                       |
-| `nameRequired`, `nameLabel`, `nameHelperText`, `namePlaceholder`                                                       | `<TextInput>` for the key name                                                               |
-| `apiKeyLabel`, `hasAPIKeyVisibilityToggle`, `showAPIKeyLabel`, `hideAPIKeyLabel`, `helperText`                         | `<PasswordInput>` (or `<TextInput>`) showing the generated key                               |
-| `hasDownloadLink`, `downloadBodyText`, `downloadFileName`, `downloadFileType`, `downloadLinkText`, `downloadLinkLabel` | `<APIKeyDownloader>` component                                                               |
-| `generateSuccessBody`, `generateSuccessMessage`                                                                        | success message with `<CheckmarkFilled>`                                                     |
-| `error`, `errorText`                                                                                                   | error message with `<ErrorFilled>`                                                           |
-| `editing`, `editButtonText`, `editSuccess`, `editSuccessMessage`                                                       | manage edit state in your own code; pass `primaryButtonText` to label the button accordingly |
-| `copyButtonText`, `copyIconDescription`                                                                                | use `copyIconDescription` on `<GenerateAnAPIKey>` for the copy button tooltip                |
-| `portalTarget`, `launcherButtonRef`                                                                                    | handle portal and focus-return directly in your app                                          |
-
-#### 4. Move body content to `children`
-
-The biggest structural change is that all modal body content becomes
-**`children`** instead of individual props. This gives you complete control.
+Replace the package import with a relative import pointing to your copied files:
 
 **Before:**
 
-```tsx
-<APIKeyModal
-  open={open}
-  onClose={() => setOpen(false)}
-  onRequestGenerate={handleGenerate}
-  generateTitle="Generate API key"
-  generateButtonText="Generate"
-  closeButtonText="Close"
-  nameRequired
-  nameLabel="Name your application"
-  namePlaceholder="Application name"
-  nameHelperText="Providing the name will help you identify your API key later."
-  loading={loading}
-  loadingText="Generating..."
-  apiKey={apiKey}
-  apiKeyLoaded={!!apiKey}
-  hasAPIKeyVisibilityToggle
-  apiKeyLabel="Unique API key"
-  showAPIKeyLabel="Show key"
-  hideAPIKeyLabel="Hide key"
-  helperText="This is your unique API key and is non-recoverable."
-  hasDownloadLink
-  downloadBodyText="Non-recoverable. Download to save."
-  downloadFileName="apikey"
-  downloadFileType="json"
-  downloadLinkText="Download as JSON"
-  generateSuccessMessage="API key successfully created"
-  error={error}
-  errorText="Failed to generate. Please try again."
-/>
+```jsx
+import { SomePrebuiltPattern } from '@carbon/ibm-products';
 ```
 
 **After:**
 
-```tsx
+```jsx
+import { SomePattern } from './patterns/SomePattern/SomePattern';
+```
+
+### Step 5 — Replace props with composed children
+
+The biggest shift is that the pattern's **internal content is no longer driven
+by props** — you render it directly as JSX `children`. Concretely:
+
+- Input fields controlled by `nameLabel` / `namePlaceholder` / `nameRequired` →
+  render your own `<TextInput>` inside `children`
+- Error/success messages controlled by `errorText` / `generateSuccessMessage` →
+  render `<ErrorFilled>` / `<CheckmarkFilled>` + `<p>` inside `children` based
+  on local state
+- A download link controlled by `hasDownloadLink` + several download props →
+  render `<APIKeyDownloader>` directly inside `children`
+- Loading state controlled by a `loading` boolean → render `<InlineLoading>`
+  inside `children`; gate the submit button via `primaryButtonDisabled`
+
+Each pattern's own migration guide maps every old prop to its replacement.
+
+### Step 6 — Test your implementation
+
+- ✅ Pattern opens and closes correctly
+- ✅ Primary action (generate / submit / copy / save) fires correctly
+- ✅ Loading and success states display as expected
+- ✅ Error states display and recover correctly
+- ✅ Pattern resets properly when closed and re-opened
+- ✅ Accessibility: focus moves to the correct element on open and close
+
+### Step 7 — Customize (optional)
+
+Because you own the code, any customization is a direct edit:
+
+```jsx
+// Change validation logic freely
+const isSubmitDisabled =
+  loading || !requiredField || someProductSpecificCheck();
+
+// Add extra fields, swap components, restructure the layout — no prop workarounds needed
+```
+
+---
+
+## Example: `APIKeyModal` → `GenerateAnAPIKey`
+
+> Full prop-by-prop reference is in the
+> [Generate an API key pattern documentation](?path=/docs/patterns-generate-an-api-key--overview).
+
+### What changed
+
+|                     | `APIKeyModal`                                                    | `GenerateAnAPIKey` pattern                                                    |
+| ------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **Import**          | `@carbon/ibm-products`                                           | Your copied `./patterns/GenerateAnAPIKey/GenerateAnAPIKey`                    |
+| **Close handler**   | `onClose`                                                        | `onRequestClose`                                                              |
+| **Title**           | `generateTitle`                                                  | `modalHeading`                                                                |
+| **Generate button** | `generateButtonText`                                             | `primaryButtonText`                                                           |
+| **Close button**    | `closeButtonText`                                                | `secondaryButtonText`                                                         |
+| **Loading**         | `loading` boolean + `loadingText`                                | `loadingStatus` (`'inactive'`/`'active'`/`'finished'`) + `loadingDescription` |
+| **Name field**      | `nameRequired`, `nameLabel`, `nameHelperText`, `namePlaceholder` | `<TextInput>` rendered in `children`                                          |
+| **Key display**     | `apiKeyLabel`, `hasAPIKeyVisibilityToggle`, `helperText`         | `<PasswordInput>` rendered in `children`                                      |
+| **Success message** | `generateSuccessMessage`                                         | `<p>` rendered in `children` when key is set                                  |
+| **Error message**   | `error`, `errorText`                                             | `<ErrorFilled>` + `<p>` rendered in `children`                                |
+| **Download link**   | `hasDownloadLink` + 5 props                                      | `<APIKeyDownloader>` rendered in `children`                                   |
+| **Edit mode**       | `editing`, `editButtonText`, `editSuccess`, `editSuccessMessage` | Same component; render edit `children` + use `primaryButtonText="Save"`       |
+| **Multi-step**      | `customSteps` array                                              | `customSteps` array — **shape unchanged**                                     |
+
+### Generate flow — before and after
+
+**Before — `APIKeyModal`:**
+
+```jsx
+import { APIKeyModal } from '@carbon/ibm-products';
+
+const [open, setOpen] = useState(false);
+const [loading, setLoading] = useState(false);
+const [apiKey, setApiKey] = useState('');
+
+<APIKeyModal
+  open={open}
+  onClose={() => {
+    setApiKey('');
+    setLoading(false);
+    setOpen(false);
+  }}
+  generateTitle="Generate an API key"
+  modalLabel="API keys"
+  generateButtonText="Generate API key"
+  copyButtonText="Copy"
+  copyIconDescription="Copy to clipboard"
+  closeButtonText="Close"
+  nameRequired
+  nameLabel="Name your application"
+  namePlaceholder="Application name"
+  nameHelperText="This name will help you identify your API key later."
+  loading={loading}
+  loadingText="Generating..."
+  apiKey={apiKey}
+  apiKeyLabel="Unique API key"
+  hasAPIKeyVisibilityToggle
+  helperText="This is your unique API key and is non-recoverable."
+  showAPIKeyLabel="Show key"
+  hideAPIKeyLabel="Hide key"
+  generateSuccessMessage="API key successfully created"
+  hasDownloadLink
+  downloadBodyText="Download your API key."
+  downloadFileName="apikey"
+  downloadFileType="json"
+  downloadLinkText="Download as JSON"
+  downloadLinkLabel="Download API Key as JSON"
+  onRequestGenerate={async (name) => {
+    setLoading(true);
+    const key = await myAPI.generate(name);
+    setApiKey(key);
+    setLoading(false);
+  }}
+/>;
+```
+
+**After — `GenerateAnAPIKey` pattern:**
+
+```jsx
+import { GenerateAnAPIKey } from './patterns/GenerateAnAPIKey/GenerateAnAPIKey';
+import { APIKeyDownloader } from './patterns/GenerateAnAPIKey/APIKeyDownloader';
+import { PasswordInput, TextInput, InlineLoading } from '@carbon/react';
+import { InformationFilled, CheckmarkFilled } from '@carbon/react/icons';
+
+const [open, setOpen] = useState(false);
+const [loading, setLoading] = useState(false);
+const [apiKey, setApiKey] = useState('');
+const [name, setName] = useState('');
+const blockClass = 'apikey-modal-pattern';
+
+const handleClose = () => {
+  setApiKey('');
+  setName('');
+  setLoading(false);
+  setOpen(false);
+};
+
+// Props switch once the key arrives
+const modalProps = apiKey
+  ? {
+      modalHeading: 'Generate an API key',
+      primaryButtonText: 'Copy',
+      onRequestSubmit: () => navigator.clipboard.writeText(apiKey),
+      apiKeyLoaded: true,
+      apiKey,
+      copyIconDescription: 'Copy to clipboard',
+    }
+  : {
+      modalHeading: 'Generate an API key',
+      primaryButtonText: 'Generate API key',
+      onRequestSubmit: async () => {
+        setLoading(true);
+        setApiKey(await myAPI.generate(name));
+        setLoading(false);
+      },
+      apiKeyLoaded: false,
+    };
+
 <GenerateAnAPIKey
   open={open}
-  onRequestClose={() => setOpen(false)}
-  onRequestSubmit={handleGenerate}
-  modalHeading="Generate API key"
-  primaryButtonText="Generate"
+  onRequestClose={handleClose}
+  modalLabel="API keys"
   secondaryButtonText="Close"
-  primaryButtonDisabled={loading || name.length === 0}
-  loadingStatus={loading ? 'active' : 'inactive'}
+  primaryButtonDisabled={loading || (!apiKey && name.length === 0)}
   loadingDescription="Generating..."
-  apiKey={apiKey}
-  apiKeyLoaded={!!apiKey}
+  {...modalProps}
 >
   {apiKey ? (
     <>
@@ -205,37 +397,37 @@ The biggest structural change is that all modal body content becomes
         tooltipPosition="left"
         helperText="This is your unique API key and is non-recoverable."
       />
-      <div className="apikey-modal-pattern__messaging">
+      <div className={`${blockClass}__messaging`}>
         <InformationFilled size={16} />
         <APIKeyDownloader
           apiKey={apiKey}
-          body="Non-recoverable. Download to save."
+          body="Download your API key."
           fileName="apikey"
           fileType="json"
           linkText="Download as JSON"
+          downloadLinkLabel="Download API Key as JSON"
         />
       </div>
-      <div className="apikey-modal-pattern__messaging">
+      <div className={`${blockClass}__messaging`}>
         <CheckmarkFilled
           size={16}
-          className="apikey-modal-pattern__checkmark-icon"
+          className={`${blockClass}__checkmark-icon`}
         />
-        <p role="alert" aria-live="assertive">
+        <p
+          className={`${blockClass}__messaging-text`}
+          role="alert"
+          aria-live="assertive"
+        >
           API key successfully created
         </p>
       </div>
     </>
   ) : (
     <>
-      {error && (
-        <div className="apikey-modal-pattern__messaging">
-          <ErrorFilled size={16} />
-          <p role="alert" aria-live="assertive">
-            Failed to generate. Please try again.
-          </p>
-        </div>
-      )}
-      <p style={{ marginBlockEnd: '1rem' }}>Optional description text.</p>
+      <p style={{ marginBlockEnd: '1rem' }}>
+        To connect securely to [product name], your application needs an API
+        key.
+      </p>
       <TextInput
         id="app-name"
         labelText="Name your application"
@@ -243,66 +435,344 @@ The biggest structural change is that all modal body content becomes
         value={name}
         onChange={(e) => setName(e.target.value)}
         disabled={loading}
-        helperText="Providing the name will help you identify your API key later."
+        helperText="This name will help you identify your API key later."
+        data-modal-primary-focus
       />
+      {loading && (
+        <InlineLoading
+          description="Generating..."
+          className={`${blockClass}__loader`}
+        />
+      )}
     </>
   )}
-</GenerateAnAPIKey>
+</GenerateAnAPIKey>;
 ```
 
-#### 5. Remove the library import
+### Edit flow — before and after
 
-Remove the now-unused import:
+**Before — `APIKeyModal`:**
 
-```tsx
-// Delete this line:
-import { APIKeyModal } from '@carbon/ibm-products';
+```jsx
+<APIKeyModal
+  open={open}
+  onClose={() => setOpen(false)}
+  generateTitle="Save an API key"
+  editButtonText="Save API key"
+  closeButtonText="Close"
+  editing
+  apiKeyName={currentKeyName}
+  nameRequired
+  nameLabel="Name your application"
+  loading={loading}
+  loadingText="Saving..."
+  editSuccess={success}
+  editSuccessMessage="API key successfully saved"
+  onRequestEdit={async (name) => {
+    setLoading(true);
+    await myAPI.edit(name);
+    setLoading(false);
+    setSuccess(true);
+  }}
+/>
 ```
 
-If `APIKeyModal` was your **only** import from `@carbon/ibm-products`, you can
-also remove the package dependency entirely:
+**After — `GenerateAnAPIKey` pattern:**
 
-```bash
-# npm
-npm uninstall @carbon/ibm-products
+```jsx
+// There is no `editing` prop — edit is the same component with different children.
+const [name, setName] = useState(currentKeyName);
+const [success, setSuccess] = useState(false);
 
-# yarn
-yarn remove @carbon/ibm-products
+<GenerateAnAPIKey
+  open={open}
+  onRequestClose={() => {
+    setName(currentKeyName);
+    setSuccess(false);
+    setOpen(false);
+  }}
+  onRequestSubmit={async () => {
+    setLoading(true);
+    await myAPI.edit(name);
+    setLoading(false);
+    setSuccess(true);
+  }}
+  modalHeading="Save an API key"
+  primaryButtonText="Save API key"
+  secondaryButtonText="Close"
+  primaryButtonDisabled={loading || name.length === 0}
+  loadingStatus={success ? 'finished' : loading ? 'active' : 'inactive'}
+  loadingDescription="Saving..."
+>
+  <TextInput
+    id="edit-app-name"
+    labelText="Name your application"
+    value={name}
+    onChange={(e) => {
+      setSuccess(false);
+      setName(e.target.value);
+    }}
+    disabled={loading}
+    data-modal-primary-focus
+  />
+  {loading && <InlineLoading description="Saving..." />}
+  {success && (
+    <div className={`${blockClass}__messaging`}>
+      <CheckmarkFilled size={20} className={`${blockClass}__checkmark-icon`} />
+      <p
+        className={`${blockClass}__messaging-text`}
+        role="alert"
+        aria-live="assertive"
+      >
+        API key successfully saved
+      </p>
+    </div>
+  )}
+</GenerateAnAPIKey>;
 ```
-
-And remove it from `package.json` if it wasn't removed automatically:
-
-```json
-// package.json — remove this entry under "dependencies" or "devDependencies"
-"@carbon/ibm-products": "^x.x.x"
-```
-
-> Most teams will still use other components from `@carbon/ibm-products` and
-> should keep the dependency. Only remove it if `APIKeyModal` was genuinely the
-> sole import.
-
-#### 6. Verify behavior
-
-Key behaviors to verify after migration:
-
-- **Generate flow** — modal opens, name input validates, primary button triggers
-  `onRequestSubmit`, loading state shown, key rendered in `PasswordInput`
-- **Copy flow** — once `apiKeyLoaded` is `true` the primary button gains the
-  copy icon and calls `onCopy` / `navigator.clipboard`
-- **Download link** — `APIKeyDownloader` creates a Blob URL on mount; confirm
-  the downloaded file contains the key
-- **Multi-step** — if you used `customSteps`, verify that `Next` / `Previous`
-  buttons advance through steps and `valid` still gates the primary button
-- **Error state** — render `<ErrorFilled>` + message in `children` when an error
-  occurs
-- **Accessibility** — use `role="alert"` + `aria-live="assertive"` on dynamic
-  status messages (success, error) as shown above
 
 ---
 
-### A note on `preview-components`
+## Example: `CreateTearsheet` → `CreateTearsheet` pattern
 
-Inside the pattern's `example/` folder you will find two sub-directories:
+> Full prop-by-prop reference is in the
+> [CreateTearsheet pattern documentation](?path=/docs/patterns-create-flows-createtearsheet--overview).
+
+### What changed
+
+|                                 | `CreateTearsheet` (old)                                                    | `CreateTearsheet` pattern                                                                                  |
+| ------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Import**                      | `@carbon/ibm-products`                                                     | Your copied `./patterns/CreateTearsheet/CreateTearsheet`                                                   |
+| **Required wrapper**            | None                                                                       | `<StepProvider>` from `@carbon/utilities-react`                                                            |
+| **Open state setter**           | Not needed                                                                 | `setOpen` prop required (to close after submit)                                                            |
+| **Step state / form state**     | Managed internally                                                         | `useStepContext()` hook from `@carbon/utilities-react`                                                     |
+| **Validation per step**         | `disableSubmit` on `<CreateTearsheetStep>`                                 | `handleNextDisabledState(formState, currentStep)` callback on `<CreateTearsheet>`                          |
+| **Next-step async hook**        | `onNext` on `<CreateTearsheetStep>`                                        | `onNext({ currentStep, totalSteps, formState })` on `<CreateTearsheet>`                                    |
+| **Button labels**               | `backButtonText`, `cancelButtonText`, `nextButtonText`, `submitButtonText` | **Unchanged**                                                                                              |
+| **Influencer**                  | Always vertical `CreateInfluencer`                                         | `progressIndicator='vertical'` (default) or `'horizontal'`; fully overridable via `influencer` render prop |
+| **Progress indicator**          | Auto-built from step `title`                                               | Auto-built from step `label` / `title`; hidden per step via `hideSteps`                                    |
+| **Intro step**                  | `introStep` prop on step                                                   | `hideSteps` prop on step (hides it from progress indicator)                                                |
+| **Dynamic / conditional steps** | `shouldIncludeStep` on step                                                | `includeStep` on step — **renamed**                                                                        |
+| **Error state**                 | `hasError` on `<CreateTearsheet>`                                          | `hasError` on `<CreateTearsheet>` — **unchanged**                                                          |
+| **Step secondary label**        | `secondaryLabel` on step                                                   | `secondaryLabel` on step — **unchanged**                                                                   |
+
+### Multi-step flow — before and after
+
+**Before — `CreateTearsheet` (old component):**
+
+```jsx
+import { CreateTearsheet, CreateTearsheetStep } from '@carbon/ibm-products';
+
+const [open, setOpen] = useState(false);
+
+<CreateTearsheet
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Create topic"
+  description="Create a Kafka topic."
+  label="Topics"
+  backButtonText="Back"
+  cancelButtonText="Cancel"
+  nextButtonText="Next"
+  submitButtonText="Create"
+  onRequestSubmit={async () => {
+    await myAPI.create(formData);
+    setOpen(false);
+  }}
+  hasError={hasSubmitError}
+>
+  <CreateTearsheetStep
+    title="Topic name"
+    subtitle="This is the unique name used to recognize your topic"
+    fieldsetLegendText="Topic information"
+    disableSubmit={!topicName}
+  >
+    <TextInput
+      id="topic-name"
+      labelText="Topic name"
+      value={topicName}
+      onChange={(e) => setTopicName(e.target.value)}
+    />
+  </CreateTearsheetStep>
+
+  <CreateTearsheetStep
+    title="Partitions"
+    fieldsetLegendText="Partition information"
+  >
+    <NumberInput
+      id="partitions"
+      value={partitions}
+      min={1}
+      max={100}
+      onChange={(e) => setPartitions(e.imaginaryTarget.value)}
+    />
+  </CreateTearsheetStep>
+</CreateTearsheet>;
+```
+
+**After — `CreateTearsheet` pattern:**
+
+```jsx
+import { CreateTearsheet } from './patterns/CreateTearsheet/CreateTearsheet';
+import { CreateTearsheetStep } from './patterns/CreateTearsheet/CreateTearsheetStep';
+import { StepProvider, useStepContext } from '@carbon/utilities-react';
+
+// Form state now lives in StepProvider's context — read/write with useStepContext()
+const TopicNameStep = () => {
+  const { formState, setFormState } = useStepContext();
+  return (
+    <CreateTearsheetStep
+      title="Topic name"
+      subtitle="This is the unique name used to recognize your topic"
+      fieldsetLegendText="Topic information"
+      // validation is handled at the container level via handleNextDisabledState
+    >
+      <TextInput
+        id="topic-name"
+        labelText="Topic name"
+        value={formState?.topicName || ''}
+        onChange={(e) => setFormState((prev) => ({ ...prev, topicName: e.target.value }))}
+      />
+    </CreateTearsheetStep>
+  );
+};
+
+const PartitionsStep = () => {
+  const { formState, setFormState } = useStepContext();
+  return (
+    <CreateTearsheetStep title="Partitions" fieldsetLegendText="Partition information">
+      <NumberInput
+        id="partitions"
+        value={formState?.partitions ?? 1}
+        min={1}
+        max={100}
+        onChange={(e) => setFormState((prev) => ({ ...prev, partitions: e.imaginaryTarget.value }))}
+      />
+    </CreateTearsheetStep>
+  );
+};
+
+// ─── Parent component ────────────────────────────────────────────────────────
+const [open, setOpen] = useState(false);
+
+// Validation callback receives shared formState and current step index
+const handleNextDisabledState = (formState, currentStep) => {
+  if (currentStep === 1 && !formState?.topicName) return true;
+  return false;
+};
+
+<StepProvider>                           {/* ← new required wrapper */}
+  <CreateTearsheet
+    open={open}
+    setOpen={setOpen}                    {/* ← new: required to close on submit */}
+    onClose={() => setOpen(false)}
+    title="Create topic"
+    description="Create a Kafka topic."
+    label="Topics"
+    backButtonText="Back"
+    cancelButtonText="Cancel"
+    nextButtonText="Next"
+    submitButtonText="Create"
+    onRequestSubmit={async () => {
+      await myAPI.create(formState);
+      // returning nothing causes the tearsheet to close automatically
+    }}
+    hasError={hasSubmitError}
+    handleNextDisabledState={handleNextDisabledState}
+  >
+    <TopicNameStep />
+    <PartitionsStep />
+  </CreateTearsheet>
+</StepProvider>
+```
+
+### Intro step (hideSteps) — before and after
+
+An intro step is a step that is excluded from the progress indicator but still
+participates in navigation.
+
+**Before:**
+
+```jsx
+<CreateTearsheetStep
+  title="Select a category"
+  introStep // ← old prop
+>
+  <TileGroup>{/* category tiles */}</TileGroup>
+</CreateTearsheetStep>
+```
+
+**After:**
+
+```jsx
+<CreateTearsheetStep
+  title="Select a category"
+  hideSteps // ← renamed
+  hasFieldset={false}
+>
+  <TileGroup>{/* category tiles */}</TileGroup>
+</CreateTearsheetStep>
+```
+
+### Conditional / dynamic step — before and after
+
+**Before:**
+
+```jsx
+<CreateTearsheetStep
+  title="Advanced options"
+  shouldIncludeStep={showAdvanced} // ← old prop
+>
+  {/* fields */}
+</CreateTearsheetStep>
+```
+
+**After:**
+
+```jsx
+<CreateTearsheetStep
+  title="Advanced options"
+  includeStep={showAdvanced} // ← renamed
+>
+  {/* fields */}
+</CreateTearsheetStep>
+```
+
+### Reading form state across steps
+
+The new pattern exposes a shared `formState` object via `useStepContext()`. Read
+from it in any step component and write to it with the `setFormState` updater:
+
+```jsx
+import { useStepContext } from '@carbon/utilities-react';
+
+const MyStep = () => {
+  const { formState, setFormState } = useStepContext();
+
+  return (
+    <CreateTearsheetStep title="Details">
+      <TextInput
+        id="name"
+        labelText="Name"
+        value={formState?.name || ''}
+        onChange={(e) =>
+          setFormState((prev) => ({ ...prev, name: e.target.value }))
+        }
+      />
+    </CreateTearsheetStep>
+  );
+};
+```
+
+Access `formState` in the `onRequestSubmit` handler via closure or by lifting it
+out of `useStepContext()` at the parent level (since the parent is also inside
+`<StepProvider>`).
+
+---
+
+## A note on `preview-components`
+
+Inside each pattern's `example/` folder you will find two sub-directories:
 
 ```
 example/
@@ -310,19 +780,63 @@ example/
 └── preview-components/  ← do NOT copy these
 ```
 
-`preview-components/` exist **purely for Storybook**. Each file (e.g.
-[`Generate.tsx`](../../../packages/ibm-products/src/patterns/GenerateAnAPIKey/example/preview-components/Generate.tsx),
-`Edit.tsx`, `GenerateWithError.tsx`, …) is a self-contained demo wrapper that
-wires up local state, simulates an async API call, and renders a trigger
-`<Button>` so the story can be interactive in isolation.
+`preview-components/` exist **purely for Storybook**. Each file is a
+self-contained demo wrapper that wires up local state, simulates an async API
+call, and renders a trigger `<Button>` so the story can be interactive in
+isolation.
 
 They were written specifically to achieve **visual and functional parity** with
-the deprecated `APIKeyModal` stories — every story variant that existed on the
-old component (`Generate`, `Generate With Error`, `Instant generate`,
-`Custom Generate`, `Edit`, `Edit With Error`, `Custom Edit`) has a matching
-preview component in the pattern, so reviewers can compare the two side-by-side
-during migration.
+the deprecated prebuilt pattern stories — every story variant that existed on
+the old component has a matching preview component in the pattern, so reviewers
+can compare the two side-by-side during migration.
 
 **Do not copy `preview-components/` into your application.** They are demo
-scaffolding, not production code. The file you want is in `components/` —
-`GenerateAnAPIKey.tsx` and `APIKeyDownloader.tsx`.
+scaffolding, not production code. The files you want are in `components/`.
+
+---
+
+## FAQ
+
+**Q: Why not just add more props to the component?**
+
+Complex components with many props become difficult to maintain and use.
+Patterns give you the flexibility to modify the code directly, without prop
+drilling or waiting for the library to support your edge case.
+
+**Q: Will I get updates to the pattern?**
+
+Pattern updates are published as new versions of the documentation and
+StackBlitz examples. You can choose to adopt updates by copying the new code —
+but you are never forced to.
+
+**Q: Can I still use the old component?**
+
+Yes, until v3.0.0 (approximately 6 months of parallel support after the
+deprecation release). After that the component will be removed from the package.
+
+**Q: What about TypeScript support?**
+
+All pattern files are written in TypeScript (`.tsx`). Copy them as-is for full
+type safety.
+
+**Q: Will other components become patterns?**
+
+We are evaluating other complex components (e.g. `EditTearsheet`,
+`EditSidePanel`) for pattern migration. We will announce each migration
+separately with plenty of notice.
+
+**Q: How do I know if a component is being deprecated?**
+
+Check the component's Storybook story for a deprecation banner, or watch for
+announcements in Slack (`#ibmproducts-pal-dev`) and GitHub Discussions.
+
+---
+
+## Support and resources
+
+| Resource              | Link                                                                                      |
+| --------------------- | ----------------------------------------------------------------------------------------- |
+| Pattern documentation | [website](https://ibm-products.carbondesignsystem.com/patterns/overview/patterns/)        |
+| GitHub source         | [carbon-design-system/ibm-products](https://github.com/carbon-design-system/ibm-products) |
+| GitHub issues         | [Open an issue](https://github.com/carbon-design-system/ibm-products/issues)              |
+| Slack                 | `#ibmproducts-pal-dev`                                                                    |

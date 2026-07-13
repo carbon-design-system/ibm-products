@@ -11,6 +11,11 @@
 @use '@carbon/styles/scss/themes' as themes;
 @use '@carbon/styles/scss/type';
 
+.docs-story main {
+  /* stylelint-disable-next-line declaration-no-important */
+  background-color: theme.$background !important;
+}
+
 $block-class: #{c4p-settings.$pkg-prefix}--coachmark__next;
 
 // BUBBLE - content styling

@@ -142,9 +142,6 @@ const renderTemplate = (args) => {
   });
 
   return html`
-    <style>
-      ${styles}
-    </style>
     <div class="example">
       <cds-slider
         id="dimension-slider"
@@ -204,6 +201,14 @@ export const WithButtons = {
 
 const meta = {
   title: 'Utilities/overflowHandler',
+  decorators: [
+    (story: any) => html`
+      <style>
+        ${styles}
+      </style>
+      ${story()}
+    `,
+  ],
 };
 
 export default meta;

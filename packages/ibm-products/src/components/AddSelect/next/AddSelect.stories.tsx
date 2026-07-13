@@ -653,6 +653,7 @@ const AddSelectRowStory = (args) => {
               onItemPanelClick={() => setItemPanelOpen(true)}
               itemPanelOpen={args.hasItemPanel && itemPanelOpen}
               icon={args.showIcon ? <Document size={24} /> : undefined}
+              skeleton={args.skeleton}
               rowContent={
                 args.useRowContent ? (
                   <div
@@ -698,6 +699,7 @@ export const AddSelectRow = {
     hasItemPanel: false,
     itemPanelOpen: false,
     disabled: false,
+    skeleton: false,
   },
   argTypes: {
     multi: {
@@ -738,6 +740,11 @@ export const AddSelectRow = {
     disabled: {
       control: 'boolean',
       description: 'Disable the example row',
+    },
+    skeleton: {
+      control: 'boolean',
+      description:
+        'Render the row as a skeleton (loading state) with placeholder content',
     },
     itemId: {
       control: 'text',

@@ -15,8 +15,6 @@ import LinkTo from '@storybook/addon-links/react';
 - [Example: `APIKeyModal` → `GenerateAnAPIKey`](#example-apikeymodal--generateanapikey)
 - [Example: `CreateTearsheet` → `CreateTearsheet` pattern](#example-createtearsheet--createtearsheet-pattern)
 - [A note on `preview-components`](#a-note-on-preview-components)
-- [FAQ](#faq)
-- [Support and resources](#support-and-resources)
 
 ---
 
@@ -800,49 +798,3 @@ can compare the two side-by-side during migration.
 scaffolding, not production code. The files you want are in `components/`.
 
 ---
-
-## FAQ
-
-**Q: Why not just add more props to the component?**
-
-Complex components with many props become difficult to maintain and use.
-Patterns give you the flexibility to modify the code directly, without prop
-drilling or waiting for the library to support your edge case.
-
-**Q: Will I get updates to the pattern?**
-
-Pattern updates are published as new versions of the documentation and
-StackBlitz examples. You can choose to adopt updates by copying the new code —
-but you are never forced to.
-
-**Q: Can I still use the old component?**
-
-Yes, until v3.0.0 (approximately 6 months of parallel support after the
-deprecation release). After that the component will be removed from the package.
-
-**Q: What about TypeScript support?**
-
-All pattern files are written in TypeScript (`.tsx`). Copy them as-is for full
-type safety.
-
-**Q: Will other components become patterns?**
-
-We are evaluating other complex components (e.g. `EditTearsheet`,
-`EditSidePanel`) for pattern migration. We will announce each migration
-separately with plenty of notice.
-
-**Q: How do I know if a component is being deprecated?**
-
-Check the component's Storybook story for a deprecation banner, or watch for
-announcements in Slack (`#ibmproducts-pal-dev`) and GitHub Discussions.
-
----
-
-## Support and resources
-
-| Resource              | Link                                                                                        |
-| --------------------- | ------------------------------------------------------------------------------------------- |
-| Pattern documentation | [website](<(https://pages.github.ibm.com/carbon/ibm-products/patterns/overview/patterns/)>) |
-| GitHub source         | [carbon-design-system/ibm-products](https://github.com/carbon-design-system/ibm-products)   |
-| GitHub issues         | [Open an issue](https://github.com/carbon-design-system/ibm-products/issues)                |
-| Slack                 | `#ibmproducts-pal-dev`                                                                      |

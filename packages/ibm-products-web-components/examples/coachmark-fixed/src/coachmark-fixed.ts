@@ -14,8 +14,6 @@ import '@carbon/web-components/es/components/button/button.js';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import '@carbon/web-components/es/components/link/index.js';
 import styles from './styles.scss?lit';
-//import '../../../src/components/coachmark/index.js';
-//import '../../../src/components/coachmark/coachmark-tagline/index.js';
 import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
 import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js'; 
 
@@ -38,13 +36,13 @@ const items = [
     id: 1,
     title: 'Hello World',
     text: 'Link opens in new tab.',
-    button: html`<cds-link href="https://www.ibm.com" target="_blank">Learn more</cds-link>`
+    button: html`<div style="margin: 16px 0 0 0"><cds-link href="https://www.ibm.com" target="_blank">Learn more</cds-link></div>`
   },
   {
     id: 2,
     title: 'Hello World',
     text: 'Link opens on this page.',
-    button: html`<cds-link href="https://www.ibm.com">Learn more</cds-link>`
+    button: html`<div style="margin: 16px 0 0 0"><cds-link href="https://www.ibm.com">Learn more</cds-link></div>`
   },
 ];
 
@@ -79,9 +77,6 @@ export class CoachmarkFixedExample extends LitElement {
     this._currentViewIndex = currentIndex;
     this._lastViewIndex = lastIndex;
     
-    // Update inert attributes after view change
-    this.updateAriaHiddenTabIndex(currentIndex);
-    
     // Focus the appropriate button after carousel navigation
     setTimeout(() => {
       if (currentIndex === lastIndex) {
@@ -96,31 +91,7 @@ export class CoachmarkFixedExample extends LitElement {
     }, 10);
   };
 
-  private updateAriaHiddenTabIndex = (itemNumber: number) => {
-    const allViews = this.carouselAPI?.allViews;
-
-    allViews &&
-      Object.values(allViews)?.forEach((item, idx) => {
-        const isActive = idx === itemNumber;
-
-        if (item) {
-          // Set aria-hidden based on active state
-          item.setAttribute('aria-hidden', String(!isActive));
-
-          if (!isActive) {
-            item.setAttribute('inert', ''); // Disable interactivity
-          } else {
-            item.removeAttribute('inert'); // Re-enable interactivity
-          }
-
-          item.removeAttribute('tabindex');
-        }
-      });
-  };
-
   private handleNext() {
-    console.log("next");
-    
     this.carouselAPI?.next();
   }
 
@@ -129,9 +100,19 @@ export class CoachmarkFixedExample extends LitElement {
   }
 
   private handleClose() {
-    this._open = false;
-    this.carouselAPI?.reset();
+    // Reset carousel if it exists - do NOT destroy it, just reset
+    if (this.carouselAPI && this.carouselAPI.reset) {
+      this.carouselAPI.reset();
+    }
+    
+    // Reset view indices after carousel reset
     this._currentViewIndex = 0;
+    this._lastViewIndex = items.length - 1;
+    
+    this._open = false;
+    
+    // Force a re-render to ensure button visibility is updated
+    this.requestUpdate();
   }
 
   private handleBeaconClick() {
@@ -144,15 +125,14 @@ export class CoachmarkFixedExample extends LitElement {
       const carouselContainer = this.shadowRoot?.querySelector('.exampleCarouselWrapper') as HTMLElement;
 
       if (carouselContainer && !this.carouselAPI) {
+        // Reset view indices when initializing carousel
+        this._currentViewIndex = 0;
+        this._lastViewIndex = items.length - 1;
+        
         this.carouselAPI = initCarousel(carouselContainer, {
           onViewChangeEnd: this.onViewChangeEnd,
           excludeSwipeSupport: true,
         });
-        
-        // Set initial inert state for inactive slides
-        setTimeout(() => {
-          this.updateAriaHiddenTabIndex(0);
-        }, 50);
       }
     }, 100);
     
@@ -197,8 +177,7 @@ export class CoachmarkFixedExample extends LitElement {
           });
         }
         
-        // When coachmark opens, initialize tabIndex and focus Next button
-        this.updateAriaHiddenTabIndex(0);
+        // When coachmark opens, focus Next button
         setTimeout(() => {
           const nextBtn = this.shadowRoot?.querySelector('.next-btn') as HTMLElement;
           nextBtn?.focus();

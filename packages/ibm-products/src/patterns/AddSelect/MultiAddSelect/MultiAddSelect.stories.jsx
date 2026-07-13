@@ -13,6 +13,11 @@ import { MultiAddSelectWithHierarchyPreview } from '../example/preview-component
 import { MultiAddSelectWithModifiers } from '../example/preview-components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
 import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
 import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
+import { MultiSelectWithBulkActionsPreview } from '../example/preview-components/MultiSelectWithBulkActions/MultiSelectWithBulkActions';
+import { MultiAddSelectWithGlobalActionsPreview } from '../example/preview-components/MultiAddSelectWithGlobalActions/MultiAddSelectWithGlobalActions';
+import { MultiAddSelectWithColumnActionsPreview } from '../example/preview-components/MultiAddSelectWithColumnActions/MultiAddSelectWithColumnActions';
+import { MultiSelectWithScrollPreview } from '../example/preview-components/MultiSelectWithScroll/MultiSelectWithScroll';
+import { MultiAddSelectWithDataTablePreview } from '../example/preview-components/MultiAddSelectWithDataTable/MultiAddSelectWithDataTable';
 
 export default {
   title: 'Patterns/Add and select/MultiAddSelect',
@@ -58,9 +63,36 @@ export const Overview = {
           <strong>Non-Hierarchical with Peek Inside Item</strong> -
           Multi-selection with the ability to peek inside items to view their
           contents in a middle panel
+        </li>
+        <li>
           <strong>With Hierarchy (No Select All)</strong> - Multi-selection with
           hierarchical navigation but without column-level select-all
           checkboxes. Only individual items can be selected.
+        </li>
+        <li>
+          <strong>With Modifiers and Bulk Actions</strong> - Multi-selection
+          with role modifiers and bulk action support for editing or removing
+          multiple selected items at once.
+        </li>
+        <li>
+          <strong>With Global Actions</strong> - Multi-selection with
+          hierarchical navigation and global search, filter, and sort
+          capabilities across all columns.
+        </li>
+        <li>
+          <strong>With Column Actions</strong> - Multi-selection with
+          hierarchical navigation and column-level filter and sort capabilities,
+          without global actions.
+        </li>
+        <li>
+          <strong>With Scroll (progressive loading)</strong> - Multi-selection
+          from large datasets that load progressively as the user scrolls.
+          Includes skeleton loading rows and a scroll hint at the bottom.
+        </li>
+        <li>
+          <strong>With DataTable</strong> - Multi-selection using a Carbon
+          DataTable with checkboxes, suited for items with multiple attributes
+          displayed in columnar form.
         </li>
       </ul>
       <h2>Component structure</h2>
@@ -96,8 +128,39 @@ export const NonHierarchicalWithPeekInsideItem = {
 
 NonHierarchicalWithPeekInsideItem.storyName =
   'Non-Hierarchical with Peek Inside Item';
+
 export const WithHierarchyNoSelectAll = {
   render: () => <MultiAddSelectWithHierarchyNoSelectAllPreview />,
 };
 
 WithHierarchyNoSelectAll.storyName = 'With Hierarchy (No Select All)';
+
+export const WithModifiersAndBulkActions = {
+  render: () => <MultiSelectWithBulkActionsPreview />,
+};
+
+WithModifiersAndBulkActions.storyName = 'With Modifiers and Bulk Actions';
+
+export const WithGlobalActions = {
+  render: () => <MultiAddSelectWithGlobalActionsPreview />,
+};
+
+WithGlobalActions.storyName = 'With Global Actions';
+
+export const WithColumnActions = {
+  render: () => <MultiAddSelectWithColumnActionsPreview />,
+};
+
+WithColumnActions.storyName = 'With Column Actions';
+
+export const WithScroll = {
+  render: () => <MultiSelectWithScrollPreview />,
+};
+
+WithScroll.storyName = 'With Scroll (progressive loading)';
+
+export const WithDataTable = {
+  render: () => <MultiAddSelectWithDataTablePreview />,
+};
+
+WithDataTable.storyName = 'With DataTable';

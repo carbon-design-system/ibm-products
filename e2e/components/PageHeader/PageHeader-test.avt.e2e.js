@@ -289,7 +289,8 @@ test.describe('PageHeader @avt', () => {
     );
 
     // renders all buttons on large screens by default
-    await pressTabKey(page, 4);
+    // +1 for the deprecation notice link in the Annotation banner
+    await pressTabKey(page, 5);
     await expect(page.getByRole('tooltip').getByText('Action 1')).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(page.getByRole('tooltip').getByText('Action 2')).toBeVisible();

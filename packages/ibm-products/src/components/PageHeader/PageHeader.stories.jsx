@@ -368,30 +368,30 @@ export default {
   parameters: {
     styles,
     layout: 'fullscreen',
-    // docs: { page: mdx },
+    /* docs: { page: mdx } */
   },
   decorators: [
     (story, { args }) => (
-      <div
-        className={cx(`${storyClass}__viewport`, {
-          [`${storyClass}__viewport--scroll`]:
-            args?.storyOptionWholePageScroll ?? false,
-        })}
-        key={args?.storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version. Please migrate to {/* cspell:disable-next-line */}
+            <a href="/?path=/docs/preview-pageheader">preview_PageHeader</a>.
+          </div>
+        }
       >
-        <Annotation
-          type="deprecation-notice"
-          text={
-            <div>
-              This component is deprecated and will be removed in the next major
-              version. Please migrate to {/* cspell:disable-next-line */}
-              <a href="/?path=/docs/preview-pageheader">preview_PageHeader</a>.
-            </div>
-          }
+        <div
+          className={cx(`${storyClass}__viewport`, {
+            [`${storyClass}__viewport--scroll`]:
+              args?.storyOptionWholePageScroll ?? false,
+          })}
+          key={args?.storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
         >
           {story()}
-        </Annotation>
-      </div>
+        </div>
+      </Annotation>
     ),
   ],
   argTypes: {
@@ -709,21 +709,10 @@ const commonArgs = {
   expandHeaderIconDescription,
 };
 // Stories
-// Resolved mapping values for use in story args.
-// The argTypes mappings only apply in the interactive canvas; MDX docs pages
-// receive raw args so we must pass the actual values directly.
-const _actionBarItems = Object.values(actionBarItems);
-const _breadcrumbs = Object.values(breadcrumbs);
-const _children = Object.values(children);
-const _navigation = Object.values(navigation);
-const _pageActions = Object.values(pageActions);
-const _tags = Object.values(tags);
-const _title = Object.values(title);
-
 export const withTitle = Template.bind({});
 withTitle.storyName = 'Simple page header with page title';
 withTitle.args = {
-  title: _title[2],
+  title: 2,
   ...commonArgs,
 };
 
@@ -731,7 +720,7 @@ export const withBreadcrumbs = Template.bind({});
 withBreadcrumbs.storyName = 'Simple page header with breadcrumb';
 withBreadcrumbs.args = {
   ...withTitle.args,
-  breadcrumbs: _breadcrumbs[2],
+  breadcrumbs: 2,
   ...commonArgs,
 };
 
@@ -739,69 +728,69 @@ export const withButtons = Template.bind({});
 withButtons.storyName = 'Simple page header with status and actions';
 withButtons.args = {
   ...withBreadcrumbs.args,
-  pageActions: _pageActions[2],
-  children: _children[1],
+  pageActions: 2,
+  children: 1,
   ...commonArgs,
 };
 
 export const withTabs = Template.bind({});
 withTabs.storyName = 'Page header with navigation tabs';
 withTabs.args = {
-  title: _title[2],
-  breadcrumbs: _breadcrumbs[2],
-  pageActions: _pageActions[2],
-  navigation: _navigation[1],
+  title: 2,
+  breadcrumbs: 2,
+  pageActions: 2,
+  navigation: 1,
   ...commonArgs,
 };
 
 export const withTags = Template.bind({});
 withTags.storyName = 'Page header with tags';
 withTags.args = {
-  title: _title[2],
-  breadcrumbs: _breadcrumbs[2],
-  pageActions: _pageActions[2],
-  tags: _tags[1],
+  title: 2,
+  breadcrumbs: 2,
+  pageActions: 2,
+  tags: 1,
   ...commonArgs,
 };
 
 export const withTabsAndTags = Template.bind({});
 withTabsAndTags.storyName = 'Page header with tags and navigation tabs';
 withTabsAndTags.args = {
-  title: _title[2],
-  breadcrumbs: _breadcrumbs[2],
-  pageActions: _pageActions[2],
-  navigation: _navigation[1],
-  tags: _tags[1],
+  title: 2,
+  breadcrumbs: 2,
+  pageActions: 2,
+  navigation: 1,
+  tags: 1,
   ...commonArgs,
 };
 
 export const withSubtitle = Template.bind({});
 withSubtitle.storyName = 'Page header with title and subtitle';
 withSubtitle.args = {
-  title: _title[2],
+  title: 2,
   subtitle,
-  breadcrumbs: _breadcrumbs[2],
-  navigation: _navigation[1],
+  breadcrumbs: 2,
+  navigation: 1,
   ...commonArgs,
 };
 
 export const withSummaryDetails = Template.bind({});
 withSummaryDetails.storyName = 'Page header with summary details';
 withSummaryDetails.args = {
-  title: _title[2],
-  breadcrumbs: _breadcrumbs[2],
-  navigation: _navigation[1],
-  children: _children[2],
+  title: 2,
+  breadcrumbs: 2,
+  navigation: 1,
+  children: 2,
   ...commonArgs,
 };
 
 export const withActionsToolbar = Template.bind({});
 withActionsToolbar.storyName = 'Page header with actions toolbar';
 withActionsToolbar.args = {
-  title: _title[2],
-  breadcrumbs: _breadcrumbs[2],
-  navigation: _navigation[1],
-  actionBarItems: _actionBarItems[2],
+  title: 2,
+  breadcrumbs: 2,
+  navigation: 1,
+  actionBarItems: 2,
   ...commonArgs,
 };
 
@@ -809,9 +798,9 @@ export const withBreadcrumbActionsToolbarOnly = Template.bind({});
 withBreadcrumbActionsToolbarOnly.storyName =
   'Reduced page header with breadcrumb bar only';
 withBreadcrumbActionsToolbarOnly.args = {
-  title: _title[1],
-  breadcrumbs: _breadcrumbs[2],
-  actionBarItems: _actionBarItems[2],
+  title: 1,
+  breadcrumbs: 2,
+  actionBarItems: 2,
   collapseTitle: true,
   ...commonArgs,
 };
@@ -819,14 +808,14 @@ withBreadcrumbActionsToolbarOnly.args = {
 export const fullyLoaded = Template.bind({});
 fullyLoaded.storyName = 'Page header with all items, pre-collapsed';
 fullyLoaded.args = {
-  title: _title[2],
+  title: 2,
   subtitle,
-  breadcrumbs: _breadcrumbs[2],
-  pageActions: _pageActions[2],
-  children: _children[2],
-  navigation: _navigation[1],
-  tags: _tags[1],
-  actionBarItems: _actionBarItems[2],
+  breadcrumbs: 2,
+  pageActions: 2,
+  children: 2,
+  navigation: 1,
+  tags: 1,
+  actionBarItems: 2,
   collapseHeader: true,
   ...commonArgs,
 };
@@ -834,14 +823,14 @@ fullyLoaded.args = {
 export const fullyLoadedAndSome = Template.bind({});
 fullyLoadedAndSome.storyName = 'Page header with long values and many items';
 fullyLoadedAndSome.args = {
-  title: _title[3],
+  title: 3,
   subtitle: longSubtitleReactNode,
-  breadcrumbs: _breadcrumbs[3],
-  pageActions: _pageActions[3],
-  children: _children[2],
-  navigation: _navigation[2],
-  tags: _tags[2],
-  actionBarItems: _actionBarItems[3],
+  breadcrumbs: 3,
+  pageActions: 3,
+  children: 2,
+  navigation: 2,
+  tags: 2,
+  actionBarItems: 3,
   hasCollapseHeaderToggle: true,
   ...commonArgs,
 };

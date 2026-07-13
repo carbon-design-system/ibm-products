@@ -85,6 +85,7 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
       <cds-button
         kind="ghost"
         size="sm"
+        class="${prefix}--coachmark-header-close-button"
         tooltip-text="${this.closeIconDescription}"
         @click=${this._handleClick}
       >

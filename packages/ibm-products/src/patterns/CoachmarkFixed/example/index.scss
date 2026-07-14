@@ -38,10 +38,13 @@ $block-class: #{$prefix}--coachmark__next;
   inline-size: 18rem;
   inset-block-start: 0.2rem !important;
   margin-inline-start: 18px;
-  transition: translate $duration-moderate-02 motion(exit, productive);
-  translate: 0 0;
-  visibility: visible;
+  transition: translate $duration-slow-01 motion(entrance, productive);
+  translate: 0 100vh;
   will-change: translate;
+
+  @media (prefers-reduced-motion) {
+    transition: none;
+  }
 
   &.is-visible {
     translate: 0 0;

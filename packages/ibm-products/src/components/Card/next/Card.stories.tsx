@@ -107,9 +107,59 @@ Default.args = {
   density: 'productive',
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
+/**
+ * When a card is disabled, pass the same disabled state down to all
+ * interactive elements inside it. This ensures correct visual styling
+ * (Carbon disabled tokens) and prevents interaction.
+ *
+ * This is the recommended pattern for composable cards — the adopter
+ * owns the disabled state and applies it explicitly to their content.
+ */
+export const Disabled = () => {
+  const [disabled, setDisabled] = React.useState(true);
+  return (
+    <Grid>
+      <Column lg={4} md={4} sm={4}>
+        <Card disabled={disabled}>
+          <Card.Header>
+            <Card.Title>Card Title</Card.Title>
+          </Card.Header>
+          <Card.Body>
+            <p>
+              When the card is disabled, pass the same state to all interactive
+              elements inside — buttons, inputs, toggles, etc.
+            </p>
+          </Card.Body>
+          <Card.Footer>
+            <Card.Action>
+              <Button kind="ghost" size="md" disabled={disabled}>
+                Action
+              </Button>
+            </Card.Action>
+            <Card.Action>
+              <IconButton
+                label="Download"
+                kind="ghost"
+                size="md"
+                disabled={disabled}
+              >
+                <Download />
+              </IconButton>
+            </Card.Action>
+          </Card.Footer>
+        </Card>
+      </Column>
+      <Column lg={4} md={4} sm={4} className="card-story-disabled-toggle">
+        <Button
+          kind="tertiary"
+          size="sm"
+          onClick={() => setDisabled((d) => !d)}
+        >
+          {!disabled ? 'Disable Card' : 'Enable Card'}
+        </Button>
+      </Column>
+    </Grid>
+  );
 };
 
 export const MinimalCard = () => (

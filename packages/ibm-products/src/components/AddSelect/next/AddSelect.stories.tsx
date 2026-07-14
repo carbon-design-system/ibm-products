@@ -10,6 +10,7 @@ import React, { useMemo, useState } from 'react';
 import { Button, Dropdown, IconButton, Tag, Toggle } from '@carbon/react';
 import { AddSelect } from '.';
 import type { AddSelectItem } from '@carbon/ibm-products';
+import { UserAvatar } from '@carbon/ibm-products';
 import { NoDataEmptyState } from '../../EmptyStates';
 import styles from './_storybook-styles.scss?inline';
 import mdx from './AddSelect.mdx';
@@ -645,8 +646,8 @@ const AddSelectRowStory = (args) => {
           <AddSelect.Column multi={args.multi} hideSearch>
             <AddSelect.Row
               itemId="1"
-              title="folder 1"
-              subtitle={args.showSubtitle ? '3 files' : undefined}
+              title="Item title"
+              subtitle={args.showSubtitle ? 'Item subtitle' : undefined}
               value="folder 1"
               selected={args.selected}
               indeterminate={args.indeterminate}
@@ -655,7 +656,16 @@ const AddSelectRowStory = (args) => {
               hasItemPanel={args.hasItemPanel}
               onItemPanelClick={() => setItemPanelOpen(true)}
               itemPanelOpen={args.hasItemPanel && itemPanelOpen}
-              icon={args.showIcon ? <Document size={24} /> : undefined}
+              icon={
+                args.showIcon ? (
+                  <UserAvatar
+                    size="md"
+                    name="thomas j. watson"
+                    tooltipAlignment="right"
+                    tooltipText="user profile image"
+                  />
+                ) : undefined
+              }
               skeleton={args.skeleton}
               rowContent={
                 args.useRowContent ? (

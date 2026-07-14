@@ -39,7 +39,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 .#{$block-class__next}__header {
-  padding: $spacing-05;
+  padding: $spacing-05 $spacing-05 $spacing-03;
   border-block-end: 1px solid $border-subtle-01;
 }
 
@@ -74,10 +74,10 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 .#{$block-class__next}__tags-label {
-  @include type.type-style('body-compact-01');
+  @include type.type-style('heading-compact-01');
 
   margin: 0;
-  color: $text-secondary;
+  color: $text-primary;
 }
 
 .#{$block-class__next}__sub-header-actions {
@@ -548,14 +548,6 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     margin-inline-start: auto;
   }
 
-  &-edit-button {
-    // Edit icon button styles
-  }
-
-  &-body {
-    // padding: 0 $spacing-05;
-  }
-
   &-item-default {
     padding: $spacing-05 0;
     border-block-end: 1px solid $border-subtle-01;
@@ -577,11 +569,6 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 // ──────────────────────────────────────────────────────────────
 .#{$block-class__next}__selection-summary-item {
   position: relative;
-
-  // Mode-specific variants
-  &--accordion {
-    // Accordion-specific styles
-  }
 
   &--default {
     // Simple mode specific styles

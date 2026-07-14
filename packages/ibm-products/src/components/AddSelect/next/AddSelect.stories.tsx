@@ -7,7 +7,7 @@
 
 // @ts-nocheck
 import React, { useMemo, useState } from 'react';
-import { Button, Dropdown, IconButton, Tag, Toggle } from '@carbon/react';
+import { Button, IconButton, Tag, Toggle } from '@carbon/react';
 import { AddSelect } from '.';
 import type { AddSelectItem } from '@carbon/ibm-products';
 import { UserAvatar } from '@carbon/ibm-products';
@@ -17,17 +17,6 @@ import mdx from './AddSelect.mdx';
 import { ArrowsVertical, Document, Filter, Popup } from '@carbon/react/icons';
 
 const storyClass = 'add-select-next-stories';
-
-type FilterOption = {
-  id: string;
-  text: string;
-};
-
-const filterOptions: FilterOption[] = [
-  { id: 'all', text: 'All items' },
-  { id: 'folder', text: 'Folders' },
-  { id: 'file', text: 'Files' },
-];
 
 const sampleItems: AddSelectItem[] = [
   {
@@ -185,7 +174,6 @@ const PlaceholderShell = ({ children }: { children: React.ReactNode }) => {
     <div
       style={{
         border: '1px dashed var(--cds-border-subtle)',
-        padding: '1rem',
         background: 'var(--cds-layer)',
       }}
     >
@@ -199,15 +187,15 @@ const PlaceholderRows = () => {
     <div
       style={{
         display: 'grid',
-        gap: '0.25rem',
+        gap: '1px',
       }}
     >
       {sampleItems.slice(0, 3).map((item) => (
         <div
           key={item.id}
           style={{
-            padding: '0.25rem',
-            background: 'var(--cds-layer-accent)',
+            padding: '0.5rem',
+            background: 'var(--cds-layer-hover-01)',
           }}
         >
           <p style={{ margin: 0 }}>AddSelect.Row</p>
@@ -244,28 +232,22 @@ export default {
 
 const AddSelectBodyStory = (args) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterType, setFilterType] = useState('all');
 
   const filteredItems = useMemo(() => {
-    return sampleItems.filter((item) => {
-      const matchesSearch = item.title
-        ?.toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const matchesFilter = filterType === 'all' || item.type === filterType;
-      return matchesSearch && matchesFilter;
-    });
-  }, [searchTerm, filterType]);
+    return sampleItems.filter((item) =>
+      item.title?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
 
   const actionsSlot = args.showActionsSlot ? (
-    <Dropdown
-      id="add-select-body-filter"
-      titleText=""
-      label="Filter items"
-      items={filterOptions}
-      itemToString={(item) => (item ? item.text : '')}
-      onChange={({ selectedItem }) => setFilterType(selectedItem?.id || 'all')}
-      size="lg"
-    />
+    <>
+      <IconButton label="Sort" kind="ghost" size="lg">
+        <ArrowsVertical />
+      </IconButton>
+      <IconButton label="Filter" kind="ghost" size="lg">
+        <Filter />
+      </IconButton>
+    </>
   ) : undefined;
 
   const subHeaderActions = args.showSubHeaderActions ? (

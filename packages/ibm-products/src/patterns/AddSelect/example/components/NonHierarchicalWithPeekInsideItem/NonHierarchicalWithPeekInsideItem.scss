@@ -9,6 +9,13 @@
 @use '@carbon/styles/scss/motion' as *;
 
 .non-hierarchical-peek-inside-pattern {
+  // Ensure the first column (items list) maintains a minimum width on resize.
+  // Uses double-class specificity to override the component's own
+  // min-inline-size: 300px declared in _add-select_next.scss.
+  &__items-column#{&}__items-column {
+    min-inline-size: 500px;
+  }
+
   &__modifier {
     flex: 0 0 auto;
     margin-inline-start: $spacing-09;

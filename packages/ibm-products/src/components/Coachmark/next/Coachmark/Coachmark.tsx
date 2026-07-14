@@ -72,7 +72,7 @@ export interface CoachmarkPropsNext {
    */
   align?: NewPopoverAlignment;
   /**
-   * Fine tune the position of the target in pixels.
+   * Fine tune the position of the target in pixels. Applies only to Beacons.
    */
   position?: { x: number; y: number };
   /**
@@ -93,7 +93,6 @@ export interface CoachmarkPropsNext {
   caret?: boolean;
   /**
    * CSS selector for the element that should receive focus when the coachmark opens.
-   * If not provided, no automatic focus management will occur.
    */
   selectorPrimaryFocus?: string;
   /**
@@ -214,7 +213,6 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       if (shouldPreventClose) {
         return;
       }
-
       onClose?.();
       setOpen(false);
     };
@@ -235,7 +233,6 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
         }}
       >
         <div
-          {...rest}
           ref={setRef}
           className={cx(blockClass, className, {
             [`${blockClass}--floating`]: floating,
@@ -243,6 +240,7 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
           {...getDevtoolsProps(componentName)}
         >
           <Popover
+            {...rest}
             open={currentOpen}
             onRequestClose={handleRequestClose}
             align={align as NewPopoverAlignment}

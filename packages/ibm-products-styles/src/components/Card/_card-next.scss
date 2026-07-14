@@ -6,6 +6,7 @@
 //
 
 // Standard imports.
+@use '@carbon/styles/scss/config' as carbon-config;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
@@ -74,14 +75,78 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
   margin-block-start: $spacing-05;
 }
 
-// Footer styles
+// ─── Footer ──────────────────────────────────────────────────────────────────
+//
+//  Layout is driven by whether CardAction wrappers are present:
+//
+//  Has CardAction children (action-set layout):
+//    - automatic top border
+//    - no footer padding (Carbon lg buttons supply their own 48px height)
+//    - all actions stretch equally (flex: 1) filling the full footer width
+//    - exception: icon-only buttons are always fixed-width (48px)
+//
+//  No CardAction children (raw content — e.g. tertiary button, custom slot):
+//    - no border
+//    - $spacing-05 padding on all sides
+//    - no stretching (content sits at intrinsic width)
+//
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Base: padded, no border — the raw-content (non-action) default.
 .#{$block-class-next}__footer {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   padding: $spacing-05;
-  gap: $spacing-03;
-  padding-block-start: 0;
+}
+
+// Action-set layout: CardAction children present.
+// Override base with no padding, overflow clip, auto border, 1px gap.
+.#{$block-class-next}__footer:has(> .#{$block-class-next}__action) {
+  overflow: hidden;
+  padding: 0;
+  border-block-start: 1px solid $border-subtle;
+  gap: 1px;
+}
+
+// Text/secondary actions stretch to fill available space.
+.#{$block-class-next}__footer
+  > .#{$block-class-next}__action:not(
+    :has(.#{carbon-config.$prefix}--btn--icon-only)
+  ) {
+  flex: 1 0 0;
+  min-inline-size: 0;
+
+  > .#{carbon-config.$prefix}--btn,
+  > * > .#{carbon-config.$prefix}--btn {
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+}
+
+// Icon-only actions are fixed-width and always right-aligned.
+// margin-inline-start: auto pushes them to the right edge regardless of
+// what precedes them — text action, custom content, or nothing.
+.#{$block-class-next}__footer
+  > .#{$block-class-next}__action:has(
+    .#{carbon-config.$prefix}--btn--icon-only
+  ) {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+}
+
+// Consecutive icon-only actions: only the first gets the auto margin,
+// the rest follow naturally in the flex row.
+.#{$block-class-next}__footer
+  > .#{$block-class-next}__action:has(.#{carbon-config.$prefix}--btn--icon-only)
+  + .#{$block-class-next}__action:has(
+    .#{carbon-config.$prefix}--btn--icon-only
+  ) {
+  margin-inline-start: 0;
+}
+
+// Action wrapper styles
+.#{$block-class-next}__action {
+  display: inline-flex;
 }
 
 // Header primitive components

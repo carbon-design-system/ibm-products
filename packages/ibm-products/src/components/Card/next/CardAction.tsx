@@ -18,6 +18,8 @@ const componentName = 'CardAction';
 export interface CardActionProps {
   /**
    * Provide the contents of the CardAction (typically a Button or IconButton).
+   * Wrapping content in CardAction opts into action-set layout: no footer
+   * padding, automatic top border, and stretch/fixed-width button behavior.
    */
   children?: ReactNode;
 
@@ -33,9 +35,10 @@ export interface CardActionProps {
 }
 
 /**
- * CardAction is a neutral interaction wrapper for buttons in the card.
- * Prevents click propagation when the card is clickable, allowing actions
- * to be triggered independently of the card's click handler.
+ * CardAction is a wrapper for interactive elements in the card footer.
+ * Its presence signals action-set layout to the footer (no padding, auto
+ * border, stretch behavior). It also prevents click propagation on
+ * clickable cards so actions fire independently of the card click handler.
  */
 export const CardAction = ({
   children,

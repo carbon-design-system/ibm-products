@@ -29,6 +29,7 @@ import {
   Notification,
   View,
   Copy,
+  ArrowRight,
 } from '@carbon/icons-react';
 import { Bee } from '@carbon/pictograms-react';
 import { UserAvatar } from '../..';
@@ -90,9 +91,9 @@ const Template = (args) => (
           </p>
         </Card.Body>
         <Card.Footer>
-          <Card.Action>
-            <Button size="sm">Action</Button>
-          </Card.Action>
+          <Button kind="tertiary" size="md">
+            Action
+          </Button>
         </Card.Footer>
       </Card>
     </Column>
@@ -144,6 +145,13 @@ export const ProductiveDensity = () => (
             more condensed layout.
           </p>
         </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md">
+              View details
+            </Button>
+          </Card.Action>
+        </Card.Footer>
       </Card>
     </Column>
   </Grid>
@@ -164,6 +172,9 @@ export const ExpressiveDensity = () => (
             spacious layout.
           </p>
         </Card.Body>
+        <Card.Footer>
+          <IconIndicator kind="succeeded" size={16} label="Succeeded" />
+        </Card.Footer>
       </Card>
     </Column>
   </Grid>
@@ -184,6 +195,18 @@ export const WithHeaderPrimitives = () => (
             primitives in the header.
           </p>
         </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md">
+              Button
+            </Button>
+          </Card.Action>
+          <Card.Action>
+            <Button kind="secondary" size="md">
+              Button
+            </Button>
+          </Card.Action>
+        </Card.Footer>
       </Card>
     </Column>
   </Grid>
@@ -203,6 +226,48 @@ export const WithIcon = () => (
         <Card.Body>
           <p>This card includes a small icon (16px) alongside the title.</p>
         </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md">
+              View report
+            </Button>
+          </Card.Action>
+          <Card.Action>
+            <Button
+              kind="ghost"
+              label="View report"
+              size="md"
+              renderIcon={Share}
+              hasIconOnly
+            ></Button>
+          </Card.Action>
+          <Card.Action>
+            <IconButton
+              label="View"
+              kind="ghost"
+              size="md"
+              onClick={(e) => {
+                e.stopPropagation();
+                console.log('View clicked');
+              }}
+            >
+              <View />
+            </IconButton>
+          </Card.Action>
+          <Card.Action>
+            <IconButton
+              label="Download"
+              kind="ghost"
+              size="md"
+              onClick={(e) => {
+                e.stopPropagation();
+                console.log('Download clicked');
+              }}
+            >
+              <Download />
+            </IconButton>
+          </Card.Action>
+        </Card.Footer>
       </Card>
     </Column>
   </Grid>
@@ -222,6 +287,11 @@ export const WithLargeIcon = () => (
         <Card.Body>
           <p>This card includes a larger icon (32px) for more prominence.</p>
         </Card.Body>
+        <Card.Footer>
+          <Button kind="tertiary" size="md">
+            Learn more
+          </Button>
+        </Card.Footer>
       </Card>
     </Column>
   </Grid>
@@ -246,6 +316,25 @@ export const WithMedia = () => (
         <Card.Body>
           <p>This card features a 16:9 aspect ratio media slot at the top.</p>
         </Card.Body>
+        <Card.Footer>
+          {/* Custom slot content: adopter-managed padding per design guidelines */}
+          <div
+            style={{
+              padding: '0 1rem',
+            }}
+          >
+            <IconIndicator kind="in-progress" size={16} label="In progress" />
+          </div>
+          <Card.Action>
+            <Button
+              kind="ghost"
+              label="View report"
+              size="md"
+              renderIcon={Share}
+              hasIconOnly
+            ></Button>
+          </Card.Action>
+        </Card.Footer>
       </Card>
     </Column>
   </Grid>
@@ -269,6 +358,18 @@ export const WithSquareMedia = () => (
         <Card.Body>
           <p>This card uses a 1:1 (square) aspect ratio for the media.</p>
         </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md">
+              Cancel
+            </Button>
+          </Card.Action>
+          <Card.Action>
+            <Button kind="secondary" size="md" renderIcon={ArrowRight}>
+              Confirm
+            </Button>
+          </Card.Action>
+        </Card.Footer>
       </Card>
     </Column>
   </Grid>
@@ -277,7 +378,7 @@ export const WithSquareMedia = () => (
 export const WithHeaderActions = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card clickable onClick={() => console.log('Card clicked')}>
+      <Card onClick={() => console.log('Card clicked')}>
         <Card.Header>
           <Card.Label>Project</Card.Label>
           <Card.Title>Website Redesign</Card.Title>
@@ -317,6 +418,23 @@ export const WithHeaderActions = () => (
             click propagation.
           </p>
         </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md">
+              View report
+            </Button>
+          </Card.Action>
+          <Card.Action>
+            <IconButton label="Share" kind="ghost" size="md">
+              <Share />
+            </IconButton>
+          </Card.Action>
+          <Card.Action>
+            <IconButton label="Download" kind="ghost" size="md">
+              <Download />
+            </IconButton>
+          </Card.Action>
+        </Card.Footer>
       </Card>
     </Column>
   </Grid>
@@ -386,6 +504,18 @@ export const WithTruncatedTitle = () => (
         <Card.Body>
           <p>The title is truncated to a single line with an ellipsis.</p>
         </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <IconButton label="Share" kind="ghost" size="md">
+              <Share />
+            </IconButton>
+          </Card.Action>
+          <Card.Action>
+            <IconButton label="Download" kind="ghost" size="md">
+              <Download />
+            </IconButton>
+          </Card.Action>
+        </Card.Footer>
       </Card>
     </Column>
   </Grid>
@@ -407,6 +537,20 @@ export const WithMultiLineTruncatedTitle = () => (
         <Card.Body>
           <p>The title is truncated to three lines with an ellipsis.</p>
         </Card.Body>
+        <Card.Footer>
+          <div
+            style={{
+              padding: '0 1rem',
+            }}
+          >
+            <IconIndicator kind="failed" size={16} label="Failed" />
+          </div>
+          <Card.Action>
+            <IconButton label="Retry" kind="ghost" size="md">
+              <View />
+            </IconButton>
+          </Card.Action>
+        </Card.Footer>
       </Card>
     </Column>
   </Grid>
@@ -540,9 +684,9 @@ export const WithAILabel = () => (
           </p>
         </Card.Body>
         <Card.Footer>
-          <Card.Action>
-            <Button size="sm">View Details</Button>
-          </Card.Action>
+          <Button size="sm" kind="tertiary">
+            View Details
+          </Button>
         </Card.Footer>
       </Card>
     </Column>

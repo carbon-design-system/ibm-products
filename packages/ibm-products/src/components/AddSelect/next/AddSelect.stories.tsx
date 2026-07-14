@@ -14,7 +14,13 @@ import { UserAvatar } from '@carbon/ibm-products';
 import { NoDataEmptyState } from '../../EmptyStates';
 import styles from './_storybook-styles.scss?inline';
 import mdx from './AddSelect.mdx';
-import { ArrowsVertical, Document, Filter, Popup } from '@carbon/react/icons';
+import {
+  ArrowsVertical,
+  Document,
+  Draggable,
+  Filter,
+  Popup,
+} from '@carbon/react/icons';
 
 const storyClass = 'add-select-next-stories';
 
@@ -22,8 +28,8 @@ const sampleItems: AddSelectItem[] = [
   {
     id: '1',
     value: '1',
-    title: 'item 1',
-    subtitle: 'item 1 subtitle',
+    title: 'Item 1',
+    subtitle: 'Item 1 subtitle',
     itemDetails: {
       id: 'description',
       title: 'Description',
@@ -33,8 +39,8 @@ const sampleItems: AddSelectItem[] = [
   {
     id: '2',
     value: '2',
-    title: 'item 2',
-    subtitle: 'item 2 subtitle',
+    title: 'Item 2',
+    subtitle: 'Item 2 subtitle',
     itemDetails: {
       id: 'description',
       title: 'Description',
@@ -44,20 +50,20 @@ const sampleItems: AddSelectItem[] = [
   {
     id: '3',
     value: '3',
-    title: 'item 3',
-    subtitle: 'item 3 subtitle',
+    title: 'Item 3',
+    subtitle: 'Item 3 subtitle',
   },
   {
     id: '4',
     value: '4',
-    title: 'item 4',
-    subtitle: 'item 4 subtitle',
+    title: 'Item 4',
+    subtitle: 'Item 4 subtitle',
   },
   {
     id: '5',
     value: '5',
-    title: 'item 5',
-    subtitle: 'item 5 subtitle',
+    title: 'Item 5',
+    subtitle: 'Item 5 subtitle',
   },
 ];
 
@@ -1040,15 +1046,12 @@ export const AddSelectSelectionSummary = {
 
 const AddSelectSelectionSummaryItemStory = (args) => {
   const [visible, setVisible] = useState(true);
-
   const item = summaryItems[0];
 
   return (
     <div
       style={{
-        width: '256px',
-        display: 'grid',
-        gap: '0.75rem',
+        width: '446px',
         border: '1px dashed var(--cds-border-subtle)',
         padding: '0.5rem',
         background: 'var(--cds-layer)',
@@ -1063,13 +1066,31 @@ const AddSelectSelectionSummaryItemStory = (args) => {
           renderAccordionTitle={
             args.useCustomTitle
               ? (currentItem) => (
-                  <div>
-                    <p style={{ margin: 0, fontWeight: 600 }}>
-                      {currentItem.title}
-                    </p>
-                    <p style={{ margin: '0.25rem 0 0' }}>
-                      Custom title renderer
-                    </p>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                    }}
+                  >
+                    <UserAvatar
+                      size="md"
+                      name={currentItem.title}
+                      tooltipText={currentItem.title}
+                    />
+                    <div>
+                      <p style={{ margin: 0 }}>{currentItem.title}</p>
+                      {currentItem.subtitle && (
+                        <p
+                          style={{
+                            margin: 0,
+                            color: 'var(--cds-text-secondary)',
+                          }}
+                        >
+                          {currentItem.subtitle}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 )
               : undefined
@@ -1077,73 +1098,63 @@ const AddSelectSelectionSummaryItemStory = (args) => {
           renderAccordionBody={
             args.useCustomContent
               ? (currentItem) => (
-                  <div>
-                    <p style={{ margin: 0 }}>
-                      Custom content for {currentItem.title}
-                    </p>
+                  <div
+                    style={{
+                      marginBlockStart: '1rem',
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '0.25rem',
+                    }}
+                  >
+                    <Tag type="blue" size="sm">
+                      {currentItem.title}
+                    </Tag>
+                    <Tag type="cyan" size="sm">
+                      Category A
+                    </Tag>
+                    <Tag type="teal" size="sm">
+                      Active
+                    </Tag>
+                    <Tag type="purple" size="sm">
+                      Priority
+                    </Tag>
                   </div>
                 )
               : undefined
           }
           renderItem={
             args.useCustomRenderer
-              ? (currentItem, onRemoveHandler) => (
+              ? (currentItem) => (
                   <div
                     style={{
-                      padding: '1rem',
-                      border: '2px solid var(--cds-border-interactive)',
-                      borderRadius: '4px',
-                      background: 'var(--cds-layer-01)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      padding: '0.625rem 1rem',
                     }}
                   >
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <div>
+                    <Draggable size={16} />
+                    <UserAvatar
+                      size="md"
+                      name={currentItem.title}
+                      tooltipText={currentItem.title}
+                    />
+                    <div style={{ flex: 1 }}>
+                      <p style={{ margin: 0 }}>{currentItem.title}</p>
+                      {currentItem.subtitle && (
                         <p
                           style={{
                             margin: 0,
-                            fontWeight: 700,
-                            color: 'var(--cds-text-primary)',
+                            color: 'var(--cds-text-secondary)',
                           }}
                         >
-                          {currentItem.title}
+                          {currentItem.subtitle}
                         </p>
-                        {currentItem.subtitle && (
-                          <p
-                            style={{
-                              margin: '0.25rem 0 0',
-                              fontSize: '0.875rem',
-                              color: 'var(--cds-text-secondary)',
-                            }}
-                          >
-                            {currentItem.subtitle}
-                          </p>
-                        )}
-                      </div>
-                      {onRemoveHandler && (
-                        <Button
-                          kind="danger--ghost"
-                          size="sm"
-                          onClick={() => onRemoveHandler(currentItem.id)}
-                        >
-                          Remove
-                        </Button>
                       )}
                     </div>
-                    <p
-                      style={{
-                        margin: '0.5rem 0 0',
-                        fontSize: '0.75rem',
-                        fontStyle: 'italic',
-                      }}
-                    >
-                      Custom item rendering
-                    </p>
+                    <Tag type="gray" size="sm">
+                      Modifier
+                    </Tag>
                   </div>
                 )
               : undefined
@@ -1152,16 +1163,28 @@ const AddSelectSelectionSummaryItemStory = (args) => {
           {args.useChildren ? (
             <div
               style={{
-                padding: '1rem',
-                border: '2px solid var(--cds-support-success)',
-                borderRadius: '4px',
-                background: 'var(--cds-layer-01)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.625rem 1rem',
               }}
             >
-              <p style={{ margin: 0, fontWeight: 700 }}>{item.title}</p>
-              <p style={{ margin: '0.25rem 0 0', fontSize: '0.875rem' }}>
-                Custom children content
-              </p>
+              <UserAvatar
+                size="md"
+                name={item.title}
+                tooltipText={item.title}
+              />
+              <div style={{ flex: 1 }}>
+                <p style={{ margin: 0 }}>{item.title}</p>
+                {item.subtitle && (
+                  <p style={{ margin: 0, color: 'var(--cds-text-secondary)' }}>
+                    {item.subtitle}
+                  </p>
+                )}
+              </div>
+              <Tag type="gray" size="sm">
+                Modifier
+              </Tag>
             </div>
           ) : undefined}
         </AddSelect.SelectionSummaryItem>

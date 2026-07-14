@@ -566,38 +566,57 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 
 // ──────────────────────────────────────────────────────────────
 // AddSelectSelectionSummaryItem - Individual selected item
+// Figma reference: node 10473-340689
+// https://github.com/carbon-design-system/ibm-products/issues/9607#issuecomment-4969016515
 // ──────────────────────────────────────────────────────────────
 .#{$block-class__next}__selection-summary-item {
-  // Figma: layer (contextual) background, bottom border on every item
+  // Figma: var(--layer (contextual)) background on every row (#1)
+  // Figma: every row has a 1px bottom border (border-subtle-01) (#2)
   position: relative;
   background-color: $layer-01;
   border-block-end: 1px solid $border-subtle-01;
 
+  // Figma: var(--layer/layer-hover-01) on hover (#3)
   &:hover {
     background-color: $layer-hover-01;
   }
 
   // Carbon Accordion adds border-block-start on every .cds--accordion__item
-  // and border-block-end on :last-child. Our wrapper already owns the single
-  // bottom border (Figma spec). Strip both to avoid double borders.
+  // and border-block-end on :last-child — causing a double bottom border and a
+  // stray top border. Our wrapper owns the sole border per Figma spec. (#13)
+  // Border ownership: bottom border → __selection-summary-item; Carbon borders → zeroed.
   &--accordion .cds--accordion__item,
   &--accordion .cds--accordion__item:last-child {
     border-block-end: none;
     border-block-start: none;
   }
 
+  // Carbon's default heading uses min-block-size: 40px with no block padding.
+  // Figma: py-[10px] px-[16px] on the heading row, so override to $spacing-04 (10px)
+  // block padding and unset the 40px minimum. (#4)
+  &--accordion .cds--accordion__heading {
+    min-block-size: unset;
+    padding-block: $spacing-04; // 10px top/bottom — Figma: py-[10px]
+    padding-inline-end: $spacing-05; // 16px — Figma: px-[16px]
+  }
+
   &--default {
-    // Non-accordion (default) mode: px-[16px] py-[10px] from Figma
+    // Non-accordion mode: Figma py-[10px] px-[16px] on the title row (#4)
     .#{$block-class__next}__selection-summary-item-title-wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      // Figma: px-[16px] py-[10px] → $spacing-05 inline, $spacing-04 block
-      padding: $spacing-04 $spacing-05;
+      padding: $spacing-04 $spacing-05; // 10px top/bottom, 16px inline
     }
+
+    // Figma: expanded content area closes with 10px bottom gap (#5)
     .#{$block-class__next}__selection-summary-item-content {
       padding-block-end: $spacing-04;
       padding-inline: $spacing-05;
+    }
+
+    .#{$block-class__next}__selection-summary-item-title {
+      @include type.type-style('heading-compact-01');
     }
   }
 
@@ -611,15 +630,17 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     flex: 1;
   }
 
+  // Figma: 14px / 18px line-height / 0.16px letter-spacing = body-compact-01 (#6)
+  // Previously had color only with no type-style applied.
   &-title {
-    // Figma: 14px / 18px / 0.16px letter-spacing = body-compact-01
     @include type.type-style('body-compact-01');
 
     color: $text-primary;
   }
 
+  // Figma: 14px / 20px line-height / 0.16px letter-spacing = body-01 (#7)
+  // Previously used label-01 (12px) which was incorrect.
   &-subtitle {
-    // Figma: 14px / 20px / 0.16px letter-spacing = body-01 (not label-01 which is 12px)
     @include type.type-style('body-01');
 
     color: $text-secondary;
@@ -642,25 +663,31 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     margin-block-end: $spacing-05;
   }
 
-  // Remove button - works in all modes
+  // Figma: remove button (32px ghost IconButton) is flush to the right edge
+  // inside the 16px inline padding. $spacing-03 (8px) gap gives the correct
+  // right-edge alignment. Previously used $spacing-05 (16px). (#8)
   &-remove-button-container {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    // Figma: button is 32px wide, placed flush to the right edge inside px-[16px]
-    padding-inline-start: $spacing-03;
+    padding-inline-start: $spacing-03; // 8px gap before the 32px button
 
-    // In accordion mode, position absolutely at the inline-end
+    // In accordion mode the remove button is absolutely positioned within the
+    // heading (position:relative). It sits inside .cds--accordion__title which
+    // is full-width, so inset-inline-end aligns it to the heading's right
+    // padding edge. Previously lacked vertical centering. (#9)
     .#{$block-class__next}__selection-summary-item--accordion & {
       position: absolute;
       inset-block-start: 50%;
-      inset-inline-end: 0;
+      inset-inline-end: $spacing-05; // 16px from inline-end — matches heading padding
+      padding-inline-start: 0;
       transform: translateY(-50%);
     }
   }
 
+  // Figma: remove button visible on hover only (#3, #8)
+  // Opacity transition keeps the reveal smooth (prefers-reduced-motion respected).
   &-remove-button {
-    // Figma: button only visible on hover; ghost IconButton sm (32px)
     opacity: 0;
     transition: opacity $duration-fast-01 motion(standard, productive);
 
@@ -669,42 +696,55 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     }
   }
 
-  // Show remove button on hover/focus for all modes
+  // Reveal on hover or keyboard focus within the item
   &:hover &-remove-button,
   &:focus-within &-remove-button {
     opacity: 1;
   }
 
+  // No extra top margin — padding is owned by the --default title-wrapper above (#11)
   &-content {
-    // Keep below the title wrapper; no extra top margin needed when padding is on wrapper
     margin-block-start: 0;
   }
 }
 
-// Accordion overrides for selection summary items
+// Accordion overrides for SelectionSummaryItem accordion variant
+// Figma reference: node 10473-340689 (collapsed) / 10473-340699 (expanded)
 .#{$block-class__next}__selection-summary {
+  // Figma collapsed state: chevron-down (∨); expanded: chevron-up (∧)
+  // Carbon renders ChevronRight (→). Rotate to match Figma orientations.
+  // Previously: collapsed = rotate(0deg) [pointing right], expanded = rotate(90deg)
+  // [pointing down] — both wrong against the Figma spec.
   .cds--accordion__arrow {
-    transform: rotate(0deg);
+    transform: rotate(90deg); // collapsed: points down (∨)
   }
 
   .cds--accordion__item--active .cds--accordion__arrow {
-    transform: rotate(90deg);
+    transform: rotate(-90deg); // expanded: points up (∧)
   }
 
+  // Figma: px-[16px] — arrow sits 16px from the inline-start edge of the row
   .cds--accordion--start .cds--accordion__arrow {
-    margin: 0 0 0 $spacing-05;
+    margin: 0 0 0 $spacing-05; // 16px from inline-start
   }
 
+  // Figma: gap-[16px] between the arrow and the title content group.
+  // $spacing-03 (8px) left gap + 8px arrow width = 16px total visual gap.
+  // padding-inline-end reserves 32px for the absolutely-positioned remove button.
   .cds--accordion--start .cds--accordion__title {
-    margin: 0 $spacing-05 0 $spacing-03;
-    padding-inline-end: $spacing-07; // Add padding to prevent overlap with remove button
+    margin-inline-end: 0;
+    margin-inline-start: $spacing-03; // 8px gap after arrow → 16px total Figma gap
+    padding-inline-end: $spacing-07; // 32px: prevents text overlap with remove button
   }
 
+  // Figma expanded slot: p-[16px] = $spacing-05 on all sides (#12)
+  // Previously: padding-block: 0 (no vertical padding) and no inline padding.
+  // This selector is more specific than Carbon's responsive padding-inline-end
+  // overrides on .cds--accordion__content, so one rule covers all breakpoints.
   .cds--accordion__item--active .cds--accordion__content {
-    // Figma expanded slot: p-[16px] = $spacing-05 all around
     margin-block-start: 0;
-    padding-block: 0;
-    padding-inline: $spacing-05;
+    padding-block: $spacing-05; // 16px top/bottom
+    padding-inline: $spacing-05; // 16px inline
   }
 }
 

@@ -17,6 +17,16 @@ import { CardHeader } from './CardHeader';
 import { CardBody } from './CardBody';
 import { CardFooter } from './CardFooter';
 
+// Import header primitive components
+import { CardHeaderMedia } from './CardHeaderMedia';
+import { CardMedia } from './CardMedia';
+import { CardLabel } from './CardLabel';
+import { CardTitle } from './CardTitle';
+import { CardTitleMedia } from './CardTitleMedia';
+import { CardCaption } from './CardCaption';
+import { CardActions } from './CardActions';
+import { CardAction } from './CardAction';
+
 const componentName = 'Card';
 const blockClass = `${pkg.prefix}--card-next`;
 
@@ -30,19 +40,35 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       onClick,
       onKeyDown,
       disabled = false,
+      density = 'productive',
+      decorator,
       className,
       children,
       ...rest
     },
     ref
   ) => {
+    // Detect if decorator is AILabel
+    const hasAILabel = decorator?.['type']?.displayName === 'AILabel';
+
+    // Normalize AILabel size to 'xs' (following SidePanel pattern)
+    const normalizedDecorator = useMemo(() => {
+      if (hasAILabel && React.isValidElement(decorator)) {
+        return React.cloneElement(decorator as React.ReactElement<any>, {
+          size: 'xs',
+        });
+      }
+      return decorator;
+    }, [decorator, hasAILabel]);
+
     // Create context value
     const contextValue = useMemo(
       () => ({
         clickable,
         disabled,
+        decorator: normalizedDecorator,
       }),
-      [clickable, disabled]
+      [clickable, disabled, normalizedDecorator]
     );
 
     // Handle keyboard interaction for clickable cards
@@ -68,6 +94,8 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
     const cardClasses = cx(blockClass, className, {
       [`${blockClass}--clickable`]: clickable && !disabled,
       [`${blockClass}--disabled`]: disabled,
+      [`${blockClass}--${density}`]: density,
+      [`${blockClass}--has-ai-label`]: hasAILabel,
     });
 
     const cardProps = {
@@ -107,6 +135,14 @@ CardComponent.propTypes = {
    */
   clickable: PropTypes.bool,
   /**
+   * Optional decorator component (typically AILabel from Carbon)
+   */
+  decorator: PropTypes.node,
+  /**
+   * Density variant: productive uses heading-compact-02, expressive uses heading-03
+   */
+  density: PropTypes.oneOf(['productive', 'expressive']),
+  /**
    * Disables the card and all interactive elements
    */
   disabled: PropTypes.bool,
@@ -120,16 +156,13 @@ CardComponent.propTypes = {
   onKeyDown: PropTypes.func,
 };
 
-export const Card = CardComponent;
-
 /**
  * -------
  * Exports
  * -------
  */
-const Root = Card;
-Root.displayName = 'Card.Root';
 
+// Create namespaced child components
 const Header = CardHeader;
 Header.displayName = 'Card.Header';
 
@@ -139,17 +172,58 @@ Body.displayName = 'Card.Body';
 const Footer = CardFooter;
 Footer.displayName = 'Card.Footer';
 
+const HeaderMedia = CardHeaderMedia;
+HeaderMedia.displayName = 'Card.HeaderMedia';
+
+const Media = CardMedia;
+Media.displayName = 'Card.Media';
+
+const Label = CardLabel;
+Label.displayName = 'Card.Label';
+
+const Title = CardTitle;
+Title.displayName = 'Card.Title';
+
+const TitleMedia = CardTitleMedia;
+TitleMedia.displayName = 'Card.TitleMedia';
+
+const Caption = CardCaption;
+Caption.displayName = 'Card.Caption';
+
+const Actions = CardActions;
+Actions.displayName = 'Card.Actions';
+
+const Action = CardAction;
+Action.displayName = 'Card.Action';
+
+// Attach child components to Card for namespaced usage (Card.Header, Card.Body, etc.)
+export const Card = Object.assign(CardComponent, {
+  Header,
+  Body,
+  Footer,
+  HeaderMedia,
+  Media,
+  Label,
+  Title,
+  TitleMedia,
+  Caption,
+  Actions,
+  Action,
+});
+
 export {
-  // direct exports
   Card as default,
   CardHeader,
   CardBody,
   CardFooter,
-  // namespaced
-  Root,
-  Header,
-  Body,
-  Footer,
+  CardHeaderMedia,
+  CardMedia,
+  CardLabel,
+  CardTitle,
+  CardTitleMedia,
+  CardCaption,
+  CardActions,
+  CardAction,
 };
 
 export type {
@@ -158,3 +232,13 @@ export type {
   CardBodyProps,
   CardFooterProps,
 } from './Card.types';
+
+// Export primitive component prop types
+export type { CardHeaderMediaProps } from './CardHeaderMedia';
+export type { CardMediaProps } from './CardMedia';
+export type { CardLabelProps } from './CardLabel';
+export type { CardTitleProps } from './CardTitle';
+export type { CardTitleMediaProps } from './CardTitleMedia';
+export type { CardCaptionProps } from './CardCaption';
+export type { CardActionsProps } from './CardActions';
+export type { CardActionProps } from './CardAction';

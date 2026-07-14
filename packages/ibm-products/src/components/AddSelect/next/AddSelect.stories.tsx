@@ -638,7 +638,10 @@ const AddSelectRowStory = (args) => {
   return (
     <div className={`${storyClass}-container--single`}>
       <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-        <AddSelect.Body hideSearch>
+        <AddSelect.Body
+          hideSearch
+          className={`${storyClass}--no-header-border`}
+        >
           <AddSelect.Column multi={args.multi} hideSearch>
             <AddSelect.Row
               itemId="1"

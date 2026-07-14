@@ -5,10 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 
 $next-story-prefix: 'add-select-next-stories';
+$block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
 
 // Storybook-specific styles for AddSelect demos and examples
 // These styles are NOT part of the production component styles
@@ -61,5 +63,13 @@ $next-story-prefix: 'add-select-next-stories';
 
     margin: 0;
     color: var(--cds-text-secondary);
+  }
+}
+
+// Row story — hide the header border that AddSelect.Body adds, so the
+// single-row demo doesn't show a divider above the row.
+.#{$next-story-prefix}--no-header-border {
+  .#{$block-class__next}__header {
+    border-block-end: none;
   }
 }

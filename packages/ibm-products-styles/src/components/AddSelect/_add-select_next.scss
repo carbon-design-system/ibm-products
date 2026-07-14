@@ -269,13 +269,12 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
       align-items: center;
       justify-content: center;
       padding: $spacing-02;
-      border-radius: $spacing-02;
       cursor: pointer;
       margin-inline-start: $spacing-03;
       transition: none;
 
       &:hover {
-        background-color: $layer-hover-01;
+        background-color: $background-hover;
       }
 
       &:focus {
@@ -294,13 +293,12 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     align-items: center;
     justify-content: center;
     padding: $spacing-02;
-    border-radius: $spacing-02;
     cursor: pointer;
     margin-inline-start: $spacing-03;
     transition: background-color $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $layer-hover-01;
+      background-color: $background-hover;
     }
 
     &:focus {

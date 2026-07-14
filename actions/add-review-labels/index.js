@@ -11,7 +11,7 @@ import github from '@actions/github';
 import core from '@actions/core';
 import { App } from 'octokit';
 import util from 'util';
-import decompress from 'decompress';
+import decompress from '@xhmikosr/decompress';
 
 async function run() {
   const { context } = github;

@@ -141,22 +141,51 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 
   &--selected {
     background-color: $layer-selected-01;
+
+    .#{$block-class__next}-row__cell-wrapper {
+      border-block-end-color: $border-subtle-selected-01;
+    }
   }
 
   &--disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+
+    .#{$block-class__next}-row__title,
+    .#{$block-class__next}-row__subtitle {
+      color: $text-disabled;
+    }
+
+    .#{$block-class__next}-row__icon svg,
+    .#{$block-class__next}-row__view-item-panel svg,
+    .#{$block-class__next}-row__nav-indicator svg {
+      fill: $icon-disabled;
+    }
   }
 
   &:hover:not(&--disabled) {
     background: $layer-hover-01;
 
     .#{$block-class__next}-row__title {
-      color: $interactive;
+      color: $link-primary;
     }
 
+    .#{$block-class__next}-row__view-item-panel svg,
     .#{$block-class__next}-row__nav-indicator svg {
-      color: $interactive;
+      fill: $icon-disabled;
+    }
+  }
+
+  // Must come after &:hover to win the specificity tie
+  &--selected:hover:not(&--disabled) {
+    background: $layer-selected-hover-01;
+
+    .#{$block-class__next}-row__title {
+      color: $text-primary;
+    }
+
+    .#{$block-class__next}-row__view-item-panel svg,
+    .#{$block-class__next}-row__nav-indicator svg {
+      fill: $icon-primary;
     }
   }
 
@@ -213,7 +242,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &__subtitle {
-    @include type.type-style('label-01');
+    @include type.type-style('helper-text-01');
 
     display: block;
     color: $text-secondary;

@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode, MouseEvent } from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
-import { useCardContext } from './CardContext';
 
 const blockClass = `${pkg.prefix}--card-next`;
 const componentName = 'CardAction';
@@ -27,42 +26,25 @@ export interface CardActionProps {
    * Provide an optional class to be applied to the containing node.
    */
   className?: string;
-
-  /**
-   * Optional click handler for the action.
-   */
-  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
 /**
  * CardAction is a wrapper for interactive elements in the card footer.
  * Its presence signals action-set layout to the footer (no padding, auto
- * border, stretch behavior). It also prevents click propagation on
- * clickable cards so actions fire independently of the card click handler.
+ * border, stretch behavior).
+ *
+ * Note: do not use CardAction inside a clickable card — clickable cards
+ * should not contain interactive elements (see usage guidelines).
  */
 export const CardAction = ({
   children,
   className,
-  onClick,
   ...rest
 }: CardActionProps) => {
-  const { clickable } = useCardContext();
-  const classes = cx(`${blockClass}__action`, className);
-
-  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
-    // Prevent card click when action is clicked
-    if (clickable) {
-      event.stopPropagation();
-    }
-    onClick?.(event);
-  };
-
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       {...rest}
-      className={classes}
-      onClick={handleClick}
+      className={cx(`${blockClass}__action`, className)}
       {...getDevtoolsProps(componentName)}
     >
       {children}
@@ -80,11 +62,6 @@ CardAction.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
-  /**
-   * Optional click handler for the action.
-   */
-  onClick: PropTypes.func,
 };
 
 CardAction.displayName = componentName;

@@ -107,12 +107,6 @@ Default.args = {
   density: 'productive',
 };
 
-export const Clickable = Template.bind({});
-Clickable.args = {
-  clickable: true,
-  onClick: () => console.log('Card clicked'),
-};
-
 export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true,

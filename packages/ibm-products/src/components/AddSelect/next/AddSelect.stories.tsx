@@ -14,7 +14,7 @@ import { UserAvatar } from '@carbon/ibm-products';
 import { NoDataEmptyState } from '../../EmptyStates';
 import styles from './_storybook-styles.scss?inline';
 import mdx from './AddSelect.mdx';
-import { Document, Filter, Popup } from '@carbon/react/icons';
+import { ArrowsVertical, Document, Filter, Popup } from '@carbon/react/icons';
 
 const storyClass = 'add-select-next-stories';
 
@@ -437,20 +437,15 @@ export const AddSelectBody = {
 
 const AddSelectColumnStory = (args) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterType, setFilterType] = useState('all');
   const [selectedItems, setSelectedItems] = useState<Set<string>>(
     new Set(['1', '4'])
   );
 
   const filteredItems = useMemo(() => {
-    return sampleItems.filter((item) => {
-      const matchesSearch = item.title
-        ?.toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const matchesFilter = filterType === 'all' || item.type === filterType;
-      return matchesSearch && matchesFilter;
-    });
-  }, [searchTerm, filterType]);
+    return sampleItems.filter((item) =>
+      item.title?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
 
   const handleItemSelect = (itemId, selected) => {
     const nextSelection = args.multi
@@ -484,21 +479,23 @@ const AddSelectColumnStory = (args) => {
     !allSelected;
 
   const actionsSlot = args.showActionsSlot ? (
-    <Dropdown
-      id="add-select-column-filter"
-      titleText=""
-      label="Filter items"
-      items={filterOptions}
-      itemToString={(item) => (item ? item.text : '')}
-      onChange={({ selectedItem }) => setFilterType(selectedItem?.id || 'all')}
-      size="md"
-    />
+    <>
+      <IconButton label="Sort" kind="ghost" size="sm">
+        <ArrowsVertical />
+      </IconButton>
+      <IconButton label="Filter" kind="ghost" size="sm">
+        <Filter />
+      </IconButton>
+    </>
   ) : undefined;
 
   return (
     <div className={`${storyClass}-column-container`}>
       <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-        <AddSelect.Body hideSearch>
+        <AddSelect.Body
+          hideSearch
+          className={`${storyClass}--no-header-border`}
+        >
           <AddSelect.Column
             title={args.title}
             searchLabel={args.searchLabel}
@@ -529,7 +526,6 @@ const AddSelectColumnStory = (args) => {
                 key={item.id}
                 itemId={item.id}
                 title={item.title || ''}
-                subtitle={item.subtitle}
                 value={item.value || ''}
                 hasChildren={args.enableNavigation && item.id === '1'}
               />

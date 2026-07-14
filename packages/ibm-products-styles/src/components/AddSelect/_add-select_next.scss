@@ -201,8 +201,8 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     align-items: center;
     justify-content: space-between;
     padding: 0 $spacing-05;
-    block-size: $spacing-09;
-    border-block-end: 1px solid $layer-accent-01;
+    block-size: $spacing-08;
+    border-block-end: 1px solid $border-subtle-01;
   }
 
   &__content {
@@ -351,6 +351,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 .#{$block-class__next}-column {
   display: flex;
   flex-direction: column;
+  padding: $spacing-05;
   block-size: 100%;
   border-inline-end: 1px solid $border-subtle-01;
   min-inline-size: 300px;
@@ -361,9 +362,6 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 
   // Search section with actions
   &__search {
-    padding: $spacing-05;
-    padding-block-end: 0;
-
     &--with-actions {
       display: flex;
       align-items: flex-end;
@@ -449,10 +447,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &__title {
-    @include type.type-style('body-compact-01');
-
-    color: $text-secondary;
-    font-weight: 600;
+    @include type.type-style('heading-compact-02');
   }
 
   // Rows container
@@ -534,7 +529,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     display: flex;
     align-items: center;
     padding: $spacing-07 $spacing-05 $spacing-03 $spacing-05;
-    border-block-end: 1px solid $layer-accent-01;
+    border-block-end: 1px solid $border-subtle-01;
   }
 
   &-title {
@@ -560,7 +555,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 
   &-item-default {
     padding: $spacing-05 0;
-    border-block-end: 1px solid $layer-accent-01;
+    border-block-end: 1px solid $border-subtle-01;
   }
 
   &-item-default-title {

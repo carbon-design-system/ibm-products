@@ -36,9 +36,9 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
 
 // Column story container
 .#{$next-story-prefix}-column-container {
-  padding: $spacing-05;
   border: 1px dashed var(--cds-border-subtle);
   background: var(--cds-layer);
+  block-size: 400px;
   inline-size: 360px;
 }
 
@@ -70,6 +70,7 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
 // single-row demo doesn't show a divider above the row.
 .#{$next-story-prefix}--no-header-border {
   .#{$block-class__next}__header {
+    padding: 0;
     border-block-end: none;
   }
 }

@@ -1050,7 +1050,7 @@ const AddSelectSelectionSummaryItemStory = (args) => {
         display: 'grid',
         gap: '0.75rem',
         border: '1px dashed var(--cds-border-subtle)',
-        padding: '1rem',
+        padding: '0.5rem',
         background: 'var(--cds-layer)',
       }}
     >

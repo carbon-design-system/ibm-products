@@ -568,17 +568,35 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 // AddSelectSelectionSummaryItem - Individual selected item
 // ──────────────────────────────────────────────────────────────
 .#{$block-class__next}__selection-summary-item {
+  // Figma: layer (contextual) background, bottom border on every item
   position: relative;
+  background-color: $layer-01;
+  border-block-end: 1px solid $border-subtle-01;
+
+  &:hover {
+    background-color: $layer-hover-01;
+  }
+
+  // Carbon Accordion adds border-block-start on every .cds--accordion__item
+  // and border-block-end on :last-child. Our wrapper already owns the single
+  // bottom border (Figma spec). Strip both to avoid double borders.
+  &--accordion .cds--accordion__item,
+  &--accordion .cds--accordion__item:last-child {
+    border-block-end: none;
+    border-block-start: none;
+  }
 
   &--default {
-    // Simple mode specific styles
+    // Non-accordion (default) mode: px-[16px] py-[10px] from Figma
     .#{$block-class__next}__selection-summary-item-title-wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: $spacing-05;
+      // Figma: px-[16px] py-[10px] → $spacing-05 inline, $spacing-04 block
+      padding: $spacing-04 $spacing-05;
     }
     .#{$block-class__next}__selection-summary-item-content {
+      padding-block-end: $spacing-04;
       padding-inline: $spacing-05;
     }
   }
@@ -594,11 +612,15 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &-title {
+    // Figma: 14px / 18px / 0.16px letter-spacing = body-compact-01
+    @include type.type-style('body-compact-01');
+
     color: $text-primary;
   }
 
   &-subtitle {
-    @include type.type-style('label-01');
+    // Figma: 14px / 20px / 0.16px letter-spacing = body-01 (not label-01 which is 12px)
+    @include type.type-style('body-01');
 
     color: $text-secondary;
   }
@@ -625,22 +647,20 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding-inline-start: $spacing-05;
+    // Figma: button is 32px wide, placed flush to the right edge inside px-[16px]
+    padding-inline-start: $spacing-03;
 
-    // In accordion mode, position absolutely
+    // In accordion mode, position absolutely at the inline-end
     .#{$block-class__next}__selection-summary-item--accordion & {
       position: absolute;
+      inset-block-start: 50%;
       inset-inline-end: 0;
-    }
-
-    // In simple mode, position in flex layout
-    .#{$block-class__next}__selection-summary-item--simple & {
-      position: relative;
-      margin-inline-start: auto;
+      transform: translateY(-50%);
     }
   }
 
   &-remove-button {
+    // Figma: button only visible on hover; ghost IconButton sm (32px)
     opacity: 0;
     transition: opacity $duration-fast-01 motion(standard, productive);
 
@@ -656,7 +676,8 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &-content {
-    margin-block-start: $spacing-03;
+    // Keep below the title wrapper; no extra top margin needed when padding is on wrapper
+    margin-block-start: 0;
   }
 }
 
@@ -680,8 +701,10 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   .cds--accordion__item--active .cds--accordion__content {
-    margin-block-start: $spacing-03;
+    // Figma expanded slot: p-[16px] = $spacing-05 all around
+    margin-block-start: 0;
     padding-block: 0;
+    padding-inline: $spacing-05;
   }
 }
 

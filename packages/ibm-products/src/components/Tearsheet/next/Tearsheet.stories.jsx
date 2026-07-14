@@ -147,7 +147,7 @@ export const Default = (
   },
   context
 ) => {
-  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
@@ -389,7 +389,7 @@ export const WithInfluencer = (
   },
   context
 ) => {
-  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const influencerPanelTriggerRef = useRef(null);
@@ -620,7 +620,7 @@ export const WithTabs = (
   },
   context
 ) => {
-  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
@@ -762,7 +762,7 @@ export const withSteps = (
   },
   context
 ) => {
-  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const launcherButtonRef = useRef(null);
   return (
     <StepProvider>
@@ -796,7 +796,7 @@ export const withStepsAndHorizontalProgressIndicator = (
   },
   context
 ) => {
-  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const launcherButtonRef = useRef(null);
   const currentStep = 1;
   const [text, setText] = useState('');
@@ -832,7 +832,7 @@ export const narrowTearsheet = (
   },
   context
 ) => {
-  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
@@ -1112,7 +1112,7 @@ export const StackingTearsheet = (
   },
   context
 ) => {
-  const [open1, setOpen1] = useState(context.viewMode !== 'docs');
+  const [open1, setOpen1] = useState(context?.viewMode !== 'docs');
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const launcherButtonRef1 = useRef(null);
@@ -1504,7 +1504,7 @@ export const WithCustomFooterActions = (
   },
   context
 ) => {
-  const [open, setOpen] = useState(context.viewMode !== 'docs');
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);

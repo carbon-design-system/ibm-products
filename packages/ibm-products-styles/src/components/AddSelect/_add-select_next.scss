@@ -193,30 +193,33 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     display: flex;
     flex: 1;
     flex-direction: column;
-    justify-content: center;
   }
 
   &__cell-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $spacing-05;
-    block-size: $spacing-08;
+    padding: $spacing-03 $spacing-05;
     border-block-end: 1px solid $border-subtle-01;
+    min-block-size: $spacing-09;
   }
 
   &__content {
     display: flex;
     flex: 1;
     align-items: center;
+    align-self: center;
   }
 
   &__checkbox {
     flex: none;
+    align-self: center;
     margin-inline-end: $spacing-05;
   }
 
   &__radio {
+    align-self: center;
+
     .cds--radio-button__appearance {
       margin-inline-end: 0;
     }
@@ -593,10 +596,6 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     }
   }
 
-  &--template {
-    // Custom template mode - minimal styling
-  }
-
   &-title-wrapper {
     display: flex;
     align-items: center;
@@ -714,14 +713,6 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 
   &-title {
     @include type.type-style('heading-03');
-  }
-
-  &-close {
-    // Close button styles
-  }
-
-  &-body {
-    // Body content styles
   }
 
   &-entry {

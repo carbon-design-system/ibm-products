@@ -75,23 +75,7 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
   margin-block-start: $spacing-05;
 }
 
-// ─── Footer ──────────────────────────────────────────────────────────────────
-//
-//  Layout is driven by whether CardAction wrappers are present:
-//
-//  Has CardAction children (action-set layout):
-//    - automatic top border
-//    - no footer padding (Carbon lg buttons supply their own 48px height)
-//    - all actions stretch equally (flex: 1) filling the full footer width
-//    - exception: icon-only buttons are always fixed-width (48px)
-//
-//  No CardAction children (raw content — e.g. tertiary button, custom slot):
-//    - no border
-//    - $spacing-05 padding on all sides
-//    - no stretching (content sits at intrinsic width)
-//
-// ─────────────────────────────────────────────────────────────────────────────
-
+// ─── Footer ────────────────────────────────────────────────────
 // Base: padded, no border — the raw-content (non-action) default.
 .#{$block-class-next}__footer {
   display: flex;

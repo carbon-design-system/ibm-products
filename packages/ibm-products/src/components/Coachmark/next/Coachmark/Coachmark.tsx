@@ -99,6 +99,11 @@ export interface CoachmarkPropsNext {
    * Prevents the Coachmark from closing when clicking outside of it.
    */
   preventCloseOnClickOutside?: boolean;
+  /**
+   * A ref to the trigger element that launched the Coachmark. When provided,
+   * focus returns to this element when the Coachmark closes.
+   */
+  launcherButtonRef?: RefObject<HTMLElement | null>;
 }
 
 // Define the type for Coachmark, extending it to include Content, ContentHeader, and ContentBody
@@ -130,9 +135,9 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
       caret,
       selectorPrimaryFocus,
       preventCloseOnClickOutside,
+      launcherButtonRef,
       ...rest
     } = props;
-    const triggerRef = useRef<HTMLElement>(null);
     const internalRef = useRef<HTMLDivElement | null>(null);
     const [contentRef, setContentRef] = useState<HTMLElement | null>(null);
     const [openState, setOpenState] = useState(false);
@@ -154,32 +159,6 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
     const currentOpen = open ?? openState;
     const caretValue =
       caret !== undefined ? caret : floating === true ? false : true;
-
-    useEffect(() => {
-      const container = internalRef.current;
-      if (!container) {
-        return;
-      }
-
-      const focusableElements = Array.from(
-        container.querySelectorAll('*')
-      ) as HTMLElement[];
-
-      const firstFocusable = focusableElements.find(
-        (el) => el.tabIndex >= 0 && !el.hasAttribute('disabled')
-      );
-
-      if (firstFocusable) {
-        triggerRef.current = firstFocusable;
-      }
-    }, [children, triggerRef]);
-
-    useEffect(() => {
-      const el = triggerRef.current;
-      if (el) {
-        el.setAttribute('aria-expanded', String(!!open));
-      }
-    }, [open, triggerRef]);
 
     // Reset position when coachmark closes
     useEffect(() => {
@@ -224,7 +203,7 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
           open: currentOpen,
           setOpen,
           align,
-          triggerRef,
+          launcherButtonRef,
           position,
           contentRef,
           setContentRef,

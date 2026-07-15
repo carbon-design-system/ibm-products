@@ -6,13 +6,14 @@
  */
 
 // Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/motion' as *;
-@use '../../global/styles/project-settings' as *;
 
-$block-class__next: #{$pkg-prefix}--add-select__next;
+$block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
+$carbon-prefix: #{c4p-settings.$carbon-prefix};
 
 /// Composable AddSelect styles (next)
 /// These styles support the composable AddSelect component structure
@@ -39,8 +40,10 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 .#{$block-class__next}__header {
-  padding: $spacing-05 $spacing-05 $spacing-03;
   border-block-end: 1px solid $border-subtle-01;
+  padding-block-end: $spacing-03;
+  padding-block-start: $spacing-05;
+  padding-inline: $spacing-05;
 }
 
 .#{$block-class__next}__search {
@@ -74,7 +77,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 .#{$block-class__next}__tags-label {
-  @include type.type-style('heading-compact-02');
+  @include type-style('heading-compact-02');
 
   margin: 0;
   color: $text-primary;
@@ -102,6 +105,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   flex: 1;
   flex-direction: column;
   overflow-y: auto;
+
   @supports (overflow-block: auto) {
     overflow-block: auto;
   }
@@ -120,8 +124,10 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     flex-direction: row;
     align-items: stretch;
     block-size: 100%;
+
     .#{$block-class__next}-column {
-      padding: $spacing-05;
+      padding-block: $spacing-05;
+      padding-inline: $spacing-05;
     }
   }
 }
@@ -204,9 +210,10 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: $spacing-03 $spacing-05;
     border-block-end: 1px solid $border-subtle-01;
     min-block-size: $spacing-09;
+    padding-block: $spacing-03;
+    padding-inline: $spacing-05;
   }
 
   &__content {
@@ -225,7 +232,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   &__radio {
     align-self: center;
 
-    .cds--radio-button__appearance {
+    .#{$carbon-prefix}--radio-button__appearance {
       margin-inline-end: 0;
     }
   }
@@ -243,14 +250,14 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &__title {
-    @include type.type-style('body-compact-01');
+    @include type-style('body-compact-01');
 
     display: block;
     color: $text-primary;
   }
 
   &__subtitle {
-    @include type.type-style('helper-text-01');
+    @include type-style('helper-text-01');
 
     display: block;
     color: $text-secondary;
@@ -276,9 +283,10 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: $spacing-02;
       cursor: pointer;
       margin-inline-start: $spacing-03;
+      padding-block: $spacing-02;
+      padding-inline: $spacing-02;
       transition: none;
 
       &:hover {
@@ -300,9 +308,10 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: $spacing-02;
     cursor: pointer;
     margin-inline-start: $spacing-03;
+    padding-block: $spacing-02;
+    padding-inline: $spacing-02;
     transition: background-color $duration-fast-01 motion(standard, productive);
 
     &:hover {
@@ -336,7 +345,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
       margin-inline-end: $spacing-05;
     }
 
-    .#{$block-class__next}-row__icon .cds--icon--skeleton {
+    .#{$block-class__next}-row__icon .#{$carbon-prefix}--icon--skeleton {
       border-radius: 50%;
       block-size: $spacing-07;
       inline-size: $spacing-07;
@@ -359,10 +368,11 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 .#{$block-class__next}-column {
   display: flex;
   flex-direction: column;
-  padding: $spacing-05;
   block-size: 100%;
   border-inline-end: 1px solid $border-subtle-01;
   min-inline-size: 300px;
+  padding-block: $spacing-05;
+  padding-inline: $spacing-05;
 
   // default: no border on last column
   &:last-child {
@@ -394,8 +404,9 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 
   // Search bar section (legacy)
   &__search-bar {
-    padding: $spacing-05;
     padding-block-end: 0;
+    padding-block-start: $spacing-05;
+    padding-inline: $spacing-05;
   }
 
   &__search-wrapper {
@@ -421,9 +432,10 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &__filter-popover {
-    padding: $spacing-05;
+    padding-block: $spacing-05;
+    padding-inline: $spacing-05;
 
-    .cds--checkbox-wrapper {
+    .#{$carbon-prefix}--checkbox-wrapper {
       margin-block-end: $spacing-03;
 
       &:last-child {
@@ -436,18 +448,19 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   &__header {
     display: flex;
     align-items: center;
-    padding: $spacing-05;
     border-block-end: 1px solid $border-subtle-01;
+    padding-block: $spacing-05;
+    padding-inline: $spacing-05;
   }
 
   &__select-all {
-    .cds--checkbox-label {
+    .#{$carbon-prefix}--checkbox-label {
       display: flex;
       align-items: center;
       gap: 0;
     }
 
-    .cds--checkbox-label-text {
+    .#{$carbon-prefix}--checkbox-label-text {
       display: flex;
       align-items: center;
       gap: $spacing-03;
@@ -462,7 +475,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &__title {
-    @include type.type-style('heading-compact-01');
+    @include type-style('heading-compact-01');
   }
 
   // Rows container
@@ -496,13 +509,14 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &-button {
-    @include type.type-style('body-compact-01');
+    @include type-style('body-compact-01');
 
-    padding: 0;
     border: none;
     background: none;
     color: $link-primary;
     cursor: pointer;
+    padding-block: 0;
+    padding-inline: 0;
     text-decoration: none;
 
     &:hover {
@@ -527,7 +541,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &-current {
-    @include type.type-style('body-compact-01');
+    @include type-style('body-compact-01');
 
     color: $text-primary;
   }
@@ -543,12 +557,14 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   &-header {
     display: flex;
     align-items: center;
-    padding: $spacing-06 $spacing-05 $spacing-03 $spacing-05;
     border-block-end: 1px solid $layer-accent-01;
+    padding-block-end: $spacing-03;
+    padding-block-start: $spacing-06;
+    padding-inline: $spacing-05;
   }
 
   &-title {
-    @include type.type-style('heading-compact-02');
+    @include type-style('heading-compact-02');
 
     margin-inline-end: $spacing-03;
   }
@@ -561,18 +577,19 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &-item-default {
-    padding: $spacing-04 $spacing-05;
     border-block-end: 1px solid $border-subtle-01;
+    padding-block: $spacing-04;
+    padding-inline: $spacing-05;
   }
 
   &-item-default-title {
-    @include type.type-style('body-compact-01');
+    @include type-style('body-compact-01');
 
     color: $text-primary;
   }
 
   &-item-default-subtitle {
-    @include type.type-style('body-01');
+    @include type-style('body-01');
 
     color: $text-secondary;
   }
@@ -599,8 +616,8 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   // and border-block-end on :last-child — causing a double bottom border and a
   // stray top border. Our wrapper owns the sole border per Figma spec. (#13)
   // Border ownership: bottom border → __selection-summary-item; Carbon borders → zeroed.
-  &--accordion .cds--accordion__item,
-  &--accordion .cds--accordion__item:last-child {
+  &--accordion .#{$carbon-prefix}--accordion__item,
+  &--accordion .#{$carbon-prefix}--accordion__item:last-child {
     border-block-end: none;
     border-block-start: none;
   }
@@ -608,7 +625,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   // Carbon's default heading uses min-block-size: 40px with no block padding.
   // Figma: py-[10px] px-[16px] on the heading row, so override to $spacing-04 (10px)
   // block padding and unset the 40px minimum. (#4)
-  &--accordion .cds--accordion__heading {
+  &--accordion .#{$carbon-prefix}--accordion__heading {
     min-block-size: unset;
     padding-block: $spacing-04; // 10px top/bottom — Figma: py-[10px]
     padding-inline-end: $spacing-05; // 16px — Figma: px-[16px]
@@ -620,7 +637,8 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: $spacing-04 $spacing-05; // 10px top/bottom, 16px inline
+      padding-block: $spacing-04; // 10px top/bottom, matches Figma py-[10px]
+      padding-inline: $spacing-05; // 16px inline, matches Figma px-[16px]
     }
 
     // Figma: expanded content area closes with 10px bottom gap (#5)
@@ -630,7 +648,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
     }
 
     .#{$block-class__next}__selection-summary-item-title {
-      @include type.type-style('heading-compact-01');
+      @include type-style('heading-compact-01');
     }
   }
 
@@ -647,7 +665,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   // Figma: 14px / 18px line-height / 0.16px letter-spacing = body-compact-01 (#6)
   // Previously had color only with no type-style applied.
   &-title {
-    @include type.type-style('body-compact-01');
+    @include type-style('body-compact-01');
 
     color: $text-primary;
   }
@@ -655,7 +673,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   // Figma: 14px / 20px line-height / 0.16px letter-spacing = body-01 (#7)
   // Previously used label-01 (12px) which was incorrect.
   &-subtitle {
-    @include type.type-style('body-01');
+    @include type-style('body-01');
 
     color: $text-secondary;
   }
@@ -665,14 +683,14 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &-header {
-    @include type.type-style('label-01');
+    @include type-style('label-01');
 
     color: $text-secondary;
     margin-block-end: $spacing-03;
   }
 
   &-body {
-    @include type.type-style('body-01');
+    @include type-style('body-01');
 
     margin-block-end: $spacing-05;
   }
@@ -729,23 +747,26 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   // Carbon renders ChevronRight (→). Rotate to match Figma orientations.
   // Previously: collapsed = rotate(0deg) [pointing right], expanded = rotate(90deg)
   // [pointing down] — both wrong against the Figma spec.
-  .cds--accordion__arrow {
+  .#{$carbon-prefix}--accordion__arrow {
     transform: rotate(90deg); // collapsed: points down (∨)
   }
 
-  .cds--accordion__item--active .cds--accordion__arrow {
+  .#{$carbon-prefix}--accordion__item--active
+    .#{$carbon-prefix}--accordion__arrow {
     transform: rotate(-90deg); // expanded: points up (∧)
   }
 
   // Figma: px-[16px] — arrow sits 16px from the inline-start edge of the row
-  .cds--accordion--start .cds--accordion__arrow {
-    margin: 0 0 0 $spacing-05; // 16px from inline-start
+  .#{$carbon-prefix}--accordion--start .#{$carbon-prefix}--accordion__arrow {
+    margin-block: 0;
+    margin-inline-end: 0;
+    margin-inline-start: $spacing-05; // 16px from inline-start
   }
 
   // Figma: gap-[16px] between the arrow and the title content group.
   // $spacing-03 (8px) left gap + 8px arrow width = 16px total visual gap.
   // padding-inline-end reserves 32px for the absolutely-positioned remove button.
-  .cds--accordion--start .cds--accordion__title {
+  .#{$carbon-prefix}--accordion--start .#{$carbon-prefix}--accordion__title {
     margin-inline-end: 0;
     margin-inline-start: $spacing-03; // 8px gap after arrow → 16px total Figma gap
     padding-inline-end: $spacing-07; // 32px: prevents text overlap with remove button
@@ -755,7 +776,8 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   // Previously: padding-block: 0 (no vertical padding) and no inline padding.
   // This selector is more specific than Carbon's responsive padding-inline-end
   // overrides on .cds--accordion__content, so one rule covers all breakpoints.
-  .cds--accordion__item--active .cds--accordion__content {
+  .#{$carbon-prefix}--accordion__item--active
+    .#{$carbon-prefix}--accordion__content {
     margin-block-start: 0;
     padding-block: $spacing-05; // 16px top/bottom
     padding-inline: $spacing-05; // 16px inline
@@ -778,22 +800,23 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &-title {
-    @include type.type-style('heading-compact-02');
+    @include type-style('heading-compact-02');
   }
 
   &-body {
-    padding: $spacing-05;
+    padding-block: $spacing-05;
+    padding-inline: $spacing-05;
   }
 
   &-entry {
     margin-block-end: $spacing-05;
 
     &-title {
-      @include type.type-style('heading-compact-01');
+      @include type-style('heading-compact-01');
     }
 
     &-body {
-      @include type.type-style('body-compact-01');
+      @include type-style('body-compact-01');
     }
   }
 }

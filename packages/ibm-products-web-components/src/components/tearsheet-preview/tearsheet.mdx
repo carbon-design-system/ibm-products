@@ -1,6 +1,24 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as TearsheetStories from './tearsheet.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import helperSource from './tearsheet-helpers.ts?raw';
+
+export const customFunctionArr = [
+  helperSource
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .trim()
+];
+
+export const customImportArr = [
+  `import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';`,
+  `import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';`,
+  `import Bee from '@carbon/icons/es/bee/32';`,
+  `import Add16 from '@carbon/icons/es/add/32';`,
+  `import RightPanelClose32 from '@carbon/icons/es/right-panel--close/32';`
+];
 
 <Meta of={TearsheetStories} />
 
@@ -105,6 +123,26 @@ import '@carbon/web-components/es/components/button/index.js';
   </c4p-tearsheet-footer>
 </c4p-preview-tearsheet>
 ```
+
+## Example Usage
+
+### Default
+
+<Canvas
+  of={TearsheetStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.Default,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+        }),
+    },
+  ]}
+></Canvas>
 
 ## With Influencer and Summary Content
 

@@ -29,6 +29,7 @@ import '@carbon/web-components/es/components/progress-bar/index.js';
 import '@carbon/web-components/es/components/notification/index.js';
 import { breakpoints } from '@carbon/layout';
 import mdx from './tearsheet.mdx';
+import { getFooterActions } from './tearsheet-helpers';
 
 const storyPrefix = 'tearsheet-preview-stories';
 
@@ -363,18 +364,18 @@ export const Default = {
       </div>
 
       <c4p-preview-tearsheet
-        variant="${args.variant}"
-        ?open="${args.open}"
-        ?prevent-close-on-click-outside="${args.preventCloseOnClickOutside}"
+        variant=${args.variant}
+        ?open=${args.open}
+        ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
       >
         <c4p-tearsheet-header
-          ?hide-close-button="${args.hideCloseButton}"
-          ?disable-header-collapse="${args.disableHeaderCollapse}"
+          ?hide-close-button=${args.hideCloseButton}
+          ?disable-header-collapse=${args.disableHeaderCollapse}
         >
           <!-- slotted Decorator -->
           ${args.decorator !== 'NONE' ? getDecorator(args.decorator) : ''}
 
-          <c4p-tearsheet-header-content title="${args.title}">
+          <c4p-tearsheet-header-content title=${args.title}>
             <label slot="label">${args.label}</label>
             ${args.showDescription ? description : ''}
             ${args.showTitleIcon
@@ -418,22 +419,8 @@ export const Default = {
             : ''}
         </c4p-tearsheet-body>
         <c4p-tearsheet-footer
-          variant="${args.variant}"
-          .actions="${[
-            {
-              kind: 'ghost',
-              label: 'Cancel',
-              onClick: toggleButton,
-            },
-            {
-              kind: 'secondary',
-              label: 'Back',
-            },
-            {
-              kind: 'primary',
-              label: 'Submit',
-            },
-          ]}"
+          variant=${args.variant}
+          .actions=${getFooterActions()}
         >
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>

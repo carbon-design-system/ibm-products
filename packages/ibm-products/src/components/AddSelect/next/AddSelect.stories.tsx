@@ -176,35 +176,15 @@ const hierarchicalItems: AddSelectItem[] = [
 const summaryItems: AddSelectItem[] = sampleItems.slice(1, 4);
 
 const PlaceholderShell = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div
-      style={{
-        border: '1px dashed var(--cds-border-subtle)',
-        background: 'var(--cds-layer)',
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <div className={`${storyClass}__placeholder-shell`}>{children}</div>;
 };
 
 const PlaceholderRows = () => {
   return (
-    <div
-      style={{
-        display: 'grid',
-        gap: '1px',
-      }}
-    >
+    <div className={`${storyClass}__placeholder-rows`}>
       {sampleItems.slice(0, 3).map((item) => (
-        <div
-          key={item.id}
-          style={{
-            padding: '0.5rem',
-            background: 'var(--cds-layer-hover-01)',
-          }}
-        >
-          <p style={{ margin: 0 }}>AddSelect.Row</p>
+        <div key={item.id} className={`${storyClass}__placeholder-row`}>
+          <p>AddSelect.Row</p>
         </div>
       ))}
     </div>
@@ -653,13 +633,7 @@ const AddSelectRowStory = (args) => {
               skeleton={args.skeleton}
               rowContent={
                 args.useRowContent ? (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                    }}
-                  >
+                  <div className={`${storyClass}__row-content`}>
                     <strong>Custom row content</strong>
                     <Tag type="purple" size="sm">
                       Custom
@@ -852,11 +826,7 @@ const AddSelectSelectionSummaryStory = (args) => {
         editIconDescription={args.editIconDescription}
         emptyState={
           args.showEmptyState ? (
-            <div
-              style={{
-                padding: '1rem 0.5rem',
-              }}
-            >
+            <div className={`${storyClass}__empty-state`}>
               <NoDataEmptyState
                 subtitle={
                   <>
@@ -873,19 +843,11 @@ const AddSelectSelectionSummaryStory = (args) => {
         renderItem={
           args.useCustomRenderer
             ? (item) => (
-                <div
-                  style={{
-                    padding: '0.5rem',
-                    borderBottom: '1px solid var(--cds-border-subtle)',
-                  }}
-                >
+                <div className={`${storyClass}__summary-render-item`}>
                   <strong>{item.title}</strong>
                   {item.subtitle && (
                     <div
-                      style={{
-                        fontSize: '0.875rem',
-                        color: 'var(--cds-text-secondary)',
-                      }}
+                      className={`${storyClass}__summary-render-item__subtitle`}
                     >
                       {item.subtitle}
                     </div>
@@ -896,15 +858,8 @@ const AddSelectSelectionSummaryStory = (args) => {
         }
         headerContent={
           args.useCustomHeader ? (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                width: '100%',
-              }}
-            >
-              <h3 style={{ margin: 0, fontSize: '1rem' }}>Custom Header</h3>
+            <div className={`${storyClass}__summary-header-content`}>
+              <h3>Custom Header</h3>
               <IconButton label="popup" kind="ghost" size="sm">
                 <Popup />
               </IconButton>
@@ -1049,14 +1004,7 @@ const AddSelectSelectionSummaryItemStory = (args) => {
   const item = summaryItems[0];
 
   return (
-    <div
-      style={{
-        width: '446px',
-        border: '1px dashed var(--cds-border-subtle)',
-        padding: '0.5rem',
-        background: 'var(--cds-layer)',
-      }}
-    >
+    <div className={`${storyClass}__summary-item-wrapper`}>
       {visible ? (
         <AddSelect.SelectionSummaryItem
           item={item}
@@ -1066,26 +1014,21 @@ const AddSelectSelectionSummaryItemStory = (args) => {
           renderAccordionTitle={
             args.useCustomTitle
               ? (currentItem) => (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                    }}
-                  >
+                  <div className={`${storyClass}__accordion-title`}>
                     <UserAvatar
                       size="md"
                       name={currentItem.title}
                       tooltipText={currentItem.title}
                     />
-                    <div>
-                      <p style={{ margin: 0 }}>{currentItem.title}</p>
+                    <div className={`${storyClass}__accordion-title-text`}>
+                      <p
+                        className={`${storyClass}__accordion-title-text__title`}
+                      >
+                        {currentItem.title}
+                      </p>
                       {currentItem.subtitle && (
                         <p
-                          style={{
-                            margin: 0,
-                            color: 'var(--cds-text-secondary)',
-                          }}
+                          className={`${storyClass}__accordion-title-text__subtitle`}
                         >
                           {currentItem.subtitle}
                         </p>
@@ -1098,14 +1041,7 @@ const AddSelectSelectionSummaryItemStory = (args) => {
           renderAccordionBody={
             args.useCustomContent
               ? (currentItem) => (
-                  <div
-                    style={{
-                      marginBlockStart: '1rem',
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      gap: '0.25rem',
-                    }}
-                  >
+                  <div className={`${storyClass}__accordion-body`}>
                     <Tag type="blue" size="sm">
                       {currentItem.title}
                     </Tag>
@@ -1125,71 +1061,68 @@ const AddSelectSelectionSummaryItemStory = (args) => {
           renderItem={
             args.useCustomRenderer
               ? (currentItem) => (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      padding: '0.625rem 1rem',
-                    }}
-                  >
-                    <Draggable size={16} />
-                    <UserAvatar
-                      size="md"
-                      name={currentItem.title}
-                      tooltipText={currentItem.title}
-                    />
-                    <div style={{ flex: 1 }}>
-                      <p style={{ margin: 0 }}>{currentItem.title}</p>
-                      {currentItem.subtitle && (
+                  <div className={`${storyClass}__summary-item-row`}>
+                    <div className={`${storyClass}__summary-item-row-reorder`}>
+                      <Draggable size={16} />
+                      <UserAvatar
+                        size="md"
+                        name={currentItem.title}
+                        tooltipText={currentItem.title}
+                      />
+                      <div className={`${storyClass}__summary-item-row-text`}>
                         <p
-                          style={{
-                            margin: 0,
-                            color: 'var(--cds-text-secondary)',
-                          }}
+                          className={`${storyClass}__summary-item-row-text__title`}
                         >
-                          {currentItem.subtitle}
+                          {currentItem.title}
                         </p>
-                      )}
+                        {currentItem.subtitle && (
+                          <p
+                            className={`${storyClass}__summary-item-row-text__subtitle`}
+                          >
+                            {currentItem.subtitle}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                    <Tag type="gray" size="sm">
+                    <span
+                      className={`${storyClass}__summary-item-row-modifier`}
+                    >
                       Modifier
-                    </Tag>
+                    </span>
                   </div>
                 )
               : undefined
           }
         >
           {args.useChildren ? (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.625rem 1rem',
-              }}
-            >
+            <div className={`${storyClass}__summary-item-row`}>
               <UserAvatar
                 size="md"
                 name={item.title}
                 tooltipText={item.title}
               />
-              <div style={{ flex: 1 }}>
-                <p style={{ margin: 0 }}>{item.title}</p>
+              <div className={`${storyClass}__summary-item-row-text`}>
+                <p className={`${storyClass}__summary-item-row-text__title`}>
+                  {item.title}
+                </p>
                 {item.subtitle && (
-                  <p style={{ margin: 0, color: 'var(--cds-text-secondary)' }}>
+                  <p
+                    className={`${storyClass}__summary-item-row-text__subtitle`}
+                  >
                     {item.subtitle}
                   </p>
                 )}
               </div>
-              <Tag type="gray" size="sm">
+              <span className={`${storyClass}__summary-item-row-modifier`}>
                 Modifier
-              </Tag>
+              </span>
             </div>
           ) : undefined}
         </AddSelect.SelectionSummaryItem>
       ) : (
-        <p style={{ margin: 0 }}>Item removed in story preview.</p>
+        <p className={`${storyClass}__summary-item-removed`}>
+          Item removed in story preview.
+        </p>
       )}
     </div>
   );
@@ -1270,9 +1203,11 @@ const AddSelectItemPanelStory = (args) => {
         renderItem={
           args.useRenderItem
             ? (item) => (
-                <div>
-                  <p style={{ margin: 0, fontWeight: 600 }}>{item.title}</p>
-                  <p style={{ margin: '0.25rem 0 0' }}>
+                <div className={`${storyClass}__item-panel-content`}>
+                  <p className={`${storyClass}__item-panel-content__title`}>
+                    {item.title}
+                  </p>
+                  <p className={`${storyClass}__item-panel-content__body`}>
                     Custom rendered details for {item.value}
                   </p>
                 </div>
@@ -1281,11 +1216,11 @@ const AddSelectItemPanelStory = (args) => {
         }
       >
         {args.useChildren ? (
-          <div>
-            <p style={{ margin: 0, fontWeight: 600 }}>
+          <div className={`${storyClass}__item-panel-content`}>
+            <p className={`${storyClass}__item-panel-content__title`}>
               Custom children content
             </p>
-            <p style={{ margin: '0.25rem 0 0' }}>
+            <p className={`${storyClass}__item-panel-content__body`}>
               This content is passed as children and takes highest priority
             </p>
           </div>

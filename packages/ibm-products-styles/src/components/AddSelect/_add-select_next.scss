@@ -74,7 +74,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 .#{$block-class__next}__tags-label {
-  @include type.type-style('heading-compact-01');
+  @include type.type-style('heading-compact-02');
 
   margin: 0;
   color: $text-primary;
@@ -450,7 +450,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &__title {
-    @include type.type-style('heading-compact-02');
+    @include type.type-style('heading-compact-01');
   }
 
   // Rows container

@@ -20,6 +20,27 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
   inline-size: 50%;
 }
 
+// PlaceholderShell — dashed outline container used across Body/Column stories
+.#{$next-story-prefix}__placeholder-shell {
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+}
+
+// PlaceholderRows — skeleton row grid shown inside Body stories
+.#{$next-story-prefix}__placeholder-rows {
+  display: grid;
+  gap: 1px;
+}
+
+.#{$next-story-prefix}__placeholder-row {
+  padding: $spacing-03;
+  background: var(--cds-layer-hover-01);
+
+  p {
+    margin: 0;
+  }
+}
+
 // Story container styling
 .#{$next-story-prefix}-container {
   display: flex;
@@ -72,5 +93,142 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
   .#{$block-class__next}__header {
     padding: 0;
     border-block-end: none;
+  }
+}
+
+// Row story — rowContent slot example
+.#{$next-story-prefix}__row-content {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+}
+
+// SelectionSummary — emptyState slot wrapper
+.#{$next-story-prefix}__empty-state {
+  padding: $spacing-05 $spacing-03;
+}
+
+// SelectionSummary — renderItem slot (custom item renderer)
+.#{$next-story-prefix}__summary-render-item {
+  padding: $spacing-03;
+  border-block-end: 1px solid var(--cds-border-subtle);
+
+  &__subtitle {
+    @include type.type-style('body-compact-01');
+
+    color: var(--cds-text-secondary);
+  }
+}
+
+// SelectionSummary — headerContent slot
+.#{$next-story-prefix}__summary-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  inline-size: 100%;
+
+  h3 {
+    @include type.type-style('heading-03');
+
+    margin: 0;
+  }
+}
+
+// SelectionSummaryItem — "item removed" fallback message
+.#{$next-story-prefix}__summary-item-removed {
+  margin: 0;
+}
+
+// SelectionSummaryItem — story wrapper
+.#{$next-story-prefix}__summary-item-wrapper {
+  padding: $spacing-03;
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+  inline-size: 446px;
+}
+
+// ItemPanel — renderItem / useChildren slot content
+.#{$next-story-prefix}__item-panel-content {
+  p {
+    margin: 0;
+  }
+
+  &__title {
+    @include type.type-style('body-compact-02');
+  }
+
+  &__body {
+    margin-block-start: $spacing-02;
+  }
+}
+
+// SelectionSummaryItem — renderAccordionTitle / renderAccordionBody slots
+.#{$next-story-prefix}__accordion-title {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-03;
+
+  &-text {
+    &__title {
+      @include type.type-style('body-compact-01');
+
+      margin: 0;
+      color: var(--cds-text-primary);
+    }
+
+    &__subtitle {
+      @include type.type-style('body-01');
+
+      margin: 0;
+      color: var(--cds-text-secondary);
+    }
+  }
+}
+
+.#{$next-story-prefix}__accordion-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-02;
+  margin-block-start: $spacing-05;
+}
+
+// SelectionSummaryItem — useChildren / renderItem example rows
+.#{$next-story-prefix}__summary-item-row {
+  display: flex;
+  align-items: center;
+  padding: $spacing-04 $spacing-05;
+  border-block-end: 1px solid var(--cds-border-subtle);
+  gap: $spacing-03;
+
+  &-reorder {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
+  &-text {
+    flex: 1;
+
+    &__title {
+      @include type.type-style('body-compact-01');
+
+      margin: 0;
+      color: var(--cds-text-primary);
+    }
+
+    &__subtitle {
+      @include type.type-style('body-01');
+
+      margin: 0;
+      color: var(--cds-text-secondary);
+    }
+  }
+
+  &-modifier {
+    @include type.type-style('body-compact-01');
+
+    color: var(--cds-text-secondary);
+    white-space: nowrap;
   }
 }

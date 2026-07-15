@@ -41,16 +41,6 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
   }
 }
 
-// Story container styling
-.#{$next-story-prefix}-container {
-  display: flex;
-  flex-direction: column;
-  padding: $spacing-11 $spacing-10;
-  gap: $spacing-07;
-  inline-size: 600px;
-  max-inline-size: 600px;
-}
-
 .#{$next-story-prefix}-container--single {
   inline-size: 26rem;
 }
@@ -72,20 +62,6 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
   inline-size: 22.5rem;
 }
 
-// Variant container for showing single and multi side by side
-.#{$next-story-prefix}-variant-container {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-03;
-
-  h4 {
-    @include type.type-style('label-02');
-
-    margin: 0;
-    color: var(--cds-text-secondary);
-  }
-}
-
 // Row story — hide the header border that AddSelect.Body adds, so the
 // single-row demo doesn't show a divider above the row.
 .#{$next-story-prefix}--no-header-border {
@@ -105,18 +81,6 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
 // SelectionSummary — emptyState slot wrapper
 .#{$next-story-prefix}__empty-state {
   padding: $spacing-05 $spacing-03;
-}
-
-// SelectionSummary — renderItem slot (custom item renderer)
-.#{$next-story-prefix}__summary-render-item {
-  padding: $spacing-03;
-  border-block-end: 1px solid var(--cds-border-subtle-01);
-
-  &__subtitle {
-    @include type.type-style('body-compact-01');
-
-    color: var(--cds-text-secondary);
-  }
 }
 
 // SelectionSummary — headerContent slot

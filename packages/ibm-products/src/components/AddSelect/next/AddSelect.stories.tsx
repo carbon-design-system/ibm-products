@@ -843,7 +843,12 @@ const AddSelectSelectionSummaryStory = (args) => {
         renderItem={
           args.useCustomRenderer
             ? (item) => (
-                <div className={`${storyClass}__summary-item-row`}>
+                <div
+                  className={`${storyClass}__summary-item-row`}
+                  style={{
+                    borderBlockEnd: '1px solid var(--cds-border-subtle-01)',
+                  }}
+                >
                   <UserAvatar
                     size="md"
                     name={item.title}

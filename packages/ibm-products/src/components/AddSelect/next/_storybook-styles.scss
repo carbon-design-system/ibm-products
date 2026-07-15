@@ -66,11 +66,10 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
 // Column story container
 .#{$next-story-prefix}-summary-container {
   overflow: auto;
-  padding: 0 $spacing-05;
   border: 1px dashed var(--cds-border-subtle);
   background: var(--cds-layer);
-  block-size: 500px;
-  inline-size: 16rem;
+  block-size: 32rem;
+  inline-size: 22.5rem;
 }
 
 // Variant container for showing single and multi side by side
@@ -111,7 +110,7 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
 // SelectionSummary — renderItem slot (custom item renderer)
 .#{$next-story-prefix}__summary-render-item {
   padding: $spacing-03;
-  border-block-end: 1px solid var(--cds-border-subtle);
+  border-block-end: 1px solid var(--cds-border-subtle-01);
 
   &__subtitle {
     @include type.type-style('body-compact-01');
@@ -144,7 +143,7 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
   padding: $spacing-03;
   border: 1px dashed var(--cds-border-subtle);
   background: var(--cds-layer);
-  inline-size: 446px;
+  inline-size: 22.5rem;
 }
 
 // ItemPanel — renderItem / useChildren slot content
@@ -197,7 +196,6 @@ $block-class__next: #{c4p-settings.$pkg-prefix}--add-select__next;
   display: flex;
   align-items: center;
   padding: $spacing-04 $spacing-05;
-  border-block-end: 1px solid var(--cds-border-subtle);
   gap: $spacing-03;
 
   &-reorder {

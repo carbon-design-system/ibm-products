@@ -279,7 +279,7 @@ export const AddSelectBody = {
     globalSearchPlaceholder: 'Search by name',
     searchResultsTitle: 'Search results',
     itemCount: 3,
-    showActionsSlot: false,
+    showActionsSlot: true,
     showSubHeaderActions: false,
     showPath: false,
     path: [
@@ -513,9 +513,9 @@ export const AddSelectColumn = {
     searchLabel: 'Search within column',
     searchPlaceholder: 'Search items',
     showSearch: true,
-    showActionsSlot: false,
+    showActionsSlot: true,
     multi: true,
-    showSelectAll: true,
+    showSelectAll: false,
     enableNavigation: false,
   },
   argTypes: {
@@ -843,15 +843,29 @@ const AddSelectSelectionSummaryStory = (args) => {
         renderItem={
           args.useCustomRenderer
             ? (item) => (
-                <div className={`${storyClass}__summary-render-item`}>
-                  <strong>{item.title}</strong>
-                  {item.subtitle && (
-                    <div
-                      className={`${storyClass}__summary-render-item__subtitle`}
+                <div className={`${storyClass}__summary-item-row`}>
+                  <UserAvatar
+                    size="md"
+                    name={item.title}
+                    tooltipText={item.title}
+                  />
+                  <div className={`${storyClass}__summary-item-row-text`}>
+                    <p
+                      className={`${storyClass}__summary-item-row-text__title`}
                     >
-                      {item.subtitle}
-                    </div>
-                  )}
+                      {item.title}
+                    </p>
+                    {item.subtitle && (
+                      <p
+                        className={`${storyClass}__summary-item-row-text__subtitle`}
+                      >
+                        {item.subtitle}
+                      </p>
+                    )}
+                  </div>
+                  <span className={`${storyClass}__summary-item-row-modifier`}>
+                    Modifier
+                  </span>
                 </div>
               )
             : undefined
@@ -1132,7 +1146,7 @@ export const AddSelectSelectionSummaryItem = {
   name: 'AddSelect.SelectionSummaryItem',
   render: AddSelectSelectionSummaryItemStory,
   args: {
-    useAccordion: false,
+    useAccordion: true,
     showRemoveButton: true,
     removeButtonLabel: 'Remove item',
     useCustomTitle: false,

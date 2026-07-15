@@ -531,8 +531,8 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   &-header {
     display: flex;
     align-items: center;
-    padding: $spacing-07 $spacing-05 $spacing-03 $spacing-05;
-    border-block-end: 1px solid $border-subtle-01;
+    padding: $spacing-06 $spacing-05 $spacing-03 $spacing-05;
+    border-block-end: 1px solid $layer-accent-01;
   }
 
   &-title {
@@ -549,16 +549,18 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   }
 
   &-item-default {
-    padding: $spacing-05 0;
+    padding: $spacing-04 $spacing-05;
     border-block-end: 1px solid $border-subtle-01;
   }
 
   &-item-default-title {
+    @include type.type-style('body-compact-01');
+
     color: $text-primary;
   }
 
   &-item-default-subtitle {
-    @include type.type-style('label-01');
+    @include type.type-style('body-01');
 
     color: $text-secondary;
   }
@@ -752,17 +754,23 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 // AddSelectItemSummaryPanel - Item summary view
 // ──────────────────────────────────────────────────────────────
 .#{$block-class__next}__item-summary-panel {
-  padding: $spacing-05;
-
   &-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-block-end: $spacing-05;
+    border-block-end: 1px solid $layer-accent-01;
+    gap: $spacing-03;
+    padding-block-end: $spacing-03;
+    padding-block-start: $spacing-07;
+    padding-inline: $spacing-05;
   }
 
   &-title {
-    @include type.type-style('heading-03');
+    @include type.type-style('heading-compact-02');
+  }
+
+  &-body {
+    padding: $spacing-05;
   }
 
   &-entry {

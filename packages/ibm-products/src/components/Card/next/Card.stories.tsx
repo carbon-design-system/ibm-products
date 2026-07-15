@@ -107,14 +107,6 @@ Default.args = {
   density: 'productive',
 };
 
-/**
- * When a card is disabled, pass the same disabled state down to all
- * interactive elements inside it. This ensures correct visual styling
- * (Carbon disabled tokens) and prevents interaction.
- *
- * This is the recommended pattern for composable cards — the adopter
- * owns the disabled state and applies it explicitly to their content.
- */
 export const Disabled = () => {
   const [disabled, setDisabled] = React.useState(true);
   return (

@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass, AddSelectContext } from './context';
 import AddSelectBody, { AddSelectBodyProps } from './AddSelectBody';
-import AddSelectContent, { AddSelectContentProps } from './AddSelectContent';
 import AddSelectColumn, { AddSelectColumnProps } from './AddSelectColumn';
 import AddSelectRow, { AddSelectRowProps } from './AddSelectRow';
 import AddSelectSelectionSummary, {
@@ -50,9 +49,6 @@ export type AddSelectComponentType = React.ForwardRefExoticComponent<
 > & {
   Body: React.ForwardRefExoticComponent<
     AddSelectBodyProps & React.RefAttributes<HTMLDivElement>
-  >;
-  Content: React.ForwardRefExoticComponent<
-    AddSelectContentProps & React.RefAttributes<HTMLDivElement>
   >;
   Column: React.ForwardRefExoticComponent<
     AddSelectColumnProps & React.RefAttributes<HTMLDivElement>
@@ -125,7 +121,6 @@ AddSelect.propTypes = {
 };
 
 AddSelect.Body = AddSelectBody;
-AddSelect.Content = AddSelectContent;
 AddSelect.Column = AddSelectColumn;
 AddSelect.Row = AddSelectRow;
 AddSelect.SelectionSummary = AddSelectSelectionSummary;

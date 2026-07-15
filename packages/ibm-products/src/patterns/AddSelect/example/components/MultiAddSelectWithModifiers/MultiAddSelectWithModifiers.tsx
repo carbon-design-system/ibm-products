@@ -355,86 +355,84 @@ export const MultiAddSelectWithModifiers = forwardRef<
                   itemCount={filteredItems.length}
                   onSearch={handleSearch}
                 >
-                  <AddSelect.Content>
-                    <AddSelect.Column multi={true} hideSearch>
-                      {filteredItems.length > 0 ? (
-                        filteredItems.map((item) => {
-                          const isSelected = selectedIds.has(item.id);
-                          const currentModifierValue =
-                            modifierStates[item.id] ||
-                            item[modifierConfig.id] ||
-                            [];
+                  <AddSelect.Column multi={true} hideSearch>
+                    {filteredItems.length > 0 ? (
+                      filteredItems.map((item) => {
+                        const isSelected = selectedIds.has(item.id);
+                        const currentModifierValue =
+                          modifierStates[item.id] ||
+                          item[modifierConfig.id] ||
+                          [];
 
-                          return (
-                            <AddSelect.Row
-                              key={item.id}
-                              itemId={item.id}
-                              title={item.title || ''}
-                              subtitle={item.subtitle}
-                              value={item.value || ''}
-                              icon={item.icon}
-                              disabled={item.disabled}
-                              hasItemPanel={!!item.itemDetails}
-                              onItemPanelClick={handleShowInfo}
-                            >
-                              <div className={`${blockClass}__modifier`}>
-                                <Layer>
-                                  {modifierConfig.multiSelect ? (
-                                    <MultiSelect
-                                      id={`modifier-${item.id}`}
-                                      titleText={modifierConfig.title}
-                                      type="inline"
-                                      label={modifierConfig.label}
-                                      items={modifierConfig.options}
-                                      initialSelectedItems={
-                                        Array.isArray(currentModifierValue)
-                                          ? currentModifierValue
-                                          : []
-                                      }
-                                      onChange={({ selectedItems }) =>
-                                        handleModifierChange(
-                                          item.id,
-                                          selectedItems || []
-                                        )
-                                      }
-                                      disabled={!isSelected}
-                                      size="sm"
-                                    />
-                                  ) : (
-                                    <Dropdown
-                                      id={`modifier-${item.id}`}
-                                      titleText={modifierConfig.title}
-                                      type="inline"
-                                      label={modifierConfig.label}
-                                      items={modifierConfig.options}
-                                      initialSelectedItem={
-                                        typeof currentModifierValue === 'string'
-                                          ? currentModifierValue
-                                          : currentModifierValue[0]
-                                      }
-                                      onChange={({ selectedItem }) =>
-                                        handleModifierChange(
-                                          item.id,
-                                          selectedItem
-                                        )
-                                      }
-                                      disabled={!isSelected}
-                                      size="sm"
-                                    />
-                                  )}
-                                </Layer>
-                              </div>
-                            </AddSelect.Row>
-                          );
-                        })
-                      ) : (
-                        <div className={`${blockClass}__no-results`}>
-                          <h4>{noResultsTitle}</h4>
-                          <p>{noResultsDescription}</p>
-                        </div>
-                      )}
-                    </AddSelect.Column>
-                  </AddSelect.Content>
+                        return (
+                          <AddSelect.Row
+                            key={item.id}
+                            itemId={item.id}
+                            title={item.title || ''}
+                            subtitle={item.subtitle}
+                            value={item.value || ''}
+                            icon={item.icon}
+                            disabled={item.disabled}
+                            hasItemPanel={!!item.itemDetails}
+                            onItemPanelClick={handleShowInfo}
+                          >
+                            <div className={`${blockClass}__modifier`}>
+                              <Layer>
+                                {modifierConfig.multiSelect ? (
+                                  <MultiSelect
+                                    id={`modifier-${item.id}`}
+                                    titleText={modifierConfig.title}
+                                    type="inline"
+                                    label={modifierConfig.label}
+                                    items={modifierConfig.options}
+                                    initialSelectedItems={
+                                      Array.isArray(currentModifierValue)
+                                        ? currentModifierValue
+                                        : []
+                                    }
+                                    onChange={({ selectedItems }) =>
+                                      handleModifierChange(
+                                        item.id,
+                                        selectedItems || []
+                                      )
+                                    }
+                                    disabled={!isSelected}
+                                    size="sm"
+                                  />
+                                ) : (
+                                  <Dropdown
+                                    id={`modifier-${item.id}`}
+                                    titleText={modifierConfig.title}
+                                    type="inline"
+                                    label={modifierConfig.label}
+                                    items={modifierConfig.options}
+                                    initialSelectedItem={
+                                      typeof currentModifierValue === 'string'
+                                        ? currentModifierValue
+                                        : currentModifierValue[0]
+                                    }
+                                    onChange={({ selectedItem }) =>
+                                      handleModifierChange(
+                                        item.id,
+                                        selectedItem
+                                      )
+                                    }
+                                    disabled={!isSelected}
+                                    size="sm"
+                                  />
+                                )}
+                              </Layer>
+                            </div>
+                          </AddSelect.Row>
+                        );
+                      })
+                    ) : (
+                      <div className={`${blockClass}__no-results`}>
+                        <h4>{noResultsTitle}</h4>
+                        <p>{noResultsDescription}</p>
+                      </div>
+                    )}
+                  </AddSelect.Column>
                 </AddSelect.Body>
               </Tearsheet.MainContent>
 

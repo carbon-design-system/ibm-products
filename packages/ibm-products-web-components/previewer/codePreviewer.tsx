@@ -279,7 +279,8 @@ const filterStoryCode = (storyCode, args) => {
       );
     } else {
       const valueStr = JSON.stringify(value);
-      const regex = new RegExp(`args\\.${escapedKey}`, 'g');
+      // Use word boundary to avoid partial matches (e.g., args.invalid shouldn't match args.invalidText)
+      const regex = new RegExp(`args\\.${escapedKey}\\b`, 'g');
       storyCodeUpdated = storyCodeUpdated.replace(regex, valueStr);
     }
   });
@@ -322,7 +323,9 @@ const appGenerator = async (
     storyCode = removeUnknownComponents(storyCode, unknownComponents);
   }
 
-  const regex = /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)/;
+  // Check for spread operators OR direct args references (e.g., args.property, ${args.property})
+  const regex =
+    /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)|(args\.[\w]+)|(\$\{args\.[\w]+\})/;
   const hasArgs = regex.test(storyCode);
 
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
@@ -340,7 +343,7 @@ const appGenerator = async (
 
   import { LitElement, html, unsafeCSS } from 'lit';
   import { customElement } from 'lit/decorators.js';
-  ${customImports?.length > 0 ? customImports?.map((customImport) => customImport) : ''}
+  ${customImports?.length > 0 ? customImports?.map((customImport) => customImport).join('\n') : ''}
   ${
     matchedComponents.length > 0
       ? matchedComponents

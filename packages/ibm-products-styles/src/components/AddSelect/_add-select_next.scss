@@ -88,8 +88,10 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 }
 
 .#{$block-class__next}__content {
+  display: flex;
   overflow: auto;
   flex: 1;
+  flex-direction: column;
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -97,6 +99,7 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
 // ──────────────────────────────────────────────────────────────
 .#{$block-class__next}-list {
   display: flex;
+  flex: 1;
   flex-direction: column;
   overflow-y: auto;
   @supports (overflow-block: auto) {
@@ -115,6 +118,8 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   // Horizontal layout for hierarchy view (columns side-by-side)
   &--horizontal {
     flex-direction: row;
+    align-items: stretch;
+    block-size: 100%;
     .#{$block-class__next}-column {
       padding: $spacing-05;
     }
@@ -359,8 +364,15 @@ $block-class__next: #{$pkg-prefix}--add-select__next;
   border-inline-end: 1px solid $border-subtle-01;
   min-inline-size: 300px;
 
+  // default: no border on last column
   &:last-child {
     border-inline-end: none;
+  }
+
+  .#{$block-class__next}-list-body--horizontal & {
+    &:last-child {
+      border-inline-end: 1px solid $border-subtle-01; // override: keep border inside horizontal layout
+    }
   }
 
   // Search section with actions

@@ -391,8 +391,12 @@ const sampleItems: AddSelectItem[] = [
   },
 ];
 
-export const AddSingleItemFromHierarchyPreview = () => {
-  const [open, setOpen] = useState(false);
+export const AddSingleItemFromHierarchyPreview = ({
+  initialOpen = false,
+}: {
+  initialOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(initialOpen);
 
   const handleSubmit = (itemId: string, value: string, item?: any) => {
     console.log('Submitted:', { itemId, value, item });

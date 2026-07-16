@@ -402,52 +402,50 @@ export const MultiSelectWithScroll = forwardRef<
                   itemCount={items.length}
                   onSearch={handleSearch}
                 >
-                  <AddSelect.Content>
-                    <AddSelect.Column multi hideSearch>
-                      {displayedItems.length > 0 ? (
-                        displayedItems.map((item) => {
-                          if (isSkeletonSentinel(item)) {
-                            return (
-                              <AddSelect.Row
-                                key={item.id}
-                                itemId={item.id}
-                                title=""
-                                value=""
-                                icon={<span />}
-                                skeleton
-                              />
-                            );
-                          }
+                  <AddSelect.Column multi hideSearch>
+                    {displayedItems.length > 0 ? (
+                      displayedItems.map((item) => {
+                        if (isSkeletonSentinel(item)) {
                           return (
                             <AddSelect.Row
                               key={item.id}
                               itemId={item.id}
-                              title={item.title || ''}
-                              subtitle={item.subtitle}
-                              value={item.value || ''}
-                              icon={item.icon}
-                              disabled={item.disabled}
-                              hasItemPanel={!!item.itemDetails}
-                              onItemPanelClick={handleShowInfo}
+                              title=""
+                              value=""
+                              icon={<span />}
+                              skeleton
                             />
                           );
-                        })
-                      ) : (
-                        <div className={`${blockClass}__no-results`}>
-                          <h4>{noResultsTitle}</h4>
-                          <p>{noResultsDescription}</p>
-                        </div>
-                      )}
+                        }
+                        return (
+                          <AddSelect.Row
+                            key={item.id}
+                            itemId={item.id}
+                            title={item.title || ''}
+                            subtitle={item.subtitle}
+                            value={item.value || ''}
+                            icon={item.icon}
+                            disabled={item.disabled}
+                            hasItemPanel={!!item.itemDetails}
+                            onItemPanelClick={handleShowInfo}
+                          />
+                        );
+                      })
+                    ) : (
+                      <div className={`${blockClass}__no-results`}>
+                        <h4>{noResultsTitle}</h4>
+                        <p>{noResultsDescription}</p>
+                      </div>
+                    )}
 
-                      {/* Bottom spacer provides the scroll hint half-row */}
-                      {!isLoading && hasMore && !searchTerm && (
-                        <div
-                          className={`${blockClass}__scroll-hint-spacer`}
-                          aria-hidden="true"
-                        />
-                      )}
-                    </AddSelect.Column>
-                  </AddSelect.Content>
+                    {/* Bottom spacer provides the scroll hint half-row */}
+                    {!isLoading && hasMore && !searchTerm && (
+                      <div
+                        className={`${blockClass}__scroll-hint-spacer`}
+                        aria-hidden="true"
+                      />
+                    )}
+                  </AddSelect.Column>
                 </AddSelect.Body>
               </Tearsheet.MainContent>
 

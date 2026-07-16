@@ -1,0 +1,22 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Storybook-specific styles that override the prefix
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/spacing' as *;
+
+// Use the main example styles with the overridden prefix
+@use './create-side-panel' with (
+  $prefix: c4p-settings.$pkg-prefix
+);
+
+.create-side-panel-stories__launcher-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(100vh - #{$spacing-09});
+}

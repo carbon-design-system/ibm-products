@@ -140,7 +140,6 @@ const TooltipTemplate = ({ ...args }, context) => {
             buttonProps={{
               onClick: handleBeaconClick,
               id: 'CoachmarkBtn',
-              'aria-expanded': isOpen,
               ref: beaconButtonRef,
             }}
           ></CoachmarkBeacon>
@@ -196,7 +195,6 @@ const FloatingTemplate = ({ ...args }, context) => {
             label="Show information"
             renderIcon={Crossroads}
             onClick={handleButtonClick}
-            aria-expanded={isOpen}
             ref={triggerButtonRef}
           >
             Show information

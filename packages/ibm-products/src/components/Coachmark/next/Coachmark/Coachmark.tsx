@@ -101,7 +101,9 @@ export interface CoachmarkPropsNext {
   preventCloseOnClickOutside?: boolean;
   /**
    * A ref to the trigger element that launched the Coachmark. When provided,
-   * focus returns to this element when the Coachmark closes.
+   * focus returns to this element when the Coachmark closes, and `aria-expanded`
+   * is automatically managed on that element — do not set `aria-expanded`
+   * directly on the trigger when using this prop.
    */
   launcherButtonRef?: RefObject<HTMLElement | null>;
 }
@@ -159,6 +161,13 @@ export const Coachmark = forwardRef<HTMLDivElement, CoachmarkPropsNext>(
     const currentOpen = open ?? openState;
     const caretValue =
       caret !== undefined ? caret : floating === true ? false : true;
+
+    useEffect(() => {
+      const el = launcherButtonRef?.current;
+      if (el) {
+        el.setAttribute('aria-expanded', String(currentOpen));
+      }
+    }, [currentOpen, launcherButtonRef]);
 
     // Reset position when coachmark closes
     useEffect(() => {

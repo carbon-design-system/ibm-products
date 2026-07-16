@@ -7,7 +7,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { prefix } from '../../globals/settings';
+import { coachmarkDetailsSignal } from './coachmark-context';
+
 export const handleClick = () => {
   const coachmark = document.querySelector('c4p-coachmark');
   coachmark?.toggleAttribute('open');
+};
+
+export const handleDone = () => {
+  const coachmark = document.querySelector('c4p-coachmark');
+  coachmark?.removeAttribute('open');
+};
+
+export const handleCoachmarkOpened = () => {
+  const details = coachmarkDetailsSignal.get();
+
+  setTimeout(() => {
+    if (details.floating) {
+      // Focus on drag handle for floating coachmark
+      const header = document.querySelector(`${prefix}-coachmark-header`);
+      const dragHandle = header?.shadowRoot?.querySelector(
+        `.${prefix}--coachmark-header-drag-handle`
+      ) as HTMLElement;
+      dragHandle?.focus();
+    } else {
+      // Focus on done button for non-floating coachmark
+      const doneButton = document.querySelector(
+        '.coachmark-body cds-button'
+      ) as HTMLElement;
+      doneButton?.focus();
+    }
+  }, 100);
 };

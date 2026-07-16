@@ -291,32 +291,30 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                   itemCount={filteredItems.length}
                   onSearch={handleSearch}
                 >
-                  <AddSelect.Content>
-                    <AddSelect.Column multi hideSearch>
-                      {filteredItems.length > 0 ? (
-                        filteredItems.map((item) => {
-                          return (
-                            <AddSelect.Row
-                              key={item.id}
-                              itemId={item.id}
-                              title={item.title || ''}
-                              subtitle={item.subtitle}
-                              value={item.value || ''}
-                              icon={item.icon}
-                              disabled={item.disabled}
-                              hasItemPanel={!!item.itemDetails}
-                              onItemPanelClick={handleShowInfo}
-                            />
-                          );
-                        })
-                      ) : (
-                        <div className={`${blockClass}__no-results`}>
-                          <h4>{noResultsTitle}</h4>
-                          <p>{noResultsDescription}</p>
-                        </div>
-                      )}
-                    </AddSelect.Column>
-                  </AddSelect.Content>
+                  <AddSelect.Column multi hideSearch>
+                    {filteredItems.length > 0 ? (
+                      filteredItems.map((item) => {
+                        return (
+                          <AddSelect.Row
+                            key={item.id}
+                            itemId={item.id}
+                            title={item.title || ''}
+                            subtitle={item.subtitle}
+                            value={item.value || ''}
+                            icon={item.icon}
+                            disabled={item.disabled}
+                            hasItemPanel={!!item.itemDetails}
+                            onItemPanelClick={handleShowInfo}
+                          />
+                        );
+                      })
+                    ) : (
+                      <div className={`${blockClass}__no-results`}>
+                        <h4>{noResultsTitle}</h4>
+                        <p>{noResultsDescription}</p>
+                      </div>
+                    )}
+                  </AddSelect.Column>
                 </AddSelect.Body>
               </Tearsheet.MainContent>
 

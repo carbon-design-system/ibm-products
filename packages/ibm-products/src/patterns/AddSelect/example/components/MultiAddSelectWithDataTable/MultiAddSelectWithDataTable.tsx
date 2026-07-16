@@ -317,139 +317,137 @@ export const MultiAddSelectWithDataTable = forwardRef<
                   itemCount={filteredItems.length}
                   onSearch={handleSearch}
                 >
-                  <AddSelect.Content>
-                    <div className={`${blockClass}__data-table-wrapper`}>
-                      {filteredItems.length > 0 ? (
-                        <DataTable
-                          rows={rows}
-                          headers={headers}
-                          render={({
-                            rows,
-                            headers,
-                            getHeaderProps,
-                            getRowProps,
-                            getSelectionProps,
-                            getTableProps,
-                            getTableContainerProps,
-                          }) => (
-                            <TableContainer
-                              {...getTableContainerProps()}
-                              className={`${blockClass}__table-container`}
+                  <div className={`${blockClass}__data-table-wrapper`}>
+                    {filteredItems.length > 0 ? (
+                      <DataTable
+                        rows={rows}
+                        headers={headers}
+                        render={({
+                          rows,
+                          headers,
+                          getHeaderProps,
+                          getRowProps,
+                          getSelectionProps,
+                          getTableProps,
+                          getTableContainerProps,
+                        }) => (
+                          <TableContainer
+                            {...getTableContainerProps()}
+                            className={`${blockClass}__table-container`}
+                          >
+                            <Table
+                              {...getTableProps()}
+                              aria-label={itemsLabel}
+                              className={`${blockClass}__table`}
                             >
-                              <Table
-                                {...getTableProps()}
-                                aria-label={itemsLabel}
-                                className={`${blockClass}__table`}
-                              >
-                                <TableHead>
-                                  <TableRow>
-                                    <TableSelectAll
-                                      {...getSelectionProps()}
-                                      onSelect={(
-                                        evt: React.ChangeEvent<HTMLInputElement>
-                                      ) => {
-                                        const checked = evt.target.checked;
-                                        const newSelectedIds = new Set(
-                                          selectedIds
-                                        );
+                              <TableHead>
+                                <TableRow>
+                                  <TableSelectAll
+                                    {...getSelectionProps()}
+                                    onSelect={(
+                                      evt: React.ChangeEvent<HTMLInputElement>
+                                    ) => {
+                                      const checked = evt.target.checked;
+                                      const newSelectedIds = new Set(
+                                        selectedIds
+                                      );
 
-                                        filteredItems.forEach((item) => {
-                                          if (!item.disabled) {
-                                            if (checked) {
-                                              newSelectedIds.add(item.id);
-                                              dataManager.setSelectedItems(
-                                                item.id,
-                                                true
-                                              );
-                                            } else {
-                                              newSelectedIds.delete(item.id);
-                                              dataManager.setSelectedItems(
-                                                item.id,
-                                                false
-                                              );
-                                            }
-                                          }
-                                        });
-
-                                        setSelectedIds(newSelectedIds);
-                                      }}
-                                      checked={
-                                        filteredItems.length > 0 &&
-                                        filteredItems
-                                          .filter((item) => !item.disabled)
-                                          .every((item) =>
-                                            selectedIds.has(item.id)
-                                          )
-                                      }
-                                    />
-                                    {headers.map((header) => (
-                                      <TableHeader
-                                        {...getHeaderProps({ header })}
-                                      >
-                                        {header.header}
-                                      </TableHeader>
-                                    ))}
-                                  </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                  {rows.map((row) => {
-                                    const item = filteredItems.find(
-                                      (i) => i.id === row.id
-                                    );
-                                    return (
-                                      <TableRow {...getRowProps({ row })}>
-                                        <TableSelectRow
-                                          {...getSelectionProps({ row })}
-                                          checked={selectedIds.has(row.id)}
-                                          disabled={row.disabled}
-                                          onSelect={(
-                                            evt: React.MouseEvent<HTMLInputElement>
-                                          ) => {
-                                            const checked = (
-                                              evt.target as HTMLInputElement
-                                            ).checked;
-                                            const newSelectedIds = new Set(
-                                              selectedIds
+                                      filteredItems.forEach((item) => {
+                                        if (!item.disabled) {
+                                          if (checked) {
+                                            newSelectedIds.add(item.id);
+                                            dataManager.setSelectedItems(
+                                              item.id,
+                                              true
                                             );
+                                          } else {
+                                            newSelectedIds.delete(item.id);
+                                            dataManager.setSelectedItems(
+                                              item.id,
+                                              false
+                                            );
+                                          }
+                                        }
+                                      });
 
-                                            if (checked) {
-                                              newSelectedIds.add(row.id);
-                                              dataManager.setSelectedItems(
-                                                row.id,
-                                                true
-                                              );
-                                            } else {
-                                              newSelectedIds.delete(row.id);
-                                              dataManager.setSelectedItems(
-                                                row.id,
-                                                false
-                                              );
-                                            }
+                                      setSelectedIds(newSelectedIds);
+                                    }}
+                                    checked={
+                                      filteredItems.length > 0 &&
+                                      filteredItems
+                                        .filter((item) => !item.disabled)
+                                        .every((item) =>
+                                          selectedIds.has(item.id)
+                                        )
+                                    }
+                                  />
+                                  {headers.map((header) => (
+                                    <TableHeader
+                                      {...getHeaderProps({ header })}
+                                    >
+                                      {header.header}
+                                    </TableHeader>
+                                  ))}
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {rows.map((row) => {
+                                  const item = filteredItems.find(
+                                    (i) => i.id === row.id
+                                  );
+                                  return (
+                                    <TableRow {...getRowProps({ row })}>
+                                      <TableSelectRow
+                                        {...getSelectionProps({ row })}
+                                        checked={selectedIds.has(row.id)}
+                                        disabled={row.disabled}
+                                        onSelect={(
+                                          evt: React.MouseEvent<HTMLInputElement>
+                                        ) => {
+                                          const checked = (
+                                            evt.target as HTMLInputElement
+                                          ).checked;
+                                          const newSelectedIds = new Set(
+                                            selectedIds
+                                          );
 
-                                            setSelectedIds(newSelectedIds);
-                                          }}
-                                        />
-                                        {row.cells.map((cell) => (
-                                          <TableCell key={cell.id}>
-                                            {cell.value}
-                                          </TableCell>
-                                        ))}
-                                      </TableRow>
-                                    );
-                                  })}
-                                </TableBody>
-                              </Table>
-                            </TableContainer>
-                          )}
-                        />
-                      ) : (
-                        <div className={`${blockClass}__no-results`}>
-                          <h4>{noResultsTitle}</h4>
-                          <p>{noResultsDescription}</p>
-                        </div>
-                      )}
-                    </div>
-                  </AddSelect.Content>
+                                          if (checked) {
+                                            newSelectedIds.add(row.id);
+                                            dataManager.setSelectedItems(
+                                              row.id,
+                                              true
+                                            );
+                                          } else {
+                                            newSelectedIds.delete(row.id);
+                                            dataManager.setSelectedItems(
+                                              row.id,
+                                              false
+                                            );
+                                          }
+
+                                          setSelectedIds(newSelectedIds);
+                                        }}
+                                      />
+                                      {row.cells.map((cell) => (
+                                        <TableCell key={cell.id}>
+                                          {cell.value}
+                                        </TableCell>
+                                      ))}
+                                    </TableRow>
+                                  );
+                                })}
+                              </TableBody>
+                            </Table>
+                          </TableContainer>
+                        )}
+                      />
+                    ) : (
+                      <div className={`${blockClass}__no-results`}>
+                        <h4>{noResultsTitle}</h4>
+                        <p>{noResultsDescription}</p>
+                      </div>
+                    )}
+                  </div>
                 </AddSelect.Body>
               </Tearsheet.MainContent>
 

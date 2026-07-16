@@ -39,8 +39,12 @@ const sampleItems: AddSelectItem[] = [
   },
 ];
 
-export const SingleAddSelectDefaultPreview = () => {
-  const [open, setOpen] = useState(false);
+export const SingleAddSelectDefaultPreview = ({
+  initialOpen = false,
+}: {
+  initialOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(initialOpen);
 
   const handleSubmit = (itemId: string, value: string) => {
     console.log('Submitted:', { itemId, value });

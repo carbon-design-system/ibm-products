@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -72,6 +72,10 @@ const defaultProps = {
 URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders with standard visible props', async () => {
     const { getByText, getByPlaceholderText } = render(
       <APIKeyModal {...defaultProps} />

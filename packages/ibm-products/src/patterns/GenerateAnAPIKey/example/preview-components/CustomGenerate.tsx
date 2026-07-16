@@ -18,7 +18,7 @@ import {
   PasswordInput,
 } from '@carbon/react';
 import { GenerateAnAPIKey, CustomStep } from '../components/GenerateAnAPIKey';
-import { APIKeyDownloader } from '../../../../components/APIKeyModal/APIKeyDownloader';
+import { APIKeyDownloader } from '../components/APIKeyDownloader';
 import { InformationFilled, CheckmarkFilled } from '@carbon/react/icons';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

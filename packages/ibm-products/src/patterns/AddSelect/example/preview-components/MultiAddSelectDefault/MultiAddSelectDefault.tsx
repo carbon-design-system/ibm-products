@@ -42,8 +42,12 @@ const sampleItems: AddSelectItem[] = [
   },
 ];
 
-export const MultiAddSelectDefault = () => {
-  const [open, setOpen] = useState(false);
+export const MultiAddSelectDefault = ({
+  initialOpen = false,
+}: {
+  initialOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(initialOpen);
 
   const handleSubmit = (itemIds: string[], values: string[]) => {
     console.log('Submitted:', { itemIds, values });

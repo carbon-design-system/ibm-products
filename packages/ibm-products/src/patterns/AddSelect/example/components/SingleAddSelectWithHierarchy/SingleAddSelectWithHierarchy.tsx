@@ -329,33 +329,31 @@ export const SingleAddSelectWithHierarchy = forwardRef<
                   path={breadcrumbPath}
                   onBreadcrumbClick={handleBreadcrumbClick}
                 >
-                  <AddSelect.Content>
-                    <AddSelect.Column onNavigate={handleNavigate} hideSearch>
-                      {filteredItems.length > 0 ? (
-                        filteredItems.map((item) => {
-                          const hasChildren = dataManager.hasChildren(item.id);
+                  <AddSelect.Column onNavigate={handleNavigate} hideSearch>
+                    {filteredItems.length > 0 ? (
+                      filteredItems.map((item) => {
+                        const hasChildren = dataManager.hasChildren(item.id);
 
-                          return (
-                            <AddSelect.Row
-                              key={item.id}
-                              itemId={item.id}
-                              title={item.title || ''}
-                              subtitle={item.subtitle}
-                              value={item.value || ''}
-                              icon={item.icon}
-                              disabled={item.disabled}
-                              hasChildren={hasChildren}
-                            />
-                          );
-                        })
-                      ) : (
-                        <div className={`${blockClass}__no-results`}>
-                          <h4>{noResultsTitle}</h4>
-                          <p>{noResultsDescription}</p>
-                        </div>
-                      )}
-                    </AddSelect.Column>
-                  </AddSelect.Content>
+                        return (
+                          <AddSelect.Row
+                            key={item.id}
+                            itemId={item.id}
+                            title={item.title || ''}
+                            subtitle={item.subtitle}
+                            value={item.value || ''}
+                            icon={item.icon}
+                            disabled={item.disabled}
+                            hasChildren={hasChildren}
+                          />
+                        );
+                      })
+                    ) : (
+                      <div className={`${blockClass}__no-results`}>
+                        <h4>{noResultsTitle}</h4>
+                        <p>{noResultsDescription}</p>
+                      </div>
+                    )}
+                  </AddSelect.Column>
                 </AddSelect.Body>
               </Tearsheet.MainContent>
             </Tearsheet.Body>

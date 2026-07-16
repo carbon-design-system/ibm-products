@@ -109,38 +109,10 @@ export const CoachmarkFixedExample = (args) => {
     setIsOpen((isOpen) => !isOpen);
   };
 
-  const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
-    const carouselItems = carouselItemsRef.current[0] || [];
-
-    carouselItems.forEach((item, idx) => {
-      if (!item) {
-        return;
-      }
-
-      const isActive = idx === activeIndex;
-
-      item.setAttribute('aria-hidden', String(!isActive));
-
-      if (!isActive) {
-        item.setAttribute('inert', '');
-      } else {
-        item.removeAttribute('inert');
-      }
-
-      item.removeAttribute('tabindex');
-    });
+  const handleViewStackUpdate = useCallback(({ currentIndex, lastIndex }) => {
+    setCurrentViewIndex(currentIndex);
+    setLastViewIndex(lastIndex);
   }, []);
-
-  const handleViewStackUpdate = useCallback(
-    ({ currentIndex, lastIndex }) => {
-      setCurrentViewIndex(currentIndex);
-      setLastViewIndex(lastIndex);
-
-      // Update inert attribute for carousel items
-      updateCarouselItemsTabIndex(currentIndex);
-    },
-    [updateCarouselItemsTabIndex]
-  );
 
   const onViewChangeStart = () => {};
   const onViewChangeEnd = (options) => {
@@ -148,25 +120,33 @@ export const CoachmarkFixedExample = (args) => {
   };
 
   useEffect(() => {
-    setFixedIsVisible(isOpen);
     if (isOpen) {
-      // Initialize tabIndex for carousel items on open
-      updateCarouselItemsTabIndex(0);
+      // Use requestAnimationFrame to ensure the initial transform state is applied
+      // before triggering the transition for smooth animation
+      requestAnimationFrame(() => {
+        setFixedIsVisible(true);
+      });
     } else {
+      setFixedIsVisible(false);
       setTimeout(() => {
         const taglineButton = document.getElementById('CoachmarkTagline');
         taglineButton?.focus();
       }, 0);
     }
-  }, [isOpen, updateCarouselItemsTabIndex]);
+  }, [isOpen]);
 
   useEffect(() => {
     const activeCarouselContainer = carouselContainerRefs.current[0];
-
     if (isOpen && activeCarouselContainer) {
+      // Destroy stale event listeners from the previous instance before
+      // re-initializing, otherwise old transitionend listeners fire with a
+      // stale viewIndexStack and reset currentViewIndex back to 0.
+      setCurrentViewIndex(0);
+      setLastViewIndex(0);
+      carouselInit.current?.destroyEvents();
       carouselInit.current = initCarousel(activeCarouselContainer, {
-        onViewChangeStart: onViewChangeStart,
-        onViewChangeEnd: onViewChangeEnd,
+        onViewChangeStart: () => {},
+        onViewChangeEnd: (options) => handleViewStackUpdate(options),
         useMaxHeight: true,
       });
     }

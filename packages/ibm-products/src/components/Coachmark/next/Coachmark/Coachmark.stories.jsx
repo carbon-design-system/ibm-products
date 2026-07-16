@@ -119,10 +119,6 @@ const TooltipTemplate = ({ ...args }, context) => {
 
   const handleClose = () => {
     setIsOpen(false);
-    // Return focus to the beacon button after closing
-    setTimeout(() => {
-      beaconButtonRef.current?.focus();
-    }, 0);
   };
 
   const handleBeaconClick = () => {
@@ -175,10 +171,6 @@ const FloatingTemplate = ({ ...args }, context) => {
 
   const handleClose = () => {
     setIsOpen(false);
-    // Return focus to the trigger button after closing
-    setTimeout(() => {
-      triggerButtonRef.current?.focus();
-    }, 0);
   };
 
   const handleButtonClick = () => {

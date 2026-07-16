@@ -76,6 +76,7 @@ import './App';
 `;
 
 export const rootStyleImports: string = `
+@use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';
 `;
@@ -83,5 +84,7 @@ export const rootStyleImports: string = `
 export const rootStyleFooter: string = `
 :root {
   @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
 }
 `;

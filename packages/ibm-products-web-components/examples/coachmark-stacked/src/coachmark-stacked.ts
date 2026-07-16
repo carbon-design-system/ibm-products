@@ -45,13 +45,13 @@ const nestedItems = [
           This is known as the enrichment phase. Enrichment supports you by emulating how an analyst 
           would evaluate a finding—for example, by adding context, such as whether a certain piece of 
           data is known to be malicious, or is linked...`,
-        button: html`<cds-link href="https://www.ibm.com">Learn more</cds-link>`,
+        button: html`<div style="margin: 16px 0 0 0"><cds-link href="https://www.ibm.com">Learn more</cds-link></div>`,
       },
       {
         id: '2',
         title: 'Hello World',
         text: 'Link opens in new tab.',
-        button: html`<cds-link href="https://www.ibm.com" target="_blank">Learn more</cds-link>`,
+        button: html`<div style="margin: 16px 0 0 0"><cds-link href="https://www.ibm.com" target="_blank">Learn more</cds-link></div>`,
       },
     ],
   },
@@ -110,12 +110,19 @@ export class CoachmarkStackedExample extends LitElement {
   @state()
   private _parentHeight: number = 0;
 
+  @state()
+  private _childVisibilityStates: Map<number, boolean> = new Map();
+
   private carouselAPIs: Map<number, InitCarousel> = new Map();
   private parentButtonRefs: Map<number, HTMLElement> = new Map();
   private lastOpenChildId: number = 0;
 
   private get currentNestedItem() {
     return nestedItems.find((item) => item.id === this._openChildId);
+  }
+
+  private _getChildVisibilityClass(itemId: number): string {
+    return this._childVisibilityStates.get(itemId) ? 'is-visible' : '';
   }
 
   private get showBack() {
@@ -177,6 +184,7 @@ export class CoachmarkStackedExample extends LitElement {
     this.lastOpenChildId = id;
     this._openChildId = id;
     this._currentViewIndex = 0;
+    this._lastViewIndex = 0;
   }
 
   private handleChildClose(event?: Event) {
@@ -185,16 +193,27 @@ export class CoachmarkStackedExample extends LitElement {
     
     const childId = this._openChildId;
     
-    // Reset carousel if it exists
+    // Reset carousel if it exists - do this BEFORE resetting view indices
     const carousel = this.carouselAPIs.get(childId);
     if (carousel) {
-      carousel.reset();
+      if (carousel.reset) {
+        carousel.reset();
+      }
+      if (carousel.destroyEvents) {
+        carousel.destroyEvents();
+      }
       this.carouselAPIs.delete(childId);
     }
+    
+    // Reset view indices after carousel cleanup
+    this._currentViewIndex = 0;
+    this._lastViewIndex = 0;
 
     // Close the child first
     this._openChildId = 0;
-    this._currentViewIndex = 0;
+    
+    // Force a re-render to ensure button visibility is updated
+    this.requestUpdate();
     
     // Ensure parent stays open
     setTimeout(() => {
@@ -210,41 +229,18 @@ export class CoachmarkStackedExample extends LitElement {
     this._currentViewIndex = currentIndex;
     this._lastViewIndex = lastIndex;
     
-    // Update inert attributes
-    this.updateAriaHiddenTabIndex(childId, currentIndex);
-    
     // Focus appropriate button
     setTimeout(() => {
-      const container = this.shadowRoot?.querySelector(`#child-${childId}`);
-      if (currentIndex === lastIndex) {
-        const doneBtn = container?.querySelector('.done-btn') as HTMLElement;
-        doneBtn?.focus();
-      } else {
-        const nextBtn = container?.querySelector('.next-btn') as HTMLElement;
-        nextBtn?.focus();
-      }
-    }, 50);
-  };
-
-  private updateAriaHiddenTabIndex(childId: number, activeIndex: number) {
-    const carousel = this.carouselAPIs.get(childId);
-    const allViews = carousel?.allViews;
-
-    if (allViews) {
-      Object.values(allViews).forEach((item, idx) => {
-        const isActive = idx === activeIndex;
-        if (item) {
-          item.setAttribute('aria-hidden', String(!isActive));
-          if (!isActive) {
-            item.setAttribute('inert', '');
-          } else {
-            item.removeAttribute('inert');
-          }
-          item.removeAttribute('tabindex');
-        }
-      });
+    const container = this.shadowRoot?.querySelector(`#child-${childId}`);
+    if (currentIndex === lastIndex) {
+    const doneBtn = container?.querySelector('.done-btn') as HTMLElement;
+    doneBtn?.focus();
+    } else {
+    const nextBtn = container?.querySelector('.next-btn') as HTMLElement;
+    nextBtn?.focus();
     }
-  }
+}, 50);
+  };
 
   private handleNext(childId: number, event?: Event) {
     event?.stopPropagation();
@@ -284,8 +280,36 @@ export class CoachmarkStackedExample extends LitElement {
 
   updated(changedProperties: Map<string, any>) {
     if (changedProperties.has('_openChildId')) {
-      this.handleParentScaling();
+            this.handleChildVisibility();
       this.initializeChildCarousel();
+    }
+  }
+
+  private handleChildVisibility() {
+    const childId = this._openChildId;
+    
+    if (childId > 0) {
+      // Use double requestAnimationFrame for smooth visibility transition
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this._childVisibilityStates.set(childId, true);
+          this.requestUpdate();
+          
+          // Wait for DOM to update and child to be fully rendered before calculating height
+          this.updateComplete.then(() => {
+            requestAnimationFrame(() => {
+              this.handleParentScaling();
+            });
+          });
+        });
+      });
+    } else {
+      // Clear all visibility states when closing
+      this._childVisibilityStates.clear();
+      this.requestUpdate();
+      
+      // Restore parent scale when closing
+      this.handleParentScaling();
     }
   }
 
@@ -314,7 +338,8 @@ export class CoachmarkStackedExample extends LitElement {
   private scaleParentForChild(parentCoachmark: any, parentWrapper: HTMLElement, popoverContent: HTMLElement) {
     this._parentOpen = true;
     
-    this.updateComplete.then(() => {
+    // Wait for content to be fully rendered before calculating height
+    setTimeout(() => {
       const childCoachmark = this.shadowRoot?.querySelector(`#child-${this._openChildId}`) as any;
       const childContentPart = childCoachmark?.shadowRoot
         ?.querySelector('cds-popover cds-popover-content')
@@ -324,22 +349,22 @@ export class CoachmarkStackedExample extends LitElement {
         childContentPart.style.insetInlineStart = '0px';
       }
       
-      setTimeout(() => {
-        if (childContentPart && parentWrapper) {
-          const childWrapper = childCoachmark?.shadowRoot?.querySelector('.c4p--coachmark--wrapper') as HTMLElement;
-          const childHeight = childWrapper?.clientHeight || childContentPart.clientHeight;
+      if (childContentPart && parentWrapper) {
+        const childWrapper = childCoachmark?.shadowRoot?.querySelector('.c4p--coachmark--wrapper') as HTMLElement;
+        const childHeight = childWrapper?.clientHeight || childContentPart.clientHeight;
+        
+        if (childHeight > 0) {
+          // Apply scaling animation first
+          this.applyScaleAnimation(popoverContent, false);
           
-          parentWrapper.style.setProperty('height', `${childHeight + 16}px`);
-          parentCoachmark.open = true;
-          
-          setTimeout(() => {
-            requestAnimationFrame(() => {
-              this.applyScaleAnimation(popoverContent, false);
-            });
-          }, 0);
+          // Then set height with a smooth transition
+          requestAnimationFrame(() => {
+            parentWrapper.style.setProperty('height', `calc(${childHeight}px + 16px)`);
+            parentCoachmark.open = true;
+          });
         }
-      }, 150);
-    });
+      }
+    }, 0);
   }
 
   private restoreParentScale(parentWrapper: HTMLElement, popoverContent: HTMLElement) {
@@ -374,20 +399,20 @@ export class CoachmarkStackedExample extends LitElement {
         ) as HTMLElement;
 
         if (carouselContainer) {
-          let carousel = this.carouselAPIs.get(this._openChildId);
-          if (!carousel) {
-            carousel = initCarousel(carouselContainer, {
-              onViewChangeEnd: this.onViewChangeEnd(this._openChildId),
-              useMaxHeight: true,
-            });
-            this.carouselAPIs.set(this._openChildId, carousel);
-          } else {
-            carousel.reset();
-          }
+          // Reset view indices when initializing carousel
+          this._currentViewIndex = 0;
+          this._lastViewIndex = 0;
+          
+          const carousel = initCarousel(carouselContainer, {
+            onViewChangeEnd: this.onViewChangeEnd(this._openChildId),
+            useMaxHeight: true,
+          });
+          this.carouselAPIs.set(this._openChildId, carousel);
           
           this.updateComplete.then(() => {
-            this.updateAriaHiddenTabIndex(this._openChildId, 0);
+            // Recalculate parent height after carousel is initialized
             requestAnimationFrame(() => {
+              this.handleParentScaling();
               (this.shadowRoot?.querySelector(`#child-${this._openChildId} ${buttonSelector}`) as HTMLElement)?.focus();
             });
           });
@@ -463,7 +488,7 @@ export class CoachmarkStackedExample extends LitElement {
         return html`
           <c4p-coachmark
             id="child-${item.id}"
-            class="stacked_element_content"
+            class="stacked_element_content ${this._getChildVisibilityClass(item.id)}"
             ?open=${isOpen}
             align=${POPOVER_ALIGNMENT.TOP}
             .highContrast=${true}

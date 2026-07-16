@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { action } from 'storybook/actions';
 
 import {
@@ -846,10 +846,25 @@ const TemplateDemo = ({
 }) => {
   const carbonPrefix = usePrefix();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
+  const [annotationLabelHeight, setAnnotationLabelHeight] = useState(0);
+  const sentinelRef = useRef(null);
+
+  // The Carbon Header is position:fixed (top:0) and overlaps the Annotation
+  // label rendered above the __viewport. Measure the label height from the DOM
+  // so we can offset the header's top and keep the annotation visible.
+  useLayoutEffect(() => {
+    const label = sentinelRef.current
+      ?.closest('[class*="--annotation__content"]')
+      ?.parentElement?.querySelector('[class*="--annotation__label"]');
+    if (label) {
+      setAnnotationLabelHeight(label.getBoundingClientRect().height);
+    }
+  }, []);
 
   return (
     <>
-      <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
+      <div ref={sentinelRef} style={{ display: 'none' }} />
+      <style>{`.${carbonPrefix}--modal { opacity: 0; }${annotationLabelHeight ? ` .${carbonPrefix}--header { top: ${annotationLabelHeight}px; }` : ''}`}</style>
       <Header aria-label="IBM Platform Name">
         <HeaderMenuButton
           aria-label="Open menu"

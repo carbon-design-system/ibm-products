@@ -153,8 +153,12 @@ const modifierConfig: ModifierConfig = {
   multiSelect: true,
 };
 
-export const MultiAddSelectWithModifiers = () => {
-  const [open, setOpen] = useState(false);
+export const MultiAddSelectWithModifiers = ({
+  initialOpen = false,
+}: {
+  initialOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(initialOpen);
 
   const handleSubmit = (
     itemIds: string[],

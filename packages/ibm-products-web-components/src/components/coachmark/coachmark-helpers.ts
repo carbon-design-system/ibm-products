@@ -8,6 +8,7 @@
  */
 
 import { prefix } from '../../globals/settings';
+import { coachmarkDetailsSignal } from './coachmark-context';
 
 export const handleClick = () => {
   const coachmark = document.querySelector('c4p-coachmark');
@@ -15,30 +16,27 @@ export const handleClick = () => {
 };
 
 export const handleDone = () => {
-  document.querySelector(`${prefix}-coachmark`)?.removeAttribute('open');
+  const coachmark = document.querySelector('c4p-coachmark');
+  coachmark?.removeAttribute('open');
 };
 
-// Listen for coachmark-opened event to focus the appropriate element
 export const handleCoachmarkOpened = () => {
-  setTimeout(() => {
-    const coachmark = document.querySelector(`${prefix}-coachmark`);
-    const isFloating = coachmark?.hasAttribute('floating');
+  const details = coachmarkDetailsSignal.get();
 
-    if (isFloating) {
-      // Focus drag icon for floating coachmark
-      const header = coachmark?.querySelector(
-        `${prefix}-coachmark-header`
+  setTimeout(() => {
+    if (details.floating) {
+      // Focus on drag handle for floating coachmark
+      const header = document.querySelector(`${prefix}-coachmark-header`);
+      const dragHandle = header?.shadowRoot?.querySelector(
+        `.${prefix}--coachmark-header-drag-handle`
       ) as HTMLElement;
-      if (header && header.shadowRoot) {
-        const dragHandle = header.shadowRoot.querySelector(
-          `.${prefix}--coachmark-header-drag-handle`
-        ) as HTMLElement;
-        dragHandle?.focus();
-      }
+      dragHandle?.focus();
     } else {
-      // Focus done button for non-floating coachmark
-      const doneButton = document.querySelector('.coachmark-body cds-button');
-      (doneButton as HTMLElement)?.focus();
+      // Focus on done button for non-floating coachmark
+      const doneButton = document.querySelector(
+        '.coachmark-body cds-button'
+      ) as HTMLElement;
+      doneButton?.focus();
     }
   }, 100);
 };

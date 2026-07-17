@@ -227,7 +227,6 @@ export default {
   ],
   subcomponents: {
     'AddSelect.Body': AddSelect.Body,
-    'AddSelect.Content': AddSelect.Content,
     'AddSelect.Column': AddSelect.Column,
     'AddSelect.Row': AddSelect.Row,
     'AddSelect.SelectionSummary': AddSelect.SelectionSummary,
@@ -364,7 +363,8 @@ export const AddSelectBody = {
     },
     children: {
       control: false,
-      description: 'Child components (typically AddSelect.Content)',
+      description:
+        'Child components (typically AddSelect.Column or AddSelect.Row)',
       table: { disable: true },
     },
     headerContent: {
@@ -497,7 +497,7 @@ const AddSelectColumnStory = (args) => {
   return (
     <div className={`${storyClass}-column-container`}>
       <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-        <AddSelect.Content>
+        <AddSelect.Body hideSearch>
           <AddSelect.Column
             title={args.title}
             searchLabel={args.searchLabel}
@@ -534,7 +534,7 @@ const AddSelectColumnStory = (args) => {
               />
             ))}
           </AddSelect.Column>
-        </AddSelect.Content>
+        </AddSelect.Body>
       </AddSelect>
     </div>
   );
@@ -638,7 +638,7 @@ const AddSelectRowStory = (args) => {
   return (
     <div className={`${storyClass}-container--single`}>
       <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-        <AddSelect.Content>
+        <AddSelect.Body hideSearch>
           <AddSelect.Column multi={args.multi} hideSearch>
             <AddSelect.Row
               itemId="1"
@@ -653,6 +653,7 @@ const AddSelectRowStory = (args) => {
               onItemPanelClick={() => setItemPanelOpen(true)}
               itemPanelOpen={args.hasItemPanel && itemPanelOpen}
               icon={args.showIcon ? <Document size={24} /> : undefined}
+              skeleton={args.skeleton}
               rowContent={
                 args.useRowContent ? (
                   <div
@@ -677,7 +678,7 @@ const AddSelectRowStory = (args) => {
               ) : null}
             </AddSelect.Row>
           </AddSelect.Column>
-        </AddSelect.Content>
+        </AddSelect.Body>
       </AddSelect>
     </div>
   );
@@ -698,6 +699,7 @@ export const AddSelectRow = {
     hasItemPanel: false,
     itemPanelOpen: false,
     disabled: false,
+    skeleton: false,
   },
   argTypes: {
     multi: {
@@ -738,6 +740,11 @@ export const AddSelectRow = {
     disabled: {
       control: 'boolean',
       description: 'Disable the example row',
+    },
+    skeleton: {
+      control: 'boolean',
+      description:
+        'Render the row as a skeleton (loading state) with placeholder content',
     },
     itemId: {
       control: 'text',

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2025
+// Copyright IBM Corp. 2021, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -48,6 +48,9 @@ const defaults = {
   customSteps: [],
 };
 
+/**
+ * @deprecated This component is deprecated.
+ */
 export const APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
   (
     {
@@ -400,8 +403,13 @@ export const APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     );
   }
 );
-
 // Return a placeholder if not released and not enabled by feature flag
+
+/**@ts-ignore*/
+APIKeyModal.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Generate An API Key pattern`,
+};
 
 export const deprecatedProps = {
   /**

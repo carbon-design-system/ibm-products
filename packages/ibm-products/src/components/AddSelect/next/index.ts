@@ -8,7 +8,6 @@
 export { AddSelect } from './AddSelect';
 export type { AddSelectProps, AddSelectComponentType } from './AddSelect';
 export type { AddSelectBodyProps } from './AddSelectBody';
-export type { AddSelectContentProps } from './AddSelectContent';
 export type { AddSelectColumnProps } from './AddSelectColumn';
 export type { AddSelectRowProps } from './AddSelectRow';
 export type { AddSelectSelectionSummaryProps } from './AddSelectSelectionSummary';

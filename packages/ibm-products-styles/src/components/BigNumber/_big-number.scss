@@ -23,6 +23,10 @@
 $block-class: #{c4p-settings.$pkg-prefix}--big-number;
 $skeleton-block-class: #{c4p-settings.$pkg-prefix}--big-number-skeleton;
 
+.#{$block-class} {
+  margin: 0;
+}
+
 .#{$block-class}__label {
   @include type-style('label-01');
 

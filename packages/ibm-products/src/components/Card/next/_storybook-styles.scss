@@ -42,6 +42,18 @@ $block-class: #{c4p-settings.$pkg-prefix}--card-next;
   }
 }
 
+// Metric pair row — used in the WithChart story to lay out two BigNumbers side by side
+.card-story-metrics {
+  display: flex;
+  gap: spacing.$spacing-07; // 2rem
+  padding-block-end: spacing.$spacing-05;
+}
+
+// Body text above the chart in Example 1 of the WithChart story
+.card-story-chart-body-text {
+  padding-block-end: spacing.$spacing-05;
+}
+
 // Metadata row in the GetStarted card footer
 .card-story-get-started-meta {
   display: flex;

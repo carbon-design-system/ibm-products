@@ -36,15 +36,21 @@ import {
   Incomplete,
   Crossroads,
   SkillLevelBasic,
+  Report,
+  Maximize,
 } from '@carbon/icons-react';
 import { Bee } from '@carbon/pictograms-react';
-import { UserAvatar } from '../..';
+import { AreaChart } from '@carbon/charts-react';
+import { UserAvatar, previewCandidate__BigNumber as BigNumber } from '../..';
 import abstractImage from '../../GetStartedCard/_story-assets/abstract-image.svg';
 import illustration1 from './_story-assets/illustration-img-1.png';
 import placeholder16x9 from './_story-assets/placeholder-16x9.png';
 import placeholder1x1 from './_story-assets/placeholder-1x1.png';
 import rebusClassic from './_story-assets/classic-rebus.png';
 import './_storybook-styles.scss';
+import '@carbon/charts-react/styles.css';
+import data from './_story-assets/data.js';
+import options from './_story-assets/options.js';
 
 export default {
   title: 'Preview/Card',
@@ -1474,3 +1480,134 @@ export const GetStartedCard = () => {
     </Grid>
   );
 };
+
+// Minimal area chart — no axes, grid, legend, or toolbar
+const chartOptions = {
+  ...options,
+  height: '180px',
+};
+
+export const WithChart = () => (
+  <Grid withRowGap>
+    {/* ── Example 1: metrics above chart, body text, footer actions ──── */}
+    <Column lg={5} md={4} sm={4}>
+      <Card
+        decorator={
+          <AILabel align="bottom-right" size="xs">
+            <AILabelContent>
+              <div>
+                <p className="secondary">AI Explained</p>
+                <h1>84%</h1>
+                <p className="secondary bold">Confidence score</p>
+                <p className="secondary">
+                  Metrics derived from AI analysis of system usage patterns.
+                </p>
+                <hr />
+                <p className="secondary">Model type</p>
+                <p className="bold">Analytics model</p>
+              </div>
+            </AILabelContent>
+          </AILabel>
+        }
+      >
+        <Card.Header>
+          <Card.Label>Label</Card.Label>
+          <Card.Title>Title</Card.Title>
+          <Card.Actions>
+            <Card.Action>
+              <IconButton
+                label="More options"
+                kind="ghost"
+                size="sm"
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              >
+                <ChartBar />
+              </IconButton>
+            </Card.Action>
+          </Card.Actions>
+        </Card.Header>
+        <Card.Body>
+          <div className="card-story-metrics">
+            <BigNumber label="Label" value={62} percentage />
+            <BigNumber label="Label" value={18} percentage />
+          </div>
+          <p className="card-story-chart-body-text">
+            Label + Title header with AILabel decorator and overflow action, two
+            BigNumber components (62% / 18%) in the body, body copy text, then
+            the area chart.
+          </p>
+          <AreaChart data={data} options={chartOptions as any} />
+        </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md">
+              Read more
+            </Button>
+          </Card.Action>
+          <Card.Action>
+            <Button kind="primary" size="md" renderIcon={Report}>
+              Start report
+            </Button>
+          </Card.Action>
+        </Card.Footer>
+      </Card>
+    </Column>
+
+    {/* ── Example 2: chart first, metrics below, no footer ─────────── */}
+    <Column lg={5} md={4} sm={4}>
+      <Card
+        decorator={
+          <AILabel align="bottom-right" size="xs" kind="inline">
+            <AILabelContent>
+              <div>
+                <p className="secondary">AI Explained</p>
+                <h1>91%</h1>
+                <p className="secondary bold">Confidence score</p>
+                <p className="secondary">
+                  Metrics derived from AI analysis of system usage patterns.
+                </p>
+                <hr />
+                <p className="secondary">Model type</p>
+                <p className="bold">Foundation model</p>
+              </div>
+            </AILabelContent>
+          </AILabel>
+        }
+      >
+        <Card.Header>
+          <Card.Title>Title</Card.Title>
+          <Card.Caption>Caption</Card.Caption>
+          <Card.Actions>
+            <Card.Action>
+              <IconButton
+                label="Expand"
+                kind="ghost"
+                size="sm"
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              >
+                <Maximize />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton
+                label="More options"
+                kind="ghost"
+                size="sm"
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              >
+                <ChartBar />
+              </IconButton>
+            </Card.Action>
+          </Card.Actions>
+        </Card.Header>
+        <Card.Body>
+          <AreaChart data={data} options={chartOptions as any} />
+          <div className="card-story-metrics">
+            <BigNumber label="Label" value={62} percentage />
+            <BigNumber label="Label" value={18} percentage />
+          </div>
+        </Card.Body>
+      </Card>
+    </Column>
+  </Grid>
+);

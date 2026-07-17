@@ -24,7 +24,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card-next;
 .story-time {
   display: flex;
   align-items: center;
-  padding: 0 $spacing-05;
+  padding: 0 spacing.$spacing-05;
   font-size: calc(spacing.$spacing-04 + spacing.$spacing-01);
   gap: spacing.$spacing-03;
 }

@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode, RefObject, useEffect, useState } from 'react';
+import React, {
+  ReactNode,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   StepGroup,
   StepContextType,
@@ -20,6 +26,7 @@ import {
   Section,
   TextInput,
 } from '@carbon/react';
+import { RightPanelClose } from '@carbon/react/icons';
 import { breakpoints } from '@carbon/layout';
 
 const useMatchMedia = (query: string) => {
@@ -88,6 +95,9 @@ export const TearsheetWithSteps = ({
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
   const isSm = useMatchMedia(smMediaQuery);
   const buttonSize = isSm ? 'xl' : '2xl';
+
+  const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
+  const influencerPanelTriggerRef = useRef<HTMLButtonElement>(null);
 
   // State for submission status message (Issue 25)
   const [submissionStatus, setSubmissionStatus] = useState('');
@@ -171,7 +181,11 @@ export const TearsheetWithSteps = ({
         )}
       </Tearsheet.Header>
       {progressIndicator === 'vertical' && (
-        <Tearsheet.Influencer>
+        <Tearsheet.Influencer
+          influencerPanelOpen={influencerPanelOpen}
+          onInfluencerPanelClose={() => setInfluencerPanelOpen(false)}
+          influencerPanelTriggerRef={influencerPanelTriggerRef}
+        >
           <ProgressIndicator vertical>
             <ProgressStep
               complete={currentStep > 1}
@@ -207,6 +221,19 @@ export const TearsheetWithSteps = ({
       )}
       <Tearsheet.Body>
         <Tearsheet.MainContent>
+          {progressIndicator === 'vertical' && (
+            <div className="influencerPanelTrigger">
+              <Button
+                ref={influencerPanelTriggerRef}
+                kind="ghost"
+                label="Open influencer panel"
+                onClick={() => setInfluencerPanelOpen(true)}
+                renderIcon={() => <RightPanelClose />}
+                aria-expanded={influencerPanelOpen}
+                aria-controls="influencer-panel"
+              />
+            </div>
+          )}
           {/* Status message announcement for submission (Issue 25) */}
           {submissionStatus && (
             <div

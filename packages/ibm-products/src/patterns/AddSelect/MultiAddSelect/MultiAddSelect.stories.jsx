@@ -13,6 +13,11 @@ import { MultiAddSelectWithHierarchyPreview } from '../example/preview-component
 import { MultiAddSelectWithModifiers } from '../example/preview-components/MultiAddSelectWithModifiers/MultiAddSelectWithModifiers';
 import { NonHierarchicalWithPeekInsideItemPreview } from '../example/preview-components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
 import { MultiAddSelectWithHierarchyNoSelectAllPreview } from '../example/preview-components/MultiAddSelectWithHierarchyNoSelectAll/MultiAddSelectWithHierarchyNoSelectAll';
+import { MultiSelectWithBulkActionsPreview } from '../example/preview-components/MultiSelectWithBulkActions/MultiSelectWithBulkActions';
+import { MultiAddSelectWithGlobalActionsPreview } from '../example/preview-components/MultiAddSelectWithGlobalActions/MultiAddSelectWithGlobalActions';
+import { MultiAddSelectWithColumnActionsPreview } from '../example/preview-components/MultiAddSelectWithColumnActions/MultiAddSelectWithColumnActions';
+import { MultiSelectWithScrollPreview } from '../example/preview-components/MultiSelectWithScroll/MultiSelectWithScroll';
+import { MultiAddSelectWithDataTablePreview } from '../example/preview-components/MultiAddSelectWithDataTable/MultiAddSelectWithDataTable';
 
 export default {
   title: 'Patterns/Add and select/MultiAddSelect',
@@ -58,9 +63,36 @@ export const Overview = {
           <strong>Non-Hierarchical with Peek Inside Item</strong> -
           Multi-selection with the ability to peek inside items to view their
           contents in a middle panel
+        </li>
+        <li>
           <strong>With Hierarchy (No Select All)</strong> - Multi-selection with
           hierarchical navigation but without column-level select-all
           checkboxes. Only individual items can be selected.
+        </li>
+        <li>
+          <strong>With Modifiers and Bulk Actions</strong> - Multi-selection
+          with role modifiers and bulk action support for editing or removing
+          multiple selected items at once.
+        </li>
+        <li>
+          <strong>With Global Actions</strong> - Multi-selection with
+          hierarchical navigation and global search, filter, and sort
+          capabilities across all columns.
+        </li>
+        <li>
+          <strong>With Column Actions</strong> - Multi-selection with
+          hierarchical navigation and column-level filter and sort capabilities,
+          without global actions.
+        </li>
+        <li>
+          <strong>With Scroll (progressive loading)</strong> - Multi-selection
+          from large datasets that load progressively as the user scrolls.
+          Includes skeleton loading rows and a scroll hint at the bottom.
+        </li>
+        <li>
+          <strong>With DataTable</strong> - Multi-selection using a Carbon
+          DataTable with checkboxes, suited for items with multiple attributes
+          displayed in columnar form.
         </li>
       </ul>
       <h2>Component structure</h2>
@@ -73,31 +105,96 @@ export const Overview = {
 };
 
 export const Default = {
-  render: () => <MultiAddSelectDefault />,
+  render: (_args, context) => (
+    <MultiAddSelectDefault initialOpen={context.viewMode !== 'docs'} />
+  ),
 };
 
 Default.storyName = 'Default';
 
 export const WithHierarchy = {
-  render: () => <MultiAddSelectWithHierarchyPreview />,
+  render: (_args, context) => (
+    <MultiAddSelectWithHierarchyPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 WithHierarchy.storyName = 'With Hierarchy';
 
 export const WithModifiers = {
-  render: () => <MultiAddSelectWithModifiers />,
+  render: (_args, context) => (
+    <MultiAddSelectWithModifiers initialOpen={context.viewMode !== 'docs'} />
+  ),
 };
 
 WithModifiers.storyName = 'With Modifiers';
 
 export const NonHierarchicalWithPeekInsideItem = {
-  render: () => <NonHierarchicalWithPeekInsideItemPreview />,
+  render: (_args, context) => (
+    <NonHierarchicalWithPeekInsideItemPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 NonHierarchicalWithPeekInsideItem.storyName =
   'Non-Hierarchical with Peek Inside Item';
+
 export const WithHierarchyNoSelectAll = {
-  render: () => <MultiAddSelectWithHierarchyNoSelectAllPreview />,
+  render: (_args, context) => (
+    <MultiAddSelectWithHierarchyNoSelectAllPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 WithHierarchyNoSelectAll.storyName = 'With Hierarchy (No Select All)';
+
+export const WithModifiersAndBulkActions = {
+  render: (_args, context) => (
+    <MultiSelectWithBulkActionsPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
+};
+
+WithModifiersAndBulkActions.storyName = 'With Modifiers and Bulk Actions';
+
+export const WithGlobalActions = {
+  render: (_args, context) => (
+    <MultiAddSelectWithGlobalActionsPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
+};
+
+WithGlobalActions.storyName = 'With Global Actions';
+
+export const WithColumnActions = {
+  render: (_args, context) => (
+    <MultiAddSelectWithColumnActionsPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
+};
+
+WithColumnActions.storyName = 'With Column Actions';
+
+export const WithScroll = {
+  render: (_args, context) => (
+    <MultiSelectWithScrollPreview initialOpen={context.viewMode !== 'docs'} />
+  ),
+};
+
+WithScroll.storyName = 'With Scroll (progressive loading)';
+
+export const WithDataTable = {
+  render: (_args, context) => (
+    <MultiAddSelectWithDataTablePreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
+};
+
+WithDataTable.storyName = 'With DataTable';

@@ -433,8 +433,12 @@ const modifierConfig: ModifierConfig = {
   options: ['Editor', 'Viewer', 'Admin'],
 };
 
-export const NonHierarchicalWithPeekInsideItemPreview = () => {
-  const [open, setOpen] = useState(false);
+export const NonHierarchicalWithPeekInsideItemPreview = ({
+  initialOpen = false,
+}: {
+  initialOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(initialOpen);
 
   const handleSubmit = (
     itemIds: string[],

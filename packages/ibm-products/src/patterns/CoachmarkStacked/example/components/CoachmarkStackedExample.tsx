@@ -19,7 +19,7 @@ import {
   preview__CoachmarkTagline as CoachmarkTagline,
   preview__Coachmark as Coachmark,
 } from '@carbon/ibm-products';
-import { initCarousel } from '@carbon/utilities';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
 import { Idea } from '@carbon/react/icons';
 import cx from 'classnames';
 
@@ -73,7 +73,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
   const [openId, setOpenId] = useState(0);
-  const carouselInit = useRef(null);
+  const carouselInit = useRef<InitCarousel | null>(null);
   const [parentHeight, setParentHeight] = useState(0);
   const stackHomeContentRef = useRef(null);
   const stackedCoachmarkContentRefs = useRef([]);
@@ -153,7 +153,9 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
             </>
           ),
           button: (
-            <CarbonLink href="https://www.ibm.com">Learn more</CarbonLink>
+            <div style={{ marginTop: '16px' }}>
+              <CarbonLink href="https://www.ibm.com">Learn more</CarbonLink>
+            </div>
           ),
         },
         {
@@ -161,10 +163,12 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
           title: 'Hello World',
           text: 'Link opens in new tab.',
           button: (
-            <CarbonLink href="https://www.ibm.com" target="_blank">
-              {' '}
-              Learn more{' '}
-            </CarbonLink>
+            <div style={{ marginTop: '16px' }}>
+              <CarbonLink href="https://www.ibm.com" target="_blank">
+                {' '}
+                Learn more{' '}
+              </CarbonLink>
+            </div>
           ),
         },
       ],
@@ -267,31 +271,6 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     setIsOpen((isOpen) => !isOpen);
   };
 
-  const updateCarouselItemsTabIndex = useCallback(
-    (itemId: number, activeIndex: number) => {
-      const carouselItems = carouselItemsRef.current[itemId] || [];
-
-      carouselItems.forEach((item, idx) => {
-        if (!item) {
-          return;
-        }
-
-        const isActive = idx === activeIndex;
-
-        item.setAttribute('aria-hidden', String(!isActive));
-
-        if (!isActive) {
-          item.setAttribute('inert', '');
-        } else {
-          item.removeAttribute('inert');
-        }
-
-        item.removeAttribute('tabindex');
-      });
-    },
-    []
-  );
-
   useEffect(() => {
     if (openId > 0) {
       lastOpenIdRef.current = openId;
@@ -306,7 +285,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       }, 100);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openId, updateCarouselItemsTabIndex]);
+  }, [openId]);
 
   useEffect(() => {
     // When parent coachmark closes, return focus to tagline button
@@ -322,9 +301,15 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     const activeCarouselContainer = carouselContainerRefs.current[openId];
 
     if (openId > 0 && activeCarouselContainer) {
+      // Destroy stale event listeners from the previous instance before
+      // re-initializing, otherwise old transitionend listeners fire with a
+      // stale viewIndexStack and reset currentViewIndex back to 0.
+      setCurrentViewIndex(0);
+      setLastViewIndex(0);
+      carouselInit.current?.destroyEvents();
       carouselInit.current = initCarousel(activeCarouselContainer, {
-        onViewChangeStart: onViewChangeStart,
-        onViewChangeEnd: onViewChangeEnd,
+        onViewChangeStart: () => {},
+        onViewChangeEnd: (options) => handleViewStackUpdate(options),
         useMaxHeight: true,
       });
     }
@@ -336,17 +321,10 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     handleViewStackUpdate(options);
   };
 
-  const handleViewStackUpdate = useCallback(
-    ({ currentIndex, lastIndex }) => {
-      setCurrentViewIndex(currentIndex);
-      setLastViewIndex(lastIndex);
-
-      // Update inert attribute for carousel items
-      updateCarouselItemsTabIndex(openId, currentIndex);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [openId, updateCarouselItemsTabIndex]
-  );
+  const handleViewStackUpdate = useCallback(({ currentIndex, lastIndex }) => {
+    setCurrentViewIndex(currentIndex);
+    setLastViewIndex(lastIndex);
+  }, []);
 
   // Separate effect to handle focus after carousel navigation
   useEffect(() => {
@@ -377,7 +355,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     carouselInit?.current?.prev();
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const getPopoverContentElement = (container: HTMLElement | null) =>
       container?.closest('.cds--popover-content') as HTMLElement | null;
 
@@ -419,20 +397,20 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       const targetHome = getPopoverContentElement(container);
 
       if (stackHomeContent && targetHome) {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            const targetHomeHeight = targetHome.clientHeight;
+        // Apply scaling class immediately
+        stackHomeContent.parentElement?.classList.add(
+          `${blockClass}--scaled-home`
+        );
+        stackHomeContent.parentElement?.classList.remove(
+          `${blockClass}--unscaled-home`
+        );
 
-            stackHomeContent.style.height = `calc(${targetHomeHeight}px + 16px)`;
-            stackHomeContent.parentElement?.classList.add(
-              `${blockClass}--scaled-home`
-            );
-            stackHomeContent.parentElement?.classList.remove(
-              `${blockClass}--unscaled-home`
-            );
-            targetHome.focus();
-          });
-        });
+        // Wait for content to be fully rendered before calculating height
+        setTimeout(() => {
+          const targetHomeHeight = targetHome.clientHeight;
+          stackHomeContent.style.height = `calc(${targetHomeHeight}px + 16px)`;
+          targetHome.focus();
+        }, 50);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -511,6 +489,19 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
       </Coachmark>
       {items.map((item) => {
         const isOpen = openId === item.id;
+        const [itemVisible, setItemVisible] = React.useState(false);
+
+        React.useEffect(() => {
+          if (isOpen) {
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                setItemVisible(true);
+              });
+            });
+          } else {
+            setItemVisible(false);
+          }
+        }, [isOpen]);
 
         return (
           <Coachmark
@@ -536,7 +527,10 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                   stackedCoachmarkContentRefs.current[item.id] = el;
                 }
               }}
-              className={cx(`${elementBlockClass}`)}
+              className={cx(
+                `${elementBlockClass}`,
+                itemVisible && 'is-visible'
+              )}
             >
               <Coachmark.ContentHeader closeIconDescription="Close" />
               <Coachmark.ContentBody>

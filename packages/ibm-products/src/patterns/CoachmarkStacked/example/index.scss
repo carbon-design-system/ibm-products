@@ -166,11 +166,9 @@ $elements-block-class: 'stacked_element_content';
 }
 
 .#{$stack-home-class}--scaled-home {
-  inset-block-end: $spacing-05;
   opacity: 0.8;
   transform: scaleX(0.9);
   transform-origin: top center;
-  transition: transform $duration-moderate-02 motion(exit, productive);
 }
 
 .#{$stack-home-class}--unscaled-home {
@@ -185,6 +183,14 @@ $elements-block-class: 'stacked_element_content';
   inset-block-start: auto;
   inset-inline-end: $spacing-13;
   inset-inline-start: auto;
+
+  .#{$carbon-prefix}--popover-content {
+    transition: height $duration-fast-02 motion(exit, productive);
+
+    @media (prefers-reduced-motion) {
+      transition: none;
+    }
+  }
 }
 
 // Create a fixed positioning context for nested coachmarks
@@ -195,10 +201,23 @@ $elements-block-class: 'stacked_element_content';
   inset-block-start: auto;
   inset-inline-end: $spacing-13;
   inset-inline-start: auto;
+  transform: translateY(100vh);
+  transition: transform $duration-fast-02 motion(exit, productive);
+  visibility: hidden;
+
+  @media (prefers-reduced-motion) {
+    transition: none;
+  }
 
   // Allow the popover to be positioned absolutely within the fixed container
   .#{$carbon-prefix}--popover {
     position: absolute;
     visibility: visible;
   }
+}
+
+// Trigger animation when is-visible class is applied
+.#{$prefix}--coachmark__next:has(.#{$elements-block-class}.is-visible) {
+  transform: translateY(0);
+  visibility: visible;
 }

@@ -31,6 +31,10 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders body', async () => {
     render(<ExportModal {...defaultProps} />);
     screen.getByText(defaultProps.body);

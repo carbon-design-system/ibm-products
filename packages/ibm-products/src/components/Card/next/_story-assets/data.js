@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 export default [
   { group: 'Dataset 1', date: '2019-01-01T00:00:00.000Z', value: 1 },
   { group: 'Dataset 1', date: '2019-01-02T00:00:00.000Z', value: 2 },

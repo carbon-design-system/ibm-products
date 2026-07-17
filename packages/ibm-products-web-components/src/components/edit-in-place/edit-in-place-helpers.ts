@@ -10,7 +10,7 @@
 import { prefix } from '../../globals/settings';
 import { EDIT_IN_PLACE_SIZE, TOOLTIP_ALIGNMENT } from './defs';
 
-export const blockClass = `${prefix}--edit-in-place`;
+export const blockClass = prefix + '--edit-in-place';
 export const storyClass = 'edit-in-place-example';
 
 export const sizes = {

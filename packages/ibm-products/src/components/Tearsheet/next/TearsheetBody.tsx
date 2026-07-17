@@ -26,20 +26,10 @@ import { useCollapsible } from '../../../global/js/hooks/useCollapsible';
  */
 
 export interface TearsheetBodyProps {
-  /**
-   * Optional static content for body
-   */
+  /** Optional static content for the body */
   children?: ReactNode;
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
+  /** Optional class name applied to the body container */
   className?: string;
-  /**
-   *You can provide content either through a callback (contentRenderer) or as static children—but not both.
-   * If both are provided, contentRenderer always takes precedence. This optional callback should return the content
-   * to be rendered in the body section, which can be either a single element or an array of elements based on your needs.
-   * If internal state access isn’t required, you can simply use static children instead
-   */
 }
 
 const TearsheetBody = forwardRef<HTMLDivElement, TearsheetBodyProps>(
@@ -51,11 +41,13 @@ const TearsheetBody = forwardRef<HTMLDivElement, TearsheetBodyProps>(
     );
   }
 );
-
+TearsheetBody.displayName = 'TearsheetBody';
 export interface MainContentProps {
   children: ReactNode;
   className?: string;
-  /** this can be set take full width without any padding */
+  /**
+   * When `true`, the content takes full width with no padding.
+   */
   isFlush?: boolean;
 }
 /**
@@ -119,6 +111,7 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
     );
   }
 );
+MainContent.displayName = 'TearsheetMainContent';
 
 /**
  * ----------------
@@ -129,22 +122,25 @@ export interface SummaryContentProps {
   children: ReactNode;
   className?: string;
   /**
-   * In mobile screens right side details section wont be visible by default. This prop can be toggled to open/close right panel in this case.
+   * On mobile screens the summary panel is hidden by default. Toggle this prop
+   * to open/close it.
    */
   summaryPanelOpen?: boolean;
   /**
-   * Specify a handler for closing the side panel.
-   * This handler closes the modal, e.g. changing `open` prop.
+   * Handler called when the summary panel close button is activated.
    */
   onSummaryPanelClose?(): void;
-  /** this can be set take full width without any padding */
+  /**
+   * When `true`, the content takes full width with no padding.
+   */
   isFlush?: boolean;
   /**
-   * Optional ref to the trigger button that opened the panel. Focus will return here when panel closes.
+   * Optional ref to the trigger button that opened the panel. Focus returns
+   * here when the panel closes.
    */
-  summaryPanelTriggerRef?: React.RefObject<HTMLElement>;
+  summaryPanelTriggerRef?: React.RefObject<HTMLElement | null>;
   /**
-   * Optional aria-label for the summary panel. Defaults to "Summary panel".
+   * Accessible label for the summary panel. Defaults to "Summary panel".
    */
   summaryPanelAriaLabel?: string;
 }
@@ -201,7 +197,13 @@ export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
     );
   }
 );
+SummaryContent.displayName = 'TearsheetSummaryContent';
 
+/**
+ * ----------------
+ * Influencer
+ * ----------------
+ */
 export interface InfluencerProps {
   children: ReactNode;
   className?: string;
@@ -279,5 +281,6 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
     );
   }
 );
+Influencer.displayName = 'TearsheetInfluencer';
 
 export default TearsheetBody;

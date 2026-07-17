@@ -135,6 +135,9 @@ export const stackblitzPrefillConfig = async ({
   }
 
   const scssImports = (c: string) =>
+    (!/@carbon\/styles\/scss\/reset/.test(c)
+      ? "@use '@carbon/styles/scss/reset';\n"
+      : '') +
     (!/@carbon\/styles\/scss\/theme/.test(c)
       ? "@use '@carbon/styles/scss/theme';\n"
       : '') +
@@ -242,7 +245,17 @@ const filterStoryCode = (storyCode, args) => {
     //replace the render closing braces
     .replace(/}\s*$/, '')
     // Remove <style>${styles}</style> injections anywhere
-    .replace(/<style>\s*\$\{styles\}\s*<\/style>/g, '');
+    .replace(/<style>\s*\$\{styles\}\s*<\/style>/g, '')
+    // Replace ${prefix} with the literal prefix value 'c4p'
+    .replace(/\$\{prefix\}/g, 'c4p')
+    // Replace ${storyPrefix} — story-local variable not available in Stackblitz
+    .replace(/\$\{storyPrefix\}/g, '');
+
+  // Unwrap ifDefined(args.xxx) → args.xxx so the replacement loop handles them normally
+  storyCodeUpdated = storyCodeUpdated.replace(
+    /ifDefined\(\s*(args\.[a-zA-Z0-9_]+)\s*\)/g,
+    '$1'
+  );
 
   // Replace all placeholders in the code with actual arg values
   Object.entries((args = args ?? {})).forEach(([key, value]) => {
@@ -279,10 +292,16 @@ const filterStoryCode = (storyCode, args) => {
       );
     } else {
       const valueStr = JSON.stringify(value);
-      const regex = new RegExp(`args\\.${escapedKey}`, 'g');
+      const regex = new RegExp(`args\\.${escapedKey}\\b`, 'g');
       storyCodeUpdated = storyCodeUpdated.replace(regex, valueStr);
     }
   });
+  // Catch-all: any args.xxx still present were not in story.args — replace with empty string
+  storyCodeUpdated = storyCodeUpdated.replace(
+    /\$\{\s*args\.[a-zA-Z0-9_]+\s*\}/g,
+    '""'
+  );
+
   return storyCodeUpdated;
 };
 

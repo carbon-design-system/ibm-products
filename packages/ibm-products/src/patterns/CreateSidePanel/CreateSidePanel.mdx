@@ -1,0 +1,104 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import * as stories from './CreateSidePanel.stories';
+
+# CreateSidePanel
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#side-panel)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Default](#default)
+- [With form validation](#with-form-validation)
+- [Feedback](#feedback)
+
+## Overview
+
+The CreateSidePanel pattern provides a recipe for building single-form creation
+interfaces in a slide-in side panel. It is used for medium-complexity creations
+where the user needs to retain page context — the underlying content remains
+visible and interactive while the panel is open.
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+To build this pattern, we recommend including the following components:
+
+- [SidePanel](https://ibm-products.carbondesignsystem.com/?path=/docs/components-sidepanel)
+  (with `slideIn` and `placement="right"`)
+- [Form](https://react.carbondesignsystem.com/?path=/docs/components-form)
+- [TextInput](https://react.carbondesignsystem.com/?path=/docs/components-textinput)
+- [Dropdown](https://react.carbondesignsystem.com/?path=/docs/components-dropdown)
+- [FormGroup](https://react.carbondesignsystem.com/?path=/docs/components-formgroup)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+
+```jsx
+import { SidePanel } from '@carbon/ibm-products';
+import { Form, TextInput, Dropdown, FormGroup, Button } from '@carbon/react';
+```
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CreateSidePanel/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CreateSidePanel/example)
+
+<Canvas withSource="none">
+  <Story of={stories.createSidePanel} />
+</Canvas>
+
+### Example
+
+Here's a quick example to get you started.
+
+#### HTML
+
+```html
+<div id="page-content-selector">
+  <button onClick="{()" ="">setOpen(true)}> Create resource</button>
+  <CreateSidePanel
+    open="{open}"
+    title="Create resource"
+    subtitle="Provide the details for your new resource"
+    formTitle="Resource configuration"
+    formDescription="Fill in the required fields below."
+    primaryButtonText="Create"
+    secondaryButtonText="Cancel"
+    selectorPageContent="#page-content-selector"
+    selectorPrimaryFocus="#resource-name"
+    onRequestClose="{()"
+    =""
+  >
+    setOpen(false)} onRequestSubmit={handleSubmit} >
+    <TextInput id="resource-name" labelText="Resource name" />
+  </CreateSidePanel>
+</div>
+```
+
+## Default
+
+The default CreateSidePanel pattern provides a focused single-form creation
+experience inside a slide-in side panel with:
+
+- A slide-in panel that preserves page context
+- Form title and description sections
+- Submit and cancel action buttons in the panel footer
+
+## With form validation
+
+The pattern can be extended to include form validation:
+
+- Field-level validation with error states
+- Submit button disabled until all required fields are valid
+- Invalid text displayed for fields with errors
+- Real-time validation on blur or change events
+
+## Feedback
+
+Help us improve this component by providing feedback through
+[GitHub issues](https://github.com/carbon-design-system/ibm-products/issues/new/choose).

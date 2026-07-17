@@ -75,13 +75,16 @@ const TearsheetHeaderContent = React.forwardRef<
     closeIconDescription,
     hideCloseButton = false,
     titleId,
+    fullyCollapsed,
   } = useContext(TearsheetContext);
 
   // Normalize decorator (AILabel is always size `sm`)
   const candidateIsAILabel =
     isValidElement(decorator) && decorator.type === AILabel;
   const normalizedDecorator = candidateIsAILabel
-    ? cloneElement(decorator as ReactElement<any>, { size: 'sm' })
+    ? cloneElement(decorator as ReactElement<any>, {
+        size: fullyCollapsed ? 'xs' : 'sm',
+      })
     : decorator;
 
   const headerContent = (
@@ -100,6 +103,7 @@ const TearsheetHeaderContent = React.forwardRef<
             align="bottom"
             autoAlign={true}
             value={title}
+            lines={fullyCollapsed ? 1 : 2}
           />
           {titleEnd ? (
             <span className={`${blockClass}__title-end`}>{titleEnd}</span>
@@ -133,6 +137,7 @@ const TearsheetHeaderContent = React.forwardRef<
         label={closeIconDescription || 'Close'}
         onClick={onClose}
         align="left"
+        size={fullyCollapsed ? 'md' : null}
       >
         <Close
           size={20}
@@ -164,5 +169,6 @@ const TearsheetHeaderContent = React.forwardRef<
     </div>
   );
 });
+TearsheetHeaderContent.displayName = 'TearsheetHeaderContent';
 
 export default TearsheetHeaderContent;

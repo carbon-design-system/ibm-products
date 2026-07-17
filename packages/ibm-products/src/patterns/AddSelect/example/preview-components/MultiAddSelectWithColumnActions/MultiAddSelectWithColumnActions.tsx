@@ -183,8 +183,12 @@ const hierarchicalItems: any = {
   ],
 };
 
-export const MultiAddSelectWithColumnActionsPreview = () => {
-  const [open, setOpen] = useState(false);
+export const MultiAddSelectWithColumnActionsPreview = ({
+  initialOpen = false,
+}: {
+  initialOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(initialOpen);
 
   const handleOpen = () => {
     setOpen(true);

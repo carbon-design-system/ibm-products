@@ -476,6 +476,7 @@ export const NonHierarchicalWithPeekInsideItem = forwardRef<
 
                   {peekInsideItem && peekInsideItem.users && (
                     <AddSelect.Column
+                      className={`${blockClass}__peek-column`}
                       title={peekInsideItem.title || ''}
                       itemCount={peekInsideItem.users.length}
                       hideSearch

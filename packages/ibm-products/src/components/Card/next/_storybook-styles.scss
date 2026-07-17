@@ -29,15 +29,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--card-next;
   gap: spacing.$spacing-03;
 }
 
-// Combining both classes raises specificity to (0,2,0) — beats the single-class
-// component rule regardless of stylesheet load order.
 .get-started-story-card.#{$block-class} {
   border-color: #8a3ffc;
   background-image: linear-gradient(to bottom, #5d25ad, #6929c4);
   color: #ffffff;
 
-  // Child text elements have explicit color rules in the component stylesheet
-  // with specificity (0,1,0). Nesting here gives (0,2,0) to win over them.
   .#{$block-class}__title,
   .#{$block-class}__label,
   .#{$block-class}__caption,

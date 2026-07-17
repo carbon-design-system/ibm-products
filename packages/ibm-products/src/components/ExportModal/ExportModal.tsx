@@ -158,6 +158,7 @@ export interface ExportModalProps
 
 /**
  * Modal dialog version of the export pattern
+ * @deprecated This component is deprecated.
  */
 export const ExportModal = forwardRef(
   (
@@ -380,6 +381,12 @@ export const ExportModal = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
+
+/**@ts-ignore*/
+ExportModal.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Export Modal pattern`,
+};
 
 ExportModal.propTypes = {
   /**

@@ -36,6 +36,12 @@ interface Props {
   setOpen?: (open: boolean) => void;
   progressIndicator?: 'vertical' | 'horizontal';
   launcherButtonRef?: RefObject<HTMLButtonElement | null>;
+  decorator?: ReactNode;
+  variant?: 'wide' | 'narrow';
+  hideCloseButton?: boolean;
+  disableHeaderCollapse?: boolean;
+  verticalGap?: string;
+  keepMounted?: boolean;
 }
 
 export const TearsheetWithSteps = ({
@@ -50,6 +56,12 @@ export const TearsheetWithSteps = ({
   selectorPrimaryFocus,
   progressIndicator = 'vertical',
   launcherButtonRef,
+  decorator,
+  variant = 'wide',
+  hideCloseButton,
+  disableHeaderCollapse,
+  verticalGap,
+  keepMounted,
   ...rest
 }: Props) => {
   const {
@@ -70,11 +82,18 @@ export const TearsheetWithSteps = ({
   return (
     <Tearsheet
       open={open}
-      variant={'wide'}
+      variant={variant}
+      decorator={decorator}
       onClose={() => setOpen?.(false)}
       launcherButtonRef={launcherButtonRef}
+      verticalGap={verticalGap}
+      keepMounted={keepMounted}
     >
-      <Tearsheet.Header>
+      <Tearsheet.Header
+        hideCloseButton={hideCloseButton}
+        disableHeaderCollapse={disableHeaderCollapse}
+        closeIconDescription={closeIconDescription}
+      >
         <Tearsheet.HeaderContent
           label="Customer data"
           title="Title of the tearsheet "

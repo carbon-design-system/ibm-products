@@ -13,7 +13,7 @@ import ansibleLogo from './_story-assets/ansible-logo.svg';
 import grafanaLogo from './_story-assets/grafana-logo.svg';
 import jsLogo from './_story-assets/js-logo.svg';
 
-export const blockClass = `${prefix}--about-modal`;
+export const blockClass = prefix + '--about-modal';
 export const storyPrefix = 'about-modal-stories__';
 export const getTitle = (index) => {
   switch (index) {

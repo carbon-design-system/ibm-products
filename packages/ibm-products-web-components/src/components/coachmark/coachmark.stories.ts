@@ -87,6 +87,7 @@ export const Tooltip = {
     ...args,
     align: 'bottom',
     caret: true,
+    selectorPrimaryFocus: '',
   },
   argTypes,
   render: (args: any) => {
@@ -103,7 +104,7 @@ export const Tooltip = {
           .floating=${args.floating}
           .position=${{ x: 150, y: 100 }}
           .caret=${args.caret}
-          selector-primary-focus=${args.selectorPrimaryFocus || ''}
+          selector-primary-focus=${args.selectorPrimaryFocus}
         >
           <c4p-coachmark-beacon
             label="Show information"
@@ -132,6 +133,7 @@ export const Floating = {
     ...args,
     align: 'bottom',
     floating: true,
+    selectorPrimaryFocus: '',
   },
   argTypes,
   render: (args: any) => {
@@ -148,7 +150,7 @@ export const Floating = {
           .floating=${args.floating}
           .caret=${args.caret}
           drag-aria-label="Coachmark is being dragged"
-          selector-primary-focus=${args.selectorPrimaryFocus || ''}
+          selector-primary-focus=${args.selectorPrimaryFocus}
         >
           <cds-button
             kind="tertiary"

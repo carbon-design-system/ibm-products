@@ -105,62 +105,96 @@ export const Overview = {
 };
 
 export const Default = {
-  render: () => <MultiAddSelectDefault />,
+  render: (_args, context) => (
+    <MultiAddSelectDefault initialOpen={context.viewMode !== 'docs'} />
+  ),
 };
 
 Default.storyName = 'Default';
 
 export const WithHierarchy = {
-  render: () => <MultiAddSelectWithHierarchyPreview />,
+  render: (_args, context) => (
+    <MultiAddSelectWithHierarchyPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 WithHierarchy.storyName = 'With Hierarchy';
 
 export const WithModifiers = {
-  render: () => <MultiAddSelectWithModifiers />,
+  render: (_args, context) => (
+    <MultiAddSelectWithModifiers initialOpen={context.viewMode !== 'docs'} />
+  ),
 };
 
 WithModifiers.storyName = 'With Modifiers';
 
 export const NonHierarchicalWithPeekInsideItem = {
-  render: () => <NonHierarchicalWithPeekInsideItemPreview />,
+  render: (_args, context) => (
+    <NonHierarchicalWithPeekInsideItemPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 NonHierarchicalWithPeekInsideItem.storyName =
   'Non-Hierarchical with Peek Inside Item';
 
 export const WithHierarchyNoSelectAll = {
-  render: () => <MultiAddSelectWithHierarchyNoSelectAllPreview />,
+  render: (_args, context) => (
+    <MultiAddSelectWithHierarchyNoSelectAllPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 WithHierarchyNoSelectAll.storyName = 'With Hierarchy (No Select All)';
 
 export const WithModifiersAndBulkActions = {
-  render: () => <MultiSelectWithBulkActionsPreview />,
+  render: (_args, context) => (
+    <MultiSelectWithBulkActionsPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 WithModifiersAndBulkActions.storyName = 'With Modifiers and Bulk Actions';
 
 export const WithGlobalActions = {
-  render: () => <MultiAddSelectWithGlobalActionsPreview />,
+  render: (_args, context) => (
+    <MultiAddSelectWithGlobalActionsPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 WithGlobalActions.storyName = 'With Global Actions';
 
 export const WithColumnActions = {
-  render: () => <MultiAddSelectWithColumnActionsPreview />,
+  render: (_args, context) => (
+    <MultiAddSelectWithColumnActionsPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 WithColumnActions.storyName = 'With Column Actions';
 
 export const WithScroll = {
-  render: () => <MultiSelectWithScrollPreview />,
+  render: (_args, context) => (
+    <MultiSelectWithScrollPreview initialOpen={context.viewMode !== 'docs'} />
+  ),
 };
 
 WithScroll.storyName = 'With Scroll (progressive loading)';
 
 export const WithDataTable = {
-  render: () => <MultiAddSelectWithDataTablePreview />,
+  render: (_args, context) => (
+    <MultiAddSelectWithDataTablePreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 WithDataTable.storyName = 'With DataTable';

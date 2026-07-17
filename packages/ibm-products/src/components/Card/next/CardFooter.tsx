@@ -9,7 +9,6 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { CardFooterProps } from './Card.types';
-import { useCardContext } from './CardContext';
 import { pkg } from '../../../settings';
 
 const componentName = 'CardFooter';

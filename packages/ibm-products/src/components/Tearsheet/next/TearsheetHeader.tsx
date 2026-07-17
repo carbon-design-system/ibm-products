@@ -26,34 +26,37 @@ import { ChevronUp } from '@carbon/react/icons';
 
 export interface TearsheetHeaderProps {
   /**
-   * Provide the optional content for header section and will be render after header titles and before progress indicator.
-   * People can make use of this if they want to have custom header.
+   * Optional content rendered inside the header section, after titles and
+   * before any progress indicator.
    */
   children?: React.ReactNode;
 
   /**
-   * The accessibility title for the close icon (if shown).
-   *
-   * **Note:** This prop is only required if a close icon is shown, i.e. if
-   * there are a no navigation actions and/or hideCloseButton is false.
+   * The accessibility label for the close icon (required when the close button
+   * is visible).
    */
   closeIconDescription?: string;
+
   /**
-   * Enable a close icon ('x') in the header area of the tearsheet. By default,
-   * (when this prop is omitted, or undefined or null) a tearsheet does not
-   * display a close icon if there are navigation actions ("transactional
-   * tearsheet") and displays one if there are no navigation actions ("passive
-   * tearsheet"), and that behavior can be overridden if required by setting
-   * this prop to either true or false.
+   * Override whether the close button is shown. When omitted, a close button
+   * is shown for passive tearsheets (no navigation actions) and hidden for
+   * transactional ones.
    */
   hideCloseButton?: boolean;
 
   className?: string;
 
   /**
-   * Default header collapse/expand while scrolling the main content can be disabled  by setting this
+   * Set to `true` to disable the default header collapse/expand behavior
+   * that is triggered by scrolling the main content.
    */
   disableHeaderCollapse?: boolean;
+
+  /**
+   * Callback fired whenever the header's fully-collapsed state changes.
+   * Receives `true` when the header is fully collapsed, `false` when expanded.
+   */
+  onHeaderCollapse?: (collapsed: boolean) => void;
 }
 
 const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
@@ -64,6 +67,7 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
       hideCloseButton = false,
       className,
       disableHeaderCollapse,
+      onHeaderCollapse,
       ...rest
     } = props;
     const parentContext = useContext(TearsheetContext);
@@ -75,11 +79,16 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
       setDisableHeaderCollapse?.(!!disableHeaderCollapse);
     }, [disableHeaderCollapse, setDisableHeaderCollapse]);
 
-    // Create enhanced context with close button props
+    useEffect(() => {
+      onHeaderCollapse?.(!!fullyCollapsed);
+    }, [fullyCollapsed, onHeaderCollapse]);
+
+    // Create enhanced context with close button props and onHeaderCollapse callback
     const enhancedContext = {
       ...parentContext,
       closeIconDescription,
       hideCloseButton,
+      onHeaderCollapse,
     };
 
     return (
@@ -87,7 +96,7 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
         <ModalHeader
           ref={headerRef}
           className={cx(`${blockClass}__header`, {
-            [`${className}`]: true,
+            [`${className}`]: !!className,
             [`${blockClass}__header--with-close-icon`]: !hideCloseButton,
             [`${blockClass}__header-collapsed`]: fullyCollapsed,
           })}
@@ -100,6 +109,7 @@ const TearsheetHeader = React.forwardRef<HTMLDivElement, TearsheetHeaderProps>(
     );
   }
 );
+TearsheetHeader.displayName = 'TearsheetHeader';
 
 export default TearsheetHeader;
 
@@ -118,16 +128,19 @@ export const TearsheetNavigationBar = React.forwardRef<
   HTMLDivElement,
   TearsheetNavigationBarProps
 >((props, ref) => {
-  const { children, scroller, className, ...rest } = props;
-
+  const { children, scroller, className = '', ...rest } = props;
   return (
-    <div className={`${blockClass}__navigation-bar  ${className}`} {...rest}>
+    <div
+      className={`${blockClass}__navigation-bar ${className}`}
+      ref={ref}
+      {...rest}
+    >
       {children}
-
       {scroller}
     </div>
   );
 });
+TearsheetNavigationBar.displayName = 'TearsheetNavigationBar';
 
 /**
  * ----------------
@@ -135,7 +148,8 @@ export const TearsheetNavigationBar = React.forwardRef<
  * ----------------
  */
 
-export interface TearsheetScrollButtonProps extends IconButtonProps {
+export interface TearsheetScrollButtonProps
+  extends Omit<IconButtonProps, 'label' | 'children'> {
   collapseText?: string;
   expandText?: string;
   className?: string;
@@ -146,9 +160,8 @@ export const TearsheetScrollButton = React.forwardRef<
   TearsheetScrollButtonProps
 >(function PageHeaderExpander(
   {
-    className,
-    children,
-    label,
+    className = '',
+
     onClick,
     collapseText = 'Collapse',
     expandText = 'Expand',
@@ -167,11 +180,11 @@ export const TearsheetScrollButton = React.forwardRef<
     <span className={`${blockClass}__scroller-container  ${className}`}>
       <IconButton
         ref={ref}
-        label={fullyCollapsed ? expandText : collapseText}
         size="md"
         kind="ghost"
         autoAlign
         {...other}
+        label={fullyCollapsed ? expandText : collapseText}
         onClick={(event) => {
           onClick?.(event);
           handleScroller(!!fullyCollapsed);

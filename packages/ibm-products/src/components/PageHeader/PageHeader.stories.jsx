@@ -837,17 +837,21 @@ fullyLoadedAndSome.args = {
 
 // Template for demo.
 // eslint-disable-next-line react/prop-types
-const TemplateDemo = ({
-  children,
-  navigation,
-  // eslint-disable-next-line no-unused-vars
-  storyOptionWholePageScroll,
-  ...props
-}) => {
+const TemplateDemo = (
+  {
+    children,
+    navigation,
+    // eslint-disable-next-line no-unused-vars
+    storyOptionWholePageScroll,
+    ...props
+  },
+  context
+) => {
   const carbonPrefix = usePrefix();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   const [annotationLabelHeight, setAnnotationLabelHeight] = useState(0);
   const sentinelRef = useRef(null);
+  const isDocsView = context?.viewMode === 'docs';
 
   // The Carbon Header is position:fixed (top:0) and overlaps the Annotation
   // label rendered above the __viewport. Measure the label height from the DOM
@@ -865,35 +869,39 @@ const TemplateDemo = ({
     <>
       <div ref={sentinelRef} style={{ display: 'none' }} />
       <style>{`.${carbonPrefix}--modal { opacity: 0; }${annotationLabelHeight ? ` .${carbonPrefix}--header { top: ${annotationLabelHeight}px; }` : ''}`}</style>
-      <Header aria-label="IBM Platform Name">
-        <HeaderMenuButton
-          aria-label="Open menu"
-          isCollapsible
-          onClick={() => {
-            setIsSideNavExpanded((prev) => !prev);
-          }}
-          isActive={isSideNavExpanded}
-        />
-        <HeaderName href="#" prefix="IBM">
-          Products application
-        </HeaderName>
-        <SideNav
-          aria-label="Side navigation"
-          expanded={isSideNavExpanded}
-          isFixedNav
-        >
-          <SideNavItems>
-            <SideNavLink
-              href="https://pages.github.ibm.com/carbon/ibm-products/"
-              target="_blank"
+      {!isDocsView && (
+        <>
+          <Header aria-label="IBM Platform Name">
+            <HeaderMenuButton
+              aria-label="Open menu"
+              isCollapsible
+              onClick={() => {
+                setIsSideNavExpanded((prev) => !prev);
+              }}
+              isActive={isSideNavExpanded}
+            />
+            <HeaderName href="#" prefix="IBM">
+              Products application
+            </HeaderName>
+            <SideNav
+              aria-label="Side navigation"
+              expanded={isSideNavExpanded}
+              isFixedNav
             >
-              Sample link: Carbon for IBM Products
-            </SideNavLink>
-          </SideNavItems>
-        </SideNav>
-      </Header>
+              <SideNavItems>
+                <SideNavLink
+                  href="https://pages.github.ibm.com/carbon/ibm-products/"
+                  target="_blank"
+                >
+                  Sample link: Carbon for IBM Products
+                </SideNavLink>
+              </SideNavItems>
+            </SideNav>
+          </Header>
+        </>
+      )}
       <div
-        className={`${storyClass}__content-container ${storyClass}__content-container--with-global-header`}
+        className={`${storyClass}__content-container${!isDocsView ? ` ${storyClass}__content-container--with-global-header` : ''}`}
       >
         <ContainerDivOrTabs
           className={`${storyClass}__content-container`}

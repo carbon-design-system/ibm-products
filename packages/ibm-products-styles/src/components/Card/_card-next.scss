@@ -178,6 +178,47 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
   inline-size: 100%;
 }
 
+// ──────────────────────────────────────────────────────────────
+// Horizontal layout
+// ──────────────────────────────────────────────────────────────
+// Card root: side-by-side flex row
+.#{$block-class-next}--horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+// Media column in horizontal mode.
+// Width comes from the inline flex-basis set by the mediaWidth prop (default 33.33%).
+// Height stretches to match the content column via align-self: stretch.
+.#{$block-class-next}__media--horizontal {
+  overflow: hidden;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+// Right-hand content column: Header/Body/Footer wrapped in __content, stacks vertically.
+.#{$block-class-next}--horizontal > .#{$block-class-next}__content {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+// Body grows to fill remaining space when present.
+.#{$block-class-next}--horizontal
+  > .#{$block-class-next}__content
+  > .#{$block-class-next}__body {
+  flex: 1 0 auto;
+}
+
+// Footer always pins to the bottom edge, whether or not a body is present.
+.#{$block-class-next}--horizontal
+  > .#{$block-class-next}__content
+  > .#{$block-class-next}__footer {
+  margin-block-start: auto;
+}
+
 // Label styles
 .#{$block-class-next}__label {
   @include type-style('label-01');

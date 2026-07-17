@@ -30,9 +30,16 @@ import {
   View,
   Copy,
   ArrowRight,
+  DirectionFork,
+  Time,
+  ChartBar,
+  Incomplete,
+  Crossroads,
+  SkillLevelBasic,
 } from '@carbon/icons-react';
 import { Bee } from '@carbon/pictograms-react';
 import { UserAvatar } from '../..';
+import abstractImage from '../../GetStartedCard/_story-assets/abstract-image.svg';
 import illustration1 from './_story-assets/illustration-img-1.png';
 import placeholder16x9 from './_story-assets/placeholder-16x9.png';
 import placeholder1x1 from './_story-assets/placeholder-1x1.png';
@@ -169,7 +176,7 @@ export const MinimalCard = () => (
 export const ProductiveDensity = () => (
   <Grid>
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Label>Category</Card.Label>
           <Card.Title>Productive Card</Card.Title>
@@ -795,7 +802,7 @@ export const IconSlotVariants = () => (
       <Card>
         <Card.Header>
           <Card.HeaderMedia>
-            <Bee className="icon-slot-pictogram" />
+            <Bee />
           </Card.HeaderMedia>
           <Card.Title>Card with Pictogram</Card.Title>
         </Card.Header>
@@ -990,7 +997,7 @@ export const WithTitleMedia = () => (
 export const WithTitleLeadingIcon = () => (
   <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title titleStart={<BeeIcon size={16} />}>
             Analytics dashboard
@@ -1022,7 +1029,7 @@ export const WithTitleLeadingIcon = () => (
     </Column>
 
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title
             titleStart={<BeeIcon size={16} />}
@@ -1050,7 +1057,7 @@ export const WithTitleLeadingIcon = () => (
 export const WithTitleTrailingIcon = () => (
   <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title titleEnd={<BeeIcon size={16} />}>
             Analytics dashboard
@@ -1082,7 +1089,7 @@ export const WithTitleTrailingIcon = () => (
     </Column>
 
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title
             titleEnd={<BeeIcon size={16} />}
@@ -1110,7 +1117,7 @@ export const WithTitleTrailingIcon = () => (
 export const WithVideo = () => (
   <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title>Product demo video</Card.Title>
           <Card.Caption>Watch our latest feature walkthrough</Card.Caption>
@@ -1141,9 +1148,8 @@ export const WithVideo = () => (
         </Card.Body>
       </Card>
     </Column>
-
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Media ratio="16x9">
           <iframe
             width={'100%'}
@@ -1168,6 +1174,22 @@ export const WithVideo = () => (
         </Card.Body>
       </Card>
     </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
+        <Card.Media ratio="16x9">
+          <iframe
+            width={'100%'}
+            height={'100%'}
+            style={{ position: 'absolute' }}
+            src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&amp;controls=0"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </Card.Media>
+      </Card>
+    </Column>
   </Grid>
 );
 
@@ -1178,7 +1200,7 @@ export const WithVideo = () => (
 export const WithManyActions = () => (
   <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Label>Category</Card.Label>
           <Card.Title>Project dashboard</Card.Title>
@@ -1255,7 +1277,7 @@ export const WithManyActions = () => (
 export const WithTextAction = () => (
   <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title>Usage metrics</Card.Title>
           <Card.Actions>
@@ -1277,7 +1299,7 @@ export const WithTextAction = () => (
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title>Usage metrics</Card.Title>
           <Card.Actions>
@@ -1310,3 +1332,232 @@ export const WithTextAction = () => (
     </Column>
   </Grid>
 );
+
+/**
+ * Horizontal layout: Card.Media on the left, Header/Body/Footer stacked on the right.
+ *
+ * Usage notes:
+ * - Card.Media must be a direct child of Card (not inside Card.Header).
+ * - mediaWidth controls the media column width (default: 33.33%).
+ * - Content inside Card.Media should fill it: width/height 100% + object-fit: cover.
+ */
+export const WithHorizontalMedia = () => (
+  <Grid withRowGap>
+    {/* Default mediaWidth (33.33%) */}
+    <Column lg={8} md={8} sm={4}>
+      <Card horizontal>
+        <Card.Media>
+          <img
+            src={placeholder1x1}
+            alt="Placeholder"
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+          />
+        </Card.Media>
+        <Card.Header>
+          <Card.Label>Get started</Card.Label>
+          <Card.Title>Generate synthetic tabular data</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Prepare your data and generate synthetic tabular data using
+            AI-assisted tooling.
+          </p>
+        </Card.Body>
+        <Card.Footer>
+          <Button kind="tertiary" size="md" renderIcon={ArrowRight}>
+            Start
+          </Button>
+        </Card.Footer>
+      </Card>
+    </Column>
+
+    {/* Custom mediaWidth (50%) */}
+    <Column lg={8} md={8} sm={4}>
+      <Card horizontal>
+        <Card.Media mediaWidth="50%">
+          <img
+            src={placeholder16x9}
+            alt="Placeholder"
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+          />
+        </Card.Media>
+        <Card.Header>
+          <Card.Title>Custom media width</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Pass <code>mediaWidth=50%</code> to control the media column width.
+            Accepts any valid CSS value.
+          </p>
+        </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md" renderIcon={ArrowRight}>
+              Learn more
+            </Button>
+          </Card.Action>
+        </Card.Footer>
+      </Card>
+    </Column>
+
+    <Column lg={8} md={8} sm={4}>
+      <Card horizontal>
+        <Card.Header>
+          <Card.Title>Custom media width</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Prepare your data and generate synthetic tabular data using
+            AI-assisted tooling.
+          </p>
+        </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md" renderIcon={ArrowRight}>
+              Learn more
+            </Button>
+          </Card.Action>
+        </Card.Footer>
+        <Card.Media>
+          <img
+            src={placeholder1x1}
+            alt="Placeholder"
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+          />
+        </Card.Media>
+      </Card>
+    </Column>
+
+    <Column lg={8} md={8} sm={4}>
+      <Card horizontal density="expressive">
+        <Card.Header>
+          <Card.HeaderMedia>
+            <DirectionFork size="32" />
+          </Card.HeaderMedia>
+          <Card.Label>Prepare your data</Card.Label>
+          <Card.Title>Generate synthetic tabular data</Card.Title>
+        </Card.Header>
+        <Card.Footer>
+          <div className="story-time">
+            <Time /> 12:00 PM
+          </div>
+          <Card.Action>
+            <IconButton renderIcon={ArrowRight} kind="ghost" size="md" />
+          </Card.Action>
+        </Card.Footer>
+        <Card.Media>
+          <img
+            src={placeholder1x1}
+            alt="Placeholder"
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+          />
+        </Card.Media>
+      </Card>
+    </Column>
+  </Grid>
+);
+
+/**
+ * Recreates the GetStartedCard pattern using composable Card primitives.
+ *
+ * The existing GetStartedCard wraps the legacy Card internally. This story
+ * demonstrates the same four variants using the new composable Card, showing
+ * that the pattern is achievable without a dedicated wrapper component.
+ *
+ * Variants:
+ * 1. Default      — vertical card, pictogram + label + title + metadata footer
+ * 2. withSequence — same but a sequence number replaces the pictogram
+ * 3. withMedia    — horizontal card, content left + image media right
+ * 4. withDisabled — disabled state
+ */
+export const GetStartedCard = () => {
+  const metadata = (
+    <div className="card-story-get-started-meta">
+      <span className="card-story-get-started-meta__item">
+        <Time size={16} /> 2 mins
+      </span>
+      <span className="card-story-get-started-meta__item">
+        <SkillLevelBasic size={16} /> Beginner
+      </span>
+    </div>
+  );
+
+  return (
+    <Grid withRowGap>
+      {/* 1. Default — pictogram variant */}
+      <Column lg={4} md={4} sm={4}>
+        <Card className="get-started-story-card" density="expressive" clickable>
+          <Card.Header>
+            <Card.HeaderMedia>
+              <Crossroads size={32} />
+            </Card.HeaderMedia>
+            <Card.Label>Prepare your data</Card.Label>
+            <Card.Title>Generate synthetic tabular data</Card.Title>
+          </Card.Header>
+          <Card.Footer>
+            {metadata}
+            <ArrowRight size={16} />
+          </Card.Footer>
+        </Card>
+      </Column>
+
+      {/* 2. withSequence — number replaces pictogram */}
+      <Column lg={4} md={4} sm={4}>
+        <Card className="get-started-story-card" density="expressive" clickable>
+          <Card.Header>
+            <Card.HeaderMedia>
+              <span
+                style={{ fontSize: '1.5rem', fontWeight: 300, lineHeight: 1 }}
+              >
+                3
+              </span>
+            </Card.HeaderMedia>
+            <Card.Label>Prepare your data</Card.Label>
+            <Card.Title>Generate synthetic tabular data</Card.Title>
+          </Card.Header>
+          <Card.Footer>
+            {metadata}
+            <ArrowRight size={16} />
+          </Card.Footer>
+        </Card>
+      </Column>
+
+      {/* 3. withMedia — horizontal, image on the right */}
+      <Column lg={8} md={8} sm={4}>
+        <Card
+          className="get-started-story-card"
+          density="expressive"
+          horizontal
+          clickable
+        >
+          <Card.Header>
+            <Card.HeaderMedia>
+              <Crossroads size={32} />
+            </Card.HeaderMedia>
+            <Card.Label>Prepare your data</Card.Label>
+            <Card.Title>Generate synthetic tabular data</Card.Title>
+          </Card.Header>
+          <Card.Footer>
+            {metadata}
+            <ArrowRight size={16} />
+          </Card.Footer>
+          <Card.Media mediaWidth="45%">
+            <img src={abstractImage} alt="Abstract" />
+          </Card.Media>
+        </Card>
+      </Column>
+    </Grid>
+  );
+};

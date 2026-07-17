@@ -172,8 +172,12 @@ const hierarchicalItems: AddSelectItem[] = [
   },
 ];
 
-export const MultiAddSelectWithGlobalActionsPreview = () => {
-  const [open, setOpen] = useState(false);
+export const MultiAddSelectWithGlobalActionsPreview = ({
+  initialOpen = false,
+}: {
+  initialOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(initialOpen);
 
   const handleOpen = () => {
     setOpen(true);

@@ -31,3 +31,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--card-next;
   block-size: spacing.$spacing-09; // 48px
   inline-size: spacing.$spacing-09; // 48px
 }
+
+// Storybook disabled toggle column — aligns the toggle button to the bottom
+.card-story-disabled-toggle {
+  display: flex;
+  align-items: flex-end;
+  padding-block-end: spacing.$spacing-05;
+}

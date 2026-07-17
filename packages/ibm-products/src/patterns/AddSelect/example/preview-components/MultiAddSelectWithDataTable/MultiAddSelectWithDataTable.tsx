@@ -117,8 +117,12 @@ const sampleItems: AddSelectItem[] = [
   },
 ];
 
-export const MultiAddSelectWithDataTablePreview = () => {
-  const [open, setOpen] = useState(false);
+export const MultiAddSelectWithDataTablePreview = ({
+  initialOpen = false,
+}: {
+  initialOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(initialOpen);
 
   const handleSubmit = (itemIds: string[], values: string[]) => {
     console.log('Submitted:', { itemIds, values });

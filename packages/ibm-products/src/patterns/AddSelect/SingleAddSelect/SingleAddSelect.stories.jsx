@@ -58,19 +58,29 @@ export const Overview = {
 };
 
 export const Default = {
-  render: () => <SingleAddSelectDefaultPreview />,
+  render: (_args, context) => (
+    <SingleAddSelectDefaultPreview initialOpen={context.viewMode !== 'docs'} />
+  ),
 };
 
 Default.storyName = 'Default';
 
 export const WithHierarchy = {
-  render: () => <SingleAddSelectWithHierarchyPreview />,
+  render: (_args, context) => (
+    <SingleAddSelectWithHierarchyPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 WithHierarchy.storyName = 'With Hierarchy';
 
 export const WithHierarchyAndSidePanel = {
-  render: () => <AddSingleItemFromHierarchyPreview />,
+  render: (_args, context) => (
+    <AddSingleItemFromHierarchyPreview
+      initialOpen={context.viewMode !== 'docs'}
+    />
+  ),
 };
 
 WithHierarchyAndSidePanel.storyName = 'With Hierarchy and Side Panel';

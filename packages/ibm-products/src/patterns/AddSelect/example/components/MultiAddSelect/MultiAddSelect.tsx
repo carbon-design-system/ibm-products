@@ -342,16 +342,15 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                         />
                       </div>
                     }
-                  >
-                    {selectedItemsForDisplay.map((item) => (
+                    renderItem={(item) => (
                       <AddSelect.SelectionSummaryItem
                         key={item.id}
                         item={item}
                         onRemove={handleRemoveItem}
                         useAccordion={true}
                       />
-                    ))}
-                  </AddSelect.SelectionSummary>
+                    )}
+                  ></AddSelect.SelectionSummary>
                 )}
               </Tearsheet.SummaryContent>
             </Tearsheet.Body>

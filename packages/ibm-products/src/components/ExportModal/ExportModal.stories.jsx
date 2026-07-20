@@ -10,9 +10,10 @@ import { Button } from '@carbon/react';
 import { ExportModal } from '.';
 import wait from '../../global/js/utils/wait';
 import mdx from './ExportModal.mdx';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/ExportModal',
+  title: 'Deprecated/Prebuilt patterns/ExportModal',
   component: ExportModal,
   tags: ['autodocs'],
   parameters: {
@@ -20,6 +21,27 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version. Please migrate to {/* cspell:disable-next-line */}
+              <a href="/?path=/docs/patterns-export-modal">
+                Export Modal true pattern
+              </a>
+              .
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
   argTypes: {
     validExtensions: {
       control: {

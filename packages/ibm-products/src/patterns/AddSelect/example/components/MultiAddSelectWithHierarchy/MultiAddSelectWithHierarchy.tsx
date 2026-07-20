@@ -726,7 +726,6 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                   globalSearchLabel={globalSearchLabel}
                   globalSearchPlaceholder={globalSearchPlaceholder}
                   searchResultsTitle={searchResultsTitle}
-                  itemCount={currentItems.length}
                   onSearch={handleGlobalSearch}
                   path={searchTerm ? [] : breadcrumbPath}
                   onBreadcrumbClick={handleBreadcrumbClick}

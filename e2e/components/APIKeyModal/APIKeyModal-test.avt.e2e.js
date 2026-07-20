@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,7 @@ test.describe('APIKeyModal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'APIKeyModal',
-      id: 'patterns-prebuilt-patterns-apikeymodal--generate',
+      id: 'deprecated-prebuilt-patterns-apikeymodal--generate',
       globals: {
         carbonTheme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('APIKeyModal @avt', () => {
   test('@avt-instant-generate-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'APIKeyModal',
-      id: 'patterns-prebuilt-patterns-apikeymodal--instant-generate',
+      id: 'deprecated-prebuilt-patterns-apikeymodal--instant-generate',
       globals: {
         carbonTheme: 'white',
       },

@@ -12,6 +12,7 @@ import { fn } from 'storybook/test';
 import './index';
 import '@carbon/web-components/es/components/toggle/index.js';
 import '@carbon/web-components/es/components/dropdown/index.js';
+import { languages, locales, blockClass } from './option-tile-helpers.ts';
 import styles from './story-styles.scss?lit';
 
 const argTypes = {
@@ -64,51 +65,6 @@ const argTypes = {
       'Provide a text explaining why the OptionsTile is in warning state.',
   },
 };
-
-const blockClass = 'options-tile';
-
-// spell-checker:disable
-const languages = [
-  { label: 'English', value: 'en' },
-  { label: '简体中文 - Chinese Simplified', value: 'zh-CN' },
-  { label: '繁體中文 - Chinese Traditional', value: 'zh-TW' },
-  { label: 'Français - French', value: 'fr' },
-  { label: 'Deutsch - German', value: 'de' },
-  { label: 'Italiano - Italian', value: 'it' },
-  { label: '日本語 - Japanese', value: 'ja' },
-  { label: '한국어 - Korean', value: 'ko' },
-  { label: 'Polski - Polish', value: 'pl' },
-  { label: 'Português (brasileiro) - Portuguese (Brazilian)', value: 'pt-BR' },
-  { label: 'Русский - Russian', value: 'ru' },
-  { label: 'Español - Spanish', value: 'es' },
-];
-
-const locales = [
-  { label: 'English', value: 'en' },
-  { label: 'English-US', value: 'en-US' },
-  { label: 'English-UK', value: 'en-UK' },
-  { label: 'English-Canada', value: 'en-CA' },
-  { label: 'English-Australia', value: 'en-AU' },
-  { label: 'Japanese', value: 'ja' },
-  { label: 'Korean', value: 'ko' },
-  { label: 'Chinese-PRC', value: 'zh-CN' },
-  { label: 'Chinese-Taiwan', value: 'zh-TW' },
-  { label: 'Vietnamese', value: 'vi' },
-  { label: 'Thai', value: 'th' },
-  { label: 'Russian', value: 'ru' },
-  { label: 'Polish', value: 'pl' },
-  { label: 'Greek', value: 'el' },
-  { label: 'Hebrew', value: 'he' },
-  { label: 'Arabic', value: 'ar' },
-  { label: 'Spanish', value: 'es' },
-  { label: 'German', value: 'de' },
-  { label: 'French', value: 'fr' },
-  { label: 'French-Canada', value: 'fr-CA' },
-  { label: 'Italian', value: 'it' },
-  { label: 'Portuguese-Brazil', value: 'pt-BR' },
-  { label: 'Turkish', value: 'tr' },
-];
-// spell-checker:enable
 
 export const Default = {
   args: {

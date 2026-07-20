@@ -81,8 +81,12 @@ const sampleUsers: AddSelectItem[] = Array.from({ length: 187 }, (_, i) => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const MultiSelectWithScrollPreview = () => {
-  const [open, setOpen] = useState(false);
+export const MultiSelectWithScrollPreview = ({
+  initialOpen = false,
+}: {
+  initialOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(initialOpen);
 
   const handleSubmit = (itemIds: string[], values: string[]) => {
     console.log('MultiSelectWithScroll submitted:', { itemIds, values });

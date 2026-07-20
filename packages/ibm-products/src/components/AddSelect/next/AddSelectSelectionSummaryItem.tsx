@@ -129,6 +129,7 @@ const AddSelectSelectionSummaryItem = forwardRef<
     );
 
     // Remove button component (reusable in all modes)
+    // Figma: ghost IconButton sm (32×32px), visible on hover via CSS opacity
     const RemoveButton = onRemove ? (
       <IconButton
         label={removeButtonLabel}
@@ -137,6 +138,7 @@ const AddSelectSelectionSummaryItem = forwardRef<
           onRemove(item.id);
         }}
         kind="ghost"
+        size="sm"
         autoAlign
         className={`${blockClass}__selection-summary-item-remove-button`}
         {...removeIconButtonProps}
@@ -145,20 +147,27 @@ const AddSelectSelectionSummaryItem = forwardRef<
       </IconButton>
     ) : null;
 
-    // Default title rendering
+    // Default title rendering — used in both default and accordion modes.
+    // In accordion mode this is passed as `titleContent` inside the accordion
+    // title slot; the remove-button container is added separately in that branch.
     const defaultTitle = (
-      <div className={`${blockClass}__selection-summary-item-title-wrapper`}>
-        <div className={`${blockClass}__selection-summary-item-selected-item`}>
-          <p className={`${blockClass}__selection-summary-item-title`}>
-            {item.title}
+      <div className={`${blockClass}__selection-summary-item-selected-item`}>
+        <p className={`${blockClass}__selection-summary-item-title`}>
+          {item.title}
+        </p>
+        {item.subtitle && (
+          <p className={`${blockClass}__selection-summary-item-subtitle`}>
+            {item.subtitle}
           </p>
-          {item.subtitle && (
-            <p className={`${blockClass}__selection-summary-item-subtitle`}>
-              {item.subtitle}
-            </p>
-          )}
-        </div>
-        {!useAccordion && onRemove && (
+        )}
+      </div>
+    );
+
+    // Non-accordion wrapper: title + remove button in a horizontal flex row
+    const defaultTitleRow = (
+      <div className={`${blockClass}__selection-summary-item-title-wrapper`}>
+        {defaultTitle}
+        {onRemove && (
           <div
             className={`${blockClass}__selection-summary-item-remove-button-container`}
           >
@@ -235,6 +244,8 @@ const AddSelectSelectionSummaryItem = forwardRef<
 
     // Priority 3: Accordion mode
     if (useAccordion) {
+      // The title slot is Carbon's .cds--accordion__title div (full-width).
+      // We render: [custom or default text content] + [absolutely-positioned remove button]
       const titleContent = renderAccordionTitle
         ? renderAccordionTitle(item)
         : defaultTitle;
@@ -247,9 +258,7 @@ const AddSelectSelectionSummaryItem = forwardRef<
           <Accordion align="start" {...accordionProps}>
             <AccordionItem
               title={
-                <div
-                  className={`${blockClass}__selection-summary-item-title-wrapper`}
-                >
+                <>
                   {titleContent}
                   {onRemove && (
                     <div
@@ -258,7 +267,7 @@ const AddSelectSelectionSummaryItem = forwardRef<
                       {RemoveButton}
                     </div>
                   )}
-                </div>
+                </>
               }
               {...accordionItemProps}
             >
@@ -272,7 +281,7 @@ const AddSelectSelectionSummaryItem = forwardRef<
     // Priority 4: Non-accordion mode (default key-value rendering only)
     return (
       <div className={itemClasses} ref={ref} {...rest}>
-        {defaultTitle}
+        {defaultTitleRow}
         <div className={`${blockClass}__selection-summary-item-content`}>
           {defaultContent()}
         </div>

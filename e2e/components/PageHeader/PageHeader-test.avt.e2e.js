@@ -171,7 +171,7 @@ test.describe('PageHeader @avt', () => {
       .getByLabel('Breadcrumb', { exact: true })
       .getByRole('button')
       .focus();
-    await pressTabKey(page, 9);
+    await pressTabKey(page, 6);
 
     await expect(
       page.getByRole('button', { name: 'Page actions' })
@@ -309,7 +309,7 @@ test.describe('PageHeader @avt', () => {
     await expect(page.getByRole('tooltip').getByText('Action 1')).toBeVisible();
     await pressTabKey(page, 2);
     await expect(page.getByRole('tooltip').getByText('Action 3')).toBeVisible();
-    await pressTabKey(page, 4);
+    await pressTabKey(page, 1);
     await expect(
       page.getByRole('button', { name: 'Show further action bar items' })
     ).toBeFocused();

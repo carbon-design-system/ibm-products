@@ -11,9 +11,9 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.88.0",
-    "@carbon/ibm-products-web-components": "^0.41.1",
-    "@carbon/web-components": "^2.56.0",
+    "@carbon/ibm-products-styles": "^2.90.0",
+    "@carbon/ibm-products-web-components": "^0.43.0",
+    "@carbon/web-components": "^2.58.1",
     "@carbon/styles": "latest",
     "lit": "^3.1.4"
   },

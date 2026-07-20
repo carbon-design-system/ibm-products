@@ -856,13 +856,27 @@ const TemplateDemo = (
   // The Carbon Header is position:fixed (top:0) and overlaps the Annotation
   // label rendered above the __viewport. Measure the label height from the DOM
   // so we can offset the header's top and keep the annotation visible.
+  // Use a MutationObserver so the measurement runs whenever the annotation
+  // label is injected into the DOM (Storybook adds it asynchronously in the
+  // canvas/story view, so a one-shot useLayoutEffect misses it).
   useLayoutEffect(() => {
-    const label = sentinelRef.current
-      ?.closest('[class*="--annotation__content"]')
-      ?.parentElement?.querySelector('[class*="--annotation__label"]');
-    if (label) {
-      setAnnotationLabelHeight(label.getBoundingClientRect().height);
-    }
+    const measure = () => {
+      const label = sentinelRef.current
+        ?.closest('[class*="--annotation__content"]')
+        ?.parentElement?.querySelector('[class*="--annotation__label"]');
+      if (label) {
+        const height = label.getBoundingClientRect().height;
+        if (height > 0) {
+          setAnnotationLabelHeight(height);
+          observer.disconnect();
+        }
+      }
+    };
+
+    const observer = new MutationObserver(measure);
+    observer.observe(document.body, { childList: true, subtree: true });
+    measure();
+    return () => observer.disconnect();
   }, []);
 
   return (

@@ -14,10 +14,10 @@ interface CoachmarkContextType {
   open?: boolean;
   setOpen: (value: boolean) => void;
   align?: NewPopoverAlignment;
-  triggerRef: RefObject<HTMLElement | null>;
+  launcherButtonRef?: RefObject<HTMLElement | null>;
   position: { x: number; y: number };
   contentRef: HTMLElement | null;
-  setContentRef: (value: any) => void;
+  setContentRef: (value: HTMLElement | null) => void;
   floating?: boolean;
   selectorPrimaryFocus?: string;
 }
@@ -26,10 +26,9 @@ export const CoachmarkContext = createContext<CoachmarkContextType>({
   open: false,
   setOpen: () => {},
   align: 'bottom',
-  triggerRef: { current: null },
   position: { x: 0, y: 0 },
   contentRef: null,
-  setContentRef: (value: boolean) => {},
+  setContentRef: (_value: HTMLElement | null) => {},
   floating: false,
 });
 

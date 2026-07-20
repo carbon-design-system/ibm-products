@@ -2,10 +2,17 @@ import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as OptionsTileStories from './options-tile.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import helperSource from './option-tile-helpers.ts?raw';
+
+export const customFunctionArr = [
+  helperSource
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .trim()
+];
 
 <Meta of={OptionsTileStories} />
-
-export const customFunctionArr=[`const blockClass = 'options-tile';`];
 
 # OptionsTile
 

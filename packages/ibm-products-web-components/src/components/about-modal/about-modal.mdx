@@ -9,6 +9,8 @@ export const customFunctionArr = [
     .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
     .replace(/export\s+/g, '')
     .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .replace(/\bprefix\b/g, "'c4p'")
+    .replace(/'c4p'\s*\+\s*'--/g, "'c4p--")
     .trim()
 ];
 

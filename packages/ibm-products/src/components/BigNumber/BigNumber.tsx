@@ -56,7 +56,7 @@ export interface BigNumberProps {
  * of a button as well as tool tip functionality.
  * The default locale is English (`en-US`) if one is not provided or if the provided one is not supported.
  */
-export const BigNumber = forwardRef<HTMLDivElement, BigNumberProps>(
+export const BigNumber = forwardRef<HTMLElement, BigNumberProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -115,7 +115,7 @@ export const BigNumber = forwardRef<HTMLDivElement, BigNumberProps>(
     }
 
     return (
-      <div
+      <figure
         {...rest}
         className={cx(blockClass, bigNumberClasses, className)}
         ref={ref}
@@ -123,7 +123,7 @@ export const BigNumber = forwardRef<HTMLDivElement, BigNumberProps>(
       >
         {/* Label and tooltip */}
         <span className={`${blockClass}__row`}>
-          <h4 className={`${blockClass}__label`}>{label}</h4>
+          <figcaption className={`${blockClass}__label`}>{label}</figcaption>
           {tooltipDescription && (
             <Tooltip
               description={tooltipDescription}
@@ -166,7 +166,7 @@ export const BigNumber = forwardRef<HTMLDivElement, BigNumberProps>(
           )}
           <span className={`${blockClass}__icon-button`}>{iconButton}</span>
         </span>
-      </div>
+      </figure>
     );
   }
 );

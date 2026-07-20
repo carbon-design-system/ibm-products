@@ -158,19 +158,9 @@ export const stackblitzPrefillConfig = async ({
       eager: true,
     });
 
-    // Also grab _storybook-styles.scss from _story-assets folders
-    const storyAssetModules = import.meta.glob(
-      '/src/components/*/_story-assets/_storybook-styles.scss',
-      {
-        as: 'raw',
-        eager: true,
-      }
-    );
-
     // Track whether we found a file for this component
     let found = false;
 
-    // Check story-styles.scss first
     Object.entries(modules).forEach(([path, content]) => {
       const match = path.match(/\/components\/([^/]+)\//);
       const folderName = match?.[1];
@@ -193,32 +183,6 @@ export const stackblitzPrefillConfig = async ({
           carbonImports + wrappedContent + rootStyleFooter;
       }
     });
-
-    // If not found, check _storybook-styles.scss in _story-assets
-    if (!found) {
-      Object.entries(storyAssetModules).forEach(([path, content]) => {
-        const match = path.match(/\/components\/([^/]+)\/_story-assets/);
-        const folderName = match?.[1];
-
-        if (folderName === componentName && content) {
-          found = true;
-          // Remove license comments
-          const licenseCommentRegex =
-            /\/\*\*?\s*\n?(?:\s*\*[^\n]*\n)*\s*\*?\s*(?:copyright|license|licensed|apache|mit|ibm corp|found in the|root directory)[^*]*\*\//gi;
-          const cleanContent = (content as string).replace(
-            licenseCommentRegex,
-            ''
-          );
-          // import only missing Carbon imports
-          const carbonImports = scssImports(cleanContent);
-          // Wrap selectors with :host {}
-          const wrappedContent = wrapSelectorsWithHost(cleanContent);
-
-          files['src/index.scss'] =
-            carbonImports + wrappedContent + rootStyleFooter;
-        }
-      });
-    }
 
     // If no file found, still create index.scss with root imports + footer
     if (!found) {
@@ -377,7 +341,7 @@ const appGenerator = async (
     storyCode = removeUnknownComponents(storyCode, unknownComponents);
   }
 
-  const regex = /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)|(args\.)/;
+  const regex = /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)/;
   const hasArgs = regex.test(storyCode);
 
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
@@ -395,9 +359,9 @@ const appGenerator = async (
 
   import { LitElement, html, unsafeCSS } from 'lit';
   import { customElement } from 'lit/decorators.js';
-  ${customImports?.length > 0 ? customImports?.map((customImport) => customImport).join('\n') : ''}
+  ${customImports?.length > 0 ? customImports?.map((customImport) => customImport) : ''}
   ${
-    matchedComponents.length > 0 && customImports?.length === 0
+    matchedComponents.length > 0
       ? matchedComponents
           .map((comp: string) => {
             const importPath = getComponentImportPath(comp, matchedComponents);

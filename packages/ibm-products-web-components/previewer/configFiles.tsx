@@ -17,7 +17,6 @@ export const packageJson: string = `{
   },
   "dependencies": {
     "@carbon/ibm-products-web-components": "latest",
-    "@carbon/ibm-products-styles": "latest",
     "@carbon/web-components": "latest",
     "@carbon/styles": "latest",
     "lit": "^3.2.1"

@@ -1004,6 +1004,30 @@ describe('AddSelect.Column', () => {
     expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
   });
 
+  it('gives each Select All checkbox a unique DOM id (useId, not select-all-${title})', () => {
+    // Two columns with the same title must not share a DOM id —
+    // the old `select-all-${title}` scheme broke the <label for> association.
+    const { container } = render(
+      <AddSelect>
+        <AddSelect.Body hideSearch layout="horizontal">
+          <AddSelect.Column title="Items" showSelectAll multi hideSearch />
+          <AddSelect.Column title="Items" showSelectAll multi hideSearch />
+        </AddSelect.Body>
+      </AddSelect>
+    );
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    expect(checkboxes).toHaveLength(2);
+    // IDs must be present and distinct
+    const id1 = checkboxes[0].id;
+    const id2 = checkboxes[1].id;
+    expect(id1).toBeTruthy();
+    expect(id2).toBeTruthy();
+    expect(id1).not.toEqual(id2);
+    // IDs must NOT be the old `select-all-Items` format
+    expect(id1).not.toBe('select-all-Items');
+    expect(id2).not.toBe('select-all-Items');
+  });
+
   it('reflects allSelected=true on the Select All checkbox', () => {
     render(
       <AddSelect>

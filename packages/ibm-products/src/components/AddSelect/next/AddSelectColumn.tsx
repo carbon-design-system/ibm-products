@@ -23,6 +23,7 @@ import {
   type CheckboxProps,
 } from '@carbon/react';
 import { blockClass, AddSelectContext } from './context';
+import { useId } from '../../../global/js/utils/useId';
 
 /**
  * ----------------
@@ -141,6 +142,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const parentContext = React.useContext(AddSelectContext);
+    const uid = useId();
     const [columnSearchTerm, setColumnSearchTerm] = useState('');
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -204,7 +206,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
             <div className={`${blockClass}-column__header`}>
               {showSelectAll && multi ? (
                 <Checkbox
-                  id={`select-all-${title}`}
+                  id={`${blockClass}-select-all-${uid}`}
                   className={`${blockClass}-column__select-all`}
                   checked={allSelected}
                   indeterminate={allIndeterminate}

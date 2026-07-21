@@ -51,9 +51,10 @@ export interface AddSelectColumnProps {
    */
   searchPlaceholder?: string;
   /**
-   * Callback when search value changes
+   * Called when this column's local search input changes.
+   * Scoped to this column only — independent of AddSelectBody's global search.
    */
-  onSearch?: (value: string) => void;
+  onSearch?: (columnSearchTerm: string) => void;
   /**
    * Actions slot - adds custom actions (filter/sort) next to search
    */
@@ -140,11 +141,11 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const parentContext = React.useContext(AddSelectContext);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [columnSearchTerm, setColumnSearchTerm] = useState('');
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
-      setSearchTerm(value);
+      setColumnSearchTerm(value);
       onSearch?.(value);
     };
 
@@ -185,7 +186,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
                     placeholder={searchPlaceholder}
                     size="md"
                     onChange={handleSearch}
-                    value={searchTerm}
+                    value={columnSearchTerm}
                     {...searchProps}
                   />
                 </div>

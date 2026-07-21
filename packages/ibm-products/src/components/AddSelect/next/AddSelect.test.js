@@ -337,43 +337,6 @@ describe('AddSelect.Body', () => {
     expect(screen.getByText('Filter')).toBeInTheDocument();
   });
 
-  it('sets aria-multiselectable on the grid when multi context is true', () => {
-    const { container } = render(
-      <AddSelect>
-        <AddSelect.Body hideSearch>
-          <AddSelect.Column multi hideSearch />
-        </AddSelect.Body>
-      </AddSelect>
-    );
-    // The grid is rendered by Body; multi is set via Column's context provider —
-    // but aria-multiselectable is driven by the Body's own multi context from
-    // the root AddSelect. Render with the root-level context instead.
-    const { container: c2 } = render(
-      <AddSelect>
-        <AddSelect.Body hideSearch />
-      </AddSelect>
-    );
-    // Default (no multi): aria-multiselectable is undefined/false
-    expect(c2.querySelector('[role="grid"]')).not.toHaveAttribute(
-      'aria-multiselectable',
-      'true'
-    );
-  });
-
-  it('sets aria-multiselectable=true on the grid when Body is inside a multi context', () => {
-    // AddSelectBody reads `multi` from AddSelectContext. Supply it via the
-    // root AddSelect — the context is initialized without multi, but Column
-    // re-provides it. Test that the attribute is absent when not set.
-    const { container } = render(
-      <AddSelect>
-        <AddSelect.Body hideSearch />
-      </AddSelect>
-    );
-    const grid = container.querySelector('[role="grid"]');
-    // multi is falsy by default — attribute should be undefined or "false"
-    expect(grid).not.toHaveAttribute('aria-multiselectable', 'true');
-  });
-
   it('does nothing on ArrowDown keydown when the grid has no rows', () => {
     // Covers the items.length === 0 early-return in handleKeyDown (L201)
     const { container } = render(

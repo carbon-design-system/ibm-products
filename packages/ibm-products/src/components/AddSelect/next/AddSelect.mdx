@@ -663,7 +663,9 @@ content area.
   badge
 - **path** (Array of objects with id and title properties, optional, default:
   []) - Navigation path for breadcrumbs
-- **onSearch** (function, optional) - Callback when search term changes
+- **onSearch** (function, optional) - Called when the global search input value
+  changes. Intended to filter across ALL columns/rows in the Body. Independent
+  of any per-column search in `AddSelect.Column`
   - Signature: `(searchTerm: string) => void`
 - **onBreadcrumbClick** (function, optional) - Callback when breadcrumb is
   clicked
@@ -700,8 +702,10 @@ title, column-level search, and "Select All" functionality.
   search input (accessibility)
 - **searchPlaceholder** (string, optional, default: "Search") - Placeholder text
   for the search input
-- **onSearch** (function, optional) - Callback when search value changes
-  - Signature: `(value: string) => void`
+- **onSearch** (function, optional) - Called when this column's local search
+  input changes. Scoped to this column only — independent of `AddSelect.Body`'s
+  global search
+  - Signature: `(columnSearchTerm: string) => void`
 - **actionsSlot** (ReactNode, optional) - Actions slot - adds custom actions
   (filter/sort) next to search
 - **hideSearch** (boolean, optional, default: false) - Whether to hide the

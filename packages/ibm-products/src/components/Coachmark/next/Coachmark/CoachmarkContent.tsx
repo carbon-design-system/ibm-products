@@ -37,7 +37,7 @@ export interface CoachmarkContentProps {
   /**
    * Accessible label for the coachmark content region.
    */
-  'aria-label': string;
+  'aria-label'?: string;
 }
 
 export type CoachmarkContentComponent = ForwardRefExoticComponent<
@@ -52,7 +52,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     const {
       className = '',
       children,
-      'aria-label': ariaLabel,
+      'aria-label': ariaLabel = 'Coachmark content',
       ...rest
     } = props;
     const coachmarkContentBlockClass = `${blockClass}--coachmark-content`;
@@ -61,7 +61,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
       setContentRef,
       onClose,
       setOpen,
-      triggerRef,
+      launcherButtonRef,
       selectorPrimaryFocus,
     } = useContext(CoachmarkContext);
 
@@ -104,8 +104,8 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
           onClose?.();
           setOpen(false);
           // Return focus to the trigger element
-          if (triggerRef?.current) {
-            triggerRef.current.focus();
+          if (launcherButtonRef?.current) {
+            launcherButtonRef.current.focus();
           }
         }
       };
@@ -117,23 +117,7 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
-    }, [open, onClose, setOpen, triggerRef]);
-
-    // Handle Escape key to close Coachmark
-    useEffect(() => {
-      const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === 'Escape' && open) {
-          onClose?.();
-          setOpen(false);
-        }
-      };
-      if (open) {
-        document.addEventListener('keydown', handleKeyDown);
-      }
-      return () => {
-        document.removeEventListener('keydown', handleKeyDown);
-      };
-    }, [open, onClose, setOpen]);
+    }, [open, onClose, setOpen, launcherButtonRef]);
 
     // Handle focus management with selectorPrimaryFocus or default to close button
     useEffect(() => {
@@ -185,7 +169,7 @@ CoachmarkContent.propTypes = {
   /**
    * Accessible label for the coachmark content region.
    */
-  'aria-label': PropTypes.string.isRequired,
+  'aria-label': PropTypes.string,
   /**
    * This is a required callback that has to return the content to render in the body section.
    * It can be a single child or an array of children depending on your need

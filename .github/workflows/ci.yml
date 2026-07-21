@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Cache node_modules
-        uses: actions/cache/save@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -55,7 +55,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -92,7 +92,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -119,7 +119,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -146,7 +146,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -173,7 +173,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -206,7 +206,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -247,7 +247,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache/restore@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -371,7 +371,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -384,7 +384,7 @@ jobs:
         run: yarn install --immutable
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@c8eb1dde813a34d0e86b136d8c4faedd0a7351ab # v17.7.1
+        uses: chromaui/action@94713c544284a14195de3b50ef24301579f1877e # v18.0.1
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -452,7 +452,7 @@ jobs:
           cache: 'yarn'
       - name: Restore node_modules
         id: cache-deps
-        uses: actions/cache@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # v6.0.0
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -469,7 +469,7 @@ jobs:
           --include-dependencies --stream
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@c8eb1dde813a34d0e86b136d8c4faedd0a7351ab # v17.7.1
+        uses: chromaui/action@94713c544284a14195de3b50ef24301579f1877e # v18.0.1
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects

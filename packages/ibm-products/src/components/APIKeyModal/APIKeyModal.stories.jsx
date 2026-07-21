@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2024
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,9 +22,10 @@ import { APIKeyModal } from '.';
 import wait from '../../global/js/utils/wait';
 import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import mdx from './APIKeyModal.mdx';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/APIKeyModal',
+  title: 'Deprecated/Prebuilt Patterns/APIKeyModal',
   component: APIKeyModal,
   tags: ['autodocs'],
   parameters: {
@@ -57,6 +58,27 @@ export default {
       control: false,
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version. Please migrate to {/* cspell:disable-next-line */}
+              <a href="/?path=/docs/patterns-generate-an-api-key">
+                Generate an API Key true pattern
+              </a>
+              .
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
 };
 
 const defaultProps = {

@@ -51,7 +51,7 @@ The AddSelect component system follows a clear hierarchical structure:
 AddSelect (Root Container)
 ├── AddSelect.Body (Main Content Area)
 │   ├── Header Section (Search, Breadcrumbs, Item Count)
-│   └── AddSelect.Content (Items Container)
+│   └── Items Container (grid, keyboard navigation)
 │       ├── AddSelect.Column (Optional Column Wrapper)
 │       │   ├── Column Header (Search, Title, Select All)
 │       │   └── AddSelect.Row (Individual Items)
@@ -81,7 +81,8 @@ interface.
 ### 2. AddSelect.Body
 
 **Purpose**: Contains the header section (search, breadcrumbs, item count) and
-the main content area. Handles global search and navigation.
+the main content area. Handles global search, navigation, and keyboard
+navigation for the items grid.
 
 **When to use**: Required for displaying the main item selection interface.
 
@@ -89,19 +90,7 @@ the main content area. Handles global search and navigation.
 
 ---
 
-### 3. AddSelect.Content
-
-**Purpose**: Container for items with built-in keyboard navigation support.
-Manages focus and provides grid-based navigation.
-
-**When to use**: Required as a wrapper for AddSelect.Row or AddSelect.Column
-components.
-
-**Component flow position**: Handles keyboard navigation and layout
-
----
-
-### 4. AddSelect.Column (Optional)
+### 3. AddSelect.Column (Optional)
 
 **Purpose**: Optional column wrapper that provides column-specific features like
 column title, column-level search, and "Select All" functionality.
@@ -116,7 +105,7 @@ column title, column-level search, and "Select All" functionality.
 
 ---
 
-### 5. AddSelect.Row
+### 4. AddSelect.Row
 
 **Purpose**: Individual selectable item with support for checkboxes
 (multi-select) or radio buttons (single-select).
@@ -127,7 +116,7 @@ column title, column-level search, and "Select All" functionality.
 
 ---
 
-### 6. AddSelect.SelectionSummary (Optional)
+### 5. AddSelect.SelectionSummary (Optional)
 
 **Purpose**: Displays a list of selected items with optional count badge and
 edit functionality.
@@ -142,7 +131,7 @@ edit functionality.
 
 ---
 
-### 7. AddSelect.SelectionSummaryItem (Optional)
+### 6. AddSelect.SelectionSummaryItem (Optional)
 
 **Purpose**: Individual item display within the selection summary, with optional
 accordion view and remove functionality.
@@ -157,7 +146,7 @@ accordion view and remove functionality.
 
 ---
 
-### 8. AddSelect.ItemPanel (Optional)
+### 7. AddSelect.ItemPanel (Optional)
 
 **Purpose**: Side panel that displays detailed information about a specific
 item.
@@ -286,17 +275,15 @@ const handleItemSelect = (itemId, selected) => {
 
 <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
   <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
-    <AddSelect.Content>
-      {items.map((item) => (
-        <AddSelect.Row
-          key={item.id}
-          itemId={item.id}
-          title={item.title}
-          subtitle={item.subtitle}
-          value={item.value}
-        />
-      ))}
-    </AddSelect.Content>
+    {items.map((item) => (
+      <AddSelect.Row
+        key={item.id}
+        itemId={item.id}
+        title={item.title}
+        subtitle={item.subtitle}
+        value={item.value}
+      />
+    ))}
   </AddSelect.Body>
 </AddSelect>;
 ```
@@ -323,19 +310,17 @@ const handleItemSelect = (itemId, selected) => {
 
 <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
   <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
-    <AddSelect.Content>
-      <AddSelect.Column multi={true}>
-        {items.map((item) => (
-          <AddSelect.Row
-            key={item.id}
-            itemId={item.id}
-            title={item.title}
-            subtitle={item.subtitle}
-            value={item.value}
-          />
-        ))}
-      </AddSelect.Column>
-    </AddSelect.Content>
+    <AddSelect.Column multi={true}>
+      {items.map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+        />
+      ))}
+    </AddSelect.Column>
   </AddSelect.Body>
 </AddSelect>;
 ```
@@ -387,17 +372,15 @@ const filteredItems = items.filter((item) => {
       />
     }
   >
-    <AddSelect.Content>
-      {filteredItems.map((item) => (
-        <AddSelect.Row
-          key={item.id}
-          itemId={item.id}
-          title={item.title}
-          subtitle={item.subtitle}
-          value={item.value}
-        />
-      ))}
-    </AddSelect.Content>
+    {filteredItems.map((item) => (
+      <AddSelect.Row
+        key={item.id}
+        itemId={item.id}
+        title={item.title}
+        subtitle={item.subtitle}
+        value={item.value}
+      />
+    ))}
   </AddSelect.Body>
 </AddSelect>;
 ```
@@ -433,27 +416,29 @@ const allSelected =
   items.length > 0 && items.every((item) => selectedItems.has(item.id));
 
 <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-  <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
-    <AddSelect.Content layout="horizontal">
-      <AddSelect.Column
-        title="Available items"
-        showSelectAll
-        multi
-        itemCount={items.length}
-        allSelected={allSelected}
-        onSelectAll={handleSelectAll}
-      >
-        {items.map((item) => (
-          <AddSelect.Row
-            key={item.id}
-            itemId={item.id}
-            title={item.title}
-            subtitle={item.subtitle}
-            value={item.value}
-          />
-        ))}
-      </AddSelect.Column>
-    </AddSelect.Content>
+  <AddSelect.Body
+    itemsLabel="Items"
+    itemCount={items.length}
+    layout="horizontal"
+  >
+    <AddSelect.Column
+      title="Available items"
+      showSelectAll
+      multi
+      itemCount={items.length}
+      allSelected={allSelected}
+      onSelectAll={handleSelectAll}
+    >
+      {items.map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+        />
+      ))}
+    </AddSelect.Column>
   </AddSelect.Body>
 </AddSelect>;
 ```
@@ -489,17 +474,15 @@ const selectedItemsArray = Array.from(selectedItems)
 
 <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
   <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
-    <AddSelect.Content>
-      {items.map((item) => (
-        <AddSelect.Row
-          key={item.id}
-          itemId={item.id}
-          title={item.title}
-          subtitle={item.subtitle}
-          value={item.value}
-        />
-      ))}
-    </AddSelect.Content>
+    {items.map((item) => (
+      <AddSelect.Row
+        key={item.id}
+        itemId={item.id}
+        title={item.title}
+        subtitle={item.subtitle}
+        value={item.value}
+      />
+    ))}
   </AddSelect.Body>
 
   <AddSelect.SelectionSummary
@@ -550,20 +533,18 @@ const handleItemPanelClick = (itemId) => {
 
 <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
   <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
-    <AddSelect.Content>
-      {items.map((item) => (
-        <AddSelect.Row
-          key={item.id}
-          itemId={item.id}
-          title={item.title}
-          subtitle={item.subtitle}
-          value={item.value}
-          hasItemPanel
-          onItemPanelClick={handleItemPanelClick}
-          itemPanelOpen={itemPanelOpen && selectedItemForPanel?.id === item.id}
-        />
-      ))}
-    </AddSelect.Content>
+    {items.map((item) => (
+      <AddSelect.Row
+        key={item.id}
+        itemId={item.id}
+        title={item.title}
+        subtitle={item.subtitle}
+        value={item.value}
+        hasItemPanel
+        onItemPanelClick={handleItemPanelClick}
+        itemPanelOpen={itemPanelOpen && selectedItemForPanel?.id === item.id}
+      />
+    ))}
   </AddSelect.Body>
 
   {itemPanelOpen && selectedItemForPanel && (
@@ -614,21 +595,23 @@ const handleNavigate = (itemId, title, parentId) => {
 };
 
 <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-  <AddSelect.Body itemsLabel="Items" itemCount={currentLevel.items.length}>
-    <AddSelect.Content layout="horizontal">
-      <AddSelect.Column title={currentLevel.title} onNavigate={handleNavigate}>
-        {currentLevel.items.map((item) => (
-          <AddSelect.Row
-            key={item.id}
-            itemId={item.id}
-            title={item.title}
-            subtitle={item.subtitle}
-            value={item.value}
-            hasChildren={item.children && item.children.length > 0}
-          />
-        ))}
-      </AddSelect.Column>
-    </AddSelect.Content>
+  <AddSelect.Body
+    itemsLabel="Items"
+    itemCount={currentLevel.items.length}
+    layout="horizontal"
+  >
+    <AddSelect.Column title={currentLevel.title} onNavigate={handleNavigate}>
+      {currentLevel.items.map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+          hasChildren={item.children && item.children.length > 0}
+        />
+      ))}
+    </AddSelect.Column>
   </AddSelect.Body>
 </AddSelect>;
 ```
@@ -664,8 +647,10 @@ content area.
 **Props:**
 
 - **children** (ReactNode, optional) - Child components (typically
-  AddSelect.Content)
+  AddSelect.Column or AddSelect.Row)
 - **className** (string, optional) - Optional CSS class name
+- **layout** ('vertical' | 'horizontal', optional, default: 'vertical') - Layout
+  direction for the items container
 - **itemsLabel** (string, optional) - Label for items section (shown when
   breadcrumbs are not used)
 - **globalSearchLabel** (string, optional, default: "Search") - Global search
@@ -699,21 +684,6 @@ content area.
   BreadcrumbItem components
 - **linkProps** (object, optional) - Additional props to pass to Link components
   in breadcrumbs
-
----
-
-### AddSelect.Content
-
-Container for items with built-in keyboard navigation support. Manages focus and
-provides grid-based navigation.
-
-**Props:**
-
-- **children** (ReactNode, optional) - Child components (AddSelect.Row or
-  AddSelect.Column)
-- **className** (string, optional) - Optional CSS class name
-- **layout** ('vertical' | 'horizontal', optional, default: 'vertical') - Layout
-  direction for columns
 
 ---
 

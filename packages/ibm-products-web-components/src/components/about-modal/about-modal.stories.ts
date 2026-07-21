@@ -101,9 +101,10 @@ export const Default = {
     modalAriaLabel: '',
   },
   argTypes,
-  render: (args) => {
-    const openModal = () => {
-      document.querySelector(`${prefix}-about-modal`)?.toggleAttribute('open');
+  render: (args: any) => {
+    const openModal = (e: Event) => {
+      const root = (e.target as Element).getRootNode() as ShadowRoot | Document;
+      root.querySelector(`${prefix}-about-modal`)?.toggleAttribute('open');
     };
     return html`
       <style>
@@ -149,8 +150,9 @@ export const AboutModalWithAllPropsSet = {
   },
   argTypes,
   render: (args) => {
-    const openModal = () => {
-      document.querySelector(`${prefix}-about-modal`)?.toggleAttribute('open');
+    const openModal = (e: Event) => {
+      const root = (e.target as Element).getRootNode() as ShadowRoot | Document;
+      root.querySelector(`${prefix}-about-modal`)?.toggleAttribute('open');
     };
     return html`
       <style>

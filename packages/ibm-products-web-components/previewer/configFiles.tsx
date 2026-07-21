@@ -51,7 +51,6 @@ export const index: string = `
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit</title>
-    <link rel="stylesheet" href="./src/index.css" />
     <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
@@ -77,6 +76,7 @@ import './App';
 `;
 
 export const rootStyleImports: string = `
+@use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes';
 `;
@@ -84,5 +84,7 @@ export const rootStyleImports: string = `
 export const rootStyleFooter: string = `
 :root {
   @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
 }
 `;

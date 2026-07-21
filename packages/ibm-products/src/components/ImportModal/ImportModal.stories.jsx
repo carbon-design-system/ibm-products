@@ -12,9 +12,10 @@ import { action } from 'storybook/actions';
 import { ImportModal } from '.';
 import mdx from './ImportModal.mdx';
 // import mdx from './ImportModal.mdx';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/ImportModal',
+  title: 'Deprecated/Prebuilt patterns/ImportModal',
   component: ImportModal,
   tags: ['autodocs'],
   parameters: {
@@ -23,6 +24,27 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version. Please migrate to {/* cspell:disable-next-line */}
+              <a href="/?path=/docs/patterns-import-and-upload">
+                Import and Upload true pattern
+              </a>
+              .
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
   argTypes: {
     accept: {
       control: {

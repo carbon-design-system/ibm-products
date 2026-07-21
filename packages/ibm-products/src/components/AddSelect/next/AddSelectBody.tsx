@@ -11,6 +11,10 @@ import React, {
   ReactNode,
   useState,
   MouseEvent,
+  useRef,
+  useEffect,
+  KeyboardEvent,
+  useContext,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -26,7 +30,7 @@ import {
   type BreadcrumbItemProps,
   type LinkProps,
 } from '@carbon/react';
-import { blockClass } from './context';
+import { blockClass, AddSelectContext } from './context';
 
 /**
  * ----------------
@@ -40,6 +44,10 @@ export interface AddSelectBodyProps {
    * Optional class name
    */
   className?: string;
+  /**
+   * Layout direction for columns: 'vertical' (default) or 'horizontal' (for hierarchy)
+   */
+  layout?: 'vertical' | 'horizontal';
   /**
    * Label for items section
    */
@@ -124,6 +132,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
     {
       children,
       className,
+      layout = 'vertical',
       itemsLabel = '',
       globalSearchLabel = 'Search',
       globalSearchPlaceholder = 'Search',
@@ -145,7 +154,122 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
     },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
+    const { multi } = useContext(AddSelectContext);
     const [searchTerm, setSearchTerm] = useState('');
+    const listRef = useRef<HTMLDivElement>(null);
+    const focusedIndexRef = useRef(0);
+
+    // Get all item elements
+    const getItems = (): HTMLElement[] => {
+      if (!listRef.current) {
+        return [];
+      }
+      return Array.from(
+        listRef.current.querySelectorAll('[role="row"]')
+      ) as HTMLElement[];
+    };
+
+    // Update focus on items - only one item should have tabindex="0"
+    const updateItemFocus = (focusIndex: number, shouldFocus = true) => {
+      const items = getItems();
+      if (items.length === 0) {
+        return;
+      }
+
+      // Ensure focusIndex is within bounds
+      focusedIndexRef.current = Math.max(
+        0,
+        Math.min(focusIndex, items.length - 1)
+      );
+
+      items.forEach((item, index) => {
+        if (index === focusedIndexRef.current) {
+          item.setAttribute('tabindex', '0');
+          if (shouldFocus) {
+            item.focus();
+          }
+        } else {
+          item.setAttribute('tabindex', '-1');
+        }
+      });
+    };
+
+    // Handle keyboard navigation
+    const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+      const items = getItems();
+      if (items.length === 0) {
+        return;
+      }
+
+      const currentItem = items[focusedIndexRef.current];
+      let handled = false;
+
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault();
+          updateItemFocus(focusedIndexRef.current + 1);
+          handled = true;
+          break;
+
+        case 'ArrowUp':
+          event.preventDefault();
+          updateItemFocus(focusedIndexRef.current - 1);
+          handled = true;
+          break;
+
+        case 'ArrowRight':
+          // Check if current item has children
+          if (currentItem && currentItem.hasAttribute('data-has-children')) {
+            event.preventDefault();
+            // Trigger navigation by clicking the nav indicator
+            const navIndicator = currentItem.querySelector(
+              `.${blockClass}-row__nav-indicator`
+            ) as HTMLElement;
+            navIndicator?.click();
+            handled = true;
+          }
+          break;
+
+        case 'Enter':
+        case ' ':
+          event.preventDefault();
+          // Trigger the item's selection by clicking the checkbox/radio
+          if (currentItem) {
+            const input = currentItem.querySelector(
+              'input[type="checkbox"], input[type="radio"]'
+            ) as HTMLInputElement;
+            input?.click();
+          }
+          handled = true;
+          break;
+
+        case 'Home':
+          if (event.ctrlKey) {
+            event.preventDefault();
+            updateItemFocus(0);
+            handled = true;
+          }
+          break;
+
+        case 'End':
+          if (event.ctrlKey) {
+            event.preventDefault();
+            updateItemFocus(items.length - 1);
+            handled = true;
+          }
+          break;
+      }
+
+      if (handled) {
+        event.stopPropagation();
+      }
+    };
+
+    // Initialize focus management after mount
+    useEffect(() => {
+      updateItemFocus(0, false);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [children]);
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
@@ -251,7 +375,22 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
         </div>
 
         {/* Body Content */}
-        <div className={`${blockClass}__content`}>{children}</div>
+        <div
+          className={`${blockClass}__content`}
+          ref={listRef}
+          role="grid"
+          aria-multiselectable={multi}
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
+        >
+          <div
+            className={cx(`${blockClass}-list-body`, {
+              [`${blockClass}-list-body--horizontal`]: layout === 'horizontal',
+            })}
+          >
+            {children}
+          </div>
+        </div>
       </div>
     );
   }
@@ -271,6 +410,8 @@ AddSelectBody.propTypes = {
   hideSearch: PropTypes.bool,
   itemCount: PropTypes.number,
   itemsLabel: PropTypes.string,
+  /**@ts-ignore */
+  layout: PropTypes.oneOf(['vertical', 'horizontal']),
   /**@ts-ignore */
   linkProps: PropTypes.object,
   /**@ts-ignore */

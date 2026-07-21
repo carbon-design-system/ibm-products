@@ -30,12 +30,12 @@ export interface StackContextType {
 
 const StackContext = createContext<StackContextType | undefined>(undefined);
 
-interface StepProviderProps {
+interface StackProviderProps {
   children: ReactNode;
   stackStepSize?: 'sm' | 'md' | 'lg';
 }
 
-export const StackProvider: React.FC<StepProviderProps> = ({
+export const StackProvider: React.FC<StackProviderProps> = ({
   children,
   stackStepSize = 'lg',
 }) => {

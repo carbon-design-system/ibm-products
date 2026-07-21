@@ -22,12 +22,13 @@ const componentName = Coachmark.displayName;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
-const renderCoachmark = ({ ...rest } = {}) =>
+const renderCoachmark = ({ open, ...rest } = {}) =>
   render(
-    <Coachmark {...rest}>
+    <Coachmark open={open} {...rest}>
       <CoachmarkBeacon
         id="CoachmarkBtn"
         label="Show information"
+        buttonProps={{ 'aria-expanded': !!open }}
       ></CoachmarkBeacon>
       <Coachmark.Content aria-label="Coachmark content">
         <Coachmark.ContentHeader
@@ -45,15 +46,16 @@ const renderCoachmark = ({ ...rest } = {}) =>
     </Coachmark>
   );
 
-const renderCoachmarkFloating = ({ ...rest } = {}) =>
+const renderCoachmarkFloating = ({ open, ...rest } = {}) =>
   render(
-    <Coachmark {...rest}>
+    <Coachmark open={open} {...rest}>
       <Button
         id="CoachmarkBtn"
         kind="tertiary"
         size="md"
         label="Show information"
         renderIcon={Crossroads}
+        aria-expanded={!!open}
       >
         Show information
       </Button>
@@ -341,6 +343,7 @@ describe(componentName, () => {
           size="md"
           label="Show information"
           renderIcon={Crossroads}
+          aria-expanded={true}
         >
           Show information
         </Button>

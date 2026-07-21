@@ -567,50 +567,48 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
                   globalSearchLabel={globalSearchLabel}
                   globalSearchPlaceholder={globalSearchPlaceholder}
                   searchResultsTitle={searchResultsTitle}
-                  itemCount={currentItems.length}
                   onSearch={handleGlobalSearch}
                   path={searchTerm ? [] : breadcrumbPath}
                   onBreadcrumbClick={handleBreadcrumbClick}
+                  layout="horizontal"
                 >
-                  <AddSelect.Content layout="horizontal">
-                    {currentItems.length > 0 ? (
-                      <>
-                        {/* First column - root level */}
+                  {currentItems.length > 0 ? (
+                    <>
+                      {/* First column - root level */}
+                      <ControlledColumn
+                        items={currentItems}
+                        onShowInfo={handleShowInfo}
+                        columnSearchPlaceholder={columnSearchPlaceholder}
+                        columnTitle={columnTitle || itemsLabel}
+                        level={1}
+                        dataManager={dataManager}
+                        onNavigateToChild={handleNavigateToChild}
+                        selectedItems={selectedIds}
+                        preSelectedItems={preSelectedIds}
+                      />
+
+                      {/* Additional columns based on navigation levels */}
+                      {navigationLevels.map((navLevel, index) => (
                         <ControlledColumn
-                          items={currentItems}
+                          key={`${navLevel.parentId}-${index}`}
+                          items={navLevel.items}
                           onShowInfo={handleShowInfo}
                           columnSearchPlaceholder={columnSearchPlaceholder}
-                          columnTitle={columnTitle || itemsLabel}
-                          level={1}
+                          columnTitle={navLevel.parentTitle}
+                          level={index + 2}
                           dataManager={dataManager}
                           onNavigateToChild={handleNavigateToChild}
                           selectedItems={selectedIds}
                           preSelectedItems={preSelectedIds}
                         />
-
-                        {/* Additional columns based on navigation levels */}
-                        {navigationLevels.map((navLevel, index) => (
-                          <ControlledColumn
-                            key={`${navLevel.parentId}-${index}`}
-                            items={navLevel.items}
-                            onShowInfo={handleShowInfo}
-                            columnSearchPlaceholder={columnSearchPlaceholder}
-                            columnTitle={navLevel.parentTitle}
-                            level={index + 2}
-                            dataManager={dataManager}
-                            onNavigateToChild={handleNavigateToChild}
-                            selectedItems={selectedIds}
-                            preSelectedItems={preSelectedIds}
-                          />
-                        ))}
-                      </>
-                    ) : (
-                      <div className={`${blockClass}__no-results`}>
-                        <h4>{noResultsTitle}</h4>
-                        <p>{noResultsDescription}</p>
-                      </div>
-                    )}
-                  </AddSelect.Content>
+                      ))}
+                    </>
+                  ) : (
+                    <div className={`${blockClass}__no-results`}>
+                      <h4>{noResultsTitle}</h4>
+                      <p>{noResultsDescription}</p>
+                    </div>
+                  )}
                 </AddSelect.Body>
               </Tearsheet.MainContent>
 

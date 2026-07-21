@@ -44,6 +44,50 @@ import mdx from './Tearsheet.mdx';
 import { TruncatedText } from '../../TruncatedText';
 const storyClass = 'tearsheet-next-stories';
 
+const sharedArgTypes = {
+  decorator: {
+    control: { type: 'boolean' },
+    description: 'When true, an AI Label decorator is shown in the header.',
+  },
+  isFlush: {
+    control: { type: 'boolean' },
+    description:
+      'When true, the main content area takes full width without padding.',
+  },
+  influencerWidth: {
+    control: { type: 'text' },
+  },
+  keepMounted: {
+    control: { type: 'boolean' },
+    description:
+      'If true, the tearsheet will remain mounted in the DOM when closed. By default (false), the tearsheet unmounts after the exit animation completes.',
+  },
+  summaryContentWidth: {
+    control: { type: 'text' },
+  },
+  verticalGap: {
+    control: { type: 'text' },
+  },
+  variant: {
+    control: { type: 'radio' },
+    options: ['wide', 'narrow'],
+  },
+  hideCloseButton: {
+    control: { type: 'boolean' },
+    description:
+      'Enable a close icon ("x") in the header area of the tearsheet. By default, a tearsheet displays a close icon.',
+  },
+  disableHeaderCollapse: {
+    control: { type: 'boolean' },
+    description:
+      'Default header collapse/expand while scrolling the main content can be disabled by setting this to true.',
+  },
+  closeIconDescription: {
+    control: { type: 'text' },
+    description: 'The accessibility title for the close icon (if shown).',
+  },
+};
+
 export default {
   title: 'Preview/Tearsheet',
   component: Tearsheet,
@@ -71,6 +115,7 @@ export default {
     children: {
       control: false, // ReactNode props don't work in the controls pane
     },
+    ...sharedArgTypes,
   },
   parameters: {
     styles,
@@ -170,7 +215,7 @@ export const Default = (
       <Tearsheet
         open={open}
         variant={variant ?? 'wide'}
-        decorator={sampleDecorator(decorator)}
+        decorator={decorator ? sampleDecorator(1) : undefined}
         onClose={() => setOpen(false)}
         preventCloseOnClickOutside={true}
         launcherButtonRef={launcherButtonRef}
@@ -184,6 +229,10 @@ export const Default = (
           hideCloseButton={hideCloseButton}
           disableHeaderCollapse={disableHeaderCollapse}
           closeIconDescription={closeIconDescription}
+          onHeaderCollapse={(collapsed) => {
+            setIsCollapsed(collapsed);
+            console.log('onHeaderCollapse:', collapsed);
+          }}
         >
           <Tearsheet.HeaderContent
             open
@@ -196,17 +245,17 @@ export const Default = (
                 menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
               >
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 1
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 2
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 3
                   </Button>
                 </Tearsheet.HeaderActionItem>
@@ -215,7 +264,7 @@ export const Default = (
           ></Tearsheet.HeaderContent>
         </Tearsheet.Header>
         <Tearsheet.Body>
-          <Tearsheet.MainContent>
+          <Tearsheet.MainContent isFlush={isFlush}>
             <div className="summaryPanelTrigger">
               <Button
                 ref={summaryPanelTriggerRef}
@@ -225,6 +274,7 @@ export const Default = (
                 renderIcon={() => <RightPanelClose />}
                 aria-expanded={summaryPanelOpen}
                 aria-controls="summary-panel"
+                size="md"
               ></Button>
             </div>
 
@@ -396,7 +446,7 @@ export const WithInfluencer = (
   const currentStep = 1;
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-  const isSm = useMatchMedia(smMediaQuery);
+  const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
   const buttonSize = isSm ? 'xl' : '2xl';
 
   return (
@@ -413,14 +463,23 @@ export const WithInfluencer = (
 
       <Tearsheet
         open={open}
-        variant={'wide'}
-        decorator={sampleDecorator(1)}
+        variant={variant ?? 'wide'}
+        decorator={decorator ? sampleDecorator(1) : undefined}
         onClose={() => setOpen(false)}
         preventCloseOnClickOutside={true}
         launcherButtonRef={launcherButtonRef}
         selectorPrimaryFocus={'#input1'}
+        influencerWidth={influencerWidth}
+        keepMounted={keepMounted}
+        summaryContentWidth={summaryContentWidth}
+        verticalGap={verticalGap}
       >
-        <Tearsheet.Header>
+        <Tearsheet.Header
+          hideCloseButton={hideCloseButton}
+          disableHeaderCollapse={disableHeaderCollapse}
+          closeIconDescription={closeIconDescription}
+          onHeaderCollapse={(collapsed) => setIsCollapsed(collapsed)}
+        >
           <Tearsheet.HeaderContent
             open
             label="Customer data"
@@ -433,17 +492,17 @@ export const WithInfluencer = (
                 menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
               >
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 1
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 2
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 3
                   </Button>
                 </Tearsheet.HeaderActionItem>
@@ -476,7 +535,7 @@ export const WithInfluencer = (
           </ProgressIndicator>
         </Tearsheet.Influencer>
         <Tearsheet.Body>
-          <Tearsheet.MainContent>
+          <Tearsheet.MainContent isFlush={isFlush}>
             <div className="influencerPanelTrigger">
               <Button
                 ref={influencerPanelTriggerRef}
@@ -486,6 +545,7 @@ export const WithInfluencer = (
                 renderIcon={() => <RightPanelClose />}
                 aria-expanded={influencerPanelOpen}
                 aria-controls="influencer-panel"
+                size="md"
               ></Button>
             </div>
 
@@ -624,7 +684,7 @@ export const WithTabs = (
   const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-  const isSm = useMatchMedia(smMediaQuery);
+  const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
   const buttonSize = isSm ? 'xl' : '2xl';
   return (
     <>
@@ -640,12 +700,21 @@ export const WithTabs = (
       <Tabs>
         <Tearsheet
           open={open}
-          variant={'wide'}
-          decorator={sampleDecorator(1)}
+          variant={variant ?? 'wide'}
+          decorator={decorator ? sampleDecorator(1) : undefined}
           onClose={() => setOpen(false)}
           launcherButtonRef={launcherButtonRef}
+          influencerWidth={influencerWidth}
+          keepMounted={keepMounted}
+          summaryContentWidth={summaryContentWidth}
+          verticalGap={verticalGap}
         >
-          <Tearsheet.Header>
+          <Tearsheet.Header
+            hideCloseButton={hideCloseButton}
+            disableHeaderCollapse={disableHeaderCollapse}
+            closeIconDescription={closeIconDescription}
+            onHeaderCollapse={(collapsed) => setIsCollapsed(collapsed)}
+          >
             <Tearsheet.HeaderContent
               open
               label="Customer data"
@@ -656,17 +725,17 @@ export const WithTabs = (
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
                 >
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 1
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 2
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 3
                     </Button>
                   </Tearsheet.HeaderActionItem>
@@ -694,6 +763,7 @@ export const WithTabs = (
                   label="Open right panel"
                   onClick={() => setSummaryPanelOpen(true)}
                   renderIcon={() => <RightPanelClose />}
+                  size="md"
                 ></Button>
               </div>
               <TabPanels>
@@ -780,6 +850,13 @@ export const withSteps = (
         open={open}
         setOpen={setOpen}
         launcherButtonRef={launcherButtonRef}
+        decorator={decorator ? sampleDecorator(1) : undefined}
+        variant={variant ?? 'wide'}
+        hideCloseButton={hideCloseButton}
+        disableHeaderCollapse={disableHeaderCollapse}
+        closeIconDescription={closeIconDescription}
+        verticalGap={verticalGap}
+        keepMounted={keepMounted}
       />
     </StepProvider>
   );
@@ -798,8 +875,6 @@ export const withStepsAndHorizontalProgressIndicator = (
 ) => {
   const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const launcherButtonRef = useRef(null);
-  const currentStep = 1;
-  const [text, setText] = useState('');
   return (
     <StepProvider>
       <Button
@@ -817,6 +892,13 @@ export const withStepsAndHorizontalProgressIndicator = (
         setOpen={setOpen}
         progressIndicator={'horizontal'}
         launcherButtonRef={launcherButtonRef}
+        decorator={decorator ? sampleDecorator(1) : undefined}
+        variant={variant ?? 'wide'}
+        hideCloseButton={hideCloseButton}
+        disableHeaderCollapse={disableHeaderCollapse}
+        closeIconDescription={closeIconDescription}
+        verticalGap={verticalGap}
+        keepMounted={keepMounted}
       />
     </StepProvider>
   );
@@ -840,8 +922,6 @@ export const narrowTearsheet = (
   const summaryPanelTriggerRef = useRef(null);
   const influencerPanelTriggerRef = useRef(null);
   const currentStep = 1;
-  const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
-  const isSm = useMatchMedia(smMediaQuery) || true; // narrow variant always uses xl
   const buttonSize = 'xl'; // narrow variant always uses xl
   return (
     <>
@@ -859,12 +939,18 @@ export const narrowTearsheet = (
           open={open}
           variant={'narrow'}
           verticalGap="5.5rem"
-          decorator={sampleDecorator(1)}
+          decorator={decorator ? sampleDecorator(1) : undefined}
           onClose={() => setOpen(false)}
           className="narrowTearsheet"
           launcherButtonRef={launcherButtonRef}
+          keepMounted={keepMounted}
         >
-          <Tearsheet.Header>
+          <Tearsheet.Header
+            hideCloseButton={hideCloseButton}
+            disableHeaderCollapse={disableHeaderCollapse}
+            closeIconDescription={closeIconDescription}
+            onHeaderCollapse={(collapsed) => setIsCollapsed(collapsed)}
+          >
             <Tearsheet.HeaderContent
               open
               label="Customer data"
@@ -875,17 +961,17 @@ export const narrowTearsheet = (
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
                 >
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 1
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 2
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 3
                     </Button>
                   </Tearsheet.HeaderActionItem>
@@ -918,7 +1004,7 @@ export const narrowTearsheet = (
             </ProgressIndicator>
           </Tearsheet.Influencer>
           <Tearsheet.Body>
-            <Tearsheet.MainContent>
+            <Tearsheet.MainContent isFlush={isFlush}>
               <div className="influencerPanelTrigger">
                 <Button
                   ref={influencerPanelTriggerRef}
@@ -928,6 +1014,7 @@ export const narrowTearsheet = (
                   renderIcon={() => <RightPanelClose />}
                   aria-expanded={influencerPanelOpen}
                   aria-controls="influencer-panel"
+                  size="md"
                 ></Button>
               </div>
               <div className="summaryPanelTrigger">
@@ -939,6 +1026,7 @@ export const narrowTearsheet = (
                   renderIcon={() => <RightPanelClose />}
                   aria-expanded={summaryPanelOpen}
                   aria-controls="summary-panel"
+                  size="md"
                 ></Button>
               </div>
 
@@ -1115,6 +1203,8 @@ export const StackingTearsheet = (
   const [open1, setOpen1] = useState(context?.viewMode !== 'docs');
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const [isCollapsed1, setIsCollapsed1] = useState(false);
+  const [isCollapsed2, setIsCollapsed2] = useState(false);
   const launcherButtonRef1 = useRef(null);
   const launcherButtonRef2 = useRef(null);
   const launcherButtonRef3 = useRef(null);
@@ -1151,8 +1241,14 @@ export const StackingTearsheet = (
           variant={variant[0]}
           verticalGap={variant[0] === 'narrow' ? '5.5rem' : ''}
           launcherButtonRef={launcherButtonRef1}
+          decorator={decorator ? sampleDecorator(1) : undefined}
         >
-          <Tearsheet.Header>
+          <Tearsheet.Header
+            hideCloseButton={hideCloseButton}
+            disableHeaderCollapse={disableHeaderCollapse}
+            closeIconDescription={closeIconDescription}
+            onHeaderCollapse={(collapsed) => setIsCollapsed1(collapsed)}
+          >
             <Tearsheet.HeaderContent
               headerActions={
                 <Tearsheet.HeaderActions
@@ -1162,7 +1258,7 @@ export const StackingTearsheet = (
                     <Button
                       ref={launcherButtonRef2}
                       kind="tertiary"
-                      size="sm"
+                      size={isCollapsed1 ? 'xs' : 'sm'}
                       onClick={() => {
                         setOpen2(true);
                       }}
@@ -1179,7 +1275,7 @@ export const StackingTearsheet = (
             ></Tearsheet.HeaderContent>
           </Tearsheet.Header>
           <Tearsheet.Body>
-            <Tearsheet.MainContent>
+            <Tearsheet.MainContent isFlush={isFlush}>
               <Section className="main-content">
                 <h3>Main content heading</h3>
 
@@ -1268,8 +1364,14 @@ export const StackingTearsheet = (
           variant={variant[1]}
           verticalGap={variant[1] === 'narrow' ? '5.5rem' : ''}
           launcherButtonRef={launcherButtonRef2}
+          decorator={decorator ? sampleDecorator(1) : undefined}
         >
-          <Tearsheet.Header>
+          <Tearsheet.Header
+            hideCloseButton={hideCloseButton}
+            disableHeaderCollapse={disableHeaderCollapse}
+            closeIconDescription={closeIconDescription}
+            onHeaderCollapse={(collapsed) => setIsCollapsed2(collapsed)}
+          >
             <Tearsheet.HeaderContent
               label="Customer data"
               title="Tearsheet 2"
@@ -1282,7 +1384,7 @@ export const StackingTearsheet = (
                     <Button
                       ref={launcherButtonRef3}
                       kind="tertiary"
-                      size="sm"
+                      size={isCollapsed2 ? 'xs' : 'sm'}
                       onClick={() => {
                         setOpen3(true);
                       }}
@@ -1296,7 +1398,7 @@ export const StackingTearsheet = (
             ></Tearsheet.HeaderContent>
           </Tearsheet.Header>
           <Tearsheet.Body>
-            <Tearsheet.MainContent>
+            <Tearsheet.MainContent isFlush={isFlush}>
               <Section className="main-content">
                 <h3>Main content heading</h3>
 
@@ -1385,8 +1487,13 @@ export const StackingTearsheet = (
           verticalGap={variant[2] === 'narrow' ? '5.5rem' : ''}
           onClose={() => setOpen3(false)}
           launcherButtonRef={launcherButtonRef3}
+          decorator={decorator ? sampleDecorator(1) : undefined}
         >
-          <Tearsheet.Header>
+          <Tearsheet.Header
+            hideCloseButton={hideCloseButton}
+            disableHeaderCollapse={disableHeaderCollapse}
+            closeIconDescription={closeIconDescription}
+          >
             <Tearsheet.HeaderContent
               label="Customer data"
               title="Tearsheet 3"
@@ -1394,7 +1501,7 @@ export const StackingTearsheet = (
             ></Tearsheet.HeaderContent>
           </Tearsheet.Header>
           <Tearsheet.Body>
-            <Tearsheet.MainContent>
+            <Tearsheet.MainContent isFlush={isFlush}>
               <Section className="main-content">
                 <h3>Main content heading</h3>
 
@@ -1481,7 +1588,6 @@ export const StackingTearsheet = (
     </>
   );
 };
-
 export const stackingWithDifferentSizes = () => (
   <StackingTearsheet variant={['wide', 'narrow', 'wide']} />
 );
@@ -1526,7 +1632,7 @@ export const WithCustomFooterActions = (
       <Tearsheet
         open={open}
         variant={variant ?? 'wide'}
-        decorator={sampleDecorator(decorator)}
+        decorator={decorator ? sampleDecorator(1) : undefined}
         onClose={() => setOpen(false)}
         preventCloseOnClickOutside={true}
         launcherButtonRef={launcherButtonRef}
@@ -1536,7 +1642,12 @@ export const WithCustomFooterActions = (
         summaryContentWidth={summaryContentWidth}
         verticalGap={verticalGap}
       >
-        <Tearsheet.Header>
+        <Tearsheet.Header
+          hideCloseButton={hideCloseButton}
+          disableHeaderCollapse={disableHeaderCollapse}
+          closeIconDescription={closeIconDescription}
+          onHeaderCollapse={(collapsed) => setIsCollapsed(collapsed)}
+        >
           <Tearsheet.HeaderContent
             open
             label="Customer data"
@@ -1548,17 +1659,17 @@ export const WithCustomFooterActions = (
                 menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
               >
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 1
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 2
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 3
                   </Button>
                 </Tearsheet.HeaderActionItem>
@@ -1567,13 +1678,14 @@ export const WithCustomFooterActions = (
           ></Tearsheet.HeaderContent>
         </Tearsheet.Header>
         <Tearsheet.Body>
-          <Tearsheet.MainContent>
+          <Tearsheet.MainContent isFlush={isFlush}>
             <div className="summaryPanelTrigger">
               <Button
                 kind="ghost"
                 label="Open right panel"
                 onClick={() => setSummaryPanelOpen(true)}
                 renderIcon={() => <RightPanelClose />}
+                size="md"
               ></Button>
             </div>
 
@@ -1686,66 +1798,4 @@ export const WithCustomFooterActions = (
       </Tearsheet>
     </>
   );
-};
-
-Default.argTypes = {
-  decorator: {
-    control: {
-      type: 'select',
-      labels: {
-        0: 'No AI Label',
-        1: 'with AI Label',
-        2: 'With non AI Label component',
-      },
-      default: 0,
-    },
-    description: 'Optional prop that allows you to pass any component.',
-    options: [0, 1, 2],
-  },
-  influencerWidth: {
-    control: {
-      type: 'text',
-    },
-  },
-  keepMounted: {
-    control: {
-      type: 'boolean',
-    },
-    description:
-      'If true, the tearsheet will remain mounted in the DOM when closed. By default (false), the tearsheet unmounts after the exit animation completes.',
-  },
-  summaryContentWidth: {
-    control: {
-      type: 'text',
-    },
-  },
-  verticalGap: {
-    control: {
-      type: 'text',
-    },
-  },
-  variant: {
-    control: { type: 'radio' },
-    options: ['wide', 'narrow'],
-  },
-  hideCloseButton: {
-    control: {
-      type: 'boolean',
-    },
-    description:
-      'Enable a close icon ("x") in the header area of the tearsheet. By default, a tearsheet displays a close icon.',
-  },
-  disableHeaderCollapse: {
-    control: {
-      type: 'boolean',
-    },
-    description:
-      'Default header collapse/expand while scrolling the main content can be disabled by setting this to true.',
-  },
-  closeIconDescription: {
-    control: {
-      type: 'text',
-    },
-    description: 'The accessibility title for the close icon (if shown).',
-  },
 };

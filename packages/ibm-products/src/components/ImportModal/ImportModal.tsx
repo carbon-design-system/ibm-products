@@ -161,6 +161,9 @@ export interface ImportModalProps {
   title: string;
 }
 
+/**
+ * @deprecated This component is deprecated.
+ */
 export const ImportModal: React.FC<ImportModalProps> = forwardRef(
   (
     {
@@ -415,6 +418,12 @@ export const ImportModal: React.FC<ImportModalProps> = forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
+
+/**@ts-ignore*/
+ImportModal.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Import and Upload pattern`,
+};
 
 ImportModal.propTypes = {
   /**

@@ -56,7 +56,11 @@ export const CardMedia = ({
     return (
       <div
         className={`${blockClass}__media ${blockClass}__media--horizontal`}
-        style={{ flexBasis: mediaWidth }}
+        style={
+          {
+            [`--${blockClass}--media-width`]: mediaWidth,
+          } as React.CSSProperties
+        }
         {...getDevtoolsProps(componentName)}
       >
         {children}

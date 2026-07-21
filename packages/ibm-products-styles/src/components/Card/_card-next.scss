@@ -189,10 +189,15 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
 }
 
 // Media column in horizontal mode.
-// Width comes from the inline flex-basis set by the mediaWidth prop (default 33.33%).
+// Width is driven by the --ibm-products--card-next--media-width custom property
+// (set by the mediaWidth prop, default 33.33%).
 // Height stretches to match the content column via align-self: stretch.
 .#{$block-class-next}__media--horizontal {
   overflow: hidden;
+  flex-basis: var(
+    --#{c4p-settings.$pkg-prefix}--card-next--media-width,
+    33.33%
+  );
   flex-shrink: 0;
   align-self: stretch;
 }

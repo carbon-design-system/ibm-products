@@ -1263,7 +1263,7 @@ export const WithVideo = () => (
 export const WithHorizontalMedia = () => (
   <Grid withRowGap>
     {/* Default mediaWidth (33.33%) */}
-    <Column lg={8} md={8} sm={4}>
+    <Column lg={8} md={4} sm={4}>
       <Card horizontal>
         <Card.Media>
           <img
@@ -1294,7 +1294,7 @@ export const WithHorizontalMedia = () => (
     </Column>
 
     {/* Custom mediaWidth (50%) */}
-    <Column lg={8} md={8} sm={4}>
+    <Column lg={8} md={4} sm={4}>
       <Card horizontal>
         <Card.Media mediaWidth="50%">
           <img
@@ -1325,7 +1325,7 @@ export const WithHorizontalMedia = () => (
       </Card>
     </Column>
 
-    <Column lg={8} md={8} sm={4}>
+    <Column lg={8} md={4} sm={4}>
       <Card horizontal>
         <Card.Header>
           <Card.Title>Custom media width</Card.Title>
@@ -1356,7 +1356,7 @@ export const WithHorizontalMedia = () => (
       </Card>
     </Column>
 
-    <Column lg={8} md={8} sm={4}>
+    <Column lg={8} md={4} sm={4}>
       <Card horizontal density="expressive">
         <Card.Header>
           <Card.HeaderMedia>

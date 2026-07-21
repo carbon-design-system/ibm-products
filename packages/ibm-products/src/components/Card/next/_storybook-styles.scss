@@ -14,27 +14,60 @@ $block-class: #{c4p-settings.$pkg-prefix}--card-next;
   padding-block-start: spacing.$spacing-07; // 2rem
 }
 
-// Storybook demo styles for CardMedia content
-// These styles are for demonstration purposes only and show how adopters
-// should style their content inside CardMedia to fill the AspectRatio container
-.#{$block-class}__media {
-  // Make any direct child div fill the AspectRatio container
-  // This works with inline styles that have width/height 100%
-  > div {
-    position: absolute;
-    inset: 0;
-  }
-}
-
-// Storybook demo styles for pictogram in icon slot
-.icon-slot-pictogram {
-  block-size: spacing.$spacing-09; // 48px
-  inline-size: spacing.$spacing-09; // 48px
-}
-
 // Storybook disabled toggle column — aligns the toggle button to the bottom
 .card-story-disabled-toggle {
   display: flex;
   align-items: flex-end;
   padding-block-end: spacing.$spacing-05;
+}
+
+.story-time {
+  display: flex;
+  align-items: center;
+  padding: 0 spacing.$spacing-05;
+  font-size: calc(spacing.$spacing-04 + spacing.$spacing-01);
+  gap: spacing.$spacing-03;
+}
+
+.get-started-story-card.#{$block-class} {
+  border-color: #8a3ffc;
+  background-image: linear-gradient(to bottom, #5d25ad, #6929c4);
+  color: #ffffff;
+
+  .#{$block-class}__title,
+  .#{$block-class}__label,
+  .#{$block-class}__caption,
+  .#{$block-class}__body {
+    color: #ffffff;
+  }
+}
+
+// Metric pair row — used in the WithChart story to lay out two BigNumbers side by side
+.card-story-metrics {
+  display: flex;
+  gap: spacing.$spacing-07; // 2rem
+  padding-block-end: spacing.$spacing-05;
+}
+
+// Body text above the chart in Example 1 of the WithChart story
+.card-story-chart-body-text {
+  padding-block-end: spacing.$spacing-05;
+}
+
+// Metadata row in the GetStarted card footer
+.card-story-get-started-meta {
+  display: flex;
+  flex: 1 0 0;
+  align-items: center;
+  gap: spacing.$spacing-05;
+}
+
+.card-story-get-started-meta__item {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem; // label-01
+  gap: spacing.$spacing-02;
+  letter-spacing: 0.32px;
+  line-height: 1rem;
+  white-space: nowrap;
 }

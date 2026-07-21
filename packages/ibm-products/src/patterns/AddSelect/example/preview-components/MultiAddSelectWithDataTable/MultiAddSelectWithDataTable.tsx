@@ -21,12 +21,15 @@ const sampleItems: AddSelectItem[] = [
     category: 'Analytics',
     owner: 'Marketing Team',
     status: 'Active',
-    itemDetails: {
-      Description:
-        'Comprehensive dashboard for analyzing customer interactions and purchase patterns',
-      Category: 'Analytics',
-      Owner: 'Marketing Team',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value:
+          'Comprehensive dashboard for analyzing customer interactions and purchase patterns',
+      },
+      { label: 'Category', value: 'Analytics' },
+      { label: 'Owner', value: 'Marketing Team' },
+    ],
   },
   {
     id: '2',
@@ -36,12 +39,15 @@ const sampleItems: AddSelectItem[] = [
     category: 'Reports',
     owner: 'Sales Team',
     status: 'Active',
-    itemDetails: {
-      Description:
-        'Detailed report showing sales trends, revenue, and team performance',
-      Category: 'Reports',
-      Owner: 'Sales Team',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value:
+          'Detailed report showing sales trends, revenue, and team performance',
+      },
+      { label: 'Category', value: 'Reports' },
+      { label: 'Owner', value: 'Sales Team' },
+    ],
   },
   {
     id: '3',
@@ -51,12 +57,14 @@ const sampleItems: AddSelectItem[] = [
     category: 'Operations',
     owner: 'Logistics Team',
     status: 'Active',
-    itemDetails: {
-      Description:
-        'Tracks stock levels, reorder points, and supply chain status',
-      Category: 'Operations',
-      Owner: 'Logistics Team',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value: 'Tracks stock levels, reorder points, and supply chain status',
+      },
+      { label: 'Category', value: 'Operations' },
+      { label: 'Owner', value: 'Logistics Team' },
+    ],
   },
   {
     id: '4',
@@ -66,12 +74,15 @@ const sampleItems: AddSelectItem[] = [
     category: 'Marketing',
     owner: 'Marketing Team',
     status: 'Active',
-    itemDetails: {
-      Description:
-        'Track marketing campaigns across multiple channels with detailed analytics',
-      Category: 'Marketing',
-      Owner: 'Marketing Team',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value:
+          'Track marketing campaigns across multiple channels with detailed analytics',
+      },
+      { label: 'Category', value: 'Marketing' },
+      { label: 'Owner', value: 'Marketing Team' },
+    ],
   },
   {
     id: '5',
@@ -81,11 +92,14 @@ const sampleItems: AddSelectItem[] = [
     category: 'HR',
     owner: 'HR Team',
     status: 'Active',
-    itemDetails: {
-      Description: 'Company-wide employee profiles and contact information',
-      Category: 'HR',
-      Owner: 'HR Team',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value: 'Company-wide employee profiles and contact information',
+      },
+      { label: 'Category', value: 'HR' },
+      { label: 'Owner', value: 'HR Team' },
+    ],
   },
   {
     id: '6',
@@ -95,12 +109,15 @@ const sampleItems: AddSelectItem[] = [
     category: 'Project Management',
     owner: 'PMO',
     status: 'Active',
-    itemDetails: {
-      Description:
-        'Interactive timeline showing project phases, dependencies, and deadlines',
-      Category: 'Project Management',
-      Owner: 'PMO',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value:
+          'Interactive timeline showing project phases, dependencies, and deadlines',
+      },
+      { label: 'Category', value: 'Project Management' },
+      { label: 'Owner', value: 'PMO' },
+    ],
   },
   {
     id: '7',
@@ -110,12 +127,14 @@ const sampleItems: AddSelectItem[] = [
     category: 'Finance',
     owner: 'Finance Team',
     status: 'Archived',
-    itemDetails: {
-      Description:
-        'Quarterly financial reports including P&L and balance sheets',
-      Category: 'Finance',
-      Owner: 'Finance Team',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value: 'Quarterly financial reports including P&L and balance sheets',
+      },
+      { label: 'Category', value: 'Finance' },
+      { label: 'Owner', value: 'Finance Team' },
+    ],
   },
   {
     id: '8',
@@ -125,12 +144,15 @@ const sampleItems: AddSelectItem[] = [
     category: 'Support',
     owner: 'Support Team',
     status: 'Active',
-    itemDetails: {
-      Description:
-        'Centralized system for managing customer support tickets and resolutions',
-      Category: 'Support',
-      Owner: 'Support Team',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value:
+          'Centralized system for managing customer support tickets and resolutions',
+      },
+      { label: 'Category', value: 'Support' },
+      { label: 'Owner', value: 'Support Team' },
+    ],
   },
 ];
 

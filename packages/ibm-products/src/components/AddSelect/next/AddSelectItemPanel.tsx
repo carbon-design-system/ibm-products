@@ -92,7 +92,10 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
   ) => {
     const panelClasses = cx(`${blockClass}__item-summary-panel`, className);
 
-    // Default content rendering - show all key-value data from itemDetails
+    // Default content rendering — renders only labelled itemDetails tuples.
+    // Only renders when itemDetails is the preferred Array<{ label, value }>
+    // form. Legacy Record-shaped itemDetails (used by custom renderers) are
+    // intentionally skipped to avoid rendering internal keys in the UI.
     const defaultContent = () => {
       if (!item) {
         return null;
@@ -100,21 +103,23 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
 
       const { itemDetails } = item;
 
-      if (!itemDetails || Object.keys(itemDetails).length === 0) {
+      if (
+        !itemDetails ||
+        !Array.isArray(itemDetails) ||
+        itemDetails.length === 0
+      ) {
         return null;
       }
 
-      const entries = Object.entries(itemDetails);
-
       return (
         <>
-          {entries.map(([key, val]) => (
+          {itemDetails.map(({ label, value: val }) => (
             <div
-              key={key}
+              key={label}
               className={`${blockClass}__item-summary-panel-entry`}
             >
               <p className={`${blockClass}__item-summary-panel-entry-title`}>
-                {key}
+                {label}
               </p>
               <p className={`${blockClass}__item-summary-panel-entry-body`}>
                 {String(val)}

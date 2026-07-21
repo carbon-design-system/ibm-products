@@ -849,8 +849,10 @@ Side panel that displays detailed information about a specific item.
 **Props:**
 
 - **title** (string, optional, default: "Item details") - Panel title
-- **item** (AddSelectItem | ItemDetailEntry[] | ReactNode, optional) - Item
-  data, array of entries, or custom content
+- **item** (AddSelectItem, optional) - Item data. `defaultContent()` renders
+  entries when `item.itemDetails` is
+  `Array<{ label: string; value: string | number }>`. Use `children` or
+  `renderItem` for custom layouts
 - **onClose** (function, optional) - Close button handler
   - Signature: `() => void`
 - **closeIconDescription** (string, optional, default: "Close") - Close button

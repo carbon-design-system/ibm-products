@@ -177,26 +177,26 @@ const AddSelectSelectionSummaryItem = forwardRef<
       </div>
     );
 
-    // Default content rendering — renders only itemDetails entries.
-    // Arbitrary item fields (e.g. value, parentId) are intentionally excluded
-    // to prevent developer-internal identifiers from appearing in the UI.
+    // Default content rendering — renders only labelled itemDetails tuples.
+    // Only renders when itemDetails is the preferred Array<{ label, value }>
+    // form. Legacy Record-shaped itemDetails (used by custom renderers) are
+    // intentionally skipped to avoid rendering internal keys in the UI.
     const defaultContent = () => {
-      if (!item?.itemDetails) {
+      if (!item?.itemDetails || !Array.isArray(item.itemDetails)) {
         return null;
       }
-      const entries = Object.entries(item.itemDetails);
-      if (entries.length === 0) {
+      if (item.itemDetails.length === 0) {
         return null;
       }
       return (
         <>
-          {entries.map(([key, val]) => (
+          {item.itemDetails.map(({ label, value: val }) => (
             <div
-              key={key}
+              key={label}
               className={`${blockClass}__selection-summary-item-entry`}
             >
               <p className={`${blockClass}__selection-summary-item-header`}>
-                {key}
+                {label}
               </p>
               <p className={`${blockClass}__selection-summary-item-body`}>
                 {String(val)}

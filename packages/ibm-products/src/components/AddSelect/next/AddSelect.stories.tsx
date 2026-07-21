@@ -30,55 +30,55 @@ const sampleItems: AddSelectItem[] = [
     value: '1',
     title: 'Item 1',
     subtitle: 'Item 1 subtitle',
-    itemDetails: {
-      Description: 'First item in the list',
-      Category: 'Type A',
-      Owner: 'Team Alpha',
-    },
+    itemDetails: [
+      { label: 'Description', value: 'First item in the list' },
+      { label: 'Category', value: 'Type A' },
+      { label: 'Owner', value: 'Team Alpha' },
+    ],
   },
   {
     id: '2',
     value: '2',
     title: 'Item 2',
     subtitle: 'Item 2 subtitle',
-    itemDetails: {
-      Description: 'Second item in the list',
-      Category: 'Type B',
-      Owner: 'Team Beta',
-    },
+    itemDetails: [
+      { label: 'Description', value: 'Second item in the list' },
+      { label: 'Category', value: 'Type B' },
+      { label: 'Owner', value: 'Team Beta' },
+    ],
   },
   {
     id: '3',
     value: '3',
     title: 'Item 3',
     subtitle: 'Item 3 subtitle',
-    itemDetails: {
-      Description: 'Third item in the list',
-      Category: 'Type A',
-      Owner: 'Team Alpha',
-    },
+    itemDetails: [
+      { label: 'Description', value: 'Third item in the list' },
+      { label: 'Category', value: 'Type A' },
+      { label: 'Owner', value: 'Team Alpha' },
+    ],
   },
   {
     id: '4',
     value: '4',
     title: 'Item 4',
     subtitle: 'Item 4 subtitle',
-    itemDetails: {
-      Description: 'Fourth item in the list',
-      Category: 'Type C',
-      Owner: 'Team Gamma',
-    },
+    itemDetails: [
+      { label: 'Description', value: 'Fourth item in the list' },
+      { label: 'Category', value: 'Type C' },
+      { label: 'Owner', value: 'Team Gamma' },
+    ],
   },
   {
     id: '5',
     value: '5',
     title: 'Item 5',
     subtitle: 'Item 5 subtitle',
-    itemDetails: {
-      Description: 'Fifth item in the list',
-      Category: 'Type B',
-      Owner: 'Team Beta',
-    },
+    itemDetails: [
+      { label: 'Description', value: 'Fifth item in the list' },
+      { label: 'Category', value: 'Type B' },
+      { label: 'Owner', value: 'Team Beta' },
+    ],
   },
 ];
 

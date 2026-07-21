@@ -1541,7 +1541,10 @@ describe('AddSelect.SelectionSummaryItem', () => {
       id: 'd1',
       title: 'Detailed',
       value: 'dv',
-      itemDetails: { Tier: 'Gold', Capacity: '10 TB' },
+      itemDetails: [
+        { label: 'Tier', value: 'Gold' },
+        { label: 'Capacity', value: '10 TB' },
+      ],
     };
     render(
       <AddSelect>
@@ -1588,7 +1591,10 @@ describe('AddSelect.ItemPanel', () => {
     id: 'p1',
     title: 'Panel item',
     value: 'vp',
-    itemDetails: { Owner: 'Alice', Size: '4 GB' },
+    itemDetails: [
+      { label: 'Owner', value: 'Alice' },
+      { label: 'Size', value: '4 GB' },
+    ],
   };
 
   it('renders the panel title', () => {

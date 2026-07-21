@@ -483,6 +483,44 @@ describe('AddSelect.Row', () => {
     expect(screen.getByRole('row')).toHaveAttribute('aria-selected', 'true');
   });
 
+  it('warns in dev when both selected prop and selectedItems context are set', () => {
+    const consoleWarn = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {});
+    render(
+      // selectedItems context is set on root; selected=true on the row — conflict
+      <AddSelect selectedItems={new Set(['r1'])}>
+        <AddSelect.Body hideSearch>
+          <AddSelect.Column multi hideSearch>
+            <AddSelect.Row itemId="r1" title="Row 1" value="v1" selected />
+          </AddSelect.Column>
+        </AddSelect.Body>
+      </AddSelect>
+    );
+    expect(consoleWarn).toHaveBeenCalledWith(
+      expect.stringContaining('[AddSelectRow]')
+    );
+    expect(consoleWarn).toHaveBeenCalledWith(expect.stringContaining('"r1"'));
+    consoleWarn.mockRestore();
+  });
+
+  it('does not warn when only selectedItems context is set (no selected prop)', () => {
+    const consoleWarn = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {});
+    render(
+      <AddSelect selectedItems={new Set(['r1'])}>
+        <AddSelect.Body hideSearch>
+          <AddSelect.Column multi hideSearch>
+            <AddSelect.Row itemId="r1" title="Row 1" value="v1" />
+          </AddSelect.Column>
+        </AddSelect.Body>
+      </AddSelect>
+    );
+    expect(consoleWarn).not.toHaveBeenCalled();
+    consoleWarn.mockRestore();
+  });
+
   it('does not call onItemSelect when disabled', () => {
     const onItemSelect = jest.fn();
     render(

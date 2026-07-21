@@ -188,6 +188,16 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
     // Use context's selected state if available
     const isSelected = selectedItems?.has(itemId) ?? selected;
 
+    if (process.env.NODE_ENV !== 'production') {
+      if (selectedItems !== undefined && selected !== false) {
+        console.warn(
+          `[AddSelectRow] Both the \`selected\` prop and \`selectedItems\` context are set ` +
+            `on row "${itemId}". The context value takes precedence. ` +
+            `Remove the \`selected\` prop when using controlled mode via AddSelect.`
+        );
+      }
+    }
+
     const handleSelect = () => {
       if (disabled) {
         return;

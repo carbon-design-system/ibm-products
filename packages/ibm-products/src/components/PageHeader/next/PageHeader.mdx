@@ -16,6 +16,7 @@ import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
   - [PageHeader.Content with hero image](#pageheadercontent-with-hero-image)
 - [PageHeader.TabsBar](#pageheadertabsbar)
   - [PageHeader.TabsBar with Tags](#pageheadertabsbar-with-tags)
+- [Migration guidance from deprecated PageHeader to preview_PageHeader](#migration-guidance-from-deprecated-pageheader-to-preview_pageheader)
 
 ## Overview
 
@@ -790,6 +791,217 @@ To include the scroller button to expand and collapse the header, pass
   </TabPanels>
 </Tabs>
 ```
+
+## Migration guidance from deprecated PageHeader to preview_PageHeader
+
+If you are currently using the deprecated `PageHeader`, a **codemod** is
+available to automate the migration to `preview__PageHeader`. Run the following
+command at the root of your project:
+
+```sh
+npx @carbon/upgrade migrate ibm-products-update-page-header-composable
+```
+
+The codemod will rewrite your existing `<PageHeader>` usages to the new
+composable structure. After running the codemod, review the diff and manually
+correct any changes that the codemod could not handle automatically.
+
+### Overview
+
+The original `PageHeader` was a single monolithic component driven entirely by
+props. `preview__PageHeader` replaces it with a **composable family** of
+sub-components so that every zone (breadcrumb bar, content area, tab bar) can be
+composed, extended, or omitted independently.
+
+### Import path
+
+```tsx
+// Before — deprecated
+import { PageHeader } from '@carbon/ibm-products';
+
+// After — composable preview
+import { preview__PageHeader as PageHeader } from '@carbon/ibm-products';
+```
+
+All sub-components are accessed directly on the namespace object, e.g.
+`PageHeader.Root`, `PageHeader.Content`, etc. The full set is:
+
+| `PageHeader.*`                     | Direct export alias                         |
+| ---------------------------------- | ------------------------------------------- |
+| `PageHeader.Root`                  | `PageHeader` itself — the outermost wrapper |
+| `PageHeader.BreadcrumbBar`         | `PageHeaderBreadcrumbBar`                   |
+| `PageHeader.Content`               | `PageHeaderContent`                         |
+| `PageHeader.ContentText`           | `PageHeaderContentText`                     |
+| `PageHeader.ContentPageActions`    | `PageHeaderContentPageActions`              |
+| `PageHeader.BreadcrumbPageActions` | `PageHeaderBreadcrumbPageActions`           |
+| `PageHeader.BreadcrumbOverflow`    | `PageHeaderBreadcrumbOverflow`              |
+| `PageHeader.TabBar`                | `PageHeaderTabBar`                          |
+| `PageHeader.TagOverflow`           | `PageHeaderTagOverflow`                     |
+| `PageHeader.ScrollButton`          | `PageHeaderScrollButton`                    |
+| `PageHeader.TitleBreadcrumb`       | `PageHeaderTitleBreadcrumb`                 |
+| `PageHeader.HeroImage`             | `PageHeaderHeroImage`                       |
+
+---
+
+### Prop-to-component mapping
+
+| Old `PageHeader` prop             | New equivalent                                                                                            |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `title` (string)                  | `<PageHeader.Content title="…" />`                                                                        |
+| `title.icon` / `renderIcon`       | `<PageHeader.Content renderIcon={Icon} />`                                                                |
+| `title.loading`                   | Render a `<SkeletonText>` inside `<PageHeader.Content>`                                                   |
+| `subtitle`                        | `<PageHeader.ContentText subtitle="…">`                                                                   |
+| `breadcrumbs`                     | `<Breadcrumb>` / `<BreadcrumbItem>` children of `<PageHeader.BreadcrumbBar>`                              |
+| `breadcrumbOverflowAriaLabel`     | Native Carbon `<Breadcrumb>` handles its own overflow                                                     |
+| `actionBarItems`                  | `<PageHeader.BreadcrumbPageActions actions={…} />` passed to `<PageHeader.BreadcrumbBar pageActions={…}>` |
+| `actionBarOverflowAriaLabel`      | `overflowMenuLabel` prop on `<PageHeader.BreadcrumbPageActions>`                                          |
+| `pageActions` (button array)      | `<PageHeader.ContentPageActions actions={…} />` passed to `<PageHeader.Content pageActions={…}>`          |
+| `pageActionsOverflowLabel`        | `menuButtonLabel` prop on `<PageHeader.ContentPageActions>`                                               |
+| `navigation` (Tabs)               | `<PageHeader.TabBar>` wrapping Carbon `<TabList>`                                                         |
+| `tags`                            | `<PageHeader.TabBar tags={<PageHeader.TagOverflow>…</PageHeader.TagOverflow>}>`                           |
+| `hasCollapseHeaderToggle`         | `<PageHeader.ScrollButton>` passed to `<PageHeader.TabBar scroller={…}>`                                  |
+| `collapseHeaderIconDescription`   | `collapseText` prop on `<PageHeader.ScrollButton>`                                                        |
+| `expandHeaderIconDescription`     | `expandText` prop on `<PageHeader.ScrollButton>`                                                          |
+| `collapseHeader`                  | No direct equivalent — scroll the page programmatically                                                   |
+| `collapseTitle`                   | Removed — title collapses automatically via scroll observation                                            |
+| `withoutBackground`               | No direct equivalent — style via CSS custom properties                                                    |
+| `fullWidthGrid` / `narrowGrid`    | Wrap with Carbon `<Grid>` / `<Column>` as needed                                                          |
+| `enableBreadcrumbScroll`          | Removed — breadcrumb bar is always sticky                                                                 |
+| `allTagsModalTitle/SearchLabel/…` | Pass those props directly to your custom `<PageHeader.TagOverflow>` trigger                               |
+
+---
+
+### Side-by-side example
+
+#### Before (deprecated)
+
+```tsx
+import { PageHeader } from '@carbon/ibm-products';
+
+<PageHeader
+  title={{ text: 'My Page', icon: MyIcon }}
+  subtitle="A short description"
+  breadcrumbs={[
+    { key: '1', label: 'Home', href: '/' },
+    { key: '2', label: 'Section', href: '/section' },
+  ]}
+  breadcrumbOverflowAriaLabel="Breadcrumb overflow"
+  actionBarItems={[
+    {
+      key: 'a1',
+      renderIcon: Activity,
+      iconDescription: 'Refresh',
+      onClick: handleRefresh,
+    },
+  ]}
+  actionBarOverflowAriaLabel="More actions"
+  pageActions={[
+    { key: 'pa1', kind: 'primary', label: 'Create', onClick: handleCreate },
+  ]}
+  pageActionsOverflowLabel="Page actions"
+  navigation={
+    <Tabs>
+      <TabList>
+        <Tab>Overview</Tab>
+        <Tab>Settings</Tab>
+      </TabList>
+    </Tabs>
+  }
+  tags={[{ key: 't1', label: 'Tag 1', type: 'blue' }]}
+  hasCollapseHeaderToggle
+  collapseHeaderIconDescription="Collapse header"
+  expandHeaderIconDescription="Expand header"
+/>;
+```
+
+#### After (preview\_\_PageHeader)
+
+```tsx
+import { preview__PageHeader as PageHeader } from '@carbon/ibm-products';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Tag,
+  OperationalTag,
+} from '@carbon/react';
+
+<Tabs>
+  <PageHeader.Root>
+    <PageHeader.BreadcrumbBar
+      renderIcon={MyIcon}
+      pageActions={
+        <PageHeader.BreadcrumbPageActions
+          actions={[
+            {
+              id: 'a1',
+              renderIcon: Activity,
+              label: 'Refresh',
+              onClick: handleRefresh,
+            },
+          ]}
+          overflowMenuLabel="More actions"
+        />
+      }
+    >
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href="/section">Section</BreadcrumbItem>
+        <PageHeader.TitleBreadcrumb>My Page</PageHeader.TitleBreadcrumb>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
+
+    <PageHeader.Content
+      title="My Page"
+      renderIcon={MyIcon}
+      pageActions={
+        <PageHeader.ContentPageActions
+          menuButtonLabel="Page actions"
+          actions={[
+            {
+              id: 'pa1',
+              onClick: handleCreate,
+              body: <Button kind="primary">Create</Button>,
+              menuItem: { label: 'Create' },
+            },
+          ]}
+        />
+      }
+    >
+      <PageHeader.ContentText subtitle="A short description" />
+    </PageHeader.Content>
+
+    <PageHeader.TabBar
+      tags={
+        <PageHeader.TagOverflow>
+          <Tag type="blue">Tag 1</Tag>
+        </PageHeader.TagOverflow>
+      }
+      scroller={
+        <PageHeader.ScrollButton
+          collapseText="Collapse header"
+          expandText="Expand header"
+        />
+      }
+    >
+      <TabList>
+        <Tab>Overview</Tab>
+        <Tab>Settings</Tab>
+      </TabList>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+  <TabPanels>
+    <TabPanel>Overview content</TabPanel>
+    <TabPanel>Settings content</TabPanel>
+  </TabPanels>
+</Tabs>;
+```
+
+---
 
 ## Component API
 

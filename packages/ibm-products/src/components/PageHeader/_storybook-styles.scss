@@ -86,6 +86,12 @@ $story-class: 'page-header-stories';
   }
 }
 
+// Remove annotation content padding so PageHeader scroll/width geometry is unaffected
+/* stylelint-disable-next-line selector-class-pattern */
+[class$='--annotation__content']:has(.#{$story-class}__viewport) {
+  padding: 0;
+}
+
 // cspell:disable-next-line
 .sbdocs .#{$story-class}__viewport {
   background-color: $background;

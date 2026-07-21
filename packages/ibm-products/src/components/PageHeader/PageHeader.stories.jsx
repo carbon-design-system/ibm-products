@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { action } from 'storybook/actions';
 
 import {
@@ -45,7 +45,7 @@ import cx from 'classnames';
 import { PageHeader } from './PageHeader';
 import { TruncatedText } from '../TruncatedText';
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
-
+import { Annotation } from '../../../.storybook/Annotation';
 import styles from './_storybook-styles.scss?inline';
 
 // import mdx from './PageHeader.mdx';
@@ -362,7 +362,7 @@ const fullWidthGrid = {
 };
 
 export default {
-  title: 'Components/PageHeader',
+  title: 'Deprecated/PageHeader',
   component: PageHeader,
   tags: ['autodocs'],
   parameters: {
@@ -372,15 +372,26 @@ export default {
   },
   decorators: [
     (story, { args }) => (
-      <div
-        className={cx(`${storyClass}__viewport`, {
-          [`${storyClass}__viewport--scroll`]:
-            args?.storyOptionWholePageScroll ?? false,
-        })}
-        key={args?.storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version. Please migrate to {/* cspell:disable-next-line */}
+            <a href="/?path=/docs/preview-pageheader">preview_PageHeader</a>.
+          </div>
+        }
       >
-        {story()}
-      </div>
+        <div
+          className={cx(`${storyClass}__viewport`, {
+            [`${storyClass}__viewport--scroll`]:
+              args?.storyOptionWholePageScroll ?? false,
+          })}
+          key={args?.storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
+        >
+          {story()}
+        </div>
+      </Annotation>
     ),
   ],
   argTypes: {
@@ -826,48 +837,85 @@ fullyLoadedAndSome.args = {
 
 // Template for demo.
 // eslint-disable-next-line react/prop-types
-const TemplateDemo = ({
-  children,
-  navigation,
-  // eslint-disable-next-line no-unused-vars
-  storyOptionWholePageScroll,
-  ...props
-}) => {
+const TemplateDemo = (
+  {
+    children,
+    navigation,
+    // eslint-disable-next-line no-unused-vars
+    storyOptionWholePageScroll,
+    ...props
+  },
+  context
+) => {
   const carbonPrefix = usePrefix();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
+  const [annotationLabelHeight, setAnnotationLabelHeight] = useState(0);
+  const sentinelRef = useRef(null);
+  const isDocsView = context?.viewMode === 'docs';
+
+  // The Carbon Header is position:fixed (top:0) and overlaps the Annotation
+  // label rendered above the __viewport. Measure the label height from the DOM
+  // so we can offset the header's top and keep the annotation visible.
+  // Use a MutationObserver so the measurement runs whenever the annotation
+  // label is injected into the DOM (Storybook adds it asynchronously in the
+  // canvas/story view, so a one-shot useLayoutEffect misses it).
+  useLayoutEffect(() => {
+    const measure = () => {
+      const label = sentinelRef.current
+        ?.closest('[class*="--annotation__content"]')
+        ?.parentElement?.querySelector('[class*="--annotation__label"]');
+      if (label) {
+        const height = label.getBoundingClientRect().height;
+        if (height > 0) {
+          setAnnotationLabelHeight(height);
+          observer.disconnect();
+        }
+      }
+    };
+
+    const observer = new MutationObserver(measure);
+    observer.observe(document.body, { childList: true, subtree: true });
+    measure();
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
-      <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
-      <Header aria-label="IBM Platform Name">
-        <HeaderMenuButton
-          aria-label="Open menu"
-          isCollapsible
-          onClick={() => {
-            setIsSideNavExpanded((prev) => !prev);
-          }}
-          isActive={isSideNavExpanded}
-        />
-        <HeaderName href="#" prefix="IBM">
-          Products application
-        </HeaderName>
-        <SideNav
-          aria-label="Side navigation"
-          expanded={isSideNavExpanded}
-          isFixedNav
-        >
-          <SideNavItems>
-            <SideNavLink
-              href="https://pages.github.ibm.com/carbon/ibm-products/"
-              target="_blank"
+      <div ref={sentinelRef} style={{ display: 'none' }} />
+      <style>{`.${carbonPrefix}--modal { opacity: 0; }${annotationLabelHeight ? ` .${carbonPrefix}--header { top: ${annotationLabelHeight}px; }` : ''}`}</style>
+      {!isDocsView && (
+        <>
+          <Header aria-label="IBM Platform Name">
+            <HeaderMenuButton
+              aria-label="Open menu"
+              isCollapsible
+              onClick={() => {
+                setIsSideNavExpanded((prev) => !prev);
+              }}
+              isActive={isSideNavExpanded}
+            />
+            <HeaderName href="#" prefix="IBM">
+              Products application
+            </HeaderName>
+            <SideNav
+              aria-label="Side navigation"
+              expanded={isSideNavExpanded}
+              isFixedNav
             >
-              Sample link: Carbon for IBM Products
-            </SideNavLink>
-          </SideNavItems>
-        </SideNav>
-      </Header>
+              <SideNavItems>
+                <SideNavLink
+                  href="https://pages.github.ibm.com/carbon/ibm-products/"
+                  target="_blank"
+                >
+                  Sample link: Carbon for IBM Products
+                </SideNavLink>
+              </SideNavItems>
+            </SideNav>
+          </Header>
+        </>
+      )}
       <div
-        className={`${storyClass}__content-container ${storyClass}__content-container--with-global-header`}
+        className={`${storyClass}__content-container${!isDocsView ? ` ${storyClass}__content-container--with-global-header` : ''}`}
       >
         <ContainerDivOrTabs
           className={`${storyClass}__content-container`}

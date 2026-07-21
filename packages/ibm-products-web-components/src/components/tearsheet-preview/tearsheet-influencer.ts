@@ -70,7 +70,7 @@ class CDSTearsheetInfluencer extends SignalWatcher(
     const { isSm } = tearsheetSignal.get();
 
     return !isSm
-      ? html` <aside>
+      ? html` <aside aria-label="${this.influencerPanelAriaLabel}">
           <slot></slot>
         </aside>`
       : html` <c4p-side-panel

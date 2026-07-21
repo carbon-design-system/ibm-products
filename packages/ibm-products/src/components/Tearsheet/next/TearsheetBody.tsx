@@ -181,7 +181,7 @@ export const SummaryContent = forwardRef<HTMLDivElement, SummaryContentProps>(
         })}
         ref={ref}
       >
-        <aside>{children}</aside>
+        <aside aria-label={summaryPanelAriaLabel}>{children}</aside>
       </div>
     ) : (
       <SidePanel
@@ -259,6 +259,7 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
 
     return !isSm ? (
       <aside
+        aria-label={influencerPanelAriaLabel}
         className={cx(`${blockClass}__influencer`, className, {
           [`${blockClass}__flush`]: isFlush,
         })}

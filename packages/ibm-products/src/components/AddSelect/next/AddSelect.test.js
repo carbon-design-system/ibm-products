@@ -1379,10 +1379,9 @@ describe('AddSelect.SelectionSummaryItem', () => {
     expect(screen.getByText('Subtitle X')).toBeInTheDocument();
   });
 
-  it('renders nothing in the content area when all item props are filtered out (defaultContent returns null)', () => {
-    // defaultContent filters out: title, subtitle, icon, id, children,
-    // selected, status, disabled, itemDetails. An item that only has those
-    // keys leaves allEntries empty, hitting the early-return at L196.
+  it('renders nothing in the content area when item has no itemDetails (defaultContent returns null)', () => {
+    // defaultContent now renders ONLY itemDetails. An item without itemDetails
+    // returns null, so the content area is empty.
     const minimalItem = {
       id: 'm1',
       title: 'Minimal',
@@ -1517,7 +1516,9 @@ describe('AddSelect.SelectionSummaryItem', () => {
     expect(screen.getByText(`Body for ${item.title}`)).toBeInTheDocument();
   });
 
-  it('renders extra item props as key/value pairs via defaultContent', () => {
+  it('does not render arbitrary item fields (e.g. value, Region) via defaultContent', () => {
+    // defaultContent now renders ONLY itemDetails — arbitrary item props that
+    // are developer identifiers must not appear as visible UI labels.
     const richItem = {
       id: 'r1',
       title: 'Rich item',
@@ -1529,8 +1530,10 @@ describe('AddSelect.SelectionSummaryItem', () => {
         <AddSelect.SelectionSummaryItem item={richItem} />
       </AddSelect>
     );
-    expect(screen.getByText('Region')).toBeInTheDocument();
-    expect(screen.getByText('US East')).toBeInTheDocument();
+    expect(screen.queryByText('Region')).not.toBeInTheDocument();
+    expect(screen.queryByText('US East')).not.toBeInTheDocument();
+    expect(screen.queryByText('value')).not.toBeInTheDocument();
+    expect(screen.queryByText('rv')).not.toBeInTheDocument();
   });
 
   it('renders itemDetails entries via defaultContent', () => {

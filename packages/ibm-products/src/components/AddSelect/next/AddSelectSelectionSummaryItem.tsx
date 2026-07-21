@@ -177,37 +177,20 @@ const AddSelectSelectionSummaryItem = forwardRef<
       </div>
     );
 
-    // Default content rendering - show all props from item (except title, subtitle) and itemDetails
+    // Default content rendering — renders only itemDetails entries.
+    // Arbitrary item fields (e.g. value, parentId) are intentionally excluded
+    // to prevent developer-internal identifiers from appearing in the UI.
     const defaultContent = () => {
-      // Collect all item props except title, subtitle, and itemDetails
-      const itemProps = Object.entries(item).filter(
-        ([key]) =>
-          key !== 'title' &&
-          key !== 'subtitle' &&
-          key !== 'icon' &&
-          key !== 'id' &&
-          key !== 'children' &&
-          key !== 'selected' &&
-          key !== 'status' &&
-          key !== 'disabled' &&
-          key !== 'itemDetails'
-      );
-
-      // Collect itemDetails props if they exist
-      const itemDetailsProps = item.itemDetails
-        ? Object.entries(item.itemDetails)
-        : [];
-
-      // Combine both sets of properties
-      const allEntries = [...itemProps, ...itemDetailsProps];
-
-      if (allEntries.length === 0) {
+      if (!item?.itemDetails) {
         return null;
       }
-
+      const entries = Object.entries(item.itemDetails);
+      if (entries.length === 0) {
+        return null;
+      }
       return (
         <>
-          {allEntries.map(([key, val]) => (
+          {entries.map(([key, val]) => (
             <div
               key={key}
               className={`${blockClass}__selection-summary-item-entry`}

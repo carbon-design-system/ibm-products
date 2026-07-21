@@ -22,10 +22,10 @@ const sampleItems: AddSelectItem[] = [
     owner: 'Marketing Team',
     status: 'Active',
     itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value:
+      Description:
         'Comprehensive dashboard for analyzing customer interactions and purchase patterns',
+      Category: 'Analytics',
+      Owner: 'Marketing Team',
     },
   },
   {
@@ -37,10 +37,10 @@ const sampleItems: AddSelectItem[] = [
     owner: 'Sales Team',
     status: 'Active',
     itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value:
+      Description:
         'Detailed report showing sales trends, revenue, and team performance',
+      Category: 'Reports',
+      Owner: 'Sales Team',
     },
   },
   {
@@ -51,6 +51,12 @@ const sampleItems: AddSelectItem[] = [
     category: 'Operations',
     owner: 'Logistics Team',
     status: 'Active',
+    itemDetails: {
+      Description:
+        'Tracks stock levels, reorder points, and supply chain status',
+      Category: 'Operations',
+      Owner: 'Logistics Team',
+    },
   },
   {
     id: '4',
@@ -61,10 +67,10 @@ const sampleItems: AddSelectItem[] = [
     owner: 'Marketing Team',
     status: 'Active',
     itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value:
+      Description:
         'Track marketing campaigns across multiple channels with detailed analytics',
+      Category: 'Marketing',
+      Owner: 'Marketing Team',
     },
   },
   {
@@ -75,6 +81,11 @@ const sampleItems: AddSelectItem[] = [
     category: 'HR',
     owner: 'HR Team',
     status: 'Active',
+    itemDetails: {
+      Description: 'Company-wide employee profiles and contact information',
+      Category: 'HR',
+      Owner: 'HR Team',
+    },
   },
   {
     id: '6',
@@ -85,10 +96,10 @@ const sampleItems: AddSelectItem[] = [
     owner: 'PMO',
     status: 'Active',
     itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value:
+      Description:
         'Interactive timeline showing project phases, dependencies, and deadlines',
+      Category: 'Project Management',
+      Owner: 'PMO',
     },
   },
   {
@@ -99,6 +110,12 @@ const sampleItems: AddSelectItem[] = [
     category: 'Finance',
     owner: 'Finance Team',
     status: 'Archived',
+    itemDetails: {
+      Description:
+        'Quarterly financial reports including P&L and balance sheets',
+      Category: 'Finance',
+      Owner: 'Finance Team',
+    },
   },
   {
     id: '8',
@@ -109,10 +126,10 @@ const sampleItems: AddSelectItem[] = [
     owner: 'Support Team',
     status: 'Active',
     itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value:
+      Description:
         'Centralized system for managing customer support tickets and resolutions',
+      Category: 'Support',
+      Owner: 'Support Team',
     },
   },
 ];

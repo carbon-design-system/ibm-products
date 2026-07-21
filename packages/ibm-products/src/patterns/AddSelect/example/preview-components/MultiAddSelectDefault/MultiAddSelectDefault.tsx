@@ -19,9 +19,9 @@ const sampleItems: AddSelectItem[] = [
     title: 'item 1',
     subtitle: 'item 1 subtitle',
     itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value: 'Description text for item 1',
+      Description: 'First item description',
+      Category: 'Type A',
+      Owner: 'Team Alpha',
     },
   },
   {
@@ -29,9 +29,9 @@ const sampleItems: AddSelectItem[] = [
     value: '2',
     title: 'item 2',
     itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value: 'Description text for item 2',
+      Description: 'Second item description',
+      Category: 'Type B',
+      Owner: 'Team Beta',
     },
   },
   {
@@ -39,6 +39,11 @@ const sampleItems: AddSelectItem[] = [
     value: '3',
     title: 'item 3',
     subtitle: 'item 3 subtitle',
+    itemDetails: {
+      Description: 'Third item description',
+      Category: 'Type A',
+      Owner: 'Team Gamma',
+    },
   },
 ];
 

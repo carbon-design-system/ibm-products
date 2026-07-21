@@ -30,14 +30,27 @@ import {
   View,
   Copy,
   ArrowRight,
+  DirectionFork,
+  Time,
+  ChartBar,
+  Incomplete,
+  Crossroads,
+  SkillLevelBasic,
+  Report,
+  Maximize,
 } from '@carbon/icons-react';
 import { Bee } from '@carbon/pictograms-react';
-import { UserAvatar } from '../..';
+import { AreaChart } from '@carbon/charts-react';
+import { UserAvatar, previewCandidate__BigNumber as BigNumber } from '../..';
+import abstractImage from '../../GetStartedCard/_story-assets/abstract-image.svg';
 import illustration1 from './_story-assets/illustration-img-1.png';
 import placeholder16x9 from './_story-assets/placeholder-16x9.png';
 import placeholder1x1 from './_story-assets/placeholder-1x1.png';
 import rebusClassic from './_story-assets/classic-rebus.png';
 import './_storybook-styles.scss';
+import '@carbon/charts-react/styles.css';
+import data from './_story-assets/data.js';
+import options from './_story-assets/options.js';
 
 export default {
   title: 'Preview/Card',
@@ -77,10 +90,17 @@ export default {
   },
 };
 
-const Template = (args) => (
-  <Grid>
+export const Minimal = () => (
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
-      <Card {...args}>
+      <Card>
+        <Card.Body>
+          <p>A minimal card with just body content.</p>
+        </Card.Body>
+      </Card>
+    </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
         <Card.Header>
           <Card.Title>Card Title</Card.Title>
         </Card.Header>
@@ -100,17 +120,10 @@ const Template = (args) => (
   </Grid>
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  clickable: false,
-  disabled: false,
-  density: 'productive',
-};
-
 export const Disabled = () => {
   const [disabled, setDisabled] = React.useState(true);
   return (
-    <Grid>
+    <Grid withRowGap>
       <Column lg={4} md={4} sm={4}>
         <Card disabled={disabled}>
           <Card.Header>
@@ -154,22 +167,10 @@ export const Disabled = () => {
   );
 };
 
-export const MinimalCard = () => (
-  <Grid>
+export const ProductiveAndExpressive = () => (
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Body>
-          <p>A minimal card with just body content.</p>
-        </Card.Body>
-      </Card>
-    </Column>
-  </Grid>
-);
-
-export const ProductiveDensity = () => (
-  <Grid>
-    <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
         <Card.Header>
           <Card.Label>Category</Card.Label>
           <Card.Title>Productive Card</Card.Title>
@@ -190,11 +191,6 @@ export const ProductiveDensity = () => (
         </Card.Footer>
       </Card>
     </Column>
-  </Grid>
-);
-
-export const ExpressiveDensity = () => (
-  <Grid>
     <Column lg={4} md={4} sm={4}>
       <Card density="expressive">
         <Card.Header>
@@ -216,40 +212,8 @@ export const ExpressiveDensity = () => (
   </Grid>
 );
 
-export const WithHeaderPrimitives = () => (
-  <Grid>
-    <Column lg={4} md={4} sm={4}>
-      <Card>
-        <Card.Header>
-          <Card.Label>Category</Card.Label>
-          <Card.Title>Dashboard Analytics Overview</Card.Title>
-          <Card.Caption>Last updated 2 hours ago</Card.Caption>
-        </Card.Header>
-        <Card.Body>
-          <p>
-            This card demonstrates the use of Label, Title, and Caption
-            primitives in the header.
-          </p>
-        </Card.Body>
-        <Card.Footer>
-          <Card.Action>
-            <Button kind="ghost" size="md">
-              Button
-            </Button>
-          </Card.Action>
-          <Card.Action>
-            <Button kind="secondary" size="md">
-              Button
-            </Button>
-          </Card.Action>
-        </Card.Footer>
-      </Card>
-    </Column>
-  </Grid>
-);
-
 export const WithIcon = () => (
-  <Grid>
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
@@ -306,11 +270,6 @@ export const WithIcon = () => (
         </Card.Footer>
       </Card>
     </Column>
-  </Grid>
-);
-
-export const WithLargeIcon = () => (
-  <Grid>
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
@@ -334,7 +293,7 @@ export const WithLargeIcon = () => (
 );
 
 export const WithMedia = () => (
-  <Grid>
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
@@ -373,11 +332,6 @@ export const WithMedia = () => (
         </Card.Footer>
       </Card>
     </Column>
-  </Grid>
-);
-
-export const WithSquareMedia = () => (
-  <Grid>
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
@@ -412,7 +366,7 @@ export const WithSquareMedia = () => (
 );
 
 export const WithHeaderActions = () => (
-  <Grid>
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card onClick={() => console.log('Card clicked')}>
         <Card.Header>
@@ -473,11 +427,133 @@ export const WithHeaderActions = () => (
         </Card.Footer>
       </Card>
     </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
+        <Card.Header>
+          <Card.Label>Category</Card.Label>
+          <Card.Title>Project dashboard</Card.Title>
+          <Card.Caption>Last updated 2 hours ago</Card.Caption>
+          <Card.Actions>
+            <Card.Action>
+              <IconButton kind="ghost" label="Edit" size="sm">
+                <Edit />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Favorite" size="sm">
+                <Favorite />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Analytics" size="sm">
+                <Analytics />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Share" size="sm">
+                <Share />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Download" size="sm">
+                <Download />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Settings" size="sm">
+                <Settings />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Notification" size="sm">
+                <Notification />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="View" size="sm">
+                <View />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Copy" size="sm">
+                <Copy />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Delete" size="sm">
+                <TrashCan />
+              </IconButton>
+            </Card.Action>
+          </Card.Actions>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Multiple action buttons can be placed in the header alongside label,
+            title, and caption. Actions are right-aligned and maintain proper
+            spacing.
+          </p>
+        </Card.Body>
+      </Card>
+    </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
+        <Card.Header>
+          <Card.Title>Usage metrics</Card.Title>
+          <Card.Actions>
+            <Card.Action>
+              <Button kind="tertiary" size="sm">
+                Action
+              </Button>
+            </Card.Action>
+          </Card.Actions>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Text actions use Carbon&apos;s small ghost button for actions that
+            require text labels instead of icons. This is useful when the action
+            needs to be more explicit or when an appropriate icon isn&apos;t
+            available.
+          </p>
+        </Card.Body>
+      </Card>
+    </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
+        <Card.Header>
+          <Card.Title>Usage metrics</Card.Title>
+          <Card.Actions>
+            <Card.Action>
+              <Button kind="tertiary" size="sm">
+                Action
+              </Button>
+            </Card.Action>
+            <Card.Action>
+              <Button kind="tertiary" size="sm">
+                Action
+              </Button>
+            </Card.Action>
+            <Card.Action>
+              <Button kind="tertiary" size="sm">
+                Action
+              </Button>
+            </Card.Action>
+          </Card.Actions>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Text actions use Carbon&apos;s small ghost button for actions that
+            require text labels instead of icons. This is useful when the action
+            needs to be more explicit or when an appropriate icon isn&apos;t
+            available.
+          </p>
+        </Card.Body>
+      </Card>
+    </Column>
   </Grid>
 );
 
 export const WithHeaderMedia = () => (
-  <Grid>
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
@@ -523,11 +599,84 @@ export const WithHeaderMedia = () => (
         </Card.Body>
       </Card>
     </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
+        <Card.Header>
+          <Card.HeaderMedia>
+            <img
+              src={illustration1}
+              alt="A sample illustration"
+              style={{ width: '48px', height: '48px', borderRadius: '4px' }}
+            />
+          </Card.HeaderMedia>
+          <Card.Title>Card with Image</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>The icon slot can contain an image element.</p>
+        </Card.Body>
+      </Card>
+    </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
+        <Card.Header>
+          <Card.HeaderMedia>
+            <UserAvatar
+              name="John Doe"
+              backgroundColor="order-1-cyan"
+              size="lg"
+            />
+          </Card.HeaderMedia>
+          <Card.Title>Card with Avatar</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>The icon slot can contain a UserAvatar component.</p>
+        </Card.Body>
+      </Card>
+    </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
+        <Card.Header>
+          <Card.HeaderMedia>
+            <Tag type="blue">New</Tag>
+          </Card.HeaderMedia>
+          <Card.Title>Card with Tag</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>The icon slot can contain a Tag component.</p>
+        </Card.Body>
+      </Card>
+    </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
+        <Card.Header>
+          <Card.HeaderMedia>
+            <IconIndicator kind="succeeded" size={16} label="Succeeded" />
+          </Card.HeaderMedia>
+          <Card.Title>Card with Status</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>The icon slot can contain a IconIndicator component.</p>
+        </Card.Body>
+      </Card>
+    </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
+        <Card.Header>
+          <Card.HeaderMedia>
+            <Bee />
+          </Card.HeaderMedia>
+          <Card.Title>Card with Pictogram</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>The icon slot can contain a Carbon pictogram.</p>
+        </Card.Body>
+      </Card>
+    </Column>
   </Grid>
 );
 
 export const WithTruncatedTitle = () => (
-  <Grid>
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
@@ -554,11 +703,6 @@ export const WithTruncatedTitle = () => (
         </Card.Footer>
       </Card>
     </Column>
-  </Grid>
-);
-
-export const WithMultiLineTruncatedTitle = () => (
-  <Grid>
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
@@ -593,7 +737,7 @@ export const WithMultiLineTruncatedTitle = () => (
 );
 
 export const WithAILabel = () => (
-  <Grid>
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card
         decorator={
@@ -729,90 +873,12 @@ export const WithAILabel = () => (
   </Grid>
 );
 
-export const IconSlotVariants = () => (
-  <Grid withRowGap>
-    <Column lg={4} md={4} sm={4}>
-      <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
-            <img
-              src={illustration1}
-              alt="A sample illustration"
-              style={{ width: '48px', height: '48px', borderRadius: '4px' }}
-            />
-          </Card.HeaderMedia>
-          <Card.Title>Card with Image</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <p>The icon slot can contain an image element.</p>
-        </Card.Body>
-      </Card>
-    </Column>
-    <Column lg={4} md={4} sm={4}>
-      <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
-            <UserAvatar
-              name="John Doe"
-              backgroundColor="order-1-cyan"
-              size="lg"
-            />
-          </Card.HeaderMedia>
-          <Card.Title>Card with Avatar</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <p>The icon slot can contain a UserAvatar component.</p>
-        </Card.Body>
-      </Card>
-    </Column>
-    <Column lg={4} md={4} sm={4}>
-      <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
-            <Tag type="blue">New</Tag>
-          </Card.HeaderMedia>
-          <Card.Title>Card with Tag</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <p>The icon slot can contain a Tag component.</p>
-        </Card.Body>
-      </Card>
-    </Column>
-    <Column lg={4} md={4} sm={4}>
-      <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
-            <IconIndicator kind="succeeded" size={16} label="Succeeded" />
-          </Card.HeaderMedia>
-          <Card.Title>Card with Status</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <p>The icon slot can contain a IconIndicator component.</p>
-        </Card.Body>
-      </Card>
-    </Column>
-    <Column lg={4} md={4} sm={4}>
-      <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
-            <Bee className="icon-slot-pictogram" />
-          </Card.HeaderMedia>
-          <Card.Title>Card with Pictogram</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <p>The icon slot can contain a Carbon pictogram.</p>
-        </Card.Body>
-      </Card>
-    </Column>
-  </Grid>
-);
-
 /**
  * Title Media Story
  * Demonstrates CardTitleMedia component for icons alongside label+title+caption block
  */
 export const WithTitleMedia = () => (
-  <Grid>
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
@@ -988,9 +1054,9 @@ export const WithTitleMedia = () => (
  * with both productive and expressive densities
  */
 export const WithTitleLeadingIcon = () => (
-  <Grid className="card-story-grid">
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title titleStart={<BeeIcon size={16} />}>
             Analytics dashboard
@@ -1022,7 +1088,7 @@ export const WithTitleLeadingIcon = () => (
     </Column>
 
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title
             titleStart={<BeeIcon size={16} />}
@@ -1048,9 +1114,9 @@ export const WithTitleLeadingIcon = () => (
  * with both productive and expressive densities
  */
 export const WithTitleTrailingIcon = () => (
-  <Grid className="card-story-grid">
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title titleEnd={<BeeIcon size={16} />}>
             Analytics dashboard
@@ -1082,7 +1148,7 @@ export const WithTitleTrailingIcon = () => (
     </Column>
 
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title
             titleEnd={<BeeIcon size={16} />}
@@ -1108,9 +1174,9 @@ export const WithTitleTrailingIcon = () => (
  * Uses a sample video to show how video elements work within cards
  */
 export const WithVideo = () => (
-  <Grid className="card-story-grid">
+  <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Header>
           <Card.Title>Product demo video</Card.Title>
           <Card.Caption>Watch our latest feature walkthrough</Card.Caption>
@@ -1141,9 +1207,8 @@ export const WithVideo = () => (
         </Card.Body>
       </Card>
     </Column>
-
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+      <Card>
         <Card.Media ratio="16x9">
           <iframe
             width={'100%'}
@@ -1168,143 +1233,379 @@ export const WithVideo = () => (
         </Card.Body>
       </Card>
     </Column>
-  </Grid>
-);
-
-/**
- * Cards with many action items in the header.
- * Demonstrates how multiple actions are displayed alongside label, title, and caption.
- */
-export const WithManyActions = () => (
-  <Grid className="card-story-grid">
     <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
-        <Card.Header>
-          <Card.Label>Category</Card.Label>
-          <Card.Title>Project dashboard</Card.Title>
-          <Card.Caption>Last updated 2 hours ago</Card.Caption>
-          <Card.Actions>
-            <Card.Action>
-              <IconButton kind="ghost" label="Edit" size="sm">
-                <Edit />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Favorite" size="sm">
-                <Favorite />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Analytics" size="sm">
-                <Analytics />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Share" size="sm">
-                <Share />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Download" size="sm">
-                <Download />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Settings" size="sm">
-                <Settings />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Notification" size="sm">
-                <Notification />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="View" size="sm">
-                <View />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Copy" size="sm">
-                <Copy />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Delete" size="sm">
-                <TrashCan />
-              </IconButton>
-            </Card.Action>
-          </Card.Actions>
-        </Card.Header>
-        <Card.Body>
-          <p>
-            Multiple action buttons can be placed in the header alongside label,
-            title, and caption. Actions are right-aligned and maintain proper
-            spacing.
-          </p>
-        </Card.Body>
+      <Card>
+        <Card.Media ratio="16x9">
+          <iframe
+            width={'100%'}
+            height={'100%'}
+            style={{ position: 'absolute' }}
+            src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&amp;controls=0"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </Card.Media>
       </Card>
     </Column>
   </Grid>
 );
 
 /**
- * Demonstrates text action using a Carbon small ghost button.
- * This shows how to use a text-based action button instead of icon-only buttons.
+ * Horizontal layout: Card.Media on the left, Header/Body/Footer stacked on the right.
+ *
+ * Usage notes:
+ * - Card.Media must be a direct child of Card (not inside Card.Header).
+ * - mediaWidth controls the media column width (default: 33.33%).
+ * - Content inside Card.Media should fill it: width/height 100% + object-fit: cover.
  */
-export const WithTextAction = () => (
-  <Grid className="card-story-grid">
-    <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+export const WithHorizontalMedia = () => (
+  <Grid withRowGap>
+    {/* Default mediaWidth (33.33%) */}
+    <Column lg={8} md={4} sm={4}>
+      <Card horizontal>
+        <Card.Media>
+          <img
+            src={placeholder1x1}
+            alt="Placeholder"
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+          />
+        </Card.Media>
         <Card.Header>
-          <Card.Title>Usage metrics</Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <Button kind="tertiary" size="sm">
-                Action
-              </Button>
-            </Card.Action>
-          </Card.Actions>
+          <Card.Label>Get started</Card.Label>
+          <Card.Title>Generate synthetic tabular data</Card.Title>
         </Card.Header>
         <Card.Body>
           <p>
-            Text actions use Carbon&apos;s small ghost button for actions that
-            require text labels instead of icons. This is useful when the action
-            needs to be more explicit or when an appropriate icon isn&apos;t
-            available.
+            Prepare your data and generate synthetic tabular data using
+            AI-assisted tooling.
           </p>
         </Card.Body>
+        <Card.Footer>
+          <Button kind="tertiary" size="md" renderIcon={ArrowRight}>
+            Start
+          </Button>
+        </Card.Footer>
       </Card>
     </Column>
-    <Column lg={4} md={4} sm={4}>
-      <Card density="productive">
+
+    {/* Custom mediaWidth (50%) */}
+    <Column lg={8} md={4} sm={4}>
+      <Card horizontal>
+        <Card.Media mediaWidth="50%">
+          <img
+            src={placeholder16x9}
+            alt="Placeholder"
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+          />
+        </Card.Media>
         <Card.Header>
-          <Card.Title>Usage metrics</Card.Title>
+          <Card.Title>Custom media width</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Pass <code>mediaWidth=50%</code> to control the media column width.
+            Accepts any valid CSS value.
+          </p>
+        </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md" renderIcon={ArrowRight}>
+              Learn more
+            </Button>
+          </Card.Action>
+        </Card.Footer>
+      </Card>
+    </Column>
+
+    <Column lg={8} md={4} sm={4}>
+      <Card horizontal>
+        <Card.Header>
+          <Card.Title>Custom media width</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Prepare your data and generate synthetic tabular data using
+            AI-assisted tooling.
+          </p>
+        </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md" renderIcon={ArrowRight}>
+              Learn more
+            </Button>
+          </Card.Action>
+        </Card.Footer>
+        <Card.Media>
+          <img
+            src={placeholder1x1}
+            alt="Placeholder"
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+          />
+        </Card.Media>
+      </Card>
+    </Column>
+
+    <Column lg={8} md={4} sm={4}>
+      <Card horizontal density="expressive">
+        <Card.Header>
+          <Card.HeaderMedia>
+            <DirectionFork size="32" />
+          </Card.HeaderMedia>
+          <Card.Label>Prepare your data</Card.Label>
+          <Card.Title>Generate synthetic tabular data</Card.Title>
+        </Card.Header>
+        <Card.Footer>
+          <div className="story-time">
+            <Time /> 12:00 PM
+          </div>
+          <Card.Action>
+            <IconButton renderIcon={ArrowRight} kind="ghost" size="md" />
+          </Card.Action>
+        </Card.Footer>
+        <Card.Media>
+          <img
+            src={placeholder1x1}
+            alt="Placeholder"
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+          />
+        </Card.Media>
+      </Card>
+    </Column>
+  </Grid>
+);
+
+/**
+ * Recreates the GetStartedCard pattern using composable Card primitives.
+ *
+ * The existing GetStartedCard wraps the legacy Card internally. This story
+ * demonstrates the same four variants using the new composable Card, showing
+ * that the pattern is achievable without a dedicated wrapper component.
+ *
+ * Variants:
+ * 1. Default      — vertical card, pictogram + label + title + metadata footer
+ * 2. withSequence — same but a sequence number replaces the pictogram
+ * 3. withMedia    — horizontal card, content left + image media right
+ * 4. withDisabled — disabled state
+ */
+export const GetStartedCard = () => {
+  const metadata = (
+    <div className="card-story-get-started-meta">
+      <span className="card-story-get-started-meta__item">
+        <Time size={16} /> 2 mins
+      </span>
+      <span className="card-story-get-started-meta__item">
+        <SkillLevelBasic size={16} /> Beginner
+      </span>
+    </div>
+  );
+
+  return (
+    <Grid withRowGap>
+      {/* 1. Default — pictogram variant */}
+      <Column lg={4} md={4} sm={4}>
+        <Card className="get-started-story-card" density="expressive" clickable>
+          <Card.Header>
+            <Card.HeaderMedia>
+              <Crossroads size={32} />
+            </Card.HeaderMedia>
+            <Card.Label>Prepare your data</Card.Label>
+            <Card.Title>Generate synthetic tabular data</Card.Title>
+          </Card.Header>
+          <Card.Footer>
+            {metadata}
+            <ArrowRight size={16} />
+          </Card.Footer>
+        </Card>
+      </Column>
+
+      {/* 2. withSequence — number replaces pictogram */}
+      <Column lg={4} md={4} sm={4}>
+        <Card className="get-started-story-card" density="expressive" clickable>
+          <Card.Header>
+            <Card.HeaderMedia>
+              <span
+                style={{ fontSize: '1.5rem', fontWeight: 300, lineHeight: 1 }}
+              >
+                3
+              </span>
+            </Card.HeaderMedia>
+            <Card.Label>Prepare your data</Card.Label>
+            <Card.Title>Generate synthetic tabular data</Card.Title>
+          </Card.Header>
+          <Card.Footer>
+            {metadata}
+            <ArrowRight size={16} />
+          </Card.Footer>
+        </Card>
+      </Column>
+
+      {/* 3. withMedia — horizontal, image on the right */}
+      <Column lg={8} md={8} sm={4}>
+        <Card
+          className="get-started-story-card"
+          density="expressive"
+          horizontal
+          clickable
+        >
+          <Card.Header>
+            <Card.HeaderMedia>
+              <Crossroads size={32} />
+            </Card.HeaderMedia>
+            <Card.Label>Prepare your data</Card.Label>
+            <Card.Title>Generate synthetic tabular data</Card.Title>
+          </Card.Header>
+          <Card.Footer>
+            {metadata}
+            <ArrowRight size={16} />
+          </Card.Footer>
+          <Card.Media mediaWidth="45%">
+            <img src={abstractImage} alt="Abstract" />
+          </Card.Media>
+        </Card>
+      </Column>
+    </Grid>
+  );
+};
+
+// Minimal area chart — no axes, grid, legend, or toolbar
+const chartOptions = {
+  ...options,
+  height: '180px',
+};
+
+export const WithChart = () => (
+  <Grid withRowGap>
+    {/* ── Example 1: metrics above chart, body text, footer actions ──── */}
+    <Column lg={5} md={4} sm={4}>
+      <Card
+        decorator={
+          <AILabel align="bottom-right" size="xs">
+            <AILabelContent>
+              <div>
+                <p className="secondary">AI Explained</p>
+                <h1>84%</h1>
+                <p className="secondary bold">Confidence score</p>
+                <p className="secondary">
+                  Metrics derived from AI analysis of system usage patterns.
+                </p>
+                <hr />
+                <p className="secondary">Model type</p>
+                <p className="bold">Analytics model</p>
+              </div>
+            </AILabelContent>
+          </AILabel>
+        }
+      >
+        <Card.Header>
+          <Card.Label>Label</Card.Label>
+          <Card.Title>Title</Card.Title>
           <Card.Actions>
             <Card.Action>
-              <Button kind="tertiary" size="sm">
-                Action
-              </Button>
-            </Card.Action>
-            <Card.Action>
-              <Button kind="tertiary" size="sm">
-                Action
-              </Button>
-            </Card.Action>
-            <Card.Action>
-              <Button kind="tertiary" size="sm">
-                Action
-              </Button>
+              <IconButton
+                label="More options"
+                kind="ghost"
+                size="sm"
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              >
+                <ChartBar />
+              </IconButton>
             </Card.Action>
           </Card.Actions>
         </Card.Header>
         <Card.Body>
-          <p>
-            Text actions use Carbon&apos;s small ghost button for actions that
-            require text labels instead of icons. This is useful when the action
-            needs to be more explicit or when an appropriate icon isn&apos;t
-            available.
+          <div className="card-story-metrics">
+            <BigNumber label="Label" value={62} percentage />
+            <BigNumber label="Label" value={18} percentage />
+          </div>
+          <p className="card-story-chart-body-text">
+            Label + Title header with AILabel decorator and overflow action, two
+            BigNumber components (62% / 18%) in the body, body copy text, then
+            the area chart.
           </p>
+          <AreaChart data={data} options={chartOptions as any} />
+        </Card.Body>
+        <Card.Footer>
+          <Card.Action>
+            <Button kind="ghost" size="md">
+              Read more
+            </Button>
+          </Card.Action>
+          <Card.Action>
+            <Button kind="primary" size="md" renderIcon={Report}>
+              Start report
+            </Button>
+          </Card.Action>
+        </Card.Footer>
+      </Card>
+    </Column>
+
+    {/* ── Example 2: chart first, metrics below, no footer ─────────── */}
+    <Column lg={5} md={4} sm={4}>
+      <Card
+        decorator={
+          <AILabel align="bottom-right" size="xs" kind="inline">
+            <AILabelContent>
+              <div>
+                <p className="secondary">AI Explained</p>
+                <h1>91%</h1>
+                <p className="secondary bold">Confidence score</p>
+                <p className="secondary">
+                  Metrics derived from AI analysis of system usage patterns.
+                </p>
+                <hr />
+                <p className="secondary">Model type</p>
+                <p className="bold">Foundation model</p>
+              </div>
+            </AILabelContent>
+          </AILabel>
+        }
+      >
+        <Card.Header>
+          <Card.Title>Title</Card.Title>
+          <Card.Caption>Caption</Card.Caption>
+          <Card.Actions>
+            <Card.Action>
+              <IconButton
+                label="Expand"
+                kind="ghost"
+                size="sm"
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              >
+                <Maximize />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton
+                label="More options"
+                kind="ghost"
+                size="sm"
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              >
+                <ChartBar />
+              </IconButton>
+            </Card.Action>
+          </Card.Actions>
+        </Card.Header>
+        <Card.Body>
+          <AreaChart data={data} options={chartOptions as any} />
+          <div className="card-story-metrics">
+            <BigNumber label="Label" value={62} percentage />
+            <BigNumber label="Label" value={18} percentage />
+          </div>
         </Card.Body>
       </Card>
     </Column>

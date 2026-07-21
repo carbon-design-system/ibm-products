@@ -139,6 +139,12 @@ export interface AddSelectRowProps {
     | 'onChange'
   >;
   /**
+   * Accessible label for the navigation indicator button.
+   * Defaults to `Navigate into <title>` when not provided.
+   * Override this prop to localize the label.
+   */
+  navIndicatorLabel?: string;
+  /**
    * Additional props to pass to the IconButton component (info panel)
    */
   itemPanelIconButtonProps?: Omit<
@@ -170,6 +176,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       className,
       checkboxProps,
       radioButtonProps,
+      navIndicatorLabel,
       itemPanelIconButtonProps,
       ...rest
     },
@@ -323,7 +330,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
                 }}
                 role="button"
                 tabIndex={-1}
-                aria-label="Navigate to children"
+                aria-label={navIndicatorLabel ?? `Navigate into ${title}`}
               >
                 <ChevronRight size={16} />
               </div>
@@ -351,6 +358,7 @@ AddSelectRow.propTypes = {
   itemPanelIconButtonProps: PropTypes.object,
   itemPanelIconDescription: PropTypes.string,
   itemPanelOpen: PropTypes.bool,
+  navIndicatorLabel: PropTypes.string,
   /**@ts-ignore */
   onItemPanelClick: PropTypes.func,
   parentId: PropTypes.string,

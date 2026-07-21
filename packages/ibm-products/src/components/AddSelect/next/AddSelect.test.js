@@ -666,6 +666,40 @@ describe('AddSelect.Row', () => {
     expect(onNavigate).toHaveBeenCalledWith('r1', 'Row 1', 'root');
   });
 
+  it('nav indicator defaults to aria-label "Navigate into <title>"', () => {
+    const { container } = render(
+      <AddSelect>
+        <AddSelect.Body hideSearch>
+          <AddSelect.Row itemId="r1" title="Row 1" value="v1" hasChildren />
+        </AddSelect.Body>
+      </AddSelect>
+    );
+    const navIndicator = container.querySelector(
+      `.${blockClass}-row__nav-indicator`
+    );
+    expect(navIndicator).toHaveAttribute('aria-label', 'Navigate into Row 1');
+  });
+
+  it('nav indicator uses navIndicatorLabel prop when provided', () => {
+    const { container } = render(
+      <AddSelect>
+        <AddSelect.Body hideSearch>
+          <AddSelect.Row
+            itemId="r1"
+            title="Row 1"
+            value="v1"
+            hasChildren
+            navIndicatorLabel="Aller aux enfants"
+          />
+        </AddSelect.Body>
+      </AddSelect>
+    );
+    const navIndicator = container.querySelector(
+      `.${blockClass}-row__nav-indicator`
+    );
+    expect(navIndicator).toHaveAttribute('aria-label', 'Aller aux enfants');
+  });
+
   it('renders rowContent slot instead of the default title/subtitle section', () => {
     const { container } = render(
       <AddSelect>

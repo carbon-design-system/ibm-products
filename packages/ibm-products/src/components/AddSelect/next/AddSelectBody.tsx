@@ -158,15 +158,20 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
     const [globalSearchTerm, setGlobalSearchTerm] = useState('');
     const listRef = useRef<HTMLDivElement>(null);
     const focusedIndexRef = useRef(0);
+    // Cache of querySelectorAll('[role="row"]') — invalidated when children change
+    const rowsCacheRef = useRef<HTMLElement[] | null>(null);
 
-    // Get all item elements
+    // Get all item elements — uses cache; refreshes after children change
     const getItems = (): HTMLElement[] => {
       if (!listRef.current) {
         return [];
       }
-      return Array.from(
-        listRef.current.querySelectorAll('[role="row"]')
-      ) as HTMLElement[];
+      if (rowsCacheRef.current === null) {
+        rowsCacheRef.current = Array.from(
+          listRef.current.querySelectorAll('[role="row"]')
+        ) as HTMLElement[];
+      }
+      return rowsCacheRef.current;
     };
 
     // Update focus on items - only one item should have tabindex="0"
@@ -265,8 +270,9 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
       }
     };
 
-    // Initialize focus management after mount
+    // Invalidate cache and re-initialize focus whenever children change
     useEffect(() => {
+      rowsCacheRef.current = null;
       updateItemFocus(0, false);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [children]);

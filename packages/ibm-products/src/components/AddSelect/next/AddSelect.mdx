@@ -487,10 +487,10 @@ const selectedItemsArray = Array.from(selectedItems)
 
   <AddSelect.SelectionSummary
     title="Selected items"
-    selectedItems={selectedItemsArray}
-    showCount
+    count={selectedItemsArray.length}
     showEditIcon
     onEdit={() => console.log('Edit clicked')}
+    emptyState={<p>No items selected</p>}
   >
     {selectedItemsArray.map((item) => (
       <AddSelect.SelectionSummaryItem
@@ -642,7 +642,10 @@ all child components.
 ### AddSelect.Body
 
 Contains the header section (search, breadcrumbs, item count) and the main
-content area.
+content area. Keyboard navigation across `[role="row"]` elements is handled
+internally; the row list is cached after the first key event and invalidated
+automatically whenever `children` change, avoiding repeated DOM queries during
+rapid navigation.
 
 **Props:**
 
@@ -777,27 +780,28 @@ buttons (single-select).
 
 ### AddSelect.SelectionSummary
 
-Displays a list of selected items with optional count badge and edit
-functionality.
+Displays a panel of selected items with an optional count badge and edit icon.
+The body is entirely composable — pass `AddSelect.SelectionSummaryItem`
+components (or any custom content) as `children`. The count badge is shown
+automatically when `count` is provided; omit `count` to hide the badge.
+`emptyState` renders whenever there are no `children`.
 
 **Props:**
 
 - **title** (string, optional, default: "Selected items") - Panel title
-- **selectedItems** (AddSelectItem[], optional, default: []) - Array of selected
-  items
-- **children** (ReactNode, optional) - Custom content or SelectionSummaryItem
-  components
-- **emptyState** (ReactNode, optional) - Custom empty state component
-- **showCount** (boolean, optional, default: true) - Show count badge
+- **count** (number, optional) - Number of selected items shown in the badge.
+  Omit to hide the badge entirely.
+- **children** (ReactNode, optional) - Custom content or
+  `AddSelect.SelectionSummaryItem` components rendered in the body
+- **emptyState** (ReactNode, optional) - Placeholder shown when there are no
+  `children`
 - **showEditIcon** (boolean, optional, default: false) - Show edit icon next to
-  count
+  the title
 - **onEdit** (function, optional) - Edit icon click handler
   - Signature: `() => void`
 - **editIconDescription** (string, optional, default: "Edit selections") - Edit
   icon aria-label
 - **className** (string, optional) - Optional CSS class name
-- **renderItem** (function, optional) - Custom item renderer
-  - Signature: `(item: AddSelectItem) => ReactNode`
 - **headerContent** (ReactNode, optional) - Custom header content (slot) -
   replaces entire header section
 - **headerActions** (ReactNode, optional) - Header actions slot - adds custom
@@ -853,6 +857,10 @@ Side panel that displays detailed information about a specific item.
   entries when `item.itemDetails` is
   `Array<{ label: string; value: string | number }>`. Use `children` or
   `renderItem` for custom layouts
+- **open** (boolean, optional) - Toggles the
+  `${blockClass}__item-summary-panel--open` CSS modifier class. Use this instead
+  of conditional rendering when you need CSS-driven slide-in/out transitions.
+  When omitted the modifier class is absent.
 - **onClose** (function, optional) - Close button handler
   - Signature: `() => void`
 - **closeIconDescription** (string, optional, default: "Close") - Close button

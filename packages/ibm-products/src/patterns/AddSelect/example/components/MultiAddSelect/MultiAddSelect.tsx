@@ -329,7 +329,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                 ) : (
                   <AddSelect.SelectionSummary
                     title={selectionSummaryTitle}
-                    selectedItems={selectedItemsForDisplay}
+                    count={selectedItemsForDisplay.length}
                     emptyState={
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}
@@ -342,15 +342,16 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                         />
                       </div>
                     }
-                    renderItem={(item) => (
+                  >
+                    {selectedItemsForDisplay.map((item) => (
                       <AddSelect.SelectionSummaryItem
                         key={item.id}
                         item={item}
                         onRemove={handleRemoveItem}
                         useAccordion={true}
                       />
-                    )}
-                  ></AddSelect.SelectionSummary>
+                    ))}
+                  </AddSelect.SelectionSummary>
                 )}
               </Tearsheet.SummaryContent>
             </Tearsheet.Body>

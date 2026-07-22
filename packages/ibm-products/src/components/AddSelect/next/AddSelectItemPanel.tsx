@@ -55,6 +55,13 @@ export interface AddSelectItemPanelProps {
    */
   className?: string;
   /**
+   * Controls visibility of the panel by toggling the
+   * `${blockClass}__item-summary-panel--open` CSS modifier class.
+   * Use this instead of conditional rendering when you need CSS-driven
+   * slide-in/out transitions.
+   */
+  open?: boolean;
+  /**
    * Additional props to pass to the close IconButton
    */
   closeIconButtonProps?: Omit<
@@ -85,12 +92,15 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
       children,
       renderItem,
       className,
+      open,
       closeIconButtonProps,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const panelClasses = cx(`${blockClass}__item-summary-panel`, className);
+    const panelClasses = cx(`${blockClass}__item-summary-panel`, className, {
+      [`${blockClass}__item-summary-panel--open`]: open,
+    });
 
     // Default content rendering — renders only labelled itemDetails tuples.
     // Only renders when itemDetails is the preferred Array<{ label, value }>
@@ -185,6 +195,7 @@ AddSelectItemPanel.propTypes = {
   item: PropTypes.object,
   /**@ts-ignore */
   onClose: PropTypes.func,
+  open: PropTypes.bool,
   /**@ts-ignore */
   renderItem: PropTypes.func,
   title: PropTypes.string,

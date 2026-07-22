@@ -1203,6 +1203,32 @@ describe('AddSelect.Body keyboard navigation', () => {
 
     expect(onItemSelect).toHaveBeenCalledWith('1', true, 'item-1');
   });
+
+  it('reuses cached rows across consecutive key events without re-querying the DOM', () => {
+    // Spy on querySelectorAll to count DOM queries
+    const qsaSpy = jest.spyOn(Element.prototype, 'querySelectorAll');
+
+    render(<ControlledAddSelect multi />);
+    const grid = screen.getByRole('grid');
+    fireEvent.focus(grid);
+
+    // Reset count after initial render/focus so we only count key-event queries
+    qsaSpy.mockClear();
+
+    // Fire multiple navigation keys
+    fireEvent.keyDown(grid, { key: 'ArrowDown' });
+    fireEvent.keyDown(grid, { key: 'ArrowDown' });
+    fireEvent.keyDown(grid, { key: 'ArrowUp' });
+
+    // With caching, querySelectorAll('[role="row"]') should fire at most once
+    // (the first key event populates the cache; subsequent key events use it)
+    const rowQueries = qsaSpy.mock.calls.filter(
+      (args) => args[0] === '[role="row"]'
+    );
+    expect(rowQueries.length).toBeLessThanOrEqual(1);
+
+    qsaSpy.mockRestore();
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -1218,38 +1244,39 @@ describe('AddSelect.SelectionSummary', () => {
   it('renders the panel title', () => {
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary
-          title="My selections"
-          selectedItems={items}
-        />
+        <AddSelect.SelectionSummary title="My selections" />
       </AddSelect>
     );
     expect(screen.getByText('My selections')).toBeInTheDocument();
   });
 
-  it('renders the item count tag when showCount is true', () => {
+  it('renders the count badge when count is provided', () => {
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary selectedItems={items} showCount />
+        <AddSelect.SelectionSummary count={2} />
       </AddSelect>
     );
     expect(screen.getByText('2')).toBeInTheDocument();
   });
 
-  it('does not render item count tag when showCount is false', () => {
+  it('does not render the count badge when count is omitted', () => {
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary selectedItems={items} showCount={false} />
+        <AddSelect.SelectionSummary />
       </AddSelect>
     );
-    expect(screen.queryByText('2')).not.toBeInTheDocument();
+    // The panel renders but no numeric badge should be present
+    expect(
+      document.querySelector(`.${blockClass}__selection-summary`)
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
   });
 
   it('renders the edit icon button when showEditIcon is true', () => {
     render(
       <AddSelect>
         <AddSelect.SelectionSummary
-          selectedItems={items}
+          count={2}
           showEditIcon
           editIconDescription="Edit selections"
           onEdit={jest.fn()}
@@ -1266,7 +1293,7 @@ describe('AddSelect.SelectionSummary', () => {
     render(
       <AddSelect>
         <AddSelect.SelectionSummary
-          selectedItems={items}
+          count={2}
           showEditIcon
           editIconDescription="Edit"
           onEdit={onEdit}
@@ -1277,34 +1304,58 @@ describe('AddSelect.SelectionSummary', () => {
     expect(onEdit).toHaveBeenCalledTimes(1);
   });
 
-  it('renders default item titles and subtitles when no children or renderItem', () => {
+  it('renders children passed to the body', () => {
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary selectedItems={items} />
+        <AddSelect.SelectionSummary count={items.length}>
+          {items.map((item) => (
+            <p key={item.id}>{item.title}</p>
+          ))}
+        </AddSelect.SelectionSummary>
       </AddSelect>
     );
     expect(screen.getByText('Selected A')).toBeInTheDocument();
-    expect(screen.getByText('Sub A')).toBeInTheDocument();
     expect(screen.getByText('Selected B')).toBeInTheDocument();
   });
 
-  it('renders emptyState when selectedItems is empty', () => {
+  it('renders emptyState when there are no children', () => {
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary
-          selectedItems={[]}
-          emptyState={<p>No items selected</p>}
-        />
+        <AddSelect.SelectionSummary emptyState={<p>No items selected</p>} />
       </AddSelect>
     );
     expect(screen.getByText('No items selected')).toBeInTheDocument();
+  });
+
+  it('does not render emptyState when children are present', () => {
+    render(
+      <AddSelect>
+        <AddSelect.SelectionSummary emptyState={<p>No items selected</p>}>
+          <p>Some child</p>
+        </AddSelect.SelectionSummary>
+      </AddSelect>
+    );
+    expect(screen.queryByText('No items selected')).not.toBeInTheDocument();
+    expect(screen.getByText('Some child')).toBeInTheDocument();
+  });
+
+  it('children take precedence over emptyState', () => {
+    render(
+      <AddSelect>
+        <AddSelect.SelectionSummary emptyState={<p>No items selected</p>}>
+          <p>Some child</p>
+        </AddSelect.SelectionSummary>
+      </AddSelect>
+    );
+    expect(screen.getByText('Some child')).toBeInTheDocument();
+    expect(screen.queryByText('No items selected')).not.toBeInTheDocument();
   });
 
   it('renders custom headerContent slot instead of default header', () => {
     render(
       <AddSelect>
         <AddSelect.SelectionSummary
-          selectedItems={items}
+          count={2}
           headerContent={<div>Custom header</div>}
         />
       </AddSelect>
@@ -1313,36 +1364,11 @@ describe('AddSelect.SelectionSummary', () => {
     expect(screen.queryByText('Selected items')).not.toBeInTheDocument();
   });
 
-  it('renders children instead of default item list', () => {
-    render(
-      <AddSelect>
-        <AddSelect.SelectionSummary selectedItems={items}>
-          <li>custom child</li>
-        </AddSelect.SelectionSummary>
-      </AddSelect>
-    );
-    expect(screen.getByText('custom child')).toBeInTheDocument();
-    expect(screen.queryByText('Selected A')).not.toBeInTheDocument();
-  });
-
-  it('renders via renderItem when provided and no children are present', () => {
-    render(
-      <AddSelect>
-        <AddSelect.SelectionSummary
-          selectedItems={items}
-          renderItem={(item) => <p key={item.id}>rendered {item.title}</p>}
-        />
-      </AddSelect>
-    );
-    expect(screen.getByText('rendered Selected A')).toBeInTheDocument();
-    expect(screen.getByText('rendered Selected B')).toBeInTheDocument();
-  });
-
   it('renders the headerActions slot alongside the edit icon', () => {
     render(
       <AddSelect>
         <AddSelect.SelectionSummary
-          selectedItems={items}
+          count={2}
           showEditIcon
           editIconDescription="Edit"
           onEdit={jest.fn()}
@@ -1354,26 +1380,11 @@ describe('AddSelect.SelectionSummary', () => {
     expect(screen.getByRole('button', { name: /edit/i })).toBeInTheDocument();
   });
 
-  it('renders item without subtitle without a subtitle element', () => {
-    const itemWithoutSubtitle = [{ id: '3', title: 'No subtitle', value: 'c' }];
-    const { container } = render(
-      <AddSelect>
-        <AddSelect.SelectionSummary selectedItems={itemWithoutSubtitle} />
-      </AddSelect>
-    );
-    expect(screen.getByText('No subtitle')).toBeInTheDocument();
-    expect(
-      container.querySelector(
-        `.${blockClass}__selection-summary-item-default-subtitle`
-      )
-    ).not.toBeInTheDocument();
-  });
-
   it('forwards a ref to the selection summary div', () => {
     const ref = React.createRef();
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary selectedItems={[]} ref={ref} />
+        <AddSelect.SelectionSummary count={0} ref={ref} />
       </AddSelect>
     );
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
@@ -1752,5 +1763,38 @@ describe('AddSelect.ItemPanel', () => {
     );
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
     expect(ref.current).toHaveClass(`${blockClass}__item-summary-panel`);
+  });
+
+  it('adds the --open modifier class when open is true', () => {
+    const { container } = render(
+      <AddSelect>
+        <AddSelect.ItemPanel open />
+      </AddSelect>
+    );
+    expect(
+      container.querySelector(`.${blockClass}__item-summary-panel`)
+    ).toHaveClass(`${blockClass}__item-summary-panel--open`);
+  });
+
+  it('does not add the --open modifier class when open is false', () => {
+    const { container } = render(
+      <AddSelect>
+        <AddSelect.ItemPanel open={false} />
+      </AddSelect>
+    );
+    expect(
+      container.querySelector(`.${blockClass}__item-summary-panel`)
+    ).not.toHaveClass(`${blockClass}__item-summary-panel--open`);
+  });
+
+  it('does not add the --open modifier class when open is omitted', () => {
+    const { container } = render(
+      <AddSelect>
+        <AddSelect.ItemPanel />
+      </AddSelect>
+    );
+    expect(
+      container.querySelector(`.${blockClass}__item-summary-panel`)
+    ).not.toHaveClass(`${blockClass}__item-summary-panel--open`);
   });
 });

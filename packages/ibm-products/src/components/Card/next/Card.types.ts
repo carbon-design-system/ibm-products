@@ -50,6 +50,11 @@ export interface CardProps extends CardBaseProps {
    * Renders in the top-right corner of the card header with a blue gradient border.
    */
   decorator?: ReactNode;
+  /**
+   * When true, the card renders in a horizontal layout: media on the left,
+   * header/body/footer stacked vertically on the right.
+   */
+  horizontal?: boolean;
 }
 
 /**
@@ -83,4 +88,8 @@ export interface CardContextValue {
    * Optional decorator component (typically AILabel) to be rendered by CardHeader
    */
   decorator?: ReactNode;
+  /**
+   * Whether the card is in horizontal layout mode
+   */
+  horizontal?: boolean;
 }

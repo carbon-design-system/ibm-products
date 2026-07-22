@@ -1,3 +1,32 @@
+## `@carbon/ibm-products@2.95.0-rc.0`
+### Features :rocket:
+- feat(Card): implement card footer and primitives (#9659)
+- feat(addselect): change story default state as open (#9647)
+- feat(create-side-panel): implement as react pattern (#9657)
+- feat(Card): implement composable `Card` header primitives (#9632)
+- feat(addselect): multi addselect with modifiers and bulk actions pattern (#9561)
+- feat(addselect):  global and column actions patterns (#9563)
+- feat(addselect): Progressive loading pattern (#9605)
+- feat(addselect):  Carbon DataTable as the item selection component (#9562)
+- feat(tearsheet): preview tearsheet code connect integration (#9631)
+
+### Bug fixes :bug:
+- fix(BigNumber): Use figure & figcaption in both react and wc (#9707)
+- fix(coachmark): remove unwanted code and added launcherbuttonref (#9667)
+- fix: design rerview changes react (#9621)
+- fix(addselect): remove addselect content sub component (#9642)
+- fix(coachmarkpatterns): animation (#9622)
+- fix: coachmark design review and a11y in web comp (#9598)
+
+### Housekeeping :house:
+- chore(pageHeader): deprecate pageHeader (#9641)
+- style(addselect): refine styles of add select components and patterns (#9669)
+- build(deps): update to Carbon 11 compatible versions to latest (#9660)
+- chore: deprecate import and upload prebuilt pattern (#9698)
+- test(addselect): unit tests for composable add select components (#9644)
+- chore(APIkeyModal): deprecate APIkeyModal (#9637)
+- chore: upgrade jest to 30.0.5 (#9585)
+
 ## `@carbon/ibm-products@2.94.0`
 ### Features :rocket:
 - feat(Card): initial scaffolding (#9597)

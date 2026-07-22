@@ -42,6 +42,7 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       disabled = false,
       density = 'productive',
       decorator,
+      horizontal = false,
       className,
       children,
       ...rest
@@ -67,8 +68,9 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
         clickable,
         disabled,
         decorator: normalizedDecorator,
+        horizontal,
       }),
-      [clickable, disabled, normalizedDecorator]
+      [clickable, disabled, normalizedDecorator, horizontal]
     );
 
     // Handle keyboard interaction for clickable cards
@@ -96,6 +98,7 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       [`${blockClass}--disabled`]: disabled,
       [`${blockClass}--${density}`]: density,
       [`${blockClass}--has-ai-label`]: hasAILabel,
+      [`${blockClass}--horizontal`]: horizontal,
     });
 
     const cardProps = {
@@ -111,9 +114,46 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       }),
     };
 
+    // In horizontal mode, split children into media and content, then order
+    // them by the position of Card.Media in the JSX — media before content
+    // children = left, media after content children = right.
+    let renderedChildren: React.ReactNode = children;
+    if (horizontal) {
+      const childArray = React.Children.toArray(children);
+
+      const isMedia = (child: React.ReactNode) =>
+        React.isValidElement(child) &&
+        (child.type === CardMedia ||
+          (child.type as React.ComponentType)?.displayName === 'Card.Media');
+
+      const mediaChildren = childArray.filter(isMedia);
+      const contentChildren = childArray.filter((c) => !isMedia(c));
+
+      // Detect JSX order: is media placed before the first content child?
+      const firstMediaIndex = childArray.findIndex(isMedia);
+      const firstContentIndex = childArray.findIndex((c) => !isMedia(c));
+      const mediaIsFirst = firstMediaIndex < firstContentIndex;
+
+      const contentWrapper = (
+        <div className={`${blockClass}__content`}>{contentChildren}</div>
+      );
+
+      renderedChildren = mediaIsFirst ? (
+        <>
+          {mediaChildren}
+          {contentWrapper}
+        </>
+      ) : (
+        <>
+          {contentWrapper}
+          {mediaChildren}
+        </>
+      );
+    }
+
     return (
       <CardContext.Provider value={contextValue}>
-        <div {...cardProps}>{children}</div>
+        <div {...cardProps}>{renderedChildren}</div>
       </CardContext.Provider>
     );
   }
@@ -146,6 +186,10 @@ CardComponent.propTypes = {
    * Disables the card and all interactive elements
    */
   disabled: PropTypes.bool,
+  /**
+   * When true, renders media on the left and content (header/body/footer) on the right
+   */
+  horizontal: PropTypes.bool,
   /**
    * Click handler for clickable cards
    */

@@ -34,6 +34,7 @@ collect:
         - overflow-aria-label
         - prevent-close-on-click-outside
         - selector-initial-focus
+        - selector-primary-focus
         - size
         - slot
         - subtitle
@@ -94,6 +95,7 @@ collect:
         - status
         # c4p-coachmark
         - caret
+        - drag-aria-label
         - dropShadow
         - floating
         - highContrast
@@ -206,7 +208,6 @@ collect:
         - container-class-name
         - onc4p-preview-tearsheet-beingclosed
         - onc4p-preview-tearsheet-closed
-        - selector-primary-focus
         - selectors-floating-menus
         - summary-content-width
         - variant

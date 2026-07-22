@@ -30,15 +30,16 @@ export interface AddSelectSelectionSummaryProps {
   title?: string;
   /**
    * Number of selected items — shown as a badge next to the title when
-   * provided. The badge is hidden when `count` is omitted.
+   * provided. The badge is hidden when `selectedItemCount` is omitted.
    */
-  count?: number;
+  selectedItemCount?: number;
   /**
    * Custom content or SelectionSummaryItem components
    */
   children?: ReactNode;
   /**
-   * Custom empty state component — shown when there are no `children`
+   * Custom empty state component — shown when `selectedItemCount` is `0` or
+   * not provided.
    */
   emptyState?: ReactNode;
   /**
@@ -81,14 +82,14 @@ export interface AddSelectSelectionSummaryProps {
 /**
  * AddSelectSelectionSummary - Displays list of selected items.
  *
- * - Pass `count` to show a numeric badge next to the title; omit it to hide the badge.
- * - Pass `emptyState` to show a placeholder when there are no `children`.
+ * - Pass `selectedItemCount` to show a numeric badge next to the title; omit it to hide the badge.
+ * - Pass `emptyState` to show a placeholder when `selectedItemCount` is `0` or not provided.
  * @example
  * With count badge:
  * ```jsx
  * <AddSelect.SelectionSummary
  *   title="Selected items"
- *   count={selectedItemsArray.length}
+ *   selectedItemCount={selectedItemsArray.length}
  *   showEditIcon
  *   onEdit={handleEdit}
  * >
@@ -98,7 +99,7 @@ export interface AddSelectSelectionSummaryProps {
  * </AddSelect.SelectionSummary>
  * ```
  *
- * Without count badge (omit `count`):
+ * Without badge (omit `selectedItemCount`):
  * ```jsx
  * <AddSelect.SelectionSummary title="Selected items">
  *   {selectedItemsArray.map((item) => (
@@ -107,11 +108,11 @@ export interface AddSelectSelectionSummaryProps {
  * </AddSelect.SelectionSummary>
  * ```
  *
- * With empty state:
+ * With empty state (shown when `selectedItemCount` is `0` or not provided):
  * ```jsx
  * <AddSelect.SelectionSummary
  *   title="Selected items"
- *   count={selectedItemsArray.length}
+ *   selectedItemCount={selectedItemsArray.length}
  *   emptyState={<NoDataEmptyState />}
  * >
  *   {selectedItemsArray.map((item) => (
@@ -127,7 +128,7 @@ const AddSelectSelectionSummary = forwardRef<
   (
     {
       title = 'Selected items',
-      count,
+      selectedItemCount,
       children,
       emptyState,
       showEditIcon = false,
@@ -153,9 +154,9 @@ const AddSelectSelectionSummary = forwardRef<
               <p className={`${blockClass}__selection-summary-title`}>
                 {title}
               </p>
-              {count !== undefined && (
+              {selectedItemCount !== undefined && (
                 <Tag type="gray" size="sm" {...tagProps}>
-                  {count}
+                  {selectedItemCount}
                 </Tag>
               )}
               {(showEditIcon || headerActions) && (
@@ -184,7 +185,7 @@ const AddSelectSelectionSummary = forwardRef<
 
         {/* Body content */}
         <div className={`${blockClass}__selection-summary-body`}>
-          {children || emptyState || null}
+          {!selectedItemCount ? emptyState : children}
         </div>
       </div>
     );
@@ -194,7 +195,6 @@ const AddSelectSelectionSummary = forwardRef<
 AddSelectSelectionSummary.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  count: PropTypes.number,
   /**@ts-ignore */
   editIconButtonProps: PropTypes.object,
   editIconDescription: PropTypes.string,
@@ -203,6 +203,7 @@ AddSelectSelectionSummary.propTypes = {
   headerContent: PropTypes.node,
   /**@ts-ignore */
   onEdit: PropTypes.func,
+  selectedItemCount: PropTypes.number,
   showEditIcon: PropTypes.bool,
   /**@ts-ignore */
   tagProps: PropTypes.object,

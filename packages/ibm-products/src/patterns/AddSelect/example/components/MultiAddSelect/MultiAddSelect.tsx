@@ -329,7 +329,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
                 ) : (
                   <AddSelect.SelectionSummary
                     title={selectionSummaryTitle}
-                    count={selectedItemsForDisplay.length}
+                    selectedItemCount={selectedItemsForDisplay.length}
                     emptyState={
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}

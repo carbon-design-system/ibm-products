@@ -649,6 +649,7 @@ export const AddSingleItemFromHierarchy = forwardRef<
               <Tearsheet.SummaryContent isFlush>
                 <AddSelect.SelectionSummary
                   title={sidePanelTitle}
+                  selectedItemCount={selectedItem ? 1 : 0}
                   emptyState={
                     <div className={`${blockClass}__empty-state`}>
                       <p className={`${blockClass}__empty-state-text`}>

@@ -487,7 +487,7 @@ const selectedItemsArray = Array.from(selectedItems)
 
   <AddSelect.SelectionSummary
     title="Selected items"
-    count={selectedItemsArray.length}
+    selectedItemCount={selectedItemsArray.length}
     showEditIcon
     onEdit={() => console.log('Edit clicked')}
     emptyState={<p>No items selected</p>}
@@ -783,18 +783,19 @@ buttons (single-select).
 Displays a panel of selected items with an optional count badge and edit icon.
 The body is entirely composable — pass `AddSelect.SelectionSummaryItem`
 components (or any custom content) as `children`. The count badge is shown
-automatically when `count` is provided; omit `count` to hide the badge.
-`emptyState` renders whenever there are no `children`.
+automatically when `selectedItemCount` is provided; omit `selectedItemCount` to
+hide the badge. `emptyState` is shown when `selectedItemCount` is `0` or not
+provided.
 
 **Props:**
 
 - **title** (string, optional, default: "Selected items") - Panel title
-- **count** (number, optional) - Number of selected items shown in the badge.
-  Omit to hide the badge entirely.
+- **selectedItemCount** (number, optional) - Number of selected items shown in
+  the badge. Omit to hide the badge entirely.
 - **children** (ReactNode, optional) - Custom content or
   `AddSelect.SelectionSummaryItem` components rendered in the body
-- **emptyState** (ReactNode, optional) - Placeholder shown when there are no
-  `children`
+- **emptyState** (ReactNode, optional) - Placeholder shown when
+  `selectedItemCount` is `0` or not provided
 - **showEditIcon** (boolean, optional, default: false) - Show edit icon next to
   the title
 - **onEdit** (function, optional) - Edit icon click handler

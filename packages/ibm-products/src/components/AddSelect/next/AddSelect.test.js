@@ -1250,10 +1250,10 @@ describe('AddSelect.SelectionSummary', () => {
     expect(screen.getByText('My selections')).toBeInTheDocument();
   });
 
-  it('renders the count badge when count is provided', () => {
+  it('renders the count badge when selectedItemCount is provided', () => {
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary count={2} />
+        <AddSelect.SelectionSummary selectedItemCount={2} />
       </AddSelect>
     );
     expect(screen.getByText('2')).toBeInTheDocument();
@@ -1276,7 +1276,7 @@ describe('AddSelect.SelectionSummary', () => {
     render(
       <AddSelect>
         <AddSelect.SelectionSummary
-          count={2}
+          selectedItemCount={2}
           showEditIcon
           editIconDescription="Edit selections"
           onEdit={jest.fn()}
@@ -1293,7 +1293,7 @@ describe('AddSelect.SelectionSummary', () => {
     render(
       <AddSelect>
         <AddSelect.SelectionSummary
-          count={2}
+          selectedItemCount={2}
           showEditIcon
           editIconDescription="Edit"
           onEdit={onEdit}
@@ -1307,7 +1307,7 @@ describe('AddSelect.SelectionSummary', () => {
   it('renders children passed to the body', () => {
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary count={items.length}>
+        <AddSelect.SelectionSummary selectedItemCount={items.length}>
           {items.map((item) => (
             <p key={item.id}>{item.title}</p>
           ))}
@@ -1318,7 +1318,19 @@ describe('AddSelect.SelectionSummary', () => {
     expect(screen.getByText('Selected B')).toBeInTheDocument();
   });
 
-  it('renders emptyState when there are no children', () => {
+  it('renders emptyState when count is 0', () => {
+    render(
+      <AddSelect>
+        <AddSelect.SelectionSummary
+          selectedItemCount={0}
+          emptyState={<p>No items selected</p>}
+        />
+      </AddSelect>
+    );
+    expect(screen.getByText('No items selected')).toBeInTheDocument();
+  });
+
+  it('renders emptyState when count is not provided', () => {
     render(
       <AddSelect>
         <AddSelect.SelectionSummary emptyState={<p>No items selected</p>} />
@@ -1327,10 +1339,30 @@ describe('AddSelect.SelectionSummary', () => {
     expect(screen.getByText('No items selected')).toBeInTheDocument();
   });
 
-  it('does not render emptyState when children are present', () => {
+  it('renders emptyState when count is 0 even if children map is empty', () => {
+    // Empty array from .map() is truthy — count gate must still fire emptyState
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary emptyState={<p>No items selected</p>}>
+        <AddSelect.SelectionSummary
+          selectedItemCount={0}
+          emptyState={<p>No items selected</p>}
+        >
+          {[].map((item) => (
+            <p key={item.id}>{item.title}</p>
+          ))}
+        </AddSelect.SelectionSummary>
+      </AddSelect>
+    );
+    expect(screen.getByText('No items selected')).toBeInTheDocument();
+  });
+
+  it('does not render emptyState when count is greater than 0', () => {
+    render(
+      <AddSelect>
+        <AddSelect.SelectionSummary
+          selectedItemCount={1}
+          emptyState={<p>No items selected</p>}
+        >
           <p>Some child</p>
         </AddSelect.SelectionSummary>
       </AddSelect>
@@ -1339,23 +1371,24 @@ describe('AddSelect.SelectionSummary', () => {
     expect(screen.getByText('Some child')).toBeInTheDocument();
   });
 
-  it('children take precedence over emptyState', () => {
+  it('renders children when selectedItemCount is greater than 0', () => {
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary emptyState={<p>No items selected</p>}>
-          <p>Some child</p>
+        <AddSelect.SelectionSummary selectedItemCount={2}>
+          <p>Item A</p>
+          <p>Item B</p>
         </AddSelect.SelectionSummary>
       </AddSelect>
     );
-    expect(screen.getByText('Some child')).toBeInTheDocument();
-    expect(screen.queryByText('No items selected')).not.toBeInTheDocument();
+    expect(screen.getByText('Item A')).toBeInTheDocument();
+    expect(screen.getByText('Item B')).toBeInTheDocument();
   });
 
   it('renders custom headerContent slot instead of default header', () => {
     render(
       <AddSelect>
         <AddSelect.SelectionSummary
-          count={2}
+          selectedItemCount={2}
           headerContent={<div>Custom header</div>}
         />
       </AddSelect>
@@ -1368,7 +1401,7 @@ describe('AddSelect.SelectionSummary', () => {
     render(
       <AddSelect>
         <AddSelect.SelectionSummary
-          count={2}
+          selectedItemCount={2}
           showEditIcon
           editIconDescription="Edit"
           onEdit={jest.fn()}
@@ -1384,7 +1417,7 @@ describe('AddSelect.SelectionSummary', () => {
     const ref = React.createRef();
     render(
       <AddSelect>
-        <AddSelect.SelectionSummary count={0} ref={ref} />
+        <AddSelect.SelectionSummary selectedItemCount={0} ref={ref} />
       </AddSelect>
     );
     expect(ref.current).toBeInstanceOf(HTMLDivElement);

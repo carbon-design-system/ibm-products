@@ -784,7 +784,7 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                 ) : (
                   <AddSelect.SelectionSummary
                     title={selectionSummaryTitle}
-                    selectedItems={selectedItemsForDisplay}
+                    selectedItemCount={selectedItemsForDisplay.length}
                     emptyState={
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}

@@ -858,7 +858,7 @@ const AddSelectSelectionSummaryStory = (args) => {
     <div className={`${storyClass}-summary-container`}>
       <AddSelect.SelectionSummary
         title={args.title}
-        count={selectedItemsArray.length}
+        selectedItemCount={selectedItemsArray.length}
         showEditIcon={args.showEditIcon}
         onEdit={args.showEditIcon ? () => {} : undefined}
         editIconDescription={args.editIconDescription}
@@ -973,7 +973,7 @@ export const AddSelectSelectionSummary = {
       description: 'Show the emptyState slot usage',
       table: { category: 'Story controls' },
     },
-    count: {
+    selectedItemCount: {
       control: false,
       description:
         'Number of selected items — drives the count badge and empty-state visibility',
@@ -984,7 +984,8 @@ export const AddSelectSelectionSummary = {
     },
     emptyState: {
       control: false,
-      description: 'Custom empty state component — shown when count === 0',
+      description:
+        'Custom empty state component — shown when selectedItemCount === 0',
     },
     onEdit: {
       control: false,

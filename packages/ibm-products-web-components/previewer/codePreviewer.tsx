@@ -35,15 +35,19 @@ interface previewerObject {
   story: any;
   customImports: string[];
   customFunctionDefs: string[];
+  customModuleDefs?: string[];
   title: string;
   componentName: string;
+  suppressAutoImports?: boolean;
 }
 export const stackblitzPrefillConfig = async ({
   story,
   customImports = [],
   customFunctionDefs = [],
+  customModuleDefs = [],
   title,
   componentName,
+  suppressAutoImports = false,
 }: previewerObject) => {
   const { args } = story;
   const productComponents = await import('../src/index');
@@ -90,48 +94,13 @@ export const stackblitzPrefillConfig = async ({
     storyCode,
     customImports,
     customFunctionDefs,
-    args
+    customModuleDefs,
+    args,
+    suppressAutoImports
   );
 
-  //separate scss imports and selectors - to wrap the selectors inside :host{}
   function wrapSelectorsWithHost(scss: string): string {
-    const lines = scss.split('\n');
-
-    let splitIndex = 0;
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      // Allow imports, variables, mixins, comments at top
-      if (
-        line.startsWith('@use') ||
-        line.startsWith('@forward') ||
-        line.startsWith('$') ||
-        line.startsWith('@mixin') ||
-        line.startsWith('//') ||
-        line.startsWith('/*') ||
-        line === ''
-      ) {
-        splitIndex = i + 1;
-        continue;
-      }
-      // First real selector reached
-      break;
-    }
-
-    const styleHeaders = lines.slice(0, splitIndex).join('\n');
-    const selectors = lines.slice(splitIndex).join('\n');
-
-    if (!selectors.trim()) {
-      return scss;
-    }
-
-    return `
-    ${styleHeaders}
-
-    :host {
-    ${selectors}
-    }
-    `;
+    return scss;
   }
 
   const scssImports = (c: string) =>
@@ -242,6 +211,13 @@ const filterStoryCode = (storyCode, args) => {
       /\{\s*args:\s*defaultArgs\s*,\s*render:\s*\(?\s*args\s*(?::\s*any)?\s*\)?\s*=>\s*\{/g,
       ''
     )
+    // Remove render wrapper with no args block: { render: () => { or { render: (args) => {
+    .replace(
+      /^\s*\{\s*render:\s*\(?\s*(?:args\s*(?::\s*any)?)?\s*\)?\s*=>\s*\{/,
+      ''
+    )
+    // Remove trailing },\n} left by the render wrapper removal
+    .replace(/\}\s*,\s*\}\s*$/, '')
     //replace the render closing braces
     .replace(/}\s*$/, '')
     // Remove <style>${styles}</style> injections anywhere
@@ -329,7 +305,9 @@ const appGenerator = async (
   storyCode: string,
   customImports: Array<string>,
   customFunctionDefs: Array<string>,
-  args: any
+  customModuleDefs: Array<string>,
+  args: any,
+  suppressAutoImports = false
 ) => {
   const {
     carbon: matchedCarbonComponents,
@@ -341,7 +319,7 @@ const appGenerator = async (
     storyCode = removeUnknownComponents(storyCode, unknownComponents);
   }
 
-  const regex = /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)/;
+  const regex = /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)|(args\.)/;
   const hasArgs = regex.test(storyCode);
 
   const formattedArgs = `const args = ${JSON.stringify(args, null, 2)};`;
@@ -358,10 +336,10 @@ const appGenerator = async (
   const app = `
 
   import { LitElement, html, unsafeCSS } from 'lit';
-  import { customElement } from 'lit/decorators.js';
-  ${customImports?.length > 0 ? customImports?.map((customImport) => customImport) : ''}
+  import { customElement, property, state, query } from 'lit/decorators.js';
+  ${customImports?.length > 0 ? customImports?.map((customImport) => customImport).join('\n') : ''}
   ${
-    matchedComponents.length > 0
+    !suppressAutoImports && matchedComponents.length > 0
       ? matchedComponents
           .map((comp: string) => {
             const importPath = getComponentImportPath(comp, matchedComponents);
@@ -383,6 +361,8 @@ const appGenerator = async (
   ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons";` : ''}
   import styles from './index.scss?inline';
   
+  ${customModuleDefs?.length > 0 ? customModuleDefs.join('\n') : ''}
+
   @customElement('my-app')
   export class MyApp extends LitElement {
     static styles = unsafeCSS(styles);

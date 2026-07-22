@@ -1,3 +1,16 @@
+## `@carbon/ibm-products-web-components@0.44.0-rc.0`
+### Features :rocket:
+- feat(tearsheet): preview tearsheet code connect integration (#9631)
+
+### Bug fixes :bug:
+- fix(BigNumber): Use figure & figcaption in both react and wc (#9707)
+- fix: open in stackblitz style issue fixed (#9699)
+- fix(coachmarkpatterns): animation (#9622)
+- fix: coachmark design review and a11y in web comp (#9598)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9660)
+
 ## `@carbon/ibm-products-web-components@0.43.0`
 ### Features :rocket:
 - feat(create-tearsheet): implemented as patterns in web components (#9552)

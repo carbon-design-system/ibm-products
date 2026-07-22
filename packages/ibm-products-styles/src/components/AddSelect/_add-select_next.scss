@@ -769,34 +769,85 @@ $carbon-prefix: #{c4p-settings.$carbon-prefix};
 // ──────────────────────────────────────────────────────────────
 // AddSelectItemSummaryPanel - Item summary view
 // ──────────────────────────────────────────────────────────────
-.#{$block-class__next}__item-summary-panel {
-  overflow: hidden;
-  block-size: 100%;
-  // Hidden by default: collapsed to zero width and shifted off screen.
-  // Using max-inline-size + translateX together ensures no gap in the layout
-  // while the panel is closed, and allows a smooth slide-in when opened.
-  max-inline-size: 0;
-  transform: translateX(100%);
-  visibility: hidden;
 
-  @media screen and (prefers-reduced-motion: no-preference) {
-    transition:
-      max-inline-size $duration-moderate-01 motion(entrance, expressive),
-      transform $duration-moderate-01 motion(entrance, expressive),
-      visibility 0s linear $duration-moderate-01;
+@keyframes add-select-item-panel-entrance {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
   }
 
-  // Open state: slide into view and restore full width
-  &--open {
-    max-inline-size: 320px;
+  100% {
+    opacity: 1;
     transform: translateX(0);
-    visibility: visible;
+  }
+}
 
-    @media screen and (prefers-reduced-motion: no-preference) {
-      transition:
-        max-inline-size $duration-moderate-01 motion(entrance, expressive),
-        transform $duration-moderate-01 motion(entrance, expressive),
-        visibility 0s linear 0s;
+@keyframes add-select-item-panel-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes add-select-item-panel-entrance-reduced {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes add-select-item-panel-exit-reduced {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.#{$block-class__next}__item-summary-panel {
+  // Hidden by default — the panel must be explicitly opened with `open={true}`.
+  // `display: none` is toggled via `transition-behavior: allow-discrete` in
+  // modern browsers; older browsers fall back to visibility + animation.
+  display: none;
+  block-size: 100%;
+  inline-size: 100%;
+  transform: translateX(0);
+  transition-behavior: allow-discrete;
+  transition-duration: $duration-moderate-01;
+  transition-property: display, opacity, transform;
+
+  // Open state — entrance animation (slides in from the right)
+  &--open {
+    display: flex;
+    flex-direction: column;
+    animation: add-select-item-panel-entrance $duration-moderate-01
+      motion(entrance, productive) forwards;
+
+    // Modern browsers: fade + slide from right on first paint
+    @starting-style {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+
+    // Reduced motion: fade only
+    @media (prefers-reduced-motion) {
+      animation: add-select-item-panel-entrance-reduced $duration-moderate-01
+        motion(entrance, productive) forwards;
+
+      @starting-style {
+        opacity: 0;
+        transform: translateX(0);
+      }
     }
   }
 

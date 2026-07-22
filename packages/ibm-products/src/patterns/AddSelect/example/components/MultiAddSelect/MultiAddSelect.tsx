@@ -321,6 +321,7 @@ export const MultiAddSelect = forwardRef<HTMLDivElement, MultiAddSelectProps>(
               <Tearsheet.SummaryContent isFlush>
                 {infoPanel.show && infoPanel.item ? (
                   <AddSelect.ItemPanel
+                    open
                     title="Item details"
                     item={infoPanel.item}
                     onClose={handleCloseInfo}

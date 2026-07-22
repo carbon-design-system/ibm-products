@@ -66,6 +66,7 @@
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
+    "@carbon/charts-react": "^1.27.16",
     "@carbon/ibm-products-utilities": "workspace:*",
     "@carbon/styles": "^1.110.1",
     "@figma/code-connect": "^1.4.0",

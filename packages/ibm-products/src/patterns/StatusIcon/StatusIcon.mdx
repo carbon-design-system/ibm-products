@@ -1,0 +1,87 @@
+import { Story, Canvas } from '@storybook/addon-docs/blocks';
+import * as stories from './StatusIcon.stories';
+
+# StatusIcon
+
+[Carbon status indicator patterns](https://carbondesignsystem.com/patterns/status-indicator-pattern/)
+|
+[Carbon icons documentation](https://react.carbondesignsystem.com/?path=/docs/components-icon)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [What is a Pattern?](#what-is-a-pattern)
+- [Carbon IconIndicator](#carbon-iconindicator)
+- [Getting Started](#getting-started)
+- [Example Usage](#example-usage)
+- [Kind Reference](#kind-reference)
+
+## Overview
+
+The `StatusIcon` pattern is a recipe that provides **full visual and API
+parity** with the `@carbon/ibm-products` `StatusIcon` component. It renders
+Carbon icons directly from `@carbon/react/icons`, giving you the exact same icon
+per `kind` (including `fatal` → `Misuse`, `critical` → `ErrorFilled`, etc.)
+without any extra runtime dependency.
+
+> 💡 Try our
+> [StackBlitz example](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/StatusIcon/example)
+> for a complete implementation.
+
+## What is a Pattern?
+
+Unlike components that are exported from the package, **patterns are recipes**
+that you copy into your codebase and customize to fit your specific needs. This
+approach offers:
+
+- **Full Control**: Modify the code to match your exact requirements
+- **No Breaking Changes**: Updates to the pattern don't affect your
+  implementation
+- **Seamless Customization**: Adapt the pattern without workarounds or prop
+  drilling
+
+## Carbon IconIndicator
+
+Carbon ships a preview component called
+[`Preview_IconIndicator`](https://react.carbondesignsystem.com/?path=/docs/components-iconindicator)
+that covers a small set of common status icons. If that subset meets your needs,
+it is worth considering as an official Carbon primitive.
+
+However, `Preview_IconIndicator` has two notable gaps compared to this pattern:
+
+- **Fewer kinds** — it does not cover kinds in StatusIcon (`fatal`,
+  `in-progress`, `running`, `info`, `pending`, etc.).
+- **Fewer sizes** — it does not expose the `lg` and `xl` size set.
+
+If you need the full range of kinds and sizes, you have two options:
+
+1. **Raise an enhancement request** on the Carbon repository to extend
+   `Preview_IconIndicator` with the missing kinds and sizes.
+2. **Use this pattern** — copy the `StatusIcon` recipe into your codebase for
+   complete control today, without waiting for upstream changes.
+
+## Getting Started
+
+1. **Copy the pattern code** from the
+   [example/components directory](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/StatusIcon/example/components)
+   into your project.
+2. **Install dependencies**: `@carbon/react` (includes `@carbon/react/icons`)
+3. **Import and use** the `StatusIcon` component in your application.
+
+```tsx
+import { StatusIcon } from './components/StatusIcon';
+
+<StatusIcon kind="fatal" size="sm" theme="light" iconDescription="Fatal" />;
+```
+
+## Example Usage
+
+> 💡 Check our
+> [StackBlitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/StatusIcon/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/StatusIcon/example)
+
+<Canvas withSource="none">
+  <Story of={stories.Default} />
+</Canvas>

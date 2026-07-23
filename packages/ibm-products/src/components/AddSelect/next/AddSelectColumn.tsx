@@ -239,7 +239,9 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
           )}
 
           {/* Rows Container */}
-          <div className={`${blockClass}-column__rows`}>{children}</div>
+          <div className={`${blockClass}-column__rows`} role="rowgroup">
+            {children}
+          </div>
         </div>
       </AddSelectContext.Provider>
     );

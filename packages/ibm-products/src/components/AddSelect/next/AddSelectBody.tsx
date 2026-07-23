@@ -392,6 +392,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
             className={cx(`${blockClass}-list-body`, {
               [`${blockClass}-list-body--horizontal`]: layout === 'horizontal',
             })}
+            role="rowgroup"
           >
             {children}
           </div>

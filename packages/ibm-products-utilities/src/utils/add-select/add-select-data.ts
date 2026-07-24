@@ -13,11 +13,33 @@ import { ReactNode } from 'react';
 export type ItemStatus = 'checked' | 'unchecked' | 'indeterminate';
 
 /**
- * Interface for item details metadata
+ * A single labelled detail entry for display in `defaultContent()`.
+ * Use this form when you want `AddSelectItemPanel` or
+ * `AddSelectSelectionSummaryItem` to render key-value pairs automatically.
  */
-export interface ItemDetails {
-  [key: string]: unknown;
+export interface ItemDetailEntry {
+  /** User-visible label shown as the row heading */
+  label: string;
+  /** Value displayed beneath the label */
+  value: string | number;
 }
+
+/**
+ * Item details metadata.
+ *
+ * **Preferred form** — labelled array consumed by `defaultContent()`:
+ * ```ts
+ * itemDetails: [
+ *   { label: 'Category', value: 'Analytics' },
+ *   { label: 'Owner',    value: 'Marketing Team' },
+ * ]
+ * ```
+ *
+ * **Legacy form** — arbitrary record for custom renderers that access
+ * named keys directly (e.g. `item.itemDetails.description`). Not rendered
+ * by `defaultContent()`.
+ */
+export type ItemDetails = ItemDetailEntry[] | Record<string, unknown>;
 
 /**
  * Interface for hierarchical data items

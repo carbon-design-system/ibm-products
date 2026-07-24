@@ -649,9 +649,7 @@ export const AddSingleItemFromHierarchy = forwardRef<
               <Tearsheet.SummaryContent isFlush>
                 <AddSelect.SelectionSummary
                   title={sidePanelTitle}
-                  showCount={false}
-                  selectedItems={selectedItem ? [selectedItem] : []}
-                  renderItem={renderSidePanelContent}
+                  selectedItemCount={selectedItem ? 1 : 0}
                   emptyState={
                     <div className={`${blockClass}__empty-state`}>
                       <p className={`${blockClass}__empty-state-text`}>
@@ -659,7 +657,11 @@ export const AddSingleItemFromHierarchy = forwardRef<
                       </p>
                     </div>
                   }
-                />
+                >
+                  {selectedItem
+                    ? renderSidePanelContent(selectedItem)
+                    : undefined}
+                </AddSelect.SelectionSummary>
               </Tearsheet.SummaryContent>
             </Tearsheet.Body>
 

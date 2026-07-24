@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.91.0-rc.0`
+## `@carbon/ibm-products-styles@2.91.0`
 ### Features :rocket:
 - feat(Card): implement card footer and primitives (#9659)
 - feat(Card): implement composable `Card` header primitives (#9632)

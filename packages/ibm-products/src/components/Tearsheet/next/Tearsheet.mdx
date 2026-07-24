@@ -18,7 +18,7 @@ import { breakpoints } from '@carbon/layout';`,
 
 export const customFunctionArr = [
   [
-    `const variant = ['wide', 'narrow', 'wide'],decorator=1,influencerWidth='',summaryContentWidth='',verticalGap='';
+    `const decorator=undefined,isFlush=undefined,influencerWidth=undefined,keepMounted=undefined,summaryContentWidth=undefined,verticalGap=undefined,variant=['wide', 'wide', 'wide'],hideCloseButton=undefined,disableHeaderCollapse=undefined,closeIconDescription=undefined, context={};
     const useMatchMedia = (query) => {
   const [matches, setMatches] = React.useState(() => {
     if (typeof window !== 'undefined') {
@@ -500,9 +500,21 @@ To render tabs, wrap the entire Tearsheet in `<Tabs></Tabs>`. You can render
 By default Tearsheet doesn't provide stepping, but you easily realize it using
 the `<StepProvider>`
 [utility](https://ibm-products.carbondesignsystem.com/?path=/docs/patterns-step-flows--overview)
-as demonstrated below
+as demonstrated below.
 
-<Canvas of={stories.withSteps} />
+<Canvas
+  of={stories.withSteps}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        window.open(
+          'https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/TearsheetWithSteps/example',
+          '_blank'
+        ),
+    },
+  ]}
+/>
 
 ## Narrow
 

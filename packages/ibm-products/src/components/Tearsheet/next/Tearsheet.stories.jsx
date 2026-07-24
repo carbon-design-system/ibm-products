@@ -37,7 +37,7 @@ import {
   Information,
   RightPanelClose,
 } from '@carbon/react/icons';
-import { TearsheetWithSteps } from './_story-assets/StepTearsheet';
+import { TearsheetWithSteps } from '../../../patterns/TearsheetWithSteps/example/components/StepTearsheet';
 import { StepProvider } from '@carbon/utilities-react';
 import { StackProvider } from './StackContext';
 import mdx from './Tearsheet.mdx';

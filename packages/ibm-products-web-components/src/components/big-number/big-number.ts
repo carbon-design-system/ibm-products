@@ -155,11 +155,11 @@ class CDSBigNumber extends LitElement {
     }
 
     return html`
-      <div class=${bigNumberClasses}>
+      <figure class=${bigNumberClasses}>
         <!-- Label and tooltip  -->
         <span class="${blockClass}__row">
           <slot name="label">
-            <h4 class="${blockClass}__label">${label}</h4>
+            <figcaption class="${blockClass}__label">${label}</figcaption>
           </slot>
         </span>
         <span class="${blockClass}__row" role="math">
@@ -196,7 +196,7 @@ class CDSBigNumber extends LitElement {
             <slot name="icon-button"></slot>
           </span>
         </span>
-      </div>
+      </figure>
     `;
   }
 

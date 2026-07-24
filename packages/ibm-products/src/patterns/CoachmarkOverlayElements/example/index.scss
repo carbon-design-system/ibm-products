@@ -53,7 +53,7 @@ $block-class: #{$prefix}--coachmark__next;
 
 //carousel
 .exampleCarouselWrapper {
-  block-size: 60px;
+  block-size: $spacing-10;
 }
 
 // Fix for carousel views blocking button clicks in Storybook

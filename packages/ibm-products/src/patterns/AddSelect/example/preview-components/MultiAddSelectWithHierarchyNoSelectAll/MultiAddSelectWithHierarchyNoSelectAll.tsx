@@ -79,8 +79,12 @@ const hierarchicalItems: AddSelectItem[] = [
   },
 ];
 
-export const MultiAddSelectWithHierarchyNoSelectAllPreview = () => {
-  const [open, setOpen] = useState(false);
+export const MultiAddSelectWithHierarchyNoSelectAllPreview = ({
+  initialOpen = false,
+}: {
+  initialOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(initialOpen);
 
   const handleOpen = () => {
     setOpen(true);

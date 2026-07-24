@@ -1,0 +1,510 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities';
+
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
+
+// Base card styles
+.#{$block-class-next} {
+  position: relative;
+  border: 1px solid $border-subtle-01;
+  border-radius: 0; // Carbon cards don't have border radius by default
+  background-color: $layer-01;
+  color: $text-primary;
+}
+
+// Clickable card styles
+.#{$block-class-next}--clickable {
+  cursor: pointer;
+  transition: background-color $duration-fast-02 motion(standard, productive);
+
+  &:hover {
+    background-color: $layer-hover-01;
+  }
+
+  &:focus {
+    @include utilities.focus-outline('outline');
+  }
+
+  &:active {
+    background-color: $layer-active-01;
+  }
+}
+
+// Disabled state
+.#{$block-class-next}--disabled {
+  border-color: $border-disabled;
+  background-color: $layer-01;
+  color: $text-disabled;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// Header styles
+.#{$block-class-next}__header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-01; // 2px gap between label, title, and caption
+}
+
+// Body styles
+.#{$block-class-next}__body {
+  @include type-style('body-compact-01');
+
+  margin-block: $spacing-05;
+  margin-block-start: 0;
+  margin-inline: $spacing-05;
+}
+
+// When body is the first child (no header), restore top padding
+.#{$block-class-next} > .#{$block-class-next}__body:first-child {
+  margin-block-start: $spacing-05;
+}
+
+// ─── Footer ────────────────────────────────────────────────────
+// Base: padded, no border — the raw-content (non-action) default.
+.#{$block-class-next}__footer {
+  display: flex;
+  align-items: center;
+  padding: $spacing-05;
+}
+
+// Action-set layout: CardAction children present.
+// Override base with no padding, overflow clip, auto border, 1px gap.
+.#{$block-class-next}__footer:has(> .#{$block-class-next}__action) {
+  overflow: hidden;
+  padding: 0;
+  border-block-start: 1px solid $border-subtle;
+  gap: 1px;
+}
+
+// Text/secondary actions stretch to fill available space.
+.#{$block-class-next}__footer
+  > .#{$block-class-next}__action:not(
+    :has(.#{carbon-config.$prefix}--btn--icon-only)
+  ) {
+  flex: 1 0 0;
+  min-inline-size: 0;
+
+  > .#{carbon-config.$prefix}--btn,
+  > * > .#{carbon-config.$prefix}--btn {
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+}
+
+// Icon-only actions are fixed-width and always right-aligned.
+// margin-inline-start: auto pushes them to the right edge regardless of
+// what precedes them — text action, custom content, or nothing.
+.#{$block-class-next}__footer
+  > .#{$block-class-next}__action:has(
+    .#{carbon-config.$prefix}--btn--icon-only
+  ) {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+}
+
+// Consecutive icon-only actions: only the first gets the auto margin,
+// the rest follow naturally in the flex row.
+.#{$block-class-next}__footer
+  > .#{$block-class-next}__action:has(.#{carbon-config.$prefix}--btn--icon-only)
+  + .#{$block-class-next}__action:has(
+    .#{carbon-config.$prefix}--btn--icon-only
+  ) {
+  margin-inline-start: 0;
+}
+
+// Action wrapper styles
+.#{$block-class-next}__action {
+  display: inline-flex;
+}
+
+// Header primitive components
+
+// Header Media styles (icon slot)
+.#{$block-class-next}__header-media {
+  display: flex;
+  flex-shrink: 0; // Don't shrink
+  align-items: flex-start; // Top-align content
+  justify-content: flex-start; // Left-align content
+  block-size: auto; // Auto height based on content
+  inline-size: auto; // Auto width based on content
+  margin-block-end: $spacing-05; // 16px bottom
+  margin-block-start: $spacing-05; // 16px top
+  margin-inline-end: $spacing-05; // 16px right
+  margin-inline-start: $spacing-05; // 16px left
+  max-block-size: $spacing-10; // 64px max height for content
+}
+
+// Inline header media margin (when NOT the first child, i.e., not header media slot)
+// This ensures inline icons align with label/title/caption text
+.#{$block-class-next}__header
+  > .#{$block-class-next}__header-media:not(:first-child) {
+  margin-inline-start: $spacing-05; // 16px left to align with text content
+}
+
+// When header media slot is followed by actions, create row layout
+.#{$block-class-next}__header:has(
+    > .#{$block-class-next}__header-media:first-child
+      + .#{$block-class-next}__actions
+  ) {
+  > .#{$block-class-next}__header-media:first-child {
+    // Header media on the left, remove right margin
+    margin-inline-end: 0;
+  }
+
+  > .#{$block-class-next}__actions {
+    // Actions on the right
+    margin-inline-start: auto;
+  }
+}
+
+// Media styles (uses Carbon AspectRatio)
+.#{$block-class-next}__media {
+  inline-size: 100%;
+}
+
+// ──────────────────────────────────────────────────────────────
+// Horizontal layout
+// ──────────────────────────────────────────────────────────────
+// Card root: side-by-side flex row
+.#{$block-class-next}--horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+// Media column in horizontal mode.
+// Width is driven by the --ibm-products--card-next--media-width custom property
+// (set by the mediaWidth prop, default 33.33%).
+// Height stretches to match the content column via align-self: stretch.
+.#{$block-class-next}__media--horizontal {
+  overflow: hidden;
+  flex-basis: var(
+    --#{c4p-settings.$pkg-prefix}--card-next--media-width,
+    33.33%
+  );
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+// Right-hand content column: Header/Body/Footer wrapped in __content, stacks vertically.
+.#{$block-class-next}--horizontal > .#{$block-class-next}__content {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+// Body grows to fill remaining space when present.
+.#{$block-class-next}--horizontal
+  > .#{$block-class-next}__content
+  > .#{$block-class-next}__body {
+  flex: 1 0 auto;
+}
+
+// Footer always pins to the bottom edge, whether or not a body is present.
+.#{$block-class-next}--horizontal
+  > .#{$block-class-next}__content
+  > .#{$block-class-next}__footer {
+  margin-block-start: auto;
+}
+
+// Label styles
+.#{$block-class-next}__label {
+  @include type-style('label-01');
+
+  color: $text-secondary;
+
+  margin-block-start: $spacing-05; // 16px top
+  margin-inline: $spacing-05; // 16px left and right
+
+  &--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// Remove all inline margins from label when inside title-content (with TitleMedia)
+.#{$block-class-next}__title-content > .#{$block-class-next}__label {
+  margin-inline: 0;
+}
+
+// Title styles
+.#{$block-class-next}__title {
+  color: $text-primary;
+  margin-inline: $spacing-05; // 16px left and right
+
+  &--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &--truncate-multi {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+  }
+}
+
+// Remove all inline margins from title when inside title-content (with TitleMedia)
+.#{$block-class-next}__title-content > .#{$block-class-next}__title {
+  margin-inline: 0;
+}
+
+// Title Media styles (icon alongside label+title+caption block)
+.#{$block-class-next}__title-media {
+  display: flex;
+  flex-shrink: 0; // Don't shrink
+  align-items: center; // Center content within the media container
+  justify-content: center; // Center content
+  margin-block-start: $spacing-05; // 16px top margin to align with label
+  margin-inline-start: $spacing-05; // 16px left padding
+  max-block-size: $spacing-10; // 64px max height
+}
+
+// When header contains title-media, make it a flex row container
+// Outer wrapper for TitleMedia + title content (horizontal layout)
+.#{$block-class-next}__header-content {
+  display: flex;
+  flex: 1; // Take remaining space
+  flex-direction: row; // Horizontal: TitleMedia on left, title-content on right
+  align-items: flex-start; // Top-align
+  gap: $spacing-05; // 16px gap between TitleMedia and title-content
+  min-inline-size: 0; // Allow content to shrink and wrap
+}
+
+// Inner wrapper for label, title, caption (vertical stack)
+.#{$block-class-next}__title-content {
+  display: flex;
+  flex: 1; // Take remaining space
+  flex-direction: column; // Stack label, title, caption vertically
+  gap: $spacing-01; // 2px gap between label, title, and caption
+  min-inline-size: 0; // Allow content to shrink and wrap
+  padding-inline-end: $spacing-05; // 16px right padding only
+}
+
+// Expressive density uses larger heading
+.#{$block-class-next}--expressive .#{$block-class-next}__title {
+  @include type-style('heading-03');
+}
+
+// Productive density uses compact heading (must come after expressive to override)
+.#{$block-class-next}--productive .#{$block-class-next}__title {
+  @include type-style('heading-compact-02');
+}
+
+// Title with leading icon layout
+.#{$block-class-next}__title--with-start-icon {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-03; // 8px between icon and text per design
+}
+
+// Title with trailing icon - no flex, icon flows inline with text
+.#{$block-class-next}__title--with-end-icon {
+  // No display: flex - let content flow naturally inline
+  // Ensure inline content can flow
+  display: block;
+}
+
+// Title leading icon wrapper
+.#{$block-class-next}__title-start-icon {
+  display: flex;
+  flex-shrink: 0; // Prevent icon from shrinking
+  margin-block: $spacing-01; // 2px top/bottom padding to center with first line of text
+}
+
+// Title trailing icon wrapper - inline element that flows with text
+.#{$block-class-next}__title-end-icon {
+  display: inline-flex; // Inline flex to flow with text like a character
+  align-items: center; // Center icon vertically within its line
+  margin-inline-start: $spacing-03; // 8px gap before icon
+  vertical-align: middle; // Align with text baseline
+}
+
+// Conditional margin for title based on siblings
+// When title is standalone (no label before it), add top margin
+.#{$block-class-next}__header > .#{$block-class-next}__title:first-child,
+.#{$block-class-next}__header
+  > .#{$block-class-next}__header-media:first-child
+  + .#{$block-class-next}__title,
+.#{$block-class-next}__header
+  > .#{$block-class-next}__media:first-child
+  + .#{$block-class-next}__title,
+.#{$block-class-next}__title-content
+  > .#{$block-class-next}__title:first-child {
+  margin-block-start: $spacing-05; // 16px top
+}
+
+// When title is standalone (no caption after it), add bottom margin
+// This applies when title is last child OR when followed by actions (but not caption)
+.#{$block-class-next}__header > .#{$block-class-next}__title:last-child,
+.#{$block-class-next}__title-content > .#{$block-class-next}__title:last-child,
+.#{$block-class-next}__title:not(:has(+ .#{$block-class-next}__caption)) {
+  margin-block-end: $spacing-05; // 16px bottom
+}
+
+// Caption styles
+.#{$block-class-next}__caption {
+  @include type-style('label-01');
+
+  color: $text-secondary;
+
+  margin-block-end: $spacing-05; // 16px bottom
+  margin-inline: $spacing-05; // 16px left and right
+
+  &--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// Remove all inline margins from caption when inside title-content (with TitleMedia)
+.#{$block-class-next}__title-content > .#{$block-class-next}__caption {
+  margin-inline: 0;
+}
+
+// Actions container styles
+.#{$block-class-next}__actions {
+  position: absolute;
+  display: inline-flex; // Use inline-flex for overflow handler
+  align-items: center;
+  justify-content: flex-end; // Right-align actions
+  block-size: $spacing-07; // 32px default height
+  gap: $spacing-02;
+  inline-size: 50%; // Limit actions to 50% of available header space per design
+  inset-block-start: $spacing-03; // 16px from top
+  inset-inline-end: $spacing-03; // 16px from right
+  max-inline-size: 50%; // Enforce 50% maximum width
+}
+
+// When actions are in header with header media slot, add bottom margin
+.#{$block-class-next}__header:has(
+    > .#{$block-class-next}__header-media:first-child
+  )
+  .#{$block-class-next}__actions {
+  margin-block-end: $spacing-07; // 32px gap below actions to title
+}
+
+// Action wrapper styles
+.#{$block-class-next}__action {
+  display: inline-flex;
+}
+
+// ──────────────────────────────────────────────────────────────
+// AI Label Support
+// ──────────────────────────────────────────────────────────────
+
+// AI Label - Apply blue gradient border when decorator is present
+.#{$block-class-next}--has-ai-label {
+  @include utilities.ai-popover-gradient('default', 0, 'layer');
+
+  border: 1px solid transparent;
+  box-shadow:
+    inset 0 -80px 70px -65px $ai-inner-shadow,
+    0 4px 10px 2px $ai-drop-shadow;
+}
+
+// Decorator (AI Label) positioning - top-right corner
+.#{$block-class-next}__decorator {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  block-size: $spacing-07; // 32px height to match actions
+  inset-block-start: $spacing-03; // 16px from top (aligned with actions)
+  inset-inline-end: $spacing-03; // 8px from right edge
+}
+
+// Adjust title padding when AI label is present to prevent text overlap
+.#{$block-class-next}--has-ai-label .#{$block-class-next}__title {
+  // Add right padding to prevent title text from overlapping with AI label
+  // AI label width (~32px) + spacing (8px) + buffer (8px) = 48px
+  padding-inline-end: calc($spacing-07 + $spacing-05);
+}
+
+// When both actions and AI label are present, increase title padding
+// to account for the action group width
+.#{$block-class-next}--has-ai-label:has(.#{$block-class-next}__actions)
+  .#{$block-class-next}__title {
+  // Actions (2-3 buttons ~80px) + gaps + AI label (32px) + spacing = ~120px
+  // Using $spacing-13 (104px) as a reasonable max to prevent excessive padding
+  padding-inline-end: $spacing-13;
+}
+
+// Adjust label padding when AI label is present
+.#{$block-class-next}--has-ai-label .#{$block-class-next}__label {
+  padding-inline-end: calc($spacing-07 + $spacing-05);
+}
+
+// When both actions and AI label are present, increase label padding
+.#{$block-class-next}--has-ai-label:has(.#{$block-class-next}__actions)
+  .#{$block-class-next}__label {
+  padding-inline-end: $spacing-13;
+}
+
+// Adjust caption padding when AI label is present
+.#{$block-class-next}--has-ai-label .#{$block-class-next}__caption {
+  padding-inline-end: calc($spacing-07 + $spacing-05);
+}
+
+// When both actions and AI label are present, increase caption padding
+.#{$block-class-next}--has-ai-label:has(.#{$block-class-next}__actions)
+  .#{$block-class-next}__caption {
+  padding-inline-end: $spacing-13;
+}
+
+// Adjust actions positioning when AI label is present
+.#{$block-class-next}--has-ai-label .#{$block-class-next}__actions {
+  // Position actions to the left of AI label with proper spacing per Figma
+  // AI label right edge spacing (12px) + AI label width (24px) + gap (12px) = 48px
+  // Using spacing tokens: $spacing-03 + $spacing-06 + $spacing-03 = 48px
+  inset-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
+}
+
+// When AI label is present and title has no caption after it, add bottom margin
+// This prevents title from overlapping with actions
+.#{$block-class-next}--has-ai-label
+  .#{$block-class-next}__header
+  > .#{$block-class-next}__title:not(:has(+ .#{$block-class-next}__caption)) {
+  margin-block-end: $spacing-05; // 16px bottom to prevent overlap with actions
+}
+
+// Hover state for clickable cards with AI label
+.#{$block-class-next}__clickable.#{$block-class-next}--has-ai-label::before {
+  @include utilities.ai-popover-gradient('hover', 0, 'layer');
+
+  position: absolute;
+  display: block;
+  block-size: 100%;
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+  content: '';
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  opacity: 0;
+  transition: opacity $duration-fast-02 motion(standard, productive);
+}
+
+.#{$block-class-next}__clickable.#{$block-class-next}--has-ai-label:hover::before {
+  opacity: 1;
+}

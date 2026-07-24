@@ -37,7 +37,7 @@ import {
   Information,
   RightPanelClose,
 } from '@carbon/react/icons';
-import { TearsheetWithSteps } from './_story-assets/StepTearsheet';
+import { TearsheetWithSteps } from '../../../patterns/TearsheetWithSteps/example/components/StepTearsheet';
 import { StepProvider } from '@carbon/utilities-react';
 import { StackProvider } from './StackContext';
 import mdx from './Tearsheet.mdx';
@@ -177,19 +177,23 @@ const description = (
 /* * * * * * * * * * * * * * | STORIES | * * * * * * * * * * * * * * */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-export const Default = ({
-  decorator,
-  isFlush,
-  influencerWidth,
-  keepMounted,
-  summaryContentWidth,
-  verticalGap,
-  variant,
-  hideCloseButton,
-  disableHeaderCollapse,
-  closeIconDescription,
-}) => {
-  const [open, setOpen] = useState(false);
+export const Default = (
+  {
+    decorator,
+    isFlush,
+    influencerWidth,
+    keepMounted,
+    summaryContentWidth,
+    verticalGap,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
   const summaryPanelTriggerRef = useRef(null);
@@ -225,6 +229,10 @@ export const Default = ({
           hideCloseButton={hideCloseButton}
           disableHeaderCollapse={disableHeaderCollapse}
           closeIconDescription={closeIconDescription}
+          onHeaderCollapse={(collapsed) => {
+            setIsCollapsed(collapsed);
+            console.log('onHeaderCollapse:', collapsed);
+          }}
         >
           <Tearsheet.HeaderContent
             open
@@ -237,17 +245,17 @@ export const Default = ({
                 menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
               >
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 1
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 2
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 3
                   </Button>
                 </Tearsheet.HeaderActionItem>
@@ -416,19 +424,23 @@ export const Default = ({
     </>
   );
 };
-export const WithInfluencer = ({
-  decorator,
-  isFlush,
-  influencerWidth,
-  keepMounted,
-  summaryContentWidth,
-  verticalGap,
-  variant,
-  hideCloseButton,
-  disableHeaderCollapse,
-  closeIconDescription,
-}) => {
-  const [open, setOpen] = useState(false);
+export const WithInfluencer = (
+  {
+    decorator,
+    isFlush,
+    influencerWidth,
+    keepMounted,
+    summaryContentWidth,
+    verticalGap,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const influencerPanelTriggerRef = useRef(null);
   const currentStep = 1;
@@ -466,6 +478,7 @@ export const WithInfluencer = ({
           hideCloseButton={hideCloseButton}
           disableHeaderCollapse={disableHeaderCollapse}
           closeIconDescription={closeIconDescription}
+          onHeaderCollapse={(collapsed) => setIsCollapsed(collapsed)}
         >
           <Tearsheet.HeaderContent
             open
@@ -479,17 +492,17 @@ export const WithInfluencer = ({
                 menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
               >
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 1
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 2
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 3
                   </Button>
                 </Tearsheet.HeaderActionItem>
@@ -652,19 +665,23 @@ export const WithInfluencer = ({
     </>
   );
 };
-export const WithTabs = ({
-  decorator,
-  isFlush,
-  influencerWidth,
-  keepMounted,
-  summaryContentWidth,
-  verticalGap,
-  variant,
-  hideCloseButton,
-  disableHeaderCollapse,
-  closeIconDescription,
-}) => {
-  const [open, setOpen] = useState(false);
+export const WithTabs = (
+  {
+    decorator,
+    isFlush,
+    influencerWidth,
+    keepMounted,
+    summaryContentWidth,
+    verticalGap,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
   const isSm = useMatchMedia(smMediaQuery) || variant === 'narrow';
@@ -696,6 +713,7 @@ export const WithTabs = ({
             hideCloseButton={hideCloseButton}
             disableHeaderCollapse={disableHeaderCollapse}
             closeIconDescription={closeIconDescription}
+            onHeaderCollapse={(collapsed) => setIsCollapsed(collapsed)}
           >
             <Tearsheet.HeaderContent
               open
@@ -707,17 +725,17 @@ export const WithTabs = ({
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
                 >
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 1
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 2
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 3
                     </Button>
                   </Tearsheet.HeaderActionItem>
@@ -802,17 +820,19 @@ export const WithTabs = ({
     </>
   );
 };
-
-export const withSteps = ({
-  decorator,
-  variant,
-  hideCloseButton,
-  disableHeaderCollapse,
-  closeIconDescription,
-  verticalGap,
-  keepMounted,
-}) => {
-  const [open, setOpen] = useState(false);
+export const withSteps = (
+  {
+    decorator,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+    verticalGap,
+    keepMounted,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const launcherButtonRef = useRef(null);
   return (
     <StepProvider>
@@ -841,17 +861,19 @@ export const withSteps = ({
     </StepProvider>
   );
 };
-
-export const withStepsAndHorizontalProgressIndicator = ({
-  decorator,
-  variant,
-  hideCloseButton,
-  disableHeaderCollapse,
-  closeIconDescription,
-  verticalGap,
-  keepMounted,
-}) => {
-  const [open, setOpen] = useState(false);
+export const withStepsAndHorizontalProgressIndicator = (
+  {
+    decorator,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+    verticalGap,
+    keepMounted,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const launcherButtonRef = useRef(null);
   return (
     <StepProvider>
@@ -881,15 +903,19 @@ export const withStepsAndHorizontalProgressIndicator = ({
     </StepProvider>
   );
 };
-export const narrowTearsheet = ({
-  decorator,
-  isFlush,
-  hideCloseButton,
-  disableHeaderCollapse,
-  closeIconDescription,
-  keepMounted,
-}) => {
-  const [open, setOpen] = useState(false);
+export const narrowTearsheet = (
+  {
+    decorator,
+    isFlush,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+    keepMounted,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
   const [influencerPanelOpen, setInfluencerPanelOpen] = useState(false);
   const launcherButtonRef = useRef(null);
@@ -923,6 +949,7 @@ export const narrowTearsheet = ({
             hideCloseButton={hideCloseButton}
             disableHeaderCollapse={disableHeaderCollapse}
             closeIconDescription={closeIconDescription}
+            onHeaderCollapse={(collapsed) => setIsCollapsed(collapsed)}
           >
             <Tearsheet.HeaderContent
               open
@@ -934,17 +961,17 @@ export const narrowTearsheet = ({
                   menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
                 >
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 1
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 2
                     </Button>
                   </Tearsheet.HeaderActionItem>
                   <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                    <Button kind="tertiary" size="sm">
+                    <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                       Action 3
                     </Button>
                   </Tearsheet.HeaderActionItem>
@@ -1162,18 +1189,22 @@ export const narrowTearsheet = ({
     </>
   );
 };
-
-export const StackingTearsheet = ({
-  variant = ['wide', 'wide', 'wide'],
-  decorator,
-  isFlush,
-  hideCloseButton,
-  disableHeaderCollapse,
-  closeIconDescription,
-}) => {
-  const [open1, setOpen1] = useState(false);
+export const StackingTearsheet = (
+  {
+    variant = ['wide', 'wide', 'wide'],
+    decorator,
+    isFlush,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+  },
+  context
+) => {
+  const [open1, setOpen1] = useState(context?.viewMode !== 'docs');
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const [isCollapsed1, setIsCollapsed1] = useState(false);
+  const [isCollapsed2, setIsCollapsed2] = useState(false);
   const launcherButtonRef1 = useRef(null);
   const launcherButtonRef2 = useRef(null);
   const launcherButtonRef3 = useRef(null);
@@ -1216,6 +1247,7 @@ export const StackingTearsheet = ({
             hideCloseButton={hideCloseButton}
             disableHeaderCollapse={disableHeaderCollapse}
             closeIconDescription={closeIconDescription}
+            onHeaderCollapse={(collapsed) => setIsCollapsed1(collapsed)}
           >
             <Tearsheet.HeaderContent
               headerActions={
@@ -1226,7 +1258,7 @@ export const StackingTearsheet = ({
                     <Button
                       ref={launcherButtonRef2}
                       kind="tertiary"
-                      size="sm"
+                      size={isCollapsed1 ? 'xs' : 'sm'}
                       onClick={() => {
                         setOpen2(true);
                       }}
@@ -1338,6 +1370,7 @@ export const StackingTearsheet = ({
             hideCloseButton={hideCloseButton}
             disableHeaderCollapse={disableHeaderCollapse}
             closeIconDescription={closeIconDescription}
+            onHeaderCollapse={(collapsed) => setIsCollapsed2(collapsed)}
           >
             <Tearsheet.HeaderContent
               label="Customer data"
@@ -1351,7 +1384,7 @@ export const StackingTearsheet = ({
                     <Button
                       ref={launcherButtonRef3}
                       kind="tertiary"
-                      size="sm"
+                      size={isCollapsed2 ? 'xs' : 'sm'}
                       onClick={() => {
                         setOpen3(true);
                       }}
@@ -1555,7 +1588,6 @@ export const StackingTearsheet = ({
     </>
   );
 };
-
 export const stackingWithDifferentSizes = () => (
   <StackingTearsheet variant={['wide', 'narrow', 'wide']} />
 );
@@ -1563,19 +1595,23 @@ export const stackingNarrowTearsheets = () => (
   <StackingTearsheet variant={['narrow', 'narrow', 'narrow']} />
 );
 
-export const WithCustomFooterActions = ({
-  decorator,
-  isFlush,
-  influencerWidth,
-  keepMounted,
-  summaryContentWidth,
-  verticalGap,
-  variant,
-  hideCloseButton,
-  disableHeaderCollapse,
-  closeIconDescription,
-}) => {
-  const [open, setOpen] = useState(false);
+export const WithCustomFooterActions = (
+  {
+    decorator,
+    isFlush,
+    influencerWidth,
+    keepMounted,
+    summaryContentWidth,
+    verticalGap,
+    variant,
+    hideCloseButton,
+    disableHeaderCollapse,
+    closeIconDescription,
+  },
+  context
+) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const launcherButtonRef = useRef(null);
   const [summaryPanelOpen, setSummaryPanelOpen] = useState(false);
   const smMediaQuery = `(max-width: ${breakpoints.md.width})`;
@@ -1610,6 +1646,7 @@ export const WithCustomFooterActions = ({
           hideCloseButton={hideCloseButton}
           disableHeaderCollapse={disableHeaderCollapse}
           closeIconDescription={closeIconDescription}
+          onHeaderCollapse={(collapsed) => setIsCollapsed(collapsed)}
         >
           <Tearsheet.HeaderContent
             open
@@ -1622,17 +1659,17 @@ export const WithCustomFooterActions = ({
                 menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
               >
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 1
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 2">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 2
                   </Button>
                 </Tearsheet.HeaderActionItem>
                 <Tearsheet.HeaderActionItem overflowItemLabel="Action 3">
-                  <Button kind="tertiary" size="sm">
+                  <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
                     Action 3
                   </Button>
                 </Tearsheet.HeaderActionItem>

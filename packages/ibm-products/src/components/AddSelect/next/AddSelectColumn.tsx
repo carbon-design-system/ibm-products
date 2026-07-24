@@ -30,7 +30,7 @@ import { blockClass, AddSelectContext } from './context';
  * ----------------
  * A composable column component that wraps AddSelectRow items.
  * Provides optional search functionality with custom actions slot.
- * Lives inside AddSelectContent and can have multiple instances.
+ * Lives inside AddSelect.Body and can have multiple instances.
  */
 
 export interface AddSelectColumnProps {

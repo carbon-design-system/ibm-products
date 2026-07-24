@@ -18,7 +18,7 @@ import { breakpoints } from '@carbon/layout';`,
 
 export const customFunctionArr = [
   [
-    `const variant = ['wide', 'narrow', 'wide'],decorator=1,influencerWidth='',summaryContentWidth='',verticalGap='';
+    `const decorator=undefined,isFlush=undefined,influencerWidth=undefined,keepMounted=undefined,summaryContentWidth=undefined,verticalGap=undefined,variant=['wide', 'wide', 'wide'],hideCloseButton=undefined,disableHeaderCollapse=undefined,closeIconDescription=undefined, context={};
     const useMatchMedia = (query) => {
   const [matches, setMatches] = React.useState(() => {
     if (typeof window !== 'undefined') {
@@ -341,6 +341,38 @@ pass `PageHeader.ScrollButton` to the `scroller` prop.
 </Tearsheet.Header>
 ```
 
+### Collapsed header
+
+When the user scrolls the main content, the header collapses to a fixed height
+of **40px**. In this reduced state, action buttons inside
+`Tearsheet.HeaderActionItem` must switch to `size="xs"` to fit the available
+space.
+
+Use the `onHeaderCollapse` callback on `Tearsheet.Header` to react to the change
+and resize your buttons accordingly:
+
+```jsx
+const [isCollapsed, setIsCollapsed] = useState(false);
+
+<Tearsheet.Header onHeaderCollapse={(collapsed) => setIsCollapsed(collapsed)}>
+  <Tearsheet.HeaderContent
+    headerActions={
+      <Tearsheet.HeaderActions>
+        <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+          <Button kind="tertiary" size={isCollapsed ? 'xs' : 'sm'}>
+            Action 1
+          </Button>
+        </Tearsheet.HeaderActionItem>
+      </Tearsheet.HeaderActions>
+    }
+  />
+</Tearsheet.Header>;
+```
+
+> **Note:** Only buttons inside `Tearsheet.HeaderActionItem` need this
+> adjustment. The overflow `MenuButton` managed by `Tearsheet.HeaderActions`
+> already handles its own sizing automatically.
+
 ## Tearsheet.Footer
 
 The Footer component supports two approaches for rendering action buttons:
@@ -468,9 +500,21 @@ To render tabs, wrap the entire Tearsheet in `<Tabs></Tabs>`. You can render
 By default Tearsheet doesn't provide stepping, but you easily realize it using
 the `<StepProvider>`
 [utility](https://ibm-products.carbondesignsystem.com/?path=/docs/patterns-step-flows--overview)
-as demonstrated below
+as demonstrated below.
 
-<Canvas of={stories.withSteps} />
+<Canvas
+  of={stories.withSteps}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        window.open(
+          'https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/TearsheetWithSteps/example',
+          '_blank'
+        ),
+    },
+  ]}
+/>
 
 ## Narrow
 

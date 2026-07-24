@@ -22,12 +22,13 @@ const componentName = Coachmark.displayName;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
-const renderCoachmark = ({ ...rest } = {}) =>
+const renderCoachmark = ({ open, ...rest } = {}) =>
   render(
-    <Coachmark {...rest}>
+    <Coachmark open={open} {...rest}>
       <CoachmarkBeacon
         id="CoachmarkBtn"
         label="Show information"
+        buttonProps={{ 'aria-expanded': !!open }}
       ></CoachmarkBeacon>
       <Coachmark.Content aria-label="Coachmark content">
         <Coachmark.ContentHeader
@@ -45,15 +46,16 @@ const renderCoachmark = ({ ...rest } = {}) =>
     </Coachmark>
   );
 
-const renderCoachmarkFloating = ({ ...rest } = {}) =>
+const renderCoachmarkFloating = ({ open, ...rest } = {}) =>
   render(
-    <Coachmark {...rest}>
+    <Coachmark open={open} {...rest}>
       <Button
         id="CoachmarkBtn"
         kind="tertiary"
         size="md"
         label="Show information"
         renderIcon={Crossroads}
+        aria-expanded={!!open}
       >
         Show information
       </Button>
@@ -92,16 +94,19 @@ describe(componentName, () => {
     global.requestAnimationFrame = originalRAF;
   });
   it('renders a component Coachmark', () => {
-    renderCoachmark({ 'data-testid': dataTestId });
-    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
+    const { container } = renderCoachmark({ 'data-testid': dataTestId });
+    const coachmarkWrapper = container.querySelector(`.${blockClass}`);
+    expect(coachmarkWrapper).toBeInTheDocument();
+    expect(coachmarkWrapper).toHaveClass(blockClass);
   });
 
   it('applies className to the containing node', () => {
-    renderCoachmark({
+    const { container } = renderCoachmark({
       className,
       'data-testid': dataTestId,
     });
-    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
+    const coachmarkWrapper = container.querySelector(`.${blockClass}`);
+    expect(coachmarkWrapper).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
@@ -124,12 +129,11 @@ describe(componentName, () => {
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    renderCoachmark({
+    const { container } = renderCoachmark({
       'data-testid': dataTestId,
     });
-    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
-      componentName
-    );
+    const coachmarkWrapper = container.querySelector(`.${blockClass}`);
+    expect(coachmarkWrapper).toHaveDevtoolsAttribute(componentName);
   });
 
   it('Check coachmark can be open by default', () => {
@@ -162,15 +166,15 @@ describe(componentName, () => {
   });
 
   it('changes the beacon position while using position prop ', async () => {
-    renderCoachmark({
+    const { container } = renderCoachmark({
       'data-testid': dataTestId,
       open: true,
       position: { x: 151, y: 155 },
     });
-    const element = screen.getByTestId(dataTestId);
-    expect(element).toBeTruthy();
+    const coachmarkWrapper = container.querySelector(`.${blockClass}`);
+    expect(coachmarkWrapper).toBeTruthy();
     await waitFor(() => {
-      expect(element.style.transform).toBe('translate(151px, 155px)');
+      expect(coachmarkWrapper.style.transform).toBe('translate(151px, 155px)');
     });
   });
 
@@ -290,13 +294,13 @@ describe(componentName, () => {
   });
 
   it('applies floating class when floating prop is true', () => {
-    renderCoachmarkFloating({
+    const { container } = renderCoachmarkFloating({
       'data-testid': dataTestId,
       open: true,
       floating: true,
     });
-    const coachmark = screen.getByTestId(dataTestId);
-    expect(coachmark).toHaveClass(`${blockClass}--floating`);
+    const coachmarkWrapper = container.querySelector(`.${blockClass}`);
+    expect(coachmarkWrapper).toHaveClass(`${blockClass}--floating`);
   });
 
   it('applies buttonProps to CoachmarkBeacon button element', () => {
@@ -339,6 +343,7 @@ describe(componentName, () => {
           size="md"
           label="Show information"
           renderIcon={Crossroads}
+          aria-expanded={true}
         >
           Show information
         </Button>

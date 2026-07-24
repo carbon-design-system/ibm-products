@@ -44,12 +44,16 @@ understand.
     position={{ x: 151, y: 155 }}
     open={isOpen}
     onClose={handleClose}
+    launcherButtonRef={beaconButtonRef}
     {...args}
   >
     <CoachmarkBeacon
-      id="CoachmarkBtn"
       label="Show information"
-      onClick={handleBeaconClick}
+      buttonProps={{
+        id: 'CoachmarkBtn',
+        ref: beaconButtonRef,
+        onClick: handleBeaconClick,
+      }}
     ></CoachmarkBeacon>
     <Coachmark.Content aria-label="Coachmark content" highContrast={true}>
       <Coachmark.ContentHeader

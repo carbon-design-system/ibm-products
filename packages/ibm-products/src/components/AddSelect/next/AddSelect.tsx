@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, ForwardedRef, ReactNode, FC } from 'react';
+import React, { forwardRef, ForwardedRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blockClass, AddSelectContext } from './context';
 import AddSelectBody, { AddSelectBodyProps } from './AddSelectBody';
-import AddSelectContent, { AddSelectContentProps } from './AddSelectContent';
 import AddSelectColumn, { AddSelectColumnProps } from './AddSelectColumn';
 import AddSelectRow, { AddSelectRowProps } from './AddSelectRow';
 import AddSelectSelectionSummary, {
@@ -48,13 +47,24 @@ export interface AddSelectProps {
 export type AddSelectComponentType = React.ForwardRefExoticComponent<
   AddSelectProps & React.RefAttributes<HTMLDivElement>
 > & {
-  Body: FC<AddSelectBodyProps>;
-  Content: FC<AddSelectContentProps>;
-  Column: FC<AddSelectColumnProps>;
-  Row: FC<AddSelectRowProps>;
-  SelectionSummary: FC<AddSelectSelectionSummaryProps>;
-  SelectionSummaryItem: FC<AddSelectSelectionSummaryItemProps>;
-  ItemPanel: FC<AddSelectItemPanelProps>;
+  Body: React.ForwardRefExoticComponent<
+    AddSelectBodyProps & React.RefAttributes<HTMLDivElement>
+  >;
+  Column: React.ForwardRefExoticComponent<
+    AddSelectColumnProps & React.RefAttributes<HTMLDivElement>
+  >;
+  Row: React.ForwardRefExoticComponent<
+    AddSelectRowProps & React.RefAttributes<HTMLDivElement>
+  >;
+  SelectionSummary: React.ForwardRefExoticComponent<
+    AddSelectSelectionSummaryProps & React.RefAttributes<HTMLDivElement>
+  >;
+  SelectionSummaryItem: React.ForwardRefExoticComponent<
+    AddSelectSelectionSummaryItemProps & React.RefAttributes<HTMLDivElement>
+  >;
+  ItemPanel: React.ForwardRefExoticComponent<
+    AddSelectItemPanelProps & React.RefAttributes<HTMLDivElement>
+  >;
 };
 
 /**
@@ -111,7 +121,6 @@ AddSelect.propTypes = {
 };
 
 AddSelect.Body = AddSelectBody;
-AddSelect.Content = AddSelectContent;
 AddSelect.Column = AddSelectColumn;
 AddSelect.Row = AddSelectRow;
 AddSelect.SelectionSummary = AddSelectSelectionSummary;

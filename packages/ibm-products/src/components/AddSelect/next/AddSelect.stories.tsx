@@ -7,33 +7,29 @@
 
 // @ts-nocheck
 import React, { useMemo, useState } from 'react';
-import { Button, Dropdown, IconButton, Tag, Toggle } from '@carbon/react';
+import { Button, IconButton, Tag, Toggle } from '@carbon/react';
 import { AddSelect } from '.';
 import type { AddSelectItem } from '@carbon/ibm-products';
+import { UserAvatar } from '@carbon/ibm-products';
 import { NoDataEmptyState } from '../../EmptyStates';
 import styles from './_storybook-styles.scss?inline';
 import mdx from './AddSelect.mdx';
-import { Document, Filter, Popup } from '@carbon/react/icons';
+import {
+  ArrowsVertical,
+  Document,
+  Draggable,
+  Filter,
+  Popup,
+} from '@carbon/react/icons';
 
 const storyClass = 'add-select-next-stories';
-
-type FilterOption = {
-  id: string;
-  text: string;
-};
-
-const filterOptions: FilterOption[] = [
-  { id: 'all', text: 'All items' },
-  { id: 'folder', text: 'Folders' },
-  { id: 'file', text: 'Files' },
-];
 
 const sampleItems: AddSelectItem[] = [
   {
     id: '1',
     value: '1',
-    title: 'item 1',
-    subtitle: 'item 1 subtitle',
+    title: 'Item 1',
+    subtitle: 'Item 1 subtitle',
     itemDetails: {
       id: 'description',
       title: 'Description',
@@ -43,8 +39,8 @@ const sampleItems: AddSelectItem[] = [
   {
     id: '2',
     value: '2',
-    title: 'item 2',
-    subtitle: 'item 2 subtitle',
+    title: 'Item 2',
+    subtitle: 'Item 2 subtitle',
     itemDetails: {
       id: 'description',
       title: 'Description',
@@ -54,20 +50,20 @@ const sampleItems: AddSelectItem[] = [
   {
     id: '3',
     value: '3',
-    title: 'item 3',
-    subtitle: 'item 3 subtitle',
+    title: 'Item 3',
+    subtitle: 'Item 3 subtitle',
   },
   {
     id: '4',
     value: '4',
-    title: 'item 4',
-    subtitle: 'item 4 subtitle',
+    title: 'Item 4',
+    subtitle: 'Item 4 subtitle',
   },
   {
     id: '5',
     value: '5',
-    title: 'item 5',
-    subtitle: 'item 5 subtitle',
+    title: 'Item 5',
+    subtitle: 'Item 5 subtitle',
   },
 ];
 
@@ -180,36 +176,15 @@ const hierarchicalItems: AddSelectItem[] = [
 const summaryItems: AddSelectItem[] = sampleItems.slice(1, 4);
 
 const PlaceholderShell = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div
-      style={{
-        border: '1px dashed var(--cds-border-subtle)',
-        padding: '1rem',
-        background: 'var(--cds-layer)',
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <div className={`${storyClass}__placeholder-shell`}>{children}</div>;
 };
 
 const PlaceholderRows = () => {
   return (
-    <div
-      style={{
-        display: 'grid',
-        gap: '0.25rem',
-      }}
-    >
+    <div className={`${storyClass}__placeholder-rows`}>
       {sampleItems.slice(0, 3).map((item) => (
-        <div
-          key={item.id}
-          style={{
-            padding: '0.25rem',
-            background: 'var(--cds-layer-accent)',
-          }}
-        >
-          <p style={{ margin: 0 }}>AddSelect.Row</p>
+        <div key={item.id} className={`${storyClass}__placeholder-row`}>
+          <p>AddSelect.Row</p>
         </div>
       ))}
     </div>
@@ -227,7 +202,6 @@ export default {
   ],
   subcomponents: {
     'AddSelect.Body': AddSelect.Body,
-    'AddSelect.Content': AddSelect.Content,
     'AddSelect.Column': AddSelect.Column,
     'AddSelect.Row': AddSelect.Row,
     'AddSelect.SelectionSummary': AddSelect.SelectionSummary,
@@ -244,28 +218,22 @@ export default {
 
 const AddSelectBodyStory = (args) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterType, setFilterType] = useState('all');
 
   const filteredItems = useMemo(() => {
-    return sampleItems.filter((item) => {
-      const matchesSearch = item.title
-        ?.toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const matchesFilter = filterType === 'all' || item.type === filterType;
-      return matchesSearch && matchesFilter;
-    });
-  }, [searchTerm, filterType]);
+    return sampleItems.filter((item) =>
+      item.title?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
 
   const actionsSlot = args.showActionsSlot ? (
-    <Dropdown
-      id="add-select-body-filter"
-      titleText=""
-      label="Filter items"
-      items={filterOptions}
-      itemToString={(item) => (item ? item.text : '')}
-      onChange={({ selectedItem }) => setFilterType(selectedItem?.id || 'all')}
-      size="lg"
-    />
+    <>
+      <IconButton label="Sort" kind="ghost" size="lg">
+        <ArrowsVertical />
+      </IconButton>
+      <IconButton label="Filter" kind="ghost" size="lg">
+        <Filter />
+      </IconButton>
+    </>
   ) : undefined;
 
   const subHeaderActions = args.showSubHeaderActions ? (
@@ -311,7 +279,7 @@ export const AddSelectBody = {
     globalSearchPlaceholder: 'Search by name',
     searchResultsTitle: 'Search results',
     itemCount: 3,
-    showActionsSlot: false,
+    showActionsSlot: true,
     showSubHeaderActions: false,
     showPath: false,
     path: [
@@ -364,7 +332,8 @@ export const AddSelectBody = {
     },
     children: {
       control: false,
-      description: 'Child components (typically AddSelect.Content)',
+      description:
+        'Child components (typically AddSelect.Column or AddSelect.Row)',
       table: { disable: true },
     },
     headerContent: {
@@ -436,20 +405,15 @@ export const AddSelectBody = {
 
 const AddSelectColumnStory = (args) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterType, setFilterType] = useState('all');
   const [selectedItems, setSelectedItems] = useState<Set<string>>(
     new Set(['1', '4'])
   );
 
   const filteredItems = useMemo(() => {
-    return sampleItems.filter((item) => {
-      const matchesSearch = item.title
-        ?.toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const matchesFilter = filterType === 'all' || item.type === filterType;
-      return matchesSearch && matchesFilter;
-    });
-  }, [searchTerm, filterType]);
+    return sampleItems.filter((item) =>
+      item.title?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
 
   const handleItemSelect = (itemId, selected) => {
     const nextSelection = args.multi
@@ -483,21 +447,23 @@ const AddSelectColumnStory = (args) => {
     !allSelected;
 
   const actionsSlot = args.showActionsSlot ? (
-    <Dropdown
-      id="add-select-column-filter"
-      titleText=""
-      label="Filter items"
-      items={filterOptions}
-      itemToString={(item) => (item ? item.text : '')}
-      onChange={({ selectedItem }) => setFilterType(selectedItem?.id || 'all')}
-      size="md"
-    />
+    <>
+      <IconButton label="Sort" kind="ghost" size="sm">
+        <ArrowsVertical />
+      </IconButton>
+      <IconButton label="Filter" kind="ghost" size="sm">
+        <Filter />
+      </IconButton>
+    </>
   ) : undefined;
 
   return (
     <div className={`${storyClass}-column-container`}>
       <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-        <AddSelect.Content>
+        <AddSelect.Body
+          hideSearch
+          className={`${storyClass}--no-header-border`}
+        >
           <AddSelect.Column
             title={args.title}
             searchLabel={args.searchLabel}
@@ -528,13 +494,12 @@ const AddSelectColumnStory = (args) => {
                 key={item.id}
                 itemId={item.id}
                 title={item.title || ''}
-                subtitle={item.subtitle}
                 value={item.value || ''}
                 hasChildren={args.enableNavigation && item.id === '1'}
               />
             ))}
           </AddSelect.Column>
-        </AddSelect.Content>
+        </AddSelect.Body>
       </AddSelect>
     </div>
   );
@@ -548,9 +513,9 @@ export const AddSelectColumn = {
     searchLabel: 'Search within column',
     searchPlaceholder: 'Search items',
     showSearch: true,
-    showActionsSlot: false,
+    showActionsSlot: true,
     multi: true,
-    showSelectAll: true,
+    showSelectAll: false,
     enableNavigation: false,
   },
   argTypes: {
@@ -638,12 +603,15 @@ const AddSelectRowStory = (args) => {
   return (
     <div className={`${storyClass}-container--single`}>
       <AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
-        <AddSelect.Content>
+        <AddSelect.Body
+          hideSearch
+          className={`${storyClass}--no-header-border`}
+        >
           <AddSelect.Column multi={args.multi} hideSearch>
             <AddSelect.Row
               itemId="1"
-              title="folder 1"
-              subtitle={args.showSubtitle ? '3 files' : undefined}
+              title="Item title"
+              subtitle={args.showSubtitle ? 'Item subtitle' : undefined}
               value="folder 1"
               selected={args.selected}
               indeterminate={args.indeterminate}
@@ -652,16 +620,20 @@ const AddSelectRowStory = (args) => {
               hasItemPanel={args.hasItemPanel}
               onItemPanelClick={() => setItemPanelOpen(true)}
               itemPanelOpen={args.hasItemPanel && itemPanelOpen}
-              icon={args.showIcon ? <Document size={24} /> : undefined}
+              icon={
+                args.showIcon ? (
+                  <UserAvatar
+                    size="md"
+                    name="thomas j. watson"
+                    tooltipAlignment="right"
+                    tooltipText="user profile image"
+                  />
+                ) : undefined
+              }
+              skeleton={args.skeleton}
               rowContent={
                 args.useRowContent ? (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                    }}
-                  >
+                  <div className={`${storyClass}__row-content`}>
                     <strong>Custom row content</strong>
                     <Tag type="purple" size="sm">
                       Custom
@@ -677,7 +649,7 @@ const AddSelectRowStory = (args) => {
               ) : null}
             </AddSelect.Row>
           </AddSelect.Column>
-        </AddSelect.Content>
+        </AddSelect.Body>
       </AddSelect>
     </div>
   );
@@ -698,6 +670,7 @@ export const AddSelectRow = {
     hasItemPanel: false,
     itemPanelOpen: false,
     disabled: false,
+    skeleton: false,
   },
   argTypes: {
     multi: {
@@ -738,6 +711,11 @@ export const AddSelectRow = {
     disabled: {
       control: 'boolean',
       description: 'Disable the example row',
+    },
+    skeleton: {
+      control: 'boolean',
+      description:
+        'Render the row as a skeleton (loading state) with placeholder content',
     },
     itemId: {
       control: 'text',
@@ -848,11 +826,7 @@ const AddSelectSelectionSummaryStory = (args) => {
         editIconDescription={args.editIconDescription}
         emptyState={
           args.showEmptyState ? (
-            <div
-              style={{
-                padding: '1rem 0.5rem',
-              }}
-            >
+            <div className={`${storyClass}__empty-state`}>
               <NoDataEmptyState
                 subtitle={
                   <>
@@ -870,37 +844,41 @@ const AddSelectSelectionSummaryStory = (args) => {
           args.useCustomRenderer
             ? (item) => (
                 <div
+                  className={`${storyClass}__summary-item-row`}
                   style={{
-                    padding: '0.5rem',
-                    borderBottom: '1px solid var(--cds-border-subtle)',
+                    borderBlockEnd: '1px solid var(--cds-border-subtle-01)',
                   }}
                 >
-                  <strong>{item.title}</strong>
-                  {item.subtitle && (
-                    <div
-                      style={{
-                        fontSize: '0.875rem',
-                        color: 'var(--cds-text-secondary)',
-                      }}
+                  <UserAvatar
+                    size="md"
+                    name={item.title}
+                    tooltipText={item.title}
+                  />
+                  <div className={`${storyClass}__summary-item-row-text`}>
+                    <p
+                      className={`${storyClass}__summary-item-row-text__title`}
                     >
-                      {item.subtitle}
-                    </div>
-                  )}
+                      {item.title}
+                    </p>
+                    {item.subtitle && (
+                      <p
+                        className={`${storyClass}__summary-item-row-text__subtitle`}
+                      >
+                        {item.subtitle}
+                      </p>
+                    )}
+                  </div>
+                  <span className={`${storyClass}__summary-item-row-modifier`}>
+                    Modifier
+                  </span>
                 </div>
               )
             : undefined
         }
         headerContent={
           args.useCustomHeader ? (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                width: '100%',
-              }}
-            >
-              <h3 style={{ margin: 0, fontSize: '1rem' }}>Custom Header</h3>
+            <div className={`${storyClass}__summary-header-content`}>
+              <h3>Custom Header</h3>
               <IconButton label="popup" kind="ghost" size="sm">
                 <Popup />
               </IconButton>
@@ -1042,20 +1020,10 @@ export const AddSelectSelectionSummary = {
 
 const AddSelectSelectionSummaryItemStory = (args) => {
   const [visible, setVisible] = useState(true);
-
   const item = summaryItems[0];
 
   return (
-    <div
-      style={{
-        width: '256px',
-        display: 'grid',
-        gap: '0.75rem',
-        border: '1px dashed var(--cds-border-subtle)',
-        padding: '1rem',
-        background: 'var(--cds-layer)',
-      }}
-    >
+    <div className={`${storyClass}__summary-item-wrapper`}>
       {visible ? (
         <AddSelect.SelectionSummaryItem
           item={item}
@@ -1065,13 +1033,26 @@ const AddSelectSelectionSummaryItemStory = (args) => {
           renderAccordionTitle={
             args.useCustomTitle
               ? (currentItem) => (
-                  <div>
-                    <p style={{ margin: 0, fontWeight: 600 }}>
-                      {currentItem.title}
-                    </p>
-                    <p style={{ margin: '0.25rem 0 0' }}>
-                      Custom title renderer
-                    </p>
+                  <div className={`${storyClass}__accordion-title`}>
+                    <UserAvatar
+                      size="md"
+                      name={currentItem.title}
+                      tooltipText={currentItem.title}
+                    />
+                    <div className={`${storyClass}__accordion-title-text`}>
+                      <p
+                        className={`${storyClass}__accordion-title-text__title`}
+                      >
+                        {currentItem.title}
+                      </p>
+                      {currentItem.subtitle && (
+                        <p
+                          className={`${storyClass}__accordion-title-text__subtitle`}
+                        >
+                          {currentItem.subtitle}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 )
               : undefined
@@ -1079,96 +1060,88 @@ const AddSelectSelectionSummaryItemStory = (args) => {
           renderAccordionBody={
             args.useCustomContent
               ? (currentItem) => (
-                  <div>
-                    <p style={{ margin: 0 }}>
-                      Custom content for {currentItem.title}
-                    </p>
+                  <div className={`${storyClass}__accordion-body`}>
+                    <Tag type="blue" size="sm">
+                      {currentItem.title}
+                    </Tag>
+                    <Tag type="cyan" size="sm">
+                      Category A
+                    </Tag>
+                    <Tag type="teal" size="sm">
+                      Active
+                    </Tag>
+                    <Tag type="purple" size="sm">
+                      Priority
+                    </Tag>
                   </div>
                 )
               : undefined
           }
           renderItem={
             args.useCustomRenderer
-              ? (currentItem, onRemoveHandler) => (
-                  <div
-                    style={{
-                      padding: '1rem',
-                      border: '2px solid var(--cds-border-interactive)',
-                      borderRadius: '4px',
-                      background: 'var(--cds-layer-01)',
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <div>
+              ? (currentItem) => (
+                  <div className={`${storyClass}__summary-item-row`}>
+                    <div className={`${storyClass}__summary-item-row-reorder`}>
+                      <Draggable size={16} />
+                      <UserAvatar
+                        size="md"
+                        name={currentItem.title}
+                        tooltipText={currentItem.title}
+                      />
+                      <div className={`${storyClass}__summary-item-row-text`}>
                         <p
-                          style={{
-                            margin: 0,
-                            fontWeight: 700,
-                            color: 'var(--cds-text-primary)',
-                          }}
+                          className={`${storyClass}__summary-item-row-text__title`}
                         >
                           {currentItem.title}
                         </p>
                         {currentItem.subtitle && (
                           <p
-                            style={{
-                              margin: '0.25rem 0 0',
-                              fontSize: '0.875rem',
-                              color: 'var(--cds-text-secondary)',
-                            }}
+                            className={`${storyClass}__summary-item-row-text__subtitle`}
                           >
                             {currentItem.subtitle}
                           </p>
                         )}
                       </div>
-                      {onRemoveHandler && (
-                        <Button
-                          kind="danger--ghost"
-                          size="sm"
-                          onClick={() => onRemoveHandler(currentItem.id)}
-                        >
-                          Remove
-                        </Button>
-                      )}
                     </div>
-                    <p
-                      style={{
-                        margin: '0.5rem 0 0',
-                        fontSize: '0.75rem',
-                        fontStyle: 'italic',
-                      }}
+                    <span
+                      className={`${storyClass}__summary-item-row-modifier`}
                     >
-                      Custom item rendering
-                    </p>
+                      Modifier
+                    </span>
                   </div>
                 )
               : undefined
           }
         >
           {args.useChildren ? (
-            <div
-              style={{
-                padding: '1rem',
-                border: '2px solid var(--cds-support-success)',
-                borderRadius: '4px',
-                background: 'var(--cds-layer-01)',
-              }}
-            >
-              <p style={{ margin: 0, fontWeight: 700 }}>{item.title}</p>
-              <p style={{ margin: '0.25rem 0 0', fontSize: '0.875rem' }}>
-                Custom children content
-              </p>
+            <div className={`${storyClass}__summary-item-row`}>
+              <UserAvatar
+                size="md"
+                name={item.title}
+                tooltipText={item.title}
+              />
+              <div className={`${storyClass}__summary-item-row-text`}>
+                <p className={`${storyClass}__summary-item-row-text__title`}>
+                  {item.title}
+                </p>
+                {item.subtitle && (
+                  <p
+                    className={`${storyClass}__summary-item-row-text__subtitle`}
+                  >
+                    {item.subtitle}
+                  </p>
+                )}
+              </div>
+              <span className={`${storyClass}__summary-item-row-modifier`}>
+                Modifier
+              </span>
             </div>
           ) : undefined}
         </AddSelect.SelectionSummaryItem>
       ) : (
-        <p style={{ margin: 0 }}>Item removed in story preview.</p>
+        <p className={`${storyClass}__summary-item-removed`}>
+          Item removed in story preview.
+        </p>
       )}
     </div>
   );
@@ -1178,7 +1151,7 @@ export const AddSelectSelectionSummaryItem = {
   name: 'AddSelect.SelectionSummaryItem',
   render: AddSelectSelectionSummaryItemStory,
   args: {
-    useAccordion: false,
+    useAccordion: true,
     showRemoveButton: true,
     removeButtonLabel: 'Remove item',
     useCustomTitle: false,
@@ -1249,9 +1222,11 @@ const AddSelectItemPanelStory = (args) => {
         renderItem={
           args.useRenderItem
             ? (item) => (
-                <div>
-                  <p style={{ margin: 0, fontWeight: 600 }}>{item.title}</p>
-                  <p style={{ margin: '0.25rem 0 0' }}>
+                <div className={`${storyClass}__item-panel-content`}>
+                  <p className={`${storyClass}__item-panel-content__title`}>
+                    {item.title}
+                  </p>
+                  <p className={`${storyClass}__item-panel-content__body`}>
                     Custom rendered details for {item.value}
                   </p>
                 </div>
@@ -1260,11 +1235,11 @@ const AddSelectItemPanelStory = (args) => {
         }
       >
         {args.useChildren ? (
-          <div>
-            <p style={{ margin: 0, fontWeight: 600 }}>
+          <div className={`${storyClass}__item-panel-content`}>
+            <p className={`${storyClass}__item-panel-content__title`}>
               Custom children content
             </p>
-            <p style={{ margin: '0.25rem 0 0' }}>
+            <p className={`${storyClass}__item-panel-content__body`}>
               This content is passed as children and takes highest priority
             </p>
           </div>

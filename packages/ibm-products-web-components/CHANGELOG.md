@@ -1,3 +1,29 @@
+## `@carbon/ibm-products-web-components@0.44.0`
+### Features :rocket:
+- feat(tearsheet): preview tearsheet code connect integration (#9631)
+
+### Bug fixes :bug:
+- fix(BigNumber): Use figure & figcaption in both react and wc (#9707)
+- fix: open in stackblitz style issue fixed (#9699)
+- fix(coachmarkpatterns): animation (#9622)
+- fix: coachmark design review and a11y in web comp (#9598)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9660)
+
+## `@carbon/ibm-products-web-components@0.43.0`
+### Features :rocket:
+- feat(create-tearsheet): implemented as patterns in web components (#9552)
+
+### Bug fixes :bug:
+- fix(tearsheet): increase the top margin to 88px from 46px (#9471)
+- fix(preview_PageHeader): resolve a11y issues (#9519)
+
+### Housekeeping :house:
+- chore(deps): update dependency c8 to v11 (#9590)
+- chore: update typescript to v6 (#9591)
+- build(deps): update to Carbon 11 compatible versions to latest (#9539)
+
 ## `@carbon/ibm-products-web-components@0.42.0`
 ### Features :rocket:
 - feat(preview_PageHeader): implement disable sticky tab bar (#9365)

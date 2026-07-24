@@ -31,8 +31,10 @@ collect:
         - onc4p-add-select-row-navigate
         - onc4p-add-select-row-select
         - open
+        - overflow-aria-label
         - prevent-close-on-click-outside
         - selector-initial-focus
+        - selector-primary-focus
         - size
         - slot
         - subtitle
@@ -93,6 +95,7 @@ collect:
         - status
         # c4p-coachmark
         - caret
+        - drag-aria-label
         - dropShadow
         - floating
         - highContrast
@@ -179,12 +182,18 @@ collect:
         # c4p-page-header-actions-set
         - actions-data
         # c4p-page-header-breadcrumb
+        - actions-aria-label
         - border
         - content-actions-flush
         - page-actions-flush
         # c4p-page-header-breadcrumbs-set
+        - breadcrumb-aria-label
         - breadcrumbs-data
         - hiddenItems
+        # c4p-page-header-content
+        - title-level
+        # c4p-page-header-content-text
+        - subtitle-level
         # c4p-page-header-hero-image
         - object-fit
         # c4p-page-header-scroller
@@ -199,7 +208,6 @@ collect:
         - container-class-name
         - onc4p-preview-tearsheet-beingclosed
         - onc4p-preview-tearsheet-closed
-        - selector-primary-focus
         - selectors-floating-menus
         - summary-content-width
         - variant
@@ -259,18 +267,6 @@ collect:
         - md
         - sm
         - xl
-        # General - influencer-width
-        - narrow
-        - wide
-        # General - kind
-        - "403"
-        - "404"
-        - checked
-        - custom
-        - disabled
-        - error
-        - indeterminate
-        - unchecked
         # General - size
         - 2xl
         - default
@@ -278,7 +274,6 @@ collect:
         - md
         - sm
         - xl
-        - xs
         # General - tooltip-alignment
         - bottom
         - bottom-left
@@ -304,21 +299,25 @@ collect:
         - top
         - top-left
         - top-right
+        # c4p-page-header-content - title-level
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        # c4p-page-header-content-text - subtitle-level
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
         # c4p-page-header-hero-image - object-fit
         - contain
         - cover
         - fill
         - none
         # c4p-preview-tearsheet - variant
-        - narrow
-        - wide
-        # c4p-side-panel - placement
-        - left
-        - right
-        # c4p-tearsheet - influencer-placement
-        - left
-        - right
-        # c4p-tearsheet - width
         - narrow
         - wide
         # c4p-tearsheet-stack - stack-step-size

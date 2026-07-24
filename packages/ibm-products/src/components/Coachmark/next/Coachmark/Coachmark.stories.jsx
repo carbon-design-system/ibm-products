@@ -119,10 +119,6 @@ const TooltipTemplate = ({ ...args }, context) => {
 
   const handleClose = () => {
     setIsOpen(false);
-    // Return focus to the beacon button after closing
-    setTimeout(() => {
-      beaconButtonRef.current?.focus();
-    }, 0);
   };
 
   const handleBeaconClick = () => {
@@ -136,6 +132,7 @@ const TooltipTemplate = ({ ...args }, context) => {
           position={{ x: 151, y: 155 }}
           open={isOpen}
           onClose={handleClose}
+          launcherButtonRef={beaconButtonRef}
           {...args}
         >
           <CoachmarkBeacon
@@ -146,7 +143,7 @@ const TooltipTemplate = ({ ...args }, context) => {
               ref: beaconButtonRef,
             }}
           ></CoachmarkBeacon>
-          <Coachmark.Content aria-label="Coachmark content">
+          <Coachmark.Content>
             <Coachmark.ContentHeader closeIconDescription="Close"></Coachmark.ContentHeader>
             <Coachmark.ContentBody>
               <h2>Hello World</h2>
@@ -175,10 +172,6 @@ const FloatingTemplate = ({ ...args }, context) => {
 
   const handleClose = () => {
     setIsOpen(false);
-    // Return focus to the trigger button after closing
-    setTimeout(() => {
-      triggerButtonRef.current?.focus();
-    }, 0);
   };
 
   const handleButtonClick = () => {
@@ -192,6 +185,7 @@ const FloatingTemplate = ({ ...args }, context) => {
           onClose={handleClose}
           floating={true}
           selectorPrimaryFocus={`.${pkg.prefix}--coachmark__next--content-header--drag-icon`}
+          launcherButtonRef={triggerButtonRef}
           {...args}
         >
           <Button
@@ -205,7 +199,7 @@ const FloatingTemplate = ({ ...args }, context) => {
           >
             Show information
           </Button>
-          <Coachmark.Content aria-label="Coachmark content">
+          <Coachmark.Content>
             <Coachmark.ContentHeader
               closeIconDescription="Close"
               dragIconDescription="Drag"

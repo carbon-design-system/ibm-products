@@ -3,20 +3,28 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as EditInPlaceStories from './edit-in-place.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 import helperSource from './edit-in-place-helpers.ts?raw';
+import defsSource from './defs.ts?raw';
 
 export const customFunctionArr = [
+  defsSource
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/import\s+\{[^}]*\}\s+from\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .trim(),
   helperSource
     .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
     .replace(/import\s+\{[^}]*\}\s+from\s+['"].*?['"];?\s*/g, '')
     .replace(/export\s+/g, '')
     .replace(/\/\*\*[\s\S]*?\*\//g, '')
-    .replace(/const\s+prefix\s*=.*?;/g, '')
-    .replace(/\$\{prefix\}/g, '${\'c4p\'}')
+    .replace(/\bprefix\b/g, "'c4p'")
+    .replace(/'c4p'\s*\+\s*'--/g, "'c4p--")
     .replace(/\s*\{\s+args:\s*defaultArgs,\s+render:\s*\(args:\s*any\)\s*=>\s*\{\s*/g, '')
     .trim()
 ];
 
 export const customImportArr = [`import '@carbon/web-components/es/components/tooltip/index.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 `];
 
 <Meta of={EditInPlaceStories} />

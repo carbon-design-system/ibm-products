@@ -76,7 +76,10 @@ class CDSTearsheetSummaryContent extends SignalWatcher(
     });
 
     return !isSm
-      ? html` <aside class="${classes}">
+      ? html` <aside
+          class="${classes}"
+          aria-label="${this.summaryPanelAriaLabel}"
+        >
           <slot></slot>
         </aside>`
       : html` <c4p-side-panel

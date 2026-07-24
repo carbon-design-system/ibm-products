@@ -35,6 +35,8 @@ import {
  * @slot footer - Footer content with actions
  * @fires c4p-preview-tearsheet-beingclosed - Fired when the tearsheet is about to close
  * @fires c4p-preview-tearsheet-closed - Fired after the tearsheet has closed
+ * @fires c4p-preview-tearsheet-collapse-change - Fired when the header collapse state changes.
+ *   `event.detail.collapsed` is `true` when collapsing, `false` when expanding.
  */
 @customElement(`${prefix}-preview-tearsheet`)
 class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
@@ -191,6 +193,12 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       `${prefix}-tearsheet-header-close-button-clicked`,
       this.handleHeaderCloseButtonClick as EventListener
     );
+
+    // Listen for internal collapse-change from header; re-dispatch as public event
+    this.addEventListener(
+      `${prefix}-tearsheet-header-collapse-change`,
+      this.handleHeaderCollapseChange as EventListener
+    );
   }
 
   protected firstUpdated(_changedProperties: PropertyValues): void {
@@ -203,7 +211,27 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       open: this.open,
       hasAILabel: this.hasAILabel,
       uniqueId: this.uniqueId,
+      ...this._readHeaderProps(),
+      onClose: () => this.closeTearsheet(),
     });
+  }
+
+  /** Read close-button props from the slotted c4p-tearsheet-header element */
+  private _readHeaderProps(): {
+    closeIconDescription: string;
+    hideCloseButton: boolean;
+  } {
+    const header = this.querySelector(`${prefix}-tearsheet-header`) as any;
+    return {
+      closeIconDescription:
+        header?.closeIconDescription ??
+        header?.getAttribute('close-icon-description') ??
+        'Close',
+      hideCloseButton:
+        header?.hideCloseButton ??
+        header?.hasAttribute('hide-close-button') ??
+        false,
+    };
   }
 
   protected updated(_changedProperties: PropertyValues): void {
@@ -555,6 +583,25 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   };
 
   /**
+   * Intercepts the internal collapse-change event from the header and
+   * re-dispatches it as the public `c4p-preview-tearsheet-collapse-change` event.
+   */
+  private handleHeaderCollapseChange = (event: Event) => {
+    event.stopPropagation();
+    const { collapsed } = (event as CustomEvent).detail;
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSTearsheet).eventCollapseChange,
+        {
+          bubbles: true,
+          composed: true,
+          detail: { collapsed },
+        }
+      )
+    );
+  };
+
+  /**
    * Handle close event from the modal (ESC key, click outside, etc.)
    */
   private handleClose = (event: Event) => {
@@ -613,7 +660,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       ?full-width="${true}"
       ai-label="${ifDefined(this.hasAILabel || undefined)}"
     >
-      <slot name="decorator"></slot>
       <slot name="header"></slot>
       <cds-modal-body class="${blockClass}__body-layout">
         <slot
@@ -627,6 +673,14 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   static styles = styles;
+
+  /**
+   * Public event fired when the header collapse state changes.
+   * `event.detail.collapsed` is `true` when collapsing, `false` when expanding.
+   */
+  static get eventCollapseChange() {
+    return `${prefix}-preview-tearsheet-collapse-change`;
+  }
 }
 
 export default CDSTearsheet;

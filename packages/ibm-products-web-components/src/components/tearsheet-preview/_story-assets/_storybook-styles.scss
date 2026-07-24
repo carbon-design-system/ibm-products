@@ -28,16 +28,27 @@ $block-class__next: #{$c4p-prefix}--tearsheet__next;
   @include hide-at-max;
 }
 
-.summaryPanelTrigger {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline-end: 0;
+.summaryPanelTrigger,
+.influencerPanelTrigger {
+  > #{$carbon-prefix}-button,
+  > button {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+
+  margin-block-end: $spacing-03;
 }
 
 .influencerPanelTrigger {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline-start: 0;
+  > #{$carbon-prefix}-button,
+  > button {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+  }
+
+  margin-block-end: $spacing-03;
 }
 
 #{$c4p-prefix}-preview-tearsheet:not([variant='narrow']) {

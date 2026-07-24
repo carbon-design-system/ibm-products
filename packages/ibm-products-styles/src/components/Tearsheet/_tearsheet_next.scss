@@ -505,7 +505,6 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     margin-inline-start: -$spacing-05;
   }
 }
-
 .#{$block-class__next}__scroller-container {
   position: absolute;
   inset-block-end: 0;

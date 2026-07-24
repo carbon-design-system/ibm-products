@@ -8,7 +8,7 @@
  */
 
 import { html, LitElement, PropertyValues } from 'lit';
-import { property, query, state } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import '@carbon/web-components/es/components/modal/index.js';
@@ -23,13 +23,15 @@ const blockClass = `${prefix}--tearsheet__next`;
 
 /**
  * Tearsheet Header component - Contains the header section with title, description, and actions.
+ * The decorator (AI label) and close button are now rendered inside c4p-tearsheet-header-content
+ * to achieve the correct DOM tab order: header-actions → decorator → close → header-content.
  *
  * @element c4p-tearsheet-header
  * @slot header-content - The main header content area (use c4p-tearsheet-header-content)
- * @slot header-navigation - Navigation tabs or breadcrumbs below the header
- * @slot header-actions - Action buttons in the header (e.g., settings, delete)
- * @slot decorator - AI label or other decorative elements
- * @fires c4p-tearsheet-header-close-button-clicked - Internal event to notify parent tearsheet
+ * @slot - Default slot for other content
+ * @slot navigation-bar - Navigation tabs or breadcrumbs below the header
+ * @fires c4p-tearsheet-header-collapse-change - Internal event; parent tearsheet re-dispatches
+ *   this as the public `c4p-preview-tearsheet-collapse-change` event.
  */
 @customElement(`${prefix}-tearsheet-header`)
 class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
@@ -58,49 +60,17 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   })
   disableHeaderCollapse: boolean = false;
 
-  @state()
-  _hasDecorator = false;
-
-  @state()
-  _hasAILabel = false;
-
-  @query('slot[name="decorator"]')
-  private decoratorSlot!: HTMLSlotElement;
-
-  /**
-   * Handles user-initiated close request of this tearsheet.
-   * Dispatches an internal event to notify the parent tearsheet to close.
-   *
-   * @param triggeredBy The element that triggered this close request.
-   */
-  private _handleUserInitiatedClose(triggeredBy: EventTarget | null) {
-    const init = {
-      bubbles: true,
-      composed: true,
-      detail: {
-        triggeredBy,
-      },
-    };
-
-    // Dispatch internal event to notify parent tearsheet
-    this.dispatchEvent(
-      new CustomEvent(
-        (this.constructor as typeof CDSTearsheetHeader).eventCloseButtonClicked,
-        init
-      )
-    );
-  }
-
   connectedCallback() {
     super.connectedCallback();
-    // Initialize signal with the initial prop value before any child components connect
+    // Initialize signal with the initial prop values before any child components connect
     updateTearsheetSignals({
       disableHeaderCollapse: this.disableHeaderCollapse,
+      closeIconDescription: this.closeIconDescription,
+      hideCloseButton: this.hideCloseButton,
     });
   }
 
   protected firstUpdated() {
-    this.updateHeaderOffset();
     // Register with the current tearsheet's uniqueId
     const uniqueId = tearsheetSignal.get().uniqueId;
     if (uniqueId) {
@@ -114,12 +84,20 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
         disableHeaderCollapse: this.disableHeaderCollapse,
       });
     }
-    this.updateHeaderOffset();
+    if (_changedProperties.has('closeIconDescription')) {
+      updateTearsheetSignals({
+        closeIconDescription: this.closeIconDescription,
+      });
+    }
+    if (_changedProperties.has('hideCloseButton')) {
+      updateTearsheetSignals({ hideCloseButton: this.hideCloseButton });
+    }
     this.updateCollapsedAttribute();
   }
 
   private updateCollapsedAttribute() {
     const { fullyCollapsed, open } = tearsheetSignal.get();
+    const wasCollapsed = this.hasAttribute('collapsed');
 
     if (open) {
       if (fullyCollapsed) {
@@ -130,47 +108,23 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
     } else {
       this.removeAttribute('collapsed');
     }
-  }
 
-  private updateHeaderOffset() {
-    const { open, isSm } = tearsheetSignal.get();
-    if (open) {
-      const assigned = this.decoratorSlot.assignedElements({ flatten: true });
-
-      const decoratorWidth = assigned?.[0]?.getBoundingClientRect().width ?? 0;
-      const closeButtonWidth = !this.hideCloseButton ? 24 : 0;
-      const offset = decoratorWidth + closeButtonWidth + (isSm ? 8 : 0);
-
-      document.documentElement.style.setProperty(
-        '--tearsheet-header-action-offset',
-        `${offset}px`
+    // Dispatch a single unified event only when the state actually changes
+    const isNowCollapsed = this.hasAttribute('collapsed');
+    if (isNowCollapsed !== wasCollapsed) {
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSTearsheetHeader).eventCollapseChange,
+          {
+            bubbles: true,
+            composed: true,
+            detail: { collapsed: isNowCollapsed },
+          }
+        )
       );
     }
   }
 
-  private _handleDecoratorChange(e: Event) {
-    this._hasAILabel = false;
-    const childItems = (e.target as HTMLSlotElement).assignedElements();
-    this._hasDecorator = childItems.length > 0;
-    if (this._hasDecorator) {
-      for (const item of childItems) {
-        if (item.tagName.toLowerCase() === 'cds-ai-label') {
-          this._hasAILabel = true;
-          break;
-        }
-      }
-    }
-    if (this._hasAILabel || this._hasDecorator) {
-      childItems[0].setAttribute('size', 'sm');
-      this.setAttribute(this._hasAILabel ? 'ai-label' : 'decorator', '');
-      this.removeAttribute(this._hasAILabel ? 'decorator' : 'ai-label');
-    } else {
-      this.removeAttribute('decorator');
-      this.removeAttribute('ai-label');
-    }
-
-    this.updateHeaderOffset();
-  }
   render() {
     const { fullyCollapsed } = tearsheetSignal.get();
     const classes = classMap({
@@ -179,24 +133,6 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
       [`${blockClass}__header-collapsed`]: !!fullyCollapsed,
     });
     return html`<cds-modal-header class="${classes}">
-      <div
-        slot="ai-label"
-        role="${this._hasDecorator ? 'complementary' : undefined}"
-        aria-label="${this._hasDecorator ? 'Decorator' : undefined}"
-      >
-        <slot
-          name="decorator"
-          @slotchange=${this._handleDecoratorChange}
-        ></slot>
-      </div>
-      <cds-modal-close-button
-        close-button-label=${this.closeIconDescription}
-        @click="${this._handleUserInitiatedClose}"
-        class="${this.hideCloseButton
-          ? `${blockClass}__header--no-close-icon`
-          : ''}"
-      ></cds-modal-close-button>
-
       <slot name="header-content"></slot>
       <slot></slot>
       <slot name="navigation-bar"></slot>
@@ -207,6 +143,15 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   static get eventCloseButtonClicked() {
     return `${prefix}-tearsheet-header-close-button-clicked`;
+  }
+
+  /**
+   * Internal event fired when the collapse state changes.
+   * The parent `c4p-preview-tearsheet` intercepts this and re-dispatches it as
+   * the public `c4p-preview-tearsheet-collapse-change` event.
+   */
+  static get eventCollapseChange() {
+    return `${prefix}-tearsheet-header-collapse-change`;
   }
 }
 export default CDSTearsheetHeader;

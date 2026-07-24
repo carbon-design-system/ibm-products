@@ -43,19 +43,7 @@ const renderTagsTemplate = (args) => {
     dismissible,
   });
 
-  return html`
-    <style>
-      ${styles}
-    </style>
-    <div class="example">
-      <div class="annotation parent">
-        <div class="annotation__label">Parent container</div>
-        <div class="annotation__content">
-          <set-of-tags .tagsData=${tagsData}></set-of-tags>
-        </div>
-      </div>
-    </div>
-  `;
+  return html` <set-of-tags .tagsData=${tagsData}></set-of-tags> `;
 };
 
 export const SetOfTags = {
@@ -68,6 +56,19 @@ export const SetOfTags = {
 
 const meta = {
   title: 'Patterns/Item overflow',
+  decorators: [
+    (story: any) => html`
+      <style>
+        ${styles}
+      </style>
+      <div class="example">
+        <div class="annotation parent">
+          <div class="annotation__label">Parent container</div>
+          <div class="annotation__content">${story()}</div>
+        </div>
+      </div>
+    `,
+  ],
 };
 
 export default meta;

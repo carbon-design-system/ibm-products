@@ -1,0 +1,160 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use '@carbon/styles/scss/config';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+body {
+  padding: $spacing-05;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  align-items: flex-start;
+  min-block-size: 100vh;
+}
+
+.example-container {
+  margin-inline-start: $spacing-01;
+  max-inline-size: 1200px;
+
+  .example-section {
+    padding: $spacing-07;
+    border: 1px solid var(--cds-border-subtle);
+    background-color: var(--cds-layer-01);
+    margin-block-end: $spacing-09;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-block: 0 $spacing-06;
+    }
+  }
+}
+
+// Status icon colors
+
+$-colors: (
+  fatal: (
+    light: $black-100,
+    dark: $gray-50,
+  ),
+  critical: (
+    light: $red-60,
+    dark: $red-50,
+  ),
+  major-warning: (
+    light: $orange-40,
+    dark: $orange-40,
+  ),
+  minor-warning: (
+    light: $yellow-20,
+    dark: $yellow-20,
+  ),
+  undefined: (
+    light: $purple-60,
+    dark: $purple-50,
+  ),
+  unknown: (
+    light: $gray-60,
+    dark: $gray-50,
+  ),
+  normal: (
+    light: $green-60,
+    dark: $green-50,
+  ),
+  info: (
+    light: $blue-60,
+    dark: $blue-50,
+  ),
+  in-progress: (
+    light: $blue-60,
+    dark: $blue-50,
+  ),
+  running: (
+    light: $green-60,
+    dark: $green-50,
+  ),
+  pending: (
+    light: $gray-60,
+    dark: $gray-50,
+  ),
+);
+
+$-icons: (
+  'fatal',
+  'critical',
+  'major-warning',
+  'minor-warning',
+  'undefined',
+  'unknown',
+  'normal',
+  'info',
+  'in-progress',
+  'running',
+  'pending'
+);
+$-themes: ('light', 'dark');
+$-block: 'status-icon';
+
+@function -clr($name, $theme) {
+  // stylelint-disable-next-line carbon/theme-use
+  @return map.get(map.get($-colors, $name), $theme);
+}
+
+@keyframes status-icon-rotating {
+  0% {
+    transform: scaleY(-1) rotate(360deg);
+  }
+
+  100% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+}
+
+.#{$-block} {
+  display: flex;
+  justify-content: flex-end;
+}
+
+// Warning icons: outer fill + inner path contrast
+.#{$-block}--light.#{$-block}--light-minor-warning,
+.#{$-block}--dark.#{$-block}--dark-minor-warning {
+  // stylelint-disable-next-line carbon/theme-use
+  fill: $yellow-20;
+}
+
+.#{$-block}--light.#{$-block}--light-major-warning path:nth-of-type(1),
+.#{$-block}--dark.#{$-block}--dark-major-warning path:nth-of-type(1),
+.#{$-block}--light.#{$-block}--light-minor-warning path:nth-of-type(1),
+.#{$-block}--dark.#{$-block}--dark-minor-warning path:nth-of-type(1) {
+  // stylelint-disable-next-line carbon/theme-use
+  fill: $gray-100;
+}
+
+@each $theme in $-themes {
+  @each $icon in $-icons {
+    .#{$-block}--#{$theme}.#{$-block}--#{$theme}-#{$icon} {
+      // stylelint-disable-next-line carbon/theme-use
+      fill: -clr($icon, $theme);
+
+      @if $icon == in-progress {
+        @media (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
+        // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+        animation: status-icon-rotating 8000ms infinite linear;
+      }
+    }
+  }
+}

@@ -275,11 +275,10 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     const assigned =
       this._decoratorSlot?.assignedElements({ flatten: true }) ?? [];
     const decoratorWidth = assigned[0]?.getBoundingClientRect().width ?? 0;
-    const { hideCloseButton } = tearsheetSignal.get();
-    // React uses 24px for close button (not 32px) — matches React's
+    // React always adds 24 regardless of hideCloseButton — it is a fixed margin,
+    // not the measured close button size. Match React exactly:
     // `headerActionMarginRight = AILabelWidth + 24 + (isSm ? 8 : 0)`
-    const closeButtonWidth = !hideCloseButton ? 24 : 0;
-    const offset = decoratorWidth + closeButtonWidth + (isSm ? 8 : 0);
+    const offset = decoratorWidth + 24 + (isSm ? 8 : 0);
     document.documentElement.style.setProperty(
       '--tearsheet-header-action-offset',
       `${offset}px`
@@ -305,8 +304,10 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
     const closeButtonTemplate = !hideCloseButton
       ? html`
-          <div class="${blockClass}__close-button ${carbonPrefix}--modal-close-button">
-            <${carbonPrefix}-icon-button
+          <div
+            class="${blockClass}__close-button ${carbonPrefix}--modal-close-button"
+          >
+            <cds-icon-button
               class="${carbonPrefix}--modal-close"
               kind="ghost"
               size="${fullyCollapsed ? 'md' : 'lg'}"
@@ -321,7 +322,7 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
               <span slot="tooltip-content"
                 >${closeIconDescription || 'Close'}</span
               >
-            </${carbonPrefix}-icon-button>
+            </cds-icon-button>
           </div>
         `
       : html``;

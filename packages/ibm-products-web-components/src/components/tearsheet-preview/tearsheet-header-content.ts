@@ -272,13 +272,12 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     if (!open) {
       return;
     }
-    const assigned =
-      this._decoratorSlot?.assignedElements({ flatten: true }) ?? [];
-    const decoratorWidth = assigned[0]?.getBoundingClientRect().width ?? 0;
-    // React always adds 24 regardless of hideCloseButton — it is a fixed margin,
-    // not the measured close button size. Match React exactly:
-    // `headerActionMarginRight = AILabelWidth + 24 + (isSm ? 8 : 0)`
-    const offset = decoratorWidth + 24 + (isSm ? 8 : 0);
+    // Mirror React: querySelector `.cds--ai-label` and read clientWidth.
+    // clientWidth is available synchronously after render (no rAF needed).
+    // React: `AILabelWidth + 24 + (isSm ? 8 : 0)`
+    const AILabelWidth =
+      this.querySelector('[slot="decorator"]')?.clientWidth ?? 0;
+    const offset = AILabelWidth + 24 + (isSm ? 8 : 0);
     document.documentElement.style.setProperty(
       '--tearsheet-header-action-offset',
       `${offset}px`
@@ -313,7 +312,15 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
               size="${fullyCollapsed ? 'md' : 'lg'}"
               align="left"
               aria-label="${closeIconDescription || 'Close'}"
-              @click="${() => onClose?.()}"
+              @click="${() => {
+                onClose?.();
+                this.dispatchEvent(
+                  new CustomEvent(
+                    `${prefix}-tearsheet-header-close-button-clicked`,
+                    { bubbles: true, composed: true }
+                  )
+                );
+              }}"
             >
               ${iconLoader(Close20, {
                 slot: 'icon',

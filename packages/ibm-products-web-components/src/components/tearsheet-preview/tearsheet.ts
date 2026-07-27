@@ -292,7 +292,9 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
       // Use requestAnimationFrame to ensure child components have registered their containers
       requestAnimationFrame(() => {
-        this._trapFocusAPI = trapFocus(this as HTMLElement, this.uniqueId);
+        this._trapFocusAPI = trapFocus(this as HTMLElement, this.uniqueId, () =>
+          this._getFirstFocusable()
+        );
       });
     }
 
@@ -379,6 +381,18 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       this.style.setProperty('--scale-factor', scaleFactor.toString());
       this.style.setProperty('--block-size-change', blockSizeChange);
     }
+  }
+
+  /**
+   * Delegates to `c4p-tearsheet-header-content.getFirstFocusable()`.
+   * All priority logic lives in the component that owns the relevant DOM.
+   */
+  private _getFirstFocusable(): HTMLElement | null {
+    const headerContentEl = this.querySelector(
+      `${prefix}-tearsheet-header-content`
+    ) as (HTMLElement & { getFirstFocusable(): HTMLElement | null }) | null;
+
+    return headerContentEl?.getFirstFocusable() ?? null;
   }
 
   disconnectedCallback() {

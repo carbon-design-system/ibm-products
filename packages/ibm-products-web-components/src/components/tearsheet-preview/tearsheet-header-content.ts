@@ -23,6 +23,7 @@ import { tearsheetSignal } from './tearsheet-signal';
 import { SignalWatcher } from '@lit-labs/signals';
 import Close20 from '@carbon/icons/es/close/20.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import { carbonPrefix } from '../../globals/settings';
 
 const blockClass = `${prefix}--tearsheet__next`;
 
@@ -97,14 +98,61 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     return tearsheet?.getAttribute('variant') === 'narrow';
   }
 
+  /**
+   * Returns the first focusable element in the header for the focus trap.
+   
+   * Priority by screen size:
+   *   Large (desktop): header-actions button → close button → AI label
+   *   Small (mobile):  AI label → close button → header-actions button
+   */
+  getFirstFocusable(): HTMLElement | null {
+    // header-actions: consumer may slot a button directly OR wrap buttons in a div.
+    //   <cds-button slot="header-actions">        → slotted element IS the button
+    //   <div slot="header-actions"><cds-button>   → button is a child of the slotted div
+    const headerActionSlot = this.querySelector<HTMLElement>(
+      '[slot="header-actions"]'
+    );
+    const headerActionBtn = headerActionSlot
+      ? headerActionSlot.matches(
+          `${carbonPrefix}-button:not([disabled]), button:not([disabled])`
+        )
+        ? headerActionSlot
+        : headerActionSlot.querySelector<HTMLElement>(
+            `${carbonPrefix}-button:not([disabled]), button:not([disabled])`
+          )
+      : null;
+
+    // close button: inside this component's own shadow DOM
+    const closeBtn = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__close-button ${carbonPrefix}-icon-button:not([disabled])`
+    );
+
+    // AI label: consumer may slot cds-ai-label directly OR wrap it in a div.
+    //   <cds-ai-label slot="decorator">        → slotted element IS the ai-label
+    //   <div slot="decorator"><cds-ai-label>   → ai-label is a child of the slotted div
+    const decoratorSlot = this.querySelector<HTMLElement>('[slot="decorator"]');
+    const aiLabel = decoratorSlot
+      ? decoratorSlot.matches(`${carbonPrefix}-ai-label`)
+        ? decoratorSlot
+        : decoratorSlot.querySelector<HTMLElement>(`${carbonPrefix}-ai-label`)
+      : null;
+
+    return this._isMobileOrNarrow
+      ? (aiLabel ?? closeBtn ?? headerActionBtn ?? null)
+      : (headerActionBtn ?? closeBtn ?? aiLabel ?? null);
+  }
+
   protected firstUpdated(_changedProperties: PropertyValues): void {
     this._checkSlots();
     this._isMobileOrNarrow =
       this.isMobileDevice?.matches || this.isNarrowVariant;
 
-    // Register with the current tearsheet's uniqueId
+    // Register containers in intentional order:
+    // 1. `this` (light DOM) — finds header-action buttons and AI label (slot="decorator")
+    // 2. `this.shadowRoot` — finds close button (cds-icon-button) and decorator slot host
     const uniqueId = tearsheetSignal.get().uniqueId;
     if (uniqueId) {
+      registerFocusableContainers(this, uniqueId);
       registerFocusableContainers(this.shadowRoot, uniqueId);
     }
   }
@@ -120,6 +168,44 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
     this._updateDecoratorSize();
     this._updateHeaderOffset();
+    this._updateInertState();
+  }
+
+  /**
+   * Applies `inert` to collapsed header regions so they are removed from
+   * the tab order and AT tree. CSS alone (opacity:0 / max-block-size:0)
+   * does not prevent keyboard focus on hidden elements.
+   *
+   * Collapsed regions:
+   *   - Everything in header-content except the title wrapper
+   *     (description, label, extra slot content, "Read more" button)
+   *   - Header-actions on small/narrow screens
+   */
+  private _updateInertState(): void {
+    const { fullyCollapsed } = tearsheetSignal.get();
+
+    // Header-content children except title wrapper
+    const headerContent = this.shadowRoot?.querySelector(
+      `.${blockClass}__header-content`
+    );
+    if (headerContent) {
+      headerContent
+        .querySelectorAll<HTMLElement>(
+          `:scope > *:not(.${blockClass}__content__title-wrapper)`
+        )
+        .forEach((el) => {
+          el.toggleAttribute('inert', fullyCollapsed);
+        });
+    }
+
+    // Header-actions: inert on small/narrow when collapsed
+    const headerActions = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__header-actions`
+    );
+    if (headerActions) {
+      const shouldInert = fullyCollapsed && this._isMobileOrNarrow;
+      headerActions.toggleAttribute('inert', shouldInert);
+    }
   }
 
   private _checkSlots() {
@@ -143,7 +229,7 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     this._hasDecorator = childItems.length > 0;
     if (this._hasDecorator) {
       for (const item of childItems) {
-        if (item.tagName.toLowerCase() === 'cds-ai-label') {
+        if (item.tagName.toLowerCase() === `${carbonPrefix}-ai-label`) {
           this._hasAILabel = true;
           break;
         }
@@ -190,7 +276,9 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
       this._decoratorSlot?.assignedElements({ flatten: true }) ?? [];
     const decoratorWidth = assigned[0]?.getBoundingClientRect().width ?? 0;
     const { hideCloseButton } = tearsheetSignal.get();
-    const closeButtonWidth = !hideCloseButton ? 32 : 0;
+    // React uses 24px for close button (not 32px) — matches React's
+    // `headerActionMarginRight = AILabelWidth + 24 + (isSm ? 8 : 0)`
+    const closeButtonWidth = !hideCloseButton ? 24 : 0;
     const offset = decoratorWidth + closeButtonWidth + (isSm ? 8 : 0);
     document.documentElement.style.setProperty(
       '--tearsheet-header-action-offset',
@@ -217,9 +305,9 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
     const closeButtonTemplate = !hideCloseButton
       ? html`
-          <div class="${blockClass}__close-button cds--modal-close-button">
-            <cds-icon-button
-              class="cds--modal-close"
+          <div class="${blockClass}__close-button ${carbonPrefix}--modal-close-button">
+            <${carbonPrefix}-icon-button
+              class="${carbonPrefix}--modal-close"
               kind="ghost"
               size="${fullyCollapsed ? 'md' : 'lg'}"
               align="left"
@@ -228,12 +316,12 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
             >
               ${iconLoader(Close20, {
                 slot: 'icon',
-                class: 'cds--modal-close__icon',
+                class: `${carbonPrefix}--modal-close__icon`,
               })}
               <span slot="tooltip-content"
                 >${closeIconDescription || 'Close'}</span
               >
-            </cds-icon-button>
+            </${carbonPrefix}-icon-button>
           </div>
         `
       : html``;
@@ -308,10 +396,14 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
     // DOM order drives tab order:
     //   Desktop/Wide: header-actions → decorator → close-button → header-content
-    //   Mobile/Narrow: header-content → header-actions (natural stacking)
-    // CSS `order` property handles the visual layout independently.
+    //   Mobile/Narrow: decorator → close-button → header-content → header-actions
+    //
+    // On mobile the decorator and close button are position:absolute (top-right corner),
+    // so they are visually first. Placing them first in DOM order aligns tab order with
+    // visual order: AI label → close button → content → header-actions.
     return this._isMobileOrNarrow
-      ? html`${headerContentTemplate} ${headerActionsTemplate}`
+      ? html`${decoratorTemplate} ${closeButtonTemplate}
+        ${headerContentTemplate} ${headerActionsTemplate}`
       : html`${headerActionsTemplate} ${decoratorTemplate}
         ${closeButtonTemplate} ${headerContentTemplate}`;
   }

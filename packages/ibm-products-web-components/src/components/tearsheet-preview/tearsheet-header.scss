@@ -154,7 +154,7 @@ $motion-duration: $duration-moderate-02;
     block-size: 1px;
     content: '';
     inline-size: 100vw;
-    inset-block-start: -$spacing-02;
+    inset-block-start: 0;
     inset-inline-start: 50%;
     pointer-events: none;
     transform: translateX(-50%);

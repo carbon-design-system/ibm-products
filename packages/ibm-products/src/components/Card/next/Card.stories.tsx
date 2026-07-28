@@ -521,17 +521,17 @@ export const WithHeaderActions = () => (
           <Card.Actions>
             <Card.Action>
               <Button kind="tertiary" size="sm">
-                Action
+                Export
               </Button>
             </Card.Action>
             <Card.Action>
               <Button kind="tertiary" size="sm">
-                Action
+                Share
               </Button>
             </Card.Action>
             <Card.Action>
               <Button kind="tertiary" size="sm">
-                Action
+                View report
               </Button>
             </Card.Action>
           </Card.Actions>

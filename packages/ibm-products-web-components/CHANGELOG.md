@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.44.0-rc.0`
+## `@carbon/ibm-products-web-components@0.44.0`
 ### Features :rocket:
 - feat(tearsheet): preview tearsheet code connect integration (#9631)
 

@@ -1,0 +1,57 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$prefix: 'c4p';
+
+@use '@carbon/ibm-products-styles/scss/components/AddSelect/add-select_next'
+  as *;
+
+:host(#{$prefix}-add-select-selection-summary) {
+  display: block;
+
+  .#{$block-class__next}__selection-summary {
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+  }
+
+  .#{$block-class__next}__selection-summary-header {
+    display: flex;
+    align-items: center;
+    padding: $spacing-04 $spacing-05;
+    border-block-end: 1px solid $border-subtle-01;
+    gap: $spacing-03;
+  }
+
+  .#{$block-class__next}__selection-summary-title {
+    @include type.type-style('heading-compact-01');
+
+    flex: 1;
+    margin: 0;
+    color: $text-primary;
+  }
+
+  .#{$block-class__next}__selection-summary-header-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-02;
+  }
+
+  .#{$block-class__next}__selection-summary-body {
+    overflow: auto;
+    flex: 1;
+    @supports (overflow-block: auto) {
+      overflow-block: auto;
+    }
+  }
+}

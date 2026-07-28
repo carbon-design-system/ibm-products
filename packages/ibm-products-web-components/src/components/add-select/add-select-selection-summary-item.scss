@@ -1,0 +1,81 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+
+$prefix: 'c4p';
+
+@use '@carbon/ibm-products-styles/scss/components/AddSelect/add-select_next'
+  as *;
+
+:host(#{$prefix}-add-select-selection-summary-item) {
+  display: block;
+
+  .#{$block-class__next}__selection-summary-item {
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class__next}__selection-summary-item-title-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: $spacing-04 $spacing-03 $spacing-04 $spacing-05;
+  }
+
+  .#{$block-class__next}__selection-summary-item-selected-item {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-01;
+  }
+
+  .#{$block-class__next}__selection-summary-item-title {
+    @include type.type-style('body-compact-01');
+
+    margin: 0;
+    color: $text-primary;
+  }
+
+  .#{$block-class__next}__selection-summary-item-subtitle {
+    @include type.type-style('label-01');
+
+    margin: 0;
+    color: $text-secondary;
+  }
+
+  .#{$block-class__next}__selection-summary-item-content {
+    padding: 0 $spacing-05 $spacing-04;
+  }
+
+  .#{$block-class__next}__selection-summary-item-entry {
+    margin-block-end: $spacing-04;
+  }
+
+  .#{$block-class__next}__selection-summary-item-header {
+    @include type.type-style('label-01');
+
+    margin: 0;
+    color: $text-secondary;
+  }
+
+  .#{$block-class__next}__selection-summary-item-body {
+    @include type.type-style('body-compact-01');
+
+    margin: 0;
+    color: $text-primary;
+  }
+
+  .#{$block-class__next}__selection-summary-item-remove-button-container {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+}

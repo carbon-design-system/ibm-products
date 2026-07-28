@@ -734,7 +734,9 @@ $duration: 1000ms;
 
   .#{$block-class}__breadcrumb-bar {
     position: sticky;
-    z-index: 1;
+    // Higher than __tab-bar (z-index: 1) so breadcrumb overflow dropdowns
+    // always render above the tab bar strip.
+    z-index: 2;
     background-color: $layer;
     block-size: to-rem(40px);
     /* stylelint-disable-next-line carbon/layout-use */

@@ -12,19 +12,12 @@ import React, {
   useRef,
   RefObject,
 } from 'react';
-import { useIsomorphicEffect } from '../../../global/js/hooks';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {
-  Column,
-  DefinitionTooltip,
-  Grid,
-  unstable_Text as Text,
-  Section,
-  Heading,
-} from '@carbon/react';
+import { Column, Grid, Section, Heading } from '@carbon/react';
 import { blockClass } from '../PageHeaderUtils';
 import { usePageHeader, type PageHeaderObserverState } from './context';
+import { TruncatedText } from '../../TruncatedText';
 
 /**
  * -----------------
@@ -53,6 +46,10 @@ export interface PageHeaderContentProps {
    */
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | typeof Heading;
   /**
+   * Specify lines to truncate in title
+   */
+  truncate?: number;
+  /**
    * The PageHeaderContent's contextual actions
    */
   contextualActions?: React.ReactNode;
@@ -74,6 +71,7 @@ export const PageHeaderContent = React.forwardRef<
     children,
     title,
     titleAs = 'h1',
+    truncate,
     renderIcon: IconElement,
     contextualActions,
     pageActions,
@@ -108,17 +106,6 @@ export const PageHeaderContent = React.forwardRef<
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageActions]);
 
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
-
-  const isEllipsisActive = (element: HTMLHeadingElement) => {
-    setIsEllipsisApplied(element.offsetHeight < element.scrollHeight);
-    return element.offsetHeight < element.scrollHeight;
-  };
-
-  useIsomorphicEffect(() => {
-    titleRef.current && isEllipsisActive(titleRef.current);
-  }, [title]);
-
   return (
     <Section as="div" className={classNames} ref={componentRef} {...other}>
       <Grid>
@@ -132,25 +119,14 @@ export const PageHeaderContent = React.forwardRef<
                   </div>
                 )}
 
-                {isEllipsisApplied ? (
-                  <DefinitionTooltip definition={title}>
-                    <Text
-                      ref={titleRef}
-                      as={titleAs}
-                      className={`${blockClass}__content__title`}
-                    >
-                      {title}
-                    </Text>
-                  </DefinitionTooltip>
-                ) : (
-                  <Text
-                    ref={titleRef}
-                    as={titleAs}
-                    className={`${blockClass}__content__title`}
-                  >
-                    {title}
-                  </Text>
-                )}
+                <TruncatedText
+                  align="bottom"
+                  id={title}
+                  lines={truncate}
+                  type="tooltip"
+                  className={`${blockClass}__content__title`}
+                  value={title}
+                />
               </div>
               {contextualActions && (
                 <div className={`${blockClass}__content__contextual-actions`}>
@@ -211,4 +187,8 @@ PageHeaderContent.propTypes = {
     PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
     PropTypes.elementType,
   ]),
+  /**
+   * Specify lines to truncate in title
+   */
+  truncate: PropTypes.number,
 };

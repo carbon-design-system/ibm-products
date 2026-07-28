@@ -8,5 +8,8 @@
  */
 import './add-select';
 import './add-select-body';
+import './add-select-column';
 import './add-select-row';
-import './add-select-content';
+import './add-select-selection-summary';
+import './add-select-selection-summary-item';
+import './add-select-item-panel';

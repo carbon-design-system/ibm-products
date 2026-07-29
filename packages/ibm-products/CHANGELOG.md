@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.95.0-rc.0`
+## `@carbon/ibm-products@2.95.0`
 ### Features :rocket:
 - feat(Card): implement card footer and primitives (#9659)
 - feat(addselect): change story default state as open (#9647)

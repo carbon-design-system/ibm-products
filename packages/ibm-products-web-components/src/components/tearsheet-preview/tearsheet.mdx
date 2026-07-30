@@ -1,6 +1,88 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as TearsheetStories from './tearsheet.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import helperSource from './tearsheet-helpers.ts?raw';
+import stackingSource from './_story-assets/stacking-tearsheet.ts?raw';
+
+export const customFunctionArr = [
+  helperSource
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .trim()
+];
+
+export const customImportArr = [
+  `import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';`,
+  `import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';`,
+  `import Bee from '@carbon/icons/es/bee/32';`,
+  `import Add16 from '@carbon/icons/es/add/32';`,
+  `import RightPanelClose32 from '@carbon/icons/es/right-panel--close/32';`
+];
+
+export const progressIndicatorFn = `
+const progressIndicator = (vertical) =>
+  html\`<cds-progress-indicator ?vertical=\${vertical} current-index="1">
+    <cds-progress-step description="Step 1: Getting started with Carbon Design System" label="First step" complete></cds-progress-step>
+    <cds-progress-step description="Step 2: Getting started with Carbon Design System" label="Second step with tooltip" current></cds-progress-step>
+    <cds-progress-step description="Step 3: Getting started with Carbon Design System" label="Third step with tooltip"></cds-progress-step>
+    <cds-progress-step description="Step 4: Getting started with Carbon Design System" label="Fourth step" secondary-label="Example invalid step" invalid></cds-progress-step>
+    <cds-progress-step disabled description="Step 5: Getting started with Carbon Design System" label="Fifth step"></cds-progress-step>
+  </cds-progress-indicator>\`;
+`;
+
+export const tabsFn = `
+const tabs = html\`<cds-tabs value="tab-1">
+  <cds-tab id="tab-1" target="tab-panel-1" value="tab-1">Tab 1</cds-tab>
+  <cds-tab id="tab-2" target="tab-panel-2" value="tab-2">Tab 2</cds-tab>
+  <cds-tab id="tab-3" target="tab-panel-3" value="tab-3">Tab 3</cds-tab>
+  <cds-tab id="tab-4" target="tab-panel-4" value="tab-4">Tab 4</cds-tab>
+  <cds-tab id="tab-5" target="tab-panel-5" value="tab-5">Tab 5</cds-tab>
+  <cds-tab id="tab-6" target="tab-panel-6" value="tab-6">Tab 6</cds-tab>
+  <cds-tab id="tab-7" target="tab-panel-7" value="tab-7">Tab 7</cds-tab>
+</cds-tabs>\`;
+
+const tabPanel = html\`<div class="tabs-demo">
+  <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>Tab Panel 1</div>
+  <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>Tab Panel 2</div>
+  <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>Tab Panel 3</div>
+  <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>Tab Panel 4</div>
+  <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>Tab Panel 5</div>
+  <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>Tab Panel 6</div>
+  <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>Tab Panel 7</div>
+</div>\`;
+`;
+
+export const getButtonSizeFn = `
+const getButtonSize = (variant = 'wide') => {
+  const smMediaQuery = '(max-width: 672px)';
+  const isSmallScreen = window.matchMedia(smMediaQuery).matches;
+  return isSmallScreen || variant === 'narrow' ? 'xl' : '2xl';
+};
+`;
+
+export const stackingImportArr = [
+  `import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';`,
+  `import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';`,
+  `import BottomPanelOpen32 from '@carbon/icons/es/bottom-panel--open/32';`,
+  `import { ref, createRef } from 'lit/directives/ref.js';`,
+  `import '@carbon/web-components/es/components/button/index.js';`,
+  `import '@carbon/web-components/es/components/text-input/index.js';`,
+];
+
+export const stackingFunctionArr = [
+  stackingSource
+    // Remove named imports: import X from '...' and import { X } from '...'
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    // Remove bare side-effect imports: import '...'
+    .replace(/import\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .replace(/styles\s*=\s*styles\s*;?/g, '')
+    .replace(/declare\s+global[\s\S]*$/, '')
+    .trim()
+];
 
 <Meta of={TearsheetStories} />
 
@@ -106,44 +188,161 @@ import '@carbon/web-components/es/components/button/index.js';
 </c4p-preview-tearsheet>
 ```
 
+## Example Usage
+
+### Default
+
+<Canvas
+  of={TearsheetStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.Default,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+          suppressAutoImports: true,
+        }),
+    },
+  ]}
+></Canvas>
+
 ## With Influencer and Summary Content
 
-```html
-<c4p-preview-tearsheet open variant="wide">
-  <c4p-tearsheet-header slot="header">
-    <c4p-tearsheet-header-content 
-      slot="header-content"
-      title="Resource details">
-    </c4p-tearsheet-header-content>
-  </c4p-tearsheet-header>
-  <!-- Left panel -->
-    <c4p-tearsheet-influencer slot="influencer">
-      <h6>Quick info</h6>
-      <p>Additional context here</p>
-    </c4p-tearsheet-influencer>
-  <c4p-tearsheet-body slot="body">
-  
+<Canvas
+  of={TearsheetStories.WithInfluencer}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.WithInfluencer,
+          customFunctionDefs: [...customFunctionArr, progressIndicatorFn],
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+          suppressAutoImports: true,
+        }),
+    },
+  ]}
+></Canvas>
 
-    <!-- Main content -->
-    <div slot="main-content">
-      <h5>Main content area</h5>
-      <!-- Your content -->
-    </div>
+## With Tabs
 
-    <!-- Right panel -->
-    <c4p-tearsheet-summary-content slot="summary-content">
-      <h6>Summary</h6>
-      <p>Key details</p>
-    </c4p-tearsheet-summary-content>
-  </c4p-tearsheet-body>
+<Canvas
+  of={TearsheetStories.WithTabs}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.WithTabs,
+          customFunctionDefs: [...customFunctionArr, progressIndicatorFn, tabsFn],
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+          suppressAutoImports: true,
+        }),
+    },
+  ]}
+></Canvas>
 
-  <c4p-tearsheet-footer slot="footer">
-    <cds-button slot="actions">Save</cds-button>
-  </c4p-tearsheet-footer>
-</c4p-preview-tearsheet>
-```
+## Narrow Tearsheet
+
+<Canvas
+  of={TearsheetStories.narrowTearsheet}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.narrowTearsheet,
+          customFunctionDefs: [...customFunctionArr, progressIndicatorFn],
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+          suppressAutoImports: true,
+        }),
+    },
+  ]}
+></Canvas>
+
+## With Custom Footer Actions
+
+<Canvas
+  of={TearsheetStories.WithCustomFooterActions}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.WithCustomFooterActions,
+          customFunctionDefs: [...customFunctionArr, getButtonSizeFn],
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+          suppressAutoImports: true,
+        }),
+    },
+  ]}
+></Canvas>
 
 ## Stacking Tearsheets
+
+<Canvas
+  of={TearsheetStories.StackingTearsheets}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.StackingTearsheets,
+          customModuleDefs: stackingFunctionArr,
+          customImports: stackingImportArr,
+          componentName: 'tearsheet-preview',
+          suppressAutoImports: true,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Stacking Narrow Tearsheets
+
+<Canvas
+  of={TearsheetStories.StackingNarrowTearsheets}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.StackingNarrowTearsheets,
+          customModuleDefs: stackingFunctionArr,
+          customImports: stackingImportArr,
+          componentName: 'tearsheet-preview',
+          suppressAutoImports: true,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Stacking With Different Sizes
+
+<Canvas
+  of={TearsheetStories.StackingWithDifferentSizes}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.StackingWithDifferentSizes,
+          customModuleDefs: stackingFunctionArr,
+          customImports: stackingImportArr,
+          componentName: 'tearsheet-preview',
+          suppressAutoImports: true,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Stacking Tearsheets (docs)
 
 To enable stacking for multiple tearsheets, wrap them in a `<c4p-tearsheet-stack>` component. This opt-in approach provides better performance and explicit control over which tearsheets participate in stacking, similar to React's `StackProvider`. The `stack-step-size` attribute controls the visual offset between stacked tearsheets (`sm`, `md`, or `lg`).
 

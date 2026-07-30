@@ -1,0 +1,99 @@
+/*
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/hide-at-breakpoint' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/breakpoint' as *;
+
+$c4p-prefix: 'c4p';
+$carbon-prefix: 'cds';
+$story-prefix: 'tearsheet-preview-stories';
+
+.#{$story-prefix}story-container {
+  position: fixed;
+  display: grid;
+  block-size: 100vh;
+  grid-template-rows: 3rem 1fr;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.#{$story-prefix}story-header {
+  background-color: var(--cds-layer-01);
+}
+
+.#{$story-prefix}story-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cds-layer-02);
+}
+
+#{$c4p-prefix}-tearsheet-influencer,
+div[slot='main-content'],
+#{$c4p-prefix}-tearsheet-summary-content {
+  padding-block: $spacing-07;
+}
+
+$block-class__next: #{$c4p-prefix}--tearsheet__next;
+@mixin hideAtLargeScreens() {
+  @include hide-at-lg;
+  @include hide-at-md;
+  @include hide-at-xlg;
+  @include hide-at-max;
+}
+
+.summaryPanelTrigger {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+.influencerPanelTrigger {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+#{$c4p-prefix}-preview-tearsheet:not([variant='narrow']) {
+  .summaryPanelTrigger,
+  .influencerPanelTrigger {
+    @include hideAtLargeScreens();
+  }
+}
+
+.summaryPanelHeading {
+  @include type.type-style('heading-03');
+}
+
+.stackButtons {
+  @include hide-at-sm;
+}
+
+.smallScreenButton {
+  @include hideAtLargeScreens();
+}
+
+.main-content {
+  padding: $spacing-05;
+}
+
+.#{$story-prefix}text-inputs {
+  display: flex;
+  gap: $spacing-05;
+  margin-block-end: $spacing-05;
+}
+
+.#{$story-prefix}textarea-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-05;
+}
+
+// Made with Bob

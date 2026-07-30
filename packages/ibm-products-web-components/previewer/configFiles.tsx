@@ -38,6 +38,7 @@ export const tsconfig: string = `{
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
+    "useDefineForClassFields": false,
     "moduleDetection": "force"
   },
   "include": ["src"]

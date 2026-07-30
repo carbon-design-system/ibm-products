@@ -29,6 +29,7 @@ import '@carbon/web-components/es/components/progress-bar/index.js';
 import '@carbon/web-components/es/components/notification/index.js';
 import { breakpoints } from '@carbon/layout';
 import mdx from './tearsheet.mdx';
+import { getFooterActions } from './tearsheet-helpers';
 
 const storyPrefix = 'tearsheet-preview-stories';
 
@@ -363,18 +364,18 @@ export const Default = {
       </div>
 
       <c4p-preview-tearsheet
-        variant="${args.variant}"
-        ?open="${args.open}"
-        ?prevent-close-on-click-outside="${args.preventCloseOnClickOutside}"
+        variant=${args.variant}
+        ?open=${args.open}
+        ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
       >
         <c4p-tearsheet-header
-          ?hide-close-button="${args.hideCloseButton}"
-          ?disable-header-collapse="${args.disableHeaderCollapse}"
+          ?hide-close-button=${args.hideCloseButton}
+          ?disable-header-collapse=${args.disableHeaderCollapse}
         >
           <!-- slotted Decorator -->
           ${args.decorator !== 'NONE' ? getDecorator(args.decorator) : ''}
 
-          <c4p-tearsheet-header-content title="${args.title}">
+          <c4p-tearsheet-header-content title=${args.title}>
             <label slot="label">${args.label}</label>
             ${args.showDescription ? description : ''}
             ${args.showTitleIcon
@@ -418,22 +419,8 @@ export const Default = {
             : ''}
         </c4p-tearsheet-body>
         <c4p-tearsheet-footer
-          variant="${args.variant}"
-          .actions="${[
-            {
-              kind: 'ghost',
-              label: 'Cancel',
-              onClick: toggleButton,
-            },
-            {
-              kind: 'secondary',
-              label: 'Back',
-            },
-            {
-              kind: 'primary',
-              label: 'Submit',
-            },
-          ]}"
+          variant=${args.variant}
+          .actions=${getFooterActions()}
         >
         </c4p-tearsheet-footer>
       </c4p-preview-tearsheet>
@@ -602,81 +589,82 @@ export const narrowTearsheet = {
       <style>
         ${styles}
       </style>
-       <div class="${storyPrefix}story-container">
+      <div class="${storyPrefix}story-container">
         <div class="${storyPrefix}story-header"></div>
         <div id="page-content-selector" class="${storyPrefix}story-content">
           <cds-button @click="${toggleButton}">Toggle tearsheet</cds-button>
         </div>
       </div>
 
+      <c4p-preview-tearsheet variant="narrow">
+        <c4p-tearsheet-header ?hide-close-button="${false}">
+          <!-- slotted Decorator -->
+          ${getDecorator('WITH_AI_LABEL')}
+          <c4p-tearsheet-header-content title="Tile to the tearsheet">
+            <label slot="label"> label </label>
+            ${description}
 
-     <c4p-preview-tearsheet variant="narrow">
-     <c4p-tearsheet-header  ?hide-close-button="${false}" >
-           <!-- slotted Decorator -->
-             ${getDecorator('WITH_AI_LABEL')}
-      <c4p-tearsheet-header-content title="Tile to the tearsheet">
-      <label slot="label"> label </label>
-    ${description}
-     
-      
-      <div slot="header-actions">
-            <cds-button size="sm" kind="tertiary" 
-              >Primary action ${iconLoader(Add16, { slot: 'icon' })}</cds-button
-            >
-          </div>
-     </c4p-tearsheet-header-content>
-   
-      
-   
-     </c4p-tearsheet-header>
-      <c4p-tearsheet-influencer  >${progressIndicator(true)}</c4p-tearsheet-influencer>
-       <c4p-tearsheet-body >
-       <div  slot="main-content"> 
-        <div class="influencerPanelTrigger">
+            <div slot="header-actions">
+              <cds-button size="sm" kind="tertiary"
+                >Primary action
+                ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+              >
+            </div>
+          </c4p-tearsheet-header-content>
+        </c4p-tearsheet-header>
+        <c4p-tearsheet-influencer
+          >${progressIndicator(true)}</c4p-tearsheet-influencer
+        >
+        <c4p-tearsheet-body>
+          <div slot="main-content">
+            <div class="influencerPanelTrigger">
               <cds-button
                 kind="ghost"
                 label="Open influencer"
                 @click="${toggleInfluencerPanel}"
               >
-                 ${iconLoader(RightPanelClose32, {
-                   slot: 'icon',
-                 })}
-                </cds-button>
+                ${iconLoader(RightPanelClose32, {
+                  slot: 'icon',
+                })}
+              </cds-button>
             </div>
             <div class="summaryPanelTrigger">
               <cds-button
                 kind="ghost"
                 label="Open right panel"
-               @click="${toggleSummaryPanel}"
-               
-              > ${iconLoader(RightPanelClose32, {
-                slot: 'icon',
-              })}</cds-button>
+                @click="${toggleSummaryPanel}"
+              >
+                ${iconLoader(RightPanelClose32, {
+                  slot: 'icon',
+                })}</cds-button
+              >
             </div>
-        ${dummyContent}</div>
-       <c4p-tearsheet-summary-content   slot="summary-content">${summaryContent}</c4p-tearsheet-summary-content>
+            ${dummyContent}
+          </div>
+          <c4p-tearsheet-summary-content slot="summary-content"
+            >${summaryContent}</c4p-tearsheet-summary-content
+          >
         </c4p-tearsheet-body>
         <c4p-tearsheet-footer
-         variant="narrow"
-         .actions="${[
-           {
-             kind: 'ghost',
-             label: 'Cancel',
-             onClick: toggleButton,
-           },
-           {
-             kind: 'secondary',
-             label: 'Back',
-           },
-           {
-             kind: 'primary',
-             label: 'Submit',
-           },
-         ]}"
-       >
-       </c4p-tearsheet-footer>
-     </<c4p-preview-tearsheet>
-      
+          variant="narrow"
+          .actions="${[
+            {
+              kind: 'ghost',
+              label: 'Cancel',
+              onClick: toggleButton,
+            },
+            {
+              kind: 'secondary',
+              label: 'Back',
+            },
+            {
+              kind: 'primary',
+              label: 'Submit',
+            },
+          ]}"
+        >
+        </c4p-tearsheet-footer>
+      </c4p-preview-tearsheet>
     `;
   },
 };

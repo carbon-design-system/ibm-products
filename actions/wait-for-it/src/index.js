@@ -24,6 +24,29 @@ async function main() {
   // As of got v12, legacy Url instances are not supported anymore. You need to use WHATWG URL instead.
   url = new URL(url);
 
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+    throw new Error(`Invalid URL scheme: ${url.protocol}. Only http and https are allowed.`);
+  }
+
+  const blockedHosts = [
+    '169.254.169.254',
+    '0.0.0.0',
+    '127.0.0.1',
+    'localhost',
+    'metadata.google.internal',
+  ];
+  if (blockedHosts.includes(url.hostname)) {
+    throw new Error(`Access to internal host ${url.hostname} is not allowed.`);
+  }
+
+  const ipMatch = url.hostname.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+  if (ipMatch) {
+    const [, a, b] = ipMatch.map(Number);
+    if (a === 10 || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168) || a === 0) {
+      throw new Error(`Access to private IP range ${url.hostname} is not allowed.`);
+    }
+  }
+
   core.info(`Waiting for a 200 response from ${url}`);
 
   try {

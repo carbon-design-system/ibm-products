@@ -9,7 +9,6 @@
 
 import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/search/index.js';
@@ -33,15 +32,6 @@ const blockClass = `${prefix}--add-select__next`;
  */
 @customElement(`${prefix}-add-select-body`)
 class CDSAddSelectBody extends LitElement {
-  /**
-   * Whether this is a multi-select (inherited from parent c4p-add-select)
-   * @private
-   */
-  private get _multi(): boolean {
-    const parent = this.closest(`${prefix}-add-select`) as any;
-    return parent?.multi ?? false;
-  }
-
   /**
    * Label for items section
    */
@@ -85,10 +75,10 @@ class CDSAddSelectBody extends LitElement {
   private _searchTerm = '';
 
   /**
-   * Item count for display
+   * Item count for display. When undefined, no count badge is rendered.
    */
   @property({ type: Number, attribute: 'item-count' })
-  itemCount = 0;
+  itemCount: number | undefined = undefined;
 
   /**
    * Whether to hide the search input
@@ -143,115 +133,128 @@ class CDSAddSelectBody extends LitElement {
       _handleSearch: handleSearch,
     } = this;
 
-    const bodyClasses = classMap({
-      [`${blockClass}__body`]: true,
-      [`${blockClass}__body--single`]: !this._multi,
-      [`${blockClass}__body--multi`]: this._multi,
-    });
-
-    const headerClass = classMap({
-      [`${blockClass}__header`]: true,
-      [`${blockClass}__header--custom`]: this._hasHeaderSlot,
-    });
+    // Only render the __header div when it has visible content.
+    // When hideSearch is true, no header slot is filled, no item count,
+    // and no path — the div is omitted entirely to avoid blank space.
+    const hasHeader =
+      !hideSearch ||
+      this._hasHeaderSlot ||
+      itemCount !== undefined ||
+      (path && path.length > 0);
 
     return html`
-      <div class=${bodyClasses}>
-        <!-- Header Section: single <slot name="header"> is always rendered.
-             When filled by consumer (_hasHeaderSlot=true), the default content
-             below is hidden via CSS. When empty, the slot renders nothing and
-             the default content is visible. -->
-        <div class=${headerClass}>
-          <slot
-            name="header"
-            @slotchange=${this._handleHeaderSlotChange}
-          ></slot>
+      <div class="${blockClass}__body">
+        ${hasHeader
+          ? html`
+              <div class="${blockClass}__header">
+                <!-- Named slot: consumer can replace the entire header -->
+                <slot
+                  name="header"
+                  @slotchange=${this._handleHeaderSlotChange}
+                ></slot>
 
-          <!-- Default header: search + actions, then sub-header row -->
-          ${!hideSearch
-            ? html`
-                <div class="${blockClass}__search-with-actions">
-                  <div class="${blockClass}__search">
-                    <cds-search
-                      label-text=${globalSearchLabel}
-                      placeholder=${globalSearchPlaceholder}
-                      size="lg"
-                      @cds-search-input=${handleSearch}
-                    ></cds-search>
-                  </div>
-                  <div class="${blockClass}__actions">
-                    <slot name="actions"></slot>
-                  </div>
-                </div>
-              `
-            : nothing}
-
-          <div class="${blockClass}__sub-header">
-            <div class="${blockClass}__tags">
-              ${searchTerm
-                ? html`
-                    <p class="${blockClass}__tags-label">
-                      ${searchResultsTitle}
-                    </p>
-                  `
-                : path && path.length > 0
+                ${!this._hasHeaderSlot
                   ? html`
-                      <cds-breadcrumb
-                        no-trailing-slash
-                        class="${classMap({
-                          [`${prefix}--add-select__next__breadcrumbs`]: true,
-                          [`${prefix}--add-select__next__breadcrumbs--multi`]:
-                            this._multi,
-                        })}"
-                      >
-                        ${path.map((entry, idx) => {
-                          const isCurrentPage = idx === path.length - 1;
-                          return html`
-                            <cds-breadcrumb-item
-                              ?is-current-page=${isCurrentPage}
+                      <!-- Search + optional actions -->
+                      ${!hideSearch
+                        ? html`
+                            <div
+                              class="${blockClass}__search ${blockClass}__search--with-actions"
                             >
-                              ${isCurrentPage
-                                ? entry.title
-                                : html`
-                                    <cds-link
-                                      href="#"
-                                      @click=${(e: Event) => {
-                                        e.preventDefault();
-                                        this.dispatchEvent(
-                                          new CustomEvent(
-                                            (
-                                              this
-                                                .constructor as typeof CDSAddSelectBody
-                                            ).eventBreadcrumbClick,
-                                            {
-                                              bubbles: true,
-                                              cancelable: true,
-                                              composed: true,
-                                              detail: { index: idx },
-                                            }
-                                          )
-                                        );
-                                      }}
-                                    >
-                                      ${entry.title}
-                                    </cds-link>
-                                  `}
-                            </cds-breadcrumb-item>
-                          `;
-                        })}
-                      </cds-breadcrumb>
+                              <div class="${blockClass}__search-input">
+                                <cds-search
+                                  label-text=${globalSearchLabel}
+                                  placeholder=${globalSearchPlaceholder}
+                                  size="lg"
+                                  @cds-search-input=${handleSearch}
+                                ></cds-search>
+                              </div>
+                              <div class="${blockClass}__global-actions">
+                                <slot name="actions"></slot>
+                              </div>
+                            </div>
+                          `
+                        : nothing}
+
+                      <!-- Sub-header: breadcrumbs / label + item count + optional actions -->
+                      <div class="${blockClass}__sub-header">
+                        <div class="${blockClass}__tags">
+                          ${searchTerm
+                            ? html`
+                                <p class="${blockClass}__tags-label">
+                                  ${searchResultsTitle}
+                                </p>
+                              `
+                            : path && path.length > 0
+                              ? html`
+                                  <cds-breadcrumb
+                                    no-trailing-slash
+                                    class="${blockClass}__breadcrumbs"
+                                  >
+                                    ${path.map((entry, idx) => {
+                                      const isCurrentPage =
+                                        idx === path.length - 1;
+                                      return html`
+                                        <cds-breadcrumb-item
+                                          ?is-current-page=${isCurrentPage}
+                                        >
+                                          ${isCurrentPage
+                                            ? entry.title
+                                            : html`
+                                                <cds-link
+                                                  href="#"
+                                                  @click=${(e: Event) => {
+                                                    e.preventDefault();
+                                                    this.dispatchEvent(
+                                                      new CustomEvent(
+                                                        (
+                                                          this
+                                                            .constructor as typeof CDSAddSelectBody
+                                                        ).eventBreadcrumbClick,
+                                                        {
+                                                          bubbles: true,
+                                                          cancelable: true,
+                                                          composed: true,
+                                                          detail: {
+                                                            index: idx,
+                                                          },
+                                                        }
+                                                      )
+                                                    );
+                                                  }}
+                                                >
+                                                  ${entry.title}
+                                                </cds-link>
+                                              `}
+                                        </cds-breadcrumb-item>
+                                      `;
+                                    })}
+                                  </cds-breadcrumb>
+                                `
+                              : html`
+                                  <p class="${blockClass}__tags-label">
+                                    ${itemsLabel}
+                                  </p>
+                                `}
+                          ${itemCount !== undefined
+                            ? html`<cds-tag type="gray" size="sm"
+                                >${itemCount}</cds-tag
+                              >`
+                            : nothing}
+                        </div>
+                        <slot name="sub-header-actions"></slot>
+                      </div>
                     `
-                  : html`
-                      <p class="${blockClass}__tags-label">${itemsLabel}</p>
-                    `}
-              <cds-tag type="gray" size="sm">${itemCount}</cds-tag>
-            </div>
-            <slot name="sub-header-actions"></slot>
-          </div>
-        </div>
+                  : nothing}
+              </div>
+            `
+          : nothing}
 
         <!-- Body Content -->
-        <div class="${blockClass}__content">
-          <slot></slot>
+        <div class="${blockClass}__content" role="grid" tabindex="0">
+          <div class="${blockClass}-list-body" role="rowgroup">
+            <slot></slot>
+          </div>
         </div>
       </div>
     `;

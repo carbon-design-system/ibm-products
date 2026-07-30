@@ -8,13 +8,17 @@
  */
 
 import { LitElement, html, nothing } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/checkbox/index.js';
 import '@carbon/web-components/es/components/radio-button/index.js';
+import '@carbon/web-components/es/components/skeleton-text/index.js';
+import '@carbon/web-components/es/components/skeleton-icon/index.js';
+import '@carbon/web-components/es/components/icon-button/index.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16';
+import View16 from '@carbon/icons/es/view/16';
 
 import { prefix } from '../../globals/settings';
 import styles from './add-select-row.scss?lit';
@@ -29,17 +33,26 @@ const blockClass = `${prefix}--add-select__next-row`;
  * @slot meta - Optional metadata slot
  * @fires c4p-add-select-row-select - Fired when row is selected/deselected
  * @fires c4p-add-select-row-navigate - Fired when navigating to children
+ * @fires c4p-add-select-row-item-panel-click - Fired when the item panel icon button is clicked
  */
 @customElement(`${prefix}-add-select-row`)
 class CDSAddSelectRow extends LitElement {
   /**
-   * Whether this is part of a multi-select list (inherited from parent c4p-add-select)
-   * @private
+   * Whether this row renders a checkbox (multi) or radio button (single).
+   * Set by the parent c4p-add-select-column via the _column-multi attribute.
+   * Falls back to reading the nearest c4p-add-select wrapper when not set.
    */
+  @property({ type: Boolean, attribute: '_column-multi', reflect: true })
+  private _columnMulti = false;
+
   private get _multi(): boolean {
+    if (this.hasAttribute('_column-multi')) {
+      return this._columnMulti;
+    }
     const parent = this.closest(`${prefix}-add-select`) as any;
     return parent?.multi ?? false;
   }
+
   /**
    * Unique identifier for the item
    */
@@ -71,10 +84,59 @@ class CDSAddSelectRow extends LitElement {
   selected = false;
 
   /**
+   * Whether the checkbox is in an indeterminate state (multi hierarchical)
+   */
+  @property({ type: Boolean, reflect: true })
+  indeterminate = false;
+
+  /**
    * Whether the item is disabled
    */
   @property({ type: Boolean })
   disabled = false;
+
+  /**
+   * Whether to render the row as a skeleton (loading) state
+   */
+  @property({ type: Boolean, reflect: true })
+  skeleton = false;
+
+  /** Whether the icon slot has assigned content */
+  @state()
+  private _hasIconSlot = false;
+
+  private _handleIconSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasIconSlot = slot.assignedElements({ flatten: true }).length > 0;
+  }
+
+  /** Whether the rowContent slot has assigned content */
+  @state()
+  private _hasRowContentSlot = false;
+
+  private _handleRowContentSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasRowContentSlot =
+      slot.assignedElements({ flatten: true }).length > 0;
+  }
+
+  /**
+   * Whether to show the item details icon button
+   */
+  @property({ type: Boolean, attribute: 'has-item-panel' })
+  hasItemPanel = false;
+
+  /**
+   * Whether the item panel is currently open for this item
+   */
+  @property({ type: Boolean, attribute: 'item-panel-open', reflect: true })
+  itemPanelOpen = false;
+
+  /**
+   * Accessible label for the item panel icon button
+   */
+  @property({ type: String, attribute: 'item-panel-icon-description' })
+  itemPanelIconDescription = 'View details';
 
   /**
    * Whether the item has children (for navigation)
@@ -87,6 +149,25 @@ class CDSAddSelectRow extends LitElement {
    */
   @property({ type: String, attribute: 'parent-id' })
   parentId = '';
+
+  /**
+   * Handle item panel icon button click
+   */
+  private _handleItemPanelClick(event: Event) {
+    event.stopPropagation();
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: { itemId: this.itemId },
+    };
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSAddSelectRow).eventItemPanelClick,
+        init
+      )
+    );
+  }
 
   /**
    * Handle navigation to children
@@ -162,8 +243,13 @@ class CDSAddSelectRow extends LitElement {
       title,
       subtitle,
       selected,
+      indeterminate,
       disabled,
       hasChildren,
+      hasItemPanel,
+      itemPanelOpen,
+      itemPanelIconDescription,
+      skeleton,
       _handleSelect: handleSelect,
     } = this;
 
@@ -171,7 +257,35 @@ class CDSAddSelectRow extends LitElement {
       [`${blockClass}`]: true,
       [`${blockClass}--selected`]: selected,
       [`${blockClass}--disabled`]: disabled,
+      [`${blockClass}--skeleton`]: skeleton,
     });
+
+    // Skeleton state — non-interactive placeholder
+    if (skeleton) {
+      return html`
+        <div class=${rowClasses} aria-hidden="true">
+          <div class="${blockClass}__cell">
+            <div class="${blockClass}__cell-wrapper">
+              <div class="${blockClass}__skeleton-control"></div>
+              <div class="${blockClass}__content">
+                ${this._hasIconSlot
+                  ? html`
+                      <div class="${blockClass}__icon">
+                        <cds-skeleton-icon></cds-skeleton-icon>
+                      </div>
+                    `
+                  : nothing}
+                <div class="${blockClass}__text">
+                  <cds-skeleton-text
+                    class="${blockClass}__skeleton-title"
+                  ></cds-skeleton-text>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
 
     return html`
       <div
@@ -188,37 +302,67 @@ class CDSAddSelectRow extends LitElement {
                   <cds-checkbox
                     class="${blockClass}__checkbox"
                     ?checked=${selected}
+                    ?indeterminate=${indeterminate}
                     ?disabled=${disabled}
                     @cds-checkbox-changed=${handleSelect}
                     label-text=${title}
                     ?hide-label=${true}
                     tabindex="-1"
-                  >
-                  </cds-checkbox>
+                  ></cds-checkbox>
                 `
               : html`
                   <cds-radio-button
+                    class="${blockClass}__radio"
                     ?checked=${selected}
                     ?disabled=${disabled}
                     @cds-radio-button-changed=${handleSelect}
-                    label-text=${title}
+                    label-text=" "
+                    aria-label=${title}
                     value=${itemId}
                     tabindex="-1"
-                  >
-                  </cds-radio-button>
+                  ></cds-radio-button>
                 `}
 
             <div class="${blockClass}__content">
-              <slot name="icon" class="${blockClass}__icon"></slot>
-              <div class="${blockClass}__text">
-                <div class="${blockClass}__title">${title}</div>
-                ${subtitle &&
-                html`<div class="${blockClass}__subtitle">${subtitle}</div>`}
-              </div>
-              <slot></slot>
+              <slot
+                name="icon"
+                class="${blockClass}__icon"
+                @slotchange=${this._handleIconSlotChange}
+              ></slot>
+              ${this._hasRowContentSlot
+                ? nothing
+                : html`
+                    <div class="${blockClass}__text">
+                      <div class="${blockClass}__title">${title}</div>
+                      ${subtitle
+                        ? html`<div class="${blockClass}__subtitle">
+                            ${subtitle}
+                          </div>`
+                        : nothing}
+                    </div>
+                    <slot></slot>
+                  `}
+              <slot
+                name="row-content"
+                @slotchange=${this._handleRowContentSlotChange}
+              ></slot>
               <slot name="meta"></slot>
             </div>
 
+            ${hasItemPanel
+              ? html`
+                  <cds-icon-button
+                    class="${blockClass}__view-item-panel"
+                    kind="ghost"
+                    size="sm"
+                    label=${itemPanelIconDescription}
+                    ?aria-pressed=${itemPanelOpen}
+                    @click=${this._handleItemPanelClick}
+                  >
+                    ${iconLoader(View16, { slot: 'icon' })}
+                  </cds-icon-button>
+                `
+              : nothing}
             ${hasChildren
               ? html`
                   <div
@@ -226,7 +370,7 @@ class CDSAddSelectRow extends LitElement {
                     @click=${this._handleNavigate}
                     role="button"
                     tabindex="-1"
-                    aria-label="Navigate to children"
+                    aria-label="Navigate into ${title}"
                   >
                     <slot name="nav-icon">
                       ${iconLoader(ChevronRight16, {
@@ -254,6 +398,13 @@ class CDSAddSelectRow extends LitElement {
    */
   static get eventNavigate() {
     return `${prefix}-add-select-row-navigate`;
+  }
+
+  /**
+   * The name of the custom event fired when item panel icon button is clicked
+   */
+  static get eventItemPanelClick() {
+    return `${prefix}-add-select-row-item-panel-click`;
   }
 
   static styles = styles;

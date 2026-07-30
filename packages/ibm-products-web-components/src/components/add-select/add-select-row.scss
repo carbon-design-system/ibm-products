@@ -19,6 +19,13 @@ $prefix: 'c4p';
 @use '@carbon/ibm-products-styles/scss/components/AddSelect/add-select_next'
   as *;
 
+/* Item panel open — blue left border, mirrors React's -row-item-panel--selected */
+:host(#{$prefix}-add-select-row[item-panel-open]) {
+  .#{$block-class__next}-row {
+    border-inline-start-color: $interactive;
+  }
+}
+
 /* Web Component specific overrides */
 :host(#{$prefix}-add-select-row) {
   display: block;
@@ -42,7 +49,9 @@ $prefix: 'c4p';
     &--selected {
       background-color: $layer-selected-01;
     }
+  }
 
+  .#{$block-class__next}-row {
     &--disabled {
       cursor: not-allowed;
       opacity: 0.5;

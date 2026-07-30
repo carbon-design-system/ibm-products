@@ -25,14 +25,13 @@ $prefix: 'c4p';
   }
 
   .#{$block-class__next}-column__search {
-    padding: $spacing-04;
-    border-block-end: 1px solid $border-subtle-01;
-  }
+    padding: $spacing-05;
+    padding-block-end: 0;
 
-  .#{$block-class__next}-column__search--with-actions {
-    display: flex;
-    align-items: center;
-    gap: $spacing-03;
+    &--with-actions {
+      display: flex;
+      align-items: flex-end;
+    }
   }
 
   .#{$block-class__next}-column__search-input {
@@ -41,14 +40,13 @@ $prefix: 'c4p';
 
   .#{$block-class__next}-column__actions {
     display: flex;
-    align-items: center;
-    gap: $spacing-02;
+    align-items: flex-end;
   }
 
   .#{$block-class__next}-column__header {
     display: flex;
     align-items: center;
-    padding: $spacing-03 $spacing-05;
+    padding: $spacing-05;
     border-block-end: 1px solid $border-subtle-01;
   }
 
@@ -59,9 +57,20 @@ $prefix: 'c4p';
   }
 
   .#{$block-class__next}-column__title {
-    @include type.type-style('label-01');
+    @include type.type-style('body-compact-01');
 
     color: $text-secondary;
+    font-weight: 600;
+  }
+
+  // Select all: checkbox label-text area holds title + tag inline
+  .#{$block-class__next}-column__select-all {
+    .cds--checkbox-label-text {
+      display: flex;
+      align-items: center;
+      gap: $spacing-03;
+      margin-inline-start: $spacing-03;
+    }
   }
 
   .#{$block-class__next}-column__rows {

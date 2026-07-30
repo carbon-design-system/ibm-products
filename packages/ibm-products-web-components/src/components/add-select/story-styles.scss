@@ -36,6 +36,15 @@ $block-class__next: 'c4p--add-select__next';
   }
 }
 
+// AddSelectBody story wrapper — prevents c4p-add-select from stretching to
+// 100% canvas block-size, keeping the component near the top like React.
+.#{$story-prefix}__body-story {
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  c4p-add-select {
+    block-size: auto;
+  }
+}
+
 .#{$story-prefix}-container--single {
   inline-size: 26rem;
 }

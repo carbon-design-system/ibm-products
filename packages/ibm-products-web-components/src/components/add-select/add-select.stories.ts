@@ -9,11 +9,13 @@
 
 import { html, nothing } from 'lit';
 import { action } from 'storybook/actions';
+import { useState } from '@storybook/preview-api';
 import '@carbon/web-components/es/components/toggle/index.js';
 import './add-select';
 import './add-select-body';
 import './add-select-column';
 import './add-select-row';
+import '../user-avatar/index.js';
 import './add-select-selection-summary';
 import './add-select-selection-summary-item';
 import './add-select-item-panel';
@@ -91,7 +93,6 @@ const AddSelectBodyTemplate = (args) => {
     globalSearchPlaceholder,
     searchResultsTitle,
     itemCount,
-    multi,
     hideSearch,
     showActionsSlot,
     showSubHeaderActions,
@@ -103,85 +104,87 @@ const AddSelectBodyTemplate = (args) => {
     <style>
       ${styles}
     </style>
-    <c4p-add-select ?multi=${multi}>
-      <div class="${storyClass}__placeholder-shell">
-        <c4p-add-select-body
-          items-label=${itemsLabel}
-          global-search-label=${globalSearchLabel}
-          global-search-placeholder=${globalSearchPlaceholder}
-          search-results-title=${searchResultsTitle}
-          .itemCount=${itemCount}
-          .path=${showPath ? path : []}
-          ?hide-search=${hideSearch}
-          @c4p-add-select-body-search=${action('c4p-add-select-body-search')}
-          @c4p-add-select-body-breadcrumb-click=${action(
-            'c4p-add-select-body-breadcrumb-click'
-          )}
-        >
-          ${showActionsSlot
-            ? html`
-                <cds-icon-button
-                  slot="actions"
-                  label="Sort"
-                  kind="ghost"
-                  size="lg"
-                >
-                  <svg
-                    slot="icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 32 32"
-                    width="16"
-                    height="16"
-                  >
-                    <path
-                      d="M27.6 20.6L24 24.2V4h-2v20.2l-3.6-3.6L17 22l6 6 6-6-1.4-1.4zM9 4L3 10l1.4 1.4L8 7.8V28h2V7.8l3.6 3.6L15 10 9 4z"
-                    />
-                  </svg>
-                </cds-icon-button>
-                <cds-icon-button
-                  slot="actions"
-                  label="Filter"
-                  kind="ghost"
-                  size="lg"
-                >
-                  <svg
-                    slot="icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 32 32"
-                    width="16"
-                    height="16"
-                  >
-                    <path
-                      d="M18 28a2 2 0 0 1-1.2-.4l-4-3A2 2 0 0 1 12 23v-7.06l-8.8-10A2 2 0 0 1 4.72 3H27.28A2 2 0 0 1 28 6.94l-8 10V26a2 2 0 0 1-2 2z"
-                    />
-                  </svg>
-                </cds-icon-button>
-              `
-            : nothing}
-          ${showSubHeaderActions
-            ? html`
-                <cds-toggle
-                  slot="sub-header-actions"
-                  id="body-subheader-toggle"
-                  label-a="Placeholder action"
-                  label-b="Placeholder action"
-                  size="sm"
-                  hide-label
-                ></cds-toggle>
-              `
-            : nothing}
-          <div class="${storyClass}__placeholder-rows">
-            ${sampleItems.slice(0, 3).map(
-              () => html`
-                <div class="${storyClass}__placeholder-row">
-                  <p>AddSelect.Row</p>
-                </div>
-              `
+    <div class="${storyClass}__body-story">
+      <c4p-add-select>
+        <div class="${storyClass}__placeholder-shell">
+          <c4p-add-select-body
+            items-label=${itemsLabel}
+            global-search-label=${globalSearchLabel}
+            global-search-placeholder=${globalSearchPlaceholder}
+            search-results-title=${searchResultsTitle}
+            .itemCount=${itemCount}
+            .path=${showPath ? path : []}
+            ?hide-search=${hideSearch}
+            @c4p-add-select-body-search=${action('c4p-add-select-body-search')}
+            @c4p-add-select-body-breadcrumb-click=${action(
+              'c4p-add-select-body-breadcrumb-click'
             )}
-          </div>
-        </c4p-add-select-body>
-      </div>
-    </c4p-add-select>
+          >
+            ${showActionsSlot
+              ? html`
+                  <cds-icon-button
+                    slot="actions"
+                    label="Sort"
+                    kind="ghost"
+                    size="lg"
+                  >
+                    <svg
+                      slot="icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 32 32"
+                      width="16"
+                      height="16"
+                    >
+                      <path
+                        d="M27.6 20.6L24 24.2V4h-2v20.2l-3.6-3.6L17 22l6 6 6-6-1.4-1.4zM9 4L3 10l1.4 1.4L8 7.8V28h2V7.8l3.6 3.6L15 10 9 4z"
+                      />
+                    </svg>
+                  </cds-icon-button>
+                  <cds-icon-button
+                    slot="actions"
+                    label="Filter"
+                    kind="ghost"
+                    size="lg"
+                  >
+                    <svg
+                      slot="icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 32 32"
+                      width="16"
+                      height="16"
+                    >
+                      <path
+                        d="M18 28a2 2 0 0 1-1.2-.4l-4-3A2 2 0 0 1 12 23v-7.06l-8.8-10A2 2 0 0 1 4.72 3H27.28A2 2 0 0 1 28 6.94l-8 10V26a2 2 0 0 1-2 2z"
+                      />
+                    </svg>
+                  </cds-icon-button>
+                `
+              : nothing}
+            ${showSubHeaderActions
+              ? html`
+                  <cds-toggle
+                    slot="sub-header-actions"
+                    id="body-subheader-toggle"
+                    label-a="Placeholder action"
+                    label-b="Placeholder action"
+                    size="sm"
+                    hide-label
+                  ></cds-toggle>
+                `
+              : nothing}
+            <div class="${storyClass}__placeholder-rows">
+              ${sampleItems.slice(0, 3).map(
+                () => html`
+                  <div class="${storyClass}__placeholder-row">
+                    <p>AddSelect.Row</p>
+                  </div>
+                `
+              )}
+            </div>
+          </c4p-add-select-body>
+        </div>
+      </c4p-add-select>
+    </div>
   `;
 };
 
@@ -194,7 +197,6 @@ export const AddSelectBody = {
     globalSearchPlaceholder: 'Search by name',
     searchResultsTitle: 'Search results',
     itemCount: 3,
-    multi: false,
     hideSearch: false,
     showActionsSlot: true,
     showSubHeaderActions: false,
@@ -225,11 +227,6 @@ export const AddSelectBody = {
     itemCount: {
       control: { type: 'number', min: 0 },
       description: 'Item count for display in tag badge',
-    },
-    multi: {
-      control: 'boolean',
-      description:
-        'Switch between multi-select (checkboxes) and single-select (radio buttons)',
     },
     hideSearch: {
       control: 'boolean',
@@ -272,13 +269,56 @@ const AddSelectColumnTemplate = (args) => {
     enableNavigation,
   } = args;
 
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(
+    new Set(['1', '4'])
+  );
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredItems = sampleItems.filter((item) =>
+    item.title?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const allSelected =
+    filteredItems.length > 0 &&
+    filteredItems.every((item) => selectedItems.has(item.id));
+
+  const allIndeterminate =
+    selectedItems.size > 0 &&
+    selectedItems.size < filteredItems.length &&
+    !allSelected;
+
+  const handleItemSelect = (e: CustomEvent) => {
+    action('c4p-add-select-row-select')(e);
+    const { itemId, selected } = e.detail;
+    const next = multi ? new Set(selectedItems) : new Set<string>();
+    if (selected) {
+      next.add(itemId);
+    } else {
+      next.delete(itemId);
+    }
+    setSelectedItems(next);
+  };
+
+  const handleSearch = (e: CustomEvent) => {
+    action('c4p-add-select-column-search')(e);
+    setSearchTerm(e.detail.searchTerm);
+  };
+
+  const handleSelectAll = (e: CustomEvent) => {
+    action('c4p-add-select-column-select-all')(e);
+    const { checked } = e.detail;
+    setSelectedItems(
+      checked ? new Set(filteredItems.map((item) => item.id)) : new Set()
+    );
+  };
+
   return html`
     <style>
       ${styles}
     </style>
     <div class="${storyClass}-column-container">
       <c4p-add-select ?multi=${multi}>
-        <c4p-add-select-body>
+        <c4p-add-select-body ?hide-search=${true}>
           <c4p-add-select-column
             title=${title}
             search-label=${searchLabel}
@@ -286,13 +326,11 @@ const AddSelectColumnTemplate = (args) => {
             ?hide-search=${!showSearch}
             ?multi=${multi}
             ?show-select-all=${showSelectAll}
-            .itemCount=${sampleItems.length}
-            @c4p-add-select-column-search=${action(
-              'c4p-add-select-column-search'
-            )}
-            @c4p-add-select-column-select-all=${action(
-              'c4p-add-select-column-select-all'
-            )}
+            .itemCount=${filteredItems.length}
+            ?all-selected=${allSelected}
+            ?all-indeterminate=${allIndeterminate}
+            @c4p-add-select-column-search=${handleSearch}
+            @c4p-add-select-column-select-all=${handleSelectAll}
           >
             ${showActionsSlot
               ? html`
@@ -301,6 +339,7 @@ const AddSelectColumnTemplate = (args) => {
                     label="Sort"
                     kind="ghost"
                     size="sm"
+                    align="bottom"
                   >
                     <svg
                       slot="icon"
@@ -319,6 +358,7 @@ const AddSelectColumnTemplate = (args) => {
                     label="Filter"
                     kind="ghost"
                     size="sm"
+                    align="bottom"
                   >
                     <svg
                       slot="icon"
@@ -334,16 +374,15 @@ const AddSelectColumnTemplate = (args) => {
                   </cds-icon-button>
                 `
               : nothing}
-            ${sampleItems.map(
+            ${filteredItems.map(
               (item) => html`
                 <c4p-add-select-row
                   item-id=${item.id}
                   title=${item.title}
                   value=${item.value}
+                  ?selected=${selectedItems.has(item.id)}
                   ?has-children=${enableNavigation && item.id === '1'}
-                  @c4p-add-select-row-select=${action(
-                    'c4p-add-select-row-select'
-                  )}
+                  @c4p-add-select-row-select=${handleItemSelect}
                   @c4p-add-select-row-navigate=${action(
                     'c4p-add-select-row-navigate'
                   )}
@@ -385,7 +424,7 @@ export const AddSelectColumn = {
     },
     showSearch: {
       control: 'boolean',
-      description: 'Toggle the hide-search behavior',
+      description: 'Toggle the hideSearch behavior',
       table: { category: 'Story controls' },
     },
     showActionsSlot: {
@@ -406,14 +445,36 @@ export const AddSelectColumn = {
       description: 'Show how the column can pass navigation callbacks to rows',
       table: { category: 'Story controls' },
     },
+    hideSearch: { table: { disable: true } },
+    itemCount: { table: { disable: true } },
+    allSelected: { table: { disable: true } },
+    allIndeterminate: { table: { disable: true } },
+    onSelectAll: { table: { disable: true } },
+    onNavigate: { table: { disable: true } },
+    className: { table: { disable: true } },
+    searchProps: { table: { disable: true } },
+    tagProps: { table: { disable: true } },
+    selectAllCheckboxProps: { table: { disable: true } },
   },
 };
 
 // ─── AddSelectRow ─────────────────────────────────────────────────────────────
 
 const AddSelectRowTemplate = (args) => {
-  const { multi, selected, showSubtitle, showTag, hasChildren, disabled } =
-    args;
+  const {
+    multi,
+    selected,
+    indeterminate,
+    showSubtitle,
+    showTag,
+    showIcon,
+    useRowContent,
+    hasChildren,
+    hasItemPanel,
+    itemPanelOpen,
+    disabled,
+    skeleton,
+  } = args;
 
   return html`
     <style>
@@ -421,7 +482,7 @@ const AddSelectRowTemplate = (args) => {
     </style>
     <div class="${storyClass}-container--single">
       <c4p-add-select ?multi=${multi}>
-        <c4p-add-select-body>
+        <c4p-add-select-body ?hide-search=${true}>
           <c4p-add-select-column ?multi=${multi} ?hide-search=${true}>
             <c4p-add-select-row
               item-id="1"
@@ -429,16 +490,41 @@ const AddSelectRowTemplate = (args) => {
               subtitle=${showSubtitle ? 'Item subtitle' : ''}
               value="folder 1"
               ?selected=${selected}
+              ?indeterminate=${indeterminate}
               ?disabled=${disabled}
               ?has-children=${hasChildren}
+              ?has-item-panel=${hasItemPanel}
+              ?item-panel-open=${hasItemPanel && itemPanelOpen}
+              ?skeleton=${skeleton}
               @c4p-add-select-row-select=${action('c4p-add-select-row-select')}
               @c4p-add-select-row-navigate=${action(
                 'c4p-add-select-row-navigate'
               )}
+              @c4p-add-select-row-item-panel-click=${action(
+                'c4p-add-select-row-item-panel-click'
+              )}
             >
-              ${showTag
-                ? html`<cds-tag type="blue" size="sm">Folder</cds-tag>`
+              ${showIcon
+                ? html`
+                    <c4p-user-avatar
+                      slot="icon"
+                      size="md"
+                      name="thomas j. watson"
+                      tooltip-text="user profile image"
+                      tooltip-alignment="right"
+                    ></c4p-user-avatar>
+                  `
                 : nothing}
+              ${useRowContent
+                ? html`
+                    <div slot="row-content" class="${storyClass}__row-content">
+                      <strong>Custom row content</strong>
+                      <cds-tag type="purple" size="sm">Custom</cds-tag>
+                    </div>
+                  `
+                : showTag
+                  ? html`<cds-tag type="blue" size="sm">Folder</cds-tag>`
+                  : nothing}
             </c4p-add-select-row>
           </c4p-add-select-column>
         </c4p-add-select-body>
@@ -453,10 +539,16 @@ export const AddSelectRow = {
   args: {
     multi: false,
     selected: false,
+    indeterminate: false,
     showSubtitle: true,
     showTag: false,
+    showIcon: false,
+    useRowContent: false,
     hasChildren: true,
+    hasItemPanel: false,
+    itemPanelOpen: false,
     disabled: false,
+    skeleton: false,
   },
   argTypes: {
     multi: {
@@ -464,6 +556,16 @@ export const AddSelectRow = {
       description:
         'Toggle row rendering between checkbox and radio button mode',
       table: { category: 'Story controls' },
+    },
+    selected: {
+      control: 'boolean',
+      description: 'Set the row selection state',
+      table: { category: 'Story controls' },
+    },
+    indeterminate: {
+      control: 'boolean',
+      description:
+        'Whether the item is in an indeterminate state (for multi hierarchical selections)',
     },
     showSubtitle: {
       control: 'boolean',
@@ -475,19 +577,44 @@ export const AddSelectRow = {
       description: 'Render custom row children content (default slot)',
       table: { category: 'Story controls' },
     },
+    showIcon: {
+      control: 'boolean',
+      description: 'Demonstrate the optional icon slot',
+      table: { category: 'Story controls' },
+    },
+    useRowContent: {
+      control: 'boolean',
+      description:
+        'Demonstrate custom row-content slot (replaces title/subtitle/children)',
+      table: { category: 'Story controls' },
+    },
     hasChildren: {
       control: 'boolean',
       description: 'Show the navigation indicator for hierarchical lists',
+    },
+    hasItemPanel: {
+      control: 'boolean',
+      description: 'Show the item details icon button',
+    },
+    itemPanelOpen: {
+      control: 'boolean',
+      description: 'Whether the item panel is currently open for this item',
+      table: { category: 'Story controls' },
     },
     disabled: {
       control: 'boolean',
       description: 'Disable the example row',
     },
-    selected: {
+    skeleton: {
       control: 'boolean',
-      description: 'Set the row selection state',
-      table: { category: 'Story controls' },
+      description:
+        'Render the row as a skeleton (loading state) with placeholder content',
     },
+    itemId: { table: { disable: true } },
+    title: { table: { disable: true } },
+    subtitle: { table: { disable: true } },
+    value: { table: { disable: true } },
+    parentId: { table: { disable: true } },
   },
 };
 

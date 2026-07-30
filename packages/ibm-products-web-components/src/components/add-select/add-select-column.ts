@@ -89,6 +89,15 @@ class CDSAddSelectColumn extends LitElement {
   @state()
   private _searchTerm = '';
 
+  /** Whether the actions slot has any assigned content */
+  @state()
+  private _hasActionsSlot = false;
+
+  private _handleActionsSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasActionsSlot = slot.assignedElements({ flatten: true }).length > 0;
+  }
+
   private _handleSearch(event: CustomEvent) {
     this._searchTerm = (event.detail?.value as string) ?? '';
     this.dispatchEvent(
@@ -171,10 +180,15 @@ class CDSAddSelectColumn extends LitElement {
               <div
                 class="${classMap({
                   [`${blockClass}-column__search`]: true,
-                  [`${blockClass}-column__search--with-actions`]: true,
+                  [`${blockClass}-column__search--with-actions`]:
+                    this._hasActionsSlot,
                 })}"
               >
-                <div class="${blockClass}-column__search-input">
+                <div
+                  class="${this._hasActionsSlot
+                    ? `${blockClass}-column__search-input`
+                    : ''}"
+                >
                   <cds-search
                     label-text=${searchLabel}
                     placeholder=${searchPlaceholder}
@@ -185,6 +199,7 @@ class CDSAddSelectColumn extends LitElement {
                 <slot
                   name="actions"
                   class="${blockClass}-column__actions"
+                  @slotchange=${this._handleActionsSlotChange}
                 ></slot>
               </div>
             `
@@ -196,19 +211,20 @@ class CDSAddSelectColumn extends LitElement {
               <div class="${blockClass}-column__header">
                 ${showSelectAll && multi
                   ? html`
-                      <cds-checkbox
-                        class="${blockClass}-column__select-all"
-                        ?checked=${allSelected}
-                        ?indeterminate=${allIndeterminate}
-                        @cds-checkbox-changed=${this._handleSelectAll}
-                        label-text="${title}"
-                      >
-                      </cds-checkbox>
-                      ${itemCount > 0
-                        ? html`<cds-tag type="gray" size="sm"
-                            >${itemCount}</cds-tag
-                          >`
-                        : nothing}
+                      <div class="${blockClass}-column__title-wrapper">
+                        <cds-checkbox
+                          class="${blockClass}-column__select-all"
+                          ?checked=${allSelected}
+                          ?indeterminate=${allIndeterminate}
+                          @cds-checkbox-changed=${this._handleSelectAll}
+                          label-text="${title}"
+                        ></cds-checkbox>
+                        ${itemCount > 0
+                          ? html`<cds-tag type="gray" size="sm"
+                              >${itemCount}</cds-tag
+                            >`
+                          : nothing}
+                      </div>
                     `
                   : html`
                       <div class="${blockClass}-column__title-wrapper">

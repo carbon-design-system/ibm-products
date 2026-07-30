@@ -22,7 +22,6 @@ $prefix: 'c4p';
 :host(#{$prefix}-add-select-body) {
   display: block;
 
-  /* Apply shared styles within shadow DOM */
   .#{$block-class__next}__body {
     display: flex;
     flex-direction: column;
@@ -38,26 +37,26 @@ $prefix: 'c4p';
   // When consumer provides a custom header via slot="header",
   // hide the default search/sub-header content.
   .#{$block-class__next}__header--custom {
-    .#{$block-class__next}__search-with-actions,
+    .#{$block-class__next}__search,
     .#{$block-class__next}__sub-header {
       display: none;
     }
   }
 
-  .#{$block-class__next}__search-with-actions {
+  // Search row: input + actions side by side (matches __search--with-actions)
+  .#{$block-class__next}__search--with-actions {
     display: flex;
-    align-items: center;
-    gap: $spacing-03;
+    align-items: flex-end;
     margin-block-end: $spacing-05;
   }
 
-  .#{$block-class__next}__search {
+  .#{$block-class__next}__search-input {
     flex: 1;
   }
 
-  .#{$block-class__next}__actions {
+  .#{$block-class__next}__global-actions {
     display: flex;
-    flex-shrink: 0;
+    align-items: flex-end;
   }
 
   .#{$block-class__next}__sub-header {
@@ -79,8 +78,20 @@ $prefix: 'c4p';
     color: $text-secondary;
   }
 
+  .#{$block-class__next}__sub-header-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+    margin-inline-start: $spacing-05;
+  }
+
   .#{$block-class__next}__content {
     overflow: auto;
     flex: 1;
+  }
+
+  .#{$block-class__next}-list-body {
+    display: flex;
+    flex-direction: column;
   }
 }

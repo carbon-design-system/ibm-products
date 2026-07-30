@@ -11,6 +11,7 @@ import cx from 'classnames';
 import { AspectRatio, AspectRatioProps } from '@carbon/react';
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
+import { useCardContext } from './CardContext';
 
 const blockClass = `${pkg.prefix}--card-next`;
 const componentName = 'CardMedia';
@@ -25,18 +26,51 @@ export interface CardMediaProps extends Omit<AspectRatioProps, 'className'> {
    * Provide an optional class to be applied to the containing node.
    */
   className?: string;
+
+  /**
+   * Width of the media column when the card is in horizontal layout.
+   * Accepts any valid CSS width value (e.g. '200px', '40%').
+   * Defaults to '33.33%'. Has no effect in vertical (default) layout.
+   */
+  mediaWidth?: string;
 }
 
 /**
- * CardMedia is a media slot component that maintains aspect ratio using Carbon's AspectRatio.
- * Used for images, profiles, tags, large pictograms, and other substantial content in the card.
- * Supports all Carbon AspectRatio props including ratio: '1x1', '2x1', '2x3', '3x2', '4x3', '9x16', '16x9'
+ * CardMedia is a media slot component that maintains aspect ratio.
+ *
+ * In vertical (default) mode it delegates to Carbon's AspectRatio.
+ * In horizontal mode it renders a plain div sized to `mediaWidth` (default
+ * 33.33%) that stretches to the full card height — no aspect-ratio math needed.
  */
-export const CardMedia = ({ children, className, ...rest }: CardMediaProps) => {
+export const CardMedia = ({
+  children,
+  className,
+  ratio,
+  mediaWidth = '33.33%',
+  ...rest
+}: CardMediaProps) => {
+  const { horizontal } = useCardContext();
   const classes = cx(`${blockClass}__media`, className);
+
+  if (horizontal) {
+    return (
+      <div
+        className={`${blockClass}__media ${blockClass}__media--horizontal`}
+        style={
+          {
+            [`--${blockClass}--media-width`]: mediaWidth,
+          } as React.CSSProperties
+        }
+        {...getDevtoolsProps(componentName)}
+      >
+        {children}
+      </div>
+    );
+  }
 
   return (
     <AspectRatio
+      ratio={ratio}
       {...rest}
       className={classes}
       {...getDevtoolsProps(componentName)}
@@ -47,15 +81,10 @@ export const CardMedia = ({ children, className, ...rest }: CardMediaProps) => {
 };
 
 CardMedia.propTypes = {
-  /**
-   * Provide the contents of the CardMedia.
-   */
   children: PropTypes.node,
-
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
   className: PropTypes.string,
+  /** Width of the media column in horizontal layout. Any valid CSS width value. */
+  mediaWidth: PropTypes.string,
 };
 
 CardMedia.displayName = componentName;

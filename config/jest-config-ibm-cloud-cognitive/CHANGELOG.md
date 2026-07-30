@@ -1,3 +1,7 @@
+## `@jest-config-ibm-cloud-cognitive@1.54.0`
+### Housekeeping :house:
+- chore: upgrade jest to 30.0.5 (#9585)
+
 ## `@jest-config-ibm-cloud-cognitive@1.51.0`
 ### Housekeeping :house:
 - docs(changelog): update for v2.91.0-rc.0 (#9462)

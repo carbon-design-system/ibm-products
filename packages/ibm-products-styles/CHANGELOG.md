@@ -1,3 +1,19 @@
+## `@carbon/ibm-products-styles@2.91.0`
+### Features :rocket:
+- feat(Card): implement card footer and primitives (#9659)
+- feat(Card): implement composable `Card` header primitives (#9632)
+- feat(addselect): Progressive loading pattern (#9605)
+
+### Bug fixes :bug:
+- fix(BigNumber): Use figure & figcaption in both react and wc (#9707)
+- fix(aboutmodal): hyperlink spacing (#9702)
+- fix: design rerview changes react (#9621)
+
+### Housekeeping :house:
+- style(addselect): refine styles of add select components and patterns (#9669)
+- build(deps): update to Carbon 11 compatible versions to latest (#9660)
+- chore: upgrade jest to 30.0.5 (#9585)
+
 ## `@carbon/ibm-products-styles@2.90.0`
 ### Features :rocket:
 - feat(Card): initial scaffolding (#9597)

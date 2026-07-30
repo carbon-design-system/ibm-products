@@ -88,6 +88,7 @@ collect:
         - disableColumnSwapping
         - disabled
         - disabledCell
+        - disableHeaderCollapse
         - disableSubmit
         - displayMetalPanel
         - downloadLinkLabel
@@ -196,6 +197,7 @@ collect:
         - itemCount
         - items
         - itemsLabel
+        - keepMounted
         - key
         - kind
         - label
@@ -284,6 +286,7 @@ collect:
         - overflowAriaLabel
         - overflowAutoAlign
         - overflowClassName
+        - overflowMenuLabel
         - overflowTags
         - overflowTooltipAlign
         - overflowType
@@ -390,7 +393,9 @@ collect:
         - tags
         - theme
         - title
+        - titleEnd
         - titleSize
+        - titleStart
         - toolbarBatchActions
         - toolbarBatchActionsDisplayMin
         - tooltipAlign
@@ -411,6 +416,7 @@ collect:
         - variableRowHeight
         - variant
         - verticalAlign
+        - verticalGap
         - verticalPosition
         - viewAllLabel
         - viewLessLabel
@@ -446,6 +452,7 @@ collect:
         - breadcrumbProps
         - defaultModifiers
         - globalFilterOpts
+        - layout
         - linkProps
         - normalizedItems
         - onBreadcrumbClick
@@ -461,8 +468,6 @@ collect:
         - selectAllCheckboxProps
         - setPath
         - showSelectAll
-        # AddSelectContent
-        - layout
         # AddSelectFilter
         - appliedFilters
         - filterOpts
@@ -497,6 +502,7 @@ collect:
         - onItemPanelClick
         - radioButtonProps
         - rowContent
+        - skeleton
         # AddSelectSelectionSummary
         - editIconButtonProps
         - editIconDescription
@@ -578,12 +584,15 @@ collect:
         - componentName
         # Card
         - clickable
+        - density
         - getStarted
         # CardFooter
         - hasButton
         # CardHeader
         - inClickableCard
         - noActionIcons
+        # CardTitle
+        - maxWidth
         # Carousel
         - disableArrowScroll
         - disableResetOnResize
@@ -807,10 +816,6 @@ collect:
         - maxFileSize
         - maxFileSizeErrorBody
         - maxFileSizeErrorHeader
-        # Influencer
-        - influencerPanelAriaLabel
-        - influencerPanelOpen
-        - influencerPanelTriggerRef
         # InlineEditButton
         - columnConfig
         - isActiveCell
@@ -933,7 +938,6 @@ collect:
         - renderOverflowBreadcrumb
         # PageHeaderBreadcrumbPageActions
         - buttonKind
-        - overflowMenuLabel
         # PageHeaderContent
         - contextualActions
         - titleAs
@@ -1022,30 +1026,29 @@ collect:
         # StringFormatter
         - tooltipDirection
         - width
-        # SummaryContent
-        - summaryPanelAriaLabel
-        - summaryPanelOpen
-        - summaryPanelTriggerRef
         # TagOverflow
         - tagComponent
         # Tearsheet
         - containerClassName
         - disablePortal
-        - keepMounted
         - summaryContentWidth
-        - verticalGap
         # TearsheetHeader
-        - disableHeaderCollapse
+        - onHeaderCollapse
         # TearsheetHeaderActionItem
         - overflowItemLabel
         # TearsheetHeaderActions
         - menuButtonProps
-        # TearsheetHeaderContent
-        - titleEnd
-        - titleStart
+        # TearsheetInfluencer
+        - influencerPanelAriaLabel
+        - influencerPanelOpen
+        - influencerPanelTriggerRef
         # TearsheetPresence
         - _autoEnablePresence
         - _presenceId
+        # TearsheetSummaryContent
+        - summaryPanelAriaLabel
+        - summaryPanelOpen
+        - summaryPanelTriggerRef
         # TearsheetWithSteps
         - progressIndicator
         - setOpen
@@ -1286,7 +1289,7 @@ collect:
         # General - verticalPosition
         - lower
         - normal
-        # AddSelectContent - layout
+        # AddSelectBody - layout
         - horizontal
         - vertical
         # APIKeyDownloader - fileType
@@ -1295,6 +1298,9 @@ collect:
         # APIKeyModal - downloadFileType
         - json
         - txt
+        # Card - density
+        - expressive
+        - productive
         # Checklist - toggleLabelAlign
         - bottom
         - bottom-left

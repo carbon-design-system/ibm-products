@@ -21,6 +21,11 @@ import './add-select-selection-summary-item';
 import './add-select-item-panel';
 import styles from './story-styles.scss?lit';
 import type { AddSelectItem } from '@carbon/ibm-products-utilities';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import ArrowsVertical16 from '@carbon/icons/es/arrows--vertical/16';
+import Filter16 from '@carbon/icons/es/filter/16';
+import Launch16 from '@carbon/icons/es/launch/16';
+import Draggable16 from '@carbon/icons/es/draggable/16';
 
 const storyClass = 'add-select-next-stories';
 
@@ -128,17 +133,7 @@ const AddSelectBodyTemplate = (args) => {
                     kind="ghost"
                     size="lg"
                   >
-                    <svg
-                      slot="icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 32 32"
-                      width="16"
-                      height="16"
-                    >
-                      <path
-                        d="M27.6 20.6L24 24.2V4h-2v20.2l-3.6-3.6L17 22l6 6 6-6-1.4-1.4zM9 4L3 10l1.4 1.4L8 7.8V28h2V7.8l3.6 3.6L15 10 9 4z"
-                      />
-                    </svg>
+                    ${iconLoader(ArrowsVertical16, { slot: 'icon' })}
                   </cds-icon-button>
                   <cds-icon-button
                     slot="actions"
@@ -146,17 +141,7 @@ const AddSelectBodyTemplate = (args) => {
                     kind="ghost"
                     size="lg"
                   >
-                    <svg
-                      slot="icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 32 32"
-                      width="16"
-                      height="16"
-                    >
-                      <path
-                        d="M18 28a2 2 0 0 1-1.2-.4l-4-3A2 2 0 0 1 12 23v-7.06l-8.8-10A2 2 0 0 1 4.72 3H27.28A2 2 0 0 1 28 6.94l-8 10V26a2 2 0 0 1-2 2z"
-                      />
-                    </svg>
+                    ${iconLoader(Filter16, { slot: 'icon' })}
                   </cds-icon-button>
                 `
               : nothing}
@@ -341,17 +326,7 @@ const AddSelectColumnTemplate = (args) => {
                     size="sm"
                     align="bottom"
                   >
-                    <svg
-                      slot="icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 32 32"
-                      width="16"
-                      height="16"
-                    >
-                      <path
-                        d="M27.6 20.6L24 24.2V4h-2v20.2l-3.6-3.6L17 22l6 6 6-6-1.4-1.4zM9 4L3 10l1.4 1.4L8 7.8V28h2V7.8l3.6 3.6L15 10 9 4z"
-                      />
-                    </svg>
+                    ${iconLoader(ArrowsVertical16, { slot: 'icon' })}
                   </cds-icon-button>
                   <cds-icon-button
                     slot="actions"
@@ -360,17 +335,7 @@ const AddSelectColumnTemplate = (args) => {
                     size="sm"
                     align="bottom"
                   >
-                    <svg
-                      slot="icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 32 32"
-                      width="16"
-                      height="16"
-                    >
-                      <path
-                        d="M18 28a2 2 0 0 1-1.2-.4l-4-3A2 2 0 0 1 12 23v-7.06l-8.8-10A2 2 0 0 1 4.72 3H27.28A2 2 0 0 1 28 6.94l-8 10V26a2 2 0 0 1-2 2z"
-                      />
-                    </svg>
+                    ${iconLoader(Filter16, { slot: 'icon' })}
                   </cds-icon-button>
                 `
               : nothing}
@@ -652,20 +617,7 @@ const AddSelectSelectionSummaryTemplate = (args) => {
               <div slot="header" class="${storyClass}__summary-header-content">
                 <h3>Custom Header</h3>
                 <cds-icon-button label="Popup" kind="ghost" size="sm">
-                  <svg
-                    slot="icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 32 32"
-                    width="16"
-                    height="16"
-                  >
-                    <path
-                      d="M26 28H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9v2H6v20h20v-9h2v9a2 2 0 0 1-2 2z"
-                    />
-                    <path
-                      d="M21 2v2h5.59L18 12.59 19.41 14 28 5.41V11h2V2h-9z"
-                    />
-                  </svg>
+                  ${iconLoader(Launch16, { slot: 'icon' })}
                 </cds-icon-button>
               </div>
             `
@@ -678,17 +630,7 @@ const AddSelectSelectionSummaryTemplate = (args) => {
                 kind="ghost"
                 size="sm"
               >
-                <svg
-                  slot="icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 32 32"
-                  width="16"
-                  height="16"
-                >
-                  <path
-                    d="M18 28a2 2 0 0 1-1.2-.4l-4-3A2 2 0 0 1 12 23v-7.06l-8.8-10A2 2 0 0 1 4.72 3H27.28A2 2 0 0 1 28 6.94l-8 10V26a2 2 0 0 1-2 2z"
-                  />
-                </svg>
+                ${iconLoader(Filter16, { slot: 'icon' })}
               </cds-icon-button>
               <cds-icon-button
                 slot="header-actions"
@@ -696,18 +638,7 @@ const AddSelectSelectionSummaryTemplate = (args) => {
                 kind="ghost"
                 size="sm"
               >
-                <svg
-                  slot="icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 32 32"
-                  width="16"
-                  height="16"
-                >
-                  <path
-                    d="M26 28H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9v2H6v20h20v-9h2v9a2 2 0 0 1-2 2z"
-                  />
-                  <path d="M21 2v2h5.59L18 12.59 19.41 14 28 5.41V11h2V2h-9z" />
-                </svg>
+                ${iconLoader(Launch16, { slot: 'icon' })}
               </cds-icon-button>
             `
           : nothing}
@@ -861,21 +792,7 @@ const AddSelectSelectionSummaryItemTemplate = (args) => {
           ? html`
               <div slot="render-item" class="${storyClass}__summary-item-row">
                 <div class="${storyClass}__summary-item-row-reorder">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 32 32"
-                    fill="currentColor"
-                    width="16"
-                    height="16"
-                    aria-hidden="true"
-                  >
-                    <path d="M10 6H14V10H10z"></path>
-                    <path d="M18 6H22V10H18z"></path>
-                    <path d="M10 14H14V18H10z"></path>
-                    <path d="M18 14H22V18H18z"></path>
-                    <path d="M10 22H14V26H10z"></path>
-                    <path d="M18 22H22V26H18z"></path>
-                  </svg>
+                  ${iconLoader(Draggable16, {})}
                   <c4p-user-avatar
                     size="md"
                     name=${item.title}

@@ -235,13 +235,23 @@ const TearsheetInternal = forwardRef<
       useStackContext();
 
     const [depth, setDepth] = useState(0);
-    const [mountNode, setMountNode] = useState<HTMLElement | null>(null);
 
-    // Set portal mount node using useIsomorphicEffect to avoid SSR issues and double rendering
-    useIsomorphicEffect(() => {
-      if (!disablePortal) {
-        setMountNode(portalTarget || document.body);
+    // Initialize mountNode eagerly so the tearsheet renders directly into the
+    // portal on its first paint.  Deferring this to an effect caused the
+    // component to first render inline (mountNode === null), then immediately
+    // remount inside the portal once the effect ran — two mounts = two
+    // entrance animations.  The lazy initializer is SSR-safe: useState
+    // initializers only run in the browser, and typeof document is guarded.
+    const [mountNode, setMountNode] = useState<HTMLElement | null>(() => {
+      if (disablePortal || typeof document === 'undefined') {
+        return null;
       }
+      return portalTarget ?? document.body;
+    });
+
+    // Keep mountNode in sync when portalTarget or disablePortal changes at runtime.
+    useIsomorphicEffect(() => {
+      setMountNode(disablePortal ? null : (portalTarget ?? document.body));
     }, [portalTarget, disablePortal]);
 
     // Set CSS custom properties driven by props

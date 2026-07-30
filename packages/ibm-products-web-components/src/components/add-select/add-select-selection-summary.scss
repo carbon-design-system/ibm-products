@@ -36,15 +36,16 @@ $prefix: 'c4p';
   .#{$block-class__next}__selection-summary-title {
     @include type.type-style('heading-compact-01');
 
-    flex: 1;
     margin: 0;
     color: $text-primary;
+    margin-inline-end: $spacing-03;
   }
 
   .#{$block-class__next}__selection-summary-header-actions {
     display: flex;
     align-items: center;
     gap: $spacing-02;
+    margin-inline-start: auto;
   }
 
   .#{$block-class__next}__selection-summary-body {

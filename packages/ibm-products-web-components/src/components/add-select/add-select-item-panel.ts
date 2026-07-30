@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html, nothing } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
@@ -93,6 +93,25 @@ class CDSAddSelectItemPanel extends LitElement {
     `;
   }
 
+  /** Whether the default slot has assigned elements */
+  @state()
+  private _hasDefaultSlot = false;
+
+  /** Whether the render-item slot has assigned elements */
+  @state()
+  private _hasRenderItemSlot = false;
+
+  private _handleDefaultSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasDefaultSlot = slot.assignedElements({ flatten: true }).length > 0;
+  }
+
+  private _handleRenderItemSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasRenderItemSlot =
+      slot.assignedElements({ flatten: true }).length > 0;
+  }
+
   render() {
     const { title, open, closeIconDescription } = this;
 
@@ -100,6 +119,11 @@ class CDSAddSelectItemPanel extends LitElement {
       [`${blockClass}__item-summary-panel`]: true,
       [`${blockClass}__item-summary-panel--open`]: open,
     });
+
+    // Priority: default slot > render-item slot > default item details
+    const showDefault = this._hasDefaultSlot;
+    const showRenderItem = !showDefault && this._hasRenderItemSlot;
+    const showItemDetails = !showDefault && !showRenderItem;
 
     return html`
       <div class=${panelClasses}>
@@ -117,11 +141,23 @@ class CDSAddSelectItemPanel extends LitElement {
           </cds-icon-button>
         </div>
 
-        <!-- Body: priority 1=default slot, 2=render-item slot, 3=default template -->
+        <!-- Body: each slot exists once; wrappers hide/show via display:none -->
         <div class="${blockClass}__item-summary-panel-body">
-          <slot>
-            <slot name="render-item"> ${this._renderDefaultContent()} </slot>
-          </slot>
+          <!-- default slot — always in DOM -->
+          <div style=${showDefault ? '' : 'display:none'}>
+            <slot @slotchange=${this._handleDefaultSlotChange}></slot>
+          </div>
+          <!-- render-item slot — always in DOM -->
+          <div style=${showRenderItem ? '' : 'display:none'}>
+            <slot
+              name="render-item"
+              @slotchange=${this._handleRenderItemSlotChange}
+            ></slot>
+          </div>
+          <!-- default item details — shown when no slot content -->
+          <div style=${showItemDetails ? '' : 'display:none'}>
+            ${this._renderDefaultContent()}
+          </div>
         </div>
       </div>
     `;

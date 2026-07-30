@@ -11,10 +11,10 @@ import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import '@carbon/web-components/es/components/accordion/index.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import SubtractAlt16 from '@carbon/icons/es/subtract--alt/16';
+import ChevronRight16 from '@carbon/icons/es/chevron--right/16';
 import { prefix } from '../../globals/settings';
 import type { AddSelectItem } from '@carbon/ibm-products-utilities';
 import styles from './add-select-selection-summary-item.scss?lit';
@@ -25,6 +25,7 @@ const blockClass = `${prefix}--add-select__next`;
  * Add Select Selection Summary Item — individual selected item display.
  * @element c4p-add-select-selection-summary-item
  * @slot default - Highest priority: replaces all rendering when populated
+ * @slot render-item - Custom full-row renderer; replaces title/subtitle/body but keeps remove button (second priority after default slot)
  * @slot accordion-title - Custom accordion title (used when use-accordion is true)
  * @slot accordion-body - Custom accordion body (used when use-accordion is true)
  * @fires c4p-add-select-selection-summary-item-remove - Fired when remove button clicked; detail: { itemId }
@@ -49,25 +50,53 @@ class CDSAddSelectSelectionSummaryItem extends LitElement {
   @property({ type: String, attribute: 'remove-button-label' })
   removeButtonLabel = 'Remove item';
 
-  /** Whether the accordion-title slot has content */
+  /**
+   * When true, the remove button is not rendered
+   */
+  @property({ type: Boolean, attribute: 'hide-remove-button' })
+  hideRemoveButton = false;
+
+  /** Whether the default slot has assigned elements */
+  @state()
+  private _hasDefaultSlot = false;
+
+  /** Whether the render-item slot has assigned elements */
+  @state()
+  private _hasRenderItemSlot = false;
+
+  /** Whether the accordion-title slot has assigned elements */
   @state()
   private _hasAccordionTitleSlot = false;
 
-  /** Whether the accordion-body slot has content */
+  /** Whether the accordion-body slot has assigned elements */
   @state()
   private _hasAccordionBodySlot = false;
 
-  private _handleSlotChange(
-    slotName: 'accordion-title' | 'accordion-body' | 'default',
-    event: Event
-  ) {
-    const slot = event.target as HTMLSlotElement;
-    const hasContent = slot.assignedNodes({ flatten: true }).length > 0;
-    if (slotName === 'accordion-title') {
-      this._hasAccordionTitleSlot = hasContent;
-    } else if (slotName === 'accordion-body') {
-      this._hasAccordionBodySlot = hasContent;
-    }
+  /** Whether the custom accordion is open */
+  @state()
+  private _accordionOpen = false;
+
+  private _handleDefaultSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasDefaultSlot = slot.assignedElements({ flatten: true }).length > 0;
+  }
+
+  private _handleAccordionTitleSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasAccordionTitleSlot =
+      slot.assignedElements({ flatten: true }).length > 0;
+  }
+
+  private _handleAccordionBodySlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasAccordionBodySlot =
+      slot.assignedElements({ flatten: true }).length > 0;
+  }
+
+  private _handleRenderItemSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasRenderItemSlot =
+      slot.assignedElements({ flatten: true }).length > 0;
   }
 
   private _handleRemove() {
@@ -112,6 +141,9 @@ class CDSAddSelectSelectionSummaryItem extends LitElement {
   }
 
   private _renderRemoveButton() {
+    if (this.hideRemoveButton) {
+      return nothing;
+    }
     return html`
       <div
         class="${blockClass}__selection-summary-item-remove-button-container"
@@ -141,8 +173,6 @@ class CDSAddSelectSelectionSummaryItem extends LitElement {
       [`${blockClass}__selection-summary-item--default`]: !useAccordion,
     });
 
-    // Priority 1: default slot has content — render it directly
-    // We always render the hidden slots so slotchange fires, then conditionally show content
     const defaultTitle = item
       ? html`
           <div class="${blockClass}__selection-summary-item-selected-item">
@@ -158,53 +188,129 @@ class CDSAddSelectSelectionSummaryItem extends LitElement {
         `
       : nothing;
 
+    // Priority flags (high → low):
+    // 1. default slot has content
+    // 2. render-item slot has content
+    // 3. useAccordion (with optional accordion-title / accordion-body slots)
+    // 4. plain default rendering from item data
+
+    const showDefault = this._hasDefaultSlot;
+    const showRenderItem = !showDefault && this._hasRenderItemSlot;
+    const showAccordion = !showDefault && !showRenderItem && useAccordion;
+    const showPlain = !showDefault && !showRenderItem && !useAccordion;
+
     return html`
       <div class=${itemClasses}>
-        <!-- Hidden slot detectors (always rendered so slotchange fires) -->
-        <slot
-          name="accordion-title"
-          style="display:none"
-          @slotchange=${(e: Event) =>
-            this._handleSlotChange('accordion-title', e)}
-        ></slot>
-        <slot
-          name="accordion-body"
-          style="display:none"
-          @slotchange=${(e: Event) =>
-            this._handleSlotChange('accordion-body', e)}
-        ></slot>
+        <!--
+          Each named slot exists exactly once in this shadow root.
+          Browser assigns light-DOM children to the first matching slot —
+          having duplicates causes the hidden detector to steal content.
+          Slots that are not currently "active" are hidden via display:none
+          on their wrapper; the single slot element is always present so
+          slotchange always fires reliably.
+        -->
 
-        <!-- Priority 1: default slot -->
-        <slot @slotchange=${(e: Event) => this._handleSlotChange('default', e)}>
-          <!-- Priority 2: accordion mode -->
-          ${useAccordion
-            ? html`
-                <cds-accordion align="start">
-                  <cds-accordion-item>
-                    <span slot="title">
-                      ${this._hasAccordionTitleSlot
-                        ? html`<slot name="accordion-title"></slot>`
-                        : defaultTitle}
-                      ${this._renderRemoveButton()}
-                    </span>
-                    ${this._hasAccordionBodySlot
-                      ? html`<slot name="accordion-body"></slot>`
-                      : this._renderDefaultItemDetails()}
-                  </cds-accordion-item>
-                </cds-accordion>
-              `
-            : html`
-                <!-- Priority 3: non-accordion default rendering -->
-                <div
-                  class="${blockClass}__selection-summary-item-title-wrapper"
-                >
-                  ${defaultTitle} ${this._renderRemoveButton()}
-                </div>
-                <div class="${blockClass}__selection-summary-item-content">
-                  ${this._renderDefaultItemDetails()}
-                </div>
-              `}
-        </slot>
+        <!-- Default slot — hidden wrapper, always present for detection -->
+        <div style=${showDefault ? '' : 'display:none'}>
+          <slot @slotchange=${this._handleDefaultSlotChange}></slot>
+        </div>
+
+        <!-- render-item slot — slot content owns full width; remove button is absolute -->
+        <div
+          class="${blockClass}__selection-summary-item-render-item-wrapper"
+          style=${showRenderItem ? '' : 'display:none'}
+        >
+          <slot
+            name="render-item"
+            @slotchange=${this._handleRenderItemSlotChange}
+          ></slot>
+          ${showRenderItem ? this._renderRemoveButton() : nothing}
+        </div>
+
+        <!--
+          accordion-title and accordion-body slots are always present at the
+          top shadow level — never nested inside cds-accordion-item's slot="title"
+          which crosses a shadow boundary and makes them unreachable.
+          The custom accordion heading/body is built from scratch so all slots
+          remain direct shadow children.
+        -->
+
+        <!--
+          accordion-title and accordion-body each exist exactly once.
+          Their wrappers are always in the DOM (so slotchange fires);
+          display:none hides them when not applicable.
+        -->
+
+        <!-- accordion mode wrapper — always rendered when useAccordion, hidden otherwise -->
+        <div style=${showAccordion ? '' : 'display:none'}>
+          <div class="${blockClass}__selection-summary-item-accordion">
+            <button
+              type="button"
+              class="${blockClass}__selection-summary-item-accordion-heading"
+              aria-expanded=${this._accordionOpen}
+              @click=${() => {
+                this._accordionOpen = !this._accordionOpen;
+              }}
+            >
+              <span
+                class="${blockClass}__selection-summary-item-accordion-arrow ${this
+                  ._accordionOpen
+                  ? `${blockClass}__selection-summary-item-accordion-arrow--open`
+                  : ''}"
+              >
+                ${iconLoader(ChevronRight16, {})}
+              </span>
+
+              <!-- accordion-title: use span (valid inside button); display:block via CSS -->
+              <span
+                class="${blockClass}__selection-summary-item-accordion-title"
+                style=${this._hasAccordionTitleSlot ? 'display:none' : ''}
+              >
+                ${defaultTitle}
+              </span>
+              <span
+                class="${blockClass}__selection-summary-item-accordion-title ${blockClass}__selection-summary-item-accordion-title--slot"
+                style=${this._hasAccordionTitleSlot ? '' : 'display:none'}
+              >
+                <slot
+                  name="accordion-title"
+                  @slotchange=${this._handleAccordionTitleSlotChange}
+                ></slot>
+              </span>
+
+              ${this._renderRemoveButton()}
+            </button>
+
+            <!-- accordion-body: shown only when open -->
+            <div
+              class="${blockClass}__selection-summary-item-accordion-body"
+              style=${this._accordionOpen ? '' : 'display:none'}
+            >
+              <!-- accordion-body slot — one instance, always in DOM -->
+              <div style=${this._hasAccordionBodySlot ? 'display:none' : ''}>
+                ${this._renderDefaultItemDetails()}
+              </div>
+              <div style=${this._hasAccordionBodySlot ? '' : 'display:none'}>
+                <slot
+                  name="accordion-body"
+                  @slotchange=${this._handleAccordionBodySlotChange}
+                ></slot>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- plain (non-accordion) mode -->
+        ${showPlain
+          ? html`
+              <div class="${blockClass}__selection-summary-item-title-wrapper">
+                ${defaultTitle} ${this._renderRemoveButton()}
+              </div>
+              <div class="${blockClass}__selection-summary-item-content">
+                ${this._renderDefaultItemDetails()}
+              </div>
+            `
+          : nothing}
       </div>
     `;
   }

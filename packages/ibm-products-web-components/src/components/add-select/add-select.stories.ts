@@ -812,9 +812,11 @@ export const AddSelectSelectionSummary = {
 const AddSelectSelectionSummaryItemTemplate = (args) => {
   const {
     useAccordion,
+    showRemoveButton,
     removeButtonLabel,
     useCustomTitle,
     useCustomContent,
+    useCustomRenderer,
     useChildren,
   } = args;
 
@@ -828,6 +830,7 @@ const AddSelectSelectionSummaryItemTemplate = (args) => {
       <c4p-add-select-selection-summary-item
         .item=${item}
         ?use-accordion=${useAccordion}
+        ?hide-remove-button=${!showRemoveButton}
         remove-button-label=${removeButtonLabel}
         @c4p-add-select-selection-summary-item-remove=${action(
           'c4p-add-select-selection-summary-item-remove'
@@ -854,12 +857,62 @@ const AddSelectSelectionSummaryItemTemplate = (args) => {
               </div>
             `
           : nothing}
-        ${useCustomTitle && !useChildren
+        ${useCustomRenderer && !useChildren
+          ? html`
+              <div slot="render-item" class="${storyClass}__summary-item-row">
+                <div class="${storyClass}__summary-item-row-reorder">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 32 32"
+                    fill="currentColor"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path d="M10 6H14V10H10z"></path>
+                    <path d="M18 6H22V10H18z"></path>
+                    <path d="M10 14H14V18H10z"></path>
+                    <path d="M18 14H22V18H18z"></path>
+                    <path d="M10 22H14V26H10z"></path>
+                    <path d="M18 22H22V26H18z"></path>
+                  </svg>
+                  <c4p-user-avatar
+                    size="md"
+                    name=${item.title}
+                    tooltip-text=${item.title}
+                    tooltip-alignment="right"
+                  ></c4p-user-avatar>
+                  <div class="${storyClass}__summary-item-row-text">
+                    <p class="${storyClass}__summary-item-row-text__title">
+                      ${item.title}
+                    </p>
+                    ${item.subtitle
+                      ? html`<p
+                          class="${storyClass}__summary-item-row-text__subtitle"
+                        >
+                          ${item.subtitle}
+                        </p>`
+                      : nothing}
+                  </div>
+                </div>
+                <span class="${storyClass}__summary-item-row-modifier"
+                  >Modifier</span
+                >
+              </div>
+            `
+          : nothing}
+        ${useCustomTitle && !useChildren && !useCustomRenderer
           ? html`
               <div
                 slot="accordion-title"
                 class="${storyClass}__accordion-title"
               >
+                <c4p-user-avatar
+                  size="md"
+                  name=${item.title}
+                  tooltip-text=${item.title}
+                  tooltip-alignment="right"
+                ></c4p-user-avatar>
                 <div class="${storyClass}__accordion-title-text">
                   <p class="${storyClass}__accordion-title-text__title">
                     ${item.title}
@@ -875,7 +928,7 @@ const AddSelectSelectionSummaryItemTemplate = (args) => {
               </div>
             `
           : nothing}
-        ${useCustomContent && !useChildren
+        ${useCustomContent && !useChildren && !useCustomRenderer
           ? html`
               <div slot="accordion-body" class="${storyClass}__accordion-body">
                 <cds-tag type="blue" size="sm">${item.title}</cds-tag>
@@ -895,15 +948,22 @@ export const AddSelectSelectionSummaryItem = {
   render: AddSelectSelectionSummaryItemTemplate,
   args: {
     useAccordion: true,
+    showRemoveButton: true,
     removeButtonLabel: 'Remove item',
     useCustomTitle: false,
     useCustomContent: false,
+    useCustomRenderer: false,
     useChildren: false,
   },
   argTypes: {
     useAccordion: {
       control: 'boolean',
       description: 'Render the item with Carbon Accordion markup',
+    },
+    showRemoveButton: {
+      control: 'boolean',
+      description: 'Toggle the remove action button',
+      table: { category: 'Story controls' },
     },
     removeButtonLabel: {
       control: 'text',
@@ -917,6 +977,12 @@ export const AddSelectSelectionSummaryItem = {
     useCustomContent: {
       control: 'boolean',
       description: 'Demonstrate accordion-body slot in accordion mode',
+      table: { category: 'Story controls' },
+    },
+    useCustomRenderer: {
+      control: 'boolean',
+      description:
+        'Demonstrate render-item slot with custom rendering (takes precedence over default title/body)',
       table: { category: 'Story controls' },
     },
     useChildren: {

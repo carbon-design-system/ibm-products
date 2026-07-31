@@ -96,6 +96,17 @@ const defaults = {
 
     GetStartedCard: false,
 
+    Card: false,
+    CardAction: false,
+    CardActions: false,
+    CardBody: false,
+    CardFooter: false,
+    CardHeader: false,
+    CardHeaderMedia: false,
+    CardMedia: false,
+    CardTitle: false,
+    CardTitleMedia: false,
+
     /* new component flags here - comment used by generate CLI */
 
     // Onboarding components not yet reviewed and released:

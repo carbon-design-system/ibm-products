@@ -485,7 +485,7 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
 .#{$block-class__next}__decorator {
   position: absolute;
   inset-block-start: convert.to-rem(10px);
-  inset-inline-end: convert.to-rem(48px);
+  inset-inline-end: $spacing-09;
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -505,7 +505,6 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     margin-inline-start: -$spacing-05;
   }
 }
-
 .#{$block-class__next}__scroller-container {
   position: absolute;
   inset-block-end: 0;

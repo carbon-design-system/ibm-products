@@ -52,11 +52,6 @@ const Navigation = () => {
 export const WithDocumentationLinks = (args) => (
   <WebTerminalProvider>
     <Navigation />
-
-    <WebTerminalContentWrapper>
-      This is where you would put content
-    </WebTerminalContentWrapper>
-
     <WebTerminal {...args} documentationLinks={documentationLinks}>
       <div className="example-terminal">
         <p>Connection successful.</p>

@@ -51,11 +51,6 @@ const Navigation = () => {
 export const WithActions = ({ actions, ...args }) => (
   <WebTerminalProvider>
     <Navigation />
-
-    <WebTerminalContentWrapper>
-      This is where you would put content
-    </WebTerminalContentWrapper>
-
     <WebTerminal {...args} actions={actions}>
       <div className="example-terminal">
         <p>Connection successful.</p>

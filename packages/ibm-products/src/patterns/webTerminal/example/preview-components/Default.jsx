@@ -52,11 +52,6 @@ const Navigation = () => {
 export const Default = ({ actions, ...args }) => (
   <WebTerminalProvider>
     <Navigation />
-
-    <WebTerminalContentWrapper>
-      This is where you would put content
-    </WebTerminalContentWrapper>
-
     <WebTerminal
       {...args}
       actions={actions}

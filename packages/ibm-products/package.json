@@ -100,7 +100,7 @@
     "storybook-addon-accessibility-checker": ">=9.2.0-git0",
     "tsdown": "^0.21.0",
     "typescript": "^6.0.0",
-    "typescript-config-carbon": "^0.10.0",
+    "typescript-config-carbon": "^0.11.0",
     "vite": "^7.0.0",
     "yargs": "^18.0.0"
   },

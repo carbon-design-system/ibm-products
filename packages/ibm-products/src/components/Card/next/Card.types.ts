@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ReactNode } from 'react';
+import { ReactNode, MouseEvent, KeyboardEvent } from 'react';
 
 /**
  * Base props shared across card components
@@ -32,11 +32,11 @@ export interface CardProps extends CardBaseProps {
   /**
    * Click handler for clickable cards
    */
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
   /**
    * Keyboard event handler for clickable cards
    */
-  onKeyDown?: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
   /**
    * Disables the card and all interactive elements
    */
@@ -91,5 +91,5 @@ export interface CardContextValue {
   /**
    * Whether the card is in horizontal layout mode
    */
-  horizontal?: boolean;
+  horizontal: boolean;
 }

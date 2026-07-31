@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
@@ -26,19 +26,22 @@ export interface CardHeaderMediaProps {
   className?: string;
 }
 
-export const CardHeaderMedia = ({
-  children,
-  className,
-  ...rest
-}: CardHeaderMediaProps) => {
-  const classes = cx(`${blockClass}__header-media`, className);
+export let CardHeaderMedia = forwardRef<HTMLDivElement, CardHeaderMediaProps>(
+  ({ children, className, ...rest }, ref) => {
+    const classes = cx(`${blockClass}__header-media`, className);
 
-  return (
-    <div {...rest} className={classes} {...getDevtoolsProps(componentName)}>
-      {children}
-    </div>
-  );
-};
+    return (
+      <div
+        {...rest}
+        ref={ref}
+        className={classes}
+        {...getDevtoolsProps(componentName)}
+      >
+        {children}
+      </div>
+    );
+  }
+);
 
 CardHeaderMedia.propTypes = {
   /**
@@ -52,4 +55,5 @@ CardHeaderMedia.propTypes = {
   className: PropTypes.string,
 };
 
+CardHeaderMedia = pkg.checkComponentEnabled(CardHeaderMedia, componentName);
 CardHeaderMedia.displayName = componentName;
